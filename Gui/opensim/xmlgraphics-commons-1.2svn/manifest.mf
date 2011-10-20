@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module: org.apache.xmlgraphics.ps
+OpenIDE-Module-Localizing-Bundle: org/apache/xmlgraphics/ps/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

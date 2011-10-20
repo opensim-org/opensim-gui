@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IKTaskSet name="arm26_InverseKinematics">
+	<objects>
+    <!-- Markers -->
+    <IKMarkerTask name="r_acromion">
+			<!--Whether or not this task will be used during inverse kinematics solve.-->
+			<apply> true </apply>
+			<!--Weight given to a marker or coordinate for solving inverse kinematics
+			    problems.-->
+			<weight> 1.00000000 </weight>
+		</IKMarkerTask>
+		<IKMarkerTask name="r_humerus_epicondyle">
+			<apply> true </apply>
+			<weight> 1.00000000 </weight>
+		</IKMarkerTask>
+		<IKMarkerTask name="r_radius_styloid">
+			<apply> true </apply>
+			<weight> 1.00000000 </weight>
+		</IKMarkerTask>
+		
+    <!-- Coordinates -->
+		<IKCoordinateTask name="r_shoulder_elev">
+			<!--Whether or not this task will be used during inverse kinematics solve.-->
+			<apply> false </apply>
+			<!--Weight given to a marker or coordinate for solving inverse kinematics
+			    problems.-->
+			<weight> 1.00000000 </weight>
+			<!--Indicates the source of the coordinate value for this task.  Possible
+			    values are default_value (use default value of coordinate, as
+			    specified in the model file, as the fixed target value), manual_value
+			    (use the value specified in the value property of this task as the
+			    fixed target value), or from_file (use the coordinate values from the
+			    coordinate data specified by the coordinates_file property).-->
+			<value_type> from_file </value_type>
+			<!--This value will be used as the desired (or prescribed) coordinate
+			    value if value_type is set to manual_value.-->
+			<value> 0.00000000 </value>
+		</IKCoordinateTask>
+		<IKCoordinateTask name="r_elbow_flex">
+			<apply> false </apply>
+			<weight> 1.00000000 </weight>
+			<value_type> from_file </value_type>
+			<value> 0.00000000 </value>
+		</IKCoordinateTask>
+	</objects>
+</IKTaskSet>
+

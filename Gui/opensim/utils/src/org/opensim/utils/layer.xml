@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.1//EN" "http://www.netbeans.org/dtds/filesystem-1_1.dtd">
+<filesystem>
+    <folder name="Actions">
+        <folder name="Edit">
+            <file name="org-opensim-swingui-RequestFeatureAction.instance"/>
+        </folder>
+        <folder name="Help">
+            <file name="org-opensim-swingui-FileBug.instance"/>
+        </folder>
+    </folder>
+    <folder name="Menu">
+         <folder name="Help">
+            <file name="org-opensim-swingui-separatorBefore.instance">
+                <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+            </file>
+            <file name="org-opensim-swingui-FileBug.shadow">
+                <attr name="originalFile" stringvalue="Actions/Help/org-opensim-swingui-FileBug.instance"/>
+            </file>
+            <file name="org-opensim-swingui-RequestFeatureAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-swingui-RequestFeatureAction.instance"/>
+            </file>
+            <file name="org-opensim-swingui-separatorAfter.instance">
+                <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+            </file>
+
+            <attr name="org-netbeans-core-actions-AboutAction.instance/org-opensim-swingui-separatorBefore.instance" boolvalue="true"/>
+            <attr name="org-opensim-swingui-separatorBefore.instance/org-opensim-swingui-FileBug.shadow" boolvalue="true"/>
+            <attr name="org-opensim-swingui-FileBug.shadow/org-opensim-swingui-RequestFeatureAction.shadow" boolvalue="true"/>
+            <attr name="org-opensim-swingui-RequestFeatureAction.shadow/org-opensim-swingui-separatorAfter.instance" boolvalue="true"/>
+        </folder>
+    </folder>
+</filesystem>

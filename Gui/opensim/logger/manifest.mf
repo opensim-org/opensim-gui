@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+OpenIDE-Module: org.opensim.logger
+OpenIDE-Module-Install: org/opensim/logger/Installer.class
+OpenIDE-Module-Layer: org/opensim/logger/layer.xml
+OpenIDE-Module-Localizing-Bundle: org/opensim/logger/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

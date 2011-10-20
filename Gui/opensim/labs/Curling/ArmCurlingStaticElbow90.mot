@@ -1,0 +1,23 @@
+Coordinates		
+nRows=11		
+nColumns=3		
+		
+# SIMM Motion File Header:		
+name Coordinates		
+datacolumns 3		
+datarows 11		
+otherdata 1		
+range 0.000000 1.000000		
+endheader		
+time	shoulder_flexion_r	elbow_flexion_r
+0	0	90
+0.1	0	90
+0.2	0	90
+0.3	0	90
+0.4	0	90
+0.5	0	90
+0.6	0	90
+0.7	0	90
+0.8	0	90
+0.9	0	90
+1	0	90

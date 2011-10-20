@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
+      <SubComponents>
+        <Menu class="javax.swing.JMenu" name="jFileMenu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="File"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFileMenuActionPerformed"/>
+          </Events>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jLoadMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Load..."/>
+                <Property name="toolTipText" type="java.lang.String" value="Load Excitations from an XML file"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jLoadMenuItemActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jSaveMenuItem">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+S"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Save..."/>
+                <Property name="toolTipText" type="java.lang.String" value="Store excitations into an XML file"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jSaveMenuItemActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jSaveAsMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Save A Copy..."/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jSaveAsMenuItemActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JSeparator" name="jSeparator1">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jCreateDefaultMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="New (current model)"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCreateDefaultMenuItemActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+      </SubComponents>
+    </Menu>
+    <Menu class="javax.swing.JMenu" name="jToolsMenu">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tools"/>
+      </Properties>
+      <SubComponents>
+        <MenuItem class="javax.swing.JMenuItem" name="jSaveTemplateMenuItem">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Save Layout..."/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jSaveTemplateMenuItemActionPerformed"/>
+          </Events>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="jLoadTemplateMenuItem">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Load Layout..."/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jLoadTemplateMenuItemActionPerformed"/>
+          </Events>
+        </MenuItem>
+      </SubComponents>
+    </Menu>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,44,0,0,2,62"/>
+    <SyntheticProperty name="formSizePolicy" type="int" value="0"/>
+    <SyntheticProperty name="generateSize" type="boolean" value="true"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="2"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jControlPanel">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+          <BorderConstraints direction="North"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <Component id="LoadButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="SaveButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="SaveAsButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="CreateNewButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="SaveLayoutButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="LoadLayoutButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Component id="helpButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="LoadButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="SaveButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="CreateNewButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="SaveLayoutButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LoadLayoutButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="SaveAsButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="helpButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JButton" name="LoadButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Load..."/>
+            <Property name="toolTipText" type="java.lang.String" value="Load excitations from an xml file"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LoadButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="SaveButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Save"/>
+            <Property name="toolTipText" type="java.lang.String" value="Save excitations to the file they came from"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SaveButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="CreateNewButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="New..."/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CreateNewButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="SaveLayoutButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Save Layout..."/>
+            <Property name="toolTipText" type="java.lang.String" value="Save current dialog layout to a file"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SaveLayoutButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="LoadLayoutButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Load Layout..."/>
+            <Property name="toolTipText" type="java.lang.String" value="apply layout from a saved layout file"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LoadLayoutButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="SaveAsButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Save As"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SaveAsButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="helpButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Help"/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Anchor with left mouse button and drag to lower right to &lt;b&gt;Zoom In&lt;/b&gt; on a rectangle.&lt;br&gt;&#xa;Anchor  with left mouse button and drag to the left to &lt;b&gt;Zoom Out/Refit&lt;/b&gt; the data.&lt;br&gt;&#xa;Use &lt;b&gt;I&lt;/b&gt; to zoom in about the center of the pane.l&lt;br&gt;&#xa;Use &lt;b&gt;O&lt;/b&gt; to zoom out about the center of the panel.l&lt;br&gt;&#xa;Use &lt;b&gt;L&lt;/b&gt; to move the panel Left&lt;br&gt;&#xa;Use &lt;b&gt;R&lt;/b&gt; to move the panel Right&lt;br&gt;&#xa;Use &lt;b&gt;U&lt;/b&gt; to move the panel Up&lt;br&gt;&#xa;Use &lt;b&gt;D&lt;/b&gt; to move the panel Down&lt;br&gt;&#xa;&lt;b&gt;Selection:&lt;/b&gt;&lt;br&gt;&#xa;Holding &lt;b&gt;CTRL&lt;/b&gt; button down turns on selection mode.&lt;br&gt;&#xa;  - Left mouse button selects individual points.&lt;br&gt;&#xa;  - Shift + left mouse button accumulates selection.&lt;br&gt;&#xa;  - Draw box to select all points within the box.&lt;br&gt;&#xa;  - Left mouse button in background deselects all points.&lt;br&gt;&#xa;&lt;b&gt;Adding Points:&lt;/b&gt;&lt;br&gt;&#xa;Right mouse click inside a panel and use popup menu to add points.&lt;br&gt;&#xa;&lt;/html&gt;&#xa;&#xa;"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="helpButtonActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

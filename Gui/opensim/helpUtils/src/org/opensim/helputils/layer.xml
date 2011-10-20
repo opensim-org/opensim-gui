@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.1//EN" "http://www.netbeans.org/dtds/filesystem-1_1.dtd">
+<filesystem>
+    <folder name="Actions">
+        <folder name="Edit">
+            <file name="org-opensim-helputils-ToolsVersionUpgradeAction.instance"/>
+        </folder>
+        <folder name="Help">
+            <file name="org-opensim-helputils-HelpShowXML.instance"/>
+        </folder>
+    </folder>
+    <folder name="Menu">
+        <folder name="Help">
+            <attr name="org-opensim-view-TutorialsAction.shadow/org-opensim-helputils-separatorBefore.instance" boolvalue="true"/>
+            <attr name="Separator1.instance/org-opensim-helputils-separatorBefore_1.instance" boolvalue="true"/>
+            <attr name="org-opensim-helputils-separatorBefore_1.instance/org-opensim-view-HelpAboutAction.shadow" boolvalue="true"/>
+            <attr name="master-help.xml/org-opensim-helputils-separatorBefore.instance" boolvalue="true"/>
+            <file name="org-opensim-helputils-separatorBefore.instance">
+                <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+            </file>
+            <attr name="org-opensim-helputils-separatorBefore.instance/org-opensim-helputils-HelpShowXML.shadow" boolvalue="true"/>
+            <attr name="org-opensim-helputils-separatorBefore.instance/org-opensim-helputils-ToolsVersionUpgradeAction.shadow" boolvalue="true"/>
+            <file name="org-opensim-helputils-ToolsVersionUpgradeAction.shadow" url="org-opensim-helputils-ToolsVersionUpgradeAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-helputils-ToolsVersionUpgradeAction.instance"/>
+            </file>
+            <attr name="org-opensim-helputils-ToolsVersionUpgradeAction.shadow/org-opensim-helputils-HelpShowXML.shadow" boolvalue="true"/>
+            <file name="org-opensim-helputils-HelpShowXML.shadow">
+                <attr name="originalFile" stringvalue="Actions/Help/org-opensim-helputils-HelpShowXML.instance"/>
+            </file>
+            <attr name="org-opensim-helputils-HelpShowXML.shadow/org-opensim-k12-separatorBefore.instance" boolvalue="true"/>
+        </folder>
+        <folder name="Tools">
+            <attr name="org-netbeans-modules-autoupdate-catalog-ModuleCatalogAction.instance/org-opensim-helputils-separatorBefore.instance" boolvalue="true"/>
+            <attr name="org-opensim-helputils-separatorBefore.instance/org-opensim-helputils-ToolsVersionUpgradeAction.shadow" boolvalue="true"/>
+            <attr name="org-opensim-helputils-ToolsVersionUpgradeAction.shadow/org-opensim-plotter-ToolsPlotAction.shadow" boolvalue="true"/>
+    </folder>
+    </folder>
+</filesystem>

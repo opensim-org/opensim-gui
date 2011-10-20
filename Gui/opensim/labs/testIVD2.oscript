@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version = "1.5.0_14" class = "java.beans.XMLDecoder">
+    <object class = "org.opensim.k12.Lab">
+        <void property = "stateObjects">
+            <void method = "put">
+                <string>labName</string>
+                <string>Inverse Dynamics</string>
+            </void>
+            <void method = "put">
+                <string>RunLabel</string>
+                <string>"Compute Joint Torques >"</string>
+            </void>
+            <void method = "put">
+                <string>OpenSimDB</string>
+                <object class = "org.opensim.view.pub.OpenSimDBDescriptor">
+                    <void property = "currentModelIndex">
+                        <int>0</int>
+                    </void>
+                    <void property = "fileNames">
+                        <void method = "add">
+                            <string>labs/Curling/ArmCurlingFullBody.osim</string>
+                        </void>
+                    </void>
+                    <void property = "modelIds">
+                        <void method = "add">
+                            <int>0</int>
+                        </void>
+                    </void>
+                </object>
+            </void>
+            <void method = "put">
+                <string>Plugins</string>
+                <object class = "org.opensim.view.pub.PluginsDB"/>
+            </void>
+            <void method = "put">
+                <string>Tool</string>
+                <object class = "org.opensim.tools.serializers.ToolSerializer">
+                    <void property = "setupFile">
+                        <string>labs/Curling/ArmCurling_ElbowFlex90_InvDyn.xml</string>
+                    </void>
+                </object>
+            </void>
+            <void method = "put">
+                <string>Parameters</string>
+                <object class = "org.opensim.k12.LabParametersNode">
+                    <void property = "parameters">
+                        <void method = "add">
+                            <object class = "org.opensim.k12.LabParameter">
+                                <void property = "objectName">
+                                    <string>Barbell</string>
+                                </void>
+                                <void property = "openSimType">
+                                    <string>Body</string>
+                                </void>
+                                <void property = "propertyName">
+                                    <string>mass</string>
+                                </void>
+                                <void property = "propertyDisplayName">
+                                    <string>Barbell mass</string>
+                                </void>
+                            </object>
+                        </void>
+                        <void method = "add">
+                            <object class = "org.opensim.k12.LabParameter">
+                                <void property = "objectName">
+                                    <string>Model</string>
+                                </void>
+                                <void property = "openSimType">
+                                    <string>Model</string>
+                                </void>
+                                <void property = "propertyName">
+                                    <string>gravity</string>
+                                </void>
+                                <void property = "propertyComponent">
+                                    <int>1</int>
+                                </void>
+                                <void property = "rangeMin">
+                                    <double>-30.0</double>
+                                </void>
+                                <void property = "rangeMax">
+                                    <double>0.0</double>
+                                </void>
+                            </object>
+                        </void>
+                    </void>
+                </object>
+            </void>
+            <void method = "put">
+                <string>Outputs</string>
+                <object class = "org.opensim.k12.LabOutputsNode">
+                    <void property = "outputs">
+                       <void method = "add">
+                            <object class = "org.opensim.k12.LabOutputTextToWindow">
+                                <void property = "textTemplate">
+                                    <string>Elbow flexion moment: ____  (N m)</string>
+                                </void>
+                                <void property = "location">
+                                    <string>LowerRight</string>
+                                </void>
+                                <void property = "quantitySpecfication">
+                                    <string>InverseDynamics.Inverse Dynamics.elbow_flexion_r_moment</string>
+                                </void>
+                            </object>
+                        </void>
+                       <void method = "add">
+                            <object class = "org.opensim.k12.LabOutputTextToObject">
+                                <void property = "textTemplate">
+                                    <string>Elbow flexion moment =____ (N m)</string>
+                                </void>
+                                <void property = "objectName">
+                                    <string>humerus_r</string>
+                                </void>
+                                <void property = "openSimType">
+                                    <string>Body</string>
+                                </void>    
+                                <void property = "quantitySpecfication">
+                                    <string>InverseDynamics.Inverse Dynamics.elbow_flexion_r_moment</string>
+                                </void>
+                            </object>
+                        </void>
+                         <void method = "add">
+                            <object class = "org.opensim.k12.LabOutputTextToPanel">
+                                <void property = "htmlTemplate">
+                                    <string>[html][font color=blue]Elbow flexion moment: ____  (N m)[/font][/html]</string>
+                                </void>
+                                <void property = "quantitySpecfication">
+                                    <string>InverseDynamics.Inverse Dynamics.elbow_flexion_r_moment</string>
+                                </void>
+                            </object>
+                        </void>
+                        <void method = "add">
+                            <object class = "org.opensim.k12.LabOutputTextToPanel">
+                                <void property = "htmlTemplate">
+                                    <string>[html][font color=red]Shoulder flexion moment: ____  (N m)[/font][/html]</string>
+                                </void>
+                                <void property = "quantitySpecfication">
+                                    <string>InverseDynamics.Inverse Dynamics.shoulder_flexion_r_moment</string>
+                                </void>
+                            </object>
+                        </void>
+                    </void>
+                </object>
+            </void>
+        </void>
+    </object>
+</java>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>org.netbeans.modules.apisupport.project</type>
+    <configuration>
+        <data xmlns="http://www.netbeans.org/ns/nb-module-project/2">
+            <code-name-base>org.jfree</code-name-base>
+            <suite-component/>
+            <module-dependencies/>
+            <public-packages>
+                <package>com.keypoint</package>
+                <package>org.jfree</package>
+                <package>org.jfree.base</package>
+                <package>org.jfree.base.config</package>
+                <package>org.jfree.base.log</package>
+                <package>org.jfree.base.modules</package>
+                <package>org.jfree.date</package>
+                <package>org.jfree.io</package>
+                <package>org.jfree.layout</package>
+                <package>org.jfree.resources</package>
+                <package>org.jfree.text</package>
+                <package>org.jfree.threads</package>
+                <package>org.jfree.ui</package>
+                <package>org.jfree.ui.about</package>
+                <package>org.jfree.ui.about.resources</package>
+                <package>org.jfree.ui.action</package>
+                <package>org.jfree.ui.tabbedui</package>
+                <package>org.jfree.util</package>
+            </public-packages>
+            <class-path-extension>
+                <runtime-relative-path>ext/jcommon-1.0.8.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/jcommon-1.0.8.jar</binary-origin>
+            </class-path-extension>
+        </data>
+    </configuration>
+</project>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>org.netbeans.modules.apisupport.project</type>
+    <configuration>
+        <data xmlns="http://www.netbeans.org/ns/nb-module-project/2">
+            <code-name-base>org.apache.xmlgraphics.ps</code-name-base>
+            <suite-component/>
+            <module-dependencies/>
+            <public-packages>
+                <package>org.apache.xmlgraphics.fonts</package>
+                <package>org.apache.xmlgraphics.image</package>
+                <package>org.apache.xmlgraphics.image.codec.png</package>
+                <package>org.apache.xmlgraphics.image.codec.tiff</package>
+                <package>org.apache.xmlgraphics.image.codec.util</package>
+                <package>org.apache.xmlgraphics.image.rendered</package>
+                <package>org.apache.xmlgraphics.image.writer</package>
+                <package>org.apache.xmlgraphics.image.writer.imageio</package>
+                <package>org.apache.xmlgraphics.image.writer.internal</package>
+                <package>org.apache.xmlgraphics.java2d</package>
+                <package>org.apache.xmlgraphics.java2d.ps</package>
+                <package>org.apache.xmlgraphics.ps</package>
+                <package>org.apache.xmlgraphics.ps.dsc</package>
+                <package>org.apache.xmlgraphics.ps.dsc.events</package>
+                <package>org.apache.xmlgraphics.ps.dsc.tools</package>
+                <package>org.apache.xmlgraphics.util</package>
+                <package>org.apache.xmlgraphics.util.i18n</package>
+                <package>org.apache.xmlgraphics.util.io</package>
+                <package>org.apache.xmlgraphics.xmp</package>
+                <package>org.apache.xmlgraphics.xmp.merge</package>
+                <package>org.apache.xmlgraphics.xmp.schemas</package>
+                <package>org.apache.xmlgraphics.xmp.schemas.pdf</package>
+            </public-packages>
+            <class-path-extension>
+                <runtime-relative-path>ext/xmlgraphics-commons-1.2svn.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/xmlgraphics-commons-1.2svn.jar</binary-origin>
+            </class-path-extension>
+        </data>
+    </configuration>
+</project>

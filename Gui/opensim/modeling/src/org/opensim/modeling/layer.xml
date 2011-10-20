@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.1//EN" "http://www.netbeans.org/dtds/filesystem-1_1.dtd">
+<filesystem>
+    <folder name="Actions">
+        <folder name="Help">
+            <file name="org-opensim-modeling-DetectModelingAction.instance"/>
+        </folder>
+    </folder>
+    <folder name="Menu">
+        <folder name="Help">
+            <attr name="org-opensim-modeling-DetectModelingAction.shadow/Separator1.instance" boolvalue="true"/>
+        </folder>
+    </folder>
+</filesystem>

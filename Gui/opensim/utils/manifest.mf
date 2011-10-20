@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+OpenIDE-Module: org.opensim.utils
+OpenIDE-Module-Install: org/opensim/utils/Installer.class
+OpenIDE-Module-Layer: org/opensim/utils/layer.xml
+OpenIDE-Module-Localizing-Bundle: org/opensim/utils/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

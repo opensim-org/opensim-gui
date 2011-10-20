@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version = "1.5.0_14" class = "java.beans.XMLDecoder">
+    <object class = "org.opensim.k12.Lab">
+        <void property = "stateObjects">
+          <void method = "put">
+                <string>labName</string>
+                <string>Inverse Kinematics</string>
+          </void>
+            <void method = "put">
+                <string>OpenSimDB</string>
+                <object class = "org.opensim.view.pub.OpenSimDBDescriptor">
+                    <void property = "currentModelIndex">
+                        <int>0</int>
+                    </void>
+                    <void property = "fileNames">
+                        <void method = "add">
+                            <string>labs/lab_IK/arm26_with_bucket.osim</string>
+                        </void>
+                    </void>
+                    <void property = "modelIds">
+                        <void method = "add">
+                            <int>0</int>
+                        </void>
+                    </void>
+                </object>
+            </void>
+            <void method = "put">
+                <string>Plugins</string>
+                <object class = "org.opensim.view.pub.PluginsDB"/>
+            </void>
+            <void method = "put">
+                <string>Tool</string>
+                <object class = "org.opensim.tools.serializers.ToolSerializer">
+                    <void property = "setupFile">
+                        <string>labs/lab_IK/arm26_Setup_InverseKinematics.xml</string>
+                    </void>
+                </object>
+            </void>
+            <void method = "put">
+                <string>instructions_file</string>
+                <string>labs/lab_IK/instructions.html</string>
+            </void>
+            <void method = "put">
+                <string>Parameters</string>
+                <object class = "org.opensim.k12.LabParametersNode">
+                    <void property = "parameters">
+                        <void method = "add">
+                            <object class = "org.opensim.k12.LabParameter">
+                                <void property = "objectName">
+                                    <string>bucket</string>
+                                </void>
+                                <void property = "openSimType">
+                                    <string>Body</string>
+                                </void>
+                                <void property = "propertyName">
+                                    <string>mass</string>
+                                </void>
+                                  <void property = "propertyDisplayName">
+                                    <string>Bucket mass</string>
+                                </void>
+                            </object>
+                        </void>
+  						<void method = "add">
+                            <object class = "org.opensim.k12.LabParameter">
+                                <void property = "objectName">
+                                    <string>r_shoulder_elev</string>
+                                </void>
+                                <void property = "openSimType">
+                                    <string>Coordinate</string>
+                                </void>
+                                  <void property = "propertyDisplayName">
+                                    <string>Shoulder Elevation</string>
+                                </void>
+                            </object>
+                        </void>
+                  </void>
+                </object>
+            </void>
+        </void>
+    </object>
+</java>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.1//EN" "http://www.netbeans.org/dtds/filesystem-1_1.dtd">
+<filesystem>
+    <folder name="Actions">
+        <folder name="Edit">
+            <file name="org-opensim-plotter-ToolsPlotAction.instance"/>
+        </folder>
+    </folder>
+    <folder name="Menu">
+        <folder name="Tools">
+            <file name="org-opensim-plotter-separatorBefore.instance">
+                <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+            </file>
+            <file name="org-opensim-plotter-ToolsPlotAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-plotter-ToolsPlotAction.instance"/>
+            </file>
+            <file name="org-opensim-plotter-separatorAfter.instance">
+                <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+            </file>
+            <attr name="org-opensim-plotter-separatorBefore.instance/org-opensim-plotter-ToolsPlotAction.shadow" boolvalue="true"/>
+            <attr name="org-opensim-plotter-ToolsPlotAction.shadow/org-opensim-plotter-separatorAfter.instance" boolvalue="true"/>
+        </folder>
+    </folder>
+</filesystem>
