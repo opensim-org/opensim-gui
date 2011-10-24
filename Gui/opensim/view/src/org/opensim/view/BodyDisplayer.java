@@ -204,6 +204,7 @@ public class BodyDisplayer extends vtkAssembly
             body.getJoint().getLocationInChild(location);
             jointBFrame.SetPosition(location);
             body.getJoint().getOrientationInChild(orientation);
+            for (int i=0; i<3; i++) orientation[i]= Math.toDegrees(orientation[i]);
             jointBFrame.SetOrientation(orientation);
             AddPart(jointBFrame);
             Modified();
@@ -223,6 +224,7 @@ public class BodyDisplayer extends vtkAssembly
             body.getJoint().getLocationInParent(location);
             jointPFrame.SetPosition(location);
             body.getJoint().getOrientationInParent(orientation);
+            for (int i=0; i<3; i++) orientation[i]= Math.toDegrees(orientation[i]);
             jointPFrame.SetOrientation(orientation);
             jointPFrame.GetProperty().SetOpacity(0.75);
             jointPFrame.GetProperty().SetLineStipplePattern(2);
