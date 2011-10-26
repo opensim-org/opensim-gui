@@ -86,134 +86,197 @@
     <folder name="File">
             <file name="org-opensim-view-FileExportSIMMModelAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-FileExportSIMMModelAction.instance"/>
+                <attr name="position" intvalue="2050"/>
             </file>
-            <attr name="org-opensim-view-FileExportSIMMModelAction.shadow/org-opensim-view-FileSaveAsModelAction.shadow" boolvalue="false"/>
             <file name="org-opensim-view-FileSaveAsModelAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-FileSaveAsModelAction.instance"/>
+                <attr name="position" intvalue="1700"/>
             </file>
-            <attr name="org-opensim-view-FileSaveAsModelAction.shadow/org-opensim-view-OpenOsimModel.shadow" boolvalue="false"/>
             <file name="org-opensim-view-OpenOsimModel.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-FileOpenOsimModelAction.instance"/>
+                <attr name="position" intvalue="1300"/>
             </file>
-            <attr name="org-opensim-view-OpenOsimModel.shadow/org-opensim-view-motions.FileLoadMotionAction.instance" boolvalue="true"/>
             <file name="org-opensim-view-motions.FileLoadMotionAction.instance" url="org-opensim-view-motions.FileLoadMotionAction.instance">
-                <attr name="position" intvalue="200"/>
+                <attr name="position" intvalue="1350"/>
             </file>
-            <attr name="org-opensim-view-motions.FileLoadMotionAction.instance/org-opensim-view-SaveModelAction.shadow" boolvalue="true"/>
             <file name="org-opensim-view-SaveModelAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-FileSaveModelAction.instance"/>
+                <attr name="position" intvalue="1600"/>
             </file>
-            <attr name="org-opensim-view-SaveModelAction.shadow/org-opensim-view-actions-FileCloseAction.shadow" boolvalue="false"/>
             <file name="org-opensim-view-actions-FileCloseAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-actions-FileCloseAction.instance"/>
+                <attr name="position" intvalue="1375"/>
             </file>
-            <attr name="org-opensim-view-actions-FileCloseAction.shadow/org-opensim-view-actions-FileImportSIMMAction.shadow" boolvalue="true"/>
             <file name="org-opensim-view-actions-FileImportSIMMAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-actions-FileImportSIMMAction.instance"/>
+                <attr name="position" intvalue="1800"/>
             </file>
-            <attr name="org-opensim-view-actions-FileImportSIMMAction.shadow/org-opensim-view-actions-separatorBefore.instance" boolvalue="false"/>
-            <attr name="org-opensim-view-actions-FileCloseAction.shadow/org-opensim-view-actions-separatorBefore.instance" boolvalue="true"/>
             <file name="org-opensim-view-actions-separatorBefore.instance">
                 <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+                <attr name="position" intvalue="1387"/>
             </file>
-            <attr name="org-opensim-view-actions-separatorBefore.instance/org-opensim-view-editors-separatorAfter.instance" boolvalue="true"/>
             <file name="org-opensim-view-editors-separatorAfter.instance">
                 <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+                <attr name="position" intvalue="1750"/>
             </file>
-            <attr name="org-opensim-view-editors-separatorAfter.instance/org-opensim-view-editors-separatorAfter_1.instance" boolvalue="true"/>
             <file name="org-opensim-view-editors-separatorAfter_1.instance" url="org-opensim-view-editors-separatorAfter_1.instance">
                 <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+                <attr name="position" intvalue="2100"/>
             </file>
-            <attr name="org-opensim-view-editors-separatorAfter_1.instance/org-opensim-view-motions-FileLoadDataAction.instance" boolvalue="true"/>
             <file name="org-opensim-view-motions-FileLoadDataAction.instance" url="org-opensim-view-motions-FileLoadDataAction.instance">
-                <attr name="position" intvalue="1200"/>
+                <attr name="position" intvalue="2300"/>
             </file>
-            <attr name="org-opensim-view-motions-FileLoadDataAction.instance/org-opensim-view-separator1.instance" boolvalue="true"/>
             <file name="org-opensim-view-separator1.instance">
                 <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+                <attr name="position" intvalue="2400"/>
             </file>
-                <file name="Separator2.instance_hidden"/>
-            <file name="Separator3.instance_hidden"/>
-            <file name="Separator4.instance_hidden"/>
-            <file name="org-netbeans-modules-print-action-PageSetupAction.shadow_hidden"/>
-            <file name="org-netbeans-modules-print-action-PrintAction.shadow_hidden"/>
-            <file name="org-openide-actions-PageSetupAction.instance_hidden"/>
-            <file name="org-openide-actions-PrintAction.instance_hidden"/>
-            <file name="org-openide-actions-SaveAction.instance_hidden"/>
-            <file name="org-openide-actions-SaveAction.shadow_hidden"/>
-            <file name="org-openide-actions-SaveAllAction.instance_hidden"/>
-            <file name="org-openide-actions-SaveAllAction.shadow_hidden"/>
-            <file name="org-openide-actions-SaveAsAction.shadow_hidden"/>
-            <attr name="org-opensim-view-actions-separatorBefore.instance/org-opensim-view-actions-FileImportSIMMAction.shadow" boolvalue="false"/>
-            <attr name="org-opensim-view-actions-FileImportSIMMAction.shadow/org-opensim-view-editors-separatorAfter.instance" boolvalue="false"/>
-            <attr name="org-opensim-view-motions.FileLoadMotionAction.instance/org-opensim-view-actions-FileCloseAction.shadow" boolvalue="true"/>
-            <attr name="org-opensim-view-actions-separatorBefore.instance/org-opensim-view-SaveModelAction.shadow" boolvalue="true"/>
-            <attr name="org-opensim-view-SaveModelAction.shadow/org-opensim-view-editors-separatorAfter.instance" boolvalue="true"/>
-            <attr name="org-opensim-view-FileExportSIMMModelAction.shadow/org-opensim-view-OpenOsimModel.shadow" boolvalue="false"/>
-            <attr name="org-opensim-view-SaveModelAction.shadow/org-opensim-view-FileSaveAsModelAction.shadow" boolvalue="true"/>
-            <attr name="org-opensim-view-FileSaveAsModelAction.shadow/org-opensim-view-editors-separatorAfter.instance" boolvalue="true"/>
-            <attr name="org-opensim-view-editors-separatorAfter.instance/org-opensim-view-actions-FileImportSIMMAction.shadow" boolvalue="true"/>
-            <attr name="org-opensim-view-actions-FileImportSIMMAction.shadow/org-opensim-view-editors-separatorAfter_1.instance" boolvalue="true"/>
-            <attr name="org-opensim-view-actions-FileImportSIMMAction.shadow/org-opensim-view-FileExportSIMMModelAction.shadow" boolvalue="true"/>
-            <attr name="org-opensim-view-FileExportSIMMModelAction.shadow/org-opensim-view-editors-separatorAfter_1.instance" boolvalue="true"/>
-            <attr name="org-opensim-view-separator1.instance/org-netbeans-core-actions-SystemExit.instance" boolvalue="true"/>
+                <file name="Separator2.instance_hidden">
+                <attr name="position" intvalue="100"/>
+            </file>
+            <file name="Separator3.instance_hidden">
+                <attr name="position" intvalue="200"/>
+            </file>
+            <file name="Separator4.instance_hidden">
+                <attr name="position" intvalue="300"/>
+            </file>
+            <file name="org-netbeans-modules-print-action-PageSetupAction.shadow_hidden">
+                <attr name="position" intvalue="400"/>
+            </file>
+            <file name="org-netbeans-modules-print-action-PrintAction.shadow_hidden">
+                <attr name="position" intvalue="500"/>
+            </file>
+            <file name="org-openide-actions-PageSetupAction.instance_hidden">
+                <attr name="position" intvalue="600"/>
+            </file>
+            <file name="org-openide-actions-PrintAction.instance_hidden">
+                <attr name="position" intvalue="700"/>
+            </file>
+            <file name="org-openide-actions-SaveAction.instance_hidden">
+                <attr name="position" intvalue="800"/>
+            </file>
+            <file name="org-openide-actions-SaveAction.shadow_hidden">
+                <attr name="position" intvalue="900"/>
+            </file>
+            <file name="org-openide-actions-SaveAllAction.instance_hidden">
+                <attr name="position" intvalue="1000"/>
+            </file>
+            <file name="org-openide-actions-SaveAllAction.shadow_hidden">
+                <attr name="position" intvalue="1100"/>
+            </file>
+            <file name="org-openide-actions-SaveAsAction.shadow_hidden">
+                <attr name="position" intvalue="1200"/>
+            </file>
         </folder>
         <folder name="Edit">
-            <file name="Separator1.instance_hidden"/>
-            <file name="org-openide-actions-CopyAction.shadow_hidden"/>
-            <file name="org-openide-actions-CutAction.shadow_hidden"/>
-            <file name="org-openide-actions-DeleteAction.shadow_hidden"/>
-            <file name="org-openide-actions-FindAction.shadow_hidden"/>
-            <file name="org-openide-actions-PasteAction.shadow_hidden"/>
-            <file name="org-openide-actions-RedoAction.shadow_hidden"/>
-            <file name="org-openide-actions-ReplaceAction.shadow_hidden"/>
-            <file name="org-openide-actions-UndoAction.shadow_hidden"/>
+            <file name="org-openide-actions-CopyAction.shadow_hidden">
+                <attr name="position" intvalue="500"/>
+            </file>
+            <file name="org-openide-actions-CutAction.shadow_hidden">
+                <attr name="position" intvalue="700"/>
+            </file>
+            <file name="org-openide-actions-DeleteAction.shadow_hidden">
+                <attr name="position" intvalue="900"/>
+            </file>
+            <file name="org-openide-actions-FindAction.shadow_hidden">
+                <attr name="position" intvalue="1100"/>
+            </file>
+            <file name="org-openide-actions-PasteAction.shadow_hidden">
+                <attr name="position" intvalue="1300"/>
+            </file>
+            <file name="org-openide-actions-RedoAction.shadow_hidden">
+                <attr name="position" intvalue="1500"/>
+            </file>
+            <file name="org-openide-actions-ReplaceAction.shadow_hidden">
+                <attr name="position" intvalue="1700"/>
+            </file>
+            <file name="org-openide-actions-UndoAction.shadow_hidden">
+                <attr name="position" intvalue="1900"/>
+            </file>
             <file name="org-opensim-view-editors-EditMusclesAction.shadow" url="org-opensim-view-editors-EditMusclesAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-editors-EditMusclesAction.instance"/>
+                <attr name="position" intvalue="2000"/>
             </file>
             <file name="org-opensim-view-excitationEditor-ExcitationEditorAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-excitationEditor-ExcitationEditorAction.instance"/>
+                <attr name="position" intvalue="2050"/>
             </file>
             <file name="org-opensim-view-markerEditor-EditMarkersAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-markerEditor-EditMarkersAction.instance"/>
+                <attr name="position" intvalue="2075"/>
             </file>
             <file name="org-opensim-view-editors-ObjectPropertiesEditor.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-editors-ObjectPropertiesEditor.instance"/>
+                <attr name="position" intvalue="2200"/>
             </file>
             <file name="org-opensim-view-actions-EditPreferencesAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-actions-EditPreferencesAction.instance"/>
+                <attr name="position" intvalue="2100"/>
             </file>
-            <attr name="org-opensim-view-editors-EditMusclesAction.shadow/org-opensim-view-excitationEditor-ExcitationEditorAction.shadow" boolvalue="true"/>
-            <attr name="org-opensim-view-excitationEditor-ExcitationEditorAction.shadow/org-opensim-view-markerEditor-EditMarkersAction.shadow" boolvalue="true"/>
-            <attr name="org-opensim-view-markerEditor-EditMarkersAction.shadow/Separator2.instance" boolvalue="true"/>
-            <attr name="org-opensim-view-editors-EditMusclesAction.shadow/Separator2.instance" boolvalue="true"/>
-            <attr name="Separator2.instance/org-opensim-view-actions-EditPreferencesAction.shadow" boolvalue="true"/>
-            <attr name="org-opensim-view-actions-EditPreferencesAction.shadow/org-opensim-view-editors-ObjectPropertiesEditor.shadow" boolvalue="true"/>
-            <file name="org-netbeans-core-actions-JumpNextAction.shadow_hidden"/>
-            <file name="org-netbeans-core-actions-JumpPrevAction.shadow_hidden"/>
-            <file name="org-openide-actions-CopyAction.instance_hidden"/>
-            <file name="org-openide-actions-CutAction.instance_hidden"/>
-            <file name="org-openide-actions-DeleteAction.instance_hidden"/>
-            <file name="org-openide-actions-FindAction.instance_hidden"/>
-            <file name="org-openide-actions-PasteAction.instance_hidden"/>
-            <file name="org-openide-actions-RedoAction.instance_hidden"/>
-            <file name="org-openide-actions-ReplaceAction.instance_hidden"/>
-            <file name="org-openide-actions-UndoAction.instance_hidden"/>
+            <file name="org-netbeans-core-actions-JumpNextAction.shadow_hidden">
+                <attr name="position" intvalue="200"/>
+            </file>
+            <file name="org-netbeans-core-actions-JumpPrevAction.shadow_hidden">
+                <attr name="position" intvalue="300"/>
+            </file>
+            <file name="org-openide-actions-CopyAction.instance_hidden">
+                <attr name="position" intvalue="400"/>
+            </file>
+            <file name="org-openide-actions-CutAction.instance_hidden">
+                <attr name="position" intvalue="600"/>
+            </file>
+            <file name="org-openide-actions-DeleteAction.instance_hidden">
+                <attr name="position" intvalue="800"/>
+            </file>
+            <file name="org-openide-actions-FindAction.instance_hidden">
+                <attr name="position" intvalue="1000"/>
+            </file>
+            <file name="org-openide-actions-PasteAction.instance_hidden">
+                <attr name="position" intvalue="1200"/>
+            </file>
+            <file name="org-openide-actions-RedoAction.instance_hidden">
+                <attr name="position" intvalue="1400"/>
+            </file>
+            <file name="org-openide-actions-ReplaceAction.instance_hidden">
+                <attr name="position" intvalue="1600"/>
+            </file>
+            <file name="org-openide-actions-UndoAction.instance_hidden">
+                <attr name="position" intvalue="1800"/>
+            </file>
         </folder>
         <folder name="Tools">
-            <attr name="org-opensim-tracking-tools-separatorAfter.instance/org-opensim-view-actions-LoadUserLibraryAction.shadow" boolvalue="true"/>
-             <file name="Separator1.instance_hidden"/>
-            <file name="Separator2.instance_hidden"/>
-            <file name="Separator3.instance_hidden"/>
-            <file name="org-netbeans-core-actions-ConfigureShortcutsAction.instance_hidden"/>
-            <file name="org-netbeans-core-actions-OptionsAction.instance_hidden"/>
-            <file name="org-netbeans-modules-autoupdate-UpdateAction.instance_hidden"/>
-            <file name="org-netbeans-modules-autoupdate-catalog-ModuleCatalogAction"/>
-            <file name="org-netbeans-modules-favorites-templates-TemplatesAction.instance_hidden"/>
-            <file name="org-openide-actions-ToolsAction.instance_hidden"/>
-            <file name="org-opensim-plotter-separatorBefore.instance_hidden"/>
+             <file name="Separator1.instance_hidden">
+                <attr name="position" intvalue="100"/>
+            </file>
+            <file name="Separator2.instance_hidden">
+                <attr name="position" intvalue="300"/>
+            </file>
+            <file name="Separator3.instance_hidden">
+                <attr name="position" intvalue="400"/>
+            </file>
+            <file name="org-netbeans-core-actions-ConfigureShortcutsAction.instance_hidden">
+                <attr name="position" intvalue="500"/>
+            </file>
+            <file name="org-netbeans-core-actions-OptionsAction.instance_hidden">
+                <attr name="position" intvalue="600"/>
+            </file>
+            <file name="org-netbeans-modules-autoupdate-UpdateAction.instance_hidden">
+                <attr name="position" intvalue="700"/>
+            </file>
+            <file name="org-netbeans-modules-autoupdate-catalog-ModuleCatalogAction">
+                <attr name="position" intvalue="200"/>
+            </file>
+            <file name="org-netbeans-modules-favorites-templates-TemplatesAction.instance_hidden">
+                <attr name="position" intvalue="800"/>
+            </file>
+            <file name="org-openide-actions-ToolsAction.instance_hidden">
+                <attr name="position" intvalue="900"/>
+            </file>
+            <file name="org-opensim-plotter-separatorBefore.instance_hidden">
+                <attr name="position" intvalue="1000"/>
+            </file>
             <file name="org-opensim-view-actions-LoadUserLibraryAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Tools/org-opensim-view-actions-ToolsLoadUserLibraryAction.instance"/>
+                <attr name="position" intvalue="1100"/>
             </file>
         </folder>
          <folder name="Window">
@@ -221,10 +284,6 @@
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-actions-ViewAddNewAction.instance"/>
             </file>
             <file name="org-opensim-view-ExplorerAction.instance" url="org-opensim-view-ExplorerAction.instance"/>
-
-            <attr name="org-opensim-view-actions-ViewAddNewAction.shadow/org-opensim-view-ExplorerAction.instance" boolvalue="true"/>
-            <attr name="org-opensim-view-ExplorerAction.instance/org-opensim-coordinateviewer-CoordinateViewerAction.shadow" boolvalue="true"/>
-            <attr name="org-opensim-coordinateviewer-CoordinateViewerAction.shadow/org-opensim-logger-LoggerAction.shadow" boolvalue="true"/>
 
             <file name="Separator3.instance_hidden"/>
             <file name="Separator4.instance_hidden"/>
@@ -289,6 +348,7 @@
     </folder>
     <folder name="Toolbars">
         <file name="Build_hidden"/>
+        <file name="Clipboard_hidden"/>
         <file name="Debug_hidden"/>
         <folder name="Edit">
             <attr name="org-openide-actions-FindAction.instance/org-openide-actions-CutAction.instance" boolvalue="true"/>

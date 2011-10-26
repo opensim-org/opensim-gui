@@ -39,7 +39,6 @@ import org.openide.util.NbBundle;
 import org.openide.util.Utilities;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.view.base.CamerasMenu;
-import org.opensim.view.base.OpenSimBaseCanvas;
 
 public final class CameraAction extends CallableSystemAction 
         implements LookupListener{
