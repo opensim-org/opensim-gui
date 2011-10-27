@@ -156,6 +156,8 @@
     </folder>
     <folder name="Menu">
     <folder name="File">
+            <file name="Import_hidden"/>
+            <file name="ImporterSeparator1.instance_hidden"/>
             <file name="org-netbeans-modules-editor-ExportHtmlAction.shadow_hidden"/>
             <file name="org-netbeans-modules-project-ui-CloseProject.shadow_hidden"/>
             <file name="org-netbeans-modules-project-ui-CustomizeProject.shadow_hidden"/>
@@ -338,8 +340,11 @@
             </file>
             <file name="sep-before-reposearch.instance_hidden"/>
         </folder>
+        <file name="Profile_hidden"/>
         <folder name="Tools">
-             <file name="LibrariesCustomizerAction.shadow_hidden"/>
+            <file name="I18N_hidden"/>
+            <file name="JavaPlatformsCustomizerAction.shadow_hidden"/>
+            <file name="LibrariesCustomizerAction.shadow_hidden"/>
             <file name="PaletteManager_hidden"/>
             <file name="Separator1.instance_hidden">
                 <attr name="position" intvalue="100"/>
@@ -358,6 +363,7 @@
             <file name="org-netbeans-core-actions-OptionsAction.instance_hidden">
                 <attr name="position" intvalue="600"/>
             </file>
+            <file name="org-netbeans-modules-apisupport-project-ui-platform-NbPlatformCustomizerAction.shadow_hidden"/>
             <file name="org-netbeans-modules-autoupdate-UpdateAction.instance_hidden">
                 <attr name="position" intvalue="700"/>
             </file>
@@ -388,8 +394,12 @@
             <file name="Navigator_hidden"/>
             <file name="Other_hidden"/>
             <file name="Output_hidden"/>
+            <file name="Profile_hidden"/>
             <file name="Versioning_hidden"/>
+            <file name="org-netbeans-core-ide-ServicesTabAction.shadow_hidden"/>
             <file name="org-netbeans-modules-project-ui-logical-tab-action.shadow_hidden"/>
+            <file name="org-netbeans-modules-project-ui-physical-tab-action.shadow_hidden"/>
+            <file name="org-netbeans-modules-tasklist-ui-TaskListAction.shadow_hidden"/>
             <file name="org-opensim-view-actions-ViewAddNewAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-actions-ViewAddNewAction.instance"/>
             </file>
