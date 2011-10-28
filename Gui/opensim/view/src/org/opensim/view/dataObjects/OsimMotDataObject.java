@@ -5,7 +5,6 @@
 package org.opensim.view.dataObjects;
 
 import java.io.IOException;
-import java.util.Set;
 import org.openide.filesystems.FileObject;
 import org.openide.loaders.DataNode;
 import org.openide.loaders.DataObjectExistsException;
@@ -14,16 +13,14 @@ import org.openide.loaders.MultiFileLoader;
 import org.openide.nodes.CookieSet;
 import org.openide.nodes.Node;
 import org.openide.nodes.Children;
-import org.openide.nodes.Node.Cookie;
 import org.openide.util.Lookup;
 
-public class OsimModelDataObject extends MultiDataObject {
+public class OsimMotDataObject extends MultiDataObject {
 
-    public OsimModelDataObject(FileObject pf, MultiFileLoader loader) throws DataObjectExistsException, IOException {
+    public OsimMotDataObject(FileObject pf, MultiFileLoader loader) throws DataObjectExistsException, IOException {
         super(pf, loader);
         CookieSet cookies = getCookieSet();
-        //cookies.add((Node.Cookie) DataEditorSupport.create(this, getPrimaryEntry(), cookies));
-        cookies.add((Node.Cookie) new OsimOpenSupport(getPrimaryEntry()));
+        cookies.add((Node.Cookie) new OsimStoOpenSupport(getPrimaryEntry()));
     }
 
     @Override
@@ -33,23 +30,6 @@ public class OsimModelDataObject extends MultiDataObject {
 
     @Override
     public Lookup getLookup() {
-        System.out.println(getCookieSet().toString());
         return getCookieSet().getLookup();
     }
-
-    @Override
-    public Set<FileObject> files() {
-        return super.files();
-    }
-
-    @Override
-    public <T extends Cookie> T getCookie(Class<T> type) {
-        return super.getCookie(type);
-    }
-
-    @Override
-    public boolean isModified() {
-        return super.isModified();
-    }
-    
 }

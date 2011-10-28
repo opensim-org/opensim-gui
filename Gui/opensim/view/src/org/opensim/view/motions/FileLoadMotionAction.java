@@ -48,7 +48,7 @@ public final class FileLoadMotionAction extends CallableSystemAction {
            // model. This's done in OpenSimDB so that created SimmMotionData is not garbage collected early.
            // also because OpenSimDB has access to all models and as such can decide if it makes sense 
            // to associate the loaded motion with a prticular model.
-           MotionsDB.getInstance().loadMotionFile(fileName);
+            loadMotion(fileName);
         }
         
    }
@@ -74,6 +74,10 @@ public final class FileLoadMotionAction extends CallableSystemAction {
    public boolean isEnabled() {
        return OpenSimDB.getInstance().getCurrentModel()!=null;
    }
+
+    public void loadMotion(String fileName) {
+           MotionsDB.getInstance().loadMotionFile(fileName);
+    }
    
    
 }

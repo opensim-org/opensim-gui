@@ -10,15 +10,16 @@
         <folder name="Tools">
             <file name="org-opensim-plotter-separatorBefore.instance">
                 <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+                <attr name="position" intvalue="60"/>
             </file>
             <file name="org-opensim-plotter-ToolsPlotAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-plotter-ToolsPlotAction.instance"/>
+                <attr name="position" intvalue="70"/>
             </file>
             <file name="org-opensim-plotter-separatorAfter.instance">
                 <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+                <attr name="position" intvalue="80"/>
             </file>
-            <attr name="org-opensim-plotter-separatorBefore.instance/org-opensim-plotter-ToolsPlotAction.shadow" boolvalue="true"/>
-            <attr name="org-opensim-plotter-ToolsPlotAction.shadow/org-opensim-plotter-separatorAfter.instance" boolvalue="true"/>
         </folder>
     </folder>
 </filesystem>

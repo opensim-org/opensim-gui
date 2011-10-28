@@ -6,28 +6,27 @@
             <file name="org-opensim-swingui-RequestFeatureAction.instance"/>
         </folder>
         <folder name="Help">
+            <file name="master-help.xml_hidden"/>
+            <file name="org-netbeans-core-actions-AboutAction.instance_hidden"/>
+            <file name="org-netbeans-modules-bugzilla-ReportNBIssueAction.instance_hidden"/>
+            <file name="org-opensim-modeling-DetectModelingAction.instance_hidden"/>
             <file name="org-opensim-swingui-FileBug.instance"/>
+            <file name="vtk-VtkAction.instance_hidden"/>
         </folder>
     </folder>
     <folder name="Menu">
          <folder name="Help">
-            <file name="org-opensim-swingui-separatorBefore.instance">
-                <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
-            </file>
+            <file name="org-netbeans-modules-bugzilla-ReportNBIssueAction.shadow_hidden"/>
+            <file name="org-netbeans-modules-usersguide-master.xml" url="org-netbeans-modules-usersguide-master.xml"/>
+
             <file name="org-opensim-swingui-FileBug.shadow">
                 <attr name="originalFile" stringvalue="Actions/Help/org-opensim-swingui-FileBug.instance"/>
+                <attr name="position" intvalue="150"/>
             </file>
             <file name="org-opensim-swingui-RequestFeatureAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-swingui-RequestFeatureAction.instance"/>
+                <attr name="position" intvalue="200"/>
             </file>
-            <file name="org-opensim-swingui-separatorAfter.instance">
-                <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
-            </file>
-
-            <attr name="org-netbeans-core-actions-AboutAction.instance/org-opensim-swingui-separatorBefore.instance" boolvalue="true"/>
-            <attr name="org-opensim-swingui-separatorBefore.instance/org-opensim-swingui-FileBug.shadow" boolvalue="true"/>
-            <attr name="org-opensim-swingui-FileBug.shadow/org-opensim-swingui-RequestFeatureAction.shadow" boolvalue="true"/>
-            <attr name="org-opensim-swingui-RequestFeatureAction.shadow/org-opensim-swingui-separatorAfter.instance" boolvalue="true"/>
-        </folder>
+         </folder>
     </folder>
 </filesystem>
