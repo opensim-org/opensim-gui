@@ -29,7 +29,7 @@
  * Created on July 21, 2007, 9:37 AM
  */
 
-package org.opensim.view.actions;
+package org.opensim.simmsupport;
 
 /**
  *

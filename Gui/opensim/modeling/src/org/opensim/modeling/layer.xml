@@ -3,12 +3,10 @@
 <filesystem>
     <folder name="Actions">
         <folder name="Help">
-            <file name="org-opensim-modeling-DetectModelingAction.instance"/>
         </folder>
     </folder>
     <folder name="Menu">
         <folder name="Help">
-            <attr name="org-opensim-modeling-DetectModelingAction.shadow/Separator1.instance" boolvalue="true"/>
-        </folder>
+         </folder>
     </folder>
 </filesystem>

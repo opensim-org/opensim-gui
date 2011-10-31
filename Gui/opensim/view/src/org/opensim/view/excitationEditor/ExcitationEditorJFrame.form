@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.1" encoding="UTF-8" ?>
 
-<Form version="1.3" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.3" maxVersion="1.3" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
+    <Container class="javax.swing.JMenuBar" name="jMenuBar1">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jFileMenu">
           <Properties>
@@ -54,11 +58,15 @@
           </SubComponents>
         </Menu>
       </SubComponents>
-    </Menu>
-    <Menu class="javax.swing.JMenu" name="jToolsMenu">
+    </Container>
+    <Container class="javax.swing.JMenu" name="jToolsMenu">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tools"/>
       </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
       <SubComponents>
         <MenuItem class="javax.swing.JMenuItem" name="jSaveTemplateMenuItem">
           <Properties>
@@ -77,7 +85,7 @@
           </Events>
         </MenuItem>
       </SubComponents>
-    </Menu>
+    </Container>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
@@ -89,7 +97,11 @@
     <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="2"/>
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
@@ -196,11 +208,8 @@
         <Component class="javax.swing.JButton" name="helpButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Help"/>
-            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;Anchor with left mouse button and drag to lower right to &lt;b&gt;Zoom In&lt;/b&gt; on a rectangle.&lt;br&gt;&#xa;Anchor  with left mouse button and drag to the left to &lt;b&gt;Zoom Out/Refit&lt;/b&gt; the data.&lt;br&gt;&#xa;Use &lt;b&gt;I&lt;/b&gt; to zoom in about the center of the pane.l&lt;br&gt;&#xa;Use &lt;b&gt;O&lt;/b&gt; to zoom out about the center of the panel.l&lt;br&gt;&#xa;Use &lt;b&gt;L&lt;/b&gt; to move the panel Left&lt;br&gt;&#xa;Use &lt;b&gt;R&lt;/b&gt; to move the panel Right&lt;br&gt;&#xa;Use &lt;b&gt;U&lt;/b&gt; to move the panel Up&lt;br&gt;&#xa;Use &lt;b&gt;D&lt;/b&gt; to move the panel Down&lt;br&gt;&#xa;&lt;b&gt;Selection:&lt;/b&gt;&lt;br&gt;&#xa;Holding &lt;b&gt;CTRL&lt;/b&gt; button down turns on selection mode.&lt;br&gt;&#xa;  - Left mouse button selects individual points.&lt;br&gt;&#xa;  - Shift + left mouse button accumulates selection.&lt;br&gt;&#xa;  - Draw box to select all points within the box.&lt;br&gt;&#xa;  - Left mouse button in background deselects all points.&lt;br&gt;&#xa;&lt;b&gt;Adding Points:&lt;/b&gt;&lt;br&gt;&#xa;Right mouse click inside a panel and use popup menu to add points.&lt;br&gt;&#xa;&lt;/html&gt;&#xa;&#xa;"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="helpButtonActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

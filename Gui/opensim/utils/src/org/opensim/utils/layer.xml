@@ -9,9 +9,7 @@
             <file name="master-help.xml_hidden"/>
             <file name="org-netbeans-core-actions-AboutAction.instance_hidden"/>
             <file name="org-netbeans-modules-bugzilla-ReportNBIssueAction.instance_hidden"/>
-            <file name="org-opensim-modeling-DetectModelingAction.instance_hidden"/>
             <file name="org-opensim-swingui-FileBug.instance"/>
-            <file name="vtk-VtkAction.instance_hidden"/>
         </folder>
     </folder>
     <folder name="Menu">

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.1//EN" "http://www.netbeans.org/dtds/filesystem-1_1.dtd">
+<filesystem>
+    <folder name="Actions">
+        <folder name="Edit">
+            <file name="org-opensim-simmsupport-FileExportSIMMModelAction.instance"/>
+            <file name="org-opensim-simmsupport-FileImportSIMMAction.instance"/>
+        </folder>
+    </folder>
+    <folder name="Menu">
+         <folder name="File">
+             <file name="org-opensim-simmsupport-FileExportSIMMModelAction.instance">
+                <attr name="position" intvalue="2400"/>
+            </file>
+            <file name="org-opensim-simmsupport-FileImportSIMMAction.instance">
+                <attr name="position" intvalue="2300"/>
+            </file>
+        </folder>
+    </folder>
+</filesystem>

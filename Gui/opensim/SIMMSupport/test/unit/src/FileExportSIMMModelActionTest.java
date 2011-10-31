@@ -5,8 +5,9 @@
  * Created on September 24, 2010, 2:49 PM
  */
 
-package org.opensim.view;
 
+
+import org.opensim.simmsupport.FileExportSIMMModelAction;
 import junit.framework.*;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
@@ -16,7 +17,7 @@ import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.SimmFileWriter;
-import org.opensim.view.actions.OpenSimToSIMMOptionsJPanel;
+import org.opensim.simmsupport.OpenSimToSIMMOptionsJPanel;
 import org.opensim.view.pub.OpenSimDB;
 
 /**

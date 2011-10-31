@@ -17,19 +17,20 @@
     </folder>
     <folder name="Menu">
         <folder name="Tools">
-            <attr name="org-netbeans-modules-autoupdate-catalog-ModuleCatalogAction.instance/org-opensim-k12utils-separatorBefore.instance" boolvalue="true"/>
             <file name="org-opensim-k12utils-separatorBefore.instance">
                 <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+                <attr name="position" intvalue="10"/>
             </file>
-            <attr name="org-opensim-k12utils-separatorBefore.instance/org-opensim-k12utils-ToolsCreateLabAction.shadow" boolvalue="true"/>
             <file name="org-opensim-k12utils-ToolsCreateLabAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Tools/org-opensim-k12utils-ToolsCreateLabAction.instance"/>
+                <attr name="position" intvalue="15"/>
             </file>
-            <attr name="org-opensim-k12utils-ToolsCreateLabAction.shadow/org-opensim-plotter-separatorBefore.instance" boolvalue="true"/>
-            <attr name="org-opensim-k12utils-ToolsCreateLabAction.shadow/org-opensim-k12utils-ToolsEditLabAction.instance" boolvalue="true"/>
-            <file name="org-opensim-k12utils-ToolsEditLabAction.instance" url="org-opensim-k12utils-ToolsEditLabAction.instance"/>
+            <file name="org-opensim-k12utils-ToolsEditLabAction.instance" url="org-opensim-k12utils-ToolsEditLabAction.instance">
+                <attr name="position" intvalue="20"/>
+            </file>
             <file name="org-opensim-k12utils-separatorBefore_1.instance" url="org-opensim-k12utils-separatorBefore_1.instance">
                 <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+                <attr name="position" intvalue="25"/>
             </file>
         </folder>
     </folder>

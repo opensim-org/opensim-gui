@@ -88,12 +88,12 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       this.mode = mode;
 
       switch(mode) {
-         case ForwardDynamics: modeName = "forward dynamics tool"; toolModel = new ForwardToolModel(model); break;
+         case ForwardDynamics: modeName = "forward dynamics tool"; toolModel = new ForwardToolModel(model); super.prepareHelpset("FD.hs"); super.getHelpBroker().enableHelpOnButton(super.helpButton, "org.opensim.simtrack.fd.help", super.getHelpSet());  break;
          case InverseDynamics: modeName = "inverse dynamics tool"; toolModel = new AnalyzeToolModel(model, mode); break;
-         case CMC: modeName = "CMC tool"; toolModel = new CMCToolModel(model); break;
-         case RRA: modeName = "RRA tool"; toolModel = new RRAToolModel(model); break;
-         case Analyze: modeName = "analyze tool"; toolModel = new AnalyzeToolModel(model, mode); break;
-         case StaticOptimization:  modeName = "static optimization tool"; toolModel = new AnalyzeToolModel(model, mode); break;
+         case CMC: modeName = "CMC tool"; toolModel = new CMCToolModel(model); super.prepareHelpset("CMC.hs"); super.getHelpBroker().enableHelpOnButton(super.helpButton, "org.opensim.simtrack.cmc.help", super.getHelpSet());  break;
+         case RRA: modeName = "RRA tool"; toolModel = new RRAToolModel(model); super.prepareHelpset("RRA.hs"); super.getHelpBroker().enableHelpOnButton(super.helpButton, "org.opensim.simtrack.rra.help", super.getHelpSet());  break;
+         case Analyze: modeName = "analyze tool"; toolModel = new AnalyzeToolModel(model, mode); super.prepareHelpset("Analyze.hs"); super.getHelpBroker().enableHelpOnButton(super.helpButton, "org.opensim.simtrack.analyze.help", super.getHelpSet());  break;
+         case StaticOptimization:  modeName = "static optimization tool"; toolModel = new AnalyzeToolModel(model, mode); super.prepareHelpset("StaticOptimization.hs"); super.getHelpBroker().enableHelpOnButton(super.helpButton, "org.opensim.simtrack.so.help", super.getHelpSet());  break;
       }
 
       if (numFormat instanceof DecimalFormat) {

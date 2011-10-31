@@ -18,13 +18,11 @@
             <file name="org-opensim-view-ObjectDisplayShowOnlyAction.instance"/>
             <file name="org-opensim-view-ModelRenameAction.instance"/>
             <file name="org-opensim-view-ViewEditAction.instance"/>
-            <file name="org-opensim-view-FileExportSIMMModelAction.instance"/>
             <file name="org-opensim-view-ViewReplicateAction.instance"/>
             <file name="org-opensim-view-SaveAction.instance"/>
                     <file name="org-opensim-view-FileSaveModelAction.instance"/>
             <file name="org-opensim-view-actions-EditPreferencesAction.instance"/>
             <file name="org-opensim-view-actions-FileCloseAction.instance"/>
-            <file name="org-opensim-view-actions-FileImportSIMMAction.instance"/>
             <file name="org-opensim-view-actions-ViewAddNewAction.instance"/>
             <file name="org-opensim-view-base-SelectCameraAction.instance"/>
             <file name="org-opensim-view-base-ToggleAxesAction.instance">
@@ -36,14 +34,13 @@
             <file name="org-opensim-view-experimentaldata-ExperimentalObjectDisplayHideAction.instance"/>
             <file name="org-opensim-view-markerEditor-EditMarkersAction.instance"/>
             <file name="org-opensim-view-nodes-DisplayPointTraceAction.instance"/>
-            <file name="org-opensim-view-nodes-EditFromNodeAction.instance"/>
             <file name="org-opensim-view-nodes-IsolateCurrentModelAction.instance"/>
             <file name="org-opensim-view-nodes-JointToggleChildFrameAction.instance"/>
             <file name="org-opensim-view-nodes-ModelCloseSelectedAction.instance"/>
             <file name="org-opensim-view-FileSaveAsModelAction.instance"/>
             <file name="org-opensim-view-motions-ShowMotionSliderAction.instance"/>
             <file name="org-opensim-view-motions-FileLoadDataAction.instance"/>
-                <file name="org-opensim-view-nodes-ToggleEnabledStateAction.instance"/>
+            <file name="org-opensim-view-nodes-ToggleEnabledStateAction.instance"/>
         </folder>
         <folder name="Help">
             <file name="org-opensim-view-HelpAboutAction.instance"/>
@@ -68,7 +65,6 @@
         <attr name="org-netbeans-core-actions-AboutAction.instance/org-opensim-swingui-separatorBefore.instance" boolvalue="true"/>
         <attr name="org-opensim-swingui-FileBug.shadow/org-opensim-swingui-separatorAfter.instance" boolvalue="true"/>
         <attr name="master-help.xml/HelpShortcuts" boolvalue="true"/>
-        <attr name="org-opensim-modeling-DetectModelingAction.shadow/Separator1.instance" boolvalue="true"/>
         <attr name="org-opensim-swingui-separatorBefore.instance/org-opensim-swingui-FileBug.shadow" boolvalue="true"/>
         <file name="org-netbeans-core-actions-AboutAction.instance" url="org-netbeans-core-actions-AboutAction_1.instance"/>
         <file name="org-opensim-swingui-FileBug.shadow" url="org-opensim-swingui-FileBug_1.shadow">
@@ -290,21 +286,32 @@
     </folder>
     <folder name="Menu">
     <folder name="File">
-            <file name="Import_hidden"/>
-            <file name="ImporterSeparator1.instance_hidden"/>
-            <file name="org-netbeans-modules-editor-ExportHtmlAction.shadow_hidden"/>
-            <file name="org-netbeans-modules-openfile-OpenFileAction.shadow_hidden"/>
-            <file name="org-netbeans-modules-openfile-RecentFileAction.shadow_hidden"/>
-            <file name="org-netbeans-modules-project-ui-CloseProject.shadow_hidden"/>
-            <file name="org-netbeans-modules-project-ui-CustomizeProject.shadow_hidden"/>
+            <attr name="position" intvalue="100"/>
+            <file name="Import_hidden">
+                <attr name="position" intvalue="100"/>
+            </file>
+            <file name="ImporterSeparator1.instance_hidden">
+                <attr name="position" intvalue="200"/>
+            </file>
+            <file name="org-netbeans-modules-editor-ExportHtmlAction.shadow_hidden">
+                <attr name="position" intvalue="500"/>
+            </file>
+            <file name="org-netbeans-modules-openfile-OpenFileAction.shadow_hidden">
+                <attr name="position" intvalue="600"/>
+            </file>
+            <file name="org-netbeans-modules-openfile-RecentFileAction.shadow_hidden">
+                <attr name="position" intvalue="700"/>
+            </file>
+            <file name="org-netbeans-modules-project-ui-CloseProject.shadow_hidden">
+                <attr name="position" intvalue="800"/>
+            </file>
+            <file name="org-netbeans-modules-project-ui-CustomizeProject.shadow_hidden">
+                <attr name="position" intvalue="900"/>
+            </file>
             <file name="org-netbeans-modules-project-ui-NewProject.shadow_hidden"/>
             <file name="org-netbeans-modules-project-ui-OpenProject.shadow_hidden"/>
             <file name="org-netbeans-modules-project-ui-RecentProjects.shadow_hidden"/>
             <file name="org-netbeans-modules-project-ui-groups-GroupsMenu.shadow_hidden"/>
-            <file name="org-opensim-view-FileExportSIMMModelAction.shadow">
-                <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-FileExportSIMMModelAction.instance"/>
-                <attr name="position" intvalue="2050"/>
-            </file>
             <file name="org-opensim-view-FileSaveAsModelAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-FileSaveAsModelAction.instance"/>
                 <attr name="position" intvalue="1700"/>
@@ -324,10 +331,6 @@
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-actions-FileCloseAction.instance"/>
                 <attr name="position" intvalue="1375"/>
             </file>
-            <file name="org-opensim-view-actions-FileImportSIMMAction.shadow">
-                <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-actions-FileImportSIMMAction.instance"/>
-                <attr name="position" intvalue="1800"/>
-            </file>
             <file name="org-opensim-view-actions-separatorBefore.instance">
                 <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
                 <attr name="position" intvalue="1387"/>
@@ -341,17 +344,17 @@
                 <attr name="position" intvalue="2100"/>
             </file>
             <file name="org-opensim-view-motions-FileLoadDataAction.instance" url="org-opensim-view-motions-FileLoadDataAction.instance">
-                <attr name="position" intvalue="2300"/>
+                <attr name="position" intvalue="2500"/>
             </file>
             <file name="org-opensim-view-separator1.instance">
                 <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
-                <attr name="position" intvalue="2400"/>
+                <attr name="position" intvalue="2450"/>
             </file>
                 <file name="Separator2.instance_hidden">
-                <attr name="position" intvalue="100"/>
+                <attr name="position" intvalue="300"/>
             </file>
             <file name="Separator3.instance_hidden">
-                <attr name="position" intvalue="200"/>
+                <attr name="position" intvalue="400"/>
             </file>
             <file name="Separator4.instance_hidden">
                 <attr name="position" intvalue="300"/>
@@ -385,6 +388,7 @@
             </file>
         </folder>
         <folder name="Edit">
+            <attr name="position" intvalue="200"/>
             <file name="Separator1.instance_hidden"/>
             <file name="Separator2.instance_hidden"/>
             <file name="SeparatorAfterFindPrevious.instance_hidden"/>
@@ -476,8 +480,11 @@
             </file>
             <file name="sep-before-reposearch.instance_hidden"/>
         </folder>
-        <file name="Profile_hidden"/>
+        <file name="Profile_hidden">
+            <attr name="position" intvalue="900"/>
+        </file>
         <folder name="Tools">
+            <attr name="position" intvalue="300"/>
             <file name="I18N_hidden"/>
             <file name="JavaPlatformsCustomizerAction.shadow_hidden"/>
             <file name="LibrariesCustomizerAction.shadow_hidden"/>
@@ -493,24 +500,19 @@
             </file>
             <file name="ServerManagerAction3.shadow_hidden"/>
             <file name="VariablesCustomizerAction.shadow_hidden"/>
-            <file name="org-netbeans-core-actions-ConfigureShortcutsAction.instance_hidden">
-                <attr name="position" intvalue="500"/>
-            </file>
             <file name="org-netbeans-core-actions-OptionsAction.instance_hidden">
                 <attr name="position" intvalue="600"/>
             </file>
-            <file name="org-netbeans-modules-apisupport-project-ui-platform-NbPlatformCustomizerAction.shadow_hidden"/>
-            <file name="org-netbeans-modules-autoupdate-UpdateAction.instance_hidden">
-                <attr name="position" intvalue="700"/>
-            </file>
             <file name="org-netbeans-modules-autoupdate-catalog-ModuleCatalogAction">
-                <attr name="position" intvalue="200"/>
+                <attr name="position" intvalue="2"/>
+            </file>
+            <file name="org-netbeans-modules-autoupdate-ui-actions-PluginManagerAction">
+                <attr name="position" intvalue="3"/>
             </file>
             <file name="org-netbeans-modules-favorites-templates-TemplatesAction.instance_hidden">
                 <attr name="position" intvalue="800"/>
             </file>
             <file name="org-netbeans-modules-favorites-templates-TemplatesAction.shadow_hidden"/>
-            <file name="org-netbeans-modules-xml-catalog-CatalogAction.shadow_hidden"/>
             <file name="org-openide-actions-ToolsAction.instance_hidden">
                 <attr name="position" intvalue="900"/>
             </file>
@@ -524,9 +526,13 @@
                 <attr name="position" intvalue="1100"/>
             </file>
         </folder>
-        <file name="Versioning_hidden"/>
+        <file name="Versioning_hidden">
+            <attr name="position" intvalue="1300"/>
+        </file>
         <folder name="Window">
-            <file name="Debug_hidden"/>
+            <attr name="position" intvalue="350"/>
+            <file name="Debug_hidden">
+                </file>
             <file name="Navigator_hidden"/>
             <file name="Other_hidden"/>
             <file name="Output_hidden"/>
@@ -538,15 +544,24 @@
             <file name="org-netbeans-modules-tasklist-ui-TaskListAction.shadow_hidden"/>
             <file name="org-opensim-view-actions-ViewAddNewAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-actions-ViewAddNewAction.instance"/>
+                <attr name="position" intvalue="500"/>
             </file>
             <file name="org-opensim-view-ExplorerAction.instance" url="org-opensim-view-ExplorerAction.instance"/>
 
             <file name="Separator3.instance_hidden"/>
             <file name="Separator4.instance_hidden"/>
-            <file name="CloneDocumentAction.shadow_hidden"/>
-            <file name="CloseAllButThisAction.shadow_hidden"/>
-            <file name="CloseAllDocumentsAction.shadow_hidden"/>
-            <file name="CloseWindowAction.shadow_hidden"/>
+            <file name="CloneDocumentAction.shadow_hidden">
+                <attr name="position" intvalue="100"/>
+            </file>
+            <file name="CloseAllButThisAction.shadow_hidden">
+                <attr name="position" intvalue="200"/>
+            </file>
+            <file name="CloseAllDocumentsAction.shadow_hidden">
+                <attr name="position" intvalue="300"/>
+            </file>
+            <file name="CloseWindowAction.shadow_hidden">
+                <attr name="position" intvalue="400"/>
+            </file>
             <file name="DocumentsAction.shadow_hidden"/>
             <file name="MaximizeWindowAction.shadow_hidden"/>
             <file name="ProgressListAction.shadow_hidden"/>
@@ -559,40 +574,56 @@
             <file name="org-netbeans-core-actions-HTMLViewAction.instance_hidden"/>
         </folder>
         <folder name="Help">
-           <attr name="Separator1.instance/org-opensim-view-TutorialsAction.shadow" boolvalue="true"/>
-           <attr name="Separator1.instance/org-opensim-view-HelpAboutAction.shadow" boolvalue="true"/>
-            <file name="org-netbeans-core-actions-AboutAction.shadow_hidden"/>
+            <attr name="position" intvalue="400"/>
+            <file name="org-netbeans-core-actions-AboutAction.shadow_hidden">
+                <attr name="position" intvalue="300"/>
+            </file>
             <file name="org-opensim-view-HelpAboutAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Help/org-opensim-view-HelpAboutAction.instance"/>
+                <attr name="position" intvalue="1500"/>
             </file>
 
-           <attr name="org-opensim-view-HelpAboutAction.shadow/org-netbeans-core-actions-AboutAction.instance" boolvalue="true"/>
+           
 
-           <attr name="org-netbeans-core-actions-AboutAction.instance/org-opensim-swingui-separatorBefore.instance" boolvalue="true"/>
-            <attr name="org-opensim-view-HelpAboutAction.shadow/org-opensim-swingui-separatorBefore.instance" boolvalue="true"/>
-            <attr name="org-opensim-swingui-separatorAfter.instance/org-opensim-view-TutorialsAction.shadow" boolvalue="true"/>
-            <file name="org-opensim-view-TutorialsAction.shadow">
+           <file name="org-opensim-view-TutorialsAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Help/org-opensim-view-HelpTutorialsAction.instance"/>
+                <attr name="position" intvalue="600"/>
             </file>
-            <attr name="org-opensim-view-TutorialsAction.shadow/master-help.xml" boolvalue="true"/>
             <file name="master-help.xml" url="master-help.xml"/>
-            <file name="master-help.xml_hidden"/>
-            <file name="org-netbeans-core-actions-AboutAction.instance_hidden"/>
+            <file name="master-help.xml_hidden">
+                <attr name="position" intvalue="100"/>
+            </file>
+            <file name="org-netbeans-core-actions-AboutAction.instance_hidden">
+                <attr name="position" intvalue="200"/>
+            </file>
         </folder>
 
-        <attr name="File/Edit" boolvalue="true"/>
-        <attr name="Edit/Tools" boolvalue="true"/>
-        <attr name="Tools/Window" boolvalue="true"/>
-        <attr name="Window/Help" boolvalue="true"/>
+        
 
-        <file name="View_hidden"/>
-        <file name="BuildProject_hidden"/>
-        <file name="CVS_hidden"/>
-        <file name="GoTo_hidden"/>
-        <file name="Refactoring_hidden"/>
-        <file name="RunProject_hidden"/>
-        <file name="Source_hidden"/>
-        <file name="org-netbeans-modules-quicksearch-QuickSearchAction.shadow_hidden"/>
+        <file name="View_hidden">
+            <attr name="position" intvalue="1400"/>
+        </file>
+        <file name="BuildProject_hidden">
+            <attr name="position" intvalue="600"/>
+        </file>
+        <file name="CVS_hidden">
+            <attr name="position" intvalue="700"/>
+        </file>
+        <file name="GoTo_hidden">
+            <attr name="position" intvalue="800"/>
+        </file>
+        <file name="Refactoring_hidden">
+            <attr name="position" intvalue="1000"/>
+        </file>
+        <file name="RunProject_hidden">
+            <attr name="position" intvalue="1100"/>
+        </file>
+        <file name="Source_hidden">
+            <attr name="position" intvalue="1200"/>
+        </file>
+        <file name="org-netbeans-modules-quicksearch-QuickSearchAction.shadow_hidden">
+            <attr name="position" intvalue="1500"/>
+        </file>
     </folder>
     <folder name="Services">
         <folder name="JavaHelp">
@@ -601,12 +632,15 @@
         <folder name="MIMEResolver">
             <file name="OsimModelResolver.xml" url="OsimModelResolver.xml">
                 <attr name="displayName" bundlevalue="org.opensim.view.Bundle#Services/MIMEResolver/OsimModelResolver.xml"/>
+                <attr name="position" intvalue="0"/>
             </file>
             <file name="OsimMotResolver.xml" url="OsimMotResolver.xml">
                 <attr name="displayName" bundlevalue="org.opensim.view.Bundle#Services/MIMEResolver/OsimMotResolver.xml"/>
+                <attr name="position" intvalue="100"/>
             </file>
             <file name="OsimStoResolver.xml" url="OsimStoResolver.xml">
                 <attr name="displayName" bundlevalue="org.opensim.view.Bundle#Services/MIMEResolver/OsimStoResolver.xml"/>
+                <attr name="position" intvalue="300"/>
             </file>
         </folder>
     </folder>

@@ -23,12 +23,8 @@
  *  OR BUSINESS INTERRUPTION) OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
  *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.opensim.view;
+package org.opensim.simmsupport;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.openide.awt.StatusDisplayer;
@@ -38,42 +34,19 @@ import org.openide.util.actions.CallableSystemAction;
 import org.opensim.modeling.Model;
 //import org.opensim.modeling.SimmFileWriter;
 import org.opensim.modeling.SimmFileWriter;
-import org.opensim.view.actions.OpenSimToSIMMOptionsJPanel;
 import org.opensim.view.pub.OpenSimDB;
 
 /**
  * A Class represnting the Action of exporting an OpenSim model to SIMM's jnt format.
  * The exported model is the "Current" model in the GUI as indicated by the explorer window.
  */
-public final class FileExportSIMMJntAction extends CallableSystemAction {
+public final class FileExportSIMMModelAction extends CallableSystemAction {
     
-    class ExportDlgListener implements ActionListener, PropertyChangeListener
-    {
-        DialogDescriptor dlgOfInterest;
-        ExportDlgListener(DialogDescriptor aDialog)
-        {
-            super();
-            dlgOfInterest=aDialog;
-            dlgOfInterest.addPropertyChangeListener(this);
-        }
-
-        public void actionPerformed(ActionEvent e) {
-            dlgOfInterest.setValid(!dlgOfInterest.isValid());
-        }
-
-        public void propertyChange(PropertyChangeEvent evt) {
-            String name=evt.getPropertyName();
-            int i=0;
-        }
-    }
     public void performAction() {
-        // TODO implement action body
         Model mdl = OpenSimDB.getInstance().getCurrentModel();
         if (mdl != null){
             OpenSimToSIMMOptionsJPanel exportPanel = new OpenSimToSIMMOptionsJPanel();
             DialogDescriptor dlg = new DialogDescriptor(exportPanel, "Export SIMM Model");
-            dlg.setValid(false);
-            dlg.setButtonListener(new ExportDlgListener(dlg));
             DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
             Object userInput = dlg.getValue();
             if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
@@ -95,13 +68,13 @@ public final class FileExportSIMMJntAction extends CallableSystemAction {
                     mslfileName = mslfileName+".msl";
                 modelWriter.writeMuscleFile(mslfileName);
 
-                StatusDisplayer.getDefault().setStatusText("Exported SIMM jnt & muscle files for model " + mdl.getName()+".");
+                StatusDisplayer.getDefault().setStatusText("Exported SIMM jnt & muscle files for model " + mdl.getName() + ".");
             }
         }
     }
     
     public String getName() {
-        return NbBundle.getMessage(FileExportSIMMJntAction.class, "CTL_ExportSIMMJntAction");
+        return NbBundle.getMessage(FileExportSIMMModelAction.class, "CTL_ExportSIMMJntAction");
     }
     
     protected void initialize() {
@@ -123,5 +96,9 @@ public final class FileExportSIMMJntAction extends CallableSystemAction {
     public boolean isEnabled() {
        return OpenSimDB.getInstance().getCurrentModel()!=null;
    }
+
+    private void throwUnimplemented() {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 
 }

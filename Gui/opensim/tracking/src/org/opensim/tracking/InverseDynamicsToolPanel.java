@@ -76,7 +76,10 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
         ((DecimalFormat) numFormat).applyPattern("#,##0.############");
       }
 
+      super.prepareHelpset("ID.hs");//add help set file
       initComponents();
+      super.getHelpBroker().enableHelpOnButton(super.helpButton, "org.opensim.simtrack.id.help", super.getHelpSet());// add action listener to help button
+
       bindPropertiesToComponents();
 
       // Add checkbox titled borders to RRA panel

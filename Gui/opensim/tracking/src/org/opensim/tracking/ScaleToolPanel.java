@@ -87,6 +87,8 @@ public class ScaleToolPanel extends BaseToolPanel implements Observer {
         ((DecimalFormat) numFormat).applyPattern("#,##0.#########");
       }
 
+      super.prepareHelpset("Scale.hs");//add help set
+      super.getHelpBroker().enableHelpOnButton(super.helpButton, "org.opensim.simtrack.scale.help", super.getHelpSet());// add action listener to help button
       initComponents();
       bindPropertiesToComponents();
 

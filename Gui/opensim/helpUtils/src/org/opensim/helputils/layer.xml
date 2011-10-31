@@ -11,28 +11,29 @@
     </folder>
     <folder name="Menu">
         <folder name="Help">
-            <attr name="org-opensim-view-TutorialsAction.shadow/org-opensim-helputils-separatorBefore.instance" boolvalue="true"/>
-            <attr name="Separator1.instance/org-opensim-helputils-separatorBefore_1.instance" boolvalue="true"/>
-            <attr name="org-opensim-helputils-separatorBefore_1.instance/org-opensim-view-HelpAboutAction.shadow" boolvalue="true"/>
-            <attr name="master-help.xml/org-opensim-helputils-separatorBefore.instance" boolvalue="true"/>
             <file name="org-opensim-helputils-separatorBefore.instance">
                 <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+                <attr name="position" intvalue="1100"/>
             </file>
-            <attr name="org-opensim-helputils-separatorBefore.instance/org-opensim-helputils-HelpShowXML.shadow" boolvalue="true"/>
-            <attr name="org-opensim-helputils-separatorBefore.instance/org-opensim-helputils-ToolsVersionUpgradeAction.shadow" boolvalue="true"/>
             <file name="org-opensim-helputils-ToolsVersionUpgradeAction.shadow" url="org-opensim-helputils-ToolsVersionUpgradeAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-helputils-ToolsVersionUpgradeAction.instance"/>
+                <attr name="position" intvalue="1300"/>
             </file>
-            <attr name="org-opensim-helputils-ToolsVersionUpgradeAction.shadow/org-opensim-helputils-HelpShowXML.shadow" boolvalue="true"/>
             <file name="org-opensim-helputils-HelpShowXML.shadow">
                 <attr name="originalFile" stringvalue="Actions/Help/org-opensim-helputils-HelpShowXML.instance"/>
+                <attr name="position" intvalue="1400"/>
             </file>
-            <attr name="org-opensim-helputils-HelpShowXML.shadow/org-opensim-k12-separatorBefore.instance" boolvalue="true"/>
         </folder>
         <folder name="Tools">
-            <attr name="org-netbeans-modules-autoupdate-catalog-ModuleCatalogAction.instance/org-opensim-helputils-separatorBefore.instance" boolvalue="true"/>
-            <attr name="org-opensim-helputils-separatorBefore.instance/org-opensim-helputils-ToolsVersionUpgradeAction.shadow" boolvalue="true"/>
-            <attr name="org-opensim-helputils-ToolsVersionUpgradeAction.shadow/org-opensim-plotter-ToolsPlotAction.shadow" boolvalue="true"/>
-    </folder>
+            <file name="JavaPlatformsCustomizerAction.shadow_hidden_hidden">
+                <attr name="position" intvalue="100"/>
+            </file>
+            <file name="org-netbeans-modules-apisupport-project-ui-platform-NbPlatformCustomizerAction.shadow_hidden_hidden">
+                <attr name="position" intvalue="200"/>
+            </file>
+            <file name="org-openide-actions-ToolsAction.shadow_hidden_hidden">
+                <attr name="position" intvalue="300"/>
+            </file>
+        </folder>
     </folder>
 </filesystem>

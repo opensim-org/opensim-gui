@@ -25,27 +25,70 @@
  */
 package org.opensim.view.actions;
 
+import java.awt.event.ActionEvent;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.prefs.BackingStoreException;
+import javax.help.CSH;
+import javax.help.CSH.DisplayHelpFromSource;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
+import javax.swing.JButton;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
+import org.openide.NotifyDescriptor;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 
 public final class EditPreferencesAction extends CallableSystemAction {
+
+    final JButton helpBtn = new JButton ("help");
+    DisplayHelpFromSource help = null;
+    HelpSet hs = null;
+
+    public EditPreferencesAction () {
+        hs = getHelpSet("view_actions.hs");
+        final HelpBroker hb = hs.createHelpBroker();
+        //CSH.setHelpIDString(helpBtn, "org.opensim.view.actions.help");
+        //CSH.setHelpSet(helpBtn, hs);
+        hb.enableHelpOnButton(helpBtn, "org.opensim.view.actions.help", hs);
+        //helpBtn.addActionListener(new CSH.DisplayHelpFromSource(hb));
+
+        help = new CSH.DisplayHelpFromSource(hb)
+        {
+            public void actionPerformed(ActionEvent ae) {
+                //helpBtn.addActionListener(new CSH.DisplayHelpFromSource(hb));
+                hb.enableHelpOnButton(helpBtn, "org.opensim.view.actions.help", hs);
+            }
+        };
+    }
    
    public void performAction() {
       EditPreferencesJPanel prefsPanel;
+      Object [] options =  {  NotifyDescriptor.OK_OPTION,
+                                NotifyDescriptor.CANCEL_OPTION,
+                                helpBtn};
       try {
          prefsPanel = new EditPreferencesJPanel();
-         DialogDescriptor prefsDialog = new DialogDescriptor(prefsPanel, "Preferences");
+         //DialogDescriptor prefsDialog = new DialogDescriptor(prefsPanel, "Preferences");
+         DialogDescriptor prefsDialog = new DialogDescriptor(prefsPanel,
+                                            "Preferences",
+                                            true,
+                                            options,
+                                            NotifyDescriptor.OK_OPTION,
+                                            DialogDescriptor.DEFAULT_ALIGN,
+                                            null,
+                                            help);
          setEnabled(false);
          DialogDisplayer.getDefault().createDialog(prefsDialog).setVisible(true);
          setEnabled(true);
+
+        //when JDialog is closed, do something
         Object userInput = prefsDialog.getValue();
-        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0)
-           prefsPanel.apply();        
-        return ;
+        if (userInput == NotifyDescriptor.OK_OPTION)
+            prefsPanel.apply();
+        return;
       } catch (BackingStoreException ex) {
          ex.printStackTrace();
       }
@@ -68,5 +111,31 @@ public final class EditPreferencesAction extends CallableSystemAction {
    protected boolean asynchronous() {
       return false;
    }
-   
+
+   //find the helpset file and create a HelpSet object
+    public HelpSet getHelpSet(String helpsetfile) {
+        HelpSet hs0 = null;
+        ClassLoader cl = null;
+        URL hsURL = null;
+
+        cl = ClassLoader.getSystemClassLoader();
+
+        URL[] urls = ((URLClassLoader)cl).getURLs();
+
+        for(URL url: urls){
+        	System.out.println("classpath="+url.getFile());
+        }
+
+        System.out.println("888888888:"+EditPreferencesAction.class.getName());
+        cl = EditPreferencesAction.class.getClassLoader();
+        //cl = Thread.currentThread().getContextClassLoader();
+        try {
+            hsURL = HelpSet.findHelpSet(cl, helpsetfile);
+            hs0 = new HelpSet(null, hsURL);
+        } catch(Exception ee) {
+            System.out.println("HelpSet: "+ee.getMessage());
+            System.out.println("HelpSet: "+ helpsetfile + " not found");
+        }
+        return hs0;
+    }
 }

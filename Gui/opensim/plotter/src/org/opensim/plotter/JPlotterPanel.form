@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.1" encoding="UTF-8" ?>
 
-<Form version="1.3" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.3" maxVersion="1.3" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <NonVisualComponents>
-    <Menu class="javax.swing.JMenuBar" name="jPlotterMenuBar">
+    <Container class="javax.swing.JMenuBar" name="jPlotterMenuBar">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jPlotterFileMenu">
           <Properties>
@@ -22,13 +26,25 @@
           </SubComponents>
         </Menu>
       </SubComponents>
-    </Menu>
-    <Menu class="javax.swing.JPopupMenu" name="jSourcePopupMenu">
-    </Menu>
-    <Menu class="javax.swing.JPopupMenu" name="jXPopupMenu">
-    </Menu>
-    <Menu class="javax.swing.JPopupMenu" name="jMusclePopupMenu">
-    </Menu>
+    </Container>
+    <Container class="javax.swing.JPopupMenu" name="jSourcePopupMenu">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+    </Container>
+    <Container class="javax.swing.JPopupMenu" name="jXPopupMenu">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+    </Container>
+    <Container class="javax.swing.JPopupMenu" name="jMusclePopupMenu">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+    </Container>
     <Container class="javax.swing.JPanel" name="jAdvancedPanel">
 
       <Layout>
@@ -304,11 +320,19 @@
         </Component>
       </SubComponents>
     </Container>
-    <Menu class="javax.swing.JPopupMenu" name="jPlotPropertiesPopupMenu">
-    </Menu>
+    <Container class="javax.swing.JPopupMenu" name="jPlotPropertiesPopupMenu">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+    </Container>
   </NonVisualComponents>
   <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="2"/>
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="2"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
@@ -323,7 +347,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jSplitPane1" alignment="0" pref="512" max="32767" attributes="0"/>
+          <Component id="jSplitPane1" alignment="0" pref="516" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -356,7 +380,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="299" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="297" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -378,11 +402,16 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <Component id="jPlotSpecPanel" max="32767" attributes="1"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPlotNavigationPanel" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jButton1" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -395,7 +424,8 @@
                           <Component id="jPlotNavigationPanel" alignment="0" max="32767" attributes="2"/>
                           <Component id="jPlotSpecPanel" alignment="0" max="32767" attributes="3"/>
                       </Group>
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -432,7 +462,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="jScrollPane1" pref="93" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="94" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -508,10 +538,10 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="jPropertiesButton">
                       <Properties>
+                        <Property name="text" type="java.lang.String" value="Properties..."/>
                         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="jPlotPropertiesPopupMenu"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Properties..."/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -538,10 +568,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jLabel2" pref="107" max="32767" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabel2" alignment="1" pref="107" max="32767" attributes="0"/>
                               <Component id="jMuscleSelectButton" alignment="0" max="32767" attributes="1"/>
                               <Component id="jAdvancedOptionsButton" alignment="0" pref="97" max="32767" attributes="1"/>
                               <Component id="xQuantityButton" alignment="0" max="32767" attributes="1"/>
@@ -673,6 +700,11 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JButton" name="jButton1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="help"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>

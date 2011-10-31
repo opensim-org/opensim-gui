@@ -7,12 +7,14 @@
 
 package org.opensim.view;
 
+import java.io.IOException;
 import junit.framework.*;
 import org.openide.awt.StatusDisplayer;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.modeling.Model;
+import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 
 /**
@@ -26,6 +28,9 @@ public class FileSaveModelActionTest extends TestCase {
     }
 
     protected void setUp() throws Exception {
+        FileOpenOsimModelAction instance = new FileOpenOsimModelAction();
+        instance.loadModel(TestEnvironment.getModelPath(), true);
+        System.out.println("Loading model is done.");
     }
 
     protected void tearDown() throws Exception {
@@ -34,79 +39,40 @@ public class FileSaveModelActionTest extends TestCase {
     /**
      * Test of saveOrSaveAsModel method, of class org.opensim.view.FileSaveModelAction.
      */
-    public void testSaveOrSaveAsModel() {
-        System.out.println("saveOrSaveAsModel");
+    @org.junit.Test
+    public void testSaveOrSaveAsModel() throws IOException {
+        Model aModel = null;
         
-        Model model = null;
+        System.out.println("testSaveOrSaveAsModel()");
         
+        aModel= new Model(OpenSimDB.getInstance().getCurrentModel());
         boolean expResult = true;
-        boolean result = FileSaveModelAction.saveOrSaveAsModel(model);
+        boolean result = FileSaveModelAction.saveOrSaveAsModel(aModel);
+        FileSaveModelAction instance = new FileSaveModelAction();
         assertEquals(expResult, result);
-        
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of performAction method, of class org.opensim.view.FileSaveModelAction.
      */
+    @org.junit.Test
     public void testPerformAction() {
-        System.out.println("performAction");
-        
-        FileSaveModelAction instance = new FileSaveModelAction();
-        
+        System.out.println("testPerformAction()");        
+        FileSaveModelAction instance = new FileSaveModelAction();      
         instance.performAction();
-        
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assert(true);
     }
 
     /**
      * Test of getName method, of class org.opensim.view.FileSaveModelAction.
      */
+    @org.junit.Test
     public void testGetName() {
-        System.out.println("getName");
-        
-        FileSaveModelAction instance = new FileSaveModelAction();
-        
-        String expResult = "";
+        System.out.println("testGetName()");
+        FileSaveModelAction instance = new FileSaveModelAction();        
+        String expResult = "Save Model...";
         String result = instance.getName();
+        System.out.println("getName()="+result);
         assertEquals(expResult, result);
-        
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of getHelpCtx method, of class org.opensim.view.FileSaveModelAction.
-     */
-    public void testGetHelpCtx() {
-        System.out.println("getHelpCtx");
-        
-        FileSaveModelAction instance = new FileSaveModelAction();
-        
-        HelpCtx expResult = null;
-        HelpCtx result = instance.getHelpCtx();
-        assertEquals(expResult, result);
-        
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of isEnabled method, of class org.opensim.view.FileSaveModelAction.
-     */
-    public void testIsEnabled() {
-        System.out.println("isEnabled");
-        
-        FileSaveModelAction instance = new FileSaveModelAction();
-        
-        boolean expResult = true;
-        boolean result = instance.isEnabled();
-        assertEquals(expResult, result);
-        
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }

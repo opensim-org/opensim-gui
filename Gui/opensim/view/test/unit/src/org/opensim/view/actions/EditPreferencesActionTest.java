@@ -1,80 +1,49 @@
 /*
- * EditPreferencesActionTest.java
- * JUnit based test
- *
- * Created on September 24, 2010, 2:52 PM
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
  */
 
 package org.opensim.view.actions;
 
-import junit.framework.*;
-import java.util.prefs.BackingStoreException;
-import org.openide.DialogDescriptor;
-import org.openide.DialogDisplayer;
-import org.openide.util.HelpCtx;
-import org.openide.util.NbBundle;
-import org.openide.util.actions.CallableSystemAction;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
  *
- * @author Ayman
+ * @author Jingjing
  */
-public class EditPreferencesActionTest extends TestCase {
-    
-    public EditPreferencesActionTest(String testName) {
-        super(testName);
+public class EditPreferencesActionTest {
+
+    public EditPreferencesActionTest() {
     }
 
-    protected void setUp() throws Exception {
+    @BeforeClass
+    public static void setUpClass() throws Exception {
     }
 
-    protected void tearDown() throws Exception {
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
+
+    @Before
+    public void setUp() {
+    }
+
+    @After
+    public void tearDown() {
     }
 
     /**
-     * Test of performAction method, of class org.opensim.view.actions.EditPreferencesAction.
+     * Test of performAction method, of class EditPreferencesAction.
      */
+    @Test
     public void testPerformAction() {
         System.out.println("performAction");
-        
         EditPreferencesAction instance = new EditPreferencesAction();
-        
         instance.performAction();
-        
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of getName method, of class org.opensim.view.actions.EditPreferencesAction.
-     */
-    public void testGetName() {
-        System.out.println("getName");
-        
-        EditPreferencesAction instance = new EditPreferencesAction();
-        
-        String expResult = "";
-        String result = instance.getName();
-        assertEquals(expResult, result);
-        
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getHelpCtx method, of class org.opensim.view.actions.EditPreferencesAction.
-     */
-    public void testGetHelpCtx() {
-        System.out.println("getHelpCtx");
-        
-        EditPreferencesAction instance = new EditPreferencesAction();
-        
-        HelpCtx expResult = null;
-        HelpCtx result = instance.getHelpCtx();
-        assertEquals(expResult, result);
-        
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }

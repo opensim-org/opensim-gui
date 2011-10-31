@@ -1,107 +1,79 @@
 /*
- * FileSaveAsModelActionTest.java
- * JUnit based test
- *
- * Created on September 24, 2010, 2:48 PM
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
  */
 
 package org.opensim.view;
 
-import junit.framework.*;
-import java.io.File;
-import org.openide.DialogDisplayer;
-import org.openide.NotifyDescriptor;
-import org.openide.awt.StatusDisplayer;
-import org.openide.util.HelpCtx;
-import org.openide.util.NbBundle;
-import org.openide.util.actions.CallableSystemAction;
+import java.io.IOException;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
 import org.opensim.modeling.Model;
-import org.opensim.utils.FileUtils;
 import org.opensim.view.pub.OpenSimDB;
-import org.opensim.view.pub.ViewDB;
 
 /**
  *
- * @author Ayman
+ * @author Jingjing
  */
-public class FileSaveAsModelActionTest extends TestCase {
-    
-    public FileSaveAsModelActionTest(String testName) {
-        super(testName);
+public class FileSaveAsModelActionTest {
+
+    public FileSaveAsModelActionTest() {
     }
 
-    protected void setUp() throws Exception {
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
+
+    @Before
+    public void setUp() throws IOException {
         FileOpenOsimModelAction instance = new FileOpenOsimModelAction();
-        
-        instance.loadModel("C:\\test\\wrist_0.osim");    
+        instance.loadModel(TestEnvironment.getModelPath(), true);
+        System.out.println("Loading model is done.");
     }
 
-    protected void tearDown() throws Exception {
+    @After
+    public void tearDown() {
         OpenSimDB.getInstance().removeModel(OpenSimDB.getInstance().getCurrentModel());
     }
 
-    /**
-     * Test of saveModel method, of class org.opensim.view.FileSaveAsModelAction.
-     */
-    public void testSaveModel() {
-        System.out.println("saveModel");
-        
-        
-        String fileName = "saveModelTo.osim";
-        if (OpenSimDB.getInstance().getCurrentModel()==null) fail("No model to save");
-        FileSaveAsModelAction.saveModel(OpenSimDB.getInstance().getCurrentModel(), fileName);
-        
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
+     /**
      * Test of performAction method, of class org.opensim.view.FileSaveAsModelAction.
      */
     public void testPerformAction() {
-        System.out.println("performAction");
-        
+        System.out.println("testPerformAction()");
         FileSaveAsModelAction instance = new FileSaveAsModelAction();
-        
         instance.performAction();
-        
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
 
     /**
+     * Test of saveAsModel method, of class FileSaveAsModelAction.
+     */
+    @Test
+    public void testSaveModel() throws IOException {
+        System.out.println("testSaveModel()");
+        String fileName = "saveAsModelTo.osim";
+        if (OpenSimDB.getInstance().getCurrentModel()== null) fail("No model to save");
+        FileSaveAsModelAction.saveModel(OpenSimDB.getInstance().getCurrentModel(), fileName);
+        Model reconstructed = new Model(fileName);
+        assert(reconstructed.isEqualTo(OpenSimDB.getInstance().getCurrentModel()));
+    }
+
+        /**
      * Test of getName method, of class org.opensim.view.FileSaveAsModelAction.
      */
     public void testGetName() {
         System.out.println("getName");
-        
         FileSaveAsModelAction instance = new FileSaveAsModelAction();
-        
         String expResult = "Save Model As...";
         String result = instance.getName();
         assertEquals(expResult, result);
-        
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of isEnabled method, of class org.opensim.view.FileSaveAsModelAction.
-     */
-    public void testIsEnabled() {
-        System.out.println("isEnabled");
-        
-        FileSaveAsModelAction instance = new FileSaveAsModelAction();
-        
-        boolean expResult = true;
-        boolean result = instance.isEnabled();
-        assertEquals(expResult, result);
-        
-        OpenSimDB.getInstance().removeModel(OpenSimDB.getInstance().getCurrentModel());
-        // TODO review the generated test code and remove the default call to fail.
-        expResult = false;
-        result = instance.isEnabled();
-        assertEquals(expResult, result);
-    }
-    
+    }   
 }

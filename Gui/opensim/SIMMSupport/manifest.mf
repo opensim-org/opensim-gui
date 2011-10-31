@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+OpenIDE-Module: org.opensim.simmsupport
+OpenIDE-Module-Localizing-Bundle: org/opensim/simmsupport/Bundle.properties
+OpenIDE-Module-Layer: org/opensim/simmsupport/layer.xml
+OpenIDE-Module-Specification-Version: 1.0
+

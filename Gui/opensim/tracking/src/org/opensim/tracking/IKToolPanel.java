@@ -60,6 +60,8 @@ public class IKToolPanel extends BaseToolPanel implements Observer {
         ((DecimalFormat) numFormat).applyPattern("#,##0.#########");
       }
 
+      super.prepareHelpset("IK.hs");//add IK help set
+      super.getHelpBroker().enableHelpOnButton(super.helpButton, "org.opensim.simtrack.ik.help", super.getHelpSet());// add action listener to help button
       initComponents();
       bindPropertiesToComponents();
 

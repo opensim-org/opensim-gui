@@ -5,8 +5,9 @@
  * Created on September 24, 2010, 2:49 PM
  */
 
-package org.opensim.view.actions;
 
+
+import org.opensim.simmsupport.FileImportSIMMAction;
 import junit.framework.*;
 import java.io.File;
 import java.io.IOException;

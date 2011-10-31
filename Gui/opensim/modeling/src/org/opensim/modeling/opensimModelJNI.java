@@ -237,6 +237,7 @@ public class opensimModelJNI {
   public final static native long OpenSimObject_updDisplayer(long jarg1, OpenSimObject jarg1_);
   public final static native void OpenSimObject_renameChildNode__SWIG_0(long jarg1, OpenSimObject jarg1_, String jarg2, String jarg3, long jarg4);
   public final static native void OpenSimObject_renameChildNode__SWIG_1(long jarg1, OpenSimObject jarg1_, String jarg2, String jarg3);
+  public final static native boolean OpenSimObject_isEqualTo(long jarg1, OpenSimObject jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native void OpenSimObject_setType(long jarg1, OpenSimObject jarg1_, String jarg2);
   public final static native String OpenSimObject_getType(long jarg1, OpenSimObject jarg1_);
   public final static native void OpenSimObject_setName(long jarg1, OpenSimObject jarg1_, String jarg2);
@@ -4632,6 +4633,9 @@ public class opensimModelJNI {
   }
   public static long SwigDirector_AnalysisWrapper_updDisplayer(AnalysisWrapper self) {
     return VisibleObject.getCPtr(self.updDisplayer());
+  }
+  public static boolean SwigDirector_AnalysisWrapper_isEqualTo(AnalysisWrapper self, long aObject) {
+    return self.isEqualTo(new OpenSimObject(aObject, false));
   }
   public static boolean SwigDirector_AnalysisWrapper_isValidDefaultType(AnalysisWrapper self, long aObject) {
     return self.isValidDefaultType((aObject == 0) ? null : new OpenSimObject(aObject, false));

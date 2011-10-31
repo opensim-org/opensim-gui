@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE toc
+  PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp TOC Version 2.0//EN"
+		 "http://java.sun.com/products/javahelp/toc_2_0.dtd">
+<toc version="2.0">
+  <tocitem text="Menus" target="Menus">
+      <tocitem text="1. File Drop-Down Menu Options" target="1FileDrop"/>
+      <tocitem text="2. Edit Drop-Down Menu Options" target="2EditDropDownMenuOptions">
+          <tocitem text="2.1 Muscle Editor" target="21MuscleEditor"/>
+          <tocitem text="2.2 Excitation Editor" target="22ExcitationEditor"/>
+          <tocitem text="2.3 Marker Editor" target="23MarkerEditor"/>
+          <tocitem text="2.4 File Editor" target="24FileEditor"/>
+          <tocitem text="2.5 Preferences Editor" target="org.opensim.view.actions.help"/>
+  </tocitem>
+  </tocitem>
+</toc>

@@ -119,6 +119,10 @@ public class OpenSimObject {
     opensimModelJNI.OpenSimObject_renameChildNode__SWIG_1(swigCPtr, this, aOldName, aNewName);
   }
 
+  public boolean isEqualTo(OpenSimObject aObject) {
+    return opensimModelJNI.OpenSimObject_isEqualTo(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
   public void setType(String aType) {
     opensimModelJNI.OpenSimObject_setType(swigCPtr, this, aType);
   }

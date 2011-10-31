@@ -12,26 +12,27 @@
     </folder>
     <folder name="Menu">
         <folder name="Help">
-            <attr name="org-opensim-view-TutorialsAction.shadow/org-opensim-k12-separatorBefore.instance" boolvalue="true"/>
             <file name="org-opensim-k12-separatorBefore.instance">
                 <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+                <attr name="position" intvalue="0"/>
             </file>
-            <attr name="org-opensim-k12-separatorBefore.instance/org-opensim-k12-HelpLessonsAction.shadow" boolvalue="true"/>
             <file name="org-opensim-k12-HelpLessonsAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Help/org-opensim-k12-HelpLabsAction.instance"/>
+                <attr name="position" intvalue="100"/>
             </file>
-            <attr name="org-opensim-k12-HelpLessonsAction.shadow/org-opensim-k12-separatorAfter.instance" boolvalue="true"/>
             <file name="org-opensim-k12-separatorAfter.instance">
                 <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+                <attr name="position" intvalue="290"/>
             </file>
-            <attr name="org-opensim-k12-separatorAfter.instance/master-help.xml" boolvalue="true"/>
         </folder>
         <folder name="Window">
             <file name="InstructionsAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Window/org-opensim-k12-InstructionsAction.instance"/>
+                <attr name="position" intvalue="0"/>
             </file>
             <file name="ParametersAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Window/org-opensim-k12-ParametersAction.instance"/>
+                <attr name="position" intvalue="100"/>
             </file>
         </folder>
     </folder>

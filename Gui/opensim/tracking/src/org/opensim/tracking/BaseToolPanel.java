@@ -39,6 +39,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Observer;
+import java.net.URL;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
+import java.net.URL;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
@@ -59,8 +65,34 @@ public abstract class BaseToolPanel extends JPanel implements ActionListener, Ob
    protected JButton applyButton = new JButton("Run");
    protected JButton okButton = new JButton("Close");
    protected JButton cancelButton = new JButton("Cancel");
+   protected JButton helpButton = new JButton("help");
    protected Dialog ownerDialog = null;
    protected boolean cleanupAfterExecuting = false;  // Keep track if cleaning up needs to be done on execution finish vs. dialog close
+   private HelpSet hs;
+   private HelpBroker hb;
+
+   public HelpSet getHelpSet() {
+       return hs;
+   }
+
+   public HelpBroker getHelpBroker() {
+       return hb;
+   }
+
+
+   public void prepareHelpset(String hsFileName) {
+        String helpsetfile = hsFileName;
+        ClassLoader cl = this.getClass().getClassLoader();
+        try {
+            URL hsURL = HelpSet.findHelpSet(cl, helpsetfile);
+            hs = new HelpSet(null, hsURL);
+        } catch(Exception ee) {
+            System.out.println("HelpSet: "+ee.getMessage());
+            System.out.println("HelpSet: "+ helpsetfile + " not found");
+        }
+
+        hb = hs.createHelpBroker();
+    }
 
    //------------------------------------------------------------------------
    // Load/Save Settings Actions
@@ -115,7 +147,7 @@ public abstract class BaseToolPanel extends JPanel implements ActionListener, Ob
    // Dialog Operations
    //------------------------------------------------------------------------
    public JButton[] getDialogOptions() {
-      return new JButton[]{settingsButton, applyButton, okButton, cancelButton};
+      return new JButton[]{settingsButton, applyButton, okButton, cancelButton, helpButton};
    }
 
    public void setOwner(Dialog window) { ownerDialog = window; }
