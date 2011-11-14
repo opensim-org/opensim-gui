@@ -13,11 +13,11 @@
         <folder name="Help">
             <file name="org-opensim-helputils-separatorBefore.instance">
                 <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
-                <attr name="position" intvalue="1100"/>
+                <attr name="position" intvalue="1302"/>
             </file>
             <file name="org-opensim-helputils-ToolsVersionUpgradeAction.shadow" url="org-opensim-helputils-ToolsVersionUpgradeAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-helputils-ToolsVersionUpgradeAction.instance"/>
-                <attr name="position" intvalue="1300"/>
+                <attr name="position" intvalue="1305"/>
             </file>
             <file name="org-opensim-helputils-HelpShowXML.shadow">
                 <attr name="originalFile" stringvalue="Actions/Help/org-opensim-helputils-HelpShowXML.instance"/>

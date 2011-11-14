@@ -15,7 +15,6 @@
     <folder name="Menu">
          <folder name="Help">
             <file name="org-netbeans-modules-bugzilla-ReportNBIssueAction.shadow_hidden"/>
-            <file name="org-netbeans-modules-usersguide-master.xml" url="org-netbeans-modules-usersguide-master.xml"/>
 
             <file name="org-opensim-swingui-FileBug.shadow">
                 <attr name="originalFile" stringvalue="Actions/Help/org-opensim-swingui-FileBug.instance"/>
