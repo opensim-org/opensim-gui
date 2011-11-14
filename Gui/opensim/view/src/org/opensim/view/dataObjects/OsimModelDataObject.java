@@ -33,7 +33,7 @@ public class OsimModelDataObject extends MultiDataObject {
 
     @Override
     public Lookup getLookup() {
-        System.out.println(getCookieSet().toString());
+        //System.out.println(getCookieSet().toString());
         return getCookieSet().getLookup();
     }
 

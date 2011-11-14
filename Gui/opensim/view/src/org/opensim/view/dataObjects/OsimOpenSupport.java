@@ -28,9 +28,9 @@ class OsimOpenSupport extends OpenSupport implements OpenCookie, CloseCookie {
             OsimModelDataObject dobj = (OsimModelDataObject) entry.getDataObject();
             //AbcTopComponent tc = new AbcTopComponent();
             //tc.setDisplayName(dobj.getName());
-            ((FileOpenOsimModelAction) FileOpenOsimModelAction.findObject(
-                            (Class)Class.forName("org.opensim.view.FileOpenOsimModelAction"))).loadModel(dobj.getPrimaryFile().getPath());
-            return;
+            FileOpenOsimModelAction act = ((FileOpenOsimModelAction) FileOpenOsimModelAction.findObject(
+                            (Class)Class.forName("org.opensim.view.FileOpenOsimModelAction"), true));
+            act.loadModel(dobj.getPrimaryFile().getPath());
         } catch (ClassNotFoundException ex) {
             Exceptions.printStackTrace(ex);
         } catch (IOException ex) {
