@@ -53,6 +53,13 @@ import org.opensim.view.experimentaldata.ModelForExperimentalData;
  * of those.
  */
 public class PlotterModel {
+
+    /**
+     * @param aFigureNumber the figureNumber to set
+     */
+    public static void setFigureNumber(int aFigureNumber) {
+        figureNumber = aFigureNumber;
+    }
    // All sources (Storages) are kept here as a linear list
    private ArrayList<PlotterSourceInterface>    sources = new ArrayList<PlotterSourceInterface>(4); // Data loaded from files
    ArrayList<String>     availableQuantities = new ArrayList<String>(50);
@@ -61,7 +68,7 @@ public class PlotterModel {
    private PlotTreeModel              plotTreeModel = new PlotTreeModel();   // Tree on the right
    private Vector<Model> loadedModels = new Vector<Model>(4);
    Hashtable<Model, AnalyzeTool> models2AnalyzeToolInstances = new Hashtable<Model, AnalyzeTool>(4);
-
+   private static int figureNumber = 1;
     private static String[] builtinQuantities= new String[] {
         "moment arm",
         "moment",
@@ -103,9 +110,10 @@ public class PlotterModel {
    private final String DEFAULT_Y_LABEL="y-label";
    /** Creates a new instance of PlotterModel */
    public PlotterModel() {
-         Plot figure = new Plot("Use \"Properties...\" button to set title.", DEFAULT_X_LABEL, DEFAULT_Y_LABEL);
+         Plot figure = new Plot("Figure "+String.valueOf(figureNumber)+".", DEFAULT_X_LABEL, DEFAULT_Y_LABEL);
          availablePlots.add(0, figure);
          plotTreeModel.addPlot(figure);
+         figureNumber++;
    }
    
    public PlotterSourceFile addFile(String filename)
