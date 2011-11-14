@@ -117,16 +117,6 @@ public final class EditPreferencesAction extends CallableSystemAction {
         HelpSet hs0 = null;
         ClassLoader cl = null;
         URL hsURL = null;
-
-        cl = ClassLoader.getSystemClassLoader();
-
-        URL[] urls = ((URLClassLoader)cl).getURLs();
-
-        for(URL url: urls){
-        	System.out.println("classpath="+url.getFile());
-        }
-
-        System.out.println("888888888:"+EditPreferencesAction.class.getName());
         cl = EditPreferencesAction.class.getClassLoader();
         //cl = Thread.currentThread().getContextClassLoader();
         try {
