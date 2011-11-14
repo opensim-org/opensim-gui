@@ -7,19 +7,14 @@
 
 package org.opensim.view.actions;
 
+import java.io.IOException;
 import junit.framework.*;
-import org.openide.DialogDisplayer;
-import org.openide.NotifyDescriptor;
+import org.openide.util.Exceptions;
 import org.openide.util.HelpCtx;
-import org.openide.util.NbBundle;
-import org.openide.util.actions.CallableSystemAction;
 import org.opensim.modeling.Model;
-import org.opensim.view.FileSaveModelAction;
-import org.opensim.view.ModelSettingsSerializer;
-import org.opensim.view.SingleModelGuiElements;
-import org.opensim.view.experimentaldata.ModelForExperimentalData;
+import org.opensim.view.FileOpenOsimModelAction;
+import org.opensim.view.TestEnvironment;
 import org.opensim.view.pub.OpenSimDB;
-import org.opensim.view.pub.ViewDB;
 
 /**
  *
@@ -41,16 +36,26 @@ public class FileCloseActionTest extends TestCase {
      * Test of closeModel method, of class org.opensim.view.actions.FileCloseAction.
      */
     public void testCloseModel() {
-        System.out.println("closeModel");
-        
-        Model model = null;
-        
-        boolean expResult = true;
-        boolean result = FileCloseAction.closeModel(model);
-        assertEquals(expResult, result);
-        
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        try {
+            System.out.println("closeModel");
+            
+            System.out.println("testLoadModel_Model()");
+            Model aModel = new Model(TestEnvironment.getModelPath());
+            System.out.println("model path="+TestEnvironment.getModelPath());
+            //aModel= new Model(modelPath);
+            FileOpenOsimModelAction instance = new FileOpenOsimModelAction();
+            boolean expResult = true;
+            boolean result = instance.loadModel(aModel, true);
+            Model mdl = OpenSimDB.getInstance().getCurrentModel();
+            
+            FileCloseAction.closeModel(mdl);
+            assertEquals(OpenSimDB.getInstance().getCurrentModel(), null);
+            
+            // TODO review the generated test code and remove the default call to fail.
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+            fail("Exception is thrown.");
+        }
     }
 
     /**
@@ -107,12 +112,12 @@ public class FileCloseActionTest extends TestCase {
         
         FileCloseAction instance = new FileCloseAction();
         
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.isEnabled();
         assertEquals(expResult, result);
         
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
     
 }
