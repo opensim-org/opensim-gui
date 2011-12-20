@@ -42,6 +42,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import javax.swing.JPopupMenu;
 import org.opensim.logger.OpenSimLogger;
+import org.opensim.modeling.Body;
 import org.opensim.modeling.MovingPathPoint;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.base.OpenSimBaseCanvas;
@@ -171,13 +172,21 @@ public class OpenSimCanvas extends OpenSimBaseCanvas implements MouseWheelListen
        }
     }
 
-     /**
-     * Callback invoked when the user doubleclicks an object in the graphics window
-     */
-    void handleDoubleClick(OpenSimObject obj) {
-       ObjectEditDialogMaker editorDialog =new ObjectEditDialogMaker(obj, ViewDB.getInstance().getCurrentModelWindow());
-       editorDialog.process();
-       ViewDB.getInstance().statusDisplaySelectedObjects();
+   // Callback invoked when the user doubleclicks an object in the graphics window
+   //--------------------------------------------------------------------------
+   void handleDoubleClick( OpenSimObject osimObject ) {
+       
+       ModelWindowVTKTopComponent ownerWindow = ViewDB.getInstance().getCurrentModelWindow();
+                
+       // If this is a rigid body, open the easy-to-use rigid body property editor (also provides the older table version).
+       Body bodyThatTalksToCpp = (osimObject == null) ? null : Body.safeDownCast(osimObject);
+       if( bodyThatTalksToCpp != null ) 
+           new LSJava.LSPropertyEditors.LSPropertyEditorRigidBody( osimObject, ownerWindow );     
+       else{
+          ObjectEditDialogMaker editorDialog = new ObjectEditDialogMaker( osimObject, ownerWindow );
+          editorDialog.process();
+          ViewDB.getInstance().statusDisplaySelectedObjects();
+       }
    }
 
    private void setPicking(boolean enabled) {

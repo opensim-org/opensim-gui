@@ -42,23 +42,38 @@ import org.opensim.view.pub.ViewDB;
 
 public final class ObjectDisplayColorAction extends CallableSystemAction {
    
-   public void performAction() {
-        // Bring color chooser and apply color to selected nodes.
-        JColorChooser objectColorChooser = new JColorChooser();
-        Color newColor = objectColorChooser.showDialog( (JFrame)WindowManager.getDefault().getMainWindow(), "Select new color", Color.WHITE);
-        if( newColor == null )return;
-        float[] colorComponents = newColor.getRGBComponents(null);
-        
+   //--------------------------------------------------------------------------
+    public void performAction() 
+    { 
+      JColorChooser objectColorChooser = new JColorChooser();
+      Color newColor = objectColorChooser.showDialog( (JFrame)WindowManager.getDefault().getMainWindow(), "Select new color", Color.WHITE );  
+      ObjectDisplayColorAction.ChangeUserSelectedNodesColor( newColor ); 
+    }
+   
+    //--------------------------------------------------------------------------
+    public static void  ChangeUserSelectedNodesColor( Color newColor ) 
+    {
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         for( int i=0; i < selected.length; i++ ) {
             if( !(selected[i] instanceof OpenSimObjectNode) )  continue;
             OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[i];
-            this.applyOperationToNode( objectNode, new double[]{colorComponents[0], colorComponents[1], colorComponents[2]} );
+            ObjectDisplayColorAction.ChangeUserSelectedNodeColor( objectNode, newColor, false );
         }
         ViewDB.getInstance().repaintAll();
-   }
+    }
+    
+    //--------------------------------------------------------------------------
+    public static void  ChangeUserSelectedNodeColor( OpenSimObjectNode objectNode, Color newColor, boolean repaintViewDB ) 
+    {
+        if( objectNode==null || newColor==null ) return;
+        float[]  newColorComponentsAsFloatArray = newColor.getRGBComponents( null );
+        double[] newColorComponentsAsDoubleArray = { newColorComponentsAsFloatArray[0], newColorComponentsAsFloatArray[1], newColorComponentsAsFloatArray[2] };
+        ObjectDisplayColorAction.applyOperationToNode( objectNode, newColorComponentsAsDoubleArray );
+        if( repaintViewDB ) ViewDB.getInstance().repaintAll();
+   } 
 
-    private void applyOperationToNode( final OpenSimObjectNode objectNode, double[] newColorComponents ) {
+    //--------------------------------------------------------------------------
+    private static void applyOperationToNode( final OpenSimObjectNode objectNode, double[] newColorComponents ) {
         OpenSimObject obj = objectNode.getOpenSimObject();
         Children ch = objectNode.getChildren();
         if( ch.getNodesCount() > 0  &&  !(objectNode instanceof OneBodyNode) ) {
@@ -67,7 +82,7 @@ public final class ObjectDisplayColorAction extends CallableSystemAction {
             for( int child = 0; child < childNodes.length; child++ ) {
                 if( !(childNodes[child] instanceof OpenSimObjectNode) ) continue;
                 OpenSimObjectNode childNode = (OpenSimObjectNode) childNodes[child];
-                this.applyOperationToNode( childNode, newColorComponents );
+                ObjectDisplayColorAction.applyOperationToNode( childNode, newColorComponents );
             }
         }
         else {

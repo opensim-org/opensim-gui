@@ -38,7 +38,7 @@ import org.opensim.view.nodes.ConcreteModelNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.pub.ViewDB;
 
-abstract class ObjectDisplayShowHideBaseAction extends CallableSystemAction {
+public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemAction {
   
    private boolean show;
 
@@ -88,11 +88,12 @@ abstract class ObjectDisplayShowHideBaseAction extends CallableSystemAction {
       ViewDB.getInstance().repaintAll();
    }
 
-    private void applyOperationToNode(final OpenSimObjectNode objectNode) {
-        OpenSimObject obj = objectNode.getOpenSimObject();
+    //-------------------------------------------------------------------------
+    private void applyOperationToNode( final OpenSimObjectNode objectNode ) 
+    {
+        // Apply action recursively to children. 
         Children ch = objectNode.getChildren();
         if (ch.getNodesCount()>0){
-            // apply action recursively
             Node[] childNodes=ch.getNodes();
             for(int child=0; child < childNodes.length ; child++){
                 if (!(childNodes[child] instanceof OpenSimObjectNode))
@@ -102,8 +103,32 @@ abstract class ObjectDisplayShowHideBaseAction extends CallableSystemAction {
             }
         }
         //else
-            ViewDB.getInstance().toggleObjectsDisplay(obj, show);
+        OpenSimObject obj = objectNode.getOpenSimObject();
+        ViewDB.getInstance().toggleObjectsDisplay(obj, show);
     }
+    
+    //-------------------------------------------------------------------------
+    public static void ApplyOperationToNodeWithShowHide( final OpenSimObjectNode objectNode, boolean showOrHide, boolean repaintAll ) 
+    {
+        // Apply action recursively to children.
+        Children ch = objectNode.getChildren();
+        if( ch.getNodesCount() > 0 )
+        {
+            Node[] childNodes = ch.getNodes();
+            for( int child=0;  child < childNodes.length;  child++ )
+            {
+               if( !(childNodes[child] instanceof OpenSimObjectNode) ) continue;
+               OpenSimObjectNode childNode = (OpenSimObjectNode)childNodes[child];
+               ObjectDisplayShowHideBaseAction.ApplyOperationToNodeWithShowHide( childNode, showOrHide, false );
+            }
+        }
+        
+        // After applying recursively, apply to openSimObjectNode and possibly repaint all.
+        OpenSimObject openSimObject = objectNode.getOpenSimObject();
+        ViewDB.getInstance().toggleObjectsDisplay( openSimObject, showOrHide );
+        if( repaintAll ) ViewDB.getInstance().repaintAll();
+    }
+    
     
     protected void initialize() {
         super.initialize();

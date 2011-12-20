@@ -43,6 +43,8 @@ import org.opensim.view.ObjectDisplayMenuAction;
 import org.opensim.view.ObjectDisplayShowAction;
 import org.opensim.view.ObjectGenericReviewAction;
 import org.opensim.view.pub.ViewDB;
+import org.opensim.view.ModelWindowVTKTopComponent;
+import LSJava.LSPropertyEditors.LSPropertyEditorRigidBody;
 
 /**
  *
@@ -60,47 +62,50 @@ public class OpenSimObjectNode extends OpenSimNode {
        this.openSimObject = obj;
        setDisplayName(obj.getName());
        //super(Children.LEAF, Lookups.fixed( new Object[] {obj} ) );
-
-     }
-    public OpenSimObjectNode(OpenSimObject obj, boolean leaf) {
-      super(Children.LEAF, Lookups.fixed( new Object[] {obj} ) );
+    }
+    
+    public OpenSimObjectNode( OpenSimObject obj, boolean leaf ) {
+      super( Children.LEAF, Lookups.fixed( new Object[] {obj} ) );
       this.openSimObject = obj;
-       setDisplayName(obj.getName());
-
-     }
+      setDisplayName( obj.getName() );
+    }
+    
     /**
      * Display name 
      */
-    public String getHtmlDisplayName() {
-        
-        return getOpenSimObject().getName() ;
-    }
+    public String getHtmlDisplayName()  { return getOpenSimObject().getName(); }
 
     /**
      * Action to be invoked on double clicking.
      */
     public Action getPreferredAction() {
-          if (getValidDisplayOptions().size()==0)  // Nothing to show or hide.
-              return null;
+         if( getValidDisplayOptions().size() ==0 ) return null;  // Nothing to show or hide.
           
-         OpenSimObject obj=getOpenSimObject();
-         int currentStatus=ViewDB.getInstance().getDisplayStatus(obj);
+         // If this is a rigid body, open the easy-to-use rigid body property editor (also provides the older table version). 
+         // Appearance panel allows user to show/hide the body.
+         if( this instanceof OneBodyNode )
+         {
+            ModelWindowVTKTopComponent ownerWindow = ViewDB.getInstance().getCurrentModelWindow();
+            new LSJava.LSPropertyEditors.LSPropertyEditorRigidBody( (OneBodyNode)this, ownerWindow );
+            return null;
+         }
+         
+         OpenSimObject obj = getOpenSimObject();
+         int currentStatus = ViewDB.getInstance().getDisplayStatus( obj );
          try {
-            if (currentStatus==0){   // Hidden
-               return ((ObjectDisplayShowAction) ObjectDisplayShowAction.findObject(
-                (Class)Class.forName("org.opensim.view.ObjectDisplayShowAction"), true));
+            if( currentStatus == 0 ) {   // 0 for hidden
+               return ((ObjectDisplayShowAction)ObjectDisplayShowAction.findObject( (Class)Class.forName("org.opensim.view.ObjectDisplayShowAction"), true));
             }
-            else if (currentStatus==1 || currentStatus==2){ // 2 for mixed, some shown some hidden, pick show
-                    return ((ObjectDisplayHideAction) ObjectDisplayHideAction.findObject(
-                    (Class)Class.forName("org.opensim.view.ObjectDisplayHideAction"), true));
+            else if( currentStatus==1 || currentStatus==2 ) { // 2 for mixed, some shown some hidden, pick show
+               return ((ObjectDisplayHideAction) ObjectDisplayHideAction.findObject( (Class)Class.forName("org.opensim.view.ObjectDisplayHideAction"), true));
             }
-         } catch (ClassNotFoundException ex) {
+         } catch( ClassNotFoundException ex ) {
             ex.printStackTrace();
          }
             
          return getReviewAction();
     }
-          
+       
     /**
      * Return the list of available actions.
      * Subclasses should user super.getActions() to use this
@@ -126,15 +131,12 @@ public class OpenSimObjectNode extends OpenSimNode {
     /**
      * return the Object presented by this node
      */
-    public OpenSimObject getOpenSimObject() {
-        return openSimObject;
-    }
+    public OpenSimObject getOpenSimObject()  { return openSimObject; }
 
    protected Action getReviewAction() {
       Action act =null;
       try {
-         act = (ObjectGenericReviewAction) ObjectGenericReviewAction.findObject(
-                    (Class)Class.forName("org.opensim.view.ObjectGenericReviewAction"), true);
+         act = (ObjectGenericReviewAction) ObjectGenericReviewAction.findObject( (Class)Class.forName("org.opensim.view.ObjectGenericReviewAction"), true);
       } catch (ClassNotFoundException ex) {
          ex.printStackTrace();
       }
@@ -143,13 +145,11 @@ public class OpenSimObjectNode extends OpenSimNode {
    
    protected void addDisplayOption(displayOption newOption)
    {
-      if (!getValidDisplayOptions().contains(newOption))
+      if( !getValidDisplayOptions().contains(newOption) )
          getValidDisplayOptions().add(newOption);
    }
 
-   public ArrayList<displayOption> getValidDisplayOptions() {
-      return validDisplayOptions;
-   }
+   public ArrayList<displayOption> getValidDisplayOptions()  { return validDisplayOptions; }
 
     @Override
     public Sheet createSheet() {

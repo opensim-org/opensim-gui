@@ -32,7 +32,10 @@ import org.openide.util.HelpCtx;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.view.editors.ObjectEditDialogMaker;
 import org.opensim.view.nodes.OpenSimObjectNode;
+import org.opensim.view.nodes.OneBodyNode;
 import org.opensim.view.pub.ViewDB;
+import LSJava.LSPropertyEditors.LSPropertyEditorRigidBody;
+
 
 public final class ObjectGenericReviewAction  extends CallableSystemAction {
    
@@ -43,13 +46,23 @@ public final class ObjectGenericReviewAction  extends CallableSystemAction {
    
    public void performAction() {
       Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
-      if (selected.length == 1){
-         OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[0];
+      if( selected.length == 1 ) {
+         OpenSimObjectNode osimObjectNode = (OpenSimObjectNode) selected[0];
+         ModelWindowVTKTopComponent ownerWindow = ViewDB.getInstance().getCurrentModelWindow();
          
-         ObjectEditDialogMaker editorDialog =new ObjectEditDialogMaker(objectNode.getOpenSimObject(),
-                 ViewDB.getInstance().getCurrentModelWindow());
-         editorDialog.process();
-      } else { // Should never happen
+         // If osimObjectNode is a rigid body, open the easy-to-use rigid body property editor (also provides the older table version). 
+         if( osimObjectNode instanceof OneBodyNode )
+           new LSJava.LSPropertyEditors.LSPropertyEditorRigidBody( (OneBodyNode)osimObjectNode, ownerWindow );
+
+         // Otherwise create older editor window to edit the properties (this is opened from user's selection of Navigator window).
+         else {
+            boolean allowEdit = false;
+            ObjectEditDialogMaker editorDialog = new ObjectEditDialogMaker( osimObjectNode.getOpenSimObject(), ownerWindow, allowEdit, "OK" ); 
+            editorDialog.process();
+         }
+
+      } 
+      else { // Should never happen
          DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message("Review of multiple objects is not supported."));
       }
    }
