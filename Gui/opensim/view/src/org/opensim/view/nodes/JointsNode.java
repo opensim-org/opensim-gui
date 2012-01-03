@@ -59,6 +59,7 @@ public class JointsNode extends OpenSimObjectSetNode {
       for (int i=0; i < js.getSize(); i++ ) {
          children.add(new Node[] { new OneJointNode(js.get(i)) });
       }
+      if (getChildren().getNodesCount()==0) setChildren(Children.LEAF);
    }
    
       public Image getIcon(int i) {

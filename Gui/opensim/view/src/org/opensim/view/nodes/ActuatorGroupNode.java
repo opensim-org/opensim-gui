@@ -69,6 +69,7 @@ public class ActuatorGroupNode extends OpenSimObjectNode {
          }
          children.add(arrNodes);
       }
+      if (getChildren().getNodesCount()==0) setChildren(Children.LEAF);
       addDisplayOption(displayOption.Showable);
       addDisplayOption(displayOption.Isolatable);
    }
