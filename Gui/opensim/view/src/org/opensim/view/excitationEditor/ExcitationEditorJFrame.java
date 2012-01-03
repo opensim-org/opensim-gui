@@ -407,9 +407,8 @@ public class ExcitationEditorJFrame extends javax.swing.JFrame {
                 FileUtils.getFileFilter(".xml", "Save excitations to file"), true, "controls.xml", this); 
          if(fileName!=null) { 
             controlSet.print(fileName); 
+            dPanel.populate(controlSet, true);
          }
-        dPanel.populate(controlSet, true);
-
     }//GEN-LAST:event_jCreateDefaultMenuItemActionPerformed
 
     private void jSaveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveMenuItemActionPerformed
