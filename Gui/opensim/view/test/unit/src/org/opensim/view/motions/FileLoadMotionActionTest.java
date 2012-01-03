@@ -7,13 +7,13 @@
 
 package org.opensim.view.motions;
 
+import java.io.File;
+import java.io.IOException;
 import junit.framework.*;
-import org.openide.util.HelpCtx;
-import org.openide.util.NbBundle;
-import org.openide.util.actions.CallableSystemAction;
-import org.opensim.utils.FileUtils;
-import org.opensim.view.pub.OpenSimDB;
-import org.opensim.view.pub.ViewDB;
+import org.opensim.modeling.Model;
+import org.opensim.view.FileOpenOsimModelAction;
+import org.opensim.view.TestEnvironment;
+import org.opensim.view.motions.MotionsDB.ModelMotionPair;
 
 /**
  *
@@ -34,15 +34,21 @@ public class FileLoadMotionActionTest extends TestCase {
     /**
      * Test of performAction method, of class org.opensim.view.motions.FileLoadMotionAction.
      */
-    public void testPerformAction() {
+    public void testPerformAction() throws IOException {
         System.out.println("performAction");
         
-        FileLoadMotionAction instance = new FileLoadMotionAction();
-        
-        instance.performAction();
-        
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Model aModel = new Model(TestEnvironment.getModelPath());
+        System.out.println("model path="+TestEnvironment.getModelPath());
+        //aModel= new Model(modelPath);
+        FileOpenOsimModelAction instance = new FileOpenOsimModelAction();
+        boolean expResult = true;
+        boolean result = instance.loadModel(aModel, true);
+        FileLoadMotionAction instance2 = new FileLoadMotionAction();
+        String motionFilePath = new File(TestEnvironment.getModelPath()).getParent()+
+                "\\OutputReference\\InverseKinematics\\arm26_InverseKinematics.mot";
+        instance2.loadMotion(motionFilePath);
+        ModelMotionPair mp = MotionsDB.getInstance().getCurrentMotion(0);
+        assertEquals(mp.model, aModel);
     }
 
     /**
@@ -53,12 +59,10 @@ public class FileLoadMotionActionTest extends TestCase {
         
         FileLoadMotionAction instance = new FileLoadMotionAction();
         
-        String expResult = "";
+        String expResult = "Load Motion...";
         String result = instance.getName();
         assertEquals(expResult, result);
         
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
 }

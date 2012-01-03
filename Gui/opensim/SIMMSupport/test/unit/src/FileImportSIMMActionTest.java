@@ -59,12 +59,10 @@ public class FileImportSIMMActionTest extends TestCase {
         
         FileImportSIMMAction instance = new FileImportSIMMAction();
         
-        String expResult = "";
+        String expResult = "Import SIMM Model...";
         String result = instance.getName();
         assertEquals(expResult, result);
         
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -75,7 +73,7 @@ public class FileImportSIMMActionTest extends TestCase {
         
         FileImportSIMMAction instance = new FileImportSIMMAction();
         
-        HelpCtx expResult = null;
+        HelpCtx expResult = HelpCtx.DEFAULT_HELP;
         HelpCtx result = instance.getHelpCtx();
         assertEquals(expResult, result);
         

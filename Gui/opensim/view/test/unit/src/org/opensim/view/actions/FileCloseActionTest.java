@@ -60,7 +60,7 @@ public class FileCloseActionTest extends TestCase {
 
     /**
      * Test of performAction method, of class org.opensim.view.actions.FileCloseAction.
-     */
+     *
     public void testPerformAction() {
         System.out.println("performAction");
         
@@ -70,7 +70,7 @@ public class FileCloseActionTest extends TestCase {
         
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
-    }
+    }*/
 
     /**
      * Test of getName method, of class org.opensim.view.actions.FileCloseAction.
@@ -80,12 +80,10 @@ public class FileCloseActionTest extends TestCase {
         
         FileCloseAction instance = new FileCloseAction();
         
-        String expResult = "";
+        String expResult = "Close Model";
         String result = instance.getName();
         assertEquals(expResult, result);
         
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -96,12 +94,10 @@ public class FileCloseActionTest extends TestCase {
         
         FileCloseAction instance = new FileCloseAction();
         
-        HelpCtx expResult = null;
+        HelpCtx expResult = HelpCtx.DEFAULT_HELP;
         HelpCtx result = instance.getHelpCtx();
         assertEquals(expResult, result);
         
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**

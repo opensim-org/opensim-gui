@@ -7,17 +7,15 @@
 
 
 
+import java.io.File;
+import java.io.IOException;
+import org.openide.util.Exceptions;
 import org.opensim.simmsupport.FileExportSIMMModelAction;
 import junit.framework.*;
-import org.openide.DialogDescriptor;
-import org.openide.DialogDisplayer;
-import org.openide.awt.StatusDisplayer;
 import org.openide.util.HelpCtx;
-import org.openide.util.NbBundle;
-import org.openide.util.actions.CallableSystemAction;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.SimmFileWriter;
-import org.opensim.simmsupport.OpenSimToSIMMOptionsJPanel;
+import org.opensim.view.FileOpenOsimModelAction;
 import org.opensim.view.pub.OpenSimDB;
 
 /**
@@ -42,12 +40,26 @@ public class FileExportSIMMModelActionTest extends TestCase {
     public void testPerformAction() {
         System.out.println("performAction");
         
-        FileExportSIMMModelAction instance = new FileExportSIMMModelAction();
-        
-        instance.performAction();
-        
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Model aModel=null;
+        try {
+            aModel = new Model(TestEnvironment.getModelPath());
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        System.out.println("model path="+TestEnvironment.getModelPath());
+        //aModel= new Model(modelPath);
+        FileOpenOsimModelAction instanceOpen = new FileOpenOsimModelAction();
+        try {
+            boolean result = instanceOpen.loadModel(aModel, true);
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        SimmFileWriter modelWriter=new SimmFileWriter(OpenSimDB.getInstance().getCurrentModel());
+        File f = new File(TestEnvironment.getModelPath());
+        modelWriter.writeJointFile(f.getParent()+"//jntfileName.jnt");        
+        modelWriter.writeMuscleFile(f.getParent()+"//musclefileName.msl");        
+        OpenSimDB.getInstance().removeModel(aModel);
+        // Compare output to std
     }
 
     /**
@@ -58,12 +70,10 @@ public class FileExportSIMMModelActionTest extends TestCase {
         
         FileExportSIMMModelAction instance = new FileExportSIMMModelAction();
         
-        String expResult = "";
+        String expResult = "Export SIMM Model...";
         String result = instance.getName();
         assertEquals(expResult, result);
         
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -74,12 +84,10 @@ public class FileExportSIMMModelActionTest extends TestCase {
         
         FileExportSIMMModelAction instance = new FileExportSIMMModelAction();
         
-        HelpCtx expResult = null;
+        HelpCtx expResult = HelpCtx.DEFAULT_HELP;
         HelpCtx result = instance.getHelpCtx();
         assertEquals(expResult, result);
         
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -90,12 +98,11 @@ public class FileExportSIMMModelActionTest extends TestCase {
         
         FileExportSIMMModelAction instance = new FileExportSIMMModelAction();
         
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.isEnabled();
         assertEquals(expResult, result);
         
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
     
 }
