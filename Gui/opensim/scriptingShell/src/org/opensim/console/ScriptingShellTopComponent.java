@@ -13,6 +13,7 @@ import org.opensim.utils.FileUtils;
 import org.python.core.Py;
 import org.python.util.PythonInterpreter; 
 import org.opensim.modeling.*;
+import org.opensim.plotter.*;
 /**
  * Top component which displays something.
  */
