@@ -71,8 +71,8 @@ public class ExternalForce extends Force {
     this(opensimModelJNI.new_ExternalForce__SWIG_8(ExternalForce.getCPtr(force), force), true);
   }
 
-  public ExternalForce(SWIGTYPE_p_DOMElement aNode) {
-    this(opensimModelJNI.new_ExternalForce__SWIG_9(SWIGTYPE_p_DOMElement.getCPtr(aNode)), true);
+  public ExternalForce(SWIGTYPE_p_SimTK__Xml__Element aNode) {
+    this(opensimModelJNI.new_ExternalForce__SWIG_9(SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode)), true);
   }
 
   public OpenSimObject copy() {
@@ -80,8 +80,12 @@ public class ExternalForce extends Force {
     return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
-  public void updateFromXMLNode() {
-    opensimModelJNI.ExternalForce_updateFromXMLNode(swigCPtr, this);
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
+    opensimModelJNI.ExternalForce_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+  }
+
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
+    opensimModelJNI.ExternalForce_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
   public void setDataSource(Storage dataSource) {

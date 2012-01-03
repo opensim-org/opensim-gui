@@ -147,10 +147,6 @@ public class PiecewiseConstantFunction extends Function {
     return (cPtr == 0) ? null : new SWIGTYPE_p_SimTK__Function(cPtr, false);
   }
 
-  public void updateFromXMLNode() {
-    opensimModelJNI.PiecewiseConstantFunction_updateFromXMLNode(swigCPtr, this);
-  }
-
   public static boolean isKindOf(String type) {
     return opensimModelJNI.PiecewiseConstantFunction_isKindOf(type);
   }

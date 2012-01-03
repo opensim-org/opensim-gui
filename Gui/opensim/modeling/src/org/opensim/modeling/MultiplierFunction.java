@@ -98,10 +98,6 @@ public class MultiplierFunction extends Function {
     return (cPtr == 0) ? null : new SWIGTYPE_p_SimTK__Function(cPtr, false);
   }
 
-  public void updateFromXMLNode() {
-    opensimModelJNI.MultiplierFunction_updateFromXMLNode(swigCPtr, this);
-  }
-
   public static boolean isKindOf(String type) {
     return opensimModelJNI.MultiplierFunction_isKindOf(type);
   }

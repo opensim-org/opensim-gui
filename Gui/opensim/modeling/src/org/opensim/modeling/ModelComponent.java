@@ -51,8 +51,8 @@ public class ModelComponent extends OpenSimObject {
     this(opensimModelJNI.new_ModelComponent__SWIG_3(SWIGTYPE_p_OpenSim__XMLDocument.getCPtr(aDocument)), true);
   }
 
-  public ModelComponent(SWIGTYPE_p_DOMElement aNode) {
-    this(opensimModelJNI.new_ModelComponent__SWIG_4(SWIGTYPE_p_DOMElement.getCPtr(aNode)), true);
+  public ModelComponent(SWIGTYPE_p_SimTK__Xml__Element aNode) {
+    this(opensimModelJNI.new_ModelComponent__SWIG_4(SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode)), true);
   }
 
   public ModelComponent(ModelComponent copy) {
@@ -83,28 +83,20 @@ public class ModelComponent extends OpenSimObject {
     return opensimModelJNI.ModelComponent_getNumStateVariables(swigCPtr, this);
   }
 
-  public String getStateVariableName(int index) {
-    return opensimModelJNI.ModelComponent_getStateVariableName(swigCPtr, this, index);
+  public SWIGTYPE_p_SimTK__SystemYIndex getStateVariableSystemIndex(String stateVariableName) {
+    return new SWIGTYPE_p_SimTK__SystemYIndex(opensimModelJNI.ModelComponent_getStateVariableSystemIndex(swigCPtr, this, stateVariableName), true);
   }
 
-  public int getStateVariableYIndex(int index) {
-    return opensimModelJNI.ModelComponent_getStateVariableYIndex(swigCPtr, this, index);
-  }
-
-  public double getStateVariable(SWIGTYPE_p_SimTK__State state, int index) {
-    return opensimModelJNI.ModelComponent_getStateVariable__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state), index);
+  public ArrayStr getStateVariableNames() {
+    return new ArrayStr(opensimModelJNI.ModelComponent_getStateVariableNames(swigCPtr, this), true);
   }
 
   public double getStateVariable(SWIGTYPE_p_SimTK__State state, String name) {
-    return opensimModelJNI.ModelComponent_getStateVariable__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state), name);
-  }
-
-  public void setStateVariable(SWIGTYPE_p_SimTK__State state, int index, double value) {
-    opensimModelJNI.ModelComponent_setStateVariable__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state), index, value);
+    return opensimModelJNI.ModelComponent_getStateVariable(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state), name);
   }
 
   public void setStateVariable(SWIGTYPE_p_SimTK__State state, String name, double value) {
-    opensimModelJNI.ModelComponent_setStateVariable__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state), name, value);
+    opensimModelJNI.ModelComponent_setStateVariable(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state), name, value);
   }
 
   public double getDiscreteVariable(SWIGTYPE_p_SimTK__State state, String name) {

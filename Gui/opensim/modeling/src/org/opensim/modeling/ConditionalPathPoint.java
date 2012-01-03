@@ -56,8 +56,12 @@ public class ConditionalPathPoint extends PathPoint {
     opensimModelJNI.ConditionalPathPoint_init(swigCPtr, this, PathPoint.getCPtr(aPoint), aPoint);
   }
 
-  public void updateFromXMLNode() {
-    opensimModelJNI.ConditionalPathPoint_updateFromXMLNode(swigCPtr, this);
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
+    opensimModelJNI.ConditionalPathPoint_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+  }
+
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
+    opensimModelJNI.ConditionalPathPoint_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
   public ArrayDouble getRange() {

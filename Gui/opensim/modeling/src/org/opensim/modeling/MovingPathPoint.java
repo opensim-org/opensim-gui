@@ -52,8 +52,8 @@ public class MovingPathPoint extends PathPoint {
     opensimModelJNI.MovingPathPoint_copyData(swigCPtr, this, MovingPathPoint.getCPtr(aPoint), aPoint);
   }
 
-  public void updateFromXMLNode() {
-    opensimModelJNI.MovingPathPoint_updateFromXMLNode(swigCPtr, this);
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
+    opensimModelJNI.MovingPathPoint_updateFromXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
   }
 
   public void init(PathPoint aPoint) {

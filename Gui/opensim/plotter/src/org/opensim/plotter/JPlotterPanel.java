@@ -1500,9 +1500,8 @@ public class JPlotterPanel extends javax.swing.JPanel
       plotterModel.configureAnalyses(tool, analysisSource, domainName, ranges);
       
       // Save the state before running the analysis so that we can restore the model afterwards
-      int numStates = currentModel.getNumStates();
-      ArrayStr stateNames = new ArrayStr();
-      currentModel.getStateNames(stateNames);
+      int numStates = currentModel.getNumStateVariables();
+      ArrayStr stateNames = currentModel.getStateVariableNames();
       // Save states for later restoration so that the GUI and model are in sync. after analysis
       double[] saveStates = new double[numStates];
       openSimContext.getStates(saveStates);
@@ -1586,8 +1585,7 @@ public class JPlotterPanel extends javax.swing.JPanel
       // set tool attributes
       Storage statesStorage = new Storage();
       // Column labels for StateStorage
-      ArrayStr stateNames = new ArrayStr();
-      mdl.getStateNames(stateNames);
+      ArrayStr stateNames = mdl.getStateVariableNames();
       stateNames.insert(0, "time");
       statesStorage.setColumnLabels(stateNames);
       return statesStorage;
@@ -2085,9 +2083,8 @@ public class JPlotterPanel extends javax.swing.JPanel
    private Storage buildStatesStorageFromMotion(Storage motionsStorage, boolean overrideActivation, double newActivation) {
       // Make a new Storage with correct size/labels
       Storage outputStorage = new Storage();
-      int numStates = currentModel.getNumStates();
-      ArrayStr stateNames = new ArrayStr();
-      currentModel.getStateNames(stateNames);
+      int numStates = currentModel.getNumStateVariables();
+      ArrayStr stateNames = currentModel.getStateVariableNames();
       ArrayStr stateNamesWithTime = new ArrayStr(stateNames);
       stateNamesWithTime.insert(0, "time");
       outputStorage.setColumnLabels(stateNames);

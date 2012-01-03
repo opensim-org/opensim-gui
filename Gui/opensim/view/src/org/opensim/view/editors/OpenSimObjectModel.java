@@ -551,8 +551,10 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
           }
           else if (propType == Property.PropertyType.ObjArray) {
             retArray = new PropertyNode[rdprop.getArraySize()];
+            //System.out.println("Name="+rdprop.getName()+" propType="+propType+" size="+rdprop.getArraySize());
             for (int i = 0; i < rdprop.getArraySize(); i++) {
               OpenSimObject subobj = rdprop.getValueObjPtr(i);
+              //String dName = subobj.getName(); 
               retArray[i] = new PropertyNode(this, subobj, i);
             }
           }

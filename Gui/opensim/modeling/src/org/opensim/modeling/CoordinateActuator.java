@@ -81,8 +81,12 @@ public class CoordinateActuator extends Actuator {
     return opensimModelJNI.CoordinateActuator_getSpeed(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
   }
 
-  public void updateFromXMLNode() {
-    opensimModelJNI.CoordinateActuator_updateFromXMLNode(swigCPtr, this);
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
+    opensimModelJNI.CoordinateActuator_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+  }
+
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
+    opensimModelJNI.CoordinateActuator_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
   public static boolean isKindOf(String type) {

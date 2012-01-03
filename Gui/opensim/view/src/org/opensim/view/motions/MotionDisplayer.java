@@ -151,7 +151,7 @@ public class MotionDisplayer implements SelectionListener {
 
         setupMotionDisplay();
         // create a buffer to be used for comuptation of constrained states
-        statesBuffer = new double[model.getNumStates()];
+        statesBuffer = new double[model.getNumStateVariables()];
         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
         if (model instanceof ModelForExperimentalData) return;
         if(vis!=null) vis.setRenderMuscleActivations(isRenderMuscleActivations());
@@ -185,8 +185,7 @@ public class MotionDisplayer implements SelectionListener {
         mapIndicesToBodies.clear();
         mapIndicesToDofs.clear();
 
-        stateNames = new ArrayStr();
-        model.getStateNames(stateNames);
+        stateNames = model.getStateVariableNames();
         stateNames.insert(0, "time");
 
         if(colNames.arrayEquals(stateNames)) {

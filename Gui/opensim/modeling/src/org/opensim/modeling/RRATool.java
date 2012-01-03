@@ -148,8 +148,12 @@ public class RRATool extends AbstractTool {
     opensimModelJNI.RRATool_setOriginalForceSet(swigCPtr, this, ForceSet.getCPtr(aForceSet), aForceSet);
   }
 
-  public void updateFromXMLNode() {
-    opensimModelJNI.RRATool_updateFromXMLNode(swigCPtr, this);
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
+    opensimModelJNI.RRATool_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+  }
+
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
+    opensimModelJNI.RRATool_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
 }

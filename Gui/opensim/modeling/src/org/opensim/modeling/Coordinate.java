@@ -253,12 +253,8 @@ public class Coordinate extends ModelComponent {
     return new SWIGTYPE_p_SimTK__MobilizedBodyIndex(opensimModelJNI.Coordinate_getBodyIndex(swigCPtr, this), true);
   }
 
-  public String getStateVariableName(int index) {
-    return opensimModelJNI.Coordinate_getStateVariableName(swigCPtr, this, index);
-  }
-
-  public int getStateVariableYIndex(int index) {
-    return opensimModelJNI.Coordinate_getStateVariableYIndex(swigCPtr, this, index);
+  public ArrayStr getStateVariableNames() {
+    return new ArrayStr(opensimModelJNI.Coordinate_getStateVariableNames(swigCPtr, this), true);
   }
 
   public static boolean isKindOf(String type) {
@@ -276,6 +272,10 @@ public class Coordinate extends ModelComponent {
 
   public void copy(OpenSimObject aObject) {
     opensimModelJNI.Coordinate_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public SWIGTYPE_p_SimTK__SystemYIndex getStateVariableSystemIndex(String stateVariableName) {
+    return new SWIGTYPE_p_SimTK__SystemYIndex(opensimModelJNI.Coordinate_getStateVariableSystemIndex(swigCPtr, this, stateVariableName), true);
   }
 
   public final static class MotionType {

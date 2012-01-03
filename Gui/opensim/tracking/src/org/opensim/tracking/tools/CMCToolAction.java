@@ -70,6 +70,6 @@ public final class CMCToolAction extends CallableSystemAction {
 
    public boolean isEnabled() {
       return (OpenSimDB.getInstance().getCurrentModel()!=null &&
-              OpenSimDB.getInstance().getCurrentModel().getNumStates()>0);
+              OpenSimDB.getInstance().getCurrentModel().getNumStateVariables()>0);
    }
 }

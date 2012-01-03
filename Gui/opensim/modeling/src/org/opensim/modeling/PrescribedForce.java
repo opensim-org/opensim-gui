@@ -47,8 +47,8 @@ public class PrescribedForce extends Force {
     this(opensimModelJNI.new_PrescribedForce__SWIG_2(PrescribedForce.getCPtr(force), force), true);
   }
 
-  public PrescribedForce(SWIGTYPE_p_DOMElement aNode) {
-    this(opensimModelJNI.new_PrescribedForce__SWIG_3(SWIGTYPE_p_DOMElement.getCPtr(aNode)), true);
+  public PrescribedForce(SWIGTYPE_p_SimTK__Xml__Element aNode) {
+    this(opensimModelJNI.new_PrescribedForce__SWIG_3(SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode)), true);
   }
 
   public OpenSimObject copy() {
@@ -56,8 +56,12 @@ public class PrescribedForce extends Force {
     return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
-  public void updateFromXMLNode() {
-    opensimModelJNI.PrescribedForce_updateFromXMLNode(swigCPtr, this);
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
+    opensimModelJNI.PrescribedForce_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+  }
+
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
+    opensimModelJNI.PrescribedForce_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
   public void setBodyName(String aBodyName) {

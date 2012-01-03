@@ -128,14 +128,6 @@ public class Joint extends ModelComponent {
     opensimModelJNI.Joint_getLocationInChild__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(rLocation));
   }
 
-  public double getLocationInParent(int aXYZ) {
-    return opensimModelJNI.Joint_getLocationInParent__SWIG_2(swigCPtr, this, aXYZ);
-  }
-
-  public double getLocationInChild(int aXYZ) {
-    return opensimModelJNI.Joint_getLocationInChild__SWIG_2(swigCPtr, this, aXYZ);
-  }
-
   public CoordinateSet getCoordinateSet() {
     return new CoordinateSet(opensimModelJNI.Joint_getCoordinateSet(swigCPtr, this), false);
   }
@@ -154,6 +146,10 @@ public class Joint extends ModelComponent {
 
   public boolean isCoordinateUsed(Coordinate aCoordinate) {
     return opensimModelJNI.Joint_isCoordinateUsed(swigCPtr, this, Coordinate.getCPtr(aCoordinate), aCoordinate);
+  }
+
+  public SWIGTYPE_p_SimTK__SpatialVec calcEquivalentSpatialForce(SWIGTYPE_p_SimTK__State s, SWIGTYPE_p_SimTK__Vector mobilityForces) {
+    return new SWIGTYPE_p_SimTK__SpatialVec(opensimModelJNI.Joint_calcEquivalentSpatialForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), SWIGTYPE_p_SimTK__Vector.getCPtr(mobilityForces)), true);
   }
 
   public void scale(ScaleSet aScaleSet) {

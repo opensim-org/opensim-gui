@@ -78,21 +78,16 @@ public class OpenSimObject {
     this(opensimModelJNI.new_OpenSimObject__SWIG_3(SWIGTYPE_p_OpenSim__XMLDocument.getCPtr(aDocument)), true);
   }
 
-  public OpenSimObject(SWIGTYPE_p_DOMElement aNode) {
-    this(opensimModelJNI.new_OpenSimObject__SWIG_4(SWIGTYPE_p_DOMElement.getCPtr(aNode)), true);
+  public OpenSimObject(OpenSimObject aObject) {
+    this(opensimModelJNI.new_OpenSimObject__SWIG_4(OpenSimObject.getCPtr(aObject), aObject), true);
   }
 
-  public OpenSimObject(OpenSimObject aObject) {
-    this(opensimModelJNI.new_OpenSimObject__SWIG_5(OpenSimObject.getCPtr(aObject), aObject), true);
+  public OpenSimObject(SWIGTYPE_p_SimTK__Xml__Element aNode) {
+    this(opensimModelJNI.new_OpenSimObject__SWIG_5(SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode)), true);
   }
 
   public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.OpenSimObject_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
-  }
-
-  public OpenSimObject copy(SWIGTYPE_p_DOMElement aNode) {
-    long cPtr = opensimModelJNI.OpenSimObject_copy__SWIG_1(swigCPtr, this, SWIGTYPE_p_DOMElement.getCPtr(aNode));
+    long cPtr = opensimModelJNI.OpenSimObject_copy(swigCPtr, this);
     return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
@@ -109,14 +104,6 @@ public class OpenSimObject {
   public VisibleObject updDisplayer() {
     long cPtr = opensimModelJNI.OpenSimObject_updDisplayer(swigCPtr, this);
     return (cPtr == 0) ? null : new VisibleObject(cPtr, false);
-  }
-
-  public void renameChildNode(String aOldName, String aNewName, SWIGTYPE_p_DOMElement startNode) {
-    opensimModelJNI.OpenSimObject_renameChildNode__SWIG_0(swigCPtr, this, aOldName, aNewName, SWIGTYPE_p_DOMElement.getCPtr(startNode));
-  }
-
-  public void renameChildNode(String aOldName, String aNewName) {
-    opensimModelJNI.OpenSimObject_renameChildNode__SWIG_1(swigCPtr, this, aOldName, aNewName);
   }
 
   public boolean isEqualTo(OpenSimObject aObject) {
@@ -189,32 +176,24 @@ public class OpenSimObject {
     return opensimModelJNI.OpenSimObject_isValidDefaultType(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
-  public void updateFromXMLNode() {
-    opensimModelJNI.OpenSimObject_updateFromXMLNode(swigCPtr, this);
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
+    opensimModelJNI.OpenSimObject_updateFromXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+  }
+
+  public void updateFromXMLDocument() {
+    opensimModelJNI.OpenSimObject_updateFromXMLDocument(swigCPtr, this);
   }
 
   public void updateDefaultObjectsFromXMLNode() {
     opensimModelJNI.OpenSimObject_updateDefaultObjectsFromXMLNode(swigCPtr, this);
   }
 
-  public void updateXMLNode(SWIGTYPE_p_DOMElement aParent, int aNodeIndex) {
-    opensimModelJNI.OpenSimObject_updateXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_DOMElement.getCPtr(aParent), aNodeIndex);
+  public void updateXMLNode(SWIGTYPE_p_SimTK__Xml__Element aParent) {
+    opensimModelJNI.OpenSimObject_updateXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aParent));
   }
 
-  public void updateXMLNode(SWIGTYPE_p_DOMElement aParent) {
-    opensimModelJNI.OpenSimObject_updateXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_DOMElement.getCPtr(aParent));
-  }
-
-  public void updateDefaultObjectsXMLNode(SWIGTYPE_p_DOMElement aParent) {
-    opensimModelJNI.OpenSimObject_updateDefaultObjectsXMLNode(swigCPtr, this, SWIGTYPE_p_DOMElement.getCPtr(aParent));
-  }
-
-  public void generateXMLNode(SWIGTYPE_p_DOMElement aParent, int aNodeIndex) {
-    opensimModelJNI.OpenSimObject_generateXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_DOMElement.getCPtr(aParent), aNodeIndex);
-  }
-
-  public void generateXMLNode(SWIGTYPE_p_DOMElement aParent) {
-    opensimModelJNI.OpenSimObject_generateXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_DOMElement.getCPtr(aParent));
+  public void updateDefaultObjectsXMLNode(SWIGTYPE_p_SimTK__Xml__Element aParent) {
+    opensimModelJNI.OpenSimObject_updateDefaultObjectsXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aParent));
   }
 
   public boolean getInlined() {
@@ -238,15 +217,6 @@ public class OpenSimObject {
     return opensimModelJNI.OpenSimObject_getDocumentFileName(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_DOMElement getXMLNode() {
-    long cPtr = opensimModelJNI.OpenSimObject_getXMLNode(swigCPtr, this);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_DOMElement(cPtr, false);
-  }
-
-  public void clearXMLStructures() {
-    opensimModelJNI.OpenSimObject_clearXMLStructures(swigCPtr, this);
-  }
-
   public void setAllPropertiesUseDefault(boolean aUseDefault) {
     opensimModelJNI.OpenSimObject_setAllPropertiesUseDefault(swigCPtr, this, aUseDefault);
   }
@@ -261,34 +231,6 @@ public class OpenSimObject {
 
   public static void PrintPropertyInfo(SWIGTYPE_p_std__ostream aOStream, String aClassName, String aPropertyName) {
     opensimModelJNI.OpenSimObject_PrintPropertyInfo__SWIG_1(SWIGTYPE_p_std__ostream.getCPtr(aOStream), aClassName, aPropertyName);
-  }
-
-  public void addObserver(OpenSimObject aObserver) {
-    opensimModelJNI.OpenSimObject_addObserver(swigCPtr, this, OpenSimObject.getCPtr(aObserver), aObserver);
-  }
-
-  public void deleteObserver(OpenSimObject aObserver) {
-    opensimModelJNI.OpenSimObject_deleteObserver(swigCPtr, this, OpenSimObject.getCPtr(aObserver), aObserver);
-  }
-
-  public void addObserverEvent(OpenSimObject aObserver, SWIGTYPE_p_OpenSim__Event aEvent) {
-    opensimModelJNI.OpenSimObject_addObserverEvent(swigCPtr, this, OpenSimObject.getCPtr(aObserver), aObserver, SWIGTYPE_p_OpenSim__Event.getCPtr(aEvent));
-  }
-
-  public void notifyObservers(SWIGTYPE_p_OpenSim__Event aEvent) {
-    opensimModelJNI.OpenSimObject_notifyObservers(swigCPtr, this, SWIGTYPE_p_OpenSim__Event.getCPtr(aEvent));
-  }
-
-  public void deleteObservers() {
-    opensimModelJNI.OpenSimObject_deleteObservers(swigCPtr, this);
-  }
-
-  public int countObservers() {
-    return opensimModelJNI.OpenSimObject_countObservers(swigCPtr, this);
-  }
-
-  public void update(OpenSimObject aObject, SWIGTYPE_p_OpenSim__Event aEvent) {
-    opensimModelJNI.OpenSimObject_update(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject, SWIGTYPE_p_OpenSim__Event.getCPtr(aEvent));
   }
 
   public static void setSerializeAllDefaults(boolean aBoolean) {

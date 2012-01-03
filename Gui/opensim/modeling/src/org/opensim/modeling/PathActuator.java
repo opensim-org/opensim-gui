@@ -80,6 +80,10 @@ public class PathActuator extends Actuator {
     return opensimModelJNI.PathActuator_getLengtheningSpeed(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
   }
 
+  public double getPower(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.PathActuator_getPower(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
   public double getStress(SWIGTYPE_p_SimTK__State s) {
     return opensimModelJNI.PathActuator_getStress(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
   }
@@ -108,8 +112,12 @@ public class PathActuator extends Actuator {
     return new ArrayDouble(opensimModelJNI.PathActuator_getRecordValues(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state)), true);
   }
 
-  public void updateFromXMLNode() {
-    opensimModelJNI.PathActuator_updateFromXMLNode(swigCPtr, this);
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
+    opensimModelJNI.PathActuator_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+  }
+
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
+    opensimModelJNI.PathActuator_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
   public void preScale(SWIGTYPE_p_SimTK__State s, ScaleSet aScaleSet) {

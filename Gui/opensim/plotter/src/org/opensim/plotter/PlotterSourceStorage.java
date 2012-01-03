@@ -160,9 +160,8 @@ public class PlotterSourceStorage implements PlotterSourceInterface {
     }
 
     public boolean hasFullState(Model model) {
-        ArrayStr stateNames = new ArrayStr();
+        ArrayStr stateNames = model.getStateVariableNames();
         stateNames.append("time");
-        model.getStateNames(stateNames);
         //outStringArray(stateNames);
         ArrayStr storageLabels = storage.getColumnLabels();
         //outStringArray(storageLabels);

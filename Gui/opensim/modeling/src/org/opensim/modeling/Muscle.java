@@ -44,8 +44,12 @@ public class Muscle extends PathActuator {
     opensimModelJNI.Muscle_copyData(swigCPtr, this, Muscle.getCPtr(aMuscle), aMuscle);
   }
 
-  public void updateFromXMLNode() {
-    opensimModelJNI.Muscle_updateFromXMLNode(swigCPtr, this);
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
+    opensimModelJNI.Muscle_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+  }
+
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
+    opensimModelJNI.Muscle_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
   public double getMaxIsometricForce() {

@@ -27,6 +27,7 @@ package org.opensim.view.editors;
 
 import java.awt.Component;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -38,6 +39,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import org.openide.util.Exceptions;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.swingui.JTableButtonMouseListener;
 import org.opensim.swingui.JTableButtonRenderer;
@@ -98,7 +100,7 @@ public class ObjectPropertyViewerPanel extends JPanel {
         editMode = allowModification;
         if (object == null)
             return;
-
+        
         model = new OpenSimObjectModel(aObject, editMode);
         //treeTable = new JTreeTable(model);
         treeTable = new ObjectPropertyViewerTreeTable(model);

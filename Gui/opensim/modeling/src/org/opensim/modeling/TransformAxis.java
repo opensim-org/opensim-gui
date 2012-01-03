@@ -43,8 +43,8 @@ public class TransformAxis extends OpenSimObject {
     this(opensimModelJNI.new_TransformAxis__SWIG_1(ArrayStr.getCPtr(coordNames), coordNames, SWIGTYPE_p_SimTK__Vec3.getCPtr(aAxis)), true);
   }
 
-  public TransformAxis(SWIGTYPE_p_DOMElement aNode) {
-    this(opensimModelJNI.new_TransformAxis__SWIG_2(SWIGTYPE_p_DOMElement.getCPtr(aNode)), true);
+  public TransformAxis(SWIGTYPE_p_SimTK__Xml__Element aNode) {
+    this(opensimModelJNI.new_TransformAxis__SWIG_2(SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode)), true);
   }
 
   public TransformAxis(TransformAxis anAxis) {
@@ -112,8 +112,12 @@ public class TransformAxis extends OpenSimObject {
     opensimModelJNI.TransformAxis_setup(swigCPtr, this, Joint.getCPtr(aJoint), aJoint);
   }
 
-  public void updateFromXMLNode() {
-    opensimModelJNI.TransformAxis_updateFromXMLNode(swigCPtr, this);
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
+    opensimModelJNI.TransformAxis_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+  }
+
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
+    opensimModelJNI.TransformAxis_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
   public static boolean isKindOf(String type) {

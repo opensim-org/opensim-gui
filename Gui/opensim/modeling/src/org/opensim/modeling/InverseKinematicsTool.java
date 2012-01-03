@@ -60,8 +60,12 @@ public class InverseKinematicsTool extends Tool {
     opensimModelJNI.InverseKinematicsTool_registerTypes();
   }
 
-  public void updateFromXMLNode() {
-    opensimModelJNI.InverseKinematicsTool_updateFromXMLNode(swigCPtr, this);
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
+    opensimModelJNI.InverseKinematicsTool_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+  }
+
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
+    opensimModelJNI.InverseKinematicsTool_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
   public void setModel(Model aModel) {

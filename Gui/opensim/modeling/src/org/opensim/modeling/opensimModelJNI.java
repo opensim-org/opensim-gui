@@ -228,15 +228,12 @@ public class opensimModelJNI {
   public final static native long new_OpenSimObject__SWIG_1(String jarg1, boolean jarg2) throws java.io.IOException;
   public final static native long new_OpenSimObject__SWIG_2(String jarg1) throws java.io.IOException;
   public final static native long new_OpenSimObject__SWIG_3(long jarg1);
-  public final static native long new_OpenSimObject__SWIG_4(long jarg1);
-  public final static native long new_OpenSimObject__SWIG_5(long jarg1, OpenSimObject jarg1_);
-  public final static native long OpenSimObject_copy__SWIG_0(long jarg1, OpenSimObject jarg1_);
-  public final static native long OpenSimObject_copy__SWIG_1(long jarg1, OpenSimObject jarg1_, long jarg2);
+  public final static native long new_OpenSimObject__SWIG_4(long jarg1, OpenSimObject jarg1_);
+  public final static native long new_OpenSimObject__SWIG_5(long jarg1);
+  public final static native long OpenSimObject_copy(long jarg1, OpenSimObject jarg1_);
   public final static native long OpenSimObject_SafeCopy(long jarg1, OpenSimObject jarg1_);
   public final static native long OpenSimObject_getDisplayer(long jarg1, OpenSimObject jarg1_);
   public final static native long OpenSimObject_updDisplayer(long jarg1, OpenSimObject jarg1_);
-  public final static native void OpenSimObject_renameChildNode__SWIG_0(long jarg1, OpenSimObject jarg1_, String jarg2, String jarg3, long jarg4);
-  public final static native void OpenSimObject_renameChildNode__SWIG_1(long jarg1, OpenSimObject jarg1_, String jarg2, String jarg3);
   public final static native boolean OpenSimObject_isEqualTo(long jarg1, OpenSimObject jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native void OpenSimObject_setType(long jarg1, OpenSimObject jarg1_, String jarg2);
   public final static native String OpenSimObject_getType(long jarg1, OpenSimObject jarg1_);
@@ -254,31 +251,20 @@ public class opensimModelJNI {
   public final static native long OpenSimObject_newInstanceOfType(String jarg1);
   public final static native void OpenSimObject_getRegisteredTypenames(long jarg1, ArrayStr jarg1_);
   public final static native boolean OpenSimObject_isValidDefaultType(long jarg1, OpenSimObject jarg1_, long jarg2, OpenSimObject jarg2_);
-  public final static native void OpenSimObject_updateFromXMLNode(long jarg1, OpenSimObject jarg1_);
+  public final static native void OpenSimObject_updateFromXMLNode(long jarg1, OpenSimObject jarg1_, long jarg2, int jarg3);
+  public final static native void OpenSimObject_updateFromXMLDocument(long jarg1, OpenSimObject jarg1_);
   public final static native void OpenSimObject_updateDefaultObjectsFromXMLNode(long jarg1, OpenSimObject jarg1_);
-  public final static native void OpenSimObject_updateXMLNode__SWIG_0(long jarg1, OpenSimObject jarg1_, long jarg2, int jarg3);
-  public final static native void OpenSimObject_updateXMLNode__SWIG_1(long jarg1, OpenSimObject jarg1_, long jarg2);
+  public final static native void OpenSimObject_updateXMLNode(long jarg1, OpenSimObject jarg1_, long jarg2);
   public final static native void OpenSimObject_updateDefaultObjectsXMLNode(long jarg1, OpenSimObject jarg1_, long jarg2);
-  public final static native void OpenSimObject_generateXMLNode__SWIG_0(long jarg1, OpenSimObject jarg1_, long jarg2, int jarg3);
-  public final static native void OpenSimObject_generateXMLNode__SWIG_1(long jarg1, OpenSimObject jarg1_, long jarg2);
   public final static native boolean OpenSimObject_getInlined(long jarg1, OpenSimObject jarg1_);
   public final static native void OpenSimObject_setInlined__SWIG_0(long jarg1, OpenSimObject jarg1_, boolean jarg2, String jarg3);
   public final static native void OpenSimObject_setInlined__SWIG_1(long jarg1, OpenSimObject jarg1_, boolean jarg2);
   public final static native long OpenSimObject_getDocument(long jarg1, OpenSimObject jarg1_);
   public final static native String OpenSimObject_getDocumentFileName(long jarg1, OpenSimObject jarg1_);
-  public final static native long OpenSimObject_getXMLNode(long jarg1, OpenSimObject jarg1_);
-  public final static native void OpenSimObject_clearXMLStructures(long jarg1, OpenSimObject jarg1_);
   public final static native void OpenSimObject_setAllPropertiesUseDefault(long jarg1, OpenSimObject jarg1_, boolean jarg2);
   public final static native boolean OpenSimObject_print(long jarg1, OpenSimObject jarg1_, String jarg2);
   public final static native void OpenSimObject_PrintPropertyInfo__SWIG_0(long jarg1, String jarg2);
   public final static native void OpenSimObject_PrintPropertyInfo__SWIG_1(long jarg1, String jarg2, String jarg3);
-  public final static native void OpenSimObject_addObserver(long jarg1, OpenSimObject jarg1_, long jarg2, OpenSimObject jarg2_);
-  public final static native void OpenSimObject_deleteObserver(long jarg1, OpenSimObject jarg1_, long jarg2, OpenSimObject jarg2_);
-  public final static native void OpenSimObject_addObserverEvent(long jarg1, OpenSimObject jarg1_, long jarg2, OpenSimObject jarg2_, long jarg3);
-  public final static native void OpenSimObject_notifyObservers(long jarg1, OpenSimObject jarg1_, long jarg2);
-  public final static native void OpenSimObject_deleteObservers(long jarg1, OpenSimObject jarg1_);
-  public final static native int OpenSimObject_countObservers(long jarg1, OpenSimObject jarg1_);
-  public final static native void OpenSimObject_update(long jarg1, OpenSimObject jarg1_, long jarg2, OpenSimObject jarg2_, long jarg3);
   public final static native void OpenSimObject_setSerializeAllDefaults(boolean jarg1);
   public final static native boolean OpenSimObject_getSerializeAllDefaults();
   public final static native boolean OpenSimObject_isKindOf(String jarg1);
@@ -468,7 +454,8 @@ public class opensimModelJNI {
   public final static native int VisibleObject_countGeometry(long jarg1, VisibleObject jarg1_);
   public final static native long VisibleObject_getDefaultGeometry(long jarg1, VisibleObject jarg1_);
   public final static native void VisibleObject_setupProperties(long jarg1, VisibleObject jarg1_);
-  public final static native void VisibleObject_updateFromXMLNode(long jarg1, VisibleObject jarg1_);
+  public final static native void VisibleObject_updateFromXMLNode__SWIG_0(long jarg1, VisibleObject jarg1_, long jarg2, int jarg3);
+  public final static native void VisibleObject_updateFromXMLNode__SWIG_1(long jarg1, VisibleObject jarg1_, long jarg2);
   public final static native long new_StateVector__SWIG_0(double jarg1, int jarg2, long jarg3);
   public final static native long new_StateVector__SWIG_1(double jarg1, int jarg2);
   public final static native long new_StateVector__SWIG_2(double jarg1);
@@ -770,7 +757,8 @@ public class opensimModelJNI {
   public final static native int NaturalCubicSpline_getArgumentSize(long jarg1, NaturalCubicSpline jarg1_);
   public final static native int NaturalCubicSpline_getMaxDerivativeOrder(long jarg1, NaturalCubicSpline jarg1_);
   public final static native long NaturalCubicSpline_createSimTKFunction(long jarg1, NaturalCubicSpline jarg1_);
-  public final static native void NaturalCubicSpline_updateFromXMLNode(long jarg1, NaturalCubicSpline jarg1_);
+  public final static native void NaturalCubicSpline_updateFromXMLNode__SWIG_0(long jarg1, NaturalCubicSpline jarg1_, long jarg2, int jarg3);
+  public final static native void NaturalCubicSpline_updateFromXMLNode__SWIG_1(long jarg1, NaturalCubicSpline jarg1_, long jarg2);
   public final static native boolean NaturalCubicSpline_isKindOf(String jarg1);
   public final static native boolean NaturalCubicSpline_isA(long jarg1, NaturalCubicSpline jarg1_, String jarg2);
   public final static native long NaturalCubicSpline_safeDownCast(long jarg1, OpenSimObject jarg1_);
@@ -823,7 +811,6 @@ public class opensimModelJNI {
   public final static native int PiecewiseConstantFunction_getArgumentSize(long jarg1, PiecewiseConstantFunction jarg1_);
   public final static native int PiecewiseConstantFunction_getMaxDerivativeOrder(long jarg1, PiecewiseConstantFunction jarg1_);
   public final static native long PiecewiseConstantFunction_createSimTKFunction(long jarg1, PiecewiseConstantFunction jarg1_);
-  public final static native void PiecewiseConstantFunction_updateFromXMLNode(long jarg1, PiecewiseConstantFunction jarg1_);
   public final static native boolean PiecewiseConstantFunction_isKindOf(String jarg1);
   public final static native boolean PiecewiseConstantFunction_isA(long jarg1, PiecewiseConstantFunction jarg1_, String jarg2);
   public final static native long PiecewiseConstantFunction_safeDownCast(long jarg1, OpenSimObject jarg1_);
@@ -866,7 +853,8 @@ public class opensimModelJNI {
   public final static native int PiecewiseLinearFunction_getArgumentSize(long jarg1, PiecewiseLinearFunction jarg1_);
   public final static native int PiecewiseLinearFunction_getMaxDerivativeOrder(long jarg1, PiecewiseLinearFunction jarg1_);
   public final static native long PiecewiseLinearFunction_createSimTKFunction(long jarg1, PiecewiseLinearFunction jarg1_);
-  public final static native void PiecewiseLinearFunction_updateFromXMLNode(long jarg1, PiecewiseLinearFunction jarg1_);
+  public final static native void PiecewiseLinearFunction_updateFromXMLNode__SWIG_0(long jarg1, PiecewiseLinearFunction jarg1_, long jarg2, int jarg3);
+  public final static native void PiecewiseLinearFunction_updateFromXMLNode__SWIG_1(long jarg1, PiecewiseLinearFunction jarg1_, long jarg2);
   public final static native boolean PiecewiseLinearFunction_isKindOf(String jarg1);
   public final static native boolean PiecewiseLinearFunction_isA(long jarg1, PiecewiseLinearFunction jarg1_, String jarg2);
   public final static native long PiecewiseLinearFunction_safeDownCast(long jarg1, OpenSimObject jarg1_);
@@ -887,7 +875,6 @@ public class opensimModelJNI {
   public final static native int MultiplierFunction_getArgumentSize(long jarg1, MultiplierFunction jarg1_);
   public final static native int MultiplierFunction_getMaxDerivativeOrder(long jarg1, MultiplierFunction jarg1_);
   public final static native long MultiplierFunction_createSimTKFunction(long jarg1, MultiplierFunction jarg1_);
-  public final static native void MultiplierFunction_updateFromXMLNode(long jarg1, MultiplierFunction jarg1_);
   public final static native boolean MultiplierFunction_isKindOf(String jarg1);
   public final static native boolean MultiplierFunction_isA(long jarg1, MultiplierFunction jarg1_, String jarg2);
   public final static native long MultiplierFunction_safeDownCast(long jarg1, OpenSimObject jarg1_);
@@ -1249,12 +1236,10 @@ public class opensimModelJNI {
   public final static native int ModelComponent_getModelingOption(long jarg1, ModelComponent jarg1_, long jarg2);
   public final static native void ModelComponent_setModelingOption(long jarg1, ModelComponent jarg1_, long jarg2, int jarg3);
   public final static native int ModelComponent_getNumStateVariables(long jarg1, ModelComponent jarg1_);
-  public final static native String ModelComponent_getStateVariableName(long jarg1, ModelComponent jarg1_, int jarg2);
-  public final static native int ModelComponent_getStateVariableYIndex(long jarg1, ModelComponent jarg1_, int jarg2);
-  public final static native double ModelComponent_getStateVariable__SWIG_0(long jarg1, ModelComponent jarg1_, long jarg2, int jarg3);
-  public final static native double ModelComponent_getStateVariable__SWIG_1(long jarg1, ModelComponent jarg1_, long jarg2, String jarg3);
-  public final static native void ModelComponent_setStateVariable__SWIG_0(long jarg1, ModelComponent jarg1_, long jarg2, int jarg3, double jarg4);
-  public final static native void ModelComponent_setStateVariable__SWIG_1(long jarg1, ModelComponent jarg1_, long jarg2, String jarg3, double jarg4);
+  public final static native long ModelComponent_getStateVariableSystemIndex(long jarg1, ModelComponent jarg1_, String jarg2);
+  public final static native long ModelComponent_getStateVariableNames(long jarg1, ModelComponent jarg1_);
+  public final static native double ModelComponent_getStateVariable(long jarg1, ModelComponent jarg1_, long jarg2, String jarg3);
+  public final static native void ModelComponent_setStateVariable(long jarg1, ModelComponent jarg1_, long jarg2, String jarg3, double jarg4);
   public final static native double ModelComponent_getDiscreteVariable(long jarg1, ModelComponent jarg1_, long jarg2, String jarg3);
   public final static native void ModelComponent_setDiscreteVariable(long jarg1, ModelComponent jarg1_, long jarg2, String jarg3, double jarg4);
   public final static native void ModelComponent_markCacheVariableValid(long jarg1, ModelComponent jarg1_, long jarg2, String jarg3);
@@ -1455,7 +1440,8 @@ public class opensimModelJNI {
   public final static native long new_ExternalForce__SWIG_9(long jarg1);
   public final static native void delete_ExternalForce(long jarg1);
   public final static native long ExternalForce_copy__SWIG_0(long jarg1, ExternalForce jarg1_);
-  public final static native void ExternalForce_updateFromXMLNode(long jarg1, ExternalForce jarg1_);
+  public final static native void ExternalForce_updateFromXMLNode__SWIG_0(long jarg1, ExternalForce jarg1_, long jarg2, int jarg3);
+  public final static native void ExternalForce_updateFromXMLNode__SWIG_1(long jarg1, ExternalForce jarg1_, long jarg2);
   public final static native void ExternalForce_setDataSource(long jarg1, ExternalForce jarg1_, long jarg2, Storage jarg2_);
   public final static native void ExternalForce_setAppliedToBodyName(long jarg1, ExternalForce jarg1_, String jarg2);
   public final static native String ExternalForce_getAppliedToBodyName(long jarg1, ExternalForce jarg1_);
@@ -1637,7 +1623,8 @@ public class opensimModelJNI {
   public final static native void delete_ExternalLoads(long jarg1);
   public final static native long ExternalLoads_copy(long jarg1, ExternalLoads jarg1_);
   public final static native void ExternalLoads_copyData(long jarg1, ExternalLoads jarg1_, long jarg2, ExternalLoads jarg2_);
-  public final static native void ExternalLoads_updateFromXMLNode(long jarg1, ExternalLoads jarg1_);
+  public final static native void ExternalLoads_updateFromXMLNode__SWIG_0(long jarg1, ExternalLoads jarg1_, long jarg2, int jarg3);
+  public final static native void ExternalLoads_updateFromXMLNode__SWIG_1(long jarg1, ExternalLoads jarg1_, long jarg2);
   public final static native void ExternalLoads_setup(long jarg1, ExternalLoads jarg1_, long jarg2, Model jarg2_);
   public final static native long ExternalLoads_getModel(long jarg1, ExternalLoads jarg1_);
   public final static native String ExternalLoads_getDataFileName(long jarg1, ExternalLoads jarg1_);
@@ -1656,7 +1643,8 @@ public class opensimModelJNI {
   public final static native long new_PrescribedForce__SWIG_3(long jarg1);
   public final static native void delete_PrescribedForce(long jarg1);
   public final static native long PrescribedForce_copy__SWIG_0(long jarg1, PrescribedForce jarg1_);
-  public final static native void PrescribedForce_updateFromXMLNode(long jarg1, PrescribedForce jarg1_);
+  public final static native void PrescribedForce_updateFromXMLNode__SWIG_0(long jarg1, PrescribedForce jarg1_, long jarg2, int jarg3);
+  public final static native void PrescribedForce_updateFromXMLNode__SWIG_1(long jarg1, PrescribedForce jarg1_, long jarg2);
   public final static native void PrescribedForce_setBodyName(long jarg1, PrescribedForce jarg1_, String jarg2);
   public final static native String PrescribedForce_getBodyName(long jarg1, PrescribedForce jarg1_);
   public final static native void PrescribedForce_setForceFunctions(long jarg1, PrescribedForce jarg1_, long jarg2, Function jarg2_, long jarg3, Function jarg3_, long jarg4, Function jarg4_);
@@ -2340,7 +2328,7 @@ public class opensimModelJNI {
   public final static native void AbstractTool_printResults__SWIG_3(long jarg1, AbstractTool jarg1_, String jarg2);
   public final static native boolean AbstractTool_createExternalLoads__SWIG_0(long jarg1, AbstractTool jarg1_, String jarg2, long jarg3, Model jarg3_, long jarg4, Storage jarg4_);
   public final static native boolean AbstractTool_createExternalLoads__SWIG_1(long jarg1, AbstractTool jarg1_, String jarg2, long jarg3, Model jarg3_);
-  public final static native void AbstractTool_updateFromXMLNode(long jarg1, AbstractTool jarg1_);
+  public final static native void AbstractTool_updateFromXMLNode(long jarg1, AbstractTool jarg1_, long jarg2, int jarg3);
   public final static native void AbstractTool_loadQStorage(long jarg1, AbstractTool jarg1_, String jarg2, long jarg3, Storage jarg3_);
   public final static native long new_Marker__SWIG_0();
   public final static native long new_Marker__SWIG_1(long jarg1, Marker jarg1_);
@@ -2873,7 +2861,8 @@ public class opensimModelJNI {
   public final static native long TransformAxis_getAxis__SWIG_2(long jarg1, TransformAxis jarg1_);
   public final static native double TransformAxis_getAxis__SWIG_3(long jarg1, TransformAxis jarg1_, int jarg2);
   public final static native void TransformAxis_setup(long jarg1, TransformAxis jarg1_, long jarg2, Joint jarg2_);
-  public final static native void TransformAxis_updateFromXMLNode(long jarg1, TransformAxis jarg1_);
+  public final static native void TransformAxis_updateFromXMLNode__SWIG_0(long jarg1, TransformAxis jarg1_, long jarg2, int jarg3);
+  public final static native void TransformAxis_updateFromXMLNode__SWIG_1(long jarg1, TransformAxis jarg1_, long jarg2);
   public final static native boolean TransformAxis_isKindOf(String jarg1);
   public final static native boolean TransformAxis_isA(long jarg1, TransformAxis jarg1_, String jarg2);
   public final static native long TransformAxis_safeDownCast(long jarg1, OpenSimObject jarg1_);
@@ -2945,12 +2934,12 @@ public class opensimModelJNI {
   public final static native boolean Coordinate_isConstrained(long jarg1, Coordinate jarg1_, long jarg2);
   public final static native int Coordinate_getMobilityIndex(long jarg1, Coordinate jarg1_);
   public final static native long Coordinate_getBodyIndex(long jarg1, Coordinate jarg1_);
-  public final static native String Coordinate_getStateVariableName(long jarg1, Coordinate jarg1_, int jarg2);
-  public final static native int Coordinate_getStateVariableYIndex(long jarg1, Coordinate jarg1_, int jarg2);
+  public final static native long Coordinate_getStateVariableNames(long jarg1, Coordinate jarg1_);
   public final static native boolean Coordinate_isKindOf(String jarg1);
   public final static native boolean Coordinate_isA(long jarg1, Coordinate jarg1_, String jarg2);
   public final static native long Coordinate_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void Coordinate_copy__SWIG_1(long jarg1, Coordinate jarg1_, long jarg2, OpenSimObject jarg2_);
+  public final static native long Coordinate_getStateVariableSystemIndex(long jarg1, Coordinate jarg1_, String jarg2);
   public final static native void delete_SetCoordinates(long jarg1);
   public final static native long new_SetCoordinates__SWIG_0();
   public final static native long new_SetCoordinates__SWIG_1(String jarg1, boolean jarg2);
@@ -3041,13 +3030,12 @@ public class opensimModelJNI {
   public final static native void Joint_getLocationInParent__SWIG_1(long jarg1, Joint jarg1_, double[] jarg2);
   public final static native void Joint_setLocationInChild(long jarg1, Joint jarg1_, long jarg2);
   public final static native void Joint_getLocationInChild__SWIG_1(long jarg1, Joint jarg1_, long jarg2);
-  public final static native double Joint_getLocationInParent__SWIG_2(long jarg1, Joint jarg1_, int jarg2);
-  public final static native double Joint_getLocationInChild__SWIG_2(long jarg1, Joint jarg1_, int jarg2);
   public final static native long Joint_getCoordinateSet(long jarg1, Joint jarg1_);
   public final static native boolean Joint_getReverse(long jarg1, Joint jarg1_);
   public final static native int Joint_numCoordinates(long jarg1, Joint jarg1_);
   public final static native void Joint_checkParentBody(long jarg1, Joint jarg1_);
   public final static native boolean Joint_isCoordinateUsed(long jarg1, Joint jarg1_, long jarg2, Coordinate jarg2_);
+  public final static native long Joint_calcEquivalentSpatialForce(long jarg1, Joint jarg1_, long jarg2, long jarg3);
   public final static native void Joint_scale(long jarg1, Joint jarg1_, long jarg2, ScaleSet jarg2_);
   public final static native boolean Joint_isKindOf(String jarg1);
   public final static native boolean Joint_isA(long jarg1, Joint jarg1_, String jarg2);
@@ -3066,7 +3054,8 @@ public class opensimModelJNI {
   public final static native int CustomJoint_numCoordinates(long jarg1, CustomJoint jarg1_);
   public final static native long CustomJoint_getSpatialTransform(long jarg1, CustomJoint jarg1_);
   public final static native void CustomJoint_scale(long jarg1, CustomJoint jarg1_, long jarg2, ScaleSet jarg2_);
-  public final static native void CustomJoint_updateFromXMLNode(long jarg1, CustomJoint jarg1_);
+  public final static native void CustomJoint_updateFromXMLNode__SWIG_0(long jarg1, CustomJoint jarg1_, long jarg2, int jarg3);
+  public final static native void CustomJoint_updateFromXMLNode__SWIG_1(long jarg1, CustomJoint jarg1_, long jarg2);
   public final static native boolean CustomJoint_isKindOf(String jarg1);
   public final static native boolean CustomJoint_isA(long jarg1, CustomJoint jarg1_, String jarg2);
   public final static native long CustomJoint_safeDownCast(long jarg1, OpenSimObject jarg1_);
@@ -3220,7 +3209,8 @@ public class opensimModelJNI {
   public final static native long new_Model__SWIG_1(String jarg1) throws java.io.IOException;
   public final static native long new_Model__SWIG_2(long jarg1, Model jarg1_);
   public final static native void delete_Model(long jarg1);
-  public final static native void Model_updateFromXMLNode(long jarg1, Model jarg1_);
+  public final static native void Model_updateFromXMLNode__SWIG_0(long jarg1, Model jarg1_, long jarg2, int jarg3);
+  public final static native void Model_updateFromXMLNode__SWIG_1(long jarg1, Model jarg1_, long jarg2);
   public final static native long Model_copy(long jarg1, Model jarg1_);
   public final static native void Model_copyData(long jarg1, Model jarg1_, long jarg2, Model jarg2_);
   public final static native void Model_setupProperties(long jarg1, Model jarg1_);
@@ -3248,11 +3238,11 @@ public class opensimModelJNI {
   public final static native long Model_getDecorationSubsystem(long jarg1, Model jarg1_);
   public final static native long Model_updDecorationSubsystem(long jarg1, Model jarg1_);
   public final static native int Model_getNumStateVariables(long jarg1, Model jarg1_);
+  public final static native void Model_addComponent(long jarg1, Model jarg1_, long jarg2, ModelComponent jarg2_);
   public final static native void Model_addBody(long jarg1, Model jarg1_, long jarg2, Body jarg2_);
   public final static native void Model_addConstraint(long jarg1, Model jarg1_, long jarg2, Constraint jarg2_);
   public final static native void Model_addForce(long jarg1, Model jarg1_, long jarg2, Force jarg2_);
   public final static native void Model_addContactGeometry(long jarg1, Model jarg1_, long jarg2, ContactGeometry jarg2_);
-  public final static native void Model_addModelComponent(long jarg1, Model jarg1_, long jarg2, ModelComponent jarg2_);
   public final static native String Model_getInputFileName(long jarg1, Model jarg1_);
   public final static native void Model_setInputFileName(long jarg1, Model jarg1_, String jarg2);
   public final static native String Model_getCredits(long jarg1, Model jarg1_);
@@ -3265,8 +3255,6 @@ public class opensimModelJNI {
   public final static native long Model_updMultibodySystem(long jarg1, Model jarg1_);
   public final static native long Model_getGravity(long jarg1, Model jarg1_);
   public final static native boolean Model_setGravity(long jarg1, Model jarg1_, long jarg2);
-  public final static native int Model_getNumStates__SWIG_0(long jarg1, Model jarg1_, boolean jarg2);
-  public final static native int Model_getNumStates__SWIG_1(long jarg1, Model jarg1_);
   public final static native int Model_getNumMarkers(long jarg1, Model jarg1_);
   public final static native int Model_getNumContactGeometries(long jarg1, Model jarg1_);
   public final static native int Model_getNumBodies(long jarg1, Model jarg1_);
@@ -3296,8 +3284,8 @@ public class opensimModelJNI {
   public final static native void Model_applyDefaultConfiguration(long jarg1, Model jarg1_, long jarg2);
   public final static native long Model_getSimbodyEngine(long jarg1, Model jarg1_);
   public final static native long Model_updSimbodyEngine(long jarg1, Model jarg1_);
-  public final static native void Model_getStateNames__SWIG_0(long jarg1, Model jarg1_, long jarg2, ArrayStr jarg2_, boolean jarg3);
-  public final static native void Model_getStateNames__SWIG_1(long jarg1, Model jarg1_, long jarg2, ArrayStr jarg2_);
+  public final static native long Model_getStateVariableNames(long jarg1, Model jarg1_);
+  public final static native double Model_getStateVariable(long jarg1, Model jarg1_, long jarg2, String jarg3);
   public final static native void Model_getStateValues(long jarg1, Model jarg1_, long jarg2, long jarg3, ArrayDouble jarg3_);
   public final static native void Model_setStateValues(long jarg1, Model jarg1_, long jarg2, long jarg3);
   public final static native int Model_getNumMuscleStates(long jarg1, Model jarg1_);
@@ -3381,7 +3369,8 @@ public class opensimModelJNI {
   public final static native long ConditionalPathPoint_copy__SWIG_0(long jarg1, ConditionalPathPoint jarg1_);
   public final static native void ConditionalPathPoint_copyData(long jarg1, ConditionalPathPoint jarg1_, long jarg2, ConditionalPathPoint jarg2_);
   public final static native void ConditionalPathPoint_init(long jarg1, ConditionalPathPoint jarg1_, long jarg2, PathPoint jarg2_);
-  public final static native void ConditionalPathPoint_updateFromXMLNode(long jarg1, ConditionalPathPoint jarg1_);
+  public final static native void ConditionalPathPoint_updateFromXMLNode__SWIG_0(long jarg1, ConditionalPathPoint jarg1_, long jarg2, int jarg3);
+  public final static native void ConditionalPathPoint_updateFromXMLNode__SWIG_1(long jarg1, ConditionalPathPoint jarg1_, long jarg2);
   public final static native long ConditionalPathPoint_getRange(long jarg1, ConditionalPathPoint jarg1_);
   public final static native long ConditionalPathPoint_getCoordinate(long jarg1, ConditionalPathPoint jarg1_);
   public final static native String ConditionalPathPoint_getCoordinateName(long jarg1, ConditionalPathPoint jarg1_);
@@ -3394,7 +3383,7 @@ public class opensimModelJNI {
   public final static native void delete_MovingPathPoint(long jarg1);
   public final static native long MovingPathPoint_copy__SWIG_0(long jarg1, MovingPathPoint jarg1_);
   public final static native void MovingPathPoint_copyData(long jarg1, MovingPathPoint jarg1_, long jarg2, MovingPathPoint jarg2_);
-  public final static native void MovingPathPoint_updateFromXMLNode(long jarg1, MovingPathPoint jarg1_);
+  public final static native void MovingPathPoint_updateFromXMLNode(long jarg1, MovingPathPoint jarg1_, long jarg2, int jarg3);
   public final static native void MovingPathPoint_init(long jarg1, MovingPathPoint jarg1_, long jarg2, PathPoint jarg2_);
   public final static native long MovingPathPoint_getXCoordinate(long jarg1, MovingPathPoint jarg1_);
   public final static native long MovingPathPoint_getYCoordinate(long jarg1, MovingPathPoint jarg1_);
@@ -3569,6 +3558,7 @@ public class opensimModelJNI {
   public final static native double PathActuator_getOptimalForce(long jarg1, PathActuator jarg1_);
   public final static native double PathActuator_getLength(long jarg1, PathActuator jarg1_, long jarg2);
   public final static native double PathActuator_getLengtheningSpeed(long jarg1, PathActuator jarg1_, long jarg2);
+  public final static native double PathActuator_getPower(long jarg1, PathActuator jarg1_, long jarg2);
   public final static native double PathActuator_getStress(long jarg1, PathActuator jarg1_, long jarg2);
   public final static native void PathActuator_addNewPathPoint(long jarg1, PathActuator jarg1_, String jarg2, long jarg3, Body jarg3_, long jarg4);
   public final static native void PathActuator_computeForce(long jarg1, PathActuator jarg1_, long jarg2, long jarg3, long jarg4);
@@ -3576,7 +3566,8 @@ public class opensimModelJNI {
   public final static native double PathActuator_computeMomentArm(long jarg1, PathActuator jarg1_, long jarg2, long jarg3, Coordinate jarg3_);
   public final static native long PathActuator_getRecordLabels(long jarg1, PathActuator jarg1_);
   public final static native long PathActuator_getRecordValues(long jarg1, PathActuator jarg1_, long jarg2);
-  public final static native void PathActuator_updateFromXMLNode(long jarg1, PathActuator jarg1_);
+  public final static native void PathActuator_updateFromXMLNode__SWIG_0(long jarg1, PathActuator jarg1_, long jarg2, int jarg3);
+  public final static native void PathActuator_updateFromXMLNode__SWIG_1(long jarg1, PathActuator jarg1_, long jarg2);
   public final static native void PathActuator_preScale(long jarg1, PathActuator jarg1_, long jarg2, long jarg3, ScaleSet jarg3_);
   public final static native void PathActuator_scale(long jarg1, PathActuator jarg1_, long jarg2, long jarg3, ScaleSet jarg3_);
   public final static native void PathActuator_postScale(long jarg1, PathActuator jarg1_, long jarg2, long jarg3, ScaleSet jarg3_);
@@ -3589,7 +3580,8 @@ public class opensimModelJNI {
   public final static native void delete_Muscle(long jarg1);
   public final static native long Muscle_copy__SWIG_0(long jarg1, Muscle jarg1_);
   public final static native void Muscle_copyData(long jarg1, Muscle jarg1_, long jarg2, Muscle jarg2_);
-  public final static native void Muscle_updateFromXMLNode(long jarg1, Muscle jarg1_);
+  public final static native void Muscle_updateFromXMLNode__SWIG_0(long jarg1, Muscle jarg1_, long jarg2, int jarg3);
+  public final static native void Muscle_updateFromXMLNode__SWIG_1(long jarg1, Muscle jarg1_, long jarg2);
   public final static native double Muscle_getMaxIsometricForce(long jarg1, Muscle jarg1_);
   public final static native double Muscle_getOptimalFiberLength(long jarg1, Muscle jarg1_);
   public final static native double Muscle_getTendonSlackLength(long jarg1, Muscle jarg1_);
@@ -3659,7 +3651,8 @@ public class opensimModelJNI {
   public final static native double ActivationFiberLengthMuscle_computeIsokineticForceAssumingInfinitelyStiffTendon(long jarg1, ActivationFiberLengthMuscle jarg1_, long jarg2, double jarg3);
   public final static native long ActivationFiberLengthMuscle_getRecordLabels(long jarg1, ActivationFiberLengthMuscle jarg1_);
   public final static native long ActivationFiberLengthMuscle_getRecordValues(long jarg1, ActivationFiberLengthMuscle jarg1_, long jarg2);
-  public final static native int ActivationFiberLengthMuscle_getStateVariableYIndex(long jarg1, ActivationFiberLengthMuscle jarg1_, int jarg2);
+  public final static native long ActivationFiberLengthMuscle_getStateVariableNames(long jarg1, ActivationFiberLengthMuscle jarg1_);
+  public final static native long ActivationFiberLengthMuscle_getStateVariableSystemIndex(long jarg1, ActivationFiberLengthMuscle jarg1_, String jarg2);
   public final static native boolean ActivationFiberLengthMuscle_isKindOf(String jarg1);
   public final static native boolean ActivationFiberLengthMuscle_isA(long jarg1, ActivationFiberLengthMuscle jarg1_, String jarg2);
   public final static native long ActivationFiberLengthMuscle_safeDownCast(long jarg1, OpenSimObject jarg1_);
@@ -3797,7 +3790,8 @@ public class opensimModelJNI {
   public final static native long CoordinateActuator_getRecordLabels(long jarg1, CoordinateActuator jarg1_);
   public final static native long CoordinateActuator_getRecordValues(long jarg1, CoordinateActuator jarg1_, long jarg2);
   public final static native double CoordinateActuator_getSpeed(long jarg1, CoordinateActuator jarg1_, long jarg2);
-  public final static native void CoordinateActuator_updateFromXMLNode(long jarg1, CoordinateActuator jarg1_);
+  public final static native void CoordinateActuator_updateFromXMLNode__SWIG_0(long jarg1, CoordinateActuator jarg1_, long jarg2, int jarg3);
+  public final static native void CoordinateActuator_updateFromXMLNode__SWIG_1(long jarg1, CoordinateActuator jarg1_, long jarg2);
   public final static native boolean CoordinateActuator_isKindOf(String jarg1);
   public final static native boolean CoordinateActuator_isA(long jarg1, CoordinateActuator jarg1_, String jarg2);
   public final static native long CoordinateActuator_safeDownCast(long jarg1, OpenSimObject jarg1_);
@@ -3867,7 +3861,6 @@ public class opensimModelJNI {
   public final static native boolean Delp1990Muscle_setTendonForceLengthCurve(long jarg1, Delp1990Muscle jarg1_, long jarg2, Function jarg2_);
   public final static native long Delp1990Muscle_getForceVelocityCurve(long jarg1, Delp1990Muscle jarg1_);
   public final static native boolean Delp1990Muscle_setForceVelocityCurve(long jarg1, Delp1990Muscle jarg1_, long jarg2, Function jarg2_);
-  public final static native int Delp1990Muscle_getStateVariableYIndex(long jarg1, Delp1990Muscle jarg1_, int jarg2);
   public final static native boolean Delp1990Muscle_isKindOf(String jarg1);
   public final static native boolean Delp1990Muscle_isA(long jarg1, Delp1990Muscle jarg1_, String jarg2);
   public final static native long Delp1990Muscle_safeDownCast(long jarg1, OpenSimObject jarg1_);
@@ -4235,7 +4228,8 @@ public class opensimModelJNI {
   public final static native long new_InverseDynamicsTool__SWIG_3(long jarg1, InverseDynamicsTool jarg1_);
   public final static native long InverseDynamicsTool_copy(long jarg1, InverseDynamicsTool jarg1_);
   public final static native void InverseDynamicsTool_registerTypes();
-  public final static native void InverseDynamicsTool_updateFromXMLNode(long jarg1, InverseDynamicsTool jarg1_);
+  public final static native void InverseDynamicsTool_updateFromXMLNode__SWIG_0(long jarg1, InverseDynamicsTool jarg1_, long jarg2, int jarg3);
+  public final static native void InverseDynamicsTool_updateFromXMLNode__SWIG_1(long jarg1, InverseDynamicsTool jarg1_, long jarg2);
   public final static native void InverseDynamicsTool_setCoordinateValues(long jarg1, InverseDynamicsTool jarg1_, long jarg2, Storage jarg2_);
   public final static native boolean InverseDynamicsTool_hasCoordinateValues(long jarg1, InverseDynamicsTool jarg1_);
   public final static native String InverseDynamicsTool_getOutputGenForceFileName(long jarg1, InverseDynamicsTool jarg1_);
@@ -4251,7 +4245,8 @@ public class opensimModelJNI {
   public final static native long new_ForwardTool__SWIG_3(String jarg1) throws java.io.IOException;
   public final static native long new_ForwardTool__SWIG_4(long jarg1, ForwardTool jarg1_);
   public final static native long ForwardTool_copy(long jarg1, ForwardTool jarg1_);
-  public final static native void ForwardTool_updateFromXMLNode(long jarg1, ForwardTool jarg1_);
+  public final static native void ForwardTool_updateFromXMLNode__SWIG_0(long jarg1, ForwardTool jarg1_, long jarg2, int jarg3);
+  public final static native void ForwardTool_updateFromXMLNode__SWIG_1(long jarg1, ForwardTool jarg1_, long jarg2);
   public final static native void ForwardTool_setManager(long jarg1, ForwardTool jarg1_, long jarg2, Manager jarg2_);
   public final static native long ForwardTool_getManager(long jarg1, ForwardTool jarg1_);
   public final static native String ForwardTool_getStatesFileName(long jarg1, ForwardTool jarg1_);
@@ -4322,7 +4317,8 @@ public class opensimModelJNI {
   public final static native boolean RRATool_run(long jarg1, RRATool jarg1_) throws java.io.IOException;
   public final static native long RRATool_getForceStorage(long jarg1, RRATool jarg1_);
   public final static native void RRATool_setOriginalForceSet(long jarg1, RRATool jarg1_, long jarg2, ForceSet jarg2_);
-  public final static native void RRATool_updateFromXMLNode(long jarg1, RRATool jarg1_);
+  public final static native void RRATool_updateFromXMLNode__SWIG_0(long jarg1, RRATool jarg1_, long jarg2, int jarg3);
+  public final static native void RRATool_updateFromXMLNode__SWIG_1(long jarg1, RRATool jarg1_, long jarg2);
   public final static native void delete_AnalyzeTool(long jarg1);
   public final static native long new_AnalyzeTool__SWIG_0();
   public final static native long new_AnalyzeTool__SWIG_1(String jarg1, boolean jarg2) throws java.io.IOException;
@@ -4330,6 +4326,8 @@ public class opensimModelJNI {
   public final static native long new_AnalyzeTool__SWIG_3(long jarg1, AnalyzeTool jarg1_);
   public final static native long new_AnalyzeTool__SWIG_4(long jarg1, Model jarg1_);
   public final static native long AnalyzeTool_copy(long jarg1, AnalyzeTool jarg1_);
+  public final static native void AnalyzeTool_updateFromXMLNode__SWIG_0(long jarg1, AnalyzeTool jarg1_, long jarg2, int jarg3);
+  public final static native void AnalyzeTool_updateFromXMLNode__SWIG_1(long jarg1, AnalyzeTool jarg1_, long jarg2);
   public final static native void AnalyzeTool_setStatesStorage(long jarg1, AnalyzeTool jarg1_, long jarg2, Storage jarg2_);
   public final static native long AnalyzeTool_createStatesStorageFromCoordinatesAndSpeeds(long jarg1, Model jarg1_, long jarg2, Storage jarg2_, long jarg3, Storage jarg3_);
   public final static native long AnalyzeTool_getStatesStorage(long jarg1, AnalyzeTool jarg1_);
@@ -4354,7 +4352,8 @@ public class opensimModelJNI {
   public final static native long new_InverseKinematicsTool__SWIG_3(long jarg1, InverseKinematicsTool jarg1_);
   public final static native long InverseKinematicsTool_copy(long jarg1, InverseKinematicsTool jarg1_);
   public final static native void InverseKinematicsTool_registerTypes();
-  public final static native void InverseKinematicsTool_updateFromXMLNode(long jarg1, InverseKinematicsTool jarg1_);
+  public final static native void InverseKinematicsTool_updateFromXMLNode__SWIG_0(long jarg1, InverseKinematicsTool jarg1_, long jarg2, int jarg3);
+  public final static native void InverseKinematicsTool_updateFromXMLNode__SWIG_1(long jarg1, InverseKinematicsTool jarg1_, long jarg2);
   public final static native void InverseKinematicsTool_setModel(long jarg1, InverseKinematicsTool jarg1_, long jarg2, Model jarg2_);
   public final static native void InverseKinematicsTool_setStartTime(long jarg1, InverseKinematicsTool jarg1_, double jarg2);
   public final static native double InverseKinematicsTool_getStartTime(long jarg1, InverseKinematicsTool jarg1_);
@@ -4625,9 +4624,6 @@ public class opensimModelJNI {
   public static long SwigDirector_AnalysisWrapper_copy__SWIG_1(AnalysisWrapper self) {
     return OpenSimObject.getCPtr(self.copy());
   }
-  public static long SwigDirector_AnalysisWrapper_copy__SWIG_1(AnalysisWrapper self, long aNode) {
-    return OpenSimObject.getCPtr(self.copy((aNode == 0) ? null : new SWIGTYPE_p_DOMElement(aNode, false)));
-  }
   public static long SwigDirector_AnalysisWrapper_getDisplayer(AnalysisWrapper self) {
     return VisibleObject.getCPtr(self.getDisplayer());
   }
@@ -4640,29 +4636,17 @@ public class opensimModelJNI {
   public static boolean SwigDirector_AnalysisWrapper_isValidDefaultType(AnalysisWrapper self, long aObject) {
     return self.isValidDefaultType((aObject == 0) ? null : new OpenSimObject(aObject, false));
   }
-  public static void SwigDirector_AnalysisWrapper_updateFromXMLNode(AnalysisWrapper self) {
-    self.updateFromXMLNode();
+  public static void SwigDirector_AnalysisWrapper_updateFromXMLNode(AnalysisWrapper self, long aNode, int versionNumber) {
+    self.updateFromXMLNode(new SWIGTYPE_p_SimTK__Xml__Element(aNode, false), versionNumber);
   }
   public static void SwigDirector_AnalysisWrapper_updateDefaultObjectsFromXMLNode(AnalysisWrapper self) {
     self.updateDefaultObjectsFromXMLNode();
   }
-  public static void SwigDirector_AnalysisWrapper_updateXMLNode__SWIG_0(AnalysisWrapper self, long aParent, int aNodeIndex) {
-    self.updateXMLNode((aParent == 0) ? null : new SWIGTYPE_p_DOMElement(aParent, false), aNodeIndex);
-  }
-  public static void SwigDirector_AnalysisWrapper_updateXMLNode__SWIG_1(AnalysisWrapper self, long aParent) {
-    self.updateXMLNode((aParent == 0) ? null : new SWIGTYPE_p_DOMElement(aParent, false));
+  public static void SwigDirector_AnalysisWrapper_updateXMLNode(AnalysisWrapper self, long aParent) {
+    self.updateXMLNode(new SWIGTYPE_p_SimTK__Xml__Element(aParent, false));
   }
   public static void SwigDirector_AnalysisWrapper_updateDefaultObjectsXMLNode(AnalysisWrapper self, long aParent) {
-    self.updateDefaultObjectsXMLNode((aParent == 0) ? null : new SWIGTYPE_p_DOMElement(aParent, false));
-  }
-  public static void SwigDirector_AnalysisWrapper_generateXMLNode__SWIG_0(AnalysisWrapper self, long aParent, int aNodeIndex) {
-    self.generateXMLNode((aParent == 0) ? null : new SWIGTYPE_p_DOMElement(aParent, false), aNodeIndex);
-  }
-  public static void SwigDirector_AnalysisWrapper_generateXMLNode__SWIG_1(AnalysisWrapper self, long aParent) {
-    self.generateXMLNode((aParent == 0) ? null : new SWIGTYPE_p_DOMElement(aParent, false));
-  }
-  public static void SwigDirector_AnalysisWrapper_update(AnalysisWrapper self, long aObject, long aEvent) {
-    self.update(new OpenSimObject(aObject, false), new SWIGTYPE_p_OpenSim__Event(aEvent, false));
+    self.updateDefaultObjectsXMLNode(new SWIGTYPE_p_SimTK__Xml__Element(aParent, false));
   }
   public static boolean SwigDirector_AnalysisWrapper_isA(AnalysisWrapper self, String type) {
     return self.isA(type);

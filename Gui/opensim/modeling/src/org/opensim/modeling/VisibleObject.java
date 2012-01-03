@@ -188,8 +188,12 @@ public class VisibleObject extends OpenSimObject {
     opensimModelJNI.VisibleObject_setupProperties(swigCPtr, this);
   }
 
-  public void updateFromXMLNode() {
-    opensimModelJNI.VisibleObject_updateFromXMLNode(swigCPtr, this);
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
+    opensimModelJNI.VisibleObject_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+  }
+
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
+    opensimModelJNI.VisibleObject_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
 }

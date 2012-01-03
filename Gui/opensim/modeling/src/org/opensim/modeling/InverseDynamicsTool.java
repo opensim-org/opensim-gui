@@ -60,8 +60,12 @@ public class InverseDynamicsTool extends DynamicsTool {
     opensimModelJNI.InverseDynamicsTool_registerTypes();
   }
 
-  public void updateFromXMLNode() {
-    opensimModelJNI.InverseDynamicsTool_updateFromXMLNode(swigCPtr, this);
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
+    opensimModelJNI.InverseDynamicsTool_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+  }
+
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
+    opensimModelJNI.InverseDynamicsTool_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
   public void setCoordinateValues(Storage aStorage) {

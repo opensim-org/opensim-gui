@@ -64,8 +64,12 @@ public class Model extends ModelComponent {
     this(opensimModelJNI.new_Model__SWIG_2(Model.getCPtr(aModel), aModel), true);
   }
 
-  public void updateFromXMLNode() {
-    opensimModelJNI.Model_updateFromXMLNode(swigCPtr, this);
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
+    opensimModelJNI.Model_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+  }
+
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
+    opensimModelJNI.Model_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
   public OpenSimObject copy() {
@@ -178,6 +182,10 @@ public class Model extends ModelComponent {
     return opensimModelJNI.Model_getNumStateVariables(swigCPtr, this);
   }
 
+  public void addComponent(ModelComponent aComponent) {
+    opensimModelJNI.Model_addComponent(swigCPtr, this, ModelComponent.getCPtr(aComponent), aComponent);
+  }
+
   public void addBody(Body aBody) {
     opensimModelJNI.Model_addBody(swigCPtr, this, Body.getCPtr(aBody), aBody);
   }
@@ -192,10 +200,6 @@ public class Model extends ModelComponent {
 
   public void addContactGeometry(ContactGeometry aContactGeometry) {
     opensimModelJNI.Model_addContactGeometry(swigCPtr, this, ContactGeometry.getCPtr(aContactGeometry), aContactGeometry);
-  }
-
-  public void addModelComponent(ModelComponent aComponent) {
-    opensimModelJNI.Model_addModelComponent(swigCPtr, this, ModelComponent.getCPtr(aComponent), aComponent);
   }
 
   public String getInputFileName() {
@@ -244,14 +248,6 @@ public class Model extends ModelComponent {
 
   public boolean setGravity(SWIGTYPE_p_SimTK__Vec3 aGrav) {
     return opensimModelJNI.Model_setGravity(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(aGrav));
-  }
-
-  public int getNumStates(boolean includeSimTKStates) {
-    return opensimModelJNI.Model_getNumStates__SWIG_0(swigCPtr, this, includeSimTKStates);
-  }
-
-  public int getNumStates() {
-    return opensimModelJNI.Model_getNumStates__SWIG_1(swigCPtr, this);
   }
 
   public int getNumMarkers() {
@@ -370,12 +366,12 @@ public class Model extends ModelComponent {
     return new SimbodyEngine(opensimModelJNI.Model_updSimbodyEngine(swigCPtr, this), false);
   }
 
-  public void getStateNames(ArrayStr rStateNames, boolean includeInternalStates) {
-    opensimModelJNI.Model_getStateNames__SWIG_0(swigCPtr, this, ArrayStr.getCPtr(rStateNames), rStateNames, includeInternalStates);
+  public ArrayStr getStateVariableNames() {
+    return new ArrayStr(opensimModelJNI.Model_getStateVariableNames(swigCPtr, this), true);
   }
 
-  public void getStateNames(ArrayStr rStateNames) {
-    opensimModelJNI.Model_getStateNames__SWIG_1(swigCPtr, this, ArrayStr.getCPtr(rStateNames), rStateNames);
+  public double getStateVariable(SWIGTYPE_p_SimTK__State state, String name) {
+    return opensimModelJNI.Model_getStateVariable(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state), name);
   }
 
   public void getStateValues(SWIGTYPE_p_SimTK__State s, ArrayDouble rStateValues) {

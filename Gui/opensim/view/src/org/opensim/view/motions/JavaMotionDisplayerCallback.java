@@ -93,11 +93,10 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
     private void createResultStorage() {
         storage = new Storage();
         getStorage().setName("Results");
-        stateLabels = new ArrayStr();
-        getModelForDisplay().getStateNames(stateLabels, true);
+        stateLabels = getModelForDisplay().getStateVariableNames();
         stateLabels.insert(0, "time");
         getStorage().setColumnLabels(stateLabels);
-        numStates = getModelForDisplay().getNumStates(true);
+        numStates = getModelForDisplay().getNumStateVariables();
         statesBuffer = new double[numStates];
         ownsStorage=true;
     }

@@ -268,8 +268,8 @@ public class AbstractTool extends OpenSimObject {
     return opensimModelJNI.AbstractTool_createExternalLoads__SWIG_1(swigCPtr, this, aExternalLoadsFileName, Model.getCPtr(aModel), aModel);
   }
 
-  public void updateFromXMLNode() {
-    opensimModelJNI.AbstractTool_updateFromXMLNode(swigCPtr, this);
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
+    opensimModelJNI.AbstractTool_updateFromXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
   }
 
   public void loadQStorage(String statesFileName, Storage rQStore) {

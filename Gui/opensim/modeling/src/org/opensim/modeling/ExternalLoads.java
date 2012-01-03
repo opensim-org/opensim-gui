@@ -64,8 +64,12 @@ public class ExternalLoads extends ModelComponentSetExternalForces {
     opensimModelJNI.ExternalLoads_copyData(swigCPtr, this, ExternalLoads.getCPtr(otherExternalLoads), otherExternalLoads);
   }
 
-  public void updateFromXMLNode() {
-    opensimModelJNI.ExternalLoads_updateFromXMLNode(swigCPtr, this);
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
+    opensimModelJNI.ExternalLoads_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+  }
+
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
+    opensimModelJNI.ExternalLoads_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
   public void setup(Model aModel) {
