@@ -27,8 +27,6 @@ package org.opensim.view;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
 import javax.swing.SwingUtilities;
 import org.netbeans.api.progress.ProgressHandle;
 import org.netbeans.api.progress.ProgressHandleFactory;
@@ -42,6 +40,7 @@ import org.opensim.logger.OpenSimLogger;
 import org.opensim.modeling.Model;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
+import org.opensim.view.actions.MRUFilesOptions;
 import org.opensim.view.base.ExecOpenSimProcess;
 import org.opensim.view.pub.OpenSimDB;
 
@@ -139,6 +138,8 @@ public class FileOpenOsimModelAction extends CallableSystemAction {
      * @returns true on success else failure
      */
       public boolean loadModel(final String fileName) throws IOException {
+         MRUFilesOptions opts = MRUFilesOptions.getInstance();
+         opts.addFile(new File(fileName).getAbsolutePath());
          return loadModel(fileName, false);
          
      }

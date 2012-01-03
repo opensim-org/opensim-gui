@@ -319,7 +319,7 @@
             <file name="org-opensim-view-OpenOsimModel.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-FileOpenOsimModelAction.instance"/>
                 <attr name="position" intvalue="1300"/>
-            </file>
+            </file> 
             <file name="org-opensim-view-motions.FileLoadMotionAction.instance" url="org-opensim-view-motions.FileLoadMotionAction.instance">
                 <attr name="position" intvalue="1350"/>
             </file>
@@ -504,7 +504,7 @@
                 <attr name="position" intvalue="600"/>
             </file>
             <file name="org-netbeans-modules-autoupdate-catalog-ModuleCatalogAction">
-                <attr name="position" intvalue="2"/>
+                <attr name="position" intvalue="1"/>
             </file>
             <file name="org-netbeans-modules-autoupdate-ui-actions-PluginManagerAction">
                 <attr name="position" intvalue="3"/>
@@ -662,21 +662,37 @@
         </folder>
     </folder>
     <folder name="Toolbars">
-        <file name="Build_hidden"/>
-        <file name="Clipboard_hidden"/>
-        <file name="Debug_hidden"/>
-        <folder name="Edit">
-            <attr name="org-openide-actions-FindAction.instance/org-openide-actions-CutAction.instance" boolvalue="true"/>
+        <file name="Build_hidden">
+            <attr name="position" intvalue="300"/>
+        </file>
+        <file name="Clipboard_hidden">
             <attr name="position" intvalue="400"/>
-            <file name="org-openide-actions-CopyAction.instance_hidden"/>
-            <file name="org-openide-actions-CutAction.instance_hidden"/>
-            <file name="org-openide-actions-FindAction.instance_hidden"/>
-            <file name="org-openide-actions-PasteAction.instance_hidden"/>
-            <file name="org-opensim-view-motions-ShowMotionSliderAction.instance" url="org-opensim-view-motions-ShowMotionSliderAction.instance"/>
+        </file>
+        <file name="Debug_hidden">
+            <attr name="position" intvalue="500"/>
+        </file>
+        <folder name="Edit">
+            <attr name="position" intvalue="200"/>
+            <file name="org-openide-actions-CopyAction.instance_hidden">
+                <attr name="position" intvalue="100"/>
+            </file>
+            <file name="org-openide-actions-CutAction.instance_hidden">
+                <attr name="position" intvalue="200"/>
+            </file>
+            <file name="org-openide-actions-FindAction.instance_hidden">
+                <attr name="position" intvalue="300"/>
+            </file>
+            <file name="org-openide-actions-PasteAction.instance_hidden">
+                <attr name="position" intvalue="500"/>
+            </file>
+            <file name="org-opensim-view-motions-ShowMotionSliderAction.instance" url="org-opensim-view-motions-ShowMotionSliderAction.instance">
+                <attr name="position" intvalue="1400"/>
+            </file>
         </folder>
         <file name="File_hidden"/>
         <file name="Memory_hidden"/>
         <file name="Standard.xml_hidden"/>
+        <file name="UndoRedo_hidden"/>
     </folder>
     <folder name="Windows2">
         <folder name="Components">
