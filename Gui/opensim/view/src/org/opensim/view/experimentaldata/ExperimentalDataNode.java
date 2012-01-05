@@ -90,17 +90,17 @@ public class ExperimentalDataNode extends OpenSimNode{
             try {
                 nodeActions = new Action[] {
                            (ExperimentalObjectDisplayShowAction) ExperimentalObjectDisplayShowAction.findObject(
-                           (Class)Class.forName("org.opensim.view.experimentaldata.ExperimentalObjectDisplayShowAction"), 
+                           (Class<org.opensim.view.experimentaldata.ExperimentalObjectDisplayShowAction>)Class.forName("org.opensim.view.experimentaldata.ExperimentalObjectDisplayShowAction"), 
                                    true),
                            (ExperimentalObjectDisplayShowOnlyAction) ExperimentalObjectDisplayShowOnlyAction.findObject(
-                           (Class)Class.forName("org.opensim.view.experimentaldata.ExperimentalObjectDisplayShowOnlyAction"), 
+                           (Class<org.opensim.view.experimentaldata.ExperimentalObjectDisplayShowOnlyAction>)Class.forName("org.opensim.view.experimentaldata.ExperimentalObjectDisplayShowOnlyAction"), 
                                    true),
                            (ExperimentalObjectDisplayHideAction) ExperimentalObjectDisplayHideAction.findObject(
-                           (Class)Class.forName("org.opensim.view.experimentaldata.ExperimentalObjectDisplayHideAction"), 
+                           (Class<org.opensim.view.experimentaldata.ExperimentalObjectDisplayHideAction>)Class.forName("org.opensim.view.experimentaldata.ExperimentalObjectDisplayHideAction"), 
                                    true),
                             null,
                             (ExperimentalObjectDisplayShowTrailAction) ExperimentalObjectDisplayShowTrailAction.findObject(
-                           (Class)Class.forName("org.opensim.view.experimentaldata.ExperimentalObjectDisplayShowTrailAction"), 
+                           (Class<org.opensim.view.experimentaldata.ExperimentalObjectDisplayShowTrailAction>)Class.forName("org.opensim.view.experimentaldata.ExperimentalObjectDisplayShowTrailAction"), 
                                    true),
                 };
                 

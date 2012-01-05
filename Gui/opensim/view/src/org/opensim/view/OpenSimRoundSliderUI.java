@@ -853,6 +853,7 @@ public class OpenSimRoundSliderUI extends SliderUI
         return label;
     }
 
+    @Override
     public void paint( Graphics g, JComponent c )   {
         recalculateIfInsetsChanged();
 	recalculateIfOrientationChanged();
@@ -1248,17 +1249,17 @@ public class OpenSimRoundSliderUI extends SliderUI
         // Property Change Handler
         public void propertyChange(PropertyChangeEvent e) {
             String propertyName = e.getPropertyName();
-            if (propertyName == "orientation" ||
-                    propertyName == "inverted" ||
-                    propertyName == "labelTable" ||
-                    propertyName == "majorTickSpacing" ||
-                    propertyName == "minorTickSpacing" ||
-                    propertyName == "paintTicks" ||
-                    propertyName == "paintTrack" ||
-                    propertyName == "paintLabels") {
+            if ("orientation".equals(propertyName) ||
+                    "inverted".equals(propertyName) ||
+                    "labelTable".equals(propertyName) ||
+                    "majorTickSpacing".equals(propertyName) ||
+                    "minorTickSpacing".equals(propertyName) ||
+                    "paintTicks".equals(propertyName) ||
+                    "paintTrack".equals(propertyName) ||
+                    "paintLabels".equals(propertyName)) {
                 calculateGeometry();
                 slider.repaint();
-            } else if (propertyName == "componentOrientation") {
+            } else if ("componentOrientation".equals(propertyName)) {
                 calculateGeometry();
                 slider.repaint();
                 InputMap km = getInputMap(JComponent.WHEN_FOCUSED, slider);
@@ -1307,6 +1308,7 @@ public class OpenSimRoundSliderUI extends SliderUI
         protected transient int offsetX, offsetY;
         protected transient int currentMouseX, currentMouseY;
 
+        @Override
         public void mouseReleased(MouseEvent e) {
             if (!slider.isEnabled()) {
                 return;
@@ -1340,6 +1342,7 @@ public class OpenSimRoundSliderUI extends SliderUI
         * thumb then page up if the mouse is in the upper half
         * of the track.
         */
+        @Override
         public void mousePressed(MouseEvent e) {
             if (!slider.isEnabled()) {
                 return;
@@ -1471,6 +1474,7 @@ public class OpenSimRoundSliderUI extends SliderUI
         * Set the models value to the position of the top/left
         * of the thumb relative to the origin of the track.
         */
+        @Override
         public void mouseDragged(MouseEvent e) {
             int thumbMiddle = 0;
 
@@ -1535,6 +1539,7 @@ public class OpenSimRoundSliderUI extends SliderUI
 //            }
         }
 
+        @Override
         public void mouseMoved(MouseEvent e) { }
     }
 
@@ -1834,6 +1839,7 @@ public class OpenSimRoundSliderUI extends SliderUI
         put(action.getValue(Action.NAME), action);
     }
 
+        @Override
     public void put(Object key, Action action) {
         loadIfNecessary();
         super.put(key, action);
