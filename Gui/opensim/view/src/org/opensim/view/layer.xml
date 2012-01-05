@@ -20,7 +20,7 @@
             <file name="org-opensim-view-ViewEditAction.instance"/>
             <file name="org-opensim-view-ViewReplicateAction.instance"/>
             <file name="org-opensim-view-SaveAction.instance"/>
-                    <file name="org-opensim-view-FileSaveModelAction.instance"/>
+            <file name="org-opensim-view-FileSaveModelAction.instance"/>
             <file name="org-opensim-view-actions-EditPreferencesAction.instance"/>
             <file name="org-opensim-view-actions-FileCloseAction.instance"/>
             <file name="org-opensim-view-actions-ViewAddNewAction.instance"/>
@@ -41,6 +41,7 @@
             <file name="org-opensim-view-motions-ShowMotionSliderAction.instance"/>
             <file name="org-opensim-view-motions-FileLoadDataAction.instance"/>
             <file name="org-opensim-view-nodes-ToggleEnabledStateAction.instance"/>
+            <file name="org-opensim-view-actions-FileSaveAllAction.instance"/>
         </folder>
         <folder name="Help">
             <file name="org-opensim-view-HelpAboutAction.instance"/>
@@ -294,10 +295,10 @@
                 <attr name="position" intvalue="200"/>
             </file>
             <file name="org-netbeans-modules-editor-ExportHtmlAction.shadow_hidden">
-                <attr name="position" intvalue="500"/>
+                <attr name="position" intvalue="700"/>
             </file>
             <file name="org-netbeans-modules-openfile-OpenFileAction.shadow_hidden">
-                <attr name="position" intvalue="600"/>
+                <attr name="position" intvalue="900"/>
             </file>
             <file name="org-netbeans-modules-openfile-RecentFileAction.shadow_hidden">
                 <attr name="position" intvalue="700"/>
@@ -308,10 +309,17 @@
             <file name="org-netbeans-modules-project-ui-CustomizeProject.shadow_hidden">
                 <attr name="position" intvalue="900"/>
             </file>
-            <file name="org-netbeans-modules-project-ui-NewProject.shadow_hidden"/>
-            <file name="org-netbeans-modules-project-ui-OpenProject.shadow_hidden"/>
-            <file name="org-netbeans-modules-project-ui-RecentProjects.shadow_hidden"/>
-            <file name="org-netbeans-modules-project-ui-groups-GroupsMenu.shadow_hidden"/>
+            <file name="org-netbeans-modules-project-ui-NewProject.shadow_hidden">
+                <attr name="position" intvalue="1000"/>
+            </file>
+            <file name="org-netbeans-modules-project-ui-OpenProject.shadow_hidden">
+                <attr name="position" intvalue="1100"/>
+            </file>
+            <file name="org-netbeans-modules-project-ui-RecentProjects.shadow_hidden">
+                <attr name="position" intvalue="1200"/>
+            </file>
+            <file name="org-netbeans-modules-project-ui-groups-GroupsMenu.shadow_hidden">
+                </file>
             <file name="org-opensim-view-FileSaveAsModelAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-FileSaveAsModelAction.instance"/>
                 <attr name="position" intvalue="1700"/>
@@ -320,6 +328,10 @@
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-FileOpenOsimModelAction.instance"/>
                 <attr name="position" intvalue="1300"/>
             </file> 
+            <file name="org-opensim-view-actions-FileSaveAllAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-actions-FileSaveAllAction.instance"/>
+                <attr name="position" intvalue="1710"/>
+            </file>
             <file name="org-opensim-view-motions.FileLoadMotionAction.instance" url="org-opensim-view-motions.FileLoadMotionAction.instance">
                 <attr name="position" intvalue="1350"/>
             </file>
@@ -354,16 +366,16 @@
                 <attr name="position" intvalue="300"/>
             </file>
             <file name="Separator3.instance_hidden">
-                <attr name="position" intvalue="400"/>
+                <attr name="position" intvalue="500"/>
             </file>
             <file name="Separator4.instance_hidden">
-                <attr name="position" intvalue="300"/>
-            </file>
-            <file name="org-netbeans-modules-print-action-PageSetupAction.shadow_hidden">
                 <attr name="position" intvalue="400"/>
             </file>
+            <file name="org-netbeans-modules-print-action-PageSetupAction.shadow_hidden">
+                <attr name="position" intvalue="600"/>
+            </file>
             <file name="org-netbeans-modules-print-action-PrintAction.shadow_hidden">
-                <attr name="position" intvalue="500"/>
+                <attr name="position" intvalue="800"/>
             </file>
             <file name="org-openide-actions-PageSetupAction.instance_hidden">
                 <attr name="position" intvalue="600"/>
