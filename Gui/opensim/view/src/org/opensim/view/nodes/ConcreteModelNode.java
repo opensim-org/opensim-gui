@@ -60,6 +60,8 @@ public class ConcreteModelNode extends OpenSimObjectNode {
                         (Class)Class.forName("org.opensim.view.nodes.ModelInfoAction"), true),
                 (ModelCloseSelectedAction) ModelCloseSelectedAction.findObject(
                         (Class)Class.forName("org.opensim.view.nodes.ModelCloseSelectedAction"), true),
+		(ModelSaveSelectedAction) ModelSaveSelectedAction.findObject(
+			(Class)Class.forName("org.opensim.view.nodes.ModelSaveSelectedAction"), true)
                 
             };
       } catch(ClassNotFoundException e){
