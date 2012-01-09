@@ -164,6 +164,12 @@ public class OpenSimBaseCanvas extends vtkPanel
       } else if (KeyEvent.VK_DOWN == keyCode) {
          panCamera(0.0, 5.0);
          repaint();
+      }else if (KeyEvent.VK_J == keyCode) {
+         rotateCamera(5.0);
+         repaint();
+      }else if (KeyEvent.VK_K == keyCode) {
+         rotateCamera(-5.0);
+         repaint();
       }
       fireStateChanged();
       super.keyPressed(e);
@@ -344,5 +350,14 @@ public class OpenSimBaseCanvas extends vtkPanel
       }
    }
    // -----------------------------------------------------------------------
+
+    private void rotateCamera(double d) {
+       cam = ren.GetActiveCamera();
+       cam.Azimuth(d);
+       vtkLightCollection lights = GetRenderer().GetLights();
+      lights.RemoveAllItems();
+      GetRenderer().CreateLight();
+      repaint();
+    }
 
 }
