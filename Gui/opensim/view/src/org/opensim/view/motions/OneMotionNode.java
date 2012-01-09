@@ -167,4 +167,14 @@ public class OneMotionNode extends OpenSimObjectNode{
     public void setExperimental(boolean experimental) {
         this.experimental = experimental;
     }
+   public Action getPreferredAction() {
+      Action act=null;
+      try {
+         act =(MotionsSetCurrentAction) MotionsSetCurrentAction.findObject(
+                    (Class)Class.forName("org.opensim.view.motions.MotionsSetCurrentAction"), true);
+      } catch(ClassNotFoundException e){
+         
+ }
+      return act;
+   }
 }
