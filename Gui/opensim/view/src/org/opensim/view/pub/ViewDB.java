@@ -74,6 +74,7 @@ import vtk.vtkCamera;
 import vtk.vtkCaptionActor2D;
 import vtk.vtkFollower;
 import vtk.vtkMatrix4x4;
+import vtk.vtkOutlineFilter;
 import vtk.vtkPolyDataMapper;
 import vtk.vtkProp3D;
 import vtk.vtkProp3DCollection;
@@ -81,6 +82,7 @@ import vtk.vtkProperty;
 import vtk.vtkTextActor;
 import vtk.vtkTextProperty;
 import vtk.vtkTransform;
+import vtk.vtkTransformPolyDataFilter;
 import vtk.vtkVectorText;
 
 /**
@@ -280,20 +282,23 @@ public final class ViewDB extends Observable implements Observer {
                newModelVisual.getModelDisplayAssembly().SetUserMatrix(m);
                
                sceneAssembly.AddPart(newModelVisual.getModelDisplayAssembly());
-               // Check if this refits scene into window
+                // add to list of models
+               getModelVisuals().add(newModelVisual); //Too late??
+              // Check if this refits scene into window
                // int rc = newModelVisual.getModelDisplayAssembly().GetReferenceCount();
                if(OpenSimDB.getInstance().getNumModels()==1) { 
                   Iterator<ModelWindowVTKTopComponent> windowIter = openWindows.iterator();
+                  double[] bnds = new double[6];
                   while(windowIter.hasNext()){
+                     bnds = computeSceneBounds();
+                     //createBBox();
                      ModelWindowVTKTopComponent nextWindow = windowIter.next();
                      // This line may need to be enclosed in a Lock /UnLock pair per vtkPanel
                      lockDrawingSurfaces(true);
-                     nextWindow.getCanvas().GetRenderer().ResetCamera(sceneAssembly.GetBounds());
+                     nextWindow.getCanvas().GetRenderer().ResetCamera(bnds);
                      lockDrawingSurfaces(false);
                   }
                }
-               // add to list of models
-               getModelVisuals().add(newModelVisual); //Too late??
                //rc = newModelVisual.getModelDisplayAssembly().GetReferenceCount();
                repaintAll();
                //rc = newModelVisual.getModelDisplayAssembly().GetReferenceCount();
@@ -960,13 +965,13 @@ public final class ViewDB extends Observable implements Observer {
       vtkMatrix4x4 m = new vtkMatrix4x4();
       Iterator<SingleModelVisuals> iter = modelVisuals.iterator();
       // modelBounds are -1 to 1 and updated only after drawing
-      double modelBounds[] = newModelVisual.getModelDisplayAssembly().GetBounds();
+      double modelBounds[] = newModelVisual.getBounds();
       // If at least one model exists compute bounding box for the scene
       // and place the new model outside the box along z-axis.
       // This could be made into an option where models are placed along X, Y or Z
       // Also possible to define a default offset in any direction and reuse it.
       if (iter.hasNext()){
-         double bounds[]= sceneAssembly.GetBounds();
+         double bounds[]= computeSceneBounds();
          String defaultOffsetDirection = NbBundle.getMessage(ViewDB.class,"CTL_DisplayOffsetDir");
          defaultOffsetDirection=Preferences.userNodeForPackage(TheApp.class).get("DisplayOffsetDir", defaultOffsetDirection);
          if (defaultOffsetDirection == null)
@@ -1367,6 +1372,16 @@ public final class ViewDB extends Observable implements Observer {
       return null;
    }
 
+    private double[] computeSceneBounds() {
+     Iterator<SingleModelVisuals> iter = modelVisuals.iterator();
+     double[] bounds = new double[]{.1, -.1, .1, -.1, .1, -.1};
+     while(iter.hasNext()){
+         SingleModelVisuals nextModel = iter.next();
+         bounds = boundsUnion(bounds, nextModel.getBoundsBodiesOnly());
+      }
+      return bounds;
+    }
+
    /**
     * Utility: apply a function to given actor, or to all actors in assembly.
     */
@@ -1744,4 +1759,5 @@ public final class ViewDB extends Observable implements Observer {
         graphicsAvailable = aGraphicsAvailable;
         
     }
+
 }

@@ -44,10 +44,13 @@ import org.opensim.view.pub.GeometryFileLocator;
 import org.opensim.view.pub.ViewDB;
 import vtk.FrameActor;
 import vtk.vtkActor;
+import vtk.vtkAppendPolyData;
 import vtk.vtkAssembly;
 import vtk.vtkBMPReader;
 import vtk.vtkImageReader2;
 import vtk.vtkJPEGReader;
+import vtk.vtkMapper;
+import vtk.vtkOutlineFilter;
 import vtk.vtkPNGReader;
 import vtk.vtkPolyDataMapper;
 import vtk.vtkProp3D;
@@ -75,6 +78,11 @@ public class BodyDisplayer extends vtkAssembly
     private boolean showCOM = false;
     private vtkActor centerOfMassActor = new vtkActor();
     private vtkSphereSource comSource = new vtkSphereSource();
+    private double[] bodyBounds = new double[]{.1, -.1, .1, -.1, .1, -.1};
+    // Create bounding box for selection and size estimate
+    vtkOutlineFilter outlineFilter = new vtkOutlineFilter();
+    vtkActor outlineActor = new vtkActor();
+    vtkPolyDataMapper outlineMapper = new vtkPolyDataMapper();
 
     private double bFrameScale =1.2;
     private double bFrameRadius =0.005;
@@ -118,6 +126,10 @@ public class BodyDisplayer extends vtkAssembly
       bodyDisplayer.getScaleFactors(bodyScales);
       double[] bodyRotTrans = new double[6];
       bodyDisplayer.getRotationsAndTranslationsAsArray6(bodyRotTrans);
+      // Also optionally add outlineActor to this
+      outlineActor.SetMapper(outlineMapper);
+      outlineMapper.AddInputConnection(outlineFilter.GetOutputPort());
+      boolean hasGeometry=false;
       // For each bone in the current body.
       for (int k = 0; k < bodyDisplayer.getNumGeometryFiles(); ++k) {
           GeometrySet gSet = bodyDisplayer.getGeometrySet();
@@ -132,17 +144,40 @@ public class BodyDisplayer extends vtkAssembly
           boneActor.SetScale(currentScales);
           //setTransformFromArray6(bodyRotTrans, (vtkTransform) boneActor.GetUserTransform());
           if (boneActor!=null){
+            hasGeometry=true;
             AddPart(boneActor);
-            mapGeometryToVtkObjects.put(gPiece, boneActor);
+           mapGeometryToVtkObjects.put(gPiece, boneActor);
           }
       }
-      
+      if (hasGeometry){
+         vtkProp3DCollection parts = GetParts();
+         parts.InitTraversal();
+         vtkAppendPolyData append = new vtkAppendPolyData();
+         for (;;) {
+            vtkProp3D prop = parts.GetNextProp3D();
+            if (prop==null) break;
+            else {
+                vtkMapper mapper = ((vtkActor)prop).GetMapper();
+                append.AddInput(((vtkPolyDataMapper) mapper).GetInput());
+            }
+         }
+         append.Update();
+         outlineFilter.AddInput(append.GetOutput());
+      }
+
       if (bodyDisplayer.getShowAxes()){
           AddPart(getBodyAxes());
       }
       double[] dCom= new double[3];
       body.getCenterOfMass(dCom);
       comSource.SetCenter(dCom);
+  
+       if (hasGeometry){
+         double[] bnds = outlineActor.GetBounds();
+         //outlineActor.SetVisibility(0);
+         bodyBounds = ViewDB.boundsUnion(bnds, bodyBounds);
+         //AddPart(outlineActor);
+      }
       //comSource.SetEndPhi(90);
       //comSource.SetEndTheta(90);
       centerOfMassActor.GetProperty().SetLineStipplePattern(0xF0F0);
@@ -423,7 +458,8 @@ public class BodyDisplayer extends vtkAssembly
              mapVtkObjects2Objects.put(nextActor, body);
              if (nextActor instanceof vtkActor)
                  actors.add((vtkActor)nextActor);
-             if (nextActor instanceof FrameActor || nextActor == centerOfMassActor) continue;
+             if (nextActor instanceof FrameActor || nextActor == centerOfMassActor ||
+                     nextActor == outlineActor) continue;
              mapObject2VtkObjects.put(gSet.get(idx), nextActor);
              idx++;
         }
@@ -437,5 +473,12 @@ public class BodyDisplayer extends vtkAssembly
         if (showCOM) AddPart(centerOfMassActor);
         else RemovePart(centerOfMassActor);
         this.showCOM = showCOM;
+    }
+
+    /**
+     * @return the bodyBounds
+     */
+    public double[] getBodyBounds() {
+        return bodyBounds;
     }
 }

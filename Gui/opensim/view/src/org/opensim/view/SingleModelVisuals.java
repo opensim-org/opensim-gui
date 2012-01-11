@@ -72,6 +72,9 @@ import vtk.vtkTransform;
 import vtk.vtkTransformPolyDataFilter;
 import vtk.vtkArrowSource;
 import vtk.vtkLineSource;
+import vtk.vtkOutlineFilter;
+import vtk.vtkPlaneSource;
+import vtk.vtkPolyDataMapper;
 
 /**
  *
@@ -91,7 +94,7 @@ public class SingleModelVisuals {
     protected vtkAssembly modelDisplayAssembly;   // assembly representing the model
     protected vtkLinearTransform modelDisplayTransform; // extra transform to shift, rotate model
     private double opacity;
-    private double[] bounds = new double[6];
+    private double[] bounds = new double[]{-.1, .1, -.1, .1, -.1, .1};
     private boolean visible;
 
     private double[] inactiveMuscleColor = new double[]{0.0, 0.0, 1.0};
@@ -172,9 +175,15 @@ public class SingleModelVisuals {
             Body body = bodies.get(bodyNum);
 
             // Body actor
-            vtkAssembly bodyRep = new BodyDisplayer(modelAssembly, body,
+            BodyDisplayer bodyRep = new BodyDisplayer(modelAssembly, body,
                     mapObject2VtkObjects, mapVtkObjects2Objects);
-
+            vtkMatrix4x4 bXform = getBodyTransform(model, body);
+            double[] bodyBounds = bodyRep.getBodyBounds();
+            for(int c=0; c<3; c++){
+                bodyBounds[2*c] += bXform.GetElement(c, 3);
+                bodyBounds[2*c+1] += bXform.GetElement(c, 3);
+            }
+            bounds = ViewDB.boundsUnion(bounds, bodyBounds);
             // Bodies have things attached to them as handled by the
             // dependents mechanism. For each one of these a new vtkActor is created and attached 
             // to the same xform as the owner body.
@@ -281,32 +290,6 @@ public class SingleModelVisuals {
          markersRep.updateMarkerGeometry(markers.get(i));
    }
 
-/*
-   public void setMarkerLineVisible(Marker marker, boolean state) {
-      double[] origin = {0.0, 0.0, 0.0};
-      Boolean oldState = markerLinesVisible.get(marker);
-      if (state != oldState) {
-         markerLinesVisible.put(marker, state);
-         vtkLineSource markerLine = mapMarkers2Lines.get(marker);
-         if (state == false) {
-            markerLine.SetPoint1(origin);
-            markerLine.SetPoint2(origin);
-         } else {
-            double[] offset = new double[3];
-            double[] gOffset = new double[3];
-            double[] gOrigin = new double[3];
-            SimbodyEngine de = marker.getBody().getModel().getSimbodyEngine();
-            marker.getOffset(offset);
-            OpenSimContext context=OpenSimDB.getInstance().getContext(marker.getBody().getModel());
-            context.transformPosition(marker.getBody(), offset, gOffset);
-            context.transformPosition(marker.getBody(), origin, gOrigin);
-            markerLine.SetPoint1(gOffset);
-            markerLine.SetPoint2(gOrigin);
-         }
-         getMarkersRep().setModified();
-      }
-   }
-*/
    /**
     * Functions for dealing with actuator geometry
     */
@@ -515,10 +498,10 @@ public class SingleModelVisuals {
      * Compute bounding box for model as this can be useful for initial placement
      *  This is supposed to be a ballpark rather than an accurate estimate so that minor changes to
      * model do not cause overlap, but the bboox is not intended to be kept up-to-date
-     * unused and turned out to be very slow for some reason*/
+     * unused and turned out to be very slow for some reason
     private void computeModelBoundingbox() {
         modelDisplayAssembly.GetBounds(bounds);
-    }
+    }*/
 
     // NOTE: these functions are necessary in order to deal with the model offsets...
     // Not the most general solution (e.g. if the hierarchy changed and there was more than one user matrix
@@ -545,13 +528,13 @@ public class SingleModelVisuals {
     }
 
    public double[] getBoundsBodiesOnly() {
-      double[] bounds = null;
-      bodiesCollection.InitTraversal();
+      double[] bounds = getBounds();
+      /*bodiesCollection.InitTraversal();
       for(;;) {
          vtkProp3D prop = bodiesCollection.GetNextProp3D();
          if(prop==null) break;
          if(prop.GetVisibility()!=0) bounds = ViewDB.boundsUnion(bounds, prop.GetBounds());
-      }
+      }*/
       if (bounds!=null)
          transformModelToWorldBounds(bounds);
       return bounds;
@@ -838,6 +821,35 @@ public class SingleModelVisuals {
                 mapNoPathForces2Displayer.get(f).updateGeometry();
             }
         }
+    }
+
+    /**
+     * @return the bounds
+     */
+    public double[] getBounds() {
+        return bounds;
+    }
+   public void createBBox()
+    {
+      double[] bnds = getBounds();
+     System.out.println("createBBox"+bounds[0]
+              +" "+bounds[1]+" "+bounds[2]+" "+bounds[3]+" "+bounds[4]+" "+bounds[5]);
+     vtkPlaneSource plane = new vtkPlaneSource();
+      plane.SetResolution(50,50);
+
+      plane.SetPoint1(bnds[0], bnds[2], bnds[4]);
+      plane.SetPoint2(bnds[1], bnds[3], bnds[5]);
+      plane.SetOrigin((bnds[0]+bnds[1])/2., (bnds[2]+bnds[3])/2., (bnds[4]+bnds[5])/2.);
+    vtkOutlineFilter outTpd1 = new vtkOutlineFilter();
+      outTpd1.SetInput(plane.GetOutput());
+
+    vtkPolyDataMapper mapTpd1 = new vtkPolyDataMapper();
+      mapTpd1.SetInput(outTpd1.GetOutput());
+
+    vtkActor tpd1Actor = new vtkActor();
+      tpd1Actor.SetMapper(mapTpd1);
+      tpd1Actor.GetProperty().SetColor(1,0,0);
+      modelDisplayAssembly.AddPart(tpd1Actor);
     }
 }
 
