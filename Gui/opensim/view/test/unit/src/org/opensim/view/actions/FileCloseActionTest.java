@@ -37,9 +37,7 @@ public class FileCloseActionTest extends TestCase {
      */
     public void testCloseModel() {
         try {
-            System.out.println("closeModel");
-            
-            System.out.println("testLoadModel_Model()");
+             System.out.println("closeModel");
             Model aModel = new Model(TestEnvironment.getModelPath());
             System.out.println("model path="+TestEnvironment.getModelPath());
             //aModel= new Model(modelPath);

@@ -45,7 +45,7 @@ public class FileImportSIMMActionTest extends TestCase {
         
         FileImportSIMMAction instance = new FileImportSIMMAction();
         
-        instance.performAction();
+        //instance.importSIMMModel();
         
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -67,7 +67,7 @@ public class FileImportSIMMActionTest extends TestCase {
 
     /**
      * Test of getHelpCtx method, of class org.opensim.view.actions.FileImportSIMMAction.
-     */
+     *
     public void testGetHelpCtx() {
         System.out.println("getHelpCtx");
         
@@ -79,6 +79,6 @@ public class FileImportSIMMActionTest extends TestCase {
         
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
-    }
+    }*/
     
 }

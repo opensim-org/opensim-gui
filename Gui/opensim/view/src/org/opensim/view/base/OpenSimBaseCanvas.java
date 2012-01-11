@@ -28,25 +28,31 @@
  */
 package org.opensim.view.base;
 
-import java.awt.Cursor;
-import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.prefs.Preferences;
 import javax.swing.JPopupMenu;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.EventListenerList;
+import org.openide.util.Exceptions;
 import org.opensim.utils.Prefs;
 import org.opensim.utils.TheApp;
 import org.opensim.view.Camera;
 import org.opensim.view.pub.ViewDB;
+import vtk.vtkActor2D;
 import vtk.vtkCamera;
+import vtk.vtkImageData;
+import vtk.vtkImageMapper;
 import vtk.vtkLightCollection;
+import vtk.vtkPNGReader;
 import vtk.vtkPanel;
 
 /**
@@ -83,6 +89,7 @@ public class OpenSimBaseCanvas extends vtkPanel
       camerasMenu = new CamerasMenu(this);
       addKeyListener(this);
       addMouseWheelListener(this);
+      addLogo();
       // AntiAliasing
       int desiredAAFrames = Preferences.userNodeForPackage(TheApp.class).getInt("AntiAliasingFrames", numAAFrames);
       if (desiredAAFrames >=0 && desiredAAFrames<=10){
@@ -360,4 +367,35 @@ public class OpenSimBaseCanvas extends vtkPanel
       repaint();
     }
 
-}
+    public void addLogo() {
+        vtkActor2D logoActor = new vtkActor2D();
+        vtkImageMapper logoMapper = new vtkImageMapper();
+        logoActor.SetMapper(logoMapper);
+        logoActor.SetPickable(0);
+        logoActor.SetDisplayPosition(10, 10);
+        logoActor.SetWidth(0.05);
+        logoActor.SetHeight(0.05);
+        vtkPNGReader imageReader=new vtkPNGReader();
+        /*
+        try {
+            FileWriter fstream = new FileWriter("myworkingDirectory.txt");
+            BufferedWriter out = new BufferedWriter(fstream);
+            out.write("Hello Java");
+            //Close the output stream
+            out.close();
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }*/
+        imageReader.SetFileName("OpenSimLogoSmall.PNG");
+        imageReader.UpdateWholeExtent();
+        imageReader.Update();
+        int[] ext = imageReader.GetDataExtent();
+        vtkImageData imageData = imageReader.GetOutput();
+        logoMapper.SetInput(imageData);
+        //logoActor.SetLayerNumber(0);
+        //logoActor.GetProperty().SetOpacity(0.2);
+        //logoActor.SetProperty(null);
+        GetRenderer().AddActor2D(logoActor);
+        //repaint();
+   }
+ }

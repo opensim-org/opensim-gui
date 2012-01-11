@@ -54,15 +54,21 @@ public final class FileImportSIMMAction extends CallableSystemAction {
                 return;
             }
             String mslfileName = importPanel.getMslFilename();
-            String command="simmToOpenSim -j \""+jntfileName+"\"";
+            String osimfilename = importPanel.getOsimFilename();
+            String markersFileName = importPanel.getMarkersFileName();
+            importSIMMModel(jntfileName, mslfileName, osimfilename, markersFileName);
+        }
+    }
+    
+    public void importSIMMModel(String jntfileName, String mslfileName, String osimfilename, String markersFileName){
 
+            String command="simmToOpenSim -j \""+jntfileName+"\"";
             if (mslfileName!=null && !mslfileName.equalsIgnoreCase(""))
                 command += " -m \""+mslfileName+"\"";
             command += " -g Geometry";
             // simmToOpenSim is assumed in the Path, similar to other dlls we depend on.
             File f = new File(jntfileName);
             File jntFileDir = f.getParentFile();
-            String osimfilename = importPanel.getOsimFilename();
             if (osimfilename==null || osimfilename.length()==0){
                DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message("No valid OpeSim file have been specified. Import aborted."));
                return;
@@ -75,12 +81,11 @@ public final class FileImportSIMMAction extends CallableSystemAction {
                if(userAnswer==NotifyDescriptor.NO_OPTION) return;
             }
            
-            command+=" -x \""+importPanel.getOsimFilename()+"\"";
-            if (importPanel.getUseSeparateMarkersFile() && 
-                    importPanel.getMarkersFileName()!=null &&
-                    !importPanel.getMarkersFileName().equalsIgnoreCase("")){
+            command+=" -x \""+osimfilename+"\"";
+            if (markersFileName!=null &&
+                    !markersFileName.equalsIgnoreCase("")){
                //-ms markerset_out
-               command+=" -ms \""+importPanel.getMarkersFileName()+"\"";
+               command+=" -ms \""+markersFileName+"\"";
             }
             OpenSimLogger.logMessage("Executing ["+command+"]\n", 0);
             boolean success = ExecOpenSimProcess.execute(command, new String[]{""}, jntFileDir );
@@ -104,7 +109,7 @@ public final class FileImportSIMMAction extends CallableSystemAction {
                             new NotifyDescriptor.Message("Error opening converted model file "+fullOsimFilename));
                 };
             }
-        }
+
     }
     public String getName() {
         return NbBundle.getMessage(FileImportSIMMAction.class, "CTL_FileImportSIMMAction");

@@ -52,7 +52,7 @@ public static boolean closeModel(Model model) {
    SingleModelGuiElements guiElem = ViewDB.getInstance().getModelGuiElements(model);
    
    // Do not allow the model to be closed if it is locked.
-   if (guiElem.isLocked()) {
+   if (guiElem != null && guiElem.isLocked()) {
       NotifyDescriptor dlg = new NotifyDescriptor.Message(model.getName() + " is currently in use by " +
               guiElem.getLockOwner() + " and cannot be closed.", NotifyDescriptor.INFORMATION_MESSAGE);
       DialogDisplayer.getDefault().notify(dlg);
@@ -60,17 +60,9 @@ public static boolean closeModel(Model model) {
    }
    
    // Confirm closing
-   if (guiElem.getUnsavedChangesFlag()) {
+   if (guiElem != null && guiElem.getUnsavedChangesFlag()) {
       if (saveAndConfirmClose(model) == false)
          return false;
-   }
-   //Fake models for data import need special treatment, may save data xforms instead
-   if (!(model instanceof ModelForExperimentalData)){
-       // Write settings to persistent storage
-       ModelSettingsSerializer ser = ViewDB.getInstance().getModelSavedSettings(model);
-       boolean promptToSaveSettings = false;
-       if (promptToSaveSettings && ser.confirmAndWrite(model)==NotifyDescriptor.CANCEL_OPTION)
-          return false;
    }
    OpenSimDB.getInstance().removeModel(model);
    
