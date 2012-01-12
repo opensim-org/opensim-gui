@@ -25,6 +25,9 @@
  */
 package org.opensim.view.actions;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.openide.util.HelpCtx;
@@ -32,10 +35,9 @@ import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.modeling.Model;
 import org.opensim.view.FileSaveModelAction;
-import org.opensim.view.ModelSettingsSerializer;
 import org.opensim.view.SingleModelGuiElements;
-import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.view.pub.OpenSimDB;
+import org.opensim.view.pub.OpenSimDB.CloseModelDefaultAction;
 import org.opensim.view.pub.ViewDB;
 
 public final class FileCloseAction extends CallableSystemAction {
@@ -61,17 +63,40 @@ public static boolean closeModel(Model model) {
    
    // Confirm closing
    if (guiElem != null && guiElem.getUnsavedChangesFlag()) {
-      if (saveAndConfirmClose(model) == false)
+      CloseModelDefaultAction curAction = OpenSimDB.getCurrentCloseModelDefaultAction();
+      if (curAction==CloseModelDefaultAction.PROMPT && saveAndConfirmClose(model) == false)
          return false;
+      else if (curAction==CloseModelDefaultAction.SAVE)
+          FileSaveModelAction.saveOrSaveAsModel(model, false);
    }
    OpenSimDB.getInstance().removeModel(model);
    
    return true;
 }
 
-   private static boolean saveAndConfirmClose(Model model)
+   private static boolean saveAndConfirmClose(final Model model)
    {
-      NotifyDescriptor dlg = new NotifyDescriptor.Confirmation("Do you want to save the changes to " + model.getName() + "?", "Save model?");
+       ConfirmSaveDiscardJPanel confirmPanel = new ConfirmSaveDiscardJPanel("model "+model.getName()+"?");
+       DialogDescriptor confirmDialog = 
+                    new DialogDescriptor(confirmPanel, 
+                        "Confirm Save/Discard",
+                        true,
+                        new Object[]{DialogDescriptor.OK_OPTION, DialogDescriptor.NO_OPTION, DialogDescriptor.CANCEL_OPTION},
+                        DialogDescriptor.CANCEL_OPTION,
+                        0, null, new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String cmd = e.getActionCommand();
+                //System.out.println("cmd="+cmd);
+                if (cmd.equalsIgnoreCase("ok")) FileSaveModelAction.saveOrSaveAsModel(model, false);
+                
+            }
+        });
+       DialogDisplayer.getDefault().createDialog(confirmDialog).setVisible(true);
+       return true;
+       /*
+       NotifyDescriptor dlg = new NotifyDescriptor.Confirmation("Do you want to save the changes to " + model.getName() + "?", "Save model?");
       Object userSelection = DialogDisplayer.getDefault().notify(dlg);
       if (((Integer)userSelection).intValue() == ((Integer)NotifyDescriptor.OK_OPTION).intValue()) {
          return FileSaveModelAction.saveOrSaveAsModel(model);
@@ -79,7 +104,7 @@ public static boolean closeModel(Model model) {
          return true;
       } else {
          return false;
-      }
+      }*/
    }
 
    public void performAction() {

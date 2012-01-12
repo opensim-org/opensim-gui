@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Observable;
 import java.util.Vector;
+import java.util.prefs.Preferences;
 import java.util.regex.Pattern;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
@@ -56,6 +57,7 @@ import org.opensim.modeling.Force;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.utils.TheApp;
 import org.opensim.view.*;
 import vtk.vtkMatrix4x4;
 
@@ -71,10 +73,43 @@ public class OpenSimDB extends Observable implements Externalizable{
     static private Hashtable<Model, OpenSimContext> mapModelsToContexts =
            new Hashtable<Model, OpenSimContext>();
     static Model currentModel=null;
+
+    /**
+     * @return the currentCloseModelDefaultAction
+     */
+    static public CloseModelDefaultAction getCurrentCloseModelDefaultAction() {
+        String defaultCloseActionString="Prompt";
+        String saved = Preferences.userNodeForPackage(TheApp.class).get("DefaultCloseAction", defaultCloseActionString);
+        // Parse saved to an int, use 0 (no debug) on failure
+        if (saved.equalsIgnoreCase("discard")) currentCloseModelDefaultAction=CloseModelDefaultAction.DISCARD;
+        else if (saved.equalsIgnoreCase("save")) currentCloseModelDefaultAction=CloseModelDefaultAction.SAVE;
+        else currentCloseModelDefaultAction=CloseModelDefaultAction.PROMPT;
+        
+        return currentCloseModelDefaultAction;
+    }
+
+    /**
+     * @param currentCloseModelDefaultAction the currentCloseModelDefaultAction to set
+     */
+    static public void setCurrentCloseModelDefaultAction(CloseModelDefaultAction newCloseModelDefaultAction) {
+        currentCloseModelDefaultAction = newCloseModelDefaultAction;
+        String closeAction = "prompt";
+        if (currentCloseModelDefaultAction ==CloseModelDefaultAction.DISCARD)
+            closeAction="discard";
+        else if (currentCloseModelDefaultAction ==CloseModelDefaultAction.SAVE)
+            closeAction="save";
+        Preferences.userNodeForPackage(TheApp.class).put("DefaultCloseAction", closeAction);
+    }
+    public enum CloseModelDefaultAction {
+        SAVE,
+        DISCARD,
+        PROMPT
+    }
+    static private CloseModelDefaultAction currentCloseModelDefaultAction = CloseModelDefaultAction.PROMPT;
     ///static UndoManager undoMgr=new UndoManager();
     
     /** Creates a new instance of OpenSimDB */
-    public OpenSimDB() {
+    private OpenSimDB() {
         instance = this;
     }
     

@@ -34,9 +34,9 @@ import org.opensim.view.pub.ViewDB;
 
 public final class FileSaveModelAction extends CallableSystemAction {
    
-    public static boolean saveOrSaveAsModel(Model model) {
+    public static boolean saveOrSaveAsModel(Model model, boolean forceSaveAs) {
       if(model==null) return false;
-      if(!model.getInputFileName().equals("")) {
+      if(!model.getInputFileName().equals("") && !forceSaveAs) {
          FileSaveAsModelAction.saveModel(model, model.getInputFileName());
          return true;
       }
@@ -45,7 +45,7 @@ public final class FileSaveModelAction extends CallableSystemAction {
 
     public void performAction() {
       Model model = ViewDB.getInstance().getCurrentModel();
-      if (model != null) saveOrSaveAsModel(model);
+      if (model != null) saveOrSaveAsModel(model, false);
     }
     
     public String getName() {

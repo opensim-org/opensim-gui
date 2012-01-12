@@ -9,7 +9,7 @@ import org.opensim.modeling.Model;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.FileSaveModelAction;
 
-public final class ModelSaveSelectedAction extends CallableSystemAction {
+public final class ModelSaveAsSelectedAction extends CallableSystemAction {
    
     public void performAction() {
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
@@ -25,12 +25,12 @@ public final class ModelSaveSelectedAction extends CallableSystemAction {
         }
         for(int i=0; i<modelsToSave.size(); i++){
             // Piggyback on common code in FileCloseAction
-            FileSaveModelAction.saveOrSaveAsModel(modelsToSave.get(i), false);
+            FileSaveModelAction.saveOrSaveAsModel(modelsToSave.get(i), true);
         }
     }
    
    public String getName() {
-      return NbBundle.getMessage(ModelSaveSelectedAction.class, "CTL_ModelSaveSelectedAction");
+      return NbBundle.getMessage(ModelSaveAsSelectedAction.class, "CTL_ModelSaveAsSelectedAction");
    }
    
    protected void initialize() {
@@ -49,6 +49,6 @@ public final class ModelSaveSelectedAction extends CallableSystemAction {
    
    public boolean isEnabled() {
       Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
-      return selected.length>=1;
+      return (selected.length==1 && selected[0] instanceof ConcreteModelNode);
    }
 }

@@ -47,7 +47,7 @@ public class FileSaveModelActionTest extends TestCase {
         
         aModel= new Model(OpenSimDB.getInstance().getCurrentModel());
         boolean expResult = true;
-        boolean result = FileSaveModelAction.saveOrSaveAsModel(aModel);
+        boolean result = FileSaveModelAction.saveOrSaveAsModel(aModel, false);
         FileSaveModelAction instance = new FileSaveModelAction();
         assertEquals(expResult, result);
     }
