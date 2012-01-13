@@ -104,7 +104,7 @@ public class AxesActor extends vtkAssembly {
     ycylMapper.SetInput(ycyl.GetOutput());
     vtkActor ycylActor = new vtkActor();
     ycylActor.SetMapper(ycylMapper);
-    ycylActor.GetProperty().SetColor(0,1,0);
+    ycylActor.GetProperty().SetColor(1,1,0);
     ycylActor.SetPosition(0.0, axisLength/2, 0.0);
     ycylActor.GetProperty().SetAmbient(cylAmbient);
     ycylActor.GetProperty().SetOpacity(cylOpacity);
@@ -119,7 +119,7 @@ public class AxesActor extends vtkAssembly {
     zcylMapper.SetInput(zcyl.GetOutput());
     vtkActor zcylActor = new vtkActor();
     zcylActor.SetMapper(zcylMapper);
-    zcylActor.GetProperty().SetColor(0,0,1);
+    zcylActor.GetProperty().SetColor(0,1,0);
     zcylActor.RotateX(90);
     zcylActor.SetPosition(0.0, 0.0, axisLength/2);
     zcylActor.GetProperty().SetAmbient(cylAmbient);
@@ -150,7 +150,7 @@ public class AxesActor extends vtkAssembly {
         yconeMapper.SetInput(ycone.GetOutput());
         vtkActor yconeActor = new vtkActor();
         yconeActor.SetMapper(yconeMapper);
-        yconeActor.GetProperty().SetColor(0,1,0);
+        yconeActor.GetProperty().SetColor(1,1,0);
         yconeActor.RotateZ(90);
         yconeActor.SetScale(coneScale, coneScale, coneScale);
         yconeActor.SetPosition(0.0, axisLength+(coneScale/2), 0.0);
@@ -164,7 +164,7 @@ public class AxesActor extends vtkAssembly {
         zconeMapper.SetInput(zcone.GetOutput());
         vtkActor zconeActor = new vtkActor();
         zconeActor.SetMapper(zconeMapper);
-        zconeActor.GetProperty().SetColor(0,0,1);
+        zconeActor.GetProperty().SetColor(0,1,0);
         zconeActor.RotateY(-90);
         zconeActor.SetScale(coneScale, coneScale, coneScale);
         zconeActor.SetPosition(0.0, 0.0, axisLength+(coneScale/2));
@@ -195,7 +195,7 @@ public class AxesActor extends vtkAssembly {
         ytextActor = new vtkFollower();
         ytextActor.SetMapper(ytextMapper);
         ytextActor.SetScale(axisTextLength, axisTextLength, axisTextLength);
-        ytextActor.GetProperty().SetColor(0, 1, 0);
+        ytextActor.GetProperty().SetColor(1, 1, 0);
         ytextActor.SetPosition(0.0, axisLength, 0.0);
         
         //--- z-Label
@@ -206,7 +206,7 @@ public class AxesActor extends vtkAssembly {
         ztextActor = new vtkFollower();
         ztextActor.SetMapper(ztextMapper);
         ztextActor.SetScale(axisTextLength, axisTextLength, axisTextLength);
-        ztextActor.GetProperty().SetColor(0, 0, 1);
+        ztextActor.GetProperty().SetColor(0, 1, 0);
         ztextActor.SetPosition(0.0, 0.0, axisLength);
         
         this.AddPart(xtextActor);
