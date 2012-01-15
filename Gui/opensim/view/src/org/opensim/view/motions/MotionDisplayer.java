@@ -154,7 +154,7 @@ public class MotionDisplayer implements SelectionListener {
         statesBuffer = new double[model.getNumStateVariables()];
         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
         if (model instanceof ModelForExperimentalData) return;
-        if(vis!=null) vis.setRenderMuscleActivations(isRenderMuscleActivations());
+        if(vis!=null) vis.setApplyMuscleColors(isRenderMuscleActivations());
     }
 
     public void setupMotionDisplay() { 
@@ -192,7 +192,7 @@ public class MotionDisplayer implements SelectionListener {
            // This is a states file
            statesFile = true;
            SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-           if(vis!=null) vis.setRenderMuscleActivations(true);
+           if(vis!=null) vis.setApplyMuscleColors(true);
            setRenderMuscleActivations(true);
         } else  {
            // We should build sorted lists of object names so that we can find them easily
@@ -635,7 +635,7 @@ public class MotionDisplayer implements SelectionListener {
         // those actuators were referred to...  So we avoid all that with this if statement.
         if(OpenSimDB.getInstance().hasModel(model) && renderMuscleActivations) {
            SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-           if(vis!=null) vis.setRenderMuscleActivations(false);
+           if(vis!=null) vis.setApplyMuscleColors(false);
         }
         // If trails are shown, hide them too
         Enumeration<vtkActor> trailActors = objectTrails.elements();

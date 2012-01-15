@@ -121,7 +121,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    public void setRenderMuscleActivations(boolean render) {
       if(getModelForDisplayCompatibleStates()) {
         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(getModelForDisplay());
-        if(vis!=null) vis.setRenderMuscleActivations(render);
+        if(vis!=null) vis.setApplyMuscleColors(render);
       }
    }
 

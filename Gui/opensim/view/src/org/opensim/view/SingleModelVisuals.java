@@ -378,9 +378,9 @@ public class SingleModelVisuals {
       }
    }
 
-   public void setRenderMuscleActivations(boolean enabled) {
+   public void setApplyMuscleColors(boolean enabled) {
       Iterator<LineSegmentMuscleDisplayer> dispIter = mapActuator2Displayer.values().iterator();
-      while(dispIter.hasNext()) dispIter.next().setRenderActivation(enabled);
+      while(dispIter.hasNext()) dispIter.next().setApplyColoringFunction(enabled);
       getMuscleSegmentsRep().setModified();
       getMusclePointsRep().setModified();
    }

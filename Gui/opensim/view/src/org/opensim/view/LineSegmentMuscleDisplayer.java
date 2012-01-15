@@ -47,7 +47,6 @@ public class LineSegmentMuscleDisplayer {
 
    private Muscle act;
    private OpenSimContext openSimContext;
-   private boolean renderActivation = false;
 
    private OpenSimvtkGlyphCloud musclePointsRep;
    private OpenSimvtkOrientedGlyphCloud muscleSegmentsRep;
@@ -56,27 +55,32 @@ public class LineSegmentMuscleDisplayer {
    Vector<Integer> musclePointGlyphIds = new Vector<Integer>(10);
    Vector<Integer> muscleSegmentGlyphIds = new Vector<Integer>(10);
    protected GeometryPath geomPath;
-
-   final static double activationColorTau = 5;
-   final static double activationColorFactor = 1/(1-Math.exp(-activationColorTau));
-
+   private MuscleColoringFunction muscleColoringFunction;
+   private MuscleColoringFunction defaultColoringFunction;
+   
    public LineSegmentMuscleDisplayer(Muscle act, OpenSimvtkGlyphCloud musclePointsRep, OpenSimvtkOrientedGlyphCloud muscleSegmentsRep)
-   {
+    {
         OpenSimObject pathObject;
         try {
-          pathObject = act.getPropertySet().get("GeometryPath").getValueObj();
-          this.geomPath = GeometryPath.safeDownCast(pathObject);
-      this.act = act;
-      this.musclePointsRep = musclePointsRep;
-      this.muscleSegmentsRep = muscleSegmentsRep;
-      openSimContext = OpenSimDB.getInstance().getContext(act.getModel());
+            pathObject = act.getPropertySet().get("GeometryPath").getValueObj();
+            this.geomPath = GeometryPath.safeDownCast(pathObject);
+            this.act = act;
+            this.musclePointsRep = musclePointsRep;
+            this.muscleSegmentsRep = muscleSegmentsRep;
+            openSimContext = OpenSimDB.getInstance().getContext(act.getModel());
+            muscleColoringFunction = new MuscleNoColoringFunction(openSimContext);
+            defaultColoringFunction = new MuscleColorByActivationFunction(openSimContext);
         } catch (IOException ex) {
             ex.printStackTrace();
-   }
-   }
+        }
+    }
 
-   public void setRenderActivation(boolean enabled) {
-      renderActivation = enabled;
+   public void setApplyColoringFunction(boolean enabled) {
+      if (enabled)
+          muscleColoringFunction = defaultColoringFunction;
+      else
+          muscleColoringFunction = new MuscleNoColoringFunction(openSimContext);
+          
       updateGeometry(true);
    }
 
@@ -177,15 +181,7 @@ public class LineSegmentMuscleDisplayer {
 
       if (dp == DisplayPreference.None) return;
 
-      double activation = 1.0;
-      OpenSimContext context = OpenSimDB.getInstance().getContext(act.getModel());
-      if(renderActivation) {
-         activation = context.getActivation(act);
-         // Apply this transfer function to get better results from the color map
-         activation = activationColorFactor * (1-Math.exp(-activationColorTau*activation));
-//Jeff            activation = 1/(1+Math.exp(100.0*(-activation+0.5)));
-      }
-
+      double activation = muscleColoringFunction.getColor(act); 
       // A displayer is found, get geometry
       int geomSize = actuatorDisplayer.countGeometry();
       if (geomSize > 0) {
@@ -194,7 +190,7 @@ public class LineSegmentMuscleDisplayer {
          double[] position1 = new double[3];
          double[] position2 = new double[3];
 
-         ArrayPathPoint path=context.getCurrentDisplayPath(geomPath);
+         ArrayPathPoint path=openSimContext.getCurrentDisplayPath(geomPath);
 
          // Points are already in inertial frame
          for(int i=0; i<geomSize; i++) {
@@ -326,5 +322,12 @@ public class LineSegmentMuscleDisplayer {
         for(int d=0; d <3; d++)
             vector3[d]=vector3[d]/length;
         return length;
+    }
+
+    /**
+     * @param defaultColoringFunction the defaultColoringFunction to set
+     */
+    public void setDefaultColoringFunction(MuscleColoringFunction newColoringFunction) {
+        this.defaultColoringFunction = newColoringFunction;
     }
 }
