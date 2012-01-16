@@ -27,6 +27,7 @@ package org.opensim.view;
 
 import java.awt.Color;
 import java.awt.Dialog;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.util.prefs.Preferences;
@@ -153,6 +154,8 @@ public class ModelWindowVTKTopComponent extends TopComponent
             }
         });
 
+        setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
+        setDoubleBuffered(true);
         setMinimumSize(new java.awt.Dimension(20, 20));
         setLayout(new java.awt.GridBagLayout());
 
@@ -176,7 +179,7 @@ public class ModelWindowVTKTopComponent extends TopComponent
 
         jModelWindowToolBar.setBorder(null);
         jModelWindowToolBar.setFloatable(false);
-        jModelWindowToolBar.setOrientation(1);
+        jModelWindowToolBar.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jModelWindowToolBar.setToolTipText("Drag to Preferred Edge or Float");
         jModelWindowToolBar.setMaximumSize(new java.awt.Dimension(20, 20));
         jModelWindowToolBar.setMinimumSize(new java.awt.Dimension(20, 20));
