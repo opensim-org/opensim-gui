@@ -58,55 +58,30 @@ private PythonInterpreter interp;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        fileTextFieldAndChooser1 = new org.opensim.swingui.FileTextFieldAndChooser();
-        jExcutePyScriptButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jConsole2 = new org.opensim.console.JConsole();
 
         setToolTipText(org.openide.util.NbBundle.getMessage(ScriptingShellTopComponent.class, "ScriptingShellTopComponent.toolTipText")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(ScriptingShellTopComponent.class, "ScriptingShellTopComponent.jLabel1.text")); // NOI18N
-
-        org.openide.awt.Mnemonics.setLocalizedText(jExcutePyScriptButton, org.openide.util.NbBundle.getMessage(ScriptingShellTopComponent.class, "ScriptingShellTopComponent.jExcutePyScriptButton.text")); // NOI18N
-        jExcutePyScriptButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jExcutePyScriptButtonActionPerformed(evt);
-            }
-        });
+        jConsole2.setColumns(20);
+        jConsole2.setRows(5);
+        jScrollPane2.setViewportView(jConsole2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(fileTextFieldAndChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jExcutePyScriptButton)
-                .addContainerGap())
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jExcutePyScriptButton)
-                    .addComponent(fileTextFieldAndChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addContainerGap())
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jExcutePyScriptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jExcutePyScriptButtonActionPerformed
-        // TODO add your handling code here:
-        interp.execfile(fileTextFieldAndChooser1.getFileName());
-    }//GEN-LAST:event_jExcutePyScriptButtonActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.opensim.swingui.FileTextFieldAndChooser fileTextFieldAndChooser1;
-    private javax.swing.JButton jExcutePyScriptButton;
-    private javax.swing.JLabel jLabel1;
+    private org.opensim.console.JConsole jConsole2;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
     @Override
     public void componentOpened() {
