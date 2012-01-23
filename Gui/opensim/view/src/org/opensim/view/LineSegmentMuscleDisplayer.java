@@ -55,8 +55,8 @@ public class LineSegmentMuscleDisplayer {
    Vector<Integer> musclePointGlyphIds = new Vector<Integer>(10);
    Vector<Integer> muscleSegmentGlyphIds = new Vector<Integer>(10);
    protected GeometryPath geomPath;
-   private MuscleColoringFunction muscleColoringFunction;
-   private MuscleColoringFunction defaultColoringFunction;
+   private MuscleColoringFunction muscleColoringFunction; 
+   private MuscleColoringFunction defaultColoringFunction; //current function to use during simulation
    
    public LineSegmentMuscleDisplayer(Muscle act, OpenSimvtkGlyphCloud musclePointsRep, OpenSimvtkOrientedGlyphCloud muscleSegmentsRep)
     {
