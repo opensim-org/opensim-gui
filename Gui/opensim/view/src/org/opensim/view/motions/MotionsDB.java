@@ -49,6 +49,8 @@ import org.opensim.utils.FileUtils;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.ModelEvent;
 import org.opensim.view.ObjectsRenamedEvent;
+import org.opensim.view.experimentaldata.AnnotatedMotion;
+import org.opensim.view.experimentaldata.ExperimentalOtherDataSetNode;
 import org.opensim.view.nodes.ConcreteModelNode;
 import org.opensim.view.pub.*;
 
@@ -105,7 +107,7 @@ public class MotionsDB extends Observable // Observed by other entities in motio
     * A side effect of changing the model associated with a loaded motion is that the new model becomes
     * current.
     */
-   public void loadMotionFile(String fileName) {
+   public void loadMotionFile(String fileName, boolean primary) {
       Storage storage = null;
       try {
          storage = new Storage(fileName);
@@ -114,24 +116,42 @@ public class MotionsDB extends Observable // Observed by other entities in motio
          DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message("Could not read motion file "+fileName));
          return;
       }
+      saveStorageFileName(storage, fileName);
       final Storage newMotion = storage;
-      boolean associated = false;
-      while(!associated){
-         Model modelForMotion = OpenSimDB.getInstance().selectModel(OpenSimDB.getInstance().getCurrentModel());
-         if (modelForMotion == null){ // user cancelled
-            break;
-         }
-         // user selected a model, try to associate it
-         if(MotionsDB.getInstance().motionAssociationPossible(modelForMotion, newMotion)){
-            addMotion(modelForMotion, newMotion);
-            saveStorageFileName(newMotion, fileName);
-            StatusDisplayer.getDefault().setStatusText("Associated motion: "+newMotion.getName()+" to model: "+modelForMotion.getName());
-            associated = true;
-         } else { // Show error that motion couldn't be associated and repeat'
-            DialogDisplayer.getDefault().notify( 
-                    new NotifyDescriptor.Message("Could not associate motion to current model."));
-            break;
-         }
+      loadMotionStorage(newMotion, primary);
+   }
+   
+   public void loadMotionStorage(Storage newMotion, boolean primary)
+   {
+      if (primary){
+          boolean associated = false;
+          while(!associated){
+             Model modelForMotion = OpenSimDB.getInstance().selectModel(OpenSimDB.getInstance().getCurrentModel());
+             if (modelForMotion == null){ // user cancelled
+                break;
+             }
+             // user selected a model, try to associate it
+             if(MotionsDB.getInstance().motionAssociationPossible(modelForMotion, newMotion)){
+                addMotion(modelForMotion, newMotion, null);
+                 StatusDisplayer.getDefault().setStatusText("Associated motion: "+newMotion.getName()+" to model: "+modelForMotion.getName());
+                associated = true;
+             } else { // Show error that motion couldn't be associated and repeat'
+                DialogDisplayer.getDefault().notify( 
+                        new NotifyDescriptor.Message("Could not associate motion to current model."));
+                break;
+             }
+          }
+      }
+      else{ // There's already a model associated with current motion, use it
+          Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
+          if (selected.length==1 && selected[0] instanceof OneMotionNode){
+              OneMotionNode parentMotionNode = (OneMotionNode) selected[0];
+              Model modelForMotion = parentMotionNode.getModelForNode();
+              if (newMotion instanceof AnnotatedMotion)
+                addMotion(modelForMotion, newMotion, parentMotionNode.getMotion());
+              else
+                addMotion(modelForMotion, new AnnotatedMotion(newMotion), parentMotionNode.getMotion());
+           }
       }
    }
    
@@ -160,7 +180,7 @@ public class MotionsDB extends Observable // Observed by other entities in motio
       return (numUsedColumns>=1);  // At least one column makes sense
    }
 
-   public void addMotion(Model model, Storage motion) {
+   public void addMotion(Model model, Storage motion, Storage parentMotion) {
       if (! (model instanceof ModelForExperimentalData)){
           boolean convertAngles = motion.isInDegrees();
           if(convertAngles) model.getSimbodyEngine().convertDegreesToRadians(motion);
@@ -178,11 +198,12 @@ public class MotionsDB extends Observable // Observed by other entities in motio
       BitSet motionBits = new BitSet(numBits);
       mapMotion2BitSet.put(motion, motionBits);
 
-      MotionEvent evt = new MotionEvent(this, model, motion, MotionEvent.Operation.Open);
+      MotionEvent evt = new MotionEvent(this, model, motion, 
+              (parentMotion==null)?MotionEvent.Operation.Open:MotionEvent.Operation.Assoc);
       setChanged();
       notifyObservers(evt);
 
-      setCurrent(model, motion); // Also make it current (a separate event is sent out)
+      if (parentMotion==null) setCurrent(model, motion); // Also make it current (a separate event is sent out)
    }
 
    public void setMotionModified(Storage motion, boolean state) {
@@ -340,6 +361,14 @@ public class MotionsDB extends Observable // Observed by other entities in motio
                      }
                      break;
                   }
+                  case Assoc:
+                  {
+                      Node[] motionNode = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
+                      if (motionNode.length!=1) return;
+                      Node newMotionNode = new OneMotionNode(evnt.getMotion());
+                      motionNode[0].getChildren().add(new Node[]{newMotionNode});
+                      break;
+                  }
                }
             }
          });
@@ -450,7 +479,7 @@ public class MotionsDB extends Observable // Observed by other entities in motio
             int index=0;
             if (candidateModel.getInputFileName().equalsIgnoreCase(modelFiles.get(index))){
                 // Create motion from corresponding motionFiles[index]
-                MotionsDB.getInstance().loadMotionFile(motionFiles.get(index));
+                MotionsDB.getInstance().loadMotionFile(motionFiles.get(index), true);
             }
         }
     }

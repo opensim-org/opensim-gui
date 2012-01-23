@@ -57,8 +57,8 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
     
     private Vector<String> markerNames=null;
     private Vector<String> forceNames=null;
-    private static Vector<String[]> patterns = new Vector<String[]>(6);
-    private static Vector<ExperimentalDataItemType> classifications = new Vector<ExperimentalDataItemType>(6);
+    private static Vector<String[]> patterns = new Vector<String[]>(8);
+    private static Vector<ExperimentalDataItemType> classifications = new Vector<ExperimentalDataItemType>(8);
     private Vector<ExperimentalDataObject> classified=new Vector<ExperimentalDataObject>(10);
     private double[] boundingBox = new double[]{1000., 10000., 10000., -1., -1., -1.};
     private double unitConversion = 1.0;
@@ -86,7 +86,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
         int maxXIndex=-1;
         for(int i=0; i<markerNames.getSize(); i++){
             String markerName=markerNames.getitem(i);
-            ExperimentalDataObject markerObject = new ExperimentalDataObject(
+            ExperimentalDataObject markerObject = new MotionObjectBodyMarker(
                     ExperimentalDataItemType.MarkerData, markerName, i*3);
             classified.add(markerObject);
             for(int coord=0; coord<3; coord++){
@@ -132,7 +132,9 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
     }
 
     public Vector<String> getForceNames() {
-        return getNamesOfObjectsOfType(ExperimentalDataItemType.ForceData);
+        Vector<String> forces =  getNamesOfObjectsOfType(ExperimentalDataItemType.ForceData);
+        forces.addAll(getNamesOfObjectsOfType(ExperimentalDataItemType.JointForceData));
+        return forces;
     }
 
     private void setupPatterns() {
@@ -142,12 +144,16 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
         patterns.add(3,  new String[]{"_px", "_py", "_pz"});
         patterns.add(4,  new String[]{"_1", "_2", "_3"});
         patterns.add(5,  new String[]{"_x", "_y", "_z"});
+        patterns.add(6,  new String[]{"_fx", "_fy", "_fz"});
+        patterns.add(7,  new String[]{"_mx", "_my", "_mz"});
         classifications.add(0, ExperimentalDataItemType.ForceData);
         classifications.add(1, ExperimentalDataItemType.PointData);
         classifications.add(2, ExperimentalDataItemType.PointData);
         classifications.add(3, ExperimentalDataItemType.PointData);
         classifications.add(4, ExperimentalDataItemType.PointData);
         classifications.add(5, ExperimentalDataItemType.PointData);
+        classifications.add(6, ExperimentalDataItemType.ForceData);
+        classifications.add(7, ExperimentalDataItemType.MomentData);
         
     }
     public Vector<ExperimentalDataObject> classifyColumns() {
@@ -161,7 +167,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
             ExperimentalDataItemType columnType = ExperimentalDataItemType.Unknown;
             String label = labelsVector.get(i);
             String baseName="";
-            for(int patternIdx=0; patternIdx <6 && !found; patternIdx++) {
+            for(int patternIdx=0; patternIdx <8 && !found; patternIdx++) {
                 boolean foundPatternAtIdx=true;
                 String nextLabel=label;
                 // For the pattern (patterns[patternIdx]) check exact match
@@ -172,8 +178,6 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
                         foundPatternAtIdx=false;
                         break;               
                     }
-                    System.out.println("labelsVector.size()"+labelsVector.size());
-                    System.out.println("test index"+i+k);
                     label= labelsVector.get(i+k);
                     if (!(label.endsWith(testAgainst))){
                         foundPatternAtIdx=false;
@@ -183,7 +187,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
                 if (foundPatternAtIdx){
                     found=true;
                     columnType = classifications.get(patternIdx);
-                    classified.add(new ExperimentalDataObject(columnType, baseName, i-1));
+                    classified.add(new MotionObjectBodyForce(columnType, baseName, i-1));
                     System.out.println("Found "+columnType.toString()+ " at index "+i);
                     i+=(columnType.getNumberOfColumns()-1);
                     break;
@@ -418,9 +422,6 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
 
     public double getDataRate() {
         return dataRate;
-    }
-
-    private void unimplemented() {
     }
     
 }

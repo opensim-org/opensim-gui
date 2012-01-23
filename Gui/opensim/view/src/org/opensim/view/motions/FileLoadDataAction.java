@@ -60,7 +60,7 @@ public final class FileLoadDataAction extends CallableSystemAction {
                     // Add the visuals to support it
                     ModelForExperimentalData modelForDataImport = new ModelForExperimentalData(nextNumber++, amot);
                     OpenSimDB.getInstance().addModel(modelForDataImport);
-                    MotionsDB.getInstance().addMotion(modelForDataImport, amot);
+                    MotionsDB.getInstance().addMotion(modelForDataImport, amot, null);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -85,7 +85,7 @@ public final class FileLoadDataAction extends CallableSystemAction {
                         System.out.println("Missing resource file Models/Internal/_openSimlab.osim. Previewing is aborted.");
                         return;
                     }
-                    MotionsDB.getInstance().addMotion(modelForDataImport, amot);
+                    MotionsDB.getInstance().addMotion(modelForDataImport, amot, null);
             }
         }
     }

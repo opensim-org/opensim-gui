@@ -76,7 +76,7 @@ public final class FileLoadMotionAction extends CallableSystemAction {
    }
 
     public void loadMotion(String fileName) {
-           MotionsDB.getInstance().loadMotionFile(fileName);
+           MotionsDB.getInstance().loadMotionFile(fileName, true);
     }
    
    

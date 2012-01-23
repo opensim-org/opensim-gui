@@ -215,7 +215,7 @@ public class IKToolModel extends Observable implements Observer {
       }
       motion = newMotion;
       if(motion!=null) {
-         MotionsDB.getInstance().addMotion(getOriginalModel(), motion);
+         MotionsDB.getInstance().addMotion(getOriginalModel(), motion, null);
          //MotionControlJPanel.getInstance().setUserTime(motion.getLastTime());
          MotionsDB.getInstance().setMotionModified(motion, true);
       }

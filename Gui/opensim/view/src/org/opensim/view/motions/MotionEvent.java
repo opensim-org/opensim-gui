@@ -44,7 +44,7 @@ import org.opensim.modeling.Storage;
  */
 public class MotionEvent extends EventObject {
     
-    public enum Operation{Open, Close, CurrentMotionsChanged, Modified};
+    public enum Operation{Open, Close, CurrentMotionsChanged, Modified, Assoc};
     private Model model;
     Storage motion;
     Operation op= Operation.Open;

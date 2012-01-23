@@ -364,7 +364,7 @@ public class ScaleToolModel extends Observable implements Observer {
             if(getMarkerPlacerEnabled() && scaleTool.getMarkerPlacer().getOutputStorage()!=null) {
                Storage motion = new Storage(scaleTool.getMarkerPlacer().getOutputStorage());
                motion.setName("static pose");
-               MotionsDB.getInstance().addMotion(scaledModel, motion);
+               MotionsDB.getInstance().addMotion(scaledModel, motion, null);
             }
             resetModified();
          }

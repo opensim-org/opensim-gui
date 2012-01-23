@@ -12,6 +12,8 @@
     </Component>
   </NonVisualComponents>
   <Properties>
+    <Property name="debugGraphicsOptions" type="int" value="4"/>
+    <Property name="doubleBuffered" type="boolean" value="true"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[20, 20]"/>
     </Property>

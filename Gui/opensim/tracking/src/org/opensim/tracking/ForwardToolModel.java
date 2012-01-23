@@ -223,7 +223,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
       }
       motion = newMotion;
       if(motion!=null) {
-         MotionsDB.getInstance().addMotion(getOriginalModel(), motion);
+         MotionsDB.getInstance().addMotion(getOriginalModel(), motion, null);
          //MotionControlJPanel.getInstance().setUserTime(motion.getLastTime());
       }
    }

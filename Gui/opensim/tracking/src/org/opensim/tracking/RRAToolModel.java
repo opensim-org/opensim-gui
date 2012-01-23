@@ -186,14 +186,14 @@ public class RRAToolModel extends TrackingToolModel {
                //OpenSim20 added argument
                OpenSimDB.getInstance().replaceModel(reducedResidualsModel, newReducedResidualsModel, null);
                reducedResidualsModel = newReducedResidualsModel;
-               MotionsDB.getInstance().addMotion(reducedResidualsModel, motion);
+               MotionsDB.getInstance().addMotion(reducedResidualsModel, motion, null);
                }
             } else {
                if(reducedResidualsModel!=null) {
                   OpenSimDB.getInstance().removeModel(reducedResidualsModel);
                   reducedResidualsModel = null;
                }
-               MotionsDB.getInstance().addMotion(getOriginalModel(), motion);
+               MotionsDB.getInstance().addMotion(getOriginalModel(), motion, null);
             }
          }
 

@@ -161,9 +161,9 @@ public class MasterMotionModel {
    // -----------------------------------------------------------------------
    // Utilities for building the super motion
    // -----------------------------------------------------------------------
-   void add(Model abstractModel, Storage simmMotionData) {
-      displayers.add(new MotionDisplayer(simmMotionData, abstractModel));
-      buildSuperMotion(abstractModel, simmMotionData);
+   void add(Model model, Storage simmMotionData) {
+      displayers.add(new MotionDisplayer(simmMotionData, model));
+      buildSuperMotion(model, simmMotionData);
    }
    void add(MotionsDB.ModelMotionPair pair) {
       add(pair.model, pair.motion);

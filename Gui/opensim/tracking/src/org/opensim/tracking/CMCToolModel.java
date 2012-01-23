@@ -475,7 +475,7 @@ public class CMCToolModel extends TrackingToolModel {
     }
     private void updateMotion(Storage newMotion) {
         if(newMotion!=null) {
-            MotionsDB.getInstance().addMotion(getOriginalModel(), newMotion);
+            MotionsDB.getInstance().addMotion(getOriginalModel(), newMotion, null);
             MotionsDB.getInstance().setCurrentTime(newMotion.getLastTime());
             
         }

@@ -25,6 +25,7 @@
  */
 package org.opensim.view.motions;
 
+import java.io.File;
 import java.io.IOException;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
@@ -34,41 +35,51 @@ import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.CoordinateSet;
+import org.opensim.modeling.MarkerData;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.Storage;
+import org.opensim.modeling.Units;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.ExplorerTopComponent;
+import org.opensim.view.experimentaldata.AnnotatedMotion;
 
-public final class MotionAppendMotionAction extends CallableSystemAction {
+public final class MotionAssociateMotionAction extends CallableSystemAction {
 
    public void performAction() {
       Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
       if (selected.length == 1 && (selected[0] instanceof OneMotionNode)) {
          OneMotionNode node = (OneMotionNode)selected[0];
-         String fileName = FileUtils.getInstance().browseForFilename(".mot", "Motion file", ExplorerTopComponent.findInstance());
+         String fileName = FileUtils.getInstance().browseForFilename(".mot, .sto, .trc", "Motion or Storage file", ExplorerTopComponent.findInstance());
          if (fileName != null) {
             Storage motion = node.getMotion();
             Storage storage = null;
             try {
-               storage = new Storage(fileName);
+               if (fileName.endsWith(".sto") || fileName.endsWith(".mot"))
+                storage = new Storage(fileName);
+               else if (fileName.endsWith(".trc")){
+                    MarkerData markerData = new MarkerData(fileName);
+                    Storage newStorage = new Storage();
+                    markerData.makeRdStorage(newStorage);
+                    AnnotatedMotion amot = new AnnotatedMotion(newStorage, markerData.getMarkerNames());
+                    amot.setUnitConversion(1.0/(markerData.getUnits().convertTo(Units.UnitType.Meters)));
+                    amot.setName(new File(fileName).getName());
+                    amot.setDataRate(markerData.getDataRate());
+                    amot.setCameraRate(markerData.getCameraRate());
+                    storage = amot;
+               }
             } catch (IOException ex) {
                ex.printStackTrace();
                DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message("Could not read motion file " + fileName));
                return;
             }
-            final Storage newMotion = storage;
-            if (timeFramesMatch(motion, newMotion) == false) {
-               DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message(fileName +
-                       " cannot be appended to " + motion.getName() + "-- time frames do not match."));
-               return;
-            }
+            Storage newMotion = storage;
             if (columnNamesOverlap(motion, newMotion, node.getModel()) == true) {
                DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message(fileName +
-                       " cannot be appended to " + motion.getName() + "-- duplicate column labels encountered."));
+                       " cannot be associated to " + motion.getName() + "-- duplicate column labels encountered."));
                return;
             }
-            newMotion.addToRdStorage(motion, motion.getFirstTime(), motion.getLastTime());
+            MotionsDB.getInstance().loadMotionStorage(newMotion, false);
             MotionsDB.getInstance().reportModifiedMotion(motion, node.getModel());
             //MotionsDB.getInstance().setCurrent(node.getModel(), motion);
          }
@@ -126,7 +137,7 @@ public final class MotionAppendMotionAction extends CallableSystemAction {
    }
 
    public String getName() {
-      return NbBundle.getMessage(MotionAppendMotionAction.class, "CTL_MotionAppendMotionAction");
+      return NbBundle.getMessage(MotionAssociateMotionAction.class, "CTL_MotionAssociateMotionAction");
    }
 
    protected void initialize() {

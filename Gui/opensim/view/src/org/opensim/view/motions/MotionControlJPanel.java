@@ -722,6 +722,10 @@ public class MotionControlJPanel extends javax.swing.JPanel
                   getMasterMotion().getDisplayer(i).setupMotionDisplay();
                }
             }
+         } else if (evt.getOperation() == Operation.Assoc) {
+             // Create MotionDisplayer and associate it to that of currentMotion
+             MotionDisplayer newMotionDisplayer = new MotionDisplayer(evt.getMotion(), evt.getModel());
+             getMasterMotion().getDisplayer(0).getAssociatedMotions().add(newMotionDisplayer);
          }
          motionLoaded = (getMasterMotion().getNumMotions() > 0);
          updatePanelDisplay();

@@ -85,6 +85,13 @@ import vtk.vtkProp;
  */
 
 public class MotionDisplayer implements SelectionListener {
+
+    /**
+     * @return the associatedMotions
+     */
+    public ArrayList<MotionDisplayer> getAssociatedMotions() {
+        return associatedMotions;
+    }
     
     public enum ObjectTypesInMotionFiles{GenCoord, 
                                          GenCoord_Velocity, 
@@ -125,6 +132,7 @@ public class MotionDisplayer implements SelectionListener {
     
     protected Hashtable<ExperimentalDataObject, vtkActor> objectTrails = new Hashtable<ExperimentalDataObject, vtkActor>();
 
+    private ArrayList<MotionDisplayer> associatedMotions = new  ArrayList<MotionDisplayer>();
     public class ObjectIndexPair {
        public Object object;
        public int stateVectorIndex; // Actual (0-based) index into state vector
@@ -178,6 +186,7 @@ public class MotionDisplayer implements SelectionListener {
                     int glyphIndex=groundForcesRep.addLocation(nextObject);
                     nextObject.setGlyphInfo(glyphIndex, groundForcesRep);
                 }
+                
             }
             //createTrails(model);
             return;
@@ -471,6 +480,10 @@ public class MotionDisplayer implements SelectionListener {
                            (currentTime > simmMotionData.getLastTime()) ? simmMotionData.getLastTime() : currentTime;
       simmMotionData.getDataAtTime(clampedTime, interpolatedStates.getSize(), interpolatedStates);
       applyStatesToModel(interpolatedStates);
+      // Repeat for associated motions
+      for (MotionDisplayer assocMotion:associatedMotions){
+          assocMotion.applyTimeToModel(currentTime);
+      }
    }
 
    private void applyStatesToModel(ArrayDouble states) 
@@ -479,13 +492,13 @@ public class MotionDisplayer implements SelectionListener {
      long before = 0, after=0;
      if (profile)
           before =System.nanoTime();
-     if (model instanceof ModelForExperimentalData){
+     if (simmMotionData instanceof AnnotatedMotion){
           int dataSize = states.getSize();
           AnnotatedMotion mot = (AnnotatedMotion)simmMotionData;
           Vector<ExperimentalDataObject> objects=mot.getClassified();
           boolean markersModified=false;
           boolean forcesModified=false;
-          for(ExperimentalDataObject nextObject:objects){
+           for(ExperimentalDataObject nextObject:objects){
                 if (!nextObject.isDisplayed()) continue;
                 if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
                     int startIndex = nextObject.getStartIndexInFileNotIncludingTime();
@@ -508,6 +521,7 @@ public class MotionDisplayer implements SelectionListener {
                    
                     forcesModified=true;
               }
+              
               if (forcesModified) groundForcesRep.setModified();
               if (markersModified) markersRep.setModified();
           }
@@ -642,6 +656,10 @@ public class MotionDisplayer implements SelectionListener {
         while (trailActors.hasMoreElements()){
             ViewDB.getInstance().removeUserObjectFromModel(model, trailActors.nextElement());
         }
+        for (MotionDisplayer assocMotion:associatedMotions){
+          assocMotion.cleanupDisplay();
+      }
+
     }
 
    public Storage getSimmMotionData() {

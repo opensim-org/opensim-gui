@@ -175,7 +175,7 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
           motion = newMotion;
           motion.crop(analyzeTool().getStartTime(), analyzeTool().getFinalTime());
           if(motion!=null) {
-              MotionsDB.getInstance().addMotion(getOriginalModel(), motion);
+              MotionsDB.getInstance().addMotion(getOriginalModel(), motion, null);
               MotionsDB.getInstance().setCurrentTime(motion.getLastTime());
               
           }

@@ -181,7 +181,7 @@ public class InverseDynamicsToolModel extends AbstractToolModelWithExternalLoads
           motion = newMotion;
           motion.crop(InverseDynamicsTool().getStartTime(), InverseDynamicsTool().getEndTime());
           if(motion!=null) {
-              MotionsDB.getInstance().addMotion(getOriginalModel(), motion);
+              MotionsDB.getInstance().addMotion(getOriginalModel(), motion, null);
               MotionsDB.getInstance().setCurrentTime(motion.getLastTime());
               
           }

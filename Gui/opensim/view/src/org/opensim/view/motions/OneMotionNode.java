@@ -33,10 +33,10 @@ import java.net.URL;
 import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.Action;
+import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.Storage;
-import org.opensim.view.experimentaldata.AnnotateMotionObjectsAction;
 import org.opensim.view.experimentaldata.AnnotatedMotion;
 import org.opensim.view.experimentaldata.ExperimentalDataItemType;
 import org.opensim.view.experimentaldata.ExperimentalDataObject;
@@ -62,6 +62,7 @@ public class OneMotionNode extends OpenSimObjectNode{
           setExperimental(true);
           createChildren(dMotion);
       }
+
    }
    
    public Image getIcon(int i) {
@@ -103,8 +104,8 @@ public class OneMotionNode extends OpenSimObjectNode{
                 (MotionRenameAction) MotionRenameAction.findObject(
                      (Class)Class.forName("org.opensim.view.motions.MotionRenameAction"), true),
                  isExperimental()?null:
-                (MotionAppendMotionAction) MotionAppendMotionAction.findObject(
-                     (Class)Class.forName("org.opensim.view.motions.MotionAppendMotionAction"), true),
+                (MotionAssociateMotionAction) MotionAssociateMotionAction.findObject(
+                     (Class)Class.forName("org.opensim.view.motions.MotionAssociateMotionAction"), true),
                 (MotionsSynchronizeAction) MotionsSynchronizeAction.findObject(
                      (Class)Class.forName("org.opensim.view.motions.MotionsSynchronizeAction"), true),
                 (MotionsSaveAsAction) MotionsSaveAsAction.findObject(
