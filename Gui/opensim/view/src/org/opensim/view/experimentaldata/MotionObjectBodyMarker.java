@@ -35,71 +35,29 @@ import org.opensim.utils.Vec3;
  *  OR BUSINESS INTERRUPTION) OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
  *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class MotionObjectBodyMarker extends MotionObjectBodyFixed {
 
-    protected String bodyName = "ground";
-    public static final String PROP_BODYNAME = "bodyName";
-    protected Vec3 position = new Vec3(0, 0, 0);
-
+/*
+ * An Object representing an Experimental Marker
+ */
+public class MotionObjectBodyMarker extends MotionObjectBodyPoint {
+ 
+    private String markerName;
     public MotionObjectBodyMarker(ExperimentalDataItemType objectType, String baseName, int index) {
         super(objectType, baseName, index);
     }
 
     /**
-     * Get the value of position
-     *
-     * @return the value of position
+     * @return the markerName
      */
-    public Vec3 getPosition() {
-        return position;
+    public String getMarkerName() {
+        return markerName;
     }
 
     /**
-     * Set the value of position
-     *
-     * @param position new value of position
+     * @param markerName the markerName to set
      */
-    public void setPosition(Vec3 position) {
-        this.position = position;
+    public void setMarkerName(String markerName) {
+        this.markerName = markerName;
     }
 
-    /**
-     * Get the value of bodyName
-     *
-     * @return the value of bodyName
-     */
-    public String getBodyName() {
-        return bodyName;
-    }
-
-    /**
-     * Set the value of bodyName
-     *
-     * @param bodyName new value of bodyName
-     */
-    public void setBodyName(String bodyName) {
-        String oldBodyName = this.bodyName;
-        this.bodyName = bodyName;
-        propertyChangeSupport.firePropertyChange(PROP_BODYNAME, oldBodyName, bodyName);
-    }
-    private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
-
-    /**
-     * Add PropertyChangeListener.
-     *
-     * @param listener
-     */
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        propertyChangeSupport.addPropertyChangeListener(listener);
-    }
-
-    /**
-     * Remove PropertyChangeListener.
-     *
-     * @param listener
-     */
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        propertyChangeSupport.removePropertyChangeListener(listener);
-    }
-
-}
+ }

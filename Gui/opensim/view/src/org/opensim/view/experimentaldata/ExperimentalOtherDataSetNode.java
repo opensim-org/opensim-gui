@@ -104,7 +104,7 @@ public class ExperimentalOtherDataSetNode extends OpenSimNode {
         // Create an ExperimentalForceNode for each 
         if (allMotionObjects==null) return;
         for(ExperimentalDataObject dObject:allMotionObjects){
-            if (dObject.getObjectType()!=ExperimentalDataItemType.ForceData &&
+            if (dObject.getObjectType()!=ExperimentalDataItemType.ForceAndPointData &&
                     dObject.getObjectType()!=ExperimentalDataItemType.MarkerData){
                 getChildren().add(new Node[]{new ExperimentalOtherDataNode(dObject, dMotion)});
             }

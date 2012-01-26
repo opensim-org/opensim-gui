@@ -162,7 +162,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Applied to"/>
+            <Property name="text" type="java.lang.String" value="Attached to"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="BodiesComboBox">
@@ -183,7 +183,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Force Name"/>
+            <Property name="text" type="java.lang.String" value="Object Name"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="ForceNameTextField">
@@ -197,7 +197,6 @@
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupForceType"/>
             </Property>
-            <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Point Force"/>
             <Property name="actionCommand" type="java.lang.String" value="PointForce"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -219,6 +218,7 @@
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupForceType"/>
             </Property>
+            <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Body Force"/>
             <Property name="actionCommand" type="java.lang.String" value="BodyForce"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">

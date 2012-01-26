@@ -1,5 +1,5 @@
 /*
- * EditOneMotionForcePanel.java
+ * EditOneMotionObjectPanel.java
  *
  * Created on January 30, 2010, 1:37 PM
  */
@@ -12,42 +12,42 @@ import org.openide.DialogDescriptor;
 import org.opensim.modeling.ArrayInt;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.BodySet;
-import org.opensim.modeling.ExternalLoads;
 import org.opensim.modeling.Model;
-import org.opensim.modeling.ExternalForce;
 import org.opensim.modeling.Storage;
 
 /**
  *
  * @author  ayman
  */
-public class EditOneMotionForcePanel extends javax.swing.JPanel {
-    ExternalForce externalForce=null;
-    Storage forceStorage=null;
-    //Model model;
-    ExternalLoads loads;
+public class EditOneMotionObjectPanel extends javax.swing.JPanel {
+    MotionObjectBodyPoint motionBodyPoint=null;
+    MotionObjectBodyForceAtFixedPoint motionForce = null;
+    AnnotatedMotion aMotion;
+    Model aModel;
+    
     boolean initializing=true;
     ArrayStr lbls;
     private DialogDescriptor dDialog;
     boolean changeToUniqueNames=false;  // If true we should be using column numbers exclusively
-    
-    /** Creates new form EditOneMotionForcePanel */
-    public EditOneMotionForcePanel(ExternalForce force, Storage storage, ExternalLoads aLoads) {
-        externalForce = force;
-        loads = aLoads;
-        forceStorage = new Storage(storage);
-        changeToUniqueNames = forceStorage.makeStorageLabelsUnique();
-        if (changeToUniqueNames){ 
-            // Prompt user to save to a new file, describe changes
-        }
-        lbls=forceStorage.getColumnLabels();
+    boolean isForce=false;
+    boolean pointSpecified=false;
+    /** Creates new form EditOneMotionObjectPanel */
+    public EditOneMotionObjectPanel(MotionObjectBodyPoint motionObject, AnnotatedMotion dMotion, Model model) {
+        motionBodyPoint = motionObject;
+        isForce = (motionObject instanceof MotionObjectBodyForceAtVarPoint ||
+                motionObject instanceof MotionObjectBodyForceAtFixedPoint);
+        if (isForce) 
+            motionForce = (MotionObjectBodyForceAtFixedPoint)motionObject;
+        aMotion = dMotion;
+        aModel = model;
+        lbls=aMotion.getColumnLabels();
         //model = aModel;
         initComponents();
-        ForceNameTextField.setText(force.getName());
+        jCheckBoxForce.setSelected(isForce);
+        
+        ForceNameTextField.setText(motionObject.getName());
         initComboBoxes();
         
-        jCheckBoxForce.setSelected(externalForce.appliesForce());
-        jRadioButtonApplyPointForce.setSelected(externalForce.specifiesPoint());
           
         updateAvailabilityFromCheckboxSelections();
         initializing=false;
@@ -86,7 +86,7 @@ public class EditOneMotionForcePanel extends javax.swing.JPanel {
 
         jLabelExternalLoadsApplicationDescription.setText("jLabel1");
 
-        jLabel5.setText("Applied to");
+        jLabel5.setText("Attached to");
 
         BodiesComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         BodiesComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -100,7 +100,7 @@ public class EditOneMotionForcePanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setText("Force Name");
+        jLabel3.setText("Object Name");
 
         ForceNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +114,6 @@ public class EditOneMotionForcePanel extends javax.swing.JPanel {
         });
 
         buttonGroupForceType.add(jRadioButtonApplyPointForce);
-        jRadioButtonApplyPointForce.setSelected(true);
         jRadioButtonApplyPointForce.setText("Point Force");
         jRadioButtonApplyPointForce.setActionCommand("PointForce");
         jRadioButtonApplyPointForce.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -127,6 +126,7 @@ public class EditOneMotionForcePanel extends javax.swing.JPanel {
         });
 
         buttonGroupForceType.add(jRadioButtonApplyBodyForce);
+        jRadioButtonApplyBodyForce.setSelected(true);
         jRadioButtonApplyBodyForce.setText("Body Force");
         jRadioButtonApplyBodyForce.setActionCommand("BodyForce");
         jRadioButtonApplyBodyForce.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -425,10 +425,9 @@ public class EditOneMotionForcePanel extends javax.swing.JPanel {
     private void initComboBoxes() {
         // Body name combobox
         
-        Model model=loads.getModel();
-        BodySet bodySet = model.getBodySet();
+        BodySet bodySet = aModel.getBodySet();
         populateBodyList(bodySet, BodiesComboBox);
-         BodiesComboBox.setSelectedItem(externalForce.getAppliedToBodyName());
+         BodiesComboBox.setSelectedItem(motionBodyPoint.getAttachedToBodyName());
         // All other drop downs, populate with column names except time.
         Vector<String> colmnLabels = lbls.toVector();
         colmnLabels.set(0,""); // no default column & time shouldn't be permitted anyway'
@@ -438,21 +437,25 @@ public class EditOneMotionForcePanel extends javax.swing.JPanel {
         jComboBoxFX.setModel(new javax.swing.DefaultComboBoxModel(colNames));
         jComboBoxFY.setModel(new javax.swing.DefaultComboBoxModel(colNames));
         jComboBoxFZ.setModel(new javax.swing.DefaultComboBoxModel(colNames));
-        jCheckBoxForce.setSelected(false);
-        String forceId = externalForce.getForceIdentifier();
+        jCheckBoxForce.setSelected(isForce);
+        if (isForce){
+            
+        }
         //externalForce.getForceFunctionNames(forceFunctionNames);
-        if (externalForce.appliesForce()){
+         if (motionBodyPoint.appliesForce()){
+            String forceId = motionForce.getForceIdentifier();
             setComboBoxSelection(jComboBoxFX, forceId, 0);
             setComboBoxSelection(jComboBoxFY, forceId, 1);
             setComboBoxSelection(jComboBoxFZ, forceId, 2);
         }
+        
         // Point dropdowns
         jComboBoxPX.setModel(new javax.swing.DefaultComboBoxModel(colNames));
         jComboBoxPY.setModel(new javax.swing.DefaultComboBoxModel(colNames));
         jComboBoxPZ.setModel(new javax.swing.DefaultComboBoxModel(colNames));
-        String pointId = externalForce.getPointIdentifier();
         //externalForce.getPointFunctionNames(pointFunctionNames);
-        if (externalForce.specifiesPoint()){
+        if (motionBodyPoint.specifiesPoint()){
+            String pointId = motionBodyPoint.getPointIdentifier();
             setComboBoxSelection(jComboBoxPX, pointId, 0);
             setComboBoxSelection(jComboBoxPY, pointId, 1);
             setComboBoxSelection(jComboBoxPZ, pointId, 2);
@@ -462,10 +465,12 @@ public class EditOneMotionForcePanel extends javax.swing.JPanel {
        //externalForce.getTorqueFunctionNames(torqueFunctionNames);
         populateBodyList(bodySet, ForceExpressedBodiesComboBox);
         populateBodyList(bodySet, PointExpressedBodiesComboBox);
-        String dbg1 = externalForce.getForceExpressedInBodyName();
-        ForceExpressedBodiesComboBox.setSelectedItem(externalForce.getForceExpressedInBodyName());
-        String dbg2 = externalForce.getPointExpressedInBodyName();
-        PointExpressedBodiesComboBox.setSelectedItem(externalForce.getPointExpressedInBodyName());
+        if (isForce){
+            String dbg1 = motionForce.getForceExpressedInBodyName();
+            ForceExpressedBodiesComboBox.setSelectedItem(motionForce.getForceExpressedInBodyName());
+        }
+        String dbg2 = motionBodyPoint.getPointExpressedInBodyName();
+        PointExpressedBodiesComboBox.setSelectedItem(motionBodyPoint.getPointExpressedInBodyName());
 
     }
 
@@ -481,7 +486,7 @@ public class EditOneMotionForcePanel extends javax.swing.JPanel {
     }
     
     private void setComboBoxSelection(final JComboBox jcombox, final String objIdentifier, final int j) throws NumberFormatException {
-        ArrayInt indices = forceStorage.getColumnIndicesForIdentifier(objIdentifier);
+        ArrayInt indices = aMotion.getColumnIndicesForIdentifier(objIdentifier);
         if (indices.getSize()!=3) return;
         if (indices.getitem(j)== -1) return;
         //String[] suffixes = new String[]{"x", "y", "z"};
@@ -519,23 +524,23 @@ public class EditOneMotionForcePanel extends javax.swing.JPanel {
         if (initializing) return;
         String forceName=ForceNameTextField.getText();
         if (forceName != null && forceName.length()!=0)
-            if (!initializing) externalForce.setName(forceName);
+            if (!initializing) motionBodyPoint.setName(forceName);
         
         String forceBodyame = (String) BodiesComboBox.getSelectedItem();
         if (forceBodyame != null && forceBodyame.length()!=0)
-            if (!initializing) externalForce.setAppliedToBodyName(forceBodyame);
+            if (!initializing) motionBodyPoint.setAttachedToBodyName(forceBodyame);
         
         // Set either forcefunctions or force and pointFunctions if ForceCheckBox is on
-        if (jCheckBoxForce.isSelected()){
+        if (jCheckBoxForce.isSelected() && isForce){
             // get first selected item and make sure it has a common prefix with other 2 use the prefix as forceIdentifier
-            externalForce.setForceIdentifier(makeIdentifier(
+            motionForce.setForceIdentifier(makeIdentifier(
                     (String)jComboBoxFX.getSelectedItem(),
                     (String)jComboBoxFY.getSelectedItem(), 
                     (String)jComboBoxFZ.getSelectedItem()));
             // if point force also allow for setPointFunctionNames
             String cmd=buttonGroupForceType.getSelection().getActionCommand();
             if (cmd.equals("PointForce")){
-                externalForce.setPointIdentifier(makeIdentifier(
+                motionBodyPoint.setPointIdentifier(makeIdentifier(
                     (String)jComboBoxPX.getSelectedItem(),
                     (String)jComboBoxPY.getSelectedItem(), 
                     (String)jComboBoxPZ.getSelectedItem()));
@@ -548,18 +553,18 @@ public class EditOneMotionForcePanel extends javax.swing.JPanel {
                 //externalForce.clearForceFunctions();
             }
         }
-        // Set torquefunctions if TorqueCheckBox is on
+        
         String selected = (String) ForceExpressedBodiesComboBox.getSelectedItem();
-        if (selected !=null)
-            externalForce.setForceExpressedInBodyName(selected);
+        if (selected !=null && isForce)
+            motionForce.setForceExpressedInBodyName(selected);
         selected = (String) PointExpressedBodiesComboBox.getSelectedItem();
         if (selected !=null)
-            externalForce.setPointExpressedInBodyName(selected);
+            motionBodyPoint.setPointExpressedInBodyName(selected);
     }
     // Convenience method to enable/disable buttons and dropdowns based on user selections
     // for check-boxes, radio-buttons
     private void updateAvailabilityFromCheckboxSelections() {
-        boolean applyForce=jCheckBoxForce.isSelected();
+        boolean applyForce=jCheckBoxForce.isSelected() && isForce;
         String cmd = buttonGroupForceType.getSelection().getActionCommand();
         jRadioButtonApplyPointForce.setEnabled(applyForce);
         jRadioButtonApplyBodyForce.setEnabled(applyForce);
@@ -610,28 +615,6 @@ public class EditOneMotionForcePanel extends javax.swing.JPanel {
             }
         }
       return true;
-    }
-    public boolean  makeStorageLabelsUnique(Storage aStore) {
-        ArrayStr lbls = aStore.getColumnLabels();
-        String offending="";
-        boolean changedLabels=false;
-        for(int i=0; i< lbls.getSize(); i++){
-            boolean isUnique= (lbls.findIndex(lbls.getitem(i))==i);
-            if (!isUnique){ // Make new names
-                offending =lbls.getitem(i);
-                boolean exist=true;
-                String newName =offending;
-                changedLabels = true;
-                int c=1;
-                while(exist){
-                    newName = offending+"("+String.valueOf(c)+")";
-                    exist= (lbls.findIndex(newName)!=-1);
-                    c++;
-                }
-                lbls.setitem(i, newName);
-            }
-        }
-        return (!changedLabels);
     }
     /**
      * We should expect these strings to have common prefix except for last letter

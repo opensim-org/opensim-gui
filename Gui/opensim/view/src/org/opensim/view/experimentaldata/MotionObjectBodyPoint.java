@@ -1,11 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.opensim.view.experimentaldata;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
+import org.opensim.utils.Vec3;
 
 /**
  *
@@ -34,69 +29,83 @@ import java.beans.PropertyChangeSupport;
  *  OR BUSINESS INTERRUPTION) OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
  *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class MotionObjectJointForce extends MotionObjectBodyPoint {
 
-    protected String jointName;
+/*
+ * A class representing a point fixed to a body read from a data/motion file. 
+ */
+public class MotionObjectBodyPoint extends ExperimentalDataObject {
+    protected double[] point = new double[]{0, 0, 0};
 
-    public MotionObjectJointForce(ExperimentalDataItemType objectType, String baseName, int index) {
+    public MotionObjectBodyPoint(ExperimentalDataItemType objectType, String baseName, int index) {
         super(objectType, baseName, index);
+        setPointIdentifier(baseName);
+    }
+    public static final String PROP_BODYNAME = "bodyName";
+    protected String bodyName = "ground";
+    private String pointIdentifier="";
+    /**
+     * Get the value of bodyName
+     *
+     * @return the value of bodyName
+     */
+    public String getBodyName() {
+        return bodyName;
     }
 
     /**
-     * Get the value of jointName
+     * Set the value of bodyName
      *
-     * @return the value of jointName
+     * @param bodyName new value of bodyName
      */
-    public String getJointName() {
-        return jointName;
+    public void setBodyName(String bodyName) {
+        String oldBodyName = this.bodyName;
+        this.bodyName = bodyName;
     }
 
-    /**
-     * Set the value of jointName
-     *
-     * @param jointName new value of jointName
-     */
-    public void setJointName(String jointName) {
-        this.jointName = jointName;
-    }
-    private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
-
-    /**
-     * Add PropertyChangeListener.
-     *
-     * @param listener
-     */
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        propertyChangeSupport.addPropertyChangeListener(listener);
+    void setPointExpressedInBodyName(String selected) {
+        bodyName = selected;
     }
 
-    /**
-     * Remove PropertyChangeListener.
-     *
-     * @param listener
-     */
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        propertyChangeSupport.removePropertyChangeListener(listener);
+    void setPointIdentifier(String makeIdentifier) {
+        pointIdentifier = makeIdentifier;
     }
 
-    void setForceExpressedInBodyName(String selected) {
-        throw new UnsupportedOperationException("Not yet implemented");
+    String getPointExpressedInBodyName() {
+        return bodyName;
     }
 
-    void setForceIdentifier(String makeIdentifier) {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    String getForceExpressedInBodyName() {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    boolean appliesForce() {
+    boolean specifiesPoint() {
         return true;
     }
 
-    String getForceIdentifier() {
-        throw new UnsupportedOperationException("Not yet implemented");
+    String getPointIdentifier() {
+        return pointIdentifier;
     }
 
+    void setAttachedToBodyName(String forceBodyame) {
+        setBodyName(forceBodyame);
+    }
+
+    String getAttachedToBodyName() {
+        return getBodyName();
+    }
+
+    /**
+     * @return the point
+     */
+    public double[] getPoint() {
+        return point;
+    }
+
+    /**
+     * @param point the point to set
+     */
+    public void setPoint(double[] point) {
+        this.point = point;
+    }
+
+    boolean appliesForce() {
+        return false;
+    }
+    
 }

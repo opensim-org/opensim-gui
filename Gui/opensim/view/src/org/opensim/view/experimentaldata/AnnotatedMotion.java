@@ -67,6 +67,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
     private double frameRate=0.;
     private double cameraRate=0.;
     private double dataRate=0.;
+    private MotionDisplayer motionDisplayer;
     /** Creates a new instance of AnnotatedMotion 
      * This constructor is called when a trc file is read (so we know it is 
      * Marker only data already.
@@ -124,7 +125,9 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
     }
 
     public Vector<String> getMarkerNames() {
-        return getNamesOfObjectsOfType(ExperimentalDataItemType.MarkerData);
+        Vector<String> markers= getNamesOfObjectsOfType(ExperimentalDataItemType.MarkerData);
+        markers.addAll(getNamesOfObjectsOfType(ExperimentalDataItemType.PointData));
+        return markers;
     }
 
     public void setMarkerNames(Vector<String> markerNames) {
@@ -132,7 +135,9 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
     }
 
     public Vector<String> getForceNames() {
-        Vector<String> forces =  getNamesOfObjectsOfType(ExperimentalDataItemType.ForceData);
+        Vector<String> forces =  getNamesOfObjectsOfType(ExperimentalDataItemType.ForceAndPointData);
+        forces.addAll(getNamesOfObjectsOfType(ExperimentalDataItemType.BodyForceData));
+        forces.addAll(getNamesOfObjectsOfType(ExperimentalDataItemType.MomentData));
         forces.addAll(getNamesOfObjectsOfType(ExperimentalDataItemType.JointForceData));
         return forces;
     }
@@ -146,13 +151,13 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
         patterns.add(5,  new String[]{"_x", "_y", "_z"});
         patterns.add(6,  new String[]{"_fx", "_fy", "_fz"});
         patterns.add(7,  new String[]{"_mx", "_my", "_mz"});
-        classifications.add(0, ExperimentalDataItemType.ForceData);
+        classifications.add(0, ExperimentalDataItemType.ForceAndPointData);
         classifications.add(1, ExperimentalDataItemType.PointData);
         classifications.add(2, ExperimentalDataItemType.PointData);
         classifications.add(3, ExperimentalDataItemType.PointData);
         classifications.add(4, ExperimentalDataItemType.PointData);
         classifications.add(5, ExperimentalDataItemType.PointData);
-        classifications.add(6, ExperimentalDataItemType.ForceData);
+        classifications.add(6, ExperimentalDataItemType.BodyForceData);
         classifications.add(7, ExperimentalDataItemType.MomentData);
         
     }
@@ -187,7 +192,29 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
                 if (foundPatternAtIdx){
                     found=true;
                     columnType = classifications.get(patternIdx);
-                    classified.add(new MotionObjectBodyForce(columnType, baseName, i-1));
+                    if (patternIdx ==0){
+                        // Force _v? followed by Point _p?
+                        classified.add(new MotionObjectBodyForceAtVarPoint(columnType, baseName+"_v", i-1));
+                        classified.add(new MotionObjectBodyPoint(columnType, baseName+"_p", i+2));
+                    }
+                    else {
+                        String patternString  = patterns.get(patternIdx)[0];
+                        String prefix = patternString.substring(0, patternString.length()-1);
+                        switch(classifications.get(patternIdx)){
+                            case ForceAndPointData:
+                                classified.add(new MotionObjectBodyForceAtVarPoint(columnType, baseName+prefix, i-1));
+                                break;
+                            case PointData:
+                            case MarkerData:
+                                classified.add(new MotionObjectBodyMarker(columnType, baseName+prefix, i-1));
+                                break;
+                            case BodyForceData:
+                            case MomentData:
+                                classified.add(new MotionObjectBodyForceAtFixedPoint(columnType, baseName+prefix, i-1));
+                                break;
+                        }                           
+                            
+                    }
                     System.out.println("Found "+columnType.toString()+ " at index "+i);
                     i+=(columnType.getNumberOfColumns()-1);
                     break;
@@ -268,7 +295,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
                         dataObject.getObjectType()==ExperimentalDataItemType.MarkerData){
                     int startIndex = dataObject.getStartIndexInFileNotIncludingTime();
                     transformPointData(motionCopy, vtktransform, startIndex);
-                } else if (dataObject.getObjectType()==ExperimentalDataItemType.ForceData){
+                } else if (dataObject.getObjectType()==ExperimentalDataItemType.ForceAndPointData){
                     int startIndex = dataObject.getStartIndexInFileNotIncludingTime();
                     // First vector, then position
                     // If we allow for translations the first line may need to change
@@ -423,5 +450,15 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
     public double getDataRate() {
         return dataRate;
     }
+
+    /**
+     * @param motionDisplayer the motionDisplayer to set
+     */
+    public void setMotionDisplayer(MotionDisplayer motionDisplayer) {
+        this.motionDisplayer = motionDisplayer;
+    }
     
+    public void updateMotionDisplayer() {
+        motionDisplayer.updateMotionObjects();
+    }
 }

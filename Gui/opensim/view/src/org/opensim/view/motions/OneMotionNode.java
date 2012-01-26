@@ -33,7 +33,6 @@ import java.net.URL;
 import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.Action;
-import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.Storage;
@@ -43,6 +42,7 @@ import org.opensim.view.experimentaldata.ExperimentalDataObject;
 import org.opensim.view.experimentaldata.ExperimentalForceSetNode;
 import org.opensim.view.experimentaldata.ExperimentalMarkerSetNode;
 import org.opensim.view.experimentaldata.ExperimentalOtherDataSetNode;
+import org.opensim.view.experimentaldata.MotionEditMotionObjectsAction;
 import org.opensim.view.experimentaldata.MotionReclassifyAction;
 import org.opensim.view.nodes.*;
 
@@ -50,7 +50,7 @@ import org.opensim.view.nodes.*;
  *
  * @author Ayman & Jeff
  */
-public class OneMotionNode extends OpenSimObjectNode{
+public class OneMotionNode extends OpenSimObjectNode {
     private boolean experimental;
     /** Creates a new instance of OneMotionNode */
    public OneMotionNode(Storage motion) {
@@ -96,7 +96,7 @@ public class OneMotionNode extends OpenSimObjectNode{
     public Action[] getActions(boolean b) {
         Action[] retValue=null;
         try {
-            boolean isCurrent = MotionsDB.getInstance().isModelMotionPairCurrent(new MotionsDB.ModelMotionPair(getModel(), getMotion()));
+            //boolean isCurrent = MotionsDB.getInstance().isModelMotionPairCurrent(new MotionsDB.ModelMotionPair(getModel(), getMotion()));
             retValue = new Action[]{
                 (MotionsSetCurrentAction) MotionsSetCurrentAction.findObject(
                      (Class)Class.forName("org.opensim.view.motions.MotionsSetCurrentAction"), true),
@@ -113,10 +113,15 @@ public class OneMotionNode extends OpenSimObjectNode{
                  isExperimental()?null:
                 (MotionsCloseAction) MotionsCloseAction.findObject(
                      (Class)Class.forName("org.opensim.view.motions.MotionsCloseAction"), true),
-                (isExperimental() && isCurrent)?
+                (isExperimental())?
                     (MotionReclassifyAction) MotionReclassifyAction.findObject(
                      (Class)Class.forName("org.opensim.view.experimentaldata.MotionReclassifyAction"), true)
                      :null,
+               (isExperimental())?
+                    (MotionEditMotionObjectsAction) MotionEditMotionObjectsAction.findObject(
+                     (Class)Class.forName("org.opensim.view.experimentaldata.MotionEditMotionObjectsAction"), true)
+                     :null,
+                
             };
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
@@ -146,19 +151,20 @@ public class OneMotionNode extends OpenSimObjectNode{
         if (names !=null && names.size()>0){ // File had forces
              getChildren().add(new Node[]{new ExperimentalForceSetNode(dMotion)});
         }
+        /*
         // Things other than markers and forces
         Vector<ExperimentalDataObject> all = dMotion.getClassified();
         if (names !=null&& names.size()>0){  // Everything else
             for(ExperimentalDataObject obj:all){
                 boolean other = (obj.getObjectType()!=ExperimentalDataItemType.MarkerData) &&
-                        (obj.getObjectType()!=ExperimentalDataItemType.ForceData);
+                        (obj.getObjectType()!=ExperimentalDataItemType.ForceAndPointData);
                 if (other){
                     // Create a parent node for OtherData
                     getChildren().add(new Node[]{new ExperimentalOtherDataSetNode(dMotion)}); 
                     break;
                }
             }
-        }
+        }*/
     }
 
     public boolean isExperimental() {

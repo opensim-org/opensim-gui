@@ -178,11 +178,15 @@ public class MotionDisplayer implements SelectionListener {
             // Add place hoders for markers
             AnnotatedMotion mot= (AnnotatedMotion) simmMotionData;
             Vector<ExperimentalDataObject> objects=mot.getClassified();
+            mot.setMotionDisplayer(this);
             for(ExperimentalDataObject nextObject:objects){
                 if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
                     int glyphIndex=markersRep.addLocation(nextObject);
                     nextObject.setGlyphInfo(glyphIndex, markersRep);
-                } else if (nextObject.getObjectType()==ExperimentalDataItemType.ForceData){
+                } else if (nextObject.getObjectType()==ExperimentalDataItemType.ForceAndPointData){
+                    int glyphIndex=groundForcesRep.addLocation(nextObject);
+                    nextObject.setGlyphInfo(glyphIndex, groundForcesRep);
+                } else if (nextObject.getObjectType()==ExperimentalDataItemType.BodyForceData){
                     int glyphIndex=groundForcesRep.addLocation(nextObject);
                     nextObject.setGlyphInfo(glyphIndex, groundForcesRep);
                 }
@@ -508,12 +512,21 @@ public class MotionDisplayer implements SelectionListener {
                             states.getitem(startIndex+2)/mot.getUnitConversion());
                     markersModified = true;
                 }
-                else if (nextObject.getObjectType()==ExperimentalDataItemType.ForceData){
+                else if (nextObject.getObjectType()==ExperimentalDataItemType.ForceAndPointData){
                     int startIndex = nextObject.getStartIndexInFileNotIncludingTime();
                     groundForcesRep.setLocation(nextObject.getGlyphIndex(), 
                             states.getitem(startIndex+3), 
                             states.getitem(startIndex+4), 
                             states.getitem(startIndex+5));
+                    groundForcesRep.setNormalAtLocation(nextObject.getGlyphIndex(), 
+                            states.getitem(startIndex), 
+                            states.getitem(startIndex+1), 
+                            states.getitem(startIndex+2));
+                   
+                    forcesModified=true;
+              } else if (nextObject.getObjectType()==ExperimentalDataItemType.BodyForceData){
+                    int startIndex = nextObject.getStartIndexInFileNotIncludingTime();
+                    groundForcesRep.setLocation(nextObject.getGlyphIndex(), 0., 0., 0.);
                     groundForcesRep.setNormalAtLocation(nextObject.getGlyphIndex(), 
                             states.getitem(startIndex), 
                             states.getitem(startIndex+1), 
@@ -732,7 +745,7 @@ public class MotionDisplayer implements SelectionListener {
             mot.getDataColumn(startIndex+2, zCoord);
             scale = mot.getUnitConversion();
         } 
-        else if (object.getObjectType()==ExperimentalDataItemType.ForceData){
+        else if (object.getObjectType()==ExperimentalDataItemType.ForceAndPointData){
             int startIndex = object.getStartIndexInFileNotIncludingTime();
             mot.getDataColumn(startIndex+2, xCoord);
             mot.getDataColumn(startIndex+3, yCoord);
@@ -810,5 +823,30 @@ public class MotionDisplayer implements SelectionListener {
             if (obj!=null)
             // SelectedGlyphUserObject provies the bbox, name, other attributes needed for selection mgmt
                 ViewDB.getInstance().markSelected(new SelectedGlyphUserObject(obj, model, glyphRep), true, false, true);
+    }
+    
+    public void updateMotionObjects(){
+        AddMotionObjectsRep(model);
+        if (simmMotionData instanceof AnnotatedMotion){
+            // Add place hoders for markers
+            AnnotatedMotion mot= (AnnotatedMotion) simmMotionData;
+            Vector<ExperimentalDataObject> objects=mot.getClassified();
+            mot.setMotionDisplayer(this);
+            for(ExperimentalDataObject nextObject:objects){
+                if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
+                    int glyphIndex=markersRep.addLocation(nextObject);
+                    nextObject.setGlyphInfo(glyphIndex, markersRep);
+                } else if (nextObject.getObjectType()==ExperimentalDataItemType.ForceAndPointData){
+                    int glyphIndex=groundForcesRep.addLocation(nextObject);
+                    nextObject.setGlyphInfo(glyphIndex, groundForcesRep);
+                } else if (nextObject.getObjectType()==ExperimentalDataItemType.BodyForceData){
+                    int glyphIndex=groundForcesRep.addLocation(nextObject);
+                    nextObject.setGlyphInfo(glyphIndex, groundForcesRep);
+                }
+                
+            }
+            //createTrails(model);
+            return;
+        }      
     }
 }

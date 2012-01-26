@@ -35,51 +35,41 @@ import org.opensim.utils.Vec3;
  *  OR BUSINESS INTERRUPTION) OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
  *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class MotionObjectBodyForce extends MotionObjectBodyFixed {
-    protected Vec3 forceVector;
+public class MotionObjectBodyForceAtFixedPoint extends MotionObjectBodyPoint {
+
     public static final String PROP_FORCEVECTOR = "forceVector";
+    String forceIdentifier="";
+    String forceExpressedInBodyName = "ground";
+    
+    public MotionObjectBodyForceAtFixedPoint(ExperimentalDataItemType objectType, String baseName, int forceIndex) {
+        super(objectType, "", forceIndex);
+        setForceIdentifier(baseName);
+        setName(baseName);
+   }
 
-    public MotionObjectBodyForce(ExperimentalDataItemType objectType, String baseName, int index) {
-        super(objectType, baseName, index);
+    void setForceExpressedInBodyName(String selected) {
+        forceExpressedInBodyName = selected;
     }
 
-    /**
-     * Get the value of forceVector
-     *
-     * @return the value of forceVector
-     */
-    public Vec3 getForceVector() {
-        return forceVector;
+    void setForceIdentifier(String makeIdentifier) {
+        forceIdentifier = makeIdentifier;
     }
 
-    /**
-     * Set the value of forceVector
-     *
-     * @param forceVector new value of forceVector
-     */
-    public void setForceVector(Vec3 forceVector) {
-        Vec3 oldForceVector = this.forceVector;
-        this.forceVector = forceVector;
-        propertyChangeSupport.firePropertyChange(PROP_FORCEVECTOR, oldForceVector, forceVector);
-    }
-    private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
-
-    /**
-     * Add PropertyChangeListener.
-     *
-     * @param listener
-     */
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        propertyChangeSupport.addPropertyChangeListener(listener);
+    String getForceExpressedInBodyName() {
+        return forceExpressedInBodyName;
     }
 
-    /**
-     * Remove PropertyChangeListener.
-     *
-     * @param listener
-     */
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        propertyChangeSupport.removePropertyChangeListener(listener);
+    boolean appliesForce() {
+        return true;
     }
 
+    String getForceIdentifier() {
+        return forceIdentifier;
+    }
+
+    @Override
+    boolean specifiesPoint() {
+        return false;
+    }
+ 
 }

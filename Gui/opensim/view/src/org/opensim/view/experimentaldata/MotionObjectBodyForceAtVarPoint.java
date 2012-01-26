@@ -6,6 +6,7 @@ package org.opensim.view.experimentaldata;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import org.opensim.utils.Vec3;
 
 /**
  *
@@ -34,61 +35,33 @@ import java.beans.PropertyChangeSupport;
  *  OR BUSINESS INTERRUPTION) OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
  *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class MotionObjectJointForce extends MotionObjectBodyPoint {
+public class MotionObjectBodyForceAtVarPoint extends MotionObjectBodyPoint {
 
-    protected String jointName;
-
-    public MotionObjectJointForce(ExperimentalDataItemType objectType, String baseName, int index) {
-        super(objectType, baseName, index);
-    }
-
-    /**
-     * Get the value of jointName
-     *
-     * @return the value of jointName
-     */
-    public String getJointName() {
-        return jointName;
-    }
-
-    /**
-     * Set the value of jointName
-     *
-     * @param jointName new value of jointName
-     */
-    public void setJointName(String jointName) {
-        this.jointName = jointName;
-    }
-    private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
-
-    /**
-     * Add PropertyChangeListener.
-     *
-     * @param listener
-     */
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        propertyChangeSupport.addPropertyChangeListener(listener);
-    }
-
-    /**
-     * Remove PropertyChangeListener.
-     *
-     * @param listener
-     */
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        propertyChangeSupport.removePropertyChangeListener(listener);
-    }
+    public static final String PROP_FORCEVECTOR = "forceVector";
+    double[] offset = new double[]{0, 0, 0};
+    String forceIdentifier="";
+    String forceExpressedInBodyName = "ground";
+    
+    public MotionObjectBodyForceAtVarPoint(ExperimentalDataItemType objectType, String baseName, int forceIndex) {
+        super(objectType, baseName, forceIndex);
+        setForceIdentifier(baseName);
+   }
+    /*
+    public MotionObjectBodyForceAtVarPoint(ExperimentalDataItemType objectType, String baseName, int forceIndex) {
+        super(objectType, baseName, forceIndex);
+        setForceIdentifier(baseName);
+   }*/
 
     void setForceExpressedInBodyName(String selected) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        forceExpressedInBodyName = selected;
     }
 
     void setForceIdentifier(String makeIdentifier) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        forceIdentifier = makeIdentifier;
     }
 
     String getForceExpressedInBodyName() {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return forceExpressedInBodyName;
     }
 
     boolean appliesForce() {
@@ -96,7 +69,7 @@ public class MotionObjectJointForce extends MotionObjectBodyPoint {
     }
 
     String getForceIdentifier() {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return forceIdentifier;
     }
-
+ 
 }

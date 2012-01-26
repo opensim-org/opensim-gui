@@ -36,7 +36,7 @@ import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.OpenSimvtkGlyphCloud;
 
 /**
- *
+ * An Object representing data to be visualized from a data/motion file e.g. Marker, GRF, etc.
  * @author ayman
  */
 public class ExperimentalDataObject extends OpenSimObject {
@@ -62,15 +62,6 @@ public class ExperimentalDataObject extends OpenSimObject {
     public void setObjectType(ExperimentalDataItemType objectType) {
         this.objectType = objectType;
     }
-/*
-    public String getName() {
-        return baseName;
-    }
-
-    public void setName(String baseName) {
-        this.baseName = baseName;
-    }
-*/
     public int getStartIndexInFileNotIncludingTime() {
         return startIndexInFileNotIncludingTime;
     }
