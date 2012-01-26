@@ -10,6 +10,7 @@ import org.opensim.modeling.Joint;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.BodyDisplayer;
+import org.opensim.view.BodyToggleFrameAction;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.pub.ViewDB;
 import vtk.vtkProp3D;
@@ -23,26 +24,47 @@ public final class BodyToggleCOMAction extends BooleanStateAction {
         // TODO implement action body
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         // TODO implement action body
-        boolean newState = !getBooleanState();
-        for(int i=0;i<selected.length;i++){
+        boolean newState = !super.getBooleanState();
+        for( int i=0; i<selected.length; i++ ){
             Node selectedNode = selected[i];
-            if (selectedNode instanceof OneBodyNode){
-                OpenSimObject object=((OneBodyNode) selectedNode).getOpenSimObject();
-                Body b =  Body.safeDownCast(object);
-                vtkProp3D visuals=ViewDB.getInstance().getModelVisuals(b.getModel()).getVtkRepForObject(b);
-                if (visuals instanceof BodyDisplayer){
-                    BodyDisplayer rep = (BodyDisplayer) visuals;
-                    rep.setShowCOM(newState);
-                }
-            }
-            else if (selectedNode instanceof BodiesNode){
+            if( selectedNode instanceof OneBodyNode )
+                this.ShowCMForOneBodyNode( (OneBodyNode)selectedNode, newState, false );
+            else if( selectedNode instanceof BodiesNode ){
                 Model model=((BodiesNode)selectedNode).getModelForNode();
                 ViewDB.getInstance().getModelVisuals(model).setShowCOM(newState);
             }
         }
-         setBooleanState(newState);
+        super.setBooleanState( newState );
         ViewDB.getInstance().renderAll();
    }
+    
+   //-------------------------------------------------------------------------
+   public static boolean  IsShowCMForBody( OpenSimObject openSimObjectAssociatedWithBody )
+   {
+      BodyDisplayer rep = BodyToggleFrameAction.GetBodyDisplayerForBody( openSimObjectAssociatedWithBody );  
+      return rep==null ? false : rep.isShowCOM();
+   }
+    
+    
+   //----------------------------------------------------------------------------- 
+   static public void  ShowCMForOneBodyNode( OneBodyNode oneBodyNode, boolean showCMIsTrueHideIsFalse, boolean renderAll )
+   {
+      if( oneBodyNode == null ) return; 
+      BodyToggleCOMAction.ShowCMForBody( oneBodyNode.getOpenSimObject(), showCMIsTrueHideIsFalse, renderAll );
+   }
+   
+   
+   //-------------------------------------------------------------------------
+   public static void  ShowCMForBody( OpenSimObject openSimObjectAssociatedWithBody, boolean showCMIsTrueHideIsFalse, boolean renderAll )
+   {
+      BodyDisplayer rep = BodyToggleFrameAction.GetBodyDisplayerForBody( openSimObjectAssociatedWithBody );
+      if( rep != null )
+      {
+          rep.setShowCOM( showCMIsTrueHideIsFalse ); 
+          if( renderAll ) ViewDB.getInstance().renderAll();
+      }     
+   }
+    
     
     public String getName() {
         return NbBundle.getMessage(BodyToggleCOMAction.class, "CTL_BodyToggleCOMAction");
@@ -51,7 +73,7 @@ public final class BodyToggleCOMAction extends BooleanStateAction {
     protected void initialize() {
         super.initialize();
         // see org.openide.util.actions.SystemAction.iconResource() javadoc for more details
-        putValue("noIconInMenu", Boolean.TRUE);
+        super.putValue("noIconInMenu", Boolean.TRUE);
     }
     
     public HelpCtx getHelpCtx() {
@@ -66,21 +88,19 @@ public final class BodyToggleCOMAction extends BooleanStateAction {
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         //if(selected.length!=1) return false; // only if a single item is selected
         // Action shouldn't be available otherwise
-        if (selected[0] instanceof OneBodyNode){
+        if( selected[0] instanceof OneBodyNode ){
             OneBodyNode dNode = (OneBodyNode)selected[0];
-            Body b = Body.safeDownCast(dNode.getOpenSimObject());
-            vtkProp3D visuals=ViewDB.getInstance().getModelVisuals(b.getModel()).getVtkRepForObject(b);
-            if (visuals instanceof BodyDisplayer){
-               BodyDisplayer rep = (BodyDisplayer) visuals;
-               setBooleanState(rep.isShowCOM());
-            }
+            BodyDisplayer rep = BodyToggleFrameAction.GetBodyDisplayerForBody( dNode.getOpenSimObject() );
+            if( rep != null ) super.setBooleanState( rep.isShowCOM() );
             return true;
         }
         else if (selected[0] instanceof BodiesNode){
                 Model model=((BodiesNode)selected[0]).getModelForNode();
-                setBooleanState(ViewDB.getInstance().getModelVisuals(model).isShowCOM());
+                super.setBooleanState( ViewDB.getInstance().getModelVisuals(model).isShowCOM() );
                 return true;
         }
         return false;
     }
+    
+
 }

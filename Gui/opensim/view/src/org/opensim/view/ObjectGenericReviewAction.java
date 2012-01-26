@@ -33,8 +33,10 @@ import org.openide.util.actions.CallableSystemAction;
 import org.opensim.view.editors.ObjectEditDialogMaker;
 import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.nodes.OneBodyNode;
+import org.opensim.view.nodes.OneJointNode;
 import org.opensim.view.pub.ViewDB;
 import LSJava.LSPropertyEditors.LSPropertyEditorRigidBody;
+import LSJava.LSPropertyEditors.LSPropertyEditorJoint;
 
 
 public final class ObjectGenericReviewAction  extends CallableSystemAction {
@@ -53,6 +55,10 @@ public final class ObjectGenericReviewAction  extends CallableSystemAction {
          // If osimObjectNode is a rigid body, open the easy-to-use rigid body property editor (also provides the older table version). 
          if( osimObjectNode instanceof OneBodyNode )
            new LSJava.LSPropertyEditors.LSPropertyEditorRigidBody( (OneBodyNode)osimObjectNode, ownerWindow );
+         
+         // If osimObjectNode is a joint (connection), open the easy-to-use joint property editor (also provides the older table version). 
+         else if( osimObjectNode instanceof OneJointNode )
+           new LSJava.LSPropertyEditors.LSPropertyEditorJoint( (OneJointNode)osimObjectNode, ownerWindow );
 
          // Otherwise create older editor window to edit the properties (this is opened from user's selection of Navigator window).
          else {

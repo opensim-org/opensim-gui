@@ -79,16 +79,21 @@ public class OpenSimObjectNode extends OpenSimNode {
      * Action to be invoked on double clicking.
      */
     public Action getPreferredAction() {
-         if( getValidDisplayOptions().size() ==0 ) return null;  // Nothing to show or hide.
-          
-         // If this is a rigid body, open the easy-to-use rigid body property editor (also provides the older table version). 
-         // Appearance panel allows user to show/hide the body.
-         if( this instanceof OneBodyNode )
+         
+         // For certain types of objects, open its easy-to-use property editor (also provides the older table version). 
+         // In the past, double-clicking was used to to show/hide objects.  To provide that functionality, 
+         // the Appearance panel of the easy-to-use property editor allows user to show/hide the object.
+         if( (this instanceof OneBodyNode) || (this instanceof OneJointNode) )
          {
             ModelWindowVTKTopComponent ownerWindow = ViewDB.getInstance().getCurrentModelWindow();
-            new LSJava.LSPropertyEditors.LSPropertyEditorRigidBody( (OneBodyNode)this, ownerWindow );
+            if(      this instanceof OneBodyNode  ) new LSJava.LSPropertyEditors.LSPropertyEditorRigidBody(  (OneBodyNode)this, ownerWindow );
+            else if( this instanceof OneJointNode ) new LSJava.LSPropertyEditors.LSPropertyEditorJoint(     (OneJointNode)this, ownerWindow );
             return null;
          }
+         
+         // Note: As of January 2012, the default behavior of showing/hiding an object by use of double-click is not longer employed.
+         boolean nothingToShowOrHide = getValidDisplayOptions().isEmpty();  // getValidDisplayOptions().size() == 0;
+         if( true || nothingToShowOrHide ) return null;
          
          OpenSimObject obj = getOpenSimObject();
          int currentStatus = ViewDB.getInstance().getDisplayStatus( obj );
@@ -103,7 +108,7 @@ public class OpenSimObjectNode extends OpenSimNode {
             ex.printStackTrace();
          }
             
-         return getReviewAction();
+         return this.getReviewAction();
     }
        
     /**

@@ -60,11 +60,11 @@ public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemActi
       // If show==true: The "show" option is enabled unless every selected node is shown.
       // If show==false: The "hide" option is enabled unless every selected node is hidden.
       Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
-      for(int i=0; i < selected.length; i++) {
-         if(selected[i] instanceof ConcreteModelNode) {
-            if(ViewDB.getInstance().getDisplayStatus(((ConcreteModelNode)selected[i]).getModel()) != show)
+      for( int i=0; i < selected.length; i++ ) {
+         if( selected[i] instanceof ConcreteModelNode ) {
+            if( ViewDB.getInstance().getDisplayStatus(((ConcreteModelNode)selected[i]).getModel()) != show )
                return true;
-         } else if (selected[i] instanceof OpenSimObjectNode) {
+         } else if ( selected[i] instanceof OpenSimObjectNode ) {
             OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[i];
             if (objectNode.getChildren().getNodesCount()>0) // TODO: actually check children
                return true;
@@ -82,7 +82,7 @@ public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemActi
          if(selected[i] instanceof ConcreteModelNode) {
             ViewDB.getInstance().toggleModelDisplay(((ConcreteModelNode)selected[i]).getModel(), show);
          } else if(selected[i] instanceof OpenSimObjectNode) {
-            applyOperationToNode((OpenSimObjectNode)selected[i]);
+            this.applyOperationToNode( (OpenSimObjectNode)selected[i] );
          }
       }
       ViewDB.getInstance().repaintAll();
@@ -99,7 +99,7 @@ public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemActi
                 if (!(childNodes[child] instanceof OpenSimObjectNode))
                     continue;
                OpenSimObjectNode childNode = (OpenSimObjectNode) childNodes[child];
-               applyOperationToNode(childNode);
+               this.applyOperationToNode( childNode );
             }
         }
         //else
@@ -124,11 +124,17 @@ public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemActi
         }
         
         // After applying recursively, apply to openSimObjectNode and possibly repaint all.
-        OpenSimObject openSimObject = objectNode.getOpenSimObject();
-        ViewDB.getInstance().toggleObjectsDisplay( openSimObject, showOrHide );
-        if( repaintAll ) ViewDB.getInstance().repaintAll();
+        ObjectDisplayShowHideBaseAction.ShowOrHideOpenSimObject( objectNode.getOpenSimObject(), showOrHide, repaintAll );
     }
     
+    
+    //-------------------------------------------------------------------------
+    private static void  ShowOrHideOpenSimObject( OpenSimObject openSimObject, boolean showIsTrueHideIsFalse, boolean repaintAll )
+    {
+       ViewDB.getInstance().toggleObjectsDisplay( openSimObject, showIsTrueHideIsFalse );
+       if( repaintAll ) ViewDB.getInstance().repaintAll();    
+    }
+  
     
     protected void initialize() {
         super.initialize();
