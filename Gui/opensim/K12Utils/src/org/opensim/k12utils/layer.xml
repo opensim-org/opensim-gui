@@ -19,18 +19,18 @@
         <folder name="Tools">
             <file name="org-opensim-k12utils-separatorBefore.instance">
                 <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
-                <attr name="position" intvalue="10"/>
+                <attr name="position" intvalue="1000"/>
             </file>
             <file name="org-opensim-k12utils-ToolsCreateLabAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Tools/org-opensim-k12utils-ToolsCreateLabAction.instance"/>
-                <attr name="position" intvalue="15"/>
+                <attr name="position" intvalue="1300"/>
             </file>
             <file name="org-opensim-k12utils-ToolsEditLabAction.instance" url="org-opensim-k12utils-ToolsEditLabAction.instance">
-                <attr name="position" intvalue="20"/>
+                <attr name="position" intvalue="1350"/>
             </file>
             <file name="org-opensim-k12utils-separatorBefore_1.instance" url="org-opensim-k12utils-separatorBefore_1.instance">
                 <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
-                <attr name="position" intvalue="25"/>
+                <attr name="position" intvalue="1380"/>
             </file>
         </folder>
     </folder>

@@ -10,7 +10,7 @@
         <folder name="Tools">
             <file name="org-opensim-console-ToolsRunScriptAction.shadow">
                <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-console-ToolsRunScriptAction.instance"/>
-               <attr name="position" intvalue="0"/>
+               <attr name="position" intvalue="2000"/>
             </file>
          </folder>
     </folder>

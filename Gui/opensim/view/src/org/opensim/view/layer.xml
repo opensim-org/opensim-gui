@@ -497,45 +497,65 @@
         </file>
         <folder name="Tools">
             <attr name="position" intvalue="300"/>
-            <file name="I18N_hidden"/>
-            <file name="JavaPlatformsCustomizerAction.shadow_hidden"/>
-            <file name="LibrariesCustomizerAction.shadow_hidden"/>
-            <file name="PaletteManager_hidden"/>
-            <file name="Separator1.instance_hidden">
+            <file name="I18N_hidden">
                 <attr name="position" intvalue="100"/>
             </file>
-            <file name="Separator2.instance_hidden">
-                <attr name="position" intvalue="300"/>
+            <file name="JavaPlatformsCustomizerAction.shadow_hidden">
+                <attr name="position" intvalue="200"/>
             </file>
-            <file name="Separator3.instance_hidden">
+            <file name="LibrariesCustomizerAction.shadow_hidden">
                 <attr name="position" intvalue="400"/>
             </file>
-            <file name="ServerManagerAction3.shadow_hidden"/>
-            <file name="VariablesCustomizerAction.shadow_hidden"/>
-            <file name="org-netbeans-core-actions-OptionsAction.instance_hidden">
+            <file name="PaletteManager_hidden">
+                <attr name="position" intvalue="500"/>
+            </file>
+            <file name="Separator1.instance_hidden">
+                <attr name="position" intvalue="300"/>
+            </file>
+            <file name="Separator2.instance_hidden">
                 <attr name="position" intvalue="600"/>
             </file>
-            <file name="org-netbeans-modules-autoupdate-catalog-ModuleCatalogAction">
-                <attr name="position" intvalue="1"/>
+            <file name="Separator3.instance_hidden">
+                <attr name="position" intvalue="700"/>
             </file>
-            <file name="org-netbeans-modules-autoupdate-ui-actions-PluginManagerAction">
-                <attr name="position" intvalue="3"/>
-            </file>
-            <file name="org-netbeans-modules-favorites-templates-TemplatesAction.instance_hidden">
+            <file name="ServerManagerAction3.shadow_hidden">
                 <attr name="position" intvalue="800"/>
             </file>
-            <file name="org-netbeans-modules-favorites-templates-TemplatesAction.shadow_hidden"/>
-            <file name="org-openide-actions-ToolsAction.instance_hidden">
+            <file name="VariablesCustomizerAction.shadow_hidden">
                 <attr name="position" intvalue="900"/>
             </file>
-            <file name="org-openide-actions-ToolsAction.shadow_hidden"/>
-            <file name="org-opensim-k12utils-separatorBefore.instance_hidden"/>
-            <file name="org-opensim-plotter-separatorBefore.instance_hidden">
+            <file name="org-netbeans-core-actions-OptionsAction.instance_hidden">
                 <attr name="position" intvalue="1000"/>
+            </file>
+            <file name="org-netbeans-modules-autoupdate-catalog-ModuleCatalogAction">
+                <attr name="position" intvalue="1800"/>
+            </file>
+            <file name="org-netbeans-modules-autoupdate-ui-actions-PluginManagerAction">
+                <attr name="position" intvalue="1900"/>
+            </file>
+            <file name="org-netbeans-modules-favorites-templates-TemplatesAction.instance_hidden">
+                <attr name="position" intvalue="1200"/>
+            </file>
+            <file name="org-netbeans-modules-favorites-templates-TemplatesAction.shadow_hidden">
+                <attr name="position" intvalue="1100"/>
+            </file>
+            <file name="org-netbeans-modules-options-OptionsWindowAction.shadow_hidden"/>
+            <file name="org-netbeans-modules-xml-catalog-CatalogAction.shadow_hidden"/>
+            <file name="org-openide-actions-ToolsAction.instance_hidden">
+                <attr name="position" intvalue="1300"/>
+            </file>
+            <file name="org-openide-actions-ToolsAction.shadow_hidden">
+                <attr name="position" intvalue="1400"/>
+            </file>
+            <file name="org-opensim-k12utils-separatorBefore.instance_hidden">
+                <attr name="position" intvalue="1500"/>
+            </file>
+            <file name="org-opensim-plotter-separatorBefore.instance_hidden">
+                <attr name="position" intvalue="1600"/>
             </file>
             <file name="org-opensim-view-actions-LoadUserLibraryAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Tools/org-opensim-view-actions-ToolsLoadUserLibraryAction.instance"/>
-                <attr name="position" intvalue="1100"/>
+                <attr name="position" intvalue="1700"/>
             </file>
         </folder>
         <file name="Versioning_hidden">
@@ -590,16 +610,17 @@
             <file name="org-netbeans-core-actions-AboutAction.shadow_hidden">
                 <attr name="position" intvalue="300"/>
             </file>
+            <file name="org-netbeans-modules-autoupdate-ui-actions-CheckForUpdatesAction.shadow_hidden"/>
             <file name="org-opensim-view-HelpAboutAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Help/org-opensim-view-HelpAboutAction.instance"/>
-                <attr name="position" intvalue="1500"/>
+                <attr name="position" intvalue="0"/>
             </file>
 
            
 
            <file name="org-opensim-view-TutorialsAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Help/org-opensim-view-HelpTutorialsAction.instance"/>
-                <attr name="position" intvalue="600"/>
+                <attr name="position" intvalue="1600"/>
             </file>
             <file name="master-help.xml" url="master-help.xml"/>
             <file name="master-help.xml_hidden">
@@ -608,6 +629,7 @@
             <file name="org-netbeans-core-actions-AboutAction.instance_hidden">
                 <attr name="position" intvalue="200"/>
             </file>
+            <file name="shortcuts.xml_hidden"/>
         </folder>
 
         
