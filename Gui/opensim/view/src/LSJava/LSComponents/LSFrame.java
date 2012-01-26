@@ -1,10 +1,9 @@
 //--------------------------------------------------------------------------
 // File:     LSFrame.java
 // Class:    LSFrame
-// Parent:   Frame
-// Children: LSPlotFrame
+// Parents:  Frame -> Window -> Container -> Component -> Object
 // Purpose:  Holds generic data and methods for a frame (part of a frame or window)
-// Authors:  John Mitiguy and Paul Mitiguy, 2001-2010.
+// Authors:  John Mitiguy and Paul Mitiguy (2001-2010).
 //--------------------------------------------------------------------------
 // This work is dedicated to the public domain.
 // To the maximum extent possible under law, the author(s) and contributor(s) have

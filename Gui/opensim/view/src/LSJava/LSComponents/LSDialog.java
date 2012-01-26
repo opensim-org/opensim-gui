@@ -1,10 +1,9 @@
 //--------------------------------------------------------------------------
 // File:     LSDialog.java
 // Class:    LSDialog
-// Parent:   Dialog
-// Children: Many - but this is usually an abstract class.
+// Parents:  Dialog -> Window -> Container -> Component -> Object
 // Purpose:  Holds generic data and methods for a dialog box
-// Authors:  John Mitiguy and Paul Mitiguy, 2001-2010.
+// Authors:  John Mitiguy and Paul Mitiguy (2001-2010).
 //--------------------------------------------------------------------------
 // This work is dedicated to the public domain.
 // To the maximum extent possible under law, the author(s) and contributor(s) have

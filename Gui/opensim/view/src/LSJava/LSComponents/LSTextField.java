@@ -2,9 +2,8 @@
 // File:     LSTextField.java
 // Class:    LSTextField
 // Parent:   TextField
-// Children: None
 // Purpose:  TextFields for user interface
-// Authors:  John Mitiguy and Paul Mitiguy, 2001-2010.
+// Authors:  John Mitiguy and Paul Mitiguy (2001-2010).
 //--------------------------------------------------------------------------
 // This work is dedicated to the public domain.
 // To the maximum extent possible under law, the author(s) and contributor(s) have
@@ -28,7 +27,8 @@ import  java.awt.*;
 public class LSTextField extends TextField
 {
    // Constructor ---------------------------------------------------------
-   public LSTextField( double initialValue,                 boolean isEditable, LSContainer container, int gridWidth, int gridHeight, ActionListener actionListenerOrNull, FocusListener focusListenerOrNull, KeyListener keyListenerOrNull )   { this( LSString.GetStringFromDouble(initialValue), LSDouble.GetMaxNumberOfCharsInTextFieldsForDoublePrecisionNumber(), isEditable, container, gridWidth, gridHeight, actionListenerOrNull, focusListenerOrNull, keyListenerOrNull ); }
+   public LSTextField( int    initialValue,  int textWidth, boolean isEditable, LSContainer container, int gridWidth, int gridHeight, ActionListener actionListenerOrNull, FocusListener focusListenerOrNull, KeyListener keyListenerOrNull )   { this( LSString.GetStringFromInteger(initialValue), textWidth==0 ? LSInteger.GetNumberOfDigits(initialValue) + 2 : textWidth, isEditable, container, gridWidth, gridHeight, actionListenerOrNull, focusListenerOrNull, keyListenerOrNull ); }
+   public LSTextField( double initialValue,  int textWidth, boolean isEditable, LSContainer container, int gridWidth, int gridHeight, ActionListener actionListenerOrNull, FocusListener focusListenerOrNull, KeyListener keyListenerOrNull )   { this( LSString.GetStringFromDouble(initialValue),  textWidth==0 ? LSDouble.GetMaxNumberOfCharsInTextFieldsForDoublePrecisionNumber() : textWidth, isEditable, container, gridWidth, gridHeight, actionListenerOrNull, focusListenerOrNull, keyListenerOrNull ); }
    public LSTextField( String initialString, int textWidth, boolean isEditable, LSContainer container, int gridWidth, int gridHeight, ActionListener actionListenerOrNull, FocusListener focusListenerOrNull, KeyListener keyListenerOrNull )
    {
       super( initialString, textWidth );
@@ -41,15 +41,15 @@ public class LSTextField extends TextField
       myConstraintsWhenCreated.gridheight = gridHeight;
       container.AddComponentToLayout( this, myConstraintsWhenCreated );
 
-      // An ActionEvent occurs whenever the user hits the ENTER key
+      // ActionEvent occurs whenever the user hits the ENTER key.
       if( actionListenerOrNull != null )
          super.addActionListener( actionListenerOrNull );
 
-      // A FocusEvent occurs whenever the user hits the TAB key or leaves the field to edit a different field
+      // FocusEvent occurs whenever the user hits the TAB key or leaves the field to edit a different field.
       if( focusListenerOrNull != null )
          super.addFocusListener( focusListenerOrNull );
 
-      // Respond to user typing certain keys, e.g., pressing OK or ESCAPE
+      // Respond to user typing certain keys, e.g., pressing OK or ESCAPE.
       if( keyListenerOrNull != null )
          super.addKeyListener( keyListenerOrNull );
    }
@@ -84,9 +84,10 @@ public class LSTextField extends TextField
    public boolean  IssueWarningMessageIfTextFieldIsNegativeNumber( Window ownerWindowOrNullForCurrentWindow )         { boolean isError = LSMessageDialog.IssueWarningMessageIfStringIsNegativeNumber( ownerWindowOrNullForCurrentWindow, this.GetTextFieldAsString() );          return this.SetTextFieldBackgroundColorSuggestingErrorTrueOrOKFalse(isError); }
 
    //-------------------------------------------------------------------------
-   public void    SetTextFieldFromString( String s )   { super.setText(s); }
-   public void    SetTextFieldFromInteger( int x )     { this.SetTextFieldFromString( LSString.GetStringFromInteger(x) ); }
-   public void    SetTextFieldFromDouble( double x )   { this.SetTextFieldFromString( LSString.GetStringFromDouble(x)  ); }
+   public void  SetTextFieldFromString( String s )  { super.setText(s); }
+   public void  SetTextFieldFromInteger( int x )    { this.SetTextFieldFromString( LSString.GetStringFromInteger(x) ); }
+   public void  SetTextFieldFromDouble( double d )  { this.SetTextFieldFromString( LSString.GetStringFromDouble(d)  ); }
+   public void  SetTextFieldWithDoubleRoundedToNearestInteger( double d, double epsilonToRoundDoubleToNearestIntegerOr0 ) { this.SetTextFieldFromDouble( epsilonToRoundDoubleToNearestIntegerOr0 <= 0 ? d : LSDouble.RoundToNearestIntegerIfWithinEpsilon(d,epsilonToRoundDoubleToNearestIntegerOr0) ); }
 
    //-------------------------------------------------------------------------
    private void     SetTextFieldBackgroundColor( Color backgroundColor )                               { super.setBackground( backgroundColor ); }

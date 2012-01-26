@@ -2,9 +2,8 @@
 // File:     LSLabel.java
 // Class:    LSLabel
 // Parent:   Label
-// Children: None
 // Purpose:  Labels for windows, panels, dialog boxes, frames, etc.
-// Authors:  John Mitiguy and Paul Mitiguy, 2001-2010.
+// Authors:  John Mitiguy and Paul Mitiguy (2001-2010).
 //--------------------------------------------------------------------------
 // This work is dedicated to the public domain.
 // To the maximum extent possible under law, the author(s) and contributor(s) have
@@ -24,17 +23,20 @@ import  java.awt.Label;
 import  java.awt.Container;
 import  java.awt.GridBagConstraints;
 import  java.awt.Color;
-//import  javax.swing.JLabel;
+import  javax.swing.JLabel;
 
 
 //--------------------------------------------------------------------------
-public class LSLabel extends Label
+public class LSLabel extends JLabel
 {
    // Constructor ---------------------------------------------------------
+   public LSLabel( String labelText, int labelLocation, LSContainer container )	                { this( labelText, labelLocation, container, 1, 1 ); } 
    public LSLabel( String labelText, int labelLocation, LSContainer container, int gridWidth )	{ this( labelText, labelLocation, container, gridWidth, 1 ); } 
    public LSLabel( String labelText, int labelLocation, LSContainer container, int gridWidth, int gridHeight )
    {
       super( labelText, labelLocation );
+      this.SetLabelFont( LSFont.GetUserFont() );
+      this.SetLabelForegroundColor( LSColor.GetUserForegroundColor() );  // MGPlot=LSColor.GetUserForegroundColor(), OpenSim=Color.Black
 
       // Keep a copy of the constraints for adding and removing this component to frames, dialogs, panels, ...
       myConstraintsWhenCreated = container.GetConstraintsClone();
@@ -51,6 +53,12 @@ public class LSLabel extends Label
    public void     SetLabelForegroundColor( Color color )  { super.setForeground(color); }
    public void     SetLabelVisible( boolean tf )           { super.setVisible(tf); }
    public boolean  IsLabelVisible( )                       { return super.isVisible(); }
+
+   // ---------------------------------------------------------------------
+   // Static label location information for use by either Label or JLabel.
+   public final static int  LEFT   = JLabel.LEFT;     // Defined as Label.LEFT   or JLabel.LEFT.
+   public final static int  CENTER = JLabel.CENTER;   // Defined as Label.CENTER or JLabel.CENTER.
+   public final static int  RIGHT  = JLabel.RIGHT;    // Defined as Label.RIGHT  or JLabel.RIGHT.
 
 
    // ------------------------------------------------------------------------

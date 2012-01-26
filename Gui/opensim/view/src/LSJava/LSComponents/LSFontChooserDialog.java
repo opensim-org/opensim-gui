@@ -2,9 +2,8 @@
 // File:     LSFontChooserDialog.java
 // Class:    LSFontChooserDialog
 // Parent:   LSDialog
-// Children: None
 // Purpose:  Dialog box for font family, font style, and font size
-// Authors:  John Mitiguy and Paul Mitiguy, 2001-2010.
+// Authors:  John Mitiguy and Paul Mitiguy (2001-2010).
 //--------------------------------------------------------------------------
 // This work is dedicated to the public domain.
 // To the maximum extent possible under law, the author(s) and contributor(s) have
@@ -56,9 +55,9 @@ public class LSFontChooserDialog extends LSDialog implements ActionListener, Ite
       myContainer.SetConstraintInsets( 4, 6, 2, 6 );            // padding on top, left, bottom, right
 
       // Titles, e.g., Font family, font style, font size,
-      myContainer.AddLabelToLayout( "Font Family", Label.LEFT, 1 );
-      myContainer.AddLabelToLayout( "Font Style",  Label.LEFT, 1 );
-      myContainer.AddLabelToLayoutRowRemainder( "Font Size", Label.LEFT );
+      myContainer.AddLabelToLayout1Wide1High( "Font Family", LSLabel.LEFT );
+      myContainer.AddLabelToLayout1Wide1High( "Font Style",  LSLabel.LEFT );
+      myContainer.AddLabelToLayoutRowRemainder1High( "Font Size", LSLabel.LEFT );
 
       // Layout.
       myContainer.SetConstraintWeightX( 1.0 );

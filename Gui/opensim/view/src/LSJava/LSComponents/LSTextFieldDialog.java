@@ -2,9 +2,8 @@
 // File:     LSTextFieldDialog.java
 // Class:    LSTextFieldDialog
 // Parent:   LSDialog
-// Children: None
 // Purpose:  Dialog box for getting a single line of text from user
-// Authors:  John Mitiguy and Paul Mitiguy, 2001-2010.
+// Authors:  John Mitiguy and Paul Mitiguy (2001-2010).
 //--------------------------------------------------------------------------
 // This work is dedicated to the public domain.
 // To the maximum extent possible under law, the author(s) and contributor(s) have
@@ -37,9 +36,9 @@ public class LSTextFieldDialog extends LSDialog implements ActionListener, KeyLi
       myContainer.SetConstraintInsets( 8, 7, 8, 5 );            // Padding on top, left, bottom, right
 
       // Label then textfield
-      myContainer.AddLabelToLayout( textFieldLabel, Label.RIGHT, 1 );
+      myContainer.AddLabelToLayout1Wide1High( textFieldLabel, LSLabel.RIGHT );
       myTextField = new LSTextField( initialString, textWidth, true, myContainer, 1, 1, this, null, this );
-      myContainer.AddBlankLabelToLayoutRowRemainder();
+      myContainer.AddBlankLabelToLayoutRowRemainder1High();
 
       // OK and Cancel buttons
       LSPanel panelOfButtons = new LSPanel( myContainer, GridBagConstraints.REMAINDER, 1 );

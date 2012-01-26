@@ -2,9 +2,8 @@
 // File:     LSScrollBar.java
 // Class:    LSScrollBar
 // Parent:   Scrollbar
-// Children: None
 // Purpose:  Scrollbars for user interface
-// Authors:  John Mitiguy and Paul Mitiguy, 2001-2010.
+// Authors:  John Mitiguy and Paul Mitiguy (2001-2010).
 //--------------------------------------------------------------------------
 // This work is dedicated to the public domain.
 // To the maximum extent possible under law, the author(s) and contributor(s) have
@@ -40,7 +39,7 @@ public class LSScrollBar extends Scrollbar
       container.AddComponentToLayout( this, gridWidth, gridHeight );
 
       if( adjustmentListener != null )
-         addAdjustmentListener( adjustmentListener );
+         super.addAdjustmentListener( adjustmentListener );
    }
 
    // ---------------------------------------------------------------------

@@ -2,9 +2,8 @@
 // File:     LSMessageDialog.java
 // Class:    LSMessageDialog
 // Parent:   LSDialog
-// Children: None
 // Purpose:  Dialog box for displaying messages to user
-// Authors:  John Mitiguy and Paul Mitiguy, 2001-2010.
+// Authors:  John Mitiguy and Paul Mitiguy (2001-2010).
 //--------------------------------------------------------------------------
 // This work is dedicated to the public domain.
 // To the maximum extent possible under law, the author(s) and contributor(s) have
@@ -28,16 +27,16 @@ import  java.awt.event.*;
 public class LSMessageDialog extends LSDialog implements ActionListener, KeyListener
 {
    // Quasi Constructor ---------------------------------------------------
-   public static LSMessageDialog  NewUserMessageDialog( String s )                                                                              { return LSMessageDialog.NewUserMessageDialog( null, new LSStringList(s), Label.CENTER  ); }
+   public static LSMessageDialog  NewUserMessageDialog( String s )                                                                              { return LSMessageDialog.NewUserMessageDialog( null, new LSStringList(s), LSLabel.CENTER  ); }
    public static LSMessageDialog  NewUserMessageDialog( String s, int labelLocation )                                                           { return LSMessageDialog.NewUserMessageDialog( null, new LSStringList(s), labelLocation ); }
-   public static LSMessageDialog  NewUserMessageDialog( String sA, String sB )                                                                  { return LSMessageDialog.NewUserMessageDialog( null, new LSStringList(sA,sB),       Label.LEFT ); }
-   public static LSMessageDialog  NewUserMessageDialog( String sA, String sB, String sC )                                                       { return LSMessageDialog.NewUserMessageDialog( null, new LSStringList(sA,sB,sC),    Label.LEFT ); }
-   public static LSMessageDialog  NewUserMessageDialog( String sA, String sB, String sC, String sD )                                            { return LSMessageDialog.NewUserMessageDialog( null, new LSStringList(sA,sB,sC,sD), Label.LEFT ); }
-   public static LSMessageDialog  NewUserMessageDialog( Window ownerWindowOrNullForCurrentWindow, String s )                                    { return LSMessageDialog.NewUserMessageDialog( ownerWindowOrNullForCurrentWindow, new LSStringList(s), Label.CENTER  ); }
+   public static LSMessageDialog  NewUserMessageDialog( String sA, String sB )                                                                  { return LSMessageDialog.NewUserMessageDialog( null, new LSStringList(sA,sB),       LSLabel.LEFT ); }
+   public static LSMessageDialog  NewUserMessageDialog( String sA, String sB, String sC )                                                       { return LSMessageDialog.NewUserMessageDialog( null, new LSStringList(sA,sB,sC),    LSLabel.LEFT ); }
+   public static LSMessageDialog  NewUserMessageDialog( String sA, String sB, String sC, String sD )                                            { return LSMessageDialog.NewUserMessageDialog( null, new LSStringList(sA,sB,sC,sD), LSLabel.LEFT ); }
+   public static LSMessageDialog  NewUserMessageDialog( Window ownerWindowOrNullForCurrentWindow, String s )                                    { return LSMessageDialog.NewUserMessageDialog( ownerWindowOrNullForCurrentWindow, new LSStringList(s), LSLabel.CENTER  ); }
    public static LSMessageDialog  NewUserMessageDialog( Window ownerWindowOrNullForCurrentWindow, String s, int labelLocation )                 { return LSMessageDialog.NewUserMessageDialog( ownerWindowOrNullForCurrentWindow, new LSStringList(s), labelLocation ); }
-   public static LSMessageDialog  NewUserMessageDialog( Window ownerWindowOrNullForCurrentWindow, String sA, String sB )                        { return LSMessageDialog.NewUserMessageDialog( ownerWindowOrNullForCurrentWindow, new LSStringList(sA,sB),       Label.LEFT ); }
-   public static LSMessageDialog  NewUserMessageDialog( Window ownerWindowOrNullForCurrentWindow, String sA, String sB, String sC )             { return LSMessageDialog.NewUserMessageDialog( ownerWindowOrNullForCurrentWindow, new LSStringList(sA,sB,sC),    Label.LEFT ); }
-   public static LSMessageDialog  NewUserMessageDialog( Window ownerWindowOrNullForCurrentWindow, String sA, String sB, String sC, String sD )  { return LSMessageDialog.NewUserMessageDialog( ownerWindowOrNullForCurrentWindow, new LSStringList(sA,sB,sC,sD), Label.LEFT ); }
+   public static LSMessageDialog  NewUserMessageDialog( Window ownerWindowOrNullForCurrentWindow, String sA, String sB )                        { return LSMessageDialog.NewUserMessageDialog( ownerWindowOrNullForCurrentWindow, new LSStringList(sA,sB),       LSLabel.LEFT ); }
+   public static LSMessageDialog  NewUserMessageDialog( Window ownerWindowOrNullForCurrentWindow, String sA, String sB, String sC )             { return LSMessageDialog.NewUserMessageDialog( ownerWindowOrNullForCurrentWindow, new LSStringList(sA,sB,sC),    LSLabel.LEFT ); }
+   public static LSMessageDialog  NewUserMessageDialog( Window ownerWindowOrNullForCurrentWindow, String sA, String sB, String sC, String sD )  { return LSMessageDialog.NewUserMessageDialog( ownerWindowOrNullForCurrentWindow, new LSStringList(sA,sB,sC,sD), LSLabel.LEFT ); }
    public static LSMessageDialog  NewUserMessageDialog( Window ownerWindowOrNullForCurrentWindow, LSStringList sList, int labelLocation ) 
    {
       if( sList == null ) return null;  
@@ -107,7 +106,7 @@ public class LSMessageDialog extends LSDialog implements ActionListener, KeyList
       myContainer.SetConstraintInsets( 5, 9, 5, 9 );            // Padding on top, left, bottom, right
 
       int numberOfMessages = sList == null ? 0 : sList.GetSizeOfArrayList();
-      if( numberOfMessages == 1 )  myContainer.AddLabelToLayoutRowRemainder( sList.GetStringAtIndex(0), labelLocation );
+      if( numberOfMessages == 1 )  myContainer.AddLabelToLayoutRowRemainder1High( sList.GetStringAtIndex(0), labelLocation );
       else if( numberOfMessages > 0 )  myContainer.AddStringListToContainerReturnPanel( sList, labelLocation, null );
 
       this.CreateButtonPanelWithOKButtonAndListener();

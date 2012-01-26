@@ -2,9 +2,8 @@
 // File:     LSMenuItem.java
 // Class:    LSMenuItem
 // Parent:   MenuItem
-// Children: None
 // Purpose:  Creates a menu and adds it to its Menu and adds a listener
-// Authors:  John Mitiguy and Paul Mitiguy, 2001-2010.
+// Authors:  John Mitiguy and Paul Mitiguy (2001-2010).
 //--------------------------------------------------------------------------
 // This work is dedicated to the public domain.
 // To the maximum extent possible under law, the author(s) and contributor(s) have

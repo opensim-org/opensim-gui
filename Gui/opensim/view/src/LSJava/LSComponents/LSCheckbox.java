@@ -2,9 +2,8 @@
 // File:     LSCheckbox.java
 // Class:    LSCheckbox
 // Parent:   Checkbox
-// Children: None
 // Purpose:  Checkbox for user interface
-// Authors:  John Mitiguy and Paul Mitiguy, 2001-2010.
+// Authors:  John Mitiguy and Paul Mitiguy (2001-2010).
 //--------------------------------------------------------------------------
 // This work is dedicated to the public domain.
 // To the maximum extent possible under law, the author(s) and contributor(s) have
@@ -33,8 +32,9 @@ public class LSCheckbox extends Checkbox
 
       container.AddComponentToLayout( this, gridWidth, gridHeight );
 
-      if( itemListener != null )  // responds to clicking the button
-         addItemListener( itemListener );
+      // Respond to clicking the button.
+      if( itemListener != null )  
+         super.addItemListener( itemListener );
    }
 
    // ---------------------------------------------------------------------

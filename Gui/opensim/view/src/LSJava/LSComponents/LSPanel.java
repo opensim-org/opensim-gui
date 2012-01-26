@@ -1,10 +1,9 @@
 //--------------------------------------------------------------------------
 // File:     LSPanel.java
 // Class:    LSPanel
-// Parent:   Panel
-// Children: None
+// Parents:  Panel -> Container -> Component -> Object
 // Purpose:  Holds generic data and methods for a panel (part of a frame or window)
-// Authors:  John Mitiguy and Paul Mitiguy, 2001-2010.
+// Authors:  John Mitiguy and Paul Mitiguy (2001-2010).
 //--------------------------------------------------------------------------
 // This work is dedicated to the public domain.
 // To the maximum extent possible under law, the author(s) and contributor(s) have
@@ -27,7 +26,6 @@ public class LSPanel extends Panel
 {
    // Constructor ---------------------------------------------------------
    public LSPanel( )  { this( null, 0, 0 ); }
-   public LSPanel( LSContainer container, int gridWidth )  { this(container,gridWidth,1); }
    public LSPanel( LSContainer container, int gridWidth, int gridHeight )
    {
       // May be used as a generic Panel with LSContainer that does not immediately get added to a frame or window.

@@ -2,9 +2,8 @@
 // File:     LSContainer.java
 // Class:    LSContainer
 // Parent:   None
-// Children: None
 // Purpose:  Generic container class for adding, removing, packing, painting, color, and font for components
-// Authors:  John Mitiguy and Paul Mitiguy, 2001-2010.
+// Authors:  John Mitiguy and Paul Mitiguy (2001-2010).
 //--------------------------------------------------------------------------
 // This work is dedicated to the public domain.
 // To the maximum extent possible under law, the author(s) and contributor(s) have
@@ -163,6 +162,9 @@ public class LSContainer
    }
 
    //-------------------------------------------------------------------------
+   public void  AddComponentToLayoutRowRemainder1High( Component component ) { this.AddComponentToLayout( component, GridBagConstraints.REMAINDER, 1 ); }
+   public void  AddComponentToLayoutColRemainder1Wide( Component component ) { this.AddComponentToLayout( component, 1, GridBagConstraints.REMAINDER ); } 
+   public void  AddComponentToLayout1Wide1High( Component component )        { this.AddComponentToLayout( component, 1, 1 ); } 
    public void  AddComponentToLayout( Component component, int gridWidth, int gridHeight )
    {
       this.SetConstraintGridWidth(  gridWidth  );  // Note: Use gridWidth  = GridBagConstraints.REMAINDER  for remainder of row.
@@ -183,14 +185,16 @@ public class LSContainer
 
    //-------------------------------------------------------------------------
    public  LSLabel  AddLabelToLayout( String labelText, int labelLocation, int gridWidth, int gridHeight )  { return new LSLabel( labelText, labelLocation, this, gridWidth, gridHeight ); }
-   public  LSLabel  AddLabelToLayout( String labelText, int labelLocation, int gridWidth )                  { return this.AddLabelToLayout( labelText, labelLocation, gridWidth, 1 ); }
-   public  LSLabel  AddLabelToLayoutRowRemainder( String labelText, int labelLocation )                     { return this.AddLabelToLayout( labelText, labelLocation, GridBagConstraints.REMAINDER, 1); }
-   public  LSLabel  AddBlankLabelToLayoutRow( int gridWidth )                                               { return this.AddLabelToLayout(       " ", Label.LEFT,    gridWidth, 1 ); }
-   public  LSLabel  AddBlankLabelToLayoutRowRemainder( )                                                    { return this.AddLabelToLayoutRowRemainder( " ", Label.LEFT ); }
+   public  LSLabel  AddLabelToLayoutRow( String labelText, int labelLocation, int gridWidth )               { return this.AddLabelToLayout( labelText, labelLocation, gridWidth, 1 ); }
+   public  LSLabel  AddLabelToLayout1Wide1High( String labelText, int labelLocation )                       { return this.AddLabelToLayout( labelText, labelLocation, 1, 1 ); }
+   public  LSLabel  AddLabelToLayoutRowRemainder1High( String labelText, int labelLocation )                { return this.AddLabelToLayout( labelText, labelLocation, GridBagConstraints.REMAINDER, 1); }
+   public  LSLabel  AddBlankLabelToLayout1Wide1High( )                                                      { return this.AddLabelToLayout(       " ", LSLabel.LEFT,           1,           1 ); }
+   public  LSLabel  AddBlankLabelToLayout( int gridWidth, int gridHeight )                                  { return this.AddLabelToLayout(       " ", LSLabel.LEFT,    gridWidth, gridHeight ); }
+   public  LSLabel  AddBlankLabelToLayoutRowRemainder1High( )                                               { return this.AddLabelToLayoutRowRemainder1High( " ", LSLabel.LEFT ); }
    public  void     AddDividerLine( int numberOfCharacters )                                                { this.AddDividerLineWithSpecifiedCharacter( numberOfCharacters,      '-' ); }
    public  void     AddBlankLineAsString( int numberOfBlankCharacters )                                     { this.AddDividerLineWithSpecifiedCharacter( numberOfBlankCharacters, ' ' ); }
    public  void     AddBlankLine( int numberOfLines )                                                       { for( int i=0;  i<numberOfLines;  i++ )  this.AddBlankLine(); }
-   private void     AddBlankLine( )                                                                         { this.AddLabelToLayoutRowRemainder( " ", Label.CENTER ); }
+   private void     AddBlankLine( )                                                                         { this.AddLabelToLayoutRowRemainder1High( " ", LSLabel.CENTER ); }
 
 
    //-------------------------------------------------------------------------
@@ -207,7 +211,7 @@ public class LSContainer
    {
       StringBuffer dividerLineAsStringBuffer =  LSStringBuffer.GetStringBufferInitializedToCharacter( numberOfCharacters, dividerCharacter );
       String dividerLineAsString = LSString.GetStringFromStringBuffer( dividerLineAsStringBuffer );
-      LSLabel labelAdded = this.AddLabelToLayout( dividerLineAsString, Label.CENTER, GridBagConstraints.REMAINDER );
+      LSLabel labelAdded = this.AddLabelToLayoutRowRemainder1High( dividerLineAsString, LSLabel.CENTER );
       int userFontSize = LSFont.GetUserFontSize();
       LSFont labelAddedFont = new LSFont( "Monospaced", LSFont.PLAIN, userFontSize );
       labelAdded.SetLabelFont( labelAddedFont );
@@ -246,7 +250,7 @@ public class LSContainer
          if( LSString.IsStringEmptyOrNull(msgi) )  this.AddBlankLine(1);
          else
          {
-            LSLabel label = this.AddLabelToLayout( msgi, labelLocation, GridBagConstraints.REMAINDER );
+            LSLabel label = this.AddLabelToLayoutRowRemainder1High( msgi, labelLocation );
             label.SetLabelFont( font );
          }
       }
