@@ -64,6 +64,7 @@ import org.opensim.modeling.Storage;
 import org.opensim.view.OpenSimvtkGlyphCloud;
 import org.opensim.view.SingleModelVisuals;
 import org.opensim.view.experimentaldata.ExperimentalDataItemType;
+import org.opensim.view.experimentaldata.MotionObjectBodyPoint;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 import vtk.vtkActor;
@@ -121,9 +122,13 @@ public class MotionDisplayer implements SelectionListener {
     OpenSimvtkGlyphCloud  markersRep = null;
     private Storage simmMotionData;
     private Model model;
+    OpenSimContext dContext; 
     ArrayStr stateNames;
     private double[] statesBuffer;
     private boolean renderMuscleActivations=false;
+    double DEFAULT_FACTOR_SCALE_FACTOR=.001;
+    double currentScaleFactor;
+    
     // For columns that start with a body name, this is the map from column index to body reference.
     // The map is currently used only for body forces and generalized forces.
     private Hashtable<Integer, Body> mapIndicesToBodies = new Hashtable<Integer, Body>(10);
@@ -155,8 +160,9 @@ public class MotionDisplayer implements SelectionListener {
     /** Creates a new instance of MotionDisplayer */
     public MotionDisplayer(Storage motionData, Model model) {
         this.model = model;
+        dContext= OpenSimDB.getInstance().getContext(model);
         simmMotionData = motionData;
-
+        currentScaleFactor = DEFAULT_FACTOR_SCALE_FACTOR;
         setupMotionDisplay();
         // create a buffer to be used for comuptation of constrained states
         statesBuffer = new double[model.getNumStateVariables()];
@@ -267,19 +273,19 @@ public class MotionDisplayer implements SelectionListener {
         groundForcesRep.setShape(MotionObjectsDB.getInstance().getShape("arrow"));
         groundForcesRep.setColor(new double[]{0., 1.0, 0.});
         groundForcesRep.setOpacity(0.7);
-        groundForcesRep.setScaleFactor(0.001);
+        groundForcesRep.setScaleFactor(currentScaleFactor);
         groundForcesRep.orientByNormalAndScaleByVector();
 
         bodyForcesRep.setShape(MotionObjectsDB.getInstance().getShape("arrow"));
         bodyForcesRep.setColor(new double[]{0., 0., 1.0});
         bodyForcesRep.setOpacity(0.7);
-        bodyForcesRep.setScaleFactor(0.001);
+        bodyForcesRep.setScaleFactor(currentScaleFactor);
         bodyForcesRep.orientByNormalAndScaleByVector();
 
         generalizedForcesRep.setShape(MotionObjectsDB.getInstance().getShape("arrow"));
         generalizedForcesRep.setColor(new double[]{0., 1.0, 1.0});
         generalizedForcesRep.setOpacity(0.7);
-        generalizedForcesRep.setScaleFactor(0.001);
+        generalizedForcesRep.setScaleFactor(currentScaleFactor);
         generalizedForcesRep.orientByNormalAndScaleByVector();
 
         markersRep.setShape(MotionObjectsDB.getInstance().getShape("marker"));
@@ -526,7 +532,14 @@ public class MotionDisplayer implements SelectionListener {
                     forcesModified=true;
               } else if (nextObject.getObjectType()==ExperimentalDataItemType.BodyForceData){
                     int startIndex = nextObject.getStartIndexInFileNotIncludingTime();
-                    groundForcesRep.setLocation(nextObject.getGlyphIndex(), 0., 0., 0.);
+                    MotionObjectBodyPoint bodyPointObject = (MotionObjectBodyPoint)nextObject;
+                    double[] bodyPoint =bodyPointObject.getPoint();
+                    Body b = model.getBodySet().get(bodyPointObject.getBodyName());
+                    double[] bodyPointGlobal = new double[3]; 
+                    // Transform to ground from body frame
+                    dContext.transformPosition(b, bodyPoint, bodyPointGlobal);
+                    groundForcesRep.setLocation(nextObject.getGlyphIndex(), 
+                            bodyPointGlobal[0], bodyPointGlobal[1], bodyPointGlobal[2]);
                     groundForcesRep.setNormalAtLocation(nextObject.getGlyphIndex(), 
                             states.getitem(startIndex), 
                             states.getitem(startIndex+1), 
@@ -826,10 +839,12 @@ public class MotionDisplayer implements SelectionListener {
     }
     
     public void updateMotionObjects(){
-        AddMotionObjectsRep(model);
         if (simmMotionData instanceof AnnotatedMotion){
             // Add place hoders for markers
             AnnotatedMotion mot= (AnnotatedMotion) simmMotionData;
+            currentScaleFactor *= mot.getDisplayScale();
+            AddMotionObjectsRep(model);
+            System.out.println("Setting scale factor to "+mot.getDisplayScale());
             Vector<ExperimentalDataObject> objects=mot.getClassified();
             mot.setMotionDisplayer(this);
             for(ExperimentalDataObject nextObject:objects){

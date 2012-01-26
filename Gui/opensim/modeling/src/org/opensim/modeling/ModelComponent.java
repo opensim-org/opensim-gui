@@ -71,24 +71,24 @@ public class ModelComponent extends OpenSimObject {
     opensimModelJNI.ModelComponent_updateDisplayer(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
   }
 
-  public int getModelingOption(SWIGTYPE_p_SimTK__State state) {
-    return opensimModelJNI.ModelComponent_getModelingOption(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state));
-  }
-
-  public void setModelingOption(SWIGTYPE_p_SimTK__State state, int flag) {
-    opensimModelJNI.ModelComponent_setModelingOption(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state), flag);
-  }
-
   public int getNumStateVariables() {
     return opensimModelJNI.ModelComponent_getNumStateVariables(swigCPtr, this);
+  }
+
+  public ArrayStr getStateVariableNames() {
+    return new ArrayStr(opensimModelJNI.ModelComponent_getStateVariableNames(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_SimTK__SystemYIndex getStateVariableSystemIndex(String stateVariableName) {
     return new SWIGTYPE_p_SimTK__SystemYIndex(opensimModelJNI.ModelComponent_getStateVariableSystemIndex(swigCPtr, this, stateVariableName), true);
   }
 
-  public ArrayStr getStateVariableNames() {
-    return new ArrayStr(opensimModelJNI.ModelComponent_getStateVariableNames(swigCPtr, this), true);
+  public int getModelingOption(SWIGTYPE_p_SimTK__State state) {
+    return opensimModelJNI.ModelComponent_getModelingOption(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state));
+  }
+
+  public void setModelingOption(SWIGTYPE_p_SimTK__State state, int flag) {
+    opensimModelJNI.ModelComponent_setModelingOption(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state), flag);
   }
 
   public double getStateVariable(SWIGTYPE_p_SimTK__State state, String name) {
@@ -113,10 +113,6 @@ public class ModelComponent extends OpenSimObject {
 
   public boolean isCacheVariableValid(SWIGTYPE_p_SimTK__State state, String name) {
     return opensimModelJNI.ModelComponent_isCacheVariableValid(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state), name);
-  }
-
-  public void includeAsSubComponent(ModelComponent aComponent) {
-    opensimModelJNI.ModelComponent_includeAsSubComponent(swigCPtr, this, ModelComponent.getCPtr(aComponent), aComponent);
   }
 
 }

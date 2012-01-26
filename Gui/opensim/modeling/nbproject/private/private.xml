@@ -2,7 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
-        <file>file:/E:/Projects/OpenSim240/opensim/OpenSim/Applications/Gui/opensim/modeling/src/org/opensim/modeling/opensimModelJNI.java</file>
-        <file>file:/E:/Projects/OpenSim240/opensim/OpenSim/Applications/Gui/opensim/modeling/src/org/opensim/modeling/RRATool.java</file>
+        <file>file:/E:/Projects/OpenSimTrunk/Gui/opensim/modeling/build.xml</file>
+        <file>file:/E:/Projects/OpenSimTrunk/Gui/opensim/modeling/manifest.mf</file>
+        <file>file:/E:/Projects/OpenSimTrunk/Gui/opensim/modeling/nbproject/private/private.properties</file>
+        <file>file:/E:/Projects/OpenSimTrunk/Gui/opensim/modeling/nbproject/project.properties</file>
+        <file>file:/E:/Projects/OpenSimTrunk/Gui/opensim/modeling/nbproject/project.xml</file>
+        <file>file:/E:/Projects/OpenSimTrunk/Gui/opensim/modeling/nbproject/suite.properties</file>
+        <file>file:/E:/Projects/OpenSimTrunk/Gui/opensim/modeling/src/org/opensim/modeling/OpenSimObject.java</file>
     </open-files>
 </project-private>

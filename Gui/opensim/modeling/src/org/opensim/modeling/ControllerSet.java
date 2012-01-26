@@ -92,14 +92,6 @@ public class ControllerSet extends ModelComponentSetControllers {
     return opensimModelJNI.ControllerSet_check(swigCPtr, this);
   }
 
-  public double getFirstTime() {
-    return opensimModelJNI.ControllerSet_getFirstTime(swigCPtr, this);
-  }
-
-  public double getLastTime() {
-    return opensimModelJNI.ControllerSet_getLastTime(swigCPtr, this);
-  }
-
   public void setDesiredStates(Storage yStore) {
     opensimModelJNI.ControllerSet_setDesiredStates(swigCPtr, this, Storage.getCPtr(yStore), yStore);
   }

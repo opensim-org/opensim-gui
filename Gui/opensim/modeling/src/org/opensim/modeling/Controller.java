@@ -43,8 +43,8 @@ public class Controller extends ModelComponent {
     return opensimModelJNI.Controller_isDisabled(swigCPtr, this);
   }
 
-  public void setDisabled(boolean aTrueFalse) {
-    opensimModelJNI.Controller_setDisabled(swigCPtr, this, aTrueFalse);
+  public void setDisabled(boolean disableFlag) {
+    opensimModelJNI.Controller_setDisabled(swigCPtr, this, disableFlag);
   }
 
   public void computeControls(SWIGTYPE_p_SimTK__State s, SWIGTYPE_p_SimTK__Vector controls) {
@@ -69,14 +69,6 @@ public class Controller extends ModelComponent {
 
   public ArrayStr getActuatorNames() {
     return new ArrayStr(opensimModelJNI.Controller_getActuatorNames(swigCPtr, this), false);
-  }
-
-  public double getFirstTime() {
-    return opensimModelJNI.Controller_getFirstTime(swigCPtr, this);
-  }
-
-  public double getLastTime() {
-    return opensimModelJNI.Controller_getLastTime(swigCPtr, this);
   }
 
 }

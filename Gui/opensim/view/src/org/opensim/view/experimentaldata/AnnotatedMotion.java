@@ -68,6 +68,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
     private double cameraRate=0.;
     private double dataRate=0.;
     private MotionDisplayer motionDisplayer;
+    private double displayScale = 1.0;
     /** Creates a new instance of AnnotatedMotion 
      * This constructor is called when a trc file is read (so we know it is 
      * Marker only data already.
@@ -460,5 +461,19 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
     
     public void updateMotionDisplayer() {
         motionDisplayer.updateMotionObjects();
+    }
+
+    /**
+     * @return the displayScale
+     */
+    public double getDisplayScale() {
+        return displayScale;
+    }
+
+    /**
+     * @param displayScale the displayScale to set
+     */
+    public void setDisplayScale(double displayScale) {
+        this.displayScale = displayScale;
     }
 }

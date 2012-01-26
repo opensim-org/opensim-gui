@@ -66,6 +66,7 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
         initComponents();
         updateButtonAvailability();
         jMotionObjectsList.addListSelectionListener(this);
+        jForceScaleTextField.setText(String.valueOf(aMotion.getDisplayScale()));
     }
     
     /** This method is called from within the constructor to
@@ -104,6 +105,11 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
         jButtonAdd = new javax.swing.JButton();
         jButtonDelete = new javax.swing.JButton();
         jButtonEdit = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jForceScaleTextField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
 
         jLabel5.setText("Applied to");
 
@@ -268,7 +274,7 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
                 .addContainerGap())
         );
 
-        MotionObjectsListPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Specify Forces"));
+        MotionObjectsListPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Specify Objects"));
 
         jMotionObjectsList.setModel(objectListModel);
         jScrollPane1.setViewportView(jMotionObjectsList);
@@ -321,20 +327,63 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
             .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 185, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         );
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Display Options"));
+
+        jLabel1.setText("Scale for forces");
+
+        jForceScaleTextField.setText("1.0");
+        jForceScaleTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jForceScaleTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Shape");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Arrow In", "Arrow Out", " " }));
+
+        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jLabel1)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jForceScaleTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(18, 18, 18)
+                .add(jLabel2)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(123, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                .add(jLabel1)
+                .add(jForceScaleTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(jLabel2)
+                .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+        );
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(MotionObjectsListPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, MotionObjectsListPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+            .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(MotionObjectsListPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -386,6 +435,11 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
              cachedForces.add(pf);
          }*/
     }//GEN-LAST:event_jButtonAddActionPerformed
+
+private void jForceScaleTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jForceScaleTextFieldActionPerformed
+// TODO add your handling code here:
+        aMotion.setDisplayScale(Double.parseDouble(jForceScaleTextField.getText()));
+}//GEN-LAST:event_jForceScaleTextFieldActionPerformed
    
     private void updateButtonAvailability() {
        int[] sels = jMotionObjectsList.getSelectedIndices();
@@ -417,6 +471,7 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
     private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonEdit;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBoxFX;
     private javax.swing.JComboBox jComboBoxFY;
     private javax.swing.JComboBox jComboBoxFZ;
@@ -426,12 +481,16 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
     private javax.swing.JComboBox jComboBoxTX;
     private javax.swing.JComboBox jComboBoxTY;
     private javax.swing.JComboBox jComboBoxTZ;
+    private javax.swing.JTextField jForceScaleTextField;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JList jMotionObjectsList;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
     

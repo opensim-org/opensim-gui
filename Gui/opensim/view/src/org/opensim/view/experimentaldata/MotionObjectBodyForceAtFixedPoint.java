@@ -49,6 +49,7 @@ public class MotionObjectBodyForceAtFixedPoint extends MotionObjectBodyPoint {
 
     void setForceExpressedInBodyName(String selected) {
         forceExpressedInBodyName = selected;
+        setAttachedToBodyName(selected);
     }
 
     void setForceIdentifier(String makeIdentifier) {
