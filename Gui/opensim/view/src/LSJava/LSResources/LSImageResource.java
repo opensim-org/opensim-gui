@@ -2,9 +2,8 @@
 // File:     LSImageResource.java
 // Class:    LSImageResource
 // Parent:   None
-// Children: None
 // Purpose:  Easy-to-use and commonly used methods for getting images, resizing, etc.
-// Author:   Paul Mitiguy, 2011. 
+// Author:   Paul Mitiguy, 2011-2012. 
 //--------------------------------------------------------------------------
 // This work is dedicated to the public domain.
 // To the maximum extent possible under law, the author(s) and contributor(s) have
@@ -22,6 +21,7 @@ package LSJava.LSResources;
 import  LSJava.LSUtility.*;
 import  LSJava.LSComponents.*;
 import  java.io.*;
+import  java.awt.*; 
 import  java.awt.Image;
 import  java.awt.image.BufferedImage;
 import  javax.imageio.ImageIO;
@@ -74,6 +74,20 @@ public class LSImageResource
    public static JLabel  GetJLabelFromLSResourcesFileName( String shortGraphicsFileName )                                               { return LSImageResource.GetJLabelFromImageIcon( LSImageResource.GetImageIconFromLSResourcesFileName(shortGraphicsFileName) ); }
    public static JLabel  GetJLabelFromLSResourcesFileNameBufferedImage( String shortGraphicsFileName )                                  { return LSImageResource.GetJLabelFromImageIcon( LSImageResource.GetImageIconFromLSResourcesFileNameBufferedImage(shortGraphicsFileName) ); }
    public static JLabel  GetJLabelFromLSResourcesFileNameScaled( String shortGraphicsFileName, int widthInPixels, int heightInPixels )  { return LSImageResource.GetJLabelFromImage( LSImageResource.GetScaledImageFromLSResourcesFileName(shortGraphicsFileName,widthInPixels,heightInPixels) ); }
+   
+   //-----------------------------------------------------------------------------
+   public static LSPanel  GetLSPanelFromLSResourcesFileNameScaled( String shortGraphicsFileName, int widthInPixels, int heightInPixels, Color backgroundColorOrNullForWhite )  
+   {
+      // Add image to the left-hand-side of the panel, then maybe put in some blank white space.
+      LSPanel     panel = new LSPanel();
+      LSContainer panelContainer = panel.GetPanelAsContainer();
+      panelContainer.SetContainerBackgroundColor( backgroundColorOrNullForWhite==null ? Color.white : backgroundColorOrNullForWhite );
+      JLabel labelWithPicture = LSJava.LSResources.LSImageResource.GetJLabelFromLSResourcesFileNameScaled( shortGraphicsFileName, widthInPixels, heightInPixels );
+      if( labelWithPicture != null )  panelContainer.AddComponentToLayoutColRemainder1Wide( labelWithPicture );
+      new LSLabel( " ", LSLabel.CENTER, panelContainer, 1, GridBagConstraints.REMAINDER );
+      return panel;
+   }
+
 
    //-----------------------------------------------------------------------------
    public static int  GetImageIconWidthInPixels(  ImageIcon imageIcon )  { return imageIcon==null ? 0 : imageIcon.getIconWidth();  }
