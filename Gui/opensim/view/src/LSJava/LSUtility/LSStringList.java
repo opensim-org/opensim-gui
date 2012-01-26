@@ -2,9 +2,8 @@
 // File:     LSStringList.java
 // Class:    LSStringList
 // Parent:   LSArrayList
-// Children: None
 // Purpose:  Resizable array of strings
-// Authors:  John Mitiguy and Paul Mitiguy, 2001-2010.
+// Authors:  John Mitiguy and Paul Mitiguy (2001-2010).
 //--------------------------------------------------------------------------
 // This work is dedicated to the public domain.
 // To the maximum extent possible under law, the author(s) and contributor(s) have

@@ -2,9 +2,8 @@
 // File:     LSColor.java
 // Class:    LSColor
 // Parent:   Color
-// Children: None
 // Purpose:  Color information is stored here
-// Authors:  John Mitiguy and Paul Mitiguy, 2001-2010.
+// Authors:  John Mitiguy and Paul Mitiguy (2001-2010).
 //--------------------------------------------------------------------------
 // This work is dedicated to the public domain.
 // To the maximum extent possible under law, the author(s) and contributor(s) have
@@ -63,9 +62,9 @@ public class LSColor extends Color
    //-------------------------------------------------------------------------
    private static LSColor  GetColorFromUserSettings( String userRedName, String userGreenName, String userBlueName )
    {
-      int red   = GetRGBInteger( userRedName   );
-      int green = GetRGBInteger( userGreenName );
-      int blue  = GetRGBInteger( userBlueName  );
+      int red   = LSColor.GetRGBInteger( userRedName   );
+      int green = LSColor.GetRGBInteger( userGreenName );
+      int blue  = LSColor.GetRGBInteger( userBlueName  );
       return ( red<0 || green<0 || blue<0 ) ? null : new LSColor(red, green, blue);
    }
 

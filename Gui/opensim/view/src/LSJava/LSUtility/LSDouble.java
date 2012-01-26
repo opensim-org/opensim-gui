@@ -2,9 +2,8 @@
 // File:     LSDouble.java
 // Class:    LSDouble
 // Parent:   None
-// Children: None
 // Purpose:  Useful functions for double precision numbers
-// Authors:  John Mitiguy and Paul Mitiguy, 2001-2010.
+// Authors:  John Mitiguy and Paul Mitiguy (2001-2010).
 //--------------------------------------------------------------------------
 // This work is dedicated to the public domain.
 // To the maximum extent possible under law, the author(s) and contributor(s) have
@@ -81,6 +80,24 @@ public class LSDouble
    public static double  Ceil(  double x )  { return java.lang.Math.ceil(x);  }
    public static double  Abs(   double x )  { return java.lang.Math.abs(x);   }
    public static double  Sqrt(  double x )  { return java.lang.Math.sqrt(x);  }
+
+   //-------------------------------------------------------------------------
+   public static double  RoundToNearestIntegerIfWithinEpsilon( double x, double nonNegativeEpsilon )
+   {
+      double absX = Abs( x );
+      double floorX = Floor( absX );
+      double ceilX  = Ceil(  absX );
+      double diffWithFloor = absX  - floorX;
+      double diffWithCeil  = ceilX - absX;
+      boolean useCeilToCompare = diffWithCeil <= diffWithFloor;
+
+      double signX = x < 0 ? -1 : 1;
+      if( useCeilToCompare  &&  absX + nonNegativeEpsilon >= ceilX ) x = signX *  ceilX;
+      else if( floorX + nonNegativeEpsilon >= absX )                 x = signX * floorX;
+
+      return x;
+   }
+
 
    //-------------------------------------------------------------------------
    public static double  GetDoubleFromString( String s )

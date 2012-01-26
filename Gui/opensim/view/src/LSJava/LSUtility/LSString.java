@@ -2,9 +2,8 @@
 // File:     LSString.java
 // Class:    LSString
 // Parent:   None
-// Children: None
 // Purpose:  Useful functions for strings
-// Authors:  John Mitiguy and Paul Mitiguy, 2001-2010.
+// Authors:  John Mitiguy and Paul Mitiguy (2001-2010).
 //--------------------------------------------------------------------------
 // This work is dedicated to the public domain.
 // To the maximum extent possible under law, the author(s) and contributor(s) have
@@ -54,13 +53,17 @@ public class LSString
    public static String   ReplaceCaretInStringWithDoubleAsterisk( String s )                                 { return ReplaceCharacterInStringWithNewString( s, '^', "**" ); }
 
    //-------------------------------------------------------------------------
-   public static int      StringCompareCaseSensitive(    String a, String b )  { return (a==null || b==null) ? NULL_STRING__ : a.compareTo(b); }
+   public static int      StringCompareCaseSensitive(    String a, String b )  { return (a==null || b==null) ? NULL_STRING_INTEGER__ : a.compareTo(b); }
    public static boolean  IsStringsEqualCaseSensitive(   String a, String b )  { return StringCompareCaseSensitive(a,b) == 0; }
    public static boolean  IsStringsEqualCaseInsensitive( String a, String b )  { return (a==null || b==null) ? false : a.equalsIgnoreCase(b); }
    public static boolean  IsStringsEqualForNumberOfCharacters( String a, String b, int numberOfCharacters, boolean ignoreCase )  { return (a==null || b==null) ? false : a.regionMatches(ignoreCase, 0, b, 0, numberOfCharacters); }
    public static boolean  IsStringsEqualCaseInsensitiveForNumberOfCharacters( String a, String b, int numberOfCharacters )       { return IsStringsEqualForNumberOfCharacters(a, b, numberOfCharacters, true ); }
    public static boolean  IsStringsEqualCaseSensitiveForNumberOfCharacters(   String a, String b, int numberOfCharacters )       { return IsStringsEqualForNumberOfCharacters(a, b, numberOfCharacters, false); }
 
+   //-------------------------------------------------------------------------
+   public static String   StringConcatenateWithSpacesBetweenIfNotNull( String a, String b )                      { if( a==null ) return b;    return b==null ? a : (a + " " + b); }
+   public static String   StringConcatenateWithSpacesBetweenIfNotNull( String a, String b, String c )            { return StringConcatenateWithSpacesBetweenIfNotNull( a, StringConcatenateWithSpacesBetweenIfNotNull(b,c) ); }
+   public static String   StringConcatenateWithSpacesBetweenIfNotNull( String a, String b, String c, String d )  { return StringConcatenateWithSpacesBetweenIfNotNull( a, StringConcatenateWithSpacesBetweenIfNotNull(b,c,d) ); }
 
    //-------------------------------------------------------------------------
    public static boolean  IsStringInString( boolean ignoreCase, String seekString, String s )
@@ -150,6 +153,6 @@ public class LSString
    }
 
    //-------------------------------------------------------------------------
-   private static final int  NULL_STRING__ = -2147483648;
+   private static final int  NULL_STRING_INTEGER__ = -2147483648;
 
 }

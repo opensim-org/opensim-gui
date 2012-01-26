@@ -2,9 +2,8 @@
 // File:     LSInteger.java
 // Class:    LSInteger
 // Parent:   None
-// Children: None
 // Purpose:  Useful functions for integer numbers
-// Authors:  John Mitiguy and Paul Mitiguy, 2001-2010.
+// Authors:  John Mitiguy and Paul Mitiguy (2001-2010).
 //--------------------------------------------------------------------------
 // This work is dedicated to the public domain.
 // To the maximum extent possible under law, the author(s) and contributor(s) have
@@ -69,6 +68,8 @@ public class LSInteger
    public static int  GetValidIntegerGreaterThanLessThanEquals( int x, int alternate, int min, int max )        { return LSInteger.IsValidInteger(x) && x> min && x<=max ? x : alternate;}
    public static int  GetValidIntegerGreaterThanEqualsLessThanEquals( int x, int alternate, int min, int max )  { return LSInteger.IsValidInteger(x) && x>=min && x<=max ? x : alternate;}
 
+   //-------------------------------------------------------------------------
+   public static int  GetNumberOfDigits( int x )   { x = x==0 ? 1 : LSInteger.Abs(x);  double xPlusEpsilon = 0.1 + (double)x;  return (int)LSDouble.Ceil( Math.log10(xPlusEpsilon) ); }
 
    //-------------------------------------------------------------------------
    public static int  GetIntegerFromString( String s )
