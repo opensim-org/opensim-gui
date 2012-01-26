@@ -1,9 +1,9 @@
 //-----------------------------------------------------------------------------
 // File:     LSPropertyEditorRigidBody.java
 // Class:    LSPropertyEditorRigidBody
-// Parents:  LSFrame
+// Parents:  LSDialog
 // Purpose:  Displays/edits properties for rigid bodies.
-// Authors:  Paul Mitiguy, 2011.   
+// Authors:  Paul Mitiguy, 2011-2012.   
 //--------------------------------------------------------------------------
 // This work is dedicated to the public domain.
 // To the maximum extent possible under law, the author(s) and contributor(s) have
@@ -23,28 +23,20 @@ import  LSJava.LSComponents.*;
 import  LSJava.LSResources.*;
 import  java.awt.*; 
 import  java.awt.event.*;
-import  java.awt.image.BufferedImage; 
 import  javax.swing.JTabbedPane; 
-import  javax.swing.ImageIcon; 
 import  javax.swing.JLabel; 
-import  javax.swing.JColorChooser;
+import  javax.swing.event.ChangeEvent;
 
 import  org.opensim.view.ModelWindowVTKTopComponent;
-import  org.opensim.view.editors.ObjectEditDialogMaker;
-import  org.opensim.view.pub.ViewDB;
 import  org.opensim.modeling.OpenSimObject;
-import  org.opensim.view.nodes.OneBodyNode;
 import  org.opensim.view.nodes.OpenSimObjectNode;
-import  org.opensim.view.nodes.OpenSimNode;
-import  org.opensim.view.ObjectDisplayColorAction;
-import  org.opensim.view.ExplorerTopComponent;
-import  org.opensim.view.ObjectDisplayShowHideBaseAction;
-import  org.opensim.utils.TheApp;
+import  org.opensim.view.nodes.OneBodyNode;
+import  org.opensim.view.nodes.BodyToggleCOMAction;
+import  org.opensim.view.BodyToggleFrameAction;
 
-import  org.openide.nodes.Node;
 
 //-----------------------------------------------------------------------------
-public class LSPropertyEditorRigidBody extends LSDialog implements ActionListener, FocusListener, ItemListener, KeyListener 
+public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract implements ActionListener, FocusListener, ItemListener, KeyListener 
 { 
    // Constructor ---------------------------------------------------------------- 
    public LSPropertyEditorRigidBody( OneBodyNode oneBodyNodePassedToConstructor, ModelWindowVTKTopComponent ownerWindowPassedToConstructor )  
@@ -56,66 +48,41 @@ public class LSPropertyEditorRigidBody extends LSDialog implements ActionListene
    // Constructor ----------------------------------------------------------------
    public  LSPropertyEditorRigidBody( OpenSimObject openSimObjectPassedToConstructor, ModelWindowVTKTopComponent ownerWindowPassedToConstructor  )  
    { 
-      // Arguments: ownerFrame, dialogTitle, isModal, isResizeable.
-      super( TheApp.getAppFrame(), null, false, true );
+      super( openSimObjectPassedToConstructor, ownerWindowPassedToConstructor, "BodyCMPicture.png", "Rigid Body", 560, 400 );  
 
-      // Connect this object to the corresponding OpenSim object.
-      myAssociatedOpenSimObject = openSimObjectPassedToConstructor;
-      myOpenSimModelWindowVTKTopComponentOwnerWindow = ownerWindowPassedToConstructor;
-      this.SetAssociatedOpenSimOneBodyNodeOrNullIfNotAlreadySet();
+      // Connect this object to its corresponding OpenSim object.
+      // Note: Some of the connection occurs in both parent and child constructors.
+      this.SetAssociatedOpenSimOneBodyNodeIfNotAlreadySet();
             
-      // Display the frame with an appropriate name and icon.
-      this.SetRigidBodyDialogTitle(); 
-      this.SetRigidBodyDialogIconImage();
-
-      // Set the background color to light yellow
-      int xNumberOfPixelsOfTabbedPaneMin = 560;
-      int yNumberOfPixelsOfTabbedPaneMin = 400;
-      int xNumberOfPixelsThisDialogMin = xNumberOfPixelsOfTabbedPaneMin + 40;
-      int yNumberOfPixelsThisDialogMin = yNumberOfPixelsOfTabbedPaneMin + 40;
-      super.setBackground( LSColor.BackgroundColorVeryLightGray );
-      super.setMinimumSize(   new Dimension(xNumberOfPixelsThisDialogMin, yNumberOfPixelsThisDialogMin) );
-      super.setPreferredSize( new Dimension(xNumberOfPixelsThisDialogMin, yNumberOfPixelsThisDialogMin) );
-      super.setMaximumSize(   new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE ) );
-
-      // Add each tab in a tabbed pane the same size as the property editor
-      // JTabbedPane is a GUI element that has built-in listeners and event handlers.
-      // A. User can use the mouse to click to switch to a specific tab.
-      // B. User can use keyboard arrows to switch from tab to next tab.
-      // C. If enabled, user can use Mnemonics (which may not make sense here).
-      myJTabbedPane = new JTabbedPane(); 
-      myJTabbedPane.setMinimumSize(   new Dimension(xNumberOfPixelsOfTabbedPaneMin, yNumberOfPixelsOfTabbedPaneMin) );
-      myJTabbedPane.setPreferredSize( new Dimension(xNumberOfPixelsOfTabbedPaneMin, yNumberOfPixelsOfTabbedPaneMin) );
-      myJTabbedPane.setMaximumSize(   new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE) );
+      // Add panels, choose the previously selected panel to show, and display the window. 
       this.AddPanelsToFrame(); 
-
-      // Default location to issue warning messages.
-      LSMessageDialog.SetCurrentWindowToIssueMessages( (Window)this );
-        
-      // If first time one of these created, set the default tab to open.
-      // Otherwise, open the user's last selected tab component.
-      this.SetCurrentUserSelectedTabIndex( LSPropertyEditorRigidBody.GetPriorUserSelectedTabComponent() );
-
-      // Display the window. 
-      GetDialogAsContainer().PackLocateShow();
+      super.SetSelectedTabbedPaneFromPriorUserSelection();
+      this.GetDialogAsContainer().PackLocateShow();
    } 
    
    //-------------------------------------------------------------------------
-   public void  actionPerformed( ActionEvent actionEvent )  { this.CheckActionEventTarget( actionEvent.getSource() ); }
-   public void  focusLost(   FocusEvent focusEvent )        { this.CheckFocusLostEventTarget(  focusEvent.getSource() ); }
+   public void  actionPerformed( ActionEvent actionEvent )  { this.CheckActionEventTarget(     actionEvent.getSource() ); }
+   public void  focusLost(   FocusEvent focusEvent )        { this.CheckFocusLostEventTarget(   focusEvent.getSource() ); }
    public void  focusGained( FocusEvent focusEvent )        { this.CheckFocusGainedEventTarget( focusEvent.getSource() ); } 
 
    //-------------------------------------------------------------------------
    public void  itemStateChanged( ItemEvent itemEvent )     
    {
-      if( itemEvent.getSource() == myShowRigidBodyCheckbox ) this.ProcessEventShowOrHideRigidBody( myShowRigidBodyCheckbox.GetCheckboxState() );
+      Object eventTarget = itemEvent.getSource();
+      if(      eventTarget == myShowBodyCheckbox )            super.ShowOrHideObject( myAssociatedOpenSimOneBodyNodeOrNull, true  ); // myShowBodyCheckbox.GetCheckboxState();
+      else if( eventTarget == myHideBodyCheckbox )            super.ShowOrHideObject( myAssociatedOpenSimOneBodyNodeOrNull, false );
+      else if( eventTarget == myShowCMCheckbox ) 	      BodyToggleCOMAction.ShowCMForOneBodyNode( myAssociatedOpenSimOneBodyNodeOrNull, myShowCMCheckbox.GetCheckboxState(), true );
+      else if( eventTarget == myShowBodyAxesCheckbox )	      BodyToggleFrameAction.ShowAxesForBody( super.GetAssociatedOpenSimObject(), myShowBodyAxesCheckbox.GetCheckboxState(), true );
+      else if( eventTarget == myWireFrameCheckbox ) 	      { super.SetObjectRepresentationPointsWireFrameOrSurfaceAndSurfaceShading( 1, 0 );  super.ShowOrHideObject( myAssociatedOpenSimOneBodyNodeOrNull, true  );  myHideBodyCheckbox.SetCheckboxState(false); }
+      else if( eventTarget == mySurfaceShadedSmoothCheckbox ) { super.SetObjectRepresentationPointsWireFrameOrSurfaceAndSurfaceShading( 2, 1 );  super.ShowOrHideObject( myAssociatedOpenSimOneBodyNodeOrNull, true  );  myHideBodyCheckbox.SetCheckboxState(false); }
+   // else if( eventTarget == mySurfaceShadedFlatCheckbox )   { super.SetObjectRepresentationPointsWireFrameOrSurfaceAndSurfaceShading( 2, 0 );  super.ShowOrHideObject( myAssociatedOpenSimOneBodyNodeOrNull, true  );  myHideBodyCheckbox.SetCheckboxState(false); }
    }
 
   
    //-------------------------------------------------------------------------
-   public void  keyPressed( KeyEvent keyEvent )             {;}
-   public void  keyReleased( KeyEvent keyEvent )            {;}
-   public void  keyTyped( KeyEvent keyEvent )
+   public void  keyPressed(  KeyEvent keyEvent )  {;}
+   public void  keyReleased( KeyEvent keyEvent )  {;}
+   public void  keyTyped(    KeyEvent keyEvent )
    {
       switch( keyEvent.getKeyChar() )
       {
@@ -124,12 +91,19 @@ public class LSPropertyEditorRigidBody extends LSDialog implements ActionListene
       }
    }
 
+   //-------------------------------------------------------------------------
+   public void  stateChanged( ChangeEvent changeEvent ) 
+   {
+      Object eventTarget = changeEvent.getSource();
+      if( eventTarget == myOpacitySlider ) { if( !myOpacitySlider.getValueIsAdjusting() )  super.SetObjectOpacity( myOpacitySlider.GetSliderValueAsInteger() ); } 
+   }
+
 
    //-------------------------------------------------------------------------
    private void  CheckActionEventTarget( Object eventTarget )
    {
-      if(      eventTarget == myButtonToOpenOldTableOfRigidProperties ) this.ProcessEventClickButtonToOpenTableOfRigidBodyProperties();
-      else if( eventTarget == myButtonToOpenColorChooser )              this.ProcessEventClickButtonToOpenColorChooser(); 
+      if(      eventTarget == myButtonToOpenOldPropertyViewerTable ) super.ProcessEventClickButtonToOpenOldPropertyViewerTable();
+      else if( eventTarget == myButtonToOpenColorChooser )           super.CreateColorDialogBoxToChangeUserSelectedColor( myAssociatedOpenSimOneBodyNodeOrNull );
    }
    
    //-------------------------------------------------------------------------
@@ -137,26 +111,18 @@ public class LSPropertyEditorRigidBody extends LSDialog implements ActionListene
    {
       boolean requestFocusBack = false;
       Window ownerWindowOrThis = super.GetLSDialogOwnerWindowOrThis(); 
-      if(      eventTarget==myNameTextField )   this.ProcessEventRigidBodyNameChanged();
-      else if( eventTarget==myMassTextField )  {if( (requestFocusBack = myMassTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis)) != true ) myMassTextField.IssueWarningMessageIfTextFieldIsNegativeNumber(ownerWindowOrThis); }
-      else if( eventTarget==myXcmTextField  )        requestFocusBack =  myXcmTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis);
-      else if( eventTarget==myYcmTextField  )        requestFocusBack =  myYcmTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis);
-      else if( eventTarget==myZcmTextField  )        requestFocusBack =  myZcmTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis);
-      else if( eventTarget==myIxxTextField || eventTarget==myIyyTextField || eventTarget==myIzzTextField )
-      {
-         LSTextField eventTargetAsTextField = (LSTextField)eventTarget;
-         if( (requestFocusBack = eventTargetAsTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis)) != true )
-	    eventTargetAsTextField.IssueWarningMessageIfTextFieldIsNegativeNumber(ownerWindowOrThis); 
-         this.CheckInertiaMatrixAndGiveVisualFeedbackOnWhetherOrNotItIsPhysicallyPossible();
-      }
-      else if( eventTarget == myIxyTextField ) requestFocusBack = this.ProcessEventProductOfInertiaChanged( (LSTextField)eventTarget, myIyxTextField );
-      else if( eventTarget == myIxzTextField ) requestFocusBack = this.ProcessEventProductOfInertiaChanged( (LSTextField)eventTarget, myIzxTextField );
-      else if( eventTarget == myIyzTextField ) requestFocusBack = this.ProcessEventProductOfInertiaChanged( (LSTextField)eventTarget, myIzyTextField );
+      if(      eventTarget==myNameTextField )  super.SetOpenSimObjectNameAndPropertyEditorDialogTitle( myNameTextField.GetTextFieldAsString(), myAssociatedOpenSimOneBodyNodeOrNull );
+      else if( eventTarget==myXcmTextField  )  requestFocusBack = myXcmTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis);
+      else if( eventTarget==myYcmTextField  )  requestFocusBack = myYcmTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis);
+      else if( eventTarget==myZcmTextField  )  requestFocusBack = myZcmTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis);
+      else if( eventTarget==myIxxTextField || eventTarget==myIyyTextField || eventTarget==myIzzTextField ) this.CheckInertiaMatrixAndGiveVisualFeedbackOnWhetherOrNotItIsPhysicallyPossible();
+      else if( eventTarget==myIxyTextField  )  requestFocusBack = this.ProcessEventProductOfInertiaChanged( (LSTextField)eventTarget, myIyxTextField );
+      else if( eventTarget==myIxzTextField  )  requestFocusBack = this.ProcessEventProductOfInertiaChanged( (LSTextField)eventTarget, myIzxTextField );
+      else if( eventTarget==myIyzTextField  )  requestFocusBack = this.ProcessEventProductOfInertiaChanged( (LSTextField)eventTarget, myIzyTextField );
       if( requestFocusBack && eventTarget instanceof LSTextField ) { LSTextField eventTargetLSTextField = (LSTextField)eventTarget;  eventTargetLSTextField.RequestFocus(); }
       return requestFocusBack;
    }
    
-
    //-------------------------------------------------------------------------
    private void  CheckFocusGainedEventTarget( Object eventTarget )
    {
@@ -170,10 +136,9 @@ public class LSPropertyEditorRigidBody extends LSDialog implements ActionListene
    //-----------------------------------------------------------------------------
    private void  AddPanelsToFrame() 
    { 
-      this.AddTabToRigidBodyProperties( "Appearance",               null,  this.CreateTabComponentAppearanceRigidBodyProperty(),             "Appearance" );
-      this.AddTabToRigidBodyProperties( "Mass and Center of Mass",  null,  this.CreateTabComponentMassAndCenterOfMassRigidBodyProperty(),    "Mass and Center of Mass" );
-      this.AddTabToRigidBodyProperties( "Inertia Properties",       null,  this.CreateTabComponentInertiaPropertiesRigidBodyProperty(),      "Inertia Properties" );
-      this.AddTabToRigidBodyProperties( "Position and Orientation", null,  this.CreateTabComponentPositionAndOrientationRigidBodyProperty(), "Position and Orientation" );
+      super.AddTabToPropertyEditor( "Appearance",               null,  this.CreateTabComponentAppearanceRigidBodyProperty(),             null );
+      super.AddTabToPropertyEditor( "Mass and Center of Mass",  null,  this.CreateTabComponentMassAndCenterOfMassRigidBodyProperty(),    null );
+      super.AddTabToPropertyEditor( "Inertia Properties",       null,  this.CreateTabComponentInertiaPropertiesRigidBodyProperty(),      null );
         
       // Note: The following create a shortcut of the user pressing ALT-1 to get the 0th panel added to tabbedPane, etc. 
       // tabbedPane.setMnemonicAt( 0, KeyEvent.VK_1 ); 
@@ -181,18 +146,10 @@ public class LSPropertyEditorRigidBody extends LSDialog implements ActionListene
       // tabbedPane.setMnemonicAt( 2, KeyEvent.VK_3 ); 
       // tabbedPane.setMnemonicAt( 3, KeyEvent.VK_4 ); 
 
-      // Add tabbed pane to this frame. 
-      this.GetDialogAsContainer().AddComponent( myJTabbedPane ); 
-        
-      // Tab layout defaults to JTabbedPane.WRAP_TAB_LAYOUT.  Otherwise use JTabbedPane.SCROLL_TAB_LAYOUT. 
-      myJTabbedPane.setTabLayoutPolicy( JTabbedPane.SCROLL_TAB_LAYOUT ); 
+      // Add tabbed pane to this frame.   Use layout policy JTabbedPane.WRAP_TAB_LAYOUT or JTabbedPane.SCROLL_TAB_LAYOUT. 
+      super.AddTabbedPanelToThisWithDesignatedLayoutPolicy( JTabbedPane.SCROLL_TAB_LAYOUT );  
    } 
 
-   //-----------------------------------------------------------------------------
-   private void  AddTabToRigidBodyProperties( String nameOnTab, ImageIcon iconOnTabOrNull, Component component, String toolTipStringOrNull )  
-   { 
-      if( myJTabbedPane != null )  myJTabbedPane.addTab( nameOnTab, iconOnTabOrNull, component, toolTipStringOrNull ); 
-   } 
 
    //-----------------------------------------------------------------------------
    private Component  CreateTabComponentAppearanceRigidBodyProperty( ) 
@@ -201,14 +158,10 @@ public class LSPropertyEditorRigidBody extends LSDialog implements ActionListene
       LSContainer tabComponentWithTwoPanelsContainer = tabComponentWithTwoPanels.GetPanelAsContainer();
       tabComponentWithTwoPanelsContainer.SetContainerBackgroundColor( Color.white );
       
-      // Add an image to the left-hand-side of the panel, then put in some blank white space.
       // Other possible images are: ImageIcon  openSimImageIcon = TheApp.getApplicationIcon()  and  Image openSimLogoImage = TheApp.getAppImage();
-      LSPanel picturePanel = new LSPanel( tabComponentWithTwoPanelsContainer, 1, GridBagConstraints.REMAINDER );
-      LSContainer picturePanelContainer = picturePanel.GetPanelAsContainer();
-      picturePanelContainer.SetContainerBackgroundColor( Color.white );
-      JLabel labelWithPicture = LSJava.LSResources.LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "OpenSimLogoNoWords.jpg", 0, 150 );
-      if( labelWithPicture != null )  picturePanel.GetPanelAsContainer().AddComponentToLayout( labelWithPicture, 1, GridBagConstraints.REMAINDER );
-      new LSLabel( " ", Label.CENTER, picturePanelContainer, 1, GridBagConstraints.REMAINDER );
+      LSPanel picturePanel = LSImageResource.GetLSPanelFromLSResourcesFileNameScaled( "OpenSimLogoNoWords.jpg", 0, 150, Color.white );
+      tabComponentWithTwoPanelsContainer.AddComponentToLayoutColRemainder1Wide( picturePanel );
+      tabComponentWithTwoPanelsContainer.AddLabelToLayout( "  ", LSLabel.CENTER, 1, GridBagConstraints.REMAINDER );
 
       // Add a panel with relevant buttons, textboxes, etc.
       LSPanel tabComponent = new LSPanel( tabComponentWithTwoPanelsContainer, GridBagConstraints.REMAINDER, GridBagConstraints.REMAINDER ); 
@@ -216,34 +169,82 @@ public class LSPropertyEditorRigidBody extends LSDialog implements ActionListene
       tabContainer.SetContainerBackgroundColor( Color.white );
       
       // Create button to open up the old property viewer table.
-      myButtonToOpenOldTableOfRigidProperties = new LSButton( "Property Viewer", tabContainer, GridBagConstraints.REMAINDER, 1, this, null );
+      myButtonToOpenOldPropertyViewerTable = new LSButton( "Property Viewer", tabContainer, GridBagConstraints.REMAINDER, 1, this, null );
 
       // Single blank line.
-      tabContainer.AddBlankLabelToLayoutRowRemainder();
+      tabContainer.AddBlankLabelToLayoutRowRemainder1High();
 
       // Create text field  to change the name of the object.
-      String nameOfRigidBody = this.GetNameOfRigidBody();
-      int  lengthOfNameOfRigidBody = LSString.GetStringLength( nameOfRigidBody );
-      int  textFieldWidthForNameOfRigidBody = (int)( 1.5*( lengthOfNameOfRigidBody < 12 ? 12 : lengthOfNameOfRigidBody ) );
-      new LSLabel( "Name = ", Label.RIGHT, tabContainer, 1 );
-      myNameTextField  = new LSTextField( nameOfRigidBody, textFieldWidthForNameOfRigidBody, true, tabContainer, GridBagConstraints.REMAINDER, 1, this, this, this );
+      new LSLabel( "Name = ", LSLabel.RIGHT, tabContainer );
+      myNameTextField = new LSTextField( super.GetOpenSimObjectName(), super.GetTextFieldWidthForOpenSimObjectName(), true, tabContainer, GridBagConstraints.REMAINDER, 1, this, this, this );
       
-      // Add show rigid body checkbox.
-      tabContainer.AddBlankLabelToLayoutRow(1);
-      myShowRigidBodyCheckbox  = new LSCheckbox( "Show rigid body", true, null, tabContainer, GridBagConstraints.REMAINDER, 1, this );
+       // Add panel for show/hide body.
+      tabContainer.AddBlankLabelToLayout1Wide1High();
+      this.CreateShowHideBodyPanel( tabContainer );
 
       // Add show center of mass of rigid body checkbox.
-      tabContainer.AddBlankLabelToLayoutRow(1); 
-      myShowCMCheckbox  = new LSCheckbox( "Show center of mass", false, null, tabContainer, GridBagConstraints.REMAINDER, 1, this );
+      tabContainer.AddBlankLabelToLayout1Wide1High(); 
+      boolean initialStateOfShowCM = BodyToggleCOMAction.IsShowCMForBody( super.GetAssociatedOpenSimObject() );
+      myShowCMCheckbox = new LSCheckbox( "Show center of mass", initialStateOfShowCM, null, tabContainer, GridBagConstraints.REMAINDER, 1, this );
+
+      // Add show body axes checkbox.
+      tabContainer.AddBlankLabelToLayout1Wide1High(); 
+      boolean initialStateOfShowBodyAxes = BodyToggleFrameAction.IsShowAxesForBody( super.GetAssociatedOpenSimObject() );
+      myShowBodyAxesCheckbox = new LSCheckbox( "Show body axes (toggle)", initialStateOfShowBodyAxes, null, tabContainer, GridBagConstraints.REMAINDER, 1, this );
+
+      // Add panel for wireframe or surface.
+      this.CreateWireFrameOrSurfaceShadedPanel( tabContainer );
+
+      // Add opacity slider.
+      int currentValueOfOpacity = super.GetObjectOpacityFromOpenSimWithRangeFrom0To100();
+      new LSLabel( "Opacity: ", LSLabel.RIGHT, tabContainer );
+      myOpacitySlider = new LSSlider( LSSlider.HORIZONTAL, 0, 100, currentValueOfOpacity, 20, 5, tabContainer, GridBagConstraints.REMAINDER, 1, this );
 
       // Single blank line.
-      tabContainer.AddBlankLabelToLayoutRowRemainder();
+      tabContainer.AddBlankLabelToLayoutRowRemainder1High();
 
       // Create button that if invoked, opens up the color chooser.
       myButtonToOpenColorChooser = new LSButton( "Color", tabContainer, GridBagConstraints.REMAINDER, 1, this, null );
 
       return tabComponentWithTwoPanels;
    } 
+
+
+   //-----------------------------------------------------------------------------
+   private void  CreateShowHideBodyPanel( LSContainer tabContainer )
+   { 
+      LSPanel     panel = new LSPanel( tabContainer, GridBagConstraints.REMAINDER, 1 ); 
+      LSContainer panelContainer = panel.GetPanelAsContainer();
+      panelContainer.SetContainerBackgroundColor( Color.white );
+           
+      // Note: Entire group is set to false, because as of now, there is no way to find out how object is currently displayed. 
+      CheckboxGroup checkboxGroup = new CheckboxGroup();
+      myShowBodyCheckbox = new LSCheckbox( "Show body", false, checkboxGroup, panelContainer, 1, 1, this ); 
+      panelContainer.AddBlankLabelToLayout1Wide1High();  
+      myHideBodyCheckbox = new LSCheckbox( "Hide body", false, checkboxGroup, panelContainer, 1, 1, this );   
+      panelContainer.AddBlankLabelToLayoutRowRemainder1High(); 
+   }
+   
+   
+   //-----------------------------------------------------------------------------
+   private void  CreateWireFrameOrSurfaceShadedPanel( LSContainer tabContainer )
+   { 
+      LSPanel     panel = new LSPanel( tabContainer, GridBagConstraints.REMAINDER, 1 ); 
+      LSContainer panelContainer = panel.GetPanelAsContainer();
+      panelContainer.SetContainerBackgroundColor( Color.white );
+
+      // Note: Entire group is set to false, because as of now, there is no way to find out how object is currently displayed. 
+      CheckboxGroup checkboxGroup = new CheckboxGroup();
+      myWireFrameCheckbox =	      new LSCheckbox( "Wireframe",     false, checkboxGroup, panelContainer, 1, 1, this ); 
+      panelContainer.AddBlankLabelToLayout1Wide1High();  
+      mySurfaceShadedSmoothCheckbox = new LSCheckbox( "Smooth-Shaded", false, checkboxGroup, panelContainer, GridBagConstraints.REMAINDER, 1, this );    
+      // panelContainer.AddBlankLabelToLayout1Wide1High();  
+      // mySurfaceShadedFlatCheckbox =   new LSCheckbox( "Flat-Shaded",   false, checkboxGroup, panelContainer, GridBagConstraints.REMAINDER, 1, this );    
+      // mySurfaceShadedFlatCheckbox is unimplemented VTK option since: (a) no difference to analytical geometry, (b) not much faster than smooth, (c) Confusing to give user extra options.
+   }
+   
+   
+
 
    //-----------------------------------------------------------------------------
    private Component  CreateTabComponentMassAndCenterOfMassRigidBodyProperty( ) 
@@ -253,28 +254,30 @@ public class LSPropertyEditorRigidBody extends LSDialog implements ActionListene
       tabContainer.SetContainerBackgroundColor( Color.white );
 
       // Create mass label and text field.
-      LSLabel massLabel = new LSLabel( "Mass = ", Label.RIGHT, tabContainer, 1 );
-      myMassTextField = new LSTextField( 3.0E-5, true, tabContainer, GridBagConstraints.REMAINDER, 1, this, this, this );
+      LSLabel massLabel = new LSLabel( "Mass  =  ", LSLabel.RIGHT, tabContainer );
+      myMassTextField = new LSTextFieldWithListenersForOpenSimDoubleNonNegative( this, super.GetPropertyTalkToSimbody(), "mass", 0.0, 0, true, tabContainer, 1, 1, this, this, this );   
+      tabContainer.AddBlankLabelToLayoutRowRemainder1High();
 
       // Create center of mass labels and text fields.
-      tabContainer.AddBlankLabelToLayoutRowRemainder();
-      new LSLabel( "Position of Body center of mass (Bcm) from Body origin (Bo)", Label.CENTER, tabContainer, GridBagConstraints.REMAINDER );
+      tabContainer.AddBlankLabelToLayoutRowRemainder1High();
+      new LSLabel( "Position of Body center of mass (Bcm) from Body origin (Bo)", LSLabel.CENTER, tabContainer, GridBagConstraints.REMAINDER );
       
-      new LSLabel( "Position  =  ", Label.RIGHT, tabContainer, 1 );
-      myXcmTextField  = new LSTextField( 0.0, true, tabContainer, 1, 1, this, this, this );
-      new LSLabel( " * bx", Label.LEFT, tabContainer, GridBagConstraints.REMAINDER );
+      double cmXYZValues[] = super.GetPropertyTalkToSimbody().GetOpenSimObjectPropertyValueAsArrayDouble3FromPropertyName( "mass_center" );
+      new LSLabel( "Position  =  ", LSLabel.RIGHT, tabContainer );
+      myXcmTextField  = new LSTextField( cmXYZValues[0], 0, true, tabContainer, 1, 1, this, this, this );
+      new LSLabel( " * bx", LSLabel.LEFT, tabContainer, GridBagConstraints.REMAINDER );
       
-      new LSLabel( "  +  ", Label.RIGHT, tabContainer, 1 );
-      myYcmTextField  = new LSTextField( 0.0, true, tabContainer, 1, 1, this, this, this );
-      new LSLabel( " * by", Label.LEFT, tabContainer, GridBagConstraints.REMAINDER );
+      new LSLabel( "  +  ", LSLabel.RIGHT, tabContainer );
+      myYcmTextField  = new LSTextField( cmXYZValues[1], 0, true, tabContainer, 1, 1, this, this, this );
+      new LSLabel( " * by", LSLabel.LEFT, tabContainer, GridBagConstraints.REMAINDER );
 
-      new LSLabel( "  +  ", Label.RIGHT, tabContainer, 1 );
-      myZcmTextField  = new LSTextField( 0.0, true, tabContainer, 1, 1, this, this, this );
-      new LSLabel( " * bz", Label.LEFT, tabContainer, GridBagConstraints.REMAINDER );
+      new LSLabel( "  +  ", LSLabel.RIGHT, tabContainer );
+      myZcmTextField  = new LSTextField( cmXYZValues[2], 0, true, tabContainer, 1, 1, this, this, this );
+      new LSLabel( " * bz", LSLabel.LEFT, tabContainer, GridBagConstraints.REMAINDER );
 
       // Add picture of a rigid body with Bcm (Body center of mass) and Bo (Body origin).
       JLabel labelWithPicture = LSJava.LSResources.LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "RigidBodyWithOriginCMAndBasisVectors.jpg", 0, 140 );
-      if( labelWithPicture != null )  tabContainer.AddComponentToLayout( labelWithPicture, GridBagConstraints.REMAINDER, 1 );
+      if( labelWithPicture != null )  tabContainer.AddComponentToLayoutRowRemainder1High( labelWithPicture );
       
       return tabComponent;
    } 
@@ -287,19 +290,19 @@ public class LSPropertyEditorRigidBody extends LSDialog implements ActionListene
       tabContainer.SetContainerBackgroundColor( Color.white );
 
       // Create inertia properties labels and text fields.
-      tabContainer.AddBlankLabelToLayoutRowRemainder();
-      myInertiaIncorrectLabel = new LSLabel( "Error: INVALID Inertia matrix", Label.CENTER, tabContainer, GridBagConstraints.REMAINDER );
+      tabContainer.AddBlankLabelToLayoutRowRemainder1High();
+      myInertiaIncorrectLabel = new LSLabel( "Error: INVALID Inertia matrix", LSLabel.CENTER, tabContainer, GridBagConstraints.REMAINDER );
       myInertiaIncorrectLabel.SetLabelForegroundColor( LSColor.BackgroundColorSuggestingError );
       myInertiaIncorrectLabel.SetLabelVisible( true );
  
       // Create inertia properties labels and text fields.
-      tabContainer.AddBlankLabelToLayoutRowRemainder();
-      new LSLabel( "Inertia matrix about Body center of mass (Bcm) for bx, by, bz", Label.CENTER, tabContainer, GridBagConstraints.REMAINDER );
-      tabContainer.AddComponentToLayout( this.CreatePanelWithInertiaMatrix(), GridBagConstraints.REMAINDER, 1 );
+      tabContainer.AddBlankLabelToLayoutRowRemainder1High();
+      new LSLabel( "Inertia matrix about Body center of mass (Bcm) for bx, by, bz", LSLabel.CENTER, tabContainer, GridBagConstraints.REMAINDER );
+      tabContainer.AddComponentToLayoutRowRemainder1High( this.CreatePanelWithInertiaMatrix() );
 
       // Add picture of a rigid body with Bcm (Body center of mass) and Bo (Body origin).
       JLabel labelWithPicture = LSJava.LSResources.LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "RigidBodyWithCMAndBasisVectors.jpg", 0, 140 );
-      if( labelWithPicture != null )  tabContainer.AddComponentToLayout( labelWithPicture, GridBagConstraints.REMAINDER, 1 );
+      if( labelWithPicture != null )  tabContainer.AddComponentToLayoutRowRemainder1High( labelWithPicture );
 
       // After creating the matrix, provide visual feedback on whether or not it is possible.
       this.CheckInertiaMatrixAndGiveVisualFeedbackOnWhetherOrNotItIsPhysicallyPossible();
@@ -318,114 +321,29 @@ public class LSPropertyEditorRigidBody extends LSDialog implements ActionListene
       tabContainer.SetConstraintInsets( 4, 4, 4, 4 );
 
       // Create inertia properties labels and text fields.
-      myIxxTextField = new LSTextField( 1.0, true,  tabContainer, 1, 1, this, this, this );
-      myIxyTextField = new LSTextField( 0.0, true,  tabContainer, 1, 1, this, this, this );
-      myIxzTextField = new LSTextField( 0.0, true,  tabContainer, GridBagConstraints.REMAINDER, 1, this, this, this );
-      myIyxTextField = new LSTextField( 0.0, false, tabContainer, 1, 1, null, this, null );
-      myIyyTextField = new LSTextField( 2.0, true,  tabContainer, 1, 1, this, this, this );
-      myIyzTextField = new LSTextField( 0.0, true,  tabContainer, GridBagConstraints.REMAINDER, 1, this, this, this );
-      myIzxTextField = new LSTextField( 0.0, false, tabContainer, 1, 1, null, this, null );
-      myIzyTextField = new LSTextField( 0.0, false, tabContainer, 1, 1, null, this, null );
-      myIzzTextField = new LSTextField( 3.0, true,  tabContainer, GridBagConstraints.REMAINDER, 1, this, this, this );
+      myIxxTextField = new LSTextFieldWithListenersForOpenSimDoubleNonNegative( this, super.GetPropertyTalkToSimbody(), "inertia_xx", 0.0, 0, true, tabContainer, 1, 1, this, this, this );   
+      myIxyTextField = new LSTextFieldWithListenersForOpenSimDouble(            this, super.GetPropertyTalkToSimbody(), "inertia_xy", 0.0, 0, true, tabContainer, 1, 1, this, this, this );   
+      myIxzTextField = new LSTextFieldWithListenersForOpenSimDouble(            this, super.GetPropertyTalkToSimbody(), "inertia_xz", 0.0, 0, true, tabContainer, GridBagConstraints.REMAINDER, 1, this, this, this );   
+      myIyxTextField = new LSTextField( myIxyTextField.GetTextFieldAsString(), 0, false, tabContainer, 1, 1, null, this, null );
+      myIyyTextField = new LSTextFieldWithListenersForOpenSimDoubleNonNegative( this, super.GetPropertyTalkToSimbody(), "inertia_yy", 0.0, 0, true, tabContainer, 1, 1, this, this, this );   
+      myIyzTextField = new LSTextFieldWithListenersForOpenSimDouble(            this, super.GetPropertyTalkToSimbody(), "inertia_yz", 0.0, 0, true, tabContainer, GridBagConstraints.REMAINDER, 1, this, this, this );   
+      myIzxTextField = new LSTextField( myIxzTextField.GetTextFieldAsString(), 0, false, tabContainer, 1, 1, null, this, null );
+      myIzyTextField = new LSTextField( myIyzTextField.GetTextFieldAsString(), 0, false, tabContainer, 1, 1, null, this, null );
+      myIzzTextField = new LSTextFieldWithListenersForOpenSimDoubleNonNegative( this, super.GetPropertyTalkToSimbody(), "inertia_zz", 0.0, 0, true, tabContainer, GridBagConstraints.REMAINDER, 1, this, this, this );   
       
       return myInertiaMatrixPanel;
    } 
 
 
-   //-----------------------------------------------------------------------------
-   private Component  CreateTabComponentPositionAndOrientationRigidBodyProperty( ) 
-   { 
-      LSPanel     tabComponent = new LSPanel(); 
-      LSContainer tabContainer = tabComponent.GetPanelAsContainer();
-
-      new LSLabel( "TBD: Position and Orientation (with degrees/radians conversion)", Label.CENTER, tabContainer, GridBagConstraints.REMAINDER );
-      return tabComponent;
-   } 
-
-   
-   //-----------------------------------------------------------------------------
-   private String  GetNameOfRigidBody( )  { return myAssociatedOpenSimObject.getName(); } 
-   private void    SetNameOfRigidBody( String newName )    
-   { 
-      myAssociatedOpenSimObject.setName( newName );
-      if( myAssociatedOpenSimOneBodyNodeOrNull != null )
-         myAssociatedOpenSimOneBodyNodeOrNull.renameObjectNode( myAssociatedOpenSimObject, newName );
-   } 
-
-   
    //----------------------------------------------------------------------------- 
-   private void  SetAssociatedOpenSimOneBodyNodeOrNullIfNotAlreadySet( )
+   private void  SetAssociatedOpenSimOneBodyNodeIfNotAlreadySet( )
    {
       if( myAssociatedOpenSimOneBodyNodeOrNull == null )
       {
-         ExplorerTopComponent explorerTopComponentTree = ExplorerTopComponent.findInstance();
-         Node rootNode = explorerTopComponentTree.getExplorerManager().getRootContext();
-         if( rootNode instanceof OpenSimNode )
-         {
-             OpenSimNode rootNodeAsOpenSimNode = (OpenSimNode)rootNode;
-             Object objectToMatch = myAssociatedOpenSimObject; 
-             OpenSimObjectNode matchingObjectNode = rootNodeAsOpenSimNode.findChild( objectToMatch );
-             if( matchingObjectNode instanceof OneBodyNode )
-                myAssociatedOpenSimOneBodyNodeOrNull = (OneBodyNode)matchingObjectNode;
-         }
+         OpenSimObjectNode matchingObjectNode = super.GetRootNodeAsOpenSimObjectNodeOrReturnNullIfNoMatch();
+         if( matchingObjectNode instanceof OneBodyNode )
+            myAssociatedOpenSimOneBodyNodeOrNull = (OneBodyNode)matchingObjectNode;
       }
-   }
-       
-   
-   //-----------------------------------------------------------------------------
-   private void  SetRigidBodyDialogTitle( ) 
-   { 
-      String rigidBodyName = this.GetNameOfRigidBody();
-      String frameTitle = rigidBodyName == null ? "Rigid Body Properties" : ("Rigid Body Properties for " + rigidBodyName);
-      super.setTitle( frameTitle ); 
-   } 
-   
-   
-   //-----------------------------------------------------------------------------
-   private void  SetRigidBodyDialogIconImage( ) 
-   { 
-      ImageIcon rigidBodyIcon = LSJava.LSResources.LSImageResource.GetImageIconFromLSResourcesFileName( "BodyCMPicture.png" );  
-      Image imageToLeftOfDialogTitle = (rigidBodyIcon == null) ? null : rigidBodyIcon.getImage();
-      if( imageToLeftOfDialogTitle != null ) super.setIconImage( imageToLeftOfDialogTitle );
-   }
-
-   
-   //-------------------------------------------------------------------------
-   private void  ProcessEventRigidBodyNameChanged( )
-   {
-       String newName = myNameTextField.GetTextFieldAsString();
-       String oldName = this.GetNameOfRigidBody();
-       if( newName != null && LSString.IsStringsEqualCaseSensitive(newName,oldName) == false )
-       {
-          this.SetNameOfRigidBody( newName );
-	  this.SetRigidBodyDialogTitle();
-       }
-   }
-
-
-   //-------------------------------------------------------------------------
-   private void  ProcessEventClickButtonToOpenTableOfRigidBodyProperties( )
-   {
-      boolean allowEdit = false;
-      ObjectEditDialogMaker editorDialog = new ObjectEditDialogMaker( myAssociatedOpenSimObject, myOpenSimModelWindowVTKTopComponentOwnerWindow, allowEdit, "OK" ); 
-      editorDialog.process();
-   }
-
-
-   //-------------------------------------------------------------------------
-   private void  ProcessEventClickButtonToOpenColorChooser( )
-   {
-      Color newColor = JColorChooser.showDialog( this, "Color of rigid body " + this.GetNameOfRigidBody(), Color.WHITE );
-      if( myAssociatedOpenSimOneBodyNodeOrNull != null ) ObjectDisplayColorAction.ChangeUserSelectedNodeColor( myAssociatedOpenSimOneBodyNodeOrNull, newColor, true );
-      else                                               ObjectDisplayColorAction.ChangeUserSelectedNodesColor( newColor );
-   }
-
-
-   //-----------------------------------------------------------------------------
-   private void  ProcessEventShowOrHideRigidBody( boolean showOrHide )
-   {
-      if( myAssociatedOpenSimOneBodyNodeOrNull != null )
-         ObjectDisplayShowHideBaseAction.ApplyOperationToNodeWithShowHide( myAssociatedOpenSimOneBodyNodeOrNull, showOrHide, true ); 
    }
 
 
@@ -525,44 +443,47 @@ public class LSPropertyEditorRigidBody extends LSDialog implements ActionListene
 
 
    //-----------------------------------------------------------------------------
-   private int          GetNumberOfTabs( )                                { return myJTabbedPane == null ? 0 : myJTabbedPane.getTabCount(); }
-   private boolean      IsTabIndexInRange( int tabIndex )                 { return myJTabbedPane == null ? false : tabIndex < GetNumberOfTabs(); }
-   private boolean      SetCurrentUserSelectedTabIndex( int tabIndex )    { if( !IsTabIndexInRange(tabIndex) ) return false;   myJTabbedPane.setSelectedIndex( tabIndex );   return true; } 
-   private static int   GetPriorUserSelectedTabComponent()                { return myPriorUserSelectedTabInitialized ? myPriorUserSelectedTabIndex : 0; }   
-   private static void  SetPriorUserSelectedTabComponent( int tabIndex )  { myPriorUserSelectedTabInitialized = true;   myPriorUserSelectedTabIndex = tabIndex; }   
-
-
-   //-----------------------------------------------------------------------------
    // Class data
-   private OpenSimObject  myAssociatedOpenSimObject;  
-   private OneBodyNode    myAssociatedOpenSimOneBodyNodeOrNull;  // Relevant class hierarchy: OneBodyNode -> OpenSimObjectNode -> OpenSimNode -> AbstractNode -> Node
-   private ModelWindowVTKTopComponent  myOpenSimModelWindowVTKTopComponentOwnerWindow;
+   private OneBodyNode  myAssociatedOpenSimOneBodyNodeOrNull;  // Relevant class hierarchy: OneBodyNode -> OpenSimObjectNode -> OpenSimNode -> AbstractNode -> Node
    
-   private JTabbedPane    myJTabbedPane; 
-   private LSButton       myButtonToOpenOldTableOfRigidProperties;
+   // Items appearing on the appearance tab.
+   private LSButton       myButtonToOpenOldPropertyViewerTable;
    private LSTextField    myNameTextField; 
-   private LSTextField    myMassTextField;     
-   private LSTextField    myXcmTextField,  myYcmTextField,  myZcmTextField;   
+   private LSCheckbox     myShowBodyCheckbox, myHideBodyCheckbox;
    private LSCheckbox     myShowCMCheckbox;
-   private LSCheckbox     myShowRigidBodyCheckbox;
+   private LSCheckbox     myShowBodyAxesCheckbox;
+   private LSButton       myButtonToOpenColorChooser;
+   private LSSlider       myOpacitySlider;
+   private LSCheckbox     myWireFrameCheckbox;
+   private LSCheckbox     mySurfaceShadedSmoothCheckbox;
+   private LSCheckbox     mySurfaceShadedFlatCheckbox;  
+   // mySurfaceShadedFlatCheckbox is unimplemented VTK option since: (a) no difference to analytical geometry, (b) not much faster than smooth, (c) Confusing to give user extra options.
+   
+   // Mass and center of mass fields.
+   private LSTextField    myXcmTextField,  myYcmTextField,  myZcmTextField;   
+   
+   // Mass and inertia matrix fields.
+   private LSTextFieldWithListenersForOpenSimDoubleNonNegative  myMassTextField;  
+   private LSTextFieldWithListenersForOpenSimDoubleNonNegative  myIxxTextField;
+   private LSTextFieldWithListenersForOpenSimDoubleNonNegative  myIyyTextField;
+   private LSTextFieldWithListenersForOpenSimDoubleNonNegative  myIzzTextField;
+   private LSTextFieldWithListenersForOpenSimDouble             myIxyTextField;
+   private LSTextFieldWithListenersForOpenSimDouble             myIxzTextField;
+   private LSTextFieldWithListenersForOpenSimDouble             myIyzTextField;
+   private LSTextField                                          myIyxTextField;
+   private LSTextField                                          myIzxTextField;
+   private LSTextField                                          myIzyTextField;
+   private LSPanel  myInertiaMatrixPanel; 
+   private LSLabel  myInertiaIncorrectLabel;
    
    // Determine which LSTextField last had focus to determine if the one that regains focus is the same one.
    private LSTextField    myPreviousTextFieldThatHadFocus;
-           
-   // Inertia matrix fields.
-   private LSTextField    myIxxTextField,  myIxyTextField,  myIxzTextField;
-   private LSTextField    myIyxTextField,  myIyyTextField,  myIyzTextField;
-   private LSTextField    myIzxTextField,  myIzyTextField,  myIzzTextField;
-   private LSPanel        myInertiaMatrixPanel; 
-   private LSLabel        myInertiaIncorrectLabel;
-   
-   // Object color
-   private LSButton       myButtonToOpenColorChooser;
 
-   // When this is redisplayed, show the tab that was last viewed by the user.
-   private static boolean  myPriorUserSelectedTabInitialized;   
-   private static int      myPriorUserSelectedTabIndex;   
-
+   //-----------------------------------------------------------------------------
+   // When this property editor is re-displayed, show tab that was last viewed by the user.
+   protected int   GetPriorUserSelectedTabbedPaneIndexVirtualFunction()  { return myPriorUserSelectedTabIndex; }   
+   protected void  SetPriorUserSelectedTabbedPaneIndexVirtualFunction()  { myPriorUserSelectedTabIndex = super.GetSelectedTabbedPaneIndex(); } 
+   private static int   myPriorUserSelectedTabIndex = 0;   
 }
 
 

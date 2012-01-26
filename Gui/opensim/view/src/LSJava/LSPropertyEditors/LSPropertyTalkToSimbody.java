@@ -7,9 +7,12 @@
 //           to the Model (in Model/View/Controller) that is stored in the
 //           OpenSim API which is written in C++.  In other words, simplifies 
 //           communication Java to fields in OpenSimObjectModel.
-// Authors:  Paul Mitiguy.  Contributors: Ayman Habib, Michael Sherman, Scott Delp.   
+// Authors:  Paul Mitiguy, 2011-2012.   
 //--------------------------------------------------------------------------
-// License TBD.
+// This work is dedicated to the public domain.
+// To the maximum extent possible under law, the author(s) and contributor(s) have
+// dedicated all copyright and related and neighboring rights to this software
+// to the public domain worldwide. This software is distributed without warranty.
 //--------------------------------------------------------------------------
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR   
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,     
@@ -19,42 +22,113 @@
 // IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //--------------------------------------------------------------------------
 package LSJava.LSPropertyEditors;
+import  LSJava.LSUtility.*;
 import  LSJava.LSComponents.*;
+import  java.io.IOException;
+
+import  org.opensim.modeling.OpenSimObject;
+import  org.opensim.modeling.PropertySet;
+import  org.opensim.modeling.Property;
+import  org.opensim.modeling.ArrayDouble;
 import  org.opensim.view.nodes.OpenSimObjectNode;  
+import  org.opensim.view.nodes.OpenSimNode;
 
 
 //-----------------------------------------------------------------------------
 public class LSPropertyTalkToSimbody  
 { 
    //-----------------------------------------------------------------------------
-   public  LSPropertyTalkToSimbody()  {;}
-
-   //-----------------------------------------------------------------------------
-   public  LSPropertyTalkToSimbody( OpenSimObjectNode obj )
+   public  LSPropertyTalkToSimbody( OpenSimObject openSimObjectPassedToConstructorShouldNotBeNull )
    { 
-      this.SetOpenSimObjectNodeIssueErrorIfNull( obj );
+      // Connect this object to its corresponding OpenSim object.
+      // Note: Some of the connection occurs in other constructors.
+      myOpenSimObject = openSimObjectPassedToConstructorShouldNotBeNull;
    } 
 
+
    //-----------------------------------------------------------------------------
-   public  double   GetModelValueDouble( ) {return 0.0;}
-   public  boolean  SetModelValueDouble( double valueToSet ) {return true;}
-   
-   //-----------------------------------------------------------------------------
-   public  OpenSimObjectNode  GetOpenSimObjectNodeIssueErrorIfNull( )                        { this.IssueErrorIfOpenSimObjectNodeIsNull();  return myOpenSimObjectNode; }
-   public  boolean            SetOpenSimObjectNodeIssueErrorIfNull( OpenSimObjectNode obj )  { myOpenSimObjectNode = obj;  return this.IssueErrorIfOpenSimObjectNodeIsNull() == false; }
+   public OpenSimObject  GetOpenSimObject()       { return myOpenSimObject; }  
+   public String         GetOpenSimObjectName( )  { return this.GetOpenSimObject().getName(); } 
 
 
    //-----------------------------------------------------------------------------
-   public  boolean  IssueErrorIfOpenSimObjectNodeIsNull( )
+   public int  GetTextFieldWidthForOpenSimObjectName( )  
    { 
-      if( myOpenSimObjectNode == null ) { LSMessageDialog.DebugMessage( "myOpenSimObjectNode is Null in class LSPropertyTalkToSimbody" );  return true; }
-      return false;
+      String objectName = this.GetOpenSimObjectName();
+      int  lengthOfObjectName = LSString.GetStringLength( objectName );
+      double textFieldWidthForObjectName = 1.5 * ( lengthOfObjectName < 12 ? 12 : lengthOfObjectName );
+      return (int)textFieldWidthForObjectName;
+   }
+   
+
+   //-------------------------------------------------------------------------
+   public Property  GetOpenSimObjectPropertyValueFromPropertyName( String propertyName ) 
+   {
+      PropertySet propertySet = this.GetOpenSimObject().getPropertySet();
+      if( propertySet != null )
+      {
+         try{ return propertySet.get( propertyName );
+         } catch( IOException ex ) { ex.printStackTrace(); }
+      }
+      return null;
+   }
+   
+   //-------------------------------------------------------------------------
+   public double  GetOpenSimObjectPropertyValueAsDoubleFromPropertyName( String propertyName ) 
+   {
+      Property openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
+      return openSimObjectProperty==null ? 0.0 : openSimObjectProperty.getValueDbl();
+   }
+   
+   //-------------------------------------------------------------------------
+   private ArrayDouble  GetOpenSimObjectPropertyValueAsArrayDoubleFromPropertyName( String propertyName ) 
+   {
+      Property openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
+      return openSimObjectProperty==null ? null : null; // openSimObjectProperty.getValueDblArray();
+      // TODO: There is some type mis-match between Java/C++ double arrays that crashes the GUI completely and without warning.
+   }
+
+   //-------------------------------------------------------------------------
+   public double[]  GetOpenSimObjectPropertyValueAsArrayDoubleNFromPropertyName( String propertyName, int expectedNumberOfElements ) 
+   {
+      ArrayDouble arrayDouble = this.GetOpenSimObjectPropertyValueAsArrayDoubleFromPropertyName( propertyName ); 
+      boolean isValid = (arrayDouble!=null && arrayDouble.getSize() == expectedNumberOfElements);
+      double retValue[] = new double[ expectedNumberOfElements ];
+      for( int i=0;  i<expectedNumberOfElements; i++ ) retValue[i] = isValid ? arrayDouble.getitem(i) : 0.0;
+      return retValue;
+   }
+      
+   //-------------------------------------------------------------------------
+   public double[]  GetOpenSimObjectPropertyValueAsArrayDouble3FromPropertyName( String propertyName )  { return this.GetOpenSimObjectPropertyValueAsArrayDoubleNFromPropertyName( propertyName, 3 ); }  
+      
+
+
+   //-------------------------------------------------------------------------
+   public void  SetOpenSimObjectPropertyValueAsDoubleForPropertyName( String propertyName, double valueToSet ) 
+   {
+      Property openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
+      if( openSimObjectProperty != null ) openSimObjectProperty.setValueDbl( valueToSet );
+   }
+
+
+   //-----------------------------------------------------------------------------
+   public boolean  SetOpenSimObjectName( String newName, OpenSimNode associatedOpenSimNodeOrNull )    
+   { 
+      String oldName = this.GetOpenSimObjectName();
+      if( newName != null && LSString.IsStringsEqualCaseSensitive(newName,oldName) == false )
+      {
+         this.GetOpenSimObject().setName( newName );
+         if( associatedOpenSimNodeOrNull != null )
+            associatedOpenSimNodeOrNull.renameObjectNode( this.GetOpenSimObject(), newName );
+         return true;
+      }
+      return false; // No name change.
    } 
 
 
    //-----------------------------------------------------------------------------
    // Class data
-   private OpenSimObjectNode  myOpenSimObjectNode;     
+   private   OpenSimObject  myOpenSimObject;  
 
 }
 
