@@ -128,6 +128,8 @@ public class MotionDisplayer implements SelectionListener {
     private boolean renderMuscleActivations=false;
     double DEFAULT_FACTOR_SCALE_FACTOR=.001;
     double currentScaleFactor;
+    String DEFAULT_FORCE_SHAPE="arrow";
+    String currentForceShape;
     
     // For columns that start with a body name, this is the map from column index to body reference.
     // The map is currently used only for body forces and generalized forces.
@@ -163,6 +165,7 @@ public class MotionDisplayer implements SelectionListener {
         dContext= OpenSimDB.getInstance().getContext(model);
         simmMotionData = motionData;
         currentScaleFactor = DEFAULT_FACTOR_SCALE_FACTOR;
+        currentForceShape = DEFAULT_FORCE_SHAPE;
         setupMotionDisplay();
         // create a buffer to be used for comuptation of constrained states
         statesBuffer = new double[model.getNumStateVariables()];
@@ -270,7 +273,7 @@ public class MotionDisplayer implements SelectionListener {
         generalizedForcesRep = new OpenSimvtkGlyphCloud(true); bodyForcesRep.setName("JointForce");
         markersRep = new OpenSimvtkGlyphCloud(false);   bodyForcesRep.setName("Exp. Markers");
 
-        groundForcesRep.setShape(MotionObjectsDB.getInstance().getShape("arrow"));
+        groundForcesRep.setShape(MotionObjectsDB.getInstance().getShape(currentForceShape));
         groundForcesRep.setColor(new double[]{0., 1.0, 0.});
         groundForcesRep.setOpacity(0.7);
         groundForcesRep.setScaleFactor(currentScaleFactor);
@@ -842,7 +845,8 @@ public class MotionDisplayer implements SelectionListener {
         if (simmMotionData instanceof AnnotatedMotion){
             // Add place hoders for markers
             AnnotatedMotion mot= (AnnotatedMotion) simmMotionData;
-            currentScaleFactor *= mot.getDisplayScale();
+            currentScaleFactor = mot.getDisplayScale();
+            currentForceShape = mot.getDisplayForceShape();
             AddMotionObjectsRep(model);
             System.out.println("Setting scale factor to "+mot.getDisplayScale());
             Vector<ExperimentalDataObject> objects=mot.getClassified();

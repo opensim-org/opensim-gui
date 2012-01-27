@@ -52,13 +52,14 @@ public final class MotionEditMotionObjectsAction extends CallableSystemAction {
         final AnnotatedMotion amot = (AnnotatedMotion) (motionNode).getMotion();
         EditMotionObjectsPanel dataPanel= new EditMotionObjectsPanel(amot, model);
         final DialogDescriptor dlg = new DialogDescriptor(dataPanel, "Inspect Motion Data");
+        dlg.setOptions(new Object[]{DialogDescriptor.CLOSED_OPTION});
         dlg.setModal(false);
         Dialog wDlg = DialogDisplayer.getDefault().createDialog(dlg);
         wDlg.setVisible(true);
         wDlg.addWindowListener(new WindowAdapter(){
               public void windowClosing(WindowEvent event) {
                 Object userInput = dlg.getValue();
-                if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+                if (((Integer)userInput).compareTo((Integer)DialogDescriptor.CLOSED_OPTION)==0){
                     amot.updateMotionDisplayer();
                 }
                 //amot.applyTransform(dataPanel.getLastTranform());
@@ -66,7 +67,7 @@ public final class MotionEditMotionObjectsAction extends CallableSystemAction {
               }
             public void windowClosed(WindowEvent e) {
                 Object userInput = dlg.getValue();
-                if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+                if (((Integer)userInput).compareTo((Integer)DialogDescriptor.CLOSED_OPTION)==0){
                     amot.updateMotionDisplayer();
                 }
                 //amot.applyTransform(dataPanel.getLastTranform());

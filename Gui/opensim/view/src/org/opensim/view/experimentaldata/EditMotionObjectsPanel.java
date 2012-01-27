@@ -67,6 +67,7 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
         updateButtonAvailability();
         jMotionObjectsList.addListSelectionListener(this);
         jForceScaleTextField.setText(String.valueOf(aMotion.getDisplayScale()));
+        jForceDisplayShapeComboBox.setSelectedItem(aMotion.getDisplayForceShape());
     }
     
     /** This method is called from within the constructor to
@@ -109,7 +110,7 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
         jLabel1 = new javax.swing.JLabel();
         jForceScaleTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jForceDisplayShapeComboBox = new javax.swing.JComboBox();
 
         jLabel5.setText("Applied to");
 
@@ -280,7 +281,7 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
         jScrollPane1.setViewportView(jMotionObjectsList);
 
         jButtonAdd.setText("Add...");
-        jButtonAdd.setToolTipText("Add an external force to the tool");
+        jButtonAdd.setToolTipText("Add a motion object based on data ");
         jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddActionPerformed(evt);
@@ -288,7 +289,7 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
         });
 
         jButtonDelete.setText("Delete");
-        jButtonDelete.setToolTipText("Delete selected forces/torques");
+        jButtonDelete.setToolTipText("Delete selected object(s)");
         jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonDeleteActionPerformed1(evt);
@@ -296,7 +297,7 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
         });
 
         jButtonEdit.setText("Edit...");
-        jButtonEdit.setToolTipText("Edit selected force");
+        jButtonEdit.setToolTipText("Edit selected object");
         jButtonEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEditActionPerformed(evt);
@@ -332,15 +333,27 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
         jLabel1.setText("Scale for forces");
 
         jForceScaleTextField.setText("1.0");
+        jForceScaleTextField.setToolTipText("scale for the shape used");
         jForceScaleTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jForceScaleTextFieldActionPerformed(evt);
             }
         });
+        jForceScaleTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jForceScaleTextFieldFocusLost(evt);
+            }
+        });
 
         jLabel2.setText("Shape");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Arrow In", "Arrow Out", " " }));
+        jForceDisplayShapeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "arrow", "arrow_in", "ball" }));
+        jForceDisplayShapeComboBox.setToolTipText("available shapes ");
+        jForceDisplayShapeComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jForceDisplayShapeComboBoxActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -354,8 +367,8 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
                 .add(18, 18, 18)
                 .add(jLabel2)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .add(jForceDisplayShapeComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(131, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -363,7 +376,7 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
                 .add(jLabel1)
                 .add(jForceScaleTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(jLabel2)
-                .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(jForceDisplayShapeComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
@@ -440,6 +453,16 @@ private void jForceScaleTextFieldActionPerformed(java.awt.event.ActionEvent evt)
 // TODO add your handling code here:
         aMotion.setDisplayScale(Double.parseDouble(jForceScaleTextField.getText()));
 }//GEN-LAST:event_jForceScaleTextFieldActionPerformed
+
+    private void jForceScaleTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jForceScaleTextFieldFocusLost
+        aMotion.setDisplayScale(Double.parseDouble(jForceScaleTextField.getText()));
+// TODO add your handling code here:
+    }//GEN-LAST:event_jForceScaleTextFieldFocusLost
+
+    private void jForceDisplayShapeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jForceDisplayShapeComboBoxActionPerformed
+        // TODO add your handling code here:
+        aMotion.setDisplayForceShape((String)jForceDisplayShapeComboBox.getSelectedItem());
+    }//GEN-LAST:event_jForceDisplayShapeComboBoxActionPerformed
    
     private void updateButtonAvailability() {
        int[] sels = jMotionObjectsList.getSelectedIndices();
@@ -471,7 +494,6 @@ private void jForceScaleTextFieldActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonEdit;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBoxFX;
     private javax.swing.JComboBox jComboBoxFY;
     private javax.swing.JComboBox jComboBoxFZ;
@@ -481,6 +503,7 @@ private void jForceScaleTextFieldActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JComboBox jComboBoxTX;
     private javax.swing.JComboBox jComboBoxTY;
     private javax.swing.JComboBox jComboBoxTZ;
+    private javax.swing.JComboBox jForceDisplayShapeComboBox;
     private javax.swing.JTextField jForceScaleTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -31,12 +31,12 @@ package org.opensim.view.motions;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Set;
-import vtk.vtkActor;
 import vtk.vtkArrowSource;
 import vtk.vtkCubeSource;
 import vtk.vtkPolyData;
-import vtk.vtkPolyDataMapper;
 import vtk.vtkSphereSource;
+import vtk.vtkTransform;
+import vtk.vtkTransformPolyDataFilter;
 
 /**
  *
@@ -62,6 +62,8 @@ public class MotionObjectsDB {
       motionObjectsMap.put("arrow", createArrow());
       // another marker
       motionObjectsMap.put("box", creatCube());
+      // reverse arrow
+      motionObjectsMap.put("arrow_in", createArrowIn());
       
       /*
       motionObjectsMap.put("torque", new vtkSphereSource());
@@ -127,5 +129,19 @@ public class MotionObjectsDB {
    public vtkPolyData getShape(String shapeName) {
         return motionObjectsMap.get(shapeName);
     }
+
+    private vtkPolyData createArrowIn() {
+      vtkArrowSource arr=new vtkArrowSource();
+      arr.SetShaftRadius(0.02);
+      arr.SetTipLength(0.2);
+      vtkPolyData arrPolyDate = arr.GetOutput();
+      vtkTransformPolyDataFilter flipFilter = new vtkTransformPolyDataFilter();
+      vtkTransform flipTransform = new vtkTransform();
+      flipTransform.RotateZ(180);
+      flipTransform.Translate(-1.0, 0., 0.);
+      flipFilter.SetTransform(flipTransform);
+      flipFilter.SetInputConnection(arr.GetOutputPort());
+      return flipFilter.GetOutput();
+   }
    
 }
