@@ -118,7 +118,7 @@ public final class ViewDB extends Observable implements Observer {
    // Flag indicating whether new models are open in a new window or in the same window
    static boolean openModelInNewWindow=true;
    
-   static boolean useImmediateModeRendering=false; // Use Render instead of paint
+   static boolean useImmediateModeRendering = false; // Use Render instead of paint
    private ArrayList<Selectable> selectedObjects = new ArrayList<Selectable>(0);
    private Hashtable<Selectable, vtkCaptionActor2D> selectedObjectsAnnotations = new Hashtable<Selectable, vtkCaptionActor2D>(0);
    private ArrayList<SelectionListener> selectionListeners = new ArrayList<SelectionListener>(0);
@@ -579,10 +579,10 @@ public final class ViewDB extends Observable implements Observer {
    /**
     * Cycle through displayed windows and repaint them
     */
-   public void repaintAll() {
+   public static void repaintAll() {
       Iterator<ModelWindowVTKTopComponent> windowIter = openWindows.iterator();
-      while(windowIter.hasNext()){
-         if (useImmediateModeRendering)
+      while( windowIter.hasNext() ){
+         if( useImmediateModeRendering )
             windowIter.next().getCanvas().Render();
          else
             windowIter.next().getCanvas().repaint();
@@ -680,32 +680,53 @@ public final class ViewDB extends Observable implements Observer {
    /**
     * Set the Opacity of the passed in object to newOpacity
     */
-   public void setObjectOpacity(OpenSimObject object, double newOpacity) {
+   //-----------------------------------------------------------------------------
+   public static void setObjectOpacity( OpenSimObject object, double newOpacity ) {
       vtkProp3D asm = ViewDB.getInstance().getVtkRepForObject(object);
-      applyOpacity(newOpacity, asm);
-      if (asm instanceof BodyDisplayer){
+      ViewDB.applyOpacity( newOpacity, asm );
+      if( asm instanceof BodyDisplayer )
           ((BodyDisplayer) asm).setOpacity(newOpacity);
-      }
-      else if (object instanceof DisplayGeometry){
+      else if (object instanceof DisplayGeometry)
           ((DisplayGeometry)object).setOpacity(newOpacity);
-      }
    }
    
-   private void applyOpacity(final double newOpacity, final vtkProp3D asm) {
-      ApplyFunctionToActors(asm, new ActorFunctionApplier() {
+   //-----------------------------------------------------------------------------
+   private static void applyOpacity( final double newOpacity, final vtkProp3D asm ) {
+      ViewDB.ApplyFunctionToActors( asm, new ActorFunctionApplier() {
          public void apply(vtkActor actor) { actor.GetProperty().SetOpacity(newOpacity); }});
-      repaintAll();
+      ViewDB.repaintAll();
    }
    /**
     * Retrieve the display properties for the passed in object.
     */
-   public void getObjectProperties(OpenSimObject object, final vtkProperty saveProperty) {
+   public static void getObjectProperties(OpenSimObject object, final vtkProperty saveProperty) {
       vtkProp3D asm = ViewDB.getInstance().getVtkRepForObject(object);
       ApplyFunctionToActors(asm, new ActorFunctionApplier() {
          public void apply(vtkActor actor) { 
             saveProperty.SetColor(actor.GetProperty().GetColor());
             saveProperty.SetOpacity(actor.GetProperty().GetOpacity()); }});
    }
+   
+   
+   //-----------------------------------------------------------------------------
+   public static double getObjectOpacityInRangeFrom0To1( OpenSimObject object )
+   {
+      if( object == null ) return 1; 
+      vtkProperty propertyToFillInformation = new vtkProperty(); 
+      ViewDB.getObjectProperties( object, propertyToFillInformation );
+      return propertyToFillInformation.GetOpacity();
+   }
+   
+   //-----------------------------------------------------------------------------
+   public static double[] getObjectRGBColorIn3DoublesWithRangeFrom0To1( OpenSimObject object )
+   {
+      double objectColor[] = { 1.0, 1.0, 1.0 }; 
+      if( object == null ) return objectColor; 
+      vtkProperty propertyToFillInformation = new vtkProperty(); 
+      ViewDB.getObjectProperties( object, propertyToFillInformation );
+      return propertyToFillInformation.GetColor();  // This seems to always return 1,1,1.
+   }
+   
    public void setObjectProperties(OpenSimObject object, vtkProperty saveProperty) {
       setObjectColor(object, saveProperty.GetColor());
       setObjectOpacity(object, saveProperty.GetOpacity());
@@ -1242,7 +1263,7 @@ public final class ViewDB extends Observable implements Observer {
     * 2. Phong
     * defined in vtkProperty.h
     */
-   public void setObjectRepresentation(final OpenSimObject object, final int rep, final int newShading) {
+   public static void setObjectRepresentation(final OpenSimObject object, final int rep, final int newShading) {
       // Set new rep in model so that it's persistent.'
       DisplayGeometry.DisplayPreference newPref = DisplayGeometry.DisplayPreference.GouraudShaded;
       if (rep==1)  newPref = DisplayGeometry.DisplayPreference.WireFrame;
