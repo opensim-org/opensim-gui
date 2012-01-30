@@ -26,12 +26,14 @@ import  LSJava.LSUtility.*;
 import  LSJava.LSComponents.*;
 import  java.io.IOException;
 
+import  org.opensim.modeling.Model;
 import  org.opensim.modeling.OpenSimObject;
 import  org.opensim.modeling.PropertySet;
 import  org.opensim.modeling.Property;
 import  org.opensim.modeling.ArrayDouble;
 import  org.opensim.view.nodes.OpenSimObjectNode;  
 import  org.opensim.view.nodes.OpenSimNode;
+import  org.opensim.view.pub.OpenSimDB;
 
 
 //-----------------------------------------------------------------------------
@@ -102,12 +104,29 @@ public class LSPropertyTalkToSimbody
    public double[]  GetOpenSimObjectPropertyValueAsArrayDouble3FromPropertyName( String propertyName )  { return this.GetOpenSimObjectPropertyValueAsArrayDoubleNFromPropertyName( propertyName, 3 ); }  
       
 
-
    //-------------------------------------------------------------------------
    public void  SetOpenSimObjectPropertyValueAsDoubleForPropertyName( String propertyName, double valueToSet ) 
    {
       Property openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
       if( openSimObjectProperty != null ) openSimObjectProperty.setValueDbl( valueToSet );
+      this.InitializeSystemForTheModelAssociatedWithThisProperty();
+   }
+
+
+   //-------------------------------------------------------------------------
+   private void  InitializeSystemForTheModelAssociatedWithThisProperty( )
+   { 
+      // Paul: Ask Ayman if there is better way to ensure that we find the model that goes with this property.
+      Model currentModel = OpenSimDB.getInstance().getCurrentModel();
+      LSPropertyTalkToSimbody.InitializeSystemForModel( currentModel );
+   }
+
+
+   //-------------------------------------------------------------------------
+   private static void  InitializeSystemForModel( Model aModel )  
+   { 
+      try { aModel.initSystem(); } 
+      catch (IOException ex) { ex.printStackTrace(); }
    }
 
 
