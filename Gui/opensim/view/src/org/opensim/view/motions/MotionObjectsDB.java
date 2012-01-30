@@ -134,7 +134,6 @@ public class MotionObjectsDB {
       vtkArrowSource arr=new vtkArrowSource();
       arr.SetShaftRadius(0.02);
       arr.SetTipLength(0.2);
-      vtkPolyData arrPolyDate = arr.GetOutput();
       vtkTransformPolyDataFilter flipFilter = new vtkTransformPolyDataFilter();
       vtkTransform flipTransform = new vtkTransform();
       flipTransform.RotateZ(180);

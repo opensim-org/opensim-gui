@@ -66,7 +66,7 @@ public class MotionObjectBodyPoint extends ExperimentalDataObject {
         bodyName = selected;
     }
 
-    void setPointIdentifier(String makeIdentifier) {
+    public void setPointIdentifier(String makeIdentifier) {
         pointIdentifier = makeIdentifier;
     }
 
@@ -74,11 +74,8 @@ public class MotionObjectBodyPoint extends ExperimentalDataObject {
         return bodyName;
     }
 
-    boolean specifiesPoint() {
-        return true;
-    }
 
-    String getPointIdentifier() {
+    public String getPointIdentifier() {
         return pointIdentifier;
     }
 

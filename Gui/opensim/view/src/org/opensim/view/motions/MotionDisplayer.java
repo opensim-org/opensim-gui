@@ -64,6 +64,7 @@ import org.opensim.modeling.Storage;
 import org.opensim.view.OpenSimvtkGlyphCloud;
 import org.opensim.view.SingleModelVisuals;
 import org.opensim.view.experimentaldata.ExperimentalDataItemType;
+import org.opensim.view.experimentaldata.MotionObjectBodyForce;
 import org.opensim.view.experimentaldata.MotionObjectBodyPoint;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
@@ -522,16 +523,29 @@ public class MotionDisplayer implements SelectionListener {
                     markersModified = true;
                 }
                 else if (nextObject.getObjectType()==ExperimentalDataItemType.ForceAndPointData){
-                    int startIndex = nextObject.getStartIndexInFileNotIncludingTime();
+                    String pointId = ((MotionObjectBodyForce)nextObject).getPointIdentifier();
+                    String forceId = ((MotionObjectBodyForce)nextObject).getForceIdentifier();
+                    String bodyId = ((MotionObjectBodyForce)nextObject).getBodyName();  
+                    Body b = model.getBodySet().get(bodyId);
+                    int startPointIndex = simmMotionData.getColumnIndicesForIdentifier(pointId).getitem(0)-1;
+                    double[] locationLocal = new double[]{states.getitem(startPointIndex), 
+                            states.getitem(startPointIndex+1), 
+                            states.getitem(startPointIndex+2)};
+                    double[] locationGlobal = new double[3]; 
+                    // Transform to ground from body frame
+                    dContext.transformPosition(b, locationLocal, locationGlobal);
                     groundForcesRep.setLocation(nextObject.getGlyphIndex(), 
-                            states.getitem(startIndex+3), 
-                            states.getitem(startIndex+4), 
-                            states.getitem(startIndex+5));
+                            locationGlobal[0], locationGlobal[1], locationGlobal[2]);
+                    int startForceIndex = simmMotionData.getColumnIndicesForIdentifier(forceId).getitem(0)-1;
+                    double[] forceLocal = new double[]{states.getitem(startForceIndex), 
+                            states.getitem(startForceIndex+1), 
+                            states.getitem(startForceIndex+2)};
+                    double[] forceGlobal = new double[3]; 
+                    dContext.transform(b, forceLocal, model.getGroundBody(), forceGlobal);
                     groundForcesRep.setNormalAtLocation(nextObject.getGlyphIndex(), 
-                            states.getitem(startIndex), 
-                            states.getitem(startIndex+1), 
-                            states.getitem(startIndex+2));
-                   
+                            forceGlobal[0], 
+                            forceGlobal[1], 
+                            forceGlobal[2]);
                     forcesModified=true;
               } else if (nextObject.getObjectType()==ExperimentalDataItemType.BodyForceData){
                     int startIndex = nextObject.getStartIndexInFileNotIncludingTime();
@@ -543,11 +557,20 @@ public class MotionDisplayer implements SelectionListener {
                     dContext.transformPosition(b, bodyPoint, bodyPointGlobal);
                     groundForcesRep.setLocation(nextObject.getGlyphIndex(), 
                             bodyPointGlobal[0], bodyPointGlobal[1], bodyPointGlobal[2]);
-                    groundForcesRep.setNormalAtLocation(nextObject.getGlyphIndex(), 
-                            states.getitem(startIndex), 
+                    double[] vectorGlobal = new double[]{states.getitem(startIndex), 
                             states.getitem(startIndex+1), 
-                            states.getitem(startIndex+2));
-                   
+                            states.getitem(startIndex+2)}; 
+                    if (!(b==model.getGroundBody())){
+                        double[] vectorLocal = new double[]{
+                                states.getitem(startIndex), 
+                                states.getitem(startIndex+1), 
+                                states.getitem(startIndex+2)
+                        };
+                        // Transform to ground from body frame
+                        dContext.transform(b, vectorLocal, model.getGroundBody(), vectorGlobal);
+                    }
+                    groundForcesRep.setNormalAtLocation(nextObject.getGlyphIndex(), 
+                            vectorGlobal[0], vectorGlobal[1], vectorGlobal[2]);
                     forcesModified=true;
               }
               

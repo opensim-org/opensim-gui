@@ -35,24 +35,24 @@ import org.opensim.utils.Vec3;
  *  OR BUSINESS INTERRUPTION) OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
  *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class MotionObjectBodyForceAtFixedPoint extends MotionObjectBodyPoint {
+public class MotionObjectBodyForce extends MotionObjectBodyPoint {
 
     public static final String PROP_FORCEVECTOR = "forceVector";
+    double[] offset = new double[]{0, 0, 0};
     String forceIdentifier="";
     String forceExpressedInBodyName = "ground";
+    private boolean specifyPoint;
     
-    public MotionObjectBodyForceAtFixedPoint(ExperimentalDataItemType objectType, String baseName, int forceIndex) {
-        super(objectType, "", forceIndex);
+    public MotionObjectBodyForce(ExperimentalDataItemType objectType, String baseName, int forceIndex) {
+        super(objectType, baseName, forceIndex);
         setForceIdentifier(baseName);
-        setName(baseName);
    }
 
     void setForceExpressedInBodyName(String selected) {
         forceExpressedInBodyName = selected;
-        setAttachedToBodyName(selected);
     }
 
-    void setForceIdentifier(String makeIdentifier) {
+    public void setForceIdentifier(String makeIdentifier) {
         forceIdentifier = makeIdentifier;
     }
 
@@ -64,13 +64,22 @@ public class MotionObjectBodyForceAtFixedPoint extends MotionObjectBodyPoint {
         return true;
     }
 
-    String getForceIdentifier() {
+    public String getForceIdentifier() {
         return forceIdentifier;
     }
 
-    @Override
+    
     boolean specifiesPoint() {
-        return false;
+        return specifyPoint;
+    }
+
+    @Override
+    public void setObjectType(ExperimentalDataItemType objectType) {
+        super.setObjectType(objectType);
+        if (objectType==ExperimentalDataItemType.BodyForceData)
+            specifyPoint = false;
+        else
+            specifyPoint = true;
     }
  
 }

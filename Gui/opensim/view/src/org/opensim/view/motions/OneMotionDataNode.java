@@ -50,11 +50,18 @@ import org.opensim.view.nodes.*;
  *
  * @author Ayman
  */
-public class OneMotionNode extends OpenSimObjectNode {
-     /** Creates a new instance of OneMotionNode */
-   public OneMotionNode(Storage motion) {
+public class OneMotionDataNode extends OneMotionNode {
+    private boolean experimental=true;
+    /** Creates a new instance of OneMotionNode */
+   public OneMotionDataNode(Storage motion) {
       super(motion);
       //setChildren(Children.LEAF);
+      if (motion instanceof AnnotatedMotion){
+          // Motion is experimental data, may need to add some levels underneath.
+          AnnotatedMotion dMotion= (AnnotatedMotion) motion;
+          createChildren(dMotion);
+      }
+
    }
    
    public Image getIcon(int i) {
@@ -92,17 +99,19 @@ public class OneMotionNode extends OpenSimObjectNode {
             retValue = new Action[]{
                 (MotionsSetCurrentAction) MotionsSetCurrentAction.findObject(
                      (Class)Class.forName("org.opensim.view.motions.MotionsSetCurrentAction"), true),
+                isExperimental()?null:
                 (MotionRenameAction) MotionRenameAction.findObject(
                      (Class)Class.forName("org.opensim.view.motions.MotionRenameAction"), true),
+                 isExperimental()?null:
                 (MotionAssociateMotionAction) MotionAssociateMotionAction.findObject(
                      (Class)Class.forName("org.opensim.view.motions.MotionAssociateMotionAction"), true),
                 (MotionsSynchronizeAction) MotionsSynchronizeAction.findObject(
                      (Class)Class.forName("org.opensim.view.motions.MotionsSynchronizeAction"), true),
                 (MotionsSaveAsAction) MotionsSaveAsAction.findObject(
                      (Class)Class.forName("org.opensim.view.motions.MotionsSaveAsAction"), true),
+                 isExperimental()?null:
                 (MotionsCloseAction) MotionsCloseAction.findObject(
                      (Class)Class.forName("org.opensim.view.motions.MotionsCloseAction"), true),
-                /*
                 (isExperimental())?
                     (MotionReclassifyAction) MotionReclassifyAction.findObject(
                      (Class)Class.forName("org.opensim.view.experimentaldata.MotionReclassifyAction"), true)
@@ -111,7 +120,7 @@ public class OneMotionNode extends OpenSimObjectNode {
                     (MotionEditMotionObjectsAction) MotionEditMotionObjectsAction.findObject(
                      (Class)Class.forName("org.opensim.view.experimentaldata.MotionEditMotionObjectsAction"), true)
                      :null,
-                */
+                
             };
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
@@ -129,8 +138,42 @@ public class OneMotionNode extends OpenSimObjectNode {
            retValue = "<b>"+retValue+"</b>";
         return retValue;
     }
-    
-    public Action getPreferredAction() {
+
+    private void createChildren(AnnotatedMotion dMotion) {
+        Vector<String> names=null;
+        names =dMotion.getMarkerNames();
+        if (names != null && names.size()>0){ // File had markers
+            getChildren().add(new Node[]{new ExperimentalMarkerSetNode(dMotion)});
+        }
+        // Now Forces
+        names =dMotion.getForceNames();
+        if (names !=null && names.size()>0){ // File had forces
+             getChildren().add(new Node[]{new ExperimentalForceSetNode(dMotion)});
+        }
+        /*
+        // Things other than markers and forces
+        Vector<ExperimentalDataObject> all = dMotion.getClassified();
+        if (names !=null&& names.size()>0){  // Everything else
+            for(ExperimentalDataObject obj:all){
+                boolean other = (obj.getObjectType()!=ExperimentalDataItemType.MarkerData) &&
+                        (obj.getObjectType()!=ExperimentalDataItemType.ForceAndPointData);
+                if (other){
+                    // Create a parent node for OtherData
+                    getChildren().add(new Node[]{new ExperimentalOtherDataSetNode(dMotion)}); 
+                    break;
+               }
+            }
+        }*/
+    }
+
+    public boolean isExperimental() {
+        return experimental;
+    }
+
+    public void setExperimental(boolean experimental) {
+        this.experimental = experimental;
+    }
+   public Action getPreferredAction() {
       Action act=null;
       try {
          act =(MotionsSetCurrentAction) MotionsSetCurrentAction.findObject(

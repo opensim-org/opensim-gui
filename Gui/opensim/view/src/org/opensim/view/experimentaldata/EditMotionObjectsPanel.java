@@ -418,7 +418,7 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
             pfo = objectListModel.get(sels[0]);
         }
         
-        MotionObjectBodyPoint pf = ((MotionObjectBodyPoint) pfo);
+        MotionObjectBodyForce pf = ((MotionObjectBodyForce) pfo);
         //ExperimentalDataObject pfCopy = pf.;
         EditOneMotionObjectPanel eofPanel = new EditOneMotionObjectPanel(pf, aMotion, aModel);
         DialogDescriptor dlg = new DialogDescriptor(eofPanel, "Create/Edit Motion Objects");
@@ -431,7 +431,17 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
     }//GEN-LAST:event_jButtonEditActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
-         /*ExternalForce pf = new ExternalForce();
+         MotionObjectBodyForce pf = new MotionObjectBodyForce(ExperimentalDataItemType.ForceAndPointData, "", -1);
+         objectListModel.addElement(pf);
+         EditOneMotionObjectPanel eofPanel = new EditOneMotionObjectPanel(pf, aMotion, aModel);
+         DialogDescriptor dlg = new DialogDescriptor(eofPanel, "Create/Edit Motion Objects");
+         eofPanel.setDDialog(dlg);
+         DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
+         Object userInput = dlg.getValue();
+         if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)!=0){
+             //objectListModel.set(sels[0], pfCopy);
+         }
+       /*ExternalForce pf = new ExternalForce();
          //pf.setName(dTool.getNextAvailableForceName("ExternalForce"));
          pf.setAppliedToBodyName("ground");
          EditOneMotionObjectPanel eofPanel = new EditOneMotionObjectPanel(pf, externalLoadsStorage,dLoads);

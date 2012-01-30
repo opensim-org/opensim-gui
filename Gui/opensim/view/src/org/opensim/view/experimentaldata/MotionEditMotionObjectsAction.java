@@ -46,7 +46,7 @@ public final class MotionEditMotionObjectsAction extends CallableSystemAction {
         // TODO implement action body
         // Get experimental data object from selected nodes and invoke ".hide on them"
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
-        if (selected.length!=1 || (! (selected[0] instanceof OneMotionNode))) return;
+        if (selected.length!=1) return;
         OneMotionNode motionNode = (OneMotionNode)(selected[0]);
         Model model = motionNode.getModelForNode();
         final AnnotatedMotion amot = (AnnotatedMotion) (motionNode).getMotion();

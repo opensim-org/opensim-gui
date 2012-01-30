@@ -26,9 +26,12 @@ public class MotionObjectsListModel extends DefaultListModel {
 
     private void initModel() {
         clear();
+        
         for (int i=0; i<dMotion.getClassified().size(); i++){
             ExperimentalDataObject f= dMotion.getClassified().get(i);
-            add(i, f);
+            // No points/markers or moments for now
+            if (f instanceof MotionObjectBodyForce)
+                addElement(f);
         }
     }
     

@@ -48,13 +48,16 @@ import org.opensim.view.nodes.*;
 
 /**
  *
- * @author Ayman
+ * @author Ayman 
+ * 
+ * A class representing a dataset to be associated with an existing motion, usetrs can control how tro display 
+ * the contents of the dataset but are not allowed to change it.
  */
-public class OneMotionNode extends OpenSimObjectNode {
-     /** Creates a new instance of OneMotionNode */
-   public OneMotionNode(Storage motion) {
+public class OneAssociatedMotionNode extends OneMotionNode {
+    /** Creates a new instance of OneMotionNode */
+   public OneAssociatedMotionNode(AnnotatedMotion motion) {
       super(motion);
-      //setChildren(Children.LEAF);
+       createChildren(motion);
    }
    
    public Image getIcon(int i) {
@@ -90,28 +93,10 @@ public class OneMotionNode extends OpenSimObjectNode {
         try {
             //boolean isCurrent = MotionsDB.getInstance().isModelMotionPairCurrent(new MotionsDB.ModelMotionPair(getModel(), getMotion()));
             retValue = new Action[]{
-                (MotionsSetCurrentAction) MotionsSetCurrentAction.findObject(
-                     (Class)Class.forName("org.opensim.view.motions.MotionsSetCurrentAction"), true),
-                (MotionRenameAction) MotionRenameAction.findObject(
-                     (Class)Class.forName("org.opensim.view.motions.MotionRenameAction"), true),
-                (MotionAssociateMotionAction) MotionAssociateMotionAction.findObject(
-                     (Class)Class.forName("org.opensim.view.motions.MotionAssociateMotionAction"), true),
-                (MotionsSynchronizeAction) MotionsSynchronizeAction.findObject(
-                     (Class)Class.forName("org.opensim.view.motions.MotionsSynchronizeAction"), true),
-                (MotionsSaveAsAction) MotionsSaveAsAction.findObject(
-                     (Class)Class.forName("org.opensim.view.motions.MotionsSaveAsAction"), true),
                 (MotionsCloseAction) MotionsCloseAction.findObject(
                      (Class)Class.forName("org.opensim.view.motions.MotionsCloseAction"), true),
-                /*
-                (isExperimental())?
-                    (MotionReclassifyAction) MotionReclassifyAction.findObject(
-                     (Class)Class.forName("org.opensim.view.experimentaldata.MotionReclassifyAction"), true)
-                     :null,
-               (isExperimental())?
-                    (MotionEditMotionObjectsAction) MotionEditMotionObjectsAction.findObject(
+                (MotionEditMotionObjectsAction) MotionEditMotionObjectsAction.findObject(
                      (Class)Class.forName("org.opensim.view.experimentaldata.MotionEditMotionObjectsAction"), true)
-                     :null,
-                */
             };
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
@@ -129,8 +114,35 @@ public class OneMotionNode extends OpenSimObjectNode {
            retValue = "<b>"+retValue+"</b>";
         return retValue;
     }
-    
-    public Action getPreferredAction() {
+
+    private void createChildren(AnnotatedMotion dMotion) {
+        Vector<String> names=null;
+        names =dMotion.getMarkerNames();
+        if (names != null && names.size()>0){ // File had markers
+            getChildren().add(new Node[]{new ExperimentalMarkerSetNode(dMotion)});
+        }
+        // Now Forces
+        names =dMotion.getForceNames();
+        if (names !=null && names.size()>0){ // File had forces
+             getChildren().add(new Node[]{new ExperimentalForceSetNode(dMotion)});
+        }
+        /*
+        // Things other than markers and forces
+        Vector<ExperimentalDataObject> all = dMotion.getClassified();
+        if (names !=null&& names.size()>0){  // Everything else
+            for(ExperimentalDataObject obj:all){
+                boolean other = (obj.getObjectType()!=ExperimentalDataItemType.MarkerData) &&
+                        (obj.getObjectType()!=ExperimentalDataItemType.ForceAndPointData);
+                if (other){
+                    // Create a parent node for OtherData
+                    getChildren().add(new Node[]{new ExperimentalOtherDataSetNode(dMotion)}); 
+                    break;
+               }
+            }
+        }*/
+    }
+
+   public Action getPreferredAction() {
       Action act=null;
       try {
          act =(MotionsSetCurrentAction) MotionsSetCurrentAction.findObject(

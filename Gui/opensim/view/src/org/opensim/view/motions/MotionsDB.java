@@ -40,6 +40,7 @@ import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.openide.awt.StatusDisplayer;
 import org.openide.nodes.Node;
+import org.openide.nodes.Node;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
@@ -50,7 +51,6 @@ import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.ModelEvent;
 import org.opensim.view.ObjectsRenamedEvent;
 import org.opensim.view.experimentaldata.AnnotatedMotion;
-import org.opensim.view.experimentaldata.ExperimentalOtherDataSetNode;
 import org.opensim.view.nodes.ConcreteModelNode;
 import org.opensim.view.pub.*;
 
@@ -59,7 +59,9 @@ import org.opensim.view.pub.*;
  * @author Ayman
  */
 public class MotionsDB extends Observable // Observed by other entities in motionviewer
-        implements Observer {   // Observer OpenSimDB to sync. up when models are deleted
+        implements Observer {
+
+ // Observer OpenSimDB to sync. up when models are deleted
    
    public static class ModelMotionPair {
       public Model model;
@@ -330,10 +332,13 @@ public class MotionsDB extends Observable // Observed by other entities in motio
                   {
                      Node modelNode = ExplorerTopComponent.findInstance().getModelNode(evnt.getModel());
                      if (modelNode==null) return;
-                     Node newMotionNode = new OneMotionNode(evnt.getMotion());
-                     if (evnt.getModel() instanceof ModelForExperimentalData)
+                     Node newMotionNode; 
+                     if (evnt.getModel() instanceof ModelForExperimentalData){
+                         newMotionNode= new OneMotionDataNode(evnt.getMotion());
                          modelNode.getChildren().add(new Node[]{newMotionNode});
+                     }
                      else {
+                         newMotionNode= new OneMotionNode(evnt.getMotion());
                          MotionsNode motionsNode = (MotionsNode) modelNode.getChildren().findChild("Motions");
                          if(motionsNode==null) {
                              motionsNode = new MotionsNode();
@@ -365,7 +370,7 @@ public class MotionsDB extends Observable // Observed by other entities in motio
                   {
                       Node[] motionNode = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
                       if (motionNode.length!=1) return;
-                      Node newMotionNode = new OneMotionNode(evnt.getMotion());
+                      Node newMotionNode = new OneAssociatedMotionNode((AnnotatedMotion)evnt.getMotion());
                       motionNode[0].getChildren().add(new Node[]{newMotionNode});
                       break;
                   }
@@ -398,10 +403,11 @@ public class MotionsDB extends Observable // Observed by other entities in motio
       if(modelNode!=null) {
          Node motionsNode = modelNode.getChildren().findChild("Motions");
          if(motionsNode!=null) {
-            Node[] children = motionsNode.getChildren().getNodes();
-            for(Node child : motionsNode.getChildren().getNodes())
-               if((child instanceof OneMotionNode) && ((OneMotionNode)child).getMotion() == motion)
-                  return (OneMotionNode)child;
+             return getMotionNode(motionsNode, motion);
+         }
+         else { // Preview motion
+             if (model instanceof ModelForExperimentalData)
+                 return getMotionNode(modelNode, motion);
          }
       }
       return null;
@@ -483,4 +489,22 @@ public class MotionsDB extends Observable // Observed by other entities in motio
             }
         }
     }
+    
+       private OneMotionNode getMotionNode(Node motionsNode, Storage motion) {
+              Node[] children = motionsNode.getChildren().getNodes();
+            for(Node child : motionsNode.getChildren().getNodes()){
+               if(child instanceof OneMotionNode){
+                   OneMotionNode motionNode = (OneMotionNode) child;
+                   if (motionNode.getMotion() == motion)
+                       return motionNode;
+                   for(Node associatedMotionNode:motionNode.getChildren().getNodes()){
+                        if ((associatedMotionNode instanceof OneAssociatedMotionNode) &&
+                                ((OneAssociatedMotionNode)associatedMotionNode).getMotion() == motion)
+                            return (OneMotionNode)associatedMotionNode;
+                   }
+               }               
+            }
+            return null;
+     }
+
 }

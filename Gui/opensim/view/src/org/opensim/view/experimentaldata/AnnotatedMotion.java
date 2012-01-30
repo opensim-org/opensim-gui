@@ -57,8 +57,8 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
     
     private Vector<String> markerNames=null;
     private Vector<String> forceNames=null;
-    private static Vector<String[]> patterns = new Vector<String[]>(8);
-    private static Vector<ExperimentalDataItemType> classifications = new Vector<ExperimentalDataItemType>(8);
+    private static Vector<String[]> patterns = new Vector<String[]>(7);
+    private static Vector<ExperimentalDataItemType> classifications = new Vector<ExperimentalDataItemType>(7);
     private Vector<ExperimentalDataObject> classified=new Vector<ExperimentalDataObject>(10);
     private double[] boundingBox = new double[]{1000., 10000., 10000., -1., -1., -1.};
     private double unitConversion = 1.0;
@@ -139,8 +139,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
     public Vector<String> getForceNames() {
         Vector<String> forces =  getNamesOfObjectsOfType(ExperimentalDataItemType.ForceAndPointData);
         forces.addAll(getNamesOfObjectsOfType(ExperimentalDataItemType.BodyForceData));
-        forces.addAll(getNamesOfObjectsOfType(ExperimentalDataItemType.MomentData));
-        forces.addAll(getNamesOfObjectsOfType(ExperimentalDataItemType.JointForceData));
+         forces.addAll(getNamesOfObjectsOfType(ExperimentalDataItemType.JointForceData));
         return forces;
     }
 
@@ -152,16 +151,14 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
         patterns.add(4,  new String[]{"_1", "_2", "_3"});
         patterns.add(5,  new String[]{"_x", "_y", "_z"});
         patterns.add(6,  new String[]{"_fx", "_fy", "_fz"});
-        patterns.add(7,  new String[]{"_mx", "_my", "_mz"});
-        classifications.add(0, ExperimentalDataItemType.ForceAndPointData);
+         classifications.add(0, ExperimentalDataItemType.ForceAndPointData);
         classifications.add(1, ExperimentalDataItemType.PointData);
         classifications.add(2, ExperimentalDataItemType.PointData);
         classifications.add(3, ExperimentalDataItemType.PointData);
         classifications.add(4, ExperimentalDataItemType.PointData);
         classifications.add(5, ExperimentalDataItemType.PointData);
         classifications.add(6, ExperimentalDataItemType.BodyForceData);
-        classifications.add(7, ExperimentalDataItemType.MomentData);
-        
+         
     }
     public Vector<ExperimentalDataObject> classifyColumns() {
         ArrayStr labels=getColumnLabels();
@@ -174,7 +171,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
             ExperimentalDataItemType columnType = ExperimentalDataItemType.Unknown;
             String label = labelsVector.get(i);
             String baseName="";
-            for(int patternIdx=0; patternIdx <8 && !found; patternIdx++) {
+            for(int patternIdx=0; patternIdx <patterns.size() && !found; patternIdx++) {
                 boolean foundPatternAtIdx=true;
                 String nextLabel=label;
                 // For the pattern (patterns[patternIdx]) check exact match
@@ -196,23 +193,24 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
                     columnType = classifications.get(patternIdx);
                     if (patternIdx ==0){
                         // Force _v? followed by Point _p?
-                        classified.add(new MotionObjectBodyForceAtVarPoint(columnType, baseName+"_v", i-1));
-                        classified.add(new MotionObjectBodyPoint(columnType, baseName+"_p", i+2));
+                        MotionObjectBodyForce f = new MotionObjectBodyForce(columnType, baseName+"_v", i-1);
+                        f.setPointIdentifier(baseName+"_p");
+                        classified.add(f);
                     }
                     else {
                         String patternString  = patterns.get(patternIdx)[0];
                         String prefix = patternString.substring(0, patternString.length()-1);
                         switch(classifications.get(patternIdx)){
                             case ForceAndPointData:
-                                classified.add(new MotionObjectBodyForceAtVarPoint(columnType, baseName+prefix, i-1));
+                                //classified.add(new MotionObjectBodyForceAtVarPoint(columnType, baseName+prefix, i-1));
+                                assert(false);
                                 break;
                             case PointData:
                             case MarkerData:
                                 classified.add(new MotionObjectBodyMarker(columnType, baseName+prefix, i-1));
                                 break;
                             case BodyForceData:
-                            case MomentData:
-                                classified.add(new MotionObjectBodyForceAtFixedPoint(columnType, baseName+prefix, i-1));
+                                 classified.add(new MotionObjectBodyForce(columnType, baseName+prefix, i-1));
                                 break;
                         }                           
                             

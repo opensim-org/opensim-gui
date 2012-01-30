@@ -21,8 +21,8 @@ import org.opensim.modeling.Storage;
  * @author  ayman
  */
 public class EditOneMotionObjectPanel extends javax.swing.JPanel {
-    MotionObjectBodyPoint motionBodyPoint=null;
-    MotionObjectBodyForceAtFixedPoint motionForce = null;
+    MotionObjectBodyForce motionBodyPoint=null;
+    MotionObjectBodyForce motionForce = null;
     AnnotatedMotion aMotion;
     Model aModel;
     
@@ -33,12 +33,11 @@ public class EditOneMotionObjectPanel extends javax.swing.JPanel {
     boolean isForce=false;
     boolean pointSpecified=false;
     /** Creates new form EditOneMotionObjectPanel */
-    public EditOneMotionObjectPanel(MotionObjectBodyPoint motionObject, AnnotatedMotion dMotion, Model model) {
+    public EditOneMotionObjectPanel(MotionObjectBodyForce motionObject, AnnotatedMotion dMotion, Model model) {
         motionBodyPoint = motionObject;
-        isForce = (motionObject instanceof MotionObjectBodyForceAtVarPoint ||
-                motionObject instanceof MotionObjectBodyForceAtFixedPoint);
+        isForce = true;
         if (isForce) 
-            motionForce = (MotionObjectBodyForceAtFixedPoint)motionObject;
+            motionForce = (MotionObjectBodyForce)motionObject;
         aMotion = dMotion;
         aModel = model;
         lbls=aMotion.getColumnLabels();
@@ -66,6 +65,7 @@ public class EditOneMotionObjectPanel extends javax.swing.JPanel {
         buttonGroupForceType = new javax.swing.ButtonGroup();
         jLabel2 = new javax.swing.JLabel();
         PointExpressedBodiesComboBox = new javax.swing.JComboBox();
+        jCheckBoxForce = new javax.swing.JCheckBox();
         EditOneForcePanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         BodiesComboBox = new javax.swing.JComboBox();
@@ -77,7 +77,6 @@ public class EditOneMotionObjectPanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jComboBoxPZ = new javax.swing.JComboBox();
         jComboBoxPX = new javax.swing.JComboBox();
-        jCheckBoxForce = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
         jComboBoxFX = new javax.swing.JComboBox();
         jComboBoxFY = new javax.swing.JComboBox();
@@ -98,6 +97,15 @@ public class EditOneMotionObjectPanel extends javax.swing.JPanel {
         PointExpressedBodiesComboBox.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 PointExpressedBodiesComboBoxFocusLost(evt);
+            }
+        });
+
+        jCheckBoxForce.setText("Show as force");
+        jCheckBoxForce.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        jCheckBoxForce.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        jCheckBoxForce.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxForceActionPerformed(evt);
             }
         });
 
@@ -142,7 +150,8 @@ public class EditOneMotionObjectPanel extends javax.swing.JPanel {
 
         buttonGroupForceType.add(jRadioButtonApplyBodyForce);
         jRadioButtonApplyBodyForce.setSelected(true);
-        jRadioButtonApplyBodyForce.setText("Body Force");
+        jRadioButtonApplyBodyForce.setText("Body Force (at Center of Mass)");
+        jRadioButtonApplyBodyForce.setToolTipText("Show as Force acting at a body's COM");
         jRadioButtonApplyBodyForce.setActionCommand("BodyForce");
         jRadioButtonApplyBodyForce.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         jRadioButtonApplyBodyForce.setEnabled(false);
@@ -175,15 +184,6 @@ public class EditOneMotionObjectPanel extends javax.swing.JPanel {
         jComboBoxPX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxPXActionPerformed(evt);
-            }
-        });
-
-        jCheckBoxForce.setText("Show as force");
-        jCheckBoxForce.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        jCheckBoxForce.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jCheckBoxForce.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxForceActionPerformed(evt);
             }
         });
 
@@ -233,14 +233,6 @@ public class EditOneMotionObjectPanel extends javax.swing.JPanel {
             .add(EditOneForcePanelLayout.createSequentialGroup()
                 .add(EditOneForcePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(EditOneForcePanelLayout.createSequentialGroup()
-                        .add(21, 21, 21)
-                        .add(EditOneForcePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(jLabel4)
-                            .add(jLabel6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 69, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                    .add(EditOneForcePanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(jCheckBoxForce))
-                    .add(EditOneForcePanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .add(EditOneForcePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jLabel3)
@@ -250,28 +242,29 @@ public class EditOneMotionObjectPanel extends javax.swing.JPanel {
                             .add(org.jdesktop.layout.GroupLayout.LEADING, BodiesComboBox, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .add(org.jdesktop.layout.GroupLayout.LEADING, ForceNameTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 126, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                     .add(EditOneForcePanelLayout.createSequentialGroup()
-                        .add(39, 39, 39)
-                        .add(jRadioButtonApplyPointForce)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jRadioButtonApplyBodyForce)
-                        .add(198, 198, 198))
-                    .add(EditOneForcePanelLayout.createSequentialGroup()
+                        .add(21, 21, 21)
                         .add(EditOneForcePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(EditOneForcePanelLayout.createSequentialGroup()
-                                .add(139, 139, 139)
-                                .add(EditOneForcePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                    .add(org.jdesktop.layout.GroupLayout.LEADING, jComboBoxPX, 0, 139, Short.MAX_VALUE)
-                                    .add(org.jdesktop.layout.GroupLayout.LEADING, jComboBoxFX, 0, 139, Short.MAX_VALUE)
-                                    .add(org.jdesktop.layout.GroupLayout.LEADING, ForceExpressedBodiesComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 108, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                                .add(jRadioButtonApplyBodyForce)
+                                .add(18, 18, 18)
+                                .add(jRadioButtonApplyPointForce))
                             .add(EditOneForcePanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .add(jLabel1)
-                                .add(177, 177, 177)))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(EditOneForcePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, jComboBoxPY, 0, 112, Short.MAX_VALUE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, jComboBoxFY, 0, 112, Short.MAX_VALUE))
-                        .add(8, 8, 8)))
+                                .add(EditOneForcePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(jLabel1)
+                                    .add(jLabel6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 69, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(jLabel4))
+                                .add(27, 27, 27)
+                                .add(EditOneForcePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(ForceExpressedBodiesComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 108, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(EditOneForcePanelLayout.createSequentialGroup()
+                                        .add(EditOneForcePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jComboBoxPX, 0, 139, Short.MAX_VALUE)
+                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jComboBoxFX, 0, 139, Short.MAX_VALUE))
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                        .add(EditOneForcePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jComboBoxPY, 0, 112, Short.MAX_VALUE)
+                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jComboBoxFY, 0, 112, Short.MAX_VALUE))
+                                        .add(8, 8, 8)))))))
                 .add(0, 0, 0)
                 .add(EditOneForcePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jComboBoxPZ, 0, 123, Short.MAX_VALUE)
@@ -281,7 +274,7 @@ public class EditOneMotionObjectPanel extends javax.swing.JPanel {
         EditOneForcePanelLayout.setVerticalGroup(
             EditOneForcePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(EditOneForcePanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(EditOneForcePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(ForceNameTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jLabel3))
@@ -289,30 +282,26 @@ public class EditOneMotionObjectPanel extends javax.swing.JPanel {
                 .add(EditOneForcePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(BodiesComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jLabel5))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jCheckBoxForce)
+                .add(27, 27, 27)
+                .add(EditOneForcePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jRadioButtonApplyBodyForce)
+                    .add(jRadioButtonApplyPointForce))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(EditOneForcePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jRadioButtonApplyPointForce)
-                    .add(jRadioButtonApplyBodyForce))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(EditOneForcePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(jLabel4)
-                    .add(EditOneForcePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                        .add(jComboBoxFX, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(jComboBoxFY, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(jComboBoxFZ, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                    .add(jComboBoxFX, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jComboBoxFY, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jComboBoxFZ, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel4))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(EditOneForcePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel6)
                     .add(jComboBoxPZ, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jComboBoxPX, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jComboBoxPY, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(18, 18, 18)
-                .add(EditOneForcePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(EditOneForcePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jLabel1)
-                    .add(ForceExpressedBodiesComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(ForceExpressedBodiesComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
@@ -323,7 +312,10 @@ public class EditOneMotionObjectPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(EditOneForcePanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .add(EditOneForcePanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -517,9 +509,20 @@ public class EditOneMotionObjectPanel extends javax.swing.JPanel {
     // Update ExternalForce based on selection in the GUI Panel
     private void updateForceFromPanel() {
         if (initializing) return;
+        String sel = (buttonGroupForceType.getSelection().getActionCommand());
+        if (sel.equalsIgnoreCase("BodyForce")){
+            motionForce.setObjectType(ExperimentalDataItemType.BodyForceData);
+        }
+        else
+            motionForce.setObjectType(ExperimentalDataItemType.ForceAndPointData);
+        
+        jComboBoxPX.setEnabled(motionForce.specifiesPoint());
+        jComboBoxPY.setEnabled(motionForce.specifiesPoint());
+        jComboBoxPZ.setEnabled(motionForce.specifiesPoint());
+
         String forceName=ForceNameTextField.getText();
         if (forceName != null && forceName.length()!=0)
-            if (!initializing) motionBodyPoint.setName(forceName);
+            motionBodyPoint.setName(forceName);
         
         String forceBodyame = (String) BodiesComboBox.getSelectedItem();
         if (forceBodyame != null && forceBodyame.length()!=0){
