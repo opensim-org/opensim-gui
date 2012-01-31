@@ -41,19 +41,14 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
    // Constructor ---------------------------------------------------------------- 
    public LSPropertyEditorRigidBody( OneBodyNode oneBodyNodePassedToConstructor, ModelWindowVTKTopComponent ownerWindowPassedToConstructor )  
    { 
-       this( oneBodyNodePassedToConstructor.getOpenSimObject(), ownerWindowPassedToConstructor ); 
-       myAssociatedOpenSimOneBodyNodeOrNull = oneBodyNodePassedToConstructor;
+       this( oneBodyNodePassedToConstructor.getOpenSimObject(), oneBodyNodePassedToConstructor, ownerWindowPassedToConstructor ); 
    }
 
    // Constructor ----------------------------------------------------------------
-   public  LSPropertyEditorRigidBody( OpenSimObject openSimObjectPassedToConstructor, ModelWindowVTKTopComponent ownerWindowPassedToConstructor  )  
+   public  LSPropertyEditorRigidBody( OpenSimObject openSimObjectToConstructorShouldNotBeNull, OneBodyNode oneBodyNodeToConstructorMayBeNull, ModelWindowVTKTopComponent ownerWindowPassedToConstructor  )  
    { 
-      super( openSimObjectPassedToConstructor, ownerWindowPassedToConstructor, "BodyCMPicture.png", "Rigid Body", 560, 400 );  
+      super( openSimObjectToConstructorShouldNotBeNull, oneBodyNodeToConstructorMayBeNull, ownerWindowPassedToConstructor, "BodyCMPicture.png", "Rigid Body", 560, 400 );  
 
-      // Connect this object to its corresponding OpenSim object.
-      // Note: Some of the connection occurs in both parent and child constructors.
-      this.SetAssociatedOpenSimOneBodyNodeIfNotAlreadySet();
-            
       // Add panels, choose the previously selected panel to show, and display the window. 
       this.AddPanelsToFrame(); 
       super.SetSelectedTabbedPaneFromPriorUserSelection();
@@ -69,13 +64,13 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
    public void  itemStateChanged( ItemEvent itemEvent )     
    {
       Object eventTarget = itemEvent.getSource();
-      if(      eventTarget == myShowBodyCheckbox )            super.ShowOrHideObject( myAssociatedOpenSimOneBodyNodeOrNull, true  ); // myShowBodyCheckbox.GetCheckboxState();
-      else if( eventTarget == myHideBodyCheckbox )            super.ShowOrHideObject( myAssociatedOpenSimOneBodyNodeOrNull, false );
-      else if( eventTarget == myShowCMCheckbox ) 	      BodyToggleCOMAction.ShowCMForOneBodyNode( myAssociatedOpenSimOneBodyNodeOrNull, myShowCMCheckbox.GetCheckboxState(), true );
+      if(      eventTarget == myShowBodyCheckbox )            super.ShowOrHideObject( true  ); // myShowBodyCheckbox.GetCheckboxState();
+      else if( eventTarget == myHideBodyCheckbox )            super.ShowOrHideObject( false );
+      else if( eventTarget == myShowCMCheckbox ) 	      BodyToggleCOMAction.ShowCMForOneBodyNode( this.GetAssociatedOpenSimOneBodyNodeOrNull(), myShowCMCheckbox.GetCheckboxState(), true );
       else if( eventTarget == myShowBodyAxesCheckbox )	      BodyToggleFrameAction.ShowAxesForBody( super.GetAssociatedOpenSimObject(), myShowBodyAxesCheckbox.GetCheckboxState(), true );
-      else if( eventTarget == myWireFrameCheckbox ) 	      { super.SetObjectRepresentationPointsWireFrameOrSurfaceAndSurfaceShading( 1, 0 );  super.ShowOrHideObject( myAssociatedOpenSimOneBodyNodeOrNull, true  );  myHideBodyCheckbox.SetCheckboxState(false); }
-      else if( eventTarget == mySurfaceShadedSmoothCheckbox ) { super.SetObjectRepresentationPointsWireFrameOrSurfaceAndSurfaceShading( 2, 1 );  super.ShowOrHideObject( myAssociatedOpenSimOneBodyNodeOrNull, true  );  myHideBodyCheckbox.SetCheckboxState(false); }
-   // else if( eventTarget == mySurfaceShadedFlatCheckbox )   { super.SetObjectRepresentationPointsWireFrameOrSurfaceAndSurfaceShading( 2, 0 );  super.ShowOrHideObject( myAssociatedOpenSimOneBodyNodeOrNull, true  );  myHideBodyCheckbox.SetCheckboxState(false); }
+      else if( eventTarget == myWireFrameCheckbox ) 	      { super.SetObjectRepresentationPointsWireFrameOrSurfaceAndSurfaceShading( 1, 0 );  super.ShowOrHideObject( true  );  myHideBodyCheckbox.SetCheckboxState(false); }
+      else if( eventTarget == mySurfaceShadedSmoothCheckbox ) { super.SetObjectRepresentationPointsWireFrameOrSurfaceAndSurfaceShading( 2, 1 );  super.ShowOrHideObject( true  );  myHideBodyCheckbox.SetCheckboxState(false); }
+   // else if( eventTarget == mySurfaceShadedFlatCheckbox )   { super.SetObjectRepresentationPointsWireFrameOrSurfaceAndSurfaceShading( 2, 0 );  super.ShowOrHideObject( true  );  myHideBodyCheckbox.SetCheckboxState(false); }
    }
 
   
@@ -103,7 +98,7 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
    private void  CheckActionEventTarget( Object eventTarget )
    {
       if(      eventTarget == myButtonToOpenOldPropertyViewerTable ) super.ProcessEventClickButtonToOpenOldPropertyViewerTable();
-      else if( eventTarget == myButtonToOpenColorChooser )           super.CreateColorDialogBoxToChangeUserSelectedColor( myAssociatedOpenSimOneBodyNodeOrNull );
+      else if( eventTarget == myButtonToOpenColorChooser )           super.CreateColorDialogBoxToChangeUserSelectedColor();
    }
    
    //-------------------------------------------------------------------------
@@ -111,7 +106,7 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
    {
       boolean requestFocusBack = false;
       Window ownerWindowOrThis = super.GetLSDialogOwnerWindowOrThis(); 
-      if(      eventTarget==myNameTextField )  super.SetOpenSimObjectNameAndPropertyEditorDialogTitle( myNameTextField.GetTextFieldAsString(), myAssociatedOpenSimOneBodyNodeOrNull );
+      if(      eventTarget==myNameTextField )  super.SetOpenSimObjectNameAndPropertyEditorDialogTitle( myNameTextField.GetTextFieldAsString() );
       else if( eventTarget==myXcmTextField  )  requestFocusBack = myXcmTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis);
       else if( eventTarget==myYcmTextField  )  requestFocusBack = myYcmTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis);
       else if( eventTarget==myZcmTextField  )  requestFocusBack = myZcmTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis);
@@ -242,9 +237,7 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
       // mySurfaceShadedFlatCheckbox =   new LSCheckbox( "Flat-Shaded",   false, checkboxGroup, panelContainer, GridBagConstraints.REMAINDER, 1, this );    
       // mySurfaceShadedFlatCheckbox is unimplemented VTK option since: (a) no difference to analytical geometry, (b) not much faster than smooth, (c) Confusing to give user extra options.
    }
-   
-   
-
+    
 
    //-----------------------------------------------------------------------------
    private Component  CreateTabComponentMassAndCenterOfMassRigidBodyProperty( ) 
@@ -336,14 +329,13 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
 
 
    //----------------------------------------------------------------------------- 
-   private void  SetAssociatedOpenSimOneBodyNodeIfNotAlreadySet( )
+   // Relevant class hierarchy: OneBodyNode -> OpenSimObjectNode -> OpenSimNode -> AbstractNode -> Node
+   //----------------------------------------------------------------------------- 
+   private OneBodyNode  GetAssociatedOpenSimOneBodyNodeOrNull( )
    {
-      if( myAssociatedOpenSimOneBodyNodeOrNull == null )
-      {
-         OpenSimObjectNode matchingObjectNode = super.GetRootNodeAsOpenSimObjectNodeOrReturnNullIfNoMatch();
-         if( matchingObjectNode instanceof OneBodyNode )
-            myAssociatedOpenSimOneBodyNodeOrNull = (OneBodyNode)matchingObjectNode;
-      }
+
+      OpenSimObjectNode openSimObjectNode = super.GetAssociatedOpenSimObjectNodeOrNull();
+      return (openSimObjectNode instanceof OneBodyNode) ? (OneBodyNode)openSimObjectNode : null;
    }
 
 
@@ -444,7 +436,6 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
 
    //-----------------------------------------------------------------------------
    // Class data
-   private OneBodyNode  myAssociatedOpenSimOneBodyNodeOrNull;  // Relevant class hierarchy: OneBodyNode -> OpenSimObjectNode -> OpenSimNode -> AbstractNode -> Node
    
    // Items appearing on the appearance tab.
    private LSButton       myButtonToOpenOldPropertyViewerTable;

@@ -41,19 +41,14 @@ public class LSPropertyEditorJoint extends LSPropertyEditorTabbedAbstract implem
    // Constructor ---------------------------------------------------------------- 
    public LSPropertyEditorJoint( OneJointNode jointNodePassedToConstructor, ModelWindowVTKTopComponent ownerWindowPassedToConstructor )  
    { 
-       this( jointNodePassedToConstructor.getOpenSimObject(), ownerWindowPassedToConstructor ); 
-       myAssociatedOpenSimJointNodeOrNull = jointNodePassedToConstructor;
+       this( jointNodePassedToConstructor.getOpenSimObject(), jointNodePassedToConstructor, ownerWindowPassedToConstructor ); 
    }
 
    // Constructor ----------------------------------------------------------------
-   public  LSPropertyEditorJoint( OpenSimObject openSimObjectPassedToConstructor, ModelWindowVTKTopComponent ownerWindowPassedToConstructor  )  
+   public  LSPropertyEditorJoint( OpenSimObject openSimObjectPassedToConstructor, OneJointNode jointNodePassedToConstructor, ModelWindowVTKTopComponent ownerWindowPassedToConstructor  )  
    { 
-      super( openSimObjectPassedToConstructor, ownerWindowPassedToConstructor, "jointNode.png", "Joint", 600, 480 );  
+      super( openSimObjectPassedToConstructor, jointNodePassedToConstructor, ownerWindowPassedToConstructor, "jointNode.png", "Joint", 600, 480 );  
 
-      // Connect this object to its corresponding OpenSim object.
-      // Note: Some of the connection occurs in both parent and child constructors.
-      this.SetAssociatedOpenSimJointNodeOrNullIfNotAlreadySet();
-            
       // Add panels, choose the previously selected panel to show, and display the window. 
       this.AddPanelsToFrame(); 
       super.SetSelectedTabbedPaneFromPriorUserSelection();
@@ -68,7 +63,7 @@ public class LSPropertyEditorJoint extends LSPropertyEditorTabbedAbstract implem
    //-------------------------------------------------------------------------
    public void  itemStateChanged( ItemEvent itemEvent )     
    {
-      if( itemEvent.getSource() == myShowJointCheckbox ) super.ShowOrHideObject( myAssociatedOpenSimJointNodeOrNull, myShowJointCheckbox.GetCheckboxState() );
+      if( itemEvent.getSource() == myShowJointCheckbox ) super.ShowOrHideObject( myShowJointCheckbox.GetCheckboxState() );
    }
 
   
@@ -89,7 +84,7 @@ public class LSPropertyEditorJoint extends LSPropertyEditorTabbedAbstract implem
    private void  CheckActionEventTarget( Object eventTarget )
    {
       if(      eventTarget == myButtonToOpenOldPropertyViewerTable ) super.ProcessEventClickButtonToOpenOldPropertyViewerTable();
-      else if( eventTarget == myButtonToOpenColorChooser )           super.CreateColorDialogBoxToChangeUserSelectedColor( myAssociatedOpenSimJointNodeOrNull );
+      else if( eventTarget == myButtonToOpenColorChooser )           super.CreateColorDialogBoxToChangeUserSelectedColor();
       else if( eventTarget == myButtonToOpenJointFrameInboard )      this.CreateSeparateDialogForJointInboardOrOutboardFrame( true  );
       else if( eventTarget == myButtonToOpenJointFrameOutboard )     this.CreateSeparateDialogForJointInboardOrOutboardFrame( false );
    }
@@ -99,7 +94,7 @@ public class LSPropertyEditorJoint extends LSPropertyEditorTabbedAbstract implem
    {
       boolean requestFocusBack = false;
       Window ownerWindowOrThis = super.GetLSDialogOwnerWindowOrThis(); 
-      if(      eventTarget==myNameTextField )   super.SetOpenSimObjectNameAndPropertyEditorDialogTitle( myNameTextField.GetTextFieldAsString(), myAssociatedOpenSimJointNodeOrNull );
+      if(      eventTarget==myNameTextField )   super.SetOpenSimObjectNameAndPropertyEditorDialogTitle( myNameTextField.GetTextFieldAsString() );
       else if( eventTarget==myCoordAPositionFromBodyAOriginXTextField  )  requestFocusBack = myCoordAPositionFromBodyAOriginXTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis);
       else if( eventTarget==myCoordAPositionFromBodyAOriginYTextField  )  requestFocusBack = myCoordAPositionFromBodyAOriginYTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis);
       else if( eventTarget==myCoordAPositionFromBodyAOriginZTextField  )  requestFocusBack = myCoordAPositionFromBodyAOriginZTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis);
@@ -335,7 +330,6 @@ public class LSPropertyEditorJoint extends LSPropertyEditorTabbedAbstract implem
    //-------------------------------------------------------------------------
    private String  GetJointConnectedToRigidBodyName( boolean isRigidBodyA )
    {
-      if( myAssociatedOpenSimJointNodeOrNull == null ) return null;
       String rigidBodyName = (isRigidBodyA==true) ? "Body A" : "Body B";
       return rigidBodyName;
    }
@@ -351,21 +345,19 @@ public class LSPropertyEditorJoint extends LSPropertyEditorTabbedAbstract implem
 
 
    //----------------------------------------------------------------------------- 
-   private void  SetAssociatedOpenSimJointNodeOrNullIfNotAlreadySet( )
+   // Relevant class hierarchy: OneJointNode -> OpenSimObjectNode -> OpenSimNode -> AbstractNode -> Node 
+   //----------------------------------------------------------------------------- 
+   private OneJointNode  GetAssociatedOpenSimOneJointNodeOrNull( )
    {
-      if( myAssociatedOpenSimJointNodeOrNull == null )
-      {
-         OpenSimObjectNode matchingObjectNode = super.GetRootNodeAsOpenSimObjectNodeOrReturnNullIfNoMatch();
-         if( matchingObjectNode instanceof OneJointNode )
-            myAssociatedOpenSimJointNodeOrNull = (OneJointNode)matchingObjectNode;
-      }
+
+      OpenSimObjectNode openSimObjectNode = super.GetAssociatedOpenSimObjectNodeOrNull();
+      return (openSimObjectNode instanceof OneJointNode) ? (OneJointNode)openSimObjectNode : null;
    }
-       
+
 
    //-----------------------------------------------------------------------------
    // Class data
-   private OneJointNode  myAssociatedOpenSimJointNodeOrNull;  // Relevant class hierarchy: OneJointNode -> OpenSimObjectNode -> OpenSimNode -> AbstractNode -> Node 
-   
+
    // Items appearing on the appearance tab.
    private LSButton       myButtonToOpenOldPropertyViewerTable;
    private LSTextField    myNameTextField; 

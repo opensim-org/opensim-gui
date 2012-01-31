@@ -32,24 +32,36 @@ import  org.opensim.modeling.Property;
 import  org.opensim.modeling.ArrayDouble;
 import  org.opensim.modeling.OpenSimContext;  
 import  org.opensim.view.nodes.OpenSimNode;
+import  org.opensim.view.nodes.OpenSimObjectNode;
 import  org.opensim.view.pub.OpenSimDB;
+import  org.opensim.view.ExplorerTopComponent;
+import  org.openide.nodes.Node;
 
 
 //-----------------------------------------------------------------------------
 public class LSPropertyTalkToSimbody  
 { 
    //-----------------------------------------------------------------------------
-   public  LSPropertyTalkToSimbody( OpenSimObject openSimObjectPassedToConstructorShouldNotBeNull )
+   public  LSPropertyTalkToSimbody( OpenSimObject openSimObjectToConstructorShouldNotBeNull, OpenSimObjectNode openSimObjectNodeToConstructorMayBeNull )
    { 
       // Connect this object to its corresponding OpenSim object.
       // Note: Some of the connection occurs in other constructors.
-      myOpenSimObject = openSimObjectPassedToConstructorShouldNotBeNull;
+      myOpenSimObjectPassedToConstructor = openSimObjectToConstructorShouldNotBeNull;
+      myOpenSimObjectNodeMayBeNull = openSimObjectNodeToConstructorMayBeNull;
+      if( myOpenSimObjectNodeMayBeNull == null ) 
+         myOpenSimObjectNodeMayBeNull = LSPropertyTalkToSimbody.GetRootNodeAsOpenSimObjectNodeOrReturnNullIfNoMatch( myOpenSimObjectPassedToConstructor ); 
    } 
 
 
    //-----------------------------------------------------------------------------
-   public OpenSimObject  GetOpenSimObject()       { return myOpenSimObject; }  
-   public String         GetOpenSimObjectName( )  { return this.GetOpenSimObject().getName(); } 
+   public OpenSimObject      GetOpenSimObject()             { return myOpenSimObjectPassedToConstructor; }  
+   public String             GetOpenSimObjectName( )        { return this.GetOpenSimObject().getName(); } 
+   
+   //-----------------------------------------------------------------------------
+   // Relevant class hierarchy:            OpenSimObjectNode -> OpenSimNode -> AbstractNode -> Node
+   // Some children of OpenSimObjectNode:  OneBodyNode, OneJointNode
+   //-----------------------------------------------------------------------------
+   public OpenSimObjectNode  GetOpenSimObjectNodeOrNull()   { return myOpenSimObjectNodeMayBeNull; }  
 
 
    //-----------------------------------------------------------------------------
@@ -61,6 +73,21 @@ public class LSPropertyTalkToSimbody
       return (int)textFieldWidthForObjectName;
    }
    
+
+   //----------------------------------------------------------------------------- 
+   protected static OpenSimObjectNode  GetRootNodeAsOpenSimObjectNodeOrReturnNullIfNoMatch( Object objectToMatch )
+   {
+      ExplorerTopComponent explorerTopComponentTree = ExplorerTopComponent.findInstance();
+      Node rootNode = explorerTopComponentTree == null ? null : explorerTopComponentTree.getExplorerManager().getRootContext();
+      if( rootNode instanceof OpenSimNode  &&  objectToMatch != null )
+      {
+          OpenSimNode rootNodeAsOpenSimNode = (OpenSimNode)rootNode;
+          OpenSimObjectNode matchingObjectNode = rootNodeAsOpenSimNode.findChild( objectToMatch );
+	  return matchingObjectNode;
+      }
+      return null;
+   }
+  
 
    //-------------------------------------------------------------------------
    public Property  GetOpenSimObjectPropertyValueFromPropertyName( String propertyName ) 
@@ -102,43 +129,48 @@ public class LSPropertyTalkToSimbody
    //-------------------------------------------------------------------------
    public double[]  GetOpenSimObjectPropertyValueAsArrayDouble3FromPropertyName( String propertyName )  { return this.GetOpenSimObjectPropertyValueAsArrayDoubleNFromPropertyName( propertyName, 3 ); }  
       
+   //-------------------------------------------------------------------------
+   private Model  GetModelAssociatedWithProperty(  )               { return ( myOpenSimObjectNodeMayBeNull != null ) ? myOpenSimObjectNodeMayBeNull.getModelForNode() : null; }
+   private Model  GetModelAssociatedWithPropertyOrCurrentModel( )  { Model aModel = this.GetModelAssociatedWithProperty();  return (aModel != null ) ? aModel : OpenSimDB.getInstance().getCurrentModel(); }
 
+   
    //-------------------------------------------------------------------------
    public void  SetOpenSimObjectPropertyValueAsDoubleForPropertyName( String propertyName, double valueToSet ) 
    {
       Property openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
       if( openSimObjectProperty != null ) openSimObjectProperty.setValueDbl( valueToSet );
-      this.InitializeSystemForTheModelAssociatedWithThisProperty();
+      this.RecreateOpenSimAPIModelAfterPropertyChange();
    }
 
 
    //-------------------------------------------------------------------------
-   private void  InitializeSystemForTheModelAssociatedWithThisProperty( )
+   private void  RecreateOpenSimAPIModelAfterPropertyChange(  )  
    { 
-      // Paul: Ask Ayman if there is better way to ensure that we find the model that goes with this property.
-      Model currentModel = OpenSimDB.getInstance().getCurrentModel();
-      LSPropertyTalkToSimbody.InitializeSystemForModel( currentModel );
+      Model aModel = this.GetModelAssociatedWithPropertyOrCurrentModel(); 
+      LSPropertyTalkToSimbody.RecreateOpenSimAPIModel( aModel ); 
    }
-
-
+   
    //-------------------------------------------------------------------------
-   private static void  InitializeSystemForModel( Model aModel )  
+   private static void  RecreateOpenSimAPIModel( Model aModel )  
    { 
       OpenSimContext apiCommunicator = OpenSimDB.getInstance().getContext( aModel );
       apiCommunicator.recreateSystemAfterSystemExistsKeepStage();
    }
 
-
+   
    //-----------------------------------------------------------------------------
-   public boolean  SetOpenSimObjectName( String newName, OpenSimNode associatedOpenSimNodeOrNull )    
+   public boolean  SetOpenSimObjectName( String newName )    
    { 
       String oldName = this.GetOpenSimObjectName();
       if( newName != null && LSString.IsStringsEqualCaseSensitive(newName,oldName) == false )
       {
          this.GetOpenSimObject().setName( newName );
+         
+	 OpenSimObjectNode associatedOpenSimNodeOrNull = this.GetOpenSimObjectNodeOrNull(); // Can cast OpenSimObjectNode as OpenSimNode.
          if( associatedOpenSimNodeOrNull != null )
             associatedOpenSimNodeOrNull.renameObjectNode( this.GetOpenSimObject(), newName );
-         return true;
+         
+	 return true;
       }
       return false; // No name change.
    } 
@@ -146,7 +178,8 @@ public class LSPropertyTalkToSimbody
 
    //-----------------------------------------------------------------------------
    // Class data
-   private   OpenSimObject  myOpenSimObject;  
+   private   OpenSimObject      myOpenSimObjectPassedToConstructor; 
+   private   OpenSimObjectNode  myOpenSimObjectNodeMayBeNull;       // Relevant class hierarchy: OpenSimObjectNode -> OpenSimNode -> AbstractNode -> Node
 
 }
 

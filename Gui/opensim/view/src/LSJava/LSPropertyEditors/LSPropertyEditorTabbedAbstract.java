@@ -18,11 +18,9 @@
 // IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //--------------------------------------------------------------------------
 package LSJava.LSPropertyEditors;
-import  LSJava.LSPropertyEditors.LSPropertyTalkToSimbody;
 import  LSJava.LSUtility.*;
 import  LSJava.LSComponents.*;
 import  java.awt.*; 
-import  java.io.IOException;
 import  javax.swing.JTabbedPane; 
 import  javax.swing.ImageIcon; 
 import  javax.swing.JColorChooser;
@@ -41,7 +39,7 @@ import  org.opensim.utils.TheApp;
 
 import  org.opensim.modeling.OpenSimObject;
 
-import  org.openide.nodes.Node;
+
 
 
 
@@ -49,14 +47,14 @@ import  org.openide.nodes.Node;
 public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements ChangeListener   
 { 
    // Constructor ----------------------------------------------------------------
-   protected  LSPropertyEditorTabbedAbstract( OpenSimObject openSimObjectPassedToConstructor, ModelWindowVTKTopComponent ownerWindowPassedToConstructor, String filenameForDialogIconImage, String nameOfTypeOfObjectEgRigidBodyOrJoint, int xNumberOfPixelsOfTabbedPaneMin, int yNumberOfPixelsOfTabbedPaneMin )  
+   protected  LSPropertyEditorTabbedAbstract( OpenSimObject openSimObjectToConstructorShouldNotBeNull, OpenSimObjectNode openSimObjectNodeToConstructorMayBeNull, ModelWindowVTKTopComponent ownerWindowPassedToConstructor, String filenameForDialogIconImage, String nameOfTypeOfObjectEgRigidBodyOrJoint, int xNumberOfPixelsOfTabbedPaneMin, int yNumberOfPixelsOfTabbedPaneMin )  
    { 
       // Arguments: ownerFrame, dialogTitle, isModal, isResizeable.
       super( TheApp.getAppFrame(), null, false, true );
 
       // Connect this object to its corresponding OpenSim object.
       // Note: Some of the connection occurs in both parent and child constructors.
-      myPropertyTalkToSimbody = new LSPropertyTalkToSimbody( openSimObjectPassedToConstructor );
+      myPropertyTalkToSimbody = new LSPropertyTalkToSimbody( openSimObjectToConstructorShouldNotBeNull, openSimObjectNodeToConstructorMayBeNull );
       myOpenSimModelWindowVTKTopComponentOwnerWindow = ownerWindowPassedToConstructor;
             
       // Display the dialog with an appropriate name and icon.
@@ -125,24 +123,9 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
    protected  OpenSimObject            GetAssociatedOpenSimObject()               { return myPropertyTalkToSimbody.GetOpenSimObject(); }
    protected  String                   GetOpenSimObjectName( )                    { return myPropertyTalkToSimbody.GetOpenSimObjectName(); } 
    protected  int                      GetTextFieldWidthForOpenSimObjectName( )   { return myPropertyTalkToSimbody.GetTextFieldWidthForOpenSimObjectName(); }
-   
+   protected  OpenSimObjectNode        GetAssociatedOpenSimObjectNodeOrNull()     { return myPropertyTalkToSimbody.GetOpenSimObjectNodeOrNull(); }
 
-   //----------------------------------------------------------------------------- 
-   protected OpenSimObjectNode  GetRootNodeAsOpenSimObjectNodeOrReturnNullIfNoMatch( )
-   {
-      ExplorerTopComponent explorerTopComponentTree = ExplorerTopComponent.findInstance();
-      Node rootNode = explorerTopComponentTree == null ? null : explorerTopComponentTree.getExplorerManager().getRootContext();
-      if( rootNode instanceof OpenSimNode )
-      {
-          OpenSimNode rootNodeAsOpenSimNode = (OpenSimNode)rootNode;
-          Object objectToMatch = this.GetAssociatedOpenSimObject(); 
-          OpenSimObjectNode matchingObjectNode = rootNodeAsOpenSimNode.findChild( objectToMatch );
-	  return matchingObjectNode;
-      }
-      return null;
-   }
-  
-
+ 
    //-------------------------------------------------------------------------
    protected int  GetObjectOpacityFromOpenSimWithRangeFrom0To100( ) 
    {
@@ -169,9 +152,9 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
 
 
    //-----------------------------------------------------------------------------
-   public void  SetOpenSimObjectNameAndPropertyEditorDialogTitle( String newName, OpenSimNode associatedOpenSimNodeOrNull )    
+   public void  SetOpenSimObjectNameAndPropertyEditorDialogTitle( String newName )    
    { 
-      if( myPropertyTalkToSimbody.SetOpenSimObjectName(newName,associatedOpenSimNodeOrNull) )
+      if( myPropertyTalkToSimbody.SetOpenSimObjectName(newName) )
 	 this.SetPropertyEditorDialogTitle();
    } 
 
@@ -179,7 +162,7 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
    //-----------------------------------------------------------------------------
    protected void  SetPropertyEditorDialogTitle() 
    { 
-      String titleOfDialogBox = LSString.StringConcatenateWithSpacesBetweenIfNotNull( myNameOfTypeOfObjectEgRigidBodyOrJoint, "Editor:", myPropertyTalkToSimbody.GetOpenSimObjectName() );
+      String titleOfDialogBox = LSString.StringConcatenateWithSpacesBetweenIfNotNull( myNameOfTypeOfObjectEgRigidBodyOrJoint, "Editor:", this.GetOpenSimObjectName() );
       super.setTitle( titleOfDialogBox ); 
    } 
    
@@ -206,16 +189,20 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
 
    
    //-------------------------------------------------------------------------
-   protected void  CreateColorDialogBoxToChangeUserSelectedColor( OpenSimObjectNode associatedOpenSimObjectNodeOrNull )
+   protected void  CreateColorDialogBoxToChangeUserSelectedColor( )
    {
-      int[] currentRGBColorWithRangeFrom0To255 = this.GetObjectRGBColorIn3IntegersWithRangeFrom0To255();
-      int currentRed   = currentRGBColorWithRangeFrom0To255[ 0 ];
-      int currentGreen = currentRGBColorWithRangeFrom0To255[ 1 ];
-      int currentBlue  = currentRGBColorWithRangeFrom0To255[ 2 ];
-      Color initialColorInDialog = new Color( currentRed, currentGreen, currentBlue );
-      String titleOfColorDialogBox = LSString.StringConcatenateWithSpacesBetweenIfNotNull( "Color of", myNameOfTypeOfObjectEgRigidBodyOrJoint, myPropertyTalkToSimbody.GetOpenSimObjectName() );
-      Color newColor = JColorChooser.showDialog( this, titleOfColorDialogBox, initialColorInDialog );
-      LSPropertyEditorTabbedAbstract.ChangeObjectColor( associatedOpenSimObjectNodeOrNull, newColor );
+      OpenSimObjectNode associatedOpenSimObjectNodeOrNull = this.GetAssociatedOpenSimObjectNodeOrNull();
+      if( associatedOpenSimObjectNodeOrNull != null )
+      {
+         int[] currentRGBColorWithRangeFrom0To255 = this.GetObjectRGBColorIn3IntegersWithRangeFrom0To255();
+         int currentRed   = currentRGBColorWithRangeFrom0To255[ 0 ];
+         int currentGreen = currentRGBColorWithRangeFrom0To255[ 1 ];
+         int currentBlue  = currentRGBColorWithRangeFrom0To255[ 2 ];
+         Color initialColorInDialog = new Color( currentRed, currentGreen, currentBlue );
+         String titleOfColorDialogBox = LSString.StringConcatenateWithSpacesBetweenIfNotNull( "Color of", myNameOfTypeOfObjectEgRigidBodyOrJoint, this.GetOpenSimObjectName() );
+         Color newColor = JColorChooser.showDialog( this, titleOfColorDialogBox, initialColorInDialog );
+         LSPropertyEditorTabbedAbstract.ChangeObjectColor( associatedOpenSimObjectNodeOrNull, newColor );
+      }
    }
     
 
@@ -238,8 +225,9 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
 
 
    //-----------------------------------------------------------------------------
-   protected void  ShowOrHideObject( OpenSimObjectNode associatedOpenSimObjectNodeOrNull, boolean showOrHide )
+   protected void  ShowOrHideObject( boolean showOrHide )
    {
+      OpenSimObjectNode associatedOpenSimObjectNodeOrNull = this.GetAssociatedOpenSimObjectNodeOrNull();
       if( associatedOpenSimObjectNodeOrNull != null )
          ObjectDisplayShowHideBaseAction.ApplyOperationToNodeWithShowHide( associatedOpenSimObjectNodeOrNull, showOrHide, true ); 
    }
