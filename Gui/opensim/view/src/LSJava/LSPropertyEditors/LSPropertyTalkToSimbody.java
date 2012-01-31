@@ -23,7 +23,6 @@
 //--------------------------------------------------------------------------
 package LSJava.LSPropertyEditors;
 import  LSJava.LSUtility.*;
-import  LSJava.LSComponents.*;
 import  java.io.IOException;
 
 import  org.opensim.modeling.Model;
@@ -31,7 +30,7 @@ import  org.opensim.modeling.OpenSimObject;
 import  org.opensim.modeling.PropertySet;
 import  org.opensim.modeling.Property;
 import  org.opensim.modeling.ArrayDouble;
-import  org.opensim.view.nodes.OpenSimObjectNode;  
+import  org.opensim.modeling.OpenSimContext;  
 import  org.opensim.view.nodes.OpenSimNode;
 import  org.opensim.view.pub.OpenSimDB;
 
@@ -125,8 +124,8 @@ public class LSPropertyTalkToSimbody
    //-------------------------------------------------------------------------
    private static void  InitializeSystemForModel( Model aModel )  
    { 
-      try { aModel.initSystem(); } 
-      catch (IOException ex) { ex.printStackTrace(); }
+      OpenSimContext apiCommunicator = OpenSimDB.getInstance().getContext( aModel );
+      apiCommunicator.recreateSystemAfterSystemExistsKeepStage();
    }
 
 

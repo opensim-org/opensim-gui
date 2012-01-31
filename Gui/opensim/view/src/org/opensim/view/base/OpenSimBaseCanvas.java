@@ -385,7 +385,7 @@ public class OpenSimBaseCanvas extends vtkPanel
             out.close();
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
-        }*/
+        }
         imageReader.SetFileName("OpenSimLogoSmall.PNG");
         imageReader.UpdateWholeExtent();
         imageReader.Update();
@@ -395,7 +395,7 @@ public class OpenSimBaseCanvas extends vtkPanel
         //logoActor.SetLayerNumber(0);
         //logoActor.GetProperty().SetOpacity(0.2);
         //logoActor.SetProperty(null);
-        GetRenderer().AddActor2D(logoActor);
+        GetRenderer().AddActor2D(logoActor); */
         //repaint();
    }
  }

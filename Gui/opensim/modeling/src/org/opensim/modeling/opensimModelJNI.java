@@ -1227,8 +1227,7 @@ public class opensimModelJNI {
   public final static native long new_ModelComponent__SWIG_1(String jarg1, boolean jarg2) throws java.io.IOException;
   public final static native long new_ModelComponent__SWIG_2(String jarg1) throws java.io.IOException;
   public final static native long new_ModelComponent__SWIG_3(long jarg1);
-  public final static native long new_ModelComponent__SWIG_4(long jarg1);
-  public final static native long new_ModelComponent__SWIG_5(long jarg1, ModelComponent jarg1_);
+  public final static native long new_ModelComponent__SWIG_4(long jarg1, ModelComponent jarg1_);
   public final static native void delete_ModelComponent(long jarg1);
   public final static native long ModelComponent_getModel(long jarg1, ModelComponent jarg1_);
   public final static native long ModelComponent_updModel(long jarg1, ModelComponent jarg1_);
@@ -1236,8 +1235,8 @@ public class opensimModelJNI {
   public final static native int ModelComponent_getNumStateVariables(long jarg1, ModelComponent jarg1_);
   public final static native long ModelComponent_getStateVariableNames(long jarg1, ModelComponent jarg1_);
   public final static native long ModelComponent_getStateVariableSystemIndex(long jarg1, ModelComponent jarg1_, String jarg2);
-  public final static native int ModelComponent_getModelingOption(long jarg1, ModelComponent jarg1_, long jarg2);
-  public final static native void ModelComponent_setModelingOption(long jarg1, ModelComponent jarg1_, long jarg2, int jarg3);
+  public final static native int ModelComponent_getModelingOption(long jarg1, ModelComponent jarg1_, long jarg2, String jarg3);
+  public final static native void ModelComponent_setModelingOption(long jarg1, ModelComponent jarg1_, long jarg2, String jarg3, int jarg4);
   public final static native double ModelComponent_getStateVariable(long jarg1, ModelComponent jarg1_, long jarg2, String jarg3);
   public final static native void ModelComponent_setStateVariable(long jarg1, ModelComponent jarg1_, long jarg2, String jarg3, double jarg4);
   public final static native double ModelComponent_getDiscreteVariable(long jarg1, ModelComponent jarg1_, long jarg2, String jarg3);
@@ -4374,6 +4373,8 @@ public class opensimModelJNI {
   public final static native void OpenSimContext_computeConstrainedCoordinates(long jarg1, OpenSimContext jarg1_, double[] jarg2);
   public final static native void OpenSimContext_getStates__SWIG_0(long jarg1, OpenSimContext jarg1_, double[] jarg2);
   public final static native void OpenSimContext_getStates__SWIG_1(long jarg1, OpenSimContext jarg1_, long jarg2, ArrayDouble jarg2_);
+  public final static native void OpenSimContext_recreateSystemAfterSystemExistsKeepStage(long jarg1, OpenSimContext jarg1_);
+  public final static native void OpenSimContext_recreateSystemAfterSystemExists(long jarg1, OpenSimContext jarg1_);
   public final static native void OpenSimContext_transformPosition(long jarg1, OpenSimContext jarg1_, long jarg2, Body jarg2_, double[] jarg3, double[] jarg4);
   public final static native long OpenSimContext_getTransform(long jarg1, OpenSimContext jarg1_, long jarg2, Body jarg2_);
   public final static native void OpenSimContext_transform(long jarg1, OpenSimContext jarg1_, long jarg2, Body jarg2_, double[] jarg3, long jarg4, Body jarg4_, double[] jarg5);

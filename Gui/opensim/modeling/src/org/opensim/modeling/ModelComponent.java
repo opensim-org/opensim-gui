@@ -47,16 +47,12 @@ public class ModelComponent extends OpenSimObject {
     this(opensimModelJNI.new_ModelComponent__SWIG_2(aFileName), true);
   }
 
-  public ModelComponent(SWIGTYPE_p_OpenSim__XMLDocument aDocument) {
-    this(opensimModelJNI.new_ModelComponent__SWIG_3(SWIGTYPE_p_OpenSim__XMLDocument.getCPtr(aDocument)), true);
-  }
-
   public ModelComponent(SWIGTYPE_p_SimTK__Xml__Element aNode) {
-    this(opensimModelJNI.new_ModelComponent__SWIG_4(SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode)), true);
+    this(opensimModelJNI.new_ModelComponent__SWIG_3(SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode)), true);
   }
 
   public ModelComponent(ModelComponent copy) {
-    this(opensimModelJNI.new_ModelComponent__SWIG_5(ModelComponent.getCPtr(copy), copy), true);
+    this(opensimModelJNI.new_ModelComponent__SWIG_4(ModelComponent.getCPtr(copy), copy), true);
   }
 
   public Model getModel() {
@@ -83,12 +79,12 @@ public class ModelComponent extends OpenSimObject {
     return new SWIGTYPE_p_SimTK__SystemYIndex(opensimModelJNI.ModelComponent_getStateVariableSystemIndex(swigCPtr, this, stateVariableName), true);
   }
 
-  public int getModelingOption(SWIGTYPE_p_SimTK__State state) {
-    return opensimModelJNI.ModelComponent_getModelingOption(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state));
+  public int getModelingOption(SWIGTYPE_p_SimTK__State state, String name) {
+    return opensimModelJNI.ModelComponent_getModelingOption(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state), name);
   }
 
-  public void setModelingOption(SWIGTYPE_p_SimTK__State state, int flag) {
-    opensimModelJNI.ModelComponent_setModelingOption(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state), flag);
+  public void setModelingOption(SWIGTYPE_p_SimTK__State state, String name, int flag) {
+    opensimModelJNI.ModelComponent_setModelingOption(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state), name, flag);
   }
 
   public double getStateVariable(SWIGTYPE_p_SimTK__State state, String name) {
