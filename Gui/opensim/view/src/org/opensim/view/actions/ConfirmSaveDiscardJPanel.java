@@ -41,6 +41,7 @@ public class ConfirmSaveDiscardJPanel extends javax.swing.JPanel {
         alwaysSaveRadioButton = new javax.swing.JRadioButton();
         alwaysDiscardRadioButton = new javax.swing.JRadioButton();
         alwaysPromptRadioButton = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
 
         jLabelModelOrMotion.setText(org.openide.util.NbBundle.getMessage(ConfirmSaveDiscardJPanel.class, "ConfirmSaveDiscardJPanel.jLabelModelOrMotion.text")); // NOI18N
         jLabelModelOrMotion.setToolTipText(org.openide.util.NbBundle.getMessage(ConfirmSaveDiscardJPanel.class, "ConfirmSaveDiscardJPanel.jLabelModelOrMotion.toolTipText")); // NOI18N
@@ -91,6 +92,8 @@ public class ConfirmSaveDiscardJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setText(org.openide.util.NbBundle.getMessage(ConfirmSaveDiscardJPanel.class, "ConfirmSaveDiscardJPanel.jLabel2.text")); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -104,12 +107,15 @@ public class ConfirmSaveDiscardJPanel extends javax.swing.JPanel {
                         .addComponent(jLabelModelOrMotion, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(alwaysDiscardRadioButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(alwaysSaveRadioButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(alwaysPromptRadioButton)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(alwaysDiscardRadioButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(alwaysSaveRadioButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(alwaysPromptRadioButton)))))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,7 +129,8 @@ public class ConfirmSaveDiscardJPanel extends javax.swing.JPanel {
                     .addComponent(alwaysDiscardRadioButton)
                     .addComponent(alwaysSaveRadioButton)
                     .addComponent(alwaysPromptRadioButton))
-                .addGap(19, 19, 19))
+                .addGap(5, 5, 5)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -159,6 +166,7 @@ public class ConfirmSaveDiscardJPanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton alwaysPromptRadioButton;
     private javax.swing.JRadioButton alwaysSaveRadioButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelModelOrMotion;
     private javax.swing.ButtonGroup saveActionButtonGroup;
     // End of variables declaration//GEN-END:variables
