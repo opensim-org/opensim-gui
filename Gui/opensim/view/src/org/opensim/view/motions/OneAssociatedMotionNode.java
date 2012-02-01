@@ -2,7 +2,7 @@
  *
  * OneMotionNode
  * Author(s): Ayman Habib & Jeff Reinbolt
- * Copyright (c)  2005-2006, Stanford University, Ayman Habib & Jeff Reinbolt
+ * Copyright (c)  2005-2006, Stanford University, Ayman Habib
 * Use of the OpenSim software in source form is permitted provided that the following
 * conditions are met:
 * 	1. The software is used only for non-commercial research and education. It may not
@@ -57,7 +57,7 @@ public class OneAssociatedMotionNode extends OneMotionNode {
     /** Creates a new instance of OneMotionNode */
    public OneAssociatedMotionNode(AnnotatedMotion motion) {
       super(motion);
-       createChildren(motion);
+       //createChildren(motion);
    }
    
    public Image getIcon(int i) {
