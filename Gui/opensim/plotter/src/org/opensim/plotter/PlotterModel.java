@@ -110,7 +110,7 @@ public class PlotterModel {
    private final String DEFAULT_Y_LABEL="y-label";
    /** Creates a new instance of PlotterModel */
    public PlotterModel() {
-         Plot figure = new Plot("Figure "+String.valueOf(figureNumber)+".", DEFAULT_X_LABEL, DEFAULT_Y_LABEL);
+         Plot figure = new Plot("Figure "+String.valueOf(figureNumber), DEFAULT_X_LABEL, DEFAULT_Y_LABEL);
          availablePlots.add(0, figure);
          plotTreeModel.addPlot(figure);
          figureNumber++;
