@@ -200,6 +200,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
          ToolCommon.bindProperty(toolModel.getTool(), "states_file", statesFileName);
          ToolCommon.bindProperty(toolModel.getTool(), "coordinates_file", coordinatesFileName);
          ToolCommon.bindProperty(toolModel.getTool(), "lowpass_cutoff_frequency_for_coordinates", cutoffFrequency);
+         ToolCommon.bindProperty(toolModel.getTool(), "solve_for_equilibrium_for_auxiliary_states", analyzeSolveForEquilibriumCheckBox);
       } else if(mode==Mode.InverseDynamics|| mode==Mode.StaticOptimization) {
          ToolCommon.bindProperty(toolModel.getTool(), "states_file", statesFileName);
          ToolCommon.bindProperty(toolModel.getTool(), "coordinates_file", coordinatesFileName);
@@ -214,16 +215,23 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
          ToolCommon.bindProperty(toolModel.getTool(), "task_set_file", cmcTaskSetFileName);
          ToolCommon.bindProperty(toolModel.getTool(), "constraints_file", cmcConstraintsFileName);
          ToolCommon.bindProperty(toolModel.getTool(), "cmc_time_window", cmcTimeWindow);
+         ToolCommon.bindProperty(toolModel.getTool(), "desired_kinematics_file", cmcDesiredKinematicsFileName);
       } else { //RRA
          ToolCommon.bindProperty(toolModel.getTool(), "task_set_file", cmcTaskSetFileName);
+         ToolCommon.bindProperty(toolModel.getTool(), "constraints_file", cmcConstraintsFileName);
          ToolCommon.bindProperty(toolModel.getTool(), "output_model_file", rraOutputModelFileName);
          ToolCommon.bindProperty(toolModel.getTool(), "adjusted_com_body", rraAdjustedBodyComboBox);
          ToolCommon.bindProperty(toolModel.getTool(), "cmc_time_window", cmcTimeWindow);
+         ToolCommon.bindProperty(toolModel.getTool(), "desired_kinematics_file", cmcDesiredKinematicsFileName);
+         ToolCommon.bindProperty(toolModel.getTool(), "lowpass_cutoff_frequency", cmcCutoffFrequency);
       }
 
        if (mode==Mode.StaticOptimization){
-             ToolCommon.bindProperty(toolModel.getTool(), "solve_for_equilibrium_for_auxiliary_states", useForceLengthStaticOptCheckBox);
-             //ToolCommon.bindProperty(toolModel.getTool(), "activation_exponent", staticOptActivationExponentTextField);
+         ToolCommon.bindProperty(toolModel.getTool(), "solve_for_equilibrium_for_auxiliary_states", analyzeSolveForEquilibriumCheckBox);
+         ToolCommon.bindProperty(toolModel.getTool(), "lowpass_cutoff_frequency_for_coordinates", cutoffFrequency1);
+         ToolCommon.bindProperty(toolModel.getTool(), "states_file", statesFileName1);
+         ToolCommon.bindProperty(toolModel.getTool(), "coordinates_file", coordinatesFileName1);
+    //ToolCommon.bindProperty(toolModel.getTool(), "activation_exponent", staticOptActivationExponentTextField);
        }
        else
             ToolCommon.bindProperty(toolModel.getTool(), "solve_for_equilibrium_for_auxiliary_states", solveForEquilibriumCheckBox);
@@ -620,6 +628,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
         outputDirectory = new org.opensim.swingui.FileTextFieldAndChooser();
         jLabel6 = new javax.swing.JLabel();
         outputName = new javax.swing.JTextField();
+        availableFinalTime = new javax.swing.JTextField();
         timePanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         initialTime = new javax.swing.JTextField();
@@ -627,7 +636,6 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
         finalTime = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         availableInitialTime = new javax.swing.JTextField();
-        availableFinalTime = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         cmcTimeWindow = new javax.swing.JTextField();
@@ -940,6 +948,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                 }
             });
 
+            analyzeControlsFileName.setToolTipText("xml file containing controls ");
             analyzeControlsFileName.addChangeListener(new javax.swing.event.ChangeListener() {
                 public void stateChanged(javax.swing.event.ChangeEvent evt) {
                     analyzeControlsFileNameStateChanged(evt);
@@ -1085,6 +1094,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
             jLabel6.setText("Prefix");
 
             outputName.setText("jTextField1");
+            outputName.setToolTipText("Prefix to be attached to output file names");
             outputName.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     outputNameActionPerformed(evt);
@@ -1095,6 +1105,10 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                     outputNameFocusLost(evt);
                 }
             });
+
+            availableFinalTime.setEditable(false);
+            availableFinalTime.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+            availableFinalTime.setText("jTextField2");
 
             org.jdesktop.layout.GroupLayout outputPanelLayout = new org.jdesktop.layout.GroupLayout(outputPanel);
             outputPanel.setLayout(outputPanelLayout);
@@ -1110,16 +1124,23 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                     .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                     .add(outputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(outputPrecision, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 64, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(outputName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+                        .add(outputPanelLayout.createSequentialGroup()
+                            .add(outputName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+                            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                            .add(availableFinalTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                         .add(outputDirectory, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE))
                     .addContainerGap())
             );
             outputPanelLayout.setVerticalGroup(
                 outputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                 .add(outputPanelLayout.createSequentialGroup()
-                    .add(outputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                        .add(jLabel6)
-                        .add(outputName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(outputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(outputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(jLabel6)
+                            .add(outputName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(outputPanelLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .add(availableFinalTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                     .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                     .add(outputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                         .add(jLabel11)
@@ -1169,10 +1190,6 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
             availableInitialTime.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
             availableInitialTime.setText("jTextField1");
 
-            availableFinalTime.setEditable(false);
-            availableFinalTime.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-            availableFinalTime.setText("jTextField2");
-
             jLabel8.setText("to");
 
             jLabel23.setText("CMC look-ahead window");
@@ -1206,9 +1223,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                         .add(timePanelLayout.createSequentialGroup()
                             .add(availableInitialTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                            .add(jLabel8)
-                            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                            .add(availableFinalTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(jLabel8))
                         .add(timePanelLayout.createSequentialGroup()
                             .add(timePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
                                 .add(org.jdesktop.layout.GroupLayout.LEADING, cmcTimeWindow)
@@ -1220,7 +1235,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                     .addContainerGap(102, Short.MAX_VALUE))
             );
 
-            timePanelLayout.linkSize(new java.awt.Component[] {availableFinalTime, availableInitialTime, finalTime, initialTime}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
+            timePanelLayout.linkSize(new java.awt.Component[] {availableInitialTime, finalTime, initialTime}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
 
             timePanelLayout.setVerticalGroup(
                 timePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -1228,8 +1243,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                     .add(timePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                         .add(jLabel7)
                         .add(availableInitialTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(jLabel8)
-                        .add(availableFinalTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(jLabel8))
                     .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                     .add(timePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                         .add(jLabel4)
@@ -1312,6 +1326,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
 
             jLabel9.setText("Controls");
 
+            controlsFileName.setToolTipText("xml file containing controls ");
             controlsFileName.addChangeListener(new javax.swing.event.ChangeListener() {
                 public void stateChanged(javax.swing.event.ChangeEvent evt) {
                     controlsFileNameStateChanged(evt);
