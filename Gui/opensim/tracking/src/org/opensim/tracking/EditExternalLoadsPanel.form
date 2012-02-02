@@ -363,7 +363,7 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="DatafileNameLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="externalLoadsDataFileName" pref="344" max="32767" attributes="0"/>
+              <Component id="externalLoadsDataFileName" pref="355" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
           <Component id="ForcesListManagerPanel" alignment="0" max="32767" attributes="0"/>
@@ -372,18 +372,18 @@
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Group type="102" alignment="0" attributes="1">
                       <Component id="filterModelKinematics" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="cutoffFrequency" max="32767" attributes="0"/>
-          </Group>
+                  </Group>
                   <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="externalLoadsModelKinematicsFileName" alignment="0" pref="259" max="32767" attributes="0"/>
-              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-          </Group>
+                  <Component id="externalLoadsModelKinematicsFileName" alignment="0" pref="284" max="32767" attributes="0"/>
+                  <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
-      </Group>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
