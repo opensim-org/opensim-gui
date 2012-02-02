@@ -213,6 +213,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
          ToolCommon.bindProperty(toolModel.getTool(), "lowpass_cutoff_frequency", cmcCutoffFrequency);
          ToolCommon.bindProperty(toolModel.getTool(), "task_set_file", cmcTaskSetFileName);
          ToolCommon.bindProperty(toolModel.getTool(), "constraints_file", cmcConstraintsFileName);
+         ToolCommon.bindProperty(toolModel.getTool(), "cmc_time_window", cmcTimeWindow);
       } else { //RRA
          ToolCommon.bindProperty(toolModel.getTool(), "task_set_file", cmcTaskSetFileName);
          ToolCommon.bindProperty(toolModel.getTool(), "output_model_file", rraOutputModelFileName);
@@ -1248,6 +1249,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
 
             modelName.setEditable(false);
             modelName.setText("jTextField1");
+            modelName.setToolTipText("Current Model in GUI");
 
             org.jdesktop.layout.GroupLayout modelInfoPanelLayout = new org.jdesktop.layout.GroupLayout(modelInfoPanel);
             modelInfoPanel.setLayout(modelInfoPanelLayout);

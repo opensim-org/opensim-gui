@@ -956,6 +956,7 @@
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value="jTextField1"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Current Model in GUI"/>
                   </Properties>
                 </Component>
               </SubComponents>

@@ -51,6 +51,7 @@ import org.jdesktop.layout.GroupLayout;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
+import org.opensim.modeling.AbstractTool;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.ExternalLoads;
 import org.opensim.modeling.Model;
@@ -85,7 +86,7 @@ public class ActuatorsAndExternalLoadsPanel extends javax.swing.JPanel {
       }
 
       initComponents();
-      //OpenSim23 bindPropertiesToComponents();
+      bindPropertiesToComponents();
       
       if(!includeActuatorsPanel) actuatorsPanel.setVisible(false);
 
@@ -105,10 +106,18 @@ public class ActuatorsAndExternalLoadsPanel extends javax.swing.JPanel {
    }
 
    private void bindPropertiesToComponents() {
-      ToolCommon.bindProperty(toolModel.getTool(), "force_set_files", actuatorSetFiles);
-      ToolCommon.bindProperty(toolModel.getTool(), "external_loads_file", externalLoadsFileName);
-      ToolCommon.bindProperty(toolModel.getTool(), "external_loads_model_kinematics_file", externalLoadsModelKinematicsFileName);
-      ToolCommon.bindProperty(toolModel.getTool(), "lowpass_cutoff_frequency_for_load_kinematics", cutoffFrequency);
+      AbstractTool aTool = toolModel.getTool();
+      if (aTool== null) {
+          if (toolModel instanceof InverseDynamicsToolModel){
+              InverseDynamicsToolModel idTool = (InverseDynamicsToolModel)toolModel;
+              ToolCommon.bindProperty(idTool.getIdTool(), "external_loads_file", externalLoadsFileName);
+              return;
+          }
+      }
+      ToolCommon.bindProperty(aTool, "force_set_files", actuatorSetFiles);
+      ToolCommon.bindProperty(aTool, "external_loads_file", externalLoadsFileName);
+      ToolCommon.bindProperty(aTool, "external_loads_model_kinematics_file", externalLoadsModelKinematicsFileName);
+      ToolCommon.bindProperty(aTool, "lowpass_cutoff_frequency_for_load_kinematics", cutoffFrequency);
    }
 
    private void setEnabled(JPanel panel, boolean enabled) {

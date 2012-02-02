@@ -61,7 +61,8 @@ public abstract class BaseToolPanel extends JPanel implements ActionListener, Ob
   
    private FileFilter settingsFilter = null;
 
-   protected JButton settingsButton = new JButton("Settings >");
+   protected JButton loadSettingsButton = new JButton("Load...");
+   protected JButton saveSettingsButton = new JButton("Save...");
    protected JButton applyButton = new JButton("Run");
    protected JButton okButton = new JButton("Close");
    protected JButton cancelButton = new JButton("Cancel");
@@ -113,16 +114,16 @@ public abstract class BaseToolPanel extends JPanel implements ActionListener, Ob
    }
 
    public BaseToolPanel() {
-      settingsButton.addMouseListener(new MouseAdapter() {
+      /*loadSettingsButton.addMouseListener(new MouseAdapter() {
          public void mousePressed(MouseEvent evt) {
             JPopupMenu popup = new JPopupMenu();
-            popup.add(new JMenuItem(new LoadSettingsAction()));
+            popup.add(new JMenuItem());
             popup.add(new JMenuItem(new SaveSettingsAction()));
             popup.show(evt.getComponent(),evt.getX(),evt.getY());
-      }});
-
-      setSettingsFileDescription("Settings file");
-
+      }});*/
+      loadSettingsButton.addActionListener(new LoadSettingsAction());
+      saveSettingsButton.addActionListener(new SaveSettingsAction());
+ 
       //settingsButton.setToolTipText("Load or save tool settings to an XML file.");
       //applyButton.setToolTipText("Run tool.  Disabled while tool is running, and if settings are either invalid or unchanged since last run.");
       //okButton.setToolTipText("Close tool dialog while letting tool continue running and keeping results.");
@@ -147,7 +148,7 @@ public abstract class BaseToolPanel extends JPanel implements ActionListener, Ob
    // Dialog Operations
    //------------------------------------------------------------------------
    public JButton[] getDialogOptions() {
-      return new JButton[]{settingsButton, applyButton, okButton, cancelButton, helpButton};
+      return new JButton[]{loadSettingsButton, saveSettingsButton, applyButton, okButton, cancelButton, helpButton};
    }
 
    public void setOwner(Dialog window) { ownerDialog = window; }
