@@ -99,6 +99,7 @@ public class JConsole extends JTextArea implements KeyListener {
         engine.exec("import java.lang as lang");
         engine.exec("import org.opensim.modeling as modeling");
         engine.exec("import org.opensim.view.pub as view");
+        engine.exec("import org.opensim.tracking as tools");
         engine.setOut(out);
         engine.setErr(err);
         setTabSize(4);
