@@ -11,20 +11,17 @@ package org.opensim.view.nodes;
 
 
 import java.awt.Image;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Hashtable;
 import javax.swing.ImageIcon;
 import org.openide.nodes.AbstractNode;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
-import org.openide.nodes.PropertySupport;
 import org.openide.nodes.Sheet;
 //import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.Property;
 import org.opensim.modeling.Property.PropertyType;
 
 /**
@@ -37,9 +34,9 @@ import org.opensim.modeling.Property.PropertyType;
  */
 public class OpenSimNode extends AbstractNode {
     
-    static Hashtable<PropertyType, Class> mapPropertyEnumToClass = new Hashtable<PropertyType, Class>();
-    static Hashtable<PropertyType, String> mapPropertyEnumToGetters = new Hashtable<PropertyType, String>();
-    static Hashtable<PropertyType, String> mapPropertyEnumToSetters = new Hashtable<PropertyType, String>();
+    static final Hashtable<PropertyType, Class> mapPropertyEnumToClass = new Hashtable<PropertyType, Class>();
+    static final Hashtable<PropertyType, String> mapPropertyEnumToGetters = new Hashtable<PropertyType, String>();
+    static final Hashtable<PropertyType, String> mapPropertyEnumToSetters = new Hashtable<PropertyType, String>();
     static {
         mapPropertyEnumToClass.put(PropertyType.Int, Integer.class);
         mapPropertyEnumToGetters.put(PropertyType.Int, "getValueInt");
@@ -48,11 +45,14 @@ public class OpenSimNode extends AbstractNode {
         mapPropertyEnumToSetters.put(PropertyType.Dbl, "setValueDbl");
         mapPropertyEnumToClass.put(PropertyType.Str, String.class);
         mapPropertyEnumToGetters.put(PropertyType.Str, "getValueStr");
+        mapPropertyEnumToSetters.put(PropertyType.Str, "setValue");
         mapPropertyEnumToClass.put(PropertyType.Bool, Boolean.class);
         mapPropertyEnumToGetters.put(PropertyType.Bool, "getValueBool");
         mapPropertyEnumToClass.put(PropertyType.Obj, OpenSimObject.class);
         mapPropertyEnumToGetters.put(PropertyType.Obj, "getValueObj");
-    }
+        mapPropertyEnumToClass.put(PropertyType.DblVec, String.class);
+        mapPropertyEnumToGetters.put(PropertyType.DblVec, "toString");
+   }
     /**
      * Creates a new instance of OpenSimNode
      */

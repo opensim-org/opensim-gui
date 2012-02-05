@@ -38,13 +38,13 @@ import org.openide.nodes.Sheet;
 import org.openide.util.lookup.Lookups;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.Property.PropertyType;
+import org.opensim.modeling.PropertyDblArray;
 import org.opensim.view.ObjectDisplayHideAction;
 import org.opensim.view.ObjectDisplayMenuAction;
 import org.opensim.view.ObjectDisplayShowAction;
 import org.opensim.view.ObjectGenericReviewAction;
 import org.opensim.view.pub.ViewDB;
 import org.opensim.view.ModelWindowVTKTopComponent;
-import LSJava.LSPropertyEditors.LSPropertyEditorRigidBody;
 
 /**
  *
@@ -79,21 +79,16 @@ public class OpenSimObjectNode extends OpenSimNode {
      * Action to be invoked on double clicking.
      */
     public Action getPreferredAction() {
-         
-         // For certain types of objects, open its easy-to-use property editor (also provides the older table version). 
-         // In the past, double-clicking was used to to show/hide objects.  To provide that functionality, 
-         // the Appearance panel of the easy-to-use property editor allows user to show/hide the object.
-         if( (this instanceof OneBodyNode) || (this instanceof OneJointNode) )
+         if( getValidDisplayOptions().size() ==0 ) return null;  // Nothing to show or hide.
+          
+         // If this is a rigid body, open the easy-to-use rigid body property editor (also provides the older table version). 
+         // Appearance panel allows user to show/hide the body.
+         if( this instanceof OneBodyNode )
          {
             ModelWindowVTKTopComponent ownerWindow = ViewDB.getInstance().getCurrentModelWindow();
-            if(      this instanceof OneBodyNode  ) new LSJava.LSPropertyEditors.LSPropertyEditorRigidBody(  (OneBodyNode)this, ownerWindow );
-            else if( this instanceof OneJointNode ) new LSJava.LSPropertyEditors.LSPropertyEditorJoint(     (OneJointNode)this, ownerWindow );
+            new LSJava.LSPropertyEditors.LSPropertyEditorRigidBody( (OneBodyNode)this, ownerWindow );
             return null;
          }
-         
-         // Note: As of January 2012, the default behavior of showing/hiding an object by use of double-click is not longer employed.
-         boolean nothingToShowOrHide = getValidDisplayOptions().isEmpty();  // getValidDisplayOptions().size() == 0;
-         if( true || nothingToShowOrHide ) return null;
          
          OpenSimObject obj = getOpenSimObject();
          int currentStatus = ViewDB.getInstance().getDisplayStatus( obj );
@@ -108,7 +103,7 @@ public class OpenSimObjectNode extends OpenSimNode {
             ex.printStackTrace();
          }
             
-         return this.getReviewAction();
+         return getReviewAction();
     }
        
     /**
@@ -169,13 +164,26 @@ public class OpenSimObjectNode extends OpenSimNode {
         for(int i=0; i<ps.getSize(); i++){
             try {
                 org.opensim.modeling.Property prop = ps.get(i);
-                if (mapPropertyEnumToClass.containsKey(prop.getType())) {
+                final PropertyType currentPropType = prop.getType();
+                //Class dClass = prop.getClass();
+                if (currentPropType==PropertyType.DblVec ||
+                        currentPropType==PropertyType.DblArray){
+                     PropertySupport.Reflection nextNodeProp = new PropertySupport.Reflection(prop, mapPropertyEnumToClass.get(currentPropType),
+                            mapPropertyEnumToGetters.get(currentPropType),
+                            mapPropertyEnumToSetters.get(currentPropType));
+                     nextNodeProp.setValue("canEditAsText", Boolean.TRUE); 
+                     nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
+                     nextNodeProp.setName(prop.getName());
+                     set.put(nextNodeProp);
+                }
+                //getArraySize()
+                else if (mapPropertyEnumToClass.containsKey(currentPropType)) {
                     // Need Class, functionToGet, functioToSet // Editor
-                    PropertySupport.Reflection nextNodeProp = new PropertySupport.Reflection(prop, mapPropertyEnumToClass.get(prop.getType()),
-                            mapPropertyEnumToGetters.get(prop.getType()),
-                            mapPropertyEnumToSetters.get(prop.getType()));
+                    PropertySupport.Reflection nextNodeProp = new PropertySupport.Reflection(prop, mapPropertyEnumToClass.get(currentPropType),
+                            mapPropertyEnumToGetters.get(currentPropType),
+                            mapPropertyEnumToSetters.get(currentPropType));
                     nextNodeProp.setName(prop.getName());
-                    if (prop.getType()==PropertyType.Str){
+                    if (currentPropType==PropertyType.Str){
                         ((Node.Property)nextNodeProp).setValue("oneline", Boolean.TRUE);
                         ((Node.Property)nextNodeProp).setValue("suppressCustomEditor", Boolean.TRUE);
                     }
