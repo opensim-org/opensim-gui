@@ -136,7 +136,7 @@ public class MotionObjectsDB {
       arr.SetTipLength(0.2);
       vtkTransformPolyDataFilter flipFilter = new vtkTransformPolyDataFilter();
       vtkTransform flipTransform = new vtkTransform();
-      flipTransform.RotateZ(180);
+      //flipTransform.RotateZ(180);
       flipTransform.Translate(-1.0, 0., 0.);
       flipFilter.SetTransform(flipTransform);
       flipFilter.SetInputConnection(arr.GetOutputPort());
