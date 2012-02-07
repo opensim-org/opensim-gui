@@ -164,4 +164,28 @@ public class ArrayDouble {
     opensimModelJNI.ArrayDouble_setValues(swigCPtr, this, dValues, size);
   }
 
+  public SWIGTYPE_p_SimTK__Vec3 getAsVec3() {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.ArrayDouble_getAsVec3(swigCPtr, this), true);
+  }
+
+  public static SWIGTYPE_p_SimTK__Vec3 createVec3(double e1, double e2, double e3) {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.ArrayDouble_createVec3__SWIG_0(e1, e2, e3), true);
+  }
+
+  public static SWIGTYPE_p_SimTK__Vec3 createVec3(double e1) {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.ArrayDouble_createVec3__SWIG_1(e1), true);
+  }
+
+  public static SWIGTYPE_p_SimTK__Vec3 createVec3(double[] es) {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.ArrayDouble_createVec3__SWIG_2(es), true);
+  }
+
+  public static ArrayDouble getValuesFromVec3(SWIGTYPE_p_SimTK__Vec3 vec3) {
+    return new ArrayDouble(opensimModelJNI.ArrayDouble_getValuesFromVec3(SWIGTYPE_p_SimTK__Vec3.getCPtr(vec3)), true);
+  }
+
+  public String toString() {
+    return opensimModelJNI.ArrayDouble_toString(swigCPtr, this);
+  }
+
 }

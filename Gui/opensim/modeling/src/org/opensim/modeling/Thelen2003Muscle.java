@@ -35,6 +35,18 @@ public class Thelen2003Muscle extends ActivationFiberLengthMuscle {
     super.delete();
   }
 
+  public Thelen2003Muscle() {
+    this(opensimModelJNI.new_Thelen2003Muscle__SWIG_0(), true);
+  }
+
+  public Thelen2003Muscle(String aName, double aMaxIsometricForce, double aOptimalFiberLength, double aTendonSlackLength, double aPennationAngle) {
+    this(opensimModelJNI.new_Thelen2003Muscle__SWIG_1(aName, aMaxIsometricForce, aOptimalFiberLength, aTendonSlackLength, aPennationAngle), true);
+  }
+
+  public Thelen2003Muscle(Thelen2003Muscle aMuscle) {
+    this(opensimModelJNI.new_Thelen2003Muscle__SWIG_2(Thelen2003Muscle.getCPtr(aMuscle), aMuscle), true);
+  }
+
   public OpenSimObject copy() {
     long cPtr = opensimModelJNI.Thelen2003Muscle_copy__SWIG_0(swigCPtr, this);
     return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
@@ -130,6 +142,30 @@ public class Thelen2003Muscle extends ActivationFiberLengthMuscle {
 
   public boolean setFlen(double aFlen) {
     return opensimModelJNI.Thelen2003Muscle_setFlen(swigCPtr, this, aFlen);
+  }
+
+  public double computeActuation(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Thelen2003Muscle_computeActuation(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
+  public double calcTendonForce(SWIGTYPE_p_SimTK__State s, double aNormTendonLength) {
+    return opensimModelJNI.Thelen2003Muscle_calcTendonForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), aNormTendonLength);
+  }
+
+  public double calcPassiveForce(SWIGTYPE_p_SimTK__State s, double aNormFiberLength) {
+    return opensimModelJNI.Thelen2003Muscle_calcPassiveForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), aNormFiberLength);
+  }
+
+  public double calcActiveForce(SWIGTYPE_p_SimTK__State s, double aNormFiberLength) {
+    return opensimModelJNI.Thelen2003Muscle_calcActiveForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), aNormFiberLength);
+  }
+
+  public double calcFiberVelocity(SWIGTYPE_p_SimTK__State s, double aActivation, double aActiveForce, double aVelocityDependentForce) {
+    return opensimModelJNI.Thelen2003Muscle_calcFiberVelocity(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), aActivation, aActiveForce, aVelocityDependentForce);
+  }
+
+  public double computeIsometricForce(SWIGTYPE_p_SimTK__State s, double activation) {
+    return opensimModelJNI.Thelen2003Muscle_computeIsometricForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), activation);
   }
 
   public static boolean isKindOf(String type) {

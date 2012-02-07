@@ -98,6 +98,26 @@ public class Model extends ModelComponent {
     opensimModelJNI.Model_cleanup(swigCPtr, this);
   }
 
+  public void setUseVisualizer(boolean visualize) {
+    opensimModelJNI.Model_setUseVisualizer(swigCPtr, this, visualize);
+  }
+
+  public boolean getUseVisualizer() {
+    return opensimModelJNI.Model_getUseVisualizer(swigCPtr, this);
+  }
+
+  public boolean hasModelVisualizer() {
+    return opensimModelJNI.Model_hasModelVisualizer(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_OpenSim__ModelVisualizer getModelVisualizer() {
+    return new SWIGTYPE_p_OpenSim__ModelVisualizer(opensimModelJNI.Model_getModelVisualizer(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__ModelVisualizer updModelVisualizer() {
+    return new SWIGTYPE_p_OpenSim__ModelVisualizer(opensimModelJNI.Model_updModelVisualizer(swigCPtr, this), false);
+  }
+
   public SWIGTYPE_p_SimTK__State initSystem() throws java.io.IOException {
     return new SWIGTYPE_p_SimTK__State(opensimModelJNI.Model_initSystem(swigCPtr, this), false);
   }
@@ -144,6 +164,14 @@ public class Model extends ModelComponent {
 
   public void equilibrateMuscles(SWIGTYPE_p_SimTK__State state) {
     opensimModelJNI.Model_equilibrateMuscles(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state));
+  }
+
+  public SWIGTYPE_p_SimTK__MultibodySystem getMultibodySystem() {
+    return new SWIGTYPE_p_SimTK__MultibodySystem(opensimModelJNI.Model_getMultibodySystem(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_SimTK__MultibodySystem updMultibodySystem() {
+    return new SWIGTYPE_p_SimTK__MultibodySystem(opensimModelJNI.Model_updMultibodySystem(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_SimTK__SimbodyMatterSubsystem getMatterSubsystem() {
@@ -232,14 +260,6 @@ public class Model extends ModelComponent {
 
   public Units getForceUnits() {
     return new Units(opensimModelJNI.Model_getForceUnits(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_SimTK__MultibodySystem getMultibodySystem() {
-    return new SWIGTYPE_p_SimTK__MultibodySystem(opensimModelJNI.Model_getMultibodySystem(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_SimTK__MultibodySystem updMultibodySystem() {
-    return new SWIGTYPE_p_SimTK__MultibodySystem(opensimModelJNI.Model_updMultibodySystem(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_SimTK__Vec3 getGravity() {

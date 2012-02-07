@@ -35,6 +35,18 @@ public class Schutte1993Muscle extends ActivationFiberLengthMuscle {
     super.delete();
   }
 
+  public Schutte1993Muscle() {
+    this(opensimModelJNI.new_Schutte1993Muscle__SWIG_0(), true);
+  }
+
+  public Schutte1993Muscle(String aName, double aMaxIsometricForce, double aOptimalFiberLength, double aTendonSlackLength, double aPennationAngle) {
+    this(opensimModelJNI.new_Schutte1993Muscle__SWIG_1(aName, aMaxIsometricForce, aOptimalFiberLength, aTendonSlackLength, aPennationAngle), true);
+  }
+
+  public Schutte1993Muscle(Schutte1993Muscle aMuscle) {
+    this(opensimModelJNI.new_Schutte1993Muscle__SWIG_2(Schutte1993Muscle.getCPtr(aMuscle), aMuscle), true);
+  }
+
   public OpenSimObject copy() {
     long cPtr = opensimModelJNI.Schutte1993Muscle_copy__SWIG_0(swigCPtr, this);
     return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
@@ -66,6 +78,14 @@ public class Schutte1993Muscle extends ActivationFiberLengthMuscle {
 
   public boolean setDamping(double aDamping) {
     return opensimModelJNI.Schutte1993Muscle_setDamping(swigCPtr, this, aDamping);
+  }
+
+  public double computeActuation(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Schutte1993Muscle_computeActuation(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
+  public double computeIsometricForce(SWIGTYPE_p_SimTK__State s, double activation) {
+    return opensimModelJNI.Schutte1993Muscle_computeIsometricForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), activation);
   }
 
   public Function getActiveForceLengthCurve() {

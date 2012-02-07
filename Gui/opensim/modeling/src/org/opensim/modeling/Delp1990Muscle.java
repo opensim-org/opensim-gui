@@ -35,6 +35,18 @@ public class Delp1990Muscle extends ActivationFiberLengthMuscle {
     super.delete();
   }
 
+  public Delp1990Muscle() {
+    this(opensimModelJNI.new_Delp1990Muscle__SWIG_0(), true);
+  }
+
+  public Delp1990Muscle(String aName, double aMaxIsometricForce, double aOptimalFiberLength, double aTendonSlackLength, double aPennationAngle) {
+    this(opensimModelJNI.new_Delp1990Muscle__SWIG_1(aName, aMaxIsometricForce, aOptimalFiberLength, aTendonSlackLength, aPennationAngle), true);
+  }
+
+  public Delp1990Muscle(Delp1990Muscle aMuscle) {
+    this(opensimModelJNI.new_Delp1990Muscle__SWIG_2(Delp1990Muscle.getCPtr(aMuscle), aMuscle), true);
+  }
+
   public OpenSimObject copy() {
     long cPtr = opensimModelJNI.Delp1990Muscle_copy__SWIG_0(swigCPtr, this);
     return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
@@ -66,6 +78,38 @@ public class Delp1990Muscle extends ActivationFiberLengthMuscle {
 
   public boolean setMass(double aMass) {
     return opensimModelJNI.Delp1990Muscle_setMass(swigCPtr, this, aMass);
+  }
+
+  public double getFiberVelocity(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Delp1990Muscle_getFiberVelocity(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
+  public void setFiberVelocity(SWIGTYPE_p_SimTK__State s, double fiberVelocity) {
+    opensimModelJNI.Delp1990Muscle_setFiberVelocity(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), fiberVelocity);
+  }
+
+  public double getFiberVelocityDeriv(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Delp1990Muscle_getFiberVelocityDeriv(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
+  public void setFiberVelocityDeriv(SWIGTYPE_p_SimTK__State s, double fiberVelocityDeriv) {
+    opensimModelJNI.Delp1990Muscle_setFiberVelocityDeriv(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), fiberVelocityDeriv);
+  }
+
+  public void setActiveForce(SWIGTYPE_p_SimTK__State s, double aForce) {
+    opensimModelJNI.Delp1990Muscle_setActiveForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), aForce);
+  }
+
+  public double getActiveForce(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Delp1990Muscle_getActiveForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
+  public double computeActuation(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Delp1990Muscle_computeActuation(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
+  public double computeIsometricForce(SWIGTYPE_p_SimTK__State s, double activation) {
+    return opensimModelJNI.Delp1990Muscle_computeIsometricForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), activation);
   }
 
   public Function getActiveForceLengthCurve() {
