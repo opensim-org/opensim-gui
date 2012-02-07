@@ -290,6 +290,7 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
         plotMetricsPanel = new javax.swing.JPanel();
         plotMetricsCheckBox = new javax.swing.JCheckBox();
         reuseSelectedQuantitiesCheckBox = new javax.swing.JCheckBox();
+        motionRadioButton1 = new javax.swing.JRadioButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         mainSettingsPanel = new javax.swing.JPanel();
         outputPanel = new javax.swing.JPanel();
@@ -303,7 +304,6 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
         inverseInputPanel = new javax.swing.JPanel();
         motionsComboBox1 = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
-        motionRadioButton1 = new javax.swing.JRadioButton();
         coordinatesFileName1 = new org.opensim.swingui.FileTextFieldAndChooser();
         fromFileMotionRadioButton1 = new javax.swing.JRadioButton();
         loadedMotionRadioButton1 = new javax.swing.JRadioButton();
@@ -369,6 +369,17 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
                 .add(14, 14, 14)
                 .add(reuseSelectedQuantitiesCheckBox))
         );
+
+        buttonGroup3.add(motionRadioButton1);
+        motionRadioButton1.setSelected(true);
+        motionRadioButton1.setText("Motion");
+        motionRadioButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        motionRadioButton1.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        motionRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputSourceRadioButtonActionPerformed1(evt);
+            }
+        });
 
         outputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Output"));
 
@@ -472,17 +483,6 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
 
         jLabel1.setText("Hz");
 
-        buttonGroup3.add(motionRadioButton1);
-        motionRadioButton1.setSelected(true);
-        motionRadioButton1.setText("Motion");
-        motionRadioButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        motionRadioButton1.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        motionRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputSourceRadioButtonActionPerformed1(evt);
-            }
-        });
-
         coordinatesFileName1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 coordinatesFileName1StateChanged(evt);
@@ -539,43 +539,36 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
                 .addContainerGap()
                 .add(inverseInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(inverseInputPanelLayout.createSequentialGroup()
-                        .add(motionRadioButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 62, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(inverseInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(fromFileMotionRadioButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 82, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(loadedMotionRadioButton1))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(inverseInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, motionsComboBox1, 0, 217, Short.MAX_VALUE)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, coordinatesFileName1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)))
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, motionsComboBox1, 0, 285, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, coordinatesFileName1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)))
                     .add(inverseInputPanelLayout.createSequentialGroup()
                         .add(filterCoordinatesCheckBox1)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(cutoffFrequency1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 32, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jLabel1)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 223, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(jLabel1)))
                 .add(34, 34, 34))
         );
         inverseInputPanelLayout.setVerticalGroup(
             inverseInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(inverseInputPanelLayout.createSequentialGroup()
                 .add(inverseInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(inverseInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                        .add(motionRadioButton1)
-                        .add(fromFileMotionRadioButton1))
+                    .add(fromFileMotionRadioButton1)
                     .add(coordinatesFileName1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(inverseInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(motionsComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(loadedMotionRadioButton1))
-                .add(inverseInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(inverseInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                        .add(jLabel1)
-                        .add(cutoffFrequency1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(inverseInputPanelLayout.createSequentialGroup()
-                        .add(filterCoordinatesCheckBox1)
-                        .add(4, 4, 4))))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(inverseInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(filterCoordinatesCheckBox1)
+                    .add(cutoffFrequency1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel1)))
         );
 
         org.jdesktop.layout.GroupLayout mainSettingsPanelLayout = new org.jdesktop.layout.GroupLayout(mainSettingsPanel);
@@ -593,12 +586,12 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
         mainSettingsPanelLayout.setVerticalGroup(
             mainSettingsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(mainSettingsPanelLayout.createSequentialGroup()
-                .add(inverseInputPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 91, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(inverseInputPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(timePanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(timePanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(outputPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(outputPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Main Settings", mainSettingsPanel);

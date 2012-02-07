@@ -171,6 +171,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       // Actuators & External Loads tab
       actuatorsAndExternalLoadsPanel = new ActuatorsAndExternalLoadsPanel(toolModel, toolModel.getOriginalModel(), 
               mode!=Mode.InverseDynamics);
+      if (mode==Mode.RRA) actuatorsAndExternalLoadsPanel.setReplaceOnlyMode();
       jTabbedPane1.addTab((mode==Mode.InverseDynamics) ? "External Loads" : "Actuators and External Loads", actuatorsAndExternalLoadsPanel);
 
       // Analysis Set tab

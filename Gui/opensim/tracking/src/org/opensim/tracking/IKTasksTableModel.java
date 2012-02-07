@@ -112,9 +112,9 @@ public class IKTasksTableModel extends AbstractTableModel implements Observer {
    private String[] columnNames = new String[]{"Enabled", "Name", "Value", "Weight"};
    private IKTasksModel tasks;
 
-   public final static String LockedStr = "LOCKED";
-   public final static String FromFileStr = "FROM FILE";
-   public final static String InvalidFromFileStr = "FROM FILE -- NOT FOUND!";
+   public final static String LockedStr = "Locked";
+   public final static String FromFileStr = "From File";
+   public final static String InvalidFromFileStr = "From File -- NOT FOUND!";
 
    IKTasksTableModel(IKTasksModel tasks, String type) {
       this.tasks = tasks;
