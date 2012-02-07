@@ -203,7 +203,7 @@ public class SingleModelVisuals {
                 } else if (PathPoint.safeDownCast(owner)!=null||
                            ConditionalPathPoint.safeDownCast(owner)!=null){
                    // Muscle points are handled in addGeometryForForces
-                } else { // WrapObjects, and any other geometry attached to body
+                } else { // WrapObjects, Contact Geometry and any other geometry attached to body
                    vtkActor attachmentRep = DisplayGeometryFactory.createGeometryDisplayer(Dependent, model.getFilePath());
                    if(attachmentRep!=null) {
                       mapObject2VtkObjects.put(Dependent.getOwner(), attachmentRep);
