@@ -539,7 +539,7 @@ final class CoordinateViewerTopComponent extends TopComponent implements Observe
 
    private void updatePosesPopup() {
          jPosesPopupMenu.removeAll();
-         if (!hasModel) return;
+         if (!hasModel || prefs==null) return;
          // Add items to select poses with callback to apply them
          createDefaultPoseIfNeeded(prefs.getPoses());
          final Vector<ModelPose> poses =prefs.getPoses();
