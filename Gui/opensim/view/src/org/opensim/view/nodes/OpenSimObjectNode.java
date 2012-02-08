@@ -172,9 +172,14 @@ public class OpenSimObjectNode extends OpenSimNode {
                             mapPropertyEnumToGetters.get(currentPropType),
                             mapPropertyEnumToSetters.get(currentPropType));
                      nextNodeProp.setValue("canEditAsText", Boolean.TRUE); 
-                     nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
+                     nextNodeProp.setValue("suppressCustomEditor", Boolean.FALSE);
                      nextNodeProp.setName(prop.getName());
                      set.put(nextNodeProp);
+                     //org.opensim.modeling.PropertyDblArray pda = PropertyDblArray.safeDownCast(prop);
+                     int sz = prop.getValueDblArray().getSize();
+                     double val = prop.getValueDblArray().getitem(0);
+                     int x=0;
+                     //System.out.println(prop.getName()+" "+val);
                 }
                 //getArraySize()
                 else if (mapPropertyEnumToClass.containsKey(currentPropType)) {
