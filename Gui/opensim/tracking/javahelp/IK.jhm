@@ -3,6 +3,5 @@
   PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp Map Version 2.0//EN"
          "http://java.sun.com/products/javahelp/map_2_0.dtd">
 <map version="2.0">
-  <mapID target="org.opensim.simtrack.ik.help" url="IKHelp.html" />
-
+  <mapID target="org.opensim.simtrack.ik.help" url="Getting+Started+with+Inverse+Kinematics.html" />
 </map>		
