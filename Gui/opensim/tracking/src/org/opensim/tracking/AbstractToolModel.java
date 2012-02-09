@@ -165,7 +165,13 @@ public abstract class AbstractToolModel extends Observable {
    }
    protected void setDefaultResultsDirectory(Model model) {
       // Try to come up with a reasonable output directory
-      if(!model.getInputFileName().equals("")) tool.setResultsDir((new File(model.getInputFileName())).getParent());
+      if(!model.getInputFileName().equals("")){
+          String parentDir = (new File(model.getInputFileName())).getParent();
+          if (parentDir != null)
+            tool.setResultsDir(parentDir);
+          else
+            tool.setResultsDir(".");
+      }
       else tool.setResultsDir(Preferences.userNodeForPackage(TheApp.class).get("WorkDirectory", ""));
    }
    

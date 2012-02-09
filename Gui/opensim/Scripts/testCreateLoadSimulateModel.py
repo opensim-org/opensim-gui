@@ -1,6 +1,8 @@
 import javax.swing as swing
 import org.opensim.modeling as modeling
 import org.opensim.view.pub as view;
+import org.opensim.tracking as tools
+
 
 modeling.OpenSimObject.setDebugLevel(3)
 osimModel = modeling.Model()
@@ -17,13 +19,12 @@ ground.addDisplayGeometry("anchor1.vtp")
 ground.addDisplayGeometry("anchor2.vtp")
 
 # BLOCK BODY
-osimModel.print("tug_of_war01.osim")
-
 block = modeling.Body()
 block.setName("Block");
 block.setMass(20)
 block.addDisplayGeometry("block.vtp")
-#FreeJoint(String name, Body parent, double[] locationInParent, double[] orientationInParent, Body body, double[] locationInBody, double[] orientationInBody, boolean reverse) {
+
+#Create FreeJoint to connect block to ground
 zeroVec = [0, 0, 0]
 jnt = modeling.FreeJoint("blockToGround", ground, zeroVec, zeroVec, block, zeroVec, zeroVec, 0)
 jointCoordinateSet = jnt.getCoordinateSet();
@@ -36,8 +37,7 @@ jointCoordinateSet.get(5).setRange([-1, 1])
 
 osimModel.addBody(block);
 
-osimModel.print("tug_of_war02.osim")
-
+#Now setup attributes for the two muscles
 maxIsometricForce = 1000.0
 optimalFiberLength = 0.1
 tendonSlackLength = 0.2
@@ -54,7 +54,7 @@ muscle1.setPennationAngleAtOptimalFiberLength(pennationAngle)
 # Path for muscle 1
 muscle1.addNewPathPoint("muscle1-point1", ground, modeling.ArrayDouble.createVec3([0.0,0.05,-0.35]))
 muscle1.addNewPathPoint("muscle1-point2", block, modeling.ArrayDouble.createVec3([0.0,0.0,-0.05]))
-# Add muscle1 to model as Force
+
 osimModel.addForce(muscle1);
 
 # Repeat for Muscle 2
@@ -68,7 +68,16 @@ muscle2.setPennationAngleAtOptimalFiberLength(pennationAngle)
 muscle2.addNewPathPoint("muscle2-point1", ground, modeling.ArrayDouble.createVec3([0.0,0.05,0.35]))
 muscle2.addNewPathPoint("muscle2-point2", block, modeling.ArrayDouble.createVec3([0.0,0.0,0.05]))
 
-# Add the second muscle to the model
-osimModel.addForce(muscle2);
+# Add the two muscles (as forces) to the model
+osimModel.addForce(muscle2)
 
-osimModel.print("tug_of_war_muscles.osim")
+osimModel.print("tug-of-war.osim");
+
+#Add model to GUI
+view.gui.addModel("tug-of-war.osim")
+
+#Create object that will run the ForwardTool with all default settings
+guiTool = tools.ForwardToolModel(view.gui.getCurrentModel())
+
+#Run tool in background thread updating the GUI
+guiTool.execute()

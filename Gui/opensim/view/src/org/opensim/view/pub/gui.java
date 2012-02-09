@@ -4,6 +4,8 @@
  */
 package org.opensim.view.pub;
 
+import java.io.IOException;
+import org.openide.util.Exceptions;
 import org.opensim.modeling.Coordinate;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
@@ -59,5 +61,14 @@ public final class gui {
     static public void setCoordinate(Coordinate coordinate, double newValue){
         getModelState(coordinate.getModel()).setValue(coordinate, newValue);
         ViewDB.getInstance().updateModelDisplay(coordinate.getModel());
+    }
+    static public void addModel(String fileName){
+        try {
+            Model aModel = new Model(fileName);
+            String filename = aModel.getInputFileName();
+            OpenSimDB.getInstance().addModel(aModel);
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
     }
 }
