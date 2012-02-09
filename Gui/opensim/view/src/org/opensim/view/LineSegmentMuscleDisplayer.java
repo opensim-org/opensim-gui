@@ -61,18 +61,14 @@ public class LineSegmentMuscleDisplayer {
    public LineSegmentMuscleDisplayer(Muscle act, OpenSimvtkGlyphCloud musclePointsRep, OpenSimvtkOrientedGlyphCloud muscleSegmentsRep)
     {
         OpenSimObject pathObject;
-        try {
-            pathObject = act.getPropertySet().get("GeometryPath").getValueObj();
-            this.geomPath = GeometryPath.safeDownCast(pathObject);
-            this.act = act;
-            this.musclePointsRep = musclePointsRep;
-            this.muscleSegmentsRep = muscleSegmentsRep;
-            openSimContext = OpenSimDB.getInstance().getContext(act.getModel());
-            muscleColoringFunction = new MuscleNoColoringFunction(openSimContext);
-            defaultColoringFunction = new MuscleColorByActivationFunction(openSimContext);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        pathObject = act.getGeometryPath();
+        this.geomPath = GeometryPath.safeDownCast(pathObject);
+        this.act = act;
+        this.musclePointsRep = musclePointsRep;
+        this.muscleSegmentsRep = muscleSegmentsRep;
+        openSimContext = OpenSimDB.getInstance().getContext(act.getModel());
+        muscleColoringFunction = new MuscleNoColoringFunction(openSimContext);
+        defaultColoringFunction = new MuscleColorByActivationFunction(openSimContext);
     }
 
    public void setApplyColoringFunction(boolean enabled) {
