@@ -84,7 +84,7 @@ public class OpenSimObjectNode extends OpenSimNode {
           
          // If this is a rigid body, open the easy-to-use rigid body property editor (also provides the older table version). 
          // Appearance panel allows user to show/hide the body.
-         if( this instanceof OneBodyNode )
+         if( this instanceof OneBodyNode ) // this instanceof OneJointNode
          {
             ModelWindowVTKTopComponent ownerWindow = ViewDB.getInstance().getCurrentModelWindow();
             if(      this instanceof OneBodyNode  ) LSJava.LSPropertyEditors.LSPropertyEditorRigidBody.NewLSPropertyEditorRigidBody(  (OneBodyNode)this, ownerWindow );
