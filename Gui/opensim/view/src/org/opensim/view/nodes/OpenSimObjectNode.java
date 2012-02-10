@@ -45,6 +45,7 @@ import org.opensim.view.ObjectDisplayShowAction;
 import org.opensim.view.ObjectGenericReviewAction;
 import org.opensim.view.pub.ViewDB;
 import org.opensim.view.ModelWindowVTKTopComponent;
+import LSJava.LSPropertyEditors.LSPropertyEditorJoint;
 
 /**
  *
@@ -86,7 +87,8 @@ public class OpenSimObjectNode extends OpenSimNode {
          if( this instanceof OneBodyNode )
          {
             ModelWindowVTKTopComponent ownerWindow = ViewDB.getInstance().getCurrentModelWindow();
-            new LSJava.LSPropertyEditors.LSPropertyEditorRigidBody( (OneBodyNode)this, ownerWindow );
+            if(      this instanceof OneBodyNode  ) LSJava.LSPropertyEditors.LSPropertyEditorRigidBody.NewLSPropertyEditorRigidBody(  (OneBodyNode)this, ownerWindow );
+            else if( this instanceof OneJointNode ) new LSJava.LSPropertyEditors.LSPropertyEditorJoint(     (OneJointNode)this, ownerWindow );
             return null;
          }
          
