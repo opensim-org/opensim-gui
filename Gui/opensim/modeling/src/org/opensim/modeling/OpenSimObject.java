@@ -74,16 +74,12 @@ public class OpenSimObject {
     this(opensimModelJNI.new_OpenSimObject__SWIG_2(aFileName), true);
   }
 
-  public OpenSimObject(SWIGTYPE_p_OpenSim__XMLDocument aDocument) {
-    this(opensimModelJNI.new_OpenSimObject__SWIG_3(SWIGTYPE_p_OpenSim__XMLDocument.getCPtr(aDocument)), true);
-  }
-
   public OpenSimObject(OpenSimObject aObject) {
-    this(opensimModelJNI.new_OpenSimObject__SWIG_4(OpenSimObject.getCPtr(aObject), aObject), true);
+    this(opensimModelJNI.new_OpenSimObject__SWIG_3(OpenSimObject.getCPtr(aObject), aObject), true);
   }
 
-  public OpenSimObject(SWIGTYPE_p_SimTK__Xml__Element aNode) {
-    this(opensimModelJNI.new_OpenSimObject__SWIG_5(SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode)), true);
+  public OpenSimObject(SWIGTYPE_p_SimTK__Xml__Element aElement) {
+    this(opensimModelJNI.new_OpenSimObject__SWIG_4(SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aElement)), true);
   }
 
   public OpenSimObject copy() {
@@ -132,6 +128,22 @@ public class OpenSimObject {
 
   public String getDescription() {
     return opensimModelJNI.OpenSimObject_getDescription(swigCPtr, this);
+  }
+
+  public String getAuthors() {
+    return opensimModelJNI.OpenSimObject_getAuthors(swigCPtr, this);
+  }
+
+  public void setAuthors(String aAuthors) {
+    opensimModelJNI.OpenSimObject_setAuthors(swigCPtr, this, aAuthors);
+  }
+
+  public String getReferences() {
+    return opensimModelJNI.OpenSimObject_getReferences(swigCPtr, this);
+  }
+
+  public void setReferences(String aReferences) {
+    opensimModelJNI.OpenSimObject_setReferences(swigCPtr, this, aReferences);
   }
 
   public String toString() {

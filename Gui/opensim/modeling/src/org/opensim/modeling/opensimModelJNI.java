@@ -223,13 +223,12 @@ public class opensimModelJNI {
   public final static native long PropertySet_getGroupContaining(long jarg1, PropertySet jarg1_, long jarg2, Property jarg2_);
   public final static native int PropertySet_getGroupIndexContaining(long jarg1, PropertySet jarg1_, long jarg2, Property jarg2_);
   public final static native String ObjectDEFAULT_NAME_get();
-  public final static native void delete_OpenSimObject(long jarg1);
   public final static native long new_OpenSimObject__SWIG_0();
   public final static native long new_OpenSimObject__SWIG_1(String jarg1, boolean jarg2) throws java.io.IOException;
   public final static native long new_OpenSimObject__SWIG_2(String jarg1) throws java.io.IOException;
-  public final static native long new_OpenSimObject__SWIG_3(long jarg1);
-  public final static native long new_OpenSimObject__SWIG_4(long jarg1, OpenSimObject jarg1_);
-  public final static native long new_OpenSimObject__SWIG_5(long jarg1);
+  public final static native long new_OpenSimObject__SWIG_3(long jarg1, OpenSimObject jarg1_);
+  public final static native long new_OpenSimObject__SWIG_4(long jarg1);
+  public final static native void delete_OpenSimObject(long jarg1);
   public final static native long OpenSimObject_copy(long jarg1, OpenSimObject jarg1_);
   public final static native long OpenSimObject_SafeCopy(long jarg1, OpenSimObject jarg1_);
   public final static native long OpenSimObject_getDisplayer(long jarg1, OpenSimObject jarg1_);
@@ -241,6 +240,10 @@ public class opensimModelJNI {
   public final static native String OpenSimObject_getName(long jarg1, OpenSimObject jarg1_);
   public final static native void OpenSimObject_setDescription(long jarg1, OpenSimObject jarg1_, String jarg2);
   public final static native String OpenSimObject_getDescription(long jarg1, OpenSimObject jarg1_);
+  public final static native String OpenSimObject_getAuthors(long jarg1, OpenSimObject jarg1_);
+  public final static native void OpenSimObject_setAuthors(long jarg1, OpenSimObject jarg1_, String jarg2);
+  public final static native String OpenSimObject_getReferences(long jarg1, OpenSimObject jarg1_);
+  public final static native void OpenSimObject_setReferences(long jarg1, OpenSimObject jarg1_, String jarg2);
   public final static native String OpenSimObject_toString(long jarg1, OpenSimObject jarg1_);
   public final static native long OpenSimObject_getPropertySet(long jarg1, OpenSimObject jarg1_);
   public final static native void OpenSimObject_RegisterType(long jarg1, OpenSimObject jarg1_);
