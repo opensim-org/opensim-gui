@@ -40,32 +40,26 @@ public class LSWindowAdapter extends WindowAdapter
    }
 
    // Invoked when a window has been opened --------------------------------
-   public void  windowOpened( WindowEvent windowEvent )  {}
+   public void  windowOpened( WindowEvent windowEvent ) {}
 
-   // Invoked when a window is in the process of being closed --------------
+   // Invoked when a window is in the process of being closed of has been closed 
    public void  windowClosing( WindowEvent windowEvent ) { this.ProcessWindowClosedEvent(windowEvent); }
+   public void  windowClosed(  WindowEvent windowEvent ) { this.ProcessWindowClosedEvent(windowEvent); }
 
-   // Invoked when a window has been closed --------------------------------
-   public void  windowClosed( WindowEvent windowEvent)  { this.ProcessWindowClosedEvent(windowEvent); }
-
-   // Invoked when a window is iconified -----------------------------------
-   public void  windowIconified( WindowEvent windowEvent ) {}
-
-   // Invoked when a window is de-iconified --------------------------------
+   // Invoked when a window is iconified or de-iconified -------------------
+   public void  windowIconified(   WindowEvent windowEvent ) {}
    public void  windowDeiconified( WindowEvent windowEvent ) {}
 
-   // Invoked when a window is activiated ----------------------------------
-   public void  windowActivated( WindowEvent windowEvent )  {}
-
-   // Invoked when a window is de-activiated -------------------------------
+   // Invoked when a window is activiated or de-activated ------------------
+   public void  windowActivated(   WindowEvent windowEvent ) {}
    public void  windowDeactivated( WindowEvent windowEvent ) {}
    
    // ----------------------------------------------------------------------
    private void  ProcessWindowClosedEvent( WindowEvent windowEvent )  
    { 
-      // Once the window has been disposed or system exit is called, do nothing.
-      // All the resources associated with myWindow should be gone and myWindow should be null. 
-      if( myAlreadyDisposedOrExited == true )  return;
+      // Do nothing once the window has been disposed or system exit is called.
+      // All resources associated with myWindow should be gone and myWindow should be null. 
+      if( myWindow == null )  return;
       
       Object eventTarget = windowEvent.getSource();
       if( eventTarget == myWindow ) 
@@ -75,14 +69,10 @@ public class LSWindowAdapter extends WindowAdapter
             case LSWindowAdapter.DO_NOTHING_ON_CLOSE: break;
             case LSWindowAdapter.HIDE_ON_CLOSE:	      myWindow.setVisible( false ); 
 	                                              break;
-	    case LSWindowAdapter.DISPOSE_ON_CLOSE:    if( myAlreadyDisposedOrExited == false )
-						         this.DisposeWindowAndSetMyWindowToNull();
+	    case LSWindowAdapter.DISPOSE_ON_CLOSE:    this.DisposeWindowAndSetMyWindowToNull();
 	                                              break;
-	    case LSWindowAdapter.EXIT_ON_CLOSE:       if( myAlreadyDisposedOrExited == false )
-	                                              { 
-						         this.DisposeWindowAndSetMyWindowToNull();
-	                                                 LSSystem.SystemExit(0);    
-						      }
+	    case LSWindowAdapter.EXIT_ON_CLOSE:       this.DisposeWindowAndSetMyWindowToNull();
+	                                              LSSystem.SystemExit(0);    
                                                       break;
 	 }     
       }  
@@ -92,12 +82,11 @@ public class LSWindowAdapter extends WindowAdapter
    // ----------------------------------------------------------------------
    private void  DisposeWindowAndSetMyWindowToNull( )  
    { 
-      if( myAlreadyDisposedOrExited == false ) 
+      if( myWindow != null ) 
       {
          LSWindowAdapter.RemoveWindowFromArrayOfExistingWindows( myWindow );
 	 myWindow.dispose();
 	 myWindow = null;
-         myAlreadyDisposedOrExited = true; 
       }
    }
 
@@ -113,7 +102,6 @@ public class LSWindowAdapter extends WindowAdapter
    // Class variables ------------------------------------------------------
    private Window   myWindow;
    private int      myWhatToDoWhenWindowCloses;
-   private boolean  myAlreadyDisposedOrExited;
 
    private static final LSArrayList  myArrayListOfExistingWindows = new LSArrayList( 30 );
 
