@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------
 // File:     LSPropertyEditorTabbedAbstract.java
 // Class:    LSPropertyEditorTabbedAbstract
-// Parents:  LSDialog
+// Parents:  LSDialog -> Dialog -> Window -> Container -> Component -> Object
 // Purpose:  Abstract class containing generic methods for property editing.
 // Authors:  Paul Mitiguy, 2011-2012.   
 //--------------------------------------------------------------------------
@@ -21,6 +21,8 @@ package LSJava.LSPropertyEditors;
 import  LSJava.LSUtility.*;
 import  LSJava.LSComponents.*;
 import  java.awt.*; 
+import  java.awt.event.WindowEvent;
+import  java.awt.event.WindowListener;
 import  javax.swing.JTabbedPane; 
 import  javax.swing.ImageIcon; 
 import  javax.swing.JColorChooser;
@@ -30,21 +32,16 @@ import  javax.swing.event.ChangeEvent;
 import  org.opensim.view.ModelWindowVTKTopComponent;
 import  org.opensim.view.editors.ObjectEditDialogMaker;
 import  org.opensim.view.nodes.OpenSimObjectNode;
-import  org.opensim.view.nodes.OpenSimNode;
 import  org.opensim.view.ObjectDisplayColorAction;
 import  org.opensim.view.ObjectDisplayShowHideBaseAction;
-import  org.opensim.view.ExplorerTopComponent;
 import  org.opensim.view.pub.ViewDB;
 import  org.opensim.utils.TheApp;
 
 import  org.opensim.modeling.OpenSimObject;
 
 
-
-
-
 //-----------------------------------------------------------------------------
-public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements ChangeListener   
+public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements ChangeListener
 { 
    // Constructor ----------------------------------------------------------------
    protected  LSPropertyEditorTabbedAbstract( OpenSimObject openSimObjectToConstructorShouldNotBeNull, OpenSimObjectNode openSimObjectNodeToConstructorMayBeNull, ModelWindowVTKTopComponent ownerWindowPassedToConstructor, String filenameForDialogIconImage, String nameOfTypeOfObjectEgRigidBodyOrJoint, int xNumberOfPixelsOfTabbedPaneMin, int yNumberOfPixelsOfTabbedPaneMin )  
@@ -83,21 +80,30 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
       // Default location to issue warning messages.
       LSMessageDialog.SetCurrentWindowToIssueMessages( (Window)this );
 
-      // Add a listener to hear when the tabs change. 
-      myJTabbedPane.addChangeListener( this );
+      // Add a listener to hear when the tabs change.
+      //----------------------------------------------
+      ChangeListener changeListener = new ChangeListener() 
+      {
+         public void  stateChanged( ChangeEvent changeEvent ) 
+	 {
+            Object eventTarget = changeEvent.getSource();
+            if( eventTarget == myJTabbedPane )
+            {  
+                // At construction, myStateChangeCalledByUserChangingPanesNotClassConstructor = false;
+                // First time stateChanged is called is when class is initially constructed.
+                if( myStateChangeCalledByUserChangingPanesNotClassConstructor == true ) SetPriorUserSelectedTabbedPaneIndexVirtualFunction(); 
+                else myStateChangeCalledByUserChangingPanesNotClassConstructor = true; 
+            }
+         }
+      };
+      myJTabbedPane.addChangeListener( changeListener );
+
    } 
    
 
    //----------------------------------------------------------------------------- 
-   public void stateChanged( ChangeEvent changeEvent )  
-   { 
-       if( changeEvent.getSource() == myJTabbedPane )
-       {  
-           // First time stateChanged is called is when class is initially constructed.
-           if( myStateChangeCalledByUserChangingPanesNotClassConstructor ) this.SetPriorUserSelectedTabbedPaneIndexVirtualFunction(); 
-           else myStateChangeCalledByUserChangingPanesNotClassConstructor = true; 
-       }
-   }
+   private LSPropertyEditorRigidBody  GetThisAsPropertyEditorRigidBodyElseNull( )  { return this instanceof LSPropertyEditorRigidBody ? (LSPropertyEditorRigidBody)this : null; }
+   private LSPropertyEditorJoint      GetThisAsPropertyEditorJointElseNull( )      { return this instanceof LSPropertyEditorJoint     ?     (LSPropertyEditorJoint)this : null; }
 
 
    //-----------------------------------------------------------------------------
@@ -134,12 +140,20 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
    }
 
    //-------------------------------------------------------------------------
-   protected void  SetObjectOpacity( int newOpacityRangeFrom0To100 ) 
+   protected void  SetObjectOpacityWithIntegerFrom0To100( int newOpacityRangeFrom0To100 ) 
    {
       if(      newOpacityRangeFrom0To100 > 100 ) newOpacityRangeFrom0To100 = 100; 
       else if( newOpacityRangeFrom0To100 < 0   ) newOpacityRangeFrom0To100 = 0; 
       double newOpacityRangeFrom0To1 = ((double)newOpacityRangeFrom0To100) / 100.0;
       ViewDB.setObjectOpacity( this.GetAssociatedOpenSimObject(), newOpacityRangeFrom0To1 );
+      
+      // Maybe call sub-class to show the object if currently hidden.
+      LSPropertyEditorRigidBody propertyEditorRigidBody = this.GetThisAsPropertyEditorRigidBodyElseNull();
+      if(  propertyEditorRigidBody != null )
+      {
+         boolean shouldShowObject = newOpacityRangeFrom0To100 > 0; 
+         propertyEditorRigidBody.ProcessEventHideOrShow( shouldShowObject, false, true, false );
+      }
    }
    
  
@@ -180,11 +194,19 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
 
 
    //-------------------------------------------------------------------------
-   protected static void  ChangeObjectColor( OpenSimObjectNode associatedOpenSimObjectNodeOrNull, Color newColor )
+   private void  ChangeObjectColor( Color newColor )
    {
-      if( newColor == null ) return;
-      if( associatedOpenSimObjectNodeOrNull != null ) ObjectDisplayColorAction.ChangeUserSelectedNodeColor( associatedOpenSimObjectNodeOrNull, newColor, true );
-      else                                            ObjectDisplayColorAction.ChangeUserSelectedNodesColor( newColor );
+      if( newColor != null ) 
+      {
+         OpenSimObjectNode associatedOpenSimObjectNodeOrNull = this.GetAssociatedOpenSimObjectNodeOrNull();
+         if( associatedOpenSimObjectNodeOrNull != null ) ObjectDisplayColorAction.ChangeUserSelectedNodeColor( associatedOpenSimObjectNodeOrNull, newColor, true );
+         else                                            ObjectDisplayColorAction.ChangeUserSelectedNodesColor( newColor );
+
+         // Maybe call sub-class to show the object if currently hidden.
+         LSPropertyEditorRigidBody propertyEditorRigidBody = this.GetThisAsPropertyEditorRigidBodyElseNull();
+         if( propertyEditorRigidBody != null )
+            propertyEditorRigidBody.ProcessEventHideOrShow( true, false, false, true );
+      }
    }
 
    
@@ -201,7 +223,7 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
          Color initialColorInDialog = new Color( currentRed, currentGreen, currentBlue );
          String titleOfColorDialogBox = LSString.StringConcatenateWithSpacesBetweenIfNotNull( "Color of", myNameOfTypeOfObjectEgRigidBodyOrJoint, this.GetOpenSimObjectName() );
          Color newColor = JColorChooser.showDialog( this, titleOfColorDialogBox, initialColorInDialog );
-         LSPropertyEditorTabbedAbstract.ChangeObjectColor( associatedOpenSimObjectNodeOrNull, newColor );
+         this.ChangeObjectColor( newColor );
       }
    }
     
@@ -224,6 +246,10 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
    }
 
 
+   //-------------------------------------------------------------------------
+   protected int  IsObjectCurrentlyHidden0Shown1Mixed2( )  { return ViewDB.getInstance().getDisplayStatus( this.GetAssociatedOpenSimObject() ); }
+
+
    //-----------------------------------------------------------------------------
    protected void  ShowOrHideObject( boolean showOrHide )
    {
@@ -232,24 +258,55 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
          ObjectDisplayShowHideBaseAction.ApplyOperationToNodeWithShowHide( associatedOpenSimObjectNodeOrNull, showOrHide, true ); 
    }
 
-
    //-----------------------------------------------------------------------------
    // When this property editor is re-displayed, show tab that was last viewed by the user.
    private   int            GetNumberOfTabbedPaneTabs( )                    { return myJTabbedPane == null ?  0 : myJTabbedPane.getTabCount(); }
    private   boolean        IsTabbedPaneIndexInRange( int tabIndex )        { return myJTabbedPane == null ? false : tabIndex < this.GetNumberOfTabbedPaneTabs(); }
    protected int            GetSelectedTabbedPaneIndex( )                   { return myJTabbedPane == null ? -1 : myJTabbedPane.getSelectedIndex(); }
    private   boolean        SetSelectedTabbedPaneFromIndex( int tabIndex )  { boolean okIndex = this.IsTabbedPaneIndexInRange(tabIndex);  if(okIndex) myJTabbedPane.setSelectedIndex(tabIndex);  return okIndex; } 
-   protected boolean        SetSelectedTabbedPaneFromPriorUserSelection( )  { return this.SetSelectedTabbedPaneFromIndex( this.GetPriorUserSelectedTabbedPaneIndexVirtualFunction() ); } 
+   protected boolean        SetSelectedTabbedPaneFromPriorUserSelection( )  
+   { 
+       int priorTabIndex = this.GetPriorUserSelectedTabbedPaneIndexVirtualFunction();
+       return this.SetSelectedTabbedPaneFromIndex( priorTabIndex ); 
+   } 
    protected abstract int   GetPriorUserSelectedTabbedPaneIndexVirtualFunction();
    protected abstract void  SetPriorUserSelectedTabbedPaneIndexVirtualFunction();
-   private   boolean        myStateChangeCalledByUserChangingPanesNotClassConstructor = false;
+
+
+   //-----------------------------------------------------------------------------
+   private static LSPropertyEditorTabbedAbstract  IsExistingPropertyEditorForOpenSimObject( OpenSimObject openSimObjectToFind )  
+   { 
+      int numberOfExistingWindows = LSWindowAdapter.GetNumberOfExistingWindows();
+      for( int i=0;  i < numberOfExistingWindows;  i++ )
+      {
+         Window wi = LSWindowAdapter.GetExistingWindowOrNull( i );
+	 if( wi != null && wi instanceof LSPropertyEditorTabbedAbstract )
+	 {
+            LSPropertyEditorTabbedAbstract propertyEditori = (LSPropertyEditorTabbedAbstract)wi;
+	    OpenSimObject openSimObjecti = propertyEditori.GetAssociatedOpenSimObject();
+	    if( openSimObjectToFind == openSimObjecti ) return propertyEditori;
+	 } 
+      }
+      return null;
+   }    
+
+   //-----------------------------------------------------------------------------
+   protected static LSPropertyEditorTabbedAbstract  IfIsExistingPropertyEditorForOpenSimObjectPushToFront( OpenSimObject openSimObjectToFind )  
+   { 
+      LSPropertyEditorTabbedAbstract propertyEditori =  LSPropertyEditorTabbedAbstract.IsExistingPropertyEditorForOpenSimObject( openSimObjectToFind );
+      if( propertyEditori != null ) propertyEditori.SetDialogVisible( true );
+      return propertyEditori;
+   }    
+
 
    //-----------------------------------------------------------------------------
    // Class data
    private   LSPropertyTalkToSimbody	 myPropertyTalkToSimbody;
    private   String                      myNameOfTypeOfObjectEgRigidBodyOrJoint;
    private   ModelWindowVTKTopComponent  myOpenSimModelWindowVTKTopComponentOwnerWindow;
+   private   boolean                     myStateChangeCalledByUserChangingPanesNotClassConstructor = false;
    protected JTabbedPane                 myJTabbedPane; 
+
 }
 
 

@@ -181,7 +181,7 @@ public class OpenSimCanvas extends OpenSimBaseCanvas implements MouseWheelListen
        // If this is a rigid body, open the easy-to-use rigid body property editor (also provides the older table version).
        Body bodyThatTalksToCpp = (osimObject == null) ? null : Body.safeDownCast(osimObject);
        if( bodyThatTalksToCpp != null ) 
-           new LSJava.LSPropertyEditors.LSPropertyEditorRigidBody( osimObject, null, ownerWindow );     
+           LSJava.LSPropertyEditors.LSPropertyEditorRigidBody.NewLSPropertyEditorRigidBody( osimObject, null, ownerWindow );     
        else{
           ObjectEditDialogMaker editorDialog = new ObjectEditDialogMaker( osimObject, ownerWindow );
           editorDialog.process();

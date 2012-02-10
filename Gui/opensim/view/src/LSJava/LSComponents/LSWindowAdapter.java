@@ -21,37 +21,104 @@ package LSJava.LSComponents;
 import  LSJava.LSUtility.*;
 import  java.awt.*;
 import  java.awt.event.*;
+import  javax.swing.WindowConstants;
 
 
 //--------------------------------------------------------------------------
 public class LSWindowAdapter extends WindowAdapter
 {
    // Constructor ----------------------------------------------------------
-   public LSWindowAdapter( Window window, boolean exitOnWindowClose )  { myWindow = window;   myExitOnWindowClose = exitOnWindowClose; }
+   public LSWindowAdapter( Window window, int whatToDoWhenWindowCloses )  
+   { 
+      if( window != null )
+      {
+         myWindow = window;   
+         myWhatToDoWhenWindowCloses = whatToDoWhenWindowCloses; 
+         window.addWindowListener( this );
+	 LSWindowAdapter.AddToArrayOfExistingWindowsIfNotExists( window );
+      }
+   }
 
    // Invoked when a window has been opened --------------------------------
-   public void windowOpened(WindowEvent e)  {}
+   public void  windowOpened( WindowEvent windowEvent )  {}
 
    // Invoked when a window is in the process of being closed --------------
-   public void windowClosing( WindowEvent windowEvent )                { if( myExitOnWindowClose == true ) LSSystem.SystemExit(0);  else myWindow.dispose(); }
+   public void  windowClosing( WindowEvent windowEvent ) { this.ProcessWindowClosedEvent(windowEvent); }
 
    // Invoked when a window has been closed --------------------------------
-   public void windowClosed(WindowEvent e)  {}
+   public void  windowClosed( WindowEvent windowEvent)  { this.ProcessWindowClosedEvent(windowEvent); }
 
    // Invoked when a window is iconified -----------------------------------
-   public void windowIconified(WindowEvent e) {}
+   public void  windowIconified( WindowEvent windowEvent ) {}
 
    // Invoked when a window is de-iconified --------------------------------
-   public void windowDeiconified(WindowEvent e) {}
+   public void  windowDeiconified( WindowEvent windowEvent ) {}
 
    // Invoked when a window is activiated ----------------------------------
-   public void windowActivated(WindowEvent e)  {}
+   public void  windowActivated( WindowEvent windowEvent )  {}
 
    // Invoked when a window is de-activiated -------------------------------
-   public void windowDeactivated(WindowEvent e) {}
+   public void  windowDeactivated( WindowEvent windowEvent ) {}
+   
+   // ----------------------------------------------------------------------
+   private void  ProcessWindowClosedEvent( WindowEvent windowEvent )  
+   { 
+      // Once the window has been disposed or system exit is called, do nothing.
+      // All the resources associated with myWindow should be gone and myWindow should be null. 
+      if( myAlreadyDisposedOrExited == true )  return;
+      
+      Object eventTarget = windowEvent.getSource();
+      if( eventTarget == myWindow ) 
+      { 
+         switch( myWhatToDoWhenWindowCloses )
+         {
+            case LSWindowAdapter.DO_NOTHING_ON_CLOSE: break;
+            case LSWindowAdapter.HIDE_ON_CLOSE:	      myWindow.setVisible( false ); 
+	                                              break;
+	    case LSWindowAdapter.DISPOSE_ON_CLOSE:    if( myAlreadyDisposedOrExited == false )
+						         this.DisposeWindowAndSetMyWindowToNull();
+	                                              break;
+	    case LSWindowAdapter.EXIT_ON_CLOSE:       if( myAlreadyDisposedOrExited == false )
+	                                              { 
+						         this.DisposeWindowAndSetMyWindowToNull();
+	                                                 LSSystem.SystemExit(0);    
+						      }
+                                                      break;
+	 }     
+      }  
+   }
+
+
+   // ----------------------------------------------------------------------
+   private void  DisposeWindowAndSetMyWindowToNull( )  
+   { 
+      if( myAlreadyDisposedOrExited == false ) 
+      {
+         LSWindowAdapter.RemoveWindowFromArrayOfExistingWindows( myWindow );
+	 myWindow.dispose();
+	 myWindow = null;
+         myAlreadyDisposedOrExited = true; 
+      }
+   }
+
+
+
+   //-----------------------------------------------------------------------------
+   public static int     GetNumberOfExistingWindows( )                       { return myArrayListOfExistingWindows.GetSizeOfArrayList(); }
+   public static Window  GetExistingWindowOrNull( int i )                    { Object x = myArrayListOfExistingWindows.GetObjectAtIndex(i);  return x==null ? null : (Window)x; }
+   public static void    AddToArrayOfExistingWindowsIfNotExists( Window w )  { myArrayListOfExistingWindows.AddObjectToArrayIfNotExistsAndNotNull( w ); }
+   public static void 	 RemoveWindowFromArrayOfExistingWindows( Window w )  { myArrayListOfExistingWindows.RemoveAllOccurencesOfObject( w ); }
 
 
    // Class variables ------------------------------------------------------
    private Window   myWindow;
-   private boolean  myExitOnWindowClose;
+   private int      myWhatToDoWhenWindowCloses;
+   private boolean  myAlreadyDisposedOrExited;
+
+   private static final LSArrayList  myArrayListOfExistingWindows = new LSArrayList( 30 );
+
+   public final static int  DO_NOTHING_ON_CLOSE = WindowConstants.DO_NOTHING_ON_CLOSE;  // Usually defined as 0 in Java.
+   public final static int  HIDE_ON_CLOSE       = WindowConstants.HIDE_ON_CLOSE;        // Usually defined as 1 in Java.
+   public final static int  DISPOSE_ON_CLOSE    = WindowConstants.DISPOSE_ON_CLOSE;     // Usually defined as 2 in Java.
+   public final static int  EXIT_ON_CLOSE       = WindowConstants.EXIT_ON_CLOSE;        // Usually defined as 3 in Java.
 }

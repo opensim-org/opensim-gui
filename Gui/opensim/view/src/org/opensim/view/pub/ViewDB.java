@@ -1210,7 +1210,7 @@ public final class ViewDB extends Observable implements Observer {
    /**
     * Return a flag indicating if an object is displayed or not
     **/
-   public int getDisplayStatus(OpenSimObject openSimObject) {
+   public static int getDisplayStatus(OpenSimObject openSimObject) {
       int visible = 0;
       ObjectGroup group = ObjectGroup.safeDownCast(openSimObject);
       if (group != null) {

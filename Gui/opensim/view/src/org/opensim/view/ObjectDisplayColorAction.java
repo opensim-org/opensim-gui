@@ -91,6 +91,13 @@ public final class ObjectDisplayColorAction extends CallableSystemAction {
                 ((ColorableInterface)objectNode).setColor(new Color((float)newColorComponents[0], 
                         (float)newColorComponents[1], (float)newColorComponents[2]));
         }
+        
+        // If objectNode is OneBodyNode, do not change color of center of mass.
+        if( objectNode instanceof OneBodyNode )
+        {
+           BodyDisplayer rep = BodyToggleFrameAction.GetBodyDisplayerForBody( obj );  
+           rep.SetCMSphereColorToGreen();
+        }
     }
     
     // Make it available only if selected objects have representation and belong to same model

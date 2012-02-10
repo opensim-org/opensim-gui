@@ -2,6 +2,7 @@
 // File:     LSDialog.java
 // Class:    LSDialog
 // Parents:  Dialog -> Window -> Container -> Component -> Object
+//           Has a WindowAdapter that acts as a WindowListener.
 // Purpose:  Holds generic data and methods for a dialog box
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).
 //--------------------------------------------------------------------------
@@ -20,6 +21,7 @@
 package LSJava.LSComponents;
 import  java.awt.*;
 import  java.awt.event.*;
+//import  javax.swing.JDialog;
 
 
 //--------------------------------------------------------------------------
@@ -36,7 +38,7 @@ public abstract class LSDialog extends Dialog
       myContainer = new LSContainer( this );
       
       // Put in a window listener to respond to closing events, minimizing, etc.
-      super.addWindowListener( new LSWindowAdapter(this,false) );
+      myWindowAdapter = new LSWindowAdapter( this, LSWindowAdapter.DISPOSE_ON_CLOSE );
 
       this.SetDialogResizable( isResizeable );
    }
@@ -58,5 +60,6 @@ public abstract class LSDialog extends Dialog
 
 
    // Class variables --------------------------------------------------------
-   protected LSContainer  myContainer;
+   protected LSContainer     myContainer;
+   private   LSWindowAdapter myWindowAdapter;
 }

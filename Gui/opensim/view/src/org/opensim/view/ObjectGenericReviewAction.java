@@ -54,7 +54,7 @@ public final class ObjectGenericReviewAction  extends CallableSystemAction {
          
          // If osimObjectNode is a rigid body, open the easy-to-use rigid body property editor (also provides the older table version). 
          if( osimObjectNode instanceof OneBodyNode )
-           new LSJava.LSPropertyEditors.LSPropertyEditorRigidBody( (OneBodyNode)osimObjectNode, ownerWindow );
+           LSJava.LSPropertyEditors.LSPropertyEditorRigidBody.NewLSPropertyEditorRigidBody( (OneBodyNode)osimObjectNode, ownerWindow );
          
          // If osimObjectNode is a joint (connection), open the easy-to-use joint property editor (also provides the older table version). 
          else if( osimObjectNode instanceof OneJointNode )

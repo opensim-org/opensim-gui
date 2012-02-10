@@ -116,7 +116,7 @@ public class BodyDisplayer extends vtkAssembly
       comSource.SetRadius(ViewDB.getInstance().getMarkerDisplayRadius()*2);
       comMapper.SetInput(comSource.GetOutput());
       centerOfMassActor.SetMapper(comMapper);
-      centerOfMassActor.GetProperty().SetColor(0.0, 1.0, 0.0); // Green COM for now
+      this.SetCMSphereColorToGreen();
 
       //jointBFrame.GetProperty().SetLineStipplePattern(1);
       VisibleObject bodyDisplayer = body.getDisplayer();
@@ -203,7 +203,7 @@ public class BodyDisplayer extends vtkAssembly
         }
         return boneActor;
     }
-*/
+*/          
     public vtkActor getBodyAxes() {
         return bodyAxes;
     }
@@ -465,16 +465,17 @@ public class BodyDisplayer extends vtkAssembly
         }
     }
 
-    public boolean isShowCOM() {
-        return showCOM;
-    }
+    public boolean isShowCOM() { return showCOM; }
 
-    public void setShowCOM(boolean showCOM) {
-        if (showCOM) AddPart(centerOfMassActor);
+    public void setShowCOM( boolean showCM ) {
+        if( showCM ) { AddPart(centerOfMassActor);  this.SetCMSphereColorToGreen(); }
         else RemovePart(centerOfMassActor);
-        this.showCOM = showCOM;
+        this.showCOM = showCM;
     }
-
+    
+    //--------------------------------------------------------------------------
+    public void  SetCMSphereColorToGreen( ) { centerOfMassActor.GetProperty().SetColor( 0.0, 1.0, 0.0 ); } // Green COM for now 
+    
     /**
      * @return the bodyBounds
      */

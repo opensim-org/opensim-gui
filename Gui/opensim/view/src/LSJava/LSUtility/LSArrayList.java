@@ -43,9 +43,11 @@ public class LSArrayList extends ArrayList
 
 
    //-------------------------------------------------------------------------
+   // public void     Clear()                                                          { super.clear(); }
    public boolean     IsIndexInRange( int i )                                          { return i >= 0  &&  i < this.GetSizeOfArrayList(); }
    public void        AddObjectToArray( Object x )                                     { super.add(x); }
    public void        AddObjectToArrayIfNotNull( Object x )                            { if( x != null ) this.AddObjectToArray(x); }
+   public void        AddObjectToArrayIfNotExistsAndNotNull( Object x )                { if( !this.IsObjectContainedInArray(x) ) this.AddObjectToArrayIfNotNull(x); }
    public void        AddToLocationIfObjectNotNull( int location, Object x )           { if( x != null ) super.add(location,x); }
    public boolean     IsObjectContainedInArray( Object x )                             { return super.contains(x); }
    public void        EnsureArrayCapacity( int newCapacity )                           { super.ensureCapacity( newCapacity ); }
@@ -54,15 +56,11 @@ public class LSArrayList extends ArrayList
    public Object      GetObjectAtIndex( int i )                                        { return this.IsIndexInRange(i) ? super.get(i) : null; }
    public Object      GetObjectAtIndexOrReturnOther( int i, Object returnIfNotFound )  { Object x = GetObjectAtIndex(i);  return x==null ? returnIfNotFound : x; }
    public void        SetObjectAtIndex( int i, Object x )                              { if( this.IsIndexInRange(i) )  super.set(i,x); }
-   public void        RemoveObjectAtIndex( int i )                                     { if( this.IsIndexInRange(i) )  super.remove(i); }
-   // public void     Clear()                                                          { super.clear(); }
-
-   //-------------------------------------------------------------------------
-
-   //-------------------------------------------------------------------------
-   // Returns index of object if it is found, otherwise returns -1
-   //-------------------------------------------------------------------------
-   public int  GetFirstIndexOfObject( Object x )  { return super.indexOf(x); }
-   public int  GetLastIndexOfObject( Object x )   { return super.lastIndexOf(x); }
+   public boolean     RemoveObjectAtIndex( int i )                                     { if( this.IsIndexInRange(i) )  { super.remove(i); return true; }  return false; }
+   public boolean     RemoveFirstOccurenceOfObject( Object x )                         { int index = this.GetFirstIndexOfObjectElseNegative1(x);  return index >= 0 ? this.RemoveObjectAtIndex(index) : false; }
+   public void        RemoveAllOccurencesOfObject( Object x )                          { while( this.RemoveFirstOccurenceOfObject(x) ) {} }
+   public int         GetFirstIndexOfObjectElseNegative1( Object x )                   { return super.indexOf(x); }
+   public int         GetLastIndexOfObjectElseNegative1( Object x )                    { return super.lastIndexOf(x); }
+   public Object      GetObjectIfContainedInArrayOtherwiseNull( Object x )             { return this.GetFirstIndexOfObjectElseNegative1(x) >= 0 ? x : null; }
 }
 

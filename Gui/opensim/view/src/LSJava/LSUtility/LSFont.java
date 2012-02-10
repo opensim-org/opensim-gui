@@ -264,9 +264,9 @@ public class LSFont extends Font
 
    // The default font size is 14 because 13 is too small, 16 is better for some dialogue boxes,
    // but messes up the dialogue box displayed after user clicks the Function button.
-   public  final static String   myDefaultFontFamilyName = "Serif";       // MGPlot="Serif",     OpenSim="Tahoma"
-   public  final static int      myDefaultFontStyle      = LSFont.BOLD;   // MGPlot=LSFont.BOLD, OpenSim=LSFont.PLAIN
-   public  final static int      myDefaultFontSize       = 14;            // MGPlot=14,          OpenSim=12
+   public final static String   myDefaultFontFamilyName = "Serif";       // MGPlot="Serif",     OpenSim="Tahoma"
+   public final static int      myDefaultFontStyle      = LSFont.BOLD;   // MGPlot=LSFont.BOLD, OpenSim=LSFont.PLAIN
+   public final static int      myDefaultFontSize       = 14;            // MGPlot=14,          OpenSim=12
    private static LSFont myUserFont = new LSFont( myDefaultFontFamilyName, myDefaultFontStyle, myDefaultFontSize );
 
    // Available font families, styles, and sizes

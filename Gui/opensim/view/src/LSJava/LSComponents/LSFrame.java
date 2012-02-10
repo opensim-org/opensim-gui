@@ -2,6 +2,7 @@
 // File:     LSFrame.java
 // Class:    LSFrame
 // Parents:  Frame -> Window -> Container -> Component -> Object
+//           Has a WindowAdapter that acts as a WindowListener.
 // Purpose:  Holds generic data and methods for a frame (part of a frame or window)
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).
 //--------------------------------------------------------------------------
@@ -21,6 +22,7 @@ package LSJava.LSComponents;
 import  LSJava.LSUtility.*;
 import  java.awt.*;
 import  java.awt.event.*;
+//import  javax.swing.JFrame;
 
 
 //--------------------------------------------------------------------------
@@ -39,8 +41,12 @@ abstract public class LSFrame extends Frame implements ActionListener
          LSMessageDialog.SetCurrentWindowToIssueMessages( this );
 
       // Put in a window listener to respond to closing events, minimizing, etc.
-      myWindowAdapter = new LSWindowAdapter( this, exitOnWindowClose );
-      addWindowListener( myWindowAdapter );
+      myWindowAdapter = new LSWindowAdapter( this, exitOnWindowClose ? LSWindowAdapter.EXIT_ON_CLOSE : LSWindowAdapter.DISPOSE_ON_CLOSE );
+
+      // The normal default for JFrame is to just hide the window when it is closed.
+      // This behavior is overridden in here to to dispose of resources when window is closed.
+      // May override in subclasses with: DO_NOTHING_ON_CLOSE, HIDE_ON_CLOSE, DISPOSE_ON_CLOSE, EXIT_ON_CLOSE.
+      // super.setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE ); 
    }
 
 

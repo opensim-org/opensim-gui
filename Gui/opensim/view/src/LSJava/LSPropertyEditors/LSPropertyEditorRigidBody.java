@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------
 // File:     LSPropertyEditorRigidBody.java
 // Class:    LSPropertyEditorRigidBody
-// Parents:  LSDialog
+// Parents:  LSPropertyEditorTabbedAbstract -> LSDialog -> Dialog -> Window -> Container -> Component -> Object
 // Purpose:  Displays/edits properties for rigid bodies.
 // Authors:  Paul Mitiguy, 2011-2012.   
 //--------------------------------------------------------------------------
@@ -38,39 +38,48 @@ import  org.opensim.view.BodyToggleFrameAction;
 //-----------------------------------------------------------------------------
 public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract implements ActionListener, FocusListener, ItemListener, KeyListener 
 { 
-   // Constructor ---------------------------------------------------------------- 
-   public LSPropertyEditorRigidBody( OneBodyNode oneBodyNodePassedToConstructor, ModelWindowVTKTopComponent ownerWindowPassedToConstructor )  
-   { 
-       this( oneBodyNodePassedToConstructor.getOpenSimObject(), oneBodyNodePassedToConstructor, ownerWindowPassedToConstructor ); 
-   }
+   // Quasi constructor ----------------------------------------------------------
+   public static LSPropertyEditorRigidBody  NewLSPropertyEditorRigidBody( OneBodyNode oneBodyNodePassedToConstructor, ModelWindowVTKTopComponent ownerWindowPassedToConstructor )
+   {
+     return LSPropertyEditorRigidBody.NewLSPropertyEditorRigidBody( oneBodyNodePassedToConstructor.getOpenSimObject(), oneBodyNodePassedToConstructor, ownerWindowPassedToConstructor ); 
+   }  
+
+   // Quasi constructor ----------------------------------------------------------
+   public static LSPropertyEditorRigidBody  NewLSPropertyEditorRigidBody( OpenSimObject openSimObjectToConstructorShouldNotBeNull, OneBodyNode oneBodyNodeToConstructorMayBeNull, ModelWindowVTKTopComponent ownerWindowPassedToConstructor  )  
+   {
+      LSPropertyEditorTabbedAbstract propertyEditorAlreadyExists = LSPropertyEditorTabbedAbstract.IfIsExistingPropertyEditorForOpenSimObjectPushToFront( openSimObjectToConstructorShouldNotBeNull ); 
+      if( propertyEditorAlreadyExists != null )  return (LSPropertyEditorRigidBody)propertyEditorAlreadyExists;
+      return new LSPropertyEditorRigidBody( openSimObjectToConstructorShouldNotBeNull, oneBodyNodeToConstructorMayBeNull, ownerWindowPassedToConstructor );
+   }  
+
 
    // Constructor ----------------------------------------------------------------
-   public  LSPropertyEditorRigidBody( OpenSimObject openSimObjectToConstructorShouldNotBeNull, OneBodyNode oneBodyNodeToConstructorMayBeNull, ModelWindowVTKTopComponent ownerWindowPassedToConstructor  )  
+   private  LSPropertyEditorRigidBody( OpenSimObject openSimObjectToConstructorShouldNotBeNull, OneBodyNode oneBodyNodeToConstructorMayBeNull, ModelWindowVTKTopComponent ownerWindowPassedToConstructor  )  
    { 
       super( openSimObjectToConstructorShouldNotBeNull, oneBodyNodeToConstructorMayBeNull, ownerWindowPassedToConstructor, "BodyCMPicture.png", "Rigid Body", 560, 400 );  
 
-      // Add panels, choose the previously selected panel to show, and display the window. 
+      // Add panels, display the window, choose the previously selected panel to display. 
       this.AddPanelsToFrame(); 
-      super.SetSelectedTabbedPaneFromPriorUserSelection();
       this.GetDialogAsContainer().PackLocateShow();
+      super.SetSelectedTabbedPaneFromPriorUserSelection();
    } 
    
    //-------------------------------------------------------------------------
-   public void  actionPerformed( ActionEvent actionEvent )  { this.CheckActionEventTarget(     actionEvent.getSource() ); }
-   public void  focusLost(   FocusEvent focusEvent )        { this.CheckFocusLostEventTarget(   focusEvent.getSource() ); }
-   public void  focusGained( FocusEvent focusEvent )        { this.CheckFocusGainedEventTarget( focusEvent.getSource() ); } 
+   public void  actionPerformed( ActionEvent actionEvent )  { Object eventTarget = actionEvent.getSource();  this.CheckActionEventTarget(eventTarget);      }
+   public void  focusLost(   FocusEvent focusEvent )        { Object eventTarget =  focusEvent.getSource();  this.CheckFocusLostEventTarget(eventTarget);   }
+   public void  focusGained( FocusEvent focusEvent )        { Object eventTarget =  focusEvent.getSource();  this.CheckFocusGainedEventTarget(eventTarget); } 
 
    //-------------------------------------------------------------------------
    public void  itemStateChanged( ItemEvent itemEvent )     
    {
       Object eventTarget = itemEvent.getSource();
-      if(      eventTarget == myShowBodyCheckbox )            super.ShowOrHideObject( true  ); // myShowBodyCheckbox.GetCheckboxState();
-      else if( eventTarget == myHideBodyCheckbox )            super.ShowOrHideObject( false );
-      else if( eventTarget == myShowCMCheckbox ) 	      BodyToggleCOMAction.ShowCMForOneBodyNode( this.GetAssociatedOpenSimOneBodyNodeOrNull(), myShowCMCheckbox.GetCheckboxState(), true );
-      else if( eventTarget == myShowBodyAxesCheckbox )	      BodyToggleFrameAction.ShowAxesForBody( super.GetAssociatedOpenSimObject(), myShowBodyAxesCheckbox.GetCheckboxState(), true );
-      else if( eventTarget == myWireFrameCheckbox ) 	      { super.SetObjectRepresentationPointsWireFrameOrSurfaceAndSurfaceShading( 1, 0 );  super.ShowOrHideObject( true  );  myHideBodyCheckbox.SetCheckboxState(false); }
-      else if( eventTarget == mySurfaceShadedSmoothCheckbox ) { super.SetObjectRepresentationPointsWireFrameOrSurfaceAndSurfaceShading( 2, 1 );  super.ShowOrHideObject( true  );  myHideBodyCheckbox.SetCheckboxState(false); }
-   // else if( eventTarget == mySurfaceShadedFlatCheckbox )   { super.SetObjectRepresentationPointsWireFrameOrSurfaceAndSurfaceShading( 2, 0 );  super.ShowOrHideObject( true  );  myHideBodyCheckbox.SetCheckboxState(false); }
+      if(      eventTarget == myShowBodyCheckbox )            this.ProcessEventHideOrShow( true,  false, false, false ); // myShowBodyCheckbox.GetCheckboxState();
+      else if( eventTarget == myHideBodyCheckbox )            this.ProcessEventHideOrShow( false, false, false, false );  // myHideBodyCheckbox.GetCheckboxState();
+      else if( eventTarget == myShowCMCheckbox ) 	      this.ProcessEventShowCMOrShowBodyAxes( eventTarget );
+      else if( eventTarget == myShowBodyAxesCheckbox )	      this.ProcessEventShowCMOrShowBodyAxes( eventTarget );
+      else if( eventTarget == myWireFrameCheckbox ) 	      { super.SetObjectRepresentationPointsWireFrameOrSurfaceAndSurfaceShading( 1, 0 );  this.ProcessEventHideOrShow(true,false,false,false); }
+      else if( eventTarget == mySurfaceShadedSmoothCheckbox ) { super.SetObjectRepresentationPointsWireFrameOrSurfaceAndSurfaceShading( 2, 1 );  this.ProcessEventHideOrShow(true,false,false,false); }
+   // else if( eventTarget == mySurfaceShadedFlatCheckbox )   { super.SetObjectRepresentationPointsWireFrameOrSurfaceAndSurfaceShading( 2, 0 );  this.ProcessEventHideOrShow(true,false,false,false); }
    }
 
   
@@ -90,7 +99,72 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
    public void  stateChanged( ChangeEvent changeEvent ) 
    {
       Object eventTarget = changeEvent.getSource();
-      if( eventTarget == myOpacitySlider ) { if( !myOpacitySlider.getValueIsAdjusting() )  super.SetObjectOpacity( myOpacitySlider.GetSliderValueAsInteger() ); } 
+      if( eventTarget == myOpacitySlider ) { if( !myOpacitySlider.getValueIsAdjusting() )  super.SetObjectOpacityWithIntegerFrom0To100( myOpacitySlider.GetSliderValueAsInteger() ); } 
+   }
+
+
+   //-------------------------------------------------------------------------
+   private void  ProcessEventShowCMOrShowBodyAxes( Object eventTarget )
+   {
+      boolean isShow = false;
+      if( eventTarget == myShowCMCheckbox ) 
+      {	      
+	 isShow = myShowCMCheckbox.GetCheckboxState();
+         BodyToggleCOMAction.ShowCMForOneBodyNode( this.GetAssociatedOpenSimOneBodyNodeOrNull(), isShow, true );
+      }
+      else if( eventTarget == myShowBodyAxesCheckbox )	
+      {      
+	 isShow = myShowBodyAxesCheckbox.GetCheckboxState();
+         BodyToggleFrameAction.ShowAxesForBody( super.GetAssociatedOpenSimObject(), isShow, true );
+      }
+
+      // May have to do special things in order to see sub-geometry (considered a bug in the way OpenSim uses VTK now).
+      if( isShow ) this.ProcessEventHideOrShow( isShow, true, false, false );
+   }
+
+
+   //-------------------------------------------------------------------------
+   public void  ProcessEventHideOrShow( boolean isShow, boolean userClickedShowCMOrBodyAxes, boolean userChangedOpacityValue, boolean userChangedColor )
+   {
+      // Show object and any sub-object geometry.
+      super.ShowOrHideObject( isShow );
+
+      // Determine low and high value of opacity if showing CM or BodyAxes.
+      int currentValueOfOpacitySlider0To100 = myOpacitySlider.GetSliderValueAsInteger();
+      int  lowValueOfOpacityIfShowCMOrAxes = (currentValueOfOpacitySlider0To100 < 30 || currentValueOfOpacitySlider0To100 > 70) ? 30 : currentValueOfOpacitySlider0To100;
+      int highValueOfOpacityIfShowCMOrAxes = (currentValueOfOpacitySlider0To100 < 30 || currentValueOfOpacitySlider0To100 > 70) ? 70 : currentValueOfOpacitySlider0To100;
+
+      // If body is hidden, it must be shown so user can see any other geometry (considered a bug in the way OpenSim uses VTK now).
+      // If body is shown,  it must be made a little transparent to see other geometry.
+      boolean checkBoxOnForCMOrBodyAxes = myShowCMCheckbox.GetCheckboxState() || myShowBodyAxesCheckbox.GetCheckboxState();
+      boolean isShowCMOrShowBodyAxes = (isShow==false && userClickedShowCMOrBodyAxes==false) ? false : checkBoxOnForCMOrBodyAxes;
+      int opacityValue = isShow ? (isShowCMOrShowBodyAxes ? highValueOfOpacityIfShowCMOrAxes : 100) : 
+                                  (isShowCMOrShowBodyAxes ? lowValueOfOpacityIfShowCMOrAxes  : 0);
+
+      // If user just changed color and opacity is nonzero, leave opacity alone (at the current slider value).
+      if( userChangedColor && currentValueOfOpacitySlider0To100 != 0 ) opacityValue = currentValueOfOpacitySlider0To100;
+
+      // If user just changed opacity, just leave it alone.
+      // Otherwise, change the slider which should fire an event in super class and change object's opacity.
+      // If event does not occur, use  super.SetObjectOpacityWithIntegerFrom0To100( opacityValue );
+      if( userChangedOpacityValue == false ) myOpacitySlider.SetSliderValueFromInteger( opacityValue );
+      currentValueOfOpacitySlider0To100 = myOpacitySlider.GetSliderValueAsInteger();
+      
+      // If user clicked ShowCMOrBodyAxes==true, then uncheck the Hide checkbox.
+      // If user clicked wireframe or surface,   then uncheck the Hide checkbox.
+      // If user increased opacity,              then uncheck the Hide checkbox.
+      // If user changed the color,              then uncheck the Hide checkbox.
+      int objectHidden0Shown1Mixed2 = this.IsObjectCurrentlyHidden0Shown1Mixed2();
+      if( (objectHidden0Shown1Mixed2 > 0) || userClickedShowCMOrBodyAxes || userChangedColor ) // || isShow
+      {
+         myShowBodyCheckbox.SetCheckboxState( true  );  // True must be done first or else Java ignores the next statement.
+         myHideBodyCheckbox.SetCheckboxState( false );
+      }
+      else if( objectHidden0Shown1Mixed2==0 || currentValueOfOpacitySlider0To100==0 )
+      { 
+         myHideBodyCheckbox.SetCheckboxState( true  );	// True must be done first or else Java ignores the next statement.
+         myShowBodyCheckbox.SetCheckboxState( false );  
+      }
    }
 
 
@@ -173,27 +247,28 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
       new LSLabel( "Name = ", LSLabel.RIGHT, tabContainer );
       myNameTextField = new LSTextField( super.GetOpenSimObjectName(), super.GetTextFieldWidthForOpenSimObjectName(), true, tabContainer, GridBagConstraints.REMAINDER, 1, this, this, this );
       
-       // Add panel for show/hide body.
-      tabContainer.AddBlankLabelToLayout1Wide1High();
-      this.CreateShowHideBodyPanel( tabContainer );
-
       // Add show center of mass of rigid body checkbox.
       tabContainer.AddBlankLabelToLayout1Wide1High(); 
       boolean initialStateOfShowCM = BodyToggleCOMAction.IsShowCMForBody( super.GetAssociatedOpenSimObject() );
-      myShowCMCheckbox = new LSCheckbox( "Show center of mass", initialStateOfShowCM, null, tabContainer, GridBagConstraints.REMAINDER, 1, this );
+      myShowCMCheckbox = new LSCheckbox( "Show center of mass", initialStateOfShowCM, null, tabContainer, 2, 1, this );
+      // myShowCMCheckbox = new LSCheckbox( "Show center of mass", initialStateOfShowCM, null, tabContainer, GridBagConstraints.REMAINDER, 1, this );
+
+      // Add picture of center of mass.
+      JLabel labelWithPictureOfCM = LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "BodyCMPicture.png", 0, 30 );
+      tabContainer.AddComponentToLayoutRowRemainder1High( labelWithPictureOfCM );
 
       // Add show body axes checkbox.
       tabContainer.AddBlankLabelToLayout1Wide1High(); 
       boolean initialStateOfShowBodyAxes = BodyToggleFrameAction.IsShowAxesForBody( super.GetAssociatedOpenSimObject() );
-      myShowBodyAxesCheckbox = new LSCheckbox( "Show body axes (toggle)", initialStateOfShowBodyAxes, null, tabContainer, GridBagConstraints.REMAINDER, 1, this );
+      myShowBodyAxesCheckbox = new LSCheckbox( "Show body axes (toggle)", initialStateOfShowBodyAxes, null, tabContainer, 2, 1, this );
+      // myShowBodyAxesCheckbox = new LSCheckbox( "Show body axes (toggle)", initialStateOfShowBodyAxes, null, tabContainer, GridBagConstraints.REMAINDER, 1, this );
+      
+      // Add picture of XYZ Basis Vectors to right of checkbox.
+      JLabel labelWithPictureOfXYZBasisVectors = LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "XRedYYellowZGreenBasisVectors.jpg", 0, 40 );
+      tabContainer.AddComponentToLayoutRowRemainder1High( labelWithPictureOfXYZBasisVectors );
 
-      // Add panel for wireframe or surface.
-      this.CreateWireFrameOrSurfaceShadedPanel( tabContainer );
-
-      // Add opacity slider.
-      int currentValueOfOpacity = super.GetObjectOpacityFromOpenSimWithRangeFrom0To100();
-      new LSLabel( "Opacity: ", LSLabel.RIGHT, tabContainer );
-      myOpacitySlider = new LSSlider( LSSlider.HORIZONTAL, 0, 100, currentValueOfOpacity, 20, 5, tabContainer, GridBagConstraints.REMAINDER, 1, this );
+      // Add panel for wireframe/surface hide/show and translucent/opaque slider.
+      this.CreatePanelTranslucentHideToOpaqueShow( tabContainer );
 
       // Single blank line.
       tabContainer.AddBlankLabelToLayoutRowRemainder1High();
@@ -206,18 +281,47 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
 
 
    //-----------------------------------------------------------------------------
-   private void  CreateShowHideBodyPanel( LSContainer tabContainer )
+   private void  CreatePanelTranslucentHideToOpaqueShow( LSContainer addNewPanelToThisContainer ) 
    { 
-      LSPanel     panel = new LSPanel( tabContainer, GridBagConstraints.REMAINDER, 1 ); 
+      LSPanel     panel = new LSPanel( addNewPanelToThisContainer, GridBagConstraints.REMAINDER, 1 ); 
+      LSContainer panelContainer = panel.GetPanelAsContainer();
+      panelContainer.SetContainerBackgroundColor( Color.white );
+
+      // Add panel for wireframe or surface.
+      this.CreateWireFrameOrSurfaceShadedPanel( panelContainer );
+
+      // Add CheckboxGroup and panel for hide body.
+      CheckboxGroup checkboxGroupForShowHide = new CheckboxGroup();
+      this.CreateHideOrShowBodyPanels( panelContainer, checkboxGroupForShowHide, true );
+
+      // Add opacity slider.
+      int currentValueOfOpacity = super.GetObjectOpacityFromOpenSimWithRangeFrom0To100();
+      myOpacitySlider = new LSSlider( LSSlider.HORIZONTAL, 0, 100, currentValueOfOpacity, 20, 5, panelContainer, 1, 1, this );
+
+      // Add panel for show body.
+      this.CreateHideOrShowBodyPanels( panelContainer, checkboxGroupForShowHide, false );
+   } 
+
+
+   //-----------------------------------------------------------------------------
+   private void  CreateHideOrShowBodyPanels( LSContainer addNewPanelToThisContainer, CheckboxGroup checkboxGroupForShowHide, boolean isHidePanel )
+   { 
+      LSPanel     panel = new LSPanel( addNewPanelToThisContainer, (isHidePanel ? 1 : GridBagConstraints.REMAINDER), 1 ); 
       LSContainer panelContainer = panel.GetPanelAsContainer();
       panelContainer.SetContainerBackgroundColor( Color.white );
            
       // Note: Entire group is set to false, because as of now, there is no way to find out how object is currently displayed. 
-      CheckboxGroup checkboxGroup = new CheckboxGroup();
-      myShowBodyCheckbox = new LSCheckbox( "Show body", false, checkboxGroup, panelContainer, 1, 1, this ); 
-      panelContainer.AddBlankLabelToLayout1Wide1High();  
-      myHideBodyCheckbox = new LSCheckbox( "Hide body", false, checkboxGroup, panelContainer, 1, 1, this );   
-      panelContainer.AddBlankLabelToLayoutRowRemainder1High(); 
+      if( isHidePanel )
+      {
+         panelContainer.AddLabelToLayoutRowRemainder1High( "Translucent ", LSLabel.RIGHT );
+         myHideBodyCheckbox = new LSCheckbox( "Hide", false, checkboxGroupForShowHide, panelContainer, GridBagConstraints.REMAINDER, 1, this );   
+      }
+      else
+      {
+         panelContainer.AddLabelToLayoutRowRemainder1High( " Opaque", LSLabel.LEFT );
+         panelContainer.AddLabelToLayout1Wide1High( " ", LSLabel.LEFT );
+         myShowBodyCheckbox = new LSCheckbox( "Show", false, checkboxGroupForShowHide, panelContainer, GridBagConstraints.REMAINDER, 1, this ); 
+      }
    }
    
    

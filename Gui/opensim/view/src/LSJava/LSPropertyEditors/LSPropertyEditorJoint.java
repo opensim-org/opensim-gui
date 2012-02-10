@@ -18,14 +18,12 @@
 // IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //--------------------------------------------------------------------------
 package LSJava.LSPropertyEditors;
-import  LSJava.LSUtility.*;
 import  LSJava.LSComponents.*;
 import  LSJava.LSResources.*;
 import  java.awt.*; 
 import  java.awt.event.*;
-import  java.awt.image.BufferedImage; 
+import  javax.swing.event.ChangeEvent;
 import  javax.swing.JTabbedPane; 
-import  javax.swing.ImageIcon; 
 import  javax.swing.JLabel; 
 
 import  org.opensim.view.ModelWindowVTKTopComponent;
@@ -33,7 +31,6 @@ import  org.opensim.modeling.OpenSimObject;
 import  org.opensim.view.nodes.OpenSimObjectNode;
 import  org.opensim.view.nodes.OneJointNode;
 
-import  org.openide.nodes.Node;
 
 //-----------------------------------------------------------------------------
 public class LSPropertyEditorJoint extends LSPropertyEditorTabbedAbstract implements ActionListener, FocusListener, ItemListener, KeyListener 
@@ -63,10 +60,17 @@ public class LSPropertyEditorJoint extends LSPropertyEditorTabbedAbstract implem
    //-------------------------------------------------------------------------
    public void  itemStateChanged( ItemEvent itemEvent )     
    {
-      if( itemEvent.getSource() == myShowJointCheckbox ) super.ShowOrHideObject( myShowJointCheckbox.GetCheckboxState() );
+      Object eventTarget = itemEvent.getSource();
+      if( eventTarget == myShowJointCheckbox ) super.ShowOrHideObject( myShowJointCheckbox.GetCheckboxState() );
+   }
+  
+   //-------------------------------------------------------------------------
+   public void  stateChanged( ChangeEvent changeEvent ) 
+   {
+      Object eventTarget = changeEvent.getSource();
    }
 
-  
+
    //-------------------------------------------------------------------------
    public void  keyPressed( KeyEvent keyEvent )             {;}
    public void  keyReleased( KeyEvent keyEvent )            {;}
