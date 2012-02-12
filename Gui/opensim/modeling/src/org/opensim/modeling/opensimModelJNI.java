@@ -234,7 +234,6 @@ public class opensimModelJNI {
   public final static native long OpenSimObject_getDisplayer(long jarg1, OpenSimObject jarg1_);
   public final static native long OpenSimObject_updDisplayer(long jarg1, OpenSimObject jarg1_);
   public final static native boolean OpenSimObject_isEqualTo(long jarg1, OpenSimObject jarg1_, long jarg2, OpenSimObject jarg2_);
-  public final static native void OpenSimObject_setType(long jarg1, OpenSimObject jarg1_, String jarg2);
   public final static native String OpenSimObject_getType(long jarg1, OpenSimObject jarg1_);
   public final static native void OpenSimObject_setName(long jarg1, OpenSimObject jarg1_, String jarg2);
   public final static native String OpenSimObject_getName(long jarg1, OpenSimObject jarg1_);
@@ -253,12 +252,9 @@ public class opensimModelJNI {
   public final static native long OpenSimObject_makeObjectFromFile(String jarg1);
   public final static native long OpenSimObject_newInstanceOfType(String jarg1);
   public final static native void OpenSimObject_getRegisteredTypenames(long jarg1, ArrayStr jarg1_);
-  public final static native boolean OpenSimObject_isValidDefaultType(long jarg1, OpenSimObject jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native void OpenSimObject_updateFromXMLNode(long jarg1, OpenSimObject jarg1_, long jarg2, int jarg3);
   public final static native void OpenSimObject_updateFromXMLDocument(long jarg1, OpenSimObject jarg1_);
-  public final static native void OpenSimObject_updateDefaultObjectsFromXMLNode(long jarg1, OpenSimObject jarg1_);
   public final static native void OpenSimObject_updateXMLNode(long jarg1, OpenSimObject jarg1_, long jarg2);
-  public final static native void OpenSimObject_updateDefaultObjectsXMLNode(long jarg1, OpenSimObject jarg1_, long jarg2);
   public final static native boolean OpenSimObject_getInlined(long jarg1, OpenSimObject jarg1_);
   public final static native void OpenSimObject_setInlined__SWIG_0(long jarg1, OpenSimObject jarg1_, boolean jarg2, String jarg3);
   public final static native void OpenSimObject_setInlined__SWIG_1(long jarg1, OpenSimObject jarg1_, boolean jarg2);
@@ -2225,6 +2221,20 @@ public class opensimModelJNI {
   public final static native boolean ControlLinear_isA(long jarg1, ControlLinear jarg1_, String jarg2);
   public final static native long ControlLinear_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void ControlLinear_copy__SWIG_1(long jarg1, ControlLinear jarg1_, long jarg2, OpenSimObject jarg2_);
+  public final static native long new_PrescribedController__SWIG_0();
+  public final static native long new_PrescribedController__SWIG_1(long jarg1, Model jarg1_);
+  public final static native long new_PrescribedController__SWIG_2(String jarg1, boolean jarg2);
+  public final static native long new_PrescribedController__SWIG_3(String jarg1);
+  public final static native long new_PrescribedController__SWIG_4(long jarg1, PrescribedController jarg1_);
+  public final static native void delete_PrescribedController(long jarg1);
+  public final static native long PrescribedController_copy__SWIG_0(long jarg1, PrescribedController jarg1_);
+  public final static native boolean PrescribedController_isKindOf(String jarg1);
+  public final static native boolean PrescribedController_isA(long jarg1, PrescribedController jarg1_, String jarg2);
+  public final static native long PrescribedController_safeDownCast(long jarg1, OpenSimObject jarg1_);
+  public final static native void PrescribedController_copy__SWIG_1(long jarg1, PrescribedController jarg1_, long jarg2, OpenSimObject jarg2_);
+  public final static native void PrescribedController_computeControls(long jarg1, PrescribedController jarg1_, long jarg2, long jarg3);
+  public final static native void PrescribedController_prescribeControlForActuator__SWIG_0(long jarg1, PrescribedController jarg1_, int jarg2, long jarg3, Function jarg3_);
+  public final static native void PrescribedController_prescribeControlForActuator__SWIG_1(long jarg1, PrescribedController jarg1_, String jarg2, long jarg3, Function jarg3_);
   public final static native void delete_Manager(long jarg1);
   public final static native long new_Manager__SWIG_0(long jarg1, Model jarg1_, long jarg2);
   public final static native long new_Manager__SWIG_1();
@@ -4579,6 +4589,7 @@ public class opensimModelJNI {
   public final static native long ControlConstant_SWIGUpcast(long jarg1);
   public final static native long ControlLinearNode_SWIGUpcast(long jarg1);
   public final static native long ControlLinear_SWIGUpcast(long jarg1);
+  public final static native long PrescribedController_SWIGUpcast(long jarg1);
   public final static native long AbstractTool_SWIGUpcast(long jarg1);
   public final static native long Marker_SWIGUpcast(long jarg1);
   public final static native long SetMarkers_SWIGUpcast(long jarg1);
@@ -4684,20 +4695,11 @@ public class opensimModelJNI {
   public static boolean SwigDirector_AnalysisWrapper_isEqualTo(AnalysisWrapper self, long aObject) {
     return self.isEqualTo(new OpenSimObject(aObject, false));
   }
-  public static boolean SwigDirector_AnalysisWrapper_isValidDefaultType(AnalysisWrapper self, long aObject) {
-    return self.isValidDefaultType((aObject == 0) ? null : new OpenSimObject(aObject, false));
-  }
   public static void SwigDirector_AnalysisWrapper_updateFromXMLNode(AnalysisWrapper self, long aNode, int versionNumber) {
     self.updateFromXMLNode(new SWIGTYPE_p_SimTK__Xml__Element(aNode, false), versionNumber);
   }
-  public static void SwigDirector_AnalysisWrapper_updateDefaultObjectsFromXMLNode(AnalysisWrapper self) {
-    self.updateDefaultObjectsFromXMLNode();
-  }
   public static void SwigDirector_AnalysisWrapper_updateXMLNode(AnalysisWrapper self, long aParent) {
     self.updateXMLNode(new SWIGTYPE_p_SimTK__Xml__Element(aParent, false));
-  }
-  public static void SwigDirector_AnalysisWrapper_updateDefaultObjectsXMLNode(AnalysisWrapper self, long aParent) {
-    self.updateDefaultObjectsXMLNode(new SWIGTYPE_p_SimTK__Xml__Element(aParent, false));
   }
   public static boolean SwigDirector_AnalysisWrapper_isA(AnalysisWrapper self, String type) {
     return self.isA(type);

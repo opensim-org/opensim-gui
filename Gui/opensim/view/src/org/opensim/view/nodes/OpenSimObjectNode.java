@@ -36,6 +36,7 @@ import org.openide.nodes.Node;
 import org.openide.nodes.PropertySupport;
 import org.openide.nodes.Sheet;
 import org.openide.util.lookup.Lookups;
+import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.Property.PropertyType;
 import org.opensim.modeling.PropertyDblArray;
@@ -178,9 +179,10 @@ public class OpenSimObjectNode extends OpenSimNode {
                      nextNodeProp.setName(prop.getName());
                      set.put(nextNodeProp);
                      //org.opensim.modeling.PropertyDblArray pda = PropertyDblArray.safeDownCast(prop);
-                     int sz = prop.getValueDblArray().getSize();
-                     double val = prop.getValueDblArray().getitem(0);
-                     int x=0;
+                     //int sz = prop.getValueDblArray().getSize();
+                     //double val = prop.getValueDblArray().getitem(0);
+                     //prop.setValue(new ArrayDouble(1, 3));
+                     //nt x=0;
                      //System.out.println(prop.getName()+" "+val);
                 }
                 //getArraySize()

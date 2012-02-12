@@ -106,10 +106,6 @@ public class OpenSimObject {
     return opensimModelJNI.OpenSimObject_isEqualTo(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
-  public void setType(String aType) {
-    opensimModelJNI.OpenSimObject_setType(swigCPtr, this, aType);
-  }
-
   public String getType() {
     return opensimModelJNI.OpenSimObject_getType(swigCPtr, this);
   }
@@ -184,10 +180,6 @@ public class OpenSimObject {
     opensimModelJNI.OpenSimObject_getRegisteredTypenames(ArrayStr.getCPtr(rTypeNames), rTypeNames);
   }
 
-  public boolean isValidDefaultType(OpenSimObject aObject) {
-    return opensimModelJNI.OpenSimObject_isValidDefaultType(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
-  }
-
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
     opensimModelJNI.OpenSimObject_updateFromXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
   }
@@ -196,16 +188,8 @@ public class OpenSimObject {
     opensimModelJNI.OpenSimObject_updateFromXMLDocument(swigCPtr, this);
   }
 
-  public void updateDefaultObjectsFromXMLNode() {
-    opensimModelJNI.OpenSimObject_updateDefaultObjectsFromXMLNode(swigCPtr, this);
-  }
-
   public void updateXMLNode(SWIGTYPE_p_SimTK__Xml__Element aParent) {
     opensimModelJNI.OpenSimObject_updateXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aParent));
-  }
-
-  public void updateDefaultObjectsXMLNode(SWIGTYPE_p_SimTK__Xml__Element aParent) {
-    opensimModelJNI.OpenSimObject_updateDefaultObjectsXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aParent));
   }
 
   public boolean getInlined() {
