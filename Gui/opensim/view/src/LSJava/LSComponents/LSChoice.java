@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSChoice.java
-// Class:    LSChoice
 // Parent:   Choice
 // Purpose:  Choices for user interface
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

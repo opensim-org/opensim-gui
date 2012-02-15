@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSScrollBar.java
-// Class:    LSScrollBar
 // Parent:   Scrollbar
 // Purpose:  Scrollbars for user interface
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSFileDialog.java
-// Class:    LSFileDialog
 // Parent:   FileDialog
 // Purpose:  Handles file dialog boxes
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

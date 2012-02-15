@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSFrame.java
-// Class:    LSFrame
 // Parents:  Frame -> Window -> Container -> Component -> Object
 //           Has a WindowAdapter that acts as a WindowListener.
 // Purpose:  Holds generic data and methods for a frame (part of a frame or window)

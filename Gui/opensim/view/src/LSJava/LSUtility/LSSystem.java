@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSSystem.java
-// Class:    LSSystem
 // Parent:   None
 // Purpose:  Handles various system level commands and functions
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

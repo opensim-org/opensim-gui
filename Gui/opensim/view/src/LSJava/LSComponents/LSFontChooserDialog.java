@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSFontChooserDialog.java
-// Class:    LSFontChooserDialog
 // Parent:   LSDialog
 // Purpose:  Dialog box for font family, font style, and font size
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSTextArea.java
-// Class:    LSTextArea
 // Parent:   TextArea
 // Purpose:  TextAreas for user interface
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

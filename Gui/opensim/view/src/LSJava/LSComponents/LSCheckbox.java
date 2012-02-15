@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSCheckbox.java
-// Class:    LSCheckbox
 // Parent:   Checkbox
 // Purpose:  Checkbox for user interface
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

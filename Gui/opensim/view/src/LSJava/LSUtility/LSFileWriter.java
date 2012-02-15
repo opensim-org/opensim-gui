@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSFileWriter.java
-// Class:    LSFileWriter
 // Parent:   None
 // Purpose:  Writes text files, including ASCII and Unicode
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

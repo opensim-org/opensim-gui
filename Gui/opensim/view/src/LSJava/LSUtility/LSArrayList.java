@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSArrayList.java
-// Class:    LSArrayList
 // Parent:   ArrayList
 // Purpose:  Resizable array of objects
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSPanelRotationMatrixTextFields.java
-// Class:    LSPanelRotationMatrixTextFields
 // Parents:  LSPanelMatrix3x3TextFields -> LSPanel -> Panel -> Container -> Component -> Object
 // Purpose:  Holds rotation matrix information.
 // Authors:  Paul Mitiguy, 2011-2012.

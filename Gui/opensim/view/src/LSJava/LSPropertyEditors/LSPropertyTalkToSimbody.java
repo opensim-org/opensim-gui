@@ -1,6 +1,5 @@
 //-----------------------------------------------------------------------------
 // File:     LSPropertyTalkToSimbody.java
-// Class:    LSPropertyTalkToSimbody
 // Parents:  None
 // Purpose:  Helpful class that easily communicates changes made in Java classes
 //           (e.g., components such as text fields, sliders, and buttons)
@@ -54,14 +53,29 @@ public class LSPropertyTalkToSimbody
 
 
    //-----------------------------------------------------------------------------
-   public OpenSimObject      GetOpenSimObject()             { return myOpenSimObjectPassedToConstructor; }  
-   public String             GetOpenSimObjectName( )        { return this.GetOpenSimObject().getName(); } 
-   
-   //-----------------------------------------------------------------------------
    // Relevant class hierarchy:            OpenSimObjectNode -> OpenSimNode -> AbstractNode -> Node
    // Some children of OpenSimObjectNode:  OneBodyNode, OneJointNode
    //-----------------------------------------------------------------------------
-   public OpenSimObjectNode  GetOpenSimObjectNodeOrNull()   { return myOpenSimObjectNodeMayBeNull; }  
+   public OpenSimObjectNode  GetOpenSimObjectNodeOrNull()  { return myOpenSimObjectNodeMayBeNull; }  
+   //-----------------------------------------------------------------------------
+   public OpenSimObject  GetOpenSimObject()       { return myOpenSimObjectPassedToConstructor; }  
+   public String         GetOpenSimObjectName( )  { return this.GetOpenSimObject().getName(); } 
+   //-----------------------------------------------------------------------------
+   public boolean  SetOpenSimObjectName( String newName )    
+   { 
+      String oldName = this.GetOpenSimObjectName();
+      if( newName != null && LSString.IsStringsEqualCaseSensitive(newName,oldName) == false )
+      {
+         this.GetOpenSimObject().setName( newName );
+         
+	 OpenSimObjectNode associatedOpenSimNodeOrNull = this.GetOpenSimObjectNodeOrNull(); // Can cast OpenSimObjectNode as OpenSimNode.
+         if( associatedOpenSimNodeOrNull != null )
+            associatedOpenSimNodeOrNull.renameObjectNode( this.GetOpenSimObject(), newName );
+         
+	 return true;
+      }
+      return false; // No name change.
+   } 
 
 
    //-----------------------------------------------------------------------------
@@ -75,7 +89,7 @@ public class LSPropertyTalkToSimbody
    
 
    //----------------------------------------------------------------------------- 
-   protected static OpenSimObjectNode  GetRootNodeAsOpenSimObjectNodeOrReturnNullIfNoMatch( Object objectToMatch )
+   private static OpenSimObjectNode  GetRootNodeAsOpenSimObjectNodeOrReturnNullIfNoMatch( Object objectToMatch )
    {
       ExplorerTopComponent explorerTopComponentTree = ExplorerTopComponent.findInstance();
       Node rootNode = explorerTopComponentTree == null ? null : explorerTopComponentTree.getExplorerManager().getRootContext();
@@ -100,6 +114,7 @@ public class LSPropertyTalkToSimbody
       }
       return null;
    }
+
    
    //-------------------------------------------------------------------------
    public double  GetOpenSimObjectPropertyValueAsDoubleFromPropertyName( String propertyName ) 
@@ -107,33 +122,6 @@ public class LSPropertyTalkToSimbody
       Property openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
       return openSimObjectProperty==null ? 0.0 : openSimObjectProperty.getValueDbl();
    }
-   
-   //-------------------------------------------------------------------------
-   private ArrayDouble  GetOpenSimObjectPropertyValueAsArrayDoubleFromPropertyName( String propertyName ) 
-   {
-      Property openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
-      return openSimObjectProperty==null ? null : null; // openSimObjectProperty.getValueDblArray();
-      // TODO: There is some type mis-match between Java/C++ double arrays that crashes the GUI completely and without warning.
-   }
-
-   //-------------------------------------------------------------------------
-   public double[]  GetOpenSimObjectPropertyValueAsArrayDoubleNFromPropertyName( String propertyName, int expectedNumberOfElements ) 
-   {
-      ArrayDouble arrayDouble = this.GetOpenSimObjectPropertyValueAsArrayDoubleFromPropertyName( propertyName ); 
-      boolean isValid = (arrayDouble!=null && arrayDouble.getSize() == expectedNumberOfElements);
-      double retValue[] = new double[ expectedNumberOfElements ];
-      for( int i=0;  i<expectedNumberOfElements; i++ ) retValue[i] = isValid ? arrayDouble.getitem(i) : 0.0;
-      return retValue;
-   }
-      
-   //-------------------------------------------------------------------------
-   public double[]  GetOpenSimObjectPropertyValueAsArrayDouble3FromPropertyName( String propertyName )  { return this.GetOpenSimObjectPropertyValueAsArrayDoubleNFromPropertyName( propertyName, 3 ); }  
-      
-   //-------------------------------------------------------------------------
-   private Model  GetModelAssociatedWithProperty(  )               { return ( myOpenSimObjectNodeMayBeNull != null ) ? myOpenSimObjectNodeMayBeNull.getModelForNode() : null; }
-   private Model  GetModelAssociatedWithPropertyOrCurrentModel( )  { Model aModel = this.GetModelAssociatedWithProperty();  return (aModel != null ) ? aModel : OpenSimDB.getInstance().getCurrentModel(); }
-
-   
    //-------------------------------------------------------------------------
    public void  SetOpenSimObjectPropertyValueAsDoubleForPropertyName( String propertyName, double valueToSet ) 
    {
@@ -143,6 +131,71 @@ public class LSPropertyTalkToSimbody
    }
 
 
+   //-------------------------------------------------------------------------
+   public ArrayDouble  GetOpenSimObjectPropertyValueAsArrayDoubleFromPropertyName( String propertyName ) 
+   {
+      Property openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
+      return openSimObjectProperty==null ? null : openSimObjectProperty.getValueDblArray();
+   }
+   //-------------------------------------------------------------------------
+   public double[]  GetOpenSimObjectPropertyValueAsArrayDoubleNFromPropertyName( String propertyName, int expectedNumberOfElements ) 
+   {
+      double retValue[] = new double[ expectedNumberOfElements ];  // default initialization is 0.0
+      ArrayDouble arrayDouble = this.GetOpenSimObjectPropertyValueAsArrayDoubleFromPropertyName( propertyName ); 
+      int actualNumberOfElements = arrayDouble==null ? 0 : arrayDouble.getSize();
+      for( int i=0;  i < actualNumberOfElements;  i++ ) retValue[i] = arrayDouble.getitem(i);
+      return retValue;
+   }
+   //-------------------------------------------------------------------------
+   public double[]  GetOpenSimObjectPropertyValueAsArrayDouble3FromPropertyName( String propertyName )  
+   { 
+      return this.GetOpenSimObjectPropertyValueAsArrayDoubleNFromPropertyName( propertyName, 3 ); 
+   }  
+   //-------------------------------------------------------------------------
+   public void  SetOpenSimObjectPropertyValueAsArrayDoubleFromPropertyName( String propertyName, ArrayDouble arrayDouble )
+   {
+      Property openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
+      if( openSimObjectProperty != null  &&  arrayDouble != null ) openSimObjectProperty.setValue( arrayDouble );
+      this.RecreateOpenSimAPIModelAfterPropertyChange();
+   }
+   //-------------------------------------------------------------------------
+   public void  SetOpenSimObjectPropertyValueAsArrayDoubleNFromPropertyName( String propertyName, double valuesToSet[] ) 
+   {
+      int numberOfElements = valuesToSet == null ? 0 : valuesToSet.length;
+      if( numberOfElements > 0 )
+      {
+         ArrayDouble arrayDouble = new ArrayDouble( 0.0, numberOfElements );
+	 for( int i=0;  i<numberOfElements;  i++ ) arrayDouble.setitem( i, valuesToSet[i] );
+         this.SetOpenSimObjectPropertyValueAsArrayDoubleFromPropertyName( propertyName, arrayDouble );
+      }
+   }
+
+
+   //-------------------------------------------------------------------------
+   public double  GetOpenSimObjectPropertyValueAsArrayDoubleElementFromPropertyName( String propertyName, int elementNumber )
+   {
+      ArrayDouble arrayDouble = this.GetOpenSimObjectPropertyValueAsArrayDoubleFromPropertyName( propertyName ); 
+      boolean isValid = ( arrayDouble != null  &&  elementNumber < arrayDouble.getSize() );
+      return isValid ? arrayDouble.getitem(elementNumber) : 0.0;
+   }
+   //-------------------------------------------------------------------------
+   public void  SetOpenSimObjectPropertyValueAsArrayDoubleElementForPropertyName( String propertyName, int elementNumber, double valueToSet )
+   {
+      ArrayDouble arrayDouble = this.GetOpenSimObjectPropertyValueAsArrayDoubleFromPropertyName( propertyName ); 
+      boolean isValid = (arrayDouble != null  &&  elementNumber < arrayDouble.getSize() );
+      if( isValid )
+      {
+         arrayDouble.setitem( elementNumber, valueToSet );
+	 this.SetOpenSimObjectPropertyValueAsArrayDoubleFromPropertyName( propertyName, arrayDouble );
+      }
+   }
+
+
+   //-------------------------------------------------------------------------
+   private Model  GetModelAssociatedWithProperty(  )               { return (myOpenSimObjectNodeMayBeNull != null) ? myOpenSimObjectNodeMayBeNull.getModelForNode() : null; }
+   private Model  GetModelAssociatedWithPropertyOrCurrentModel( )  { Model aModel = this.GetModelAssociatedWithProperty();  return (aModel != null ) ? aModel : OpenSimDB.getInstance().getCurrentModel(); }
+
+   
    //-------------------------------------------------------------------------
    private void  RecreateOpenSimAPIModelAfterPropertyChange(  )  
    { 
@@ -156,24 +209,6 @@ public class LSPropertyTalkToSimbody
       OpenSimContext apiCommunicator = OpenSimDB.getInstance().getContext( aModel );
       apiCommunicator.recreateSystemAfterSystemExistsKeepStage();
    }
-
-   
-   //-----------------------------------------------------------------------------
-   public boolean  SetOpenSimObjectName( String newName )    
-   { 
-      String oldName = this.GetOpenSimObjectName();
-      if( newName != null && LSString.IsStringsEqualCaseSensitive(newName,oldName) == false )
-      {
-         this.GetOpenSimObject().setName( newName );
-         
-	 OpenSimObjectNode associatedOpenSimNodeOrNull = this.GetOpenSimObjectNodeOrNull(); // Can cast OpenSimObjectNode as OpenSimNode.
-         if( associatedOpenSimNodeOrNull != null )
-            associatedOpenSimNodeOrNull.renameObjectNode( this.GetOpenSimObject(), newName );
-         
-	 return true;
-      }
-      return false; // No name change.
-   } 
 
 
    //-----------------------------------------------------------------------------

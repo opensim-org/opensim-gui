@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSDialog.java
-// Class:    LSDialog
 // Parents:  Dialog -> Window -> Container -> Component -> Object
 //           Has a WindowAdapter that acts as a WindowListener.
 // Purpose:  Holds generic data and methods for a dialog box

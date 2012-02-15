@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSDirFileName.java
-// Class:    LSDirFileName
 // Parent:   File
 // Purpose:  Contains filename and directory name
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

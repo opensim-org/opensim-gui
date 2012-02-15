@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSPanel.java
-// Class:    LSPanel
 // Parents:  Panel -> Container -> Component -> Object
 // Purpose:  Holds generic data and methods for a panel (part of a frame or window)
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

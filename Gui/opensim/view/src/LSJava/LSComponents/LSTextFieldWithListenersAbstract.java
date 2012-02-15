@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSTextFieldWithListenersAbstract.java
-// Class:    LSTextFieldWithListenersAbstract
 // Parent:   LSTextField
 // Purpose:  Abstract class with LSTextFields with listeners for event handling.
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2012).
@@ -54,11 +53,15 @@ public abstract class LSTextFieldWithListenersAbstract extends LSTextField imple
    public void  keyReleased( KeyEvent keyEvent )  {;}
    public void  keyTyped(    KeyEvent keyEvent )
    {
-      switch( keyEvent.getKeyChar() )
+      Object eventTarget = keyEvent.getSource();
+      if( eventTarget == this )
       {
-//       case KeyEvent.VK_ENTER:   break;
-         case KeyEvent.VK_ESCAPE:  this.CheckActionOrFocusOrKeyEventTarget( keyEvent.getSource() ); 
-	                           break;
+         switch( keyEvent.getKeyChar() )
+         {
+            case KeyEvent.VK_ENTER:   
+            case KeyEvent.VK_ESCAPE:  this.CheckActionOrFocusOrKeyEventTarget( eventTarget ); 
+	                              break;
+         }
       }
    }
 

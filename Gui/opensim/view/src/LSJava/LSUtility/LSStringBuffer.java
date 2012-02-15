@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSStringBuffer.java
-// Class:    LSStringBuffer
 // Parent:   None
 // Purpose:  Useful functions for a string buffer
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

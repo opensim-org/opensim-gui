@@ -1,6 +1,5 @@
 //-----------------------------------------------------------------------------
 // File:     LSPropertyEditorJoint.java
-// Class:    LSPropertyEditorJoint
 // Parents:  LSDialog
 // Purpose:  Displays/edits properties for joints (connections between rigid bodies).
 // Authors:  Paul Mitiguy, 2011-2012.   

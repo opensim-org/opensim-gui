@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSFont.java
-// Class:    LSFont
 // Parent:   Font
 // Purpose:  Font information is stored here
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

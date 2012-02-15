@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSMenuItem.java
-// Class:    LSMenuItem
 // Parent:   MenuItem
 // Purpose:  Creates a menu and adds it to its Menu and adds a listener
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

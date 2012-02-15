@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSCharacter.java
-// Class:    LSCharacter
 // Parent:   None
 // Purpose:  Useful functions for characters
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

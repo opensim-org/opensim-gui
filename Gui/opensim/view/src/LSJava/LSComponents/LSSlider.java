@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSSlider.java
-// Class:    LSSlider
 // Parent:   LSScrollbar
 // Purpose:  Slider for user interface
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

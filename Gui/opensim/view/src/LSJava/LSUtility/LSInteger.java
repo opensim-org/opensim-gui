@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSInteger.java
-// Class:    LSInteger
 // Parent:   None
 // Purpose:  Useful functions for integer numbers
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

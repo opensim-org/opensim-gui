@@ -113,8 +113,8 @@ public class BodyDisplayer extends vtkAssembly
       
       vtkPolyDataMapper comMapper = new vtkPolyDataMapper();
 
-      comSource.SetRadius(ViewDB.getInstance().getMarkerDisplayRadius()*2);
-      comMapper.SetInput(comSource.GetOutput());
+      comSource.SetRadius( ViewDB.getInstance().getMarkerDisplayRadius()*2 );
+      comMapper.SetInput( comSource.GetOutput() );
       centerOfMassActor.SetMapper(comMapper);
       this.SetCMSphereColorToGreen();
 
@@ -165,13 +165,11 @@ public class BodyDisplayer extends vtkAssembly
          outlineFilter.AddInput(append.GetOutput());
       }
 
-      if (bodyDisplayer.getShowAxes()){
-          AddPart(getBodyAxes());
-      }
-      double[] dCom= new double[3];
-      body.getCenterOfMass(dCom);
-      comSource.SetCenter(dCom);
-  
+      if( bodyDisplayer.getShowAxes() )
+          AddPart( getBodyAxes() );
+      
+      this.SetCMLocationFromPropertyTable( false );
+      
        if (hasGeometry){
          double[] bnds = outlineActor.GetBounds();
          //outlineActor.SetVisibility(0);
@@ -468,14 +466,28 @@ public class BodyDisplayer extends vtkAssembly
     public boolean isShowCOM() { return showCOM; }
 
     public void setShowCOM( boolean showCM ) {
-        if( showCM ) { AddPart(centerOfMassActor);  this.SetCMSphereColorToGreen(); }
-        else RemovePart(centerOfMassActor);
+        if( showCM ) { super.AddPart(centerOfMassActor);  this.SetCMSphereColorToGreen(); }
+        else super.RemovePart(centerOfMassActor);
         this.showCOM = showCM;
     }
     
     //--------------------------------------------------------------------------
     public void  SetCMSphereColorToGreen( ) { centerOfMassActor.GetProperty().SetColor( 0.0, 1.0, 0.0 ); } // Green COM for now 
     
+    //--------------------------------------------------------------------------
+    public void  SetCMLocationFromPropertyTable( boolean updateView )
+    {
+       double[] cmLocationToFill = new double[3];
+       body.getCenterOfMass( cmLocationToFill );
+       comSource.SetCenter( cmLocationToFill );
+       if( updateView )
+       {
+          super.Modified();
+          ViewDB.getInstance().repaintAll();
+       }
+    }
+      
+      
     /**
      * @return the bodyBounds
      */

@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSContainer.java
-// Class:    LSContainer
 // Parent:   None
 // Purpose:  Generic container class for adding, removing, packing, painting, color, and font for components
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

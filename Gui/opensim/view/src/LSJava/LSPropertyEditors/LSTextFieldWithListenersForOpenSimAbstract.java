@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSTextFieldWithListenersForOpenSimAbstract.java
-// Class:    LSTextFieldWithListenersForOpenSimAbstract
 // Parent:   LSTextFieldWithListenersAbstract
 // Purpose:  LSTextFields with listeners for event handling and connection to OpenSimObject properties.
 // Authors:  Paul Mitiguy (2011-2012).
@@ -39,6 +38,15 @@ public abstract class LSTextFieldWithListenersForOpenSimAbstract extends LSTextF
 
    //-------------------------------------------------------------------------
    abstract protected void  EventActionOrFocusOrKeyEventOnThisObjectVirtual( );
+
+
+   //-------------------------------------------------------------------------
+   protected boolean  IssueErrorMessageInOwnerWindowAndRequestFocusBackIfBadDoublePrecisionNumber( )
+   {
+      boolean requestFocusBack = super.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber( this.GetOwnerWindowOrNull() );
+      if( requestFocusBack ) super.RequestFocus();
+      return requestFocusBack;
+   }
 
 
    //-------------------------------------------------------------------------

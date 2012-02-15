@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSButton.java
-// Class:    LSButton
 // Parent:   Button
 // Purpose:  Buttons for user interface
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

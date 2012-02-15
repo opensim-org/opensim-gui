@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSTextFieldForOpenSim.java
-// Class:    LSTextFieldForOpenSim
 // Parent:   LSTextField
 // Purpose:  LSTextFields with name used by OpenSim property editor.
 // Authors:  Paul Mitiguy (2011-2012).

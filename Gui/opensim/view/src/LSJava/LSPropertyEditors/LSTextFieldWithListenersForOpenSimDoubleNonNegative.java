@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSTextFieldWithListenersForOpenSimDoubleNonNegative.java
-// Class:    LSTextFieldWithListenersForOpenSimDoubleNonNegative
 // Parent:   LSTextFieldWithListenersForOpenSimDouble
 // Purpose:  LSTextFields with listeners for event handling and connection to OpenSimObject properties.
 // Authors:  Paul Mitiguy (2011-2012).
@@ -28,9 +27,20 @@ import  java.awt.*;
 public class LSTextFieldWithListenersForOpenSimDoubleNonNegative extends LSTextFieldWithListenersForOpenSimDouble
 {
    // Constructor ---------------------------------------------------------
-   public LSTextFieldWithListenersForOpenSimDoubleNonNegative( Window ownerWindowOrNull, LSPropertyTalkToSimbody propertyToTalkToSimbody, String openSimPropertyName, double initialValue,  int textWidth, boolean isEditable, LSContainer container, int gridWidth, int gridHeight, ActionListener actionListenerOrNull, FocusListener focusListenerOrNull, KeyListener keyListenerOrNull )   
+   public LSTextFieldWithListenersForOpenSimDoubleNonNegative( Window ownerWindowOrNull, LSPropertyTalkToSimbody propertyToTalkToSimbody, String openSimPropertyName, int textWidth, boolean isEditable, LSContainer container, int gridWidth, int gridHeight, ActionListener actionListenerOrNull, FocusListener focusListenerOrNull, KeyListener keyListenerOrNull )   
    { 
-      super( ownerWindowOrNull, propertyToTalkToSimbody, openSimPropertyName, initialValue,  textWidth, isEditable, container, gridWidth, gridHeight, actionListenerOrNull, focusListenerOrNull, keyListenerOrNull ); 
+      super( ownerWindowOrNull, propertyToTalkToSimbody, openSimPropertyName, textWidth, isEditable, container, gridWidth, gridHeight, actionListenerOrNull, focusListenerOrNull, keyListenerOrNull ); 
+   }
+
+
+   //-------------------------------------------------------------------------
+   protected void  EventActionOrFocusOrKeyEventOnThisObjectVirtual( )
+   {
+      if( !super.IssueErrorMessageInOwnerWindowAndRequestFocusBackIfBadDoublePrecisionNumber() )
+      {
+         super.IssueWarningMessageIfTextFieldIsNegativeNumber( super.GetOwnerWindowOrNull() ); 
+	 this.SetOpenSimObjectPropertyValueFromTextFieldAsDouble();
+      }
    }
 
 }

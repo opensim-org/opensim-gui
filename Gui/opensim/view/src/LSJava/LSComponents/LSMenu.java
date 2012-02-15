@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSMenu.java
-// Class:    LSMenu
 // Parent:   Menu
 // Purpose:  Abstract class for handling menus
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

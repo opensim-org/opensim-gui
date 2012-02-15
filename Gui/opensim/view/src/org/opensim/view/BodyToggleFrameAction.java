@@ -67,10 +67,10 @@ public final class BodyToggleFrameAction extends BooleanStateAction {
                  BodyToggleFrameAction.ShowAxesForOneBodyNode( (OneBodyNode)selectedNode, newState, false );
         }
         super.setBooleanState( newState );
-        ViewDB.getInstance().renderAll();
+        ViewDB.ViewDBGetInstanceRenderAll();
     }
-    
-    
+  
+     
     //-------------------------------------------------------------------------
     public static boolean  IsShowAxesForBody( OpenSimObject openSimObjectAssociatedWithBody )
     {
@@ -93,7 +93,7 @@ public final class BodyToggleFrameAction extends BooleanStateAction {
        if( rep != null )
        {
            rep.setShowAxes( showAxesTrueHideIsFalse );
-           if( renderAll ) ViewDB.getInstance().renderAll();
+           if( renderAll ) ViewDB.ViewDBGetInstanceRenderAll();
        }     
     }
     

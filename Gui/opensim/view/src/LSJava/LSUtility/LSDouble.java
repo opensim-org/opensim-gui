@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSDouble.java
-// Class:    LSDouble
 // Parent:   None
 // Purpose:  Useful functions for double precision numbers
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

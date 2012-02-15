@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSMessageDialog.java
-// Class:    LSMessageDialog
 // Parent:   LSDialog
 // Purpose:  Dialog box for displaying messages to user
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

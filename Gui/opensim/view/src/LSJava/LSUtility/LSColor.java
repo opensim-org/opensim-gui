@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSColor.java
-// Class:    LSColor
 // Parent:   Color
 // Purpose:  Color information is stored here
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

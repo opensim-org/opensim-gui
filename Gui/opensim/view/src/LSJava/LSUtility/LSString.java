@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSString.java
-// Class:    LSString
 // Parent:   None
 // Purpose:  Useful functions for strings
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

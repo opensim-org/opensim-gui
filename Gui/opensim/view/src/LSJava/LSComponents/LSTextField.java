@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSTextField.java
-// Class:    LSTextField
 // Parent:   TextField
 // Purpose:  TextFields for user interface
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

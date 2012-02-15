@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSFileReader.java
-// Class:    LSFileReader
 // Parent:   None
 // Purpose:  Reads text files, including ASCII and Unicode
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

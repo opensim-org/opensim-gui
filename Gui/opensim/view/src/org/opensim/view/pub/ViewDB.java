@@ -154,12 +154,26 @@ public final class ViewDB extends Observable implements Observer {
     * Enforce a singleton pattern
     */
    public static ViewDB getInstance() {
-      if (instance==null){
-         instance = new ViewDB();
-      }
+      if( instance==null ) instance = new ViewDB();
       return instance;
    }
    
+   
+   //--------------------------------------------------------------------------
+   public static void  ViewDBGetInstanceRepaintAll(  )  
+   { 
+       ViewDB viewDBInstance = ViewDB.getInstance();
+       if( viewDBInstance != null ) viewDBInstance.repaintAll(); 
+   }
+   
+   //--------------------------------------------------------------------------
+   public static void  ViewDBGetInstanceRenderAll(  )  
+   { 
+       ViewDB viewDBInstance = ViewDB.getInstance();
+       if( viewDBInstance != null ) viewDBInstance.renderAll(); 
+   } 
+   
+    
     // The setChanged() protected method must overridden to make it public
     public synchronized void setChanged() {
         super.setChanged();

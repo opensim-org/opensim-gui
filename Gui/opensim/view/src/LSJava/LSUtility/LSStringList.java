@@ -1,7 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSStringList.java
-// Class:    LSStringList
-// Parent:   LSArrayList
 // Purpose:  Resizable array of strings
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).
 //--------------------------------------------------------------------------

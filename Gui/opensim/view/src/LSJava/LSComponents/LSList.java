@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSList.java
-// Class:    LSList
 // Parent:   List
 // Purpose:  Lists for user interface
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

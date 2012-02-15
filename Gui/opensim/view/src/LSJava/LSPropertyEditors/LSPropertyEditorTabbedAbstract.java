@@ -1,6 +1,5 @@
 //-----------------------------------------------------------------------------
 // File:     LSPropertyEditorTabbedAbstract.java
-// Class:    LSPropertyEditorTabbedAbstract
 // Parents:  LSDialog -> Dialog -> Window -> Container -> Component -> Object
 // Purpose:  Abstract class containing generic methods for property editing.
 // Authors:  Paul Mitiguy, 2011-2012.   
@@ -246,9 +245,11 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
    }
 
 
-   //-------------------------------------------------------------------------
+   //-----------------------------------------------------------------------------
    protected int  IsObjectCurrentlyHidden0Shown1Mixed2( )  { return ViewDB.getInstance().getDisplayStatus( this.GetAssociatedOpenSimObject() ); }
 
+   //-----------------------------------------------------------------------------
+   protected void  RepaintAllOpenGL( )  { ViewDB.ViewDBGetInstanceRepaintAll(); }
 
    //-----------------------------------------------------------------------------
    protected void  ShowOrHideObject( boolean showOrHide )
@@ -274,7 +275,7 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
 
 
    //-----------------------------------------------------------------------------
-   private static LSPropertyEditorTabbedAbstract  IsExistingPropertyEditorForOpenSimObject( OpenSimObject openSimObjectToFind )  
+   private static LSPropertyEditorTabbedAbstract  IsExistingPropertyEditorForOpenSimObject( OpenSimObject openSimObjectToFind, OpenSimObjectNode openSimObjectNodeToFindMayBeNull )  
    { 
       int numberOfExistingWindows = LSWindowAdapter.GetNumberOfExistingWindows();
       for( int i=0;  i < numberOfExistingWindows;  i++ )
@@ -284,16 +285,17 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
 	 {
             LSPropertyEditorTabbedAbstract propertyEditori = (LSPropertyEditorTabbedAbstract)wi;
 	    OpenSimObject openSimObjecti = propertyEditori.GetAssociatedOpenSimObject();
-	    if( openSimObjectToFind == openSimObjecti ) return propertyEditori;
+            OpenSimObjectNode openSimObjectNodei = propertyEditori.GetAssociatedOpenSimObjectNodeOrNull();
+	    if( openSimObjectToFind == openSimObjecti || (openSimObjectNodei != null && openSimObjectNodei==openSimObjectNodeToFindMayBeNull) )  return propertyEditori;
 	 } 
       }
       return null;
    }    
 
    //-----------------------------------------------------------------------------
-   protected static LSPropertyEditorTabbedAbstract  IfIsExistingPropertyEditorForOpenSimObjectPushToFront( OpenSimObject openSimObjectToFind )  
+   protected static LSPropertyEditorTabbedAbstract  IfIsExistingPropertyEditorForOpenSimObjectPushToFront( OpenSimObject openSimObjectToFind, OpenSimObjectNode openSimObjectNodeToFindMayBeNull )  
    { 
-      LSPropertyEditorTabbedAbstract propertyEditori =  LSPropertyEditorTabbedAbstract.IsExistingPropertyEditorForOpenSimObject( openSimObjectToFind );
+      LSPropertyEditorTabbedAbstract propertyEditori =  LSPropertyEditorTabbedAbstract.IsExistingPropertyEditorForOpenSimObject( openSimObjectToFind, openSimObjectNodeToFindMayBeNull );
       if( propertyEditori != null ) propertyEditori.SetDialogVisible( true );
       return propertyEditori;
    }    

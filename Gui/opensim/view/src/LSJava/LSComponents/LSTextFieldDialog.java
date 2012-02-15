@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSTextFieldDialog.java
-// Class:    LSTextFieldDialog
 // Parent:   LSDialog
 // Purpose:  Dialog box for getting a single line of text from user
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

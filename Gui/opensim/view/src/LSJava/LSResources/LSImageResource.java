@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSImageResource.java
-// Class:    LSImageResource
 // Parent:   None
 // Purpose:  Easy-to-use and commonly used methods for getting images, resizing, etc.
 // Author:   Paul Mitiguy, 2011-2012. 

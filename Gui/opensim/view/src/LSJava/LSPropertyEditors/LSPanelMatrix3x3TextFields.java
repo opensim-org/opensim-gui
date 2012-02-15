@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSPanelMatrix3x3TextFields.java
-// Class:    LSPanelMatrix3x3TextFields
 // Parents:  LSPanel -> Panel -> Container -> Component -> Object
 // Purpose:  Holds 3x3 matrix with optional title and picture.
 // Authors:  Paul Mitiguy, 2011-2012.

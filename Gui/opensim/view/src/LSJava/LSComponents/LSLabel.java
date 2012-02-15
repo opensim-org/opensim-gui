@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSLabel.java
-// Class:    LSLabel
 // Parent:   Label
 // Purpose:  Labels for windows, panels, dialog boxes, frames, etc.
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

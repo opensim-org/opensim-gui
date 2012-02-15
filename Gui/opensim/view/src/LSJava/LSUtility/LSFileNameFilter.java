@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSFileNameFilter.java
-// Class:    LSFileNameFilter
 // Parent:   FileNameFilter
 // Purpose:  Filters file names for file dialog boxes
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).

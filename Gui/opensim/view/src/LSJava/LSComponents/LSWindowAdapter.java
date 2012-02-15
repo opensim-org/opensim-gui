@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSWindowAdapter.java
-// Class:    LSWindowAdapter
 // Parent:   WindowAdapter -> Object  (WindowAdapter is an abstract class)
 // Purpose:  Handles window opening, closing, iconifying, etc.
 // Authors:  John Mitiguy and Paul Mitiguy (2001-2010).
@@ -89,7 +88,6 @@ public class LSWindowAdapter extends WindowAdapter
 	 myWindow = null;
       }
    }
-
 
 
    //-----------------------------------------------------------------------------

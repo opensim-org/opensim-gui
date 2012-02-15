@@ -1,6 +1,5 @@
 //--------------------------------------------------------------------------
 // File:     LSTextFieldWithListenersForOpenSimDouble.java
-// Class:    LSTextFieldWithListenersForOpenSimDouble
 // Parent:   LSTextFieldWithListenersAbstract
 // Purpose:  LSTextFields with listeners for event handling and connection to OpenSimObject properties.
 // Authors:  Paul Mitiguy (2011-2012).
@@ -28,9 +27,9 @@ import  java.awt.*;
 public class LSTextFieldWithListenersForOpenSimDouble extends LSTextFieldWithListenersForOpenSimAbstract
 {
    // Constructor ---------------------------------------------------------
-   public LSTextFieldWithListenersForOpenSimDouble( Window ownerWindowOrNull, LSPropertyTalkToSimbody propertyToTalkToSimbody, String openSimPropertyName, double initialValue,  int textWidth, boolean isEditable, LSContainer container, int gridWidth, int gridHeight, ActionListener actionListenerOrNull, FocusListener focusListenerOrNull, KeyListener keyListenerOrNull )   
+   public LSTextFieldWithListenersForOpenSimDouble( Window ownerWindowOrNull, LSPropertyTalkToSimbody propertyToTalkToSimbody, String openSimPropertyName, int textWidth, boolean isEditable, LSContainer container, int gridWidth, int gridHeight, ActionListener actionListenerOrNull, FocusListener focusListenerOrNull, KeyListener keyListenerOrNull )   
    { 
-      super( ownerWindowOrNull, propertyToTalkToSimbody, openSimPropertyName, LSString.GetStringFromDouble(initialValue),  textWidth==0 ? LSDouble.GetMaxNumberOfCharsInTextFieldsForDoublePrecisionNumber() : textWidth, isEditable, container, gridWidth, gridHeight, actionListenerOrNull, focusListenerOrNull, keyListenerOrNull ); 
+      super( ownerWindowOrNull, propertyToTalkToSimbody, openSimPropertyName, "0.0",  textWidth==0 ? LSDouble.GetMaxNumberOfCharsInTextFieldsForDoublePrecisionNumber() : textWidth, isEditable, container, gridWidth, gridHeight, actionListenerOrNull, focusListenerOrNull, keyListenerOrNull ); 
       double propertyValue = this.GetOpenSimObjectPropertyValueAsDouble();
       super.SetTextFieldFromDouble( propertyValue );
    }
@@ -39,15 +38,16 @@ public class LSTextFieldWithListenersForOpenSimDouble extends LSTextFieldWithLis
    //-------------------------------------------------------------------------
    protected void  EventActionOrFocusOrKeyEventOnThisObjectVirtual( )
    {
-      Window ownerWindowOrNull = super.GetOwnerWindowOrNull();
-      boolean requestFocusBack = super.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber( ownerWindowOrNull );
-      if( requestFocusBack ) super.RequestFocus();
-      else 
-      {
-         if( this instanceof LSTextFieldWithListenersForOpenSimDoubleNonNegative )
-            super.IssueWarningMessageIfTextFieldIsNegativeNumber( ownerWindowOrNull ); 
+      if( !super.IssueErrorMessageInOwnerWindowAndRequestFocusBackIfBadDoublePrecisionNumber() )
 	 this.SetOpenSimObjectPropertyValueFromTextFieldAsDouble();
-      }
+   }
+
+
+   //-------------------------------------------------------------------------
+   protected double  GetOpenSimObjectPropertyValueAsDouble( )
+   {
+      String propertyName = super.GetAssociatedOpenSimPropertyName();
+      return super.GetPropertyToTalkToSimbody().GetOpenSimObjectPropertyValueAsDoubleFromPropertyName( propertyName );
    }
 
 
@@ -57,14 +57,6 @@ public class LSTextFieldWithListenersForOpenSimDouble extends LSTextFieldWithLis
       String propertyName = super.GetAssociatedOpenSimPropertyName();
       double propertValue = super.GetTextFieldAsDouble();
       super.GetPropertyToTalkToSimbody().SetOpenSimObjectPropertyValueAsDoubleForPropertyName( propertyName, propertValue );
-   }
-
-
-   //-------------------------------------------------------------------------
-   protected double  GetOpenSimObjectPropertyValueAsDouble( )
-   {
-      String propertyName = super.GetAssociatedOpenSimPropertyName();
-      return super.GetPropertyToTalkToSimbody().GetOpenSimObjectPropertyValueAsDoubleFromPropertyName( propertyName );
    }
 
 }

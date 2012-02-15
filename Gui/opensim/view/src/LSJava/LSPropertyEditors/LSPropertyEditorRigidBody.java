@@ -1,6 +1,5 @@
 //-----------------------------------------------------------------------------
 // File:     LSPropertyEditorRigidBody.java
-// Class:    LSPropertyEditorRigidBody
 // Parents:  LSPropertyEditorTabbedAbstract -> LSDialog -> Dialog -> Window -> Container -> Component -> Object
 // Purpose:  Displays/edits properties for rigid bodies.
 // Authors:  Paul Mitiguy, 2011-2012.   
@@ -29,6 +28,7 @@ import  javax.swing.event.ChangeEvent;
 
 import  org.opensim.view.ModelWindowVTKTopComponent;
 import  org.opensim.modeling.OpenSimObject;
+import  org.opensim.view.BodyDisplayer;
 import  org.opensim.view.nodes.OpenSimObjectNode;
 import  org.opensim.view.nodes.OneBodyNode;
 import  org.opensim.view.nodes.BodyToggleCOMAction;
@@ -47,7 +47,7 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
    // Quasi constructor ----------------------------------------------------------
    public static LSPropertyEditorRigidBody  NewLSPropertyEditorRigidBody( OpenSimObject openSimObjectToConstructorShouldNotBeNull, OneBodyNode oneBodyNodeToConstructorMayBeNull, ModelWindowVTKTopComponent ownerWindowPassedToConstructor  )  
    {
-      LSPropertyEditorTabbedAbstract propertyEditorAlreadyExists = LSPropertyEditorTabbedAbstract.IfIsExistingPropertyEditorForOpenSimObjectPushToFront( openSimObjectToConstructorShouldNotBeNull ); 
+      LSPropertyEditorTabbedAbstract propertyEditorAlreadyExists = LSPropertyEditorTabbedAbstract.IfIsExistingPropertyEditorForOpenSimObjectPushToFront( openSimObjectToConstructorShouldNotBeNull, oneBodyNodeToConstructorMayBeNull ); 
       if( propertyEditorAlreadyExists != null )  return (LSPropertyEditorRigidBody)propertyEditorAlreadyExists;
       return new LSPropertyEditorRigidBody( openSimObjectToConstructorShouldNotBeNull, oneBodyNodeToConstructorMayBeNull, ownerWindowPassedToConstructor );
    }  
@@ -75,7 +75,8 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
       Object eventTarget = itemEvent.getSource();
       if(      eventTarget == myShowBodyCheckbox )            this.ProcessEventHideOrShow( true,  false, false, false ); // myShowBodyCheckbox.GetCheckboxState();
       else if( eventTarget == myHideBodyCheckbox )            this.ProcessEventHideOrShow( false, false, false, false );  // myHideBodyCheckbox.GetCheckboxState();
-      else if( eventTarget == myShowCMCheckbox ) 	      this.ProcessEventShowCMOrShowBodyAxes( eventTarget );
+      else if( eventTarget == myShowCMCheckboxA ) 	      this.ProcessEventShowCMOrShowBodyAxes( eventTarget );
+      else if( eventTarget == myShowCMCheckboxB ) 	      this.ProcessEventShowCMOrShowBodyAxes( eventTarget );
       else if( eventTarget == myShowBodyAxesCheckbox )	      this.ProcessEventShowCMOrShowBodyAxes( eventTarget );
       else if( eventTarget == myWireFrameCheckbox ) 	      { super.SetObjectRepresentationPointsWireFrameOrSurfaceAndSurfaceShading( 1, 0 );  this.ProcessEventHideOrShow(true,false,false,false); }
       else if( eventTarget == mySurfaceShadedSmoothCheckbox ) { super.SetObjectRepresentationPointsWireFrameOrSurfaceAndSurfaceShading( 2, 1 );  this.ProcessEventHideOrShow(true,false,false,false); }
@@ -104,12 +105,30 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
 
 
    //-------------------------------------------------------------------------
+   private void  SynchronizeShowCenterOfMassCheckboxes( Object eventTarget )
+   {
+      boolean isShowing = eventTarget == myShowCMCheckboxA ? myShowCMCheckboxA.GetCheckboxState() : myShowCMCheckboxB.GetCheckboxState();
+      myShowCMCheckboxA.SetCheckboxState( isShowing );
+      myShowCMCheckboxB.SetCheckboxState( isShowing );
+   }
+
+
+   //-------------------------------------------------------------------------
    private void  ProcessEventShowCMOrShowBodyAxes( Object eventTarget )
    {
       boolean isShow = false;
-      if( eventTarget == myShowCMCheckbox ) 
+
+      // Ensure checkboxes for showing the center of mass stay synchronized.
+      if( eventTarget == myShowCMCheckboxB )
+      {
+         this.SynchronizeShowCenterOfMassCheckboxes( eventTarget );
+	 eventTarget = myShowCMCheckboxA;
+      } 
+
+      if( eventTarget == myShowCMCheckboxA ) 
       {	      
-	 isShow = myShowCMCheckbox.GetCheckboxState();
+         this.SynchronizeShowCenterOfMassCheckboxes( eventTarget );
+	 isShow = myShowCMCheckboxA.GetCheckboxState();
          BodyToggleCOMAction.ShowCMForOneBodyNode( this.GetAssociatedOpenSimOneBodyNodeOrNull(), isShow, true );
       }
       else if( eventTarget == myShowBodyAxesCheckbox )	
@@ -121,6 +140,18 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
       // May have to do special things in order to see sub-geometry (considered a bug in the way OpenSim uses VTK now).
       if( isShow ) this.ProcessEventHideOrShow( isShow, true, false, false );
    }
+
+
+   //-------------------------------------------------------------------------
+   public void  ProcessEventChangedCMPositionEvent( )
+   {
+      if( myShowCMCheckboxA.GetCheckboxState() )
+      {
+         BodyDisplayer rep = BodyToggleFrameAction.GetBodyDisplayerForBody( super.GetAssociatedOpenSimObject() );
+         if( rep != null ) rep.SetCMLocationFromPropertyTable( true );
+         super.RepaintAllOpenGL();
+      }
+   } 
 
 
    //-------------------------------------------------------------------------
@@ -136,7 +167,7 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
 
       // If body is hidden, it must be shown so user can see any other geometry (considered a bug in the way OpenSim uses VTK now).
       // If body is shown,  it must be made a little transparent to see other geometry.
-      boolean checkBoxOnForCMOrBodyAxes = myShowCMCheckbox.GetCheckboxState() || myShowBodyAxesCheckbox.GetCheckboxState();
+      boolean checkBoxOnForCMOrBodyAxes = myShowCMCheckboxA.GetCheckboxState() || myShowBodyAxesCheckbox.GetCheckboxState();
       boolean isShowCMOrShowBodyAxes = (isShow==false && userClickedShowCMOrBodyAxes==false) ? false : checkBoxOnForCMOrBodyAxes;
       int opacityValue = isShow ? (isShowCMOrShowBodyAxes ? highValueOfOpacityIfShowCMOrAxes : 100) : 
                                   (isShowCMOrShowBodyAxes ? lowValueOfOpacityIfShowCMOrAxes  : 0);
@@ -181,9 +212,7 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
       boolean requestFocusBack = false;
       Window ownerWindowOrThis = super.GetLSDialogOwnerWindowOrThis(); 
       if(      eventTarget==myNameTextField )  super.SetOpenSimObjectNameAndPropertyEditorDialogTitle( myNameTextField.GetTextFieldAsString() );
-      else if( eventTarget==myXcmTextField  )  requestFocusBack = myXcmTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis);
-      else if( eventTarget==myYcmTextField  )  requestFocusBack = myYcmTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis);
-      else if( eventTarget==myZcmTextField  )  requestFocusBack = myZcmTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis);
+      else if( eventTarget==myXcmTextField || eventTarget==myYcmTextField || eventTarget==myZcmTextField ) this.ProcessEventChangedCMPositionEvent(); 
       else if( eventTarget==myIxxTextField || eventTarget==myIyyTextField || eventTarget==myIzzTextField ) this.CheckInertiaMatrixAndGiveVisualFeedbackOnWhetherOrNotItIsPhysicallyPossible();
       else if( eventTarget==myIxyTextField  )  requestFocusBack = this.ProcessEventProductOfInertiaChanged( (LSTextField)eventTarget, myIyxTextField );
       else if( eventTarget==myIxzTextField  )  requestFocusBack = this.ProcessEventProductOfInertiaChanged( (LSTextField)eventTarget, myIzxTextField );
@@ -250,23 +279,34 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
       // Add show center of mass of rigid body checkbox.
       tabContainer.AddBlankLabelToLayout1Wide1High(); 
       boolean initialStateOfShowCM = BodyToggleCOMAction.IsShowCMForBody( super.GetAssociatedOpenSimObject() );
-      myShowCMCheckbox = new LSCheckbox( "Show center of mass", initialStateOfShowCM, null, tabContainer, 2, 1, this );
-      // myShowCMCheckbox = new LSCheckbox( "Show center of mass", initialStateOfShowCM, null, tabContainer, GridBagConstraints.REMAINDER, 1, this );
+      myShowCMCheckboxA = new LSCheckbox( "Show center of mass", initialStateOfShowCM, null, tabContainer, 2, 1, this );
 
       // Add picture of center of mass.
-      JLabel labelWithPictureOfCM = LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "BodyCMPicture.png", 0, 30 );
+      JLabel labelWithPictureOfCM = LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "BodyCMPictureGreenSphere.png", 0, 30 );
       tabContainer.AddComponentToLayoutRowRemainder1High( labelWithPictureOfCM );
 
       // Add show body axes checkbox.
       tabContainer.AddBlankLabelToLayout1Wide1High(); 
       boolean initialStateOfShowBodyAxes = BodyToggleFrameAction.IsShowAxesForBody( super.GetAssociatedOpenSimObject() );
-      myShowBodyAxesCheckbox = new LSCheckbox( "Show body axes (toggle)", initialStateOfShowBodyAxes, null, tabContainer, 2, 1, this );
-      // myShowBodyAxesCheckbox = new LSCheckbox( "Show body axes (toggle)", initialStateOfShowBodyAxes, null, tabContainer, GridBagConstraints.REMAINDER, 1, this );
+      myShowBodyAxesCheckbox = new LSCheckbox( "Show body axes", initialStateOfShowBodyAxes, null, tabContainer, 2, 1, this );
       
       // Add picture of XYZ Basis Vectors to right of checkbox.
-      JLabel labelWithPictureOfXYZBasisVectors = LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "XRedYYellowZGreenBasisVectors.jpg", 0, 40 );
+      JLabel labelWithPictureOfXYZBasisVectors = LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "XRedYYellowZGreenBasisVectors.png", 0, 40 );
       tabContainer.AddComponentToLayoutRowRemainder1High( labelWithPictureOfXYZBasisVectors );
 
+      // Maybe add show muscle wrapping surfaces checkbox.
+      boolean oneOrMoreMuscleWrappingSurfacesExistsForThisBody = true;
+      if( oneOrMoreMuscleWrappingSurfacesExistsForThisBody )
+      {
+         tabContainer.AddBlankLabelToLayout1Wide1High(); 
+         boolean initialStateOfShowMuscleWrappingSurfaces = false; // BodyToggleFrameAction.IsShowAxesForBody( super.GetAssociatedOpenSimObject() );
+         myShowMuscleWrappingSurfacesCheckbox = new LSCheckbox( "Show muscle-wrapping surfaces", initialStateOfShowMuscleWrappingSurfaces, null, tabContainer, 2, 1, this );
+           
+         // Add picture of muscle-wrapping surface - if any exist for this rigid body.
+         JLabel labelWithPictureOfMuscleWrappingSurfaces = LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "MuscleWrapSurface.png", 0, 30 );
+         tabContainer.AddComponentToLayoutRowRemainder1High( labelWithPictureOfMuscleWrappingSurfaces );
+      }
+      
       // Add panel for wireframe/surface hide/show and translucent/opaque slider.
       this.CreatePanelTranslucentHideToOpaqueShow( tabContainer );
 
@@ -352,25 +392,30 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
 
       // Create mass label and text field.
       LSLabel massLabel = new LSLabel( "Mass  =  ", LSLabel.RIGHT, tabContainer );
-      myMassTextField = new LSTextFieldWithListenersForOpenSimDoubleNonNegative( this, super.GetPropertyTalkToSimbody(), "mass", 0.0, 0, true, tabContainer, 1, 1, this, this, this );   
+      myMassTextField = new LSTextFieldWithListenersForOpenSimDoubleNonNegative( this, super.GetPropertyTalkToSimbody(), "mass", 0, true, tabContainer, 1, 1, this, this, this );   
       tabContainer.AddBlankLabelToLayoutRowRemainder1High();
 
       // Create center of mass labels and text fields.
       tabContainer.AddBlankLabelToLayoutRowRemainder1High();
       new LSLabel( "Position of Body center of mass (Bcm) from Body origin (Bo)", LSLabel.CENTER, tabContainer, GridBagConstraints.REMAINDER );
       
-      double cmXYZValues[] = super.GetPropertyTalkToSimbody().GetOpenSimObjectPropertyValueAsArrayDouble3FromPropertyName( "mass_center" );
       new LSLabel( "Position  =  ", LSLabel.RIGHT, tabContainer );
-      myXcmTextField  = new LSTextField( cmXYZValues[0], 0, true, tabContainer, 1, 1, this, this, this );
+      myXcmTextField  = new LSTextFieldWithListenersForOpenSimArrayDouble( 0, this, super.GetPropertyTalkToSimbody(), "mass_center", 0, true, tabContainer, 1, 1, this, this, this );   
       new LSLabel( " * bx", LSLabel.LEFT, tabContainer, GridBagConstraints.REMAINDER );
       
       new LSLabel( "  +  ", LSLabel.RIGHT, tabContainer );
-      myYcmTextField  = new LSTextField( cmXYZValues[1], 0, true, tabContainer, 1, 1, this, this, this );
+      myYcmTextField  = new LSTextFieldWithListenersForOpenSimArrayDouble( 1, this, super.GetPropertyTalkToSimbody(), "mass_center", 0, true, tabContainer, 1, 1, this, this, this );   
       new LSLabel( " * by", LSLabel.LEFT, tabContainer, GridBagConstraints.REMAINDER );
 
       new LSLabel( "  +  ", LSLabel.RIGHT, tabContainer );
-      myZcmTextField  = new LSTextField( cmXYZValues[2], 0, true, tabContainer, 1, 1, this, this, this );
+      myZcmTextField  = new LSTextFieldWithListenersForOpenSimArrayDouble( 2, this, super.GetPropertyTalkToSimbody(), "mass_center", 0, true, tabContainer, 1, 1, this, this, this );   
       new LSLabel( " * bz", LSLabel.LEFT, tabContainer, GridBagConstraints.REMAINDER );
+
+      // Add show center of mass checkbox.
+      tabContainer.AddBlankLabelToLayout1Wide1High(); 
+      boolean initialStateOfShowCM = BodyToggleCOMAction.IsShowCMForBody( super.GetAssociatedOpenSimObject() );
+      myShowCMCheckboxB = new LSCheckbox( "Show center of mass", initialStateOfShowCM, null, tabContainer, GridBagConstraints.REMAINDER, 1, this );
+
 
       // Add picture of a rigid body with Bcm (Body center of mass) and Bo (Body origin).
       JLabel labelWithPicture = LSJava.LSResources.LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "RigidBodyWithOriginCMAndBasisVectors.jpg", 0, 140 );
@@ -418,15 +463,15 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
       tabContainer.SetConstraintInsets( 4, 4, 4, 4 );
 
       // Create inertia properties labels and text fields.
-      myIxxTextField = new LSTextFieldWithListenersForOpenSimDoubleNonNegative( this, super.GetPropertyTalkToSimbody(), "inertia_xx", 0.0, 0, true, tabContainer, 1, 1, this, this, this );   
-      myIxyTextField = new LSTextFieldWithListenersForOpenSimDouble(            this, super.GetPropertyTalkToSimbody(), "inertia_xy", 0.0, 0, true, tabContainer, 1, 1, this, this, this );   
-      myIxzTextField = new LSTextFieldWithListenersForOpenSimDouble(            this, super.GetPropertyTalkToSimbody(), "inertia_xz", 0.0, 0, true, tabContainer, GridBagConstraints.REMAINDER, 1, this, this, this );   
+      myIxxTextField = new LSTextFieldWithListenersForOpenSimDoubleNonNegative( this, super.GetPropertyTalkToSimbody(), "inertia_xx", 0, true, tabContainer, 1, 1, this, this, this );   
+      myIxyTextField = new LSTextFieldWithListenersForOpenSimDouble(            this, super.GetPropertyTalkToSimbody(), "inertia_xy", 0, true, tabContainer, 1, 1, this, this, this );   
+      myIxzTextField = new LSTextFieldWithListenersForOpenSimDouble(            this, super.GetPropertyTalkToSimbody(), "inertia_xz", 0, true, tabContainer, GridBagConstraints.REMAINDER, 1, this, this, this );   
       myIyxTextField = new LSTextField( myIxyTextField.GetTextFieldAsString(), 0, false, tabContainer, 1, 1, null, this, null );
-      myIyyTextField = new LSTextFieldWithListenersForOpenSimDoubleNonNegative( this, super.GetPropertyTalkToSimbody(), "inertia_yy", 0.0, 0, true, tabContainer, 1, 1, this, this, this );   
-      myIyzTextField = new LSTextFieldWithListenersForOpenSimDouble(            this, super.GetPropertyTalkToSimbody(), "inertia_yz", 0.0, 0, true, tabContainer, GridBagConstraints.REMAINDER, 1, this, this, this );   
+      myIyyTextField = new LSTextFieldWithListenersForOpenSimDoubleNonNegative( this, super.GetPropertyTalkToSimbody(), "inertia_yy", 0, true, tabContainer, 1, 1, this, this, this );   
+      myIyzTextField = new LSTextFieldWithListenersForOpenSimDouble(            this, super.GetPropertyTalkToSimbody(), "inertia_yz", 0, true, tabContainer, GridBagConstraints.REMAINDER, 1, this, this, this );   
       myIzxTextField = new LSTextField( myIxzTextField.GetTextFieldAsString(), 0, false, tabContainer, 1, 1, null, this, null );
       myIzyTextField = new LSTextField( myIyzTextField.GetTextFieldAsString(), 0, false, tabContainer, 1, 1, null, this, null );
-      myIzzTextField = new LSTextFieldWithListenersForOpenSimDoubleNonNegative( this, super.GetPropertyTalkToSimbody(), "inertia_zz", 0.0, 0, true, tabContainer, GridBagConstraints.REMAINDER, 1, this, this, this );   
+      myIzzTextField = new LSTextFieldWithListenersForOpenSimDoubleNonNegative( this, super.GetPropertyTalkToSimbody(), "inertia_zz", 0, true, tabContainer, GridBagConstraints.REMAINDER, 1, this, this, this );   
       
       return myInertiaMatrixPanel;
    } 
@@ -545,8 +590,10 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
    private LSButton       myButtonToOpenOldPropertyViewerTable;
    private LSTextField    myNameTextField; 
    private LSCheckbox     myShowBodyCheckbox, myHideBodyCheckbox;
-   private LSCheckbox     myShowCMCheckbox;
+   private LSCheckbox     myShowCMCheckboxA;	   // Checkbox on appearance tab
+   private LSCheckbox     myShowCMCheckboxB;	   // Checkbox on mass and center of mass tab
    private LSCheckbox     myShowBodyAxesCheckbox;
+   private LSCheckbox     myShowMuscleWrappingSurfacesCheckbox;
    private LSButton       myButtonToOpenColorChooser;
    private LSSlider       myOpacitySlider;
    private LSCheckbox     myWireFrameCheckbox;
@@ -554,8 +601,8 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
    private LSCheckbox     mySurfaceShadedFlatCheckbox;  
    // mySurfaceShadedFlatCheckbox is unimplemented VTK option since: (a) no difference to analytical geometry, (b) not much faster than smooth, (c) Confusing to give user extra options.
    
-   // Mass and center of mass fields.
-   private LSTextField    myXcmTextField,  myYcmTextField,  myZcmTextField;   
+   // Center of mass fields.
+   private LSTextFieldWithListenersForOpenSimArrayDouble  myXcmTextField,  myYcmTextField,  myZcmTextField;   
    
    // Mass and inertia matrix fields.
    private LSTextFieldWithListenersForOpenSimDoubleNonNegative  myMassTextField;  
