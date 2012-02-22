@@ -66,6 +66,7 @@ import javax.swing.tree.TreePath;
 import org.jfree.chart.ChartPanel;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
+import org.openide.util.Exceptions;
 import org.opensim.modeling.Coordinate;
 import org.opensim.modeling.AnalysisSet;
 import org.opensim.modeling.AnalyzeTool;
@@ -103,6 +104,7 @@ public class JPlotterPanel extends javax.swing.JPanel
    //      files don't need to be re read/parsed'
    // 2. It serves as the model backing the tree of plots/figures.
    private PlotterModel plotterModel = new PlotterModel();
+
    public enum PlotDataSource {FileSource, MotionSource, AnalysisSource};
    JPlotterQuantitySelector xSelector = null;
    String currentCurveTitle="";
@@ -893,27 +895,7 @@ public class JPlotterPanel extends javax.swing.JPanel
              JMenuItem coordinateMenuItem = new JMenuItem(coordinateName);
              coordinateMenuItem.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e) {
-                   setDomainName(coordinateName);
-                   sourceX=null;
-                   jXQtyTextField.setText(coordinateName);
-                   CoordinateSet cs = currentModel.getCoordinateSet();
-                   Coordinate coord = cs.get(coordinateName);
-                   if (coord.getMotionType() == Coordinate.MotionType.Rotational) {
-                      double conversionToGuiUnits = Math.toDegrees(1.0);
-                      domainFormat.setMinimumFractionDigits(0);
-                      domainFormat.setMaximumFractionDigits(5);
-                      domainFormatter.setMinimum(conversionToGuiUnits*coord.getRangeMin());
-                      domainFormatter.setMaximum(conversionToGuiUnits*coord.getRangeMax());
-                      jDomainStartTextField.setValue(conversionToGuiUnits*coord.getRangeMin());
-                      jDomainEndTextField.setValue(conversionToGuiUnits*coord.getRangeMax());
-                   } else {
-                      domainFormat.setMinimumFractionDigits(3);
-                      domainFormat.setMaximumFractionDigits(5);
-                      domainFormatter.setMinimum(coord.getRangeMin());
-                      domainFormatter.setMaximum(coord.getRangeMax());
-                      jDomainStartTextField.setValue(coord.getRangeMin());
-                      jDomainEndTextField.setValue(coord.getRangeMax());
-                   }
+                   populateXQty(coordinateName);
                    updateContextGuiElements();
                    jPlotterAddPlotButton.setEnabled(validateXY());
       //printPlotDescriptor();
@@ -1090,6 +1072,7 @@ public class JPlotterPanel extends javax.swing.JPanel
       TreeNode[] nodes = ((PlotTreeModel)plotterModel.getPlotTreeModel()).getPathToRoot(cvnode);
       TreePath path = new TreePath(nodes);
       jPlotsTree.addSelectionPath(path);
+      currentCurve = plotCurve;
    }
    
    private void jLoadFileToPlotterMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLoadFileToPlotterMenuItemActionPerformed
@@ -1106,6 +1089,16 @@ public class JPlotterPanel extends javax.swing.JPanel
       }
    }//GEN-LAST:event_jLoadFileToPlotterMenuItemActionPerformed
    
+   public PlotterSourceFile loadFile(String dataFilename) {
+        try {
+            PlotterSourceFile src = new PlotterSourceFile(dataFilename);
+            getPlotterModel().addSource(src);
+            return src;
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        return null;
+   }
    
    public PlotterModel getPlotterModel() {
       return plotterModel;
@@ -1372,6 +1365,19 @@ public class JPlotterPanel extends javax.swing.JPanel
       }
       return rep;      
    }
+   public PlotCurve plotDataFromSource(PlotterSourceInterface source, String domain, String range) {
+        sourceX = source;
+        sourceY = sourceX;
+        setDomainName(domain);
+        PlotCurveSettings settings  = getSettings();
+        PlotCurve plotCurve=null;
+        settings.setName(range);
+        plotCurve = plotterModel.addCurveSingleRangeName("Title", settings,
+                                sourceX, getDomainName(), sourceY, range);
+        makeCurveCurrent(plotCurve);
+        return plotCurve;
+   }
+   
    public PlotCurve showAnalysisCurveAgainstTime(Model aModel, Storage s,
            String title,
            String curveLegend, String columnName,
@@ -1662,16 +1668,10 @@ public class JPlotterPanel extends javax.swing.JPanel
             jSourcePopupMenu.add(quantityMenuItem);
             quantityMenuItem.addActionListener(
                     new ActionListener(){
-               public void actionPerformed(ActionEvent e) {
-                  // Show multipleSelect dialog with all muscles
-                  // Populate YQty text field with selection
-                  //XX1
-                  jYQtyTextField.setText(qName);
-                  useMuscles(true);
-                  updateContextGuiElements();
-                  sourceY=(new PlotterSourceAnalysis(currentModel, plotterModel.getStorage(qName, currentModel), qName));
-                  //printPlotDescriptor();
-               }
+                        public void actionPerformed(ActionEvent e) {
+                            populateYQty(qName);
+                        }
+                        
             });
          }
          }
@@ -2159,5 +2159,48 @@ public class JPlotterPanel extends javax.swing.JPanel
     {
         return plotterModel.getCurrentPlot().getChartPanel();
     
+    }
+    PlotCurve showAnalysisCurve(String qName, String muscleName, String genCoordName) {
+       PlotCurve plotCurve=null;
+       openSimContext = OpenSimDB.getInstance().getContext(currentModel);
+       populateYQty(qName);
+       populateXQty(genCoordName);
+       rangeNames = new String[]{muscleName};
+       jPlotterAddCurveButtonActionPerformed(null);
+       plotCurve = currentCurve;
+       return plotCurve;
+    }
+    private void populateYQty(final String qtyName) {
+        // Show multipleSelect dialog with all muscles
+        // Populate YQty text field with selection
+        //XX1
+        jYQtyTextField.setText(qtyName);
+        useMuscles(true);
+        updateContextGuiElements();
+        sourceY=(new PlotterSourceAnalysis(currentModel, plotterModel.getStorage(qtyName, currentModel), qtyName));
+    }
+    private void populateXQty(final String coordinateName) {
+        setDomainName(coordinateName);
+        sourceX = null;
+        jXQtyTextField.setText(coordinateName);
+        CoordinateSet cs = currentModel.getCoordinateSet();
+        Coordinate coord = cs.get(coordinateName);
+        if (coord.getMotionType() == Coordinate.MotionType.Rotational) {
+            double conversionToGuiUnits = Math.toDegrees(1.0);
+            domainFormat.setMinimumFractionDigits(0);
+            domainFormat.setMaximumFractionDigits(5);
+            domainFormatter.setMinimum(conversionToGuiUnits * coord.getRangeMin());
+            domainFormatter.setMaximum(conversionToGuiUnits * coord.getRangeMax());
+            jDomainStartTextField.setValue(conversionToGuiUnits * coord.getRangeMin());
+            jDomainEndTextField.setValue(conversionToGuiUnits * coord.getRangeMax());
+        } else {
+            domainFormat.setMinimumFractionDigits(3);
+            domainFormat.setMaximumFractionDigits(5);
+            domainFormatter.setMinimum(coord.getRangeMin());
+            domainFormatter.setMaximum(coord.getRangeMax());
+            jDomainStartTextField.setValue(coord.getRangeMin());
+            jDomainEndTextField.setValue(coord.getRangeMax());
+        }
+
     }
 }

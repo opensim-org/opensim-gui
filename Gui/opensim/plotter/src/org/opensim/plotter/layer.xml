@@ -5,21 +5,21 @@
         <folder name="Edit">
             <file name="org-opensim-plotter-ToolsPlotAction.instance"/>
         </folder>
-    </folder>
+     </folder>
     <folder name="Menu">
         <folder name="Tools">
             <file name="org-opensim-plotter-separatorBefore.instance">
                 <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
-                <attr name="position" intvalue="60"/>
+                <attr name="position" intvalue="40"/>
             </file>
             <file name="org-opensim-plotter-ToolsPlotAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-plotter-ToolsPlotAction.instance"/>
-                <attr name="position" intvalue="70"/>
+                <attr name="position" intvalue="45"/>
             </file>
             <file name="org-opensim-plotter-separatorAfter.instance">
                 <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
-                <attr name="position" intvalue="80"/>
+                <attr name="position" intvalue="50"/>
             </file>
         </folder>
     </folder>
-</filesystem>
+ </filesystem>

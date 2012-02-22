@@ -28,6 +28,8 @@
  */
 package org.opensim.plotter;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -36,6 +38,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeNode;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.opensim.modeling.Analysis;
 import org.opensim.modeling.AnalysisSet;
 import org.opensim.modeling.AnalyzeTool;
@@ -188,7 +191,6 @@ public class PlotterModel {
       PlotCurve newCurve = new PlotCurve(plotCurveSettings, source1, string1, source2, string2);
       currentPlot.add(newCurve);
       
-      //currentPlot.dChart.getXYPlot().addAnnotation(new XYTextAnnotation("text", ));
       plotTreeModel.addPlotCurveToTree(newCurve);
       //currentPlot.setTitle(title);
       // if motionCurve xlabel is motion name, ylabel string2
@@ -496,6 +498,22 @@ public class PlotterModel {
          }
       }
    }
+     public void setColorRGB(int series, float r, float g, float b){
+       Plot currentPlot = availablePlots.get(currentPlotIndex);
+       XYPlot dPlot = currentPlot.getChartPanel().getChart().getXYPlot();
+       XYItemRenderer renderer = dPlot.getRenderer();
+       renderer.setSeriesPaint(series, new Color(r, g, b));
+       //renderer.setBaseStroke(new BasicStroke(3.0f));
+   }
+   
+   public void setStroke(float size){
+       Plot currentPlot = availablePlots.get(currentPlotIndex);
+       XYPlot dPlot = currentPlot.getChartPanel().getChart().getXYPlot();
+       XYItemRenderer renderer = dPlot.getRenderer();
+       //renderer.setSeriesPaint(0, new Color(r, g, b));
+       renderer.setBaseStroke(new BasicStroke(size));
+   }
+  
 
    
 }

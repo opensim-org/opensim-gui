@@ -28,8 +28,12 @@
  */
 package org.opensim.plotter;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.util.Vector;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.opensim.modeling.Coordinate;
 import org.opensim.modeling.ArrayDouble;
@@ -44,7 +48,6 @@ import org.opensim.view.pub.OpenSimDB;
  */
 public class PlotCurve {
    
-   JFreeChart   dChart=null;
    private XYSeries    curveSeries=null;
    private boolean      timeDependent=false;
    private PlotCurveSettings    settings;
@@ -373,5 +376,6 @@ public class PlotCurve {
    public void setYLabel(String yLabel) {
       this.yLabel = yLabel;
    }
-
+   
+ 
 }

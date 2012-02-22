@@ -380,7 +380,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="297" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="299" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -405,10 +405,10 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jPlotSpecPanel" max="32767" attributes="1"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPlotNavigationPanel" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jPlotSpecPanel" max="32767" attributes="1"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jPlotNavigationPanel" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jButton1" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -462,7 +462,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="jScrollPane1" pref="94" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="96" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -613,7 +613,7 @@
                               <Component id="jSummaryAdvancedTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jAdvancedOptionsButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -637,8 +637,8 @@
                     <Property name="text" type="java.lang.String" value="Y-Quantity..."/>
                   </Properties>
                   <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="yQuantityButtonMousePressed"/>
                     <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="yQuantityButtonMouseReleased"/>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="yQuantityButtonMousePressed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jMuscleSelectButton">

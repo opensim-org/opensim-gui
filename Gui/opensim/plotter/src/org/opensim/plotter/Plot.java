@@ -176,7 +176,7 @@ public class Plot {
        
     }
     
-   void exportData(String filename) {
+   public void exportData(String filename) {
       if (seriesCollection==null)
          return;     // Nothing to export
       try {
