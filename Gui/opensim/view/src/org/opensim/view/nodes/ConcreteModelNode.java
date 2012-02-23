@@ -25,6 +25,7 @@ public class ConcreteModelNode extends OpenSimObjectNode {
         getChildren().add(new Node[] {new ContactGeometriesNode(m.getContactGeometrySet())});
         getChildren().add(new Node[] {new AllForcesNode(m.getForceSet())});
         getChildren().add(new Node[] {new MarkersNode(m.getMarkerSet())});
+        getChildren().add(new Node[] {new ControllersNode(m.getControllerSet())});
         }
         addDisplayOption(displayOption.Isolatable);
         addDisplayOption(displayOption.Showable);
