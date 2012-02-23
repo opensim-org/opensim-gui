@@ -50,8 +50,14 @@ public class OpenSimNode extends AbstractNode {
         mapPropertyEnumToGetters.put(PropertyType.Bool, "getValueBool");
         mapPropertyEnumToClass.put(PropertyType.Obj, OpenSimObject.class);
         mapPropertyEnumToGetters.put(PropertyType.Obj, "getValueObj");
+        mapPropertyEnumToClass.put(PropertyType.StrArray, String.class);
+        mapPropertyEnumToGetters.put(PropertyType.StrArray, "toString");
+        mapPropertyEnumToClass.put(PropertyType.IntArray, String.class);
+        mapPropertyEnumToGetters.put(PropertyType.IntArray, "toString");
         mapPropertyEnumToClass.put(PropertyType.DblVec, String.class);
         mapPropertyEnumToGetters.put(PropertyType.DblVec, "toString");
+        mapPropertyEnumToClass.put(PropertyType.DblArray, String.class);
+        mapPropertyEnumToGetters.put(PropertyType.DblArray, "toString");
    }
     /**
      * Creates a new instance of OpenSimNode

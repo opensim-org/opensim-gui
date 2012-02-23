@@ -25,6 +25,8 @@
  */
 package org.opensim.view;
 
+import java.beans.PropertyEditor;
+import java.beans.PropertyEditorManager;
 import java.beans.XMLDecoder;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -128,6 +130,8 @@ public class Installer extends ModuleInstall {
                 ex.printStackTrace();
             }
         }
+        PropertyEditorManager.registerEditor(OpenSimObject.class, OpenSimObjectEditor.class);
+        PropertyEditor findEditor = PropertyEditorManager.findEditor(OpenSimObject.class);
     }
     /**
      * restorePrefs is primarily used for the first time around where there are no pref values
