@@ -32,16 +32,11 @@ public class MarkersDisplayer extends OpenSimvtkGlyphCloud {
     /** Creates a new instance of MarkersDisplayer */
     public MarkersDisplayer() {
         super(false);
-           // Markers
-       vtkSphereSource marker=new vtkSphereSource();
-       marker.SetRadius(ViewDB.getInstance().getMarkerDisplayRadius());
-       marker.SetCenter(0., 0., 0.);
+       // Markers
        defaultMarkerColor = ViewDB.getInstance().getDefaultMarkersColor();
        setColorRange(defaultMarkerColor, defaultMarkerColor);
        setSelectedColor(SelectedObject.defaultSelectedColor);
-       vtkStripper strip1 = new vtkStripper();
-       strip1.SetInput(marker.GetOutput());
-       setShape(strip1.GetOutput());
+       setShape("marker");
        scaleByVectorComponents();
 }
 
