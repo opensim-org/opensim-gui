@@ -43,16 +43,16 @@ public class ModelComponentSetJoints extends SetJoints {
     this(opensimModelJNI.new_ModelComponentSetJoints__SWIG_1(Model.getCPtr(model), model), true);
   }
 
-  public ModelComponentSetJoints(Model model, String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelJNI.new_ModelComponentSetJoints__SWIG_2(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
+  public ModelComponentSetJoints(Model model, String fileName, boolean aUpdateFromXMLNode) {
+    this(opensimModelJNI.new_ModelComponentSetJoints__SWIG_2(Model.getCPtr(model), model, fileName, aUpdateFromXMLNode), true);
   }
 
-  public ModelComponentSetJoints(Model model, String aFileName) {
-    this(opensimModelJNI.new_ModelComponentSetJoints__SWIG_3(Model.getCPtr(model), model, aFileName), true);
+  public ModelComponentSetJoints(Model model, String fileName) {
+    this(opensimModelJNI.new_ModelComponentSetJoints__SWIG_3(Model.getCPtr(model), model, fileName), true);
   }
 
-  public ModelComponentSetJoints(ModelComponentSetJoints aSet) {
-    this(opensimModelJNI.new_ModelComponentSetJoints__SWIG_4(ModelComponentSetJoints.getCPtr(aSet), aSet), true);
+  public ModelComponentSetJoints(ModelComponentSetJoints source) {
+    this(opensimModelJNI.new_ModelComponentSetJoints__SWIG_4(ModelComponentSetJoints.getCPtr(source), source), true);
   }
 
   public OpenSimObject copy() {

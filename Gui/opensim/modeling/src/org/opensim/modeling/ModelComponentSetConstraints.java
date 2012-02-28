@@ -43,16 +43,16 @@ public class ModelComponentSetConstraints extends SetConstraints {
     this(opensimModelJNI.new_ModelComponentSetConstraints__SWIG_1(Model.getCPtr(model), model), true);
   }
 
-  public ModelComponentSetConstraints(Model model, String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelJNI.new_ModelComponentSetConstraints__SWIG_2(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
+  public ModelComponentSetConstraints(Model model, String fileName, boolean aUpdateFromXMLNode) {
+    this(opensimModelJNI.new_ModelComponentSetConstraints__SWIG_2(Model.getCPtr(model), model, fileName, aUpdateFromXMLNode), true);
   }
 
-  public ModelComponentSetConstraints(Model model, String aFileName) {
-    this(opensimModelJNI.new_ModelComponentSetConstraints__SWIG_3(Model.getCPtr(model), model, aFileName), true);
+  public ModelComponentSetConstraints(Model model, String fileName) {
+    this(opensimModelJNI.new_ModelComponentSetConstraints__SWIG_3(Model.getCPtr(model), model, fileName), true);
   }
 
-  public ModelComponentSetConstraints(ModelComponentSetConstraints aSet) {
-    this(opensimModelJNI.new_ModelComponentSetConstraints__SWIG_4(ModelComponentSetConstraints.getCPtr(aSet), aSet), true);
+  public ModelComponentSetConstraints(ModelComponentSetConstraints source) {
+    this(opensimModelJNI.new_ModelComponentSetConstraints__SWIG_4(ModelComponentSetConstraints.getCPtr(source), source), true);
   }
 
   public OpenSimObject copy() {

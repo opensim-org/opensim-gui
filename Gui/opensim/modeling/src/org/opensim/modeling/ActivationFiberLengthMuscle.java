@@ -35,15 +35,6 @@ public class ActivationFiberLengthMuscle extends Muscle {
     super.delete();
   }
 
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.ActivationFiberLengthMuscle_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
-  }
-
-  public void equilibrate(SWIGTYPE_p_SimTK__State state) {
-    opensimModelJNI.ActivationFiberLengthMuscle_equilibrate(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state));
-  }
-
   public double getDefaultActivation() {
     return opensimModelJNI.ActivationFiberLengthMuscle_getDefaultActivation(swigCPtr, this);
   }
@@ -60,116 +51,20 @@ public class ActivationFiberLengthMuscle extends Muscle {
     opensimModelJNI.ActivationFiberLengthMuscle_setDefaultFiberLength(swigCPtr, this, length);
   }
 
-  public double getFiberLength(SWIGTYPE_p_SimTK__State s) {
-    return opensimModelJNI.ActivationFiberLengthMuscle_getFiberLength(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  public void setActivation(SWIGTYPE_p_SimTK__State s, double activation) {
+    opensimModelJNI.ActivationFiberLengthMuscle_setActivation(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), activation);
   }
 
   public void setFiberLength(SWIGTYPE_p_SimTK__State s, double fiberLength) {
     opensimModelJNI.ActivationFiberLengthMuscle_setFiberLength(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), fiberLength);
   }
 
-  public double getFiberLengthDeriv(SWIGTYPE_p_SimTK__State s) {
-    return opensimModelJNI.ActivationFiberLengthMuscle_getFiberLengthDeriv(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
-  public void setFiberLengthDeriv(SWIGTYPE_p_SimTK__State s, double fiberLengthDeriv) {
-    opensimModelJNI.ActivationFiberLengthMuscle_setFiberLengthDeriv(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), fiberLengthDeriv);
-  }
-
-  public double getNormalizedFiberLength(SWIGTYPE_p_SimTK__State s) {
-    return opensimModelJNI.ActivationFiberLengthMuscle_getNormalizedFiberLength(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
-  public double getFiberLengthAlongTendon(SWIGTYPE_p_SimTK__State s) {
-    return opensimModelJNI.ActivationFiberLengthMuscle_getFiberLengthAlongTendon(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
-  public double getTendonLength(SWIGTYPE_p_SimTK__State s) {
-    return opensimModelJNI.ActivationFiberLengthMuscle_getTendonLength(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
-  public double getFiberForce(SWIGTYPE_p_SimTK__State s) {
-    return opensimModelJNI.ActivationFiberLengthMuscle_getFiberForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
-  public double getActiveFiberForce(SWIGTYPE_p_SimTK__State s) {
-    return opensimModelJNI.ActivationFiberLengthMuscle_getActiveFiberForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
-  public double getPassiveFiberForce(SWIGTYPE_p_SimTK__State s) {
-    return opensimModelJNI.ActivationFiberLengthMuscle_getPassiveFiberForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
-  public double getActiveFiberForceAlongTendon(SWIGTYPE_p_SimTK__State s) {
-    return opensimModelJNI.ActivationFiberLengthMuscle_getActiveFiberForceAlongTendon(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
-  public double getPassiveFiberForceAlongTendon(SWIGTYPE_p_SimTK__State s) {
-    return opensimModelJNI.ActivationFiberLengthMuscle_getPassiveFiberForceAlongTendon(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
-  public double getPassiveForce(SWIGTYPE_p_SimTK__State s) {
-    return opensimModelJNI.ActivationFiberLengthMuscle_getPassiveForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
-  public void setPassiveForce(SWIGTYPE_p_SimTK__State s, double aForce) {
-    opensimModelJNI.ActivationFiberLengthMuscle_setPassiveForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), aForce);
-  }
-
-  public double getTendonForce(SWIGTYPE_p_SimTK__State s) {
-    return opensimModelJNI.ActivationFiberLengthMuscle_getTendonForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
-  public void setTendonForce(SWIGTYPE_p_SimTK__State s, double aForce) {
-    opensimModelJNI.ActivationFiberLengthMuscle_setTendonForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), aForce);
-  }
-
-  public double getActivation(SWIGTYPE_p_SimTK__State s) {
-    return opensimModelJNI.ActivationFiberLengthMuscle_getActivation(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
-  public void setActivation(SWIGTYPE_p_SimTK__State s, double activation) {
-    opensimModelJNI.ActivationFiberLengthMuscle_setActivation(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), activation);
-  }
-
-  public double getActivationDeriv(SWIGTYPE_p_SimTK__State s) {
-    return opensimModelJNI.ActivationFiberLengthMuscle_getActivationDeriv(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
-  public void setActivationDeriv(SWIGTYPE_p_SimTK__State s, double activationDeriv) {
-    opensimModelJNI.ActivationFiberLengthMuscle_setActivationDeriv(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), activationDeriv);
-  }
-
-  public double getExcitation(SWIGTYPE_p_SimTK__State s) {
-    return opensimModelJNI.ActivationFiberLengthMuscle_getExcitation(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
-  public double getStress(SWIGTYPE_p_SimTK__State s) {
-    return opensimModelJNI.ActivationFiberLengthMuscle_getStress(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
-  public void computeEquilibrium(SWIGTYPE_p_SimTK__State s) {
-    opensimModelJNI.ActivationFiberLengthMuscle_computeEquilibrium(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
-  public double computeActuation(SWIGTYPE_p_SimTK__State s) {
-    return opensimModelJNI.ActivationFiberLengthMuscle_computeActuation(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
-  public double computeIsometricForce(SWIGTYPE_p_SimTK__State s, double activation) {
-    return opensimModelJNI.ActivationFiberLengthMuscle_computeIsometricForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), activation);
+  public double getActivationRate(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.ActivationFiberLengthMuscle_getActivationRate(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
   }
 
   public double computeIsokineticForceAssumingInfinitelyStiffTendon(SWIGTYPE_p_SimTK__State s, double aActivation) {
     return opensimModelJNI.ActivationFiberLengthMuscle_computeIsokineticForceAssumingInfinitelyStiffTendon(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), aActivation);
-  }
-
-  public ArrayStr getRecordLabels() {
-    return new ArrayStr(opensimModelJNI.ActivationFiberLengthMuscle_getRecordLabels(swigCPtr, this), true);
-  }
-
-  public ArrayDouble getRecordValues(SWIGTYPE_p_SimTK__State state) {
-    return new ArrayDouble(opensimModelJNI.ActivationFiberLengthMuscle_getRecordValues(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state)), true);
   }
 
   public ArrayStr getStateVariableNames() {
@@ -194,7 +89,7 @@ public class ActivationFiberLengthMuscle extends Muscle {
   }
 
   public void copy(OpenSimObject aObject) {
-    opensimModelJNI.ActivationFiberLengthMuscle_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelJNI.ActivationFiberLengthMuscle_copy(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

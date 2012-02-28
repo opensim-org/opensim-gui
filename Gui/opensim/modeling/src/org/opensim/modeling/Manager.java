@@ -39,8 +39,12 @@ public class Manager {
     this(opensimModelJNI.new_Manager__SWIG_0(Model.getCPtr(arg0), arg0, SWIGTYPE_p_SimTK__Integrator.getCPtr(arg1)), true);
   }
 
+  public Manager(Model aModel) {
+    this(opensimModelJNI.new_Manager__SWIG_1(Model.getCPtr(aModel), aModel), true);
+  }
+
   public Manager() {
-    this(opensimModelJNI.new_Manager__SWIG_1(), true);
+    this(opensimModelJNI.new_Manager__SWIG_2(), true);
   }
 
   public void setSessionName(String name) {

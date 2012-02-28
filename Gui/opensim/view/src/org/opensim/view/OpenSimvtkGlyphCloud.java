@@ -33,10 +33,10 @@ package org.opensim.view;
 import java.util.HashMap;
 import java.util.Stack;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.view.motions.MotionObjectsDB;
 import vtk.vtkActor;
 import vtk.vtkColorTransferFunction;
 import vtk.vtkDataArray;
-import vtk.vtkDataSet;
 import vtk.vtkFloatArray;
 import vtk.vtkGlyph3D;
 import vtk.vtkIdList;
@@ -94,6 +94,9 @@ public class OpenSimvtkGlyphCloud {    // Assume same shape
     
     public void setShape(vtkPolyData rep) {
         shape = rep;
+    }
+    public void setShapeName(String name) {
+        setShape(MotionObjectsDB.getInstance().getShape(name));
     }
     public void setDisplayProperties(vtkProperty prop) {
         actor.SetProperty(prop);

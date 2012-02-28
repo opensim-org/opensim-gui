@@ -15,6 +15,7 @@ import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.SimbodyEngine;
+import org.opensim.view.motions.MotionObjectsDB;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 import vtk.vtkSphereSource;
@@ -36,7 +37,7 @@ public class MarkersDisplayer extends OpenSimvtkGlyphCloud {
        defaultMarkerColor = ViewDB.getInstance().getDefaultMarkersColor();
        setColorRange(defaultMarkerColor, defaultMarkerColor);
        setSelectedColor(SelectedObject.defaultSelectedColor);
-       setShape("marker");
+       setShapeName("marker");
        scaleByVectorComponents();
 }
 

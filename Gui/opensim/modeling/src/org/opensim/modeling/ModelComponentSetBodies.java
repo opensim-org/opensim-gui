@@ -43,16 +43,16 @@ public class ModelComponentSetBodies extends SetBodies {
     this(opensimModelJNI.new_ModelComponentSetBodies__SWIG_1(Model.getCPtr(model), model), true);
   }
 
-  public ModelComponentSetBodies(Model model, String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelJNI.new_ModelComponentSetBodies__SWIG_2(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
+  public ModelComponentSetBodies(Model model, String fileName, boolean aUpdateFromXMLNode) {
+    this(opensimModelJNI.new_ModelComponentSetBodies__SWIG_2(Model.getCPtr(model), model, fileName, aUpdateFromXMLNode), true);
   }
 
-  public ModelComponentSetBodies(Model model, String aFileName) {
-    this(opensimModelJNI.new_ModelComponentSetBodies__SWIG_3(Model.getCPtr(model), model, aFileName), true);
+  public ModelComponentSetBodies(Model model, String fileName) {
+    this(opensimModelJNI.new_ModelComponentSetBodies__SWIG_3(Model.getCPtr(model), model, fileName), true);
   }
 
-  public ModelComponentSetBodies(ModelComponentSetBodies aSet) {
-    this(opensimModelJNI.new_ModelComponentSetBodies__SWIG_4(ModelComponentSetBodies.getCPtr(aSet), aSet), true);
+  public ModelComponentSetBodies(ModelComponentSetBodies source) {
+    this(opensimModelJNI.new_ModelComponentSetBodies__SWIG_4(ModelComponentSetBodies.getCPtr(source), source), true);
   }
 
   public OpenSimObject copy() {

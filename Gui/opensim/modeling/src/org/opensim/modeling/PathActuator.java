@@ -104,14 +104,6 @@ public class PathActuator extends Actuator {
     return opensimModelJNI.PathActuator_computeMomentArm(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), Coordinate.getCPtr(aCoord), aCoord);
   }
 
-  public ArrayStr getRecordLabels() {
-    return new ArrayStr(opensimModelJNI.PathActuator_getRecordLabels(swigCPtr, this), true);
-  }
-
-  public ArrayDouble getRecordValues(SWIGTYPE_p_SimTK__State state) {
-    return new ArrayDouble(opensimModelJNI.PathActuator_getRecordValues(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state)), true);
-  }
-
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
     opensimModelJNI.PathActuator_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
   }

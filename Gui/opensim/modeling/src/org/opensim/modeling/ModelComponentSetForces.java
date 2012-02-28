@@ -43,16 +43,16 @@ public class ModelComponentSetForces extends SetForces {
     this(opensimModelJNI.new_ModelComponentSetForces__SWIG_1(Model.getCPtr(model), model), true);
   }
 
-  public ModelComponentSetForces(Model model, String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelJNI.new_ModelComponentSetForces__SWIG_2(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
+  public ModelComponentSetForces(Model model, String fileName, boolean aUpdateFromXMLNode) {
+    this(opensimModelJNI.new_ModelComponentSetForces__SWIG_2(Model.getCPtr(model), model, fileName, aUpdateFromXMLNode), true);
   }
 
-  public ModelComponentSetForces(Model model, String aFileName) {
-    this(opensimModelJNI.new_ModelComponentSetForces__SWIG_3(Model.getCPtr(model), model, aFileName), true);
+  public ModelComponentSetForces(Model model, String fileName) {
+    this(opensimModelJNI.new_ModelComponentSetForces__SWIG_3(Model.getCPtr(model), model, fileName), true);
   }
 
-  public ModelComponentSetForces(ModelComponentSetForces aSet) {
-    this(opensimModelJNI.new_ModelComponentSetForces__SWIG_4(ModelComponentSetForces.getCPtr(aSet), aSet), true);
+  public ModelComponentSetForces(ModelComponentSetForces source) {
+    this(opensimModelJNI.new_ModelComponentSetForces__SWIG_4(ModelComponentSetForces.getCPtr(source), source), true);
   }
 
   public OpenSimObject copy() {

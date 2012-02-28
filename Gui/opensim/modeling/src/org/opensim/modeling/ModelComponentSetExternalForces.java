@@ -43,16 +43,16 @@ public class ModelComponentSetExternalForces extends SetExternalForces {
     this(opensimModelJNI.new_ModelComponentSetExternalForces__SWIG_1(Model.getCPtr(model), model), true);
   }
 
-  public ModelComponentSetExternalForces(Model model, String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelJNI.new_ModelComponentSetExternalForces__SWIG_2(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
+  public ModelComponentSetExternalForces(Model model, String fileName, boolean aUpdateFromXMLNode) {
+    this(opensimModelJNI.new_ModelComponentSetExternalForces__SWIG_2(Model.getCPtr(model), model, fileName, aUpdateFromXMLNode), true);
   }
 
-  public ModelComponentSetExternalForces(Model model, String aFileName) {
-    this(opensimModelJNI.new_ModelComponentSetExternalForces__SWIG_3(Model.getCPtr(model), model, aFileName), true);
+  public ModelComponentSetExternalForces(Model model, String fileName) {
+    this(opensimModelJNI.new_ModelComponentSetExternalForces__SWIG_3(Model.getCPtr(model), model, fileName), true);
   }
 
-  public ModelComponentSetExternalForces(ModelComponentSetExternalForces aSet) {
-    this(opensimModelJNI.new_ModelComponentSetExternalForces__SWIG_4(ModelComponentSetExternalForces.getCPtr(aSet), aSet), true);
+  public ModelComponentSetExternalForces(ModelComponentSetExternalForces source) {
+    this(opensimModelJNI.new_ModelComponentSetExternalForces__SWIG_4(ModelComponentSetExternalForces.getCPtr(source), source), true);
   }
 
   public OpenSimObject copy() {

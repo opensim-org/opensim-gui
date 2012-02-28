@@ -43,16 +43,16 @@ public class ModelComponentSetCoordinates extends SetCoordinates {
     this(opensimModelJNI.new_ModelComponentSetCoordinates__SWIG_1(Model.getCPtr(model), model), true);
   }
 
-  public ModelComponentSetCoordinates(Model model, String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelJNI.new_ModelComponentSetCoordinates__SWIG_2(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
+  public ModelComponentSetCoordinates(Model model, String fileName, boolean aUpdateFromXMLNode) {
+    this(opensimModelJNI.new_ModelComponentSetCoordinates__SWIG_2(Model.getCPtr(model), model, fileName, aUpdateFromXMLNode), true);
   }
 
-  public ModelComponentSetCoordinates(Model model, String aFileName) {
-    this(opensimModelJNI.new_ModelComponentSetCoordinates__SWIG_3(Model.getCPtr(model), model, aFileName), true);
+  public ModelComponentSetCoordinates(Model model, String fileName) {
+    this(opensimModelJNI.new_ModelComponentSetCoordinates__SWIG_3(Model.getCPtr(model), model, fileName), true);
   }
 
-  public ModelComponentSetCoordinates(ModelComponentSetCoordinates aSet) {
-    this(opensimModelJNI.new_ModelComponentSetCoordinates__SWIG_4(ModelComponentSetCoordinates.getCPtr(aSet), aSet), true);
+  public ModelComponentSetCoordinates(ModelComponentSetCoordinates source) {
+    this(opensimModelJNI.new_ModelComponentSetCoordinates__SWIG_4(ModelComponentSetCoordinates.getCPtr(source), source), true);
   }
 
   public OpenSimObject copy() {

@@ -43,16 +43,16 @@ public class ModelComponentSetContactGeometry extends SetContactGeometry {
     this(opensimModelJNI.new_ModelComponentSetContactGeometry__SWIG_1(Model.getCPtr(model), model), true);
   }
 
-  public ModelComponentSetContactGeometry(Model model, String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelJNI.new_ModelComponentSetContactGeometry__SWIG_2(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
+  public ModelComponentSetContactGeometry(Model model, String fileName, boolean aUpdateFromXMLNode) {
+    this(opensimModelJNI.new_ModelComponentSetContactGeometry__SWIG_2(Model.getCPtr(model), model, fileName, aUpdateFromXMLNode), true);
   }
 
-  public ModelComponentSetContactGeometry(Model model, String aFileName) {
-    this(opensimModelJNI.new_ModelComponentSetContactGeometry__SWIG_3(Model.getCPtr(model), model, aFileName), true);
+  public ModelComponentSetContactGeometry(Model model, String fileName) {
+    this(opensimModelJNI.new_ModelComponentSetContactGeometry__SWIG_3(Model.getCPtr(model), model, fileName), true);
   }
 
-  public ModelComponentSetContactGeometry(ModelComponentSetContactGeometry aSet) {
-    this(opensimModelJNI.new_ModelComponentSetContactGeometry__SWIG_4(ModelComponentSetContactGeometry.getCPtr(aSet), aSet), true);
+  public ModelComponentSetContactGeometry(ModelComponentSetContactGeometry source) {
+    this(opensimModelJNI.new_ModelComponentSetContactGeometry__SWIG_4(ModelComponentSetContactGeometry.getCPtr(source), source), true);
   }
 
   public OpenSimObject copy() {

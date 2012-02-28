@@ -41,7 +41,7 @@ public class OneControllerNode extends OpenSimObjectNode {
         else
             imageURL = this.getClass().getResource("icons/constraintNode.png");
         if (imageURL != null) { 
-            return new ImageIcon(imageURL, "Controler").getImage();
+            return new ImageIcon(imageURL, "Controller").getImage();
         } else {
             return null;
         }

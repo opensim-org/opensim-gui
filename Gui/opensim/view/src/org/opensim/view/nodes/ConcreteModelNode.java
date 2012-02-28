@@ -5,7 +5,7 @@ import org.openide.nodes.Node;
 import org.opensim.modeling.Model;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.view.*;
-import org.opensim.view.nodes.ContactGeometriesNode;
+import org.opensim.view.motions.FileLoadMotionAction;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 import org.opensim.view.pub.ViewDB;
 
@@ -50,7 +50,7 @@ public class ConcreteModelNode extends OpenSimObjectNode {
 				};
 			}
 			else 
-            classSpecificActions = new Action[]{
+                classSpecificActions = new Action[]{
                 (ModelMakeCurrentAction) ModelMakeCurrentAction.findObject(
                         (Class)Class.forName("org.opensim.view.nodes.ModelMakeCurrentAction"), true),
                 (ModelRenameAction) ModelRenameAction.findObject(
@@ -66,7 +66,10 @@ public class ConcreteModelNode extends OpenSimObjectNode {
 			(Class)Class.forName("org.opensim.view.nodes.ModelSaveAsSelectedAction"), true),
                 null,
                 (ModelCloseSelectedAction) ModelCloseSelectedAction.findObject(
-                        (Class)Class.forName("org.opensim.view.nodes.ModelCloseSelectedAction"), true)
+                        (Class)Class.forName("org.opensim.view.nodes.ModelCloseSelectedAction"), true),
+                null,
+                (FileLoadMotionAction) FileLoadMotionAction.findObject(
+                        (Class)Class.forName("org.opensim.view.motions.FileLoadMotionAction"), true)
                 
             };
       } catch(ClassNotFoundException e){

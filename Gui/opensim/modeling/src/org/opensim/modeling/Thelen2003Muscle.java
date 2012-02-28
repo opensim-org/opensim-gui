@@ -100,48 +100,48 @@ public class Thelen2003Muscle extends ActivationFiberLengthMuscle {
     return opensimModelJNI.Thelen2003Muscle_getFlen(swigCPtr, this);
   }
 
-  public boolean setActivationTimeConstant(double aActivationTimeConstant) {
-    return opensimModelJNI.Thelen2003Muscle_setActivationTimeConstant(swigCPtr, this, aActivationTimeConstant);
+  public void setActivationTimeConstant(double aActivationTimeConstant) {
+    opensimModelJNI.Thelen2003Muscle_setActivationTimeConstant(swigCPtr, this, aActivationTimeConstant);
   }
 
-  public boolean setDeactivationTimeConstant(double aDeactivationTimeConstant) {
-    return opensimModelJNI.Thelen2003Muscle_setDeactivationTimeConstant(swigCPtr, this, aDeactivationTimeConstant);
+  public void setDeactivationTimeConstant(double aDeactivationTimeConstant) {
+    opensimModelJNI.Thelen2003Muscle_setDeactivationTimeConstant(swigCPtr, this, aDeactivationTimeConstant);
   }
 
-  public boolean setVmax(double aVmax) {
-    return opensimModelJNI.Thelen2003Muscle_setVmax(swigCPtr, this, aVmax);
+  public void setVmax(double aVmax) {
+    opensimModelJNI.Thelen2003Muscle_setVmax(swigCPtr, this, aVmax);
   }
 
-  public boolean setVmax0(double aVmax0) {
-    return opensimModelJNI.Thelen2003Muscle_setVmax0(swigCPtr, this, aVmax0);
+  public void setVmax0(double aVmax0) {
+    opensimModelJNI.Thelen2003Muscle_setVmax0(swigCPtr, this, aVmax0);
   }
 
-  public boolean setFmaxTendonStrain(double aFmaxTendonStrain) {
-    return opensimModelJNI.Thelen2003Muscle_setFmaxTendonStrain(swigCPtr, this, aFmaxTendonStrain);
+  public void setFmaxTendonStrain(double aFmaxTendonStrain) {
+    opensimModelJNI.Thelen2003Muscle_setFmaxTendonStrain(swigCPtr, this, aFmaxTendonStrain);
   }
 
-  public boolean setFmaxMuscleStrain(double aFmaxMuscleStrain) {
-    return opensimModelJNI.Thelen2003Muscle_setFmaxMuscleStrain(swigCPtr, this, aFmaxMuscleStrain);
+  public void setFmaxMuscleStrain(double aFmaxMuscleStrain) {
+    opensimModelJNI.Thelen2003Muscle_setFmaxMuscleStrain(swigCPtr, this, aFmaxMuscleStrain);
   }
 
-  public boolean setKshapeActive(double aKShapeActive) {
-    return opensimModelJNI.Thelen2003Muscle_setKshapeActive(swigCPtr, this, aKShapeActive);
+  public void setKshapeActive(double aKShapeActive) {
+    opensimModelJNI.Thelen2003Muscle_setKshapeActive(swigCPtr, this, aKShapeActive);
   }
 
-  public boolean setKshapePassive(double aKshapePassive) {
-    return opensimModelJNI.Thelen2003Muscle_setKshapePassive(swigCPtr, this, aKshapePassive);
+  public void setKshapePassive(double aKshapePassive) {
+    opensimModelJNI.Thelen2003Muscle_setKshapePassive(swigCPtr, this, aKshapePassive);
   }
 
-  public boolean setDamping(double aDamping) {
-    return opensimModelJNI.Thelen2003Muscle_setDamping(swigCPtr, this, aDamping);
+  public void setDamping(double aDamping) {
+    opensimModelJNI.Thelen2003Muscle_setDamping(swigCPtr, this, aDamping);
   }
 
-  public boolean setAf(double aAf) {
-    return opensimModelJNI.Thelen2003Muscle_setAf(swigCPtr, this, aAf);
+  public void setAf(double aAf) {
+    opensimModelJNI.Thelen2003Muscle_setAf(swigCPtr, this, aAf);
   }
 
-  public boolean setFlen(double aFlen) {
-    return opensimModelJNI.Thelen2003Muscle_setFlen(swigCPtr, this, aFlen);
+  public void setFlen(double aFlen) {
+    opensimModelJNI.Thelen2003Muscle_setFlen(swigCPtr, this, aFlen);
   }
 
   public double computeActuation(SWIGTYPE_p_SimTK__State s) {

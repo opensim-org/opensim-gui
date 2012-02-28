@@ -112,10 +112,6 @@ public class ForceSet extends ModelComponentSetForces {
     opensimModelJNI.ForceSet_getStateVariableNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
   }
 
-  public void computeEquilibrium(SWIGTYPE_p_SimTK__State s) {
-    opensimModelJNI.ForceSet_computeEquilibrium(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
   public boolean check() {
     return opensimModelJNI.ForceSet_check(swigCPtr, this);
   }
