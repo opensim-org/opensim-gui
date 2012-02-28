@@ -47,9 +47,9 @@ public class LSLabel extends JLabel
    // ---------------------------------------------------------------------
    public String   GetLabelString( )                       { return super.getText(); }
    public void     SetLabelString( String s )              { super.setText(s); }
-   public void     SetLabelFont( LSFont f )                { if( f != null ) super.setFont(f); }
-   public void     SetLabelBackgroundColor( Color color )  { super.setBackground(color); }
-   public void     SetLabelForegroundColor( Color color )  { super.setForeground(color); }
+   public void     SetLabelFont( LSFont font )             { if( font != null  ) super.setFont(font); }
+   public void     SetLabelBackgroundColor( Color color )  { if( color != null ) super.setBackground(color); }
+   public void     SetLabelForegroundColor( Color color )  { if( color != null ) super.setForeground(color); }
    public void     SetLabelVisible( boolean tf )           { super.setVisible(tf); }
    public boolean  IsLabelVisible( )                       { return super.isVisible(); }
 

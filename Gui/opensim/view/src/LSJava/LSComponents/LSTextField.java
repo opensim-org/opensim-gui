@@ -58,7 +58,7 @@ public class LSTextField extends TextField
    public void  RequestFocus( )  { super.requestFocus(); }
 
    // ------------------------------------------------------------------------
-   public void  SetTextFieldFont( Font font )                               { super.setFont( LSFont.GetUserFontIfFontIsNull(font) ); }
+   public void  SetTextFieldFont( Font font )                               { if( font != null ) super.setFont(font); }
    public void  SetTextFieldSameFontExceptBoldOrUnbold( boolean makeBold )  { Font font = LSFont.GetSameFontExceptBoldOrUnbold( super.getFont(), makeBold );  this.SetTextFieldFont(font); }
 
    //-------------------------------------------------------------------------

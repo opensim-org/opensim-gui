@@ -34,7 +34,7 @@ public class LSWindowAdapter extends WindowAdapter
          myWindow = window;   
          myWhatToDoWhenWindowCloses = whatToDoWhenWindowCloses; 
          window.addWindowListener( this );
-	 LSWindowAdapter.AddToArrayOfExistingWindowsIfNotExists( window );
+         LSWindowAdapter.AddToArrayOfExistingWindowsIfNotExists( window );
       }
    }
 
@@ -66,14 +66,14 @@ public class LSWindowAdapter extends WindowAdapter
          switch( myWhatToDoWhenWindowCloses )
          {
             case LSWindowAdapter.DO_NOTHING_ON_CLOSE: break;
-            case LSWindowAdapter.HIDE_ON_CLOSE:	      myWindow.setVisible( false ); 
-	                                              break;
-	    case LSWindowAdapter.DISPOSE_ON_CLOSE:    this.DisposeWindowAndSetMyWindowToNull();
-	                                              break;
-	    case LSWindowAdapter.EXIT_ON_CLOSE:       this.DisposeWindowAndSetMyWindowToNull();
-	                                              LSSystem.SystemExit(0);    
+            case LSWindowAdapter.HIDE_ON_CLOSE:       myWindow.setVisible( false ); 
                                                       break;
-	 }     
+            case LSWindowAdapter.DISPOSE_ON_CLOSE:    this.DisposeWindowAndSetMyWindowToNull();
+                                                      break;
+            case LSWindowAdapter.EXIT_ON_CLOSE:       this.DisposeWindowAndSetMyWindowToNull();
+                                                      LSSystem.SystemExit(0);    
+                                                      break;
+         }     
       }  
    }
 
@@ -84,8 +84,8 @@ public class LSWindowAdapter extends WindowAdapter
       if( myWindow != null ) 
       {
          LSWindowAdapter.RemoveWindowFromArrayOfExistingWindows( myWindow );
-	 myWindow.dispose();
-	 myWindow = null;
+         myWindow.dispose();
+         myWindow = null;
       }
    }
 
@@ -94,12 +94,12 @@ public class LSWindowAdapter extends WindowAdapter
    public static int     GetNumberOfExistingWindows( )                       { return myArrayListOfExistingWindows.GetSizeOfArrayList(); }
    public static Window  GetExistingWindowOrNull( int i )                    { Object x = myArrayListOfExistingWindows.GetObjectAtIndex(i);  return x==null ? null : (Window)x; }
    public static void    AddToArrayOfExistingWindowsIfNotExists( Window w )  { myArrayListOfExistingWindows.AddObjectToArrayIfNotExistsAndNotNull( w ); }
-   public static void 	 RemoveWindowFromArrayOfExistingWindows( Window w )  { myArrayListOfExistingWindows.RemoveAllOccurencesOfObject( w ); }
+   public static void    RemoveWindowFromArrayOfExistingWindows( Window w )  { myArrayListOfExistingWindows.RemoveAllOccurencesOfObject( w ); }
 
 
    // Class variables ------------------------------------------------------
-   private Window   myWindow;
-   private int      myWhatToDoWhenWindowCloses;
+   private Window  myWindow;
+   private int     myWhatToDoWhenWindowCloses;
 
    private static final LSArrayList  myArrayListOfExistingWindows = new LSArrayList( 30 );
 

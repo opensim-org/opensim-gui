@@ -102,9 +102,9 @@ public class LSContainer
    static public int  GetScreenHeight( double scaleY )  { return (int)(( java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight() ) * scaleY); }
 
    //----------------------------------------------------------------------
-   private void  SetContainerFont( Font font )               { myContainer.setFont( font ); }
-   public  void  SetContainerBackgroundColor( Color color )  { myContainer.setBackground( color ); }
-   private void  SetContainerForegroundColor( Color color )  { myContainer.setForeground( color ); }
+   private void  SetContainerFont( Font font )               { if( font != null )  myContainer.setFont( font ); }
+   public  void  SetContainerBackgroundColor( Color color )  { if( color != null ) myContainer.setBackground( color ); }
+   private void  SetContainerForegroundColor( Color color )  { if( color != null ) myContainer.setForeground( color ); }
    private void  SetContainerFontDefault( )                  { this.SetContainerFont( LSFont.GetUserFont() ); }
    private void  SetContainerBackgroundColorDefault( )       { this.SetContainerBackgroundColor( this.IsPartOfDialog() ? LSColor.GetBackgroundColorDialog() : LSColor.GetUserBackgroundColor() ); }
    private void  SetContainerForegroundColorDefault( )       { this.SetContainerForegroundColor( LSColor.GetUserForegroundColor() ); }
@@ -211,8 +211,7 @@ public class LSContainer
       StringBuffer dividerLineAsStringBuffer =  LSStringBuffer.GetStringBufferInitializedToCharacter( numberOfCharacters, dividerCharacter );
       String dividerLineAsString = LSString.GetStringFromStringBuffer( dividerLineAsStringBuffer );
       LSLabel labelAdded = this.AddLabelToLayoutRowRemainder1High( dividerLineAsString, LSLabel.CENTER );
-      int userFontSize = LSFont.GetUserFontSize();
-      LSFont labelAddedFont = new LSFont( "Monospaced", LSFont.PLAIN, userFontSize );
+      LSFont labelAddedFont = new LSFont( "Monospaced", LSFont.PLAIN, LSFont.GetUserFontSize() );
       labelAdded.SetLabelFont( labelAddedFont );
    }
    
