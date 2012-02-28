@@ -19,6 +19,7 @@
 package LSJava.LSUtility;
 import  java.awt.*;
 import  java.io.*;
+import  javax.swing.UIManager; 
 
 
 //--------------------------------------------------------------------------
@@ -26,6 +27,7 @@ public class LSFont extends Font
 {
    // Constructor ---------------------------------------------------------
    public LSFont( String fontName, int fontStyle, int fontSize )  { super( fontName, fontStyle, fontSize ); }
+   public LSFont( Font font )                                     { super( font.getName(), font.getStyle(), font.getSize() ); }
 
    // ---------------------------------------------------------------------
    public String  GetFontName( )       { return super.getName(); }
@@ -56,7 +58,6 @@ public class LSFont extends Font
    public static int     GetUserFontStyle( )                   { return myUserFont.GetFontStyle(); }
    public static int     GetUserFontSize( )                    { return myUserFont.GetFontSize(); }
    public static LSFont  GetUserFont( )                        { return myUserFont; }
-   public static Font    GetUserFontIfFontIsNull( Font font )  { return font==null ? LSFont.GetUserFont() : font; }
    public static void    SetUserFont( LSFont font )            { myUserFont = font; }
 
 
@@ -165,7 +166,7 @@ public class LSFont extends Font
    //-------------------------------------------------------------------------
    public static Font  GetSameFontExceptBoldOrUnbold( Font fontToBoldOrUnbold, boolean makeBold )
    {
-      fontToBoldOrUnbold = LSFont.GetUserFontIfFontIsNull( fontToBoldOrUnbold );
+      if( fontToBoldOrUnbold == null ) return null;
       int fontStyleInitial = fontToBoldOrUnbold.getStyle();
       int fontStyleFinal   = LSFont.GetFontStyleBoldOrUnbold( fontStyleInitial, makeBold );
       return new Font( fontToBoldOrUnbold.getName(), fontStyleFinal, fontToBoldOrUnbold.getSize() );
@@ -266,7 +267,8 @@ public class LSFont extends Font
    public final static String   myDefaultFontFamilyName = "Serif";       // MGPlot="Serif",     OpenSim="Tahoma"
    public final static int      myDefaultFontStyle      = LSFont.BOLD;   // MGPlot=LSFont.BOLD, OpenSim=LSFont.PLAIN
    public final static int      myDefaultFontSize       = 14;            // MGPlot=14,          OpenSim=12
-   private static LSFont myUserFont = new LSFont( myDefaultFontFamilyName, myDefaultFontStyle, myDefaultFontSize );
+// private static LSFont myUserFont = new LSFont( myDefaultFontFamilyName, myDefaultFontStyle, myDefaultFontSize );
+   private static LSFont myUserFont = new LSFont( UIManager.getFont("Label.font") ); 
 
    // Available font families, styles, and sizes
    // Font families guaranteed to be available by Java.  "Symbol" is also possible but not sensible.

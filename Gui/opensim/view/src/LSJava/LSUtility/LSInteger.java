@@ -68,7 +68,7 @@ public class LSInteger
    public static int  GetValidIntegerGreaterThanEqualsLessThanEquals( int x, int alternate, int min, int max )  { return LSInteger.IsValidInteger(x) && x>=min && x<=max ? x : alternate;}
 
    //-------------------------------------------------------------------------
-   public static int  GetNumberOfDigits( int x )   { x = x==0 ? 1 : LSInteger.Abs(x);  double xPlusEpsilon = 0.1 + (double)x;  return (int)LSDouble.Ceil( Math.log10(xPlusEpsilon) ); }
+   public static int  GetNumberOfDigits( int x )   { x = x==0 ? 1 : LSInteger.Abs(x);  double xPlusEpsilon = 0.1 + (double)x;  return (int)LSDouble.Ceil( LSDouble.Log10(xPlusEpsilon) ); }
 
    //-------------------------------------------------------------------------
    public static int  GetIntegerFromString( String s )
@@ -88,6 +88,5 @@ public class LSInteger
       }
       return x;
    }
-
 
 }

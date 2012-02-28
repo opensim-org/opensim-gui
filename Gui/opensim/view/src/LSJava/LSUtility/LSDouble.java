@@ -26,6 +26,30 @@ public class LSDouble
    private LSDouble( )   {;}
 
    //-------------------------------------------------------------------------
+   public static final double Pi = java.lang.Math.PI;
+   public static double  Ceil(  double x )  { return java.lang.Math.ceil(x);  }
+   public static double  Floor( double x )  { return java.lang.Math.floor(x); }
+   public static double  Abs(   double x )  { return java.lang.Math.abs(x);   }
+   public static double  Sqrt(  double x )  { return java.lang.Math.sqrt(x);  }
+   public static double  Log(   double x )  { return java.lang.Math.log(x);   }
+   public static double  Log10( double x )  { return LSDouble.Log(x) / LSDouble.Log(10); }
+   public static double  Sin(   double x )  { return java.lang.Math.sin(x);   }
+   public static double  Cos(   double x )  { return java.lang.Math.cos(x);   }
+   public static double  Tan(   double x )  { return java.lang.Math.tan(x);   }
+   public static double  Asin(  double x )  { return java.lang.Math.asin(x);  }
+   public static double  Acos(  double x )  { return java.lang.Math.acos(x);  }
+   public static double  Atan(  double x )  { return java.lang.Math.atan(x);  }
+   public static double  Atan2( double y, double x )       { return java.lang.Math.atan2(y,x);    }
+   public static double  Max(   double a, double b )       { return java.lang.Math.max(a,b);      }
+   public static double  Min(   double a, double b )       { return java.lang.Math.min(a,b);      }
+   public static double  DegreesToRadians(  double x )     { return java.lang.Math.toRadians(x);  }
+   public static double  RadiansToDegrees(  double x )     { return java.lang.Math.toDegrees(x);  }
+   public static double  RoundToIntegerOrEvenIfPoint5( double x )  { return java.lang.Math.rint(x); }
+   public static double  Pow( double base, double exponent )       { return java.lang.Math.pow(base,exponent); }
+   public static double  RandomNumberBetween0And1(  )              { return java.lang.Math.random(); }
+
+
+   //-------------------------------------------------------------------------
    public static boolean  IsNaN( double x )                               { return Double.isNaN(x); }
    public static boolean  IsMaxValue( double x )                          { return x == LSDouble.GetMaxValue(); }
    public static boolean  IsMinValue( double x )                          { return x == LSDouble.GetMinValue(); }
@@ -74,11 +98,6 @@ public class LSDouble
    public static double  GetValidDoubleGreaterThanEqualsLessThan( double x, double alternate, double min, double max )        { return LSDouble.IsValidDouble(x) && x>=min && x< max ? x : alternate;}
    public static double  GetValidDoubleGreaterThanLessThanEquals( double x, double alternate, double min, double max )        { return LSDouble.IsValidDouble(x) && x> min && x<=max ? x : alternate;}
    public static double  GetValidDoubleGreaterThanEqualsLessThanEquals( double x, double alternate, double min, double max )  { return LSDouble.IsValidDouble(x) && x>=min && x<=max ? x : alternate;}
-
-   public static double  Floor( double x )  { return java.lang.Math.floor(x); }
-   public static double  Ceil(  double x )  { return java.lang.Math.ceil(x);  }
-   public static double  Abs(   double x )  { return java.lang.Math.abs(x);   }
-   public static double  Sqrt(  double x )  { return java.lang.Math.sqrt(x);  }
 
    //-------------------------------------------------------------------------
    public static double  RoundToNearestIntegerIfWithinEpsilon( double x, double nonNegativeEpsilon )
