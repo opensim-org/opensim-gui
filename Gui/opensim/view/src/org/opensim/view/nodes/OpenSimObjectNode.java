@@ -35,6 +35,7 @@ import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.nodes.PropertySupport;
 import org.openide.nodes.Sheet;
+import org.openide.util.Exceptions;
 import org.openide.util.lookup.Lookups;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.OpenSimObject;
@@ -54,7 +55,7 @@ import LSJava.LSPropertyEditors.LSPropertyEditorJoint;
  * (or a Set as a set is also an Object)
  */
 public class OpenSimObjectNode extends OpenSimNode {
-    
+
     private OpenSimObject openSimObject;
     public enum displayOption{Showable, Isolatable, Colorable};
     private ArrayList<displayOption> validDisplayOptions = new ArrayList<displayOption>();
@@ -162,7 +163,20 @@ public class OpenSimObjectNode extends OpenSimNode {
         Sheet.Set set = retValue.get("properties");
         OpenSimObject obj = ((OpenSimObjectNode) (this)).getOpenSimObject();
         
-        org.opensim.modeling.PropertySet ps= obj.getPropertySet();
+        OpenSimObject objectAdapter = new OpenSimObjectAdapter(obj);
+        try { // Name attribute
+            PropertySupport.Reflection nameNodeProp;
+            nameNodeProp = new PropertySupport.Reflection(obj, String.class,
+                    "getName",
+                    "setName");
+            ((Node.Property) nameNodeProp).setValue("oneline", Boolean.TRUE);
+            ((Node.Property) nameNodeProp).setValue("suppressCustomEditor", Boolean.TRUE);
+
+            set.put(nameNodeProp);
+        } catch (NoSuchMethodException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+       org.opensim.modeling.PropertySet ps= obj.getPropertySet();
         
         for(int i=0; i<ps.getSize(); i++){
             try {
@@ -178,12 +192,6 @@ public class OpenSimObjectNode extends OpenSimNode {
                      nextNodeProp.setValue("suppressCustomEditor", Boolean.FALSE);
                      nextNodeProp.setName(prop.getName());
                      set.put(nextNodeProp);
-                     //org.opensim.modeling.PropertyDblArray pda = PropertyDblArray.safeDownCast(prop);
-                     //int sz = prop.getValueDblArray().getSize();
-                     //double val = prop.getValueDblArray().getitem(0);
-                     //prop.setValue(new ArrayDouble(1, 3));
-                     //nt x=0;
-                     //System.out.println(prop.getName()+" "+val);
                 }
                 //getArraySize()
                 else if (mapPropertyEnumToClass.containsKey(currentPropType)) {

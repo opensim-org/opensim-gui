@@ -38,7 +38,7 @@ public class ControllersNode extends OpenSimObjectSetNode {
       public Image getIcon(int i) {
       URL imageURL=null;
       try {
-         imageURL = Class.forName("org.opensim.view.nodes.OpenSimNode").getResource("icons/ConstraintsNode.png");
+         imageURL = Class.forName("org.opensim.view.nodes.OpenSimNode").getResource("icons/constraintsNode.png");
       } catch (ClassNotFoundException ex) {
          ex.printStackTrace();
       }
@@ -52,7 +52,7 @@ public class ControllersNode extends OpenSimObjectSetNode {
    public Image getOpenedIcon(int i) {
       URL imageURL=null;
       try {
-         imageURL = Class.forName("org.opensim.view.nodes.OpenSimNode").getResource("/org/opensim/view/nodes/icons/ConstraintsNode.png");
+         imageURL = Class.forName("org.opensim.view.nodes.OpenSimNode").getResource("/org/opensim/view/nodes/icons/constraintsNode.png");
       } catch (ClassNotFoundException ex) {
          ex.printStackTrace();
       }

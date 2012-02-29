@@ -56,7 +56,6 @@ import org.opensim.view.pub.ViewDB;
  */
 public class BodyNameEditor extends PropertyEditorSupport 
         implements ExPropertyEditor, InplaceEditor.Factory, PropertyChangeListener, ActionListener {
-    String bodyName = "ground";
     /**
      * Creates a new instance of PositionEditor
      */
@@ -72,18 +71,17 @@ public class BodyNameEditor extends PropertyEditorSupport
     }
 
     public void setValue(Object value) {
-        
-        bodyName=new String((String) value);
+        super.setValue(value);
     }
 
     public Object getValue() {
 
-        return bodyName;
+        return super.getValue();
     }
 
 
     public String getAsText() {
-        return bodyName.toString();
+        return getValue().toString();
     }
 
     public String getJavaInitializationString() {
@@ -102,7 +100,6 @@ public class BodyNameEditor extends PropertyEditorSupport
     public InplaceEditor getInplaceEditor() {
         if (ed == null) {
             ed = new Inplace();
-            ed.setValue(bodyName);
             
         }
         return ed;
@@ -151,7 +148,7 @@ public class BodyNameEditor extends PropertyEditorSupport
         public void reset() {
             String d = (String) editor.getValue();
             if (d != null) {
-                picker.setSelectedItem("ground");
+                picker.setSelectedItem(d);
             }
         }
 
