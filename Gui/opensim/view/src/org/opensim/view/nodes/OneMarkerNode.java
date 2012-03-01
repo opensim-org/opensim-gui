@@ -12,10 +12,10 @@ import org.openide.nodes.PropertySupport;
 import org.openide.nodes.Sheet;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
-import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.editors.BodyNameEditor;
+import org.opensim.view.markerEditor.MarkerDeleteAction;
 import org.opensim.view.markerEditor.MarkerEditorAction;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 
@@ -55,10 +55,11 @@ public class OneMarkerNode extends OpenSimObjectNode{
         // Arrays are fixed size, onvert to a List
         List<Action> actions = java.util.Arrays.asList(superActions);
         // Create new Array of proper size
-        Action[] retActions = new Action[actions.size()+1];
+        Action[] retActions = new Action[actions.size()+2];
         actions.toArray(retActions);
         // append new command to the end of the list of actions
         retActions[actions.size()] = new MarkerEditorAction();
+        retActions[actions.size()+1] = new MarkerDeleteAction();
         return retActions;
     }
 
@@ -95,7 +96,13 @@ public class OneMarkerNode extends OpenSimObjectNode{
             ((Node.Property) locationNodeProp).setValue("oneline", Boolean.TRUE);
             ((Node.Property) locationNodeProp).setValue("suppressCustomEditor", Boolean.TRUE);
             locationNodeProp.setName("location");
+            locationNodeProp.setShortDescription(gMarker.getPropertyComment("location"));
             set.put(locationNodeProp);
+            
+            Node.Property fixedProp = set.get("fixed");
+            set.remove("fixed");
+            Sheet.Set expertSet = sheet.get("expert");
+            expertSet.put(fixedProp);
    
         } catch (NoSuchMethodException ex) {
             Exceptions.printStackTrace(ex);

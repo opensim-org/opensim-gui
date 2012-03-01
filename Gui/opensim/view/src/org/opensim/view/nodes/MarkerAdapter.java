@@ -4,6 +4,7 @@
  */
 package org.opensim.view.nodes;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Vector;
 import javax.swing.undo.AbstractUndoableEdit;
@@ -78,7 +79,7 @@ public class MarkerAdapter  {
         final String oldName = getBodyName();
         if (bodyName.equals(oldName)) return; // Nothing to do
         marker.setBodyName(bodyName);
-        context.setBody(marker, model.getBodySet().get(bodyName), false);
+        context.setBody(marker, model.getBodySet().get(bodyName), true);
         updateDisplay();
         if (enableUndo){
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
@@ -119,12 +120,12 @@ public class MarkerAdapter  {
      */
     public void setOffsetString(String offsetString) {
        ArrayDouble d = new ArrayDouble();
-        try {
+        //try {
             d.fromString(offsetString);
-        } catch (ParseException ex) {
-            Exceptions.printStackTrace(ex);
-            return;
-        }
+        //} catch (ParseException ex) {
+        //    Exceptions.printStackTrace(ex);
+        //    return;
+        //}
        setOffset(d, true);
     }
     private void setOffset(final ArrayDouble newOffset, boolean enableUndo) {
@@ -182,5 +183,14 @@ public class MarkerAdapter  {
         ObjectsRenamedEvent evnt = new ObjectsRenamedEvent(this, model, objs);
         OpenSimDB.getInstance().setChanged();
         OpenSimDB.getInstance().notifyObservers(evnt);
+    }
+
+    String getPropertyComment(String string) {
+        try {
+            return marker.getPropertySet().get(string).getComment();
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        return "";
     }
 }

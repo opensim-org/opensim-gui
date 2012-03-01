@@ -409,7 +409,7 @@ final public class ExplorerTopComponent extends TopComponent
         public ConcreteModelNode getModelNode(final Model abstractModel) {
            Node rootNode = getExplorerManager().getRootContext();
            for(Node child : rootNode.getChildren().getNodes())
-              if((child instanceof ConcreteModelNode) && ((ConcreteModelNode)child).getModel()==abstractModel)
+              if((child instanceof ConcreteModelNode) && ((ConcreteModelNode)child).getModel().equals(abstractModel))
                  return (ConcreteModelNode)child;
            return null;
         }

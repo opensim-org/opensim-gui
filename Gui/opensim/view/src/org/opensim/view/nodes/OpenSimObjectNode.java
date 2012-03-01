@@ -163,19 +163,6 @@ public class OpenSimObjectNode extends OpenSimNode {
         Sheet.Set set = retValue.get("properties");
         OpenSimObject obj = ((OpenSimObjectNode) (this)).getOpenSimObject();
         
-        OpenSimObject objectAdapter = new OpenSimObjectAdapter(obj);
-        try { // Name attribute
-            PropertySupport.Reflection nameNodeProp;
-            nameNodeProp = new PropertySupport.Reflection(obj, String.class,
-                    "getName",
-                    "setName");
-            ((Node.Property) nameNodeProp).setValue("oneline", Boolean.TRUE);
-            ((Node.Property) nameNodeProp).setValue("suppressCustomEditor", Boolean.TRUE);
-
-            set.put(nameNodeProp);
-        } catch (NoSuchMethodException ex) {
-            Exceptions.printStackTrace(ex);
-        }
        org.opensim.modeling.PropertySet ps= obj.getPropertySet();
         
         for(int i=0; i<ps.getSize(); i++){
@@ -191,6 +178,7 @@ public class OpenSimObjectNode extends OpenSimNode {
                      nextNodeProp.setValue("canEditAsText", Boolean.TRUE); 
                      nextNodeProp.setValue("suppressCustomEditor", Boolean.FALSE);
                      nextNodeProp.setName(prop.getName());
+                     nextNodeProp.setShortDescription(prop.getComment());
                      set.put(nextNodeProp);
                 }
                 //getArraySize()
@@ -204,6 +192,7 @@ public class OpenSimObjectNode extends OpenSimNode {
                         ((Node.Property)nextNodeProp).setValue("oneline", Boolean.TRUE);
                         ((Node.Property)nextNodeProp).setValue("suppressCustomEditor", Boolean.TRUE);
                     }
+                    nextNodeProp.setShortDescription(prop.getComment());
                     set.put(nextNodeProp);
                 }
             } catch (NoSuchMethodException ex) {

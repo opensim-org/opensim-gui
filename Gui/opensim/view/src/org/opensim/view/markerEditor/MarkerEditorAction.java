@@ -2,10 +2,9 @@ package org.opensim.view.markerEditor;
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
-import javax.swing.ImageIcon;
 import org.openide.util.NbBundle;
-import org.openide.util.Utilities;
 import org.openide.windows.TopComponent;
+import org.openide.windows.WindowManager;
 
 /**
  * Action which shows MarkerEditor component.
@@ -18,9 +17,9 @@ public class MarkerEditorAction extends AbstractAction {
    }
    
    public void actionPerformed(ActionEvent evt) {
-      TopComponent win = MarkerEditorTopComponent.findInstance();
-      win.open();
-      win.requestActive();
+      TopComponent propertiesComponent =
+        WindowManager.getDefault().findTopComponent("properties");
+        propertiesComponent.open(); 
+        propertiesComponent.requestActive();
    }
-   
 }
