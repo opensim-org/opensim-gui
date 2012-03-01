@@ -4,14 +4,19 @@
  */
 package org.opensim.view.nodes;
 
+import java.text.ParseException;
+import java.util.Vector;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
+import org.openide.util.Exceptions;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
+import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.ExplorerTopComponent;
+import org.opensim.view.ObjectsRenamedEvent;
 import org.opensim.view.SingleModelVisuals;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
@@ -44,7 +49,7 @@ import org.opensim.view.pub.ViewDB;
  * @author Ayman
  */
 
-public class MarkerAdapter {
+public class MarkerAdapter  {
     Marker marker;
     Model model;
     OpenSimContext context;
@@ -74,11 +79,7 @@ public class MarkerAdapter {
         if (bodyName.equals(oldName)) return; // Nothing to do
         marker.setBodyName(bodyName);
         context.setBody(marker, model.getBodySet().get(bodyName), false);
-        // tell the ViewDB to redraw the model
-        SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-        vis.getMarkersRep().updateMarkerGeometry(marker);
-        ViewDB.getInstance().repaintAll();
-        ExplorerTopComponent.getDefault().requestActive();
+        updateDisplay();
         if (enableUndo){
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
                public void undo() throws CannotUndoException {
@@ -94,24 +95,92 @@ public class MarkerAdapter {
         }
     }
 
+    private void updateDisplay() {
+        // tell the ViewDB to redraw the model
+        SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
+        vis.getMarkersRep().updateMarkerGeometry(marker);
+        ViewDB.getInstance().repaintAll();
+        ExplorerTopComponent.getDefault().requestActive();
+    }
+
     /**
      * @return the offset
      */
-    public ArrayDouble getOffset() {
+    public String getOffsetString() {
         double[] offset= {0., 0., 0.};
         marker.getOffset(offset);
         ArrayDouble ret = new ArrayDouble();
         ret.setValues(offset, 3);
-        return ret;
+        return ret.toString();
     }
 
     /**
      * @param offset the offset to set
      */
-    public void setOffset(ArrayDouble offset) {
-        marker.setOffset(offset.getAsVec3());
-        SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-         vis.getMarkersRep().updateMarkerGeometry(marker);
-         ViewDB.getInstance().repaintAll();    
+    public void setOffsetString(String offsetString) {
+       ArrayDouble d = new ArrayDouble();
+        try {
+            d.fromString(offsetString);
+        } catch (ParseException ex) {
+            Exceptions.printStackTrace(ex);
+            return;
+        }
+       setOffset(d, true);
+    }
+    private void setOffset(final ArrayDouble newOffset, boolean enableUndo) {
+        double[] rOffset = new double[]{0., 0., 0.};
+        marker.getOffset(rOffset);
+        final ArrayDouble oldOffset = new ArrayDouble();
+        oldOffset.setValues(rOffset, 3);
+        marker.setOffset(newOffset.getAsVec3());
+        updateDisplay(); 
+        if (enableUndo){
+             AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
+               public void undo() throws CannotUndoException {
+                   super.undo();
+                   setOffset(oldOffset, false);
+               }
+               public void redo() throws CannotRedoException {
+                   super.redo();
+                   setOffset(newOffset, false);
+               }
+            };
+            ExplorerTopComponent.addUndoableEdit(auEdit);            
+        }
+    }
+    
+    public void setName(String newName){
+       setName(newName, true);
+    }
+    public String getName() {
+        return marker.getName();
+    }
+    
+    private void setName(final String newName, boolean enableUndo) {
+        final String oldName = getName();
+        if (newName.equals(oldName)) return; // Nothing to do
+        marker.setName(newName);
+        
+        
+        ExplorerTopComponent.getDefault().requestActive();
+        if (enableUndo){
+            AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
+               public void undo() throws CannotUndoException {
+                   super.undo();
+                   setName(oldName, false);
+               }
+               public void redo() throws CannotRedoException {
+                   super.redo();
+                   setName(newName, false);
+               }
+            };
+            ExplorerTopComponent.addUndoableEdit(auEdit);
+        }
+        ViewDB.getInstance().getModelGuiElements(model).updateMarkerNames();
+        Vector<OpenSimObject> objs = new Vector<OpenSimObject>(1);
+        objs.add(marker);
+        ObjectsRenamedEvent evnt = new ObjectsRenamedEvent(this, model, objs);
+        OpenSimDB.getInstance().setChanged();
+        OpenSimDB.getInstance().notifyObservers(evnt);
     }
 }

@@ -16,7 +16,6 @@ import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.editors.BodyNameEditor;
-import org.opensim.view.editors.ArrayDoubleTextEditor;
 import org.opensim.view.markerEditor.MarkerEditorAction;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 
@@ -75,12 +74,28 @@ public class OneMarkerNode extends OpenSimObjectNode{
         org.opensim.modeling.PropertySet ps = obj.getPropertySet();
         org.opensim.modeling.Property prop;
         try {
-            ps.remove("body");
+            set.remove("body");
             PropertySupport.Reflection nextNodeProp2;
             nextNodeProp2 = new PropertySupport.Reflection(gMarker, String.class, "getBodyName", "setBodyName");
             nextNodeProp2.setPropertyEditorClass(BodyNameEditor.class);
             nextNodeProp2.setName("body");
             set.put(nextNodeProp2);
+            // USe custom name change
+            set.remove("name");
+            PropertySupport.Reflection nameNodeProp;
+            nameNodeProp = new PropertySupport.Reflection(gMarker, String.class, "getName", "setName");
+            ((Node.Property) nameNodeProp).setValue("oneline", Boolean.TRUE);
+            ((Node.Property) nameNodeProp).setValue("suppressCustomEditor", Boolean.TRUE);
+            nameNodeProp.setName("name");
+            set.put(nameNodeProp);
+            // customize offset
+            set.remove("location");
+            PropertySupport.Reflection locationNodeProp;
+            locationNodeProp = new PropertySupport.Reflection(gMarker, String.class, "getOffsetString", "setOffsetString");
+            ((Node.Property) locationNodeProp).setValue("oneline", Boolean.TRUE);
+            ((Node.Property) locationNodeProp).setValue("suppressCustomEditor", Boolean.TRUE);
+            locationNodeProp.setName("location");
+            set.put(locationNodeProp);
    
         } catch (NoSuchMethodException ex) {
             Exceptions.printStackTrace(ex);

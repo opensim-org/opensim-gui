@@ -35,6 +35,26 @@ public class ArrayDouble {
     }
   }
 
+	public void fromString(String string) {
+      // Remove open and close parenth if any
+      String workString= new String(string);
+      int liveStart = workString.indexOf("(");
+      int liveEnd = workString.indexOf(")");
+      if (liveStart!=-1 && liveEnd!=-1){
+          workString = workString.substring(liveStart+1, liveEnd);
+      }
+      else if (liveStart!=liveEnd){
+          //throw new ParseException("Illegal format: Expect space separated values, optionally between matched parentheses", liveEnd);
+          return;
+      }
+      String[] splits = workString.split(" ");
+      double[] values = new double[splits.length];
+      for(int i=0; i<splits.length; i++){
+           values[i]=Double.parseDouble(splits[i]);
+       }
+       this.setValues(values, splits.length);
+	}
+
   public ArrayDouble(double aDefaultValue, int aSize, int aCapacity) {
     this(opensimModelJNI.new_ArrayDouble__SWIG_0(aDefaultValue, aSize, aCapacity), true);
   }
