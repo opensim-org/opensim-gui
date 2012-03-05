@@ -6,6 +6,7 @@ package org.opensim.plotter;
 
 import java.io.IOException;
 import javax.swing.JFrame;
+import org.jfree.chart.annotations.XYTextAnnotation;
 import org.openide.util.Exceptions;
 import org.opensim.utils.DialogUtils;
 
@@ -37,13 +38,28 @@ import org.opensim.utils.DialogUtils;
  *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 public final class OpenSimPlotter {
+    /**
+     * Create a blank Plotter Window/Panel with specified Title
+     * @param title
+     * @return a reference to a new Plotter Window for later use
+     */
     static public JPlotterPanel createPlottterPanel(String title){
         JPlotterPanel plotterPanel = new JPlotterPanel();
         JFrame f= DialogUtils.createFrameForPanel(plotterPanel, title);
         plotterPanel.setFrame(f);
+        plotterPanel.getChartPanel().getChart().setTitle(title);
+        //plotterPanel.getChartPanel().getChart().getXYPlot().;
         f.setVisible(true);
         return plotterPanel;
     }
+    /**
+     * Add data source (e.g. File or motion to available sources of the passed in Plotter Panel
+     * This allows for reusing the same data source to recreate multiple curves rather than loading it anew
+     * 
+     * @param plotter
+     * @param dataFilename
+     * @return 
+     */
     static public PlotterSourceFile addDataSource(JPlotterPanel plotter, String dataFilename){
         try {
             PlotterSourceFile src = new PlotterSourceFile(dataFilename);
@@ -54,24 +70,60 @@ public final class OpenSimPlotter {
         }
         return null;
     }
+    /**
+     * Create a new curve on the passed in Plotter panel, using domain and range specified
+     * as column labels in the passed in data source
+     * 
+     * @param panel
+     * @param src
+     * @param domain
+     * @param range
+     * @return 
+     */
     static public PlotCurve addCurve(JPlotterPanel panel, PlotterSourceFile src, 
             String domain, String range){
           return panel.plotDataFromSource(src, domain, range);
     }
+    /**
+     * Create a new curve by running the MuscleAnalysis to plot built in quantities 
+     * 
+     * @param panel
+     * @param qName
+     * @param muscleName
+     * @param genCoordName
+     * @return 
+     */
     static public PlotCurve addAnalysisCurve(JPlotterPanel panel, String qName, 
                 String muscleName, String genCoordName) {
         return panel.showAnalysisCurve(qName, muscleName, genCoordName);
     }
+    /**
+     * Set the Legend for the passed in curve
+     * @param cv
+     * @param legend 
+     */
     static public void setCurveLegend(PlotCurve cv, String legend) {
         cv.setLegend(legend);
     }
+    /**
+     * Set the color to use for the passed in curve as RGB
+     * @param panel
+     * @param series
+     * @param r
+     * @param g
+     * @param b 
+     */
     static public void setCurveColor(JPlotterPanel panel, int series, float r, float g, float b){
         panel.getPlotterModel().setColorRGB(series, r, g, b);
     }    
-    static public void setStroke(JPlotterPanel panel, float thickness){
-        panel.getPlotterModel().setStroke(thickness);
-    }
+    /**
+     * Export all the data on the plotter window to an sto file
+     * 
+     * @param panel
+     * @param fileName 
+     */
     static public void exportData(JPlotterPanel panel, String fileName){
         panel.getPlotterModel().getCurrentPlot().exportData(fileName);
     }
+
 }
