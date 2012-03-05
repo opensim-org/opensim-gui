@@ -4,18 +4,14 @@
   <NonVisualComponents>
     <Component class="javax.swing.JLabel" name="jLabelExternalLoadsApplicationDescription">
       <Properties>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <PlainString value="jLabel1"/>
-        </Property>
+        <Property name="text" type="java.lang.String" value="jLabel1" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.ButtonGroup" name="buttonGroupForceType">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <PlainString value="Point Expressed in"/>
-        </Property>
+        <Property name="text" type="java.lang.String" value="Point Expressed in" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="PointExpressedBodiesComboBox">
@@ -36,9 +32,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBoxForce">
       <Properties>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <PlainString value="Show as force"/>
-        </Property>
+        <Property name="text" type="java.lang.String" value="Show as force" noResource="true"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
             <EmptyBorder bottom="0" left="0" right="0" top="0"/>
@@ -135,10 +129,20 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jComboBoxPZ" pref="123" max="32767" attributes="3"/>
-                      <Component id="jComboBoxFZ" alignment="0" pref="123" max="32767" attributes="2"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jComboBoxPZ" pref="123" max="32767" attributes="3"/>
+                              <Component id="jComboBoxFZ" alignment="0" pref="123" max="32767" attributes="2"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jComponentComboBox" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -161,6 +165,8 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jRadioButtonApplyBodyForce" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jRadioButtonApplyPointForce" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComponentComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -188,9 +194,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="Attached to"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="Attached to" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="BodiesComboBox">
@@ -211,9 +215,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="Object Name"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="Object Name" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="ForceNameTextField">
@@ -227,12 +229,8 @@
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupForceType"/>
             </Property>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="Point Force"/>
-            </Property>
-            <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="PointForce"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="Point Force" noResource="true"/>
+            <Property name="actionCommand" type="java.lang.String" value="PointForce" noResource="true"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
                 <EmptyBorder bottom="0" left="0" right="0" top="0"/>
@@ -253,15 +251,9 @@
               <ComponentRef name="buttonGroupForceType"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="Body Force (at Center of Mass)"/>
-            </Property>
-            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="Show as Force acting at a body&apos;s COM"/>
-            </Property>
-            <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="BodyForce"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="Body Force (at Center of Mass)" noResource="true"/>
+            <Property name="toolTipText" type="java.lang.String" value="Show as Force acting at a body&apos;s COM" noResource="true"/>
+            <Property name="actionCommand" type="java.lang.String" value="BodyForce" noResource="true"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
                 <EmptyBorder bottom="0" left="0" right="0" top="0"/>
@@ -294,9 +286,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="Point Columns"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="Point Columns" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBoxPZ">
@@ -332,9 +322,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="Force Columns"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="Force Columns" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBoxFX">
@@ -389,9 +377,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="Force Expressed in"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="Force Expressed in" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="ForceExpressedBodiesComboBox">
@@ -408,6 +394,26 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ForceExpressedBodiesComboBoxActionPerformed"/>
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="ForceExpressedBodiesComboBoxFocusLost"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel7">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Component"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jComponentComboBox">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="All"/>
+                <StringItem index="1" value="x"/>
+                <StringItem index="2" value="y"/>
+                <StringItem index="3" value="z"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="forceComponentChanged"/>
           </Events>
         </Component>
       </SubComponents>

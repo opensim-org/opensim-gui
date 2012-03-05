@@ -94,6 +94,14 @@ public class MotionDisplayer implements SelectionListener {
     public ArrayList<MotionDisplayer> getAssociatedMotions() {
         return associatedMotions;
     }
+
+    private void maskForceComponent(double[] vectorGlobal, String forceComponent) {
+        if (forceComponent.equals("All")) return;
+        if (forceComponent.equals("x")) {vectorGlobal[1]=0.0; vectorGlobal[2]=0.0; return;};
+        if (forceComponent.equals("y")) {vectorGlobal[0]=0.0; vectorGlobal[2]=0.0; return;};
+        if (forceComponent.equals("z")) {vectorGlobal[0]=0.0; vectorGlobal[1]=0.0; return;};
+        
+    }
     
     public enum ObjectTypesInMotionFiles{GenCoord, 
                                          GenCoord_Velocity, 
@@ -502,7 +510,7 @@ public class MotionDisplayer implements SelectionListener {
 
    private void applyStatesToModel(ArrayDouble states) 
    {
-     boolean profile=(OpenSimObject.getDebugLevel()>=2);
+     boolean profile=false;//(OpenSimObject.getDebugLevel()>=2);
      long before = 0, after=0;
      if (profile)
           before =System.nanoTime();
@@ -531,6 +539,7 @@ public class MotionDisplayer implements SelectionListener {
                     double[] locationLocal = new double[]{states.getitem(startPointIndex), 
                             states.getitem(startPointIndex+1), 
                             states.getitem(startPointIndex+2)};
+                    maskForceComponent(locationLocal, ((MotionObjectBodyForce)nextObject).getForceComponent());
                     double[] locationGlobal = new double[3]; 
                     // Transform to ground from body frame
                     dContext.transformPosition(b, locationLocal, locationGlobal);
@@ -560,12 +569,17 @@ public class MotionDisplayer implements SelectionListener {
                     double[] vectorGlobal = new double[]{states.getitem(startIndex), 
                             states.getitem(startIndex+1), 
                             states.getitem(startIndex+2)}; 
+                    maskForceComponent(vectorGlobal, ((MotionObjectBodyForce)nextObject).getForceComponent());
+                    /*System.out.println("filter component"+vectorGlobal[0]+" "+
+                            vectorGlobal[1]+" "+vectorGlobal[2]+" comp="+
+                            ((MotionObjectBodyForce)nextObject).getForceComponent());*/
                     if (!(b==model.getGroundBody())){
                         double[] vectorLocal = new double[]{
                                 states.getitem(startIndex), 
                                 states.getitem(startIndex+1), 
                                 states.getitem(startIndex+2)
                         };
+                        maskForceComponent(vectorLocal, ((MotionObjectBodyForce)nextObject).getForceComponent());
                         // Transform to ground from body frame
                         dContext.transform(b, vectorLocal, model.getGroundBody(), vectorGlobal);
                     }

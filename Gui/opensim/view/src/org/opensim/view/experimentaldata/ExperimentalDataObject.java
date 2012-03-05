@@ -99,5 +99,12 @@ public class ExperimentalDataObject extends OpenSimObject {
         return myGlyph;
     }
 
+    /**
+     * @param startIndexInFileNotIncludingTime the startIndexInFileNotIncludingTime to set
+     */
+    public void setStartIndexInFileNotIncludingTime(int startIndexInFileNotIncludingTime) {
+        this.startIndexInFileNotIncludingTime = startIndexInFileNotIncludingTime;
+    }
+
 
 }

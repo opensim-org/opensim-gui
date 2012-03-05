@@ -75,9 +75,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="Applied to"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="Applied to" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="BodiesComboBox">
@@ -94,9 +92,7 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="PointIsGlobalCheckBox">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="Point is global"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="Point is global" noResource="true"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
                 <EmptyBorder bottom="0" left="0" right="0" top="0"/>
@@ -109,18 +105,14 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="Force Name"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="Force Name" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="ForceNameTextField">
         </Component>
         <Component class="javax.swing.JCheckBox" name="ForceIsGlobalCheckBox">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="Force is global"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="Force is global" noResource="true"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
                 <EmptyBorder bottom="0" left="0" right="0" top="0"/>
@@ -163,9 +155,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
-                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <PlainString value="Force Columns"/>
-                </Property>
+                <Property name="text" type="java.lang.String" value="Force Columns" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBoxFX">
@@ -238,9 +228,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
-                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <PlainString value="Point Columns"/>
-                </Property>
+                <Property name="text" type="java.lang.String" value="Point Columns" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBoxPX">
@@ -312,9 +300,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
-                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <PlainString value="Torque Columns"/>
-                </Property>
+                <Property name="text" type="java.lang.String" value="Torque Columns" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBoxTX">
@@ -451,12 +437,8 @@
         </Container>
         <Component class="javax.swing.JButton" name="jButtonAdd">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="Add..."/>
-            </Property>
-            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="Add a motion object based on data "/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="Add..." noResource="true"/>
+            <Property name="toolTipText" type="java.lang.String" value="Add a motion object based on data " noResource="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddActionPerformed"/>
@@ -464,12 +446,8 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonDelete">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="Delete"/>
-            </Property>
-            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="Delete selected object(s)"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="Delete" noResource="true"/>
+            <Property name="toolTipText" type="java.lang.String" value="Delete selected object(s)" noResource="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDeleteActionPerformed1"/>
@@ -477,12 +455,8 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonEdit">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="Edit..."/>
-            </Property>
-            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="Edit selected object"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="Edit..." noResource="true"/>
+            <Property name="toolTipText" type="java.lang.String" value="Edit selected object" noResource="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditActionPerformed"/>
@@ -529,19 +503,13 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="Scale for forces"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="Scale for forces" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jForceScaleTextField">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="1.0"/>
-            </Property>
-            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="scale for the shape used"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="1.0" noResource="true"/>
+            <Property name="toolTipText" type="java.lang.String" value="scale for the shape used" noResource="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jForceScaleTextFieldActionPerformed"/>
@@ -550,9 +518,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="Shape"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="Shape" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="jForceDisplayShapeComboBox">
@@ -564,9 +530,7 @@
                 <StringItem index="2" value="ball"/>
               </StringArray>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <PlainString value="available shapes "/>
-            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="available shapes " noResource="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jForceDisplayShapeComboBoxActionPerformed"/>

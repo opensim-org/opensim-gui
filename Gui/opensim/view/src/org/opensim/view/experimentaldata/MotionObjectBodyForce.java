@@ -42,7 +42,7 @@ public class MotionObjectBodyForce extends MotionObjectBodyPoint {
     String forceIdentifier="";
     String forceExpressedInBodyName = "ground";
     private boolean specifyPoint;
-    
+    private String forceComponent = "All";
     public MotionObjectBodyForce(ExperimentalDataItemType objectType, String baseName, int forceIndex) {
         super(objectType, baseName, forceIndex);
         setForceIdentifier(baseName);
@@ -80,6 +80,20 @@ public class MotionObjectBodyForce extends MotionObjectBodyPoint {
             specifyPoint = false;
         else
             specifyPoint = true;
+    }
+
+    /**
+     * @return the forceComponent
+     */
+    public String getForceComponent() {
+        return forceComponent;
+    }
+
+    /**
+     * @param forceComponent the forceComponent to set
+     */
+    public void setForceComponent(String forceComponent) {
+        this.forceComponent = forceComponent;
     }
  
 }

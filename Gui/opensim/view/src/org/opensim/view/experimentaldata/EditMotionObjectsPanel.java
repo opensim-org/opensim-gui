@@ -441,22 +441,10 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
          if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)!=0){
              //objectListModel.set(sels[0], pfCopy);
          }
-       /*ExternalForce pf = new ExternalForce();
-         //pf.setName(dTool.getNextAvailableForceName("ExternalForce"));
-         pf.setAppliedToBodyName("ground");
-         EditOneMotionObjectPanel eofPanel = new EditOneMotionObjectPanel(pf, externalLoadsStorage,dLoads);
-         DialogDescriptor dlg = new DialogDescriptor(eofPanel, "Create/Edit ExternalForce");
-         eofPanel.setDDialog(dlg);
-         Dialog d=DialogDisplayer.getDefault().createDialog(dlg);
-         d.setVisible(true);
-         Object userInput = dlg.getValue();
-         if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-             objectListModel.add(objectListModel.getSize(), pf);
-             String usrObjBodyName=pf.getAppliedToBodyName();                         
-             dLoads.append(pf);
-             dLoads.setMemoryOwner(false);
-             cachedForces.add(pf);
-         }*/
+         else {
+             aMotion.getClassified().add(pf);
+             System.out.println("Adding force id="+pf.getForceIdentifier()+" start index"+pf.getStartIndexInFileNotIncludingTime());
+         }
     }//GEN-LAST:event_jButtonAddActionPerformed
 
 private void jForceScaleTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jForceScaleTextFieldActionPerformed
