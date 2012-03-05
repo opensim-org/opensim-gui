@@ -185,12 +185,4 @@ public class MarkerAdapter  {
         OpenSimDB.getInstance().notifyObservers(evnt);
     }
 
-    String getPropertyComment(String string) {
-        try {
-            return marker.getPropertySet().get(string).getComment();
-        } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
-        }
-        return "";
-    }
 }

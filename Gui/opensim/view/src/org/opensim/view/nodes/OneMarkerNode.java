@@ -1,6 +1,7 @@
 package org.opensim.view.nodes;
 
 import java.awt.Image;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -68,7 +69,7 @@ public class OneMarkerNode extends OpenSimObjectNode{
         Sheet sheet;
 
         sheet = super.createSheet();
-        Sheet.Set set = sheet.get("properties");
+        Sheet.Set set = sheet.get(Sheet.PROPERTIES);
         // Add property for Location
         Marker obj = Marker.safeDownCast(getOpenSimObject());
         MarkerAdapter gMarker = new MarkerAdapter(obj);
@@ -96,7 +97,7 @@ public class OneMarkerNode extends OpenSimObjectNode{
             ((Node.Property) locationNodeProp).setValue("oneline", Boolean.TRUE);
             ((Node.Property) locationNodeProp).setValue("suppressCustomEditor", Boolean.TRUE);
             locationNodeProp.setName("location");
-            locationNodeProp.setShortDescription(gMarker.getPropertyComment("location"));
+            locationNodeProp.setShortDescription(getPropertyComment("location"));
             set.put(locationNodeProp);
             
             Node.Property fixedProp = set.get("fixed");

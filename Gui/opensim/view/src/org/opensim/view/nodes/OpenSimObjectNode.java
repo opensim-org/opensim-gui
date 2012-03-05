@@ -57,6 +57,15 @@ import LSJava.LSPropertyEditors.LSPropertyEditorJoint;
 public class OpenSimObjectNode extends OpenSimNode {
 
     private OpenSimObject openSimObject;
+
+    protected String getPropertyComment(String string) {
+        try {
+            return getOpenSimObject().getPropertySet().get(string).getComment();
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        return "";
+    }
     public enum displayOption{Showable, Isolatable, Colorable};
     private ArrayList<displayOption> validDisplayOptions = new ArrayList<displayOption>();
     
@@ -160,7 +169,7 @@ public class OpenSimObjectNode extends OpenSimNode {
         Sheet retValue;
         
         retValue = super.createSheet();
-        Sheet.Set set = retValue.get("properties");
+        Sheet.Set set = retValue.get(Sheet.PROPERTIES);
         OpenSimObject obj = ((OpenSimObjectNode) (this)).getOpenSimObject();
         
        org.opensim.modeling.PropertySet ps= obj.getPropertySet();
