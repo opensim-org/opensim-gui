@@ -36,13 +36,16 @@ import javax.swing.Action;
 import javax.swing.ImageIcon;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
+import org.openide.nodes.PropertySupport;
+import org.openide.nodes.Sheet;
+import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
-import org.openide.util.actions.SystemAction;
 import org.opensim.modeling.CustomJoint;
 import org.opensim.modeling.Joint;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.SpatialTransform;
 import org.opensim.modeling.TransformAxis;
+import org.opensim.view.editors.BodyNameEditor;
 
 /**
  *
@@ -96,4 +99,38 @@ public class OneJointNode extends OpenSimObjectNode {
         }
         return retActions;
     }
+
+    @Override
+    public Sheet createSheet() {
+         Sheet sheet;
+
+        sheet = super.createSheet();
+        Sheet.Set set = sheet.get(Sheet.PROPERTIES);
+        // Add property for Location
+        Joint obj = Joint.safeDownCast(getOpenSimObject());
+        JointAdapter gJoint = new JointAdapter(obj);
+        org.opensim.modeling.PropertySet ps = obj.getPropertySet();
+        org.opensim.modeling.Property prop;
+        try {
+            /*set.remove("body");
+            PropertySupport.Reflection nextNodeProp2;
+            nextNodeProp2 = new PropertySupport.Reflection(gJoint, String.class, "getBodyName", "setBodyName");
+            nextNodeProp2.setPropertyEditorClass(BodyNameEditor.class);
+            nextNodeProp2.setName("body");
+            set.put(nextNodeProp2);*/
+            set.remove("location");
+            PropertySupport.Reflection locationNodeProp;
+            locationNodeProp = new PropertySupport.Reflection(gJoint, String.class, "getLocationString", "setLocationString");
+            ((Node.Property) locationNodeProp).setValue("oneline", Boolean.TRUE);
+            ((Node.Property) locationNodeProp).setValue("suppressCustomEditor", Boolean.TRUE);
+            locationNodeProp.setName("location");
+            locationNodeProp.setShortDescription(getPropertyComment("location"));
+            set.put(locationNodeProp);
+       } catch (NoSuchMethodException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+
+        return sheet;
+     }
+    
 }

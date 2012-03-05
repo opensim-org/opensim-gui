@@ -102,7 +102,7 @@ public class OneMarkerNode extends OpenSimObjectNode{
             
             Node.Property fixedProp = set.get("fixed");
             set.remove("fixed");
-            Sheet.Set expertSet = sheet.get("expert");
+            Sheet.Set expertSet = sheet.get(Sheet.EXPERT);
             expertSet.put(fixedProp);
    
         } catch (NoSuchMethodException ex) {
