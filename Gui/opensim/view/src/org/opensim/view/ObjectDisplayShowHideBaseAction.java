@@ -28,13 +28,13 @@ package org.opensim.view;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.util.HelpCtx;
-import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.modeling.Actuator;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.nodes.ConcreteModelNode;
+import org.opensim.view.nodes.OneWrapObjectNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.pub.ViewDB;
 
@@ -108,18 +108,21 @@ public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemActi
     }
     
     //-------------------------------------------------------------------------
-    public static void ApplyOperationToNodeWithShowHide( final OpenSimObjectNode objectNode, boolean showOrHide, boolean repaintAll ) 
+    public static void ApplyOperationToNodeWithShowHide( final OpenSimObjectNode objectNode, boolean showOrHide, boolean repaintAll, boolean skipWrappingSurfaces, boolean justWrappingSurfaces ) 
     {
         // Apply action recursively to children.
-        Children ch = objectNode.getChildren();
-        if( ch.getNodesCount() > 0 )
+        Children children = objectNode.getChildren();
+        if( children.getNodesCount() > 0 )
         {
-            Node[] childNodes = ch.getNodes();
-            for( int child=0;  child < childNodes.length;  child++ )
+            Node[] childrenNodes = children.getNodes();
+            for( int i=0;  i < childrenNodes.length;  i++ )
             {
-               if( !(childNodes[child] instanceof OpenSimObjectNode) ) continue;
-               OpenSimObjectNode childNode = (OpenSimObjectNode)childNodes[child];
-               ObjectDisplayShowHideBaseAction.ApplyOperationToNodeWithShowHide( childNode, showOrHide, false );
+               Node childNodei = childrenNodes[i]; 
+               if( !(childNodei instanceof OpenSimObjectNode) ) continue;
+               if( skipWrappingSurfaces && childNodei instanceof OneWrapObjectNode ) continue;
+               if( justWrappingSurfaces && childNodei instanceof OneWrapObjectNode ) continue;
+               OpenSimObjectNode childNode = (OpenSimObjectNode)childNodei;
+               ObjectDisplayShowHideBaseAction.ApplyOperationToNodeWithShowHide( childNode, showOrHide, false, skipWrappingSurfaces, justWrappingSurfaces );
             }
         }
         

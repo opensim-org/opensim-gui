@@ -52,6 +52,28 @@ public class OneBodyNode extends OpenSimObjectNode{
       addDisplayOption(displayOption.Showable);
    }
 
+   
+   //----------------------------------------------------------------
+   public static int  GetNumberOfWrapObjectsForBody( OpenSimObject openSimObject )           
+   { 
+      WrapObjectSet wrapObjectSet = OneBodyNode.GetWrapObjectSetOrNullForBody( openSimObject ); 
+      return wrapObjectSet == null ? 0 : wrapObjectSet.getSize();
+   }
+
+   
+   //----------------------------------------------------------------
+   public static WrapObjectSet  GetWrapObjectSetOrNullForBody( OpenSimObject openSimObject )
+   {
+      if( openSimObject instanceof Body )
+      {
+         Body body = (Body)openSimObject;
+	 WrapObjectSet wrapObjectSet = body.getWrapObjectSet();
+         return wrapObjectSet;
+      }
+      return null;
+   }
+
+   
     public Node cloneNode() {
         return new OneBodyNode(getOpenSimObject());
     }

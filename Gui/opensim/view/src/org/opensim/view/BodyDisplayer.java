@@ -52,12 +52,14 @@ import vtk.vtkJPEGReader;
 import vtk.vtkMapper;
 import vtk.vtkOutlineFilter;
 import vtk.vtkPNGReader;
+import vtk.vtkPolyData;
 import vtk.vtkPolyDataMapper;
 import vtk.vtkProp3D;
 import vtk.vtkProp3DCollection;
 import vtk.vtkSphereSource;
 import vtk.vtkTexture;
 import vtk.vtkTransform;
+import vtk.vtkTransformPolyDataFilter;
 
 /**
  *
@@ -77,7 +79,7 @@ public class BodyDisplayer extends vtkAssembly
     protected Hashtable<OpenSimObject, vtkActor> mapGeometryToVtkObjects = new Hashtable<OpenSimObject, vtkActor>();
     private boolean showCOM = false;
     private vtkActor centerOfMassActor = new vtkActor();
-    private vtkSphereSource comSource = new vtkSphereSource();
+    private vtkSphereSource myCMSphereSourceVTK = new vtkSphereSource();
     private double[] bodyBounds = new double[]{.1, -.1, .1, -.1, .1, -.1};
     // Create bounding box for selection and size estimate
     vtkOutlineFilter outlineFilter = new vtkOutlineFilter();
@@ -111,12 +113,7 @@ public class BodyDisplayer extends vtkAssembly
       bodyAxes.SetScale(2.);
       bodyAxes.setRadius(0.001);
       
-      vtkPolyDataMapper comMapper = new vtkPolyDataMapper();
-
-      comSource.SetRadius( ViewDB.getInstance().getMarkerDisplayRadius()*2 );
-      comMapper.SetInput( comSource.GetOutput() );
-      centerOfMassActor.SetMapper(comMapper);
-      this.SetCMSphereColorToGreen();
+      this.SetCMToGreenSphereWhoseSizeDependsOnMarkerRadius();
 
       //jointBFrame.GetProperty().SetLineStipplePattern(1);
       VisibleObject bodyDisplayer = body.getDisplayer();
@@ -176,8 +173,7 @@ public class BodyDisplayer extends vtkAssembly
          bodyBounds = ViewDB.boundsUnion(bnds, bodyBounds);
          //AddPart(outlineActor);
       }
-      //comSource.SetEndPhi(90);
-      //comSource.SetEndTheta(90);
+
       centerOfMassActor.GetProperty().SetLineStipplePattern(0xF0F0);
       if (showCOM) AddPart(centerOfMassActor);
       updateMapsToSupportPicking(body, mapObject2VtkObjects, mapVtkObjects2Objects);
@@ -479,12 +475,78 @@ public class BodyDisplayer extends vtkAssembly
     {
        double[] cmLocationToFill = new double[3];
        body.getCenterOfMass( cmLocationToFill );
-       comSource.SetCenter( cmLocationToFill );
+       myCMSphereSourceVTK.SetCenter( cmLocationToFill );
        if( updateView )
        {
           super.Modified();
           ViewDB.getInstance().repaintAll();
        }
+    }
+    
+    
+    //--------------------------------------------------------------------------
+    public void  SetCMToGreenSphereWhoseSizeDependsOnMarkerRadius(  )
+    {
+       myCMSphereSourceVTK.SetRadius( ViewDB.getInstance().getMarkerDisplayRadius()*2 );
+       int resolutionPhi = 16, resolutionTheta = 16;
+       myCMSphereSourceVTK.LatLongTessellationOn(); 
+       myCMSphereSourceVTK.SetPhiResolution( resolutionPhi );
+       myCMSphereSourceVTK.SetThetaResolution( resolutionTheta );
+       // myCMSphereSourceVTK.SetEndPhi(90);
+       // myCMSphereSourceVTK.SetEndTheta(90);       
+       
+       vtkPolyDataMapper comMapper = new vtkPolyDataMapper();
+       comMapper.SetInput( myCMSphereSourceVTK.GetOutput() );
+       centerOfMassActor.SetMapper( comMapper );
+ 
+       this.SetCMSphereColorToGreen(); 
+       this.SetCMSphereToEllipsoidWhoseAverageScaleIsOne( 1.0, 1.0, 1.0, false );
+    }
+      
+      
+    //--------------------------------------------------------------------------
+    public void  SetCMSphereToEllipsoidFromMomentsOfInertiaOnly( double Ixx, double Iyy, double Izz, boolean updateView ) 
+    { 
+       if( Ixx <= 0.0 ) Ixx = 0.0;
+       if( Iyy <= 0.0 ) Iyy = 0.0;
+       if( Izz <= 0.0 ) Izz = 0.0;
+       double xSum = Iyy + Izz - Ixx;
+       double ySum = Izz + Ixx - Iyy;
+       double zSum = Ixx + Iyy - Izz;
+       double a = xSum > 0 ? java.lang.Math.sqrt( xSum ) : 0.0;
+       double b = ySum > 0 ? java.lang.Math.sqrt( ySum ) : 0.0;
+       double c = zSum > 0 ? java.lang.Math.sqrt( zSum ) : 0.0;
+       this.SetCMSphereToEllipsoidWhoseAverageScaleIsOne( a, b, c, updateView );
+    }
+      
+    
+    //--------------------------------------------------------------------------
+    private void  SetCMSphereToEllipsoidWhoseAverageScaleIsOne( double scaleX, double scaleY, double scaleZ, boolean updateView ) 
+    { 
+       if( scaleX < 0.0 ) scaleX = 0.0;   
+       if( scaleY < 0.0 ) scaleY = 0.0;  
+       if( scaleZ < 0.0 ) scaleZ = 0.0;  
+       double sumScale = scaleX + scaleY + scaleZ;
+       if( sumScale == 0.0 ) scaleX = scaleY = scaleZ = 1.0;
+       else
+       {
+          double oneOverAverageScaleFactor = 3.0 / sumScale;
+          if( (scaleX *= oneOverAverageScaleFactor) < 0.33 ) scaleX = 0.33;
+          if( (scaleY *= oneOverAverageScaleFactor) < 0.33 ) scaleY = 0.33;
+          if( (scaleZ *= oneOverAverageScaleFactor) < 0.33 ) scaleZ = 0.33;
+       }           
+
+       /*
+       // Paul to fix - currently SetScale also repositions the sphere
+       
+       // Somehow scale this so it looks like an ellipsoid.
+       centerOfMassActor.SetScale( scaleX, scaleY, scaleZ );
+       
+       if( updateView )
+       {
+          super.Modified();
+          ViewDB.getInstance().repaintAll();
+       } */
     }
       
       
