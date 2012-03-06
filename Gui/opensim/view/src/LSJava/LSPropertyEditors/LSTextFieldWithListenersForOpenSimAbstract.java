@@ -27,36 +27,25 @@ import  java.awt.*;
 public abstract class LSTextFieldWithListenersForOpenSimAbstract extends LSTextFieldWithListenersAbstract
 {
    // Constructor ---------------------------------------------------------
-   public LSTextFieldWithListenersForOpenSimAbstract( Window ownerWindowOrNull, LSPropertyTalkToSimbody propertyToTalkToSimbody, String openSimPropertyName, String initialString, int textWidth, boolean isEditable, LSContainer container, int gridWidth, int gridHeight, ActionListener actionListenerOrNull, FocusListener focusListenerOrNull, KeyListener keyListenerOrNull )
+   public LSTextFieldWithListenersForOpenSimAbstract( LSPropertyTalkToSimbody propertyToTalkToSimbody, String openSimPropertyName, String initialString, int textWidth, boolean isEditable, LSContainer container, int gridWidth, int gridHeight, ActionListener actionListenerOrNull, FocusListener focusListenerOrNull, KeyListener keyListenerOrNull )
    {
-      super( initialString, textWidth, isEditable, container, gridWidth, gridHeight, actionListenerOrNull, focusListenerOrNull, keyListenerOrNull );
+      super( LSColor.BackgroundColorSuggestingError, initialString, textWidth, isEditable, container, gridWidth, gridHeight, actionListenerOrNull, focusListenerOrNull, keyListenerOrNull );
       myPropertyToTalkToSimbody = propertyToTalkToSimbody;
       myOpenSimPropertyName = openSimPropertyName;
-      myOwnerWindowOrNull = ownerWindowOrNull;
    }
 
 
    //-------------------------------------------------------------------------
-   abstract protected void  EventActionOrFocusOrKeyEventOnThisObjectVirtual( );
+   abstract protected String  EventActionOrFocusLostOrKeyEventReturnErrorStringVirtual( );
 
-
-   //-------------------------------------------------------------------------
-   protected boolean  IssueErrorMessageInOwnerWindowAndRequestFocusBackIfBadDoublePrecisionNumber( )
-   {
-      boolean requestFocusBack = super.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber( this.GetOwnerWindowOrNull() );
-      if( requestFocusBack ) super.RequestFocus();
-      return requestFocusBack;
-   }
 
 
    //-------------------------------------------------------------------------
    public LSPropertyTalkToSimbody  GetPropertyToTalkToSimbody( )  { return myPropertyToTalkToSimbody; }   
    public String  GetAssociatedOpenSimPropertyName( )             { return myOpenSimPropertyName; }
-   public Window  GetOwnerWindowOrNull( )                         { return myOwnerWindowOrNull; }
 
    // Class variables --------------------------------------------------------
    private LSPropertyTalkToSimbody  myPropertyToTalkToSimbody;
    private String  myOpenSimPropertyName;
-   private Window  myOwnerWindowOrNull;
 
 }

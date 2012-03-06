@@ -27,19 +27,20 @@ import  java.awt.*;
 public class LSTextFieldWithListenersForOpenSimArrayDouble extends LSTextFieldWithListenersForOpenSimAbstract
 {
    // Constructor ---------------------------------------------------------
-   public LSTextFieldWithListenersForOpenSimArrayDouble( int elementNumber, Window ownerWindowOrNull, LSPropertyTalkToSimbody propertyToTalkToSimbody, String openSimPropertyName, int textWidth, boolean isEditable, LSContainer container, int gridWidth, int gridHeight, ActionListener actionListenerOrNull, FocusListener focusListenerOrNull, KeyListener keyListenerOrNull )   
+   public LSTextFieldWithListenersForOpenSimArrayDouble( int elementNumber, LSPropertyTalkToSimbody propertyToTalkToSimbody, String openSimPropertyName, int textWidth, boolean isEditable, LSContainer container, int gridWidth, int gridHeight, ActionListener actionListenerOrNull, FocusListener focusListenerOrNull, KeyListener keyListenerOrNull )   
    { 
-      super( ownerWindowOrNull, propertyToTalkToSimbody, openSimPropertyName, "0.0", textWidth==0 ? LSDouble.GetMaxNumberOfCharsInTextFieldsForDoublePrecisionNumber() : textWidth, isEditable, container, gridWidth, gridHeight, actionListenerOrNull, focusListenerOrNull, keyListenerOrNull ); 
+      super( propertyToTalkToSimbody, openSimPropertyName, "0.0", textWidth==0 ? LSDouble.GetMaxNumberOfCharsInTextFieldsForDoublePrecisionNumber() : textWidth, isEditable, container, gridWidth, gridHeight, actionListenerOrNull, focusListenerOrNull, keyListenerOrNull ); 
       double propertyValue = this.GetOpenSimObjectPropertyValueAsDoubleArrayElement( myElementNumber = elementNumber );
       super.SetTextFieldFromDouble( propertyValue );
    }
 
 
    //-------------------------------------------------------------------------
-   protected void  EventActionOrFocusOrKeyEventOnThisObjectVirtual( )
+   protected String  EventActionOrFocusLostOrKeyEventReturnErrorStringVirtual( )
    {
-      if( !super.IssueErrorMessageInOwnerWindowAndRequestFocusBackIfBadDoublePrecisionNumber() )
-	 this.SetOpenSimObjectPropertyValueAsDoubleArrayElementFromTextField();
+      if( !super.IsTextFieldValidDouble() ) return "Error -- Bad real number: ";
+      this.SetOpenSimObjectPropertyValueAsDoubleArrayElementFromTextField();
+      return null;
    }
 
 

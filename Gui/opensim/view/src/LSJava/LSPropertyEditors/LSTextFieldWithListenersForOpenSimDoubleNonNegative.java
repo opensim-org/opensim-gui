@@ -27,20 +27,18 @@ import  java.awt.*;
 public class LSTextFieldWithListenersForOpenSimDoubleNonNegative extends LSTextFieldWithListenersForOpenSimDouble
 {
    // Constructor ---------------------------------------------------------
-   public LSTextFieldWithListenersForOpenSimDoubleNonNegative( Window ownerWindowOrNull, LSPropertyTalkToSimbody propertyToTalkToSimbody, String openSimPropertyName, int textWidth, boolean isEditable, LSContainer container, int gridWidth, int gridHeight, ActionListener actionListenerOrNull, FocusListener focusListenerOrNull, KeyListener keyListenerOrNull )   
+   public LSTextFieldWithListenersForOpenSimDoubleNonNegative( LSPropertyTalkToSimbody propertyToTalkToSimbody, String openSimPropertyName, int textWidth, boolean isEditable, LSContainer container, int gridWidth, int gridHeight, ActionListener actionListenerOrNull, FocusListener focusListenerOrNull, KeyListener keyListenerOrNull )   
    { 
-      super( ownerWindowOrNull, propertyToTalkToSimbody, openSimPropertyName, textWidth, isEditable, container, gridWidth, gridHeight, actionListenerOrNull, focusListenerOrNull, keyListenerOrNull ); 
+      super( propertyToTalkToSimbody, openSimPropertyName, textWidth, isEditable, container, gridWidth, gridHeight, actionListenerOrNull, focusListenerOrNull, keyListenerOrNull ); 
    }
 
 
    //-------------------------------------------------------------------------
-   protected void  EventActionOrFocusOrKeyEventOnThisObjectVirtual( )
+   protected String  EventActionOrFocusLostOrKeyEventReturnErrorStringVirtual( )
    {
-      if( !super.IssueErrorMessageInOwnerWindowAndRequestFocusBackIfBadDoublePrecisionNumber() )
-      {
-         super.IssueWarningMessageIfTextFieldIsNegativeNumber( super.GetOwnerWindowOrNull() ); 
-	 this.SetOpenSimObjectPropertyValueFromTextFieldAsDouble();
-      }
+      if( !super.IsTextFieldValidDoubleNonNegative() ) return "Error -- Bad non-negative number: ";
+      super.SetOpenSimObjectPropertyValueFromTextFieldAsDouble();
+      return null;
    }
 
 }

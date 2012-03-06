@@ -93,24 +93,17 @@ public class LSPropertyEditorJoint extends LSPropertyEditorTabbedAbstract implem
    }
    
    //-------------------------------------------------------------------------
-   private boolean  CheckFocusLostEventTarget( Object eventTarget )
+   private void  CheckFocusLostEventTarget( Object eventTarget )
    {
-      boolean requestFocusBack = false;
-      Window ownerWindowOrThis = super.GetLSDialogOwnerWindowOrThis(); 
-      if(      eventTarget==myNameTextField )   super.SetOpenSimObjectNameAndPropertyEditorDialogTitle( myNameTextField.GetTextFieldAsString() );
-      else if( eventTarget==myCoordAPositionFromBodyAOriginXTextField  )  requestFocusBack = myCoordAPositionFromBodyAOriginXTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis);
-      else if( eventTarget==myCoordAPositionFromBodyAOriginYTextField  )  requestFocusBack = myCoordAPositionFromBodyAOriginYTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis);
-      else if( eventTarget==myCoordAPositionFromBodyAOriginZTextField  )  requestFocusBack = myCoordAPositionFromBodyAOriginZTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis);
-      else if( eventTarget==myCoordAOrientationFromBodyAqXTextField )     requestFocusBack = myCoordAOrientationFromBodyAqXTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis);
-      else if( eventTarget==myCoordAOrientationFromBodyAqYTextField )     requestFocusBack = myCoordAOrientationFromBodyAqYTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis);
-      else if( eventTarget==myCoordAOrientationFromBodyAqZTextField )     requestFocusBack = myCoordAOrientationFromBodyAqZTextField.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber(ownerWindowOrThis);
-
+      if(  eventTarget==myNameTextField )  super.SetOpenSimObjectNameAndPropertyEditorDialogTitle( myNameTextField.GetTextFieldAsString() );
+ 
       // Update rotation matrix if numbers are good.
-      if( !requestFocusBack && (eventTarget==myCoordAOrientationFromBodyAqXTextField || eventTarget==myCoordAOrientationFromBodyAqYTextField || eventTarget==myCoordAOrientationFromBodyAqZTextField) ) 
-         this.ProcessEventJointOrientationRelativeToParentChanged();
-
-      if( requestFocusBack && eventTarget instanceof LSTextField ) { LSTextField eventTargetLSTextField = (LSTextField)eventTarget;  eventTargetLSTextField.RequestFocus(); }
-      return requestFocusBack;
+      if( eventTarget==myCoordAOrientationFromBodyAqXTextField || eventTarget==myCoordAOrientationFromBodyAqYTextField || eventTarget==myCoordAOrientationFromBodyAqZTextField )
+      {
+         LSTextField eventTargetAsTextField = (LSTextField)eventTarget;
+         boolean isValidDouble = eventTargetAsTextField.IsTextFieldValidDouble();
+         if( isValidDouble ) this.ProcessEventJointOrientationRelativeToParentChanged();
+      } 
    }
    
 
@@ -126,14 +119,15 @@ public class LSPropertyEditorJoint extends LSPropertyEditorTabbedAbstract implem
       super.AddTabToPropertyEditor( "Joint frames",               null,  this.CreateTabComponentJointFrameSelectorButtons(),        null );
       super.AddTabToPropertyEditor( "Location in parent",         null,  this.CreateTabComponentJointPositionFromParentOrigin(),    null );
       super.AddTabToPropertyEditor( "Orientation in parent",      null,  this.CreateTabComponentJointOrientationRelativeToParent(), null );
-      super.AddTabToPropertyEditor( "Free joint",                 null,  this.CreateTabComponentJointTypeTBD( 0 ),                  null );
-      super.AddTabToPropertyEditor( "Ball joint on curved slot",  null,  this.CreateTabComponentJointTypeTBD( 1 ),                  null );
-      super.AddTabToPropertyEditor( "Ball joint",                 null,  this.CreateTabComponentJointTypeTBD( 2 ),                  null );
-      super.AddTabToPropertyEditor( "Revolute on straight slot",  null,  this.CreateTabComponentJointTypeTBD( 3 ),                  null );
-      super.AddTabToPropertyEditor( "Prismatic joint",            null,  this.CreateTabComponentJointTypeTBD( 4 ),                  null );
-      super.AddTabToPropertyEditor( "Revolute joint",             null,  this.CreateTabComponentJointTypeTBD( 5 ),                  null );
-      super.AddTabToPropertyEditor( "Rigid joint on curved slot", null,  this.CreateTabComponentJointTypeTBD( 6 ),                  null );
-      super.AddTabToPropertyEditor( "Custom joint",               null,  this.CreateTabComponentJointTypeTBD( 0 ),                  null );
+     
+      // super.AddTabToPropertyEditor( "Free joint",                 null,  this.CreateTabComponentJointTypeTBD( 0 ),                  null );
+      // super.AddTabToPropertyEditor( "Ball joint on curved slot",  null,  this.CreateTabComponentJointTypeTBD( 1 ),                  null );
+      // super.AddTabToPropertyEditor( "Ball joint",                 null,  this.CreateTabComponentJointTypeTBD( 2 ),                  null );
+      // super.AddTabToPropertyEditor( "Revolute on straight slot",  null,  this.CreateTabComponentJointTypeTBD( 3 ),                  null );
+      // super.AddTabToPropertyEditor( "Prismatic joint",            null,  this.CreateTabComponentJointTypeTBD( 4 ),                  null );
+      // super.AddTabToPropertyEditor( "Revolute joint",             null,  this.CreateTabComponentJointTypeTBD( 5 ),                  null );
+      // super.AddTabToPropertyEditor( "Rigid joint on curved slot", null,  this.CreateTabComponentJointTypeTBD( 6 ),                  null );
+      // super.AddTabToPropertyEditor( "Custom joint",               null,  this.CreateTabComponentJointTypeTBD( 0 ),                  null );
         
       // Note: The following create a shortcut of the user pressing ALT-1 to get the 0th panel added to tabbedPane, etc. 
       // tabbedPane.setMnemonicAt( 0, KeyEvent.VK_1 ); 
@@ -236,21 +230,21 @@ public class LSPropertyEditorJoint extends LSPropertyEditorTabbedAbstract implem
       // Create position labels and text fields.
       tabContainer.AddBlankLabelToLayoutRowRemainder1High();
       new LSLabel( "Position of Joint CoordA from BodyA origin (Ao)", LSLabel.CENTER, tabContainer, GridBagConstraints.REMAINDER );
-      
+         
       new LSLabel( "Position  =  ", LSLabel.RIGHT, tabContainer );
-      myCoordAPositionFromBodyAOriginXTextField  = new LSTextField( 0.0, 0, true, tabContainer, 1, 1, this, this, this );
+      myCoordAPositionFromBodyAOriginXTextField  = new LSTextFieldWithListenersForOpenSimArrayDouble( 0, super.GetPropertyTalkToSimbody(), "location_in_parent", 0, true, tabContainer, 1, 1, this, this, this );
       new LSLabel( " * bx", LSLabel.LEFT, tabContainer, GridBagConstraints.REMAINDER );
       
       new LSLabel( "  +  ", LSLabel.RIGHT, tabContainer );
-      myCoordAPositionFromBodyAOriginYTextField  = new LSTextField( 0.0, 0, true, tabContainer, 1, 1, this, this, this );
+      myCoordAPositionFromBodyAOriginYTextField  = new LSTextFieldWithListenersForOpenSimArrayDouble( 1, super.GetPropertyTalkToSimbody(), "location_in_parent", 0, true, tabContainer, 1, 1, this, this, this );
       new LSLabel( " * by", LSLabel.LEFT, tabContainer, GridBagConstraints.REMAINDER );
 
       new LSLabel( "  +  ", LSLabel.RIGHT, tabContainer );
-      myCoordAPositionFromBodyAOriginZTextField  = new LSTextField( 0.0, 0, true, tabContainer, 1, 1, this, this, this );
+      myCoordAPositionFromBodyAOriginZTextField  = new LSTextFieldWithListenersForOpenSimArrayDouble( 2, super.GetPropertyTalkToSimbody(), "location_in_parent", 0, true, tabContainer, 1, 1, this, this, this );
       new LSLabel( " * bz", LSLabel.LEFT, tabContainer, GridBagConstraints.REMAINDER );
 
       // Add picture of a joint.
-      JLabel labelWithPicture = LSJava.LSResources.LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "RigidBodyWithOriginCMAndBasisVectors.jpg", 0, 140 );
+      JLabel labelWithPicture = LSJava.LSResources.LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "RigidBodyWithOriginCMAndBasisVectors.png", 0, 140 );
       if( labelWithPicture != null )  tabContainer.AddComponentToLayoutRowRemainder1High( labelWithPicture );
       
       return tabComponent;
@@ -269,15 +263,15 @@ public class LSPropertyEditorJoint extends LSPropertyEditorTabbedAbstract implem
       tabContainer.AddBlankLabelToLayoutRowRemainder1High();
       
       new LSLabel( "qX = ", LSLabel.RIGHT, tabContainer );
-      myCoordAOrientationFromBodyAqXTextField  = new LSTextField( 0.0, 0, true, tabContainer, 1, 1, this, this, this );
+      myCoordAOrientationFromBodyAqXTextField = new LSTextFieldWithListenersForOpenSimArrayDouble( 0, super.GetPropertyTalkToSimbody(), "orientation_in_parent", 0, true, tabContainer, 1, 1, this, this, this );
       new LSLabel( " (radians)", LSLabel.LEFT, tabContainer, GridBagConstraints.REMAINDER );
       
       new LSLabel( "qY = ", LSLabel.RIGHT, tabContainer );
-      myCoordAOrientationFromBodyAqYTextField  = new LSTextField( 0.0, 0, true, tabContainer, 1, 1, this, this, this );
+      myCoordAOrientationFromBodyAqYTextField = new LSTextFieldWithListenersForOpenSimArrayDouble( 0, super.GetPropertyTalkToSimbody(), "orientation_in_parent", 0, true, tabContainer, 1, 1, this, this, this );
       new LSLabel( " (radians)", LSLabel.LEFT, tabContainer, GridBagConstraints.REMAINDER );
 
       new LSLabel( "qZ = ", LSLabel.RIGHT, tabContainer );
-      myCoordAOrientationFromBodyAqZTextField  = new LSTextField( 0.0, 0, true, tabContainer, 1, 1, this, this, this );
+      myCoordAOrientationFromBodyAqZTextField = new LSTextFieldWithListenersForOpenSimArrayDouble( 0, super.GetPropertyTalkToSimbody(), "orientation_in_parent", 0, true, tabContainer, 1, 1, this, this, this );
       new LSLabel( " (radians)", LSLabel.LEFT, tabContainer, GridBagConstraints.REMAINDER );
 
       // Create rotation matrix labels and text fields.
@@ -287,7 +281,7 @@ public class LSPropertyEditorJoint extends LSPropertyEditorTabbedAbstract implem
       this.ProcessEventJointOrientationRelativeToParentChanged();
 
       // Add picture of a joint.
-      JLabel labelWithPicture = LSJava.LSResources.LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "RigidBodyWithCMAndBasisVectors.jpg", 0, 140 );
+      JLabel labelWithPicture = LSJava.LSResources.LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "RigidBodyWithCMAndBasisVectors.png", 0, 140 );
       if( labelWithPicture != null )  tabContainer.AddComponentToLayoutRowRemainder1High( labelWithPicture );
 
       return tabComponent;
@@ -373,12 +367,12 @@ public class LSPropertyEditorJoint extends LSPropertyEditorTabbedAbstract implem
    
    // Fields relating CoordA to parent body.
    private LSPanelRotationMatrixTextFields  myJointRotationMatrixToInboardParent; 
-   private LSTextField    myCoordAOrientationFromBodyAqXTextField;
-   private LSTextField    myCoordAOrientationFromBodyAqYTextField;
-   private LSTextField    myCoordAOrientationFromBodyAqZTextField;
-   private LSTextField    myCoordAPositionFromBodyAOriginXTextField;
-   private LSTextField    myCoordAPositionFromBodyAOriginYTextField;
-   private LSTextField    myCoordAPositionFromBodyAOriginZTextField;
+   private LSTextFieldWithListenersForOpenSimArrayDouble    myCoordAOrientationFromBodyAqXTextField;
+   private LSTextFieldWithListenersForOpenSimArrayDouble    myCoordAOrientationFromBodyAqYTextField;
+   private LSTextFieldWithListenersForOpenSimArrayDouble    myCoordAOrientationFromBodyAqZTextField;
+   private LSTextFieldWithListenersForOpenSimArrayDouble    myCoordAPositionFromBodyAOriginXTextField;
+   private LSTextFieldWithListenersForOpenSimArrayDouble    myCoordAPositionFromBodyAOriginYTextField;
+   private LSTextFieldWithListenersForOpenSimArrayDouble    myCoordAPositionFromBodyAOriginZTextField;
    
    //-----------------------------------------------------------------------------
    // When this property editor is re-displayed, show tab that was last viewed by the user.

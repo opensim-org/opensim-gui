@@ -63,11 +63,29 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
       this.GetDialogAsContainer().PackLocateShow();
       super.SetSelectedTabbedPaneFromPriorUserSelection();
    } 
-   
+
+
    //-------------------------------------------------------------------------
-   public void  actionPerformed( ActionEvent actionEvent )  { Object eventTarget = actionEvent.getSource();  this.CheckActionEventTarget(eventTarget);      }
-   public void  focusLost(   FocusEvent focusEvent )        { Object eventTarget =  focusEvent.getSource();  this.CheckFocusLostEventTarget(eventTarget);   }
-   public void  focusGained( FocusEvent focusEvent )        { Object eventTarget =  focusEvent.getSource();  this.CheckFocusGainedEventTarget(eventTarget); } 
+   public void  actionPerformed( ActionEvent actionEvent )  { Object eventTarget = actionEvent.getSource();  this.CheckActionOrFocusLostOrKeyEventTarget(eventTarget); }
+   public void  focusLost(   FocusEvent focusEvent )        { Object eventTarget =  focusEvent.getSource();  this.CheckActionOrFocusLostOrKeyEventTarget(eventTarget); }
+   public void  focusGained( FocusEvent focusEvent )        { ; } 
+
+   //-------------------------------------------------------------------------
+   public void  keyPressed(  KeyEvent keyEvent )  {;}
+   public void  keyReleased( KeyEvent keyEvent )  {;}
+   public void  keyTyped(    KeyEvent keyEvent )
+   {
+      Object eventTarget = keyEvent.getSource();
+      if( eventTarget == this )
+      {
+         switch( keyEvent.getKeyChar() )
+         {
+            case KeyEvent.VK_ENTER:   
+            case KeyEvent.VK_ESCAPE:  this.CheckActionOrFocusLostOrKeyEventTarget( eventTarget ); 
+                                      break;
+         }
+      }
+   }
 
    //-------------------------------------------------------------------------
    public void  itemStateChanged( ItemEvent itemEvent )     
@@ -83,19 +101,6 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
    // else if( eventTarget == mySurfaceShadedFlatCheckbox )   { super.SetObjectRepresentationPointsWireFrameOrSurfaceAndSurfaceShading( 2, 0 );  this.ProcessEventHideOrShow(true,false,false,false); }
    }
 
-  
-   //-------------------------------------------------------------------------
-   public void  keyPressed(  KeyEvent keyEvent )  {;}
-   public void  keyReleased( KeyEvent keyEvent )  {;}
-   public void  keyTyped(    KeyEvent keyEvent )
-   {
-      switch( keyEvent.getKeyChar() )
-      {
-         case KeyEvent.VK_ESCAPE:
-         case KeyEvent.VK_ENTER:   this.CheckFocusLostEventTarget( keyEvent.getSource() ); break;
-      }
-   }
-
    //-------------------------------------------------------------------------
    public void  stateChanged( ChangeEvent changeEvent ) 
    {
@@ -103,6 +108,16 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
       if( eventTarget == myOpacitySlider ) { if( !myOpacitySlider.getValueIsAdjusting() )  super.SetObjectOpacityWithIntegerFrom0To100( myOpacitySlider.GetSliderValueAsInteger() ); } 
    }
 
+
+   //-------------------------------------------------------------------------
+   private void  CheckActionOrFocusLostOrKeyEventTarget( Object eventTarget )
+   {
+      if(      eventTarget == myButtonToOpenOldPropertyViewerTable ) super.ProcessEventClickButtonToOpenOldPropertyViewerTable();
+      else if( eventTarget == myButtonToOpenColorChooser )           super.CreateColorDialogBoxToChangeUserSelectedColor();
+      else if( eventTarget==myNameTextField )  super.SetOpenSimObjectNameAndPropertyEditorDialogTitle( myNameTextField.GetTextFieldAsString() );
+      else if( eventTarget==myXcmTextField || eventTarget==myYcmTextField || eventTarget==myZcmTextField ) this.ProcessEventChangedCMPositionEvent(); 
+   }
+   
 
    //-------------------------------------------------------------------------
    private void  SynchronizeShowCenterOfMassCheckboxes( Object eventTarget )
@@ -170,7 +185,7 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
       boolean checkBoxOnForCMOrBodyAxes = myShowCMCheckboxA.GetCheckboxState() || myShowBodyAxesCheckbox.GetCheckboxState();
       boolean isShowCMOrShowBodyAxes = (isShow==false && userClickedShowCMOrBodyAxes==false) ? false : checkBoxOnForCMOrBodyAxes;
       int opacityValue = isShow ? (isShowCMOrShowBodyAxes ? highValueOfOpacityIfShowCMOrAxes : 100) : 
-                                  (isShowCMOrShowBodyAxes ? lowValueOfOpacityIfShowCMOrAxes  : 0);
+                                  (isShowCMOrShowBodyAxes ? lowValueOfOpacityIfShowCMOrAxes  : currentValueOfOpacitySlider0To100);
 
       // If user just changed color and opacity is nonzero, leave opacity alone (at the current slider value).
       if( userChangedColor && currentValueOfOpacitySlider0To100 != 0 ) opacityValue = currentValueOfOpacitySlider0To100;
@@ -191,7 +206,7 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
          myShowBodyCheckbox.SetCheckboxState( true  );  // True must be done first or else Java ignores the next statement.
          myHideBodyCheckbox.SetCheckboxState( false );
       }
-      else if( objectHidden0Shown1Mixed2==0 || currentValueOfOpacitySlider0To100==0 )
+      else if( objectHidden0Shown1Mixed2 == 0 ) // || currentValueOfOpacitySlider0To100==0 )
       { 
          myHideBodyCheckbox.SetCheckboxState( true  );	// True must be done first or else Java ignores the next statement.
          myShowBodyCheckbox.SetCheckboxState( false );  
@@ -199,44 +214,14 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
    }
 
 
-   //-------------------------------------------------------------------------
-   private void  CheckActionEventTarget( Object eventTarget )
-   {
-      if(      eventTarget == myButtonToOpenOldPropertyViewerTable ) super.ProcessEventClickButtonToOpenOldPropertyViewerTable();
-      else if( eventTarget == myButtonToOpenColorChooser )           super.CreateColorDialogBoxToChangeUserSelectedColor();
-   }
-   
-   //-------------------------------------------------------------------------
-   private boolean  CheckFocusLostEventTarget( Object eventTarget )
-   {
-      boolean requestFocusBack = false;
-      Window ownerWindowOrThis = super.GetLSDialogOwnerWindowOrThis(); 
-      if(      eventTarget==myNameTextField )  super.SetOpenSimObjectNameAndPropertyEditorDialogTitle( myNameTextField.GetTextFieldAsString() );
-      else if( eventTarget==myXcmTextField || eventTarget==myYcmTextField || eventTarget==myZcmTextField ) this.ProcessEventChangedCMPositionEvent(); 
-      else if( eventTarget==myIxxTextField || eventTarget==myIyyTextField || eventTarget==myIzzTextField ) this.CheckInertiaMatrixAndGiveVisualFeedbackOnWhetherOrNotItIsPhysicallyPossible();
-      else if( eventTarget==myIxyTextField  )  requestFocusBack = this.ProcessEventProductOfInertiaChanged( (LSTextField)eventTarget, myIyxTextField );
-      else if( eventTarget==myIxzTextField  )  requestFocusBack = this.ProcessEventProductOfInertiaChanged( (LSTextField)eventTarget, myIzxTextField );
-      else if( eventTarget==myIyzTextField  )  requestFocusBack = this.ProcessEventProductOfInertiaChanged( (LSTextField)eventTarget, myIzyTextField );
-      if( requestFocusBack && eventTarget instanceof LSTextField ) { LSTextField eventTargetLSTextField = (LSTextField)eventTarget;  eventTargetLSTextField.RequestFocus(); }
-      return requestFocusBack;
-   }
-   
-   //-------------------------------------------------------------------------
-   private void  CheckFocusGainedEventTarget( Object eventTarget )
-   {
-      if(      eventTarget == myIyxTextField  )   myIyxTextField.RequestFocus(); 
-      else if( eventTarget == myIzxTextField || eventTarget == myIzyTextField   )   myIzzTextField.RequestFocus();
-      
-      // Change the target to bold-face font.
-      // if( eventTarget instanceOf LSTextField ) BLAH;
-   }
-
    //-----------------------------------------------------------------------------
    private void  AddPanelsToFrame() 
    { 
       super.AddTabToPropertyEditor( "Appearance",               null,  this.CreateTabComponentAppearanceRigidBodyProperty(),             null );
       super.AddTabToPropertyEditor( "Mass and Center of Mass",  null,  this.CreateTabComponentMassAndCenterOfMassRigidBodyProperty(),    null );
-      super.AddTabToPropertyEditor( "Inertia Properties",       null,  this.CreateTabComponentInertiaPropertiesRigidBodyProperty(),      null );
+
+      myInertiaMatrixPanel = new LSPanelRigidBodyInertiaMatrixForOpenSim( this );
+      super.AddTabToPropertyEditor( "Inertia Properties",       null,  myInertiaMatrixPanel, null );
         
       // Note: The following create a shortcut of the user pressing ALT-1 to get the 0th panel added to tabbedPane, etc. 
       // tabbedPane.setMnemonicAt( 0, KeyEvent.VK_1 ); 
@@ -288,15 +273,15 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
       // Add show body axes checkbox.
       tabContainer.AddBlankLabelToLayout1Wide1High(); 
       boolean initialStateOfShowBodyAxes = BodyToggleFrameAction.IsShowAxesForBody( super.GetAssociatedOpenSimObject() );
-      myShowBodyAxesCheckbox = new LSCheckbox( "Show body axes", initialStateOfShowBodyAxes, null, tabContainer, 2, 1, this );
+      myShowBodyAxesCheckbox = new LSCheckbox( "Show rigid body axes", initialStateOfShowBodyAxes, null, tabContainer, 2, 1, this );
       
       // Add picture of XYZ Basis Vectors to right of checkbox.
       JLabel labelWithPictureOfXYZBasisVectors = LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "XRedYYellowZGreenBasisVectors.png", 0, 40 );
       tabContainer.AddComponentToLayoutRowRemainder1High( labelWithPictureOfXYZBasisVectors );
 
       // Maybe add show muscle wrapping surfaces checkbox.
-      boolean oneOrMoreMuscleWrappingSurfacesExistsForThisBody = true;
-      if( oneOrMoreMuscleWrappingSurfacesExistsForThisBody )
+      int numberOfMuscleWrappingSurfacesForThisBody = OneBodyNode.GetNumberOfWrapObjectsForBody( super.GetAssociatedOpenSimObject() );
+      if( numberOfMuscleWrappingSurfacesForThisBody > 0 )
       {
          tabContainer.AddBlankLabelToLayout1Wide1High(); 
          boolean initialStateOfShowMuscleWrappingSurfaces = false; // BodyToggleFrameAction.IsShowAxesForBody( super.GetAssociatedOpenSimObject() );
@@ -392,23 +377,23 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
 
       // Create mass label and text field.
       LSLabel massLabel = new LSLabel( "Mass  =  ", LSLabel.RIGHT, tabContainer );
-      myMassTextField = new LSTextFieldWithListenersForOpenSimDoubleNonNegative( this, super.GetPropertyTalkToSimbody(), "mass", 0, true, tabContainer, 1, 1, this, this, this );   
+      myMassTextField = new LSTextFieldWithListenersForOpenSimDoubleNonNegative( super.GetPropertyTalkToSimbody(), "mass", 0, true, tabContainer, 1, 1, this, this, this );   
       tabContainer.AddBlankLabelToLayoutRowRemainder1High();
 
       // Create center of mass labels and text fields.
       tabContainer.AddBlankLabelToLayoutRowRemainder1High();
-      new LSLabel( "Position of Body center of mass (Bcm) from Body origin (Bo)", LSLabel.CENTER, tabContainer, GridBagConstraints.REMAINDER );
+      new LSLabel( "Position of rigid Body center of mass (Bcm) from rigid Body origin (Bo)", LSLabel.CENTER, tabContainer, GridBagConstraints.REMAINDER );
       
       new LSLabel( "Position  =  ", LSLabel.RIGHT, tabContainer );
-      myXcmTextField  = new LSTextFieldWithListenersForOpenSimArrayDouble( 0, this, super.GetPropertyTalkToSimbody(), "mass_center", 0, true, tabContainer, 1, 1, this, this, this );   
+      myXcmTextField  = new LSTextFieldWithListenersForOpenSimArrayDouble( 0, super.GetPropertyTalkToSimbody(), "mass_center", 0, true, tabContainer, 1, 1, this, this, this );   
       new LSLabel( " * bx", LSLabel.LEFT, tabContainer, GridBagConstraints.REMAINDER );
       
       new LSLabel( "  +  ", LSLabel.RIGHT, tabContainer );
-      myYcmTextField  = new LSTextFieldWithListenersForOpenSimArrayDouble( 1, this, super.GetPropertyTalkToSimbody(), "mass_center", 0, true, tabContainer, 1, 1, this, this, this );   
+      myYcmTextField  = new LSTextFieldWithListenersForOpenSimArrayDouble( 1, super.GetPropertyTalkToSimbody(), "mass_center", 0, true, tabContainer, 1, 1, this, this, this );   
       new LSLabel( " * by", LSLabel.LEFT, tabContainer, GridBagConstraints.REMAINDER );
 
       new LSLabel( "  +  ", LSLabel.RIGHT, tabContainer );
-      myZcmTextField  = new LSTextFieldWithListenersForOpenSimArrayDouble( 2, this, super.GetPropertyTalkToSimbody(), "mass_center", 0, true, tabContainer, 1, 1, this, this, this );   
+      myZcmTextField  = new LSTextFieldWithListenersForOpenSimArrayDouble( 2, super.GetPropertyTalkToSimbody(), "mass_center", 0, true, tabContainer, 1, 1, this, this, this );   
       new LSLabel( " * bz", LSLabel.LEFT, tabContainer, GridBagConstraints.REMAINDER );
 
       // Add show center of mass checkbox.
@@ -418,62 +403,10 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
 
 
       // Add picture of a rigid body with Bcm (Body center of mass) and Bo (Body origin).
-      JLabel labelWithPicture = LSJava.LSResources.LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "RigidBodyWithOriginCMAndBasisVectors.jpg", 0, 140 );
+      JLabel labelWithPicture = LSJava.LSResources.LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "RigidBodyWithOriginCMAndBasisVectors.png", 0, 140 );
       if( labelWithPicture != null )  tabContainer.AddComponentToLayoutRowRemainder1High( labelWithPicture );
       
       return tabComponent;
-   } 
-
-   //-----------------------------------------------------------------------------
-   private Component  CreateTabComponentInertiaPropertiesRigidBodyProperty( ) 
-   { 
-      LSPanel     tabComponent = new LSPanel(); 
-      LSContainer tabContainer = tabComponent.GetPanelAsContainer();
-      tabContainer.SetContainerBackgroundColor( Color.white );
-
-      // Create inertia properties labels and text fields.
-      tabContainer.AddBlankLabelToLayoutRowRemainder1High();
-      myInertiaIncorrectLabel = new LSLabel( "Error: INVALID Inertia matrix", LSLabel.CENTER, tabContainer, GridBagConstraints.REMAINDER );
-      myInertiaIncorrectLabel.SetLabelForegroundColor( LSColor.BackgroundColorSuggestingError );
-      myInertiaIncorrectLabel.SetLabelVisible( true );
- 
-      // Create inertia properties labels and text fields.
-      tabContainer.AddBlankLabelToLayoutRowRemainder1High();
-      new LSLabel( "Inertia matrix about Body center of mass (Bcm) for bx, by, bz", LSLabel.CENTER, tabContainer, GridBagConstraints.REMAINDER );
-      tabContainer.AddComponentToLayoutRowRemainder1High( this.CreatePanelWithInertiaMatrix() );
-
-      // Add picture of a rigid body with Bcm (Body center of mass) and Bo (Body origin).
-      JLabel labelWithPicture = LSJava.LSResources.LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "RigidBodyWithCMAndBasisVectors.jpg", 0, 140 );
-      if( labelWithPicture != null )  tabContainer.AddComponentToLayoutRowRemainder1High( labelWithPicture );
-
-      // After creating the matrix, provide visual feedback on whether or not it is possible.
-      this.CheckInertiaMatrixAndGiveVisualFeedbackOnWhetherOrNotItIsPhysicallyPossible();
-      
-      return tabComponent;
-   } 
-
-
-   //-----------------------------------------------------------------------------
-   private LSPanel  CreatePanelWithInertiaMatrix( ) 
-   { 
-      myInertiaMatrixPanel = new LSPanel(); 
-      LSContainer tabContainer = myInertiaMatrixPanel.GetPanelAsContainer();
-
-      // Extra padding (spacing) between components in inertia matrix.
-      tabContainer.SetConstraintInsets( 4, 4, 4, 4 );
-
-      // Create inertia properties labels and text fields.
-      myIxxTextField = new LSTextFieldWithListenersForOpenSimDoubleNonNegative( this, super.GetPropertyTalkToSimbody(), "inertia_xx", 0, true, tabContainer, 1, 1, this, this, this );   
-      myIxyTextField = new LSTextFieldWithListenersForOpenSimDouble(            this, super.GetPropertyTalkToSimbody(), "inertia_xy", 0, true, tabContainer, 1, 1, this, this, this );   
-      myIxzTextField = new LSTextFieldWithListenersForOpenSimDouble(            this, super.GetPropertyTalkToSimbody(), "inertia_xz", 0, true, tabContainer, GridBagConstraints.REMAINDER, 1, this, this, this );   
-      myIyxTextField = new LSTextField( myIxyTextField.GetTextFieldAsString(), 0, false, tabContainer, 1, 1, null, this, null );
-      myIyyTextField = new LSTextFieldWithListenersForOpenSimDoubleNonNegative( this, super.GetPropertyTalkToSimbody(), "inertia_yy", 0, true, tabContainer, 1, 1, this, this, this );   
-      myIyzTextField = new LSTextFieldWithListenersForOpenSimDouble(            this, super.GetPropertyTalkToSimbody(), "inertia_yz", 0, true, tabContainer, GridBagConstraints.REMAINDER, 1, this, this, this );   
-      myIzxTextField = new LSTextField( myIxzTextField.GetTextFieldAsString(), 0, false, tabContainer, 1, 1, null, this, null );
-      myIzyTextField = new LSTextField( myIyzTextField.GetTextFieldAsString(), 0, false, tabContainer, 1, 1, null, this, null );
-      myIzzTextField = new LSTextFieldWithListenersForOpenSimDoubleNonNegative( this, super.GetPropertyTalkToSimbody(), "inertia_zz", 0, true, tabContainer, GridBagConstraints.REMAINDER, 1, this, this, this );   
-      
-      return myInertiaMatrixPanel;
    } 
 
 
@@ -487,100 +420,6 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
       return (openSimObjectNode instanceof OneBodyNode) ? (OneBodyNode)openSimObjectNode : null;
    }
 
-
-   //-------------------------------------------------------------------------
-   private boolean  ProcessEventProductOfInertiaChanged( LSTextField eventTarget, LSTextField sameValueProductOfInertiaInertiaTextField )
-   {
-      Window ownerWindowOrThis = super.GetLSDialogOwnerWindowOrThis();   
-      boolean isBadField = eventTarget.IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber( ownerWindowOrThis );
-      sameValueProductOfInertiaInertiaTextField.SetTextFieldFromString( eventTarget.GetTextFieldAsString() );
-      this.CheckInertiaMatrixAndGiveVisualFeedbackOnWhetherOrNotItIsPhysicallyPossible();
-      return isBadField;
-   }
-
-
-   //-------------------------------------------------------------------------
-   private double[]  GetInertiaMatrixIfAllFieldsAreValidDoublesWithMomentsBeingNonNegativeOtherwiseNull( )
-   { 
-      if( myIxxTextField.IsTextFieldValidDoubleNonNegative() && 
-          myIyyTextField.IsTextFieldValidDoubleNonNegative() && 
-          myIzzTextField.IsTextFieldValidDoubleNonNegative() && 
-       	  myIxyTextField.IsTextFieldValidDouble() &&
-       	  myIxzTextField.IsTextFieldValidDouble() &&
-       	  myIyzTextField.IsTextFieldValidDouble() )
-      {
-         double Ixx = myIxxTextField.GetTextFieldAsDouble(); 
-         double Iyy = myIyyTextField.GetTextFieldAsDouble(); 
-         double Izz = myIzzTextField.GetTextFieldAsDouble(); 
-         double Ixy = myIxyTextField.GetTextFieldAsDouble(); 
-         double Ixz = myIxzTextField.GetTextFieldAsDouble(); 
-         double Iyz = myIyzTextField.GetTextFieldAsDouble();
-         double retValue[] = { Ixx, Iyy, Izz, Ixy, Ixz, Iyz };
-         return retValue;
-      }
-      return null;
-   }
-
-
-   //-------------------------------------------------------------------------
-   private boolean  IsValidInertiaMomentsTriangleInequality( double Ixx, double Iyy, double Izz )
-   {
-      double momentOfInertiaSum = Ixx + Iyy + Izz;
-      double epsilonMomentOfInertia = 1.0E-7 * momentOfInertiaSum; 
-      return ( Ixx <= Iyy + Izz + epsilonMomentOfInertia ) 
-          && ( Iyy <= Ixx + Izz + epsilonMomentOfInertia )
-          && ( Izz <= Ixx + Iyy + epsilonMomentOfInertia );
-   }
-   
-   //-------------------------------------------------------------------------
-   private boolean  IsValidInertiaProductsSizedComparableToMomentsOfInertia( double Ixx, double Iyy, double Izz, double Ixy, double Ixz, double Iyz, boolean[] isValidIxyIxzIyz )
-   {
-      double momentOfInertiaSum = Ixx + Iyy + Izz;
-      double epsilonMomentOfInertia = 1.0E-7 * momentOfInertiaSum; 
-      double IxxPlusEpsilon = Ixx + epsilonMomentOfInertia;
-      double IyyPlusEpsilon = Iyy + epsilonMomentOfInertia;
-      double IzzPlusEpsilon = Izz + epsilonMomentOfInertia;
-      boolean IxyOK = Math.abs( 2*Ixy ) <= IzzPlusEpsilon; 
-      boolean IxzOK = Math.abs( 2*Ixz ) <= IyyPlusEpsilon;
-      boolean IyzOK = Math.abs( 2*Iyz ) <= IxxPlusEpsilon;
-      
-      // Fill array so calling function can know which comparisons were bad.
-      if( isValidIxyIxzIyz != null )
-      {
-          isValidIxyIxzIyz[0] = IxyOK;
-          isValidIxyIxzIyz[1] = IxzOK;
-          isValidIxyIxzIyz[2] = IyzOK;
-      }
-      
-      return IyzOK && IxzOK && IxyOK;
-   } 
-   
-   //-------------------------------------------------------------------------
-   private boolean  CheckInertiaMatrixAndGiveVisualFeedbackOnWhetherOrNotItIsPhysicallyPossible( )
-   {
-      // Get all the numbers in the inertia matrix - or null if there is an error in one of the fields. 
-      double inertiaArray[] = this.GetInertiaMatrixIfAllFieldsAreValidDoublesWithMomentsBeingNonNegativeOtherwiseNull();
-          
-      // Set the moment of inertia textfield background colors to suggest errors if triangle inequality is invalid.
-      boolean isValidMomentsOfInertiaTriangleEquality = inertiaArray != null && this.IsValidInertiaMomentsTriangleInequality( inertiaArray[0], inertiaArray[1], inertiaArray[2] );
-      myIxxTextField.SetTextFieldBackgroundColorSuggestingErrorTrueOrOKFalse( !isValidMomentsOfInertiaTriangleEquality );
-      myIyyTextField.SetTextFieldBackgroundColorSuggestingErrorTrueOrOKFalse( !isValidMomentsOfInertiaTriangleEquality );
-      myIzzTextField.SetTextFieldBackgroundColorSuggestingErrorTrueOrOKFalse( !isValidMomentsOfInertiaTriangleEquality );
-
-      // Set the product of inertia textfield background colors to suggest errors if triangle inequality is invalid.
-      boolean[] isValidIxyIxzIyz = { true, true, true };
-      boolean isValidInertiaMatrix = isValidMomentsOfInertiaTriangleEquality && this.IsValidInertiaProductsSizedComparableToMomentsOfInertia( inertiaArray[0], inertiaArray[1], inertiaArray[2], inertiaArray[3], inertiaArray[4], inertiaArray[5], isValidIxyIxzIyz );
-      myIxyTextField.SetTextFieldBackgroundColorSuggestingErrorTrueOrOKFalse( !isValidIxyIxzIyz[0] );
-      myIxzTextField.SetTextFieldBackgroundColorSuggestingErrorTrueOrOKFalse( !isValidIxyIxzIyz[1] );
-      myIyzTextField.SetTextFieldBackgroundColorSuggestingErrorTrueOrOKFalse( !isValidIxyIxzIyz[2] );
-      
-      // Possibly show the label that announced the inertia matrix is invalid.
-      myInertiaMatrixPanel.GetPanelAsContainer().SetContainerBackgroundColor( isValidInertiaMatrix ? LSColor.BackgroundColorSuggestingOK : LSColor.BackgroundColorSuggestingError );    
-      myInertiaIncorrectLabel.SetLabelVisible( !isValidInertiaMatrix );
-      
-      this.GetDialogAsContainer().Repaint();
-      return isValidInertiaMatrix;
-   }
 
 
    //-----------------------------------------------------------------------------
@@ -601,22 +440,12 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
    private LSCheckbox     mySurfaceShadedFlatCheckbox;  
    // mySurfaceShadedFlatCheckbox is unimplemented VTK option since: (a) no difference to analytical geometry, (b) not much faster than smooth, (c) Confusing to give user extra options.
    
-   // Center of mass fields.
+   // Mass and center of mass fields.
+   private LSTextFieldWithListenersForOpenSimDoubleNonNegative  myMassTextField;  
    private LSTextFieldWithListenersForOpenSimArrayDouble  myXcmTextField,  myYcmTextField,  myZcmTextField;   
    
    // Mass and inertia matrix fields.
-   private LSTextFieldWithListenersForOpenSimDoubleNonNegative  myMassTextField;  
-   private LSTextFieldWithListenersForOpenSimDoubleNonNegative  myIxxTextField;
-   private LSTextFieldWithListenersForOpenSimDoubleNonNegative  myIyyTextField;
-   private LSTextFieldWithListenersForOpenSimDoubleNonNegative  myIzzTextField;
-   private LSTextFieldWithListenersForOpenSimDouble             myIxyTextField;
-   private LSTextFieldWithListenersForOpenSimDouble             myIxzTextField;
-   private LSTextFieldWithListenersForOpenSimDouble             myIyzTextField;
-   private LSTextField                                          myIyxTextField;
-   private LSTextField                                          myIzxTextField;
-   private LSTextField                                          myIzyTextField;
-   private LSPanel  myInertiaMatrixPanel; 
-   private LSLabel  myInertiaIncorrectLabel;
+   private LSPanelRigidBodyInertiaMatrixForOpenSim  myInertiaMatrixPanel;
    
    // Determine which LSTextField last had focus to determine if the one that regains focus is the same one.
    private LSTextField    myPreviousTextFieldThatHadFocus;

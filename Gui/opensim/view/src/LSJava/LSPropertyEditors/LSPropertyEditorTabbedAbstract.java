@@ -124,8 +124,8 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
 
 
    //----------------------------------------------------------------------------- 
-   protected  LSPropertyTalkToSimbody  GetPropertyTalkToSimbody()                 { return myPropertyTalkToSimbody; }
-   protected  OpenSimObject            GetAssociatedOpenSimObject()               { return myPropertyTalkToSimbody.GetOpenSimObject(); }
+   public     LSPropertyTalkToSimbody  GetPropertyTalkToSimbody()                 { return myPropertyTalkToSimbody; }
+   public     OpenSimObject            GetAssociatedOpenSimObject()               { return myPropertyTalkToSimbody.GetOpenSimObject(); }
    protected  String                   GetOpenSimObjectName( )                    { return myPropertyTalkToSimbody.GetOpenSimObjectName(); } 
    protected  int                      GetTextFieldWidthForOpenSimObjectName( )   { return myPropertyTalkToSimbody.GetTextFieldWidthForOpenSimObjectName(); }
    protected  OpenSimObjectNode        GetAssociatedOpenSimObjectNodeOrNull()     { return myPropertyTalkToSimbody.GetOpenSimObjectNodeOrNull(); }
@@ -256,7 +256,7 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
    {
       OpenSimObjectNode associatedOpenSimObjectNodeOrNull = this.GetAssociatedOpenSimObjectNodeOrNull();
       if( associatedOpenSimObjectNodeOrNull != null )
-         ObjectDisplayShowHideBaseAction.ApplyOperationToNodeWithShowHide( associatedOpenSimObjectNodeOrNull, showOrHide, true ); 
+         ObjectDisplayShowHideBaseAction.ApplyOperationToNodeWithShowHide( associatedOpenSimObjectNodeOrNull, showOrHide, true, true, false ); 
    }
 
    //-----------------------------------------------------------------------------
