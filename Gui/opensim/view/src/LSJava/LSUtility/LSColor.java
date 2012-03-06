@@ -91,10 +91,20 @@ public class LSColor extends Color
    public  final static int myDefaultForegroundColorGreen = 0;
    public  final static int myDefaultForegroundColorBlue  = 100;
    private final static int myDefaultGrayColor = 150; // In Java, lightGray=192, regularGray=128, darkGray = 64;
-   public  final static LSColor PaulGray = new LSColor( myDefaultGrayColor, myDefaultGrayColor, myDefaultGrayColor );
-   public  final static LSColor BackgroundColorSuggestingError = new LSColor( 255, 175, 255 );
-   public  final static LSColor BackgroundColorSuggestingOK    = new LSColor( 255, 255, 255 );
-   public  final static LSColor BackgroundColorVeryLightGray   = new LSColor( 240, 240, 240 );
+   public  final static LSColor PaulGray   = new LSColor( myDefaultGrayColor, myDefaultGrayColor, myDefaultGrayColor );
+   public  final static LSColor AllRed     = new LSColor( 255,   0,   0 );
+   public  final static LSColor DarkRed    = new LSColor( 140,   0,   0 );
+   public  final static LSColor LightRed   = new LSColor( 255, 100, 100 );
+   public  final static LSColor AllGreen   = new LSColor(   0, 255,   0 );
+   public  final static LSColor DarkGreen  = new LSColor(   0, 140,   0 );
+   public  final static LSColor LightGreen = new LSColor( 100, 255, 100 );
+   public  final static LSColor AllBlue    = new LSColor(   0,   0, 255 );
+   public  final static LSColor DarkBlue   = new LSColor(   0,   0, 140 );
+   public  final static LSColor LightBlue  = new LSColor( 100, 100, 255 );
+   public  final static LSColor BackgroundColorSuggestingError     = new LSColor( 255, 175, 255 );
+   public  final static LSColor BackgroundColorSuggestingWarning   = new LSColor( 255, 255, 100 );   
+   public  final static LSColor BackgroundColorSuggestingOK        = new LSColor( 255, 255, 255 );
+   public  final static LSColor BackgroundColorVeryLightGray       = new LSColor( 240, 240, 240 );
 
    private static LSColor myUserBackgroundColor = new LSColor( myDefaultBackgroundColorRed, myDefaultBackgroundColorGreen, myDefaultBackgroundColorBlue );
    private static LSColor myUserForegroundColor = new LSColor( myDefaultForegroundColorRed, myDefaultForegroundColorGreen, myDefaultForegroundColorBlue );
