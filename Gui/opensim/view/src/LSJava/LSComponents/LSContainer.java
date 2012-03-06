@@ -43,16 +43,27 @@ public class LSContainer
 
 
    //-------------------------------------------------------------------------
-   public boolean  IsDialog( )   { return myContainer instanceof Dialog; }
-   public boolean  IsFrame( )    { return myContainer instanceof Frame; }
-   public boolean  IsPanel( )    { return myContainer instanceof Panel; }
-   public boolean  IsWindow( )   { return myContainer instanceof Window; }
+   public Container  GetContainer( )  { return myContainer; }
+   public boolean    IsShowing( )     { return myContainer.isShowing(); }
+   public boolean    IsDialog( )      { return myContainer instanceof Dialog; }
+   public boolean    IsFrame( )       { return myContainer instanceof Frame; }
+   public boolean    IsPanel( )       { return myContainer instanceof Panel; }
+   public boolean    IsWindow( )      { return myContainer instanceof Window; }
 
    //-------------------------------------------------------------------------
-   private Window   GetAsWindowOrNull( )     { return this.IsWindow() ? (Window)myContainer : null; }
-   private Dialog   GetAsDialogOrNull( )     { return this.IsDialog() ? (Dialog)myContainer : null; }
-   private Window   GetDialogOwnerOrNull( )  { return this.IsDialog() ? this.GetAsDialogOrNull().getOwner() : null; }
-   private Window   GetWindowOwnerOrNull( )  { return this.IsWindow() ? this.GetAsWindowOrNull().getOwner() : null; }
+   private Window  GetDialogOwnerOrNull( )  { return this.IsDialog() ? ((Dialog)myContainer).getOwner() : null; }
+   private Window  GetWindowOwnerOrNull( )  { return this.IsWindow() ? ((Window)myContainer).getOwner() : null; }
+
+   //----------------------------------------------------------------------
+   public Window  GetParentWindowOrNull( )  { return LSContainer.GetParentWindowOrNull(myContainer); }
+   public Dialog  GetParentDialogOrNull( )  { return LSContainer.GetParentDialogOrNull(myContainer); }
+   public Frame   GetParentFrameOrNull( )   { return LSContainer.GetParentFrameOrNull( myContainer); }
+   
+   //---------------------------------------------------------------------- 
+   public static Window  GetParentWindowOrNull( Container c )  { while( c != null  &&  (c instanceof Window) == false ) c = c.getParent();  return c==null ? null : (Window)c; }
+   public static Dialog  GetParentDialogOrNull( Container c )  { while( c != null  &&  (c instanceof Dialog) == false ) c = c.getParent();  return c==null ? null : (Dialog)c; }
+   public static Frame   GetParentFrameOrNull(  Container c )  { while( c != null  &&  (c instanceof Frame)  == false ) c = c.getParent();  return c==null ? null :  (Frame)c; }
+
 
    //-------------------------------------------------------------------------
    private boolean  IsDialogOwnerShowing( )      { Window w = this.GetDialogOwnerOrNull();  return w!=null && w.isShowing(); }
@@ -92,8 +103,8 @@ public class LSContainer
    // ---------------------------------------------------------------------
    public int  GetContainerWidth( )                { return myContainer.getWidth(); }
    public int  GetContainerHeight( )               { return myContainer.getHeight(); }
-   public int  GetContainerXLocationOnScreen( )    { return myContainer.isShowing() ? myContainer.getLocationOnScreen().x : 0; }
-   public int  GetContainerYLocationOnScreen( )    { return myContainer.isShowing() ? myContainer.getLocationOnScreen().y : 0; }
+   public int  GetContainerXLocationOnScreen( )    { return this.IsShowing() ? myContainer.getLocationOnScreen().x : 0; }
+   public int  GetContainerYLocationOnScreen( )    { return this.IsShowing() ? myContainer.getLocationOnScreen().y : 0; }
 
    // ---------------------------------------------------------------------
    // Note: Take into account that Windows 95/98/2000/XP has toolbars (usually at bottom) when getting screen height (or width)
@@ -106,17 +117,8 @@ public class LSContainer
    public  void  SetContainerBackgroundColor( Color color )  { if( color != null ) myContainer.setBackground( color ); }
    private void  SetContainerForegroundColor( Color color )  { if( color != null ) myContainer.setForeground( color ); }
    private void  SetContainerFontDefault( )                  { this.SetContainerFont( LSFont.GetUserFont() ); }
-   private void  SetContainerBackgroundColorDefault( )       { this.SetContainerBackgroundColor( this.IsPartOfDialog() ? LSColor.GetBackgroundColorDialog() : LSColor.GetUserBackgroundColor() ); }
+   private void  SetContainerBackgroundColorDefault( )       { this.SetContainerBackgroundColor( this.GetParentDialogOrNull() != null ? LSColor.GetBackgroundColorDialog() : LSColor.GetUserBackgroundColor() ); }
    private void  SetContainerForegroundColorDefault( )       { this.SetContainerForegroundColor( LSColor.GetUserForegroundColor() ); }
-
-   //----------------------------------------------------------------------
-   private boolean  IsPartOfDialog( )
-   {
-      Container c = myContainer;
-      while( c != null  &&  (c instanceof Dialog) == false )
-         c = c.getParent();
-      return c != null && c instanceof Dialog;
-   }
 
    //----------------------------------------------------------------------
    public boolean  AddComponent( Component component )       { if( component == null ) return false;   myContainer.add(component); return true; }
@@ -128,7 +130,7 @@ public class LSContainer
    public void   Repaint( )                  { myContainer.repaint(); }
    public void   PackShow( )                 { this.Pack();  this.Show(); }
    public void   PackLocateShow( )           { this.Pack();  this.SetLocationAlignment(0.5,0.25);  this.Show(); }
-   public void   PackLocateShowOrRepaint( )  { if( !myContainer.isShowing() ) this.PackLocateShow();  else { this.Pack(); this.SetLocationAlignmentBeforeRepaint(); this.Repaint();}  }
+   public void   PackLocateShowOrRepaint( )  { if( !this.IsShowing() ) this.PackLocateShow();  else { this.Pack(); this.SetLocationAlignmentBeforeRepaint(); this.Repaint();}  }
 
    // ---------------------------------------------------------------------
    public void  Pack( )  // Sets the window to the preferred size
@@ -295,7 +297,7 @@ public class LSContainer
    private void  SetLocationAlignmentBeforeRepaint( )
    {
       // This method should not be called if it is currently showing
-      if( myContainer.isShowing() == false ) return;
+      if( this.IsShowing() == false ) return;
 
       // If child exceeds width of screen, center on Dialog owner (if showing)
       int screenWidth = this.GetScreenWidth(1.00);   // Width of user's computer screen (no toolbars on side)

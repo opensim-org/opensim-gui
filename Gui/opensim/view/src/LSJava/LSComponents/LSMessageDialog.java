@@ -58,9 +58,6 @@ public class LSMessageDialog extends LSDialog implements ActionListener, KeyList
    public static Window   GetCurrentWindowToIssueMessages( )                { return myCurrentWindowToIssueMessages; }
    public static void     SetCurrentWindowToIssueMessages( Window window )  { myCurrentWindowToIssueMessages = window; }
 
-   //-------------------------------------------------------------------------
-   public static boolean  IssueErrorMessageIfStringIsBadDoublePrecisionNumber( Window ownerWindowOrNullForCurrentWindow, String s )  { boolean isError = LSDouble.IsValidDoubleFromString(s) == false;          if( isError ) LSMessageDialog.NewUserMessageDialog( ownerWindowOrNullForCurrentWindow, "Error: Bad double precision number: " + s );    return isError; }
-   public static boolean  IssueWarningMessageIfStringIsNegativeNumber( Window ownerWindowOrNullForCurrentWindow, String s )          { boolean isError = LSDouble.IsValidDoubleNegativeFromString(s) == true;   if( isError ) LSMessageDialog.NewUserMessageDialog( ownerWindowOrNullForCurrentWindow, "Warning: Encountered negative number: " + s );  return isError; }
 
    //-------------------------------------------------------------------------
    public void  actionPerformed( ActionEvent actionEvent )
@@ -70,14 +67,18 @@ public class LSMessageDialog extends LSDialog implements ActionListener, KeyList
    }
 
    //-------------------------------------------------------------------------
-   public void   keyPressed( KeyEvent keyEvent )   {;}
+   public void   keyPressed(  KeyEvent keyEvent )  {;}
    public void   keyReleased( KeyEvent keyEvent )  {;}
-   public void   keyTyped( KeyEvent keyEvent )
+   public void   keyTyped(    KeyEvent keyEvent )
    {
-      switch( keyEvent.getKeyChar() )
+      Object eventTarget = keyEvent.getSource();
+      if( eventTarget == this )
       {
-         case KeyEvent.VK_ESCAPE:
-         case KeyEvent.VK_ENTER:   this.EventOKButton();   break;
+         switch( keyEvent.getKeyChar() )
+         {
+            case KeyEvent.VK_ENTER:   
+            case KeyEvent.VK_ESCAPE:  this.EventOKButton();   break;
+         }
       }
    }
 

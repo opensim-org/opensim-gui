@@ -35,7 +35,7 @@ abstract public class LSFrame extends Frame implements ActionListener
       // Layout manager, constraints, and set default values (color and font)
       myContainer = new LSContainer( this );
 
-      // Warning and dialog boxes must be associated with some frame
+      // Warning and dialog boxes should be associated with a window.
       if( exitOnWindowClose && LSMessageDialog.GetCurrentWindowToIssueMessages() == null )
          LSMessageDialog.SetCurrentWindowToIssueMessages( this );
 

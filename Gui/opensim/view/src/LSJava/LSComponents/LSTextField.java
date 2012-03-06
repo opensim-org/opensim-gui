@@ -31,7 +31,7 @@ public class LSTextField extends TextField
    public LSTextField( String initialString, int textWidth, boolean isEditable, LSContainer container, int gridWidth, int gridHeight, ActionListener actionListenerOrNull, FocusListener focusListenerOrNull, KeyListener keyListenerOrNull )
    {
       super( initialString, textWidth );
-
+      myParentLSContainer = container;
       this.SetTextFieldEditableAndColorOfTextField( isEditable );
 
       // Keep a copy of the constraints for adding and removing this component to frames, dialogs, panels, ...
@@ -63,24 +63,22 @@ public class LSTextField extends TextField
 
    //-------------------------------------------------------------------------
    public String  GetTextFieldAsString( )                                              { return super.getText(); }
+   
    public int     GetTextFieldAsInteger()                                              { return LSInteger.GetIntegerFromString( this.GetTextFieldAsString() ); }
    public int     GetTextFieldValidIntegerOrAlternate( int alternate )                 { return LSInteger.GetValidIntegerFromString( this.GetTextFieldAsString(), alternate ); }
    public int     GetTextFieldValidIntegerPositiveOrAlternate( int alternate )         { return LSInteger.GetValidIntegerPositive( this.GetTextFieldValidIntegerOrAlternate(alternate), alternate); }
    public int     GetTextFieldValidIntegerNonNegativeOrAlternate( int alternate )      { return LSInteger.GetValidIntegerNonNegative( this.GetTextFieldValidIntegerOrAlternate(alternate), alternate); }
+   
+   public double  GetTextFieldAsDouble()                                               { return LSDouble.GetDoubleFromString( this.GetTextFieldAsString() ); }
+   public double  GetTextFieldAsValidDoubleOrAlternate( double alternate )             { return LSDouble.GetValidDoubleFromString( this.GetTextFieldAsString(), alternate ); }
+   public double  GetTextFieldAsValidDoublePositiveOrAlternate( double alternate )     { return LSDouble.GetValidDoublePositive( this.GetTextFieldAsValidDoubleOrAlternate(alternate), alternate); }
+   public double  GetTextFieldAsValidDoubleNonNegativeOrAlternate( double alternate )  { return LSDouble.GetValidDoubleNonNegative( this.GetTextFieldAsValidDoubleOrAlternate(alternate), alternate); }
 
    public boolean  IsTextFieldValidDouble()                                            { return LSDouble.IsValidDoubleFromString(            this.GetTextFieldAsString() ); }
    public boolean  IsTextFieldValidDoubleNonNegative()                                 { return LSDouble.IsValidDoubleNonNegativeFromString( this.GetTextFieldAsString() ); }
    public boolean  IsTextFieldValidDoubleNonPositive()                                 { return LSDouble.IsValidDoubleNonPositiveFromString( this.GetTextFieldAsString() ); }
    public boolean  IsTextFieldValidDoublePositive()                                    { return LSDouble.IsValidDoublePositiveFromString(    this.GetTextFieldAsString() ); }
    public boolean  IsTextFieldValidDoubleNegative()                                    { return LSDouble.IsValidDoubleNegativeFromString(    this.GetTextFieldAsString() ); }
-
-   public double  GetTextFieldAsDouble()                                               { return LSDouble.GetDoubleFromString( this.GetTextFieldAsString() ); }
-   public double  GetTextFieldAsValidDoubleOrAlternate( double alternate )             { return LSDouble.GetValidDoubleFromString( this.GetTextFieldAsString(), alternate ); }
-   public double  GetTextFieldAsValidDoublePositiveOrAlternate( double alternate )     { return LSDouble.GetValidDoublePositive( this.GetTextFieldAsValidDoubleOrAlternate(alternate), alternate); }
-   public double  GetTextFieldAsValidDoubleNonNegativeOrAlternate( double alternate )  { return LSDouble.GetValidDoubleNonNegative( this.GetTextFieldAsValidDoubleOrAlternate(alternate), alternate); }
-
-   public boolean  IssueErrorMessageIfTextFieldIsBadDoublePrecisionNumber( Window ownerWindowOrNullForCurrentWindow ) { boolean isError = LSMessageDialog.IssueErrorMessageIfStringIsBadDoublePrecisionNumber( ownerWindowOrNullForCurrentWindow, this.GetTextFieldAsString() );  return this.SetTextFieldBackgroundColorSuggestingErrorTrueOrOKFalse(isError); }
-   public boolean  IssueWarningMessageIfTextFieldIsNegativeNumber( Window ownerWindowOrNullForCurrentWindow )         { boolean isError = LSMessageDialog.IssueWarningMessageIfStringIsNegativeNumber( ownerWindowOrNullForCurrentWindow, this.GetTextFieldAsString() );          return this.SetTextFieldBackgroundColorSuggestingErrorTrueOrOKFalse(isError); }
 
    //-------------------------------------------------------------------------
    public void  SetTextFieldFromString( String s )  { super.setText(s); }
@@ -89,15 +87,27 @@ public class LSTextField extends TextField
    public void  SetTextFieldWithDoubleRoundedToNearestInteger( double d, double epsilonToRoundDoubleToNearestIntegerOr0 ) { this.SetTextFieldFromDouble( epsilonToRoundDoubleToNearestIntegerOr0 <= 0 ? d : LSDouble.RoundToNearestIntegerIfWithinEpsilon(d,epsilonToRoundDoubleToNearestIntegerOr0) ); }
 
    //-------------------------------------------------------------------------
-   private void     SetTextFieldBackgroundColor( Color backgroundColor )                               { super.setBackground( backgroundColor ); }
-   public  boolean  SetTextFieldBackgroundColorSuggestingErrorTrueOrOKFalse( boolean isError )         { this.SetTextFieldBackgroundColor( isError ? LSColor.BackgroundColorSuggestingError : LSColor.BackgroundColorSuggestingOK );  return isError; }
-   private void     SetTextFieldEditable( boolean editable )                                           { super.setEditable(editable); }
-   public  void     SetTextFieldEditableAndColorOfTextField( boolean enable )                          { this.SetTextFieldEditableAndBackgroundColor( enable,  enable ? LSColor.white : LSColor.PaulGray ); }
-   public  void     SetTextFieldEditableAndBackgroundColor( boolean editable, Color backgroundColor )  { this.SetTextFieldEditable( editable );  this.SetTextFieldBackgroundColor( backgroundColor ); }
+   public  void     SetTextFieldBackgroundColor( Color backgroundColor )                                                         { super.setBackground( backgroundColor ); }
+   public  void     SetTextFieldBackgroundColorOK(  )                                                                            { this.SetTextFieldBackgroundColor( LSColor.BackgroundColorSuggestingOK      ); }
+   public  void     SetTextFieldBackgroundColorError(  )                                                                         { this.SetTextFieldBackgroundColor( LSColor.BackgroundColorSuggestingError   ); }
+   public  void     SetTextFieldBackgroundColorWarning(  )                                                                       { this.SetTextFieldBackgroundColor( LSColor.BackgroundColorSuggestingWarning ); }
+   public  void     SetTextFieldBackgroundColorOkOrError(   boolean isValid )                                                    { if( isValid ) this.SetTextFieldBackgroundColorOK();  else this.SetTextFieldBackgroundColorError();   }
+   public  void     SetTextFieldBackgroundColorOkOrWarning( boolean isValid )                                                    { if( isValid ) this.SetTextFieldBackgroundColorOK();  else this.SetTextFieldBackgroundColorWarning(); }
+   public  boolean  SetTextFieldBackgroundColorDependingOnWhetherTextFieldIsValid( boolean isValid, boolean isErrorNotWarning )  { if( isErrorNotWarning ) this.SetTextFieldBackgroundColorOkOrError(isValid);  else  this.SetTextFieldBackgroundColorOkOrWarning(isValid);  return isValid; }
+   public  boolean  SetTextFieldBackgroundColorDependingOnWhetherTextFieldIsValidDouble( boolean isErrorNotWarning )             { return this.SetTextFieldBackgroundColorDependingOnWhetherTextFieldIsValid( this.IsTextFieldValidDouble(),            isErrorNotWarning ); }
+   public  boolean  SetTextFieldBackgroundColorDependingOnWhetherTextFieldIsValidNonNegativeDouble( boolean isErrorNotWarning )  { return this.SetTextFieldBackgroundColorDependingOnWhetherTextFieldIsValid( this.IsTextFieldValidDoubleNonNegative(), isErrorNotWarning ); }
+         
+   //-------------------------------------------------------------------------
+   public  void  SetTextFieldEditable( boolean editable )                     { super.setEditable( editable ); }
+   public  void  SetTextFieldEditableAndColorOfTextField( boolean editable )  { this.SetTextFieldEditable( editable );  this.SetTextFieldBackgroundColor( editable ? LSColor.white : LSColor.PaulGray ); }
 
    // ------------------------------------------------------------------------
    public GridBagConstraints  GetConstraintsWhenCreated( )  { return myConstraintsWhenCreated; }
 
+   // ------------------------------------------------------------------------
+   public  Container  GetParentContainer( )  { return myParentLSContainer==null ? null : myParentLSContainer.GetContainer(); }
+
    // Class variables --------------------------------------------------------
-   private GridBagConstraints  myConstraintsWhenCreated;
+   private   GridBagConstraints  myConstraintsWhenCreated;
+   private   LSContainer         myParentLSContainer;
 }
