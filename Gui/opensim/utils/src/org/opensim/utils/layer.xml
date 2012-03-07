@@ -10,10 +10,12 @@
             <file name="org-netbeans-core-actions-AboutAction.instance_hidden"/>
             <file name="org-netbeans-modules-bugzilla-ReportNBIssueAction.instance_hidden"/>
             <file name="org-opensim-swingui-FileBug.instance"/>
+            <file name="org-opensim-swingui-HelpOpenOnlineDocsAction.instance"/>
         </folder>
     </folder>
     <folder name="Menu">
          <folder name="Help">
+            <file name="netbeans-kb.url_hidden"/>
             <file name="org-netbeans-modules-bugzilla-ReportNBIssueAction.shadow_hidden"/>
 
             <file name="org-opensim-swingui-FileBug.shadow">
@@ -23,6 +25,10 @@
             <file name="org-opensim-swingui-RequestFeatureAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-swingui-RequestFeatureAction.instance"/>
                 <attr name="position" intvalue="200"/>
+            </file>
+            <file name="org-opensim-swingui-HelpOpenOnlineDocsAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Help/org-opensim-swingui-HelpOpenOnlineDocsAction.instance"/>
+                <attr name="position" intvalue="250"/>
             </file>
          </folder>
     </folder>
