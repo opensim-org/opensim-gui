@@ -8,10 +8,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileFilter;
+import java.util.prefs.Preferences;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import org.openide.util.HelpCtx;
 import org.openide.util.actions.CallableSystemAction;
+import org.opensim.utils.TheApp;
 import org.python.core.Py;
 import org.python.util.PythonInterpreter;
 
@@ -41,19 +43,20 @@ public final class ToolsRunScriptAction extends CallableSystemAction {
     }
 
     public JMenuItem getMenuPresenter() {
-        JMenu displayMenu = new JMenu("Scripts");
+        JMenu scriptsMenu = new JMenu("Scripts");
         FileFilter fileFilter = new FileFilter() {
 
             public boolean accept(File file) {
                 return (!file.isDirectory() && file.getName().endsWith(".py"));
             }
         };
-        final String ScriptsRootDirectory = "Scripts";
+        final String ScriptsRootDirectory = Preferences.userNodeForPackage(TheApp.class).get("Scripts Path", "Scripts");
         File rootHelpDirectory = new File(ScriptsRootDirectory);
         String fullPath = rootHelpDirectory.getAbsolutePath();
         File[] files = rootHelpDirectory.listFiles(fileFilter);
         if (files == null) {
-            return displayMenu;
+            
+            return scriptsMenu;
         }
 
         for (int i = 0; i < files.length; i++) {
@@ -72,9 +75,9 @@ public final class ToolsRunScriptAction extends CallableSystemAction {
                 }
             });
             
-            displayMenu.add(nextItem);
+            scriptsMenu.add(nextItem);
         }
 
-        return displayMenu;
+        return scriptsMenu;
     }
 }
