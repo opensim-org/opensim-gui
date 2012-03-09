@@ -6,7 +6,7 @@ import org.opensim.plotter as plotter;
 modeling.OpenSimObject.setDebugLevel(3)
 view.gui.addModel("../../../Models/Tutorials/BothLegs/BothLegs.osim")
 
-view.gui.loadMotion("../../../Models/Tutorials/BothLegs/BothLegsWalk2.mot")
+view.gui.loadMotion("../../../Models/Tutorials/BothLegs/BothLegsWalk.mot")
 
 #default pose
 myModel = view.gui.getCurrentModel()
