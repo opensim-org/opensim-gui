@@ -523,6 +523,7 @@ public class BodyDisplayer extends vtkAssembly
     //--------------------------------------------------------------------------
     private void  SetCMSphereToEllipsoidWhoseAverageScaleIsOne( double scaleX, double scaleY, double scaleZ, boolean updateView ) 
     { 
+       /*
        if( scaleX < 0.0 ) scaleX = 0.0;   
        if( scaleY < 0.0 ) scaleY = 0.0;  
        if( scaleZ < 0.0 ) scaleZ = 0.0;  
@@ -531,22 +532,27 @@ public class BodyDisplayer extends vtkAssembly
        else
        {
           double oneOverAverageScaleFactor = 3.0 / sumScale;
-          if( (scaleX *= oneOverAverageScaleFactor) < 0.33 ) scaleX = 0.33;
-          if( (scaleY *= oneOverAverageScaleFactor) < 0.33 ) scaleY = 0.33;
-          if( (scaleZ *= oneOverAverageScaleFactor) < 0.33 ) scaleZ = 0.33;
+          if( (scaleX *= oneOverAverageScaleFactor) < 0.5 ) scaleX = 0.5;
+          if( (scaleY *= oneOverAverageScaleFactor) < 0.5 ) scaleY = 0.5;
+          if( (scaleZ *= oneOverAverageScaleFactor) < 0.5 ) scaleZ = 0.5;
        }           
 
-       /*
-       // Paul to fix - currently SetScale also repositions the sphere
-       
-       // Somehow scale this so it looks like an ellipsoid.
+       // vtk method SetScale scales all the vertices (which means scaling depends on position).
+       // To counteract this, tried various things including translating the centerOfMassActor to origin and then
+       // scaling and then re-translating to original position (but this did not work).  FIX? 
+       double[] positionAsReference = centerOfMassActor.GetPosition();
+       double[] positionCopy = { positionAsReference[0], positionAsReference[1], positionAsReference[2] };
+       centerOfMassActor.SetPosition( 0.0, 0.0, 0.0 );
        centerOfMassActor.SetScale( scaleX, scaleY, scaleZ );
-       
+       centerOfMassActor.SetPosition( positionCopy[0], positionCopy[1], positionCopy[2] );
+       // void vtkProp3D::SetUserTransform  ( vtkLinearTransform *  transform ) 
+       */
+        
        if( updateView )
        {
           super.Modified();
           ViewDB.getInstance().repaintAll();
-       } */
+       } 
     }
       
       
