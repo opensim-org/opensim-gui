@@ -64,7 +64,7 @@ public class LSColor extends Color
       int red   = LSColor.GetRGBInteger( userRedName   );
       int green = LSColor.GetRGBInteger( userGreenName );
       int blue  = LSColor.GetRGBInteger( userBlueName  );
-      return ( red<0 || green<0 || blue<0 ) ? null : new LSColor(red, green, blue);
+      return (red < 0  ||  green < 0  ||  blue < 0) ? null : new LSColor(red, green, blue);
    }
 
 
@@ -73,38 +73,41 @@ public class LSColor extends Color
    {
       Integer stringAsInteger = Integer.valueOf( userRGBName );
       int stringAsInt = stringAsInteger.intValue();
-      if( stringAsInt>=0 && stringAsInt <=255 ) return stringAsInt;
+      if( stringAsInt >= 0  &&  stringAsInt <= 255 ) return stringAsInt;
       return -1;
    }
 
 
    //-------------------------------------------------------------------------
-
    // Default background color is light blue/green, e.g., RGB=200,220,255.
-   // Default foreground color is  dark blue,       e.g., RGB=  0,  0,100. 
-   // Default background color for dialogs associated with plotting is light yellow, 
-   // e.g., when the user is plotting and clicks the HELP or FUNCTION button 
+   // Default foreground color is very dark blue,   e.g., RGB=  0,  0,100. 
    public  final static int myDefaultBackgroundColorRed   = 200;
    public  final static int myDefaultBackgroundColorGreen = 220;
    public  final static int myDefaultBackgroundColorBlue  = 255;
    public  final static int myDefaultForegroundColorRed   = 0;
    public  final static int myDefaultForegroundColorGreen = 0;
    public  final static int myDefaultForegroundColorBlue  = 100;
-   private final static int myDefaultGrayColor = 150; // In Java, lightGray=192, regularGray=128, darkGray = 64;
-   public  final static LSColor PaulGray   = new LSColor( myDefaultGrayColor, myDefaultGrayColor, myDefaultGrayColor );
-   public  final static LSColor AllRed     = new LSColor( 255,   0,   0 );
-   public  final static LSColor DarkRed    = new LSColor( 140,   0,   0 );
-   public  final static LSColor LightRed   = new LSColor( 255, 100, 100 );
-   public  final static LSColor AllGreen   = new LSColor(   0, 255,   0 );
-   public  final static LSColor DarkGreen  = new LSColor(   0, 140,   0 );
-   public  final static LSColor LightGreen = new LSColor( 100, 255, 100 );
-   public  final static LSColor AllBlue    = new LSColor(   0,   0, 255 );
-   public  final static LSColor DarkBlue   = new LSColor(   0,   0, 140 );
-   public  final static LSColor LightBlue  = new LSColor( 100, 100, 255 );
-   public  final static LSColor BackgroundColorSuggestingError     = new LSColor( 255, 175, 255 );
-   public  final static LSColor BackgroundColorSuggestingWarning   = new LSColor( 255, 255, 100 );   
-   public  final static LSColor BackgroundColorSuggestingOK        = new LSColor( 255, 255, 255 );
-   public  final static LSColor BackgroundColorVeryLightGray       = new LSColor( 240, 240, 240 );
+   public  final static LSColor AllRed      = new LSColor( 255,   0,   0 );
+   public  final static LSColor DarkRed     = new LSColor( 140,   0,   0 );
+   public  final static LSColor LightRed    = new LSColor( 255, 100, 100 );
+   public  final static LSColor AllGreen    = new LSColor(   0, 255,   0 );
+   public  final static LSColor DarkGreen   = new LSColor(   0, 140,   0 );
+   public  final static LSColor LightGreen  = new LSColor( 100, 255, 100 );
+   public  final static LSColor AllBlue     = new LSColor(   0,   0, 255 );
+   public  final static LSColor DarkBlue    = new LSColor(   0,   0, 140 );
+   public  final static LSColor LightBlue   = new LSColor( 100, 100, 255 );
+   public  final static LSColor LightYellow = new LSColor( 255, 255, 125 );
+   public  final static LSColor AllYellow   = new LSColor( 255, 255,   0 );
+   public  final static LSColor DarkYellow  = new LSColor( 170, 170,   0 );
+   public  final static LSColor LighterGray = new LSColor( 240, 240, 240 );
+   public  final static LSColor LightGray   = new LSColor( 200, 200, 200 ); // In Java    lightGray = 192
+   public  final static LSColor AllGray     = new LSColor( 150, 150, 150 ); // In Java, regularGray = 128
+   public  final static LSColor DarkGray    = new LSColor( 100, 100, 100 ); // In Java,    darkGray = 64
+   public  final static LSColor Black       = new LSColor(   0,   0,   0 );
+   public  final static LSColor White       = new LSColor( 255, 255, 255 );
+   public  final static LSColor ForegroundColorSuggestingError   = new LSColor( 150,   0,   0 );  // Darkish red.
+   public  final static LSColor BackgroundColorSuggestingError   = new LSColor( 255, 175, 255 );  // Pink
+   public  final static LSColor BackgroundColorSuggestingWarning = new LSColor( 255, 255, 100 );  // Lightish yellow 
 
    private static LSColor myUserBackgroundColor = new LSColor( myDefaultBackgroundColorRed, myDefaultBackgroundColorGreen, myDefaultBackgroundColorBlue );
    private static LSColor myUserForegroundColor = new LSColor( myDefaultForegroundColorRed, myDefaultForegroundColorGreen, myDefaultForegroundColorBlue );
