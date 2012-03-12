@@ -23,7 +23,7 @@ import  java.awt.event.*;
 
 
 //--------------------------------------------------------------------------
-public class LSMessageDialog extends LSDialog implements ActionListener, KeyListener
+public class LSMessageDialog extends LSDialogWithListenersAbstract 
 {
    // Quasi Constructor ---------------------------------------------------
    public static LSMessageDialog  NewUserMessageDialog( String s )                                                                              { return LSMessageDialog.NewUserMessageDialog( null, new LSStringList(s), LSLabel.CENTER  ); }
@@ -58,32 +58,14 @@ public class LSMessageDialog extends LSDialog implements ActionListener, KeyList
    public static Window   GetCurrentWindowToIssueMessages( )                { return myCurrentWindowToIssueMessages; }
    public static void     SetCurrentWindowToIssueMessages( Window window )  { myCurrentWindowToIssueMessages = window; }
 
-
    //-------------------------------------------------------------------------
-   public void  actionPerformed( ActionEvent actionEvent )
+   protected void  CheckActionOrFocusLostOrKeyEventTarget( Object eventTarget )
    {
-      Object eventTarget = actionEvent.getSource();
-      if( eventTarget == myOKButton )  this.EventOKButton();
+      boolean shouldDispose = false;
+      if(      eventTarget == myOKButton )  shouldDispose = true;
+      else if( eventTarget == this )        shouldDispose = true; // Key event.
+      if( shouldDispose ) super.Dispose();
    }
-
-   //-------------------------------------------------------------------------
-   public void   keyPressed(  KeyEvent keyEvent )  {;}
-   public void   keyReleased( KeyEvent keyEvent )  {;}
-   public void   keyTyped(    KeyEvent keyEvent )
-   {
-      Object eventTarget = keyEvent.getSource();
-      if( eventTarget == this )
-      {
-         switch( keyEvent.getKeyChar() )
-         {
-            case KeyEvent.VK_ENTER:   
-            case KeyEvent.VK_ESCAPE:  this.EventOKButton();   break;
-         }
-      }
-   }
-
-   //-------------------------------------------------------------------------
-   private void  EventOKButton( )  { super.Dispose(); }
 
 
    //-------------------------------------------------------------------------

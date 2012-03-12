@@ -192,6 +192,7 @@ public class LSContainer
    public  LSLabel  AddBlankLabelToLayout1Wide1High( )                                                      { return this.AddLabelToLayout(       " ", LSLabel.LEFT,           1,           1 ); }
    public  LSLabel  AddBlankLabelToLayout( int gridWidth, int gridHeight )                                  { return this.AddLabelToLayout(       " ", LSLabel.LEFT,    gridWidth, gridHeight ); }
    public  LSLabel  AddBlankLabelToLayoutRowRemainder1High( )                                               { return this.AddLabelToLayoutRowRemainder1High( " ", LSLabel.LEFT ); }
+   public  void     AddBlankLabelToLayoutXWide1High( int numberOfBlankLabels )                              { for( int i=0;  i< numberOfBlankLabels;  i++ )  this.AddBlankLabelToLayout1Wide1High(); }
    public  void     AddDividerLine( int numberOfCharacters )                                                { this.AddDividerLineWithSpecifiedCharacter( numberOfCharacters,      '-' ); }
    public  void     AddBlankLineAsString( int numberOfBlankCharacters )                                     { this.AddDividerLineWithSpecifiedCharacter( numberOfBlankCharacters, ' ' ); }
    public  void     AddBlankLine( int numberOfLines )                                                       { for( int i=0;  i<numberOfLines;  i++ )  this.AddBlankLine(); }
@@ -342,9 +343,9 @@ public class LSContainer
 
 
    //-------------------------------------------------------------------------
-   public void  SetEditableAndColorOfTextFields( boolean enable, LSTextField textFields[] )
+   public void  SetEditableAndBackgroundColorOfTextFields( boolean enable, LSTextField textFields[] )
    {
-      for( int i=0;  i < textFields.length;  i++ )  textFields[i].SetTextFieldEditableAndColorOfTextField( enable );
+      for( int i=0;  i < textFields.length;  i++ )  textFields[i].SetTextFieldEditableAndBackgroundColorOfTextField( enable );
    }
 
 

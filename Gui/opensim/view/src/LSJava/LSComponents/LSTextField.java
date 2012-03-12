@@ -32,7 +32,7 @@ public class LSTextField extends TextField
    {
       super( initialString, textWidth );
       myParentLSContainer = container;
-      this.SetTextFieldEditableAndColorOfTextField( isEditable );
+      this.SetTextFieldEditableAndBackgroundColorOfTextField( isEditable );
 
       // Keep a copy of the constraints for adding and removing this component to frames, dialogs, panels, ...
       myConstraintsWhenCreated = container.GetConstraintsClone();
@@ -87,27 +87,25 @@ public class LSTextField extends TextField
    public void  SetTextFieldWithDoubleRoundedToNearestInteger( double d, double epsilonToRoundDoubleToNearestIntegerOr0 ) { this.SetTextFieldFromDouble( epsilonToRoundDoubleToNearestIntegerOr0 <= 0 ? d : LSDouble.RoundToNearestIntegerIfWithinEpsilon(d,epsilonToRoundDoubleToNearestIntegerOr0) ); }
 
    //-------------------------------------------------------------------------
-   public  void     SetTextFieldBackgroundColor( Color backgroundColor )                                                         { super.setBackground( backgroundColor ); }
-   public  void     SetTextFieldBackgroundColorOK(  )                                                                            { this.SetTextFieldBackgroundColor( LSColor.BackgroundColorSuggestingOK      ); }
-   public  void     SetTextFieldBackgroundColorError(  )                                                                         { this.SetTextFieldBackgroundColor( LSColor.BackgroundColorSuggestingError   ); }
-   public  void     SetTextFieldBackgroundColorWarning(  )                                                                       { this.SetTextFieldBackgroundColor( LSColor.BackgroundColorSuggestingWarning ); }
-   public  void     SetTextFieldBackgroundColorOkOrError(   boolean isValid )                                                    { if( isValid ) this.SetTextFieldBackgroundColorOK();  else this.SetTextFieldBackgroundColorError();   }
-   public  void     SetTextFieldBackgroundColorOkOrWarning( boolean isValid )                                                    { if( isValid ) this.SetTextFieldBackgroundColorOK();  else this.SetTextFieldBackgroundColorWarning(); }
-   public  boolean  SetTextFieldBackgroundColorDependingOnWhetherTextFieldIsValid( boolean isValid, boolean isErrorNotWarning )  { if( isErrorNotWarning ) this.SetTextFieldBackgroundColorOkOrError(isValid);  else  this.SetTextFieldBackgroundColorOkOrWarning(isValid);  return isValid; }
-   public  boolean  SetTextFieldBackgroundColorDependingOnWhetherTextFieldIsValidDouble( boolean isErrorNotWarning )             { return this.SetTextFieldBackgroundColorDependingOnWhetherTextFieldIsValid( this.IsTextFieldValidDouble(),            isErrorNotWarning ); }
-   public  boolean  SetTextFieldBackgroundColorDependingOnWhetherTextFieldIsValidNonNegativeDouble( boolean isErrorNotWarning )  { return this.SetTextFieldBackgroundColorDependingOnWhetherTextFieldIsValid( this.IsTextFieldValidDoubleNonNegative(), isErrorNotWarning ); }
+   public void  SetTextFieldForegroundColor( Color foregroundColor )                                   { super.setForeground( foregroundColor ); }
+   public void  SetTextFieldForegroundColorOKOrError( boolean isValid )                                { this.SetTextFieldForegroundColorOKOrColor( isValid, LSColor.ForegroundColorSuggestingError ); }
+   public void  SetTextFieldForegroundColorOKOrColor( boolean isValid, Color invalidForegroundColor )  { this.SetTextFieldForegroundColor( isValid ? LSColor.Black : invalidForegroundColor );  }
+   //-------------------------------------------------------------------------
+   public void  SetTextFieldBackgroundColor( Color backgroundColor )                                   { super.setBackground( backgroundColor ); }
+   public void  SetTextFieldBackgroundColorOKOrError( boolean isValid )                                { this.SetTextFieldBackgroundColorOKOrColor( isValid, LSColor.BackgroundColorSuggestingError );   }
+   public void  SetTextFieldBackgroundColorOKOrColor( boolean isValid, Color invalidBackgroundColor )  { this.SetTextFieldBackgroundColor( isValid ? LSColor.White : invalidBackgroundColor );  }
          
    //-------------------------------------------------------------------------
-   public  void  SetTextFieldEditable( boolean editable )                     { super.setEditable( editable ); }
-   public  void  SetTextFieldEditableAndColorOfTextField( boolean editable )  { this.SetTextFieldEditable( editable );  this.SetTextFieldBackgroundColor( editable ? LSColor.white : LSColor.PaulGray ); }
+   public void  SetTextFieldEditable( boolean editable )                               { super.setEditable( editable ); }
+   public void  SetTextFieldEditableAndBackgroundColorOfTextField( boolean editable )  { this.SetTextFieldEditable( editable );  this.SetTextFieldBackgroundColor( editable ? LSColor.white : LSColor.AllGray ); }
 
    // ------------------------------------------------------------------------
    public GridBagConstraints  GetConstraintsWhenCreated( )  { return myConstraintsWhenCreated; }
 
    // ------------------------------------------------------------------------
-   public  Container  GetParentContainer( )  { return myParentLSContainer==null ? null : myParentLSContainer.GetContainer(); }
+   public Container  GetParentContainer( )  { return myParentLSContainer==null ? null : myParentLSContainer.GetContainer(); }
 
    // Class variables --------------------------------------------------------
-   private   GridBagConstraints  myConstraintsWhenCreated;
-   private   LSContainer         myParentLSContainer;
+   private GridBagConstraints  myConstraintsWhenCreated;
+   private LSContainer         myParentLSContainer;
 }

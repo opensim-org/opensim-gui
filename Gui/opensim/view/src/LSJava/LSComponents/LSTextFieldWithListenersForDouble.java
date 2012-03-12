@@ -32,6 +32,6 @@ public class LSTextFieldWithListenersForDouble extends LSTextFieldWithListenersA
    //-------------------------------------------------------------------------
    protected String  EventActionOrFocusLostOrKeyEventReturnErrorStringVirtual( )
    {
-      return super.IsTextFieldValidDouble() ? null : "Error -- Bad real number: ";
+      return super.IsTextFieldValidDouble() ? null : ("Error: Unable to interpret  " + this.GetTextFieldAsString() + "  as real number.");
    }
 }

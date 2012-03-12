@@ -33,7 +33,7 @@ public class LSTextFieldWithListenersForDoubleNonNegative extends LSTextFieldWit
    //-------------------------------------------------------------------------
    protected String  EventActionOrFocusOrKeyEventReturnErrorStringVirtual( )
    {
-      return super.IsTextFieldValidDouble() ? null : "Error -- Bad non-negative number: ";
+      return super.IsTextFieldValidDouble() ? null : ("Error: Unable to interpret  " + this.GetTextFieldAsString() + "  as non-negative number.");
    }
 
 }
