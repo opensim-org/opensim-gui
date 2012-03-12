@@ -45,22 +45,32 @@ public class LSPanelRigidBodyInertiaMatrixForOpenSim extends LSPanel implements 
       LSContainer tabContainer = this.GetPanelAsContainer();
       tabContainer.SetContainerBackgroundColor( Color.white );
 
-      // Create inertia properties labels and text fields (which are usually hidden).
+      // Create warning message label (which is usually hidden).
       tabContainer.AddBlankLabelToLayoutRowRemainder1High();
-      myInertiaIncorrectLabel = new LSLabel( "Error: INVALID Inertia matrix", LSLabel.CENTER, tabContainer, GridBagConstraints.REMAINDER );
-      myInertiaIncorrectLabel.SetLabelForegroundColor( LSColor.AllRed );
-      myInertiaIncorrectLabel.SetLabelVisible( true );
+      myInertiaInvalidLabel = new LSLabel( "Error: INVALID inertia matrix", LSLabel.CENTER, tabContainer, GridBagConstraints.REMAINDER );
+      myInertiaInvalidLabel.SetLabelForegroundColor( LSColor.AllRed );
+      myInertiaInvalidLabel.SetLabelVisible( true );
  
       // Create inertia properties labels and text fields.
       tabContainer.AddBlankLabelToLayoutRowRemainder1High();
       new LSLabel( "Inertia matrix about rigid-body center of mass (Bcm) for bx, by, bz", LSLabel.CENTER, tabContainer, GridBagConstraints.REMAINDER );
       tabContainer.AddComponentToLayoutRowRemainder1High( this.CreatePanelWithInertiaMatrix() );
 
-      // Add picture of a rigid body with Bcm (Body center of mass) and Bo (Body origin).
-      JLabel labelWithPicture = LSJava.LSResources.LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "RigidBodyWithCMAndBasisVectors.png", 0, 140 );
-      if( labelWithPicture != null )  tabContainer.AddComponentToLayoutRowRemainder1High( labelWithPicture );
+      // Add blank line separator.
+      tabContainer.AddBlankLabelToLayoutRowRemainder1High();
 
-      // After creating the matrix, provide visual feedback on whether or not it is possible.
+      // Add picture of symmetric inertia matrix.
+      JLabel labelWithPictureA = LSJava.LSResources.LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "InertiaMatrixIsSymmetric.png", 0, 110 );
+      if( labelWithPictureA != null )  tabContainer.AddComponentToLayout1Wide1High( labelWithPictureA );
+
+      // Add blank spaces between pictures.
+      tabContainer.AddBlankLabelToLayoutXWide1High( 3 );
+
+      // Add picture of a rigid body with Bcm (Body center of mass) and Bo (Body origin).
+      JLabel labelWithPictureB = LSJava.LSResources.LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "RigidBodyWithCMAndBasisVectors.png", 0, 130 );
+      if( labelWithPictureB != null )  tabContainer.AddComponentToLayoutRowRemainder1High( labelWithPictureB );
+
+      // After creating inertia matrix, provide visual feedback on whether or not it is possible.
       this.CheckInertiaMatrixAndGiveVisualFeedbackOnWhetherOrNotItIsPhysicallyPossible();
    } 
 
@@ -158,12 +168,12 @@ public class LSPanelRigidBodyInertiaMatrixForOpenSim extends LSPanel implements 
    { 
       for( int i=0;  i<6;  i++ ) inertiaArrayToFill[i] = 0.0;
 
-      if( !myIxxTextField.IsTextFieldValidDoubleNonNegative() ) return "Unable to interpret Ixx as non-negative number";
-      if( !myIyyTextField.IsTextFieldValidDoubleNonNegative() ) return "Unable to interpret Iyy as non-negative number";
-      if( !myIzzTextField.IsTextFieldValidDoubleNonNegative() ) return "Unable to interpret Izz as non-negative number";
-      if( !myIxyTextField.IsTextFieldValidDouble() )		return "Unable to interpret Ixy as real number";
-      if( !myIxzTextField.IsTextFieldValidDouble() )		return "Unable to interpret Ixz as real number";
-      if( !myIyzTextField.IsTextFieldValidDouble() )		return "Unable to interpret Iyz as real number";
+      if( !myIxxTextField.IsTextFieldValidDoubleNonNegative() ) return "Unable to interpret  Ixx  as non-negative number";
+      if( !myIyyTextField.IsTextFieldValidDoubleNonNegative() ) return "Unable to interpret  Iyy  as non-negative number";
+      if( !myIzzTextField.IsTextFieldValidDoubleNonNegative() ) return "Unable to interpret  Izz  as non-negative number";
+      if( !myIxyTextField.IsTextFieldValidDouble() )		return "Unable to interpret  Ixy  as real number";
+      if( !myIxzTextField.IsTextFieldValidDouble() )		return "Unable to interpret  Ixz  as real number";
+      if( !myIyzTextField.IsTextFieldValidDouble() )		return "Unable to interpret  Iyz  as real number";
       
       inertiaArrayToFill[0] = myIxxTextField.GetTextFieldAsDouble(); 
       inertiaArrayToFill[1] = myIyyTextField.GetTextFieldAsDouble(); 
@@ -206,16 +216,16 @@ public class LSPanelRigidBodyInertiaMatrixForOpenSim extends LSPanel implements 
           isValidIxyIxzIyz[2] = IyzOK;
       }
       
-      if( !IxyOK ) return "2*abs(Ixy) > Izz";
-      if( !IxzOK ) return "2*abs(Ixz) > Iyy";
-      if( !IyzOK ) return "2*abs(Iyz) > Ixx";
+      if( !IxyOK ) return "2 * abs(Ixy) > Izz";
+      if( !IxzOK ) return "2 * abs(Ixz) > Iyy";
+      if( !IyzOK ) return "2 * abs(Iyz) > Ixx";
       return null;
    } 
    
    //-------------------------------------------------------------------------
    private void  CheckInertiaMatrixAndGiveVisualFeedbackOnWhetherOrNotItIsPhysicallyPossible( )
    {
-      // By default, the inertia matrix is valid unless something makes it invalid.
+      // By default, inertia matrix is valid unless something makes it invalid.
       boolean isValidInertiaMatrix = true;
 
       // Get all the numbers in the inertia matrix - or null if there is an error in one of the fields. 
@@ -224,7 +234,7 @@ public class LSPanelRigidBodyInertiaMatrixForOpenSim extends LSPanel implements 
       if( errorStringIfBadMomentsProductsOfInertia != null )
       {
          isValidInertiaMatrix = false;  
-         myInertiaIncorrectLabel.SetLabelString( "Error -- INVALID Inertia matrix:  " + errorStringIfBadMomentsProductsOfInertia );  
+         myInertiaInvalidLabel.SetLabelString( "Error -- INVALID inertia matrix:  " + errorStringIfBadMomentsProductsOfInertia );  
       }
           
       // Set the moment of inertia textfield background colors to suggest errors if triangle inequality is invalid.
@@ -232,11 +242,11 @@ public class LSPanelRigidBodyInertiaMatrixForOpenSim extends LSPanel implements 
       if( errorStringIfBadTriangleInequality != null )
       {
          isValidInertiaMatrix = false;  
-         myInertiaIncorrectLabel.SetLabelString( "Error -- INVALID Inertia matrix:  " + errorStringIfBadTriangleInequality );  
-         myIxxTextField.SetTextFieldBackgroundColorError();
-         myIyyTextField.SetTextFieldBackgroundColorError();
-         myIzzTextField.SetTextFieldBackgroundColorError();
+         myInertiaInvalidLabel.SetLabelString( "Error -- INVALID inertia matrix:  " + errorStringIfBadTriangleInequality );  
       }
+      myIxxTextField.SetTextFieldForegroundColorOKOrError( errorStringIfBadTriangleInequality == null );
+      myIyyTextField.SetTextFieldForegroundColorOKOrError( errorStringIfBadTriangleInequality == null );
+      myIzzTextField.SetTextFieldForegroundColorOKOrError( errorStringIfBadTriangleInequality == null );
       
       // Set the product of inertia textfield background colors to suggest errors if products are improperly sized relatived to moments of inertia.
       boolean[] isValidIxyIxzIyz = { true, true, true };
@@ -244,15 +254,15 @@ public class LSPanelRigidBodyInertiaMatrixForOpenSim extends LSPanel implements 
       if( errorStringIfBadProductsRatio != null )
       {
          isValidInertiaMatrix = false; 
-         myInertiaIncorrectLabel.SetLabelString( "Error -- INVALID Inertia matrix:  " + errorStringIfBadProductsRatio );
-         myIxyTextField.SetTextFieldBackgroundColorOkOrError( isValidIxyIxzIyz[0] );
-         myIxzTextField.SetTextFieldBackgroundColorOkOrError( isValidIxyIxzIyz[1] );
-         myIyzTextField.SetTextFieldBackgroundColorOkOrError( isValidIxyIxzIyz[2] );
+         myInertiaInvalidLabel.SetLabelString( "Error -- INVALID inertia matrix:  " + errorStringIfBadProductsRatio );
       }   
+      myIxyTextField.SetTextFieldForegroundColorOKOrError( isValidIxyIxzIyz[0] );
+      myIxzTextField.SetTextFieldForegroundColorOKOrError( isValidIxyIxzIyz[1] );
+      myIyzTextField.SetTextFieldForegroundColorOKOrError( isValidIxyIxzIyz[2] );
       
       // Possibly show the label that announced the inertia matrix is invalid.
-      myInertiaMatrixPanel.GetPanelAsContainer().SetContainerBackgroundColor( isValidInertiaMatrix ? LSColor.BackgroundColorSuggestingOK : LSColor.BackgroundColorSuggestingError );    
-      myInertiaIncorrectLabel.SetLabelVisible( !isValidInertiaMatrix );
+      myInertiaMatrixPanel.GetPanelAsContainer().SetContainerBackgroundColor( isValidInertiaMatrix ? LSColor.White : LSColor.BackgroundColorSuggestingError );    
+      myInertiaInvalidLabel.SetLabelVisible( !isValidInertiaMatrix );
       myAssociatedRigidBodyPropertyEditor.GetDialogAsContainer().Repaint();
       
       // Show center of mass as an appropriately sized ellipsoid to help with visual debugging.
@@ -282,7 +292,7 @@ public class LSPanelRigidBodyInertiaMatrixForOpenSim extends LSPanel implements 
    private LSTextField                                          myIyxTextField;
    private LSTextField                                          myIzxTextField;
    private LSTextField                                          myIzyTextField;
-   private LSLabel  myInertiaIncorrectLabel;
+   private LSLabel  myInertiaInvalidLabel;
    private LSPanel  myInertiaMatrixPanel;
    LSPropertyEditorRigidBody  myAssociatedRigidBodyPropertyEditor;
 }

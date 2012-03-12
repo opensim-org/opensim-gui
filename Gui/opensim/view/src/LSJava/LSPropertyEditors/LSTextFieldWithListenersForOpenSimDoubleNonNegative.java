@@ -36,7 +36,7 @@ public class LSTextFieldWithListenersForOpenSimDoubleNonNegative extends LSTextF
    //-------------------------------------------------------------------------
    protected String  EventActionOrFocusLostOrKeyEventReturnErrorStringVirtual( )
    {
-      if( !super.IsTextFieldValidDoubleNonNegative() ) return "Error -- Bad non-negative number: ";
+      if( !super.IsTextFieldValidDoubleNonNegative() ) return "Error: Unable to interpret  " + this.GetTextFieldAsString() + "  as non-negative number.";
       super.SetOpenSimObjectPropertyValueFromTextFieldAsDouble();
       return null;
    }

@@ -57,8 +57,6 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
    private  LSPropertyEditorRigidBody( OpenSimObject openSimObjectToConstructorShouldNotBeNull, OneBodyNode oneBodyNodeToConstructorMayBeNull, ModelWindowVTKTopComponent ownerWindowPassedToConstructor  )  
    { 
       super( openSimObjectToConstructorShouldNotBeNull, oneBodyNodeToConstructorMayBeNull, ownerWindowPassedToConstructor, "BodyCMPicture.png", "Rigid Body", 560, 400 );  
-
-      // Add panels, display the window, choose the previously selected panel to display. 
       this.AddPanelsToFrame(); 
       this.GetDialogAsContainer().PackLocateShow();
       super.SetSelectedTabbedPaneFromPriorUserSelection();
@@ -94,7 +92,6 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
       if(      eventTarget == myShowBodyCheckbox )            this.ProcessEventHideOrShow( true,  false, false, false ); // myShowBodyCheckbox.GetCheckboxState();
       else if( eventTarget == myHideBodyCheckbox )            this.ProcessEventHideOrShow( false, false, false, false );  // myHideBodyCheckbox.GetCheckboxState();
       else if( eventTarget == myShowCMCheckboxA ) 	      this.ProcessEventShowCMOrShowBodyAxes( eventTarget );
-      else if( eventTarget == myShowCMCheckboxB ) 	      this.ProcessEventShowCMOrShowBodyAxes( eventTarget );
       else if( eventTarget == myShowBodyAxesCheckbox )	      this.ProcessEventShowCMOrShowBodyAxes( eventTarget );
       else if( eventTarget == myWireFrameCheckbox ) 	      { super.SetObjectRepresentationPointsWireFrameOrSurfaceAndSurfaceShading( 1, 0 );  this.ProcessEventHideOrShow(true,false,false,false); }
       else if( eventTarget == mySurfaceShadedSmoothCheckbox ) { super.SetObjectRepresentationPointsWireFrameOrSurfaceAndSurfaceShading( 2, 1 );  this.ProcessEventHideOrShow(true,false,false,false); }
@@ -114,36 +111,29 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
    {
       if(      eventTarget == myButtonToOpenOldPropertyViewerTable ) super.ProcessEventClickButtonToOpenOldPropertyViewerTable();
       else if( eventTarget == myButtonToOpenColorChooser )           super.CreateColorDialogBoxToChangeUserSelectedColor();
-      else if( eventTarget==myNameTextField )  super.SetOpenSimObjectNameAndPropertyEditorDialogTitle( myNameTextField.GetTextFieldAsString() );
-      else if( eventTarget==myXcmTextField || eventTarget==myYcmTextField || eventTarget==myZcmTextField ) this.ProcessEventChangedCMPositionEvent(); 
+      else if( eventTarget == myNameTextField )                      super.SetOpenSimObjectNameAndPropertyEditorDialogTitle( myNameTextField.GetTextFieldAsString() );
    }
    
 
    //-------------------------------------------------------------------------
-   private void  SynchronizeShowCenterOfMassCheckboxes( Object eventTarget )
-   {
-      boolean isShowing = eventTarget == myShowCMCheckboxA ? myShowCMCheckboxA.GetCheckboxState() : myShowCMCheckboxB.GetCheckboxState();
-      myShowCMCheckboxA.SetCheckboxState( isShowing );
-      myShowCMCheckboxB.SetCheckboxState( isShowing );
-   }
-
-
-   //-------------------------------------------------------------------------
-   private void  ProcessEventShowCMOrShowBodyAxes( Object eventTarget )
+   public void  ProcessEventShowCMOrShowBodyAxes( Object eventTarget )
    {
       boolean isShow = false;
 
       // Ensure checkboxes for showing the center of mass stay synchronized.
-      if( eventTarget == myShowCMCheckboxB )
+      LSCheckbox showCMCheckboxB = myMassAndCMPanel.GetShowCMCheckboxB();
+      if( eventTarget == showCMCheckboxB )
       {
-         this.SynchronizeShowCenterOfMassCheckboxes( eventTarget );
+         boolean checkBoxStateB = showCMCheckboxB.GetCheckboxState();
+         myShowCMCheckboxA.SetCheckboxState( checkBoxStateB );
 	 eventTarget = myShowCMCheckboxA;
       } 
 
+      // Do not use an else statement here.
       if( eventTarget == myShowCMCheckboxA ) 
       {	      
-         this.SynchronizeShowCenterOfMassCheckboxes( eventTarget );
 	 isShow = myShowCMCheckboxA.GetCheckboxState();
+	 showCMCheckboxB.SetCheckboxState( isShow );
          BodyToggleCOMAction.ShowCMForOneBodyNode( this.GetAssociatedOpenSimOneBodyNodeOrNull(), isShow, true );
       }
       else if( eventTarget == myShowBodyAxesCheckbox )	
@@ -155,18 +145,6 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
       // May have to do special things in order to see sub-geometry (considered a bug in the way OpenSim uses VTK now).
       if( isShow ) this.ProcessEventHideOrShow( isShow, true, false, false );
    }
-
-
-   //-------------------------------------------------------------------------
-   public void  ProcessEventChangedCMPositionEvent( )
-   {
-      if( myShowCMCheckboxA.GetCheckboxState() )
-      {
-         BodyDisplayer rep = BodyToggleFrameAction.GetBodyDisplayerForBody( super.GetAssociatedOpenSimObject() );
-         if( rep != null ) rep.SetCMLocationFromPropertyTable( true );
-         super.RepaintAllOpenGL();
-      }
-   } 
 
 
    //-------------------------------------------------------------------------
@@ -218,7 +196,9 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
    private void  AddPanelsToFrame() 
    { 
       super.AddTabToPropertyEditor( "Appearance",               null,  this.CreateTabComponentAppearanceRigidBodyProperty(),             null );
-      super.AddTabToPropertyEditor( "Mass and Center of Mass",  null,  this.CreateTabComponentMassAndCenterOfMassRigidBodyProperty(),    null );
+
+      myMassAndCMPanel = new LSPanelRigidBodyMassAndCMForOpenSim( this );
+      super.AddTabToPropertyEditor( "Mass and Center of Mass",  null,  myMassAndCMPanel,     null );
 
       myInertiaMatrixPanel = new LSPanelRigidBodyInertiaMatrixForOpenSim( this );
       super.AddTabToPropertyEditor( "Inertia Properties",       null,  myInertiaMatrixPanel, null );
@@ -368,48 +348,6 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
    }
     
 
-   //-----------------------------------------------------------------------------
-   private Component  CreateTabComponentMassAndCenterOfMassRigidBodyProperty( ) 
-   { 
-      LSPanel     tabComponent = new LSPanel(); 
-      LSContainer tabContainer = tabComponent.GetPanelAsContainer();
-      tabContainer.SetContainerBackgroundColor( Color.white );
-
-      // Create mass label and text field.
-      LSLabel massLabel = new LSLabel( "Mass  =  ", LSLabel.RIGHT, tabContainer );
-      myMassTextField = new LSTextFieldWithListenersForOpenSimDoubleNonNegative( super.GetPropertyTalkToSimbody(), "mass", 0, true, tabContainer, 1, 1, this, this, this );   
-      tabContainer.AddBlankLabelToLayoutRowRemainder1High();
-
-      // Create center of mass labels and text fields.
-      tabContainer.AddBlankLabelToLayoutRowRemainder1High();
-      new LSLabel( "Position of rigid Body center of mass (Bcm) from rigid Body origin (Bo)", LSLabel.CENTER, tabContainer, GridBagConstraints.REMAINDER );
-      
-      new LSLabel( "Position  =  ", LSLabel.RIGHT, tabContainer );
-      myXcmTextField  = new LSTextFieldWithListenersForOpenSimArrayDouble( 0, super.GetPropertyTalkToSimbody(), "mass_center", 0, true, tabContainer, 1, 1, this, this, this );   
-      new LSLabel( " * bx", LSLabel.LEFT, tabContainer, GridBagConstraints.REMAINDER );
-      
-      new LSLabel( "  +  ", LSLabel.RIGHT, tabContainer );
-      myYcmTextField  = new LSTextFieldWithListenersForOpenSimArrayDouble( 1, super.GetPropertyTalkToSimbody(), "mass_center", 0, true, tabContainer, 1, 1, this, this, this );   
-      new LSLabel( " * by", LSLabel.LEFT, tabContainer, GridBagConstraints.REMAINDER );
-
-      new LSLabel( "  +  ", LSLabel.RIGHT, tabContainer );
-      myZcmTextField  = new LSTextFieldWithListenersForOpenSimArrayDouble( 2, super.GetPropertyTalkToSimbody(), "mass_center", 0, true, tabContainer, 1, 1, this, this, this );   
-      new LSLabel( " * bz", LSLabel.LEFT, tabContainer, GridBagConstraints.REMAINDER );
-
-      // Add show center of mass checkbox.
-      tabContainer.AddBlankLabelToLayout1Wide1High(); 
-      boolean initialStateOfShowCM = BodyToggleCOMAction.IsShowCMForBody( super.GetAssociatedOpenSimObject() );
-      myShowCMCheckboxB = new LSCheckbox( "Show center of mass", initialStateOfShowCM, null, tabContainer, GridBagConstraints.REMAINDER, 1, this );
-
-
-      // Add picture of a rigid body with Bcm (Body center of mass) and Bo (Body origin).
-      JLabel labelWithPicture = LSJava.LSResources.LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "RigidBodyWithOriginCMAndBasisVectors.png", 0, 140 );
-      if( labelWithPicture != null )  tabContainer.AddComponentToLayoutRowRemainder1High( labelWithPicture );
-      
-      return tabComponent;
-   } 
-
-
    //----------------------------------------------------------------------------- 
    // Relevant class hierarchy: OneBodyNode -> OpenSimObjectNode -> OpenSimNode -> AbstractNode -> Node
    //----------------------------------------------------------------------------- 
@@ -430,7 +368,6 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
    private LSTextField    myNameTextField; 
    private LSCheckbox     myShowBodyCheckbox, myHideBodyCheckbox;
    private LSCheckbox     myShowCMCheckboxA;	   // Checkbox on appearance tab
-   private LSCheckbox     myShowCMCheckboxB;	   // Checkbox on mass and center of mass tab
    private LSCheckbox     myShowBodyAxesCheckbox;
    private LSCheckbox     myShowMuscleWrappingSurfacesCheckbox;
    private LSButton       myButtonToOpenColorChooser;
@@ -440,16 +377,10 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
    private LSCheckbox     mySurfaceShadedFlatCheckbox;  
    // mySurfaceShadedFlatCheckbox is unimplemented VTK option since: (a) no difference to analytical geometry, (b) not much faster than smooth, (c) Confusing to give user extra options.
    
-   // Mass and center of mass fields.
-   private LSTextFieldWithListenersForOpenSimDoubleNonNegative  myMassTextField;  
-   private LSTextFieldWithListenersForOpenSimArrayDouble  myXcmTextField,  myYcmTextField,  myZcmTextField;   
-   
-   // Mass and inertia matrix fields.
+   // Mass/CM and inertia matrix panels.
+   private LSPanelRigidBodyMassAndCMForOpenSim      myMassAndCMPanel;
    private LSPanelRigidBodyInertiaMatrixForOpenSim  myInertiaMatrixPanel;
    
-   // Determine which LSTextField last had focus to determine if the one that regains focus is the same one.
-   private LSTextField    myPreviousTextFieldThatHadFocus;
-
    //-----------------------------------------------------------------------------
    // When this property editor is re-displayed, show tab that was last viewed by the user.
    protected int   GetPriorUserSelectedTabbedPaneIndexVirtualFunction()  { return myPriorUserSelectedTabIndex; }   

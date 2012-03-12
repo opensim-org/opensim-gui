@@ -38,7 +38,7 @@ public class LSTextFieldWithListenersForOpenSimArrayDouble extends LSTextFieldWi
    //-------------------------------------------------------------------------
    protected String  EventActionOrFocusLostOrKeyEventReturnErrorStringVirtual( )
    {
-      if( !super.IsTextFieldValidDouble() ) return "Error -- Bad real number: ";
+      if( !super.IsTextFieldValidDouble() ) return ("Error: Unable to interpret  " + this.GetTextFieldAsString() + "  as real number.");
       this.SetOpenSimObjectPropertyValueAsDoubleArrayElementFromTextField();
       return null;
    }

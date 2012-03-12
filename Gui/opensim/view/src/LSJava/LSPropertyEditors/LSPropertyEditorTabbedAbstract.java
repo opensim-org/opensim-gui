@@ -20,13 +20,15 @@ package LSJava.LSPropertyEditors;
 import  LSJava.LSUtility.*;
 import  LSJava.LSComponents.*;
 import  java.awt.*; 
-import  java.awt.event.WindowEvent;
-import  java.awt.event.WindowListener;
+import  java.awt.event.KeyEvent;
 import  javax.swing.JTabbedPane; 
 import  javax.swing.ImageIcon; 
 import  javax.swing.JColorChooser;
+import  javax.swing.KeyStroke;
 import  javax.swing.event.ChangeListener;
 import  javax.swing.event.ChangeEvent;
+import  java.util.Observer;
+import  java.util.Observable;
 
 import  org.opensim.view.ModelWindowVTKTopComponent;
 import  org.opensim.view.editors.ObjectEditDialogMaker;
@@ -34,13 +36,15 @@ import  org.opensim.view.nodes.OpenSimObjectNode;
 import  org.opensim.view.ObjectDisplayColorAction;
 import  org.opensim.view.ObjectDisplayShowHideBaseAction;
 import  org.opensim.view.pub.ViewDB;
+import  org.opensim.view.ModelEvent;
+import  org.opensim.view.pub.OpenSimDB;
 import  org.opensim.utils.TheApp;
 
 import  org.opensim.modeling.OpenSimObject;
-
+import  org.opensim.modeling.Model;
 
 //-----------------------------------------------------------------------------
-public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements ChangeListener
+public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements ChangeListener, Observer
 { 
    // Constructor ----------------------------------------------------------------
    protected  LSPropertyEditorTabbedAbstract( OpenSimObject openSimObjectToConstructorShouldNotBeNull, OpenSimObjectNode openSimObjectNodeToConstructorMayBeNull, ModelWindowVTKTopComponent ownerWindowPassedToConstructor, String filenameForDialogIconImage, String nameOfTypeOfObjectEgRigidBodyOrJoint, int xNumberOfPixelsOfTabbedPaneMin, int yNumberOfPixelsOfTabbedPaneMin )  
@@ -61,7 +65,7 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
       // Set the background color to light yellow
       int xNumberOfPixelsThisDialogMin = xNumberOfPixelsOfTabbedPaneMin + 40;
       int yNumberOfPixelsThisDialogMin = yNumberOfPixelsOfTabbedPaneMin + 40;
-      super.setBackground( LSColor.BackgroundColorVeryLightGray );
+      super.setBackground( LSColor.LighterGray );
       super.setMinimumSize(   new Dimension(xNumberOfPixelsThisDialogMin, yNumberOfPixelsThisDialogMin) );
       super.setPreferredSize( new Dimension(xNumberOfPixelsThisDialogMin, yNumberOfPixelsThisDialogMin) );
       super.setMaximumSize(   new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE ) );
@@ -75,6 +79,16 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
       myJTabbedPane.setMinimumSize(   new Dimension(xNumberOfPixelsOfTabbedPaneMin, yNumberOfPixelsOfTabbedPaneMin) );
       myJTabbedPane.setPreferredSize( new Dimension(xNumberOfPixelsOfTabbedPaneMin, yNumberOfPixelsOfTabbedPaneMin) );
       myJTabbedPane.setMaximumSize(   new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE) );
+      
+      // Ignore the left-arrow and right-arrow keystrokes to change tabbed panes (since arrow keys are used in Textfields).
+      KeyStroke  leftArrowKeyStrokeRegular = KeyStroke.getKeyStroke( KeyEvent.VK_LEFT,     0, false );
+      KeyStroke  leftArrowKeyStrokeKeypad  = KeyStroke.getKeyStroke( KeyEvent.VK_KP_LEFT,  0, false );  
+      KeyStroke rightArrowKeyStrokeRegular = KeyStroke.getKeyStroke( KeyEvent.VK_RIGHT,    0, false );
+      KeyStroke rightArrowKeyStrokeKeypad  = KeyStroke.getKeyStroke( KeyEvent.VK_KP_RIGHT, 0, false );          
+      myJTabbedPane.getInputMap().put( leftArrowKeyStrokeRegular,  "none" );
+      myJTabbedPane.getInputMap().put( leftArrowKeyStrokeKeypad,   "none" );
+      myJTabbedPane.getInputMap().put( rightArrowKeyStrokeRegular, "none" );
+      myJTabbedPane.getInputMap().put( rightArrowKeyStrokeKeypad,  "none" );
 
       // Default location to issue warning messages.
       LSMessageDialog.SetCurrentWindowToIssueMessages( (Window)this );
@@ -84,7 +98,7 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
       ChangeListener changeListener = new ChangeListener() 
       {
          public void  stateChanged( ChangeEvent changeEvent ) 
-	 {
+         {
             Object eventTarget = changeEvent.getSource();
             if( eventTarget == myJTabbedPane )
             {  
@@ -122,6 +136,27 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
       myJTabbedPane.setTabLayoutPolicy( tabLayoutPolicyType ); 
    } 
 
+
+   //----------------------------------------------------------------------------- 
+   public void update( Observable observable, Object eventObject ) 
+   {
+      if( observable instanceof OpenSimDB  &&  eventObject instanceof ModelEvent )
+      {
+         ModelEvent eventObjectAsModelEvent = (ModelEvent)eventObject; 
+         if( eventObjectAsModelEvent.getOperation() == ModelEvent.Operation.Close )
+         {
+            Model modelAssociatedWithOpenSimObject = ObjectDisplayShowHideBaseAction.getModelForOpenSimObjectOrNull( this.GetAssociatedOpenSimObject() ); 
+            Model modelAssociatedWithModelEvent = eventObjectAsModelEvent.getModel();
+            Model modelCurrentlySelected = OpenSimDB.getInstance().getCurrentModel();
+            if( modelAssociatedWithOpenSimObject != null  &&  modelAssociatedWithOpenSimObject==modelAssociatedWithModelEvent  &&  modelAssociatedWithModelEvent==modelCurrentlySelected )
+            {
+               // this.deleteObserver(this);
+               this.Dispose();
+            }
+         }        
+      }
+   }
+    
 
    //----------------------------------------------------------------------------- 
    public     LSPropertyTalkToSimbody  GetPropertyTalkToSimbody()                 { return myPropertyTalkToSimbody; }
@@ -168,7 +203,7 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
    public void  SetOpenSimObjectNameAndPropertyEditorDialogTitle( String newName )    
    { 
       if( myPropertyTalkToSimbody.SetOpenSimObjectName(newName) )
-	 this.SetPropertyEditorDialogTitle();
+        this.SetPropertyEditorDialogTitle();
    } 
 
 
@@ -182,7 +217,7 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
    
    //-------------------------------------------------------------------------
    protected int[]  GetObjectRGBColorIn3IntegersWithRangeFrom0To255( ) 
-   {							      
+   {
       int currentRGBColorWithRangeFrom0To255[] = { 255, 255, 255 };
       double currentRGBColorWithRangeFrom0To1[] = ViewDB.getObjectRGBColorIn3DoublesWithRangeFrom0To1( this.GetAssociatedOpenSimObject() );
       int shouldBeThreeElements = currentRGBColorWithRangeFrom0To1==null ? 0 : currentRGBColorWithRangeFrom0To1.length;
@@ -281,13 +316,13 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
       for( int i=0;  i < numberOfExistingWindows;  i++ )
       {
          Window wi = LSWindowAdapter.GetExistingWindowOrNull( i );
-	 if( wi != null && wi instanceof LSPropertyEditorTabbedAbstract )
-	 {
+         if( wi != null && wi instanceof LSPropertyEditorTabbedAbstract )
+         {
             LSPropertyEditorTabbedAbstract propertyEditori = (LSPropertyEditorTabbedAbstract)wi;
-	    OpenSimObject openSimObjecti = propertyEditori.GetAssociatedOpenSimObject();
+            OpenSimObject openSimObjecti = propertyEditori.GetAssociatedOpenSimObject();
             OpenSimObjectNode openSimObjectNodei = propertyEditori.GetAssociatedOpenSimObjectNodeOrNull();
-	    if( openSimObjectToFind == openSimObjecti || (openSimObjectNodei != null && openSimObjectNodei==openSimObjectNodeToFindMayBeNull) )  return propertyEditori;
-	 } 
+            if( openSimObjectToFind == openSimObjecti || (openSimObjectNodei != null && openSimObjectNodei==openSimObjectNodeToFindMayBeNull) )  return propertyEditori;
+         } 
       }
       return null;
    }    
@@ -303,7 +338,7 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
 
    //-----------------------------------------------------------------------------
    // Class data
-   private   LSPropertyTalkToSimbody	 myPropertyTalkToSimbody;
+   private   LSPropertyTalkToSimbody     myPropertyTalkToSimbody;
    private   String                      myNameOfTypeOfObjectEgRigidBodyOrJoint;
    private   ModelWindowVTKTopComponent  myOpenSimModelWindowVTKTopComponentOwnerWindow;
    private   boolean                     myStateChangeCalledByUserChangingPanesNotClassConstructor = false;
