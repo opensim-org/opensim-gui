@@ -36,6 +36,11 @@ import  org.opensim.view.BodyToggleFrameAction;
 
 
 //-----------------------------------------------------------------------------
+// ActionListener listens for ENTER key.  
+// FocusListener  listens for TAB key or mouse event to different field.
+// KeyListener    listens for OK or ESCAPE key.
+// ItemListener   listens for clicks on checkboxes, etc.
+//-----------------------------------------------------------------------------
 public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract implements ActionListener, FocusListener, ItemListener, KeyListener 
 { 
    // Quasi constructor ----------------------------------------------------------
@@ -56,7 +61,7 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
    // Constructor ----------------------------------------------------------------
    private  LSPropertyEditorRigidBody( OpenSimObject openSimObjectToConstructorShouldNotBeNull, OneBodyNode oneBodyNodeToConstructorMayBeNull, ModelWindowVTKTopComponent ownerWindowPassedToConstructor  )  
    { 
-      super( openSimObjectToConstructorShouldNotBeNull, oneBodyNodeToConstructorMayBeNull, ownerWindowPassedToConstructor, "BodyCMPicture.png", "Rigid Body", 560, 400 );  
+      super( openSimObjectToConstructorShouldNotBeNull, oneBodyNodeToConstructorMayBeNull, ownerWindowPassedToConstructor, "BodyCMPicture.png", "Rigid Body", 560, 380 );  
       this.AddPanelsToFrame(); 
       this.GetDialogAsContainer().PackLocateShow();
       super.SetSelectedTabbedPaneFromPriorUserSelection();
@@ -220,17 +225,19 @@ public class LSPropertyEditorRigidBody extends LSPropertyEditorTabbedAbstract im
       LSPanel     tabComponentWithTwoPanels = new LSPanel(); 
       LSContainer tabComponentWithTwoPanelsContainer = tabComponentWithTwoPanels.GetPanelAsContainer();
       tabComponentWithTwoPanelsContainer.SetContainerBackgroundColor( Color.white );
-      
+
       // Other possible images are: ImageIcon  openSimImageIcon = TheApp.getApplicationIcon()  and  Image openSimLogoImage = TheApp.getAppImage();
       LSPanel picturePanel = LSImageResource.GetLSPanelFromLSResourcesFileNameScaled( "OpenSimLogoNoWords.jpg", 0, 150, Color.white );
       tabComponentWithTwoPanelsContainer.AddComponentToLayoutColRemainder1Wide( picturePanel );
       tabComponentWithTwoPanelsContainer.AddLabelToLayout( "  ", LSLabel.CENTER, 1, GridBagConstraints.REMAINDER );
 
       // Add a panel with relevant buttons, textboxes, etc.
+      // Add extra spacing between components.
       LSPanel tabComponent = new LSPanel( tabComponentWithTwoPanelsContainer, GridBagConstraints.REMAINDER, GridBagConstraints.REMAINDER ); 
       LSContainer tabContainer = tabComponent.GetPanelAsContainer();
       tabContainer.SetContainerBackgroundColor( Color.white );
-      
+      tabContainer.SetConstraintInsets( 3, 0, 3, 0 );
+
       // Create button to open up the old property viewer table.
       myButtonToOpenOldPropertyViewerTable = new LSButton( "Property Viewer", tabContainer, GridBagConstraints.REMAINDER, 1, this, null );
 

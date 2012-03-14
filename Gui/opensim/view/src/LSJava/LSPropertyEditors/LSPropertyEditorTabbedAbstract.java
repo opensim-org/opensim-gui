@@ -111,6 +111,9 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
       };
       myJTabbedPane.addChangeListener( changeListener );
 
+      // Add observer to hear if model is closed or object is deleted.
+      ViewDB.getInstance().addObserver( this );
+      OpenSimDB.getInstance().addObserver( this );
    } 
    
 
@@ -140,21 +143,33 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
    //----------------------------------------------------------------------------- 
    public void update( Observable observable, Object eventObject ) 
    {
-      if( observable instanceof OpenSimDB  &&  eventObject instanceof ModelEvent )
+      boolean closeAndDisposeDialog = false;
+      if( observable instanceof OpenSimDB )
       {
-         ModelEvent eventObjectAsModelEvent = (ModelEvent)eventObject; 
-         if( eventObjectAsModelEvent.getOperation() == ModelEvent.Operation.Close )
+         if( eventObject instanceof ModelEvent )
          {
-            Model modelAssociatedWithOpenSimObject = ObjectDisplayShowHideBaseAction.getModelForOpenSimObjectOrNull( this.GetAssociatedOpenSimObject() ); 
-            Model modelAssociatedWithModelEvent = eventObjectAsModelEvent.getModel();
-            Model modelCurrentlySelected = OpenSimDB.getInstance().getCurrentModel();
-            if( modelAssociatedWithOpenSimObject != null  &&  modelAssociatedWithOpenSimObject==modelAssociatedWithModelEvent  &&  modelAssociatedWithModelEvent==modelCurrentlySelected )
+            ModelEvent eventObjectAsModelEvent = (ModelEvent)eventObject; 
+            if( eventObjectAsModelEvent.getOperation() == ModelEvent.Operation.Close )
             {
-               // this.deleteObserver(this);
-               this.Dispose();
-            }
-         }        
+               Model modelAssociatedWithOpenSimObject = ObjectDisplayShowHideBaseAction.getModelForOpenSimObjectOrNull( this.GetAssociatedOpenSimObject() ); 
+               Model modelAssociatedWithModelEvent = eventObjectAsModelEvent.getModel();
+               long modelCPtrForOpenSimObject = modelAssociatedWithOpenSimObject == null ? 0 : Model.getCPtr( modelAssociatedWithOpenSimObject );
+               long modelCPtrForModelEvent    = modelAssociatedWithModelEvent    == null ? 0 : Model.getCPtr( modelAssociatedWithModelEvent );
+               if( modelCPtrForOpenSimObject != 0 &&  modelCPtrForOpenSimObject == modelCPtrForModelEvent )
+                  closeAndDisposeDialog = true;
+            }        
+         }
+//       else if( eventObject instanceof ObjectsDeletedEvent );
+//	 else if( eventObject instanceof ObjectsRenamedEvent );
       }
+
+      // If model or object was deleted, close this dialog box.
+      if( closeAndDisposeDialog == true )
+      {
+         // this.deleteObserver(this);
+         this.Dispose();
+      }
+
    }
     
 
@@ -218,12 +233,12 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
    //-------------------------------------------------------------------------
    protected int[]  GetObjectRGBColorIn3IntegersWithRangeFrom0To255( ) 
    {
-      int currentRGBColorWithRangeFrom0To255[] = { 255, 255, 255 };
       double currentRGBColorWithRangeFrom0To1[] = ViewDB.getObjectRGBColorIn3DoublesWithRangeFrom0To1( this.GetAssociatedOpenSimObject() );
       int shouldBeThreeElements = currentRGBColorWithRangeFrom0To1==null ? 0 : currentRGBColorWithRangeFrom0To1.length;
+      int currentRGBColorWithRangeFrom0To255[] = { 255, 255, 255 };
       for( int i=0;  i<shouldBeThreeElements; i++ )
          currentRGBColorWithRangeFrom0To255[i] = (int)( currentRGBColorWithRangeFrom0To1[i] * 255 );
-      return currentRGBColorWithRangeFrom0To255;  // Currently this just returns White.  May be due to VTK being bunches of pieces - and no real color available.
+      return currentRGBColorWithRangeFrom0To255;  
    }
 
 

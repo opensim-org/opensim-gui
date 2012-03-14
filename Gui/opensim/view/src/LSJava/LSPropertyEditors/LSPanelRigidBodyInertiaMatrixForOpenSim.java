@@ -53,7 +53,7 @@ public class LSPanelRigidBodyInertiaMatrixForOpenSim extends LSPanel implements 
  
       // Create inertia properties labels and text fields.
       tabContainer.AddBlankLabelToLayoutRowRemainder1High();
-      new LSLabel( "Inertia matrix about rigid-body center of mass (Bcm) for bx, by, bz", LSLabel.CENTER, tabContainer, GridBagConstraints.REMAINDER );
+      new LSLabel( "<html>Inertia matrix about body center of mass for the body's &nbsp; <b>x</b>, <b>y</b>, <b>z</b> &nbsp; unit vectors</html>", LSLabel.CENTER, tabContainer, GridBagConstraints.REMAINDER );
       tabContainer.AddComponentToLayoutRowRemainder1High( this.CreatePanelWithInertiaMatrix() );
 
       // Add blank line separator.

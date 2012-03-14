@@ -39,7 +39,6 @@ public abstract class LSTextFieldWithListenersForOpenSimAbstract extends LSTextF
    abstract protected String  EventActionOrFocusLostOrKeyEventReturnErrorStringVirtual( );
 
 
-
    //-------------------------------------------------------------------------
    public LSPropertyTalkToSimbody  GetPropertyToTalkToSimbody( )  { return myPropertyToTalkToSimbody; }   
    public String  GetAssociatedOpenSimPropertyName( )             { return myOpenSimPropertyName; }

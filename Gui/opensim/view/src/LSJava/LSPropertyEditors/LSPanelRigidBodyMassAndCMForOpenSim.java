@@ -43,6 +43,7 @@ public class LSPanelRigidBodyMassAndCMForOpenSim extends LSPanel implements Acti
       myAssociatedRigidBodyPropertyEditor = rigidBodyPropertyEditor;
       LSPropertyTalkToSimbody propertyToTalkToSimbody = myAssociatedRigidBodyPropertyEditor.GetPropertyTalkToSimbody();
 
+      // Set background to white and add extra vertical space between each component in layout.
       LSContainer tabContainer = this.GetPanelAsContainer();
       tabContainer.SetContainerBackgroundColor( Color.white );
 
@@ -59,28 +60,10 @@ public class LSPanelRigidBodyMassAndCMForOpenSim extends LSPanel implements Acti
 
       // Create center of mass labels and text fields.
       tabContainer.AddBlankLabelToLayoutRowRemainder1High();
-      new LSLabel( "Position of rigid Body center of mass (Bcm) from rigid Body origin (Bo)", LSLabel.CENTER, tabContainer, GridBagConstraints.REMAINDER );
-      
-      new LSLabel( "Position  =  ", LSLabel.RIGHT, tabContainer );
-      myXcmTextField  = new LSTextFieldWithListenersForOpenSimArrayDouble( 0, propertyToTalkToSimbody, "mass_center", 0, true, tabContainer, 1, 1, this, this, this );   
-      new LSLabel( " * bx", LSLabel.LEFT, tabContainer, GridBagConstraints.REMAINDER );
-      
-      new LSLabel( "  +  ", LSLabel.RIGHT, tabContainer );
-      myYcmTextField  = new LSTextFieldWithListenersForOpenSimArrayDouble( 1, propertyToTalkToSimbody, "mass_center", 0, true, tabContainer, 1, 1, this, this, this );   
-      new LSLabel( " * by", LSLabel.LEFT, tabContainer, GridBagConstraints.REMAINDER );
-
-      new LSLabel( "  +  ", LSLabel.RIGHT, tabContainer );
-      myZcmTextField  = new LSTextFieldWithListenersForOpenSimArrayDouble( 2, propertyToTalkToSimbody, "mass_center", 0, true, tabContainer, 1, 1, this, this, this );   
-      new LSLabel( " * bz", LSLabel.LEFT, tabContainer, GridBagConstraints.REMAINDER );
-
-      // Add show center of mass checkbox.
-      tabContainer.AddBlankLabelToLayout1Wide1High(); 
-      OpenSimObject openSimObject = myAssociatedRigidBodyPropertyEditor.GetAssociatedOpenSimObject();      
-      boolean initialStateOfShowCM = BodyToggleCOMAction.IsShowCMForBody( openSimObject );
-      myShowCMCheckboxB = new LSCheckbox( "Show center of mass", initialStateOfShowCM, null, tabContainer, GridBagConstraints.REMAINDER, 1, this );
+      tabContainer.AddComponentToLayoutRowRemainder1High( this.CreatePanelCenterOfMass(propertyToTalkToSimbody) );
 
       // Add picture of a rigid body with Bcm (Body center of mass) and Bo (Body origin).
-      JLabel labelWithPicture = LSJava.LSResources.LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "RigidBodyWithOriginCMAndBasisVectors.png", 0, 140 );
+      JLabel labelWithPicture = LSJava.LSResources.LSImageResource.GetJLabelFromLSResourcesFileNameScaled( "RigidBodyWithOriginCMAndBasisVectors.png", 0, 128 );
       if( labelWithPicture != null )  tabContainer.AddComponentToLayoutRowRemainder1High( labelWithPicture );
 
       // After creating mass properties, provide visual feedback on whether or not it is possible.
@@ -103,7 +86,6 @@ public class LSPanelRigidBodyMassAndCMForOpenSim extends LSPanel implements Acti
       {
          switch( keyEvent.getKeyChar() )
          {
-	    case KeyEvent.VK_TAB:
             case KeyEvent.VK_ENTER:   
             case KeyEvent.VK_ESCAPE:  this.CheckActionOrFocusLostOrKeyEventTarget( eventTarget ); 
                                       break;
@@ -130,6 +112,9 @@ public class LSPanelRigidBodyMassAndCMForOpenSim extends LSPanel implements Acti
    {
       if( eventTarget==myXcmTextField || eventTarget==myYcmTextField || eventTarget==myZcmTextField )
       {
+         // Ensure that text field updates the property table before trying to show the change on-screen.
+         LSTextFieldWithListenersForOpenSimArrayDouble eventTargetAsTextFieldWithListeners = (LSTextFieldWithListenersForOpenSimArrayDouble)eventTarget;
+         eventTargetAsTextFieldWithListeners.EventActionOrFocusLostOrKeyEventReturnErrorStringVirtual();
          this.CheckMassPropertiesAndGiveVisualFeedbackOnWhetherOrNotItIsPhysicallyPossible( );
          this.ProcessEventChangedCMPositionEvent(); 
       }
@@ -147,9 +132,9 @@ public class LSPanelRigidBodyMassAndCMForOpenSim extends LSPanel implements Acti
    //-------------------------------------------------------------------------
    private String  GetAllCMTextFieldsAreValidDoublesReturnNullOtherwiseErrorString( )
    { 
-      if( !myXcmTextField.IsTextFieldValidDouble() )  return "Error: Unable to interpret  xPosition  as real number";
-      if( !myYcmTextField.IsTextFieldValidDouble() )  return "Error: Unable to interpret  yPosition  as real number";
-      if( !myZcmTextField.IsTextFieldValidDouble() )  return "Error: Unable to interpret  zPosition  as real number";
+      if( !myXcmTextField.IsTextFieldValidDouble() )  return "Error: Unable to interpret  x value  as real number";
+      if( !myYcmTextField.IsTextFieldValidDouble() )  return "Error: Unable to interpret  y value  as real number";
+      if( !myZcmTextField.IsTextFieldValidDouble() )  return "Error: Unable to interpret  z value  as real number";
       return null;
    }
 
@@ -180,6 +165,39 @@ public class LSPanelRigidBodyMassAndCMForOpenSim extends LSPanel implements Acti
       }
    } 
 
+
+   //-----------------------------------------------------------------------------
+   private LSPanel  CreatePanelCenterOfMass(  LSPropertyTalkToSimbody propertyToTalkToSimbody ) 
+   {
+      LSPanel     panel = new LSPanel(); 
+      LSContainer panelContainer = panel.GetPanelAsContainer();
+      panelContainer.SetContainerBackgroundColor( Color.white );
+      panelContainer.SetConstraintInsets( 3, 0, 2, 0 );
+
+      // Create center of mass labels and text fields.
+      new LSLabel( "<html>Position of Body center of mass (Bcm) from Body origin (Bo)</html>", LSLabel.CENTER, panelContainer, GridBagConstraints.REMAINDER );
+      
+      new LSLabel( "<html>x&nbsp; = &nbsp;", LSLabel.RIGHT, panelContainer );
+      myXcmTextField  = new LSTextFieldWithListenersForOpenSimArrayDouble( 0, propertyToTalkToSimbody, "mass_center", 0, true, panelContainer, 1, 1, this, this, this );   
+      new LSLabel( " ", LSLabel.LEFT, panelContainer, GridBagConstraints.REMAINDER );
+      
+      new LSLabel( "<html>y&nbsp; = &nbsp;", LSLabel.RIGHT, panelContainer );
+      myYcmTextField  = new LSTextFieldWithListenersForOpenSimArrayDouble( 1, propertyToTalkToSimbody, "mass_center", 0, true, panelContainer, 1, 1, this, this, this );   
+      new LSLabel( " ", LSLabel.LEFT, panelContainer, GridBagConstraints.REMAINDER );
+
+      new LSLabel( "<html>z&nbsp; = &nbsp;", LSLabel.RIGHT, panelContainer );
+      myZcmTextField  = new LSTextFieldWithListenersForOpenSimArrayDouble( 2, propertyToTalkToSimbody, "mass_center", 0, true, panelContainer, 1, 1, this, this, this );   
+      new LSLabel( " ", LSLabel.LEFT, panelContainer, GridBagConstraints.REMAINDER );
+
+      // Add show center of mass checkbox.
+      panelContainer.AddBlankLabelToLayout1Wide1High(); 
+      OpenSimObject openSimObject = myAssociatedRigidBodyPropertyEditor.GetAssociatedOpenSimObject();      
+      boolean initialStateOfShowCM = BodyToggleCOMAction.IsShowCMForBody( openSimObject );
+      myShowCMCheckboxB = new LSCheckbox( "Show center of mass", initialStateOfShowCM, null, panelContainer, GridBagConstraints.REMAINDER, 1, this );
+
+      // Return panel so it can be added to tabbed panel.
+      return panel;
+   } 
 
 
    //-----------------------------------------------------------------------------
