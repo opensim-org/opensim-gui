@@ -404,6 +404,25 @@ public class BodyDisplayer extends vtkAssembly
           gPiece.setColor(colorComponents);
       }
     }
+    
+    //---------------------------------------------------------------
+    public double[]  GetColorOrReturnNull(  )
+    {
+       double[] colorOfAllPiecesOrNullIfColorOfPiecesDiffer = null; 
+       VisibleObject bodyDisplayer = body.getDisplayer();
+       GeometrySet bodyDisplayerGeometrySet = bodyDisplayer.getGeometrySet();
+       int numberOfPieces = bodyDisplayerGeometrySet==null ? 0 : bodyDisplayerGeometrySet.getSize();
+       for( int i=0;  i < numberOfPieces;  i++) 
+       {
+          DisplayGeometry gi = bodyDisplayerGeometrySet.get( i );
+          double[] colorOfCurrentPiece = {-1, -1, -1 };
+          gi.getColor( colorOfCurrentPiece );
+          for( int j=0;  j<3;  j++ ) { if( colorOfCurrentPiece[i] < 0 || colorOfCurrentPiece[i] > 1 ) return null; }
+          if( colorOfAllPiecesOrNullIfColorOfPiecesDiffer == null ) colorOfAllPiecesOrNullIfColorOfPiecesDiffer = colorOfCurrentPiece;
+          else for( int k=0;  k<3;  k++ ) { if( colorOfCurrentPiece[i] != colorOfAllPiecesOrNullIfColorOfPiecesDiffer[i] ) return null; }
+       }      
+       return colorOfAllPiecesOrNullIfColorOfPiecesDiffer; 
+    }
 
     public void setOpacity(double newOpacity) {
        VisibleObject bodyDisplayer = body.getDisplayer();
@@ -480,6 +499,7 @@ public class BodyDisplayer extends vtkAssembly
        {
           super.Modified();
           ViewDB.getInstance().repaintAll();
+          // ViewDB.getInstance().renderAll();
        }
     }
     

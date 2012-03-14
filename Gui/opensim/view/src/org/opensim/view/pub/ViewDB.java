@@ -603,7 +603,7 @@ public final class ViewDB extends Observable implements Observer {
       }
    }
 
-   public void renderAll() {
+   public static void renderAll() {
       Iterator<ModelWindowVTKTopComponent> windowIter = openWindows.iterator();
       while(windowIter.hasNext()){
          windowIter.next().getCanvas().Render();
@@ -626,7 +626,7 @@ public final class ViewDB extends Observable implements Observer {
             if(asm!=null) {
                 applyColor(colorComponents, asm, true);
                 if (object instanceof Body){
-                    ((BodyDisplayer) asm).setColor(colorComponents);
+                    ((BodyDisplayer)asm).setColor(colorComponents);
                 }
                 else if (object instanceof DisplayGeometry)
                     ((DisplayGeometry)object).setColor(colorComponents);
@@ -634,6 +634,35 @@ public final class ViewDB extends Observable implements Observer {
          
       }
       renderAll();
+   }
+   
+   //----------------------------------------------------------------
+   public static double[]  getObjectRGBColorIn3DoublesWithRangeFrom0To1( OpenSimObject object ) 
+   {
+      if( PathPoint.safeDownCast(object) != null ) return null;
+      vtkProp3D asm = ViewDB.getInstance().getVtkRepForObject( object );
+      if( asm == null ) return null; 
+
+      if( object instanceof Body )
+         return ((BodyDisplayer)asm).GetColorOrReturnNull();
+      else if( object instanceof DisplayGeometry )
+      {
+         double[] colorToReturn = {-1, -1, -1};
+         ((DisplayGeometry)object).getColor( colorToReturn );
+         return colorToReturn;
+      }
+      return null;
+   }   
+   
+   //-----------------------------------------------------------------------------
+   public static double[] getObjectRGBColorIn3DoublesWithRangeFrom0To1Deprecated( OpenSimObject object )
+   {
+      double objectColor[] = { 1.0, 1.0, 1.0 }; 
+      if( object == null ) return objectColor; 
+      vtkProperty propertyToFillInformation = new vtkProperty(); 
+      ViewDB.getObjectProperties( object, propertyToFillInformation );
+      return propertyToFillInformation.GetColor();  // This seems to always return 1,1,1.
+      // Currently this just returns White.  May be due to VTK being bunches of pieces - and no real color available.
    }
 
    public void applyColor(final double[] colorComponents, final vtkProp3D asm, boolean allowUndo) {
@@ -731,15 +760,6 @@ public final class ViewDB extends Observable implements Observer {
       return propertyToFillInformation.GetOpacity();
    }
    
-   //-----------------------------------------------------------------------------
-   public static double[] getObjectRGBColorIn3DoublesWithRangeFrom0To1( OpenSimObject object )
-   {
-      double objectColor[] = { 1.0, 1.0, 1.0 }; 
-      if( object == null ) return objectColor; 
-      vtkProperty propertyToFillInformation = new vtkProperty(); 
-      ViewDB.getObjectProperties( object, propertyToFillInformation );
-      return propertyToFillInformation.GetColor();  // This seems to always return 1,1,1.
-   }
    
    public void setObjectProperties(OpenSimObject object, vtkProperty saveProperty) {
       setObjectColor(object, saveProperty.GetColor());
