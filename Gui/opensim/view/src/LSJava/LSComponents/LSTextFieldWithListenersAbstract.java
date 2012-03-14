@@ -61,6 +61,7 @@ public abstract class LSTextFieldWithListenersAbstract extends LSTextField imple
       {
          switch( keyEvent.getKeyChar() )
          {
+            case KeyEvent.VK_TAB:   
             case KeyEvent.VK_ENTER:   
             case KeyEvent.VK_ESCAPE:  this.CheckActionOrFocusLostOrKeyEventTarget( eventTarget ); 
                                       break;
