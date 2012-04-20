@@ -35,6 +35,28 @@ public class ObjectGroup extends OpenSimObject {
     super.delete();
   }
 
+  public static ObjectGroup safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.ObjectGroup_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new ObjectGroup(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.ObjectGroup_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.ObjectGroup_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.ObjectGroup_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new ObjectGroup(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.ObjectGroup_getConcreteClassName(swigCPtr, this);
+  }
+
   public ObjectGroup() {
     this(opensimModelJNI.new_ObjectGroup__SWIG_0(), true);
   }
@@ -45,11 +67,6 @@ public class ObjectGroup extends OpenSimObject {
 
   public ObjectGroup(ObjectGroup aGroup) {
     this(opensimModelJNI.new_ObjectGroup__SWIG_2(ObjectGroup.getCPtr(aGroup), aGroup), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.ObjectGroup_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(ObjectGroup aGroup) {
@@ -78,23 +95,6 @@ public class ObjectGroup extends OpenSimObject {
 
   public ArrayObjPtr getMembers() {
     return new ArrayObjPtr(opensimModelJNI.ObjectGroup_getMembers(swigCPtr, this), false);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.ObjectGroup_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.ObjectGroup_isA(swigCPtr, this, type);
-  }
-
-  public static ObjectGroup safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ObjectGroup_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new ObjectGroup(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.ObjectGroup_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

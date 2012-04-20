@@ -35,6 +35,28 @@ public class AssemblySolver extends Solver {
     super.delete();
   }
 
+  public static AssemblySolver safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.AssemblySolver_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new AssemblySolver(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.AssemblySolver_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.AssemblySolver_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.AssemblySolver_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new AssemblySolver(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.AssemblySolver_getConcreteClassName(swigCPtr, this);
+  }
+
   public AssemblySolver(Model model, SWIGTYPE_p_SimTK__Array_T_OpenSim__CoordinateReference_t coordinateReferences, double constraintWeight) {
     this(opensimModelJNI.new_AssemblySolver__SWIG_0(Model.getCPtr(model), model, SWIGTYPE_p_SimTK__Array_T_OpenSim__CoordinateReference_t.getCPtr(coordinateReferences), constraintWeight), true);
   }

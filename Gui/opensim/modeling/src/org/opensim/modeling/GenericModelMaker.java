@@ -35,17 +35,34 @@ public class GenericModelMaker extends OpenSimObject {
     super.delete();
   }
 
+  public static GenericModelMaker safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.GenericModelMaker_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new GenericModelMaker(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.GenericModelMaker_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.GenericModelMaker_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.GenericModelMaker_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new GenericModelMaker(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.GenericModelMaker_getConcreteClassName(swigCPtr, this);
+  }
+
   public GenericModelMaker() {
     this(opensimModelJNI.new_GenericModelMaker__SWIG_0(), true);
   }
 
   public GenericModelMaker(GenericModelMaker aGenericModelMaker) {
     this(opensimModelJNI.new_GenericModelMaker__SWIG_1(GenericModelMaker.getCPtr(aGenericModelMaker), aGenericModelMaker), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.GenericModelMaker_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(GenericModelMaker aGenericModelMaker) {

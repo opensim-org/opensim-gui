@@ -1,7 +1,6 @@
 package org.opensim.view.nodes;
 
 import java.awt.Image;
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -16,8 +15,8 @@ import org.openide.util.NbBundle;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.editors.BodyNameEditor;
-import org.opensim.view.markerEditor.MarkerDeleteAction;
 import org.opensim.view.markerEditor.MarkerEditorAction;
+import org.opensim.view.markerEditor.OneMarkerDeleteAction;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 
 /** Node class to wrap AbstractMarker objects */
@@ -60,7 +59,12 @@ public class OneMarkerNode extends OpenSimObjectNode{
         actions.toArray(retActions);
         // append new command to the end of the list of actions
         retActions[actions.size()] = new MarkerEditorAction();
-        retActions[actions.size()+1] = new MarkerDeleteAction();
+        try {
+            retActions[actions.size()+1] = (OneMarkerDeleteAction) OneMarkerDeleteAction.findObject(
+                     (Class)Class.forName("org.opensim.view.markerEditor.OneMarkerDeleteAction"), true);
+        } catch (ClassNotFoundException ex) {
+            Exceptions.printStackTrace(ex);
+        }
         return retActions;
     }
 
@@ -74,7 +78,7 @@ public class OneMarkerNode extends OpenSimObjectNode{
         Marker obj = Marker.safeDownCast(getOpenSimObject());
         MarkerAdapter gMarker = new MarkerAdapter(obj);
         org.opensim.modeling.PropertySet ps = obj.getPropertySet();
-        org.opensim.modeling.Property prop;
+        org.opensim.modeling.Property_Deprecated prop;
         try {
             set.remove("body");
             PropertySupport.Reflection nextNodeProp2;
@@ -99,7 +103,7 @@ public class OneMarkerNode extends OpenSimObjectNode{
             locationNodeProp.setName("location");
             locationNodeProp.setShortDescription(getPropertyComment("location"));
             set.put(locationNodeProp);
-            
+           
             Node.Property fixedProp = set.get("fixed");
             set.remove("fixed");
             Sheet.Set expertSet = sheet.get(Sheet.EXPERT);

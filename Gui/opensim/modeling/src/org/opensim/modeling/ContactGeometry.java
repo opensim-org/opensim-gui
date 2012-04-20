@@ -35,13 +35,30 @@ public class ContactGeometry extends ModelComponent {
     super.delete();
   }
 
-  public void copyData(ContactGeometry geom) {
-    opensimModelJNI.ContactGeometry_copyData(swigCPtr, this, ContactGeometry.getCPtr(geom), geom);
+  public static ContactGeometry safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.ContactGeometry_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new ContactGeometry(cPtr, false);
   }
 
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.ContactGeometry_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.ContactGeometry_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.ContactGeometry_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.ContactGeometry_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new ContactGeometry(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.ContactGeometry_getConcreteClassName(swigCPtr, this);
+  }
+
+  public void copyData(ContactGeometry geom) {
+    opensimModelJNI.ContactGeometry_copyData(swigCPtr, this, ContactGeometry.getCPtr(geom), geom);
   }
 
   public SWIGTYPE_p_SimTK__Vec3 getLocation() {

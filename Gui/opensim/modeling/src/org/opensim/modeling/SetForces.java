@@ -35,6 +35,28 @@ public class SetForces extends OpenSimObject {
     super.delete();
   }
 
+  public static SetForces safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.SetForces_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new SetForces(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.SetForces_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.SetForces_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.SetForces_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new SetForces(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.SetForces_getConcreteClassName(swigCPtr, this);
+  }
+
   public SetForces() {
     this(opensimModelJNI.new_SetForces__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class SetForces extends OpenSimObject {
 
   public SetForces(SetForces aSet) {
     this(opensimModelJNI.new_SetForces__SWIG_3(SetForces.getCPtr(aSet), aSet), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.SetForces_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setup() {

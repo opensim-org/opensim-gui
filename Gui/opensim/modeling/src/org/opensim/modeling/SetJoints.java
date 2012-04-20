@@ -35,6 +35,28 @@ public class SetJoints extends OpenSimObject {
     super.delete();
   }
 
+  public static SetJoints safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.SetJoints_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new SetJoints(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.SetJoints_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.SetJoints_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.SetJoints_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new SetJoints(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.SetJoints_getConcreteClassName(swigCPtr, this);
+  }
+
   public SetJoints() {
     this(opensimModelJNI.new_SetJoints__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class SetJoints extends OpenSimObject {
 
   public SetJoints(SetJoints aSet) {
     this(opensimModelJNI.new_SetJoints__SWIG_3(SetJoints.getCPtr(aSet), aSet), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.SetJoints_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setup() {

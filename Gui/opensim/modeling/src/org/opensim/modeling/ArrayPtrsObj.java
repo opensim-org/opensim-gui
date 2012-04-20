@@ -91,6 +91,10 @@ public class ArrayPtrsObj {
     return opensimModelJNI.ArrayPtrsObj_getSize(swigCPtr, this);
   }
 
+  public int size() {
+    return opensimModelJNI.ArrayPtrsObj_size(swigCPtr, this);
+  }
+
   public int getIndex(OpenSimObject aObject, int aStartIndex) {
     return opensimModelJNI.ArrayPtrsObj_getIndex__SWIG_0(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject, aStartIndex);
   }

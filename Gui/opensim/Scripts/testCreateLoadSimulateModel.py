@@ -1,6 +1,5 @@
 import javax.swing as swing
 import org.opensim.modeling as modeling
-import org.opensim.view.pub as view;
 import org.opensim.tracking as tools
 
 
@@ -74,10 +73,10 @@ osimModel.addForce(muscle2)
 osimModel.print("tug-of-war.osim");
 
 #Add model to GUI
-view.gui.addModel("tug-of-war.osim")
+addModel("tug-of-war.osim")
 
 #Create object that will run the ForwardTool with all default settings
-guiTool = tools.ForwardToolModel(view.gui.getCurrentModel())
+guiTool = tools.ForwardToolModel(getCurrentModel())
 
 #Run tool in background thread updating the GUI
 guiTool.execute()

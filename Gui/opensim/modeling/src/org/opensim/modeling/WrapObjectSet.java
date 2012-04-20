@@ -35,6 +35,28 @@ public class WrapObjectSet extends SetWrapObject {
     super.delete();
   }
 
+  public static WrapObjectSet safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.WrapObjectSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new WrapObjectSet(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.WrapObjectSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.WrapObjectSet_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.WrapObjectSet_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new WrapObjectSet(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.WrapObjectSet_getConcreteClassName(swigCPtr, this);
+  }
+
   public WrapObjectSet() {
     this(opensimModelJNI.new_WrapObjectSet__SWIG_0(), true);
   }

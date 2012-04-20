@@ -35,9 +35,26 @@ public class CoordinateActuator extends Actuator {
     super.delete();
   }
 
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.CoordinateActuator_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
+  public static CoordinateActuator safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.CoordinateActuator_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new CoordinateActuator(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.CoordinateActuator_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.CoordinateActuator_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.CoordinateActuator_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new CoordinateActuator(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.CoordinateActuator_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyData(CoordinateActuator aGenForce) {
@@ -87,23 +104,6 @@ public class CoordinateActuator extends Actuator {
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
     opensimModelJNI.CoordinateActuator_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.CoordinateActuator_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.CoordinateActuator_isA(swigCPtr, this, type);
-  }
-
-  public static CoordinateActuator safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.CoordinateActuator_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new CoordinateActuator(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.CoordinateActuator_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

@@ -110,7 +110,7 @@ public class OneJointNode extends OpenSimObjectNode {
         Joint obj = Joint.safeDownCast(getOpenSimObject());
         JointAdapter gJoint = new JointAdapter(obj);
         org.opensim.modeling.PropertySet ps = obj.getPropertySet();
-        org.opensim.modeling.Property prop;
+        org.opensim.modeling.Property_Deprecated prop;
         try {
             /*set.remove("body");
             PropertySupport.Reflection nextNodeProp2;

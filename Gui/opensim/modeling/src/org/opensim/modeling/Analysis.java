@@ -35,21 +35,26 @@ public class Analysis extends OpenSimObject {
     super.delete();
   }
 
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.Analysis_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.Analysis_isA(swigCPtr, this, type);
-  }
-
   public static Analysis safeDownCast(OpenSimObject obj) {
     long cPtr = opensimModelJNI.Analysis_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Analysis(cPtr, false);
   }
 
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.Analysis_copy__SWIG_0(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.Analysis_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.Analysis_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.Analysis_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Analysis(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.Analysis_getConcreteClassName(swigCPtr, this);
   }
 
   public void set_model(Model value) {
@@ -68,31 +73,6 @@ public class Analysis extends OpenSimObject {
   public Storage get_statesStore() {
     long cPtr = opensimModelJNI.Analysis__statesStore_get(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
-  }
-
-  public Analysis(Model aModel) {
-    this(opensimModelJNI.new_Analysis__SWIG_0(Model.getCPtr(aModel), aModel), true);
-  }
-
-  public Analysis() {
-    this(opensimModelJNI.new_Analysis__SWIG_1(), true);
-  }
-
-  public Analysis(String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelJNI.new_Analysis__SWIG_2(aFileName, aUpdateFromXMLNode), true);
-  }
-
-  public Analysis(String aFileName) {
-    this(opensimModelJNI.new_Analysis__SWIG_3(aFileName), true);
-  }
-
-  public Analysis(Analysis aAnalysis) {
-    this(opensimModelJNI.new_Analysis__SWIG_4(Analysis.getCPtr(aAnalysis), aAnalysis), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.Analysis_copy__SWIG_1(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public int begin(SWIGTYPE_p_SimTK__State s) {

@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class PropertyStr extends Property {
+public class PropertyStr extends Property_Deprecated {
   private long swigCPtr;
 
   public PropertyStr(long cPtr, boolean cMemoryOwn) {
@@ -47,9 +47,9 @@ public class PropertyStr extends Property {
     this(opensimModelJNI.new_PropertyStr__SWIG_2(PropertyStr.getCPtr(aProperty), aProperty), true);
   }
 
-  public Property copy() {
-    long cPtr = opensimModelJNI.PropertyStr_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new Property(cPtr, false);
+  public AbstractProperty clone() {
+    long cPtr = opensimModelJNI.PropertyStr_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new PropertyStr(cPtr, false);
   }
 
   public String getTypeAsString() {

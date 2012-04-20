@@ -35,6 +35,28 @@ public class ControlLinearNode extends OpenSimObject {
     super.delete();
   }
 
+  public static ControlLinearNode safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.ControlLinearNode_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new ControlLinearNode(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.ControlLinearNode_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.ControlLinearNode_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.ControlLinearNode_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new ControlLinearNode(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.ControlLinearNode_getConcreteClassName(swigCPtr, this);
+  }
+
   public ControlLinearNode(double aT, double aValue) {
     this(opensimModelJNI.new_ControlLinearNode__SWIG_0(aT, aValue), true);
   }
@@ -49,11 +71,6 @@ public class ControlLinearNode extends OpenSimObject {
 
   public ControlLinearNode(ControlLinearNode aNode) {
     this(opensimModelJNI.new_ControlLinearNode__SWIG_3(ControlLinearNode.getCPtr(aNode), aNode), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.ControlLinearNode_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setTime(double aT) {

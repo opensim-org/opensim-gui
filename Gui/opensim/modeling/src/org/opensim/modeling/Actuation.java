@@ -35,6 +35,28 @@ public class Actuation extends Analysis {
     super.delete();
   }
 
+  public static Actuation safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.Actuation_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new Actuation(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.Actuation_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.Actuation_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.Actuation_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Actuation(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.Actuation_getConcreteClassName(swigCPtr, this);
+  }
+
   public Actuation(Model aModel) {
     this(opensimModelJNI.new_Actuation__SWIG_0(Model.getCPtr(aModel), aModel), true);
   }
@@ -49,11 +71,6 @@ public class Actuation extends Analysis {
 
   public Actuation(Actuation aObject) {
     this(opensimModelJNI.new_Actuation__SWIG_3(Actuation.getCPtr(aObject), aObject), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.Actuation_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setStorageCapacityIncrements(int aIncrement) {

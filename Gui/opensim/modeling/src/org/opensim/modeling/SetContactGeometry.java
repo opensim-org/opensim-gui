@@ -35,6 +35,28 @@ public class SetContactGeometry extends OpenSimObject {
     super.delete();
   }
 
+  public static SetContactGeometry safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.SetContactGeometry_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new SetContactGeometry(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.SetContactGeometry_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.SetContactGeometry_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.SetContactGeometry_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new SetContactGeometry(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.SetContactGeometry_getConcreteClassName(swigCPtr, this);
+  }
+
   public SetContactGeometry() {
     this(opensimModelJNI.new_SetContactGeometry__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class SetContactGeometry extends OpenSimObject {
 
   public SetContactGeometry(SetContactGeometry aSet) {
     this(opensimModelJNI.new_SetContactGeometry__SWIG_3(SetContactGeometry.getCPtr(aSet), aSet), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.SetContactGeometry_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setup() {

@@ -35,6 +35,28 @@ public class Body extends ModelComponent {
     super.delete();
   }
 
+  public static Body safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.Body_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new Body(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.Body_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.Body_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.Body_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Body(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.Body_getConcreteClassName(swigCPtr, this);
+  }
+
   public Body() {
     this(opensimModelJNI.new_Body__SWIG_0(), true);
   }
@@ -45,11 +67,6 @@ public class Body extends ModelComponent {
 
   public Body(Body aBody) {
     this(opensimModelJNI.new_Body__SWIG_2(Body.getCPtr(aBody), aBody), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.Body_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(Body aBody) {
@@ -141,23 +158,6 @@ public class Body extends ModelComponent {
 
   public WrapObjectSet getWrapObjectSet() {
     return new WrapObjectSet(opensimModelJNI.Body_getWrapObjectSet(swigCPtr, this), false);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.Body_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.Body_isA(swigCPtr, this, type);
-  }
-
-  public static Body safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Body_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new Body(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.Body_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public SWIGTYPE_p_SimTK__MassProperties getMassProperties() {

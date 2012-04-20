@@ -37,6 +37,28 @@ public class MarkerData extends OpenSimObject {
 
   public double[] getTimeRange() { return new double[]{getStartFrameTime(), getLastFrameTime()}; }
 
+  public static MarkerData safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.MarkerData_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new MarkerData(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.MarkerData_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.MarkerData_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.MarkerData_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new MarkerData(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.MarkerData_getConcreteClassName(swigCPtr, this);
+  }
+
   public MarkerData() {
     this(opensimModelJNI.new_MarkerData__SWIG_0(), true);
   }

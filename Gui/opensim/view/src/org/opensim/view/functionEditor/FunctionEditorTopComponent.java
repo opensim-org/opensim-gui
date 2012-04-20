@@ -361,9 +361,9 @@ final public class FunctionEditorTopComponent extends TopComponent implements Ob
    private String getFunctionTypeName(Function func) {
       MultiplierFunction mf = MultiplierFunction.safeDownCast(func);
       if (mf != null && mf.getFunction() != null) {
-         return mf.getFunction().getType();
+         return mf.getFunction().getConcreteClassName();
       } else {
-         return func.getType();
+         return func.getConcreteClassName();
       }
    }
 
@@ -385,7 +385,7 @@ final public class FunctionEditorTopComponent extends TopComponent implements Ob
           // Make a new MultiplierFunction to hold the new sub-function. The
           // MultiplierFunction must be new too so that the FunctionReplacedEvent
           // will contain two different objects.
-          newFunction = Function.makeFunctionOfType(function, function.getType());
+          newFunction = Function.makeFunctionOfType(function, function.getConcreteClassName());
           mf = MultiplierFunction.safeDownCast(newFunction);
           mf.setFunction(newf);
        } else {
@@ -705,7 +705,7 @@ final public class FunctionEditorTopComponent extends TopComponent implements Ob
             backupFunctionButton.setEnabled(true);
             restoreFunctionButton.setEnabled(true);
             typeComboBox.setEnabled(true);
-            typeComboBox.setSelectedIndex(findElement(functionTypeNames, constant.getType()));
+            typeComboBox.setSelectedIndex(findElement(functionTypeNames, constant.getConcreteClassName()));
             javax.swing.JLabel valueLabel = new javax.swing.JLabel();
             valueLabel.setText("value");
             javax.swing.JTextField valueField = new javax.swing.JTextField();
@@ -958,7 +958,7 @@ final public class FunctionEditorTopComponent extends TopComponent implements Ob
    
    private void backupFunction() {
       if (function != null)
-         savedFunction = Function.safeDownCast(function.copy());
+         savedFunction = Function.safeDownCast(function.clone());
       else
          savedFunction = null;
    }

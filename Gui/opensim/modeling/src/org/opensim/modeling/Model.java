@@ -52,6 +52,28 @@ public class Model extends ModelComponent {
     else return "";
   }
 
+  public static Model safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.Model_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new Model(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.Model_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.Model_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.Model_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Model(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.Model_getConcreteClassName(swigCPtr, this);
+  }
+
   public Model() {
     this(opensimModelJNI.new_Model__SWIG_0(), true);
   }
@@ -62,11 +84,6 @@ public class Model extends ModelComponent {
 
   public Model(Model source) {
     this(opensimModelJNI.new_Model__SWIG_2(Model.getCPtr(source), source), true);
-  }
-
-  public Model clone() {
-    long cPtr = opensimModelJNI.Model_clone(swigCPtr, this);
-    return (cPtr == 0) ? null : new Model(cPtr, false);
   }
 
   public void setup() throws java.io.IOException {
@@ -97,12 +114,12 @@ public class Model extends ModelComponent {
     return opensimModelJNI.Model_hasVisualizer(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_OpenSim__ModelVisualizer getVisualizer() {
-    return new SWIGTYPE_p_OpenSim__ModelVisualizer(opensimModelJNI.Model_getVisualizer(swigCPtr, this), false);
+  public ModelVisualizer getVisualizer() {
+    return new ModelVisualizer(opensimModelJNI.Model_getVisualizer(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_OpenSim__ModelVisualizer updVisualizer() {
-    return new SWIGTYPE_p_OpenSim__ModelVisualizer(opensimModelJNI.Model_updVisualizer(swigCPtr, this), false);
+  public ModelVisualizer updVisualizer() {
+    return new ModelVisualizer(opensimModelJNI.Model_updVisualizer(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_SimTK__State initSystem() throws java.io.IOException {
@@ -291,6 +308,14 @@ public class Model extends ModelComponent {
 
   public ForceSet updForceSet() {
     return new ForceSet(opensimModelJNI.Model_updForceSet(swigCPtr, this), false);
+  }
+
+  public ComponentSet getMiscModelComponentSet() {
+    return new ComponentSet(opensimModelJNI.Model_getMiscModelComponentSet(swigCPtr, this), false);
+  }
+
+  public ComponentSet updMiscModelComponentSet() {
+    return new ComponentSet(opensimModelJNI.Model_updMiscModelComponentSet(swigCPtr, this), false);
   }
 
   public int getNumAnalyses() {
@@ -519,11 +544,6 @@ public class Model extends ModelComponent {
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
     opensimModelJNI.Model_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.Model_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new Model(cPtr, false);
   }
 
   public void setup(Model model) {

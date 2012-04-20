@@ -35,9 +35,26 @@ public class Constraint extends ModelComponent {
     super.delete();
   }
 
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.Constraint_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
+  public static Constraint safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.Constraint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new Constraint(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.Constraint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.Constraint_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.Constraint_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Constraint(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.Constraint_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyData(Constraint aConstraint) {
@@ -74,23 +91,6 @@ public class Constraint extends ModelComponent {
 
   public void setContactPointForInducedAccelerations(SWIGTYPE_p_SimTK__State s, SWIGTYPE_p_SimTK__Vec3 point) {
     opensimModelJNI.Constraint_setContactPointForInducedAccelerations(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), SWIGTYPE_p_SimTK__Vec3.getCPtr(point));
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.Constraint_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.Constraint_isA(swigCPtr, this, type);
-  }
-
-  public static Constraint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Constraint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new Constraint(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.Constraint_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

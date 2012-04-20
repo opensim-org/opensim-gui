@@ -91,6 +91,10 @@ public class ArrayPtrsPropertyGroup {
     return opensimModelJNI.ArrayPtrsPropertyGroup_getSize(swigCPtr, this);
   }
 
+  public int size() {
+    return opensimModelJNI.ArrayPtrsPropertyGroup_size(swigCPtr, this);
+  }
+
   public int getIndex(PropertyGroup aObject, int aStartIndex) {
     return opensimModelJNI.ArrayPtrsPropertyGroup_getIndex__SWIG_0(swigCPtr, this, PropertyGroup.getCPtr(aObject), aObject, aStartIndex);
   }

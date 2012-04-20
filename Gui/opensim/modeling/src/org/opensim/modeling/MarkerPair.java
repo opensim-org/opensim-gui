@@ -35,21 +35,26 @@ public class MarkerPair extends OpenSimObject {
     super.delete();
   }
 
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.MarkerPair_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.MarkerPair_isA(swigCPtr, this, type);
-  }
-
   public static MarkerPair safeDownCast(OpenSimObject obj) {
     long cPtr = opensimModelJNI.MarkerPair_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new MarkerPair(cPtr, false);
   }
 
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.MarkerPair_copy__SWIG_0(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.MarkerPair_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.MarkerPair_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.MarkerPair_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new MarkerPair(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.MarkerPair_getConcreteClassName(swigCPtr, this);
   }
 
   public MarkerPair() {
@@ -62,11 +67,6 @@ public class MarkerPair extends OpenSimObject {
 
   public MarkerPair(String aName1, String aName2) {
     this(opensimModelJNI.new_MarkerPair__SWIG_2(aName1, aName2), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.MarkerPair_copy__SWIG_1(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(MarkerPair aMarkerPair) {

@@ -252,7 +252,7 @@ class BodySetScaleFactors extends Vector<BodyScaleFactors> {
                 scales[j]=get(i).manualScales[j];
             }
             scale.setScaleFactors(scales);
-            modelScaler.getScaleSet().append(Scale.safeDownCast(scale.copy()));
+            modelScaler.getScaleSet().append(Scale.safeDownCast(scale.clone()));
          }
       }
       if(modelScaler.getScaleSet().getSize()>0) array.append("manualScale");
@@ -274,7 +274,7 @@ class BodySetScaleFactors extends Vector<BodyScaleFactors> {
       int bodyScaleIndex = bodyScaleSet.getIndex(bodyName);
       BodyScale bodyScale = null;
       if(bodyScaleIndex < 0) {
-         bodyScale = BodyScale.safeDownCast((new BodyScale()).copy()); // Create it on C++ side
+         bodyScale = BodyScale.safeDownCast((new BodyScale()).clone()); // Create it on C++ side
          bodyScale.setName(bodyName);
          modelScaler.getMeasurementSet().get(index).getBodyScaleSet().append(bodyScale);
       } else bodyScale = bodyScaleSet.get(bodyScaleIndex);
@@ -763,7 +763,7 @@ public class ScaleToolModel extends Observable implements Observer {
          scale.setSegmentName(bodySet.get(i).getName());
          scale.setScaleFactors(identityScale);
          scale.setApply(true);
-         scaleSet.append(Scale.safeDownCast(scale.copy()));
+         scaleSet.append(Scale.safeDownCast(scale.clone()));
       }
       return scaleSet;
    }
@@ -830,7 +830,7 @@ public class ScaleToolModel extends Observable implements Observer {
    void addMarkerPair(int i) {
       MeasurementSet measurementSet = getMeasurementSet();
       MarkerPair pair = new MarkerPair("Unassigned", "Unassigned");
-      measurementSet.get(i).getMarkerPairSet().insert(0,MarkerPair.safeDownCast(pair.copy()));
+      measurementSet.get(i).getMarkerPairSet().insert(0,MarkerPair.safeDownCast(pair.clone()));
       // Recompute
       recomputeMeasurement(i);
       // Fire event
@@ -850,7 +850,7 @@ public class ScaleToolModel extends Observable implements Observer {
       MeasurementSet measurementSet = getMeasurementSet();
       Measurement measurement = new Measurement();
       measurement.setName(name);
-      measurementSet.append(Measurement.safeDownCast(measurement.copy()));
+      measurementSet.append(Measurement.safeDownCast(measurement.clone()));
       // Update parallel measurementValues array
       measurementValues.add(null);
       // Fire event

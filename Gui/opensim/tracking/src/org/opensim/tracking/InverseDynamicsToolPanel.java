@@ -638,7 +638,7 @@ private void reuseSelectedQuantitiesCheckBoxActionPerformed(java.awt.event.Actio
             }
             else {
                 OpenSimObject objGeneric = OpenSimObject.makeObjectFromFile(controlsFile);
-                if (objGeneric==null || !objGeneric.getType().equalsIgnoreCase("ControlSet")){
+                if (objGeneric==null || !objGeneric.getConcreteClassName().equalsIgnoreCase("ControlSet")){
                     DialogDisplayer.getDefault().notify(
                             new NotifyDescriptor.Message("Could not construct excitations from the specified file."));
                     return;

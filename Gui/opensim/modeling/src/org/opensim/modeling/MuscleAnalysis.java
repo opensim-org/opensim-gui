@@ -35,6 +35,28 @@ public class MuscleAnalysis extends Analysis {
     super.delete();
   }
 
+  public static MuscleAnalysis safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.MuscleAnalysis_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new MuscleAnalysis(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.MuscleAnalysis_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.MuscleAnalysis_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.MuscleAnalysis_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new MuscleAnalysis(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.MuscleAnalysis_getConcreteClassName(swigCPtr, this);
+  }
+
   public MuscleAnalysis(Model aModel) {
     this(opensimModelJNI.new_MuscleAnalysis__SWIG_0(Model.getCPtr(aModel), aModel), true);
   }
@@ -49,11 +71,6 @@ public class MuscleAnalysis extends Analysis {
 
   public MuscleAnalysis(MuscleAnalysis aObject) {
     this(opensimModelJNI.new_MuscleAnalysis__SWIG_3(MuscleAnalysis.getCPtr(aObject), aObject), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.MuscleAnalysis_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setModel(Model aModel) {
@@ -149,23 +166,6 @@ public class MuscleAnalysis extends Analysis {
 
   public int printResults(String aBaseName) {
     return opensimModelJNI.MuscleAnalysis_printResults__SWIG_3(swigCPtr, this, aBaseName);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.MuscleAnalysis_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.MuscleAnalysis_isA(swigCPtr, this, type);
-  }
-
-  public static MuscleAnalysis safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.MuscleAnalysis_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new MuscleAnalysis(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.MuscleAnalysis_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

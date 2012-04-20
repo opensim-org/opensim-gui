@@ -35,6 +35,28 @@ public class SetCoordinates extends OpenSimObject {
     super.delete();
   }
 
+  public static SetCoordinates safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.SetCoordinates_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new SetCoordinates(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.SetCoordinates_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.SetCoordinates_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.SetCoordinates_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new SetCoordinates(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.SetCoordinates_getConcreteClassName(swigCPtr, this);
+  }
+
   public SetCoordinates() {
     this(opensimModelJNI.new_SetCoordinates__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class SetCoordinates extends OpenSimObject {
 
   public SetCoordinates(SetCoordinates aSet) {
     this(opensimModelJNI.new_SetCoordinates__SWIG_3(SetCoordinates.getCPtr(aSet), aSet), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.SetCoordinates_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setup() {

@@ -35,6 +35,28 @@ public class JointSet extends ModelComponentSetJoints {
     super.delete();
   }
 
+  public static JointSet safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.JointSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new JointSet(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.JointSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.JointSet_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.JointSet_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new JointSet(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.JointSet_getConcreteClassName(swigCPtr, this);
+  }
+
   public JointSet() {
     this(opensimModelJNI.new_JointSet__SWIG_0(), true);
   }

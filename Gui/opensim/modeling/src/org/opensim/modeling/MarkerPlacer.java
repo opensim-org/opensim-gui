@@ -35,17 +35,34 @@ public class MarkerPlacer extends OpenSimObject {
     super.delete();
   }
 
+  public static MarkerPlacer safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.MarkerPlacer_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new MarkerPlacer(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.MarkerPlacer_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.MarkerPlacer_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.MarkerPlacer_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new MarkerPlacer(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.MarkerPlacer_getConcreteClassName(swigCPtr, this);
+  }
+
   public MarkerPlacer() {
     this(opensimModelJNI.new_MarkerPlacer__SWIG_0(), true);
   }
 
   public MarkerPlacer(MarkerPlacer aMarkerPlacementParams) {
     this(opensimModelJNI.new_MarkerPlacer__SWIG_1(MarkerPlacer.getCPtr(aMarkerPlacementParams), aMarkerPlacementParams), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.MarkerPlacer_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(MarkerPlacer aMarkerPlacementParams) {

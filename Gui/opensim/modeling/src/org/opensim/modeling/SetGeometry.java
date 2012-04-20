@@ -35,6 +35,28 @@ public class SetGeometry extends OpenSimObject {
     super.delete();
   }
 
+  public static SetGeometry safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.SetGeometry_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new SetGeometry(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.SetGeometry_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.SetGeometry_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.SetGeometry_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new SetGeometry(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.SetGeometry_getConcreteClassName(swigCPtr, this);
+  }
+
   public SetGeometry() {
     this(opensimModelJNI.new_SetGeometry__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class SetGeometry extends OpenSimObject {
 
   public SetGeometry(SetGeometry aSet) {
     this(opensimModelJNI.new_SetGeometry__SWIG_3(SetGeometry.getCPtr(aSet), aSet), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.SetGeometry_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setup() {

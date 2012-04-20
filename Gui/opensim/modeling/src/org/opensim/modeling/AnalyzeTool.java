@@ -35,6 +35,28 @@ public class AnalyzeTool extends AbstractTool {
     super.delete();
   }
 
+  public static AnalyzeTool safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.AnalyzeTool_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new AnalyzeTool(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.AnalyzeTool_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.AnalyzeTool_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.AnalyzeTool_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new AnalyzeTool(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.AnalyzeTool_getConcreteClassName(swigCPtr, this);
+  }
+
   public AnalyzeTool() {
     this(opensimModelJNI.new_AnalyzeTool__SWIG_0(), true);
   }
@@ -53,11 +75,6 @@ public class AnalyzeTool extends AbstractTool {
 
   public AnalyzeTool(Model aModel) {
     this(opensimModelJNI.new_AnalyzeTool__SWIG_4(Model.getCPtr(aModel), aModel), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.AnalyzeTool_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {

@@ -35,17 +35,34 @@ public class WrapEllipsoid extends WrapObject {
     super.delete();
   }
 
+  public static WrapEllipsoid safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.WrapEllipsoid_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new WrapEllipsoid(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.WrapEllipsoid_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.WrapEllipsoid_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.WrapEllipsoid_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new WrapEllipsoid(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.WrapEllipsoid_getConcreteClassName(swigCPtr, this);
+  }
+
   public WrapEllipsoid() {
     this(opensimModelJNI.new_WrapEllipsoid__SWIG_0(), true);
   }
 
   public WrapEllipsoid(WrapEllipsoid aWrapEllipsoid) {
     this(opensimModelJNI.new_WrapEllipsoid__SWIG_1(WrapEllipsoid.getCPtr(aWrapEllipsoid), aWrapEllipsoid), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.WrapEllipsoid_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(WrapEllipsoid aWrapEllipsoid) {
@@ -70,23 +87,6 @@ public class WrapEllipsoid extends WrapObject {
 
   public void setup(Model aModel, Body aBody) {
     opensimModelJNI.WrapEllipsoid_setup(swigCPtr, this, Model.getCPtr(aModel), aModel, Body.getCPtr(aBody), aBody);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.WrapEllipsoid_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.WrapEllipsoid_isA(swigCPtr, this, type);
-  }
-
-  public static WrapEllipsoid safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.WrapEllipsoid_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new WrapEllipsoid(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.WrapEllipsoid_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

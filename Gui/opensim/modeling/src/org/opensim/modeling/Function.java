@@ -35,9 +35,26 @@ public class Function extends OpenSimObject {
     super.delete();
   }
 
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.Function_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
+  public static Function safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.Function_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new Function(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.Function_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.Function_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.Function_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Function(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.Function_getConcreteClassName(swigCPtr, this);
   }
 
   public void init(Function aFunction) {
@@ -68,23 +85,6 @@ public class Function extends OpenSimObject {
   public SWIGTYPE_p_SimTK__Function createSimTKFunction() {
     long cPtr = opensimModelJNI.Function_createSimTKFunction(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_SimTK__Function(cPtr, false);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.Function_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.Function_isA(swigCPtr, this, type);
-  }
-
-  public static Function safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Function_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new Function(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.Function_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

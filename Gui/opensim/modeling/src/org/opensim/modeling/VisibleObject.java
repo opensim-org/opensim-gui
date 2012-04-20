@@ -35,6 +35,28 @@ public class VisibleObject extends OpenSimObject {
     super.delete();
   }
 
+  public static VisibleObject safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.VisibleObject_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new VisibleObject(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.VisibleObject_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.VisibleObject_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.VisibleObject_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new VisibleObject(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.VisibleObject_getConcreteClassName(swigCPtr, this);
+  }
+
   public VisibleObject() {
     this(opensimModelJNI.new_VisibleObject__SWIG_0(), true);
   }
@@ -45,11 +67,6 @@ public class VisibleObject extends OpenSimObject {
 
   public VisibleObject(VisibleObject aVisibleObject) {
     this(opensimModelJNI.new_VisibleObject__SWIG_2(VisibleObject.getCPtr(aVisibleObject), aVisibleObject), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.VisibleObject_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setOwner(OpenSimObject aObject) {

@@ -1,11 +1,8 @@
-import sys
 import javax.swing as swing
-import java.lang as lang
 import org.opensim.modeling as modeling
-import org.opensim.view.pub as view
 
 # Get handle to current model in GUI
-cModel = view.gui.getCurrentModel()
+cModel = getCurrentModel()
 # Create a fresh copy
 myModel = modeling.Model(cModel)
 # initialize the copy

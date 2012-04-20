@@ -35,21 +35,26 @@ public class BodyScale extends OpenSimObject {
     super.delete();
   }
 
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.BodyScale_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.BodyScale_isA(swigCPtr, this, type);
-  }
-
   public static BodyScale safeDownCast(OpenSimObject obj) {
     long cPtr = opensimModelJNI.BodyScale_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new BodyScale(cPtr, false);
   }
 
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.BodyScale_copy__SWIG_0(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.BodyScale_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.BodyScale_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.BodyScale_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new BodyScale(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.BodyScale_getConcreteClassName(swigCPtr, this);
   }
 
   public BodyScale() {
@@ -58,11 +63,6 @@ public class BodyScale extends OpenSimObject {
 
   public BodyScale(BodyScale aBodyScale) {
     this(opensimModelJNI.new_BodyScale__SWIG_1(BodyScale.getCPtr(aBodyScale), aBodyScale), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.BodyScale_copy__SWIG_1(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(BodyScale aBodyScale) {

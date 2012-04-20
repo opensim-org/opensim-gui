@@ -27,11 +27,8 @@ package org.opensim.tracking;
 
 import java.io.File;
 import java.util.Observable;
-import java.util.Observer;
 import java.util.Vector;
 import java.util.prefs.Preferences;
-import org.openide.DialogDisplayer;
-import org.openide.NotifyDescriptor;
 import org.opensim.modeling.AbstractTool;
 import org.opensim.modeling.Analysis;
 import org.opensim.modeling.AnalysisSet;
@@ -42,8 +39,6 @@ import org.opensim.modeling.Storage;
 import org.opensim.tracking.AbstractToolModel.Operation;
 import org.opensim.utils.FileUtils;
 import org.opensim.utils.TheApp;
-import org.opensim.view.ModelEvent;
-import org.opensim.view.pub.OpenSimDB;
 
 public abstract class AbstractToolModel extends Observable {
 
@@ -102,8 +97,8 @@ public abstract class AbstractToolModel extends Observable {
    //------------------------------------------------------------------------
    public AnalysisSet getAnalysisSet() { return tool.getAnalysisSet(); }
    public void addCopyOfAnalysis(Analysis analysis) {
-      Analysis analysisCopy = Analysis.safeDownCast(analysis.copy()); // C++-side copy
-      analysisCopy.setName(analysis.getType()); // Change name...  otherwise name will be "default" since currently the analyses we're making copies of come from the registered object table
+      Analysis analysisCopy = Analysis.safeDownCast(analysis.clone()); // C++-side copy
+      analysisCopy.setName(analysis.getConcreteClassName()); // Change name...  otherwise name will be "default" since currently the analyses we're making copies of come from the registered object table
       getAnalysisSet().append(analysisCopy);
       setModified(Operation.AnalysisAddedOrRemoved);
    }

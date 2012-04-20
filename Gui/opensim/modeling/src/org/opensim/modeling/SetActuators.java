@@ -35,6 +35,28 @@ public class SetActuators extends OpenSimObject {
     super.delete();
   }
 
+  public static SetActuators safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.SetActuators_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new SetActuators(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.SetActuators_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.SetActuators_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.SetActuators_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new SetActuators(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.SetActuators_getConcreteClassName(swigCPtr, this);
+  }
+
   public SetActuators() {
     this(opensimModelJNI.new_SetActuators__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class SetActuators extends OpenSimObject {
 
   public SetActuators(SetActuators aSet) {
     this(opensimModelJNI.new_SetActuators__SWIG_3(SetActuators.getCPtr(aSet), aSet), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.SetActuators_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setup() {

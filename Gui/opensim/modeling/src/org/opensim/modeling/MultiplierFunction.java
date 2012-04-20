@@ -35,6 +35,28 @@ public class MultiplierFunction extends Function {
     super.delete();
   }
 
+  public static MultiplierFunction safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.MultiplierFunction_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new MultiplierFunction(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.MultiplierFunction_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.MultiplierFunction_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.MultiplierFunction_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new MultiplierFunction(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.MultiplierFunction_getConcreteClassName(swigCPtr, this);
+  }
+
   public MultiplierFunction() {
     this(opensimModelJNI.new_MultiplierFunction__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class MultiplierFunction extends Function {
 
   public MultiplierFunction(MultiplierFunction aFunction) {
     this(opensimModelJNI.new_MultiplierFunction__SWIG_3(MultiplierFunction.getCPtr(aFunction), aFunction), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.MultiplierFunction_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void init(Function aFunction) {
@@ -96,23 +113,6 @@ public class MultiplierFunction extends Function {
   public SWIGTYPE_p_SimTK__Function createSimTKFunction() {
     long cPtr = opensimModelJNI.MultiplierFunction_createSimTKFunction(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_SimTK__Function(cPtr, false);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.MultiplierFunction_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.MultiplierFunction_isA(swigCPtr, this, type);
-  }
-
-  public static MultiplierFunction safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.MultiplierFunction_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new MultiplierFunction(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.MultiplierFunction_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

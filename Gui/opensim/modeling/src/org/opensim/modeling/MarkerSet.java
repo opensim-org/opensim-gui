@@ -35,6 +35,28 @@ public class MarkerSet extends SetMarkers {
     super.delete();
   }
 
+  public static MarkerSet safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.MarkerSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new MarkerSet(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.MarkerSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.MarkerSet_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.MarkerSet_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new MarkerSet(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.MarkerSet_getConcreteClassName(swigCPtr, this);
+  }
+
   public MarkerSet() {
     this(opensimModelJNI.new_MarkerSet__SWIG_0(), true);
   }
@@ -45,11 +67,6 @@ public class MarkerSet extends SetMarkers {
 
   public MarkerSet(MarkerSet aMarkerSet) {
     this(opensimModelJNI.new_MarkerSet__SWIG_2(MarkerSet.getCPtr(aMarkerSet), aMarkerSet), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.MarkerSet_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setup(Model aModel) {

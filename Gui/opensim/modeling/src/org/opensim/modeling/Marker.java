@@ -35,17 +35,34 @@ public class Marker extends OpenSimObject {
     super.delete();
   }
 
+  public static Marker safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.Marker_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new Marker(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.Marker_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.Marker_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.Marker_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Marker(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.Marker_getConcreteClassName(swigCPtr, this);
+  }
+
   public Marker() {
     this(opensimModelJNI.new_Marker__SWIG_0(), true);
   }
 
   public Marker(Marker aMarker) {
     this(opensimModelJNI.new_Marker__SWIG_1(Marker.getCPtr(aMarker), aMarker), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.Marker_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public static void deleteMarker(Marker aMarker) {
@@ -152,23 +169,6 @@ public class Marker extends OpenSimObject {
 
   public void setVirtual(boolean aTrueFalse) {
     opensimModelJNI.Marker_setVirtual(swigCPtr, this, aTrueFalse);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.Marker_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.Marker_isA(swigCPtr, this, type);
-  }
-
-  public static Marker safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Marker_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new Marker(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.Marker_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

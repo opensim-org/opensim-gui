@@ -35,6 +35,28 @@ public class SetAnalysis extends OpenSimObject {
     super.delete();
   }
 
+  public static SetAnalysis safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.SetAnalysis_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new SetAnalysis(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.SetAnalysis_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.SetAnalysis_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.SetAnalysis_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new SetAnalysis(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.SetAnalysis_getConcreteClassName(swigCPtr, this);
+  }
+
   public SetAnalysis() {
     this(opensimModelJNI.new_SetAnalysis__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class SetAnalysis extends OpenSimObject {
 
   public SetAnalysis(SetAnalysis aSet) {
     this(opensimModelJNI.new_SetAnalysis__SWIG_3(SetAnalysis.getCPtr(aSet), aSet), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.SetAnalysis_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setup() {

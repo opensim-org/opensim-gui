@@ -66,7 +66,7 @@ import org.opensim.modeling.WrapEllipsoid;
 import org.opensim.modeling.BodySet;
 import org.opensim.modeling.Function;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.Property;
+import org.opensim.modeling.Property_Deprecated;
 import org.opensim.modeling.PropertySet;
 import org.opensim.modeling.SetPathWrap;
 import org.opensim.modeling.ArrayPathPoint;
@@ -487,7 +487,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
    
    private void backupActuator() {
       setPendingChanges(false, currentAct, true);
-      Muscle savedAct = Muscle.safeDownCast(currentAct.copy());
+      Muscle savedAct = Muscle.safeDownCast(currentAct.clone());
       savedActs.put(currentAct, savedAct);
    }
 
@@ -507,7 +507,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
          if (pendingChanges.get(act)) {
              Muscle savedAct = savedActs.get(act);
              // Copy the elements of the saved actuator into the [regular] actuator.
-             savedAct.copy(act);
+             savedAct.assign(act);
          }
       }
 
@@ -536,7 +536,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
          for (int i=0; i<actuators.getSize(); i++) {
             Muscle muscle = Muscle.safeDownCast(actuators.get(i));
             if (muscle != null) {
-               Muscle savedMuscle = Muscle.safeDownCast(muscle.copy());
+               Muscle savedMuscle = Muscle.safeDownCast(muscle.clone());
                if (savedMuscle != null) {
                   savedActs.put(muscle, savedMuscle);
                   pendingChanges.put(muscle, false);
@@ -576,7 +576,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
       // Replace the actuator with the saved one.
        currentAct = savedAct; // currentAct now points to the actuator in the model's actuator set.
       // Make a new backup copy of the actuator.
-      savedAct = Muscle.safeDownCast(currentAct.copy());
+      savedAct = Muscle.safeDownCast(currentAct.clone());
       // Put the new current actuator in the pendingChanges and savedActs hash tables.
       pendingChanges.put(currentAct, true); // old state must have been true for restore to be called
       savedActs.put(currentAct, savedAct);
@@ -1133,7 +1133,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
    }
       
    public void DoublePropertyEntered(javax.swing.JTextField field, int propertyNum) {
-      Property prop = null;
+      Property_Deprecated prop = null;
       try {
          prop = currentAct.getPropertySet().get(propertyNum);
       } catch (IOException ex) {
@@ -1160,7 +1160,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
    }
 
    public void IntPropertyEntered(javax.swing.JTextField field, int propertyNum) {
-      Property prop = null;
+      Property_Deprecated prop = null;
       try {
          prop = currentAct.getPropertySet().get(propertyNum);
       } catch (IOException ex) {
@@ -1187,7 +1187,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
    }
 
    public void EditPropertyFunction(javax.swing.JButton button, int propertyNum) {
-      Property prop = null;
+      Property_Deprecated prop = null;
       try {
          prop = currentAct.getPropertySet().get(propertyNum);
       } catch (IOException ex) {
@@ -2230,7 +2230,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
          RestoreAllButton.setEnabled(false);
          return;
       } else {
-         MuscleTypeLabel.setText("Type: " + currentAct.getType());
+         MuscleTypeLabel.setText("Type: " + currentAct.getConcreteClassName());
          MuscleNameTextField.setEnabled(true);
          //MuscleTypeComboBox.setEnabled(true);
          //BackupButton.setEnabled(true);
@@ -2276,15 +2276,15 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
 
       // Loop through the properties, adding each one to the appropriate panel.
       for (i = 0; i < ps.getSize(); i++) {
-         Property p;
+         Property_Deprecated p;
          try {
             p = ps.get(i);
             final int num = i;
             int groupNum = ps.getGroupIndexContaining(p);
             if (groupNum < 0)
                groupNum = numGroups; // this is the index of the "other" panel
-            if (p.getType() == org.opensim.modeling.Property.PropertyType.Dbl ||
-                    p.getType() == org.opensim.modeling.Property.PropertyType.Int) {
+            if (p.getType() == org.opensim.modeling.Property_Deprecated.PropertyType.Dbl ||
+                    p.getType() == org.opensim.modeling.Property_Deprecated.PropertyType.Int) {
                javax.swing.JLabel propLabel = new javax.swing.JLabel();
                propLabel.setText(p.getName());
                propLabel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -2293,7 +2293,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
                javax.swing.JTextField propField = new javax.swing.JTextField();
                propField.setBounds(210, 20 + tabPropertyCount[groupNum] * 22, 120, 21);
                propField.setHorizontalAlignment(SwingConstants.TRAILING);
-               if (p.getType() == org.opensim.modeling.Property.PropertyType.Dbl)
+               if (p.getType() == org.opensim.modeling.Property_Deprecated.PropertyType.Dbl)
                   propField.setText(doublePropFormat.format(p.getValueDbl()));
                else
                   propField.setText(p.toString());
@@ -2301,7 +2301,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
                propPanel[groupNum].add(propLabel);
                propPanel[groupNum].add(propField);
                tabPropertyCount[groupNum]++;
-               if (p.getType() == org.opensim.modeling.Property.PropertyType.Dbl) {
+               if (p.getType() == org.opensim.modeling.Property_Deprecated.PropertyType.Dbl) {
                   propField.addActionListener(new java.awt.event.ActionListener() {
                      public void actionPerformed(java.awt.event.ActionEvent evt) {
                         DoublePropertyEntered(((javax.swing.JTextField)evt.getSource()), num);
@@ -2313,7 +2313,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
                            DoublePropertyEntered(((javax.swing.JTextField)evt.getSource()), num);
                      }
                   });
-               } else if (p.getType() == org.opensim.modeling.Property.PropertyType.Int) {
+               } else if (p.getType() == org.opensim.modeling.Property_Deprecated.PropertyType.Int) {
                   propField.addActionListener(new java.awt.event.ActionListener() {
                      public void actionPerformed(java.awt.event.ActionEvent evt) {
                         IntPropertyEntered(((javax.swing.JTextField)evt.getSource()), num);
@@ -2326,7 +2326,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
                      }
                   });
                }
-            } else if (p.getType() == org.opensim.modeling.Property.PropertyType.ObjPtr) {
+            } else if (p.getType() == org.opensim.modeling.Property_Deprecated.PropertyType.ObjPtr) {
                OpenSimObject obj = p.getValueObjPtr();
                Function func = Function.safeDownCast(obj);
                if (func != null) {

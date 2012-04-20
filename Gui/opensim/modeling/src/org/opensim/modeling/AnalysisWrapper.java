@@ -50,6 +50,28 @@ public class AnalysisWrapper extends Analysis {
     opensimModelJNI.AnalysisWrapper_change_ownership(this, swigCPtr, true);
   }
 
+  public static AnalysisWrapper safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.AnalysisWrapper_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new AnalysisWrapper(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    if (getClass() == AnalysisWrapper.class) opensimModelJNI.AnalysisWrapper_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject); else opensimModelJNI.AnalysisWrapper_assignSwigExplicitAnalysisWrapper(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.AnalysisWrapper_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = (getClass() == AnalysisWrapper.class) ? opensimModelJNI.AnalysisWrapper_clone(swigCPtr, this) : opensimModelJNI.AnalysisWrapper_cloneSwigExplicitAnalysisWrapper(swigCPtr, this);
+    return (cPtr == 0) ? null : new AnalysisWrapper(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return (getClass() == AnalysisWrapper.class) ? opensimModelJNI.AnalysisWrapper_getConcreteClassName(swigCPtr, this) : opensimModelJNI.AnalysisWrapper_getConcreteClassNameSwigExplicitAnalysisWrapper(swigCPtr, this);
+  }
+
   public AnalysisWrapper(Model aModel) {
     this(opensimModelJNI.new_AnalysisWrapper__SWIG_0(Model.getCPtr(aModel), aModel), true);
     opensimModelJNI.AnalysisWrapper_director_connect(this, swigCPtr, swigCMemOwn, true);

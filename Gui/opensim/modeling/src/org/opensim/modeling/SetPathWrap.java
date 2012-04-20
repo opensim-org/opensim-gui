@@ -35,6 +35,28 @@ public class SetPathWrap extends OpenSimObject {
     super.delete();
   }
 
+  public static SetPathWrap safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.SetPathWrap_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new SetPathWrap(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.SetPathWrap_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.SetPathWrap_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.SetPathWrap_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new SetPathWrap(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.SetPathWrap_getConcreteClassName(swigCPtr, this);
+  }
+
   public SetPathWrap() {
     this(opensimModelJNI.new_SetPathWrap__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class SetPathWrap extends OpenSimObject {
 
   public SetPathWrap(SetPathWrap aSet) {
     this(opensimModelJNI.new_SetPathWrap__SWIG_3(SetPathWrap.getCPtr(aSet), aSet), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.SetPathWrap_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setup() {

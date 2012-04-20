@@ -91,6 +91,10 @@ public class ArrayObjPtr {
     return opensimModelJNI.ArrayObjPtr_getSize(swigCPtr, this);
   }
 
+  public int size() {
+    return opensimModelJNI.ArrayObjPtr_size(swigCPtr, this);
+  }
+
   public int append(OpenSimObject aValue) {
     return opensimModelJNI.ArrayObjPtr_append__SWIG_0(swigCPtr, this, OpenSimObject.getCPtr(aValue), aValue);
   }

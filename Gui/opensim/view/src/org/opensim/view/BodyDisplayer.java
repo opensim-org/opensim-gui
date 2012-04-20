@@ -179,6 +179,14 @@ public class BodyDisplayer extends vtkAssembly
       updateMapsToSupportPicking(body, mapObject2VtkObjects, mapVtkObjects2Objects);
       modelAssembly.AddPart(this);
     }
+
+    public void applyPositionAndOrientation(FrameActor frame, double[] orientation, double[] location) {
+        frame.SetOrientation(0., 0., 0.);
+        frame.RotateX(orientation[0]);
+        frame.RotateY(orientation[1]);
+        frame.RotateZ(orientation[2]);
+        frame.SetPosition(location);
+    }
 /*
     private vtkActor createOneDisplayGeometry(final String modelFilePath, final double[] bodyScales, final double[] bodyRotTrans, final DisplayGeometry gPiece) {
         String boneFile = GeometryFileLocator.getInstance().getFullname(modelFilePath,gPiece.getGeometryFile(), false);
@@ -231,10 +239,9 @@ public class BodyDisplayer extends vtkAssembly
             double[] location = new double[3];
             double[] orientation = new double[3];
             body.getJoint().getLocationInChild(location);
-            jointBFrame.SetPosition(location);
             body.getJoint().getOrientationInChild(orientation);
             for (int i=0; i<3; i++) orientation[i]= Math.toDegrees(orientation[i]);
-            jointBFrame.SetOrientation(orientation);
+            applyPositionAndOrientation(jointBFrame, orientation, location);
             AddPart(jointBFrame);
             Modified();
         }
@@ -251,10 +258,11 @@ public class BodyDisplayer extends vtkAssembly
             double[] location = new double[3];
             double[] orientation = new double[3];
             body.getJoint().getLocationInParent(location);
-            jointPFrame.SetPosition(location);
+            //jointPFrame.SetPosition(location);
             body.getJoint().getOrientationInParent(orientation);
             for (int i=0; i<3; i++) orientation[i]= Math.toDegrees(orientation[i]);
-            jointPFrame.SetOrientation(orientation);
+            applyPositionAndOrientation(jointPFrame, orientation, location);
+            //jointPFrame.SetOrientation(orientation);
             jointPFrame.GetProperty().SetOpacity(0.75);
             jointPFrame.GetProperty().SetLineStipplePattern(2);
             AddPart(jointPFrame);
@@ -499,11 +507,10 @@ public class BodyDisplayer extends vtkAssembly
        {
           super.Modified();
           ViewDB.getInstance().repaintAll();
-          // ViewDB.getInstance().renderAll();
        }
     }
-    
-    
+      
+      
     //--------------------------------------------------------------------------
     public void  SetCMToGreenSphereWhoseSizeDependsOnMarkerRadius(  )
     {

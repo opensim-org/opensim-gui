@@ -35,6 +35,28 @@ public class Control extends OpenSimObject {
     super.delete();
   }
 
+  public static Control safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.Control_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new Control(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.Control_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.Control_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.Control_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Control(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.Control_getConcreteClassName(swigCPtr, this);
+  }
+
   public void setIsModelControl(boolean aTrueFalse) {
     opensimModelJNI.Control_setIsModelControl(swigCPtr, this, aTrueFalse);
   }

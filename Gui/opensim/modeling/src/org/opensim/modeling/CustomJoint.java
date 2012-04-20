@@ -35,6 +35,28 @@ public class CustomJoint extends Joint {
     super.delete();
   }
 
+  public static CustomJoint safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.CustomJoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new CustomJoint(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.CustomJoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.CustomJoint_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.CustomJoint_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new CustomJoint(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.CustomJoint_getConcreteClassName(swigCPtr, this);
+  }
+
   public CustomJoint() {
     this(opensimModelJNI.new_CustomJoint__SWIG_0(), true);
   }
@@ -59,11 +81,6 @@ public class CustomJoint extends Joint {
     this(opensimModelJNI.new_CustomJoint__SWIG_5(CustomJoint.getCPtr(aJoint), aJoint), true);
   }
 
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.CustomJoint_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
-  }
-
   public void copyData(CustomJoint aJoint) {
     opensimModelJNI.CustomJoint_copyData(swigCPtr, this, CustomJoint.getCPtr(aJoint), aJoint);
   }
@@ -86,23 +103,6 @@ public class CustomJoint extends Joint {
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
     opensimModelJNI.CustomJoint_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.CustomJoint_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.CustomJoint_isA(swigCPtr, this, type);
-  }
-
-  public static CustomJoint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.CustomJoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new CustomJoint(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.CustomJoint_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

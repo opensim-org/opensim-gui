@@ -22,7 +22,7 @@ import org.openide.nodes.Sheet;
 import org.openide.util.Lookup;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.Property.PropertyType;
+import org.opensim.modeling.Property_Deprecated.PropertyType;
 
 /**
  * 

@@ -35,6 +35,28 @@ public class PathPointSet extends SetPathPoint {
     super.delete();
   }
 
+  public static PathPointSet safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.PathPointSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new PathPointSet(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.PathPointSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.PathPointSet_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.PathPointSet_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new PathPointSet(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.PathPointSet_getConcreteClassName(swigCPtr, this);
+  }
+
   public PathPointSet() {
     this(opensimModelJNI.new_PathPointSet__SWIG_0(), true);
   }

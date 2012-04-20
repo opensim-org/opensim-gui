@@ -490,10 +490,10 @@ public final class ViewDB extends Observable implements Observer {
       else
           win.setTabDisplayName(desiredName);
       
-      if (currentModelWindow!=null){    // Copy camera from 
-          vtkCamera lastCamera=currentModelWindow.getCanvas().GetRenderer().GetActiveCamera();
+      if (getCurrentModelWindow()!=null){    // Copy camera from 
+          vtkCamera lastCamera=getCurrentModelWindow().getCanvas().GetRenderer().GetActiveCamera();
           win.getCanvas().applyOrientation(lastCamera);
-          currentModelWindow.getCanvas().GetRenderer().AddActor2D(textActor);
+            getCurrentModelWindow().getCanvas().GetRenderer().AddActor2D(textActor);
       }
       if (SwingUtilities.isEventDispatchThread()){
           win.open();
@@ -1621,8 +1621,8 @@ public final class ViewDB extends Observable implements Observer {
         XActor.SetPosition(position);
         XActor.GetProperty().SetColor(color);
         vtkCamera lastCamera=new vtkCamera();
-        if (currentModelWindow!=null)    // need a camera for the follower! 
-          lastCamera=currentModelWindow.getCanvas().GetRenderer().GetActiveCamera();
+        if (getCurrentModelWindow()!=null)    // need a camera for the follower! 
+          lastCamera=getCurrentModelWindow().getCanvas().GetRenderer().GetActiveCamera();
         XActor.SetCamera(lastCamera);
         sceneAssembly.AddPart(XActor);
         return XText;

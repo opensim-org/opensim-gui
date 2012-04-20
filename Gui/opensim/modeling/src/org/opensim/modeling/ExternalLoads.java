@@ -35,6 +35,28 @@ public class ExternalLoads extends ModelComponentSetExternalForces {
     super.delete();
   }
 
+  public static ExternalLoads safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.ExternalLoads_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new ExternalLoads(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.ExternalLoads_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.ExternalLoads_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.ExternalLoads_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new ExternalLoads(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.ExternalLoads_getConcreteClassName(swigCPtr, this);
+  }
+
   public ExternalLoads() {
     this(opensimModelJNI.new_ExternalLoads__SWIG_0(), true);
   }
@@ -53,11 +75,6 @@ public class ExternalLoads extends ModelComponentSetExternalForces {
 
   public ExternalLoads(ExternalLoads aExternalLoads) {
     this(opensimModelJNI.new_ExternalLoads__SWIG_4(ExternalLoads.getCPtr(aExternalLoads), aExternalLoads), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.ExternalLoads_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(ExternalLoads otherExternalLoads) {

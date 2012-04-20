@@ -35,21 +35,26 @@ public class Measurement extends OpenSimObject {
     super.delete();
   }
 
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.Measurement_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.Measurement_isA(swigCPtr, this, type);
-  }
-
   public static Measurement safeDownCast(OpenSimObject obj) {
     long cPtr = opensimModelJNI.Measurement_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Measurement(cPtr, false);
   }
 
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.Measurement_copy__SWIG_0(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.Measurement_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.Measurement_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.Measurement_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Measurement(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.Measurement_getConcreteClassName(swigCPtr, this);
   }
 
   public Measurement() {
@@ -58,11 +63,6 @@ public class Measurement extends OpenSimObject {
 
   public Measurement(Measurement aMeasurement) {
     this(opensimModelJNI.new_Measurement__SWIG_1(Measurement.getCPtr(aMeasurement), aMeasurement), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.Measurement_copy__SWIG_1(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(Measurement aMeasurement) {

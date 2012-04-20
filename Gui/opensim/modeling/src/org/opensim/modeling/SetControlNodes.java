@@ -91,6 +91,10 @@ public class SetControlNodes {
     return opensimModelJNI.SetControlNodes_getSize(swigCPtr, this);
   }
 
+  public int size() {
+    return opensimModelJNI.SetControlNodes_size(swigCPtr, this);
+  }
+
   public int getIndex(ControlLinearNode aObject, int aStartIndex) {
     return opensimModelJNI.SetControlNodes_getIndex__SWIG_0(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject, aStartIndex);
   }

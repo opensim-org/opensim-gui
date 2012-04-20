@@ -35,6 +35,28 @@ public class LinearFunction extends Function {
     super.delete();
   }
 
+  public static LinearFunction safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.LinearFunction_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new LinearFunction(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.LinearFunction_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.LinearFunction_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.LinearFunction_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new LinearFunction(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.LinearFunction_getConcreteClassName(swigCPtr, this);
+  }
+
   public LinearFunction() {
     this(opensimModelJNI.new_LinearFunction__SWIG_0(), true);
   }
@@ -45,11 +67,6 @@ public class LinearFunction extends Function {
 
   public LinearFunction(LinearFunction aSpline) {
     this(opensimModelJNI.new_LinearFunction__SWIG_2(LinearFunction.getCPtr(aSpline), aSpline), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.LinearFunction_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setCoefficients(ArrayDouble coefficients) {
@@ -63,23 +80,6 @@ public class LinearFunction extends Function {
   public SWIGTYPE_p_SimTK__Function createSimTKFunction() {
     long cPtr = opensimModelJNI.LinearFunction_createSimTKFunction(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_SimTK__Function(cPtr, false);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.LinearFunction_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.LinearFunction_isA(swigCPtr, this, type);
-  }
-
-  public static LinearFunction safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.LinearFunction_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new LinearFunction(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.LinearFunction_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

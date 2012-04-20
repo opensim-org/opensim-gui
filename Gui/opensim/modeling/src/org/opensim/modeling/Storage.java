@@ -35,6 +35,28 @@ public class Storage extends StorageInterface {
     super.delete();
   }
 
+  public static Storage safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.Storage_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new Storage(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.Storage_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.Storage_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.Storage_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Storage(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.Storage_getConcreteClassName(swigCPtr, this);
+  }
+
   public static void setDEFAULT_HEADER_TOKEN(String value) {
     opensimModelJNI.Storage_DEFAULT_HEADER_TOKEN_set(value);
   }
@@ -89,11 +111,6 @@ public class Storage extends StorageInterface {
 
   public Storage(Storage aStorage, int aStateIndex, int aN) {
     this(opensimModelJNI.new_Storage__SWIG_8(Storage.getCPtr(aStorage), aStorage, aStateIndex, aN), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.Storage_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public String getName() {

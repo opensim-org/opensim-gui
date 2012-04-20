@@ -35,13 +35,30 @@ public class Force extends ModelComponent {
     super.delete();
   }
 
-  public void copyData(Force aForce) {
-    opensimModelJNI.Force_copyData(swigCPtr, this, Force.getCPtr(aForce), aForce);
+  public static Force safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.Force_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new Force(cPtr, false);
   }
 
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.Force_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.Force_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.Force_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.Force_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Force(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.Force_getConcreteClassName(swigCPtr, this);
+  }
+
+  public void copyData(Force aForce) {
+    opensimModelJNI.Force_copyData(swigCPtr, this, Force.getCPtr(aForce), aForce);
   }
 
   public ArrayStr getRecordLabels() {
@@ -62,23 +79,6 @@ public class Force extends ModelComponent {
 
   public boolean hasGeometryPath() {
     return opensimModelJNI.Force_hasGeometryPath(swigCPtr, this);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.Force_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.Force_isA(swigCPtr, this, type);
-  }
-
-  public static Force safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Force_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new Force(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.Force_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

@@ -35,6 +35,28 @@ public class ConstraintSet extends ModelComponentSetConstraints {
     super.delete();
   }
 
+  public static ConstraintSet safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.ConstraintSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new ConstraintSet(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.ConstraintSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.ConstraintSet_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.ConstraintSet_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new ConstraintSet(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.ConstraintSet_getConcreteClassName(swigCPtr, this);
+  }
+
   public ConstraintSet() {
     this(opensimModelJNI.new_ConstraintSet__SWIG_0(), true);
   }

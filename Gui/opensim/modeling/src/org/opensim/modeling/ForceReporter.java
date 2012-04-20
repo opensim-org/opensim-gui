@@ -35,6 +35,28 @@ public class ForceReporter extends Analysis {
     super.delete();
   }
 
+  public static ForceReporter safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.ForceReporter_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new ForceReporter(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.ForceReporter_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.ForceReporter_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.ForceReporter_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new ForceReporter(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.ForceReporter_getConcreteClassName(swigCPtr, this);
+  }
+
   public ForceReporter(Model aModel) {
     this(opensimModelJNI.new_ForceReporter__SWIG_0(Model.getCPtr(aModel), aModel), true);
   }
@@ -49,11 +71,6 @@ public class ForceReporter extends Analysis {
 
   public ForceReporter(ForceReporter aObject) {
     this(opensimModelJNI.new_ForceReporter__SWIG_3(ForceReporter.getCPtr(aObject), aObject), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.ForceReporter_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public Storage getForceStorage() {

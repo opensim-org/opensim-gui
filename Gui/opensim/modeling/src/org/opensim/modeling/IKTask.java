@@ -35,9 +35,26 @@ public class IKTask extends OpenSimObject {
     super.delete();
   }
 
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.IKTask_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
+  public static IKTask safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.IKTask_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new IKTask(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.IKTask_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.IKTask_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.IKTask_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new IKTask(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.IKTask_getConcreteClassName(swigCPtr, this);
   }
 
   public boolean getApply() {

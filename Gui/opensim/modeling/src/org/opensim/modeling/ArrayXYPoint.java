@@ -91,6 +91,10 @@ public class ArrayXYPoint {
     return opensimModelJNI.ArrayXYPoint_getSize(swigCPtr, this);
   }
 
+  public int size() {
+    return opensimModelJNI.ArrayXYPoint_size(swigCPtr, this);
+  }
+
   public int append(XYPoint aValue) {
     return opensimModelJNI.ArrayXYPoint_append__SWIG_0(swigCPtr, this, XYPoint.getCPtr(aValue), aValue);
   }

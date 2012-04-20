@@ -35,6 +35,28 @@ public class ScaleTool extends OpenSimObject {
     super.delete();
   }
 
+  public static ScaleTool safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.ScaleTool_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new ScaleTool(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.ScaleTool_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.ScaleTool_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.ScaleTool_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new ScaleTool(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.ScaleTool_getConcreteClassName(swigCPtr, this);
+  }
+
   public ScaleTool() {
     this(opensimModelJNI.new_ScaleTool__SWIG_0(), true);
   }
@@ -45,11 +67,6 @@ public class ScaleTool extends OpenSimObject {
 
   public ScaleTool(ScaleTool aSubject) {
     this(opensimModelJNI.new_ScaleTool__SWIG_2(ScaleTool.getCPtr(aSubject), aSubject), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.ScaleTool_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(ScaleTool aSubject) {

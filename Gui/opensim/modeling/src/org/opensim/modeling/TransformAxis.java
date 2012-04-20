@@ -35,6 +35,28 @@ public class TransformAxis extends OpenSimObject {
     super.delete();
   }
 
+  public static TransformAxis safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.TransformAxis_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new TransformAxis(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.TransformAxis_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.TransformAxis_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.TransformAxis_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new TransformAxis(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.TransformAxis_getConcreteClassName(swigCPtr, this);
+  }
+
   public TransformAxis() {
     this(opensimModelJNI.new_TransformAxis__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class TransformAxis extends OpenSimObject {
 
   public TransformAxis(TransformAxis anAxis) {
     this(opensimModelJNI.new_TransformAxis__SWIG_3(TransformAxis.getCPtr(anAxis), anAxis), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.TransformAxis_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(TransformAxis anAxis) {
@@ -118,23 +135,6 @@ public class TransformAxis extends OpenSimObject {
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
     opensimModelJNI.TransformAxis_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.TransformAxis_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.TransformAxis_isA(swigCPtr, this, type);
-  }
-
-  public static TransformAxis safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.TransformAxis_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new TransformAxis(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.TransformAxis_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

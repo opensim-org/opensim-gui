@@ -303,7 +303,7 @@ public class PlotterModel {
       return ((Plot)fNode.getUserObject());
    }
 
-   void addSource(PlotterSourceInterface src) {
+   public void addSource(PlotterSourceInterface src) {
       sources.add(src);
    }
 

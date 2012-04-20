@@ -260,10 +260,11 @@ public class IKTaskSetPanel extends javax.swing.JPanel implements ListSelectionL
         defaultValueTextField = new javax.swing.JTextField();
         disableSelectedCheckBox = new javax.swing.JCheckBox();
         fromFileTextField = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        ikCoordinateTasksTable = new javax.swing.JTable();
+        jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         ikMarkerTasksTable = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        ikCoordinateTasksTable = new javax.swing.JTable();
 
         buttonGroup1.add(noValueRadioButton);
         noValueRadioButton.setText("jRadioButton1");
@@ -376,7 +377,7 @@ public class IKTaskSetPanel extends javax.swing.JPanel implements ListSelectionL
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, fromFileTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 115, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(defaultValueTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(manualValueTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 116, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 126, Short.MAX_VALUE)
                 .add(jLabel1)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(weightTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 105, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -408,10 +409,11 @@ public class IKTaskSetPanel extends javax.swing.JPanel implements ListSelectionL
                         .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(manualValueTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(manualValueRadioButton))))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jScrollPane2.setViewportView(ikCoordinateTasksTable);
+        jSplitPane1.setDividerLocation(70);
+        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
         ikMarkerTasksTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -426,23 +428,25 @@ public class IKTaskSetPanel extends javax.swing.JPanel implements ListSelectionL
         ));
         jScrollPane1.setViewportView(ikMarkerTasksTable);
 
+        jSplitPane1.setLeftComponent(jScrollPane1);
+
+        jScrollPane2.setViewportView(ikCoordinateTasksTable);
+
+        jSplitPane1.setRightComponent(jScrollPane2);
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
-            .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
+            .add(jSplitPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-                .addContainerGap())
+                .add(jSplitPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -513,6 +517,7 @@ public class IKTaskSetPanel extends javax.swing.JPanel implements ListSelectionL
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JRadioButton manualValueRadioButton;
     private javax.swing.JTextField manualValueTextField;
     private javax.swing.JRadioButton noValueRadioButton;

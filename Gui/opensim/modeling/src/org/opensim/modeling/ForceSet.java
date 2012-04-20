@@ -35,6 +35,28 @@ public class ForceSet extends ModelComponentSetForces {
     super.delete();
   }
 
+  public static ForceSet safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.ForceSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new ForceSet(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.ForceSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.ForceSet_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.ForceSet_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new ForceSet(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.ForceSet_getConcreteClassName(swigCPtr, this);
+  }
+
   public ForceSet() {
     this(opensimModelJNI.new_ForceSet__SWIG_0(), true);
   }
@@ -53,11 +75,6 @@ public class ForceSet extends ModelComponentSetForces {
 
   public ForceSet(ForceSet aForceSet) {
     this(opensimModelJNI.new_ForceSet__SWIG_4(ForceSet.getCPtr(aForceSet), aForceSet), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.ForceSet_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(ForceSet aAbsForceSet) {

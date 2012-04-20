@@ -35,6 +35,28 @@ public class SetBodies extends OpenSimObject {
     super.delete();
   }
 
+  public static SetBodies safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.SetBodies_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new SetBodies(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.SetBodies_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.SetBodies_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.SetBodies_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new SetBodies(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.SetBodies_getConcreteClassName(swigCPtr, this);
+  }
+
   public SetBodies() {
     this(opensimModelJNI.new_SetBodies__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class SetBodies extends OpenSimObject {
 
   public SetBodies(SetBodies aSet) {
     this(opensimModelJNI.new_SetBodies__SWIG_3(SetBodies.getCPtr(aSet), aSet), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.SetBodies_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setup() {

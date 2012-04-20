@@ -35,6 +35,28 @@ public class FreeJoint extends Joint {
     super.delete();
   }
 
+  public static FreeJoint safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.FreeJoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new FreeJoint(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.FreeJoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.FreeJoint_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.FreeJoint_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new FreeJoint(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.FreeJoint_getConcreteClassName(swigCPtr, this);
+  }
+
   public FreeJoint() {
     this(opensimModelJNI.new_FreeJoint__SWIG_0(), true);
   }
@@ -55,11 +77,6 @@ public class FreeJoint extends Joint {
     this(opensimModelJNI.new_FreeJoint__SWIG_4(FreeJoint.getCPtr(aJoint), aJoint), true);
   }
 
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.FreeJoint_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
-  }
-
   public void copyData(FreeJoint aJoint) {
     opensimModelJNI.FreeJoint_copyData(swigCPtr, this, FreeJoint.getCPtr(aJoint), aJoint);
   }
@@ -74,23 +91,6 @@ public class FreeJoint extends Joint {
 
   public void scale(ScaleSet aScaleSet) {
     opensimModelJNI.FreeJoint_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.FreeJoint_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.FreeJoint_isA(swigCPtr, this, type);
-  }
-
-  public static FreeJoint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.FreeJoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new FreeJoint(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.FreeJoint_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

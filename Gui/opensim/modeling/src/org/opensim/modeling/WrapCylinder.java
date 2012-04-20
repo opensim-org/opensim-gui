@@ -35,17 +35,34 @@ public class WrapCylinder extends WrapObject {
     super.delete();
   }
 
+  public static WrapCylinder safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.WrapCylinder_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new WrapCylinder(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.WrapCylinder_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.WrapCylinder_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.WrapCylinder_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new WrapCylinder(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.WrapCylinder_getConcreteClassName(swigCPtr, this);
+  }
+
   public WrapCylinder() {
     this(opensimModelJNI.new_WrapCylinder__SWIG_0(), true);
   }
 
   public WrapCylinder(WrapCylinder aWrapCylinder) {
     this(opensimModelJNI.new_WrapCylinder__SWIG_1(WrapCylinder.getCPtr(aWrapCylinder), aWrapCylinder), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.WrapCylinder_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(WrapCylinder aWrapCylinder) {

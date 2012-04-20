@@ -698,7 +698,7 @@
     </folder>
     <folder name="Toolbars">
         <file name="Build_hidden">
-            <attr name="position" intvalue="300"/>
+            <attr name="position" intvalue="100"/>
         </file>
         <file name="Clipboard_hidden">
             <attr name="position" intvalue="400"/>
@@ -707,7 +707,7 @@
             <attr name="position" intvalue="500"/>
         </file>
         <folder name="Edit">
-            <attr name="position" intvalue="200"/>
+            <attr name="position" intvalue="2200"/>
             <file name="org-openide-actions-CopyAction.instance_hidden">
                 <attr name="position" intvalue="100"/>
             </file>
@@ -721,7 +721,7 @@
                 <attr name="position" intvalue="500"/>
             </file>
             <file name="org-opensim-view-motions-ShowMotionSliderAction.instance" url="org-opensim-view-motions-ShowMotionSliderAction.instance">
-                <attr name="position" intvalue="1400"/>
+                <attr name="position" intvalue="2400"/>
             </file>
         </folder>
         <file name="File_hidden"/>

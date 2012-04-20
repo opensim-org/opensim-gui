@@ -60,27 +60,27 @@ public class PropertySet {
     return opensimModelJNI.PropertySet_getSize(swigCPtr, this);
   }
 
-  public Property get(int i) throws java.io.IOException {
+  public Property_Deprecated get(int i) throws java.io.IOException {
     long cPtr = opensimModelJNI.PropertySet_get__SWIG_0(swigCPtr, this, i);
-    return (cPtr == 0) ? null : new Property(cPtr, false);
+    return (cPtr == 0) ? null : new Property_Deprecated(cPtr, false);
   }
 
-  public Property get(String aName) throws java.io.IOException {
+  public Property_Deprecated get(String aName) throws java.io.IOException {
     long cPtr = opensimModelJNI.PropertySet_get__SWIG_1(swigCPtr, this, aName);
-    return (cPtr == 0) ? null : new Property(cPtr, false);
+    return (cPtr == 0) ? null : new Property_Deprecated(cPtr, false);
   }
 
-  public Property contains(String aName) {
+  public Property_Deprecated contains(String aName) {
     long cPtr = opensimModelJNI.PropertySet_contains(swigCPtr, this, aName);
-    return (cPtr == 0) ? null : new Property(cPtr, false);
+    return (cPtr == 0) ? null : new Property_Deprecated(cPtr, false);
   }
 
-  public void append(Property aProperty) {
-    opensimModelJNI.PropertySet_append__SWIG_0(swigCPtr, this, Property.getCPtr(aProperty), aProperty);
+  public void append(Property_Deprecated aProperty) {
+    opensimModelJNI.PropertySet_append__SWIG_0(swigCPtr, this, Property_Deprecated.getCPtr(aProperty), aProperty);
   }
 
-  public void append(Property aProperty, String aName) {
-    opensimModelJNI.PropertySet_append__SWIG_1(swigCPtr, this, Property.getCPtr(aProperty), aProperty, aName);
+  public void append(Property_Deprecated aProperty, String aName) {
+    opensimModelJNI.PropertySet_append__SWIG_1(swigCPtr, this, Property_Deprecated.getCPtr(aProperty), aProperty, aName);
   }
 
   public void remove(String aName) {
@@ -104,25 +104,25 @@ public class PropertySet {
     opensimModelJNI.PropertySet_addPropertyToGroup__SWIG_1(swigCPtr, this, PropertyGroup.getCPtr(aGroup), aGroup, aPropertyName);
   }
 
-  public void addPropertyToGroup(PropertyGroup aGroup, Property aProperty) {
-    opensimModelJNI.PropertySet_addPropertyToGroup__SWIG_2(swigCPtr, this, PropertyGroup.getCPtr(aGroup), aGroup, Property.getCPtr(aProperty), aProperty);
+  public void addPropertyToGroup(PropertyGroup aGroup, Property_Deprecated aProperty) {
+    opensimModelJNI.PropertySet_addPropertyToGroup__SWIG_2(swigCPtr, this, PropertyGroup.getCPtr(aGroup), aGroup, Property_Deprecated.getCPtr(aProperty), aProperty);
   }
 
-  public void addPropertyToGroup(String aGroupName, Property aProperty) {
-    opensimModelJNI.PropertySet_addPropertyToGroup__SWIG_3(swigCPtr, this, aGroupName, Property.getCPtr(aProperty), aProperty);
+  public void addPropertyToGroup(String aGroupName, Property_Deprecated aProperty) {
+    opensimModelJNI.PropertySet_addPropertyToGroup__SWIG_3(swigCPtr, this, aGroupName, Property_Deprecated.getCPtr(aProperty), aProperty);
   }
 
   public ArrayPtrsPropertyGroup getGroups() {
     return new ArrayPtrsPropertyGroup(opensimModelJNI.PropertySet_getGroups(swigCPtr, this), false);
   }
 
-  public PropertyGroup getGroupContaining(Property aProperty) {
-    long cPtr = opensimModelJNI.PropertySet_getGroupContaining(swigCPtr, this, Property.getCPtr(aProperty), aProperty);
+  public PropertyGroup getGroupContaining(Property_Deprecated aProperty) {
+    long cPtr = opensimModelJNI.PropertySet_getGroupContaining(swigCPtr, this, Property_Deprecated.getCPtr(aProperty), aProperty);
     return (cPtr == 0) ? null : new PropertyGroup(cPtr, false);
   }
 
-  public int getGroupIndexContaining(Property aProperty) {
-    return opensimModelJNI.PropertySet_getGroupIndexContaining(swigCPtr, this, Property.getCPtr(aProperty), aProperty);
+  public int getGroupIndexContaining(Property_Deprecated aProperty) {
+    return opensimModelJNI.PropertySet_getGroupIndexContaining(swigCPtr, this, Property_Deprecated.getCPtr(aProperty), aProperty);
   }
 
 }

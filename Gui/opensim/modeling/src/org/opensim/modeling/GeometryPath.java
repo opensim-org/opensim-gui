@@ -35,17 +35,34 @@ public class GeometryPath extends ModelComponent {
     super.delete();
   }
 
+  public static GeometryPath safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.GeometryPath_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new GeometryPath(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.GeometryPath_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.GeometryPath_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.GeometryPath_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new GeometryPath(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.GeometryPath_getConcreteClassName(swigCPtr, this);
+  }
+
   public GeometryPath() {
     this(opensimModelJNI.new_GeometryPath__SWIG_0(), true);
   }
 
   public GeometryPath(GeometryPath aPath) {
     this(opensimModelJNI.new_GeometryPath__SWIG_1(GeometryPath.getCPtr(aPath), aPath), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.GeometryPath_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setName(String aName) {
@@ -178,23 +195,6 @@ public class GeometryPath extends ModelComponent {
 
   public void updateDisplayer(SWIGTYPE_p_SimTK__State s) {
     opensimModelJNI.GeometryPath_updateDisplayer(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.GeometryPath_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.GeometryPath_isA(swigCPtr, this, type);
-  }
-
-  public static GeometryPath safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.GeometryPath_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new GeometryPath(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.GeometryPath_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public void updateGeometry(SWIGTYPE_p_SimTK__State s) {

@@ -35,6 +35,28 @@ public class PiecewiseConstantFunction extends Function {
     super.delete();
   }
 
+  public static PiecewiseConstantFunction safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.PiecewiseConstantFunction_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new PiecewiseConstantFunction(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.PiecewiseConstantFunction_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.PiecewiseConstantFunction_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.PiecewiseConstantFunction_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new PiecewiseConstantFunction(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.PiecewiseConstantFunction_getConcreteClassName(swigCPtr, this);
+  }
+
   public PiecewiseConstantFunction() {
     this(opensimModelJNI.new_PiecewiseConstantFunction__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class PiecewiseConstantFunction extends Function {
 
   public PiecewiseConstantFunction(PiecewiseConstantFunction aFunction) {
     this(opensimModelJNI.new_PiecewiseConstantFunction__SWIG_3(PiecewiseConstantFunction.getCPtr(aFunction), aFunction), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.PiecewiseConstantFunction_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void init(Function aFunction) {
@@ -145,23 +162,6 @@ public class PiecewiseConstantFunction extends Function {
   public SWIGTYPE_p_SimTK__Function createSimTKFunction() {
     long cPtr = opensimModelJNI.PiecewiseConstantFunction_createSimTKFunction(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_SimTK__Function(cPtr, false);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.PiecewiseConstantFunction_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.PiecewiseConstantFunction_isA(swigCPtr, this, type);
-  }
-
-  public static PiecewiseConstantFunction safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.PiecewiseConstantFunction_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new PiecewiseConstantFunction(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.PiecewiseConstantFunction_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

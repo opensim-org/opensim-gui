@@ -35,9 +35,26 @@ public class StorageInterface extends OpenSimObject {
     super.delete();
   }
 
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.StorageInterface_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
+  public static StorageInterface safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.StorageInterface_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new StorageInterface(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.StorageInterface_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.StorageInterface_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.StorageInterface_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new StorageInterface(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.StorageInterface_getConcreteClassName(swigCPtr, this);
   }
 
   public int getSize() {

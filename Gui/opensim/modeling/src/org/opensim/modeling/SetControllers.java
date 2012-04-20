@@ -35,6 +35,28 @@ public class SetControllers extends OpenSimObject {
     super.delete();
   }
 
+  public static SetControllers safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.SetControllers_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new SetControllers(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.SetControllers_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.SetControllers_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.SetControllers_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new SetControllers(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.SetControllers_getConcreteClassName(swigCPtr, this);
+  }
+
   public SetControllers() {
     this(opensimModelJNI.new_SetControllers__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class SetControllers extends OpenSimObject {
 
   public SetControllers(SetControllers aSet) {
     this(opensimModelJNI.new_SetControllers__SWIG_3(SetControllers.getCPtr(aSet), aSet), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.SetControllers_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setup() {

@@ -35,6 +35,28 @@ public class ModelComponentSetContactGeometry extends SetContactGeometry {
     super.delete();
   }
 
+  public static ModelComponentSetContactGeometry safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.ModelComponentSetContactGeometry_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new ModelComponentSetContactGeometry(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.ModelComponentSetContactGeometry_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.ModelComponentSetContactGeometry_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.ModelComponentSetContactGeometry_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new ModelComponentSetContactGeometry(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.ModelComponentSetContactGeometry_getConcreteClassName(swigCPtr, this);
+  }
+
   public ModelComponentSetContactGeometry() {
     this(opensimModelJNI.new_ModelComponentSetContactGeometry__SWIG_0(), true);
   }
@@ -53,11 +75,6 @@ public class ModelComponentSetContactGeometry extends SetContactGeometry {
 
   public ModelComponentSetContactGeometry(ModelComponentSetContactGeometry source) {
     this(opensimModelJNI.new_ModelComponentSetContactGeometry__SWIG_4(ModelComponentSetContactGeometry.getCPtr(source), source), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.ModelComponentSetContactGeometry_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public boolean append(ContactGeometry aObject) {

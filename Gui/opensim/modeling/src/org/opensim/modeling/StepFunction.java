@@ -35,6 +35,28 @@ public class StepFunction extends Function {
     super.delete();
   }
 
+  public static StepFunction safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.StepFunction_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new StepFunction(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.StepFunction_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.StepFunction_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.StepFunction_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new StepFunction(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.StepFunction_getConcreteClassName(swigCPtr, this);
+  }
+
   public StepFunction() {
     this(opensimModelJNI.new_StepFunction__SWIG_0(), true);
   }
@@ -53,11 +75,6 @@ public class StepFunction extends Function {
 
   public StepFunction(StepFunction aSpline) {
     this(opensimModelJNI.new_StepFunction__SWIG_4(StepFunction.getCPtr(aSpline), aSpline), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.StepFunction_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setStartTime(double time) {
@@ -95,23 +112,6 @@ public class StepFunction extends Function {
   public SWIGTYPE_p_SimTK__Function createSimTKFunction() {
     long cPtr = opensimModelJNI.StepFunction_createSimTKFunction(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_SimTK__Function(cPtr, false);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.StepFunction_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.StepFunction_isA(swigCPtr, this, type);
-  }
-
-  public static StepFunction safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.StepFunction_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new StepFunction(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.StepFunction_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

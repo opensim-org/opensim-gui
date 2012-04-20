@@ -22,7 +22,7 @@ public final class ModelInfoAction extends CallableSystemAction {
         Model mdl = modelNode.getModel();
         infoPanel.setModelName(mdl.getName());
         infoPanel.setModelFile(mdl.getInputFileName());
-        infoPanel.setDynamicsEngineName(mdl.getSimbodyEngine().getType());
+        infoPanel.setDynamicsEngineName(mdl.getSimbodyEngine().getConcreteClassName());
         infoPanel.setAuthors(
                 mdl.getCredits());
         infoPanel.setReferences(mdl.getPublications());

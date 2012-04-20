@@ -35,6 +35,28 @@ public class OpenSimContext extends OpenSimObject {
     super.delete();
   }
 
+  public static OpenSimContext safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.OpenSimContext_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new OpenSimContext(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.OpenSimContext_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.OpenSimContext_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.OpenSimContext_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new OpenSimContext(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.OpenSimContext_getConcreteClassName(swigCPtr, this);
+  }
+
   public OpenSimContext(SWIGTYPE_p_SimTK__State s, Model model) {
     this(opensimModelJNI.new_OpenSimContext(SWIGTYPE_p_SimTK__State.getCPtr(s), Model.getCPtr(model), model), true);
   }

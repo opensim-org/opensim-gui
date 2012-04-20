@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.1" encoding="UTF-8" ?>
 
-<Form version="1.3">
+<Form version="1.3" maxVersion="1.3" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -108,7 +108,7 @@
                           <Component id="BackupButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="BackupAllButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="30" max="32767" attributes="0"/>
+                      <EmptySpace pref="34" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -131,7 +131,7 @@
                     <TitledBorder title="Offset"/>
                   </Border>
                 </Property>
-                <Property name="name" type="java.lang.String" value="offset"/>
+                <Property name="name" type="java.lang.String" value="offset" noResource="true"/>
               </Properties>
 
               <Layout>

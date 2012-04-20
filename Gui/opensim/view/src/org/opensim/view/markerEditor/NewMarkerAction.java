@@ -29,21 +29,21 @@ import org.opensim.view.pub.ViewDB;
 
 /**
  *
- * @author Peter Loan
+ * @author Ayman Habib
  */
 public class NewMarkerAction extends AbstractAction {
 
-    /** Creates a new instance of NewMarkerAction */
-    public NewMarkerAction() {
-        super(NbBundle.getMessage(NewMarkerAction.class, "CTL_NewMarkerAction"));
-    }
+   /** Creates a new instance of NewMarkerAction */
+   public NewMarkerAction() {
+      super(NbBundle.getMessage(NewMarkerAction.class, "CTL_NewMarkerAction"));
+   }
 
-    public void actionPerformed(ActionEvent evt) {
+   public void actionPerformed(ActionEvent evt) {
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         // One MarkersNode must have been selected otherwise bail
         if (selected.length != 1 || !(selected[0] instanceof MarkersNode)) {
             return;
-        }
+   }
         MarkersNode markersNode = (MarkersNode) selected[0];
         Model model = markersNode.getModelForNode();
         double[] offset = {0.11, 0.22, 0.33};
@@ -78,7 +78,7 @@ public class NewMarkerAction extends AbstractAction {
                 public void undo() throws CannotUndoException {
                     super.undo();
                     Marker toDelete = model.getMarkerSet().get(saveMarkerName);
-                    new MarkerDeleteAction().deleteMarker(toDelete, false);
+                    OneMarkerDeleteAction.deleteMarker(toDelete, false);
                 }
 
                 public void redo() throws CannotRedoException {

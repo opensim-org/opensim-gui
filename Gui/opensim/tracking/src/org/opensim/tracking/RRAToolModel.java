@@ -229,7 +229,7 @@ public class RRAToolModel extends TrackingToolModel {
    public RRAToolModel(Model model) throws IOException {
       super(model);
 
-      if(model.getSimbodyEngine().getType().equals("SimmKinematicsEngine"))
+      if(model.getSimbodyEngine().getConcreteClassName().equals("SimmKinematicsEngine"))
          throw new IOException("Computed muscle control tool requires a model with SdfastEngine or SimbodyEngine; SimmKinematicsEngine does not support dynamics.");
 
       setTool(new RRATool());

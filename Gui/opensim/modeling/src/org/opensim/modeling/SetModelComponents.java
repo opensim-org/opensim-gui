@@ -35,6 +35,28 @@ public class SetModelComponents extends OpenSimObject {
     super.delete();
   }
 
+  public static SetModelComponents safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.SetModelComponents_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new SetModelComponents(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.SetModelComponents_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.SetModelComponents_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.SetModelComponents_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new SetModelComponents(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.SetModelComponents_getConcreteClassName(swigCPtr, this);
+  }
+
   public SetModelComponents() {
     this(opensimModelJNI.new_SetModelComponents__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class SetModelComponents extends OpenSimObject {
 
   public SetModelComponents(SetModelComponents aSet) {
     this(opensimModelJNI.new_SetModelComponents__SWIG_3(SetModelComponents.getCPtr(aSet), aSet), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.SetModelComponents_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setup() {

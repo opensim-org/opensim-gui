@@ -35,9 +35,26 @@ public class ControlConstant extends Control {
     super.delete();
   }
 
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.ControlConstant_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
+  public static ControlConstant safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.ControlConstant_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new ControlConstant(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.ControlConstant_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.ControlConstant_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.ControlConstant_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new ControlConstant(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.ControlConstant_getConcreteClassName(swigCPtr, this);
   }
 
   public int getNumParameters() {
@@ -114,23 +131,6 @@ public class ControlConstant extends Control {
 
   public void setControlValueMax(double aT, double aX) {
     opensimModelJNI.ControlConstant_setControlValueMax(swigCPtr, this, aT, aX);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.ControlConstant_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.ControlConstant_isA(swigCPtr, this, type);
-  }
-
-  public static ControlConstant safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ControlConstant_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new ControlConstant(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.ControlConstant_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

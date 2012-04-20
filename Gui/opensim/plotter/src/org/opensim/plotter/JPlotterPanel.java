@@ -105,6 +105,10 @@ public class JPlotterPanel extends javax.swing.JPanel
    // 2. It serves as the model backing the tree of plots/figures.
    private PlotterModel plotterModel = new PlotterModel();
 
+    public void setTitle(String title) {
+        getChartPanel().getChart().setTitle(title);
+    }
+
    public enum PlotDataSource {FileSource, MotionSource, AnalysisSource};
    JPlotterQuantitySelector xSelector = null;
    String currentCurveTitle="";
@@ -442,7 +446,7 @@ public class JPlotterPanel extends javax.swing.JPanel
         );
         jTopChartingPanelLayout.setVerticalGroup(
             jTopChartingPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 297, Short.MAX_VALUE)
+            .add(0, 299, Short.MAX_VALUE)
         );
 
         jSplitPane1.setLeftComponent(jTopChartingPanel);
@@ -463,8 +467,8 @@ public class JPlotterPanel extends javax.swing.JPanel
         jPlotterDeletePlotButton.setText("Delete");
         jPlotterDeletePlotButton.addActionListener(this);
 
-        jPropertiesButton.setComponentPopupMenu(jPlotPropertiesPopupMenu);
         jPropertiesButton.setText("Properties...");
+        jPropertiesButton.setComponentPopupMenu(jPlotPropertiesPopupMenu);
 
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -590,7 +594,7 @@ public class JPlotterPanel extends javax.swing.JPanel
                 .add(0, 0, Short.MAX_VALUE))
         );
 
-        jButton1.setText("help");
+        jButton1.setText("Help");
 
         org.jdesktop.layout.GroupLayout jPlotControlPanelLayout = new org.jdesktop.layout.GroupLayout(jPlotControlPanel);
         jPlotControlPanel.setLayout(jPlotControlPanelLayout);
@@ -2160,7 +2164,7 @@ public class JPlotterPanel extends javax.swing.JPanel
         return plotterModel.getCurrentPlot().getChartPanel();
     
     }
-    PlotCurve showAnalysisCurve(String qName, String muscleName, String genCoordName) {
+    public PlotCurve showAnalysisCurve(String qName, String muscleName, String genCoordName) {
        PlotCurve plotCurve=null;
        openSimContext = OpenSimDB.getInstance().getContext(currentModel);
        populateYQty(qName);

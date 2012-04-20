@@ -106,6 +106,10 @@ public class ArrayStr {
     return opensimModelJNI.ArrayStr_getSize(swigCPtr, this);
   }
 
+  public int size() {
+    return opensimModelJNI.ArrayStr_size(swigCPtr, this);
+  }
+
   public int append(String aValue) {
     return opensimModelJNI.ArrayStr_append__SWIG_0(swigCPtr, this, aValue);
   }

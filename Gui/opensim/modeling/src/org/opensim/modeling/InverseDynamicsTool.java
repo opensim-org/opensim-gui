@@ -35,6 +35,28 @@ public class InverseDynamicsTool extends DynamicsTool {
     super.delete();
   }
 
+  public static InverseDynamicsTool safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.InverseDynamicsTool_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new InverseDynamicsTool(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.InverseDynamicsTool_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.InverseDynamicsTool_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.InverseDynamicsTool_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new InverseDynamicsTool(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.InverseDynamicsTool_getConcreteClassName(swigCPtr, this);
+  }
+
   public InverseDynamicsTool() {
     this(opensimModelJNI.new_InverseDynamicsTool__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class InverseDynamicsTool extends DynamicsTool {
 
   public InverseDynamicsTool(InverseDynamicsTool aObject) {
     this(opensimModelJNI.new_InverseDynamicsTool__SWIG_3(InverseDynamicsTool.getCPtr(aObject), aObject), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.InverseDynamicsTool_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public static void registerTypes() {

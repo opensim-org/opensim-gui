@@ -35,6 +35,28 @@ public class PrescribedController extends Controller {
     super.delete();
   }
 
+  public static PrescribedController safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.PrescribedController_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new PrescribedController(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.PrescribedController_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.PrescribedController_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.PrescribedController_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new PrescribedController(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.PrescribedController_getConcreteClassName(swigCPtr, this);
+  }
+
   public PrescribedController() {
     this(opensimModelJNI.new_PrescribedController__SWIG_0(), true);
   }
@@ -53,28 +75,6 @@ public class PrescribedController extends Controller {
 
   public PrescribedController(PrescribedController PrescribedController) {
     this(opensimModelJNI.new_PrescribedController__SWIG_4(PrescribedController.getCPtr(PrescribedController), PrescribedController), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.PrescribedController_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.PrescribedController_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.PrescribedController_isA(swigCPtr, this, type);
-  }
-
-  public static PrescribedController safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.PrescribedController_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new PrescribedController(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.PrescribedController_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public void computeControls(SWIGTYPE_p_SimTK__State s, SWIGTYPE_p_SimTK__Vector controls) {

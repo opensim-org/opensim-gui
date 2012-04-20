@@ -35,6 +35,28 @@ public class Controller extends ModelComponent {
     super.delete();
   }
 
+  public static Controller safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.Controller_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new Controller(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.Controller_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.Controller_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.Controller_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Controller(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.Controller_getConcreteClassName(swigCPtr, this);
+  }
+
   public int getNumStateVariables() {
     return opensimModelJNI.Controller_getNumStateVariables(swigCPtr, this);
   }

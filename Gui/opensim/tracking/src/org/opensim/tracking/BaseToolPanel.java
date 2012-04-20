@@ -65,8 +65,8 @@ public abstract class BaseToolPanel extends JPanel implements ActionListener, Ob
    protected JButton saveSettingsButton = new JButton("Save...");
    protected JButton applyButton = new JButton("Run");
    protected JButton okButton = new JButton("Close");
-   protected JButton cancelButton = new JButton("Cancel");
-   protected JButton helpButton = new JButton("help");
+   //protected JButton cancelButton = new JButton("Cancel");
+   protected JButton helpButton = new JButton("Help");
    protected Dialog ownerDialog = null;
    protected boolean cleanupAfterExecuting = false;  // Keep track if cleaning up needs to be done on execution finish vs. dialog close
    private HelpSet hs;
@@ -148,7 +148,7 @@ public abstract class BaseToolPanel extends JPanel implements ActionListener, Ob
    // Dialog Operations
    //------------------------------------------------------------------------
    public JButton[] getDialogOptions() {
-      return new JButton[]{loadSettingsButton, saveSettingsButton, applyButton, okButton, cancelButton, helpButton};
+      return new JButton[]{loadSettingsButton, saveSettingsButton, applyButton, okButton, helpButton};
    }
 
    public void setOwner(Dialog window) { ownerDialog = window; }
@@ -158,11 +158,7 @@ public abstract class BaseToolPanel extends JPanel implements ActionListener, Ob
    }
 
    public void actionPerformed(ActionEvent evt) {
-      if(evt.getSource() == cancelButton) {
-         pressedCancel();
-         ownerDialog.dispose();
-         // the owner dialog will automatically handle disposing of the dialog in response to Cancel, since this is a standard option (CANCEL_OPTION)
-      } else if(evt.getSource() == okButton) {
+      if(evt.getSource() == okButton) {
          pressedClose();
          ownerDialog.dispose();
       } else if(evt.getSource() == applyButton) {

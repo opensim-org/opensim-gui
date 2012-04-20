@@ -35,21 +35,26 @@ public class StaticOptimization extends Analysis {
     super.delete();
   }
 
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.StaticOptimization_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.StaticOptimization_isA(swigCPtr, this, type);
-  }
-
   public static StaticOptimization safeDownCast(OpenSimObject obj) {
     long cPtr = opensimModelJNI.StaticOptimization_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new StaticOptimization(cPtr, false);
   }
 
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.StaticOptimization_copy__SWIG_0(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.StaticOptimization_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.StaticOptimization_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.StaticOptimization_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new StaticOptimization(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.StaticOptimization_getConcreteClassName(swigCPtr, this);
   }
 
   public StaticOptimization(Model aModel) {
@@ -62,11 +67,6 @@ public class StaticOptimization extends Analysis {
 
   public StaticOptimization(StaticOptimization aObject) {
     this(opensimModelJNI.new_StaticOptimization__SWIG_2(StaticOptimization.getCPtr(aObject), aObject), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.StaticOptimization_copy__SWIG_1(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setStorageCapacityIncrements(int aIncrement) {

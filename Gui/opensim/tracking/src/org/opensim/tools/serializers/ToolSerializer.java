@@ -51,19 +51,19 @@ public class ToolSerializer extends Observable implements Serializable{
         OpenSimObject obj = OpenSimObject.makeObjectFromFile(setupFile);
         AbstractTool tool = AbstractTool.safeDownCast(obj);
         try {
-            if (tool.getType().equalsIgnoreCase("IKTool")){
+            if (tool.getConcreteClassName().equalsIgnoreCase("IKTool")){
                 IKToolModel toolModel = new IKToolModel(model);
                 tool2 = toolModel;
                 toolModel.loadSettings(setupFile);
                 toolModel.execute();
             }
-            else if (tool.getType().equalsIgnoreCase("ForwardTool")){
+            else if (tool.getConcreteClassName().equalsIgnoreCase("ForwardTool")){
                 ForwardToolModel toolModel = new ForwardToolModel(model);
                 tool1 = toolModel;
                 toolModel.loadSettings(setupFile);
                 toolModel.execute();
             }
-            else if (tool.getType().equalsIgnoreCase("AnalyzeTool")){ // Covers IVD, StaticOptimization and Analyze
+            else if (tool.getConcreteClassName().equalsIgnoreCase("AnalyzeTool")){ // Covers IVD, StaticOptimization and Analyze
                 AnalyzeToolModel toolModel = new AnalyzeToolModel(model, AnalyzeAndForwardToolPanel.Mode.Analyze);
                 tool1 = toolModel;
                 toolModel.loadSettings(setupFile);

@@ -35,17 +35,34 @@ public class WrapTorus extends WrapObject {
     super.delete();
   }
 
+  public static WrapTorus safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.WrapTorus_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new WrapTorus(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.WrapTorus_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.WrapTorus_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.WrapTorus_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new WrapTorus(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.WrapTorus_getConcreteClassName(swigCPtr, this);
+  }
+
   public WrapTorus() {
     this(opensimModelJNI.new_WrapTorus__SWIG_0(), true);
   }
 
   public WrapTorus(WrapTorus aWrapTorus) {
     this(opensimModelJNI.new_WrapTorus__SWIG_1(WrapTorus.getCPtr(aWrapTorus), aWrapTorus), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.WrapTorus_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(WrapTorus aWrapTorus) {

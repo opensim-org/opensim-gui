@@ -78,7 +78,7 @@ class AnalysisSetTableModel extends AbstractTableModel implements Observer {
 
    public Object getValueAt(int row, int col) {
       if(col==0) return toolModel.getAnalysisSet().get(row).getOn();
-      else if(col==1) return toolModel.getAnalysisSet().get(row).getType();
+      else if(col==1) return toolModel.getAnalysisSet().get(row).getConcreteClassName();
       else if(col==2) return toolModel.getAnalysisSet().get(row).getName();
       else return null;
    }
@@ -113,7 +113,7 @@ public class AnalysisSetPanel extends javax.swing.JPanel implements Observer {
    class AddAnalysisAction extends AbstractAction {
       private Analysis analysis;
       public AddAnalysisAction(Analysis analysis) {
-         super(analysis.getType());
+         super(analysis.getConcreteClassName());
          this.analysis = analysis;
       }
       public void actionPerformed(ActionEvent evt) {
@@ -252,7 +252,7 @@ public class AnalysisSetPanel extends javax.swing.JPanel implements Observer {
    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
       if(currentSelectedRow>=0) {
          Analysis analysis = toolModel.getAnalysisSet().get(currentSelectedRow);
-         Analysis analysisCopy = Analysis.safeDownCast(analysis.copy()); // C++-side copy
+         Analysis analysisCopy = Analysis.safeDownCast(analysis.clone()); // C++-side copy
          ObjectEditDialogMaker editorDialog = new ObjectEditDialogMaker(analysisCopy, true, "OK");
          if(editorDialog.process()) {
             toolModel.replaceAnalysis(currentSelectedRow, analysisCopy);

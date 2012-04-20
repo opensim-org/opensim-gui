@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class PropertyDblArray extends Property {
+public class PropertyDblArray extends Property_Deprecated {
   private long swigCPtr;
 
   public PropertyDblArray(long cPtr, boolean cMemoryOwn) {
@@ -51,9 +51,17 @@ public class PropertyDblArray extends Property {
     this(opensimModelJNI.new_PropertyDblArray__SWIG_3(PropertyDblArray.getCPtr(aProperty), aProperty), true);
   }
 
-  public Property copy() {
-    long cPtr = opensimModelJNI.PropertyDblArray_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new Property(cPtr, false);
+  public boolean isArrayProperty() {
+    return opensimModelJNI.PropertyDblArray_isArrayProperty(swigCPtr, this);
+  }
+
+  public AbstractProperty clone() {
+    long cPtr = opensimModelJNI.PropertyDblArray_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new PropertyDblArray(cPtr, false);
+  }
+
+  public int getNumValues() {
+    return opensimModelJNI.PropertyDblArray_getNumValues(swigCPtr, this);
   }
 
   public String getTypeAsString() {
@@ -69,7 +77,7 @@ public class PropertyDblArray extends Property {
   }
 
   public ArrayDouble getValueDblArray() {
-    return new ArrayDouble(opensimModelJNI.PropertyDblArray_getValueDblArray__SWIG_0(swigCPtr, this), false);
+    return new ArrayDouble(opensimModelJNI.PropertyDblArray_getValueDblArray(swigCPtr, this), false);
   }
 
   public String toString() {

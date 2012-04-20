@@ -35,6 +35,28 @@ public class Coordinate extends ModelComponent {
     super.delete();
   }
 
+  public static Coordinate safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.Coordinate_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new Coordinate(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.Coordinate_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.Coordinate_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.Coordinate_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Coordinate(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.Coordinate_getConcreteClassName(swigCPtr, this);
+  }
+
   public Coordinate() {
     this(opensimModelJNI.new_Coordinate__SWIG_0(), true);
   }
@@ -45,11 +67,6 @@ public class Coordinate extends ModelComponent {
 
   public Coordinate(Coordinate aCoordinate) {
     this(opensimModelJNI.new_Coordinate__SWIG_2(Coordinate.getCPtr(aCoordinate), aCoordinate), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.Coordinate_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(Coordinate aCoordinate) {
@@ -255,23 +272,6 @@ public class Coordinate extends ModelComponent {
 
   public ArrayStr getStateVariableNames() {
     return new ArrayStr(opensimModelJNI.Coordinate_getStateVariableNames(swigCPtr, this), true);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.Coordinate_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.Coordinate_isA(swigCPtr, this, type);
-  }
-
-  public static Coordinate safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Coordinate_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new Coordinate(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.Coordinate_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public SWIGTYPE_p_SimTK__SystemYIndex getStateVariableSystemIndex(String stateVariableName) {

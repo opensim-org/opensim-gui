@@ -35,17 +35,34 @@ public class ModelScaler extends OpenSimObject {
     super.delete();
   }
 
+  public static ModelScaler safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.ModelScaler_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new ModelScaler(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.ModelScaler_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.ModelScaler_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.ModelScaler_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new ModelScaler(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.ModelScaler_getConcreteClassName(swigCPtr, this);
+  }
+
   public ModelScaler() {
     this(opensimModelJNI.new_ModelScaler__SWIG_0(), true);
   }
 
   public ModelScaler(ModelScaler aModelScaler) {
     this(opensimModelJNI.new_ModelScaler__SWIG_1(ModelScaler.getCPtr(aModelScaler), aModelScaler), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.ModelScaler_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(ModelScaler aModelScaler) {

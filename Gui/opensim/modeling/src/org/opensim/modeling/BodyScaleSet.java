@@ -35,6 +35,28 @@ public class BodyScaleSet extends SetBodyScales {
     super.delete();
   }
 
+  public static BodyScaleSet safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.BodyScaleSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new BodyScaleSet(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.BodyScaleSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.BodyScaleSet_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.BodyScaleSet_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new BodyScaleSet(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.BodyScaleSet_getConcreteClassName(swigCPtr, this);
+  }
+
   public BodyScaleSet() {
     this(opensimModelJNI.new_BodyScaleSet__SWIG_0(), true);
   }

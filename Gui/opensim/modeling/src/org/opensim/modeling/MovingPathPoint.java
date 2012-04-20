@@ -35,17 +35,34 @@ public class MovingPathPoint extends PathPoint {
     super.delete();
   }
 
+  public static MovingPathPoint safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.MovingPathPoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new MovingPathPoint(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.MovingPathPoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.MovingPathPoint_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.MovingPathPoint_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new MovingPathPoint(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.MovingPathPoint_getConcreteClassName(swigCPtr, this);
+  }
+
   public MovingPathPoint() {
     this(opensimModelJNI.new_MovingPathPoint__SWIG_0(), true);
   }
 
   public MovingPathPoint(MovingPathPoint aPoint) {
     this(opensimModelJNI.new_MovingPathPoint__SWIG_1(MovingPathPoint.getCPtr(aPoint), aPoint), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.MovingPathPoint_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(MovingPathPoint aPoint) {
@@ -104,23 +121,6 @@ public class MovingPathPoint extends PathPoint {
 
   public void scale(SWIGTYPE_p_SimTK__State s, SWIGTYPE_p_SimTK__Vec3 aScaleFactors) {
     opensimModelJNI.MovingPathPoint_scale(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), SWIGTYPE_p_SimTK__Vec3.getCPtr(aScaleFactors));
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.MovingPathPoint_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.MovingPathPoint_isA(swigCPtr, this, type);
-  }
-
-  public static MovingPathPoint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.MovingPathPoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new MovingPathPoint(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.MovingPathPoint_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

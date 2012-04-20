@@ -91,6 +91,10 @@ public class ArrayBool {
     return opensimModelJNI.ArrayBool_getSize(swigCPtr, this);
   }
 
+  public int size() {
+    return opensimModelJNI.ArrayBool_size(swigCPtr, this);
+  }
+
   public int append(boolean aValue) {
     return opensimModelJNI.ArrayBool_append__SWIG_0(swigCPtr, this, aValue);
   }

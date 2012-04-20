@@ -39,7 +39,6 @@ import org.openide.util.Exceptions;
 import org.openide.util.lookup.Lookups;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.Property.PropertyType;
 import org.opensim.modeling.PropertyDblArray;
 import org.opensim.view.ObjectDisplayHideAction;
 import org.opensim.view.ObjectDisplayMenuAction;
@@ -48,6 +47,7 @@ import org.opensim.view.ObjectGenericReviewAction;
 import org.opensim.view.pub.ViewDB;
 import org.opensim.view.ModelWindowVTKTopComponent;
 import LSJava.LSPropertyEditors.LSPropertyEditorJoint;
+import org.opensim.modeling.Property_Deprecated.PropertyType;
 
 /**
  *
@@ -176,7 +176,7 @@ public class OpenSimObjectNode extends OpenSimNode {
         
         for(int i=0; i<ps.getSize(); i++){
             try {
-                org.opensim.modeling.Property prop = ps.get(i);
+                org.opensim.modeling.Property_Deprecated prop = ps.get(i);
                 final PropertyType currentPropType = prop.getType();
                 //Class dClass = prop.getClass();
                 if (currentPropType==PropertyType.DblVec ||

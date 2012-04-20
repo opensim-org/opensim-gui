@@ -35,6 +35,28 @@ public class SetBodyScales extends OpenSimObject {
     super.delete();
   }
 
+  public static SetBodyScales safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.SetBodyScales_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new SetBodyScales(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.SetBodyScales_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.SetBodyScales_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.SetBodyScales_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new SetBodyScales(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.SetBodyScales_getConcreteClassName(swigCPtr, this);
+  }
+
   public SetBodyScales() {
     this(opensimModelJNI.new_SetBodyScales__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class SetBodyScales extends OpenSimObject {
 
   public SetBodyScales(SetBodyScales aSet) {
     this(opensimModelJNI.new_SetBodyScales__SWIG_3(SetBodyScales.getCPtr(aSet), aSet), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.SetBodyScales_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setup() {

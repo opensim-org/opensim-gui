@@ -35,6 +35,28 @@ public class MeasurementSet extends SetMeasurements {
     super.delete();
   }
 
+  public static MeasurementSet safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.MeasurementSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new MeasurementSet(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.MeasurementSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.MeasurementSet_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.MeasurementSet_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new MeasurementSet(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.MeasurementSet_getConcreteClassName(swigCPtr, this);
+  }
+
   public MeasurementSet() {
     this(opensimModelJNI.new_MeasurementSet__SWIG_0(), true);
   }

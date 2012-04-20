@@ -35,17 +35,34 @@ public class PathWrapPoint extends PathPoint {
     super.delete();
   }
 
+  public static PathWrapPoint safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.PathWrapPoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new PathWrapPoint(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.PathWrapPoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.PathWrapPoint_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.PathWrapPoint_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new PathWrapPoint(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.PathWrapPoint_getConcreteClassName(swigCPtr, this);
+  }
+
   public PathWrapPoint() {
     this(opensimModelJNI.new_PathWrapPoint__SWIG_0(), true);
   }
 
   public PathWrapPoint(PathWrapPoint aPoint) {
     this(opensimModelJNI.new_PathWrapPoint__SWIG_1(PathWrapPoint.getCPtr(aPoint), aPoint), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.PathWrapPoint_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(PathWrapPoint aPoint) {
@@ -71,23 +88,6 @@ public class PathWrapPoint extends PathPoint {
 
   public void setWrapObject(WrapObject aWrapObject) {
     opensimModelJNI.PathWrapPoint_setWrapObject(swigCPtr, this, WrapObject.getCPtr(aWrapObject), aWrapObject);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.PathWrapPoint_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.PathWrapPoint_isA(swigCPtr, this, type);
-  }
-
-  public static PathWrapPoint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.PathWrapPoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new PathWrapPoint(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.PathWrapPoint_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

@@ -111,6 +111,10 @@ public class ArrayDouble {
     return opensimModelJNI.ArrayDouble_getSize(swigCPtr, this);
   }
 
+  public int size() {
+    return opensimModelJNI.ArrayDouble_size(swigCPtr, this);
+  }
+
   public int append(double aValue) {
     return opensimModelJNI.ArrayDouble_append__SWIG_0(swigCPtr, this, aValue);
   }

@@ -667,7 +667,7 @@ final public class MarkerEditorTopComponent extends TopComponent implements Obse
 
    private void backupMarker() {
       setPendingChanges(MarkerState.UNMODIFIED, currentMarker, true);
-      Marker savedMarker = Marker.safeDownCast(currentMarker.copy());
+      Marker savedMarker = Marker.safeDownCast(currentMarker.clone());
       savedMarkers.put(currentMarker, savedMarker);
       //printInfo("backupMarker");
    }
@@ -694,11 +694,11 @@ final public class MarkerEditorTopComponent extends TopComponent implements Obse
             savedMarkers.remove(marker);
             pendingChanges.remove(marker);
          } else if (state == MarkerState.ADDED) {
-            Marker savedMarker = Marker.safeDownCast(marker.copy());
+            Marker savedMarker = Marker.safeDownCast(marker.clone());
             savedMarkers.put(marker, savedMarker);
          } else if (state == MarkerState.MODIFIED) {
             Marker savedMarker = savedMarkers.get(marker);
-            savedMarker.copy(marker);
+            savedMarker.assign(marker);
          }
       }
 
@@ -723,7 +723,7 @@ final public class MarkerEditorTopComponent extends TopComponent implements Obse
       if (currentModel != null && currentModel.getSimbodyEngine() != null) {
          MarkerSet markers = currentModel.getMarkerSet();
          for (int i=0; i<markers.getSize(); i++) {
-            Marker savedMarker = Marker.safeDownCast(markers.get(i).copy());
+            Marker savedMarker = Marker.safeDownCast(markers.get(i).clone());
             savedMarkers.put(markers.get(i), savedMarker);
             pendingChanges.put(markers.get(i), MarkerState.UNMODIFIED);
          }

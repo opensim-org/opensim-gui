@@ -35,6 +35,28 @@ public class RRATool extends AbstractTool {
     super.delete();
   }
 
+  public static RRATool safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.RRATool_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new RRATool(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.RRATool_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.RRATool_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.RRATool_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new RRATool(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.RRATool_getConcreteClassName(swigCPtr, this);
+  }
+
   public RRATool() {
     this(opensimModelJNI.new_RRATool__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class RRATool extends AbstractTool {
 
   public RRATool(RRATool aObject) {
     this(opensimModelJNI.new_RRATool__SWIG_3(RRATool.getCPtr(aObject), aObject), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.RRATool_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public String getDesiredPointsFileName() {

@@ -35,6 +35,28 @@ public class NaturalCubicSpline extends Function {
     super.delete();
   }
 
+  public static NaturalCubicSpline safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.NaturalCubicSpline_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new NaturalCubicSpline(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.NaturalCubicSpline_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.NaturalCubicSpline_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.NaturalCubicSpline_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new NaturalCubicSpline(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.NaturalCubicSpline_getConcreteClassName(swigCPtr, this);
+  }
+
   public NaturalCubicSpline() {
     this(opensimModelJNI.new_NaturalCubicSpline__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class NaturalCubicSpline extends Function {
 
   public NaturalCubicSpline(NaturalCubicSpline aSpline) {
     this(opensimModelJNI.new_NaturalCubicSpline__SWIG_3(NaturalCubicSpline.getCPtr(aSpline), aSpline), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.NaturalCubicSpline_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void init(Function aFunction) {
@@ -145,23 +162,6 @@ public class NaturalCubicSpline extends Function {
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
     opensimModelJNI.NaturalCubicSpline_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.NaturalCubicSpline_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.NaturalCubicSpline_isA(swigCPtr, this, type);
-  }
-
-  public static NaturalCubicSpline safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.NaturalCubicSpline_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new NaturalCubicSpline(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.NaturalCubicSpline_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

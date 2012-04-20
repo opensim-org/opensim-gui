@@ -35,8 +35,30 @@ public class Solver extends OpenSimObject {
     super.delete();
   }
 
-  public Solver(Model model) {
-    this(opensimModelJNI.new_Solver(Model.getCPtr(model), model), true);
+  public static Solver safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.Solver_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new Solver(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.Solver_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.Solver_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.Solver_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Solver(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.Solver_getConcreteClassName(swigCPtr, this);
+  }
+
+  public Model getModel() {
+    return new Model(opensimModelJNI.Solver_getModel(swigCPtr, this), false);
   }
 
 }

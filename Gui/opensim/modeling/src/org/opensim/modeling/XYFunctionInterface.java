@@ -42,6 +42,28 @@ public class XYFunctionInterface extends OpenSimObject {
 		dFunction = aFunction;
   }
 
+  public static XYFunctionInterface safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.XYFunctionInterface_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new XYFunctionInterface(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.XYFunctionInterface_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.XYFunctionInterface_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.XYFunctionInterface_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new XYFunctionInterface(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.XYFunctionInterface_getConcreteClassName(swigCPtr, this);
+  }
+
   public static boolean isXYFunction(Function f) {
     return opensimModelJNI.XYFunctionInterface_isXYFunction(Function.getCPtr(f), f);
   }

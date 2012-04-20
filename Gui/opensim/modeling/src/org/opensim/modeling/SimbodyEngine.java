@@ -35,6 +35,28 @@ public class SimbodyEngine extends OpenSimObject {
     super.delete();
   }
 
+  public static SimbodyEngine safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.SimbodyEngine_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new SimbodyEngine(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.SimbodyEngine_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.SimbodyEngine_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.SimbodyEngine_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new SimbodyEngine(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.SimbodyEngine_getConcreteClassName(swigCPtr, this);
+  }
+
   public void set_model(Model value) {
     opensimModelJNI.SimbodyEngine__model_set(swigCPtr, this, Model.getCPtr(value), value);
   }
@@ -54,11 +76,6 @@ public class SimbodyEngine extends OpenSimObject {
 
   public SimbodyEngine(SimbodyEngine aEngine) {
     this(opensimModelJNI.new_SimbodyEngine__SWIG_2(SimbodyEngine.getCPtr(aEngine), aEngine), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.SimbodyEngine_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public Model getModel() {

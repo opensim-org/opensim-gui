@@ -30,6 +30,7 @@ import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.openide.windows.TopComponent;
+import org.openide.windows.WindowManager;
 
 public final class EditMarkersAction extends CallableSystemAction {
    
@@ -56,7 +57,7 @@ public final class EditMarkersAction extends CallableSystemAction {
    }
    
     public void actionPerformed(ActionEvent evt) {
-        TopComponent win = MarkerEditorTopComponent.findInstance();
+        TopComponent win = WindowManager.getDefault().findTopComponent("properties");
         win.open();
         win.requestActive();
     }

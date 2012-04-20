@@ -35,24 +35,26 @@ public class ModelComponent extends OpenSimObject {
     super.delete();
   }
 
-  public ModelComponent() {
-    this(opensimModelJNI.new_ModelComponent__SWIG_0(), true);
+  public static ModelComponent safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.ModelComponent_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new ModelComponent(cPtr, false);
   }
 
-  public ModelComponent(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
-    this(opensimModelJNI.new_ModelComponent__SWIG_1(aFileName, aUpdateFromXMLNode), true);
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.ModelComponent_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
-  public ModelComponent(String aFileName) throws java.io.IOException {
-    this(opensimModelJNI.new_ModelComponent__SWIG_2(aFileName), true);
+  public static String getClassName() {
+    return opensimModelJNI.ModelComponent_getClassName();
   }
 
-  public ModelComponent(SWIGTYPE_p_SimTK__Xml__Element aNode) {
-    this(opensimModelJNI.new_ModelComponent__SWIG_3(SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode)), true);
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.ModelComponent_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new ModelComponent(cPtr, false);
   }
 
-  public ModelComponent(ModelComponent copy) {
-    this(opensimModelJNI.new_ModelComponent__SWIG_4(ModelComponent.getCPtr(copy), copy), true);
+  public String getConcreteClassName() {
+    return opensimModelJNI.ModelComponent_getConcreteClassName(swigCPtr, this);
   }
 
   public Model getModel() {
@@ -105,6 +107,10 @@ public class ModelComponent extends OpenSimObject {
 
   public void markCacheVariableValid(SWIGTYPE_p_SimTK__State state, String name) {
     opensimModelJNI.ModelComponent_markCacheVariableValid(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state), name);
+  }
+
+  public void markCacheVariableInvalid(SWIGTYPE_p_SimTK__State state, String name) {
+    opensimModelJNI.ModelComponent_markCacheVariableInvalid(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state), name);
   }
 
   public boolean isCacheVariableValid(SWIGTYPE_p_SimTK__State state, String name) {

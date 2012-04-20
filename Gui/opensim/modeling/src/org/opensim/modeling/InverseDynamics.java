@@ -35,21 +35,26 @@ public class InverseDynamics extends Analysis {
     super.delete();
   }
 
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.InverseDynamics_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.InverseDynamics_isA(swigCPtr, this, type);
-  }
-
   public static InverseDynamics safeDownCast(OpenSimObject obj) {
     long cPtr = opensimModelJNI.InverseDynamics_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new InverseDynamics(cPtr, false);
   }
 
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.InverseDynamics_copy__SWIG_0(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.InverseDynamics_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.InverseDynamics_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.InverseDynamics_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new InverseDynamics(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.InverseDynamics_getConcreteClassName(swigCPtr, this);
   }
 
   public InverseDynamics(Model aModel) {
@@ -62,11 +67,6 @@ public class InverseDynamics extends Analysis {
 
   public InverseDynamics(InverseDynamics aObject) {
     this(opensimModelJNI.new_InverseDynamics__SWIG_2(InverseDynamics.getCPtr(aObject), aObject), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.InverseDynamics_copy__SWIG_1(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setStorageCapacityIncrements(int aIncrement) {

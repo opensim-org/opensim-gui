@@ -35,17 +35,34 @@ public class PathWrap extends OpenSimObject {
     super.delete();
   }
 
+  public static PathWrap safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.PathWrap_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new PathWrap(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.PathWrap_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.PathWrap_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.PathWrap_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new PathWrap(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.PathWrap_getConcreteClassName(swigCPtr, this);
+  }
+
   public PathWrap() {
     this(opensimModelJNI.new_PathWrap__SWIG_0(), true);
   }
 
   public PathWrap(PathWrap aPathWrap) {
     this(opensimModelJNI.new_PathWrap__SWIG_1(PathWrap.getCPtr(aPathWrap), aPathWrap), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.PathWrap_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(PathWrap aPathWrap) {

@@ -35,6 +35,28 @@ public class ForwardTool extends AbstractTool {
     super.delete();
   }
 
+  public static ForwardTool safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.ForwardTool_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new ForwardTool(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.ForwardTool_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.ForwardTool_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.ForwardTool_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new ForwardTool(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.ForwardTool_getConcreteClassName(swigCPtr, this);
+  }
+
   public ForwardTool() {
     this(opensimModelJNI.new_ForwardTool__SWIG_0(), true);
   }
@@ -53,11 +75,6 @@ public class ForwardTool extends AbstractTool {
 
   public ForwardTool(ForwardTool aObject) {
     this(opensimModelJNI.new_ForwardTool__SWIG_4(ForwardTool.getCPtr(aObject), aObject), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.ForwardTool_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {

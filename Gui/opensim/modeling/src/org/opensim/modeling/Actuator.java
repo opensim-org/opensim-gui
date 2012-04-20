@@ -35,9 +35,26 @@ public class Actuator extends Actuator_ {
     super.delete();
   }
 
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.Actuator_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
+  public static Actuator safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.Actuator_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new Actuator(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.Actuator_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.Actuator_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.Actuator_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Actuator(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.Actuator_getConcreteClassName(swigCPtr, this);
   }
 
   public double getControl(SWIGTYPE_p_SimTK__State s) {
@@ -124,23 +141,6 @@ public class Actuator extends Actuator_ {
 
   public void resetOverrideForceFunction() {
     opensimModelJNI.Actuator_resetOverrideForceFunction(swigCPtr, this);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.Actuator_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.Actuator_isA(swigCPtr, this, type);
-  }
-
-  public static Actuator safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Actuator_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new Actuator(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.Actuator_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

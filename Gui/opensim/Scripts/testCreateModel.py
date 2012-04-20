@@ -1,6 +1,5 @@
 import javax.swing as swing
 import org.opensim.modeling as modeling
-import org.opensim.view.pub as view;
 
 modeling.OpenSimObject.setDebugLevel(3)
 osimModel = modeling.Model()

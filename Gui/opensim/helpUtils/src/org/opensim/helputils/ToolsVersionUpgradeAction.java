@@ -29,7 +29,7 @@ public final class ToolsVersionUpgradeAction extends CallableSystemAction {
                         mdl.initSystem();
                         boolean saveDefaults = OpenSimObject.getSerializeAllDefaults();
                         OpenSimObject.setSerializeAllDefaults(upgradePanel.isWriteDefaults());
-                        mdl.copy().print(output);
+                        mdl.clone().print(output);
                         OpenSimObject.setSerializeAllDefaults(saveDefaults);
                     } catch (IOException ex) {
                         ex.printStackTrace();
@@ -39,7 +39,7 @@ public final class ToolsVersionUpgradeAction extends CallableSystemAction {
                     OpenSimObject obj = OpenSimObject.makeObjectFromFile(input);
                     boolean saveDefaults = OpenSimObject.getSerializeAllDefaults();
                     OpenSimObject.setSerializeAllDefaults(upgradePanel.isWriteDefaults());
-                    obj.copy().print(output);
+                    obj.clone().print(output);
                     OpenSimObject.setSerializeAllDefaults(saveDefaults);
                 }
                 else if (upgradePanel.getExtension().equalsIgnoreCase(".sto")){

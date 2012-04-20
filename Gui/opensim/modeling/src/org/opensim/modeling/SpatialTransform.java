@@ -35,17 +35,34 @@ public class SpatialTransform extends OpenSimObject {
     super.delete();
   }
 
+  public static SpatialTransform safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.SpatialTransform_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new SpatialTransform(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.SpatialTransform_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.SpatialTransform_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.SpatialTransform_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new SpatialTransform(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.SpatialTransform_getConcreteClassName(swigCPtr, this);
+  }
+
   public SpatialTransform() {
     this(opensimModelJNI.new_SpatialTransform__SWIG_0(), true);
   }
 
   public SpatialTransform(SpatialTransform aSpatialTransform) {
     this(opensimModelJNI.new_SpatialTransform__SWIG_1(SpatialTransform.getCPtr(aSpatialTransform), aSpatialTransform), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.SpatialTransform_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(SpatialTransform aSpatialTransform) {

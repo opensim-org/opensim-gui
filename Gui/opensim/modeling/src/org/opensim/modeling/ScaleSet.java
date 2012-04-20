@@ -35,6 +35,28 @@ public class ScaleSet extends SetScales {
     super.delete();
   }
 
+  public static ScaleSet safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.ScaleSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new ScaleSet(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.ScaleSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.ScaleSet_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.ScaleSet_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new ScaleSet(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.ScaleSet_getConcreteClassName(swigCPtr, this);
+  }
+
   public ScaleSet() {
     this(opensimModelJNI.new_ScaleSet__SWIG_0(), true);
   }

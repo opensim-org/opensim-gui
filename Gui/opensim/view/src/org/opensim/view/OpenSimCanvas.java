@@ -80,7 +80,7 @@ public class OpenSimCanvas extends OpenSimBaseCanvas implements MouseWheelListen
     /** Creates a new instance of OpenSimCanvas */
     public OpenSimCanvas() {
         addMouseWheelListener(this);
-        profile=(OpenSimObject.getDebugLevel()>=2);
+        //profile=(OpenSimObject.getDebugLevel()>=2);
     }
     
     public int getLastX() {

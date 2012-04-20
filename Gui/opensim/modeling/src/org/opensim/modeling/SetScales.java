@@ -35,6 +35,28 @@ public class SetScales extends OpenSimObject {
     super.delete();
   }
 
+  public static SetScales safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.SetScales_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new SetScales(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.SetScales_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.SetScales_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.SetScales_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new SetScales(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.SetScales_getConcreteClassName(swigCPtr, this);
+  }
+
   public SetScales() {
     this(opensimModelJNI.new_SetScales__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class SetScales extends OpenSimObject {
 
   public SetScales(SetScales aSet) {
     this(opensimModelJNI.new_SetScales__SWIG_3(SetScales.getCPtr(aSet), aSet), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.SetScales_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setup() {

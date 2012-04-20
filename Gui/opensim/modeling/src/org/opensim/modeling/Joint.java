@@ -35,17 +35,34 @@ public class Joint extends ModelComponent {
     super.delete();
   }
 
+  public static Joint safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.Joint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new Joint(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.Joint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.Joint_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.Joint_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Joint(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.Joint_getConcreteClassName(swigCPtr, this);
+  }
+
   public void setup(Model aModel) {
     opensimModelJNI.Joint_setup(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
   public void copyData(Joint aJoint) {
     opensimModelJNI.Joint_copyData(swigCPtr, this, Joint.getCPtr(aJoint), aJoint);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.Joint_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setBody(Body aBody) {
@@ -152,25 +169,12 @@ public class Joint extends ModelComponent {
     return new SWIGTYPE_p_SimTK__SpatialVec(opensimModelJNI.Joint_calcEquivalentSpatialForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), SWIGTYPE_p_SimTK__Vector.getCPtr(mobilityForces)), true);
   }
 
+  public double calcPower(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Joint_calcPower(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
   public void scale(ScaleSet aScaleSet) {
     opensimModelJNI.Joint_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.Joint_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.Joint_isA(swigCPtr, this, type);
-  }
-
-  public static Joint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Joint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new Joint(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.Joint_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public void updateName(String aName) {

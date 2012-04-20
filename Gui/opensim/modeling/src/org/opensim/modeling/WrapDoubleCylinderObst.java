@@ -35,17 +35,34 @@ public class WrapDoubleCylinderObst extends WrapObject {
     super.delete();
   }
 
+  public static WrapDoubleCylinderObst safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.WrapDoubleCylinderObst_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new WrapDoubleCylinderObst(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.WrapDoubleCylinderObst_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.WrapDoubleCylinderObst_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.WrapDoubleCylinderObst_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new WrapDoubleCylinderObst(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.WrapDoubleCylinderObst_getConcreteClassName(swigCPtr, this);
+  }
+
   public WrapDoubleCylinderObst() {
     this(opensimModelJNI.new_WrapDoubleCylinderObst__SWIG_0(), true);
   }
 
   public WrapDoubleCylinderObst(WrapDoubleCylinderObst aWrapDoubleCylinderObst) {
     this(opensimModelJNI.new_WrapDoubleCylinderObst__SWIG_1(WrapDoubleCylinderObst.getCPtr(aWrapDoubleCylinderObst), aWrapDoubleCylinderObst), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.WrapDoubleCylinderObst_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(WrapDoubleCylinderObst aWrapDoubleCylinderObst) {

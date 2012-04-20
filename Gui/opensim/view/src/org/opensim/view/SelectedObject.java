@@ -63,7 +63,7 @@ public class SelectedObject implements Selectable {
    }
 
    public String getStatusText() {
-      return object.getType() + ":" + object.getName();
+      return object.getConcreteClassName() + ":" + object.getName();
    }
 
    private Model getModel(PathPoint mp) { return mp.getBody().getModel(); }
@@ -111,14 +111,14 @@ public class SelectedObject implements Selectable {
          double unselectedColor[] = {1.0, 1.0, 1.0};
          if(highlight){
              // Save existing color with the body for later restoration
-             Body b=(Body)object;
+             Body b=Body.safeDownCast(object);
              vtkProp3DCollection props =asm.GetParts();
              double[] currentColor = ((vtkActor)props.GetLastProp3D()).GetProperty().GetColor();
-             //OpenSim211 b.getDisplayer().getVisibleProperties().setColor(currentColor);
-             //ViewDB.getInstance().applyColor(defaultSelectedColor, asm);
+             //b.getDisplayer().getVisibleProperties().setColor(currentColor);
+             ViewDB.getInstance().applyColor(defaultSelectedColor, asm, false);
          }
          else{
-            Body b=(Body)object;
+            Body b=Body.safeDownCast(object);
             double[] actualColor = new double[3];
             asm.applyColorsFromModel();
          }

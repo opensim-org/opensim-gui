@@ -35,6 +35,28 @@ public class PrescribedForce extends Force {
     super.delete();
   }
 
+  public static PrescribedForce safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.PrescribedForce_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new PrescribedForce(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.PrescribedForce_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.PrescribedForce_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.PrescribedForce_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new PrescribedForce(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.PrescribedForce_getConcreteClassName(swigCPtr, this);
+  }
+
   public PrescribedForce(Body body) {
     this(opensimModelJNI.new_PrescribedForce__SWIG_0(Body.getCPtr(body), body), true);
   }
@@ -49,11 +71,6 @@ public class PrescribedForce extends Force {
 
   public PrescribedForce(SWIGTYPE_p_SimTK__Xml__Element aNode) {
     this(opensimModelJNI.new_PrescribedForce__SWIG_3(SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode)), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.PrescribedForce_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
@@ -182,23 +199,6 @@ public class PrescribedForce extends Force {
 
   public ArrayDouble getRecordValues(SWIGTYPE_p_SimTK__State state) {
     return new ArrayDouble(opensimModelJNI.PrescribedForce_getRecordValues(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state)), true);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.PrescribedForce_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.PrescribedForce_isA(swigCPtr, this, type);
-  }
-
-  public static PrescribedForce safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.PrescribedForce_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new PrescribedForce(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.PrescribedForce_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

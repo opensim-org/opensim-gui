@@ -35,6 +35,28 @@ public class BodySet extends ModelComponentSetBodies {
     super.delete();
   }
 
+  public static BodySet safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.BodySet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new BodySet(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.BodySet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.BodySet_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.BodySet_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new BodySet(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.BodySet_getConcreteClassName(swigCPtr, this);
+  }
+
   public BodySet() {
     this(opensimModelJNI.new_BodySet__SWIG_0(), true);
   }

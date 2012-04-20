@@ -35,6 +35,28 @@ public class ModelComponentSetBodies extends SetBodies {
     super.delete();
   }
 
+  public static ModelComponentSetBodies safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.ModelComponentSetBodies_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new ModelComponentSetBodies(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.ModelComponentSetBodies_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.ModelComponentSetBodies_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.ModelComponentSetBodies_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new ModelComponentSetBodies(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.ModelComponentSetBodies_getConcreteClassName(swigCPtr, this);
+  }
+
   public ModelComponentSetBodies() {
     this(opensimModelJNI.new_ModelComponentSetBodies__SWIG_0(), true);
   }
@@ -53,11 +75,6 @@ public class ModelComponentSetBodies extends SetBodies {
 
   public ModelComponentSetBodies(ModelComponentSetBodies source) {
     this(opensimModelJNI.new_ModelComponentSetBodies__SWIG_4(ModelComponentSetBodies.getCPtr(source), source), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.ModelComponentSetBodies_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public boolean append(Body aObject) {

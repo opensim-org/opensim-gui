@@ -35,6 +35,28 @@ public class SetMuscles extends OpenSimObject {
     super.delete();
   }
 
+  public static SetMuscles safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.SetMuscles_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new SetMuscles(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.SetMuscles_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.SetMuscles_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.SetMuscles_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new SetMuscles(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.SetMuscles_getConcreteClassName(swigCPtr, this);
+  }
+
   public SetMuscles() {
     this(opensimModelJNI.new_SetMuscles__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class SetMuscles extends OpenSimObject {
 
   public SetMuscles(SetMuscles aSet) {
     this(opensimModelJNI.new_SetMuscles__SWIG_3(SetMuscles.getCPtr(aSet), aSet), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.SetMuscles_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setup() {

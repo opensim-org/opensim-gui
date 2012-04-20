@@ -13,7 +13,9 @@ import javax.swing.text.DocumentFilter;
 
 import org.python.core.Py;
 import org.python.core.PyException;
+import org.python.core.PySystemState;
 import org.python.util.InteractiveInterpreter;
+import org.python.util.JLineConsole;
 
 /**
  * Copyright (c)  2005-2012, Stanford University and Ayman Habib
@@ -68,7 +70,7 @@ public class JConsole extends JTextArea implements KeyListener {
     /**
      * The script engine and scope we're using
      */
-    InteractiveInterpreter engine;
+    InteractiveInterpreter interp;
     /**
      * The allowed variables and stuff to use
      */
@@ -81,27 +83,50 @@ public class JConsole extends JTextArea implements KeyListener {
      * 
      */
     public JConsole() {
+        
         // create streams that will link with this
         in = new ConsoleInputStream(this);
         // System.setIn(in);
         out = new ConsoleOutputStream(this);
-        // System.setOut(new PrintStream(out));
+        //System.setOut(new PrintStream(out));
         err = new ConsoleOutputStream(this);
         // setup the command history
         history = new CommandHistory();
         // setup the script engine
-        engine = new InteractiveInterpreter();
+        interp = new InteractiveInterpreter();
 
+        // no postProps, registry values used 
+        //JLineConsole.initialize(System.getProperties(), null, new String[0]);
+
+        //interp = new JLineConsole();
+        /*
+        // important line, set JLineConsole to internal python variable to be able to 
+        // acces console from python interface
+        interp.getSystemState().__setattr__("_jy_interpreter", Py.java2py(interp));
+
+        // this instance - in order to call interrupt on correct thread
+        //interp.getSystemState().__setattr__("_jy_main", Py.java2py(this));
+		
+        // JLINE console initialization
+        JLineConsole.initialize(System.getProperties(), null, new String[0]);       // setup the script interp
+        
+        // enable autocomplete by default:)
+        interp.exec("import rlcompleter, readline");
+        interp.exec("readline.parse_and_bind('tab: complete')");
+        */
         Py.getSystemState().setClassLoader(
                 this.getClass().getClassLoader());
-        engine.exec("import sys");
-        engine.exec("import javax.swing as swing");
-        engine.exec("import java.lang as lang");
-        engine.exec("import org.opensim.modeling as modeling");
-        engine.exec("import org.opensim.view.pub as view");
-        engine.exec("import org.opensim.tracking as tools");
-        engine.setOut(out);
-        engine.setErr(err);
+        interp.exec("import sys");
+        interp.exec("import javax.swing as swing");
+        interp.exec("import java.lang as lang");
+        interp.exec("import org.opensim.modeling as modeling");
+        interp.exec("from org.opensim.console.gui import *");
+        interp.exec("from org.opensim.console.OpenSimPlotter import *");
+        
+        //engine.exec("import org.opensim.tracking as tools");
+        //interp.setIn(in);
+        interp.setOut(out);
+        interp.setErr(err);
         setTabSize(4);
         // setup the event handlers and input processing
         // setup the document filter so output and old text can't be modified
@@ -112,6 +137,7 @@ public class JConsole extends JTextArea implements KeyListener {
         setText("Jython Interactive Console\r\n>>> ");
         // editStart = getText().length();
         getCaret().setDot(editStart);
+       //((JLineConsole)interp).interact();
     }
 
     @Override
@@ -207,7 +233,24 @@ public class JConsole extends JTextArea implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.isControlDown()) {
+        if (e.getKeyCode() == KeyEvent.VK_UP && !e.isShiftDown() && !e.isAltDown()) {
+            // prev in history
+            StringBuilder temp = new StringBuilder(getText());
+            // remove the current command
+            temp.delete(editStart, temp.length());
+            temp.append(history.getPrevCommand());
+            setText(temp.toString(), false);
+            e.consume();
+        } else if (e.getKeyCode() == KeyEvent.VK_DOWN && !e.isShiftDown() && !e.isAltDown()) {
+            // next in history
+            StringBuilder temp = new StringBuilder(getText());
+            // remove the current command
+            temp.delete(editStart, temp.length());
+            temp.append(history.getNextCommand());
+            setText(temp.toString(), false);
+            e.consume();
+        }        
+        else if (e.isControlDown()) {
             if (e.getKeyCode() == KeyEvent.VK_A && !e.isShiftDown() && !e.isAltDown()) {
                 // handle select all
                 // if selection start is in the editable region, try to select
@@ -222,23 +265,7 @@ public class JConsole extends JTextArea implements KeyListener {
                         e.consume();
                     }
                 }
-            } else if (e.getKeyCode() == KeyEvent.VK_DOWN && !e.isShiftDown() && !e.isAltDown()) {
-                // next in history
-                StringBuilder temp = new StringBuilder(getText());
-                // remove the current command
-                temp.delete(editStart, temp.length());
-                temp.append(history.getNextCommand());
-                setText(temp.toString(), false);
-                e.consume();
-            } else if (e.getKeyCode() == KeyEvent.VK_UP && !e.isShiftDown() && !e.isAltDown()) {
-                // prev in history
-                StringBuilder temp = new StringBuilder(getText());
-                // remove the current command
-                temp.delete(editStart, temp.length());
-                temp.append(history.getPrevCommand());
-                setText(temp.toString(), false);
-                e.consume();
-            }
+            } 
         } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             // handle script execution
             if (!e.isShiftDown() && !e.isAltDown()) {
@@ -310,12 +337,13 @@ public class JConsole extends JTextArea implements KeyListener {
         public void run() {
             running = true;
             try {
-                engine.runsource(commands);
+                interp.runsource(commands);
+                ScriptingShellTopComponent.getDefault().logMessage(commands);
             } catch (PyException e) {
                 // prints out the python error message to the console
                 e.printStackTrace();
             }
-            // engine.eval(commands, context);
+            // interp.eval(commands, context);
             StringBuilder text = new StringBuilder(getText());
             text.append(">>> ");
             setText(text.toString());
@@ -344,3 +372,16 @@ public class JConsole extends JTextArea implements KeyListener {
         // don't need to use this for anything
     }
 }
+ /*
+ *          StreamGobbler errorGobbler = new 
+            StreamGobbler(proc.getErrorStream(), "ERROR");            
+            
+            // any output?
+            StreamGobbler outputGobbler = new 
+               StreamGobbler(proc.getInputStream(), "OUTPUT");
+                
+            // kick them off
+            errorGobbler.start();
+            outputGobbler.start();                
+
+ */

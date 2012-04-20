@@ -91,6 +91,10 @@ public class ArrayInt {
     return opensimModelJNI.ArrayInt_getSize(swigCPtr, this);
   }
 
+  public int size() {
+    return opensimModelJNI.ArrayInt_size(swigCPtr, this);
+  }
+
   public int append(int aValue) {
     return opensimModelJNI.ArrayInt_append__SWIG_0(swigCPtr, this, aValue);
   }

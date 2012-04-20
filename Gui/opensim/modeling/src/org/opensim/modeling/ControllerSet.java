@@ -35,6 +35,28 @@ public class ControllerSet extends ModelComponentSetControllers {
     super.delete();
   }
 
+  public static ControllerSet safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.ControllerSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new ControllerSet(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.ControllerSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.ControllerSet_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.ControllerSet_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new ControllerSet(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.ControllerSet_getConcreteClassName(swigCPtr, this);
+  }
+
   public ControllerSet() {
     this(opensimModelJNI.new_ControllerSet__SWIG_0(), true);
   }
@@ -53,11 +75,6 @@ public class ControllerSet extends ModelComponentSetControllers {
 
   public ControllerSet(Model model, String aFileName) {
     this(opensimModelJNI.new_ControllerSet__SWIG_4(Model.getCPtr(model), model, aFileName), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.ControllerSet_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(ControllerSet aAbsControllerSet) {

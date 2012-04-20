@@ -35,9 +35,26 @@ public class Actuator_ extends Force {
     super.delete();
   }
 
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.Actuator__copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
+  public static Actuator_ safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.Actuator__safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new Actuator_(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.Actuator__assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.Actuator__getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.Actuator__clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Actuator_(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.Actuator__getConcreteClassName(swigCPtr, this);
   }
 
   public int numControls() {

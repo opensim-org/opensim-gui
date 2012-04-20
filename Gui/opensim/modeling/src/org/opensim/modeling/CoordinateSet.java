@@ -35,6 +35,28 @@ public class CoordinateSet extends ModelComponentSetCoordinates {
     super.delete();
   }
 
+  public static CoordinateSet safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.CoordinateSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new CoordinateSet(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.CoordinateSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.CoordinateSet_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.CoordinateSet_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new CoordinateSet(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.CoordinateSet_getConcreteClassName(swigCPtr, this);
+  }
+
   public CoordinateSet() {
     this(opensimModelJNI.new_CoordinateSet__SWIG_0(), true);
   }

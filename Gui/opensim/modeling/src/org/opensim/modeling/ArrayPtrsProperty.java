@@ -91,12 +91,16 @@ public class ArrayPtrsProperty {
     return opensimModelJNI.ArrayPtrsProperty_getSize(swigCPtr, this);
   }
 
-  public int getIndex(Property aObject, int aStartIndex) {
-    return opensimModelJNI.ArrayPtrsProperty_getIndex__SWIG_0(swigCPtr, this, Property.getCPtr(aObject), aObject, aStartIndex);
+  public int size() {
+    return opensimModelJNI.ArrayPtrsProperty_size(swigCPtr, this);
   }
 
-  public int getIndex(Property aObject) {
-    return opensimModelJNI.ArrayPtrsProperty_getIndex__SWIG_1(swigCPtr, this, Property.getCPtr(aObject), aObject);
+  public int getIndex(Property_Deprecated aObject, int aStartIndex) {
+    return opensimModelJNI.ArrayPtrsProperty_getIndex__SWIG_0(swigCPtr, this, Property_Deprecated.getCPtr(aObject), aObject, aStartIndex);
+  }
+
+  public int getIndex(Property_Deprecated aObject) {
+    return opensimModelJNI.ArrayPtrsProperty_getIndex__SWIG_1(swigCPtr, this, Property_Deprecated.getCPtr(aObject), aObject);
   }
 
   public int getIndex(String aName, int aStartIndex) {
@@ -107,59 +111,59 @@ public class ArrayPtrsProperty {
     return opensimModelJNI.ArrayPtrsProperty_getIndex__SWIG_3(swigCPtr, this, aName);
   }
 
-  public boolean append(Property aObject) {
-    return opensimModelJNI.ArrayPtrsProperty_append__SWIG_0(swigCPtr, this, Property.getCPtr(aObject), aObject);
+  public boolean append(Property_Deprecated aObject) {
+    return opensimModelJNI.ArrayPtrsProperty_append__SWIG_0(swigCPtr, this, Property_Deprecated.getCPtr(aObject), aObject);
   }
 
   public boolean append(ArrayPtrsProperty aArray) {
     return opensimModelJNI.ArrayPtrsProperty_append__SWIG_1(swigCPtr, this, ArrayPtrsProperty.getCPtr(aArray), aArray);
   }
 
-  public boolean insert(int aIndex, Property aObject) {
-    return opensimModelJNI.ArrayPtrsProperty_insert(swigCPtr, this, aIndex, Property.getCPtr(aObject), aObject);
+  public boolean insert(int aIndex, Property_Deprecated aObject) {
+    return opensimModelJNI.ArrayPtrsProperty_insert(swigCPtr, this, aIndex, Property_Deprecated.getCPtr(aObject), aObject);
   }
 
   public boolean remove(int aIndex) {
     return opensimModelJNI.ArrayPtrsProperty_remove__SWIG_0(swigCPtr, this, aIndex);
   }
 
-  public boolean remove(Property aObject) {
-    return opensimModelJNI.ArrayPtrsProperty_remove__SWIG_1(swigCPtr, this, Property.getCPtr(aObject), aObject);
+  public boolean remove(Property_Deprecated aObject) {
+    return opensimModelJNI.ArrayPtrsProperty_remove__SWIG_1(swigCPtr, this, Property_Deprecated.getCPtr(aObject), aObject);
   }
 
-  public boolean set(int aIndex, Property aObject) {
-    return opensimModelJNI.ArrayPtrsProperty_set(swigCPtr, this, aIndex, Property.getCPtr(aObject), aObject);
+  public boolean set(int aIndex, Property_Deprecated aObject) {
+    return opensimModelJNI.ArrayPtrsProperty_set(swigCPtr, this, aIndex, Property_Deprecated.getCPtr(aObject), aObject);
   }
 
-  public Property get(int aIndex) {
+  public Property_Deprecated get(int aIndex) {
     long cPtr = opensimModelJNI.ArrayPtrsProperty_get__SWIG_0(swigCPtr, this, aIndex);
-    return (cPtr == 0) ? null : new Property(cPtr, false);
+    return (cPtr == 0) ? null : new Property_Deprecated(cPtr, false);
   }
 
-  public Property get(String aName) {
+  public Property_Deprecated get(String aName) {
     long cPtr = opensimModelJNI.ArrayPtrsProperty_get__SWIG_1(swigCPtr, this, aName);
-    return (cPtr == 0) ? null : new Property(cPtr, false);
+    return (cPtr == 0) ? null : new Property_Deprecated(cPtr, false);
   }
 
-  public Property getLast() {
+  public Property_Deprecated getLast() {
     long cPtr = opensimModelJNI.ArrayPtrsProperty_getLast(swigCPtr, this);
-    return (cPtr == 0) ? null : new Property(cPtr, false);
+    return (cPtr == 0) ? null : new Property_Deprecated(cPtr, false);
   }
 
-  public int searchBinary(Property aObject, boolean aFindFirst, int aLo, int aHi) {
-    return opensimModelJNI.ArrayPtrsProperty_searchBinary__SWIG_0(swigCPtr, this, Property.getCPtr(aObject), aObject, aFindFirst, aLo, aHi);
+  public int searchBinary(Property_Deprecated aObject, boolean aFindFirst, int aLo, int aHi) {
+    return opensimModelJNI.ArrayPtrsProperty_searchBinary__SWIG_0(swigCPtr, this, Property_Deprecated.getCPtr(aObject), aObject, aFindFirst, aLo, aHi);
   }
 
-  public int searchBinary(Property aObject, boolean aFindFirst, int aLo) {
-    return opensimModelJNI.ArrayPtrsProperty_searchBinary__SWIG_1(swigCPtr, this, Property.getCPtr(aObject), aObject, aFindFirst, aLo);
+  public int searchBinary(Property_Deprecated aObject, boolean aFindFirst, int aLo) {
+    return opensimModelJNI.ArrayPtrsProperty_searchBinary__SWIG_1(swigCPtr, this, Property_Deprecated.getCPtr(aObject), aObject, aFindFirst, aLo);
   }
 
-  public int searchBinary(Property aObject, boolean aFindFirst) {
-    return opensimModelJNI.ArrayPtrsProperty_searchBinary__SWIG_2(swigCPtr, this, Property.getCPtr(aObject), aObject, aFindFirst);
+  public int searchBinary(Property_Deprecated aObject, boolean aFindFirst) {
+    return opensimModelJNI.ArrayPtrsProperty_searchBinary__SWIG_2(swigCPtr, this, Property_Deprecated.getCPtr(aObject), aObject, aFindFirst);
   }
 
-  public int searchBinary(Property aObject) {
-    return opensimModelJNI.ArrayPtrsProperty_searchBinary__SWIG_3(swigCPtr, this, Property.getCPtr(aObject), aObject);
+  public int searchBinary(Property_Deprecated aObject) {
+    return opensimModelJNI.ArrayPtrsProperty_searchBinary__SWIG_3(swigCPtr, this, Property_Deprecated.getCPtr(aObject), aObject);
   }
 
 }

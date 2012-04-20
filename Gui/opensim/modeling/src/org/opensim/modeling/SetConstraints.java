@@ -35,6 +35,28 @@ public class SetConstraints extends OpenSimObject {
     super.delete();
   }
 
+  public static SetConstraints safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.SetConstraints_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new SetConstraints(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.SetConstraints_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.SetConstraints_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.SetConstraints_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new SetConstraints(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.SetConstraints_getConcreteClassName(swigCPtr, this);
+  }
+
   public SetConstraints() {
     this(opensimModelJNI.new_SetConstraints__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class SetConstraints extends OpenSimObject {
 
   public SetConstraints(SetConstraints aSet) {
     this(opensimModelJNI.new_SetConstraints__SWIG_3(SetConstraints.getCPtr(aSet), aSet), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.SetConstraints_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setup() {

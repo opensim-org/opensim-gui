@@ -35,9 +35,26 @@ public class DynamicsTool extends Tool {
     super.delete();
   }
 
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.DynamicsTool_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
+  public static DynamicsTool safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.DynamicsTool_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new DynamicsTool(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.DynamicsTool_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.DynamicsTool_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.DynamicsTool_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new DynamicsTool(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.DynamicsTool_getConcreteClassName(swigCPtr, this);
   }
 
   public void disableModelForces(Model model, SWIGTYPE_p_SimTK__State s, ArrayStr forcesByNameOrGroup) {

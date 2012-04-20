@@ -35,6 +35,28 @@ public class GeometrySet extends SetGeometry {
     super.delete();
   }
 
+  public static GeometrySet safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.GeometrySet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new GeometrySet(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.GeometrySet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.GeometrySet_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.GeometrySet_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new GeometrySet(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.GeometrySet_getConcreteClassName(swigCPtr, this);
+  }
+
   public GeometrySet() {
     this(opensimModelJNI.new_GeometrySet(), true);
   }

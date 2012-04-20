@@ -324,7 +324,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       String str = "";
       for(int i=0; i<toolModel.getAnalysisSet().getSize(); i++){
           Analysis an = toolModel.getAnalysisSet().get(i);
-          str += (i>0 ? ", " : "") + an.getType();
+          str += (i>0 ? ", " : "") + an.getConcreteClassName();
           toolModel.setAnalysisTimeFromTool(an);
       }
       activeAnalyses.setText(str);
@@ -1905,7 +1905,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
             }
             else {
                 OpenSimObject objGeneric = OpenSimObject.makeObjectFromFile(controlsFile);
-                if (objGeneric==null || !objGeneric.getType().equalsIgnoreCase("ControlSet")){
+                if (objGeneric==null || !objGeneric.getConcreteClassName().equalsIgnoreCase("ControlSet")){
                     DialogDisplayer.getDefault().notify(
                             new NotifyDescriptor.Message("Could not construct excitations from the specified file."));
                     return;

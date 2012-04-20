@@ -717,7 +717,8 @@ public class ModelWindowVTKTopComponent extends TopComponent
         
         // Set toolBarPanel1 background color
         toolBarPanel1.setBackground(new java.awt.Color((int) (background[0]*255), (int) (background[1]*255), (int) (background[2]*255)));
-        
+        //getCanvas().loadLogoImage();
+        //getCanvas().GetRenderer().Modified();
     }
     
     public void recenterSphere()
@@ -772,5 +773,8 @@ public class ModelWindowVTKTopComponent extends TopComponent
 
     public UndoRedo getUndoRedo() {
         return ExplorerTopComponent.getDefault().getUndoRedo();
+    }
+    public void processKey(char c) {
+        getCanvas().processKey(c);
     }
 }

@@ -63,8 +63,8 @@ public class OtherForcesNode extends OpenSimObjectSetNode {
             Muscle msl = Muscle.safeDownCast(nextForce);
             if (msl != null)
                continue;
-            if (nextForce.getType().equalsIgnoreCase("ElasticFoundationForce") ||
-              nextForce.getType().equalsIgnoreCase("HuntCrossleyForce"))
+            if (nextForce.getConcreteClassName().equalsIgnoreCase("ElasticFoundationForce") ||
+              nextForce.getConcreteClassName().equalsIgnoreCase("HuntCrossleyForce"))
                continue;
             Actuator act = Actuator.safeDownCast(nextForce);
             if (act != null)

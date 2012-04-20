@@ -51,9 +51,9 @@ public class PropertyTransform extends PropertyDblArray {
     this(opensimModelJNI.new_PropertyTransform__SWIG_3(PropertyTransform.getCPtr(aProperty), aProperty), true);
   }
 
-  public Property copy() {
-    long cPtr = opensimModelJNI.PropertyTransform_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new Property(cPtr, false);
+  public AbstractProperty clone() {
+    long cPtr = opensimModelJNI.PropertyTransform_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new PropertyTransform(cPtr, false);
   }
 
   public String getTypeAsString() {

@@ -35,6 +35,28 @@ public class MarkerPairSet extends SetMarkerPairs {
     super.delete();
   }
 
+  public static MarkerPairSet safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.MarkerPairSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new MarkerPairSet(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.MarkerPairSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.MarkerPairSet_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.MarkerPairSet_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new MarkerPairSet(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.MarkerPairSet_getConcreteClassName(swigCPtr, this);
+  }
+
   public MarkerPairSet() {
     this(opensimModelJNI.new_MarkerPairSet__SWIG_0(), true);
   }

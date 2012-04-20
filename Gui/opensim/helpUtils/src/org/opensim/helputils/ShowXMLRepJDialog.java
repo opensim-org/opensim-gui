@@ -3,24 +3,25 @@
  *
  * Created on March 29, 2011, 9:17 PM
  */
-
 package org.opensim.helputils;
 
 import java.io.IOException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.text.html.HTMLEditorKit;
+import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.Property;
 import org.opensim.modeling.PropertySet;
+import org.opensim.modeling.Property_Deprecated;
 
 /**
  *
  * @author  Ayman
  */
 public class ShowXMLRepJDialog extends javax.swing.JDialog {
-    
+
     DefaultComboBoxModel cbModel = new DefaultComboBoxModel();
+
     /** Creates new form ShowXMLRepJDialog */
     public ShowXMLRepJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -28,7 +29,7 @@ public class ShowXMLRepJDialog extends javax.swing.JDialog {
         initComponents();
         jEditorPane1.setEditorKit(new HTMLEditorKit());
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -109,45 +110,49 @@ public class ShowXMLRepJDialog extends javax.swing.JDialog {
 // TODO add your handling code here:
         String selectedClass = (String) jComboBox1.getSelectedItem();
         OpenSimObject obj = OpenSimObject.newInstanceOfType(selectedClass);
-        String contents="";
+        String contents = "";
         PropertySet pSet = obj.getPropertySet();
-        contents = contents.concat("<FONT COLOR=RED>&lt;"+obj.getType()+"&gt</FONT><br>");
-        for(int i=0; i< pSet.getSize(); i++){
+        contents = contents.concat("<FONT COLOR=RED>&lt;" + obj.getConcreteClassName() + "&gt</FONT><br>");
+        for (int i = 0; i < pSet.getSize(); i++) {
             try {
-                Property p = pSet.get(i);
+                Property_Deprecated p = pSet.get(i);
                 String cmt = p.getComment();
-                if (cmt.length()>0) contents = contents.concat("\t<FONT COLOR=Green>&lt;!--"+cmt+"--&gt</FONT><br>");
-                contents = contents.concat("\t<FONT COLOR=RED>&lt;"+p.getName()+"&gt;</FONT>"+
-                        removeEnclosingParethesisIfNeeded(p.toString())+
-                        "<FONT COLOR=RED>&lt;/"+p.getName()+"&gt</FONT><br>");
+                if (cmt.length() > 0) {
+                    contents = contents.concat("\t<FONT COLOR=Green>&lt;!--" + cmt + "--&gt</FONT><br>");
+                }
+                contents = contents.concat("\t<FONT COLOR=RED>&lt;" + p.getName() + "&gt;</FONT>"
+                        + removeEnclosingParethesisIfNeeded(p.toString())
+                        + "<FONT COLOR=RED>&lt;/" + p.getName() + "&gt</FONT><br>");
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-           
+            
         }
-        contents = contents.concat("<FONT COLOR=RED>&lt;/"+obj.getType()+"&gt</FONT><br>");
+        //contents = contents.concat(dumpObj(obj, contents));
+        contents = contents.concat("<FONT COLOR=RED>&lt;/" + obj.getConcreteClassName() + "&gt</FONT><br>");
         jEditorPane1.selectAll();
         jEditorPane1.cut();
         jEditorPane1.setText(contents);
-        String credits="";
-        if (!obj.getAuthors().equalsIgnoreCase("")){
-            credits=credits.concat("Authors: "+obj.getAuthors()+"\n");
+        String credits = "";
+        if (!obj.getAuthors().equalsIgnoreCase("")) {
+            credits = credits.concat("Authors: " + obj.getAuthors() + "\n");
+        } else {
+            credits = credits.concat("Provided by the OpenSim development team.\n");
         }
-        else
-            credits=credits.concat("Provided by the OpenSim development team.\n");
-        if (!obj.getReferences().equalsIgnoreCase("")){
-            credits=credits.concat("Reference: "+obj.getReferences()+"\n");
+        if (!obj.getReferences().equalsIgnoreCase("")) {
+            credits = credits.concat("Reference: " + obj.getReferences() + "\n");
+        } else {
+            credits = credits.concat("Reference: " + "OpenSim IEEE Publication\n");
         }
-        else
-            credits=credits.concat("Reference: "+"OpenSim IEEE Publication\n");
         creditsTextArea.setText(credits);
     }//GEN-LAST:event_jComboBox1ActionPerformed
-    
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 new ShowXMLRepJDialog(new javax.swing.JFrame(), true).setVisible(true);
             }
@@ -157,10 +162,10 @@ public class ShowXMLRepJDialog extends javax.swing.JDialog {
     private void populateCbModel() {
         ArrayStr typeNames = new ArrayStr();
         OpenSimObject.getRegisteredTypenames(typeNames);
-        for(int i=0; i< typeNames.getSize(); i++)
+        for (int i = 0; i < typeNames.getSize(); i++) {
             cbModel.addElement(typeNames.getitem(i));
+        }
     }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea creditsTextArea;
     private javax.swing.JComboBox jComboBox1;
@@ -169,11 +174,25 @@ public class ShowXMLRepJDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
-   
+
     private String removeEnclosingParethesisIfNeeded(String string) {
-        if (string.startsWith("(")){
-            return string.substring(1, string.length()-1);
+        if (string.startsWith("(")) {
+            return string.substring(1, string.length() - 1);
         }
         return string;
+    }
+
+    String dumpObj(OpenSimObject obj, String dumpToString) {
+        for (int p = 0; p < obj.getNumProperties(); ++p) {
+            AbstractProperty ap = obj.getPropertyByIndex(p);
+            dumpToString = dumpToString.concat("\t");
+            dumpToString = dumpToString.concat(ap.getName()+ "=" + ap.toString());
+            if (ap.isObjectProperty()) {
+                for (int i = 0; i < ap.size(); ++i) {
+                    dumpObj(ap.getValueAsObject(i),dumpToString);
+                }
+            }
+        }
+        return dumpToString;
     }
 }

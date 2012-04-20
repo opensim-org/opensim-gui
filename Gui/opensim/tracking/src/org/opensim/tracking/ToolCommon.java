@@ -28,7 +28,7 @@ package org.opensim.tracking;
 import javax.swing.JComponent;
 import org.opensim.modeling.IO;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.Property;
+import org.opensim.modeling.Property_Deprecated;
 import org.opensim.modeling.PropertySet;
 
 public class ToolCommon {
@@ -40,14 +40,14 @@ public class ToolCommon {
 
     public static void bindProperty(OpenSimObject obj, String propertyName, JComponent comp) { 
       PropertySet pset = obj.getPropertySet();
-      Property prop = pset.contains(propertyName);
+      Property_Deprecated prop = pset.contains(propertyName);
       if(prop!=null) {
          String comment = prop.getComment();
          if(!comment.equals("")) {
-            comp.setToolTipText("<html>"+IO.formatText(comment, "", 120, "<br>")+"<br><br>XML property: <b>"+obj.getType()+" > "+propertyName+"</b></html>");
+            comp.setToolTipText("<html>"+IO.formatText(comment, "", 120, "<br>")+"<br><br>XML property: <b>"+obj.getConcreteClassName()+" > "+propertyName+"</b></html>");
          }
       } else {
-         System.out.println("ToolCommon.bindProperty: Could not find property '"+propertyName+"' in object of type '"+obj.getType()+"'");
+         System.out.println("ToolCommon.bindProperty: Could not find property '"+propertyName+"' in object of type '"+obj.getConcreteClassName()+"'");
       }
    }
 }

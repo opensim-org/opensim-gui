@@ -10,6 +10,7 @@ INSTALL_FILES(/etc/ FILES  ${ETC_FILES})
 INSTALL(DIRECTORY ${NETBEANS_INSTALL_DIR}/platform6/ DESTINATION platform6)
 # IF(EXISTS opensim/build/cluster/)
 INSTALL(DIRECTORY opensim/build/cluster/ DESTINATION opensim)
+INSTALL(DIRECTORY opensim/Scripts DESTINATION Scripts)
 # ENDIF(EXISTS opensim/build/cluster/)
 
 # This to be replaced with a CMake Variable

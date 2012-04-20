@@ -35,6 +35,28 @@ public class Ligament extends Force {
     super.delete();
   }
 
+  public static Ligament safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.Ligament_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new Ligament(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.Ligament_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.Ligament_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.Ligament_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Ligament(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.Ligament_getConcreteClassName(swigCPtr, this);
+  }
+
   public Ligament() {
     this(opensimModelJNI.new_Ligament__SWIG_0(), true);
   }
@@ -43,17 +65,16 @@ public class Ligament extends Force {
     this(opensimModelJNI.new_Ligament__SWIG_1(Ligament.getCPtr(aLigament), aLigament), true);
   }
 
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.Ligament_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
-  }
-
   public void copyData(Ligament aLigament) {
     opensimModelJNI.Ligament_copyData(swigCPtr, this, Ligament.getCPtr(aLigament), aLigament);
   }
 
   public GeometryPath getGeometryPath() {
     return new GeometryPath(opensimModelJNI.Ligament_getGeometryPath(swigCPtr, this), false);
+  }
+
+  public GeometryPath updGeometryPath() {
+    return new GeometryPath(opensimModelJNI.Ligament_updGeometryPath(swigCPtr, this), false);
   }
 
   public boolean hasGeometryPath() {
@@ -81,8 +102,7 @@ public class Ligament extends Force {
   }
 
   public Function getForceLengthCurve() {
-    long cPtr = opensimModelJNI.Ligament_getForceLengthCurve(swigCPtr, this);
-    return (cPtr == 0) ? null : new Function(cPtr, false);
+    return new Function(opensimModelJNI.Ligament_getForceLengthCurve(swigCPtr, this), false);
   }
 
   public boolean setForceLengthCurve(Function aForceLengthCurve) {
@@ -116,23 +136,6 @@ public class Ligament extends Force {
 
   public void updateDisplayer(SWIGTYPE_p_SimTK__State s) {
     opensimModelJNI.Ligament_updateDisplayer(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.Ligament_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.Ligament_isA(swigCPtr, this, type);
-  }
-
-  public static Ligament safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Ligament_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new Ligament(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.Ligament_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

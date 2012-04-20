@@ -35,6 +35,28 @@ public class ModelComponentSetCoordinates extends SetCoordinates {
     super.delete();
   }
 
+  public static ModelComponentSetCoordinates safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.ModelComponentSetCoordinates_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new ModelComponentSetCoordinates(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.ModelComponentSetCoordinates_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.ModelComponentSetCoordinates_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.ModelComponentSetCoordinates_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new ModelComponentSetCoordinates(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.ModelComponentSetCoordinates_getConcreteClassName(swigCPtr, this);
+  }
+
   public ModelComponentSetCoordinates() {
     this(opensimModelJNI.new_ModelComponentSetCoordinates__SWIG_0(), true);
   }
@@ -53,11 +75,6 @@ public class ModelComponentSetCoordinates extends SetCoordinates {
 
   public ModelComponentSetCoordinates(ModelComponentSetCoordinates source) {
     this(opensimModelJNI.new_ModelComponentSetCoordinates__SWIG_4(ModelComponentSetCoordinates.getCPtr(source), source), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.ModelComponentSetCoordinates_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public boolean append(Coordinate aObject) {

@@ -46,6 +46,7 @@ import org.openide.util.Exceptions;
 import org.opensim.utils.Prefs;
 import org.opensim.utils.TheApp;
 import org.opensim.view.Camera;
+import org.opensim.view.pub.GeometryFileLocator;
 import org.opensim.view.pub.ViewDB;
 import vtk.vtkActor2D;
 import vtk.vtkCamera;
@@ -219,7 +220,27 @@ public class OpenSimBaseCanvas extends vtkPanel
       UnLock();
    } 
       
-   
+   public void processKey(char keyChar){
+      if ('x' == keyChar) {
+         applyCameraMinusX();
+      } else if ('y' == keyChar) {
+         applyCameraMinusY();
+      } else if ('z' == keyChar) {
+         applyCameraMinusZ();
+      } else if ('i' == keyChar) {
+         GetRenderer().GetActiveCamera().Zoom(1.05);
+         repaint();
+      } else if ('o' == keyChar) {
+         GetRenderer().GetActiveCamera().Zoom(0.95);
+         repaint();
+      } else if ('j' == keyChar) {
+         rotateCamera(5.0);
+         repaint();
+      }else if ('k' == keyChar) {
+         rotateCamera(-5.0);
+         repaint();
+      }
+   }
    /**
     * A method to apply a prespecified Camera (selectedCamera) to the current Canvas
     */
@@ -376,17 +397,9 @@ public class OpenSimBaseCanvas extends vtkPanel
         logoActor.SetWidth(0.05);
         logoActor.SetHeight(0.05);
         vtkPNGReader imageReader=new vtkPNGReader();
-        /*
-        try {
-            FileWriter fstream = new FileWriter("myworkingDirectory.txt");
-            BufferedWriter out = new BufferedWriter(fstream);
-            out.write("Hello Java");
-            //Close the output stream
-            out.close();
-        } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
-        }
-        imageReader.SetFileName("OpenSimLogoSmall.PNG");
+        String fullFileName = GeometryFileLocator.getInstance().getFullname("", "OpenSimLogoSmall.PNG", true);
+        if (fullFileName==null) return;
+        imageReader.SetFileName(fullFileName);
         imageReader.UpdateWholeExtent();
         imageReader.Update();
         int[] ext = imageReader.GetDataExtent();
@@ -395,7 +408,7 @@ public class OpenSimBaseCanvas extends vtkPanel
         //logoActor.SetLayerNumber(0);
         //logoActor.GetProperty().SetOpacity(0.2);
         //logoActor.SetProperty(null);
-        GetRenderer().AddActor2D(logoActor); */
+        GetRenderer().AddActor2D(logoActor);
         //repaint();
    }
  }

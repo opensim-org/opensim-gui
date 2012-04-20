@@ -14,4 +14,14 @@
             </file>
          </folder>
     </folder>
+    <folder name="Windows2">
+         <folder name="Components">
+            <file name="ScriptingShellTopComponent.settings" url="ScriptingShellTopComponentSettings.xml"/>
+        </folder>
+       <folder name="Modes">
+            <folder name="osimMessagesMode">
+                <file name="ScriptingShellTopComponent.wstcref" url="ScriptingShellTopComponentWstcref.xml"/>
+            </folder>
+        </folder>
+    </folder>
 </filesystem>

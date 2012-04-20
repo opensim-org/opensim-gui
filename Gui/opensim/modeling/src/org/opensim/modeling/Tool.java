@@ -35,6 +35,28 @@ public class Tool extends OpenSimObject {
     super.delete();
   }
 
+  public static Tool safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.Tool_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new Tool(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.Tool_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.Tool_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.Tool_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Tool(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.Tool_getConcreteClassName(swigCPtr, this);
+  }
+
   public boolean run() throws java.io.IOException {
     return opensimModelJNI.Tool_run(swigCPtr, this);
   }

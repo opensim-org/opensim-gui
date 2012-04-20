@@ -59,7 +59,6 @@ import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.view.markerEditor.MarkerEditorTopComponent;
 import org.opensim.view.nodes.ConcreteModelNode;
 import org.opensim.view.experimentaldata.ExperimentalDataTopNode;
 import org.opensim.view.nodes.MarkersNode;
@@ -105,8 +104,8 @@ final public class ExplorerTopComponent extends TopComponent
       OpenSimNode root = new OpenSimNode.RootNode();
       manager.setRootContext(root);
       getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, 0), "handleDelete");
-      getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), "handleDelete");
-      getActionMap().put("handleDelete", new handleDelete());
+      //getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), "handleDelete");
+      //getActionMap().put("handleDelete", new handleDelete());
       associateLookup(ExplorerUtils.createLookup(manager, getActionMap()));
       /*
       this.addComponentListener(new ComponentAdapter(){
@@ -114,23 +113,6 @@ final public class ExplorerTopComponent extends TopComponent
               WindowManager.getDefault().getMainWindow().validate();
           }
       });*/
-   }
-
-   final class handleDelete extends AbstractAction {
-       public void actionPerformed(ActionEvent e) {
-          Node[] selectedNodes = manager.getSelectedNodes();
-          ArrayList<Marker> markers = new ArrayList<Marker>(0);
-          for (int i=0; i<selectedNodes.length; i++) {
-             if (selectedNodes[i] instanceof OneMarkerNode) {
-                OpenSimObjectNode node = (OpenSimObjectNode)selectedNodes[i];
-                markers.add((Marker)node.getOpenSimObject());
-             }
-          }
-          if (markers.size() > 0) {
-             MarkerEditorTopComponent win = MarkerEditorTopComponent.findInstance();
-             win.deleteMarkers(markers, true);
-          }
-       }           
    }
 
    BeanTreeView getTree() {

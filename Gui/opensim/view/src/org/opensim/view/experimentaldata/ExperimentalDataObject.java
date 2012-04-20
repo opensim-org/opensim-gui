@@ -32,14 +32,14 @@
 
 package org.opensim.view.experimentaldata;
 
-import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.OpenSimJavaObject;
 import org.opensim.view.OpenSimvtkGlyphCloud;
 
 /**
  * An Object representing data to be visualized from a data/motion file e.g. Marker, GRF, etc.
  * @author ayman
  */
-public class ExperimentalDataObject extends OpenSimObject {
+public class ExperimentalDataObject extends OpenSimJavaObject {
     
     private ExperimentalDataItemType objectType=ExperimentalDataItemType.Unknown;
     //private String baseName="";

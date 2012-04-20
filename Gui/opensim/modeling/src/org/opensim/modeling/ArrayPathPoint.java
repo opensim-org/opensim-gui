@@ -91,6 +91,10 @@ public class ArrayPathPoint {
     return opensimModelJNI.ArrayPathPoint_getSize(swigCPtr, this);
   }
 
+  public int size() {
+    return opensimModelJNI.ArrayPathPoint_size(swigCPtr, this);
+  }
+
   public int append(PathPoint aValue) {
     return opensimModelJNI.ArrayPathPoint_append__SWIG_0(swigCPtr, this, PathPoint.getCPtr(aValue), aValue);
   }

@@ -35,6 +35,28 @@ public class InverseKinematicsTool extends Tool {
     super.delete();
   }
 
+  public static InverseKinematicsTool safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.InverseKinematicsTool_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new InverseKinematicsTool(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.InverseKinematicsTool_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.InverseKinematicsTool_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.InverseKinematicsTool_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new InverseKinematicsTool(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.InverseKinematicsTool_getConcreteClassName(swigCPtr, this);
+  }
+
   public InverseKinematicsTool() {
     this(opensimModelJNI.new_InverseKinematicsTool__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class InverseKinematicsTool extends Tool {
 
   public InverseKinematicsTool(InverseKinematicsTool aObject) {
     this(opensimModelJNI.new_InverseKinematicsTool__SWIG_3(InverseKinematicsTool.getCPtr(aObject), aObject), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.InverseKinematicsTool_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public static void registerTypes() {
@@ -102,6 +119,10 @@ public class InverseKinematicsTool extends Tool {
 
   public String getCoordinateFileName() {
     return opensimModelJNI.InverseKinematicsTool_getCoordinateFileName(swigCPtr, this);
+  }
+
+  public void setOutputMotionFileName(String aOutputMotionFileName) {
+    opensimModelJNI.InverseKinematicsTool_setOutputMotionFileName(swigCPtr, this, aOutputMotionFileName);
   }
 
   public String getOutputMotionFileName() {

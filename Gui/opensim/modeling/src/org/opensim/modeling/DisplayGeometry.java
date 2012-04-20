@@ -35,6 +35,28 @@ public class DisplayGeometry extends OpenSimObject {
     super.delete();
   }
 
+  public static DisplayGeometry safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.DisplayGeometry_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new DisplayGeometry(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.DisplayGeometry_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.DisplayGeometry_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.DisplayGeometry_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new DisplayGeometry(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.DisplayGeometry_getConcreteClassName(swigCPtr, this);
+  }
+
   public DisplayGeometry() {
     this(opensimModelJNI.new_DisplayGeometry__SWIG_0(), true);
   }
@@ -45,11 +67,6 @@ public class DisplayGeometry extends OpenSimObject {
 
   public DisplayGeometry(DisplayGeometry aDisplayGeometry) {
     this(opensimModelJNI.new_DisplayGeometry__SWIG_2(DisplayGeometry.getCPtr(aDisplayGeometry), aDisplayGeometry), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.DisplayGeometry_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public String getGeometryFile() {
@@ -130,23 +147,6 @@ public class DisplayGeometry extends OpenSimObject {
 
   public void setOpacity(double aOpacity) {
     opensimModelJNI.DisplayGeometry_setOpacity(swigCPtr, this, aOpacity);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.DisplayGeometry_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.DisplayGeometry_isA(swigCPtr, this, type);
-  }
-
-  public static DisplayGeometry safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.DisplayGeometry_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new DisplayGeometry(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.DisplayGeometry_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public final static class DisplayPreference {

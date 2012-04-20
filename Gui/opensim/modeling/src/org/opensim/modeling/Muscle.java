@@ -35,6 +35,28 @@ public class Muscle extends PathActuator {
     super.delete();
   }
 
+  public static Muscle safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.Muscle_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new Muscle(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.Muscle_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.Muscle_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.Muscle_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Muscle(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.Muscle_getConcreteClassName(swigCPtr, this);
+  }
+
   public double getMaxIsometricForce() {
     return opensimModelJNI.Muscle_getMaxIsometricForce(swigCPtr, this);
   }
@@ -75,6 +97,22 @@ public class Muscle extends PathActuator {
     opensimModelJNI.Muscle_setMaxContractionVelocity(swigCPtr, this, aMaxContractionVelocity);
   }
 
+  public boolean getIgnoreTendonCompliance(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Muscle_getIgnoreTendonCompliance(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
+  public void setIgnoreTendonCompliance(SWIGTYPE_p_SimTK__State s, boolean ignore) {
+    opensimModelJNI.Muscle_setIgnoreTendonCompliance(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), ignore);
+  }
+
+  public boolean getIgnoreActivationDynamics(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Muscle_getIgnoreActivationDynamics(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
+  public void setIgnoreActivationDynamics(SWIGTYPE_p_SimTK__State s, boolean ignore) {
+    opensimModelJNI.Muscle_setIgnoreActivationDynamics(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), ignore);
+  }
+
   public double getActivation(SWIGTYPE_p_SimTK__State s) {
     return opensimModelJNI.Muscle_getActivation(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
   }
@@ -103,6 +141,26 @@ public class Muscle extends PathActuator {
     return opensimModelJNI.Muscle_getTendonStrain(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
   }
 
+  public double getFiberPotentialEnergy(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Muscle_getFiberPotentialEnergy(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
+  public double getTendonPotentialEnergy(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Muscle_getTendonPotentialEnergy(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
+  public double getMusclePotentialEnergy(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Muscle_getMusclePotentialEnergy(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
+  public double getPassiveForceMultiplier(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Muscle_getPassiveForceMultiplier(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
+  public double getActiveForceLengthMultiplier(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Muscle_getActiveForceLengthMultiplier(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
   public double getFiberVelocity(SWIGTYPE_p_SimTK__State s) {
     return opensimModelJNI.Muscle_getFiberVelocity(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
   }
@@ -117,6 +175,14 @@ public class Muscle extends PathActuator {
 
   public double getPennationAngularVelocity(SWIGTYPE_p_SimTK__State s) {
     return opensimModelJNI.Muscle_getPennationAngularVelocity(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
+  public double getTendonVelocity(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Muscle_getTendonVelocity(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
+  public double getForceVelocityMultiplier(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Muscle_getForceVelocityMultiplier(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
   }
 
   public double getFiberForce(SWIGTYPE_p_SimTK__State s) {
@@ -143,6 +209,30 @@ public class Muscle extends PathActuator {
     return opensimModelJNI.Muscle_getTendonForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
   }
 
+  public double getFiberStiffness(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Muscle_getFiberStiffness(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
+  public double getTendonStiffness(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Muscle_getTendonStiffness(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
+  public double getMuscleStiffness(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Muscle_getMuscleStiffness(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
+  public double getFiberPower(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Muscle_getFiberPower(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
+  public double getTendonPower(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Muscle_getTendonPower(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
+  public double getMusclePower(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Muscle_getMusclePower(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
   public double getStress(SWIGTYPE_p_SimTK__State s) {
     return opensimModelJNI.Muscle_getStress(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
   }
@@ -167,42 +257,12 @@ public class Muscle extends PathActuator {
     opensimModelJNI.Muscle_equilibrate(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
   }
 
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.Muscle_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
-  }
-
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
     opensimModelJNI.Muscle_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
     opensimModelJNI.Muscle_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
-  }
-
-  public double calcPennationAngle(SWIGTYPE_p_SimTK__State s) {
-    return opensimModelJNI.Muscle_calcPennationAngle(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
-  public double computeIsometricForce(SWIGTYPE_p_SimTK__State s, double activation) {
-    return opensimModelJNI.Muscle_computeIsometricForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), activation);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.Muscle_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.Muscle_isA(swigCPtr, this, type);
-  }
-
-  public static Muscle safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Muscle_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new Muscle(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.Muscle_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

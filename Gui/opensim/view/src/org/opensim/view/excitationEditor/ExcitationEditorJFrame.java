@@ -430,7 +430,7 @@ public class ExcitationEditorJFrame extends javax.swing.JFrame {
          String fileName = FileUtils.getInstance().browseForFilename(".xml", "Controls XML file", this);
          if(fileName!=null) {
          OpenSimObject objGeneric = OpenSimObject.makeObjectFromFile(fileName);
-         if (objGeneric==null || !objGeneric.getType().equalsIgnoreCase("ControlSet")){
+         if (objGeneric==null || !objGeneric.getConcreteClassName().equalsIgnoreCase("ControlSet")){
             DialogDisplayer.getDefault().notify(
                new NotifyDescriptor.Message("Could not construct excitations from the specified file.")); 
             return;

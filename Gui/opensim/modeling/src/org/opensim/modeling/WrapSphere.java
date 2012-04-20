@@ -35,17 +35,34 @@ public class WrapSphere extends WrapObject {
     super.delete();
   }
 
+  public static WrapSphere safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.WrapSphere_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new WrapSphere(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.WrapSphere_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.WrapSphere_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.WrapSphere_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new WrapSphere(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.WrapSphere_getConcreteClassName(swigCPtr, this);
+  }
+
   public WrapSphere() {
     this(opensimModelJNI.new_WrapSphere__SWIG_0(), true);
   }
 
   public WrapSphere(WrapSphere aWrapSphere) {
     this(opensimModelJNI.new_WrapSphere__SWIG_1(WrapSphere.getCPtr(aWrapSphere), aWrapSphere), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.WrapSphere_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(WrapSphere aWrapSphere) {

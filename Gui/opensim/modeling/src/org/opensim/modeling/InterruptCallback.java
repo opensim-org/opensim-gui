@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class InterruptCallback extends Analysis {
+public class InterruptCallback extends AnalysisWrapper {
   private long swigCPtr;
 
   public InterruptCallback(long cPtr, boolean cMemoryOwn) {

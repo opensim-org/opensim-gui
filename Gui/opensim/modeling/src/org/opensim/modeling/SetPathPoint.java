@@ -35,6 +35,28 @@ public class SetPathPoint extends OpenSimObject {
     super.delete();
   }
 
+  public static SetPathPoint safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.SetPathPoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new SetPathPoint(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.SetPathPoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.SetPathPoint_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.SetPathPoint_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new SetPathPoint(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.SetPathPoint_getConcreteClassName(swigCPtr, this);
+  }
+
   public SetPathPoint() {
     this(opensimModelJNI.new_SetPathPoint__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class SetPathPoint extends OpenSimObject {
 
   public SetPathPoint(SetPathPoint aSet) {
     this(opensimModelJNI.new_SetPathPoint__SWIG_3(SetPathPoint.getCPtr(aSet), aSet), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.SetPathPoint_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setup() {

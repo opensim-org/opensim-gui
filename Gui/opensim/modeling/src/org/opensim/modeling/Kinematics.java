@@ -35,21 +35,26 @@ public class Kinematics extends Analysis {
     super.delete();
   }
 
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.Kinematics_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.Kinematics_isA(swigCPtr, this, type);
-  }
-
   public static Kinematics safeDownCast(OpenSimObject obj) {
     long cPtr = opensimModelJNI.Kinematics_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Kinematics(cPtr, false);
   }
 
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.Kinematics_copy__SWIG_0(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.Kinematics_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.Kinematics_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.Kinematics_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Kinematics(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.Kinematics_getConcreteClassName(swigCPtr, this);
   }
 
   public Kinematics(Model aModel) {
@@ -66,11 +71,6 @@ public class Kinematics extends Analysis {
 
   public Kinematics(Kinematics aObject) {
     this(opensimModelJNI.new_Kinematics__SWIG_3(Kinematics.getCPtr(aObject), aObject), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.Kinematics_copy__SWIG_1(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setStorageCapacityIncrements(int aIncrement) {

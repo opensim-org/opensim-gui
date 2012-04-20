@@ -35,17 +35,34 @@ public class PathPoint extends OpenSimObject {
     super.delete();
   }
 
+  public static PathPoint safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.PathPoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new PathPoint(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.PathPoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.PathPoint_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.PathPoint_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new PathPoint(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.PathPoint_getConcreteClassName(swigCPtr, this);
+  }
+
   public PathPoint() {
     this(opensimModelJNI.new_PathPoint__SWIG_0(), true);
   }
 
   public PathPoint(PathPoint aPoint) {
     this(opensimModelJNI.new_PathPoint__SWIG_1(PathPoint.getCPtr(aPoint), aPoint), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.PathPoint_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(PathPoint aPoint) {
@@ -111,23 +128,6 @@ public class PathPoint extends OpenSimObject {
 
   public static void deletePathPoint(PathPoint aPoint) {
     opensimModelJNI.PathPoint_deletePathPoint(PathPoint.getCPtr(aPoint), aPoint);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.PathPoint_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.PathPoint_isA(swigCPtr, this, type);
-  }
-
-  public static PathPoint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.PathPoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new PathPoint(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.PathPoint_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

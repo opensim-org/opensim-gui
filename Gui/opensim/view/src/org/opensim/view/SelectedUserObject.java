@@ -52,7 +52,7 @@ public abstract class SelectedUserObject implements Selectable {
    }
 
    public String getStatusText() {
-      return object.getType() + ":" + object.getName();
+      return object.getConcreteClassName() + ":" + object.getName();
    }
 
     public Model getOwnerModel() {

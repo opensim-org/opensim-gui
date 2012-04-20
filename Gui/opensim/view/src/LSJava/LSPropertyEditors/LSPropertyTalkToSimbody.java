@@ -27,7 +27,6 @@ import  java.io.IOException;
 import  org.opensim.modeling.Model;
 import  org.opensim.modeling.OpenSimObject;
 import  org.opensim.modeling.PropertySet;
-import  org.opensim.modeling.Property;
 import  org.opensim.modeling.ArrayDouble;
 import  org.opensim.modeling.OpenSimContext;  
 import  org.opensim.view.nodes.OpenSimNode;
@@ -35,6 +34,7 @@ import  org.opensim.view.nodes.OpenSimObjectNode;
 import  org.opensim.view.pub.OpenSimDB;
 import  org.opensim.view.ExplorerTopComponent;
 import  org.openide.nodes.Node;
+import org.opensim.modeling.Property_Deprecated;
 
 
 //-----------------------------------------------------------------------------
@@ -104,7 +104,7 @@ public class LSPropertyTalkToSimbody
   
 
    //-------------------------------------------------------------------------
-   public Property  GetOpenSimObjectPropertyValueFromPropertyName( String propertyName ) 
+   public Property_Deprecated  GetOpenSimObjectPropertyValueFromPropertyName( String propertyName ) 
    {
       PropertySet propertySet = this.GetOpenSimObject().getPropertySet();
       if( propertySet != null )
@@ -119,14 +119,14 @@ public class LSPropertyTalkToSimbody
    //-------------------------------------------------------------------------
    public double  GetOpenSimObjectPropertyValueAsDoubleFromPropertyName( String propertyName ) 
    {
-      Property openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
+      Property_Deprecated openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
       return openSimObjectProperty==null ? 0.0 : openSimObjectProperty.getValueDbl();
    }
    //-------------------------------------------------------------------------
    public void  SetOpenSimObjectPropertyValueAsDoubleForPropertyName( String propertyName, double valueToSet ) 
    {
-      Property openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
-      if( openSimObjectProperty != null ) openSimObjectProperty.setValueDbl( valueToSet );
+      Property_Deprecated openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
+      if( openSimObjectProperty != null ) openSimObjectProperty.setValue( valueToSet );
       this.RecreateOpenSimAPIModelAfterPropertyChange();
    }
 
@@ -134,7 +134,7 @@ public class LSPropertyTalkToSimbody
    //-------------------------------------------------------------------------
    public ArrayDouble  GetOpenSimObjectPropertyValueAsArrayDoubleFromPropertyName( String propertyName ) 
    {
-      Property openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
+      Property_Deprecated openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
       return openSimObjectProperty==null ? null : openSimObjectProperty.getValueDblArray();
    }
    //-------------------------------------------------------------------------
@@ -154,7 +154,7 @@ public class LSPropertyTalkToSimbody
    //-------------------------------------------------------------------------
    public void  SetOpenSimObjectPropertyValueAsArrayDoubleFromPropertyName( String propertyName, ArrayDouble arrayDouble )
    {
-      Property openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
+      Property_Deprecated openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
       if( openSimObjectProperty != null  &&  arrayDouble != null ) openSimObjectProperty.setValue( arrayDouble );
       this.RecreateOpenSimAPIModelAfterPropertyChange();
    }

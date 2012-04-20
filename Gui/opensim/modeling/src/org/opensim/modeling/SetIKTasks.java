@@ -35,6 +35,28 @@ public class SetIKTasks extends OpenSimObject {
     super.delete();
   }
 
+  public static SetIKTasks safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.SetIKTasks_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new SetIKTasks(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.SetIKTasks_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.SetIKTasks_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.SetIKTasks_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new SetIKTasks(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.SetIKTasks_getConcreteClassName(swigCPtr, this);
+  }
+
   public SetIKTasks() {
     this(opensimModelJNI.new_SetIKTasks__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class SetIKTasks extends OpenSimObject {
 
   public SetIKTasks(SetIKTasks aSet) {
     this(opensimModelJNI.new_SetIKTasks__SWIG_3(SetIKTasks.getCPtr(aSet), aSet), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.SetIKTasks_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setup() {

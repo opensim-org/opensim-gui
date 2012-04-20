@@ -35,17 +35,34 @@ public class ConditionalPathPoint extends PathPoint {
     super.delete();
   }
 
+  public static ConditionalPathPoint safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.ConditionalPathPoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new ConditionalPathPoint(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.ConditionalPathPoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.ConditionalPathPoint_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.ConditionalPathPoint_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new ConditionalPathPoint(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.ConditionalPathPoint_getConcreteClassName(swigCPtr, this);
+  }
+
   public ConditionalPathPoint() {
     this(opensimModelJNI.new_ConditionalPathPoint__SWIG_0(), true);
   }
 
   public ConditionalPathPoint(ConditionalPathPoint aPoint) {
     this(opensimModelJNI.new_ConditionalPathPoint__SWIG_1(ConditionalPathPoint.getCPtr(aPoint), aPoint), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.ConditionalPathPoint_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(ConditionalPathPoint aPoint) {
@@ -75,23 +92,6 @@ public class ConditionalPathPoint extends PathPoint {
 
   public String getCoordinateName() {
     return opensimModelJNI.ConditionalPathPoint_getCoordinateName(swigCPtr, this);
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.ConditionalPathPoint_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.ConditionalPathPoint_isA(swigCPtr, this, type);
-  }
-
-  public static ConditionalPathPoint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ConditionalPathPoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new ConditionalPathPoint(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.ConditionalPathPoint_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

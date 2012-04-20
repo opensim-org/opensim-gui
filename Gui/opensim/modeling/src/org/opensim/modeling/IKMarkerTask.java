@@ -35,21 +35,26 @@ public class IKMarkerTask extends IKTask {
     super.delete();
   }
 
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.IKMarkerTask_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.IKMarkerTask_isA(swigCPtr, this, type);
-  }
-
   public static IKMarkerTask safeDownCast(OpenSimObject obj) {
     long cPtr = opensimModelJNI.IKMarkerTask_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new IKMarkerTask(cPtr, false);
   }
 
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.IKMarkerTask_copy__SWIG_0(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.IKMarkerTask_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.IKMarkerTask_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.IKMarkerTask_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new IKMarkerTask(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.IKMarkerTask_getConcreteClassName(swigCPtr, this);
   }
 
   public IKMarkerTask() {
@@ -58,11 +63,6 @@ public class IKMarkerTask extends IKTask {
 
   public IKMarkerTask(IKMarkerTask aIKMarkerTask) {
     this(opensimModelJNI.new_IKMarkerTask__SWIG_1(IKMarkerTask.getCPtr(aIKMarkerTask), aIKMarkerTask), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.IKMarkerTask_copy__SWIG_1(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
 }

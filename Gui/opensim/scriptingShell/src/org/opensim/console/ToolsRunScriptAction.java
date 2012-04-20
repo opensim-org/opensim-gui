@@ -6,15 +6,21 @@ package org.opensim.console;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.prefs.Preferences;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import org.openide.util.Exceptions;
 import org.openide.util.HelpCtx;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.utils.TheApp;
-import org.python.core.Py;
 import org.python.util.PythonInterpreter;
 
 public final class ToolsRunScriptAction extends CallableSystemAction {
@@ -65,13 +71,12 @@ public final class ToolsRunScriptAction extends CallableSystemAction {
             nextItem.addActionListener(new ActionListener() {
 
                 public void actionPerformed(ActionEvent e) {
-
-                    PythonInterpreter interp = new PythonInterpreter();
-
-                    Py.getSystemState().setClassLoader(
-                            this.getClass().getClassLoader());
-                    interp.exec("import sys");
+                    PythonInterpreter interp = ScriptingShellTopComponent.getDefault().getInterp();
                     interp.execfile(ScriptsRootDirectory+"/"+fileName);
+                    File scriptFile= new File(ScriptsRootDirectory+"/"+fileName);
+                    String fileContents = getContents(scriptFile);
+                    ScriptingShellTopComponent.getDefault().logMessage(fileContents);
+                    ScriptingShellTopComponent.getDefault().logMessage("Finished executing script file "+fileName);
                 }
             });
             
@@ -79,5 +84,34 @@ public final class ToolsRunScriptAction extends CallableSystemAction {
         }
 
         return scriptsMenu;
+    }
+ 
+    public String getContents(File aFile) {
+        StringBuilder contents = new StringBuilder();
+
+        try {
+            //use buffering, reading one line at a time
+            //FileReader always assumes default encoding is OK!
+            BufferedReader input = new BufferedReader(new FileReader(aFile));
+            try {
+                String line = null; //not declared within while loop
+        		/*
+                 * readLine is a bit quirky :
+                 * it returns the content of a line MINUS the newline.
+                 * it returns null only for the END of the stream.
+                 * it returns an empty String if two newlines appear in a row.
+                 */
+                while ((line = input.readLine()) != null) {
+                    contents.append(line);
+                    contents.append(System.getProperty("line.separator"));
+                }
+            } finally {
+                input.close();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return contents.toString();
     }
 }

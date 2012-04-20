@@ -24,11 +24,35 @@
                     </run-dependency>
                 </dependency>
                 <dependency>
+                    <code-name-base>org.openide.filesystems</code-name-base>
+                    <build-prerequisite/>
+                    <compile-dependency/>
+                    <run-dependency>
+                        <specification-version>7.47.1</specification-version>
+                    </run-dependency>
+                </dependency>
+                <dependency>
+                    <code-name-base>org.openide.loaders</code-name-base>
+                    <build-prerequisite/>
+                    <compile-dependency/>
+                    <run-dependency>
+                        <specification-version>7.21.1</specification-version>
+                    </run-dependency>
+                </dependency>
+                <dependency>
                     <code-name-base>org.openide.modules</code-name-base>
                     <build-prerequisite/>
                     <compile-dependency/>
                     <run-dependency>
                         <specification-version>7.23.1</specification-version>
+                    </run-dependency>
+                </dependency>
+                <dependency>
+                    <code-name-base>org.openide.nodes</code-name-base>
+                    <build-prerequisite/>
+                    <compile-dependency/>
+                    <run-dependency>
+                        <specification-version>7.21.1</specification-version>
                     </run-dependency>
                 </dependency>
                 <dependency>
@@ -100,8 +124,8 @@
                 <package>org.opensim.console</package>
             </public-packages>
             <class-path-extension>
-                <runtime-relative-path>ext/jython-parser.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/jython-parser.jar</binary-origin>
+                <runtime-relative-path>ext/jython.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/jython.jar</binary-origin>
             </class-path-extension>
         </data>
     </configuration>

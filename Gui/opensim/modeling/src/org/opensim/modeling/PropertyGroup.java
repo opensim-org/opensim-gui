@@ -47,8 +47,8 @@ public class PropertyGroup {
     this(opensimModelJNI.new_PropertyGroup__SWIG_2(PropertyGroup.getCPtr(aGroup), aGroup), true);
   }
 
-  public PropertyGroup copy() {
-    long cPtr = opensimModelJNI.PropertyGroup_copy(swigCPtr, this);
+  public PropertyGroup clone() {
+    long cPtr = opensimModelJNI.PropertyGroup_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new PropertyGroup(cPtr, false);
   }
 
@@ -64,25 +64,25 @@ public class PropertyGroup {
     return opensimModelJNI.PropertyGroup_contains(swigCPtr, this, aName);
   }
 
-  public void add(Property aProperty) {
-    opensimModelJNI.PropertyGroup_add(swigCPtr, this, Property.getCPtr(aProperty), aProperty);
+  public void add(Property_Deprecated aProperty) {
+    opensimModelJNI.PropertyGroup_add(swigCPtr, this, Property_Deprecated.getCPtr(aProperty), aProperty);
   }
 
-  public void remove(Property aProperty) {
-    opensimModelJNI.PropertyGroup_remove(swigCPtr, this, Property.getCPtr(aProperty), aProperty);
+  public void remove(Property_Deprecated aProperty) {
+    opensimModelJNI.PropertyGroup_remove(swigCPtr, this, Property_Deprecated.getCPtr(aProperty), aProperty);
   }
 
-  public SWIGTYPE_p_OpenSim__ArrayT_OpenSim__Property_p_t getProperties() {
-    return new SWIGTYPE_p_OpenSim__ArrayT_OpenSim__Property_p_t(opensimModelJNI.PropertyGroup_getProperties(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__ArrayT_OpenSim__Property_Deprecated_p_t getProperties() {
+    return new SWIGTYPE_p_OpenSim__ArrayT_OpenSim__Property_Deprecated_p_t(opensimModelJNI.PropertyGroup_getProperties(swigCPtr, this), false);
   }
 
-  public Property get(int aIndex) {
+  public Property_Deprecated get(int aIndex) {
     long cPtr = opensimModelJNI.PropertyGroup_get(swigCPtr, this, aIndex);
-    return (cPtr == 0) ? null : new Property(cPtr, false);
+    return (cPtr == 0) ? null : new Property_Deprecated(cPtr, false);
   }
 
-  public int getPropertyIndex(Property aProperty) {
-    return opensimModelJNI.PropertyGroup_getPropertyIndex(swigCPtr, this, Property.getCPtr(aProperty), aProperty);
+  public int getPropertyIndex(Property_Deprecated aProperty) {
+    return opensimModelJNI.PropertyGroup_getPropertyIndex(swigCPtr, this, Property_Deprecated.getCPtr(aProperty), aProperty);
   }
 
   public void setName(String aName) {

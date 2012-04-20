@@ -35,17 +35,34 @@ public class PathActuator extends Actuator {
     super.delete();
   }
 
+  public static PathActuator safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.PathActuator_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new PathActuator(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.PathActuator_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.PathActuator_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.PathActuator_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new PathActuator(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.PathActuator_getConcreteClassName(swigCPtr, this);
+  }
+
   public PathActuator() {
     this(opensimModelJNI.new_PathActuator__SWIG_0(), true);
   }
 
   public PathActuator(PathActuator aGenForce) {
     this(opensimModelJNI.new_PathActuator__SWIG_1(PathActuator.getCPtr(aGenForce), aGenForce), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.PathActuator_copy__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void copyData(PathActuator aGenForce) {
@@ -131,23 +148,6 @@ public class PathActuator extends Actuator {
 
   public void updateDisplayer(SWIGTYPE_p_SimTK__State s) {
     opensimModelJNI.PathActuator_updateDisplayer(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
-  public static boolean isKindOf(String type) {
-    return opensimModelJNI.PathActuator_isKindOf(type);
-  }
-
-  public boolean isA(String type) {
-    return opensimModelJNI.PathActuator_isA(swigCPtr, this, type);
-  }
-
-  public static PathActuator safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.PathActuator_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new PathActuator(cPtr, false);
-  }
-
-  public void copy(OpenSimObject aObject) {
-    opensimModelJNI.PathActuator_copy__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
 }

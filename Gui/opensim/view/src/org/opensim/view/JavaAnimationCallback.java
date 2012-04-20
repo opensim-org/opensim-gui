@@ -39,7 +39,7 @@ import org.opensim.view.pub.ViewDB;
  *
  * @author Ayman Habib
  */
-public class JavaAnimationCallback extends Analysis {
+public class JavaAnimationCallback extends AnalysisWrapper {
    
    public JavaAnimationCallback(Model aModel) {
       super(aModel);

@@ -91,6 +91,10 @@ public class ArrayStorage {
     return opensimModelJNI.ArrayStorage_getSize(swigCPtr, this);
   }
 
+  public int size() {
+    return opensimModelJNI.ArrayStorage_size(swigCPtr, this);
+  }
+
   public int getIndex(Storage aObject, int aStartIndex) {
     return opensimModelJNI.ArrayStorage_getIndex__SWIG_0(swigCPtr, this, Storage.getCPtr(aObject), aObject, aStartIndex);
   }

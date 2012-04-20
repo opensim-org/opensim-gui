@@ -217,7 +217,7 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
       else toolName = "Analyze Tool";
 
       // In inverse dynamisc mode, we know for sure we'll need a real dynamics engine, so check this up front
-      if(staticOptimizationMode && model.getSimbodyEngine().getType().equals("SimmKinematicsEngine"))
+      if(staticOptimizationMode && model.getSimbodyEngine().getConcreteClassName().equals("SimmKinematicsEngine"))
          throw new IOException(toolName+" requires a model with SdfastEngine or SimbodyEngine; SimmKinematicsEngine does not support dynamics.");
 
       AnalyzeTool dTool = new AnalyzeTool();
@@ -273,7 +273,7 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
               }
           }
           if(inverseDynamicsAnalysis==null) {
-              inverseDynamicsAnalysis = InverseDynamics.safeDownCast(new InverseDynamics().copy());
+              inverseDynamicsAnalysis = InverseDynamics.safeDownCast(new InverseDynamics().clone());
               setAnalysisTimeFromTool(inverseDynamicsAnalysis);
               //analyzeTool().addAnalysis(inverseDynamicsAnalysis);
           }
@@ -301,7 +301,7 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
               }
           }
           if(staticOptimizationAnalysis==null) {
-              staticOptimizationAnalysis = StaticOptimization.safeDownCast(new StaticOptimization().copy()); // C++-side copy
+              staticOptimizationAnalysis = StaticOptimization.safeDownCast(new StaticOptimization().clone()); // C++-side copy
               analyzeTool().getAnalysisSet().append(staticOptimizationAnalysis);
           }
           staticOptimizationAnalysis.setOn(true);

@@ -35,6 +35,28 @@ public class ContactGeometrySet extends ModelComponentSetContactGeometry {
     super.delete();
   }
 
+  public static ContactGeometrySet safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.ContactGeometrySet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new ContactGeometrySet(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.ContactGeometrySet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.ContactGeometrySet_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.ContactGeometrySet_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new ContactGeometrySet(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.ContactGeometrySet_getConcreteClassName(swigCPtr, this);
+  }
+
   public ContactGeometrySet() {
     this(opensimModelJNI.new_ContactGeometrySet__SWIG_0(), true);
   }

@@ -35,6 +35,28 @@ public class ModelComponentSetForces extends SetForces {
     super.delete();
   }
 
+  public static ModelComponentSetForces safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.ModelComponentSetForces_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new ModelComponentSetForces(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.ModelComponentSetForces_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.ModelComponentSetForces_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.ModelComponentSetForces_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new ModelComponentSetForces(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.ModelComponentSetForces_getConcreteClassName(swigCPtr, this);
+  }
+
   public ModelComponentSetForces() {
     this(opensimModelJNI.new_ModelComponentSetForces__SWIG_0(), true);
   }
@@ -53,11 +75,6 @@ public class ModelComponentSetForces extends SetForces {
 
   public ModelComponentSetForces(ModelComponentSetForces source) {
     this(opensimModelJNI.new_ModelComponentSetForces__SWIG_4(ModelComponentSetForces.getCPtr(source), source), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.ModelComponentSetForces_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public boolean append(Force aObject) {

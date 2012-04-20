@@ -35,6 +35,28 @@ public class CMCTool extends AbstractTool {
     super.delete();
   }
 
+  public static CMCTool safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimModelJNI.CMCTool_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new CMCTool(cPtr, false);
+  }
+
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.CMCTool_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
+  public static String getClassName() {
+    return opensimModelJNI.CMCTool_getClassName();
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimModelJNI.CMCTool_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new CMCTool(cPtr, false);
+  }
+
+  public String getConcreteClassName() {
+    return opensimModelJNI.CMCTool_getConcreteClassName(swigCPtr, this);
+  }
+
   public CMCTool() {
     this(opensimModelJNI.new_CMCTool__SWIG_0(), true);
   }
@@ -49,11 +71,6 @@ public class CMCTool extends AbstractTool {
 
   public CMCTool(CMCTool aObject) {
     this(opensimModelJNI.new_CMCTool__SWIG_3(CMCTool.getCPtr(aObject), aObject), true);
-  }
-
-  public OpenSimObject copy() {
-    long cPtr = opensimModelJNI.CMCTool_copy(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public String getDesiredPointsFileName() {
