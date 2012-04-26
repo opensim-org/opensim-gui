@@ -47,30 +47,6 @@ public class OneConstraintNode extends OpenSimObjectNode  implements Disableable
         }
     }
 
-    @Override
-    public Sheet createSheet() {
-        Sheet retValue;
-        
-        retValue = super.createSheet();
-        /*
-        OpenSimObject obj = getOpenSimObject();
-        org.opensim.modeling.PropertySet ps= obj.getPropertySet();
-        try {
-            org.opensim.modeling.Property isDisabledProp = ps.get("isDisabled");
-            PropertySupport.Reflection nextNodeProp;
-            nextNodeProp = new PropertySupport.Reflection(isDisabledProp, OpenSimNode.mapPropertyEnumToClass.get(isDisabledProp.getType()), mapPropertyEnumToGetters.get(isDisabledProp.getType()), 
-                    "setValue");
-            nextNodeProp.setName(isDisabledProp.getName());
-            getSet().put(nextNodeProp);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } catch (NoSuchMethodException ex) {
-            ex.printStackTrace();
-        }
-        */
-        return retValue;
-    }
-
     public boolean isDisabled() {
         return disabled;
     }

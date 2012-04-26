@@ -64,8 +64,8 @@ public class PropertyDblArray extends Property_Deprecated {
     return opensimModelJNI.PropertyDblArray_getNumValues(swigCPtr, this);
   }
 
-  public String getTypeAsString() {
-    return opensimModelJNI.PropertyDblArray_getTypeAsString(swigCPtr, this);
+  public String getTypeName() {
+    return opensimModelJNI.PropertyDblArray_getTypeName(swigCPtr, this);
   }
 
   public void setValue(ArrayDouble aArray) {

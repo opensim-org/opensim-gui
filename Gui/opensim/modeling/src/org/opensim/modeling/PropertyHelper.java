@@ -35,8 +35,87 @@ public class PropertyHelper {
     }
   }
 
+  public static boolean getValueBool(AbstractProperty p, int index) {
+    return opensimModelJNI.PropertyHelper_getValueBool__SWIG_0(AbstractProperty.getCPtr(p), p, index);
+  }
+
+  public static boolean getValueBool(AbstractProperty p) {
+    return opensimModelJNI.PropertyHelper_getValueBool__SWIG_1(AbstractProperty.getCPtr(p), p);
+  }
+
+  public static void setValueBool(boolean v, AbstractProperty p, int index) {
+    opensimModelJNI.PropertyHelper_setValueBool__SWIG_0(v, AbstractProperty.getCPtr(p), p, index);
+  }
+
+  public static void setValueBool(boolean v, AbstractProperty p) {
+    opensimModelJNI.PropertyHelper_setValueBool__SWIG_1(v, AbstractProperty.getCPtr(p), p);
+  }
+
+  public static void appendValueBool(boolean v, AbstractProperty p) {
+    opensimModelJNI.PropertyHelper_appendValueBool(v, AbstractProperty.getCPtr(p), p);
+  }
+
+  public static int getValueInt(AbstractProperty p, int index) {
+    return opensimModelJNI.PropertyHelper_getValueInt__SWIG_0(AbstractProperty.getCPtr(p), p, index);
+  }
+
+  public static int getValueInt(AbstractProperty p) {
+    return opensimModelJNI.PropertyHelper_getValueInt__SWIG_1(AbstractProperty.getCPtr(p), p);
+  }
+
+  public static void setValueInt(int v, AbstractProperty p, int index) {
+    opensimModelJNI.PropertyHelper_setValueInt__SWIG_0(v, AbstractProperty.getCPtr(p), p, index);
+  }
+
+  public static void setValueInt(int v, AbstractProperty p) {
+    opensimModelJNI.PropertyHelper_setValueInt__SWIG_1(v, AbstractProperty.getCPtr(p), p);
+  }
+
+  public static void appendValueInt(int v, AbstractProperty p) {
+    opensimModelJNI.PropertyHelper_appendValueInt(v, AbstractProperty.getCPtr(p), p);
+  }
+
+  public static double getValueDouble(AbstractProperty p, int index) {
+    return opensimModelJNI.PropertyHelper_getValueDouble__SWIG_0(AbstractProperty.getCPtr(p), p, index);
+  }
+
+  public static double getValueDouble(AbstractProperty p) {
+    return opensimModelJNI.PropertyHelper_getValueDouble__SWIG_1(AbstractProperty.getCPtr(p), p);
+  }
+
+  public static void setValueDouble(double v, AbstractProperty p, int index) {
+    opensimModelJNI.PropertyHelper_setValueDouble__SWIG_0(v, AbstractProperty.getCPtr(p), p, index);
+  }
+
+  public static void setValueDouble(double v, AbstractProperty p) {
+    opensimModelJNI.PropertyHelper_setValueDouble__SWIG_1(v, AbstractProperty.getCPtr(p), p);
+  }
+
+  public static void appendValueDouble(double v, AbstractProperty p) {
+    opensimModelJNI.PropertyHelper_appendValueDouble(v, AbstractProperty.getCPtr(p), p);
+  }
+
+  public static String getValueString(AbstractProperty p, int index) {
+    return opensimModelJNI.PropertyHelper_getValueString__SWIG_0(AbstractProperty.getCPtr(p), p, index);
+  }
+
+  public static String getValueString(AbstractProperty p) {
+    return opensimModelJNI.PropertyHelper_getValueString__SWIG_1(AbstractProperty.getCPtr(p), p);
+  }
+
+  public static void setValueString(String v, AbstractProperty p, int index) {
+    opensimModelJNI.PropertyHelper_setValueString__SWIG_0(v, AbstractProperty.getCPtr(p), p, index);
+  }
+
+  public static void setValueString(String v, AbstractProperty p) {
+    opensimModelJNI.PropertyHelper_setValueString__SWIG_1(v, AbstractProperty.getCPtr(p), p);
+  }
+
+  public static void appendValueString(String v, AbstractProperty p) {
+    opensimModelJNI.PropertyHelper_appendValueString(v, AbstractProperty.getCPtr(p), p);
+  }
+
   public PropertyHelper() {
     this(opensimModelJNI.new_PropertyHelper(), true);
   }
-
-}
+ }

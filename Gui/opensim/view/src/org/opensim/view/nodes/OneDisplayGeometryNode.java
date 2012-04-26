@@ -111,19 +111,10 @@ public class OneDisplayGeometryNode extends OpenSimObjectNode implements Colorab
         DisplayGeometry obj = DisplayGeometry.safeDownCast(getOpenSimObject());
         DisplayGeometryDisplayer disp = (DisplayGeometryDisplayer) ViewDB.getInstance().getVtkRepForObject(obj);
         if (disp==null) return sheet;
-        /*Disallow change from Navigator
-         disp.addPropertyChangeListener(new PropertyChangeListener() {
-
-            public void propertyChange(PropertyChangeEvent evt) {
-                if (evt.getPropertyName().equals("Color")){
-                    ExplorerTopComponent.getDefault().setActivatedNodes(ExplorerTopComponent.getDefault().getActivatedNodes());
-                }
-            }
-        });*/
         try {
             PropertySupport.Reflection nextNodeProp;
             nextNodeProp = new PropertySupport.Reflection(disp, Color.class, "getColor", "setColorGUI");
-            nextNodeProp.setName("Color");
+            nextNodeProp.setName("color");
             set.put(nextNodeProp);
             PropertySupport.Reflection nextNodeProp2;
             nextNodeProp2 = new PropertySupport.Reflection(disp, Vec3.class, "getLocation", "setLocation");

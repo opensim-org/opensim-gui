@@ -11,8 +11,6 @@ import javax.swing.text.html.HTMLEditorKit;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.PropertySet;
-import org.opensim.modeling.Property_Deprecated;
 
 /**
  *
@@ -28,6 +26,7 @@ public class ShowXMLRepJDialog extends javax.swing.JDialog {
         populateCbModel();
         initComponents();
         jEditorPane1.setEditorKit(new HTMLEditorKit());
+        jComboBox1ActionPerformed(null);
     }
 
     /** This method is called from within the constructor to
@@ -111,24 +110,9 @@ public class ShowXMLRepJDialog extends javax.swing.JDialog {
         String selectedClass = (String) jComboBox1.getSelectedItem();
         OpenSimObject obj = OpenSimObject.newInstanceOfType(selectedClass);
         String contents = "";
-        PropertySet pSet = obj.getPropertySet();
         contents = contents.concat("<FONT COLOR=RED>&lt;" + obj.getConcreteClassName() + "&gt</FONT><br>");
-        for (int i = 0; i < pSet.getSize(); i++) {
-            try {
-                Property_Deprecated p = pSet.get(i);
-                String cmt = p.getComment();
-                if (cmt.length() > 0) {
-                    contents = contents.concat("\t<FONT COLOR=Green>&lt;!--" + cmt + "--&gt</FONT><br>");
-                }
-                contents = contents.concat("\t<FONT COLOR=RED>&lt;" + p.getName() + "&gt;</FONT>"
-                        + removeEnclosingParethesisIfNeeded(p.toString())
-                        + "<FONT COLOR=RED>&lt;/" + p.getName() + "&gt</FONT><br>");
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            
-        }
-        //contents = contents.concat(dumpObj(obj, contents));
+        String newdump = dumpObj(obj, "");
+        contents = contents.concat(newdump);
         contents = contents.concat("<FONT COLOR=RED>&lt;/" + obj.getConcreteClassName() + "&gt</FONT><br>");
         jEditorPane1.selectAll();
         jEditorPane1.cut();
@@ -182,17 +166,23 @@ public class ShowXMLRepJDialog extends javax.swing.JDialog {
         return string;
     }
 
-    String dumpObj(OpenSimObject obj, String dumpToString) {
+    String dumpObj(OpenSimObject obj, String indent) {
+        String result="";
         for (int p = 0; p < obj.getNumProperties(); ++p) {
             AbstractProperty ap = obj.getPropertyByIndex(p);
-            dumpToString = dumpToString.concat("\t");
-            dumpToString = dumpToString.concat(ap.getName()+ "=" + ap.toString());
-            if (ap.isObjectProperty()) {
+            String cmt = ap.getComment();
+            if (cmt.length() > 0) {
+               result = result.concat("\t<FONT COLOR=Green>&lt;!--" + cmt + "--&gt</FONT><br>\n");
+            }
+            result = result.concat("\t<FONT COLOR=RED>&lt;" + ap.getName() + "&gt;</FONT>\n"
+                        + removeEnclosingParethesisIfNeeded(ap.toString())
+                        + "<FONT COLOR=RED>&lt;/" + ap.getName() + "&gt</FONT><br>\n");
+             if (ap.isObjectProperty()) {
                 for (int i = 0; i < ap.size(); ++i) {
-                    dumpObj(ap.getValueAsObject(i),dumpToString);
+                    /////result = result.concat(dumpObj(ap.getValueAsObject(i), ""));
                 }
             }
         }
-        return dumpToString;
+        return result;
     }
 }

@@ -43,7 +43,7 @@ public class LineSegmentForceDisplayer {
     protected Force forceAlongPath;
     /** Creates a new instance of LineSegmentForceDisplayer */
     public LineSegmentForceDisplayer(Force forceAlongPath,  OpenSimvtkGlyphCloud pointsRep, OpenSimvtkOrientedGlyphCloud segmentsRep) throws IOException {
-        OpenSimObject pathObject =  forceAlongPath.getPropertySet().get("GeometryPath").getValueObj();
+        OpenSimObject pathObject =  forceAlongPath.getPropertyByName("GeometryPath").getValueAsObject();
         this.geomPath = GeometryPath.safeDownCast(pathObject);
         this.pointsRep = pointsRep;
         this.segmentsRep = segmentsRep;

@@ -52,8 +52,8 @@ public class PropertyStr extends Property_Deprecated {
     return (cPtr == 0) ? null : new PropertyStr(cPtr, false);
   }
 
-  public String getTypeAsString() {
-    return opensimModelJNI.PropertyStr_getTypeAsString(swigCPtr, this);
+  public String getTypeName() {
+    return opensimModelJNI.PropertyStr_getTypeName(swigCPtr, this);
   }
 
   public void setValue(String aValue) {

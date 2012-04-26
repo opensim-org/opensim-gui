@@ -47,15 +47,6 @@ public class OneControllerNode extends OpenSimObjectNode {
         }
     }
 
-    @Override
-    public Sheet createSheet() {
-        Sheet retValue;
-        
-        retValue = super.createSheet();
-
-        return retValue;
-    }
-
     public Action[] getActions(boolean b) {
         Action[] superActions = (Action[]) super.getActions(b);        
         // Arrays are fixed size, onvert to a List

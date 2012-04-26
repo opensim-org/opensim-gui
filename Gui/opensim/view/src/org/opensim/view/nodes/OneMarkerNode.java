@@ -77,8 +77,6 @@ public class OneMarkerNode extends OpenSimObjectNode{
         // Add property for Location
         Marker obj = Marker.safeDownCast(getOpenSimObject());
         MarkerAdapter gMarker = new MarkerAdapter(obj);
-        org.opensim.modeling.PropertySet ps = obj.getPropertySet();
-        org.opensim.modeling.Property_Deprecated prop;
         try {
             set.remove("body");
             PropertySupport.Reflection nextNodeProp2;

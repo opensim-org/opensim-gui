@@ -52,6 +52,10 @@ public class AbstractProperty {
     return opensimModelJNI.AbstractProperty_toString(swigCPtr, this);
   }
 
+  public String getTypeName() {
+    return opensimModelJNI.AbstractProperty_getTypeName(swigCPtr, this);
+  }
+
   public boolean isObjectProperty() {
     return opensimModelJNI.AbstractProperty_isObjectProperty(swigCPtr, this);
   }

@@ -56,8 +56,8 @@ public class PropertyTransform extends PropertyDblArray {
     return (cPtr == 0) ? null : new PropertyTransform(cPtr, false);
   }
 
-  public String getTypeAsString() {
-    return opensimModelJNI.PropertyTransform_getTypeAsString(swigCPtr, this);
+  public String getTypeName() {
+    return opensimModelJNI.PropertyTransform_getTypeName(swigCPtr, this);
   }
 
   public void setValue(SWIGTYPE_p_SimTK__Transform aTransform) {

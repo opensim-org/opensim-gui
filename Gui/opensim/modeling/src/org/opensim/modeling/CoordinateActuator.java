@@ -86,14 +86,6 @@ public class CoordinateActuator extends Actuator {
     return opensimModelJNI.CoordinateActuator_isCoordinateValid(swigCPtr, this);
   }
 
-  public ArrayStr getRecordLabels() {
-    return new ArrayStr(opensimModelJNI.CoordinateActuator_getRecordLabels(swigCPtr, this), true);
-  }
-
-  public ArrayDouble getRecordValues(SWIGTYPE_p_SimTK__State state) {
-    return new ArrayDouble(opensimModelJNI.CoordinateActuator_getRecordValues(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state)), true);
-  }
-
   public double getSpeed(SWIGTYPE_p_SimTK__State s) {
     return opensimModelJNI.CoordinateActuator_getSpeed(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
   }

@@ -124,8 +124,8 @@ public class Property_Deprecated extends AbstractProperty {
     return Property_Deprecated.PropertyType.swigToEnum(opensimModelJNI.Property_Deprecated_getType(swigCPtr, this));
   }
 
-  public String getTypeAsString() {
-    return opensimModelJNI.Property_Deprecated_getTypeAsString(swigCPtr, this);
+  public String getTypeName() {
+    return opensimModelJNI.Property_Deprecated_getTypeName(swigCPtr, this);
   }
 
   public String toString() {

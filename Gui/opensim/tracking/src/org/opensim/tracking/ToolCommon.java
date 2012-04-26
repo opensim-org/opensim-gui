@@ -26,9 +26,9 @@
 package org.opensim.tracking;
 
 import javax.swing.JComponent;
+import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.IO;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.Property_Deprecated;
 import org.opensim.modeling.PropertySet;
 
 public class ToolCommon {
@@ -39,8 +39,7 @@ public class ToolCommon {
    public static final String WeightFormatStr = "%.3f";
 
     public static void bindProperty(OpenSimObject obj, String propertyName, JComponent comp) { 
-      PropertySet pset = obj.getPropertySet();
-      Property_Deprecated prop = pset.contains(propertyName);
+       AbstractProperty prop = obj.getPropertyByName(propertyName);
       if(prop!=null) {
          String comment = prop.getComment();
          if(!comment.equals("")) {
