@@ -196,6 +196,7 @@ public class opensimModelJNI {
   public final static native long PropertyTransform_getValueTransform(long jarg1, PropertyTransform jarg1_);
   public final static native void PropertyTransform_setValue__SWIG_1(long jarg1, PropertyTransform jarg1_, int jarg2, double[] jarg3);
   public final static native void PropertyTransform_getRotationsAndTranslationsAsArray6(long jarg1, PropertyTransform jarg1_, double[] jarg2);
+  public final static native void PropertyTransform_setValue__SWIG_2(long jarg1, PropertyTransform jarg1_, long jarg2, ArrayDouble jarg2_);
   public final static native String PropertyTransform_toString(long jarg1, PropertyTransform jarg1_);
   public final static native void delete_PropertyTransform(long jarg1);
   public final static native long new_PropertyGroup__SWIG_0();
@@ -4954,6 +4955,8 @@ public class opensimModelJNI {
   public final static native void PropertyHelper_setValueString__SWIG_0(String jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
   public final static native void PropertyHelper_setValueString__SWIG_1(String jarg1, long jarg2, AbstractProperty jarg2_);
   public final static native void PropertyHelper_appendValueString(String jarg1, long jarg2, AbstractProperty jarg2_);
+  public final static native double PropertyHelper_getValueTransform(long jarg1, AbstractProperty jarg1_, int jarg2);
+  public final static native void PropertyHelper_setValueTransform(double jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
   public final static native long new_PropertyHelper();
   public final static native void delete_PropertyHelper(long jarg1);
   public final static native void delete_SimtkLogCallback(long jarg1);

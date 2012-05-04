@@ -76,6 +76,10 @@ public class PropertyTransform extends PropertyDblArray {
     opensimModelJNI.PropertyTransform_getRotationsAndTranslationsAsArray6(swigCPtr, this, aArray);
   }
 
+  public void setValue(ArrayDouble aArray) {
+    opensimModelJNI.PropertyTransform_setValue__SWIG_2(swigCPtr, this, ArrayDouble.getCPtr(aArray), aArray);
+  }
+
   public String toString() {
     return opensimModelJNI.PropertyTransform_toString(swigCPtr, this);
   }

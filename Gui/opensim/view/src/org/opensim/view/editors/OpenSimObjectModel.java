@@ -37,8 +37,8 @@ import javax.swing.JButton;
 import javax.swing.event.MouseInputAdapter;
 import org.opensim.modeling.IO;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.Property_Deprecated;
-import org.opensim.modeling.PropertySet;
+import org.opensim.modeling.PropertyHelper;
+import org.opensim.modeling.AbstractProperty;
 
 //=========================================================================
 // OpenSimObjectModel
@@ -51,7 +51,7 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
   static protected Class[] cTypes = { TreeTableModel.class, JButton.class, String.class, String.class, String.class };
 
   // Column header tool tips
-  static final String[] toolTipStr = { "Property_Deprecated name in xml file", "Controls for array properties", "Current property value", null, "Description"};
+  static final String[] toolTipStr = { "Property name in xml file", "Controls for array properties", "Current property value", null, "Description"};
 
   // Whether columns are editable
   // Column 0 is the tree, needs to be "editable" in order for expansion/collapse of nodes
@@ -201,14 +201,14 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
 
   class PropertyNode {
     private PropertyNode parent;
-    protected Object property; // May be OpenSimObject or a Property_Deprecated
+    protected Object propertyOrObject; // May be OpenSimObject or a AbstractProperty
     protected PropertyNode[] children;
-    protected Property_Deprecated.PropertyType propValueType = null; // Indicates property type of this node (NOTE: an item of a PropertyDblArray gets the type PropertyDbl!)
+    protected String propValueType = ""; // Indicates propertyOrObject type of this node (NOTE: an item of a PropertyDblArray gets the type PropertyDbl!)
 
     /** will this object be treated as a leaf or as expandible */
     protected boolean aggregate;
 
-    /** in cases where the node corresponds to an array entry, keep index here, and property will be the property array containing the item */
+    /** in cases where the node corresponds to an array entry, keep index here, and propertyOrObject will be the propertyOrObject array containing the item */
     protected int idx;
 
     protected JButton controlButton = null;
@@ -219,57 +219,46 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
     /**
      * PropertyNode constructor that takes object, no parent or index
      *
-     * @param property Object
+     * @param propertyOrObject Object
      */
-    protected PropertyNode(Object property) {
-      this(null, property, -1);
+    protected PropertyNode(Object propertyOrObject) {
+      this(null, propertyOrObject, -1);
     }
 
     /**
      * PropertyNode constructor that takes parent as well as object
      *
      * @param parent PropertyNode
-     * @param property Object
+     * @param propertyOrObject Object
      */
     protected PropertyNode(PropertyNode parent, Object property) {
       this(parent, property, -1);
     }
 
     /**
-     * PropertyNode constructor taht takes parent, object and an index. used by
+     * PropertyNode constructor that takes parent, object and an index. used by
      * arrays
      *
      * @param parent PropertyNode
-     * @param property Object
-     * @param index int
+     * @param propertyOrObject Object
+     * @param index int, -1 if this is not a member of a list
      */
     protected PropertyNode(PropertyNode parent, Object property, int index) {
       this.parent = parent;
-      this.property = property;
+      this.propertyOrObject = property;
       this.idx = index;
       aggregate = false;
 
        if (property instanceof OpenSimObject) {
-         aggregate = true;
-      } else if (property instanceof Property_Deprecated) {
-         Property_Deprecated.PropertyType propType = ( (Property_Deprecated) property).getType();
-          if(propType==Property_Deprecated.PropertyType.Dbl 
-                 || (propType==Property_Deprecated.PropertyType.DblArray && idx!=-1) 
-                 || (propType==Property_Deprecated.PropertyType.DblVec && idx!=-1))
-            propValueType = Property_Deprecated.PropertyType.Dbl; 
-         else if(propType==Property_Deprecated.PropertyType.Int || (propType==Property_Deprecated.PropertyType.IntArray && idx!=-1)) propValueType = Property_Deprecated.PropertyType.Int; 
-         else if(propType==Property_Deprecated.PropertyType.Str || (propType==Property_Deprecated.PropertyType.StrArray && idx!=-1)) propValueType = Property_Deprecated.PropertyType.Str; 
-         else if(propType==Property_Deprecated.PropertyType.Bool || (propType==Property_Deprecated.PropertyType.BoolArray && idx!=-1)) propValueType = Property_Deprecated.PropertyType.Bool; 
-
-         if(propType == Property_Deprecated.PropertyType.DblArray ||
-            propType == Property_Deprecated.PropertyType.DblVec ||
-            propType == Property_Deprecated.PropertyType.IntArray ||
-            propType == Property_Deprecated.PropertyType.StrArray ||
-            propType == Property_Deprecated.PropertyType.BoolArray )
+         aggregate = true; // This will cause recursion downstream
+      } else { // actual property rather than an Object
+         AbstractProperty ap = (AbstractProperty) property;
+         propValueType = ap.getTypeName();
+         if(ap.isListProperty() )
          {
             if(idx==-1) {
                aggregate = true;
-                 if (propType != Property_Deprecated.PropertyType.DblArray && propType != Property_Deprecated.PropertyType.DblVec){
+                 if (ap.getMinListSize()!= ap.getMaxListSize()){
                    // Button to add array item
                    controlButton = new JButton(addIcon);
                    //controlButton.setRolloverIcon(addRolloverIcon); // doesn't work right now
@@ -280,7 +269,7 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
                }
 
             } else {
-               if (propType != Property_Deprecated.PropertyType.DblArray && propType != Property_Deprecated.PropertyType.DblVec){
+               if (ap.getMinListSize()!= ap.getMaxListSize()&& ap.size()>0){
                    // Button to delete array item
                    controlButton = new JButton(removeIcon);
                    //controlButton.setRolloverIcon(removeRolloverIcon); // doesn't work right now
@@ -291,12 +280,12 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
              }
             }
          }
-         else if(propType == Property_Deprecated.PropertyType.Obj ||
-                 propType == Property_Deprecated.PropertyType.ObjPtr ||
-                 propType == Property_Deprecated.PropertyType.ObjArray)
+         else if(ap.isObjectProperty() && (!ap.isOptionalProperty() || ap.size()>=1))
          {
             aggregate = true;
          }
+         else if (propValueType.equalsIgnoreCase("Transform"))
+             aggregate = true;
       }
 
       if(controlButton!=null) {
@@ -317,36 +306,36 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
     protected PropertyNode[] getChildren() { return children; }
 
     public String getDescription() {
-       if(property instanceof Property_Deprecated && idx==-1) return ((Property_Deprecated)property).getComment();
+       if(propertyOrObject instanceof AbstractProperty && idx==-1) return ((AbstractProperty)propertyOrObject).getComment();
        else return " ";
     }
 
     public boolean editable() { return !aggregate; }
 
     //-----------------------------------------------------------------------
-    // Add/Remove for property arrays
+    // Add/Remove for propertyOrObject arrays
     //-----------------------------------------------------------------------
 
-    // This is the parent node for a property array, and we want to add an item to the array
+    // This is the parent node for a propertyOrObject array, and we want to add an item to the array
     private void addPropertyItem() {
-      Property_Deprecated p = (Property_Deprecated)property;
+      AbstractProperty p = (AbstractProperty)propertyOrObject;
       // TODO: what values should we use to populate newly created item?
-      if (p.getType() == Property_Deprecated.PropertyType.DblArray) p.getValueDblArray().append(0.0);
-      else if (p.getType() == Property_Deprecated.PropertyType.IntArray) p.getValueIntArray().append(0);
-      else if (p.getType() == Property_Deprecated.PropertyType.StrArray) p.getValueStrArray().append("");
-      else if (p.getType() == Property_Deprecated.PropertyType.BoolArray) p.getValueBoolArray().append(true);
+      if (p.getTypeName().equalsIgnoreCase("double")) PropertyHelper.appendValueDouble(0.0, p);
+      else if (p.getTypeName().equalsIgnoreCase("int")) PropertyHelper.appendValueInt(0, p);
+      else if (p.getTypeName().equalsIgnoreCase("string")) PropertyHelper.appendValueString("", p);
+      else if (p.getTypeName().equalsIgnoreCase("bool")) PropertyHelper.appendValueBool(true, p);
       reloadChildren(this);
     }
 
-    // This is an item in a property array, and we remove this item
+    // This is an item in a propertyOrObject array, and we remove this item
     private void removePropertyItem() {
-      if(idx != -1) {
-         Property_Deprecated p = (Property_Deprecated)getParent().property;
-         if (p.getType() == Property_Deprecated.PropertyType.DblArray) p.getValueDblArray().remove(idx);
-         else if (p.getType() == Property_Deprecated.PropertyType.IntArray) p.getValueIntArray().remove(idx);
-         else if (p.getType() == Property_Deprecated.PropertyType.StrArray) p.getValueStrArray().remove(idx);
-         else if (p.getType() == Property_Deprecated.PropertyType.BoolArray) p.getValueBoolArray().remove(idx);
-         reloadChildren(getParent());
+      if(idx != -1) {/* FIXME30
+         AbstractProperty p = (AbstractProperty)getParent().propertyOrObject;
+         if (p.getType() == AbstractProperty.PropertyType.DblArray) p.getValueDblArray().remove(idx);
+         else if (p.getType() == AbstractProperty.PropertyType.IntArray) p.getValueIntArray().remove(idx);
+         else if (p.getType() == AbstractProperty.PropertyType.StrArray) p.getValueStrArray().remove(idx);
+         else if (p.getType() == AbstractProperty.PropertyType.BoolArray) p.getValueBoolArray().remove(idx);
+         reloadChildren(getParent());(*/
       }
     }
 
@@ -362,76 +351,57 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
     public String getTreeNodeToolTipText() { return toString(); }
 
     public String getValueToolTipText() {
-       if (property instanceof OpenSimObject) {
-          return "Object of type '"+((OpenSimObject)property).getConcreteClassName()+"', name '"+((OpenSimObject)property).getName()+"'";
-       } else if (property instanceof Property_Deprecated) {
-            Property_Deprecated p = (Property_Deprecated)property;
-            if(propValueType == Property_Deprecated.PropertyType.Dbl) return "Double: " + getValue().toString();
-            else if(propValueType == Property_Deprecated.PropertyType.Int) return "Integer: " + getValue().toString();
-            else if(propValueType == Property_Deprecated.PropertyType.Str) return "String: " + getValue().toString();
-            else if(propValueType == Property_Deprecated.PropertyType.Bool) return "Boolean: " + getValue().toString();
-            else if(p.getType()==Property_Deprecated.PropertyType.DblArray) return "Array of doubles: " + getValue().toString();
-            else if(p.getType()==Property_Deprecated.PropertyType.DblVec) return "Vector of doubles: " + getValue().toString();
-             else if(p.getType()==Property_Deprecated.PropertyType.IntArray) return "Array of integers: " + getValue().toString();
-            else if(p.getType()==Property_Deprecated.PropertyType.StrArray) return "Array of strings: " + getValue().toString();
-            else if(p.getType()==Property_Deprecated.PropertyType.BoolArray) return "Array of booleans: " + getValue().toString();
-            else if(p.getType()==Property_Deprecated.PropertyType.ObjPtr) return (p.getValueObjPtr()!=null) ? "Object pointer: " + p.getValueObjPtr().getConcreteClassName() : "Object pointer";
-            else return p.toString();
-       } else return null;
+       if (propertyOrObject instanceof OpenSimObject) {
+          return "Object of type '"+((OpenSimObject)propertyOrObject).getConcreteClassName()+"', name '"+((OpenSimObject)propertyOrObject).getName()+"'";
+       } else {
+            AbstractProperty p = (AbstractProperty)propertyOrObject;
+            return p.toString();
+       }
     }
 
     public String getDescriptionToolTipText() { return getDescription(); }
 
     public Object getValue() {
-      if (property instanceof OpenSimObject)
-        return ( (OpenSimObject) property).getName();
-      else if (property instanceof Property_Deprecated) {
-         Property_Deprecated p = (Property_Deprecated)property;
-         if(propValueType == Property_Deprecated.PropertyType.Dbl) { 
-            if(idx==-1) return (Double)p.getValueDbl();
-            else {
-                if (p.getType()== Property_Deprecated.PropertyType.DblArray)
-                    return (Double)p.getValueDblArray().getitem(idx);
-                else{   // DblVec3
-                    String string = p.toString();
-                    String[] valueStrings = string.substring(1, string.length()-1).split(" ");
-                    return Double.valueOf(valueStrings[idx]);
-                }
-            } 
-         } else if(propValueType == Property_Deprecated.PropertyType.Int) {
-            if(idx==-1) return (Integer)p.getValueInt();
-            else return (Integer)p.getValueIntArray().getitem(idx); 
-         } else if(propValueType == Property_Deprecated.PropertyType.Str) {
-            if(idx==-1) return (String)p.getValueStr();
-            else return (String)p.getValueStrArray().getitem(idx); 
-         } else if(propValueType == Property_Deprecated.PropertyType.Bool) {
-            if(idx==-1) return (Boolean)p.getValueBool();
-            else return (Boolean)p.getValueBoolArray().getitem(idx); 
-         } else if(p.getType() == Property_Deprecated.PropertyType.ObjPtr && p.getValueObjPtr()!=null) {
-            return p.getValueObjPtr().getConcreteClassName();
-         } else return p.toString();
+      if (propertyOrObject instanceof OpenSimObject)
+        return ( (OpenSimObject) propertyOrObject).getName();
+      else {
+         AbstractProperty ap = (AbstractProperty)propertyOrObject;
+         if (ap.isListProperty() && idx==-1)
+             return ap.toString();
+         if(propValueType.equalsIgnoreCase("double")) { 
+            return PropertyHelper.getValueDouble(ap, idx);
+         } else if(propValueType.equalsIgnoreCase("int")) {
+            return PropertyHelper.getValueInt(ap, idx); 
+         } else if(propValueType.equalsIgnoreCase("string")) {
+            return PropertyHelper.getValueString(ap, idx);  
+         } else if(propValueType.equalsIgnoreCase("bool")) {
+            return PropertyHelper.getValueBool(ap, idx);
+         } else if(propValueType.equalsIgnoreCase("Transform")) {
+             return PropertyHelper.getValueTransform(ap, idx);
+         } else if(propValueType.equalsIgnoreCase("Object")) {
+            return ap.getValueAsObject();
+         } else 
+             return ap.toString();
       }
-      return "unknownValue";
     }
 
     public Class getValueClass() { 
-      if (property instanceof Property_Deprecated) {
-         Property_Deprecated p = (Property_Deprecated)property;
-         if(propValueType == Property_Deprecated.PropertyType.Dbl) return Double.class;
-         else if(propValueType == Property_Deprecated.PropertyType.Int) return Integer.class;
-         else if(propValueType == Property_Deprecated.PropertyType.Str) return String.class;
-         else if(propValueType == Property_Deprecated.PropertyType.Bool) return Boolean.class;
+      if (propertyOrObject instanceof AbstractProperty) {
+         if(propValueType.equalsIgnoreCase("double")) return Double.class;
+         else if(propValueType.equalsIgnoreCase("int")) return Integer.class;
+         else if(propValueType.equalsIgnoreCase("string")) return String.class;
+         else if(propValueType.equalsIgnoreCase("bool")) return Boolean.class;
       }
       return String.class; // If none of the above, it's a string
     }
 
-    // This is the name appearing in the tree navigator part of the property editor
+    // This is the name appearing in the tree navigator part of the propertyOrObject editor
     public String toString() { 
        String[] vec3Names = new String[]{"X", "Y", "Z"};
-      if (property instanceof OpenSimObject)
-         return ((OpenSimObject)property).getConcreteClassName();
-      else if (property instanceof Property_Deprecated && idx==-1)
-        return ( (Property_Deprecated) property).getName();
+      if (propertyOrObject instanceof OpenSimObject)
+         return ((OpenSimObject)propertyOrObject).getConcreteClassName();
+      else if (propertyOrObject instanceof AbstractProperty && idx==-1)
+        return ( (AbstractProperty) propertyOrObject).getName();
       else if (idx!=-1){
               return ( "["+String.valueOf(idx)+"]");
       }
@@ -439,9 +409,9 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
     }
 
    public JButton getControlButton() {
-      if(isEditable && controlButton!=null) { // A controlButton is possible, but we check the sizes of the property array to see if we can really add/remove elements
-         if(idx==-1 && ((Property_Deprecated)property).getArraySize() < ((Property_Deprecated)property).getMaxListSize()) return controlButton; // an add button
-         else if(idx!=-1 && ((Property_Deprecated)property).getArraySize() > ((Property_Deprecated)property).getMinListSize()) return controlButton; // a delete button
+      if(isEditable && controlButton!=null) { // A controlButton is possible, but we check the sizes of the propertyOrObject array to see if we can really add/remove elements
+         if(idx==-1 && ((AbstractProperty)propertyOrObject).size() < ((AbstractProperty)propertyOrObject).getMaxListSize()) return controlButton; // an add button
+         else if(idx!=-1 && ((AbstractProperty)propertyOrObject).size() > ((AbstractProperty)propertyOrObject).getMinListSize()) return controlButton; // a delete button
       }
       return null;
    }
@@ -449,47 +419,36 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
    public void setValue(Object value) {
       /**
       * The following steps need to be done
-      * 1. Map property and index if any to a primitive type
+      * 1. Map propertyOrObject and index if any to a primitive type
       * 2. Cast value into a String sValue;
       * 3. Parse sValue using type info
-      * 4. call API to ste the value
+      * 4. call API to set the value
       */
       // Only primitive properties and array entries can be edited
-      if(property instanceof Property_Deprecated) {
-         Property_Deprecated p = (Property_Deprecated)property;
+      if(propertyOrObject instanceof AbstractProperty) {
+         AbstractProperty p = (AbstractProperty)propertyOrObject;
          p.setUseDefault(false);
 
          // NOTE: I wanted the values to come in as Double, Integer, etc. but due to some weirdness the table editor thinks
          // it's editing a string in the cases of Double, Integer, and String... so I check this below (value instanceof String) to be safe
          try {
             NumberFormat numFormat = NumberFormat.getInstance();
-            if(propValueType == Property_Deprecated.PropertyType.Dbl) {
+            if(propValueType.equalsIgnoreCase("double")) {
                double val = (value instanceof String) ? numFormat.parse((String)value).doubleValue() : ((Double)value).doubleValue();
-               if(idx==-1) p.setValue(val); 
-               else{
-                   if (p.getType()==Property_Deprecated.PropertyType.DblArray)
-                        p.getValueDblArray().set(idx, val);
-                   else {   //DblVec3
-                        String string = p.toString();
-                        String[] valueStrings = string.substring(1, string.length()-1).split(" ");
-                        double[] dValues = new double[3];
-                        for(int i=0; i<3; i++){
-                            dValues[i]=Double.valueOf(valueStrings[i]);
-                        }
-                        dValues[idx]=val;
-                        p.setValue(3, dValues);
-                   }
-               }
-            } else if(propValueType == Property_Deprecated.PropertyType.Int) {
+               PropertyHelper.setValueDouble(val, p, idx); 
+            } else if(propValueType.equalsIgnoreCase("int")) {
                int val = (value instanceof String) ? numFormat.parse((String)value).intValue() : ((Integer)value).intValue();
-               if(idx==-1) p.setValue(val); else p.getValueIntArray().set(idx, val);
-            } else if(propValueType == Property_Deprecated.PropertyType.Str) {
+               PropertyHelper.setValueInt(val, p, idx);
+            } else if(propValueType.equalsIgnoreCase("string")) {
                String val = (String)value;
-               if(idx==-1) p.setValue(val); else p.getValueStrArray().set(idx, val);
-            } else if(propValueType == Property_Deprecated.PropertyType.Bool) {
+               PropertyHelper.setValueString(val, p, idx);
+            } else if(propValueType.equalsIgnoreCase("bool")) {
                boolean val = ((Boolean)value).booleanValue();
-               if(idx==-1) p.setValue(val); else p.getValueBoolArray().set(idx, val);
-            }
+              PropertyHelper.setValueBool(val, p, idx);
+            } else if(propValueType.equalsIgnoreCase("Transform")) {
+               double val = (value instanceof String) ? numFormat.parse((String)value).doubleValue() : ((Double)value).doubleValue();
+               PropertyHelper.setValueTransform(val, p, idx);
+             }
          } catch (ParseException ex) { // might get a parsing exception
          }
 
@@ -499,20 +458,22 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
 
     protected PropertyNode[] createChildren(OpenSimObject obj) {
        if(obj==null) return null;
-       PropertySet props = obj.getPropertySet();
-       PropertyNode[] retArray = new PropertyNode[props.getSize()];
-       for (int i = 0; i < props.getSize(); i++) {
-            Property_Deprecated prop=null;
-            try {
-               prop = props.get(i);
-            } catch (IOException ex) {
-               ex.printStackTrace();
+       //System.out.println("createChildren for object: "+obj.toString()+" type="+obj.getConcreteClassName());
+       int numProps = obj.getNumProperties();
+       PropertyNode[] retArray = new PropertyNode[numProps];
+       for (int i = 0; i < numProps; i++) {
+            AbstractProperty prop=null;
+            prop = obj.updPropertyByIndex(i);
+            if(prop.isObjectProperty()){
+                if (!prop.isListProperty() && !prop.isOptionalProperty())
+                    retArray[i] = new PropertyNode(this, prop.getValueAsObject());
+                else // List or optional
+                    retArray[i] = new PropertyNode(this, prop); //?
             }
-            if(prop!=null && (prop).getType()==Property_Deprecated.PropertyType.Obj)
-               retArray[i] = new PropertyNode(this, prop.getValueObj());
             else
                retArray[i] = new PropertyNode(this, prop);
        }
+       //System.out.println("finished createChildren for object: "+obj.toString());
        return retArray;
     }
 
@@ -520,40 +481,47 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
      * Creates PropertyNodes for the children of this node.
      *
      * @return PropertyNode[]
-     * @todo Complete the list of types of Property_Deprecated that are aggregates:
+     * @todo Complete the list of types of AbstractProperty that are aggregates:
      *   primitive types already work as well as Arrays of doubles and Strings.
      *   Left: Arrays of objects and actual editing/change-probagation
      */
     protected PropertyNode[] createChildren() {
       PropertyNode[] retArray = null;
+      ///System.out.println("createChildren for object:"+propertyOrObject.toString());
 
       try {
-        if (property instanceof OpenSimObject) {
-          retArray = createChildren((OpenSimObject)property);
+        if (propertyOrObject instanceof OpenSimObject) {
+          retArray = createChildren((OpenSimObject)propertyOrObject);
         }
-        else if (property instanceof Property_Deprecated) {
-          Property_Deprecated rdprop = (Property_Deprecated) property;
-          Property_Deprecated.PropertyType propType = rdprop.getType();
-          if (propType == Property_Deprecated.PropertyType.Obj || propType == Property_Deprecated.PropertyType.ObjPtr) {
-            boolean objPtr=(propType == Property_Deprecated.PropertyType.ObjPtr);
-            OpenSimObject childObj = (objPtr)?(OpenSimObject) rdprop.getValueObjPtr():(OpenSimObject) rdprop.getValueObj();
-            retArray = createChildren(childObj);
+        else if (propertyOrObject instanceof AbstractProperty) { // Actual 
+          AbstractProperty rdprop = (AbstractProperty) propertyOrObject;
+           if (rdprop.isObjectProperty()) { // Object, ObjectPtr or Array of Objects
+               //System.out.println("Found Object property:"+rdprop.getTypeName());
+               if (!rdprop.isListProperty() && !rdprop.isOptionalProperty()){
+                     retArray = createChildren(rdprop.getValueAsObject());
+               }
+               else if (rdprop.isListProperty()) {
+                   retArray = new PropertyNode[rdprop.size()];
+                    for (int i = 0; i < rdprop.size(); i++) {
+                        retArray[i] = new PropertyNode(this, rdprop.getValueAsObject(i), -1); // PropertyNode will figure out our type
+                    }
+               }
+               else { // optional drill down only if size > 0
+                   if (rdprop.size()==1)
+                       retArray = createChildren(rdprop.getValueAsObject());
+               }
           }
-          else if (propType == Property_Deprecated.PropertyType.DblArray ||
-                   propType == Property_Deprecated.PropertyType.DblVec ||
-                   propType == Property_Deprecated.PropertyType.IntArray ||
-                   propType == Property_Deprecated.PropertyType.StrArray ||
-                   propType == Property_Deprecated.PropertyType.BoolArray) 
-          {
-            retArray = new PropertyNode[rdprop.getArraySize()];
-            for (int i = 0; i < rdprop.getArraySize(); i++) 
-               retArray[i] = new PropertyNode(this, property, i); // PropertyNode will figure out our type
+          else if (rdprop.isListProperty()) 
+          { // List of non Objects: transform, 
+            retArray = new PropertyNode[rdprop.size()];
+            for (int i = 0; i < rdprop.size(); i++) 
+               retArray[i] = new PropertyNode(this, propertyOrObject, i); // PropertyNode will figure out our type
           }
-          else if (propType == Property_Deprecated.PropertyType.ObjArray) {
-            retArray = new PropertyNode[rdprop.getArraySize()];
+          else { // simple objects
+            retArray = new PropertyNode[rdprop.size()];
             //System.out.println("Name="+rdprop.getName()+" propType="+propType+" size="+rdprop.getArraySize());
-            for (int i = 0; i < rdprop.getArraySize(); i++) {
-              OpenSimObject subobj = rdprop.getValueObjPtr(i);
+            for (int i = 0; i < rdprop.size(); i++) {
+              OpenSimObject subobj = rdprop.getValueAsObject(i);
               //String dName = subobj.getName(); 
               retArray[i] = new PropertyNode(this, subobj, i);
             }

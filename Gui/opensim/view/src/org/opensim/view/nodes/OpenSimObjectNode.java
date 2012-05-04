@@ -103,7 +103,14 @@ public class OpenSimObjectNode extends OpenSimNode {
             nextNodeProp.setValue("canEditAsText", Boolean.FALSE);
             nextNodeProp.setValue("suppressCustomEditor", Boolean.FALSE);
        }
-       
+       else { // fall through, unsupported for now
+           nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap),
+                String.class,
+                "toString",//mapPropertyEnumToGetters.get(currentPropType),
+                null);//mapPropertyEnumToSetters.get(currentPropType));
+            nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
+            nextNodeProp.setValue("suppressCustomEditor", Boolean.FALSE);
+       }
        return nextNodeProp;
     }
 
@@ -125,6 +132,14 @@ public class OpenSimObjectNode extends OpenSimNode {
                 "getValueObj",//mapPropertyEnumToGetters.get(currentPropType),
                 "setValueObj");//mapPropertyEnumToSetters.get(currentPropType));
             nextNodeProp.setValue("canEditAsText", Boolean.FALSE);
+            nextNodeProp.setValue("suppressCustomEditor", Boolean.FALSE);
+       }
+       else { // fall through, unexpected
+           nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap),
+                String.class,
+                "toString",//mapPropertyEnumToGetters.get(currentPropType),
+                null);//mapPropertyEnumToSetters.get(currentPropType));
+            nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
             nextNodeProp.setValue("suppressCustomEditor", Boolean.FALSE);
        }
        return nextNodeProp;
@@ -155,7 +170,7 @@ public class OpenSimObjectNode extends OpenSimNode {
      */
     public Action getPreferredAction() {
          if( getValidDisplayOptions().size() ==0 ) return null;  // Nothing to show or hide.
-          
+         /* override getPreferredAction in desired class instead
          // If this is a rigid body, open the easy-to-use rigid body property editor (also provides the older table version). 
          // Appearance panel allows user to show/hide the body.
          if( this instanceof OneBodyNode ) // this instanceof OneJointNode
@@ -164,7 +179,7 @@ public class OpenSimObjectNode extends OpenSimNode {
             if(      this instanceof OneBodyNode  ) LSJava.LSPropertyEditors.LSPropertyEditorRigidBody.NewLSPropertyEditorRigidBody(  (OneBodyNode)this, ownerWindow );
             else if( this instanceof OneJointNode ) new LSJava.LSPropertyEditors.LSPropertyEditorJoint(     (OneJointNode)this, ownerWindow );
             return null;
-         }
+         } */
          
          OpenSimObject obj = getOpenSimObject();
          int currentStatus = ViewDB.getInstance().getDisplayStatus( obj );

@@ -115,7 +115,16 @@ public class PropertyHelper {
     opensimModelJNI.PropertyHelper_appendValueString(v, AbstractProperty.getCPtr(p), p);
   }
 
+  public static double getValueTransform(AbstractProperty p, int index) {
+    return opensimModelJNI.PropertyHelper_getValueTransform(AbstractProperty.getCPtr(p), p, index);
+  }
+
+  public static void setValueTransform(double v, AbstractProperty p, int index) {
+    opensimModelJNI.PropertyHelper_setValueTransform(v, AbstractProperty.getCPtr(p), p, index);
+  }
+
   public PropertyHelper() {
     this(opensimModelJNI.new_PropertyHelper(), true);
   }
- }
+
+}
