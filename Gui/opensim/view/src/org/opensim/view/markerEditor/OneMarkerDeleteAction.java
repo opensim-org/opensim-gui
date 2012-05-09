@@ -100,7 +100,7 @@ public final class OneMarkerDeleteAction extends CallableSystemAction {
         OpenSimDB.getInstance().setChanged();
         OpenSimDB.getInstance().notifyObservers(evnt);
         if (supportUndo) {
-            System.out.println("name, body, offset="+saveMarkerName+" "+saveBodyName+" "+saveMarkerOffset);
+            //System.out.println("name, body, offset="+saveMarkerName+" "+saveBodyName+" "+saveMarkerOffset);
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
 
                 public void undo() throws CannotUndoException {

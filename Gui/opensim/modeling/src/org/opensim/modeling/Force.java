@@ -57,8 +57,48 @@ public class Force extends ModelComponent {
     return opensimModelJNI.Force_getConcreteClassName(swigCPtr, this);
   }
 
-  public void copyData(Force aForce) {
-    opensimModelJNI.Force_copyData(swigCPtr, this, Force.getCPtr(aForce), aForce);
+  public void setPropertyIndex_isDisabled(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Force_PropertyIndex_isDisabled_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_isDisabled() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Force_PropertyIndex_isDisabled_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_isDisabled(Force source) {
+    opensimModelJNI.Force_copyProperty_isDisabled(swigCPtr, this, Force.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_isDisabled() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Force_getProperty_isDisabled__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_isDisabled() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Force_updProperty_isDisabled__SWIG_0(swigCPtr, this), false);
+  }
+
+  public boolean getProperty_isDisabled(int i) {
+    return opensimModelJNI.Force_getProperty_isDisabled__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_bool updProperty_isDisabled(int i) {
+    return new SWIGTYPE_p_bool(opensimModelJNI.Force_updProperty_isDisabled__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_isDisabled(int i, boolean value) {
+    opensimModelJNI.Force_setProperty_isDisabled__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_isDisabled(boolean value) {
+    return opensimModelJNI.Force_appendProperty_isDisabled(swigCPtr, this, value);
+  }
+
+  public void constructProperty_isDisabled(boolean initValue) {
+    opensimModelJNI.Force_constructProperty_isDisabled(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_isDisabled(boolean value) {
+    opensimModelJNI.Force_setProperty_isDisabled__SWIG_1(swigCPtr, this, value);
   }
 
   public ArrayStr getRecordLabels() {

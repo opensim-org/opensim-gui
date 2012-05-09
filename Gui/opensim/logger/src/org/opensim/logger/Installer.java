@@ -36,7 +36,7 @@ public class Installer extends ModuleInstall {
    public void restored() {
       super.restored();
       if(logCallback == null) {
-         System.out.println("Initializing logger callback");
+         //System.out.println("Initializing logger callback");
          logCallback = new JavaLogCallback();
          logCallback.addToLogManager();
       }

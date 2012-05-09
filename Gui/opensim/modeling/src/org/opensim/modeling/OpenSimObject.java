@@ -141,6 +141,14 @@ public class OpenSimObject {
     return new AbstractProperty(opensimModelJNI.OpenSimObject_updPropertyByName(swigCPtr, this, name), false);
   }
 
+  public void setObjectIsUpToDateWithProperties(boolean isUpToDate) {
+    opensimModelJNI.OpenSimObject_setObjectIsUpToDateWithProperties(swigCPtr, this, isUpToDate);
+  }
+
+  public boolean isObjectUpToDateWithProperties() {
+    return opensimModelJNI.OpenSimObject_isObjectUpToDateWithProperties(swigCPtr, this);
+  }
+
   public static void PrintPropertyInfo(SWIGTYPE_p_std__ostream os, String classNameDotPropertyName) {
     opensimModelJNI.OpenSimObject_PrintPropertyInfo__SWIG_0(SWIGTYPE_p_std__ostream.getCPtr(os), classNameDotPropertyName);
   }

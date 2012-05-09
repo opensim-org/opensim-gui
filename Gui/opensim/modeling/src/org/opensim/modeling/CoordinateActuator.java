@@ -57,29 +57,127 @@ public class CoordinateActuator extends Actuator {
     return opensimModelJNI.CoordinateActuator_getConcreteClassName(swigCPtr, this);
   }
 
-  public void copyData(CoordinateActuator aGenForce) {
-    opensimModelJNI.CoordinateActuator_copyData(swigCPtr, this, CoordinateActuator.getCPtr(aGenForce), aGenForce);
+  public void setPropertyIndex_coordinate(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.CoordinateActuator_PropertyIndex_coordinate_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public void setCoordinate(Coordinate aCoordinate) {
-    opensimModelJNI.CoordinateActuator_setCoordinate(swigCPtr, this, Coordinate.getCPtr(aCoordinate), aCoordinate);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_coordinate() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.CoordinateActuator_PropertyIndex_coordinate_get(swigCPtr, this), true);
   }
 
-  public Coordinate getCoordinate() {
-    long cPtr = opensimModelJNI.CoordinateActuator_getCoordinate(swigCPtr, this);
-    return (cPtr == 0) ? null : new Coordinate(cPtr, false);
+  public void copyProperty_coordinate(CoordinateActuator source) {
+    opensimModelJNI.CoordinateActuator_copyProperty_coordinate(swigCPtr, this, CoordinateActuator.getCPtr(source), source);
   }
 
-  public void setOptimalForce(double aOptimalForce) {
-    opensimModelJNI.CoordinateActuator_setOptimalForce(swigCPtr, this, aOptimalForce);
+  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_coordinate() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.CoordinateActuator_getProperty_coordinate__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_coordinate() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.CoordinateActuator_updProperty_coordinate__SWIG_0(swigCPtr, this), false);
+  }
+
+  public String getProperty_coordinate(int i) {
+    return opensimModelJNI.CoordinateActuator_getProperty_coordinate__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_std__string updProperty_coordinate(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.CoordinateActuator_updProperty_coordinate__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_coordinate(int i, String value) {
+    opensimModelJNI.CoordinateActuator_setProperty_coordinate__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_coordinate(String value) {
+    return opensimModelJNI.CoordinateActuator_appendProperty_coordinate(swigCPtr, this, value);
+  }
+
+  public void constructProperty_coordinate() {
+    opensimModelJNI.CoordinateActuator_constructProperty_coordinate__SWIG_0(swigCPtr, this);
+  }
+
+  public void constructProperty_coordinate(String initValue) {
+    opensimModelJNI.CoordinateActuator_constructProperty_coordinate__SWIG_1(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_coordinate(String value) {
+    opensimModelJNI.CoordinateActuator_setProperty_coordinate__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_optimal_force(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.CoordinateActuator_PropertyIndex_optimal_force_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_optimal_force() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.CoordinateActuator_PropertyIndex_optimal_force_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_optimal_force(CoordinateActuator source) {
+    opensimModelJNI.CoordinateActuator_copyProperty_optimal_force(swigCPtr, this, CoordinateActuator.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_optimal_force() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.CoordinateActuator_getProperty_optimal_force__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_optimal_force() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.CoordinateActuator_updProperty_optimal_force__SWIG_0(swigCPtr, this), false);
+  }
+
+  public double getProperty_optimal_force(int i) {
+    return opensimModelJNI.CoordinateActuator_getProperty_optimal_force__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double updProperty_optimal_force(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.CoordinateActuator_updProperty_optimal_force__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_optimal_force(int i, double value) {
+    opensimModelJNI.CoordinateActuator_setProperty_optimal_force__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_optimal_force(double value) {
+    return opensimModelJNI.CoordinateActuator_appendProperty_optimal_force(swigCPtr, this, value);
+  }
+
+  public void constructProperty_optimal_force(double initValue) {
+    opensimModelJNI.CoordinateActuator_constructProperty_optimal_force(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_optimal_force(double value) {
+    opensimModelJNI.CoordinateActuator_setProperty_optimal_force__SWIG_1(swigCPtr, this, value);
+  }
+
+  public CoordinateActuator(String coordinateName) {
+    this(opensimModelJNI.new_CoordinateActuator__SWIG_0(coordinateName), true);
+  }
+
+  public CoordinateActuator() {
+    this(opensimModelJNI.new_CoordinateActuator__SWIG_1(), true);
+  }
+
+  public void setOptimalForce(double optimalForce) {
+    opensimModelJNI.CoordinateActuator_setOptimalForce(swigCPtr, this, optimalForce);
   }
 
   public double getOptimalForce() {
     return opensimModelJNI.CoordinateActuator_getOptimalForce(swigCPtr, this);
   }
 
-  public boolean check() {
-    return opensimModelJNI.CoordinateActuator_check(swigCPtr, this);
+  public static ForceSet CreateForceSetOfCoordinateActuatorsForModel(SWIGTYPE_p_SimTK__State s, Model aModel, double aOptimalForce, boolean aIncludeLockedAndConstrainedCoordinates) {
+    long cPtr = opensimModelJNI.CoordinateActuator_CreateForceSetOfCoordinateActuatorsForModel__SWIG_0(SWIGTYPE_p_SimTK__State.getCPtr(s), Model.getCPtr(aModel), aModel, aOptimalForce, aIncludeLockedAndConstrainedCoordinates);
+    return (cPtr == 0) ? null : new ForceSet(cPtr, false);
+  }
+
+  public static ForceSet CreateForceSetOfCoordinateActuatorsForModel(SWIGTYPE_p_SimTK__State s, Model aModel, double aOptimalForce) {
+    long cPtr = opensimModelJNI.CoordinateActuator_CreateForceSetOfCoordinateActuatorsForModel__SWIG_1(SWIGTYPE_p_SimTK__State.getCPtr(s), Model.getCPtr(aModel), aModel, aOptimalForce);
+    return (cPtr == 0) ? null : new ForceSet(cPtr, false);
+  }
+
+  public static ForceSet CreateForceSetOfCoordinateActuatorsForModel(SWIGTYPE_p_SimTK__State s, Model aModel) {
+    long cPtr = opensimModelJNI.CoordinateActuator_CreateForceSetOfCoordinateActuatorsForModel__SWIG_2(SWIGTYPE_p_SimTK__State.getCPtr(s), Model.getCPtr(aModel), aModel);
+    return (cPtr == 0) ? null : new ForceSet(cPtr, false);
   }
 
   public boolean isCoordinateValid() {
@@ -90,12 +188,13 @@ public class CoordinateActuator extends Actuator {
     return opensimModelJNI.CoordinateActuator_getSpeed(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
   }
 
-  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
-    opensimModelJNI.CoordinateActuator_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+  public void setCoordinate(Coordinate aCoordinate) {
+    opensimModelJNI.CoordinateActuator_setCoordinate(swigCPtr, this, Coordinate.getCPtr(aCoordinate), aCoordinate);
   }
 
-  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
-    opensimModelJNI.CoordinateActuator_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
+  public Coordinate getCoordinate() {
+    long cPtr = opensimModelJNI.CoordinateActuator_getCoordinate(swigCPtr, this);
+    return (cPtr == 0) ? null : new Coordinate(cPtr, false);
   }
 
 }

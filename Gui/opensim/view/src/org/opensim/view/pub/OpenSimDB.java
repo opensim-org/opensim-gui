@@ -441,5 +441,10 @@ public class OpenSimDB extends Observable implements Externalizable{
             notifyObservers(evnt);
        }
     }
+    public void markObjectsChanged(Vector<OpenSimObject> objs, Model model) {
+        ObjectsChangedEvent evnt = new ObjectsChangedEvent(this, model, objs);
+        getInstance().setChanged();
+        getInstance().notifyObservers(evnt);
+    }
 
  }

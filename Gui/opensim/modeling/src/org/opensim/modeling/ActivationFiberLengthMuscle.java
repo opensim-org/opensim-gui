@@ -57,6 +57,94 @@ public class ActivationFiberLengthMuscle extends Muscle {
     return opensimModelJNI.ActivationFiberLengthMuscle_getConcreteClassName(swigCPtr, this);
   }
 
+  public void setPropertyIndex_default_activation(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.ActivationFiberLengthMuscle_PropertyIndex_default_activation_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_default_activation() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ActivationFiberLengthMuscle_PropertyIndex_default_activation_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_default_activation(ActivationFiberLengthMuscle source) {
+    opensimModelJNI.ActivationFiberLengthMuscle_copyProperty_default_activation(swigCPtr, this, ActivationFiberLengthMuscle.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_default_activation() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ActivationFiberLengthMuscle_getProperty_default_activation__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_default_activation() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ActivationFiberLengthMuscle_updProperty_default_activation__SWIG_0(swigCPtr, this), false);
+  }
+
+  public double getProperty_default_activation(int i) {
+    return opensimModelJNI.ActivationFiberLengthMuscle_getProperty_default_activation__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double updProperty_default_activation(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.ActivationFiberLengthMuscle_updProperty_default_activation__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_default_activation(int i, double value) {
+    opensimModelJNI.ActivationFiberLengthMuscle_setProperty_default_activation__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_default_activation(double value) {
+    return opensimModelJNI.ActivationFiberLengthMuscle_appendProperty_default_activation(swigCPtr, this, value);
+  }
+
+  public void constructProperty_default_activation(double initValue) {
+    opensimModelJNI.ActivationFiberLengthMuscle_constructProperty_default_activation(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_default_activation(double value) {
+    opensimModelJNI.ActivationFiberLengthMuscle_setProperty_default_activation__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_default_fiber_length(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.ActivationFiberLengthMuscle_PropertyIndex_default_fiber_length_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_default_fiber_length() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ActivationFiberLengthMuscle_PropertyIndex_default_fiber_length_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_default_fiber_length(ActivationFiberLengthMuscle source) {
+    opensimModelJNI.ActivationFiberLengthMuscle_copyProperty_default_fiber_length(swigCPtr, this, ActivationFiberLengthMuscle.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_default_fiber_length() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ActivationFiberLengthMuscle_getProperty_default_fiber_length__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_default_fiber_length() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ActivationFiberLengthMuscle_updProperty_default_fiber_length__SWIG_0(swigCPtr, this), false);
+  }
+
+  public double getProperty_default_fiber_length(int i) {
+    return opensimModelJNI.ActivationFiberLengthMuscle_getProperty_default_fiber_length__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double updProperty_default_fiber_length(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.ActivationFiberLengthMuscle_updProperty_default_fiber_length__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_default_fiber_length(int i, double value) {
+    opensimModelJNI.ActivationFiberLengthMuscle_setProperty_default_fiber_length__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_default_fiber_length(double value) {
+    return opensimModelJNI.ActivationFiberLengthMuscle_appendProperty_default_fiber_length(swigCPtr, this, value);
+  }
+
+  public void constructProperty_default_fiber_length(double initValue) {
+    opensimModelJNI.ActivationFiberLengthMuscle_constructProperty_default_fiber_length(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_default_fiber_length(double value) {
+    opensimModelJNI.ActivationFiberLengthMuscle_setProperty_default_fiber_length__SWIG_1(swigCPtr, this, value);
+  }
+
   public double getDefaultActivation() {
     return opensimModelJNI.ActivationFiberLengthMuscle_getDefaultActivation(swigCPtr, this);
   }
@@ -81,20 +169,20 @@ public class ActivationFiberLengthMuscle extends Muscle {
     opensimModelJNI.ActivationFiberLengthMuscle_setFiberLength(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), fiberLength);
   }
 
-  public double getActivationRate(SWIGTYPE_p_SimTK__State s) {
-    return opensimModelJNI.ActivationFiberLengthMuscle_getActivationRate(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
-  }
-
-  public double computeIsokineticForceAssumingInfinitelyStiffTendon(SWIGTYPE_p_SimTK__State s, double aActivation) {
-    return opensimModelJNI.ActivationFiberLengthMuscle_computeIsokineticForceAssumingInfinitelyStiffTendon(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), aActivation);
-  }
-
   public ArrayStr getStateVariableNames() {
     return new ArrayStr(opensimModelJNI.ActivationFiberLengthMuscle_getStateVariableNames(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_SimTK__SystemYIndex getStateVariableSystemIndex(String stateVariableName) {
     return new SWIGTYPE_p_SimTK__SystemYIndex(opensimModelJNI.ActivationFiberLengthMuscle_getStateVariableSystemIndex(swigCPtr, this, stateVariableName), true);
+  }
+
+  public double getActivationRate(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.ActivationFiberLengthMuscle_getActivationRate(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
+  public double computeIsokineticForceAssumingInfinitelyStiffTendon(SWIGTYPE_p_SimTK__State s, double aActivation) {
+    return opensimModelJNI.ActivationFiberLengthMuscle_computeIsokineticForceAssumingInfinitelyStiffTendon(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), aActivation);
   }
 
 }

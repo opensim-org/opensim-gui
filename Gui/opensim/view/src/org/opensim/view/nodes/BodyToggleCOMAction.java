@@ -35,7 +35,7 @@ public final class BodyToggleCOMAction extends BooleanStateAction {
             }
         }
         super.setBooleanState( newState );
-        ViewDB.getInstance().renderAll();
+        ViewDB.renderAll();
    }
     
    //-------------------------------------------------------------------------
@@ -61,7 +61,7 @@ public final class BodyToggleCOMAction extends BooleanStateAction {
       if( rep != null )
       {
           rep.setShowCOM( showCMIsTrueHideIsFalse ); 
-          if( renderAll ) ViewDB.getInstance().renderAll();
+          if( renderAll ) ViewDB.renderAll();
       }     
    }
     

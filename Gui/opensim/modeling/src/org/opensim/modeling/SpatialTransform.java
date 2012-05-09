@@ -57,28 +57,288 @@ public class SpatialTransform extends OpenSimObject {
     return opensimModelJNI.SpatialTransform_getConcreteClassName(swigCPtr, this);
   }
 
+  public void setPropertyIndex_rotation1(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.SpatialTransform_PropertyIndex_rotation1_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_rotation1() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.SpatialTransform_PropertyIndex_rotation1_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_rotation1(SpatialTransform source) {
+    opensimModelJNI.SpatialTransform_copyProperty_rotation1(swigCPtr, this, SpatialTransform.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t getProperty_rotation1() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t(opensimModelJNI.SpatialTransform_getProperty_rotation1__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t updProperty_rotation1() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t(opensimModelJNI.SpatialTransform_updProperty_rotation1__SWIG_0(swigCPtr, this), false);
+  }
+
+  public TransformAxis getProperty_rotation1(int i) {
+    return new TransformAxis(opensimModelJNI.SpatialTransform_getProperty_rotation1__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public TransformAxis updProperty_rotation1(int i) {
+    return new TransformAxis(opensimModelJNI.SpatialTransform_updProperty_rotation1__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_rotation1(int i, TransformAxis value) {
+    opensimModelJNI.SpatialTransform_setProperty_rotation1__SWIG_0(swigCPtr, this, i, TransformAxis.getCPtr(value), value);
+  }
+
+  public int appendProperty_rotation1(TransformAxis value) {
+    return opensimModelJNI.SpatialTransform_appendProperty_rotation1(swigCPtr, this, TransformAxis.getCPtr(value), value);
+  }
+
+  public void constructProperty_rotation1(TransformAxis initValue) {
+    opensimModelJNI.SpatialTransform_constructProperty_rotation1(swigCPtr, this, TransformAxis.getCPtr(initValue), initValue);
+  }
+
+  public void setProperty_rotation1(TransformAxis value) {
+    opensimModelJNI.SpatialTransform_setProperty_rotation1__SWIG_1(swigCPtr, this, TransformAxis.getCPtr(value), value);
+  }
+
+  public void setPropertyIndex_rotation2(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.SpatialTransform_PropertyIndex_rotation2_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_rotation2() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.SpatialTransform_PropertyIndex_rotation2_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_rotation2(SpatialTransform source) {
+    opensimModelJNI.SpatialTransform_copyProperty_rotation2(swigCPtr, this, SpatialTransform.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t getProperty_rotation2() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t(opensimModelJNI.SpatialTransform_getProperty_rotation2__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t updProperty_rotation2() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t(opensimModelJNI.SpatialTransform_updProperty_rotation2__SWIG_0(swigCPtr, this), false);
+  }
+
+  public TransformAxis getProperty_rotation2(int i) {
+    return new TransformAxis(opensimModelJNI.SpatialTransform_getProperty_rotation2__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public TransformAxis updProperty_rotation2(int i) {
+    return new TransformAxis(opensimModelJNI.SpatialTransform_updProperty_rotation2__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_rotation2(int i, TransformAxis value) {
+    opensimModelJNI.SpatialTransform_setProperty_rotation2__SWIG_0(swigCPtr, this, i, TransformAxis.getCPtr(value), value);
+  }
+
+  public int appendProperty_rotation2(TransformAxis value) {
+    return opensimModelJNI.SpatialTransform_appendProperty_rotation2(swigCPtr, this, TransformAxis.getCPtr(value), value);
+  }
+
+  public void constructProperty_rotation2(TransformAxis initValue) {
+    opensimModelJNI.SpatialTransform_constructProperty_rotation2(swigCPtr, this, TransformAxis.getCPtr(initValue), initValue);
+  }
+
+  public void setProperty_rotation2(TransformAxis value) {
+    opensimModelJNI.SpatialTransform_setProperty_rotation2__SWIG_1(swigCPtr, this, TransformAxis.getCPtr(value), value);
+  }
+
+  public void setPropertyIndex_rotation3(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.SpatialTransform_PropertyIndex_rotation3_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_rotation3() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.SpatialTransform_PropertyIndex_rotation3_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_rotation3(SpatialTransform source) {
+    opensimModelJNI.SpatialTransform_copyProperty_rotation3(swigCPtr, this, SpatialTransform.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t getProperty_rotation3() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t(opensimModelJNI.SpatialTransform_getProperty_rotation3__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t updProperty_rotation3() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t(opensimModelJNI.SpatialTransform_updProperty_rotation3__SWIG_0(swigCPtr, this), false);
+  }
+
+  public TransformAxis getProperty_rotation3(int i) {
+    return new TransformAxis(opensimModelJNI.SpatialTransform_getProperty_rotation3__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public TransformAxis updProperty_rotation3(int i) {
+    return new TransformAxis(opensimModelJNI.SpatialTransform_updProperty_rotation3__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_rotation3(int i, TransformAxis value) {
+    opensimModelJNI.SpatialTransform_setProperty_rotation3__SWIG_0(swigCPtr, this, i, TransformAxis.getCPtr(value), value);
+  }
+
+  public int appendProperty_rotation3(TransformAxis value) {
+    return opensimModelJNI.SpatialTransform_appendProperty_rotation3(swigCPtr, this, TransformAxis.getCPtr(value), value);
+  }
+
+  public void constructProperty_rotation3(TransformAxis initValue) {
+    opensimModelJNI.SpatialTransform_constructProperty_rotation3(swigCPtr, this, TransformAxis.getCPtr(initValue), initValue);
+  }
+
+  public void setProperty_rotation3(TransformAxis value) {
+    opensimModelJNI.SpatialTransform_setProperty_rotation3__SWIG_1(swigCPtr, this, TransformAxis.getCPtr(value), value);
+  }
+
+  public void setPropertyIndex_translation1(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.SpatialTransform_PropertyIndex_translation1_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_translation1() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.SpatialTransform_PropertyIndex_translation1_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_translation1(SpatialTransform source) {
+    opensimModelJNI.SpatialTransform_copyProperty_translation1(swigCPtr, this, SpatialTransform.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t getProperty_translation1() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t(opensimModelJNI.SpatialTransform_getProperty_translation1__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t updProperty_translation1() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t(opensimModelJNI.SpatialTransform_updProperty_translation1__SWIG_0(swigCPtr, this), false);
+  }
+
+  public TransformAxis getProperty_translation1(int i) {
+    return new TransformAxis(opensimModelJNI.SpatialTransform_getProperty_translation1__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public TransformAxis updProperty_translation1(int i) {
+    return new TransformAxis(opensimModelJNI.SpatialTransform_updProperty_translation1__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_translation1(int i, TransformAxis value) {
+    opensimModelJNI.SpatialTransform_setProperty_translation1__SWIG_0(swigCPtr, this, i, TransformAxis.getCPtr(value), value);
+  }
+
+  public int appendProperty_translation1(TransformAxis value) {
+    return opensimModelJNI.SpatialTransform_appendProperty_translation1(swigCPtr, this, TransformAxis.getCPtr(value), value);
+  }
+
+  public void constructProperty_translation1(TransformAxis initValue) {
+    opensimModelJNI.SpatialTransform_constructProperty_translation1(swigCPtr, this, TransformAxis.getCPtr(initValue), initValue);
+  }
+
+  public void setProperty_translation1(TransformAxis value) {
+    opensimModelJNI.SpatialTransform_setProperty_translation1__SWIG_1(swigCPtr, this, TransformAxis.getCPtr(value), value);
+  }
+
+  public void setPropertyIndex_translation2(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.SpatialTransform_PropertyIndex_translation2_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_translation2() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.SpatialTransform_PropertyIndex_translation2_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_translation2(SpatialTransform source) {
+    opensimModelJNI.SpatialTransform_copyProperty_translation2(swigCPtr, this, SpatialTransform.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t getProperty_translation2() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t(opensimModelJNI.SpatialTransform_getProperty_translation2__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t updProperty_translation2() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t(opensimModelJNI.SpatialTransform_updProperty_translation2__SWIG_0(swigCPtr, this), false);
+  }
+
+  public TransformAxis getProperty_translation2(int i) {
+    return new TransformAxis(opensimModelJNI.SpatialTransform_getProperty_translation2__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public TransformAxis updProperty_translation2(int i) {
+    return new TransformAxis(opensimModelJNI.SpatialTransform_updProperty_translation2__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_translation2(int i, TransformAxis value) {
+    opensimModelJNI.SpatialTransform_setProperty_translation2__SWIG_0(swigCPtr, this, i, TransformAxis.getCPtr(value), value);
+  }
+
+  public int appendProperty_translation2(TransformAxis value) {
+    return opensimModelJNI.SpatialTransform_appendProperty_translation2(swigCPtr, this, TransformAxis.getCPtr(value), value);
+  }
+
+  public void constructProperty_translation2(TransformAxis initValue) {
+    opensimModelJNI.SpatialTransform_constructProperty_translation2(swigCPtr, this, TransformAxis.getCPtr(initValue), initValue);
+  }
+
+  public void setProperty_translation2(TransformAxis value) {
+    opensimModelJNI.SpatialTransform_setProperty_translation2__SWIG_1(swigCPtr, this, TransformAxis.getCPtr(value), value);
+  }
+
+  public void setPropertyIndex_translation3(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.SpatialTransform_PropertyIndex_translation3_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_translation3() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.SpatialTransform_PropertyIndex_translation3_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_translation3(SpatialTransform source) {
+    opensimModelJNI.SpatialTransform_copyProperty_translation3(swigCPtr, this, SpatialTransform.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t getProperty_translation3() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t(opensimModelJNI.SpatialTransform_getProperty_translation3__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t updProperty_translation3() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TransformAxis_t(opensimModelJNI.SpatialTransform_updProperty_translation3__SWIG_0(swigCPtr, this), false);
+  }
+
+  public TransformAxis getProperty_translation3(int i) {
+    return new TransformAxis(opensimModelJNI.SpatialTransform_getProperty_translation3__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public TransformAxis updProperty_translation3(int i) {
+    return new TransformAxis(opensimModelJNI.SpatialTransform_updProperty_translation3__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_translation3(int i, TransformAxis value) {
+    opensimModelJNI.SpatialTransform_setProperty_translation3__SWIG_0(swigCPtr, this, i, TransformAxis.getCPtr(value), value);
+  }
+
+  public int appendProperty_translation3(TransformAxis value) {
+    return opensimModelJNI.SpatialTransform_appendProperty_translation3(swigCPtr, this, TransformAxis.getCPtr(value), value);
+  }
+
+  public void constructProperty_translation3(TransformAxis initValue) {
+    opensimModelJNI.SpatialTransform_constructProperty_translation3(swigCPtr, this, TransformAxis.getCPtr(initValue), initValue);
+  }
+
+  public void setProperty_translation3(TransformAxis value) {
+    opensimModelJNI.SpatialTransform_setProperty_translation3__SWIG_1(swigCPtr, this, TransformAxis.getCPtr(value), value);
+  }
+
   public SpatialTransform() {
-    this(opensimModelJNI.new_SpatialTransform__SWIG_0(), true);
+    this(opensimModelJNI.new_SpatialTransform(), true);
   }
 
-  public SpatialTransform(SpatialTransform aSpatialTransform) {
-    this(opensimModelJNI.new_SpatialTransform__SWIG_1(SpatialTransform.getCPtr(aSpatialTransform), aSpatialTransform), true);
+  public void setup(CustomJoint owningJoint) {
+    opensimModelJNI.SpatialTransform_setup(swigCPtr, this, CustomJoint.getCPtr(owningJoint), owningJoint);
   }
 
-  public void copyData(SpatialTransform aSpatialTransform) {
-    opensimModelJNI.SpatialTransform_copyData(swigCPtr, this, SpatialTransform.getCPtr(aSpatialTransform), aSpatialTransform);
-  }
-
-  public void setup(CustomJoint aJoint) {
-    opensimModelJNI.SpatialTransform_setup(swigCPtr, this, CustomJoint.getCPtr(aJoint), aJoint);
+  public void constructIndependentAxes(int nAxes, int startIndex) {
+    opensimModelJNI.SpatialTransform_constructIndependentAxes(swigCPtr, this, nAxes, startIndex);
   }
 
   public ArrayStr getCoordinateNames() {
     return new ArrayStr(opensimModelJNI.SpatialTransform_getCoordinateNames(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_std__vectorT_std__vectorT_int_t_t getCooridinateIndices() {
-    return new SWIGTYPE_p_std__vectorT_std__vectorT_int_t_t(opensimModelJNI.SpatialTransform_getCooridinateIndices(swigCPtr, this), true);
+  public SWIGTYPE_p_std__vectorT_std__vectorT_int_t_t getCoordinateIndices() {
+    return new SWIGTYPE_p_std__vectorT_std__vectorT_int_t_t(opensimModelJNI.SpatialTransform_getCoordinateIndices(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_std__vectorT_SimTK__Function_const_p_t getFunctions() {
@@ -93,8 +353,12 @@ public class SpatialTransform extends OpenSimObject {
     opensimModelJNI.SpatialTransform_scale(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(scaleFactors));
   }
 
-  public TransformAxis getTransformAxis(int aIndex) {
-    return new TransformAxis(opensimModelJNI.SpatialTransform_getTransformAxis(swigCPtr, this, aIndex), false);
+  public TransformAxis getTransformAxis(int whichAxis) {
+    return new TransformAxis(opensimModelJNI.SpatialTransform_getTransformAxis(swigCPtr, this, whichAxis), false);
+  }
+
+  public TransformAxis updTransformAxis(int whichAxis) {
+    return new TransformAxis(opensimModelJNI.SpatialTransform_updTransformAxis(swigCPtr, this, whichAxis), false);
   }
 
 }

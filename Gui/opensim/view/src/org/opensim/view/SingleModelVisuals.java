@@ -255,28 +255,13 @@ public class SingleModelVisuals {
 
             // Fill the maps between objects and display to support picking, highlighting, etc..
             // The reverse map takes an actor to an Object and is filled as actors are created.
-            vtkProp3D bodyRep= mapObject2VtkObjects.get(body);
+            BodyDisplayer bodyRep= (BodyDisplayer) mapObject2VtkObjects.get(body);
             vtkMatrix4x4 bodyVtkTransform= getBodyTransform(model, body);
             if (bodyRep!=null)
                bodyRep.SetUserMatrix(bodyVtkTransform);
 
-            // For dependents (markers, muscle points, update xforms as well)
-            VisibleObject bodyDisplayer = body.getDisplayer();
-            for(int j=0; j < bodyDisplayer.countDependents();j++){
-                VisibleObject dependent = bodyDisplayer.getDependent(j);
-                OpenSimObject owner = dependent.getOwner();
-
-                if (Marker.safeDownCast(owner)!=null){
-                   // Markers are handled in updateMarkersGeometry
-                } else if (PathPoint.safeDownCast(owner)!=null){
-                   // Muscle points are handled in updateForceGeometry
-                } else {
-                   // Must be a wrap object, so we set the wrap object's transform to the body transform (the wrap object
-                   // has an additional xform that was set in createModelAssembly specifying the wrap object's xform in its parent body's space)
-                   //vtkProp3D deptAssembly = mapObject2VtkObjects.get(dependent.getOwner());
-                   //deptAssembly.SetUserMatrix(bodyVtkTransform);
-                }
-            }
+            bodyRep.applyDisplayPreferences();
+            
         }
        
         updateMarkersGeometry(model.getMarkerSet());

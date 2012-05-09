@@ -80,6 +80,7 @@ public class DofFunctionEventListener implements FunctionEventListener {
                guiElem.setUnsavedChangesFlag(true);
             }
          } else if (event instanceof FunctionModifiedEvent) {
+             /* FIXME 30
             if (dof.getCoordinateNames().getSize() > 0) {
                //TODO: not a good way to force a joint recalculation!!
                // TODO: for now, deal only with the first coordinate.
@@ -89,7 +90,7 @@ public class DofFunctionEventListener implements FunctionEventListener {
                ViewDB.getInstance().updateModelDisplayNoRepaint(model);
                ViewDB.getInstance().renderAll();
                guiElem.setUnsavedChangesFlag(true);
-            }
+            } */
          }
       }
    }

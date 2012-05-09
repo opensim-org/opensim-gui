@@ -57,16 +57,184 @@ public class Ligament extends Force {
     return opensimModelJNI.Ligament_getConcreteClassName(swigCPtr, this);
   }
 
+  public void setPropertyIndex_GeometryPath(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Ligament_PropertyIndex_GeometryPath_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_GeometryPath() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Ligament_PropertyIndex_GeometryPath_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_GeometryPath(Ligament source) {
+    opensimModelJNI.Ligament_copyProperty_GeometryPath(swigCPtr, this, Ligament.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__GeometryPath_t getProperty_GeometryPath() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__GeometryPath_t(opensimModelJNI.Ligament_getProperty_GeometryPath__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__GeometryPath_t updProperty_GeometryPath() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__GeometryPath_t(opensimModelJNI.Ligament_updProperty_GeometryPath__SWIG_0(swigCPtr, this), false);
+  }
+
+  public GeometryPath getProperty_GeometryPath(int i) {
+    return new GeometryPath(opensimModelJNI.Ligament_getProperty_GeometryPath__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public GeometryPath updProperty_GeometryPath(int i) {
+    return new GeometryPath(opensimModelJNI.Ligament_updProperty_GeometryPath__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_GeometryPath(int i, GeometryPath value) {
+    opensimModelJNI.Ligament_setProperty_GeometryPath__SWIG_0(swigCPtr, this, i, GeometryPath.getCPtr(value), value);
+  }
+
+  public int appendProperty_GeometryPath(GeometryPath value) {
+    return opensimModelJNI.Ligament_appendProperty_GeometryPath(swigCPtr, this, GeometryPath.getCPtr(value), value);
+  }
+
+  public void constructProperty_GeometryPath(GeometryPath initValue) {
+    opensimModelJNI.Ligament_constructProperty_GeometryPath(swigCPtr, this, GeometryPath.getCPtr(initValue), initValue);
+  }
+
+  public void setProperty_GeometryPath(GeometryPath value) {
+    opensimModelJNI.Ligament_setProperty_GeometryPath__SWIG_1(swigCPtr, this, GeometryPath.getCPtr(value), value);
+  }
+
+  public void setPropertyIndex_resting_length(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Ligament_PropertyIndex_resting_length_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_resting_length() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Ligament_PropertyIndex_resting_length_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_resting_length(Ligament source) {
+    opensimModelJNI.Ligament_copyProperty_resting_length(swigCPtr, this, Ligament.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_resting_length() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Ligament_getProperty_resting_length__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_resting_length() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Ligament_updProperty_resting_length__SWIG_0(swigCPtr, this), false);
+  }
+
+  public double getProperty_resting_length(int i) {
+    return opensimModelJNI.Ligament_getProperty_resting_length__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double updProperty_resting_length(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.Ligament_updProperty_resting_length__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_resting_length(int i, double value) {
+    opensimModelJNI.Ligament_setProperty_resting_length__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_resting_length(double value) {
+    return opensimModelJNI.Ligament_appendProperty_resting_length(swigCPtr, this, value);
+  }
+
+  public void constructProperty_resting_length(double initValue) {
+    opensimModelJNI.Ligament_constructProperty_resting_length(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_resting_length(double value) {
+    opensimModelJNI.Ligament_setProperty_resting_length__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_pcsa_force(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Ligament_PropertyIndex_pcsa_force_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_pcsa_force() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Ligament_PropertyIndex_pcsa_force_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_pcsa_force(Ligament source) {
+    opensimModelJNI.Ligament_copyProperty_pcsa_force(swigCPtr, this, Ligament.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_pcsa_force() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Ligament_getProperty_pcsa_force__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_pcsa_force() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Ligament_updProperty_pcsa_force__SWIG_0(swigCPtr, this), false);
+  }
+
+  public double getProperty_pcsa_force(int i) {
+    return opensimModelJNI.Ligament_getProperty_pcsa_force__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double updProperty_pcsa_force(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.Ligament_updProperty_pcsa_force__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_pcsa_force(int i, double value) {
+    opensimModelJNI.Ligament_setProperty_pcsa_force__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_pcsa_force(double value) {
+    return opensimModelJNI.Ligament_appendProperty_pcsa_force(swigCPtr, this, value);
+  }
+
+  public void constructProperty_pcsa_force(double initValue) {
+    opensimModelJNI.Ligament_constructProperty_pcsa_force(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_pcsa_force(double value) {
+    opensimModelJNI.Ligament_setProperty_pcsa_force__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_force_length_curve(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Ligament_PropertyIndex_force_length_curve_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_force_length_curve() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Ligament_PropertyIndex_force_length_curve_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_force_length_curve(Ligament source) {
+    opensimModelJNI.Ligament_copyProperty_force_length_curve(swigCPtr, this, Ligament.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t getProperty_force_length_curve() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.Ligament_getProperty_force_length_curve__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t updProperty_force_length_curve() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.Ligament_updProperty_force_length_curve__SWIG_0(swigCPtr, this), false);
+  }
+
+  public Function getProperty_force_length_curve(int i) {
+    return new Function(opensimModelJNI.Ligament_getProperty_force_length_curve__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public Function updProperty_force_length_curve(int i) {
+    return new Function(opensimModelJNI.Ligament_updProperty_force_length_curve__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_force_length_curve(int i, Function value) {
+    opensimModelJNI.Ligament_setProperty_force_length_curve__SWIG_0(swigCPtr, this, i, Function.getCPtr(value), value);
+  }
+
+  public int appendProperty_force_length_curve(Function value) {
+    return opensimModelJNI.Ligament_appendProperty_force_length_curve(swigCPtr, this, Function.getCPtr(value), value);
+  }
+
+  public void constructProperty_force_length_curve(Function initValue) {
+    opensimModelJNI.Ligament_constructProperty_force_length_curve(swigCPtr, this, Function.getCPtr(initValue), initValue);
+  }
+
+  public void setProperty_force_length_curve(Function value) {
+    opensimModelJNI.Ligament_setProperty_force_length_curve__SWIG_1(swigCPtr, this, Function.getCPtr(value), value);
+  }
+
   public Ligament() {
-    this(opensimModelJNI.new_Ligament__SWIG_0(), true);
-  }
-
-  public Ligament(Ligament aLigament) {
-    this(opensimModelJNI.new_Ligament__SWIG_1(Ligament.getCPtr(aLigament), aLigament), true);
-  }
-
-  public void copyData(Ligament aLigament) {
-    opensimModelJNI.Ligament_copyData(swigCPtr, this, Ligament.getCPtr(aLigament), aLigament);
+    this(opensimModelJNI.new_Ligament(), true);
   }
 
   public GeometryPath getGeometryPath() {

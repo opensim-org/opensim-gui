@@ -3,7 +3,6 @@ package org.opensim.console;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Vector;
 import java.util.prefs.Preferences;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -24,9 +23,7 @@ import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.utils.BrowserLauncher;
 import org.opensim.utils.TheApp;
-import org.opensim.view.ObjectsChangedEvent;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;

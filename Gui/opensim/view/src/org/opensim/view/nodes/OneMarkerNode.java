@@ -84,14 +84,14 @@ public class OneMarkerNode extends OpenSimObjectNode{
             nextNodeProp2.setPropertyEditorClass(BodyNameEditor.class);
             nextNodeProp2.setName("body");
             set.put(nextNodeProp2);
-            // USe custom name change
+            /*
             set.remove("name");
             PropertySupport.Reflection nameNodeProp;
             nameNodeProp = new PropertySupport.Reflection(gMarker, String.class, "getName", "setName");
             ((Node.Property) nameNodeProp).setValue("oneline", Boolean.TRUE);
             ((Node.Property) nameNodeProp).setValue("suppressCustomEditor", Boolean.TRUE);
             nameNodeProp.setName("name");
-            set.put(nameNodeProp);
+            set.put(nameNodeProp);*/
             // customize offset
             set.remove("location");
             PropertySupport.Reflection locationNodeProp;
@@ -101,11 +101,11 @@ public class OneMarkerNode extends OpenSimObjectNode{
             locationNodeProp.setName("location");
             locationNodeProp.setShortDescription(getPropertyComment("location"));
             set.put(locationNodeProp);
-           
+           /*
             Node.Property fixedProp = set.get("fixed");
             set.remove("fixed");
             Sheet.Set expertSet = sheet.get(Sheet.EXPERT);
-            expertSet.put(fixedProp);
+            expertSet.put(fixedProp);*/
    
         } catch (NoSuchMethodException ex) {
             Exceptions.printStackTrace(ex);

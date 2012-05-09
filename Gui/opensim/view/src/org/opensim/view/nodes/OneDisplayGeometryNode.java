@@ -112,6 +112,7 @@ public class OneDisplayGeometryNode extends OpenSimObjectNode implements Colorab
         DisplayGeometryDisplayer disp = (DisplayGeometryDisplayer) ViewDB.getInstance().getVtkRepForObject(obj);
         if (disp==null) return sheet;
         try {
+            /*
             PropertySupport.Reflection nextNodeProp;
             nextNodeProp = new PropertySupport.Reflection(disp, Color.class, "getColor", "setColorGUI");
             nextNodeProp.setName("color");
@@ -130,7 +131,7 @@ public class OneDisplayGeometryNode extends OpenSimObjectNode implements Colorab
             nextNodeProp3.setPropertyEditorClass(PositionEditor.class);
             nextNodeProp3.setName("Orientation");        
             set.put(nextNodeProp3);
-            
+            */
             PropertySupport.Reflection nextNodeProp4;
             nextNodeProp4 = new PropertySupport.Reflection(disp, DisplayGeometry.DisplayPreference.class, "getDisplayPreference", "setDisplayPreference");
             nextNodeProp4.setPropertyEditorClass(DisplayPreferenceEditor.class);

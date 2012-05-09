@@ -525,7 +525,7 @@ public class EditExternalLoadsPanel extends javax.swing.JPanel
             pfo = forceListModel.get(sels[0]);
         }
         ExternalForce pf = ExternalForce.safeDownCast((OpenSimObject) pfo);
-        ExternalForce pfCopy = new ExternalForce(pf);
+        ExternalForce pfCopy = ExternalForce.safeDownCast(pf.clone());
         EditOneForceJPanel eofPanel = new EditOneForceJPanel(pf, externalLoadsStorage, dLoads);
         DialogDescriptor dlg = new DialogDescriptor(eofPanel, "Create/Edit ExternalForce");
         eofPanel.setDDialog(dlg);

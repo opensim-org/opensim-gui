@@ -128,8 +128,8 @@ public class AbstractProperty {
     opensimModelJNI.AbstractProperty_setComment(swigCPtr, this, aComment);
   }
 
-  public void setUseDefault(boolean aTrueFalse) {
-    opensimModelJNI.AbstractProperty_setUseDefault(swigCPtr, this, aTrueFalse);
+  public void setValueIsDefault(boolean isDefault) {
+    opensimModelJNI.AbstractProperty_setValueIsDefault(swigCPtr, this, isDefault);
   }
 
   public String getName() {
@@ -140,8 +140,8 @@ public class AbstractProperty {
     return opensimModelJNI.AbstractProperty_getComment(swigCPtr, this);
   }
 
-  public boolean getUseDefault() {
-    return opensimModelJNI.AbstractProperty_getUseDefault(swigCPtr, this);
+  public boolean getValueIsDefault() {
+    return opensimModelJNI.AbstractProperty_getValueIsDefault(swigCPtr, this);
   }
 
   public int getMinListSize() {

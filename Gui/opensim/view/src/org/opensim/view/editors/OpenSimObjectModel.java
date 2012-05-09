@@ -427,7 +427,7 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
       // Only primitive properties and array entries can be edited
       if(propertyOrObject instanceof AbstractProperty) {
          AbstractProperty p = (AbstractProperty)propertyOrObject;
-         p.setUseDefault(false);
+         p.setValueIsDefault(false);
 
          // NOTE: I wanted the values to come in as Double, Integer, etc. but due to some weirdness the table editor thinks
          // it's editing a string in the cases of Double, Integer, and String... so I check this below (value instanceof String) to be safe
@@ -467,8 +467,8 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
             if(prop.isObjectProperty()){
                 if (!prop.isListProperty() && !prop.isOptionalProperty())
                     retArray[i] = new PropertyNode(this, prop.getValueAsObject());
-                else // List or optional
-                    retArray[i] = new PropertyNode(this, prop); //?
+                else 
+                    retArray[i] = new PropertyNode(this, prop); //List
             }
             else
                retArray[i] = new PropertyNode(this, prop);
@@ -493,22 +493,21 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
         if (propertyOrObject instanceof OpenSimObject) {
           retArray = createChildren((OpenSimObject)propertyOrObject);
         }
-        else if (propertyOrObject instanceof AbstractProperty) { // Actual 
+        else if (propertyOrObject instanceof AbstractProperty) { // Actual prop
           AbstractProperty rdprop = (AbstractProperty) propertyOrObject;
            if (rdprop.isObjectProperty()) { // Object, ObjectPtr or Array of Objects
                //System.out.println("Found Object property:"+rdprop.getTypeName());
-               if (!rdprop.isListProperty() && !rdprop.isOptionalProperty()){
-                     retArray = createChildren(rdprop.getValueAsObject());
+               if (rdprop.size()==1){
+                   if (rdprop.isOneObjectProperty())
+                        retArray = createChildren((OpenSimObject)rdprop.getValueAsObject());
+                    else
+                        retArray = createChildren((OpenSimObject)rdprop.getValueAsObject(0));
                }
-               else if (rdprop.isListProperty()) {
+               else {
                    retArray = new PropertyNode[rdprop.size()];
                     for (int i = 0; i < rdprop.size(); i++) {
                         retArray[i] = new PropertyNode(this, rdprop.getValueAsObject(i), -1); // PropertyNode will figure out our type
                     }
-               }
-               else { // optional drill down only if size > 0
-                   if (rdprop.size()==1)
-                       retArray = createChildren(rdprop.getValueAsObject());
                }
           }
           else if (rdprop.isListProperty()) 
@@ -570,7 +569,7 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
     protected void loadChildren() {
       children = createChildren();
       for (int counter = children.length - 1; counter >= 0; counter--) {
-        if (!children[counter].isLeaf()) {
+        if (children[counter]!=null && !children[counter].isLeaf()) {
           children[counter].loadChildren();
         }
       }

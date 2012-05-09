@@ -57,20 +57,452 @@ public class Thelen2003Muscle extends ActivationFiberLengthMuscle {
     return opensimModelJNI.Thelen2003Muscle_getConcreteClassName(swigCPtr, this);
   }
 
+  public void setPropertyIndex_activation_time_constant(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Thelen2003Muscle_PropertyIndex_activation_time_constant_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_activation_time_constant() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Thelen2003Muscle_PropertyIndex_activation_time_constant_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_activation_time_constant(Thelen2003Muscle source) {
+    opensimModelJNI.Thelen2003Muscle_copyProperty_activation_time_constant(swigCPtr, this, Thelen2003Muscle.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_activation_time_constant() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Thelen2003Muscle_getProperty_activation_time_constant__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_activation_time_constant() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Thelen2003Muscle_updProperty_activation_time_constant__SWIG_0(swigCPtr, this), false);
+  }
+
+  public double getProperty_activation_time_constant(int i) {
+    return opensimModelJNI.Thelen2003Muscle_getProperty_activation_time_constant__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double updProperty_activation_time_constant(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.Thelen2003Muscle_updProperty_activation_time_constant__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_activation_time_constant(int i, double value) {
+    opensimModelJNI.Thelen2003Muscle_setProperty_activation_time_constant__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_activation_time_constant(double value) {
+    return opensimModelJNI.Thelen2003Muscle_appendProperty_activation_time_constant(swigCPtr, this, value);
+  }
+
+  public void constructProperty_activation_time_constant(double initValue) {
+    opensimModelJNI.Thelen2003Muscle_constructProperty_activation_time_constant(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_activation_time_constant(double value) {
+    opensimModelJNI.Thelen2003Muscle_setProperty_activation_time_constant__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_deactivation_time_constant(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Thelen2003Muscle_PropertyIndex_deactivation_time_constant_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_deactivation_time_constant() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Thelen2003Muscle_PropertyIndex_deactivation_time_constant_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_deactivation_time_constant(Thelen2003Muscle source) {
+    opensimModelJNI.Thelen2003Muscle_copyProperty_deactivation_time_constant(swigCPtr, this, Thelen2003Muscle.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_deactivation_time_constant() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Thelen2003Muscle_getProperty_deactivation_time_constant__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_deactivation_time_constant() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Thelen2003Muscle_updProperty_deactivation_time_constant__SWIG_0(swigCPtr, this), false);
+  }
+
+  public double getProperty_deactivation_time_constant(int i) {
+    return opensimModelJNI.Thelen2003Muscle_getProperty_deactivation_time_constant__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double updProperty_deactivation_time_constant(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.Thelen2003Muscle_updProperty_deactivation_time_constant__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_deactivation_time_constant(int i, double value) {
+    opensimModelJNI.Thelen2003Muscle_setProperty_deactivation_time_constant__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_deactivation_time_constant(double value) {
+    return opensimModelJNI.Thelen2003Muscle_appendProperty_deactivation_time_constant(swigCPtr, this, value);
+  }
+
+  public void constructProperty_deactivation_time_constant(double initValue) {
+    opensimModelJNI.Thelen2003Muscle_constructProperty_deactivation_time_constant(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_deactivation_time_constant(double value) {
+    opensimModelJNI.Thelen2003Muscle_setProperty_deactivation_time_constant__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_FmaxTendonStrain(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Thelen2003Muscle_PropertyIndex_FmaxTendonStrain_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_FmaxTendonStrain() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Thelen2003Muscle_PropertyIndex_FmaxTendonStrain_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_FmaxTendonStrain(Thelen2003Muscle source) {
+    opensimModelJNI.Thelen2003Muscle_copyProperty_FmaxTendonStrain(swigCPtr, this, Thelen2003Muscle.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_FmaxTendonStrain() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Thelen2003Muscle_getProperty_FmaxTendonStrain__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_FmaxTendonStrain() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Thelen2003Muscle_updProperty_FmaxTendonStrain__SWIG_0(swigCPtr, this), false);
+  }
+
+  public double getProperty_FmaxTendonStrain(int i) {
+    return opensimModelJNI.Thelen2003Muscle_getProperty_FmaxTendonStrain__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double updProperty_FmaxTendonStrain(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.Thelen2003Muscle_updProperty_FmaxTendonStrain__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_FmaxTendonStrain(int i, double value) {
+    opensimModelJNI.Thelen2003Muscle_setProperty_FmaxTendonStrain__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_FmaxTendonStrain(double value) {
+    return opensimModelJNI.Thelen2003Muscle_appendProperty_FmaxTendonStrain(swigCPtr, this, value);
+  }
+
+  public void constructProperty_FmaxTendonStrain(double initValue) {
+    opensimModelJNI.Thelen2003Muscle_constructProperty_FmaxTendonStrain(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_FmaxTendonStrain(double value) {
+    opensimModelJNI.Thelen2003Muscle_setProperty_FmaxTendonStrain__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_FmaxMuscleStrain(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Thelen2003Muscle_PropertyIndex_FmaxMuscleStrain_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_FmaxMuscleStrain() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Thelen2003Muscle_PropertyIndex_FmaxMuscleStrain_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_FmaxMuscleStrain(Thelen2003Muscle source) {
+    opensimModelJNI.Thelen2003Muscle_copyProperty_FmaxMuscleStrain(swigCPtr, this, Thelen2003Muscle.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_FmaxMuscleStrain() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Thelen2003Muscle_getProperty_FmaxMuscleStrain__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_FmaxMuscleStrain() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Thelen2003Muscle_updProperty_FmaxMuscleStrain__SWIG_0(swigCPtr, this), false);
+  }
+
+  public double getProperty_FmaxMuscleStrain(int i) {
+    return opensimModelJNI.Thelen2003Muscle_getProperty_FmaxMuscleStrain__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double updProperty_FmaxMuscleStrain(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.Thelen2003Muscle_updProperty_FmaxMuscleStrain__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_FmaxMuscleStrain(int i, double value) {
+    opensimModelJNI.Thelen2003Muscle_setProperty_FmaxMuscleStrain__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_FmaxMuscleStrain(double value) {
+    return opensimModelJNI.Thelen2003Muscle_appendProperty_FmaxMuscleStrain(swigCPtr, this, value);
+  }
+
+  public void constructProperty_FmaxMuscleStrain(double initValue) {
+    opensimModelJNI.Thelen2003Muscle_constructProperty_FmaxMuscleStrain(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_FmaxMuscleStrain(double value) {
+    opensimModelJNI.Thelen2003Muscle_setProperty_FmaxMuscleStrain__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_KshapeActive(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Thelen2003Muscle_PropertyIndex_KshapeActive_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_KshapeActive() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Thelen2003Muscle_PropertyIndex_KshapeActive_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_KshapeActive(Thelen2003Muscle source) {
+    opensimModelJNI.Thelen2003Muscle_copyProperty_KshapeActive(swigCPtr, this, Thelen2003Muscle.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_KshapeActive() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Thelen2003Muscle_getProperty_KshapeActive__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_KshapeActive() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Thelen2003Muscle_updProperty_KshapeActive__SWIG_0(swigCPtr, this), false);
+  }
+
+  public double getProperty_KshapeActive(int i) {
+    return opensimModelJNI.Thelen2003Muscle_getProperty_KshapeActive__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double updProperty_KshapeActive(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.Thelen2003Muscle_updProperty_KshapeActive__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_KshapeActive(int i, double value) {
+    opensimModelJNI.Thelen2003Muscle_setProperty_KshapeActive__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_KshapeActive(double value) {
+    return opensimModelJNI.Thelen2003Muscle_appendProperty_KshapeActive(swigCPtr, this, value);
+  }
+
+  public void constructProperty_KshapeActive(double initValue) {
+    opensimModelJNI.Thelen2003Muscle_constructProperty_KshapeActive(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_KshapeActive(double value) {
+    opensimModelJNI.Thelen2003Muscle_setProperty_KshapeActive__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_KshapePassive(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Thelen2003Muscle_PropertyIndex_KshapePassive_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_KshapePassive() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Thelen2003Muscle_PropertyIndex_KshapePassive_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_KshapePassive(Thelen2003Muscle source) {
+    opensimModelJNI.Thelen2003Muscle_copyProperty_KshapePassive(swigCPtr, this, Thelen2003Muscle.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_KshapePassive() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Thelen2003Muscle_getProperty_KshapePassive__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_KshapePassive() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Thelen2003Muscle_updProperty_KshapePassive__SWIG_0(swigCPtr, this), false);
+  }
+
+  public double getProperty_KshapePassive(int i) {
+    return opensimModelJNI.Thelen2003Muscle_getProperty_KshapePassive__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double updProperty_KshapePassive(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.Thelen2003Muscle_updProperty_KshapePassive__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_KshapePassive(int i, double value) {
+    opensimModelJNI.Thelen2003Muscle_setProperty_KshapePassive__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_KshapePassive(double value) {
+    return opensimModelJNI.Thelen2003Muscle_appendProperty_KshapePassive(swigCPtr, this, value);
+  }
+
+  public void constructProperty_KshapePassive(double initValue) {
+    opensimModelJNI.Thelen2003Muscle_constructProperty_KshapePassive(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_KshapePassive(double value) {
+    opensimModelJNI.Thelen2003Muscle_setProperty_KshapePassive__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_Af(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Thelen2003Muscle_PropertyIndex_Af_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_Af() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Thelen2003Muscle_PropertyIndex_Af_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_Af(Thelen2003Muscle source) {
+    opensimModelJNI.Thelen2003Muscle_copyProperty_Af(swigCPtr, this, Thelen2003Muscle.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_Af() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Thelen2003Muscle_getProperty_Af__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_Af() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Thelen2003Muscle_updProperty_Af__SWIG_0(swigCPtr, this), false);
+  }
+
+  public double getProperty_Af(int i) {
+    return opensimModelJNI.Thelen2003Muscle_getProperty_Af__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double updProperty_Af(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.Thelen2003Muscle_updProperty_Af__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_Af(int i, double value) {
+    opensimModelJNI.Thelen2003Muscle_setProperty_Af__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_Af(double value) {
+    return opensimModelJNI.Thelen2003Muscle_appendProperty_Af(swigCPtr, this, value);
+  }
+
+  public void constructProperty_Af(double initValue) {
+    opensimModelJNI.Thelen2003Muscle_constructProperty_Af(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_Af(double value) {
+    opensimModelJNI.Thelen2003Muscle_setProperty_Af__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_Flen(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Thelen2003Muscle_PropertyIndex_Flen_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_Flen() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Thelen2003Muscle_PropertyIndex_Flen_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_Flen(Thelen2003Muscle source) {
+    opensimModelJNI.Thelen2003Muscle_copyProperty_Flen(swigCPtr, this, Thelen2003Muscle.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_Flen() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Thelen2003Muscle_getProperty_Flen__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_Flen() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Thelen2003Muscle_updProperty_Flen__SWIG_0(swigCPtr, this), false);
+  }
+
+  public double getProperty_Flen(int i) {
+    return opensimModelJNI.Thelen2003Muscle_getProperty_Flen__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double updProperty_Flen(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.Thelen2003Muscle_updProperty_Flen__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_Flen(int i, double value) {
+    opensimModelJNI.Thelen2003Muscle_setProperty_Flen__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_Flen(double value) {
+    return opensimModelJNI.Thelen2003Muscle_appendProperty_Flen(swigCPtr, this, value);
+  }
+
+  public void constructProperty_Flen(double initValue) {
+    opensimModelJNI.Thelen2003Muscle_constructProperty_Flen(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_Flen(double value) {
+    opensimModelJNI.Thelen2003Muscle_setProperty_Flen__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_activation_minimum_value(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Thelen2003Muscle_PropertyIndex_activation_minimum_value_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_activation_minimum_value() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Thelen2003Muscle_PropertyIndex_activation_minimum_value_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_activation_minimum_value(Thelen2003Muscle source) {
+    opensimModelJNI.Thelen2003Muscle_copyProperty_activation_minimum_value(swigCPtr, this, Thelen2003Muscle.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_activation_minimum_value() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Thelen2003Muscle_getProperty_activation_minimum_value__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_activation_minimum_value() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Thelen2003Muscle_updProperty_activation_minimum_value__SWIG_0(swigCPtr, this), false);
+  }
+
+  public double getProperty_activation_minimum_value(int i) {
+    return opensimModelJNI.Thelen2003Muscle_getProperty_activation_minimum_value__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double updProperty_activation_minimum_value(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.Thelen2003Muscle_updProperty_activation_minimum_value__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_activation_minimum_value(int i, double value) {
+    opensimModelJNI.Thelen2003Muscle_setProperty_activation_minimum_value__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_activation_minimum_value(double value) {
+    return opensimModelJNI.Thelen2003Muscle_appendProperty_activation_minimum_value(swigCPtr, this, value);
+  }
+
+  public void constructProperty_activation_minimum_value(double initValue) {
+    opensimModelJNI.Thelen2003Muscle_constructProperty_activation_minimum_value(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_activation_minimum_value(double value) {
+    opensimModelJNI.Thelen2003Muscle_setProperty_activation_minimum_value__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_fv_linear_extrap_threshold(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Thelen2003Muscle_PropertyIndex_fv_linear_extrap_threshold_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_fv_linear_extrap_threshold() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Thelen2003Muscle_PropertyIndex_fv_linear_extrap_threshold_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_fv_linear_extrap_threshold(Thelen2003Muscle source) {
+    opensimModelJNI.Thelen2003Muscle_copyProperty_fv_linear_extrap_threshold(swigCPtr, this, Thelen2003Muscle.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_fv_linear_extrap_threshold() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Thelen2003Muscle_getProperty_fv_linear_extrap_threshold__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_fv_linear_extrap_threshold() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Thelen2003Muscle_updProperty_fv_linear_extrap_threshold__SWIG_0(swigCPtr, this), false);
+  }
+
+  public double getProperty_fv_linear_extrap_threshold(int i) {
+    return opensimModelJNI.Thelen2003Muscle_getProperty_fv_linear_extrap_threshold__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double updProperty_fv_linear_extrap_threshold(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.Thelen2003Muscle_updProperty_fv_linear_extrap_threshold__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_fv_linear_extrap_threshold(int i, double value) {
+    opensimModelJNI.Thelen2003Muscle_setProperty_fv_linear_extrap_threshold__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_fv_linear_extrap_threshold(double value) {
+    return opensimModelJNI.Thelen2003Muscle_appendProperty_fv_linear_extrap_threshold(swigCPtr, this, value);
+  }
+
+  public void constructProperty_fv_linear_extrap_threshold(double initValue) {
+    opensimModelJNI.Thelen2003Muscle_constructProperty_fv_linear_extrap_threshold(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_fv_linear_extrap_threshold(double value) {
+    opensimModelJNI.Thelen2003Muscle_setProperty_fv_linear_extrap_threshold__SWIG_1(swigCPtr, this, value);
+  }
+
   public Thelen2003Muscle() {
     this(opensimModelJNI.new_Thelen2003Muscle__SWIG_0(), true);
   }
 
   public Thelen2003Muscle(String aName, double aMaxIsometricForce, double aOptimalFiberLength, double aTendonSlackLength, double aPennationAngle) {
     this(opensimModelJNI.new_Thelen2003Muscle__SWIG_1(aName, aMaxIsometricForce, aOptimalFiberLength, aTendonSlackLength, aPennationAngle), true);
-  }
-
-  public Thelen2003Muscle(Thelen2003Muscle aMuscle) {
-    this(opensimModelJNI.new_Thelen2003Muscle__SWIG_2(Thelen2003Muscle.getCPtr(aMuscle), aMuscle), true);
-  }
-
-  public void copyData(Thelen2003Muscle aMuscle) {
-    opensimModelJNI.Thelen2003Muscle_copyData(swigCPtr, this, Thelen2003Muscle.getCPtr(aMuscle), aMuscle);
   }
 
   public double getActivationTimeConstant() {
@@ -89,8 +521,8 @@ public class Thelen2003Muscle extends ActivationFiberLengthMuscle {
     return opensimModelJNI.Thelen2003Muscle_getFmaxTendonStrain(swigCPtr, this);
   }
 
-  public double getFmaxFiberStrain() {
-    return opensimModelJNI.Thelen2003Muscle_getFmaxFiberStrain(swigCPtr, this);
+  public double getFmaxMuscleStrain() {
+    return opensimModelJNI.Thelen2003Muscle_getFmaxMuscleStrain(swigCPtr, this);
   }
 
   public double getKshapeActive() {

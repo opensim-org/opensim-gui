@@ -144,9 +144,7 @@ public class JointAdapter  {
 
     private void updateDisplay() {
         // tell the ViewDB to redraw the model
-        SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-        vis.updateModelDisplay(model);
-        ViewDB.getInstance().repaintAll();
+        ViewDB.getInstance().updateModelDisplay(model);
         ExplorerTopComponent.getDefault().requestActive();
     }
 

@@ -78,6 +78,7 @@ public class DofFunctionEditorAction extends AbstractAction {
 				    functionEditor.addChangeListener(new DofFunctionEventListener());
 				    FunctionEditorOptions options = new FunctionEditorOptions();
 				    options.title = dof.getJoint().getName();
+                                    /* FIXME30
 				    if (dof.getCoordinateNames().getSize() > 0) {
 					//TODO: For now, just get the first coordinate name.
 					String coordName = dof.getCoordinateNames().getitem(0);
@@ -103,7 +104,7 @@ public class DofFunctionEditorAction extends AbstractAction {
 					    }
 					    options.YLabel = options.YDisplayUnits.getLabel();
 					}
-				    }
+				    }*/
 				    functionEditor.open(newModel, dof, null, newFunction, options);
 				    functionEditor.requestActive();
 				}

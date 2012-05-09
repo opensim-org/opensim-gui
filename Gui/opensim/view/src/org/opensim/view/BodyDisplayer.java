@@ -116,20 +116,20 @@ public class BodyDisplayer extends vtkAssembly
       this.SetCMToGreenSphereWhoseSizeDependsOnMarkerRadius();
 
       //jointBFrame.GetProperty().SetLineStipplePattern(1);
-      VisibleObject bodyDisplayer = body.getDisplayer();
+      VisibleObject bodyVisibleObject = body.getDisplayer();
 
       // Scale
       double[] bodyScales = new double[3];
-      bodyDisplayer.getScaleFactors(bodyScales);
+      bodyVisibleObject.getScaleFactors(bodyScales);
       double[] bodyRotTrans = new double[6];
-      bodyDisplayer.getRotationsAndTranslationsAsArray6(bodyRotTrans);
+      bodyVisibleObject.getRotationsAndTranslationsAsArray6(bodyRotTrans);
       // Also optionally add outlineActor to this
       outlineActor.SetMapper(outlineMapper);
       outlineMapper.AddInputConnection(outlineFilter.GetOutputPort());
       boolean hasGeometry=false;
       // For each bone in the current body.
-      for (int k = 0; k < bodyDisplayer.getNumGeometryFiles(); ++k) {
-          GeometrySet gSet = bodyDisplayer.getGeometrySet();
+      for (int k = 0; k < bodyVisibleObject.getNumGeometryFiles(); ++k) {
+          GeometrySet gSet = bodyVisibleObject.getGeometrySet();
           DisplayGeometry gPiece = gSet.get(k);
           // Make sure we have a valid geometry before creating DisplayGeometryDisplayer
           String fullFileName = GeometryFileLocator.getInstance().getFullname(modelFilePath,gPiece.getGeometryFile(), false);
@@ -162,7 +162,7 @@ public class BodyDisplayer extends vtkAssembly
          outlineFilter.AddInput(append.GetOutput());
       }
 
-      if( bodyDisplayer.getShowAxes() )
+      if( bodyVisibleObject.getShowAxes() )
           AddPart( getBodyAxes() );
       
       this.SetCMLocationFromPropertyTable( false );
@@ -404,9 +404,9 @@ public class BodyDisplayer extends vtkAssembly
 
     public void setColor(double[] colorComponents) {
         // Cycle thru Pieces and set their Color accordingly
-      VisibleObject bodyDisplayer = body.getDisplayer();
+      VisibleObject bodyVisibleObject = body.getDisplayer();
       // For each bone in the current body.
-      GeometrySet gSet = bodyDisplayer.getGeometrySet();
+      GeometrySet gSet = bodyVisibleObject.getGeometrySet();
       for (int k = 0; k < gSet.getSize(); ++k) {
           DisplayGeometry gPiece = gSet.get(k);
           gPiece.setColor(colorComponents);
@@ -417,8 +417,8 @@ public class BodyDisplayer extends vtkAssembly
     public double[]  GetColorOrReturnNull(  )
     {
        double[] colorOfAllPiecesOrNullIfColorOfPiecesDiffer = null; 
-       VisibleObject bodyDisplayer = body.getDisplayer();
-       GeometrySet bodyDisplayerGeometrySet = bodyDisplayer.getGeometrySet();
+       VisibleObject bodyVisibleObject = body.getDisplayer();
+       GeometrySet bodyDisplayerGeometrySet = bodyVisibleObject.getGeometrySet();
        int numberOfPieces = bodyDisplayerGeometrySet==null ? 0 : bodyDisplayerGeometrySet.getSize();
        for( int i=0;  i < numberOfPieces;  i++) 
        {
@@ -433,9 +433,9 @@ public class BodyDisplayer extends vtkAssembly
     }
 
     public void setOpacity(double newOpacity) {
-       VisibleObject bodyDisplayer = body.getDisplayer();
+       VisibleObject bodyVisibleObject = body.getDisplayer();
       // For each bone in the current body.
-      GeometrySet gSet = bodyDisplayer.getGeometrySet();
+      GeometrySet gSet = bodyVisibleObject.getGeometrySet();
       for (int k = 0; k < gSet.getSize(); ++k) {
           DisplayGeometry gPiece = gSet.get(k);
           gPiece.setOpacity(newOpacity);
@@ -451,8 +451,8 @@ public class BodyDisplayer extends vtkAssembly
     }
 
     void applyColorsFromModel() {
-      VisibleObject bodyDisplayer = body.getDisplayer();
-      GeometrySet gSet = bodyDisplayer.getGeometrySet();
+      VisibleObject bodyVisibleObject = body.getDisplayer();
+      GeometrySet gSet = bodyVisibleObject.getGeometrySet();
       for (int k = 0; k < gSet.getSize(); ++k) {
           DisplayGeometry gPiece = gSet.get(k);
           double[] colorOnFile = new double[3];
@@ -588,5 +588,21 @@ public class BodyDisplayer extends vtkAssembly
      */
     public double[] getBodyBounds() {
         return bodyBounds;
+    }
+    /**
+     * Cycle thru geometry and apply preferences including vis of joint frames, colors, COM
+     */
+    void applyDisplayPreferences() 
+    {
+       VisibleObject bodyVisibleObject = body.getDisplayer();
+       GeometrySet gSet = bodyVisibleObject.getGeometrySet();
+        // Cycle thru GeometrySet and apply preferences
+       for(int i=0; i<gSet.getSize(); i++) {
+           DisplayGeometry gPiece=gSet.get(i);
+           DisplayGeometryDisplayer gActor = (DisplayGeometryDisplayer) mapGeometryToVtkObjects.get(gPiece);
+           if (gActor==null) continue;
+           gActor.applyDisplayPreferenceToActor();
+       }
+       // Now frames and COM
     }
 }

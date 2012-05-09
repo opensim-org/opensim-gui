@@ -38,7 +38,7 @@ public final class JointToggleParentFrameAction extends BooleanStateAction {
                 }
             }
         }
-        ViewDB.getInstance().renderAll();
+        ViewDB.renderAll();
    }
     
     public String getName() {

@@ -57,6 +57,342 @@ public class ExternalForce extends Force {
     return opensimModelJNI.ExternalForce_getConcreteClassName(swigCPtr, this);
   }
 
+  public void setPropertyIndex_applied_to_body(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.ExternalForce_PropertyIndex_applied_to_body_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_applied_to_body() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ExternalForce_PropertyIndex_applied_to_body_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_applied_to_body(ExternalForce source) {
+    opensimModelJNI.ExternalForce_copyProperty_applied_to_body(swigCPtr, this, ExternalForce.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_applied_to_body() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_getProperty_applied_to_body__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_applied_to_body() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_updProperty_applied_to_body__SWIG_0(swigCPtr, this), false);
+  }
+
+  public String getProperty_applied_to_body(int i) {
+    return opensimModelJNI.ExternalForce_getProperty_applied_to_body__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_std__string updProperty_applied_to_body(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_updProperty_applied_to_body__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_applied_to_body(int i, String value) {
+    opensimModelJNI.ExternalForce_setProperty_applied_to_body__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_applied_to_body(String value) {
+    return opensimModelJNI.ExternalForce_appendProperty_applied_to_body(swigCPtr, this, value);
+  }
+
+  public void constructProperty_applied_to_body() {
+    opensimModelJNI.ExternalForce_constructProperty_applied_to_body__SWIG_0(swigCPtr, this);
+  }
+
+  public void constructProperty_applied_to_body(String initValue) {
+    opensimModelJNI.ExternalForce_constructProperty_applied_to_body__SWIG_1(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_applied_to_body(String value) {
+    opensimModelJNI.ExternalForce_setProperty_applied_to_body__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_force_expressed_in_body(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.ExternalForce_PropertyIndex_force_expressed_in_body_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_force_expressed_in_body() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ExternalForce_PropertyIndex_force_expressed_in_body_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_force_expressed_in_body(ExternalForce source) {
+    opensimModelJNI.ExternalForce_copyProperty_force_expressed_in_body(swigCPtr, this, ExternalForce.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_force_expressed_in_body() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_getProperty_force_expressed_in_body__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_force_expressed_in_body() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_updProperty_force_expressed_in_body__SWIG_0(swigCPtr, this), false);
+  }
+
+  public String getProperty_force_expressed_in_body(int i) {
+    return opensimModelJNI.ExternalForce_getProperty_force_expressed_in_body__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_std__string updProperty_force_expressed_in_body(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_updProperty_force_expressed_in_body__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_force_expressed_in_body(int i, String value) {
+    opensimModelJNI.ExternalForce_setProperty_force_expressed_in_body__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_force_expressed_in_body(String value) {
+    return opensimModelJNI.ExternalForce_appendProperty_force_expressed_in_body(swigCPtr, this, value);
+  }
+
+  public void constructProperty_force_expressed_in_body() {
+    opensimModelJNI.ExternalForce_constructProperty_force_expressed_in_body__SWIG_0(swigCPtr, this);
+  }
+
+  public void constructProperty_force_expressed_in_body(String initValue) {
+    opensimModelJNI.ExternalForce_constructProperty_force_expressed_in_body__SWIG_1(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_force_expressed_in_body(String value) {
+    opensimModelJNI.ExternalForce_setProperty_force_expressed_in_body__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_point_expressed_in_body(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.ExternalForce_PropertyIndex_point_expressed_in_body_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_point_expressed_in_body() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ExternalForce_PropertyIndex_point_expressed_in_body_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_point_expressed_in_body(ExternalForce source) {
+    opensimModelJNI.ExternalForce_copyProperty_point_expressed_in_body(swigCPtr, this, ExternalForce.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_point_expressed_in_body() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_getProperty_point_expressed_in_body__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_point_expressed_in_body() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_updProperty_point_expressed_in_body__SWIG_0(swigCPtr, this), false);
+  }
+
+  public String getProperty_point_expressed_in_body(int i) {
+    return opensimModelJNI.ExternalForce_getProperty_point_expressed_in_body__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_std__string updProperty_point_expressed_in_body(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_updProperty_point_expressed_in_body__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_point_expressed_in_body(int i, String value) {
+    opensimModelJNI.ExternalForce_setProperty_point_expressed_in_body__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_point_expressed_in_body(String value) {
+    return opensimModelJNI.ExternalForce_appendProperty_point_expressed_in_body(swigCPtr, this, value);
+  }
+
+  public void constructProperty_point_expressed_in_body() {
+    opensimModelJNI.ExternalForce_constructProperty_point_expressed_in_body__SWIG_0(swigCPtr, this);
+  }
+
+  public void constructProperty_point_expressed_in_body(String initValue) {
+    opensimModelJNI.ExternalForce_constructProperty_point_expressed_in_body__SWIG_1(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_point_expressed_in_body(String value) {
+    opensimModelJNI.ExternalForce_setProperty_point_expressed_in_body__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_force_identifier(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.ExternalForce_PropertyIndex_force_identifier_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_force_identifier() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ExternalForce_PropertyIndex_force_identifier_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_force_identifier(ExternalForce source) {
+    opensimModelJNI.ExternalForce_copyProperty_force_identifier(swigCPtr, this, ExternalForce.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_force_identifier() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_getProperty_force_identifier__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_force_identifier() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_updProperty_force_identifier__SWIG_0(swigCPtr, this), false);
+  }
+
+  public String getProperty_force_identifier(int i) {
+    return opensimModelJNI.ExternalForce_getProperty_force_identifier__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_std__string updProperty_force_identifier(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_updProperty_force_identifier__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_force_identifier(int i, String value) {
+    opensimModelJNI.ExternalForce_setProperty_force_identifier__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_force_identifier(String value) {
+    return opensimModelJNI.ExternalForce_appendProperty_force_identifier(swigCPtr, this, value);
+  }
+
+  public void constructProperty_force_identifier() {
+    opensimModelJNI.ExternalForce_constructProperty_force_identifier__SWIG_0(swigCPtr, this);
+  }
+
+  public void constructProperty_force_identifier(String initValue) {
+    opensimModelJNI.ExternalForce_constructProperty_force_identifier__SWIG_1(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_force_identifier(String value) {
+    opensimModelJNI.ExternalForce_setProperty_force_identifier__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_point_identifier(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.ExternalForce_PropertyIndex_point_identifier_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_point_identifier() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ExternalForce_PropertyIndex_point_identifier_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_point_identifier(ExternalForce source) {
+    opensimModelJNI.ExternalForce_copyProperty_point_identifier(swigCPtr, this, ExternalForce.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_point_identifier() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_getProperty_point_identifier__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_point_identifier() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_updProperty_point_identifier__SWIG_0(swigCPtr, this), false);
+  }
+
+  public String getProperty_point_identifier(int i) {
+    return opensimModelJNI.ExternalForce_getProperty_point_identifier__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_std__string updProperty_point_identifier(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_updProperty_point_identifier__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_point_identifier(int i, String value) {
+    opensimModelJNI.ExternalForce_setProperty_point_identifier__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_point_identifier(String value) {
+    return opensimModelJNI.ExternalForce_appendProperty_point_identifier(swigCPtr, this, value);
+  }
+
+  public void constructProperty_point_identifier() {
+    opensimModelJNI.ExternalForce_constructProperty_point_identifier__SWIG_0(swigCPtr, this);
+  }
+
+  public void constructProperty_point_identifier(String initValue) {
+    opensimModelJNI.ExternalForce_constructProperty_point_identifier__SWIG_1(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_point_identifier(String value) {
+    opensimModelJNI.ExternalForce_setProperty_point_identifier__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_torque_identifier(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.ExternalForce_PropertyIndex_torque_identifier_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_torque_identifier() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ExternalForce_PropertyIndex_torque_identifier_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_torque_identifier(ExternalForce source) {
+    opensimModelJNI.ExternalForce_copyProperty_torque_identifier(swigCPtr, this, ExternalForce.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_torque_identifier() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_getProperty_torque_identifier__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_torque_identifier() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_updProperty_torque_identifier__SWIG_0(swigCPtr, this), false);
+  }
+
+  public String getProperty_torque_identifier(int i) {
+    return opensimModelJNI.ExternalForce_getProperty_torque_identifier__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_std__string updProperty_torque_identifier(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_updProperty_torque_identifier__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_torque_identifier(int i, String value) {
+    opensimModelJNI.ExternalForce_setProperty_torque_identifier__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_torque_identifier(String value) {
+    return opensimModelJNI.ExternalForce_appendProperty_torque_identifier(swigCPtr, this, value);
+  }
+
+  public void constructProperty_torque_identifier() {
+    opensimModelJNI.ExternalForce_constructProperty_torque_identifier__SWIG_0(swigCPtr, this);
+  }
+
+  public void constructProperty_torque_identifier(String initValue) {
+    opensimModelJNI.ExternalForce_constructProperty_torque_identifier__SWIG_1(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_torque_identifier(String value) {
+    opensimModelJNI.ExternalForce_setProperty_torque_identifier__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_data_source_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.ExternalForce_PropertyIndex_data_source_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_data_source_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ExternalForce_PropertyIndex_data_source_name_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_data_source_name(ExternalForce source) {
+    opensimModelJNI.ExternalForce_copyProperty_data_source_name(swigCPtr, this, ExternalForce.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_data_source_name() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_getProperty_data_source_name__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_data_source_name() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_updProperty_data_source_name__SWIG_0(swigCPtr, this), false);
+  }
+
+  public String getProperty_data_source_name(int i) {
+    return opensimModelJNI.ExternalForce_getProperty_data_source_name__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_std__string updProperty_data_source_name(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_updProperty_data_source_name__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_data_source_name(int i, String value) {
+    opensimModelJNI.ExternalForce_setProperty_data_source_name__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_data_source_name(String value) {
+    return opensimModelJNI.ExternalForce_appendProperty_data_source_name(swigCPtr, this, value);
+  }
+
+  public void constructProperty_data_source_name() {
+    opensimModelJNI.ExternalForce_constructProperty_data_source_name__SWIG_0(swigCPtr, this);
+  }
+
+  public void constructProperty_data_source_name(String initValue) {
+    opensimModelJNI.ExternalForce_constructProperty_data_source_name__SWIG_1(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_data_source_name(String value) {
+    opensimModelJNI.ExternalForce_setProperty_data_source_name__SWIG_1(swigCPtr, this, value);
+  }
+
   public ExternalForce() {
     this(opensimModelJNI.new_ExternalForce__SWIG_0(), true);
   }
@@ -89,12 +425,8 @@ public class ExternalForce extends Force {
     this(opensimModelJNI.new_ExternalForce__SWIG_7(Storage.getCPtr(dataSource), dataSource), true);
   }
 
-  public ExternalForce(ExternalForce force) {
-    this(opensimModelJNI.new_ExternalForce__SWIG_8(ExternalForce.getCPtr(force), force), true);
-  }
-
   public ExternalForce(SWIGTYPE_p_SimTK__Xml__Element aNode) {
-    this(opensimModelJNI.new_ExternalForce__SWIG_9(SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode)), true);
+    this(opensimModelJNI.new_ExternalForce__SWIG_8(SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode)), true);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
@@ -107,6 +439,10 @@ public class ExternalForce extends Force {
 
   public void setDataSource(Storage dataSource) {
     opensimModelJNI.ExternalForce_setDataSource(swigCPtr, this, Storage.getCPtr(dataSource), dataSource);
+  }
+
+  public String getDataSourceName() {
+    return opensimModelJNI.ExternalForce_getDataSourceName(swigCPtr, this);
   }
 
   public void setAppliedToBodyName(String applyToName) {

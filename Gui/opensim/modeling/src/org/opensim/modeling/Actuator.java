@@ -57,6 +57,94 @@ public class Actuator extends Actuator_ {
     return opensimModelJNI.Actuator_getConcreteClassName(swigCPtr, this);
   }
 
+  public void setPropertyIndex_min_control(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Actuator_PropertyIndex_min_control_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_min_control() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Actuator_PropertyIndex_min_control_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_min_control(Actuator source) {
+    opensimModelJNI.Actuator_copyProperty_min_control(swigCPtr, this, Actuator.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_min_control() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Actuator_getProperty_min_control__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_min_control() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Actuator_updProperty_min_control__SWIG_0(swigCPtr, this), false);
+  }
+
+  public double getProperty_min_control(int i) {
+    return opensimModelJNI.Actuator_getProperty_min_control__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double updProperty_min_control(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.Actuator_updProperty_min_control__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_min_control(int i, double value) {
+    opensimModelJNI.Actuator_setProperty_min_control__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_min_control(double value) {
+    return opensimModelJNI.Actuator_appendProperty_min_control(swigCPtr, this, value);
+  }
+
+  public void constructProperty_min_control(double initValue) {
+    opensimModelJNI.Actuator_constructProperty_min_control(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_min_control(double value) {
+    opensimModelJNI.Actuator_setProperty_min_control__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_max_control(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Actuator_PropertyIndex_max_control_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_max_control() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Actuator_PropertyIndex_max_control_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_max_control(Actuator source) {
+    opensimModelJNI.Actuator_copyProperty_max_control(swigCPtr, this, Actuator.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_max_control() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Actuator_getProperty_max_control__SWIG_0(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_max_control() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Actuator_updProperty_max_control__SWIG_0(swigCPtr, this), false);
+  }
+
+  public double getProperty_max_control(int i) {
+    return opensimModelJNI.Actuator_getProperty_max_control__SWIG_1(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double updProperty_max_control(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.Actuator_updProperty_max_control__SWIG_1(swigCPtr, this, i), false);
+  }
+
+  public void setProperty_max_control(int i, double value) {
+    opensimModelJNI.Actuator_setProperty_max_control__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int appendProperty_max_control(double value) {
+    return opensimModelJNI.Actuator_appendProperty_max_control(swigCPtr, this, value);
+  }
+
+  public void constructProperty_max_control(double initValue) {
+    opensimModelJNI.Actuator_constructProperty_max_control(swigCPtr, this, initValue);
+  }
+
+  public void setProperty_max_control(double value) {
+    opensimModelJNI.Actuator_setProperty_max_control__SWIG_1(swigCPtr, this, value);
+  }
+
   public double getControl(SWIGTYPE_p_SimTK__State s) {
     return opensimModelJNI.Actuator_getControl(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
   }

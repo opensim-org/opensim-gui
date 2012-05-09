@@ -175,7 +175,7 @@ public class LineSegmentMuscleDisplayer {
       for(int i=0; i<musclePointGlyphIds.size(); i++) musclePointsRep.hide(musclePointGlyphIds.get(i));
       for(int i=0; i<muscleSegmentGlyphIds.size(); i++) muscleSegmentsRep.hide(muscleSegmentGlyphIds.get(i));
 
-      if (dp == DisplayPreference.None) return;
+      if (dp == DisplayPreference.None || openSimContext.isDisabled(act)) return;
 
       double activation = muscleColoringFunction.getColor(act); 
       // A displayer is found, get geometry
