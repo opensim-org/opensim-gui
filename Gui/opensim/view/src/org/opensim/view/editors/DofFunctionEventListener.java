@@ -80,17 +80,17 @@ public class DofFunctionEventListener implements FunctionEventListener {
                guiElem.setUnsavedChangesFlag(true);
             }
          } else if (event instanceof FunctionModifiedEvent) {
-             /* FIXME 30
-            if (dof.getCoordinateNames().getSize() > 0) {
+             
+            if (dof.getCoordinateNamesInArray().getSize() > 0) {
                //TODO: not a good way to force a joint recalculation!!
                // TODO: for now, deal only with the first coordinate.
-               String coordName = dof.getCoordinateNames().getitem(0);
+               String coordName = dof.getCoordinateNamesInArray().getitem(0);
                Coordinate coord = dof.getJoint().getCoordinateSet().get(coordName);
                openSimContext.setValue(coord, openSimContext.getValue(coord));
                ViewDB.getInstance().updateModelDisplayNoRepaint(model);
                ViewDB.getInstance().renderAll();
                guiElem.setUnsavedChangesFlag(true);
-            } */
+            }
          }
       }
    }

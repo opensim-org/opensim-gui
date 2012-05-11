@@ -4,13 +4,10 @@
  */
 package org.opensim.view.nodes;
 
-import java.io.IOException;
-import java.text.ParseException;
 import java.util.Vector;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
-import org.openide.util.Exceptions;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;

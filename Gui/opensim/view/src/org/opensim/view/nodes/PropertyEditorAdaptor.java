@@ -3,12 +3,14 @@ package org.opensim.view.nodes;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
+import org.openide.nodes.Node;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PropertyHelper;
+import org.opensim.utils.Vec3;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
@@ -56,12 +58,14 @@ public class PropertyEditorAdaptor {
     AbstractProperty prop;
     OpenSimContext context = null;
     Model model;
-
-    public PropertyEditorAdaptor(AbstractProperty prop, OpenSimObject obj, Model model) {
+    OpenSimObjectNode node;
+    
+    public PropertyEditorAdaptor(AbstractProperty prop, OpenSimObject obj, Model model, OpenSimObjectNode ownerNode) {
         this.prop = prop;
         this.context = OpenSimDB.getInstance().getContext(model);
         this.model = model;
         this.obj = obj;
+        this.node = ownerNode;
     }
     // Double Properties
 
@@ -79,7 +83,7 @@ public class PropertyEditorAdaptor {
      * @param v
      * @param supportUndo 
      */
-    public void setValueDouble(double v, boolean supportUndo) {
+    private void setValueDouble(double v, boolean supportUndo) {
         double oldValue = PropertyHelper.getValueDouble(prop);
         PropertyHelper.setValueDouble(v, prop);
         handlePropertyChange(oldValue, v, supportUndo);
@@ -98,7 +102,7 @@ public class PropertyEditorAdaptor {
         setValueInt(v, true);
     }
 
-    public void setValueInt(int v, boolean supportUndo) {
+    private void setValueInt(int v, boolean supportUndo) {
         int oldValue = getValueInt();
         PropertyHelper.setValueInt(v, prop);
         handlePropertyChange(oldValue, v, supportUndo);
@@ -117,14 +121,10 @@ public class PropertyEditorAdaptor {
         setValueBool(v, true);
     }
 
-    public void setValueBool(boolean v, boolean supportUndo) {
+    private void setValueBool(boolean v, boolean supportUndo) {
         boolean oldValue = getValueBool();
         PropertyHelper.setValueBool(v, prop);
-        //boolean newValue = PropertyHelper.getValueBool(prop);
-        //System.out.println("new value1="+newValue);
         handlePropertyChange(oldValue, v, supportUndo);
-        //newValue = PropertyHelper.getValueBool(prop);
-        //System.out.println("new value2="+newValue);
     }
 
     public void setValueBool(Boolean v) {
@@ -140,13 +140,45 @@ public class PropertyEditorAdaptor {
         setValueString(v, true);
     }
 
-    public void setValueString(String v, boolean supportUndo) {
+    private void setValueString(String v, boolean supportUndo) {
         String oldValue = PropertyHelper.getValueString(prop);
         PropertyHelper.setValueString(v, prop);
         handlePropertyChange(oldValue, v, supportUndo);
     }
 
+    // Vec3 Properties
+    public Vec3 getValueVec3() {
+        Vec3 dVec3 = new Vec3(PropertyHelper.getValueVec3(prop, 0),
+                PropertyHelper.getValueVec3(prop, 1),
+                PropertyHelper.getValueVec3(prop, 2));
+        return dVec3;
+    }
+
+    public void setValueVec3FromString(String vString) {
+        ArrayDouble d = new ArrayDouble();
+        d.fromString(vString);
+        if (d.getSize()==3){
+            setValueVec3(new Vec3(d.getitem(0), d.getitem(1), d.getitem(2)));
+        }
+     }
+    public void setValueVec3(Vec3 v) {
+        setValueVec3(v, true);
+    }
+
+    private void setValueVec3(Vec3 v, boolean supportUndo) {
+        Vec3 oldVec3 = new Vec3(PropertyHelper.getValueVec3(prop, 0),
+                PropertyHelper.getValueVec3(prop, 1),
+                PropertyHelper.getValueVec3(prop, 2));
+         for(int i=0; i<3; i++)
+            PropertyHelper.setValueVec3(v.get()[i], prop, i);
+         handlePropertyChange(oldVec3, v, supportUndo);
+   }
+   
     public OpenSimObject getValueObj() {
+        if (prop.isOneObjectProperty())
+            return prop.getValueAsObject();
+        if (prop.isOptionalProperty() && prop.size()==1)
+            return prop.getValueAsObject(0);
         return prop.getValueAsObject();
     }
 
@@ -158,23 +190,57 @@ public class PropertyEditorAdaptor {
         return prop.toString();
     }
 
-    public void setValueDoubleListFromString(String aString) {
-        // Parse String into an array of doubles, check that it's the right size for prop then assign
+    private void setValueDoubleListFromString(String aString, boolean allowUndo) {
+         // Parse String into an array of doubles, check that it's the right size for prop then assign
         ArrayDouble d = new ArrayDouble();
         d.fromString(aString);
         if (prop.size() == d.getSize()) {
-            int sz = prop.size();
-            for (int i = 0; i < sz; i++) {
-                PropertyHelper.setValueDouble(d.getitem(i), prop, i);
-            }
+            assignValueArrayDouble(d, allowUndo);
         }
-        context.recreateSystemAfterSystemExistsKeepStage();
-        ViewDB.getInstance().updateModelDisplay(model);
+    }
+ 
+    public void setValueDoubleListFromString(String aString) {
+        setValueDoubleListFromString(aString, true);
     }
 
-    private void handlePropertyChange(final double oldValue, final double v, boolean supportUndo) {
+    private void assignValueArrayDouble(ArrayDouble d, boolean allowUndo) {
+        int sz = prop.size();
+        final ArrayDouble oldArray = new ArrayDouble();
+        for (int i = 0; i < sz; i++) {
+             oldArray.append(PropertyHelper.getValueDouble(prop, i));
+             PropertyHelper.setValueDouble(d.getitem(i), prop, i);
+        }
+        handlePropertyChange(oldArray, d, allowUndo);
+    }
+
+    // Transform Property
+    private void setValueTransformFromString(String aString, boolean allowUndo) {
+         // Parse String into an array of doubles, check that it's the right size for prop then assign
+        ArrayDouble d = new ArrayDouble();
+        d.fromString(aString);
+        if (prop.size() == d.getSize()) {
+            assignValueTransform(d, allowUndo);
+        }
+    }
+ 
+    public void setValueTransformFromString(String aString) {
+        setValueTransformFromString(aString, true);
+    }
+
+    private void assignValueTransform(ArrayDouble d, boolean allowUndo) {
+        int sz = prop.size();
+        final ArrayDouble oldArray = new ArrayDouble();
+        for (int i = 0; i < sz; i++) {
+             oldArray.append(PropertyHelper.getValueDouble(prop, i));
+             PropertyHelper.setValueTransform(d.getitem(i), prop, i);
+        }
+        handlePropertyChangeTransform(oldArray, d, allowUndo);
+    }
+
+     private void handlePropertyChange(final double oldValue, final double v, boolean supportUndo) {
         context.recreateSystemAfterSystemExistsKeepStage();
         ViewDB.getInstance().updateModelDisplay(model);
+        node.refreshNode();
         if (supportUndo) {
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
 
@@ -197,7 +263,8 @@ public class PropertyEditorAdaptor {
     private void handlePropertyChange(final String oldValue, final String v, boolean supportUndo) {
         context.recreateSystemAfterSystemExistsKeepStage();
         ViewDB.getInstance().updateModelDisplay(model);
-        if (supportUndo) {
+        node.refreshNode();
+       if (supportUndo) {
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
 
                 @Override
@@ -219,6 +286,7 @@ public class PropertyEditorAdaptor {
     private void handlePropertyChange(final boolean oldValue, final boolean v, boolean supportUndo) {
         context.recreateSystemAfterSystemExistsKeepStage();
         ViewDB.getInstance().updateModelDisplay(model);
+        node.refreshNode();
         if (supportUndo) {
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
 
@@ -241,6 +309,7 @@ public class PropertyEditorAdaptor {
     private void handlePropertyChange(final int oldValue, final int v, boolean supportUndo) {
         context.recreateSystemAfterSystemExistsKeepStage();
         ViewDB.getInstance().updateModelDisplay(model);
+        node.refreshNode();
         if (supportUndo) {
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
 
@@ -254,6 +323,72 @@ public class PropertyEditorAdaptor {
                 public void redo() throws CannotRedoException {
                     super.redo();
                     setValueInt(v, true);
+                }
+            };
+            ExplorerTopComponent.addUndoableEdit(auEdit);
+        }
+    }
+    private void handlePropertyChange(final ArrayDouble oldValue, final ArrayDouble v, boolean supportUndo) {
+        context.recreateSystemAfterSystemExistsKeepStage();
+        ViewDB.getInstance().updateModelDisplay(model);
+        node.refreshNode();
+        if (supportUndo) {
+            AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
+
+                @Override
+                public void undo() throws CannotUndoException {
+                    super.undo();
+                    assignValueArrayDouble(oldValue, false);
+                }
+
+                @Override
+                public void redo() throws CannotRedoException {
+                    super.redo();
+                    assignValueArrayDouble(v, true);
+                }
+            };
+            ExplorerTopComponent.addUndoableEdit(auEdit);
+        }
+    }
+    private void handlePropertyChange(final Vec3 oldValue, final Vec3 v, boolean supportUndo) {
+        context.recreateSystemAfterSystemExistsKeepStage();
+        ViewDB.getInstance().updateModelDisplay(model);
+        node.refreshNode();
+        if (supportUndo) {
+            AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
+
+                @Override
+                public void undo() throws CannotUndoException {
+                    super.undo();
+                    setValueVec3(oldValue, false);
+                }
+
+                @Override
+                public void redo() throws CannotRedoException {
+                    super.redo();
+                    setValueVec3(v, true);
+                }
+            };
+            ExplorerTopComponent.addUndoableEdit(auEdit);
+        }
+    }
+    private void handlePropertyChangeTransform(final ArrayDouble oldValue, final ArrayDouble v, boolean supportUndo) {
+        context.recreateSystemAfterSystemExistsKeepStage();
+        ViewDB.getInstance().updateModelDisplay(model);
+        node.refreshNode();
+        if (supportUndo) {
+            AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
+
+                @Override
+                public void undo() throws CannotUndoException {
+                    super.undo();
+                    assignValueTransform(oldValue, false);
+                }
+
+                @Override
+                public void redo() throws CannotRedoException {
+                    super.redo();
+                    assignValueTransform(v, true);
                 }
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);

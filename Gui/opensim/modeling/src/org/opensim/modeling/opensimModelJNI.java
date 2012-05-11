@@ -290,7 +290,7 @@ public class opensimModelJNI {
   public final static native boolean OpenSimObject_hasProperty(long jarg1, OpenSimObject jarg1_, String jarg2);
   public final static native long OpenSimObject_getPropertyByName(long jarg1, OpenSimObject jarg1_, String jarg2);
   public final static native long OpenSimObject_updPropertyByName(long jarg1, OpenSimObject jarg1_, String jarg2);
-  public final static native void OpenSimObject_setObjectIsUpToDateWithProperties(long jarg1, OpenSimObject jarg1_, boolean jarg2);
+  public final static native void OpenSimObject_setObjectIsUpToDateWithProperties(long jarg1, OpenSimObject jarg1_);
   public final static native boolean OpenSimObject_isObjectUpToDateWithProperties(long jarg1, OpenSimObject jarg1_);
   public final static native void OpenSimObject_PrintPropertyInfo__SWIG_0(long jarg1, String jarg2);
   public final static native void OpenSimObject_PrintPropertyInfo__SWIG_1(long jarg1, String jarg2, String jarg3);
@@ -311,6 +311,7 @@ public class opensimModelJNI {
   public final static native String OpenSimObject_getClassName();
   public final static native void OpenSimObject_setSerializeAllDefaults(boolean jarg1);
   public final static native boolean OpenSimObject_getSerializeAllDefaults();
+  public final static native void OpenSimObject_clearObjectIsUpToDateWithProperties(long jarg1, OpenSimObject jarg1_);
   public final static native boolean OpenSimObject_isKindOf(String jarg1);
   public final static native boolean OpenSimObject_isA(long jarg1, OpenSimObject jarg1_, String jarg2);
   public final static native void OpenSimObject_setDebugLevel(int jarg1);
@@ -3381,6 +3382,7 @@ public class opensimModelJNI {
   public final static native long new_TransformAxis__SWIG_2(long jarg1);
   public final static native void TransformAxis_setCoordinateNames(long jarg1, TransformAxis jarg1_, long jarg2, ArrayStr jarg2_);
   public final static native long TransformAxis_getCoordinateNames(long jarg1, TransformAxis jarg1_);
+  public final static native long TransformAxis_getCoordinateNamesInArray(long jarg1, TransformAxis jarg1_);
   public final static native void TransformAxis_setAxis(long jarg1, TransformAxis jarg1_, long jarg2);
   public final static native long TransformAxis_getAxis__SWIG_0(long jarg1, TransformAxis jarg1_);
   public final static native void TransformAxis_getAxis__SWIG_1(long jarg1, TransformAxis jarg1_, long jarg2);
@@ -5542,6 +5544,8 @@ public class opensimModelJNI {
   public final static native void PropertyHelper_appendValueString(String jarg1, long jarg2, AbstractProperty jarg2_);
   public final static native double PropertyHelper_getValueTransform(long jarg1, AbstractProperty jarg1_, int jarg2);
   public final static native void PropertyHelper_setValueTransform(double jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
+  public final static native double PropertyHelper_getValueVec3(long jarg1, AbstractProperty jarg1_, int jarg2);
+  public final static native void PropertyHelper_setValueVec3(double jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
   public final static native long new_PropertyHelper();
   public final static native void delete_PropertyHelper(long jarg1);
   public final static native void delete_SimtkLogCallback(long jarg1);

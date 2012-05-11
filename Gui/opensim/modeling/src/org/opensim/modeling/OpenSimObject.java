@@ -141,8 +141,8 @@ public class OpenSimObject {
     return new AbstractProperty(opensimModelJNI.OpenSimObject_updPropertyByName(swigCPtr, this, name), false);
   }
 
-  public void setObjectIsUpToDateWithProperties(boolean isUpToDate) {
-    opensimModelJNI.OpenSimObject_setObjectIsUpToDateWithProperties(swigCPtr, this, isUpToDate);
+  public void setObjectIsUpToDateWithProperties() {
+    opensimModelJNI.OpenSimObject_setObjectIsUpToDateWithProperties(swigCPtr, this);
   }
 
   public boolean isObjectUpToDateWithProperties() {
@@ -226,6 +226,10 @@ public class OpenSimObject {
 
   public static boolean getSerializeAllDefaults() {
     return opensimModelJNI.OpenSimObject_getSerializeAllDefaults();
+  }
+
+  public void clearObjectIsUpToDateWithProperties() {
+    opensimModelJNI.OpenSimObject_clearObjectIsUpToDateWithProperties(swigCPtr, this);
   }
 
   public static boolean isKindOf(String type) {

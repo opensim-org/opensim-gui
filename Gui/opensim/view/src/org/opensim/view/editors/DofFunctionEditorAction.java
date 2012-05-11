@@ -78,10 +78,10 @@ public class DofFunctionEditorAction extends AbstractAction {
 				    functionEditor.addChangeListener(new DofFunctionEventListener());
 				    FunctionEditorOptions options = new FunctionEditorOptions();
 				    options.title = dof.getJoint().getName();
-                                    /* FIXME30
-				    if (dof.getCoordinateNames().getSize() > 0) {
+                                    
+				    if (dof.getCoordinateNamesInArray().getSize() > 0) {
 					//TODO: For now, just get the first coordinate name.
-					String coordName = dof.getCoordinateNames().getitem(0);
+					String coordName = dof.getCoordinateNamesInArray().getitem(0);
 					Coordinate coord = dof.getJoint().getCoordinateSet().get(coordName);
 					if (coord != null) {
 					    // Determine the units of the X axis
@@ -104,7 +104,7 @@ public class DofFunctionEditorAction extends AbstractAction {
 					    }
 					    options.YLabel = options.YDisplayUnits.getLabel();
 					}
-				    }*/
+				    }
 				    functionEditor.open(newModel, dof, null, newFunction, options);
 				    functionEditor.requestActive();
 				}

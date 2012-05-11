@@ -119,6 +119,15 @@ public class OpenSimNode extends AbstractNode {
           ((OpenSimNode)children[i]).renameObjectNode(objectToRename, newName);
        }
     }
+    
+    Class getClassForTypeName(String string){
+        Class classEditAs = mapPropertyTypeNameToClass.get(string);
+        
+        if (classEditAs != null )
+            return classEditAs;
+        else
+            return String.class;
+    }
 /*
     @Override
     public PasteType getDropType(Transferable t, final int action, int index) {

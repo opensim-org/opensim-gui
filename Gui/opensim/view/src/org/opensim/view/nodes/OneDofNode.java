@@ -62,11 +62,11 @@ public class OneDofNode extends OpenSimObjectNode{
               setChildren(Children.LEAF);
            } else if (func != null ) {
               //TODO: for now, deal only with the first coordinate.
-               /* FIXME30
-               if (ad.getCoordinateNames().getSize()>0){
-                    String displayName = "f(" + ad.getCoordinateNames().getitem(0) + ")";
+               
+               if (ad.getCoordinateNamesInArray().getSize()>0){
+                    String displayName = "f(" + ad.getCoordinateNamesInArray().getitem(0) + ")";
                     children.add(new Node[] { new DofFunctionNode(func, displayName, ad) });
-               } */
+               }
            }
         }
     }

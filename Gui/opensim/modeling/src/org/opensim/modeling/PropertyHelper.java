@@ -123,6 +123,14 @@ public class PropertyHelper {
     opensimModelJNI.PropertyHelper_setValueTransform(v, AbstractProperty.getCPtr(p), p, index);
   }
 
+  public static double getValueVec3(AbstractProperty p, int index) {
+    return opensimModelJNI.PropertyHelper_getValueVec3(AbstractProperty.getCPtr(p), p, index);
+  }
+
+  public static void setValueVec3(double v, AbstractProperty p, int index) {
+    opensimModelJNI.PropertyHelper_setValueVec3(v, AbstractProperty.getCPtr(p), p, index);
+  }
+
   public PropertyHelper() {
     this(opensimModelJNI.new_PropertyHelper(), true);
   }

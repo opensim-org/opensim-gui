@@ -54,5 +54,5 @@ public class Vec3
                       a*v1.vec[2]+b*v2.vec[2]);
    }
 
-   public String toString() { return String.format("%.3f,%.3f,%.3f",vec[0],vec[1],vec[2]); }
+   public String toString() { return String.format("%.5f,%.5f,%.5f",vec[0],vec[1],vec[2]); }
 }

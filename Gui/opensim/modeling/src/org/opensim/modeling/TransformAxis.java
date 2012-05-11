@@ -209,6 +209,10 @@ public class TransformAxis extends OpenSimObject {
     return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.TransformAxis_getCoordinateNames(swigCPtr, this), false);
   }
 
+  public ArrayStr getCoordinateNamesInArray() {
+    return new ArrayStr(opensimModelJNI.TransformAxis_getCoordinateNamesInArray(swigCPtr, this), true);
+  }
+
   public void setAxis(SWIGTYPE_p_SimTK__Vec3 axis) {
     opensimModelJNI.TransformAxis_setAxis(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(axis));
   }
