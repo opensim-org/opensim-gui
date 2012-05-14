@@ -2,11 +2,11 @@
 <OpenSimDocument Version="20302">
 	<IKTool name="leg39_IKTool">
 		<!--Directory used for writing results.-->
-		<results_directory> ./ </results_directory>
+		<results_directory> </results_directory>
 		<!--Directory for input files-->
 		<input_directory>  </input_directory>
 	<!--Name of the .osim file used to construct a model.-->
-	<model_file> leg39.osim </model_file>
+	<model_file>  </model_file>
 		<!--A positive scalar that is used to weight the importance of satisfying
 		    constraints.A weighting of 'Infinity' or if it is unassigned results
 		    in the constraints being strictly enforced.-->
@@ -85,18 +85,18 @@
 	</IKTaskSet>
 		<!--TRC file (.trc) containing the time history of observations of marker
 				    positions.-->
-				<marker_file> leg39_swing.trc </marker_file>
+				<marker_file> </marker_file>
 		<!--The name of the storage (.sto or .mot) file containing coordinate
 		    observations.Coordinate values from this file are included if there is
 		    a corresponding coordinate task.-->
-		<coordinate_file> Unassigned </coordinate_file>
+		<coordinate_file> </coordinate_file>
 		<!--Time range over which the inverse kinematics problem is solved.-->
-		<time_range>       0.00000000       0.40000000 </time_range>
+		<time_range> </time_range>
 		<!--Flag (true or false) indicating whether or not to report marker and
 		    coordinate errors from the inverse kinematics solution.-->
 		<report_errors> true </report_errors>
 				<!--Name of the motion file (.mot) to which the results should be written.-->
-				<output_motion_file> leg39_InverseKinematics.mot </output_motion_file>
+				<output_motion_file> </output_motion_file>
 	</IKTool>
 </OpenSimDocument>
 

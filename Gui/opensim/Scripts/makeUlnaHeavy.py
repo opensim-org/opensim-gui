@@ -1,31 +1,38 @@
-import sys
-import javax.swing as swing
-import java.lang as lang
-import org.opensim.modeling as modeling
-import org.opensim.view.pub as view
+# This example shows to to create a modified version of a model that is loaded in the GUI. 
+# The script increases the mass of the ulna. The modified model is then loaded in the GUI.
+
+# NOTE: The Arm26 model must be loaded and current in the GUI to run this script.
 
 # Get handle to current model in GUI
-cModel = view.gui.getCurrentModel()
+oldModel = getCurrentModel()
+
 # Create a fresh copy
-myModel = modeling.Model(cModel)
-# initialize the copy
-myModel.initSystem()
-# name the copy for later showing in GUI
-oldName = cModel.getName()
+myModel = modeling.Model(oldModel)
+
+# Initialize the copy, if values need to be set in the model's state
+# pass along the variable myState  returned by initSystem
+myState = myModel.initSystem()
+
+# Name the copy for later display in the GUI
+oldName = oldModel.getName()
 myModel.setName(oldName+"_heavier")
 
-# A scale factor for mass of for-arm
+# A scale factor for mass of forarm
 massScale = 3
 
 # Change mass of forarm in the model
-forarm = myModel.getBodySet().get("r_ulna_radius_hand")
-forarm.setMass(forarm.getMass() * massScale)
-fullName = cModel.getInputFileName()
-newName = fullName.replace('.osim', '_heavier.osim')
+forearm = myModel.getBodySet().get("r_ulna_radius_hand")
+forearm.setMass(forearm.getMass() * massScale)
+
+# Get full path name of original.old model
+fullPathName = oldModel.getInputFileName()
+
+# Change the name of the modified model
+newName = fullPathName.replace('.osim', '_heavier.osim')
 myModel.print(newName)
 
-#Add model to GUI
-view.gui.addModel(newName)
+# Load the model in the GUI
+addModel(newName)
 
 
 

@@ -1,17 +1,20 @@
-import javax.swing as swing
-import org.opensim.modeling as modeling
+# This example increases the maxIsometricForce of all the muscles in the currently loaded model.
+# A pop-up dialog displays a confirmation with the name of the new model.
 
 # Get handle to current model in GUI
-cModel = getCurrentModel()
+oldModel = getCurrentModel()
+
 # Create a fresh copy
-myModel = modeling.Model(cModel)
-# initialize the copy
+myModel = modeling.Model(oldModel)
+
+# Initialize the copy
 myModel.initSystem()
-# name the copy for later showing in GUI
-oldName = cModel.getName()
+
+# Name the copy for later showing in GUI
+oldName = oldModel.getName()
 myModel.setName(oldName+"_Stronger")
 
-# A scale factor for MaxIsometricForce of muscles
+# Define a scale factor for MaxIsometricForce of muscles
 scaleFactor = 1.2
 
 # Apply scale factor to MaxIsometricForce
@@ -20,7 +23,7 @@ for i in range(myModel.getMuscles().getSize()):
 	currentMuscle.setMaxIsometricForce(currentMuscle.getMaxIsometricForce()*scaleFactor)
 
 # Save resulting model
-fullName = cModel.getInputFileName()
+fullName = oldModel.getInputFileName()
 newName = fullName.replace('.osim', '_stronger.osim')
 myModel.print(newName)
 

@@ -1,20 +1,21 @@
-import sys
-import javax.swing as swing
-import java.lang as lang
-import org.opensim.modeling as modeling
-import org.opensim.view.pub as view
+# This example script shows how to change the attributes of the muscles for the current model 
+# (tendonSlackLength in this example).
 
 # Get handle to current model in GUI
-cModel = view.gui.getCurrentModel()
-# Create a fresh copy
-myModel = modeling.Model(cModel)
-# initialize the copy
-myModel.initSystem()
-# name the copy for later showing in GUI
-oldName = cModel.getName()
-myModel.setName(oldName+"_modified")
+oldModel = getCurrentModel()
 
-# A scale factor for MaxIsometricForce of muscles
+# Create a fresh copy
+myModel = modeling.Model(oldModel)
+
+# Initialize the copy, if values needed to be set in state
+# pass along the variable myState returned by initSystem
+myState = myModel.initSystem()
+
+# Name the copy for later display in the GUI
+oldName = oldModel.getName()
+myModel.setName(oldName+"_longerTSL")
+
+# A scale factor for tendonSlackLength of muscles
 tendonSlackLengthScale = 1.5
 
 # Change TendonSlackLength for all muscles in the model
@@ -23,12 +24,15 @@ for i in range(myModel.getMuscles().getSize()):
 	oldSL = currentMuscle.getTendonSlackLength()
 	currentMuscle.setTendonSlackLength(oldSL * tendonSlackLengthScale)
 
-fullName = cModel.getInputFileName()
-newName = fullName.replace('.osim', '_modified.osim')
-myModel.print(newName)
+#get full path name of original model
+fullPathName = oldModel.getInputFileName()
+
+#Change pathname to output file name
+newPathName = fullPathName.replace('.osim', '_longerTSL.osim')
+myModel.print(newPathName)
 
 #Add model to GUI
-view.gui.addModel(newName)
+addModel(newPathName)
 
 
 
