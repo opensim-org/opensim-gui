@@ -139,7 +139,7 @@ public class DisplayGeometryDisplayer extends vtkActor
         return color;
     }
     
-    private void applyAttributesToActor() {        
+    public void applyAttributesToActor() {        
         // Apply texture if any
         String textureFile = displayGeometry.getTextureFile();
         if (textureFile!=null && !textureFile.equalsIgnoreCase("")){
@@ -203,7 +203,7 @@ public class DisplayGeometryDisplayer extends vtkActor
         xform.Translate(rotationsAndTranslations[3], rotationsAndTranslations[4], rotationsAndTranslations[5]);
     }
     
-    protected void applyDisplayPreferenceToActor() {
+    public void applyDisplayPreferenceToActor() {
         
         switch(displayGeometry.getDisplayPreference().swigValue()) {
             case 0:

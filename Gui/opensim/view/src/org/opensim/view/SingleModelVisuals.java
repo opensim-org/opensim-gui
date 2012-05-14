@@ -47,6 +47,7 @@ import org.opensim.modeling.Muscle;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.BodySet;
 import org.opensim.modeling.ConditionalPathPoint;
+import org.opensim.modeling.DisplayGeometry;
 import org.opensim.modeling.DisplayGeometry.DisplayPreference;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.OpenSimContext;
@@ -835,6 +836,21 @@ public class SingleModelVisuals {
       tpd1Actor.SetMapper(mapTpd1);
       tpd1Actor.GetProperty().SetColor(1,0,0);
       modelDisplayAssembly.AddPart(tpd1Actor);
+    }
+
+    public void updateObjectDisplay(OpenSimObject specificObject) {
+        vtkProp3D prop3D = mapObject2VtkObjects.get(specificObject);
+        if (prop3D!= null){
+            if (specificObject instanceof Body){
+                ((BodyDisplayer)prop3D).applyColorsFromModel();
+                ((BodyDisplayer)prop3D).applyDisplayPreferences();
+            }
+            else if (specificObject instanceof DisplayGeometry){
+                ((DisplayGeometryDisplayer)prop3D).applyAttributesToActor();
+                ((DisplayGeometryDisplayer)prop3D).applyDisplayPreferenceToActor();
+            }
+            
+        }
     }
 }
 

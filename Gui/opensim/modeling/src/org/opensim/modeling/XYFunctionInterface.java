@@ -156,9 +156,9 @@ public class XYFunctionInterface extends OpenSimObject {
     return (cPtr == 0) ? null : new LinearFunction(cPtr, false);
   }
 
-  public NaturalCubicSpline getNaturalCubicSpline() {
-    long cPtr = opensimModelJNI.XYFunctionInterface_getNaturalCubicSpline(swigCPtr, this);
-    return (cPtr == 0) ? null : new NaturalCubicSpline(cPtr, false);
+  public SimmSpline getSimmSpline() {
+    long cPtr = opensimModelJNI.XYFunctionInterface_getSimmSpline(swigCPtr, this);
+    return (cPtr == 0) ? null : new SimmSpline(cPtr, false);
   }
 
   public SWIGTYPE_p_GCVSpline getGCVSpline() {

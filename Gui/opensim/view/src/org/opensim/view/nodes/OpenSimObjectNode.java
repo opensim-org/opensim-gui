@@ -258,7 +258,7 @@ public class OpenSimObjectNode extends OpenSimNode {
          getValidDisplayOptions().add(newOption);
    }
 
-   public ArrayList<displayOption> getValidDisplayOptions()  { return validDisplayOptions; }
+    public ArrayList<displayOption> getValidDisplayOptions()  { return validDisplayOptions; }
 
     @Override
     public Sheet createSheet() {

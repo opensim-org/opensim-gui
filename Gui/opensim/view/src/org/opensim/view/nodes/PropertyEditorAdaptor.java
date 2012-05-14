@@ -3,7 +3,6 @@ package org.opensim.view.nodes;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
-import org.openide.nodes.Node;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.Model;
@@ -124,7 +123,7 @@ public class PropertyEditorAdaptor {
     private void setValueBool(boolean v, boolean supportUndo) {
         boolean oldValue = getValueBool();
         PropertyHelper.setValueBool(v, prop);
-        handlePropertyChange(oldValue, v, supportUndo);
+        handlePropertyChange(oldValue, v, supportUndo);      
     }
 
     public void setValueBool(Boolean v) {
@@ -239,7 +238,7 @@ public class PropertyEditorAdaptor {
 
      private void handlePropertyChange(final double oldValue, final double v, boolean supportUndo) {
         context.recreateSystemAfterSystemExistsKeepStage();
-        ViewDB.getInstance().updateModelDisplay(model);
+        ViewDB.getInstance().updateModelDisplay(model, obj);
         node.refreshNode();
         if (supportUndo) {
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
@@ -262,7 +261,7 @@ public class PropertyEditorAdaptor {
 
     private void handlePropertyChange(final String oldValue, final String v, boolean supportUndo) {
         context.recreateSystemAfterSystemExistsKeepStage();
-        ViewDB.getInstance().updateModelDisplay(model);
+        ViewDB.getInstance().updateModelDisplay(model, obj);
         node.refreshNode();
        if (supportUndo) {
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
@@ -285,7 +284,7 @@ public class PropertyEditorAdaptor {
 
     private void handlePropertyChange(final boolean oldValue, final boolean v, boolean supportUndo) {
         context.recreateSystemAfterSystemExistsKeepStage();
-        ViewDB.getInstance().updateModelDisplay(model);
+        ViewDB.getInstance().updateModelDisplay(model, obj);
         node.refreshNode();
         if (supportUndo) {
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
@@ -308,7 +307,7 @@ public class PropertyEditorAdaptor {
 
     private void handlePropertyChange(final int oldValue, final int v, boolean supportUndo) {
         context.recreateSystemAfterSystemExistsKeepStage();
-        ViewDB.getInstance().updateModelDisplay(model);
+        ViewDB.getInstance().updateModelDisplay(model, obj);
         node.refreshNode();
         if (supportUndo) {
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
@@ -330,7 +329,8 @@ public class PropertyEditorAdaptor {
     }
     private void handlePropertyChange(final ArrayDouble oldValue, final ArrayDouble v, boolean supportUndo) {
         context.recreateSystemAfterSystemExistsKeepStage();
-        ViewDB.getInstance().updateModelDisplay(model);
+        //ViewDB.getInstance().updateModelVisuals(model);
+        ViewDB.getInstance().updateModelDisplay(model, obj);
         node.refreshNode();
         if (supportUndo) {
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
@@ -352,7 +352,7 @@ public class PropertyEditorAdaptor {
     }
     private void handlePropertyChange(final Vec3 oldValue, final Vec3 v, boolean supportUndo) {
         context.recreateSystemAfterSystemExistsKeepStage();
-        ViewDB.getInstance().updateModelDisplay(model);
+        ViewDB.getInstance().updateModelDisplay(model, obj);
         node.refreshNode();
         if (supportUndo) {
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
@@ -374,7 +374,7 @@ public class PropertyEditorAdaptor {
     }
     private void handlePropertyChangeTransform(final ArrayDouble oldValue, final ArrayDouble v, boolean supportUndo) {
         context.recreateSystemAfterSystemExistsKeepStage();
-        ViewDB.getInstance().updateModelDisplay(model);
+        ViewDB.getInstance().updateModelDisplay(model, obj);
         node.refreshNode();
         if (supportUndo) {
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {

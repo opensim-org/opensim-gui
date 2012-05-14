@@ -592,7 +592,7 @@ public class BodyDisplayer extends vtkAssembly
     /**
      * Cycle thru geometry and apply preferences including vis of joint frames, colors, COM
      */
-    void applyDisplayPreferences() 
+    public void applyDisplayPreferences() 
     {
        VisibleObject bodyVisibleObject = body.getDisplayer();
        GeometrySet gSet = bodyVisibleObject.getGeometrySet();

@@ -1154,9 +1154,20 @@ public final class ViewDB extends Observable implements Observer {
     * We could get visModel from animationCallback using getModelVisuals(animationCallback.getModel())
     * but that's another map search.
     */
-   public void updateModelDisplay(Model aModel) {
+    public void updateModelDisplay(Model aModel) {
+        updateModelDisplay(aModel, null);
+    }
+    /**
+     * Update display of passed in model, optionally recreating display geometry and applying preferences
+     * @param aModel
+     * @param checkRecreateGeometry : whether to try to sync up geometry with OpenSim objects underneath
+     *  This excludes transforms since these are obtained from the system on the fly.
+     */
+   public void updateModelDisplay(Model aModel, OpenSimObject specificObject) {
       if (!isGraphicsAvailable()) return;
       lockDrawingSurfaces(true);
+      if (specificObject!=null)
+            mapModelsToVisuals.get(aModel).updateObjectDisplay(specificObject);
       mapModelsToVisuals.get(aModel).updateModelDisplay(aModel);
       lockDrawingSurfaces(false);
       repaintAll();
