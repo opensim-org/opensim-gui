@@ -21,6 +21,7 @@ import vtk.vtkActor;
 import vtk.vtkOBJReader;
 import vtk.vtkPolyData;
 import vtk.vtkPolyDataMapper;
+import vtk.vtkProp3D;
 import vtk.vtkTransform;
 import vtk.vtkTransformPolyDataFilter;
 
@@ -42,7 +43,9 @@ public class DisplayGeometryFactory {
     }
     public static vtkActor createGeometryDisplayer(VisibleObject visibleObject, String modelPath) {
         vtkActor attachmentRep = null;
-        for(int gc=0; gc<visibleObject.countGeometry(); gc++){
+        int numGeometryPieces = visibleObject.countGeometry();
+        //assert(numGeometryPieces<= 1);
+        for(int gc=0; gc< numGeometryPieces; gc++){
             Geometry g = visibleObject.getGeometry(gc);
             AnalyticGeometry ag=null;
             ag = AnalyticGeometry.dynamic_cast(g);
@@ -50,7 +53,7 @@ public class DisplayGeometryFactory {
                 vtkPolyData analyticPolyData = AnalyticGeometryDisplayer.getPolyData(ag);
                 attachmentRep= createActorForPolyData(analyticPolyData, visibleObject);
                 attachmentRep.GetProperty().SetRepresentationToWireframe();
-                //attachmentRep.GetProperty().SetOpacity(0.3);
+                
             } else {  // Contact geometry
                 PolyhedralGeometry pg = PolyhedralGeometry.dynamic_cast(g);
                 if (pg !=null){
@@ -64,7 +67,6 @@ public class DisplayGeometryFactory {
                     attachmentRep= createActorForPolyData(meshPoly, visibleObject);
                     // Always wireframe wrapping and contact geometry for now
                     attachmentRep.GetProperty().SetRepresentationToWireframe();
-                    //attachmentRep.GetProperty().SetOpacity(0.3);
                 }
             }
         } //for
@@ -118,4 +120,7 @@ public class DisplayGeometryFactory {
         }
     }
 
+    static void updateFromProperties(vtkProp3D prop3D, VisibleObject visibleObject) {
+        prop3D.Modified();
+    }
 }

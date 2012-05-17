@@ -631,8 +631,6 @@ public class opensimModelJNI {
   public final static native void Storage_setInDegrees(long jarg1, Storage jarg1_, boolean jarg2);
   public final static native int Storage_getData__SWIG_0(long jarg1, Storage jarg1_, int jarg2, int jarg3, long jarg4);
   public final static native int Storage_getData__SWIG_1(long jarg1, Storage jarg1_, int jarg2, int jarg3, int jarg4, long jarg5);
-  public final static native int Storage_getData__SWIG_2(long jarg1, Storage jarg1_, int jarg2, int jarg3, int jarg4, long jarg5);
-  public final static native int Storage_getData__SWIG_3(long jarg1, Storage jarg1_, int jarg2, int jarg3, long jarg4);
   public final static native int Storage_getDataAtTime__SWIG_0(long jarg1, Storage jarg1_, double jarg2, int jarg3, long jarg4);
   public final static native int Storage_getDataAtTime__SWIG_1(long jarg1, Storage jarg1_, double jarg2, int jarg3, long jarg4);
   public final static native int Storage_getDataAtTime__SWIG_2(long jarg1, Storage jarg1_, double jarg2, int jarg3, long jarg4, ArrayDouble jarg4_);
@@ -5490,6 +5488,7 @@ public class opensimModelJNI {
   public final static native double OpenSimContext_getTime(long jarg1, OpenSimContext jarg1_);
   public final static native void OpenSimContext_getTransformAsDouble16(long jarg1, double[] jarg2);
   public final static native void OpenSimContext_setDefaultsFromState(long jarg1, OpenSimContext jarg1_);
+  public final static native void OpenSimContext_recreateSystemKeepStage(long jarg1, OpenSimContext jarg1_);
   public final static native void OpenSimContext_realizePosition(long jarg1, OpenSimContext jarg1_);
   public final static native void OpenSimContext_realizeVelocity(long jarg1, OpenSimContext jarg1_);
   public final static native void delete_OpenSimContext(long jarg1);

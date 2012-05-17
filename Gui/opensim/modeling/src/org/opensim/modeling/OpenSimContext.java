@@ -341,6 +341,10 @@ public class OpenSimContext extends OpenSimObject {
     opensimModelJNI.OpenSimContext_setDefaultsFromState(swigCPtr, this);
   }
 
+  public void recreateSystemKeepStage() {
+    opensimModelJNI.OpenSimContext_recreateSystemKeepStage(swigCPtr, this);
+  }
+
   public void realizePosition() {
     opensimModelJNI.OpenSimContext_realizePosition(swigCPtr, this);
   }

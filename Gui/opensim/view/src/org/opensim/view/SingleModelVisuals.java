@@ -55,6 +55,7 @@ import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PathActuator;
 import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.VisibleObject;
+import org.opensim.modeling.WrapObject;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 import vtk.vtkActor;
@@ -842,14 +843,15 @@ public class SingleModelVisuals {
         vtkProp3D prop3D = mapObject2VtkObjects.get(specificObject);
         if (prop3D!= null){
             if (specificObject instanceof Body){
-                ((BodyDisplayer)prop3D).applyColorsFromModel();
-                ((BodyDisplayer)prop3D).applyDisplayPreferences();
+                ((BodyDisplayer)prop3D).updateFromProperties();
             }
             else if (specificObject instanceof DisplayGeometry){
-                ((DisplayGeometryDisplayer)prop3D).applyAttributesToActor();
+                ((DisplayGeometryDisplayer)prop3D).applyAttributesAndTransformToActor();
                 ((DisplayGeometryDisplayer)prop3D).applyDisplayPreferenceToActor();
             }
-            
+            else if (specificObject instanceof WrapObject ){
+                DisplayGeometryFactory.updateFromProperties(prop3D, specificObject.getDisplayer());
+            }
         }
     }
 }

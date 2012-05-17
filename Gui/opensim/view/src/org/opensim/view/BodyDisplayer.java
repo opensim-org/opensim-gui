@@ -118,11 +118,6 @@ public class BodyDisplayer extends vtkAssembly
       //jointBFrame.GetProperty().SetLineStipplePattern(1);
       VisibleObject bodyVisibleObject = body.getDisplayer();
 
-      // Scale
-      double[] bodyScales = new double[3];
-      bodyVisibleObject.getScaleFactors(bodyScales);
-      double[] bodyRotTrans = new double[6];
-      bodyVisibleObject.getRotationsAndTranslationsAsArray6(bodyRotTrans);
       // Also optionally add outlineActor to this
       outlineActor.SetMapper(outlineMapper);
       outlineMapper.AddInputConnection(outlineFilter.GetOutputPort());
@@ -135,10 +130,6 @@ public class BodyDisplayer extends vtkAssembly
           String fullFileName = GeometryFileLocator.getInstance().getFullname(modelFilePath,gPiece.getGeometryFile(), false);
           if (fullFileName==null) continue;
           vtkActor boneActor=new DisplayGeometryDisplayer(gPiece, modelFilePath);
-          double[] currentScales=boneActor.GetScale();
-          for(int i=0; i<3; i++)
-              currentScales[i]*=bodyScales[i];
-          boneActor.SetScale(currentScales);
           //setTransformFromArray6(bodyRotTrans, (vtkTransform) boneActor.GetUserTransform());
           if (boneActor!=null){
             hasGeometry=true;
@@ -146,6 +137,8 @@ public class BodyDisplayer extends vtkAssembly
            mapGeometryToVtkObjects.put(gPiece, boneActor);
           }
       }
+      applyVisibleObjectScaleAndTransform(bodyVisibleObject);
+       
       if (hasGeometry){
          vtkProp3DCollection parts = GetParts();
          parts.InitTraversal();
@@ -180,6 +173,22 @@ public class BodyDisplayer extends vtkAssembly
       modelAssembly.AddPart(this);
     }
 
+    private void applyVisibleObjectScaleAndTransform(VisibleObject bodyVisibleObject) {
+        // Scale
+        double[] bodyScales = new double[3];
+        bodyVisibleObject.getScaleFactors(bodyScales);
+        double[] bodyRotTrans = new double[6];
+        bodyVisibleObject.getRotationsAndTranslationsAsArray6(bodyRotTrans);
+         /*
+          * Scale
+          */
+         SetScale(bodyScales);
+         // Transform
+         vtkTransform xform = new vtkTransform();
+         setTransformFromArray6(bodyRotTrans, xform);
+         SetUserTransform(xform);
+    }
+
     public void applyPositionAndOrientation(FrameActor frame, double[] orientation, double[] location) {
         frame.SetOrientation(0., 0., 0.);
         frame.RotateX(orientation[0]);
@@ -195,7 +204,7 @@ public class BodyDisplayer extends vtkAssembly
            return boneActor;
         boneActor = GeometryFactory.populateActorFromFile(boneFile);
         if (boneActor != null){
-          applyAttributesToActor(boneActor, gPiece);
+          applyAttributesAndTransformToActor(boneActor, gPiece);
           double[] currentScales=boneActor.GetScale();
           for(int i=0; i<3; i++)
               currentScales[i]*=bodyScales[i];
@@ -604,5 +613,15 @@ public class BodyDisplayer extends vtkAssembly
            gActor.applyDisplayPreferenceToActor();
        }
        // Now frames and COM
+    }
+
+    /**
+     * Update display of Body to correspond to latest Properties
+     */
+   void updateFromProperties() {
+        applyVisibleObjectScaleAndTransform(body.getDisplayer());
+        applyColorsFromModel();
+        applyDisplayPreferences();
+        SetCMLocationFromPropertyTable(true);
     }
 }

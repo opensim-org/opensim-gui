@@ -68,7 +68,7 @@ public class DisplayGeometryDisplayer extends vtkActor
         this.modelFilePath=modelFilePath;
         String boneFile = GeometryFileLocator.getInstance().getFullname(modelFilePath,displayGeometry.getGeometryFile(), false);
         GeometryFactory.populateActorFromFile(boneFile, this);
-        applyAttributesToActor();        
+        applyAttributesAndTransformToActor();        
     }
     
     public void setHidden(boolean toHide) {
@@ -139,7 +139,7 @@ public class DisplayGeometryDisplayer extends vtkActor
         return color;
     }
     
-    public void applyAttributesToActor() {        
+    public void applyAttributesAndTransformToActor() {        
         // Apply texture if any
         String textureFile = displayGeometry.getTextureFile();
         if (textureFile!=null && !textureFile.equalsIgnoreCase("")){
@@ -174,18 +174,18 @@ public class DisplayGeometryDisplayer extends vtkActor
             GetProperty().SetColor(dColor);
             color = new Color((float)dColor[0], (float)dColor[1], (float)dColor[2]);
         }
-        // Transform
-        double[] rotationsAndTranslations = new double[6];
-        displayGeometry.getRotationsAndTranslationsAsArray6(rotationsAndTranslations);
-        vtkTransform xform = new vtkTransform();
-        setTransformFromArray6(rotationsAndTranslations, xform);
-        SetUserTransform(xform);
         /*
          * Scale
          */
         double[] scales = new double[]{1., 1., 1.};
         displayGeometry.getScaleFactors(scales);
         SetScale(scales);
+        // Transform
+        double[] rotationsAndTranslations = new double[6];
+        displayGeometry.getRotationsAndTranslationsAsArray6(rotationsAndTranslations);
+        vtkTransform xform = new vtkTransform();
+        setTransformFromArray6(rotationsAndTranslations, xform);
+        SetUserTransform(xform);
         /**
          * Representation
          */

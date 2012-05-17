@@ -227,14 +227,6 @@ public class Storage extends StorageInterface {
     return opensimModelJNI.Storage_getData__SWIG_1(swigCPtr, this, aTimeIndex, aStateIndex, aN, SWIGTYPE_p_p_double.getCPtr(rData));
   }
 
-  public int getData(int aTimeIndex, int aStateIndex, int aN, SWIGTYPE_p_double rData) {
-    return opensimModelJNI.Storage_getData__SWIG_2(swigCPtr, this, aTimeIndex, aStateIndex, aN, SWIGTYPE_p_double.getCPtr(rData));
-  }
-
-  public int getData(int aTimeIndex, int aN, SWIGTYPE_p_p_double rData) {
-    return opensimModelJNI.Storage_getData__SWIG_3(swigCPtr, this, aTimeIndex, aN, SWIGTYPE_p_p_double.getCPtr(rData));
-  }
-
   public int getDataAtTime(double aTime, int aN, SWIGTYPE_p_p_double rData) {
     return opensimModelJNI.Storage_getDataAtTime__SWIG_0(swigCPtr, this, aTime, aN, SWIGTYPE_p_p_double.getCPtr(rData));
   }

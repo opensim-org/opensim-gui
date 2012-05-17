@@ -28,6 +28,7 @@
  */
 package org.opensim.view.nodes;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.Action;
 import org.openide.nodes.Children;
@@ -44,7 +45,6 @@ import org.opensim.view.ObjectGenericReviewAction;
 import org.opensim.view.pub.ViewDB;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Model;
-import org.opensim.utils.Vec3;
 
 /**
  *
@@ -98,7 +98,7 @@ public class OpenSimObjectNode extends OpenSimNode {
        else if (apType.equalsIgnoreCase("Vec3")){
             nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
                 String.class,
-                "toString",//mapPropertyEnumToGetters.get(currentPropType),
+                "getPropertyAsString",//mapPropertyEnumToGetters.get(currentPropType),
                 "setValueVec3FromString");//mapPropertyEnumToSetters.get(currentPropType));
             nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
             nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
@@ -114,7 +114,7 @@ public class OpenSimObjectNode extends OpenSimNode {
        else { // fall through, unsupported for now
            nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
                 String.class,
-                "toString",//mapPropertyEnumToGetters.get(currentPropType),
+                "getPropertyAsString",//mapPropertyEnumToGetters.get(currentPropType),
                 null);//mapPropertyEnumToSetters.get(currentPropType));
             nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
             nextNodeProp.setValue("suppressCustomEditor", Boolean.FALSE);
@@ -127,17 +127,24 @@ public class OpenSimObjectNode extends OpenSimNode {
         AbstractProperty ap = obj.getPropertyByIndex(p);
         String apType = ap.getTypeName();
         if (apType.equalsIgnoreCase("double")){
-            nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
-                String.class,
-                "toString",//mapPropertyEnumToGetters.get(currentPropType),
-                "setValueDoubleListFromString");//mapPropertyEnumToSetters.get(currentPropType));
+            if (ap.getName().toLowerCase().contains("color")){
+                nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
+                    Color.class,
+                    "getPropertyDoubleListAsColor",//mapPropertyEnumToGetters.get(currentPropType),
+                    "setValueDoubleListFromColor");
+            }
+            else
+                nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
+                    String.class,
+                    "getPropertyAsString",//mapPropertyEnumToGetters.get(currentPropType),
+                    "setValueDoubleListFromString");//mapPropertyEnumToSetters.get(currentPropType));
             nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
             nextNodeProp.setValue("suppressCustomEditor", Boolean.FALSE);
        }
        else if (apType.equalsIgnoreCase("Transform")){
             nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
                 String.class,
-                "toString",//mapPropertyEnumToGetters.get(currentPropType),
+                "getPropertyAsString",//mapPropertyEnumToGetters.get(currentPropType),
                 "setValueTransformFromString");//mapPropertyEnumToSetters.get(currentPropType));
             nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
             nextNodeProp.setValue("suppressCustomEditor", Boolean.FALSE);
@@ -145,7 +152,7 @@ public class OpenSimObjectNode extends OpenSimNode {
        else { // fall through, unexpected, should handle arrays of strings
            nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
                 String.class,
-                "toString",//mapPropertyEnumToGetters.get(currentPropType),
+                "getPropertyAsString",//mapPropertyEnumToGetters.get(currentPropType),
                 null);//mapPropertyEnumToSetters.get(currentPropType));
             nextNodeProp.setValue("canEditAsText", Boolean.FALSE);
             nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
