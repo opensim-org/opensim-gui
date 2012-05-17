@@ -1,11 +1,14 @@
 package org.opensim.view.nodes;
 
+import java.util.Vector;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.ExplorerTopComponent;
+import org.opensim.view.ObjectsRenamedEvent;
+import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 
 /**
@@ -67,6 +70,11 @@ public class ObjectNameEditor {
     }
     private void handleNameChange(final String oldValue, final String v, boolean supportUndo) {
         ViewDB.getInstance().updateModelDisplay(model);
+        Vector<OpenSimObject> objs = new Vector<OpenSimObject>(1);
+        objs.add(obj);
+        ObjectsRenamedEvent evnt = new ObjectsRenamedEvent(this, model, objs);
+        OpenSimDB.getInstance().setChanged();
+        OpenSimDB.getInstance().notifyObservers(evnt);
         node.refreshNode();
         if (supportUndo) {
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
