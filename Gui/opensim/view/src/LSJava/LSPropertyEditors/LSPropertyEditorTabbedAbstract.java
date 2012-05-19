@@ -30,18 +30,24 @@ import  javax.swing.event.ChangeEvent;
 import  java.util.Observer;
 import  java.util.Observable;
 
+import  org.openide.explorer.ExplorerManager;
 import  org.opensim.view.ModelWindowVTKTopComponent;
+import  org.opensim.view.ExplorerTopComponent;
 import  org.opensim.view.editors.ObjectEditDialogMaker;
-import  org.opensim.view.nodes.OpenSimObjectNode;
 import  org.opensim.view.ObjectDisplayColorAction;
 import  org.opensim.view.ObjectDisplayShowHideBaseAction;
 import  org.opensim.view.pub.ViewDB;
 import  org.opensim.view.ModelEvent;
 import  org.opensim.view.pub.OpenSimDB;
+import  org.opensim.view.nodes.OpenSimObjectNode;
+import  org.opensim.view.nodes.OneBodyNode;
+import  org.opensim.view.nodes.OneJointNode;
+import  org.openide.nodes.Node;
 import  org.opensim.utils.TheApp;
 
 import  org.opensim.modeling.OpenSimObject;
 import  org.opensim.modeling.Model;
+
 
 //-----------------------------------------------------------------------------
 public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements ChangeListener, Observer
@@ -138,6 +144,45 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
       // Tab layout defaults to JTabbedPane.WRAP_TAB_LAYOUT.  Otherwise use JTabbedPane.SCROLL_TAB_LAYOUT. 
       myJTabbedPane.setTabLayoutPolicy( tabLayoutPolicyType ); 
    } 
+
+
+   //-------------------------------------------------------------------------
+   public static OpenSimObjectNode  GetSelectedOpenSimObjectNodeInOpenSimExplorerOrNull( )
+   {
+      ExplorerTopComponent explorerTopComponentTree   = ExplorerTopComponent.findInstance();
+      Node[]    arrayOfSelectedNodesInOpenSimExplorer = (explorerTopComponentTree==null) ? null : explorerTopComponentTree.getExplorerManager().getSelectedNodes();
+      
+      // Currently cannot support multiple-selection by user.
+      if( arrayOfSelectedNodesInOpenSimExplorer != null  &&  arrayOfSelectedNodesInOpenSimExplorer.length == 1 ) 
+      {
+         Node selectedNode = arrayOfSelectedNodesInOpenSimExplorer[ 0 ];
+         if( selectedNode instanceof OpenSimObjectNode ) 
+            return (OpenSimObjectNode)selectedNode;
+      }
+      return null;
+   }
+
+   //-------------------------------------------------------------------------
+   public static OneBodyNode  GetSelectedOneBodyNodeInOpenSimExplorerOrNull( )
+   {
+      OpenSimObjectNode osimObjectNode = LSPropertyEditorTabbedAbstract.GetSelectedOpenSimObjectNodeInOpenSimExplorerOrNull();
+      return (osimObjectNode instanceof OneBodyNode) ? (OneBodyNode)osimObjectNode : null;
+   }
+
+   //-------------------------------------------------------------------------
+   public static OneJointNode  GetSelectedOneJointNodeInOpenSimExplorerOrNull( )
+   {
+      OpenSimObjectNode osimObjectNode = LSPropertyEditorTabbedAbstract.GetSelectedOpenSimObjectNodeInOpenSimExplorerOrNull();
+      return (osimObjectNode instanceof OneJointNode) ? (OneJointNode)osimObjectNode : null;
+   }
+
+
+   //-------------------------------------------------------------------------
+   public static ModelWindowVTKTopComponent  GetCurrentModelWindowVTKTopComponent( )
+   {
+      return ViewDB.getInstance().getCurrentModelWindow();
+   }
+
 
 
    //----------------------------------------------------------------------------- 
@@ -314,7 +359,7 @@ public abstract class LSPropertyEditorTabbedAbstract extends LSDialog implements
    private   int            GetNumberOfTabbedPaneTabs( )                    { return myJTabbedPane == null ?  0 : myJTabbedPane.getTabCount(); }
    private   boolean        IsTabbedPaneIndexInRange( int tabIndex )        { return myJTabbedPane == null ? false : tabIndex < this.GetNumberOfTabbedPaneTabs(); }
    protected int            GetSelectedTabbedPaneIndex( )                   { return myJTabbedPane == null ? -1 : myJTabbedPane.getSelectedIndex(); }
-   private   boolean        SetSelectedTabbedPaneFromIndex( int tabIndex )  { boolean okIndex = this.IsTabbedPaneIndexInRange(tabIndex);  if(okIndex) myJTabbedPane.setSelectedIndex(tabIndex);  return okIndex; } 
+   public    boolean        SetSelectedTabbedPaneFromIndex( int tabIndex )  { boolean okIndex = this.IsTabbedPaneIndexInRange(tabIndex);  if(okIndex) myJTabbedPane.setSelectedIndex(tabIndex);  return okIndex; } 
    protected boolean        SetSelectedTabbedPaneFromPriorUserSelection( )  
    { 
        int priorTabIndex = this.GetPriorUserSelectedTabbedPaneIndexVirtualFunction();
