@@ -91,7 +91,7 @@ public class LSPropertyTalkToSimbody
    //----------------------------------------------------------------------------- 
    private static OpenSimObjectNode  GetRootNodeAsOpenSimObjectNodeOrReturnNullIfNoMatch( Object objectToMatch )
    {
-      ExplorerTopComponent explorerTopComponentTree = ExplorerTopComponent.findInstance();
+      ExplorerTopComponent explorerTopComponentTree    = ExplorerTopComponent.findInstance();
       Node rootNode = explorerTopComponentTree == null ? null : explorerTopComponentTree.getExplorerManager().getRootContext();
       if( rootNode instanceof OpenSimNode  &&  objectToMatch != null )
       {
