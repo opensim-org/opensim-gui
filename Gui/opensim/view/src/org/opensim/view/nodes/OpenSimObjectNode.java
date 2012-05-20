@@ -44,6 +44,7 @@ import org.opensim.view.ObjectDisplayShowAction;
 import org.opensim.view.ObjectGenericReviewAction;
 import org.opensim.view.pub.ViewDB;
 import org.opensim.modeling.AbstractProperty;
+import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Model;
 
 /**
@@ -104,6 +105,15 @@ public class OpenSimObjectNode extends OpenSimNode {
             nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
        }
        else if (ap.isObjectProperty() && ap.size()==1){ // already know its not list, could be optional though
+           // Custom editor for geometry 
+           if (ap.getTypeName().toLowerCase().equalsIgnoreCase("geometrypath")){
+             nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
+                GeometryPath.class,
+                "getValueObjAsGeometryPath",//mapPropertyEnumToGetters.get(currentPropType),
+                "setValueObjFromGeometryPath");//mapPropertyEnumToSetters.get(currentPropType));              
+             nextNodeProp.setPropertyEditorClass(OpenSimGeometryPathEditor.class);
+           }
+           else
             nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
                 OpenSimObject.class,
                 "getValueObj",//mapPropertyEnumToGetters.get(currentPropType),

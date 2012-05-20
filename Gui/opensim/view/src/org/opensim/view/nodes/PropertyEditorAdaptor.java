@@ -6,6 +6,7 @@ import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayDouble;
+import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
@@ -54,7 +55,7 @@ import org.opensim.view.pub.ViewDB;
  */
 public class PropertyEditorAdaptor {
 
-    OpenSimObject obj; // Object being edited
+    OpenSimObject obj; // Object being edited or selected in navigator window
     AbstractProperty prop; // Property being edited
     OpenSimContext context = null; // Context object needed to recreate the system as needed, cached for speed
     Model model; // model to which obj belongs
@@ -188,6 +189,14 @@ public class PropertyEditorAdaptor {
         handlePropertyChange(oldObject, v, allowUndo);
     }
 
+    public GeometryPath getValueObjAsGeometryPath() {
+        OpenSimObject obj = getValueObj();
+        return GeometryPath.safeDownCast(obj);
+    }
+    
+    public void setValueObjFromGeometryPath(GeometryPath geometryPath) {
+        setValueObj(geometryPath, true);
+    }
     private void setValueDoubleListFromString(String aString, boolean allowUndo) {
         // Parse String into an array of doubles, check that it's the right size for prop then assign
         ArrayDouble d = new ArrayDouble();
@@ -266,6 +275,11 @@ public class PropertyEditorAdaptor {
                 }
 
                 @Override
+                public String getUndoPresentationName() {
+                    return "Undo "+prop.getName()+" change";
+                }
+
+                @Override
                 public void redo() throws CannotRedoException {
                     super.redo();
                     setValueDouble(v, true);
@@ -288,6 +302,11 @@ public class PropertyEditorAdaptor {
                 public void undo() throws CannotUndoException {
                     super.undo();
                     setValueString(oldValue, false);
+                }
+
+                @Override
+                public String getUndoPresentationName() {
+                    return "Undo "+prop.getName()+" change";
                 }
 
                 @Override
@@ -316,6 +335,11 @@ public class PropertyEditorAdaptor {
                 }
 
                 @Override
+                public String getUndoPresentationName() {
+                    return "Undo "+prop.getName()+" change";
+                }
+
+                @Override
                 public void redo() throws CannotRedoException {
                     super.redo();
                     setValueBool(v, true);
@@ -338,6 +362,11 @@ public class PropertyEditorAdaptor {
                 public void undo() throws CannotUndoException {
                     super.undo();
                     setValueInt(oldValue, false);
+                }
+
+                @Override
+                public String getUndoPresentationName() {
+                    return "Undo "+prop.getName()+" change";
                 }
 
                 @Override
@@ -369,6 +398,11 @@ public class PropertyEditorAdaptor {
                 }
 
                 @Override
+                public String getUndoPresentationName() {
+                    return "Undo "+prop.getName()+" change";
+                }
+
+                @Override
                 public void redo() throws CannotRedoException {
                     super.redo();
                     assignValueArrayDouble(v, true);
@@ -393,6 +427,11 @@ public class PropertyEditorAdaptor {
                 public void undo() throws CannotUndoException {
                     super.undo();
                     setValueVec3(oldValue, false);
+                }
+
+                @Override
+                public String getUndoPresentationName() {
+                    return "Undo "+prop.getName()+" change";
                 }
 
                 @Override
@@ -424,6 +463,11 @@ public class PropertyEditorAdaptor {
                 }
 
                 @Override
+                public String getUndoPresentationName() {
+                    return "Undo "+prop.getName()+" change";
+                }
+
+                @Override
                 public void redo() throws CannotRedoException {
                     super.redo();
                     assignValueTransform(v, true);
@@ -446,6 +490,11 @@ public class PropertyEditorAdaptor {
                 public void undo() throws CannotUndoException {
                     super.undo();
                     setValueObj(oldObject, false);
+                }
+
+                @Override
+                public String getUndoPresentationName() {
+                    return "Undo "+prop.getName()+" change";
                 }
 
                 @Override
