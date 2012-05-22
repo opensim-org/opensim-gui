@@ -34,7 +34,8 @@ import  org.opensim.view.nodes.OpenSimObjectNode;
 import  org.opensim.view.pub.OpenSimDB;
 import  org.opensim.view.ExplorerTopComponent;
 import  org.openide.nodes.Node;
-import org.opensim.modeling.Property_Deprecated;
+import  org.opensim.modeling.AbstractProperty;
+import  org.opensim.modeling.PropertyHelper;
 
 
 //-----------------------------------------------------------------------------
@@ -104,89 +105,45 @@ public class LSPropertyTalkToSimbody
   
 
    //-------------------------------------------------------------------------
-   public Property_Deprecated  GetOpenSimObjectPropertyValueFromPropertyName( String propertyName ) 
+   public AbstractProperty  GetOpenSimObjectPropertyValueFromPropertyName( String propertyName ) 
    {
-      PropertySet propertySet = this.GetOpenSimObject().getPropertySet();
-      if( propertySet != null )
-      {
-         try{ return propertySet.get( propertyName );
-         } catch( IOException ex ) { ex.printStackTrace(); }
-      }
-      return null;
+      AbstractProperty abstractProperty = this.GetOpenSimObject().getPropertyByName( propertyName );
+      return abstractProperty;
    }
 
    
    //-------------------------------------------------------------------------
    public double  GetOpenSimObjectPropertyValueAsDoubleFromPropertyName( String propertyName ) 
    {
-      Property_Deprecated openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
-      return openSimObjectProperty==null ? 0.0 : openSimObjectProperty.getValueDbl();
+      AbstractProperty openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
+      return openSimObjectProperty==null ? 0.0 : PropertyHelper.getValueDouble( openSimObjectProperty );
    }
    //-------------------------------------------------------------------------
    public void  SetOpenSimObjectPropertyValueAsDoubleForPropertyName( String propertyName, double valueToSet ) 
    {
-      Property_Deprecated openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
-      if( openSimObjectProperty != null ) openSimObjectProperty.setValue( valueToSet );
+      AbstractProperty openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
+      if( openSimObjectProperty != null ) PropertyHelper.setValueDouble( valueToSet, openSimObjectProperty ); 
       this.RecreateOpenSimAPIModelAfterPropertyChange();
-   }
-
-
-   //-------------------------------------------------------------------------
-   public ArrayDouble  GetOpenSimObjectPropertyValueAsArrayDoubleFromPropertyName( String propertyName ) 
-   {
-      Property_Deprecated openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
-      return openSimObjectProperty==null ? null : openSimObjectProperty.getValueDblArray();
-   }
-   //-------------------------------------------------------------------------
-   public double[]  GetOpenSimObjectPropertyValueAsArrayDoubleNFromPropertyName( String propertyName, int expectedNumberOfElements ) 
-   {
-      double retValue[] = new double[ expectedNumberOfElements ];  // default initialization is 0.0
-      ArrayDouble arrayDouble = this.GetOpenSimObjectPropertyValueAsArrayDoubleFromPropertyName( propertyName ); 
-      int actualNumberOfElements = arrayDouble==null ? 0 : arrayDouble.getSize();
-      for( int i=0;  i < actualNumberOfElements;  i++ ) retValue[i] = arrayDouble.getitem(i);
-      return retValue;
-   }
-   //-------------------------------------------------------------------------
-   public double[]  GetOpenSimObjectPropertyValueAsArrayDouble3FromPropertyName( String propertyName )  
-   { 
-      return this.GetOpenSimObjectPropertyValueAsArrayDoubleNFromPropertyName( propertyName, 3 ); 
-   }  
-   //-------------------------------------------------------------------------
-   public void  SetOpenSimObjectPropertyValueAsArrayDoubleFromPropertyName( String propertyName, ArrayDouble arrayDouble )
-   {
-      Property_Deprecated openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
-      if( openSimObjectProperty != null  &&  arrayDouble != null ) openSimObjectProperty.setValue( arrayDouble );
-      this.RecreateOpenSimAPIModelAfterPropertyChange();
-   }
-   //-------------------------------------------------------------------------
-   public void  SetOpenSimObjectPropertyValueAsArrayDoubleNFromPropertyName( String propertyName, double valuesToSet[] ) 
-   {
-      int numberOfElements = valuesToSet == null ? 0 : valuesToSet.length;
-      if( numberOfElements > 0 )
-      {
-         ArrayDouble arrayDouble = new ArrayDouble( 0.0, numberOfElements );
-	 for( int i=0;  i<numberOfElements;  i++ ) arrayDouble.setitem( i, valuesToSet[i] );
-         this.SetOpenSimObjectPropertyValueAsArrayDoubleFromPropertyName( propertyName, arrayDouble );
-      }
    }
 
 
    //-------------------------------------------------------------------------
    public double  GetOpenSimObjectPropertyValueAsArrayDoubleElementFromPropertyName( String propertyName, int elementNumber )
    {
-      ArrayDouble arrayDouble = this.GetOpenSimObjectPropertyValueAsArrayDoubleFromPropertyName( propertyName ); 
-      boolean isValid = ( arrayDouble != null  &&  elementNumber < arrayDouble.getSize() );
-      return isValid ? arrayDouble.getitem(elementNumber) : 0.0;
+      double retValue = 0.0;
+      AbstractProperty openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
+      if( openSimObjectProperty != null  &&  elementNumber >= openSimObjectProperty.getMinListSize()  &&  elementNumber < openSimObjectProperty.getMaxListSize() )
+         retValue = PropertyHelper.getValueDouble( openSimObjectProperty, elementNumber );
+      return retValue;
    }
    //-------------------------------------------------------------------------
    public void  SetOpenSimObjectPropertyValueAsArrayDoubleElementForPropertyName( String propertyName, int elementNumber, double valueToSet )
    {
-      ArrayDouble arrayDouble = this.GetOpenSimObjectPropertyValueAsArrayDoubleFromPropertyName( propertyName ); 
-      boolean isValid = (arrayDouble != null  &&  elementNumber < arrayDouble.getSize() );
-      if( isValid )
+      AbstractProperty openSimObjectProperty = this.GetOpenSimObjectPropertyValueFromPropertyName( propertyName );
+      if( openSimObjectProperty != null  &&  elementNumber >= openSimObjectProperty.getMinListSize()  &&  elementNumber < openSimObjectProperty.getMaxListSize() )
       {
-         arrayDouble.setitem( elementNumber, valueToSet );
-	 this.SetOpenSimObjectPropertyValueAsArrayDoubleFromPropertyName( propertyName, arrayDouble );
+         PropertyHelper.setValueDouble(  valueToSet, openSimObjectProperty, elementNumber );
+         this.RecreateOpenSimAPIModelAfterPropertyChange();
       }
    }
 
