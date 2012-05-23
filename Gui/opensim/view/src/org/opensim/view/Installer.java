@@ -49,6 +49,7 @@ import org.opensim.view.editors.MuscleEditorTopComponent;
 import javax.swing.JPopupMenu;
 import org.opensim.utils.ApplicationState;
 import org.opensim.view.actions.ApplicationExit;
+import org.opensim.view.markerEditor.MarkerEditorTopComponent;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.view.motions.MotionsDBDescriptor;
 import org.opensim.view.pub.ViewDBDescriptor;
@@ -73,7 +74,7 @@ public class Installer extends ModuleInstall {
 
     public void restored() {
         super.restored();
-        System.setProperty ("netbeans.buildnumber", "3.0.0.dev1"); // Should get that from JNI but sometimes doesn't work'
+        System.setProperty ("netbeans.buildnumber", "3.0.beta1"); // Should get that from JNI but sometimes doesn't work'
         try {
              // Put your startup code here.
             UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
@@ -84,6 +85,7 @@ public class Installer extends ModuleInstall {
                // which is necessary to allow moving muscle points even if the muscle editor top component is not shown
                // Note that this may cause a warning exception "Cannot find MuscleEditor component" to be shown... just ignore it.
                MuscleEditorTopComponent.findInstance();
+               MarkerEditorTopComponent.findInstance();
             }});
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
@@ -128,7 +130,6 @@ public class Installer extends ModuleInstall {
             }
         }
         PropertyEditorManager.registerEditor(OpenSimObject.class, OpenSimObjectEditor.class);
-        PropertyEditor findEditor = PropertyEditorManager.findEditor(OpenSimObject.class);
     }
     /**
      * restorePrefs is primarily used for the first time around where there are no pref values
