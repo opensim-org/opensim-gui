@@ -269,4 +269,8 @@ public class OpenSimObject {
     opensimModelJNI.OpenSimObject_RenameType(oldName, newName);
   }
 
+  public static ArrayStr getFunctionClassNames() {
+    return new ArrayStr(opensimModelJNI.OpenSimObject_getFunctionClassNames(), true);
+  }
+
 }

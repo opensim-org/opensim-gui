@@ -321,6 +321,7 @@ public class opensimModelJNI {
   public final static native long OpenSimObject_SafeCopy(long jarg1, OpenSimObject jarg1_);
   public final static native void OpenSimObject_RegisterType(long jarg1, OpenSimObject jarg1_);
   public final static native void OpenSimObject_RenameType(String jarg1, String jarg2);
+  public final static native long OpenSimObject_getFunctionClassNames();
   public final static native long ObjectGroup_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void ObjectGroup_assign(long jarg1, ObjectGroup jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String ObjectGroup_getClassName();
