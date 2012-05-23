@@ -30,7 +30,9 @@ import org.opensim.modeling.AnalyticEllipsoid;
 import org.opensim.modeling.AnalyticGeometry;
 import org.opensim.modeling.AnalyticSphere;
 import org.opensim.modeling.AnalyticTorus;
+import org.opensim.modeling.DisplayGeometry;
 import org.opensim.modeling.Geometry;
+import org.opensim.modeling.VisibleObject;
 import vtk.vtkActor;
 import vtk.vtkClipPolyData;
 import vtk.vtkCylinderSource;
@@ -47,6 +49,18 @@ public class AnalyticGeometryDisplayer extends vtkActor {
     private static int RESOLUTION_PHI=32;
     private static int RESOLUTION_THETA=32;
     private static int CYL_RESOLUTION=32;
+    private AnalyticGeometry ag;
+    private VisibleObject vo;
+    /** 
+     * Displayer for Wrap Geometry
+     * @param ag
+     * @param visibleObject 
+     */
+    AnalyticGeometryDisplayer(AnalyticGeometry ag, VisibleObject visibleObject) {
+        this.ag = ag;
+        this.vo = visibleObject;
+        updateFromProperties();
+     }
 
     /**
      * Convert AnalyticGeometry object passed in to the corresponding vtk polyhedral representation.
@@ -177,4 +191,53 @@ public class AnalyticGeometryDisplayer extends vtkActor {
       
       return clipper.GetOutput();
    }
+    
+    private void addPolyDataToActorApplyProperties(final vtkPolyData meshPoly, final VisibleObject visibleObject) {
+        // Move rep to proper location
+        vtkTransformPolyDataFilter mover = new vtkTransformPolyDataFilter();
+        vtkTransform moverTransform = new vtkTransform();
+        double[] matRows = new double[16];
+        visibleObject.getTransformAsDouble16(matRows);
+        moverTransform.SetMatrix(SingleModelVisuals.convertTransformToVtkMatrix4x4(matRows));
+        mover.SetInput(meshPoly);
+        mover.SetTransform(moverTransform);
+        
+        // Mapper
+        vtkPolyDataMapper mapper = new vtkPolyDataMapper();
+        mapper.SetInput(mover.GetOutput());
+        SetMapper(mapper);
+        
+        // Color/shading
+        GetProperty().SetColor(new double[]{0., 1., 1.});
+    }
+
+    /**
+     * Apply user display preference (None, wireframe, shading)
+     */
+    private void applyDisplayPrefs(VisibleObject objectDisplayer) {
+
+         // Show vs. Hide
+        if (objectDisplayer.getDisplayPreference() == DisplayGeometry.DisplayPreference.None ||
+                DisplayGeometryFactory.isDisplayContactGeometry()==false){
+            SetVisibility(0);
+            return;
+        }
+        SetVisibility(1);
+        if (objectDisplayer.getDisplayPreference().swigValue()==DisplayGeometry.DisplayPreference.WireFrame.swigValue())
+            GetProperty().SetRepresentationToWireframe();
+        else {
+
+            if (objectDisplayer.getDisplayPreference() == DisplayGeometry.DisplayPreference.FlatShaded)
+                GetProperty().SetInterpolationToFlat();
+            else
+                GetProperty().SetRepresentationToWireframe();
+        }
+    }
+    
+   void updateFromProperties() {
+        vtkPolyData polyData = getPolyData(ag);
+        addPolyDataToActorApplyProperties(polyData, vo);
+        applyDisplayPrefs(vo);
+        Modified();
+    }
 }

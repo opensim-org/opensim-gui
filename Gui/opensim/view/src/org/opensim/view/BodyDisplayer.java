@@ -196,25 +196,7 @@ public class BodyDisplayer extends vtkAssembly
         frame.RotateZ(orientation[2]);
         frame.SetPosition(location);
     }
-/*
-    private vtkActor createOneDisplayGeometry(final String modelFilePath, final double[] bodyScales, final double[] bodyRotTrans, final DisplayGeometry gPiece) {
-        String boneFile = GeometryFileLocator.getInstance().getFullname(modelFilePath,gPiece.getGeometryFile(), false);
-        vtkActor boneActor = null;
-        if (boneFile==null)
-           return boneActor;
-        boneActor = GeometryFactory.populateActorFromFile(boneFile);
-        if (boneActor != null){
-          applyAttributesAndTransformToActor(boneActor, gPiece);
-          double[] currentScales=boneActor.GetScale();
-          for(int i=0; i<3; i++)
-              currentScales[i]*=bodyScales[i];
-          boneActor.SetScale(currentScales);
-          setTransformFromArray6(bodyRotTrans, (vtkTransform) boneActor.GetUserTransform());
-          // Compose 
-        }
-        return boneActor;
-    }
-*/          
+         
     public vtkActor getBodyAxes() {
         return bodyAxes;
     }

@@ -31,7 +31,7 @@ import vtk.vtkTransformPolyDataFilter;
  */
 public class DisplayGeometryFactory {
 
-    static boolean displayContactGeometry = false;
+    private static boolean displayContactGeometry = false;
 
     static void updateDisplayPreference() {
         String saved = Preferences.userNodeForPackage(TheApp.class).get("Display Contact Geometry", "Off");
@@ -45,14 +45,12 @@ public class DisplayGeometryFactory {
         vtkActor attachmentRep = null;
         int numGeometryPieces = visibleObject.countGeometry();
         //assert(numGeometryPieces<= 1);
-        for(int gc=0; gc< numGeometryPieces; gc++){
+        for(int gc=0; gc< 1; gc++){
             Geometry g = visibleObject.getGeometry(gc);
             AnalyticGeometry ag=null;
             ag = AnalyticGeometry.dynamic_cast(g);
             if (ag != null){
-                vtkPolyData analyticPolyData = AnalyticGeometryDisplayer.getPolyData(ag);
-                attachmentRep= createActorForPolyData(analyticPolyData, visibleObject);
-                attachmentRep.GetProperty().SetRepresentationToWireframe();
+                attachmentRep= new AnalyticGeometryDisplayer(ag, visibleObject);
                 
             } else {  // Contact geometry
                 PolyhedralGeometry pg = PolyhedralGeometry.dynamic_cast(g);
@@ -71,7 +69,6 @@ public class DisplayGeometryFactory {
             }
         } //for
         
-        applyDisplayPrefs(visibleObject,attachmentRep);
         return attachmentRep;
     }
     
@@ -96,7 +93,7 @@ public class DisplayGeometryFactory {
         return attachmentRep;
     }
     
-        /**
+   /**
      * Apply user display preference (None, wireframe, shading)
      */
     private static void applyDisplayPrefs(VisibleObject objectDisplayer, vtkActor objectRep) {
@@ -104,7 +101,7 @@ public class DisplayGeometryFactory {
         if (objectRep==null) return;
         // Show vs. Hide
         if (objectDisplayer.getDisplayPreference() == DisplayGeometry.DisplayPreference.None ||
-                displayContactGeometry==false){
+                isDisplayContactGeometry()==false){
             objectRep.SetVisibility(0);
             return;
         }
@@ -122,5 +119,12 @@ public class DisplayGeometryFactory {
 
     static void updateFromProperties(vtkProp3D prop3D, VisibleObject visibleObject) {
         prop3D.Modified();
+    }
+
+    /**
+     * @return the displayContactGeometry
+     */
+    public static boolean isDisplayContactGeometry() {
+        return displayContactGeometry;
     }
 }

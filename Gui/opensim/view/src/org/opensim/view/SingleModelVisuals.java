@@ -197,10 +197,6 @@ public class SingleModelVisuals {
                 if (Marker.safeDownCast(owner)!=null){
                     
                     markersRep.addMarker(Marker.safeDownCast(owner));
-                    /*vtkLineSource markerLine = new vtkLineSource();
-                    mapMarkers2Lines.put(owner, markerLine);
-                    markerLinesVisible.put(owner, false);
-                    markerLinePolyData.AddInput(markerLine.GetOutput());*/
                     continue;
                 } else if (PathPoint.safeDownCast(owner)!=null||
                            ConditionalPathPoint.safeDownCast(owner)!=null){
@@ -850,7 +846,7 @@ public class SingleModelVisuals {
                 ((DisplayGeometryDisplayer)prop3D).applyDisplayPreferenceToActor();
             }
             else if (specificObject instanceof WrapObject ){
-                DisplayGeometryFactory.updateFromProperties(prop3D, specificObject.getDisplayer());
+                ((AnalyticGeometryDisplayer)prop3D).updateFromProperties();
             }
         }
     }
