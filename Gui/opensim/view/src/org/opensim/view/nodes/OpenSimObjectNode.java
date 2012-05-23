@@ -44,6 +44,7 @@ import org.opensim.view.ObjectDisplayShowAction;
 import org.opensim.view.ObjectGenericReviewAction;
 import org.opensim.view.pub.ViewDB;
 import org.opensim.modeling.AbstractProperty;
+import org.opensim.modeling.Function;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Model;
 
@@ -104,22 +105,8 @@ public class OpenSimObjectNode extends OpenSimNode {
             nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
             nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
        }
-       else if (ap.isObjectProperty() && ap.size()==1){ // already know its not list, could be optional though
-           // Custom editor for geometry 
-           if (ap.getTypeName().toLowerCase().equalsIgnoreCase("geometrypath")){
-             nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
-                GeometryPath.class,
-                "getValueObjAsGeometryPath",//mapPropertyEnumToGetters.get(currentPropType),
-                "setValueObjFromGeometryPath");//mapPropertyEnumToSetters.get(currentPropType));              
-             nextNodeProp.setPropertyEditorClass(OpenSimGeometryPathEditor.class);
-           }
-           else
-            nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
-                OpenSimObject.class,
-                "getValueObj",//mapPropertyEnumToGetters.get(currentPropType),
-                "setValueObj");//mapPropertyEnumToSetters.get(currentPropType));
-            nextNodeProp.setValue("canEditAsText", Boolean.FALSE);
-            nextNodeProp.setValue("suppressCustomEditor", Boolean.FALSE);
+       else if (ap.isObjectProperty() && ap.size()==1){             
+           nextNodeProp = createCustomNodePropertyAndEditor(ap, obj, model, nextNodeProp);
        }
        else { // fall through, unsupported for now
            nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
@@ -130,6 +117,33 @@ public class OpenSimObjectNode extends OpenSimNode {
             nextNodeProp.setValue("suppressCustomEditor", Boolean.FALSE);
        }
        return nextNodeProp;
+    }
+
+    private Reflection createCustomNodePropertyAndEditor(AbstractProperty ap, OpenSimObject obj, Model model, Reflection nextNodeProp) throws NoSuchMethodException {
+        // already know its not list, could be optional though
+        // Custom editor for geometry
+        if (ap.getTypeName().toLowerCase().equalsIgnoreCase("GeometryPath")){
+          nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
+             GeometryPath.class,
+             "getValueObjAsGeometryPath",//mapPropertyEnumToGetters.get(currentPropType),
+             "setValueObjFromGeometryPath");//mapPropertyEnumToSetters.get(currentPropType));              
+          nextNodeProp.setPropertyEditorClass(OpenSimGeometryPathEditor.class);
+        }
+        else if (ap.getTypeName().toLowerCase().equalsIgnoreCase("Function")){
+          nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
+             Function.class,
+             "getValueObjAsFunction",//mapPropertyEnumToGetters.get(currentPropType),
+             "setValueObjFromFunction");//mapPropertyEnumToSetters.get(currentPropType));              
+          nextNodeProp.setPropertyEditorClass(OpenSimFunctionEditor.class);
+        }
+        else 
+         nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
+             OpenSimObject.class,
+             "getValueObj",//mapPropertyEnumToGetters.get(currentPropType),
+             "setValueObj");//mapPropertyEnumToSetters.get(currentPropType));
+        nextNodeProp.setValue("canEditAsText", Boolean.FALSE);
+        nextNodeProp.setValue("suppressCustomEditor", Boolean.FALSE);
+        return nextNodeProp;
     }
 
     private Reflection createNodePropForOpenSimListProperty(OpenSimObject obj, int p, Model model) throws NoSuchMethodException {
@@ -174,9 +188,9 @@ public class OpenSimObjectNode extends OpenSimNode {
        PropertySupport.Reflection nextNodeProp = new PropertySupport.Reflection(new ObjectNameEditor(obj, model, this),
             String.class,
             "getName",
-            "setName");
+            null);
        nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
-       nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
+       nextNodeProp.setValue("suppressCustomEditor", Boolean.FALSE);
        return nextNodeProp;
    }
     public enum displayOption{Showable, Isolatable, Colorable};

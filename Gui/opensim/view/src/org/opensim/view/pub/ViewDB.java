@@ -689,7 +689,7 @@ public final class ViewDB extends Observable implements Observer {
            
        };
        if (allowUndo)
-            ExplorerTopComponent.getDefault().getUndoRedoManager().addEdit(auEdit);
+            ExplorerTopComponent.addUndoableEdit(auEdit);
 
        ApplyFunctionToActors(asm, new ActorFunctionApplier() {
          public void apply(vtkActor actor) { 

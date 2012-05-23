@@ -131,7 +131,7 @@ public class DisplayGeometryDisplayer extends vtkActor
             }
            
        };
-        ExplorerTopComponent.getDefault().getUndoRedoManager().addEdit(auEdit);
+        ExplorerTopComponent.addUndoableEdit(auEdit);
         color = newColor;
     }
     
@@ -270,7 +270,7 @@ public class DisplayGeometryDisplayer extends vtkActor
                 }
 
            };
-            ExplorerTopComponent.getDefault().getUndoRedoManager().addEdit(auEdit);
+            ExplorerTopComponent.addUndoableEdit(auEdit);
         }
         displayGeometry.setDisplayPreference(newPref);
         applyDisplayPreferenceToActor();
@@ -317,7 +317,7 @@ public class DisplayGeometryDisplayer extends vtkActor
                 }
 
            };
-            ExplorerTopComponent.getDefault().getUndoRedoManager().addEdit(auEdit);
+            ExplorerTopComponent.addUndoableEdit(auEdit);
         }
         ViewDB.getInstance().renderAll();
     }
