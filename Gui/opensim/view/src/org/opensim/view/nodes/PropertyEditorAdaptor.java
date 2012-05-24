@@ -63,6 +63,13 @@ public class PropertyEditorAdaptor {
     Model model; // model to which obj belongs
     OpenSimObjectNode node;
 
+    public PropertyEditorAdaptor(AbstractProperty prop, OpenSimObjectNode ownerNode) {
+        this.prop = prop;
+        this.model = ownerNode.getModelForNode();
+        this.context = OpenSimDB.getInstance().getContext(model);
+        this.obj = ownerNode.getOpenSimObject();
+        this.node = ownerNode;
+    }
     public PropertyEditorAdaptor(AbstractProperty prop, OpenSimObject obj, Model model, OpenSimObjectNode ownerNode) {
         this.prop = prop;
         this.context = OpenSimDB.getInstance().getContext(model);

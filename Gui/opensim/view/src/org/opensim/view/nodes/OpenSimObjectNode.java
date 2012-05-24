@@ -66,23 +66,23 @@ public class OpenSimObjectNode extends OpenSimNode {
         AbstractProperty ap = obj.getPropertyByIndex(p);
         String apType = ap.getTypeName();
         if (apType.equalsIgnoreCase("double")){
-            nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
+            nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, this),
                 getClassForTypeName(ap.getTypeName()),
-                "getValueDouble",//mapPropertyEnumToGetters.get(currentPropType),
-                "setValueDouble");//mapPropertyEnumToSetters.get(currentPropType));
+                "getValueDouble",
+                "setValueDouble");
             nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
             nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
        }
        else if (apType.equalsIgnoreCase("int")){
-            nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
+            nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, this),
                 getClassForTypeName(ap.getTypeName()),
-                "getValueInt",//mapPropertyEnumToGetters.get(currentPropType),
-                "setValueInt");//mapPropertyEnumToSetters.get(currentPropType));
+                "getValueInt",
+                "setValueInt");
              nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
              nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
        }
        else if (apType.equalsIgnoreCase("bool")){
-            nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
+            nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, this),
                 getClassForTypeName(ap.getTypeName()),
                 "getValueBool",//mapPropertyEnumToGetters.get(currentPropType),
                 "setValueBool");//mapPropertyEnumToSetters.get(currentPropType));
@@ -90,7 +90,7 @@ public class OpenSimObjectNode extends OpenSimNode {
             //nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
        }
        else if (apType.equalsIgnoreCase("string")){
-            nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
+            nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, this),
                 getClassForTypeName(ap.getTypeName()),
                 "getValueString",//mapPropertyEnumToGetters.get(currentPropType),
                 "setValueString");//mapPropertyEnumToSetters.get(currentPropType));
@@ -98,7 +98,7 @@ public class OpenSimObjectNode extends OpenSimNode {
             nextNodeProp.setValue("suppressCustomEditor", Boolean.FALSE);
        }
        else if (apType.equalsIgnoreCase("Vec3")){
-            nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
+            nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, this),
                 String.class,
                 "getPropertyAsString",//mapPropertyEnumToGetters.get(currentPropType),
                 "setValueVec3FromString");//mapPropertyEnumToSetters.get(currentPropType));
@@ -109,7 +109,7 @@ public class OpenSimObjectNode extends OpenSimNode {
            nextNodeProp = createCustomNodePropertyAndEditor(ap, obj, model, nextNodeProp);
        }
        else { // fall through, unsupported for now
-           nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
+           nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, this),
                 String.class,
                 "getPropertyAsString",//mapPropertyEnumToGetters.get(currentPropType),
                 null);//mapPropertyEnumToSetters.get(currentPropType));
@@ -123,21 +123,21 @@ public class OpenSimObjectNode extends OpenSimNode {
         // already know its not list, could be optional though
         // Custom editor for geometry
         if (ap.getTypeName().toLowerCase().equalsIgnoreCase("GeometryPath")){
-          nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
+          nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, this),
              GeometryPath.class,
              "getValueObjAsGeometryPath",//mapPropertyEnumToGetters.get(currentPropType),
              "setValueObjFromGeometryPath");//mapPropertyEnumToSetters.get(currentPropType));              
           nextNodeProp.setPropertyEditorClass(OpenSimGeometryPathEditor.class);
         }
         else if (ap.getTypeName().toLowerCase().equalsIgnoreCase("Function")){
-          nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
+          nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, this),
              Function.class,
              "getValueObjAsFunction",//mapPropertyEnumToGetters.get(currentPropType),
-             "setValueObjFromFunction");//mapPropertyEnumToSetters.get(currentPropType));              
+             null);//mapPropertyEnumToSetters.get(currentPropType));              
           nextNodeProp.setPropertyEditorClass(OpenSimFunctionEditor.class);
         }
         else 
-         nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
+         nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, this),
              OpenSimObject.class,
              "getValueObj",//mapPropertyEnumToGetters.get(currentPropType),
              "setValueObj");//mapPropertyEnumToSetters.get(currentPropType));
@@ -152,13 +152,13 @@ public class OpenSimObjectNode extends OpenSimNode {
         String apType = ap.getTypeName();
         if (apType.equalsIgnoreCase("double")){
             if (ap.getName().toLowerCase().contains("color")){
-                nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
+                nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, this),
                     Color.class,
                     "getPropertyDoubleListAsColor",//mapPropertyEnumToGetters.get(currentPropType),
                     "setValueDoubleListFromColor");
             }
             else
-                nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
+                nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, this),
                     String.class,
                     "getPropertyAsString",//mapPropertyEnumToGetters.get(currentPropType),
                     "setValueDoubleListFromString");//mapPropertyEnumToSetters.get(currentPropType));
@@ -166,7 +166,7 @@ public class OpenSimObjectNode extends OpenSimNode {
             nextNodeProp.setValue("suppressCustomEditor", Boolean.FALSE);
        }
        else if (apType.equalsIgnoreCase("Transform")){
-            nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
+            nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, this),
                 String.class,
                 "getPropertyAsString",//mapPropertyEnumToGetters.get(currentPropType),
                 "setValueTransformFromString");//mapPropertyEnumToSetters.get(currentPropType));
@@ -174,7 +174,7 @@ public class OpenSimObjectNode extends OpenSimNode {
             nextNodeProp.setValue("suppressCustomEditor", Boolean.FALSE);
        }
        else { // fall through, unexpected, should handle arrays of strings
-           nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, obj, model, this),
+           nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, this),
                 String.class,
                 "getPropertyAsString",//mapPropertyEnumToGetters.get(currentPropType),
                 null);//mapPropertyEnumToSetters.get(currentPropType));
@@ -212,24 +212,16 @@ public class OpenSimObjectNode extends OpenSimNode {
     /**
      * Display name 
      */
+    @Override
     public String getHtmlDisplayName()  { return getOpenSimObject().getName(); }
 
     /**
      * Action to be invoked on double clicking.
      */
+    @Override
     public Action getPreferredAction() {
-         if( getValidDisplayOptions().size() ==0 ) return null;  // Nothing to show or hide.
-         /* override getPreferredAction in desired class instead
-         // If this is a rigid body, open the easy-to-use rigid body property editor (also provides the older table version). 
-         // Appearance panel allows user to show/hide the body.
-         if( this instanceof OneBodyNode ) // this instanceof OneJointNode
-         {
-            ModelWindowVTKTopComponent ownerWindow = ViewDB.getInstance().getCurrentModelWindow();
-            if(      this instanceof OneBodyNode  ) LSJava.LSPropertyEditors.LSPropertyEditorRigidBody.NewLSPropertyEditorRigidBody(  (OneBodyNode)this, ownerWindow );
-            else if( this instanceof OneJointNode ) new LSJava.LSPropertyEditors.LSPropertyEditorJoint(     (OneJointNode)this, ownerWindow );
-            return null;
-         } */
-         
+         if( getValidDisplayOptions().isEmpty() ) return null;  // Nothing to show or hide.
+        
          OpenSimObject obj = getOpenSimObject();
          int currentStatus = ViewDB.getInstance().getDisplayStatus( obj );
          try {
@@ -250,6 +242,7 @@ public class OpenSimObjectNode extends OpenSimNode {
      * Return the list of available actions.
      * Subclasses should user super.getActions() to use this
      */
+    @Override
     public Action[] getActions(boolean b) {
       Action[] objectNodeActions;
       try {
@@ -305,6 +298,7 @@ public class OpenSimObjectNode extends OpenSimNode {
                 if (nextNodeProp != null) {
                     nextNodeProp.setName("name");
                     nextNodeProp.setShortDescription("Name of the Object");
+                    nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
                     set.put(nextNodeProp);
                 }
             } catch (NoSuchMethodException ex) {
