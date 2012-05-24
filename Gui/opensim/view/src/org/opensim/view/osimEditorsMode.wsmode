@@ -10,6 +10,6 @@
   </constraints>
   <bounds x="0" y="0" width="0" height="0" />
   <frame state="0"/>
-    <active-tc id="MuscleEditorTopComponent"/>
+    <active-tc id="properties"/>
     <empty-behavior permanent="false"/>
 </mode>

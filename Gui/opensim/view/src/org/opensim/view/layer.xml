@@ -561,8 +561,10 @@
             <file name="Other_hidden"/>
             <file name="Output_hidden"/>
             <file name="Profile_hidden"/>
+            <file name="ShowPaletteAction.shadow_hidden"/>
             <file name="Versioning_hidden"/>
             <file name="org-netbeans-core-ide-ServicesTabAction.shadow_hidden"/>
+            <file name="org-netbeans-core-windows-actions-ResetWindowsAction.shadow_hidden"/>
             <file name="org-netbeans-modules-favorites-View.shadow_hidden"/>
             <file name="org-netbeans-modules-project-ui-logical-tab-action.shadow_hidden"/>
             <file name="org-netbeans-modules-project-ui-physical-tab-action.shadow_hidden"/>
@@ -736,6 +738,11 @@
             <folder name="osimEditorsMode">
                 <file name="MarkerEditorTopComponent.wstcref" url="MarkerEditorTopComponentWstcref.xml"/>
                 <file name="MuscleEditorTopComponent.wstcref" url="editors/MuscleEditorTopComponentWstcref.xml"/>
+                <file name="properties.wstcref" url="propertiesWstcref_1.xml"/>
+            </folder>
+            <folder name="properties">
+                <file name="properties.wstcref" url="propertiesWstcref.xml"/>
+                <file name="properties.wstcref_hidden"/>
             </folder>
             <file name="properties.wsmode_hidden"/>
             <file name="explorer.wsmode_hidden"/>

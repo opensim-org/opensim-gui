@@ -43,5 +43,6 @@
     <tc-list>
   <tc-id id="CoordinateViewerTopComponent"/>
   <tc-id id="ExplorerTopComponent"/>
+  <tc-id id="properties"/>
     </tc-list>
 </windowmanager>
