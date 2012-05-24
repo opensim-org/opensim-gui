@@ -440,17 +440,9 @@
             <file name="org-openide-actions-UndoAction.shadow_hidden">
                 <attr name="position" intvalue="1900"/>
             </file>
-            <file name="org-opensim-view-editors-EditMusclesAction.shadow" url="org-opensim-view-editors-EditMusclesAction.shadow">
-                <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-editors-EditMusclesAction.instance"/>
-                <attr name="position" intvalue="2000"/>
-            </file>
             <file name="org-opensim-view-excitationEditor-ExcitationEditorAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-excitationEditor-ExcitationEditorAction.instance"/>
                 <attr name="position" intvalue="2050"/>
-            </file>
-            <file name="org-opensim-view-markerEditor-EditMarkersAction.shadow">
-                <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-markerEditor-EditMarkersAction.instance"/>
-                <attr name="position" intvalue="2075"/>
             </file>
             <file name="org-opensim-view-editors-ObjectPropertiesEditor.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-editors-ObjectPropertiesEditor.instance"/>
