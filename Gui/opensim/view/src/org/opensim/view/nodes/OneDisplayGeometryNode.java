@@ -100,7 +100,7 @@ public class OneDisplayGeometryNode extends OpenSimObjectNode implements Colorab
         }
         return retValue;
     }
-    
+    /*
     @Override
     public Sheet createSheet() {
         Sheet sheet;
@@ -112,32 +112,12 @@ public class OneDisplayGeometryNode extends OpenSimObjectNode implements Colorab
         DisplayGeometryDisplayer disp = (DisplayGeometryDisplayer) ViewDB.getInstance().getVtkRepForObject(obj);
         if (disp==null) return sheet;
         try {
-            /*
-            PropertySupport.Reflection nextNodeProp;
-            nextNodeProp = new PropertySupport.Reflection(disp, Color.class, "getColor", "setColorGUI");
-            nextNodeProp.setName("color");
-            set.put(nextNodeProp);
-            PropertySupport.Reflection nextNodeProp2;
-            nextNodeProp2 = new PropertySupport.Reflection(disp, Vec3.class, "getLocation", "setLocation");
-            nextNodeProp2.setPropertyEditorClass(PositionEditor.class);
-            nextNodeProp2.setName("Location"); 
-            set.put(nextNodeProp2);
-            nextNodeProp2.getPropertyEditor().addPropertyChangeListener(new PropertyChangeListener(){
-                public void propertyChange(PropertyChangeEvent evt) {
-                    System.out.println("Change Propagated");
-                }});
-            PropertySupport.Reflection nextNodeProp3;
-            nextNodeProp3 = new PropertySupport.Reflection(disp, Vec3.class, "getOrientation", "setOrientation");
-            nextNodeProp3.setPropertyEditorClass(PositionEditor.class);
-            nextNodeProp3.setName("Orientation");        
-            set.put(nextNodeProp3);
-            */
+            set.remove("display_preference");
             PropertySupport.Reflection nextNodeProp4;
             nextNodeProp4 = new PropertySupport.Reflection(disp, DisplayGeometry.DisplayPreference.class, "getDisplayPreference", "setDisplayPreference");
             nextNodeProp4.setPropertyEditorClass(DisplayPreferenceEditor.class);
-            nextNodeProp4.setName("Display Preference");        
+            nextNodeProp4.setName("display_preference");        
             set.put(nextNodeProp4);
-            
         }
         catch (NoSuchMethodException ex) {
             ex.printStackTrace();
@@ -145,7 +125,7 @@ public class OneDisplayGeometryNode extends OpenSimObjectNode implements Colorab
         
         return sheet;
     }
-
+     * */
     public Color getColor() {
         DisplayGeometry obj = DisplayGeometry.safeDownCast(getOpenSimObject());
         DisplayGeometryDisplayer disp = (DisplayGeometryDisplayer) ViewDB.getInstance().getVtkRepForObject(obj);

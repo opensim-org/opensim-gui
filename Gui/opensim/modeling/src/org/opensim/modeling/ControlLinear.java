@@ -205,8 +205,8 @@ public class ControlLinear extends Control {
     return opensimModelJNI.ControlLinear_getLastTime(swigCPtr, this);
   }
 
-  public void simplify(PropertySet aProperties) {
-    opensimModelJNI.ControlLinear_simplify__SWIG_0(swigCPtr, this, PropertySet.getCPtr(aProperties), aProperties);
+  public void simplify(SWIGTYPE_p_PropertySet aProperties) {
+    opensimModelJNI.ControlLinear_simplify__SWIG_0(swigCPtr, this, SWIGTYPE_p_PropertySet.getCPtr(aProperties));
   }
 
   public boolean simplify(double cutoffFrequency, double distance) {

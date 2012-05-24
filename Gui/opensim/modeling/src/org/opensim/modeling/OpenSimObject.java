@@ -252,8 +252,8 @@ public class OpenSimObject {
     return opensimModelJNI.OpenSimObject_toString(swigCPtr, this);
   }
 
-  public PropertySet getPropertySet() {
-    return new PropertySet(opensimModelJNI.OpenSimObject_getPropertySet(swigCPtr, this), false);
+  public SWIGTYPE_p_PropertySet getPropertySet() {
+    return new SWIGTYPE_p_PropertySet(opensimModelJNI.OpenSimObject_getPropertySet(swigCPtr, this), false);
   }
 
   public static OpenSimObject SafeCopy(OpenSimObject aObject) {

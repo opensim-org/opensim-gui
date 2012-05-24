@@ -51,7 +51,6 @@ import org.opensim.modeling.MeasurementSet;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelScaler;
 import org.opensim.modeling.OpenSimContext;
-import org.opensim.modeling.PropertyStr;
 import org.opensim.modeling.Scale;
 import org.opensim.modeling.ScaleSet;
 import org.opensim.modeling.ScaleTool;
@@ -75,7 +74,7 @@ class OptionalFile {
       else { enabled = true; this.fileName = fileName; }
    }
    public String toProperty() { 
-      return (enabled && !FileUtils.effectivelyNull(fileName)) ? fileName : PropertyStr.getDefaultStr();
+      return (enabled && !FileUtils.effectivelyNull(fileName)) ? fileName : "Unassigned";
    }
 }
 
@@ -567,7 +566,7 @@ public class ScaleToolModel extends Observable implements Observer {
    // Filename effectively null if it's null, or "", or "Unassigned"
    //------------------------------------------------------------------------
    private boolean fileNameEffectivelyNull(String fileName) {
-      return fileName==null || fileName.equals("") || fileName.equals(PropertyStr.getDefaultStr());
+      return fileName==null || fileName.equals("") || fileName.equalsIgnoreCase("Unassigned");
    }
    private String getFileName(String fileName) {
       return FileUtils.effectivelyNull(fileName) ? "" : fileName;
@@ -934,7 +933,7 @@ public class ScaleToolModel extends Observable implements Observer {
       relativeToAbsolutePaths(fileName);
 
       // reset some things in the scale tool which we will not use
-      scaleTool.getGenericModelMaker().setModelFileName(PropertyStr.getDefaultStr()); // TODO: what should we really set this to?
+      scaleTool.getGenericModelMaker().setModelFileName("Unassigned"); // TODO: what should we really set this to?
 
       // keep internal data in sync
       modifiedSinceLastExecute = true;

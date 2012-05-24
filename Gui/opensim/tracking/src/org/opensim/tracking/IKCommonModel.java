@@ -33,7 +33,6 @@ import org.opensim.modeling.InverseKinematicsTool;
 import org.opensim.modeling.MarkerData;
 import org.opensim.modeling.MarkerPlacer;
 import org.opensim.modeling.Model;
-import org.opensim.modeling.PropertyStr;
 import org.opensim.modeling.Storage;
 
 //===========================================================================
@@ -87,7 +86,7 @@ public class IKCommonModel extends Observable implements Observer {
    // Filename effectively null if it's null, or "", or "Unassigned"
    //------------------------------------------------------------------------
    private boolean fileNameEffectivelyNull(String fileName) {
-      return fileName==null || fileName.equals("") || fileName.equals(PropertyStr.getDefaultStr());
+      return fileName==null || fileName.equals("") || fileName.equalsIgnoreCase("Unassigned");
    }
    private String getFileName(String fileName) {
       return fileNameEffectivelyNull(fileName) ? "" : fileName;

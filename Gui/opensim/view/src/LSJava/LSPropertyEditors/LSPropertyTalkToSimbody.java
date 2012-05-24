@@ -22,12 +22,9 @@
 //--------------------------------------------------------------------------
 package LSJava.LSPropertyEditors;
 import  LSJava.LSUtility.*;
-import  java.io.IOException;
 
 import  org.opensim.modeling.Model;
 import  org.opensim.modeling.OpenSimObject;
-import  org.opensim.modeling.PropertySet;
-import  org.opensim.modeling.ArrayDouble;
 import  org.opensim.modeling.OpenSimContext;  
 import  org.opensim.view.nodes.OpenSimNode;
 import  org.opensim.view.nodes.OpenSimObjectNode;

@@ -28,8 +28,8 @@ public class MarkersNode extends OpenSimObjectSetNode {
         super(markerSet);
         setDisplayName(NbBundle.getMessage(MarkersNode.class, "CTL_Markers"));
         updateChildNodes(markerSet);
-      addDisplayOption(displayOption.Isolatable);
-      addDisplayOption(displayOption.Showable);
+        addDisplayOption(displayOption.Isolatable);
+        addDisplayOption(displayOption.Showable);
     }
 
     public void updateChildNodes(MarkerSet markerSet) {

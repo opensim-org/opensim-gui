@@ -47,7 +47,6 @@ import org.openide.NotifyDescriptor;
 import org.opensim.modeling.ControlSet;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.PropertyStr;
 import org.opensim.modeling.Storage;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.swingui.FileTextFieldAndChooser;
@@ -686,7 +685,7 @@ private void reuseSelectedQuantitiesCheckBoxActionPerformed(java.awt.event.Actio
 
     private void coordinatesFileName1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_coordinatesFileName1StateChanged
        String fileName = coordinatesFileName1.getFileName();
-       boolean invalidFile=(fileName==null || fileName.equals("") || fileName.equals(PropertyStr.getDefaultStr()));
+       boolean invalidFile=(fileName==null || fileName.equals("") || fileName.equalsIgnoreCase("Unassigned"));
        if(!invalidFile) {
       toolModel.setCoordinatesFileName(coordinatesFileName1.getFileName());
              File f = new File(coordinatesFileName1.getFileName());

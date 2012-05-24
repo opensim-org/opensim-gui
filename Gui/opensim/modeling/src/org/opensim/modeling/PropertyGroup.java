@@ -64,25 +64,25 @@ public class PropertyGroup {
     return opensimModelJNI.PropertyGroup_contains(swigCPtr, this, aName);
   }
 
-  public void add(Property_Deprecated aProperty) {
-    opensimModelJNI.PropertyGroup_add(swigCPtr, this, Property_Deprecated.getCPtr(aProperty), aProperty);
+  public void add(SWIGTYPE_p_Property_Deprecated aProperty) {
+    opensimModelJNI.PropertyGroup_add(swigCPtr, this, SWIGTYPE_p_Property_Deprecated.getCPtr(aProperty));
   }
 
-  public void remove(Property_Deprecated aProperty) {
-    opensimModelJNI.PropertyGroup_remove(swigCPtr, this, Property_Deprecated.getCPtr(aProperty), aProperty);
+  public void remove(SWIGTYPE_p_Property_Deprecated aProperty) {
+    opensimModelJNI.PropertyGroup_remove(swigCPtr, this, SWIGTYPE_p_Property_Deprecated.getCPtr(aProperty));
   }
 
-  public SWIGTYPE_p_OpenSim__ArrayT_OpenSim__Property_Deprecated_p_t getProperties() {
-    return new SWIGTYPE_p_OpenSim__ArrayT_OpenSim__Property_Deprecated_p_t(opensimModelJNI.PropertyGroup_getProperties(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__ArrayT_Property_Deprecated_p_t getProperties() {
+    return new SWIGTYPE_p_OpenSim__ArrayT_Property_Deprecated_p_t(opensimModelJNI.PropertyGroup_getProperties(swigCPtr, this), false);
   }
 
-  public Property_Deprecated get(int aIndex) {
+  public SWIGTYPE_p_Property_Deprecated get(int aIndex) {
     long cPtr = opensimModelJNI.PropertyGroup_get(swigCPtr, this, aIndex);
-    return (cPtr == 0) ? null : new Property_Deprecated(cPtr, false);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_Property_Deprecated(cPtr, false);
   }
 
-  public int getPropertyIndex(Property_Deprecated aProperty) {
-    return opensimModelJNI.PropertyGroup_getPropertyIndex(swigCPtr, this, Property_Deprecated.getCPtr(aProperty), aProperty);
+  public int getPropertyIndex(SWIGTYPE_p_Property_Deprecated aProperty) {
+    return opensimModelJNI.PropertyGroup_getPropertyIndex(swigCPtr, this, SWIGTYPE_p_Property_Deprecated.getCPtr(aProperty));
   }
 
   public void setName(String aName) {

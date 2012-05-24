@@ -209,8 +209,8 @@ public class ControlSet extends SetControls {
     opensimModelJNI.ControlSet_setParameterValues__SWIG_3(swigCPtr, this, ArrayDouble.getCPtr(aP), aP);
   }
 
-  public void simplify(PropertySet aProperties) {
-    opensimModelJNI.ControlSet_simplify(swigCPtr, this, PropertySet.getCPtr(aProperties), aProperties);
+  public void simplify(SWIGTYPE_p_PropertySet aProperties) {
+    opensimModelJNI.ControlSet_simplify(swigCPtr, this, SWIGTYPE_p_PropertySet.getCPtr(aProperties));
   }
 
   public void filter(double aT) {

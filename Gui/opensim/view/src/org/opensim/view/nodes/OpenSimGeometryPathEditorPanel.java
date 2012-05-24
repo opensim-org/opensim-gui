@@ -43,6 +43,7 @@ import java.util.Vector;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayPathPoint;
 import org.opensim.modeling.ArrayPtrsPropertyGroup;
 import org.opensim.modeling.Body;
@@ -62,8 +63,7 @@ import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.PathPointSet;
 import org.opensim.modeling.PathWrap;
 import org.opensim.modeling.PropertyGroup;
-import org.opensim.modeling.PropertySet;
-import org.opensim.modeling.Property_Deprecated;
+import org.opensim.modeling.PropertyHelper;
 import org.opensim.modeling.SetPathWrap;
 import org.opensim.modeling.SetWrapObject;
 import org.opensim.modeling.Units;
@@ -201,25 +201,11 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          setupAttachmentPanel(asm);
       
       int i, j;
-      PropertySet ps = currentAct.getPropertySet();
-      
-      // Create the panels to hold the properties.
-      ArrayPtrsPropertyGroup groups = ps.getGroups();
-      int numGroups = groups.getSize();
+      int numGroups = 0;
       javax.swing.JScrollPane propTab[] = new javax.swing.JScrollPane[numGroups + 1];
       javax.swing.JPanel propPanel[] = new javax.swing.JPanel[numGroups + 1];
       int tabPropertyCount[] = new int[numGroups + 1];
-      for (i = 0; i < numGroups; i++) {
-         PropertyGroup pg = groups.get(i);
-         propTab[i] = new javax.swing.JScrollPane();
-         propPanel[i] = new javax.swing.JPanel();
-         propPanel[i].setLayout(null);
-         //propPanel[i].setBackground(new java.awt.Color(200, 200, 255));
-         propTab[i].setViewportView(propPanel[i]);
-         propTab[i].setName(pg.getName());
-         ParametersTabbedPanel.addTab(pg.getName(), null, propTab[i], pg.getName());
-         tabPropertyCount[i] = 0;
-      }
+
       // Create the "other" panel to hold properties that are not in a group.
       propTab[numGroups] = new javax.swing.JScrollPane();
       propPanel[numGroups] = new javax.swing.JPanel();
@@ -352,14 +338,10 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
    }
    
    public void DoublePropertyEntered(javax.swing.JTextField field, int propertyNum) {
-      Property_Deprecated prop = null;
-      try {
-         prop = currentAct.getPropertySet().get(propertyNum);
-      } catch (IOException ex) {
-         ex.printStackTrace();
-      }
+      AbstractProperty prop = currentAct.getPropertyByIndex(propertyNum);
+
       if (prop != null) {
-         double newValue, oldValue = prop.getValueDbl();
+         double newValue, oldValue = PropertyHelper.getValueDouble(prop);
          try {
             newValue = doublePropFormat.parse(field.getText()).doubleValue();
          } catch (ParseException ex) {
@@ -371,7 +353,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          field.setText(doublePropFormat.format(newValue));
 
          if (newValue != oldValue) {
-            prop.setValue(newValue);
+            PropertyHelper.setValueDouble(newValue, prop);
             //setPendingChanges(true, currentAct, true);
             // TODO generate an event for this??
          }
@@ -379,14 +361,10 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
    }
 
    public void IntPropertyEntered(javax.swing.JTextField field, int propertyNum) {
-      Property_Deprecated prop = null;
-      try {
-         prop = currentAct.getPropertySet().get(propertyNum);
-      } catch (IOException ex) {
-         ex.printStackTrace();
-      }
+     AbstractProperty prop = currentAct.getPropertyByIndex(propertyNum);
+     
       if (prop != null) {
-         int newValue, oldValue = prop.getValueInt();
+         int newValue, oldValue = PropertyHelper.getValueInt(prop);
          try {
             newValue = intPropFormat.parse(field.getText()).intValue();
          } catch (ParseException ex) {
@@ -398,7 +376,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          field.setText(intPropFormat.format(newValue));
 
          if (newValue != oldValue) {
-            prop.setValue(newValue);
+            PropertyHelper.setValueInt(newValue, prop);
             setPendingChanges(true, currentAct, true);
             // TODO generate an event for this??
          }
@@ -406,14 +384,10 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
    }
 
    public void EditPropertyFunction(javax.swing.JButton button, int propertyNum) {
-      Property_Deprecated prop = null;
-      try {
-         prop = currentAct.getPropertySet().get(propertyNum);
-      } catch (IOException ex) {
-         ex.printStackTrace();
-      }
+      AbstractProperty prop = currentAct.getPropertyByIndex(propertyNum);
+ 
       if (prop != null) {
-         OpenSimObject obj = prop.getValueObjPtr();
+         OpenSimObject obj = prop.getValueAsObject();
          Function func = Function.safeDownCast(obj);
          FunctionEditorTopComponent win = FunctionEditorTopComponent.findInstance();
          win.addChangeListener(new MusclePropertyFunctionEventListener());

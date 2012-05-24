@@ -185,8 +185,8 @@ public class Control extends OpenSimObject {
     return opensimModelJNI.Control_getLastTime(swigCPtr, this);
   }
 
-  public void simplify(PropertySet aProperties) {
-    opensimModelJNI.Control_simplify(swigCPtr, this, PropertySet.getCPtr(aProperties), aProperties);
+  public void simplify(SWIGTYPE_p_PropertySet aProperties) {
+    opensimModelJNI.Control_simplify(swigCPtr, this, SWIGTYPE_p_PropertySet.getCPtr(aProperties));
   }
 
   public void filter(double aT) {

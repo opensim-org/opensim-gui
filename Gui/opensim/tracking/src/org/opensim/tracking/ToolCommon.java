@@ -29,7 +29,6 @@ import javax.swing.JComponent;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.IO;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.PropertySet;
 
 public class ToolCommon {
 

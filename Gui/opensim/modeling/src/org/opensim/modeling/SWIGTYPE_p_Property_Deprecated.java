@@ -8,18 +8,18 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_OpenSim__ArrayT_OpenSim__Property_Deprecated_p_t {
+public class SWIGTYPE_p_Property_Deprecated {
   private long swigCPtr;
 
-  protected SWIGTYPE_p_OpenSim__ArrayT_OpenSim__Property_Deprecated_p_t(long cPtr, boolean futureUse) {
+  protected SWIGTYPE_p_Property_Deprecated(long cPtr, boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_OpenSim__ArrayT_OpenSim__Property_Deprecated_p_t() {
+  protected SWIGTYPE_p_Property_Deprecated() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_OpenSim__ArrayT_OpenSim__Property_Deprecated_p_t obj) {
+  protected static long getCPtr(SWIGTYPE_p_Property_Deprecated obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }
