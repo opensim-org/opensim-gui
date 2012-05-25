@@ -218,8 +218,8 @@ public class Model extends ModelComponent {
     opensimModelJNI.Model_addForce(swigCPtr, this, Force.getCPtr(aForce), aForce);
   }
 
-  public void addProbe(SWIGTYPE_p_OpenSim__Probe aProbe) {
-    opensimModelJNI.Model_addProbe(swigCPtr, this, SWIGTYPE_p_OpenSim__Probe.getCPtr(aProbe));
+  public void addProbe(Probe aProbe) {
+    opensimModelJNI.Model_addProbe(swigCPtr, this, Probe.getCPtr(aProbe), aProbe);
   }
 
   public void addContactGeometry(ContactGeometry aContactGeometry) {
@@ -318,12 +318,12 @@ public class Model extends ModelComponent {
     return new ForceSet(opensimModelJNI.Model_updForceSet(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_OpenSim__ProbeSet getProbeSet() {
-    return new SWIGTYPE_p_OpenSim__ProbeSet(opensimModelJNI.Model_getProbeSet(swigCPtr, this), false);
+  public ProbeSet getProbeSet() {
+    return new ProbeSet(opensimModelJNI.Model_getProbeSet(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_OpenSim__ProbeSet updProbeSet() {
-    return new SWIGTYPE_p_OpenSim__ProbeSet(opensimModelJNI.Model_updProbeSet(swigCPtr, this), false);
+  public ProbeSet updProbeSet() {
+    return new ProbeSet(opensimModelJNI.Model_updProbeSet(swigCPtr, this), false);
   }
 
   public ComponentSet getMiscModelComponentSet() {

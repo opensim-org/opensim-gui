@@ -173,7 +173,7 @@ public final class gui {
      * @param aModel
      * @param type : one of Body, Joint, Force (or any force producing object e.g. muscle), Controller
      * @param name : name of the object of the specified type 
-     * @return
+     * @return Object in the model with specified type and name 
      * @throws IOException if the object couldn't be located
      */
     static public OpenSimObject findObject(Model aModel, String type, String name) throws IOException
