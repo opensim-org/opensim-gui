@@ -282,25 +282,25 @@ public class MotionDisplayer implements SelectionListener {
         generalizedForcesRep = new OpenSimvtkGlyphCloud(true); bodyForcesRep.setName("JointForce");
         markersRep = new OpenSimvtkGlyphCloud(false);   bodyForcesRep.setName("Exp. Markers");
 
-        groundForcesRep.setShape(MotionObjectsDB.getInstance().getShape(currentForceShape));
+        groundForcesRep.setShapeName(currentForceShape);
         groundForcesRep.setColor(new double[]{0., 1.0, 0.});
         groundForcesRep.setOpacity(0.7);
         groundForcesRep.setScaleFactor(currentScaleFactor);
         groundForcesRep.orientByNormalAndScaleByVector();
 
-        bodyForcesRep.setShape(MotionObjectsDB.getInstance().getShape("arrow"));
+        bodyForcesRep.setShapeName("arrow");
         bodyForcesRep.setColor(new double[]{0., 0., 1.0});
         bodyForcesRep.setOpacity(0.7);
         bodyForcesRep.setScaleFactor(currentScaleFactor);
         bodyForcesRep.orientByNormalAndScaleByVector();
 
-        generalizedForcesRep.setShape(MotionObjectsDB.getInstance().getShape("arrow"));
+        generalizedForcesRep.setShapeName("arrow");
         generalizedForcesRep.setColor(new double[]{0., 1.0, 1.0});
         generalizedForcesRep.setOpacity(0.7);
         generalizedForcesRep.setScaleFactor(currentScaleFactor);
         generalizedForcesRep.orientByNormalAndScaleByVector();
 
-        markersRep.setShape(MotionObjectsDB.getInstance().getShape("marker"));
+        markersRep.setShapeName("marker");
         markersRep.setColor(new double[]{0.0, 0.0, 1.0}); //Scale , scaleBy
         markersRep.scaleByVectorComponents();
         markersRep.setScaleFactor(ViewDB.getInstance().getExperimentalMarkerDisplayScale());

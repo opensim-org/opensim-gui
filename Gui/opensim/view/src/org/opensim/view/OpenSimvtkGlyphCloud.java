@@ -71,6 +71,7 @@ public class OpenSimvtkGlyphCloud {    // Assume same shape
 
     private Stack<Integer> freeList = new Stack<Integer>();
     private String name;
+    private String shapeName;
     /**
     * Creates a new instance of OpenSimvtkGlyphCloud.
     * if createScalars is true then obbjects are colored based on scalarValues
@@ -92,11 +93,14 @@ public class OpenSimvtkGlyphCloud {    // Assume same shape
         glyph.SetScaleModeToDataScalingOff(); // So hide/show behavior is disabled by default
     }
     
-    public void setShape(vtkPolyData rep) {
+    private void setShape(vtkPolyData rep) {
         shape = rep;
     }
     public void setShapeName(String name) {
-        setShape(MotionObjectsDB.getInstance().getShape(name));
+            shapeName = name; // Cache shape name for later editing
+            setShape(MotionObjectsDB.getInstance().getShape(name));
+            setModified();
+        
     }
     public void setDisplayProperties(vtkProperty prop) {
         actor.SetProperty(prop);
@@ -197,8 +201,12 @@ public class OpenSimvtkGlyphCloud {    // Assume same shape
 
     public void setScaleFactor(double d) {
         glyph.SetScaleFactor(d);
+        setModified();
     }
    
+    public double getScaleFactor() {
+        return glyph.GetScaleFactor();
+    }
    public void setModified() {
       pointPolyData.Modified();
       pointCloud.Modified();
@@ -306,5 +314,23 @@ public class OpenSimvtkGlyphCloud {    // Assume same shape
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the lookupTable
+     */
+    public vtkColorTransferFunction getLookupTable() {
+        return lookupTable;
+    }
+
+    /**
+     * @return the shapeName
+     */
+    public String getShapeName() {
+        return shapeName;
+    }
+    
+    public boolean hasShapeName(String newName){
+        return (MotionObjectsDB.getInstance().getShape(name)!=null);
     }
 }

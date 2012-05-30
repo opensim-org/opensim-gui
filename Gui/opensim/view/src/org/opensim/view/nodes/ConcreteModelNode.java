@@ -24,7 +24,7 @@ public class ConcreteModelNode extends OpenSimObjectNode {
         getChildren().add(new Node[] {new ConstraintsNode(m.getConstraintSet())});        
         getChildren().add(new Node[] {new ContactGeometriesNode(m.getContactGeometrySet())});
         getChildren().add(new Node[] {new AllForcesNode(m.getForceSet())});
-        getChildren().add(new Node[] {new MarkersNode(m.getMarkerSet())});
+        getChildren().add(new Node[] {new MarkersNode(m.getMarkerSet(), m)});
         getChildren().add(new Node[] {new ControllersNode(m.getControllerSet())});
         getChildren().add(new Node[] {new ProbesNode(m.getProbeSet())});
         getChildren().add(new Node[] {new OtherComponentsNode(m.getMiscModelComponentSet())});

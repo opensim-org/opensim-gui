@@ -9,13 +9,16 @@
 
 package org.opensim.view;
 
+import java.awt.Color;
 import java.util.Hashtable;
+import javax.swing.undo.AbstractUndoableEdit;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.SimbodyEngine;
-import org.opensim.view.motions.MotionObjectsDB;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 
@@ -35,7 +38,7 @@ public class MarkersDisplayer extends OpenSimvtkGlyphCloud {
        defaultMarkerColor = ViewDB.getInstance().getDefaultMarkersColor();
        setColorRange(defaultMarkerColor, defaultMarkerColor);
        setSelectedColor(SelectedObject.defaultSelectedColor);
-       setShape(MotionObjectsDB.getInstance().getShape("marker"));
+       setShapeName("marker");
        scaleByVectorComponents();
 }
 
@@ -93,4 +96,25 @@ public class MarkersDisplayer extends OpenSimvtkGlyphCloud {
       }
       setModified();
    }
+
+    /**
+     * @return the color
+     */
+    public Color getColor() {
+        double[] color = new double[]{1.0, 1.0, 1.0};
+        this.getLookupTable().GetColor(0., color);
+        return new Color((float)color[0], (float)color[1], (float)color[2]);
+    }
+
+    /**
+     * @param color the color to set
+     */
+    public void setColor(Color color) {
+        // Convert to RGB values and call setColorRange
+        float[] colorAsFloats = new float[]{1.0f, 1.0f, 1.0f};
+        color.getRGBColorComponents(colorAsFloats);
+        double[] colorAsDoubles = new double[]{colorAsFloats[0], colorAsFloats[1], colorAsFloats[2]};
+        this.setColorRange(colorAsDoubles, colorAsDoubles);
+        setModified();
+    }
 }

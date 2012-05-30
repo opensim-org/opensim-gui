@@ -58,6 +58,8 @@ public class MotionObjectsDB {
       motionObjectsMap.put("ball", createBall());
       // marker
       motionObjectsMap.put("marker", createMarker());
+      // musclePoint
+      motionObjectsMap.put("musclepoint", createMusclePoint());
       // force
       motionObjectsMap.put("arrow", createArrow());
       // another marker
@@ -65,12 +67,6 @@ public class MotionObjectsDB {
       // reverse arrow
       motionObjectsMap.put("arrow_in", createArrowIn());
       
-      /*
-      motionObjectsMap.put("torque", new vtkSphereSource());
-      motionObjectsMap.put("arrow", new vtkSphereSource());
-      motionObjectsMap.put("body_com", new vtkSphereSource());
-      motionObjectsMap.put("com", new vtkSphereSource());
-       **/
    }
    
    public static synchronized MotionObjectsDB getInstance() {
@@ -108,6 +104,13 @@ public class MotionObjectsDB {
       marker.SetRadius(.01);
       marker.SetCenter(0., 0., 0.);
       return marker.GetOutput();
+   }
+   
+   private vtkPolyData createMusclePoint() {
+      vtkSphereSource mp=new vtkSphereSource();
+      mp.SetRadius(1.); // will be scaled by preference
+      mp.SetCenter(0., 0., 0.);
+      return mp.GetOutput();
    }
 
    private vtkPolyData createArrow() {

@@ -196,7 +196,7 @@ public class SingleModelVisuals {
                 OpenSimObject owner = Dependent.getOwner();
                 if (Marker.safeDownCast(owner)!=null){
                     
-                    markersRep.addMarker(Marker.safeDownCast(owner));
+                    getMarkersRep().addMarker(Marker.safeDownCast(owner));
                     continue;
                 } else if (PathPoint.safeDownCast(owner)!=null||
                            ConditionalPathPoint.safeDownCast(owner)!=null){
@@ -270,7 +270,7 @@ public class SingleModelVisuals {
 
    private void updateMarkersGeometry(MarkerSet markers) {
       for (int i=0; i<markers.getSize(); i++)
-         markersRep.updateMarkerGeometry(markers.get(i));
+         getMarkersRep().updateMarkerGeometry(markers.get(i));
    }
 
    /**
@@ -647,15 +647,16 @@ public class SingleModelVisuals {
     private void createMusclePointRep(OpenSimvtkGlyphCloud aMusclePointsRep) {
 
         // Muscle points
-        vtkSphereSource viaPoint=new vtkSphereSource();
-        viaPoint.SetRadius(ViewDB.getInstance().getMuscleDisplayRadius());
-        viaPoint.SetCenter(0., 0., 0.);
+        //vtkSphereSource viaPoint=new vtkSphereSource();
+        //viaPoint.SetRadius(ViewDB.getInstance().getMuscleDisplayRadius());
+        //viaPoint.SetCenter(0., 0., 0.);
         //getMusclePointsRep().setColors(defaultMusclePointColor, SelectedObject.defaultSelectedColor);
         aMusclePointsRep.setColorRange(inactiveMuscleColor, defaultMusclePointColor);
         aMusclePointsRep.setSelectedColor(SelectedObject.defaultSelectedColor);
-        vtkStripper strip2 = new vtkStripper();
-        strip2.SetInput(viaPoint.GetOutput());
-        aMusclePointsRep.setShape(strip2.GetOutput());
+        //vtkStripper strip2 = new vtkStripper();
+        //strip2.SetInput(viaPoint.GetOutput());
+        aMusclePointsRep.setShapeName("musclepoint");
+        aMusclePointsRep.setScaleFactor(ViewDB.getInstance().getMuscleDisplayRadius());
         aMusclePointsRep.scaleByVectorComponents();
     }
 

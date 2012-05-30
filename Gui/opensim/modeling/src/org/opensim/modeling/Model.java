@@ -122,6 +122,14 @@ public class Model extends ModelComponent {
     return new ModelVisualizer(opensimModelJNI.Model_updVisualizer(swigCPtr, this), false);
   }
 
+  public void buildSystem() {
+    opensimModelJNI.Model_buildSystem(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_SimTK__State initializeState() {
+    return new SWIGTYPE_p_SimTK__State(opensimModelJNI.Model_initializeState(swigCPtr, this), false);
+  }
+
   public SWIGTYPE_p_SimTK__State initSystem() throws java.io.IOException {
     return new SWIGTYPE_p_SimTK__State(opensimModelJNI.Model_initSystem(swigCPtr, this), false);
   }
