@@ -1354,10 +1354,39 @@ public final class ViewDB extends Observable implements Observer {
          picking = false;
       }
    }
-
-   public void dragSelectedObjects(OpenSimObject clickedObject, double dragVector[]) {
+   public void dragSelectedObjects(final OpenSimObject clickedObject, final double dragVector[]) {
+       dragSelectedObjects(clickedObject, dragVector, true);
+   }
+   public void dragSelectedObjects(final OpenSimObject clickedObject, final double dragVector[], boolean supportUndo) {
       DragObjectsEvent evnt = new DragObjectsEvent(clickedObject, dragVector);
-      setChanged();
+      //System.out.println("drg vec"+dragVector[0]+" "+dragVector[1]+" "+dragVector[2]);
+      // undo is a drag in the opposite direction!
+      AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
+           public boolean canUndo() {
+               return true;
+           }
+           public boolean canRedo() {
+               return true;
+           }
+           public void undo() throws CannotUndoException {
+               super.undo();
+               final double[] negativeDrag=new double[3];
+               for(int i=0;i<3;i++) negativeDrag[i]=-dragVector[i];
+               dragSelectedObjects(clickedObject, negativeDrag, false);
+           }
+           public void redo() throws CannotRedoException {
+               super.redo();
+               dragSelectedObjects(clickedObject, dragVector, true);
+           }
+
+            public String getPresentationName() {
+                return "Drag object(s)";
+            }
+           
+       };
+      if (supportUndo)
+        ExplorerTopComponent.addUndoableEdit(auEdit);
+      setChanged();  
       notifyObservers(evnt);
    }
 
