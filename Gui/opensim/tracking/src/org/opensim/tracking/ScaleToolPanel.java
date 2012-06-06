@@ -143,7 +143,7 @@ public class ScaleToolPanel extends BaseToolPanel implements Observer {
    public void update(Observable observable, Object obj) {
       if (observable instanceof OpenSimDB){
            if (obj instanceof ModelEvent) {
-                if (OpenSimDB.getInstance().hasModel(scaleToolModel.getUnscaledModel()))
+                if (OpenSimDB.getInstance().hasModel(scaleToolModel.getOriginalModel()))
                     return;
                 else {
                     scaleToolModel.deleteObserver(this);

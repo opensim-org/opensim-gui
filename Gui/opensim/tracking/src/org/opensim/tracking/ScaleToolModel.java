@@ -287,6 +287,13 @@ class BodySetScaleFactors extends Vector<BodyScaleFactors> {
 // ScaleToolModel
 //==================================================================
 public class ScaleToolModel extends Observable implements Observer {
+
+    /**
+     * @return the originalModel
+     */
+    public Model getOriginalModel() {
+        return originalModel;
+    }
    //========================================================================
    // ScaleToolWorker
    //========================================================================
