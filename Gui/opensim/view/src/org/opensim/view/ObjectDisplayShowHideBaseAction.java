@@ -108,6 +108,7 @@ public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemActi
         //else
         OpenSimObject obj = objectNode.getOpenSimObject();
         ViewDB.getInstance().toggleObjectsDisplay(obj, show);
+        objectNode.refreshNode();
     }
     
     //-------------------------------------------------------------------------

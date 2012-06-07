@@ -58,6 +58,8 @@ public class ObjectDisplayChangeRepAction extends CallableSystemAction {
         for(int i=0; i < selected.length; i++){
             OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[i];
             ViewDB.getInstance().setObjectRepresentation(objectNode.getOpenSimObject(), newRep, newShading);
+            objectNode.refreshNode();
+
          }        
     }
   

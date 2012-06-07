@@ -83,10 +83,18 @@ public final class ObjectDisplayColorAction extends CallableSystemAction {
                 if( !(childNodes[child] instanceof OpenSimObjectNode) ) continue;
                 OpenSimObjectNode childNode = (OpenSimObjectNode) childNodes[child];
                 ObjectDisplayColorAction.applyOperationToNode( childNode, newColorComponents );
+                childNode.refreshNode();
+
             }
         }
         else {
+            /* The following is cleaner and more maintainable but fails for objects that don't have "color" as property
+             *     new PropertyEditorAdaptor("color", objectNode).setValueDoubleListFromColor(new Color((float)newColorComponents[0], 
+                        (float)newColorComponents[1], (float)newColorComponents[2]));
+        
+             */
             ViewDB.getInstance().setObjectColor( obj, newColorComponents );
+            objectNode.refreshNode();
             if( objectNode instanceof ColorableInterface )
                 ((ColorableInterface)objectNode).setColor(new Color((float)newColorComponents[0], 
                         (float)newColorComponents[1], (float)newColorComponents[2]));

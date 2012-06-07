@@ -74,6 +74,7 @@ public final class ModelRenameAction extends CallableSystemAction {
                     SingleModelGuiElements guiElem = ViewDB.getInstance().getModelGuiElements(dModel);
                     guiElem.setUnsavedChangesFlag(true);
                  }
+                 objectNode.refreshNode();
              } else
                  DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message("Provided name "+newName+" is not valid"));
          }
