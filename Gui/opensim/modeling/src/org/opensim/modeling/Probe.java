@@ -70,35 +70,43 @@ public class Probe extends ModelComponent {
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_isDisabled() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Probe_getProperty_isDisabled__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Probe_getProperty_isDisabled(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_isDisabled() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Probe_updProperty_isDisabled__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Probe_updProperty_isDisabled(swigCPtr, this), false);
   }
 
-  public boolean getProperty_isDisabled(int i) {
-    return opensimModelJNI.Probe_getProperty_isDisabled__SWIG_1(swigCPtr, this, i);
+  public boolean get_isDisabled(int i) {
+    return opensimModelJNI.Probe_get_isDisabled__SWIG_0(swigCPtr, this, i);
   }
 
-  public SWIGTYPE_p_bool updProperty_isDisabled(int i) {
-    return new SWIGTYPE_p_bool(opensimModelJNI.Probe_updProperty_isDisabled__SWIG_1(swigCPtr, this, i), false);
+  public SWIGTYPE_p_bool upd_isDisabled(int i) {
+    return new SWIGTYPE_p_bool(opensimModelJNI.Probe_upd_isDisabled__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void setProperty_isDisabled(int i, boolean value) {
-    opensimModelJNI.Probe_setProperty_isDisabled__SWIG_0(swigCPtr, this, i, value);
+  public void set_isDisabled(int i, boolean value) {
+    opensimModelJNI.Probe_set_isDisabled__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int appendProperty_isDisabled(boolean value) {
-    return opensimModelJNI.Probe_appendProperty_isDisabled(swigCPtr, this, value);
+  public int append_isDisabled(boolean value) {
+    return opensimModelJNI.Probe_append_isDisabled(swigCPtr, this, value);
   }
 
   public void constructProperty_isDisabled(boolean initValue) {
     opensimModelJNI.Probe_constructProperty_isDisabled(swigCPtr, this, initValue);
   }
 
-  public void setProperty_isDisabled(boolean value) {
-    opensimModelJNI.Probe_setProperty_isDisabled__SWIG_1(swigCPtr, this, value);
+  public boolean get_isDisabled() {
+    return opensimModelJNI.Probe_get_isDisabled__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_bool upd_isDisabled() {
+    return new SWIGTYPE_p_bool(opensimModelJNI.Probe_upd_isDisabled__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_isDisabled(boolean value) {
+    opensimModelJNI.Probe_set_isDisabled__SWIG_1(swigCPtr, this, value);
   }
 
   public void setPropertyIndex_operation(SWIGTYPE_p_PropertyIndex value) {
@@ -114,35 +122,43 @@ public class Probe extends ModelComponent {
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_operation() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.Probe_getProperty_operation__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.Probe_getProperty_operation(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_operation() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.Probe_updProperty_operation__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.Probe_updProperty_operation(swigCPtr, this), false);
   }
 
-  public String getProperty_operation(int i) {
-    return opensimModelJNI.Probe_getProperty_operation__SWIG_1(swigCPtr, this, i);
+  public String get_operation(int i) {
+    return opensimModelJNI.Probe_get_operation__SWIG_0(swigCPtr, this, i);
   }
 
-  public SWIGTYPE_p_std__string updProperty_operation(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.Probe_updProperty_operation__SWIG_1(swigCPtr, this, i), false);
+  public SWIGTYPE_p_std__string upd_operation(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.Probe_upd_operation__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void setProperty_operation(int i, String value) {
-    opensimModelJNI.Probe_setProperty_operation__SWIG_0(swigCPtr, this, i, value);
+  public void set_operation(int i, String value) {
+    opensimModelJNI.Probe_set_operation__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int appendProperty_operation(String value) {
-    return opensimModelJNI.Probe_appendProperty_operation(swigCPtr, this, value);
+  public int append_operation(String value) {
+    return opensimModelJNI.Probe_append_operation(swigCPtr, this, value);
   }
 
   public void constructProperty_operation(String initValue) {
     opensimModelJNI.Probe_constructProperty_operation(swigCPtr, this, initValue);
   }
 
-  public void setProperty_operation(String value) {
-    opensimModelJNI.Probe_setProperty_operation__SWIG_1(swigCPtr, this, value);
+  public String get_operation() {
+    return opensimModelJNI.Probe_get_operation__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_std__string upd_operation() {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.Probe_upd_operation__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_operation(String value) {
+    opensimModelJNI.Probe_set_operation__SWIG_1(swigCPtr, this, value);
   }
 
   public void setPropertyIndex_operation_parameter(SWIGTYPE_p_PropertyIndex value) {
@@ -158,35 +174,43 @@ public class Probe extends ModelComponent {
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_operation_parameter() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Probe_getProperty_operation_parameter__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Probe_getProperty_operation_parameter(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_operation_parameter() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Probe_updProperty_operation_parameter__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Probe_updProperty_operation_parameter(swigCPtr, this), false);
   }
 
-  public double getProperty_operation_parameter(int i) {
-    return opensimModelJNI.Probe_getProperty_operation_parameter__SWIG_1(swigCPtr, this, i);
+  public double get_operation_parameter(int i) {
+    return opensimModelJNI.Probe_get_operation_parameter__SWIG_0(swigCPtr, this, i);
   }
 
-  public SWIGTYPE_p_double updProperty_operation_parameter(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.Probe_updProperty_operation_parameter__SWIG_1(swigCPtr, this, i), false);
+  public SWIGTYPE_p_double upd_operation_parameter(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.Probe_upd_operation_parameter__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void setProperty_operation_parameter(int i, double value) {
-    opensimModelJNI.Probe_setProperty_operation_parameter__SWIG_0(swigCPtr, this, i, value);
+  public void set_operation_parameter(int i, double value) {
+    opensimModelJNI.Probe_set_operation_parameter__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int appendProperty_operation_parameter(double value) {
-    return opensimModelJNI.Probe_appendProperty_operation_parameter(swigCPtr, this, value);
+  public int append_operation_parameter(double value) {
+    return opensimModelJNI.Probe_append_operation_parameter(swigCPtr, this, value);
   }
 
   public void constructProperty_operation_parameter(double initValue) {
     opensimModelJNI.Probe_constructProperty_operation_parameter(swigCPtr, this, initValue);
   }
 
-  public void setProperty_operation_parameter(double value) {
-    opensimModelJNI.Probe_setProperty_operation_parameter__SWIG_1(swigCPtr, this, value);
+  public double get_operation_parameter() {
+    return opensimModelJNI.Probe_get_operation_parameter__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_double upd_operation_parameter() {
+    return new SWIGTYPE_p_double(opensimModelJNI.Probe_upd_operation_parameter__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_operation_parameter(double value) {
+    opensimModelJNI.Probe_set_operation_parameter__SWIG_1(swigCPtr, this, value);
   }
 
   public boolean isDisabled() {

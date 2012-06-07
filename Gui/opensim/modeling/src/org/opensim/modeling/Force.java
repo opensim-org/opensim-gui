@@ -70,43 +70,43 @@ public class Force extends ModelComponent {
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_isDisabled() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Force_getProperty_isDisabled__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Force_getProperty_isDisabled(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_isDisabled() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Force_updProperty_isDisabled__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Force_updProperty_isDisabled(swigCPtr, this), false);
   }
 
-  public boolean getProperty_isDisabled(int i) {
-    return opensimModelJNI.Force_getProperty_isDisabled__SWIG_1(swigCPtr, this, i);
+  public boolean get_isDisabled(int i) {
+    return opensimModelJNI.Force_get_isDisabled__SWIG_0(swigCPtr, this, i);
   }
 
-  public SWIGTYPE_p_bool updProperty_isDisabled(int i) {
-    return new SWIGTYPE_p_bool(opensimModelJNI.Force_updProperty_isDisabled__SWIG_1(swigCPtr, this, i), false);
+  public SWIGTYPE_p_bool upd_isDisabled(int i) {
+    return new SWIGTYPE_p_bool(opensimModelJNI.Force_upd_isDisabled__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void setProperty_isDisabled(int i, boolean value) {
-    opensimModelJNI.Force_setProperty_isDisabled__SWIG_0(swigCPtr, this, i, value);
+  public void set_isDisabled(int i, boolean value) {
+    opensimModelJNI.Force_set_isDisabled__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int appendProperty_isDisabled(boolean value) {
-    return opensimModelJNI.Force_appendProperty_isDisabled(swigCPtr, this, value);
+  public int append_isDisabled(boolean value) {
+    return opensimModelJNI.Force_append_isDisabled(swigCPtr, this, value);
   }
 
   public void constructProperty_isDisabled(boolean initValue) {
     opensimModelJNI.Force_constructProperty_isDisabled(swigCPtr, this, initValue);
   }
 
-  public void setProperty_isDisabled(boolean value) {
-    opensimModelJNI.Force_setProperty_isDisabled__SWIG_1(swigCPtr, this, value);
+  public boolean get_isDisabled() {
+    return opensimModelJNI.Force_get_isDisabled__SWIG_1(swigCPtr, this);
   }
 
-  public ArrayStr getRecordLabels() {
-    return new ArrayStr(opensimModelJNI.Force_getRecordLabels(swigCPtr, this), true);
+  public SWIGTYPE_p_bool upd_isDisabled() {
+    return new SWIGTYPE_p_bool(opensimModelJNI.Force_upd_isDisabled__SWIG_1(swigCPtr, this), false);
   }
 
-  public ArrayDouble getRecordValues(SWIGTYPE_p_SimTK__State state) {
-    return new ArrayDouble(opensimModelJNI.Force_getRecordValues(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state)), true);
+  public void set_isDisabled(boolean value) {
+    opensimModelJNI.Force_set_isDisabled__SWIG_1(swigCPtr, this, value);
   }
 
   public boolean isDisabled(SWIGTYPE_p_SimTK__State s) {
@@ -115,6 +115,14 @@ public class Force extends ModelComponent {
 
   public void setDisabled(SWIGTYPE_p_SimTK__State s, boolean disabled) {
     opensimModelJNI.Force_setDisabled(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), disabled);
+  }
+
+  public ArrayStr getRecordLabels() {
+    return new ArrayStr(opensimModelJNI.Force_getRecordLabels(swigCPtr, this), true);
+  }
+
+  public ArrayDouble getRecordValues(SWIGTYPE_p_SimTK__State state) {
+    return new ArrayDouble(opensimModelJNI.Force_getRecordValues(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state)), true);
   }
 
   public boolean hasGeometryPath() {

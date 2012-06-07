@@ -70,35 +70,43 @@ public class CustomJoint extends Joint {
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__SpatialTransform_t getProperty_SpatialTransform() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__SpatialTransform_t(opensimModelJNI.CustomJoint_getProperty_SpatialTransform__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__SpatialTransform_t(opensimModelJNI.CustomJoint_getProperty_SpatialTransform(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__SpatialTransform_t updProperty_SpatialTransform() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__SpatialTransform_t(opensimModelJNI.CustomJoint_updProperty_SpatialTransform__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__SpatialTransform_t(opensimModelJNI.CustomJoint_updProperty_SpatialTransform(swigCPtr, this), false);
   }
 
-  public SpatialTransform getProperty_SpatialTransform(int i) {
-    return new SpatialTransform(opensimModelJNI.CustomJoint_getProperty_SpatialTransform__SWIG_1(swigCPtr, this, i), false);
+  public SpatialTransform get_SpatialTransform(int i) {
+    return new SpatialTransform(opensimModelJNI.CustomJoint_get_SpatialTransform__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public SpatialTransform updProperty_SpatialTransform(int i) {
-    return new SpatialTransform(opensimModelJNI.CustomJoint_updProperty_SpatialTransform__SWIG_1(swigCPtr, this, i), false);
+  public SpatialTransform upd_SpatialTransform(int i) {
+    return new SpatialTransform(opensimModelJNI.CustomJoint_upd_SpatialTransform__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void setProperty_SpatialTransform(int i, SpatialTransform value) {
-    opensimModelJNI.CustomJoint_setProperty_SpatialTransform__SWIG_0(swigCPtr, this, i, SpatialTransform.getCPtr(value), value);
+  public void set_SpatialTransform(int i, SpatialTransform value) {
+    opensimModelJNI.CustomJoint_set_SpatialTransform__SWIG_0(swigCPtr, this, i, SpatialTransform.getCPtr(value), value);
   }
 
-  public int appendProperty_SpatialTransform(SpatialTransform value) {
-    return opensimModelJNI.CustomJoint_appendProperty_SpatialTransform(swigCPtr, this, SpatialTransform.getCPtr(value), value);
+  public int append_SpatialTransform(SpatialTransform value) {
+    return opensimModelJNI.CustomJoint_append_SpatialTransform(swigCPtr, this, SpatialTransform.getCPtr(value), value);
   }
 
   public void constructProperty_SpatialTransform(SpatialTransform initValue) {
     opensimModelJNI.CustomJoint_constructProperty_SpatialTransform(swigCPtr, this, SpatialTransform.getCPtr(initValue), initValue);
   }
 
-  public void setProperty_SpatialTransform(SpatialTransform value) {
-    opensimModelJNI.CustomJoint_setProperty_SpatialTransform__SWIG_1(swigCPtr, this, SpatialTransform.getCPtr(value), value);
+  public SpatialTransform get_SpatialTransform() {
+    return new SpatialTransform(opensimModelJNI.CustomJoint_get_SpatialTransform__SWIG_1(swigCPtr, this), false);
+  }
+
+  public SpatialTransform upd_SpatialTransform() {
+    return new SpatialTransform(opensimModelJNI.CustomJoint_upd_SpatialTransform__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_SpatialTransform(SpatialTransform value) {
+    opensimModelJNI.CustomJoint_set_SpatialTransform__SWIG_1(swigCPtr, this, SpatialTransform.getCPtr(value), value);
   }
 
   public CustomJoint() {

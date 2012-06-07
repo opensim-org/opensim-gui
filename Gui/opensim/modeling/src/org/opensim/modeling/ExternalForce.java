@@ -70,27 +70,27 @@ public class ExternalForce extends Force {
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_applied_to_body() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_getProperty_applied_to_body__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_getProperty_applied_to_body(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_applied_to_body() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_updProperty_applied_to_body__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_updProperty_applied_to_body(swigCPtr, this), false);
   }
 
-  public String getProperty_applied_to_body(int i) {
-    return opensimModelJNI.ExternalForce_getProperty_applied_to_body__SWIG_1(swigCPtr, this, i);
+  public String get_applied_to_body(int i) {
+    return opensimModelJNI.ExternalForce_get_applied_to_body__SWIG_0(swigCPtr, this, i);
   }
 
-  public SWIGTYPE_p_std__string updProperty_applied_to_body(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_updProperty_applied_to_body__SWIG_1(swigCPtr, this, i), false);
+  public SWIGTYPE_p_std__string upd_applied_to_body(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_upd_applied_to_body__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void setProperty_applied_to_body(int i, String value) {
-    opensimModelJNI.ExternalForce_setProperty_applied_to_body__SWIG_0(swigCPtr, this, i, value);
+  public void set_applied_to_body(int i, String value) {
+    opensimModelJNI.ExternalForce_set_applied_to_body__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int appendProperty_applied_to_body(String value) {
-    return opensimModelJNI.ExternalForce_appendProperty_applied_to_body(swigCPtr, this, value);
+  public int append_applied_to_body(String value) {
+    return opensimModelJNI.ExternalForce_append_applied_to_body(swigCPtr, this, value);
   }
 
   public void constructProperty_applied_to_body() {
@@ -101,8 +101,16 @@ public class ExternalForce extends Force {
     opensimModelJNI.ExternalForce_constructProperty_applied_to_body__SWIG_1(swigCPtr, this, initValue);
   }
 
-  public void setProperty_applied_to_body(String value) {
-    opensimModelJNI.ExternalForce_setProperty_applied_to_body__SWIG_1(swigCPtr, this, value);
+  public String get_applied_to_body() {
+    return opensimModelJNI.ExternalForce_get_applied_to_body__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_std__string upd_applied_to_body() {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_upd_applied_to_body__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_applied_to_body(String value) {
+    opensimModelJNI.ExternalForce_set_applied_to_body__SWIG_1(swigCPtr, this, value);
   }
 
   public void setPropertyIndex_force_expressed_in_body(SWIGTYPE_p_PropertyIndex value) {
@@ -118,27 +126,27 @@ public class ExternalForce extends Force {
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_force_expressed_in_body() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_getProperty_force_expressed_in_body__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_getProperty_force_expressed_in_body(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_force_expressed_in_body() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_updProperty_force_expressed_in_body__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_updProperty_force_expressed_in_body(swigCPtr, this), false);
   }
 
-  public String getProperty_force_expressed_in_body(int i) {
-    return opensimModelJNI.ExternalForce_getProperty_force_expressed_in_body__SWIG_1(swigCPtr, this, i);
+  public String get_force_expressed_in_body(int i) {
+    return opensimModelJNI.ExternalForce_get_force_expressed_in_body__SWIG_0(swigCPtr, this, i);
   }
 
-  public SWIGTYPE_p_std__string updProperty_force_expressed_in_body(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_updProperty_force_expressed_in_body__SWIG_1(swigCPtr, this, i), false);
+  public SWIGTYPE_p_std__string upd_force_expressed_in_body(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_upd_force_expressed_in_body__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void setProperty_force_expressed_in_body(int i, String value) {
-    opensimModelJNI.ExternalForce_setProperty_force_expressed_in_body__SWIG_0(swigCPtr, this, i, value);
+  public void set_force_expressed_in_body(int i, String value) {
+    opensimModelJNI.ExternalForce_set_force_expressed_in_body__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int appendProperty_force_expressed_in_body(String value) {
-    return opensimModelJNI.ExternalForce_appendProperty_force_expressed_in_body(swigCPtr, this, value);
+  public int append_force_expressed_in_body(String value) {
+    return opensimModelJNI.ExternalForce_append_force_expressed_in_body(swigCPtr, this, value);
   }
 
   public void constructProperty_force_expressed_in_body() {
@@ -149,8 +157,16 @@ public class ExternalForce extends Force {
     opensimModelJNI.ExternalForce_constructProperty_force_expressed_in_body__SWIG_1(swigCPtr, this, initValue);
   }
 
-  public void setProperty_force_expressed_in_body(String value) {
-    opensimModelJNI.ExternalForce_setProperty_force_expressed_in_body__SWIG_1(swigCPtr, this, value);
+  public String get_force_expressed_in_body() {
+    return opensimModelJNI.ExternalForce_get_force_expressed_in_body__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_std__string upd_force_expressed_in_body() {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_upd_force_expressed_in_body__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_force_expressed_in_body(String value) {
+    opensimModelJNI.ExternalForce_set_force_expressed_in_body__SWIG_1(swigCPtr, this, value);
   }
 
   public void setPropertyIndex_point_expressed_in_body(SWIGTYPE_p_PropertyIndex value) {
@@ -166,27 +182,27 @@ public class ExternalForce extends Force {
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_point_expressed_in_body() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_getProperty_point_expressed_in_body__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_getProperty_point_expressed_in_body(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_point_expressed_in_body() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_updProperty_point_expressed_in_body__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_updProperty_point_expressed_in_body(swigCPtr, this), false);
   }
 
-  public String getProperty_point_expressed_in_body(int i) {
-    return opensimModelJNI.ExternalForce_getProperty_point_expressed_in_body__SWIG_1(swigCPtr, this, i);
+  public String get_point_expressed_in_body(int i) {
+    return opensimModelJNI.ExternalForce_get_point_expressed_in_body__SWIG_0(swigCPtr, this, i);
   }
 
-  public SWIGTYPE_p_std__string updProperty_point_expressed_in_body(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_updProperty_point_expressed_in_body__SWIG_1(swigCPtr, this, i), false);
+  public SWIGTYPE_p_std__string upd_point_expressed_in_body(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_upd_point_expressed_in_body__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void setProperty_point_expressed_in_body(int i, String value) {
-    opensimModelJNI.ExternalForce_setProperty_point_expressed_in_body__SWIG_0(swigCPtr, this, i, value);
+  public void set_point_expressed_in_body(int i, String value) {
+    opensimModelJNI.ExternalForce_set_point_expressed_in_body__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int appendProperty_point_expressed_in_body(String value) {
-    return opensimModelJNI.ExternalForce_appendProperty_point_expressed_in_body(swigCPtr, this, value);
+  public int append_point_expressed_in_body(String value) {
+    return opensimModelJNI.ExternalForce_append_point_expressed_in_body(swigCPtr, this, value);
   }
 
   public void constructProperty_point_expressed_in_body() {
@@ -197,8 +213,16 @@ public class ExternalForce extends Force {
     opensimModelJNI.ExternalForce_constructProperty_point_expressed_in_body__SWIG_1(swigCPtr, this, initValue);
   }
 
-  public void setProperty_point_expressed_in_body(String value) {
-    opensimModelJNI.ExternalForce_setProperty_point_expressed_in_body__SWIG_1(swigCPtr, this, value);
+  public String get_point_expressed_in_body() {
+    return opensimModelJNI.ExternalForce_get_point_expressed_in_body__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_std__string upd_point_expressed_in_body() {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_upd_point_expressed_in_body__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_point_expressed_in_body(String value) {
+    opensimModelJNI.ExternalForce_set_point_expressed_in_body__SWIG_1(swigCPtr, this, value);
   }
 
   public void setPropertyIndex_force_identifier(SWIGTYPE_p_PropertyIndex value) {
@@ -214,27 +238,27 @@ public class ExternalForce extends Force {
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_force_identifier() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_getProperty_force_identifier__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_getProperty_force_identifier(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_force_identifier() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_updProperty_force_identifier__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_updProperty_force_identifier(swigCPtr, this), false);
   }
 
-  public String getProperty_force_identifier(int i) {
-    return opensimModelJNI.ExternalForce_getProperty_force_identifier__SWIG_1(swigCPtr, this, i);
+  public String get_force_identifier(int i) {
+    return opensimModelJNI.ExternalForce_get_force_identifier__SWIG_0(swigCPtr, this, i);
   }
 
-  public SWIGTYPE_p_std__string updProperty_force_identifier(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_updProperty_force_identifier__SWIG_1(swigCPtr, this, i), false);
+  public SWIGTYPE_p_std__string upd_force_identifier(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_upd_force_identifier__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void setProperty_force_identifier(int i, String value) {
-    opensimModelJNI.ExternalForce_setProperty_force_identifier__SWIG_0(swigCPtr, this, i, value);
+  public void set_force_identifier(int i, String value) {
+    opensimModelJNI.ExternalForce_set_force_identifier__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int appendProperty_force_identifier(String value) {
-    return opensimModelJNI.ExternalForce_appendProperty_force_identifier(swigCPtr, this, value);
+  public int append_force_identifier(String value) {
+    return opensimModelJNI.ExternalForce_append_force_identifier(swigCPtr, this, value);
   }
 
   public void constructProperty_force_identifier() {
@@ -245,8 +269,16 @@ public class ExternalForce extends Force {
     opensimModelJNI.ExternalForce_constructProperty_force_identifier__SWIG_1(swigCPtr, this, initValue);
   }
 
-  public void setProperty_force_identifier(String value) {
-    opensimModelJNI.ExternalForce_setProperty_force_identifier__SWIG_1(swigCPtr, this, value);
+  public String get_force_identifier() {
+    return opensimModelJNI.ExternalForce_get_force_identifier__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_std__string upd_force_identifier() {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_upd_force_identifier__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_force_identifier(String value) {
+    opensimModelJNI.ExternalForce_set_force_identifier__SWIG_1(swigCPtr, this, value);
   }
 
   public void setPropertyIndex_point_identifier(SWIGTYPE_p_PropertyIndex value) {
@@ -262,27 +294,27 @@ public class ExternalForce extends Force {
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_point_identifier() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_getProperty_point_identifier__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_getProperty_point_identifier(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_point_identifier() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_updProperty_point_identifier__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_updProperty_point_identifier(swigCPtr, this), false);
   }
 
-  public String getProperty_point_identifier(int i) {
-    return opensimModelJNI.ExternalForce_getProperty_point_identifier__SWIG_1(swigCPtr, this, i);
+  public String get_point_identifier(int i) {
+    return opensimModelJNI.ExternalForce_get_point_identifier__SWIG_0(swigCPtr, this, i);
   }
 
-  public SWIGTYPE_p_std__string updProperty_point_identifier(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_updProperty_point_identifier__SWIG_1(swigCPtr, this, i), false);
+  public SWIGTYPE_p_std__string upd_point_identifier(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_upd_point_identifier__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void setProperty_point_identifier(int i, String value) {
-    opensimModelJNI.ExternalForce_setProperty_point_identifier__SWIG_0(swigCPtr, this, i, value);
+  public void set_point_identifier(int i, String value) {
+    opensimModelJNI.ExternalForce_set_point_identifier__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int appendProperty_point_identifier(String value) {
-    return opensimModelJNI.ExternalForce_appendProperty_point_identifier(swigCPtr, this, value);
+  public int append_point_identifier(String value) {
+    return opensimModelJNI.ExternalForce_append_point_identifier(swigCPtr, this, value);
   }
 
   public void constructProperty_point_identifier() {
@@ -293,8 +325,16 @@ public class ExternalForce extends Force {
     opensimModelJNI.ExternalForce_constructProperty_point_identifier__SWIG_1(swigCPtr, this, initValue);
   }
 
-  public void setProperty_point_identifier(String value) {
-    opensimModelJNI.ExternalForce_setProperty_point_identifier__SWIG_1(swigCPtr, this, value);
+  public String get_point_identifier() {
+    return opensimModelJNI.ExternalForce_get_point_identifier__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_std__string upd_point_identifier() {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_upd_point_identifier__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_point_identifier(String value) {
+    opensimModelJNI.ExternalForce_set_point_identifier__SWIG_1(swigCPtr, this, value);
   }
 
   public void setPropertyIndex_torque_identifier(SWIGTYPE_p_PropertyIndex value) {
@@ -310,27 +350,27 @@ public class ExternalForce extends Force {
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_torque_identifier() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_getProperty_torque_identifier__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_getProperty_torque_identifier(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_torque_identifier() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_updProperty_torque_identifier__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_updProperty_torque_identifier(swigCPtr, this), false);
   }
 
-  public String getProperty_torque_identifier(int i) {
-    return opensimModelJNI.ExternalForce_getProperty_torque_identifier__SWIG_1(swigCPtr, this, i);
+  public String get_torque_identifier(int i) {
+    return opensimModelJNI.ExternalForce_get_torque_identifier__SWIG_0(swigCPtr, this, i);
   }
 
-  public SWIGTYPE_p_std__string updProperty_torque_identifier(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_updProperty_torque_identifier__SWIG_1(swigCPtr, this, i), false);
+  public SWIGTYPE_p_std__string upd_torque_identifier(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_upd_torque_identifier__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void setProperty_torque_identifier(int i, String value) {
-    opensimModelJNI.ExternalForce_setProperty_torque_identifier__SWIG_0(swigCPtr, this, i, value);
+  public void set_torque_identifier(int i, String value) {
+    opensimModelJNI.ExternalForce_set_torque_identifier__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int appendProperty_torque_identifier(String value) {
-    return opensimModelJNI.ExternalForce_appendProperty_torque_identifier(swigCPtr, this, value);
+  public int append_torque_identifier(String value) {
+    return opensimModelJNI.ExternalForce_append_torque_identifier(swigCPtr, this, value);
   }
 
   public void constructProperty_torque_identifier() {
@@ -341,8 +381,16 @@ public class ExternalForce extends Force {
     opensimModelJNI.ExternalForce_constructProperty_torque_identifier__SWIG_1(swigCPtr, this, initValue);
   }
 
-  public void setProperty_torque_identifier(String value) {
-    opensimModelJNI.ExternalForce_setProperty_torque_identifier__SWIG_1(swigCPtr, this, value);
+  public String get_torque_identifier() {
+    return opensimModelJNI.ExternalForce_get_torque_identifier__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_std__string upd_torque_identifier() {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_upd_torque_identifier__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_torque_identifier(String value) {
+    opensimModelJNI.ExternalForce_set_torque_identifier__SWIG_1(swigCPtr, this, value);
   }
 
   public void setPropertyIndex_data_source_name(SWIGTYPE_p_PropertyIndex value) {
@@ -358,27 +406,27 @@ public class ExternalForce extends Force {
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_data_source_name() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_getProperty_data_source_name__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_getProperty_data_source_name(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_data_source_name() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_updProperty_data_source_name__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExternalForce_updProperty_data_source_name(swigCPtr, this), false);
   }
 
-  public String getProperty_data_source_name(int i) {
-    return opensimModelJNI.ExternalForce_getProperty_data_source_name__SWIG_1(swigCPtr, this, i);
+  public String get_data_source_name(int i) {
+    return opensimModelJNI.ExternalForce_get_data_source_name__SWIG_0(swigCPtr, this, i);
   }
 
-  public SWIGTYPE_p_std__string updProperty_data_source_name(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_updProperty_data_source_name__SWIG_1(swigCPtr, this, i), false);
+  public SWIGTYPE_p_std__string upd_data_source_name(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_upd_data_source_name__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void setProperty_data_source_name(int i, String value) {
-    opensimModelJNI.ExternalForce_setProperty_data_source_name__SWIG_0(swigCPtr, this, i, value);
+  public void set_data_source_name(int i, String value) {
+    opensimModelJNI.ExternalForce_set_data_source_name__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int appendProperty_data_source_name(String value) {
-    return opensimModelJNI.ExternalForce_appendProperty_data_source_name(swigCPtr, this, value);
+  public int append_data_source_name(String value) {
+    return opensimModelJNI.ExternalForce_append_data_source_name(swigCPtr, this, value);
   }
 
   public void constructProperty_data_source_name() {
@@ -389,8 +437,16 @@ public class ExternalForce extends Force {
     opensimModelJNI.ExternalForce_constructProperty_data_source_name__SWIG_1(swigCPtr, this, initValue);
   }
 
-  public void setProperty_data_source_name(String value) {
-    opensimModelJNI.ExternalForce_setProperty_data_source_name__SWIG_1(swigCPtr, this, value);
+  public String get_data_source_name() {
+    return opensimModelJNI.ExternalForce_get_data_source_name__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_std__string upd_data_source_name() {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.ExternalForce_upd_data_source_name__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_data_source_name(String value) {
+    opensimModelJNI.ExternalForce_set_data_source_name__SWIG_1(swigCPtr, this, value);
   }
 
   public ExternalForce() {

@@ -182,6 +182,14 @@ public class Model extends ModelComponent {
     return new SWIGTYPE_p_SimTK__MultibodySystem(opensimModelJNI.Model_updMultibodySystem(swigCPtr, this), false);
   }
 
+  public SWIGTYPE_p_SimTK__DefaultSystemSubsystem getDefaultSubsystem() {
+    return new SWIGTYPE_p_SimTK__DefaultSystemSubsystem(opensimModelJNI.Model_getDefaultSubsystem(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_SimTK__DefaultSystemSubsystem updDefaultSubsystem() {
+    return new SWIGTYPE_p_SimTK__DefaultSystemSubsystem(opensimModelJNI.Model_updDefaultSubsystem(swigCPtr, this), false);
+  }
+
   public SWIGTYPE_p_SimTK__SimbodyMatterSubsystem getMatterSubsystem() {
     return new SWIGTYPE_p_SimTK__SimbodyMatterSubsystem(opensimModelJNI.Model_getMatterSubsystem(swigCPtr, this), false);
   }

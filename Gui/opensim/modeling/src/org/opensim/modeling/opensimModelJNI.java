@@ -1343,10 +1343,10 @@ public class opensimModelJNI {
   public final static native boolean Force_get_isDisabled__SWIG_1(long jarg1, Force jarg1_);
   public final static native long Force_upd_isDisabled__SWIG_1(long jarg1, Force jarg1_);
   public final static native void Force_set_isDisabled__SWIG_1(long jarg1, Force jarg1_, boolean jarg2);
-  public final static native long Force_getRecordLabels(long jarg1, Force jarg1_);
-  public final static native long Force_getRecordValues(long jarg1, Force jarg1_, long jarg2);
   public final static native boolean Force_isDisabled(long jarg1, Force jarg1_, long jarg2);
   public final static native void Force_setDisabled(long jarg1, Force jarg1_, long jarg2, boolean jarg3);
+  public final static native long Force_getRecordLabels(long jarg1, Force jarg1_);
+  public final static native long Force_getRecordValues(long jarg1, Force jarg1_, long jarg2);
   public final static native boolean Force_hasGeometryPath(long jarg1, Force jarg1_);
   public final static native void delete_Force(long jarg1);
   public final static native long SetForces_safeDownCast(long jarg1, OpenSimObject jarg1_);
@@ -3562,8 +3562,7 @@ public class opensimModelJNI {
   public final static native long new_FreeJoint__SWIG_0();
   public final static native long new_FreeJoint__SWIG_1(String jarg1, long jarg2, Body jarg2_, long jarg3, long jarg4, long jarg5, Body jarg5_, long jarg6, long jarg7, boolean jarg8);
   public final static native long new_FreeJoint__SWIG_2(String jarg1, long jarg2, Body jarg2_, long jarg3, long jarg4, long jarg5, Body jarg5_, long jarg6, long jarg7);
-  public final static native long new_FreeJoint__SWIG_3(String jarg1, long jarg2, Body jarg2_, double[] jarg3, double[] jarg4, long jarg5, Body jarg5_, double[] jarg6, double[] jarg7, boolean jarg8);
-  public final static native long new_FreeJoint__SWIG_4(long jarg1, FreeJoint jarg1_);
+  public final static native long new_FreeJoint__SWIG_3(long jarg1, FreeJoint jarg1_);
   public final static native void delete_FreeJoint(long jarg1);
   public final static native void FreeJoint_copyData(long jarg1, FreeJoint jarg1_, long jarg2, FreeJoint jarg2_);
   public final static native void FreeJoint_setup(long jarg1, FreeJoint jarg1_, long jarg2, Model jarg2_);
@@ -3940,6 +3939,8 @@ public class opensimModelJNI {
   public final static native void Model_equilibrateMuscles(long jarg1, Model jarg1_, long jarg2);
   public final static native long Model_getMultibodySystem(long jarg1, Model jarg1_);
   public final static native long Model_updMultibodySystem(long jarg1, Model jarg1_);
+  public final static native long Model_getDefaultSubsystem(long jarg1, Model jarg1_);
+  public final static native long Model_updDefaultSubsystem(long jarg1, Model jarg1_);
   public final static native long Model_getMatterSubsystem(long jarg1, Model jarg1_);
   public final static native long Model_updMatterSubsystem(long jarg1, Model jarg1_);
   public final static native long Model_getGravityForce(long jarg1, Model jarg1_);

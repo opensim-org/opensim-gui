@@ -70,27 +70,27 @@ public class TransformAxis extends OpenSimObject {
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_coordinates() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.TransformAxis_getProperty_coordinates__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.TransformAxis_getProperty_coordinates(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_coordinates() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.TransformAxis_updProperty_coordinates__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.TransformAxis_updProperty_coordinates(swigCPtr, this), false);
   }
 
-  public String getProperty_coordinates(int i) {
-    return opensimModelJNI.TransformAxis_getProperty_coordinates__SWIG_1(swigCPtr, this, i);
+  public String get_coordinates(int i) {
+    return opensimModelJNI.TransformAxis_get_coordinates(swigCPtr, this, i);
   }
 
-  public SWIGTYPE_p_std__string updProperty_coordinates(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.TransformAxis_updProperty_coordinates__SWIG_1(swigCPtr, this, i), false);
+  public SWIGTYPE_p_std__string upd_coordinates(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.TransformAxis_upd_coordinates(swigCPtr, this, i), false);
   }
 
-  public void setProperty_coordinates(int i, String value) {
-    opensimModelJNI.TransformAxis_setProperty_coordinates(swigCPtr, this, i, value);
+  public void set_coordinates(int i, String value) {
+    opensimModelJNI.TransformAxis_set_coordinates(swigCPtr, this, i, value);
   }
 
-  public int appendProperty_coordinates(String value) {
-    return opensimModelJNI.TransformAxis_appendProperty_coordinates(swigCPtr, this, value);
+  public int append_coordinates(String value) {
+    return opensimModelJNI.TransformAxis_append_coordinates(swigCPtr, this, value);
   }
 
   public void constructProperty_coordinates() {
@@ -110,35 +110,43 @@ public class TransformAxis extends OpenSimObject {
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vec3_t getProperty_axis() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vec3_t(opensimModelJNI.TransformAxis_getProperty_axis__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vec3_t(opensimModelJNI.TransformAxis_getProperty_axis(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vec3_t updProperty_axis() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vec3_t(opensimModelJNI.TransformAxis_updProperty_axis__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vec3_t(opensimModelJNI.TransformAxis_updProperty_axis(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_SimTK__Vec3 getProperty_axis(int i) {
-    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.TransformAxis_getProperty_axis__SWIG_1(swigCPtr, this, i), false);
+  public SWIGTYPE_p_SimTK__Vec3 get_axis(int i) {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.TransformAxis_get_axis__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public SWIGTYPE_p_SimTK__Vec3 updProperty_axis(int i) {
-    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.TransformAxis_updProperty_axis__SWIG_1(swigCPtr, this, i), false);
+  public SWIGTYPE_p_SimTK__Vec3 upd_axis(int i) {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.TransformAxis_upd_axis__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void setProperty_axis(int i, SWIGTYPE_p_SimTK__Vec3 value) {
-    opensimModelJNI.TransformAxis_setProperty_axis__SWIG_0(swigCPtr, this, i, SWIGTYPE_p_SimTK__Vec3.getCPtr(value));
+  public void set_axis(int i, SWIGTYPE_p_SimTK__Vec3 value) {
+    opensimModelJNI.TransformAxis_set_axis__SWIG_0(swigCPtr, this, i, SWIGTYPE_p_SimTK__Vec3.getCPtr(value));
   }
 
-  public int appendProperty_axis(SWIGTYPE_p_SimTK__Vec3 value) {
-    return opensimModelJNI.TransformAxis_appendProperty_axis(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(value));
+  public int append_axis(SWIGTYPE_p_SimTK__Vec3 value) {
+    return opensimModelJNI.TransformAxis_append_axis(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(value));
   }
 
   public void constructProperty_axis(SWIGTYPE_p_SimTK__Vec3 initValue) {
     opensimModelJNI.TransformAxis_constructProperty_axis(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(initValue));
   }
 
-  public void setProperty_axis(SWIGTYPE_p_SimTK__Vec3 value) {
-    opensimModelJNI.TransformAxis_setProperty_axis__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(value));
+  public SWIGTYPE_p_SimTK__Vec3 get_axis() {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.TransformAxis_get_axis__SWIG_1(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_SimTK__Vec3 upd_axis() {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.TransformAxis_upd_axis__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_axis(SWIGTYPE_p_SimTK__Vec3 value) {
+    opensimModelJNI.TransformAxis_set_axis__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(value));
   }
 
   public void setPropertyIndex_function(SWIGTYPE_p_PropertyIndex value) {
@@ -154,27 +162,27 @@ public class TransformAxis extends OpenSimObject {
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t getProperty_function() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.TransformAxis_getProperty_function__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.TransformAxis_getProperty_function(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t updProperty_function() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.TransformAxis_updProperty_function__SWIG_0(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.TransformAxis_updProperty_function(swigCPtr, this), false);
   }
 
-  public Function getProperty_function(int i) {
-    return new Function(opensimModelJNI.TransformAxis_getProperty_function__SWIG_1(swigCPtr, this, i), false);
+  public Function get_function(int i) {
+    return new Function(opensimModelJNI.TransformAxis_get_function__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public Function updProperty_function(int i) {
-    return new Function(opensimModelJNI.TransformAxis_updProperty_function__SWIG_1(swigCPtr, this, i), false);
+  public Function upd_function(int i) {
+    return new Function(opensimModelJNI.TransformAxis_upd_function__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void setProperty_function(int i, Function value) {
-    opensimModelJNI.TransformAxis_setProperty_function__SWIG_0(swigCPtr, this, i, Function.getCPtr(value), value);
+  public void set_function(int i, Function value) {
+    opensimModelJNI.TransformAxis_set_function__SWIG_0(swigCPtr, this, i, Function.getCPtr(value), value);
   }
 
-  public int appendProperty_function(Function value) {
-    return opensimModelJNI.TransformAxis_appendProperty_function(swigCPtr, this, Function.getCPtr(value), value);
+  public int append_function(Function value) {
+    return opensimModelJNI.TransformAxis_append_function(swigCPtr, this, Function.getCPtr(value), value);
   }
 
   public void constructProperty_function() {
@@ -185,8 +193,16 @@ public class TransformAxis extends OpenSimObject {
     opensimModelJNI.TransformAxis_constructProperty_function__SWIG_1(swigCPtr, this, Function.getCPtr(initValue), initValue);
   }
 
-  public void setProperty_function(Function value) {
-    opensimModelJNI.TransformAxis_setProperty_function__SWIG_1(swigCPtr, this, Function.getCPtr(value), value);
+  public Function get_function() {
+    return new Function(opensimModelJNI.TransformAxis_get_function__SWIG_1(swigCPtr, this), false);
+  }
+
+  public Function upd_function() {
+    return new Function(opensimModelJNI.TransformAxis_upd_function__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_function(Function value) {
+    opensimModelJNI.TransformAxis_set_function__SWIG_1(swigCPtr, this, Function.getCPtr(value), value);
   }
 
   public TransformAxis() {
