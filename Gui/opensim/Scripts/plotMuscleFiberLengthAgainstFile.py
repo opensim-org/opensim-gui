@@ -10,7 +10,7 @@ modeling.OpenSimObject.setDebugLevel(3)
 addModel(getScriptsDir()+"/testData/BothLegs.osim")
 
 # Create a plotter panel and set the title
-plotterPanel = createPlottterPanel("Plot Example")
+plotterPanel = createPlotterPanel("Plot Example")
 
 # Add curves showing rectus femoris and vasti fiber lengths vs. right knee angle and set the legend
 crv1 = addAnalysisCurve(plotterPanel, "fiber-length", "RF", "r_knee_angle")

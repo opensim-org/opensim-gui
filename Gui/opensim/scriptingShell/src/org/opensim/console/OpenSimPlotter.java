@@ -45,7 +45,7 @@ public final class OpenSimPlotter {
      * @param title
      * @return a reference to a new Plotter Window for later use
      */
-    static public JPlotterPanel createPlottterPanel(String title){
+    static public JPlotterPanel createPlotterPanel(String title){
         JPlotterPanel plotterPanel = new JPlotterPanel();
         JFrame f= DialogUtils.createFrameForPanel(plotterPanel, title);
         plotterPanel.setFrame(f);

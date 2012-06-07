@@ -120,6 +120,7 @@ public class JConsole extends JTextArea implements KeyListener {
         interp.exec("import javax.swing as swing");
         interp.exec("import java.lang as lang");
         interp.exec("import org.opensim.modeling as modeling");
+        interp.exec("modeling.OpenSimObject.setDebugLevel(3)");
         interp.exec("from org.opensim.console.gui import *");
         interp.exec("from org.opensim.console.OpenSimPlotter import *");
         

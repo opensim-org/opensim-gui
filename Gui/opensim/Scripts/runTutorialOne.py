@@ -18,7 +18,7 @@ for i in range(myModel.getCoordinateSet().getSize()):
 	setCoordinateValue(coord, coord.getDefaultValue())
 
 # Plot the RF and VASINT fiber lengths with the model in the default pose
-plotterPanel = createPlottterPanel("Plot ")
+plotterPanel = createPlotterPanel("Plot ")
 crv1 = addAnalysisCurve(plotterPanel, "fiber-length", "RF", "r_knee_angle")
 setCurveLegend(crv1, "RF")
 crv2 = addAnalysisCurve(plotterPanel, "fiber-length", "VASINT", "r_knee_angle")
