@@ -8,18 +8,18 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_OpenSim__ProbeSet {
+public class SWIGTYPE_p_SimTK__DefaultSystemSubsystem {
   private long swigCPtr;
 
-  protected SWIGTYPE_p_OpenSim__ProbeSet(long cPtr, boolean futureUse) {
+  protected SWIGTYPE_p_SimTK__DefaultSystemSubsystem(long cPtr, boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_OpenSim__ProbeSet() {
+  protected SWIGTYPE_p_SimTK__DefaultSystemSubsystem() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_OpenSim__ProbeSet obj) {
+  protected static long getCPtr(SWIGTYPE_p_SimTK__DefaultSystemSubsystem obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }
