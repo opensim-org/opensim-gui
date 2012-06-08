@@ -362,7 +362,7 @@ final public class MarkerEditorTopComponent extends TopComponent implements Obse
    }//GEN-LAST:event_AddMarkerButtonActionPerformed
 
    private void RestoreAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestoreAllButtonActionPerformed
-      restoreAllMarkers();
+      //restoreAllMarkers();
    }//GEN-LAST:event_RestoreAllButtonActionPerformed
 
    private void RestoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestoreButtonActionPerformed
@@ -769,81 +769,6 @@ final public class MarkerEditorTopComponent extends TopComponent implements Obse
       setupComponent(currentMarker);
       ViewDB.getInstance().repaintAll();
       //printInfo("restoreMarker end");
-   }
-
-   private void restoreAllMarkers() {
-      // Should never be null, but just in case...
-       if (currentModel == null)
-          return;
-
-      boolean updateEditor = false;
-      SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(currentModel);
-
-      //printInfo("restoreAllMarkers start");
-
-      // Loop through the pendingChanges table:
-      //    1. delete all markers that are MarkerState.ADDED
-      //    2. restore all markers that are MarkerState.MODIFIED or MarkerState.DELETED
-      Enumeration<Marker> markers = pendingChanges.keys();
-      Vector<OpenSimObject> renamedObjects = new Vector<OpenSimObject>(1);
-      Vector<OpenSimObject> deletedObjects = new Vector<OpenSimObject>(1);
-      Vector<OpenSimObject> addedObjects = new Vector<OpenSimObject>(1);
-      while (markers.hasMoreElements()) {
-         Marker marker = markers.nextElement();
-         MarkerState state = pendingChanges.get(marker);
-         if (state == MarkerState.DELETED) {
-            double[] offset = new double[3];
-            Marker savedMarker = savedMarkers.get(marker);
-            MarkerSet markerset = currentModel.getMarkerSet();
-            savedMarker.getOffset(offset);
-            Body b = currentModel.getBodySet().get(savedMarker.getBodyName());
-            String n = savedMarker.getName();
-            Marker restoredMarker = markerset.addMarker(savedMarker.getName(), offset, b);
-            addedObjects.add(restoredMarker);
-            pendingChanges.remove(marker);
-            //wedpendingChanges.put(restoredMarker, MarkerState.UNMODIFIED);
-            savedMarkers.remove(marker);
-            savedMarkers.put(restoredMarker, savedMarker);
-         } else if (state == MarkerState.ADDED) {
-            deleteMarker(marker, false);
-            deletedObjects.add(marker);
-         } else if (state == MarkerState.MODIFIED) {
-            Marker savedMarker = savedMarkers.get(marker);
-            if (marker.getName().equals(savedMarker.getName()) == false) {
-              renamedObjects.add(marker);
-            }
-            // Copy the elements of the saved marker into the [regular] marker.
-            marker.copyData(savedMarker);
-            marker.setup(currentModel);
-            vis.getMarkersRep().updateMarkerGeometry(marker);
-         }
-      }
-
-      // Update the marker name list in the ViewDB.
-      ViewDB.getInstance().getModelGuiElements(currentModel).updateMarkerNames();
-
-      if (renamedObjects.size() > 0) {
-         ObjectsRenamedEvent evnt = new ObjectsRenamedEvent(this, currentModel, renamedObjects);
-         OpenSimDB.getInstance().setChanged();
-         OpenSimDB.getInstance().notifyObservers(evnt);
-      }
-
-      if (deletedObjects.size() > 0) {
-         ObjectsDeletedEvent evnt = new ObjectsDeletedEvent(this, currentModel, deletedObjects);
-         OpenSimDB.getInstance().setChanged();
-         OpenSimDB.getInstance().notifyObservers(evnt);
-      }
-
-      if (addedObjects.size() > 0) {
-         ObjectsAddedEvent evnt = new ObjectsAddedEvent(this, currentModel, addedObjects);
-         OpenSimDB.getInstance().setChanged();
-         OpenSimDB.getInstance().notifyObservers(evnt);
-      }
-
-      setAllPendingChanges(MarkerState.UNMODIFIED);
-
-      ViewDB.getInstance().repaintAll();
-      //printInfo("restoreAllMarkers end");
    }
 
    private String makeUniqueMarkerName(MarkerSet markerset) {
