@@ -673,7 +673,14 @@
             </file>
         </folder>
     </folder>
-    <folder name="Shortcuts"/>
+    <folder name="Shortcuts">
+        <file name="D-Z.shadow">  
+        <attr name="originalFile" stringvalue="Actions/Edit/org-openide-actions-UndoAction.instance" /> 
+        </file>
+        <file name="D-Y.shadow">  
+        <attr name="originalFile" stringvalue="Actions/Edit/org-openide-actions-RedoAction.instance" /> 
+        </file>
+    </folder>
     <folder name="Templates">
         <folder name="Other">
             <file name="OsimModelTemplate.osim" url="OsimModelTemplate.osim">
