@@ -43,6 +43,8 @@ public class ShowXMLRepJDialog extends javax.swing.JDialog {
         jEditorPane1 = new javax.swing.JEditorPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         creditsTextArea = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -60,6 +62,7 @@ public class ShowXMLRepJDialog extends javax.swing.JDialog {
 
         jLabel1.setText("Class Name");
 
+        jEditorPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("How objects of the selected class show in XML"));
         jEditorPane1.setEditable(false);
         jScrollPane1.setViewportView(jEditorPane1);
 
@@ -68,21 +71,33 @@ public class ShowXMLRepJDialog extends javax.swing.JDialog {
         creditsTextArea.setRows(5);
         creditsTextArea.setToolTipText("Authors. description and references.");
         creditsTextArea.setWrapStyleWord(true);
+        creditsTextArea.setBorder(javax.swing.BorderFactory.createTitledBorder("Author(s) and References"));
         jScrollPane2.setViewportView(creditsTextArea);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Monospaced", 2, 13)); // NOI18N
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("The text box above shows all the properties that can be set in XML for (an instance of) the selected class name. Some of these properties are optional and can be ignored. Assumed default values are usually described in Doxygen comments.");
+        jTextArea1.setWrapStyleWord(true);
+        jTextArea1.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        jTextArea1.setEnabled(false);
+        jScrollPane3.setViewportView(jTextArea1);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+            .add(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane1)
-                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
-                    .add(layout.createSequentialGroup()
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                    .add(jScrollPane1)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                         .add(jLabel1)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jComboBox1, 0, 311, Short.MAX_VALUE)))
+                        .add(jComboBox1, 0, 312, Short.MAX_VALUE))
+                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -93,9 +108,11 @@ public class ShowXMLRepJDialog extends javax.swing.JDialog {
                     .add(jLabel1)
                     .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(17, 17, 17)
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 178, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 87, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 90, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
         );
 
         pack();
@@ -126,7 +143,12 @@ public class ShowXMLRepJDialog extends javax.swing.JDialog {
         if (!obj.getReferences().equalsIgnoreCase("")) {
             credits = credits.concat("Reference: " + obj.getReferences() + "\n");
         } else {
-            credits = credits.concat("Reference: " + "OpenSim IEEE Publication\n");
+            credits = credits.concat("Reference: " + 
+                    "\nDelp SL, Anderson FC, Arnold AS, Loan P, "+
+                    "\nHabib A, John CT, Guendelman E, Thelen DG."+
+                    "\nOpenSim: Open-source Software to Create and Analyze "+
+                    "\nDynamic Simulations of Movement. IEEE Transactions on "+
+                    "\nBiomedical Engineering. (2007)");
         }
         creditsTextArea.setText(credits);
     }//GEN-LAST:event_jComboBox1ActionPerformed
@@ -157,6 +179,8 @@ public class ShowXMLRepJDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 
     private String removeEnclosingParethesisIfNeeded(String string) {
