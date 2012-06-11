@@ -293,7 +293,7 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChange(final double oldValue, final double v, boolean supportUndo) {
-        context.setDefaultsFromState();
+        context.setPropertiesFromState();
         PropertyHelper.setValueDouble(v, prop);
         handlePropertyChangeCommon();
         if (supportUndo) {
@@ -321,7 +321,7 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChange(final String oldValue, final String v, boolean supportUndo) {
-        context.setDefaultsFromState();
+        context.setPropertiesFromState();
         PropertyHelper.setValueString(v, prop);
         handlePropertyChangeCommon();
         if (supportUndo) {
@@ -349,7 +349,7 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChange(final boolean oldValue, final boolean v, boolean supportUndo) {
-        context.setDefaultsFromState();
+        context.setPropertiesFromState();
         PropertyHelper.setValueBool(v, prop);
         handlePropertyChangeCommon();
         if (supportUndo) {
@@ -377,7 +377,7 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChange(final int oldValue, final int v, boolean supportUndo) {
-        context.setDefaultsFromState();
+        context.setPropertiesFromState();
         PropertyHelper.setValueInt(v, prop);
         handlePropertyChangeCommon();
         if (supportUndo) {
@@ -405,7 +405,7 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChange(final ArrayDouble oldValue, final ArrayDouble v, boolean supportUndo) {
-        context.setDefaultsFromState();
+        context.setPropertiesFromState();
         int sz = v.size();
         for (int i = 0; i < sz; i++) {
             PropertyHelper.setValueDouble(v.getitem(i), prop, i);
@@ -436,7 +436,7 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChange(final Vec3 oldValue, final Vec3 v, boolean supportUndo) {
-        context.setDefaultsFromState();
+        context.setPropertiesFromState();
         for (int i = 0; i < 3; i++) {
             PropertyHelper.setValueVec3(v.get()[i], prop, i);
         }
@@ -466,7 +466,7 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChangeTransform(final ArrayDouble oldValue, final ArrayDouble v, boolean supportUndo) {
-        context.setDefaultsFromState();
+        context.setPropertiesFromState();
         int sz = prop.size();
         for (int i = 0; i < sz; i++) {
             PropertyHelper.setValueTransform(v.getitem(i), prop, i);
@@ -497,7 +497,7 @@ public class PropertyEditorAdaptor {
     }
     
     private void handlePropertyChange(final OpenSimObject oldObject, final OpenSimObject v, boolean supportUndo) {
-        context.setDefaultsFromState();
+        context.setPropertiesFromState();
         prop.setValueAsObject(v);
         handlePropertyChangeCommon();
         if (supportUndo) {

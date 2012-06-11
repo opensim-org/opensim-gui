@@ -87,7 +87,7 @@ public class Model extends ModelComponent {
   }
 
   public void setup() throws java.io.IOException {
-    opensimModelJNI.Model_setup__SWIG_0(swigCPtr, this);
+    opensimModelJNI.Model_setup(swigCPtr, this);
   }
 
   public void cleanup() {
@@ -578,20 +578,20 @@ public class Model extends ModelComponent {
     opensimModelJNI.Model_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
-  public void setup(Model model) {
-    opensimModelJNI.Model_setup__SWIG_1(swigCPtr, this, Model.getCPtr(model), model);
+  public void connectToModel(Model model) {
+    opensimModelJNI.Model_connectToModel(swigCPtr, this, Model.getCPtr(model), model);
   }
 
-  public void createSystem(SWIGTYPE_p_SimTK__MultibodySystem system) {
-    opensimModelJNI.Model_createSystem(swigCPtr, this, SWIGTYPE_p_SimTK__MultibodySystem.getCPtr(system));
+  public void addToSystem(SWIGTYPE_p_SimTK__MultibodySystem system) {
+    opensimModelJNI.Model_addToSystem(swigCPtr, this, SWIGTYPE_p_SimTK__MultibodySystem.getCPtr(system));
   }
 
-  public void initState(SWIGTYPE_p_SimTK__State state) {
-    opensimModelJNI.Model_initState(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state));
+  public void initStateFromProperties(SWIGTYPE_p_SimTK__State state) {
+    opensimModelJNI.Model_initStateFromProperties(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state));
   }
 
-  public void setDefaultsFromState(SWIGTYPE_p_SimTK__State state) {
-    opensimModelJNI.Model_setDefaultsFromState(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state));
+  public void setPropertiesFromState(SWIGTYPE_p_SimTK__State state) {
+    opensimModelJNI.Model_setPropertiesFromState(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state));
   }
 
   public void generateDecorations(boolean fixed, SWIGTYPE_p_OpenSim__ModelDisplayHints hints, SWIGTYPE_p_SimTK__State state, SWIGTYPE_p_SimTK__Array_T_SimTK__DecorativeGeometry_t appendToThis) {

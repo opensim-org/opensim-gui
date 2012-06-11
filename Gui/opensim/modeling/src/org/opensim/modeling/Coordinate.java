@@ -73,10 +73,6 @@ public class Coordinate extends ModelComponent {
     opensimModelJNI.Coordinate_copyData(swigCPtr, this, Coordinate.getCPtr(aCoordinate), aCoordinate);
   }
 
-  public void setup(Model aModel) {
-    opensimModelJNI.Coordinate_setup(swigCPtr, this, Model.getCPtr(aModel), aModel);
-  }
-
   public void setJoint(Joint aOwningJoint) {
     opensimModelJNI.Coordinate_setJoint(swigCPtr, this, Joint.getCPtr(aOwningJoint), aOwningJoint);
   }
@@ -276,6 +272,10 @@ public class Coordinate extends ModelComponent {
 
   public SWIGTYPE_p_SimTK__SystemYIndex getStateVariableSystemIndex(String stateVariableName) {
     return new SWIGTYPE_p_SimTK__SystemYIndex(opensimModelJNI.Coordinate_getStateVariableSystemIndex(swigCPtr, this, stateVariableName), true);
+  }
+
+  public void connectToModel(Model aModel) {
+    opensimModelJNI.Coordinate_connectToModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
   public final static class MotionType {

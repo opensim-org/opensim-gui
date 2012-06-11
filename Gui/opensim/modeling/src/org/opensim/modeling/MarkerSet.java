@@ -69,8 +69,8 @@ public class MarkerSet extends SetMarkers {
     this(opensimModelJNI.new_MarkerSet__SWIG_2(MarkerSet.getCPtr(aMarkerSet), aMarkerSet), true);
   }
 
-  public void setup(Model aModel) {
-    opensimModelJNI.MarkerSet_setup(swigCPtr, this, Model.getCPtr(aModel), aModel);
+  public void connectMarkersToModel(Model aModel) {
+    opensimModelJNI.MarkerSet_connectMarkersToModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
   public void getMarkerNames(ArrayStr aMarkerNamesArray) {

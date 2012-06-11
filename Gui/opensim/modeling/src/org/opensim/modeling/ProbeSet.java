@@ -77,8 +77,4 @@ public class ProbeSet extends ModelComponentSetProbes {
     this(opensimModelJNI.new_ProbeSet__SWIG_4(ProbeSet.getCPtr(aAbsProbeSet), aAbsProbeSet), true);
   }
 
-  public void setup(Model aModel) {
-    opensimModelJNI.ProbeSet_setup(swigCPtr, this, Model.getCPtr(aModel), aModel);
-  }
-
 }

@@ -373,8 +373,8 @@ public class SpatialTransform extends OpenSimObject {
     this(opensimModelJNI.new_SpatialTransform(), true);
   }
 
-  public void setup(CustomJoint owningJoint) {
-    opensimModelJNI.SpatialTransform_setup(swigCPtr, this, CustomJoint.getCPtr(owningJoint), owningJoint);
+  public void connectToJoint(CustomJoint owningJoint) {
+    opensimModelJNI.SpatialTransform_connectToJoint(swigCPtr, this, CustomJoint.getCPtr(owningJoint), owningJoint);
   }
 
   public void constructIndependentAxes(int nAxes, int startIndex) {

@@ -93,4 +93,24 @@ public class ModelComponentSetControllers extends SetControllers {
     return opensimModelJNI.ModelComponentSetControllers_set__SWIG_1(swigCPtr, this, aIndex, Controller.getCPtr(aObject), aObject);
   }
 
+  public void invokeConnectToModel(Model model) {
+    opensimModelJNI.ModelComponentSetControllers_invokeConnectToModel(swigCPtr, this, Model.getCPtr(model), model);
+  }
+
+  public void invokeAddToSystem(SWIGTYPE_p_SimTK__MultibodySystem system) {
+    opensimModelJNI.ModelComponentSetControllers_invokeAddToSystem(swigCPtr, this, SWIGTYPE_p_SimTK__MultibodySystem.getCPtr(system));
+  }
+
+  public void invokeInitStateFromProperties(SWIGTYPE_p_SimTK__State state) {
+    opensimModelJNI.ModelComponentSetControllers_invokeInitStateFromProperties(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state));
+  }
+
+  public void invokeSetPropertiesFromState(SWIGTYPE_p_SimTK__State state) {
+    opensimModelJNI.ModelComponentSetControllers_invokeSetPropertiesFromState(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state));
+  }
+
+  public void invokeGenerateDecorations(boolean fixed, SWIGTYPE_p_OpenSim__ModelDisplayHints hints, SWIGTYPE_p_SimTK__State state, SWIGTYPE_p_SimTK__Array_T_SimTK__DecorativeGeometry_t appendToThis) {
+    opensimModelJNI.ModelComponentSetControllers_invokeGenerateDecorations(swigCPtr, this, fixed, SWIGTYPE_p_OpenSim__ModelDisplayHints.getCPtr(hints), SWIGTYPE_p_SimTK__State.getCPtr(state), SWIGTYPE_p_SimTK__Array_T_SimTK__DecorativeGeometry_t.getCPtr(appendToThis));
+  }
+
 }

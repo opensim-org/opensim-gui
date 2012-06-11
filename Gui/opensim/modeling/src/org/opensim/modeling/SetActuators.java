@@ -73,8 +73,8 @@ public class SetActuators extends OpenSimObject {
     this(opensimModelJNI.new_SetActuators__SWIG_3(SetActuators.getCPtr(aSet), aSet), true);
   }
 
-  public void setup() {
-    opensimModelJNI.SetActuators_setup(swigCPtr, this);
+  public void setupGroups() {
+    opensimModelJNI.SetActuators_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {

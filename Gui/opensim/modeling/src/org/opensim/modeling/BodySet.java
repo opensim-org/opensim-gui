@@ -69,10 +69,6 @@ public class BodySet extends ModelComponentSetBodies {
     this(opensimModelJNI.new_BodySet__SWIG_2(BodySet.getCPtr(aAbsBodySet), aAbsBodySet), true);
   }
 
-  public void setup(Model aModel) {
-    opensimModelJNI.BodySet_setup(swigCPtr, this, Model.getCPtr(aModel), aModel);
-  }
-
   public BodySet(Model model, String aFileName, boolean aUpdateFromXMLNode) {
     this(opensimModelJNI.new_BodySet__SWIG_3(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
   }

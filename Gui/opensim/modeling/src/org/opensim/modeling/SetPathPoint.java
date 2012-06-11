@@ -73,8 +73,8 @@ public class SetPathPoint extends OpenSimObject {
     this(opensimModelJNI.new_SetPathPoint__SWIG_3(SetPathPoint.getCPtr(aSet), aSet), true);
   }
 
-  public void setup() {
-    opensimModelJNI.SetPathPoint_setup(swigCPtr, this);
+  public void setupGroups() {
+    opensimModelJNI.SetPathPoint_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {

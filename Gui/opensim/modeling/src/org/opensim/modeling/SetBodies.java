@@ -73,8 +73,8 @@ public class SetBodies extends OpenSimObject {
     this(opensimModelJNI.new_SetBodies__SWIG_3(SetBodies.getCPtr(aSet), aSet), true);
   }
 
-  public void setup() {
-    opensimModelJNI.SetBodies_setup(swigCPtr, this);
+  public void setupGroups() {
+    opensimModelJNI.SetBodies_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {

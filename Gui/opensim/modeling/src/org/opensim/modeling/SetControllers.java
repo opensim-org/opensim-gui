@@ -73,8 +73,8 @@ public class SetControllers extends OpenSimObject {
     this(opensimModelJNI.new_SetControllers__SWIG_3(SetControllers.getCPtr(aSet), aSet), true);
   }
 
-  public void setup() {
-    opensimModelJNI.SetControllers_setup(swigCPtr, this);
+  public void setupGroups() {
+    opensimModelJNI.SetControllers_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {

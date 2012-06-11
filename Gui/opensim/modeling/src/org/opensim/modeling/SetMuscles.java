@@ -73,8 +73,8 @@ public class SetMuscles extends OpenSimObject {
     this(opensimModelJNI.new_SetMuscles__SWIG_3(SetMuscles.getCPtr(aSet), aSet), true);
   }
 
-  public void setup() {
-    opensimModelJNI.SetMuscles_setup(swigCPtr, this);
+  public void setupGroups() {
+    opensimModelJNI.SetMuscles_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {

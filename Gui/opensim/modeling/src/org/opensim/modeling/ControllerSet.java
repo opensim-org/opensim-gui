@@ -113,14 +113,6 @@ public class ControllerSet extends ModelComponentSetControllers {
     opensimModelJNI.ControllerSet_setDesiredStates(swigCPtr, this, Storage.getCPtr(yStore), yStore);
   }
 
-  public void setup(Model aModel) {
-    opensimModelJNI.ControllerSet_setup(swigCPtr, this, Model.getCPtr(aModel), aModel);
-  }
-
-  public void createSystem(SWIGTYPE_p_SimTK__MultibodySystem system) {
-    opensimModelJNI.ControllerSet_createSystem(swigCPtr, this, SWIGTYPE_p_SimTK__MultibodySystem.getCPtr(system));
-  }
-
   public void computeControls(SWIGTYPE_p_SimTK__State s, SWIGTYPE_p_SimTK__Vector controls) {
     opensimModelJNI.ControllerSet_computeControls(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), SWIGTYPE_p_SimTK__Vector.getCPtr(controls));
   }

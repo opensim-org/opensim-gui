@@ -73,8 +73,8 @@ public class SetScales extends OpenSimObject {
     this(opensimModelJNI.new_SetScales__SWIG_3(SetScales.getCPtr(aSet), aSet), true);
   }
 
-  public void setup() {
-    opensimModelJNI.SetScales_setup(swigCPtr, this);
+  public void setupGroups() {
+    opensimModelJNI.SetScales_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {

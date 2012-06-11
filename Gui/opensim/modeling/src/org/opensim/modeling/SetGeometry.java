@@ -73,8 +73,8 @@ public class SetGeometry extends OpenSimObject {
     this(opensimModelJNI.new_SetGeometry__SWIG_3(SetGeometry.getCPtr(aSet), aSet), true);
   }
 
-  public void setup() {
-    opensimModelJNI.SetGeometry_setup(swigCPtr, this);
+  public void setupGroups() {
+    opensimModelJNI.SetGeometry_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {

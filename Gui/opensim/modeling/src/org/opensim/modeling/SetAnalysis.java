@@ -73,8 +73,8 @@ public class SetAnalysis extends OpenSimObject {
     this(opensimModelJNI.new_SetAnalysis__SWIG_3(SetAnalysis.getCPtr(aSet), aSet), true);
   }
 
-  public void setup() {
-    opensimModelJNI.SetAnalysis_setup(swigCPtr, this);
+  public void setupGroups() {
+    opensimModelJNI.SetAnalysis_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {

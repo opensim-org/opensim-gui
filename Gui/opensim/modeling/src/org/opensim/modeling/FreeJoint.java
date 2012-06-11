@@ -77,16 +77,16 @@ public class FreeJoint extends Joint {
     opensimModelJNI.FreeJoint_copyData(swigCPtr, this, FreeJoint.getCPtr(aJoint), aJoint);
   }
 
-  public void setup(Model aModel) {
-    opensimModelJNI.FreeJoint_setup(swigCPtr, this, Model.getCPtr(aModel), aModel);
-  }
-
   public int numCoordinates() {
     return opensimModelJNI.FreeJoint_numCoordinates(swigCPtr, this);
   }
 
   public void scale(ScaleSet aScaleSet) {
     opensimModelJNI.FreeJoint_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
+  }
+
+  public void connectToModel(Model aModel) {
+    opensimModelJNI.FreeJoint_connectToModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
 }

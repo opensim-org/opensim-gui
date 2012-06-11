@@ -73,8 +73,8 @@ public class SetCoordinates extends OpenSimObject {
     this(opensimModelJNI.new_SetCoordinates__SWIG_3(SetCoordinates.getCPtr(aSet), aSet), true);
   }
 
-  public void setup() {
-    opensimModelJNI.SetCoordinates_setup(swigCPtr, this);
+  public void setupGroups() {
+    opensimModelJNI.SetCoordinates_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {

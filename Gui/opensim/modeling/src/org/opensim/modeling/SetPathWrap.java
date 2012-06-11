@@ -73,8 +73,8 @@ public class SetPathWrap extends OpenSimObject {
     this(opensimModelJNI.new_SetPathWrap__SWIG_3(SetPathWrap.getCPtr(aSet), aSet), true);
   }
 
-  public void setup() {
-    opensimModelJNI.SetPathWrap_setup(swigCPtr, this);
+  public void setupGroups() {
+    opensimModelJNI.SetPathWrap_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {

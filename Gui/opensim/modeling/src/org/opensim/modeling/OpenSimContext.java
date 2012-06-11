@@ -337,8 +337,8 @@ public class OpenSimContext extends OpenSimObject {
     opensimModelJNI.OpenSimContext_getTransformAsDouble16(SWIGTYPE_p_Transform.getCPtr(aTransform), flattened);
   }
 
-  public void setDefaultsFromState() {
-    opensimModelJNI.OpenSimContext_setDefaultsFromState(swigCPtr, this);
+  public void setPropertiesFromState() {
+    opensimModelJNI.OpenSimContext_setPropertiesFromState(swigCPtr, this);
   }
 
   public void recreateSystemKeepStage() {

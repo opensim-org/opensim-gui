@@ -81,10 +81,6 @@ public class CoordinateSet extends ModelComponentSetCoordinates {
     opensimModelJNI.CoordinateSet_populate(swigCPtr, this, Model.getCPtr(model), model);
   }
 
-  public void setup(Model model) {
-    opensimModelJNI.CoordinateSet_setup(swigCPtr, this, Model.getCPtr(model), model);
-  }
-
   public void getSpeedNames(ArrayStr rNames) {
     opensimModelJNI.CoordinateSet_getSpeedNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
   }

@@ -567,7 +567,7 @@ final class CoordinateViewerTopComponent extends TopComponent implements Observe
          setDefaultItem.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
                // Show a dialog warning that this change is persistent if model is saved
-                openSimContext.setDefaultsFromState();
+                openSimContext.setPropertiesFromState();
                 for(int i=0; i<poses.size(); i++){
                     final ModelPose p=poses.get(i);
                     if (p.getPoseName().compareTo(DEFAULT_POSE_NAME)==0){

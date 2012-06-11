@@ -141,8 +141,8 @@ public class Marker extends OpenSimObject {
     opensimModelJNI.Marker_scale(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(aScaleFactors));
   }
 
-  public void setup(Model aModel) {
-    opensimModelJNI.Marker_setup(swigCPtr, this, Model.getCPtr(aModel), aModel);
+  public void connectMarkerToModel(Model aModel) {
+    opensimModelJNI.Marker_connectMarkerToModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
   public void updateGeometry() {

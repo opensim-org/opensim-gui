@@ -73,8 +73,8 @@ public class SetMeasurements extends OpenSimObject {
     this(opensimModelJNI.new_SetMeasurements__SWIG_3(SetMeasurements.getCPtr(aSet), aSet), true);
   }
 
-  public void setup() {
-    opensimModelJNI.SetMeasurements_setup(swigCPtr, this);
+  public void setupGroups() {
+    opensimModelJNI.SetMeasurements_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {

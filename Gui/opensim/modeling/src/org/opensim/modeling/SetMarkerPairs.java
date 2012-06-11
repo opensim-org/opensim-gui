@@ -73,8 +73,8 @@ public class SetMarkerPairs extends OpenSimObject {
     this(opensimModelJNI.new_SetMarkerPairs__SWIG_3(SetMarkerPairs.getCPtr(aSet), aSet), true);
   }
 
-  public void setup() {
-    opensimModelJNI.SetMarkerPairs_setup(swigCPtr, this);
+  public void setupGroups() {
+    opensimModelJNI.SetMarkerPairs_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {

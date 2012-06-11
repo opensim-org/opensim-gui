@@ -73,8 +73,8 @@ public class SetJoints extends OpenSimObject {
     this(opensimModelJNI.new_SetJoints__SWIG_3(SetJoints.getCPtr(aSet), aSet), true);
   }
 
-  public void setup() {
-    opensimModelJNI.SetJoints_setup(swigCPtr, this);
+  public void setupGroups() {
+    opensimModelJNI.SetJoints_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {

@@ -86,8 +86,8 @@ public class SimbodyEngine extends OpenSimObject {
     opensimModelJNI.SimbodyEngine_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
-  public void setup(Model aModel) {
-    opensimModelJNI.SimbodyEngine_setup(swigCPtr, this, Model.getCPtr(aModel), aModel);
+  public void connectSimbodyEngineToModel(Model aModel) {
+    opensimModelJNI.SimbodyEngine_connectSimbodyEngineToModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
   public Body getGroundBody() {

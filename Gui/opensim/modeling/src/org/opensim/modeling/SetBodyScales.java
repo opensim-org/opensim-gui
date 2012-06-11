@@ -73,8 +73,8 @@ public class SetBodyScales extends OpenSimObject {
     this(opensimModelJNI.new_SetBodyScales__SWIG_3(SetBodyScales.getCPtr(aSet), aSet), true);
   }
 
-  public void setup() {
-    opensimModelJNI.SetBodyScales_setup(swigCPtr, this);
+  public void setupGroups() {
+    opensimModelJNI.SetBodyScales_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {

@@ -73,8 +73,8 @@ public class SetWrapObject extends OpenSimObject {
     this(opensimModelJNI.new_SetWrapObject__SWIG_3(SetWrapObject.getCPtr(aSet), aSet), true);
   }
 
-  public void setup() {
-    opensimModelJNI.SetWrapObject_setup(swigCPtr, this);
+  public void setupGroups() {
+    opensimModelJNI.SetWrapObject_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {

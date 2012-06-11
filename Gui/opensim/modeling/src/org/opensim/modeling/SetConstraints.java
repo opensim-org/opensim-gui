@@ -73,8 +73,8 @@ public class SetConstraints extends OpenSimObject {
     this(opensimModelJNI.new_SetConstraints__SWIG_3(SetConstraints.getCPtr(aSet), aSet), true);
   }
 
-  public void setup() {
-    opensimModelJNI.SetConstraints_setup(swigCPtr, this);
+  public void setupGroups() {
+    opensimModelJNI.SetConstraints_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {

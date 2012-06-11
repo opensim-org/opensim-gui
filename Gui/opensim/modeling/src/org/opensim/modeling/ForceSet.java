@@ -81,8 +81,8 @@ public class ForceSet extends ModelComponentSetForces {
     opensimModelJNI.ForceSet_copyData(swigCPtr, this, ForceSet.getCPtr(aAbsForceSet), aAbsForceSet);
   }
 
-  public void setup(Model aModel) {
-    opensimModelJNI.ForceSet_setup(swigCPtr, this, Model.getCPtr(aModel), aModel);
+  public void invokeConnectToModel(Model aModel) {
+    opensimModelJNI.ForceSet_invokeConnectToModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
   public boolean remove(int aIndex) {

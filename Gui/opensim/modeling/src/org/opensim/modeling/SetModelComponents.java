@@ -73,8 +73,8 @@ public class SetModelComponents extends OpenSimObject {
     this(opensimModelJNI.new_SetModelComponents__SWIG_3(SetModelComponents.getCPtr(aSet), aSet), true);
   }
 
-  public void setup() {
-    opensimModelJNI.SetModelComponents_setup(swigCPtr, this);
+  public void setupGroups() {
+    opensimModelJNI.SetModelComponents_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {

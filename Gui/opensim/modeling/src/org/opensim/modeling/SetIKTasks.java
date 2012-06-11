@@ -73,8 +73,8 @@ public class SetIKTasks extends OpenSimObject {
     this(opensimModelJNI.new_SetIKTasks__SWIG_3(SetIKTasks.getCPtr(aSet), aSet), true);
   }
 
-  public void setup() {
-    opensimModelJNI.SetIKTasks_setup(swigCPtr, this);
+  public void setupGroups() {
+    opensimModelJNI.SetIKTasks_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {

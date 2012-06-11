@@ -57,10 +57,6 @@ public class Controller extends ModelComponent {
     return opensimModelJNI.Controller_getConcreteClassName(swigCPtr, this);
   }
 
-  public int getNumStateVariables() {
-    return opensimModelJNI.Controller_getNumStateVariables(swigCPtr, this);
-  }
-
   public boolean isDisabled() {
     return opensimModelJNI.Controller_isDisabled(swigCPtr, this);
   }

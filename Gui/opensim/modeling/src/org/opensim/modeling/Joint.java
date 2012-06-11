@@ -57,10 +57,6 @@ public class Joint extends ModelComponent {
     return opensimModelJNI.Joint_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setup(Model aModel) {
-    opensimModelJNI.Joint_setup(swigCPtr, this, Model.getCPtr(aModel), aModel);
-  }
-
   public void copyData(Joint aJoint) {
     opensimModelJNI.Joint_copyData(swigCPtr, this, Joint.getCPtr(aJoint), aJoint);
   }
@@ -179,6 +175,10 @@ public class Joint extends ModelComponent {
 
   public void updateName(String aName) {
     opensimModelJNI.Joint_updateName(swigCPtr, this, aName);
+  }
+
+  public void connectToModel(Model aModel) {
+    opensimModelJNI.Joint_connectToModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
 }

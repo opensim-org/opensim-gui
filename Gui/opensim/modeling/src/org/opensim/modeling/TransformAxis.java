@@ -273,8 +273,8 @@ public class TransformAxis extends OpenSimObject {
     return opensimModelJNI.TransformAxis_getValue(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
   }
 
-  public void setup(Joint owningJoint) {
-    opensimModelJNI.TransformAxis_setup(swigCPtr, this, Joint.getCPtr(owningJoint), owningJoint);
+  public void connectToJoint(Joint owningJoint) {
+    opensimModelJNI.TransformAxis_connectToJoint(swigCPtr, this, Joint.getCPtr(owningJoint), owningJoint);
   }
 
 }

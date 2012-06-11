@@ -73,8 +73,8 @@ public class SetExternalForces extends OpenSimObject {
     this(opensimModelJNI.new_SetExternalForces__SWIG_3(SetExternalForces.getCPtr(aSet), aSet), true);
   }
 
-  public void setup() {
-    opensimModelJNI.SetExternalForces_setup(swigCPtr, this);
+  public void setupGroups() {
+    opensimModelJNI.SetExternalForces_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {

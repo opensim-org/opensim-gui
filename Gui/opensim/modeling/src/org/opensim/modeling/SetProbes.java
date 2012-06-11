@@ -73,8 +73,8 @@ public class SetProbes extends OpenSimObject {
     this(opensimModelJNI.new_SetProbes__SWIG_3(SetProbes.getCPtr(aSet), aSet), true);
   }
 
-  public void setup() {
-    opensimModelJNI.SetProbes_setup(swigCPtr, this);
+  public void setupGroups() {
+    opensimModelJNI.SetProbes_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {

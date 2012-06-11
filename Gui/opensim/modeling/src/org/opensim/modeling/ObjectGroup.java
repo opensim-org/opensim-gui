@@ -89,8 +89,8 @@ public class ObjectGroup extends OpenSimObject {
     opensimModelJNI.ObjectGroup_replace(swigCPtr, this, OpenSimObject.getCPtr(aOldObject), aOldObject, OpenSimObject.getCPtr(aNewObject), aNewObject);
   }
 
-  public void setup(ArrayPtrsObj aObjects) {
-    opensimModelJNI.ObjectGroup_setup(swigCPtr, this, ArrayPtrsObj.getCPtr(aObjects), aObjects);
+  public void setupGroup(ArrayPtrsObj aObjects) {
+    opensimModelJNI.ObjectGroup_setupGroup(swigCPtr, this, ArrayPtrsObj.getCPtr(aObjects), aObjects);
   }
 
   public ArrayObjPtr getMembers() {

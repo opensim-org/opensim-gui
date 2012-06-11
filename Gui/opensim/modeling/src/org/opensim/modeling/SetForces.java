@@ -73,8 +73,8 @@ public class SetForces extends OpenSimObject {
     this(opensimModelJNI.new_SetForces__SWIG_3(SetForces.getCPtr(aSet), aSet), true);
   }
 
-  public void setup() {
-    opensimModelJNI.SetForces_setup(swigCPtr, this);
+  public void setupGroups() {
+    opensimModelJNI.SetForces_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {
