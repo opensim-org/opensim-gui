@@ -366,10 +366,11 @@ public class BodyDisplayer extends vtkAssembly
         boneActor.GetProperty().SetOpacity(gPiece.getOpacity());
     }
 
-    private void setTransformFromArray6(final double[] rotationsAndTranslations, final vtkTransform xform) {
+    static public void setTransformFromArray6(final double[] rotationsAndTranslations, final vtkTransform xform) {
         xform.RotateX(Math.toDegrees(rotationsAndTranslations[0]));
         xform.RotateY(Math.toDegrees(rotationsAndTranslations[1]));
         xform.RotateZ(Math.toDegrees(rotationsAndTranslations[2]));
+        xform.PostMultiply();
         xform.Translate(rotationsAndTranslations[3], rotationsAndTranslations[4], rotationsAndTranslations[5]);
     }
 

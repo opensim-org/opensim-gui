@@ -184,7 +184,7 @@ public class DisplayGeometryDisplayer extends vtkActor
         double[] rotationsAndTranslations = new double[6];
         displayGeometry.getRotationsAndTranslationsAsArray6(rotationsAndTranslations);
         vtkTransform xform = new vtkTransform();
-        setTransformFromArray6(rotationsAndTranslations, xform);
+        BodyDisplayer.setTransformFromArray6(rotationsAndTranslations, xform);
         SetUserTransform(xform);
         /**
          * Representation
@@ -195,14 +195,7 @@ public class DisplayGeometryDisplayer extends vtkActor
          */
         GetProperty().SetOpacity(displayGeometry.getOpacity());
     }
-    
-    private void setTransformFromArray6(final double[] rotationsAndTranslations, final vtkTransform xform) {
-        xform.RotateX(Math.toDegrees(rotationsAndTranslations[0]));
-        xform.RotateY(Math.toDegrees(rotationsAndTranslations[1]));
-        xform.RotateZ(Math.toDegrees(rotationsAndTranslations[2]));
-        xform.Translate(rotationsAndTranslations[3], rotationsAndTranslations[4], rotationsAndTranslations[5]);
-    }
-    
+        
     public void applyDisplayPreferenceToActor() {
         
         switch(displayGeometry.getDisplayPreference().swigValue()) {
@@ -289,7 +282,7 @@ public class DisplayGeometryDisplayer extends vtkActor
         for(int i=0; i<3;i++) rotationsAndTranslations[i+3]=loc.get(i);
         displayGeometry.setRotationsAndTRanslations(rotationsAndTranslations);
         vtkTransform xform = new vtkTransform();
-        setTransformFromArray6(rotationsAndTranslations, xform);
+        BodyDisplayer.setTransformFromArray6(rotationsAndTranslations, xform);
         SetUserTransform(xform);
         Modified();
         if (allowUndo){
@@ -332,7 +325,7 @@ public class DisplayGeometryDisplayer extends vtkActor
         for(int i=0; i<3;i++) rotationsAndTranslations[i]=Math.toRadians(loc.get(i));
         displayGeometry.setRotationsAndTRanslations(rotationsAndTranslations);
         vtkTransform xform = new vtkTransform();
-        setTransformFromArray6(rotationsAndTranslations, xform);
+        BodyDisplayer.setTransformFromArray6(rotationsAndTranslations, xform);
         SetUserTransform(xform);
         Modified();
         ViewDB.getInstance().renderAll();
