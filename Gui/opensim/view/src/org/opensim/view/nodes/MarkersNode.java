@@ -39,7 +39,7 @@ public class MarkersNode extends OpenSimObjectSetNode {
         setDisplayName(NbBundle.getMessage(MarkersNode.class, "CTL_Markers"));
         updateChildNodes(markerSet);
         model=m;
-        markersDisplayer = ViewDB.getInstance().getModelVisuals(model).getMarkersRep();
+        markersDisplayer=null;
         addDisplayOption(displayOption.Isolatable);
         addDisplayOption(displayOption.Showable);
     }
@@ -154,6 +154,8 @@ public class MarkersNode extends OpenSimObjectSetNode {
     
     public Color getColor()
     {
+        if (markersDisplayer==null)
+            markersDisplayer = ViewDB.getInstance().getModelVisuals(model).getMarkersRep();
         return markersDisplayer.getColor();
     }
    
@@ -186,6 +188,8 @@ public class MarkersNode extends OpenSimObjectSetNode {
 
     public double getScaleFactor()
     {
+        if (markersDisplayer==null)
+            markersDisplayer = ViewDB.getInstance().getModelVisuals(model).getMarkersRep();
         return markersDisplayer.getScaleFactor();
     }
 } // class MarkersNode
