@@ -419,12 +419,13 @@ public class QuantityNameFilterJPanel extends javax.swing.JPanel
             return;
         }
         jModelComboBox.setModel(new DefaultComboBoxModel(models));
-        currentModel = (Model)models[0];
-        
+        currentModel = OpenSimDB.getInstance().getCurrentModel();
+        jModelComboBox.setSelectedItem(currentModel);
         Vector<String> groups=ViewDB.getInstance().getModelGuiElements(currentModel).getActuatorGroupNames();
         jMuscleGroupComboBox.setModel(new DefaultComboBoxModel(groups));
         setFilter(currentFilter);
-        restrictToGroup(groups.get(0));
+        if (groups.size()>0)
+            restrictToGroup(groups.get(0));
         
 // TODO add your handling code here:
     }//GEN-LAST:event_jModelGroupRadioButtonActionPerformed
