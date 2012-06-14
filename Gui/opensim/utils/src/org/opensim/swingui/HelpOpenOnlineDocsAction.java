@@ -36,7 +36,7 @@ public final class HelpOpenOnlineDocsAction extends CallableSystemAction {
     public void performAction() {
         //Or use internal browser 
         // HtmlBrowser.URLDisplayer.getDefault().showURL(new URL("https://simtk.org/tracker/?func=add&atid=322&group_id=91"));
-        BrowserLauncher.openURL("http://simtk-confluence.stanford.edu:8080/display/OpenSim/User%27s+Guide");
+        BrowserLauncher.openURL("http://www.stanford.edu/group/opensim/support/index.html");
     }
     
     public String getName() {
