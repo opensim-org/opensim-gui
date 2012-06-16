@@ -61,6 +61,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.text.NumberFormatter;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import org.jfree.chart.ChartPanel;
@@ -186,7 +187,8 @@ public class JPlotterPanel extends javax.swing.JPanel
       jTopChartingPanel.setLayout(new BorderLayout());
       xSelector = new JPlotterQuantitySelector(jXQtyTextField, this, true);
       jPlotsTree.addTreeSelectionListener(this);
-      
+      jPlotsTree.setEditable(true);
+      jPlotsTree.setCellEditor(new UserTreeCellEditor(jPlotsTree, new DefaultTreeCellRenderer()));
       jPlotterDeletePlotButton.setEnabled(false);
       jPlotterAddPlotButton.setEnabled(validateXY());
       // Add in blank figure by default
