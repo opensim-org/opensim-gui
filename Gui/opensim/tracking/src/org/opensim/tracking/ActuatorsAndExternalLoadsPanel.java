@@ -116,8 +116,8 @@ public class ActuatorsAndExternalLoadsPanel extends javax.swing.JPanel {
       }
       ToolCommon.bindProperty(aTool, "force_set_files", actuatorSetFiles);
       ToolCommon.bindProperty(aTool, "external_loads_file", externalLoadsFileName);
-      ToolCommon.bindProperty(aTool, "external_loads_model_kinematics_file", externalLoadsModelKinematicsFileName);
-      ToolCommon.bindProperty(aTool, "lowpass_cutoff_frequency_for_load_kinematics", cutoffFrequency);
+      //ToolCommon.bindProperty(aTool, "external_loads_model_kinematics_file", externalLoadsModelKinematicsFileName);
+      //ToolCommon.bindProperty(aTool, "lowpass_cutoff_frequency_for_load_kinematics", cutoffFrequency);
    }
 
    private void setEnabled(JPanel panel, boolean enabled) {
