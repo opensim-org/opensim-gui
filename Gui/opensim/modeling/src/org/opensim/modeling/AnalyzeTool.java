@@ -94,6 +94,10 @@ public class AnalyzeTool extends AbstractTool {
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
+  public static void fixMuscleStatesToValidRange(Storage aStore, Model aModel) {
+    opensimModelJNI.AnalyzeTool_fixMuscleStatesToValidRange(Storage.getCPtr(aStore), aStore, Model.getCPtr(aModel), aModel);
+  }
+
   public Storage getStatesStorage() {
     return new Storage(opensimModelJNI.AnalyzeTool_getStatesStorage(swigCPtr, this), false);
   }

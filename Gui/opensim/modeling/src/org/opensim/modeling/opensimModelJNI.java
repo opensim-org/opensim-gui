@@ -152,6 +152,7 @@ public class opensimModelJNI {
   public final static native long OpenSimObject_newInstanceOfType(String jarg1);
   public final static native void OpenSimObject_getRegisteredTypenames(long jarg1, ArrayStr jarg1_);
   public final static native long OpenSimObject_makeObjectFromFile(String jarg1);
+  public final static native void OpenSimObject_readObjectFromXMLNodeOrFile(long jarg1, OpenSimObject jarg1_, long jarg2, int jarg3);
   public final static native void OpenSimObject_updateFromXMLNode(long jarg1, OpenSimObject jarg1_, long jarg2, int jarg3);
   public final static native void OpenSimObject_updateXMLNode(long jarg1, OpenSimObject jarg1_, long jarg2);
   public final static native boolean OpenSimObject_getInlined(long jarg1, OpenSimObject jarg1_);
@@ -489,6 +490,7 @@ public class opensimModelJNI {
   public final static native int Storage_getDataAtTime__SWIG_2(long jarg1, Storage jarg1_, double jarg2, int jarg3, long jarg4, ArrayDouble jarg4_);
   public final static native int Storage_getDataColumn__SWIG_0(long jarg1, Storage jarg1_, int jarg2, long jarg3);
   public final static native int Storage_getDataColumn__SWIG_1(long jarg1, Storage jarg1_, int jarg2, long jarg3, ArrayDouble jarg3_);
+  public final static native void Storage_setDataColumnToFixedValue(long jarg1, Storage jarg1_, String jarg2, double jarg3);
   public final static native void Storage_setDataColumn(long jarg1, Storage jarg1_, int jarg2, long jarg3, ArrayDouble jarg3_);
   public final static native int Storage_getDataColumn__SWIG_2(long jarg1, Storage jarg1_, String jarg2, long jarg3);
   public final static native void Storage_getDataColumn__SWIG_3(long jarg1, Storage jarg1_, String jarg2, long jarg3, ArrayDouble jarg3_, double jarg4);
@@ -4895,19 +4897,6 @@ public class opensimModelJNI {
   public final static native double Thelen2003Muscle_get_Flen__SWIG_1(long jarg1, Thelen2003Muscle jarg1_);
   public final static native long Thelen2003Muscle_upd_Flen__SWIG_1(long jarg1, Thelen2003Muscle jarg1_);
   public final static native void Thelen2003Muscle_set_Flen__SWIG_1(long jarg1, Thelen2003Muscle jarg1_, double jarg2);
-  public final static native void Thelen2003Muscle_PropertyIndex_activation_minimum_value_set(long jarg1, Thelen2003Muscle jarg1_, long jarg2);
-  public final static native long Thelen2003Muscle_PropertyIndex_activation_minimum_value_get(long jarg1, Thelen2003Muscle jarg1_);
-  public final static native void Thelen2003Muscle_copyProperty_activation_minimum_value(long jarg1, Thelen2003Muscle jarg1_, long jarg2, Thelen2003Muscle jarg2_);
-  public final static native long Thelen2003Muscle_getProperty_activation_minimum_value(long jarg1, Thelen2003Muscle jarg1_);
-  public final static native long Thelen2003Muscle_updProperty_activation_minimum_value(long jarg1, Thelen2003Muscle jarg1_);
-  public final static native double Thelen2003Muscle_get_activation_minimum_value__SWIG_0(long jarg1, Thelen2003Muscle jarg1_, int jarg2);
-  public final static native long Thelen2003Muscle_upd_activation_minimum_value__SWIG_0(long jarg1, Thelen2003Muscle jarg1_, int jarg2);
-  public final static native void Thelen2003Muscle_set_activation_minimum_value__SWIG_0(long jarg1, Thelen2003Muscle jarg1_, int jarg2, double jarg3);
-  public final static native int Thelen2003Muscle_append_activation_minimum_value(long jarg1, Thelen2003Muscle jarg1_, double jarg2);
-  public final static native void Thelen2003Muscle_constructProperty_activation_minimum_value(long jarg1, Thelen2003Muscle jarg1_, double jarg2);
-  public final static native double Thelen2003Muscle_get_activation_minimum_value__SWIG_1(long jarg1, Thelen2003Muscle jarg1_);
-  public final static native long Thelen2003Muscle_upd_activation_minimum_value__SWIG_1(long jarg1, Thelen2003Muscle jarg1_);
-  public final static native void Thelen2003Muscle_set_activation_minimum_value__SWIG_1(long jarg1, Thelen2003Muscle jarg1_, double jarg2);
   public final static native void Thelen2003Muscle_PropertyIndex_fv_linear_extrap_threshold_set(long jarg1, Thelen2003Muscle jarg1_, long jarg2);
   public final static native long Thelen2003Muscle_PropertyIndex_fv_linear_extrap_threshold_get(long jarg1, Thelen2003Muscle jarg1_);
   public final static native void Thelen2003Muscle_copyProperty_fv_linear_extrap_threshold(long jarg1, Thelen2003Muscle jarg1_, long jarg2, Thelen2003Muscle jarg2_);
@@ -5498,6 +5487,7 @@ public class opensimModelJNI {
   public final static native void AnalyzeTool_updateFromXMLNode__SWIG_1(long jarg1, AnalyzeTool jarg1_, long jarg2);
   public final static native void AnalyzeTool_setStatesStorage(long jarg1, AnalyzeTool jarg1_, long jarg2, Storage jarg2_);
   public final static native long AnalyzeTool_createStatesStorageFromCoordinatesAndSpeeds(long jarg1, Model jarg1_, long jarg2, Storage jarg2_, long jarg3, Storage jarg3_);
+  public final static native void AnalyzeTool_fixMuscleStatesToValidRange(long jarg1, Storage jarg1_, long jarg2, Model jarg2_);
   public final static native long AnalyzeTool_getStatesStorage(long jarg1, AnalyzeTool jarg1_);
   public final static native String AnalyzeTool_getStatesFileName(long jarg1, AnalyzeTool jarg1_);
   public final static native void AnalyzeTool_setStatesFileName(long jarg1, AnalyzeTool jarg1_, String jarg2);
@@ -5859,8 +5849,8 @@ public class opensimModelJNI {
   public static long SwigDirector_AnalysisWrapper_updDisplayer(AnalysisWrapper self) {
     return VisibleObject.getCPtr(self.updDisplayer());
   }
-  public static void SwigDirector_AnalysisWrapper_updateFromXMLNode(AnalysisWrapper self, long node, int versionNumber) {
-    self.updateFromXMLNode(new SWIGTYPE_p_SimTK__Xml__Element(node, false), versionNumber);
+  public static void SwigDirector_AnalysisWrapper_updateFromXMLNode(AnalysisWrapper self, long objectElement, int versionNumber) {
+    self.updateFromXMLNode(new SWIGTYPE_p_SimTK__Xml__Element(objectElement, false), versionNumber);
   }
   public static void SwigDirector_AnalysisWrapper_updateXMLNode(AnalysisWrapper self, long parent) {
     self.updateXMLNode(new SWIGTYPE_p_SimTK__Xml__Element(parent, false));

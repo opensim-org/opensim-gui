@@ -473,58 +473,6 @@ public class Thelen2003Muscle extends ActivationFiberLengthMuscle {
     opensimModelJNI.Thelen2003Muscle_set_Flen__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_activation_minimum_value(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Thelen2003Muscle_PropertyIndex_activation_minimum_value_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_activation_minimum_value() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Thelen2003Muscle_PropertyIndex_activation_minimum_value_get(swigCPtr, this), true);
-  }
-
-  public void copyProperty_activation_minimum_value(Thelen2003Muscle source) {
-    opensimModelJNI.Thelen2003Muscle_copyProperty_activation_minimum_value(swigCPtr, this, Thelen2003Muscle.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_activation_minimum_value() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Thelen2003Muscle_getProperty_activation_minimum_value(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_activation_minimum_value() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Thelen2003Muscle_updProperty_activation_minimum_value(swigCPtr, this), false);
-  }
-
-  public double get_activation_minimum_value(int i) {
-    return opensimModelJNI.Thelen2003Muscle_get_activation_minimum_value__SWIG_0(swigCPtr, this, i);
-  }
-
-  public SWIGTYPE_p_double upd_activation_minimum_value(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.Thelen2003Muscle_upd_activation_minimum_value__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_activation_minimum_value(int i, double value) {
-    opensimModelJNI.Thelen2003Muscle_set_activation_minimum_value__SWIG_0(swigCPtr, this, i, value);
-  }
-
-  public int append_activation_minimum_value(double value) {
-    return opensimModelJNI.Thelen2003Muscle_append_activation_minimum_value(swigCPtr, this, value);
-  }
-
-  public void constructProperty_activation_minimum_value(double initValue) {
-    opensimModelJNI.Thelen2003Muscle_constructProperty_activation_minimum_value(swigCPtr, this, initValue);
-  }
-
-  public double get_activation_minimum_value() {
-    return opensimModelJNI.Thelen2003Muscle_get_activation_minimum_value__SWIG_1(swigCPtr, this);
-  }
-
-  public SWIGTYPE_p_double upd_activation_minimum_value() {
-    return new SWIGTYPE_p_double(opensimModelJNI.Thelen2003Muscle_upd_activation_minimum_value__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_activation_minimum_value(double value) {
-    opensimModelJNI.Thelen2003Muscle_set_activation_minimum_value__SWIG_1(swigCPtr, this, value);
-  }
-
   public void setPropertyIndex_fv_linear_extrap_threshold(SWIGTYPE_p_PropertyIndex value) {
     opensimModelJNI.Thelen2003Muscle_PropertyIndex_fv_linear_extrap_threshold_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }

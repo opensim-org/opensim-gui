@@ -247,6 +247,10 @@ public class Storage extends StorageInterface {
     return opensimModelJNI.Storage_getDataColumn__SWIG_1(swigCPtr, this, aStateIndex, ArrayDouble.getCPtr(rData), rData);
   }
 
+  public void setDataColumnToFixedValue(String columnName, double newValue) {
+    opensimModelJNI.Storage_setDataColumnToFixedValue(swigCPtr, this, columnName, newValue);
+  }
+
   public void setDataColumn(int aStateIndex, ArrayDouble aData) {
     opensimModelJNI.Storage_setDataColumn(swigCPtr, this, aStateIndex, ArrayDouble.getCPtr(aData), aData);
   }
