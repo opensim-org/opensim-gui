@@ -93,12 +93,8 @@ public class ExternalForce extends Force {
     return opensimModelJNI.ExternalForce_append_applied_to_body(swigCPtr, this, value);
   }
 
-  public void constructProperty_applied_to_body() {
-    opensimModelJNI.ExternalForce_constructProperty_applied_to_body__SWIG_0(swigCPtr, this);
-  }
-
   public void constructProperty_applied_to_body(String initValue) {
-    opensimModelJNI.ExternalForce_constructProperty_applied_to_body__SWIG_1(swigCPtr, this, initValue);
+    opensimModelJNI.ExternalForce_constructProperty_applied_to_body(swigCPtr, this, initValue);
   }
 
   public String get_applied_to_body() {
@@ -149,12 +145,8 @@ public class ExternalForce extends Force {
     return opensimModelJNI.ExternalForce_append_force_expressed_in_body(swigCPtr, this, value);
   }
 
-  public void constructProperty_force_expressed_in_body() {
-    opensimModelJNI.ExternalForce_constructProperty_force_expressed_in_body__SWIG_0(swigCPtr, this);
-  }
-
   public void constructProperty_force_expressed_in_body(String initValue) {
-    opensimModelJNI.ExternalForce_constructProperty_force_expressed_in_body__SWIG_1(swigCPtr, this, initValue);
+    opensimModelJNI.ExternalForce_constructProperty_force_expressed_in_body(swigCPtr, this, initValue);
   }
 
   public String get_force_expressed_in_body() {
@@ -205,12 +197,8 @@ public class ExternalForce extends Force {
     return opensimModelJNI.ExternalForce_append_point_expressed_in_body(swigCPtr, this, value);
   }
 
-  public void constructProperty_point_expressed_in_body() {
-    opensimModelJNI.ExternalForce_constructProperty_point_expressed_in_body__SWIG_0(swigCPtr, this);
-  }
-
   public void constructProperty_point_expressed_in_body(String initValue) {
-    opensimModelJNI.ExternalForce_constructProperty_point_expressed_in_body__SWIG_1(swigCPtr, this, initValue);
+    opensimModelJNI.ExternalForce_constructProperty_point_expressed_in_body(swigCPtr, this, initValue);
   }
 
   public String get_point_expressed_in_body() {
@@ -261,12 +249,8 @@ public class ExternalForce extends Force {
     return opensimModelJNI.ExternalForce_append_force_identifier(swigCPtr, this, value);
   }
 
-  public void constructProperty_force_identifier() {
-    opensimModelJNI.ExternalForce_constructProperty_force_identifier__SWIG_0(swigCPtr, this);
-  }
-
   public void constructProperty_force_identifier(String initValue) {
-    opensimModelJNI.ExternalForce_constructProperty_force_identifier__SWIG_1(swigCPtr, this, initValue);
+    opensimModelJNI.ExternalForce_constructProperty_force_identifier(swigCPtr, this, initValue);
   }
 
   public String get_force_identifier() {
@@ -317,12 +301,8 @@ public class ExternalForce extends Force {
     return opensimModelJNI.ExternalForce_append_point_identifier(swigCPtr, this, value);
   }
 
-  public void constructProperty_point_identifier() {
-    opensimModelJNI.ExternalForce_constructProperty_point_identifier__SWIG_0(swigCPtr, this);
-  }
-
   public void constructProperty_point_identifier(String initValue) {
-    opensimModelJNI.ExternalForce_constructProperty_point_identifier__SWIG_1(swigCPtr, this, initValue);
+    opensimModelJNI.ExternalForce_constructProperty_point_identifier(swigCPtr, this, initValue);
   }
 
   public String get_point_identifier() {
@@ -373,12 +353,8 @@ public class ExternalForce extends Force {
     return opensimModelJNI.ExternalForce_append_torque_identifier(swigCPtr, this, value);
   }
 
-  public void constructProperty_torque_identifier() {
-    opensimModelJNI.ExternalForce_constructProperty_torque_identifier__SWIG_0(swigCPtr, this);
-  }
-
   public void constructProperty_torque_identifier(String initValue) {
-    opensimModelJNI.ExternalForce_constructProperty_torque_identifier__SWIG_1(swigCPtr, this, initValue);
+    opensimModelJNI.ExternalForce_constructProperty_torque_identifier(swigCPtr, this, initValue);
   }
 
   public String get_torque_identifier() {
@@ -429,12 +405,8 @@ public class ExternalForce extends Force {
     return opensimModelJNI.ExternalForce_append_data_source_name(swigCPtr, this, value);
   }
 
-  public void constructProperty_data_source_name() {
-    opensimModelJNI.ExternalForce_constructProperty_data_source_name__SWIG_0(swigCPtr, this);
-  }
-
   public void constructProperty_data_source_name(String initValue) {
-    opensimModelJNI.ExternalForce_constructProperty_data_source_name__SWIG_1(swigCPtr, this, initValue);
+    opensimModelJNI.ExternalForce_constructProperty_data_source_name(swigCPtr, this, initValue);
   }
 
   public String get_data_source_name() {

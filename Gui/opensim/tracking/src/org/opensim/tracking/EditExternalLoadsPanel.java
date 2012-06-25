@@ -70,7 +70,7 @@ public class EditExternalLoadsPanel extends javax.swing.JPanel
      */
     public EditExternalLoadsPanel(Model model, String externalLoadsFilename) throws IOException {
         boolean createNewFile=false;
-        if (!new File(externalLoadsFilename).exists()){
+        if (externalLoadsFilename.equalsIgnoreCase("Unassigned") || !new File(externalLoadsFilename).exists()){
             // Query user to create new file
             createNewFile = true;
         }
@@ -104,7 +104,7 @@ public class EditExternalLoadsPanel extends javax.swing.JPanel
         File extForcesFile = new File(fullExternalLoadsFilename);
         if (extForcesFile.exists()){
             dataFile = new File(dataFileName);
-            if (!dataFile.exists()){
+            if (!dataFile.exists() || dataFile.isDirectory()){
                 // Try full path
                 String parentDir = extForcesFile.getParent();
                 dataFileName = parentDir+File.separator+dataFileName;
@@ -119,7 +119,8 @@ public class EditExternalLoadsPanel extends javax.swing.JPanel
             // We're dead. bail out. We shouldn't be here as the constructor should've aborted'
         }
         externalLoadsDataFileName.setFileName(dataFileName);
-        if (dataFileName!="" && dataFileName !=null && new File(dataFileName).exists()){
+        if (dataFileName!="" && dataFileName !=null && new File(dataFileName).exists() && 
+                new File(dataFileName).isFile()){
             try {
                 externalLoadsStorage = new Storage(dataFileName, true);
             } catch (IOException ex) {
@@ -559,8 +560,10 @@ public class EditExternalLoadsPanel extends javax.swing.JPanel
         if (externalLoadsDataFileName.getFileIsValid()){
             //dTool.getExternalForceSet().
          String dataFile = externalLoadsDataFileName.getFileName();
-         if (dataFile!="" && dataFile !=null && new File(dataFile).exists()){
+         if (dataFile!="" && dataFile !=null && new File(dataFile).exists() &&
+                 new File(dataFile).isFile()){
              try {
+                 
                  externalLoadsStorage = new Storage(dataFile, true);   
                   boolean isUnique = verifyUniqueLabels(externalLoadsStorage);
                   externalLoadsStorage.makeStorageLabelsUnique();
