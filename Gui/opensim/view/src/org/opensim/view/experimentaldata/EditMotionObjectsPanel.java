@@ -66,7 +66,7 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
         initComponents();
         updateButtonAvailability();
         jMotionObjectsList.addListSelectionListener(this);
-        jForceScaleTextField.setText(String.valueOf(aMotion.getDisplayScale()));
+        jForceScaleTextField.setText(String.valueOf(aMotion.getDisplayForceScale()));
         jForceDisplayShapeComboBox.setSelectedItem(aMotion.getDisplayForceShape());
     }
     
@@ -404,8 +404,9 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
         int[] sels = jMotionObjectsList.getSelectedIndices();
         Object pfo=null;
         for(int i=sels.length;i>=1;i--){
+           ExperimentalDataObject obj= (ExperimentalDataObject) objectListModel.get(sels[i-1]);
            objectListModel.remove(sels[i-1]);
-           aMotion.getClassified().remove(sels[i-1]);
+           aMotion.getClassified().remove(obj);
         }
  // TODO add your handling code here:
         
@@ -449,11 +450,11 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
 
 private void jForceScaleTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jForceScaleTextFieldActionPerformed
 // TODO add your handling code here:
-        aMotion.setDisplayScale(Double.parseDouble(jForceScaleTextField.getText()));
+        aMotion.setDisplayForceScale(Double.parseDouble(jForceScaleTextField.getText()));
 }//GEN-LAST:event_jForceScaleTextFieldActionPerformed
 
     private void jForceScaleTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jForceScaleTextFieldFocusLost
-        aMotion.setDisplayScale(Double.parseDouble(jForceScaleTextField.getText()));
+        aMotion.setDisplayForceScale(Double.parseDouble(jForceScaleTextField.getText()));
 // TODO add your handling code here:
     }//GEN-LAST:event_jForceScaleTextFieldFocusLost
 
