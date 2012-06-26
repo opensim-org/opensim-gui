@@ -3,11 +3,17 @@
 <filesystem>
     <folder name="Actions">
         <folder name="Edit">
-            <file name="org-opensim-console-ToolsRunScriptAction.instance"/>
-        </folder>
+           <file name="org-opensim-console-ToolsOpenScriptAction.instance"/>
+           <file name="org-opensim-console-ToolsRunScriptAction.instance"/>
+         </folder>
     </folder>
     <folder name="Menu">
-        <folder name="Tools">
+        <folder name="Scripts">
+           <attr name="position" intvalue="250"/>
+           <file name="org-opensim-console-ToolsOpenScriptAction.shadow">
+               <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-console-ToolsOpenScriptAction.instance"/>
+               <attr name="position" intvalue="1000"/>
+            </file>
             <file name="org-opensim-console-ToolsRunScriptAction.shadow">
                <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-console-ToolsRunScriptAction.instance"/>
                <attr name="position" intvalue="2000"/>
