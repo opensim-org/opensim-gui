@@ -1519,11 +1519,13 @@ public class JPlotterPanel extends javax.swing.JPanel
       openSimContext.getStates(saveStates);
       
       Storage extendedMotionStorage;
-       if (motion != null && motion instanceof PlotterSourceMotion){
+      int key = (int) (java.lang.Math.random()*100);
+      if (motion != null && motion instanceof PlotterSourceMotion){
          tool.setStartTime( motion.getStorage().getFirstTime());
          tool.setFinalTime( motion.getStorage().getLastTime());
          statesStorage = buildStatesStorageFromMotion(motion.getStorage(), isActivationOverride(), getActivationValue());
          tool.setStatesStorage(statesStorage);
+         //statesStorage.print(key+"statesFromMotion.sto");
       } else {
          // Recreate stateStorage
          statesStorage=createStateStorageWithHeader(currentModel);
@@ -1531,7 +1533,7 @@ public class JPlotterPanel extends javax.swing.JPanel
           // make states for analysis by setting fiberlength and activation and form complete storage
          double[] statesForAnalysis = new double[numStates];
          openSimContext.getStates(statesForAnalysis);
-         setNonzeroDefaultValues(stateNames, statesForAnalysis, isActivationOverride(), getActivationValue());
+         //setNonzeroDefaultValues(stateNames, statesForAnalysis, isActivationOverride(), getActivationValue());
          double NUM_STEPS=100.0;
          int xIndex = statesStorage.getStateIndex(getDomainName());
          Coordinate coord = currentModel.getCoordinateSet().get(getDomainName());
@@ -1548,7 +1550,7 @@ public class JPlotterPanel extends javax.swing.JPanel
          }
          // Make 100 steps along the way, varying the quantity on sourceX by 1/100 of the distance between domStart & domEnd
          statesStorage.purge();
-         for(int i=0; i<NUM_STEPS; i++){
+          for(int i=0; i<NUM_STEPS; i++){
             double time = (double)i;
             double increment = 1./(NUM_STEPS-1)*(domEnd-domStart);
             double val=domStart+increment*i;
@@ -1565,6 +1567,8 @@ public class JPlotterPanel extends javax.swing.JPanel
          tool.setFinalTime(NUM_STEPS);
          sourceX=new PlotterSourceAnalysis(currentModel, statesStorage, "");
          statesStorage.print("toolInput.sto");
+         //tool.setStatesFileName("toolInput"+key+".sto");
+         tool.setModelFilename(currentModel.getInputFileName());
       }
       tool.setPrintResultFiles(false);
       analysisSource.getStorage().purge();
@@ -1582,9 +1586,9 @@ public class JPlotterPanel extends javax.swing.JPanel
 
     private void setNonzeroDefaultValues(final ArrayStr stateNames, final double[] statesForAnalysis, boolean activationOverride, double activationValue) {
         for(int i=0; i<statesForAnalysis.length; i++){
-           if (stateNames.getitem(i).endsWith(".fiber_length"))
+           /*if (stateNames.getitem(i).endsWith(".fiber_length"))
               statesForAnalysis[i]=0.01;
-           else if (stateNames.getitem(i).endsWith(".activation")) {
+           else */if (stateNames.getitem(i).endsWith(".activation")) {
               if (activationOverride)
                  statesForAnalysis[i]=activationValue;
               else
