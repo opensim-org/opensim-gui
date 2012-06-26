@@ -556,13 +556,26 @@
         <folder name="Window">
             <attr name="position" intvalue="350"/>
             <file name="Debug_hidden">
-                </file>
-            <file name="Navigator_hidden"/>
-            <file name="Other_hidden"/>
-            <file name="Output_hidden"/>
-            <file name="Profile_hidden"/>
-            <file name="ShowPaletteAction.shadow_hidden"/>
-            <file name="Versioning_hidden"/>
+                    <attr name="position" intvalue="500"/>
+            </file>
+            <file name="Navigator_hidden">
+                <attr name="position" intvalue="800"/>
+            </file>
+            <file name="Other_hidden">
+                <attr name="position" intvalue="900"/>
+            </file>
+            <file name="Output_hidden">
+                <attr name="position" intvalue="1000"/>
+            </file>
+            <file name="Profile_hidden">
+                <attr name="position" intvalue="1100"/>
+            </file>
+            <file name="ShowPaletteAction.shadow_hidden">
+                <attr name="position" intvalue="1500"/>
+            </file>
+            <file name="Versioning_hidden">
+                <attr name="position" intvalue="1700"/>
+            </file>
             <file name="org-netbeans-core-ide-ServicesTabAction.shadow_hidden"/>
             <file name="org-netbeans-core-windows-actions-ResetWindowsAction.shadow_hidden"/>
             <file name="org-netbeans-modules-favorites-View.shadow_hidden"/>
@@ -573,10 +586,15 @@
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-actions-ViewAddNewAction.instance"/>
                 <attr name="position" intvalue="500"/>
             </file>
-            <file name="org-opensim-view-ExplorerAction.instance" url="org-opensim-view-ExplorerAction.instance"/>
-
-            <file name="Separator3.instance_hidden"/>
-            <file name="Separator4.instance_hidden"/>
+            <file name="org-opensim-view-ExplorerAction.instance" url="org-opensim-view-ExplorerAction.instance">
+                <attr name="position" intvalue="100"/>
+            </file>
+            <file name="Separator3.instance_hidden">
+                <attr name="position" intvalue="1300"/>
+            </file>
+            <file name="Separator4.instance_hidden">
+                <attr name="position" intvalue="1400"/>
+            </file>
             <file name="CloneDocumentAction.shadow_hidden">
                 <attr name="position" intvalue="100"/>
             </file>
@@ -589,16 +607,34 @@
             <file name="CloseWindowAction.shadow_hidden">
                 <attr name="position" intvalue="400"/>
             </file>
-            <file name="DocumentsAction.shadow_hidden"/>
-            <file name="MaximizeWindowAction.shadow_hidden"/>
-            <file name="ProgressListAction.shadow_hidden"/>
-            <file name="SwitchToRecentDocumentAction.shadow_hidden"/>
-            <file name="ViewFavoritesTabAction.shadow_hidden"/>
-            <file name="ViewRuntimeTabAction.shadow_hidden"/>
-            <file name="oldRootsEnd.txt_hidden"/>
-            <file name="oldRootsStart.txt_hidden"/>
+            <file name="DocumentsAction.shadow_hidden">
+                <attr name="position" intvalue="600"/>
+            </file>
+            <file name="MaximizeWindowAction.shadow_hidden">
+                <attr name="position" intvalue="700"/>
+            </file>
+            <file name="ProgressListAction.shadow_hidden">
+                <attr name="position" intvalue="1200"/>
+            </file>
+            <file name="SwitchToRecentDocumentAction.shadow_hidden">
+                <attr name="position" intvalue="1600"/>
+            </file>
+            <file name="ViewFavoritesTabAction.shadow_hidden">
+                <attr name="position" intvalue="1800"/>
+            </file>
+            <file name="ViewRuntimeTabAction.shadow_hidden">
+                <attr name="position" intvalue="1900"/>
+            </file>
+            <file name="oldRootsEnd.txt_hidden">
+                <attr name="position" intvalue="2000"/>
+            </file>
+            <file name="oldRootsStart.txt_hidden">
+                <attr name="position" intvalue="2100"/>
+            </file>
             <file name="org-netbeans-core-output2-OutputWindowAction.instance_hidden"/>
-            <file name="org-netbeans-core-actions-HTMLViewAction.instance_hidden"/>
+            <file name="org-netbeans-core-actions-HTMLViewAction.instance_hidden">
+                <attr name="position" intvalue="2200"/>
+            </file>
         </folder>
         <folder name="Help">
             <attr name="position" intvalue="400"/>
@@ -615,7 +651,7 @@
 
            <file name="org-opensim-view-TutorialsAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Help/org-opensim-view-HelpTutorialsAction.instance"/>
-                <attr name="position" intvalue="1600"/>
+                <attr name="position" intvalue="600"/>
             </file>
             <file name="master-help.xml" url="master-help.xml"/>
             <file name="master-help.xml_hidden">
@@ -675,10 +711,10 @@
     </folder>
     <folder name="Shortcuts">
         <file name="D-Z.shadow">  
-        <attr name="originalFile" stringvalue="Actions/Edit/org-openide-actions-UndoAction.instance" /> 
+        <attr name="originalFile" stringvalue="Actions/Edit/org-openide-actions-UndoAction.instance"/> 
         </file>
         <file name="D-Y.shadow">  
-        <attr name="originalFile" stringvalue="Actions/Edit/org-openide-actions-RedoAction.instance" /> 
+        <attr name="originalFile" stringvalue="Actions/Edit/org-openide-actions-RedoAction.instance"/> 
         </file>
     </folder>
     <folder name="Templates">

@@ -11,13 +11,9 @@
     </folder>
     <folder name="Menu">
         <folder name="Help">
-            <file name="org-opensim-helputils-separatorBefore.instance">
-                <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
-                <attr name="position" intvalue="1800"/>
-            </file>
             <file name="org-opensim-helputils-HelpShowXML.shadow">
                 <attr name="originalFile" stringvalue="Actions/Help/org-opensim-helputils-HelpShowXML.instance"/>
-                <attr name="position" intvalue="2000"/>
+                <attr name="position" intvalue="300"/>
             </file>
         </folder>
         <folder name="Tools">

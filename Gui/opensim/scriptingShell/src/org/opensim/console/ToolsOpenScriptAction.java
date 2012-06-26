@@ -14,13 +14,17 @@ import java.io.IOException;
 import java.util.prefs.Preferences;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import org.openide.cookies.OpenCookie;
+import org.openide.filesystems.FileObject;
+import org.openide.filesystems.FileUtil;
+import org.openide.loaders.DataObject;
+import org.openide.util.Exceptions;
 import org.openide.util.HelpCtx;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.utils.FileUtils;
 import org.opensim.utils.TheApp;
-import org.python.util.PythonInterpreter;
 
-public final class ToolsRunScriptAction extends CallableSystemAction {
+public final class ToolsOpenScriptAction extends CallableSystemAction {
 
     public void performAction() {
         //throw new UnsupportedOperationException("Not supported yet.");
@@ -31,7 +35,7 @@ public final class ToolsRunScriptAction extends CallableSystemAction {
     }
 
     public String getName() {
-        return "Run";
+        return "Open";
     }
 
    
@@ -46,7 +50,7 @@ public final class ToolsRunScriptAction extends CallableSystemAction {
     }
 
     public JMenuItem getMenuPresenter() {
-        JMenu scriptsMenu = new JMenu("Run ");
+        JMenu scriptsMenu = new JMenu("Open");
         FileFilter fileFilter = new FileFilter() {
 
             public boolean accept(File file) {
@@ -68,7 +72,7 @@ public final class ToolsRunScriptAction extends CallableSystemAction {
             nextItem.addActionListener(new ActionListener() {
 
                 public void actionPerformed(ActionEvent e) {
-                    executeFile(ScriptsRootDirectory + "/" + fileName);
+                    openFile(ScriptsRootDirectory + "/" + fileName);
                 }
             });
 
@@ -80,7 +84,7 @@ public final class ToolsRunScriptAction extends CallableSystemAction {
             public void actionPerformed(ActionEvent e) {
                 String dataFilename = FileUtils.getInstance().browseForFilename(".py", "Files containing script to execute", true);
                 if (dataFilename != null) {
-                    executeFile(dataFilename);
+                    openFile(dataFilename);
                 }
             }
         });
@@ -120,12 +124,15 @@ public final class ToolsRunScriptAction extends CallableSystemAction {
      * execute passed in scriptFilename in Scripting shell and echo contents
      * @param scriptFilename 
      */
-    void executeFile(String scriptFilename) {
-        PythonInterpreter interp = ScriptingShellTopComponent.getDefault().getInterp();
-        interp.execfile(scriptFilename);
-        File scriptFile = new File(scriptFilename);
-        String fileContents = getContents(scriptFile);
-        ScriptingShellTopComponent.getDefault().logMessage(fileContents);
-        ScriptingShellTopComponent.getDefault().logMessage("Finished executing script file " + scriptFilename);
+    void openFile(String scriptFilename) {
+        try {
+            FileObject fObj = FileUtil.createData(new File(scriptFilename));
+            DataObject dObj  = DataObject.find(fObj);
+            OpenCookie open = dObj.getLookup().lookup(OpenCookie.class);
+            open.open();
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        
     }
 }

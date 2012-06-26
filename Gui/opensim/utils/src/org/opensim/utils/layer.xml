@@ -15,20 +15,24 @@
     </folder>
     <folder name="Menu">
          <folder name="Help">
-            <file name="netbeans-kb.url_hidden"/>
-            <file name="org-netbeans-modules-bugzilla-ReportNBIssueAction.shadow_hidden"/>
+            <file name="netbeans-kb.url_hidden">
+                <attr name="position" intvalue="100"/>
+            </file>
+            <file name="org-netbeans-modules-bugzilla-ReportNBIssueAction.shadow_hidden">
+                <attr name="position" intvalue="200"/>
+            </file>
 
             <file name="org-opensim-swingui-FileBug.shadow">
                 <attr name="originalFile" stringvalue="Actions/Help/org-opensim-swingui-FileBug.instance"/>
-                <attr name="position" intvalue="150"/>
+                <attr name="position" intvalue="400"/>
             </file>
             <file name="org-opensim-swingui-RequestFeatureAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-swingui-RequestFeatureAction.instance"/>
-                <attr name="position" intvalue="200"/>
+                <attr name="position" intvalue="500"/>
             </file>
             <file name="org-opensim-swingui-HelpOpenOnlineDocsAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Help/org-opensim-swingui-HelpOpenOnlineDocsAction.instance"/>
-                <attr name="position" intvalue="250"/>
+                <attr name="position" intvalue="200"/>
             </file>
          </folder>
     </folder>
