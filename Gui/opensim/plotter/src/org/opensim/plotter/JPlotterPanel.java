@@ -2123,7 +2123,7 @@ public class JPlotterPanel extends javax.swing.JPanel
             else if (activationColumns.get(j))
                buffer[j]=newActivation;
             else
-               buffer[j]=0.0;
+               buffer[j]=1.0;
             if (activationColumns.get(j) && overrideActivation)
                buffer[j]=newActivation;
          }
