@@ -30,6 +30,7 @@
 
 package org.opensim.view;
 
+import java.awt.Color;
 import java.util.HashMap;
 import java.util.Stack;
 import org.opensim.modeling.OpenSimObject;
@@ -109,6 +110,7 @@ public class OpenSimvtkGlyphCloud {    // Assume same shape
    // Single color (doesn't support showing selected/unselected)
    public void setColor(double[] color) {
       actor.GetProperty().SetColor(color);
+      setModified();
    }
 
    private void initializeLookupTableIfNecessary() {
@@ -332,5 +334,26 @@ public class OpenSimvtkGlyphCloud {    // Assume same shape
     
     public boolean hasShapeName(String newName){
         return (MotionObjectsDB.getInstance().getShape(name)!=null);
+    }
+
+    /**
+     * @return the color
+     */
+    public Color getColor() {
+        double[] color = new double[]{1.0, 1.0, 1.0};
+        this.getLookupTable().GetColor(0.0, color);
+        return new Color((float) color[0], (float) color[1], (float) color[2]);
+    }
+
+    /**
+     * @param color the color to set
+     */
+    public void setColor(Color color) {
+        // Convert to RGB values and call setColorRange
+        float[] colorAsFloats = new float[]{1.0F, 1.0F, 1.0F};
+        color.getRGBColorComponents(colorAsFloats);
+        double[] colorAsDoubles = new double[]{colorAsFloats[0], colorAsFloats[1], colorAsFloats[2]};
+        this.setColorRange(colorAsDoubles, colorAsDoubles);
+        setModified();
     }
 }

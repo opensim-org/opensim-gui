@@ -31,20 +31,25 @@
  */
 package org.opensim.view.experimentaldata;
 
+import java.awt.Color;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.beans.PropertyChangeListener;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Vector;
-import javax.swing.Action;
 import javax.swing.ImageIcon;
-import org.openide.nodes.Children;
+import javax.swing.undo.AbstractUndoableEdit;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
 import org.openide.nodes.Node;
+import org.openide.nodes.PropertySupport;
+import org.openide.nodes.Sheet;
+import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
-import org.opensim.view.ModelDisplayMenuAction;
-import org.opensim.view.ModelRenameAction;
+import org.opensim.view.ExplorerTopComponent;
+import org.opensim.view.OpenSimvtkGlyphCloud;
+import org.opensim.view.motions.MotionDisplayer;
 import org.opensim.view.nodes.*;
+import org.opensim.view.pub.ViewDB;
 
 /**
  *
@@ -54,6 +59,9 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
     private static ResourceBundle bundle = NbBundle.getBundle(ExperimentalMarkerSetNode.class);
     private static String nodeName;
     AnnotatedMotion dMotion;
+    private MotionDisplayer motionDisplayer;
+    private OpenSimvtkGlyphCloud markersDisplayer;
+
     /** Creates a new instance of ExperimentalMarkerNode */
     public ExperimentalMarkerSetNode(AnnotatedMotion dMotion) {
         nodeName=bundle.getString("MARKERSET_NODE_NAME");
@@ -62,6 +70,8 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
         setShortDescription(bundle.getString("HINT_ExperimentalMarkerSetNode"));
         this.dMotion=dMotion;
         createChildren();
+        motionDisplayer= dMotion.getMotionDisplayer();
+        markersDisplayer = motionDisplayer.getMarkersRep();
     }
     
     public String getHtmlDisplayName() {
@@ -110,4 +120,88 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
         }
     }
 
+    @Override
+    public Sheet createSheet() {
+         Sheet defaultSheet = super.createSheet();
+        try {
+            Sheet.Set set = defaultSheet.get(Sheet.PROPERTIES);
+            PropertySupport.Reflection nextNodeProp = new PropertySupport.Reflection(this, Color.class, "getColor", "setColorUI");
+            nextNodeProp.setName("marker color");
+            set.put(nextNodeProp);
+
+            PropertySupport.Reflection nextNodeProp2= new PropertySupport.Reflection(this, double.class, "getMarkerScaleFactor", "setMarkerScaleFactorUI");
+            nextNodeProp2.setName("marker size");
+            set.put(nextNodeProp2);
+
+            return defaultSheet;
+        } catch (NoSuchMethodException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        return defaultSheet;
+    }
+    void setColorUI(final Color color, boolean allowUndo) {
+        final Color oldColor = getColor();
+        if (allowUndo){
+            AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
+                @Override
+               public void undo() throws CannotUndoException {
+                   super.undo();
+                   setColorUI(oldColor, false);
+               }
+                @Override
+               public void redo() throws CannotRedoException {
+                   super.redo();
+                   setColorUI(color, true);
+               }
+            };
+            ExplorerTopComponent.addUndoableEdit(auEdit);
+        }
+        markersDisplayer.setColor(color);
+        ViewDB.repaintAll();
+        refreshNode();
+    }
+    public void setColorUI(final Color color) {
+        setColorUI(color, true);
+    }
+    
+    public Color getColor()
+    {
+        if (markersDisplayer==null)
+            markersDisplayer = motionDisplayer.getMarkersRep();
+        return markersDisplayer.getColor();
+    }
+   
+    public void setMarkerScaleFactorUI(double newFactor) {
+        setMarkerScaleFactorUI(newFactor, true);
+    }
+    
+    void setMarkerScaleFactorUI(final double newFactor, boolean allowUndo)
+    {
+        final double oldMarkerScaleFactor = getMarkerScaleFactor();
+        if (allowUndo){
+            AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
+               @Override
+               public void undo() throws CannotUndoException {
+                   super.undo();
+                   setMarkerScaleFactorUI(oldMarkerScaleFactor, false);
+               }
+               @Override
+               public void redo() throws CannotRedoException {
+                   super.redo();
+                   setMarkerScaleFactorUI(newFactor, true);
+               }
+            };
+            ExplorerTopComponent.addUndoableEdit(auEdit);
+        }       
+        markersDisplayer.setScaleFactor(newFactor);
+        ViewDB.repaintAll();
+        refreshNode();
+    }
+
+    public double getMarkerScaleFactor()
+    {
+        if (markersDisplayer==null)
+            markersDisplayer = motionDisplayer.getMarkersRep();
+        return markersDisplayer.getScaleFactor();
+    }
 }

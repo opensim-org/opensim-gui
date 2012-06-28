@@ -331,11 +331,4 @@ public class OpenSimObjectNode extends OpenSimNode {
         }
         return retValue;
     }
-    /**
-     * public method to enable refreshing node display once changes have been made
-     */
-    public void refreshNode()
-    {
-        firePropertySetsChange(null, getPropertySets());
-    }
 }

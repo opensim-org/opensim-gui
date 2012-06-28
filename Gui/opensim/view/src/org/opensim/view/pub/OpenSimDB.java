@@ -239,7 +239,7 @@ public class OpenSimDB extends Observable implements Externalizable{
     /**
      * Set the current model to the new one and fire an event for the change.
      */
-    public void setCurrentModel(final Model aCurrentModel, boolean logEdit) {
+    public void setCurrentModel(final Model aCurrentModel, boolean allowUndo) {
         final Model saveCurrentModel = currentModel;
         currentModel = aCurrentModel;
         Vector<OpenSimObject> objs = new Vector<OpenSimObject>(1);
@@ -250,7 +250,7 @@ public class OpenSimDB extends Observable implements Externalizable{
         notifyObservers(evnt);
         objs.clear();
         
-        if (logEdit){
+        if (allowUndo){
             ExplorerTopComponent.addUndoableEdit(new AbstractUndoableEdit() {
                 public void undo() throws CannotUndoException {
                     super.undo();
@@ -259,7 +259,7 @@ public class OpenSimDB extends Observable implements Externalizable{
 
                 public void redo() throws CannotRedoException {
                     super.redo();
-                    setCurrentModel(aCurrentModel, false);
+                    setCurrentModel(aCurrentModel, true);
                 }
 
                 public boolean canUndo() {
@@ -274,10 +274,10 @@ public class OpenSimDB extends Observable implements Externalizable{
                 public String toString() {
                     return "Current Model";
                 }
-
+*/
                 public String getPresentationName() {
-                    return "Current Model";
-                }*/
+                    return "Change Current Model";
+                }
            });
     }
     }

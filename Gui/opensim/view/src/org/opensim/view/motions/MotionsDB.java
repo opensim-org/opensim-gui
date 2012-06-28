@@ -40,7 +40,7 @@ import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.openide.awt.StatusDisplayer;
 import org.openide.nodes.Node;
-import org.openide.nodes.Node;
+import org.opensim.modeling.AnalyzeTool;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
@@ -120,6 +120,8 @@ public class MotionsDB extends Observable // Observed by other entities in motio
       }
       saveStorageFileName(storage, fileName);
       final Storage newMotion = storage;
+      Model currentModel = OpenSimDB.getInstance().getCurrentModel();
+      AnalyzeTool.fixMuscleStatesToValidRange(newMotion, currentModel);
       loadMotionStorage(newMotion, primary);
    }
    

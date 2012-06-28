@@ -34,6 +34,7 @@
 
 package org.opensim.view.motions;
 
+import java.awt.Color;
 import java.util.Collection;
 import java.util.Hashtable;
 import java.util.ArrayList;
@@ -88,7 +89,9 @@ import vtk.vtkProp;
 
 public class MotionDisplayer implements SelectionListener {
 
-    /**
+    double[] defaultExperimentalMarkerColor = new double[]{0.0, 0.0, 1.0};
+    private double[] defaultForceColor = new double[]{0., 1.0, 0.};
+     /**
      * @return the associatedMotions
      */
     public ArrayList<MotionDisplayer> getAssociatedMotions() {
@@ -100,6 +103,54 @@ public class MotionDisplayer implements SelectionListener {
         if (forceComponent.equals("x")) {vectorGlobal[1]=0.0; vectorGlobal[2]=0.0; return;};
         if (forceComponent.equals("y")) {vectorGlobal[0]=0.0; vectorGlobal[2]=0.0; return;};
         if (forceComponent.equals("z")) {vectorGlobal[0]=0.0; vectorGlobal[1]=0.0; return;};
+        
+    }
+
+    /**
+     * @return the groundForcesRep
+     */
+    public OpenSimvtkGlyphCloud getGroundForcesRep() {
+        return groundForcesRep;
+    }
+
+    /**
+     * @return the markersRep
+     */
+    public OpenSimvtkGlyphCloud getMarkersRep() {
+        return markersRep;
+    }
+
+    /**
+     * @return the currentForceShape
+     */
+    public String getCurrentForceShape() {
+        return currentForceShape;
+    }
+
+    /**
+     * @param currentForceShape the currentForceShape to set
+     */
+    public void setCurrentForceShape(String currentForceShape) {
+        this.currentForceShape = currentForceShape;
+    }
+
+    /**
+     * @return the defaultForceColor
+     */
+    public Color getDefaultForceColor() {
+        return new Color((float)defaultForceColor[0], (float)defaultForceColor[1], (float)defaultForceColor[2]);
+    }
+
+
+    
+    /**
+     * @param defaultForceColor the defaultForceColor to set
+     */
+    public void setDefaultForceColor(Color defaultForceColor) {
+        float[] colorFloat = new float[3];
+        defaultForceColor.getColorComponents(colorFloat);
+        for (int i=0;i<3;i++) this.defaultForceColor[i] = (double) colorFloat[i];
+        getGroundForcesRep().setColor(defaultForceColor);
         
     }
     
@@ -125,10 +176,10 @@ public class MotionDisplayer implements SelectionListener {
 
     Hashtable<Integer, ObjectTypesInMotionFiles> mapIndicesToObjectTypes=new Hashtable<Integer, ObjectTypesInMotionFiles>(40);
     Hashtable<Integer, Object> mapIndicesToObjects=new Hashtable<Integer, Object>(40);
-    OpenSimvtkGlyphCloud  groundForcesRep = null;
+    private OpenSimvtkGlyphCloud  groundForcesRep = null;
     OpenSimvtkGlyphCloud  bodyForcesRep = null;
     OpenSimvtkGlyphCloud  generalizedForcesRep = null;
-    OpenSimvtkGlyphCloud  markersRep = null;
+    private OpenSimvtkGlyphCloud  markersRep = null;
     private Storage simmMotionData;
     private Model model;
     OpenSimContext dContext; 
@@ -138,7 +189,7 @@ public class MotionDisplayer implements SelectionListener {
     double DEFAULT_FACTOR_SCALE_FACTOR=.001;
     double currentScaleFactor;
     String DEFAULT_FORCE_SHAPE="arrow";
-    String currentForceShape;
+    private String currentForceShape;
     
     // For columns that start with a body name, this is the map from column index to body reference.
     // The map is currently used only for body forces and generalized forces.
@@ -283,7 +334,8 @@ public class MotionDisplayer implements SelectionListener {
         markersRep = new OpenSimvtkGlyphCloud(false);   bodyForcesRep.setName("Exp. Markers");
 
         groundForcesRep.setShapeName(currentForceShape);
-        groundForcesRep.setColor(new double[]{0., 1.0, 0.});
+        groundForcesRep.setColor(defaultForceColor);
+        groundForcesRep.setColorRange(defaultForceColor, defaultForceColor);
         groundForcesRep.setOpacity(0.7);
         groundForcesRep.setScaleFactor(currentScaleFactor);
         groundForcesRep.orientByNormalAndScaleByVector();
@@ -301,7 +353,8 @@ public class MotionDisplayer implements SelectionListener {
         generalizedForcesRep.orientByNormalAndScaleByVector();
 
         markersRep.setShapeName("marker");
-        markersRep.setColor(new double[]{0.0, 0.0, 1.0}); //Scale , scaleBy
+        markersRep.setColor(defaultExperimentalMarkerColor); //Scale , scaleBy
+        markersRep.setColorRange(defaultExperimentalMarkerColor, defaultExperimentalMarkerColor);
         markersRep.scaleByVectorComponents();
         markersRep.setScaleFactor(ViewDB.getInstance().getExperimentalMarkerDisplayScale());
         
@@ -882,10 +935,9 @@ public class MotionDisplayer implements SelectionListener {
         if (simmMotionData instanceof AnnotatedMotion){
             // Add place hoders for markers
             AnnotatedMotion mot= (AnnotatedMotion) simmMotionData;
-            currentScaleFactor = mot.getDisplayScale();
+            currentScaleFactor = mot.getDisplayForceScale();
             currentForceShape = mot.getDisplayForceShape();
             AddMotionObjectsRep(model);
-            System.out.println("Setting scale factor to "+mot.getDisplayScale());
             Vector<ExperimentalDataObject> objects=mot.getClassified();
             mot.setMotionDisplayer(this);
             for(ExperimentalDataObject nextObject:objects){

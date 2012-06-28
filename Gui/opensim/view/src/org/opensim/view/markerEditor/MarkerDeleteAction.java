@@ -74,7 +74,7 @@ public class MarkerDeleteAction extends AbstractAction {
                 public void redo() throws CannotRedoException {
                     super.redo();
                     Marker toDelete = model.getMarkerSet().get(saveMarkerName);
-                    deleteMarker(toDelete, false);
+                    deleteMarker(toDelete, true);
                 }
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);

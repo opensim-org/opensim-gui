@@ -302,7 +302,7 @@ public class DisplayGeometryDisplayer extends vtkActor
                public void redo() throws CannotRedoException {
                    super.redo();
                    // Change display
-                   setLocationGUI(loc, false);
+                   setLocationGUI(loc, true);
                    // Change model
                }
                 public String getPresentationName() {

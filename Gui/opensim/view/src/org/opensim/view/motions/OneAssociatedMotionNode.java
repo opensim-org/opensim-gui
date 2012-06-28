@@ -28,23 +28,22 @@
  */
 package org.opensim.view.motions;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.net.URL;
 import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.Action;
 import org.openide.nodes.Node;
+import org.openide.nodes.PropertySupport;
+import org.openide.nodes.Sheet;
+import org.openide.util.Exceptions;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.Storage;
 import org.opensim.view.experimentaldata.AnnotatedMotion;
-import org.opensim.view.experimentaldata.ExperimentalDataItemType;
-import org.opensim.view.experimentaldata.ExperimentalDataObject;
 import org.opensim.view.experimentaldata.ExperimentalForceSetNode;
 import org.opensim.view.experimentaldata.ExperimentalMarkerSetNode;
-import org.opensim.view.experimentaldata.ExperimentalOtherDataSetNode;
 import org.opensim.view.experimentaldata.MotionEditMotionObjectsAction;
-import org.opensim.view.experimentaldata.MotionReclassifyAction;
-import org.opensim.view.nodes.*;
 
 /**
  *
@@ -126,20 +125,6 @@ public class OneAssociatedMotionNode extends OneMotionNode {
         if (names !=null && names.size()>0){ // File had forces
              getChildren().add(new Node[]{new ExperimentalForceSetNode(dMotion)});
         }
-        /*
-        // Things other than markers and forces
-        Vector<ExperimentalDataObject> all = dMotion.getClassified();
-        if (names !=null&& names.size()>0){  // Everything else
-            for(ExperimentalDataObject obj:all){
-                boolean other = (obj.getObjectType()!=ExperimentalDataItemType.MarkerData) &&
-                        (obj.getObjectType()!=ExperimentalDataItemType.ForceAndPointData);
-                if (other){
-                    // Create a parent node for OtherData
-                    getChildren().add(new Node[]{new ExperimentalOtherDataSetNode(dMotion)}); 
-                    break;
-               }
-            }
-        }*/
     }
 
    public Action getPreferredAction() {
@@ -152,4 +137,30 @@ public class OneAssociatedMotionNode extends OneMotionNode {
  }
       return act;
    }
+
+    @Override
+    public Sheet createSheet() {
+        Sheet defaultSheet = super.createSheet();
+        AnnotatedMotion dMotion = (AnnotatedMotion)this.getOpenSimObject();
+        try {
+            Sheet.Set set = defaultSheet.get(Sheet.PROPERTIES);
+            PropertySupport.Reflection nextNodeProp = new PropertySupport.Reflection(dMotion.getMotionDisplayer(), Color.class, "getDefaultForceColor", "setDefaultForceColor");
+            nextNodeProp.setName("force color");
+            set.put(nextNodeProp);
+
+            PropertySupport.Reflection nextNodeProp2= new PropertySupport.Reflection(dMotion, double.class, "getDisplayForceScale", "setDisplayForceScale");
+            nextNodeProp2.setName("Force display size");
+            set.put(nextNodeProp2);
+
+            PropertySupport.Reflection nextNodeProp3= new PropertySupport.Reflection(dMotion, String.class, "getDisplayForceShape", "setDisplayForceShape");
+            nextNodeProp3.setName("Force display shape");
+            set.put(nextNodeProp3);
+
+            return defaultSheet;
+        } catch (NoSuchMethodException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        return defaultSheet;
+    }
+   
 }

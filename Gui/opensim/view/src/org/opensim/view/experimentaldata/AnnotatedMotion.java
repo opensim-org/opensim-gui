@@ -68,7 +68,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
     private double cameraRate=0.;
     private double dataRate=0.;
     private MotionDisplayer motionDisplayer;
-    private double displayScale = .001;
+    private double displayForceScale = .001;
     private String displayForceShape = "arrow";
     /** Creates a new instance of AnnotatedMotion 
      * This constructor is called when a trc file is read (so we know it is 
@@ -459,21 +459,22 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
     }
     
     public void updateMotionDisplayer() {
-        motionDisplayer.updateMotionObjects();
+        getMotionDisplayer().updateMotionObjects();
     }
 
     /**
-     * @return the displayScale
+     * @return the displayForceScale
      */
-    public double getDisplayScale() {
-        return displayScale;
+    public double getDisplayForceScale() {
+        return displayForceScale;
     }
 
     /**
-     * @param displayScale the displayScale to set
+     * @param displayForceScale the displayForceScale to set
      */
-    public void setDisplayScale(double displayScale) {
-        this.displayScale = displayScale;
+    public void setDisplayForceScale(double displayScale) {
+        this.displayForceScale = displayScale;
+        updateMotionDisplayer();
     }
 
     public String getDisplayForceShape() {
@@ -485,5 +486,13 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
      */
     public void setDisplayForceShape(String displayForceShape) {
         this.displayForceShape = displayForceShape;
+        updateMotionDisplayer();
+    }
+
+    /**
+     * @return the motionDisplayer
+     */
+    public MotionDisplayer getMotionDisplayer() {
+        return motionDisplayer;
     }
 }

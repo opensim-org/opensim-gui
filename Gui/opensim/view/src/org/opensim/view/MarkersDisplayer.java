@@ -96,25 +96,4 @@ public class MarkersDisplayer extends OpenSimvtkGlyphCloud {
       }
       setModified();
    }
-
-    /**
-     * @return the color
-     */
-    public Color getColor() {
-        double[] color = new double[]{1.0, 1.0, 1.0};
-        this.getLookupTable().GetColor(0., color);
-        return new Color((float)color[0], (float)color[1], (float)color[2]);
-    }
-
-    /**
-     * @param color the color to set
-     */
-    public void setColor(Color color) {
-        // Convert to RGB values and call setColorRange
-        float[] colorAsFloats = new float[]{1.0f, 1.0f, 1.0f};
-        color.getRGBColorComponents(colorAsFloats);
-        double[] colorAsDoubles = new double[]{colorAsFloats[0], colorAsFloats[1], colorAsFloats[2]};
-        this.setColorRange(colorAsDoubles, colorAsDoubles);
-        setModified();
-    }
 }

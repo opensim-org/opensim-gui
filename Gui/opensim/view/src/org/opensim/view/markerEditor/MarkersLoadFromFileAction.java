@@ -109,7 +109,7 @@ public class MarkersLoadFromFileAction extends AbstractAction {
                 public void redo() throws CannotRedoException {
                     super.redo();
                     Marker newMarker = model.getMarkerSet().addMarker(saveMarkerName, saveMarkerOffset, model.getBodySet().get(saveBodyName));
-                    addMarker(newMarker, false);
+                    addMarker(newMarker, true);
                 }
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);

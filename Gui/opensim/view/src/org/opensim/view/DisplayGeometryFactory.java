@@ -45,6 +45,7 @@ public class DisplayGeometryFactory {
         vtkActor attachmentRep = null;
         int numGeometryPieces = visibleObject.countGeometry();
         //assert(numGeometryPieces<= 1);
+        if (numGeometryPieces>0) {
         for(int gc=0; gc< 1; gc++){
             Geometry g = visibleObject.getGeometry(gc);
             AnalyticGeometry ag=null;
@@ -68,7 +69,7 @@ public class DisplayGeometryFactory {
                 }
             }
         } //for
-        
+        }
         return attachmentRep;
     }
     

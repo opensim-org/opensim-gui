@@ -54,6 +54,13 @@ public class OpenSimNode extends AbstractNode {
         super(children, lookup);
     }
 
+    /**
+     * public method to enable refreshing node display once changes have been made
+     */
+    public void refreshNode() {
+        firePropertySetsChange(null, getPropertySets());
+    }
+
 
     /** Root node (has all open models as its children). Unused!*/
     public static class RootNode extends OpenSimNode {

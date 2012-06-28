@@ -31,20 +31,24 @@
  */
 package org.opensim.view.experimentaldata;
 
+import java.awt.Color;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.beans.PropertyChangeListener;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Vector;
-import javax.swing.Action;
 import javax.swing.ImageIcon;
-import org.openide.nodes.Children;
+import javax.swing.undo.AbstractUndoableEdit;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
 import org.openide.nodes.Node;
+import org.openide.nodes.PropertySupport;
+import org.openide.nodes.Sheet;
+import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
-import org.opensim.view.ModelDisplayMenuAction;
-import org.opensim.view.ModelRenameAction;
+import org.opensim.view.ExplorerTopComponent;
+import org.opensim.view.OpenSimvtkGlyphCloud;
 import org.opensim.view.nodes.*;
+import org.opensim.view.pub.ViewDB;
 
 /**
  *
@@ -54,6 +58,7 @@ public class ExperimentalForceSetNode extends OpenSimNode {
     private static ResourceBundle bundle = NbBundle.getBundle(ExperimentalForceSetNode.class);
     private static String nodeName;
     AnnotatedMotion dMotion;
+    private OpenSimvtkGlyphCloud forcesDisplayer;
     /** Creates a new instance of ExperimentalForceNode */
     public ExperimentalForceSetNode(AnnotatedMotion dMotion) {
         nodeName=bundle.getString("ForceSet_NODE_NAME");
@@ -61,6 +66,7 @@ public class ExperimentalForceSetNode extends OpenSimNode {
         setDisplayName(nodeName);
         setShortDescription(bundle.getString("HINT_ExperimentalForceSetNode"));
         this.dMotion=dMotion;
+        forcesDisplayer = dMotion.getMotionDisplayer().getGroundForcesRep();
         createChildren();
     }
     
@@ -111,6 +117,90 @@ public class ExperimentalForceSetNode extends OpenSimNode {
                 getChildren().add(new Node[]{new ExperimentalForceNode(dObject, dMotion)});
             }
         }
+    }
+   @Override
+    public Sheet createSheet() {
+         Sheet defaultSheet = super.createSheet();
+        try {
+            Sheet.Set set = defaultSheet.get(Sheet.PROPERTIES);
+            PropertySupport.Reflection nextNodeProp = new PropertySupport.Reflection(this, Color.class, "getColor", "setColorUI");
+            nextNodeProp.setName("force color");
+            set.put(nextNodeProp);
+
+            PropertySupport.Reflection nextNodeProp2= new PropertySupport.Reflection(this, double.class, "getForceScaleFactor", "setForceScaleFactorUI");
+            nextNodeProp2.setName("force size");
+            set.put(nextNodeProp2);
+
+            return defaultSheet;
+        } catch (NoSuchMethodException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        return defaultSheet;
+    }
+    void setColorUI(final Color color, boolean allowUndo) {
+        final Color oldColor = getColor();
+        if (allowUndo){
+            AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
+                @Override
+               public void undo() throws CannotUndoException {
+                   super.undo();
+                   setColorUI(oldColor, false);
+               }
+                @Override
+               public void redo() throws CannotRedoException {
+                   super.redo();
+                   setColorUI(color, true);
+               }
+            };
+            ExplorerTopComponent.addUndoableEdit(auEdit);
+        }
+        forcesDisplayer.setColor(color);
+        ViewDB.repaintAll();
+        refreshNode();
+    }
+    public void setColorUI(final Color color) {
+        setColorUI(color, true);
+    }
+    
+    public Color getColor()
+    {
+        if (forcesDisplayer==null)
+            forcesDisplayer = dMotion.getMotionDisplayer().getGroundForcesRep();
+        return forcesDisplayer.getColor();
+    }
+   
+    public void setForceScaleFactorUI(double newFactor) {
+        setForceScaleFactorUI(newFactor, true);
+    }
+    
+    void setForceScaleFactorUI(final double newFactor, boolean allowUndo)
+    {
+        final double oldForceScaleFactor = getForceScaleFactor();
+        if (allowUndo){
+            AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
+               @Override
+               public void undo() throws CannotUndoException {
+                   super.undo();
+                   setForceScaleFactorUI(oldForceScaleFactor, false);
+               }
+               @Override
+               public void redo() throws CannotRedoException {
+                   super.redo();
+                   setForceScaleFactorUI(newFactor, true);
+               }
+            };
+            ExplorerTopComponent.addUndoableEdit(auEdit);
+        }       
+        forcesDisplayer.setScaleFactor(newFactor);
+        ViewDB.repaintAll();
+        refreshNode();
+    }
+
+    public double getForceScaleFactor()
+    {
+        if (forcesDisplayer==null)
+            forcesDisplayer = dMotion.getMotionDisplayer().getGroundForcesRep();
+        return forcesDisplayer.getScaleFactor();
     }
 
 }

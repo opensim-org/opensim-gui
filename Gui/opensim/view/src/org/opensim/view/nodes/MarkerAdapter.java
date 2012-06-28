@@ -86,7 +86,7 @@ public class MarkerAdapter  {
                }
                public void redo() throws CannotRedoException {
                    super.redo();
-                   setBodyName(bodyName, false);
+                   setBodyName(bodyName, true);
                }
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
@@ -140,7 +140,7 @@ public class MarkerAdapter  {
                }
                public void redo() throws CannotRedoException {
                    super.redo();
-                   setOffset(newOffset, false);
+                   setOffset(newOffset, true);
                }
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);            
@@ -169,7 +169,7 @@ public class MarkerAdapter  {
                }
                public void redo() throws CannotRedoException {
                    super.redo();
-                   setName(newName, false);
+                   setName(newName, true);
                }
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);

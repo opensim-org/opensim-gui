@@ -680,7 +680,7 @@ public final class ViewDB extends Observable implements Observer {
            }
            public void redo() throws CannotRedoException {
                super.redo();
-               applyColor(colorComponents, asm, false);
+               applyColor(colorComponents, asm, true);
            }
 
             public String getPresentationName() {
