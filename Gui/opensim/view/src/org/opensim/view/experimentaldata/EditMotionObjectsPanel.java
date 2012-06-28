@@ -66,8 +66,6 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
         initComponents();
         updateButtonAvailability();
         jMotionObjectsList.addListSelectionListener(this);
-        jForceScaleTextField.setText(String.valueOf(aMotion.getDisplayForceScale()));
-        jForceDisplayShapeComboBox.setSelectedItem(aMotion.getDisplayForceShape());
     }
     
     /** This method is called from within the constructor to
@@ -106,27 +104,22 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
         jButtonAdd = new javax.swing.JButton();
         jButtonDelete = new javax.swing.JButton();
         jButtonEdit = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jForceScaleTextField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jForceDisplayShapeComboBox = new javax.swing.JComboBox();
 
-        jLabel5.setText("Applied to");
+        jLabel5.setText("Applied to"); // NOI18N
 
         BodiesComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        PointIsGlobalCheckBox.setText("Point is global");
+        PointIsGlobalCheckBox.setText("Point is global"); // NOI18N
         PointIsGlobalCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         PointIsGlobalCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
-        jLabel3.setText("Force Name");
+        jLabel3.setText("Force Name"); // NOI18N
 
-        ForceIsGlobalCheckBox.setText("Force is global");
+        ForceIsGlobalCheckBox.setText("Force is global"); // NOI18N
         ForceIsGlobalCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         ForceIsGlobalCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
-        jLabel4.setText("Force Columns");
+        jLabel4.setText("Force Columns"); // NOI18N
 
         jComboBoxFX.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -158,7 +151,7 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
                 .add(jComboBoxFX, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
 
-        jLabel6.setText("Point Columns");
+        jLabel6.setText("Point Columns"); // NOI18N
 
         jComboBoxPX.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -190,7 +183,7 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
                 .add(jComboBoxPZ, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
 
-        jLabel7.setText("Torque Columns");
+        jLabel7.setText("Torque Columns"); // NOI18N
 
         jComboBoxTX.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -280,24 +273,24 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
         jMotionObjectsList.setModel(objectListModel);
         jScrollPane1.setViewportView(jMotionObjectsList);
 
-        jButtonAdd.setText("Add...");
-        jButtonAdd.setToolTipText("Add a motion object based on data ");
+        jButtonAdd.setText("Add..."); // NOI18N
+        jButtonAdd.setToolTipText("Add a motion object based on data "); // NOI18N
         jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddActionPerformed(evt);
             }
         });
 
-        jButtonDelete.setText("Delete");
-        jButtonDelete.setToolTipText("Delete selected object(s)");
+        jButtonDelete.setText("Delete"); // NOI18N
+        jButtonDelete.setToolTipText("Delete selected object(s)"); // NOI18N
         jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonDeleteActionPerformed1(evt);
             }
         });
 
-        jButtonEdit.setText("Edit...");
-        jButtonEdit.setToolTipText("Edit selected object");
+        jButtonEdit.setText("Edit..."); // NOI18N
+        jButtonEdit.setToolTipText("Edit selected object"); // NOI18N
         jButtonEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEditActionPerformed(evt);
@@ -328,65 +321,12 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
             .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 185, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         );
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Display Options"));
-
-        jLabel1.setText("Scale for forces");
-
-        jForceScaleTextField.setText("1.0");
-        jForceScaleTextField.setToolTipText("scale for the shape used");
-        jForceScaleTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jForceScaleTextFieldActionPerformed(evt);
-            }
-        });
-        jForceScaleTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jForceScaleTextFieldFocusLost(evt);
-            }
-        });
-
-        jLabel2.setText("Shape");
-
-        jForceDisplayShapeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "arrow", "arrow_in", "ball" }));
-        jForceDisplayShapeComboBox.setToolTipText("available shapes ");
-        jForceDisplayShapeComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jForceDisplayShapeComboBoxActionPerformed(evt);
-            }
-        });
-
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jLabel1)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jForceScaleTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(18, 18, 18)
-                .add(jLabel2)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jForceDisplayShapeComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(131, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                .add(jLabel1)
-                .add(jForceScaleTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(jLabel2)
-                .add(jForceDisplayShapeComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-        );
-
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, MotionObjectsListPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(MotionObjectsListPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -394,8 +334,6 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
             .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(MotionObjectsListPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -447,21 +385,6 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
              System.out.println("Adding force id="+pf.getForceIdentifier()+" start index"+pf.getStartIndexInFileNotIncludingTime());
          }
     }//GEN-LAST:event_jButtonAddActionPerformed
-
-private void jForceScaleTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jForceScaleTextFieldActionPerformed
-// TODO add your handling code here:
-        aMotion.setDisplayForceScale(Double.parseDouble(jForceScaleTextField.getText()));
-}//GEN-LAST:event_jForceScaleTextFieldActionPerformed
-
-    private void jForceScaleTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jForceScaleTextFieldFocusLost
-        aMotion.setDisplayForceScale(Double.parseDouble(jForceScaleTextField.getText()));
-// TODO add your handling code here:
-    }//GEN-LAST:event_jForceScaleTextFieldFocusLost
-
-    private void jForceDisplayShapeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jForceDisplayShapeComboBoxActionPerformed
-        // TODO add your handling code here:
-        aMotion.setDisplayForceShape((String)jForceDisplayShapeComboBox.getSelectedItem());
-    }//GEN-LAST:event_jForceDisplayShapeComboBoxActionPerformed
    
     private void updateButtonAvailability() {
        int[] sels = jMotionObjectsList.getSelectedIndices();
@@ -502,17 +425,12 @@ private void jForceScaleTextFieldActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JComboBox jComboBoxTX;
     private javax.swing.JComboBox jComboBoxTY;
     private javax.swing.JComboBox jComboBoxTZ;
-    private javax.swing.JComboBox jForceDisplayShapeComboBox;
-    private javax.swing.JTextField jForceScaleTextField;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JList jMotionObjectsList;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
     
