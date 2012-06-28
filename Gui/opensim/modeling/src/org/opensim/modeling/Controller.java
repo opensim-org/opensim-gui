@@ -57,6 +57,106 @@ public class Controller extends ModelComponent {
     return opensimModelJNI.Controller_getConcreteClassName(swigCPtr, this);
   }
 
+  public void setPropertyIndex_isDisabled(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Controller_PropertyIndex_isDisabled_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_isDisabled() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Controller_PropertyIndex_isDisabled_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_isDisabled(Controller source) {
+    opensimModelJNI.Controller_copyProperty_isDisabled(swigCPtr, this, Controller.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_isDisabled() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Controller_getProperty_isDisabled(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_isDisabled() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Controller_updProperty_isDisabled(swigCPtr, this), false);
+  }
+
+  public boolean get_isDisabled(int i) {
+    return opensimModelJNI.Controller_get_isDisabled__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_bool upd_isDisabled(int i) {
+    return new SWIGTYPE_p_bool(opensimModelJNI.Controller_upd_isDisabled__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_isDisabled(int i, boolean value) {
+    opensimModelJNI.Controller_set_isDisabled__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_isDisabled(boolean value) {
+    return opensimModelJNI.Controller_append_isDisabled(swigCPtr, this, value);
+  }
+
+  public void constructProperty_isDisabled(boolean initValue) {
+    opensimModelJNI.Controller_constructProperty_isDisabled(swigCPtr, this, initValue);
+  }
+
+  public boolean get_isDisabled() {
+    return opensimModelJNI.Controller_get_isDisabled__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_bool upd_isDisabled() {
+    return new SWIGTYPE_p_bool(opensimModelJNI.Controller_upd_isDisabled__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_isDisabled(boolean value) {
+    opensimModelJNI.Controller_set_isDisabled__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_actuator_list(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Controller_PropertyIndex_actuator_list_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_actuator_list() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Controller_PropertyIndex_actuator_list_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_actuator_list(Controller source) {
+    opensimModelJNI.Controller_copyProperty_actuator_list(swigCPtr, this, Controller.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_actuator_list() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.Controller_getProperty_actuator_list(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_actuator_list() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.Controller_updProperty_actuator_list(swigCPtr, this), false);
+  }
+
+  public String get_actuator_list(int i) {
+    return opensimModelJNI.Controller_get_actuator_list(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_std__string upd_actuator_list(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.Controller_upd_actuator_list(swigCPtr, this, i), false);
+  }
+
+  public void set_actuator_list(int i, String value) {
+    opensimModelJNI.Controller_set_actuator_list(swigCPtr, this, i, value);
+  }
+
+  public int append_actuator_list(String value) {
+    return opensimModelJNI.Controller_append_actuator_list(swigCPtr, this, value);
+  }
+
+  public void constructProperty_actuator_list() {
+    opensimModelJNI.Controller_constructProperty_actuator_list(swigCPtr, this);
+  }
+
+  public void set_numControls(int value) {
+    opensimModelJNI.Controller__numControls_set(swigCPtr, this, value);
+  }
+
+  public int get_numControls() {
+    return opensimModelJNI.Controller__numControls_get(swigCPtr, this);
+  }
+
   public boolean isDisabled() {
     return opensimModelJNI.Controller_isDisabled(swigCPtr, this);
   }
@@ -83,10 +183,6 @@ public class Controller extends ModelComponent {
 
   public SetActuators updActuators() {
     return new SetActuators(opensimModelJNI.Controller_updActuators(swigCPtr, this), false);
-  }
-
-  public ArrayStr getActuatorNames() {
-    return new ArrayStr(opensimModelJNI.Controller_getActuatorNames(swigCPtr, this), false);
   }
 
 }

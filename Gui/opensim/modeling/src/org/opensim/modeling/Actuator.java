@@ -229,22 +229,4 @@ public class Actuator extends Actuator_ {
     return opensimModelJNI.Actuator_getOverrideForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
   }
 
-  public void setOverrideForceFunction(SWIGTYPE_p_OpenSim__StateFunction arg0) {
-    opensimModelJNI.Actuator_setOverrideForceFunction(swigCPtr, this, SWIGTYPE_p_OpenSim__StateFunction.getCPtr(arg0));
-  }
-
-  public SWIGTYPE_p_OpenSim__StateFunction getOverrideForceFunction() {
-    long cPtr = opensimModelJNI.Actuator_getOverrideForceFunction(swigCPtr, this);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_OpenSim__StateFunction(cPtr, false);
-  }
-
-  public SWIGTYPE_p_OpenSim__StateFunction updOverrideForceFunction() {
-    long cPtr = opensimModelJNI.Actuator_updOverrideForceFunction(swigCPtr, this);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_OpenSim__StateFunction(cPtr, false);
-  }
-
-  public void resetOverrideForceFunction() {
-    opensimModelJNI.Actuator_resetOverrideForceFunction(swigCPtr, this);
-  }
-
 }

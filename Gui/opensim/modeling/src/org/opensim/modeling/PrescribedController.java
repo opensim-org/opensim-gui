@@ -61,20 +61,8 @@ public class PrescribedController extends Controller {
     this(opensimModelJNI.new_PrescribedController__SWIG_0(), true);
   }
 
-  public PrescribedController(Model aModel) {
-    this(opensimModelJNI.new_PrescribedController__SWIG_1(Model.getCPtr(aModel), aModel), true);
-  }
-
-  public PrescribedController(String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelJNI.new_PrescribedController__SWIG_2(aFileName, aUpdateFromXMLNode), true);
-  }
-
-  public PrescribedController(String aFileName) {
-    this(opensimModelJNI.new_PrescribedController__SWIG_3(aFileName), true);
-  }
-
   public PrescribedController(PrescribedController PrescribedController) {
-    this(opensimModelJNI.new_PrescribedController__SWIG_4(PrescribedController.getCPtr(PrescribedController), PrescribedController), true);
+    this(opensimModelJNI.new_PrescribedController__SWIG_1(PrescribedController.getCPtr(PrescribedController), PrescribedController), true);
   }
 
   public void computeControls(SWIGTYPE_p_SimTK__State s, SWIGTYPE_p_SimTK__Vector controls) {
