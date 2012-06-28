@@ -71,6 +71,7 @@ import org.opensim.view.functionEditor.FunctionPanel;
 import org.opensim.view.functionEditor.FunctionPanelListener;
 import org.opensim.view.functionEditor.FunctionPlot;
 import org.opensim.view.functionEditor.FunctionRenderer;
+import org.opensim.view.functionEditor.FunctionReplacedEvent;
 import org.opensim.view.functionEditor.FunctionXYSeries;
 import org.opensim.view.pub.OpenSimDB;
 
@@ -396,6 +397,7 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
         typeComboBox = new javax.swing.JComboBox();
         crosshairsCheckBox = new javax.swing.JCheckBox();
         PropertiesButton = new javax.swing.JButton();
+        restoreFunctionButton = new javax.swing.JButton();
 
         xValueTextField.setMaximumSize(new java.awt.Dimension(100, 21));
         xValueTextField.setMinimumSize(new java.awt.Dimension(100, 21));
@@ -468,6 +470,13 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
             }
         });
 
+        restoreFunctionButton.setText(org.openide.util.NbBundle.getMessage(OpenSimFunctionEditorPanel.class, "OpenSimFunctionEditorPanel.restoreFunctionButton.text")); // NOI18N
+        restoreFunctionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restoreFunctionButtonrestoreFunctionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout FunctionEditorPanelLayout = new javax.swing.GroupLayout(FunctionEditorPanel);
         FunctionEditorPanel.setLayout(FunctionEditorPanelLayout);
         FunctionEditorPanelLayout.setHorizontalGroup(
@@ -498,7 +507,9 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
                             .addContainerGap()
                             .addComponent(typeLabel)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(restoreFunctionButton))))
                 .addContainerGap())
         );
         FunctionEditorPanelLayout.setVerticalGroup(
@@ -519,7 +530,8 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
                 .addGap(26, 26, 26)
                 .addGroup(FunctionEditorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(typeLabel))
+                    .addComponent(typeLabel)
+                    .addComponent(restoreFunctionButton))
                 .addContainerGap())
         );
 
@@ -569,6 +581,18 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
     private void PropertiesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PropertiesButtonActionPerformed
 
         if (functionPanel != null) {             functionPanel.doEditChartProperties();         }     }//GEN-LAST:event_PropertiesButtonActionPerformed
+
+private void restoreFunctionButtonrestoreFunctionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restoreFunctionButtonrestoreFunctionActionPerformed
+      Function func = function;
+      // function must be set to null before calling replaceFunction, but I'm not sure why.
+      function = null;
+      //notifyListeners(new FunctionReplacedEvent(model, object, func, savedFunction));
+      restoreFunction();
+      setupComponent();
+      setPendingChanges(false, true);
+      functionJPanel.validate();
+      this.repaint();
+}//GEN-LAST:event_restoreFunctionButtonrestoreFunctionActionPerformed
 
     private void xValueEntered(javax.swing.JTextField field) {
         // TODO: check old value of each selected point to see if anything really changes
@@ -798,6 +822,14 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
         }
         return false;
     }
+    private void restoreFunction() {
+      if (savedFunction != null) {
+         function = savedFunction;
+         xyFunction = new XYFunctionInterface(function);
+         // make a new backup copy
+         //backupFunction();
+      }
+   }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel FunctionEditorPanel;
     private javax.swing.JScrollPane FunctionEditorScrollPane;
@@ -806,6 +838,7 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
     private javax.swing.JLabel functionDescriptionLabel;
     private javax.swing.JPanel functionJPanel;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton restoreFunctionButton;
     private javax.swing.JComboBox typeComboBox;
     private javax.swing.JLabel typeLabel;
     private javax.swing.JLabel xValueLabel;

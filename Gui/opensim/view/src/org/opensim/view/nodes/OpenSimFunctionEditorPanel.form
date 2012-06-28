@@ -74,11 +74,13 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="PropertiesButton" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="1">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="typeLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="typeComboBox" min="-2" pref="145" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="restoreFunctionButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -106,6 +108,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="typeComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="typeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="restoreFunctionButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -236,6 +239,16 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PropertiesButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="restoreFunctionButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/opensim/view/nodes/Bundle.properties" key="OpenSimFunctionEditorPanel.restoreFunctionButton.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="restoreFunctionButtonrestoreFunctionActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
