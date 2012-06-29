@@ -193,6 +193,15 @@ public class OpenSimObjectNode extends OpenSimNode {
        nextNodeProp.setValue("suppressCustomEditor", Boolean.FALSE);
        return nextNodeProp;
    }
+    private Reflection createNodePropForObjectType(OpenSimObject obj) throws NoSuchMethodException {
+       PropertySupport.Reflection nextNodeProp = new PropertySupport.Reflection(obj,
+            String.class,
+            "getConcreteClassName",
+            null);
+       nextNodeProp.setValue("canEditAsText", Boolean.FALSE);
+       nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
+       return nextNodeProp;
+   }
     public enum displayOption{Showable, Isolatable, Colorable};
     private ArrayList<displayOption> validDisplayOptions = new ArrayList<displayOption>();
     
@@ -305,6 +314,19 @@ public class OpenSimObjectNode extends OpenSimNode {
                 Exceptions.printStackTrace(ex);
             }
         }
+        // Repeat for type
+        try {
+            Reflection nextNodeProp = createNodePropForObjectType(obj);
+            if (nextNodeProp != null) {
+                nextNodeProp.setName("type");
+                nextNodeProp.setShortDescription("Type of the Object");
+                nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
+                set.put(nextNodeProp);
+            }
+        } catch (NoSuchMethodException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+
         for (int p = 0; p < obj.getNumProperties(); ++p) {
             try {
                 AbstractProperty ap = obj.getPropertyByIndex(p);
