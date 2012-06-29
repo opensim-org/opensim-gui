@@ -61,20 +61,8 @@ public class ProbeSet extends ModelComponentSetProbes {
     this(opensimModelJNI.new_ProbeSet__SWIG_0(), true);
   }
 
-  public ProbeSet(Model model) {
-    this(opensimModelJNI.new_ProbeSet__SWIG_1(Model.getCPtr(model), model), true);
-  }
-
-  public ProbeSet(Model model, String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelJNI.new_ProbeSet__SWIG_2(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
-  }
-
-  public ProbeSet(Model model, String aFileName) {
-    this(opensimModelJNI.new_ProbeSet__SWIG_3(Model.getCPtr(model), model, aFileName), true);
-  }
-
   public ProbeSet(ProbeSet aAbsProbeSet) {
-    this(opensimModelJNI.new_ProbeSet__SWIG_4(ProbeSet.getCPtr(aAbsProbeSet), aAbsProbeSet), true);
+    this(opensimModelJNI.new_ProbeSet__SWIG_1(ProbeSet.getCPtr(aAbsProbeSet), aAbsProbeSet), true);
   }
 
 }

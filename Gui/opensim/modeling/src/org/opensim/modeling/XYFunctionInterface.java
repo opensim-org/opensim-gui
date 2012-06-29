@@ -72,6 +72,10 @@ public class XYFunctionInterface extends OpenSimObject {
     this(opensimModelJNI.new_XYFunctionInterface(Function.getCPtr(f), f), true);
   }
 
+  public boolean isSpecifiedByControlPoints() {
+    return opensimModelJNI.XYFunctionInterface_isSpecifiedByControlPoints(swigCPtr, this);
+  }
+
   public int getNumberOfPoints() {
     return opensimModelJNI.XYFunctionInterface_getNumberOfPoints(swigCPtr, this);
   }

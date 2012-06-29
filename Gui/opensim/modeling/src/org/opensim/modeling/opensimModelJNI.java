@@ -819,6 +819,7 @@ public class opensimModelJNI {
   public final static native String XYFunctionInterface_getConcreteClassName(long jarg1, XYFunctionInterface jarg1_);
   public final static native boolean XYFunctionInterface_isXYFunction(long jarg1, Function jarg1_);
   public final static native long new_XYFunctionInterface(long jarg1, Function jarg1_);
+  public final static native boolean XYFunctionInterface_isSpecifiedByControlPoints(long jarg1, XYFunctionInterface jarg1_);
   public final static native int XYFunctionInterface_getNumberOfPoints(long jarg1, XYFunctionInterface jarg1_);
   public final static native long XYFunctionInterface_getXValues(long jarg1, XYFunctionInterface jarg1_);
   public final static native long XYFunctionInterface_getYValues(long jarg1, XYFunctionInterface jarg1_);
@@ -4048,10 +4049,7 @@ public class opensimModelJNI {
   public final static native long ProbeSet_clone(long jarg1, ProbeSet jarg1_);
   public final static native String ProbeSet_getConcreteClassName(long jarg1, ProbeSet jarg1_);
   public final static native long new_ProbeSet__SWIG_0();
-  public final static native long new_ProbeSet__SWIG_1(long jarg1, Model jarg1_);
-  public final static native long new_ProbeSet__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
-  public final static native long new_ProbeSet__SWIG_3(long jarg1, Model jarg1_, String jarg2);
-  public final static native long new_ProbeSet__SWIG_4(long jarg1, ProbeSet jarg1_);
+  public final static native long new_ProbeSet__SWIG_1(long jarg1, ProbeSet jarg1_);
   public final static native void delete_ProbeSet(long jarg1);
   public final static native void ModelVisualizer_show(long jarg1, ModelVisualizer jarg1_, long jarg2);
   public final static native long ModelVisualizer_getInputSilo(long jarg1, ModelVisualizer jarg1_);

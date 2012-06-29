@@ -371,6 +371,7 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
     public OpenSimFunctionEditorPanel(Function functionToEdit) {
         function = functionToEdit;
         xyFunction = new XYFunctionInterface(function);
+        savedFunction = Function.safeDownCast(functionToEdit.clone());
         initComponents();
         ArrayStr functionClassNames = OpenSimObject.getFunctionClassNames();
         functionTypeNames = new String[functionClassNames.size()];
@@ -649,7 +650,7 @@ private void restoreFunctionButtonrestoreFunctionActionPerformed(java.awt.event.
         if (function != null) {
             Constant constant = Constant.safeDownCast(function);
             if (constant != null) {
-                typeComboBox.setEnabled(true);
+                //typeComboBox.setEnabled(true);
                 typeComboBox.setSelectedIndex(findElement(functionTypeNames, constant.getConcreteClassName()));
                 javax.swing.JLabel valueLabel = new javax.swing.JLabel();
                 valueLabel.setText("value");
@@ -719,7 +720,8 @@ private void restoreFunctionButtonrestoreFunctionActionPerformed(java.awt.event.
                 functionJPanel.setLayout(new BorderLayout());
                 functionJPanel.add(functionPanel);
                 functionPanel.addFunctionPanelListener(this);
-                typeComboBox.setEnabled(true);
+                functionJPanel.setEnabled(xyFunction.isSpecifiedByControlPoints());
+                //typeComboBox.setEnabled(true);
                 typeComboBox.setSelectedIndex(findElement(functionTypeNames, getFunctionTypeName(function)));
                 xValueTextField.setEnabled(true);
                 yValueTextField.setEnabled(true);
@@ -733,7 +735,7 @@ private void restoreFunctionButtonrestoreFunctionActionPerformed(java.awt.event.
             }
             updateFunctionTitle();
         } else {
-            typeComboBox.setEnabled(false);
+            //typeComboBox.setEnabled(false);
             xValueTextField.setEnabled(false);
             yValueTextField.setEnabled(false);
             crosshairsCheckBox.setEnabled(false);
@@ -741,7 +743,8 @@ private void restoreFunctionButtonrestoreFunctionActionPerformed(java.awt.event.
             functionDescriptionLabel.setText("");
             //clearChangeListenerList();
         }
-
+        /*functionDescriptionLabel.setText(functionDescriptionLabel.getText()+
+                "editable="+String.valueOf(xyFunction.isSpecifiedByControlPoints()));*/
         Dimension d = new Dimension(500, 430);
         FunctionEditorPanel.setPreferredSize(d);
     }
