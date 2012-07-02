@@ -260,7 +260,7 @@
                     </file>
                     <file name="sep-2.instance">
                         <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
-                        <attr name="position" intvalue="500"/>
+                        <attr name="position" intvalue="490"/>
                     </file>
                     <file name="sep-3.instance">
                         <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
@@ -646,9 +646,6 @@
                 <attr name="originalFile" stringvalue="Actions/Help/org-opensim-view-HelpAboutAction.instance"/>
                 <attr name="position" intvalue="0"/>
             </file>
-
-           
-
            <file name="org-opensim-view-TutorialsAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Help/org-opensim-view-HelpTutorialsAction.instance"/>
                 <attr name="position" intvalue="600"/>
@@ -662,9 +659,6 @@
             </file>
             <file name="shortcuts.xml_hidden"/>
         </folder>
-
-        
-
         <file name="View_hidden">
             <attr name="position" intvalue="1400"/>
         </file>
