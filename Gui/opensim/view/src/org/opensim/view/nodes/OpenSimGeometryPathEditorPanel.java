@@ -32,14 +32,13 @@ package org.opensim.view.nodes;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -59,6 +58,7 @@ import org.opensim.modeling.MovingPathPoint;
 import org.opensim.modeling.Muscle;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PathActuator;
 import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.PathPointSet;
 import org.opensim.modeling.PathWrap;
@@ -87,7 +87,7 @@ import org.opensim.view.pub.ViewDB;
 public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
 
    private javax.swing.JScrollPane WrapTab = null;
-   private javax.swing.JScrollPane CurrentPathTab = null;
+   //private javax.swing.JScrollPane CurrentPathTab = null;
    private String selectedTabName = null;
    private javax.swing.JCheckBox attachmentSelectBox[] = null; // array of checkboxes for selecting attachment points
    private String[] wrapObjectNames = null;
@@ -102,9 +102,12 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
    private OpenSimContext openSimContext;
    private Model currentModel;
    private Muscle currentAct = null; // the actuator that is currently shown in the Muscle Editor window
+   private GeometryPath savePath;
+    private JButton RestoreButton;
    /** Creates new form OpenSimGeometryPathEditorPanel */
     public OpenSimGeometryPathEditorPanel(GeometryPath pathToEdit) {
         currentModel = pathToEdit.getModel();
+        savePath = GeometryPath.safeDownCast(pathToEdit.clone());
         openSimContext = OpenSimDB.getInstance().getContext(currentModel);
         initComponents();
         currentAct = Muscle.safeDownCast(pathToEdit.getOwner());
@@ -189,7 +192,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       ParametersTabbedPanel.removeAll();
       AttachmentsTab = null;
       WrapTab = null;
-      CurrentPathTab = null;
+      //CurrentPathTab = null;
 
       // Set the current actuator to the newly selected one (should only be null
       // if the model is null or if the model has no actuators).
@@ -215,88 +218,6 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       propTab[numGroups].setName("Other");
       ParametersTabbedPanel.addTab("Other", null, propTab[numGroups], "other parameters");
       tabPropertyCount[numGroups] = 0;
-
-      // Loop through the properties, adding each one to the appropriate panel.
-      /*
-      for (i = 0; i < ps.getSize(); i++) {
-         Property_Deprecated p;
-         try {
-            p = ps.get(i);
-            final int num = i;
-            int groupNum = ps.getGroupIndexContaining(p);
-            if (groupNum < 0)
-               groupNum = numGroups; // this is the index of the "other" panel
-            if (p.getType() == org.opensim.modeling.Property_Deprecated.PropertyType.Dbl ||
-                    p.getType() == org.opensim.modeling.Property_Deprecated.PropertyType.Int) {
-               javax.swing.JLabel propLabel = new javax.swing.JLabel();
-               propLabel.setText(p.getName());
-               propLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-               propLabel.setBounds(20, 22 + tabPropertyCount[groupNum] * 22, 180, 16);
-               propLabel.setToolTipText(p.getComment());
-               javax.swing.JTextField propField = new javax.swing.JTextField();
-               propField.setBounds(210, 20 + tabPropertyCount[groupNum] * 22, 120, 21);
-               propField.setHorizontalAlignment(SwingConstants.TRAILING);
-               if (p.getType() == org.opensim.modeling.Property_Deprecated.PropertyType.Dbl)
-                  propField.setText(doublePropFormat.format(p.getValueDbl()));
-               else
-                  propField.setText(p.toString());
-               propField.setToolTipText(p.getComment());
-               propPanel[groupNum].add(propLabel);
-               propPanel[groupNum].add(propField);
-               tabPropertyCount[groupNum]++;
-               if (p.getType() == org.opensim.modeling.Property_Deprecated.PropertyType.Dbl) {
-                  propField.addActionListener(new java.awt.event.ActionListener() {
-                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        DoublePropertyEntered(((javax.swing.JTextField)evt.getSource()), num);
-                     }
-                  });
-                  propField.addFocusListener(new java.awt.event.FocusAdapter() {
-                     public void focusLost(java.awt.event.FocusEvent evt) {
-                        if (!evt.isTemporary())
-                           DoublePropertyEntered(((javax.swing.JTextField)evt.getSource()), num);
-                     }
-                  });
-               } else if (p.getType() == org.opensim.modeling.Property_Deprecated.PropertyType.Int) {
-                  propField.addActionListener(new java.awt.event.ActionListener() {
-                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        IntPropertyEntered(((javax.swing.JTextField)evt.getSource()), num);
-                     }
-                  });
-                  propField.addFocusListener(new java.awt.event.FocusAdapter() {
-                     public void focusLost(java.awt.event.FocusEvent evt) {
-                        if (!evt.isTemporary())
-                           IntPropertyEntered(((javax.swing.JTextField)evt.getSource()), num);
-                     }
-                  });
-               }
-            } else if (p.getType() == org.opensim.modeling.Property_Deprecated.PropertyType.ObjPtr) {
-               OpenSimObject obj = p.getValueObjPtr();
-               Function func = Function.safeDownCast(obj);
-               if (func != null) {
-                  javax.swing.JLabel propLabel = new javax.swing.JLabel();
-                  propLabel.setText(p.getName());
-                  propLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-                  propLabel.setBounds(20, 22 + tabPropertyCount[groupNum] * 22, 200, 16);
-                  propLabel.setToolTipText(p.getComment());
-                  javax.swing.JButton propButton = new javax.swing.JButton();
-                  propButton.setBounds(230, 20 + tabPropertyCount[groupNum] * 22, 65, 21);
-                  propButton.setText("Edit");
-                  propButton.setEnabled(true);
-                  propButton.setToolTipText("Edit the function controlling this property");
-                  propButton.addActionListener(new java.awt.event.ActionListener() {
-                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        EditPropertyFunction(((javax.swing.JButton)evt.getSource()), num);
-                     }
-                  });
-                  propPanel[groupNum].add(propLabel);
-                  propPanel[groupNum].add(propButton);
-                  tabPropertyCount[groupNum]++;
-               }
-            }
-         } catch (IOException ex) {
-            ex.printStackTrace();
-         }
-      }*/
       
       // Set the preferred sizes of the property tabs.
       // If any of them have no properties, remove them
@@ -545,13 +466,13 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       attachmentTypeLabel.setBounds(X + 45, Y - 30, 40, 16);
       javax.swing.JLabel attachmentXLabel = new javax.swing.JLabel();
       attachmentXLabel.setText("X");
-      attachmentXLabel.setBounds(X + 160, Y - 30, 8, 16);
+      attachmentXLabel.setBounds(X + 160, Y - 30, 5, 16);
       javax.swing.JLabel attachmentYLabel = new javax.swing.JLabel();
       attachmentYLabel.setText("Y");
-      attachmentYLabel.setBounds(X + 295, Y - 30, 8, 16);
+      attachmentYLabel.setBounds(X + 295, Y - 30, 5, 16);
       javax.swing.JLabel attachmentZLabel = new javax.swing.JLabel();
       attachmentZLabel.setText("Z");
-      attachmentZLabel.setBounds(X + 430, Y - 30, 8, 16);
+      attachmentZLabel.setBounds(X + 430, Y - 30, 5, 16);
       javax.swing.JLabel attachmentBodyLabel = new javax.swing.JLabel();
       attachmentBodyLabel.setText("Body");
       attachmentBodyLabel.setBounds(X + 532, Y - 30, 30, 16);
@@ -583,7 +504,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          MovingPathPoint mmp = MovingPathPoint.safeDownCast(pathPoints.get(i));
 
          int height = Y + numGuiLines * 25;
-         int width = 135;
+         int width = 60;
          int x = X;
          int y = Y;
          final int num = i;
@@ -898,6 +819,17 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       addButton.setToolTipText("Add an attachment point");
       addButton.setBounds(X + 100, Y + 20 + numGuiLines * 25, 70, 21);
       AttachmentsPanel.add(addButton);
+      RestoreButton = new javax.swing.JButton();
+      RestoreButton.setText("Restore");
+      RestoreButton.setBounds(X + 300, Y + 20 + numGuiLines * 25, 70, 21);
+      RestoreButton.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RestoreButtonActionPerformed(null);
+            }
+        });
+     AttachmentsPanel.add(RestoreButton);
       
       class PopupListener extends MouseAdapter {
          public void mousePressed(MouseEvent e) {
@@ -1397,7 +1329,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       javax.swing.JPanel CurrentPathPanel = new javax.swing.JPanel();
       CurrentPathPanel.setLayout(null);
       //CurrentPathPanel.setBackground(new java.awt.Color(200, 200, 255));
-      CurrentPathTab.setViewportView(CurrentPathPanel);
+      //CurrentPathTab.setViewportView(CurrentPathPanel);
 
       // Put the points in the current path in the CurrentPath tab
       ArrayPathPoint asmp = openSimContext.getCurrentPath(asm);
@@ -1407,13 +1339,13 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       // Set up the muscle-independent labels
       javax.swing.JLabel currentPathXLabel = new javax.swing.JLabel();
       currentPathXLabel.setText("X");
-      currentPathXLabel.setBounds(X + 35, Y - 30, 8, 16);
+      currentPathXLabel.setBounds(X + 35, Y - 30, 6, 16);
       javax.swing.JLabel currentPathYLabel = new javax.swing.JLabel();
       currentPathYLabel.setText("Y");
-      currentPathYLabel.setBounds(X + 95, Y - 30, 8, 16);
+      currentPathYLabel.setBounds(X + 95, Y - 30, 6, 16);
       javax.swing.JLabel currentPathZLabel = new javax.swing.JLabel();
       currentPathZLabel.setText("Z");
-      currentPathZLabel.setBounds(X + 155, Y - 30, 8, 16);
+      currentPathZLabel.setBounds(X + 155, Y - 30, 6, 16);
       javax.swing.JLabel currentPathBodyLabel = new javax.swing.JLabel();
       currentPathBodyLabel.setText("Body");
       currentPathBodyLabel.setBounds(X + 210, Y - 30, 30, 16);
@@ -1748,6 +1680,18 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void setPendingChanges(boolean b, Muscle currentAct, boolean b0) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        //throw new UnsupportedOperationException("Not yet implemented");
     }
+    
+    void RestoreButtonActionPerformed(ActionEvent evt)
+    {
+        PathActuator pact = PathActuator.safeDownCast(currentAct);
+        pact.updGeometryPath().assign(savePath);
+        openSimContext.recreateSystemKeepStage();
+        setupComponent(currentAct);
+        SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(currentModel);
+        Muscle asm = Muscle.safeDownCast(currentAct);
+        vis.updateActuatorGeometry(asm, true);
+        ViewDB.getInstance().repaintAll();
+   }
 }
