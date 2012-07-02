@@ -31,10 +31,7 @@ package org.opensim.plotter;
 import java.util.Vector;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
-import org.opensim.modeling.Coordinate;
-import org.opensim.modeling.ArrayStr;
-import org.opensim.modeling.Model;
-import org.opensim.modeling.Storage;
+import org.opensim.modeling.*;
 
 /**
  *
@@ -48,12 +45,14 @@ public class PlotterSourceAnalysis implements PlotterSourceInterface {
    private Storage   storage;
    private Model model;
    private boolean live;    // Flag indicating whether the storage underneath is live 
+   private String storageName;
    /** Creates a new instance of PlotterSourceAnalysis */
    public PlotterSourceAnalysis(Model aModel, Storage storage, String modelAnalysisString) {
       model = aModel;
       this.storage = storage;
       live=true;
       displayName = modelAnalysisString;
+      storageName = storage.getName();
       
       if (storage.getName().startsWith("MomentArm_"))
          displayName = storage.getName().substring(10)+" "+displayName;
@@ -175,5 +174,8 @@ public class PlotterSourceAnalysis implements PlotterSourceInterface {
 
     public boolean hasFullState(Model model) {
         return false;
+    }
+    void updateStorage(Analysis muscleAnalysis) {
+        storage = muscleAnalysis.getStorageList().get(storageName);
     }
 }

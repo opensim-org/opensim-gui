@@ -68,17 +68,7 @@ import org.jfree.chart.ChartPanel;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.openide.util.Exceptions;
-import org.opensim.modeling.Coordinate;
-import org.opensim.modeling.AnalysisSet;
-import org.opensim.modeling.AnalyzeTool;
-import org.opensim.modeling.ArrayDouble;
-import org.opensim.modeling.ArrayStr;
-import org.opensim.modeling.CoordinateSet;
-import org.opensim.modeling.Model;
-import org.opensim.modeling.OpenSimContext;
-import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.StateVector;
-import org.opensim.modeling.Storage;
+import org.opensim.modeling.*;
 import org.opensim.view.motions.MotionEvent;
 import org.opensim.view.motions.MotionTimeChangeEvent;
 import org.opensim.utils.FileUtils;
@@ -1525,7 +1515,7 @@ public class JPlotterPanel extends javax.swing.JPanel
          tool.setFinalTime( motion.getStorage().getLastTime());
          statesStorage = buildStatesStorageFromMotion(motion.getStorage(), isActivationOverride(), getActivationValue());
          tool.setStatesStorage(statesStorage);
-         //statesStorage.print(key+"statesFromMotion.sto");
+         statesStorage.print(key+"statesFromMotion.sto");
       } else {
          // Recreate stateStorage
          statesStorage=createStateStorageWithHeader(currentModel);
@@ -1533,7 +1523,7 @@ public class JPlotterPanel extends javax.swing.JPanel
           // make states for analysis by setting fiberlength and activation and form complete storage
          double[] statesForAnalysis = new double[numStates];
          openSimContext.getStates(statesForAnalysis);
-         //setNonzeroDefaultValues(stateNames, statesForAnalysis, isActivationOverride(), getActivationValue());
+         setNonzeroDefaultValues(stateNames, statesForAnalysis, isActivationOverride(), getActivationValue());
          double NUM_STEPS=100.0;
          int xIndex = statesStorage.getStateIndex(getDomainName());
          Coordinate coord = currentModel.getCoordinateSet().get(getDomainName());
@@ -1566,20 +1556,23 @@ public class JPlotterPanel extends javax.swing.JPanel
          tool.setStartTime(0.);
          tool.setFinalTime(NUM_STEPS);
          sourceX=new PlotterSourceAnalysis(currentModel, statesStorage, "");
-         statesStorage.print("toolInput.sto");
-         //tool.setStatesFileName("toolInput"+key+".sto");
+         statesStorage.print("toolInput"+key+".sto");
+         tool.setStatesFileName("toolInput"+key+".sto");
          tool.setModelFilename(currentModel.getInputFileName());
       }
       tool.setPrintResultFiles(false);
-      analysisSource.getStorage().purge();
-      tool.print("PlotterTool.xml");
+      //analysisSource.getStorage().purge();
+      tool.print("PlotterTool"+key+".xml");
       try {
          tool.run(true);
       } catch (IOException ex) {
          ex.printStackTrace();
       }
       openSimContext.setStates(saveStates);
-      analysisSource.getStorage().print("toolOutput.sto");
+      int na = currentModel.getAnalysisSet().getSize();
+      Analysis analysis = currentModel.getAnalysisSet().get("MuscleAnalysis");
+      analysisSource.updateStorage(analysis);
+      analysisSource.getStorage().print("toolOutput"+key+".sto");
       currentModel.getSimbodyEngine().convertRadiansToDegrees(analysisSource.getStorage());
       currentModel.getSimbodyEngine().convertRadiansToDegrees(statesStorage);
    }
