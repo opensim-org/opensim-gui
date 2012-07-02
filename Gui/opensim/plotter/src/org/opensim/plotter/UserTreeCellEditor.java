@@ -67,9 +67,11 @@ public class UserTreeCellEditor extends DefaultTreeCellEditor {
        
        if(userObject instanceof PlotCurve) {
          item = (PlotCurve) node.getUserObject();
+         topItem = null;
        }
        else if (userObject instanceof Plot) {
            topItem = (Plot) node.getUserObject();
+           item = null;
        }
      }
      return super.getTreeCellEditorComponent(

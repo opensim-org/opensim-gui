@@ -38,7 +38,11 @@ class PlotNode extends DefaultMutableTreeNode
    }
 
    public String toString() {
-      return ((Plot) getUserObject()).getTitle();
+       Object userObj = getUserObject();
+       if (userObj instanceof Plot)
+            return ((Plot) userObj).getTitle();
+       else 
+           return "";
    } 
 
 }
