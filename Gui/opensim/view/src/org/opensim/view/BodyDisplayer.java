@@ -450,8 +450,12 @@ public class BodyDisplayer extends vtkAssembly
           double[] colorOnFile = new double[3];
           gPiece.getColor(colorOnFile);
           gPiece.setColor(colorOnFile);
+          DisplayGeometryDisplayer gd = (DisplayGeometryDisplayer) mapGeometryToVtkObjects.get(gPiece);
+          gd.GetProperty().SetColor(colorOnFile);
+          gd.Modified();
       }
     }
+    
     private void updateMapsToSupportPicking(final Body body, 
             Hashtable<OpenSimObject, vtkProp3D> mapObject2VtkObjects,
             Hashtable<vtkProp3D, OpenSimObject> mapVtkObjects2Objects) {
