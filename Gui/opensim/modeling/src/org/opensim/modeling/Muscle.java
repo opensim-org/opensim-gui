@@ -585,8 +585,12 @@ public class Muscle extends PathActuator {
     return opensimModelJNI.Muscle_getMuscleStiffness(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
   }
 
-  public double getFiberPower(SWIGTYPE_p_SimTK__State s) {
-    return opensimModelJNI.Muscle_getFiberPower(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  public double getFiberActivePower(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Muscle_getFiberActivePower(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
+  public double getFiberPassivePower(SWIGTYPE_p_SimTK__State s) {
+    return opensimModelJNI.Muscle_getFiberPassivePower(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
   }
 
   public double getTendonPower(SWIGTYPE_p_SimTK__State s) {

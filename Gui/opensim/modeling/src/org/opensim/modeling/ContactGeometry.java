@@ -57,6 +57,94 @@ public class ContactGeometry extends ModelComponent {
     return opensimModelJNI.ContactGeometry_getConcreteClassName(swigCPtr, this);
   }
 
+  public void setPropertyIndex_display_preference(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.ContactGeometry_PropertyIndex_display_preference_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_display_preference() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ContactGeometry_PropertyIndex_display_preference_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_display_preference(ContactGeometry source) {
+    opensimModelJNI.ContactGeometry_copyProperty_display_preference(swigCPtr, this, ContactGeometry.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_int_t getProperty_display_preference() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_int_t(opensimModelJNI.ContactGeometry_getProperty_display_preference(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_int_t updProperty_display_preference() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_int_t(opensimModelJNI.ContactGeometry_updProperty_display_preference(swigCPtr, this), false);
+  }
+
+  public int get_display_preference(int i) {
+    return opensimModelJNI.ContactGeometry_get_display_preference__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_int upd_display_preference(int i) {
+    return new SWIGTYPE_p_int(opensimModelJNI.ContactGeometry_upd_display_preference__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_display_preference(int i, int value) {
+    opensimModelJNI.ContactGeometry_set_display_preference__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_display_preference(int value) {
+    return opensimModelJNI.ContactGeometry_append_display_preference(swigCPtr, this, value);
+  }
+
+  public void constructProperty_display_preference(int initValue) {
+    opensimModelJNI.ContactGeometry_constructProperty_display_preference(swigCPtr, this, initValue);
+  }
+
+  public int get_display_preference() {
+    return opensimModelJNI.ContactGeometry_get_display_preference__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_int upd_display_preference() {
+    return new SWIGTYPE_p_int(opensimModelJNI.ContactGeometry_upd_display_preference__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_display_preference(int value) {
+    opensimModelJNI.ContactGeometry_set_display_preference__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_color(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.ContactGeometry_PropertyIndex_color_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_color() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ContactGeometry_PropertyIndex_color_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_color(ContactGeometry source) {
+    opensimModelJNI.ContactGeometry_copyProperty_color(swigCPtr, this, ContactGeometry.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_color() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ContactGeometry_getProperty_color(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_color() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ContactGeometry_updProperty_color(swigCPtr, this), false);
+  }
+
+  public double get_color(int i) {
+    return opensimModelJNI.ContactGeometry_get_color(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double upd_color(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.ContactGeometry_upd_color(swigCPtr, this, i), false);
+  }
+
+  public void set_color(int i, double value) {
+    opensimModelJNI.ContactGeometry_set_color(swigCPtr, this, i, value);
+  }
+
+  public int append_color(double value) {
+    return opensimModelJNI.ContactGeometry_append_color(swigCPtr, this, value);
+  }
+
   public void copyData(ContactGeometry geom) {
     opensimModelJNI.ContactGeometry_copyData(swigCPtr, this, ContactGeometry.getCPtr(geom), geom);
   }

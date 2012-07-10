@@ -101,8 +101,8 @@ public class MuscleAnalysis extends Analysis {
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
-  public Storage getTendonLegthStorage() {
-    long cPtr = opensimModelJNI.MuscleAnalysis_getTendonLegthStorage(swigCPtr, this);
+  public Storage getTendonLengthStorage() {
+    long cPtr = opensimModelJNI.MuscleAnalysis_getTendonLengthStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
@@ -133,6 +133,26 @@ public class MuscleAnalysis extends Analysis {
 
   public Storage getPassiveFiberForceAlongTendonStorage() {
     long cPtr = opensimModelJNI.MuscleAnalysis_getPassiveFiberForceAlongTendonStorage(swigCPtr, this);
+    return (cPtr == 0) ? null : new Storage(cPtr, false);
+  }
+
+  public Storage getFiberActivePowerStorage() {
+    long cPtr = opensimModelJNI.MuscleAnalysis_getFiberActivePowerStorage(swigCPtr, this);
+    return (cPtr == 0) ? null : new Storage(cPtr, false);
+  }
+
+  public Storage getFiberPassivePowerStorage() {
+    long cPtr = opensimModelJNI.MuscleAnalysis_getFiberPassivePowerStorage(swigCPtr, this);
+    return (cPtr == 0) ? null : new Storage(cPtr, false);
+  }
+
+  public Storage getTendonPowerStorage() {
+    long cPtr = opensimModelJNI.MuscleAnalysis_getTendonPowerStorage(swigCPtr, this);
+    return (cPtr == 0) ? null : new Storage(cPtr, false);
+  }
+
+  public Storage getMusclePowerStorage() {
+    long cPtr = opensimModelJNI.MuscleAnalysis_getMusclePowerStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 

@@ -57,6 +57,94 @@ public class WrapObject extends OpenSimObject {
     return opensimModelJNI.WrapObject_getConcreteClassName(swigCPtr, this);
   }
 
+  public void setPropertyIndex_display_preference(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.WrapObject_PropertyIndex_display_preference_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_display_preference() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.WrapObject_PropertyIndex_display_preference_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_display_preference(WrapObject source) {
+    opensimModelJNI.WrapObject_copyProperty_display_preference(swigCPtr, this, WrapObject.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_int_t getProperty_display_preference() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_int_t(opensimModelJNI.WrapObject_getProperty_display_preference(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_int_t updProperty_display_preference() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_int_t(opensimModelJNI.WrapObject_updProperty_display_preference(swigCPtr, this), false);
+  }
+
+  public int get_display_preference(int i) {
+    return opensimModelJNI.WrapObject_get_display_preference__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_int upd_display_preference(int i) {
+    return new SWIGTYPE_p_int(opensimModelJNI.WrapObject_upd_display_preference__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_display_preference(int i, int value) {
+    opensimModelJNI.WrapObject_set_display_preference__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_display_preference(int value) {
+    return opensimModelJNI.WrapObject_append_display_preference(swigCPtr, this, value);
+  }
+
+  public void constructProperty_display_preference(int initValue) {
+    opensimModelJNI.WrapObject_constructProperty_display_preference(swigCPtr, this, initValue);
+  }
+
+  public int get_display_preference() {
+    return opensimModelJNI.WrapObject_get_display_preference__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_int upd_display_preference() {
+    return new SWIGTYPE_p_int(opensimModelJNI.WrapObject_upd_display_preference__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_display_preference(int value) {
+    opensimModelJNI.WrapObject_set_display_preference__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_color(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.WrapObject_PropertyIndex_color_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_color() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.WrapObject_PropertyIndex_color_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_color(WrapObject source) {
+    opensimModelJNI.WrapObject_copyProperty_color(swigCPtr, this, WrapObject.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_color() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.WrapObject_getProperty_color(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_color() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.WrapObject_updProperty_color(swigCPtr, this), false);
+  }
+
+  public double get_color(int i) {
+    return opensimModelJNI.WrapObject_get_color(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double upd_color(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.WrapObject_upd_color(swigCPtr, this, i), false);
+  }
+
+  public void set_color(int i, double value) {
+    opensimModelJNI.WrapObject_set_color(swigCPtr, this, i, value);
+  }
+
+  public int append_color(double value) {
+    return opensimModelJNI.WrapObject_append_color(swigCPtr, this, value);
+  }
+
   public void copyData(WrapObject aWrapObject) {
     opensimModelJNI.WrapObject_copyData(swigCPtr, this, WrapObject.getCPtr(aWrapObject), aWrapObject);
   }

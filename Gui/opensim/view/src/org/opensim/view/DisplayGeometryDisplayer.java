@@ -337,4 +337,8 @@ public class DisplayGeometryDisplayer extends vtkActor
         return new Vec3(rotationsAndTranslations[0], rotationsAndTranslations[1], rotationsAndTranslations[2]);
     }
     
+    public void updateFromProperties() {
+        applyAttributesAndTransformToActor();
+        applyDisplayPreferenceToActor();
+    }
 }

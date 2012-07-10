@@ -10,11 +10,7 @@
 package org.opensim.view;
 
 import java.util.prefs.Preferences;
-import org.opensim.modeling.AnalyticGeometry;
-import org.opensim.modeling.DisplayGeometry;
-import org.opensim.modeling.Geometry;
-import org.opensim.modeling.PolyhedralGeometry;
-import org.opensim.modeling.VisibleObject;
+import org.opensim.modeling.*;
 import org.opensim.utils.TheApp;
 import org.opensim.view.pub.GeometryFileLocator;
 import vtk.vtkActor;
@@ -41,32 +37,25 @@ public class DisplayGeometryFactory {
             displayContactGeometry = false;
 
     }
-    public static vtkActor createGeometryDisplayer(VisibleObject visibleObject, String modelPath) {
+    public static vtkActor createGeometryDisplayer(OpenSimObject object, String modelPath) {
         vtkActor attachmentRep = null;
+        VisibleObject visibleObject = object.getDisplayer();
         int numGeometryPieces = visibleObject.countGeometry();
         //assert(numGeometryPieces<= 1);
         if (numGeometryPieces>0) {
-        for(int gc=0; gc< 1; gc++){
+        System.out.println("Number of GeometryPieces="+numGeometryPieces);
+        for(int gc=0; gc< numGeometryPieces; gc++){
             Geometry g = visibleObject.getGeometry(gc);
             AnalyticGeometry ag=null;
             ag = AnalyticGeometry.dynamic_cast(g);
             if (ag != null){
-                attachmentRep= new AnalyticGeometryDisplayer(ag, visibleObject);
+                attachmentRep= new AnalyticGeometryDisplayer(ag, object);
                 
             } else {  // Contact geometry
-                PolyhedralGeometry pg = PolyhedralGeometry.dynamic_cast(g);
+                 PolyhedralGeometry pg = PolyhedralGeometry.dynamic_cast(g);
                 if (pg !=null){
-                    String geometryFile = pg.getGeometryFilename();
-                    String meshFile = GeometryFileLocator.getInstance().getFullname(modelPath,geometryFile, false);
-                    if (meshFile==null || (!meshFile.endsWith(".obj")))
-                        continue;
-                    vtkOBJReader polyReader = new vtkOBJReader();
-                    polyReader.SetFileName(meshFile);
-                    vtkPolyData meshPoly = polyReader.GetOutput();
-                    attachmentRep= createActorForPolyData(meshPoly, visibleObject);
-                    // Always wireframe wrapping and contact geometry for now
-                    attachmentRep.GetProperty().SetRepresentationToWireframe();
-                }
+                    attachmentRep = new PolyhedralGeometryDisplayer(pg, object, modelPath);
+                 }
             }
         } //for
         }

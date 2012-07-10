@@ -38,24 +38,8 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
-import org.opensim.modeling.Force;
-import org.opensim.modeling.Actuator;
-import org.opensim.modeling.Body;
-import org.opensim.modeling.ForceSet;
-import org.opensim.modeling.Marker;
-import org.opensim.modeling.Muscle;
-import org.opensim.modeling.Model;
-import org.opensim.modeling.BodySet;
-import org.opensim.modeling.ConditionalPathPoint;
-import org.opensim.modeling.DisplayGeometry;
+import org.opensim.modeling.*;
 import org.opensim.modeling.DisplayGeometry.DisplayPreference;
-import org.opensim.modeling.MarkerSet;
-import org.opensim.modeling.OpenSimContext;
-import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.PathActuator;
-import org.opensim.modeling.PathPoint;
-import org.opensim.modeling.VisibleObject;
-import org.opensim.modeling.WrapObject;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 import vtk.vtkActor;
@@ -202,10 +186,11 @@ public class SingleModelVisuals {
                            ConditionalPathPoint.safeDownCast(owner)!=null){
                    // Muscle points are handled in addGeometryForForces
                 } else { // WrapObjects, Contact Geometry and any other geometry attached to body
-                   vtkActor attachmentRep = DisplayGeometryFactory.createGeometryDisplayer(Dependent, model.getFilePath());
+                    String cl  = owner.getConcreteClassName();
+                   vtkActor attachmentRep = DisplayGeometryFactory.createGeometryDisplayer(owner, model.getFilePath());
                    if(attachmentRep!=null) {
-                      mapObject2VtkObjects.put(Dependent.getOwner(), attachmentRep);
-                      mapVtkObjects2Objects.put(attachmentRep, Dependent.getOwner());
+                      mapObject2VtkObjects.put(owner, attachmentRep);
+                      mapVtkObjects2Objects.put(attachmentRep, owner);
                       bodyRep.AddPart(attachmentRep);
 
                    }
@@ -843,11 +828,10 @@ public class SingleModelVisuals {
                 ((BodyDisplayer)prop3D).updateFromProperties();
             }
             else if (specificObject instanceof DisplayGeometry){
-                ((DisplayGeometryDisplayer)prop3D).applyAttributesAndTransformToActor();
-                ((DisplayGeometryDisplayer)prop3D).applyDisplayPreferenceToActor();
+                ((DisplayGeometryDisplayer)prop3D).updateFromProperties();
             }
-            else if (specificObject instanceof WrapObject ){
-                ((AnalyticGeometryDisplayer)prop3D).updateFromProperties();
+            else if (prop3D instanceof ObjectDisplayer ){
+                ((ObjectDisplayer)prop3D).updateFromProperties();
             }
         }
     }
