@@ -28,7 +28,7 @@
             </file>
             <file name="org-opensim-swingui-RequestFeatureAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-swingui-RequestFeatureAction.instance"/>
-                <attr name="position" intvalue="500"/>
+                <attr name="position" intvalue="480"/>
             </file>
             <file name="org-opensim-swingui-HelpOpenOnlineDocsAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Help/org-opensim-swingui-HelpOpenOnlineDocsAction.instance"/>
