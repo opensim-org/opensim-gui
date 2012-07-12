@@ -161,6 +161,7 @@ public class opensimModelJNI {
   public final static native String OpenSimObject_getDocumentFileName(long jarg1, OpenSimObject jarg1_);
   public final static native void OpenSimObject_setAllPropertiesUseDefault(long jarg1, OpenSimObject jarg1_, boolean jarg2);
   public final static native boolean OpenSimObject_print(long jarg1, OpenSimObject jarg1_, String jarg2);
+  public final static native String OpenSimObject_dump(long jarg1, OpenSimObject jarg1_);
   public final static native String OpenSimObject_getClassName();
   public final static native void OpenSimObject_setSerializeAllDefaults(boolean jarg1);
   public final static native boolean OpenSimObject_getSerializeAllDefaults();
