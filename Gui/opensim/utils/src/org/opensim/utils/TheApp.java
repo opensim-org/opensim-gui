@@ -29,6 +29,8 @@
 package org.opensim.utils;
 
 import java.awt.Image;
+import java.io.File;
+import java.util.Map;
 import javax.swing.JFrame;
 import org.openide.DialogDisplayer;
 import org.openide.LifecycleManager;
@@ -101,5 +103,32 @@ public final class TheApp {
     
     public static Image getApplicationIcon() {
        return Utilities.loadImage("/org/opensim/utils/frame.gif");
+    }
+    /**
+     * get the top directory where the OpenSim application is installed based on OPENSIM_HOME
+     * @return installDir
+     */
+    public static String getInstallDir() {
+        Map<String, String> env = System.getenv();
+        String installDir = env.get("OPENSIM_HOME");
+        return installDir;
+    }
+    /**
+     * Get full path name to the file containing logo to be displayed as watermark
+     * @return path or null if OPENSIM_HOME is not set;
+     */
+    public static String getApplicationLogoFileName() {
+        String installDir = TheApp.getInstallDir();
+        if (installDir==null) return null;
+        String fullLogoFileName = installDir+File.separatorChar+"Geometry"+File.separatorChar+"OpenSimLogoSmall.PNG";
+        return fullLogoFileName;
+    }
+    /**
+     * Get default location to search for geometry in a new installation. This is shown in GUI under 
+     * Preferences -> Geometry Path and can be edited later
+     * @return $installDir/Geometry
+     */
+    public static String getDefaultGeometrySearchPath() {
+        return getInstallDir()+File.separatorChar+"Geometry";
     }
 }
