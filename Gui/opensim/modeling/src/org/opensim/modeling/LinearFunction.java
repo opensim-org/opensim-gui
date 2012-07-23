@@ -65,16 +65,36 @@ public class LinearFunction extends Function {
     this(opensimModelJNI.new_LinearFunction__SWIG_1(ArrayDouble.getCPtr(coefficients), coefficients), true);
   }
 
+  public LinearFunction(double slope, double intercept) {
+    this(opensimModelJNI.new_LinearFunction__SWIG_2(slope, intercept), true);
+  }
+
   public LinearFunction(LinearFunction aSpline) {
-    this(opensimModelJNI.new_LinearFunction__SWIG_2(LinearFunction.getCPtr(aSpline), aSpline), true);
+    this(opensimModelJNI.new_LinearFunction__SWIG_3(LinearFunction.getCPtr(aSpline), aSpline), true);
   }
 
   public void setCoefficients(ArrayDouble coefficients) {
     opensimModelJNI.LinearFunction_setCoefficients(swigCPtr, this, ArrayDouble.getCPtr(coefficients), coefficients);
   }
 
+  public void setSlope(double slope) {
+    opensimModelJNI.LinearFunction_setSlope(swigCPtr, this, slope);
+  }
+
+  public void setIntercept(double intercept) {
+    opensimModelJNI.LinearFunction_setIntercept(swigCPtr, this, intercept);
+  }
+
   public ArrayDouble getCoefficients() {
     return new ArrayDouble(opensimModelJNI.LinearFunction_getCoefficients(swigCPtr, this), true);
+  }
+
+  public double getSlope() {
+    return opensimModelJNI.LinearFunction_getSlope(swigCPtr, this);
+  }
+
+  public double getIntercept() {
+    return opensimModelJNI.LinearFunction_getIntercept(swigCPtr, this);
   }
 
   public SWIGTYPE_p_SimTK__Function createSimTKFunction() {

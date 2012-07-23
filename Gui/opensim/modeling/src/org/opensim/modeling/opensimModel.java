@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class opensimModel {
+public class opensimModel implements opensimModelConstants {
   public static void setOpenSimVersion(String value) {
     opensimModelJNI.OpenSimVersion_set(value);
   }
@@ -23,6 +23,18 @@ public class opensimModel {
 
   public static String GetVersion() {
     return opensimModelJNI.GetVersion();
+  }
+
+  public static String GetOSInfoVerbose() {
+    return opensimModelJNI.GetOSInfoVerbose();
+  }
+
+  public static String GetOSInfo() {
+    return opensimModelJNI.GetOSInfo();
+  }
+
+  public static String GetCompilerVersion() {
+    return opensimModelJNI.GetCompilerVersion();
   }
 
   public static int getArray_CAPMIN() {

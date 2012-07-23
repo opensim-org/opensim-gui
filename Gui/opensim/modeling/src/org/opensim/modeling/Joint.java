@@ -57,8 +57,368 @@ public class Joint extends ModelComponent {
     return opensimModelJNI.Joint_getConcreteClassName(swigCPtr, this);
   }
 
-  public void copyData(Joint aJoint) {
-    opensimModelJNI.Joint_copyData(swigCPtr, this, Joint.getCPtr(aJoint), aJoint);
+  public void setPropertyIndex_parent_body(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Joint_PropertyIndex_parent_body_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_parent_body() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Joint_PropertyIndex_parent_body_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_parent_body(Joint source) {
+    opensimModelJNI.Joint_copyProperty_parent_body(swigCPtr, this, Joint.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_parent_body() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.Joint_getProperty_parent_body(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_parent_body() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.Joint_updProperty_parent_body(swigCPtr, this), false);
+  }
+
+  public String get_parent_body(int i) {
+    return opensimModelJNI.Joint_get_parent_body__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_std__string upd_parent_body(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.Joint_upd_parent_body__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_parent_body(int i, String value) {
+    opensimModelJNI.Joint_set_parent_body__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_parent_body(String value) {
+    return opensimModelJNI.Joint_append_parent_body(swigCPtr, this, value);
+  }
+
+  public void constructProperty_parent_body(String initValue) {
+    opensimModelJNI.Joint_constructProperty_parent_body(swigCPtr, this, initValue);
+  }
+
+  public String get_parent_body() {
+    return opensimModelJNI.Joint_get_parent_body__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_std__string upd_parent_body() {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.Joint_upd_parent_body__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_parent_body(String value) {
+    opensimModelJNI.Joint_set_parent_body__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void setPropertyIndex_location_in_parent(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Joint_PropertyIndex_location_in_parent_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_location_in_parent() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Joint_PropertyIndex_location_in_parent_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_location_in_parent(Joint source) {
+    opensimModelJNI.Joint_copyProperty_location_in_parent(swigCPtr, this, Joint.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vec3_t getProperty_location_in_parent() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vec3_t(opensimModelJNI.Joint_getProperty_location_in_parent(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vec3_t updProperty_location_in_parent() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vec3_t(opensimModelJNI.Joint_updProperty_location_in_parent(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_SimTK__Vec3 get_location_in_parent(int i) {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.Joint_get_location_in_parent__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public SWIGTYPE_p_SimTK__Vec3 upd_location_in_parent(int i) {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.Joint_upd_location_in_parent__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_location_in_parent(int i, SWIGTYPE_p_SimTK__Vec3 value) {
+    opensimModelJNI.Joint_set_location_in_parent__SWIG_0(swigCPtr, this, i, SWIGTYPE_p_SimTK__Vec3.getCPtr(value));
+  }
+
+  public int append_location_in_parent(SWIGTYPE_p_SimTK__Vec3 value) {
+    return opensimModelJNI.Joint_append_location_in_parent(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(value));
+  }
+
+  public void constructProperty_location_in_parent(SWIGTYPE_p_SimTK__Vec3 initValue) {
+    opensimModelJNI.Joint_constructProperty_location_in_parent(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(initValue));
+  }
+
+  public SWIGTYPE_p_SimTK__Vec3 get_location_in_parent() {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.Joint_get_location_in_parent__SWIG_1(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_SimTK__Vec3 upd_location_in_parent() {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.Joint_upd_location_in_parent__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_location_in_parent(SWIGTYPE_p_SimTK__Vec3 value) {
+    opensimModelJNI.Joint_set_location_in_parent__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(value));
+  }
+
+  public void setPropertyIndex_orientation_in_parent(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Joint_PropertyIndex_orientation_in_parent_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_orientation_in_parent() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Joint_PropertyIndex_orientation_in_parent_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_orientation_in_parent(Joint source) {
+    opensimModelJNI.Joint_copyProperty_orientation_in_parent(swigCPtr, this, Joint.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vec3_t getProperty_orientation_in_parent() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vec3_t(opensimModelJNI.Joint_getProperty_orientation_in_parent(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vec3_t updProperty_orientation_in_parent() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vec3_t(opensimModelJNI.Joint_updProperty_orientation_in_parent(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_SimTK__Vec3 get_orientation_in_parent(int i) {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.Joint_get_orientation_in_parent__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public SWIGTYPE_p_SimTK__Vec3 upd_orientation_in_parent(int i) {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.Joint_upd_orientation_in_parent__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_orientation_in_parent(int i, SWIGTYPE_p_SimTK__Vec3 value) {
+    opensimModelJNI.Joint_set_orientation_in_parent__SWIG_0(swigCPtr, this, i, SWIGTYPE_p_SimTK__Vec3.getCPtr(value));
+  }
+
+  public int append_orientation_in_parent(SWIGTYPE_p_SimTK__Vec3 value) {
+    return opensimModelJNI.Joint_append_orientation_in_parent(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(value));
+  }
+
+  public void constructProperty_orientation_in_parent(SWIGTYPE_p_SimTK__Vec3 initValue) {
+    opensimModelJNI.Joint_constructProperty_orientation_in_parent(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(initValue));
+  }
+
+  public SWIGTYPE_p_SimTK__Vec3 get_orientation_in_parent() {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.Joint_get_orientation_in_parent__SWIG_1(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_SimTK__Vec3 upd_orientation_in_parent() {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.Joint_upd_orientation_in_parent__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_orientation_in_parent(SWIGTYPE_p_SimTK__Vec3 value) {
+    opensimModelJNI.Joint_set_orientation_in_parent__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(value));
+  }
+
+  public void setPropertyIndex_location(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Joint_PropertyIndex_location_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_location() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Joint_PropertyIndex_location_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_location(Joint source) {
+    opensimModelJNI.Joint_copyProperty_location(swigCPtr, this, Joint.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vec3_t getProperty_location() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vec3_t(opensimModelJNI.Joint_getProperty_location(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vec3_t updProperty_location() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vec3_t(opensimModelJNI.Joint_updProperty_location(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_SimTK__Vec3 get_location(int i) {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.Joint_get_location__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public SWIGTYPE_p_SimTK__Vec3 upd_location(int i) {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.Joint_upd_location__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_location(int i, SWIGTYPE_p_SimTK__Vec3 value) {
+    opensimModelJNI.Joint_set_location__SWIG_0(swigCPtr, this, i, SWIGTYPE_p_SimTK__Vec3.getCPtr(value));
+  }
+
+  public int append_location(SWIGTYPE_p_SimTK__Vec3 value) {
+    return opensimModelJNI.Joint_append_location(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(value));
+  }
+
+  public void constructProperty_location(SWIGTYPE_p_SimTK__Vec3 initValue) {
+    opensimModelJNI.Joint_constructProperty_location(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(initValue));
+  }
+
+  public SWIGTYPE_p_SimTK__Vec3 get_location() {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.Joint_get_location__SWIG_1(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_SimTK__Vec3 upd_location() {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.Joint_upd_location__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_location(SWIGTYPE_p_SimTK__Vec3 value) {
+    opensimModelJNI.Joint_set_location__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(value));
+  }
+
+  public void setPropertyIndex_orientation(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Joint_PropertyIndex_orientation_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_orientation() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Joint_PropertyIndex_orientation_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_orientation(Joint source) {
+    opensimModelJNI.Joint_copyProperty_orientation(swigCPtr, this, Joint.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vec3_t getProperty_orientation() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vec3_t(opensimModelJNI.Joint_getProperty_orientation(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vec3_t updProperty_orientation() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vec3_t(opensimModelJNI.Joint_updProperty_orientation(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_SimTK__Vec3 get_orientation(int i) {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.Joint_get_orientation__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public SWIGTYPE_p_SimTK__Vec3 upd_orientation(int i) {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.Joint_upd_orientation__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_orientation(int i, SWIGTYPE_p_SimTK__Vec3 value) {
+    opensimModelJNI.Joint_set_orientation__SWIG_0(swigCPtr, this, i, SWIGTYPE_p_SimTK__Vec3.getCPtr(value));
+  }
+
+  public int append_orientation(SWIGTYPE_p_SimTK__Vec3 value) {
+    return opensimModelJNI.Joint_append_orientation(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(value));
+  }
+
+  public void constructProperty_orientation(SWIGTYPE_p_SimTK__Vec3 initValue) {
+    opensimModelJNI.Joint_constructProperty_orientation(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(initValue));
+  }
+
+  public SWIGTYPE_p_SimTK__Vec3 get_orientation() {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.Joint_get_orientation__SWIG_1(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_SimTK__Vec3 upd_orientation() {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.Joint_upd_orientation__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_orientation(SWIGTYPE_p_SimTK__Vec3 value) {
+    opensimModelJNI.Joint_set_orientation__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(value));
+  }
+
+  public void setPropertyIndex_CoordinateSet(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Joint_PropertyIndex_CoordinateSet_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_CoordinateSet() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Joint_PropertyIndex_CoordinateSet_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_CoordinateSet(Joint source) {
+    opensimModelJNI.Joint_copyProperty_CoordinateSet(swigCPtr, this, Joint.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__CoordinateSet_t getProperty_CoordinateSet() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__CoordinateSet_t(opensimModelJNI.Joint_getProperty_CoordinateSet(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__CoordinateSet_t updProperty_CoordinateSet() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__CoordinateSet_t(opensimModelJNI.Joint_updProperty_CoordinateSet(swigCPtr, this), false);
+  }
+
+  public CoordinateSet get_CoordinateSet(int i) {
+    return new CoordinateSet(opensimModelJNI.Joint_get_CoordinateSet__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public CoordinateSet upd_CoordinateSet(int i) {
+    return new CoordinateSet(opensimModelJNI.Joint_upd_CoordinateSet__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_CoordinateSet(int i, CoordinateSet value) {
+    opensimModelJNI.Joint_set_CoordinateSet__SWIG_0(swigCPtr, this, i, CoordinateSet.getCPtr(value), value);
+  }
+
+  public int append_CoordinateSet(CoordinateSet value) {
+    return opensimModelJNI.Joint_append_CoordinateSet(swigCPtr, this, CoordinateSet.getCPtr(value), value);
+  }
+
+  public void constructProperty_CoordinateSet(CoordinateSet initValue) {
+    opensimModelJNI.Joint_constructProperty_CoordinateSet(swigCPtr, this, CoordinateSet.getCPtr(initValue), initValue);
+  }
+
+  public CoordinateSet get_CoordinateSet() {
+    return new CoordinateSet(opensimModelJNI.Joint_get_CoordinateSet__SWIG_1(swigCPtr, this), false);
+  }
+
+  public CoordinateSet upd_CoordinateSet() {
+    return new CoordinateSet(opensimModelJNI.Joint_upd_CoordinateSet__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_CoordinateSet(CoordinateSet value) {
+    opensimModelJNI.Joint_set_CoordinateSet__SWIG_1(swigCPtr, this, CoordinateSet.getCPtr(value), value);
+  }
+
+  public void setPropertyIndex_reverse(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Joint_PropertyIndex_reverse_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_reverse() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Joint_PropertyIndex_reverse_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_reverse(Joint source) {
+    opensimModelJNI.Joint_copyProperty_reverse(swigCPtr, this, Joint.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_reverse() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Joint_getProperty_reverse(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_reverse() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Joint_updProperty_reverse(swigCPtr, this), false);
+  }
+
+  public boolean get_reverse(int i) {
+    return opensimModelJNI.Joint_get_reverse__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_bool upd_reverse(int i) {
+    return new SWIGTYPE_p_bool(opensimModelJNI.Joint_upd_reverse__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_reverse(int i, boolean value) {
+    opensimModelJNI.Joint_set_reverse__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_reverse(boolean value) {
+    return opensimModelJNI.Joint_append_reverse(swigCPtr, this, value);
+  }
+
+  public void constructProperty_reverse(boolean initValue) {
+    opensimModelJNI.Joint_constructProperty_reverse(swigCPtr, this, initValue);
+  }
+
+  public boolean get_reverse() {
+    return opensimModelJNI.Joint_get_reverse__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_bool upd_reverse() {
+    return new SWIGTYPE_p_bool(opensimModelJNI.Joint_upd_reverse__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_reverse(boolean value) {
+    opensimModelJNI.Joint_set_reverse__SWIG_1(swigCPtr, this, value);
   }
 
   public void setBody(Body aBody) {
@@ -67,6 +427,10 @@ public class Joint extends ModelComponent {
 
   public Body getBody() {
     return new Body(opensimModelJNI.Joint_getBody(swigCPtr, this), false);
+  }
+
+  public Body updBody() {
+    return new Body(opensimModelJNI.Joint_updBody(swigCPtr, this), false);
   }
 
   public void setLocation(SWIGTYPE_p_SimTK__Vec3 aLocation) {
@@ -99,6 +463,10 @@ public class Joint extends ModelComponent {
 
   public Body getParentBody() {
     return new Body(opensimModelJNI.Joint_getParentBody(swigCPtr, this), false);
+  }
+
+  public Body updParentBody() {
+    return new Body(opensimModelJNI.Joint_updParentBody(swigCPtr, this), false);
   }
 
   public void setLocationInParent(SWIGTYPE_p_SimTK__Vec3 aLocation) {
@@ -137,8 +505,8 @@ public class Joint extends ModelComponent {
     opensimModelJNI.Joint_setLocationInChild(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(aLocation));
   }
 
-  public void getLocationInChild(SWIGTYPE_p_SimTK__Vec3 rLocation) {
-    opensimModelJNI.Joint_getLocationInChild__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(rLocation));
+  public SWIGTYPE_p_SimTK__Vec3 getLocationInChild() {
+    return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.Joint_getLocationInChild__SWIG_1(swigCPtr, this), false);
   }
 
   public CoordinateSet getCoordinateSet() {
@@ -171,10 +539,6 @@ public class Joint extends ModelComponent {
 
   public void scale(ScaleSet aScaleSet) {
     opensimModelJNI.Joint_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
-  }
-
-  public void updateName(String aName) {
-    opensimModelJNI.Joint_updateName(swigCPtr, this, aName);
   }
 
   public void connectToModel(Model aModel) {

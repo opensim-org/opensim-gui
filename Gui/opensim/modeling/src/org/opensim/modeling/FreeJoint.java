@@ -69,14 +69,6 @@ public class FreeJoint extends Joint {
     this(opensimModelJNI.new_FreeJoint__SWIG_2(name, Body.getCPtr(parent), parent, SWIGTYPE_p_SimTK__Vec3.getCPtr(locationInParent), SWIGTYPE_p_SimTK__Vec3.getCPtr(orientationInParent), Body.getCPtr(body), body, SWIGTYPE_p_SimTK__Vec3.getCPtr(locationInBody), SWIGTYPE_p_SimTK__Vec3.getCPtr(orientationInBody)), true);
   }
 
-  public FreeJoint(FreeJoint aJoint) {
-    this(opensimModelJNI.new_FreeJoint__SWIG_3(FreeJoint.getCPtr(aJoint), aJoint), true);
-  }
-
-  public void copyData(FreeJoint aJoint) {
-    opensimModelJNI.FreeJoint_copyData(swigCPtr, this, FreeJoint.getCPtr(aJoint), aJoint);
-  }
-
   public int numCoordinates() {
     return opensimModelJNI.FreeJoint_numCoordinates(swigCPtr, this);
   }

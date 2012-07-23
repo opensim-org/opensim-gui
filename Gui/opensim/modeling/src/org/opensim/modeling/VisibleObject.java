@@ -98,6 +98,10 @@ public class VisibleObject extends OpenSimObject {
     return new GeometrySet(opensimModelJNI.VisibleObject_getGeometrySet(swigCPtr, this), false);
   }
 
+  public GeometrySet updGeometrySet() {
+    return new GeometrySet(opensimModelJNI.VisibleObject_updGeometrySet(swigCPtr, this), false);
+  }
+
   public SWIGTYPE_p_SimTK__Transform getTransform() {
     return new SWIGTYPE_p_SimTK__Transform(opensimModelJNI.VisibleObject_getTransform(swigCPtr, this), false);
   }

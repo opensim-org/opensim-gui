@@ -109,108 +109,164 @@ public class Probe extends ModelComponent {
     opensimModelJNI.Probe_set_isDisabled__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_operation(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Probe_PropertyIndex_operation_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_probe_operation(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Probe_PropertyIndex_probe_operation_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_operation() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Probe_PropertyIndex_operation_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_probe_operation() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Probe_PropertyIndex_probe_operation_get(swigCPtr, this), true);
   }
 
-  public void copyProperty_operation(Probe source) {
-    opensimModelJNI.Probe_copyProperty_operation(swigCPtr, this, Probe.getCPtr(source), source);
+  public void copyProperty_probe_operation(Probe source) {
+    opensimModelJNI.Probe_copyProperty_probe_operation(swigCPtr, this, Probe.getCPtr(source), source);
   }
 
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_operation() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.Probe_getProperty_operation(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_probe_operation() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.Probe_getProperty_probe_operation(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_operation() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.Probe_updProperty_operation(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_probe_operation() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.Probe_updProperty_probe_operation(swigCPtr, this), false);
   }
 
-  public String get_operation(int i) {
-    return opensimModelJNI.Probe_get_operation__SWIG_0(swigCPtr, this, i);
+  public String get_probe_operation(int i) {
+    return opensimModelJNI.Probe_get_probe_operation__SWIG_0(swigCPtr, this, i);
   }
 
-  public SWIGTYPE_p_std__string upd_operation(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.Probe_upd_operation__SWIG_0(swigCPtr, this, i), false);
+  public SWIGTYPE_p_std__string upd_probe_operation(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.Probe_upd_probe_operation__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_operation(int i, String value) {
-    opensimModelJNI.Probe_set_operation__SWIG_0(swigCPtr, this, i, value);
+  public void set_probe_operation(int i, String value) {
+    opensimModelJNI.Probe_set_probe_operation__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int append_operation(String value) {
-    return opensimModelJNI.Probe_append_operation(swigCPtr, this, value);
+  public int append_probe_operation(String value) {
+    return opensimModelJNI.Probe_append_probe_operation(swigCPtr, this, value);
   }
 
-  public void constructProperty_operation(String initValue) {
-    opensimModelJNI.Probe_constructProperty_operation(swigCPtr, this, initValue);
+  public void constructProperty_probe_operation(String initValue) {
+    opensimModelJNI.Probe_constructProperty_probe_operation(swigCPtr, this, initValue);
   }
 
-  public String get_operation() {
-    return opensimModelJNI.Probe_get_operation__SWIG_1(swigCPtr, this);
+  public String get_probe_operation() {
+    return opensimModelJNI.Probe_get_probe_operation__SWIG_1(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_std__string upd_operation() {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.Probe_upd_operation__SWIG_1(swigCPtr, this), false);
+  public SWIGTYPE_p_std__string upd_probe_operation() {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.Probe_upd_probe_operation__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_operation(String value) {
-    opensimModelJNI.Probe_set_operation__SWIG_1(swigCPtr, this, value);
+  public void set_probe_operation(String value) {
+    opensimModelJNI.Probe_set_probe_operation__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_operation_parameter(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Probe_PropertyIndex_operation_parameter_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_initial_conditions_for_integration(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Probe_PropertyIndex_initial_conditions_for_integration_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_operation_parameter() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Probe_PropertyIndex_operation_parameter_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_initial_conditions_for_integration() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Probe_PropertyIndex_initial_conditions_for_integration_get(swigCPtr, this), true);
   }
 
-  public void copyProperty_operation_parameter(Probe source) {
-    opensimModelJNI.Probe_copyProperty_operation_parameter(swigCPtr, this, Probe.getCPtr(source), source);
+  public void copyProperty_initial_conditions_for_integration(Probe source) {
+    opensimModelJNI.Probe_copyProperty_initial_conditions_for_integration(swigCPtr, this, Probe.getCPtr(source), source);
   }
 
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_operation_parameter() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Probe_getProperty_operation_parameter(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vector_t getProperty_initial_conditions_for_integration() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vector_t(opensimModelJNI.Probe_getProperty_initial_conditions_for_integration(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_operation_parameter() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Probe_updProperty_operation_parameter(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vector_t updProperty_initial_conditions_for_integration() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vector_t(opensimModelJNI.Probe_updProperty_initial_conditions_for_integration(swigCPtr, this), false);
   }
 
-  public double get_operation_parameter(int i) {
-    return opensimModelJNI.Probe_get_operation_parameter__SWIG_0(swigCPtr, this, i);
+  public SWIGTYPE_p_SimTK__Vector get_initial_conditions_for_integration(int i) {
+    return new SWIGTYPE_p_SimTK__Vector(opensimModelJNI.Probe_get_initial_conditions_for_integration__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public SWIGTYPE_p_double upd_operation_parameter(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.Probe_upd_operation_parameter__SWIG_0(swigCPtr, this, i), false);
+  public SWIGTYPE_p_SimTK__Vector upd_initial_conditions_for_integration(int i) {
+    return new SWIGTYPE_p_SimTK__Vector(opensimModelJNI.Probe_upd_initial_conditions_for_integration__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_operation_parameter(int i, double value) {
-    opensimModelJNI.Probe_set_operation_parameter__SWIG_0(swigCPtr, this, i, value);
+  public void set_initial_conditions_for_integration(int i, SWIGTYPE_p_SimTK__Vector value) {
+    opensimModelJNI.Probe_set_initial_conditions_for_integration__SWIG_0(swigCPtr, this, i, SWIGTYPE_p_SimTK__Vector.getCPtr(value));
   }
 
-  public int append_operation_parameter(double value) {
-    return opensimModelJNI.Probe_append_operation_parameter(swigCPtr, this, value);
+  public int append_initial_conditions_for_integration(SWIGTYPE_p_SimTK__Vector value) {
+    return opensimModelJNI.Probe_append_initial_conditions_for_integration(swigCPtr, this, SWIGTYPE_p_SimTK__Vector.getCPtr(value));
   }
 
-  public void constructProperty_operation_parameter(double initValue) {
-    opensimModelJNI.Probe_constructProperty_operation_parameter(swigCPtr, this, initValue);
+  public void constructProperty_initial_conditions_for_integration() {
+    opensimModelJNI.Probe_constructProperty_initial_conditions_for_integration__SWIG_0(swigCPtr, this);
   }
 
-  public double get_operation_parameter() {
-    return opensimModelJNI.Probe_get_operation_parameter__SWIG_1(swigCPtr, this);
+  public void constructProperty_initial_conditions_for_integration(SWIGTYPE_p_SimTK__Vector initValue) {
+    opensimModelJNI.Probe_constructProperty_initial_conditions_for_integration__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Vector.getCPtr(initValue));
   }
 
-  public SWIGTYPE_p_double upd_operation_parameter() {
-    return new SWIGTYPE_p_double(opensimModelJNI.Probe_upd_operation_parameter__SWIG_1(swigCPtr, this), false);
+  public SWIGTYPE_p_SimTK__Vector get_initial_conditions_for_integration() {
+    return new SWIGTYPE_p_SimTK__Vector(opensimModelJNI.Probe_get_initial_conditions_for_integration__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_operation_parameter(double value) {
-    opensimModelJNI.Probe_set_operation_parameter__SWIG_1(swigCPtr, this, value);
+  public SWIGTYPE_p_SimTK__Vector upd_initial_conditions_for_integration() {
+    return new SWIGTYPE_p_SimTK__Vector(opensimModelJNI.Probe_upd_initial_conditions_for_integration__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_initial_conditions_for_integration(SWIGTYPE_p_SimTK__Vector value) {
+    opensimModelJNI.Probe_set_initial_conditions_for_integration__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Vector.getCPtr(value));
+  }
+
+  public void setPropertyIndex_scale_factor(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Probe_PropertyIndex_scale_factor_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_scale_factor() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Probe_PropertyIndex_scale_factor_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_scale_factor(Probe source) {
+    opensimModelJNI.Probe_copyProperty_scale_factor(swigCPtr, this, Probe.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_scale_factor() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Probe_getProperty_scale_factor(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_scale_factor() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Probe_updProperty_scale_factor(swigCPtr, this), false);
+  }
+
+  public double get_scale_factor(int i) {
+    return opensimModelJNI.Probe_get_scale_factor__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double upd_scale_factor(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.Probe_upd_scale_factor__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_scale_factor(int i, double value) {
+    opensimModelJNI.Probe_set_scale_factor__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_scale_factor(double value) {
+    return opensimModelJNI.Probe_append_scale_factor(swigCPtr, this, value);
+  }
+
+  public void constructProperty_scale_factor(double initValue) {
+    opensimModelJNI.Probe_constructProperty_scale_factor(swigCPtr, this, initValue);
+  }
+
+  public double get_scale_factor() {
+    return opensimModelJNI.Probe_get_scale_factor__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_double upd_scale_factor() {
+    return new SWIGTYPE_p_double(opensimModelJNI.Probe_upd_scale_factor__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_scale_factor(double value) {
+    opensimModelJNI.Probe_set_scale_factor__SWIG_1(swigCPtr, this, value);
   }
 
   public boolean isDisabled() {
@@ -225,24 +281,28 @@ public class Probe extends ModelComponent {
     return opensimModelJNI.Probe_getOperation(swigCPtr, this);
   }
 
-  public void setOperation(String operation) {
-    opensimModelJNI.Probe_setOperation(swigCPtr, this, operation);
+  public void setOperation(String probe_operation) {
+    opensimModelJNI.Probe_setOperation(swigCPtr, this, probe_operation);
   }
 
-  public double getOperationParameter() {
-    return opensimModelJNI.Probe_getOperationParameter(swigCPtr, this);
+  public SWIGTYPE_p_SimTK__Vector getInitialConditions() {
+    return new SWIGTYPE_p_SimTK__Vector(opensimModelJNI.Probe_getInitialConditions(swigCPtr, this), true);
   }
 
-  public void setOperationParameter(double operation_parameter) {
-    opensimModelJNI.Probe_setOperationParameter(swigCPtr, this, operation_parameter);
+  public void setInitialConditions(SWIGTYPE_p_SimTK__Vector initial_conditions_for_integration) {
+    opensimModelJNI.Probe_setInitialConditions(swigCPtr, this, SWIGTYPE_p_SimTK__Vector.getCPtr(initial_conditions_for_integration));
   }
 
-  public ArrayStr getRecordLabels() {
-    return new ArrayStr(opensimModelJNI.Probe_getRecordLabels(swigCPtr, this), true);
+  public double getScaleFactor() {
+    return opensimModelJNI.Probe_getScaleFactor(swigCPtr, this);
   }
 
-  public ArrayDouble getRecordValues(SWIGTYPE_p_SimTK__State state) {
-    return new ArrayDouble(opensimModelJNI.Probe_getRecordValues(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state)), true);
+  public void setScaleFactor(double scale_factor) {
+    opensimModelJNI.Probe_setScaleFactor(swigCPtr, this, scale_factor);
+  }
+
+  public SWIGTYPE_p_SimTK__Vector getProbeOutputs(SWIGTYPE_p_SimTK__State state) {
+    return new SWIGTYPE_p_SimTK__Vector(opensimModelJNI.Probe_getProbeOutputs(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state)), true);
   }
 
 }
