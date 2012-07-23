@@ -26,20 +26,16 @@
 package org.opensim.view;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Vector;
-import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import javax.swing.event.UndoableEditEvent;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
@@ -64,8 +60,8 @@ import org.opensim.view.experimentaldata.ExperimentalDataTopNode;
 import org.opensim.view.nodes.MarkersNode;
 import org.opensim.view.nodes.OneMarkerNode;
 import org.opensim.view.nodes.OpenSimNode;
-import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.pub.OpenSimDB;
+import org.opensim.view.pub.ViewDB;
 
 /**
  * Top component which displays something.
@@ -469,7 +465,25 @@ final public class ExplorerTopComponent extends TopComponent
         public static void addUndoableEdit(AbstractUndoableEdit aUndoableEdit)
         {
             getDefault().getUndoRedoManager().addEdit(aUndoableEdit);
-        }
+            TopComponent tc = ViewDB.getCurrentModelWindow();
+            if (tc==null){ // No gfx window
+                tc = getDefault();
+            } 
+            if (tc==null) return;   // No tc to piggyback on
+            final TopComponent tcf = tc;
+            if (java.awt.EventQueue.isDispatchThread()) {
+                tcf.requestActive();
+            }
+            else {
+                SwingUtilities.invokeLater(new Runnable(){
+
+                @Override
+                public void run() {
+                    tcf.requestActive();
+                }
+            });
+            }
+         }
         public static void addFinalEdit()
         {
             getDefault().getUndoRedoManager().discardAllEdits();
