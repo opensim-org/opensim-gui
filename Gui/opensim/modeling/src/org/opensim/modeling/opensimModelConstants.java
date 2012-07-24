@@ -8,19 +8,8 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_OpenSim__StateFunction {
-  private long swigCPtr;
-
-  protected SWIGTYPE_p_OpenSim__StateFunction(long cPtr, boolean futureUse) {
-    swigCPtr = cPtr;
-  }
-
-  protected SWIGTYPE_p_OpenSim__StateFunction() {
-    swigCPtr = 0;
-  }
-
-  protected static long getCPtr(SWIGTYPE_p_OpenSim__StateFunction obj) {
-    return (obj == null) ? 0 : obj.swigCPtr;
-  }
+public interface opensimModelConstants {
+  public final static String GET_SYSTEM_INFO = opensimModelJNI.GET_SYSTEM_INFO_get();
+  public final static String GET_COMPILER_INFO = opensimModelJNI.GET_COMPILER_INFO_get();
+  public final static String GET_OS_NAME = opensimModelJNI.GET_OS_NAME_get();
 }
-
