@@ -148,7 +148,7 @@ public class ScaleToolPanel extends BaseToolPanel implements Observer {
                 else {
                     scaleToolModel.deleteObserver(this);
                     NotifyDescriptor.Message dlg =
-                          new NotifyDescriptor.Message("Model used by the tool is being closed.. Closing tool.");
+                          new NotifyDescriptor.Message("Model used by the tool is being closed. Closing tool.");
                     DialogDisplayer.getDefault().notify(dlg);
                     this.close();
                     return;
