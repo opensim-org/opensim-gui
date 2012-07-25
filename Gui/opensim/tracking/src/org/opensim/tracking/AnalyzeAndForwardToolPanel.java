@@ -222,7 +222,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
          ToolCommon.bindProperty(toolModel.getTool(), "constraints_file", cmcConstraintsFileName);
          ToolCommon.bindProperty(toolModel.getTool(), "output_model_file", rraOutputModelFileName);
          ToolCommon.bindProperty(toolModel.getTool(), "adjusted_com_body", rraAdjustedBodyComboBox);
-         ToolCommon.bindProperty(toolModel.getTool(), "cmc_time_window", cmcTimeWindow);
+         //ToolCommon.bindProperty(toolModel.getTool(), "cmc_time_window", cmcTimeWindow);
          ToolCommon.bindProperty(toolModel.getTool(), "desired_kinematics_file", cmcDesiredKinematicsFileName);
          ToolCommon.bindProperty(toolModel.getTool(), "lowpass_cutoff_frequency", cmcCutoffFrequency);
       }
