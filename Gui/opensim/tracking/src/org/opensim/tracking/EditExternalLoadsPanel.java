@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Vector;
+import java.util.prefs.Preferences;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import org.openide.DialogDescriptor;
@@ -49,6 +50,7 @@ import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.ExternalForce;
 import org.opensim.modeling.Storage;
 import org.opensim.utils.FileUtils;
+import org.opensim.utils.TheApp;
 
 /**
  *
@@ -76,7 +78,10 @@ public class EditExternalLoadsPanel extends javax.swing.JPanel
         }
         if (externalLoadsFilename.equalsIgnoreCase("")|| externalLoadsFilename.equalsIgnoreCase("Unassigned") || createNewFile){
             // Create a new empty ExternalLoads file and use it for now
-            String f = new File(model.getInputFileName()).getParentFile().getAbsolutePath();
+            String f = Preferences.userNodeForPackage(TheApp.class).get("WorkDirectory", "");
+            //String t1 = model.getInputFileName();  
+            if (model.getInputFileName()!=null && new File(model.getInputFileName()).getParentFile()!=null)
+                f = new File(model.getInputFileName()).getParentFile().getAbsolutePath();
             externalLoadsFilename = FileUtils.getNextAvailableName(f, "ExternalLoads.xml");
             ExternalLoads el = new ExternalLoads();
             el.setName("Ex1");
