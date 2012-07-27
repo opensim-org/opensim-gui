@@ -5824,7 +5824,6 @@ public class opensimModelJNI {
   public final static native void AnalyzeTool_updateFromXMLNode__SWIG_1(long jarg1, AnalyzeTool jarg1_, long jarg2);
   public final static native void AnalyzeTool_setStatesStorage(long jarg1, AnalyzeTool jarg1_, long jarg2, Storage jarg2_);
   public final static native long AnalyzeTool_createStatesStorageFromCoordinatesAndSpeeds(long jarg1, Model jarg1_, long jarg2, Storage jarg2_, long jarg3, Storage jarg3_);
-  public final static native void AnalyzeTool_fixMuscleStatesToValidRange(long jarg1, Storage jarg1_, long jarg2, Model jarg2_);
   public final static native long AnalyzeTool_getStatesStorage(long jarg1, AnalyzeTool jarg1_);
   public final static native String AnalyzeTool_getStatesFileName(long jarg1, AnalyzeTool jarg1_);
   public final static native void AnalyzeTool_setStatesFileName(long jarg1, AnalyzeTool jarg1_, String jarg2);
