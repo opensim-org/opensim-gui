@@ -141,6 +141,10 @@ public class SetJoints extends OpenSimObject {
     return opensimModelJNI.SetJoints_append(swigCPtr, this, Joint.getCPtr(aObject), aObject);
   }
 
+  public boolean cloneAndAppend(Joint aObject) {
+    return opensimModelJNI.SetJoints_cloneAndAppend(swigCPtr, this, Joint.getCPtr(aObject), aObject);
+  }
+
   public boolean insert(int aIndex, Joint aObject) {
     return opensimModelJNI.SetJoints_insert(swigCPtr, this, aIndex, Joint.getCPtr(aObject), aObject);
   }

@@ -141,6 +141,10 @@ public class SetAnalysis extends OpenSimObject {
     return opensimModelJNI.SetAnalysis_append(swigCPtr, this, Analysis.getCPtr(aObject), aObject);
   }
 
+  public boolean cloneAndAppend(Analysis aObject) {
+    return opensimModelJNI.SetAnalysis_cloneAndAppend(swigCPtr, this, Analysis.getCPtr(aObject), aObject);
+  }
+
   public boolean insert(int aIndex, Analysis aObject) {
     return opensimModelJNI.SetAnalysis_insert(swigCPtr, this, aIndex, Analysis.getCPtr(aObject), aObject);
   }

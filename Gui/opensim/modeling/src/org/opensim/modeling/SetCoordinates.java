@@ -141,6 +141,10 @@ public class SetCoordinates extends OpenSimObject {
     return opensimModelJNI.SetCoordinates_append(swigCPtr, this, Coordinate.getCPtr(aObject), aObject);
   }
 
+  public boolean cloneAndAppend(Coordinate aObject) {
+    return opensimModelJNI.SetCoordinates_cloneAndAppend(swigCPtr, this, Coordinate.getCPtr(aObject), aObject);
+  }
+
   public boolean insert(int aIndex, Coordinate aObject) {
     return opensimModelJNI.SetCoordinates_insert(swigCPtr, this, aIndex, Coordinate.getCPtr(aObject), aObject);
   }

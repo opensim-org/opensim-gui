@@ -141,6 +141,10 @@ public class SetConstraints extends OpenSimObject {
     return opensimModelJNI.SetConstraints_append(swigCPtr, this, Constraint.getCPtr(aObject), aObject);
   }
 
+  public boolean cloneAndAppend(Constraint aObject) {
+    return opensimModelJNI.SetConstraints_cloneAndAppend(swigCPtr, this, Constraint.getCPtr(aObject), aObject);
+  }
+
   public boolean insert(int aIndex, Constraint aObject) {
     return opensimModelJNI.SetConstraints_insert(swigCPtr, this, aIndex, Constraint.getCPtr(aObject), aObject);
   }

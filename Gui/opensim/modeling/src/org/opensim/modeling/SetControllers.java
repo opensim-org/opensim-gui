@@ -141,6 +141,10 @@ public class SetControllers extends OpenSimObject {
     return opensimModelJNI.SetControllers_append(swigCPtr, this, Controller.getCPtr(aObject), aObject);
   }
 
+  public boolean cloneAndAppend(Controller aObject) {
+    return opensimModelJNI.SetControllers_cloneAndAppend(swigCPtr, this, Controller.getCPtr(aObject), aObject);
+  }
+
   public boolean insert(int aIndex, Controller aObject) {
     return opensimModelJNI.SetControllers_insert(swigCPtr, this, aIndex, Controller.getCPtr(aObject), aObject);
   }

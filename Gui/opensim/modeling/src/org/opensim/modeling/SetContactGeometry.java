@@ -141,6 +141,10 @@ public class SetContactGeometry extends OpenSimObject {
     return opensimModelJNI.SetContactGeometry_append(swigCPtr, this, ContactGeometry.getCPtr(aObject), aObject);
   }
 
+  public boolean cloneAndAppend(ContactGeometry aObject) {
+    return opensimModelJNI.SetContactGeometry_cloneAndAppend(swigCPtr, this, ContactGeometry.getCPtr(aObject), aObject);
+  }
+
   public boolean insert(int aIndex, ContactGeometry aObject) {
     return opensimModelJNI.SetContactGeometry_insert(swigCPtr, this, aIndex, ContactGeometry.getCPtr(aObject), aObject);
   }

@@ -141,6 +141,10 @@ public class SetScales extends OpenSimObject {
     return opensimModelJNI.SetScales_append(swigCPtr, this, Scale.getCPtr(aObject), aObject);
   }
 
+  public boolean cloneAndAppend(Scale aObject) {
+    return opensimModelJNI.SetScales_cloneAndAppend(swigCPtr, this, Scale.getCPtr(aObject), aObject);
+  }
+
   public boolean insert(int aIndex, Scale aObject) {
     return opensimModelJNI.SetScales_insert(swigCPtr, this, aIndex, Scale.getCPtr(aObject), aObject);
   }

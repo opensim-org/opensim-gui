@@ -141,6 +141,10 @@ public class SetGeometry extends OpenSimObject {
     return opensimModelJNI.SetGeometry_append(swigCPtr, this, DisplayGeometry.getCPtr(aObject), aObject);
   }
 
+  public boolean cloneAndAppend(DisplayGeometry aObject) {
+    return opensimModelJNI.SetGeometry_cloneAndAppend(swigCPtr, this, DisplayGeometry.getCPtr(aObject), aObject);
+  }
+
   public boolean insert(int aIndex, DisplayGeometry aObject) {
     return opensimModelJNI.SetGeometry_insert(swigCPtr, this, aIndex, DisplayGeometry.getCPtr(aObject), aObject);
   }

@@ -141,6 +141,10 @@ public class SetActuators extends OpenSimObject {
     return opensimModelJNI.SetActuators_append(swigCPtr, this, Actuator.getCPtr(aObject), aObject);
   }
 
+  public boolean cloneAndAppend(Actuator aObject) {
+    return opensimModelJNI.SetActuators_cloneAndAppend(swigCPtr, this, Actuator.getCPtr(aObject), aObject);
+  }
+
   public boolean insert(int aIndex, Actuator aObject) {
     return opensimModelJNI.SetActuators_insert(swigCPtr, this, aIndex, Actuator.getCPtr(aObject), aObject);
   }

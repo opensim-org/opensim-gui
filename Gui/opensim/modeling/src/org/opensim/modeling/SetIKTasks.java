@@ -141,6 +141,10 @@ public class SetIKTasks extends OpenSimObject {
     return opensimModelJNI.SetIKTasks_append(swigCPtr, this, IKTask.getCPtr(aObject), aObject);
   }
 
+  public boolean cloneAndAppend(IKTask aObject) {
+    return opensimModelJNI.SetIKTasks_cloneAndAppend(swigCPtr, this, IKTask.getCPtr(aObject), aObject);
+  }
+
   public boolean insert(int aIndex, IKTask aObject) {
     return opensimModelJNI.SetIKTasks_insert(swigCPtr, this, aIndex, IKTask.getCPtr(aObject), aObject);
   }

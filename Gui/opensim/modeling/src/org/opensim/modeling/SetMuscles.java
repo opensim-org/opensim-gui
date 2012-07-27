@@ -141,6 +141,10 @@ public class SetMuscles extends OpenSimObject {
     return opensimModelJNI.SetMuscles_append(swigCPtr, this, Muscle.getCPtr(aObject), aObject);
   }
 
+  public boolean cloneAndAppend(Muscle aObject) {
+    return opensimModelJNI.SetMuscles_cloneAndAppend(swigCPtr, this, Muscle.getCPtr(aObject), aObject);
+  }
+
   public boolean insert(int aIndex, Muscle aObject) {
     return opensimModelJNI.SetMuscles_insert(swigCPtr, this, aIndex, Muscle.getCPtr(aObject), aObject);
   }

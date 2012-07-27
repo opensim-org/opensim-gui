@@ -141,6 +141,10 @@ public class SetWrapObject extends OpenSimObject {
     return opensimModelJNI.SetWrapObject_append(swigCPtr, this, WrapObject.getCPtr(aObject), aObject);
   }
 
+  public boolean cloneAndAppend(WrapObject aObject) {
+    return opensimModelJNI.SetWrapObject_cloneAndAppend(swigCPtr, this, WrapObject.getCPtr(aObject), aObject);
+  }
+
   public boolean insert(int aIndex, WrapObject aObject) {
     return opensimModelJNI.SetWrapObject_insert(swigCPtr, this, aIndex, WrapObject.getCPtr(aObject), aObject);
   }

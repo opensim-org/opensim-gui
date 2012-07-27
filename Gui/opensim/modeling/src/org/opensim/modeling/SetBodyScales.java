@@ -141,6 +141,10 @@ public class SetBodyScales extends OpenSimObject {
     return opensimModelJNI.SetBodyScales_append(swigCPtr, this, BodyScale.getCPtr(aObject), aObject);
   }
 
+  public boolean cloneAndAppend(BodyScale aObject) {
+    return opensimModelJNI.SetBodyScales_cloneAndAppend(swigCPtr, this, BodyScale.getCPtr(aObject), aObject);
+  }
+
   public boolean insert(int aIndex, BodyScale aObject) {
     return opensimModelJNI.SetBodyScales_insert(swigCPtr, this, aIndex, BodyScale.getCPtr(aObject), aObject);
   }

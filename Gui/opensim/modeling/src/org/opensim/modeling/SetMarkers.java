@@ -141,6 +141,10 @@ public class SetMarkers extends OpenSimObject {
     return opensimModelJNI.SetMarkers_append(swigCPtr, this, Marker.getCPtr(aObject), aObject);
   }
 
+  public boolean cloneAndAppend(Marker aObject) {
+    return opensimModelJNI.SetMarkers_cloneAndAppend(swigCPtr, this, Marker.getCPtr(aObject), aObject);
+  }
+
   public boolean insert(int aIndex, Marker aObject) {
     return opensimModelJNI.SetMarkers_insert(swigCPtr, this, aIndex, Marker.getCPtr(aObject), aObject);
   }

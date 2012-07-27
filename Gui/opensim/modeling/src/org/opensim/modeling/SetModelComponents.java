@@ -141,6 +141,10 @@ public class SetModelComponents extends OpenSimObject {
     return opensimModelJNI.SetModelComponents_append(swigCPtr, this, ModelComponent.getCPtr(aObject), aObject);
   }
 
+  public boolean cloneAndAppend(ModelComponent aObject) {
+    return opensimModelJNI.SetModelComponents_cloneAndAppend(swigCPtr, this, ModelComponent.getCPtr(aObject), aObject);
+  }
+
   public boolean insert(int aIndex, ModelComponent aObject) {
     return opensimModelJNI.SetModelComponents_insert(swigCPtr, this, aIndex, ModelComponent.getCPtr(aObject), aObject);
   }

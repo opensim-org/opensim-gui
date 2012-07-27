@@ -141,6 +141,10 @@ public class SetMeasurements extends OpenSimObject {
     return opensimModelJNI.SetMeasurements_append(swigCPtr, this, Measurement.getCPtr(aObject), aObject);
   }
 
+  public boolean cloneAndAppend(Measurement aObject) {
+    return opensimModelJNI.SetMeasurements_cloneAndAppend(swigCPtr, this, Measurement.getCPtr(aObject), aObject);
+  }
+
   public boolean insert(int aIndex, Measurement aObject) {
     return opensimModelJNI.SetMeasurements_insert(swigCPtr, this, aIndex, Measurement.getCPtr(aObject), aObject);
   }

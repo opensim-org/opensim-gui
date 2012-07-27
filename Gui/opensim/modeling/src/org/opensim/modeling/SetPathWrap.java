@@ -141,6 +141,10 @@ public class SetPathWrap extends OpenSimObject {
     return opensimModelJNI.SetPathWrap_append(swigCPtr, this, PathWrap.getCPtr(aObject), aObject);
   }
 
+  public boolean cloneAndAppend(PathWrap aObject) {
+    return opensimModelJNI.SetPathWrap_cloneAndAppend(swigCPtr, this, PathWrap.getCPtr(aObject), aObject);
+  }
+
   public boolean insert(int aIndex, PathWrap aObject) {
     return opensimModelJNI.SetPathWrap_insert(swigCPtr, this, aIndex, PathWrap.getCPtr(aObject), aObject);
   }

@@ -141,6 +141,10 @@ public class SetBodies extends OpenSimObject {
     return opensimModelJNI.SetBodies_append(swigCPtr, this, Body.getCPtr(aObject), aObject);
   }
 
+  public boolean cloneAndAppend(Body aObject) {
+    return opensimModelJNI.SetBodies_cloneAndAppend(swigCPtr, this, Body.getCPtr(aObject), aObject);
+  }
+
   public boolean insert(int aIndex, Body aObject) {
     return opensimModelJNI.SetBodies_insert(swigCPtr, this, aIndex, Body.getCPtr(aObject), aObject);
   }

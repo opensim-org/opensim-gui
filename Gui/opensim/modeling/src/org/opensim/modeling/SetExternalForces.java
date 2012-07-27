@@ -141,6 +141,10 @@ public class SetExternalForces extends OpenSimObject {
     return opensimModelJNI.SetExternalForces_append(swigCPtr, this, ExternalForce.getCPtr(aObject), aObject);
   }
 
+  public boolean cloneAndAppend(ExternalForce aObject) {
+    return opensimModelJNI.SetExternalForces_cloneAndAppend(swigCPtr, this, ExternalForce.getCPtr(aObject), aObject);
+  }
+
   public boolean insert(int aIndex, ExternalForce aObject) {
     return opensimModelJNI.SetExternalForces_insert(swigCPtr, this, aIndex, ExternalForce.getCPtr(aObject), aObject);
   }

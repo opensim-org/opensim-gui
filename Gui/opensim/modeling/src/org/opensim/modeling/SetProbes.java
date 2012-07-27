@@ -141,6 +141,10 @@ public class SetProbes extends OpenSimObject {
     return opensimModelJNI.SetProbes_append(swigCPtr, this, Probe.getCPtr(aObject), aObject);
   }
 
+  public boolean cloneAndAppend(Probe aObject) {
+    return opensimModelJNI.SetProbes_cloneAndAppend(swigCPtr, this, Probe.getCPtr(aObject), aObject);
+  }
+
   public boolean insert(int aIndex, Probe aObject) {
     return opensimModelJNI.SetProbes_insert(swigCPtr, this, aIndex, Probe.getCPtr(aObject), aObject);
   }
