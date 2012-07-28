@@ -137,8 +137,8 @@ public class SetControls extends OpenSimObject {
     opensimModelJNI.SetControls_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean append(Control aObject) {
-    return opensimModelJNI.SetControls_append(swigCPtr, this, Control.getCPtr(aObject), aObject);
+  public boolean adoptAndAppend(Control aObject) {
+    return opensimModelJNI.SetControls_adoptAndAppend(swigCPtr, this, Control.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(Control aObject) {

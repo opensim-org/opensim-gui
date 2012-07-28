@@ -137,8 +137,8 @@ public class SetMarkerPairs extends OpenSimObject {
     opensimModelJNI.SetMarkerPairs_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean append(MarkerPair aObject) {
-    return opensimModelJNI.SetMarkerPairs_append(swigCPtr, this, MarkerPair.getCPtr(aObject), aObject);
+  public boolean adoptAndAppend(MarkerPair aObject) {
+    return opensimModelJNI.SetMarkerPairs_adoptAndAppend(swigCPtr, this, MarkerPair.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(MarkerPair aObject) {

@@ -137,8 +137,8 @@ public class SetProbes extends OpenSimObject {
     opensimModelJNI.SetProbes_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean append(Probe aObject) {
-    return opensimModelJNI.SetProbes_append(swigCPtr, this, Probe.getCPtr(aObject), aObject);
+  public boolean adoptAndAppend(Probe aObject) {
+    return opensimModelJNI.SetProbes_adoptAndAppend(swigCPtr, this, Probe.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(Probe aObject) {

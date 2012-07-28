@@ -77,10 +77,6 @@ public class ModelComponentSetCoordinates extends SetCoordinates {
     this(opensimModelJNI.new_ModelComponentSetCoordinates__SWIG_4(ModelComponentSetCoordinates.getCPtr(source), source), true);
   }
 
-  public boolean append(Coordinate aObject) {
-    return opensimModelJNI.ModelComponentSetCoordinates_append(swigCPtr, this, Coordinate.getCPtr(aObject), aObject);
-  }
-
   public boolean insert(int aIndex, Coordinate aObject) {
     return opensimModelJNI.ModelComponentSetCoordinates_insert(swigCPtr, this, aIndex, Coordinate.getCPtr(aObject), aObject);
   }

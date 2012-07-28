@@ -77,10 +77,6 @@ public class ModelComponentSetControllers extends SetControllers {
     this(opensimModelJNI.new_ModelComponentSetControllers__SWIG_4(ModelComponentSetControllers.getCPtr(source), source), true);
   }
 
-  public boolean append(Controller aObject) {
-    return opensimModelJNI.ModelComponentSetControllers_append(swigCPtr, this, Controller.getCPtr(aObject), aObject);
-  }
-
   public boolean insert(int aIndex, Controller aObject) {
     return opensimModelJNI.ModelComponentSetControllers_insert(swigCPtr, this, aIndex, Controller.getCPtr(aObject), aObject);
   }

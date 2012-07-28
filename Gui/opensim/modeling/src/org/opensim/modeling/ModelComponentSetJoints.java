@@ -77,10 +77,6 @@ public class ModelComponentSetJoints extends SetJoints {
     this(opensimModelJNI.new_ModelComponentSetJoints__SWIG_4(ModelComponentSetJoints.getCPtr(source), source), true);
   }
 
-  public boolean append(Joint aObject) {
-    return opensimModelJNI.ModelComponentSetJoints_append(swigCPtr, this, Joint.getCPtr(aObject), aObject);
-  }
-
   public boolean insert(int aIndex, Joint aObject) {
     return opensimModelJNI.ModelComponentSetJoints_insert(swigCPtr, this, aIndex, Joint.getCPtr(aObject), aObject);
   }

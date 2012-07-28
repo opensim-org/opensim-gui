@@ -77,10 +77,6 @@ public class ModelComponentSetProbes extends SetProbes {
     this(opensimModelJNI.new_ModelComponentSetProbes__SWIG_4(ModelComponentSetProbes.getCPtr(source), source), true);
   }
 
-  public boolean append(Probe aObject) {
-    return opensimModelJNI.ModelComponentSetProbes_append(swigCPtr, this, Probe.getCPtr(aObject), aObject);
-  }
-
   public boolean insert(int aIndex, Probe aObject) {
     return opensimModelJNI.ModelComponentSetProbes_insert(swigCPtr, this, aIndex, Probe.getCPtr(aObject), aObject);
   }

@@ -137,8 +137,8 @@ public class SetJoints extends OpenSimObject {
     opensimModelJNI.SetJoints_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean append(Joint aObject) {
-    return opensimModelJNI.SetJoints_append(swigCPtr, this, Joint.getCPtr(aObject), aObject);
+  public boolean adoptAndAppend(Joint aObject) {
+    return opensimModelJNI.SetJoints_adoptAndAppend(swigCPtr, this, Joint.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(Joint aObject) {

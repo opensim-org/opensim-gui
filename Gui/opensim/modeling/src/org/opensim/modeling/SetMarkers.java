@@ -137,8 +137,8 @@ public class SetMarkers extends OpenSimObject {
     opensimModelJNI.SetMarkers_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean append(Marker aObject) {
-    return opensimModelJNI.SetMarkers_append(swigCPtr, this, Marker.getCPtr(aObject), aObject);
+  public boolean adoptAndAppend(Marker aObject) {
+    return opensimModelJNI.SetMarkers_adoptAndAppend(swigCPtr, this, Marker.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(Marker aObject) {

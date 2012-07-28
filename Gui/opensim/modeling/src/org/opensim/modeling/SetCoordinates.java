@@ -137,8 +137,8 @@ public class SetCoordinates extends OpenSimObject {
     opensimModelJNI.SetCoordinates_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean append(Coordinate aObject) {
-    return opensimModelJNI.SetCoordinates_append(swigCPtr, this, Coordinate.getCPtr(aObject), aObject);
+  public boolean adoptAndAppend(Coordinate aObject) {
+    return opensimModelJNI.SetCoordinates_adoptAndAppend(swigCPtr, this, Coordinate.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(Coordinate aObject) {

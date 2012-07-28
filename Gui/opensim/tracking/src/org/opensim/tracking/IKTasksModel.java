@@ -177,7 +177,7 @@ class IKMarkerTasksModel extends IKTasksModel {
          // Write it out if it's applied or if it has nonzero weight (even if not applied)
          // the latter case is so that user can recover their settings next time they load it in.
          if(tasks.get(i).getApply() || tasks.get(i).getWeight()!=0)
-            fullTaskSet.append(IKMarkerTask.safeDownCast(tasks.get(i).clone())); // C++-side copy
+            fullTaskSet.cloneAndAppend(tasks.get(i)); // C++-side copy
       } 
    }
 
@@ -257,7 +257,7 @@ class IKCoordinateTasksModel extends IKTasksModel {
          if(tasks.get(i).getApply() || tasks.get(i).getWeight()!=0) {
             IKCoordinateTask task = (IKCoordinateTask)tasks.get(i);
             IKCoordinateTask taskCopy = IKCoordinateTask.safeDownCast(task.clone()); // C++-side copy
-            fullTaskSet.append(taskCopy);
+            fullTaskSet.adoptAndAppend(taskCopy);
          }
       }
    }

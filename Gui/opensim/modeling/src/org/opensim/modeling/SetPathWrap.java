@@ -137,8 +137,8 @@ public class SetPathWrap extends OpenSimObject {
     opensimModelJNI.SetPathWrap_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean append(PathWrap aObject) {
-    return opensimModelJNI.SetPathWrap_append(swigCPtr, this, PathWrap.getCPtr(aObject), aObject);
+  public boolean adoptAndAppend(PathWrap aObject) {
+    return opensimModelJNI.SetPathWrap_adoptAndAppend(swigCPtr, this, PathWrap.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(PathWrap aObject) {

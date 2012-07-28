@@ -137,8 +137,8 @@ public class SetExternalForces extends OpenSimObject {
     opensimModelJNI.SetExternalForces_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean append(ExternalForce aObject) {
-    return opensimModelJNI.SetExternalForces_append(swigCPtr, this, ExternalForce.getCPtr(aObject), aObject);
+  public boolean adoptAndAppend(ExternalForce aObject) {
+    return opensimModelJNI.SetExternalForces_adoptAndAppend(swigCPtr, this, ExternalForce.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(ExternalForce aObject) {

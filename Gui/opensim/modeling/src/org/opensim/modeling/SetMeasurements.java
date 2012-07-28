@@ -137,8 +137,8 @@ public class SetMeasurements extends OpenSimObject {
     opensimModelJNI.SetMeasurements_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean append(Measurement aObject) {
-    return opensimModelJNI.SetMeasurements_append(swigCPtr, this, Measurement.getCPtr(aObject), aObject);
+  public boolean adoptAndAppend(Measurement aObject) {
+    return opensimModelJNI.SetMeasurements_adoptAndAppend(swigCPtr, this, Measurement.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(Measurement aObject) {

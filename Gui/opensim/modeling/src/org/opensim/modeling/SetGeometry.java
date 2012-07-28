@@ -137,8 +137,8 @@ public class SetGeometry extends OpenSimObject {
     opensimModelJNI.SetGeometry_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean append(DisplayGeometry aObject) {
-    return opensimModelJNI.SetGeometry_append(swigCPtr, this, DisplayGeometry.getCPtr(aObject), aObject);
+  public boolean adoptAndAppend(DisplayGeometry aObject) {
+    return opensimModelJNI.SetGeometry_adoptAndAppend(swigCPtr, this, DisplayGeometry.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(DisplayGeometry aObject) {

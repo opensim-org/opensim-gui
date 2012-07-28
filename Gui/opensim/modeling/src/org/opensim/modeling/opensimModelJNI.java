@@ -307,7 +307,7 @@ public class opensimModelJNI {
   public final static native int SetGeometry_getIndex__SWIG_2(long jarg1, SetGeometry jarg1_, String jarg2, int jarg3);
   public final static native int SetGeometry_getIndex__SWIG_3(long jarg1, SetGeometry jarg1_, String jarg2);
   public final static native void SetGeometry_getGroupNamesContaining(long jarg1, SetGeometry jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetGeometry_append(long jarg1, SetGeometry jarg1_, long jarg2, DisplayGeometry jarg2_);
+  public final static native boolean SetGeometry_adoptAndAppend(long jarg1, SetGeometry jarg1_, long jarg2, DisplayGeometry jarg2_);
   public final static native boolean SetGeometry_cloneAndAppend(long jarg1, SetGeometry jarg1_, long jarg2, DisplayGeometry jarg2_);
   public final static native boolean SetGeometry_insert(long jarg1, SetGeometry jarg1_, int jarg2, long jarg3, DisplayGeometry jarg3_);
   public final static native boolean SetGeometry_remove__SWIG_0(long jarg1, SetGeometry jarg1_, int jarg2);
@@ -1138,7 +1138,7 @@ public class opensimModelJNI {
   public final static native int SetScales_getIndex__SWIG_2(long jarg1, SetScales jarg1_, String jarg2, int jarg3);
   public final static native int SetScales_getIndex__SWIG_3(long jarg1, SetScales jarg1_, String jarg2);
   public final static native void SetScales_getGroupNamesContaining(long jarg1, SetScales jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetScales_append(long jarg1, SetScales jarg1_, long jarg2, Scale jarg2_);
+  public final static native boolean SetScales_adoptAndAppend(long jarg1, SetScales jarg1_, long jarg2, Scale jarg2_);
   public final static native boolean SetScales_cloneAndAppend(long jarg1, SetScales jarg1_, long jarg2, Scale jarg2_);
   public final static native boolean SetScales_insert(long jarg1, SetScales jarg1_, int jarg2, long jarg3, Scale jarg3_);
   public final static native boolean SetScales_remove__SWIG_0(long jarg1, SetScales jarg1_, int jarg2);
@@ -1244,7 +1244,7 @@ public class opensimModelJNI {
   public final static native int SetModelComponents_getIndex__SWIG_2(long jarg1, SetModelComponents jarg1_, String jarg2, int jarg3);
   public final static native int SetModelComponents_getIndex__SWIG_3(long jarg1, SetModelComponents jarg1_, String jarg2);
   public final static native void SetModelComponents_getGroupNamesContaining(long jarg1, SetModelComponents jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetModelComponents_append(long jarg1, SetModelComponents jarg1_, long jarg2, ModelComponent jarg2_);
+  public final static native boolean SetModelComponents_adoptAndAppend(long jarg1, SetModelComponents jarg1_, long jarg2, ModelComponent jarg2_);
   public final static native boolean SetModelComponents_cloneAndAppend(long jarg1, SetModelComponents jarg1_, long jarg2, ModelComponent jarg2_);
   public final static native boolean SetModelComponents_insert(long jarg1, SetModelComponents jarg1_, int jarg2, long jarg3, ModelComponent jarg3_);
   public final static native boolean SetModelComponents_remove__SWIG_0(long jarg1, SetModelComponents jarg1_, int jarg2);
@@ -1279,7 +1279,6 @@ public class opensimModelJNI {
   public final static native long new_ModelComponentSetModelComponent__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ModelComponentSetModelComponent__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ModelComponentSetModelComponent__SWIG_4(long jarg1, ModelComponentSetModelComponent jarg1_);
-  public final static native boolean ModelComponentSetModelComponent_append(long jarg1, ModelComponentSetModelComponent jarg1_, long jarg2, ModelComponent jarg2_);
   public final static native boolean ModelComponentSetModelComponent_insert(long jarg1, ModelComponentSetModelComponent jarg1_, int jarg2, long jarg3, ModelComponent jarg3_);
   public final static native boolean ModelComponentSetModelComponent_set__SWIG_0(long jarg1, ModelComponentSetModelComponent jarg1_, int jarg2, long jarg3, ModelComponent jarg3_, boolean jarg4);
   public final static native boolean ModelComponentSetModelComponent_set__SWIG_1(long jarg1, ModelComponentSetModelComponent jarg1_, int jarg2, long jarg3, ModelComponent jarg3_);
@@ -1325,7 +1324,7 @@ public class opensimModelJNI {
   public final static native int SetMuscles_getIndex__SWIG_2(long jarg1, SetMuscles jarg1_, String jarg2, int jarg3);
   public final static native int SetMuscles_getIndex__SWIG_3(long jarg1, SetMuscles jarg1_, String jarg2);
   public final static native void SetMuscles_getGroupNamesContaining(long jarg1, SetMuscles jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetMuscles_append(long jarg1, SetMuscles jarg1_, long jarg2, Muscle jarg2_);
+  public final static native boolean SetMuscles_adoptAndAppend(long jarg1, SetMuscles jarg1_, long jarg2, Muscle jarg2_);
   public final static native boolean SetMuscles_cloneAndAppend(long jarg1, SetMuscles jarg1_, long jarg2, Muscle jarg2_);
   public final static native boolean SetMuscles_insert(long jarg1, SetMuscles jarg1_, int jarg2, long jarg3, Muscle jarg3_);
   public final static native boolean SetMuscles_remove__SWIG_0(long jarg1, SetMuscles jarg1_, int jarg2);
@@ -1400,7 +1399,7 @@ public class opensimModelJNI {
   public final static native int SetForces_getIndex__SWIG_2(long jarg1, SetForces jarg1_, String jarg2, int jarg3);
   public final static native int SetForces_getIndex__SWIG_3(long jarg1, SetForces jarg1_, String jarg2);
   public final static native void SetForces_getGroupNamesContaining(long jarg1, SetForces jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetForces_append(long jarg1, SetForces jarg1_, long jarg2, Force jarg2_);
+  public final static native boolean SetForces_adoptAndAppend(long jarg1, SetForces jarg1_, long jarg2, Force jarg2_);
   public final static native boolean SetForces_cloneAndAppend(long jarg1, SetForces jarg1_, long jarg2, Force jarg2_);
   public final static native boolean SetForces_insert(long jarg1, SetForces jarg1_, int jarg2, long jarg3, Force jarg3_);
   public final static native boolean SetForces_remove__SWIG_0(long jarg1, SetForces jarg1_, int jarg2);
@@ -1435,7 +1434,6 @@ public class opensimModelJNI {
   public final static native long new_ModelComponentSetForces__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ModelComponentSetForces__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ModelComponentSetForces__SWIG_4(long jarg1, ModelComponentSetForces jarg1_);
-  public final static native boolean ModelComponentSetForces_append(long jarg1, ModelComponentSetForces jarg1_, long jarg2, Force jarg2_);
   public final static native boolean ModelComponentSetForces_insert(long jarg1, ModelComponentSetForces jarg1_, int jarg2, long jarg3, Force jarg3_);
   public final static native boolean ModelComponentSetForces_set__SWIG_0(long jarg1, ModelComponentSetForces jarg1_, int jarg2, long jarg3, Force jarg3_, boolean jarg4);
   public final static native boolean ModelComponentSetForces_set__SWIG_1(long jarg1, ModelComponentSetForces jarg1_, int jarg2, long jarg3, Force jarg3_);
@@ -1626,7 +1624,7 @@ public class opensimModelJNI {
   public final static native int SetExternalForces_getIndex__SWIG_2(long jarg1, SetExternalForces jarg1_, String jarg2, int jarg3);
   public final static native int SetExternalForces_getIndex__SWIG_3(long jarg1, SetExternalForces jarg1_, String jarg2);
   public final static native void SetExternalForces_getGroupNamesContaining(long jarg1, SetExternalForces jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetExternalForces_append(long jarg1, SetExternalForces jarg1_, long jarg2, ExternalForce jarg2_);
+  public final static native boolean SetExternalForces_adoptAndAppend(long jarg1, SetExternalForces jarg1_, long jarg2, ExternalForce jarg2_);
   public final static native boolean SetExternalForces_cloneAndAppend(long jarg1, SetExternalForces jarg1_, long jarg2, ExternalForce jarg2_);
   public final static native boolean SetExternalForces_insert(long jarg1, SetExternalForces jarg1_, int jarg2, long jarg3, ExternalForce jarg3_);
   public final static native boolean SetExternalForces_remove__SWIG_0(long jarg1, SetExternalForces jarg1_, int jarg2);
@@ -1715,7 +1713,7 @@ public class opensimModelJNI {
   public final static native int SetControllers_getIndex__SWIG_2(long jarg1, SetControllers jarg1_, String jarg2, int jarg3);
   public final static native int SetControllers_getIndex__SWIG_3(long jarg1, SetControllers jarg1_, String jarg2);
   public final static native void SetControllers_getGroupNamesContaining(long jarg1, SetControllers jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetControllers_append(long jarg1, SetControllers jarg1_, long jarg2, Controller jarg2_);
+  public final static native boolean SetControllers_adoptAndAppend(long jarg1, SetControllers jarg1_, long jarg2, Controller jarg2_);
   public final static native boolean SetControllers_cloneAndAppend(long jarg1, SetControllers jarg1_, long jarg2, Controller jarg2_);
   public final static native boolean SetControllers_insert(long jarg1, SetControllers jarg1_, int jarg2, long jarg3, Controller jarg3_);
   public final static native boolean SetControllers_remove__SWIG_0(long jarg1, SetControllers jarg1_, int jarg2);
@@ -1750,7 +1748,6 @@ public class opensimModelJNI {
   public final static native long new_ModelComponentSetControllers__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ModelComponentSetControllers__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ModelComponentSetControllers__SWIG_4(long jarg1, ModelComponentSetControllers jarg1_);
-  public final static native boolean ModelComponentSetControllers_append(long jarg1, ModelComponentSetControllers jarg1_, long jarg2, Controller jarg2_);
   public final static native boolean ModelComponentSetControllers_insert(long jarg1, ModelComponentSetControllers jarg1_, int jarg2, long jarg3, Controller jarg3_);
   public final static native boolean ModelComponentSetControllers_set__SWIG_0(long jarg1, ModelComponentSetControllers jarg1_, int jarg2, long jarg3, Controller jarg3_, boolean jarg4);
   public final static native boolean ModelComponentSetControllers_set__SWIG_1(long jarg1, ModelComponentSetControllers jarg1_, int jarg2, long jarg3, Controller jarg3_);
@@ -1792,7 +1789,6 @@ public class opensimModelJNI {
   public final static native long new_ModelComponentSetExternalForces__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ModelComponentSetExternalForces__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ModelComponentSetExternalForces__SWIG_4(long jarg1, ModelComponentSetExternalForces jarg1_);
-  public final static native boolean ModelComponentSetExternalForces_append(long jarg1, ModelComponentSetExternalForces jarg1_, long jarg2, ExternalForce jarg2_);
   public final static native boolean ModelComponentSetExternalForces_insert(long jarg1, ModelComponentSetExternalForces jarg1_, int jarg2, long jarg3, ExternalForce jarg3_);
   public final static native boolean ModelComponentSetExternalForces_set__SWIG_0(long jarg1, ModelComponentSetExternalForces jarg1_, int jarg2, long jarg3, ExternalForce jarg3_, boolean jarg4);
   public final static native boolean ModelComponentSetExternalForces_set__SWIG_1(long jarg1, ModelComponentSetExternalForces jarg1_, int jarg2, long jarg3, ExternalForce jarg3_);
@@ -2057,7 +2053,7 @@ public class opensimModelJNI {
   public final static native int SetContactGeometry_getIndex__SWIG_2(long jarg1, SetContactGeometry jarg1_, String jarg2, int jarg3);
   public final static native int SetContactGeometry_getIndex__SWIG_3(long jarg1, SetContactGeometry jarg1_, String jarg2);
   public final static native void SetContactGeometry_getGroupNamesContaining(long jarg1, SetContactGeometry jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetContactGeometry_append(long jarg1, SetContactGeometry jarg1_, long jarg2, ContactGeometry jarg2_);
+  public final static native boolean SetContactGeometry_adoptAndAppend(long jarg1, SetContactGeometry jarg1_, long jarg2, ContactGeometry jarg2_);
   public final static native boolean SetContactGeometry_cloneAndAppend(long jarg1, SetContactGeometry jarg1_, long jarg2, ContactGeometry jarg2_);
   public final static native boolean SetContactGeometry_insert(long jarg1, SetContactGeometry jarg1_, int jarg2, long jarg3, ContactGeometry jarg3_);
   public final static native boolean SetContactGeometry_remove__SWIG_0(long jarg1, SetContactGeometry jarg1_, int jarg2);
@@ -2092,7 +2088,6 @@ public class opensimModelJNI {
   public final static native long new_ModelComponentSetContactGeometry__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ModelComponentSetContactGeometry__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ModelComponentSetContactGeometry__SWIG_4(long jarg1, ModelComponentSetContactGeometry jarg1_);
-  public final static native boolean ModelComponentSetContactGeometry_append(long jarg1, ModelComponentSetContactGeometry jarg1_, long jarg2, ContactGeometry jarg2_);
   public final static native boolean ModelComponentSetContactGeometry_insert(long jarg1, ModelComponentSetContactGeometry jarg1_, int jarg2, long jarg3, ContactGeometry jarg3_);
   public final static native boolean ModelComponentSetContactGeometry_set__SWIG_0(long jarg1, ModelComponentSetContactGeometry jarg1_, int jarg2, long jarg3, ContactGeometry jarg3_, boolean jarg4);
   public final static native boolean ModelComponentSetContactGeometry_set__SWIG_1(long jarg1, ModelComponentSetContactGeometry jarg1_, int jarg2, long jarg3, ContactGeometry jarg3_);
@@ -2201,7 +2196,7 @@ public class opensimModelJNI {
   public final static native int SetActuators_getIndex__SWIG_2(long jarg1, SetActuators jarg1_, String jarg2, int jarg3);
   public final static native int SetActuators_getIndex__SWIG_3(long jarg1, SetActuators jarg1_, String jarg2);
   public final static native void SetActuators_getGroupNamesContaining(long jarg1, SetActuators jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetActuators_append(long jarg1, SetActuators jarg1_, long jarg2, Actuator jarg2_);
+  public final static native boolean SetActuators_adoptAndAppend(long jarg1, SetActuators jarg1_, long jarg2, Actuator jarg2_);
   public final static native boolean SetActuators_cloneAndAppend(long jarg1, SetActuators jarg1_, long jarg2, Actuator jarg2_);
   public final static native boolean SetActuators_insert(long jarg1, SetActuators jarg1_, int jarg2, long jarg3, Actuator jarg3_);
   public final static native boolean SetActuators_remove__SWIG_0(long jarg1, SetActuators jarg1_, int jarg2);
@@ -2321,7 +2316,7 @@ public class opensimModelJNI {
   public final static native int SetAnalysis_getIndex__SWIG_2(long jarg1, SetAnalysis jarg1_, String jarg2, int jarg3);
   public final static native int SetAnalysis_getIndex__SWIG_3(long jarg1, SetAnalysis jarg1_, String jarg2);
   public final static native void SetAnalysis_getGroupNamesContaining(long jarg1, SetAnalysis jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetAnalysis_append(long jarg1, SetAnalysis jarg1_, long jarg2, Analysis jarg2_);
+  public final static native boolean SetAnalysis_adoptAndAppend(long jarg1, SetAnalysis jarg1_, long jarg2, Analysis jarg2_);
   public final static native boolean SetAnalysis_cloneAndAppend(long jarg1, SetAnalysis jarg1_, long jarg2, Analysis jarg2_);
   public final static native boolean SetAnalysis_insert(long jarg1, SetAnalysis jarg1_, int jarg2, long jarg3, Analysis jarg3_);
   public final static native boolean SetAnalysis_remove__SWIG_0(long jarg1, SetAnalysis jarg1_, int jarg2);
@@ -2435,7 +2430,7 @@ public class opensimModelJNI {
   public final static native int SetControls_getIndex__SWIG_2(long jarg1, SetControls jarg1_, String jarg2, int jarg3);
   public final static native int SetControls_getIndex__SWIG_3(long jarg1, SetControls jarg1_, String jarg2);
   public final static native void SetControls_getGroupNamesContaining(long jarg1, SetControls jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetControls_append(long jarg1, SetControls jarg1_, long jarg2, Control jarg2_);
+  public final static native boolean SetControls_adoptAndAppend(long jarg1, SetControls jarg1_, long jarg2, Control jarg2_);
   public final static native boolean SetControls_cloneAndAppend(long jarg1, SetControls jarg1_, long jarg2, Control jarg2_);
   public final static native boolean SetControls_insert(long jarg1, SetControls jarg1_, int jarg2, long jarg3, Control jarg3_);
   public final static native boolean SetControls_remove__SWIG_0(long jarg1, SetControls jarg1_, int jarg2);
@@ -2811,7 +2806,7 @@ public class opensimModelJNI {
   public final static native int SetMarkers_getIndex__SWIG_2(long jarg1, SetMarkers jarg1_, String jarg2, int jarg3);
   public final static native int SetMarkers_getIndex__SWIG_3(long jarg1, SetMarkers jarg1_, String jarg2);
   public final static native void SetMarkers_getGroupNamesContaining(long jarg1, SetMarkers jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetMarkers_append(long jarg1, SetMarkers jarg1_, long jarg2, Marker jarg2_);
+  public final static native boolean SetMarkers_adoptAndAppend(long jarg1, SetMarkers jarg1_, long jarg2, Marker jarg2_);
   public final static native boolean SetMarkers_cloneAndAppend(long jarg1, SetMarkers jarg1_, long jarg2, Marker jarg2_);
   public final static native boolean SetMarkers_insert(long jarg1, SetMarkers jarg1_, int jarg2, long jarg3, Marker jarg3_);
   public final static native boolean SetMarkers_remove__SWIG_0(long jarg1, SetMarkers jarg1_, int jarg2);
@@ -2978,7 +2973,7 @@ public class opensimModelJNI {
   public final static native int SetWrapObject_getIndex__SWIG_2(long jarg1, SetWrapObject jarg1_, String jarg2, int jarg3);
   public final static native int SetWrapObject_getIndex__SWIG_3(long jarg1, SetWrapObject jarg1_, String jarg2);
   public final static native void SetWrapObject_getGroupNamesContaining(long jarg1, SetWrapObject jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetWrapObject_append(long jarg1, SetWrapObject jarg1_, long jarg2, WrapObject jarg2_);
+  public final static native boolean SetWrapObject_adoptAndAppend(long jarg1, SetWrapObject jarg1_, long jarg2, WrapObject jarg2_);
   public final static native boolean SetWrapObject_cloneAndAppend(long jarg1, SetWrapObject jarg1_, long jarg2, WrapObject jarg2_);
   public final static native boolean SetWrapObject_insert(long jarg1, SetWrapObject jarg1_, int jarg2, long jarg3, WrapObject jarg3_);
   public final static native boolean SetWrapObject_remove__SWIG_0(long jarg1, SetWrapObject jarg1_, int jarg2);
@@ -3059,7 +3054,7 @@ public class opensimModelJNI {
   public final static native int SetPathWrap_getIndex__SWIG_2(long jarg1, SetPathWrap jarg1_, String jarg2, int jarg3);
   public final static native int SetPathWrap_getIndex__SWIG_3(long jarg1, SetPathWrap jarg1_, String jarg2);
   public final static native void SetPathWrap_getGroupNamesContaining(long jarg1, SetPathWrap jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetPathWrap_append(long jarg1, SetPathWrap jarg1_, long jarg2, PathWrap jarg2_);
+  public final static native boolean SetPathWrap_adoptAndAppend(long jarg1, SetPathWrap jarg1_, long jarg2, PathWrap jarg2_);
   public final static native boolean SetPathWrap_cloneAndAppend(long jarg1, SetPathWrap jarg1_, long jarg2, PathWrap jarg2_);
   public final static native boolean SetPathWrap_insert(long jarg1, SetPathWrap jarg1_, int jarg2, long jarg3, PathWrap jarg3_);
   public final static native boolean SetPathWrap_remove__SWIG_0(long jarg1, SetPathWrap jarg1_, int jarg2);
@@ -3207,7 +3202,7 @@ public class opensimModelJNI {
   public final static native int SetBodies_getIndex__SWIG_2(long jarg1, SetBodies jarg1_, String jarg2, int jarg3);
   public final static native int SetBodies_getIndex__SWIG_3(long jarg1, SetBodies jarg1_, String jarg2);
   public final static native void SetBodies_getGroupNamesContaining(long jarg1, SetBodies jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetBodies_append(long jarg1, SetBodies jarg1_, long jarg2, Body jarg2_);
+  public final static native boolean SetBodies_adoptAndAppend(long jarg1, SetBodies jarg1_, long jarg2, Body jarg2_);
   public final static native boolean SetBodies_cloneAndAppend(long jarg1, SetBodies jarg1_, long jarg2, Body jarg2_);
   public final static native boolean SetBodies_insert(long jarg1, SetBodies jarg1_, int jarg2, long jarg3, Body jarg3_);
   public final static native boolean SetBodies_remove__SWIG_0(long jarg1, SetBodies jarg1_, int jarg2);
@@ -3242,7 +3237,6 @@ public class opensimModelJNI {
   public final static native long new_ModelComponentSetBodies__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ModelComponentSetBodies__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ModelComponentSetBodies__SWIG_4(long jarg1, ModelComponentSetBodies jarg1_);
-  public final static native boolean ModelComponentSetBodies_append(long jarg1, ModelComponentSetBodies jarg1_, long jarg2, Body jarg2_);
   public final static native boolean ModelComponentSetBodies_insert(long jarg1, ModelComponentSetBodies jarg1_, int jarg2, long jarg3, Body jarg3_);
   public final static native boolean ModelComponentSetBodies_set__SWIG_0(long jarg1, ModelComponentSetBodies jarg1_, int jarg2, long jarg3, Body jarg3_, boolean jarg4);
   public final static native boolean ModelComponentSetBodies_set__SWIG_1(long jarg1, ModelComponentSetBodies jarg1_, int jarg2, long jarg3, Body jarg3_);
@@ -3302,7 +3296,7 @@ public class opensimModelJNI {
   public final static native int SetBodyScales_getIndex__SWIG_2(long jarg1, SetBodyScales jarg1_, String jarg2, int jarg3);
   public final static native int SetBodyScales_getIndex__SWIG_3(long jarg1, SetBodyScales jarg1_, String jarg2);
   public final static native void SetBodyScales_getGroupNamesContaining(long jarg1, SetBodyScales jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetBodyScales_append(long jarg1, SetBodyScales jarg1_, long jarg2, BodyScale jarg2_);
+  public final static native boolean SetBodyScales_adoptAndAppend(long jarg1, SetBodyScales jarg1_, long jarg2, BodyScale jarg2_);
   public final static native boolean SetBodyScales_cloneAndAppend(long jarg1, SetBodyScales jarg1_, long jarg2, BodyScale jarg2_);
   public final static native boolean SetBodyScales_insert(long jarg1, SetBodyScales jarg1_, int jarg2, long jarg3, BodyScale jarg3_);
   public final static native boolean SetBodyScales_remove__SWIG_0(long jarg1, SetBodyScales jarg1_, int jarg2);
@@ -3715,7 +3709,7 @@ public class opensimModelJNI {
   public final static native int SetCoordinates_getIndex__SWIG_2(long jarg1, SetCoordinates jarg1_, String jarg2, int jarg3);
   public final static native int SetCoordinates_getIndex__SWIG_3(long jarg1, SetCoordinates jarg1_, String jarg2);
   public final static native void SetCoordinates_getGroupNamesContaining(long jarg1, SetCoordinates jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetCoordinates_append(long jarg1, SetCoordinates jarg1_, long jarg2, Coordinate jarg2_);
+  public final static native boolean SetCoordinates_adoptAndAppend(long jarg1, SetCoordinates jarg1_, long jarg2, Coordinate jarg2_);
   public final static native boolean SetCoordinates_cloneAndAppend(long jarg1, SetCoordinates jarg1_, long jarg2, Coordinate jarg2_);
   public final static native boolean SetCoordinates_insert(long jarg1, SetCoordinates jarg1_, int jarg2, long jarg3, Coordinate jarg3_);
   public final static native boolean SetCoordinates_remove__SWIG_0(long jarg1, SetCoordinates jarg1_, int jarg2);
@@ -3750,7 +3744,6 @@ public class opensimModelJNI {
   public final static native long new_ModelComponentSetCoordinates__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ModelComponentSetCoordinates__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ModelComponentSetCoordinates__SWIG_4(long jarg1, ModelComponentSetCoordinates jarg1_);
-  public final static native boolean ModelComponentSetCoordinates_append(long jarg1, ModelComponentSetCoordinates jarg1_, long jarg2, Coordinate jarg2_);
   public final static native boolean ModelComponentSetCoordinates_insert(long jarg1, ModelComponentSetCoordinates jarg1_, int jarg2, long jarg3, Coordinate jarg3_);
   public final static native boolean ModelComponentSetCoordinates_set__SWIG_0(long jarg1, ModelComponentSetCoordinates jarg1_, int jarg2, long jarg3, Coordinate jarg3_, boolean jarg4);
   public final static native boolean ModelComponentSetCoordinates_set__SWIG_1(long jarg1, ModelComponentSetCoordinates jarg1_, int jarg2, long jarg3, Coordinate jarg3_);
@@ -3969,7 +3962,7 @@ public class opensimModelJNI {
   public final static native int SetJoints_getIndex__SWIG_2(long jarg1, SetJoints jarg1_, String jarg2, int jarg3);
   public final static native int SetJoints_getIndex__SWIG_3(long jarg1, SetJoints jarg1_, String jarg2);
   public final static native void SetJoints_getGroupNamesContaining(long jarg1, SetJoints jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetJoints_append(long jarg1, SetJoints jarg1_, long jarg2, Joint jarg2_);
+  public final static native boolean SetJoints_adoptAndAppend(long jarg1, SetJoints jarg1_, long jarg2, Joint jarg2_);
   public final static native boolean SetJoints_cloneAndAppend(long jarg1, SetJoints jarg1_, long jarg2, Joint jarg2_);
   public final static native boolean SetJoints_insert(long jarg1, SetJoints jarg1_, int jarg2, long jarg3, Joint jarg3_);
   public final static native boolean SetJoints_remove__SWIG_0(long jarg1, SetJoints jarg1_, int jarg2);
@@ -4004,7 +3997,6 @@ public class opensimModelJNI {
   public final static native long new_ModelComponentSetJoints__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ModelComponentSetJoints__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ModelComponentSetJoints__SWIG_4(long jarg1, ModelComponentSetJoints jarg1_);
-  public final static native boolean ModelComponentSetJoints_append(long jarg1, ModelComponentSetJoints jarg1_, long jarg2, Joint jarg2_);
   public final static native boolean ModelComponentSetJoints_insert(long jarg1, ModelComponentSetJoints jarg1_, int jarg2, long jarg3, Joint jarg3_);
   public final static native boolean ModelComponentSetJoints_set__SWIG_0(long jarg1, ModelComponentSetJoints jarg1_, int jarg2, long jarg3, Joint jarg3_, boolean jarg4);
   public final static native boolean ModelComponentSetJoints_set__SWIG_1(long jarg1, ModelComponentSetJoints jarg1_, int jarg2, long jarg3, Joint jarg3_);
@@ -4068,7 +4060,7 @@ public class opensimModelJNI {
   public final static native int SetConstraints_getIndex__SWIG_2(long jarg1, SetConstraints jarg1_, String jarg2, int jarg3);
   public final static native int SetConstraints_getIndex__SWIG_3(long jarg1, SetConstraints jarg1_, String jarg2);
   public final static native void SetConstraints_getGroupNamesContaining(long jarg1, SetConstraints jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetConstraints_append(long jarg1, SetConstraints jarg1_, long jarg2, Constraint jarg2_);
+  public final static native boolean SetConstraints_adoptAndAppend(long jarg1, SetConstraints jarg1_, long jarg2, Constraint jarg2_);
   public final static native boolean SetConstraints_cloneAndAppend(long jarg1, SetConstraints jarg1_, long jarg2, Constraint jarg2_);
   public final static native boolean SetConstraints_insert(long jarg1, SetConstraints jarg1_, int jarg2, long jarg3, Constraint jarg3_);
   public final static native boolean SetConstraints_remove__SWIG_0(long jarg1, SetConstraints jarg1_, int jarg2);
@@ -4103,7 +4095,6 @@ public class opensimModelJNI {
   public final static native long new_ModelComponentSetConstraints__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ModelComponentSetConstraints__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ModelComponentSetConstraints__SWIG_4(long jarg1, ModelComponentSetConstraints jarg1_);
-  public final static native boolean ModelComponentSetConstraints_append(long jarg1, ModelComponentSetConstraints jarg1_, long jarg2, Constraint jarg2_);
   public final static native boolean ModelComponentSetConstraints_insert(long jarg1, ModelComponentSetConstraints jarg1_, int jarg2, long jarg3, Constraint jarg3_);
   public final static native boolean ModelComponentSetConstraints_set__SWIG_0(long jarg1, ModelComponentSetConstraints jarg1_, int jarg2, long jarg3, Constraint jarg3_, boolean jarg4);
   public final static native boolean ModelComponentSetConstraints_set__SWIG_1(long jarg1, ModelComponentSetConstraints jarg1_, int jarg2, long jarg3, Constraint jarg3_);
@@ -4218,7 +4209,7 @@ public class opensimModelJNI {
   public final static native int SetProbes_getIndex__SWIG_2(long jarg1, SetProbes jarg1_, String jarg2, int jarg3);
   public final static native int SetProbes_getIndex__SWIG_3(long jarg1, SetProbes jarg1_, String jarg2);
   public final static native void SetProbes_getGroupNamesContaining(long jarg1, SetProbes jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetProbes_append(long jarg1, SetProbes jarg1_, long jarg2, Probe jarg2_);
+  public final static native boolean SetProbes_adoptAndAppend(long jarg1, SetProbes jarg1_, long jarg2, Probe jarg2_);
   public final static native boolean SetProbes_cloneAndAppend(long jarg1, SetProbes jarg1_, long jarg2, Probe jarg2_);
   public final static native boolean SetProbes_insert(long jarg1, SetProbes jarg1_, int jarg2, long jarg3, Probe jarg3_);
   public final static native boolean SetProbes_remove__SWIG_0(long jarg1, SetProbes jarg1_, int jarg2);
@@ -4253,7 +4244,6 @@ public class opensimModelJNI {
   public final static native long new_ModelComponentSetProbes__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ModelComponentSetProbes__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ModelComponentSetProbes__SWIG_4(long jarg1, ModelComponentSetProbes jarg1_);
-  public final static native boolean ModelComponentSetProbes_append(long jarg1, ModelComponentSetProbes jarg1_, long jarg2, Probe jarg2_);
   public final static native boolean ModelComponentSetProbes_insert(long jarg1, ModelComponentSetProbes jarg1_, int jarg2, long jarg3, Probe jarg3_);
   public final static native boolean ModelComponentSetProbes_set__SWIG_0(long jarg1, ModelComponentSetProbes jarg1_, int jarg2, long jarg3, Probe jarg3_, boolean jarg4);
   public final static native boolean ModelComponentSetProbes_set__SWIG_1(long jarg1, ModelComponentSetProbes jarg1_, int jarg2, long jarg3, Probe jarg3_);
@@ -4519,7 +4509,7 @@ public class opensimModelJNI {
   public final static native int SetPathPoint_getIndex__SWIG_2(long jarg1, SetPathPoint jarg1_, String jarg2, int jarg3);
   public final static native int SetPathPoint_getIndex__SWIG_3(long jarg1, SetPathPoint jarg1_, String jarg2);
   public final static native void SetPathPoint_getGroupNamesContaining(long jarg1, SetPathPoint jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetPathPoint_append(long jarg1, SetPathPoint jarg1_, long jarg2, PathPoint jarg2_);
+  public final static native boolean SetPathPoint_adoptAndAppend(long jarg1, SetPathPoint jarg1_, long jarg2, PathPoint jarg2_);
   public final static native boolean SetPathPoint_cloneAndAppend(long jarg1, SetPathPoint jarg1_, long jarg2, PathPoint jarg2_);
   public final static native boolean SetPathPoint_insert(long jarg1, SetPathPoint jarg1_, int jarg2, long jarg3, PathPoint jarg3_);
   public final static native boolean SetPathPoint_remove__SWIG_0(long jarg1, SetPathPoint jarg1_, int jarg2);
@@ -5306,7 +5296,7 @@ public class opensimModelJNI {
   public final static native int SetIKTasks_getIndex__SWIG_2(long jarg1, SetIKTasks jarg1_, String jarg2, int jarg3);
   public final static native int SetIKTasks_getIndex__SWIG_3(long jarg1, SetIKTasks jarg1_, String jarg2);
   public final static native void SetIKTasks_getGroupNamesContaining(long jarg1, SetIKTasks jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetIKTasks_append(long jarg1, SetIKTasks jarg1_, long jarg2, IKTask jarg2_);
+  public final static native boolean SetIKTasks_adoptAndAppend(long jarg1, SetIKTasks jarg1_, long jarg2, IKTask jarg2_);
   public final static native boolean SetIKTasks_cloneAndAppend(long jarg1, SetIKTasks jarg1_, long jarg2, IKTask jarg2_);
   public final static native boolean SetIKTasks_insert(long jarg1, SetIKTasks jarg1_, int jarg2, long jarg3, IKTask jarg3_);
   public final static native boolean SetIKTasks_remove__SWIG_0(long jarg1, SetIKTasks jarg1_, int jarg2);
@@ -5402,7 +5392,7 @@ public class opensimModelJNI {
   public final static native int SetMarkerPairs_getIndex__SWIG_2(long jarg1, SetMarkerPairs jarg1_, String jarg2, int jarg3);
   public final static native int SetMarkerPairs_getIndex__SWIG_3(long jarg1, SetMarkerPairs jarg1_, String jarg2);
   public final static native void SetMarkerPairs_getGroupNamesContaining(long jarg1, SetMarkerPairs jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetMarkerPairs_append(long jarg1, SetMarkerPairs jarg1_, long jarg2, MarkerPair jarg2_);
+  public final static native boolean SetMarkerPairs_adoptAndAppend(long jarg1, SetMarkerPairs jarg1_, long jarg2, MarkerPair jarg2_);
   public final static native boolean SetMarkerPairs_cloneAndAppend(long jarg1, SetMarkerPairs jarg1_, long jarg2, MarkerPair jarg2_);
   public final static native boolean SetMarkerPairs_insert(long jarg1, SetMarkerPairs jarg1_, int jarg2, long jarg3, MarkerPair jarg3_);
   public final static native boolean SetMarkerPairs_remove__SWIG_0(long jarg1, SetMarkerPairs jarg1_, int jarg2);
@@ -5478,7 +5468,7 @@ public class opensimModelJNI {
   public final static native int SetMeasurements_getIndex__SWIG_2(long jarg1, SetMeasurements jarg1_, String jarg2, int jarg3);
   public final static native int SetMeasurements_getIndex__SWIG_3(long jarg1, SetMeasurements jarg1_, String jarg2);
   public final static native void SetMeasurements_getGroupNamesContaining(long jarg1, SetMeasurements jarg1_, String jarg2, long jarg3, ArrayStr jarg3_);
-  public final static native boolean SetMeasurements_append(long jarg1, SetMeasurements jarg1_, long jarg2, Measurement jarg2_);
+  public final static native boolean SetMeasurements_adoptAndAppend(long jarg1, SetMeasurements jarg1_, long jarg2, Measurement jarg2_);
   public final static native boolean SetMeasurements_cloneAndAppend(long jarg1, SetMeasurements jarg1_, long jarg2, Measurement jarg2_);
   public final static native boolean SetMeasurements_insert(long jarg1, SetMeasurements jarg1_, int jarg2, long jarg3, Measurement jarg3_);
   public final static native boolean SetMeasurements_remove__SWIG_0(long jarg1, SetMeasurements jarg1_, int jarg2);

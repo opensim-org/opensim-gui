@@ -137,8 +137,8 @@ public class SetIKTasks extends OpenSimObject {
     opensimModelJNI.SetIKTasks_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean append(IKTask aObject) {
-    return opensimModelJNI.SetIKTasks_append(swigCPtr, this, IKTask.getCPtr(aObject), aObject);
+  public boolean adoptAndAppend(IKTask aObject) {
+    return opensimModelJNI.SetIKTasks_adoptAndAppend(swigCPtr, this, IKTask.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(IKTask aObject) {

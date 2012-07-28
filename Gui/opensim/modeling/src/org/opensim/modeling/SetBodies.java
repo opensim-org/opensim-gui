@@ -137,8 +137,8 @@ public class SetBodies extends OpenSimObject {
     opensimModelJNI.SetBodies_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean append(Body aObject) {
-    return opensimModelJNI.SetBodies_append(swigCPtr, this, Body.getCPtr(aObject), aObject);
+  public boolean adoptAndAppend(Body aObject) {
+    return opensimModelJNI.SetBodies_adoptAndAppend(swigCPtr, this, Body.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(Body aObject) {

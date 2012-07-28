@@ -137,8 +137,8 @@ public class SetMuscles extends OpenSimObject {
     opensimModelJNI.SetMuscles_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean append(Muscle aObject) {
-    return opensimModelJNI.SetMuscles_append(swigCPtr, this, Muscle.getCPtr(aObject), aObject);
+  public boolean adoptAndAppend(Muscle aObject) {
+    return opensimModelJNI.SetMuscles_adoptAndAppend(swigCPtr, this, Muscle.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(Muscle aObject) {

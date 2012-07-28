@@ -137,8 +137,8 @@ public class SetBodyScales extends OpenSimObject {
     opensimModelJNI.SetBodyScales_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean append(BodyScale aObject) {
-    return opensimModelJNI.SetBodyScales_append(swigCPtr, this, BodyScale.getCPtr(aObject), aObject);
+  public boolean adoptAndAppend(BodyScale aObject) {
+    return opensimModelJNI.SetBodyScales_adoptAndAppend(swigCPtr, this, BodyScale.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(BodyScale aObject) {

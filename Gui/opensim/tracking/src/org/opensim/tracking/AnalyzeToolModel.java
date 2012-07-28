@@ -302,7 +302,7 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
           }
           if(staticOptimizationAnalysis==null) {
               staticOptimizationAnalysis = StaticOptimization.safeDownCast(new StaticOptimization().clone()); // C++-side copy
-              analyzeTool().getAnalysisSet().append(staticOptimizationAnalysis);
+              analyzeTool().getAnalysisSet().adoptAndAppend(staticOptimizationAnalysis);
           }
           staticOptimizationAnalysis.setOn(true);
           staticOptimizationAnalysis.setUseModelForceSet(true);

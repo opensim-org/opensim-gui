@@ -137,8 +137,8 @@ public class SetScales extends OpenSimObject {
     opensimModelJNI.SetScales_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean append(Scale aObject) {
-    return opensimModelJNI.SetScales_append(swigCPtr, this, Scale.getCPtr(aObject), aObject);
+  public boolean adoptAndAppend(Scale aObject) {
+    return opensimModelJNI.SetScales_adoptAndAppend(swigCPtr, this, Scale.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(Scale aObject) {

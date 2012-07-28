@@ -77,10 +77,6 @@ public class ModelComponentSetBodies extends SetBodies {
     this(opensimModelJNI.new_ModelComponentSetBodies__SWIG_4(ModelComponentSetBodies.getCPtr(source), source), true);
   }
 
-  public boolean append(Body aObject) {
-    return opensimModelJNI.ModelComponentSetBodies_append(swigCPtr, this, Body.getCPtr(aObject), aObject);
-  }
-
   public boolean insert(int aIndex, Body aObject) {
     return opensimModelJNI.ModelComponentSetBodies_insert(swigCPtr, this, aIndex, Body.getCPtr(aObject), aObject);
   }

@@ -398,7 +398,7 @@ public class ExcitationEditorJFrame extends javax.swing.JFrame {
                         control.setName(act.getName());
                     else
                         control.setName(act.getName()+String.valueOf(nc));
-                    controlSet.append(control);
+                    controlSet.adoptAndAppend(control);
                     controlsRefs.add(control);
                 }
 	}

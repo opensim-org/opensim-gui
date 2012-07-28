@@ -137,8 +137,8 @@ public class SetContactGeometry extends OpenSimObject {
     opensimModelJNI.SetContactGeometry_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean append(ContactGeometry aObject) {
-    return opensimModelJNI.SetContactGeometry_append(swigCPtr, this, ContactGeometry.getCPtr(aObject), aObject);
+  public boolean adoptAndAppend(ContactGeometry aObject) {
+    return opensimModelJNI.SetContactGeometry_adoptAndAppend(swigCPtr, this, ContactGeometry.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(ContactGeometry aObject) {

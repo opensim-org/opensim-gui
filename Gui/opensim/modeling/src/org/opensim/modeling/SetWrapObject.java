@@ -137,8 +137,8 @@ public class SetWrapObject extends OpenSimObject {
     opensimModelJNI.SetWrapObject_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean append(WrapObject aObject) {
-    return opensimModelJNI.SetWrapObject_append(swigCPtr, this, WrapObject.getCPtr(aObject), aObject);
+  public boolean adoptAndAppend(WrapObject aObject) {
+    return opensimModelJNI.SetWrapObject_adoptAndAppend(swigCPtr, this, WrapObject.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(WrapObject aObject) {

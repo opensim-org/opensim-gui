@@ -251,7 +251,7 @@ class BodySetScaleFactors extends Vector<BodyScaleFactors> {
                 scales[j]=get(i).manualScales[j];
             }
             scale.setScaleFactors(scales);
-            modelScaler.getScaleSet().append(Scale.safeDownCast(scale.clone()));
+            modelScaler.getScaleSet().cloneAndAppend(scale);
          }
       }
       if(modelScaler.getScaleSet().getSize()>0) array.append("manualScale");
@@ -273,9 +273,9 @@ class BodySetScaleFactors extends Vector<BodyScaleFactors> {
       int bodyScaleIndex = bodyScaleSet.getIndex(bodyName);
       BodyScale bodyScale = null;
       if(bodyScaleIndex < 0) {
-         bodyScale = BodyScale.safeDownCast((new BodyScale()).clone()); // Create it on C++ side
+         bodyScale = new BodyScale(); // Create it on C++ side
          bodyScale.setName(bodyName);
-         modelScaler.getMeasurementSet().get(index).getBodyScaleSet().append(bodyScale);
+         modelScaler.getMeasurementSet().get(index).getBodyScaleSet().cloneAndAppend(bodyScale);
       } else bodyScale = bodyScaleSet.get(bodyScaleIndex);
       if(axis==0 || axis==-1) bodyScale.getAxisNames().append("X");
       if(axis==1 || axis==-1) bodyScale.getAxisNames().append("Y");
@@ -769,7 +769,7 @@ public class ScaleToolModel extends Observable implements Observer {
          scale.setSegmentName(bodySet.get(i).getName());
          scale.setScaleFactors(identityScale);
          scale.setApply(true);
-         scaleSet.append(Scale.safeDownCast(scale.clone()));
+         scaleSet.cloneAndAppend(scale);
       }
       return scaleSet;
    }
@@ -856,7 +856,7 @@ public class ScaleToolModel extends Observable implements Observer {
       MeasurementSet measurementSet = getMeasurementSet();
       Measurement measurement = new Measurement();
       measurement.setName(name);
-      measurementSet.append(Measurement.safeDownCast(measurement.clone()));
+      measurementSet.cloneAndAppend(measurement);
       // Update parallel measurementValues array
       measurementValues.add(null);
       // Fire event

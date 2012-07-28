@@ -77,10 +77,6 @@ public class ModelComponentSetExternalForces extends SetExternalForces {
     this(opensimModelJNI.new_ModelComponentSetExternalForces__SWIG_4(ModelComponentSetExternalForces.getCPtr(source), source), true);
   }
 
-  public boolean append(ExternalForce aObject) {
-    return opensimModelJNI.ModelComponentSetExternalForces_append(swigCPtr, this, ExternalForce.getCPtr(aObject), aObject);
-  }
-
   public boolean insert(int aIndex, ExternalForce aObject) {
     return opensimModelJNI.ModelComponentSetExternalForces_insert(swigCPtr, this, aIndex, ExternalForce.getCPtr(aObject), aObject);
   }

@@ -77,10 +77,6 @@ public class ModelComponentSetForces extends SetForces {
     this(opensimModelJNI.new_ModelComponentSetForces__SWIG_4(ModelComponentSetForces.getCPtr(source), source), true);
   }
 
-  public boolean append(Force aObject) {
-    return opensimModelJNI.ModelComponentSetForces_append(swigCPtr, this, Force.getCPtr(aObject), aObject);
-  }
-
   public boolean insert(int aIndex, Force aObject) {
     return opensimModelJNI.ModelComponentSetForces_insert(swigCPtr, this, aIndex, Force.getCPtr(aObject), aObject);
   }

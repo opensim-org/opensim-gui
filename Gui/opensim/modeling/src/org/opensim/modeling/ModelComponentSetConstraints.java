@@ -77,10 +77,6 @@ public class ModelComponentSetConstraints extends SetConstraints {
     this(opensimModelJNI.new_ModelComponentSetConstraints__SWIG_4(ModelComponentSetConstraints.getCPtr(source), source), true);
   }
 
-  public boolean append(Constraint aObject) {
-    return opensimModelJNI.ModelComponentSetConstraints_append(swigCPtr, this, Constraint.getCPtr(aObject), aObject);
-  }
-
   public boolean insert(int aIndex, Constraint aObject) {
     return opensimModelJNI.ModelComponentSetConstraints_insert(swigCPtr, this, aIndex, Constraint.getCPtr(aObject), aObject);
   }

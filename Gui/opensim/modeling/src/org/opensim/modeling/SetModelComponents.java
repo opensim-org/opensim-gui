@@ -137,8 +137,8 @@ public class SetModelComponents extends OpenSimObject {
     opensimModelJNI.SetModelComponents_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean append(ModelComponent aObject) {
-    return opensimModelJNI.SetModelComponents_append(swigCPtr, this, ModelComponent.getCPtr(aObject), aObject);
+  public boolean adoptAndAppend(ModelComponent aObject) {
+    return opensimModelJNI.SetModelComponents_adoptAndAppend(swigCPtr, this, ModelComponent.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(ModelComponent aObject) {

@@ -137,8 +137,8 @@ public class SetForces extends OpenSimObject {
     opensimModelJNI.SetForces_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean append(Force aObject) {
-    return opensimModelJNI.SetForces_append(swigCPtr, this, Force.getCPtr(aObject), aObject);
+  public boolean adoptAndAppend(Force aObject) {
+    return opensimModelJNI.SetForces_adoptAndAppend(swigCPtr, this, Force.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(Force aObject) {

@@ -679,7 +679,7 @@ public class ExcitationEditorJPanel extends javax.swing.JPanel implements TreeSe
                     if (userObject instanceof ExcitationObject){
                         ExcitationObject eo = (ExcitationObject)userObject;
                         ExcitationRenderer renderer = (ExcitationRenderer) eo.getPlotPanel().getChart().getXYPlot().getRenderer(0);
-                        newControlSet.append(renderer.getControl());
+                        newControlSet.adoptAndAppend(renderer.getControl());
                     }
                 }
                 newControlSet.print(fileName);

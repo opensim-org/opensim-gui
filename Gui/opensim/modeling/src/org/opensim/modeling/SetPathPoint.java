@@ -137,8 +137,8 @@ public class SetPathPoint extends OpenSimObject {
     opensimModelJNI.SetPathPoint_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean append(PathPoint aObject) {
-    return opensimModelJNI.SetPathPoint_append(swigCPtr, this, PathPoint.getCPtr(aObject), aObject);
+  public boolean adoptAndAppend(PathPoint aObject) {
+    return opensimModelJNI.SetPathPoint_adoptAndAppend(swigCPtr, this, PathPoint.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(PathPoint aObject) {

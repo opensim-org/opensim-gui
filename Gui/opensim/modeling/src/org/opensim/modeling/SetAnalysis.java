@@ -137,8 +137,8 @@ public class SetAnalysis extends OpenSimObject {
     opensimModelJNI.SetAnalysis_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean append(Analysis aObject) {
-    return opensimModelJNI.SetAnalysis_append(swigCPtr, this, Analysis.getCPtr(aObject), aObject);
+  public boolean adoptAndAppend(Analysis aObject) {
+    return opensimModelJNI.SetAnalysis_adoptAndAppend(swigCPtr, this, Analysis.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(Analysis aObject) {

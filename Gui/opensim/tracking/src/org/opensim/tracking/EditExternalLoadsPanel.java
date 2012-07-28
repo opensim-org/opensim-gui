@@ -555,7 +555,7 @@ public class EditExternalLoadsPanel extends javax.swing.JPanel
          if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
              forceListModel.add(forceListModel.getSize(), pf);
              String usrObjBodyName=pf.getAppliedToBodyName();                         
-             dLoads.append(pf);
+             dLoads.adoptAndAppend(pf);
              dLoads.setMemoryOwner(false);
              cachedForces.add(pf);
          }

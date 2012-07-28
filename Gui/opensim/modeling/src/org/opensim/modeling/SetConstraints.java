@@ -137,8 +137,8 @@ public class SetConstraints extends OpenSimObject {
     opensimModelJNI.SetConstraints_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean append(Constraint aObject) {
-    return opensimModelJNI.SetConstraints_append(swigCPtr, this, Constraint.getCPtr(aObject), aObject);
+  public boolean adoptAndAppend(Constraint aObject) {
+    return opensimModelJNI.SetConstraints_adoptAndAppend(swigCPtr, this, Constraint.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(Constraint aObject) {
