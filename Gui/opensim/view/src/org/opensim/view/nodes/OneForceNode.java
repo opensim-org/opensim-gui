@@ -37,10 +37,8 @@ import javax.swing.ImageIcon;
 import org.openide.nodes.Children;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.Force;
-import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.ObjectDisplayMenuAction;
-import org.opensim.view.pub.OpenSimDB;
 
 /**
  *
@@ -84,28 +82,29 @@ public class OneForceNode extends OpenSimObjectNode implements DisableableObject
     protected boolean disabled = false;
 
 
+    @Override
     public boolean isDisabled() {
         return disabled;
     }
 
 
+    @Override
     public void setDisabled(boolean disabled) {
-        OpenSimDB.getInstance().disableForce(getOpenSimObject(), disabled);
+        //OpenSimDB.getInstance().disableForce(getOpenSimObject(), disabled);
         this.disabled = disabled;
         if (disabled)
             setIconBaseWithExtension("/org/opensim/view/nodes/icons/disabledNode.png");
         else
             setIconBaseWithExtension("/org/opensim/view/nodes/icons/muscleNode.png");
-        // The following line forces a refresh of the Properties window if open
-        firePropertySetsChange(null, getPropertySets());
+        //refreshNode();
 
     }
 
 
     protected void updateDisabledFlag(final OpenSimObject actuator) {        
         Force f = Force.safeDownCast(actuator);
-        OpenSimContext context = OpenSimDB.getInstance().getContext(f.getModel());
-        disabled = context.isDisabled(f);
+        //OpenSimContext context = OpenSimDB.getInstance().getContext(f.getModel());
+        disabled = f.get_isDisabled();
     }
 
     public Action[] getActions(boolean b) {
@@ -132,4 +131,12 @@ public class OneForceNode extends OpenSimObjectNode implements DisableableObject
         }
         return retActions;
     }
+
+    @Override
+    public void refreshNode() {
+        super.refreshNode();
+        updateDisabledFlag(getOpenSimObject());
+        setDisabled(disabled);
+    }
+   
 }

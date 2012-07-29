@@ -415,7 +415,7 @@ public class OpenSimDB extends Observable implements Externalizable{
     public void disableForce(OpenSimObject openSimObject, boolean disabled) {
         Force f = Force.safeDownCast(openSimObject);
         OpenSimContext context = getContext(f.getModel());
-        boolean oldState = context.isDisabled(f);
+        boolean oldState = f.get_isDisabled();
         if (oldState != disabled){
             context.setDisabled(f, disabled);
             // Fire an event so that other interested parties (e.g. Opened tools, view can update)

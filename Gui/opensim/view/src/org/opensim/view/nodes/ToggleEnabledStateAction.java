@@ -9,8 +9,6 @@ import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.BooleanStateAction;
 import org.opensim.view.ExplorerTopComponent;
-import org.opensim.view.SingleModelGuiElements;
-import org.opensim.view.pub.ViewDB;
 
 public final class ToggleEnabledStateAction extends BooleanStateAction {
         
@@ -48,17 +46,6 @@ public final class ToggleEnabledStateAction extends BooleanStateAction {
         // TODO implement action body
         boolean oldState = getBooleanState();
         final boolean newState = !oldState;
-        AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
-           public void undo() throws CannotUndoException {
-               super.undo();
-               applyNewStateToNodes(selected, !newState);
-           }
-           public void redo() throws CannotRedoException {
-               super.redo();
-               applyNewStateToNodes(selected, newState);
-           }
-        };
-        ExplorerTopComponent.addUndoableEdit(auEdit);
         applyNewStateToNodes(selected, newState);
    }
 
@@ -68,9 +55,9 @@ public final class ToggleEnabledStateAction extends BooleanStateAction {
             if (selectedNode instanceof DisableableObject){
                 DisableableObject object=(DisableableObject) selectedNode;
                 object.setDisabled(!newState);
-                OpenSimNode oNode= (OpenSimNode) selectedNode;
-                SingleModelGuiElements guiElem = ViewDB.getInstance().getModelGuiElements(oNode.getModelForNode());
-                guiElem.setUnsavedChangesFlag(true);
+                OpenSimObjectNode oNode= (OpenSimObjectNode) selectedNode;
+                PropertyEditorAdaptor pea = new PropertyEditorAdaptor("isDisabled", oNode);
+                pea.setValueBool(!newState);
             }
         }
         setBooleanState(newState);

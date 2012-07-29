@@ -8,11 +8,12 @@ import javax.swing.Action;
 import javax.swing.ImageIcon;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
-import org.openide.nodes.Sheet;
 import org.openide.util.NbBundle;
+import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Constraint;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PropertyHelper;
 import org.opensim.view.ObjectDisplayMenuAction;
 import org.opensim.view.pub.OpenSimDB;
 
@@ -52,20 +53,19 @@ public class OneConstraintNode extends OpenSimObjectNode  implements Disableable
     }
 
     public void setDisabled(boolean disabled) {
-        OpenSimDB.getInstance().disableConstraint(getOpenSimObject(), disabled);
+        //OpenSimDB.getInstance().disableConstraint(getOpenSimObject(), disabled);
         this.disabled = disabled;
         if (disabled)
             setIconBaseWithExtension("/org/opensim/view/nodes/icons/disabledNode.png");
         else
             setIconBaseWithExtension("/org/opensim/view/nodes/icons/constraintNode.png");
-        // The following line forces a refresh of the Properties window if open
-        firePropertySetsChange(null, getPropertySets());
+        //refreshNode();
     }
 
     private void updateDisabledFlag() {
         Constraint c = Constraint.safeDownCast(getOpenSimObject());
-        OpenSimContext context = OpenSimDB.getInstance().getContext(c.getModel());
-        disabled = context.isDisabled(c);
+        AbstractProperty ap = c.getPropertyByName("isDisabled");
+        disabled = PropertyHelper.getValueBool(ap);
     }
 
     public Action[] getActions(boolean b) {
@@ -91,5 +91,12 @@ public class OneConstraintNode extends OpenSimObjectNode  implements Disableable
             ex.printStackTrace();
         }
         return retActions;
+    }
+
+    @Override
+    public void refreshNode() {
+        super.refreshNode();
+        updateDisabledFlag();
+        setDisabled(disabled);
     }
 }
