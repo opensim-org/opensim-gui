@@ -1515,7 +1515,7 @@ public class JPlotterPanel extends javax.swing.JPanel
          tool.setFinalTime( motion.getStorage().getLastTime());
          statesStorage = buildStatesStorageFromMotion(motion.getStorage(), isActivationOverride(), getActivationValue());
          tool.setStatesStorage(statesStorage);
-         statesStorage.print(key+"statesFromMotion.sto");
+         //statesStorage.print(key+"statesFromMotion.sto");
       } else {
          // Recreate stateStorage
          statesStorage=createStateStorageWithHeader(currentModel);
@@ -1556,13 +1556,13 @@ public class JPlotterPanel extends javax.swing.JPanel
          tool.setStartTime(0.);
          tool.setFinalTime(NUM_STEPS);
          sourceX=new PlotterSourceAnalysis(currentModel, statesStorage, "");
-         statesStorage.print("toolInput"+key+".sto");
-         tool.setStatesFileName("toolInput"+key+".sto");
+         statesStorage.print("toolInput"/*+key*/+".sto");
+         tool.setStatesFileName("toolInput"/*+key*/+".sto");
          tool.setModelFilename(currentModel.getInputFileName());
       }
       tool.setPrintResultFiles(false);
       //analysisSource.getStorage().purge();
-      tool.print("PlotterTool"+key+".xml");
+      //tool.print("PlotterTool"+key+".xml");
       try {
          tool.run(true);
       } catch (IOException ex) {
@@ -1572,7 +1572,7 @@ public class JPlotterPanel extends javax.swing.JPanel
       int na = currentModel.getAnalysisSet().getSize();
       Analysis analysis = currentModel.getAnalysisSet().get("MuscleAnalysis");
       analysisSource.updateStorage(analysis);
-      analysisSource.getStorage().print("toolOutput"+key+".sto");
+      analysisSource.getStorage().print("toolOutput"/*+key*/+".sto");
       currentModel.getSimbodyEngine().convertRadiansToDegrees(analysisSource.getStorage());
       currentModel.getSimbodyEngine().convertRadiansToDegrees(statesStorage);
    }
