@@ -613,6 +613,14 @@ public class Thelen2003Muscle extends ActivationFiberLengthMuscle {
     return opensimModelJNI.Thelen2003Muscle_setForceVelocityExtrapolationThreshold(swigCPtr, this, aFvThresh);
   }
 
+  public SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel getActivationModel() {
+    return new SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel(opensimModelJNI.Thelen2003Muscle_getActivationModel(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_MuscleFixedWidthPennationModel getPennationModel() {
+    return new SWIGTYPE_p_MuscleFixedWidthPennationModel(opensimModelJNI.Thelen2003Muscle_getPennationModel(swigCPtr, this), false);
+  }
+
   public double computeActuation(SWIGTYPE_p_SimTK__State s) {
     return opensimModelJNI.Thelen2003Muscle_computeActuation(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
   }
@@ -621,8 +629,12 @@ public class Thelen2003Muscle extends ActivationFiberLengthMuscle {
     opensimModelJNI.Thelen2003Muscle_computeInitialFiberEquilibrium(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
   }
 
-  public double computeIsometricForce(SWIGTYPE_p_SimTK__State s, double activation) {
-    return opensimModelJNI.Thelen2003Muscle_computeIsometricForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), activation);
+  public double calcActiveFiberForceAlongTendon(double activation, double fiberLength, double fiberVelocity) {
+    return opensimModelJNI.Thelen2003Muscle_calcActiveFiberForceAlongTendon(swigCPtr, this, activation, fiberLength, fiberVelocity);
+  }
+
+  public double calcInextensibleTendonActiveFiberForce(SWIGTYPE_p_SimTK__State s, double aActivation) {
+    return opensimModelJNI.Thelen2003Muscle_calcInextensibleTendonActiveFiberForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), aActivation);
   }
 
 }

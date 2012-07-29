@@ -4892,7 +4892,7 @@ public class opensimModelJNI {
   public final static native void Muscle_setActivation(long jarg1, Muscle jarg1_, long jarg2, double jarg3);
   public final static native double Muscle_computeActuation(long jarg1, Muscle jarg1_, long jarg2);
   public final static native void Muscle_equilibrate(long jarg1, Muscle jarg1_, long jarg2);
-  public final static native double Muscle_computeIsokineticForceAssumingInfinitelyStiffTendon(long jarg1, Muscle jarg1_, long jarg2, double jarg3);
+  public final static native double Muscle_calcInextensibleTendonActiveFiberForce(long jarg1, Muscle jarg1_, long jarg2, double jarg3);
   public final static native void delete_Muscle(long jarg1);
   public final static native long ActivationFiberLengthMuscle_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void ActivationFiberLengthMuscle_assign(long jarg1, ActivationFiberLengthMuscle jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -5256,9 +5256,12 @@ public class opensimModelJNI {
   public final static native boolean Thelen2003Muscle_setAf(long jarg1, Thelen2003Muscle jarg1_, double jarg2);
   public final static native boolean Thelen2003Muscle_setFlen(long jarg1, Thelen2003Muscle jarg1_, double jarg2);
   public final static native boolean Thelen2003Muscle_setForceVelocityExtrapolationThreshold(long jarg1, Thelen2003Muscle jarg1_, double jarg2);
+  public final static native long Thelen2003Muscle_getActivationModel(long jarg1, Thelen2003Muscle jarg1_);
+  public final static native long Thelen2003Muscle_getPennationModel(long jarg1, Thelen2003Muscle jarg1_);
   public final static native double Thelen2003Muscle_computeActuation(long jarg1, Thelen2003Muscle jarg1_, long jarg2);
   public final static native void Thelen2003Muscle_computeInitialFiberEquilibrium(long jarg1, Thelen2003Muscle jarg1_, long jarg2);
-  public final static native double Thelen2003Muscle_computeIsometricForce(long jarg1, Thelen2003Muscle jarg1_, long jarg2, double jarg3);
+  public final static native double Thelen2003Muscle_calcActiveFiberForceAlongTendon(long jarg1, Thelen2003Muscle jarg1_, double jarg2, double jarg3, double jarg4);
+  public final static native double Thelen2003Muscle_calcInextensibleTendonActiveFiberForce(long jarg1, Thelen2003Muscle jarg1_, long jarg2, double jarg3);
   public final static native void delete_Thelen2003Muscle(long jarg1);
   public final static native long IKTask_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void IKTask_assign(long jarg1, IKTask jarg1_, long jarg2, OpenSimObject jarg2_);
