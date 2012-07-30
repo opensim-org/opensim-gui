@@ -11,6 +11,7 @@
             <file name="org-netbeans-modules-bugzilla-ReportNBIssueAction.instance_hidden"/>
             <file name="org-opensim-swingui-FileBug.instance"/>
             <file name="org-opensim-swingui-HelpOpenOnlineDocsAction.instance"/>
+            <file name="org-opensim-swingui-HelpOpenDoxygenAction.instance"/>
         </folder>
     </folder>
     <folder name="Menu">
@@ -33,6 +34,10 @@
             <file name="org-opensim-swingui-HelpOpenOnlineDocsAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Help/org-opensim-swingui-HelpOpenOnlineDocsAction.instance"/>
                 <attr name="position" intvalue="200"/>
+            </file>
+            <file name="org-opensim-swingui-HelpOpenDoxygenAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Help/org-opensim-swingui-HelpOpenDoxygenAction.instance"/>
+                <attr name="position" intvalue="600"/>
             </file>
          </folder>
     </folder>
