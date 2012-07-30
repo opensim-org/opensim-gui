@@ -1,9 +1,11 @@
 IF(OPENSIM_INSTALL_PACKAGE_BUILD)
 FILE(GLOB BIN_FILES opensim/build/launcher/bin/*.*)
 FILE(GLOB ETC_FILES opensim/build/launcher/etc/*.*)
+FILE(GLOB INTERNAL_FILES Internal_openSimlab.osim)
 
 INSTALL_FILES(/bin/ FILES  ${BIN_FILES})
 INSTALL_FILES(/etc/ FILES  ${ETC_FILES})
+INSTALL_FILES(/Models/Internal/ FILES  ${INTERNAL_FILES})
 
 # This to be replaced with a CMake Variable
 # Check if directory exists first to more gracefully handle case where it doesn't exist (otherwise cmake prints an error message)

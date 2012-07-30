@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSimDocument Version="10600">
+<Model name="OpenSimLab">
+	<angle_units> radians </angle_units>
+	<ActuatorSet name="">
+	<groups>
+	</groups>
+	<objects>
+	</objects>
+	</ActuatorSet>
+	<DynamicsEngine>
+		<SimbodyEngine>
+			<!--Acceleration due to gravity.-->
+			<gravity>       0.00000000      -9.80665000       0.00000000 </gravity>
+			<!--Bodies in the model.-->
+			<BodySet name="">
+				<objects>
+					<Body name="ground">
+						<WrapObjectSet name="">
+							<objects/>
+							<groups/>
+						</WrapObjectSet>
+						<mass>       0.00000000 </mass>
+						<mass_center>       0.00000000       0.00000000       0.00000000 </mass_center>
+						<inertia_xx>       0.00000000 </inertia_xx>
+						<inertia_yy>       0.00000000 </inertia_yy>
+						<inertia_zz>       0.00000000 </inertia_zz>
+						<inertia_xy>       0.00000000 </inertia_xy>
+						<inertia_xz>       0.00000000 </inertia_xz>
+						<inertia_yz>       0.00000000 </inertia_yz>
+						<!--Joint that connects this body with the parent body.-->
+						<Joint/>
+						<VisibleObject name="">
+							<geometry_files> axes.vtp </geometry_files>
+							<VisibleProperties name="">
+								<display_preference> 4 </display_preference>
+								<show_normals> false </show_normals>
+								<show_axes> false </show_axes>
+								<material_name> DEFAULT </material_name>
+							</VisibleProperties>
+							<scale_factors>       1.00000000       1.00000000       1.00000000 </scale_factors>
+						</VisibleObject>
+					</Body>
+				</objects>
+				<groups/>
+			</BodySet>
+			<!--Constraints in the model.-->
+			<ConstraintSet name="">
+				<objects/>
+				<groups/>
+			</ConstraintSet>
+			<!--Markers in the model.-->
+			<MarkerSet name="">
+				<objects/>
+				<groups/>
+			</MarkerSet>
+		</SimbodyEngine>
+	</DynamicsEngine>
+</Model>
+</OpenSimDocument>
