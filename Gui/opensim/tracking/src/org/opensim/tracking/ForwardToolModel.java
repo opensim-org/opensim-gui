@@ -32,13 +32,7 @@ import org.netbeans.api.progress.ProgressHandleFactory;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.openide.util.Cancellable;
-import org.opensim.modeling.Analysis;
-import org.opensim.modeling.ForwardTool;
-import org.opensim.modeling.InterruptCallback;
-import org.opensim.modeling.Kinematics;
-import org.opensim.modeling.Model;
-import org.opensim.modeling.OpenSimContext;
-import org.opensim.modeling.Storage;
+import org.opensim.modeling.*;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.swingui.SwingWorker;
 import org.opensim.utils.ErrorDialog;
@@ -47,6 +41,7 @@ import org.opensim.view.motions.JavaMotionDisplayerCallback;
 import org.opensim.view.pub.OpenSimDB;
 
 public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
+
    //========================================================================
    // ForwardToolWorker
    //========================================================================
@@ -190,7 +185,9 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
    //========================================================================
 
    private Storage motion = null;
-
+   private double [] controlTimeRange = {Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY };
+   private double [] statesTimeRange = {Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY };
+   
    public ForwardToolModel(Model model) throws IOException {
       super(model);
 
@@ -210,6 +207,17 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
       forwardTool().setName(model.getName());
 
       setDefaultResultsDirectory(model);
+
+   }
+
+   private void updateToolTimeRange() {
+       
+       double timeRange[] = getTimeRange(controlTimeRange, statesTimeRange);
+       
+       forwardTool().setStartTime(timeRange[0]);     
+       forwardTool().setFinalTime(timeRange[1]);
+       
+       setModified(AbstractToolModel.Operation.TimeRangeChanged);
    }
 
    ForwardTool forwardTool() { return (ForwardTool)tool; }
@@ -228,6 +236,41 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
       }
    }
 
+   private void updateControlTimeRange(double startTime, double endTime) {
+       controlTimeRange[0] = startTime;
+       controlTimeRange[1] = endTime;
+       updateToolTimeRange();
+   }
+   
+   private void updateStatesTimeRange(double startTime, double endTime) {
+       statesTimeRange[0] = startTime;
+       statesTimeRange[1] = endTime;
+       updateToolTimeRange();
+   }
+    
+   /**
+    * Calculating the time range for FD from control and states files
+    * @param controlTimeRange
+    * @param statesTimeRange
+    * @return 
+    */
+   private double[] getTimeRange(double[] controlTimeRange, double[] statesTimeRange) {
+       
+       // Default time range;
+       double timeRange[] = {0, 1}; 
+       
+       if(controlTimeRange[0] == Double.NEGATIVE_INFINITY 
+               && controlTimeRange[1] == Double.NEGATIVE_INFINITY ) {
+           
+           timeRange[0] = (statesTimeRange[0] > Double.NEGATIVE_INFINITY ) ? statesTimeRange[0] : 0;
+           timeRange[1] = (statesTimeRange[0] > Double.NEGATIVE_INFINITY ) ? statesTimeRange[0] + 1 : 1;
+       } else {
+           timeRange[0] = controlTimeRange[0];
+           timeRange[1] = controlTimeRange[1];
+       }
+        
+       return timeRange;
+   }
    //------------------------------------------------------------------------
    // Get/Set Values
    //------------------------------------------------------------------------
@@ -237,6 +280,29 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
       if(!getControlsFileName().equals(fileName)) {
          forwardTool().setControlsFileName(fileName);
          setModified(AbstractToolModel.Operation.InputDataChanged);
+        
+         double startTime = 0, endTime = 1;
+         if(fileName.endsWith(".xml")){
+             
+            ControlSet set = new ControlSet(fileName);
+            if(set.getSize() > 0) {
+            	Control c = set.get(0);
+                if(c != null) {
+                    ControlLinear cl = ControlLinear.safeDownCast(c);
+                    startTime = cl.getFirstTime();
+                    endTime = cl.getLastTime();
+                }
+            }
+         } else if (fileName.endsWith(".sto")) {
+            try {
+                Storage s = new Storage(fileName);
+                startTime = s.getFirstTime();
+                endTime = s.getLastTime();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+         }
+         updateControlTimeRange(startTime, endTime);
       }
    }
    public boolean getControlsValid() { 
@@ -249,6 +315,12 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
       if(!getInitialStatesFileName().equals(fileName)) {
          forwardTool().setStatesFileName(fileName);
          setModified(AbstractToolModel.Operation.InputDataChanged);
+         try {
+            Storage s = new Storage(fileName);
+            updateStatesTimeRange(s.getFirstTime(), s.getLastTime());
+         } catch (IOException ex) {
+             ex.printStackTrace();
+         }
       }
    }
    public boolean getInitialStatesValid() { return true; }//(new File(getInitialStatesFileName()).exists()); }
