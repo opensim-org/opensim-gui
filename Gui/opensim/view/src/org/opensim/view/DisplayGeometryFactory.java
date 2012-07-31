@@ -43,7 +43,6 @@ public class DisplayGeometryFactory {
         int numGeometryPieces = visibleObject.countGeometry();
         //assert(numGeometryPieces<= 1);
         if (numGeometryPieces>0) {
-        System.out.println("Number of GeometryPieces="+numGeometryPieces);
         for(int gc=0; gc< numGeometryPieces; gc++){
             Geometry g = visibleObject.getGeometry(gc);
             AnalyticGeometry ag=null;
