@@ -119,10 +119,10 @@ public class MotionsDB extends Observable // Observed by other entities in motio
          return;
       }
       saveStorageFileName(storage, fileName);
-      final Storage newMotion = storage;
-      Model currentModel = OpenSimDB.getInstance().getCurrentModel();
-      AnalyzeTool.fixMuscleStatesToValidRange(newMotion, currentModel);
-      loadMotionStorage(newMotion, primary);
+      //final Storage newMotion = storage;
+      //Model currentModel = OpenSimDB.getInstance().getCurrentModel();
+      //AnalyzeTool.fixMuscleStatesToValidRange(newMotion, currentModel);
+      loadMotionStorage(storage, primary);
    }
    
    public void loadMotionStorage(Storage newMotion, boolean primary)
