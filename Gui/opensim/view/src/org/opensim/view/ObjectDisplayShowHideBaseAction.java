@@ -37,6 +37,7 @@ import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.nodes.ConcreteModelNode;
 import org.opensim.view.nodes.OneWrapObjectNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
+import org.opensim.view.nodes.PropertyEditorAdaptor;
 import org.opensim.view.pub.ViewDB;
 
 public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemAction {
@@ -107,8 +108,15 @@ public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemActi
         }
         //else
         OpenSimObject obj = objectNode.getOpenSimObject();
-        ViewDB.getInstance().toggleObjectsDisplay(obj, show);
-        objectNode.refreshNode();
+        boolean hasPreferenceProperty = obj.hasProperty("display_preference");
+        if (hasPreferenceProperty){
+            PropertyEditorAdaptor pea = new PropertyEditorAdaptor("display_preference", objectNode);
+            pea.setValueInt(show?4:0);
+        }
+        else {
+            ViewDB.getInstance().toggleObjectsDisplay(obj, show);
+            objectNode.refreshNode();
+        }
     }
     
     //-------------------------------------------------------------------------

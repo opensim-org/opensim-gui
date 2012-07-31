@@ -203,15 +203,18 @@ public class DisplayGeometryDisplayer extends vtkActor
                 SetVisibility(0);
                 break;
             case 1:
+                SetVisibility(1);
                 GetProperty().SetRepresentationToWireframe();
                 break;
             case 2:
             case 3:
+                SetVisibility(1);
                 GetProperty().SetRepresentationToSurface();
                 GetProperty().SetInterpolationToFlat();
                 break;
             case 4:
             default:
+                SetVisibility(1);
                 GetProperty().SetRepresentationToSurface();
                 GetProperty().SetInterpolationToGouraud();
         }

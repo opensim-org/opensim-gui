@@ -38,6 +38,7 @@ import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.nodes.OneBodyNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
+import org.opensim.view.nodes.PropertyEditorAdaptor;
 import org.opensim.view.pub.ViewDB;
 
 public final class ObjectDisplayColorAction extends CallableSystemAction {
@@ -51,63 +52,69 @@ public final class ObjectDisplayColorAction extends CallableSystemAction {
     }
    
     //--------------------------------------------------------------------------
-    public static void  ChangeUserSelectedNodesColor( Color newColor ) 
-    {
+    public static void ChangeUserSelectedNodesColor(Color newColor) {
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
-        for( int i=0; i < selected.length; i++ ) {
-            if( !(selected[i] instanceof OpenSimObjectNode) )  continue;
+        for (int i = 0; i < selected.length; i++) {
+            if (!(selected[i] instanceof OpenSimObjectNode)) {
+                continue;
+            }
             OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[i];
-            ObjectDisplayColorAction.ChangeUserSelectedNodeColor( objectNode, newColor, false );
+            ObjectDisplayColorAction.ChangeUserSelectedNodeColor(objectNode, newColor, false);
         }
         ViewDB.getInstance().repaintAll();
     }
-    
-    //--------------------------------------------------------------------------
-    public static void  ChangeUserSelectedNodeColor( OpenSimObjectNode objectNode, Color newColor, boolean repaintViewDB ) 
-    {
-        if( objectNode==null || newColor==null ) return;
-        float[]  newColorComponentsAsFloatArray = newColor.getRGBComponents( null );
-        double[] newColorComponentsAsDoubleArray = { newColorComponentsAsFloatArray[0], newColorComponentsAsFloatArray[1], newColorComponentsAsFloatArray[2] };
-        ObjectDisplayColorAction.applyOperationToNode( objectNode, newColorComponentsAsDoubleArray );
-        if( repaintViewDB ) ViewDB.getInstance().repaintAll();
-   } 
 
     //--------------------------------------------------------------------------
-    private static void applyOperationToNode( final OpenSimObjectNode objectNode, double[] newColorComponents ) {
-        OpenSimObject obj = objectNode.getOpenSimObject();
-        Children ch = objectNode.getChildren();
-        if( ch.getNodesCount() > 0  &&  !(objectNode instanceof OneBodyNode) ) {
-            // apply action recursively
-            Node[] childNodes = ch.getNodes();
-            for( int child = 0; child < childNodes.length; child++ ) {
-                if( !(childNodes[child] instanceof OpenSimObjectNode) ) continue;
-                OpenSimObjectNode childNode = (OpenSimObjectNode) childNodes[child];
-                ObjectDisplayColorAction.applyOperationToNode( childNode, newColorComponents );
-                childNode.refreshNode();
-
-            }
+    public static void ChangeUserSelectedNodeColor(OpenSimObjectNode objectNode, Color newColor, boolean repaintViewDB) {
+        if (objectNode == null || newColor == null) {
+            return;
         }
-        else {
-            /* The following is cleaner and more maintainable but fails for objects that don't have "color" as property
-             *     new PropertyEditorAdaptor("color", objectNode).setValueDoubleListFromColor(new Color((float)newColorComponents[0], 
-                        (float)newColorComponents[1], (float)newColorComponents[2]));
-        
-             */
-            ViewDB.getInstance().setObjectColor( obj, newColorComponents );
-            objectNode.refreshNode();
-            if( objectNode instanceof ColorableInterface )
-                ((ColorableInterface)objectNode).setColor(new Color((float)newColorComponents[0], 
-                        (float)newColorComponents[1], (float)newColorComponents[2]));
-        }
-        
-        // If objectNode is OneBodyNode, do not change color of center of mass.
-        if( objectNode instanceof OneBodyNode )
-        {
-           BodyDisplayer rep = BodyToggleFrameAction.GetBodyDisplayerForBody( obj );  
-           rep.SetCMSphereColorToGreen();
+        float[] newColorComponentsAsFloatArray = newColor.getRGBComponents(null);
+        double[] newColorComponentsAsDoubleArray = {newColorComponentsAsFloatArray[0], newColorComponentsAsFloatArray[1], newColorComponentsAsFloatArray[2]};
+        ObjectDisplayColorAction.applyOperationToNode(objectNode, newColorComponentsAsDoubleArray);
+        if (repaintViewDB) {
+            ViewDB.getInstance().repaintAll();
         }
     }
-    
+
+    //--------------------------------------------------------------------------
+    private static void applyOperationToNode(final OpenSimObjectNode objectNode, double[] newColorComponents) {
+        OpenSimObject obj = objectNode.getOpenSimObject();
+        Children ch = objectNode.getChildren();
+        if (ch.getNodesCount() > 0 && !(objectNode instanceof OneBodyNode)) {
+            // apply action recursively
+            Node[] childNodes = ch.getNodes();
+            for (int child = 0; child < childNodes.length; child++) {
+                if (!(childNodes[child] instanceof OpenSimObjectNode)) {
+                    continue;
+                }
+                OpenSimObjectNode childNode = (OpenSimObjectNode) childNodes[child];
+                ObjectDisplayColorAction.applyOperationToNode(childNode, newColorComponents);
+            }
+        } else {
+            /*
+             * The following is cleaner and more maintainable but fails for
+             * objects that don't have "color" as property
+             */
+            boolean hasColorProperty = obj.hasProperty("color");
+            if (hasColorProperty) {
+                PropertyEditorAdaptor pea = new PropertyEditorAdaptor("color", objectNode);
+                Color newColor = new Color((float) newColorComponents[0],
+                        (float) newColorComponents[1], (float) newColorComponents[2]);
+                pea.setValueDoubleListFromColor(newColor);
+            } else {
+
+                ViewDB.getInstance().setObjectColor(obj, newColorComponents);
+            }
+            objectNode.refreshNode();
+        }
+        // If objectNode is OneBodyNode, do not change color of center of mass.
+        if (objectNode instanceof OneBodyNode) {
+            BodyDisplayer rep = BodyToggleFrameAction.GetBodyDisplayerForBody(obj);
+            rep.SetCMSphereColorToGreen();
+        }
+    }
+
     // Make it available only if selected objects have representation and belong to same model
     public boolean isEnabled() {
        // The "hide" option is enabled unless every selected node is hidden.

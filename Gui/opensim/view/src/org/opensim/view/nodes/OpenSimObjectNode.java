@@ -47,6 +47,7 @@ import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Function;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.PropertyHelper;
 
 /**
  *
@@ -232,12 +233,26 @@ public class OpenSimObjectNode extends OpenSimNode {
          if( getValidDisplayOptions().isEmpty() ) return null;  // Nothing to show or hide.
         
          OpenSimObject obj = getOpenSimObject();
-         int currentStatus = ViewDB.getInstance().getDisplayStatus( obj );
+         
+         int currentStatus = 0;
+         if (obj.hasProperty("display_preference")){
+             int pref = PropertyHelper.getValueInt(obj.getPropertyByName("display_preference"));
+             // 0 hidden
+             // 1 wireframe
+             // 3 flat
+             // 4 surface
+             if (pref==0) 
+                 currentStatus=0; 
+             else 
+                 currentStatus=1;
+         }
+         else
+             currentStatus = ViewDB.getInstance().getDisplayStatus( obj );
          try {
             if( currentStatus == 0 ) {   // 0 for hidden
                return ((ObjectDisplayShowAction)ObjectDisplayShowAction.findObject( (Class)Class.forName("org.opensim.view.ObjectDisplayShowAction"), true));
             }
-            else if( currentStatus==1 || currentStatus==2 ) { // 2 for mixed, some shown some hidden, pick show
+            else  { // 2 for mixed, some shown some hidden, hide all now
                return ((ObjectDisplayHideAction) ObjectDisplayHideAction.findObject( (Class)Class.forName("org.opensim.view.ObjectDisplayHideAction"), true));
             }
          } catch( ClassNotFoundException ex ) {

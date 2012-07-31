@@ -45,20 +45,9 @@ import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import org.openide.awt.StatusDisplayer;
 import org.openide.util.NbBundle;
-import org.opensim.modeling.Actuator;
-import org.opensim.modeling.DisplayGeometry;
-import org.opensim.modeling.Marker;
-import org.opensim.modeling.Muscle;
-import org.opensim.modeling.ArrayObjPtr;
-import org.opensim.modeling.Body;
-import org.opensim.modeling.Model;
+import org.opensim.modeling.*;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
-import org.opensim.modeling.ObjectGroup;
-import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.PathPoint;
-import org.opensim.modeling.VisibleObject;
 import org.opensim.modeling.DisplayGeometry.DisplayPreference;
-import org.opensim.modeling.Force;
 import org.opensim.utils.Prefs;
 import org.opensim.utils.TheApp;
 import org.opensim.view.*;
@@ -74,7 +63,6 @@ import vtk.vtkCamera;
 import vtk.vtkCaptionActor2D;
 import vtk.vtkFollower;
 import vtk.vtkMatrix4x4;
-import vtk.vtkOutlineFilter;
 import vtk.vtkPolyDataMapper;
 import vtk.vtkProp3D;
 import vtk.vtkProp3DCollection;
@@ -82,7 +70,6 @@ import vtk.vtkProperty;
 import vtk.vtkTextActor;
 import vtk.vtkTextProperty;
 import vtk.vtkTransform;
-import vtk.vtkTransformPolyDataFilter;
 import vtk.vtkVectorText;
 
 /**
@@ -1283,13 +1270,17 @@ public final class ViewDB extends Observable implements Observer {
             return 1;
       } else {
          VisibleObject vo = openSimObject.getDisplayer();
-         if (vo != null) {
+         if (openSimObject.hasProperty("display_preference")){
+             int pref = PropertyHelper.getValueInt(openSimObject.getPropertyByName("display_preference"));
+             // 0 hidden){
+             if (pref!= 0)
+                visible = 1;
+             else
+                 visible = 0;
+         }
+         else if (vo != null) {
             DisplayPreference dp = vo.getDisplayPreference();
             if (dp != DisplayPreference.None)
-               visible = 1;
-         }
-         else if (openSimObject instanceof DisplayGeometry){
-             if (((DisplayGeometry)openSimObject).getDisplayPreference() != DisplayPreference.None)
                visible = 1;
          }
       }
@@ -1807,7 +1798,7 @@ public final class ViewDB extends Observable implements Observer {
            // Forces now
            if (obj instanceof Force){
                Force f = Force.safeDownCast(obj);
-               boolean newState = OpenSimDB.getInstance().getContext(f.getModel()).isDisabled(f);
+               boolean newState = f.get_isDisabled();
                if (f instanceof Muscle) {
                    Muscle m = Muscle.safeDownCast(f);
                    if (!newState){

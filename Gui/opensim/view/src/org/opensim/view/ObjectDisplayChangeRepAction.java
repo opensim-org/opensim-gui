@@ -30,6 +30,7 @@ import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.view.nodes.OpenSimObjectNode;
+import org.opensim.view.nodes.PropertyEditorAdaptor;
 import org.opensim.view.pub.ViewDB;
 
 public class ObjectDisplayChangeRepAction extends CallableSystemAction {
@@ -57,11 +58,18 @@ public class ObjectDisplayChangeRepAction extends CallableSystemAction {
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         for(int i=0; i < selected.length; i++){
             OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[i];
-            ViewDB.getInstance().setObjectRepresentation(objectNode.getOpenSimObject(), newRep, newShading);
-            objectNode.refreshNode();
-
-         }        
-    }
+            boolean hasPreferenceProperty = objectNode.getOpenSimObject().hasProperty("display_preference");
+            if (hasPreferenceProperty){
+                PropertyEditorAdaptor pea = new PropertyEditorAdaptor("display_preference", objectNode);
+                int newValue  = mapRepAndShadingToPref(newRep, newShading);
+                pea.setValueInt(newValue);
+            }
+            else {
+                ViewDB.getInstance().setObjectRepresentation(objectNode.getOpenSimObject(), newRep, newShading);
+                objectNode.refreshNode();
+            }
+        }
+   }
   
     public String getName() {
         return "unused";
@@ -79,6 +87,15 @@ public class ObjectDisplayChangeRepAction extends CallableSystemAction {
     
     protected boolean asynchronous() {
         return false;
+    }
+
+    private int mapRepAndShadingToPref(int newRep, int newShading) {
+        if (newRep==1) return 1;    // Wireframe
+        if (newRep==2){
+           if (newShading==0) return 3;    // flat
+           if (newShading==1 || newShading==2) return 4;    // flat
+         }
+        return 4;
     }
     
 }
