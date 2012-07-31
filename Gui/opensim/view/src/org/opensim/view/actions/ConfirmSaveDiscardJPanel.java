@@ -19,11 +19,11 @@ import org.opensim.view.pub.OpenSimDB.CloseModelDefaultAction;
  */
 public class ConfirmSaveDiscardJPanel extends javax.swing.JPanel {
 
+    boolean rememberChoice = false;
     /** Creates new form ConfirmSaveDiscardJPanel */
-    public ConfirmSaveDiscardJPanel(String custom) {
+    public ConfirmSaveDiscardJPanel(boolean firstOfMany) {
         initComponents();
-        jLabelModelOrMotion.setText(custom);
-        setDefaultActionButtonGroup();
+        remeberDecisionCheckBox.setEnabled(firstOfMany);
     }
 
     /** This method is called from within the constructor to
@@ -35,64 +35,18 @@ public class ConfirmSaveDiscardJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        saveActionButtonGroup = new javax.swing.ButtonGroup();
-        jLabelModelOrMotion = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        alwaysSaveRadioButton = new javax.swing.JRadioButton();
-        alwaysDiscardRadioButton = new javax.swing.JRadioButton();
-        alwaysPromptRadioButton = new javax.swing.JRadioButton();
-        jLabel2 = new javax.swing.JLabel();
-
-        jLabelModelOrMotion.setText(org.openide.util.NbBundle.getMessage(ConfirmSaveDiscardJPanel.class, "ConfirmSaveDiscardJPanel.jLabelModelOrMotion.text")); // NOI18N
-        jLabelModelOrMotion.setToolTipText(org.openide.util.NbBundle.getMessage(ConfirmSaveDiscardJPanel.class, "ConfirmSaveDiscardJPanel.jLabelModelOrMotion.toolTipText")); // NOI18N
+        remeberDecisionCheckBox = new javax.swing.JCheckBox();
 
         jLabel1.setText(org.openide.util.NbBundle.getMessage(ConfirmSaveDiscardJPanel.class, "ConfirmSaveDiscardJPanel.jLabel1.text")); // NOI18N
 
-        saveActionButtonGroup.add(alwaysSaveRadioButton);
-        alwaysSaveRadioButton.setText(org.openide.util.NbBundle.getMessage(ConfirmSaveDiscardJPanel.class, "ConfirmSaveDiscardJPanel.alwaysSaveRadioButton.text")); // NOI18N
-        alwaysSaveRadioButton.setActionCommand(org.openide.util.NbBundle.getMessage(ConfirmSaveDiscardJPanel.class, "ConfirmSaveDiscardJPanel.alwaysSaveRadioButton.actionCommand")); // NOI18N
-        alwaysSaveRadioButton.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                alwaysSaveRadioButtonItemStateChanged(evt);
-            }
-        });
-        alwaysSaveRadioButton.addActionListener(new java.awt.event.ActionListener() {
+        remeberDecisionCheckBox.setText(org.openide.util.NbBundle.getMessage(ConfirmSaveDiscardJPanel.class, "ConfirmSaveDiscardJPanel.remeberDecisionCheckBox.text")); // NOI18N
+        remeberDecisionCheckBox.setEnabled(false);
+        remeberDecisionCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                alwaysSaveRadioButtonActionPerformed(evt);
+                applyToRemainingFiles(evt);
             }
         });
-
-        saveActionButtonGroup.add(alwaysDiscardRadioButton);
-        alwaysDiscardRadioButton.setText(org.openide.util.NbBundle.getMessage(ConfirmSaveDiscardJPanel.class, "ConfirmSaveDiscardJPanel.text")); // NOI18N
-        alwaysDiscardRadioButton.setActionCommand(org.openide.util.NbBundle.getMessage(ConfirmSaveDiscardJPanel.class, "ConfirmSaveDiscardJPanel.actionCommand")); // NOI18N
-        alwaysDiscardRadioButton.setName(""); // NOI18N
-        alwaysDiscardRadioButton.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                alwaysDiscardRadioButtonItemStateChanged(evt);
-            }
-        });
-        alwaysDiscardRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                alwaysDiscardRadioButtonActionPerformed(evt);
-            }
-        });
-
-        saveActionButtonGroup.add(alwaysPromptRadioButton);
-        alwaysPromptRadioButton.setSelected(true);
-        alwaysPromptRadioButton.setText(org.openide.util.NbBundle.getMessage(ConfirmSaveDiscardJPanel.class, "ConfirmSaveDiscardJPanel.alwaysPromptRadioButton.text")); // NOI18N
-        alwaysPromptRadioButton.setActionCommand(org.openide.util.NbBundle.getMessage(ConfirmSaveDiscardJPanel.class, "ConfirmSaveDiscardJPanel.alwaysPromptRadioButton.actionCommand")); // NOI18N
-        alwaysPromptRadioButton.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                alwaysPromptRadioButtonItemStateChanged(evt);
-            }
-        });
-        alwaysPromptRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                alwaysPromptRadioButtonActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText(org.openide.util.NbBundle.getMessage(ConfirmSaveDiscardJPanel.class, "ConfirmSaveDiscardJPanel.jLabel2.text")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -101,83 +55,33 @@ public class ConfirmSaveDiscardJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelModelOrMotion, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(alwaysDiscardRadioButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(alwaysSaveRadioButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(alwaysPromptRadioButton)))))
-                .addContainerGap(21, Short.MAX_VALUE))
+                    .addComponent(remeberDecisionCheckBox)
+                    .addComponent(jLabel1))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabelModelOrMotion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(alwaysDiscardRadioButton)
-                    .addComponent(alwaysSaveRadioButton)
-                    .addComponent(alwaysPromptRadioButton))
-                .addGap(5, 5, 5)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(remeberDecisionCheckBox)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void alwaysDiscardRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_alwaysDiscardRadioButtonItemStateChanged
+    private void applyToRemainingFiles(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyToRemainingFiles
         // TODO add your handling code here:
-    }//GEN-LAST:event_alwaysDiscardRadioButtonItemStateChanged
-
-    private void alwaysSaveRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_alwaysSaveRadioButtonItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_alwaysSaveRadioButtonItemStateChanged
-
-    private void alwaysPromptRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_alwaysPromptRadioButtonItemStateChanged
-       // TODO add your handling code here:
-    }//GEN-LAST:event_alwaysPromptRadioButtonItemStateChanged
-
-    private void alwaysDiscardRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alwaysDiscardRadioButtonActionPerformed
-        // TODO add your handling code here:
-        OpenSimDB.setCurrentCloseModelDefaultAction(CloseModelDefaultAction.DISCARD);
-    }//GEN-LAST:event_alwaysDiscardRadioButtonActionPerformed
-
-    private void alwaysSaveRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alwaysSaveRadioButtonActionPerformed
-        OpenSimDB.setCurrentCloseModelDefaultAction(CloseModelDefaultAction.SAVE);
-        // TODO add your handling code here:
-    }//GEN-LAST:event_alwaysSaveRadioButtonActionPerformed
-
-    private void alwaysPromptRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alwaysPromptRadioButtonActionPerformed
-        OpenSimDB.setCurrentCloseModelDefaultAction(CloseModelDefaultAction.PROMPT);
-        // TODO add your handling code here:
-    }//GEN-LAST:event_alwaysPromptRadioButtonActionPerformed
+        rememberChoice = remeberDecisionCheckBox.isSelected();
+    }//GEN-LAST:event_applyToRemainingFiles
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton alwaysDiscardRadioButton;
-    private javax.swing.JRadioButton alwaysPromptRadioButton;
-    private javax.swing.JRadioButton alwaysSaveRadioButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabelModelOrMotion;
-    private javax.swing.ButtonGroup saveActionButtonGroup;
+    private javax.swing.JCheckBox remeberDecisionCheckBox;
     // End of variables declaration//GEN-END:variables
 
-    private void setDefaultActionButtonGroup() {
-      OpenSimDB.CloseModelDefaultAction closeModelDefaultAction = OpenSimDB.getCurrentCloseModelDefaultAction();
-       if (closeModelDefaultAction == CloseModelDefaultAction.SAVE)
-            alwaysSaveRadioButton.setSelected(true);
-        else if (closeModelDefaultAction == CloseModelDefaultAction.DISCARD)
-            alwaysDiscardRadioButton.setSelected(true);
-        else
-            alwaysPromptRadioButton.setSelected(true);
+    boolean rememberUserChoice() {
+        return rememberChoice;
     }
+
 }

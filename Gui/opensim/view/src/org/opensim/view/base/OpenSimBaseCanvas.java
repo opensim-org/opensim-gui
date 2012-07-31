@@ -395,10 +395,7 @@ public class OpenSimBaseCanvas extends vtkPanel
         logoActor.SetWidth(0.05);
         logoActor.SetHeight(0.05);
         vtkPNGReader imageReader=new vtkPNGReader();
-        Map<String, String> env = System.getenv();
-        String installDir = env.get("OPENSIM_HOME");
-        if (installDir==null) return;
-        String fullFileName = installDir+File.separatorChar+"Geometry"+File.separatorChar+"OpenSimLogoSmall.PNG";
+        String fullFileName= TheApp.getApplicationLogoFileName();
         if (fullFileName==null) return;
         imageReader.SetFileName(fullFileName);
         imageReader.UpdateWholeExtent();

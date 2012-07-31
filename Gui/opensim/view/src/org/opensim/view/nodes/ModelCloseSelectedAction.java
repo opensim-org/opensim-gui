@@ -8,6 +8,7 @@ import org.openide.util.actions.CallableSystemAction;
 import org.opensim.modeling.Model;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.actions.FileCloseAction;
+import org.opensim.view.pub.OpenSimDB;
 
 public final class ModelCloseSelectedAction extends CallableSystemAction {
    
@@ -23,9 +24,11 @@ public final class ModelCloseSelectedAction extends CallableSystemAction {
                 modelsToClose.add(mdl);
             }
         }
-        for(int i=0; i<modelsToClose.size(); i++){
+        OpenSimDB.setCurrentCloseModelDefaultAction(OpenSimDB.CloseModelDefaultAction.PROMPT);
+        boolean proceedWithClosing=true;
+        for(int i=0; i<modelsToClose.size() && proceedWithClosing; i++){
             // Piggyback on common code in FileCloseAction
-            FileCloseAction.closeModel(modelsToClose.get(i));
+            proceedWithClosing = FileCloseAction.closeModel(modelsToClose.get(i), i==0 && modelsToClose.size()>1);
         }
     }
    

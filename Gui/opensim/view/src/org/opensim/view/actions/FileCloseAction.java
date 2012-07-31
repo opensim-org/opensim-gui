@@ -25,8 +25,10 @@
  */
 package org.opensim.view.actions;
 
+import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JFrame;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
@@ -34,6 +36,7 @@ import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.modeling.Model;
+import org.opensim.utils.DialogUtils;
 import org.opensim.view.FileSaveModelAction;
 import org.opensim.view.SingleModelGuiElements;
 import org.opensim.view.pub.OpenSimDB;
@@ -48,35 +51,40 @@ public final class FileCloseAction extends CallableSystemAction {
  * the close. If the model is not closed, return false.
  */
 public static boolean closeModel(Model model) {
-   if(model==null) return true;
-
-
-   SingleModelGuiElements guiElem = ViewDB.getInstance().getModelGuiElements(model);
    
-   // Do not allow the model to be closed if it is locked.
-   if (guiElem != null && guiElem.isLocked()) {
-      NotifyDescriptor dlg = new NotifyDescriptor.Message(model.getName() + " is currently in use by " +
-              guiElem.getLockOwner() + " and cannot be closed.", NotifyDescriptor.INFORMATION_MESSAGE);
-      DialogDisplayer.getDefault().notify(dlg);
-      return false;
-   }
-   
-   // Confirm closing
-   if (guiElem != null && guiElem.getUnsavedChangesFlag()) {
-      CloseModelDefaultAction curAction = OpenSimDB.getCurrentCloseModelDefaultAction();
-      if (curAction==CloseModelDefaultAction.PROMPT && saveAndConfirmClose(model) == false)
-         return false;
-      else if (curAction==CloseModelDefaultAction.SAVE)
-          FileSaveModelAction.saveOrSaveAsModel(model, false);
-   }
-   OpenSimDB.getInstance().removeModel(model);
-   
-   return true;
+   return closeModel(model, false);
 }
 
-   private static boolean saveAndConfirmClose(final Model model)
+        public static boolean closeModel(Model model, boolean firstOfMany) {
+        if(model==null) return true;
+
+
+        SingleModelGuiElements guiElem = ViewDB.getInstance().getModelGuiElements(model);
+        
+        // Do not allow the model to be closed if it is locked.
+        if (guiElem != null && guiElem.isLocked()) {
+           NotifyDescriptor dlg = new NotifyDescriptor.Message(model.getName() + " is currently in use by " +
+                   guiElem.getLockOwner() + " and cannot be closed.", NotifyDescriptor.INFORMATION_MESSAGE);
+           DialogDisplayer.getDefault().notify(dlg);
+           return false;
+        }
+        
+        // Confirm closing
+        if (guiElem != null && guiElem.getUnsavedChangesFlag()) {
+           CloseModelDefaultAction curAction = OpenSimDB.getCurrentCloseModelDefaultAction();
+           if (curAction==CloseModelDefaultAction.PROMPT && saveAndConfirmClose(model, firstOfMany) == false)
+              return false;
+           else if (curAction==CloseModelDefaultAction.SAVE)
+               FileSaveModelAction.saveOrSaveAsModel(model, false);
+        }
+        OpenSimDB.getInstance().removeModel(model);
+        
+        return true;
+    }
+
+   private static boolean saveAndConfirmClose(final Model model, boolean firstOfMany)
    {
-       ConfirmSaveDiscardJPanel confirmPanel = new ConfirmSaveDiscardJPanel("model "+model.getName()+"?");
+       final ConfirmSaveDiscardJPanel confirmPanel = new ConfirmSaveDiscardJPanel(firstOfMany);
        DialogDescriptor confirmDialog = 
                     new DialogDescriptor(confirmPanel, 
                         "Confirm Save/Discard",
@@ -88,13 +96,24 @@ public static boolean closeModel(Model model) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String cmd = e.getActionCommand();
-                //System.out.println("cmd="+cmd);
-                if (cmd.equalsIgnoreCase("ok")) FileSaveModelAction.saveOrSaveAsModel(model, false);
-                
+                boolean remember = confirmPanel.rememberUserChoice();
+                if (remember){
+                    if (cmd.equalsIgnoreCase("ok")){
+                        OpenSimDB.setCurrentCloseModelDefaultAction(CloseModelDefaultAction.SAVE);
+                        FileSaveModelAction.saveOrSaveAsModel(model, false);
+                    }
+                    else if (cmd.equalsIgnoreCase("no")){
+                        OpenSimDB.setCurrentCloseModelDefaultAction(CloseModelDefaultAction.DISCARD);                       
+                    }
+                 }               
             }
         });
        DialogDisplayer.getDefault().createDialog(confirmDialog).setVisible(true);
-       return true;
+       Object dlgReturn = confirmDialog.getValue();
+       // We'll get here after user closes the dialog.
+       Integer dlgReturnAsInteger = ((Integer)dlgReturn).intValue();
+       return ( dlgReturnAsInteger != ((Integer)NotifyDescriptor.CANCEL_OPTION).intValue() &&
+               dlgReturnAsInteger != ((Integer)NotifyDescriptor.DEFAULT_OPTION).intValue());
        /*
        NotifyDescriptor dlg = new NotifyDescriptor.Confirmation("Do you want to save the changes to " + model.getName() + "?", "Save model?");
       Object userSelection = DialogDisplayer.getDefault().notify(dlg);
