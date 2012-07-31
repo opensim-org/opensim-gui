@@ -64,7 +64,9 @@ public class EditPreferencesJPanel extends javax.swing.JPanel {
        "MusclePoint Color",
        "WrapObjectColor",
        "WrapObject Color",
-       "ShowWrapObjects"
+       "ShowWrapObjects",
+       "DefaultCloseAction",
+       "Display Contact Geometry"
    };
    /** Creates new form EditPreferencesJPanel */
    public EditPreferencesJPanel() throws BackingStoreException {
