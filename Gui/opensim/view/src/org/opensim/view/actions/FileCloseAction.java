@@ -25,10 +25,9 @@
  */
 package org.opensim.view.actions;
 
-import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
+import javax.swing.JButton;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
@@ -36,7 +35,6 @@ import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.modeling.Model;
-import org.opensim.utils.DialogUtils;
 import org.opensim.view.FileSaveModelAction;
 import org.opensim.view.SingleModelGuiElements;
 import org.opensim.view.pub.OpenSimDB;
@@ -85,12 +83,13 @@ public static boolean closeModel(Model model) {
    private static boolean saveAndConfirmClose(final Model model, boolean firstOfMany)
    {
        final ConfirmSaveDiscardJPanel confirmPanel = new ConfirmSaveDiscardJPanel(firstOfMany);
+       JButton cancelButton = new JButton("Cancel");
        DialogDescriptor confirmDialog = 
                     new DialogDescriptor(confirmPanel, 
-                        "Confirm Save/Discard",
+                        "Confirm Save",
                         true,
-                        new Object[]{DialogDescriptor.OK_OPTION, DialogDescriptor.NO_OPTION, DialogDescriptor.CANCEL_OPTION},
-                        DialogDescriptor.CANCEL_OPTION,
+                        new Object[]{new JButton("Save"), new JButton("Discard"), cancelButton},
+                        cancelButton,
                         0, null, new ActionListener(){
 
             @Override
@@ -98,22 +97,22 @@ public static boolean closeModel(Model model) {
                 String cmd = e.getActionCommand();
                 boolean remember = confirmPanel.rememberUserChoice();
                 if (remember){
-                    if (cmd.equalsIgnoreCase("ok")){
+                    if (cmd.equalsIgnoreCase("Save")){
                         OpenSimDB.setCurrentCloseModelDefaultAction(CloseModelDefaultAction.SAVE);
                         FileSaveModelAction.saveOrSaveAsModel(model, false);
                     }
-                    else if (cmd.equalsIgnoreCase("no")){
+                    else if (cmd.equalsIgnoreCase("Discard")){
                         OpenSimDB.setCurrentCloseModelDefaultAction(CloseModelDefaultAction.DISCARD);                       
                     }
                  }               
             }
         });
+       confirmDialog.setClosingOptions(null);
        DialogDisplayer.getDefault().createDialog(confirmDialog).setVisible(true);
        Object dlgReturn = confirmDialog.getValue();
        // We'll get here after user closes the dialog.
-       Integer dlgReturnAsInteger = ((Integer)dlgReturn).intValue();
-       return ( dlgReturnAsInteger != ((Integer)NotifyDescriptor.CANCEL_OPTION).intValue() &&
-               dlgReturnAsInteger != ((Integer)NotifyDescriptor.DEFAULT_OPTION).intValue());
+       boolean closed = ((dlgReturn instanceof Integer) && (((Integer)dlgReturn).intValue()==-1));
+       return (!closed && ! cancelButton.equals(dlgReturn));
        /*
        NotifyDescriptor dlg = new NotifyDescriptor.Confirmation("Do you want to save the changes to " + model.getName() + "?", "Save model?");
       Object userSelection = DialogDisplayer.getDefault().notify(dlg);
