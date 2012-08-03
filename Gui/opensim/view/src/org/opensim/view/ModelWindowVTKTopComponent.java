@@ -513,6 +513,7 @@ public class ModelWindowVTKTopComponent extends TopComponent
                      String.valueOf(colorComponents[2]);
              Preferences.userNodeForPackage(TheApp.class).put("BackgroundColor", defaultBackgroundColor);
              synchronizeBackgroundColor();
+             dCanvas.updateLogoForBackgoundColor();
              dCanvas.repaint();
         }
     }//GEN-LAST:event_jBackgroundColorButtonActionPerformed

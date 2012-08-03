@@ -72,7 +72,8 @@ public class OpenSimBaseCanvas extends vtkPanel
 
    double currentTime = 0;
    Camera camera = null;
-   
+   vtkImageMapper logoMapper = new vtkImageMapper();
+
    // Enable opoups to display on top of heavy weight component/canvas
    static {
       JPopupMenu.setDefaultLightWeightPopupEnabled(false);
@@ -388,7 +389,6 @@ public class OpenSimBaseCanvas extends vtkPanel
 
     public void addLogo() {
         vtkActor2D logoActor = new vtkActor2D();
-        vtkImageMapper logoMapper = new vtkImageMapper();
         logoActor.SetMapper(logoMapper);
         logoActor.SetPickable(0);
         logoActor.SetDisplayPosition(10, 10);
@@ -403,10 +403,25 @@ public class OpenSimBaseCanvas extends vtkPanel
         int[] ext = imageReader.GetDataExtent();
         vtkImageData imageData = imageReader.GetOutput();
         logoMapper.SetInput(imageData);
-        //logoActor.SetLayerNumber(0);
-        //logoActor.GetProperty().SetOpacity(0.2);
-        //logoActor.SetProperty(null);
+        updateLogoForBackgoundColor();
+        // use 1000 for light bgnd, 
+        //System.out.println("Color Level = "+logoMapper.GetColorLevel());
         GetRenderer().AddActor2D(logoActor);
         //repaint();
    }
+    /**
+     * Compute what level 0-1000 to use 1000 works best on light background, 0 on dark
+     * @return 
+     */
+    private double computeColorLevelForBackgound() {
+        double[] bgnd = GetRenderer().GetBackground();
+        double avg = 0.0; 
+        for (int i=0; i<3; i++) avg += bgnd[i];
+        avg /= 3;
+        return (avg > 0.5? 1000:0);
+    }
+
+    public void updateLogoForBackgoundColor() {
+       logoMapper.SetColorLevel(computeColorLevelForBackgound());
+    }
  }
