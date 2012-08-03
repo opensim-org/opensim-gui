@@ -77,6 +77,7 @@ public class ToolsVersionUpgradeJPanel extends javax.swing.JPanel
      */
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
+
         jWriteDefaultsCheckBox = new javax.swing.JCheckBox();
         angleUnitsButtonGroup = new javax.swing.ButtonGroup();
         buttonGroup1 = new javax.swing.ButtonGroup();
@@ -99,6 +100,7 @@ public class ToolsVersionUpgradeJPanel extends javax.swing.JPanel
         });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Convert a model, storage, or setup file to the latest version"));
+
         jLabel3.setText("New file");
 
         newVersionfileTextFieldAndChooser.setToolTipText("location of .jnt file");
@@ -107,11 +109,21 @@ public class ToolsVersionUpgradeJPanel extends javax.swing.JPanel
                 newVersionfileTextFieldAndChooserStateChanged(evt);
             }
         });
+        newVersionfileTextFieldAndChooser.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                newVersionfileTextFieldAndChooserFocusLost(evt);
+            }
+        });
 
         oldVersionfileTextFieldAndChooser.setToolTipText("location of .jnt file");
         oldVersionfileTextFieldAndChooser.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 oldVersionfileTextFieldAndChooserStateChanged(evt);
+            }
+        });
+        oldVersionfileTextFieldAndChooser.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                oldVersionFocusLost(evt);
             }
         });
 
@@ -196,6 +208,18 @@ public class ToolsVersionUpgradeJPanel extends javax.swing.JPanel
       JCheckBox defaultsCheckbox = (JCheckBox)evt.getSource();
       writeDefaults = defaultsCheckbox.isSelected();
     }//GEN-LAST:event_jWriteDefaultsCheckBoxActionPerformed
+
+    private void newVersionfileTextFieldAndChooserFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_newVersionfileTextFieldAndChooserFocusLost
+        // TODO add your handling code here:
+       inputFileName = oldVersionfileTextFieldAndChooser.getFileName();
+       outputFileName = newVersionfileTextFieldAndChooser.getFileName();   
+    }//GEN-LAST:event_newVersionfileTextFieldAndChooserFocusLost
+
+    private void oldVersionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_oldVersionFocusLost
+       inputFileName = oldVersionfileTextFieldAndChooser.getFileName();
+       outputFileName = newVersionfileTextFieldAndChooser.getFileName();   
+        // TODO add your handling code here:
+    }//GEN-LAST:event_oldVersionFocusLost
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

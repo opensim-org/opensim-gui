@@ -115,6 +115,7 @@
           </Properties>
           <Events>
             <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="newVersionfileTextFieldAndChooserStateChanged"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="newVersionfileTextFieldAndChooserFocusLost"/>
           </Events>
         </Component>
         <Component class="org.opensim.swingui.FileTextFieldAndChooser" name="oldVersionfileTextFieldAndChooser">
@@ -123,6 +124,7 @@
           </Properties>
           <Events>
             <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="oldVersionfileTextFieldAndChooserStateChanged"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="oldVersionFocusLost"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
