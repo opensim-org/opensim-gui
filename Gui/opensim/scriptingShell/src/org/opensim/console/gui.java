@@ -7,6 +7,7 @@ import java.util.prefs.Preferences;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import org.openide.ErrorManager;
 import org.openide.cookies.InstanceCookie;
 import org.openide.filesystems.FileObject;
@@ -200,16 +201,29 @@ public final class gui {
      * 
      * @param obj 
      */
-    static public void selectObject(OpenSimObject obj){
-        ViewDB.getInstance().setSelectedObject(obj);
+    static public void selectObject(final OpenSimObject obj){
+        SwingUtilities.invokeLater(new Runnable(){
+
+            @Override
+            public void run() {
+                ViewDB.getInstance().setSelectedObject(obj);
+            }
+        });    
     }
     /**
      * setObjectColor marks the passed in object if it has a visual representation with passed in color
      * 
      * @param obj 
      */
-    static public void setObjectColor(OpenSimObject obj,  double[] colorComponents){
-        ViewDB.getInstance().setObjectColor(obj, colorComponents);
+    static public void setObjectColor(final OpenSimObject obj,  final double[] colorComponents){
+        SwingUtilities.invokeLater(new Runnable(){
+
+            @Override
+            public void run() {
+                ViewDB.getInstance().setObjectColor(obj, colorComponents);
+            }
+        });
+        
     }
     /**
      * Turn on/off the display of the passed in object according to the passed in flag
@@ -218,8 +232,14 @@ public final class gui {
      * @param obj
      * @param onOrOff 
      */
-    static public void toggleObjectDisplay(OpenSimObject obj,  boolean onOrOff){
-        ViewDB.getInstance().toggleObjectsDisplay(obj, onOrOff);
+    static public void toggleObjectDisplay(final OpenSimObject obj,  final boolean onOrOff){
+        SwingUtilities.invokeLater(new Runnable(){
+
+            @Override
+            public void run() {
+                ViewDB.getInstance().toggleObjectsDisplay(obj, onOrOff);
+            }
+        });
     }
     /**
      * Set the opacity of an object. Valid only for objects that allow that operation, 
@@ -229,15 +249,25 @@ public final class gui {
      * @param obj: The object to set the opacity of
      * @param newOpacity0To1 
      */
-    static public void setObjectOpacity(OpenSimObject obj, double newOpacity0To1) {
-        ViewDB.getInstance().setObjectOpacity(obj, newOpacity0To1);
+    static public void setObjectOpacity(final OpenSimObject obj, final double newOpacity0To1) {
+        SwingUtilities.invokeLater(new Runnable(){
+
+            @Override
+            public void run() {
+                ViewDB.getInstance().setObjectOpacity(obj, newOpacity0To1);
+            }});
     }
     /**
      * Perform operation in current graphics window equivalent to pressing c while the window has focus
      * @param char c 
      */
-    static public void gfxWindowSendKey(char c){
-        ViewDB.getCurrentModelWindow().processKey(c);
+    static public void gfxWindowSendKey(final char c){
+        SwingUtilities.invokeLater(new Runnable(){
+
+            @Override
+            public void run() {
+                ViewDB.getCurrentModelWindow().processKey(c);
+            }});
     }
     /**
      * Get the full name of the directory used as a root for the Scripts.
