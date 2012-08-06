@@ -42,7 +42,6 @@ testShowModelSummary.py:	 demonstrate displaying info about the model in a stand
 plotMuscleFiberLengthAgainstFile.py : demonstrates  opening a plot window, making curves and plotting data from files.
 makeUlnaHeavy.py	 : 	 demonstrates changing some attributes of Bodies( Ulna's mass in this example in Arm26 model)
 alterTendonSlackLength.py:    demonstrates changing some attributes of Muscles (tendonSlackLength in this example)
-#Experimental: testCreateAndLoadModel.py:  demonstrates building model from scratch including muscles and controller saving to a file then loading. 
 
 
 tips:
