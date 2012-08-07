@@ -5237,7 +5237,7 @@ public class opensimModelJNI {
   public final static native long new_Thelen2003Muscle__SWIG_0();
   public final static native long new_Thelen2003Muscle__SWIG_1(String jarg1, double jarg2, double jarg3, double jarg4, double jarg5);
   public final static native double Thelen2003Muscle_getActivationTimeConstant(long jarg1, Thelen2003Muscle jarg1_);
-  public final static native double Thelen2003Muscle_getActivationMinimumValue(long jarg1, Thelen2003Muscle jarg1_);
+  public final static native double Thelen2003Muscle_getMinimumActivation(long jarg1, Thelen2003Muscle jarg1_);
   public final static native double Thelen2003Muscle_getDeactivationTimeConstant(long jarg1, Thelen2003Muscle jarg1_);
   public final static native double Thelen2003Muscle_getFmaxTendonStrain(long jarg1, Thelen2003Muscle jarg1_);
   public final static native double Thelen2003Muscle_getFmaxMuscleStrain(long jarg1, Thelen2003Muscle jarg1_);
@@ -5246,9 +5246,11 @@ public class opensimModelJNI {
   public final static native double Thelen2003Muscle_getAf(long jarg1, Thelen2003Muscle jarg1_);
   public final static native double Thelen2003Muscle_getFlen(long jarg1, Thelen2003Muscle jarg1_);
   public final static native double Thelen2003Muscle_getForceVelocityExtrapolationThreshold(long jarg1, Thelen2003Muscle jarg1_);
+  public final static native double Thelen2003Muscle_getMinimumFiberLength(long jarg1, Thelen2003Muscle jarg1_);
+  public final static native double Thelen2003Muscle_getMaximumPennationAngle(long jarg1, Thelen2003Muscle jarg1_);
   public final static native boolean Thelen2003Muscle_setActivationTimeConstant(long jarg1, Thelen2003Muscle jarg1_, double jarg2);
-  public final static native boolean Thelen2003Muscle_setActivationMinimumValue(long jarg1, Thelen2003Muscle jarg1_, double jarg2);
   public final static native boolean Thelen2003Muscle_setDeactivationTimeConstant(long jarg1, Thelen2003Muscle jarg1_, double jarg2);
+  public final static native boolean Thelen2003Muscle_setMinimumActivation(long jarg1, Thelen2003Muscle jarg1_, double jarg2);
   public final static native boolean Thelen2003Muscle_setFmaxTendonStrain(long jarg1, Thelen2003Muscle jarg1_, double jarg2);
   public final static native boolean Thelen2003Muscle_setFmaxFiberStrain(long jarg1, Thelen2003Muscle jarg1_, double jarg2);
   public final static native boolean Thelen2003Muscle_setKshapeActive(long jarg1, Thelen2003Muscle jarg1_, double jarg2);
@@ -5256,6 +5258,7 @@ public class opensimModelJNI {
   public final static native boolean Thelen2003Muscle_setAf(long jarg1, Thelen2003Muscle jarg1_, double jarg2);
   public final static native boolean Thelen2003Muscle_setFlen(long jarg1, Thelen2003Muscle jarg1_, double jarg2);
   public final static native boolean Thelen2003Muscle_setForceVelocityExtrapolationThreshold(long jarg1, Thelen2003Muscle jarg1_, double jarg2);
+  public final static native boolean Thelen2003Muscle_setMaximumPennationAngle(long jarg1, Thelen2003Muscle jarg1_, double jarg2);
   public final static native long Thelen2003Muscle_getActivationModel(long jarg1, Thelen2003Muscle jarg1_);
   public final static native long Thelen2003Muscle_getPennationModel(long jarg1, Thelen2003Muscle jarg1_);
   public final static native double Thelen2003Muscle_computeActuation(long jarg1, Thelen2003Muscle jarg1_, long jarg2);

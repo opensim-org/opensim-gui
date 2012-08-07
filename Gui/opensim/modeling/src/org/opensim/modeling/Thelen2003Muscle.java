@@ -537,8 +537,8 @@ public class Thelen2003Muscle extends ActivationFiberLengthMuscle {
     return opensimModelJNI.Thelen2003Muscle_getActivationTimeConstant(swigCPtr, this);
   }
 
-  public double getActivationMinimumValue() {
-    return opensimModelJNI.Thelen2003Muscle_getActivationMinimumValue(swigCPtr, this);
+  public double getMinimumActivation() {
+    return opensimModelJNI.Thelen2003Muscle_getMinimumActivation(swigCPtr, this);
   }
 
   public double getDeactivationTimeConstant() {
@@ -573,16 +573,24 @@ public class Thelen2003Muscle extends ActivationFiberLengthMuscle {
     return opensimModelJNI.Thelen2003Muscle_getForceVelocityExtrapolationThreshold(swigCPtr, this);
   }
 
+  public double getMinimumFiberLength() {
+    return opensimModelJNI.Thelen2003Muscle_getMinimumFiberLength(swigCPtr, this);
+  }
+
+  public double getMaximumPennationAngle() {
+    return opensimModelJNI.Thelen2003Muscle_getMaximumPennationAngle(swigCPtr, this);
+  }
+
   public boolean setActivationTimeConstant(double aActivationTimeConstant) {
     return opensimModelJNI.Thelen2003Muscle_setActivationTimeConstant(swigCPtr, this, aActivationTimeConstant);
   }
 
-  public boolean setActivationMinimumValue(double aActivationMinValue) {
-    return opensimModelJNI.Thelen2003Muscle_setActivationMinimumValue(swigCPtr, this, aActivationMinValue);
-  }
-
   public boolean setDeactivationTimeConstant(double aDeactivationTimeConstant) {
     return opensimModelJNI.Thelen2003Muscle_setDeactivationTimeConstant(swigCPtr, this, aDeactivationTimeConstant);
+  }
+
+  public boolean setMinimumActivation(double aActivationMinValue) {
+    return opensimModelJNI.Thelen2003Muscle_setMinimumActivation(swigCPtr, this, aActivationMinValue);
   }
 
   public boolean setFmaxTendonStrain(double aFmaxTendonStrain) {
@@ -611,6 +619,10 @@ public class Thelen2003Muscle extends ActivationFiberLengthMuscle {
 
   public boolean setForceVelocityExtrapolationThreshold(double aFvThresh) {
     return opensimModelJNI.Thelen2003Muscle_setForceVelocityExtrapolationThreshold(swigCPtr, this, aFvThresh);
+  }
+
+  public boolean setMaximumPennationAngle(double maxPennationAngle) {
+    return opensimModelJNI.Thelen2003Muscle_setMaximumPennationAngle(swigCPtr, this, maxPennationAngle);
   }
 
   public SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel getActivationModel() {
