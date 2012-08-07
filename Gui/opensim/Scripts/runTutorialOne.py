@@ -47,7 +47,7 @@ setCurveLegend(crv2, "VASINT")
 
 # Plot the RF and VASINT fiber lengths with the model with the hip flexed to 45 deg
 hip_coord = myModel.getCoordinateSet().get("r_hip_flexion")
-setCoordinateValue(coord, 45)
+setCoordinateValueDegrees(hip_coord,45)
 crv3 = addAnalysisCurve(plotterPanel, "fiber-length", "RF", "r_knee_angle")
 setCurveLegend(crv3, "RF_hip45")
 crv4 = addAnalysisCurve(plotterPanel, "fiber-length", "VASINT", "r_knee_angle")

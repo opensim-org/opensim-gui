@@ -3,6 +3,7 @@ package org.opensim.console;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.prefs.Preferences;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -108,10 +109,28 @@ public final class gui {
      * @param coordinate
      * @param newValue 
      */
-    static public void setCoordinateValue(Coordinate coordinate, double newValue){
-        getModelState(coordinate.getModel()).setValue(coordinate, newValue);
-        ViewDB.getInstance().updateModelDisplay(coordinate.getModel());
-    }
+    static public void setCoordinateValue(final Coordinate coordinate, final double newValue){
+             SwingUtilities.invokeLater(new Runnable(){
+
+                @Override
+                public void run() {
+                    getModelState(coordinate.getModel()).setValue(coordinate, newValue);
+                    ViewDB.getInstance().updateModelDisplay(coordinate.getModel());
+                    MotionsDB.getInstance().reportTimeChange(0);
+                }
+            });
+     }
+    /**
+     * setCoordinateValue allows the user to set the value of the passed in Coordinate to the specified newValue
+     *  This call, also updates the Graphics window if needed.
+     * 
+     * @param coordinate
+     * @param newValue specified in degrees (rather than radians)
+     */
+    static public void setCoordinateValueDegrees(final Coordinate coordinate, final double newValue){
+        double valueInDegrees = newValue*Math.PI/180.;
+        setCoordinateValue(coordinate, valueInDegrees);
+     }
     /**
      * addModel creates a new OpenSim model from the passed in fileName and loads this model 
      * into the OpenSim application. This is equivalent to "File->Open Model..."
