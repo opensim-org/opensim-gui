@@ -30,18 +30,18 @@ package org.opensim.view.nodes;
 
 import java.awt.Image;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
-import javax.swing.Action;
 import javax.swing.ImageIcon;
 import org.openide.nodes.Children;
+import org.openide.nodes.Node;
+import org.openide.nodes.PropertySupport;
+import org.openide.nodes.Sheet;
+import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
-import org.opensim.modeling.Force;
-import org.opensim.modeling.OpenSimContext;
+import org.opensim.modeling.Marker;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.view.editors.MuscleEditorAction;
+import org.opensim.view.editors.BodyNameEditor;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
-import org.opensim.view.pub.OpenSimDB;
 
 /**
  *
@@ -72,6 +72,19 @@ public class OneMuscleNode extends OneForceNode {
     }
    public Image getOpenedIcon(int i) {
         return getIcon(i);
+    }
+    /** override createSheet to remove optimal_force property
+    * 
+    * @return 
+    */
+    @Override
+    public Sheet createSheet() {
+        Sheet sheet;
+
+        sheet = super.createSheet();
+        Sheet.Set set = sheet.get(Sheet.PROPERTIES);
+        set.remove("optimal_force");
+        return sheet;
     }
 
 }
