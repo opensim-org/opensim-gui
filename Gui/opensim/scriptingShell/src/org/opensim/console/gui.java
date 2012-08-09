@@ -290,7 +290,7 @@ public final class gui {
     }
     /**
      * Get the full name of the directory used as a root for the Scripts.
-     * @return 
+     * @return string that represents the path to the Scripts directory
      */
     static public String getScriptsDir()
     {
@@ -298,6 +298,15 @@ public final class gui {
         if (relativePath.equals(null)) return null;
         return new File(relativePath).getAbsolutePath();
     }
+    /**
+     * Get the full name of the directory used as a root for OpenSim installation.
+     * @return string that represents the path to the installation directory
+     */
+    static public String getInstallDir()
+    {
+        return TheApp.getInstallDir();
+    }
+    
     /**
      * Show Doxygen documentation for the passed in class name. Class name is not qualified with Name space
      * OpenSim name space is assumed.
