@@ -23,27 +23,43 @@
  *  OR BUSINESS INTERRUPTION) OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
  *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.opensim.view;
+package org.opensim.helputils.helpmenu;
 
-import java.awt.event.ActionEvent;
-import java.io.File;
-import javax.swing.AbstractAction;
-import org.opensim.utils.BrowserLauncher;
+import javax.swing.JButton;
+import org.openide.DialogDescriptor;
+import org.openide.DialogDisplayer;
+import org.openide.util.HelpCtx;
+import org.openide.util.NbBundle;
+import org.openide.util.actions.CallableSystemAction;
 
-
-/**
- * A Class that displays a passed in url
- */
-class BrowserPageDisplayerAction extends AbstractAction
-{
-    File dFile;
-    
-    public BrowserPageDisplayerAction(File localFile){
-        super(localFile.getName());
-        dFile=localFile;
-    }
-    public void actionPerformed(ActionEvent e) {
-        BrowserLauncher.openURL(dFile.getAbsolutePath());            
-    }
-    
+public final class AboutAction extends CallableSystemAction {
+   
+   public void performAction() {
+      // TODO implement action body
+      AboutJPanel helpPanel = new AboutJPanel();
+      DialogDescriptor helpDlgDescriptor = new DialogDescriptor(helpPanel, "About", true, null);
+      helpDlgDescriptor.setOptions(new Object[]{new JButton("Close")});     
+      DialogDisplayer.getDefault().createDialog(helpDlgDescriptor).setVisible(true);
+   }
+   
+   public String getName() {
+      return NbBundle.getMessage(AboutAction.class, "CTL_About");
+   }
+   
+   @Override
+   protected void initialize() {
+      super.initialize();
+      // see org.openide.util.actions.SystemAction.iconResource() javadoc for more details
+      putValue("noIconInMenu", Boolean.TRUE);
+   }
+   
+   public HelpCtx getHelpCtx() {
+      return HelpCtx.DEFAULT_HELP;
+   }
+   
+   @Override
+   protected boolean asynchronous() {
+      return false;
+   }
+   
 }

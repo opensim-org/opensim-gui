@@ -23,28 +23,30 @@
  *  OR BUSINESS INTERRUPTION) OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
  *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.opensim.swingui;
+package org.opensim.helputils.helpmenu;
 
-
+import java.io.File;
+import java.io.FileFilter;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
-import org.opensim.utils.BrowserLauncher;
 
-public final class FileBug extends CallableSystemAction {
+public final class TutorialsAction extends CallableSystemAction {
     
     public void performAction() {
-        //Or use internal browser 
-        // HtmlBrowser.URLDisplayer.getDefault().showURL(new URL("https://simtk.org/tracker/?func=add&atid=322&group_id=91"));
-        BrowserLauncher.openURL("https://simtk.org/tracker/?func=add&atid=322&group_id=91");
+        // TODO implement action body
     }
     
     public String getName() {
-        return NbBundle.getMessage(FileBug.class, "CTL_FileBug");
+        return NbBundle.getMessage(TutorialsAction.class, "CTL_Tutorials");
     }
     
+    @Override
     protected void initialize() {
         super.initialize();
+        // see org.openide.util.actions.SystemAction.iconResource() javadoc for more details
         putValue("noIconInMenu", Boolean.TRUE);
     }
     
@@ -52,8 +54,35 @@ public final class FileBug extends CallableSystemAction {
         return HelpCtx.DEFAULT_HELP;
     }
     
+    @Override
     protected boolean asynchronous() {
         return false;
+    }
+    
+    @Override
+    public JMenuItem getMenuPresenter() {
+      JMenu displayMenu = new JMenu("Examples & Tutorials");
+      FileFilter fileFilter = new FileFilter() {
+                public boolean accept(File file) {
+                    return (!file.isDirectory()&& file.getName().endsWith(".pdf"));
+                }
+      };
+      
+      // Add online examples
+      displayMenu.add(new BrowserPageDisplayerAction("Online Examples", "http://simtk-confluence.stanford.edu:8080/display/OpenSim/Examples+and+Tutorials"));
+     
+      String TutorialsRootDirectory=NbBundle.getMessage(TutorialsAction.class, "CTL_Tutorials_Root");
+      File rootHelpDirectory= new File(TutorialsRootDirectory);
+      
+      File[] files = rootHelpDirectory.listFiles(fileFilter);
+      if (files == null)  return displayMenu;
+      
+      for (int i=0; i<files.length; i++){
+        // List html files in tutorials directory 
+                // List html files in tutorials directory 
+        displayMenu.add(new BrowserPageDisplayerAction(files[i]));
+      }
+      return displayMenu;
     }
     
 }

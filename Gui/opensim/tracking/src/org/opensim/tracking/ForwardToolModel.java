@@ -250,6 +250,10 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
     
    /**
     * Calculating the time range for FD from control and states files
+    * If control file is specified, take control file's initial/final times.
+    * If state file is specified, take state file's initial time and assign
+    * the final value to 1 second after the initial time.
+    * Default the time range is [0, 1]
     * @param controlTimeRange
     * @param statesTimeRange
     * @return 

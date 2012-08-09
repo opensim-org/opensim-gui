@@ -24,12 +24,12 @@
  *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 /*
- * HelpAboutJPanel.java
+ * AboutJPanel.java
  *
  * Created on August 8, 2007, 7:50 PM
  */
 
-package org.opensim.view;
+package org.opensim.helputils.helpmenu;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -40,14 +40,13 @@ import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.util.MissingResourceException;
-import javax.swing.ImageIcon;
 import org.opensim.modeling.opensimModelJNI;
 
 /**
  *
  * @author  Ayman
  */
-public final class HelpAboutJPanel extends javax.swing.JPanel implements ImageObserver {
+public final class AboutJPanel extends javax.swing.JPanel implements ImageObserver {
     /** The about image */
     static Reference aboutRef;
     static Reference OpenSimRef;
@@ -55,8 +54,8 @@ public final class HelpAboutJPanel extends javax.swing.JPanel implements ImageOb
     static Reference NIHRef;
     static Reference SimbiosRef;
     
-    /** Creates new form HelpAboutJPanel */
-    public HelpAboutJPanel() {        
+    /** Creates new form AboutJPanel */
+    public AboutJPanel() {        
         initComponents();
         this.setPreferredSize(new Dimension(410, 505));
         populateDetailsPanel();
@@ -133,7 +132,7 @@ public final class HelpAboutJPanel extends javax.swing.JPanel implements ImageOb
             .add(0, 487, Short.MAX_VALUE)
         );
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18));
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel1.setText("OpenSim");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -142,10 +141,10 @@ public final class HelpAboutJPanel extends javax.swing.JPanel implements ImageOb
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Operating System:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Java Runtime:");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Home Dir:");
 
         versionString.setText("v1.0");
@@ -156,7 +155,7 @@ public final class HelpAboutJPanel extends javax.swing.JPanel implements ImageOb
 
         jHomeDirString.setText("home dir");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("VM Vendor:");
 
         VMvendorString.setText("jLabel7");
@@ -276,7 +275,7 @@ public final class HelpAboutJPanel extends javax.swing.JPanel implements ImageOb
         jTextArea3.setBackground(new java.awt.Color(236, 233, 216));
         jTextArea3.setColumns(20);
         jTextArea3.setEditable(false);
-        jTextArea3.setFont(new java.awt.Font("Tahoma", 0, 11));
+        jTextArea3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jTextArea3.setLineWrap(true);
         jTextArea3.setRows(5);
         jTextArea3.setText("OpenSim was created by a collaborative team as part of Simbios, a national center for biomedical computation based at Stanford University.\n\nOpenSim includes computational components from SimTK.  Please see www.simtk.org for additional information.\n");
@@ -319,7 +318,7 @@ public final class HelpAboutJPanel extends javax.swing.JPanel implements ImageOb
         jTextArea2.setBackground(new java.awt.Color(236, 233, 216));
         jTextArea2.setColumns(20);
         jTextArea2.setEditable(false);
-        jTextArea2.setFont(new java.awt.Font("Tahoma", 0, 11));
+        jTextArea2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jTextArea2.setLineWrap(true);
         jTextArea2.setRows(5);
         jTextArea2.setText("Development of OpenSim is funded by the National Institutes of Health through the NIH Roadmap for Medical Research Grant U54 GM072970 and through NIH Grants HD33929 and HD046814.\n");
@@ -362,7 +361,7 @@ public final class HelpAboutJPanel extends javax.swing.JPanel implements ImageOb
         jTextArea4.setBackground(new java.awt.Color(236, 233, 216));
         jTextArea4.setColumns(20);
         jTextArea4.setEditable(false);
-        jTextArea4.setFont(new java.awt.Font("Tahoma", 0, 11));
+        jTextArea4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jTextArea4.setLineWrap(true);
         jTextArea4.setRows(5);
         jTextArea4.setText("For details see \n\nDelp, S.L., Anderson, F.C., Arnold, A. S., Loan, P., Habib, A., John, C., Guendelman, E., Thelen, D.G.   OpenSim: Open-source software to create and analyze dynamic simulations of movement.  IEEE Transactions on Biomedical Engineering, Nov. 2007.  Other citations and contributions noted within the application.");
@@ -375,7 +374,7 @@ public final class HelpAboutJPanel extends javax.swing.JPanel implements ImageOb
 
         jTextArea1.setBackground(new java.awt.Color(236, 233, 216));
         jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 11));
+        jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jTextArea1.setRows(5);
         jTextArea1.setText("\nThis program includes software developed by the\nApache Software Foundation (http://www.apache.org/).\n\nThe application uses VTK (http://www.vtk.org), JFreeChart (http://www.jfree.org)\nand is built on top of NetBeans platform (http://www.netbeans.org).");
         jTextArea1.setMargin(new java.awt.Insets(0, 10, 0, 10));
@@ -474,6 +473,7 @@ public final class HelpAboutJPanel extends javax.swing.JPanel implements ImageOb
     private javax.swing.JLabel versionString;
     // End of variables declaration//GEN-END:variables
 
+    @Override
     public void paint(Graphics g) {
        super.paint(g);
         if (jTabbedPane1.getSelectedIndex()==0){
@@ -495,7 +495,7 @@ public final class HelpAboutJPanel extends javax.swing.JPanel implements ImageOb
         Image ret;
         if ((aboutRef == null) ||
                 ((ret = (Image) aboutRef.get()) == null)) {
-            ret = loadImage("/org/opensim/view/images/splash.gif");
+            ret = loadImage("/org/opensim/helputils/helpmenu/images/splash.gif");
             aboutRef = new WeakReference(ret);
         }
         return ret;
@@ -504,7 +504,7 @@ public final class HelpAboutJPanel extends javax.swing.JPanel implements ImageOb
         Image ret;
         if ((OpenSimRef == null) ||
                 ((ret = (Image) OpenSimRef.get()) == null)) {
-            ret = loadImage("/org/opensim/view/images/frame48.gif");
+            ret = loadImage("/org/opensim/helputils/helpmenu/images/frame48.gif");
             OpenSimRef = new WeakReference(ret);
         }
         return ret;
@@ -513,7 +513,7 @@ public final class HelpAboutJPanel extends javax.swing.JPanel implements ImageOb
         Image ret;
         if ((SimTKRef == null) ||
                 ((ret = (Image) SimTKRef.get()) == null)) {
-            ret = loadImage("/org/opensim/view/images/simtk_48.gif");
+            ret = loadImage("/org/opensim/helputils/helpmenu/images/simtk_48.gif");
             SimTKRef = new WeakReference(ret);
         }
         return ret;
@@ -523,7 +523,7 @@ public final class HelpAboutJPanel extends javax.swing.JPanel implements ImageOb
         Image ret;
         if ((NIHRef == null) ||
                 ((ret = (Image) NIHRef.get()) == null)) {
-            ret = loadImage("/org/opensim/view/images/nih_48.gif");
+            ret = loadImage("/org/opensim/helputils/helpmenu/images/nih_48.gif");
             NIHRef = new WeakReference(ret);
         }
         return ret;
@@ -533,7 +533,7 @@ public final class HelpAboutJPanel extends javax.swing.JPanel implements ImageOb
         Image ret;
         if ((SimbiosRef == null) ||
                 ((ret = (Image) SimbiosRef.get()) == null)) {
-            ret = loadImage("/org/opensim/view/images/simbios_48.gif");
+            ret = loadImage("/org/opensim/helputils/helpmenu/images/simbios_48.gif");
             SimbiosRef = new WeakReference(ret);
         }
         return ret;
@@ -545,6 +545,7 @@ public final class HelpAboutJPanel extends javax.swing.JPanel implements ImageOb
             URL u = getClass().getResource(urlString);
             return Toolkit.getDefaultToolkit().getImage(u);
         } catch (MissingResourceException exception) {
+            exception.printStackTrace();
             return null;
         }
     }

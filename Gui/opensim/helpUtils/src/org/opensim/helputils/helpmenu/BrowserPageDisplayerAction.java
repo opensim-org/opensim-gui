@@ -1,5 +1,5 @@
 /*
- * Copyright (c)  2005-2012, Stanford University and Ayman Habib
+ * Copyright (c)  2005-2008, Stanford University
  * Use of the OpenSim software in source form is permitted provided that the following
  * conditions are met:
  * 	1. The software is used only for non-commercial research and education. It may not
@@ -23,37 +23,34 @@
  *  OR BUSINESS INTERRUPTION) OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
  *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.opensim.swingui;
+package org.opensim.helputils.helpmenu;
 
-
-import org.openide.util.HelpCtx;
-import org.openide.util.NbBundle;
-import org.openide.util.actions.CallableSystemAction;
+import java.awt.event.ActionEvent;
+import java.io.File;
+import javax.swing.AbstractAction;
 import org.opensim.utils.BrowserLauncher;
 
-public final class HelpOpenOnlineDocsAction extends CallableSystemAction {
+
+/**
+ * A Class that displays a passed in url
+ */
+class BrowserPageDisplayerAction extends AbstractAction
+{
+    String url;
     
-    public void performAction() {
-        //Or use internal browser 
-        // HtmlBrowser.URLDisplayer.getDefault().showURL(new URL("https://simtk.org/tracker/?func=add&atid=322&group_id=91"));
-        BrowserLauncher.openURL("http://www.stanford.edu/group/opensim/support/index.html");
+    public BrowserPageDisplayerAction(File localFile){
+        super(localFile.getName());
+        this.url = localFile.getAbsolutePath();
     }
     
-    public String getName() {
-        return NbBundle.getMessage(HelpOpenOnlineDocsAction.class, "CTL_OnlineDocs");
+    public BrowserPageDisplayerAction(String dispName, String url){
+        super(dispName);
+        this.url = url;           
     }
-    
-    protected void initialize() {
-        super.initialize();
-        putValue("noIconInMenu", Boolean.TRUE);
-    }
-    
-    public HelpCtx getHelpCtx() {
-        return HelpCtx.DEFAULT_HELP;
-    }
-    
-    protected boolean asynchronous() {
-        return false;
+        
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        BrowserLauncher.openURL(url);            
     }
     
 }

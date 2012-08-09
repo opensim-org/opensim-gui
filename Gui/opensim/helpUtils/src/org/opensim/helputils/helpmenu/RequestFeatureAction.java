@@ -23,29 +23,24 @@
  *  OR BUSINESS INTERRUPTION) OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
  *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.opensim.view;
+package org.opensim.helputils.helpmenu;
 
-import javax.swing.JButton;
-import org.openide.DialogDescriptor;
-import org.openide.DialogDisplayer;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
+import org.opensim.utils.BrowserLauncher;
 
-public final class HelpAboutAction extends CallableSystemAction {
+public final class RequestFeatureAction extends CallableSystemAction {
    
    public void performAction() {
-      // TODO implement action body
-      HelpAboutJPanel helpPanel = new HelpAboutJPanel();
-      DialogDescriptor helpDlgDescriptor = new DialogDescriptor(helpPanel, "About", true, null);
-      helpDlgDescriptor.setOptions(new Object[]{new JButton("Close")});     
-      DialogDisplayer.getDefault().createDialog(helpDlgDescriptor).setVisible(true);
+       BrowserLauncher.openURL("https://simtk.org/tracker/?func=add&atid=323&group_id=91");
    }
    
    public String getName() {
-      return NbBundle.getMessage(HelpAboutAction.class, "CTL_HelpAboutAction");
+      return NbBundle.getMessage(RequestFeatureAction.class, "CTL_RequestFeature");
    }
    
+    @Override
    protected void initialize() {
       super.initialize();
       // see org.openide.util.actions.SystemAction.iconResource() javadoc for more details
@@ -56,6 +51,7 @@ public final class HelpAboutAction extends CallableSystemAction {
       return HelpCtx.DEFAULT_HELP;
    }
    
+    @Override
    protected boolean asynchronous() {
       return false;
    }

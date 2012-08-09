@@ -23,31 +23,27 @@
  *  OR BUSINESS INTERRUPTION) OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
  *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.opensim.view;
+package org.opensim.helputils.helpmenu;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.net.MalformedURLException;
-import java.net.URL;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
+import org.opensim.utils.BrowserLauncher;
 
-public final class HelpTutorialsAction extends CallableSystemAction {
+public final class FileBugAction extends CallableSystemAction {
     
     public void performAction() {
-        // TODO implement action body
+        BrowserLauncher.openURL("https://simtk.org/tracker/?func=add&atid=322&group_id=91");
     }
     
     public String getName() {
-        return NbBundle.getMessage(HelpTutorialsAction.class, "CTL_TutorialsAction");
+        return NbBundle.getMessage(FileBugAction.class, "CTL_FileBug");
     }
     
+    @Override
     protected void initialize() {
         super.initialize();
-        // see org.openide.util.actions.SystemAction.iconResource() javadoc for more details
         putValue("noIconInMenu", Boolean.TRUE);
     }
     
@@ -55,29 +51,9 @@ public final class HelpTutorialsAction extends CallableSystemAction {
         return HelpCtx.DEFAULT_HELP;
     }
     
+    @Override
     protected boolean asynchronous() {
         return false;
-    }
-    
-    public JMenuItem getMenuPresenter() {
-      JMenu displayMenu = new JMenu("Tutorials");
-      FileFilter fileFilter = new FileFilter() {
-                public boolean accept(File file) {
-                    return (!file.isDirectory()&& file.getName().endsWith(".pdf"));
-                }
-      };
-      String TutorialsRootDirectory=NbBundle.getMessage(HelpTutorialsAction.class, "CTL_Tutorials_Root");
-      File rootHelpDirectory= new File(TutorialsRootDirectory);
-      String fullPath = rootHelpDirectory.getAbsolutePath();
-      File[] files = rootHelpDirectory.listFiles(fileFilter);
-      if (files == null)  return displayMenu;
-      
-      for (int i=0; i<files.length; i++){
-        // List html files in tutorials directory 
-                // List html files in tutorials directory 
-        displayMenu.add(new BrowserPageDisplayerAction(files[i]));
-      }
-      return displayMenu;
     }
     
 }

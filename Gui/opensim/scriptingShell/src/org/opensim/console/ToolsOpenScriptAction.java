@@ -59,7 +59,7 @@ public final class ToolsOpenScriptAction extends CallableSystemAction {
         };
         final String ScriptsRootDirectory = Preferences.userNodeForPackage(TheApp.class).get("Scripts Path", "Scripts");
         File rootHelpDirectory = new File(ScriptsRootDirectory);
-        String fullPath = rootHelpDirectory.getAbsolutePath();
+        final String fullPath = rootHelpDirectory.getAbsolutePath();
         File[] files = rootHelpDirectory.listFiles(fileFilter);
         if (files == null) {
 
@@ -71,8 +71,9 @@ public final class ToolsOpenScriptAction extends CallableSystemAction {
             JMenuItem nextItem = new JMenuItem(fileName);
             nextItem.addActionListener(new ActionListener() {
 
+                @Override
                 public void actionPerformed(ActionEvent e) {
-                    openFile(ScriptsRootDirectory + "/" + fileName);
+                    openFile(fullPath + "/" + fileName);
                 }
             });
 

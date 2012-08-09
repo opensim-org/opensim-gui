@@ -43,10 +43,6 @@
             <file name="org-opensim-view-nodes-ToggleEnabledStateAction.instance"/>
             <file name="org-opensim-view-actions-FileSaveAllAction.instance"/>
         </folder>
-        <folder name="Help">
-            <file name="org-opensim-view-HelpAboutAction.instance"/>
-            <file name="org-opensim-view-HelpTutorialsAction.instance"/>
-        </folder>
         <folder name="Tools">
             <file name="org-opensim-view-actions-ToolsLoadUserLibraryAction.instance"/>
         </folder>
@@ -59,25 +55,6 @@
     </folder>
     <file name="HTMLPalette_hidden"/>
     <file name="HTTPServer_DUMMY_hidden"/>
-    <folder name="Help">
-        <attr name="HelpShortcuts\SystemFileSystem.localizingBundle" stringvalue="org.netbeans.modules.javahelp.resources.Bundle"/>
-        <attr name="HelpShortcuts/Separator1.instance" boolvalue="true"/>
-        <attr name="Separator1.instance/org-netbeans-core-actions-AboutAction.instance" boolvalue="true"/>
-        <attr name="org-netbeans-core-actions-AboutAction.instance/org-opensim-swingui-separatorBefore.instance" boolvalue="true"/>
-        <attr name="org-opensim-swingui-FileBug.shadow/org-opensim-swingui-separatorAfter.instance" boolvalue="true"/>
-        <attr name="master-help.xml/HelpShortcuts" boolvalue="true"/>
-        <attr name="org-opensim-swingui-separatorBefore.instance/org-opensim-swingui-FileBug.shadow" boolvalue="true"/>
-        <file name="org-netbeans-core-actions-AboutAction.instance" url="org-netbeans-core-actions-AboutAction_1.instance"/>
-        <file name="org-opensim-swingui-FileBug.shadow" url="org-opensim-swingui-FileBug_1.shadow">
-            <attr name="originalFile" stringvalue="Actions/Help/org-opensim-swingui-FileBug.instance"/>
-        </file>
-        <file name="org-opensim-swingui-separatorAfter.instance" url="org-opensim-swingui-separatorAfter_1.instance">
-            <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
-        </file>
-        <file name="org-opensim-swingui-separatorBefore.instance" url="org-opensim-swingui-separatorBefore_1.instance">
-            <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
-        </file>
-    </folder>
     <file name="J2EE_hidden"/>
     <folder name="Loaders">
         <folder name="text">
@@ -642,14 +619,6 @@
                 <attr name="position" intvalue="300"/>
             </file>
             <file name="org-netbeans-modules-autoupdate-ui-actions-CheckForUpdatesAction.shadow_hidden"/>
-            <file name="org-opensim-view-HelpAboutAction.shadow">
-                <attr name="originalFile" stringvalue="Actions/Help/org-opensim-view-HelpAboutAction.instance"/>
-                <attr name="position" intvalue="0"/>
-            </file>
-           <file name="org-opensim-view-TutorialsAction.shadow">
-                <attr name="originalFile" stringvalue="Actions/Help/org-opensim-view-HelpTutorialsAction.instance"/>
-                <attr name="position" intvalue="600"/>
-            </file>
             <file name="master-help.xml" url="master-help.xml"/>
             <file name="master-help.xml_hidden">
                 <attr name="position" intvalue="100"/>

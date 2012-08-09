@@ -6,16 +6,17 @@
             <file name="org-opensim-helputils-ToolsVersionUpgradeAction.instance"/>
         </folder>
         <folder name="Help">
-            <file name="org-opensim-helputils-HelpShowXML.instance"/>
+            <file name="org-opensim-helputils-helpmenu-OpenOnlineDocsAction.instance"/>
+            <file name="org-opensim-helputils-helpmenu-UsersGuideAction.instance"/>    
+            <file name="org-opensim-helputils-helpmenu-TutorialsAction.instance"/>     
+            <file name="org-opensim-helputils-helpmenu-ShowXMLAction.instance"/>
+            <file name="org-opensim-helputils-helpmenu-OpenDoxygenAction.instance"/>
+            <file name="org-opensim-helputils-helpmenu-FileBugAction.instance"/>   
+            <file name="org-opensim-helputils-helpmenu-RequestFeatureAction.instance"/>
+            <file name="org-opensim-helputils-helpmenu-AboutAction.instance"/>      
         </folder>
     </folder>
     <folder name="Menu">
-        <folder name="Help">
-            <file name="org-opensim-helputils-HelpShowXML.shadow">
-                <attr name="originalFile" stringvalue="Actions/Help/org-opensim-helputils-HelpShowXML.instance"/>
-                <attr name="position" intvalue="300"/>
-            </file>
-        </folder>
         <folder name="Tools">
             <file name="JavaPlatformsCustomizerAction.shadow_hidden_hidden">
                 <attr name="position" intvalue="100"/>
@@ -30,6 +31,48 @@
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-helputils-ToolsVersionUpgradeAction.instance"/>
                 <attr name="position" intvalue="950"/>
            </file>
+        </folder>
+        <folder name="Help">
+            <file name="org-opensim-helputils-helpmenu-OpenOnlineDocsAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Help/org-opensim-helputils-helpmenu-OpenOnlineDocsAction.instance"/>
+                <attr name="position" intvalue="0"/>
+            </file>
+            <file name="org-opensim-helputils-helpmenu-UsersGuideAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Help/org-opensim-helputils-helpmenu-UsersGuideAction.instance"/>
+                <attr name="position" intvalue="100"/>
+            </file>
+            <file name="org-opensim-helputils-helpmenu-TutorialsAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Help/org-opensim-helputils-helpmenu-TutorialsAction.instance"/>
+                <attr name="position" intvalue="200"/>
+            </file>
+            <file name="org-opensim-helputils-helpmenu-ShowXMLAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Help/org-opensim-helputils-helpmenu-ShowXMLAction.instance"/>
+                <attr name="position" intvalue="300"/>
+            </file>
+            <file name="org-opensim-helputils-helpmenu-OpenDoxygenAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Help/org-opensim-helputils-helpmenu-OpenDoxygenAction.instance"/>
+                <attr name="position" intvalue="400"/>
+            </file>
+            <file name="org-opensim-plotter-separatorBefore.instance">
+                <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+                <attr name="position" intvalue="500"/>
+            </file>
+            <file name="org-opensim-helputils-helpmenu-FileBugAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Help/org-opensim-helputils-helpmenu-FileBugAction.instance"/>
+                <attr name="position" intvalue="600"/>
+            </file>
+            <file name="org-opensim-helputils-helpmenu-RequestFeatureAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Help/org-opensim-helputils-helpmenu-RequestFeatureAction.instance"/>
+                <attr name="position" intvalue="700"/>
+            </file>
+            <file name="org-opensim-plotter-separatorAfter.instance">
+                <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+                <attr name="position" intvalue="800"/>
+            </file>
+            <file name="org-opensim-helputils-helpmenu-AboutAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Help/org-opensim-helputils-helpmenu-AboutAction.instance"/>
+                <attr name="position" intvalue="900"/>
+            </file>            
         </folder>
     </folder>
 </filesystem>
