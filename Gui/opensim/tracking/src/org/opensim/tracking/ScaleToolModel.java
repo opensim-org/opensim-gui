@@ -150,16 +150,12 @@ class BodySetScaleFactors extends Vector<BodyScaleFactors> {
       // Initialize assuming nonuniform
       for(int i=0; i<size(); i++) set(i, new BodyScaleFactors());
 
-      boolean sawManualScale = false;
-      for(int o=0; o<modelScaler.getScalingOrder().getSize(); o++) {
+      for(int order=0; order<modelScaler.getScalingOrder().getSize(); order++) {
          //------------------------------------------------------------------
          // Measurement-based scaling
          //------------------------------------------------------------------
-         if(modelScaler.getScalingOrder().getitem(o).equals("measurements")) {
-            if(sawManualScale) {
-               // measurements after manualScale is a weird case (because measurement based scaling allows only some of the axes to be overwritten... whereas
-               // the GUI currently assumes a given coordinate is either using measurements for all 3 axes or manualscales for all 3 axes
-            }
+         if(modelScaler.getScalingOrder().getitem(order).equals("measurements")) {
+
             for(int i=0; i<modelScaler.getScalingOrder().getSize(); i++) {
                if(modelScaler.getScalingOrder().getitem(i).equals("measurements")) {
                   MeasurementSet measurementSet = modelScaler.getMeasurementSet();
@@ -188,8 +184,7 @@ class BodySetScaleFactors extends Vector<BodyScaleFactors> {
          //------------------------------------------------------------------
          // Manual scaling
          //------------------------------------------------------------------
-         else if(modelScaler.getScalingOrder().getitem(o).equals("manualScale")) {
-            sawManualScale = true;
+         else if(modelScaler.getScalingOrder().getitem(order).equals("manualScale")) {
             for(int i=0; i<modelScaler.getScaleSet().getSize(); i++) {
                Scale scale = modelScaler.getScaleSet().get(i);
                Integer bodyIndex = mapBodyNameToIndex.get(scale.getSegmentName());
@@ -204,7 +199,7 @@ class BodySetScaleFactors extends Vector<BodyScaleFactors> {
                }
             }
          } else {
-            System.out.println("ERROR: Unrecognized string '"+modelScaler.getScalingOrder().getitem(o)+" in scaling order property");
+            System.out.println("ERROR: Unrecognized string '"+modelScaler.getScalingOrder().getitem(order)+" in scaling order property");
          }
       }
 
@@ -251,7 +246,7 @@ class BodySetScaleFactors extends Vector<BodyScaleFactors> {
                 scales[j]=get(i).manualScales[j];
             }
             scale.setScaleFactors(scales);
-            modelScaler.getScaleSet().cloneAndAppend(scale);
+            modelScaler.getScaleSet().adoptAndAppend(Scale.safeDownCast(scale.clone()));
          }
       }
       if(modelScaler.getScaleSet().getSize()>0) array.append("manualScale");
@@ -273,9 +268,9 @@ class BodySetScaleFactors extends Vector<BodyScaleFactors> {
       int bodyScaleIndex = bodyScaleSet.getIndex(bodyName);
       BodyScale bodyScale = null;
       if(bodyScaleIndex < 0) {
-         bodyScale = new BodyScale(); // Create it on C++ side
+         bodyScale = BodyScale.safeDownCast((new BodyScale()).clone()); // Create it on C++ side
          bodyScale.setName(bodyName);
-         modelScaler.getMeasurementSet().get(index).getBodyScaleSet().cloneAndAppend(bodyScale);
+         modelScaler.getMeasurementSet().get(index).getBodyScaleSet().adoptAndAppend(bodyScale);
       } else bodyScale = bodyScaleSet.get(bodyScaleIndex);
       if(axis==0 || axis==-1) bodyScale.getAxisNames().append("X");
       if(axis==1 || axis==-1) bodyScale.getAxisNames().append("Y");
@@ -304,7 +299,9 @@ public class ScaleToolModel extends Observable implements Observer {
       OpenSimContext processedModelContext=null;
       
       ScaleToolWorker() throws Exception {
+         System.out.println("MeasurementSet in ScaleToolWorker 1="+scaleTool.getModelScaler().getMeasurementSet().dump());
          updateScaleTool();
+         System.out.println("MeasurementSet in ScaleToolWorker 2="+scaleTool.getModelScaler().getMeasurementSet().dump());
 
          progressHandle = ProgressHandleFactory.createHandle("Executing scaling...",
                               new Cancellable() {
@@ -340,6 +337,8 @@ public class ScaleToolModel extends Observable implements Observer {
             // Pass empty path as path to subject, since we already have the measurement trial as an absolute path
             String t=unscaledModel.getFilePath();
             scaleTool.getMarkerPlacer().setOutputModelFileName(t+scaleTool.getMarkerPlacer().getOutputModelFileName());
+            System.out.println("MeasurementSet in ScaleToolWorker 3="+scaleTool.getModelScaler().getMeasurementSet().dump());
+
             if(!processedModelContext.processModelScale(scaleTool.getModelScaler(), processedModel, "", scaleTool.getSubjectMass())) {
                result = false;
                return this;
@@ -449,10 +448,15 @@ public class ScaleToolModel extends Observable implements Observer {
    //------------------------------------------------------------------------
    
    private void updateScaleTool() {
+      /// GOOOOOOOOOOOOOOOOOOOD
       scaleTool.setPrintResultFiles((scaleTool.getMarkerPlacer().getOutputModelFileName()!=""));
       scaleTool.getGenericModelMaker().setMarkerSetFileName(extraMarkerSetFile.toProperty());
       scaleTool.getModelScaler().setMarkerFileName(measurementTrialFile.toProperty());
+      System.out.println("MeasurementSet in updateScaleTool 1.5="+scaleTool.getModelScaler().getMeasurementSet().dump());
+
       bodySetScaleFactors.toModelScaler();
+      /// BAAAAAAAAAAAD
+      System.out.println("MeasurementSet in updateScaleTool 2="+scaleTool.getModelScaler().getMeasurementSet().dump());
       ikCommonModel.toMarkerPlacer(scaleTool.getMarkerPlacer());
    }
 
@@ -769,7 +773,7 @@ public class ScaleToolModel extends Observable implements Observer {
          scale.setSegmentName(bodySet.get(i).getName());
          scale.setScaleFactors(identityScale);
          scale.setApply(true);
-         scaleSet.cloneAndAppend(scale);
+         scaleSet.adoptAndAppend(Scale.safeDownCast(scale.clone()));
       }
       return scaleSet;
    }
@@ -856,7 +860,7 @@ public class ScaleToolModel extends Observable implements Observer {
       MeasurementSet measurementSet = getMeasurementSet();
       Measurement measurement = new Measurement();
       measurement.setName(name);
-      measurementSet.cloneAndAppend(measurement);
+      measurementSet.adoptAndAppend(Measurement.safeDownCast(measurement.clone()));
       // Update parallel measurementValues array
       measurementValues.add(null);
       // Fire event
