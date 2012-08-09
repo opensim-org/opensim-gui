@@ -19,7 +19,20 @@ import org.opensim.modeling.OpenSimObject;
 public class ShowXMLRepJDialog extends javax.swing.JDialog {
 
     DefaultComboBoxModel cbModel = new DefaultComboBoxModel();
-
+    String[] excludedList = new String[] {
+       "SMC_Joint",
+       "PathWrap",
+       "ObjectGroup",
+       "ModelScaler",
+       "GenericModelMaker",
+       "ControlSetController",
+       "ControlLinear",
+       "ControlLinearNode",
+       "ControlConstant",
+       "CMC",
+       "MetabolicMuscle"
+   };
+    
     /** Creates new form ShowXMLRepJDialog */
     public ShowXMLRepJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -169,7 +182,13 @@ public class ShowXMLRepJDialog extends javax.swing.JDialog {
         ArrayStr typeNames = new ArrayStr();
         OpenSimObject.getRegisteredTypenames(typeNames);
         for (int i = 0; i < typeNames.getSize(); i++) {
-            cbModel.addElement(typeNames.getitem(i));
+            boolean excluded = false;
+            String currentType = typeNames.getitem(i);
+            excluded = currentType.endsWith("Set");
+            for(int j=0; j < excludedList.length && !excluded; j++)
+                excluded = (excludedList[j].equalsIgnoreCase(currentType));
+            if (!excluded)
+                cbModel.addElement(typeNames.getitem(i));
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
