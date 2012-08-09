@@ -3,6 +3,7 @@ package org.opensim.helputils;
 import java.io.IOException;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
+import org.openide.NotifyDescriptor;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
@@ -37,9 +38,17 @@ public final class ToolsVersionUpgradeAction extends CallableSystemAction {
                 }
                else if (upgradePanel.getExtension().equalsIgnoreCase(".xml")){
                     OpenSimObject obj = OpenSimObject.makeObjectFromFile(input);
+                    if (obj==null){
+                        NotifyDescriptor.Message dlgErr =
+                          new NotifyDescriptor.Message("Failed to constct an OpenSim object from file "+
+                                input+
+                                ". Possible reasons: file has incorrect format or object type has been deprecated.");
+                         DialogDisplayer.getDefault().notify(dlgErr);   
+                         return;
+                    }
                     boolean saveDefaults = OpenSimObject.getSerializeAllDefaults();
                     OpenSimObject.setSerializeAllDefaults(upgradePanel.isWriteDefaults());
-                    obj.clone().print(output);
+                    obj.print(output);
                     OpenSimObject.setSerializeAllDefaults(saveDefaults);
                 }
                 else if (upgradePanel.getExtension().equalsIgnoreCase(".sto")){
