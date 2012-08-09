@@ -29,6 +29,8 @@ package org.opensim.view.motions;
  */
 import java.io.File;
 import java.io.IOException;
+import org.openide.DialogDisplayer;
+import org.openide.NotifyDescriptor;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
@@ -62,7 +64,12 @@ public final class FileLoadDataAction extends CallableSystemAction {
                     OpenSimDB.getInstance().addModel(modelForDataImport);
                     MotionsDB.getInstance().addMotion(modelForDataImport, amot, null);
                 } catch (IOException ex) {
-                    ex.printStackTrace();
+                    NotifyDescriptor.Message dlg =
+                          new NotifyDescriptor.Message("Couldn't load data and/or model for display.\n"+
+                                "Possible reasons: data file has incorrect format or resource file _openSimlab.osim missing.");
+                  DialogDisplayer.getDefault().notify(dlg);   
+            return;
+
                 }
             }
             else if (fileName.endsWith(".mot")){
