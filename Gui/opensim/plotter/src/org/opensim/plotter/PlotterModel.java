@@ -406,7 +406,7 @@ public class PlotterModel {
                 an.setOn(true);
                 String coordinateY=shortName.substring(shortName.indexOf('_')+1);
                 ArrayStr coordsArray = new ArrayStr();
-                coordsArray.append(coordinateY);
+                coordsArray.append("all");  // This's bad and will slow things down but is a workaround MuscleAnalysis change that creates storages too late for us
                 if (MuscleAnalysis.safeDownCast(an)!=null)
                    ((MuscleAnalysis)MuscleAnalysis.safeDownCast(an)).setCoordinates(coordsArray);   
         }
