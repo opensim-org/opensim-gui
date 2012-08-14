@@ -163,6 +163,15 @@ public final class FileUtils {
         };
     }
 
+    /**
+     * Check if a file or directory path exists
+     * @param filePath
+     * @return if the file/directory exists
+     */
+    public boolean exists(String filePath) {
+        return new File(filePath).exists();
+    }
+    
     // If promptIfReplacing==true then it prompts user if they are trying to replacing an existing file.  
     // If currentFilename!=null, and the user chooses that file, then the prompt is skipped, since it is assumed they're simply saving over their currently loaded copy.
     public String browseForFilenameToSave(FileFilter filter, boolean promptIfReplacing, String currentFilename)
@@ -208,16 +217,25 @@ public final class FileUtils {
 
     public String browseForFolder()
     {
-       return browseForFolder(null);
+       return browseForFolder(null, "");
     }
     
-    public String browseForFolder(Frame parent)
+    public String browseForFolder(String description)
+    {
+       return browseForFolder(null, description);
+    }
+    
+    public String browseForFolder(Frame parent, String description)
     {
         // Init dialog to use "WorkDirectory" as thought of by user
         String defaultDir = Preferences.userNodeForPackage(TheApp.class).get("WorkDirectory", "");
         //final JFileChooser dlog = new JFileChooser(defaultDir);
         dlog.setCurrentDirectory(new File(defaultDir));
         dlog.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        
+        if(!description.equals("")) {
+            dlog.setDialogTitle(description);
+        }
         
         String outFilename=null;
         Frame topFrame = (parent==null)?TheApp.getAppFrame():parent;
@@ -254,6 +272,7 @@ public final class FileUtils {
         String defaultDir = Preferences.userNodeForPackage(TheApp.class).get("WorkDirectory", "");
         //JFileChooser dlog = new JFileChooser(defaultDir);
         dlog.setCurrentDirectory(new File(defaultDir));
+        dlog.setDialogTitle(filter.getDescription());
         if(filter!=null) { dlog.resetChoosableFileFilters(); dlog.setFileFilter(filter); }
         
         String outFilename=null;
