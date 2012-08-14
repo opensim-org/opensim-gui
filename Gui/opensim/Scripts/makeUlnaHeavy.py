@@ -24,9 +24,8 @@
 
 # NOTE: The Arm26 model must be loaded and current in the GUI to run this script.
 
-# Get handle to current model in GUI
-oldModel = getCurrentModel()
-
+# Get handle to the Arm26 model
+oldModel = modeling.Model(getInstallDir() + "/Models/Arm26/arm26.osim")
 # Create a fresh copy
 myModel = modeling.Model(oldModel)
 

@@ -28,7 +28,8 @@
 modeling.OpenSimObject.setDebugLevel(3)
 
 # Load the model BothLegs.osim
-addModel(getScriptsDir()+"/testData/BothLegs.osim")
+filepath = getInstallDir() + "/Models/BothLegs/BothLegs.osim";
+addModel(filepath);
 
 # Create a plotter panel and set the title
 plotterPanel = createPlotterPanel("Plot Example")
