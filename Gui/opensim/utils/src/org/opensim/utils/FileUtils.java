@@ -207,7 +207,10 @@ public final class FileUtils {
               if(answer==NotifyDescriptor.YES_OPTION) break;
            } else break;
        }
-       if(outFilename != null) Preferences.userNodeForPackage(TheApp.class).put("WorkDirectory", dlog.getSelectedFile().getParent());
+       if(outFilename != null){
+           String workDirectoryString = dlog.getSelectedFile().getParent();
+            setWorkingDirectoryPreference(workDirectoryString);
+       }
        return outFilename;
     }
     public String browseForFilenameToSave(String extensions, String description, boolean promptIfReplacing, String currentFilename)
@@ -250,8 +253,18 @@ public final class FileUtils {
            break;
        }
        dlog.setFileSelectionMode(JFileChooser.FILES_ONLY);
-       if(outFilename != null) Preferences.userNodeForPackage(TheApp.class).put("WorkDirectory", dlog.getSelectedFile().getParent());
+       if(outFilename != null){
+           String workDirectoryString = dlog.getSelectedFile().getParent();
+           setWorkingDirectoryPreference( workDirectoryString);
+       }
        return outFilename;
+    }
+    /**
+     * set Preference for directory to be used for future file browsing
+     * @param workDirectoryString 
+     */
+    public void setWorkingDirectoryPreference(String workDirectoryString) {
+        Preferences.userNodeForPackage(TheApp.class).put("WorkDirectory", workDirectoryString);
     }
 
     /**
@@ -295,7 +308,7 @@ public final class FileUtils {
                       new NotifyDescriptor.Message("Selected file "+outFilename+" does not exist."));
            else break;
        }
-       if(outFilename != null) Preferences.userNodeForPackage(TheApp.class).put("WorkDirectory", dlog.getSelectedFile().getParent());
+       if(outFilename != null) setWorkingDirectoryPreference(dlog.getSelectedFile().getParent());
        return outFilename;
     }
     public String browseForFilename(String extensions, String description, boolean isRequired2Exist, Component parent)
@@ -476,7 +489,7 @@ public final class FileUtils {
               else
                    outFilenames[1]=outFiles[i].getAbsolutePath();             
           }
-          if(outFilenames.length>0) Preferences.userNodeForPackage(TheApp.class).put("WorkDirectory", dlog.getSelectedFiles()[0].getParent());
+          if(outFilenames.length>0) setWorkingDirectoryPreference(dlog.getSelectedFiles()[0].getParent());
        }
        // get jnt file followed by muscle file of any into output array
         
