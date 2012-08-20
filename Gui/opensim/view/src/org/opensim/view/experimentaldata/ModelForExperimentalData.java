@@ -31,9 +31,11 @@
 
 package org.opensim.view.experimentaldata;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
 import org.opensim.modeling.*;
+import org.opensim.utils.TheApp;
 
 /**
  *
@@ -55,7 +57,7 @@ public class ModelForExperimentalData extends Model{
      * Creates a new instance of ModelForExperimentalData
      */
     public ModelForExperimentalData(int i, AnnotatedMotion motionData) throws IOException {
-        super("Models/Internal/_openSimlab.osim");
+        super(TheApp.getInstallDir()+File.separatorChar+"Models"+File.separatorChar+"Internal"+File.separatorChar+"_openSimlab.osim");
         setName("ExperimentalData_"+i);
         this.motionData=motionData;
         //setup();
