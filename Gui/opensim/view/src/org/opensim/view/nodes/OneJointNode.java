@@ -40,12 +40,12 @@ import org.openide.nodes.PropertySupport;
 import org.openide.nodes.Sheet;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
-import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.CustomJoint;
 import org.opensim.modeling.Joint;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.SpatialTransform;
 import org.opensim.modeling.TransformAxis;
+import org.opensim.view.editors.BodyNameEditor;
 
 /**
  *
@@ -99,30 +99,31 @@ public class OneJointNode extends OpenSimObjectNode {
         }
         return retActions;
     }
-/*
+
     @Override
     public Sheet createSheet() {
-         Sheet sheet;
-
-        sheet = super.createSheet();
+        Sheet sheet = super.createSheet();
         Sheet.Set set = sheet.get(Sheet.PROPERTIES);
-        // Add property for Location
-        Joint obj = Joint.safeDownCast(getOpenSimObject());
-        JointAdapter gJoint = new JointAdapter(obj);
-        try {
-            set.remove("location");
-            PropertySupport.Reflection locationNodeProp;
-            locationNodeProp = new PropertySupport.Reflection(gJoint, String.class, "getLocationString", "setLocationString");
-            ((Node.Property) locationNodeProp).setValue("oneline", Boolean.TRUE);
-            ((Node.Property) locationNodeProp).setValue("suppressCustomEditor", Boolean.TRUE);
-            locationNodeProp.setName("location");
-            locationNodeProp.setShortDescription(getPropertyComment("location"));
-            set.put(locationNodeProp);
-       } catch (NoSuchMethodException ex) {
+       try {
+            set.remove("parent_body");
+            PropertySupport.Reflection nextNodeProp2;
+            nextNodeProp2 = new PropertySupport.Reflection(this, String.class, "getParentBodyName", "setParentBodyName");
+            nextNodeProp2.setPropertyEditorClass(BodyNameEditor.class);
+            nextNodeProp2.setName("parent_body");
+            set.put(nextNodeProp2);
+        } catch (NoSuchMethodException ex) {
             Exceptions.printStackTrace(ex);
-        }
-
+        }      
         return sheet;
-     }
-    */
+   }
+    
+   public void setParentBodyName(String newParentName) {
+       new PropertyEditorAdaptor("parent_body", this).setValueString(newParentName);
+   }
+
+   public String getParentBodyName() {
+        return new PropertyEditorAdaptor("parent_body", this).getValueString();
+   }
+
+    
 }
