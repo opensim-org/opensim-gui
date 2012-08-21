@@ -21,74 +21,94 @@
 
 # This example script runs multiple inverse kinematics trials for the leg39 model. To see the results 
 # load the model and ik output in the GUI.
-# The script can either use the specified input and output folders/files, or you can prompt the user.
+# The script prompts the user for input files.
 
 # Import needed packages
-# COMMENT
-import java.io as io 
+# File input and output with native python os package
+import os
+
+# Utils contains tools to browse for files and folders
+import org.opensim.utils as utils
 
 # More graceful handling of exceptions thrown by tools, may be taken out in production
 modeling.OpenSimObject.setDebugLevel(3)
 
 # Browse for Directory containing trc files to process
-# Or use the commented line to allow the user to browse for the folder
-print "Acquire folder that contains trc files"
-trcDataFolder = getScriptsDir()+"\\testData\\Subject01\\Marker_Data\\"
+
+print "Acquiring folders with marker data"
+
+trcDataFolder = "thisdirectorydoesnotexist";
+# Uncomment the following line to manually assign directory.
+#trcDataFolder = getScriptsDir()+"/testData/Subject01/Marker_Data/"
+
+# Prompts user to select directory if above does not exist
+if not os.path.exists(trcDataFolder):
+	trcDataFolder = utils.FileUtils.getInstance().browseForFolder("Select the folder that contains trc files");
 print trcDataFolder
 
 # Load the setup file
-# Or use the commented line to allow the user to browse for the folder
-print "Acquire setup file"
-setupFile = getScriptsDir()+"\\testData\\Subject01\\Generic_Setup_leg39_InverseKinematics.xml"
+print "Acquiring setup file"
+
+# Prompts user to select file if above does not exist
+setupFile = getScriptsDir()+"/testData/Subject01/Generic_Setup_leg39_InverseKinematics.xml"
+if not os.path.exists(setupFile):
+	setupFile = utils.FileUtils.getInstance().browseForFilename(".xml", "Select the setup file for the IK tool", 1)
 print setupFile
 
 # Select folder to store output results
-print "Acquire folder that contains output files"
-resultsFolder = getScriptsDir()+"\\testData\\Subject01\\IK_Results\\"
+print "Acquiring folder to store the IK results output files"
+
+resultsFolder = getScriptsDir()+"/testData/Subject01/IK_Results/"
+if not os.path.exists(resultsFolder):
+	resultsFolder = utils.FileUtils.getInstance().browseForFolder("Select the folder to store the IK results output files");
 print resultsFolder
 
 # Initialize InverseKinematicsTool from setup file
+print "Creating InverseKinematicsTool"
 ikTool = modeling.InverseKinematicsTool(setupFile)
-print "Created InverseKinematicsTool"
 
-# Create the model to be used and and initialize
-model = modeling.Model(getScriptsDir()+"\\testData\\Subject01\\Subject01.osim")
+# Load the model to be used and and initialize
+print "Acquiring model"
+modelFile = getScriptsDir()+"/testData/Subject01/Subject01.osim"
+if not os.path.exists(modelFile):
+	modelFile = utils.FileUtils.getInstance().browseForFilename(".osim", "Select the Model", 1)
+
+model = modeling.Model(modelFile)
+
+print "Creating and initializing model"
 model.initSystem()
-print "Created and initialized model"
+
+# Display model
+addModel(modelFile)
 
 # Tell the IK tool to use the model
 ikTool.setModel(model)
 
 # Cycle thru the trc files in trcDataFolder, set each as markerDataFileName
 # change corresponding output file and repeat
-trcFolder = io.File(trcDataFolder)
       
-trcFiles = trcFolder.list() 
-  
-for x in range(len(trcFiles)): 
-    if trcFiles[x].endswith(".trc"):
-	
-		  # Set name of output motion
-		  print "Processing "+trcFiles[x]
-		  outFile = trcFiles[x].replace('.trc', '_ik.sto')
-		  
-		  # Set name of input trc file and output motion in tool
-		  ikTool.setMarkerDataFileName(trcDataFolder+trcFiles[x])
-		  ikTool.setOutputMotionFileName(resultsFolder+outFile)
-		  
-		  # Use the trc file to get the start and end times
-		  markerData = modeling.MarkerData(trcDataFolder+trcFiles[x])
-		  ikTool.setStartTime(markerData.getStartFrameTime())
-		  ikTool.setEndTime(markerData.getLastFrameTime())
-		  
-		  # Run the tool
-		  print "Running trial file "+ikTool.getMarkerDataFileName()+" Output:"+ikTool.getOutputMotionFileName()
-		  ikTool.run()
-		  print "Finished processing trial "+trcFiles[x] 
-		  
-	      # Save the setup file
-		  trialSetupFile = trcFiles[x].replace('.trc', '_IK_Setup.xml')
-		  ikTool.print(resultsFolder+trialSetupFile)
-		  
+for filename in os.listdir(trcDataFolder): 
+    if filename.endswith(".trc"):
 
+		# Set name of output motion
+		print "Processing "+filename;
+		outFileName = filename.replace('.trc', '_ik.sto')
+		trialSetupFileName = filename.replace('.trc', 'ik_setup.xml')
 
+		# Set name of input trc file and output motion in tool
+		ikTool.setMarkerDataFileName(trcDataFolder+'\\'+filename)
+		ikTool.setOutputMotionFileName(resultsFolder+'\\'+outFileName)
+
+		# Use the trc file to get the start and end times
+		markerData = modeling.MarkerData(trcDataFolder+'\\'+filename)
+		ikTool.setStartTime(markerData.getStartFrameTime())
+		ikTool.setEndTime(markerData.getLastFrameTime())
+
+		# Run the tool
+		print "Runnning trial file "+ikTool.getMarkerDataFileName()+" Output:"+ikTool.getOutputMotionFileName()
+		ikTool.run()
+		print "Finished processing trial "+filename
+
+		# Save the setup file
+		trialSetupFileName = filename.replace('.trc', '_IK_Setup.xml')
+		ikTool.print(resultsFolder+'\\'+trialSetupFileName)

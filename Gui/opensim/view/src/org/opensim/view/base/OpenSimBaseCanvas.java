@@ -73,7 +73,6 @@ public class OpenSimBaseCanvas extends vtkPanel
    double currentTime = 0;
    Camera camera = null;
    vtkImageMapper logoMapper = new vtkImageMapper();
-
    // Enable opoups to display on top of heavy weight component/canvas
    static {
       JPopupMenu.setDefaultLightWeightPopupEnabled(false);
@@ -388,12 +387,7 @@ public class OpenSimBaseCanvas extends vtkPanel
     }
 
     public void addLogo() {
-        vtkActor2D logoActor = new vtkActor2D();
-        logoActor.SetMapper(logoMapper);
-        logoActor.SetPickable(0);
-        logoActor.SetDisplayPosition(10, 10);
-        logoActor.SetWidth(0.05);
-        logoActor.SetHeight(0.05);
+
         vtkPNGReader imageReader=new vtkPNGReader();
         String fullFileName= TheApp.getApplicationLogoFileName();
         if (fullFileName==null) return;
@@ -402,26 +396,55 @@ public class OpenSimBaseCanvas extends vtkPanel
         imageReader.Update();
         int[] ext = imageReader.GetDataExtent();
         vtkImageData imageData = imageReader.GetOutput();
+        
         logoMapper.SetInput(imageData);
+        
         updateLogoForBackgoundColor();
         // use 1000 for light bgnd, 
         //System.out.println("Color Level = "+logoMapper.GetColorLevel());
-        GetRenderer().AddActor2D(logoActor);
+        addLogoActor(logoMapper, 0, 10, 10, 0.05, 0.05); 
         //repaint();
    }
+    
+    private void addLogoActor(vtkImageMapper mapper, int isPickable, int dispPosX, int dispPosY, double width, double height) {
+        vtkActor2D logoActor = new vtkActor2D();
+        logoActor.SetMapper(mapper);
+        logoActor.SetPickable(isPickable);
+        logoActor.SetDisplayPosition(dispPosX, dispPosY);
+        logoActor.SetWidth(width);
+        logoActor.SetHeight(height);
+        GetRenderer().AddActor2D(logoActor);
+    }
     /**
      * Compute what level 0-1000 to use 1000 works best on light background, 0 on dark
      * @return 
      */
-    private double computeColorLevelForBackgound() {
+    private double[] computeColorLevelAndWindowForBackgound() {
         double[] bgnd = GetRenderer().GetBackground();
         double avg = 0.0; 
-        for (int i=0; i<3; i++) avg += bgnd[i];
+        for (int i=0; i<3; i++) {
+            avg += bgnd[i];
+        }
         avg /= 3;
-        return (avg > 0.5? 1000:0);
+        
+        System.out.println("Colour Code: " + bgnd[0] + "," + bgnd[1] + "," + bgnd[2]);
+        System.out.println("bgnd size: " + bgnd.length);
+                    
+        System.out.println("******AVERAGE COLOR****** " + avg);
+    
+        // If intensity >= 0.21 use one setting for ColorWindow and ColorLevel, else use another
+        double[] colorWindowAndLevel = (avg >= 0.21) ? new double[]{1000, 500} : new double[]{250,  175};
+        
+        return colorWindowAndLevel;
+        
     }
 
     public void updateLogoForBackgoundColor() {
-       logoMapper.SetColorLevel(computeColorLevelForBackgound());
+       
+       double[] colorWindowAndLevel = computeColorLevelAndWindowForBackgound();
+               
+       logoMapper.SetColorWindow(colorWindowAndLevel[0]);
+       logoMapper.SetColorLevel(colorWindowAndLevel[1]);
+ 
     }
  }

@@ -1011,13 +1011,13 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                                 .add(analyzeInputPanelLayout.createSequentialGroup()
                                     .add(analyzeInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                         .add(filterCoordinatesCheckBox)
-                                        .add(loadedMotionRadioButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                                        .add(loadedMotionRadioButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .add(fromFileMotionRadioButton))
                                     .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                     .add(analyzeInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                        .add(motionsComboBox, 0, 212, Short.MAX_VALUE)
-                                        .add(coordinatesFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-                                        .add(cutoffFrequency, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))))
+                                        .add(motionsComboBox, 0, 230, Short.MAX_VALUE)
+                                        .add(coordinatesFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                                        .add(cutoffFrequency, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE))))
                             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                             .add(jLabel1))
                         .add(analyzeSolveForEquilibriumCheckBox)
@@ -1235,9 +1235,6 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                             .add(finalTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 64, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                     .addContainerGap(102, Short.MAX_VALUE))
             );
-
-            timePanelLayout.linkSize(new java.awt.Component[] {availableInitialTime, finalTime, initialTime}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
-
             timePanelLayout.setVerticalGroup(
                 timePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                 .add(timePanelLayout.createSequentialGroup()
@@ -1334,7 +1331,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                 }
             });
 
-            jLabel12.setText("States");
+            jLabel12.setText("Initial State");
 
             initialStatesFileName.addChangeListener(new javax.swing.event.ChangeListener() {
                 public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -1373,8 +1370,8 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                                 .add(jLabel12))
                             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                             .add(forwardInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                .add(initialStatesFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
-                                .add(controlsFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE))
+                                .add(initialStatesFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                                .add(controlsFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE))
                             .add(0, 0, 0)
                             .add(editForwardExcitationsButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 33, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                         .add(solveForEquilibriumCheckBox))
@@ -1703,7 +1700,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
 
             staticOptimizationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Objective Function"));
 
-            jLabel24.setFont(new java.awt.Font("Tahoma", 2, 11));
+            jLabel24.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
             jLabel24.setText("Sum of (muscle activation) ^");
 
             staticOptActivationExponentTextField.setText("2");

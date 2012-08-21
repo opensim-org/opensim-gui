@@ -25,7 +25,7 @@
 modeling.OpenSimObject.setDebugLevel(3)
 
 # Load model
-addModel(getScriptsDir()+"/testData/BothLegs.osim")
+addModel(getInstallDir()+"/Models/BothLegs/BothLegs.osim")
 
 # Load a motion
 loadMotion(getScriptsDir()+"/testData/BothLegsWalk.mot")
