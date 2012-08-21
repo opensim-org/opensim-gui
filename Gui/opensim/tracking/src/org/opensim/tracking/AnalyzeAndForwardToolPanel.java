@@ -259,8 +259,9 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                     return;
                 else {
                     toolModel.deleteObserver(this);
+                    OpenSimDB.getInstance().deleteObserver(this);
                     NotifyDescriptor.Message dlg =
-                          new NotifyDescriptor.Message("Model used by the tool is being closed.. Closing tool.");
+                          new NotifyDescriptor.Message("Model used by the tool is being closed. Closing tool.");
                     DialogDisplayer.getDefault().notify(dlg);
                     this.close();
                     return;

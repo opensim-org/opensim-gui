@@ -389,10 +389,11 @@ public class RRAToolModel extends TrackingToolModel {
 
    public void cancel() {
       interrupt(false);
+      /* Cancel is same as close, no need to remove adjusted model if tool is done
       if(reducedResidualsModel!=null) {
          OpenSimDB.getInstance().removeModel(reducedResidualsModel);
          reducedResidualsModel = null;
-      }
+      }*/
    }
 
    //------------------------------------------------------------------------
@@ -431,7 +432,7 @@ public class RRAToolModel extends TrackingToolModel {
       rraTool().setDesiredKinematicsFileName(FileUtils.makePathAbsolute(rraTool().getDesiredKinematicsFileName(), parentDir));
       rraTool().setConstraintsFileName(FileUtils.makePathAbsolute(rraTool().getConstraintsFileName(), parentDir));
       rraTool().setTaskSetFileName(FileUtils.makePathAbsolute(rraTool().getTaskSetFileName(), parentDir));
-      rraTool().setRRAControlsFileName(FileUtils.makePathAbsolute(rraTool().getRRAControlsFileName(), parentDir));
+      //rraTool().setRRAControlsFileName(FileUtils.makePathAbsolute(rraTool().getRRAControlsFileName(), parentDir));
       rraTool().setOutputModelFileName(FileUtils.makePathAbsolute(rraTool().getOutputModelFileName(), parentDir));
 
       rraTool().setExternalLoadsFileName(FileUtils.makePathAbsolute(rraTool().getExternalLoadsFileName(), parentDir));
@@ -444,7 +445,7 @@ public class RRAToolModel extends TrackingToolModel {
       rraTool().setDesiredKinematicsFileName(FileUtils.makePathRelative(rraTool().getDesiredKinematicsFileName(), parentDir));
       rraTool().setConstraintsFileName(FileUtils.makePathRelative(rraTool().getConstraintsFileName(), parentDir));
       rraTool().setTaskSetFileName(FileUtils.makePathRelative(rraTool().getTaskSetFileName(), parentDir));
-      rraTool().setRRAControlsFileName(FileUtils.makePathRelative(rraTool().getRRAControlsFileName(), parentDir));
+      //rraTool().setRRAControlsFileName(FileUtils.makePathRelative(rraTool().getRRAControlsFileName(), parentDir));
       rraTool().setOutputModelFileName(FileUtils.makePathRelative(rraTool().getOutputModelFileName(), parentDir));
 
       rraTool().setExternalLoadsFileName(FileUtils.makePathRelative(rraTool().getExternalLoadsFileName(), parentDir));

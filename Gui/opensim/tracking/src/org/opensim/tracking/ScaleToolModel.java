@@ -480,8 +480,9 @@ public class ScaleToolModel extends Observable implements Observer {
 
    public void cancel() {
       interrupt(false);
+      /*
       if(scaledModel!=null) OpenSimDB.getInstance().removeModel(scaledModel);
-      scaledModel = null;
+      scaledModel = null;*/
    }
 
    //------------------------------------------------------------------------
