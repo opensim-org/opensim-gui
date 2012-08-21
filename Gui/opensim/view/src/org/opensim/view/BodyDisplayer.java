@@ -73,6 +73,7 @@ public class BodyDisplayer extends vtkAssembly
     
     private FrameActor bodyAxes = new FrameActor();
     private FrameActor jointBFrame = new FrameActor();
+    private vtkAssembly displayGeometryAssembly = new vtkAssembly();
     private boolean showAxes = false;
     private boolean showJointBFrame = false;
     protected Hashtable<Body, FrameActor> mapChildren2Frames = new Hashtable<Body, FrameActor>(2);
@@ -133,14 +134,15 @@ public class BodyDisplayer extends vtkAssembly
           //setTransformFromArray6(bodyRotTrans, (vtkTransform) boneActor.GetUserTransform());
           if (boneActor!=null){
             hasGeometry=true;
-            AddPart(boneActor);
-           mapGeometryToVtkObjects.put(gPiece, boneActor);
+            displayGeometryAssembly.AddPart(boneActor);
+            mapGeometryToVtkObjects.put(gPiece, boneActor);
           }
       }
+      this.AddPart(displayGeometryAssembly);
       applyVisibleObjectScaleAndTransform(bodyVisibleObject);
        
       if (hasGeometry){
-         vtkProp3DCollection parts = GetParts();
+         vtkProp3DCollection parts = displayGeometryAssembly.GetParts();
          parts.InitTraversal();
          vtkAppendPolyData append = new vtkAppendPolyData();
          for (;;) {
@@ -182,11 +184,11 @@ public class BodyDisplayer extends vtkAssembly
          /*
           * Scale
           */
-         SetScale(bodyScales);
+         displayGeometryAssembly.SetScale(bodyScales);
          // Transform
          vtkTransform xform = new vtkTransform();
          setTransformFromArray6(bodyRotTrans, xform);
-         SetUserTransform(xform);
+         displayGeometryAssembly.SetUserTransform(xform);
     }
 
     public void applyPositionAndOrientation(FrameActor frame, double[] orientation, double[] location) {
@@ -465,7 +467,7 @@ public class BodyDisplayer extends vtkAssembly
         mapObject2VtkObjects.put(body, this);
         
         // Picker picks Actors only, put those in reverseMap instead of BodyDisplayer
-        vtkProp3DCollection props = GetParts();
+        vtkProp3DCollection props = displayGeometryAssembly.GetParts();
         props.InitTraversal();
         ArrayList<vtkActor> actors = new ArrayList<vtkActor>();
         int idx=0;
@@ -610,5 +612,12 @@ public class BodyDisplayer extends vtkAssembly
         applyColorsFromModel();
         applyDisplayPreferences();
         SetCMLocationFromPropertyTable(true);
+    }
+
+    /**
+     * @return the displayGeometryAssembly
+     */
+    public vtkAssembly getDisplayGeometryAssembly() {
+        return displayGeometryAssembly;
     }
 }

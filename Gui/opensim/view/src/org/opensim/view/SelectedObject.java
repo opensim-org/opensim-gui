@@ -112,10 +112,10 @@ public class SelectedObject implements Selectable {
          if(highlight){
              // Save existing color with the body for later restoration
              Body b=Body.safeDownCast(object);
-             vtkProp3DCollection props =asm.GetParts();
+             vtkProp3DCollection props =asm.getDisplayGeometryAssembly().GetParts();
              double[] currentColor = ((vtkActor)props.GetLastProp3D()).GetProperty().GetColor();
              //b.getDisplayer().getVisibleProperties().setColor(currentColor);
-             ViewDB.getInstance().applyColor(defaultSelectedColor, asm, false);
+             ViewDB.getInstance().applyColor(defaultSelectedColor, asm.getDisplayGeometryAssembly(), false);
          }
          else{
             Body b=Body.safeDownCast(object);
