@@ -338,7 +338,7 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
             XLabel = "";
             YLabel = "";
             XUnits = new Units(Units.UnitType.Radians);
-            XDisplayUnits = new Units(Units.UnitType.Degrees);
+            XDisplayUnits = new Units(Units.UnitType.Radians);
             YUnits = new Units(Units.UnitType.Meters);
             YDisplayUnits = new Units(Units.UnitType.Meters);
         }
