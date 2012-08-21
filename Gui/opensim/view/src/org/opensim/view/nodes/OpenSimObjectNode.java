@@ -185,15 +185,16 @@ public class OpenSimObjectNode extends OpenSimNode {
        return nextNodeProp;
    }
 
-    private Reflection createNodePropForObjectName(OpenSimObject obj, Model model) throws NoSuchMethodException {
-       PropertySupport.Reflection nextNodeProp = new PropertySupport.Reflection(new ObjectNameEditor(obj, model, this),
+    protected Reflection createNodePropForObjectName(OpenSimObject obj, Model model, boolean isSettable) throws NoSuchMethodException {
+       PropertySupport.Reflection nextNodeProp =  new PropertySupport.Reflection(new ObjectNameEditor(obj, model, this),
             String.class,
             "getName",
-            null);
+            (isSettable?"setName":null));
        nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
-       nextNodeProp.setValue("suppressCustomEditor", Boolean.FALSE);
+       nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
        return nextNodeProp;
    }
+    
     private Reflection createNodePropForObjectType(OpenSimObject obj) throws NoSuchMethodException {
        PropertySupport.Reflection nextNodeProp = new PropertySupport.Reflection(obj,
             String.class,
@@ -272,12 +273,11 @@ public class OpenSimObjectNode extends OpenSimNode {
       try {
          boolean showDisplayMenu = validDisplayOptions.size()>0;
          if (showDisplayMenu)
-            objectNodeActions = new Action[]  {getReviewAction(), 
-                                          null, 
+            objectNodeActions = new Action[]  { 
                                           (ObjectDisplayMenuAction) ObjectDisplayMenuAction.findObject(
                  (Class)Class.forName("org.opensim.view.ObjectDisplayMenuAction"), true)};
          else
-            objectNodeActions = new Action[]  {getReviewAction()};
+            objectNodeActions = new Action[]  {};
          
       } catch (ClassNotFoundException ex) {
          ex.printStackTrace();
@@ -318,7 +318,7 @@ public class OpenSimObjectNode extends OpenSimNode {
         Model theModel = getModelForNode();
         if (!obj.getName().equalsIgnoreCase("")){
             try {
-                Reflection nextNodeProp = createNodePropForObjectName(obj, theModel);
+                Reflection nextNodeProp = createNodePropForObjectName(obj, theModel, false);
                 if (nextNodeProp != null) {
                     nextNodeProp.setName("name");
                     nextNodeProp.setShortDescription("Name of the Object");
