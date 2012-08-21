@@ -39,6 +39,7 @@ import java.beans.PropertyChangeListener;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -50,7 +51,7 @@ import javax.swing.KeyStroke;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.text.NumberFormatter;
-import org.openide.util.Utilities;
+import org.openide.util.ImageUtilities;
 import org.opensim.modeling.Coordinate;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
@@ -80,16 +81,18 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
    private static double ROUNDOFF=1E-5;  // work around for roundoff converting Strings to/from doubles
    private static String LABELS_FORMAT="###.###";          // Number of digits to show after floating point in bounds
    // Should make images static or use reference rather than create a new instance per slider.
-   static ImageIcon unclampedIcon=new ImageIcon(Utilities.loadImage("org/opensim/coordinateviewer/images/unclamped.png"));
-   static ImageIcon unclamped_rolloverIcon=new ImageIcon(Utilities.loadImage("org/opensim/coordinateviewer/images/unclamped_rollover.png"));
-   static ImageIcon clamped_rolloverIcon=new ImageIcon(Utilities.loadImage("org/opensim/coordinateviewer/images/clamped_rollover.png"));
-   static ImageIcon clampedIcon=new ImageIcon(Utilities.loadImage("org/opensim/coordinateviewer/images/clamped.png"));
-   static ImageIcon unlockedIcon=new ImageIcon(Utilities.loadImage("org/opensim/coordinateviewer/images/unlocked.png"));
-   static ImageIcon unlocked_rolloverIcon=new ImageIcon(Utilities.loadImage("org/opensim/coordinateviewer/images/unlocked_rollover.png"));
-   static ImageIcon locked_rolloverIcon=new ImageIcon(Utilities.loadImage("org/opensim/coordinateviewer/images/locked_rollover.png"));
-   static ImageIcon lockedIcon=new ImageIcon(Utilities.loadImage("org/opensim/coordinateviewer/images/locked.png"));
+   static ImageIcon unclampedIcon=new ImageIcon(ImageUtilities.loadImage("org/opensim/coordinateviewer/images/unclamped.png"));
+   static ImageIcon unclamped_rolloverIcon=new ImageIcon(ImageUtilities.loadImage("org/opensim/coordinateviewer/images/unclamped_rollover.png"));
+   static ImageIcon clamped_rolloverIcon=new ImageIcon(ImageUtilities.loadImage("org/opensim/coordinateviewer/images/clamped_rollover.png"));
+   static ImageIcon clampedIcon=new ImageIcon(ImageUtilities.loadImage("org/opensim/coordinateviewer/images/clamped.png"));
+   static ImageIcon unlockedIcon=new ImageIcon(ImageUtilities.loadImage("org/opensim/coordinateviewer/images/unlocked.png"));
+   static ImageIcon unlocked_rolloverIcon=new ImageIcon(ImageUtilities.loadImage("org/opensim/coordinateviewer/images/unlocked_rollover.png"));
+   static ImageIcon locked_rolloverIcon=new ImageIcon(ImageUtilities.loadImage("org/opensim/coordinateviewer/images/locked_rollover.png"));
+   static ImageIcon lockedIcon=new ImageIcon(ImageUtilities.loadImage("org/opensim/coordinateviewer/images/locked.png"));
    
   
+   private ArrayList<CoordinateChangeListener> coordChangeListeners = new ArrayList<CoordinateChangeListener>();;
+
    public CoordinateSliderWithBox(Coordinate coord) {
       this.coord = coord;
       this.model = coord.getModel();
@@ -139,8 +142,6 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
       jXSlider.addChangeListener(this);
       jFormattedTextField.addPropertyChangeListener("value", this);
       jFormattedTextField.addFocusListener((FocusListener)callback);
-      
-      updateValue();
    }
    
    private void setTextfieldBounds(boolean trueFalse) {
@@ -290,9 +291,9 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
       }
       if (openSimContext.getClamped(coord)){
          if (openSimContext.getValue(coord)>coord.getRangeMax()){
-            setTheValue(coord.getRangeMax()*conversion, true, true, true, true);
+            fireCoordinateChange(coord, coord.getRangeMax()*conversion, true, true, true, true);
          } else if (openSimContext.getValue(coord)<coord.getRangeMin()){
-            setTheValue(coord.getRangeMin()*conversion, true, true, true, true);
+            fireCoordinateChange(coord, coord.getRangeMin()*conversion, true, true, true, true);
          }
       }
 // TODO add your handling code here:
@@ -332,7 +333,7 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
      * During initialization, we don't want to update display of the whole model for every single slider.
      * but do it once after all the sliders were initialized.
      */
-    void setTheValue(double theValue, boolean setText, boolean setSlider, boolean setCoordinate, boolean updateDisplay) {
+   void setTheValue(double theValue, boolean setText, boolean setSlider, boolean setCoordinate, boolean updateDisplay) {
        // Remove change listeners before calling setValue to avoid extraneous events
        if(setText) {
           jFormattedTextField.removePropertyChangeListener("value", this);
@@ -370,8 +371,9 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
      * Called from CoordinateSliderWithBox in response to model coordinates changing.
      */
     public void updateValue() {
-       double theValue=openSimContext.getValue(coord) * conversion;
-       setTheValue(theValue, true, true, false, false);
+       double val = openSimContext.getValue(coord);
+       double theValue= val * conversion;
+       fireCoordinateChange(coord, theValue, true, true, false, false);
     }
     
     /**
@@ -381,7 +383,7 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
        JSlider source = (JSlider) e.getSource();
        if (source != jXSlider) return;
        double theValue = jXSlider.getValue()*step+min;
-       setTheValue(theValue, true, false, true, (source.getValueIsAdjusting()));
+       fireCoordinateChange(coord, theValue, true, false, true, (source.getValueIsAdjusting()));
     }
     /**
      * Text field change
@@ -391,7 +393,7 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
           Number value = (Number)evt.getNewValue();
           Number valueOld = (Number)evt.getOldValue();
           if (value != null && valueOld!=value) {
-             setTheValue(value.doubleValue(), false, true, true, true);
+             fireCoordinateChange(coord, value.doubleValue(), false, true, true, true);
           }
        }
     }
@@ -500,5 +502,26 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
        } else
           return bound;
     }
-     
+            
+    /**
+     * Update the listeners with change of values in each coordinate slider.
+     * @param newValue
+     * @param setText
+     * @param setSlider
+     * @param setCoordinate
+     * @param updateDisplay 
+     */
+    private void fireCoordinateChange(Coordinate coord, double newValue, boolean setText, boolean setSlider, boolean setCoordinate, boolean updateDisplay) {
+        for(CoordinateChangeListener listener : coordChangeListeners) {
+            listener.valueChanged(coord, newValue, setText, setSlider, setCoordinate, updateDisplay);
+        }
+    }
+    
+    /**
+     * Registering listeners for the coordinate changes to the component
+     * @param listener 
+     */
+    public void registerCoordChangeListener(CoordinateChangeListener listener) {
+        coordChangeListeners.add(listener);
+    }
 }
