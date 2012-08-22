@@ -147,6 +147,7 @@ public class ScaleToolPanel extends BaseToolPanel implements Observer {
                     return;
                 else {
                     scaleToolModel.deleteObserver(this);
+                    OpenSimDB.getInstance().deleteObserver(this);
                     NotifyDescriptor.Message dlg =
                           new NotifyDescriptor.Message("Model used by the tool is being closed. Closing tool.");
                     DialogDisplayer.getDefault().notify(dlg);

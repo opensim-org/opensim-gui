@@ -68,7 +68,7 @@ import org.opensim.view.pub.ViewDB;
 /**
  * Top component which displays something.
  */
-final class CoordinateViewerTopComponent extends TopComponent implements Observer {
+final class CoordinateViewerTopComponent extends TopComponent implements Observer, CoordinateChangeListener {
    
    private static CoordinateViewerTopComponent instance;
    private Model aModel;
@@ -92,6 +92,7 @@ final class CoordinateViewerTopComponent extends TopComponent implements Observe
    
    private CoordinateViewerTopComponent() {
       initComponents();
+
       jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
       setName(NbBundle.getMessage(CoordinateViewerTopComponent.class, "CTL_CoordinateViewerTopComponent"));
       setToolTipText(NbBundle.getMessage(CoordinateViewerTopComponent.class, "HINT_CoordinateViewerTopComponent"));
@@ -108,8 +109,6 @@ final class CoordinateViewerTopComponent extends TopComponent implements Observe
             //currentGroup = coords.getGroup((String)cb.getSelectedItem());
             updateDisplayGroup();
          }});
-      
-      
    }
    
    /** This method is called from within the constructor to
@@ -487,7 +486,9 @@ final class CoordinateViewerTopComponent extends TopComponent implements Observe
          if (!constrained){
             CoordinateSliderWithBox sliderPanel = new CoordinateSliderWithBox(coord);
             mapCoordinates2Sliders.put(coord, sliderPanel);
+            sliderPanel.registerCoordChangeListener(this);
             sliderPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
+            sliderPanel.updateValue();
             jPanel1.add(sliderPanel);
          }
       }
@@ -495,6 +496,23 @@ final class CoordinateViewerTopComponent extends TopComponent implements Observe
       jPanel1.add(Box.createRigidArea(new Dimension(10,10)));
       jPanel1.validate();
    }
+
+    public void valueChanged(Coordinate coord, double newValue, boolean setText, boolean setSlider, boolean setCoordinate, boolean updateDisplay) {
+        
+        CoordinateSliderWithBox currSlider = mapCoordinates2Sliders.get(coord);
+        currSlider.setTheValue(newValue, setText, setSlider, setCoordinate, setCoordinate);
+        
+        if(aModel.getConstraintSet().getSize() > 0 ){
+            for(Coordinate c : mapCoordinates2Sliders.keySet()) {
+                if(!c.getName().equals(coord.getName())){
+                    double val = mapCoordinates2Sliders.get(c).isRotational()? openSimContext.getValue(c) * (180.0/Math.PI) : openSimContext.getValue(c);
+                    mapCoordinates2Sliders.get(c).setTheValue(val
+                        ,true, true, false, false);
+                }
+            }
+        }
+    }
+    
    final static class ResolvableHelper implements Serializable {
       private static final long serialVersionUID = 1L;
       public Object readResolve() {

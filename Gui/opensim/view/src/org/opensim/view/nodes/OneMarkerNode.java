@@ -9,10 +9,12 @@ import javax.swing.ImageIcon;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.nodes.PropertySupport;
+import org.openide.nodes.PropertySupport.Reflection;
 import org.openide.nodes.Sheet;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.Marker;
+import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.editors.BodyNameEditor;
 import org.opensim.view.markerEditor.MarkerEditorAction;
@@ -77,7 +79,17 @@ public class OneMarkerNode extends OpenSimObjectNode{
         // Add property for Location
         Marker obj = Marker.safeDownCast(getOpenSimObject());
         MarkerAdapter gMarker = new MarkerAdapter(obj);
+        Model theModel = getModelForNode();
         try {
+            
+            set.remove("name");
+            Reflection nextNodeProp = createNodePropForObjectName(obj, theModel, true);
+                if (nextNodeProp != null) {
+                    nextNodeProp.setName("name");
+                    nextNodeProp.setShortDescription("Name of the Object");
+                    nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
+                    set.put(nextNodeProp);
+                }
             set.remove("body");
             PropertySupport.Reflection nextNodeProp2;
             nextNodeProp2 = new PropertySupport.Reflection(gMarker, String.class, "getBodyName", "setBodyName");
