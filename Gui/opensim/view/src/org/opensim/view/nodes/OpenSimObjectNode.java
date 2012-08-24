@@ -260,7 +260,7 @@ public class OpenSimObjectNode extends OpenSimNode {
             ex.printStackTrace();
          }
             
-         return getReviewAction();
+         return null;
     }
        
     /**
@@ -290,16 +290,7 @@ public class OpenSimObjectNode extends OpenSimNode {
      */
     public OpenSimObject getOpenSimObject()  { return openSimObject; }
 
-   protected Action getReviewAction() {
-      Action act =null;
-      try {
-         act = (ObjectGenericReviewAction) ObjectGenericReviewAction.findObject( (Class)Class.forName("org.opensim.view.ObjectGenericReviewAction"), true);
-      } catch (ClassNotFoundException ex) {
-         ex.printStackTrace();
-      }
-      return act;
-   }
-   
+  
    protected void addDisplayOption(displayOption newOption)
    {
       if( !getValidDisplayOptions().contains(newOption) )

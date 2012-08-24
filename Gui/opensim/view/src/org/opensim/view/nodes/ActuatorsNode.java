@@ -81,15 +81,6 @@ public class ActuatorsNode extends OpenSimObjectSetNode {
       
       return NbBundle.getMessage(ActuatorsNode.class, "CTL_Actuators");
    }
-   /**
-    * Actions, override behavior in OpenSimObjectNode since display options are not available
-    */
-   public Action[] getActions(boolean b) {
-      Action[] classSpecificActions=null;
-      classSpecificActions = new Action[]{
-         getReviewAction()};
-      return classSpecificActions;
-   }
    
       public Image getIcon(int i) {
       URL imageURL=null;

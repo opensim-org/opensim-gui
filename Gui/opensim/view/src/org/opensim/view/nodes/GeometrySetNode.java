@@ -77,15 +77,6 @@ public class GeometrySetNode extends OpenSimObjectSetNode {
       
       return NbBundle.getMessage(GeometrySetNode.class, "CTL_DisplayGeometries");
    }
-   /**
-    * Actions, override behavior in OpenSimObjectNode since display options are not available
-    */
-   public Action[] getActions(boolean b) {
-      Action[] classSpecificActions=null;
-      classSpecificActions = new Action[]{
-         getReviewAction()};
-      return classSpecificActions;
-   }
    
       public Image getIcon(int i) {
       URL imageURL=null;
