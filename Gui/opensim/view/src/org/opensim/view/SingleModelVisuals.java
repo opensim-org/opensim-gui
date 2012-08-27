@@ -834,6 +834,11 @@ public class SingleModelVisuals {
                 ((ObjectDisplayer)prop3D).updateFromProperties();
             }
         }
+        else if (specificObject instanceof Joint){
+            Joint jnt = Joint.safeDownCast(specificObject);
+            updateObjectDisplay(jnt.getBody());
+            updateObjectDisplay(jnt.getParentBody());            
+        }
     }
 }
 

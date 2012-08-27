@@ -32,7 +32,10 @@ package org.opensim.view;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.prefs.Preferences;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.DisplayGeometry;
@@ -248,13 +251,7 @@ public class BodyDisplayer extends vtkAssembly
             double userScale = Double.parseDouble(defaultSize);
             jointPFrame.SetScale(pFrameScale*userScale); //.2
             jointPFrame.setRadius(pFrameRadius*userScale); //.02
-            double[] location = new double[3];
-            double[] orientation = new double[3];
-            body.getJoint().getLocationInParent(location);
-            //jointPFrame.SetPosition(location);
-            body.getJoint().getOrientationInParent(orientation);
-            for (int i=0; i<3; i++) orientation[i]= Math.toDegrees(orientation[i]);
-            applyPositionAndOrientation(jointPFrame, orientation, location);
+            updateJointPFrame(body, jointPFrame);
             //jointPFrame.SetOrientation(orientation);
             jointPFrame.GetProperty().SetOpacity(0.75);
             jointPFrame.GetProperty().SetLineStipplePattern(2);
@@ -267,6 +264,16 @@ public class BodyDisplayer extends vtkAssembly
             Modified();
             mapChildren2Frames.remove(body);
         }
+    }
+
+    private void updateJointPFrame(Body body, FrameActor jointPFrame) {
+        double[] location = new double[3];
+        double[] orientation = new double[3];
+        body.getJoint().getLocationInParent(location);
+        //jointPFrame.SetPosition(location);
+        body.getJoint().getOrientationInParent(orientation);
+        for (int i=0; i<3; i++) orientation[i]= Math.toDegrees(orientation[i]);
+        applyPositionAndOrientation(jointPFrame, orientation, location);
     }
 
     public boolean isShowJointPFrame(Body body){
@@ -611,6 +618,20 @@ public class BodyDisplayer extends vtkAssembly
         applyVisibleObjectScaleAndTransform(body.getDisplayer());
         applyColorsFromModel();
         applyDisplayPreferences();
+        // update Joint frames
+        if (showJointBFrame){
+            setShowJointBFrame(false);
+            setShowJointBFrame(true); // This recomputes frame locations
+        }
+        Enumeration<Body> childBodies = mapChildren2Frames.keys();
+        while(childBodies.hasMoreElements()){
+            Body child = childBodies.nextElement();
+
+            if (mapChildren2Frames.containsKey(child)){
+                setShowJointPFrame(child, false);
+                setShowJointPFrame(child, true);
+            }
+        }
         SetCMLocationFromPropertyTable(true);
     }
 
