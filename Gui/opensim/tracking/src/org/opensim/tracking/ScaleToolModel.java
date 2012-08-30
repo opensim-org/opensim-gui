@@ -122,10 +122,6 @@ class BodySetScaleFactors extends Vector<BodyScaleFactors> {
       }
    }
 
-   public void print() {
-      for(int i=0; i<size(); i++) 
-         System.out.println("Body "+i+" ("+bodySet.get(i).getName()+"): "+get(i).toString());
-   }
 
    public void removeMeasurement(int index) {
       for(int i=0; i<size(); i++) {
@@ -299,10 +295,8 @@ public class ScaleToolModel extends Observable implements Observer {
       OpenSimContext processedModelContext=null;
       
       ScaleToolWorker() throws Exception {
-         System.out.println("MeasurementSet in ScaleToolWorker 1="+scaleTool.getModelScaler().getMeasurementSet().dump());
          updateScaleTool();
-         System.out.println("MeasurementSet in ScaleToolWorker 2="+scaleTool.getModelScaler().getMeasurementSet().dump());
-
+ 
          progressHandle = ProgressHandleFactory.createHandle("Executing scaling...",
                               new Cancellable() {
                                  public boolean cancel() {
@@ -337,7 +331,6 @@ public class ScaleToolModel extends Observable implements Observer {
             // Pass empty path as path to subject, since we already have the measurement trial as an absolute path
             String t=unscaledModel.getFilePath();
             scaleTool.getMarkerPlacer().setOutputModelFileName(t+scaleTool.getMarkerPlacer().getOutputModelFileName());
-            System.out.println("MeasurementSet in ScaleToolWorker 3="+scaleTool.getModelScaler().getMeasurementSet().dump());
 
             if(!processedModelContext.processModelScale(scaleTool.getModelScaler(), processedModel, "", scaleTool.getSubjectMass())) {
                result = false;
@@ -346,7 +339,6 @@ public class ScaleToolModel extends Observable implements Observer {
          }
 
          if(getMarkerPlacerEnabled()) {
-            System.out.println("MarkerPlacer...");
             // Pass empty path as path to subject, since we already have the static trial as an absolute path
             if(!processedModelContext.processModelMarkerPlacer(scaleTool.getMarkerPlacer(), processedModel, "")) {
                result = false;
@@ -448,15 +440,11 @@ public class ScaleToolModel extends Observable implements Observer {
    //------------------------------------------------------------------------
    
    private void updateScaleTool() {
-      /// GOOOOOOOOOOOOOOOOOOOD
       scaleTool.setPrintResultFiles((scaleTool.getMarkerPlacer().getOutputModelFileName()!=""));
       scaleTool.getGenericModelMaker().setMarkerSetFileName(extraMarkerSetFile.toProperty());
       scaleTool.getModelScaler().setMarkerFileName(measurementTrialFile.toProperty());
-      System.out.println("MeasurementSet in updateScaleTool 1.5="+scaleTool.getModelScaler().getMeasurementSet().dump());
 
       bodySetScaleFactors.toModelScaler();
-      /// BAAAAAAAAAAAD
-      System.out.println("MeasurementSet in updateScaleTool 2="+scaleTool.getModelScaler().getMeasurementSet().dump());
       ikCommonModel.toMarkerPlacer(scaleTool.getMarkerPlacer());
    }
 

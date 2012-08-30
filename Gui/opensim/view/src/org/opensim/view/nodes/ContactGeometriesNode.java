@@ -74,15 +74,6 @@ public class ContactGeometriesNode extends OpenSimObjectSetNode {
       
       return NbBundle.getMessage(ContactGeometriesNode.class, "CTL_ContactGeometries");
    }
-   /**
-    * Actions, override behavior in OpenSimObjectNode since display options are not available
-    */
-   public Action[] getActions(boolean b) {
-      Action[] classSpecificActions=null;
-      classSpecificActions = new Action[]{
-         getReviewAction()};
-      return classSpecificActions;
-   }
    
       public Image getIcon(int i) {
       URL imageURL=null;

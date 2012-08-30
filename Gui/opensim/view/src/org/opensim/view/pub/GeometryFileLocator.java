@@ -61,11 +61,11 @@ public class GeometryFileLocator {
    public String getFullname(String modelFilePath, String bareFileName, boolean debug) {
       String candidate=modelFilePath+File.separator+bareFileName;
       if (debug) OpenSimLogger.logMessage("Debug: Trying "+candidate+"\n", OpenSimLogger.INFO);
-      if (new File(candidate).exists())
+      if (isValidFile(candidate))
          return candidate;
       candidate = modelFilePath+File.separator+"Geometry"+File.separator+bareFileName;
       if (debug) OpenSimLogger.logMessage("Debug: Trying "+candidate+"\n", OpenSimLogger.INFO);
-      if (new File(candidate).exists())
+      if (isValidFile(candidate))
          return candidate;
       String GeometryPath=Preferences.userNodeForPackage(TheApp.class).get("Geometry Path", ".");
       if (GeometryPath!=null){
@@ -77,17 +77,21 @@ public class GeometryFileLocator {
                 String nextDir = tokenizer.nextToken();
                 candidate = nextDir+File.separator+bareFileName;
                if (debug) OpenSimLogger.logMessage("Debug: Trying "+candidate+"\n", OpenSimLogger.INFO);
-               if (new File(candidate).exists())
+               if (isValidFile(candidate))
                   return candidate;
          }
       }
       // Either "GeometryPath" is unspecified or was searched and nothing was found, now try installation dir.
       candidate= ".."+File.separator+"Models"+File.separator+"Geometry"+File.separator+bareFileName;
       if (debug) OpenSimLogger.logMessage("Debug: Trying "+candidate+"\n", OpenSimLogger.INFO);
-      if (new File(candidate).exists())
+      if (isValidFile(candidate))
          return candidate;
       if (debug) System.out.println("GeometryFileLocator: not foound"+candidate);
       return null;
    }
+
+    private boolean isValidFile(String candidate) {
+        return new File(candidate).exists()&& new File(candidate).isFile();
+    }
    
 }

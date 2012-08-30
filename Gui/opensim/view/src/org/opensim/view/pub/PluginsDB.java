@@ -54,7 +54,7 @@ public class PluginsDB implements Externalizable {
      * This constructor will be invoked from the deserialization code 
      */
     public PluginsDB() {
-        System.out.println("PluginsDB constructor called");
+        //System.out.println("PluginsDB constructor called");
         instance = this;
     }
 

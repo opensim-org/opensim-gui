@@ -5,10 +5,8 @@
  */
 package org.opensim.helputils;
 
-import java.io.IOException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.text.html.HTMLEditorKit;
-import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.OpenSimObject;
 
@@ -140,10 +138,10 @@ public class ShowXMLRepJDialog extends javax.swing.JDialog {
         String selectedClass = (String) jComboBox1.getSelectedItem();
         OpenSimObject obj = OpenSimObject.newInstanceOfType(selectedClass);
         String contents = "";
-        contents = contents.concat("<FONT COLOR=RED>&lt;" + obj.getConcreteClassName() + "&gt</FONT><br>");
-        String newdump = dumpObj(obj, "");
+        //contents = contents.concat("<FONT COLOR=RED>&lt;" + obj.getConcreteClassName() + "&gt</FONT><br>");
+        String newdump = dumpObj(obj);
         contents = contents.concat(newdump);
-        contents = contents.concat("<FONT COLOR=RED>&lt;/" + obj.getConcreteClassName() + "&gt</FONT><br>");
+        //contents = contents.concat("<FONT COLOR=RED>&lt;/" + obj.getConcreteClassName() + "&gt</FONT><br>");
         jEditorPane1.selectAll();
         jEditorPane1.cut();
         jEditorPane1.setText(contents);
@@ -202,30 +200,17 @@ public class ShowXMLRepJDialog extends javax.swing.JDialog {
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 
-    private String removeEnclosingParethesisIfNeeded(String string) {
-        if (string.startsWith("(")) {
-            return string.substring(1, string.length() - 1);
-        }
-        return string;
-    }
 
-    String dumpObj(OpenSimObject obj, String indent) {
-        String result="";
-        for (int p = 0; p < obj.getNumProperties(); ++p) {
-            AbstractProperty ap = obj.getPropertyByIndex(p);
-            String cmt = ap.getComment();
-            if (cmt.length() > 0) {
-               result = result.concat("\t<FONT COLOR=Green>&lt;!--" + cmt + "--&gt</FONT><br>\n");
-            }
-            result = result.concat("\t<FONT COLOR=RED>&lt;" + ap.getName() + "&gt;</FONT>\n"
-                        + removeEnclosingParethesisIfNeeded(ap.toString())
-                        + "<FONT COLOR=RED>&lt;/" + ap.getName() + "&gt</FONT><br>\n");
-             if (ap.isObjectProperty()) {
-                for (int i = 0; i < ap.size(); ++i) {
-                    /////result = result.concat(dumpObj(ap.getValueAsObject(i), ""));
-                }
-            }
-        }
-        return result;
+    String dumpObj(OpenSimObject obj) {
+        String result=obj.dump();
+        result=result.replaceAll(">", "&gt;");
+        result=result.replaceAll("<", "&lt;");
+        result=result.replaceAll("\n", "<br>\n");
+ 
+        result=result.replaceAll("&lt;", "<FONT COLOR=RED>&lt;");
+        result=result.replaceAll("&gt;", "&gt;</FONT>");
+        result=result.replaceAll("\\<FONT COLOR=RED\\>&lt;!", "<FONT COLOR=GREEN>&lt;!");
+
+         return result;
     }
 }

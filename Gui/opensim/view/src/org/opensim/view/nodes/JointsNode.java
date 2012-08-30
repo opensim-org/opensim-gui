@@ -96,10 +96,4 @@ public class JointsNode extends OpenSimObjectSetNode {
    public String getHtmlDisplayName() {
        return NbBundle.getMessage(JointsNode.class, "CTL_Joints"); }
 
-   public Action[] getActions(boolean b) {
-        Action[] classSpecificActions=null;
-            classSpecificActions = new Action[]{
-                getReviewAction()};
-        return classSpecificActions;
-   }
 }

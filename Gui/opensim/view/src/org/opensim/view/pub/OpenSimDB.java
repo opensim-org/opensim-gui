@@ -141,8 +141,8 @@ public class OpenSimDB extends Observable implements Externalizable{
         setChanged();
         ModelEvent evnt = new ModelEvent(aModel, ModelEvent.Operation.Open);
         notifyObservers(evnt); 
-        setCurrentModel(aModel);
-        ExplorerTopComponent.addFinalEdit();
+        setCurrentModel(aModel, false);
+        //ExplorerTopComponent.addFinalEdit();
     }
     
     public void setContext(Model aModel, OpenSimContext context) {
@@ -372,7 +372,7 @@ public class OpenSimDB extends Observable implements Externalizable{
             }
         }
         if (saveCurrentModel!=null)
-            setCurrentModel(saveCurrentModel);
+            setCurrentModel(saveCurrentModel, false);
     }
 
     public void writeExternal(ObjectOutput out) throws IOException {

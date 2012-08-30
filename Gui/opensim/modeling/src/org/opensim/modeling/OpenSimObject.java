@@ -220,8 +220,12 @@ public class OpenSimObject {
     return opensimModelJNI.OpenSimObject_print(swigCPtr, this, fileName);
   }
 
+  public String dump(boolean dumpDefaultName) {
+    return opensimModelJNI.OpenSimObject_dump__SWIG_0(swigCPtr, this, dumpDefaultName);
+  }
+
   public String dump() {
-    return opensimModelJNI.OpenSimObject_dump(swigCPtr, this);
+    return opensimModelJNI.OpenSimObject_dump__SWIG_1(swigCPtr, this);
   }
 
   public static String getClassName() {

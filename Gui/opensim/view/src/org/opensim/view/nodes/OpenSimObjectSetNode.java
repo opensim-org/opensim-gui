@@ -112,8 +112,7 @@ public class OpenSimObjectSetNode extends OpenSimObjectNode {
     public Action[] getActions(boolean b) {
       Action[] objectNodeActions;
       try {
-         objectNodeActions = new Action[]  {getReviewAction(), 
-                                          null, 
+         objectNodeActions = new Action[]  {
                                           (ObjectSetDisplayMenuAction) ObjectSetDisplayMenuAction.findObject(
                  (Class)Class.forName("org.opensim.view.ObjectSetDisplayMenuAction"), true)};
       } catch (ClassNotFoundException ex) {
@@ -128,16 +127,5 @@ public class OpenSimObjectSetNode extends OpenSimObjectNode {
     public OpenSimObject getOpenSimObject() {
         return openSimObject;
     }
-
-   protected Action getReviewAction() {
-      Action act =null;
-      try {
-         act = (ObjectGenericReviewAction) ObjectGenericReviewAction.findObject(
-                    (Class)Class.forName("org.opensim.view.ObjectGenericReviewAction"), true);
-      } catch (ClassNotFoundException ex) {
-         ex.printStackTrace();
-      }
-      return act;
-   }
 
 }
