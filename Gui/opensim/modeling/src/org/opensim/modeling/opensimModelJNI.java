@@ -961,6 +961,8 @@ public class opensimModelJNI {
   public final static native long ArrayDouble_createVec3__SWIG_0(double jarg1, double jarg2, double jarg3);
   public final static native long ArrayDouble_createVec3__SWIG_1(double jarg1);
   public final static native long ArrayDouble_createVec3__SWIG_2(double[] jarg1);
+  public final static native long ArrayDouble_getAsVector(long jarg1, ArrayDouble jarg1_);
+  public final static native void ArrayDouble_populateFromVector(long jarg1, ArrayDouble jarg1_, long jarg2);
   public final static native long ArrayDouble_getValuesFromVec3(long jarg1);
   public final static native String ArrayDouble_toString(long jarg1, ArrayDouble jarg1_);
   public final static native void delete_ArrayInt(long jarg1);
@@ -5867,6 +5869,8 @@ public class opensimModelJNI {
   public final static native void delete_SimmFileWriter(long jarg1);
   public final static native boolean SimmFileWriter_writeMuscleFile(long jarg1, SimmFileWriter jarg1_, String jarg2);
   public final static native boolean SimmFileWriter_writeJointFile(long jarg1, SimmFileWriter jarg1_, String jarg2);
+  public final static native void mapCxxExceptionsToJava_set(boolean jarg1);
+  public final static native boolean mapCxxExceptionsToJava_get();
   public final static native long OpenSimContext_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void OpenSimContext_assign(long jarg1, OpenSimContext jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String OpenSimContext_getClassName();
