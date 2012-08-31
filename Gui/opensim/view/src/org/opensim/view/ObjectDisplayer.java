@@ -23,6 +23,7 @@ public abstract class ObjectDisplayer extends vtkActor {
      */
     protected void applyDisplayPrefs(OpenSimObject object) {
         AbstractProperty ap = obj.getPropertyByName("display_preference");
+        if (ap == null) return;
         int prefInt = PropertyHelper.getValueInt(ap);
         DisplayGeometry.DisplayPreference pref = DisplayGeometry.DisplayPreference.swigToEnum(prefInt);
         // Show vs. HideDisplayGeometry

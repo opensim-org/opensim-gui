@@ -27,7 +27,6 @@ package org.opensim.view.editors;
 
 import java.awt.Insets;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -39,6 +38,7 @@ import org.opensim.modeling.IO;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PropertyHelper;
 import org.opensim.modeling.AbstractProperty;
+import org.opensim.modeling.ArrayDouble;
 
 //=========================================================================
 // OpenSimObjectModel
@@ -366,7 +366,8 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
         return ( (OpenSimObject) propertyOrObject).getName();
       else {
          AbstractProperty ap = (AbstractProperty)propertyOrObject;
-         if (ap.isListProperty() && idx==-1)
+         //System.out.println("Processing property ["+ap.getName()+ "] type = ["+propValueType+"] index ="+idx);
+         if (ap.isListProperty() && idx==-1 || ap.isOptionalProperty() && idx==-1)
              return ap.toString();
          if(propValueType.equalsIgnoreCase("double")) { 
             return PropertyHelper.getValueDouble(ap, idx);
@@ -387,6 +388,9 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
 
     public Class getValueClass() { 
       if (propertyOrObject instanceof AbstractProperty) {
+          if (((AbstractProperty)propertyOrObject).isListProperty()  && idx==-1){
+              return String.class;
+          }
          if(propValueType.equalsIgnoreCase("double")) return Double.class;
          else if(propValueType.equalsIgnoreCase("int")) return Integer.class;
          else if(propValueType.equalsIgnoreCase("string")) return String.class;
@@ -448,6 +452,10 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
             } else if(propValueType.equalsIgnoreCase("Transform")) {
                double val = (value instanceof String) ? numFormat.parse((String)value).doubleValue() : ((Double)value).doubleValue();
                PropertyHelper.setValueTransform(val, p, idx);
+             } else if(propValueType.equalsIgnoreCase("Vec3")) {
+                 ArrayDouble d = new ArrayDouble();
+                 d.fromString((String)value);
+                 for(int i=0; i<3; i++) PropertyHelper.setValueVec3(d.getitem(i), p, i);
              }
          } catch (ParseException ex) { // might get a parsing exception
          }

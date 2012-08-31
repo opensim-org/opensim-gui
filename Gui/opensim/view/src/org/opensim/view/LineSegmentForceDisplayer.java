@@ -204,7 +204,7 @@ public class LineSegmentForceDisplayer {
       for(int i=0; i<pointGlyphIds.size(); i++) pointsRep.hide(pointGlyphIds.get(i));
       for(int i=0; i<segmentGlyphIds.size(); i++) segmentsRep.hide(segmentGlyphIds.get(i));
 
-      if (dp == DisplayPreference.None) return;
+      if (dp == DisplayPreference.None || openSimContext.isDisabled(forceAlongPath)) return;
 
       // A displayer is found, get geometry
       int geomSize = actuatorDisplayer.countGeometry();

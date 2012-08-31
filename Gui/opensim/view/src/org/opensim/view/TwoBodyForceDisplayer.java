@@ -31,12 +31,11 @@ import vtk.vtkTubeFilter;
  *
  * @author Ayman
  */
-public class TwoBodyForceDisplayer implements ObjectDisplayerInterface {
+public class TwoBodyForceDisplayer extends vtkActor implements ObjectDisplayerInterface {
     
     protected OpenSimContext openSimContext;
     protected vtkAssembly modelAssembly;
     protected Force force;
-    private vtkActor actor;
     vtkLineSource lineSource;
     private vtkTubeFilter dFilter;
     private vtkPolyData baseShapePolyData=null;
@@ -47,6 +46,7 @@ public class TwoBodyForceDisplayer implements ObjectDisplayerInterface {
 
     /** Creates a new instance of TwoBodyForceDisplayer */
     public TwoBodyForceDisplayer(Force force, vtkAssembly modelAssembly){
+        super();
         this.force = force;
         this.modelAssembly = modelAssembly;
         openSimContext = OpenSimDB.getInstance().getContext(force.getModel());
@@ -54,7 +54,6 @@ public class TwoBodyForceDisplayer implements ObjectDisplayerInterface {
         int numGeometryPieces = force.getDisplayer().countGeometry();
         // Create Actor for fObject in ground frame then add it
         if (numGeometryPieces > 0){
-            actor = new vtkActor();
             vtkAppendPolyData forcePolyData = new vtkAppendPolyData();
             dFilter = new vtkTubeFilter();
             dFilter.SetRadius(baseSize);
@@ -77,10 +76,10 @@ public class TwoBodyForceDisplayer implements ObjectDisplayerInterface {
             }
             vtkPolyDataMapper forceMapper = new vtkPolyDataMapper();
             forceMapper.SetInput(forcePolyData.GetOutput());
-            actor.SetMapper(forceMapper);
+            SetMapper(forceMapper);
             visible = (force.getDisplayer().getDisplayPreference()!=DisplayPreference.None);
             if (visible)
-                modelAssembly.AddPart(actor);
+                modelAssembly.AddPart(this);
 
         }
    } 
@@ -89,25 +88,21 @@ public class TwoBodyForceDisplayer implements ObjectDisplayerInterface {
         openSimContext.updateDisplayer(force);
     }
 
-    public vtkActor getActor() {
-        return actor;
-    }
-
     public void setModified() {
-        actor.Modified();
+        Modified();
         modelAssembly.Modified();
     }
 
     public void updateGeometry() {
      if(force.getDisplayer()==null) return;
      if (force.getDisplayer().getDisplayPreference()==DisplayPreference.None){
-         modelAssembly.RemovePart(actor);
+         modelAssembly.RemovePart(this);
           setModified();
           visible = false;
           return;
      }
      visible = true;
-     modelAssembly.AddPart(actor);
+     modelAssembly.AddPart(this);
      Enumeration<LineGeometry> dispIter = mapGeometryToDisplayGeometry.keys();
       while(dispIter.hasMoreElements()){
          LineGeometry ag = dispIter.nextElement();
@@ -141,5 +136,10 @@ public class TwoBodyForceDisplayer implements ObjectDisplayerInterface {
         this.baseSize = baseSize;
     }
 
+    @Override
+    public void updateFromProperties() {
+        OpenSimContext context=OpenSimDB.getInstance().getContext(force.getModel());
+        if (context.isDisabled(force)) SetVisibility(0); else SetVisibility(1);
+    }
 
 }
