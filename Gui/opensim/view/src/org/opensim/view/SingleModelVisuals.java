@@ -311,6 +311,7 @@ public class SingleModelVisuals {
       while(fNoPathIter.hasMoreElements()){
           Force f = fNoPathIter.nextElement();
           OpenSimContext context=OpenSimDB.getInstance().getContext(f.getModel());
+          
           if (context.isDisabled(f)) continue;
           if (f.getDisplayer()==null) continue;
           context.updateDisplayer(f);
@@ -692,14 +693,14 @@ public class SingleModelVisuals {
     public vtkProp3DCollection getUserObjects() {
         return userObjects;
     }
-
+    // Springs and other forces
     private void addNonPathForceGeometry(vtkAssembly modelAssembly, OpenSimObject fObject) {
         Force f = Force.safeDownCast(fObject);
         OpenSimContext context=OpenSimDB.getInstance().getContext(f.getModel());
         if (context.isDisabled(f)) return;
         if (f.getDisplayer()==null) return;
         TwoBodyForceDisplayer foceDisplayer = new TwoBodyForceDisplayer(f, modelAssembly);
-        vtkActor forceActor = foceDisplayer.getActor();
+        vtkActor forceActor = foceDisplayer;
         if (forceActor!=null){
             mapNoPathForces2Displayer.put(f, foceDisplayer);
             mapVtkObjects2Objects.put(forceActor,f);
@@ -833,6 +834,8 @@ public class SingleModelVisuals {
             else if (prop3D instanceof ObjectDisplayer ){
                 ((ObjectDisplayer)prop3D).updateFromProperties();
             }
+            else if (prop3D instanceof ObjectDisplayerInterface)
+                ((ObjectDisplayerInterface)prop3D).updateFromProperties();
         }
         else if (specificObject instanceof Joint){
             Joint jnt = Joint.safeDownCast(specificObject);

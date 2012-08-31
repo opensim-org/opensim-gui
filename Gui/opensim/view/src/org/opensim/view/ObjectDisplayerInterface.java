@@ -21,5 +21,7 @@ public interface ObjectDisplayerInterface {
     void updateGeometry();
     
     OpenSimObject getOpenSimObject();
+
+    public void updateFromProperties();
     
 }
