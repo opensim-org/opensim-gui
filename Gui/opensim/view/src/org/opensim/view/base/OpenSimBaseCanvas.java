@@ -426,12 +426,7 @@ public class OpenSimBaseCanvas extends vtkPanel
             avg += bgnd[i];
         }
         avg /= 3;
-        
-        System.out.println("Colour Code: " + bgnd[0] + "," + bgnd[1] + "," + bgnd[2]);
-        System.out.println("bgnd size: " + bgnd.length);
-                    
-        System.out.println("******AVERAGE COLOR****** " + avg);
-    
+            
         // If intensity >= 0.21 use one setting for ColorWindow and ColorLevel, else use another
         double[] colorWindowAndLevel = (avg >= 0.21) ? new double[]{1000, 500} : new double[]{250,  175};
         
