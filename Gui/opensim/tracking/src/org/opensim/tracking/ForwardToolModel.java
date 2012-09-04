@@ -37,6 +37,7 @@ import org.opensim.view.motions.MotionsDB;
 import org.opensim.swingui.SwingWorker;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
+import org.opensim.view.ModelPose;
 import org.opensim.view.motions.JavaMotionDisplayerCallback;
 import org.opensim.view.pub.OpenSimDB;
 
@@ -69,6 +70,8 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
          // Update actuator set and contact force set based on settings in the tool, then call setup() and setModel()
          // setModel() will call addAnalysisSetToModel
          tool.updateModelForces(model, "");
+         ModelPose currentPose = new ModelPose("current", getOriginalModel());
+         currentPose.applyToModel(model);
          model.initSystem();
          model.setInputFileName("");    // Will do this after initSystem so that contact geometry can be loaded properly
          

@@ -51,6 +51,11 @@ public class ModelPose {
    public ModelPose(CoordinateSet coords, String name) {
       this(coords, name, false);
    }
+   // Create a pose from the current configuration of the model. This includes only coorindtae values
+   // that is, speeds and other state variables are not maintained
+   public ModelPose(String poseName, Model aModel){
+       this(aModel.getCoordinateSet(), poseName);
+   }
 
    public ModelPose(CoordinateSet coords, String name, boolean isDefault) {
       setPoseName(name);
@@ -102,5 +107,18 @@ public class ModelPose {
       return getPoseName();
    }
    
-   
+   public void applyToModel(Model aModel){
+      Vector<String> coordinateNames=getCoordinateNames();
+      Vector coordinateValues=getCoordinateValues();
+      CoordinateSet coords = aModel.getCoordinateSet();
+
+      for(int i=0;i<coordinateNames.size();i++){
+         // Values in file
+         String name=coordinateNames.get(i);
+         double storedValue = (Double)coordinateValues.get(i);
+         if (coords.contains(name)){
+            coords.get(name).setDefaultValue(storedValue);
+         }
+      }
+   }
  }
