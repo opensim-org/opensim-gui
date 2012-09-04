@@ -58,9 +58,6 @@ import vtk.vtkTransform;
 import vtk.vtkTransformPolyDataFilter;
 import vtk.vtkArrowSource;
 import vtk.vtkLineSource;
-import vtk.vtkOutlineFilter;
-import vtk.vtkPlaneSource;
-import vtk.vtkPolyDataMapper;
 
 /**
  *
@@ -89,7 +86,7 @@ public class SingleModelVisuals {
     private double[] defaultMusclePointColor = new double[]{1.0, 0.0, 0.0};
     private double[] defaultWrapObjectColor = new double[]{0.0, 1.0, 1.0};
     private boolean useCylinderMuscles=true;
-
+    
     // Maps between objects and vtkProp3D for going from Actor to Object and vice versa
     // Objects are mapped to vtkProp3D in general, but some are known to be assemblies
     // e.g. Muscles, Models
@@ -101,10 +98,7 @@ public class SingleModelVisuals {
     private Hashtable<Force, ObjectDisplayerInterface> mapNoPathForces2Displayer = new Hashtable<Force, ObjectDisplayerInterface>();
 
     protected Hashtable<OpenSimObject, vtkLineSource> mapMarkers2Lines = new Hashtable<OpenSimObject, vtkLineSource>(50);
-    //protected Hashtable<OpenSimObject, Boolean> markerLinesVisible = new Hashtable<OpenSimObject, Boolean>(50);
-    //protected vtkActor markerLineActor = new vtkActor();
-    //protected vtkAppendPolyData markerLinePolyData = new vtkAppendPolyData();
-    
+     
     // Markers and muscle points are represented as Glyphs for performance
     private MarkersDisplayer markersRep=new MarkersDisplayer();
     private OpenSimvtkGlyphCloud  musclePointsRep=new OpenSimvtkGlyphCloud(false);
@@ -116,13 +110,11 @@ public class SingleModelVisuals {
     private vtkProp3DCollection  userObjects = new vtkProp3DCollection();
     private vtkProp3DCollection  bodiesCollection = new vtkProp3DCollection();
     private ModelComDisplayer comDisplayer;
-    private boolean debug=false;
     private boolean showCOM=false;
     /**
      * Creates a new instance of SingleModelVisuals
      */
     public SingleModelVisuals(Model aModel) {
-        debug = (ViewDB.getInstance().getDebugLevel() >= 1);
         initDefaultShapesAndColors();
         modelDisplayAssembly = createModelAssembly(aModel);
         setVisible(true);
@@ -149,7 +141,7 @@ public class SingleModelVisuals {
     /**
      * Create one vtkAssembly representing the model and return it.
      */
-    protected vtkAssembly createModelAssembly(Model model)
+    private vtkAssembly createModelAssembly(Model model)
     {                
         vtkAssembly modelAssembly = new vtkAssembly();
         // Keep track of ground body to avoid recomputation
@@ -165,6 +157,7 @@ public class SingleModelVisuals {
                     mapObject2VtkObjects, mapVtkObjects2Objects);
             vtkMatrix4x4 bXform = getBodyTransform(model, body);
             double[] bodyBounds = bodyRep.getBodyBounds();
+            //ViewDB.printBounds(body.getName(), bodyBounds);
             for(int c=0; c<3; c++){
                 bodyBounds[2*c] += bXform.GetElement(c, 3);
                 bodyBounds[2*c+1] += bXform.GetElement(c, 3);
@@ -799,28 +792,7 @@ public class SingleModelVisuals {
     public double[] getBounds() {
         return bounds;
     }
-   public void createBBox()
-    {
-      double[] bnds = getBounds();
-     System.out.println("createBBox"+bounds[0]
-              +" "+bounds[1]+" "+bounds[2]+" "+bounds[3]+" "+bounds[4]+" "+bounds[5]);
-     vtkPlaneSource plane = new vtkPlaneSource();
-      plane.SetResolution(50,50);
 
-      plane.SetPoint1(bnds[0], bnds[2], bnds[4]);
-      plane.SetPoint2(bnds[1], bnds[3], bnds[5]);
-      plane.SetOrigin((bnds[0]+bnds[1])/2., (bnds[2]+bnds[3])/2., (bnds[4]+bnds[5])/2.);
-    vtkOutlineFilter outTpd1 = new vtkOutlineFilter();
-      outTpd1.SetInput(plane.GetOutput());
-
-    vtkPolyDataMapper mapTpd1 = new vtkPolyDataMapper();
-      mapTpd1.SetInput(outTpd1.GetOutput());
-
-    vtkActor tpd1Actor = new vtkActor();
-      tpd1Actor.SetMapper(mapTpd1);
-      tpd1Actor.GetProperty().SetColor(1,0,0);
-      modelDisplayAssembly.AddPart(tpd1Actor);
-    }
 
     public void updateObjectDisplay(OpenSimObject specificObject) {
         vtkProp3D prop3D = mapObject2VtkObjects.get(specificObject);

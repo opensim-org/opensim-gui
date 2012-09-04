@@ -138,11 +138,11 @@ public class BodyDisplayer extends vtkAssembly
           if (boneActor!=null){
             hasGeometry=true;
             displayGeometryAssembly.AddPart(boneActor);
-            mapGeometryToVtkObjects.put(gPiece, boneActor);
+           mapGeometryToVtkObjects.put(gPiece, boneActor);
           }
       }
       this.AddPart(displayGeometryAssembly);
-      applyVisibleObjectScaleAndTransform(bodyVisibleObject);
+      applyVisibleObjectScaleAndTransform(bodyVisibleObject, displayGeometryAssembly);
        
       if (hasGeometry){
          vtkProp3DCollection parts = displayGeometryAssembly.GetParts();
@@ -158,7 +158,7 @@ public class BodyDisplayer extends vtkAssembly
          }
          append.Update();
          outlineFilter.AddInput(append.GetOutput());
-      }
+       }
 
       if( bodyVisibleObject.getShowAxes() )
           AddPart( getBodyAxes() );
@@ -166,9 +166,8 @@ public class BodyDisplayer extends vtkAssembly
       this.SetCMLocationFromPropertyTable( false );
       
        if (hasGeometry){
-         double[] bnds = outlineActor.GetBounds();
-         //outlineActor.SetVisibility(0);
-         bodyBounds = ViewDB.boundsUnion(bnds, bodyBounds);
+         applyVisibleObjectScaleAndTransform(body.getDisplayer(), outlineActor);
+         bodyBounds = outlineActor.GetBounds();
          //AddPart(outlineActor);
       }
 
@@ -178,7 +177,7 @@ public class BodyDisplayer extends vtkAssembly
       modelAssembly.AddPart(this);
     }
 
-    private void applyVisibleObjectScaleAndTransform(VisibleObject bodyVisibleObject) {
+    private void applyVisibleObjectScaleAndTransform(VisibleObject bodyVisibleObject, vtkProp3D vtkObjectToTransform) {
         // Scale
         double[] bodyScales = new double[3];
         bodyVisibleObject.getScaleFactors(bodyScales);
@@ -187,11 +186,11 @@ public class BodyDisplayer extends vtkAssembly
          /*
           * Scale
           */
-         displayGeometryAssembly.SetScale(bodyScales);
+         vtkObjectToTransform.SetScale(bodyScales);
          // Transform
          vtkTransform xform = new vtkTransform();
          setTransformFromArray6(bodyRotTrans, xform);
-         displayGeometryAssembly.SetUserTransform(xform);
+         vtkObjectToTransform.SetUserTransform(xform);
     }
 
     public void applyPositionAndOrientation(FrameActor frame, double[] orientation, double[] location) {
@@ -484,8 +483,8 @@ public class BodyDisplayer extends vtkAssembly
              mapVtkObjects2Objects.put(nextActor, body);
              if (nextActor instanceof vtkActor)
                  actors.add((vtkActor)nextActor);
-             if (nextActor instanceof FrameActor || nextActor == centerOfMassActor ||
-                     nextActor == outlineActor) continue;
+             if (nextActor instanceof FrameActor || nextActor == centerOfMassActor /*||
+                     nextActor == outlineActor*/) continue;
              mapObject2VtkObjects.put(gSet.get(idx), nextActor);
              idx++;
         }
@@ -615,7 +614,7 @@ public class BodyDisplayer extends vtkAssembly
      * Update display of Body to correspond to latest Properties
      */
    void updateFromProperties() {
-        applyVisibleObjectScaleAndTransform(body.getDisplayer());
+        applyVisibleObjectScaleAndTransform(body.getDisplayer(), displayGeometryAssembly);
         applyColorsFromModel();
         applyDisplayPreferences();
         // update Joint frames
