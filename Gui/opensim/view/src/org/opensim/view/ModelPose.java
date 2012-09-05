@@ -106,10 +106,9 @@ public class ModelPose {
    public String toString() {
       return getPoseName();
    }
+
    
-   public void applyToModel(Model aModel){
-      Vector<String> coordinateNames=getCoordinateNames();
-      Vector coordinateValues=getCoordinateValues();
+   public void useAsDefaultForModel(Model aModel){
       CoordinateSet coords = aModel.getCoordinateSet();
 
       for(int i=0;i<coordinateNames.size();i++){

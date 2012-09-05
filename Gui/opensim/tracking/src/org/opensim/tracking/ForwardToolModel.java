@@ -71,7 +71,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
          // setModel() will call addAnalysisSetToModel
          tool.updateModelForces(model, "");
          ModelPose currentPose = new ModelPose("current", getOriginalModel());
-         currentPose.applyToModel(model);
+         currentPose.useAsDefaultForModel(model);
          model.initSystem();
          model.setInputFileName("");    // Will do this after initSystem so that contact geometry can be loaded properly
          

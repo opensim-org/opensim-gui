@@ -14,6 +14,7 @@ import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PropertyHelper;
 import org.opensim.utils.Vec3;
 import org.opensim.view.ExplorerTopComponent;
+import org.opensim.view.ModelPose;
 import org.opensim.view.SingleModelGuiElements;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
@@ -62,13 +63,15 @@ public class PropertyEditorAdaptor {
     OpenSimContext context = null; // Context object needed to recreate the system as needed, cached for speed
     Model model; // model to which obj belongs
     OpenSimObjectNode node;
+    ModelPose defaultPose;
 
     public PropertyEditorAdaptor(String propertyName, OpenSimObjectNode ownerNode) {
-         this.model = ownerNode.getModelForNode();
+        this.model = ownerNode.getModelForNode();
         this.context = OpenSimDB.getInstance().getContext(model);
         this.obj = ownerNode.getOpenSimObject();
         this.prop = obj.getPropertyByName(propertyName);
         this.node = ownerNode;
+        defaultPose = new ModelPose(model.getCoordinateSet(), "_saveDefault", true);
     }
     public PropertyEditorAdaptor(AbstractProperty prop, OpenSimObjectNode ownerNode) {
         this.prop = prop;
@@ -76,6 +79,7 @@ public class PropertyEditorAdaptor {
         this.context = OpenSimDB.getInstance().getContext(model);
         this.obj = ownerNode.getOpenSimObject();
         this.node = ownerNode;
+        defaultPose = new ModelPose(model.getCoordinateSet(), "_saveDefault", true);
     }
     public PropertyEditorAdaptor(AbstractProperty prop, OpenSimObject obj, Model model, OpenSimObjectNode ownerNode) {
         this.prop = prop;
@@ -83,6 +87,7 @@ public class PropertyEditorAdaptor {
         this.model = model;
         this.obj = obj;
         this.node = ownerNode;
+        defaultPose = new ModelPose(model.getCoordinateSet(), "_saveDefault", true);
     }
     // Double Properties
 
@@ -96,8 +101,9 @@ public class PropertyEditorAdaptor {
 
     private void handlePropertyChangeCommon() {
         context.recreateSystemKeepStage();
+        defaultPose.useAsDefaultForModel(model); // This actually sets "Defaults" rather than actual configuration
         ViewDB.getInstance().updateModelDisplay(model, obj);
-        node.refreshNode();
+        if (node!= null) node.refreshNode();
         SingleModelGuiElements guiElem = ViewDB.getInstance().getModelGuiElements(model);
         guiElem.setUnsavedChangesFlag(true);
     }
