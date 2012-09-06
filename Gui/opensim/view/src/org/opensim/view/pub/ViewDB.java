@@ -87,6 +87,7 @@ public final class ViewDB extends Observable implements Observer {
    private static ArrayList<Boolean> saveStatus = new ArrayList<Boolean>(4);
    // One single vtAssemby for the whole Scene
    private static vtkAssembly sceneAssembly;
+
    // Map models to visuals
    private Hashtable<Model, SingleModelVisuals> mapModelsToVisuals =
            new Hashtable<Model, SingleModelVisuals>();
@@ -760,7 +761,7 @@ public final class ViewDB extends Observable implements Observer {
    /**
     * Remove items from selection list which belong to the given model
     */
-   public void removeObjectsBelongingToModelFromSelection(Model model)
+   private void removeObjectsBelongingToModelFromSelection(Model model)
    {
       boolean modified = false;
       for(int i=selectedObjects.size()-1; i>=0; i--) {
@@ -809,25 +810,6 @@ public final class ViewDB extends Observable implements Observer {
          }
       }
       if(modified) {
-         statusDisplaySelectedObjects();
-         repaintAll();
-      }
-   }
-
-   /**
-    * Remove all markers from selection list.
-    */
-   public void removeMarkersFromSelection(boolean sendEvent)
-   {
-      boolean modified = false;
-      for (int i=selectedObjects.size()-1; i>=0; i--) {
-         if (selectedObjects.get(i).getOpenSimObject() instanceof Marker) {
-            markSelected(selectedObjects.get(i), false, sendEvent, false);
-            selectedObjects.remove(i);
-            modified = true;
-         }
-      }
-      if (modified) {
          statusDisplaySelectedObjects();
          repaintAll();
       }
@@ -913,6 +895,7 @@ public final class ViewDB extends Observable implements Observer {
          SelectedObject selectedObject = new SelectedObject(obj);
          selectedObjects.add(selectedObject);
          markSelected(selectedObject, true, true, true);
+         ExplorerTopComponent.getDefault().selectNodeForSelectedObject(selectedObject);
       } else { // this function should never be called with obj = null
          ClearSelectedObjectsEvent evnt = new ClearSelectedObjectsEvent(this);
          setChanged();
@@ -1844,6 +1827,12 @@ public final class ViewDB extends Observable implements Observer {
     public static void setGraphicsAvailable(boolean aGraphicsAvailable) {
         graphicsAvailable = aGraphicsAvailable;
         
+    }
+    public static void printBounds(String name, double[] bodyBounds) {
+        System.out.print("Bounds for "+name+" are:[");
+        for(int i=0; i<6; i++)
+            System.out.print(bodyBounds[i]+" ");
+        System.out.println("\n============");
     }
 
 }
