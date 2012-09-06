@@ -53,4 +53,12 @@ public class opensimModel implements opensimModelConstants {
     return opensimModelJNI.IO_STRLEN_get();
   }
 
+  public static void setMapCxxExceptionsToJava(boolean value) {
+    opensimModelJNI.mapCxxExceptionsToJava_set(value);
+  }
+
+  public static boolean getMapCxxExceptionsToJava() {
+    return opensimModelJNI.mapCxxExceptionsToJava_get();
+  }
+
 }

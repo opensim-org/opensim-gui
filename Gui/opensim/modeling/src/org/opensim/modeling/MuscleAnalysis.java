@@ -106,6 +106,21 @@ public class MuscleAnalysis extends Analysis {
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
+  public Storage getFiberVelocityStorage() {
+    long cPtr = opensimModelJNI.MuscleAnalysis_getFiberVelocityStorage(swigCPtr, this);
+    return (cPtr == 0) ? null : new Storage(cPtr, false);
+  }
+
+  public Storage getNormalizedFiberVelocityStorage() {
+    long cPtr = opensimModelJNI.MuscleAnalysis_getNormalizedFiberVelocityStorage(swigCPtr, this);
+    return (cPtr == 0) ? null : new Storage(cPtr, false);
+  }
+
+  public Storage getPennationAngularVelocityStorage() {
+    long cPtr = opensimModelJNI.MuscleAnalysis_getPennationAngularVelocityStorage(swigCPtr, this);
+    return (cPtr == 0) ? null : new Storage(cPtr, false);
+  }
+
   public Storage getForceStorage() {
     long cPtr = opensimModelJNI.MuscleAnalysis_getForceStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);

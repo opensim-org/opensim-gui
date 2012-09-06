@@ -430,6 +430,10 @@ public class Model extends ModelComponent {
     return opensimModelJNI.Model_getNumMuscleStates(swigCPtr, this);
   }
 
+  public int getNumProbeStates() {
+    return opensimModelJNI.Model_getNumProbeStates(swigCPtr, this);
+  }
+
   public void setInitialTime(double ti) {
     opensimModelJNI.Model_setInitialTime(swigCPtr, this, ti);
   }
@@ -602,8 +606,12 @@ public class Model extends ModelComponent {
     return new ArrayStr(opensimModelJNI.Model_getStateVariableNames(swigCPtr, this), true);
   }
 
-  public double getStateVariable(SWIGTYPE_p_SimTK__State state, String name) {
-    return opensimModelJNI.Model_getStateVariable(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state), name);
+  public double getStateVariable(SWIGTYPE_p_SimTK__State s, String name) {
+    return opensimModelJNI.Model_getStateVariable(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), name);
+  }
+
+  public void setStateVariable(SWIGTYPE_p_SimTK__State s, String name, double value) {
+    opensimModelJNI.Model_setStateVariable(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), name, value);
   }
 
   public SWIGTYPE_p_SimTK__SystemYIndex getStateVariableSystemIndex(String stateVariableName) {

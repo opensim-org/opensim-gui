@@ -265,6 +265,14 @@ public class Probe extends ModelComponent {
     opensimModelJNI.Probe_set_gain__SWIG_1(swigCPtr, this, value);
   }
 
+  public void reset(SWIGTYPE_p_SimTK__State s) {
+    opensimModelJNI.Probe_reset(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s));
+  }
+
+  public int getNumInternalMeasureStates() {
+    return opensimModelJNI.Probe_getNumInternalMeasureStates(swigCPtr, this);
+  }
+
   public boolean isDisabled() {
     return opensimModelJNI.Probe_isDisabled(swigCPtr, this);
   }

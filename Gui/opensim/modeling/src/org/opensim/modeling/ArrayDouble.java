@@ -204,6 +204,14 @@ public class ArrayDouble {
     return new SWIGTYPE_p_SimTK__Vec3(opensimModelJNI.ArrayDouble_createVec3__SWIG_2(es), true);
   }
 
+  public SWIGTYPE_p_SimTK__Vector getAsVector() {
+    return new SWIGTYPE_p_SimTK__Vector(opensimModelJNI.ArrayDouble_getAsVector(swigCPtr, this), true);
+  }
+
+  public void populateFromVector(SWIGTYPE_p_SimTK__Vector aVector) {
+    opensimModelJNI.ArrayDouble_populateFromVector(swigCPtr, this, SWIGTYPE_p_SimTK__Vector.getCPtr(aVector));
+  }
+
   public static ArrayDouble getValuesFromVec3(SWIGTYPE_p_SimTK__Vec3 vec3) {
     return new ArrayDouble(opensimModelJNI.ArrayDouble_getValuesFromVec3(SWIGTYPE_p_SimTK__Vec3.getCPtr(vec3)), true);
   }

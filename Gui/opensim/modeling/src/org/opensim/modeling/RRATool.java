@@ -105,14 +105,6 @@ public class RRATool extends AbstractTool {
     opensimModelJNI.RRATool_setTaskSetFileName(swigCPtr, this, aFileName);
   }
 
-  public String getRRAControlsFileName() {
-    return opensimModelJNI.RRATool_getRRAControlsFileName(swigCPtr, this);
-  }
-
-  public void setRRAControlsFileName(String aFileName) {
-    opensimModelJNI.RRATool_setRRAControlsFileName(swigCPtr, this, aFileName);
-  }
-
   public String getOutputModelFileName() {
     return opensimModelJNI.RRATool_getOutputModelFileName(swigCPtr, this);
   }
