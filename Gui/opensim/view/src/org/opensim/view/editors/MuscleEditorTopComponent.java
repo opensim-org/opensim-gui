@@ -369,7 +369,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
     }//GEN-LAST:event_BackupAllButtonActionPerformed
 
     private void RestoreAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestoreAllButtonActionPerformed
-       restoreActuators();
+       //restoreActuators();
     }//GEN-LAST:event_RestoreAllButtonActionPerformed
 
    private void MuscleComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MuscleComboBoxActionPerformed
@@ -648,56 +648,6 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
 
       setPendingChanges(false, currentAct, false);
       setupComponent(currentAct);
-      ViewDB.getInstance().repaintAll();
-   }
-
-   private void restoreActuators() {
-      // Should never be null, but just in case...
-       if (currentModel == null)
-          return;
-
-      boolean updateEditor = false;
-      SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(currentModel);
-      OpenSimContext context = OpenSimDB.getInstance().getContext(currentModel);
-
-      // Deselect all attachment points.
-      ViewDB.getInstance().removeObjectsBelongingToModelFromSelection(currentModel);
-
-      // Make a note if the current actuator needs to be restored, so you can call
-      // setupComponent() later.
-      if (pendingChanges.get(currentAct))
-          updateEditor = true;
-
-      // Loop through the actuator set, restoring only the ones that have been modified.
-      ForceSet actSet = currentModel.getForceSet();
-      Vector<OpenSimObject> objs = new Vector<OpenSimObject>(actSet.getSize());
-      for (int i=0; i<actSet.getSize(); i++) {
-          Muscle act = Muscle.safeDownCast(actSet.get(i));
-          if (pendingChanges.get(act)) {
-              Muscle savedAct = savedActs.get(act);
-              // If the name has changed, fire an event.
-              if (act.getName().equals(savedAct.getName()) == false) {
-                 objs.add(act);
-              }
-              // Make sure the Function Editor isn't still operating on one of this muscle's functions.
-              FunctionEditorTopComponent win = FunctionEditorTopComponent.findInstance();
-              win.closeObject(act);
-
-              // Copy the elements of the saved actuator into the [regular] actuator.
-              context.copyMuscle(savedAct, act);
-              vis.updateActuatorGeometry(act, true);
-          }
-      }
-      if (objs.size() > 0) {
-         ViewDB.getInstance().getModelGuiElements(currentModel).updateActuatorNames();
-         ObjectsRenamedEvent ev = new ObjectsRenamedEvent(this, currentModel, objs);
-         OpenSimDB.getInstance().setChanged();
-         OpenSimDB.getInstance().notifyObservers(ev);
-      }
-
-      setAllPendingChanges(false);
-      if (updateEditor)
-         setupComponent(currentAct);
       ViewDB.getInstance().repaintAll();
    }
 
