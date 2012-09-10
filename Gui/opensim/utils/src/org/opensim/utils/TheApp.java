@@ -35,7 +35,7 @@ import javax.swing.JFrame;
 import org.openide.DialogDisplayer;
 import org.openide.LifecycleManager;
 import org.openide.NotifyDescriptor;
-import org.openide.util.Utilities;
+import org.openide.util.ImageUtilities;
 
 /**
  *
@@ -97,12 +97,12 @@ public final class TheApp {
 
     public static Image getAppImage() {
         if (appImage==null)
-            appImage=Utilities.loadImage("org/opensim/helputils/helpmenu/images/frame48.gif");
+            appImage=ImageUtilities.loadImage("org/opensim/helputils/helpmenu/images/frame48.gif");
         return appImage;
     }
     
     public static Image getApplicationIcon() {
-       return Utilities.loadImage("/org/opensim/utils/frame.gif");
+       return ImageUtilities.loadImage("/org/opensim/utils/frame.gif");
     }
     /**
      * get the top directory where the OpenSim application is installed based on OPENSIM_HOME
