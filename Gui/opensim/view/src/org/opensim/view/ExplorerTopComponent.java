@@ -27,6 +27,7 @@ package org.opensim.view;
 
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
+import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Observable;
@@ -35,12 +36,12 @@ import java.util.Vector;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
-import javax.swing.event.UndoableEditEvent;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import org.openide.ErrorManager;
 import org.openide.awt.UndoRedo;
+import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
@@ -51,15 +52,19 @@ import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.util.Mutex;
 import org.openide.util.MutexException;
+import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.Muscle;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PathPoint;
 import org.opensim.view.nodes.ConcreteModelNode;
 import org.opensim.view.experimentaldata.ExperimentalDataTopNode;
 import org.opensim.view.nodes.MarkersNode;
 import org.opensim.view.nodes.OneMarkerNode;
 import org.opensim.view.nodes.OpenSimNode;
+import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 
@@ -93,6 +98,7 @@ final public class ExplorerTopComponent extends TopComponent
       //setToolTipText(NbBundle.getMessage(ExplorerTopComponent.class, "HINT_ExplorerTopComponent"));
       // Add explorer as observer of the database
       OpenSimDB.getInstance().addObserver(this);
+      ViewDB.getInstance().addObserver(this);
       //        setIcon(Utilities.loadImage(ICON_PATH, true));
       setLayout(new BorderLayout());
       add(modelTree, BorderLayout.CENTER);
@@ -197,6 +203,14 @@ final public class ExplorerTopComponent extends TopComponent
         
         public void update(Observable o, Object arg) {
            // Observable is OpenSimDB
+         if (o instanceof ViewDB) {
+            if (arg instanceof ObjectSelectedEvent) {
+                ObjectSelectedEvent ev = (ObjectSelectedEvent)arg;
+                Node selectedObjectNode = null;
+                selectNodeForSelectedObject(ev.getSelectedObject());
+            }
+            return;
+         }
            if (arg instanceof ObjectsAddedEvent) {
               final ObjectsAddedEvent evnt = (ObjectsAddedEvent)arg;
               final Vector<OpenSimObject> objs = evnt.getObjects();
@@ -342,6 +356,54 @@ final public class ExplorerTopComponent extends TopComponent
         public ExplorerManager getExplorerManager() {
            return manager;
         }
+
+    public void selectNodeForSelectedObject(SelectedObject selectedObject) {
+        //Node ret = null;
+        Children children = getExplorerManager().getRootContext().getChildren();
+        Node[] nodes = children.getNodes();
+        for (int i = 0; i < nodes.length; i++) {
+            if (nodes[i] instanceof ConcreteModelNode) {
+                ConcreteModelNode modelNode = ((ConcreteModelNode) (nodes[i]));
+                Node objectNode = findObjectNode(modelNode, selectedObject.getOpenSimObject());
+                // Hack to select Muscle based on selected PathPoint
+                if (selectedObject.getOpenSimObject() instanceof PathPoint){
+                    PathPoint ppt = (PathPoint)selectedObject.getOpenSimObject();
+                    GeometryPath ppath = ppt.getPath();
+                    OpenSimObject pathOwner = ppath.getOwner();
+                    if (Muscle.safeDownCast(pathOwner)!= null){
+                        Muscle ms = Muscle.safeDownCast(pathOwner);
+                        objectNode = findObjectNode(modelNode,ms);
+                    }
+                }
+                if (objectNode != null) {
+                    try {
+                        //Node[] previouslySelectedNodes = findInstance().getExplorerManager().getSelectedNodes();
+                        findInstance().getExplorerManager().setSelectedNodes(new Node[]{objectNode});
+                    } catch (PropertyVetoException ex) {
+                        Exceptions.printStackTrace(ex);
+                    }
+                    break;
+                }
+            }
+        }
+        //return ret;
+    }
+
+    private Node findObjectNode(Node topNode, OpenSimObject openSimObject) {
+        if (topNode instanceof OpenSimObjectNode){
+            if (((OpenSimObjectNode)topNode).getOpenSimObject().equals(openSimObject))
+                return topNode;
+        }
+        if (topNode.isLeaf()) return null;
+        boolean found = false;
+        Children chden= topNode.getChildren();
+        Node fndNode=null;
+        for(int ch=0; ch < chden.getNodesCount() && !found; ch++){
+            fndNode = findObjectNode(chden.getNodeAt(ch), openSimObject);
+            found = (fndNode != null);
+        }
+        return fndNode;
+    }
         
         final static class ResolvableHelper implements Serializable {
            private static final long serialVersionUID = 1L;
@@ -369,7 +431,6 @@ final public class ExplorerTopComponent extends TopComponent
          * @param new currentModel, null if not explicitly specified
          */
         public void updateCurrentModelNode(Model currentModel) {
-           Object[] models = OpenSimDB.getInstance().getAllModels();
            Children children = getExplorerManager().getRootContext().getChildren();
            Node[] nodes = children.getNodes();
            for(int i=0; i < nodes.length; i++) {

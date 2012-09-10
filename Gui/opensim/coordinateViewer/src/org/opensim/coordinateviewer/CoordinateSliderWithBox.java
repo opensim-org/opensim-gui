@@ -125,12 +125,26 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
       jXSlider.setMinimum(0);
       jXSlider.setMaximum(numTicks-1);
       
-      
       createBoundsLabels(jXSlider, min, max, 0, numTicks-1);
       jCoordinateNameLabel.setText(coord.getName());
       boolean clamped = openSimContext.getClamped(coord);
+      boolean locked = openSimContext.getLocked(coord);      
+      boolean prescribed = openSimContext.isPrescribed(coord);
+
+            
+      // If prescribed everything is disabled
+      if(prescribed) {
+
+        jMinimumLabel.setEnabled(false);
+        jMaximumLabel.setEnabled(false);
+        jXSlider.setEnabled(false);
+        jLockedCheckBox.setEnabled(false);
+        jClampedCheckBox.setEnabled(false);
+        jFormattedTextField.setEnabled(false);
+
+      } else {
+
       jClampedCheckBox.setSelected(clamped);
-      boolean locked = openSimContext.getLocked(coord);
       jLockedCheckBox.setSelected(locked);
       if (!clamped | locked){
          jMinimumLabel.setEnabled(false);
@@ -138,10 +152,12 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
       }
       jXSlider.setEnabled(!locked);
       jFormattedTextField.setEnabled(!locked);
-//       jXSlider.setToolTipText("["+Math.round(min)+", "+Math.round(max)+"]");
+        //       jXSlider.setToolTipText("["+Math.round(min)+", "+Math.round(max)+"]");
       jXSlider.addChangeListener(this);
       jFormattedTextField.addPropertyChangeListener("value", this);
       jFormattedTextField.addFocusListener((FocusListener)callback);
+
+   }
    }
    
    private void setTextfieldBounds(boolean trueFalse) {

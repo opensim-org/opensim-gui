@@ -358,7 +358,7 @@ final public class MarkerEditorTopComponent extends TopComponent implements Obse
    }//GEN-LAST:event_DeleteMarkerButtonActionPerformed
 
    private void AddMarkerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddMarkerButtonActionPerformed
-      addMarker();
+      //addMarker();
    }//GEN-LAST:event_AddMarkerButtonActionPerformed
 
    private void RestoreAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestoreAllButtonActionPerformed
@@ -812,38 +812,6 @@ final public class MarkerEditorTopComponent extends TopComponent implements Obse
          Marker sm = savedMarkers.get(marker);
          System.out.println("sm: marker = " + Marker.getCPtr(marker) + ", saved = " + Marker.getCPtr(sm));
       }
-   }
-
-   public void addMarker() {
-      if (currentModel == null)
-         return;
-
-      double[] offset = {0.11, 0.22, 0.33};
-      MarkerSet markerset = currentModel.getMarkerSet();
-      Body body = currentModel.getBodySet().get(0);
-      if (body == null)
-         return;
-      String newMarkerName = makeUniqueMarkerName(markerset);
-      Marker marker = markerset.addMarker(newMarkerName, offset, body);
-      //System.out.println("added marker " + Marker.getCPtr(marker));
-      if (marker == null)
-         return;
-
-      currentMarker = null;
-
-      // Update the marker name list in the ViewDB.
-      ViewDB.getInstance().getModelGuiElements(currentModel).updateMarkerNames();
-
-      Vector<OpenSimObject> objs = new Vector<OpenSimObject>(1);
-      objs.add(marker);
-      ObjectsAddedEvent evnt = new ObjectsAddedEvent(this, currentModel, objs);
-      OpenSimDB.getInstance().setChanged();
-      OpenSimDB.getInstance().notifyObservers(evnt);
-
-      System.out.println("adding " + newMarkerName);
-      // Deselect all existing markers and select the new one.
-      ViewDB.getInstance().removeMarkersFromSelection(true);
-      ViewDB.getInstance().toggleAddSelectedObject(marker);
    }
 
    public void deleteMarker(Marker marker, boolean sendEvent) {

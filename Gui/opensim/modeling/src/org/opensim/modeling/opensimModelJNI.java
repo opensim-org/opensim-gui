@@ -5896,6 +5896,7 @@ public class opensimModelJNI {
   public final static native void OpenSimContext_setClamped(long jarg1, OpenSimContext jarg1_, long jarg2, Coordinate jarg2_, boolean jarg3);
   public final static native boolean OpenSimContext_getClamped(long jarg1, OpenSimContext jarg1_, long jarg2, Coordinate jarg2_);
   public final static native void OpenSimContext_setLocked(long jarg1, OpenSimContext jarg1_, long jarg2, Coordinate jarg2_, boolean jarg3);
+  public final static native boolean OpenSimContext_isPrescribed(long jarg1, OpenSimContext jarg1_, long jarg2, Coordinate jarg2_);
   public final static native boolean OpenSimContext_isConstrained(long jarg1, OpenSimContext jarg1_, long jarg2, Coordinate jarg2_);
   public final static native boolean OpenSimContext_isDisabled__SWIG_0(long jarg1, OpenSimContext jarg1_, long jarg2, Constraint jarg2_);
   public final static native void OpenSimContext_setDisabled__SWIG_0(long jarg1, OpenSimContext jarg1_, long jarg2, Constraint jarg2_, boolean jarg3);
