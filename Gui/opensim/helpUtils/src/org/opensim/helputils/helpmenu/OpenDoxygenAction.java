@@ -23,8 +23,7 @@ public final class OpenDoxygenAction extends CallableSystemAction {
     public void performAction() {
         String basePath = TheApp.getInstallDir();
         String doxygenPath = "https://simtk.org/api_docs/opensim/api_docs30/";
-        System.out.println("PATH: " + doxygenPath);
-
+ 
         // If issues with online Doxygen then open local Doxygen
         try {
             URL url = new URL(doxygenPath);

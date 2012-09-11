@@ -11,6 +11,7 @@
             <file name="org-opensim-helputils-helpmenu-TutorialsAction.instance"/>     
             <file name="org-opensim-helputils-helpmenu-ShowXMLAction.instance"/>
             <file name="org-opensim-helputils-helpmenu-OpenDoxygenAction.instance"/>
+            <file name="org-opensim-helputils-helpmenu-ScriptingHelpAction.instance"/>
             <file name="org-opensim-helputils-helpmenu-FileBugAction.instance"/>   
             <file name="org-opensim-helputils-helpmenu-RequestFeatureAction.instance"/>
             <file name="org-opensim-helputils-helpmenu-AboutAction.instance"/>      
@@ -53,6 +54,11 @@
                 <attr name="originalFile" stringvalue="Actions/Help/org-opensim-helputils-helpmenu-OpenDoxygenAction.instance"/>
                 <attr name="position" intvalue="400"/>
             </file>
+            <file name="org-opensim-helputils-helpmenu-ScriptingHelpAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Help/org-opensim-helputils-helpmenu-ScriptingHelpAction.instance"/>
+                <attr name="position" intvalue="450"/>
+            </file>
+            
             <file name="org-opensim-plotter-separatorBefore.instance">
                 <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
                 <attr name="position" intvalue="500"/>
