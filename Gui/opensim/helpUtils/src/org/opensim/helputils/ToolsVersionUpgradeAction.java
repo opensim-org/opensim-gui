@@ -40,9 +40,10 @@ public final class ToolsVersionUpgradeAction extends CallableSystemAction {
                     OpenSimObject obj = OpenSimObject.makeObjectFromFile(input);
                     if (obj==null){
                         NotifyDescriptor.Message dlgErr =
-                          new NotifyDescriptor.Message("Failed to constct an OpenSim object from file "+
+                          new NotifyDescriptor.Message("Failed to construct an OpenSim object from file "+
                                 input+
-                                ". Possible reasons: file has incorrect format or object type has been deprecated.");
+                                ". Possible reasons: file has incorrect format or object type has been deprecated.\n"+
+                                "If the file is a setup file for an OpenSim tool, you can also try loading the file in the Tool and re-saving.");
                          DialogDisplayer.getDefault().notify(dlgErr);   
                          return;
                     }
