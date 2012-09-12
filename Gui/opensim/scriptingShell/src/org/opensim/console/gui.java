@@ -110,15 +110,16 @@ public final class gui {
      * @param newValue 
      */
     static public void setCoordinateValue(final Coordinate coordinate, final double newValue){
-             SwingUtilities.invokeLater(new Runnable(){
+        
+        getModelState(coordinate.getModel()).setValue(coordinate, newValue);
+        SwingUtilities.invokeLater(new Runnable(){
 
-                @Override
-                public void run() {
-                    getModelState(coordinate.getModel()).setValue(coordinate, newValue);
-                    ViewDB.getInstance().updateModelDisplay(coordinate.getModel());
-                    MotionsDB.getInstance().reportTimeChange(0);
-                }
-            });
+            @Override
+            public void run() {
+                ViewDB.getInstance().updateModelDisplay(coordinate.getModel());
+                MotionsDB.getInstance().reportTimeChange(0);
+            }
+        });
      }
     /**
      * setCoordinateValue allows the user to set the value of the passed in Coordinate to the specified newValue
