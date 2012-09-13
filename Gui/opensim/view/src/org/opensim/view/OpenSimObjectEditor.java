@@ -5,9 +5,14 @@
 package org.opensim.view;
 
 import java.awt.Component;
-import java.beans.PropertyEditorSupport;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.editors.ObjectPropertyViewerPanel;
+import org.opensim.view.nodes.OpenSimCustomEditor;
+import org.opensim.view.nodes.OpenSimObjectNode;
+import org.opensim.view.nodes.PropertyEditorAdaptor;
 
 /**
  *
@@ -36,14 +41,14 @@ import org.opensim.view.editors.ObjectPropertyViewerPanel;
  *  OR BUSINESS INTERRUPTION) OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
  *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class OpenSimObjectEditor extends PropertyEditorSupport  {
+public class OpenSimObjectEditor extends OpenSimCustomEditor {
 
     OpenSimObject objectToEdit;
+    
+    OpenSimObjectEditor(AbstractProperty ap, OpenSimObject obj, OpenSimObjectNode osNode){
+        super(ap, osNode); 
+     }
 
-    @Override
-    public boolean supportsCustomEditor() {
-        return true;
-    }
 
     @Override
     public String getAsText() {
@@ -52,23 +57,17 @@ public class OpenSimObjectEditor extends PropertyEditorSupport  {
 
     @Override
     public Component getCustomEditor() {
-        return new ObjectPropertyViewerPanel(objectToEdit, true);
+         ObjectPropertyViewerPanel opvp = new ObjectPropertyViewerPanel(objectToEdit, true);
+         opvp.getModel().addPropertyChangeListener(this);
+         return opvp;
     }
 
-    @Override
-    public String getJavaInitializationString() {
-        return ""; //super.getJavaInitializationString();
-    }
 
     @Override
     public Object getValue() {
         return objectToEdit;
     }
 
-    @Override
-    public void setAsText(String text) throws IllegalArgumentException {
-        //super.setAsText(text);
-    }
 
     @Override
     public void setValue(Object value) {
@@ -76,6 +75,4 @@ public class OpenSimObjectEditor extends PropertyEditorSupport  {
             objectToEdit = (OpenSimObject) value;
         super.setValue(value);
     }
-    
-    
 }

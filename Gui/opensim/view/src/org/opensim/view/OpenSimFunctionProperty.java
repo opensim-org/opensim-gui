@@ -2,17 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.opensim.view.nodes;
+package org.opensim.view;
 
-import java.awt.Component;
-import java.beans.PropertyEditorSupport;
+import java.beans.PropertyEditor;
+import java.lang.reflect.InvocationTargetException;
+import org.openide.nodes.PropertySupport;
 import org.opensim.modeling.AbstractProperty;
-import org.opensim.modeling.GeometryPath;
-import org.opensim.modeling.Model;
-import org.opensim.modeling.OpenSimContext;
+import org.opensim.modeling.Function;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.view.pub.OpenSimDB;
-import org.opensim.view.pub.ViewDB;
+import org.opensim.view.nodes.OpenSimFunctionEditor;
+import org.opensim.view.nodes.OpenSimObjectNode;
 
 /**
  *
@@ -41,38 +40,39 @@ import org.opensim.view.pub.ViewDB;
  *  OR BUSINESS INTERRUPTION) OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
  *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class OpenSimGeometryPathEditor extends OpenSimCustomEditor  {
+public class OpenSimFunctionProperty extends OpenSimBaseObjectProperty  {
 
-    GeometryPath objectToEdit;
+    Function objectToEdit;
 
+    public OpenSimFunctionProperty(AbstractProperty ap, OpenSimObjectNode parentNode){
+        super(ap.getName(), ap.getName(), ap.getComment());
+        OpenSimObject dObj = ap.isOptionalProperty()?ap.getValueAsObject(0): ap.getValueAsObject();
+        objectToEdit = Function.safeDownCast(dObj);
+        this.ap = ap;
+        this.parentNode = parentNode;
 
-    public OpenSimGeometryPathEditor(AbstractProperty ap, GeometryPath obj, OpenSimObjectNode osNode){
-        super(ap, osNode); 
-        objectToEdit =obj;
     }
-
+    
     @Override
-    public String getAsText() {
-        return objectToEdit.toString();
-    }
-
-    @Override
-    public Component getCustomEditor() {
-        return new OpenSimGeometryPathEditorPanel(objectToEdit);
-    }
-
-    @Override
-    public Object getValue() {
+    public OpenSimObject getValue() {
         return objectToEdit;
     }
 
+    @Override
+    public void setValue(OpenSimObject value)  {
+        objectToEdit = Function.safeDownCast(value);
+    }
 
     @Override
-    public void setValue(Object value) {
-        if (value instanceof OpenSimObject)
-            objectToEdit = (GeometryPath) value;
-        super.setValue(value);
+    public PropertyEditor getPropertyEditor() {
+        return new OpenSimFunctionEditor(ap, objectToEdit, parentNode);
     }
-    
-    
+
+    @Override
+    public void restoreDefaultValue() throws IllegalAccessException, InvocationTargetException {
+        super.restoreDefaultValue();
+    }
+
+
 }
+

@@ -6,8 +6,13 @@ package org.opensim.view.nodes;
 
 import java.awt.Component;
 import java.beans.PropertyEditorSupport;
+import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Function;
+import org.opensim.modeling.Model;
+import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.view.pub.OpenSimDB;
+import org.opensim.view.pub.ViewDB;
 
 /**
  *
@@ -36,18 +41,13 @@ import org.opensim.modeling.OpenSimObject;
  *  OR BUSINESS INTERRUPTION) OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
  *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class OpenSimFunctionEditor extends PropertyEditorSupport  {
+public class OpenSimFunctionEditor extends OpenSimCustomEditor  {
 
     Function objectToEdit;
-
-    @Override
-    public boolean supportsCustomEditor() {
-        return true;
-    }
-
-    @Override
-    public String getAsText() {
-        return objectToEdit.toString();
+    
+    public OpenSimFunctionEditor(AbstractProperty ap, Function obj, OpenSimObjectNode osNode){
+        super(ap, osNode);
+        objectToEdit =obj;
     }
 
     @Override
@@ -56,18 +56,8 @@ public class OpenSimFunctionEditor extends PropertyEditorSupport  {
     }
 
     @Override
-    public String getJavaInitializationString() {
-        return ""; //super.getJavaInitializationString();
-    }
-
-    @Override
     public Object getValue() {
         return objectToEdit;
-    }
-
-    @Override
-    public void setAsText(String text) throws IllegalArgumentException {
-        //super.setAsText(text);
     }
 
     @Override
@@ -75,6 +65,10 @@ public class OpenSimFunctionEditor extends PropertyEditorSupport  {
         if (value instanceof OpenSimObject)
             objectToEdit = (Function) value;
         super.setValue(value);
+    }
+    @Override
+    public String getAsText() {
+        return objectToEdit.toString();
     }
     
     

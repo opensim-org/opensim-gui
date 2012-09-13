@@ -41,13 +41,16 @@ import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.ObjectDisplayHideAction;
 import org.opensim.view.ObjectDisplayMenuAction;
 import org.opensim.view.ObjectDisplayShowAction;
-import org.opensim.view.ObjectGenericReviewAction;
 import org.opensim.view.pub.ViewDB;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Function;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.PropertyHelper;
+import org.opensim.view.OpenSimBaseObjectProperty;
+import org.opensim.view.OpenSimFunctionProperty;
+import org.opensim.view.OpenSimGeometryPathProperty;
+import org.opensim.view.OpenSimObjectProperty;
 
 /**
  *
@@ -105,9 +108,6 @@ public class OpenSimObjectNode extends OpenSimNode {
                 "setValueVec3FromString");//mapPropertyEnumToSetters.get(currentPropType));
             nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
             nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
-       }
-       else if (ap.isObjectProperty() && ap.size()==1){             
-           nextNodeProp = createCustomNodePropertyAndEditor(ap, obj, model, nextNodeProp);
        }
        else { // fall through, unsupported for now
            nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, this),
@@ -186,7 +186,7 @@ public class OpenSimObjectNode extends OpenSimNode {
    }
 
     protected Reflection createNodePropForObjectName(OpenSimObject obj, Model model, boolean isSettable) throws NoSuchMethodException {
-       PropertySupport.Reflection nextNodeProp =  new PropertySupport.Reflection(new ObjectNameEditor(obj, model, this),
+       PropertySupport.Reflection nextNodeProp = new PropertySupport.Reflection(new ObjectNameEditor(obj, model, this),
             String.class,
             "getName",
             (isSettable?"setName":null));
@@ -290,7 +290,7 @@ public class OpenSimObjectNode extends OpenSimNode {
      */
     public OpenSimObject getOpenSimObject()  { return openSimObject; }
 
-  
+   
    protected void addDisplayOption(displayOption newOption)
    {
       if( !getValidDisplayOptions().contains(newOption) )
@@ -338,11 +338,27 @@ public class OpenSimObjectNode extends OpenSimNode {
                 AbstractProperty ap = obj.getPropertyByIndex(p);
                 //System.out.println("type=" + ap.getTypeName() + " name=" + ap.getName());
                 if (!ap.isListProperty()) {
-                    Reflection nextNodeProp = createNodePropForOpenSimNoListProperty(obj, p, theModel);
-                    if (nextNodeProp != null) {
-                        nextNodeProp.setName(ap.getName());
-                        nextNodeProp.setShortDescription(ap.getComment());
-                        set.put(nextNodeProp);
+                    if (ap.isObjectProperty() && ap.size() == 1) {
+                        OpenSimObject objectFromProperty = ap.isOptionalProperty()?ap.getValueAsObject(0): ap.getValueAsObject();
+                        OpenSimBaseObjectProperty customProp=null;
+                        if (GeometryPath.safeDownCast(objectFromProperty)!= null){
+                            customProp  = new OpenSimGeometryPathProperty(ap, this);
+                        }
+                        else if (Function.safeDownCast(objectFromProperty)!= null){
+                            customProp  = new OpenSimFunctionProperty(ap, this);
+                        }
+                        else
+                           customProp  = new OpenSimObjectProperty(ap, this);
+                        if (customProp!=null)
+                            set.put(customProp);
+                    } else {
+                        Reflection nextNodeProp = createNodePropForOpenSimNoListProperty(obj, p, theModel);
+                        if (nextNodeProp != null) {
+                            nextNodeProp.setName(ap.getName());
+                            nextNodeProp.setShortDescription(ap.getComment());
+                            set.put(nextNodeProp);
+                        }
+
                     }
                 }
                 else { 

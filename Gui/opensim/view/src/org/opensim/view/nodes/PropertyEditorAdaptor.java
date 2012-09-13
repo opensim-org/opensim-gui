@@ -210,13 +210,12 @@ public class PropertyEditorAdaptor {
         return prop.getValueAsObject();
     }
 
-    public void setValueObj(OpenSimObject v) {
-        setValueObj(v, true);
+    public void setValueObj(OpenSimObject v, OpenSimObject oldV) {
+        setValueObj(v, oldV, true);
     }
     
-    public void setValueObj(OpenSimObject v, boolean allowUndo) {
-        OpenSimObject oldObject = getValueObj().clone();
-        handlePropertyChange(oldObject, v, allowUndo);
+    public void setValueObj(OpenSimObject v, OpenSimObject oldV, boolean allowUndo) {
+        handlePropertyChange(oldV, v, allowUndo);
     }
 
     public GeometryPath getValueObjAsGeometryPath() {
@@ -225,7 +224,7 @@ public class PropertyEditorAdaptor {
     }
     
     public void setValueObjFromGeometryPath(GeometryPath geometryPath) {
-        setValueObj(geometryPath, true);
+        setValueObj(geometryPath, geometryPath, true);
     }
     
     public Function getValueObjAsFunction() {
@@ -234,7 +233,7 @@ public class PropertyEditorAdaptor {
     }
     
     public void setValueObjFromFunction(Function function) {
-        setValueObj(function, true);
+        setValueObj(function, function, true);
     }
     private void setValueDoubleListFromString(String aString, boolean allowUndo) {
         // Parse String into an array of doubles, check that it's the right size for prop then assign
@@ -504,15 +503,15 @@ public class PropertyEditorAdaptor {
     
     private void handlePropertyChange(final OpenSimObject oldObject, final OpenSimObject v, boolean supportUndo) {
         context.setPropertiesFromState();
-        prop.setValueAsObject(v);
+        //prop.setValueAsObject(v);
         handlePropertyChangeCommon();
-        if (supportUndo) {
+        if (false) {
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
 
                 @Override
                 public void undo() throws CannotUndoException {
                     super.undo();
-                    setValueObj(oldObject, false);
+                    setValueObj(oldObject, v, false);
                 }
 
                 @Override
@@ -523,7 +522,7 @@ public class PropertyEditorAdaptor {
                 @Override
                 public void redo() throws CannotRedoException {
                     super.redo();
-                    setValueObj(v, true);
+                    setValueObj(v, oldObject, false);
                 }
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
