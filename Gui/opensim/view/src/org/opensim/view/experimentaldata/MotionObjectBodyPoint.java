@@ -40,52 +40,35 @@ public class MotionObjectBodyPoint extends ExperimentalDataObject {
         super(objectType, baseName, index);
         setPointIdentifier(baseName);
     }
-    public static final String PROP_BODYNAME = "bodyName";
-    protected String bodyName = "ground";
+    protected String pointExpressedInBody = "ground";
     private String pointIdentifier="";
     /**
-     * Get the value of bodyName
+     * Get the value of pointExpressedInBody
      *
-     * @return the value of bodyName
+     * @return the value of pointExpressedInBody
      */
-    public String getBodyName() {
-        return bodyName;
+    public String getPointExpressedInBody() {
+        return pointExpressedInBody;
     }
 
     /**
-     * Set the value of bodyName
+     * Set the value of pointExpressedInBody
      *
-     * @param bodyName new value of bodyName
+     * @param pointExpressedInBody new value of pointExpressedInBody
      */
-    public void setBodyName(String bodyName) {
-        String oldBodyName = this.bodyName;
-        this.bodyName = bodyName;
+    public void setPointExpressedInBody(String bodyName) {
+         this.pointExpressedInBody = bodyName;
     }
 
-    void setPointExpressedInBodyName(String selected) {
-        bodyName = selected;
-    }
 
     public void setPointIdentifier(String makeIdentifier) {
         pointIdentifier = makeIdentifier;
     }
 
-    String getPointExpressedInBodyName() {
-        return bodyName;
-    }
-
-
     public String getPointIdentifier() {
         return pointIdentifier;
     }
 
-    void setAttachedToBodyName(String forceBodyame) {
-        setBodyName(forceBodyame);
-    }
-
-    String getAttachedToBodyName() {
-        return getBodyName();
-    }
 
     /**
      * @return the point
