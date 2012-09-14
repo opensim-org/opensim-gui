@@ -111,7 +111,7 @@ public class OpenSimCanvas extends OpenSimBaseCanvas implements MouseWheelListen
          // (CTRL-Click) and quickly starts dragging (Click & Drag) 
          if (leftClickobj != null && !ViewDB.getInstance().isPicking()) {
             if (e.getClickCount() == lastLeftButtonClickCount+1 && leftClickobj == lastLeftButtonClickObject) {
-               handleDoubleClick(leftClickobj);
+               ViewDB.getInstance().setSelectedObject(leftClickobj);
                return; 
             } else {
                lastLeftButtonClickCount = e.getClickCount();
