@@ -377,8 +377,12 @@ final public class ExplorerTopComponent extends TopComponent
                 }
                 if (objectNode != null) {
                     try {
-                        //Node[] previouslySelectedNodes = findInstance().getExplorerManager().getSelectedNodes();
+//                        Node[] previouslySelectedNodes = findInstance().getExplorerManager().getSelectedNodes();
+//                        Node[] newSelectedNodes = new Node[previouslySelectedNodes.length+1];
+//                        System.arraycopy(previouslySelectedNodes, 0, newSelectedNodes, 0, previouslySelectedNodes.length);
+//                        newSelectedNodes[previouslySelectedNodes.length] = objectNode;
                         findInstance().getExplorerManager().setSelectedNodes(new Node[]{objectNode});
+                        this.setActivatedNodes(new Node[]{objectNode});
                     } catch (PropertyVetoException ex) {
                         Exceptions.printStackTrace(ex);
                     }
