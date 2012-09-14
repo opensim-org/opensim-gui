@@ -223,4 +223,8 @@ public class Manager {
     return opensimModelJNI.Manager_checkHalt(swigCPtr, this);
   }
 
+  public void setIntegratorAccuracy(double accuracy) {
+    opensimModelJNI.Manager_setIntegratorAccuracy(swigCPtr, this, accuracy);
+  }
+
 }

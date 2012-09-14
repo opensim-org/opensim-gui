@@ -614,4 +614,8 @@ public class Model extends ModelComponent {
     opensimModelJNI.Model_LoadOpenSimLibrary(libraryName);
   }
 
+  public void setDefaultControls(SWIGTYPE_p_SimTK__Vector newControls) {
+    opensimModelJNI.Model_setDefaultControls(swigCPtr, this, SWIGTYPE_p_SimTK__Vector.getCPtr(newControls));
+  }
+
 }

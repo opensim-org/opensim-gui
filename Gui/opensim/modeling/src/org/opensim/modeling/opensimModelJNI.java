@@ -2687,6 +2687,7 @@ public class opensimModelJNI {
   public final static native void Manager_halt(long jarg1, Manager jarg1_);
   public final static native void Manager_clearHalt(long jarg1, Manager jarg1_);
   public final static native boolean Manager_checkHalt(long jarg1, Manager jarg1_);
+  public final static native void Manager_setIntegratorAccuracy(long jarg1, Manager jarg1_, double jarg2);
   public final static native long AbstractTool_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void AbstractTool_assign(long jarg1, AbstractTool jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String AbstractTool_getClassName();
@@ -4413,6 +4414,7 @@ public class opensimModelJNI {
   public final static native double Model_getStateVariable(long jarg1, Model jarg1_, long jarg2, String jarg3);
   public final static native long Model_getStateVariableSystemIndex(long jarg1, Model jarg1_, String jarg2);
   public final static native void Model_LoadOpenSimLibrary(String jarg1);
+  public final static native void Model_setDefaultControls(long jarg1, Model jarg1_, long jarg2);
   public final static native long PathPoint_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void PathPoint_assign(long jarg1, PathPoint jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String PathPoint_getClassName();
