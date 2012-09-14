@@ -65,7 +65,7 @@ import org.opensim.modeling.Storage;
 import org.opensim.view.OpenSimvtkGlyphCloud;
 import org.opensim.view.SingleModelVisuals;
 import org.opensim.view.experimentaldata.ExperimentalDataItemType;
-import org.opensim.view.experimentaldata.MotionObjectBodyForce;
+import org.opensim.view.experimentaldata.MotionObjectPointForce;
 import org.opensim.view.experimentaldata.MotionObjectBodyPoint;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
@@ -252,7 +252,7 @@ public class MotionDisplayer implements SelectionListener {
                 if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
                     int glyphIndex=markersRep.addLocation(nextObject);
                     nextObject.setGlyphInfo(glyphIndex, markersRep);
-                } else if (nextObject.getObjectType()==ExperimentalDataItemType.ForceAndPointData){
+                } else if (nextObject.getObjectType()==ExperimentalDataItemType.PointForceData){
                     int glyphIndex=groundForcesRep.addLocation(nextObject);
                     nextObject.setGlyphInfo(glyphIndex, groundForcesRep);
                 } else if (nextObject.getObjectType()==ExperimentalDataItemType.BodyForceData){
@@ -583,16 +583,15 @@ public class MotionDisplayer implements SelectionListener {
                             states.getitem(startIndex+2)/mot.getUnitConversion());
                     markersModified = true;
                 }
-                else if (nextObject.getObjectType()==ExperimentalDataItemType.ForceAndPointData){
-                    String pointId = ((MotionObjectBodyForce)nextObject).getPointIdentifier();
-                    String forceId = ((MotionObjectBodyForce)nextObject).getForceIdentifier();
-                    String bodyId = ((MotionObjectBodyForce)nextObject).getBodyName();  
+                else if (nextObject.getObjectType()==ExperimentalDataItemType.PointForceData){
+                    String pointId = ((MotionObjectPointForce)nextObject).getPointIdentifier();
+                    String forceId = ((MotionObjectPointForce)nextObject).getForceIdentifier();
+                    String bodyId = ((MotionObjectPointForce)nextObject).getPointExpressedInBody();  
                     Body b = model.getBodySet().get(bodyId);
                     int startPointIndex = simmMotionData.getColumnIndicesForIdentifier(pointId).getitem(0)-1;
                     double[] locationLocal = new double[]{states.getitem(startPointIndex), 
                             states.getitem(startPointIndex+1), 
                             states.getitem(startPointIndex+2)};
-                    maskForceComponent(locationLocal, ((MotionObjectBodyForce)nextObject).getForceComponent());
                     double[] locationGlobal = new double[3]; 
                     // Transform to ground from body frame
                     dContext.transformPosition(b, locationLocal, locationGlobal);
@@ -602,6 +601,7 @@ public class MotionDisplayer implements SelectionListener {
                     double[] forceLocal = new double[]{states.getitem(startForceIndex), 
                             states.getitem(startForceIndex+1), 
                             states.getitem(startForceIndex+2)};
+                    maskForceComponent(forceLocal, ((MotionObjectPointForce)nextObject).getForceComponent());
                     double[] forceGlobal = new double[3]; 
                     dContext.transform(b, forceLocal, model.getGroundBody(), forceGlobal);
                     groundForcesRep.setNormalAtLocation(nextObject.getGlyphIndex(), 
@@ -613,7 +613,7 @@ public class MotionDisplayer implements SelectionListener {
                     int startIndex = nextObject.getStartIndexInFileNotIncludingTime();
                     MotionObjectBodyPoint bodyPointObject = (MotionObjectBodyPoint)nextObject;
                     double[] bodyPoint =bodyPointObject.getPoint();
-                    Body b = model.getBodySet().get(bodyPointObject.getBodyName());
+                    Body b = model.getBodySet().get(bodyPointObject.getPointExpressedInBody());
                     double[] bodyPointGlobal = new double[3]; 
                     // Transform to ground from body frame
                     dContext.transformPosition(b, bodyPoint, bodyPointGlobal);
@@ -622,20 +622,20 @@ public class MotionDisplayer implements SelectionListener {
                     double[] vectorGlobal = new double[]{states.getitem(startIndex), 
                             states.getitem(startIndex+1), 
                             states.getitem(startIndex+2)}; 
-                    maskForceComponent(vectorGlobal, ((MotionObjectBodyForce)nextObject).getForceComponent());
-                    /*System.out.println("filter component"+vectorGlobal[0]+" "+
-                            vectorGlobal[1]+" "+vectorGlobal[2]+" comp="+
-                            ((MotionObjectBodyForce)nextObject).getForceComponent());*/
-                    if (!(b==model.getGroundBody())){
+                   
+                    if (b==model.getGroundBody())
+                         maskForceComponent(vectorGlobal, ((MotionObjectPointForce)nextObject).getForceComponent());
+                    else{
                         double[] vectorLocal = new double[]{
                                 states.getitem(startIndex), 
                                 states.getitem(startIndex+1), 
                                 states.getitem(startIndex+2)
                         };
-                        maskForceComponent(vectorLocal, ((MotionObjectBodyForce)nextObject).getForceComponent());
+                        maskForceComponent(vectorLocal, ((MotionObjectPointForce)nextObject).getForceComponent());
                         // Transform to ground from body frame
                         dContext.transform(b, vectorLocal, model.getGroundBody(), vectorGlobal);
                     }
+                    
                     groundForcesRep.setNormalAtLocation(nextObject.getGlyphIndex(), 
                             vectorGlobal[0], vectorGlobal[1], vectorGlobal[2]);
                     forcesModified=true;
@@ -851,7 +851,7 @@ public class MotionDisplayer implements SelectionListener {
             mot.getDataColumn(startIndex+2, zCoord);
             scale = mot.getUnitConversion();
         } 
-        else if (object.getObjectType()==ExperimentalDataItemType.ForceAndPointData){
+        else if (object.getObjectType()==ExperimentalDataItemType.PointForceData){
             int startIndex = object.getStartIndexInFileNotIncludingTime();
             mot.getDataColumn(startIndex+2, xCoord);
             mot.getDataColumn(startIndex+3, yCoord);
@@ -944,7 +944,7 @@ public class MotionDisplayer implements SelectionListener {
                 if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
                     int glyphIndex=markersRep.addLocation(nextObject);
                     nextObject.setGlyphInfo(glyphIndex, markersRep);
-                } else if (nextObject.getObjectType()==ExperimentalDataItemType.ForceAndPointData){
+                } else if (nextObject.getObjectType()==ExperimentalDataItemType.PointForceData){
                     int glyphIndex=groundForcesRep.addLocation(nextObject);
                     nextObject.setGlyphInfo(glyphIndex, groundForcesRep);
                 } else if (nextObject.getObjectType()==ExperimentalDataItemType.BodyForceData){

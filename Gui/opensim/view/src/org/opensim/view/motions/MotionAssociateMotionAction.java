@@ -73,6 +73,7 @@ public final class MotionAssociateMotionAction extends CallableSystemAction {
                DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message("Could not read motion file " + fileName));
                return;
             }
+            MotionsDB.getInstance().saveStorageFileName(storage, fileName);
             Storage newMotion = storage;
             if (columnNamesOverlap(motion, newMotion, node.getModel()) == true) {
                DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message(fileName +
@@ -81,7 +82,6 @@ public final class MotionAssociateMotionAction extends CallableSystemAction {
             }
             MotionsDB.getInstance().loadMotionStorage(newMotion, false);
             MotionsDB.getInstance().reportModifiedMotion(motion, node.getModel());
-            //MotionsDB.getInstance().setCurrent(node.getModel(), motion);
          }
       }
    }

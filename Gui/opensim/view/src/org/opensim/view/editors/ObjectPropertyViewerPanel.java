@@ -90,7 +90,7 @@ class MyNumberRenderer extends DefaultTableCellRenderer.UIResource {
 public class ObjectPropertyViewerPanel extends JPanel {
     private static final int controlsColumnWidth = 16;
 
-    protected OpenSimObjectModel model;
+    private OpenSimObjectModel model;
     protected JTreeTable         treeTable;
     protected OpenSimObject      object;
     protected boolean            editMode;
@@ -135,11 +135,18 @@ public class ObjectPropertyViewerPanel extends JPanel {
         model.reloadChildren(model.getRoot());
     }
 
+    /**
+     * @return the model
+     */
+    public OpenSimObjectModel getModel() {
+        return model;
+    }
+
    // Handler for column header painting
    class ColumnHeaderRenderer extends JLabel implements TableCellRenderer {
       public Component getTableCellRendererComponent(JTable table, Object value,
             boolean isSelected, boolean hasFocus, int row, int column) {
-         setToolTipText(model.getColumnHeaderToolTip(column));
+         setToolTipText(getModel().getColumnHeaderToolTip(column));
          setText((value ==null) ? "" : value.toString());
          setBorder(UIManager.getBorder("TableHeader.cellBorder"));
          return this;

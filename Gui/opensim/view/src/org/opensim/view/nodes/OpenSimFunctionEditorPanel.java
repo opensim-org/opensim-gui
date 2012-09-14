@@ -586,7 +586,7 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
 private void restoreFunctionButtonrestoreFunctionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restoreFunctionButtonrestoreFunctionActionPerformed
       Function func = function;
       // function must be set to null before calling replaceFunction, but I'm not sure why.
-      function = null;
+      //function = null;
       //notifyListeners(new FunctionReplacedEvent(model, object, func, savedFunction));
       restoreFunction();
       setupComponent();
@@ -827,7 +827,7 @@ private void restoreFunctionButtonrestoreFunctionActionPerformed(java.awt.event.
     }
     private void restoreFunction() {
       if (savedFunction != null) {
-         function = savedFunction;
+         function.assign(savedFunction);
          xyFunction = new XYFunctionInterface(function);
          // make a new backup copy
          //backupFunction();

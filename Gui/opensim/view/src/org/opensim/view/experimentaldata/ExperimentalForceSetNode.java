@@ -110,8 +110,7 @@ public class ExperimentalForceSetNode extends OpenSimNode {
         // Create an ExperimentalForceNode for each 
         if (allMotionObjects==null) return;
         for(ExperimentalDataObject dObject:allMotionObjects){
-            if (dObject.getObjectType()==ExperimentalDataItemType.ForceAndPointData ||
-                dObject.getObjectType()==ExperimentalDataItemType.JointForceData ||
+            if (dObject.getObjectType()==ExperimentalDataItemType.PointForceData ||
                 dObject.getObjectType()==ExperimentalDataItemType.BodyForceData
                     ){
                 getChildren().add(new Node[]{new ExperimentalForceNode(dObject, dMotion)});

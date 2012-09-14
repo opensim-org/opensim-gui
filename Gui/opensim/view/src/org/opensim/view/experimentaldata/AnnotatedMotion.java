@@ -47,6 +47,7 @@ import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Storage;
 import org.opensim.view.motions.MotionControlJPanel;
 import org.opensim.view.motions.MotionDisplayer;
+import org.opensim.view.motions.MotionsDB;
 import vtk.vtkTransform;
 
 /**
@@ -122,6 +123,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
         /** Creates a new instance of AnnotatedMotion */
     public AnnotatedMotion(Storage storage) {
         super(storage);
+        MotionsDB.getInstance().saveStorageFileName(this, MotionsDB.getInstance().getStorageFileName(storage));
         setupPatterns();
         classified=classifyColumns();
     }
@@ -137,9 +139,8 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
     }
 
     public Vector<String> getForceNames() {
-        Vector<String> forces =  getNamesOfObjectsOfType(ExperimentalDataItemType.ForceAndPointData);
+        Vector<String> forces =  getNamesOfObjectsOfType(ExperimentalDataItemType.PointForceData);
         forces.addAll(getNamesOfObjectsOfType(ExperimentalDataItemType.BodyForceData));
-         forces.addAll(getNamesOfObjectsOfType(ExperimentalDataItemType.JointForceData));
         return forces;
     }
 
@@ -151,7 +152,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
         patterns.add(4,  new String[]{"_1", "_2", "_3"});
         patterns.add(5,  new String[]{"_x", "_y", "_z"});
         patterns.add(6,  new String[]{"_fx", "_fy", "_fz"});
-         classifications.add(0, ExperimentalDataItemType.ForceAndPointData);
+         classifications.add(0, ExperimentalDataItemType.PointForceData);
         classifications.add(1, ExperimentalDataItemType.PointData);
         classifications.add(2, ExperimentalDataItemType.PointData);
         classifications.add(3, ExperimentalDataItemType.PointData);
@@ -193,7 +194,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
                     columnType = classifications.get(patternIdx);
                     if (patternIdx ==0){
                         // Force _v? followed by Point _p?
-                        MotionObjectBodyForce f = new MotionObjectBodyForce(columnType, baseName+"_v", i-1);
+                        MotionObjectPointForce f = new MotionObjectPointForce(columnType, baseName+"_v", i-1);
                         f.setPointIdentifier(baseName+"_p");
                         classified.add(f);
                     }
@@ -201,7 +202,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
                         String patternString  = patterns.get(patternIdx)[0];
                         String prefix = patternString.substring(0, patternString.length()-1);
                         switch(classifications.get(patternIdx)){
-                            case ForceAndPointData:
+                            case PointForceData:
                                 //classified.add(new MotionObjectBodyForceAtVarPoint(columnType, baseName+prefix, i-1));
                                 assert(false);
                                 break;
@@ -210,19 +211,19 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
                                 classified.add(new MotionObjectBodyMarker(columnType, baseName+prefix, i-1));
                                 break;
                             case BodyForceData:
-                                 classified.add(new MotionObjectBodyForce(columnType, baseName+prefix, i-1));
+                                 classified.add(new MotionObjectPointForce(columnType, baseName+prefix, i-1));
                                 break;
                         }                           
                             
                     }
-                    System.out.println("Found "+columnType.toString()+ " at index "+i);
+                    //System.out.println("Found "+columnType.toString()+ " at index "+i);
                     i+=(columnType.getNumberOfColumns()-1);
                     break;
                 }
             }
             if (!found){
                 classified.add(new ExperimentalDataObject(columnType, label, i-1));
-                System.out.println("Column "+columnType.toString()+ " unclassified");
+                //System.out.println("Column "+columnType.toString()+ " unclassified");
             }
         }
         return classified;
@@ -263,7 +264,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
         obj.setTrailDisplayed(!obj.isTrailDisplayed());
     }
 
-    public double[] getBoundingBox() {
+    public final double[] getBoundingBox() {
         return boundingBox;
     }
 
@@ -295,7 +296,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
                         dataObject.getObjectType()==ExperimentalDataItemType.MarkerData){
                     int startIndex = dataObject.getStartIndexInFileNotIncludingTime();
                     transformPointData(motionCopy, vtktransform, startIndex);
-                } else if (dataObject.getObjectType()==ExperimentalDataItemType.ForceAndPointData){
+                } else if (dataObject.getObjectType()==ExperimentalDataItemType.PointForceData){
                     int startIndex = dataObject.getStartIndexInFileNotIncludingTime();
                     // First vector, then position
                     // If we allow for translations the first line may need to change
@@ -402,7 +403,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
                 getDataRate()+"\t"+ "1\t"+getSize());
         writer.newLine();
         writer.write("Frame#      Time ");
-        String headerLine = new String("   ");
+        String headerLine = "   ";
         for (int i = 0; i < markerNames.size(); i++) {
             writer.write(markerNames.get(i) + "\t\t\t");
             headerLine = headerLine.concat("X" + (i+1) + "\t" + "Y" + (i+1) + "\t" + "Z" + (i+1) + "\t");
@@ -495,4 +496,5 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
     public MotionDisplayer getMotionDisplayer() {
         return motionDisplayer;
     }
+    
 }

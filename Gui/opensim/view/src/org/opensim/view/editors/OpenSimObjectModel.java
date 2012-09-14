@@ -27,6 +27,8 @@ package org.opensim.view.editors;
 
 import java.awt.Insets;
 import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -68,6 +70,24 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
   protected final Icon removeRolloverIcon = new ImageIcon(getClass().getResource("/org/opensim/swingui/delete_rollover.png"));
 
   private NumberFormat numFormat = NumberFormat.getInstance();
+    protected boolean SomethingChanged = false;
+
+    public boolean isSomethingChanged() {
+        return SomethingChanged;
+    }
+
+    public void setSomethingChanged(boolean SomethingChanged) {
+        this.SomethingChanged = SomethingChanged;
+    }
+    private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        propertyChangeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        propertyChangeSupport.removePropertyChangeListener(listener);
+    }
 
   //-------------------------------------------------------------------------
   // Constructor
@@ -160,8 +180,18 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
    * and scalar properties are not handled the same. -Ayman 02/07
    */
   public void setValueAt(Object aValue, Object node, int column) {
-    if (column==2) ((PropertyNode)node).setValue(aValue);
+    if (column==2){
+        Object objRoot = getRoot();
+        OpenSimObject saved = (getRootOpenSimObject(objRoot)).clone();
+        ((PropertyNode)node).setValue(aValue);
+        setSomethingChanged(true);
+        propertyChangeSupport.firePropertyChange("Change", saved, getRootOpenSimObject(objRoot));
+    }
   }
+
+    private OpenSimObject getRootOpenSimObject(Object objRoot) {
+        return (OpenSimObject)((PropertyNode)objRoot).getPropertyOrObject();
+    }
 
   public String getToolTipText(Object node, int column) {
       if(node==null) return null;
@@ -201,7 +231,7 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
 
   class PropertyNode {
     private PropertyNode parent;
-    protected Object propertyOrObject; // May be OpenSimObject or a AbstractProperty
+    private Object propertyOrObject; 
     protected PropertyNode[] children;
     protected String propValueType = ""; // Indicates propertyOrObject type of this node (NOTE: an item of a PropertyDblArray gets the type PropertyDbl!)
 
@@ -609,5 +639,12 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
         fireTreeNodesChanged(OpenSimObjectModel.this, path, index, children);
       }
     }
+
+        /**
+         * @return the propertyOrObject
+         */
+        public Object getPropertyOrObject() {
+            return propertyOrObject;
+        }
   }
 }

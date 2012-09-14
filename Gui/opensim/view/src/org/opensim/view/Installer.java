@@ -129,7 +129,8 @@ public class Installer extends ModuleInstall {
                 ex.printStackTrace();
             }
         }
-        PropertyEditorManager.registerEditor(OpenSimObject.class, OpenSimObjectEditor.class);
+        //
+        //PropertyEditorManager.registerEditor(OpenSimObject.class, OpenSimObjectEditor.class);
     }
     /**
      * restorePrefs is primarily used for the first time around where there are no pref values

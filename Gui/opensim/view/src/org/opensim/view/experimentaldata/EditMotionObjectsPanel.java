@@ -29,20 +29,20 @@
 
 package org.opensim.view.experimentaldata;
 
-import java.awt.Dialog;
-import java.io.File;
 import java.io.IOException;
-import java.text.NumberFormat;
-import java.util.Vector;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.filechooser.FileFilter;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
-import org.opensim.modeling.ArrayStr;
+import org.openide.util.Exceptions;
+import org.opensim.modeling.ArrayInt;
+import org.opensim.modeling.ExternalForce;
+import org.opensim.modeling.ExternalLoads;
 import org.opensim.modeling.Model;
-import org.opensim.modeling.Storage;
 import org.opensim.utils.FileUtils;
+import org.opensim.view.motions.MotionsDB;
 
 /**
  *
@@ -104,6 +104,8 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
         jButtonAdd = new javax.swing.JButton();
         jButtonDelete = new javax.swing.JButton();
         jButtonEdit = new javax.swing.JButton();
+        jButtonLoad = new javax.swing.JButton();
+        jButtonSave = new javax.swing.JButton();
 
         jLabel5.setText("Applied to"); // NOI18N
 
@@ -297,44 +299,72 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
             }
         });
 
+        jButtonLoad.setText("Load..."); // NOI18N
+        jButtonLoad.setToolTipText("Add a motion object based on ExternalLoads file "); // NOI18N
+        jButtonLoad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLoadActionPerformed(evt);
+            }
+        });
+
+        jButtonSave.setText("Save..."); // NOI18N
+        jButtonSave.setToolTipText("Save forces tp ExternalLoads file "); // NOI18N
+        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSaveActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout MotionObjectsListPanelLayout = new org.jdesktop.layout.GroupLayout(MotionObjectsListPanel);
         MotionObjectsListPanel.setLayout(MotionObjectsListPanelLayout);
         MotionObjectsListPanelLayout.setHorizontalGroup(
             MotionObjectsListPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, MotionObjectsListPanelLayout.createSequentialGroup()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(MotionObjectsListPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                    .add(jButtonDelete, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(jButtonEdit, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(jButtonAdd, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .add(MotionObjectsListPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(MotionObjectsListPanelLayout.createSequentialGroup()
+                        .add(MotionObjectsListPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, jButtonAdd, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                            .add(jButtonEdit, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .add(MotionObjectsListPanelLayout.createSequentialGroup()
+                        .add(MotionObjectsListPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, jButtonLoad, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                            .add(jButtonDelete, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .add(MotionObjectsListPanelLayout.createSequentialGroup()
+                        .add(jButtonSave, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         MotionObjectsListPanelLayout.setVerticalGroup(
             MotionObjectsListPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(MotionObjectsListPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(jButtonAdd)
-                .add(21, 21, 21)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jButtonEdit)
-                .add(17, 17, 17)
-                .add(jButtonDelete))
-            .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 185, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(jButtonDelete)
+                .add(27, 27, 27)
+                .add(jButtonLoad)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 8, Short.MAX_VALUE)
+                .add(jButtonSave)
+                .addContainerGap(25, Short.MAX_VALUE))
+            .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .add(MotionObjectsListPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .add(MotionObjectsListPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .addContainerGap()
-                .add(MotionObjectsListPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(MotionObjectsListPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -356,9 +386,8 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
         if (sels.length==1){
             pfo = objectListModel.get(sels[0]);
         }
-        
-        MotionObjectBodyForce pf = ((MotionObjectBodyForce) pfo);
-        //ExperimentalDataObject pfCopy = pf.;
+        //System.out.println(pfo.toString());
+        MotionObjectPointForce pf = ((MotionObjectPointForce) pfo);
         EditOneMotionObjectPanel eofPanel = new EditOneMotionObjectPanel(pf, aMotion, aModel);
         DialogDescriptor dlg = new DialogDescriptor(eofPanel, "Create/Edit Motion Objects");
         eofPanel.setDDialog(dlg);
@@ -367,11 +396,14 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
          if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)!=0){
              //objectListModel.set(sels[0], pfCopy);
          }
+         else{
+             objectListModel.set(sels[0], pf);
+             //System.out.println(pfo.toString());
+         }
     }//GEN-LAST:event_jButtonEditActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
-         MotionObjectBodyForce pf = new MotionObjectBodyForce(ExperimentalDataItemType.ForceAndPointData, "", -1);
-         objectListModel.addElement(pf);
+         MotionObjectPointForce pf = new MotionObjectPointForce(ExperimentalDataItemType.PointForceData, "", -1);
          EditOneMotionObjectPanel eofPanel = new EditOneMotionObjectPanel(pf, aMotion, aModel);
          DialogDescriptor dlg = new DialogDescriptor(eofPanel, "Create/Edit Motion Objects");
          eofPanel.setDDialog(dlg);
@@ -381,10 +413,90 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
              //objectListModel.set(sels[0], pfCopy);
          }
          else {
+             objectListModel.add(objectListModel.getSize(), pf);
              aMotion.getClassified().add(pf);
-             System.out.println("Adding force id="+pf.getForceIdentifier()+" start index"+pf.getStartIndexInFileNotIncludingTime());
+             //System.out.println("Adding force id="+pf.getForceIdentifier()+" start index"+pf.getStartIndexInFileNotIncludingTime());
          }
     }//GEN-LAST:event_jButtonAddActionPerformed
+
+private void jButtonLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoadActionPerformed
+// TODO add your handling code here:
+    FileFilter ff = FileUtils.getFileFilter(".xml", "File to load External Loads from");
+    String fileName = FileUtils.getInstance().browseForFilename(ff, true, null);
+    if (fileName!=null){
+            try {
+                ExternalLoads exLoads = new ExternalLoads(aModel, fileName);
+                for(int i=0; i<exLoads.getSize(); i++){
+                    ExternalForce ef = exLoads.get(i);
+                    String bodyApplied = ef.getAppliedToBodyName();
+                    String pointInBody = ef.getPointExpressedInBodyName();
+                    String pointId = ef.getPointIdentifier();
+                    ArrayInt pointIndices = aMotion.getColumnIndicesForIdentifier(pointId);
+                    String forceInBody = ef.getForceExpressedInBodyName();
+                    String froceId = ef.getForceIdentifier();
+                    ArrayInt forceIndices = aMotion.getColumnIndicesForIdentifier(froceId);
+                    MotionObjectPointForce motionForce;
+                    if (ef.specifiesPoint()){ // PointForce
+                        motionForce = new MotionObjectPointForce(ExperimentalDataItemType.PointForceData, pointId, pointIndices.getitem(0));
+                        motionForce.setPointExpressedInBody(pointInBody);
+                    }
+                    else { // BodyForce
+                        motionForce = new MotionObjectPointForce(ExperimentalDataItemType.BodyForceData, froceId, forceIndices.getitem(0));
+                    }
+                    motionForce.setForceAppliedToBody(bodyApplied);
+                    motionForce.setName(ef.getName());
+                    motionForce.setForceExpressedInBodyName(forceInBody);
+                    motionForce.setForceIdentifier(froceId);
+                    // Torque entries
+                    if (ef.appliesTorque()){
+                        motionForce.setSpecifyTorque(true);
+                        motionForce.setTorqueIdentifier(ef.getTorqueIdentifier());
+                    }
+                    objectListModel.add(objectListModel.getSize(), motionForce);
+                    aMotion.getClassified().add(motionForce);
+               }
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+            }
+    }
+
+}//GEN-LAST:event_jButtonLoadActionPerformed
+
+private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
+// TODO add your handling code here:
+    FileFilter ff = FileUtils.getFileFilter(".xml", "File to save External Loads");
+    String fileName = FileUtils.getInstance().browseForFilenameToSave(ff, true, "", null);
+    String fullFilename = FileUtils.addExtensionIfNeeded(fileName, ".xml");
+   // create ExternalLoads object and set its attributes
+    ExternalLoads exLoad = new ExternalLoads();
+    exLoad.setDataFileName(MotionsDB.getInstance().getStorageFileName(aMotion));
+    int sz = objectListModel.size();
+    String warnings = "Data file set to:"+exLoad.getDataFileName()+"\n";
+    for (int i=0; i<sz; i++){
+        ExperimentalDataObject obj= (ExperimentalDataObject) objectListModel.get(i);
+        if (obj instanceof MotionObjectPointForce){
+            ExternalForce extForce = new ExternalForce();
+            extForce.setName(obj.getName());
+            MotionObjectPointForce force = (MotionObjectPointForce) obj;
+            extForce.setAppliedToBodyName(force.getForceAppliedToBody());
+            extForce.setForceExpressedInBodyName(force.getForceExpressedInBodyName());
+            extForce.setForceIdentifier(force.getForceIdentifier());
+            extForce.setPointExpressedInBodyName(force.getPointExpressedInBody());
+            if (force.isSpecifyTorque())
+                extForce.setTorqueIdentifier(force.getTorqueIdentifier());
+            if (force.specifiesPoint())
+                extForce.setPointIdentifier(force.getPointIdentifier());
+            if (!force.getForceComponent().equalsIgnoreCase("ALL"))
+                warnings = warnings.concat(obj.getName()+ ":Warning, component will be ignored as unsupported by External Loads.\n");
+            exLoad.cloneAndAppend(extForce);
+        }
+    }
+    if (!warnings.isEmpty()){ // Show info message with all warnings
+        NotifyDescriptor.Message dlg = new NotifyDescriptor.Message(warnings);
+        DialogDisplayer.getDefault().notify(dlg);
+    }
+    exLoad.print(fullFilename);
+}//GEN-LAST:event_jButtonSaveActionPerformed
    
     private void updateButtonAvailability() {
        int[] sels = jMotionObjectsList.getSelectedIndices();
@@ -416,6 +528,8 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
     private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonEdit;
+    private javax.swing.JButton jButtonLoad;
+    private javax.swing.JButton jButtonSave;
     private javax.swing.JComboBox jComboBoxFX;
     private javax.swing.JComboBox jComboBoxFY;
     private javax.swing.JComboBox jComboBoxFZ;

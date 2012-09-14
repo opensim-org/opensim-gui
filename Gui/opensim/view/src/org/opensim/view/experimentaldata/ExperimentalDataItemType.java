@@ -6,8 +6,7 @@ package org.opensim.view.experimentaldata;
 public enum ExperimentalDataItemType{                
     PointData(3),         
     MarkerData(3),         
-    ForceAndPointData(6),         
-    JointForceData(3),   
+    PointForceData(6),
     BodyForceData(3),
     Unknown(1);
 

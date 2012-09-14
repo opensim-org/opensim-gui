@@ -67,7 +67,7 @@ public class ExperimentalDataObject extends OpenSimJavaObject {
     }
     
     public String toString() {
-        return (getName()+"("+objectType.getNumberOfColumns()+")");
+        return (getName());
     }
 
     public boolean isDisplayed() {

@@ -941,7 +941,11 @@ public final class ViewDB extends Observable implements Observer {
    public void replaceSelectedObject(OpenSimObject obj) {
       // If the object is already in the list of selected ones, do nothing (a la Illustrator)
       // If the object is not already in the list, make this object the only selected one
-      if(!isSelected(obj)) setSelectedObject(obj);
+      if(!isSelected(obj)){
+          setSelectedObject(obj);
+      }
+      else
+          removeObjectFromSelectedList(obj);
    }
 
    public void clearSelectedObjects() {
