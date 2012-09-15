@@ -60,7 +60,12 @@ public class OpenSimObject {
   public void setPickable(boolean onOff) {
 	 pickable=onOff;
   }
-  
+  public void markAdopted() {
+    if (swigCPtr != 0) {
+      if (swigCMemOwn) swigCMemOwn = false;
+    }
+  }  
+
 
   public OpenSimObject clone() {
     long cPtr = opensimModelJNI.OpenSimObject_clone(swigCPtr, this);
