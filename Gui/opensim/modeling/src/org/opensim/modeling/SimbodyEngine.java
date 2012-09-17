@@ -103,6 +103,54 @@ public class SimbodyEngine extends OpenSimObject {
     return opensimModelJNI.SimbodyEngine_getMass(swigCPtr, this);
   }
 
+  public void getSystemInertia(SWIGTYPE_p_SimTK__State s, SWIGTYPE_p_double rM, SWIGTYPE_p_SimTK__Vec3 rCOM, SWIGTYPE_p_a_3__double rI) {
+    opensimModelJNI.SimbodyEngine_getSystemInertia__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), SWIGTYPE_p_double.getCPtr(rM), SWIGTYPE_p_SimTK__Vec3.getCPtr(rCOM), SWIGTYPE_p_a_3__double.getCPtr(rI));
+  }
+
+  public void getSystemInertia(SWIGTYPE_p_SimTK__State s, SWIGTYPE_p_double rM, SWIGTYPE_p_double rCOM, SWIGTYPE_p_double rI) {
+    opensimModelJNI.SimbodyEngine_getSystemInertia__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), SWIGTYPE_p_double.getCPtr(rM), SWIGTYPE_p_double.getCPtr(rCOM), SWIGTYPE_p_double.getCPtr(rI));
+  }
+
+  public void getPosition(SWIGTYPE_p_SimTK__State s, Body aBody, SWIGTYPE_p_SimTK__Vec3 aPoint, SWIGTYPE_p_SimTK__Vec3 rPos) {
+    opensimModelJNI.SimbodyEngine_getPosition(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), Body.getCPtr(aBody), aBody, SWIGTYPE_p_SimTK__Vec3.getCPtr(aPoint), SWIGTYPE_p_SimTK__Vec3.getCPtr(rPos));
+  }
+
+  public void getVelocity(SWIGTYPE_p_SimTK__State s, Body aBody, SWIGTYPE_p_SimTK__Vec3 aPoint, SWIGTYPE_p_SimTK__Vec3 rVel) {
+    opensimModelJNI.SimbodyEngine_getVelocity(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), Body.getCPtr(aBody), aBody, SWIGTYPE_p_SimTK__Vec3.getCPtr(aPoint), SWIGTYPE_p_SimTK__Vec3.getCPtr(rVel));
+  }
+
+  public void getAcceleration(SWIGTYPE_p_SimTK__State s, Body aBody, SWIGTYPE_p_SimTK__Vec3 aPoint, SWIGTYPE_p_SimTK__Vec3 rAcc) {
+    opensimModelJNI.SimbodyEngine_getAcceleration(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), Body.getCPtr(aBody), aBody, SWIGTYPE_p_SimTK__Vec3.getCPtr(aPoint), SWIGTYPE_p_SimTK__Vec3.getCPtr(rAcc));
+  }
+
+  public void getDirectionCosines(SWIGTYPE_p_SimTK__State s, Body aBody, SWIGTYPE_p_a_3__double rDirCos) {
+    opensimModelJNI.SimbodyEngine_getDirectionCosines__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), Body.getCPtr(aBody), aBody, SWIGTYPE_p_a_3__double.getCPtr(rDirCos));
+  }
+
+  public void getDirectionCosines(SWIGTYPE_p_SimTK__State s, Body aBody, SWIGTYPE_p_double rDirCos) {
+    opensimModelJNI.SimbodyEngine_getDirectionCosines__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), Body.getCPtr(aBody), aBody, SWIGTYPE_p_double.getCPtr(rDirCos));
+  }
+
+  public void getAngularVelocity(SWIGTYPE_p_SimTK__State s, Body aBody, SWIGTYPE_p_SimTK__Vec3 rAngVel) {
+    opensimModelJNI.SimbodyEngine_getAngularVelocity(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), Body.getCPtr(aBody), aBody, SWIGTYPE_p_SimTK__Vec3.getCPtr(rAngVel));
+  }
+
+  public void getAngularVelocityBodyLocal(SWIGTYPE_p_SimTK__State s, Body aBody, SWIGTYPE_p_SimTK__Vec3 rAngVel) {
+    opensimModelJNI.SimbodyEngine_getAngularVelocityBodyLocal(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), Body.getCPtr(aBody), aBody, SWIGTYPE_p_SimTK__Vec3.getCPtr(rAngVel));
+  }
+
+  public void getAngularAcceleration(SWIGTYPE_p_SimTK__State s, Body aBody, SWIGTYPE_p_SimTK__Vec3 rAngAcc) {
+    opensimModelJNI.SimbodyEngine_getAngularAcceleration(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), Body.getCPtr(aBody), aBody, SWIGTYPE_p_SimTK__Vec3.getCPtr(rAngAcc));
+  }
+
+  public void getAngularAccelerationBodyLocal(SWIGTYPE_p_SimTK__State s, Body aBody, SWIGTYPE_p_SimTK__Vec3 rAngAcc) {
+    opensimModelJNI.SimbodyEngine_getAngularAccelerationBodyLocal(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), Body.getCPtr(aBody), aBody, SWIGTYPE_p_SimTK__Vec3.getCPtr(rAngAcc));
+  }
+
+  public SWIGTYPE_p_Transform getTransform(SWIGTYPE_p_SimTK__State s, Body aBody) {
+    return new SWIGTYPE_p_Transform(opensimModelJNI.SimbodyEngine_getTransform(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), Body.getCPtr(aBody), aBody), true);
+  }
+
   public void computeDerivatives(SWIGTYPE_p_SimTK__State s, SWIGTYPE_p_double dqdt, SWIGTYPE_p_double dudt) {
     opensimModelJNI.SimbodyEngine_computeDerivatives(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), SWIGTYPE_p_double.getCPtr(dqdt), SWIGTYPE_p_double.getCPtr(dudt));
   }

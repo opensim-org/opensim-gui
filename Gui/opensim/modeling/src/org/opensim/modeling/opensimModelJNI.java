@@ -3350,6 +3350,18 @@ public class opensimModelJNI {
   public final static native long SimbodyEngine_getGroundBody(long jarg1, SimbodyEngine jarg1_);
   public final static native long SimbodyEngine_getWrapObject(long jarg1, SimbodyEngine jarg1_, String jarg2);
   public final static native double SimbodyEngine_getMass(long jarg1, SimbodyEngine jarg1_);
+  public final static native void SimbodyEngine_getSystemInertia__SWIG_0(long jarg1, SimbodyEngine jarg1_, long jarg2, long jarg3, long jarg4, long jarg5);
+  public final static native void SimbodyEngine_getSystemInertia__SWIG_1(long jarg1, SimbodyEngine jarg1_, long jarg2, long jarg3, long jarg4, long jarg5);
+  public final static native void SimbodyEngine_getPosition(long jarg1, SimbodyEngine jarg1_, long jarg2, long jarg3, Body jarg3_, long jarg4, long jarg5);
+  public final static native void SimbodyEngine_getVelocity(long jarg1, SimbodyEngine jarg1_, long jarg2, long jarg3, Body jarg3_, long jarg4, long jarg5);
+  public final static native void SimbodyEngine_getAcceleration(long jarg1, SimbodyEngine jarg1_, long jarg2, long jarg3, Body jarg3_, long jarg4, long jarg5);
+  public final static native void SimbodyEngine_getDirectionCosines__SWIG_0(long jarg1, SimbodyEngine jarg1_, long jarg2, long jarg3, Body jarg3_, long jarg4);
+  public final static native void SimbodyEngine_getDirectionCosines__SWIG_1(long jarg1, SimbodyEngine jarg1_, long jarg2, long jarg3, Body jarg3_, long jarg4);
+  public final static native void SimbodyEngine_getAngularVelocity(long jarg1, SimbodyEngine jarg1_, long jarg2, long jarg3, Body jarg3_, long jarg4);
+  public final static native void SimbodyEngine_getAngularVelocityBodyLocal(long jarg1, SimbodyEngine jarg1_, long jarg2, long jarg3, Body jarg3_, long jarg4);
+  public final static native void SimbodyEngine_getAngularAcceleration(long jarg1, SimbodyEngine jarg1_, long jarg2, long jarg3, Body jarg3_, long jarg4);
+  public final static native void SimbodyEngine_getAngularAccelerationBodyLocal(long jarg1, SimbodyEngine jarg1_, long jarg2, long jarg3, Body jarg3_, long jarg4);
+  public final static native long SimbodyEngine_getTransform(long jarg1, SimbodyEngine jarg1_, long jarg2, long jarg3, Body jarg3_);
   public final static native void SimbodyEngine_computeDerivatives(long jarg1, SimbodyEngine jarg1_, long jarg2, long jarg3, long jarg4);
   public final static native void SimbodyEngine_transform__SWIG_0(long jarg1, SimbodyEngine jarg1_, long jarg2, long jarg3, Body jarg3_, double[] jarg4, long jarg5, Body jarg5_, double[] jarg6);
   public final static native void SimbodyEngine_transform__SWIG_1(long jarg1, SimbodyEngine jarg1_, long jarg2, long jarg3, Body jarg3_, long jarg4, long jarg5, Body jarg5_, long jarg6);
