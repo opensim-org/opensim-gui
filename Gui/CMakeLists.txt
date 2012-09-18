@@ -4,14 +4,17 @@ IF(OPENSIM_INSTALL_PACKAGE_BUILD)
 SET(OPENSIM_INSTALL_PACKAGE_BUILD OFF CACHE BOOL "Build an installer (to post on simtk.org)")
 # The following lines assume that these steps are done from inside netbeans first
 # build zip distribution
-# extract all from zip 
+# extract all from zip under Gui/opensim/dist
 # icons modified and etc files changed
-INSTALL(DIRECTORY opensim/dist/opensim/opensim/bin DESTINATION ${CMAKE_INSTALL_PREFIX})
-INSTALL(DIRECTORY opensim/dist/opensim/opensim/ide DESTINATION ${CMAKE_INSTALL_PREFIX})
-INSTALL(DIRECTORY opensim/dist/opensim/opensim/platform DESTINATION ${CMAKE_INSTALL_PREFIX})
-INSTALL(DIRECTORY opensim/dist/opensim/opensim/etc DESTINATION ${CMAKE_INSTALL_PREFIX})
-INSTALL(DIRECTORY opensim/dist/opensim/opensim/opensim DESTINATION ${CMAKE_INSTALL_PREFIX})
-INSTALL(DIRECTORY opensim/Scripts DESTINATION ${CMAKE_INSTALL_PREFIX} PATTERN ".svn" EXCLUDE)
+INSTALL_FILES(/bin/ FILES opensim/dist/opensim/opensim/bin/opensim.exe)
+# etc
+INSTALL(DIRECTORY opensim/dist/opensim/opensim/etc/ DESTINATION etc)
+# Scripts
+INSTALL(DIRECTORY opensim/Scripts/ DESTINATION Scripts PATTERN ".svn" EXCLUDE)
+# remaining folders
+INSTALL(DIRECTORY opensim/dist/opensim/opensim/ide/ DESTINATION ide)
+INSTALL(DIRECTORY opensim/dist/opensim/opensim/platform/ DESTINATION platform)
+INSTALL(DIRECTORY opensim/dist/opensim/opensim/opensim/ DESTINATION opensim)
 
 # This to be replaced with a CMake Variable
 FILE(GLOB VTK_LIBS ${VTK_LIB_DIR}/*.dll)
