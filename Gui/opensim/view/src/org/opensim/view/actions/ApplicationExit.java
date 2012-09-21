@@ -84,7 +84,7 @@ public class ApplicationExit extends WindowAdapter
       if (answer == 1)
          return false;
 
-      System.out.println("Start saving application state.");
+      //System.out.println("Start saving application state.");
       try {
           ApplicationState state = ApplicationState.getInstance();
           OpenSimDBDescriptor dbDesc = new OpenSimDBDescriptor(OpenSimDB.getInstance());
@@ -105,7 +105,7 @@ public class ApplicationExit extends WindowAdapter
       } catch (IOException ex) {
           ex.printStackTrace();
       }
-      System.out.println("Finish saving application state.");
+      //System.out.println("Finish saving application state.");
 
       // Close all of the models, prompting the user to save them if necessary.
       // If any of the closes returns false, that model was not closed, so abort
