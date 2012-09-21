@@ -457,8 +457,9 @@ public class BodyDisplayer extends vtkAssembly
           DisplayGeometry gPiece = gSet.get(k);
           double[] colorOnFile = new double[3];
           gPiece.getColor(colorOnFile);
-          gPiece.setColor(colorOnFile);
+          //gPiece.setColor(colorOnFile);
           DisplayGeometryDisplayer gd = (DisplayGeometryDisplayer) mapGeometryToVtkObjects.get(gPiece);
+          if (gd==null) continue;
           gd.GetProperty().SetColor(colorOnFile);
           gd.Modified();
       }
