@@ -693,6 +693,11 @@ public class EditOneForceJPanel extends javax.swing.JPanel {
         jComboBoxTX.setEnabled(applyTorque);
         jComboBoxTY.setEnabled(applyTorque);
         jComboBoxTZ.setEnabled(applyTorque);
+        if (!applyTorque){
+            jComboBoxTX.setSelectedItem("");
+            jComboBoxTY.setSelectedItem("");
+            jComboBoxTZ.setSelectedItem("");
+        }
         if (dDialog!= null) dDialog.setValid(checkValid());
     }
     
