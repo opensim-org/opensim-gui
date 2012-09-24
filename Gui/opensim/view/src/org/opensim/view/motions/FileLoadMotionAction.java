@@ -29,12 +29,14 @@
  */
 package org.opensim.view.motions;
 
+import org.openide.nodes.Node;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.utils.FileUtils;
+import org.opensim.view.ExplorerTopComponent;
+import org.opensim.view.nodes.ConcreteModelNode;
 import org.opensim.view.pub.OpenSimDB;
-import org.opensim.view.pub.ViewDB;
 
 public final class FileLoadMotionAction extends CallableSystemAction {
    
@@ -72,7 +74,11 @@ public final class FileLoadMotionAction extends CallableSystemAction {
    }
    
    public boolean isEnabled() {
-       return OpenSimDB.getInstance().getCurrentModel()!=null;
+       Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
+       if (selected.length!=1) return false;
+       if (!(selected[0] instanceof ConcreteModelNode)) return false;
+       ConcreteModelNode selectedModelNode = (ConcreteModelNode) selected[0];
+       return (OpenSimDB.getInstance().getCurrentModel()==selectedModelNode.getModel());
    }
 
     public void loadMotion(String fileName) {
