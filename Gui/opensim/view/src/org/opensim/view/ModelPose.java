@@ -44,6 +44,7 @@ public class ModelPose {
     */
    private Vector<String> coordinateNames = new Vector<String>(4);
    private Vector<Double> coordinateValues = new Vector<Double>(4);
+   private Vector<Double> coordinateSpeeds = new Vector<Double>(4);
    /** Creates a new instance of ModelPose */
    public ModelPose() {
    }
@@ -70,10 +71,14 @@ public class ModelPose {
          Coordinate coord = coords.get(i);
         
          getCoordinateNames().add(coord.getName());
-         if (isDefault)
+         if (isDefault){
             getCoordinateValues().add(coord.getDefaultValue());
-         else
+            getCoordinateSpeeds().add(coord.getDefaultSpeedValue());
+         }
+         else {
             getCoordinateValues().add(context.getValue(coord));
+            getCoordinateSpeeds().add(0.0);
+         }
       }
    }
    public Vector<Double> getCoordinateValues() {
@@ -115,9 +120,25 @@ public class ModelPose {
          // Values in file
          String name=coordinateNames.get(i);
          double storedValue = (Double)coordinateValues.get(i);
+         double storedSpeedValue = (Double)coordinateSpeeds.get(i);
          if (coords.contains(name)){
             coords.get(name).setDefaultValue(storedValue);
+            coords.get(name).setDefaultSpeedValue(storedSpeedValue);
          }
       }
    }
+
+    /**
+     * @return the coordinateSpeeds
+     */
+    public Vector<Double> getCoordinateSpeeds() {
+        return coordinateSpeeds;
+    }
+
+    /**
+     * @param coordinateSpeeds the coordinateSpeeds to set
+     */
+    public void setCoordinateSpeeds(Vector<Double> coordinateSpeeds) {
+        this.coordinateSpeeds = coordinateSpeeds;
+    }
  }
