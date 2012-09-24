@@ -5824,8 +5824,6 @@ public class opensimModelJNI {
   public final static native long new_AnalyzeTool__SWIG_2(String jarg1) throws java.io.IOException;
   public final static native long new_AnalyzeTool__SWIG_3(long jarg1, AnalyzeTool jarg1_);
   public final static native long new_AnalyzeTool__SWIG_4(long jarg1, Model jarg1_);
-  public final static native void AnalyzeTool_updateFromXMLNode__SWIG_0(long jarg1, AnalyzeTool jarg1_, long jarg2, int jarg3);
-  public final static native void AnalyzeTool_updateFromXMLNode__SWIG_1(long jarg1, AnalyzeTool jarg1_, long jarg2);
   public final static native void AnalyzeTool_setStatesStorage(long jarg1, AnalyzeTool jarg1_, long jarg2, Storage jarg2_);
   public final static native long AnalyzeTool_createStatesStorageFromCoordinatesAndSpeeds(long jarg1, Model jarg1_, long jarg2, Storage jarg2_, long jarg3, Storage jarg3_);
   public final static native long AnalyzeTool_getStatesStorage(long jarg1, AnalyzeTool jarg1_);
