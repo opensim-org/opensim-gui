@@ -77,14 +77,6 @@ public class AnalyzeTool extends AbstractTool {
     this(opensimModelJNI.new_AnalyzeTool__SWIG_4(Model.getCPtr(aModel), aModel), true);
   }
 
-  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
-    opensimModelJNI.AnalyzeTool_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
-  }
-
-  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
-    opensimModelJNI.AnalyzeTool_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
-  }
-
   public void setStatesStorage(Storage aStore) {
     opensimModelJNI.AnalyzeTool_setStatesStorage(swigCPtr, this, Storage.getCPtr(aStore), aStore);
   }
