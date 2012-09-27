@@ -8,6 +8,7 @@
             <file name="org-opensim-view-experimentaldata-AnnotateMotionObjectsAction.instance"/>
             <file name="org-opensim-view-experimentaldata-MotionReclassifyAction.instance"/>
             <file name="org-opensim-view-motions.FileLoadMotionAction.instance"/>
+            <file name="org-opensim-view-motions.FileLoadMotionMenuAction.instance"/>
             <file name="org-opensim-view-FileCloseAction.instance"/>
             <file name="org-opensim-view-FileLoadStandardModelsAction.instance"/>
             <file name="org-opensim-view-ModelDisplayEditAction.instance"/>
@@ -309,7 +310,7 @@
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-actions-FileSaveAllAction.instance"/>
                 <attr name="position" intvalue="1710"/>
             </file>
-            <file name="org-opensim-view-motions.FileLoadMotionAction.instance" url="org-opensim-view-motions.FileLoadMotionAction.instance">
+            <file name="org-opensim-view-motions.FileLoadMotionMenuAction.instance" url="org-opensim-view-motions.FileLoadMotionMenuAction.instance">
                 <attr name="position" intvalue="1350"/>
             </file>
             <file name="org-opensim-view-SaveModelAction.shadow">
