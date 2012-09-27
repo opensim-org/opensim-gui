@@ -52,6 +52,18 @@ public class MotionObjectPointForce extends MotionObjectBodyPoint {
         setForceIdentifier(baseName);
    }
 
+    MotionObjectPointForce(MotionObjectPointForce pf) {
+        this(pf.getObjectType(), pf.getName(), pf.getStartIndexInFileNotIncludingTime());
+        offset = pf.offset;
+        forceIdentifier = pf.forceIdentifier;
+        forceExpressedInBodyName = pf.forceExpressedInBodyName;
+        forceAppliedToBody = pf.forceAppliedToBody;
+        specifyPoint = pf.specifyPoint;
+        forceComponent = pf.forceComponent;
+        torqueIdentifier = pf.torqueIdentifier;
+        specifyTorque = pf.specifyTorque;
+    }
+
     void setForceExpressedInBodyName(String selected) {
         forceExpressedInBodyName = selected;
     }
