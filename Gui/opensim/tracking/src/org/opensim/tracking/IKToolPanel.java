@@ -32,6 +32,8 @@
 package org.opensim.tracking;
 
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -43,6 +45,7 @@ import org.openide.NotifyDescriptor;
 import org.opensim.modeling.InverseKinematicsTool;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
+import org.opensim.utils.BrowserLauncher;
 import org.opensim.view.ModelEvent;
 import org.opensim.view.pub.OpenSimDB;
 
@@ -59,9 +62,14 @@ public class IKToolPanel extends BaseToolPanel implements Observer {
       if (numFormat instanceof DecimalFormat) {
         ((DecimalFormat) numFormat).applyPattern("#,##0.#########");
       }
+      
+      helpButton.addActionListener(new ActionListener() {
 
-      super.prepareHelpset("IK.hs");//add IK help set
-      super.getHelpBroker().enableHelpOnButton(super.helpButton, "org.opensim.simtrack.ik.help", super.getHelpSet());// add action listener to help button
+            public void actionPerformed(ActionEvent ae) {
+                BrowserLauncher.openURL("http://simtk-confluence.stanford.edu:8080/display/OpenSim30/Inverse+Kinematics");
+            }
+      });
+
       initComponents();
       bindPropertiesToComponents();
 

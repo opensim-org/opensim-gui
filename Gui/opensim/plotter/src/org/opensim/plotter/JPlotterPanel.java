@@ -46,8 +46,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Vector;
-import javax.help.HelpBroker;
-import javax.help.HelpSet;
 import javax.swing.AbstractAction;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
@@ -69,6 +67,7 @@ import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.openide.util.Exceptions;
 import org.opensim.modeling.*;
+import org.opensim.utils.BrowserLauncher;
 import org.opensim.view.motions.MotionEvent;
 import org.opensim.view.motions.MotionTimeChangeEvent;
 import org.opensim.utils.FileUtils;
@@ -154,18 +153,12 @@ public class JPlotterPanel extends javax.swing.JPanel
    double activationValue;
    private boolean modelChanged=true;
 
-   /*********Added by jingjing***********/
-    HelpSet hs = null;
-    HelpBroker hb = null;
-    
    /**
     * Creates new form JPlotterPanel
     */
    public JPlotterPanel() {
-      prepareHelpset();
       initComponents();
-      hb.enableHelpOnButton(jButton1, "org.opensim.view.plotter.help", hs);
-      
+ 
       domainFormatter.setValueClass(java.lang.Double.class);
       rangeFormatter.setValueClass(java.lang.Double.class);
       jDomainStartTextField.setValue(0.0);   jDomainStartTextField.addActionListener(new handleReturnAction(jDomainStartTextField));
@@ -193,23 +186,6 @@ public class JPlotterPanel extends javax.swing.JPanel
       jPlotsTree.setRootVisible(false);
       //printPlotDescriptor();
    }
-
-       /**
-     * Create Helset and HelpBroker for the help Button
-     */
-    public void prepareHelpset() {
-        String helpsetfile = "Plotter.hs";
-        ClassLoader cl = this.getClass().getClassLoader();
-        try {
-            URL hsURL = HelpSet.findHelpSet(cl, helpsetfile);
-            hs = new HelpSet(null, hsURL);
-        } catch(Exception ee) {
-            System.out.println("HelpSet: "+ee.getMessage());
-            System.out.println("HelpSet: "+ helpsetfile + " not found");
-        }
-
-        hb = hs.createHelpBroker();
-    }
    
    /** This method is called from within the constructor to
     * initialize the form.
@@ -360,7 +336,7 @@ public class JPlotterPanel extends javax.swing.JPanel
                         .add(org.jdesktop.layout.GroupLayout.LEADING, jAdvancedPanelLayout.createSequentialGroup()
                             .add(jActivationLabel)
                             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                            .add(jActivationValueFormattedTextField, 0, 0, Short.MAX_VALUE))
+                            .add(jActivationValueFormattedTextField, 0, 1, Short.MAX_VALUE))
                         .add(org.jdesktop.layout.GroupLayout.LEADING, jActivationOverrideCheckBox)))
                 .addContainerGap())
         );
@@ -500,7 +476,7 @@ public class JPlotterPanel extends javax.swing.JPanel
         jPlotNavigationPanelLayout.setVerticalGroup(
             jPlotNavigationPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPlotNavigationPanelLayout.createSequentialGroup()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -587,6 +563,7 @@ public class JPlotterPanel extends javax.swing.JPanel
         );
 
         jButton1.setText("Help");
+        jButton1.addActionListener(this);
 
         org.jdesktop.layout.GroupLayout jPlotControlPanelLayout = new org.jdesktop.layout.GroupLayout(jPlotControlPanel);
         jPlotControlPanel.setLayout(jPlotControlPanelLayout);
@@ -595,9 +572,9 @@ public class JPlotterPanel extends javax.swing.JPanel
             .add(jPlotControlPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(jPlotControlPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPlotControlPanelLayout.createSequentialGroup()
-                .add(jPlotSpecPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPlotControlPanelLayout.createSequentialGroup()
+                        .add(jPlotSpecPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jPlotNavigationPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, jButton1))
                 .addContainerGap())
@@ -619,7 +596,7 @@ public class JPlotterPanel extends javax.swing.JPanel
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jSplitPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
+            .add(jSplitPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -669,7 +646,10 @@ public class JPlotterPanel extends javax.swing.JPanel
         else if (evt.getSource() == jActivationOverrideCheckBox) {
             JPlotterPanel.this.jActivationOverrideCheckBoxActionPerformed(evt);
         }
+        else if (evt.getSource() == jButton1) {
+            JPlotterPanel.this.jButton1ActionPerformed(evt);
         }
+    }
 
     public void focusGained(java.awt.event.FocusEvent evt) {
     }
@@ -1084,6 +1064,10 @@ public class JPlotterPanel extends javax.swing.JPanel
          }
       }
    }//GEN-LAST:event_jLoadFileToPlotterMenuItemActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        BrowserLauncher.openURL("http://simtk-confluence.stanford.edu:8080/display/OpenSim30/Plotting");
+    }//GEN-LAST:event_jButton1ActionPerformed
    
    public PlotterSourceFile loadFile(String dataFilename) {
         try {

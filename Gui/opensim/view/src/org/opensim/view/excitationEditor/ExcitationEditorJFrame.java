@@ -39,8 +39,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.util.ArrayList;
-import javax.help.HelpBroker;
-import javax.help.HelpSet;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.opensim.modeling.Actuator;
@@ -49,6 +47,7 @@ import org.opensim.modeling.ControlSet;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.SetActuators;
+import org.opensim.utils.BrowserLauncher;
 import org.opensim.utils.FileUtils;
 import org.opensim.utils.TheApp;
 import org.opensim.view.pub.OpenSimDB;
@@ -62,16 +61,9 @@ public class ExcitationEditorJFrame extends javax.swing.JFrame {
     ArrayList<ControlLinear> controlsRefs = new ArrayList<ControlLinear>(2);    // This's a hack to prevent early garbage collection
     String helpText = "<html>\nAnchor with left mouse button and drag to lower right to <b>Zoom In</b> on a rectangle.<br>\nAnchor  with left mouse button and drag to the left to <b>Zoom Out/Refit</b> the data.<br>\nUse <b>I</b> to zoom in about the center of the pane.l<br>\nUse <b>O</b> to zoom out about the center of the panel.l<br>\nUse <b>L</b> to move the panel Left<br>\nUse <b>R</b> to move the panel Right<br>\nUse <b>U</b> to move the panel Up<br>\nUse <b>D</b> to move the panel Down<br>\n<b>Selection:</b><br>\nHolding <b>CTRL</b> button down turns on selection mode.<br>\n  - Left mouse button selects individual points.<br>\n  - Shift + left mouse button accumulates selection.<br>\n  - Draw box to select all points within the box.<br>\n  - Left mouse button in background deselects all points.<br>\n<b>Adding Points:</b><br>\nRight mouse click inside a panel and use popup menu to add points.<br>\n</html>";
 
-    /*********Added by jingjing***********/
-    HelpSet hs = null;
-    HelpBroker hb = null;
-    /*****************end*****************/
-
     /** Creates new form ExcitationEditorJFrame */
     public ExcitationEditorJFrame() {
-        prepareHelpset();
         initComponents();
-        hb.enableHelpOnButton(helpButton, "org.opensim.view.excitationEditor.help", hs);
 
         //getContentPane().setLayout(new BorderLayout());
         dPanel=new ExcitationEditorJPanel(this, null);
@@ -97,24 +89,6 @@ public class ExcitationEditorJFrame extends javax.swing.JFrame {
         dPanel.populate(controls, false);
     }
 
-    /**
-     * Create Helset and HelpBroker for the help Button
-     */
-    public void prepareHelpset() {
-        String helpsetfile = "ExcitationEditor.hs";
-        ClassLoader cl = this.getClass().getClassLoader();
-        try {
-            URL hsURL = HelpSet.findHelpSet(cl, helpsetfile);
-            hs = new HelpSet(null, hsURL);
-        } catch(Exception ee) {
-            System.out.println("HelpSet: "+ee.getMessage());
-            System.out.println("HelpSet: "+ helpsetfile + " not found");
-        }
-
-        hb = hs.createHelpBroker();
-    }
-
-    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -255,6 +229,11 @@ public class ExcitationEditorJFrame extends javax.swing.JFrame {
 
         helpButton.setText("Help");
         helpButton.setToolTipText("");
+        helpButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                helpButtonActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout jControlPanelLayout = new org.jdesktop.layout.GroupLayout(jControlPanel);
         jControlPanel.setLayout(jControlPanelLayout);
@@ -446,6 +425,10 @@ public class ExcitationEditorJFrame extends javax.swing.JFrame {
       }
    
     }//GEN-LAST:event_jLoadMenuItemActionPerformed
+
+    private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
+        BrowserLauncher.openURL("http://simtk-confluence.stanford.edu:8080/display/OpenSim30/Excitation+Editor");
+    }//GEN-LAST:event_helpButtonActionPerformed
     
     /**
      * @param args the command line arguments

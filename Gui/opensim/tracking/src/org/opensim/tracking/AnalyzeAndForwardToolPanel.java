@@ -33,6 +33,7 @@ package org.opensim.tracking;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -54,6 +55,7 @@ import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.Storage;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.swingui.FileTextFieldAndChooser;
+import org.opensim.utils.BrowserLauncher;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.FileTextFieldAndChooserWithEdit;
 import org.opensim.view.ModelEvent;
@@ -75,6 +77,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
    public enum Mode { ForwardDynamics, InverseDynamics, CMC, RRA, Analyze, StaticOptimization };
    private Mode mode;
    String modeName;
+   String helpUrl;
   
    AbstractToolModelWithExternalLoads toolModel = null;
    ActuatorsAndExternalLoadsPanel actuatorsAndExternalLoadsPanel = null;
@@ -83,19 +86,57 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
    private boolean internalTrigger = false;
    private NumberFormat numFormat = NumberFormat.getInstance();
 
+   
    /** Creates new form AnalyzeAndForwardToolPanel */
    public AnalyzeAndForwardToolPanel(Model model, Mode mode) throws IOException {
       this.mode = mode;
 
       switch(mode) {
-         case ForwardDynamics: modeName = "forward dynamics tool"; toolModel = new ForwardToolModel(model); super.prepareHelpset("FD.hs"); super.getHelpBroker().enableHelpOnButton(super.helpButton, "org.opensim.simtrack.fd.help", super.getHelpSet());  break;
-         case InverseDynamics: modeName = "inverse dynamics tool"; toolModel = new AnalyzeToolModel(model, mode); break;
-         case CMC: modeName = "CMC tool"; toolModel = new CMCToolModel(model); super.prepareHelpset("CMC.hs"); super.getHelpBroker().enableHelpOnButton(super.helpButton, "org.opensim.simtrack.cmc.help", super.getHelpSet());  break;
-         case RRA: modeName = "RRA tool"; toolModel = new RRAToolModel(model); super.prepareHelpset("RRA.hs"); super.getHelpBroker().enableHelpOnButton(super.helpButton, "org.opensim.simtrack.rra.help", super.getHelpSet());  break;
-         case Analyze: modeName = "analyze tool"; toolModel = new AnalyzeToolModel(model, mode); super.prepareHelpset("Analyze.hs"); super.getHelpBroker().enableHelpOnButton(super.helpButton, "org.opensim.simtrack.analyze.help", super.getHelpSet());  break;
-         case StaticOptimization:  modeName = "static optimization tool"; toolModel = new AnalyzeToolModel(model, mode); super.prepareHelpset("StaticOptimization.hs"); super.getHelpBroker().enableHelpOnButton(super.helpButton, "org.opensim.simtrack.so.help", super.getHelpSet());  break;
+         case ForwardDynamics: 
+             modeName = "forward dynamics tool"; 
+             toolModel = new ForwardToolModel(model);  
+
+             helpUrl = "Forward+Dynamics";
+             break;
+         case InverseDynamics: 
+             modeName = "inverse dynamics tool"; 
+             toolModel = new AnalyzeToolModel(model, mode); 
+            
+             helpUrl = "Inverse+Dynamics";
+             break;
+         case CMC: 
+             modeName = "CMC tool"; 
+             toolModel = new CMCToolModel(model); 
+            
+             helpUrl = "Computed+Muscle+Control";
+            break;
+         case RRA: 
+             modeName = "RRA tool"; 
+             toolModel = new RRAToolModel(model); 
+             
+             helpUrl = "Residual+Reduction+Algorithm";
+             break;
+         case Analyze: 
+             modeName = "analyze tool"; 
+             toolModel = new AnalyzeToolModel(model, mode); 
+             
+             helpUrl = "Analyses";
+             break;
+         case StaticOptimization:  
+             modeName = "static optimization tool"; 
+             toolModel = new AnalyzeToolModel(model, mode); 
+            
+             helpUrl = "Static+Optimization";
+             break;
       }
 
+                         
+      helpButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent ae) {
+         BrowserLauncher.openURL("http://simtk-confluence.stanford.edu:8080/display/OpenSim30/" + helpUrl);
+      }
+      });
+             
       if (numFormat instanceof DecimalFormat) {
         ((DecimalFormat) numFormat).applyPattern("#,##0.############");
       }
