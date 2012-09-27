@@ -69,19 +69,13 @@ public final class TutorialsAction extends CallableSystemAction {
       };
       
       // Add online examples
-      displayMenu.add(new BrowserPageDisplayerAction("Online Examples", "http://simtk-confluence.stanford.edu:8080/display/OpenSim/Examples+and+Tutorials"));
+      displayMenu.add(new BrowserPageDisplayerAction("Online Examples", "http://simtk-confluence.stanford.edu:8080/display/OpenSim30/Examples+and+Tutorials"));
      
-      String TutorialsRootDirectory=NbBundle.getMessage(TutorialsAction.class, "CTL_Tutorials_Root");
-      File rootHelpDirectory= new File(TutorialsRootDirectory);
+      // Adding tutorials
+      displayMenu.add(new BrowserPageDisplayerAction("OpenSimTutorial1", "http://simtk-confluence.stanford.edu:8080/display/OpenSim30/Tutorial+1+-+Intro+to+Musculoskeletal+Modeling"));
+      displayMenu.add(new BrowserPageDisplayerAction("OpenSimTutorial2", "http://simtk-confluence.stanford.edu:8080/display/OpenSim30/Tutorial+2+-+Simulation+and+Analysis+of+a+Tendon+Transfer+Surgery"));
+      displayMenu.add(new BrowserPageDisplayerAction("OpenSimTutorial3", "http://simtk-confluence.stanford.edu:8080/display/OpenSim30/Tutorial+3+-+Scaling%2C+Inverse+Kinematics%2C+and+Inverse+Dynamics"));
       
-      File[] files = rootHelpDirectory.listFiles(fileFilter);
-      if (files == null)  return displayMenu;
-      
-      for (int i=0; i<files.length; i++){
-        // List html files in tutorials directory 
-                // List html files in tutorials directory 
-        displayMenu.add(new BrowserPageDisplayerAction(files[i]));
-      }
       return displayMenu;
     }
     

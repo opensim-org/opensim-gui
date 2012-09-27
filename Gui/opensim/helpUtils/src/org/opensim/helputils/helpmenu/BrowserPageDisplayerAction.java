@@ -27,8 +27,11 @@ package org.opensim.helputils.helpmenu;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import javax.swing.AbstractAction;
 import org.opensim.utils.BrowserLauncher;
+import org.opensim.utils.TheApp;
 
 
 /**
@@ -37,6 +40,7 @@ import org.opensim.utils.BrowserLauncher;
 class BrowserPageDisplayerAction extends AbstractAction
 {
     String url;
+    String displayName;
     
     public BrowserPageDisplayerAction(File localFile){
         super(localFile.getName());
@@ -45,12 +49,27 @@ class BrowserPageDisplayerAction extends AbstractAction
     
     public BrowserPageDisplayerAction(String dispName, String url){
         super(dispName);
-        this.url = url;           
+        this.url = url;          
+        this.displayName = dispName;
     }
         
     @Override
     public void actionPerformed(ActionEvent e) {
-        BrowserLauncher.openURL(url);            
+        
+        // If issues with online tutorials then open local file
+        String path = url;
+        try {
+            URL url = new URL(path);
+            HttpURLConnection urlConnect = (HttpURLConnection)url.openConnection();
+            Object objData = urlConnect.getContent();
+            if(objData == null) {
+                path = TheApp.getInstallDir() + File.separator + "doc" + File.separator + displayName+".pdf";  
+            }            
+        } catch (Exception ex) {
+                path = TheApp.getInstallDir() + File.separator + "doc" + File.separator + displayName+".pdf";  
+        }
+
+        BrowserLauncher.openURL(path);            
     }
     
 }
