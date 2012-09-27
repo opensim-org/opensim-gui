@@ -388,16 +388,17 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
         }
         //System.out.println(pfo.toString());
         MotionObjectPointForce pf = ((MotionObjectPointForce) pfo);
+        MotionObjectPointForce pfSave = new MotionObjectPointForce(pf);
         EditOneMotionObjectPanel eofPanel = new EditOneMotionObjectPanel(pf, aMotion, aModel);
         DialogDescriptor dlg = new DialogDescriptor(eofPanel, "Create/Edit Motion Objects");
         eofPanel.setDDialog(dlg);
         DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
         Object userInput = dlg.getValue();
          if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)!=0){
-             //objectListModel.set(sels[0], pfCopy);
+             objectListModel.set(sels[0], pfSave);
          }
-         else{
-             objectListModel.set(sels[0], pf);
+         else{ // do nothing as editing is done inplace
+             //objectListModel.set(sels[0], pfSave);
              //System.out.println(pfo.toString());
          }
     }//GEN-LAST:event_jButtonEditActionPerformed

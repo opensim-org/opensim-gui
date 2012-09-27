@@ -106,7 +106,7 @@ public class SelectedObject implements Selectable {
             cloud.setSelected(id, highlight);
             cloud.setModified();
          }
-      } else if (Body.safeDownCast(object) != null) {
+      } else if (Body.safeDownCast(object) != null ) {
          BodyDisplayer asm = (BodyDisplayer) ViewDB.getInstance().getVtkRepForObject(object);
          double unselectedColor[] = {1.0, 1.0, 1.0};
          if(highlight){
@@ -122,6 +122,19 @@ public class SelectedObject implements Selectable {
             double[] actualColor = new double[3];
             asm.applyColorsFromModel();
          }
+      }
+      else {
+          vtkProp3D prop = ViewDB.getInstance().getVtkRepForObject(object);
+          if (prop instanceof ObjectDisplayer){
+             ObjectDisplayer asm = (ObjectDisplayer) prop;
+             if(highlight){
+                 //b.getDisplayer().getVisibleProperties().setColor(currentColor);
+                 ViewDB.getInstance().applyColor(defaultSelectedColor, asm, false);
+             }
+             else{
+                asm.updateFromProperties();
+             }
+          }
       }
    }
 
