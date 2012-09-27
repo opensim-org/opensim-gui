@@ -21,7 +21,7 @@ public final class UsersGuideAction extends CallableSystemAction {
     
     public void performAction() {
         String basePath = TheApp.getInstallDir();
-        String usersGuidePath = "http://simtk-confluence.stanford.edu:8080/display/OpenSim/User%27s+Guide"; 
+        String usersGuidePath = "http://simtk-confluence.stanford.edu:8080/display/OpenSim30/User%27s+Guide"; 
 
         // If issues with online user's guide then open local file
         try {
