@@ -481,8 +481,8 @@ final class CoordinateViewerTopComponent extends TopComponent implements Observe
       for(int i=0; i<coords.getSize(); i++){
          Coordinate coord = coords.get(i);
          boolean constrained = openSimContext.isConstrained(coord);
-         if (constrained)
-            System.out.println("Coordinate "+coord.getName()+" will have no slider");
+         //if (constrained)
+         //   System.out.println("Coordinate "+coord.getName()+" will have no slider");
          if (!constrained){
             CoordinateSliderWithBox sliderPanel = new CoordinateSliderWithBox(coord);
             mapCoordinates2Sliders.put(coord, sliderPanel);
