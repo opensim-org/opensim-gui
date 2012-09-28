@@ -24,9 +24,6 @@
 # data from a storage file, which contains fiber lengths for the model Subject01_simbody
 # that is included with the OpenSim distribution
 
-# This line allows for more graceful handling of low level exceptions, just in case
-modeling.OpenSimObject.setDebugLevel(3)
-
 # Load the model BothLegs.osim
 filepath = getInstallDir() + "/Models/BothLegs/BothLegs.osim";
 addModel(filepath);
