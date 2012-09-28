@@ -1511,7 +1511,8 @@ public class opensimModelJNI {
   public final static native long ExternalForce_upd_point_expressed_in_body__SWIG_0(long jarg1, ExternalForce jarg1_, int jarg2);
   public final static native void ExternalForce_set_point_expressed_in_body__SWIG_0(long jarg1, ExternalForce jarg1_, int jarg2, String jarg3);
   public final static native int ExternalForce_append_point_expressed_in_body(long jarg1, ExternalForce jarg1_, String jarg2);
-  public final static native void ExternalForce_constructProperty_point_expressed_in_body(long jarg1, ExternalForce jarg1_, String jarg2);
+  public final static native void ExternalForce_constructProperty_point_expressed_in_body__SWIG_0(long jarg1, ExternalForce jarg1_);
+  public final static native void ExternalForce_constructProperty_point_expressed_in_body__SWIG_1(long jarg1, ExternalForce jarg1_, String jarg2);
   public final static native String ExternalForce_get_point_expressed_in_body__SWIG_1(long jarg1, ExternalForce jarg1_);
   public final static native long ExternalForce_upd_point_expressed_in_body__SWIG_1(long jarg1, ExternalForce jarg1_);
   public final static native void ExternalForce_set_point_expressed_in_body__SWIG_1(long jarg1, ExternalForce jarg1_, String jarg2);
@@ -1524,7 +1525,8 @@ public class opensimModelJNI {
   public final static native long ExternalForce_upd_force_identifier__SWIG_0(long jarg1, ExternalForce jarg1_, int jarg2);
   public final static native void ExternalForce_set_force_identifier__SWIG_0(long jarg1, ExternalForce jarg1_, int jarg2, String jarg3);
   public final static native int ExternalForce_append_force_identifier(long jarg1, ExternalForce jarg1_, String jarg2);
-  public final static native void ExternalForce_constructProperty_force_identifier(long jarg1, ExternalForce jarg1_, String jarg2);
+  public final static native void ExternalForce_constructProperty_force_identifier__SWIG_0(long jarg1, ExternalForce jarg1_);
+  public final static native void ExternalForce_constructProperty_force_identifier__SWIG_1(long jarg1, ExternalForce jarg1_, String jarg2);
   public final static native String ExternalForce_get_force_identifier__SWIG_1(long jarg1, ExternalForce jarg1_);
   public final static native long ExternalForce_upd_force_identifier__SWIG_1(long jarg1, ExternalForce jarg1_);
   public final static native void ExternalForce_set_force_identifier__SWIG_1(long jarg1, ExternalForce jarg1_, String jarg2);
@@ -1537,7 +1539,8 @@ public class opensimModelJNI {
   public final static native long ExternalForce_upd_point_identifier__SWIG_0(long jarg1, ExternalForce jarg1_, int jarg2);
   public final static native void ExternalForce_set_point_identifier__SWIG_0(long jarg1, ExternalForce jarg1_, int jarg2, String jarg3);
   public final static native int ExternalForce_append_point_identifier(long jarg1, ExternalForce jarg1_, String jarg2);
-  public final static native void ExternalForce_constructProperty_point_identifier(long jarg1, ExternalForce jarg1_, String jarg2);
+  public final static native void ExternalForce_constructProperty_point_identifier__SWIG_0(long jarg1, ExternalForce jarg1_);
+  public final static native void ExternalForce_constructProperty_point_identifier__SWIG_1(long jarg1, ExternalForce jarg1_, String jarg2);
   public final static native String ExternalForce_get_point_identifier__SWIG_1(long jarg1, ExternalForce jarg1_);
   public final static native long ExternalForce_upd_point_identifier__SWIG_1(long jarg1, ExternalForce jarg1_);
   public final static native void ExternalForce_set_point_identifier__SWIG_1(long jarg1, ExternalForce jarg1_, String jarg2);
@@ -1550,7 +1553,8 @@ public class opensimModelJNI {
   public final static native long ExternalForce_upd_torque_identifier__SWIG_0(long jarg1, ExternalForce jarg1_, int jarg2);
   public final static native void ExternalForce_set_torque_identifier__SWIG_0(long jarg1, ExternalForce jarg1_, int jarg2, String jarg3);
   public final static native int ExternalForce_append_torque_identifier(long jarg1, ExternalForce jarg1_, String jarg2);
-  public final static native void ExternalForce_constructProperty_torque_identifier(long jarg1, ExternalForce jarg1_, String jarg2);
+  public final static native void ExternalForce_constructProperty_torque_identifier__SWIG_0(long jarg1, ExternalForce jarg1_);
+  public final static native void ExternalForce_constructProperty_torque_identifier__SWIG_1(long jarg1, ExternalForce jarg1_, String jarg2);
   public final static native String ExternalForce_get_torque_identifier__SWIG_1(long jarg1, ExternalForce jarg1_);
   public final static native long ExternalForce_upd_torque_identifier__SWIG_1(long jarg1, ExternalForce jarg1_);
   public final static native void ExternalForce_set_torque_identifier__SWIG_1(long jarg1, ExternalForce jarg1_, String jarg2);
@@ -1563,7 +1567,8 @@ public class opensimModelJNI {
   public final static native long ExternalForce_upd_data_source_name__SWIG_0(long jarg1, ExternalForce jarg1_, int jarg2);
   public final static native void ExternalForce_set_data_source_name__SWIG_0(long jarg1, ExternalForce jarg1_, int jarg2, String jarg3);
   public final static native int ExternalForce_append_data_source_name(long jarg1, ExternalForce jarg1_, String jarg2);
-  public final static native void ExternalForce_constructProperty_data_source_name(long jarg1, ExternalForce jarg1_, String jarg2);
+  public final static native void ExternalForce_constructProperty_data_source_name__SWIG_0(long jarg1, ExternalForce jarg1_);
+  public final static native void ExternalForce_constructProperty_data_source_name__SWIG_1(long jarg1, ExternalForce jarg1_, String jarg2);
   public final static native String ExternalForce_get_data_source_name__SWIG_1(long jarg1, ExternalForce jarg1_);
   public final static native long ExternalForce_upd_data_source_name__SWIG_1(long jarg1, ExternalForce jarg1_);
   public final static native void ExternalForce_set_data_source_name__SWIG_1(long jarg1, ExternalForce jarg1_, String jarg2);

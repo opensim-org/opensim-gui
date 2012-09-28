@@ -9,6 +9,8 @@ package org.opensim.tracking;
 import java.util.Vector;
 import javax.swing.JComboBox;
 import org.openide.DialogDescriptor;
+import org.openide.DialogDisplayer;
+import org.openide.NotifyDescriptor;
 import org.opensim.modeling.ArrayInt;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.BodySet;
@@ -518,9 +520,9 @@ public class EditOneForceJPanel extends javax.swing.JPanel {
         jComboBoxFY.setModel(new javax.swing.DefaultComboBoxModel(colNames));
         jComboBoxFZ.setModel(new javax.swing.DefaultComboBoxModel(colNames));
         jCheckBoxForce.setSelected(false);
-        String forceId = externalForce.getForceIdentifier();
         //externalForce.getForceFunctionNames(forceFunctionNames);
         if (externalForce.appliesForce()){
+            String forceId = externalForce.getForceIdentifier();
             setComboBoxSelection(jComboBoxFX, forceId, 0);
             setComboBoxSelection(jComboBoxFY, forceId, 1);
             setComboBoxSelection(jComboBoxFZ, forceId, 2);
@@ -529,10 +531,10 @@ public class EditOneForceJPanel extends javax.swing.JPanel {
         jComboBoxPX.setModel(new javax.swing.DefaultComboBoxModel(colNames));
         jComboBoxPY.setModel(new javax.swing.DefaultComboBoxModel(colNames));
         jComboBoxPZ.setModel(new javax.swing.DefaultComboBoxModel(colNames));
-        String pointId = externalForce.getPointIdentifier();
         //externalForce.getPointFunctionNames(pointFunctionNames);
         if (externalForce.specifiesPoint()){
-            setComboBoxSelection(jComboBoxPX, pointId, 0);
+           String pointId = externalForce.getPointIdentifier();
+           setComboBoxSelection(jComboBoxPX, pointId, 0);
             setComboBoxSelection(jComboBoxPY, pointId, 1);
             setComboBoxSelection(jComboBoxPZ, pointId, 2);
             jRadioButtonApplyPointForce.setSelected(true);
@@ -543,7 +545,7 @@ public class EditOneForceJPanel extends javax.swing.JPanel {
         jComboBoxTY.setModel(new javax.swing.DefaultComboBoxModel(colNames));
         jComboBoxTZ.setModel(new javax.swing.DefaultComboBoxModel(colNames));
         
-        jCheckBoxTorque.setSelected(false);
+        //jCheckBoxTorque.setSelected(externalForce.appliesTorque());
         //externalForce.getTorqueFunctionNames(torqueFunctionNames);
         if (externalForce.appliesTorque()){
             String torqueId = externalForce.getTorqueIdentifier();
@@ -552,6 +554,8 @@ public class EditOneForceJPanel extends javax.swing.JPanel {
             setComboBoxSelection(jComboBoxTZ, torqueId, 2);
             jCheckBoxTorque.setSelected(true);
         }
+        else
+            jCheckBoxTorque.setSelected(false);
         populateBodyList(bodySet, ForceExpressedBodiesComboBox);
         populateBodyList(bodySet, PointExpressedBodiesComboBox);
         String dbg1 = externalForce.getForceExpressedInBodyName();
@@ -574,8 +578,13 @@ public class EditOneForceJPanel extends javax.swing.JPanel {
     
     private void setComboBoxSelection(final JComboBox jcombox, final String objIdentifier, final int j) throws NumberFormatException {
         ArrayInt indices = forceStorage.getColumnIndicesForIdentifier(objIdentifier);
-        if (indices.getSize()!=3) return;
-        if (indices.getitem(j)== -1) return;
+        if (indices.getSize()==0 || indices.getSize()!=3 || indices.getitem(j)== -1) {
+                  NotifyDescriptor.Message dlg =
+                          new NotifyDescriptor.Message("Identifier( "+
+                          objIdentifier+") has no 3 columns associed with it in data file. Please correct before proceeding.");
+                  DialogDisplayer.getDefault().notify(dlg);            
+                return;
+        }
         //String[] suffixes = new String[]{"x", "y", "z"};
         jcombox.setSelectedItem(lbls.getitem(indices.getitem(j)));
     }
@@ -669,6 +678,14 @@ public class EditOneForceJPanel extends javax.swing.JPanel {
         jRadioButtonApplyPointForce.setEnabled(applyForce);
         jRadioButtonApplyBodyForce.setEnabled(applyForce);
         jLabelExternalLoadsApplicationDescription.setText("");
+        if (!applyForce){
+            jComboBoxFX.setSelectedItem("");
+            jComboBoxFY.setSelectedItem("");
+            jComboBoxFZ.setSelectedItem("");
+            jComboBoxPX.setSelectedItem("");
+            jComboBoxPY.setSelectedItem("");
+            jComboBoxPZ.setSelectedItem("");
+        }
         if (cmd.equals("BodyForce")){
             jComboBoxFX.setEnabled(applyForce);
             jComboBoxFY.setEnabled(applyForce);
@@ -697,6 +714,9 @@ public class EditOneForceJPanel extends javax.swing.JPanel {
             jComboBoxTX.setSelectedItem("");
             jComboBoxTY.setSelectedItem("");
             jComboBoxTZ.setSelectedItem("");
+        }
+        else { // use externalForce.getTorqueIdentifier
+            
         }
         if (dDialog!= null) dDialog.setValid(checkValid());
     }

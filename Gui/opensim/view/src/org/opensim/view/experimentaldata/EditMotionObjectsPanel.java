@@ -427,34 +427,43 @@ private void jButtonLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     if (fileName!=null){
             try {
                 ExternalLoads exLoads = new ExternalLoads(aModel, fileName);
+                String errorsWarnings = "";
                 for(int i=0; i<exLoads.getSize(); i++){
                     ExternalForce ef = exLoads.get(i);
                     String bodyApplied = ef.getAppliedToBodyName();
                     String pointInBody = ef.getPointExpressedInBodyName();
-                    String pointId = ef.getPointIdentifier();
-                    ArrayInt pointIndices = aMotion.getColumnIndicesForIdentifier(pointId);
-                    String forceInBody = ef.getForceExpressedInBodyName();
-                    String froceId = ef.getForceIdentifier();
-                    ArrayInt forceIndices = aMotion.getColumnIndicesForIdentifier(froceId);
-                    MotionObjectPointForce motionForce;
-                    if (ef.specifiesPoint()){ // PointForce
-                        motionForce = new MotionObjectPointForce(ExperimentalDataItemType.PointForceData, pointId, pointIndices.getitem(0));
-                        motionForce.setPointExpressedInBody(pointInBody);
-                    }
-                    else { // BodyForce
-                        motionForce = new MotionObjectPointForce(ExperimentalDataItemType.BodyForceData, froceId, forceIndices.getitem(0));
-                    }
-                    motionForce.setForceAppliedToBody(bodyApplied);
-                    motionForce.setName(ef.getName());
-                    motionForce.setForceExpressedInBodyName(forceInBody);
-                    motionForce.setForceIdentifier(froceId);
-                    // Torque entries
-                    if (ef.appliesTorque()){
-                        motionForce.setSpecifyTorque(true);
-                        motionForce.setTorqueIdentifier(ef.getTorqueIdentifier());
-                    }
+                    if (ef.appliesForce()){
+                        String forceInBody = ef.getForceExpressedInBodyName();
+                        String froceId = ef.getForceIdentifier();
+                        ArrayInt forceIndices = aMotion.getColumnIndicesForIdentifier(froceId);
+                        MotionObjectPointForce motionForce;
+                        if (ef.specifiesPoint()) { // PointForce
+                            String pointId = ef.getPointIdentifier();
+                            ArrayInt pointIndices = aMotion.getColumnIndicesForIdentifier(pointId);
+                            motionForce = new MotionObjectPointForce(ExperimentalDataItemType.PointForceData, pointId, pointIndices.getitem(0));
+                            motionForce.setPointExpressedInBody(pointInBody);
+                        } else { // BodyForce
+                            motionForce = new MotionObjectPointForce(ExperimentalDataItemType.BodyForceData, froceId, forceIndices.getitem(0));
+                        }
+                        motionForce.setForceAppliedToBody(bodyApplied);
+                        motionForce.setName(ef.getName());
+                        motionForce.setForceExpressedInBodyName(forceInBody);
+                        motionForce.setForceIdentifier(froceId);
+                        if (ef.appliesTorque()){
+                            motionForce.setSpecifyTorque(true);
+                            motionForce.setTorqueIdentifier(ef.getTorqueIdentifier());
+                        }
+                     // Torque entries
                     objectListModel.add(objectListModel.getSize(), motionForce);
                     aMotion.getClassified().add(motionForce);
+                  }
+                  else {
+                      errorsWarnings = errorsWarnings.concat("External force:"+ef.getName()+" doesn't apply force and will be ignored\n");
+                  }
+               }
+               if (!errorsWarnings.isEmpty()){
+                    NotifyDescriptor.Message dlg = new NotifyDescriptor.Message(errorsWarnings);
+                    DialogDisplayer.getDefault().notify(dlg);
                }
             } catch (IOException ex) {
                 Exceptions.printStackTrace(ex);
