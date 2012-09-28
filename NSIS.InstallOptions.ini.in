@@ -36,11 +36,3 @@ Top=50
 Bottom=60
 State=0
 
-[Field 5]
-Type=CheckBox
-Text=Create OpenSim Desktop Icon
-Left=0
-Right=-1
-Top=80
-Bottom=90
-State=1

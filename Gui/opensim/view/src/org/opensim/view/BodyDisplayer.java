@@ -52,7 +52,9 @@ import vtk.vtkAssembly;
 import vtk.vtkBMPReader;
 import vtk.vtkImageReader2;
 import vtk.vtkJPEGReader;
+import vtk.vtkLinearTransform;
 import vtk.vtkMapper;
+import vtk.vtkMatrix4x4;
 import vtk.vtkOutlineFilter;
 import vtk.vtkPNGReader;
 import vtk.vtkPolyData;
@@ -126,6 +128,8 @@ public class BodyDisplayer extends vtkAssembly
       outlineActor.SetMapper(outlineMapper);
       outlineMapper.AddInputConnection(outlineFilter.GetOutputPort());
       boolean hasGeometry=false;
+      vtkAppendPolyData boundingBoxPolyData = new vtkAppendPolyData();
+
       // For each bone in the current body.
       for (int k = 0; k < bodyVisibleObject.getNumGeometryFiles(); ++k) {
           GeometrySet gSet = bodyVisibleObject.getGeometrySet();
@@ -134,31 +138,30 @@ public class BodyDisplayer extends vtkAssembly
           String fullFileName = GeometryFileLocator.getInstance().getFullname(modelFilePath,gPiece.getGeometryFile(), false);
           if (fullFileName==null) continue;
           vtkActor boneActor=new DisplayGeometryDisplayer(gPiece, modelFilePath);
-          //setTransformFromArray6(bodyRotTrans, (vtkTransform) boneActor.GetUserTransform());
           if (boneActor!=null){
+              // To get tight bounding box we need to xform the polyData output by applying scale/translation
+              // then pass the output to 
+            vtkTransformPolyDataFilter xformDataFilter = new vtkTransformPolyDataFilter();
             hasGeometry=true;
             displayGeometryAssembly.AddPart(boneActor);
-           mapGeometryToVtkObjects.put(gPiece, boneActor);
+            mapGeometryToVtkObjects.put(gPiece, boneActor);
+            // Now make a bounding box, transform using sam ematrix as Actor
+            vtkPolyDataMapper mapper = (vtkPolyDataMapper) boneActor.GetMapper();
+            vtkMatrix4x4 v44 = new vtkMatrix4x4();
+            boneActor.GetMatrix(v44);
+            //System.out.println("Geometry"+gPiece.getGeometryFile()+"Matrix44"+v44.Print());
+            xformDataFilter.SetInput(mapper.GetInput());
+            vtkTransform xform = new vtkTransform();
+            xform.Concatenate(v44);
+            //System.out.println("Geometry"+gPiece.getGeometryFile()+"xformDataFilter:xform="+xform.Print());
+            xformDataFilter.SetTransform(xform);
+            boundingBoxPolyData.AddInput(xformDataFilter.GetOutput());
+            boundingBoxPolyData.Update();
           }
       }
+      outlineFilter.AddInput(boundingBoxPolyData.GetOutput());
       this.AddPart(displayGeometryAssembly);
       applyVisibleObjectScaleAndTransform(bodyVisibleObject, displayGeometryAssembly);
-       
-      if (hasGeometry){
-         vtkProp3DCollection parts = displayGeometryAssembly.GetParts();
-         parts.InitTraversal();
-         vtkAppendPolyData append = new vtkAppendPolyData();
-         for (;;) {
-            vtkProp3D prop = parts.GetNextProp3D();
-            if (prop==null) break;
-            else {
-                vtkMapper mapper = ((vtkActor)prop).GetMapper();
-                append.AddInput(((vtkPolyDataMapper) mapper).GetInput());
-            }
-         }
-         append.Update();
-         outlineFilter.AddInput(append.GetOutput());
-      }
 
       if( bodyVisibleObject.getShowAxes() )
           AddPart( getBodyAxes() );
