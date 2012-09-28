@@ -36,6 +36,7 @@ import java.awt.Component;
 import java.awt.Dialog;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -51,6 +52,7 @@ import org.openide.NotifyDescriptor;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
 import org.opensim.swingui.ComponentTitledBorder;
+import org.opensim.utils.BrowserLauncher;
 import org.opensim.view.ModelEvent;
 import org.opensim.view.pub.OpenSimDB;
 
@@ -87,8 +89,14 @@ public class ScaleToolPanel extends BaseToolPanel implements Observer {
         ((DecimalFormat) numFormat).applyPattern("#,##0.#########");
       }
 
-      super.prepareHelpset("Scale.hs");//add help set
-      super.getHelpBroker().enableHelpOnButton(super.helpButton, "org.opensim.simtrack.scale.help", super.getHelpSet());// add action listener to help button
+      
+      helpButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent ae) {
+                BrowserLauncher.openURL("http://simtk-confluence.stanford.edu:8080/display/OpenSim30/Scaling");
+            }
+      });
+      
       initComponents();
       bindPropertiesToComponents();
 

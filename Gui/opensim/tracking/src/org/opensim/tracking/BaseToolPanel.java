@@ -34,26 +34,16 @@ package org.opensim.tracking;
 import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.URL;
 import java.util.Observer;
-import java.net.URL;
-import javax.help.HelpBroker;
-import javax.help.HelpSet;
-import java.net.URL;
-import javax.help.HelpBroker;
-import javax.help.HelpSet;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.filechooser.FileFilter;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
-import org.openide.NotifyDescriptor;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.pub.OpenSimDB;
 
@@ -69,31 +59,6 @@ public abstract class BaseToolPanel extends JPanel implements ActionListener, Ob
    protected JButton helpButton = new JButton("Help");
    protected Dialog ownerDialog = null;
    protected boolean cleanupAfterExecuting = false;  // Keep track if cleaning up needs to be done on execution finish vs. dialog close
-   private HelpSet hs;
-   private HelpBroker hb;
-
-   public HelpSet getHelpSet() {
-       return hs;
-   }
-
-   public HelpBroker getHelpBroker() {
-       return hb;
-   }
-
-
-   public void prepareHelpset(String hsFileName) {
-        String helpsetfile = hsFileName;
-        ClassLoader cl = this.getClass().getClassLoader();
-        try {
-            URL hsURL = HelpSet.findHelpSet(cl, helpsetfile);
-            hs = new HelpSet(null, hsURL);
-        } catch(Exception ee) {
-            System.out.println("HelpSet: "+ee.getMessage());
-            System.out.println("HelpSet: "+ helpsetfile + " not found");
-        }
-
-        hb = hs.createHelpBroker();
-    }
 
    //------------------------------------------------------------------------
    // Load/Save Settings Actions

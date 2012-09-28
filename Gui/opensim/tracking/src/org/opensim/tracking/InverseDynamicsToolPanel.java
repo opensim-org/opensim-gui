@@ -32,6 +32,8 @@
 package org.opensim.tracking;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -51,6 +53,7 @@ import org.opensim.modeling.Storage;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.swingui.FileTextFieldAndChooser;
 import org.opensim.tracking.InverseDynamicsToolModel.InputSource;
+import org.opensim.utils.BrowserLauncher;
 import org.opensim.view.ModelEvent;
 import org.opensim.view.excitationEditor.ExcitationEditorJFrame;
 import org.opensim.view.pub.OpenSimDB;
@@ -74,11 +77,15 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
       if (numFormat instanceof DecimalFormat) {
         ((DecimalFormat) numFormat).applyPattern("#,##0.############");
       }
-
-      super.prepareHelpset("ID.hs");//add help set file
+      
       initComponents();
-      super.getHelpBroker().enableHelpOnButton(super.helpButton, "org.opensim.simtrack.id.help", super.getHelpSet());// add action listener to help button
 
+      helpButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent ae) {
+                BrowserLauncher.openURL("http://simtk-confluence.stanford.edu:8080/display/OpenSim30/Inverse+Dynamics");
+            }
+      });
       bindPropertiesToComponents();
 
       // Add checkbox titled borders to RRA panel
