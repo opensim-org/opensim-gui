@@ -57,12 +57,12 @@ public class OneMarkerNode extends OpenSimObjectNode{
         // Arrays are fixed size, onvert to a List
         List<Action> actions = java.util.Arrays.asList(superActions);
         // Create new Array of proper size
-        Action[] retActions = new Action[actions.size()+2];
+        Action[] retActions = new Action[actions.size()+1];
         actions.toArray(retActions);
         // append new command to the end of the list of actions
-        retActions[actions.size()] = new MarkerEditorAction();
+        //retActions[actions.size()] = new MarkerEditorAction();
         try {
-            retActions[actions.size()+1] = (OneMarkerDeleteAction) OneMarkerDeleteAction.findObject(
+            retActions[actions.size()] = (OneMarkerDeleteAction) OneMarkerDeleteAction.findObject(
                      (Class)Class.forName("org.opensim.view.markerEditor.OneMarkerDeleteAction"), true);
         } catch (ClassNotFoundException ex) {
             Exceptions.printStackTrace(ex);
