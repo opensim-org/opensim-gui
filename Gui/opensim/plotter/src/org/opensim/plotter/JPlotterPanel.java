@@ -1587,6 +1587,7 @@ public class JPlotterPanel extends javax.swing.JPanel
    private void resetXY() {
       jXQtyTextField.setText("");
       jYQtyTextField.setText("");
+      jYQtyTextField.setToolTipText("");
       jDomainStartTextField.setText("");
       jDomainEndTextField.setText("");
       jSelectedMusclesTextField.setText("");
@@ -2162,6 +2163,7 @@ public class JPlotterPanel extends javax.swing.JPanel
         // Populate YQty text field with selection
         //XX1
         jYQtyTextField.setText(qtyName);
+        jYQtyTextField.setToolTipText(qtyName+" is calculated by setting activation to 1.0, then equilibriating the muscle.");
         useMuscles(true);
         updateContextGuiElements();
         sourceY=(new PlotterSourceAnalysis(currentModel, plotterModel.getStorage(qtyName, currentModel), qtyName));
