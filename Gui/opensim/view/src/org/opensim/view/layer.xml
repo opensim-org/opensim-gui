@@ -655,9 +655,6 @@
         </file>
     </folder>
     <folder name="Services">
-        <folder name="JavaHelp">
-            <file name="view-helpset.xml" url="view-helpset.xml"/>
-        </folder>
         <folder name="MIMEResolver">
             <file name="OsimModelResolver.xml" url="OsimModelResolver.xml">
                 <attr name="displayName" bundlevalue="org.opensim.view.Bundle#Services/MIMEResolver/OsimModelResolver.xml"/>

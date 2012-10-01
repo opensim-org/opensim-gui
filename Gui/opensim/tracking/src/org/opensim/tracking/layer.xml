@@ -59,8 +59,5 @@
         </folder>
         </folder>
     <folder name="Services">
-        <folder name="JavaHelp">
-            <file name="tracking-helpset.xml" url="tracking-helpset.xml"/>
-        </folder>
     </folder>
 </filesystem>

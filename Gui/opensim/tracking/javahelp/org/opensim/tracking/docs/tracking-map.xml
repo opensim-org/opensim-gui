@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE map PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp Map Version 2.0//EN" "http://java.sun.com/products/javahelp/map_2_0.dtd">
-<map version="2.0">
-    <mapID target="org.opensim.tracking.about" url="tracking-about.html"/>
-    <mapID target="org.opensim.tracking.workflowWizardPanel1" url="SubjectSpecificWorkflow.htm" /> 
-    <mapID target="org.opensim.tracking.workflowWizardPanel2" url="scale.htm"/>
-</map>
