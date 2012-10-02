@@ -30,6 +30,7 @@ import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.io.Serializable;
+import java.lang.Object;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Vector;
@@ -359,15 +360,19 @@ final public class ExplorerTopComponent extends TopComponent
 
     public void selectNodeForSelectedObject(SelectedObject selectedObject) {
         //Node ret = null;
+        OpenSimObject oObject = selectedObject.getOpenSimObject();
+        selectNodeForObject(oObject );
+    }
+    public void selectNodeForObject(OpenSimObject oObject) {
         Children children = getExplorerManager().getRootContext().getChildren();
         Node[] nodes = children.getNodes();
         for (int i = 0; i < nodes.length; i++) {
             if (nodes[i] instanceof ConcreteModelNode) {
                 ConcreteModelNode modelNode = ((ConcreteModelNode) (nodes[i]));
-                Node objectNode = findObjectNode(modelNode, selectedObject.getOpenSimObject());
+                Node objectNode = findObjectNode(modelNode, oObject);
                 // Hack to select Muscle based on selected PathPoint
-                if (selectedObject.getOpenSimObject() instanceof PathPoint){
-                    PathPoint ppt = (PathPoint)selectedObject.getOpenSimObject();
+                if (oObject instanceof PathPoint){
+                    PathPoint ppt = (PathPoint)oObject;
                     GeometryPath ppath = ppt.getPath();
                     OpenSimObject pathOwner = ppath.getOwner();
                     if (Muscle.safeDownCast(pathOwner)!= null){
@@ -383,6 +388,8 @@ final public class ExplorerTopComponent extends TopComponent
 //                        newSelectedNodes[previouslySelectedNodes.length] = objectNode;
                         findInstance().getExplorerManager().setSelectedNodes(new Node[]{objectNode});
                         this.setActivatedNodes(new Node[]{objectNode});
+                        ((OpenSimObjectNode)objectNode).refreshNode();
+                        requestActive();
                     } catch (PropertyVetoException ex) {
                         Exceptions.printStackTrace(ex);
                     }
@@ -471,7 +478,7 @@ final public class ExplorerTopComponent extends TopComponent
         public UndoRedo.Manager getUndoRedoManager() {
             if (undoRedoManager == null) {
                 undoRedoManager = new UndoRedoManager();
-                undoRedoManager.setLimit(50);
+                undoRedoManager.setLimit(100);
             }
             return undoRedoManager;
         }
