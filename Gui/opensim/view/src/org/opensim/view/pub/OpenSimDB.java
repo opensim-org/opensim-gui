@@ -270,13 +270,14 @@ public class OpenSimDB extends Observable implements Externalizable{
                     return true;
                 }
 
-/*
-                public String toString() {
-                    return "Current Model";
+                @Override
+                public String getRedoPresentationName() {
+                    return "Redo Change Current Model";
                 }
-*/
-                public String getPresentationName() {
-                    return "Change Current Model";
+
+                @Override
+                public String getUndoPresentationName() {
+                    return "Undo Change Current Model";
                 }
            });
     }
