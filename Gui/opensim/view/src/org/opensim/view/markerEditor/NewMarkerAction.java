@@ -86,6 +86,14 @@ public class NewMarkerAction extends AbstractAction {
                     Marker newMarker = model.getMarkerSet().addMarker(saveMarkerName, saveMarkerOffset, model.getBodySet().get(saveBodyName));
                     addMarker(newMarker, true);
                 }
+                @Override
+                public String getRedoPresentationName() {
+                    return "Redo new marker";
+                }
+                @Override
+                public String getUndoPresentationName() {
+                    return "Undo new marker";
+                }
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }

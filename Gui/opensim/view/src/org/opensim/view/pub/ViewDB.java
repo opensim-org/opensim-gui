@@ -671,9 +671,15 @@ public final class ViewDB extends Observable implements Observer {
                applyColor(colorComponents, asm, true);
            }
 
-            public String getPresentationName() {
-                return "Color Change";
+           @Override
+           public String getRedoPresentationName() {
+               return "Redo Color change";
             }
+
+           @Override
+           public String getUndoPresentationName() {
+               return "Undo Color change";
+           }
            
        };
        if (allowUndo)
@@ -1353,9 +1359,15 @@ public final class ViewDB extends Observable implements Observer {
                dragSelectedObjects(clickedObject, dragVector, true);
            }
 
-            public String getPresentationName() {
-                return "Drag object(s)";
+           @Override
+           public String getRedoPresentationName() {
+               return "Redo Drag object(s)";
             }
+
+           @Override
+           public String getUndoPresentationName() {
+               return "Undo Drag object(s)";
+           }
            
        };
       if (supportUndo)

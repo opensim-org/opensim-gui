@@ -90,6 +90,14 @@ public class ObjectNameEditor {
                     super.redo();
                     setName(v, true);
                 }
+                @Override
+                public String getRedoPresentationName() {
+                    return "Redo name change";
+                }
+                @Override
+                public String getUndoPresentationName() {
+                    return "Undo name change";
+                }
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }

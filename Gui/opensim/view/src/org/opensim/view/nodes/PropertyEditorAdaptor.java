@@ -320,6 +320,10 @@ public class PropertyEditorAdaptor {
                     super.redo();
                     setValueDouble(v, true);
                 }
+                @Override
+                public String getRedoPresentationName() {
+                    return "Redo "+prop.getName()+" change";
+                }
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }
@@ -348,7 +352,11 @@ public class PropertyEditorAdaptor {
                     super.redo();
                     setValueString(v, true);
                 }
-            };
+                 @Override
+                public String getRedoPresentationName() {
+                    return "Redo "+prop.getName()+" change";
+                }
+           };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }
     }
@@ -376,7 +384,11 @@ public class PropertyEditorAdaptor {
                     super.redo();
                     setValueBool(v, true);
                 }
-            };
+                @Override
+                public String getRedoPresentationName() {
+                    return "Redo "+prop.getName()+" change";
+                }
+           };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }
     }
@@ -403,6 +415,10 @@ public class PropertyEditorAdaptor {
                 public void redo() throws CannotRedoException {
                     super.redo();
                     setValueInt(v, true);
+                }
+                @Override
+                public String getRedoPresentationName() {
+                    return "Redo "+prop.getName()+" change";
                 }
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
@@ -435,6 +451,10 @@ public class PropertyEditorAdaptor {
                     super.redo();
                     assignValueArrayDouble(v, true);
                 }
+                @Override
+                public String getRedoPresentationName() {
+                    return "Redo "+prop.getName()+" change";
+                }
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }
@@ -465,6 +485,12 @@ public class PropertyEditorAdaptor {
                     super.redo();
                     setValueVec3(v, true);
                 }
+
+                @Override
+                public String getRedoPresentationName() {
+                    return "Redo "+prop.getName()+" change";
+                }
+                
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }
@@ -496,6 +522,10 @@ public class PropertyEditorAdaptor {
                     super.redo();
                     assignValueTransform(v, true);
                 }
+                @Override
+                public String getRedoPresentationName() {
+                    return "Redo "+prop.getName()+" change";
+                }
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }
@@ -523,6 +553,10 @@ public class PropertyEditorAdaptor {
                 public void redo() throws CannotRedoException {
                     super.redo();
                     setValueObj(v, oldObject, false);
+                }
+                @Override
+                public String getRedoPresentationName() {
+                    return "Redo "+prop.getName()+" change";
                 }
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);

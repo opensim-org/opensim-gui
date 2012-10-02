@@ -994,7 +994,7 @@ final public class MarkerEditorTopComponent extends TopComponent implements Obse
             double offset[] = new double[3];
             OpenSimContext context=OpenSimDB.getInstance().getContext(body.getModel());
             context.transform(ground, ev.getDragVector(), body, dragVectorBody);
-            //System.out.println("drag: " + ev.getDragVector()[0] + " " + ev.getDragVector()[1] + " " + ev.getDragVector()[2]);
+            //System.out.println("Marker:"+m.getName()+" drag: " + ev.getDragVector()[0] + " " + ev.getDragVector()[1] + " " + ev.getDragVector()[2]);
             m.getOffset(offset);
             for (int j=0; j<3; j++)
                offset[j] += dragVectorBody[j];
@@ -1140,7 +1140,13 @@ final public class MarkerEditorTopComponent extends TopComponent implements Obse
                   //vis.setMarkerLineVisible(markers.get(i), false);
             }
          } else if (arg instanceof DragObjectsEvent) {
-            dragMarkers((DragObjectsEvent)arg);
+            DragObjectsEvent doe = (DragObjectsEvent) arg;
+            OpenSimObject dObj = doe.getObject();
+            if (Marker.safeDownCast(dObj)!=null){
+                ViewDB.getInstance().setSelectedObject(doe.getObject());
+                dragMarkers((DragObjectsEvent)arg);
+                ExplorerTopComponent.getDefault().selectNodeForObject(doe.getObject());
+            }
          }
       } else if (o instanceof OpenSimDB) {
          // if current model is being switched due to open/close or change current then

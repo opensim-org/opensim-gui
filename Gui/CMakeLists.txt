@@ -22,6 +22,8 @@ INSTALL_FILES(/bin/ FILES  ${VTK_LIBS})
 
 INSTALL(DIRECTORY Internal DESTINATION Models PATTERN ".svn" EXCLUDE)
 
+INSTALL_FILES(/plugins/ FILES plugins/readme.txt)
+
 # Find Java and create a jdk/jre directory and copy jre to it
 INCLUDE(${CMAKE_ROOT}/Modules/FindJava.cmake)
 SET(JRE_TO_PACKAGE "" CACHE PATH "jdk folder to include with distro")
