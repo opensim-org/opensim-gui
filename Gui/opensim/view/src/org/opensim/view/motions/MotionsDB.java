@@ -61,6 +61,16 @@ import org.opensim.view.pub.*;
 public class MotionsDB extends Observable // Observed by other entities in motionviewer
         implements Observer {
 
+    void addMotionDisplayer(Storage simmMotionData, MotionDisplayer displayer) {
+        mapMotions2Displayers.put(simmMotionData, displayer);
+    }
+    MotionDisplayer getDisplayerForMotion(Storage mot){
+        return mapMotions2Displayers.get(mot);
+    }
+    void removeMotionDisplayer(Storage mot) {
+        mapMotions2Displayers.remove(mot);
+    }
+
  // Observer OpenSimDB to sync. up when models are deleted
    
    public static class ModelMotionPair {
@@ -74,6 +84,9 @@ public class MotionsDB extends Observable // Observed by other entities in motio
    // Map model to an ArrayList of Motions linked with it
    Hashtable<Model, ArrayList<Storage>> mapModels2Motions =
            new Hashtable<Model, ArrayList<Storage>>(4);
+   
+   Hashtable<Storage, MotionDisplayer> mapMotions2Displayers =
+           new Hashtable<Storage, MotionDisplayer>(4);
    // Remember for each storage object, the file name it came from. Useful for saving/restoring application state
    // Caveats: many motions are created on the fly and have no files associated with them
    //        : If a file name is reused this info may not be current
@@ -266,10 +279,22 @@ public class MotionsDB extends Observable // Observed by other entities in motio
       mapMotion2BitSet.remove(simmMotionData);
 
       boolean removed = removeFromCurrentMotions(new ModelMotionPair(model, simmMotionData));
-
+      Node motionNode = getMotionNode(model, simmMotionData);
+      Node parentOrTopMotionsNode = null;
+      if(motionNode!=null) {
+           parentOrTopMotionsNode = motionNode.getParentNode();
+           // get displayer for parnet motion and remove evnt.getMotion() from associated motions
+           if (motionNode instanceof OneAssociatedMotionNode){
+               Storage parentMotion = ((OneMotionNode) parentOrTopMotionsNode).getMotion();
+               MotionDisplayer currentDisplayer = getDisplayerForMotion(simmMotionData);
+               currentDisplayer.cleanupDisplay();
+               getDisplayerForMotion(parentMotion).getAssociatedMotions().remove(currentDisplayer);
+           }
+      }
       MotionEvent evt = new MotionEvent(this, model, simmMotionData, MotionEvent.Operation.Close);
       setChanged();
       notifyObservers(evt);
+      removeMotionDisplayer(simmMotionData);
 
       if(removed) {
          evt = new MotionEvent(this, MotionEvent.Operation.CurrentMotionsChanged);
@@ -355,14 +380,20 @@ public class MotionsDB extends Observable // Observed by other entities in motio
                   {
                      try { // destroy() may throw IOException
                         Node motionNode = getMotionNode(evnt.getModel(), evnt.getMotion());
-                        Node motionsNode = null;
+                        Node parentOrTopMotionsNode = null;
                         if(motionNode!=null) {
-                           motionsNode = motionNode.getParentNode();
-                           motionNode.destroy();
-                        }
+                           parentOrTopMotionsNode = motionNode.getParentNode();
+                           // get displayer for parnet motion and remove evnt.getMotion() from associated motions
+                           if (motionNode instanceof OneAssociatedMotionNode){
+                               Storage parentMotion = ((OneMotionNode) parentOrTopMotionsNode).getMotion();
+                               MotionDisplayer currentDisplayer = getDisplayerForMotion(evnt.getMotion());
+                               getDisplayerForMotion(parentMotion).getAssociatedMotions().remove(currentDisplayer);
+                           }
+                            motionNode.destroy();
+                       }
                         // Delete the "Motions" container node if no more motions left
-                        if(motionsNode!=null && motionsNode.getChildren().getNodesCount()==0 && motionsNode.getName().equals("Motions"))
-                           motionsNode.destroy();
+                        if(parentOrTopMotionsNode!=null && parentOrTopMotionsNode.getChildren().getNodesCount()==0 && parentOrTopMotionsNode.getName().equals("Motions"))
+                           parentOrTopMotionsNode.destroy();
                      } catch (IOException ex) {
                         ex.printStackTrace();
                      }
@@ -439,7 +470,9 @@ public class MotionsDB extends Observable // Observed by other entities in motio
       return false;
    }
 
-   public int getNumCurrentMotions() { return currentMotions.size(); }
+   public int getNumCurrentMotions() { 
+       return currentMotions.size(); 
+   }
    public ModelMotionPair getCurrentMotion(int i) { return currentMotions.get(i); }
 
    boolean isModelMotionPairCurrent(ModelMotionPair pair) {

@@ -36,6 +36,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Observable;
 import java.util.Observer;
@@ -45,10 +46,14 @@ import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import org.openide.nodes.Children;
+import org.openide.nodes.Node;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.Storage;
+import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.motions.MotionEvent.Operation;
 import org.opensim.view.ObjectsRenamedEvent;
+import org.opensim.view.motions.MotionsDB.ModelMotionPair;
 
 /**
  *
@@ -709,9 +714,18 @@ public class MotionControlJPanel extends javax.swing.JPanel
             // Current motion changed.  Update master motion
             double currentTime = getMasterMotion().getCurrentTime();
             getMasterMotion().clear();
-            for(int i=0; i<mdb.getNumCurrentMotions(); i++)
+            for(int i=0; i<mdb.getNumCurrentMotions(); i++){
                getMasterMotion().add(mdb.getCurrentMotion(i));
+               ModelMotionPair currentModelMotionPair = mdb.getCurrentMotion(i);
+               Storage mot = currentModelMotionPair.motion;
+               MotionsDB.getInstance().getDisplayerForMotion(mot).setupMotionDisplay();
+               ArrayList<MotionDisplayer> associatedDisplayers = getMasterMotion().getDisplayer(0).getAssociatedMotions();
+               // Find associated motions as well and re-associate them
+               for (int j=0; j<associatedDisplayers.size(); j++)
+                   associatedDisplayers.get(j).setupMotionDisplay();
+            }
             getMasterMotion().setTime(currentTime);
+            
          } else if (evt.getOperation() == Operation.Modified) {
             Storage motion = evt.getMotion();
             Model model = evt.getModel();
@@ -722,10 +736,14 @@ public class MotionControlJPanel extends javax.swing.JPanel
                   getMasterMotion().getDisplayer(i).setupMotionDisplay();
                }
             }
+            getMasterMotion().setTime(getMasterMotion().getCurrentTime());
+
          } else if (evt.getOperation() == Operation.Assoc) {
              // Create MotionDisplayer and associate it to that of currentMotion
              MotionDisplayer newMotionDisplayer = new MotionDisplayer(evt.getMotion(), evt.getModel());
+             MotionsDB.getInstance().addMotionDisplayer(evt.getMotion(), newMotionDisplayer);
              getMasterMotion().getDisplayer(0).getAssociatedMotions().add(newMotionDisplayer);
+             getMasterMotion().setTime(getMasterMotion().getCurrentTime());
          }
          motionLoaded = (getMasterMotion().getNumMotions() > 0);
          updatePanelDisplay();

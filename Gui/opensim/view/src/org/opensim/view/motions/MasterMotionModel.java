@@ -162,8 +162,14 @@ public class MasterMotionModel {
    // Utilities for building the super motion
    // -----------------------------------------------------------------------
    void add(Model model, Storage simmMotionData) {
-      displayers.add(new MotionDisplayer(simmMotionData, model));
-      buildSuperMotion(model, simmMotionData);
+      
+      MotionDisplayer displayer = MotionsDB.getInstance().getDisplayerForMotion(simmMotionData);
+      if (displayer == null){
+          displayer = new MotionDisplayer(simmMotionData, model);
+          MotionsDB.getInstance().addMotionDisplayer(simmMotionData, displayer);
+      }
+      displayers.add(displayer);
+       buildSuperMotion(model, simmMotionData);
    }
    void add(MotionsDB.ModelMotionPair pair) {
       add(pair.model, pair.motion);

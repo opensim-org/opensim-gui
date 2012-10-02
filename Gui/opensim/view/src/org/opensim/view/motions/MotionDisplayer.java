@@ -431,22 +431,7 @@ public class MotionDisplayer implements SelectionListener {
               return 1;
           }
      }
-     /* ordering from SIMM
-      else if ((musc_index = name_is_muscle(ms, motion->columnname[i], NULL, &sType, &cutoffFreq, yes)) >= 0)
-         motion->mopt.muscles[musc_index] = motion->motiondata[i];
-      else if ((lig_index = get_ligament_index(ms->modelnum, motion->columnname[i])) >= 0)
-         motion->mopt.ligaments[lig_index] = motion->motiondata[i];
-      else if ((seg = name_is_marker(ms, motion->columnname[i], &motion_object, &ref, &sType, &cutoffFreq, yes)) >= 0 &&
-               motion_object >= 0 && ref >= 0)
-         store_motion_object_instance(ms->modelnum, &motion->mopt, seg, motion_object, ref, i);
-      else if ((seg = name_is_forceplate(ms, motion->columnname[i], &motion_object, &ref, &sType, &cutoffFreq, yes)) >= 0 &&
-               motion_object >= 0 && ref >= 0)
-         store_motion_object_instance(ms->modelnum, &motion->mopt, seg, motion_object, ref, i);
-      else if ((seg = name_is_body_segment(ms, motion->columnname[i], &motion_object, &ref, &sType, &cutoffFreq, yes)) >= 0 &&
-               motion_object >= 0 && ref >= 0)
-               */
-      // @ToDo muscles
-      // @ToDo ligaments
+
        MarkerSet markers = model.getMarkerSet();
        for (int i = 0; i<markers.getSize(); i++){
          Marker marker = markers.get(i);
@@ -810,32 +795,7 @@ public class MotionDisplayer implements SelectionListener {
         ViewDB.getInstance().addUserObjectToModel(model, prop);
         prop.Modified();
     }
-        /* // Create the visuals
-        Vector<String> markerNames=mot.getMarkerNames();
-        int foundPosition=markerNames.indexOf(openSimObject.getName());
-        ArrayDouble xCoord = new ArrayDouble();
-        ArrayDouble yCoord = new ArrayDouble();
-        ArrayDouble zCoord = new ArrayDouble();
-        mot.getDataColumn(3*foundPosition, xCoord);
-        mot.getDataColumn(3*foundPosition+1, yCoord);
-        mot.getDataColumn(3*foundPosition+2, zCoord);
-        vtkAppendPolyData traceLinePolyData = new vtkAppendPolyData();
-        int numPoints = xCoord.getSize();
-        for(int i=0;i<numPoints-1;i++){
-            vtkLineSource nextLine = new vtkLineSource();
-            nextLine.SetPoint1(xCoord.getitem(i)/1000., yCoord.getitem(i)/1000., zCoord.getitem(i)/1000.);
-            nextLine.SetPoint2(xCoord.getitem(i+1)/1000., yCoord.getitem(i+1)/1000., zCoord.getitem(i+1)/1000.);
-            //System.out.println("Line "+nextLine.GetPoint1()+" to "+nextLine.GetPoint2());
-            traceLinePolyData.AddInput(nextLine.GetOutput());
-        }
-        vtkPolyDataMapper traceLineMapper = new vtkPolyDataMapper();
-        traceLineMapper.SetInput(traceLinePolyData.GetOutput());
-        vtkActor traceLineActor = new vtkActor();
-        traceLineActor.SetMapper(traceLineMapper);
-        objectTrails.put(openSimObject, traceLineActor);
-        modelDisplayAssembly.AddPart(traceLineActor);
-        traceLineActor.Modified();
-    */
+
     // This method precreates the Trails for motion objects regardless.
     // user uses commands to add or remove them from the scene.
     private vtkActor createTrail(ExperimentalDataObject object) {
