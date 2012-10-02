@@ -39,11 +39,6 @@ public class opensimModelJNI {
   public final static native String OpenSimException_getMessage(long jarg1, OpenSimException jarg1_);
   public final static native void OpenSimException_print(long jarg1, OpenSimException jarg1_, long jarg2);
   public final static native String OpenSimException_what(long jarg1, OpenSimException jarg1_);
-  public final static native long new_OldVersionException__SWIG_0(String jarg1, String jarg2, int jarg3);
-  public final static native long new_OldVersionException__SWIG_1(String jarg1, String jarg2);
-  public final static native long new_OldVersionException__SWIG_2(String jarg1);
-  public final static native long new_OldVersionException__SWIG_3();
-  public final static native void delete_OldVersionException(long jarg1);
   public final static native int Array_CAPMIN_get();
   public final static native void AbstractProperty_setAllowableListSize__SWIG_0(long jarg1, AbstractProperty jarg1_, int jarg2, int jarg3);
   public final static native void AbstractProperty_setAllowableListSize__SWIG_1(long jarg1, AbstractProperty jarg1_, int jarg2);
@@ -6018,7 +6013,6 @@ public class opensimModelJNI {
   public final static native long new_SimtkLogCallback();
   public final static native void SimtkLogCallback_director_connect(SimtkLogCallback obj, long cptr, boolean mem_own, boolean weak_global);
   public final static native void SimtkLogCallback_change_ownership(SimtkLogCallback obj, long cptr, boolean take_or_release);
-  public final static native long OldVersionException_SWIGUpcast(long jarg1);
   public final static native long ObjectGroup_SWIGUpcast(long jarg1);
   public final static native long LineGeometry_SWIGUpcast(long jarg1);
   public final static native long ArrowGeometry_SWIGUpcast(long jarg1);

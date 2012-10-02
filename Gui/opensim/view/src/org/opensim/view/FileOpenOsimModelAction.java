@@ -61,41 +61,9 @@ public class FileOpenOsimModelAction extends CallableSystemAction {
                 StatusDisplayer.getDefault().setStatusText("");
             } catch (IOException ex) {
                 progressHandle.finish();
-                if (ex.getMessage().startsWith("OldVersionException")) {
-                   Object userAnswer = DialogDisplayer.getDefault().notify(
-                      new NotifyDescriptor.Confirmation("File "+fileName+" is from an early version of OpenSim, do you want to update it to current version",NotifyDescriptor.YES_NO_OPTION));
-                   if(userAnswer==NotifyDescriptor.NO_OPTION) return;
-
-                   File f = new File(fileName);
-                   File modelDir = f.getParentFile();
-                   String newOsimFileName = FileUtils.addSuffix(fileName, "_v18");
-                   String command = "migrate15to18.exe \"" + fileName + "\"" + " \"" + newOsimFileName + "\"";
-                   OpenSimLogger.logMessage("Executing ["+command+"]", 0);
-                   boolean success = ExecOpenSimProcess.execute(command, null, modelDir );
-                   // if file was not generated warn and point to message area
-                   File testExists = new File(newOsimFileName);
-                   if (!testExists.exists()){
-                      DialogDisplayer.getDefault().notify(
-                         new NotifyDescriptor.Message("Error updating model file. Please check Message window for details."));
-                      success=false;
-                   }
-
-                   if (success){
-                       try {
-                          // Display original model
-                          ((FileOpenOsimModelAction) FileOpenOsimModelAction.findObject(
-                             (Class)Class.forName("org.opensim.view.FileOpenOsimModelAction"))).loadModel(newOsimFileName);
-                       } catch (ClassNotFoundException exc) {
-                          exc.printStackTrace();
-                       } catch (IOException exc) {
-                          DialogDisplayer.getDefault().notify(
-                             new NotifyDescriptor.Message("Error opening migrated model file "+newOsimFileName+". Please check Message window for details."));
-                       }
-                   }
-                } else  {
-                   ErrorDialog.displayIOExceptionDialog("OpenSim Model Loading Error",
-                      "Could not construct a model from "+fileName+".", ex);
-                }
+                ErrorDialog.displayIOExceptionDialog("OpenSim Model Loading Error",
+                      "Could not construct a model from "+fileName+". Possible reasons: syntax error or unsupported format.", ex);
+                
             }    
         }
     }
