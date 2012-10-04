@@ -3922,6 +3922,17 @@ public class opensimModelJNI {
   public final static native int FreeJoint_numCoordinates(long jarg1, FreeJoint jarg1_);
   public final static native void FreeJoint_scale(long jarg1, FreeJoint jarg1_, long jarg2, ScaleSet jarg2_);
   public final static native void FreeJoint_connectToModel(long jarg1, FreeJoint jarg1_, long jarg2, Model jarg2_);
+  public final static native long UniversalJoint_safeDownCast(long jarg1, OpenSimObject jarg1_);
+  public final static native void UniversalJoint_assign(long jarg1, UniversalJoint jarg1_, long jarg2, OpenSimObject jarg2_);
+  public final static native String UniversalJoint_getClassName();
+  public final static native long UniversalJoint_clone(long jarg1, UniversalJoint jarg1_);
+  public final static native String UniversalJoint_getConcreteClassName(long jarg1, UniversalJoint jarg1_);
+  public final static native long new_UniversalJoint__SWIG_0();
+  public final static native long new_UniversalJoint__SWIG_1(String jarg1, long jarg2, Body jarg2_, long jarg3, long jarg4, long jarg5, Body jarg5_, long jarg6, long jarg7, boolean jarg8);
+  public final static native long new_UniversalJoint__SWIG_2(String jarg1, long jarg2, Body jarg2_, long jarg3, long jarg4, long jarg5, Body jarg5_, long jarg6, long jarg7);
+  public final static native void delete_UniversalJoint(long jarg1);
+  public final static native int UniversalJoint_numCoordinates(long jarg1, UniversalJoint jarg1_);
+  public final static native void UniversalJoint_scale(long jarg1, UniversalJoint jarg1_, long jarg2, ScaleSet jarg2_);
   public final static native long CustomJoint_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void CustomJoint_assign(long jarg1, CustomJoint jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String CustomJoint_getClassName();
@@ -6325,6 +6336,7 @@ public class opensimModelJNI {
   public final static native long CoordinateSet_SWIGUpcast(long jarg1);
   public final static native long Joint_SWIGUpcast(long jarg1);
   public final static native long FreeJoint_SWIGUpcast(long jarg1);
+  public final static native long UniversalJoint_SWIGUpcast(long jarg1);
   public final static native long CustomJoint_SWIGUpcast(long jarg1);
   public final static native long SetJoints_SWIGUpcast(long jarg1);
   public final static native long ModelComponentSetJoints_SWIGUpcast(long jarg1);
