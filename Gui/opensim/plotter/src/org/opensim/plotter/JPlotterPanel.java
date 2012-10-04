@@ -2163,7 +2163,7 @@ public class JPlotterPanel extends javax.swing.JPanel
         // Populate YQty text field with selection
         //XX1
         jYQtyTextField.setText(qtyName);
-        jYQtyTextField.setToolTipText(qtyName+" is calculated by setting activation to 1.0, then equilibriating the muscle.");
+        jYQtyTextField.setToolTipText(qtyName+" is calculated by setting activation to 1.0, then equilibriating the muscle, unless a states file is specified.");
         useMuscles(true);
         updateContextGuiElements();
         sourceY=(new PlotterSourceAnalysis(currentModel, plotterModel.getStorage(qtyName, currentModel), qtyName));

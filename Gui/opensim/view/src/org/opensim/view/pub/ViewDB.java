@@ -1676,7 +1676,7 @@ public final class ViewDB extends Observable implements Observer {
 
     public void setQuery(boolean enabled) {
         query=enabled;
-        System.out.println("Annotation "+(enabled?"On":"Off"));
+        //System.out.println("Annotation "+(enabled?"On":"Off"));
         // remove captions if disabling
         if (!enabled){
             Iterator<vtkCaptionActor2D> captions=selectedObjectsAnnotations.values().iterator();

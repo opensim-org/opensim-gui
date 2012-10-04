@@ -5659,6 +5659,7 @@ public class opensimModelJNI {
   public final static native double InverseKinematicsSolver_computeCurrentSquaredMarkerError__SWIG_0(long jarg1, InverseKinematicsSolver jarg1_, String jarg2);
   public final static native double InverseKinematicsSolver_computeCurrentSquaredMarkerError__SWIG_1(long jarg1, InverseKinematicsSolver jarg1_, int jarg2);
   public final static native void InverseKinematicsSolver_computeCurrentSquaredMarkerErrors(long jarg1, InverseKinematicsSolver jarg1_, long jarg2);
+  public final static native long InverseKinematicsSolver_getMarkerNameForIndex(long jarg1, InverseKinematicsSolver jarg1_, int jarg2);
   public final static native long Tool_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void Tool_assign(long jarg1, Tool jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String Tool_getClassName();
