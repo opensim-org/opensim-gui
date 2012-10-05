@@ -67,13 +67,10 @@ import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.openide.util.Exceptions;
 import org.opensim.modeling.*;
-import org.opensim.utils.BrowserLauncher;
+import org.opensim.utils.*;
 import org.opensim.view.motions.MotionEvent;
 import org.opensim.view.motions.MotionTimeChangeEvent;
-import org.opensim.utils.FileUtils;
 import org.opensim.view.motions.MotionsDB;
-import org.opensim.utils.DialogUtils;
-import org.opensim.utils.OpenSimDialog;
 import org.opensim.view.ModelEvent;
 import org.opensim.view.ObjectSetCurrentEvent;
 import org.opensim.view.ObjectsRenamedEvent;
@@ -1066,7 +1063,8 @@ public class JPlotterPanel extends javax.swing.JPanel
    }//GEN-LAST:event_jLoadFileToPlotterMenuItemActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        BrowserLauncher.openURL("http://simtk-confluence.stanford.edu:8080/display/OpenSim30/Plotting");
+        String path = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu:8080/display/OpenSim30/Plotting" : TheApp.getUsersGuideDir() + "Plotting.html"; 
+        BrowserLauncher.openURL(path);
     }//GEN-LAST:event_jButton1ActionPerformed
    
    public PlotterSourceFile loadFile(String dataFilename) {

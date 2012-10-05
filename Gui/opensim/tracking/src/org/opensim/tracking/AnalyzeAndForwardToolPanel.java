@@ -57,6 +57,7 @@ import org.opensim.view.motions.MotionsDB;
 import org.opensim.swingui.FileTextFieldAndChooser;
 import org.opensim.utils.BrowserLauncher;
 import org.opensim.utils.FileUtils;
+import org.opensim.utils.TheApp;
 import org.opensim.view.FileTextFieldAndChooserWithEdit;
 import org.opensim.view.ModelEvent;
 import org.opensim.view.excitationEditor.ExcitationEditorJFrame;
@@ -129,11 +130,11 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
              helpUrl = "Static+Optimization";
              break;
       }
-
                          
       helpButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent ae) {
-         BrowserLauncher.openURL("http://simtk-confluence.stanford.edu:8080/display/OpenSim30/" + helpUrl);
+          String path = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu:8080/display/OpenSim30/" + helpUrl : TheApp.getUsersGuideDir() + helpUrl + ".html";
+          BrowserLauncher.openURL(path);
       }
       });
              

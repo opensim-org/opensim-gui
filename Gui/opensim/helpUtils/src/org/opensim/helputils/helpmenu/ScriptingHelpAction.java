@@ -8,9 +8,6 @@ package org.opensim.helputils.helpmenu;
  *
  * @author Kevin Xu
  */
-import java.io.File;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
@@ -20,7 +17,7 @@ import org.opensim.utils.TheApp;
 public final class ScriptingHelpAction extends CallableSystemAction {
     
     public void performAction() {
-        String usersGuidePath = "http://simtk-confluence.stanford.edu:8080/display/OpenSim/Scripting"; 
+        String usersGuidePath = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu:8080/display/OpenSim/Scripting" : TheApp.getUsersGuideDir() + "Scripting.html"; 
         BrowserLauncher.openURL(usersGuidePath);
     }
     

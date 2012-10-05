@@ -9,8 +9,6 @@ package org.opensim.helputils.helpmenu;
  * @author Kevin Xu
  */
 import java.io.File;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
@@ -18,25 +16,13 @@ import org.opensim.utils.BrowserLauncher;
 import org.opensim.utils.TheApp;
 
 public final class UsersGuideAction extends CallableSystemAction {
-    
+
     public void performAction() {
-        String basePath = TheApp.getInstallDir();
-        String usersGuidePath = "http://simtk-confluence.stanford.edu:8080/display/OpenSim30/User%27s+Guide"; 
+        String usersGuidePath = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu:8080/display/OpenSim30/User%27s+Guide" : 
+                TheApp.getUsersGuideDir() + "User%27s+Guide.html";            
 
-        // If issues with online user's guide then open local file
-        try {
-            URL url = new URL(usersGuidePath);
-            HttpURLConnection urlConnect = (HttpURLConnection)url.openConnection();
-            Object objData = urlConnect.getContent();
-            if(objData == null) {
-                usersGuidePath = basePath + File.separator + "sdk" + File.separator + "doc" + File.separator + "UsersGuide.pdf";  
-            }            
-        } catch (Exception e) {
-            usersGuidePath = basePath + File.separator + "sdk" + File.separator + "doc" + File.separator + "UsersGuide.pdf";            
-        }
-
+        System.out.println("USERS GUIDE PATH: " + usersGuidePath);
         BrowserLauncher.openURL(usersGuidePath);
-
     }
     
     public String getName() {

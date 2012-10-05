@@ -36,6 +36,8 @@
 package org.opensim.utils;
 
 import java.lang.reflect.Method;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import javax.swing.JOptionPane;
 
 public final class BrowserLauncher {
@@ -72,4 +74,41 @@ public final class BrowserLauncher {
          }
       }
 
+   /*
+    * Check for internet connection
+    * by pinging a couple of reliable sites. Yet to find better way to do this.
+    */
+    public static boolean isConnected() {
+
+        boolean rc1 = true, rc2 = true;
+        
+        try {
+            URL url = new URL("http://www.stanford.edu");
+            HttpURLConnection urlConnect = (HttpURLConnection)url.openConnection();
+            urlConnect.setUseCaches(false);
+            Object objData = urlConnect.getContent();
+            if(objData == null) {
+                rc1 = false;
+            }            
+        } catch (Exception e) {
+            e.printStackTrace();
+            rc1 = false;  
+        }
+
+        try {
+            URL url = new URL("http://www.google.com");
+            HttpURLConnection urlConnect = (HttpURLConnection)url.openConnection();
+            urlConnect.setUseCaches(false);
+            Object objData = urlConnect.getContent();
+            if(objData == null) {
+                rc2 = false;
+            }            
+        } catch (Exception e) {
+            e.printStackTrace();
+            rc2 = false;  
+        }
+        
+        System.out.println("RC1: " + rc1 + " RC2: " + rc2);
+        return rc1 | rc2;
+    }
    }
