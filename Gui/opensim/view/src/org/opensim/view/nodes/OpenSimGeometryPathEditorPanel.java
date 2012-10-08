@@ -478,13 +478,13 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       attachmentBodyLabel.setBounds(X + 300, Y - 30, 30, 16);
       javax.swing.JLabel coordLabel = new javax.swing.JLabel();
       coordLabel.setText("Coordinate");
-      coordLabel.setBounds(X + 360, Y - 30, 90, 16);
+      coordLabel.setBounds(X + 400, Y - 30, 90, 16);
       javax.swing.JLabel rangeMinLabel = new javax.swing.JLabel();
       rangeMinLabel.setText("Min");
-      rangeMinLabel.setBounds(X + 420, Y - 30, 60, 16);
+      rangeMinLabel.setBounds(X + 530, Y - 30, 60, 16);
       javax.swing.JLabel rangeMaxLabel = new javax.swing.JLabel();
       rangeMaxLabel.setText("Max");
-      rangeMaxLabel.setBounds(X + 480, Y - 30, 60, 16);
+      rangeMaxLabel.setBounds(X + 590, Y - 30, 60, 16);
       AttachmentsPanel.add(attachmentSelLabel);
       AttachmentsPanel.add(attachmentTypeLabel);
       AttachmentsPanel.add(attachmentXLabel);
