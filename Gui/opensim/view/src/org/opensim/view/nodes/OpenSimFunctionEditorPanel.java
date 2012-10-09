@@ -387,9 +387,9 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
 
         jScrollPane1 = new javax.swing.JScrollPane();
         FunctionEditorScrollPane = new javax.swing.JScrollPane();
+        functionDescriptionLabel = new javax.swing.JLabel();
         FunctionEditorPanel = new javax.swing.JPanel();
         xValueTextField = new javax.swing.JTextField();
-        functionDescriptionLabel = new javax.swing.JLabel();
         functionJPanel = new javax.swing.JPanel();
         xValueLabel = new javax.swing.JLabel();
         yValueLabel = new javax.swing.JLabel();
@@ -399,6 +399,9 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
         crosshairsCheckBox = new javax.swing.JCheckBox();
         PropertiesButton = new javax.swing.JButton();
         restoreFunctionButton = new javax.swing.JButton();
+
+        functionDescriptionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        functionDescriptionLabel.setText(org.openide.util.NbBundle.getMessage(OpenSimFunctionEditorPanel.class, "OpenSimFunctionEditorPanel.functionDescriptionLabel.text")); // NOI18N
 
         xValueTextField.setMaximumSize(new java.awt.Dimension(100, 21));
         xValueTextField.setMinimumSize(new java.awt.Dimension(100, 21));
@@ -413,9 +416,6 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
                 xValueTextFieldxValueFocusLost(evt);
             }
         });
-
-        functionDescriptionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        functionDescriptionLabel.setText(org.openide.util.NbBundle.getMessage(OpenSimFunctionEditorPanel.class, "OpenSimFunctionEditorPanel.functionDescriptionLabel.text")); // NOI18N
 
         functionJPanel.setMinimumSize(new java.awt.Dimension(25, 25));
 
@@ -485,9 +485,6 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
             .addGroup(FunctionEditorPanelLayout.createSequentialGroup()
                 .addGroup(FunctionEditorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(FunctionEditorPanelLayout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(functionDescriptionLabel))
-                    .addGroup(FunctionEditorPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(functionJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(FunctionEditorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -516,9 +513,7 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
         FunctionEditorPanelLayout.setVerticalGroup(
             FunctionEditorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FunctionEditorPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(functionDescriptionLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(31, 31, 31)
                 .addComponent(functionJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(17, 17, 17)
                 .addGroup(FunctionEditorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
