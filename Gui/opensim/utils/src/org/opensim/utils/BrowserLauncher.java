@@ -108,7 +108,6 @@ public final class BrowserLauncher {
             rc2 = false;  
         }
         
-        System.out.println("RC1: " + rc1 + " RC2: " + rc2);
         return rc1 | rc2;
     }
    }

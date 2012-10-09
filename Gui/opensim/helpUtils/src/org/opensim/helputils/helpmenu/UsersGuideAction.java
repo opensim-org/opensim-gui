@@ -21,7 +21,6 @@ public final class UsersGuideAction extends CallableSystemAction {
         String usersGuidePath = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu:8080/display/OpenSim30/User%27s+Guide" : 
                 TheApp.getUsersGuideDir() + "User%27s+Guide.html";            
 
-        System.out.println("USERS GUIDE PATH: " + usersGuidePath);
         BrowserLauncher.openURL(usersGuidePath);
     }
     

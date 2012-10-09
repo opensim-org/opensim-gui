@@ -59,7 +59,6 @@ class BrowserPageDisplayerAction extends AbstractAction
         // If issues with online tutorials then open local file
         String path = BrowserLauncher.isConnected() ? url : TheApp.getInstallDir() + File.separator + "doc" + File.separator + displayName+".pdf";
         
-        System.out.println("Path: " + path);
         BrowserLauncher.openURL(path);            
     }
     
