@@ -131,14 +131,11 @@ public class MotionsDB extends Observable // Observed by other entities in motio
          DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message("Could not read motion file "+fileName));
          return;
       }
-      saveStorageFileName(storage, fileName);
-      //final Storage newMotion = storage;
-      //Model currentModel = OpenSimDB.getInstance().getCurrentModel();
-      //AnalyzeTool.fixMuscleStatesToValidRange(newMotion, currentModel);
-      loadMotionStorage(storage, primary);
+      //saveStorageFileName(storage, fileName);
+      loadMotionStorage(storage, primary, fileName);
    }
    
-   public void loadMotionStorage(Storage newMotion, boolean primary)
+   public void loadMotionStorage(Storage newMotion, boolean primary, String filePath)
    {
       if (primary){
           boolean associated = false;
@@ -166,8 +163,11 @@ public class MotionsDB extends Observable // Observed by other entities in motio
               Model modelForMotion = parentMotionNode.getModelForNode();
               if (newMotion instanceof AnnotatedMotion)
                 addMotion(modelForMotion, newMotion, parentMotionNode.getMotion());
-              else
-                addMotion(modelForMotion, new AnnotatedMotion(newMotion), parentMotionNode.getMotion());
+              else {
+                AnnotatedMotion aMot = new AnnotatedMotion(newMotion);
+                addMotion(modelForMotion, aMot, parentMotionNode.getMotion());
+                MotionsDB.getInstance().saveStorageFileName(aMot, filePath);
+              }
            }
       }
    }
