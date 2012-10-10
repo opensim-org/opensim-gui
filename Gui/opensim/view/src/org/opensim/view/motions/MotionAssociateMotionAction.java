@@ -73,14 +73,13 @@ public final class MotionAssociateMotionAction extends CallableSystemAction {
                DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message("Could not read motion file " + fileName));
                return;
             }
-            MotionsDB.getInstance().saveStorageFileName(storage, fileName);
             Storage newMotion = storage;
             if (columnNamesOverlap(motion, newMotion, node.getModel()) == true) {
                DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message(fileName +
                        " cannot be associated to " + motion.getName() + "-- duplicate column labels encountered."));
                return;
             }
-            MotionsDB.getInstance().loadMotionStorage(newMotion, false);
+            MotionsDB.getInstance().loadMotionStorage(newMotion, false, fileName);
             MotionsDB.getInstance().reportModifiedMotion(motion, node.getModel());
          }
       }

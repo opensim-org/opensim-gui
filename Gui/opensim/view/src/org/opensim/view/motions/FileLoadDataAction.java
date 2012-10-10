@@ -63,6 +63,7 @@ public final class FileLoadDataAction extends CallableSystemAction {
                     ModelForExperimentalData modelForDataImport = new ModelForExperimentalData(nextNumber++, amot);
                     OpenSimDB.getInstance().addModel(modelForDataImport);
                     MotionsDB.getInstance().addMotion(modelForDataImport, amot, null);
+                    MotionsDB.getInstance().saveStorageFileName(amot, fileName);
                 } catch (IOException ex) {
                     NotifyDescriptor.Message dlg =
                           new NotifyDescriptor.Message("Couldn't load data and/or model for display.\n"+
@@ -93,6 +94,7 @@ public final class FileLoadDataAction extends CallableSystemAction {
                         return;
                     }
                     MotionsDB.getInstance().addMotion(modelForDataImport, amot, null);
+                    MotionsDB.getInstance().saveStorageFileName(amot, fileName);
             }
         }
     }

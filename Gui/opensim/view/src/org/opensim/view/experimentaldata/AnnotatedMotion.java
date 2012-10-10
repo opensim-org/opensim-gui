@@ -123,7 +123,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
         /** Creates a new instance of AnnotatedMotion */
     public AnnotatedMotion(Storage storage) {
         super(storage);
-        MotionsDB.getInstance().saveStorageFileName(this, MotionsDB.getInstance().getStorageFileName(storage));
+        //MotionsDB.getInstance().saveStorageFileName(this, MotionsDB.getInstance().getStorageFileName(storage));
         setupPatterns();
         classified=classifyColumns();
     }

@@ -79,16 +79,4 @@ public class DofFunctionNode extends OpenSimObjectNode{
       return displayName;
    }
    
-   public Action[] getActions(boolean b) {
-      // Get actions from parent (generic object menu for review, display)
-      Action[] superActions = (Action[]) super.getActions(b);
-      // Arrays are fixed size, onvert to a List
-      List<Action> actions = java.util.Arrays.asList(superActions);
-      // Create new Array of proper size
-      Action[] retActions = new Action[actions.size()+1];
-      actions.toArray(retActions);
-      // append new command to the end of the list of actions
-      retActions[actions.size()] = new DofFunctionEditorAction(dof);
-      return retActions;
-   }
 }
