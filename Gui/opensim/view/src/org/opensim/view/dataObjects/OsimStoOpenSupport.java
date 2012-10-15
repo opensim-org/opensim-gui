@@ -11,7 +11,7 @@ import org.openide.loaders.OpenSupport;
 import org.openide.util.Exceptions;
 import org.openide.windows.CloneableTopComponent;
 import org.opensim.utils.FileUtils;
-import org.opensim.view.motions.FileLoadMotionAction;
+import org.opensim.view.motions.FileLoadMotionMenuAction;
 
 /**
  *
@@ -32,8 +32,8 @@ class OsimStoOpenSupport extends OpenSupport implements OpenCookie, CloseCookie 
             String parentPath = fobj.getParent().getPath();
             FileUtils.getInstance().setWorkingDirectoryPreference(parentPath);
 
-            ((FileLoadMotionAction) FileLoadMotionAction.findObject(
-                            (Class<FileLoadMotionAction>)Class.forName("org.opensim.view.motions.FileLoadMotionAction"))).loadMotion(fobj.getPath());
+            ((FileLoadMotionMenuAction) FileLoadMotionMenuAction.findObject(
+                            (Class<FileLoadMotionMenuAction>)Class.forName("org.opensim.view.motions.FileLoadMotionMenuAction"))).loadMotion(fobj.getPath());
             return;
         } catch (ClassNotFoundException ex) {
             Exceptions.printStackTrace(ex);
