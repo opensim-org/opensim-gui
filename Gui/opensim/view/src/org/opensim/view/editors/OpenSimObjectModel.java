@@ -237,7 +237,7 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
 
     /** will this object be treated as a leaf or as expandible */
     protected boolean aggregate;
-
+    protected boolean editable = true;
     /** in cases where the node corresponds to an array entry, keep index here, and propertyOrObject will be the propertyOrObject array containing the item */
     protected int idx;
 
@@ -316,6 +316,9 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
          }
          else if (propValueType.equalsIgnoreCase("Transform"))
              aggregate = true;
+         else if (ap.isOptionalProperty() && ap.size()==0){
+             editable = false;
+         }
       }
 
       if(controlButton!=null) {
@@ -340,7 +343,7 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
        else return " ";
     }
 
-    public boolean editable() { return !aggregate; }
+    public boolean editable() { return !aggregate && editable; }
 
     //-----------------------------------------------------------------------
     // Add/Remove for propertyOrObject arrays
@@ -461,6 +464,7 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
       // Only primitive properties and array entries can be edited
       if(propertyOrObject instanceof AbstractProperty) {
          AbstractProperty p = (AbstractProperty)propertyOrObject;
+         if (p.isOptionalProperty() && p.size()==0) return;
          p.setValueIsDefault(false);
 
          // NOTE: I wanted the values to come in as Double, Integer, etc. but due to some weirdness the table editor thinks
