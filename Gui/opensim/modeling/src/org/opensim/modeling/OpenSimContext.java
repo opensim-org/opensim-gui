@@ -89,6 +89,10 @@ public class OpenSimContext extends OpenSimObject {
     opensimModelJNI.OpenSimContext_getStates__SWIG_1(swigCPtr, this, ArrayDouble.getCPtr(rStates), rStates);
   }
 
+  public SWIGTYPE_p_SimTK__State getCurrentStateRef() {
+    return new SWIGTYPE_p_SimTK__State(opensimModelJNI.OpenSimContext_getCurrentStateRef(swigCPtr, this), false);
+  }
+
   public void recreateSystemAfterSystemExistsKeepStage() {
     opensimModelJNI.OpenSimContext_recreateSystemAfterSystemExistsKeepStage(swigCPtr, this);
   }

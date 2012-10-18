@@ -6109,6 +6109,7 @@ public class opensimModelJNI {
   public final static native void OpenSimContext_computeConstrainedCoordinates(long jarg1, OpenSimContext jarg1_, double[] jarg2);
   public final static native void OpenSimContext_getStates__SWIG_0(long jarg1, OpenSimContext jarg1_, double[] jarg2);
   public final static native void OpenSimContext_getStates__SWIG_1(long jarg1, OpenSimContext jarg1_, long jarg2, ArrayDouble jarg2_);
+  public final static native long OpenSimContext_getCurrentStateRef(long jarg1, OpenSimContext jarg1_);
   public final static native void OpenSimContext_recreateSystemAfterSystemExistsKeepStage(long jarg1, OpenSimContext jarg1_);
   public final static native void OpenSimContext_recreateSystemAfterSystemExists(long jarg1, OpenSimContext jarg1_);
   public final static native void OpenSimContext_transformPosition(long jarg1, OpenSimContext jarg1_, long jarg2, Body jarg2_, double[] jarg3, double[] jarg4);
