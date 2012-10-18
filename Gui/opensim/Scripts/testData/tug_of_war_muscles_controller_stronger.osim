@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<OpenSimDocument Version="20303">
+<OpenSimDocument Version="30000">
 	<Model name="tugOfWar_Stronger">
+		<!--See the credits section below for information about this model's authors, data sources, intended uses, and more.
+		See the publications section for the paper(s) you should cite when using this model. Do not remove either section if you modify or add to this model.
+		If you are this model's author(s), add or update the credits and publications sections before distributing your model.-->
 		<credits>Unassigned</credits>
 		<publications>Unassigned</publications>
 		<length_units>meters</length_units>
@@ -102,12 +105,17 @@
 					<!--Joint that connects this body with the parent body.-->
 					<Joint>
 						<FreeJoint name="blockToGround">
+							<!--Name of the parent body to which this joint connects its owner body.-->
 							<parent_body>ground</parent_body>
-							<location_in_parent> 0 0.05 0</location_in_parent>
-							<orientation_in_parent> 0 0 0</orientation_in_parent>
-							<location> 0 0 0</location>
-							<orientation> 0 0 0</orientation>
-							<!--Generalized coordinates parameterizing this joint.-->
+							<!--Location of the joint in the parent body specified in the parent reference frame. Default is (0,0,0).-->
+							<location_in_parent>0 0.05 0</location_in_parent>
+							<!--Orientation of the joint in the parent body specified in the parent reference frame. Euler XYZ body-fixed rotation angles are used to express the orientation. Default is (0,0,0).-->
+							<orientation_in_parent>0 0 0</orientation_in_parent>
+							<!--Location of the joint in the child body specified in the child reference frame. For SIMM models, this vector is always the zero vector (i.e., the body reference frame coincides with the joint). -->
+							<location>0 0 0</location>
+							<!--Orientation of the joint in the owing body specified in the owning body reference frame.  Euler XYZ body-fixed rotation angles are used to express the orientation. -->
+							<orientation>0 0 0</orientation>
+							<!--Set holding the generalized coordinates (q's) that parmeterize this joint.-->
 							<CoordinateSet>
 								<objects>
 									<Coordinate name="blockToGround_xRotation">
@@ -209,6 +217,7 @@
 								</objects>
 								<groups />
 							</CoordinateSet>
+							<!--Whether the joint transform defines parent->child or child->parent.-->
 							<reverse>false</reverse>
 						</FreeJoint>
 					</Joint>
@@ -439,15 +448,15 @@
 			</objects>
 			<groups />
 		</ControllerSet>
-		<!--Probes in the model.-->
-		<ProbeSet>
-			<objects />
-			<groups />
-		</ProbeSet>
 		<!--Additional components in the model.-->
 		<ComponentSet name="MiscComponents">
 			<objects />
 			<groups />
 		</ComponentSet>
+		<!--Probes in the model.-->
+		<ProbeSet>
+			<objects />
+			<groups />
+		</ProbeSet>
 	</Model>
 </OpenSimDocument>
