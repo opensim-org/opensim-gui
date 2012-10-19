@@ -101,6 +101,10 @@ public class OpenSimContext extends OpenSimObject {
     opensimModelJNI.OpenSimContext_recreateSystemAfterSystemExists(swigCPtr, this);
   }
 
+  public void resetStateToDefault() {
+    opensimModelJNI.OpenSimContext_resetStateToDefault(swigCPtr, this);
+  }
+
   public void transformPosition(Body body, double[] offset, double[] gOffset) {
     opensimModelJNI.OpenSimContext_transformPosition(swigCPtr, this, Body.getCPtr(body), body, offset, gOffset);
   }
