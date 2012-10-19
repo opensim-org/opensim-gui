@@ -3,7 +3,6 @@ package org.opensim.console;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.prefs.Preferences;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -16,6 +15,7 @@ import org.openide.filesystems.FileUtil;
 import org.openide.loaders.DataObject;
 import org.openide.util.Exceptions;
 import org.openide.util.actions.CallableSystemAction;
+import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.Constraint;
 import org.opensim.modeling.Coordinate;
@@ -25,6 +25,7 @@ import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.SWIGTYPE_p_SimTK__State;
 import org.opensim.utils.TheApp;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.view.pub.OpenSimDB;
@@ -93,6 +94,16 @@ public final class gui {
         return OpenSimDB.getInstance().getContext(aModel);
     }
     
+    /**
+     * dump raw state
+     */
+    static public String dumpModelState(Model aModel) {
+        SWIGTYPE_p_SimTK__State stateRef = OpenSimDB.getInstance().getContext(aModel).getCurrentStateRef();
+        ArrayDouble stateVec = new ArrayDouble();
+        aModel.getStateValues(stateRef, stateVec);
+        return stateVec.toString();
+    }
+
     /**
      * getCooridnate 
      * @param aModel

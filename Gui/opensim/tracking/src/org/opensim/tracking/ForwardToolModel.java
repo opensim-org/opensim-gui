@@ -63,6 +63,13 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
 
          // Re-initialize our copy of the model
          Model model = new Model(getOriginalModel());
+         model.initSystem();
+         OpenSimContext context = OpenSimDB.getInstance().getContext(getOriginalModel());
+         // This line has the effect of copying the current state of the gui model
+         // to the copy of the model used for forward simulation so that a 
+         // simulation can "resume" from current state. If initial states are specified 
+         // this state will not be used
+         model.setPropertiesFromState(context.getCurrentStateRef());
          String tempFileName=getOriginalModel().getInputFileName();
          //int loc = tempFileName.lastIndexOf(".");
          model.setInputFileName(tempFileName);
@@ -70,8 +77,8 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
          // Update actuator set and contact force set based on settings in the tool, then call setup() and setModel()
          // setModel() will call addAnalysisSetToModel
          tool.updateModelForces(model, "");
-         ModelPose currentPose = new ModelPose("current", getOriginalModel());
-         currentPose.useAsDefaultForModel(model);
+         //ModelPose currentPose = new ModelPose("current", getOriginalModel());
+         //currentPose.useAsDefaultForModel(model);
          model.initSystem();
          model.setInputFileName("");    // Will do this after initSystem so that contact geometry can be loaded properly
          

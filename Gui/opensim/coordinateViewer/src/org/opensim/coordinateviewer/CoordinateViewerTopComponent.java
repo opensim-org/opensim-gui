@@ -531,12 +531,15 @@ final class CoordinateViewerTopComponent extends TopComponent implements Observe
       }
       boolean realize=false;
       int which = -1;
+      openSimContext.resetStateToDefault();
+      boolean isDefault =  (pose.getPoseName().equalsIgnoreCase(DEFAULT_POSE_NAME));
       for(int i=0;i<coordinateNames.size();i++){
          // Values in file
          String name=coordinateNames.get(i);
          double storedValue = (Double)coordinateValues.get(i);
          
          Coordinate coord=coords.get(name);
+         if (isDefault) storedValue = coord.getDefaultValue();
          if (coord !=null){
             openSimContext.setValue(coord, storedValue, false);
             realize=true;
@@ -549,10 +552,11 @@ final class CoordinateViewerTopComponent extends TopComponent implements Observe
             name=coordinateNames.get(which);
             storedValue = (Double)coordinateValues.get(which);
             coord=coords.get(name);
+            if (isDefault) storedValue = coord.getDefaultValue();
             openSimContext.setValue(coord, storedValue, true);             
          }
       }
-      
+      openSimContext.realizeVelocity();
    }
 
    private void updatePosesPopup() {
@@ -584,16 +588,11 @@ final class CoordinateViewerTopComponent extends TopComponent implements Observe
          JMenuItem setDefaultItem = new JMenuItem("Set Default");
          setDefaultItem.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
+                // Make a pose from currentState
+                Model mdl = OpenSimDB.getInstance().getCurrentModel();
+                ModelPose newDefaultPose = new ModelPose(mdl.getCoordinateSet(),DEFAULT_POSE_NAME, false);
+                newDefaultPose.useAsDefaultForModel(mdl);
                // Show a dialog warning that this change is persistent if model is saved
-                openSimContext.setPropertiesFromState();
-                for(int i=0; i<poses.size(); i++){
-                    final ModelPose p=poses.get(i);
-                    if (p.getPoseName().compareTo(DEFAULT_POSE_NAME)==0){
-                        Vector<String> cnames = p.getCoordinateNames();
-                        for(int c=0; c<cnames.size();c++)
-                            p.getCoordinateValues().set(c, openSimContext.getValue(aModel.getCoordinateSet().get(c)));
-                    }
-                }
             }});
          jPosesPopupMenu.add(setDefaultItem);
          if (poses.size()>0){
@@ -642,6 +641,8 @@ final class CoordinateViewerTopComponent extends TopComponent implements Observe
     private void applyPoseToModel(Model mdl, ModelPose pose) {
         Vector<String> coordinateNames=pose.getCoordinateNames();
         Vector coordinateValues=pose.getCoordinateValues();
+        openSimContext = OpenSimDB.getInstance().getContext(mdl);
+        openSimContext.resetStateToDefault();
         for(int i=0;i<coordinateNames.size();i++){
             // Values in file
             String name=coordinateNames.get(i);

@@ -107,7 +107,7 @@ public class OneJointNode extends OpenSimObjectNode {
        try {
             set.remove("parent_body");
             PropertySupport.Reflection nextNodeProp2;
-            nextNodeProp2 = new PropertySupport.Reflection(this, String.class, "getParentBodyName", "setParentBodyName");
+            nextNodeProp2 = new PropertySupport.Reflection(this, String.class, "getParentBodyName", null);
             nextNodeProp2.setPropertyEditorClass(BodyNameEditor.class);
             nextNodeProp2.setName("parent_body");
             set.put(nextNodeProp2);
