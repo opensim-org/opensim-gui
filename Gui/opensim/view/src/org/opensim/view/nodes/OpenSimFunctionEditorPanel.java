@@ -87,7 +87,7 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
 
     private void notifyListeners(FunctionModifiedEvent functionModifiedEvent) {
         //throw new UnsupportedOperationException("Not yet implemented");
-    }
+         }
 
     private String getFunctionTypeName(Function func) {
         MultiplierFunction mf = MultiplierFunction.safeDownCast(func);
@@ -676,6 +676,10 @@ private void restoreFunctionButtonrestoreFunctionActionPerformed(java.awt.event.
             } else {
                 XYSeriesCollection seriesCollection = new XYSeriesCollection();
                 xySeries = new FunctionXYSeries("function");
+                // The following mysterious line has the side effect of recomputing coefficients that are internal to the function
+                // and that are not part of the state and not updated by setting X,Y vectors or createSystem
+                xyFunction.setX(0, xyFunction.getX(0));
+                
                 for (int i = 0; i < xyFunction.getNumberOfPoints(); i++) {
                     xySeries.add(new XYDataItem(xyFunction.getX(i) * (options.XUnits.convertTo(options.XDisplayUnits)),
                             xyFunction.getY(i) * (options.YUnits.convertTo(options.YDisplayUnits))));
