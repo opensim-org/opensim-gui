@@ -187,6 +187,10 @@ public class MuscleAnalysis extends Analysis {
     return opensimModelJNI.MuscleAnalysis_getComputeMoments(swigCPtr, this);
   }
 
+  public SWIGTYPE_p_OpenSim__ArrayPtrsT_OpenSim__StorageCoordinatePair_t getMomentArmStorageArray() {
+    return new SWIGTYPE_p_OpenSim__ArrayPtrsT_OpenSim__StorageCoordinatePair_t(opensimModelJNI.MuscleAnalysis_getMomentArmStorageArray(swigCPtr, this), false);
+  }
+
   public int printResults(String aBaseName, String aDir, double aDT, String aExtension) {
     return opensimModelJNI.MuscleAnalysis_printResults__SWIG_0(swigCPtr, this, aBaseName, aDir, aDT, aExtension);
   }

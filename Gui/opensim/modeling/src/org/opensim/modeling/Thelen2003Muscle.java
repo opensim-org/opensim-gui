@@ -621,16 +621,16 @@ public class Thelen2003Muscle extends ActivationFiberLengthMuscle {
     return opensimModelJNI.Thelen2003Muscle_setForceVelocityExtrapolationThreshold(swigCPtr, this, aFvThresh);
   }
 
-  public boolean setMaximumPennationAngle(double maxPennationAngle) {
-    return opensimModelJNI.Thelen2003Muscle_setMaximumPennationAngle(swigCPtr, this, maxPennationAngle);
-  }
-
   public SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel getActivationModel() {
     return new SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel(opensimModelJNI.Thelen2003Muscle_getActivationModel(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_MuscleFixedWidthPennationModel getPennationModel() {
     return new SWIGTYPE_p_MuscleFixedWidthPennationModel(opensimModelJNI.Thelen2003Muscle_getPennationModel(swigCPtr, this), false);
+  }
+
+  public void printCurveToCSVFile(Thelen2003Muscle.CurveType ctype, String path) {
+    opensimModelJNI.Thelen2003Muscle_printCurveToCSVFile(swigCPtr, this, ctype.swigValue(), path);
   }
 
   public double computeActuation(SWIGTYPE_p_SimTK__State s) {
@@ -647,6 +647,52 @@ public class Thelen2003Muscle extends ActivationFiberLengthMuscle {
 
   public double calcInextensibleTendonActiveFiberForce(SWIGTYPE_p_SimTK__State s, double aActivation) {
     return opensimModelJNI.Thelen2003Muscle_calcInextensibleTendonActiveFiberForce(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), aActivation);
+  }
+
+  public final static class CurveType {
+    public final static Thelen2003Muscle.CurveType FiberActiveForceLength = new Thelen2003Muscle.CurveType("FiberActiveForceLength");
+    public final static Thelen2003Muscle.CurveType FiberPassiveForceLength = new Thelen2003Muscle.CurveType("FiberPassiveForceLength");
+    public final static Thelen2003Muscle.CurveType FiberForceVelocity = new Thelen2003Muscle.CurveType("FiberForceVelocity");
+    public final static Thelen2003Muscle.CurveType TendonForceLength = new Thelen2003Muscle.CurveType("TendonForceLength");
+
+    public final int swigValue() {
+      return swigValue;
+    }
+
+    public String toString() {
+      return swigName;
+    }
+
+    public static CurveType swigToEnum(int swigValue) {
+      if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
+        return swigValues[swigValue];
+      for (int i = 0; i < swigValues.length; i++)
+        if (swigValues[i].swigValue == swigValue)
+          return swigValues[i];
+      throw new IllegalArgumentException("No enum " + CurveType.class + " with value " + swigValue);
+    }
+
+    private CurveType(String swigName) {
+      this.swigName = swigName;
+      this.swigValue = swigNext++;
+    }
+
+    private CurveType(String swigName, int swigValue) {
+      this.swigName = swigName;
+      this.swigValue = swigValue;
+      swigNext = swigValue+1;
+    }
+
+    private CurveType(String swigName, CurveType swigEnum) {
+      this.swigName = swigName;
+      this.swigValue = swigEnum.swigValue;
+      swigNext = this.swigValue+1;
+    }
+
+    private static CurveType[] swigValues = { FiberActiveForceLength, FiberPassiveForceLength, FiberForceVelocity, TendonForceLength };
+    private static int swigNext = 0;
+    private final int swigValue;
+    private final String swigName;
   }
 
 }

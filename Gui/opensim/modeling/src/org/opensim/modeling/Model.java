@@ -51,6 +51,38 @@ public class Model extends ModelComponent {
       return originalModelPath + java.io.File.separator;
     else return "";
   }
+  public void adoptComponent(ModelComponent aComponent) {
+	aComponent.markAdopted();
+	addComponent(aComponent);
+  }
+  public void adoptBody(Body aBody) {
+	aBody.markAdopted();
+	addBody(aBody);
+  }
+  public void adoptConstraint(Constraint aConstraint) {
+	aConstraint.markAdopted();
+	addConstraint(aConstraint);
+  }
+  public void adoptForce(Force aForce) {
+	aForce.markAdopted();
+	addForce(aForce);
+  }
+  public void adoptProbe(Probe aProbe) {
+	aProbe.markAdopted();
+	addProbe(aProbe);
+  }
+  public void adoptContactGeometry(ContactGeometry aContactGeometry) {
+	aContactGeometry.markAdopted();
+	addContactGeometry(aContactGeometry);
+  }
+  public void adoptAnalysis(Analysis aAnalysis) {
+	aAnalysis.markAdopted();
+	addAnalysis(aAnalysis);
+  }
+  public void adoptController(Controller aController) {
+	aController.markAdopted();
+	addController(aController);
+  }
 
   public static Model safeDownCast(OpenSimObject obj) {
     long cPtr = opensimModelJNI.Model_safeDownCast(OpenSimObject.getCPtr(obj), obj);
@@ -132,6 +164,18 @@ public class Model extends ModelComponent {
 
   public SWIGTYPE_p_SimTK__State initSystem() throws java.io.IOException {
     return new SWIGTYPE_p_SimTK__State(opensimModelJNI.Model_initSystem(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_SimTK__State getWorkingState() {
+    return new SWIGTYPE_p_SimTK__State(opensimModelJNI.Model_getWorkingState(swigCPtr, this), false);
+  }
+
+  public void copyDefaultStateIntoWorkingState() {
+    opensimModelJNI.Model_copyDefaultStateIntoWorkingState(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_SimTK__State copyDefaultStateIntoWorkingStateAndReturn() {
+    return new SWIGTYPE_p_SimTK__State(opensimModelJNI.Model_copyDefaultStateIntoWorkingStateAndReturn(swigCPtr, this), false);
   }
 
   public void initStateWithoutRecreatingSystem(SWIGTYPE_p_SimTK__State state) {
@@ -620,6 +664,10 @@ public class Model extends ModelComponent {
 
   public static void LoadOpenSimLibrary(String libraryName) {
     opensimModelJNI.Model_LoadOpenSimLibrary(libraryName);
+  }
+
+  public void setDefaultControls(SWIGTYPE_p_SimTK__Vector newControls) {
+    opensimModelJNI.Model_setDefaultControls(swigCPtr, this, SWIGTYPE_p_SimTK__Vector.getCPtr(newControls));
   }
 
 }

@@ -375,12 +375,20 @@ public class Storage extends StorageInterface {
     return opensimModelJNI.Storage_append__SWIG_6(swigCPtr, this, aT, SWIGTYPE_p_SimTK__Vector.getCPtr(aY));
   }
 
+  public int append(double aT, ArrayDouble aY, boolean aCheckForDuplicateTime) {
+    return opensimModelJNI.Storage_append__SWIG_7(swigCPtr, this, aT, ArrayDouble.getCPtr(aY), aY, aCheckForDuplicateTime);
+  }
+
+  public int append(double aT, ArrayDouble aY) {
+    return opensimModelJNI.Storage_append__SWIG_8(swigCPtr, this, aT, ArrayDouble.getCPtr(aY), aY);
+  }
+
   public int append(double aT, SWIGTYPE_p_SimTK__Vec3 aY, boolean aCheckForDuplicateTime) {
-    return opensimModelJNI.Storage_append__SWIG_7(swigCPtr, this, aT, SWIGTYPE_p_SimTK__Vec3.getCPtr(aY), aCheckForDuplicateTime);
+    return opensimModelJNI.Storage_append__SWIG_9(swigCPtr, this, aT, SWIGTYPE_p_SimTK__Vec3.getCPtr(aY), aCheckForDuplicateTime);
   }
 
   public int append(double aT, SWIGTYPE_p_SimTK__Vec3 aY) {
-    return opensimModelJNI.Storage_append__SWIG_8(swigCPtr, this, aT, SWIGTYPE_p_SimTK__Vec3.getCPtr(aY));
+    return opensimModelJNI.Storage_append__SWIG_10(swigCPtr, this, aT, SWIGTYPE_p_SimTK__Vec3.getCPtr(aY));
   }
 
   public int store(int aStep, double aT, int aN, SWIGTYPE_p_double aY) {

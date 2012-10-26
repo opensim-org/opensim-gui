@@ -51,6 +51,11 @@ public class ModelVisualizer {
     return new SWIGTYPE_p_SimTK__Visualizer(opensimModelJNI.ModelVisualizer_updSimbodyVisualizer(swigCPtr, this), false);
   }
 
+  public SWIGTYPE_p_SimTK__DefaultGeometry getGeometryDecorationGenerator() {
+    long cPtr = opensimModelJNI.ModelVisualizer_getGeometryDecorationGenerator(swigCPtr, this);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_SimTK__DefaultGeometry(cPtr, false);
+  }
+
   public Model getModel() {
     return new Model(opensimModelJNI.ModelVisualizer_getModel(swigCPtr, this), false);
   }
