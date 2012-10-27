@@ -53,6 +53,7 @@ import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
 import org.opensim.swingui.ComponentTitledBorder;
 import org.opensim.utils.BrowserLauncher;
+import org.opensim.utils.TheApp;
 import org.opensim.view.ModelEvent;
 import org.opensim.view.pub.OpenSimDB;
 
@@ -93,7 +94,8 @@ public class ScaleToolPanel extends BaseToolPanel implements Observer {
       helpButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent ae) {
-                BrowserLauncher.openURL("http://simtk-confluence.stanford.edu:8080/display/OpenSim30/Scaling");
+                String path = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu:8080/display/OpenSim30/Scaling" : TheApp.getUsersGuideDir() +  "Scaling.html";
+                BrowserLauncher.openURL(path);
             }
       });
       

@@ -114,6 +114,13 @@ public final class TheApp {
         return installDir;
     }
     /**
+     * Get full path name to the directory containing the local users guide html pages
+     * @return path or null if OPENSIM_HOME is not set;
+     */
+    public static String getUsersGuideDir() {
+        return getInstallDir() + File.separator + "sdk" + File.separator + "doc" + File.separator + "UsersGuide" + File.separator;
+    }
+    /**
      * Get full path name to the file containing logo to be displayed as watermark
      * @return path or null if OPENSIM_HOME is not set;
      */

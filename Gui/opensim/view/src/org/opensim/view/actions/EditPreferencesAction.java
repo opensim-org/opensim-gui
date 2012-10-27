@@ -40,6 +40,7 @@ import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.utils.BrowserLauncher;
+import org.opensim.utils.TheApp;
 
 public final class EditPreferencesAction extends CallableSystemAction {
 
@@ -68,7 +69,8 @@ public final class EditPreferencesAction extends CallableSystemAction {
                                                 @Override
                                                 public void actionPerformed(ActionEvent ae) {
                                                     if(ae.getSource().equals(helpBtn)) {
-                                                        BrowserLauncher.openURL("http://simtk-confluence.stanford.edu:8080/display/OpenSim30/User+Preferences");
+                                                        String path = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu:8080/display/OpenSim30/User+Preferences" : TheApp.getUsersGuideDir() + "User+Preferences.html";
+                                                        BrowserLauncher.openURL(path);
                                                     }
                                                 }
                                             });

@@ -46,6 +46,7 @@ import org.opensim.modeling.InverseKinematicsTool;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
 import org.opensim.utils.BrowserLauncher;
+import org.opensim.utils.TheApp;
 import org.opensim.view.ModelEvent;
 import org.opensim.view.pub.OpenSimDB;
 
@@ -66,7 +67,8 @@ public class IKToolPanel extends BaseToolPanel implements Observer {
       helpButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent ae) {
-                BrowserLauncher.openURL("http://simtk-confluence.stanford.edu:8080/display/OpenSim30/Inverse+Kinematics");
+                String path = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu:8080/display/OpenSim30/Inverse+Kinematics" : TheApp.getUsersGuideDir() + "Inverse+Kinematics.html";
+                BrowserLauncher.openURL(path);
             }
       });
 

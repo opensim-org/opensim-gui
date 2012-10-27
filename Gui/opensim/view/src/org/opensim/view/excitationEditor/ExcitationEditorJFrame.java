@@ -427,7 +427,8 @@ public class ExcitationEditorJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jLoadMenuItemActionPerformed
 
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
-        BrowserLauncher.openURL("http://simtk-confluence.stanford.edu:8080/display/OpenSim30/Excitation+Editor");
+        String path = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu:8080/display/OpenSim30/Excitation+Editor" : TheApp.getUsersGuideDir() + "Excitation+Editor.html";
+        BrowserLauncher.openURL(path);
     }//GEN-LAST:event_helpButtonActionPerformed
     
     /**
