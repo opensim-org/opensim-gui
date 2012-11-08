@@ -329,8 +329,8 @@ public class ScaleToolModel extends Observable implements Observer {
             System.out.println("ModelScaler...");
             processedModelContext = OpenSimDB.getInstance().createContext(processedModel);
             // Pass empty path as path to subject, since we already have the measurement trial as an absolute path
-            String t=unscaledModel.getFilePath();
-            scaleTool.getMarkerPlacer().setOutputModelFileName(t+scaleTool.getMarkerPlacer().getOutputModelFileName());
+            //String t=unscaledModel.getFilePath();
+            scaleTool.getMarkerPlacer().setOutputModelFileName(scaleTool.getMarkerPlacer().getOutputModelFileName());
 
             if(!processedModelContext.processModelScale(scaleTool.getModelScaler(), processedModel, "", scaleTool.getSubjectMass())) {
                result = false;
