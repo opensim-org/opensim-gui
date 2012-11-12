@@ -84,7 +84,7 @@ public class ApplicationExit extends WindowAdapter
       if (answer == 1)
          return false;
 
-      //System.out.println("Start saving application state.");
+      System.out.println("Start saving application state.");
       try {
           ApplicationState state = ApplicationState.getInstance();
           OpenSimDBDescriptor dbDesc = new OpenSimDBDescriptor(OpenSimDB.getInstance());
@@ -92,7 +92,7 @@ public class ApplicationExit extends WindowAdapter
           ViewDBDescriptor vudbDesc = new ViewDBDescriptor(ViewDB.getInstance());
           state.addObject("ViewDB", vudbDesc);
           //release 1.8 remember plugins
-          state.addObject("Plugins", PluginsDB.getInstance());
+          state.addObject("PluginsDB", PluginsDB.getInstance());
           state.addObject("MotionsDB", new MotionsDBDescriptor(MotionsDB.getInstance()));
           XMLEncoder e = new XMLEncoder(new BufferedOutputStream(
 					new FileOutputStream("AppState.xml")));
