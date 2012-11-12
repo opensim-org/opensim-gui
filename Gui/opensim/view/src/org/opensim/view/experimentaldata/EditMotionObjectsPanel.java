@@ -439,11 +439,11 @@ private void jButtonLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     MotionObjectPointForce motionForce;
                     if (ef.specifiesPoint()){ // PointForce
                         motionForce = new MotionObjectPointForce(ExperimentalDataItemType.PointForceData, pointId, pointIndices.getitem(0));
-                        motionForce.setPointExpressedInBody(pointInBody);
                     }
                     else { // BodyForce
                         motionForce = new MotionObjectPointForce(ExperimentalDataItemType.BodyForceData, froceId, forceIndices.getitem(0));
-                    }
+                     }
+                    motionForce.setPointExpressedInBody(pointInBody);
                     motionForce.setForceAppliedToBody(bodyApplied);
                     motionForce.setName(ef.getName());
                     motionForce.setForceExpressedInBodyName(forceInBody);
