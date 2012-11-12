@@ -6,6 +6,7 @@ import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayDouble;
+import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.Function;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Model;
@@ -248,9 +249,42 @@ public class PropertyEditorAdaptor {
         return prop.toString();
     }
     
+    public void setValueStringListFromString(String aString) {
+        setValueStringListFromString(aString, true);
+    }
+    public void setValueStringListFromArrayStr(ArrayStr oldValue, boolean b) {
+         String stringStr = new String("(");
+         for(int i=0;i<oldValue.getSize(); i++) {
+             stringStr = stringStr.concat(oldValue.getitem(i));
+             stringStr = stringStr.concat(" ");
+         }
+         stringStr = stringStr.concat(")");
+         setValueStringListFromString(stringStr);
+    }
+
+    private void setValueStringListFromString(String aString, boolean allowUndo) {
+        // Parse String into an array of doubles, check that it's the right size for prop then assign
+        ArrayStr d = new ArrayStr();
+        // Remove open and close parenth if any
+        String workString= new String(aString);
+        int liveStart = workString.indexOf("(");
+        int liveEnd = workString.indexOf(")");
+        if (liveStart!=-1 && liveEnd!=-1){
+            workString = workString.substring(liveStart+1, liveEnd);
+        }
+        else if (liveStart!=liveEnd){
+          //throw new ParseException("Illegal format: Expect space separated values, optionally between matched parentheses", liveEnd);
+          return;
+        }
+        String[] splits = workString.split(" ");
+        assignValueArrayString(splits, allowUndo);
+        
+    }
+    
     public void setValueDoubleListFromString(String aString) {
         setValueDoubleListFromString(aString, true);
     }
+
     public Color getPropertyDoubleListAsColor() {
         return new Color((float) PropertyHelper.getValueDouble(prop, 0),
                 (float)PropertyHelper.getValueDouble(prop, 1),
@@ -558,6 +592,55 @@ public class PropertyEditorAdaptor {
                 public String getRedoPresentationName() {
                     return "Redo "+prop.getName()+" change";
                 }
+            };
+            ExplorerTopComponent.addUndoableEdit(auEdit);
+        }
+    }
+
+    private void assignValueArrayString(String[] splits, boolean allowUndo) {
+        int sz = prop.size();
+        final ArrayStr oldArray = new ArrayStr();
+        for (int i = 0; i < sz; i++) {
+            oldArray.append(PropertyHelper.getValueString(prop, i));
+        }
+        final ArrayStr newArray = new ArrayStr();
+        for (int i = 0; i < splits.length; i++) {
+            newArray.append(splits[i]);
+        }
+       
+        handlePropertyChange(oldArray, newArray, allowUndo);    
+    }
+    private void handlePropertyChange(final ArrayStr oldValue, final ArrayStr newValue, boolean supportUndo) {
+        //context.setPropertiesFromState();
+                    
+        
+        PropertyHelper.setValueStringArray(prop, newValue);
+           
+        handlePropertyChangeCommon();
+        if (supportUndo) {
+            AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
+
+                @Override
+                public void undo() throws CannotUndoException {
+                    super.undo();
+                    setValueStringListFromArrayStr(oldValue, false);
+                }
+
+                @Override
+                public String getUndoPresentationName() {
+                    return "Undo "+prop.getName()+" change";
+                }
+
+                @Override
+                public void redo() throws CannotRedoException {
+                    super.redo();
+                    setValueStringListFromArrayStr(newValue, true);
+                }
+                @Override
+                public String getRedoPresentationName() {
+                    return "Redo "+prop.getName()+" change";
+                }
+
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }

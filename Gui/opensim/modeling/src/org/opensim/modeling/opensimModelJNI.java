@@ -493,6 +493,7 @@ public class opensimModelJNI {
   public final static native int Storage_getDataAtTime__SWIG_0(long jarg1, Storage jarg1_, double jarg2, int jarg3, long jarg4);
   public final static native int Storage_getDataAtTime__SWIG_1(long jarg1, Storage jarg1_, double jarg2, int jarg3, long jarg4);
   public final static native int Storage_getDataAtTime__SWIG_2(long jarg1, Storage jarg1_, double jarg2, int jarg3, long jarg4, ArrayDouble jarg4_);
+  public final static native int Storage_getDataAtTime__SWIG_3(long jarg1, Storage jarg1_, double jarg2, int jarg3, long jarg4);
   public final static native int Storage_getDataColumn__SWIG_0(long jarg1, Storage jarg1_, int jarg2, long jarg3);
   public final static native int Storage_getDataColumn__SWIG_1(long jarg1, Storage jarg1_, int jarg2, long jarg3, ArrayDouble jarg3_);
   public final static native void Storage_setDataColumnToFixedValue(long jarg1, Storage jarg1_, String jarg2, double jarg3);
@@ -2937,6 +2938,8 @@ public class opensimModelJNI {
   public final static native void WrapTorus_copyData(long jarg1, WrapTorus jarg1_, long jarg2, WrapTorus jarg2_);
   public final static native String WrapTorus_getWrapTypeName(long jarg1, WrapTorus jarg1_);
   public final static native String WrapTorus_getDimensionsString(long jarg1, WrapTorus jarg1_);
+  public final static native long WrapTorus_getInnerRadius(long jarg1, WrapTorus jarg1_);
+  public final static native long WrapTorus_getOuterRadius(long jarg1, WrapTorus jarg1_);
   public final static native void WrapTorus_scale(long jarg1, WrapTorus jarg1_, long jarg2);
   public final static native void WrapTorus_connectToModelAndBody(long jarg1, WrapTorus jarg1_, long jarg2, Model jarg2_, long jarg3, Body jarg3_);
   public final static native long WrapEllipsoid_safeDownCast(long jarg1, OpenSimObject jarg1_);
@@ -6222,6 +6225,8 @@ public class opensimModelJNI {
   public final static native void PropertyHelper_setValueTransform(double jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
   public final static native double PropertyHelper_getValueVec3(long jarg1, AbstractProperty jarg1_, int jarg2);
   public final static native void PropertyHelper_setValueVec3(double jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
+  public final static native long PropertyHelper_getValueStringArray(long jarg1, AbstractProperty jarg1_);
+  public final static native void PropertyHelper_setValueStringArray(long jarg1, AbstractProperty jarg1_, long jarg2, ArrayStr jarg2_);
   public final static native long new_PropertyHelper();
   public final static native void delete_PropertyHelper(long jarg1);
   public final static native void delete_SimtkLogCallback(long jarg1);

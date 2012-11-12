@@ -131,6 +131,14 @@ public class PropertyHelper {
     opensimModelJNI.PropertyHelper_setValueVec3(v, AbstractProperty.getCPtr(p), p, index);
   }
 
+  public static ArrayStr getValueStringArray(AbstractProperty p) {
+    return new ArrayStr(opensimModelJNI.PropertyHelper_getValueStringArray(AbstractProperty.getCPtr(p), p), true);
+  }
+
+  public static void setValueStringArray(AbstractProperty p, ArrayStr aStringArray) {
+    opensimModelJNI.PropertyHelper_setValueStringArray(AbstractProperty.getCPtr(p), p, ArrayStr.getCPtr(aStringArray), aStringArray);
+  }
+
   public PropertyHelper() {
     this(opensimModelJNI.new_PropertyHelper(), true);
   }

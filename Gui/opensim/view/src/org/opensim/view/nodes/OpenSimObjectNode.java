@@ -174,6 +174,14 @@ public class OpenSimObjectNode extends OpenSimNode {
             nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
             nextNodeProp.setValue("suppressCustomEditor", Boolean.FALSE);
        }
+       else if (apType.equalsIgnoreCase("string")){
+            nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, this),
+                String.class,
+                "getPropertyAsString",//mapPropertyEnumToGetters.get(currentPropType),
+                "setValueStringListFromString");//mapPropertyEnumToSetters.get(currentPropType));
+            nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
+            nextNodeProp.setValue("suppressCustomEditor", Boolean.FALSE);
+       }
        else { // fall through, unexpected, should handle arrays of strings
            nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, this),
                 String.class,

@@ -77,6 +77,14 @@ public class WrapTorus extends WrapObject {
     return opensimModelJNI.WrapTorus_getDimensionsString(swigCPtr, this);
   }
 
+  public SWIGTYPE_p_SimTK__Real getInnerRadius() {
+    return new SWIGTYPE_p_SimTK__Real(opensimModelJNI.WrapTorus_getInnerRadius(swigCPtr, this), true);
+  }
+
+  public SWIGTYPE_p_SimTK__Real getOuterRadius() {
+    return new SWIGTYPE_p_SimTK__Real(opensimModelJNI.WrapTorus_getOuterRadius(swigCPtr, this), true);
+  }
+
   public void scale(SWIGTYPE_p_SimTK__Vec3 aScaleFactors) {
     opensimModelJNI.WrapTorus_scale(swigCPtr, this, SWIGTYPE_p_SimTK__Vec3.getCPtr(aScaleFactors));
   }
