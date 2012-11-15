@@ -4034,7 +4034,6 @@ public class opensimModelJNI {
   public final static native long Constraint_clone(long jarg1, Constraint jarg1_);
   public final static native String Constraint_getConcreteClassName(long jarg1, Constraint jarg1_);
   public final static native void delete_Constraint(long jarg1);
-  public final static native void Constraint_copyData(long jarg1, Constraint jarg1_, long jarg2, Constraint jarg2_);
   public final static native void Constraint_updateFromConstraint(long jarg1, Constraint jarg1_, long jarg2, long jarg3, Constraint jarg3_);
   public final static native boolean Constraint_isDisabled(long jarg1, Constraint jarg1_, long jarg2);
   public final static native boolean Constraint_setDisabled(long jarg1, Constraint jarg1_, long jarg2, boolean jarg3);

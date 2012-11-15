@@ -57,10 +57,6 @@ public class Constraint extends ModelComponent {
     return opensimModelJNI.Constraint_getConcreteClassName(swigCPtr, this);
   }
 
-  public void copyData(Constraint aConstraint) {
-    opensimModelJNI.Constraint_copyData(swigCPtr, this, Constraint.getCPtr(aConstraint), aConstraint);
-  }
-
   public void updateFromConstraint(SWIGTYPE_p_SimTK__State s, Constraint aConstraint) {
     opensimModelJNI.Constraint_updateFromConstraint(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(s), Constraint.getCPtr(aConstraint), aConstraint);
   }
