@@ -28,7 +28,7 @@ modeling.OpenSimObject.setDebugLevel(3)
 addModel(getInstallDir()+"/Models/BothLegs/BothLegs.osim")
 
 # Load a motion
-loadMotion(getScriptsDir()+"/testData/BothLegsWalk.mot")
+loadMotion(getInstallDir()+"/Models/BothLegs/BothLegsWalk.mot")
 
 # Get a handle to the current model
 myModel = getCurrentModel()
