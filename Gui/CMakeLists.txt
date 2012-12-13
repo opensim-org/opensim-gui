@@ -24,6 +24,11 @@ INSTALL(DIRECTORY Internal DESTINATION Models PATTERN ".svn" EXCLUDE)
 
 INSTALL_FILES(/plugins/ FILES plugins/readme.txt)
 
+# Install Tutorials to doc folder
+FILE(GLOB TUTORIAL_FILES Documentation/Tutorials/*.pdf)
+INSTALL_FILES(/doc/ FILES  ${TUTORIAL_FILES})
+# MESSAGE("TUTORIAL_FILES="${TUTORIAL_FILES})
+
 # Find Java and create a jdk/jre directory and copy jre to it
 INCLUDE(${CMAKE_ROOT}/Modules/FindJava.cmake)
 SET(JRE_TO_PACKAGE "" CACHE PATH "jdk folder to include with distro")
