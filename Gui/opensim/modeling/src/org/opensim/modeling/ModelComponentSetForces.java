@@ -105,8 +105,8 @@ public class ModelComponentSetForces extends SetForces {
     opensimModelJNI.ModelComponentSetForces_invokeSetPropertiesFromState(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state));
   }
 
-  public void invokeGenerateDecorations(boolean fixed, SWIGTYPE_p_OpenSim__ModelDisplayHints hints, SWIGTYPE_p_SimTK__State state, SWIGTYPE_p_SimTK__Array_T_SimTK__DecorativeGeometry_t appendToThis) {
-    opensimModelJNI.ModelComponentSetForces_invokeGenerateDecorations(swigCPtr, this, fixed, SWIGTYPE_p_OpenSim__ModelDisplayHints.getCPtr(hints), SWIGTYPE_p_SimTK__State.getCPtr(state), SWIGTYPE_p_SimTK__Array_T_SimTK__DecorativeGeometry_t.getCPtr(appendToThis));
+  public void invokeGenerateDecorations(boolean fixed, ModelDisplayHints hints, SWIGTYPE_p_SimTK__State state, SWIGTYPE_p_SimTK__Array_T_SimTK__DecorativeGeometry_t appendToThis) {
+    opensimModelJNI.ModelComponentSetForces_invokeGenerateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, SWIGTYPE_p_SimTK__State.getCPtr(state), SWIGTYPE_p_SimTK__Array_T_SimTK__DecorativeGeometry_t.getCPtr(appendToThis));
   }
 
 }

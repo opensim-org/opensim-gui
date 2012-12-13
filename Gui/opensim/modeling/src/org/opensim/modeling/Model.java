@@ -126,12 +126,12 @@ public class Model extends ModelComponent {
     opensimModelJNI.Model_cleanup(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_OpenSim__ModelDisplayHints getDisplayHints() {
-    return new SWIGTYPE_p_OpenSim__ModelDisplayHints(opensimModelJNI.Model_getDisplayHints(swigCPtr, this), false);
+  public ModelDisplayHints getDisplayHints() {
+    return new ModelDisplayHints(opensimModelJNI.Model_getDisplayHints(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_OpenSim__ModelDisplayHints updDisplayHints() {
-    return new SWIGTYPE_p_OpenSim__ModelDisplayHints(opensimModelJNI.Model_updDisplayHints(swigCPtr, this), false);
+  public ModelDisplayHints updDisplayHints() {
+    return new ModelDisplayHints(opensimModelJNI.Model_updDisplayHints(swigCPtr, this), false);
   }
 
   public void setUseVisualizer(boolean visualize) {
@@ -642,8 +642,8 @@ public class Model extends ModelComponent {
     opensimModelJNI.Model_setPropertiesFromState(swigCPtr, this, SWIGTYPE_p_SimTK__State.getCPtr(state));
   }
 
-  public void generateDecorations(boolean fixed, SWIGTYPE_p_OpenSim__ModelDisplayHints hints, SWIGTYPE_p_SimTK__State state, SWIGTYPE_p_SimTK__Array_T_SimTK__DecorativeGeometry_t appendToThis) {
-    opensimModelJNI.Model_generateDecorations(swigCPtr, this, fixed, SWIGTYPE_p_OpenSim__ModelDisplayHints.getCPtr(hints), SWIGTYPE_p_SimTK__State.getCPtr(state), SWIGTYPE_p_SimTK__Array_T_SimTK__DecorativeGeometry_t.getCPtr(appendToThis));
+  public void generateDecorations(boolean fixed, ModelDisplayHints hints, SWIGTYPE_p_SimTK__State state, SWIGTYPE_p_SimTK__Array_T_SimTK__DecorativeGeometry_t appendToThis) {
+    opensimModelJNI.Model_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, SWIGTYPE_p_SimTK__State.getCPtr(state), SWIGTYPE_p_SimTK__Array_T_SimTK__DecorativeGeometry_t.getCPtr(appendToThis));
   }
 
   public ArrayStr getStateVariableNames() {

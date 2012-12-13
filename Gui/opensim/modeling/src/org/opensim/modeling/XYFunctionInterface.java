@@ -165,9 +165,9 @@ public class XYFunctionInterface extends OpenSimObject {
     return (cPtr == 0) ? null : new SimmSpline(cPtr, false);
   }
 
-  public SWIGTYPE_p_GCVSpline getGCVSpline() {
+  public GCVSpline getGCVSpline() {
     long cPtr = opensimModelJNI.XYFunctionInterface_getGCVSpline(swigCPtr, this);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_GCVSpline(cPtr, false);
+    return (cPtr == 0) ? null : new GCVSpline(cPtr, false);
   }
 
   public final static class FunctionType {

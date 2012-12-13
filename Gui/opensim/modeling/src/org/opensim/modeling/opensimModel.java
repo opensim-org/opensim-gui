@@ -53,6 +53,14 @@ public class opensimModel implements opensimModelConstants {
     return opensimModelJNI.IO_STRLEN_get();
   }
 
+  public static int getPointKinematicsNAME_LENGTH() {
+    return opensimModelJNI.PointKinematicsNAME_LENGTH_get();
+  }
+
+  public static int getPointKinematicsBUFFER_LENGTH() {
+    return opensimModelJNI.PointKinematicsBUFFER_LENGTH_get();
+  }
+
   public static void setMapCxxExceptionsToJava(boolean value) {
     opensimModelJNI.mapCxxExceptionsToJava_set(value);
   }
