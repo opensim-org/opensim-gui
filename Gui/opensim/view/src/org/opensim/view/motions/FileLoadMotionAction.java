@@ -81,7 +81,7 @@ public final class FileLoadMotionAction extends CallableSystemAction {
        return (OpenSimDB.getInstance().getCurrentModel()==selectedModelNode.getModel());
    }
 
-    public void loadMotion(String fileName) {
+    static public void loadMotion(String fileName) {
            MotionsDB.getInstance().loadMotionFile(fileName, true);
     }
    

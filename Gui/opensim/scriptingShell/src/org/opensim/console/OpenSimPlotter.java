@@ -7,10 +7,14 @@ package org.opensim.console;
 import java.io.IOException;
 import javax.swing.JFrame;
 import org.openide.util.Exceptions;
+import org.opensim.modeling.Storage;
 import org.opensim.plotter.JPlotterPanel;
 import org.opensim.plotter.PlotCurve;
 import org.opensim.plotter.PlotterSourceFile;
+import org.opensim.plotter.PlotterSourceMotion;
 import org.opensim.utils.DialogUtils;
+import org.opensim.view.motions.FileLoadMotionAction;
+import org.opensim.view.motions.MotionsDB;
 
 /**
  *
@@ -72,6 +76,14 @@ public final class OpenSimPlotter {
         }
         return null;
     }
+    
+    static public PlotterSourceMotion addMotionSource(JPlotterPanel plotter, String motionFilename) {
+        FileLoadMotionAction.loadMotion(motionFilename);
+        Storage mot = MotionsDB.getInstance().getCurrentMotion(0).motion;
+        PlotterSourceMotion src = new PlotterSourceMotion(mot);
+        plotter.getPlotterModel().addMotion(mot);
+        return src;
+    }
     /**
      * Create a new curve on the passed in Plotter panel, using domain and range specified
      * as column labels in the passed in data source
@@ -98,6 +110,21 @@ public final class OpenSimPlotter {
     static public PlotCurve addAnalysisCurve(JPlotterPanel panel, String qName, 
                 String muscleName, String genCoordName) {
         return panel.showAnalysisCurve(qName, muscleName, genCoordName);
+    }
+    /**
+     * Create a new curve by running the MuscleAnalysis to plot built quantity against passed in motion file
+     * 
+     * @param panel
+     * @param qName
+     * @param muscleName
+     * @param genCoordName
+     * @return 
+     */
+    //  sourceY=(new PlotterSourceAnalysis(currentModel, plotterModel.getStorage(internalName+coordinateName, currentModel), qName));
+
+    static public PlotCurve addMotionCurve(JPlotterPanel panel, String qName, 
+                String muscleName, PlotterSourceMotion dataSource) {
+        return panel.showMotionCurve(qName, muscleName, dataSource);
     }
     /**
      * Set the Legend for the passed in curve

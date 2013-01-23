@@ -355,7 +355,7 @@ public class PlotterModel {
        return models2AnalyzeToolInstances.get(model);
     }
 
-   PlotterSourceInterface addMotion(Storage nextMotion) {
+   public PlotterSourceInterface addMotion(Storage nextMotion) {
       ArrayList<PlotterSourceMotion> loadedMotions=getLoadedMotionSources();
       for(int i=0; i<loadedMotions.size(); i++){
          if (loadedMotions.get(i).getStorage().equals(nextMotion))

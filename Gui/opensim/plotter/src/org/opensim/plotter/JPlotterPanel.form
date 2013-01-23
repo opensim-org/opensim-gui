@@ -637,8 +637,8 @@
                     <Property name="text" type="java.lang.String" value="Y-Quantity..."/>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="yQuantityButtonMouseReleased"/>
                     <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="yQuantityButtonMousePressed"/>
+                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="yQuantityButtonMouseReleased"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jMuscleSelectButton">

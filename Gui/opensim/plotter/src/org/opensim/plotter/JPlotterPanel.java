@@ -96,6 +96,38 @@ public class JPlotterPanel extends javax.swing.JPanel
         getChartPanel().getChart().setTitle(title);
     }
 
+    public PlotCurve showMotionCurve(String qName, String muscleName, PlotterSourceMotion dataSource) {
+       PlotCurve plotCurve=null;
+       openSimContext = OpenSimDB.getInstance().getContext(currentModel);
+       if (qName.toLowerCase().startsWith("moment")){
+           String coordName = qName.substring(qName.indexOf(".")+1);
+           // Could be a moment or momentArm plot
+           useMuscles(true);
+           if (qName.toLowerCase().startsWith("momentarm")){
+               sourceY=(new PlotterSourceAnalysis(currentModel, plotterModel.getStorage("MomentArm_"+coordName, currentModel), "moment arm"));
+           }
+           else {   // Just Moment
+               sourceY=(new PlotterSourceAnalysis(currentModel, plotterModel.getStorage("Moment_"+coordName, currentModel), "moment"));               
+           }
+       }
+       else
+            populateYQty(qName);
+       sourceX = dataSource;
+       domainName = dataSource.getDisplayName();
+       //populateXQty(dataSource.getDisplayName());
+       rangeNames = new String[]{muscleName};
+       jPlotterAddCurveButtonActionPerformed(null);
+       plotCurve = currentCurve;
+       refreshPanel(plotCurve, muscleName);
+       return plotCurve;
+    }
+
+    private void refreshPanel(PlotCurve plotCurve, String muscleName) {
+        plotCurve.setLegend(muscleName);
+        plotCurve.getCurveSeries().fireSeriesChanged();
+        plotterModel.fireChangeEvent(getNodeForCurve(plotCurve));
+    }
+
    public enum PlotDataSource {FileSource, MotionSource, AnalysisSource};
    JPlotterQuantitySelector xSelector = null;
    String currentCurveTitle="";
@@ -1374,6 +1406,7 @@ public class JPlotterPanel extends javax.swing.JPanel
         plotCurve = plotterModel.addCurveSingleRangeName(title, settings,
                 sourceX, getDomainName(),                 sourceY, rangeNames[0]);
         makeCurveCurrent(plotCurve);
+        plotterModel.fireChangeEvent(getNodeForCurve(plotCurve));
         // Observe motionsDB 
         //MotionsDB.getInstance().addObserver(this);
       return plotCurve;
@@ -1544,7 +1577,7 @@ public class JPlotterPanel extends javax.swing.JPanel
       }
       tool.setPrintResultFiles(false);
       //analysisSource.getStorage().purge();
-      //tool.print("PlotterTool"+key+".xml");
+      tool.print("PlotterTool.xml");
       try {
          tool.run(true);
       } catch (IOException ex) {
@@ -1878,6 +1911,14 @@ public class JPlotterPanel extends javax.swing.JPanel
    public void setModelChanged(boolean modelChanged) {
       this.modelChanged = modelChanged;
    }
+   
+   /*
+    * Locate the node corresponding to the passed in PlotCurve
+    */
+   public DefaultMutableTreeNode getNodeForCurve(PlotCurve cv) {
+      PlotCurveNode figNode =  ((PlotTreeModel)plotterModel.getPlotTreeModel()).findCurveNode(cv);
+      return figNode;
+   }
    /*
     * This function is responsible for populating and handling the callbacks for the context
     * menu of the tree of plots shown on the right in the plotter dialog.
@@ -2107,6 +2148,7 @@ public class JPlotterPanel extends javax.swing.JPanel
          outputStateVector.setStates(statesFromMotion.getTime(), numStates, buffer);
          outputStorage.append(outputStateVector);
       }
+      outputStorage.print("motion2State.sto");
       return outputStorage;
    }
 
@@ -2149,11 +2191,24 @@ public class JPlotterPanel extends javax.swing.JPanel
     public PlotCurve showAnalysisCurve(String qName, String muscleName, String genCoordName) {
        PlotCurve plotCurve=null;
        openSimContext = OpenSimDB.getInstance().getContext(currentModel);
-       populateYQty(qName);
+       if (qName.toLowerCase().startsWith("moment")){
+           String coordName = qName.substring(qName.indexOf(".")+1);
+           // Could be a moment or momentArm plot
+           useMuscles(true);
+           if (qName.toLowerCase().startsWith("momentarm")){
+               sourceY=(new PlotterSourceAnalysis(currentModel, plotterModel.getStorage("MomentArm_"+coordName, currentModel), "moment arm"));
+           }
+           else {   // Just Moment
+               sourceY=(new PlotterSourceAnalysis(currentModel, plotterModel.getStorage("Moment_"+coordName, currentModel), "moment"));               
+           }
+       }
+       else
+            populateYQty(qName);
        populateXQty(genCoordName);
        rangeNames = new String[]{muscleName};
        jPlotterAddCurveButtonActionPerformed(null);
        plotCurve = currentCurve;
+       refreshPanel(plotCurve, muscleName);
        return plotCurve;
     }
     private void populateYQty(final String qtyName) {
