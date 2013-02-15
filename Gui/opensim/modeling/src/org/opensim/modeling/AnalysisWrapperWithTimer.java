@@ -29,14 +29,14 @@ public class AnalysisWrapperWithTimer extends AnalysisWrapper {
         super(model);
     }
     
-    public int step(SWIGTYPE_p_SimTK__State s, int stepNumber) {
+    public int step(State s, int stepNumber) {
         int retValue;
         
         retValue = super.step(s, stepNumber);
         return retValue;
     }
 
-    public int begin(SWIGTYPE_p_SimTK__State s) {
+    public int begin(State s) {
         int retValue;
         
         retValue = super.begin(s);
@@ -48,7 +48,7 @@ public class AnalysisWrapperWithTimer extends AnalysisWrapper {
         aTimer = new Timer();
     }
 
-    public int end(SWIGTYPE_p_SimTK__State s) {
+    public int end(State s) {
         int retValue=0;
         
         //retValue = super.end(s);

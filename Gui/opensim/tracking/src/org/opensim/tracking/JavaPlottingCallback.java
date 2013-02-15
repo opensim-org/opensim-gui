@@ -36,7 +36,7 @@ import org.opensim.modeling.AnalysisWrapperWithTimer;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.CMCTool;
 import org.opensim.modeling.Model;
-import org.opensim.modeling.SWIGTYPE_p_SimTK__State;
+import org.opensim.modeling.State;
 import org.opensim.modeling.Storage;
 import org.opensim.plotter.JPlotterPanel;
 import org.opensim.plotter.PlotCurve;
@@ -69,7 +69,7 @@ public class JavaPlottingCallback extends AnalysisWrapperWithTimer{
         //context = OpenSimDB.getInstance().getContext(aModelForDisplay);
     }
     
-  public int step(SWIGTYPE_p_SimTK__State s, int i) {
+  public int step(State s, int i) {
       super.step(s, i);
       processStep(getSimulationTime());
       return 0;
@@ -97,7 +97,7 @@ public class JavaPlottingCallback extends AnalysisWrapperWithTimer{
        }
    }
 
- public int begin(SWIGTYPE_p_SimTK__State s) {
+ public int begin(State s) {
         int retValue=0;
         
         //retValue = super.begin(aStep, aDT, aT, aX, aY);

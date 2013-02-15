@@ -25,7 +25,7 @@ import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.SWIGTYPE_p_SimTK__State;
+import org.opensim.modeling.State;
 import org.opensim.utils.TheApp;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.view.pub.OpenSimDB;
@@ -98,7 +98,7 @@ public final class gui {
      * dump raw state
      */
     static public String dumpModelState(Model aModel) {
-        SWIGTYPE_p_SimTK__State stateRef = OpenSimDB.getInstance().getContext(aModel).getCurrentStateRef();
+        State stateRef = OpenSimDB.getInstance().getContext(aModel).getCurrentStateRef();
         ArrayDouble stateVec = new ArrayDouble();
         aModel.getStateValues(stateRef, stateVec);
         return stateVec.toString();

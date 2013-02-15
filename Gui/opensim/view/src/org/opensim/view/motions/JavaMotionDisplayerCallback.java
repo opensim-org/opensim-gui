@@ -168,7 +168,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
       }
    }
    
-   public void processStep(SWIGTYPE_p_SimTK__State s, int stepNumber) {
+   public void processStep(State s, int stepNumber) {
       if(!getOn()) return;
       if (!proceed(stepNumber)) return;
       super.step(s, stepNumber);
@@ -230,14 +230,14 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
         return true;
     }
 
-    public int step(SWIGTYPE_p_SimTK__State s, int stepNumber) {
+    public int step(State s, int stepNumber) {
         int retValue;
         retValue = super.step(s, stepNumber);
         processStep(s, stepNumber);
         return retValue;
     }
 
-    public int begin(SWIGTYPE_p_SimTK__State s) {
+    public int begin(State s) {
         int retValue=0;
         if (!isInitialized()){
 			initializeTimer();
