@@ -7,6 +7,7 @@ package org.opensim.console;
 import java.io.IOException;
 import javax.swing.JFrame;
 import org.openide.util.Exceptions;
+import org.opensim.modeling.Function;
 import org.opensim.modeling.Storage;
 import org.opensim.plotter.JPlotterPanel;
 import org.opensim.plotter.PlotCurve;
@@ -45,7 +46,7 @@ import org.opensim.view.motions.MotionsDB;
  */
 public final class OpenSimPlotter {
     /**
-     * Create a blank Plotter Window/Panel with specified Title
+     * Create a blank PlotterPanel with specified title
      * @param title
      * @return a reference to a new Plotter Window for later use
      */
@@ -59,12 +60,13 @@ public final class OpenSimPlotter {
         return plotterPanel;
     }
     /**
-     * Add data source (e.g. File or motion to available sources of the passed in Plotter Panel
+     * Add data source (File) to the lis of sources available to the passed in Plotter Panel
      * This allows for reusing the same data source to recreate multiple curves rather than loading it anew
+     * for every curve.
      * 
-     * @param plotter
-     * @param dataFilename
-     * @return 
+     * @param plotter PlotterPanel to use
+     * @param dataFilename Full path of the file name to be used as a data source (.sto or .mot are expected)
+     * @return a reference to the datasouce that was opened for later use when plotting curves
      */
     static public PlotterSourceFile addDataSource(JPlotterPanel plotter, String dataFilename){
         try {
@@ -77,6 +79,15 @@ public final class OpenSimPlotter {
         return null;
     }
     
+    /**
+     * Add notion source (.mot) to the list of sources available to the passed in Plotter Panel
+     * This allows for reusing the same data source to create multiple curves rather than loading files anew
+     * for every curve. File header indicates whether angular data is in radians or degrees
+     * 
+     * @param plotter PlotterPanel to use
+     * @param motionFilename Full path of the file name to be used as a data source (.mot is expected)
+     * @return a reference to the datasouce that was opened for later use when plotting curves
+     */
     static public PlotterSourceMotion addMotionSource(JPlotterPanel plotter, String motionFilename) {
         FileLoadMotionAction.loadMotion(motionFilename);
         Storage mot = MotionsDB.getInstance().getCurrentMotion(0).motion;
@@ -86,26 +97,37 @@ public final class OpenSimPlotter {
     }
     /**
      * Create a new curve on the passed in Plotter panel, using domain and range specified
-     * as column labels in the passed in data source
+     * as column labels in the passed in data source. File header indicates whether angular data is in radians or degrees
      * 
-     * @param panel
-     * @param src
-     * @param domain
-     * @param range
-     * @return 
+     * @param panel: PlotterPanel to render the curve on
+     * @param src: data source used to obtain data
+     * @param domain: column label corresponding to domain
+     * @param range: column label corresponding to range
+     * @return handle to the created curve (range vs. domain) curve is rendered as a side-effect
      */
     static public PlotCurve addCurve(JPlotterPanel panel, PlotterSourceFile src, 
             String domain, String range){
           return panel.plotDataFromSource(src, domain, range);
     }
     /**
-     * Create a new curve by running the MuscleAnalysis to plot built in quantities 
+     * Create a new curve by running the MuscleAnalysis to plot built in quantities. 
      * 
-     * @param panel
-     * @param qName
-     * @param muscleName
-     * @param genCoordName
-     * @return 
+     * @param panel: PlotterPanel to render the curve on
+     * @param qName: quantity to plot, vaid options are: 
+     * moment.${genCoordName}, 
+     * momentarm.${genCoordName}, 
+     * "Length",
+     * "FiberLength",
+     * "TendonLength",
+     * "NormalizedFiberLength",
+     * "TendonForce",
+     * "ActiveFiberForce",
+     * "PassiveFiberForce",
+     * "FiberForce"
+     * 
+     * @param muscleName: name of a muscle of interest as it appears in the model
+     * @param genCoordName: name of generalized coordinate as it appears in model
+     * @return handle to PlotCurve
      */
     static public PlotCurve addAnalysisCurve(JPlotterPanel panel, String qName, 
                 String muscleName, String genCoordName) {
@@ -115,10 +137,20 @@ public final class OpenSimPlotter {
      * Create a new curve by running the MuscleAnalysis to plot built quantity against passed in motion file
      * 
      * @param panel
-     * @param qName
-     * @param muscleName
-     * @param genCoordName
-     * @return 
+     * @param qName: quantity name vaid options are: 
+     * moment.${genCoordName}, 
+     * momentarm.${genCoordName}, 
+     * "Length",
+     * "FiberLength",
+     * "TendonLength",
+     * "NormalizedFiberLength",
+     * "TendonForce",
+     * "ActiveFiberForce",
+     * "PassiveFiberForce",
+     * "FiberForce"
+     * @param muscleName: name of a muscle of interest as it appears in the model
+     * @param genCoordName: name of generalized coordinate as it appears in model
+     * @return handle to PlotCurve
      */
     //  sourceY=(new PlotterSourceAnalysis(currentModel, plotterModel.getStorage(internalName+coordinateName, currentModel), qName));
 
@@ -128,19 +160,19 @@ public final class OpenSimPlotter {
     }
     /**
      * Set the Legend for the passed in curve
-     * @param cv
-     * @param legend 
+     * @param cv : handle to PlotCurve
+     * @param legend: new String for legend
      */
     static public void setCurveLegend(PlotCurve cv, String legend) {
         cv.setLegend(legend);
     }
     /**
      * Set the color to use for the passed in curve as RGB
-     * @param panel
-     * @param series
-     * @param r
-     * @param g
-     * @param b 
+     * @param panel: Plotter panel
+     * @param series: Curve number
+     * @param r :red color component 0,1
+     * @param g: green color component 0,1
+     * @param b: blue color component 0, 1
      */
     static public void setCurveColor(JPlotterPanel panel, int series, float r, float g, float b){
         panel.getPlotterModel().setColorRGB(series, r, g, b);
@@ -148,8 +180,8 @@ public final class OpenSimPlotter {
     /**
      * Export all the data on the plotter window to an sto file
      * 
-     * @param panel
-     * @param fileName 
+     * @param panel: reference to the PlotterPanel whose curves are being exported.
+     * @param fileName: Name of output file name to export data to.
      */
     static public void exportData(JPlotterPanel panel, String fileName){
         panel.getPlotterModel().getCurrentPlot().exportData(fileName);
