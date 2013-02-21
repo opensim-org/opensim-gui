@@ -39,7 +39,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -63,6 +62,8 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import org.jfree.chart.ChartPanel;
+import org.jfree.chart.axis.ValueAxis;
+import org.jfree.data.xy.XYSeries;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.openide.util.Exceptions;
@@ -126,6 +127,28 @@ public class JPlotterPanel extends javax.swing.JPanel
         plotCurve.setLegend(muscleName);
         plotCurve.getCurveSeries().fireSeriesChanged();
         plotterModel.fireChangeEvent(getNodeForCurve(plotCurve));
+    }
+
+    public PlotCurve showFunctionCurve(Function opensimFunction) {
+        ValueAxis dAxis = getChartPanel().getChart().getXYPlot().getDomainAxis();
+        double dmin = dAxis.getLowerBound();
+        double dmax = dAxis.getUpperBound();
+        ArrayList xValues = new ArrayList();
+        ArrayList yValues = new ArrayList();
+        //XYSeries curveSeries = new XYSeries("F="+opensimFunction.getName(), false, true);
+        for (int i=0; i<=100; i++){
+            double xValue = dmin + i*0.01*(dmax-dmin);
+            org.opensim.modeling.Vector parms = new org.opensim.modeling.Vector(1, xValue);
+            double yValue = opensimFunction.calcValue(parms);
+            xValues.add(xValue);
+            yValues.add(yValue);
+        }
+        PlotCurveSettings settings = new PlotCurveSettings(this);
+        settings.setName(opensimFunction.getName());
+        PlotCurve cv = new PlotCurve(settings, xValues, yValues, opensimFunction.getName());
+        plotterModel.getCurrentPlot().add(cv);
+        plotterModel.getPlotTreeModel().addPlotCurveToTree(cv);
+        return cv;
     }
 
    public enum PlotDataSource {FileSource, MotionSource, AnalysisSource};

@@ -159,6 +159,15 @@ public final class OpenSimPlotter {
         return panel.showMotionCurve(qName, muscleName, dataSource);
     }
     /**
+     * Create a new curve representing an arbitrary OpenSimFunction and add it to the passed in plotter panel
+     * @param panel: panel to add the curve to
+     * @param function: Any OpenSim function
+     * @return a handle to the created curve 
+     */
+    static public PlotCurve addFunctionCurve(JPlotterPanel panel, Function function) {
+        return panel.showFunctionCurve(function);
+    }
+    /**
      * Set the Legend for the passed in curve
      * @param cv : handle to PlotCurve
      * @param legend: new String for legend

@@ -239,7 +239,7 @@ public class PlotterModel {
         dPlot.getRangeAxis().setLabel(newLabel);
     }
 
-   TreeModel getPlotTreeModel() {
+   PlotTreeModel getPlotTreeModel() {
       return plotTreeModel;
    }
    /**

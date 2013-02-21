@@ -30,6 +30,7 @@ package org.opensim.plotter;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Vector;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.XYPlot;
@@ -128,7 +129,17 @@ public class PlotCurve {
        // Make description here after everything is set
        curveSeries.setDescription(makeDescription());
     }
-
+   public PlotCurve(PlotCurveSettings plotCurveSettings, 
+           ArrayList xValues, 
+           ArrayList yValues, String stringy) {
+       XYSeries curveSeries = new XYSeries(plotCurveSettings.getName(), false, true);
+       setCurveSeries(curveSeries);   // user named curves
+       for (int i = 0; i<xValues.size();i++){
+           getCurveSeries().add((Double)xValues.get(i), (Double)yValues.get(i));//add the computed values to the series
+       }
+       curveSeries.setDescription(plotCurveSettings.getName());
+       rangeNames = new String[]{stringy};
+   }
    private ArrayDouble getDataArrayFromStorage(final Storage storage, final String colName, boolean isDomain, boolean convertAnglesToDegrees ) {
       ArrayDouble Array = new ArrayDouble(storage.getSize());
       if (colName.equalsIgnoreCase("time")){
@@ -376,6 +387,5 @@ public class PlotCurve {
    public void setYLabel(String yLabel) {
       this.yLabel = yLabel;
    }
-   
  
 }
