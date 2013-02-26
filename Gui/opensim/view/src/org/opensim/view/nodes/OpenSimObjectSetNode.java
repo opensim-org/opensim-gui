@@ -29,12 +29,13 @@
 package org.opensim.view.nodes;
 
 import javax.swing.Action;
+import org.openide.actions.NewAction;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
+import org.openide.util.actions.SystemAction;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.ObjectDisplayHideAction;
 import org.opensim.view.ObjectDisplayShowAction;
-import org.opensim.view.ObjectGenericReviewAction;
 import org.opensim.view.ObjectSetDisplayMenuAction;
 import org.opensim.view.pub.ViewDB;
 
@@ -114,7 +115,9 @@ public class OpenSimObjectSetNode extends OpenSimObjectNode {
       try {
          objectNodeActions = new Action[]  {
                                           (ObjectSetDisplayMenuAction) ObjectSetDisplayMenuAction.findObject(
-                 (Class)Class.forName("org.opensim.view.ObjectSetDisplayMenuAction"), true)};
+                 (Class)Class.forName("org.opensim.view.ObjectSetDisplayMenuAction"), true),
+                 //SystemAction.get(NewAction.class)
+         };
       } catch (ClassNotFoundException ex) {
          ex.printStackTrace();
          objectNodeActions = new Action[] {null};
