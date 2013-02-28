@@ -24,9 +24,6 @@
 # data from a storage file, which contains fiber lengths for the model Subject01_simbody
 # that is included with the OpenSim distribution
 
-# This line allows for more graceful handling of low level exceptions, just in case
-modeling.OpenSimObject.setDebugLevel(3)
-
 # Load the model BothLegs.osim
 filepath = getInstallDir() + "/Models/BothLegs/BothLegs.osim";
 addModel(filepath);
@@ -47,8 +44,15 @@ crv4 = addCurve(plotterPanel, src, "knee_angle_r", "vas_int_r")
 crv3.setLegend("RF_Subject01")
 crv4.setLegend("VASINT_Subject01") 
 
+crv5 =  addAnalysisCurve(plotterPanel, "MomentArm.r_knee_angle", "RF", "r_knee_angle")
+
 # Change the color of the first curve in the plot
 setCurveColor(plotterPanel, 0, 0.0, 1.0, 1.0)
+
+#Arbitrary OpenSim Function, name of curve is same as name of Function
+threshold =  modeling.Constant(0.18)
+threshold.setName('threshold')
+cv6 = addFunctionCurve(plotterPanel, threshold)
 
 # Export the data in the plotter window to a file
 exportData(plotterPanel, getScriptsDir()+"/testData/cvs_export.sto")
