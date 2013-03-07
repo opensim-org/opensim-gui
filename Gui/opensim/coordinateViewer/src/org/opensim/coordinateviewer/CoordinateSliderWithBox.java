@@ -391,6 +391,12 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
        double theValue= val * conversion;
        fireCoordinateChange(coord, theValue, true, true, false, false);
     }
+     /* updateCalue that doesn't recursively updates other sliders */
+    void updateValueSelfOnly() {
+       double val = openSimContext.getValue(coord);
+       double theValue= val * conversion;
+       setTheValue(theValue, true, true, false, false);
+    }
     
     /**
      * Slider change

@@ -450,7 +450,7 @@ final class CoordinateViewerTopComponent extends TopComponent implements Observe
             // Get current model, displayed group and update their sliders, text boxes
             Enumeration<CoordinateSliderWithBox> displayedSliders=mapCoordinates2Sliders.elements();
             while(displayedSliders.hasMoreElements()){
-               displayedSliders.nextElement().updateValue();
+               displayedSliders.nextElement().updateValueSelfOnly();
             }
          }        
       }
