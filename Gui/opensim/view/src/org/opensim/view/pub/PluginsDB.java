@@ -79,7 +79,7 @@ public class PluginsDB implements Externalizable {
         for (int i=0; i<sz; i++) {
             String sharedLibraryName = in.readUTF();
             try{
-                System.loadLibrary(sharedLibraryName);
+                System.load(sharedLibraryName);
                 getFileNames().add(sharedLibraryName);
             }
             catch(UnsatisfiedLinkError e){
@@ -104,7 +104,7 @@ public class PluginsDB implements Externalizable {
         for (int i=0; i<fileNames.size(); i++) {
             String sharedLibraryName = fileNames.get(i);
             try{
-                System.loadLibrary(sharedLibraryName);
+                System.load(sharedLibraryName);
                 OpenSimLogger.logMessage("Successfully loaded library "+sharedLibraryName+".\n", OpenSimLogger.INFO);
             }
             catch(UnsatisfiedLinkError e){

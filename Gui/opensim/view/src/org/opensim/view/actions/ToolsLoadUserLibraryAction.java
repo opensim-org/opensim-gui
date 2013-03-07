@@ -57,6 +57,7 @@ public final class ToolsLoadUserLibraryAction extends CallableSystemAction {
       
       for (int i=0; i<files.length; i++){
         final String filename=files[i].getName();
+        final String fullFileName = files[i].getAbsolutePath();
         JMenuItem extItem = new JMenuItem(filename);
         extItem.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
@@ -70,13 +71,13 @@ public final class ToolsLoadUserLibraryAction extends CallableSystemAction {
                         DialogDescriptor.OK_OPTION,
                         1, null, null);
                 try {
-                    System.loadLibrary(libName);
+                    System.load(fullFileName);
                     
                     DialogDisplayer.getDefault().createDialog(confirmDialog).setVisible(true);
                     // Check if we need to always preload
                     if(loadPluginJPanel.isPreloadAlways()){
                         //System.out.println("Always preload "+filename);
-                        PluginsDB.getInstance().addLibrary(libName);
+                        PluginsDB.getInstance().addLibrary(fullFileName);
                     }
                 } catch(UnsatisfiedLinkError er){
                     DialogDisplayer.getDefault().notify(
