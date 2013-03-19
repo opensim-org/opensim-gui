@@ -46,7 +46,7 @@ import org.opensim.utils.*;
 public class GeometryFileLocator {
    
    static GeometryFileLocator locator;
-   static String geometryInstallationDirectory=".."+File.separator+"Models"+File.separator+"Geometry";
+   static String geometryInstallationDirectory=TheApp.getDefaultGeometrySearchPath()+File.separator+"Geometry";
    /** Creates a new instance of GeometryFileLocator */
    public GeometryFileLocator() {
    }
@@ -82,11 +82,11 @@ public class GeometryFileLocator {
          }
       }
       // Either "GeometryPath" is unspecified or was searched and nothing was found, now try installation dir.
-      candidate= ".."+File.separator+"Models"+File.separator+"Geometry"+File.separator+bareFileName;
+      candidate= TheApp.getDefaultGeometrySearchPath()+File.separator+bareFileName;
       if (debug) OpenSimLogger.logMessage("Debug: Trying "+candidate+"\n", OpenSimLogger.INFO);
       if (isValidFile(candidate))
          return candidate;
-      if (debug) System.out.println("GeometryFileLocator: not foound"+candidate);
+      if (debug) System.out.println("GeometryFileLocator: not found"+candidate);
       return null;
    }
 
