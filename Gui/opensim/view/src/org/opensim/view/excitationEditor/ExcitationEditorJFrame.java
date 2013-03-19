@@ -340,9 +340,10 @@ public class ExcitationEditorJFrame extends javax.swing.JFrame {
         String fileName = FileUtils.getInstance().browseForFilenameToSave(
                 FileUtils.getFileFilter(".xml", "Save excitations to file"), true, "controls.xml", this);
          if(fileName!=null) {
-            dPanel.getControlSet().print(fileName);  // We should also switch current set to use the saveAs file
+            String fileNameWithExtention = FileUtils.addExtensionIfNeeded(fileName, ".xml");
+            dPanel.getControlSet().print(fileNameWithExtention);  // We should also switch current set to use the saveAs file
             String temp=dPanel.getControlSet().getDocumentFileName();
-            int x=0;
+            
          }
 // TODO add your handling code here:
     }//GEN-LAST:event_jSaveAsMenuItemActionPerformed
@@ -385,7 +386,8 @@ public class ExcitationEditorJFrame extends javax.swing.JFrame {
         String fileName = FileUtils.getInstance().browseForFilenameToSave( 
                 FileUtils.getFileFilter(".xml", "Save excitations to file"), true, "controls.xml", this); 
          if(fileName!=null) { 
-            controlSet.print(fileName); 
+            String fileNameWithExtention = FileUtils.addExtensionIfNeeded(fileName, ".xml");
+            controlSet.print(fileNameWithExtention); 
             dPanel.populate(controlSet, true);
          }
     }//GEN-LAST:event_jCreateDefaultMenuItemActionPerformed
