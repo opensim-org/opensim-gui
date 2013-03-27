@@ -189,7 +189,7 @@ public class ShowXMLRepJDialog extends javax.swing.JDialog {
         String result=obj.dump();
         result=result.replaceAll(">", "&gt;");
         result=result.replaceAll("<", "&lt;");
-        result=result.replaceAll("\n", "<br>\n");
+        result=result.replaceAll("\n", "&#13;&#10<br>\n");
  
         result=result.replaceAll("&lt;", "<FONT COLOR=RED>&lt;");
         result=result.replaceAll("&gt;", "&gt;</FONT>");
