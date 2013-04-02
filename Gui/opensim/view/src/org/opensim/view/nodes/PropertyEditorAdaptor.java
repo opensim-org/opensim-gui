@@ -4,15 +4,7 @@ import java.awt.Color;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
-import org.opensim.modeling.AbstractProperty;
-import org.opensim.modeling.ArrayDouble;
-import org.opensim.modeling.ArrayStr;
-import org.opensim.modeling.Function;
-import org.opensim.modeling.GeometryPath;
-import org.opensim.modeling.Model;
-import org.opensim.modeling.OpenSimContext;
-import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.PropertyHelper;
+import org.opensim.modeling.*;
 import org.opensim.utils.Vec3;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.ModelPose;
@@ -66,6 +58,9 @@ public class PropertyEditorAdaptor {
     OpenSimObjectNode node;
     ModelPose defaultPose;
 
+    Model clonedModel;
+    State clonedState;
+    
     public PropertyEditorAdaptor(String propertyName, OpenSimObjectNode ownerNode) {
         this.model = ownerNode.getModelForNode();
         this.context = OpenSimDB.getInstance().getContext(model);
@@ -99,9 +94,9 @@ public class PropertyEditorAdaptor {
     public void setValueDouble(double v) {
         setValueDouble(v, true);
     }
-
+    
     private void handlePropertyChangeCommon() {
-        context.recreateSystemKeepStage();
+//        context.recreateSystemKeepStage();
         //defaultPose.useAsDefaultForModel(model); // This actually sets "Defaults" rather than actual configuration
         ViewDB.getInstance().updateModelDisplay(model, obj);
         if (node!= null) node.refreshNode();
@@ -331,11 +326,52 @@ public class PropertyEditorAdaptor {
         handlePropertyChangeTransform(oldArray, d, allowUndo);
     }
 
+    private void cacheModelAndState() {
+
+        clonedModel = (Model)model.clone();
+        clonedState = context.getCurrentStateCopy();
+        
+    }
+    
+    private void restoreStateFromCachedModel() {
+
+        try {
+            model.initSystem();
+            clonedModel.initSystem();
+
+            // Find all the state variables
+            ArrayStr modelVariableNames = model.getStateVariableNames();
+            ArrayStr clonedModelVariableNames = clonedModel.getStateVariableNames();
+
+            for(int i = 0; i < modelVariableNames.getSize(); i++) {
+                
+                // Going through the state variables in the model
+                String name = modelVariableNames.getitem(i);
+
+                // If finds it in the clonedState, copies value over
+                if(clonedModelVariableNames.findIndex(name) >=0 ) {
+                    double value = clonedModel.getStateVariable(clonedState, name);
+                    model.setStateVariable(model.getWorkingState(), name, value); 
+                }
+            }
+//
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+        
+        context.setState(model.getWorkingState());
+    }
+    
     private void handlePropertyChange(final double oldValue, final double v, boolean supportUndo) {
-        //context.setPropertiesFromState();
-        PropertyHelper.setValueDouble(v, prop);
+        
+        System.out.println("======Printing typename: " + prop.getTypeName());
+        cacheModelAndState();
+        PropertyHelper.setValueDouble(v, prop);        
+        restoreStateFromCachedModel();
         handlePropertyChangeCommon();
-        if (supportUndo) {
+        
+        if (supportUndo) {  
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
 
                 @Override
@@ -364,9 +400,11 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChange(final String oldValue, final String v, boolean supportUndo) {
-        //context.setPropertiesFromState();
-        PropertyHelper.setValueString(v, prop);
+        cacheModelAndState();
+        PropertyHelper.setValueString(v, prop);        
+        restoreStateFromCachedModel();
         handlePropertyChangeCommon();
+        
         if (supportUndo) {
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
 
@@ -396,9 +434,11 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChange(final boolean oldValue, final boolean v, boolean supportUndo) {
-        //context.setPropertiesFromState();
-        PropertyHelper.setValueBool(v, prop);
+        cacheModelAndState();
+        PropertyHelper.setValueBool(v, prop);        
+        restoreStateFromCachedModel();
         handlePropertyChangeCommon();
+
         if (supportUndo) {
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
 
@@ -428,9 +468,11 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChange(final int oldValue, final int v, boolean supportUndo) {
-        //context.setPropertiesFromState();
+        cacheModelAndState();
         PropertyHelper.setValueInt(v, prop);
+        restoreStateFromCachedModel();
         handlePropertyChangeCommon();
+
         if (supportUndo) {
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
 
@@ -460,12 +502,15 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChange(final ArrayDouble oldValue, final ArrayDouble v, boolean supportUndo) {
-        //context.setPropertiesFromState();
+        cacheModelAndState();
         int sz = v.size();
         for (int i = 0; i < sz; i++) {
             PropertyHelper.setValueDouble(v.getitem(i), prop, i);
         }
+
+        restoreStateFromCachedModel();
         handlePropertyChangeCommon();
+
         if (supportUndo) {
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
 
@@ -495,11 +540,14 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChange(final Vec3 oldValue, final Vec3 v, boolean supportUndo) {
-        //context.setPropertiesFromState();
+        cacheModelAndState();
         for (int i = 0; i < 3; i++) {
-            PropertyHelper.setValueVec3(v.get()[i], prop, i);
+            PropertyHelper.setValueVec3(v.get()[i], prop , i);
         }
+
+        restoreStateFromCachedModel();
         handlePropertyChangeCommon();
+  
         if (supportUndo) {
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
 
@@ -531,12 +579,16 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChangeTransform(final ArrayDouble oldValue, final ArrayDouble v, boolean supportUndo) {
-        //context.setPropertiesFromState();
+        cacheModelAndState();
         int sz = prop.size();
+
         for (int i = 0; i < sz; i++) {
             PropertyHelper.setValueTransform(v.getitem(i), prop, i);
         }
+
+        restoreStateFromCachedModel();        
         handlePropertyChangeCommon();
+
         if (supportUndo) {
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
 
@@ -566,6 +618,7 @@ public class PropertyEditorAdaptor {
     }
     
     private void handlePropertyChange(final OpenSimObject oldObject, final OpenSimObject v, boolean supportUndo) {
+
         //context.setPropertiesFromState();
         //prop.setValueAsObject(v);
         handlePropertyChangeCommon();
@@ -611,12 +664,12 @@ public class PropertyEditorAdaptor {
         handlePropertyChange(oldArray, newArray, allowUndo);    
     }
     private void handlePropertyChange(final ArrayStr oldValue, final ArrayStr newValue, boolean supportUndo) {
-        //context.setPropertiesFromState();
-                    
-        
+        cacheModelAndState();    
         PropertyHelper.setValueStringArray(prop, newValue);
-           
+
+        restoreStateFromCachedModel();
         handlePropertyChangeCommon();
+
         if (supportUndo) {
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
 
@@ -630,7 +683,7 @@ public class PropertyEditorAdaptor {
                 public String getUndoPresentationName() {
                     return "Undo "+prop.getName()+" change";
                 }
-
+ 
                 @Override
                 public void redo() throws CannotRedoException {
                     super.redo();
