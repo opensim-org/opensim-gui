@@ -34,12 +34,11 @@ import java.awt.Dialog;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-import java.util.TimerTask;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.opensim.modeling.AnalysisWrapperWithTimer;
 import org.opensim.modeling.Model;
-import org.opensim.modeling.SWIGTYPE_p_SimTK__State;
+import org.opensim.modeling.State;
 import org.opensim.modeling.Storage;
 import org.opensim.plotter.JPlotterPanel;
 import org.opensim.plotter.PlotCurve;
@@ -75,7 +74,7 @@ public class ResultsDisplayerCallback extends AnalysisWrapperWithTimer{
         setRefreshRateInMillis(JavaMotionDisplayerCallback.getRefreshRatePreference());
     }
     
-  public int step(SWIGTYPE_p_SimTK__State s, int i) {
+  public int step(State s, int i) {
       super.step(s, i);
       processStep(getSimulationTime());
       return 0;
@@ -106,7 +105,7 @@ public class ResultsDisplayerCallback extends AnalysisWrapperWithTimer{
        }
    }
 
- public int begin(SWIGTYPE_p_SimTK__State s) {
+ public int begin(State s) {
         int retValue=0;
         
         //retValue = super.begin(aStep, aDT, aT, aX, aY);
@@ -184,7 +183,7 @@ public class ResultsDisplayerCallback extends AnalysisWrapperWithTimer{
        outputs.add(output);
     }   
 
-    public int end(SWIGTYPE_p_SimTK__State s) {
+    public int end(State s) {
         int retValue;
         
         //retValue = super.end(s);

@@ -26,7 +26,7 @@ import org.opensim.tracking.ResultDisplayerInterface;
 import org.opensim.view.ModelEvent;
 import org.opensim.view.pub.OpenSimDB;
 import java.applet.*;
-import org.opensim.modeling.Property;
+import org.opensim.modeling.AbstractProperty;
 import org.opensim.view.ObjectSetCurrentEvent;
 import org.opensim.view.ObjectsDeletedEvent;
 import org.opensim.view.pub.ViewDB;
@@ -223,21 +223,21 @@ final class ParametersTopComponent extends TopComponent
                     knobsPanel.add(new SliderWithTextBox(ca,
                             (c.getMotionType()==Coordinate.MotionType.Rotational)?convertRadiansToDegrees:1.0,
                             nextParam.getPropertyDisplayName()));
-                } else if (nextParam.getOpenSimType().equalsIgnoreCase("Model")){
+                } /* else if (nextParam.getOpenSimType().equalsIgnoreCase("Model")){
                     //DynamicPropertyAdaptor objAdaptor;
                     try {
-                        Property prop=mdl.getPropertySet().get(nextParam.getPropertyName());
+                        AbstractProperty prop=mdl.getPropertySet().get(nextParam.getPropertyName());
                         String displayName = nextParam.getPropertyDisplayName();
                         createGUIForProperty(prop, displayName, mdl, mdl, nextParam.getPropertyComponent(), 
                                 nextParam.getRangeMin(), nextParam.getRangeMax(), nextParam.getUserInterface());
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
-                } else {
+                } */ else {
                     try {
                         OpenSimObject obj = mdl.getObjectByTypeAndName(nextParam.getOpenSimType(), nextParam.getObjectName());
                         //DynamicPropertyAdaptor objAdaptor;
-                        Property prop=obj.getPropertySet().get(nextParam.getPropertyName());
+                        AbstractProperty prop=obj.getPropertyByName(nextParam.getPropertyName());
                         String displayName = nextParam.getPropertyDisplayName();
                         createGUIForProperty(prop, displayName, mdl, obj, nextParam.getPropertyComponent(), 
                                 nextParam.getRangeMin(), nextParam.getRangeMax(), nextParam.getUserInterface());
@@ -252,15 +252,15 @@ final class ParametersTopComponent extends TopComponent
         knobsPanel.validate();
     }
 
-    private void createGUIForProperty(final Property prop, final String displayName, final Model mdl,
+    private void createGUIForProperty(final AbstractProperty prop, final String displayName, final Model mdl,
             final OpenSimObject obj, final int propertyComponent, double min, double max, Object userInterface) {
         if (((String)userInterface).equalsIgnoreCase("Slider")){
-            if (prop.getType()==(prop.getType().Dbl)){
+            if (prop.getTypeName().equals("double")){
                 DynamicPropertyAdaptor objAdaptor = new DynamicPropertyAdaptor(obj, mdl, prop, min, max);
                 knobsPanel.add(new SliderWithTextBox(objAdaptor,
                         1.0,
                         displayName));
-            } else if (prop.getType()==prop.getType().DblVec||
+            } /*else if (prop.getType()==prop.getType().DblVec||
                     prop.getType()==prop.getType().DblArray){
                 // Three sliders one per component if none specified
                 if (propertyComponent==-1){
@@ -276,7 +276,7 @@ final class ParametersTopComponent extends TopComponent
                             1.0,
                             displayName));
                 }
-            }
+            }*/
         }
         return;
     }
@@ -311,7 +311,7 @@ final class ParametersTopComponent extends TopComponent
 
     public ToolExecutor createExecutor(ToolSerializer tool, Model model) throws IOException {
          OpenSimObject obj = OpenSimObject.makeObjectFromFile(tool.getSetupFile());
-         toolExecutor = ToolFactory.createExecutor(model, tool.getSetupFile(), obj.getType(), this);
+         toolExecutor = ToolFactory.createExecutor(model, tool.getSetupFile(), obj.getConcreteClassName(), this);
          return toolExecutor;
     }
 

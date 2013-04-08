@@ -14,7 +14,8 @@ import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.Property;
+import org.opensim.modeling.AbstractProperty;
+import org.opensim.modeling.PropertyHelper;
 import org.opensim.swingui.DblBoundedRangeModel;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.ObjectsChangedEvent;
@@ -26,18 +27,18 @@ import org.opensim.view.pub.ViewDB;
 public class DynamicPropertyComponentAdaptor extends DblBoundedRangeModel {
     OpenSimObject dObject;
     OpenSimContext context;
-    Property dProperty;
+    AbstractProperty dProperty;
     private double value;
     int index=-1;
     
-    public DynamicPropertyComponentAdaptor(OpenSimObject object, Model model, Property prop, int index, double min, double max) {
+    public DynamicPropertyComponentAdaptor(OpenSimObject object, Model model, AbstractProperty prop, int index, double min, double max) {
         setRangeForObjectPropertyDbl(object, model, prop, index, min, max);
     }
 
-    public DynamicPropertyComponentAdaptor(OpenSimObject object, Model model, Property prop, int index) {
+    public DynamicPropertyComponentAdaptor(OpenSimObject object, Model model, AbstractProperty prop, int index) {
         setRangeForObjectPropertyDbl(object, model, prop, index);
     }
-    private void setRangeForObjectPropertyDbl(OpenSimObject object, Model model, Property prop, int index, 
+    private void setRangeForObjectPropertyDbl(OpenSimObject object, Model model, AbstractProperty prop, int index, 
             double min, double max) {
         this.dObject = object;
         this.dProperty=prop;
@@ -50,7 +51,7 @@ public class DynamicPropertyComponentAdaptor extends DblBoundedRangeModel {
         else
             doSetRangeProps(v, 0., v/2., v*2.0, 3);
     }
-    private void setRangeForObjectPropertyDbl(OpenSimObject object, Model model, Property prop, int index) {
+    private void setRangeForObjectPropertyDbl(OpenSimObject object, Model model, AbstractProperty prop, int index) {
         double v = getComponentValue(prop, index);
         setRangeForObjectPropertyDbl(object, model, prop, index, v/2., v*2.0);
     }
@@ -74,43 +75,19 @@ public class DynamicPropertyComponentAdaptor extends DblBoundedRangeModel {
          OpenSimDB.getInstance().notifyObservers(evnt);
     }
 
-    private double getComponentValue(Property prop, int index) {
-        if (prop.getType()==prop.getType().DblArray){
-            assert(prop.getValueDblArray().getSize()>=(index-1));
-            return prop.getValueDblArray().getitem(index);
-        }
-        else if (prop.getType()==prop.getType().DblVec){
-            assert(index <= prop.getValueDblArray().getSize()-1);
-            String string = prop.toString();
-            String[] valueStrings = string.substring(1, string.length()-1).split(" ");
-            double[] dValues = new double[3];
-            for(int i=0; i<3; i++){
-                dValues[i]=Double.valueOf(valueStrings[i]);
-            }
-
-            return dValues[index];
+    private double getComponentValue(AbstractProperty prop, int index) {
+        if (prop.getTypeName().equals("double")){
+            assert(prop.size()>=(index-1));
+            return PropertyHelper.getValueDouble(prop, index);
         }
         else 
             return 0;
     }
 
-    private void setComponentValue(Property prop, int index, double value) {
-        if (prop.getType()==prop.getType().DblArray){
-            assert(prop.getValueDblArray().getSize()>=(index-1));
-            ArrayDouble current=prop.getValueDblArray();
-            current.setitem(index, value);
-            prop.setValue(current);
-        }
-        else if (prop.getType()==prop.getType().DblVec){
-            assert(index <= 2);
-            String string = prop.toString();
-            String[] valueStrings = string.substring(1, string.length()-1).split(" ");
-            double[] dValues = new double[3];
-            for(int i=0; i<3; i++){
-                dValues[i]=Double.valueOf(valueStrings[i]);
-            }
-            dValues[index]=value;
-            prop.setValue(3, dValues);
+    private void setComponentValue(AbstractProperty prop, int index, double value) {
+        if (prop.getTypeName().equals("double")){
+            assert(prop.size()>=(index-1));
+            PropertyHelper.setValueDouble(value, prop, index);
         }
         else 
             throw new UnsupportedOperationException("Not yet implemented");
