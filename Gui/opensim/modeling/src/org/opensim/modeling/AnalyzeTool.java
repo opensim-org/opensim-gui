@@ -146,6 +146,10 @@ public class AnalyzeTool extends AbstractTool {
     opensimModelJNI.AnalyzeTool_setPrintResultFiles(swigCPtr, this, aToWrite);
   }
 
+  public void disableIntegrationOnlyProbes() {
+    opensimModelJNI.AnalyzeTool_disableIntegrationOnlyProbes(swigCPtr, this);
+  }
+
   public boolean run() throws java.io.IOException {
     return opensimModelJNI.AnalyzeTool_run__SWIG_0(swigCPtr, this);
   }

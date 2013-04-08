@@ -189,6 +189,46 @@ public class HuntCrossleyForce extends Force {
     opensimModelJNI.HuntCrossleyForce_setTransitionVelocity(swigCPtr, this, velocity);
   }
 
+  public double getStiffness() {
+    return opensimModelJNI.HuntCrossleyForce_getStiffness(swigCPtr, this);
+  }
+
+  public void setStiffness(double stiffness) {
+    opensimModelJNI.HuntCrossleyForce_setStiffness(swigCPtr, this, stiffness);
+  }
+
+  public double getDissipation() {
+    return opensimModelJNI.HuntCrossleyForce_getDissipation(swigCPtr, this);
+  }
+
+  public void setDissipation(double dissipation) {
+    opensimModelJNI.HuntCrossleyForce_setDissipation(swigCPtr, this, dissipation);
+  }
+
+  public double getStaticFriction() {
+    return opensimModelJNI.HuntCrossleyForce_getStaticFriction(swigCPtr, this);
+  }
+
+  public void setStaticFriction(double friction) {
+    opensimModelJNI.HuntCrossleyForce_setStaticFriction(swigCPtr, this, friction);
+  }
+
+  public double getDynamicFriction() {
+    return opensimModelJNI.HuntCrossleyForce_getDynamicFriction(swigCPtr, this);
+  }
+
+  public void setDynamicFriction(double friction) {
+    opensimModelJNI.HuntCrossleyForce_setDynamicFriction(swigCPtr, this, friction);
+  }
+
+  public double getViscousFriction() {
+    return opensimModelJNI.HuntCrossleyForce_getViscousFriction(swigCPtr, this);
+  }
+
+  public void setViscousFriction(double friction) {
+    opensimModelJNI.HuntCrossleyForce_setViscousFriction(swigCPtr, this, friction);
+  }
+
   public ArrayStr getRecordLabels() {
     return new ArrayStr(opensimModelJNI.HuntCrossleyForce_getRecordLabels(swigCPtr, this), true);
   }

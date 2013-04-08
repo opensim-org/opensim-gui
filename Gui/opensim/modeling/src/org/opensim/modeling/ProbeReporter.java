@@ -97,6 +97,10 @@ public class ProbeReporter extends Analysis {
     return opensimModelJNI.ProbeReporter_end(swigCPtr, this, State.getCPtr(s), s);
   }
 
+  public void disableIntegrationOnlyProbes() {
+    opensimModelJNI.ProbeReporter_disableIntegrationOnlyProbes(swigCPtr, this);
+  }
+
   public int printResults(String aBaseName, String aDir, double aDT, String aExtension) {
     return opensimModelJNI.ProbeReporter_printResults__SWIG_0(swigCPtr, this, aBaseName, aDir, aDT, aExtension);
   }

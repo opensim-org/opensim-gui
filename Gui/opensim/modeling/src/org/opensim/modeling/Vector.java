@@ -8,12 +8,11 @@
 
 package org.opensim.modeling;
 
-public class Vector {
+public class Vector extends VectorBaseDouble {
   private long swigCPtr;
-  protected boolean swigCMemOwn;
 
   public Vector(long cPtr, boolean cMemoryOwn) {
-    swigCMemOwn = cMemoryOwn;
+    super(opensimModelJNI.Vector_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -33,18 +32,35 @@ public class Vector {
       }
       swigCPtr = 0;
     }
+    super.delete();
   }
 
   public Vector() {
     this(opensimModelJNI.new_Vector__SWIG_0(), true);
   }
 
+  public Vector(Vector src) {
+    this(opensimModelJNI.new_Vector__SWIG_1(Vector.getCPtr(src), src), true);
+  }
+
   public Vector(int m, SWIGTYPE_p_double cppInitialValues) {
-    this(opensimModelJNI.new_Vector__SWIG_1(m, SWIGTYPE_p_double.getCPtr(cppInitialValues)), true);
+    this(opensimModelJNI.new_Vector__SWIG_2(m, SWIGTYPE_p_double.getCPtr(cppInitialValues)), true);
   }
 
   public Vector(int m, double initialValue) {
-    this(opensimModelJNI.new_Vector__SWIG_2(m, initialValue), true);
+    this(opensimModelJNI.new_Vector__SWIG_3(m, initialValue), true);
+  }
+
+  public String toString() {
+    return opensimModelJNI.Vector_toString(swigCPtr, this);
+  }
+
+  public double get(int i) {
+    return opensimModelJNI.Vector_get(swigCPtr, this, i);
+  }
+
+  public void set(int i, double value) {
+    opensimModelJNI.Vector_set(swigCPtr, this, i, value);
   }
 
 }

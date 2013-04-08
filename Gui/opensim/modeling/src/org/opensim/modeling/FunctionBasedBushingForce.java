@@ -1037,8 +1037,8 @@ public class FunctionBasedBushingForce extends Force {
     return new SWIGTYPE_p_SimTK__VecT_6_double_1_t(opensimModelJNI.FunctionBasedBushingForce_computeDeflection(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
-  public void computeForce(State s, SWIGTYPE_p_SimTK__Vector_T_SimTK__SpatialVec_t bodyForces, Vector generalizedForces) {
-    opensimModelJNI.FunctionBasedBushingForce_computeForce(swigCPtr, this, State.getCPtr(s), s, SWIGTYPE_p_SimTK__Vector_T_SimTK__SpatialVec_t.getCPtr(bodyForces), Vector.getCPtr(generalizedForces), generalizedForces);
+  public void computeForce(State s, SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t bodyForces, Vector generalizedForces) {
+    opensimModelJNI.FunctionBasedBushingForce_computeForce(swigCPtr, this, State.getCPtr(s), s, SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t.getCPtr(bodyForces), Vector.getCPtr(generalizedForces), generalizedForces);
   }
 
   public double computePotentialEnergy(State s) {

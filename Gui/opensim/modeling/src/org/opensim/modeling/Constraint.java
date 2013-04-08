@@ -57,6 +57,58 @@ public class Constraint extends ModelComponent {
     return opensimModelJNI.Constraint_getConcreteClassName(swigCPtr, this);
   }
 
+  public void setPropertyIndex_isDisabled(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Constraint_PropertyIndex_isDisabled_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_isDisabled() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Constraint_PropertyIndex_isDisabled_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_isDisabled(Constraint source) {
+    opensimModelJNI.Constraint_copyProperty_isDisabled(swigCPtr, this, Constraint.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_isDisabled() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Constraint_getProperty_isDisabled(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_isDisabled() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Constraint_updProperty_isDisabled(swigCPtr, this), false);
+  }
+
+  public boolean get_isDisabled(int i) {
+    return opensimModelJNI.Constraint_get_isDisabled__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_bool upd_isDisabled(int i) {
+    return new SWIGTYPE_p_bool(opensimModelJNI.Constraint_upd_isDisabled__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_isDisabled(int i, boolean value) {
+    opensimModelJNI.Constraint_set_isDisabled__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_isDisabled(boolean value) {
+    return opensimModelJNI.Constraint_append_isDisabled(swigCPtr, this, value);
+  }
+
+  public void constructProperty_isDisabled(boolean initValue) {
+    opensimModelJNI.Constraint_constructProperty_isDisabled(swigCPtr, this, initValue);
+  }
+
+  public boolean get_isDisabled() {
+    return opensimModelJNI.Constraint_get_isDisabled__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_bool upd_isDisabled() {
+    return new SWIGTYPE_p_bool(opensimModelJNI.Constraint_upd_isDisabled__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_isDisabled(boolean value) {
+    opensimModelJNI.Constraint_set_isDisabled__SWIG_1(swigCPtr, this, value);
+  }
+
   public void updateFromConstraint(State s, Constraint aConstraint) {
     opensimModelJNI.Constraint_updateFromConstraint(swigCPtr, this, State.getCPtr(s), s, Constraint.getCPtr(aConstraint), aConstraint);
   }
@@ -69,8 +121,8 @@ public class Constraint extends ModelComponent {
     return opensimModelJNI.Constraint_setDisabled(swigCPtr, this, State.getCPtr(s), s, isDisabled);
   }
 
-  public void calcConstraintForces(State s, SWIGTYPE_p_SimTK__Vector_T_SimTK__SpatialVec_t bodyForcesInAncestor, Vector mobilityForces) {
-    opensimModelJNI.Constraint_calcConstraintForces(swigCPtr, this, State.getCPtr(s), s, SWIGTYPE_p_SimTK__Vector_T_SimTK__SpatialVec_t.getCPtr(bodyForcesInAncestor), Vector.getCPtr(mobilityForces), mobilityForces);
+  public void calcConstraintForces(State s, SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t bodyForcesInAncestor, Vector mobilityForces) {
+    opensimModelJNI.Constraint_calcConstraintForces(swigCPtr, this, State.getCPtr(s), s, SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t.getCPtr(bodyForcesInAncestor), Vector.getCPtr(mobilityForces), mobilityForces);
   }
 
   public ArrayStr getRecordLabels() {

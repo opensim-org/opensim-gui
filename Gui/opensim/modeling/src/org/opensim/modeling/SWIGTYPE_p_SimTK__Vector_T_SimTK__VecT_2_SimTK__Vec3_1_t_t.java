@@ -8,18 +8,18 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_UnitInertiaP {
+public class SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t {
   private long swigCPtr;
 
-  protected SWIGTYPE_p_UnitInertiaP(long cPtr, boolean futureUse) {
+  protected SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t(long cPtr, boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_UnitInertiaP() {
+  protected SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_UnitInertiaP obj) {
+  protected static long getCPtr(SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }

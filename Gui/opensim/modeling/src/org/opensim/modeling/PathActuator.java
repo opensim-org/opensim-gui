@@ -205,8 +205,8 @@ public class PathActuator extends Actuator {
     opensimModelJNI.PathActuator_addNewPathPoint(swigCPtr, this, proposedName, Body.getCPtr(aBody), aBody, Vec3.getCPtr(aPositionOnBody), aPositionOnBody);
   }
 
-  public void computeForce(State state, SWIGTYPE_p_SimTK__Vector_T_SimTK__SpatialVec_t bodyForces, Vector mobilityForces) {
-    opensimModelJNI.PathActuator_computeForce(swigCPtr, this, State.getCPtr(state), state, SWIGTYPE_p_SimTK__Vector_T_SimTK__SpatialVec_t.getCPtr(bodyForces), Vector.getCPtr(mobilityForces), mobilityForces);
+  public void computeForce(State state, SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t bodyForces, Vector mobilityForces) {
+    opensimModelJNI.PathActuator_computeForce(swigCPtr, this, State.getCPtr(state), state, SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t.getCPtr(bodyForces), Vector.getCPtr(mobilityForces), mobilityForces);
   }
 
   public double computeActuation(State s) {

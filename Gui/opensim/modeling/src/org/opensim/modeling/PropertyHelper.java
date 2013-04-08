@@ -139,6 +139,10 @@ public class PropertyHelper {
     opensimModelJNI.PropertyHelper_setValueStringArray(AbstractProperty.getCPtr(p), p, ArrayStr.getCPtr(aStringArray), aStringArray);
   }
 
+  public static void removeItem(AbstractProperty p, int index) {
+    opensimModelJNI.PropertyHelper_removeItem(AbstractProperty.getCPtr(p), p, index);
+  }
+
   public PropertyHelper() {
     this(opensimModelJNI.new_PropertyHelper(), true);
   }

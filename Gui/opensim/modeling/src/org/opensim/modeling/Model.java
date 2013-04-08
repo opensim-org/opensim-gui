@@ -51,37 +51,45 @@ public class Model extends ModelComponent {
       return originalModelPath + java.io.File.separator;
     else return "";
   }
-  public void adoptComponent(ModelComponent aComponent) {
+
+  public void addComponent(ModelComponent aComponent) {
 	aComponent.markAdopted();
-	addComponent(aComponent);
+    addComponentImpl(aComponent);
   }
-  public void adoptBody(Body aBody) {
+
+  public void addBody(Body aBody) {
 	aBody.markAdopted();
-	addBody(aBody);
+    addBodyImpl(aBody);
   }
-  public void adoptConstraint(Constraint aConstraint) {
+
+  public void addConstraint(Constraint aConstraint) {
 	aConstraint.markAdopted();
-	addConstraint(aConstraint);
+    addConstraintImpl(aConstraint);
   }
-  public void adoptForce(Force aForce) {
-	aForce.markAdopted();
-	addForce(aForce);
-  }
-  public void adoptProbe(Probe aProbe) {
+
+  public void addProbe(Probe aProbe) {
 	aProbe.markAdopted();
-	addProbe(aProbe);
-  }
-  public void adoptContactGeometry(ContactGeometry aContactGeometry) {
+    addProbeImpl(aProbe);
+  }  
+  
+  public void addContactGeometry(ContactGeometry aContactGeometry) {
 	aContactGeometry.markAdopted();
-	addContactGeometry(aContactGeometry);
+    addContactGeometryImpl(aContactGeometry);
   }
-  public void adoptAnalysis(Analysis aAnalysis) {
+
+  public void addAnalysis(Analysis aAnalysis) {
 	aAnalysis.markAdopted();
-	addAnalysis(aAnalysis);
+	addAnalysisImpl(aAnalysis);
   }
-  public void adoptController(Controller aController) {
+
+  public void addForce(Force aForce) {
+	aForce.markAdopted();
+	addForceImpl(aForce);
+  }
+
+  public void addController(Controller aController) {
 	aController.markAdopted();
-	addController(aController);
+	addControllerImpl(aController);
   }
 
   public static Model safeDownCast(OpenSimObject obj) {
@@ -262,28 +270,28 @@ public class Model extends ModelComponent {
     return opensimModelJNI.Model_getNumStateVariables(swigCPtr, this);
   }
 
-  public void addComponent(ModelComponent aComponent) {
-    opensimModelJNI.Model_addComponent(swigCPtr, this, ModelComponent.getCPtr(aComponent), aComponent);
+  public void addComponentImpl(ModelComponent aComponent) {
+    opensimModelJNI.Model_addComponentImpl(swigCPtr, this, ModelComponent.getCPtr(aComponent), aComponent);
   }
 
-  public void addBody(Body aBody) {
-    opensimModelJNI.Model_addBody(swigCPtr, this, Body.getCPtr(aBody), aBody);
+  public void addBodyImpl(Body aBody) {
+    opensimModelJNI.Model_addBodyImpl(swigCPtr, this, Body.getCPtr(aBody), aBody);
   }
 
-  public void addConstraint(Constraint aConstraint) {
-    opensimModelJNI.Model_addConstraint(swigCPtr, this, Constraint.getCPtr(aConstraint), aConstraint);
+  public void addConstraintImpl(Constraint aConstraint) {
+    opensimModelJNI.Model_addConstraintImpl(swigCPtr, this, Constraint.getCPtr(aConstraint), aConstraint);
   }
 
-  public void addForce(Force aForce) {
-    opensimModelJNI.Model_addForce(swigCPtr, this, Force.getCPtr(aForce), aForce);
+  public void addForceImpl(Force aForce) {
+    opensimModelJNI.Model_addForceImpl(swigCPtr, this, Force.getCPtr(aForce), aForce);
   }
 
-  public void addProbe(Probe aProbe) {
-    opensimModelJNI.Model_addProbe(swigCPtr, this, Probe.getCPtr(aProbe), aProbe);
+  public void addProbeImpl(Probe aProbe) {
+    opensimModelJNI.Model_addProbeImpl(swigCPtr, this, Probe.getCPtr(aProbe), aProbe);
   }
 
-  public void addContactGeometry(ContactGeometry aContactGeometry) {
-    opensimModelJNI.Model_addContactGeometry(swigCPtr, this, ContactGeometry.getCPtr(aContactGeometry), aContactGeometry);
+  public void addContactGeometryImpl(ContactGeometry aContactGeometry) {
+    opensimModelJNI.Model_addContactGeometryImpl(swigCPtr, this, ContactGeometry.getCPtr(aContactGeometry), aContactGeometry);
   }
 
   public String getInputFileName() {
@@ -406,12 +414,20 @@ public class Model extends ModelComponent {
     return new Vector(opensimModelJNI.Model_updDefaultControls(swigCPtr, this), false);
   }
 
+  public void setDefaultControls(Vector controls) {
+    opensimModelJNI.Model_setDefaultControls__SWIG_0(swigCPtr, this, Vector.getCPtr(controls), controls);
+  }
+
   public Vector getDefaultControls() {
     return new Vector(opensimModelJNI.Model_getDefaultControls(swigCPtr, this), false);
   }
 
   public Vector updControls(State s) {
     return new Vector(opensimModelJNI.Model_updControls(swigCPtr, this, State.getCPtr(s), s), false);
+  }
+
+  public void setControls(State s, Vector controls) {
+    opensimModelJNI.Model_setControls(swigCPtr, this, State.getCPtr(s), s, Vector.getCPtr(controls), controls);
   }
 
   public Vector getControls(State s) {
@@ -463,7 +479,11 @@ public class Model extends ModelComponent {
   }
 
   public void getStateValues(State state, ArrayDouble stateValues) {
-    opensimModelJNI.Model_getStateValues(swigCPtr, this, State.getCPtr(state), state, ArrayDouble.getCPtr(stateValues), stateValues);
+    opensimModelJNI.Model_getStateValues__SWIG_0(swigCPtr, this, State.getCPtr(state), state, ArrayDouble.getCPtr(stateValues), stateValues);
+  }
+
+  public Vector getStateValues(State s) {
+    return new Vector(opensimModelJNI.Model_getStateValues__SWIG_1(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
   public void setStateValues(State state, SWIGTYPE_p_double stateValues) {
@@ -558,12 +578,12 @@ public class Model extends ModelComponent {
     return opensimModelJNI.Model_deleteUnusedMarkers(swigCPtr, this, ArrayStr.getCPtr(aMarkerNames), aMarkerNames);
   }
 
-  public void addAnalysis(Analysis aAnalysis) {
-    opensimModelJNI.Model_addAnalysis(swigCPtr, this, Analysis.getCPtr(aAnalysis), aAnalysis);
+  public void addAnalysisImpl(Analysis aAnalysis) {
+    opensimModelJNI.Model_addAnalysisImpl(swigCPtr, this, Analysis.getCPtr(aAnalysis), aAnalysis);
   }
 
-  public void addController(Controller aController) {
-    opensimModelJNI.Model_addController(swigCPtr, this, Controller.getCPtr(aController), aController);
+  public void addControllerImpl(Controller aController) {
+    opensimModelJNI.Model_addControllerImpl(swigCPtr, this, Controller.getCPtr(aController), aController);
   }
 
   public void removeAnalysis(Analysis analysis, boolean deleteIt) {
@@ -664,10 +684,6 @@ public class Model extends ModelComponent {
 
   public static void LoadOpenSimLibrary(String libraryName) {
     opensimModelJNI.Model_LoadOpenSimLibrary(libraryName);
-  }
-
-  public void setDefaultControls(Vector newControls) {
-    opensimModelJNI.Model_setDefaultControls(swigCPtr, this, Vector.getCPtr(newControls), newControls);
   }
 
 }

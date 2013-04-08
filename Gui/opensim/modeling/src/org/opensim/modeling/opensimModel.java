@@ -37,6 +37,58 @@ public class opensimModel implements opensimModelConstants {
     return opensimModelJNI.GetCompilerVersion();
   }
 
+  public static SpatialVec findRelativeVelocity(SWIGTYPE_p_Transform X_FA, SpatialVec V_FA, SWIGTYPE_p_Transform X_FB, SpatialVec V_FB) {
+    return new SpatialVec(opensimModelJNI.findRelativeVelocity(SWIGTYPE_p_Transform.getCPtr(X_FA), SpatialVec.getCPtr(V_FA), V_FA, SWIGTYPE_p_Transform.getCPtr(X_FB), SpatialVec.getCPtr(V_FB), V_FB), true);
+  }
+
+  public static SpatialVec findRelativeVelocityInF(Vec3 p_AB_F, SpatialVec V_FA, SpatialVec V_FB) {
+    return new SpatialVec(opensimModelJNI.findRelativeVelocityInF(Vec3.getCPtr(p_AB_F), p_AB_F, SpatialVec.getCPtr(V_FA), V_FA, SpatialVec.getCPtr(V_FB), V_FB), true);
+  }
+
+  public static SpatialVec findRelativeAcceleration(SWIGTYPE_p_Transform X_FA, SpatialVec V_FA, SpatialVec A_FA, SWIGTYPE_p_Transform X_FB, SpatialVec V_FB, SpatialVec A_FB) {
+    return new SpatialVec(opensimModelJNI.findRelativeAcceleration(SWIGTYPE_p_Transform.getCPtr(X_FA), SpatialVec.getCPtr(V_FA), V_FA, SpatialVec.getCPtr(A_FA), A_FA, SWIGTYPE_p_Transform.getCPtr(X_FB), SpatialVec.getCPtr(V_FB), V_FB, SpatialVec.getCPtr(A_FB), A_FB), true);
+  }
+
+  public static SpatialVec findRelativeAccelerationInF(Vec3 p_AB_F, SpatialVec V_FA, SpatialVec A_FA, SpatialVec V_FB, SpatialVec A_FB) {
+    return new SpatialVec(opensimModelJNI.findRelativeAccelerationInF(Vec3.getCPtr(p_AB_F), p_AB_F, SpatialVec.getCPtr(V_FA), V_FA, SpatialVec.getCPtr(A_FA), A_FA, SpatialVec.getCPtr(V_FB), V_FB, SpatialVec.getCPtr(A_FB), A_FB), true);
+  }
+
+  public static SpatialVec reverseRelativeVelocity(SWIGTYPE_p_Transform X_AB, SpatialVec V_AB) {
+    return new SpatialVec(opensimModelJNI.reverseRelativeVelocity(SWIGTYPE_p_Transform.getCPtr(X_AB), SpatialVec.getCPtr(V_AB), V_AB), true);
+  }
+
+  public static SpatialVec reverseRelativeVelocityInA(SWIGTYPE_p_Transform X_AB, SpatialVec V_AB) {
+    return new SpatialVec(opensimModelJNI.reverseRelativeVelocityInA(SWIGTYPE_p_Transform.getCPtr(X_AB), SpatialVec.getCPtr(V_AB), V_AB), true);
+  }
+
+  public static SpatialVec shiftVelocityBy(SpatialVec V_AB, Vec3 r_A) {
+    return new SpatialVec(opensimModelJNI.shiftVelocityBy(SpatialVec.getCPtr(V_AB), V_AB, Vec3.getCPtr(r_A), r_A), true);
+  }
+
+  public static SpatialVec shiftVelocityFromTo(SpatialVec V_A_BP, Vec3 fromP_A, Vec3 toQ_A) {
+    return new SpatialVec(opensimModelJNI.shiftVelocityFromTo(SpatialVec.getCPtr(V_A_BP), V_A_BP, Vec3.getCPtr(fromP_A), fromP_A, Vec3.getCPtr(toQ_A), toQ_A), true);
+  }
+
+  public static SpatialVec shiftForceBy(SpatialVec F_AP, Vec3 r_A) {
+    return new SpatialVec(opensimModelJNI.shiftForceBy(SpatialVec.getCPtr(F_AP), F_AP, Vec3.getCPtr(r_A), r_A), true);
+  }
+
+  public static SpatialVec shiftForceFromTo(SpatialVec F_AP, Vec3 fromP_A, Vec3 toQ_A) {
+    return new SpatialVec(opensimModelJNI.shiftForceFromTo(SpatialVec.getCPtr(F_AP), F_AP, Vec3.getCPtr(fromP_A), fromP_A, Vec3.getCPtr(toQ_A), toQ_A), true);
+  }
+
+  public static SpatialVec shiftAccelerationBy(SpatialVec A_AB, Vec3 w_AB, Vec3 r_A) {
+    return new SpatialVec(opensimModelJNI.shiftAccelerationBy(SpatialVec.getCPtr(A_AB), A_AB, Vec3.getCPtr(w_AB), w_AB, Vec3.getCPtr(r_A), r_A), true);
+  }
+
+  public static SpatialVec shiftAccelerationFromTo(SpatialVec A_A_BP, Vec3 w_AB, Vec3 fromP_A, Vec3 toQ_A) {
+    return new SpatialVec(opensimModelJNI.shiftAccelerationFromTo(SpatialVec.getCPtr(A_A_BP), A_A_BP, Vec3.getCPtr(w_AB), w_AB, Vec3.getCPtr(fromP_A), fromP_A, Vec3.getCPtr(toQ_A), toQ_A), true);
+  }
+
+  public static PhiMatrixTranspose transpose(PhiMatrix phi) {
+    return new PhiMatrixTranspose(opensimModelJNI.transpose(PhiMatrix.getCPtr(phi), phi), true);
+  }
+
   public static int getArray_CAPMIN() {
     return opensimModelJNI.Array_CAPMIN_get();
   }

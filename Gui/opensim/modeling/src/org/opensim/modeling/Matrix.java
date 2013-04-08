@@ -8,12 +8,11 @@
 
 package org.opensim.modeling;
 
-public class Matrix {
+public class Matrix extends MatrixBaseDouble {
   private long swigCPtr;
-  protected boolean swigCMemOwn;
 
   public Matrix(long cPtr, boolean cMemoryOwn) {
-    swigCMemOwn = cMemoryOwn;
+    super(opensimModelJNI.Matrix_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -33,6 +32,7 @@ public class Matrix {
       }
       swigCPtr = 0;
     }
+    super.delete();
   }
 
   public Matrix() {
@@ -51,12 +51,20 @@ public class Matrix {
     this(opensimModelJNI.new_Matrix__SWIG_3(m, n), true);
   }
 
-  public Matrix(int m, int n, SWIGTYPE_p_double cppInitialValuesByRow) {
-    this(opensimModelJNI.new_Matrix__SWIG_4(m, n, SWIGTYPE_p_double.getCPtr(cppInitialValuesByRow)), true);
+  public Matrix(int m, int n, double initialValue) {
+    this(opensimModelJNI.new_Matrix__SWIG_4(m, n, initialValue), true);
   }
 
-  public Matrix(int m, int n, double initialValue) {
-    this(opensimModelJNI.new_Matrix__SWIG_5(m, n, initialValue), true);
+  public String toString() {
+    return opensimModelJNI.Matrix_toString(swigCPtr, this);
+  }
+
+  public double get(int i, int j) {
+    return opensimModelJNI.Matrix_get(swigCPtr, this, i, j);
+  }
+
+  public void set(int i, int j, double value) {
+    opensimModelJNI.Matrix_set(swigCPtr, this, i, j, value);
   }
 
 }

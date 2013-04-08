@@ -179,4 +179,16 @@ public class Mat33 {
     return opensimModelJNI.Mat33_isExactlySymmetric(swigCPtr, this);
   }
 
+  public String toString() {
+    return opensimModelJNI.Mat33_toString(swigCPtr, this);
+  }
+
+  public double get(int i, int j) {
+    return opensimModelJNI.Mat33_get(swigCPtr, this, i, j);
+  }
+
+  public void set(int i, int j, double value) {
+    opensimModelJNI.Mat33_set(swigCPtr, this, i, j, value);
+  }
+
 }

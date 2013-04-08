@@ -93,6 +93,10 @@ public class OpenSimContext extends OpenSimObject {
     return new State(opensimModelJNI.OpenSimContext_getCurrentStateRef(swigCPtr, this), false);
   }
 
+  public State getCurrentStateCopy() {
+    return new State(opensimModelJNI.OpenSimContext_getCurrentStateCopy(swigCPtr, this), true);
+  }
+
   public void recreateSystemAfterSystemExistsKeepStage() {
     opensimModelJNI.OpenSimContext_recreateSystemAfterSystemExistsKeepStage(swigCPtr, this);
   }

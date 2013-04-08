@@ -103,18 +103,6 @@ public class Vec3 {
     opensimModelJNI.Vec3_setToZero(swigCPtr, this);
   }
 
-  public static Vec3 getAs(SWIGTYPE_p_double p) {
-    return new Vec3(opensimModelJNI.Vec3_getAs(SWIGTYPE_p_double.getCPtr(p)), false);
-  }
-
-  public static Vec3 updAs(SWIGTYPE_p_double p) {
-    return new Vec3(opensimModelJNI.Vec3_updAs(SWIGTYPE_p_double.getCPtr(p)), false);
-  }
-
-  public static Vec3 getNaN() {
-    return new Vec3(opensimModelJNI.Vec3_getNaN(), true);
-  }
-
   public boolean isNaN() {
     return opensimModelJNI.Vec3_isNaN(swigCPtr, this);
   }
@@ -137,6 +125,18 @@ public class Vec3 {
 
   public boolean isNumericallyEqual(double e) {
     return opensimModelJNI.Vec3_isNumericallyEqual__SWIG_3(swigCPtr, this, e);
+  }
+
+  public String toString() {
+    return opensimModelJNI.Vec3_toString(swigCPtr, this);
+  }
+
+  public void set(int i, double value) {
+    opensimModelJNI.Vec3_set(swigCPtr, this, i, value);
+  }
+
+  public double get(int i) {
+    return opensimModelJNI.Vec3_get(swigCPtr, this, i);
   }
 
 }

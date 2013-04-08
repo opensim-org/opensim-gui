@@ -529,8 +529,8 @@ public class Joint extends ModelComponent {
     return opensimModelJNI.Joint_isCoordinateUsed(swigCPtr, this, Coordinate.getCPtr(aCoordinate), aCoordinate);
   }
 
-  public SWIGTYPE_p_SimTK__SpatialVec calcEquivalentSpatialForce(State s, Vector mobilityForces) {
-    return new SWIGTYPE_p_SimTK__SpatialVec(opensimModelJNI.Joint_calcEquivalentSpatialForce(swigCPtr, this, State.getCPtr(s), s, Vector.getCPtr(mobilityForces), mobilityForces), true);
+  public SpatialVec calcEquivalentSpatialForce(State s, Vector mobilityForces) {
+    return new SpatialVec(opensimModelJNI.Joint_calcEquivalentSpatialForce(swigCPtr, this, State.getCPtr(s), s, Vector.getCPtr(mobilityForces), mobilityForces), true);
   }
 
   public double calcPower(State s) {
