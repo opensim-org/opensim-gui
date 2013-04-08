@@ -317,8 +317,8 @@ public class Ligament extends Force {
     return opensimModelJNI.Ligament_computeMomentArm(swigCPtr, this, State.getCPtr(s), s, Coordinate.getCPtr(aCoord), aCoord);
   }
 
-  public void computeForce(State s, SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t bodyForces, Vector generalizedForces) {
-    opensimModelJNI.Ligament_computeForce(swigCPtr, this, State.getCPtr(s), s, SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t.getCPtr(bodyForces), Vector.getCPtr(generalizedForces), generalizedForces);
+  public void computeForce(State s, VectorOfSpatialVec bodyForces, Vector generalizedForces) {
+    opensimModelJNI.Ligament_computeForce(swigCPtr, this, State.getCPtr(s), s, VectorOfSpatialVec.getCPtr(bodyForces), bodyForces, Vector.getCPtr(generalizedForces), generalizedForces);
   }
 
   public void preScale(State s, ScaleSet aScaleSet) {

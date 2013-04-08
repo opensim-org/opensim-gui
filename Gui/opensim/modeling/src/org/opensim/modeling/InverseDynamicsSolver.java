@@ -69,8 +69,8 @@ public class InverseDynamicsSolver extends Solver {
     return new Vector(opensimModelJNI.InverseDynamicsSolver_solve__SWIG_1(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
-  public Vector solve(State s, Vector udot, Vector appliedMobilityForces, SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t appliedBodyForces) {
-    return new Vector(opensimModelJNI.InverseDynamicsSolver_solve__SWIG_2(swigCPtr, this, State.getCPtr(s), s, Vector.getCPtr(udot), udot, Vector.getCPtr(appliedMobilityForces), appliedMobilityForces, SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t.getCPtr(appliedBodyForces)), true);
+  public Vector solve(State s, Vector udot, Vector appliedMobilityForces, VectorOfSpatialVec appliedBodyForces) {
+    return new Vector(opensimModelJNI.InverseDynamicsSolver_solve__SWIG_2(swigCPtr, this, State.getCPtr(s), s, Vector.getCPtr(udot), udot, Vector.getCPtr(appliedMobilityForces), appliedMobilityForces, VectorOfSpatialVec.getCPtr(appliedBodyForces), appliedBodyForces), true);
   }
 
   public Vector solve(State s, FunctionSet Qs, double time) {

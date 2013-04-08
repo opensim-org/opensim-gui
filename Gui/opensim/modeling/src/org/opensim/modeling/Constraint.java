@@ -121,8 +121,8 @@ public class Constraint extends ModelComponent {
     return opensimModelJNI.Constraint_setDisabled(swigCPtr, this, State.getCPtr(s), s, isDisabled);
   }
 
-  public void calcConstraintForces(State s, SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t bodyForcesInAncestor, Vector mobilityForces) {
-    opensimModelJNI.Constraint_calcConstraintForces(swigCPtr, this, State.getCPtr(s), s, SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t.getCPtr(bodyForcesInAncestor), Vector.getCPtr(mobilityForces), mobilityForces);
+  public void calcConstraintForces(State s, VectorOfSpatialVec bodyForcesInAncestor, Vector mobilityForces) {
+    opensimModelJNI.Constraint_calcConstraintForces(swigCPtr, this, State.getCPtr(s), s, VectorOfSpatialVec.getCPtr(bodyForcesInAncestor), bodyForcesInAncestor, Vector.getCPtr(mobilityForces), mobilityForces);
   }
 
   public ArrayStr getRecordLabels() {

@@ -245,6 +245,13 @@ public class opensimModelJNI {
   public final static native void SpatialVec_set(long jarg1, SpatialVec jarg1_, int jarg2, long jarg3, Vec3 jarg3_);
   public final static native long SpatialVec_get(long jarg1, SpatialVec jarg1_, int jarg2);
   public final static native void delete_SpatialVec(long jarg1);
+  public final static native long new_VectorOfSpatialVec__SWIG_0();
+  public final static native long new_VectorOfSpatialVec__SWIG_1(long jarg1, VectorOfSpatialVec jarg1_);
+  public final static native long new_VectorOfSpatialVec__SWIG_2(int jarg1, long jarg2, SpatialVec jarg2_);
+  public final static native String VectorOfSpatialVec_toString(long jarg1, VectorOfSpatialVec jarg1_);
+  public final static native long VectorOfSpatialVec_get(long jarg1, VectorOfSpatialVec jarg1_, int jarg2);
+  public final static native void VectorOfSpatialVec_set(long jarg1, VectorOfSpatialVec jarg1_, int jarg2, long jarg3, SpatialVec jarg3_);
+  public final static native void delete_VectorOfSpatialVec(long jarg1);
   public final static native long new_Transform__SWIG_0();
   public final static native long new_Transform__SWIG_1(long jarg1, long jarg2, Vec3 jarg2_);
   public final static native long new_Transform__SWIG_2(long jarg1);
@@ -1953,7 +1960,7 @@ public class opensimModelJNI {
   public final static native long new_InverseDynamicsSolver(long jarg1, Model jarg1_);
   public final static native long InverseDynamicsSolver_solve__SWIG_0(long jarg1, InverseDynamicsSolver jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
   public final static native long InverseDynamicsSolver_solve__SWIG_1(long jarg1, InverseDynamicsSolver jarg1_, long jarg2, State jarg2_);
-  public final static native long InverseDynamicsSolver_solve__SWIG_2(long jarg1, InverseDynamicsSolver jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_, long jarg4, Vector jarg4_, long jarg5);
+  public final static native long InverseDynamicsSolver_solve__SWIG_2(long jarg1, InverseDynamicsSolver jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_, long jarg4, Vector jarg4_, long jarg5, VectorOfSpatialVec jarg5_);
   public final static native long InverseDynamicsSolver_solve__SWIG_3(long jarg1, InverseDynamicsSolver jarg1_, long jarg2, State jarg2_, long jarg3, FunctionSet jarg3_, double jarg4);
   public final static native long Force_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void Force_assign(long jarg1, Force jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -4992,7 +4999,7 @@ public class opensimModelJNI {
   public final static native void Constraint_updateFromConstraint(long jarg1, Constraint jarg1_, long jarg2, State jarg2_, long jarg3, Constraint jarg3_);
   public final static native boolean Constraint_isDisabled(long jarg1, Constraint jarg1_, long jarg2, State jarg2_);
   public final static native boolean Constraint_setDisabled(long jarg1, Constraint jarg1_, long jarg2, State jarg2_, boolean jarg3);
-  public final static native void Constraint_calcConstraintForces(long jarg1, Constraint jarg1_, long jarg2, State jarg2_, long jarg3, long jarg4, Vector jarg4_);
+  public final static native void Constraint_calcConstraintForces(long jarg1, Constraint jarg1_, long jarg2, State jarg2_, long jarg3, VectorOfSpatialVec jarg3_, long jarg4, Vector jarg4_);
   public final static native long Constraint_getRecordLabels(long jarg1, Constraint jarg1_);
   public final static native long Constraint_getRecordValues(long jarg1, Constraint jarg1_, long jarg2, State jarg2_);
   public final static native void Constraint_scale(long jarg1, Constraint jarg1_, long jarg2, ScaleSet jarg2_);
@@ -6145,7 +6152,7 @@ public class opensimModelJNI {
   public final static native boolean Ligament_setForceLengthCurve(long jarg1, Ligament jarg1_, long jarg2, Function jarg2_);
   public final static native double Ligament_getTension(long jarg1, Ligament jarg1_, long jarg2, State jarg2_);
   public final static native double Ligament_computeMomentArm(long jarg1, Ligament jarg1_, long jarg2, State jarg2_, long jarg3, Coordinate jarg3_);
-  public final static native void Ligament_computeForce(long jarg1, Ligament jarg1_, long jarg2, State jarg2_, long jarg3, long jarg4, Vector jarg4_);
+  public final static native void Ligament_computeForce(long jarg1, Ligament jarg1_, long jarg2, State jarg2_, long jarg3, VectorOfSpatialVec jarg3_, long jarg4, Vector jarg4_);
   public final static native void Ligament_preScale(long jarg1, Ligament jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native void Ligament_scale(long jarg1, Ligament jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native void Ligament_postScale(long jarg1, Ligament jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
@@ -6194,7 +6201,7 @@ public class opensimModelJNI {
   public final static native double PathActuator_getPower(long jarg1, PathActuator jarg1_, long jarg2, State jarg2_);
   public final static native double PathActuator_getStress(long jarg1, PathActuator jarg1_, long jarg2, State jarg2_);
   public final static native void PathActuator_addNewPathPoint(long jarg1, PathActuator jarg1_, String jarg2, long jarg3, Body jarg3_, long jarg4, Vec3 jarg4_);
-  public final static native void PathActuator_computeForce(long jarg1, PathActuator jarg1_, long jarg2, State jarg2_, long jarg3, long jarg4, Vector jarg4_);
+  public final static native void PathActuator_computeForce(long jarg1, PathActuator jarg1_, long jarg2, State jarg2_, long jarg3, VectorOfSpatialVec jarg3_, long jarg4, Vector jarg4_);
   public final static native double PathActuator_computeActuation(long jarg1, PathActuator jarg1_, long jarg2, State jarg2_);
   public final static native double PathActuator_computeMomentArm(long jarg1, PathActuator jarg1_, long jarg2, State jarg2_, long jarg3, Coordinate jarg3_);
   public final static native void PathActuator_updateFromXMLNode__SWIG_0(long jarg1, PathActuator jarg1_, long jarg2, int jarg3);
@@ -6904,7 +6911,7 @@ public class opensimModelJNI {
   public final static native void FunctionBasedBushingForce_setForceVisualScale(long jarg1, FunctionBasedBushingForce jarg1_, double jarg2);
   public final static native void FunctionBasedBushingForce_setVisualAspectRatio(long jarg1, FunctionBasedBushingForce jarg1_, double jarg2);
   public final static native long FunctionBasedBushingForce_computeDeflection(long jarg1, FunctionBasedBushingForce jarg1_, long jarg2, State jarg2_);
-  public final static native void FunctionBasedBushingForce_computeForce(long jarg1, FunctionBasedBushingForce jarg1_, long jarg2, State jarg2_, long jarg3, long jarg4, Vector jarg4_);
+  public final static native void FunctionBasedBushingForce_computeForce(long jarg1, FunctionBasedBushingForce jarg1_, long jarg2, State jarg2_, long jarg3, VectorOfSpatialVec jarg3_, long jarg4, Vector jarg4_);
   public final static native double FunctionBasedBushingForce_computePotentialEnergy(long jarg1, FunctionBasedBushingForce jarg1_, long jarg2, State jarg2_);
   public final static native long FunctionBasedBushingForce_getRecordLabels(long jarg1, FunctionBasedBushingForce jarg1_);
   public final static native long FunctionBasedBushingForce_getRecordValues(long jarg1, FunctionBasedBushingForce jarg1_, long jarg2, State jarg2_);
