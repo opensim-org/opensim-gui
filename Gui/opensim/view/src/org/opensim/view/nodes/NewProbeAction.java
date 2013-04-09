@@ -67,7 +67,7 @@ public class NewProbeAction extends AbstractAction {
             Probe newProbe = Probe.safeDownCast(OpenSimObject.newInstanceOfType(userSelectedType));
             newProbe.setName(userSpecifiedName);
             Model model = probesNode.getModelForNode();
-            model.adoptProbe(newProbe);
+            model.addProbe(newProbe);
             OneProbeNode node=new OneProbeNode(newProbe);
             Node[] arrNodes = new Node[1];
             arrNodes[0] = node;
