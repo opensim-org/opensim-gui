@@ -5872,6 +5872,7 @@ public class opensimModelJNI {
   public final static native void Model_setPropertiesFromState(long jarg1, Model jarg1_, long jarg2, State jarg2_);
   public final static native void Model_generateDecorations(long jarg1, Model jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5);
   public final static native long Model_getStateVariableNames(long jarg1, Model jarg1_);
+  public final static native long Model_getStateVariableSystemIndices(long jarg1, Model jarg1_);
   public final static native double Model_getStateVariable(long jarg1, Model jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native void Model_setStateVariable(long jarg1, Model jarg1_, long jarg2, State jarg2_, String jarg3, double jarg4);
   public final static native long Model_getStateVariableSystemIndex(long jarg1, Model jarg1_, String jarg2);
