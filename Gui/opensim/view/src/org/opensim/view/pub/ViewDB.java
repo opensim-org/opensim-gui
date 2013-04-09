@@ -196,11 +196,7 @@ public final class ViewDB extends Observable implements Observer {
                   SingleModelVisuals vis = mapModelsToVisuals.get(ev.getModel());
                   vis.addMarkerGeometry((Marker)objs.get(i));
                   repaintAll();
-               } else if (objs.get(i) instanceof Marker) {
-                  SingleModelVisuals vis = mapModelsToVisuals.get(ev.getModel());
-                  vis.addMarkerGeometry((Marker)objs.get(i));
-                  repaintAll();
-               }
+               } 
             }
          } else if (arg instanceof ObjectSetCurrentEvent) {
             // Current model has changed. For view purposes this affects available commands
