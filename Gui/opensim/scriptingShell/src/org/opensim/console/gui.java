@@ -25,8 +25,10 @@ import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.Probe;
 import org.opensim.modeling.State;
 import org.opensim.utils.TheApp;
+import org.opensim.view.SingleModelVisuals;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
@@ -83,16 +85,6 @@ public final class gui {
     static public void setCurrentModel(Model aModel){
         OpenSimDB.getInstance().setCurrentModel(aModel);
     }
-    /**
-     * get a reference to the state of the passed in model. Every model is backed by an instance of the 
-     * class OpenSimContext that serves as a container of the current state of the model.
-     * 
-     * @param aModel
-     * @return reference to the OpenSimContext corrsponding to passed in model
-     */
-    static public OpenSimContext getModelState(Model aModel){
-        return OpenSimDB.getInstance().getContext(aModel);
-    }
     
     /**
      * dump raw state
@@ -101,9 +93,16 @@ public final class gui {
         State stateRef = OpenSimDB.getInstance().getContext(aModel).getCurrentStateRef();
         ArrayDouble stateVec = new ArrayDouble();
         aModel.getStateValues(stateRef, stateVec);
-        return stateVec.toString();
+        return stateRef.getY().toString();
     }
 
+    /**
+     * return raw state
+     */
+    static public State getStateRef(Model aModel) {
+        State stateRef = OpenSimDB.getInstance().getContext(aModel).getCurrentStateRef();
+        return stateRef;
+    }
     /**
      * getCooridnate 
      * @param aModel
@@ -121,8 +120,8 @@ public final class gui {
      * @param newValue 
      */
     static public void setCoordinateValue(final Coordinate coordinate, final double newValue){
-        
-        getModelState(coordinate.getModel()).setValue(coordinate, newValue);
+        OpenSimContext context=OpenSimDB.getInstance().getContext(coordinate.getModel());
+        coordinate.setValue(context.getCurrentStateRef(), newValue);
         SwingUtilities.invokeLater(new Runnable(){
 
             @Override
@@ -225,6 +224,8 @@ public final class gui {
             return Marker.safeDownCast(rawObject);
         else if (type.equalsIgnoreCase("Joint"))
             return Joint.safeDownCast(rawObject);
+        else if (type.equalsIgnoreCase("Probe"))
+            return Probe.safeDownCast(rawObject);
         return rawObject;
     }
     /**
@@ -366,5 +367,16 @@ public final class gui {
         methodsFrame.setVisible(true);
         return ;
     }
-    
+    /**
+     * 
+     * @return list of models loaded in the application
+     */
+    static public Model[] getOpenModels() 
+    {
+        Object[] modelsAsObjects = OpenSimDB.getAllModels();
+        Model[] models = new Model[modelsAsObjects.length];
+        for(int i=0; i<modelsAsObjects.length; i++)
+            models[i] = (Model) modelsAsObjects[i];
+        return models;
+    } 
  }
