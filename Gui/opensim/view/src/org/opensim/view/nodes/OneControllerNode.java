@@ -8,16 +8,14 @@ import javax.swing.Action;
 import javax.swing.ImageIcon;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
-import org.openide.nodes.Sheet;
 import org.openide.util.NbBundle;
-import org.opensim.modeling.Controller;
-import org.opensim.modeling.OpenSimContext;
+import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PropertyHelper;
 import org.opensim.view.ObjectDisplayMenuAction;
-import org.opensim.view.pub.OpenSimDB;
 
 /** Node class to wrap Controller objects */
-public class OneControllerNode extends OpenSimObjectNode {
+public class OneControllerNode extends OpenSimObjectNode implements DisableableObject {
    private static ResourceBundle bundle = NbBundle.getBundle(OneControllerNode.class);
    private boolean disabled=false;
    
@@ -25,7 +23,7 @@ public class OneControllerNode extends OpenSimObjectNode {
       super(b);
       setShortDescription(bundle.getString("HINT_ControllerNode"));
       setChildren(Children.LEAF);      
-      //updateDisabledFlag();
+      updateDisabledFlag();
    }
 
     public Node cloneNode() {
@@ -45,6 +43,26 @@ public class OneControllerNode extends OpenSimObjectNode {
         } else {
             return null;
         }
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+    
+    public void setDisabled(boolean disabled) {
+        //OpenSimDB.getInstance().disableConstraint(getOpenSimObject(), disabled);
+        this.disabled = disabled;
+        if (disabled)
+            setIconBaseWithExtension("/org/opensim/view/nodes/icons/disabledNode.png");
+        else
+            setIconBaseWithExtension("/org/opensim/view/nodes/icons/constraintNode.png");
+        //refreshNode();
+    }
+
+    private void updateDisabledFlag() {
+        OpenSimObject c = getOpenSimObject();
+        AbstractProperty ap = c.getPropertyByName("isDisabled");
+        disabled = PropertyHelper.getValueBool(ap);
     }
 
     public Action[] getActions(boolean b) {
@@ -70,5 +88,12 @@ public class OneControllerNode extends OpenSimObjectNode {
             ex.printStackTrace();
         }
         return retActions;
+    }
+
+    @Override
+    public void refreshNode() {
+        super.refreshNode();
+        updateDisabledFlag();
+        setDisabled(disabled);
     }
 }
