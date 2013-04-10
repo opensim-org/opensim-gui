@@ -5,17 +5,23 @@
 package org.opensim.console;
 
 import java.io.IOException;
-import javax.swing.JFrame;
 import org.openide.util.Exceptions;
+import org.opensim.modeling.ArrayStr;
+import org.opensim.modeling.Coordinate;
 import org.opensim.modeling.Function;
+import org.opensim.modeling.Model;
+import org.opensim.modeling.PathActuator;
+import org.opensim.modeling.PiecewiseLinearFunction;
+import org.opensim.modeling.State;
 import org.opensim.modeling.Storage;
 import org.opensim.plotter.JPlotterPanel;
 import org.opensim.plotter.PlotCurve;
+import org.opensim.plotter.PlotterDB;
 import org.opensim.plotter.PlotterSourceFile;
 import org.opensim.plotter.PlotterSourceMotion;
-import org.opensim.utils.DialogUtils;
 import org.opensim.view.motions.FileLoadMotionAction;
 import org.opensim.view.motions.MotionsDB;
+import org.opensim.view.pub.OpenSimDB;
 
 /**
  *
@@ -51,12 +57,8 @@ public final class OpenSimPlotter {
      * @return a reference to a new Plotter Window for later use
      */
     static public JPlotterPanel createPlotterPanel(String title){
-        JPlotterPanel plotterPanel = new JPlotterPanel();
-        JFrame f= DialogUtils.createFrameForPanel(plotterPanel, title);
-        plotterPanel.setFrame(f);
+        JPlotterPanel plotterPanel = PlotterDB.getInstance().createPlotterWindow();
         plotterPanel.setTitle(title);
-        //plotterPanel.getChartPanel().getChart().getXYPlot().;
-        f.setVisible(true);
         return plotterPanel;
     }
     /**
@@ -134,6 +136,35 @@ public final class OpenSimPlotter {
         return panel.showAnalysisCurve(qName, muscleName, genCoordName);
     }
     /**
+     * 
+     * @param panel to draw on
+     * @param qName curve name/legend
+     * @param pathActuatorName PathActuator name
+     * @param genCoordName Gencoord name
+     * @return curve representing the moment arm of pathActuatorName wrt genCoordName
+     */
+     static public PlotCurve addMomentArmCurve(JPlotterPanel panel, 
+                String pathActuatorName, String genCoordName) {
+        Model mdl = OpenSimDB.getInstance().getCurrentModel();
+        if (mdl == null) return null;
+        Coordinate coord = mdl.getCoordinateSet().get(genCoordName);
+        if (coord ==null) return null;
+        double rmin = coord.getRangeMin();
+        double rmax = coord.getRangeMax();
+        double step = (rmax - rmin)/100.0;
+        State s = OpenSimDB.getInstance().getContext(mdl).getCurrentStateCopy();
+        PathActuator pa = PathActuator.safeDownCast(mdl.getForceSet().get(pathActuatorName));
+        PiecewiseLinearFunction f = new PiecewiseLinearFunction();
+        f.setName("MomentArm_"+pathActuatorName);
+        for(double g=rmin; g<=rmax; g+=step){
+            coord.setValue(s, g);
+            double momentArm = pa.computeMomentArm(s, coord);
+            //System.out.println("Coord ="+g+" ma="+momentArm);
+            f.addPoint(g, momentArm);
+        }
+        return addFunctionCurve(panel, f);
+    }
+   /**
      * Create a new curve by running the MuscleAnalysis to plot built quantity against passed in motion file
      * 
      * @param panel
@@ -195,5 +226,12 @@ public final class OpenSimPlotter {
     static public void exportData(JPlotterPanel panel, String fileName){
         panel.getPlotterModel().getCurrentPlot().exportData(fileName);
     }
-
+    /**
+     * Get a handle to the last opened plotter window to modify it
+     * @return handle to last opened plotterPanel
+     */
+    static public JPlotterPanel getLastPlotterPanel() {
+        return PlotterDB.getInstance().getLastPlotterPanel();
+    }
+   
 }

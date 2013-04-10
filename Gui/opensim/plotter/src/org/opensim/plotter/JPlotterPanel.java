@@ -237,6 +237,7 @@ public class JPlotterPanel extends javax.swing.JPanel
       useMuscles(false);
       jPlotsTree.setRootVisible(false);
       //printPlotDescriptor();
+      PlotterDB.getInstance().registerPlotterPanel(this);
    }
    
    /** This method is called from within the constructor to
@@ -1673,11 +1674,7 @@ public class JPlotterPanel extends javax.swing.JPanel
          ////////////////////////////////////////////////////////////////////////
          // Analyses
          ////////////////////////////////////////////////////////////////////////
-         AnalysisSet analyses = currentModel.getAnalysisSet();
-         if (analyses==null){
-             System.out.println("no analyses");
-         }
-         //assert(analyses!=null);
+
          boolean addedSomething=false;
          /// Builtin
          if (! (currentModel instanceof ModelForExperimentalData)){
