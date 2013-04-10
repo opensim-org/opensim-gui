@@ -17,16 +17,15 @@ import org.opensim.modeling.PropertyHelper;
 import org.opensim.view.ObjectDisplayMenuAction;
 import org.opensim.view.pub.OpenSimDB;
 
-/** Node class to wrap AbstractMarker objects */
-public class OneConstraintNode extends OpenSimObjectNode  implements DisableableObject {
+/** Node class to wrap Constraint objects */
+public class OneConstraintNode extends DisablableOpenSimObjectNode {
    private static ResourceBundle bundle = NbBundle.getBundle(OneConstraintNode.class);
-   private boolean disabled=false;
    
    public OneConstraintNode(OpenSimObject b) {
       super(b);
       setShortDescription(bundle.getString("HINT_ConstraintNode"));
       setChildren(Children.LEAF);      
-      updateDisabledFlag();
+      
    }
 
     public Node cloneNode() {
@@ -38,9 +37,9 @@ public class OneConstraintNode extends OpenSimObjectNode  implements Disableable
     public Image getIcon(int i) {
         URL imageURL;
         if (disabled)
-            imageURL = this.getClass().getResource("icons/disabledNode.png");
-        else
-            imageURL = this.getClass().getResource("icons/constraintNode.png");
+            return super.getIcon(i);
+        
+        imageURL = this.getClass().getResource("icons/constraintNode.png");
         if (imageURL != null) { 
             return new ImageIcon(imageURL, "Constraint").getImage();
         } else {
@@ -48,24 +47,12 @@ public class OneConstraintNode extends OpenSimObjectNode  implements Disableable
         }
     }
 
-    public boolean isDisabled() {
-        return disabled;
-    }
-
+    @Override
     public void setDisabled(boolean disabled) {
-        //OpenSimDB.getInstance().disableConstraint(getOpenSimObject(), disabled);
-        this.disabled = disabled;
-        if (disabled)
-            setIconBaseWithExtension("/org/opensim/view/nodes/icons/disabledNode.png");
-        else
+        super.setDisabled(disabled);
+        if (!disabled){
             setIconBaseWithExtension("/org/opensim/view/nodes/icons/constraintNode.png");
-        //refreshNode();
-    }
-
-    private void updateDisabledFlag() {
-        Constraint c = Constraint.safeDownCast(getOpenSimObject());
-        AbstractProperty ap = c.getPropertyByName("isDisabled");
-        disabled = PropertyHelper.getValueBool(ap);
+        }
     }
 
     public Action[] getActions(boolean b) {
@@ -91,12 +78,5 @@ public class OneConstraintNode extends OpenSimObjectNode  implements Disableable
             ex.printStackTrace();
         }
         return retActions;
-    }
-
-    @Override
-    public void refreshNode() {
-        super.refreshNode();
-        updateDisabledFlag();
-        setDisabled(disabled);
     }
 }

@@ -15,15 +15,13 @@ import org.opensim.modeling.PropertyHelper;
 import org.opensim.view.ObjectDisplayMenuAction;
 
 /** Node class to wrap Controller objects */
-public class OneControllerNode extends OpenSimObjectNode implements DisableableObject {
+public class OneControllerNode extends DisablableOpenSimObjectNode {
    private static ResourceBundle bundle = NbBundle.getBundle(OneControllerNode.class);
-   private boolean disabled=false;
    
    public OneControllerNode(OpenSimObject b) {
       super(b);
       setShortDescription(bundle.getString("HINT_ControllerNode"));
       setChildren(Children.LEAF);      
-      updateDisabledFlag();
    }
 
     public Node cloneNode() {
@@ -35,35 +33,23 @@ public class OneControllerNode extends OpenSimObjectNode implements DisableableO
     public Image getIcon(int i) {
         URL imageURL;
         if (disabled)
-            imageURL = this.getClass().getResource("icons/disabledNode.png");
-        else
-            imageURL = this.getClass().getResource("icons/constraintNode.png");
+            return super.getIcon(i);
+        
+        imageURL = this.getClass().getResource("icons/constraintNode.png");
         if (imageURL != null) { 
             return new ImageIcon(imageURL, "Controller").getImage();
         } else {
             return null;
         }
     }
-
-    public boolean isDisabled() {
-        return disabled;
-    }
     
     public void setDisabled(boolean disabled) {
-        //OpenSimDB.getInstance().disableConstraint(getOpenSimObject(), disabled);
-        this.disabled = disabled;
-        if (disabled)
-            setIconBaseWithExtension("/org/opensim/view/nodes/icons/disabledNode.png");
-        else
+        super.setDisabled(disabled);
+        if (!disabled){
             setIconBaseWithExtension("/org/opensim/view/nodes/icons/constraintNode.png");
-        //refreshNode();
+        }
     }
 
-    private void updateDisabledFlag() {
-        OpenSimObject c = getOpenSimObject();
-        AbstractProperty ap = c.getPropertyByName("isDisabled");
-        disabled = PropertyHelper.getValueBool(ap);
-    }
 
     public Action[] getActions(boolean b) {
         Action[] superActions = (Action[]) super.getActions(b);        
@@ -88,12 +74,5 @@ public class OneControllerNode extends OpenSimObjectNode implements DisableableO
             ex.printStackTrace();
         }
         return retActions;
-    }
-
-    @Override
-    public void refreshNode() {
-        super.refreshNode();
-        updateDisabledFlag();
-        setDisabled(disabled);
     }
 }

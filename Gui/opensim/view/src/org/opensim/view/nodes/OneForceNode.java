@@ -44,7 +44,7 @@ import org.opensim.view.ObjectDisplayMenuAction;
  *
  * @author Ayman Habib
  */
-public class OneForceNode extends OpenSimObjectNode implements DisableableObject{
+public class OneForceNode extends DisablableOpenSimObjectNode {
 
     private static ResourceBundle bundle = NbBundle.getBundle(OneForceNode.class);
     /**
@@ -52,7 +52,6 @@ public class OneForceNode extends OpenSimObjectNode implements DisableableObject
      */
     public OneForceNode(OpenSimObject force) {
         super(force);
-        updateDisabledFlag(force);
         setShortDescription(bundle.getString("HINT_OtherForceNode"));
         setChildren(Children.LEAF);
         Force f= Force.safeDownCast(force);
@@ -63,48 +62,29 @@ public class OneForceNode extends OpenSimObjectNode implements DisableableObject
         }
         //addDisplayOption(displayOption.Isolatable);
     }
+    @Override
     public Image getIcon(int i) {
         URL imageURL;
         if (disabled)
-            imageURL = this.getClass().getResource("icons/disabledNode.png");
-        else
-            imageURL = this.getClass().getResource("icons/forceNode.png");
+            return super.getIcon(i);
+        
+        imageURL = this.getClass().getResource("icons/forceNode.png");
         if (imageURL != null) { 
             return new ImageIcon(imageURL, "Force").getImage();
         } else {
             return null;
         }
     }
-   public Image getOpenedIcon(int i) {
-        return getIcon(i);
-    }
-
-    protected boolean disabled = false;
-
-
-    @Override
-    public boolean isDisabled() {
-        return disabled;
-    }
 
 
     @Override
     public void setDisabled(boolean disabled) {
         //OpenSimDB.getInstance().disableForce(getOpenSimObject(), disabled);
-        this.disabled = disabled;
-        if (disabled)
-            setIconBaseWithExtension("/org/opensim/view/nodes/icons/disabledNode.png");
-        else
+        super.setDisabled(disabled);
+        if (!disabled)
             setIconBaseWithExtension("/org/opensim/view/nodes/icons/muscleNode.png");
         //refreshNode();
 
-    }
-
-
-    protected void updateDisabledFlag(final OpenSimObject actuator) {        
-        Force f = Force.safeDownCast(actuator);
-        //OpenSimContext context = OpenSimDB.getInstance().getContext(f.getModel());
-        disabled = f.get_isDisabled();
     }
 
     public Action[] getActions(boolean b) {
@@ -130,13 +110,6 @@ public class OneForceNode extends OpenSimObjectNode implements DisableableObject
             ex.printStackTrace();
         }
         return retActions;
-    }
-
-    @Override
-    public void refreshNode() {
-        super.refreshNode();
-        updateDisabledFlag(getOpenSimObject());
-        setDisabled(disabled);
     }
    
 }
