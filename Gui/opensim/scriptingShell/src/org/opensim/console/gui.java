@@ -34,43 +34,18 @@ import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 
 /**
- *
- * @author ayman
- * Copyright (c)  2005-2012, Stanford University, Ayman Habib
- * Use of the OpenSim software in source form is permitted provided that the following
- * conditions are met:
- * 	1. The software is used only for non-commercial research and education. It may not
- *     be used in relation to any commercial activity.
- * 	2. The software is not distributed or redistributed.  Software distribution is allowed
- *     only through https://simtk.org/home/opensim.
- * 	3. Use of the OpenSim software or derivatives must be acknowledged in all publications,
- *      presentations, or documents describing work in which OpenSim or derivatives are used.
- * 	4. Credits to developers may not be removed from executables
- *     created from modifications of the source.
- * 	5. Modifications of source code must retain the above copyright notice, this list of
- *     conditions and the following disclaimer.
- *
- *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- *  EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- *  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- *  SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
- *  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
- *  TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- *  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- *  OR BUSINESS INTERRUPTION) OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
- *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
-/**
  *  gui is an implementation of the Facade design pattern to 
+ * 
  * 1. Shield the user from the various classes used by the GUI
  * 2. Provide convenience methods that update the GUI if needed
  * 
- * @author ayman
+ * Methods in this class can be used without specifying "gui." for convenience.
+ * 
+ * @author Ayman
  */
 public final class gui {
     /**
-     * get a reference to the model that is current in the OpenSim application.
+     * getCurrentModel() gets a reference to the model that is current in the OpenSim application.
      * 
      * @return current model
      */
@@ -87,24 +62,24 @@ public final class gui {
     }
     
     /**
-     * dump raw state
+     * dumpModelState() dumps the vector of continuous state variables that backs aModel
+     * as a String (SimTK::State.getY())
      */
     static public String dumpModelState(Model aModel) {
         State stateRef = OpenSimDB.getInstance().getContext(aModel).getCurrentStateRef();
-        ArrayDouble stateVec = new ArrayDouble();
-        aModel.getStateValues(stateRef, stateVec);
         return stateRef.getY().toString();
     }
 
     /**
-     * return raw state
+     * getStateRef() returns a reference to the instance of SimTK::State that backs aModel
      */
     static public State getStateRef(Model aModel) {
         State stateRef = OpenSimDB.getInstance().getContext(aModel).getCurrentStateRef();
         return stateRef;
     }
     /**
-     * getCooridnate 
+     * getCoordinate ()
+     * 
      * @param aModel
      * @param name
      * @return a reference to the coordinate with passed in name in the model "aModel"
@@ -113,8 +88,9 @@ public final class gui {
         return aModel.getCoordinateSet().get(name);
     }
     /**
-     * setCoordinateValue allows the user to set the value of the passed in Coordinate to the specified newValue
+     * setCoordinateValue() allows the user to set the value of the passed in Coordinate to the specified newValue
      *  This call, also updates the Graphics window if needed.
+     *  rotational coordinates should be specified in radians
      * 
      * @param coordinate
      * @param newValue 
@@ -132,7 +108,7 @@ public final class gui {
         });
      }
     /**
-     * setCoordinateValue allows the user to set the value of the passed in Coordinate to the specified newValue
+     * setCoordinateValueDegrees allows the user to set the value of the passed in Coordinate to the specified newValue
      *  This call, also updates the Graphics window if needed.
      * 
      * @param coordinate
@@ -143,7 +119,7 @@ public final class gui {
         setCoordinateValue(coordinate, valueInDegrees);
      }
     /**
-     * addModel creates a new OpenSim model from the passed in fileName and loads this model 
+     * addModel() creates a new OpenSim model from the passed in fileName and loads this model 
      * into the OpenSim application. This is equivalent to "File->Open Model..."
      * 
      * @param fileName to construct the model from
@@ -278,7 +254,7 @@ public final class gui {
      * specifically those that have visual representation and athat have individual control over
      * their opacity
      * 
-     * @param obj: The object to set the opacity of
+     * @param obj The object to set the opacity of
      * @param newOpacity0To1 
      */
     static public void setObjectOpacity(final OpenSimObject obj, final double newOpacity0To1) {
@@ -291,7 +267,7 @@ public final class gui {
     }
     /**
      * Perform operation in current graphics window equivalent to pressing c while the window has focus
-     * @param char c 
+     * @param c 
      */
     static public void gfxWindowSendKey(final char c){
         SwingUtilities.invokeLater(new Runnable(){
@@ -321,27 +297,17 @@ public final class gui {
     }
     
     /**
-     * Show Doxygen documentation for the passed in class name. Class name is not qualified with Name space
-     * OpenSim name space is assumed.
-     * 
-     * @param className 
-     *
-    static public void showDocs(String className)
-    {
-        BrowserLauncher.openURL("file:///D:/OpenSim3.0a1/sdk/doc/html/classOpenSim_1_1" + className + ".html");
-    }
-     * */
-    /**
-     * return the full qualified name of the Class that obj is an instance of
+     * getClassName() returns the full qualified name of the Class that obj is an instance of
      * @param obj
-     * @return 
+     * @return class name as a string, fully qualified.
      */
     static public String getClassName(Object obj)
     {
         return obj.getClass().getName();
     }
     /**
-     * Show in a standalone modal dialog the methods available for the passed in object
+     * methodsview() Shows in a standalone modal dialog the methods available for the passed in object
+     * 
      * @param obj
      * 
      */
@@ -368,8 +334,9 @@ public final class gui {
         return ;
     }
     /**
+     * getOpenModels()
      * 
-     * @return list of models loaded in the application
+     * @return list of models currently loaded in the application
      */
     static public Model[] getOpenModels() 
     {

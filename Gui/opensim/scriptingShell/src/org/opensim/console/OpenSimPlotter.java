@@ -21,34 +21,14 @@ import org.opensim.plotter.PlotterSourceMotion;
 import org.opensim.view.motions.FileLoadMotionAction;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.view.pub.OpenSimDB;
-
 /**
  *
- * @author ayman
- * Copyright (c)  2005-2012, Stanford University, Ayman Habib
- * Use of the OpenSim software in source form is permitted provided that the following
- * conditions are met:
- * 	1. The software is used only for non-commercial research and education. It may not
- *     be used in relation to any commercial activity.
- * 	2. The software is not distributed or redistributed.  Software distribution is allowed
- *     only through https://simtk.org/home/opensim.
- * 	3. Use of the OpenSim software or derivatives must be acknowledged in all publications,
- *      presentations, or documents describing work in which OpenSim or derivatives are used.
- * 	4. Credits to developers may not be removed from executables
- *     created from modifications of the source.
- * 	5. Modifications of source code must retain the above copyright notice, this list of
- *     conditions and the following disclaimer.
- *
- *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- *  EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- *  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- *  SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
- *  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
- *  TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- *  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- *  OR BUSINESS INTERRUPTION) OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
- *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * @author Ayman
+ * 
+ * OpenSimPlotter is top level class to plotting functionality for GUI scripting
+ * 
  */
+
 public final class OpenSimPlotter {
     /**
      * Create a blank PlotterPanel with specified title
@@ -100,10 +80,10 @@ public final class OpenSimPlotter {
      * Create a new curve on the passed in Plotter panel, using domain and range specified
      * as column labels in the passed in data source. File header indicates whether angular data is in radians or degrees
      * 
-     * @param panel: PlotterPanel to render the curve on
-     * @param src: data source used to obtain data
-     * @param domain: column label corresponding to domain
-     * @param range: column label corresponding to range
+     * @param panel PlotterPanel to render the curve on
+     * @param src data source used to obtain data
+     * @param domain column label corresponding to domain
+     * @param range column label corresponding to range
      * @return handle to the created curve (range vs. domain) curve is rendered as a side-effect
      */
     static public PlotCurve addCurve(JPlotterPanel panel, PlotterSourceFile src, 
@@ -113,8 +93,8 @@ public final class OpenSimPlotter {
     /**
      * Create a new curve by running the MuscleAnalysis to plot built in quantities. 
      * 
-     * @param panel: PlotterPanel to render the curve on
-     * @param qName: quantity to plot, vaid options are: 
+     * @param panel PlotterPanel to render the curve on
+     * @param qName quantity to plot, vaid options are: 
      * moment.${genCoordName}, 
      * momentarm.${genCoordName}, 
      * "Length",
@@ -126,8 +106,8 @@ public final class OpenSimPlotter {
      * "PassiveFiberForce",
      * "FiberForce"
      * 
-     * @param muscleName: name of a muscle of interest as it appears in the model
-     * @param genCoordName: name of generalized coordinate as it appears in model
+     * @param muscleName name of a muscle of interest as it appears in the model
+     * @param genCoordName name of generalized coordinate as it appears in model
      * @return handle to PlotCurve
      */
     static public PlotCurve addAnalysisCurve(JPlotterPanel panel, String qName, 
@@ -135,9 +115,11 @@ public final class OpenSimPlotter {
         return panel.showAnalysisCurve(qName, muscleName, genCoordName);
     }
     /**
+     * Create a curve representing momentArm of passed in PathActuator relative
+     * to a specific Coordinate
+     * @since 3.1
      * 
      * @param panel to draw on
-     * @param qName curve name/legend
      * @param pathActuatorName PathActuator name
      * @param genCoordName Gencoord name
      * @return curve representing the moment arm of pathActuatorName wrt genCoordName
@@ -171,7 +153,7 @@ public final class OpenSimPlotter {
      * Create a new curve by running the MuscleAnalysis to plot built quantity against passed in motion file
      * 
      * @param panel
-     * @param qName: quantity name vaid options are: 
+     * @param qName quantity name vaid options are: 
      * moment.${genCoordName}, 
      * momentarm.${genCoordName}, 
      * "Length",
@@ -182,8 +164,7 @@ public final class OpenSimPlotter {
      * "ActiveFiberForce",
      * "PassiveFiberForce",
      * "FiberForce"
-     * @param muscleName: name of a muscle of interest as it appears in the model
-     * @param genCoordName: name of generalized coordinate as it appears in model
+     * @param muscleName name of a muscle of interest as it appears in the model
      * @return handle to PlotCurve
      */
     //  sourceY=(new PlotterSourceAnalysis(currentModel, plotterModel.getStorage(internalName+coordinateName, currentModel), qName));
@@ -193,10 +174,13 @@ public final class OpenSimPlotter {
         return panel.showMotionCurve(qName, muscleName, dataSource);
     }
     /**
-     * Create a new curve representing an arbitrary OpenSimFunction and add it to the passed in plotter panel
-     * @param panel: panel to add the curve to
-     * @param function: Any OpenSim function
-     * @return a handle to the created curve 
+     * Create a new curve representing an arbitrary OpenSim::Function and add it to the passed in plotter panel
+     * 
+     * @since 3.1
+     * 
+     * @param panel panel to add the curve to
+     * @param function Any OpenSim function
+     * @return a handle to the created curve after adding it to the plot window
      */
     static public PlotCurve addFunctionCurve(JPlotterPanel panel, Function function) {
         return panel.showFunctionCurve(function);
@@ -204,18 +188,18 @@ public final class OpenSimPlotter {
     /**
      * Set the Legend for the passed in curve
      * @param cv : handle to PlotCurve
-     * @param legend: new String for legend
+     * @param legend : new String for legend
      */
     static public void setCurveLegend(PlotCurve cv, String legend) {
         cv.setLegend(legend);
     }
     /**
      * Set the color to use for the passed in curve as RGB
-     * @param panel: Plotter panel
-     * @param series: Curve number
+     * @param panel : Plotter panel
+     * @param series : Curve number
      * @param r :red color component 0,1
-     * @param g: green color component 0,1
-     * @param b: blue color component 0, 1
+     * @param g : green color component 0,1
+     * @param b : blue color component 0, 1
      */
     static public void setCurveColor(JPlotterPanel panel, int series, float r, float g, float b){
         panel.getPlotterModel().setColorRGB(series, r, g, b);
@@ -223,14 +207,18 @@ public final class OpenSimPlotter {
     /**
      * Export all the data on the plotter window to an sto file
      * 
-     * @param panel: reference to the PlotterPanel whose curves are being exported.
-     * @param fileName: Name of output file name to export data to.
+     * @param panel reference to the PlotterPanel whose curves are being exported.
+     * @param fileName : Name of output file name to export data to.
      */
     static public void exportData(JPlotterPanel panel, String fileName){
         panel.getPlotterModel().getCurrentPlot().exportData(fileName);
     }
     /**
-     * Get a handle to the last opened plotter window to modify it
+     * Get a handle to the last opened plotter window to modify it.
+     * This is useful to add curves using scripts to a plot window created using the GUI Tools->Plot
+     * 
+     * @since 3.1
+     * 
      * @return handle to last opened plotterPanel
      */
     static public JPlotterPanel getLastPlotterPanel() {
