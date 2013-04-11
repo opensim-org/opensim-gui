@@ -173,44 +173,32 @@ public class Probe extends ModelComponent {
     opensimModelJNI.Probe_copyProperty_initial_conditions_for_integration(swigCPtr, this, Probe.getCPtr(source), source);
   }
 
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vector_T_double_t_t getProperty_initial_conditions_for_integration() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vector_T_double_t_t(opensimModelJNI.Probe_getProperty_initial_conditions_for_integration(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_initial_conditions_for_integration() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Probe_getProperty_initial_conditions_for_integration(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vector_T_double_t_t updProperty_initial_conditions_for_integration() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__Vector_T_double_t_t(opensimModelJNI.Probe_updProperty_initial_conditions_for_integration(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_initial_conditions_for_integration() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Probe_updProperty_initial_conditions_for_integration(swigCPtr, this), false);
   }
 
-  public Vector get_initial_conditions_for_integration(int i) {
-    return new Vector(opensimModelJNI.Probe_get_initial_conditions_for_integration__SWIG_0(swigCPtr, this, i), false);
+  public double get_initial_conditions_for_integration(int i) {
+    return opensimModelJNI.Probe_get_initial_conditions_for_integration(swigCPtr, this, i);
   }
 
-  public Vector upd_initial_conditions_for_integration(int i) {
-    return new Vector(opensimModelJNI.Probe_upd_initial_conditions_for_integration__SWIG_0(swigCPtr, this, i), false);
+  public SWIGTYPE_p_double upd_initial_conditions_for_integration(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.Probe_upd_initial_conditions_for_integration(swigCPtr, this, i), false);
   }
 
-  public void set_initial_conditions_for_integration(int i, Vector value) {
-    opensimModelJNI.Probe_set_initial_conditions_for_integration__SWIG_0(swigCPtr, this, i, Vector.getCPtr(value), value);
+  public void set_initial_conditions_for_integration(int i, double value) {
+    opensimModelJNI.Probe_set_initial_conditions_for_integration(swigCPtr, this, i, value);
   }
 
-  public int append_initial_conditions_for_integration(Vector value) {
-    return opensimModelJNI.Probe_append_initial_conditions_for_integration(swigCPtr, this, Vector.getCPtr(value), value);
+  public int append_initial_conditions_for_integration(double value) {
+    return opensimModelJNI.Probe_append_initial_conditions_for_integration(swigCPtr, this, value);
   }
 
-  public void constructProperty_initial_conditions_for_integration(Vector initValue) {
-    opensimModelJNI.Probe_constructProperty_initial_conditions_for_integration(swigCPtr, this, Vector.getCPtr(initValue), initValue);
-  }
-
-  public Vector get_initial_conditions_for_integration() {
-    return new Vector(opensimModelJNI.Probe_get_initial_conditions_for_integration__SWIG_1(swigCPtr, this), false);
-  }
-
-  public Vector upd_initial_conditions_for_integration() {
-    return new Vector(opensimModelJNI.Probe_upd_initial_conditions_for_integration__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_initial_conditions_for_integration(Vector value) {
-    opensimModelJNI.Probe_set_initial_conditions_for_integration__SWIG_1(swigCPtr, this, Vector.getCPtr(value), value);
+  public void constructProperty_initial_conditions_for_integration() {
+    opensimModelJNI.Probe_constructProperty_initial_conditions_for_integration(swigCPtr, this);
   }
 
   public void setPropertyIndex_gain(SWIGTYPE_p_PropertyIndex value) {
