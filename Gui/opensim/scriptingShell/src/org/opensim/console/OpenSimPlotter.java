@@ -6,7 +6,6 @@ package org.opensim.console;
 
 import java.io.IOException;
 import org.openide.util.Exceptions;
-import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.Coordinate;
 import org.opensim.modeling.Function;
 import org.opensim.modeling.Model;
@@ -156,11 +155,15 @@ public final class OpenSimPlotter {
         PathActuator pa = PathActuator.safeDownCast(mdl.getForceSet().get(pathActuatorName));
         PiecewiseLinearFunction f = new PiecewiseLinearFunction();
         f.setName("MomentArm_"+pathActuatorName);
-        for(double g=rmin; g<=rmax; g+=step){
+        double convToDegrees = 1.0;
+        String mtype = coord.get_motion_type();
+        if (coord.get_motion_type().equalsIgnoreCase("rotational")) 
+            convToDegrees = 180.0/Math.PI;
+        for(double g=rmin; g<rmax; g+=step){
             coord.setValue(s, g);
             double momentArm = pa.computeMomentArm(s, coord);
-            //System.out.println("Coord ="+g+" ma="+momentArm);
-            f.addPoint(g, momentArm);
+            //System.out.println("Coord ="+g*convToDegrees+" ma="+momentArm);
+            f.addPoint(g*convToDegrees, momentArm);
         }
         return addFunctionCurve(panel, f);
     }
