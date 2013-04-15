@@ -131,8 +131,10 @@ public class JPlotterPanel extends javax.swing.JPanel
 
     public PlotCurve showFunctionCurve(Function opensimFunction) {
         ValueAxis dAxis = getChartPanel().getChart().getXYPlot().getDomainAxis();
-        double dmin = dAxis.getLowerBound();
-        double dmax = dAxis.getUpperBound();
+        double dmin = dAxis.getLowerBound()/(1.0+dAxis.getLowerMargin());
+        //double dLMargin = dAxis.getLowerMargin();
+        double dmax = dAxis.getUpperBound()/(1.0+dAxis.getUpperMargin());
+        //double dUMargin = dAxis.getUpperMargin();
         ArrayList xValues = new ArrayList();
         ArrayList yValues = new ArrayList();
         //XYSeries curveSeries = new XYSeries("F="+opensimFunction.getName(), false, true);
