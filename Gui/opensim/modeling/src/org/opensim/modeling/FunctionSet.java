@@ -35,6 +35,11 @@ public class FunctionSet extends SetFunctions {
     super.delete();
   }
 
+  public void adoptAndAppend(Function aFunction) {
+	aFunction.markAdopted();
+    adoptAndAppendImpl(aFunction);
+  }
+
   public static FunctionSet safeDownCast(OpenSimObject obj) {
     long cPtr = opensimModelJNI.FunctionSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new FunctionSet(cPtr, false);
