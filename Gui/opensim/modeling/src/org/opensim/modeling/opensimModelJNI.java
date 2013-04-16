@@ -287,6 +287,13 @@ public class opensimModelJNI {
   public final static native void delete_Transform(long jarg1);
   public final static native long new_Inertia__SWIG_0();
   public final static native long new_Inertia__SWIG_1(double jarg1);
+  public final static native long new_Inertia__SWIG_2(long jarg1, Vec3 jarg1_, double jarg2);
+  public final static native long new_Inertia__SWIG_3(long jarg1, Vec3 jarg1_, long jarg2, Vec3 jarg2_);
+  public final static native long new_Inertia__SWIG_4(long jarg1, Vec3 jarg1_);
+  public final static native long new_Inertia__SWIG_5(double jarg1, double jarg2, double jarg3);
+  public final static native long new_Inertia__SWIG_6(double jarg1, double jarg2, double jarg3, double jarg4, double jarg5, double jarg6);
+  public final static native long Inertia_getMoments(long jarg1, Inertia jarg1_);
+  public final static native long Inertia_getProducts(long jarg1, Inertia jarg1_);
   public final static native boolean Inertia_isNaN(long jarg1, Inertia jarg1_);
   public final static native boolean Inertia_isInf(long jarg1, Inertia jarg1_);
   public final static native boolean Inertia_isFinite(long jarg1, Inertia jarg1_);

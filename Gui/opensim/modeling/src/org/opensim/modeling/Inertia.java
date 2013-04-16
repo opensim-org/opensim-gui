@@ -43,6 +43,34 @@ public class Inertia {
     this(opensimModelJNI.new_Inertia__SWIG_1(moment), true);
   }
 
+  public Inertia(Vec3 p, double mass) {
+    this(opensimModelJNI.new_Inertia__SWIG_2(Vec3.getCPtr(p), p, mass), true);
+  }
+
+  public Inertia(Vec3 moments, Vec3 products) {
+    this(opensimModelJNI.new_Inertia__SWIG_3(Vec3.getCPtr(moments), moments, Vec3.getCPtr(products), products), true);
+  }
+
+  public Inertia(Vec3 moments) {
+    this(opensimModelJNI.new_Inertia__SWIG_4(Vec3.getCPtr(moments), moments), true);
+  }
+
+  public Inertia(double xx, double yy, double zz) {
+    this(opensimModelJNI.new_Inertia__SWIG_5(xx, yy, zz), true);
+  }
+
+  public Inertia(double xx, double yy, double zz, double xy, double xz, double yz) {
+    this(opensimModelJNI.new_Inertia__SWIG_6(xx, yy, zz, xy, xz, yz), true);
+  }
+
+  public Vec3 getMoments() {
+    return new Vec3(opensimModelJNI.Inertia_getMoments(swigCPtr, this), false);
+  }
+
+  public Vec3 getProducts() {
+    return new Vec3(opensimModelJNI.Inertia_getProducts(swigCPtr, this), false);
+  }
+
   public boolean isNaN() {
     return opensimModelJNI.Inertia_isNaN(swigCPtr, this);
   }
