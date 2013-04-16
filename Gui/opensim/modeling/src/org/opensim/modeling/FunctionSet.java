@@ -35,9 +35,9 @@ public class FunctionSet extends SetFunctions {
     super.delete();
   }
 
-  public void adoptAndAppend(Function aFunction) {
+  public boolean adoptAndAppend(Function aFunction) {
 	aFunction.markAdopted();
-    adoptAndAppendImpl(aFunction);
+    return super.adoptAndAppend(aFunction);
   }
 
   public static FunctionSet safeDownCast(OpenSimObject obj) {
