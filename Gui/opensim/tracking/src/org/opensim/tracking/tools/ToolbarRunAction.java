@@ -34,6 +34,7 @@ public final class ToolbarRunAction implements ActionListener {
             try {
                 // TODO implement action body
                 toolModel = new ForwardToolModel(OpenSimDB.getInstance().getCurrentModel());
+                toolModel.setSolveForEquilibrium(true);
                 toolModel.execute();
                 running = true;
                 // Change 
