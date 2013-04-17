@@ -76,8 +76,7 @@ public final class TheApp {
      **/
     public static void exitApp(String errorMessage)
     {
-        DialogDisplayer.getDefault().notify(
-                new NotifyDescriptor.Message(errorMessage));
+        ErrorDialog.showMessageDialog(errorMessage);
         LifecycleManager.getDefault().exit();
     }
     /**

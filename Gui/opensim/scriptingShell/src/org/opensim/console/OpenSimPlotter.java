@@ -18,6 +18,7 @@ import org.opensim.plotter.PlotCurve;
 import org.opensim.plotter.PlotterDB;
 import org.opensim.plotter.PlotterSourceFile;
 import org.opensim.plotter.PlotterSourceMotion;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.view.motions.FileLoadMotionAction;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.view.pub.OpenSimDB;
@@ -88,7 +89,12 @@ public final class OpenSimPlotter {
      */
     static public PlotCurve addCurve(JPlotterPanel panel, PlotterSourceFile src, 
             String domain, String range){
+        if (src.isValidName(domain) && src.isValidName(range))
           return panel.plotDataFromSource(src, domain, range);
+        else {
+            ErrorDialog.showMessageDialog("Invalid specification of domain and range: "+domain+", "+range+" please check and retry.");
+            return null;
+        }
     }
     /**
      * Create a new curve by running the MuscleAnalysis to plot built in quantities. 

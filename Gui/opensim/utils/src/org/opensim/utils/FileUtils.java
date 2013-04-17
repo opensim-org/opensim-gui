@@ -62,6 +62,12 @@ public final class FileUtils {
     public static FileFilter MotionFileFilter = getFileFilter(".mot,.sto", "Motion or storage file");
     public static FileFilter TrcFileFilter = getFileFilter(".trc", "Marker trajectory file");
     
+    /**
+     * 
+     * @param folder name of folder to search
+     * @param baseName starting guess for unused filename located under folder
+     * @return name of unused filename that can be created under folder in the form base_X 
+     */
     public static String getNextAvailableName(String folder, String baseName) {
         File baseFile = new File(baseName);
         if (baseFile.isAbsolute()){ // user specified a full path. Ignore passed in folder
@@ -91,6 +97,11 @@ public final class FileUtils {
         return null;
     }
    
+    /**
+     * 
+     * @param fileName including extension
+     * @return extension part of passed in fileName
+     */
    public static String getExtension(String fileName) {
       int lastPathSeparatorIndex = fileName.lastIndexOf(File.separatorChar);
       String nameAndExtension;
@@ -103,7 +114,7 @@ public final class FileUtils {
    }
 
     /**
-     * utility method to add suffix to a file name
+     * utility method to add suffix to a file name, keeping extension
      */
     public static String addSuffix(String filenameWithExtension, String suffix) {
         if( filenameWithExtension == null ) return null;
@@ -118,6 +129,9 @@ public final class FileUtils {
     }
     /**
      * Extension should contain the leading . e.g. ".xml"
+     * @param path
+     * @param extension
+     * @return path appended with extension if it doesn't have it already
      */
     public static String addExtensionIfNeeded(String path, String extension) {
         if (path.endsWith(extension) || getExtension(path)!=null)
@@ -127,7 +141,7 @@ public final class FileUtils {
     }
         
    /**
-     * Utility to create file filters to browse for files of specified "extension" with "description"
+     * Utility to create file filters to browse for files of specified "extension" with "description" desc
      */
     public static FileFilter getFileFilter(final String extensions, final String desc) {
         if(extensions==null || desc==null) return null;
@@ -469,14 +483,11 @@ public final class FileUtils {
             * If isRequired2Exist flag is passed in as true we need to make sure the file really exists
             */
            if (allExist==false)
-              DialogDisplayer.getDefault().notify(
-                      new NotifyDescriptor.Message("Selected file(s) "+badFiles+" do not exist."));
+              ErrorDialog.showMessageDialog("Selected file(s) "+badFiles+" do not exist.");
            else if (numJntFiles!=1)
-              DialogDisplayer.getDefault().notify(
-                      new NotifyDescriptor.Message("One jnt file must be selected."));
+              ErrorDialog.showMessageDialog("One jnt file must be selected.");
            else if (numMslFiles>1)
-              DialogDisplayer.getDefault().notify(
-                      new NotifyDescriptor.Message("At most one msl file can be selected."));
+              ErrorDialog.showMessageDialog("At most one msl file can be selected.");
            else
                break;
        }
@@ -495,6 +506,13 @@ public final class FileUtils {
         
        return outFilenames;
     }
+    /**
+     * Check if we're running on Windows
+     * @return true if running on Windows, false otherwise
+     * 
+     * This's used to makePathRelative which is no a cross-platform operation. 
+     * The use of this function is thus discouraged
+     */
     public static boolean isWindows(){
  
 	String os = System.getProperty("os.name").toLowerCase();

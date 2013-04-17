@@ -29,9 +29,17 @@ import java.awt.Dialog;
 import java.io.IOException;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
+import org.openide.NotifyDescriptor;
 
 public class ErrorDialog {
-
+    
+    /**
+     * Display error dialog with contents from IOException
+     * 
+     * @param title dialog title
+     * @param message text message explaining the exception
+     * @param ex IOException
+     */
    public static void displayIOExceptionDialog(String title, String message, IOException ex) {
       ErrorPanel panel = new ErrorPanel();
       panel.setText(message, ex.getMessage());
@@ -40,4 +48,12 @@ public class ErrorDialog {
       Dialog dialog = DialogDisplayer.getDefault().createDialog(dlg);
       dialog.setVisible(true);
    }
+    /**
+     * Popup a dialog showing the passed in message
+     * @param message 
+     */
+    public static void showMessageDialog(String message) {
+        DialogDisplayer.getDefault().notify(
+                new NotifyDescriptor.Message(message));
+    }
 }
