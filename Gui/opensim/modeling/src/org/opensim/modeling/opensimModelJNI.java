@@ -2994,6 +2994,7 @@ public class opensimModelJNI {
   public final static native void HuntCrossleyForce_setDynamicFriction(long jarg1, HuntCrossleyForce jarg1_, double jarg2);
   public final static native double HuntCrossleyForce_getViscousFriction(long jarg1, HuntCrossleyForce jarg1_);
   public final static native void HuntCrossleyForce_setViscousFriction(long jarg1, HuntCrossleyForce jarg1_, double jarg2);
+  public final static native void HuntCrossleyForce_addGeometry(long jarg1, HuntCrossleyForce jarg1_, String jarg2);
   public final static native long HuntCrossleyForce_getRecordLabels(long jarg1, HuntCrossleyForce jarg1_);
   public final static native long HuntCrossleyForce_getRecordValues(long jarg1, HuntCrossleyForce jarg1_, long jarg2, State jarg2_);
   public final static native void delete_HuntCrossleyForce(long jarg1);
@@ -5799,8 +5800,6 @@ public class opensimModelJNI {
   public final static native void MetabolicMuscleParameter_set_maintenance_constant_fast_twitch__SWIG_1(long jarg1, MetabolicMuscleParameter jarg1_, double jarg2);
   public final static native long new_MetabolicMuscleParameter__SWIG_0();
   public final static native long new_MetabolicMuscleParameter__SWIG_1(double jarg1, boolean jarg2, double jarg3, double jarg4, double jarg5, double jarg6, double jarg7);
-  public final static native long MetabolicMuscleParameter_getMuscle(long jarg1, MetabolicMuscleParameter jarg1_);
-  public final static native void MetabolicMuscleParameter_setMuscle(long jarg1, MetabolicMuscleParameter jarg1_, long jarg2, Muscle jarg2_);
   public final static native double MetabolicMuscleParameter_getMuscleMass(long jarg1, MetabolicMuscleParameter jarg1_);
   public final static native void MetabolicMuscleParameter_setMuscleMass(long jarg1, MetabolicMuscleParameter jarg1_, double jarg2);
   public final static native void delete_MetabolicMuscleParameter(long jarg1);
@@ -6383,6 +6382,10 @@ public class opensimModelJNI {
   public final static native boolean GeometryPath_replacePathPoint(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, long jarg3, PathPoint jarg3_, long jarg4, PathPoint jarg4_);
   public final static native long GeometryPath_getOwner(long jarg1, GeometryPath jarg1_);
   public final static native void GeometryPath_setOwner(long jarg1, GeometryPath jarg1_, long jarg2, OpenSimObject jarg2_);
+  public final static native void GeometryPath_setDefaultColor(long jarg1, GeometryPath jarg1_, long jarg2, Vec3 jarg2_);
+  public final static native long GeometryPath_getDefaultColor(long jarg1, GeometryPath jarg1_);
+  public final static native void GeometryPath_setColor(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, long jarg3, Vec3 jarg3_);
+  public final static native long GeometryPath_getColor(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_);
   public final static native double GeometryPath_getLength(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_);
   public final static native void GeometryPath_setLength(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, double jarg3);
   public final static native double GeometryPath_getPreScaleLength(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_);

@@ -429,15 +429,6 @@ public class MetabolicMuscleParameter extends OpenSimObject {
     this(opensimModelJNI.new_MetabolicMuscleParameter__SWIG_1(muscle_mass, calculate_mass_from_muscle_properties, ratio_slow_twitch_fibers, activation_constant_slow_twitch, activation_constant_fast_twitch, maintenance_constant_slow_twitch, maintenance_constant_fast_twitch), true);
   }
 
-  public Muscle getMuscle() {
-    long cPtr = opensimModelJNI.MetabolicMuscleParameter_getMuscle(swigCPtr, this);
-    return (cPtr == 0) ? null : new Muscle(cPtr, false);
-  }
-
-  public void setMuscle(Muscle m) {
-    opensimModelJNI.MetabolicMuscleParameter_setMuscle(swigCPtr, this, Muscle.getCPtr(m), m);
-  }
-
   public double getMuscleMass() {
     return opensimModelJNI.MetabolicMuscleParameter_getMuscleMass(swigCPtr, this);
   }

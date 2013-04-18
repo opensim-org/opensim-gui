@@ -229,6 +229,10 @@ public class HuntCrossleyForce extends Force {
     opensimModelJNI.HuntCrossleyForce_setViscousFriction(swigCPtr, this, friction);
   }
 
+  public void addGeometry(String name) {
+    opensimModelJNI.HuntCrossleyForce_addGeometry(swigCPtr, this, name);
+  }
+
   public ArrayStr getRecordLabels() {
     return new ArrayStr(opensimModelJNI.HuntCrossleyForce_getRecordLabels(swigCPtr, this), true);
   }

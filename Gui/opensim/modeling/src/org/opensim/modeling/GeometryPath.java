@@ -132,6 +132,22 @@ public class GeometryPath extends ModelComponent {
     opensimModelJNI.GeometryPath_setOwner(swigCPtr, this, OpenSimObject.getCPtr(anObject), anObject);
   }
 
+  public void setDefaultColor(Vec3 color) {
+    opensimModelJNI.GeometryPath_setDefaultColor(swigCPtr, this, Vec3.getCPtr(color), color);
+  }
+
+  public Vec3 getDefaultColor() {
+    return new Vec3(opensimModelJNI.GeometryPath_getDefaultColor(swigCPtr, this), false);
+  }
+
+  public void setColor(State s, Vec3 color) {
+    opensimModelJNI.GeometryPath_setColor(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(color), color);
+  }
+
+  public Vec3 getColor(State s) {
+    return new Vec3(opensimModelJNI.GeometryPath_getColor(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
   public double getLength(State s) {
     return opensimModelJNI.GeometryPath_getLength(swigCPtr, this, State.getCPtr(s), s);
   }

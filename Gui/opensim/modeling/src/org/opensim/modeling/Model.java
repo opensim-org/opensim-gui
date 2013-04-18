@@ -578,8 +578,8 @@ public class Model extends ModelComponent {
     return opensimModelJNI.Model_deleteUnusedMarkers(swigCPtr, this, ArrayStr.getCPtr(aMarkerNames), aMarkerNames);
   }
 
-  public void addAnalysisImpl(Analysis aAnalysis) {
-    opensimModelJNI.Model_addAnalysisImpl(swigCPtr, this, Analysis.getCPtr(aAnalysis), aAnalysis);
+  public void addAnalysisImpl(Analysis analysis) {
+    opensimModelJNI.Model_addAnalysisImpl(swigCPtr, this, Analysis.getCPtr(analysis), analysis);
   }
 
   public void addControllerImpl(Controller aController) {

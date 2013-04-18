@@ -445,24 +445,24 @@ public class ExternalForce extends Force {
     this(opensimModelJNI.new_ExternalForce__SWIG_0(), true);
   }
 
-  public ExternalForce(Storage dataSource, String forceIdentifier, String PointIdentifier, String torqueIdentifier, String appliedToBodyName, String forceExpressedInBodyName, String pointExpressedInBodyName) {
-    this(opensimModelJNI.new_ExternalForce__SWIG_1(Storage.getCPtr(dataSource), dataSource, forceIdentifier, PointIdentifier, torqueIdentifier, appliedToBodyName, forceExpressedInBodyName, pointExpressedInBodyName), true);
+  public ExternalForce(Storage dataSource, String forceIdentifier, String pointIdentifier, String torqueIdentifier, String appliedToBodyName, String forceExpressedInBodyName, String pointExpressedInBodyName) {
+    this(opensimModelJNI.new_ExternalForce__SWIG_1(Storage.getCPtr(dataSource), dataSource, forceIdentifier, pointIdentifier, torqueIdentifier, appliedToBodyName, forceExpressedInBodyName, pointExpressedInBodyName), true);
   }
 
-  public ExternalForce(Storage dataSource, String forceIdentifier, String PointIdentifier, String torqueIdentifier, String appliedToBodyName, String forceExpressedInBodyName) {
-    this(opensimModelJNI.new_ExternalForce__SWIG_2(Storage.getCPtr(dataSource), dataSource, forceIdentifier, PointIdentifier, torqueIdentifier, appliedToBodyName, forceExpressedInBodyName), true);
+  public ExternalForce(Storage dataSource, String forceIdentifier, String pointIdentifier, String torqueIdentifier, String appliedToBodyName, String forceExpressedInBodyName) {
+    this(opensimModelJNI.new_ExternalForce__SWIG_2(Storage.getCPtr(dataSource), dataSource, forceIdentifier, pointIdentifier, torqueIdentifier, appliedToBodyName, forceExpressedInBodyName), true);
   }
 
-  public ExternalForce(Storage dataSource, String forceIdentifier, String PointIdentifier, String torqueIdentifier, String appliedToBodyName) {
-    this(opensimModelJNI.new_ExternalForce__SWIG_3(Storage.getCPtr(dataSource), dataSource, forceIdentifier, PointIdentifier, torqueIdentifier, appliedToBodyName), true);
+  public ExternalForce(Storage dataSource, String forceIdentifier, String pointIdentifier, String torqueIdentifier, String appliedToBodyName) {
+    this(opensimModelJNI.new_ExternalForce__SWIG_3(Storage.getCPtr(dataSource), dataSource, forceIdentifier, pointIdentifier, torqueIdentifier, appliedToBodyName), true);
   }
 
-  public ExternalForce(Storage dataSource, String forceIdentifier, String PointIdentifier, String torqueIdentifier) {
-    this(opensimModelJNI.new_ExternalForce__SWIG_4(Storage.getCPtr(dataSource), dataSource, forceIdentifier, PointIdentifier, torqueIdentifier), true);
+  public ExternalForce(Storage dataSource, String forceIdentifier, String pointIdentifier, String torqueIdentifier) {
+    this(opensimModelJNI.new_ExternalForce__SWIG_4(Storage.getCPtr(dataSource), dataSource, forceIdentifier, pointIdentifier, torqueIdentifier), true);
   }
 
-  public ExternalForce(Storage dataSource, String forceIdentifier, String PointIdentifier) {
-    this(opensimModelJNI.new_ExternalForce__SWIG_5(Storage.getCPtr(dataSource), dataSource, forceIdentifier, PointIdentifier), true);
+  public ExternalForce(Storage dataSource, String forceIdentifier, String pointIdentifier) {
+    this(opensimModelJNI.new_ExternalForce__SWIG_5(Storage.getCPtr(dataSource), dataSource, forceIdentifier, pointIdentifier), true);
   }
 
   public ExternalForce(Storage dataSource, String forceIdentifier) {
