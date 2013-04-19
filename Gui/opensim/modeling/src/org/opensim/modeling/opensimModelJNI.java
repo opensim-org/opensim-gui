@@ -6093,6 +6093,7 @@ public class opensimModelJNI {
   public final static native void Model_addForceImpl(long jarg1, Model jarg1_, long jarg2, Force jarg2_);
   public final static native void Model_addProbeImpl(long jarg1, Model jarg1_, long jarg2, Probe jarg2_);
   public final static native void Model_addContactGeometryImpl(long jarg1, Model jarg1_, long jarg2, ContactGeometry jarg2_);
+  public final static native void Model_removeProbe(long jarg1, Model jarg1_, long jarg2, Probe jarg2_);
   public final static native String Model_getInputFileName(long jarg1, Model jarg1_);
   public final static native void Model_setInputFileName(long jarg1, Model jarg1_, String jarg2);
   public final static native String Model_getCredits(long jarg1, Model jarg1_);

@@ -85,6 +85,19 @@ public class PropertyEditorAdaptor {
         this.node = ownerNode;
         defaultPose = new ModelPose(model.getCoordinateSet(), "_saveDefault", true);
     }
+    /**
+     * Constructor that only takes a model. This's not to be used for specific Property editing
+     * it just leverages the code written to support recreating the system under the model after an edit
+     * @param aModel 
+     */
+    public PropertyEditorAdaptor(Model aModel) {
+        this.model = aModel;
+        this.context = OpenSimDB.getInstance().getContext(model);
+        this.obj = null;
+        this.prop = null;
+        this.node = null;
+        defaultPose = new ModelPose(model.getCoordinateSet(), "_saveDefault", true);
+    }
     // Double Properties
 
     public double getValueDouble() {
@@ -361,6 +374,7 @@ public class PropertyEditorAdaptor {
         }
         
         context.setState(model.getWorkingState());
+        context.realizePosition();
     }
     
     private void handlePropertyChange(final double oldValue, final double v, boolean supportUndo) {
@@ -698,5 +712,13 @@ public class PropertyEditorAdaptor {
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }
     }
-
+    /**
+     * Need model and context only. 
+     */
+    public void handleModelChange()
+    {
+        cacheModelAndState();
+        restoreStateFromCachedModel();
+    }
+            
 }

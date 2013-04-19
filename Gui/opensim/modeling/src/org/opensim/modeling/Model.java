@@ -294,6 +294,10 @@ public class Model extends ModelComponent {
     opensimModelJNI.Model_addContactGeometryImpl(swigCPtr, this, ContactGeometry.getCPtr(aContactGeometry), aContactGeometry);
   }
 
+  public void removeProbe(Probe aProbe) {
+    opensimModelJNI.Model_removeProbe(swigCPtr, this, Probe.getCPtr(aProbe), aProbe);
+  }
+
   public String getInputFileName() {
     return opensimModelJNI.Model_getInputFileName(swigCPtr, this);
   }

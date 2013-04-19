@@ -50,8 +50,9 @@ public class OneProbeNode  extends DisablableOpenSimObjectNode {
         // Arrays are fixed size, onvert to a List
         List<Action> actions = java.util.Arrays.asList(superActions);
         // Create new Array of proper size
-        Action[] retActions = new Action[actions.size()+1];
+        Action[] retActions = new Action[actions.size()+2];
         actions.toArray(retActions);
+        retActions[actions.size()]=new DeleteProbeAction();
         if (disabled){  // take out display menu ObjectDisplayMenuAction
             for (int i=0; i< retActions.length; i++){
                 if (retActions[i] instanceof ObjectDisplayMenuAction){
@@ -63,7 +64,7 @@ public class OneProbeNode  extends DisablableOpenSimObjectNode {
         try {
             ToggleEnabledStateAction act =(ToggleEnabledStateAction) ToggleEnabledStateAction.findObject(
                     (Class)Class.forName("org.opensim.view.nodes.ToggleEnabledStateAction"), true);
-            retActions[actions.size()]=act;
+            retActions[actions.size()+1]=act;
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         }
