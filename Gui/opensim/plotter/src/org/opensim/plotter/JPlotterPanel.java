@@ -163,8 +163,8 @@ public class JPlotterPanel extends javax.swing.JPanel
     }
     
     public void setAxesLabels(String xAxis, String yAxis) {
-        setDomainAxisLabel(xAxis);
-        setRangeAxisLabel(yAxis);
+        setXAxisLabel(xAxis);
+        setYAxisLabel(yAxis);
     }    
 
    public enum PlotDataSource {FileSource, MotionSource, AnalysisSource};
