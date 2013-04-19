@@ -152,6 +152,20 @@ public class JPlotterPanel extends javax.swing.JPanel
         plotterModel.getPlotTreeModel().addPlotCurveToTree(cv);
         return cv;
     }
+    
+    
+    public void setXAxisLabel(String label) {
+        plotterModel.getCurrentPlot().getChartPanel().getChart().getXYPlot().getDomainAxis().setLabel(label);
+    }
+    
+    public void setYAxisLabel(String label) {
+        plotterModel.getCurrentPlot().getChartPanel().getChart().getXYPlot().getRangeAxis().setLabel(label);
+    }
+    
+    public void setAxesLabels(String xAxis, String yAxis) {
+        setDomainAxisLabel(xAxis);
+        setRangeAxisLabel(yAxis);
+    }    
 
    public enum PlotDataSource {FileSource, MotionSource, AnalysisSource};
    JPlotterQuantitySelector xSelector = null;
