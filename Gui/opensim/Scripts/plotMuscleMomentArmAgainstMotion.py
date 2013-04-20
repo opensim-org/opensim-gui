@@ -31,14 +31,13 @@ addModel(filepath);
 # Create a plotter panel and set the title
 plotterPanel = createPlotterPanel("Plot Example")
 
-motionfilePath = getScriptsDir()+"/testData/BothLegsWalk.mot"
+motionfilePath = getInstallDir() + "/Models/BothLegs/BothLegsWalk.mot"
 motSrc = addMotionSource(plotterPanel, motionfilePath)
 
 # Plot MomentArm of RF, VASINT about r_knee_angle through the motion
-addMotionCurve(plotterPanel, 'momentArm.r_knee_angle', 'RF', motSrc)
-addMotionCurve(plotterPanel, 'muscle-tendon length', 'RF', motSrc)
+crv1 = addMotionCurve(plotterPanel, 'momentArm.r_knee_angle', 'RF', motSrc)
+crv2 = addMotionCurve(plotterPanel, 'muscle-tendon length', 'RF', motSrc)
 # addMotionCurve(plotterPanel, 'momentArm.r_knee_angle', 'VASINT', motSrc)
 
-# Plot moment of RF about r_knee_angle through motion
-# addMotionCurve(plotterPanel, 'moment.r_knee_angle', 'RF', motSrc)
-
+crv1.setLegend("Moment Arm")
+crv2.setLegend("Muscle-Tendon Length")

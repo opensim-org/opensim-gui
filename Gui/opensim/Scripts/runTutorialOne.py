@@ -20,10 +20,6 @@
 # ----------------------------------------------------------------------- #
 
 # This example performs some of the initial steps of Tutorial One
-
-# This line allows for more graceful handling of low level exceptions, just in case
-modeling.OpenSimObject.setDebugLevel(3)
-
 # Load model
 addModel(getInstallDir()+"/Models/BothLegs/BothLegs.osim")
 

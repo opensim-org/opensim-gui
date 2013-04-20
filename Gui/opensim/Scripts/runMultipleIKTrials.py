@@ -30,9 +30,6 @@ import os
 # Utils contains tools to browse for files and folders
 import org.opensim.utils as utils
 
-# More graceful handling of exceptions thrown by tools, may be taken out in production
-modeling.OpenSimObject.setDebugLevel(3)
-
 # Browse for Directory containing trc files to process
 
 print "Acquiring folders with marker data"
