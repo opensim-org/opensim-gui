@@ -100,4 +100,12 @@ public class ConcreteModelNode extends OpenSimObjectNode {
  }
       return act;
    }
+
+    @Override
+    public void updateSelfFromObject() {
+        for(int i=0; i<getChildren().getNodesCount(); i++){
+            OpenSimObjectSetNode setNode = (OpenSimObjectSetNode) getChildren().getNodeAt(i); 
+            setNode.updateSelfFromObject();
+        }        
+    }
 }

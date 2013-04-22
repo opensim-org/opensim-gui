@@ -131,4 +131,11 @@ public class OpenSimObjectSetNode extends OpenSimObjectNode {
         return openSimObject;
     }
 
+    @Override
+    public void updateSelfFromObject() {
+        
+       
+    }
+
+    
 }

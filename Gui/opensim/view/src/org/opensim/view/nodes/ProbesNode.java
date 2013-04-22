@@ -96,5 +96,53 @@ public class ProbesNode extends OpenSimObjectSetNode {
         }
          return newName;
     }
+
+    @Override
+    public void updateSelfFromObject() {
+        super.updateSelfFromObject();
+        /**
+         * Get Probes from model (a ref already there)
+         */
+        OpenSimObject probeSetObj = this.getOpenSimObject();
+        ProbeSet probeSet = ProbeSet.safeDownCast(probeSetObj);
+        // Make sure every Probe has a node otherwise create one
+        // this handles insertions and edits
+        for(int probeNum=0; probeNum<probeSet.getSize(); probeNum++){
+            // Cycle thru nodes and find corresponding Probe
+            Probe nextProbe = probeSet.get(probeNum);
+            Children children = getChildren();
+            boolean found = false;
+            OpenSimObjectNode foundNode = null;
+            for(int childNum=0; childNum < children.getNodesCount() && !found; childNum++){
+                OpenSimObjectNode pNode = (OpenSimObjectNode) children.getNodeAt(childNum);
+                found = (pNode instanceof OneProbeNode && pNode.getOpenSimObject().equals(nextProbe));
+                if (found)
+                    foundNode = pNode;
+            }
+            if (!found){
+                // append to the end
+                OneProbeNode node = new OneProbeNode(nextProbe);
+                Node[] arrNodes = new Node[1];
+                arrNodes[0] = node;
+                children.add(arrNodes);
+            }
+            else
+                foundNode.updateSelfFromObject();
+        }
+        // Deletion
+        if (probeSet.getSize()<getChildren().getNodesCount()){
+            // some nodes need to be deleted
+            int numChildren = getChildren().getNodesCount();
+            for(int childNum=numChildren-1; childNum >=0 ; childNum--){
+                OneProbeNode pNode = (OneProbeNode) getChildren().getNodeAt(childNum);
+                String nm = pNode.getDisplayName(); // this relies on gui-side rather than API values
+                boolean exists = (probeSet.getIndex(nm)!=-1);
+                if (!exists)
+                    getChildren().remove(new Node[]{pNode});
+            
+            } //for
+        } //if
+          
+    }
     
 } // class ProbesNode

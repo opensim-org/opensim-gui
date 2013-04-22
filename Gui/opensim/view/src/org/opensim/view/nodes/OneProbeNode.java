@@ -71,4 +71,9 @@ public class OneProbeNode  extends DisablableOpenSimObjectNode {
         return retActions;
     }
 
+    @Override
+    public void updateSelfFromObject() {
+        super.updateSelfFromObject();
+    }
+
 }

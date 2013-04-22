@@ -15,7 +15,6 @@ import org.openide.filesystems.FileUtil;
 import org.openide.loaders.DataObject;
 import org.openide.util.Exceptions;
 import org.openide.util.actions.CallableSystemAction;
-import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.Constraint;
 import org.opensim.modeling.Coordinate;
@@ -28,8 +27,9 @@ import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.Probe;
 import org.opensim.modeling.State;
 import org.opensim.utils.TheApp;
-import org.opensim.view.SingleModelVisuals;
+import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.motions.MotionsDB;
+import org.opensim.view.nodes.ConcreteModelNode;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 
@@ -346,4 +346,12 @@ public final class gui {
             models[i] = (Model) modelsAsObjects[i];
         return models;
     } 
- }
+     
+    /**
+     * updateDisplay to be in sync. with model edits done from scripting shell
+     */
+    static public void updateDisplay() {
+        ConcreteModelNode modelNode = ExplorerTopComponent.getDefault().getModelNode(getCurrentModel());
+        modelNode.updateSelfFromObject();
+    }
+}

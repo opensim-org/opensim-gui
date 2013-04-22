@@ -64,5 +64,11 @@ public abstract class DisablableOpenSimObjectNode extends OpenSimObjectNode impl
         }
         return null;
     }
+
+    @Override
+    public void updateSelfFromObject() {
+        super.updateSelfFromObject();
+        refreshNode();
+    }
     
 }

@@ -212,6 +212,15 @@ public class OpenSimObjectNode extends OpenSimNode {
        nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
        return nextNodeProp;
    }
+    /**
+     * Method for the node to update its children by addition/deletion/rename
+     * Model delegates the call to sets and sets down to objects after handling add/delete from set
+     * If an Object's node creates children it's resposnible for maintaining them by addition/deletion/rename
+     * Object is repsonsible for enabling/disabling
+     */
+    public void updateSelfFromObject() {
+        setDisplayName(openSimObject.getName());
+    };
     public enum displayOption{Showable, Isolatable, Colorable};
     private ArrayList<displayOption> validDisplayOptions = new ArrayList<displayOption>();
     
