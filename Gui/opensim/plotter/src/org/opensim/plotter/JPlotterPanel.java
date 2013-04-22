@@ -1630,6 +1630,9 @@ public class JPlotterPanel extends javax.swing.JPanel
       analysisSource.getStorage().print("toolOutput"/*+key*/+".sto");
       currentModel.getSimbodyEngine().convertRadiansToDegrees(analysisSource.getStorage());
       currentModel.getSimbodyEngine().convertRadiansToDegrees(statesStorage);
+       ArrayStr coordsArray = new ArrayStr();
+       coordsArray.append("all"); 
+       MuscleAnalysis.safeDownCast(analysis).setCoordinates(coordsArray);   
    }
 
     private void setNonzeroDefaultValues(final ArrayStr stateNames, final double[] statesForAnalysis, boolean activationOverride, double activationValue) {

@@ -377,6 +377,14 @@ public class PlotterModel {
         }
         // Should get here only if moment arm
         int numStorages = analyses.get("MuscleAnalysis").getStorageList().getSize();
+        if (analyses.get("MuscleAnalysis").getStorageList().getIndex(qName)==-1){
+            //String anXml = analyses.get("MuscleAnalysis").dump();
+            MuscleAnalysis.safeDownCast(analyses.get("MuscleAnalysis")).allocateStorageObjects();
+        }
+        /*ArrayStorage ast = analyses.get("MuscleAnalysis").getStorageList();
+        for(int i=0;i<ast.getSize();i++)
+            System.out.println(ast.get(i).getName());
+        System.out.println("----");*/
         return analyses.get("MuscleAnalysis").getStorageList().get(qName);
     }
 
@@ -406,7 +414,7 @@ public class PlotterModel {
                 an.setOn(true);
                 String coordinateY=shortName.substring(shortName.indexOf('_')+1);
                 ArrayStr coordsArray = new ArrayStr();
-                coordsArray.append("all");  // This's bad and will slow things down but is a workaround MuscleAnalysis change that creates storages too late for us
+                coordsArray.append(coordinateY);  // This's bad and will slow things down but is a workaround MuscleAnalysis change that creates storages too late for us
                 if (MuscleAnalysis.safeDownCast(an)!=null)
                    ((MuscleAnalysis)MuscleAnalysis.safeDownCast(an)).setCoordinates(coordsArray);   
         }

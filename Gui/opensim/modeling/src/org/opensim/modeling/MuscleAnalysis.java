@@ -207,4 +207,8 @@ public class MuscleAnalysis extends Analysis {
     return opensimModelJNI.MuscleAnalysis_printResults__SWIG_3(swigCPtr, this, aBaseName);
   }
 
+  public void allocateStorageObjects() {
+    opensimModelJNI.MuscleAnalysis_allocateStorageObjects(swigCPtr, this);
+  }
+
 }

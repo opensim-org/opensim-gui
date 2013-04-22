@@ -7316,6 +7316,7 @@ public class opensimModelJNI {
   public final static native int MuscleAnalysis_printResults__SWIG_1(long jarg1, MuscleAnalysis jarg1_, String jarg2, String jarg3, double jarg4);
   public final static native int MuscleAnalysis_printResults__SWIG_2(long jarg1, MuscleAnalysis jarg1_, String jarg2, String jarg3);
   public final static native int MuscleAnalysis_printResults__SWIG_3(long jarg1, MuscleAnalysis jarg1_, String jarg2);
+  public final static native void MuscleAnalysis_allocateStorageObjects(long jarg1, MuscleAnalysis jarg1_);
   public final static native long InverseDynamics_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void InverseDynamics_assign(long jarg1, InverseDynamics jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String InverseDynamics_getClassName();
