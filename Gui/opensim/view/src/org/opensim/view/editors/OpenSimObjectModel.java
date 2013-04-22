@@ -293,7 +293,9 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
                    controlButton = new JButton(addIcon);
                    //controlButton.setRolloverIcon(addRolloverIcon); // doesn't work right now
                    controlButton.addMouseListener(new MouseInputAdapter() {
-                      public void mousePressed(MouseEvent evt) { addPropertyItem(); }
+                      public void mousePressed(MouseEvent evt) { 
+                          addPropertyItem(); 
+                      }
                    });
                    controlButton.setToolTipText("Add an item to this property array");
                }
@@ -304,7 +306,10 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
                    controlButton = new JButton(removeIcon);
                    //controlButton.setRolloverIcon(removeRolloverIcon); // doesn't work right now
                    controlButton.addMouseListener(new MouseInputAdapter() {
-                      public void mousePressed(MouseEvent evt) { removePropertyItem(); }
+                                @Override
+                      public void mousePressed(MouseEvent evt) { 
+                                    removePropertyItem(); 
+                                }
                    });
                    controlButton.setToolTipText("Remove this item from the property array");
              }
@@ -362,13 +367,10 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
 
     // This is an item in a propertyOrObject array, and we remove this item
     private void removePropertyItem() {
-      if(idx != -1) {/* FIXME30
+      if(idx != -1) {
          AbstractProperty p = (AbstractProperty)getParent().propertyOrObject;
-         if (p.getType() == AbstractProperty.PropertyType.DblArray) p.getValueDblArray().remove(idx);
-         else if (p.getType() == AbstractProperty.PropertyType.IntArray) p.getValueIntArray().remove(idx);
-         else if (p.getType() == AbstractProperty.PropertyType.StrArray) p.getValueStrArray().remove(idx);
-         else if (p.getType() == AbstractProperty.PropertyType.BoolArray) p.getValueBoolArray().remove(idx);
-         reloadChildren(getParent());(*/
+         PropertyHelper.removeItem(p, idx);
+         reloadChildren(getParent());
       }
     }
 
