@@ -58,11 +58,7 @@ public class GeometryPath extends ModelComponent {
   }
 
   public GeometryPath() {
-    this(opensimModelJNI.new_GeometryPath__SWIG_0(), true);
-  }
-
-  public GeometryPath(GeometryPath aPath) {
-    this(opensimModelJNI.new_GeometryPath__SWIG_1(GeometryPath.getCPtr(aPath), aPath), true);
+    this(opensimModelJNI.new_GeometryPath(), true);
   }
 
   public void setName(String aName) {

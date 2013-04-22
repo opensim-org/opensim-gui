@@ -178,12 +178,12 @@ public class Model extends ModelComponent {
     return new State(opensimModelJNI.Model_getWorkingState(swigCPtr, this), false);
   }
 
-  public void copyDefaultStateIntoWorkingState() {
-    opensimModelJNI.Model_copyDefaultStateIntoWorkingState(swigCPtr, this);
+  public State updWorkingState() {
+    return new State(opensimModelJNI.Model_updWorkingState(swigCPtr, this), false);
   }
 
-  public State copyDefaultStateIntoWorkingStateAndReturn() {
-    return new State(opensimModelJNI.Model_copyDefaultStateIntoWorkingStateAndReturn(swigCPtr, this), false);
+  public void copyDefaultStateIntoWorkingState() {
+    opensimModelJNI.Model_copyDefaultStateIntoWorkingState(swigCPtr, this);
   }
 
   public void initStateWithoutRecreatingSystem(State state) {
@@ -500,10 +500,6 @@ public class Model extends ModelComponent {
 
   public int getNumProbeStates() {
     return opensimModelJNI.Model_getNumProbeStates(swigCPtr, this);
-  }
-
-  public void setInitialTime(double ti) {
-    opensimModelJNI.Model_setInitialTime(swigCPtr, this, ti);
   }
 
   public CoordinateSet updCoordinateSet() {

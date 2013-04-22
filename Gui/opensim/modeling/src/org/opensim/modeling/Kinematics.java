@@ -69,10 +69,6 @@ public class Kinematics extends Analysis {
     this(opensimModelJNI.new_Kinematics__SWIG_2(aFileName), true);
   }
 
-  public Kinematics(Kinematics aObject) {
-    this(opensimModelJNI.new_Kinematics__SWIG_3(Kinematics.getCPtr(aObject), aObject), true);
-  }
-
   public void setStorageCapacityIncrements(int aIncrement) {
     opensimModelJNI.Kinematics_setStorageCapacityIncrements(swigCPtr, this, aIncrement);
   }
