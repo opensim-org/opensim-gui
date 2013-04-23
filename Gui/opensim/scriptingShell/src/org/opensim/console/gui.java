@@ -348,7 +348,9 @@ public final class gui {
     } 
      
     /**
-     * updateDisplay to be in sync. with model edits done from scripting shell
+     * updateDisplay to be in sync. with model edits done from scripting shell. 
+     * As of now works on Navigator for Probes only, will need to update Coordinates and Gfx window
+     * and support other object types as well
      */
     static public void updateDisplay() {
         ConcreteModelNode modelNode = ExplorerTopComponent.getDefault().getModelNode(getCurrentModel());
