@@ -54,42 +54,42 @@ public class Model extends ModelComponent {
 
   public void addComponent(ModelComponent aComponent) {
 	aComponent.markAdopted();
-    addComponentImpl(aComponent);
+    private_addComponent(aComponent);
   }
 
   public void addBody(Body aBody) {
 	aBody.markAdopted();
-    addBodyImpl(aBody);
+    private_addBody(aBody);
   }
 
   public void addConstraint(Constraint aConstraint) {
 	aConstraint.markAdopted();
-    addConstraintImpl(aConstraint);
+    private_addConstraint(aConstraint);
   }
 
   public void addProbe(Probe aProbe) {
 	aProbe.markAdopted();
-    addProbeImpl(aProbe);
+    private_addProbe(aProbe);
   }  
   
   public void addContactGeometry(ContactGeometry aContactGeometry) {
 	aContactGeometry.markAdopted();
-    addContactGeometryImpl(aContactGeometry);
+    private_addContactGeometry(aContactGeometry);
   }
 
   public void addAnalysis(Analysis aAnalysis) {
 	aAnalysis.markAdopted();
-	addAnalysisImpl(aAnalysis);
+	private_addAnalysis(aAnalysis);
   }
 
   public void addForce(Force aForce) {
 	aForce.markAdopted();
-	addForceImpl(aForce);
+	private_addForce(aForce);
   }
 
   public void addController(Controller aController) {
 	aController.markAdopted();
-	addControllerImpl(aController);
+	private_addController(aController);
   }
 
   public static Model safeDownCast(OpenSimObject obj) {
@@ -270,28 +270,28 @@ public class Model extends ModelComponent {
     return opensimModelJNI.Model_getNumStateVariables(swigCPtr, this);
   }
 
-  public void addComponentImpl(ModelComponent aComponent) {
-    opensimModelJNI.Model_addComponentImpl(swigCPtr, this, ModelComponent.getCPtr(aComponent), aComponent);
+  private void private_addComponent(ModelComponent aComponent) {
+    opensimModelJNI.Model_private_addComponent(swigCPtr, this, ModelComponent.getCPtr(aComponent), aComponent);
   }
 
-  public void addBodyImpl(Body aBody) {
-    opensimModelJNI.Model_addBodyImpl(swigCPtr, this, Body.getCPtr(aBody), aBody);
+  private void private_addBody(Body aBody) {
+    opensimModelJNI.Model_private_addBody(swigCPtr, this, Body.getCPtr(aBody), aBody);
   }
 
-  public void addConstraintImpl(Constraint aConstraint) {
-    opensimModelJNI.Model_addConstraintImpl(swigCPtr, this, Constraint.getCPtr(aConstraint), aConstraint);
+  private void private_addConstraint(Constraint aConstraint) {
+    opensimModelJNI.Model_private_addConstraint(swigCPtr, this, Constraint.getCPtr(aConstraint), aConstraint);
   }
 
-  public void addForceImpl(Force aForce) {
-    opensimModelJNI.Model_addForceImpl(swigCPtr, this, Force.getCPtr(aForce), aForce);
+  private void private_addForce(Force aForce) {
+    opensimModelJNI.Model_private_addForce(swigCPtr, this, Force.getCPtr(aForce), aForce);
   }
 
-  public void addProbeImpl(Probe aProbe) {
-    opensimModelJNI.Model_addProbeImpl(swigCPtr, this, Probe.getCPtr(aProbe), aProbe);
+  private void private_addProbe(Probe aProbe) {
+    opensimModelJNI.Model_private_addProbe(swigCPtr, this, Probe.getCPtr(aProbe), aProbe);
   }
 
-  public void addContactGeometryImpl(ContactGeometry aContactGeometry) {
-    opensimModelJNI.Model_addContactGeometryImpl(swigCPtr, this, ContactGeometry.getCPtr(aContactGeometry), aContactGeometry);
+  private void private_addContactGeometry(ContactGeometry aContactGeometry) {
+    opensimModelJNI.Model_private_addContactGeometry(swigCPtr, this, ContactGeometry.getCPtr(aContactGeometry), aContactGeometry);
   }
 
   public void removeProbe(Probe aProbe) {
@@ -578,12 +578,12 @@ public class Model extends ModelComponent {
     return opensimModelJNI.Model_deleteUnusedMarkers(swigCPtr, this, ArrayStr.getCPtr(aMarkerNames), aMarkerNames);
   }
 
-  public void addAnalysisImpl(Analysis analysis) {
-    opensimModelJNI.Model_addAnalysisImpl(swigCPtr, this, Analysis.getCPtr(analysis), analysis);
+  private void private_addAnalysis(Analysis analysis) {
+    opensimModelJNI.Model_private_addAnalysis(swigCPtr, this, Analysis.getCPtr(analysis), analysis);
   }
 
-  public void addControllerImpl(Controller aController) {
-    opensimModelJNI.Model_addControllerImpl(swigCPtr, this, Controller.getCPtr(aController), aController);
+  private void private_addController(Controller aController) {
+    opensimModelJNI.Model_private_addController(swigCPtr, this, Controller.getCPtr(aController), aController);
   }
 
   public void removeAnalysis(Analysis analysis, boolean deleteIt) {

@@ -81,6 +81,10 @@ public class GeometryPath extends ModelComponent {
     return new PathWrapSet(opensimModelJNI.GeometryPath_getWrapSet(swigCPtr, this), false);
   }
 
+  public void addPathWrap(WrapObject aWrapObject) {
+    opensimModelJNI.GeometryPath_addPathWrap(swigCPtr, this, WrapObject.getCPtr(aWrapObject), aWrapObject);
+  }
+
   public PathPoint addPathPoint(State s, int aIndex, Body aBody) {
     long cPtr = opensimModelJNI.GeometryPath_addPathPoint(swigCPtr, this, State.getCPtr(s), s, aIndex, Body.getCPtr(aBody), aBody);
     return (cPtr == 0) ? null : new PathPoint(cPtr, false);
@@ -97,10 +101,6 @@ public class GeometryPath extends ModelComponent {
 
   public boolean deletePathPoint(State s, int aIndex) {
     return opensimModelJNI.GeometryPath_deletePathPoint(swigCPtr, this, State.getCPtr(s), s, aIndex);
-  }
-
-  public void addPathWrap(State s, WrapObject aWrapObject) {
-    opensimModelJNI.GeometryPath_addPathWrap(swigCPtr, this, State.getCPtr(s), s, WrapObject.getCPtr(aWrapObject), aWrapObject);
   }
 
   public void moveUpPathWrap(State s, int aIndex) {

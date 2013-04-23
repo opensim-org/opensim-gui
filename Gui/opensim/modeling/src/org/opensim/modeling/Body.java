@@ -151,6 +151,10 @@ public class Body extends ModelComponent {
     opensimModelJNI.Body_getScaleFactors(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
   }
 
+  public void addWrapObject(WrapObject wrapObject) {
+    opensimModelJNI.Body_addWrapObject(swigCPtr, this, WrapObject.getCPtr(wrapObject), wrapObject);
+  }
+
   public WrapObject getWrapObject(String aName) {
     long cPtr = opensimModelJNI.Body_getWrapObject(swigCPtr, this, aName);
     return (cPtr == 0) ? null : new WrapObject(cPtr, false);

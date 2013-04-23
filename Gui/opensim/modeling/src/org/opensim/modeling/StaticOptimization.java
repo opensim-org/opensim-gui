@@ -111,6 +111,22 @@ public class StaticOptimization extends Analysis {
     return opensimModelJNI.StaticOptimization_getUseMusclePhysiology(swigCPtr, this);
   }
 
+  public void setConvergenceCriterion(double tolerance) {
+    opensimModelJNI.StaticOptimization_setConvergenceCriterion(swigCPtr, this, tolerance);
+  }
+
+  public double getConvergenceCriterion() {
+    return opensimModelJNI.StaticOptimization_getConvergenceCriterion(swigCPtr, this);
+  }
+
+  public void setMaxIterations(int maxIt) {
+    opensimModelJNI.StaticOptimization_setMaxIterations(swigCPtr, this, maxIt);
+  }
+
+  public int getMaxIterations() {
+    return opensimModelJNI.StaticOptimization_getMaxIterations(swigCPtr, this);
+  }
+
   public int printResults(String aBaseName, String aDir, double aDT, String aExtension) {
     return opensimModelJNI.StaticOptimization_printResults__SWIG_0(swigCPtr, this, aBaseName, aDir, aDT, aExtension);
   }
