@@ -9335,6 +9335,7 @@ public class opensimModelJNI {
   public final static native void InverseDynamicsTool_setCoordinateValues(long jarg1, InverseDynamicsTool jarg1_, long jarg2, Storage jarg2_);
   public final static native boolean InverseDynamicsTool_hasCoordinateValues(long jarg1, InverseDynamicsTool jarg1_);
   public final static native String InverseDynamicsTool_getOutputGenForceFileName(long jarg1, InverseDynamicsTool jarg1_);
+  public final static native void InverseDynamicsTool_setOutputGenForceFileName(long jarg1, InverseDynamicsTool jarg1_, String jarg2);
   public final static native String InverseDynamicsTool_getCoordinatesFileName(long jarg1, InverseDynamicsTool jarg1_);
   public final static native void InverseDynamicsTool_setCoordinatesFileName(long jarg1, InverseDynamicsTool jarg1_, String jarg2);
   public final static native double InverseDynamicsTool_getLowpassCutoffFrequency(long jarg1, InverseDynamicsTool jarg1_);

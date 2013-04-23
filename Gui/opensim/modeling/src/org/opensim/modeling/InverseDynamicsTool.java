@@ -97,6 +97,10 @@ public class InverseDynamicsTool extends DynamicsTool {
     return opensimModelJNI.InverseDynamicsTool_getOutputGenForceFileName(swigCPtr, this);
   }
 
+  public void setOutputGenForceFileName(String desiredOutputFileName) {
+    opensimModelJNI.InverseDynamicsTool_setOutputGenForceFileName(swigCPtr, this, desiredOutputFileName);
+  }
+
   public String getCoordinatesFileName() {
     return opensimModelJNI.InverseDynamicsTool_getCoordinatesFileName(swigCPtr, this);
   }
