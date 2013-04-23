@@ -575,7 +575,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       }
       cmcDesiredKinematicsFileName.setFileName(toolModel.getDesiredKinematicsFileName(),false);
       cmcTaskSetFileName.setFileName(toolModel.getTaskSetFileName(),false);
-      cmcConstraintsFileName.setFileName(toolModel.getConstraintsFileName(),false);
+      cmcConstraintsFileName.setVisible(false);
 
       cmcFilterKinematicsCheckBox.setSelected(toolModel.getFilterKinematics());
       if(!cmcFilterKinematicsCheckBox.isSelected()) {
@@ -585,8 +585,8 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
          cmcCutoffFrequency.setText(numFormat.format(toolModel.getLowpassCutoffFrequency()));
       }
 
-      cmcConstraintsCheckBox.setSelected(toolModel.getConstraintsEnabled());
-      if(!cmcConstraintsCheckBox.isSelected()) cmcConstraintsFileName.setEnabled(false);
+      cmcConstraintsCheckBox.setVisible(false);
+      //if(!cmcConstraintsCheckBox.isSelected()) cmcConstraintsFileName.setEnabled(false);
 
       updateIntegratorSettings(toolModel);
     }
