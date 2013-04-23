@@ -56,7 +56,6 @@ public class PropertyEditorAdaptor {
     OpenSimContext context = null; // Context object needed to recreate the system as needed, cached for speed
     Model model; // model to which obj belongs
     OpenSimObjectNode node;
-    ModelPose defaultPose;
 
     Model clonedModel;
     State clonedState;
@@ -67,7 +66,7 @@ public class PropertyEditorAdaptor {
         this.obj = ownerNode.getOpenSimObject();
         this.prop = obj.getPropertyByName(propertyName);
         this.node = ownerNode;
-        defaultPose = new ModelPose(model.getCoordinateSet(), "_saveDefault", true);
+        //defaultPose = new ModelPose(model.getCoordinateSet(), "_saveDefault", true);
     }
     public PropertyEditorAdaptor(AbstractProperty prop, OpenSimObjectNode ownerNode) {
         this.prop = prop;
@@ -75,7 +74,7 @@ public class PropertyEditorAdaptor {
         this.context = OpenSimDB.getInstance().getContext(model);
         this.obj = ownerNode.getOpenSimObject();
         this.node = ownerNode;
-        defaultPose = new ModelPose(model.getCoordinateSet(), "_saveDefault", true);
+        //defaultPose = new ModelPose(model.getCoordinateSet(), "_saveDefault", true);
     }
     public PropertyEditorAdaptor(AbstractProperty prop, OpenSimObject obj, Model model, OpenSimObjectNode ownerNode) {
         this.prop = prop;
@@ -83,11 +82,12 @@ public class PropertyEditorAdaptor {
         this.model = model;
         this.obj = obj;
         this.node = ownerNode;
-        defaultPose = new ModelPose(model.getCoordinateSet(), "_saveDefault", true);
+        //defaultPose = new ModelPose(model.getCoordinateSet(), "_saveDefault", true);
     }
     /**
-     * Constructor that only takes a model. This's not to be used for specific Property editing
+     * Constructor that only takes a model. This's NOY to be used for specific Property editing
      * it just leverages the code written to support recreating the system under the model after an edit
+     * 
      * @param aModel 
      */
     public PropertyEditorAdaptor(Model aModel) {
@@ -96,7 +96,7 @@ public class PropertyEditorAdaptor {
         this.obj = null;
         this.prop = null;
         this.node = null;
-        defaultPose = new ModelPose(model.getCoordinateSet(), "_saveDefault", true);
+        //defaultPose = new ModelPose(model.getCoordinateSet(), "_saveDefault", true);
     }
     // Double Properties
 
