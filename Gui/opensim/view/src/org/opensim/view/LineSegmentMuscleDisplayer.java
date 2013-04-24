@@ -28,7 +28,7 @@ package org.opensim.view;
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Vector;
-import org.opensim.modeling.Muscle;
+import org.opensim.modeling.PathActuator;
 import org.opensim.modeling.ArrayPathPoint;
 import org.opensim.modeling.Geometry;
 import org.opensim.modeling.LineGeometry;
@@ -39,13 +39,14 @@ import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.VisibleObject;
 import org.opensim.modeling.DisplayGeometry.DisplayPreference;
 import org.opensim.modeling.GeometryPath;
+import org.opensim.modeling.Muscle;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.pub.OpenSimDB;
 import vtk.vtkMatrix4x4;
 
 public class LineSegmentMuscleDisplayer {
 
-   private Muscle act;
+   private PathActuator act;
    private OpenSimContext openSimContext;
 
    private OpenSimvtkGlyphCloud musclePointsRep;
@@ -58,7 +59,7 @@ public class LineSegmentMuscleDisplayer {
    private MuscleColoringFunction muscleColoringFunction; 
    private MuscleColoringFunction defaultColoringFunction; //current function to use during simulation
    
-   public LineSegmentMuscleDisplayer(Muscle act, OpenSimvtkGlyphCloud musclePointsRep, OpenSimvtkOrientedGlyphCloud muscleSegmentsRep)
+   public LineSegmentMuscleDisplayer(PathActuator act, OpenSimvtkGlyphCloud musclePointsRep, OpenSimvtkOrientedGlyphCloud muscleSegmentsRep)
     {
         OpenSimObject pathObject;
         pathObject = act.getGeometryPath();
@@ -177,7 +178,10 @@ public class LineSegmentMuscleDisplayer {
 
       if (dp == DisplayPreference.None || openSimContext.isDisabled(act)) return;
 
-      double activation = muscleColoringFunction.getColor(act); 
+      double activation = 0;
+      Muscle msl = Muscle.safeDownCast(act);
+      if (msl!=null)
+          activation = muscleColoringFunction.getColor(msl); 
       // A displayer is found, get geometry
       int geomSize = actuatorDisplayer.countGeometry();
       if (geomSize > 0) {

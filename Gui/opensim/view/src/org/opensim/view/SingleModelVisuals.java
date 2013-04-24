@@ -281,7 +281,7 @@ public class SingleModelVisuals {
     }
 
     public void addPathActuatorGeometry(Force act, boolean callSetModified) {
-       Muscle muscle = Muscle.safeDownCast(act);
+       PathActuator muscle = PathActuator.safeDownCast(act);
        if(muscle == null) return;   // Could be just a force, in this case add and mark modified
        OpenSimContext context=OpenSimDB.getInstance().getContext(muscle.getModel());
         if (context.isDisabled(act)) return;
