@@ -53,7 +53,10 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
     static Reference SimTKRef;
     static Reference NIHRef;
     static Reference SimbiosRef;
-    
+    static Reference DARPARef;
+    static Reference NCSRRRef;
+         
+
     /** Creates new form AboutJPanel */
     public AboutJPanel() {        
         initComponents();
@@ -90,20 +93,15 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         jLabel8 = new javax.swing.JLabel();
         compilerVersionLabel = new javax.swing.JLabel();
         jCreditsPanel = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
         jPanel8 = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea4 = new javax.swing.JTextArea();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTextArea5 = new javax.swing.JTextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
 
         jTabbedPane1.setMaximumSize(new java.awt.Dimension(410, 515));
         jTabbedPane1.setMinimumSize(new java.awt.Dimension(410, 515));
@@ -112,7 +110,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 405, Short.MAX_VALUE)
+            .add(0, 492, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -182,11 +180,11 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
                             .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                 .add(jPanel5Layout.createSequentialGroup()
                                     .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                        .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                                        .add(jLabel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                                        .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                                        .add(jLabel6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jLabel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+                                        .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(jLabel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+                                        .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(jLabel6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jLabel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
                                 .add(jPanel5Layout.createSequentialGroup()
                                     .add(jLabel7)
@@ -200,9 +198,9 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
                                 .add(libraryPathString)
                                 .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                     .add(VMvendorString)
-                                    .add(operatingSystemString, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                                    .add(versionString, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                                    .add(jreString, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                                    .add(operatingSystemString, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                                    .add(versionString, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                                    .add(jreString, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
                                     .add(jHomeDirString))))))
                 .addContainerGap())
         );
@@ -259,48 +257,6 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
 
         jTabbedPane1.addTab("Details", jDetailsPanel);
 
-        org.jdesktop.layout.GroupLayout jPanel7Layout = new org.jdesktop.layout.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 100, Short.MAX_VALUE)
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 100, Short.MAX_VALUE)
-        );
-
-        jScrollPane2.setBorder(null);
-
-        jTextArea3.setBackground(new java.awt.Color(236, 233, 216));
-        jTextArea3.setColumns(20);
-        jTextArea3.setEditable(false);
-        jTextArea3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        jTextArea3.setLineWrap(true);
-        jTextArea3.setRows(5);
-        jTextArea3.setText("OpenSim was created by a collaborative team as part of Simbios, a national center for biomedical computation based at Stanford University.\n\nOpenSim includes computational components from SimTK.  Please see www.simtk.org for additional information.\n");
-        jTextArea3.setWrapStyleWord(true);
-        jTextArea3.setMargin(new java.awt.Insets(0, 5, 0, 0));
-        jScrollPane2.setViewportView(jTextArea3);
-
-        org.jdesktop.layout.GroupLayout jPanel6Layout = new org.jdesktop.layout.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel6Layout.createSequentialGroup()
-                .add(jPanel7, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel6Layout.createSequentialGroup()
-                .add(jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jPanel7, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -312,47 +268,19 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
             .add(0, 75, Short.MAX_VALUE)
         );
 
-        jScrollPane1.setBorder(null);
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-
-        jTextArea2.setBackground(new java.awt.Color(236, 233, 216));
-        jTextArea2.setColumns(20);
-        jTextArea2.setEditable(false);
-        jTextArea2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        jTextArea2.setLineWrap(true);
-        jTextArea2.setRows(5);
-        jTextArea2.setText("Development of OpenSim is funded by the National Institutes of Health through the NIH Roadmap for Medical Research Grant U54 GM072970 and through NIH Grants HD33929 and HD046814.\n");
-        jTextArea2.setWrapStyleWord(true);
-        jTextArea2.setMargin(new java.awt.Insets(5, 5, 0, 0));
-        jScrollPane1.setViewportView(jTextArea2);
-
         org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel3Layout.createSequentialGroup()
                 .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel3Layout.createSequentialGroup()
-                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane1)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        org.jdesktop.layout.GroupLayout jPanel9Layout = new org.jdesktop.layout.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 100, Short.MAX_VALUE)
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 131, Short.MAX_VALUE)
+                .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         jScrollPane4.setBorder(null);
@@ -364,58 +292,83 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         jTextArea4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jTextArea4.setLineWrap(true);
         jTextArea4.setRows(5);
-        jTextArea4.setText("For details see \n\nDelp, S.L., Anderson, F.C., Arnold, A. S., Loan, P., Habib, A., John, C., Guendelman, E., Thelen, D.G.   OpenSim: Open-source software to create and analyze dynamic simulations of movement.  IEEE Transactions on Biomedical Engineering, Nov. 2007.  Other citations and contributions noted within the application.");
+        jTextArea4.setText("OpenSim application uses computational components from Simbody (https://simtk.org/home/simbody).\n\nThe application uses VTK (http://www.vtk.org), JFreeChart (http://www.jfree.org)\nand is built on top of NetBeans platform (http://www.netbeans.org).\n");
         jTextArea4.setWrapStyleWord(true);
         jTextArea4.setMargin(new java.awt.Insets(0, 5, 0, 0));
         jScrollPane4.setViewportView(jTextArea4);
-
-        jScrollPane3.setBorder(null);
-        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        jTextArea1.setBackground(new java.awt.Color(236, 233, 216));
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        jTextArea1.setRows(5);
-        jTextArea1.setText("\nThis program includes software developed by the\nApache Software Foundation (http://www.apache.org/).\n\nThe application uses VTK (http://www.vtk.org), JFreeChart (http://www.jfree.org)\nand is built on top of NetBeans platform (http://www.netbeans.org).");
-        jTextArea1.setMargin(new java.awt.Insets(0, 10, 0, 10));
-        jScrollPane3.setViewportView(jTextArea1);
 
         org.jdesktop.layout.GroupLayout jPanel8Layout = new org.jdesktop.layout.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel8Layout.createSequentialGroup()
-                .add(jPanel9, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))
-            .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+                .add(111, 111, 111)
+                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 299, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel8Layout.createSequentialGroup()
-                .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(jPanel9, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 158, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        jScrollPane5.setBorder(null);
+        jScrollPane5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        jTextArea5.setBackground(new java.awt.Color(236, 233, 216));
+        jTextArea5.setColumns(20);
+        jTextArea5.setEditable(false);
+        jTextArea5.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jTextArea5.setLineWrap(true);
+        jTextArea5.setRows(5);
+        jTextArea5.setText("For more details see http://opensim.stanford.edu and the paper below:\nDelp, S.L., Anderson, F.C., Arnold, A. S., Loan, P., Habib, A., John, C., Guendelman, E., Thelen, D.G.   OpenSim: Open-source software to create and analyze dynamic simulations of movement.  IEEE Transactions on Biomedical Engineering, Nov. 2007.  \nOther citations and contributions are noted within the application.");
+        jTextArea5.setWrapStyleWord(true);
+        jTextArea5.setMargin(new java.awt.Insets(0, 5, 0, 0));
+        jScrollPane5.setViewportView(jTextArea5);
+
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        jTextArea2.setBackground(new java.awt.Color(236, 233, 216));
+        jTextArea2.setColumns(20);
+        jTextArea2.setEditable(false);
+        jTextArea2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jTextArea2.setLineWrap(true);
+        jTextArea2.setRows(5);
+        jTextArea2.setText("The OpenSim GUI is an application for musculoskeletal modeling and simulation. It is supported by Simbios, the NIH National Center for Physics-Based Simulation of Biological Structures at Stanford, funded under the NIH Roadmap for Medical Research, grant U54 GM072970. It is additionally supported by the National Center for Simulation in Rehabilitation Research (NCSRR), an NIH National Center for Medical Rehabilitation Research, grant R24 HD065690. OpenSim receives additional support from DARPA through the Warrior Web Program. \n");
+        jTextArea2.setWrapStyleWord(true);
+        jTextArea2.setMargin(new java.awt.Insets(5, 5, 0, 0));
+        jScrollPane1.setViewportView(jTextArea2);
 
         org.jdesktop.layout.GroupLayout jCreditsPanelLayout = new org.jdesktop.layout.GroupLayout(jCreditsPanel);
         jCreditsPanel.setLayout(jCreditsPanelLayout);
         jCreditsPanelLayout.setHorizontalGroup(
             jCreditsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(jPanel6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(jPanel8, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(jCreditsPanelLayout.createSequentialGroup()
+                .add(jPanel8, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .add(jCreditsPanelLayout.createSequentialGroup()
+                .add(111, 111, 111)
+                .add(jCreditsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(jScrollPane5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 299, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 299, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(345, 345, 345)
+                .add(jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jCreditsPanelLayout.setVerticalGroup(
             jCreditsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jCreditsPanelLayout.createSequentialGroup()
-                .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jCreditsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jCreditsPanelLayout.createSequentialGroup()
+                        .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(123, 123, 123))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jCreditsPanelLayout.createSequentialGroup()
+                        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 181, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(jScrollPane5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 135, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(6, 6, 6)))
                 .add(jPanel8, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -426,11 +379,11 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jTabbedPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+            .add(jTabbedPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jTabbedPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
+            .add(jTabbedPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
     
@@ -454,19 +407,14 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextArea4;
+    private javax.swing.JTextArea jTextArea5;
     private javax.swing.JLabel jreString;
     private javax.swing.JLabel libraryPathString;
     private javax.swing.JLabel operatingSystemString;
@@ -483,10 +431,12 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
            g.drawImage( getOpenSimImage(), 15, 40, 48, 48, this );
         }
         else {
-           g.drawImage( getNIHImage(), 15, 40, 48, 48, this );
-           g.drawImage( getSimbiosImage(), 15, 120, 48, 22, this );
-           g.drawImage( getSimTKImage(), 15, 180, 48, 28, this );
-           g.drawImage( getOpenSimImage(), 15, 250, 48, 48, this );
+           g.drawImage( getOpenSimImage(), 15, 40, this ); 
+           g.drawImage( getSimbiosImage(), 15, 150, this );           
+           g.drawImage( getNCSRRImage(), 15, 225, this );
+           g.drawImage( getSimTKImage(), 15, 280, this );
+           g.drawImage( getNIHImage(), 15, 350, this );
+           g.drawImage( getDARPAImage(), 15, 450, this );
         }
     }
     
@@ -504,16 +454,37 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         Image ret;
         if ((OpenSimRef == null) ||
                 ((ret = (Image) OpenSimRef.get()) == null)) {
-            ret = loadImage("/org/opensim/helputils/helpmenu/images/frame48.gif");
+            ret = loadImage("/org/opensim/helputils/helpmenu/images/logo_transparent_color.png");
             OpenSimRef = new WeakReference(ret);
         }
         return ret;
     }
+    
+    private Image getDARPAImage() {
+        Image ret;
+        if ((DARPARef == null) ||
+                ((ret = (Image) DARPARef.get()) == null)) {
+            ret = loadImage("/org/opensim/helputils/helpmenu/images/darpa_logo.png");
+            DARPARef = new WeakReference(ret);
+        }
+        return ret;
+    }
+    
+    private Image getNCSRRImage() {
+        Image ret;
+        if ((NCSRRRef == null) ||
+                ((ret = (Image) NCSRRRef.get()) == null)) {
+            ret = loadImage("/org/opensim/helputils/helpmenu/images/ncsrr_logo_footer.png");
+            NCSRRRef = new WeakReference(ret);
+        }
+        return ret;
+    }
+    
     private Image getSimTKImage() {
         Image ret;
         if ((SimTKRef == null) ||
                 ((ret = (Image) SimTKRef.get()) == null)) {
-            ret = loadImage("/org/opensim/helputils/helpmenu/images/simtk_48.gif");
+            ret = loadImage("/org/opensim/helputils/helpmenu/images/SimTKLogo.png");
             SimTKRef = new WeakReference(ret);
         }
         return ret;
@@ -523,7 +494,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         Image ret;
         if ((NIHRef == null) ||
                 ((ret = (Image) NIHRef.get()) == null)) {
-            ret = loadImage("/org/opensim/helputils/helpmenu/images/nih_48.gif");
+            ret = loadImage("/org/opensim/helputils/helpmenu/images/nih_logo.png");
             NIHRef = new WeakReference(ret);
         }
         return ret;
@@ -533,7 +504,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         Image ret;
         if ((SimbiosRef == null) ||
                 ((ret = (Image) SimbiosRef.get()) == null)) {
-            ret = loadImage("/org/opensim/helputils/helpmenu/images/simbios_48.gif");
+            ret = loadImage("/org/opensim/helputils/helpmenu/images/SimbiosLogo.png");
             SimbiosRef = new WeakReference(ret);
         }
         return ret;
