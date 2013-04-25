@@ -39,7 +39,7 @@ public class TwoBodyForceDisplayer extends vtkActor implements ObjectDisplayerIn
     vtkLineSource lineSource;
     private vtkTubeFilter dFilter;
     private vtkPolyData baseShapePolyData=null;
-    private double baseSize=0.1;
+    private double baseSize=0.001;
     private boolean visible=true;
     private Hashtable<LineGeometry, vtkLineSource> mapGeometryToDisplayGeometry = 
             new Hashtable<LineGeometry, vtkLineSource>();
