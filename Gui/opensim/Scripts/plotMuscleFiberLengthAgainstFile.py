@@ -54,5 +54,11 @@ threshold =  modeling.Constant(0.18)
 threshold.setName('threshold')
 cv6 = addFunctionCurve(plotterPanel, threshold)
 
+# Changing the axes labels
+plotterPanel.setXAxisLabel("Knee angle (deg)");
+plotterPanel.setYAxisLabel("Fiber Length (m)");
+# Use this for a quick way to set labels for both axes.
+# plotterPanel.setAxesLabels("Knee angle (deg)","Fiber length (mm)")
+
 # Export the data in the plotter window to a file
 exportData(plotterPanel, getScriptsDir()+"/testData/cvs_export.sto")
