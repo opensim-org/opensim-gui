@@ -8,18 +8,18 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_OpenSim__PropertyT_OpenSim__MetabolicMuscleParameterSet_t {
+public class SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet {
   private long swigCPtr;
 
-  protected SWIGTYPE_p_OpenSim__PropertyT_OpenSim__MetabolicMuscleParameterSet_t(long cPtr, boolean futureUse) {
+  protected SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet(long cPtr, boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_OpenSim__PropertyT_OpenSim__MetabolicMuscleParameterSet_t() {
+  protected SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_OpenSim__PropertyT_OpenSim__MetabolicMuscleParameterSet_t obj) {
+  protected static long getCPtr(SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }

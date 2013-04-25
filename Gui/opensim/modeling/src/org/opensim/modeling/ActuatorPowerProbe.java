@@ -245,4 +245,8 @@ public class ActuatorPowerProbe extends Probe {
     return new ArrayStr(opensimModelJNI.ActuatorPowerProbe_getProbeOutputLabels(swigCPtr, this), true);
   }
 
+  public void connectToModel(Model aModel) {
+    opensimModelJNI.ActuatorPowerProbe_connectToModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
+  }
+
 }

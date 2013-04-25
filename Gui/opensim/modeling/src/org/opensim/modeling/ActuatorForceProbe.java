@@ -245,4 +245,8 @@ public class ActuatorForceProbe extends Probe {
     return new ArrayStr(opensimModelJNI.ActuatorForceProbe_getProbeOutputLabels(swigCPtr, this), true);
   }
 
+  public void connectToModel(Model model) {
+    opensimModelJNI.ActuatorForceProbe_connectToModel(swigCPtr, this, Model.getCPtr(model), model);
+  }
+
 }
