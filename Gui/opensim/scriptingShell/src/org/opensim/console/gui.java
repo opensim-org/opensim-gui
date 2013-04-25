@@ -123,10 +123,44 @@ public final class gui {
      * into the OpenSim application. This is equivalent to "File->Open Model..."
      * 
      * @param fileName to construct the model from
+     * 
+     * @deprecated use loadModel instead
      */
     static public void addModel(String fileName){
         try {
             Model aModel = new Model(fileName);
+            OpenSimDB.getInstance().addModel(aModel);
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+    }
+    /**
+     * loadModel() creates a new OpenSim model from the passed in fileName and loads this model 
+     * into the OpenSim application. This is equivalent to "File->Open Model..."
+     * 
+     * @param fileName to construct the model from
+     * 
+     * 
+     */
+    static public void loadModel(String fileName){
+        try {
+            Model aModel = new Model(fileName);
+            OpenSimDB.getInstance().addModel(aModel);
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+    }
+    /**
+     * loadModel() loads the passed in model into the OpenSim application. 
+     * The application takes ownership of the passed in model
+     * 
+     * @param aModel is the model to be loaded. 
+     * 
+     * 
+     */
+    static public void loadModel(Model aModel){
+        try {
+            aModel.markAdopted();
             OpenSimDB.getInstance().addModel(aModel);
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
