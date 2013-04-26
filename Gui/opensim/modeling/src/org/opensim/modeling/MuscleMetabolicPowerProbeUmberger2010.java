@@ -545,4 +545,44 @@ public class MuscleMetabolicPowerProbeUmberger2010 extends Probe {
     return new ArrayStr(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_getProbeOutputLabels(swigCPtr, this), true);
   }
 
+  public int getNumMetabolicMuscles() {
+    return opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_getNumMetabolicMuscles(swigCPtr, this);
+  }
+
+  public void setParametersForExistingMuscle(String muscleName, double ratio_slow_twitch_fibers) {
+    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_setParametersForExistingMuscle(swigCPtr, this, muscleName, ratio_slow_twitch_fibers);
+  }
+
+  public void addMuscle(String muscleName, double ratio_slow_twitch_fibers) {
+    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_addMuscle(swigCPtr, this, muscleName, ratio_slow_twitch_fibers);
+  }
+
+  public void removeMuscle(String muscleName) {
+    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_removeMuscle(swigCPtr, this, muscleName);
+  }
+
+  public void setUseProvidedMass(String muscleName, double providedMass) {
+    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_setUseProvidedMass(swigCPtr, this, muscleName, providedMass);
+  }
+
+  public void setUseCalculatedMass(String muscleName) {
+    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_setUseCalculatedMass(swigCPtr, this, muscleName);
+  }
+
+  public boolean isUsingProvidedMass(String muscleName) {
+    return opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_isUsingProvidedMass(swigCPtr, this, muscleName);
+  }
+
+  public double getMuscleMassUsed(String muscleName) {
+    return opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_getMuscleMassUsed(swigCPtr, this, muscleName);
+  }
+
+  public double getRatioSlowTwitchFibers(String muscleName) {
+    return opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_getRatioSlowTwitchFibers(swigCPtr, this, muscleName);
+  }
+
+  public void setRatioSlowTwitchFibers(String muscleName, double ratio) {
+    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_setRatioSlowTwitchFibers(swigCPtr, this, muscleName, ratio);
+  }
+
 }

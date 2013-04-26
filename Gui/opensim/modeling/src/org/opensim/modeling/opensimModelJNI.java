@@ -5877,6 +5877,16 @@ public class opensimModelJNI {
   public final static native long MuscleMetabolicPowerProbeUmberger2010_computeProbeInputs(long jarg1, MuscleMetabolicPowerProbeUmberger2010 jarg1_, long jarg2, State jarg2_);
   public final static native int MuscleMetabolicPowerProbeUmberger2010_getNumProbeInputs(long jarg1, MuscleMetabolicPowerProbeUmberger2010 jarg1_);
   public final static native long MuscleMetabolicPowerProbeUmberger2010_getProbeOutputLabels(long jarg1, MuscleMetabolicPowerProbeUmberger2010 jarg1_);
+  public final static native int MuscleMetabolicPowerProbeUmberger2010_getNumMetabolicMuscles(long jarg1, MuscleMetabolicPowerProbeUmberger2010 jarg1_);
+  public final static native void MuscleMetabolicPowerProbeUmberger2010_setParametersForExistingMuscle(long jarg1, MuscleMetabolicPowerProbeUmberger2010 jarg1_, String jarg2, double jarg3);
+  public final static native void MuscleMetabolicPowerProbeUmberger2010_addMuscle(long jarg1, MuscleMetabolicPowerProbeUmberger2010 jarg1_, String jarg2, double jarg3);
+  public final static native void MuscleMetabolicPowerProbeUmberger2010_removeMuscle(long jarg1, MuscleMetabolicPowerProbeUmberger2010 jarg1_, String jarg2);
+  public final static native void MuscleMetabolicPowerProbeUmberger2010_setUseProvidedMass(long jarg1, MuscleMetabolicPowerProbeUmberger2010 jarg1_, String jarg2, double jarg3);
+  public final static native void MuscleMetabolicPowerProbeUmberger2010_setUseCalculatedMass(long jarg1, MuscleMetabolicPowerProbeUmberger2010 jarg1_, String jarg2);
+  public final static native boolean MuscleMetabolicPowerProbeUmberger2010_isUsingProvidedMass(long jarg1, MuscleMetabolicPowerProbeUmberger2010 jarg1_, String jarg2);
+  public final static native double MuscleMetabolicPowerProbeUmberger2010_getMuscleMassUsed(long jarg1, MuscleMetabolicPowerProbeUmberger2010 jarg1_, String jarg2);
+  public final static native double MuscleMetabolicPowerProbeUmberger2010_getRatioSlowTwitchFibers(long jarg1, MuscleMetabolicPowerProbeUmberger2010 jarg1_, String jarg2);
+  public final static native void MuscleMetabolicPowerProbeUmberger2010_setRatioSlowTwitchFibers(long jarg1, MuscleMetabolicPowerProbeUmberger2010 jarg1_, String jarg2, double jarg3);
   public final static native void delete_MuscleMetabolicPowerProbeUmberger2010(long jarg1);
   public final static native long new_ModelDisplayHints();
   public final static native long ModelDisplayHints_setShowWrapGeometry(long jarg1, ModelDisplayHints jarg1_, boolean jarg2);
