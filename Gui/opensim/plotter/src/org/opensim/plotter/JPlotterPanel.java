@@ -104,15 +104,27 @@ public class JPlotterPanel extends javax.swing.JPanel
            String coordName = qName.substring(qName.indexOf(".")+1);
            // Could be a moment or momentArm plot
            useMuscles(true);
+           if (!currentModel.getCoordinateSet().contains(coordName)){
+               ErrorDialog.showMessageDialog("Invalid coordinate specification: "+coordName+", please check and retry.");
+               return null;
+           }               
            if (qName.toLowerCase().startsWith("momentarm")){
                sourceY=(new PlotterSourceAnalysis(currentModel, plotterModel.getStorage("MomentArm_"+coordName, currentModel), "moment arm"));
            }
            else {   // Just Moment
                sourceY=(new PlotterSourceAnalysis(currentModel, plotterModel.getStorage("Moment_"+coordName, currentModel), "moment"));               
            }
+           if (!currentModel.getMuscles().contains(muscleName)){
+               ErrorDialog.showMessageDialog("Invalid specification of muscle: "+muscleName+" please check and retry.");
+                return null;
+           }
        }
-       else
+       else if (currentModel.getMuscles().contains(qName))
             populateYQty(qName);
+       else {
+            ErrorDialog.showMessageDialog("Invalid specification of quantity and/or muscle: "+qName+", "+muscleName+" please check and retry.");
+            return null;
+       }
        sourceX = dataSource;
        domainName = dataSource.getDisplayName();
        //populateXQty(dataSource.getDisplayName());
