@@ -27,25 +27,22 @@ displayName = "#CTL_ToolbarRunAction")
 @Messages("CTL_ToolbarRunAction=Run Forward Simulation")
 public final class ToolbarRunAction implements ActionListener {
 
-    boolean running = false;
     ForwardToolModel toolModel=null;
     public void actionPerformed(ActionEvent e) {
-        if (!running) {
+        if (toolModel == null || !toolModel.isExecuting()) {
             try {
                 // TODO implement action body
                 toolModel = new ForwardToolModel(OpenSimDB.getInstance().getCurrentModel());
                 toolModel.setSolveForEquilibrium(true);
                 toolModel.execute();
-                running = true;
                 // Change 
             } catch (IOException ex) {
                 Exceptions.printStackTrace(ex);
             }
         } else {
-            if (toolModel!=null){ 
+            if (toolModel != null) {
                 toolModel.cancel();
-                running = false;
             }
         }
-        }
+    }
 }
