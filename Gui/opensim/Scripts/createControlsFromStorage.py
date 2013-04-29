@@ -18,11 +18,15 @@
 # implied. See the License for the specific language governing            #
 # permissions and limitations under the License.                          #
 # ----------------------------------------------------------------------- #
-
+#
+# Author: Ayman Habib, Jen Hicks
+# Stanford University
+#
 # This example loads controls from a storage file and creates an xml file 
 # that has a ControlSet. The column labels are assumed to be names of 
 # actuators, unless they have a trailing "_min", or "_max" then they're used
-# as control constraints
+# as control constraints. If no min or max is specified in the file then the same
+# value is used for Control's min, max and value.
 
 # Utils contains tools to browse for files and folders
 import org.opensim.utils as utils
@@ -40,23 +44,26 @@ controlStorage = modeling.Storage(controlProfileStore)
 
 controlProfileXml = "doesnotexistfile.xml"
 if not os.path.exists(controlProfileXml):
-	controlProfileXml = utils.FileUtils.getInstance().browseForFilename(".xml", "Select the xml file for controls profile", 0)
+	controlProfileXml = utils.FileUtils.getInstance().browseForFilenameToSave(".xml", "Select the xml file for controls", 1, "controls.xml")
 print controlProfileXml
 
+#Invoke constructor of ControlSet that takes a Storage as input.
+#if that's all what you need, you can stop here and write the result to file
 csetRaw = modeling.ControlSet(controlStorage)
 
-# Now cycle thru the controls and for each
+# Now cycle thru the controls and foreach
 #	find name, if not ending in _min or _max then
 #	if name_min exists then use it as minValue otherwise use value itself as minValue
 #	if name_max exists then use it as maxValue otherwise use value itself as maxValue
 #	remove all controls that end in _min or _max and write to file
 
+# number of controls 
 sz = csetRaw.getSize()
+# column labels are all controls, min, max + time
 lbls = controlStorage.getColumnLabels()
 nLabels = lbls.getSize()-1
-csetRaw.print('E:/test/createControls/createControls_01.xml')
 
-#for all columns except for time do this
+#for all controls in the set do this
 for i in range (0, nLabels):
 	csi = csetRaw.get(i)
 	csiL = modeling.ControlLinear.safeDownCast(csi)
@@ -65,9 +72,12 @@ for i in range (0, nLabels):
 	minControlIndex = -1
 	maxControlName = controlName+'_max'
 	maxControlIndex = -1
+	# if name doesn't contain _min or _max
 	if (controlName.find('_min')==-1 and controlName.find('_max')==-1):
 		minControlIndex = csetRaw.getIndex(minControlName)
 		maxControlIndex = csetRaw.getIndex(maxControlName)
+		currentMin = 10000000
+		currentMax = -10000000
 		if (minControlIndex!= -1):
 			csiL_min = modeling.ControlLinear.safeDownCast(csetRaw.get(minControlIndex))
 			nodeSet = csiL.getControlValues()
@@ -75,15 +85,21 @@ for i in range (0, nLabels):
 			for nodeNum in range(0, nodeSetSize-1):
 				clNode = nodeSet.get(nodeNum)
 				clNodeTime = clNode.getTime()
-				csiL.setControlValueMin(clNodeTime, csiL_min.getControlValue(clNodeTime))
+				minValue = csiL_min.getControlValue(clNodeTime)
+				csiL.setControlValueMin(clNodeTime, minValue)
+				if (minValue < currentMin):
+					currentMin = minValue
 		else:
 			nodeSet = csiL.getControlValues()
 			nodeSetSize = nodeSet.getSize()
 			for nodeNum in range(0, nodeSetSize-1):
 				clNode = nodeSet.get(nodeNum)
 				clNodeTime = clNode.getTime()
-				csiL.setControlValueMin(clNodeTime, csiL.getControlValue(clNodeTime))
-				
+				minValue = csiL.getControlValue(clNodeTime);
+				csiL.setControlValueMin(clNodeTime, minValue)
+				if (minValue < currentMin):
+					currentMin = minValue
+		csiL.setDefaultParameterMin(currentMin)
 		# repeat for max
 		if (maxControlIndex!=-1):
 			csiL_max = modeling.ControlLinear.safeDownCast(csetRaw.get(maxControlIndex))
@@ -92,15 +108,22 @@ for i in range (0, nLabels):
 			for nodeNum in range(0, nodeSetSize-1):
 				clNode = nodeSet.get(nodeNum)
 				clNodeTime = clNode.getTime()
-				csiL.setControlValueMax(clNodeTime, csiL_max.getControlValue(clNodeTime))
+				maxValue = csiL_max.getControlValue(clNodeTime)
+				csiL.setControlValueMax(clNodeTime, maxValue)
+				if (maxValue > currentMax):
+					currentMax = maxValue
 		else:
 			nodeSet = csiL.getControlValues()
 			nodeSetSize = nodeSet.getSize()
 			for nodeNum in range(0, nodeSetSize-1):
 				clNode = nodeSet.get(nodeNum)
 				clNodeTime = clNode.getTime()
-				csiL.setControlValueMax(clNodeTime, csiL.getControlValue(clNodeTime))
-	
+				maxValue = csiL.getControlValue(clNodeTime)
+				csiL.setControlValueMax(clNodeTime, maxValue)
+				if (maxValue > currentMax):
+					currentMax = maxValue
+		csiL.setDefaultParameterMax(currentMax)
+
 #remove entries that has trailing _min or _max
 for i in range (0, lbls.getSize()):
 	label = lbls.getitem(i)
@@ -109,6 +132,7 @@ for i in range (0, lbls.getSize()):
 	idx = csetRaw.getIndex(label)
 	csetRaw.remove(idx)
 
+# Write output to xml file
 csetRaw.print(controlProfileXml)
 
 
