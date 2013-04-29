@@ -24,7 +24,7 @@ displayName = "#CTL_ToolbarRunAction")
     @ActionReference(path = "Toolbars/UndoRedo", position = 600),
     @ActionReference(path = "Shortcuts", name = "O-R")
 })
-@Messages("CTL_ToolbarRunAction=Run...")
+@Messages("CTL_ToolbarRunAction=Run Forward Simulation")
 public final class ToolbarRunAction implements ActionListener {
 
     boolean running = false;
