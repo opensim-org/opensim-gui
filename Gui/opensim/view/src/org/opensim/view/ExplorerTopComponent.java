@@ -219,17 +219,13 @@ final public class ExplorerTopComponent extends TopComponent
                  if (objs.get(i) instanceof Model) {
                     final int index = i;
                     // Add the model to the Tree window.
-                    SwingUtilities.invokeLater(new Runnable() {
-                       public void run() {
-                          ExplorerTopComponent tree = ExplorerTopComponent.findInstance();
-                          Node rootNode = tree.getExplorerManager().getRootContext();
-                          Model newModel = (Model)objs.get(index);
-                          ConcreteModelNode newModelNode = new ConcreteModelNode(newModel);
-                          rootNode.getChildren().add(new Node[] { newModelNode});
-                          updateCurrentModelNode(newModel);
-                       }
-                    }
-                    );
+                      ExplorerTopComponent tree = ExplorerTopComponent.findInstance();
+                      Node rootNode = tree.getExplorerManager().getRootContext();
+                      Model newModel = (Model)objs.get(index);
+                      ConcreteModelNode newModelNode = new ConcreteModelNode(newModel);
+                      rootNode.getChildren().add(new Node[] { newModelNode});
+                      updateCurrentModelNode(newModel);
+
                  } else if (objs.get(i) instanceof Marker) {
                     Marker marker = (Marker)objs.get(i);
                     Model model = evnt.getModel();
@@ -298,8 +294,6 @@ final public class ExplorerTopComponent extends TopComponent
            } else if (arg instanceof ModelEvent) {
               final ModelEvent evnt = (ModelEvent)arg;
               // Add the model to the Tree window.
-              SwingUtilities.invokeLater(new Runnable() {
-                 public void run() {
                     ExplorerTopComponent tree = ExplorerTopComponent.findInstance();
                     
                     Node rootNode = tree.getExplorerManager().getRootContext();
@@ -335,9 +329,8 @@ final public class ExplorerTopComponent extends TopComponent
                           break;
                        }
                     }
-                 }
-              }
-              );
+                 
+              
            } else if (arg instanceof ObjectsRenamedEvent) {
               final ObjectsRenamedEvent ev = (ObjectsRenamedEvent)arg;
               Vector<OpenSimObject> objs = ev.getObjects();

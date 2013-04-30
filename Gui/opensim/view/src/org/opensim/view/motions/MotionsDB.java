@@ -352,8 +352,8 @@ public class MotionsDB extends Observable // Observed by other entities in motio
          }
       } else if (o instanceof MotionsDB && arg instanceof MotionEvent) {
          final MotionEvent evnt = (MotionEvent) arg;
-         SwingUtilities.invokeLater(new Runnable(){
-            public void run() {  // Update tree display on event thread
+         
+               // Update tree display on event thread
                switch(evnt.getOperation()) {
                   case Open:
                   {
@@ -408,8 +408,8 @@ public class MotionsDB extends Observable // Observed by other entities in motio
                       break;
                   }
                }
-            }
-         });
+            
+         
       }
    }
 
