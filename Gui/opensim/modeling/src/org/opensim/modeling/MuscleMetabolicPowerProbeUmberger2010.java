@@ -317,56 +317,56 @@ public class MuscleMetabolicPowerProbeUmberger2010 extends Probe {
     opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_set_enforce_minimum_heat_rate_per_muscle__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_scaling_factor(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_PropertyIndex_scaling_factor_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_aerobic_factor(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_PropertyIndex_aerobic_factor_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_scaling_factor() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_PropertyIndex_scaling_factor_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_aerobic_factor() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_PropertyIndex_aerobic_factor_get(swigCPtr, this), true);
   }
 
-  public void copyProperty_scaling_factor(MuscleMetabolicPowerProbeUmberger2010 source) {
-    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_copyProperty_scaling_factor(swigCPtr, this, MuscleMetabolicPowerProbeUmberger2010.getCPtr(source), source);
+  public void copyProperty_aerobic_factor(MuscleMetabolicPowerProbeUmberger2010 source) {
+    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_copyProperty_aerobic_factor(swigCPtr, this, MuscleMetabolicPowerProbeUmberger2010.getCPtr(source), source);
   }
 
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_scaling_factor() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_getProperty_scaling_factor(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_aerobic_factor() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_getProperty_aerobic_factor(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_scaling_factor() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_updProperty_scaling_factor(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_aerobic_factor() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_updProperty_aerobic_factor(swigCPtr, this), false);
   }
 
-  public double get_scaling_factor(int i) {
-    return opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_get_scaling_factor__SWIG_0(swigCPtr, this, i);
+  public double get_aerobic_factor(int i) {
+    return opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_get_aerobic_factor__SWIG_0(swigCPtr, this, i);
   }
 
-  public SWIGTYPE_p_double upd_scaling_factor(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_upd_scaling_factor__SWIG_0(swigCPtr, this, i), false);
+  public SWIGTYPE_p_double upd_aerobic_factor(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_upd_aerobic_factor__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_scaling_factor(int i, double value) {
-    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_set_scaling_factor__SWIG_0(swigCPtr, this, i, value);
+  public void set_aerobic_factor(int i, double value) {
+    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_set_aerobic_factor__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int append_scaling_factor(double value) {
-    return opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_append_scaling_factor(swigCPtr, this, value);
+  public int append_aerobic_factor(double value) {
+    return opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_append_aerobic_factor(swigCPtr, this, value);
   }
 
-  public void constructProperty_scaling_factor(double initValue) {
-    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_constructProperty_scaling_factor(swigCPtr, this, initValue);
+  public void constructProperty_aerobic_factor(double initValue) {
+    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_constructProperty_aerobic_factor(swigCPtr, this, initValue);
   }
 
-  public double get_scaling_factor() {
-    return opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_get_scaling_factor__SWIG_1(swigCPtr, this);
+  public double get_aerobic_factor() {
+    return opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_get_aerobic_factor__SWIG_1(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_double upd_scaling_factor() {
-    return new SWIGTYPE_p_double(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_upd_scaling_factor__SWIG_1(swigCPtr, this), false);
+  public SWIGTYPE_p_double upd_aerobic_factor() {
+    return new SWIGTYPE_p_double(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_upd_aerobic_factor__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_scaling_factor(double value) {
-    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_set_scaling_factor__SWIG_1(swigCPtr, this, value);
+  public void set_aerobic_factor(double value) {
+    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_set_aerobic_factor__SWIG_1(swigCPtr, this, value);
   }
 
   public void setPropertyIndex_basal_coefficient(SWIGTYPE_p_PropertyIndex value) {
@@ -473,56 +473,56 @@ public class MuscleMetabolicPowerProbeUmberger2010 extends Probe {
     opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_set_basal_exponent__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_metabolic_parameters(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_PropertyIndex_metabolic_parameters_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_MetabolicMuscleParameterSet(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_PropertyIndex_MetabolicMuscleParameterSet_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_metabolic_parameters() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_PropertyIndex_metabolic_parameters_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_MetabolicMuscleParameterSet() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_PropertyIndex_MetabolicMuscleParameterSet_get(swigCPtr, this), true);
   }
 
-  public void copyProperty_metabolic_parameters(MuscleMetabolicPowerProbeUmberger2010 source) {
-    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_copyProperty_metabolic_parameters(swigCPtr, this, MuscleMetabolicPowerProbeUmberger2010.getCPtr(source), source);
+  public void copyProperty_MetabolicMuscleParameterSet(MuscleMetabolicPowerProbeUmberger2010 source) {
+    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_copyProperty_MetabolicMuscleParameterSet(swigCPtr, this, MuscleMetabolicPowerProbeUmberger2010.getCPtr(source), source);
   }
 
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet_t getProperty_metabolic_parameters() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet_t(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_getProperty_metabolic_parameters(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet_t getProperty_MetabolicMuscleParameterSet() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet_t(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_getProperty_MetabolicMuscleParameterSet(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet_t updProperty_metabolic_parameters() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet_t(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_updProperty_metabolic_parameters(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet_t updProperty_MetabolicMuscleParameterSet() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet_t(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_updProperty_MetabolicMuscleParameterSet(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet get_metabolic_parameters(int i) {
-    return new SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_get_metabolic_parameters__SWIG_0(swigCPtr, this, i), false);
+  public SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet get_MetabolicMuscleParameterSet(int i) {
+    return new SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_get_MetabolicMuscleParameterSet__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet upd_metabolic_parameters(int i) {
-    return new SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_upd_metabolic_parameters__SWIG_0(swigCPtr, this, i), false);
+  public SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet upd_MetabolicMuscleParameterSet(int i) {
+    return new SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_upd_MetabolicMuscleParameterSet__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_metabolic_parameters(int i, SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet value) {
-    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_set_metabolic_parameters__SWIG_0(swigCPtr, this, i, SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet.getCPtr(value));
+  public void set_MetabolicMuscleParameterSet(int i, SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet value) {
+    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_set_MetabolicMuscleParameterSet__SWIG_0(swigCPtr, this, i, SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet.getCPtr(value));
   }
 
-  public int append_metabolic_parameters(SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet value) {
-    return opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_append_metabolic_parameters(swigCPtr, this, SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet.getCPtr(value));
+  public int append_MetabolicMuscleParameterSet(SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet value) {
+    return opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_append_MetabolicMuscleParameterSet(swigCPtr, this, SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet.getCPtr(value));
   }
 
-  public void constructProperty_metabolic_parameters(SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet initValue) {
-    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_constructProperty_metabolic_parameters(swigCPtr, this, SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet.getCPtr(initValue));
+  public void constructProperty_MetabolicMuscleParameterSet(SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet initValue) {
+    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_constructProperty_MetabolicMuscleParameterSet(swigCPtr, this, SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet.getCPtr(initValue));
   }
 
-  public SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet get_metabolic_parameters() {
-    return new SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_get_metabolic_parameters__SWIG_1(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet get_MetabolicMuscleParameterSet() {
+    return new SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_get_MetabolicMuscleParameterSet__SWIG_1(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet upd_metabolic_parameters() {
-    return new SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_upd_metabolic_parameters__SWIG_1(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet upd_MetabolicMuscleParameterSet() {
+    return new SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet(opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_upd_MetabolicMuscleParameterSet__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_metabolic_parameters(SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet value) {
-    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_set_metabolic_parameters__SWIG_1(swigCPtr, this, SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet.getCPtr(value));
+  public void set_MetabolicMuscleParameterSet(SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet value) {
+    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_set_MetabolicMuscleParameterSet__SWIG_1(swigCPtr, this, SWIGTYPE_p_OpenSim__MuscleMetabolicPowerProbeUmberger2010__MetabolicMuscleParameterSet.getCPtr(value));
   }
 
   public MuscleMetabolicPowerProbeUmberger2010() {
@@ -549,32 +549,32 @@ public class MuscleMetabolicPowerProbeUmberger2010 extends Probe {
     return opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_getNumMetabolicMuscles(swigCPtr, this);
   }
 
-  public void setParametersForExistingMuscle(String muscleName, double ratio_slow_twitch_fibers) {
-    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_setParametersForExistingMuscle(swigCPtr, this, muscleName, ratio_slow_twitch_fibers);
+  public void addMuscle(String muscleName, double ratio_slow_twitch_fibers) {
+    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_addMuscle__SWIG_0(swigCPtr, this, muscleName, ratio_slow_twitch_fibers);
   }
 
-  public void addMuscle(String muscleName, double ratio_slow_twitch_fibers) {
-    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_addMuscle(swigCPtr, this, muscleName, ratio_slow_twitch_fibers);
+  public void addMuscle(String muscleName, double ratio_slow_twitch_fibers, double muscle_mass) {
+    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_addMuscle__SWIG_1(swigCPtr, this, muscleName, ratio_slow_twitch_fibers, muscle_mass);
   }
 
   public void removeMuscle(String muscleName) {
     opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_removeMuscle(swigCPtr, this, muscleName);
   }
 
-  public void setUseProvidedMass(String muscleName, double providedMass) {
-    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_setUseProvidedMass(swigCPtr, this, muscleName, providedMass);
+  public void useProvidedMass(String muscleName, double providedMass) {
+    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_useProvidedMass(swigCPtr, this, muscleName, providedMass);
   }
 
-  public void setUseCalculatedMass(String muscleName) {
-    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_setUseCalculatedMass(swigCPtr, this, muscleName);
+  public void useCalculatedMass(String muscleName) {
+    opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_useCalculatedMass(swigCPtr, this, muscleName);
   }
 
   public boolean isUsingProvidedMass(String muscleName) {
     return opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_isUsingProvidedMass(swigCPtr, this, muscleName);
   }
 
-  public double getMuscleMassUsed(String muscleName) {
-    return opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_getMuscleMassUsed(swigCPtr, this, muscleName);
+  public double getMuscleMass(String muscleName) {
+    return opensimModelJNI.MuscleMetabolicPowerProbeUmberger2010_getMuscleMass(swigCPtr, this, muscleName);
   }
 
   public double getRatioSlowTwitchFibers(String muscleName) {
