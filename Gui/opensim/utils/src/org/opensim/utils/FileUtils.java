@@ -291,7 +291,6 @@ public final class FileUtils {
      * If the file is required and a non-existant name is entered and isRequired2Exist==true
      *    then this function returns null 
      *
-     * @todo this could be improved by making our own JFileChooser container JPanel
      */
     public String browseForFilename(FileFilter filter, boolean isRequired2Exist, Component parent)
     {
