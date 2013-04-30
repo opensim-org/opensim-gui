@@ -63,6 +63,7 @@ import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.axis.ValueAxis;
+import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
@@ -142,10 +143,15 @@ public class JPlotterPanel extends javax.swing.JPanel
     }
 
     public PlotCurve showFunctionCurve(Function opensimFunction) {
-        ValueAxis dAxis = getChartPanel().getChart().getXYPlot().getDomainAxis();
-        double dmin = dAxis.getLowerBound()/(1.0+dAxis.getLowerMargin());
-        //double dLMargin = dAxis.getLowerMargin();
-        double dmax = dAxis.getUpperBound()/(1.0+dAxis.getUpperMargin());
+        // see if we have andy data sets, if so use first one to get domain bounds otherwise 0-1
+        int numDataSets = getChartPanel().getChart().getXYPlot().getDatasetCount();
+        double dmin= 0.0;
+        double dmax = 1.0;
+        if (numDataSets > 0){
+             XYDataset dataSet0 = getChartPanel().getChart().getXYPlot().getDataset(0);
+             dmin = dataSet0.getX(0, 0).doubleValue();
+             dmax = dataSet0.getX(0, dataSet0.getItemCount(0) -1).doubleValue();
+        }
         //double dUMargin = dAxis.getUpperMargin();
         ArrayList xValues = new ArrayList();
         ArrayList yValues = new ArrayList();
