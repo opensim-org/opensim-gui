@@ -13,7 +13,9 @@ import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionID;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle.Messages;
+import org.opensim.modeling.Model;
 import org.opensim.tracking.ForwardToolModel;
+import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.view.pub.OpenSimDB;
 
 @ActionID(category = "Edit",
@@ -31,8 +33,11 @@ public final class ToolbarRunAction implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (toolModel == null || !toolModel.isExecuting()) {
             try {
+                Model currentModel = OpenSimDB.getInstance().getCurrentModel();
+                if (currentModel == null || currentModel instanceof ModelForExperimentalData)
+                    return;
                 // TODO implement action body
-                toolModel = new ForwardToolModel(OpenSimDB.getInstance().getCurrentModel());
+                toolModel = new ForwardToolModel(currentModel);
                 toolModel.setSolveForEquilibrium(true);
                 toolModel.execute();
                 // Change 
