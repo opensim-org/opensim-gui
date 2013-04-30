@@ -18,7 +18,10 @@
 # implied. See the License for the specific language governing            #
 # permissions and limitations under the License.                          #
 # ----------------------------------------------------------------------- #
-
+#
+# Author: Ayman Habib, 
+# Stanford University
+#
 # This example script shows how to change the attributes of the muscles for the current model 
 # (tendonSlackLength in this example).
 
