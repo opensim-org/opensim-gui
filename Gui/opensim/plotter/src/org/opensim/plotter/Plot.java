@@ -240,6 +240,7 @@ public class Plot {
          columnLabels.append("time");
          XYSeries series = seriesCollection.getSeries(currentSeriesIndex);
          String domain = curvesList.get(currentSeriesIndex).getXLabel();
+         if (domain==null) domain = "Domain_"+String.valueOf(si);
          columnLabels.append(domain);
          for (int j=0; j< curveGroup.size(); j++){
             if (curveGroup.get(j)==currentSeriesIndex){
