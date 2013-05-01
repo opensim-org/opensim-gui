@@ -21,7 +21,7 @@
 
 # This example performs some of the initial steps of Tutorial One
 # Load model
-addModel(getInstallDir()+"/Models/BothLegs/BothLegs.osim")
+loadModel(getInstallDir()+"/Models/BothLegs/BothLegs.osim")
 
 # Load a motion
 loadMotion(getInstallDir()+"/Models/BothLegs/BothLegsWalk.mot")

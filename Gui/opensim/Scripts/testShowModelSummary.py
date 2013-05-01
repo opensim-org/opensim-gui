@@ -19,6 +19,10 @@
 # permissions and limitations under the License.                          #
 # ----------------------------------------------------------------------- #
 
+#
+# Author(s): Ayman Habib
+# Stanford University
+#
 # This example script creates a standalone dialog window to 
 # display information about the current model (name, number of 
 # bodies, and number of joints). This script only works if a model 

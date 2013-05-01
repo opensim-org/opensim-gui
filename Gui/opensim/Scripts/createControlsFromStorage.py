@@ -19,7 +19,7 @@
 # permissions and limitations under the License.                          #
 # ----------------------------------------------------------------------- #
 #
-# Author: Ayman Habib, Jen Hicks
+# Author(s): Ayman Habib, Jen Hicks
 # Stanford University
 #
 # This example loads controls from a storage file and creates an xml file 

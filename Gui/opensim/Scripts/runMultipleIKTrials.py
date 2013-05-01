@@ -19,6 +19,9 @@
 # permissions and limitations under the License.                          #
 # ----------------------------------------------------------------------- #
 
+# Author(s): Ayman Habib, Edith Arnold
+# Stanford University
+#
 # This example script runs multiple inverse kinematics trials for the leg39 model. To see the results 
 # load the model and ik output in the GUI.
 # The script prompts the user for input files.
@@ -76,7 +79,7 @@ print "Creating and initializing model"
 model.initSystem()
 
 # Display model
-addModel(modelFile)
+loadModel(modelFile)
 
 # Tell the IK tool to use the model
 ikTool.setModel(model)

@@ -24,7 +24,7 @@
 # femur transparent, and aligns the model view with the x axis.
 
 # Load model
-addModel(getInstallDir()+"/Models/BothLegs/BothLegs.osim")
+loadModel(getInstallDir()+"/Models/BothLegs/BothLegs.osim")
 
 # Get a handle to the current model (the one just loaded)
 model = getCurrentModel()

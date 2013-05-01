@@ -26,7 +26,7 @@
 
 # Load the model BothLegs.osim
 filepath = getInstallDir() + "/Models/BothLegs/BothLegs.osim";
-addModel(filepath);
+loadModel(filepath);
 
 # Create a plotter panel and set the title
 plotterPanel = createPlotterPanel("Plot Example")

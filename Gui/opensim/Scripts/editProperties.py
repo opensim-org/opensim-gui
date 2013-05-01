@@ -19,6 +19,10 @@
 # permissions and limitations under the License.                          #
 # ----------------------------------------------------------------------- #
 
+#
+# Author(s): Jen Hicks, Ayman Habib, Kevin Xu
+# Stanford University
+#
 # This example shows how to use the Property Helper convenience method
 # to access and modify model component properties. This method is 
 # needed when you want to modify a property that does not have an 
@@ -29,7 +33,7 @@
 # the bushings in the model
 
 # Load the model and get handle 
-addModel(getInstallDir()+"/Models/BouncingBlock/bouncing_block.osim")
+loadModel(getInstallDir()+"/Models/BouncingBlock/bouncing_block.osim")
 currentModel = getCurrentModel()
 
 # Create a new copy
@@ -74,4 +78,4 @@ newName = fullPathName.replace('.osim', '_edited.osim')
 myModel.print(newName)
 
 # Load the model in the GUI
-addModel(newName)
+loadModel(newName)

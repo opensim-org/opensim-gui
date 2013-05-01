@@ -19,10 +19,12 @@
 # permissions and limitations under the License.                          #
 # ----------------------------------------------------------------------- #
 
+#
+# Author(s): Ayman Habib
+# Stanford University
+#
 # This example shows to to create a modified version of a model that is loaded in the GUI. 
 # The script increases the mass of the ulna. The modified model is then loaded in the GUI.
-
-# NOTE: The Arm26 model must be loaded and current in the GUI to run this script.
 
 # Get handle to the Arm26 model
 oldModel = modeling.Model(getInstallDir() + "/Models/Arm26/arm26.osim")
@@ -52,7 +54,7 @@ newName = fullPathName.replace('.osim', '_heavier.osim')
 myModel.print(newName)
 
 # Load the model in the GUI
-addModel(newName)
+loadModel(newName)
 
 
 

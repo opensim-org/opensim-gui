@@ -56,7 +56,7 @@ newPathName = fullPathName.replace('.osim', '_longerTSL.osim')
 myModel.print(newPathName)
 
 #Add model to GUI
-addModel(newPathName)
+loadModel(newPathName)
 
 
 

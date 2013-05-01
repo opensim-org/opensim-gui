@@ -19,6 +19,9 @@
 # permissions and limitations under the License.                          #
 # ----------------------------------------------------------------------- #
 
+# Author(s): Ayman Habib, Edith Arnold
+# Stanford University
+#
 # This example script shows how to create and display a plot window. The script loads the 
 # BothLegs OpenSim model adds curves of fiber length for the model. Then, it loads and plots 
 # data from a storage file, which contains fiber lengths for the model Subject01_simbody
@@ -26,7 +29,7 @@
 
 # Load the model BothLegs.osim
 filepath = getInstallDir() + "/Models/BothLegs/BothLegs.osim";
-addModel(filepath);
+loadModel(filepath);
 
 # Create a plotter panel and set the title
 plotterPanel = createPlotterPanel("Plot Example")
