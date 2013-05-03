@@ -1299,20 +1299,36 @@ public class JPlotterPanel extends javax.swing.JPanel
          }
       }
    }
-   
-   void setMinX(double minX) {
+   /**
+    * Specify domain min bound
+    * 
+    * @param minX 
+    */   
+   public void setMinX(double minX) {
       jDomainStartTextField.setValue(minX);
    }
-   
-   double getMinX() {
+   /**
+    * Retrieve domain min bound
+    * 
+    * @return domain min bound
+    */
+   public double getMinX() {
       return ((Double)jDomainStartTextField.getValue()).doubleValue();
    }
-   
-   void setMaxX(double maxX) {
+   /**
+    * Specify domain max bound
+    * 
+    * @param maxX 
+    */
+   public void setMaxX(double maxX) {
       jDomainEndTextField.setValue(maxX);
    }
-   
-   double getMaxX() {
+   /**
+    * Retrieve domain max bound
+    * 
+    * @return domain max bound
+    */
+   public double getMaxX() {
       return ((Double)jDomainEndTextField.getValue()).doubleValue();
    }
    
@@ -1438,6 +1454,8 @@ public class JPlotterPanel extends javax.swing.JPanel
         sourceY = sourceX;
         setDomainName(domain);
         PlotCurveSettings settings  = getSettings();
+        settings.setXMin(source.getStorage().getFirstTime());
+        settings.setXMax(source.getStorage().getLastTime());
         PlotCurve plotCurve=null;
         settings.setName(range);
         plotCurve = plotterModel.addCurveSingleRangeName("Title", settings,
