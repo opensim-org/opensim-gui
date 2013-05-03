@@ -33,7 +33,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.*;
-import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -42,9 +41,7 @@ import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
-import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayPathPoint;
-import org.opensim.modeling.ArrayPtrsPropertyGroup;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.BodySet;
 import org.opensim.modeling.ConditionalPathPoint;
@@ -62,8 +59,6 @@ import org.opensim.modeling.PathActuator;
 import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.PathPointSet;
 import org.opensim.modeling.PathWrap;
-import org.opensim.modeling.PropertyGroup;
-import org.opensim.modeling.PropertyHelper;
 import org.opensim.modeling.SetPathWrap;
 import org.opensim.modeling.SetWrapObject;
 import org.opensim.modeling.Units;
@@ -74,7 +69,6 @@ import org.opensim.view.Selectable;
 import org.opensim.view.SingleModelGuiElements;
 import org.opensim.view.SingleModelVisuals;
 import org.opensim.view.editors.MusclePointFunctionEventListener;
-import org.opensim.view.editors.MusclePropertyFunctionEventListener;
 import org.opensim.view.functionEditor.FunctionEditorTopComponent;
 import org.opensim.view.functionEditor.FunctionEditorTopComponent.FunctionEditorOptions;
 import org.opensim.view.pub.OpenSimDB;
@@ -258,72 +252,6 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       this.repaint();
    }
    
-   public void DoublePropertyEntered(javax.swing.JTextField field, int propertyNum) {
-      AbstractProperty prop = currentAct.getPropertyByIndex(propertyNum);
-
-      if (prop != null) {
-         double newValue, oldValue = PropertyHelper.getValueDouble(prop);
-         try {
-            newValue = doublePropFormat.parse(field.getText()).doubleValue();
-         } catch (ParseException ex) {
-            Toolkit.getDefaultToolkit().beep();
-            field.setText(doublePropFormat.format(oldValue));
-            return;
-         }
-         // format the number and write it back into the text field
-         field.setText(doublePropFormat.format(newValue));
-
-         if (newValue != oldValue) {
-            PropertyHelper.setValueDouble(newValue, prop);
-            //setPendingChanges(true, currentAct, true);
-            // TODO generate an event for this??
-         }
-      }
-   }
-
-   public void IntPropertyEntered(javax.swing.JTextField field, int propertyNum) {
-     AbstractProperty prop = currentAct.getPropertyByIndex(propertyNum);
-     
-      if (prop != null) {
-         int newValue, oldValue = PropertyHelper.getValueInt(prop);
-         try {
-            newValue = intPropFormat.parse(field.getText()).intValue();
-         } catch (ParseException ex) {
-            Toolkit.getDefaultToolkit().beep();
-            field.setText(intPropFormat.format(oldValue));
-            return;
-         }
-         // write the value back into the text field (for consistent formatting)
-         field.setText(intPropFormat.format(newValue));
-
-         if (newValue != oldValue) {
-            PropertyHelper.setValueInt(newValue, prop);
-            setPendingChanges(true, currentAct, true);
-            // TODO generate an event for this??
-         }
-      }
-   }
-
-   public void EditPropertyFunction(javax.swing.JButton button, int propertyNum) {
-      AbstractProperty prop = currentAct.getPropertyByIndex(propertyNum);
- 
-      if (prop != null) {
-         OpenSimObject obj = prop.getValueAsObject();
-         Function func = Function.safeDownCast(obj);
-         FunctionEditorTopComponent win = FunctionEditorTopComponent.findInstance();
-         win.addChangeListener(new MusclePropertyFunctionEventListener());
-         FunctionEditorOptions options = new FunctionEditorOptions();
-         options.title = prop.getName();
-         options.XUnits = new Units(Units.UnitType.Meters);
-         options.XDisplayUnits = options.XUnits;
-         options.YUnits = new Units(Units.UnitType.Newtons);
-         options.YDisplayUnits = options.YUnits;
-         options.XLabel = "norm length";
-         options.YLabel = "norm force";
-         win.open(currentModel, currentAct, null, func, options);
-      }
-   }
-
    public void EditPathPointFunction(javax.swing.JButton button, int attachmentNum, int xyz) {
       Muscle asm = Muscle.safeDownCast(currentAct);
       if (asm != null) {
@@ -383,7 +311,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       PathPoint closestPoint = pathPoints.get(index);
       OpenSimContext context =OpenSimDB.getInstance().getContext(asm.getModel());
       context.addPathPoint(asm.getGeometryPath(), menuChoice, closestPoint.getBody());
-      setPendingChanges(true, currentAct, false);
+      
       setupComponent(currentAct);
       Model model = asm.getModel();
       SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
@@ -418,7 +346,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          // TODO: send some event that the muscle displayer can listen for and know to deselect the point
          // and make sure the rest of the points maintain correct selection status
          ViewDB.getInstance().removeObjectsBelongingToMuscleFromSelection(Muscle.safeDownCast(currentAct));
-         setPendingChanges(true, currentAct, false);
+         
          setupComponent(currentAct);
          Model model = asm.getModel();
          // Fire an ObjectsDeletedEvent.
@@ -1213,7 +1141,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       WrapObject awo = asm.getModel().getSimbodyEngine().getWrapObject(wrapObjectNames[menuChoice]);
       OpenSimContext context =OpenSimDB.getInstance().getContext(asm.getModel());
       context.addPathWrap(asm.getGeometryPath(), awo);
-      setPendingChanges(true, currentAct, true);
+      
       setupComponent(currentAct);
       Model model = asm.getModel();
       SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
@@ -1225,7 +1153,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       Muscle asm = Muscle.safeDownCast(currentAct);
       OpenSimContext context =OpenSimDB.getInstance().getContext(asm.getModel());
       context.moveUpPathWrap(asm.getGeometryPath(), num);
-      setPendingChanges(true, currentAct, true);
+      
       setupComponent(currentAct);
       Model model = asm.getModel();
       SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
@@ -1237,7 +1165,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       Muscle asm = Muscle.safeDownCast(currentAct);
       OpenSimContext context =OpenSimDB.getInstance().getContext(asm.getModel());
       context.moveDownPathWrap(asm.getGeometryPath(), num);
-      setPendingChanges(true, currentAct, true);
+      
       setupComponent(currentAct);
       Model model = asm.getModel();
       SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
@@ -1249,7 +1177,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       Muscle asm = Muscle.safeDownCast(currentAct);
       OpenSimContext context =OpenSimDB.getInstance().getContext(asm.getModel());
       context.deletePathWrap(asm.getGeometryPath(), num);
-      setPendingChanges(true, currentAct, true);
+      
       setupComponent(currentAct);
       Model model = asm.getModel();
       SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
@@ -1268,7 +1196,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          mw.setMethod(PathWrap.WrapMethod.midpoint);
       else if (methodInt == 2)
          mw.setMethod(PathWrap.WrapMethod.axial);
-      setPendingChanges(true, currentAct, true);
+      
       setupComponent(currentAct);
       Model model = asm.getModel();
       SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
@@ -1291,7 +1219,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          newStartPt = -1;
       if (newStartPt != oldStartPt) {
          openSimContext.setStartPoint(mw, newStartPt);
-         setPendingChanges(true, currentAct, true);
+         
          Model model = asm.getModel();
          // tell the ViewDB to redraw the model
          SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
@@ -1315,7 +1243,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          Model model = asm.getModel();
          OpenSimContext context = OpenSimDB.getInstance().getContext(model);
          context.setEndPoint(mw, newEndPt);
-         setPendingChanges(true, currentAct, true);
+         
          // tell the ViewDB to redraw the model
          SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
          vis.updateActuatorGeometry(asm, true);
@@ -1441,7 +1369,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
             //   needsUpdating = true;
             //}
          }
-         setPendingChanges(true, currentAct, true);
+         
          if (needsUpdating) {
             updateAttachmentPanel(asm);
          }
@@ -1479,7 +1407,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
             context.setYCoordinate(mmp, newCoord);
          else if (xyz == 2)
             context.setZCoordinate(mmp, newCoord);
-         setPendingChanges(true, currentAct, true);
+         
          ParametersTabbedPanel.setSelectedComponent(AttachmentsTab);
          // tell the ViewDB to redraw the model
          SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
@@ -1523,7 +1451,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
             PathPoint.deletePathPoint(newPoint);
             return;
          }
-         setPendingChanges(true, currentAct, true);
+         
          ParametersTabbedPanel.setSelectedComponent(AttachmentsTab);
          // tell the ViewDB to redraw the model
          SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(currentModel);
@@ -1552,7 +1480,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          Model model = asm.getModel();
          OpenSimContext context = OpenSimDB.getInstance().getContext(model);
          context.setLocation(pathPoints.get(attachmentNum), coordNum, newValue);
-         setPendingChanges(true, currentAct, true);
+         
          // tell the ViewDB to redraw the model
          SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
          vis.updateActuatorGeometry(asm, true);
@@ -1572,7 +1500,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       if (Body.getCPtr(newBody) != Body.getCPtr(oldBody)) {
          OpenSimContext context=OpenSimDB.getInstance().getContext(model);
          context.setBody(pathPoints.get(attachmentNum), newBody);
-         setPendingChanges(true, currentAct, true);
+         
          // tell the ViewDB to redraw the model
          SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
          vis.updateActuatorGeometry(asm, true);
@@ -1617,7 +1545,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
             Model model = asm.getModel();
             OpenSimContext context = OpenSimDB.getInstance().getContext(model);
             context.setRangeMin(via, newValue/conversion);
-            setPendingChanges(true, currentAct, true);
+            
             // tell the ViewDB to redraw the model
             SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
             vis.updateActuatorGeometry(asm, true);
@@ -1660,7 +1588,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          // update the model if the number has changed
          if (newValue != oldValue) {
             openSimContext.setRangeMax(via, newValue/conversion);
-            setPendingChanges(true, currentAct, true);
+            
             // tell the ViewDB to redraw the model
             Model model = asm.getModel();
             SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
@@ -1678,10 +1606,6 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
     private javax.swing.JTabbedPane ParametersTabbedPanel;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
-
-    private void setPendingChanges(boolean b, Muscle currentAct, boolean b0) {
-        //throw new UnsupportedOperationException("Not yet implemented");
-    }
     
     void RestoreButtonActionPerformed(ActionEvent evt)
     {
