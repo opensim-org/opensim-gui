@@ -450,7 +450,7 @@ public class opensimModelJNI {
   public final static native long State_updMultipliers__SWIG_0(long jarg1, State jarg1_, long jarg2);
   public final static native long State_updQErrWeights__SWIG_0(long jarg1, State jarg1_, long jarg2);
   public final static native long State_updUErrWeights__SWIG_0(long jarg1, State jarg1_, long jarg2);
-  public final static native long State_getTime(long jarg1, State jarg1_);
+  public final static native double State_getTime(long jarg1, State jarg1_);
   public final static native long State_getY(long jarg1, State jarg1_);
   public final static native long State_getQ__SWIG_1(long jarg1, State jarg1_);
   public final static native long State_getU__SWIG_1(long jarg1, State jarg1_);
@@ -461,7 +461,7 @@ public class opensimModelJNI {
   public final static native long State_updZWeights__SWIG_1(long jarg1, State jarg1_);
   public final static native long State_updTime(long jarg1, State jarg1_);
   public final static native long State_updY(long jarg1, State jarg1_);
-  public final static native void State_setTime(long jarg1, State jarg1_, long jarg2);
+  public final static native void State_setTime(long jarg1, State jarg1_, double jarg2);
   public final static native void State_setY(long jarg1, State jarg1_, long jarg2, Vector jarg2_);
   public final static native long State_updQ__SWIG_1(long jarg1, State jarg1_);
   public final static native long State_updU__SWIG_1(long jarg1, State jarg1_);

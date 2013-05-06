@@ -491,8 +491,8 @@ public class State {
     return new Vector(opensimModelJNI.State_updUErrWeights__SWIG_0(swigCPtr, this, SWIGTYPE_p_SubsystemIndex.getCPtr(arg0)), false);
   }
 
-  public SWIGTYPE_p_Real getTime() {
-    return new SWIGTYPE_p_Real(opensimModelJNI.State_getTime(swigCPtr, this), false);
+  public double getTime() {
+    return opensimModelJNI.State_getTime(swigCPtr, this);
   }
 
   public Vector getY() {
@@ -527,16 +527,16 @@ public class State {
     return new Vector(opensimModelJNI.State_updZWeights__SWIG_1(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_Real updTime() {
-    return new SWIGTYPE_p_Real(opensimModelJNI.State_updTime(swigCPtr, this), false);
+  public SWIGTYPE_p_double updTime() {
+    return new SWIGTYPE_p_double(opensimModelJNI.State_updTime(swigCPtr, this), false);
   }
 
   public Vector updY() {
     return new Vector(opensimModelJNI.State_updY(swigCPtr, this), false);
   }
 
-  public void setTime(SWIGTYPE_p_Real t) {
-    opensimModelJNI.State_setTime(swigCPtr, this, SWIGTYPE_p_Real.getCPtr(t));
+  public void setTime(double t) {
+    opensimModelJNI.State_setTime(swigCPtr, this, t);
   }
 
   public void setY(Vector y) {
