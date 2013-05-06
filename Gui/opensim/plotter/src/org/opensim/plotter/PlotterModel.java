@@ -521,7 +521,13 @@ public class PlotterModel {
        //renderer.setSeriesPaint(0, new Color(r, g, b));
        renderer.setBaseStroke(new BasicStroke(size));
    }
-  
-
    
+   // cleanup method intended to release resource and attempts to force gc
+    void cleanup() {
+        sources.clear();
+        availablePlots.clear();
+        models2AnalyzeToolInstances.clear();
+        plotTreeModel = null;
+        System.gc();
+    }
 }
