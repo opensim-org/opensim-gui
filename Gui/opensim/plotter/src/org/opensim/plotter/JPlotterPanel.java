@@ -183,7 +183,20 @@ public class JPlotterPanel extends javax.swing.JPanel
     public void setAxesLabels(String xAxis, String yAxis) {
         setXAxisLabel(xAxis);
         setYAxisLabel(yAxis);
-    }    
+    }
+    
+    // cleanup method intended to release resource and cleanup plotterModel
+    //  supporting the panel. Possibly removing circular references if any
+    void cleanup() {
+        frame = null;
+        sourceX = null;
+        sourceY = null;
+        if (jPlotsTree != null){
+            jPlotsTree.removeTreeSelectionListener(this);
+            jPlotsTree = null;
+        }
+        plotterModel.cleanup();
+    }
 
    public enum PlotDataSource {FileSource, MotionSource, AnalysisSource};
    JPlotterQuantitySelector xSelector = null;

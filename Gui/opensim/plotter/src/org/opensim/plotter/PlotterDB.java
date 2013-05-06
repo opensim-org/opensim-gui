@@ -101,6 +101,7 @@ public class PlotterDB {
               MotionsDB.getInstance().deleteObserver(plotterPanel);
               OpenSimDB.getInstance().deleteObserver(plotterPanel); 
               unRegisterPlotterPanel(plotterPanel);
+              plotterPanel.cleanup();
            }
 
             @Override
@@ -108,6 +109,7 @@ public class PlotterDB {
               MotionsDB.getInstance().deleteObserver(plotterPanel);
               OpenSimDB.getInstance().deleteObserver(plotterPanel); 
               unRegisterPlotterPanel(plotterPanel);
+              plotterPanel.cleanup();
           }
 
       });
