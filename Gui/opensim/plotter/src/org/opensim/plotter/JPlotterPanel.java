@@ -145,12 +145,14 @@ public class JPlotterPanel extends javax.swing.JPanel
     public PlotCurve showFunctionCurve(Function opensimFunction) {
         // see if we have andy data sets, if so use first one to get domain bounds otherwise 0-1
         int numDataSets = getChartPanel().getChart().getXYPlot().getDatasetCount();
-        double dmin= 0.0;
-        double dmax = 1.0;
+        double dmin= getMinX();
+        double dmax = getMaxX();
         if (numDataSets > 0){
              XYDataset dataSet0 = getChartPanel().getChart().getXYPlot().getDataset(0);
-             dmin = dataSet0.getX(0, 0).doubleValue();
-             dmax = dataSet0.getX(0, dataSet0.getItemCount(0) -1).doubleValue();
+             if (dataSet0.getSeriesCount()>0){
+                dmin = dataSet0.getX(0, 0).doubleValue();
+                dmax = dataSet0.getX(0, dataSet0.getItemCount(0) -1).doubleValue();
+             }
         }
         //double dUMargin = dAxis.getUpperMargin();
         ArrayList xValues = new ArrayList();
