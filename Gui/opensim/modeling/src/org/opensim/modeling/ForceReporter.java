@@ -89,6 +89,18 @@ public class ForceReporter extends Analysis {
     opensimModelJNI.ForceReporter_includeConstraintForces(swigCPtr, this, flag);
   }
 
+  public int begin(State s) {
+    return opensimModelJNI.ForceReporter_begin(swigCPtr, this, State.getCPtr(s), s);
+  }
+
+  public int step(State s, int setNumber) {
+    return opensimModelJNI.ForceReporter_step(swigCPtr, this, State.getCPtr(s), s, setNumber);
+  }
+
+  public int end(State s) {
+    return opensimModelJNI.ForceReporter_end(swigCPtr, this, State.getCPtr(s), s);
+  }
+
   public int printResults(String aBaseName, String aDir, double aDT, String aExtension) {
     return opensimModelJNI.ForceReporter_printResults__SWIG_0(swigCPtr, this, aBaseName, aDir, aDT, aExtension);
   }

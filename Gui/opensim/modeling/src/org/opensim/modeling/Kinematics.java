@@ -96,6 +96,18 @@ public class Kinematics extends Analysis {
     opensimModelJNI.Kinematics_setRecordAccelerations(swigCPtr, this, aRecordAccelerations);
   }
 
+  public int begin(State s) {
+    return opensimModelJNI.Kinematics_begin(swigCPtr, this, State.getCPtr(s), s);
+  }
+
+  public int step(State s, int setNumber) {
+    return opensimModelJNI.Kinematics_step(swigCPtr, this, State.getCPtr(s), s, setNumber);
+  }
+
+  public int end(State s) {
+    return opensimModelJNI.Kinematics_end(swigCPtr, this, State.getCPtr(s), s);
+  }
+
   public int printResults(String aBaseName, String aDir, double aDT, String aExtension) {
     return opensimModelJNI.Kinematics_printResults__SWIG_0(swigCPtr, this, aBaseName, aDir, aDT, aExtension);
   }

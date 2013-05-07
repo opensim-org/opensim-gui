@@ -81,6 +81,18 @@ public class StatesReporter extends Analysis {
     return new Storage(opensimModelJNI.StatesReporter_updStatesStorage(swigCPtr, this), false);
   }
 
+  public int begin(State s) {
+    return opensimModelJNI.StatesReporter_begin(swigCPtr, this, State.getCPtr(s), s);
+  }
+
+  public int step(State s, int setNumber) {
+    return opensimModelJNI.StatesReporter_step(swigCPtr, this, State.getCPtr(s), s, setNumber);
+  }
+
+  public int end(State s) {
+    return opensimModelJNI.StatesReporter_end(swigCPtr, this, State.getCPtr(s), s);
+  }
+
   public int printResults(String aBaseName, String aDir, double aDT, String aExtension) {
     return opensimModelJNI.StatesReporter_printResults__SWIG_0(swigCPtr, this, aBaseName, aDir, aDT, aExtension);
   }

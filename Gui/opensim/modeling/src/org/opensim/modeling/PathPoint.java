@@ -85,6 +85,26 @@ public class PathPoint extends OpenSimObject {
     opensimModelJNI.PathPoint_setLocationCoord(swigCPtr, this, aXYZ, aValue);
   }
 
+  public void setLocation(State s, Vec3 aLocation) {
+    opensimModelJNI.PathPoint_setLocation__SWIG_0(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(aLocation), aLocation);
+  }
+
+  public void setLocation(State s, int aCoordIndex, double aLocation) {
+    opensimModelJNI.PathPoint_setLocation__SWIG_1(swigCPtr, this, State.getCPtr(s), s, aCoordIndex, aLocation);
+  }
+
+  public void setLocation(State s, double[] pt) {
+    opensimModelJNI.PathPoint_setLocation__SWIG_2(swigCPtr, this, State.getCPtr(s), s, pt);
+  }
+
+  public void setBody(Body aBody) {
+    opensimModelJNI.PathPoint_setBody(swigCPtr, this, Body.getCPtr(aBody), aBody);
+  }
+
+  public void changeBodyPreserveLocation(State s, Body aBody) {
+    opensimModelJNI.PathPoint_changeBodyPreserveLocation(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody);
+  }
+
   public Body getBody() {
     return new Body(opensimModelJNI.PathPoint_getBody(swigCPtr, this), false);
   }
@@ -105,6 +125,22 @@ public class PathPoint extends OpenSimObject {
   public WrapObject getWrapObject() {
     long cPtr = opensimModelJNI.PathPoint_getWrapObject(swigCPtr, this);
     return (cPtr == 0) ? null : new WrapObject(cPtr, false);
+  }
+
+  public boolean isActive(State s) {
+    return opensimModelJNI.PathPoint_isActive(swigCPtr, this, State.getCPtr(s), s);
+  }
+
+  public void connectToModelAndPath(Model aModel, GeometryPath aPath) {
+    opensimModelJNI.PathPoint_connectToModelAndPath(swigCPtr, this, Model.getCPtr(aModel), aModel, GeometryPath.getCPtr(aPath), aPath);
+  }
+
+  public void update(State s) {
+    opensimModelJNI.PathPoint_update(swigCPtr, this, State.getCPtr(s), s);
+  }
+
+  public void getVelocity(State s, Vec3 aVelocity) {
+    opensimModelJNI.PathPoint_getVelocity(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(aVelocity), aVelocity);
   }
 
   public VisibleObject getDisplayer() {

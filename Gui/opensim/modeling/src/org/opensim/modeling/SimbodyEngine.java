@@ -103,6 +103,66 @@ public class SimbodyEngine extends OpenSimObject {
     return opensimModelJNI.SimbodyEngine_getMass(swigCPtr, this);
   }
 
+  public void getSystemInertia(State s, SWIGTYPE_p_double rM, Vec3 rCOM, SWIGTYPE_p_a_3__double rI) {
+    opensimModelJNI.SimbodyEngine_getSystemInertia__SWIG_0(swigCPtr, this, State.getCPtr(s), s, SWIGTYPE_p_double.getCPtr(rM), Vec3.getCPtr(rCOM), rCOM, SWIGTYPE_p_a_3__double.getCPtr(rI));
+  }
+
+  public void getSystemInertia(State s, SWIGTYPE_p_double rM, SWIGTYPE_p_double rCOM, SWIGTYPE_p_double rI) {
+    opensimModelJNI.SimbodyEngine_getSystemInertia__SWIG_1(swigCPtr, this, State.getCPtr(s), s, SWIGTYPE_p_double.getCPtr(rM), SWIGTYPE_p_double.getCPtr(rCOM), SWIGTYPE_p_double.getCPtr(rI));
+  }
+
+  public void getPosition(State s, Body aBody, Vec3 aPoint, Vec3 rPos) {
+    opensimModelJNI.SimbodyEngine_getPosition(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, Vec3.getCPtr(aPoint), aPoint, Vec3.getCPtr(rPos), rPos);
+  }
+
+  public void getVelocity(State s, Body aBody, Vec3 aPoint, Vec3 rVel) {
+    opensimModelJNI.SimbodyEngine_getVelocity(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, Vec3.getCPtr(aPoint), aPoint, Vec3.getCPtr(rVel), rVel);
+  }
+
+  public void getAcceleration(State s, Body aBody, Vec3 aPoint, Vec3 rAcc) {
+    opensimModelJNI.SimbodyEngine_getAcceleration(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, Vec3.getCPtr(aPoint), aPoint, Vec3.getCPtr(rAcc), rAcc);
+  }
+
+  public void getDirectionCosines(State s, Body aBody, SWIGTYPE_p_a_3__double rDirCos) {
+    opensimModelJNI.SimbodyEngine_getDirectionCosines__SWIG_0(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, SWIGTYPE_p_a_3__double.getCPtr(rDirCos));
+  }
+
+  public void getDirectionCosines(State s, Body aBody, SWIGTYPE_p_double rDirCos) {
+    opensimModelJNI.SimbodyEngine_getDirectionCosines__SWIG_1(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, SWIGTYPE_p_double.getCPtr(rDirCos));
+  }
+
+  public void getAngularVelocity(State s, Body aBody, Vec3 rAngVel) {
+    opensimModelJNI.SimbodyEngine_getAngularVelocity(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, Vec3.getCPtr(rAngVel), rAngVel);
+  }
+
+  public void getAngularVelocityBodyLocal(State s, Body aBody, Vec3 rAngVel) {
+    opensimModelJNI.SimbodyEngine_getAngularVelocityBodyLocal(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, Vec3.getCPtr(rAngVel), rAngVel);
+  }
+
+  public void getAngularAcceleration(State s, Body aBody, Vec3 rAngAcc) {
+    opensimModelJNI.SimbodyEngine_getAngularAcceleration(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, Vec3.getCPtr(rAngAcc), rAngAcc);
+  }
+
+  public void getAngularAccelerationBodyLocal(State s, Body aBody, Vec3 rAngAcc) {
+    opensimModelJNI.SimbodyEngine_getAngularAccelerationBodyLocal(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, Vec3.getCPtr(rAngAcc), rAngAcc);
+  }
+
+  public SWIGTYPE_p_Transform getTransform(State s, Body aBody) {
+    return new SWIGTYPE_p_Transform(opensimModelJNI.SimbodyEngine_getTransform(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody), true);
+  }
+
+  public void computeReactions(State s, SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_3_double_1_t_t rForces, SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_3_double_1_t_t rTorques) {
+    opensimModelJNI.SimbodyEngine_computeReactions(swigCPtr, this, State.getCPtr(s), s, SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_3_double_1_t_t.getCPtr(rForces), SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_3_double_1_t_t.getCPtr(rTorques));
+  }
+
+  public void formCompleteStorages(State s, Storage aQIn, SWIGTYPE_p_p_OpenSim__Storage rQComplete, SWIGTYPE_p_p_OpenSim__Storage rUComplete) {
+    opensimModelJNI.SimbodyEngine_formCompleteStorages(swigCPtr, this, State.getCPtr(s), s, Storage.getCPtr(aQIn), aQIn, SWIGTYPE_p_p_OpenSim__Storage.getCPtr(rQComplete), SWIGTYPE_p_p_OpenSim__Storage.getCPtr(rUComplete));
+  }
+
+  public void formEulerTransform(State s, Body aBody, SWIGTYPE_p_double rE) {
+    opensimModelJNI.SimbodyEngine_formEulerTransform(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, SWIGTYPE_p_double.getCPtr(rE));
+  }
+
   public void computeDerivatives(State s, SWIGTYPE_p_double dqdt, SWIGTYPE_p_double dudt) {
     opensimModelJNI.SimbodyEngine_computeDerivatives(swigCPtr, this, State.getCPtr(s), s, SWIGTYPE_p_double.getCPtr(dqdt), SWIGTYPE_p_double.getCPtr(dudt));
   }

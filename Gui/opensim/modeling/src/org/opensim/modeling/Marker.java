@@ -137,6 +137,10 @@ public class Marker extends OpenSimObject {
     opensimModelJNI.Marker_changeBody(swigCPtr, this, Body.getCPtr(aBody), aBody);
   }
 
+  public void changeBodyPreserveLocation(State s, Body aBody) {
+    opensimModelJNI.Marker_changeBodyPreserveLocation(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody);
+  }
+
   public void scale(Vec3 aScaleFactors) {
     opensimModelJNI.Marker_scale(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
   }

@@ -96,6 +96,18 @@ public class Actuation extends Analysis {
     opensimModelJNI.Actuation_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
+  public int begin(State s) {
+    return opensimModelJNI.Actuation_begin(swigCPtr, this, State.getCPtr(s), s);
+  }
+
+  public int step(State s, int setNumber) {
+    return opensimModelJNI.Actuation_step(swigCPtr, this, State.getCPtr(s), s, setNumber);
+  }
+
+  public int end(State s) {
+    return opensimModelJNI.Actuation_end(swigCPtr, this, State.getCPtr(s), s);
+  }
+
   public int printResults(String aBaseName, String aDir, double aDT, String aExtension) {
     return opensimModelJNI.Actuation_printResults__SWIG_0(swigCPtr, this, aBaseName, aDir, aDT, aExtension);
   }
