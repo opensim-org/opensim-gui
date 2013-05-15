@@ -59,16 +59,14 @@ block.setMass(100)
 # specify for the scripting shell that this is a BushingForce
 hipBushing = modeling.BushingForce.safeDownCast(myModel.getForceSet().get("hip_bushing"))
 
-# Get the current stiffness, converting from the SimTK Vec3 to an 
-# ArrayDouble, compatible with the scripting shell
-currentStiffness = modeling.ArrayDouble.getValuesFromVec3(hipBushing.get_rotational_stiffness())
+# Get the current stiffness, as SimTK Vec3 
+currentStiffness = hipBushing.get_rotational_stiffness()
 
-# Double the stiffness, then convert back to a SimTK Vec3, compatible
-# with the OpenSim API
-newStiffness = modeling.ArrayDouble()
+# Double the stiffness.
+newStiffness = modeling.Vec3()
 for i in range(0,3):
-   newStiffness.setitem(i,2*currentStiffness.getitem(i))
-hipBushing.set_rotational_stiffness(newStiffness.getAsVec3())
+   newStiffness.set(i,2*currentStiffness.get(i))
+hipBushing.set_rotational_stiffness(newStiffness)
 
 # Get full path name of original.old model
 fullPathName = currentModel.getInputFileName()
