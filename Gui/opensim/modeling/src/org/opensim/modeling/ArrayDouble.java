@@ -47,7 +47,7 @@ public class ArrayDouble {
           //throw new ParseException("Illegal format: Expect space separated values, optionally between matched parentheses", liveEnd);
           return;
       }
-      String[] splits = workString.split(" |\t");
+      String[] splits = workString.split(" ");
       double[] values = new double[splits.length];
       for(int i=0; i<splits.length; i++){
            values[i]=Double.parseDouble(splits[i]);
