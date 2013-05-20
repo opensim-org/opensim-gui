@@ -309,8 +309,8 @@ public class PathSpring extends Force {
     return opensimModelJNI.PathSpring_getLength(swigCPtr, this, State.getCPtr(s), s);
   }
 
-  public double getStrain(State s) {
-    return opensimModelJNI.PathSpring_getStrain(swigCPtr, this, State.getCPtr(s), s);
+  public double getStretch(State s) {
+    return opensimModelJNI.PathSpring_getStretch(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getLengtheningSpeed(State s) {

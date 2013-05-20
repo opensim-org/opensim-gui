@@ -119,12 +119,16 @@ public class Model extends ModelComponent {
     this(opensimModelJNI.new_Model__SWIG_0(), true);
   }
 
+  public Model(String filename, boolean connectToModel) throws java.io.IOException {
+    this(opensimModelJNI.new_Model__SWIG_1(filename, connectToModel), true);
+  }
+
   public Model(String filename) throws java.io.IOException {
-    this(opensimModelJNI.new_Model__SWIG_1(filename), true);
+    this(opensimModelJNI.new_Model__SWIG_2(filename), true);
   }
 
   public Model(Model source) {
-    this(opensimModelJNI.new_Model__SWIG_2(Model.getCPtr(source), source), true);
+    this(opensimModelJNI.new_Model__SWIG_3(Model.getCPtr(source), source), true);
   }
 
   public void setup() throws java.io.IOException {
