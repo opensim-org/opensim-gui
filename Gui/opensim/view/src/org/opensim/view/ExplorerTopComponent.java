@@ -368,10 +368,8 @@ final public class ExplorerTopComponent extends TopComponent
                     PathPoint ppt = (PathPoint)oObject;
                     GeometryPath ppath = ppt.getPath();
                     OpenSimObject pathOwner = ppath.getOwner();
-                    if (Muscle.safeDownCast(pathOwner)!= null){
-                        Muscle ms = Muscle.safeDownCast(pathOwner);
-                        objectNode = findObjectNode(modelNode,ms);
-                    }
+                    objectNode = findObjectNode(modelNode,pathOwner);
+                    
                 }
                 if (objectNode != null) {
                     try {
