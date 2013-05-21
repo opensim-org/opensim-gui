@@ -2,10 +2,11 @@ package org.opensim.console;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.Reader;
-import java.io.Writer;
+import java.io.*;
+import java.util.ArrayList;
 
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -13,9 +14,10 @@ import javax.swing.text.DocumentFilter;
 
 import org.python.core.Py;
 import org.python.core.PyException;
-import org.python.core.PySystemState;
+import org.python.util.InteractiveConsole;
 import org.python.util.InteractiveInterpreter;
 import org.python.util.JLineConsole;
+import org.python.util.PythonInterpreter;
 
 /**
  * Copyright (c)  2005-2012, Stanford University and Ayman Habib
@@ -70,7 +72,7 @@ public class JConsole extends JTextArea implements KeyListener {
     /**
      * The script engine and scope we're using
      */
-    InteractiveInterpreter interp;
+    private InteractiveConsole interp;
     /**
      * The allowed variables and stuff to use
      */
@@ -79,6 +81,12 @@ public class JConsole extends JTextArea implements KeyListener {
     private ConsoleFilter filter;
     private Thread pythonThread;
 
+    private ArrayList<ConsoleListener> consoleListeners = new ArrayList<ConsoleListener>();
+    
+    private String moreCommand = "";
+    
+    private final String ps1 = ">>> ";    
+    private final String ps2 = "... "; 
     /**
      * 
      */
@@ -93,27 +101,27 @@ public class JConsole extends JTextArea implements KeyListener {
         // setup the command history
         history = new CommandHistory();
         // setup the script engine
-        interp = new InteractiveInterpreter();
+//        interp = new InteractiveInterpreter();
 
         // no postProps, registry values used 
-        //JLineConsole.initialize(System.getProperties(), null, new String[0]);
+        JLineConsole.initialize(System.getProperties(), null, new String[0]);
 
-        //interp = new JLineConsole();
-        /*
+        interp = new JLineConsole();
+	
         // important line, set JLineConsole to internal python variable to be able to 
         // acces console from python interface
         interp.getSystemState().__setattr__("_jy_interpreter", Py.java2py(interp));
-
+        interp.getSystemState().__setattr__("_jy_main", Py.java2py(this));
+	
         // this instance - in order to call interrupt on correct thread
-        //interp.getSystemState().__setattr__("_jy_main", Py.java2py(this));
-		
+
         // JLINE console initialization
-        JLineConsole.initialize(System.getProperties(), null, new String[0]);       // setup the script interp
+//        JLineConsole.initialize(System.getProperties(), null, new String[0]);       // setup the script interp
         
         // enable autocomplete by default:)
         interp.exec("import rlcompleter, readline");
         interp.exec("readline.parse_and_bind('tab: complete')");
-        */
+
         Py.getSystemState().setClassLoader(
                 this.getClass().getClassLoader());
         interp.exec("import sys");
@@ -140,6 +148,89 @@ public class JConsole extends JTextArea implements KeyListener {
        //((JLineConsole)interp).interact();
     }
 
+    private void fireCommandExecuted(String commands) {
+        for(ConsoleListener listener : consoleListeners) {
+            listener.onExecution(commands);
+        }
+    }
+        
+    private void fireKeyPressed(KeyEvent e) {
+        for(ConsoleListener listener : consoleListeners) {
+            listener.onKeyPressed(e);
+        }
+    }
+    
+    public void registerConsoleListener(ConsoleListener listener) {
+        consoleListeners.add(listener);
+    }
+    
+    public void executeFile(String filename) {
+        try {
+            interp.execfile(filename);
+        } catch (PyException e) {
+            e.printStackTrace();
+        }                    
+  
+        fireCommandExecuted(getFileContents(filename));
+        fireCommandExecuted("Finished executing script file " + filename);
+
+    }
+    
+    public void executeCommand(String commands) {
+
+        StringBuilder text;
+
+        moreCommand += commands;
+
+        try {           
+            // If command is not finished (i.e. loop)
+            if(interp.runsource(moreCommand)) {
+                text = new StringBuilder(getText()); 
+                text.append(ps2);
+                moreCommand += "\n";
+            } else {
+                text = new StringBuilder(getText()); 
+                text.append(ps1);
+                moreCommand = "";
+            }
+
+            setText(text.toString());
+        } catch (PyException e) {
+            e.printStackTrace();
+        }
+        fireCommandExecuted(commands);
+    }
+            
+    private String getFileContents(String filename) {
+        StringBuilder contents = new StringBuilder();
+
+        File aFile = new File(filename);
+        try {
+            //use buffering, reading one line at a time
+            //FileReader always assumes default encoding is OK!
+            BufferedReader input = new BufferedReader(new FileReader(aFile));
+            try {
+                String line = null; //not declared within while loop
+        		/*
+                 * readLine is a bit quirky :
+                 * it returns the content of a line MINUS the newline.
+                 * it returns null only for the END of the stream.
+                 * it returns an empty String if two newlines appear in a row.
+                 */
+                while ((line = input.readLine()) != null) {
+                    contents.append(line);
+                    contents.append(System.getProperty("line.separator"));
+                }
+            } finally {
+                input.close();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return contents.toString();
+    }
+        
     @Override
     public void setText(String text) {
         setText(text, true);
@@ -336,17 +427,14 @@ public class JConsole extends JTextArea implements KeyListener {
         @Override
         public void run() {
             running = true;
-            try {
-                interp.runsource(commands);
-                ScriptingShellTopComponent.getDefault().logMessage(commands);
-            } catch (PyException e) {
-                // prints out the python error message to the console
-                e.printStackTrace();
-            }
-            // interp.eval(commands, context);
-            StringBuilder text = new StringBuilder(getText());
-            text.append(">>> ");
-            setText(text.toString());
+            SwingUtilities.invokeLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    executeCommand(commands);
+                }
+            });
+
             running = false;
         }
     }
@@ -357,8 +445,8 @@ public class JConsole extends JTextArea implements KeyListener {
         if (running) {
             // I know it's depracated, but since this object is being destroyed,
             // this thread should go, too
-            pythonThread.stop();
-            pythonThread.destroy();
+            pythonThread.interrupt();
+            pythonThread = null;
         }
     }
 
@@ -372,16 +460,3 @@ public class JConsole extends JTextArea implements KeyListener {
         // don't need to use this for anything
     }
 }
- /*
- *          StreamGobbler errorGobbler = new 
-            StreamGobbler(proc.getErrorStream(), "ERROR");            
-            
-            // any output?
-            StreamGobbler outputGobbler = new 
-               StreamGobbler(proc.getInputStream(), "OUTPUT");
-                
-            // kick them off
-            errorGobbler.start();
-            outputGobbler.start();                
-
- */

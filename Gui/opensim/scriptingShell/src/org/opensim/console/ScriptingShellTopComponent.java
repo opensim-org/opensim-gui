@@ -4,15 +4,19 @@
  */
 package org.opensim.console;
 
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import javax.swing.JMenuItem;
+import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
+import javax.swing.border.TitledBorder;
 import org.openide.util.NbBundle;
 import org.openide.windows.TopComponent;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
-import org.openide.awt.ActionReference;
-import org.python.util.PythonInterpreter; 
+import org.openide.awt.ActionReference; 
 /**
  * Top component which displays something.
  */
@@ -27,13 +31,31 @@ persistenceType = TopComponent.PERSISTENCE_ALWAYS)
 @TopComponent.OpenActionRegistration(displayName = "#CTL_ScriptingShellAction",
 preferredID = "ScriptingShellTopComponent")
 public final class ScriptingShellTopComponent extends TopComponent {
-private PythonInterpreter interp;
 
-public ScriptingShellTopComponent() {
+    private class MessagePanel extends javax.swing.JTextArea implements ConsoleListener {
+
+        @Override
+        public void onExecution(String commands) {
+            displayMessage(commands);
+        }
+
+        @Override
+        public void onKeyPressed(KeyEvent e) {
+        }
+        
+        private void displayMessage(final String msg) {
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public synchronized void run() {
+                    MessagePanel.this.append("#"+msg+"\n");
+                }
+            });
+        }
+    }
+    
+    public ScriptingShellTopComponent() {
         //fileTextFieldAndChooser1.setFileFilter(FileUtils.getFileFilter(".py", "Python script file to load"));
         initComponents();
-        instance = this;
-        interp = jConsole2.interp;
         
         setName(NbBundle.getMessage(ScriptingShellTopComponent.class, "CTL_ScriptingShellTopComponent"));
         setToolTipText(NbBundle.getMessage(ScriptingShellTopComponent.class, "HINT_ScriptingShellTopComponent"));
@@ -42,6 +64,17 @@ public ScriptingShellTopComponent() {
         jPopupMenu1.removeAll();
         addPopupCommands();
 
+	jConsole2 = new JConsole();
+
+        jConsole2.setColumns(20);
+        jConsole2.setRows(5);
+        jScrollPane2.setViewportView(jConsole2);
+        
+        historyArea = (MessagePanel)jTextArea1;
+        historyArea.setComponentPopupMenu(jPopupMenu1);
+        jConsole2.registerConsoleListener(historyArea);
+        jScrollPane1.setBorder(new TitledBorder("Command History"));
+        historyArea.setEditable(false);
     }
 
     /** This method is called from within the constructor to
@@ -55,25 +88,19 @@ public ScriptingShellTopComponent() {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jConsole2 = new org.opensim.console.JConsole();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jEditorPane1 = new javax.swing.JEditorPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new MessagePanel();
 
         setToolTipText(org.openide.util.NbBundle.getMessage(ScriptingShellTopComponent.class, "ScriptingShellTopComponent.toolTipText")); // NOI18N
 
         jSplitPane1.setDividerLocation(240);
-
-        jConsole2.setColumns(20);
-        jConsole2.setRows(5);
-        jScrollPane2.setViewportView(jConsole2);
-
         jSplitPane1.setLeftComponent(jScrollPane2);
 
-        jEditorPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(ScriptingShellTopComponent.class, "ScriptingShellTopComponent.jEditorPane1.border.title"))); // NOI18N
-        jEditorPane1.setComponentPopupMenu(jPopupMenu1);
-        jScrollPane3.setViewportView(jEditorPane1);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
-        jSplitPane1.setRightComponent(jScrollPane3);
+        jSplitPane1.setRightComponent(jScrollPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -85,20 +112,23 @@ public ScriptingShellTopComponent() {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 153, Short.MAX_VALUE)
+            .addGap(0, 154, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.opensim.console.JConsole jConsole2;
-    private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
+
+    private JConsole jConsole2;
+    private MessagePanel historyArea;
+    
     @Override
     public void componentOpened() {
         // TODO add custom code on component opening
@@ -129,18 +159,15 @@ public ScriptingShellTopComponent() {
     }
     private static ScriptingShellTopComponent instance;
 
-    PythonInterpreter getInterp() {
-        return interp;
+    public synchronized JConsole getConsole() {
+        return jConsole2;
     }
-
-    void logMessage(String string) {
-        jEditorPane1.setText(jEditorPane1.getText()+"#"+string+"\n");
-    }
+    
     private void addPopupCommands() {
         JMenuItem clearItem = jPopupMenu1.add("Clear");
         clearItem.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
-                jEditorPane1.setText("");
+                historyArea.setText("");
             }});
-}
+    }
 }
