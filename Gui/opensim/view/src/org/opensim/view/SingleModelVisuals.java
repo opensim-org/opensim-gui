@@ -325,7 +325,22 @@ public class SingleModelVisuals {
          getMusclePointsRep().setModified();
       }
    }
+   public void updateForceOnPathGeometry(Object act, boolean callUpdateDisplayer) {
+      LineSegmentForceDisplayer disp = mapPathForces2Displayer.get(act);
+      if(disp != null) {
+         disp.updateGeometry(callUpdateDisplayer);
+         otherPathSegmentsRep.setModified();
+         otherPathPointsRep.setModified();
+      }
+   }
 
+   public void updateMuscleOrForceAlongPathGeometry(OpenSimObject act, boolean callUpdateDisplayer) {
+       Muscle msl = Muscle.safeDownCast(act);
+       if (msl!=null)
+           updateActuatorGeometry(msl, callUpdateDisplayer);
+       else
+           updateForceOnPathGeometry(act, callUpdateDisplayer);
+   }
    public void updateForceGeometry(Model mdl) {
       updateForceGeometry(mdl.getForceSet());
    }
@@ -644,6 +659,8 @@ public class SingleModelVisuals {
             return getMarkersRep();
         else if (getMusclePointsRep().getVtkActor()==act)
             return getMusclePointsRep();
+        else if (getForceAlongPathPointsRep().getVtkActor()==act)
+            return getForceAlongPathPointsRep();
         else
            return null;
     }

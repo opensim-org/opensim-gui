@@ -89,13 +89,17 @@ public class SelectedObject implements Selectable {
    {
       if (PathPoint.safeDownCast(object) != null) {
          PathPoint mp = PathPoint.safeDownCast(object);
+         OpenSimObject owner = mp.getPath().getOwner();
          SingleModelVisuals visuals = ViewDB.getInstance().getModelVisuals(getModel(mp));
-         OpenSimvtkGlyphCloud cloud = visuals.getMusclePointsRep();
+         OpenSimvtkGlyphCloud cloud = null;
+         if (Muscle.safeDownCast(owner) != null)
+             cloud = visuals.getMusclePointsRep();
+         else 
+             cloud = visuals.getForceAlongPathPointsRep();
          int id = cloud.getPointId(object);
          if(id>=0) { // just to be safe
             cloud.setSelected(id, highlight);
-            Muscle m = Muscle.safeDownCast(mp.getPath().getOwner());
-            visuals.updateActuatorGeometry(m, false); //TODO: perhaps overkill for getting musclepoint to update?
+            visuals.updateMuscleOrForceAlongPathGeometry(owner, false); //TODO: perhaps overkill for getting musclepoint to update?
          }
       } else if (Marker.safeDownCast(object) != null) {
          Marker marker = Marker.safeDownCast(object);
