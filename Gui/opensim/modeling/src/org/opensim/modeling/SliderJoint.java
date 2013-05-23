@@ -73,12 +73,4 @@ public class SliderJoint extends Joint {
     return opensimModelJNI.SliderJoint_numCoordinates(swigCPtr, this);
   }
 
-  public void scale(ScaleSet aScaleSet) {
-    opensimModelJNI.SliderJoint_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
-  }
-
-  public void connectToModel(Model aModel) {
-    opensimModelJNI.SliderJoint_connectToModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
-  }
-
 }
