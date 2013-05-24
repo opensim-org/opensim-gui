@@ -124,15 +124,10 @@ public final class gui {
      * 
      * @param fileName to construct the model from
      * 
-     * @deprecated use loadModel instead
+     * @Deprecated use loadModel instead
      */
     static public void addModel(String fileName){
-        try {
-            Model aModel = new Model(fileName);
-            OpenSimDB.getInstance().addModel(aModel);
-        } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
-        }
+        loadModel(fileName);
     }
     /**
      * loadModel() creates a new OpenSim model from the passed in fileName and loads this model 
