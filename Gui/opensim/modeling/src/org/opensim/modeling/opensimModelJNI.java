@@ -4257,7 +4257,9 @@ public class opensimModelJNI {
   public final static native void SimbodyEngine_computeReactions(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_, long jarg3, long jarg4);
   public final static native void SimbodyEngine_formCompleteStorages(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_, long jarg3, Storage jarg3_, long jarg4, long jarg5);
   public final static native void SimbodyEngine_formEulerTransform(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_, long jarg3, Body jarg3_, long jarg4);
-  public final static native void SimbodyEngine_computeDerivatives(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_, long jarg3, long jarg4);
+  public final static native void SimbodyEngine_computeDerivatives__SWIG_0(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_, long jarg3, long jarg4);
+  public final static native void SimbodyEngine_computeDerivatives__SWIG_1(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_, long jarg3);
+  public final static native void SimbodyEngine_computeDerivatives__SWIG_2(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_);
   public final static native void SimbodyEngine_transform__SWIG_0(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_, long jarg3, Body jarg3_, double[] jarg4, long jarg5, Body jarg5_, double[] jarg6);
   public final static native void SimbodyEngine_transform__SWIG_1(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_, long jarg3, Body jarg3_, long jarg4, Vec3 jarg4_, long jarg5, Body jarg5_, long jarg6, Vec3 jarg6_);
   public final static native void SimbodyEngine_transformPosition__SWIG_0(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_, long jarg3, Body jarg3_, double[] jarg4, long jarg5, Body jarg5_, double[] jarg6);
@@ -7876,7 +7878,6 @@ public class opensimModelJNI {
   public final static native String ExpressionBasedBushingForce_getFzExpression(long jarg1, ExpressionBasedBushingForce jarg1_);
   public final static native long ExpressionBasedBushingForce_computeDeflection(long jarg1, ExpressionBasedBushingForce jarg1_, long jarg2, State jarg2_);
   public final static native void ExpressionBasedBushingForce_computeForce(long jarg1, ExpressionBasedBushingForce jarg1_, long jarg2, State jarg2_, long jarg3, VectorOfSpatialVec jarg3_, long jarg4, Vector jarg4_);
-  public final static native double ExpressionBasedBushingForce_computePotentialEnergy(long jarg1, ExpressionBasedBushingForce jarg1_, long jarg2, State jarg2_);
   public final static native long ExpressionBasedBushingForce_getRecordLabels(long jarg1, ExpressionBasedBushingForce jarg1_);
   public final static native long ExpressionBasedBushingForce_getRecordValues(long jarg1, ExpressionBasedBushingForce jarg1_, long jarg2, State jarg2_);
   public final static native void delete_ExpressionBasedBushingForce(long jarg1);

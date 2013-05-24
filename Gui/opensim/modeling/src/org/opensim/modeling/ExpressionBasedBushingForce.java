@@ -1065,10 +1065,6 @@ public class ExpressionBasedBushingForce extends Force {
     opensimModelJNI.ExpressionBasedBushingForce_computeForce(swigCPtr, this, State.getCPtr(s), s, VectorOfSpatialVec.getCPtr(bodyForces), bodyForces, Vector.getCPtr(generalizedForces), generalizedForces);
   }
 
-  public double computePotentialEnergy(State s) {
-    return opensimModelJNI.ExpressionBasedBushingForce_computePotentialEnergy(swigCPtr, this, State.getCPtr(s), s);
-  }
-
   public ArrayStr getRecordLabels() {
     return new ArrayStr(opensimModelJNI.ExpressionBasedBushingForce_getRecordLabels(swigCPtr, this), true);
   }

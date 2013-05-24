@@ -164,7 +164,15 @@ public class SimbodyEngine extends OpenSimObject {
   }
 
   public void computeDerivatives(State s, SWIGTYPE_p_double dqdt, SWIGTYPE_p_double dudt) {
-    opensimModelJNI.SimbodyEngine_computeDerivatives(swigCPtr, this, State.getCPtr(s), s, SWIGTYPE_p_double.getCPtr(dqdt), SWIGTYPE_p_double.getCPtr(dudt));
+    opensimModelJNI.SimbodyEngine_computeDerivatives__SWIG_0(swigCPtr, this, State.getCPtr(s), s, SWIGTYPE_p_double.getCPtr(dqdt), SWIGTYPE_p_double.getCPtr(dudt));
+  }
+
+  public void computeDerivatives(State s, SWIGTYPE_p_double dqdt) {
+    opensimModelJNI.SimbodyEngine_computeDerivatives__SWIG_1(swigCPtr, this, State.getCPtr(s), s, SWIGTYPE_p_double.getCPtr(dqdt));
+  }
+
+  public void computeDerivatives(State s) {
+    opensimModelJNI.SimbodyEngine_computeDerivatives__SWIG_2(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void transform(State s, Body aBodyFrom, double[] aVec, Body aBodyTo, double[] rVec) {
