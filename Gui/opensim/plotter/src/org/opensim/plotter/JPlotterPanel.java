@@ -42,8 +42,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Observable;
+import java.util.*;
 import java.util.Vector;
 import javax.swing.AbstractAction;
 import javax.swing.JCheckBox;
@@ -94,6 +93,8 @@ public class JPlotterPanel extends javax.swing.JPanel
    // 2. It serves as the model backing the tree of plots/figures.
    private PlotterModel plotterModel = new PlotterModel();
 
+   private HashSet<String> qNameSet = new HashSet<String>();
+   
     public void setTitle(String title) {
         getChartPanel().getChart().setTitle(title);
     }
@@ -120,7 +121,7 @@ public class JPlotterPanel extends javax.swing.JPanel
                 return null;
            }
        }
-       else if (currentModel.getMuscles().contains(qName))
+       else if (currentModel.getMuscles().contains(qName) || qNameSet.contains(qName.toLowerCase()))
             populateYQty(qName);
        else {
             ErrorDialog.showMessageDialog("Invalid specification of quantity and/or muscle: "+qName+", "+muscleName+" please check and retry.");
@@ -198,6 +199,17 @@ public class JPlotterPanel extends javax.swing.JPanel
             jPlotsTree = null;
         }
         plotterModel.cleanup();
+    }
+
+    private void populateQNameSet() {
+      qNameSet.add("length");
+      qNameSet.add("fiberlength");
+      qNameSet.add("tendonlength");
+      qNameSet.add("normalizedfiberlength");
+      qNameSet.add("tendonforce");
+      qNameSet.add("activefiberforce");
+      qNameSet.add("passivefiberforce");
+      qNameSet.add("fiberforce");
     }
 
    public enum PlotDataSource {FileSource, MotionSource, AnalysisSource};
@@ -287,7 +299,9 @@ public class JPlotterPanel extends javax.swing.JPanel
       jPlotsTree.setRootVisible(false);
       //printPlotDescriptor();
       PlotterDB.getInstance().registerPlotterPanel(this);
-   }
+      
+      populateQNameSet();
+    }
    
    /** This method is called from within the constructor to
     * initialize the form.
