@@ -335,7 +335,7 @@ public class SingleModelVisuals {
    }
 
    public void updateMuscleOrForceAlongPathGeometry(OpenSimObject act, boolean callUpdateDisplayer) {
-       Muscle msl = Muscle.safeDownCast(act);
+       PathActuator msl = PathActuator.safeDownCast(act);
        if (msl!=null)
            updateActuatorGeometry(msl, callUpdateDisplayer);
        else

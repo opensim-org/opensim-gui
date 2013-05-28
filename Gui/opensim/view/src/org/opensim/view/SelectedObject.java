@@ -33,8 +33,8 @@ import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.Marker;
-import org.opensim.modeling.Muscle;
 import org.opensim.modeling.OpenSimContext;
+import org.opensim.modeling.PathActuator;
 import org.opensim.modeling.PathPoint;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
@@ -92,7 +92,7 @@ public class SelectedObject implements Selectable {
          OpenSimObject owner = mp.getPath().getOwner();
          SingleModelVisuals visuals = ViewDB.getInstance().getModelVisuals(getModel(mp));
          OpenSimvtkGlyphCloud cloud = null;
-         if (Muscle.safeDownCast(owner) != null)
+         if (PathActuator.safeDownCast(owner) != null)
              cloud = visuals.getMusclePointsRep();
          else 
              cloud = visuals.getForceAlongPathPointsRep();

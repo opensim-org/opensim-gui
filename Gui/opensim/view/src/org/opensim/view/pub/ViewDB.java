@@ -361,8 +361,8 @@ public final class ViewDB extends Observable implements Observer {
            }
            if (obj instanceof Model) {
               // TODO: do same stuff as ModelEvent.Operation.Close event
-           } else if (obj instanceof Muscle) {
-              removeObjectsBelongingToMuscleFromSelection((Muscle)obj);
+           } else if (obj instanceof PathActuator) {
+              removeObjectsBelongingToMuscleFromSelection(obj);
               getModelVisuals(ev.getModel()).removeActuatorGeometry((Actuator)obj);
               repaint = true;
            } else if (obj instanceof Marker) {
@@ -783,25 +783,22 @@ public final class ViewDB extends Observable implements Observer {
    /**
     * Remove items from selection list which belong to the given model
     */
-   public void removeObjectsBelongingToMuscleFromSelection(Muscle muscle)
+   public void removeObjectsBelongingToMuscleFromSelection(OpenSimObject objectWithPath)
    {
       boolean modified = false;
+      OpenSimObject pathObject =  objectWithPath.getPropertyByName("GeometryPath").getValueAsObject();
+      GeometryPath gp = GeometryPath.safeDownCast(pathObject);
       for (int i=selectedObjects.size()-1; i>=0; i--) {
-         // First see if the selected object is a muscle.
-         Muscle asm = Muscle.safeDownCast(selectedObjects.get(i).getOpenSimObject());
-         if (asm != null) {
-            if (Muscle.getCPtr(asm) == Muscle.getCPtr(muscle)) {
-               markSelected(selectedObjects.get(i), false, false, false);
-               selectedObjects.remove(i);
-               modified = true;
-               continue;
-            }
-         }
-         // Now see if the selected object is a muscle point.
+         // First see if the selected object is a objectWithPath.
+          // markSelected(selectedObjects.get(i), false, false, false);
+          // selectedObjects.remove(i);
+          // modified = true;
+           
+         // Now see if the selected object is a objectWithPath point.
          PathPoint mp = PathPoint.safeDownCast(selectedObjects.get(i).getOpenSimObject());
          if (mp != null) {
-            for (int j=0; j < muscle.getGeometryPath().getPathPointSet().getSize(); j++) {
-               if (PathPoint.getCPtr(mp) == PathPoint.getCPtr(muscle.getGeometryPath().getPathPointSet().get(j))) {
+            for (int j=0; j < gp.getPathPointSet().getSize(); j++) {
+               if (PathPoint.getCPtr(mp) == PathPoint.getCPtr(gp.getPathPointSet().get(j))) {
                   markSelected(selectedObjects.get(i), false, false, false);
                   //System.out.println("removing " + mp.getName());
                   selectedObjects.remove(i);
@@ -1791,12 +1788,12 @@ public final class ViewDB extends Observable implements Observer {
                Force f = Force.safeDownCast(obj);
                boolean newState = f.get_isDisabled();
                if (f instanceof Muscle) {
-                   Muscle m = Muscle.safeDownCast(f);
+                   PathActuator m = PathActuator.safeDownCast(f);
                    if (!newState){
                        getModelVisuals(m.getModel()).addPathActuatorGeometry(m, true);
                        toggleObjectsDisplay(m, true);
                    } else{  // turning off
-                       removeObjectsBelongingToMuscleFromSelection((Muscle)obj);
+                       removeObjectsBelongingToMuscleFromSelection(obj);
                        getModelVisuals(ev.getModel()).removeGeometry(obj);
                    }
                    repaint = true;
