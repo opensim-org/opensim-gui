@@ -23,7 +23,7 @@
 # Author(s): Ayman Habib
 # Stanford University
 #
-# This example shows to to create a modified version of a model that is loaded in the GUI. 
+# This example shows how to load a model and create a modified version of the model
 # The script increases the mass of the ulna. The modified model is then loaded in the GUI.
 
 # Get handle to the Arm26 model
