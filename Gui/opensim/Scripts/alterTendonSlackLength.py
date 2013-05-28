@@ -27,7 +27,10 @@
 
 # Get handle to current model in GUI
 oldModel = getCurrentModel()
-
+ 
+if not oldModel:
+	print "ERROR: Need to load a model first\n"
+	
 # Create a fresh copy
 myModel = modeling.Model(oldModel)
 
@@ -57,7 +60,3 @@ myModel.print(newPathName)
 
 #Add model to GUI
 loadModel(newPathName)
-
-
-
-
