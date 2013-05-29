@@ -3,14 +3,28 @@
 <filesystem>
     <folder name="Actions">
         <folder name="Edit">
-           <file name="org-opensim-console-ToolsOpenScriptAction.instance"/>
-           <file name="org-opensim-console-ToolsRunScriptAction.instance"/>
+           <file name="org-opensim-console-RunCurrentAction.instance_hidden"/>
+            <file name="org-opensim-console-ToolsOpenScriptAction.instance"/>
+           <file name="org-opensim-console-ToolsRunCurrentScriptAction.instance">
+                <attr name="delegate" methodvalue="org.openide.awt.Actions.inject"/>
+                <attr name="iconBase" stringvalue="org/opensim/console/run.png"/>
+                <attr name="injectable" stringvalue="org.opensim.console.ToolsRunCurrentScriptAction"/>
+                <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.context"/>
+                <attr name="noIconInMenu" boolvalue="false"/>
+                <attr name="selectionType" stringvalue="EXACTLY_ONE"/>
+                <attr name="type" stringvalue="org.openide.loaders.DataObject"/>
+            </file>
+            <file name="org-opensim-console-ToolsRunScriptAction.instance"/>
          </folder>
     </folder>
     <folder name="Menu">
         <folder name="Scripts">
            <attr name="position" intvalue="250"/>
-           <file name="org-opensim-console-ToolsOpenScriptAction.shadow">
+           <file name="org-opensim-console-ToolsRunCurrentScriptAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-console-ToolsRunCurrentScriptAction.instance"/>
+                <attr name="position" intvalue="2100"/>
+            </file>
+            <file name="org-opensim-console-ToolsOpenScriptAction.shadow">
                <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-console-ToolsOpenScriptAction.instance"/>
                <attr name="position" intvalue="1000"/>
             </file>
@@ -19,6 +33,9 @@
                <attr name="position" intvalue="2000"/>
             </file>
          </folder>
+        <folder name="Tools">
+            <file name="org-opensim-console-ToolsRunCurrentScriptAction.shadow_hidden"/>
+        </folder>
     </folder>
     <folder name="Windows2">
          <folder name="Components">
