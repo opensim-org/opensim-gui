@@ -473,6 +473,58 @@ public class Umberger2010MuscleMetabolicsProbe extends Probe {
     opensimModelJNI.Umberger2010MuscleMetabolicsProbe_set_basal_exponent__SWIG_1(swigCPtr, this, value);
   }
 
+  public void setPropertyIndex_report_total_metabolics_only(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.Umberger2010MuscleMetabolicsProbe_PropertyIndex_report_total_metabolics_only_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_report_total_metabolics_only() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Umberger2010MuscleMetabolicsProbe_PropertyIndex_report_total_metabolics_only_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_report_total_metabolics_only(Umberger2010MuscleMetabolicsProbe source) {
+    opensimModelJNI.Umberger2010MuscleMetabolicsProbe_copyProperty_report_total_metabolics_only(swigCPtr, this, Umberger2010MuscleMetabolicsProbe.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_report_total_metabolics_only() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Umberger2010MuscleMetabolicsProbe_getProperty_report_total_metabolics_only(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_report_total_metabolics_only() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Umberger2010MuscleMetabolicsProbe_updProperty_report_total_metabolics_only(swigCPtr, this), false);
+  }
+
+  public boolean get_report_total_metabolics_only(int i) {
+    return opensimModelJNI.Umberger2010MuscleMetabolicsProbe_get_report_total_metabolics_only__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_bool upd_report_total_metabolics_only(int i) {
+    return new SWIGTYPE_p_bool(opensimModelJNI.Umberger2010MuscleMetabolicsProbe_upd_report_total_metabolics_only__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_report_total_metabolics_only(int i, boolean value) {
+    opensimModelJNI.Umberger2010MuscleMetabolicsProbe_set_report_total_metabolics_only__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_report_total_metabolics_only(boolean value) {
+    return opensimModelJNI.Umberger2010MuscleMetabolicsProbe_append_report_total_metabolics_only(swigCPtr, this, value);
+  }
+
+  public void constructProperty_report_total_metabolics_only(boolean initValue) {
+    opensimModelJNI.Umberger2010MuscleMetabolicsProbe_constructProperty_report_total_metabolics_only(swigCPtr, this, initValue);
+  }
+
+  public boolean get_report_total_metabolics_only() {
+    return opensimModelJNI.Umberger2010MuscleMetabolicsProbe_get_report_total_metabolics_only__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_bool upd_report_total_metabolics_only() {
+    return new SWIGTYPE_p_bool(opensimModelJNI.Umberger2010MuscleMetabolicsProbe_upd_report_total_metabolics_only__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_report_total_metabolics_only(boolean value) {
+    opensimModelJNI.Umberger2010MuscleMetabolicsProbe_set_report_total_metabolics_only__SWIG_1(swigCPtr, this, value);
+  }
+
   public void setPropertyIndex_Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameterSet(SWIGTYPE_p_PropertyIndex value) {
     opensimModelJNI.Umberger2010MuscleMetabolicsProbe_PropertyIndex_Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameterSet_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }

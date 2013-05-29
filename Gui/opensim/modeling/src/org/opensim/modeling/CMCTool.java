@@ -73,6 +73,14 @@ public class CMCTool extends AbstractTool {
     this(opensimModelJNI.new_CMCTool__SWIG_3(CMCTool.getCPtr(aObject), aObject), true);
   }
 
+  public ArrayStr getExcludedActuators() {
+    return new ArrayStr(opensimModelJNI.CMCTool_getExcludedActuators(swigCPtr, this), false);
+  }
+
+  public void setExcludedActuators(ArrayStr excludedActs) {
+    opensimModelJNI.CMCTool_setExcludedActuators(swigCPtr, this, ArrayStr.getCPtr(excludedActs), excludedActs);
+  }
+
   public String getDesiredPointsFileName() {
     return opensimModelJNI.CMCTool_getDesiredPointsFileName(swigCPtr, this);
   }
