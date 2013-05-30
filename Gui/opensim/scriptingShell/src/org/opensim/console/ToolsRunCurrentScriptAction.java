@@ -17,7 +17,6 @@ import org.openide.awt.ActionID;
 import org.openide.cookies.SaveCookie;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle.Messages;
-import org.opensim.tracking.ForwardToolModel;
 
 @ActionID(category = "Edit",
 id = "org.opensim.console.ToolsRunCurrentScriptAction")
@@ -30,8 +29,6 @@ displayName = "#CTL_RunCurrentAction")
 public final class ToolsRunCurrentScriptAction implements ActionListener {
 
     private final DataObject context;
-
-    ForwardToolModel toolModel=null;
 
     public ToolsRunCurrentScriptAction(DataObject context) {
         this.context = context;
@@ -60,24 +57,5 @@ public final class ToolsRunCurrentScriptAction implements ActionListener {
             }
         }
         ScriptingShellTopComponent.getDefault().getConsole().executeFile(path);
-        /*
-        if (toolModel == null || !toolModel.isExecuting()) {
-            try {
-                Model currentModel = OpenSimDB.getInstance().getCurrentModel();
-                if (currentModel == null || currentModel instanceof ModelForExperimentalData)
-                    return;
-                // TODO implement action body
-                toolModel = new ForwardToolModel(currentModel);
-                toolModel.setSolveForEquilibrium(true);
-                toolModel.execute();
-                // Change 
-            } catch (IOException ex) {
-                Exceptions.printStackTrace(ex);
-            }
-        } else {
-            if (toolModel != null) {
-                toolModel.cancel();
-            }
-        }*/
     }
 }
