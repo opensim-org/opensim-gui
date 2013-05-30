@@ -487,6 +487,30 @@ public class Model extends ModelComponent {
     return new SimbodyEngine(opensimModelJNI.Model_updSimbodyEngine(swigCPtr, this), false);
   }
 
+  public Vector computeStateVariableDerivatives(State s) {
+    return new Vector(opensimModelJNI.Model_computeStateVariableDerivatives(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
+  public double getTotalMass(State s) {
+    return opensimModelJNI.Model_getTotalMass(swigCPtr, this, State.getCPtr(s), s);
+  }
+
+  public Inertia getInertiaAboutMassCenter(State s) {
+    return new Inertia(opensimModelJNI.Model_getInertiaAboutMassCenter(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
+  public Vec3 calcMassCenterPosition(State s) {
+    return new Vec3(opensimModelJNI.Model_calcMassCenterPosition(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
+  public Vec3 calcMassCenterVelocity(State s) {
+    return new Vec3(opensimModelJNI.Model_calcMassCenterVelocity(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
+  public Vec3 calcMassCenterAcceleration(State s) {
+    return new Vec3(opensimModelJNI.Model_calcMassCenterAcceleration(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
   public void getStateValues(State state, ArrayDouble stateValues) {
     opensimModelJNI.Model_getStateValues__SWIG_0(swigCPtr, this, State.getCPtr(state), state, ArrayDouble.getCPtr(stateValues), stateValues);
   }

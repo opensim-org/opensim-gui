@@ -99,18 +99,6 @@ public class SimbodyEngine extends OpenSimObject {
     return (cPtr == 0) ? null : new WrapObject(cPtr, false);
   }
 
-  public double getMass() {
-    return opensimModelJNI.SimbodyEngine_getMass(swigCPtr, this);
-  }
-
-  public void getSystemInertia(State s, SWIGTYPE_p_double rM, Vec3 rCOM, SWIGTYPE_p_a_3__double rI) {
-    opensimModelJNI.SimbodyEngine_getSystemInertia__SWIG_0(swigCPtr, this, State.getCPtr(s), s, SWIGTYPE_p_double.getCPtr(rM), Vec3.getCPtr(rCOM), rCOM, SWIGTYPE_p_a_3__double.getCPtr(rI));
-  }
-
-  public void getSystemInertia(State s, SWIGTYPE_p_double rM, SWIGTYPE_p_double rCOM, SWIGTYPE_p_double rI) {
-    opensimModelJNI.SimbodyEngine_getSystemInertia__SWIG_1(swigCPtr, this, State.getCPtr(s), s, SWIGTYPE_p_double.getCPtr(rM), SWIGTYPE_p_double.getCPtr(rCOM), SWIGTYPE_p_double.getCPtr(rI));
-  }
-
   public void getPosition(State s, Body aBody, Vec3 aPoint, Vec3 rPos) {
     opensimModelJNI.SimbodyEngine_getPosition(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, Vec3.getCPtr(aPoint), aPoint, Vec3.getCPtr(rPos), rPos);
   }
@@ -161,18 +149,6 @@ public class SimbodyEngine extends OpenSimObject {
 
   public void formEulerTransform(State s, Body aBody, SWIGTYPE_p_double rE) {
     opensimModelJNI.SimbodyEngine_formEulerTransform(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, SWIGTYPE_p_double.getCPtr(rE));
-  }
-
-  public void computeDerivatives(State s, SWIGTYPE_p_double dqdt, SWIGTYPE_p_double dudt) {
-    opensimModelJNI.SimbodyEngine_computeDerivatives__SWIG_0(swigCPtr, this, State.getCPtr(s), s, SWIGTYPE_p_double.getCPtr(dqdt), SWIGTYPE_p_double.getCPtr(dudt));
-  }
-
-  public void computeDerivatives(State s, SWIGTYPE_p_double dqdt) {
-    opensimModelJNI.SimbodyEngine_computeDerivatives__SWIG_1(swigCPtr, this, State.getCPtr(s), s, SWIGTYPE_p_double.getCPtr(dqdt));
-  }
-
-  public void computeDerivatives(State s) {
-    opensimModelJNI.SimbodyEngine_computeDerivatives__SWIG_2(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void transform(State s, Body aBodyFrom, double[] aVec, Body aBodyTo, double[] rVec) {

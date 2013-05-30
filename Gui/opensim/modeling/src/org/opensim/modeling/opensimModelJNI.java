@@ -4241,9 +4241,6 @@ public class opensimModelJNI {
   public final static native void SimbodyEngine_connectSimbodyEngineToModel(long jarg1, SimbodyEngine jarg1_, long jarg2, Model jarg2_);
   public final static native long SimbodyEngine_getGroundBody(long jarg1, SimbodyEngine jarg1_);
   public final static native long SimbodyEngine_getWrapObject(long jarg1, SimbodyEngine jarg1_, String jarg2);
-  public final static native double SimbodyEngine_getMass(long jarg1, SimbodyEngine jarg1_);
-  public final static native void SimbodyEngine_getSystemInertia__SWIG_0(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_, long jarg3, long jarg4, Vec3 jarg4_, long jarg5);
-  public final static native void SimbodyEngine_getSystemInertia__SWIG_1(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_, long jarg3, long jarg4, long jarg5);
   public final static native void SimbodyEngine_getPosition(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_, long jarg3, Body jarg3_, long jarg4, Vec3 jarg4_, long jarg5, Vec3 jarg5_);
   public final static native void SimbodyEngine_getVelocity(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_, long jarg3, Body jarg3_, long jarg4, Vec3 jarg4_, long jarg5, Vec3 jarg5_);
   public final static native void SimbodyEngine_getAcceleration(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_, long jarg3, Body jarg3_, long jarg4, Vec3 jarg4_, long jarg5, Vec3 jarg5_);
@@ -4257,9 +4254,6 @@ public class opensimModelJNI {
   public final static native void SimbodyEngine_computeReactions(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_, long jarg3, long jarg4);
   public final static native void SimbodyEngine_formCompleteStorages(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_, long jarg3, Storage jarg3_, long jarg4, long jarg5);
   public final static native void SimbodyEngine_formEulerTransform(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_, long jarg3, Body jarg3_, long jarg4);
-  public final static native void SimbodyEngine_computeDerivatives__SWIG_0(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_, long jarg3, long jarg4);
-  public final static native void SimbodyEngine_computeDerivatives__SWIG_1(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_, long jarg3);
-  public final static native void SimbodyEngine_computeDerivatives__SWIG_2(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_);
   public final static native void SimbodyEngine_transform__SWIG_0(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_, long jarg3, Body jarg3_, double[] jarg4, long jarg5, Body jarg5_, double[] jarg6);
   public final static native void SimbodyEngine_transform__SWIG_1(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_, long jarg3, Body jarg3_, long jarg4, Vec3 jarg4_, long jarg5, Body jarg5_, long jarg6, Vec3 jarg6_);
   public final static native void SimbodyEngine_transformPosition__SWIG_0(long jarg1, SimbodyEngine jarg1_, long jarg2, State jarg2_, long jarg3, Body jarg3_, double[] jarg4, long jarg5, Body jarg5_, double[] jarg6);
@@ -6466,6 +6460,12 @@ public class opensimModelJNI {
   public final static native void Model_applyDefaultConfiguration(long jarg1, Model jarg1_, long jarg2, State jarg2_);
   public final static native long Model_getSimbodyEngine(long jarg1, Model jarg1_);
   public final static native long Model_updSimbodyEngine(long jarg1, Model jarg1_);
+  public final static native long Model_computeStateVariableDerivatives(long jarg1, Model jarg1_, long jarg2, State jarg2_);
+  public final static native double Model_getTotalMass(long jarg1, Model jarg1_, long jarg2, State jarg2_);
+  public final static native long Model_getInertiaAboutMassCenter(long jarg1, Model jarg1_, long jarg2, State jarg2_);
+  public final static native long Model_calcMassCenterPosition(long jarg1, Model jarg1_, long jarg2, State jarg2_);
+  public final static native long Model_calcMassCenterVelocity(long jarg1, Model jarg1_, long jarg2, State jarg2_);
+  public final static native long Model_calcMassCenterAcceleration(long jarg1, Model jarg1_, long jarg2, State jarg2_);
   public final static native void Model_getStateValues__SWIG_0(long jarg1, Model jarg1_, long jarg2, State jarg2_, long jarg3, ArrayDouble jarg3_);
   public final static native long Model_getStateValues__SWIG_1(long jarg1, Model jarg1_, long jarg2, State jarg2_);
   public final static native void Model_setStateValues(long jarg1, Model jarg1_, long jarg2, State jarg2_, long jarg3);
