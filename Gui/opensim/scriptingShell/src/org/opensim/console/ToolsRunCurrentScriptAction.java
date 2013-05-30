@@ -17,7 +17,7 @@ import org.openide.awt.ActionID;
 import org.openide.cookies.SaveCookie;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle.Messages;
-import org.opensim.tracking.ForwardToolModel;
+
 
 @ActionID(category = "Edit",
 id = "org.opensim.console.ToolsRunCurrentScriptAction")
@@ -31,7 +31,7 @@ public final class ToolsRunCurrentScriptAction implements ActionListener {
 
     private final DataObject context;
 
-    ForwardToolModel toolModel=null;
+    //ForwardToolModel toolModel=null;
 
     public ToolsRunCurrentScriptAction(DataObject context) {
         this.context = context;
