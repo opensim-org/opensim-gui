@@ -35,6 +35,8 @@ import os
 # Load the setup file
 print "Acquiring file for Control profile"
 
+#if _min and _max are not 
+double offsetIfMinMax_Unspecified=0.0 
 # Prompts user to select file if above does not exist
 controlProfileStore = "doesnotexistfile.sto"
 if not os.path.exists(controlProfileStore):
@@ -88,7 +90,7 @@ for i in range (0, nLabels):
 				minValue = csiL_min.getControlValue(clNodeTime)
 				csiL.setControlValueMin(clNodeTime, minValue)
 				if (minValue < currentMin):
-					currentMin = minValue
+					currentMin = minValue-offsetIfMinMax_Unspecified
 		else:
 			nodeSet = csiL.getControlValues()
 			nodeSetSize = nodeSet.getSize()
@@ -111,7 +113,7 @@ for i in range (0, nLabels):
 				maxValue = csiL_max.getControlValue(clNodeTime)
 				csiL.setControlValueMax(clNodeTime, maxValue)
 				if (maxValue > currentMax):
-					currentMax = maxValue
+					currentMax = maxValue+offsetIfMinMax_Unspecified
 		else:
 			nodeSet = csiL.getControlValues()
 			nodeSetSize = nodeSet.getSize()
