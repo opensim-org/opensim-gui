@@ -39,7 +39,7 @@ motSrc = addMotionSource(plotterPanel, motionfilePath)
 
 # Plot MomentArm of RF, VASINT about r_knee_angle through the motion
 crv1 = addMotionCurve(plotterPanel, 'momentArm.r_knee_angle', 'RF', motSrc)
-crv2 = addMotionCurve(plotterPanel, 'muscle-tendon length', 'RF', motSrc)
+crv2 = addMotionCurve(plotterPanel, 'Length', 'RF', motSrc)
 # addMotionCurve(plotterPanel, 'momentArm.r_knee_angle', 'VASINT', motSrc)
 
 crv1.setLegend("Moment Arm")
