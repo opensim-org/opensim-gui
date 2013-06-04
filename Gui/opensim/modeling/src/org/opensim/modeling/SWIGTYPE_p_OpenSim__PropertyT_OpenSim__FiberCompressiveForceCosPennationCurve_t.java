@@ -8,18 +8,18 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_ActiveForceLengthCurve {
+public class SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FiberCompressiveForceCosPennationCurve_t {
   private long swigCPtr;
 
-  protected SWIGTYPE_p_ActiveForceLengthCurve(long cPtr, boolean futureUse) {
+  protected SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FiberCompressiveForceCosPennationCurve_t(long cPtr, boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_ActiveForceLengthCurve() {
+  protected SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FiberCompressiveForceCosPennationCurve_t() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_ActiveForceLengthCurve obj) {
+  protected static long getCPtr(SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FiberCompressiveForceCosPennationCurve_t obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }

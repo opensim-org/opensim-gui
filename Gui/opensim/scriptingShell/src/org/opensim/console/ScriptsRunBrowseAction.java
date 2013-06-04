@@ -24,12 +24,13 @@ import org.openide.util.actions.CallableSystemAction;
 import org.opensim.utils.FileUtils;
 import org.opensim.utils.TheApp;
 
-public final class ToolsOpenScriptAction extends CallableSystemAction {
+public final class ScriptsRunBrowseAction extends CallableSystemAction {
 
     public void performAction() {
-        String dataFilename = FileUtils.getInstance().browseForFilename(".py", "Files containing script to execute", true);
-        if (dataFilename != null) {
-            openFile(dataFilename);
+        String scriptFilename = FileUtils.getInstance().browseForFilename(".py", "Files containing script to execute", true);
+        if (scriptFilename != null) {
+            MRUScriptsOptions.getInstance().addFile(scriptFilename);
+            ScriptingShellTopComponent.getDefault().getConsole().executeFile(scriptFilename);
         }
     }
 
@@ -38,7 +39,7 @@ public final class ToolsOpenScriptAction extends CallableSystemAction {
     }
 
     public String getName() {
-        return "Open...";
+        return "Run...";
     }
 
    

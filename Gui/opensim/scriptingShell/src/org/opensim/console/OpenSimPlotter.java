@@ -181,7 +181,7 @@ public final class OpenSimPlotter {
     }
     /**
      * Create a new curve representing an arbitrary OpenSim::Function and add it to the passed in plotter panel
-     * If panel contains plots then first one is used to obtain domain bounds, otherwise 0-1 is assumed.
+     * If panel contains plots then first one is used to obtain domain bounds, otherwise getMinX()-getMaxX is assumed.
      * 
      * @since 3.1
      * 

@@ -433,44 +433,44 @@ public class Millard2012EquilibriumMuscle extends Muscle {
     opensimModelJNI.Millard2012EquilibriumMuscle_copyProperty_ActiveForceLengthCurve(swigCPtr, this, Millard2012EquilibriumMuscle.getCPtr(source), source);
   }
 
-  public SWIGTYPE_p_OpenSim__PropertyT_ActiveForceLengthCurve_t getProperty_ActiveForceLengthCurve() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_ActiveForceLengthCurve_t(opensimModelJNI.Millard2012EquilibriumMuscle_getProperty_ActiveForceLengthCurve(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__ActiveForceLengthCurve_t getProperty_ActiveForceLengthCurve() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__ActiveForceLengthCurve_t(opensimModelJNI.Millard2012EquilibriumMuscle_getProperty_ActiveForceLengthCurve(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_OpenSim__PropertyT_ActiveForceLengthCurve_t updProperty_ActiveForceLengthCurve() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_ActiveForceLengthCurve_t(opensimModelJNI.Millard2012EquilibriumMuscle_updProperty_ActiveForceLengthCurve(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__ActiveForceLengthCurve_t updProperty_ActiveForceLengthCurve() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__ActiveForceLengthCurve_t(opensimModelJNI.Millard2012EquilibriumMuscle_updProperty_ActiveForceLengthCurve(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_ActiveForceLengthCurve get_ActiveForceLengthCurve(int i) {
-    return new SWIGTYPE_p_ActiveForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_get_ActiveForceLengthCurve__SWIG_0(swigCPtr, this, i), false);
+  public ActiveForceLengthCurve get_ActiveForceLengthCurve(int i) {
+    return new ActiveForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_get_ActiveForceLengthCurve__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public SWIGTYPE_p_ActiveForceLengthCurve upd_ActiveForceLengthCurve(int i) {
-    return new SWIGTYPE_p_ActiveForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_upd_ActiveForceLengthCurve__SWIG_0(swigCPtr, this, i), false);
+  public ActiveForceLengthCurve upd_ActiveForceLengthCurve(int i) {
+    return new ActiveForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_upd_ActiveForceLengthCurve__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_ActiveForceLengthCurve(int i, SWIGTYPE_p_ActiveForceLengthCurve value) {
-    opensimModelJNI.Millard2012EquilibriumMuscle_set_ActiveForceLengthCurve__SWIG_0(swigCPtr, this, i, SWIGTYPE_p_ActiveForceLengthCurve.getCPtr(value));
+  public void set_ActiveForceLengthCurve(int i, ActiveForceLengthCurve value) {
+    opensimModelJNI.Millard2012EquilibriumMuscle_set_ActiveForceLengthCurve__SWIG_0(swigCPtr, this, i, ActiveForceLengthCurve.getCPtr(value), value);
   }
 
-  public int append_ActiveForceLengthCurve(SWIGTYPE_p_ActiveForceLengthCurve value) {
-    return opensimModelJNI.Millard2012EquilibriumMuscle_append_ActiveForceLengthCurve(swigCPtr, this, SWIGTYPE_p_ActiveForceLengthCurve.getCPtr(value));
+  public int append_ActiveForceLengthCurve(ActiveForceLengthCurve value) {
+    return opensimModelJNI.Millard2012EquilibriumMuscle_append_ActiveForceLengthCurve(swigCPtr, this, ActiveForceLengthCurve.getCPtr(value), value);
   }
 
-  public void constructProperty_ActiveForceLengthCurve(SWIGTYPE_p_ActiveForceLengthCurve initValue) {
-    opensimModelJNI.Millard2012EquilibriumMuscle_constructProperty_ActiveForceLengthCurve(swigCPtr, this, SWIGTYPE_p_ActiveForceLengthCurve.getCPtr(initValue));
+  public void constructProperty_ActiveForceLengthCurve(ActiveForceLengthCurve initValue) {
+    opensimModelJNI.Millard2012EquilibriumMuscle_constructProperty_ActiveForceLengthCurve(swigCPtr, this, ActiveForceLengthCurve.getCPtr(initValue), initValue);
   }
 
-  public SWIGTYPE_p_ActiveForceLengthCurve get_ActiveForceLengthCurve() {
-    return new SWIGTYPE_p_ActiveForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_get_ActiveForceLengthCurve__SWIG_1(swigCPtr, this), false);
+  public ActiveForceLengthCurve get_ActiveForceLengthCurve() {
+    return new ActiveForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_get_ActiveForceLengthCurve__SWIG_1(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_ActiveForceLengthCurve upd_ActiveForceLengthCurve() {
-    return new SWIGTYPE_p_ActiveForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_upd_ActiveForceLengthCurve__SWIG_1(swigCPtr, this), false);
+  public ActiveForceLengthCurve upd_ActiveForceLengthCurve() {
+    return new ActiveForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_upd_ActiveForceLengthCurve__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_ActiveForceLengthCurve(SWIGTYPE_p_ActiveForceLengthCurve value) {
-    opensimModelJNI.Millard2012EquilibriumMuscle_set_ActiveForceLengthCurve__SWIG_1(swigCPtr, this, SWIGTYPE_p_ActiveForceLengthCurve.getCPtr(value));
+  public void set_ActiveForceLengthCurve(ActiveForceLengthCurve value) {
+    opensimModelJNI.Millard2012EquilibriumMuscle_set_ActiveForceLengthCurve__SWIG_1(swigCPtr, this, ActiveForceLengthCurve.getCPtr(value), value);
   }
 
   public void setPropertyIndex_ForceVelocityInverseCurve(SWIGTYPE_p_PropertyIndex value) {
@@ -485,44 +485,44 @@ public class Millard2012EquilibriumMuscle extends Muscle {
     opensimModelJNI.Millard2012EquilibriumMuscle_copyProperty_ForceVelocityInverseCurve(swigCPtr, this, Millard2012EquilibriumMuscle.getCPtr(source), source);
   }
 
-  public SWIGTYPE_p_OpenSim__PropertyT_ForceVelocityInverseCurve_t getProperty_ForceVelocityInverseCurve() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_ForceVelocityInverseCurve_t(opensimModelJNI.Millard2012EquilibriumMuscle_getProperty_ForceVelocityInverseCurve(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__ForceVelocityInverseCurve_t getProperty_ForceVelocityInverseCurve() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__ForceVelocityInverseCurve_t(opensimModelJNI.Millard2012EquilibriumMuscle_getProperty_ForceVelocityInverseCurve(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_OpenSim__PropertyT_ForceVelocityInverseCurve_t updProperty_ForceVelocityInverseCurve() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_ForceVelocityInverseCurve_t(opensimModelJNI.Millard2012EquilibriumMuscle_updProperty_ForceVelocityInverseCurve(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__ForceVelocityInverseCurve_t updProperty_ForceVelocityInverseCurve() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__ForceVelocityInverseCurve_t(opensimModelJNI.Millard2012EquilibriumMuscle_updProperty_ForceVelocityInverseCurve(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_ForceVelocityInverseCurve get_ForceVelocityInverseCurve(int i) {
-    return new SWIGTYPE_p_ForceVelocityInverseCurve(opensimModelJNI.Millard2012EquilibriumMuscle_get_ForceVelocityInverseCurve__SWIG_0(swigCPtr, this, i), false);
+  public ForceVelocityInverseCurve get_ForceVelocityInverseCurve(int i) {
+    return new ForceVelocityInverseCurve(opensimModelJNI.Millard2012EquilibriumMuscle_get_ForceVelocityInverseCurve__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public SWIGTYPE_p_ForceVelocityInverseCurve upd_ForceVelocityInverseCurve(int i) {
-    return new SWIGTYPE_p_ForceVelocityInverseCurve(opensimModelJNI.Millard2012EquilibriumMuscle_upd_ForceVelocityInverseCurve__SWIG_0(swigCPtr, this, i), false);
+  public ForceVelocityInverseCurve upd_ForceVelocityInverseCurve(int i) {
+    return new ForceVelocityInverseCurve(opensimModelJNI.Millard2012EquilibriumMuscle_upd_ForceVelocityInverseCurve__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_ForceVelocityInverseCurve(int i, SWIGTYPE_p_ForceVelocityInverseCurve value) {
-    opensimModelJNI.Millard2012EquilibriumMuscle_set_ForceVelocityInverseCurve__SWIG_0(swigCPtr, this, i, SWIGTYPE_p_ForceVelocityInverseCurve.getCPtr(value));
+  public void set_ForceVelocityInverseCurve(int i, ForceVelocityInverseCurve value) {
+    opensimModelJNI.Millard2012EquilibriumMuscle_set_ForceVelocityInverseCurve__SWIG_0(swigCPtr, this, i, ForceVelocityInverseCurve.getCPtr(value), value);
   }
 
-  public int append_ForceVelocityInverseCurve(SWIGTYPE_p_ForceVelocityInverseCurve value) {
-    return opensimModelJNI.Millard2012EquilibriumMuscle_append_ForceVelocityInverseCurve(swigCPtr, this, SWIGTYPE_p_ForceVelocityInverseCurve.getCPtr(value));
+  public int append_ForceVelocityInverseCurve(ForceVelocityInverseCurve value) {
+    return opensimModelJNI.Millard2012EquilibriumMuscle_append_ForceVelocityInverseCurve(swigCPtr, this, ForceVelocityInverseCurve.getCPtr(value), value);
   }
 
-  public void constructProperty_ForceVelocityInverseCurve(SWIGTYPE_p_ForceVelocityInverseCurve initValue) {
-    opensimModelJNI.Millard2012EquilibriumMuscle_constructProperty_ForceVelocityInverseCurve(swigCPtr, this, SWIGTYPE_p_ForceVelocityInverseCurve.getCPtr(initValue));
+  public void constructProperty_ForceVelocityInverseCurve(ForceVelocityInverseCurve initValue) {
+    opensimModelJNI.Millard2012EquilibriumMuscle_constructProperty_ForceVelocityInverseCurve(swigCPtr, this, ForceVelocityInverseCurve.getCPtr(initValue), initValue);
   }
 
-  public SWIGTYPE_p_ForceVelocityInverseCurve get_ForceVelocityInverseCurve() {
-    return new SWIGTYPE_p_ForceVelocityInverseCurve(opensimModelJNI.Millard2012EquilibriumMuscle_get_ForceVelocityInverseCurve__SWIG_1(swigCPtr, this), false);
+  public ForceVelocityInverseCurve get_ForceVelocityInverseCurve() {
+    return new ForceVelocityInverseCurve(opensimModelJNI.Millard2012EquilibriumMuscle_get_ForceVelocityInverseCurve__SWIG_1(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_ForceVelocityInverseCurve upd_ForceVelocityInverseCurve() {
-    return new SWIGTYPE_p_ForceVelocityInverseCurve(opensimModelJNI.Millard2012EquilibriumMuscle_upd_ForceVelocityInverseCurve__SWIG_1(swigCPtr, this), false);
+  public ForceVelocityInverseCurve upd_ForceVelocityInverseCurve() {
+    return new ForceVelocityInverseCurve(opensimModelJNI.Millard2012EquilibriumMuscle_upd_ForceVelocityInverseCurve__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_ForceVelocityInverseCurve(SWIGTYPE_p_ForceVelocityInverseCurve value) {
-    opensimModelJNI.Millard2012EquilibriumMuscle_set_ForceVelocityInverseCurve__SWIG_1(swigCPtr, this, SWIGTYPE_p_ForceVelocityInverseCurve.getCPtr(value));
+  public void set_ForceVelocityInverseCurve(ForceVelocityInverseCurve value) {
+    opensimModelJNI.Millard2012EquilibriumMuscle_set_ForceVelocityInverseCurve__SWIG_1(swigCPtr, this, ForceVelocityInverseCurve.getCPtr(value), value);
   }
 
   public void setPropertyIndex_FiberForceLengthCurve(SWIGTYPE_p_PropertyIndex value) {
@@ -537,44 +537,44 @@ public class Millard2012EquilibriumMuscle extends Muscle {
     opensimModelJNI.Millard2012EquilibriumMuscle_copyProperty_FiberForceLengthCurve(swigCPtr, this, Millard2012EquilibriumMuscle.getCPtr(source), source);
   }
 
-  public SWIGTYPE_p_OpenSim__PropertyT_FiberForceLengthCurve_t getProperty_FiberForceLengthCurve() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_FiberForceLengthCurve_t(opensimModelJNI.Millard2012EquilibriumMuscle_getProperty_FiberForceLengthCurve(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FiberForceLengthCurve_t getProperty_FiberForceLengthCurve() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FiberForceLengthCurve_t(opensimModelJNI.Millard2012EquilibriumMuscle_getProperty_FiberForceLengthCurve(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_OpenSim__PropertyT_FiberForceLengthCurve_t updProperty_FiberForceLengthCurve() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_FiberForceLengthCurve_t(opensimModelJNI.Millard2012EquilibriumMuscle_updProperty_FiberForceLengthCurve(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FiberForceLengthCurve_t updProperty_FiberForceLengthCurve() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FiberForceLengthCurve_t(opensimModelJNI.Millard2012EquilibriumMuscle_updProperty_FiberForceLengthCurve(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_FiberForceLengthCurve get_FiberForceLengthCurve(int i) {
-    return new SWIGTYPE_p_FiberForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_get_FiberForceLengthCurve__SWIG_0(swigCPtr, this, i), false);
+  public FiberForceLengthCurve get_FiberForceLengthCurve(int i) {
+    return new FiberForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_get_FiberForceLengthCurve__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public SWIGTYPE_p_FiberForceLengthCurve upd_FiberForceLengthCurve(int i) {
-    return new SWIGTYPE_p_FiberForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_upd_FiberForceLengthCurve__SWIG_0(swigCPtr, this, i), false);
+  public FiberForceLengthCurve upd_FiberForceLengthCurve(int i) {
+    return new FiberForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_upd_FiberForceLengthCurve__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_FiberForceLengthCurve(int i, SWIGTYPE_p_FiberForceLengthCurve value) {
-    opensimModelJNI.Millard2012EquilibriumMuscle_set_FiberForceLengthCurve__SWIG_0(swigCPtr, this, i, SWIGTYPE_p_FiberForceLengthCurve.getCPtr(value));
+  public void set_FiberForceLengthCurve(int i, FiberForceLengthCurve value) {
+    opensimModelJNI.Millard2012EquilibriumMuscle_set_FiberForceLengthCurve__SWIG_0(swigCPtr, this, i, FiberForceLengthCurve.getCPtr(value), value);
   }
 
-  public int append_FiberForceLengthCurve(SWIGTYPE_p_FiberForceLengthCurve value) {
-    return opensimModelJNI.Millard2012EquilibriumMuscle_append_FiberForceLengthCurve(swigCPtr, this, SWIGTYPE_p_FiberForceLengthCurve.getCPtr(value));
+  public int append_FiberForceLengthCurve(FiberForceLengthCurve value) {
+    return opensimModelJNI.Millard2012EquilibriumMuscle_append_FiberForceLengthCurve(swigCPtr, this, FiberForceLengthCurve.getCPtr(value), value);
   }
 
-  public void constructProperty_FiberForceLengthCurve(SWIGTYPE_p_FiberForceLengthCurve initValue) {
-    opensimModelJNI.Millard2012EquilibriumMuscle_constructProperty_FiberForceLengthCurve(swigCPtr, this, SWIGTYPE_p_FiberForceLengthCurve.getCPtr(initValue));
+  public void constructProperty_FiberForceLengthCurve(FiberForceLengthCurve initValue) {
+    opensimModelJNI.Millard2012EquilibriumMuscle_constructProperty_FiberForceLengthCurve(swigCPtr, this, FiberForceLengthCurve.getCPtr(initValue), initValue);
   }
 
-  public SWIGTYPE_p_FiberForceLengthCurve get_FiberForceLengthCurve() {
-    return new SWIGTYPE_p_FiberForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_get_FiberForceLengthCurve__SWIG_1(swigCPtr, this), false);
+  public FiberForceLengthCurve get_FiberForceLengthCurve() {
+    return new FiberForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_get_FiberForceLengthCurve__SWIG_1(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_FiberForceLengthCurve upd_FiberForceLengthCurve() {
-    return new SWIGTYPE_p_FiberForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_upd_FiberForceLengthCurve__SWIG_1(swigCPtr, this), false);
+  public FiberForceLengthCurve upd_FiberForceLengthCurve() {
+    return new FiberForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_upd_FiberForceLengthCurve__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_FiberForceLengthCurve(SWIGTYPE_p_FiberForceLengthCurve value) {
-    opensimModelJNI.Millard2012EquilibriumMuscle_set_FiberForceLengthCurve__SWIG_1(swigCPtr, this, SWIGTYPE_p_FiberForceLengthCurve.getCPtr(value));
+  public void set_FiberForceLengthCurve(FiberForceLengthCurve value) {
+    opensimModelJNI.Millard2012EquilibriumMuscle_set_FiberForceLengthCurve__SWIG_1(swigCPtr, this, FiberForceLengthCurve.getCPtr(value), value);
   }
 
   public void setPropertyIndex_TendonForceLengthCurve(SWIGTYPE_p_PropertyIndex value) {
@@ -589,44 +589,44 @@ public class Millard2012EquilibriumMuscle extends Muscle {
     opensimModelJNI.Millard2012EquilibriumMuscle_copyProperty_TendonForceLengthCurve(swigCPtr, this, Millard2012EquilibriumMuscle.getCPtr(source), source);
   }
 
-  public SWIGTYPE_p_OpenSim__PropertyT_TendonForceLengthCurve_t getProperty_TendonForceLengthCurve() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_TendonForceLengthCurve_t(opensimModelJNI.Millard2012EquilibriumMuscle_getProperty_TendonForceLengthCurve(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TendonForceLengthCurve_t getProperty_TendonForceLengthCurve() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TendonForceLengthCurve_t(opensimModelJNI.Millard2012EquilibriumMuscle_getProperty_TendonForceLengthCurve(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_OpenSim__PropertyT_TendonForceLengthCurve_t updProperty_TendonForceLengthCurve() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_TendonForceLengthCurve_t(opensimModelJNI.Millard2012EquilibriumMuscle_updProperty_TendonForceLengthCurve(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TendonForceLengthCurve_t updProperty_TendonForceLengthCurve() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__TendonForceLengthCurve_t(opensimModelJNI.Millard2012EquilibriumMuscle_updProperty_TendonForceLengthCurve(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_TendonForceLengthCurve get_TendonForceLengthCurve(int i) {
-    return new SWIGTYPE_p_TendonForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_get_TendonForceLengthCurve__SWIG_0(swigCPtr, this, i), false);
+  public TendonForceLengthCurve get_TendonForceLengthCurve(int i) {
+    return new TendonForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_get_TendonForceLengthCurve__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public SWIGTYPE_p_TendonForceLengthCurve upd_TendonForceLengthCurve(int i) {
-    return new SWIGTYPE_p_TendonForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_upd_TendonForceLengthCurve__SWIG_0(swigCPtr, this, i), false);
+  public TendonForceLengthCurve upd_TendonForceLengthCurve(int i) {
+    return new TendonForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_upd_TendonForceLengthCurve__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_TendonForceLengthCurve(int i, SWIGTYPE_p_TendonForceLengthCurve value) {
-    opensimModelJNI.Millard2012EquilibriumMuscle_set_TendonForceLengthCurve__SWIG_0(swigCPtr, this, i, SWIGTYPE_p_TendonForceLengthCurve.getCPtr(value));
+  public void set_TendonForceLengthCurve(int i, TendonForceLengthCurve value) {
+    opensimModelJNI.Millard2012EquilibriumMuscle_set_TendonForceLengthCurve__SWIG_0(swigCPtr, this, i, TendonForceLengthCurve.getCPtr(value), value);
   }
 
-  public int append_TendonForceLengthCurve(SWIGTYPE_p_TendonForceLengthCurve value) {
-    return opensimModelJNI.Millard2012EquilibriumMuscle_append_TendonForceLengthCurve(swigCPtr, this, SWIGTYPE_p_TendonForceLengthCurve.getCPtr(value));
+  public int append_TendonForceLengthCurve(TendonForceLengthCurve value) {
+    return opensimModelJNI.Millard2012EquilibriumMuscle_append_TendonForceLengthCurve(swigCPtr, this, TendonForceLengthCurve.getCPtr(value), value);
   }
 
-  public void constructProperty_TendonForceLengthCurve(SWIGTYPE_p_TendonForceLengthCurve initValue) {
-    opensimModelJNI.Millard2012EquilibriumMuscle_constructProperty_TendonForceLengthCurve(swigCPtr, this, SWIGTYPE_p_TendonForceLengthCurve.getCPtr(initValue));
+  public void constructProperty_TendonForceLengthCurve(TendonForceLengthCurve initValue) {
+    opensimModelJNI.Millard2012EquilibriumMuscle_constructProperty_TendonForceLengthCurve(swigCPtr, this, TendonForceLengthCurve.getCPtr(initValue), initValue);
   }
 
-  public SWIGTYPE_p_TendonForceLengthCurve get_TendonForceLengthCurve() {
-    return new SWIGTYPE_p_TendonForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_get_TendonForceLengthCurve__SWIG_1(swigCPtr, this), false);
+  public TendonForceLengthCurve get_TendonForceLengthCurve() {
+    return new TendonForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_get_TendonForceLengthCurve__SWIG_1(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_TendonForceLengthCurve upd_TendonForceLengthCurve() {
-    return new SWIGTYPE_p_TendonForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_upd_TendonForceLengthCurve__SWIG_1(swigCPtr, this), false);
+  public TendonForceLengthCurve upd_TendonForceLengthCurve() {
+    return new TendonForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_upd_TendonForceLengthCurve__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_TendonForceLengthCurve(SWIGTYPE_p_TendonForceLengthCurve value) {
-    opensimModelJNI.Millard2012EquilibriumMuscle_set_TendonForceLengthCurve__SWIG_1(swigCPtr, this, SWIGTYPE_p_TendonForceLengthCurve.getCPtr(value));
+  public void set_TendonForceLengthCurve(TendonForceLengthCurve value) {
+    opensimModelJNI.Millard2012EquilibriumMuscle_set_TendonForceLengthCurve__SWIG_1(swigCPtr, this, TendonForceLengthCurve.getCPtr(value), value);
   }
 
   public Millard2012EquilibriumMuscle() {
@@ -653,20 +653,20 @@ public class Millard2012EquilibriumMuscle extends Muscle {
     return new SWIGTYPE_p_MuscleFixedWidthPennationModel(opensimModelJNI.Millard2012EquilibriumMuscle_getPennationModel(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_ActiveForceLengthCurve getActiveForceLengthCurve() {
-    return new SWIGTYPE_p_ActiveForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_getActiveForceLengthCurve(swigCPtr, this), false);
+  public ActiveForceLengthCurve getActiveForceLengthCurve() {
+    return new ActiveForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_getActiveForceLengthCurve(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_ForceVelocityInverseCurve getForceVelocityInverseCurve() {
-    return new SWIGTYPE_p_ForceVelocityInverseCurve(opensimModelJNI.Millard2012EquilibriumMuscle_getForceVelocityInverseCurve(swigCPtr, this), false);
+  public ForceVelocityInverseCurve getForceVelocityInverseCurve() {
+    return new ForceVelocityInverseCurve(opensimModelJNI.Millard2012EquilibriumMuscle_getForceVelocityInverseCurve(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_FiberForceLengthCurve getFiberForceLengthCurve() {
-    return new SWIGTYPE_p_FiberForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_getFiberForceLengthCurve(swigCPtr, this), false);
+  public FiberForceLengthCurve getFiberForceLengthCurve() {
+    return new FiberForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_getFiberForceLengthCurve(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_TendonForceLengthCurve getTendonForceLengthCurve() {
-    return new SWIGTYPE_p_TendonForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_getTendonForceLengthCurve(swigCPtr, this), false);
+  public TendonForceLengthCurve getTendonForceLengthCurve() {
+    return new TendonForceLengthCurve(opensimModelJNI.Millard2012EquilibriumMuscle_getTendonForceLengthCurve(swigCPtr, this), false);
   }
 
   public double getFiberStiffnessAlongTendon(State s) {
@@ -705,20 +705,20 @@ public class Millard2012EquilibriumMuscle extends Muscle {
     opensimModelJNI.Millard2012EquilibriumMuscle_setSecondOrderActivationModel(swigCPtr, this, SWIGTYPE_p_MuscleSecondOrderActivationDynamicModel.getCPtr(aActivation2Mdl));
   }
 
-  public void setActiveForceLengthCurve(SWIGTYPE_p_ActiveForceLengthCurve aActiveForceLengthCurve) {
-    opensimModelJNI.Millard2012EquilibriumMuscle_setActiveForceLengthCurve(swigCPtr, this, SWIGTYPE_p_ActiveForceLengthCurve.getCPtr(aActiveForceLengthCurve));
+  public void setActiveForceLengthCurve(ActiveForceLengthCurve aActiveForceLengthCurve) {
+    opensimModelJNI.Millard2012EquilibriumMuscle_setActiveForceLengthCurve(swigCPtr, this, ActiveForceLengthCurve.getCPtr(aActiveForceLengthCurve), aActiveForceLengthCurve);
   }
 
-  public void setForceVelocityInverseCurve(SWIGTYPE_p_ForceVelocityInverseCurve aForceVelocityInverseCurve) {
-    opensimModelJNI.Millard2012EquilibriumMuscle_setForceVelocityInverseCurve(swigCPtr, this, SWIGTYPE_p_ForceVelocityInverseCurve.getCPtr(aForceVelocityInverseCurve));
+  public void setForceVelocityInverseCurve(ForceVelocityInverseCurve aForceVelocityInverseCurve) {
+    opensimModelJNI.Millard2012EquilibriumMuscle_setForceVelocityInverseCurve(swigCPtr, this, ForceVelocityInverseCurve.getCPtr(aForceVelocityInverseCurve), aForceVelocityInverseCurve);
   }
 
-  public void setFiberForceLengthCurve(SWIGTYPE_p_FiberForceLengthCurve aFiberForceLengthCurve) {
-    opensimModelJNI.Millard2012EquilibriumMuscle_setFiberForceLengthCurve(swigCPtr, this, SWIGTYPE_p_FiberForceLengthCurve.getCPtr(aFiberForceLengthCurve));
+  public void setFiberForceLengthCurve(FiberForceLengthCurve aFiberForceLengthCurve) {
+    opensimModelJNI.Millard2012EquilibriumMuscle_setFiberForceLengthCurve(swigCPtr, this, FiberForceLengthCurve.getCPtr(aFiberForceLengthCurve), aFiberForceLengthCurve);
   }
 
-  public void setTendonForceLengthCurve(SWIGTYPE_p_TendonForceLengthCurve aTendonForceLengthCurve) {
-    opensimModelJNI.Millard2012EquilibriumMuscle_setTendonForceLengthCurve(swigCPtr, this, SWIGTYPE_p_TendonForceLengthCurve.getCPtr(aTendonForceLengthCurve));
+  public void setTendonForceLengthCurve(TendonForceLengthCurve aTendonForceLengthCurve) {
+    opensimModelJNI.Millard2012EquilibriumMuscle_setTendonForceLengthCurve(swigCPtr, this, TendonForceLengthCurve.getCPtr(aTendonForceLengthCurve), aTendonForceLengthCurve);
   }
 
   public void setMuscleConfiguration(boolean ignoreTendonCompliance, boolean ignoreActivationDynamics, boolean useDamping, boolean useSecondOrderActivation) {

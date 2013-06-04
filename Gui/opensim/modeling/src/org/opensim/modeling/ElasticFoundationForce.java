@@ -193,6 +193,50 @@ public class ElasticFoundationForce extends Force {
     opensimModelJNI.ElasticFoundationForce_setTransitionVelocity(swigCPtr, this, velocity);
   }
 
+  public double getStiffness() {
+    return opensimModelJNI.ElasticFoundationForce_getStiffness(swigCPtr, this);
+  }
+
+  public void setStiffness(double stiffness) {
+    opensimModelJNI.ElasticFoundationForce_setStiffness(swigCPtr, this, stiffness);
+  }
+
+  public double getDissipation() {
+    return opensimModelJNI.ElasticFoundationForce_getDissipation(swigCPtr, this);
+  }
+
+  public void setDissipation(double dissipation) {
+    opensimModelJNI.ElasticFoundationForce_setDissipation(swigCPtr, this, dissipation);
+  }
+
+  public double getStaticFriction() {
+    return opensimModelJNI.ElasticFoundationForce_getStaticFriction(swigCPtr, this);
+  }
+
+  public void setStaticFriction(double friction) {
+    opensimModelJNI.ElasticFoundationForce_setStaticFriction(swigCPtr, this, friction);
+  }
+
+  public double getDynamicFriction() {
+    return opensimModelJNI.ElasticFoundationForce_getDynamicFriction(swigCPtr, this);
+  }
+
+  public void setDynamicFriction(double friction) {
+    opensimModelJNI.ElasticFoundationForce_setDynamicFriction(swigCPtr, this, friction);
+  }
+
+  public double getViscousFriction() {
+    return opensimModelJNI.ElasticFoundationForce_getViscousFriction(swigCPtr, this);
+  }
+
+  public void setViscousFriction(double friction) {
+    opensimModelJNI.ElasticFoundationForce_setViscousFriction(swigCPtr, this, friction);
+  }
+
+  public void addGeometry(String name) {
+    opensimModelJNI.ElasticFoundationForce_addGeometry(swigCPtr, this, name);
+  }
+
   public ArrayStr getRecordLabels() {
     return new ArrayStr(opensimModelJNI.ElasticFoundationForce_getRecordLabels(swigCPtr, this), true);
   }

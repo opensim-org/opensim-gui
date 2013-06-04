@@ -8,18 +8,18 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_OpenSim__PropertyT_ForceVelocityInverseCurve_t {
+public class SWIGTYPE_p_OpenSim__PropertyT_OpenSim__ForceVelocityCurve_t {
   private long swigCPtr;
 
-  protected SWIGTYPE_p_OpenSim__PropertyT_ForceVelocityInverseCurve_t(long cPtr, boolean futureUse) {
+  protected SWIGTYPE_p_OpenSim__PropertyT_OpenSim__ForceVelocityCurve_t(long cPtr, boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_OpenSim__PropertyT_ForceVelocityInverseCurve_t() {
+  protected SWIGTYPE_p_OpenSim__PropertyT_OpenSim__ForceVelocityCurve_t() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_OpenSim__PropertyT_ForceVelocityInverseCurve_t obj) {
+  protected static long getCPtr(SWIGTYPE_p_OpenSim__PropertyT_OpenSim__ForceVelocityCurve_t obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }

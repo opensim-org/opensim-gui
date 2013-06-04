@@ -18,9 +18,10 @@ import org.openide.cookies.SaveCookie;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle.Messages;
 
+
 @ActionID(category = "Edit",
 id = "org.opensim.console.ToolsRunCurrentScriptAction")
-@ActionRegistration(iconBase = "org/opensim/console/run.png",
+@ActionRegistration(
 displayName = "#CTL_RunCurrentAction")
 @ActionReferences({
     @ActionReference(path = "Menu/Tools", position = 925)

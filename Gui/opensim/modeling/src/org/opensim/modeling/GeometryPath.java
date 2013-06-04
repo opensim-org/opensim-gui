@@ -168,16 +168,20 @@ public class GeometryPath extends ModelComponent {
     return new ArrayPathPoint(opensimModelJNI.GeometryPath_getCurrentDisplayPath(swigCPtr, this, State.getCPtr(s), s), false);
   }
 
-  public void getPointForceDirections(State s, SWIGTYPE_p_OpenSim__ArrayT_OpenSim__PointForceDirection_p_t rPFDs) {
-    opensimModelJNI.GeometryPath_getPointForceDirections(swigCPtr, this, State.getCPtr(s), s, SWIGTYPE_p_OpenSim__ArrayT_OpenSim__PointForceDirection_p_t.getCPtr(rPFDs));
-  }
-
   public double getLengtheningSpeed(State s) {
     return opensimModelJNI.GeometryPath_getLengtheningSpeed(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setLengtheningSpeed(State s, double speed) {
     opensimModelJNI.GeometryPath_setLengtheningSpeed(swigCPtr, this, State.getCPtr(s), s, speed);
+  }
+
+  public void getPointForceDirections(State s, SWIGTYPE_p_OpenSim__ArrayT_OpenSim__PointForceDirection_p_t rPFDs) {
+    opensimModelJNI.GeometryPath_getPointForceDirections(swigCPtr, this, State.getCPtr(s), s, SWIGTYPE_p_OpenSim__ArrayT_OpenSim__PointForceDirection_p_t.getCPtr(rPFDs));
+  }
+
+  public void addInEquivalentForcesOnBodies(State state, double tension, VectorOfSpatialVec bodyForces) {
+    opensimModelJNI.GeometryPath_addInEquivalentForcesOnBodies(swigCPtr, this, State.getCPtr(state), state, tension, VectorOfSpatialVec.getCPtr(bodyForces), bodyForces);
   }
 
   public double computeMomentArm(State s, Coordinate aCoord) {
@@ -194,10 +198,6 @@ public class GeometryPath extends ModelComponent {
 
   public void postScale(State s, ScaleSet aScaleSet) {
     opensimModelJNI.GeometryPath_postScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(aScaleSet), aScaleSet);
-  }
-
-  public int getNumStateVariables() {
-    return opensimModelJNI.GeometryPath_getNumStateVariables(swigCPtr, this);
   }
 
   public VisibleObject getDisplayer() {
