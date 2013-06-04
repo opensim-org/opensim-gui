@@ -27,6 +27,9 @@
             <file name="org-opensim-console-ScriptsRunBrowseAction.instance">
                 <attr name="position" intvalue="1750"/>
             </file>
+            <file name="org-opensim-console-ScriptsRunMRUScriptsAction.instance">
+                <attr name="position" intvalue="1925"/>
+            </file>
             <file name="org-opensim-console-ToolsRunCurrentScriptAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-console-ToolsRunCurrentScriptAction.instance"/>
                 <attr name="position" intvalue="2100"/>
