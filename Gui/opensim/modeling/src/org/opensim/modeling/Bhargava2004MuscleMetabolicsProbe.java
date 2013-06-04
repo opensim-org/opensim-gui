@@ -741,6 +741,22 @@ public class Bhargava2004MuscleMetabolicsProbe extends Probe {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_setRatioSlowTwitchFibers(swigCPtr, this, muscleName, ratio);
   }
 
+  public double getDensity(String muscleName) {
+    return opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_getDensity(swigCPtr, this, muscleName);
+  }
+
+  public void setDensity(String muscleName, double density) {
+    opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_setDensity(swigCPtr, this, muscleName, density);
+  }
+
+  public double getSpecificTension(String muscleName) {
+    return opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_getSpecificTension(swigCPtr, this, muscleName);
+  }
+
+  public void setSpecificTension(String muscleName, double specificTension) {
+    opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_setSpecificTension(swigCPtr, this, muscleName, specificTension);
+  }
+
   public double getActivationConstantSlowTwitch(String muscleName) {
     return opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_getActivationConstantSlowTwitch(swigCPtr, this, muscleName);
   }

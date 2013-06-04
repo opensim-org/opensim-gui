@@ -637,4 +637,20 @@ public class Umberger2010MuscleMetabolicsProbe extends Probe {
     opensimModelJNI.Umberger2010MuscleMetabolicsProbe_setRatioSlowTwitchFibers(swigCPtr, this, muscleName, ratio);
   }
 
+  public double getDensity(String muscleName) {
+    return opensimModelJNI.Umberger2010MuscleMetabolicsProbe_getDensity(swigCPtr, this, muscleName);
+  }
+
+  public void setDensity(String muscleName, double density) {
+    opensimModelJNI.Umberger2010MuscleMetabolicsProbe_setDensity(swigCPtr, this, muscleName, density);
+  }
+
+  public double getSpecificTension(String muscleName) {
+    return opensimModelJNI.Umberger2010MuscleMetabolicsProbe_getSpecificTension(swigCPtr, this, muscleName);
+  }
+
+  public void setSpecificTension(String muscleName, double specificTension) {
+    opensimModelJNI.Umberger2010MuscleMetabolicsProbe_setSpecificTension(swigCPtr, this, muscleName, specificTension);
+  }
+
 }
