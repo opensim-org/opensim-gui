@@ -165,7 +165,7 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
         jFormattedTextField.addPropertyChangeListener("value", this);
         jFormattedTextField.addFocusListener((FocusListener)callback);
         
-        //jSpeedTextField.addPropertyChangeListener("value", this);
+        jSpeedTextField.addPropertyChangeListener("value", this);
         jSpeedTextField.addFocusListener((FocusListener)callbackSpeed);
 
       }
@@ -454,7 +454,10 @@ private void jSpeedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//G
        if (source != jXSlider) return;
        double theValue = jXSlider.getValue()*step+min;
        fireCoordinateChange(coord, theValue, true, false, true, (source.getValueIsAdjusting()));
-    }
+       
+       double sp = ((Double)jSpeedTextField.getValue()).doubleValue();
+       coord.setSpeedValue(openSimContext.getCurrentStateRef(), sp);
+     }
     /**
      * Text field change
      */
@@ -463,7 +466,13 @@ private void jSpeedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//G
           Number value = (Number)evt.getNewValue();
           Number valueOld = (Number)evt.getOldValue();
           if (value != null && valueOld!=value) {
-             fireCoordinateChange(coord, value.doubleValue(), false, true, true, true);
+              Object src = evt.getSource();
+              if (src.equals(jFormattedTextField))
+                fireCoordinateChange(coord, value.doubleValue(), false, true, true, true);
+              else{
+                double sp = ((Double)jSpeedTextField.getValue()).doubleValue();
+                coord.setSpeedValue(openSimContext.getCurrentStateRef(), sp);               
+              }
           }
        }
     }
@@ -559,7 +568,7 @@ private void jSpeedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//G
              try {
                 double valueFromTextField = numberFormat.parse(text).doubleValue();
              } catch (ParseException ex){
-                jFormattedTextField.setText(numberFormat.format(oldValue));
+                jSpeedTextField.setText(numberFormat.format(oldValue));
              }
           } else try {                    //The text is valid,
              jSpeedTextField.commitEdit();     //so use it.
