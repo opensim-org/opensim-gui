@@ -47,4 +47,9 @@
             </folder>
         </folder>
     </folder>
+        <folder name="Shortcuts">
+        <file name="F5.shadow">  
+        <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-console-ToolsRunCurrentScriptAction.instance"/> 
+        </file>
+    </folder>
 </filesystem>
