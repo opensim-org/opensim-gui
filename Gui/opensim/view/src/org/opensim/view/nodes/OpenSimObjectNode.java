@@ -47,6 +47,7 @@ import org.opensim.modeling.Function;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.PropertyHelper;
+import org.opensim.modeling.XYFunctionInterface;
 import org.opensim.view.OpenSimBaseObjectProperty;
 import org.opensim.view.OpenSimFunctionProperty;
 import org.opensim.view.OpenSimGeometryPathProperty;
@@ -361,7 +362,8 @@ public class OpenSimObjectNode extends OpenSimNode {
                         if (GeometryPath.safeDownCast(objectFromProperty)!= null){
                             customProp  = new OpenSimGeometryPathProperty(ap, this);
                         }
-                        else if (Function.safeDownCast(objectFromProperty)!= null){
+                        else if (Function.safeDownCast(objectFromProperty)!= null &&
+                                XYFunctionInterface.isXYFunction(Function.safeDownCast(objectFromProperty))){
                             customProp  = new OpenSimFunctionProperty(ap, this);
                         }
                         else
