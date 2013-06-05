@@ -27,7 +27,7 @@ import org.opensim.utils.TheApp;
 public final class ToolsOpenScriptAction extends CallableSystemAction {
 
     public void performAction() {
-        String dataFilename = FileUtils.getInstance().browseForFilename(".py", "Files containing script to execute", true);
+        String dataFilename = FileUtils.getInstance().browseForFilename(FileUtils.ScriptFileFilter, "Choose script (.py) to open");
         if (dataFilename != null) {
             openFile(dataFilename);
         }
@@ -51,51 +51,6 @@ public final class ToolsOpenScriptAction extends CallableSystemAction {
     public HelpCtx getHelpCtx() {
          return HelpCtx.DEFAULT_HELP;
     }
-/*
-    public JMenuItem getMenuPresenter() {
-        JMenu scriptsMenu = new JMenu("Open");
-        FileFilter fileFilter = new FileFilter() {
-
-            public boolean accept(File file) {
-                return (!file.isDirectory() && file.getName().endsWith(".py"));
-            }
-        };
-        final String ScriptsRootDirectory = Preferences.userNodeForPackage(TheApp.class).get("Scripts Path", "Scripts");
-        File rootHelpDirectory = new File(ScriptsRootDirectory);
-        final String fullPath = rootHelpDirectory.getAbsolutePath();
-        File[] files = rootHelpDirectory.listFiles(fileFilter);
-        if (files == null) {
-
-            return scriptsMenu;
-        }
-
-        for (int i = 0; i < files.length; i++) {
-            final String fileName = files[i].getName();
-            JMenuItem nextItem = new JMenuItem(fileName);
-            nextItem.addActionListener(new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    openFile(fullPath + "/" + fileName);
-                }
-            });
-
-            scriptsMenu.add(nextItem);
-        }
-        JMenuItem browseItem = new JMenuItem("Browse...");
-        browseItem.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                String dataFilename = FileUtils.getInstance().browseForFilename(".py", "Files containing script to execute", true);
-                if (dataFilename != null) {
-                    openFile(dataFilename);
-                }
-            }
-        });
-        scriptsMenu.add(browseItem);
-        return scriptsMenu;
-    }
-*/
     /**
      * execute passed in scriptFilename in Scripting shell and echo contents
      * @param scriptFilename 

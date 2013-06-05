@@ -61,6 +61,7 @@ public final class FileUtils {
     public static FileFilter OpenSimModelFileFilter = getFileFilter(".osim", "OpenSim model");
     public static FileFilter MotionFileFilter = getFileFilter(".mot,.sto", "Motion or storage file");
     public static FileFilter TrcFileFilter = getFileFilter(".trc", "Marker trajectory file");
+    public static FileFilter ScriptFileFilter = getFileFilter(".py", "OpenSim script");
     
     /**
      * 
@@ -324,10 +325,50 @@ public final class FileUtils {
        if(outFilename != null) setWorkingDirectoryPreference(dlog.getSelectedFile().getParent());
        return outFilename;
     }
+    
+        public String browseForFilename(FileFilter filter, String dialog, boolean isRequired2Exist, Component parent)
+    {
+        // Init dialog to use "WorkDirectory" as thought of by user
+        String defaultDir = Preferences.userNodeForPackage(TheApp.class).get("WorkDirectory", "");
+        //JFileChooser dlog = new JFileChooser(defaultDir);
+        dlog.setCurrentDirectory(new File(defaultDir));
+        dlog.setDialogTitle(dialog);
+        if(filter!=null) { dlog.resetChoosableFileFilters(); dlog.setFileFilter(filter); }
+        
+        String outFilename=null;
+        Component topWindow;
+        if (parent==null)
+            topWindow = TheApp.getAppFrame();
+        else
+            topWindow = parent;
+        for (;;) {
+           dlog.setSelectedFile(new File(" "));
+           int result = dlog.showOpenDialog(topWindow);
+           outFilename = null;
+           if (result == JFileChooser.APPROVE_OPTION && dlog.getSelectedFile() != null)
+                outFilename = dlog.getSelectedFile().getAbsolutePath();
+           /** 
+            * If isRequired2Exist flag is passed in as true we need to make sure the file really exists
+            */
+           if (isRequired2Exist && outFilename!= null && !(new File(outFilename)).exists())
+              DialogDisplayer.getDefault().notify(
+                      new NotifyDescriptor.Message("Selected file "+outFilename+" does not exist."));
+           else break;
+       }
+       if(outFilename != null) setWorkingDirectoryPreference(dlog.getSelectedFile().getParent());
+       return outFilename;
+    }
+     
     public String browseForFilename(String extensions, String description, boolean isRequired2Exist, Component parent)
     {
        return browseForFilename(FileUtils.getFileFilter(extensions, description), isRequired2Exist, parent);
     }
+    
+    public String browseForFilename(FileFilter filter, String dialog)
+    {
+        return browseForFilename(filter, dialog, true, null);
+    }
+    
     public String browseForFilename(String extensions, String description, Component parent)
     {
         return browseForFilename(extensions, description, true, parent);

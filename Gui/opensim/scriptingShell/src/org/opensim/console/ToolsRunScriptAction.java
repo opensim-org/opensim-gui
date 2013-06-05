@@ -74,7 +74,7 @@ public final class ToolsRunScriptAction extends CallableSystemAction {
         browseItem.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                String dataFilename = FileUtils.getInstance().browseForFilename(".py", "Files containing script to execute", true);
+                String dataFilename = FileUtils.getInstance().browseForFilename(FileUtils.ScriptFileFilter, "Choose script (.py) to run");
                 if (dataFilename != null) {
                     ScriptingShellTopComponent.getDefault().getConsole().executeFile(dataFilename);
                 }
