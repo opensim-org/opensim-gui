@@ -1,4 +1,4 @@
-<?xml version="1.1" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.3" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
@@ -29,38 +29,30 @@
               <Component id="jClampedCheckBox" min="-2" pref="20" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="jMinimumLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="jXSlider" pref="126" max="32767" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jXSlider" pref="70" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jMaximumLabel" min="-2" pref="25" max="-2" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="jSpeedLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jSpeedTextField" min="-2" pref="49" max="-2" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jCoordinateNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jFormattedTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLockedCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jClampedCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jMinimumLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="jMaximumLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jSpeedLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jSpeedTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="jXSlider" alignment="0" min="-2" pref="25" max="-2" attributes="1"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
+          <Group type="103" groupAlignment="3" attributes="0">
+              <Component id="jCoordinateNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Component id="jFormattedTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Component id="jLockedCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Component id="jClampedCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Component id="jMinimumLabel" alignment="3" min="-2" max="-2" attributes="0"/>
           </Group>
+          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+              <Component id="jMaximumLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Component id="jSpeedTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+          </Group>
+          <Component id="jXSlider" alignment="0" min="-2" pref="25" max="-2" attributes="1"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -220,11 +212,6 @@
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[25, 25]"/>
         </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jSpeedLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Speed"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jSpeedTextField">
