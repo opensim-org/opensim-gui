@@ -36,7 +36,7 @@ import os
 print "Acquiring file for Control profile"
 
 #if _min and _max are not 
-offsetIfMinMax_Unspecified=0.01 
+offsetIfMinMax_Unspecified=0.0
 # Prompts user to select file if above does not exist
 controlProfileStore = "doesnotexistfile.sto"
 if not os.path.exists(controlProfileStore):
