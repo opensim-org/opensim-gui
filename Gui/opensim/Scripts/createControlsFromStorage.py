@@ -36,7 +36,7 @@ import os
 print "Acquiring file for Control profile"
 
 #if _min and _max are not 
-double offsetIfMinMax_Unspecified=0.0 
+offsetIfMinMax_Unspecified=0.01 
 # Prompts user to select file if above does not exist
 controlProfileStore = "doesnotexistfile.sto"
 if not os.path.exists(controlProfileStore):
@@ -55,8 +55,8 @@ csetRaw = modeling.ControlSet(controlStorage)
 
 # Now cycle thru the controls and foreach
 #	find name, if not ending in _min or _max then
-#	if name_min exists then use it as minValue otherwise use value itself as minValue
-#	if name_max exists then use it as maxValue otherwise use value itself as maxValue
+#	if name_min exists then use it as minValue otherwise use value itself-offsetIfMinMax_Unspecified as minValue
+#	if name_max exists then use it as maxValue otherwise use value itself+offsetIfMinMax_Unspecified as maxValue
 #	remove all controls that end in _min or _max and write to file
 
 # number of controls 
@@ -90,7 +90,7 @@ for i in range (0, nLabels):
 				minValue = csiL_min.getControlValue(clNodeTime)
 				csiL.setControlValueMin(clNodeTime, minValue)
 				if (minValue < currentMin):
-					currentMin = minValue-offsetIfMinMax_Unspecified
+					currentMin = minValue
 		else:
 			nodeSet = csiL.getControlValues()
 			nodeSetSize = nodeSet.getSize()
@@ -101,6 +101,7 @@ for i in range (0, nLabels):
 				csiL.setControlValueMin(clNodeTime, minValue)
 				if (minValue < currentMin):
 					currentMin = minValue
+			currentMin=currentMin-offsetIfMinMax_Unspecified
 		csiL.setDefaultParameterMin(currentMin)
 		# repeat for max
 		if (maxControlIndex!=-1):
@@ -113,7 +114,7 @@ for i in range (0, nLabels):
 				maxValue = csiL_max.getControlValue(clNodeTime)
 				csiL.setControlValueMax(clNodeTime, maxValue)
 				if (maxValue > currentMax):
-					currentMax = maxValue+offsetIfMinMax_Unspecified
+					currentMax = maxValue
 		else:
 			nodeSet = csiL.getControlValues()
 			nodeSetSize = nodeSet.getSize()
@@ -124,6 +125,7 @@ for i in range (0, nLabels):
 				csiL.setControlValueMax(clNodeTime, maxValue)
 				if (maxValue > currentMax):
 					currentMax = maxValue
+			currentMax = currentMax+offsetIfMinMax_Unspecified
 		csiL.setDefaultParameterMax(currentMax)
 
 #remove entries that has trailing _min or _max
