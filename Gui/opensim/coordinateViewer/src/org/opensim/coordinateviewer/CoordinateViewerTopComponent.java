@@ -492,7 +492,7 @@ final class CoordinateViewerTopComponent extends TopComponent implements Observe
       JPanel labelPanel = new JPanel(new BorderLayout());
       labelPanel.add(coordinateValueLabel, BorderLayout.WEST);
       labelPanel.add(speedLabel, BorderLayout.EAST);
-
+      labelPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE,25));  // fixing height
       labelPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
       
       jPanel1.add(labelPanel); 
