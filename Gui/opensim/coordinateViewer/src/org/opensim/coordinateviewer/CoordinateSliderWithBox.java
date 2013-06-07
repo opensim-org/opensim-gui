@@ -375,7 +375,7 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
 private void jSpeedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSpeedTextFieldActionPerformed
 // TODO add your handling code here:
     State st = openSimContext.getCurrentStateRef();
-    double speed = ((Double)jSpeedTextField.getValue()).doubleValue();
+    double speed = getSpeed();
     coord.setSpeedValue(st, speed);
 }//GEN-LAST:event_jSpeedTextFieldActionPerformed
 
@@ -385,7 +385,10 @@ private void SpeedFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_
     
 }//GEN-LAST:event_SpeedFocusGained
    
-   
+private double getSpeed() {
+    double speed = ((Double)jSpeedTextField.getValue()).doubleValue();
+    return isRotational() ? Math.toDegrees(speed) : speed;
+}  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox jClampedCheckBox;
     private javax.swing.JLabel jCoordinateNameLabel;
@@ -464,8 +467,9 @@ private void SpeedFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_
        double theValue = jXSlider.getValue()*step+min;
        fireCoordinateChange(coord, theValue, true, false, true, (source.getValueIsAdjusting()));
        
-       double sp = ((Double)jSpeedTextField.getValue()).doubleValue();
+       double sp = getSpeed();
        coord.setSpeedValue(openSimContext.getCurrentStateRef(), sp);
+
      }
     /**
      * Text field change
@@ -479,7 +483,7 @@ private void SpeedFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_
               if (src.equals(jFormattedTextField))
                 fireCoordinateChange(coord, value.doubleValue(), false, true, true, true);
               else{
-                double sp = ((Double)jSpeedTextField.getValue()).doubleValue();
+                double sp = getSpeed();
                 coord.setSpeedValue(openSimContext.getCurrentStateRef(), sp);               
               }
           }
