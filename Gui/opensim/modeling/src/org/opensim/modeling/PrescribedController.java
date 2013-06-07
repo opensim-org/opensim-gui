@@ -61,8 +61,12 @@ public class PrescribedController extends Controller {
     this(opensimModelJNI.new_PrescribedController__SWIG_0(), true);
   }
 
-  public PrescribedController(PrescribedController PrescribedController) {
-    this(opensimModelJNI.new_PrescribedController__SWIG_1(PrescribedController.getCPtr(PrescribedController), PrescribedController), true);
+  public PrescribedController(String controlsFileName, int interpMethodType) {
+    this(opensimModelJNI.new_PrescribedController__SWIG_1(controlsFileName, interpMethodType), true);
+  }
+
+  public PrescribedController(String controlsFileName) {
+    this(opensimModelJNI.new_PrescribedController__SWIG_2(controlsFileName), true);
   }
 
   public void computeControls(State s, Vector controls) {

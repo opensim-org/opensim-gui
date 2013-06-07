@@ -435,6 +435,10 @@ public class Model extends ModelComponent {
     return new Vector(opensimModelJNI.Model_updControls(swigCPtr, this, State.getCPtr(s), s), false);
   }
 
+  public void markControlsAsValid(State s) {
+    opensimModelJNI.Model_markControlsAsValid(swigCPtr, this, State.getCPtr(s), s);
+  }
+
   public void setControls(State s, Vector controls) {
     opensimModelJNI.Model_setControls(swigCPtr, this, State.getCPtr(s), s, Vector.getCPtr(controls), controls);
   }

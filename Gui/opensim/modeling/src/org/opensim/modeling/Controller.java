@@ -149,24 +149,12 @@ public class Controller extends ModelComponent {
     opensimModelJNI.Controller_constructProperty_actuator_list(swigCPtr, this);
   }
 
-  public void set_numControls(int value) {
-    opensimModelJNI.Controller__numControls_set(swigCPtr, this, value);
-  }
-
-  public int get_numControls() {
-    return opensimModelJNI.Controller__numControls_get(swigCPtr, this);
-  }
-
   public boolean isDisabled() {
     return opensimModelJNI.Controller_isDisabled(swigCPtr, this);
   }
 
   public void setDisabled(boolean disableFlag) {
     opensimModelJNI.Controller_setDisabled(swigCPtr, this, disableFlag);
-  }
-
-  public void computeControls(State s, Vector controls) {
-    opensimModelJNI.Controller_computeControls(swigCPtr, this, State.getCPtr(s), s, Vector.getCPtr(controls), controls);
   }
 
   public void setActuators(SetActuators actuators) {
@@ -183,6 +171,14 @@ public class Controller extends ModelComponent {
 
   public SetActuators updActuators() {
     return new SetActuators(opensimModelJNI.Controller_updActuators(swigCPtr, this), false);
+  }
+
+  public void computeControls(State s, Vector controls) {
+    opensimModelJNI.Controller_computeControls(swigCPtr, this, State.getCPtr(s), s, Vector.getCPtr(controls), controls);
+  }
+
+  public int getNumControls() {
+    return opensimModelJNI.Controller_getNumControls(swigCPtr, this);
   }
 
 }

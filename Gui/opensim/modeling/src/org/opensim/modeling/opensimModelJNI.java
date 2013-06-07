@@ -2310,15 +2310,14 @@ public class opensimModelJNI {
   public final static native void Controller_set_actuator_list(long jarg1, Controller jarg1_, int jarg2, String jarg3);
   public final static native int Controller_append_actuator_list(long jarg1, Controller jarg1_, String jarg2);
   public final static native void Controller_constructProperty_actuator_list(long jarg1, Controller jarg1_);
-  public final static native void Controller__numControls_set(long jarg1, Controller jarg1_, int jarg2);
-  public final static native int Controller__numControls_get(long jarg1, Controller jarg1_);
   public final static native boolean Controller_isDisabled(long jarg1, Controller jarg1_);
   public final static native void Controller_setDisabled(long jarg1, Controller jarg1_, boolean jarg2);
-  public final static native void Controller_computeControls(long jarg1, Controller jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
   public final static native void Controller_setActuators(long jarg1, Controller jarg1_, long jarg2, SetActuators jarg2_);
   public final static native void Controller_addActuator(long jarg1, Controller jarg1_, long jarg2, Actuator jarg2_);
   public final static native long Controller_getActuatorSet(long jarg1, Controller jarg1_);
   public final static native long Controller_updActuators(long jarg1, Controller jarg1_);
+  public final static native void Controller_computeControls(long jarg1, Controller jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
+  public final static native int Controller_getNumControls(long jarg1, Controller jarg1_);
   public final static native void delete_Controller(long jarg1);
   public final static native long SetControllers_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void SetControllers_assign(long jarg1, SetControllers jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -3541,7 +3540,8 @@ public class opensimModelJNI {
   public final static native long PrescribedController_clone(long jarg1, PrescribedController jarg1_);
   public final static native String PrescribedController_getConcreteClassName(long jarg1, PrescribedController jarg1_);
   public final static native long new_PrescribedController__SWIG_0();
-  public final static native long new_PrescribedController__SWIG_1(long jarg1, PrescribedController jarg1_);
+  public final static native long new_PrescribedController__SWIG_1(String jarg1, int jarg2);
+  public final static native long new_PrescribedController__SWIG_2(String jarg1);
   public final static native void delete_PrescribedController(long jarg1);
   public final static native void PrescribedController_computeControls(long jarg1, PrescribedController jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
   public final static native void PrescribedController_prescribeControlForActuator__SWIG_0(long jarg1, PrescribedController jarg1_, int jarg2, long jarg3, Function jarg3_);
@@ -6475,6 +6475,7 @@ public class opensimModelJNI {
   public final static native void Model_setDefaultControls__SWIG_0(long jarg1, Model jarg1_, long jarg2, Vector jarg2_);
   public final static native long Model_getDefaultControls(long jarg1, Model jarg1_);
   public final static native long Model_updControls(long jarg1, Model jarg1_, long jarg2, State jarg2_);
+  public final static native void Model_markControlsAsValid(long jarg1, Model jarg1_, long jarg2, State jarg2_);
   public final static native void Model_setControls(long jarg1, Model jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
   public final static native long Model_getControls(long jarg1, Model jarg1_, long jarg2, State jarg2_);
   public final static native void Model_computeControls(long jarg1, Model jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
