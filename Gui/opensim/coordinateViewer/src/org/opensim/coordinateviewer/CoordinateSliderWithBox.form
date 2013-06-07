@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.1" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.3" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
@@ -217,11 +217,16 @@
     <Component class="javax.swing.JFormattedTextField" name="jSpeedTextField">
       <Properties>
         <Property name="text" type="java.lang.String" value="1.000"/>
+        <Property name="toolTipText" type="java.lang.String" value="Speed"/>
         <Property name="alignmentY" type="float" value="0.0"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jSpeedTextFieldActionPerformed"/>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="SpeedFocusGained"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(speedFormatter);"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

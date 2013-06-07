@@ -74,7 +74,9 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
    private double conversion=1.0;
    int numTicks=0;
    NumberFormat numberFormat;
+   NumberFormat sNumberFormat;
    NumberFormatter formatter;
+   NumberFormatter speedFormatter;
    private boolean rotational;
    private Coordinate coord;
    private OpenSimContext openSimContext;
@@ -115,6 +117,9 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
       numberFormat = NumberFormat.getNumberInstance();
       numberFormat.setMinimumFractionDigits(3);
       formatter = new NumberFormatter(numberFormat);
+      sNumberFormat = NumberFormat.getNumberInstance();
+      sNumberFormat.setMinimumFractionDigits(3);
+      speedFormatter = new NumberFormatter(sNumberFormat); // this maybe unnecessary if using same format as Coordinates but more flexible
       setTextfieldBounds(true);
       initComponents();
       
@@ -180,6 +185,8 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
          formatter.setMaximum(new Double(1e30));
          
       }
+      speedFormatter.setMinimum(new Double(-1e30));
+      speedFormatter.setMaximum(new Double(1e30));
    }
    
    /** This method is called from within the constructor to
@@ -197,7 +204,7 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
         jCoordinateNameLabel = new javax.swing.JLabel();
         jMinimumLabel = new javax.swing.JLabel();
         jMaximumLabel = new javax.swing.JLabel();
-        jSpeedTextField = new javax.swing.JFormattedTextField();
+        jSpeedTextField = new JFormattedTextField(speedFormatter);
 
         setAlignmentY(0.0F);
 
@@ -277,10 +284,16 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
         jMaximumLabel.setPreferredSize(new java.awt.Dimension(25, 25));
 
         jSpeedTextField.setText("1.000");
+        jSpeedTextField.setToolTipText("Speed");
         jSpeedTextField.setAlignmentY(0.0F);
         jSpeedTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jSpeedTextFieldActionPerformed(evt);
+            }
+        });
+        jSpeedTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                SpeedFocusGained(evt);
             }
         });
 
@@ -365,6 +378,12 @@ private void jSpeedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//G
     double speed = ((Double)jSpeedTextField.getValue()).doubleValue();
     coord.setSpeedValue(st, speed);
 }//GEN-LAST:event_jSpeedTextFieldActionPerformed
+
+private void SpeedFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SpeedFocusGained
+// TODO add your handling code here:
+    int x = 0;
+    
+}//GEN-LAST:event_SpeedFocusGained
    
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
