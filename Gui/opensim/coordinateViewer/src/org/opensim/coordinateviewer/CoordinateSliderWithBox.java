@@ -71,7 +71,7 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
         PropertyChangeListener{
    
    private double min, max, step;
-   private double conversion=1.0;
+   private double conversion=1.0; // 1.0 or rad to degree factor
    int numTicks=0;
    NumberFormat numberFormat;
    NumberFormat sNumberFormat;
@@ -284,7 +284,7 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
         jMaximumLabel.setPreferredSize(new java.awt.Dimension(25, 25));
 
         jSpeedTextField.setText("1.000");
-        jSpeedTextField.setToolTipText("Speed");
+        jSpeedTextField.setToolTipText("Speed M/S Deg/S");
         jSpeedTextField.setAlignmentY(0.0F);
         jSpeedTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -375,8 +375,7 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
 private void jSpeedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSpeedTextFieldActionPerformed
 // TODO add your handling code here:
     State st = openSimContext.getCurrentStateRef();
-    double speed = getSpeed();
-    coord.setSpeedValue(st, speed);
+    coord.setSpeedValue(st, getSpeedFromTextboxInternalUnits());
 }//GEN-LAST:event_jSpeedTextFieldActionPerformed
 
 private void SpeedFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SpeedFocusGained
@@ -385,9 +384,9 @@ private void SpeedFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_
     
 }//GEN-LAST:event_SpeedFocusGained
    
-private double getSpeed() {
+private double getSpeedFromTextboxInternalUnits() {
     double speed = ((Double)jSpeedTextField.getValue()).doubleValue();
-    return isRotational() ? Math.toDegrees(speed) : speed;
+    return speed/conversion;
 }  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox jClampedCheckBox;
@@ -446,7 +445,7 @@ private double getSpeed() {
        double val = openSimContext.getValue(coord);
        double theValue= val * conversion;
        double sp = coord.getSpeedValue(openSimContext.getCurrentStateRef());
-       jSpeedTextField.setValue(new Double(sp));
+       jSpeedTextField.setValue(new Double(sp*conversion));
        fireCoordinateChange(coord, theValue, true, true, false, false);
     }
      /* updateCalue that doesn't recursively updates other sliders */
@@ -455,7 +454,7 @@ private double getSpeed() {
        double theValue= val * conversion;
        setTheValue(theValue, true, true, false, false);
        double sp = coord.getSpeedValue(openSimContext.getCurrentStateRef());
-       jSpeedTextField.setValue(new Double(sp));
+       jSpeedTextField.setValue(new Double(sp*conversion));
     }
     
     /**
@@ -467,8 +466,7 @@ private double getSpeed() {
        double theValue = jXSlider.getValue()*step+min;
        fireCoordinateChange(coord, theValue, true, false, true, (source.getValueIsAdjusting()));
        
-       double sp = getSpeed();
-       coord.setSpeedValue(openSimContext.getCurrentStateRef(), sp);
+       coord.setSpeedValue(openSimContext.getCurrentStateRef(), getSpeedFromTextboxInternalUnits());
 
      }
     /**
@@ -483,8 +481,7 @@ private double getSpeed() {
               if (src.equals(jFormattedTextField))
                 fireCoordinateChange(coord, value.doubleValue(), false, true, true, true);
               else{
-                double sp = getSpeed();
-                coord.setSpeedValue(openSimContext.getCurrentStateRef(), sp);               
+                 coord.setSpeedValue(openSimContext.getCurrentStateRef(), getSpeedFromTextboxInternalUnits());               
               }
           }
        }

@@ -217,7 +217,7 @@
     <Component class="javax.swing.JFormattedTextField" name="jSpeedTextField">
       <Properties>
         <Property name="text" type="java.lang.String" value="1.000"/>
-        <Property name="toolTipText" type="java.lang.String" value="Speed"/>
+        <Property name="toolTipText" type="java.lang.String" value="Speed M/S Deg/S"/>
         <Property name="alignmentY" type="float" value="0.0"/>
       </Properties>
       <Events>
