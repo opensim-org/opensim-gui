@@ -46,7 +46,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
    //========================================================================
    // ForwardToolWorker
    //========================================================================
-   class ForwardToolWorker extends SwingWorker implements Stoppable{
+   class ForwardToolWorker extends SwingWorker {
       private ProgressHandle progressHandle = null;
       private JavaMotionDisplayerCallback animationCallback = null;
       private InterruptCallback interruptingCallback = null;
@@ -122,7 +122,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
          setExecuting(true);
       }
 
-        @Override
+      
       public void interrupt(boolean promptToKeepPartialResult) {
          this.promptToKeepPartialResult = promptToKeepPartialResult;
          if(interruptingCallback!=null) interruptingCallback.interrupt();
