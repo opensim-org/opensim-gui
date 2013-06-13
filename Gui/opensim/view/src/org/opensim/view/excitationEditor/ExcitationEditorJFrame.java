@@ -58,7 +58,6 @@ import org.opensim.view.pub.OpenSimDB;
  */
 public class ExcitationEditorJFrame extends javax.swing.JFrame {
     ExcitationEditorJPanel dPanel;
-    ArrayList<ControlLinear> controlsRefs = new ArrayList<ControlLinear>(2);    // This's a hack to prevent early garbage collection
     String helpText = "<html>\nAnchor with left mouse button and drag to lower right to <b>Zoom In</b> on a rectangle.<br>\nAnchor  with left mouse button and drag to the left to <b>Zoom Out/Refit</b> the data.<br>\nUse <b>I</b> to zoom in about the center of the pane.l<br>\nUse <b>O</b> to zoom out about the center of the panel.l<br>\nUse <b>L</b> to move the panel Left<br>\nUse <b>R</b> to move the panel Right<br>\nUse <b>U</b> to move the panel Up<br>\nUse <b>D</b> to move the panel Down<br>\n<b>Selection:</b><br>\nHolding <b>CTRL</b> button down turns on selection mode.<br>\n  - Left mouse button selects individual points.<br>\n  - Shift + left mouse button accumulates selection.<br>\n  - Draw box to select all points within the box.<br>\n  - Left mouse button in background deselects all points.<br>\n<b>Adding Points:</b><br>\nRight mouse click inside a panel and use popup menu to add points.<br>\n</html>";
 
     /** Creates new form ExcitationEditorJFrame */
@@ -378,8 +377,7 @@ public class ExcitationEditorJFrame extends javax.swing.JFrame {
                         control.setName(act.getName());
                     else
                         control.setName(act.getName()+String.valueOf(nc));
-                    controlSet.adoptAndAppend(control);
-                    controlsRefs.add(control);
+                    controlSet.cloneAndAppend(control);
                 }
 	}
         

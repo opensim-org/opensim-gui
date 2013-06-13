@@ -9,7 +9,10 @@
             <file name="org-opensim-tracking-tools-ForwardToolAction.instance"/>
             <file name="org-opensim-tracking-tools-InverseDynamicsToolAction.instance"/>
             <file name="org-opensim-tracking-tools-StaticOptimizationAction.instance"/>
+            <file name="org-opensim-tracking-tools-ToolbarStopAction.instance_hidden"/>
             <file name="org-opensim-tracking-tools-ToolsScaleAction.instance"/>                
+            <file name="org-opensim-tracking-tools-ToolbarRunForwardAction.instance"/>                
+            <file name="org-opensim-tracking-tools-ToolbarStopForwardAction.instance"/>                
                                 
         </folder>
         <folder name="Tools">
@@ -59,5 +62,16 @@
         </folder>
         </folder>
     <folder name="Services">
+    </folder>
+    <folder name="Shortcuts">
+        <file name="O-R.shadow"> 
+        <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-tracking-tools-ToolbarRunForwardAction.instance"/> 
+        </file> 
+    </folder>
+    <folder name="Toolbars">
+        <folder name="Edit">
+            <file name="org-opensim-tracking-tools-ToolbarRunForwardAction.instance"/>
+            <file name="org-opensim-tracking-tools-ToolbarStopForwardAction.instance"/>
+        </folder>
     </folder>
 </filesystem>

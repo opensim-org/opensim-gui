@@ -489,6 +489,7 @@ final class CoordinateViewerTopComponent extends TopComponent implements Observe
       
       JLabel coordinateValueLabel = new JLabel("Coordinate Value");
       JLabel speedLabel = new JLabel("Speed         ");
+      speedLabel.setToolTipText("Speed m/s, deg/s");
       JPanel labelPanel = new JPanel(new BorderLayout());
       labelPanel.add(coordinateValueLabel, BorderLayout.WEST);
       labelPanel.add(speedLabel, BorderLayout.EAST);

@@ -4,7 +4,10 @@
     <folder name="Actions">
         <folder name="Edit">
            <file name="org-opensim-console-RunCurrentAction.instance_hidden"/>
-            <file name="org-opensim-console-ToolsOpenScriptAction.instance"/>
+            <file name="org-opensim-console-ScriptsSaveAsAction.instance_hidden"/>
+            <file name="org-opensim-console-ToolsOpenScriptAction.instance">
+                <attr name="name" stringvalue="org-opensim-console-ScriptsSaveAction"/>
+            </file>
            <file name="org-opensim-console-ToolsRunCurrentScriptAction.instance">
                 <attr name="delegate" methodvalue="org.openide.awt.Actions.inject"/>
                 <attr name="injectable" stringvalue="org.opensim.console.ToolsRunCurrentScriptAction"/>
@@ -15,12 +18,25 @@
             </file>
             <file name="org-opensim-console-ToolsRunScriptAction.instance"/>
             <file name="org-opensim-console-ScriptsRunBrowseAction.instance"/>
+            <file name="org-opensim-console-ScriptsSaveAction.instance"/>
          </folder>
     </folder>
     <folder name="Menu">
         <folder name="Scripts">
            <attr name="position" intvalue="250"/>
-           <file name="org-opensim-console-MRUScriptsAction.shadow">
+           <file name="org-opensim-console-MRUScriptsAction-separatorBefore.instance">
+                <attr name="instanceCreate" newvalue="javax.swing.JSeparator"/>
+                <attr name="position" intvalue="1625"/>
+            </file>
+            <file name="org-opensim-console-MRUScriptsAction-separatorBefore_1.instance">
+                <attr name="instanceCreate" newvalue="javax.swing.JSeparator"/>
+                <attr name="position" intvalue="2012"/>
+            </file>
+            <file name="org-opensim-console-MRUScriptsAction-separatorBefore_1_1.instance">
+                <attr name="instanceCreate" newvalue="javax.swing.JSeparator"/>
+                <attr name="position" intvalue="1687"/>
+            </file>
+            <file name="org-opensim-console-MRUScriptsAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-console-MRUScriptsAction.instance"/>
                 <attr name="position" intvalue="1500"/>
             </file>
@@ -29,6 +45,10 @@
             </file>
             <file name="org-opensim-console-ScriptsRunMRUScriptsAction.instance">
                 <attr name="position" intvalue="1925"/>
+            </file>
+            <file name="org-opensim-console-ScriptsSaveAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-console-ScriptsSaveAction.instance"/>
+                <attr name="position" intvalue="1656"/>
             </file>
             <file name="org-opensim-console-ToolsRunCurrentScriptAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-console-ToolsRunCurrentScriptAction.instance"/>
@@ -56,6 +76,9 @@
         <folder name="Shortcuts">
         <file name="F5.shadow">  
         <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-console-ToolsRunCurrentScriptAction.instance"/> 
+        </file>
+        <file name="C-s.shadow">  
+        <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-console-ScriptsSaveAction.instance"/> 
         </file>
     </folder>
 </filesystem>

@@ -35,9 +35,9 @@ import org.openide.util.Cancellable;
 import org.opensim.modeling.*;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.swingui.SwingWorker;
+import org.opensim.tracking.tools.SimulationDB;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
-import org.opensim.view.ModelPose;
 import org.opensim.view.motions.JavaMotionDisplayerCallback;
 import org.opensim.view.pub.OpenSimDB;
 
@@ -97,7 +97,8 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
          progressHandle = ProgressHandleFactory.createHandle("Executing forward integration...",
                               new Cancellable() {
                                  public boolean cancel() {
-                                    interrupt(false);
+                                    interrupt(true);
+                                    SimulationDB.getInstance().stopSimulation();
                                     return true;
                                  }
                               });
@@ -117,12 +118,15 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
          interruptingCallback = new InterruptCallback(getModel());
          getModel().addAnalysis(interruptingCallback);
          addResultDisplayers(getModel());   // Create all analyses that need to be created on analysis model
+         // Put Stoppable in lookup to disable run and enable stop
          setExecuting(true);
       }
 
+      
       public void interrupt(boolean promptToKeepPartialResult) {
          this.promptToKeepPartialResult = promptToKeepPartialResult;
          if(interruptingCallback!=null) interruptingCallback.interrupt();
+         // Remove Stoppable from lookup to Enable run and disable stop
       }
 
       public Object construct() {
@@ -174,7 +178,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
          if(result) resetModified();
 
          setExecuting(false);
-
+         SimulationDB.getInstance().finishSimulation();
          worker = null;
       }
         private void addResultDisplayers(Model model) {
@@ -373,6 +377,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
       if(isModified() && worker==null) {
          try {
             worker = new ForwardToolWorker();
+            SimulationDB.getInstance().startSimulation(this);
          } catch (IOException ex) {
             setExecuting(false);
             return;
