@@ -33,6 +33,7 @@ import org.openide.util.Exceptions;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
+import org.opensim.modeling.ForwardTool;
 import org.opensim.modeling.Model;
 import org.opensim.tracking.ForwardToolModel;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
@@ -55,6 +56,7 @@ public final class ToolbarRunForwardAction extends CallableSystemAction implemen
                 toolModel = new ForwardToolModel(currentModel);
                 toolModel.setFinalTime(1000.0);
                 toolModel.setSolveForEquilibrium(true);
+                ((ForwardTool) toolModel.getTool()).setPrintResultFiles(false);
                 toolModel.execute();
                 
                 // Change 
