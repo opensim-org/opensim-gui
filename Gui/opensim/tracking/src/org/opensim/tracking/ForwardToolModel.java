@@ -144,7 +144,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
          System.out.println("Finished running forward tool.");
          boolean processResults = result;
          if(!result && promptToKeepPartialResult) {
-            Object answer = DialogDisplayer.getDefault().notify(new NotifyDescriptor.Confirmation("Forward integration did not complete.  Keep partial result?",NotifyDescriptor.YES_NO_OPTION));
+            Object answer = DialogDisplayer.getDefault().notify(new NotifyDescriptor.Confirmation("Do you want to keep your forward simulation results?",NotifyDescriptor.YES_NO_OPTION));
             if(answer==NotifyDescriptor.YES_OPTION) processResults = true;
          }
          //animationCallback.getStateStorage().print("AccumulatedState.sto");
