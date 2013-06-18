@@ -11,6 +11,7 @@
             <file name="org-opensim-tracking-tools-StaticOptimizationAction.instance"/>
             <file name="org-opensim-tracking-tools-ToolbarStopAction.instance_hidden"/>
             <file name="org-opensim-tracking-tools-ToolsScaleAction.instance"/>                
+            <file name="org-opensim-tracking-tools-ToolbarSimulationAction.instance"/>                
             <file name="org-opensim-tracking-tools-ToolbarRunForwardAction.instance"/>                
             <file name="org-opensim-tracking-tools-ToolbarStopForwardAction.instance"/>                
                                 
@@ -70,8 +71,9 @@
     </folder>
     <folder name="Toolbars">
         <folder name="Edit">
-            <file name="org-opensim-tracking-tools-ToolbarRunForwardAction.instance"/>
-            <file name="org-opensim-tracking-tools-ToolbarStopForwardAction.instance"/>
+            <file name="org-opensim-tracking-tools-ToolbarSimulationAction.instance">
+                <attr name="position" intvalue="300"/>
+            </file>
         </folder>
     </folder>
 </filesystem>
