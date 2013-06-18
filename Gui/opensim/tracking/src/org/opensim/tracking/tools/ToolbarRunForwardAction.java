@@ -42,6 +42,7 @@ import org.opensim.view.pub.OpenSimDB;
 public final class ToolbarRunForwardAction extends CallableSystemAction implements Observer {
    
     private boolean enabled = true;
+    private double finalTime = 1000.0;
     
     public ToolbarRunForwardAction() {
         SimulationDB.getInstance().addObserver(this);
@@ -54,7 +55,7 @@ public final class ToolbarRunForwardAction extends CallableSystemAction implemen
                     return;
                 // TODO implement action body
                 toolModel = new ForwardToolModel(currentModel);
-                toolModel.setFinalTime(1000.0);
+                toolModel.setFinalTime(getFinalTime());
                 toolModel.setSolveForEquilibrium(true);
                 ((ForwardTool) toolModel.getTool()).setPrintResultFiles(false);
                 toolModel.execute();
@@ -100,5 +101,19 @@ public final class ToolbarRunForwardAction extends CallableSystemAction implemen
                 setEnabled(enabled);
             }
         }
+    }
+
+    /**
+     * @return the finalTime
+     */
+    public double getFinalTime() {
+        return finalTime;
+    }
+
+    /**
+     * @param finalTime the finalTime to set
+     */
+    public void setFinalTime(double finalTime) {
+        this.finalTime = finalTime;
     }
 }

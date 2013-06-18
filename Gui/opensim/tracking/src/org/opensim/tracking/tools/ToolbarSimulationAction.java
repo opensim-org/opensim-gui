@@ -26,9 +26,17 @@
 package org.opensim.tracking.tools;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
-import javax.swing.Box;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.JToolBar;
+import org.openide.DialogDisplayer;
+import org.openide.NotifyDescriptor;
+import org.openide.awt.DropDownButtonFactory;
 import org.openide.util.Exceptions;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
@@ -63,15 +71,37 @@ public final class ToolbarSimulationAction extends CallableSystemAction {
       tb.setBorderPainted(true);
       //tb.setFloatable(true);
       tb.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Simulate"));
+      JPopupMenu popup = new JPopupMenu();
+      JMenuItem endTimeMenuitem = new JMenuItem("End time...");
+      popup.add(endTimeMenuitem);
       //tb.addSeparator(new Dimension(10,40));
         try {
-            tb.add(Box.createHorizontalStrut(10));
-            ToolbarRunForwardAction runFD = (ToolbarRunForwardAction) ToolbarRunForwardAction.findObject((Class)Class.forName("org.opensim.tracking.tools.ToolbarRunForwardAction"), true);
-            tb.add(runFD);
-            tb.add(Box.createHorizontalStrut(10));
+            ImageIcon icon = new ImageIcon(getClass().getResource("/org/opensim/tracking/tools/run.png"));
+            JButton dropdownButton = DropDownButtonFactory.createDropDownButton(icon, popup);
+            //tb.add(Box.createHorizontalStrut(10));
+            final ToolbarRunForwardAction runFD = (ToolbarRunForwardAction) ToolbarRunForwardAction.findObject((Class)Class.forName("org.opensim.tracking.tools.ToolbarRunForwardAction"), true);
+            //JButton fdButton = new JButton(runFD);
+            endTimeMenuitem.addActionListener(new ActionListener(){
+
+            public void actionPerformed(ActionEvent ae) {
+                String msg = "Current end time: ";
+                msg = msg.concat(String.valueOf(runFD.getFinalTime()));
+                msg = msg.concat(" sec., please enter new final time:");
+                NotifyDescriptor.InputLine dlg =
+                            new NotifyDescriptor.InputLine(msg, "New final time:");
+                     if(DialogDisplayer.getDefault().notify(dlg)==NotifyDescriptor.OK_OPTION){
+                        runFD.setFinalTime( Double.parseDouble(dlg.getInputText()));
+                     }
+            }
+        });
+
+      tb.add(dropdownButton);
+            dropdownButton.setAction(runFD);
+            dropdownButton.setText("Run");
+            //tb.add(Box.createHorizontalStrut(10));
             ToolbarStopForwardAction stopFD = (ToolbarStopForwardAction) ToolbarStopForwardAction.findObject((Class)Class.forName("org.opensim.tracking.tools.ToolbarStopForwardAction"), true);
             tb.add(stopFD);
-            tb.add(Box.createHorizontalStrut(10));
+            //tb.add(Box.createHorizontalStrut(10));
             //tb.add(new JLabel("simulate "+SimulationDB.getSimulationTime()+" sec."));
         } catch (ClassNotFoundException ex) {
             Exceptions.printStackTrace(ex);
