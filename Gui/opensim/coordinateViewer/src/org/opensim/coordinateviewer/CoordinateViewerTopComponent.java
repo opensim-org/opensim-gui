@@ -174,6 +174,11 @@ final class CoordinateViewerTopComponent extends TopComponent implements Observe
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, "Model:");
 
         org.openide.awt.Mnemonics.setLocalizedText(jModelNameLabel, "model name");
+        jModelNameLabel.setAutoscrolls(true);
+        jModelNameLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jModelNameLabel.setMaximumSize(new java.awt.Dimension(421, 14));
+        jModelNameLabel.setMinimumSize(new java.awt.Dimension(0, 0));
+        jModelNameLabel.setPreferredSize(new java.awt.Dimension(400, 14));
 
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -207,8 +212,8 @@ final class CoordinateViewerTopComponent extends TopComponent implements Observe
                 .addContainerGap()
                 .add(jLabel1)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jModelNameLabel)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(jModelNameLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jPosesButton)
                 .addContainerGap())
             .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
@@ -220,7 +225,7 @@ final class CoordinateViewerTopComponent extends TopComponent implements Observe
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jPosesButton)
                     .add(jLabel1)
-                    .add(jModelNameLabel))
+                    .add(jModelNameLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE))
         );
