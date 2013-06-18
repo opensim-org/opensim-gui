@@ -26,10 +26,9 @@
 package org.opensim.tracking.tools;
 
 import java.awt.Component;
-import java.awt.Dimension;
-import javax.swing.JLabel;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.JToolBar;
-import javax.swing.border.EtchedBorder;
 import org.openide.util.Exceptions;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
@@ -60,21 +59,24 @@ public final class ToolbarSimulationAction extends CallableSystemAction {
    }
 
    public Component getToolbarPresenter() {
-      JToolBar tb = new JToolBar("Simulate");
+      JToolBar tb = new JToolBar();
       tb.setBorderPainted(true);
-      tb.setFloatable(true);
-      //tb.setBorder(new EtchedBorder());
-      tb.addSeparator(new Dimension(10,40));
+      //tb.setFloatable(true);
+      tb.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Simulate"));
+      //tb.addSeparator(new Dimension(10,40));
         try {
+            tb.add(Box.createHorizontalStrut(10));
             ToolbarRunForwardAction runFD = (ToolbarRunForwardAction) ToolbarRunForwardAction.findObject((Class)Class.forName("org.opensim.tracking.tools.ToolbarRunForwardAction"), true);
             tb.add(runFD);
+            tb.add(Box.createHorizontalStrut(10));
             ToolbarStopForwardAction stopFD = (ToolbarStopForwardAction) ToolbarStopForwardAction.findObject((Class)Class.forName("org.opensim.tracking.tools.ToolbarStopForwardAction"), true);
             tb.add(stopFD);
+            tb.add(Box.createHorizontalStrut(10));
             //tb.add(new JLabel("simulate "+SimulationDB.getSimulationTime()+" sec."));
         } catch (ClassNotFoundException ex) {
             Exceptions.printStackTrace(ex);
         }
-      tb.addSeparator(new Dimension(10,40));
+      //tb.addSeparator(new Dimension(10,40));
       return tb;
    }
    
