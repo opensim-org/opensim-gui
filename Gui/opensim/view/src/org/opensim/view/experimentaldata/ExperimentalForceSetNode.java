@@ -66,7 +66,7 @@ public class ExperimentalForceSetNode extends OpenSimNode {
         setDisplayName(nodeName);
         setShortDescription(bundle.getString("HINT_ExperimentalForceSetNode"));
         this.dMotion=dMotion;
-        forcesDisplayer = dMotion.getMotionDisplayer().getGroundForcesRep();
+        //forcesDisplayer = dMotion.getMotionDisplayer().getGroundForcesRep();
         createChildren();
     }
     
