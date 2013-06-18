@@ -14,16 +14,13 @@ import org.opensim.tracking.ForwardToolModel;
 public class SimulationDB extends Observable{
     
     static SimulationDB instance;
+
+
     ForwardToolModel forwardToolModel= null;
     private boolean running = false;
     
     private SimulationDB() {
         instance = this;
-    }
-    
-    // The setChanged() protected method must overridden to make it public
-    public synchronized void setChanged() {
-        super.setChanged();
     }
     
     public static synchronized SimulationDB getInstance() {
