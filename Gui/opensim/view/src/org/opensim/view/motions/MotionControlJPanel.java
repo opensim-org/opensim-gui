@@ -258,10 +258,10 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         jPlayButton.setContentAreaFilled(false);
         jPlayButton.setFocusPainted(false);
         jPlayButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jPlayButton.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/org/opensim/view/motions/images/pause_beveled_selected.png"))); // NOI18N
-        jPlayButton.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/org/opensim/view/motions/images/pause_beveled_rollover.png"))); // NOI18N
-        jPlayButton.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/org/opensim/view/motions/images/pause_beveled_rollover_selected.png"))); // NOI18N
-        jPlayButton.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/org/opensim/view/motions/images/pause_beveled_selected.png"))); // NOI18N
+        jPlayButton.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/org/opensim/view/motions/images/play_beveled_selected.png"))); // NOI18N
+        jPlayButton.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/org/opensim/view/motions/images/play_beveled_rollover.png"))); // NOI18N
+        jPlayButton.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/org/opensim/view/motions/images/play_beveled_rollover_selected.png"))); // NOI18N
+        jPlayButton.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/org/opensim/view/motions/images/play_beveled_selected.png"))); // NOI18N
         jPlayButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPlayButtonActionPerformed(evt);
@@ -276,7 +276,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         jAdvanceButton.setContentAreaFilled(false);
         jAdvanceButton.setFocusPainted(false);
         jAdvanceButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jAdvanceButton.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/org/opensim/view/motions/images/stop_beveled_selected.png"))); // NOI18N
+        jAdvanceButton.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/org/opensim/view/motions/images/step_beveled_selected.png"))); // NOI18N
         jAdvanceButton.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/org/opensim/view/motions/images/step_beveled_rollover.png"))); // NOI18N
         jAdvanceButton.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/org/opensim/view/motions/images/step_beveled_rollover_selected.png"))); // NOI18N
         jAdvanceButton.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/org/opensim/view/motions/images/step_beveled_selected.png"))); // NOI18N

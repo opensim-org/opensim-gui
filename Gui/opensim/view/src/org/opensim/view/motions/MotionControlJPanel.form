@@ -249,16 +249,16 @@
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
             <Property name="pressedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/org/opensim/view/motions/images/pause_beveled_selected.png"/>
+              <Image iconType="3" name="/org/opensim/view/motions/images/play_beveled_selected.png"/>
             </Property>
             <Property name="rolloverIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/org/opensim/view/motions/images/pause_beveled_rollover.png"/>
+              <Image iconType="3" name="/org/opensim/view/motions/images/play_beveled_rollover.png"/>
             </Property>
             <Property name="rolloverSelectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/org/opensim/view/motions/images/pause_beveled_rollover_selected.png"/>
+              <Image iconType="3" name="/org/opensim/view/motions/images/play_beveled_rollover_selected.png"/>
             </Property>
             <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/org/opensim/view/motions/images/pause_beveled_selected.png"/>
+              <Image iconType="3" name="/org/opensim/view/motions/images/play_beveled_selected.png"/>
             </Property>
           </Properties>
           <Events>
@@ -281,7 +281,7 @@
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
             <Property name="pressedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/org/opensim/view/motions/images/stop_beveled_selected.png"/>
+              <Image iconType="3" name="/org/opensim/view/motions/images/step_beveled_selected.png"/>
             </Property>
             <Property name="rolloverIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/org/opensim/view/motions/images/step_beveled_rollover.png"/>
