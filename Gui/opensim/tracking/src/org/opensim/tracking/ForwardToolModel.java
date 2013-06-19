@@ -111,6 +111,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
          animationCallback.setMinRenderTimeInterval(0.1); // to avoid rendering really frequently which can slow down our execution
          animationCallback.setRenderMuscleActivations(true);
          animationCallback.startProgressUsingTime(ti,tf);
+         animationCallback.setDisplayTimeProgress(true);
 
          // Do this manouver (there's gotta be a nicer way) to create the object so that C++ owns it and not Java (since 
          // removeIntegCallback in finished() will cause the C++-side callback to be deleted, and if Java owned this object
@@ -144,7 +145,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
          System.out.println("Finished running forward tool.");
          boolean processResults = result;
          if(!result && promptToKeepPartialResult) {
-            Object answer = DialogDisplayer.getDefault().notify(new NotifyDescriptor.Confirmation("Do you want to keep your forward simulation results?",NotifyDescriptor.YES_NO_OPTION));
+            Object answer = NotifyDescriptor.YES_OPTION;//DialogDisplayer.getDefault().notify(new NotifyDescriptor.Confirmation("Do you want to keep your forward simulation results?",NotifyDescriptor.YES_NO_OPTION));
             if(answer==NotifyDescriptor.YES_OPTION) processResults = true;
          }
          //animationCallback.getStateStorage().print("AccumulatedState.sto");

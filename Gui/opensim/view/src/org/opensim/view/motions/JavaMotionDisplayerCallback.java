@@ -31,10 +31,10 @@
 package org.opensim.view.motions;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.TimerTask;
 import java.util.prefs.Preferences;
 import javax.swing.SwingUtilities;
 import org.netbeans.api.progress.ProgressHandle;
+import org.openide.awt.StatusDisplayer;
 import org.opensim.modeling.*;
 import org.opensim.utils.TheApp;
 import org.opensim.view.SingleModelVisuals;
@@ -72,6 +72,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    int numStates=0;
    ArrayStr stateLabels=null;
    private double[] statesBuffer;
+   private boolean displayTimeProgress=false;
    //private int stepNumber=0;
    
    // Creates a new instance of JavaMotionDisplayerCallback 
@@ -177,7 +178,10 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
           else {
          int progressStep = (int)((getSimulationTime()-startTime)*progressTimeResolution);
          if(progressStep > lastProgressStep) { // make sure we only advance progress (else an exception is thrown)
+            String msg = "Simulation time="+String.valueOf(getSimulationTime());
+            if (displayTimeProgress) progressHandle.setDisplayName(msg);
             progressHandle.progress(progressStep);
+            //StatusDisplayer.getDefault().setStatusText(msg);
             lastProgressStep = progressStep;
          }
       }
@@ -263,5 +267,12 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
 
     public Storage getStorage() {
         return storage;
+    }
+
+    /**
+     * @param displayTimeProgress the displayTimeProgress to set
+     */
+    public void setDisplayTimeProgress(boolean displayTimeProgress) {
+        this.displayTimeProgress = displayTimeProgress;
     }
 }
