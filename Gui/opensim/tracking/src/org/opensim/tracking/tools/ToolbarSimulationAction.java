@@ -26,6 +26,7 @@
 package org.opensim.tracking.tools;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
@@ -34,6 +35,7 @@ import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JToolBar;
+import javax.swing.border.TitledBorder;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.openide.awt.DropDownButtonFactory;
@@ -68,9 +70,10 @@ public final class ToolbarSimulationAction extends CallableSystemAction {
 
    public Component getToolbarPresenter() {
       JToolBar tb = new JToolBar();
-      tb.setBorderPainted(true);
+      tb.setPreferredSize(new Dimension(80, 71));
+      tb.setMaximumSize(new Dimension(80, 71));
       //tb.setFloatable(true);
-      tb.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Simulate"));
+      tb.setBorder(BorderFactory.createTitledBorder(null, "Simulate", TitledBorder.CENTER, TitledBorder.TOP));
       JPopupMenu popup = new JPopupMenu();
       JMenuItem endTimeMenuitem = new JMenuItem("End time...");
       popup.add(endTimeMenuitem);
