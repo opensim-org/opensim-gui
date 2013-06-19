@@ -178,8 +178,10 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
           else {
          int progressStep = (int)((getSimulationTime()-startTime)*progressTimeResolution);
          if(progressStep > lastProgressStep) { // make sure we only advance progress (else an exception is thrown)
-            String msg = "Simulation time="+String.valueOf(getSimulationTime());
-            if (displayTimeProgress) progressHandle.setDisplayName(msg);
+            String msg = String.format("Forward Simulation, t=%.4f", getSimulationTime());
+            if (displayTimeProgress) {
+                progressHandle.setDisplayName(msg);
+            }
             progressHandle.progress(progressStep);
             //StatusDisplayer.getDefault().setStatusText(msg);
             lastProgressStep = progressStep;

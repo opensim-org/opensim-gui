@@ -94,7 +94,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
          // Initialize progress bar, given we know the number of frames to process
          double ti = getInitialTime();
          double tf = getFinalTime();
-         progressHandle = ProgressHandleFactory.createHandle("Executing forward integration...",
+         progressHandle = ProgressHandleFactory.createHandle("Forward integration...",
                               new Cancellable() {
                                  public boolean cancel() {
                                     interrupt(true);
@@ -127,7 +127,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
       public void interrupt(boolean promptToKeepPartialResult) {
          this.promptToKeepPartialResult = promptToKeepPartialResult;
          if(interruptingCallback!=null) interruptingCallback.interrupt();
-         // Remove Stoppable from lookup to Enable run and disable stop
+         
       }
 
       public Object construct() {
