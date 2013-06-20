@@ -28,6 +28,8 @@
  */
 package org.opensim.view.motions;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -35,12 +37,12 @@ import java.util.Hashtable;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Vector;
-import javax.swing.SwingUtilities;
+import javax.swing.JButton;
+import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.openide.awt.StatusDisplayer;
 import org.openide.nodes.Node;
-import org.opensim.modeling.AnalyzeTool;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
@@ -50,6 +52,7 @@ import org.opensim.utils.FileUtils;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.ModelEvent;
 import org.opensim.view.ObjectsRenamedEvent;
+import org.opensim.view.actions.ConfirmSaveDiscardJPanel;
 import org.opensim.view.experimentaldata.AnnotatedMotion;
 import org.opensim.view.nodes.ConcreteModelNode;
 import org.opensim.view.pub.*;
@@ -60,6 +63,13 @@ import org.opensim.view.pub.*;
  */
 public class MotionsDB extends Observable // Observed by other entities in motionviewer
         implements Observer {
+
+    public enum CloseMotionDefaultAction {
+        SAVE,
+        DISCARD,
+        PROMPT
+    }
+    static private CloseMotionDefaultAction currentCloseMotionDefaultAction = CloseMotionDefaultAction.PROMPT;
 
     void addMotionDisplayer(Storage simmMotionData, MotionDisplayer displayer) {
         mapMotions2Displayers.put(simmMotionData, displayer);
@@ -334,13 +344,7 @@ public class MotionsDB extends Observable // Observed by other entities in motio
          if (evnt.getOperation()==ModelEvent.Operation.Close){
 
             Model model = evnt.getModel();
-            // Send motion close events for all motions associated with this model
-            ArrayList<Storage> motionsForModel = mapModels2Motions.get(evnt.getModel());
-            if(motionsForModel != null) {
-               for(int i=motionsForModel.size()-1; i>=0; i--){
-                  closeMotion(model, motionsForModel.get(i), false);
-               }
-            }
+            closeMotionsForModel(model);
          }
          else if (evnt.getOperation()==ModelEvent.Operation.SetCurrent){
               if (evnt.getModel() instanceof ModelForExperimentalData){
@@ -541,5 +545,52 @@ public class MotionsDB extends Observable // Observed by other entities in motio
             }
             return null;
      }
+       
+    public void closeMotionsForModel(Model model) {
+        // Send motion close events for all motions associated with this model
+        ArrayList<Storage> motionsForModel = mapModels2Motions.get(model);
+        if(motionsForModel != null) {
+           int numMotions = motionsForModel.size();
+           if (numMotions>1){
+            currentCloseMotionDefaultAction = CloseMotionDefaultAction.SAVE;
+            final ConfirmSaveDiscardJPanel confirmPanel = new ConfirmSaveDiscardJPanel(numMotions>1);
+            confirmPanel.setConformationText("Do you want to save results for "+model.getName());
+            JButton saveButton = new JButton("Save");
+            DialogDescriptor confirmDialog = 
+                    new DialogDescriptor(confirmPanel, 
+                        "Confirm Save",
+                        true,
+                        new Object[]{saveButton, new JButton("Discard")},
+                        saveButton,
+                        0, null, new ActionListener(){
 
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String cmd = e.getActionCommand();
+                        boolean remember = confirmPanel.rememberUserChoice();
+                        if (remember) {
+                            if (cmd.equalsIgnoreCase("Save")) {
+                                currentCloseMotionDefaultAction = CloseMotionDefaultAction.SAVE;
+                                //FileSaveModelAction.saveOrSaveAsModel(model, false);
+                            } else if (cmd.equalsIgnoreCase("Discard")) {
+                                currentCloseMotionDefaultAction = CloseMotionDefaultAction.DISCARD;                       
+                            }
+                        }
+                    }
+                });
+                confirmDialog.setClosingOptions(null);
+                DialogDisplayer.getDefault().createDialog(confirmDialog).setVisible(true);
+                Object dlgReturn = confirmDialog.getValue();
+                int x=0;
+                for(int i=numMotions-1; i>=0; i--){
+                    closeMotion(model, motionsForModel.get(i), currentCloseMotionDefaultAction == CloseMotionDefaultAction.SAVE, false);
+                }
+                currentCloseMotionDefaultAction = CloseMotionDefaultAction.SAVE;
+            }
+           else if (numMotions==1)
+               closeMotion(model, motionsForModel.get(0), false);
+           /*
+           */
+        }
+    }
 }
