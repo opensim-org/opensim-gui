@@ -73,8 +73,8 @@ public final class ToolbarSimulationAction extends CallableSystemAction {
    public Component getToolbarPresenter() {
       JPanel tb = new JPanel();
       tb.setLayout(new FlowLayout());
-      tb.setPreferredSize(new Dimension(250, 50));
-      tb.setMaximumSize(new Dimension(250, 50));
+      tb.setPreferredSize(new Dimension(230, 50));
+      tb.setMaximumSize(new Dimension(230, 50));
       //tb.setFloatable(true);
       //tb.setBorder(BorderFactory.createTitledBorder(null, "Simulate", TitledBorder.CENTER, TitledBorder.TOP));
       tb.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -83,12 +83,13 @@ public final class ToolbarSimulationAction extends CallableSystemAction {
       popup.add(endTimeMenuitem);
       //tb.addSeparator(new Dimension(10,40));
         try {
-            JLabel jLabel1 = new JLabel("Simulate ");
+            JLabel jLabel1 = new JLabel("Simulate");
             jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
             tb.add(jLabel1);
             ImageIcon icon = new ImageIcon(getClass().getResource("/org/opensim/tracking/tools/run.png"));
             JButton dropdownButton = DropDownButtonFactory.createDropDownButton(icon, popup);
-            tb.add(Box.createHorizontalStrut(10));
+            dropdownButton.setPreferredSize(new Dimension(60,32));
+            tb.add(Box.createHorizontalStrut(2));
             final ToolbarRunForwardAction runFD = (ToolbarRunForwardAction) ToolbarRunForwardAction.findObject((Class)Class.forName("org.opensim.tracking.tools.ToolbarRunForwardAction"), true);
             //JButton fdButton = new JButton(runFD);
             endTimeMenuitem.addActionListener(new ActionListener(){
@@ -108,10 +109,12 @@ public final class ToolbarSimulationAction extends CallableSystemAction {
       tb.add(dropdownButton);
             dropdownButton.setAction(runFD);
             dropdownButton.setText("Run");
-            tb.add(Box.createHorizontalStrut(10));
+            tb.add(Box.createHorizontalStrut(5));
             ToolbarStopForwardAction stopFD = (ToolbarStopForwardAction) ToolbarStopForwardAction.findObject((Class)Class.forName("org.opensim.tracking.tools.ToolbarStopForwardAction"), true);
-            tb.add(new JButton(stopFD));
-            tb.add(Box.createHorizontalStrut(10));
+            JButton stopBtn = new JButton(stopFD);
+            stopBtn.setPreferredSize(new Dimension(60,32));
+            tb.add(stopBtn);
+            tb.add(Box.createHorizontalStrut(3));
             //tb.add(new JLabel("simulate "+SimulationDB.getSimulationTime()+" sec."));
         } catch (ClassNotFoundException ex) {
             Exceptions.printStackTrace(ex);

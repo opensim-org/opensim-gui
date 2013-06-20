@@ -18,7 +18,7 @@
       <Dimension value="[0, 50]"/>
     </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[600, 50]"/>
+      <Dimension value="[630, 50]"/>
     </Property>
   </Properties>
   <AuxValues>
@@ -39,7 +39,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jMotionNameLabel" min="-2" pref="84" max="-2" attributes="0"/>
+              <Component id="jMotionNameLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabelForSpeedSpinner" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -55,11 +55,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jStartTimeTextField" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jPlaybackButtonsPanel" pref="181" max="32767" attributes="1"/>
+                      <Component id="jPlaybackButtonsPanel" max="32767" attributes="1"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jEndTimeTextField" min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jMotionSlider" alignment="0" pref="293" max="32767" attributes="3"/>
+                  <Component id="jMotionSlider" alignment="0" pref="280" max="32767" attributes="3"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jWrapToggleButton" min="-2" max="-2" attributes="0"/>
@@ -550,6 +550,15 @@
           <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
             <EtchetBorder/>
           </Border>
+        </Property>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[130, 18]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[130, 18]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[130, 18]"/>
         </Property>
       </Properties>
     </Component>
