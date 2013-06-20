@@ -44,7 +44,7 @@ public final class ToolbarStopForwardAction extends CallableSystemAction impleme
    }
    
    public String getName() {
-      return NbBundle.getMessage(ToolbarStopForwardAction.class, "CTL_ToolbarStopAction");
+      return "";//NbBundle.getMessage(ToolbarStopForwardAction.class, "CTL_ToolbarStopAction");
    }
    
    protected void initialize() {
