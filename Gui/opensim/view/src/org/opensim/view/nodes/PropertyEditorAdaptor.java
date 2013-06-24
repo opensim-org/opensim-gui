@@ -338,55 +338,17 @@ public class PropertyEditorAdaptor {
         }
         handlePropertyChangeTransform(oldArray, d, allowUndo);
     }
-
-    private void cacheModelAndState() {
-
-        clonedModel = (Model)model.clone();
-        clonedState = context.getCurrentStateCopy();
-        
-    }
-    
-    private void restoreStateFromCachedModel() {
-
-        try {
-            model.initSystem();
-            clonedModel.initSystem();
-
-        } catch (Exception e) {
-            // Any issues in initSystem gets thrown
-            IllegalArgumentException iae = new IllegalArgumentException(e.getMessage());
-            throw iae;
-        }
-        // Find all the state variables
-        ArrayStr modelVariableNames = model.getStateVariableNames();
-        ArrayStr clonedModelVariableNames = clonedModel.getStateVariableNames();
-
-        for(int i = 0; i < modelVariableNames.getSize(); i++) {
-
-            // Going through the state variables in the model
-            String name = modelVariableNames.getitem(i);
-
-            // If finds it in the clonedState, copies value over
-            if(clonedModelVariableNames.findIndex(name) >=0 ) {
-                double value = clonedModel.getStateVariable(clonedState, name);
-                model.setStateVariable(model.getWorkingState(), name, value); 
-            }
-        }
-
-        context.setState(model.getWorkingState());
-        context.realizePosition();
-    }
     
     private void handlePropertyChange(final double oldValue, final double v, boolean supportUndo) {
         
-        cacheModelAndState();
+        context.cacheModelAndState();
         PropertyHelper.setValueDouble(v, prop);        
         try {
-            restoreStateFromCachedModel();
+            context.restoreStateFromCachedModel();
         } catch (IllegalArgumentException iae) {
             ErrorManager.getDefault().annotate(iae, ErrorManager.ERROR, null, iae.getMessage(), null, null);
             PropertyHelper.setValueDouble(oldValue, prop);
-            restoreStateFromCachedModel();  
+            context.restoreStateFromCachedModel();  
             throw iae;
         }
         handlePropertyChangeCommon();
@@ -420,14 +382,14 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChange(final String oldValue, final String v, boolean supportUndo) {
-        cacheModelAndState();
+        context.cacheModelAndState();
         PropertyHelper.setValueString(v, prop);        
         try {
-            restoreStateFromCachedModel();
+            context.restoreStateFromCachedModel();
         } catch (IllegalArgumentException iae) {
             ErrorManager.getDefault().annotate(iae, ErrorManager.ERROR, null, iae.getMessage(), null, null);
             PropertyHelper.setValueString(oldValue, prop);
-            restoreStateFromCachedModel();  
+            context.restoreStateFromCachedModel();  
             throw iae;
         }
         handlePropertyChangeCommon();
@@ -461,14 +423,14 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChange(final boolean oldValue, final boolean v, boolean supportUndo) {
-        cacheModelAndState();
+        context.cacheModelAndState();
         PropertyHelper.setValueBool(v, prop);        
         try {
-            restoreStateFromCachedModel();
+            context.restoreStateFromCachedModel();
         } catch (IllegalArgumentException iae) {
             ErrorManager.getDefault().annotate(iae, ErrorManager.ERROR, null, iae.getMessage(), null, null);
             PropertyHelper.setValueBool(oldValue, prop);
-            restoreStateFromCachedModel();  
+            context.restoreStateFromCachedModel();  
             throw iae;
         }
         handlePropertyChangeCommon();
@@ -502,14 +464,14 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChange(final int oldValue, final int v, boolean supportUndo) {
-        cacheModelAndState();
+        context.cacheModelAndState();
         PropertyHelper.setValueInt(v, prop);
         try {
-            restoreStateFromCachedModel();
+            context.restoreStateFromCachedModel();
         } catch (IllegalArgumentException iae) {
             ErrorManager.getDefault().annotate(iae, ErrorManager.ERROR, null, iae.getMessage(), null, null);
             PropertyHelper.setValueInt(oldValue, prop);
-            restoreStateFromCachedModel();  
+            context.restoreStateFromCachedModel();  
             throw iae;
         }
         handlePropertyChangeCommon();
@@ -543,19 +505,19 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChange(final ArrayDouble oldValue, final ArrayDouble v, boolean supportUndo) {
-        cacheModelAndState();
+        context.cacheModelAndState();
         int sz = v.size();
         for (int i = 0; i < sz; i++) {
             PropertyHelper.setValueDouble(v.getitem(i), prop, i);
         }
         try {
-            restoreStateFromCachedModel();
+            context.restoreStateFromCachedModel();
         } catch (IllegalArgumentException iae) {
             ErrorManager.getDefault().annotate(iae, ErrorManager.ERROR, null, iae.getMessage(), null, null);
             for (int i = 0; i < sz; i++) {
                 PropertyHelper.setValueDouble(oldValue.getitem(i), prop, i);
             }
-            restoreStateFromCachedModel();  
+            context.restoreStateFromCachedModel();  
             throw iae;
         }
         handlePropertyChangeCommon();
@@ -589,19 +551,19 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChange(final Vec3 oldValue, final Vec3 v, boolean supportUndo) {
-        cacheModelAndState();
+        context.cacheModelAndState();
         for (int i = 0; i < 3; i++) {
             PropertyHelper.setValueVec3(v.get()[i], prop , i);
         }
 
         try {
-            restoreStateFromCachedModel();
+            context.restoreStateFromCachedModel();
         } catch (IllegalArgumentException iae) {
             ErrorManager.getDefault().annotate(iae, ErrorManager.ERROR, null, iae.getMessage(), null, null);
             for (int i = 0; i < 3; i++) {
                 PropertyHelper.setValueVec3(oldValue.get()[i], prop , i);
             }
-            restoreStateFromCachedModel();  
+            context.restoreStateFromCachedModel();  
             throw iae;
         }
         
@@ -638,7 +600,7 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChangeTransform(final ArrayDouble oldValue, final ArrayDouble v, boolean supportUndo) {
-        cacheModelAndState();
+        context.cacheModelAndState();
         int sz = prop.size();
 
         for (int i = 0; i < sz; i++) {
@@ -646,13 +608,13 @@ public class PropertyEditorAdaptor {
         }
 
         try {
-            restoreStateFromCachedModel();
+            context.restoreStateFromCachedModel();
         } catch (IllegalArgumentException iae) {
             ErrorManager.getDefault().annotate(iae, ErrorManager.ERROR, null, iae.getMessage(), null, null);
             for (int i = 0; i < sz; i++) {
                 PropertyHelper.setValueTransform(oldValue.getitem(i), prop, i);
             }
-            restoreStateFromCachedModel();  
+            context.restoreStateFromCachedModel();  
             throw iae;
         }        
         handlePropertyChangeCommon();
@@ -732,14 +694,14 @@ public class PropertyEditorAdaptor {
         handlePropertyChange(oldArray, newArray, allowUndo);    
     }
     private void handlePropertyChange(final ArrayStr oldValue, final ArrayStr newValue, boolean supportUndo) {
-        cacheModelAndState();    
+        context.cacheModelAndState();    
         PropertyHelper.setValueStringArray(prop, newValue);
         try {
-            restoreStateFromCachedModel();
+            context.restoreStateFromCachedModel();
         } catch (IllegalArgumentException iae) {
             ErrorManager.getDefault().annotate(iae, ErrorManager.ERROR, null, iae.getMessage(), null, null);
             PropertyHelper.setValueStringArray(prop, oldValue);
-            restoreStateFromCachedModel();  
+            context.restoreStateFromCachedModel();  
             throw iae;
         }
         handlePropertyChangeCommon();
@@ -777,8 +739,8 @@ public class PropertyEditorAdaptor {
      */
     public void handleModelChange()
     {
-        cacheModelAndState();
-        restoreStateFromCachedModel();
+        context.cacheModelAndState();
+        context.restoreStateFromCachedModel();
     }
             
 }
