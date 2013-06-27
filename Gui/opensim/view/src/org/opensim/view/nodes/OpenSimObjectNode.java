@@ -353,10 +353,11 @@ public class OpenSimObjectNode extends OpenSimNode {
 
         for (int p = 0; p < obj.getNumProperties(); ++p) {
             try {
-                AbstractProperty ap = obj.getPropertyByIndex(p);              
-                if (!ap.isListProperty() && !ap.isOptionalProperty()) {
+                AbstractProperty ap = obj.getPropertyByIndex(p);
+                //System.out.println("type=" + ap.getTypeName() + " name=" + ap.getName());
+                if (!ap.isListProperty()) {
                     if (ap.isObjectProperty() && ap.size() == 1) {
-                        OpenSimObject objectFromProperty = ap.getValueAsObject();
+                        OpenSimObject objectFromProperty = ap.isOptionalProperty()?ap.getValueAsObject(0): ap.getValueAsObject();
                         OpenSimBaseObjectProperty customProp=null;
                         if (GeometryPath.safeDownCast(objectFromProperty)!= null){
                             customProp  = new OpenSimGeometryPathProperty(ap, this);
@@ -370,11 +371,22 @@ public class OpenSimObjectNode extends OpenSimNode {
                         if (customProp!=null)
                             set.put(customProp);
                     } else {
-                        Reflection nextNodeProp = createNodePropForOpenSimNoListProperty(obj, p, theModel);
-                        if (nextNodeProp != null) {
-                            nextNodeProp.setName(ap.getName());
-                            nextNodeProp.setShortDescription(ap.getComment());
-                            set.put(nextNodeProp);
+                        // This could be optional if so treat as  a list, else noList
+                        if (ap.isOptionalProperty()){
+                            Reflection nextNodeProp = createNodePropForOpenSimListProperty(obj, p, theModel);
+                            if (nextNodeProp != null) {
+                                nextNodeProp.setName(ap.getName());
+                                nextNodeProp.setShortDescription(ap.getComment());
+                                set.put(nextNodeProp);
+                            }
+                        }
+                        else {
+                            Reflection nextNodeProp = createNodePropForOpenSimNoListProperty(obj, p, theModel);
+                            if (nextNodeProp != null) {
+                                nextNodeProp.setName(ap.getName());
+                                nextNodeProp.setShortDescription(ap.getComment());
+                                set.put(nextNodeProp);
+                            }
                         }
 
                     }
