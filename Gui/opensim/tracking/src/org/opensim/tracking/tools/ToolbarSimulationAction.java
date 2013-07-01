@@ -30,7 +30,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -38,6 +37,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.openide.awt.DropDownButtonFactory;
@@ -95,14 +95,14 @@ public final class ToolbarSimulationAction extends CallableSystemAction {
             endTimeMenuitem.addActionListener(new ActionListener(){
 
             public void actionPerformed(ActionEvent ae) {
-                String msg = "Current end time: ";
-                msg = msg.concat(String.valueOf(runFD.getFinalTime()));
-                msg = msg.concat(" sec., please enter new final time:");
-                NotifyDescriptor.InputLine dlg =
-                            new NotifyDescriptor.InputLine(msg, "New final time:");
-                     if(DialogDisplayer.getDefault().notify(dlg)==NotifyDescriptor.OK_OPTION){
-                        runFD.setFinalTime( Double.parseDouble(dlg.getInputText()));
-                     }
+                SpecifyFinalTimeJPanel endTimePanel = new SpecifyFinalTimeJPanel(runFD.getFinalTime());
+                DialogDescriptor dlg = new DialogDescriptor(endTimePanel,"Specify end time");
+                dlg.setModal(true);
+                DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
+                Object userInput = dlg.getValue();
+                if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+                    runFD.setFinalTime( endTimePanel.getEndtime());
+                }
             }
         });
 
