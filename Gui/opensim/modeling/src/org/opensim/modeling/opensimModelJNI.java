@@ -9635,19 +9635,6 @@ public class opensimModelJNI {
   public final static native String Millard2012EquilibriumMuscle_getClassName();
   public final static native long Millard2012EquilibriumMuscle_clone(long jarg1, Millard2012EquilibriumMuscle jarg1_);
   public final static native String Millard2012EquilibriumMuscle_getConcreteClassName(long jarg1, Millard2012EquilibriumMuscle jarg1_);
-  public final static native void Millard2012EquilibriumMuscle_PropertyIndex_use_fiber_damping_set(long jarg1, Millard2012EquilibriumMuscle jarg1_, long jarg2);
-  public final static native long Millard2012EquilibriumMuscle_PropertyIndex_use_fiber_damping_get(long jarg1, Millard2012EquilibriumMuscle jarg1_);
-  public final static native void Millard2012EquilibriumMuscle_copyProperty_use_fiber_damping(long jarg1, Millard2012EquilibriumMuscle jarg1_, long jarg2, Millard2012EquilibriumMuscle jarg2_);
-  public final static native long Millard2012EquilibriumMuscle_getProperty_use_fiber_damping(long jarg1, Millard2012EquilibriumMuscle jarg1_);
-  public final static native long Millard2012EquilibriumMuscle_updProperty_use_fiber_damping(long jarg1, Millard2012EquilibriumMuscle jarg1_);
-  public final static native boolean Millard2012EquilibriumMuscle_get_use_fiber_damping__SWIG_0(long jarg1, Millard2012EquilibriumMuscle jarg1_, int jarg2);
-  public final static native long Millard2012EquilibriumMuscle_upd_use_fiber_damping__SWIG_0(long jarg1, Millard2012EquilibriumMuscle jarg1_, int jarg2);
-  public final static native void Millard2012EquilibriumMuscle_set_use_fiber_damping__SWIG_0(long jarg1, Millard2012EquilibriumMuscle jarg1_, int jarg2, boolean jarg3);
-  public final static native int Millard2012EquilibriumMuscle_append_use_fiber_damping(long jarg1, Millard2012EquilibriumMuscle jarg1_, boolean jarg2);
-  public final static native void Millard2012EquilibriumMuscle_constructProperty_use_fiber_damping(long jarg1, Millard2012EquilibriumMuscle jarg1_, boolean jarg2);
-  public final static native boolean Millard2012EquilibriumMuscle_get_use_fiber_damping__SWIG_1(long jarg1, Millard2012EquilibriumMuscle jarg1_);
-  public final static native long Millard2012EquilibriumMuscle_upd_use_fiber_damping__SWIG_1(long jarg1, Millard2012EquilibriumMuscle jarg1_);
-  public final static native void Millard2012EquilibriumMuscle_set_use_fiber_damping__SWIG_1(long jarg1, Millard2012EquilibriumMuscle jarg1_, boolean jarg2);
   public final static native void Millard2012EquilibriumMuscle_PropertyIndex_fiber_damping_set(long jarg1, Millard2012EquilibriumMuscle jarg1_, long jarg2);
   public final static native long Millard2012EquilibriumMuscle_PropertyIndex_fiber_damping_get(long jarg1, Millard2012EquilibriumMuscle jarg1_);
   public final static native void Millard2012EquilibriumMuscle_copyProperty_fiber_damping(long jarg1, Millard2012EquilibriumMuscle jarg1_, long jarg2, Millard2012EquilibriumMuscle jarg2_);
@@ -9801,7 +9788,7 @@ public class opensimModelJNI {
   public final static native double Millard2012EquilibriumMuscle_getActivationDerivative(long jarg1, Millard2012EquilibriumMuscle jarg1_, long jarg2, State jarg2_);
   public final static native long Millard2012EquilibriumMuscle_getStateVariableNames(long jarg1, Millard2012EquilibriumMuscle jarg1_);
   public final static native long Millard2012EquilibriumMuscle_getStateVariableSystemIndex(long jarg1, Millard2012EquilibriumMuscle jarg1_, String jarg2);
-  public final static native void Millard2012EquilibriumMuscle_setMuscleConfiguration(long jarg1, Millard2012EquilibriumMuscle jarg1_, boolean jarg2, boolean jarg3, boolean jarg4);
+  public final static native void Millard2012EquilibriumMuscle_setMuscleConfiguration(long jarg1, Millard2012EquilibriumMuscle jarg1_, boolean jarg2, boolean jarg3, double jarg4);
   public final static native void Millard2012EquilibriumMuscle_setFiberDamping(long jarg1, Millard2012EquilibriumMuscle jarg1_, double jarg2);
   public final static native void Millard2012EquilibriumMuscle_setDefaultActivation(long jarg1, Millard2012EquilibriumMuscle jarg1_, double jarg2);
   public final static native void Millard2012EquilibriumMuscle_setActivation(long jarg1, Millard2012EquilibriumMuscle jarg1_, long jarg2, State jarg2_, double jarg3);
