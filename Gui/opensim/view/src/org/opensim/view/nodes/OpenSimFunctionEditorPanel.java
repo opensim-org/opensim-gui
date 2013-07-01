@@ -388,7 +388,6 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
         jScrollPane1 = new javax.swing.JScrollPane();
         FunctionEditorScrollPane = new javax.swing.JScrollPane();
         functionDescriptionLabel = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
         FunctionEditorPanel = new javax.swing.JPanel();
         xValueTextField = new javax.swing.JTextField();
         functionJPanel = new javax.swing.JPanel();
@@ -400,7 +399,6 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
         crosshairsCheckBox = new javax.swing.JCheckBox();
         PropertiesButton = new javax.swing.JButton();
         restoreFunctionButton = new javax.swing.JButton();
-        propertiesPanel = new javax.swing.JPanel();
 
         functionDescriptionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         functionDescriptionLabel.setText(org.openide.util.NbBundle.getMessage(OpenSimFunctionEditorPanel.class, "OpenSimFunctionEditorPanel.functionDescriptionLabel.text")); // NOI18N
@@ -425,7 +423,7 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
         functionJPanel.setLayout(functionJPanelLayout);
         functionJPanelLayout.setHorizontalGroup(
             functionJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 483, Short.MAX_VALUE)
+            .addGap(0, 508, Short.MAX_VALUE)
         );
         functionJPanelLayout.setVerticalGroup(
             functionJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -533,39 +531,22 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab(org.openide.util.NbBundle.getMessage(OpenSimFunctionEditorPanel.class, "OpenSimFunctionEditorPanel.FunctionEditorPanel.TabConstraints.tabTitle"), FunctionEditorPanel); // NOI18N
-
-        javax.swing.GroupLayout propertiesPanelLayout = new javax.swing.GroupLayout(propertiesPanel);
-        propertiesPanel.setLayout(propertiesPanelLayout);
-        propertiesPanelLayout.setHorizontalGroup(
-            propertiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 503, Short.MAX_VALUE)
-        );
-        propertiesPanelLayout.setVerticalGroup(
-            propertiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 402, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab(org.openide.util.NbBundle.getMessage(OpenSimFunctionEditorPanel.class, "OpenSimFunctionEditorPanel.propertiesPanel.TabConstraints.tabTitle"), propertiesPanel); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(FunctionEditorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(FunctionEditorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-
-        jTabbedPane1.getAccessibleContext().setAccessibleName(org.openide.util.NbBundle.getMessage(OpenSimFunctionEditorPanel.class, "OpenSimFunctionEditorPanel.jTabbedPane1.AccessibleContext.accessibleName")); // NOI18N
     }// </editor-fold>//GEN-END:initComponents
 
     private void xValueTextFieldxValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xValueTextFieldxValueActionPerformed
@@ -859,8 +840,6 @@ private void restoreFunctionButtonrestoreFunctionActionPerformed(java.awt.event.
     private javax.swing.JLabel functionDescriptionLabel;
     private javax.swing.JPanel functionJPanel;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JPanel propertiesPanel;
     private javax.swing.JButton restoreFunctionButton;
     private javax.swing.JComboBox typeComboBox;
     private javax.swing.JLabel typeLabel;
