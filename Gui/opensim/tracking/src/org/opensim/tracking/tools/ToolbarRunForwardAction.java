@@ -46,6 +46,7 @@ public final class ToolbarRunForwardAction extends CallableSystemAction implemen
     
     public ToolbarRunForwardAction() {
         SimulationDB.getInstance().addObserver(this);
+        OpenSimDB.getInstance().addObserver(this);
     }
    public void performAction() {
        ForwardToolModel toolModel=null;
@@ -85,8 +86,21 @@ public final class ToolbarRunForwardAction extends CallableSystemAction implemen
    }
    
    public boolean isEnabled() {
-      return enabled;
+      boolean toolEnabled = checkToolStatus();
+      return enabled && toolEnabled;
    }
+
+    private boolean checkToolStatus() {
+        ForwardToolAction fdAction;
+        boolean toolEnabled=true;
+        try {
+            fdAction = (ForwardToolAction) ForwardToolAction.findObject((Class)Class.forName("org.opensim.tracking.tools.ForwardToolAction"), true);
+            toolEnabled = fdAction.isEnabled();
+        } catch (ClassNotFoundException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        return toolEnabled;
+    }
     public void update(Observable o, Object o1) {
         if (o instanceof SimulationDB){
             SimulationDB sdb = (SimulationDB) o;
@@ -100,6 +114,10 @@ public final class ToolbarRunForwardAction extends CallableSystemAction implemen
                 enabled = true;
                 setEnabled(enabled);
             }
+        }
+        else if (o instanceof OpenSimDB){
+            enabled = checkToolStatus();
+            setEnabled(enabled);
         }
     }
 

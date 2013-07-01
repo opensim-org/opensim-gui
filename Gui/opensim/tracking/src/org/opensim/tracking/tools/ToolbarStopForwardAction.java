@@ -29,15 +29,17 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.ImageIcon;
 import org.openide.util.HelpCtx;
-import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
+import org.opensim.view.pub.OpenSimDB;
 
 public final class ToolbarStopForwardAction extends CallableSystemAction implements Observer {
    
-    private boolean enabled = true;
+    //private boolean enabled = false;
     
     public ToolbarStopForwardAction() {
         SimulationDB.getInstance().addObserver(this);
+        OpenSimDB.getInstance().addObserver(this);
+        setEnabled(false);
     }
    public void performAction() {
        SimulationDB.getInstance().stopSimulation();
@@ -61,22 +63,19 @@ public final class ToolbarStopForwardAction extends CallableSystemAction impleme
       return false;
    }
    
-   public boolean isEnabled() {
-      return enabled;
-   }
    
    public void update(Observable o, Object o1) {
         if (o instanceof SimulationDB){
             SimulationDB sdb = (SimulationDB) o;
             if (sdb.isRunning()){
                 //System.out.println("Will enable Stop");
-                enabled = true;
-                setEnabled(enabled);
+                //enabled = true;
+                setEnabled(true);
             }
             else {
                 //System.out.println("Will disable Stop");
-                enabled = false;
-                setEnabled(enabled);
+                //enabled = false;
+                setEnabled(false);
             }
         }
     }
