@@ -377,6 +377,8 @@ public class MotionsDB extends Observable // Observed by other entities in motio
                              modelNode.getChildren().add(new Node[]{motionsNode});
                          }
                          motionsNode.getChildren().add(new Node[]{newMotionNode});
+                         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
+                         ExplorerTopComponent.findInstance().getExplorerManager().setExploredContext(newMotionNode, selected);
                      }
                      break;
                   }
