@@ -346,9 +346,12 @@ public class PropertyEditorAdaptor {
         try {
             context.restoreStateFromCachedModel();
         } catch (Exception iae) {
+            IllegalArgumentException ioe = new IllegalArgumentException();
+            ErrorManager.getDefault().annotate(ioe, iae.getMessage());
+            
             PropertyHelper.setValueDouble(oldValue, prop);
             context.restoreStateFromCachedModel();  
-            throw new IllegalArgumentException(iae.getMessage());
+            throw ioe;
         }
         handlePropertyChangeCommon();
         
@@ -386,9 +389,12 @@ public class PropertyEditorAdaptor {
         try {
             context.restoreStateFromCachedModel();
         } catch (Exception iae) {
+            IllegalArgumentException ioe = new IllegalArgumentException();
+            ErrorManager.getDefault().annotate(ioe, iae.getMessage());
+            
             PropertyHelper.setValueString(oldValue, prop);
             context.restoreStateFromCachedModel();  
-            throw new IllegalArgumentException(iae.getMessage());
+            throw ioe;
         }
         handlePropertyChangeCommon();
         
@@ -426,9 +432,12 @@ public class PropertyEditorAdaptor {
         try {
             context.restoreStateFromCachedModel();
         } catch (Exception iae) {
+            IllegalArgumentException ioe = new IllegalArgumentException();
+            ErrorManager.getDefault().annotate(ioe, iae.getMessage());
+            
             PropertyHelper.setValueBool(oldValue, prop);
             context.restoreStateFromCachedModel();  
-            throw new IllegalArgumentException(iae.getMessage());
+            throw ioe;
         }
         handlePropertyChangeCommon();
 
@@ -466,9 +475,12 @@ public class PropertyEditorAdaptor {
         try {
             context.restoreStateFromCachedModel();
         } catch (Exception iae) {
+            IllegalArgumentException ioe = new IllegalArgumentException();
+            ErrorManager.getDefault().annotate(ioe, iae.getMessage());
+            
             PropertyHelper.setValueInt(oldValue, prop);
             context.restoreStateFromCachedModel();  
-            throw new IllegalArgumentException(iae.getMessage());
+            throw ioe;
         }
         handlePropertyChangeCommon();
 
@@ -509,11 +521,14 @@ public class PropertyEditorAdaptor {
         try {
             context.restoreStateFromCachedModel();
         } catch (Exception iae) {
+            IllegalArgumentException ioe = new IllegalArgumentException();
+            ErrorManager.getDefault().annotate(ioe, iae.getMessage());
+            
             for (int i = 0; i < sz; i++) {
                 PropertyHelper.setValueDouble(oldValue.getitem(i), prop, i);
             }
             context.restoreStateFromCachedModel();  
-            throw new IllegalArgumentException(iae.getMessage());
+            throw ioe;
         }
         handlePropertyChangeCommon();
 
@@ -554,11 +569,14 @@ public class PropertyEditorAdaptor {
         try {
             context.restoreStateFromCachedModel();
         } catch (Exception iae) {
+            IllegalArgumentException ioe = new IllegalArgumentException();
+            ErrorManager.getDefault().annotate(ioe, iae.getMessage());
+            
             for (int i = 0; i < 3; i++) {
                 PropertyHelper.setValueVec3(oldValue.get()[i], prop , i);
             }
             context.restoreStateFromCachedModel();  
-            throw new IllegalArgumentException(iae.getMessage());
+            throw ioe;
         }
         
         handlePropertyChangeCommon();
@@ -604,11 +622,14 @@ public class PropertyEditorAdaptor {
         try {
             context.restoreStateFromCachedModel();
         } catch (Exception iae) {
+            IllegalArgumentException ioe = new IllegalArgumentException();
+            ErrorManager.getDefault().annotate(ioe, iae.getMessage()); 
+            
             for (int i = 0; i < sz; i++) {
                 PropertyHelper.setValueTransform(oldValue.getitem(i), prop, i);
             }
             context.restoreStateFromCachedModel();  
-            throw new IllegalArgumentException(iae.getMessage());
+            throw ioe;
         }        
         handlePropertyChangeCommon();
 
@@ -692,10 +713,13 @@ public class PropertyEditorAdaptor {
         try {
             context.restoreStateFromCachedModel();
         } catch (Exception iae) {
-            System.out.println("GUI Exxception Caught: " + iae.getMessage() + " LocalizedMessage: " + iae.getLocalizedMessage() + " Msg: " + iae.toString());
+            
+            IllegalArgumentException ioe = new IllegalArgumentException();
+            ErrorManager.getDefault().annotate(ioe, iae.getMessage());
+           
             PropertyHelper.setValueStringArray(prop, oldValue);
             context.restoreStateFromCachedModel();  
-            throw new IllegalArgumentException(iae.getMessage());
+            throw ioe;
         }
         handlePropertyChangeCommon();
 
