@@ -44,6 +44,7 @@ import org.opensim.modeling.Storage;
 import org.opensim.view.motions.JavaMotionDisplayerCallback;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.swingui.SwingWorker;
+import org.opensim.tracking.tools.SimulationDB;
 import org.opensim.utils.DialogUtils;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
@@ -102,6 +103,7 @@ public class CMCToolModel extends TrackingToolModel {
                               new Cancellable() {
                                  public boolean cancel() {
                                     interrupt(false);
+                                    SimulationDB.getInstance().fireToolFinish();
                                     return true;
                                  }
                               });
@@ -166,6 +168,7 @@ public class CMCToolModel extends TrackingToolModel {
          //getModel().addAnalysis(kinematicsAnalysis);
 
          setExecuting(true);
+         SimulationDB.getInstance().fireToolStart();
       }
 
       public void interrupt(boolean promptToKeepPartialResult) {
@@ -226,7 +229,7 @@ public class CMCToolModel extends TrackingToolModel {
          if(result) resetModified();
 
          setExecuting(false);
-
+         SimulationDB.getInstance().fireToolFinish();
          worker = null;
       }
    }
@@ -362,6 +365,7 @@ public class CMCToolModel extends TrackingToolModel {
       if(isModified() && worker==null) {
          try {
             worker = new CMCToolWorker();
+            SimulationDB.getInstance().fireToolStart();
          } catch (IOException ex) {
             setExecuting(false);
             ErrorDialog.displayIOExceptionDialog("CMC Tool Error", "Tool initialization failed.", ex);

@@ -67,7 +67,7 @@ public final class ToolbarStopForwardAction extends CallableSystemAction impleme
    public void update(Observable o, Object o1) {
         if (o instanceof SimulationDB){
             SimulationDB sdb = (SimulationDB) o;
-            if (sdb.isRunning()){
+            if (sdb.isSimulating()){
                 //System.out.println("Will enable Stop");
                 //enabled = true;
                 setEnabled(true);
