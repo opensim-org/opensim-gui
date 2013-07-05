@@ -663,8 +663,16 @@ public class PropertyEditorAdaptor {
     
     private void handlePropertyChange(final OpenSimObject oldObject, final OpenSimObject v, boolean supportUndo) {
 
-        //context.setPropertiesFromState();
+        context.cacheModelAndState();
         //prop.setValueAsObject(v);
+        try {
+            context.restoreStateFromCachedModel();
+        } catch (IllegalArgumentException iae) {
+            ErrorManager.getDefault().annotate(iae, ErrorManager.ERROR, null, iae.getMessage(), null, null);
+            prop.setValueAsObject(oldObject);
+            context.restoreStateFromCachedModel();  
+            throw iae;
+        }
         handlePropertyChangeCommon();
         if (false) {
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
