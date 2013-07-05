@@ -247,4 +247,8 @@ public class PrescribedController extends Controller {
     prescribedFunction.markAdopted();
   }
 
+  public void connectToModel(Model model) {
+    opensimModelJNI.PrescribedController_connectToModel(swigCPtr, this, Model.getCPtr(model), model);
+  }
+
 }

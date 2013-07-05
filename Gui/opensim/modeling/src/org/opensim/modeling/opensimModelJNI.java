@@ -3587,6 +3587,7 @@ public class opensimModelJNI {
   public final static native void PrescribedController_computeControls(long jarg1, PrescribedController jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
   public final static native void PrescribedController_prescribeControlForActuator__SWIG_0(long jarg1, PrescribedController jarg1_, int jarg2, long jarg3, Function jarg3_);
   public final static native void PrescribedController_prescribeControlForActuator__SWIG_1(long jarg1, PrescribedController jarg1_, String jarg2, long jarg3, Function jarg3_);
+  public final static native void PrescribedController_connectToModel(long jarg1, PrescribedController jarg1_, long jarg2, Model jarg2_);
   public final static native void delete_Manager(long jarg1);
   public final static native long new_Manager__SWIG_0(long jarg1, Model jarg1_, long jarg2);
   public final static native long new_Manager__SWIG_1(long jarg1, Model jarg1_);
