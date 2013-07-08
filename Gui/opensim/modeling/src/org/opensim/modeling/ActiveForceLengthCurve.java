@@ -321,8 +321,8 @@ public class ActiveForceLengthCurve extends Function {
     this(opensimModelJNI.new_ActiveForceLengthCurve__SWIG_0(), true);
   }
 
-  public ActiveForceLengthCurve(double minActiveNormFiberLength, double transitionNormFiberLength, double maxActiveNormFiberLength, double shallowAscendingSlope, double minValue, String muscleName) {
-    this(opensimModelJNI.new_ActiveForceLengthCurve__SWIG_1(minActiveNormFiberLength, transitionNormFiberLength, maxActiveNormFiberLength, shallowAscendingSlope, minValue, muscleName), true);
+  public ActiveForceLengthCurve(double minActiveNormFiberLength, double transitionNormFiberLength, double maxActiveNormFiberLength, double shallowAscendingSlope, double minimumValue, String muscleName) {
+    this(opensimModelJNI.new_ActiveForceLengthCurve__SWIG_1(minActiveNormFiberLength, transitionNormFiberLength, maxActiveNormFiberLength, shallowAscendingSlope, minimumValue, muscleName), true);
   }
 
   public double getMinActiveFiberLength() {
@@ -349,8 +349,8 @@ public class ActiveForceLengthCurve extends Function {
     opensimModelJNI.ActiveForceLengthCurve_setActiveFiberLengths(swigCPtr, this, minActiveNormFiberLength, transitionNormFiberLength, maxActiveNormFiberLength, shallowAscendingSlope);
   }
 
-  public void setMinValue(double minValue) {
-    opensimModelJNI.ActiveForceLengthCurve_setMinValue(swigCPtr, this, minValue);
+  public void setMinValue(double minimumValue) {
+    opensimModelJNI.ActiveForceLengthCurve_setMinValue(swigCPtr, this, minimumValue);
   }
 
   public double calcValue(double normFiberLength) {

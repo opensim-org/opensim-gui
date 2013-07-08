@@ -481,12 +481,12 @@ public class ForceVelocityCurve extends Function {
     this(opensimModelJNI.new_ForceVelocityCurve__SWIG_1(concentricSlopeAtVmax, concentricSlopeNearVmax, isometricSlope, eccentricSlopeAtVmax, eccentricSlopeNearVmax, maxEccentricVelocityForceMultiplier, concentricCurviness, eccentricCurviness, muscleName), true);
   }
 
-  public double getConcentricSlopeNearVmax() {
-    return opensimModelJNI.ForceVelocityCurve_getConcentricSlopeNearVmax(swigCPtr, this);
-  }
-
   public double getConcentricSlopeAtVmax() {
     return opensimModelJNI.ForceVelocityCurve_getConcentricSlopeAtVmax(swigCPtr, this);
+  }
+
+  public double getConcentricSlopeNearVmax() {
+    return opensimModelJNI.ForceVelocityCurve_getConcentricSlopeNearVmax(swigCPtr, this);
   }
 
   public double getIsometricSlope() {
