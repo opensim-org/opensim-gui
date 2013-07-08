@@ -2,10 +2,13 @@ package org.opensim.view.nodes;
 
 
 import java.awt.Color;
+import java.io.IOException;
+import javax.swing.JOptionPane;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import org.openide.ErrorManager;
+import org.openide.util.Exceptions;
 import org.opensim.modeling.*;
 import org.opensim.utils.Vec3;
 import org.opensim.view.ExplorerTopComponent;
@@ -345,13 +348,16 @@ public class PropertyEditorAdaptor {
         PropertyHelper.setValueDouble(v, prop);        
         try {
             context.restoreStateFromCachedModel();
-        } catch (Exception iae) {
-            IllegalArgumentException ioe = new IllegalArgumentException();
-            ErrorManager.getDefault().annotate(ioe, iae.getMessage());
-            
-            PropertyHelper.setValueDouble(oldValue, prop);
-            context.restoreStateFromCachedModel();  
-            throw ioe;
+        } catch (IOException iae) {
+            try {
+                 new JOptionPane(iae.getMessage(), 
+				JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+                
+                PropertyHelper.setValueDouble(oldValue, prop);
+                context.restoreStateFromCachedModel();  
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+            }
         }
         handlePropertyChangeCommon();
         
@@ -388,13 +394,16 @@ public class PropertyEditorAdaptor {
         PropertyHelper.setValueString(v, prop);        
         try {
             context.restoreStateFromCachedModel();
-        } catch (Exception iae) {
-            IllegalArgumentException ioe = new IllegalArgumentException();
-            ErrorManager.getDefault().annotate(ioe, iae.getMessage());
-            
-            PropertyHelper.setValueString(oldValue, prop);
-            context.restoreStateFromCachedModel();  
-            throw ioe;
+         } catch (IOException iae) {
+            try {
+                 new JOptionPane(iae.getMessage(), 
+				JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+                
+                PropertyHelper.setValueString(oldValue, prop);
+                context.restoreStateFromCachedModel();  
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+            }
         }
         handlePropertyChangeCommon();
         
@@ -431,13 +440,16 @@ public class PropertyEditorAdaptor {
         PropertyHelper.setValueBool(v, prop);        
         try {
             context.restoreStateFromCachedModel();
-        } catch (Exception iae) {
-            IllegalArgumentException ioe = new IllegalArgumentException();
-            ErrorManager.getDefault().annotate(ioe, iae.getMessage());
-            
-            PropertyHelper.setValueBool(oldValue, prop);
-            context.restoreStateFromCachedModel();  
-            throw ioe;
+        } catch (IOException iae) {
+            try {
+                new JOptionPane(iae.getMessage(), 
+				JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+                
+                PropertyHelper.setValueBool(oldValue, prop);
+                context.restoreStateFromCachedModel();  
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+            }
         }
         handlePropertyChangeCommon();
 
@@ -474,13 +486,16 @@ public class PropertyEditorAdaptor {
         PropertyHelper.setValueInt(v, prop);
         try {
             context.restoreStateFromCachedModel();
-        } catch (Exception iae) {
-            IllegalArgumentException ioe = new IllegalArgumentException();
-            ErrorManager.getDefault().annotate(ioe, iae.getMessage());
-            
-            PropertyHelper.setValueInt(oldValue, prop);
-            context.restoreStateFromCachedModel();  
-            throw ioe;
+        } catch (IOException iae) {
+            try {
+                new JOptionPane(iae.getMessage(), 
+				JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+                
+                PropertyHelper.setValueInt(oldValue, prop);
+                context.restoreStateFromCachedModel();  
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+            }
         }
         handlePropertyChangeCommon();
 
@@ -520,15 +535,18 @@ public class PropertyEditorAdaptor {
         }
         try {
             context.restoreStateFromCachedModel();
-        } catch (Exception iae) {
-            IllegalArgumentException ioe = new IllegalArgumentException();
-            ErrorManager.getDefault().annotate(ioe, iae.getMessage());
-            
-            for (int i = 0; i < sz; i++) {
-                PropertyHelper.setValueDouble(oldValue.getitem(i), prop, i);
+        } catch (IOException iae) {
+            try {
+                new JOptionPane(iae.getMessage(),
+                        JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+                int oldSize = oldValue.size();
+                for (int i = 0; i < oldSize; i++) {
+                    PropertyHelper.setValueDouble(oldValue.getitem(i), prop, i);
+                }
+                context.restoreStateFromCachedModel();
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
             }
-            context.restoreStateFromCachedModel();  
-            throw ioe;
         }
         handlePropertyChangeCommon();
 
@@ -568,15 +586,18 @@ public class PropertyEditorAdaptor {
 
         try {
             context.restoreStateFromCachedModel();
-        } catch (Exception iae) {
-            IllegalArgumentException ioe = new IllegalArgumentException();
-            ErrorManager.getDefault().annotate(ioe, iae.getMessage());
-            
-            for (int i = 0; i < 3; i++) {
-                PropertyHelper.setValueVec3(oldValue.get()[i], prop , i);
+        } catch (IOException iae) {
+            try {
+                new JOptionPane(iae.getMessage(),
+                        JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+
+                for (int i = 0; i < 3; i++) {
+                    PropertyHelper.setValueVec3(oldValue.get()[i], prop, i);
+                }
+                context.restoreStateFromCachedModel();
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
             }
-            context.restoreStateFromCachedModel();  
-            throw ioe;
         }
         
         handlePropertyChangeCommon();
@@ -621,16 +642,19 @@ public class PropertyEditorAdaptor {
 
         try {
             context.restoreStateFromCachedModel();
-        } catch (Exception iae) {
-            IllegalArgumentException ioe = new IllegalArgumentException();
-            ErrorManager.getDefault().annotate(ioe, iae.getMessage()); 
-            
-            for (int i = 0; i < sz; i++) {
-                PropertyHelper.setValueTransform(oldValue.getitem(i), prop, i);
+        } catch (IOException iae) {
+            try {
+                new JOptionPane(iae.getMessage(),
+                        JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+
+                for (int i = 0; i < sz; i++) {
+                    PropertyHelper.setValueTransform(oldValue.getitem(i), prop, i);
+                }
+                context.restoreStateFromCachedModel();
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
             }
-            context.restoreStateFromCachedModel();  
-            throw ioe;
-        }        
+        }
         handlePropertyChangeCommon();
 
         if (supportUndo) {
@@ -667,11 +691,16 @@ public class PropertyEditorAdaptor {
         //prop.setValueAsObject(v);
         try {
             context.restoreStateFromCachedModel();
-        } catch (IllegalArgumentException iae) {
-            ErrorManager.getDefault().annotate(iae, ErrorManager.ERROR, null, iae.getMessage(), null, null);
-            prop.setValueAsObject(oldObject);
-            context.restoreStateFromCachedModel();  
-            throw iae;
+        } catch (IOException iae) {
+            try {
+                new JOptionPane(iae.getMessage(), 
+				JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+                
+                 prop.setValueAsObject(oldObject);
+                context.restoreStateFromCachedModel();  
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+            }
         }
         handlePropertyChangeCommon();
         if (false) {
@@ -720,14 +749,16 @@ public class PropertyEditorAdaptor {
         PropertyHelper.setValueStringArray(prop, newValue);
         try {
             context.restoreStateFromCachedModel();
-        } catch (Exception iae) {
-            
-            IllegalArgumentException ioe = new IllegalArgumentException();
-            ErrorManager.getDefault().annotate(ioe, iae.getMessage());
-           
-            PropertyHelper.setValueStringArray(prop, oldValue);
-            context.restoreStateFromCachedModel();  
-            throw ioe;
+         } catch (IOException iae) {
+            try {
+                new JOptionPane(iae.getMessage(), 
+				JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+                
+                PropertyHelper.setValueStringArray(prop, oldValue);
+                context.restoreStateFromCachedModel();  
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+            }
         }
         handlePropertyChangeCommon();
 
@@ -764,8 +795,12 @@ public class PropertyEditorAdaptor {
      */
     public void handleModelChange()
     {
-        context.cacheModelAndState();
-        context.restoreStateFromCachedModel();
+        try {
+            context.cacheModelAndState();
+            context.restoreStateFromCachedModel();
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
     }
             
 }

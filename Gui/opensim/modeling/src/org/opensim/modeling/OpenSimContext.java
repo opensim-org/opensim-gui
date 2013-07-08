@@ -373,7 +373,7 @@ public class OpenSimContext extends OpenSimObject {
     opensimModelJNI.OpenSimContext_cacheModelAndState(swigCPtr, this);
   }
 
-  public void restoreStateFromCachedModel() {
+  public void restoreStateFromCachedModel() throws java.io.IOException {
     opensimModelJNI.OpenSimContext_restoreStateFromCachedModel(swigCPtr, this);
   }
 
