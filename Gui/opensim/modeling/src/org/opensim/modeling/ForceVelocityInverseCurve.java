@@ -477,8 +477,8 @@ public class ForceVelocityInverseCurve extends Function {
     this(opensimModelJNI.new_ForceVelocityInverseCurve__SWIG_0(), true);
   }
 
-  public ForceVelocityInverseCurve(double concentricSlopeAtVmax, double concentricSlopeNearVmax, double isometricSlope, double eccentricSlopeAtVmax, double eccentricSlopeNearVmax, double maxEccentricVelocityForceMultiplier, double concentricCurviness, double eccentricCurviness, String muscleName) {
-    this(opensimModelJNI.new_ForceVelocityInverseCurve__SWIG_1(concentricSlopeAtVmax, concentricSlopeNearVmax, isometricSlope, eccentricSlopeAtVmax, eccentricSlopeNearVmax, maxEccentricVelocityForceMultiplier, concentricCurviness, eccentricCurviness, muscleName), true);
+  public ForceVelocityInverseCurve(double concentricSlopeAtVmax, double concentricSlopeNearVmax, double isometricSlope, double eccentricSlopeAtVmax, double eccentricSlopeNearVmax, double maxEccentricVelocityForceMultiplier, double concentricCurviness, double eccentricCurviness) {
+    this(opensimModelJNI.new_ForceVelocityInverseCurve__SWIG_1(concentricSlopeAtVmax, concentricSlopeNearVmax, isometricSlope, eccentricSlopeAtVmax, eccentricSlopeNearVmax, maxEccentricVelocityForceMultiplier, concentricCurviness, eccentricCurviness), true);
   }
 
   public double getConcentricSlopeAtVmax() {

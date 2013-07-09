@@ -281,12 +281,12 @@ public class TendonForceLengthCurve extends Function {
     this(opensimModelJNI.new_TendonForceLengthCurve__SWIG_0(), true);
   }
 
-  public TendonForceLengthCurve(double strainAtOneNormForce, double stiffnessAtOneNormForce, double normForceAtToeEnd, double curviness, String muscleName) {
-    this(opensimModelJNI.new_TendonForceLengthCurve__SWIG_1(strainAtOneNormForce, stiffnessAtOneNormForce, normForceAtToeEnd, curviness, muscleName), true);
+  public TendonForceLengthCurve(double strainAtOneNormForce, double stiffnessAtOneNormForce, double normForceAtToeEnd, double curviness) {
+    this(opensimModelJNI.new_TendonForceLengthCurve__SWIG_1(strainAtOneNormForce, stiffnessAtOneNormForce, normForceAtToeEnd, curviness), true);
   }
 
-  public TendonForceLengthCurve(double strainAtOneNormForce, String muscleName) {
-    this(opensimModelJNI.new_TendonForceLengthCurve__SWIG_2(strainAtOneNormForce, muscleName), true);
+  public TendonForceLengthCurve(double strainAtOneNormForce) {
+    this(opensimModelJNI.new_TendonForceLengthCurve__SWIG_2(strainAtOneNormForce), true);
   }
 
   public double getStrainAtOneNormForce() {

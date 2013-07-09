@@ -333,8 +333,8 @@ public class FiberForceLengthCurve extends Function {
     this(opensimModelJNI.new_FiberForceLengthCurve__SWIG_0(), true);
   }
 
-  public FiberForceLengthCurve(double strainAtZeroForce, double strainAtOneNormForce, double stiffnessAtLowForce, double stiffnessAtOneNormForce, double curviness, String muscleName) {
-    this(opensimModelJNI.new_FiberForceLengthCurve__SWIG_1(strainAtZeroForce, strainAtOneNormForce, stiffnessAtLowForce, stiffnessAtOneNormForce, curviness, muscleName), true);
+  public FiberForceLengthCurve(double strainAtZeroForce, double strainAtOneNormForce, double stiffnessAtLowForce, double stiffnessAtOneNormForce, double curviness) {
+    this(opensimModelJNI.new_FiberForceLengthCurve__SWIG_1(strainAtZeroForce, strainAtOneNormForce, stiffnessAtLowForce, stiffnessAtOneNormForce, curviness), true);
   }
 
   public double getStrainAtZeroForce() {
