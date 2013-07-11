@@ -264,6 +264,7 @@ public class PropertyEditorAdaptor {
         setValueStringListFromString(aString, true);
     }
     public void setValueStringListFromArrayStr(ArrayStr oldValue, boolean b) {
+
          String stringStr = new String("(");
          for(int i=0;i<oldValue.getSize(); i++) {
              stringStr = stringStr.concat(oldValue.getitem(i));
@@ -273,7 +274,9 @@ public class PropertyEditorAdaptor {
          setValueStringListFromString(stringStr);
     }
 
-    private void setValueStringListFromString(String aString, boolean allowUndo) {
+    private void setValueStringListFromString(String aString, boolean allowUndo) {        
+        System.out.println("Property type: " + prop.getTypeName());
+        
         // Parse String into an array of doubles, check that it's the right size for prop then assign
         ArrayStr d = new ArrayStr();
         // Remove open and close parenth if any
@@ -739,24 +742,34 @@ public class PropertyEditorAdaptor {
         }
         final ArrayStr newArray = new ArrayStr();
         for (int i = 0; i < splits.length; i++) {
+            System.out.println("Splits: " + splits[i]);
             newArray.append(splits[i]);
         }
        
         handlePropertyChange(oldArray, newArray, allowUndo);    
     }
     private void handlePropertyChange(final ArrayStr oldValue, final ArrayStr newValue, boolean supportUndo) {
+        System.out.println("Property: " + prop.getTypeName());
+        System.out.println("Editing string");
         context.cacheModelAndState();    
-        PropertyHelper.setValueStringArray(prop, newValue);
+        System.out.println("Got here though");
         try {
+            PropertyHelper.setValueStringArray(prop, newValue);
+            System.out.println("Set up string");
+
+            System.out.println("Exception?");
             context.restoreStateFromCachedModel();
-         } catch (IOException iae) {
+         } catch (Exception iae) {
+             System.out.println("Caught.");
             try {
+                System.out.println("Exception again?");
                 new JOptionPane(iae.getMessage(), 
 				JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
                 
                 PropertyHelper.setValueStringArray(prop, oldValue);
                 context.restoreStateFromCachedModel();  
-            } catch (IOException ex) {
+            } catch (Exception ex) {
+                System.out.println("Caught again.");
                 Exceptions.printStackTrace(ex);
             }
         }
