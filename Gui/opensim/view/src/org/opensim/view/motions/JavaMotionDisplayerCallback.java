@@ -73,13 +73,15 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    ArrayStr stateLabels=null;
    private double[] statesBuffer;
    private boolean displayTimeProgress=false;
+   private boolean coordinatesOnly=false;
    //private int stepNumber=0;
    
    // Creates a new instance of JavaMotionDisplayerCallback 
-   public JavaMotionDisplayerCallback(Model aModel, Storage aStorage, ProgressHandle progressHandle) {
+   public JavaMotionDisplayerCallback(Model aModel, Storage aStorage, ProgressHandle progressHandle, boolean coordinatesOnly) {
       super(aModel);
       modelForDisplay=aModel;
       context = OpenSimDB.getInstance().getContext(aModel);
+      this.coordinatesOnly = coordinatesOnly;
       if(aStorage!=null) {
          this.storage = aStorage;
       }
@@ -94,10 +96,17 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
     private void createResultStorage() {
         storage = new Storage();
         getStorage().setName("Results");
-        stateLabels = getModelForDisplay().getStateVariableNames();
+        stateLabels = new ArrayStr();
+        if (isCoordinatesOnly()){
+            get_model().getCoordinateSet().getNames(stateLabels);
+        }
+        else {
+            stateLabels = getModelForDisplay().getStateVariableNames();
+            
+        }
         stateLabels.insert(0, "time");
         getStorage().setColumnLabels(stateLabels);
-        numStates = getModelForDisplay().getNumStateVariables();
+        numStates = isCoordinatesOnly()?getModelForDisplay().getNumCoordinates(): getModelForDisplay().getNumStateVariables();
         statesBuffer = new double[numStates];
         ownsStorage=true;
     }
@@ -192,9 +201,19 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
       if (ownsStorage) {    // Callback is the one accumulating results //ASSERTS downlstream 0327
           // Need to make sure nextResult is not Freed by gc
           StateVector nextResult = new StateVector();
-          super.getStates(statesBuffer);
-          //System.out.println("Simulation time="+currentSimTime+" state[0]="+statesBuffer[0]);
-          nextResult.setStates(currentSimTime, numStates, statesBuffer);
+          if (isCoordinatesOnly()){
+              CoordinateSet cs = get_model().getCoordinateSet();
+              nextResult.setTime(currentSimTime);
+              for(int i=0; i< cs.getSize(); i++){
+                  nextResult.getData().append(cs.get(i).getValue(s));
+              }
+              getStorage().append(nextResult);
+          }
+          else {
+              super.getStates(statesBuffer);
+            //System.out.println("Simulation time="+currentSimTime+" state[0]="+statesBuffer[0]);
+            nextResult.setStates(currentSimTime, numStates, statesBuffer);
+          }
           getStorage().append(nextResult);
       }
       if (!isInitialized()){
@@ -276,5 +295,19 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
      */
     public void setDisplayTimeProgress(boolean displayTimeProgress) {
         this.displayTimeProgress = displayTimeProgress;
+    }
+
+    /**
+     * @return the coordinatesOnly
+     */
+    public boolean isCoordinatesOnly() {
+        return coordinatesOnly;
+    }
+
+    /**
+     * @param coordinatesOnly the coordinatesOnly to set
+     */
+    public void setCoordinatesOnly(boolean coordinatesOnly) {
+        this.coordinatesOnly = coordinatesOnly;
     }
 }
