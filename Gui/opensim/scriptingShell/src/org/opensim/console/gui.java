@@ -26,6 +26,7 @@ import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.Probe;
 import org.opensim.modeling.State;
+import org.opensim.modeling.Storage;
 import org.opensim.utils.TheApp;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.motions.MotionsDB;
@@ -77,6 +78,16 @@ public final class gui {
         State stateRef = OpenSimDB.getInstance().getContext(aModel).getCurrentStateRef();
         return stateRef;
     }
+    /**
+     * getCurrentMotion() gets a reference to the motion that is current in the OpenSim application.
+     * 
+     * @return current motion as a Storage object. If none or multiple (sync.) it returns null
+     */
+    static public Storage getCurrentMotion(){
+        if (MotionsDB.getInstance().getNumCurrentMotions()!=1) return null;
+        return MotionsDB.getInstance().getCurrentMotion(0).motion;
+    }
+ 
     /**
      * getCoordinate ()
      * 
