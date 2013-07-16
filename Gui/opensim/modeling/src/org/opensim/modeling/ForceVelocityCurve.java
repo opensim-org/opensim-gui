@@ -525,8 +525,12 @@ public class ForceVelocityCurve extends Function {
     opensimModelJNI.ForceVelocityCurve_setEccentricCurviness(swigCPtr, this, aEccentricCurviness);
   }
 
+  public double calcValue(Vector x) {
+    return opensimModelJNI.ForceVelocityCurve_calcValue__SWIG_0(swigCPtr, this, Vector.getCPtr(x), x);
+  }
+
   public double calcValue(double normFiberVelocity) {
-    return opensimModelJNI.ForceVelocityCurve_calcValue(swigCPtr, this, normFiberVelocity);
+    return opensimModelJNI.ForceVelocityCurve_calcValue__SWIG_1(swigCPtr, this, normFiberVelocity);
   }
 
   public double calcDerivative(double normFiberVelocity, int order) {

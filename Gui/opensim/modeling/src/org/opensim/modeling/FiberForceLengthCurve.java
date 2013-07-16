@@ -369,8 +369,12 @@ public class FiberForceLengthCurve extends Function {
     opensimModelJNI.FiberForceLengthCurve_setOptionalProperties(swigCPtr, this, aStiffnessAtLowForce, aStiffnessAtOneNormForce, aCurviness);
   }
 
+  public double calcValue(Vector x) {
+    return opensimModelJNI.FiberForceLengthCurve_calcValue__SWIG_0(swigCPtr, this, Vector.getCPtr(x), x);
+  }
+
   public double calcValue(double normFiberLength) {
-    return opensimModelJNI.FiberForceLengthCurve_calcValue(swigCPtr, this, normFiberLength);
+    return opensimModelJNI.FiberForceLengthCurve_calcValue__SWIG_1(swigCPtr, this, normFiberLength);
   }
 
   public double calcDerivative(double normFiberLength, int order) {
