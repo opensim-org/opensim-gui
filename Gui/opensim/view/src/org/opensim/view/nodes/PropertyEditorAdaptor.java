@@ -227,6 +227,7 @@ public class PropertyEditorAdaptor {
     }
     
     public void setValueObj(OpenSimObject v, OpenSimObject oldV, boolean allowUndo) {
+        v.updPropertyByIndex(0); // this line is intended to turn on the flag that object is not in sync. wih properties
         handlePropertyChange(oldV, v, allowUndo);
     }
 
