@@ -9036,7 +9036,8 @@ public class opensimModelJNI {
   public final static native double ActiveForceLengthCurve_getMinValue(long jarg1, ActiveForceLengthCurve jarg1_);
   public final static native void ActiveForceLengthCurve_setActiveFiberLengths(long jarg1, ActiveForceLengthCurve jarg1_, double jarg2, double jarg3, double jarg4, double jarg5);
   public final static native void ActiveForceLengthCurve_setMinValue(long jarg1, ActiveForceLengthCurve jarg1_, double jarg2);
-  public final static native double ActiveForceLengthCurve_calcValue(long jarg1, ActiveForceLengthCurve jarg1_, double jarg2);
+  public final static native double ActiveForceLengthCurve_calcValue__SWIG_0(long jarg1, ActiveForceLengthCurve jarg1_, long jarg2, Vector jarg2_);
+  public final static native double ActiveForceLengthCurve_calcValue__SWIG_1(long jarg1, ActiveForceLengthCurve jarg1_, double jarg2);
   public final static native double ActiveForceLengthCurve_calcDerivative(long jarg1, ActiveForceLengthCurve jarg1_, double jarg2, int jarg3);
   public final static native long ActiveForceLengthCurve_getCurveDomain(long jarg1, ActiveForceLengthCurve jarg1_);
   public final static native void ActiveForceLengthCurve_printMuscleCurveToCSVFile(long jarg1, ActiveForceLengthCurve jarg1_, String jarg2);
@@ -9097,7 +9098,8 @@ public class opensimModelJNI {
   public final static native boolean FiberCompressiveForceCosPennationCurve_isFittedCurveBeingUsed(long jarg1, FiberCompressiveForceCosPennationCurve jarg1_);
   public final static native void FiberCompressiveForceCosPennationCurve_setEngagementAngleInDegrees(long jarg1, FiberCompressiveForceCosPennationCurve jarg1_, double jarg2);
   public final static native void FiberCompressiveForceCosPennationCurve_setOptionalProperties(long jarg1, FiberCompressiveForceCosPennationCurve jarg1_, double jarg2, double jarg3);
-  public final static native double FiberCompressiveForceCosPennationCurve_calcValue(long jarg1, FiberCompressiveForceCosPennationCurve jarg1_, double jarg2);
+  public final static native double FiberCompressiveForceCosPennationCurve_calcValue__SWIG_0(long jarg1, FiberCompressiveForceCosPennationCurve jarg1_, double jarg2);
+  public final static native double FiberCompressiveForceCosPennationCurve_calcValue__SWIG_1(long jarg1, FiberCompressiveForceCosPennationCurve jarg1_, long jarg2, Vector jarg2_);
   public final static native double FiberCompressiveForceCosPennationCurve_calcDerivative(long jarg1, FiberCompressiveForceCosPennationCurve jarg1_, double jarg2, int jarg3);
   public final static native double FiberCompressiveForceCosPennationCurve_calcIntegral(long jarg1, FiberCompressiveForceCosPennationCurve jarg1_, double jarg2);
   public final static native long FiberCompressiveForceCosPennationCurve_getCurveDomain(long jarg1, FiberCompressiveForceCosPennationCurve jarg1_);
@@ -9158,7 +9160,8 @@ public class opensimModelJNI {
   public final static native void FiberCompressiveForceLengthCurve_setNormLengthAtZeroForce(long jarg1, FiberCompressiveForceLengthCurve jarg1_, double jarg2);
   public final static native void FiberCompressiveForceLengthCurve_setOptionalProperties(long jarg1, FiberCompressiveForceLengthCurve jarg1_, double jarg2, double jarg3);
   public final static native boolean FiberCompressiveForceLengthCurve_isFittedCurveBeingUsed(long jarg1, FiberCompressiveForceLengthCurve jarg1_);
-  public final static native double FiberCompressiveForceLengthCurve_calcValue(long jarg1, FiberCompressiveForceLengthCurve jarg1_, double jarg2);
+  public final static native double FiberCompressiveForceLengthCurve_calcValue__SWIG_0(long jarg1, FiberCompressiveForceLengthCurve jarg1_, double jarg2);
+  public final static native double FiberCompressiveForceLengthCurve_calcValue__SWIG_1(long jarg1, FiberCompressiveForceLengthCurve jarg1_, long jarg2, Vector jarg2_);
   public final static native double FiberCompressiveForceLengthCurve_calcDerivative(long jarg1, FiberCompressiveForceLengthCurve jarg1_, double jarg2, int jarg3);
   public final static native double FiberCompressiveForceLengthCurve_calcIntegral(long jarg1, FiberCompressiveForceLengthCurve jarg1_, double jarg2);
   public final static native long FiberCompressiveForceLengthCurve_getCurveDomain(long jarg1, FiberCompressiveForceLengthCurve jarg1_);
@@ -9248,7 +9251,8 @@ public class opensimModelJNI {
   public final static native boolean FiberForceLengthCurve_isFittedCurveBeingUsed(long jarg1, FiberForceLengthCurve jarg1_);
   public final static native void FiberForceLengthCurve_setCurveStrains(long jarg1, FiberForceLengthCurve jarg1_, double jarg2, double jarg3);
   public final static native void FiberForceLengthCurve_setOptionalProperties(long jarg1, FiberForceLengthCurve jarg1_, double jarg2, double jarg3, double jarg4);
-  public final static native double FiberForceLengthCurve_calcValue(long jarg1, FiberForceLengthCurve jarg1_, double jarg2);
+  public final static native double FiberForceLengthCurve_calcValue__SWIG_0(long jarg1, FiberForceLengthCurve jarg1_, long jarg2, Vector jarg2_);
+  public final static native double FiberForceLengthCurve_calcValue__SWIG_1(long jarg1, FiberForceLengthCurve jarg1_, double jarg2);
   public final static native double FiberForceLengthCurve_calcDerivative(long jarg1, FiberForceLengthCurve jarg1_, double jarg2, int jarg3);
   public final static native double FiberForceLengthCurve_calcIntegral(long jarg1, FiberForceLengthCurve jarg1_, double jarg2);
   public final static native long FiberForceLengthCurve_getCurveDomain(long jarg1, FiberForceLengthCurve jarg1_);
@@ -9377,7 +9381,8 @@ public class opensimModelJNI {
   public final static native void ForceVelocityCurve_setCurveShape(long jarg1, ForceVelocityCurve jarg1_, double jarg2, double jarg3, double jarg4, double jarg5, double jarg6, double jarg7);
   public final static native void ForceVelocityCurve_setConcentricCurviness(long jarg1, ForceVelocityCurve jarg1_, double jarg2);
   public final static native void ForceVelocityCurve_setEccentricCurviness(long jarg1, ForceVelocityCurve jarg1_, double jarg2);
-  public final static native double ForceVelocityCurve_calcValue(long jarg1, ForceVelocityCurve jarg1_, double jarg2);
+  public final static native double ForceVelocityCurve_calcValue__SWIG_0(long jarg1, ForceVelocityCurve jarg1_, long jarg2, Vector jarg2_);
+  public final static native double ForceVelocityCurve_calcValue__SWIG_1(long jarg1, ForceVelocityCurve jarg1_, double jarg2);
   public final static native double ForceVelocityCurve_calcDerivative(long jarg1, ForceVelocityCurve jarg1_, double jarg2, int jarg3);
   public final static native long ForceVelocityCurve_getCurveDomain(long jarg1, ForceVelocityCurve jarg1_);
   public final static native void ForceVelocityCurve_printMuscleCurveToCSVFile(long jarg1, ForceVelocityCurve jarg1_, String jarg2);
@@ -9505,7 +9510,8 @@ public class opensimModelJNI {
   public final static native void ForceVelocityInverseCurve_setCurveShape(long jarg1, ForceVelocityInverseCurve jarg1_, double jarg2, double jarg3, double jarg4, double jarg5, double jarg6, double jarg7);
   public final static native void ForceVelocityInverseCurve_setConcentricCurviness(long jarg1, ForceVelocityInverseCurve jarg1_, double jarg2);
   public final static native void ForceVelocityInverseCurve_setEccentricCurviness(long jarg1, ForceVelocityInverseCurve jarg1_, double jarg2);
-  public final static native double ForceVelocityInverseCurve_calcValue(long jarg1, ForceVelocityInverseCurve jarg1_, double jarg2);
+  public final static native double ForceVelocityInverseCurve_calcValue__SWIG_0(long jarg1, ForceVelocityInverseCurve jarg1_, long jarg2, Vector jarg2_);
+  public final static native double ForceVelocityInverseCurve_calcValue__SWIG_1(long jarg1, ForceVelocityInverseCurve jarg1_, double jarg2);
   public final static native double ForceVelocityInverseCurve_calcDerivative(long jarg1, ForceVelocityInverseCurve jarg1_, double jarg2, int jarg3);
   public final static native long ForceVelocityInverseCurve_getCurveDomain(long jarg1, ForceVelocityInverseCurve jarg1_);
   public final static native void ForceVelocityInverseCurve_printMuscleCurveToCSVFile(long jarg1, ForceVelocityInverseCurve jarg1_, String jarg2);
@@ -9581,7 +9587,8 @@ public class opensimModelJNI {
   public final static native boolean TendonForceLengthCurve_isFittedCurveBeingUsed(long jarg1, TendonForceLengthCurve jarg1_);
   public final static native void TendonForceLengthCurve_setStrainAtOneNormForce(long jarg1, TendonForceLengthCurve jarg1_, double jarg2);
   public final static native void TendonForceLengthCurve_setOptionalProperties(long jarg1, TendonForceLengthCurve jarg1_, double jarg2, double jarg3, double jarg4);
-  public final static native double TendonForceLengthCurve_calcValue(long jarg1, TendonForceLengthCurve jarg1_, double jarg2);
+  public final static native double TendonForceLengthCurve_calcValue__SWIG_0(long jarg1, TendonForceLengthCurve jarg1_, long jarg2, Vector jarg2_);
+  public final static native double TendonForceLengthCurve_calcValue__SWIG_1(long jarg1, TendonForceLengthCurve jarg1_, double jarg2);
   public final static native double TendonForceLengthCurve_calcDerivative(long jarg1, TendonForceLengthCurve jarg1_, double jarg2, int jarg3);
   public final static native double TendonForceLengthCurve_calcIntegral(long jarg1, TendonForceLengthCurve jarg1_, double jarg2);
   public final static native long TendonForceLengthCurve_getCurveDomain(long jarg1, TendonForceLengthCurve jarg1_);

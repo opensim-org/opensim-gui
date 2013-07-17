@@ -317,8 +317,12 @@ public class TendonForceLengthCurve extends Function {
     opensimModelJNI.TendonForceLengthCurve_setOptionalProperties(swigCPtr, this, aStiffnessAtOneNormForce, aNormForceAtToeEnd, aCurviness);
   }
 
+  public double calcValue(Vector x) {
+    return opensimModelJNI.TendonForceLengthCurve_calcValue__SWIG_0(swigCPtr, this, Vector.getCPtr(x), x);
+  }
+
   public double calcValue(double aNormLength) {
-    return opensimModelJNI.TendonForceLengthCurve_calcValue(swigCPtr, this, aNormLength);
+    return opensimModelJNI.TendonForceLengthCurve_calcValue__SWIG_1(swigCPtr, this, aNormLength);
   }
 
   public double calcDerivative(double aNormLength, int order) {

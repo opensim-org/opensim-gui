@@ -254,7 +254,11 @@ public class FiberCompressiveForceLengthCurve extends Function {
   }
 
   public double calcValue(double aNormLength) {
-    return opensimModelJNI.FiberCompressiveForceLengthCurve_calcValue(swigCPtr, this, aNormLength);
+    return opensimModelJNI.FiberCompressiveForceLengthCurve_calcValue__SWIG_0(swigCPtr, this, aNormLength);
+  }
+
+  public double calcValue(Vector x) {
+    return opensimModelJNI.FiberCompressiveForceLengthCurve_calcValue__SWIG_1(swigCPtr, this, Vector.getCPtr(x), x);
   }
 
   public double calcDerivative(double aNormLength, int order) {

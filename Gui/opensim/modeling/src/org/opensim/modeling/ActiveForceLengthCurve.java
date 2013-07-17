@@ -353,8 +353,12 @@ public class ActiveForceLengthCurve extends Function {
     opensimModelJNI.ActiveForceLengthCurve_setMinValue(swigCPtr, this, minValue);
   }
 
+  public double calcValue(Vector x) {
+    return opensimModelJNI.ActiveForceLengthCurve_calcValue__SWIG_0(swigCPtr, this, Vector.getCPtr(x), x);
+  }
+
   public double calcValue(double normFiberLength) {
-    return opensimModelJNI.ActiveForceLengthCurve_calcValue(swigCPtr, this, normFiberLength);
+    return opensimModelJNI.ActiveForceLengthCurve_calcValue__SWIG_1(swigCPtr, this, normFiberLength);
   }
 
   public double calcDerivative(double normFiberLength, int order) {

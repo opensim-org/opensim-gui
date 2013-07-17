@@ -185,6 +185,7 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
         OpenSimObject saved = (getRootOpenSimObject(objRoot)).clone();
         ((PropertyNode)node).setValue(aValue);
         setSomethingChanged(true);
+        getRootOpenSimObject(objRoot).updPropertyByIndex(0);
         propertyChangeSupport.firePropertyChange("Change", saved, getRootOpenSimObject(objRoot));
     }
   }
