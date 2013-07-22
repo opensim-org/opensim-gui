@@ -5,14 +5,11 @@
 package org.opensim.view.nodes;
 
 import java.awt.Component;
-import java.beans.PropertyEditorSupport;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Function;
-import org.opensim.modeling.Model;
-import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.view.pub.OpenSimDB;
-import org.opensim.view.pub.ViewDB;
 
 /**
  *
@@ -47,11 +44,12 @@ public class OpenSimFunctionEditor extends OpenSimCustomEditor  {
     
     public OpenSimFunctionEditor(AbstractProperty ap, Function obj, OpenSimObjectNode osNode){
         super(ap, osNode);
-        objectToEdit =obj;
+        //objectToEdit =obj;
     }
 
     @Override
     public Component getCustomEditor() {
+        if (objectToEdit == null) return new JPanel().add(new JLabel(" Only individual selections of this type can be edited."));
         return new OpenSimFunctionEditorPanel(objectToEdit);
     }
 
