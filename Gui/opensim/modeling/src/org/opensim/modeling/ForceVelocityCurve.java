@@ -477,16 +477,16 @@ public class ForceVelocityCurve extends Function {
     this(opensimModelJNI.new_ForceVelocityCurve__SWIG_0(), true);
   }
 
-  public ForceVelocityCurve(double concentricSlopeAtVmax, double concentricSlopeNearVmax, double isometricSlope, double eccentricSlopeAtVmax, double eccentricSlopeNearVmax, double maxEccentricVelocityForceMultiplier, double concentricCurviness, double eccentricCurviness, String muscleName) {
-    this(opensimModelJNI.new_ForceVelocityCurve__SWIG_1(concentricSlopeAtVmax, concentricSlopeNearVmax, isometricSlope, eccentricSlopeAtVmax, eccentricSlopeNearVmax, maxEccentricVelocityForceMultiplier, concentricCurviness, eccentricCurviness, muscleName), true);
-  }
-
-  public double getConcentricSlopeNearVmax() {
-    return opensimModelJNI.ForceVelocityCurve_getConcentricSlopeNearVmax(swigCPtr, this);
+  public ForceVelocityCurve(double concentricSlopeAtVmax, double concentricSlopeNearVmax, double isometricSlope, double eccentricSlopeAtVmax, double eccentricSlopeNearVmax, double maxEccentricVelocityForceMultiplier, double concentricCurviness, double eccentricCurviness) {
+    this(opensimModelJNI.new_ForceVelocityCurve__SWIG_1(concentricSlopeAtVmax, concentricSlopeNearVmax, isometricSlope, eccentricSlopeAtVmax, eccentricSlopeNearVmax, maxEccentricVelocityForceMultiplier, concentricCurviness, eccentricCurviness), true);
   }
 
   public double getConcentricSlopeAtVmax() {
     return opensimModelJNI.ForceVelocityCurve_getConcentricSlopeAtVmax(swigCPtr, this);
+  }
+
+  public double getConcentricSlopeNearVmax() {
+    return opensimModelJNI.ForceVelocityCurve_getConcentricSlopeNearVmax(swigCPtr, this);
   }
 
   public double getIsometricSlope() {
