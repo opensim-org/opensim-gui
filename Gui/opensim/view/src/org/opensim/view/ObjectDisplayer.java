@@ -12,7 +12,7 @@ import vtk.*;
  * @author ayman
  */
 public abstract class ObjectDisplayer extends vtkActor {
-    protected OpenSimObject obj;
+    private OpenSimObject obj;
 
     public ObjectDisplayer(OpenSimObject object) {
         obj = object;
@@ -73,6 +73,13 @@ public abstract class ObjectDisplayer extends vtkActor {
         vtkPolyDataMapper mapper = new vtkPolyDataMapper();
         mapper.SetInput(mover.GetOutput());
         SetMapper(mapper);
+    }
+
+    /**
+     * @return the obj
+     */
+    public OpenSimObject getObj() {
+        return obj;
     }
     
 }
