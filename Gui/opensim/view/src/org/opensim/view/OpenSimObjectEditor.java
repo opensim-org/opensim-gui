@@ -5,14 +5,13 @@
 package org.opensim.view;
 
 import java.awt.Component;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.editors.ObjectPropertyViewerPanel;
 import org.opensim.view.nodes.OpenSimCustomEditor;
 import org.opensim.view.nodes.OpenSimObjectNode;
-import org.opensim.view.nodes.PropertyEditorAdaptor;
 
 /**
  *
@@ -57,6 +56,7 @@ public class OpenSimObjectEditor extends OpenSimCustomEditor {
 
     @Override
     public Component getCustomEditor() {
+        if (objectToEdit == null) return new JPanel().add(new JLabel(" Only individual selections of this type can be edited."));
          ObjectPropertyViewerPanel opvp = new ObjectPropertyViewerPanel(objectToEdit, true);
          opvp.getModel().addPropertyChangeListener(this);
          return opvp;

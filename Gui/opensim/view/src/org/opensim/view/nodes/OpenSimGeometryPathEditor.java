@@ -5,14 +5,11 @@
 package org.opensim.view.nodes;
 
 import java.awt.Component;
-import java.beans.PropertyEditorSupport;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.GeometryPath;
-import org.opensim.modeling.Model;
-import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.view.pub.OpenSimDB;
-import org.opensim.view.pub.ViewDB;
 
 /**
  *
@@ -48,7 +45,7 @@ public class OpenSimGeometryPathEditor extends OpenSimCustomEditor  {
 
     public OpenSimGeometryPathEditor(AbstractProperty ap, GeometryPath obj, OpenSimObjectNode osNode){
         super(ap, osNode); 
-        objectToEdit =obj;
+        
     }
 
     @Override
@@ -58,6 +55,7 @@ public class OpenSimGeometryPathEditor extends OpenSimCustomEditor  {
 
     @Override
     public Component getCustomEditor() {
+       if (objectToEdit == null) return new JPanel().add(new JLabel(" Only individual selections  of this type can be edited."));
         return new OpenSimGeometryPathEditorPanel(objectToEdit);
     }
 

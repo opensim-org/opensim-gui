@@ -189,6 +189,12 @@ public class AnalyticGeometryDisplayer extends ObjectDisplayer {
 
     @Override
     void updateFromProperties() {
+        ContactSphere cs = ContactSphere.safeDownCast(getObj());
+        if (cs != null){
+            double newRadius = cs.getRadius();
+            AnalyticSphere anSphere = AnalyticSphere.dynamic_cast(ag);
+            anSphere.setSphereRadius(newRadius);
+        }
         vtkPolyData polyData = getPolyData(ag);
         updatePropertiesForPolyData(polyData);
     }
