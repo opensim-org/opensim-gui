@@ -14,6 +14,7 @@ public class Joint extends ModelComponent {
   public Joint(long cPtr, boolean cMemoryOwn) {
     super(opensimModelJNI.Joint_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
+    markAdopted();
   }
 
   public static long getCPtr(Joint obj) {

@@ -59,17 +59,14 @@ public class FreeJoint extends Joint {
 
   public FreeJoint() {
     this(opensimModelJNI.new_FreeJoint__SWIG_0(), true);
-    markAdopted();
   }
 
   public FreeJoint(String name, Body parent, Vec3 locationInParent, Vec3 orientationInParent, Body body, Vec3 locationInBody, Vec3 orientationInBody, boolean reverse) {
     this(opensimModelJNI.new_FreeJoint__SWIG_1(name, Body.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, Body.getCPtr(body), body, Vec3.getCPtr(locationInBody), locationInBody, Vec3.getCPtr(orientationInBody), orientationInBody, reverse), true);
-    markAdopted();
   }
 
   public FreeJoint(String name, Body parent, Vec3 locationInParent, Vec3 orientationInParent, Body body, Vec3 locationInBody, Vec3 orientationInBody) {
     this(opensimModelJNI.new_FreeJoint__SWIG_2(name, Body.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, Body.getCPtr(body), body, Vec3.getCPtr(locationInBody), locationInBody, Vec3.getCPtr(orientationInBody), orientationInBody), true);
-    markAdopted();
   }
 
   public int numCoordinates() {

@@ -91,8 +91,8 @@ public class InverseKinematicsSolver extends AssemblySolver {
     opensimModelJNI.InverseKinematicsSolver_computeCurrentSquaredMarkerErrors(swigCPtr, this, SWIGTYPE_p_SimTK__Array_T_double_t.getCPtr(markerErrors));
   }
 
-  public SWIGTYPE_p_SimTK__String getMarkerNameForIndex(int markerErrorIndex) {
-    return new SWIGTYPE_p_SimTK__String(opensimModelJNI.InverseKinematicsSolver_getMarkerNameForIndex(swigCPtr, this, markerErrorIndex), true);
+  public SWIGTYPE_p_SimTK__String getMarkerNameForIndex(int markerIndex) {
+    return new SWIGTYPE_p_SimTK__String(opensimModelJNI.InverseKinematicsSolver_getMarkerNameForIndex(swigCPtr, this, markerIndex), true);
   }
 
 }
