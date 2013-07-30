@@ -14,16 +14,13 @@ import org.opensim.tracking.ForwardToolModel;
 public class SimulationDB extends Observable{
     
     static SimulationDB instance;
+
+
     ForwardToolModel forwardToolModel= null;
     private boolean running = false;
     
     private SimulationDB() {
         instance = this;
-    }
-    
-    // The setChanged() protected method must overridden to make it public
-    public synchronized void setChanged() {
-        super.setChanged();
     }
     
     public static synchronized SimulationDB getInstance() {
@@ -34,8 +31,18 @@ public class SimulationDB extends Observable{
         return instance;
     }
 
+    public void fireToolFinish() {
+        running = false;
+        setChanged();
+        notifyObservers();
+    }
+
     public void startSimulation(ForwardToolModel toolModel) {
         forwardToolModel = toolModel;
+        fireToolStart();
+    }
+
+    public void fireToolStart() {
         running = true;
         setChanged();
         notifyObservers();
@@ -45,9 +52,7 @@ public class SimulationDB extends Observable{
             forwardToolModel.interrupt(true);
             forwardToolModel=null;
         }
-        running = false;
-        setChanged();
-        notifyObservers();
+        fireToolFinish();
     }
 
     /**
@@ -57,11 +62,12 @@ public class SimulationDB extends Observable{
         return running;
     }
 
+    public boolean isSimulating() {
+        return running && forwardToolModel!=null;
+    }
     public void finishSimulation() {
         forwardToolModel=null;
-        running = false;
-        setChanged();
-        notifyObservers();
+        fireToolFinish();
     }
     
     

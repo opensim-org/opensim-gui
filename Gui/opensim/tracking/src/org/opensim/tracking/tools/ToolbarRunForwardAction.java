@@ -42,9 +42,11 @@ import org.opensim.view.pub.OpenSimDB;
 public final class ToolbarRunForwardAction extends CallableSystemAction implements Observer {
    
     private boolean enabled = true;
+    private double finalTime = 1000.0;
     
     public ToolbarRunForwardAction() {
         SimulationDB.getInstance().addObserver(this);
+        OpenSimDB.getInstance().addObserver(this);
     }
    public void performAction() {
        ForwardToolModel toolModel=null;
@@ -54,7 +56,7 @@ public final class ToolbarRunForwardAction extends CallableSystemAction implemen
                     return;
                 // TODO implement action body
                 toolModel = new ForwardToolModel(currentModel);
-                toolModel.setFinalTime(1000.0);
+                toolModel.setFinalTime(getFinalTime());
                 toolModel.setSolveForEquilibrium(true);
                 ((ForwardTool) toolModel.getTool()).setPrintResultFiles(false);
                 toolModel.execute();
@@ -84,8 +86,21 @@ public final class ToolbarRunForwardAction extends CallableSystemAction implemen
    }
    
    public boolean isEnabled() {
-      return enabled;
+      boolean toolEnabled = checkToolStatus();
+      return enabled && toolEnabled;
    }
+
+    private boolean checkToolStatus() {
+        ForwardToolAction fdAction;
+        boolean toolEnabled=true;
+        try {
+            fdAction = (ForwardToolAction) ForwardToolAction.findObject((Class)Class.forName("org.opensim.tracking.tools.ForwardToolAction"), true);
+            toolEnabled = fdAction.isEnabled();
+        } catch (ClassNotFoundException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        return toolEnabled;
+    }
     public void update(Observable o, Object o1) {
         if (o instanceof SimulationDB){
             SimulationDB sdb = (SimulationDB) o;
@@ -100,5 +115,23 @@ public final class ToolbarRunForwardAction extends CallableSystemAction implemen
                 setEnabled(enabled);
             }
         }
+        else if (o instanceof OpenSimDB){
+            enabled = checkToolStatus();
+            setEnabled(enabled);
+    }
+    }
+
+    /**
+     * @return the finalTime
+     */
+    public double getFinalTime() {
+        return finalTime;
+    }
+
+    /**
+     * @param finalTime the finalTime to set
+     */
+    public void setFinalTime(double finalTime) {
+        this.finalTime = finalTime;
     }
 }
