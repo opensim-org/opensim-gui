@@ -35,7 +35,7 @@ import os
 # Load the setup file
 print "Acquiring file for Control profile"
 
-#if _min and _max are not 
+#if _min and _max are not
 offsetIfMinMax_Unspecified=0.01
 # Prompts user to select file if above does not exist
 controlProfileStore = "doesnotexistfile.sto"
@@ -70,6 +70,11 @@ for i in range (0, nLabels):
 	csi = csetRaw.get(i)
 	csiL = modeling.ControlLinear.safeDownCast(csi)
 	controlName = csi.getName()
+    # [chrisdembia] For the control to be applied, must be named as
+    # "<Actuator::getName()>.excitation". The name "<Actuator::getName()>" is
+    # not sufficient, and the control will not be applied (in CMC). Temporary
+    # fix.
+    csi.getName(controlName + '.excitation')
 	minControlName = controlName+'_min'
 	minControlIndex = -1
 	maxControlName = controlName+'_max'
@@ -84,7 +89,7 @@ for i in range (0, nLabels):
 			csiL_min = modeling.ControlLinear.safeDownCast(csetRaw.get(minControlIndex))
 			nodeSet = csiL.getControlValues()
 			nodeSetSize = nodeSet.getSize()
-			for nodeNum in range(0, nodeSetSize-1):
+			for nodeNum in range(nodeSetSize):
 				clNode = nodeSet.get(nodeNum)
 				clNodeTime = clNode.getTime()
 				minValue = csiL_min.getControlValue(clNodeTime)
@@ -94,7 +99,7 @@ for i in range (0, nLabels):
 		else:
 			nodeSet = csiL.getControlValues()
 			nodeSetSize = nodeSet.getSize()
-			for nodeNum in range(0, nodeSetSize-1):
+			for nodeNum in range(nodeSetSize):
 				clNode = nodeSet.get(nodeNum)
 				clNodeTime = clNode.getTime()
 				minValue = csiL.getControlValue(clNodeTime);
@@ -108,7 +113,7 @@ for i in range (0, nLabels):
 			csiL_max = modeling.ControlLinear.safeDownCast(csetRaw.get(maxControlIndex))
 			nodeSet = csiL.getControlValues()
 			nodeSetSize = nodeSet.getSize()
-			for nodeNum in range(0, nodeSetSize-1):
+			for nodeNum in range(nodeSetSize):
 				clNode = nodeSet.get(nodeNum)
 				clNodeTime = clNode.getTime()
 				maxValue = csiL_max.getControlValue(clNodeTime)
@@ -118,7 +123,7 @@ for i in range (0, nLabels):
 		else:
 			nodeSet = csiL.getControlValues()
 			nodeSetSize = nodeSet.getSize()
-			for nodeNum in range(0, nodeSetSize-1):
+			for nodeNum in range(nodeSetSize):
 				clNode = nodeSet.get(nodeNum)
 				clNodeTime = clNode.getTime()
 				maxValue = csiL.getControlValue(clNodeTime)
@@ -129,7 +134,7 @@ for i in range (0, nLabels):
 		csiL.setDefaultParameterMax(currentMax)
 
 #remove entries that has trailing _min or _max
-for i in range (0, lbls.getSize()):
+for i in range(lbls.getSize()):
 	label = lbls.getitem(i)
 	if (label.find('_min')==-1 and label.find('_max')==-1):
 		continue
