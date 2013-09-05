@@ -35,7 +35,7 @@ import os
 # Load the setup file
 print "Acquiring file for Control profile"
 
-#if _min and _max are not
+#if _min and _max are not 
 offsetIfMinMax_Unspecified=0.01
 # Prompts user to select file if above does not exist
 controlProfileStore = "doesnotexistfile.sto"
