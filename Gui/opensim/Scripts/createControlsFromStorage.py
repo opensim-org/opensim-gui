@@ -63,6 +63,7 @@ csetRaw = modeling.ControlSet(controlStorage)
 sz = csetRaw.getSize()
 # column labels are all controls, min, max + time
 lbls = controlStorage.getColumnLabels()
+# subtracting 1 to disregard the time column
 nLabels = lbls.getSize()-1
 
 #for all controls in the set do this
@@ -74,7 +75,7 @@ for i in range (0, nLabels):
     # "<Actuator::getName()>.excitation". The name "<Actuator::getName()>" is
     # not sufficient, and the control will not be applied (in CMC). Temporary
     # fix.
-    csi.getName(controlName + '.excitation')
+	csi.setName(controlName + '.excitation')
 	minControlName = controlName+'_min'
 	minControlIndex = -1
 	maxControlName = controlName+'_max'
