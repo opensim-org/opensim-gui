@@ -112,18 +112,19 @@ public class SelectedObject implements Selectable {
          }
       } else if (Body.safeDownCast(object) != null ) {
          BodyDisplayer asm = (BodyDisplayer) ViewDB.getInstance().getVtkRepForObject(object);
-         double unselectedColor[] = {1.0, 1.0, 1.0};
+         //double unselectedColor[] = {1.0, 1.0, 1.0};
          if(highlight){
              // Save existing color with the body for later restoration
              Body b=Body.safeDownCast(object);
              vtkProp3DCollection props =asm.getDisplayGeometryAssembly().GetParts();
-             double[] currentColor = ((vtkActor)props.GetLastProp3D()).GetProperty().GetColor();
+             //vtkProp3D lastProp = props.GetLastProp3D();
+             //double[] currentColor = ((vtkActor)props.GetLastProp3D()).GetProperty().GetColor();
              //b.getDisplayer().getVisibleProperties().setColor(currentColor);
              ViewDB.getInstance().applyColor(defaultSelectedColor, asm.getDisplayGeometryAssembly(), false);
          }
          else{
-            Body b=Body.safeDownCast(object);
-            double[] actualColor = new double[3];
+            //Body b=Body.safeDownCast(object);
+            //double[] actualColor = new double[3];
             asm.applyColorsFromModel();
          }
       }
