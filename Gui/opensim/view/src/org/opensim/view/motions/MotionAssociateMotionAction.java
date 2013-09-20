@@ -55,7 +55,7 @@ public final class MotionAssociateMotionAction extends CallableSystemAction {
             Storage motion = node.getMotion();
             Storage storage = null;
             try {
-               if (fileName.endsWith(".sto") || fileName.endsWith(".mot"))
+               if (fileName.toLowerCase().endsWith(".sto") || fileName.toLowerCase().endsWith(".mot"))
                 storage = new Storage(fileName);
                else if (fileName.endsWith(".trc")){
                     MarkerData markerData = new MarkerData(fileName);
