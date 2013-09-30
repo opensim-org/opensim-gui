@@ -8,18 +8,18 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_OpenSim__MarkersReference {
+public class SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type {
   private long swigCPtr;
 
-  protected SWIGTYPE_p_OpenSim__MarkersReference(long cPtr, boolean futureUse) {
+  protected SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type(long cPtr, boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_OpenSim__MarkersReference() {
+  protected SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_OpenSim__MarkersReference obj) {
+  protected static long getCPtr(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }

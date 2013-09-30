@@ -101,12 +101,12 @@ public class DisplayGeometry extends OpenSimObject {
     opensimModelJNI.DisplayGeometry_setTextureFile(swigCPtr, this, aTextureFile);
   }
 
-  public SWIGTYPE_p_SimTK__Transform_T_Real_t getTransform() {
-    return new SWIGTYPE_p_SimTK__Transform_T_Real_t(opensimModelJNI.DisplayGeometry_getTransform(swigCPtr, this), false);
+  public Transform getTransform() {
+    return new Transform(opensimModelJNI.DisplayGeometry_getTransform(swigCPtr, this), false);
   }
 
-  public void setTransform(SWIGTYPE_p_SimTK__Transform_T_Real_t aTransform) {
-    opensimModelJNI.DisplayGeometry_setTransform(swigCPtr, this, SWIGTYPE_p_SimTK__Transform_T_Real_t.getCPtr(aTransform));
+  public void setTransform(Transform aTransform) {
+    opensimModelJNI.DisplayGeometry_setTransform(swigCPtr, this, Transform.getCPtr(aTransform), aTransform);
   }
 
   public void setRotationsAndTRanslations(double[] aArray) {

@@ -73,8 +73,4 @@ public class BallJoint extends Joint {
     return opensimModelJNI.BallJoint_numCoordinates(swigCPtr, this);
   }
 
-  public void scale(ScaleSet aScaleSet) {
-    opensimModelJNI.BallJoint_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
-  }
-
 }

@@ -8,18 +8,18 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_3_double_1_t_t {
+public class SWIGTYPE_p_PolygonalMesh {
   private long swigCPtr;
 
-  protected SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_3_double_1_t_t(long cPtr, boolean futureUse) {
+  protected SWIGTYPE_p_PolygonalMesh(long cPtr, boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_3_double_1_t_t() {
+  protected SWIGTYPE_p_PolygonalMesh() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_3_double_1_t_t obj) {
+  protected static long getCPtr(SWIGTYPE_p_PolygonalMesh obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }

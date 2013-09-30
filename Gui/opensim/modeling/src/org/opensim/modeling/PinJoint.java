@@ -73,8 +73,4 @@ public class PinJoint extends Joint {
     return opensimModelJNI.PinJoint_numCoordinates(swigCPtr, this);
   }
 
-  public void scale(ScaleSet aScaleSet) {
-    opensimModelJNI.PinJoint_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
-  }
-
 }

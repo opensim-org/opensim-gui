@@ -139,8 +139,8 @@ public class SimbodyEngine extends OpenSimObject {
     return new SWIGTYPE_p_Transform(opensimModelJNI.SimbodyEngine_getTransform(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody), true);
   }
 
-  public void computeReactions(State s, SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_3_double_1_t_t rForces, SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_3_double_1_t_t rTorques) {
-    opensimModelJNI.SimbodyEngine_computeReactions(swigCPtr, this, State.getCPtr(s), s, SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_3_double_1_t_t.getCPtr(rForces), SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_3_double_1_t_t.getCPtr(rTorques));
+  public void computeReactions(State s, VectorOfVec3 rForces, VectorOfVec3 rTorques) {
+    opensimModelJNI.SimbodyEngine_computeReactions(swigCPtr, this, State.getCPtr(s), s, VectorOfVec3.getCPtr(rForces), rForces, VectorOfVec3.getCPtr(rTorques), rTorques);
   }
 
   public void formCompleteStorages(State s, Storage aQIn, SWIGTYPE_p_p_OpenSim__Storage rQComplete, SWIGTYPE_p_p_OpenSim__Storage rUComplete) {

@@ -143,12 +143,4 @@ public class StateVector {
     opensimModelJNI.StateVector_divide__SWIG_2(swigCPtr, this, StateVector.getCPtr(aStateVector), aStateVector);
   }
 
-  public void print() {
-    opensimModelJNI.StateVector_print__SWIG_0(swigCPtr, this);
-  }
-
-  public int print(SWIGTYPE_p_FILE fp) {
-    return opensimModelJNI.StateVector_print__SWIG_1(swigCPtr, this, SWIGTYPE_p_FILE.getCPtr(fp));
-  }
-
 }

@@ -377,8 +377,8 @@ public class WeldConstraint extends Constraint {
     this(opensimModelJNI.new_WeldConstraint__SWIG_1(name, Body.getCPtr(body1), body1, Vec3.getCPtr(locationInBody1), locationInBody1, Vec3.getCPtr(orientationInBody1), orientationInBody1, Body.getCPtr(body2), body2, Vec3.getCPtr(locationInBody2), locationInBody2, Vec3.getCPtr(orientationInBody2), orientationInBody2), true);
   }
 
-  public WeldConstraint(String name, Body body1, SWIGTYPE_p_SimTK__Transform_T_Real_t transformInBody1, Body body2, SWIGTYPE_p_SimTK__Transform_T_Real_t transformInBody2) {
-    this(opensimModelJNI.new_WeldConstraint__SWIG_2(name, Body.getCPtr(body1), body1, SWIGTYPE_p_SimTK__Transform_T_Real_t.getCPtr(transformInBody1), Body.getCPtr(body2), body2, SWIGTYPE_p_SimTK__Transform_T_Real_t.getCPtr(transformInBody2)), true);
+  public WeldConstraint(String name, Body body1, Transform transformInBody1, Body body2, Transform transformInBody2) {
+    this(opensimModelJNI.new_WeldConstraint__SWIG_2(name, Body.getCPtr(body1), body1, Transform.getCPtr(transformInBody1), transformInBody1, Body.getCPtr(body2), body2, Transform.getCPtr(transformInBody2), transformInBody2), true);
   }
 
   public void setBody1ByName(String aBodyName) {

@@ -60,4 +60,5 @@ public interface opensimModelConstants {
   public final static double SimTK_DALTON_TO_GRAM = opensimModelJNI.SimTK_DALTON_TO_GRAM_get();
   public final static double SimTK_E_TO_COULOMB = opensimModelJNI.SimTK_E_TO_COULOMB_get();
   public final static double SimTK_EV_TO_JOULE = opensimModelJNI.SimTK_EV_TO_JOULE_get();
+  public final static int SimTK_DEFAULT_PRECISION = opensimModelJNI.SimTK_DEFAULT_PRECISION_get();
 }

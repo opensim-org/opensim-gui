@@ -73,8 +73,4 @@ public class UniversalJoint extends Joint {
     return opensimModelJNI.UniversalJoint_numCoordinates(swigCPtr, this);
   }
 
-  public void scale(ScaleSet aScaleSet) {
-    opensimModelJNI.UniversalJoint_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
-  }
-
 }

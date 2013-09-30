@@ -191,8 +191,8 @@ public class WrapObject extends OpenSimObject {
     opensimModelJNI.WrapObject_setQuadrantName(swigCPtr, this, aName);
   }
 
-  public SWIGTYPE_p_SimTK__Transform_T_Real_t getTransform() {
-    return new SWIGTYPE_p_SimTK__Transform_T_Real_t(opensimModelJNI.WrapObject_getTransform(swigCPtr, this), false);
+  public Transform getTransform() {
+    return new Transform(opensimModelJNI.WrapObject_getTransform(swigCPtr, this), false);
   }
 
   public String getWrapTypeName() {

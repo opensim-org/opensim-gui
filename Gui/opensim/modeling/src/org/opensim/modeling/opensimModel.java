@@ -89,6 +89,177 @@ public class opensimModel implements opensimModelConstants {
     return new PhiMatrixTranspose(opensimModelJNI.transpose(PhiMatrix.getCPtr(phi), phi), true);
   }
 
+  public static void SimTK_version_SimTKcommon(SWIGTYPE_p_int major, SWIGTYPE_p_int minor, SWIGTYPE_p_int build) {
+    opensimModelJNI.SimTK_version_SimTKcommon(SWIGTYPE_p_int.getCPtr(major), SWIGTYPE_p_int.getCPtr(minor), SWIGTYPE_p_int.getCPtr(build));
+  }
+
+  public static void SimTK_about_SimTKcommon(String key, int maxlen, String value) {
+    opensimModelJNI.SimTK_about_SimTKcommon(key, maxlen, value);
+  }
+
+  public static boolean canStoreInNonnegativeInt(boolean arg0) {
+    return opensimModelJNI.canStoreInNonnegativeInt__SWIG_0(arg0);
+  }
+
+  public static boolean canStoreInNonnegativeInt(char c) {
+    return opensimModelJNI.canStoreInNonnegativeInt__SWIG_1(c);
+  }
+
+  public static boolean canStoreInNonnegativeInt(short arg0) {
+    return opensimModelJNI.canStoreInNonnegativeInt__SWIG_2(arg0);
+  }
+
+  public static boolean canStoreInNonnegativeInt(byte c) {
+    return opensimModelJNI.canStoreInNonnegativeInt__SWIG_3(c);
+  }
+
+  public static boolean canStoreInNonnegativeInt(int arg0) {
+    return opensimModelJNI.canStoreInNonnegativeInt__SWIG_5(arg0);
+  }
+
+  public static boolean canStoreInNonnegativeInt(long l) {
+    return opensimModelJNI.canStoreInNonnegativeInt__SWIG_8(l);
+  }
+
+  public static boolean canStoreInNonnegativeInt(java.math.BigInteger u) {
+    return opensimModelJNI.canStoreInNonnegativeInt__SWIG_11(u);
+  }
+
+  public static boolean isSizeInRange(char sz, char mx) {
+    return opensimModelJNI.isSizeInRange__SWIG_0(sz, mx);
+  }
+
+  public static boolean isSizeInRange(byte sz, byte mx) {
+    return opensimModelJNI.isSizeInRange__SWIG_1(sz, mx);
+  }
+
+  public static boolean isSizeInRange(short sz, short mx) {
+    return opensimModelJNI.isSizeInRange__SWIG_2(sz, mx);
+  }
+
+  public static boolean isSizeInRange(int sz, int mx) {
+    return opensimModelJNI.isSizeInRange__SWIG_3(sz, mx);
+  }
+
+  public static boolean isSizeInRange(long sz, long mx) {
+    return opensimModelJNI.isSizeInRange__SWIG_5(sz, mx);
+  }
+
+  public static boolean isSizeInRange(java.math.BigInteger sz, java.math.BigInteger mx) {
+    return opensimModelJNI.isSizeInRange__SWIG_10(sz, mx);
+  }
+
+  public static boolean isIndexInRange(char ix, char sz) {
+    return opensimModelJNI.isIndexInRange__SWIG_0(ix, sz);
+  }
+
+  public static boolean isIndexInRange(byte ix, byte sz) {
+    return opensimModelJNI.isIndexInRange__SWIG_1(ix, sz);
+  }
+
+  public static boolean isIndexInRange(short ix, short sz) {
+    return opensimModelJNI.isIndexInRange__SWIG_2(ix, sz);
+  }
+
+  public static boolean isIndexInRange(int ix, int sz) {
+    return opensimModelJNI.isIndexInRange__SWIG_3(ix, sz);
+  }
+
+  public static boolean isIndexInRange(long ix, long sz) {
+    return opensimModelJNI.isIndexInRange__SWIG_5(ix, sz);
+  }
+
+  public static boolean isIndexInRange(java.math.BigInteger ix, java.math.BigInteger sz) {
+    return opensimModelJNI.isIndexInRange__SWIG_10(ix, sz);
+  }
+
+  public static boolean isNonnegative(boolean arg0) {
+    return opensimModelJNI.isNonnegative__SWIG_0(arg0);
+  }
+
+  public static boolean isNonnegative(char n) {
+    return opensimModelJNI.isNonnegative__SWIG_1(n);
+  }
+
+  public static boolean isNonnegative(byte n) {
+    return opensimModelJNI.isNonnegative__SWIG_2(n);
+  }
+
+  public static boolean isNonnegative(short n) {
+    return opensimModelJNI.isNonnegative__SWIG_3(n);
+  }
+
+  public static boolean isNonnegative(int n) {
+    return opensimModelJNI.isNonnegative__SWIG_4(n);
+  }
+
+  public static boolean isNonnegative(long n) {
+    return opensimModelJNI.isNonnegative__SWIG_6(n);
+  }
+
+  public static boolean isNonnegative(java.math.BigInteger arg0) {
+    return opensimModelJNI.isNonnegative__SWIG_11(arg0);
+  }
+
+  public static int getInvalidIndex() {
+    return opensimModelJNI.InvalidIndex_get();
+  }
+
+  public static Vec3 getBlack() {
+    long cPtr = opensimModelJNI.Black_get();
+    return (cPtr == 0) ? null : new Vec3(cPtr, false);
+  }
+
+  public static Vec3 getGray() {
+    long cPtr = opensimModelJNI.Gray_get();
+    return (cPtr == 0) ? null : new Vec3(cPtr, false);
+  }
+
+  public static Vec3 getRed() {
+    long cPtr = opensimModelJNI.Red_get();
+    return (cPtr == 0) ? null : new Vec3(cPtr, false);
+  }
+
+  public static Vec3 getGreen() {
+    long cPtr = opensimModelJNI.Green_get();
+    return (cPtr == 0) ? null : new Vec3(cPtr, false);
+  }
+
+  public static Vec3 getBlue() {
+    long cPtr = opensimModelJNI.Blue_get();
+    return (cPtr == 0) ? null : new Vec3(cPtr, false);
+  }
+
+  public static Vec3 getYellow() {
+    long cPtr = opensimModelJNI.Yellow_get();
+    return (cPtr == 0) ? null : new Vec3(cPtr, false);
+  }
+
+  public static Vec3 getOrange() {
+    long cPtr = opensimModelJNI.Orange_get();
+    return (cPtr == 0) ? null : new Vec3(cPtr, false);
+  }
+
+  public static Vec3 getMagenta() {
+    long cPtr = opensimModelJNI.Magenta_get();
+    return (cPtr == 0) ? null : new Vec3(cPtr, false);
+  }
+
+  public static Vec3 getPurple() {
+    long cPtr = opensimModelJNI.Purple_get();
+    return (cPtr == 0) ? null : new Vec3(cPtr, false);
+  }
+
+  public static Vec3 getCyan() {
+    long cPtr = opensimModelJNI.Cyan_get();
+    return (cPtr == 0) ? null : new Vec3(cPtr, false);
+  }
+
+  public static Vec3 getWhite() {
+    long cPtr = opensimModelJNI.White_get();
+    return (cPtr == 0) ? null : new Vec3(cPtr, false);
+  }
+
   public static int getArray_CAPMIN() {
     return opensimModelJNI.Array_CAPMIN_get();
   }

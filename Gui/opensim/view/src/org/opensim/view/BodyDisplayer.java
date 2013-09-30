@@ -34,13 +34,12 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Set;
 import java.util.prefs.Preferences;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.DisplayGeometry;
 import org.opensim.modeling.GeometrySet;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.Vec3;
 import org.opensim.modeling.VisibleObject;
 import org.opensim.utils.TheApp;
 import org.opensim.view.pub.GeometryFileLocator;
@@ -52,12 +51,9 @@ import vtk.vtkAssembly;
 import vtk.vtkBMPReader;
 import vtk.vtkImageReader2;
 import vtk.vtkJPEGReader;
-import vtk.vtkLinearTransform;
-import vtk.vtkMapper;
 import vtk.vtkMatrix4x4;
 import vtk.vtkOutlineFilter;
 import vtk.vtkPNGReader;
-import vtk.vtkPolyData;
 import vtk.vtkPolyDataMapper;
 import vtk.vtkProp3D;
 import vtk.vtkProp3DCollection;
@@ -196,12 +192,12 @@ public class BodyDisplayer extends vtkAssembly
          vtkObjectToTransform.SetUserTransform(xform);
     }
 
-    public void applyPositionAndOrientation(FrameActor frame, double[] orientation, double[] location) {
+    public void applyPositionAndOrientation(FrameActor frame, Vec3 orientation, Vec3 location) {
         frame.SetOrientation(0., 0., 0.);
-        frame.RotateX(orientation[0]);
-        frame.RotateY(orientation[1]);
-        frame.RotateZ(orientation[2]);
-        frame.SetPosition(location);
+        frame.RotateX(orientation.get(0));
+        frame.RotateY(orientation.get(1));
+        frame.RotateZ(orientation.get(2));
+        frame.SetPosition(new double[]{location.get(0), location.get(1), location.get(2)});
     }
          
     public vtkActor getBodyAxes() {
@@ -234,11 +230,10 @@ public class BodyDisplayer extends vtkAssembly
         }
         else {
             if (!body.hasJoint()) return;
-            double[] location = new double[3];
-            double[] orientation = new double[3];
-            body.getJoint().getLocationInChild(location);
-            body.getJoint().getOrientationInChild(orientation);
-            for (int i=0; i<3; i++) orientation[i]= Math.toDegrees(orientation[i]);
+            Vec3 location = body.getJoint().getLocationInChild();
+            Vec3 orientation = new Vec3();
+            body.getJoint().getOrientation(orientation);
+            for (int i=0; i<3; i++) orientation.set(i, Math.toDegrees(orientation.get(i)));
             applyPositionAndOrientation(jointBFrame, orientation, location);
             AddPart(jointBFrame);
             Modified();
@@ -269,12 +264,12 @@ public class BodyDisplayer extends vtkAssembly
     }
 
     private void updateJointPFrame(Body body, FrameActor jointPFrame) {
-        double[] location = new double[3];
-        double[] orientation = new double[3];
+        Vec3 location = new Vec3();
+        Vec3 orientation = new Vec3();
         body.getJoint().getLocationInParent(location);
         //jointPFrame.SetPosition(location);
         body.getJoint().getOrientationInParent(orientation);
-        for (int i=0; i<3; i++) orientation[i]= Math.toDegrees(orientation[i]);
+        for (int i=0; i<3; i++) orientation.set(i,Math.toDegrees(orientation.get(i)));
         applyPositionAndOrientation(jointPFrame, orientation, location);
     }
 

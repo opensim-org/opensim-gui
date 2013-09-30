@@ -8,18 +8,18 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_SimTK__Real {
+public class SWIGTYPE_p_std__reverse_iteratorT_double_const_p_t {
   private long swigCPtr;
 
-  protected SWIGTYPE_p_SimTK__Real(long cPtr, boolean futureUse) {
+  protected SWIGTYPE_p_std__reverse_iteratorT_double_const_p_t(long cPtr, boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_SimTK__Real() {
+  protected SWIGTYPE_p_std__reverse_iteratorT_double_const_p_t() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_SimTK__Real obj) {
+  protected static long getCPtr(SWIGTYPE_p_std__reverse_iteratorT_double_const_p_t obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }

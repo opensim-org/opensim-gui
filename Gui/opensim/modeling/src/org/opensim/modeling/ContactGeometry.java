@@ -345,8 +345,8 @@ public class ContactGeometry extends ModelComponent {
     return new SWIGTYPE_p_SimTK__ContactGeometry(opensimModelJNI.ContactGeometry_createSimTKContactGeometry(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_SimTK__Transform_T_Real_t getTransform() {
-    return new SWIGTYPE_p_SimTK__Transform_T_Real_t(opensimModelJNI.ContactGeometry_getTransform(swigCPtr, this), true);
+  public Transform getTransform() {
+    return new Transform(opensimModelJNI.ContactGeometry_getTransform(swigCPtr, this), true);
   }
 
   public void scale(ScaleSet aScaleSet) {

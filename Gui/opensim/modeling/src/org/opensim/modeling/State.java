@@ -151,8 +151,8 @@ public class State {
     return new SWIGTYPE_p_AbstractValue(opensimModelJNI.State_getDiscreteVariable(swigCPtr, this, SWIGTYPE_p_SubsystemIndex.getCPtr(arg0), SWIGTYPE_p_DiscreteVariableIndex.getCPtr(arg1)), false);
   }
 
-  public SWIGTYPE_p_Real getDiscreteVarLastUpdateTime(SWIGTYPE_p_SubsystemIndex arg0, SWIGTYPE_p_DiscreteVariableIndex arg1) {
-    return new SWIGTYPE_p_Real(opensimModelJNI.State_getDiscreteVarLastUpdateTime(swigCPtr, this, SWIGTYPE_p_SubsystemIndex.getCPtr(arg0), SWIGTYPE_p_DiscreteVariableIndex.getCPtr(arg1)), true);
+  public double getDiscreteVarLastUpdateTime(SWIGTYPE_p_SubsystemIndex arg0, SWIGTYPE_p_DiscreteVariableIndex arg1) {
+    return opensimModelJNI.State_getDiscreteVarLastUpdateTime(swigCPtr, this, SWIGTYPE_p_SubsystemIndex.getCPtr(arg0), SWIGTYPE_p_DiscreteVariableIndex.getCPtr(arg1));
   }
 
   public SWIGTYPE_p_AbstractValue getDiscreteVarUpdateValue(SWIGTYPE_p_SubsystemIndex arg0, SWIGTYPE_p_DiscreteVariableIndex arg1) {
@@ -663,12 +663,12 @@ public class State {
     return new Vector(opensimModelJNI.State_updMultipliers__SWIG_1(swigCPtr, this), false);
   }
 
-  public void getSystemStageVersions(SWIGTYPE_p_Array_T_int_t versions) {
-    opensimModelJNI.State_getSystemStageVersions(swigCPtr, this, SWIGTYPE_p_Array_T_int_t.getCPtr(versions));
+  public void getSystemStageVersions(SWIGTYPE_p_SimTK__Array_T_int_unsigned_int_t versions) {
+    opensimModelJNI.State_getSystemStageVersions(swigCPtr, this, SWIGTYPE_p_SimTK__Array_T_int_unsigned_int_t.getCPtr(versions));
   }
 
-  public Stage getLowestSystemStageDifference(SWIGTYPE_p_Array_T_int_t prevVersions) {
-    return new Stage(opensimModelJNI.State_getLowestSystemStageDifference(swigCPtr, this, SWIGTYPE_p_Array_T_int_t.getCPtr(prevVersions)), true);
+  public Stage getLowestSystemStageDifference(SWIGTYPE_p_SimTK__Array_T_int_unsigned_int_t prevVersions) {
+    return new Stage(opensimModelJNI.State_getLowestSystemStageDifference(swigCPtr, this, SWIGTYPE_p_SimTK__Array_T_int_unsigned_int_t.getCPtr(prevVersions)), true);
   }
 
   public void setSystemTopologyStageVersion(int topoVersion) {

@@ -162,11 +162,7 @@ public class HuntCrossleyForce extends Force {
   }
 
   public HuntCrossleyForce() {
-    this(opensimModelJNI.new_HuntCrossleyForce__SWIG_0(), true);
-  }
-
-  public HuntCrossleyForce(SWIGTYPE_p_OpenSim__HuntCrossleyForce__ContactParameters params) {
-    this(opensimModelJNI.new_HuntCrossleyForce__SWIG_1(SWIGTYPE_p_OpenSim__HuntCrossleyForce__ContactParameters.getCPtr(params)), true);
+    this(opensimModelJNI.new_HuntCrossleyForce(), true);
   }
 
   public SWIGTYPE_p_OpenSim__HuntCrossleyForce__ContactParametersSet updContactParametersSet() {

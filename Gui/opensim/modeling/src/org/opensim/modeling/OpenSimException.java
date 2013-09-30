@@ -59,10 +59,6 @@ public class OpenSimException {
     return opensimModelJNI.OpenSimException_getMessage(swigCPtr, this);
   }
 
-  public void print(SWIGTYPE_p_std__ostream aOut) {
-    opensimModelJNI.OpenSimException_print(swigCPtr, this, SWIGTYPE_p_std__ostream.getCPtr(aOut));
-  }
-
   public String what() {
     return opensimModelJNI.OpenSimException_what(swigCPtr, this);
   }

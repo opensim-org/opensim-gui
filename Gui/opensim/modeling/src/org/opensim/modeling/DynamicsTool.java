@@ -77,6 +77,14 @@ public class DynamicsTool extends Tool {
     opensimModelJNI.DynamicsTool_setExternalLoadsFileName(swigCPtr, this, aFileName);
   }
 
+  public void setModelFileName(String aFileName) {
+    opensimModelJNI.DynamicsTool_setModelFileName(swigCPtr, this, aFileName);
+  }
+
+  public String getModelFileName() {
+    return opensimModelJNI.DynamicsTool_getModelFileName(swigCPtr, this);
+  }
+
   public void setStartTime(double d) {
     opensimModelJNI.DynamicsTool_setStartTime(swigCPtr, this, d);
   }

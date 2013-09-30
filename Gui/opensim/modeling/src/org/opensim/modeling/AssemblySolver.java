@@ -57,12 +57,12 @@ public class AssemblySolver extends Solver {
     return opensimModelJNI.AssemblySolver_getConcreteClassName(swigCPtr, this);
   }
 
-  public AssemblySolver(Model model, SWIGTYPE_p_SimTK__Array_T_OpenSim__CoordinateReference_t coordinateReferences, double constraintWeight) {
-    this(opensimModelJNI.new_AssemblySolver__SWIG_0(Model.getCPtr(model), model, SWIGTYPE_p_SimTK__Array_T_OpenSim__CoordinateReference_t.getCPtr(coordinateReferences), constraintWeight), true);
+  public AssemblySolver(Model model, ArrayCoordinateReference coordinateReferences, double constraintWeight) {
+    this(opensimModelJNI.new_AssemblySolver__SWIG_0(Model.getCPtr(model), model, ArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences, constraintWeight), true);
   }
 
-  public AssemblySolver(Model model, SWIGTYPE_p_SimTK__Array_T_OpenSim__CoordinateReference_t coordinateReferences) {
-    this(opensimModelJNI.new_AssemblySolver__SWIG_1(Model.getCPtr(model), model, SWIGTYPE_p_SimTK__Array_T_OpenSim__CoordinateReference_t.getCPtr(coordinateReferences)), true);
+  public AssemblySolver(Model model, ArrayCoordinateReference coordinateReferences) {
+    this(opensimModelJNI.new_AssemblySolver__SWIG_1(Model.getCPtr(model), model, ArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences), true);
   }
 
   public void setAccuracy(double accuracy) {
@@ -73,8 +73,8 @@ public class AssemblySolver extends Solver {
     opensimModelJNI.AssemblySolver_setConstraintWeight(swigCPtr, this, weight);
   }
 
-  public SWIGTYPE_p_SimTK__Array_T_OpenSim__CoordinateReference_t getCoordinateReferences() {
-    return new SWIGTYPE_p_SimTK__Array_T_OpenSim__CoordinateReference_t(opensimModelJNI.AssemblySolver_getCoordinateReferences(swigCPtr, this), false);
+  public ArrayCoordinateReference getCoordinateReferences() {
+    return new ArrayCoordinateReference(opensimModelJNI.AssemblySolver_getCoordinateReferences(swigCPtr, this), false);
   }
 
   public void updateCoordinateReference(String coordName, double value, double weight) {

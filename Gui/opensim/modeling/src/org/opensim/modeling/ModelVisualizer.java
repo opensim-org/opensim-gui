@@ -64,8 +64,8 @@ public class ModelVisualizer {
     return new Model(opensimModelJNI.ModelVisualizer_updModel(swigCPtr, this), false);
   }
 
-  public boolean findGeometryFile(String geoFile, SWIGTYPE_p_bool isAbsolute, SWIGTYPE_p_SimTK__Array_T_std__string_t attempts) {
-    return opensimModelJNI.ModelVisualizer_findGeometryFile(swigCPtr, this, geoFile, SWIGTYPE_p_bool.getCPtr(isAbsolute), SWIGTYPE_p_SimTK__Array_T_std__string_t.getCPtr(attempts));
+  public boolean findGeometryFile(String geoFile, SWIGTYPE_p_bool isAbsolute, SWIGTYPE_p_SimTK__Array_T_std__string_unsigned_int_t attempts) {
+    return opensimModelJNI.ModelVisualizer_findGeometryFile(swigCPtr, this, geoFile, SWIGTYPE_p_bool.getCPtr(isAbsolute), SWIGTYPE_p_SimTK__Array_T_std__string_unsigned_int_t.getCPtr(attempts));
   }
 
 }

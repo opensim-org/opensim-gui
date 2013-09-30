@@ -8,18 +8,18 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_SimTK__String {
+public class SWIGTYPE_p_SimTK__Array_T_int_unsigned_int_t {
   private long swigCPtr;
 
-  protected SWIGTYPE_p_SimTK__String(long cPtr, boolean futureUse) {
+  protected SWIGTYPE_p_SimTK__Array_T_int_unsigned_int_t(long cPtr, boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_SimTK__String() {
+  protected SWIGTYPE_p_SimTK__Array_T_int_unsigned_int_t() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_SimTK__String obj) {
+  protected static long getCPtr(SWIGTYPE_p_SimTK__Array_T_int_unsigned_int_t obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }

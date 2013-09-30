@@ -62,6 +62,7 @@ import org.opensim.view.experimentaldata.ExperimentalDataObject;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Storage;
+import org.opensim.modeling.Vec3;
 import org.opensim.view.OpenSimvtkGlyphCloud;
 import org.opensim.view.SingleModelVisuals;
 import org.opensim.view.experimentaldata.ExperimentalDataItemType;
@@ -681,6 +682,7 @@ public class MotionDisplayer implements SelectionListener {
             SimbodyEngine de = model.getSimbodyEngine();
             Body body = mapIndicesToBodies.get(index+1);
             TransformAxis dof = mapIndicesToDofs.get(index+1);
+            Vec3 vOffset = new Vec3();
             double[] offset = new double[3];
             double[] gOffset = new double[3];
             dof.getAxis(offset); // in parent frame, right?
@@ -689,7 +691,8 @@ public class MotionDisplayer implements SelectionListener {
                offset[j] *= (magnitude * 10.0); // * 10.0 because test data is small
             context.transform(body, offset, de.getGroundBody(), gOffset);
             generalizedForcesRep.setNormalAtLocation(forceIndex, gOffset[0], gOffset[1], gOffset[2]);
-            dof.getJoint().getLocationInChild(offset);
+            vOffset = dof.getJoint().getLocationInChild();
+            for (int ix=0; ix<3; ix++) offset[ix]=vOffset.get(ix);
             context.transformPosition(body, offset, gOffset);
             generalizedForcesRep.setLocation(forceIndex, gOffset[0], gOffset[1], gOffset[2]);
          }

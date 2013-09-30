@@ -8,18 +8,18 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_SimTK__Array_T_SimTK__DecorativeGeometry_t {
+public class SWIGTYPE_p_SimTK__ArrayView_T_SimTK__VecT_3_double_1_t_unsigned_int_t {
   private long swigCPtr;
 
-  protected SWIGTYPE_p_SimTK__Array_T_SimTK__DecorativeGeometry_t(long cPtr, boolean futureUse) {
+  protected SWIGTYPE_p_SimTK__ArrayView_T_SimTK__VecT_3_double_1_t_unsigned_int_t(long cPtr, boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_SimTK__Array_T_SimTK__DecorativeGeometry_t() {
+  protected SWIGTYPE_p_SimTK__ArrayView_T_SimTK__VecT_3_double_1_t_unsigned_int_t() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_SimTK__Array_T_SimTK__DecorativeGeometry_t obj) {
+  protected static long getCPtr(SWIGTYPE_p_SimTK__ArrayView_T_SimTK__VecT_3_double_1_t_unsigned_int_t obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }

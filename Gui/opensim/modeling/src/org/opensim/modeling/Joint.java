@@ -474,7 +474,7 @@ public class Joint extends ModelComponent {
   }
 
   public void getLocationInParent(Vec3 rLocation) {
-    opensimModelJNI.Joint_getLocationInParent__SWIG_0(swigCPtr, this, Vec3.getCPtr(rLocation), rLocation);
+    opensimModelJNI.Joint_getLocationInParent(swigCPtr, this, Vec3.getCPtr(rLocation), rLocation);
   }
 
   public void setOrientationInParent(Vec3 aOrientation) {
@@ -482,23 +482,7 @@ public class Joint extends ModelComponent {
   }
 
   public void getOrientationInParent(Vec3 rOrientation) {
-    opensimModelJNI.Joint_getOrientationInParent__SWIG_0(swigCPtr, this, Vec3.getCPtr(rOrientation), rOrientation);
-  }
-
-  public void getOrientationInChild(double[] rOrientation) {
-    opensimModelJNI.Joint_getOrientationInChild(swigCPtr, this, rOrientation);
-  }
-
-  public void getOrientationInParent(double[] rOrientation) {
-    opensimModelJNI.Joint_getOrientationInParent__SWIG_1(swigCPtr, this, rOrientation);
-  }
-
-  public void getLocationInChild(double[] rLocation) {
-    opensimModelJNI.Joint_getLocationInChild__SWIG_0(swigCPtr, this, rLocation);
-  }
-
-  public void getLocationInParent(double[] rLocation) {
-    opensimModelJNI.Joint_getLocationInParent__SWIG_1(swigCPtr, this, rLocation);
+    opensimModelJNI.Joint_getOrientationInParent(swigCPtr, this, Vec3.getCPtr(rOrientation), rOrientation);
   }
 
   public void setLocationInChild(Vec3 aLocation) {
@@ -506,7 +490,7 @@ public class Joint extends ModelComponent {
   }
 
   public Vec3 getLocationInChild() {
-    return new Vec3(opensimModelJNI.Joint_getLocationInChild__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimModelJNI.Joint_getLocationInChild(swigCPtr, this), false);
   }
 
   public CoordinateSet getCoordinateSet() {

@@ -105,8 +105,8 @@ public class ModelComponentSetControllers extends SetControllers {
     opensimModelJNI.ModelComponentSetControllers_invokeSetPropertiesFromState(swigCPtr, this, State.getCPtr(state), state);
   }
 
-  public void invokeGenerateDecorations(boolean fixed, ModelDisplayHints hints, State state, SWIGTYPE_p_SimTK__Array_T_SimTK__DecorativeGeometry_t appendToThis) {
-    opensimModelJNI.ModelComponentSetControllers_invokeGenerateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, SWIGTYPE_p_SimTK__Array_T_SimTK__DecorativeGeometry_t.getCPtr(appendToThis));
+  public void invokeGenerateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
+    opensimModelJNI.ModelComponentSetControllers_invokeGenerateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
   }
 
 }

@@ -73,8 +73,4 @@ public class GimbalJoint extends Joint {
     return opensimModelJNI.GimbalJoint_numCoordinates(swigCPtr, this);
   }
 
-  public void scale(ScaleSet aScaleSet) {
-    opensimModelJNI.GimbalJoint_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
-  }
-
 }

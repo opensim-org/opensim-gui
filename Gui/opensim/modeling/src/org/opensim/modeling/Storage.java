@@ -583,28 +583,24 @@ public class Storage extends StorageInterface {
     return opensimModelJNI.Storage_makeStorageLabelsUnique(swigCPtr, this);
   }
 
-  public void print() {
-    opensimModelJNI.Storage_print__SWIG_0(swigCPtr, this);
-  }
-
   public boolean print(String aFileName, String aMode, String aComment) {
-    return opensimModelJNI.Storage_print__SWIG_1(swigCPtr, this, aFileName, aMode, aComment);
+    return opensimModelJNI.Storage_print__SWIG_0(swigCPtr, this, aFileName, aMode, aComment);
   }
 
   public boolean print(String aFileName, String aMode) {
-    return opensimModelJNI.Storage_print__SWIG_2(swigCPtr, this, aFileName, aMode);
+    return opensimModelJNI.Storage_print__SWIG_1(swigCPtr, this, aFileName, aMode);
   }
 
   public boolean print(String aFileName) {
-    return opensimModelJNI.Storage_print__SWIG_3(swigCPtr, this, aFileName);
+    return opensimModelJNI.Storage_print__SWIG_2(swigCPtr, this, aFileName);
   }
 
   public int print(String aFileName, double aDT, String aMode) {
-    return opensimModelJNI.Storage_print__SWIG_4(swigCPtr, this, aFileName, aDT, aMode);
+    return opensimModelJNI.Storage_print__SWIG_3(swigCPtr, this, aFileName, aDT, aMode);
   }
 
   public int print(String aFileName, double aDT) {
-    return opensimModelJNI.Storage_print__SWIG_5(swigCPtr, this, aFileName, aDT);
+    return opensimModelJNI.Storage_print__SWIG_4(swigCPtr, this, aFileName, aDT);
   }
 
   public void setOutputFileName(String aFileName) {

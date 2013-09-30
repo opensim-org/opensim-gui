@@ -102,12 +102,12 @@ public class VisibleObject extends OpenSimObject {
     return new GeometrySet(opensimModelJNI.VisibleObject_updGeometrySet(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_SimTK__Transform_T_Real_t getTransform() {
-    return new SWIGTYPE_p_SimTK__Transform_T_Real_t(opensimModelJNI.VisibleObject_getTransform(swigCPtr, this), false);
+  public Transform getTransform() {
+    return new Transform(opensimModelJNI.VisibleObject_getTransform(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_SimTK__Transform_T_Real_t updTransform() {
-    return new SWIGTYPE_p_SimTK__Transform_T_Real_t(opensimModelJNI.VisibleObject_updTransform(swigCPtr, this), false);
+  public Transform updTransform() {
+    return new Transform(opensimModelJNI.VisibleObject_updTransform(swigCPtr, this), false);
   }
 
   public void getRotationsAndTranslationsAsArray6(double[] aArray) {
@@ -118,8 +118,8 @@ public class VisibleObject extends OpenSimObject {
     opensimModelJNI.VisibleObject_getTransformAsDouble16(swigCPtr, this, flatList);
   }
 
-  public void setTransform(SWIGTYPE_p_SimTK__Transform_T_Real_t aTransform) {
-    opensimModelJNI.VisibleObject_setTransform(swigCPtr, this, SWIGTYPE_p_SimTK__Transform_T_Real_t.getCPtr(aTransform));
+  public void setTransform(Transform aTransform) {
+    opensimModelJNI.VisibleObject_setTransform(swigCPtr, this, Transform.getCPtr(aTransform), aTransform);
   }
 
   public void translate(Vec3 t) {

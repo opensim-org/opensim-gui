@@ -69,8 +69,8 @@ public class IKTaskSet extends SetIKTasks {
     this(opensimModelJNI.new_IKTaskSet__SWIG_2(aFileName), true);
   }
 
-  public void createMarkerWeightSet(SWIGTYPE_p_OpenSim__SetT_MarkerWeight_t aWeights) {
-    opensimModelJNI.IKTaskSet_createMarkerWeightSet(swigCPtr, this, SWIGTYPE_p_OpenSim__SetT_MarkerWeight_t.getCPtr(aWeights));
+  public void createMarkerWeightSet(SetMarkerWeights aWeights) {
+    opensimModelJNI.IKTaskSet_createMarkerWeightSet(swigCPtr, this, SetMarkerWeights.getCPtr(aWeights), aWeights);
   }
 
 }

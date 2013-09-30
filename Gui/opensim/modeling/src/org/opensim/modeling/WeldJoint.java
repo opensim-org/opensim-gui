@@ -73,16 +73,8 @@ public class WeldJoint extends Joint {
     return opensimModelJNI.WeldJoint_numCoordinates(swigCPtr, this);
   }
 
-  public void scale(ScaleSet aScaleSet) {
-    opensimModelJNI.WeldJoint_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
-  }
-
-  public void connectToModel(Model aModel) {
-    opensimModelJNI.WeldJoint_connectToModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
-  }
-
-  public void createMobilizedBody(SWIGTYPE_p_SimTK__Transform_T_Real_t parentTransform, SWIGTYPE_p_SimTK__Transform_T_Real_t childTransform) {
-    opensimModelJNI.WeldJoint_createMobilizedBody(swigCPtr, this, SWIGTYPE_p_SimTK__Transform_T_Real_t.getCPtr(parentTransform), SWIGTYPE_p_SimTK__Transform_T_Real_t.getCPtr(childTransform));
+  public void createMobilizedBody(Transform parentTransform, Transform childTransform) {
+    opensimModelJNI.WeldJoint_createMobilizedBody(swigCPtr, this, Transform.getCPtr(parentTransform), parentTransform, Transform.getCPtr(childTransform), childTransform);
   }
 
 }
