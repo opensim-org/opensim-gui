@@ -4,6 +4,7 @@
  */
 package org.opensim.topologyEditor;
 
+import java.util.ArrayList;
 import org.netbeans.api.visual.action.ActionFactory;
 import org.netbeans.api.visual.action.WidgetAction;
 import org.netbeans.api.visual.anchor.AnchorFactory;
@@ -72,5 +73,13 @@ public class ModelGraphScene extends GraphScene.StringGraph {
         ((ConnectionWidget) findWidget (edge)).setTargetAnchor (AnchorFactory.createRectangularAnchor (w));
     }
 
+
+    public void clearAll() {
+        for (String edge : new ArrayList<String> (getEdges ()))
+                removeEdge (edge);
+        for (String node : new ArrayList<String> (getNodes ()))
+                removeNode (node);
+        validate();
+    }
 }
 
