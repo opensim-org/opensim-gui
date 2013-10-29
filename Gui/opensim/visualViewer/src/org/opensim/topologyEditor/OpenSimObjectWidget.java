@@ -36,6 +36,8 @@ public class OpenSimObjectWidget extends Widget {
     private static final Image IMAGE_OPERATION = Utilities.loadImage ("test/resources/methodPublic.gif"); // NOI18N
 
     private LabelWidget className;
+    
+    private boolean highLighted;
     /*
     private Widget members;
     private Widget operations;
@@ -104,21 +106,23 @@ public class OpenSimObjectWidget extends Widget {
 
         return widget;
     }
-    /*
-    public void addMember (Widget memberWidget) {
-        members.addChild (memberWidget);
+
+    /**
+     * @return the highLighted
+     */
+    public boolean isHighLighted() {
+        return highLighted;
     }
 
-    public void removeMember (Widget memberWidget) {
-        members.removeChild (memberWidget);
+    /**
+     * @param highLighted the highLighted to set
+     */
+    public void setHighLighted(boolean highLighted) {
+        if (highLighted)
+            setForeground (Color.RED);
+        else
+            setForeground (Color.BLACK);
+        this.highLighted = highLighted;
     }
 
-    public void addOperation (Widget operationWidget) {
-        operations.addChild (operationWidget);
-    }
-
-    public void removeOperation (Widget operationWidget) {
-        operations.removeChild (operationWidget);
-    }
-     * */
 }
