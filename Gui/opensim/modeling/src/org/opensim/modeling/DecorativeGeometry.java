@@ -164,6 +164,14 @@ public class DecorativeGeometry {
     return new SWIGTYPE_p_DecorativeGeometryRep(opensimModelJNI.DecorativeGeometry_updRep(swigCPtr, this), false);
   }
 
+  public boolean hasUserRef() {
+    return opensimModelJNI.DecorativeGeometry_hasUserRef(swigCPtr, this);
+  }
+
+  public OpenSimObject getUserRefAsObject() {
+    return new OpenSimObject(opensimModelJNI.DecorativeGeometry_getUserRefAsObject(swigCPtr, this), false);
+  }
+
   public final static class Representation {
     public final static DecorativeGeometry.Representation DrawPoints = new DecorativeGeometry.Representation("DrawPoints", opensimModelJNI.DecorativeGeometry_DrawPoints_get());
     public final static DecorativeGeometry.Representation DrawWireframe = new DecorativeGeometry.Representation("DrawWireframe", opensimModelJNI.DecorativeGeometry_DrawWireframe_get());

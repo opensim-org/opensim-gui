@@ -213,12 +213,68 @@ public class ClutchedPathSpring extends PathActuator {
     opensimModelJNI.ClutchedPathSpring_set_relaxation_time_constant__SWIG_1(swigCPtr, this, value);
   }
 
+  public void setPropertyIndex_initial_stretch(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.ClutchedPathSpring_PropertyIndex_initial_stretch_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_initial_stretch() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ClutchedPathSpring_PropertyIndex_initial_stretch_get(swigCPtr, this), true);
+  }
+
+  public void copyProperty_initial_stretch(ClutchedPathSpring source) {
+    opensimModelJNI.ClutchedPathSpring_copyProperty_initial_stretch(swigCPtr, this, ClutchedPathSpring.getCPtr(source), source);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_initial_stretch() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ClutchedPathSpring_getProperty_initial_stretch(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_initial_stretch() {
+    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ClutchedPathSpring_updProperty_initial_stretch(swigCPtr, this), false);
+  }
+
+  public double get_initial_stretch(int i) {
+    return opensimModelJNI.ClutchedPathSpring_get_initial_stretch__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double upd_initial_stretch(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.ClutchedPathSpring_upd_initial_stretch__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_initial_stretch(int i, double value) {
+    opensimModelJNI.ClutchedPathSpring_set_initial_stretch__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_initial_stretch(double value) {
+    return opensimModelJNI.ClutchedPathSpring_append_initial_stretch(swigCPtr, this, value);
+  }
+
+  public void constructProperty_initial_stretch(double initValue) {
+    opensimModelJNI.ClutchedPathSpring_constructProperty_initial_stretch(swigCPtr, this, initValue);
+  }
+
+  public double get_initial_stretch() {
+    return opensimModelJNI.ClutchedPathSpring_get_initial_stretch__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_double upd_initial_stretch() {
+    return new SWIGTYPE_p_double(opensimModelJNI.ClutchedPathSpring_upd_initial_stretch__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_initial_stretch(double value) {
+    opensimModelJNI.ClutchedPathSpring_set_initial_stretch__SWIG_1(swigCPtr, this, value);
+  }
+
   public ClutchedPathSpring() {
     this(opensimModelJNI.new_ClutchedPathSpring__SWIG_0(), true);
   }
 
+  public ClutchedPathSpring(String name, double stiffness, double dissipation, double relaxationTau, double stretch0) {
+    this(opensimModelJNI.new_ClutchedPathSpring__SWIG_1(name, stiffness, dissipation, relaxationTau, stretch0), true);
+  }
+
   public ClutchedPathSpring(String name, double stiffness, double dissipation, double relaxationTau) {
-    this(opensimModelJNI.new_ClutchedPathSpring__SWIG_1(name, stiffness, dissipation, relaxationTau), true);
+    this(opensimModelJNI.new_ClutchedPathSpring__SWIG_2(name, stiffness, dissipation, relaxationTau), true);
   }
 
   public double getStiffness() {
@@ -235,6 +291,14 @@ public class ClutchedPathSpring extends PathActuator {
 
   public void setDissipation(double dissipation) {
     opensimModelJNI.ClutchedPathSpring_setDissipation(swigCPtr, this, dissipation);
+  }
+
+  public double getInitialStretch() {
+    return opensimModelJNI.ClutchedPathSpring_getInitialStretch(swigCPtr, this);
+  }
+
+  public void setInitialStretch(double stretch0) {
+    opensimModelJNI.ClutchedPathSpring_setInitialStretch(swigCPtr, this, stretch0);
   }
 
   public double getStretch(State s) {

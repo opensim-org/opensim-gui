@@ -39,12 +39,12 @@ public class ArrayCoordinateReference {
     this(opensimModelJNI.new_ArrayCoordinateReference__SWIG_0(), true);
   }
 
-  public ArrayCoordinateReference(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n) {
-    this(opensimModelJNI.new_ArrayCoordinateReference__SWIG_1(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n)), true);
+  public ArrayCoordinateReference(long n) {
+    this(opensimModelJNI.new_ArrayCoordinateReference__SWIG_1(n), true);
   }
 
-  public ArrayCoordinateReference(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n, CoordinateReference initVal) {
-    this(opensimModelJNI.new_ArrayCoordinateReference__SWIG_2(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n), CoordinateReference.getCPtr(initVal), initVal), true);
+  public ArrayCoordinateReference(long n, CoordinateReference initVal) {
+    this(opensimModelJNI.new_ArrayCoordinateReference__SWIG_2(n, CoordinateReference.getCPtr(initVal), initVal), true);
   }
 
   public ArrayCoordinateReference(ArrayCoordinateReference src) {
@@ -59,8 +59,8 @@ public class ArrayCoordinateReference {
     return new ArrayCoordinateReference(opensimModelJNI.ArrayCoordinateReference_deallocate(swigCPtr, this), false);
   }
 
-  public void assign(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n, CoordinateReference fillValue) {
-    opensimModelJNI.ArrayCoordinateReference_assign(swigCPtr, this, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n), CoordinateReference.getCPtr(fillValue), fillValue);
+  public void assign(long n, CoordinateReference fillValue) {
+    opensimModelJNI.ArrayCoordinateReference_assign(swigCPtr, this, n, CoordinateReference.getCPtr(fillValue), fillValue);
   }
 
   public void fill(CoordinateReference fillValue) {
@@ -71,56 +71,56 @@ public class ArrayCoordinateReference {
     opensimModelJNI.ArrayCoordinateReference_swap(swigCPtr, this, ArrayCoordinateReference.getCPtr(other), other);
   }
 
-  public ArrayCoordinateReference adoptData(CoordinateReference newData, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type dataSize, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type dataCapacity) {
-    return new ArrayCoordinateReference(opensimModelJNI.ArrayCoordinateReference_adoptData__SWIG_0(swigCPtr, this, CoordinateReference.getCPtr(newData), newData, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(dataSize), SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(dataCapacity)), false);
+  public ArrayCoordinateReference adoptData(CoordinateReference newData, long dataSize, long dataCapacity) {
+    return new ArrayCoordinateReference(opensimModelJNI.ArrayCoordinateReference_adoptData__SWIG_0(swigCPtr, this, CoordinateReference.getCPtr(newData), newData, dataSize, dataCapacity), false);
   }
 
-  public ArrayCoordinateReference adoptData(CoordinateReference newData, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type dataSize) {
-    return new ArrayCoordinateReference(opensimModelJNI.ArrayCoordinateReference_adoptData__SWIG_1(swigCPtr, this, CoordinateReference.getCPtr(newData), newData, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(dataSize)), false);
+  public ArrayCoordinateReference adoptData(CoordinateReference newData, long dataSize) {
+    return new ArrayCoordinateReference(opensimModelJNI.ArrayCoordinateReference_adoptData__SWIG_1(swigCPtr, this, CoordinateReference.getCPtr(newData), newData, dataSize), false);
   }
 
-  public ArrayCoordinateReference shareData(CoordinateReference newData, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type dataSize) {
-    return new ArrayCoordinateReference(opensimModelJNI.ArrayCoordinateReference_shareData__SWIG_0(swigCPtr, this, CoordinateReference.getCPtr(newData), newData, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(dataSize)), false);
+  public ArrayCoordinateReference shareData(CoordinateReference newData, long dataSize) {
+    return new ArrayCoordinateReference(opensimModelJNI.ArrayCoordinateReference_shareData__SWIG_0(swigCPtr, this, CoordinateReference.getCPtr(newData), newData, dataSize), false);
   }
 
   public ArrayCoordinateReference shareData(CoordinateReference first, CoordinateReference last1) {
     return new ArrayCoordinateReference(opensimModelJNI.ArrayCoordinateReference_shareData__SWIG_1(swigCPtr, this, CoordinateReference.getCPtr(first), first, CoordinateReference.getCPtr(last1), last1), false);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type size() {
-    return new SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type(opensimModelJNI.ArrayCoordinateReference_size(swigCPtr, this), true);
+  public long size() {
+    return opensimModelJNI.ArrayCoordinateReference_size(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type max_size() {
-    return new SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type(opensimModelJNI.ArrayCoordinateReference_max_size(swigCPtr, this), true);
+  public long max_size() {
+    return opensimModelJNI.ArrayCoordinateReference_max_size(swigCPtr, this);
   }
 
   public boolean empty() {
     return opensimModelJNI.ArrayCoordinateReference_empty(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type capacity() {
-    return new SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type(opensimModelJNI.ArrayCoordinateReference_capacity(swigCPtr, this), true);
+  public long capacity() {
+    return opensimModelJNI.ArrayCoordinateReference_capacity(swigCPtr, this);
   }
 
-  public void resize(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n) {
-    opensimModelJNI.ArrayCoordinateReference_resize__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n));
+  public void resize(long n) {
+    opensimModelJNI.ArrayCoordinateReference_resize__SWIG_0(swigCPtr, this, n);
   }
 
-  public void resize(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n, CoordinateReference initVal) {
-    opensimModelJNI.ArrayCoordinateReference_resize__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n), CoordinateReference.getCPtr(initVal), initVal);
+  public void resize(long n, CoordinateReference initVal) {
+    opensimModelJNI.ArrayCoordinateReference_resize__SWIG_1(swigCPtr, this, n, CoordinateReference.getCPtr(initVal), initVal);
   }
 
-  public void reserve(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n) {
-    opensimModelJNI.ArrayCoordinateReference_reserve(swigCPtr, this, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n));
+  public void reserve(long n) {
+    opensimModelJNI.ArrayCoordinateReference_reserve(swigCPtr, this, n);
   }
 
   public void shrink_to_fit() {
     opensimModelJNI.ArrayCoordinateReference_shrink_to_fit(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type allocated() {
-    return new SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type(opensimModelJNI.ArrayCoordinateReference_allocated(swigCPtr, this), true);
+  public long allocated() {
+    return opensimModelJNI.ArrayCoordinateReference_allocated(swigCPtr, this);
   }
 
   public boolean isOwner() {
@@ -193,8 +193,8 @@ public class ArrayCoordinateReference {
     return new CoordinateReference(opensimModelJNI.ArrayCoordinateReference_back__SWIG_0(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayView_T_OpenSim__CoordinateReference_unsigned_int_t updSubArray(long index, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type length) {
-    return new SWIGTYPE_p_SimTK__ArrayView_T_OpenSim__CoordinateReference_unsigned_int_t(opensimModelJNI.ArrayCoordinateReference_updSubArray(swigCPtr, this, index, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(length)), true);
+  public SWIGTYPE_p_SimTK__ArrayView_T_OpenSim__CoordinateReference_unsigned_int_t updSubArray(long index, long length) {
+    return new SWIGTYPE_p_SimTK__ArrayView_T_OpenSim__CoordinateReference_unsigned_int_t(opensimModelJNI.ArrayCoordinateReference_updSubArray(swigCPtr, this, index, length), true);
   }
 
   public void push_back(CoordinateReference value) {
@@ -233,8 +233,8 @@ public class ArrayCoordinateReference {
     opensimModelJNI.ArrayCoordinateReference_clear(swigCPtr, this);
   }
 
-  public CoordinateReference insert(CoordinateReference p, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n, CoordinateReference value) {
-    long cPtr = opensimModelJNI.ArrayCoordinateReference_insert__SWIG_0(swigCPtr, this, CoordinateReference.getCPtr(p), p, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n), CoordinateReference.getCPtr(value), value);
+  public CoordinateReference insert(CoordinateReference p, long n, CoordinateReference value) {
+    long cPtr = opensimModelJNI.ArrayCoordinateReference_insert__SWIG_0(swigCPtr, this, CoordinateReference.getCPtr(p), p, n, CoordinateReference.getCPtr(value), value);
     return (cPtr == 0) ? null : new CoordinateReference(cPtr, false);
   }
 

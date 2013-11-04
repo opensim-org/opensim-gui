@@ -39,12 +39,12 @@ public class SimTKArrayVec3 {
     this(opensimModelJNI.new_SimTKArrayVec3__SWIG_0(), true);
   }
 
-  public SimTKArrayVec3(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n) {
-    this(opensimModelJNI.new_SimTKArrayVec3__SWIG_1(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n)), true);
+  public SimTKArrayVec3(long n) {
+    this(opensimModelJNI.new_SimTKArrayVec3__SWIG_1(n), true);
   }
 
-  public SimTKArrayVec3(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n, Vec3 initVal) {
-    this(opensimModelJNI.new_SimTKArrayVec3__SWIG_2(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n), Vec3.getCPtr(initVal), initVal), true);
+  public SimTKArrayVec3(long n, Vec3 initVal) {
+    this(opensimModelJNI.new_SimTKArrayVec3__SWIG_2(n, Vec3.getCPtr(initVal), initVal), true);
   }
 
   public SimTKArrayVec3(SimTKArrayVec3 src) {
@@ -59,8 +59,8 @@ public class SimTKArrayVec3 {
     return new SimTKArrayVec3(opensimModelJNI.SimTKArrayVec3_deallocate(swigCPtr, this), false);
   }
 
-  public void assign(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n, Vec3 fillValue) {
-    opensimModelJNI.SimTKArrayVec3_assign(swigCPtr, this, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n), Vec3.getCPtr(fillValue), fillValue);
+  public void assign(long n, Vec3 fillValue) {
+    opensimModelJNI.SimTKArrayVec3_assign(swigCPtr, this, n, Vec3.getCPtr(fillValue), fillValue);
   }
 
   public void fill(Vec3 fillValue) {
@@ -71,56 +71,56 @@ public class SimTKArrayVec3 {
     opensimModelJNI.SimTKArrayVec3_swap(swigCPtr, this, SimTKArrayVec3.getCPtr(other), other);
   }
 
-  public SimTKArrayVec3 adoptData(Vec3 newData, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type dataSize, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type dataCapacity) {
-    return new SimTKArrayVec3(opensimModelJNI.SimTKArrayVec3_adoptData__SWIG_0(swigCPtr, this, Vec3.getCPtr(newData), newData, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(dataSize), SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(dataCapacity)), false);
+  public SimTKArrayVec3 adoptData(Vec3 newData, long dataSize, long dataCapacity) {
+    return new SimTKArrayVec3(opensimModelJNI.SimTKArrayVec3_adoptData__SWIG_0(swigCPtr, this, Vec3.getCPtr(newData), newData, dataSize, dataCapacity), false);
   }
 
-  public SimTKArrayVec3 adoptData(Vec3 newData, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type dataSize) {
-    return new SimTKArrayVec3(opensimModelJNI.SimTKArrayVec3_adoptData__SWIG_1(swigCPtr, this, Vec3.getCPtr(newData), newData, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(dataSize)), false);
+  public SimTKArrayVec3 adoptData(Vec3 newData, long dataSize) {
+    return new SimTKArrayVec3(opensimModelJNI.SimTKArrayVec3_adoptData__SWIG_1(swigCPtr, this, Vec3.getCPtr(newData), newData, dataSize), false);
   }
 
-  public SimTKArrayVec3 shareData(Vec3 newData, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type dataSize) {
-    return new SimTKArrayVec3(opensimModelJNI.SimTKArrayVec3_shareData__SWIG_0(swigCPtr, this, Vec3.getCPtr(newData), newData, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(dataSize)), false);
+  public SimTKArrayVec3 shareData(Vec3 newData, long dataSize) {
+    return new SimTKArrayVec3(opensimModelJNI.SimTKArrayVec3_shareData__SWIG_0(swigCPtr, this, Vec3.getCPtr(newData), newData, dataSize), false);
   }
 
   public SimTKArrayVec3 shareData(Vec3 first, Vec3 last1) {
     return new SimTKArrayVec3(opensimModelJNI.SimTKArrayVec3_shareData__SWIG_1(swigCPtr, this, Vec3.getCPtr(first), first, Vec3.getCPtr(last1), last1), false);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type size() {
-    return new SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type(opensimModelJNI.SimTKArrayVec3_size(swigCPtr, this), true);
+  public long size() {
+    return opensimModelJNI.SimTKArrayVec3_size(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type max_size() {
-    return new SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type(opensimModelJNI.SimTKArrayVec3_max_size(swigCPtr, this), true);
+  public long max_size() {
+    return opensimModelJNI.SimTKArrayVec3_max_size(swigCPtr, this);
   }
 
   public boolean empty() {
     return opensimModelJNI.SimTKArrayVec3_empty(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type capacity() {
-    return new SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type(opensimModelJNI.SimTKArrayVec3_capacity(swigCPtr, this), true);
+  public long capacity() {
+    return opensimModelJNI.SimTKArrayVec3_capacity(swigCPtr, this);
   }
 
-  public void resize(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n) {
-    opensimModelJNI.SimTKArrayVec3_resize__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n));
+  public void resize(long n) {
+    opensimModelJNI.SimTKArrayVec3_resize__SWIG_0(swigCPtr, this, n);
   }
 
-  public void resize(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n, Vec3 initVal) {
-    opensimModelJNI.SimTKArrayVec3_resize__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n), Vec3.getCPtr(initVal), initVal);
+  public void resize(long n, Vec3 initVal) {
+    opensimModelJNI.SimTKArrayVec3_resize__SWIG_1(swigCPtr, this, n, Vec3.getCPtr(initVal), initVal);
   }
 
-  public void reserve(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n) {
-    opensimModelJNI.SimTKArrayVec3_reserve(swigCPtr, this, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n));
+  public void reserve(long n) {
+    opensimModelJNI.SimTKArrayVec3_reserve(swigCPtr, this, n);
   }
 
   public void shrink_to_fit() {
     opensimModelJNI.SimTKArrayVec3_shrink_to_fit(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type allocated() {
-    return new SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type(opensimModelJNI.SimTKArrayVec3_allocated(swigCPtr, this), true);
+  public long allocated() {
+    return opensimModelJNI.SimTKArrayVec3_allocated(swigCPtr, this);
   }
 
   public boolean isOwner() {
@@ -193,8 +193,8 @@ public class SimTKArrayVec3 {
     return new Vec3(opensimModelJNI.SimTKArrayVec3_back__SWIG_0(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayView_T_SimTK__VecT_3_double_1_t_unsigned_int_t updSubArray(long index, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type length) {
-    return new SWIGTYPE_p_SimTK__ArrayView_T_SimTK__VecT_3_double_1_t_unsigned_int_t(opensimModelJNI.SimTKArrayVec3_updSubArray(swigCPtr, this, index, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(length)), true);
+  public SWIGTYPE_p_SimTK__ArrayView_T_SimTK__VecT_3_double_1_t_unsigned_int_t updSubArray(long index, long length) {
+    return new SWIGTYPE_p_SimTK__ArrayView_T_SimTK__VecT_3_double_1_t_unsigned_int_t(opensimModelJNI.SimTKArrayVec3_updSubArray(swigCPtr, this, index, length), true);
   }
 
   public void push_back(Vec3 value) {
@@ -233,8 +233,8 @@ public class SimTKArrayVec3 {
     opensimModelJNI.SimTKArrayVec3_clear(swigCPtr, this);
   }
 
-  public Vec3 insert(Vec3 p, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n, Vec3 value) {
-    long cPtr = opensimModelJNI.SimTKArrayVec3_insert__SWIG_0(swigCPtr, this, Vec3.getCPtr(p), p, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n), Vec3.getCPtr(value), value);
+  public Vec3 insert(Vec3 p, long n, Vec3 value) {
+    long cPtr = opensimModelJNI.SimTKArrayVec3_insert__SWIG_0(swigCPtr, this, Vec3.getCPtr(p), p, n, Vec3.getCPtr(value), value);
     return (cPtr == 0) ? null : new Vec3(cPtr, false);
   }
 

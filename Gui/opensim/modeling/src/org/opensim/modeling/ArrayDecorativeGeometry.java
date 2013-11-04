@@ -39,12 +39,12 @@ public class ArrayDecorativeGeometry {
     this(opensimModelJNI.new_ArrayDecorativeGeometry__SWIG_0(), true);
   }
 
-  public ArrayDecorativeGeometry(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n) {
-    this(opensimModelJNI.new_ArrayDecorativeGeometry__SWIG_1(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n)), true);
+  public ArrayDecorativeGeometry(long n) {
+    this(opensimModelJNI.new_ArrayDecorativeGeometry__SWIG_1(n), true);
   }
 
-  public ArrayDecorativeGeometry(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n, DecorativeGeometry initVal) {
-    this(opensimModelJNI.new_ArrayDecorativeGeometry__SWIG_2(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n), DecorativeGeometry.getCPtr(initVal), initVal), true);
+  public ArrayDecorativeGeometry(long n, DecorativeGeometry initVal) {
+    this(opensimModelJNI.new_ArrayDecorativeGeometry__SWIG_2(n, DecorativeGeometry.getCPtr(initVal), initVal), true);
   }
 
   public ArrayDecorativeGeometry(ArrayDecorativeGeometry src) {
@@ -59,8 +59,8 @@ public class ArrayDecorativeGeometry {
     return new ArrayDecorativeGeometry(opensimModelJNI.ArrayDecorativeGeometry_deallocate(swigCPtr, this), false);
   }
 
-  public void assign(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n, DecorativeGeometry fillValue) {
-    opensimModelJNI.ArrayDecorativeGeometry_assign(swigCPtr, this, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n), DecorativeGeometry.getCPtr(fillValue), fillValue);
+  public void assign(long n, DecorativeGeometry fillValue) {
+    opensimModelJNI.ArrayDecorativeGeometry_assign(swigCPtr, this, n, DecorativeGeometry.getCPtr(fillValue), fillValue);
   }
 
   public void fill(DecorativeGeometry fillValue) {
@@ -71,56 +71,56 @@ public class ArrayDecorativeGeometry {
     opensimModelJNI.ArrayDecorativeGeometry_swap(swigCPtr, this, ArrayDecorativeGeometry.getCPtr(other), other);
   }
 
-  public ArrayDecorativeGeometry adoptData(DecorativeGeometry newData, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type dataSize, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type dataCapacity) {
-    return new ArrayDecorativeGeometry(opensimModelJNI.ArrayDecorativeGeometry_adoptData__SWIG_0(swigCPtr, this, DecorativeGeometry.getCPtr(newData), newData, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(dataSize), SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(dataCapacity)), false);
+  public ArrayDecorativeGeometry adoptData(DecorativeGeometry newData, long dataSize, long dataCapacity) {
+    return new ArrayDecorativeGeometry(opensimModelJNI.ArrayDecorativeGeometry_adoptData__SWIG_0(swigCPtr, this, DecorativeGeometry.getCPtr(newData), newData, dataSize, dataCapacity), false);
   }
 
-  public ArrayDecorativeGeometry adoptData(DecorativeGeometry newData, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type dataSize) {
-    return new ArrayDecorativeGeometry(opensimModelJNI.ArrayDecorativeGeometry_adoptData__SWIG_1(swigCPtr, this, DecorativeGeometry.getCPtr(newData), newData, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(dataSize)), false);
+  public ArrayDecorativeGeometry adoptData(DecorativeGeometry newData, long dataSize) {
+    return new ArrayDecorativeGeometry(opensimModelJNI.ArrayDecorativeGeometry_adoptData__SWIG_1(swigCPtr, this, DecorativeGeometry.getCPtr(newData), newData, dataSize), false);
   }
 
-  public ArrayDecorativeGeometry shareData(DecorativeGeometry newData, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type dataSize) {
-    return new ArrayDecorativeGeometry(opensimModelJNI.ArrayDecorativeGeometry_shareData__SWIG_0(swigCPtr, this, DecorativeGeometry.getCPtr(newData), newData, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(dataSize)), false);
+  public ArrayDecorativeGeometry shareData(DecorativeGeometry newData, long dataSize) {
+    return new ArrayDecorativeGeometry(opensimModelJNI.ArrayDecorativeGeometry_shareData__SWIG_0(swigCPtr, this, DecorativeGeometry.getCPtr(newData), newData, dataSize), false);
   }
 
   public ArrayDecorativeGeometry shareData(DecorativeGeometry first, DecorativeGeometry last1) {
     return new ArrayDecorativeGeometry(opensimModelJNI.ArrayDecorativeGeometry_shareData__SWIG_1(swigCPtr, this, DecorativeGeometry.getCPtr(first), first, DecorativeGeometry.getCPtr(last1), last1), false);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type size() {
-    return new SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type(opensimModelJNI.ArrayDecorativeGeometry_size(swigCPtr, this), true);
+  public long size() {
+    return opensimModelJNI.ArrayDecorativeGeometry_size(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type max_size() {
-    return new SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type(opensimModelJNI.ArrayDecorativeGeometry_max_size(swigCPtr, this), true);
+  public long max_size() {
+    return opensimModelJNI.ArrayDecorativeGeometry_max_size(swigCPtr, this);
   }
 
   public boolean empty() {
     return opensimModelJNI.ArrayDecorativeGeometry_empty(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type capacity() {
-    return new SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type(opensimModelJNI.ArrayDecorativeGeometry_capacity(swigCPtr, this), true);
+  public long capacity() {
+    return opensimModelJNI.ArrayDecorativeGeometry_capacity(swigCPtr, this);
   }
 
-  public void resize(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n) {
-    opensimModelJNI.ArrayDecorativeGeometry_resize__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n));
+  public void resize(long n) {
+    opensimModelJNI.ArrayDecorativeGeometry_resize__SWIG_0(swigCPtr, this, n);
   }
 
-  public void resize(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n, DecorativeGeometry initVal) {
-    opensimModelJNI.ArrayDecorativeGeometry_resize__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n), DecorativeGeometry.getCPtr(initVal), initVal);
+  public void resize(long n, DecorativeGeometry initVal) {
+    opensimModelJNI.ArrayDecorativeGeometry_resize__SWIG_1(swigCPtr, this, n, DecorativeGeometry.getCPtr(initVal), initVal);
   }
 
-  public void reserve(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n) {
-    opensimModelJNI.ArrayDecorativeGeometry_reserve(swigCPtr, this, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n));
+  public void reserve(long n) {
+    opensimModelJNI.ArrayDecorativeGeometry_reserve(swigCPtr, this, n);
   }
 
   public void shrink_to_fit() {
     opensimModelJNI.ArrayDecorativeGeometry_shrink_to_fit(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type allocated() {
-    return new SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type(opensimModelJNI.ArrayDecorativeGeometry_allocated(swigCPtr, this), true);
+  public long allocated() {
+    return opensimModelJNI.ArrayDecorativeGeometry_allocated(swigCPtr, this);
   }
 
   public boolean isOwner() {
@@ -193,8 +193,8 @@ public class ArrayDecorativeGeometry {
     return new DecorativeGeometry(opensimModelJNI.ArrayDecorativeGeometry_back__SWIG_0(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayView_T_SimTK__DecorativeGeometry_unsigned_int_t updSubArray(long index, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type length) {
-    return new SWIGTYPE_p_SimTK__ArrayView_T_SimTK__DecorativeGeometry_unsigned_int_t(opensimModelJNI.ArrayDecorativeGeometry_updSubArray(swigCPtr, this, index, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(length)), true);
+  public SWIGTYPE_p_SimTK__ArrayView_T_SimTK__DecorativeGeometry_unsigned_int_t updSubArray(long index, long length) {
+    return new SWIGTYPE_p_SimTK__ArrayView_T_SimTK__DecorativeGeometry_unsigned_int_t(opensimModelJNI.ArrayDecorativeGeometry_updSubArray(swigCPtr, this, index, length), true);
   }
 
   public void push_back(DecorativeGeometry value) {
@@ -233,18 +233,14 @@ public class ArrayDecorativeGeometry {
     opensimModelJNI.ArrayDecorativeGeometry_clear(swigCPtr, this);
   }
 
-  public DecorativeGeometry insert(DecorativeGeometry p, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n, DecorativeGeometry value) {
-    long cPtr = opensimModelJNI.ArrayDecorativeGeometry_insert__SWIG_0(swigCPtr, this, DecorativeGeometry.getCPtr(p), p, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n), DecorativeGeometry.getCPtr(value), value);
+  public DecorativeGeometry insert(DecorativeGeometry p, long n, DecorativeGeometry value) {
+    long cPtr = opensimModelJNI.ArrayDecorativeGeometry_insert__SWIG_0(swigCPtr, this, DecorativeGeometry.getCPtr(p), p, n, DecorativeGeometry.getCPtr(value), value);
     return (cPtr == 0) ? null : new DecorativeGeometry(cPtr, false);
   }
 
   public DecorativeGeometry insert(DecorativeGeometry p, DecorativeGeometry value) {
     long cPtr = opensimModelJNI.ArrayDecorativeGeometry_insert__SWIG_1(swigCPtr, this, DecorativeGeometry.getCPtr(p), p, DecorativeGeometry.getCPtr(value), value);
     return (cPtr == 0) ? null : new DecorativeGeometry(cPtr, false);
-  }
-
-  public int getSizeAsInt() {
-    return opensimModelJNI.ArrayDecorativeGeometry_getSizeAsInt(swigCPtr, this);
   }
 
 }

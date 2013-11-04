@@ -39,12 +39,12 @@ public class SimTKArrayDouble {
     this(opensimModelJNI.new_SimTKArrayDouble__SWIG_0(), true);
   }
 
-  public SimTKArrayDouble(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n) {
-    this(opensimModelJNI.new_SimTKArrayDouble__SWIG_1(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n)), true);
+  public SimTKArrayDouble(long n) {
+    this(opensimModelJNI.new_SimTKArrayDouble__SWIG_1(n), true);
   }
 
-  public SimTKArrayDouble(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n, double initVal) {
-    this(opensimModelJNI.new_SimTKArrayDouble__SWIG_2(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n), initVal), true);
+  public SimTKArrayDouble(long n, double initVal) {
+    this(opensimModelJNI.new_SimTKArrayDouble__SWIG_2(n, initVal), true);
   }
 
   public SimTKArrayDouble(SimTKArrayDouble src) {
@@ -59,8 +59,8 @@ public class SimTKArrayDouble {
     return new SimTKArrayDouble(opensimModelJNI.SimTKArrayDouble_deallocate(swigCPtr, this), false);
   }
 
-  public void assign(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n, double fillValue) {
-    opensimModelJNI.SimTKArrayDouble_assign(swigCPtr, this, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n), fillValue);
+  public void assign(long n, double fillValue) {
+    opensimModelJNI.SimTKArrayDouble_assign(swigCPtr, this, n, fillValue);
   }
 
   public void fill(double fillValue) {
@@ -71,56 +71,56 @@ public class SimTKArrayDouble {
     opensimModelJNI.SimTKArrayDouble_swap(swigCPtr, this, SimTKArrayDouble.getCPtr(other), other);
   }
 
-  public SimTKArrayDouble adoptData(SWIGTYPE_p_double newData, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type dataSize, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type dataCapacity) {
-    return new SimTKArrayDouble(opensimModelJNI.SimTKArrayDouble_adoptData__SWIG_0(swigCPtr, this, SWIGTYPE_p_double.getCPtr(newData), SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(dataSize), SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(dataCapacity)), false);
+  public SimTKArrayDouble adoptData(SWIGTYPE_p_double newData, long dataSize, long dataCapacity) {
+    return new SimTKArrayDouble(opensimModelJNI.SimTKArrayDouble_adoptData__SWIG_0(swigCPtr, this, SWIGTYPE_p_double.getCPtr(newData), dataSize, dataCapacity), false);
   }
 
-  public SimTKArrayDouble adoptData(SWIGTYPE_p_double newData, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type dataSize) {
-    return new SimTKArrayDouble(opensimModelJNI.SimTKArrayDouble_adoptData__SWIG_1(swigCPtr, this, SWIGTYPE_p_double.getCPtr(newData), SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(dataSize)), false);
+  public SimTKArrayDouble adoptData(SWIGTYPE_p_double newData, long dataSize) {
+    return new SimTKArrayDouble(opensimModelJNI.SimTKArrayDouble_adoptData__SWIG_1(swigCPtr, this, SWIGTYPE_p_double.getCPtr(newData), dataSize), false);
   }
 
-  public SimTKArrayDouble shareData(SWIGTYPE_p_double newData, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type dataSize) {
-    return new SimTKArrayDouble(opensimModelJNI.SimTKArrayDouble_shareData__SWIG_0(swigCPtr, this, SWIGTYPE_p_double.getCPtr(newData), SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(dataSize)), false);
+  public SimTKArrayDouble shareData(SWIGTYPE_p_double newData, long dataSize) {
+    return new SimTKArrayDouble(opensimModelJNI.SimTKArrayDouble_shareData__SWIG_0(swigCPtr, this, SWIGTYPE_p_double.getCPtr(newData), dataSize), false);
   }
 
   public SimTKArrayDouble shareData(SWIGTYPE_p_double first, SWIGTYPE_p_double last1) {
     return new SimTKArrayDouble(opensimModelJNI.SimTKArrayDouble_shareData__SWIG_1(swigCPtr, this, SWIGTYPE_p_double.getCPtr(first), SWIGTYPE_p_double.getCPtr(last1)), false);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type size() {
-    return new SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type(opensimModelJNI.SimTKArrayDouble_size(swigCPtr, this), true);
+  public long size() {
+    return opensimModelJNI.SimTKArrayDouble_size(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type max_size() {
-    return new SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type(opensimModelJNI.SimTKArrayDouble_max_size(swigCPtr, this), true);
+  public long max_size() {
+    return opensimModelJNI.SimTKArrayDouble_max_size(swigCPtr, this);
   }
 
   public boolean empty() {
     return opensimModelJNI.SimTKArrayDouble_empty(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type capacity() {
-    return new SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type(opensimModelJNI.SimTKArrayDouble_capacity(swigCPtr, this), true);
+  public long capacity() {
+    return opensimModelJNI.SimTKArrayDouble_capacity(swigCPtr, this);
   }
 
-  public void resize(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n) {
-    opensimModelJNI.SimTKArrayDouble_resize__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n));
+  public void resize(long n) {
+    opensimModelJNI.SimTKArrayDouble_resize__SWIG_0(swigCPtr, this, n);
   }
 
-  public void resize(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n, double initVal) {
-    opensimModelJNI.SimTKArrayDouble_resize__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n), initVal);
+  public void resize(long n, double initVal) {
+    opensimModelJNI.SimTKArrayDouble_resize__SWIG_1(swigCPtr, this, n, initVal);
   }
 
-  public void reserve(SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n) {
-    opensimModelJNI.SimTKArrayDouble_reserve(swigCPtr, this, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n));
+  public void reserve(long n) {
+    opensimModelJNI.SimTKArrayDouble_reserve(swigCPtr, this, n);
   }
 
   public void shrink_to_fit() {
     opensimModelJNI.SimTKArrayDouble_shrink_to_fit(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type allocated() {
-    return new SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type(opensimModelJNI.SimTKArrayDouble_allocated(swigCPtr, this), true);
+  public long allocated() {
+    return opensimModelJNI.SimTKArrayDouble_allocated(swigCPtr, this);
   }
 
   public boolean isOwner() {
@@ -193,8 +193,8 @@ public class SimTKArrayDouble {
     return opensimModelJNI.SimTKArrayDouble_back__SWIG_0(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayView_T_double_unsigned_int_t updSubArray(long index, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type length) {
-    return new SWIGTYPE_p_SimTK__ArrayView_T_double_unsigned_int_t(opensimModelJNI.SimTKArrayDouble_updSubArray(swigCPtr, this, index, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(length)), true);
+  public SWIGTYPE_p_SimTK__ArrayView_T_double_unsigned_int_t updSubArray(long index, long length) {
+    return new SWIGTYPE_p_SimTK__ArrayView_T_double_unsigned_int_t(opensimModelJNI.SimTKArrayDouble_updSubArray(swigCPtr, this, index, length), true);
   }
 
   public void push_back(double value) {
@@ -233,8 +233,8 @@ public class SimTKArrayDouble {
     opensimModelJNI.SimTKArrayDouble_clear(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_double insert(SWIGTYPE_p_double p, SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type n, double value) {
-    long cPtr = opensimModelJNI.SimTKArrayDouble_insert__SWIG_0(swigCPtr, this, SWIGTYPE_p_double.getCPtr(p), SWIGTYPE_p_SimTK__ArrayIndexTraitsT_unsigned_int_t__size_type.getCPtr(n), value);
+  public SWIGTYPE_p_double insert(SWIGTYPE_p_double p, long n, double value) {
+    long cPtr = opensimModelJNI.SimTKArrayDouble_insert__SWIG_0(swigCPtr, this, SWIGTYPE_p_double.getCPtr(p), n, value);
     return (cPtr == 0) ? null : new SWIGTYPE_p_double(cPtr, false);
   }
 

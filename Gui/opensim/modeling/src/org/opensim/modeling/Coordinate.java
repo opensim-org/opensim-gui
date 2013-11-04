@@ -657,8 +657,8 @@ public class Coordinate extends ModelComponent {
     return opensimModelJNI.Coordinate_getMobilizerQIndex(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_SimTK__MobilizedBodyIndex getBodyIndex() {
-    return new SWIGTYPE_p_SimTK__MobilizedBodyIndex(opensimModelJNI.Coordinate_getBodyIndex(swigCPtr, this), true);
+  public int getBodyIndex() {
+    return opensimModelJNI.Coordinate_getBodyIndex(swigCPtr, this);
   }
 
   public ArrayStr getStateVariableNames() {

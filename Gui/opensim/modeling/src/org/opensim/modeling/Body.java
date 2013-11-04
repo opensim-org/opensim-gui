@@ -143,8 +143,8 @@ public class Body extends ModelComponent {
     return (cPtr == 0) ? null : new VisibleObject(cPtr, false);
   }
 
-  public SWIGTYPE_p_SimTK__MobilizedBodyIndex getIndex() {
-    return new SWIGTYPE_p_SimTK__MobilizedBodyIndex(opensimModelJNI.Body_getIndex(swigCPtr, this), true);
+  public int getIndex() {
+    return opensimModelJNI.Body_getIndex(swigCPtr, this);
   }
 
   public void getScaleFactors(Vec3 aScaleFactors) {
