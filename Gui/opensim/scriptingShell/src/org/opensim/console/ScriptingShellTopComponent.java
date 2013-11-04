@@ -75,6 +75,8 @@ public final class ScriptingShellTopComponent extends TopComponent {
         jConsole2.registerConsoleListener(historyArea);
         jScrollPane1.setBorder(new TitledBorder("Command History"));
         historyArea.setEditable(false);
+        
+        instance = this;
     }
 
     /** This method is called from within the constructor to
