@@ -22,4 +22,9 @@
             </file>
         </folder>
     </folder>
+    <folder name="Shortcuts">
+            <file name="D-T.shadow">  
+            <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-plotter-ToolsPlotAction.instance"/> 
+        </file>
+    </folder>
  </filesystem>

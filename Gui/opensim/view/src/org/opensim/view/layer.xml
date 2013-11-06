@@ -676,6 +676,18 @@
         <file name="D-Y.shadow">  
         <attr name="originalFile" stringvalue="Actions/Edit/org-openide-actions-RedoAction.instance"/> 
         </file>
+        <file name="D-O.shadow">  
+        <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-FileOpenOsimModelAction.instance"/> 
+        </file>
+        <file name="D-F4.shadow">  
+        <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-actions-FileCloseAction.instance"/> 
+        </file>
+        <file name="D-L.shadow">
+            <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-motions.FileLoadMotionMenuAction.instance"/>
+        </file>
+        <file name="D-S.shadow">
+            <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-FileSaveModelAction.instance"/>
+        </file>
     </folder>
     <folder name="Templates">
         <folder name="Other">
