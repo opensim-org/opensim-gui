@@ -6,9 +6,13 @@ package org.opensim.topologyEditor;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Vector;
 import javax.swing.JScrollPane;
+import org.openide.util.LookupEvent;
 import org.openide.util.NbBundle;
 import org.openide.windows.TopComponent;
 import org.netbeans.api.settings.ConvertAsProperties;
@@ -25,10 +29,16 @@ import org.netbeans.api.visual.widget.LabelWidget;
 import org.netbeans.api.visual.widget.Widget;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
+import org.openide.util.Lookup;
+import org.openide.util.LookupListener;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.BodySet;
 import org.opensim.modeling.Joint;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.OpenSimObject;
+import org.opensim.view.ModelEvent;
+import org.opensim.view.ObjectSetCurrentEvent;
+import org.opensim.view.ObjectsChangedEvent;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 
@@ -45,16 +55,24 @@ persistenceType = TopComponent.PERSISTENCE_ALWAYS)
 @ActionReference(path = "Menu/Window" /*, position = 333 */)
 @TopComponent.OpenActionRegistration(displayName = "#CTL_visualTopComponentAction",
 preferredID = "visualTopComponentTopComponent")
-public final class topologyEditorTopComponent extends TopComponent implements Observer {
+public final class topologyEditorTopComponent extends TopComponent implements Observer, LookupListener{
     ModelGraphScene scene;
     GraphLayout<String,String> graphLayout = GraphLayoutFactory.createTreeGraphLayout (50, 50, 25, 20, true);
- 
+    Model currentModel;
+    Lookup.Result<OpenSimObject> r;
+    ArrayList<String> selectedObjects = new ArrayList<String>();
+    
     public topologyEditorTopComponent() {
         initComponents();
+        setLayout(new BorderLayout());
         setName(NbBundle.getMessage(topologyEditorTopComponent.class, "CTL_visualTopComponentTopComponent"));
         setToolTipText(NbBundle.getMessage(topologyEditorTopComponent.class, "HINT_visualTopComponentTopComponent"));
-        populateDefault();
+        scene = new ModelGraphScene();
+        JScrollPane sPane = new JScrollPane(scene.createView());
+        add(sPane, BorderLayout.CENTER); 
         OpenSimDB.getInstance().addObserver(this);
+        r = ViewDB.getLookup().lookupResult(OpenSimObject.class);
+        r.addLookupListener (this);
     }
 
     /** This method is called from within the constructor to
@@ -82,6 +100,8 @@ public final class topologyEditorTopComponent extends TopComponent implements Ob
     @Override
     public void componentOpened() {
         // TODO add custom code on component opening
+        scene.clearAll();
+        populateDefault();
     }
 
     @Override
@@ -102,15 +122,12 @@ public final class topologyEditorTopComponent extends TopComponent implements Ob
     }
 
     private void populateDefault() {
-        setLayout(new BorderLayout());
-
-        scene = new ModelGraphScene();
         GraphLayoutSupport.setTreeGraphLayoutRootNode (graphLayout, "ground");
         final SceneLayout sceneGraphLayout = LayoutFactory.createSceneGraphLayout (scene, graphLayout);
         
         WidgetAction hoverAction = ActionFactory.createHoverAction (new MyHoverProvider ());
         scene.getActions().addAction (hoverAction);
-        Model currentModel = OpenSimDB.getInstance().getCurrentModel();
+        currentModel = OpenSimDB.getInstance().getCurrentModel();
         if (currentModel == null) return;
         BodySet bods = currentModel.getBodySet();
         int numBodies = bods.getSize();
@@ -135,12 +152,10 @@ public final class topologyEditorTopComponent extends TopComponent implements Ob
                 scene.setEdgeTarget (jntToChild, bod.getName());
             }
         }
-        //SceneSupport.show (scene);
-        //scene.createBirdView();
-        JScrollPane sPane = new JScrollPane(scene.createView());
-        add(sPane, BorderLayout.CENTER); 
+        scene.validate();
+        
+        
         //add(scene.createSatelliteView(), BorderLayout.EAST); 
- 
         sceneGraphLayout.invokeLayoutImmediately ();
         scene.validate();
         scene.getActions ().addAction (ActionFactory.createEditAction (new EditProvider() {
@@ -156,15 +171,66 @@ public final class topologyEditorTopComponent extends TopComponent implements Ob
 
     @Override
     public void update(Observable o, Object o1) {
-        scene.removeChildren();
-        populateDefault();
+        if (o1 instanceof ObjectsChangedEvent) // if no structural change, do nothing
+            return;
+        if (o1 instanceof ObjectSetCurrentEvent){
+            ObjectSetCurrentEvent evt = (ObjectSetCurrentEvent)o1;
+            Vector<OpenSimObject> objs = evt.getObjects();
+            // If any of the event objects is a model not equal to the current one, this means there is a new
+            // current model. So update the panel.
+            for (int i=0; i<objs.size(); i++) {
+               if (objs.get(i) instanceof Model) {
+                  if (currentModel == null || !currentModel.equals(objs.get(i))) {
+                     scene.clearAll();
+                     populateDefault();
+                     break;
+                  }
+               }
+            }
+        }
+        else if (o1 instanceof ModelEvent){
+            if (((ModelEvent)o1).getOperation()==ModelEvent.Operation.Close ||
+                    (((ModelEvent)o1).getOperation()==ModelEvent.Operation.Open))
+                scene.clearAll();
+                //populateDefault();
+                return;
+            
+        }
+        else {    
+            scene.clearAll();
+            //populateDefault();
+        }
     }
+
+    @Override
+    public void resultChanged(LookupEvent ev) {
+        Collection<? extends OpenSimObject> allSelected = r.allInstances();
+        for (String previouslySelected: selectedObjects){
+            Widget widget = scene.findWidget(previouslySelected);
+            if (widget != null){
+                widget.setBackground (Color.WHITE);
+                widget.setForeground (Color.BLACK);
+            }               
+        }
+        if (!allSelected.isEmpty()) {
+            for (OpenSimObject sel:allSelected){
+                Widget widget = scene.findWidget(sel.getName());
+                if (widget != null){
+                    widget.setBackground (Color.WHITE);
+                    widget.setForeground (Color.RED);
+                    selectedObjects.add(sel.getName());
+                }
+            }
+        }
+        
+    }
+
    private static class MyHoverProvider implements TwoStateHoverProvider {
 
         public void unsetHovering(Widget widget) {
             if (widget != null) {
-                widget.setBackground (Color.WHITE);
-                widget.setForeground (Color.BLACK);
+                //widget.setBackground (Color.WHITE);
+                //widget.setForeground (Color.BLACK);
                 LabelWidget selected = ((LabelWidget)widget);
                 Body b = OpenSimDB.getInstance().getCurrentModel().getBodySet().get(selected.getLabel());
                 ViewDB.getInstance().removeObjectFromSelectedList(b);
@@ -173,11 +239,13 @@ public final class topologyEditorTopComponent extends TopComponent implements Ob
 
         public void setHovering(Widget widget) {
             if (widget != null) {
-                widget.setBackground (new Color (52, 124, 150));
-                widget.setForeground (Color.RED);
+                //widget.setBackground (new Color (52, 124, 150));
+                //widget.setForeground (Color.RED);
                 LabelWidget selected = ((LabelWidget)widget);
                 Body b = OpenSimDB.getInstance().getCurrentModel().getBodySet().get(selected.getLabel());
                 ViewDB.getInstance().replaceSelectedObject(b);
+                
+                
             }
         }
 

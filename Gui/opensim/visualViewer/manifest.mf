@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 OpenIDE-Module: org.opensim.graphlEditor
-OpenIDE-Module-Localizing-Bundle: org/opensim/graphlEditor/Bundle.properties
+OpenIDE-Module-Localizing-Bundle: org/opensim/topologyEditor/Bundle.properties
 OpenIDE-Module-Requires: org.openide.windows.WindowManager
 OpenIDE-Module-Specification-Version: 1.0
 
