@@ -31,6 +31,7 @@ package org.opensim.view.pub;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -44,7 +45,12 @@ import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import org.openide.awt.StatusDisplayer;
+import org.openide.util.Lookup;
+import org.openide.util.LookupEvent;
+import org.openide.util.LookupListener;
 import org.openide.util.NbBundle;
+import org.openide.util.lookup.AbstractLookup;
+import org.openide.util.lookup.InstanceContent;
 import org.opensim.modeling.*;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.modeling.DisplayGeometry.DisplayPreference;
@@ -79,7 +85,7 @@ import vtk.vtkVectorText;
  * A Database of Displayed models, and displayed windows ModelWindowVTKTopComponents
  * Also keeps track of currently activated model window ModelWindowVTKTopComponent
  */
-public final class ViewDB extends Observable implements Observer {
+public final class ViewDB extends Observable implements Observer, LookupListener {
    // List of view windows currently displayed
    static ArrayList<ModelWindowVTKTopComponent> openWindows = new ArrayList<ModelWindowVTKTopComponent>(4);
    // List of models currently available in all views
@@ -87,6 +93,13 @@ public final class ViewDB extends Observable implements Observer {
    private static ArrayList<Boolean> saveStatus = new ArrayList<Boolean>(4);
    // One single vtAssemby for the whole Scene
    private static vtkAssembly sceneAssembly;
+
+    /**
+     * @return the myLookup
+     */
+    public static Lookup getLookup() {
+        return myLookup;
+    }
 
    // Map models to visuals
    private Hashtable<Model, SingleModelVisuals> mapModelsToVisuals =
@@ -124,10 +137,15 @@ public final class ViewDB extends Observable implements Observer {
    private double markerDisplayRadius = .01;
    private int debugLevel=1;
    private NumberFormat numFormat = NumberFormat.getInstance();
+   
+    private final static InstanceContent lookupContents = new InstanceContent();
+    private final static Lookup myLookup = new AbstractLookup (lookupContents);
+    Lookup.Result<OpenSimObject> r;
 
    /** Creates a new instance of ViewDB */
    private ViewDB() {
         applyPreferences();
+        r = myLookup.lookupResult(OpenSimObject.class);
      }
 
     public void applyPreferences() {
@@ -820,6 +838,11 @@ public final class ViewDB extends Observable implements Observer {
     */
    public void markSelected(Selectable selectedObject, boolean highlight, boolean sendEvent, boolean updateStatusDisplayAndRepaint) {
       selectedObject.markSelected(highlight);
+      if (highlight)
+          lookupContents.add(selectedObject.getOpenSimObject());
+      else
+          lookupContents.remove(selectedObject.getOpenSimObject());
+      
       if (ViewDB.getInstance().isQuery()){
           if (highlight){
            // Add caption
@@ -1454,6 +1477,17 @@ public final class ViewDB extends Observable implements Observer {
          bounds = boundsUnion(bounds, nextModel.getBoundsBodiesOnly());
       }
       return bounds;
+    }
+
+    @Override
+    public void resultChanged(LookupEvent ev) {
+        Lookup.Result r = (Lookup.Result) ev.getSource();
+        Collection c = r.allInstances();
+        if (!c.isEmpty()) {
+            Object lup = c.iterator().next();
+            int x=0;
+        }
+
     }
 
    /**
