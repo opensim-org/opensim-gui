@@ -140,6 +140,16 @@ public class SelectedObject implements Selectable {
                 asm.updateFromProperties();
              }
           }
+          else if (prop instanceof DisplayGeometryDisplayer){
+              DisplayGeometryDisplayer dgd = (DisplayGeometryDisplayer) prop;
+              if(highlight){
+                 //b.getDisplayer().getVisibleProperties().setColor(currentColor);
+                 ViewDB.getInstance().applyColor(defaultSelectedColor, prop, false);
+             }
+             else{
+                dgd.updateFromProperties();
+             }
+          }
       }
    }
 

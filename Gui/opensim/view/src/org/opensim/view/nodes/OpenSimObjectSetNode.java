@@ -29,14 +29,12 @@
 package org.opensim.view.nodes;
 
 import javax.swing.Action;
-import org.openide.actions.NewAction;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
-import org.openide.util.actions.SystemAction;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.ObjectDisplayHideAction;
-import org.opensim.view.ObjectDisplayShowAction;
 import org.opensim.view.ObjectSetDisplayMenuAction;
+import org.opensim.view.actions.ObjectDisplaySelectAction;
 import org.opensim.view.pub.ViewDB;
 
 /**
@@ -91,14 +89,9 @@ public class OpenSimObjectSetNode extends OpenSimObjectNode {
          if (collectiveStatus==2) collectiveStatus=0;  // Assume hidden if mixed
          
          try {
-            if (collectiveStatus==0){   // Hidden
-               return ((ObjectDisplayShowAction) ObjectDisplayShowAction.findObject(
-                (Class)Class.forName("org.opensim.view.ObjectDisplayShowAction"), true));
-            }
-            else { // 2 for mixed, some shown some hidden, pick show
-                    return ((ObjectDisplayHideAction) ObjectDisplayHideAction.findObject(
-                    (Class)Class.forName("org.opensim.view.ObjectDisplayHideAction"), true));
-            }
+            // 2 for mixed, some shown some hidden, pick show
+            return ((ObjectDisplaySelectAction) ObjectDisplaySelectAction.findObject(
+            (Class)Class.forName("org.opensim.view.actions.ObjectDisplaySelectAction"), true));
          } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
          }

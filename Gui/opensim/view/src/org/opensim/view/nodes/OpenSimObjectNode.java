@@ -38,7 +38,6 @@ import org.openide.nodes.Sheet;
 import org.openide.util.Exceptions;
 import org.openide.util.lookup.Lookups;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.view.ObjectDisplayHideAction;
 import org.opensim.view.ObjectDisplayMenuAction;
 import org.opensim.view.ObjectDisplayShowAction;
 import org.opensim.view.pub.ViewDB;
@@ -52,6 +51,7 @@ import org.opensim.view.OpenSimBaseObjectProperty;
 import org.opensim.view.OpenSimFunctionProperty;
 import org.opensim.view.OpenSimGeometryPathProperty;
 import org.opensim.view.OpenSimObjectProperty;
+import org.opensim.view.actions.ObjectDisplaySelectAction;
 
 /**
  *
@@ -268,12 +268,9 @@ public class OpenSimObjectNode extends OpenSimNode {
          else
              currentStatus = ViewDB.getInstance().getDisplayStatus( obj );
          try {
-            if( currentStatus == 0 ) {   // 0 for hidden
-               return ((ObjectDisplayShowAction)ObjectDisplayShowAction.findObject( (Class)Class.forName("org.opensim.view.ObjectDisplayShowAction"), true));
-            }
-            else  { // 2 for mixed, some shown some hidden, hide all now
-               return ((ObjectDisplayHideAction) ObjectDisplayHideAction.findObject( (Class)Class.forName("org.opensim.view.ObjectDisplayHideAction"), true));
-            }
+             // 2 for mixed, some shown some hidden, hide all now
+               return ((ObjectDisplaySelectAction) ObjectDisplaySelectAction.findObject( (Class)Class.forName("org.opensim.view.actions.ObjectDisplaySelectAction"), true));
+            
          } catch( ClassNotFoundException ex ) {
             ex.printStackTrace();
          }
