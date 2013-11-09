@@ -2089,7 +2089,8 @@ public class JPlotterPanel extends javax.swing.JPanel
             renamMenuItem.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e) {
                     NotifyDescriptor.InputLine dlg =
-                            new NotifyDescriptor.InputLine("Current Name: "+cv2.getLegend(), "Rename Curve to");
+                            new NotifyDescriptor.InputLine("Current Name: ", "Rename");
+                    dlg.setInputText(cv2.getLegend());
                     if(DialogDisplayer.getDefault().notify(dlg)==NotifyDescriptor.OK_OPTION){
                         String newName = dlg.getInputText();
                         // Fix tree display by forcing repaint

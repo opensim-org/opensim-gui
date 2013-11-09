@@ -51,7 +51,8 @@ public final class ModelRenameAction extends CallableSystemAction {
       if (selected.length == 1){
          OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[0];
          NotifyDescriptor.InputLine dlg =
-                 new NotifyDescriptor.InputLine("Current Name: "+objectNode.getOpenSimObject().getName(), "Rename Object");
+                 new NotifyDescriptor.InputLine("Model Name: ", "Rename ");
+         dlg.setInputText(objectNode.getOpenSimObject().getName());
          if(DialogDisplayer.getDefault().notify(dlg)==NotifyDescriptor.OK_OPTION){
              String newName = dlg.getInputText();
              if (OpenSimDB.getInstance().validateName(newName, true)){

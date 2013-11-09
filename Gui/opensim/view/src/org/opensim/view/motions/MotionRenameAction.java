@@ -36,11 +36,13 @@ import org.opensim.view.pub.OpenSimDB;
 
 public final class MotionRenameAction extends CallableSystemAction {
    
+    @Override
     public void performAction() {
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         OneMotionNode objectNode = (OneMotionNode)selected[0];
         NotifyDescriptor.InputLine dlg =
-                new NotifyDescriptor.InputLine("Current Name: "+objectNode.getOpenSimObject().getName(), "Rename Object");
+                new NotifyDescriptor.InputLine("Current Name: ", "Rename Motion");
+        dlg.setInputText(objectNode.getOpenSimObject().getName());
         if(DialogDisplayer.getDefault().notify(dlg)==NotifyDescriptor.OK_OPTION){
             String newName = dlg.getInputText();
             if (OpenSimDB.getInstance().validateName(newName, true)){
