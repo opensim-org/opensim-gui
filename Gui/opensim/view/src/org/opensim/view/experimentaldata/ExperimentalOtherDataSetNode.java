@@ -32,18 +32,12 @@
 package org.opensim.view.experimentaldata;
 
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.beans.PropertyChangeListener;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Vector;
-import javax.swing.Action;
 import javax.swing.ImageIcon;
-import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.util.NbBundle;
-import org.opensim.view.ModelDisplayMenuAction;
-import org.opensim.view.ModelRenameAction;
 import org.opensim.view.nodes.*;
 
 /**
