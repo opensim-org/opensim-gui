@@ -196,10 +196,6 @@ public final class topologyEditorTopComponent extends TopComponent implements Ob
                 return;
             
         }
-        else {    
-            scene.clearAll();
-            //populateDefault();
-        }
     }
 
     @Override
