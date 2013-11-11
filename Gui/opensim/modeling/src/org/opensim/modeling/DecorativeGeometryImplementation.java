@@ -90,6 +90,10 @@ public class DecorativeGeometryImplementation {
     opensimModelJNI.DecorativeGeometryImplementation_implementMeshGeometry(swigCPtr, this, DecorativeMesh.getCPtr(arg0), arg0);
   }
 
+  public void implementMeshFileGeometry(DecorativeMeshFile arg0) {
+    opensimModelJNI.DecorativeGeometryImplementation_implementMeshFileGeometry(swigCPtr, this, DecorativeMeshFile.getCPtr(arg0), arg0);
+  }
+
   public DecorativeGeometryImplementation() {
     this(opensimModelJNI.new_DecorativeGeometryImplementation(), true);
     opensimModelJNI.DecorativeGeometryImplementation_director_connect(this, swigCPtr, swigCMemOwn, true);

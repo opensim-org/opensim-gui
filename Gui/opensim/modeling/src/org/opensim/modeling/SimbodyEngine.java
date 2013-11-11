@@ -135,8 +135,8 @@ public class SimbodyEngine extends OpenSimObject {
     opensimModelJNI.SimbodyEngine_getAngularAccelerationBodyLocal(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, Vec3.getCPtr(rAngAcc), rAngAcc);
   }
 
-  public SWIGTYPE_p_Transform getTransform(State s, Body aBody) {
-    return new SWIGTYPE_p_Transform(opensimModelJNI.SimbodyEngine_getTransform(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody), true);
+  public Transform getTransform(State s, Body aBody) {
+    return new Transform(opensimModelJNI.SimbodyEngine_getTransform(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody), true);
   }
 
   public void computeReactions(State s, VectorOfVec3 rForces, VectorOfVec3 rTorques) {

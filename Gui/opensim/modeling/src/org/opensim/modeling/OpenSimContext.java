@@ -113,8 +113,8 @@ public class OpenSimContext extends OpenSimObject {
     opensimModelJNI.OpenSimContext_transformPosition(swigCPtr, this, Body.getCPtr(body), body, offset, gOffset);
   }
 
-  public SWIGTYPE_p_Transform getTransform(Body body) {
-    return new SWIGTYPE_p_Transform(opensimModelJNI.OpenSimContext_getTransform(swigCPtr, this, Body.getCPtr(body), body), true);
+  public Transform getTransform(Body body) {
+    return new Transform(opensimModelJNI.OpenSimContext_getTransform(swigCPtr, this, Body.getCPtr(body), body), true);
   }
 
   public void transform(Body ground, double[] d, Body body, double[] dragVectorBody) {
@@ -349,8 +349,8 @@ public class OpenSimContext extends OpenSimObject {
     return opensimModelJNI.OpenSimContext_getTime(swigCPtr, this);
   }
 
-  public static void getTransformAsDouble16(SWIGTYPE_p_Transform aTransform, double[] flattened) {
-    opensimModelJNI.OpenSimContext_getTransformAsDouble16(SWIGTYPE_p_Transform.getCPtr(aTransform), flattened);
+  public static void getTransformAsDouble16(Transform aTransform, double[] flattened) {
+    opensimModelJNI.OpenSimContext_getTransformAsDouble16(Transform.getCPtr(aTransform), aTransform, flattened);
   }
 
   public void setPropertiesFromState() {

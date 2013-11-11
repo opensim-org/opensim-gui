@@ -578,6 +578,19 @@ public class opensimModelJNI {
   public final static native long DecorativeMesh_setLineThickness(long jarg1, DecorativeMesh jarg1_, double jarg2);
   public final static native long DecorativeMesh_setRepresentation(long jarg1, DecorativeMesh jarg1_, int jarg2);
   public final static native void delete_DecorativeMesh(long jarg1);
+  public final static native long new_DecorativeMeshFile(String jarg1);
+  public final static native String DecorativeMeshFile_getMeshFile(long jarg1, DecorativeMeshFile jarg1_);
+  public final static native long DecorativeMeshFile_setBodyId(long jarg1, DecorativeMeshFile jarg1_, int jarg2);
+  public final static native long DecorativeMeshFile_setIndexOnBody(long jarg1, DecorativeMeshFile jarg1_, int jarg2);
+  public final static native long DecorativeMeshFile_setUserRef(long jarg1, DecorativeMeshFile jarg1_, long jarg2);
+  public final static native long DecorativeMeshFile_setTransform(long jarg1, DecorativeMeshFile jarg1_, long jarg2, Transform jarg2_);
+  public final static native long DecorativeMeshFile_setResolution(long jarg1, DecorativeMeshFile jarg1_, double jarg2);
+  public final static native long DecorativeMeshFile_setScaleFactors(long jarg1, DecorativeMeshFile jarg1_, long jarg2, Vec3 jarg2_);
+  public final static native long DecorativeMeshFile_setColor(long jarg1, DecorativeMeshFile jarg1_, long jarg2, Vec3 jarg2_);
+  public final static native long DecorativeMeshFile_setOpacity(long jarg1, DecorativeMeshFile jarg1_, double jarg2);
+  public final static native long DecorativeMeshFile_setLineThickness(long jarg1, DecorativeMeshFile jarg1_, double jarg2);
+  public final static native long DecorativeMeshFile_setRepresentation(long jarg1, DecorativeMeshFile jarg1_, int jarg2);
+  public final static native void delete_DecorativeMeshFile(long jarg1);
   public final static native long new_Decorations__SWIG_0();
   public final static native long new_Decorations__SWIG_1(long jarg1, DecorativeGeometry jarg1_);
   public final static native long Decorations_addDecoration__SWIG_0(long jarg1, Decorations jarg1_, long jarg2, DecorativeGeometry jarg2_);
@@ -606,6 +619,7 @@ public class opensimModelJNI {
   public final static native void DecorativeGeometryImplementation_implementFrameGeometry(long jarg1, DecorativeGeometryImplementation jarg1_, long jarg2, DecorativeFrame jarg2_);
   public final static native void DecorativeGeometryImplementation_implementTextGeometry(long jarg1, DecorativeGeometryImplementation jarg1_, long jarg2, DecorativeText jarg2_);
   public final static native void DecorativeGeometryImplementation_implementMeshGeometry(long jarg1, DecorativeGeometryImplementation jarg1_, long jarg2, DecorativeMesh jarg2_);
+  public final static native void DecorativeGeometryImplementation_implementMeshFileGeometry(long jarg1, DecorativeGeometryImplementation jarg1_, long jarg2, DecorativeMeshFile jarg2_);
   public final static native long new_DecorativeGeometryImplementation();
   public final static native void DecorativeGeometryImplementation_director_connect(DecorativeGeometryImplementation obj, long cptr, boolean mem_own, boolean weak_global);
   public final static native void DecorativeGeometryImplementation_change_ownership(DecorativeGeometryImplementation obj, long cptr, boolean take_or_release);
@@ -11383,7 +11397,7 @@ public class opensimModelJNI {
   public final static native void OpenSimContext_replaceTransformAxisFunction(long jarg1, OpenSimContext jarg1_, long jarg2, TransformAxis jarg2_, long jarg3, Function jarg3_);
   public final static native boolean OpenSimContext_isNaN(double jarg1);
   public final static native double OpenSimContext_getTime(long jarg1, OpenSimContext jarg1_);
-  public final static native void OpenSimContext_getTransformAsDouble16(long jarg1, double[] jarg2);
+  public final static native void OpenSimContext_getTransformAsDouble16(long jarg1, Transform jarg1_, double[] jarg2);
   public final static native void OpenSimContext_setPropertiesFromState(long jarg1, OpenSimContext jarg1_);
   public final static native void OpenSimContext_recreateSystemKeepStage(long jarg1, OpenSimContext jarg1_);
   public final static native void OpenSimContext_realizePosition(long jarg1, OpenSimContext jarg1_);
@@ -11468,6 +11482,7 @@ public class opensimModelJNI {
   public final static native long DecorativeFrame_SWIGUpcast(long jarg1);
   public final static native long DecorativeText_SWIGUpcast(long jarg1);
   public final static native long DecorativeMesh_SWIGUpcast(long jarg1);
+  public final static native long DecorativeMeshFile_SWIGUpcast(long jarg1);
   public final static native long Decorations_SWIGUpcast(long jarg1);
   public final static native long ObjectGroup_SWIGUpcast(long jarg1);
   public final static native long LineGeometry_SWIGUpcast(long jarg1);
@@ -11724,6 +11739,9 @@ public class opensimModelJNI {
   }
   public static void SwigDirector_DecorativeGeometryImplementation_implementMeshGeometry(DecorativeGeometryImplementation self, long arg0) {
     self.implementMeshGeometry(new DecorativeMesh(arg0, false));
+  }
+  public static void SwigDirector_DecorativeGeometryImplementation_implementMeshFileGeometry(DecorativeGeometryImplementation self, long arg0) {
+    self.implementMeshFileGeometry(new DecorativeMeshFile(arg0, false));
   }
   public static long SwigDirector_AnalysisWrapper_clone(AnalysisWrapper self) {
     return AnalysisWrapper.getCPtr(self.clone());
