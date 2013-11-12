@@ -47,7 +47,7 @@ import org.opensim.view.pub.ViewDB;
  */
 @ConvertAsProperties(dtd = "-//org.opensim.graphlEditor//visualTopComponent//EN",
 autostore = false)
-@TopComponent.Description(preferredID = "visualTopComponentTopComponent",
+@TopComponent.Description(preferredID = "Topological View",
 //iconBase="SET/PATH/TO/ICON/HERE", 
 persistenceType = TopComponent.PERSISTENCE_ALWAYS)
 @TopComponent.Registration(mode = "editor", openAtStartup = false)
