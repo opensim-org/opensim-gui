@@ -81,4 +81,9 @@
             </file>            
         </folder>
     </folder>
+        <folder name="Shortcuts">
+            <file name="F1.shadow">  
+            <attr name="originalFile" stringvalue="Actions/Help/org-opensim-helputils-helpmenu-OpenOnlineDocsAction.instance"/> 
+        </file>
+    </folder>
 </filesystem>
