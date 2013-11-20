@@ -81,7 +81,10 @@ public class IKToolPanel extends BaseToolPanel implements Observer {
 
       markerFileName.setExtensionsAndDescription(".trc", "IK trial marker data");
       coordinateFileName.setExtensionsAndDescription(".mot,.sto", "Coordinates of IK trial");
-  
+      outputMotionFilePath.setExtensionsAndDescription(".mot", "Result motion file for IK");
+      outputMotionFilePath.setIncludeOpenButton(false);
+      outputMotionFilePath.setDirectoriesOnly(false);
+      outputMotionFilePath.setCheckIfFileExists(false);
       updateModelDataFromModel();
       updateFromModel();
 
@@ -94,6 +97,8 @@ public class IKToolPanel extends BaseToolPanel implements Observer {
       ToolCommon.bindProperty(ikTool, "coordinate_file", coordinateFileName);
       ToolCommon.bindProperty(ikTool, "time_range", startTime);
       ToolCommon.bindProperty(ikTool, "time_range", endTime);
+      ToolCommon.bindProperty(ikTool, "output_motion_file", outputMotionFilePath);
+      
    }
 
    public void update(Observable observable, Object obj) {
@@ -143,11 +148,13 @@ public class IKToolPanel extends BaseToolPanel implements Observer {
       coordinateFileName.setFileName(ikToolModel.getIKCommonModel().getCoordinateDataFileName(),false);
       coordinateFileName.setFileIsValid(ikToolModel.getIKCommonModel().getCoordinateDataValid());
 
+      
       // Time range
       double[] timeRange = ikToolModel.getIKCommonModel().getTimeRange();
       startTime.setText(numFormat.format(timeRange[0]));
       endTime.setText(numFormat.format(timeRange[1]));
 
+      outputMotionFilePath.setFileName(ikToolModel.getIKTool().getOutputMotionFileName());
       //---------------------------------------------------------------------
       // Dialog buttons
       //---------------------------------------------------------------------
@@ -202,6 +209,9 @@ public class IKToolPanel extends BaseToolPanel implements Observer {
         modelNameTextField = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         markerSetInfoTextField = new javax.swing.JTextField();
+        outputPanel = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        outputMotionFilePath = new org.opensim.swingui.FileTextFieldAndChooser();
 
         markerPlacerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "IK Trial"));
 
@@ -273,14 +283,14 @@ public class IKToolPanel extends BaseToolPanel implements Observer {
                     .add(jLabel12))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(markerPlacerPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(markerFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
-                    .add(coordinateFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                    .add(markerFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+                    .add(coordinateFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, markerPlacerPanelLayout.createSequentialGroup()
-                        .add(startTime, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                        .add(startTime, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jLabel9)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(endTime, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)))
+                        .add(endTime, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -349,6 +359,37 @@ public class IKToolPanel extends BaseToolPanel implements Observer {
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        outputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Output"));
+
+        jLabel11.setText("Motion File");
+
+        outputMotionFilePath.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                outputMotionFilePathStateChanged(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout outputPanelLayout = new org.jdesktop.layout.GroupLayout(outputPanel);
+        outputPanel.setLayout(outputPanelLayout);
+        outputPanelLayout.setHorizontalGroup(
+            outputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(outputPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jLabel11)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(outputMotionFilePath, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        outputPanelLayout.setVerticalGroup(
+            outputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(outputPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(outputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(jLabel11)
+                    .add(outputMotionFilePath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -356,6 +397,7 @@ public class IKToolPanel extends BaseToolPanel implements Observer {
             .add(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, outputPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(markerPlacerPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(jPanel1Layout.createSequentialGroup()
                         .add(genericModelDataPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -369,6 +411,8 @@ public class IKToolPanel extends BaseToolPanel implements Observer {
                 .add(genericModelDataPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(markerPlacerPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(outputPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -380,14 +424,14 @@ public class IKToolPanel extends BaseToolPanel implements Observer {
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jTabbedPane)
+                .add(jTabbedPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jTabbedPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                .add(jTabbedPane)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -419,12 +463,17 @@ public class IKToolPanel extends BaseToolPanel implements Observer {
          endTime.setText(numFormat.format(timeRange[1]));
       }
    }//GEN-LAST:event_timeRangeActionPerformed
+
+private void outputMotionFilePathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_outputMotionFilePathStateChanged
+      ikToolModel.getIKTool().setOutputMotionFileName(outputMotionFilePath.getFileName());
+}//GEN-LAST:event_outputMotionFilePathStateChanged
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox coordinateCheckBox;
     private org.opensim.swingui.FileTextFieldAndChooser coordinateFileName;
     private javax.swing.JTextField endTime;
     private javax.swing.JPanel genericModelDataPanel;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel16;
@@ -436,6 +485,8 @@ public class IKToolPanel extends BaseToolPanel implements Observer {
     private javax.swing.JPanel markerPlacerPanel;
     private javax.swing.JTextField markerSetInfoTextField;
     private javax.swing.JTextField modelNameTextField;
+    private org.opensim.swingui.FileTextFieldAndChooser outputMotionFilePath;
+    private javax.swing.JPanel outputPanel;
     private javax.swing.JTextField startTime;
     // End of variables declaration//GEN-END:variables
    

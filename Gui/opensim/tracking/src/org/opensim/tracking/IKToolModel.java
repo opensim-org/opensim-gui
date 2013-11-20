@@ -194,19 +194,6 @@ public class IKToolModel extends Observable implements Observer {
    public IKCommonModel getIKCommonModel() { return ikCommonModel; }
    
    //------------------------------------------------------------------------
-   // IK trial name
-   //------------------------------------------------------------------------
-   public String getTrialName() {
-      return trialName;
-   }
-   public void setTrialName(String trialName) {
-      if(!this.trialName.equals(trialName)) {
-         this.trialName = trialName;
-         setModified(Operation.IKTrialNameChanged);
-      }
-   }
-
-   //------------------------------------------------------------------------
    // Setting the motion in the model
    //------------------------------------------------------------------------
    private void updateMotion(Storage newMotion) {
@@ -308,13 +295,14 @@ public class IKToolModel extends Observable implements Observer {
       String parentDir = (new File(parentFileName)).getParent();
         ikTool.setMarkerDataFileName(FileUtils.makePathAbsolute(ikTool.getMarkerDataFileName(),parentDir));
         ikTool.setCoordinateFileName(FileUtils.makePathAbsolute(ikTool.getCoordinateFileName(),parentDir));
+        ikTool.setOutputMotionFileName(FileUtils.makePathAbsolute(ikTool.getOutputMotionFileName(), parentDir));
   }
 
    private void AbsoluteToRelativePaths(String parentFileName) {
       String parentDir = (new File(parentFileName)).getParent();
       ikTool.setMarkerDataFileName(FileUtils.makePathRelative(ikTool.getMarkerDataFileName(),parentDir));
       ikTool.setCoordinateFileName(FileUtils.makePathRelative(ikTool.getCoordinateFileName(),parentDir));
-      
+      ikTool.setOutputMotionFileName(FileUtils.makePathRelative(ikTool.getOutputMotionFileName(), parentDir));
    }
 
    public boolean loadSettings(String fileName) {
@@ -337,9 +325,11 @@ public class IKToolModel extends Observable implements Observer {
 
    public boolean saveSettings(String fileName) {
       String fullFilename = FileUtils.addExtensionIfNeeded(fileName, ".xml");
+      /*
       XMLExternalFileChooserHelper helper = new XMLExternalFileChooserHelper(fullFilename);
       helper.addObject(ikTool.getIKTaskSet(), "IK Task Set");
-      if(!helper.promptUser()) return false;
+      if(!helper.promptUser()) return false;*/
+      ikTool.getIKTaskSet().setInlined(true);
       updateIKTool();
       AbsoluteToRelativePaths(fullFilename);
       ikTool.print(fullFilename);
