@@ -269,8 +269,8 @@ public class FiberCompressiveForceLengthCurve extends Function {
     return opensimModelJNI.FiberCompressiveForceLengthCurve_calcIntegral(swigCPtr, this, aNormLength);
   }
 
-  public SWIGTYPE_p_SimTK__VecT_2_double_1_t getCurveDomain() {
-    return new SWIGTYPE_p_SimTK__VecT_2_double_1_t(opensimModelJNI.FiberCompressiveForceLengthCurve_getCurveDomain(swigCPtr, this), true);
+  public Vec2 getCurveDomain() {
+    return new Vec2(opensimModelJNI.FiberCompressiveForceLengthCurve_getCurveDomain(swigCPtr, this), true);
   }
 
   public void printMuscleCurveToCSVFile(String path) {

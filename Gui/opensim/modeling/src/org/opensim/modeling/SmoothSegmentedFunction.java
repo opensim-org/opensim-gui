@@ -67,8 +67,8 @@ public class SmoothSegmentedFunction {
     opensimModelJNI.SmoothSegmentedFunction_setName(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(name));
   }
 
-  public SWIGTYPE_p_SimTK__VecT_2_double_1_t getCurveDomain() {
-    return new SWIGTYPE_p_SimTK__VecT_2_double_1_t(opensimModelJNI.SmoothSegmentedFunction_getCurveDomain(swigCPtr, this), true);
+  public Vec2 getCurveDomain() {
+    return new Vec2(opensimModelJNI.SmoothSegmentedFunction_getCurveDomain(swigCPtr, this), true);
   }
 
   public void printMuscleCurveToCSVFile(String path, double domainMin, double domainMax) {

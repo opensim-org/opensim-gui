@@ -189,8 +189,8 @@ public class ActivationFiberLengthMuscle extends Muscle {
     return new ArrayStr(opensimModelJNI.ActivationFiberLengthMuscle_getStateVariableNames(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_SimTK__SystemYIndex getStateVariableSystemIndex(String stateVariableName) {
-    return new SWIGTYPE_p_SimTK__SystemYIndex(opensimModelJNI.ActivationFiberLengthMuscle_getStateVariableSystemIndex(swigCPtr, this, stateVariableName), true);
+  public int getStateVariableSystemIndex(String stateVariableName) {
+    return opensimModelJNI.ActivationFiberLengthMuscle_getStateVariableSystemIndex(swigCPtr, this, stateVariableName);
   }
 
   public double getActivationRate(State s) {

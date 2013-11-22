@@ -43,8 +43,8 @@ public class VectorOfSpatialVec {
     this(opensimModelJNI.new_VectorOfSpatialVec__SWIG_1(VectorOfSpatialVec.getCPtr(src), src), true);
   }
 
-  public VectorOfSpatialVec(int m, SpatialVec cppInitialValues) {
-    this(opensimModelJNI.new_VectorOfSpatialVec__SWIG_2(m, SpatialVec.getCPtr(cppInitialValues), cppInitialValues), true);
+  public VectorOfSpatialVec(int m, SpatialVec initialValue) {
+    this(opensimModelJNI.new_VectorOfSpatialVec__SWIG_2(m, SpatialVec.getCPtr(initialValue), initialValue), true);
   }
 
   public String toString() {

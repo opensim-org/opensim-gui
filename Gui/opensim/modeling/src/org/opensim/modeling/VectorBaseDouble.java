@@ -47,10 +47,6 @@ public class VectorBaseDouble extends MatrixBaseDouble {
     this(opensimModelJNI.new_VectorBaseDouble__SWIG_2(VectorBaseDouble.getCPtr(source), source), true);
   }
 
-  public VectorBaseDouble(int m, double initialValue) {
-    this(opensimModelJNI.new_VectorBaseDouble__SWIG_3(m, initialValue), true);
-  }
-
   public int size() {
     return opensimModelJNI.VectorBaseDouble_size(swigCPtr, this);
   }

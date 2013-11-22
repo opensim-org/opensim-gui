@@ -77,8 +77,8 @@ public class ModelComponent extends OpenSimObject {
     return new ArrayStr(opensimModelJNI.ModelComponent_getStateVariableNames(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_SimTK__SystemYIndex getStateVariableSystemIndex(String stateVariableName) {
-    return new SWIGTYPE_p_SimTK__SystemYIndex(opensimModelJNI.ModelComponent_getStateVariableSystemIndex(swigCPtr, this, stateVariableName), true);
+  public int getStateVariableSystemIndex(String stateVariableName) {
+    return opensimModelJNI.ModelComponent_getStateVariableSystemIndex(swigCPtr, this, stateVariableName);
   }
 
   public int getModelingOption(State state, String name) {

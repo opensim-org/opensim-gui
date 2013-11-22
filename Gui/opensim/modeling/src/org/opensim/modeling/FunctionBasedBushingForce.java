@@ -1033,8 +1033,8 @@ public class FunctionBasedBushingForce extends Force {
     opensimModelJNI.FunctionBasedBushingForce_setVisualAspectRatio(swigCPtr, this, ratio);
   }
 
-  public SWIGTYPE_p_SimTK__VecT_6_double_1_t computeDeflection(State s) {
-    return new SWIGTYPE_p_SimTK__VecT_6_double_1_t(opensimModelJNI.FunctionBasedBushingForce_computeDeflection(swigCPtr, this, State.getCPtr(s), s), true);
+  public Vec6 computeDeflection(State s) {
+    return new Vec6(opensimModelJNI.FunctionBasedBushingForce_computeDeflection(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
   public void computeForce(State s, VectorOfSpatialVec bodyForces, Vector generalizedForces) {

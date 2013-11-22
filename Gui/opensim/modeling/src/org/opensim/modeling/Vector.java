@@ -43,12 +43,8 @@ public class Vector extends VectorBaseDouble {
     this(opensimModelJNI.new_Vector__SWIG_1(Vector.getCPtr(src), src), true);
   }
 
-  public Vector(int m, SWIGTYPE_p_double cppInitialValues) {
-    this(opensimModelJNI.new_Vector__SWIG_2(m, SWIGTYPE_p_double.getCPtr(cppInitialValues)), true);
-  }
-
   public Vector(int m, double initialValue) {
-    this(opensimModelJNI.new_Vector__SWIG_3(m, initialValue), true);
+    this(opensimModelJNI.new_Vector__SWIG_2(m, initialValue), true);
   }
 
   public String toString() {

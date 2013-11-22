@@ -365,8 +365,8 @@ public class ActiveForceLengthCurve extends Function {
     return opensimModelJNI.ActiveForceLengthCurve_calcDerivative(swigCPtr, this, normFiberLength, order);
   }
 
-  public SWIGTYPE_p_SimTK__VecT_2_double_1_t getCurveDomain() {
-    return new SWIGTYPE_p_SimTK__VecT_2_double_1_t(opensimModelJNI.ActiveForceLengthCurve_getCurveDomain(swigCPtr, this), true);
+  public Vec2 getCurveDomain() {
+    return new Vec2(opensimModelJNI.ActiveForceLengthCurve_getCurveDomain(swigCPtr, this), true);
   }
 
   public void printMuscleCurveToCSVFile(String path) {

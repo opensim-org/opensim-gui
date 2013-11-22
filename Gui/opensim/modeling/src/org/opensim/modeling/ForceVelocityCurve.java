@@ -537,8 +537,8 @@ public class ForceVelocityCurve extends Function {
     return opensimModelJNI.ForceVelocityCurve_calcDerivative(swigCPtr, this, normFiberVelocity, order);
   }
 
-  public SWIGTYPE_p_SimTK__VecT_2_double_1_t getCurveDomain() {
-    return new SWIGTYPE_p_SimTK__VecT_2_double_1_t(opensimModelJNI.ForceVelocityCurve_getCurveDomain(swigCPtr, this), true);
+  public Vec2 getCurveDomain() {
+    return new Vec2(opensimModelJNI.ForceVelocityCurve_getCurveDomain(swigCPtr, this), true);
   }
 
   public void printMuscleCurveToCSVFile(String path) {

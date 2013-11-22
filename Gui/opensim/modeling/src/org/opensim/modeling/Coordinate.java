@@ -665,8 +665,8 @@ public class Coordinate extends ModelComponent {
     return new ArrayStr(opensimModelJNI.Coordinate_getStateVariableNames(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_SimTK__SystemYIndex getStateVariableSystemIndex(String stateVariableName) {
-    return new SWIGTYPE_p_SimTK__SystemYIndex(opensimModelJNI.Coordinate_getStateVariableSystemIndex(swigCPtr, this, stateVariableName), true);
+  public int getStateVariableSystemIndex(String stateVariableName) {
+    return opensimModelJNI.Coordinate_getStateVariableSystemIndex(swigCPtr, this, stateVariableName);
   }
 
   public Coordinate() {

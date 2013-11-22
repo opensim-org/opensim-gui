@@ -85,10 +85,6 @@ public class opensimModel implements opensimModelConstants {
     return new SpatialVec(opensimModelJNI.shiftAccelerationFromTo(SpatialVec.getCPtr(A_A_BP), A_A_BP, Vec3.getCPtr(w_AB), w_AB, Vec3.getCPtr(fromP_A), fromP_A, Vec3.getCPtr(toQ_A), toQ_A), true);
   }
 
-  public static PhiMatrixTranspose transpose(PhiMatrix phi) {
-    return new PhiMatrixTranspose(opensimModelJNI.transpose(PhiMatrix.getCPtr(phi), phi), true);
-  }
-
   public static void SimTK_version_SimTKcommon(SWIGTYPE_p_int major, SWIGTYPE_p_int minor, SWIGTYPE_p_int build) {
     opensimModelJNI.SimTK_version_SimTKcommon(SWIGTYPE_p_int.getCPtr(major), SWIGTYPE_p_int.getCPtr(minor), SWIGTYPE_p_int.getCPtr(build));
   }

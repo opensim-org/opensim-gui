@@ -1033,8 +1033,8 @@ public class Millard2012AccelerationMuscle extends Muscle {
     return new ArrayStr(opensimModelJNI.Millard2012AccelerationMuscle_getStateVariableNames(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_SimTK__SystemYIndex getStateVariableSystemIndex(String stateVariableName) {
-    return new SWIGTYPE_p_SimTK__SystemYIndex(opensimModelJNI.Millard2012AccelerationMuscle_getStateVariableSystemIndex(swigCPtr, this, stateVariableName), true);
+  public int getStateVariableSystemIndex(String stateVariableName) {
+    return opensimModelJNI.Millard2012AccelerationMuscle_getStateVariableSystemIndex(swigCPtr, this, stateVariableName);
   }
 
   public double computeActuation(State s) {

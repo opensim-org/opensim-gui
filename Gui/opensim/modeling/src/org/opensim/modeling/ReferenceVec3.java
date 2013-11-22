@@ -61,8 +61,8 @@ public class ReferenceVec3 extends OpenSimObject {
     return opensimModelJNI.ReferenceVec3_getNumRefs(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_SimTK__VecT_2_double_1_t getValidTimeRange() {
-    return new SWIGTYPE_p_SimTK__VecT_2_double_1_t(opensimModelJNI.ReferenceVec3_getValidTimeRange(swigCPtr, this), true);
+  public Vec2 getValidTimeRange() {
+    return new Vec2(opensimModelJNI.ReferenceVec3_getValidTimeRange(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_SimTK__Array_T_std__string_unsigned_int_t getNames() {

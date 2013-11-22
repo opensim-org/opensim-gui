@@ -93,8 +93,8 @@ public class MarkersReference extends ReferenceVec3 {
     return opensimModelJNI.MarkersReference_getNumRefs(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_SimTK__VecT_2_double_1_t getValidTimeRange() {
-    return new SWIGTYPE_p_SimTK__VecT_2_double_1_t(opensimModelJNI.MarkersReference_getValidTimeRange(swigCPtr, this), true);
+  public Vec2 getValidTimeRange() {
+    return new Vec2(opensimModelJNI.MarkersReference_getValidTimeRange(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_SimTK__Array_T_std__string_unsigned_int_t getNames() {

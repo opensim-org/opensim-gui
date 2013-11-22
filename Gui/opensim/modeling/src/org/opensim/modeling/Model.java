@@ -703,8 +703,8 @@ public class Model extends ModelComponent {
     return new ArrayStr(opensimModelJNI.Model_getStateVariableNames(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_OpenSim__ArrayT_SimTK__SystemYIndex_t getStateVariableSystemIndices() {
-    return new SWIGTYPE_p_OpenSim__ArrayT_SimTK__SystemYIndex_t(opensimModelJNI.Model_getStateVariableSystemIndices(swigCPtr, this), false);
+  public ArrayInt getStateVariableSystemIndices() {
+    return new ArrayInt(opensimModelJNI.Model_getStateVariableSystemIndices(swigCPtr, this), false);
   }
 
   public double getStateVariable(State s, String name) {
@@ -715,8 +715,8 @@ public class Model extends ModelComponent {
     opensimModelJNI.Model_setStateVariable(swigCPtr, this, State.getCPtr(s), s, name, value);
   }
 
-  public SWIGTYPE_p_SimTK__SystemYIndex getStateVariableSystemIndex(String stateVariableName) {
-    return new SWIGTYPE_p_SimTK__SystemYIndex(opensimModelJNI.Model_getStateVariableSystemIndex(swigCPtr, this, stateVariableName), true);
+  public int getStateVariableSystemIndex(String stateVariableName) {
+    return opensimModelJNI.Model_getStateVariableSystemIndex(swigCPtr, this, stateVariableName);
   }
 
   public static void LoadOpenSimLibrary(String libraryName) {

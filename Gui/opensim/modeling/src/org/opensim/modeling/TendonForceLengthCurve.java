@@ -333,8 +333,8 @@ public class TendonForceLengthCurve extends Function {
     return opensimModelJNI.TendonForceLengthCurve_calcIntegral(swigCPtr, this, aNormLength);
   }
 
-  public SWIGTYPE_p_SimTK__VecT_2_double_1_t getCurveDomain() {
-    return new SWIGTYPE_p_SimTK__VecT_2_double_1_t(opensimModelJNI.TendonForceLengthCurve_getCurveDomain(swigCPtr, this), true);
+  public Vec2 getCurveDomain() {
+    return new Vec2(opensimModelJNI.TendonForceLengthCurve_getCurveDomain(swigCPtr, this), true);
   }
 
   public void printMuscleCurveToCSVFile(String path) {

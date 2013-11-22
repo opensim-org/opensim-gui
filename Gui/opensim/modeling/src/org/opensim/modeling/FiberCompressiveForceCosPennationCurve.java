@@ -273,8 +273,8 @@ public class FiberCompressiveForceCosPennationCurve extends Function {
     return opensimModelJNI.FiberCompressiveForceCosPennationCurve_calcIntegral(swigCPtr, this, cosPennationAngle);
   }
 
-  public SWIGTYPE_p_SimTK__VecT_2_double_1_t getCurveDomain() {
-    return new SWIGTYPE_p_SimTK__VecT_2_double_1_t(opensimModelJNI.FiberCompressiveForceCosPennationCurve_getCurveDomain(swigCPtr, this), true);
+  public Vec2 getCurveDomain() {
+    return new Vec2(opensimModelJNI.FiberCompressiveForceCosPennationCurve_getCurveDomain(swigCPtr, this), true);
   }
 
   public void printMuscleCurveToCSVFile(String path) {

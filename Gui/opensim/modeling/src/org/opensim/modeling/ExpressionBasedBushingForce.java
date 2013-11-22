@@ -1057,8 +1057,8 @@ public class ExpressionBasedBushingForce extends Force {
     return opensimModelJNI.ExpressionBasedBushingForce_getFzExpression(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_SimTK__VecT_6_double_1_t computeDeflection(State s) {
-    return new SWIGTYPE_p_SimTK__VecT_6_double_1_t(opensimModelJNI.ExpressionBasedBushingForce_computeDeflection(swigCPtr, this, State.getCPtr(s), s), true);
+  public Vec6 computeDeflection(State s) {
+    return new Vec6(opensimModelJNI.ExpressionBasedBushingForce_computeDeflection(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
   public void computeForce(State s, VectorOfSpatialVec bodyForces, Vector generalizedForces) {

@@ -87,47 +87,6 @@ public class IO {
     return opensimModelJNI.IO_GetPrintOfflineDocuments();
   }
 
-  public static String ReadToTokenLine(SWIGTYPE_p_std__istream aIS, String aToken) {
-    return opensimModelJNI.IO_ReadToTokenLine(SWIGTYPE_p_std__istream.getCPtr(aIS), aToken);
-  }
-
-  public static String ReadLine(SWIGTYPE_p_std__istream aIS) {
-    return opensimModelJNI.IO_ReadLine(SWIGTYPE_p_std__istream.getCPtr(aIS));
-  }
-
-  public static int ComputeNumberOfSteps(double aTI, double aTF, double aDT) {
-    return opensimModelJNI.IO_ComputeNumberOfSteps(aTI, aTF, aDT);
-  }
-
-  public static String ReadCharacters(SWIGTYPE_p_std__istream aIS, int aNChar) {
-    return opensimModelJNI.IO_ReadCharacters(SWIGTYPE_p_std__istream.getCPtr(aIS), aNChar);
-  }
-
-  public static SWIGTYPE_p_FILE OpenFile(String aFileName, String aMode) {
-    long cPtr = opensimModelJNI.IO_OpenFile(aFileName, aMode);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_FILE(cPtr, false);
-  }
-
-  public static SWIGTYPE_p_std__ifstream OpenInputFile(String aFileName, SWIGTYPE_p_std__ios_base__openmode mode) {
-    long cPtr = opensimModelJNI.IO_OpenInputFile__SWIG_0(aFileName, SWIGTYPE_p_std__ios_base__openmode.getCPtr(mode));
-    return (cPtr == 0) ? null : new SWIGTYPE_p_std__ifstream(cPtr, false);
-  }
-
-  public static SWIGTYPE_p_std__ifstream OpenInputFile(String aFileName) {
-    long cPtr = opensimModelJNI.IO_OpenInputFile__SWIG_1(aFileName);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_std__ifstream(cPtr, false);
-  }
-
-  public static SWIGTYPE_p_std__ofstream OpenOutputFile(String aFileName, SWIGTYPE_p_std__ios_base__openmode mode) {
-    long cPtr = opensimModelJNI.IO_OpenOutputFile__SWIG_0(aFileName, SWIGTYPE_p_std__ios_base__openmode.getCPtr(mode));
-    return (cPtr == 0) ? null : new SWIGTYPE_p_std__ofstream(cPtr, false);
-  }
-
-  public static SWIGTYPE_p_std__ofstream OpenOutputFile(String aFileName) {
-    long cPtr = opensimModelJNI.IO_OpenOutputFile__SWIG_1(aFileName);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_std__ofstream(cPtr, false);
-  }
-
   public static int makeDir(String aDirName) {
     return opensimModelJNI.IO_makeDir(aDirName);
   }

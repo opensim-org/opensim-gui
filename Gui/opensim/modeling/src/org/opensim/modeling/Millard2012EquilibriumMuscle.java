@@ -665,8 +665,8 @@ public class Millard2012EquilibriumMuscle extends Muscle {
     return new ArrayStr(opensimModelJNI.Millard2012EquilibriumMuscle_getStateVariableNames(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_SimTK__SystemYIndex getStateVariableSystemIndex(String stateVariableName) {
-    return new SWIGTYPE_p_SimTK__SystemYIndex(opensimModelJNI.Millard2012EquilibriumMuscle_getStateVariableSystemIndex(swigCPtr, this, stateVariableName), true);
+  public int getStateVariableSystemIndex(String stateVariableName) {
+    return opensimModelJNI.Millard2012EquilibriumMuscle_getStateVariableSystemIndex(swigCPtr, this, stateVariableName);
   }
 
   public void setMuscleConfiguration(boolean ignoreTendonCompliance, boolean ignoreActivationDynamics, double dampingCoefficient) {
@@ -737,8 +737,8 @@ public class Millard2012EquilibriumMuscle extends Muscle {
     return opensimModelJNI.Millard2012EquilibriumMuscle_calcActiveFiberForceAlongTendon(swigCPtr, this, activation, fiberLength, fiberVelocity);
   }
 
-  public SWIGTYPE_p_SimTK__VecT_4_double_1_t calcFiberStateGivenBoundaryCond(double lengthMT, double velocityMT, double tendonForce, double dTendonForceDT) {
-    return new SWIGTYPE_p_SimTK__VecT_4_double_1_t(opensimModelJNI.Millard2012EquilibriumMuscle_calcFiberStateGivenBoundaryCond(swigCPtr, this, lengthMT, velocityMT, tendonForce, dTendonForceDT), true);
+  public Vec4 calcFiberStateGivenBoundaryCond(double lengthMT, double velocityMT, double tendonForce, double dTendonForceDT) {
+    return new Vec4(opensimModelJNI.Millard2012EquilibriumMuscle_calcFiberStateGivenBoundaryCond(swigCPtr, this, lengthMT, velocityMT, tendonForce, dTendonForceDT), true);
   }
 
   public double calcInextensibleTendonActiveFiberForce(State s, double aActivation) {

@@ -39,20 +39,16 @@ public class Matrix extends MatrixBaseDouble {
     this(opensimModelJNI.new_Matrix__SWIG_0(), true);
   }
 
-  public Matrix(SWIGTYPE_p_MatrixCommitment mc) {
-    this(opensimModelJNI.new_Matrix__SWIG_1(SWIGTYPE_p_MatrixCommitment.getCPtr(mc)), true);
-  }
-
   public Matrix(Matrix src) {
-    this(opensimModelJNI.new_Matrix__SWIG_2(Matrix.getCPtr(src), src), true);
+    this(opensimModelJNI.new_Matrix__SWIG_1(Matrix.getCPtr(src), src), true);
   }
 
   public Matrix(int m, int n) {
-    this(opensimModelJNI.new_Matrix__SWIG_3(m, n), true);
+    this(opensimModelJNI.new_Matrix__SWIG_2(m, n), true);
   }
 
   public Matrix(int m, int n, double initialValue) {
-    this(opensimModelJNI.new_Matrix__SWIG_4(m, n, initialValue), true);
+    this(opensimModelJNI.new_Matrix__SWIG_3(m, n, initialValue), true);
   }
 
   public String toString() {

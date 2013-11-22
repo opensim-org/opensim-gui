@@ -43,8 +43,8 @@ public class VectorOfVec3 {
     this(opensimModelJNI.new_VectorOfVec3__SWIG_1(VectorOfVec3.getCPtr(src), src), true);
   }
 
-  public VectorOfVec3(int m, Vec3 cppInitialValues) {
-    this(opensimModelJNI.new_VectorOfVec3__SWIG_2(m, Vec3.getCPtr(cppInitialValues), cppInitialValues), true);
+  public VectorOfVec3(int m, Vec3 initialValue) {
+    this(opensimModelJNI.new_VectorOfVec3__SWIG_2(m, Vec3.getCPtr(initialValue), initialValue), true);
   }
 
   public String toString() {
