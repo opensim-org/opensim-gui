@@ -483,8 +483,6 @@ public class opensimModelJNI {
   public final static native long DecorativePoint_setPoint(long jarg1, DecorativePoint jarg1_, long jarg2, Vec3 jarg2_);
   public final static native long DecorativePoint_getPoint(long jarg1, DecorativePoint jarg1_);
   public final static native long DecorativePoint_setBodyId(long jarg1, DecorativePoint jarg1_, int jarg2);
-  public final static native long DecorativePoint_setIndexOnBody(long jarg1, DecorativePoint jarg1_, int jarg2);
-  public final static native long DecorativePoint_setUserRef(long jarg1, DecorativePoint jarg1_, long jarg2);
   public final static native long DecorativePoint_setTransform(long jarg1, DecorativePoint jarg1_, long jarg2, Transform jarg2_);
   public final static native long DecorativePoint_setResolution(long jarg1, DecorativePoint jarg1_, double jarg2);
   public final static native long DecorativePoint_setScaleFactors(long jarg1, DecorativePoint jarg1_, long jarg2, Vec3 jarg2_);
@@ -500,8 +498,6 @@ public class opensimModelJNI {
   public final static native long DecorativeLine_setPoint2(long jarg1, DecorativeLine jarg1_, long jarg2, Vec3 jarg2_);
   public final static native long DecorativeLine_setEndpoints(long jarg1, DecorativeLine jarg1_, long jarg2, Vec3 jarg2_, long jarg3, Vec3 jarg3_);
   public final static native long DecorativeLine_setBodyId(long jarg1, DecorativeLine jarg1_, int jarg2);
-  public final static native long DecorativeLine_setIndexOnBody(long jarg1, DecorativeLine jarg1_, int jarg2);
-  public final static native long DecorativeLine_setUserRef(long jarg1, DecorativeLine jarg1_, long jarg2);
   public final static native long DecorativeLine_setTransform(long jarg1, DecorativeLine jarg1_, long jarg2, Transform jarg2_);
   public final static native long DecorativeLine_setResolution(long jarg1, DecorativeLine jarg1_, double jarg2);
   public final static native long DecorativeLine_setScaleFactors(long jarg1, DecorativeLine jarg1_, long jarg2, Vec3 jarg2_);
@@ -520,8 +516,6 @@ public class opensimModelJNI {
   public final static native long DecorativeCircle_setRadius(long jarg1, DecorativeCircle jarg1_, double jarg2);
   public final static native double DecorativeCircle_getRadius(long jarg1, DecorativeCircle jarg1_);
   public final static native long DecorativeCircle_setBodyId(long jarg1, DecorativeCircle jarg1_, int jarg2);
-  public final static native long DecorativeCircle_setIndexOnBody(long jarg1, DecorativeCircle jarg1_, int jarg2);
-  public final static native long DecorativeCircle_setUserRef(long jarg1, DecorativeCircle jarg1_, long jarg2);
   public final static native long DecorativeCircle_setTransform(long jarg1, DecorativeCircle jarg1_, long jarg2, Transform jarg2_);
   public final static native long DecorativeCircle_setResolution(long jarg1, DecorativeCircle jarg1_, double jarg2);
   public final static native long DecorativeCircle_setScaleFactors(long jarg1, DecorativeCircle jarg1_, long jarg2, Vec3 jarg2_);
@@ -535,8 +529,6 @@ public class opensimModelJNI {
   public final static native long DecorativeSphere_setRadius(long jarg1, DecorativeSphere jarg1_, double jarg2);
   public final static native double DecorativeSphere_getRadius(long jarg1, DecorativeSphere jarg1_);
   public final static native long DecorativeSphere_setBodyId(long jarg1, DecorativeSphere jarg1_, int jarg2);
-  public final static native long DecorativeSphere_setIndexOnBody(long jarg1, DecorativeSphere jarg1_, int jarg2);
-  public final static native long DecorativeSphere_setUserRef(long jarg1, DecorativeSphere jarg1_, long jarg2);
   public final static native long DecorativeSphere_setTransform(long jarg1, DecorativeSphere jarg1_, long jarg2, Transform jarg2_);
   public final static native long DecorativeSphere_setResolution(long jarg1, DecorativeSphere jarg1_, double jarg2);
   public final static native long DecorativeSphere_setScaleFactors(long jarg1, DecorativeSphere jarg1_, long jarg2, Vec3 jarg2_);
@@ -550,8 +542,6 @@ public class opensimModelJNI {
   public final static native long DecorativeEllipsoid_setRadii(long jarg1, DecorativeEllipsoid jarg1_, long jarg2, Vec3 jarg2_);
   public final static native long DecorativeEllipsoid_getRadii(long jarg1, DecorativeEllipsoid jarg1_);
   public final static native long DecorativeEllipsoid_setBodyId(long jarg1, DecorativeEllipsoid jarg1_, int jarg2);
-  public final static native long DecorativeEllipsoid_setIndexOnBody(long jarg1, DecorativeEllipsoid jarg1_, int jarg2);
-  public final static native long DecorativeEllipsoid_setUserRef(long jarg1, DecorativeEllipsoid jarg1_, long jarg2);
   public final static native long DecorativeEllipsoid_setTransform(long jarg1, DecorativeEllipsoid jarg1_, long jarg2, Transform jarg2_);
   public final static native long DecorativeEllipsoid_setResolution(long jarg1, DecorativeEllipsoid jarg1_, double jarg2);
   public final static native long DecorativeEllipsoid_setScaleFactors(long jarg1, DecorativeEllipsoid jarg1_, long jarg2, Vec3 jarg2_);
@@ -565,8 +555,6 @@ public class opensimModelJNI {
   public final static native long DecorativeBrick_setHalfLengths(long jarg1, DecorativeBrick jarg1_, long jarg2, Vec3 jarg2_);
   public final static native long DecorativeBrick_getHalfLengths(long jarg1, DecorativeBrick jarg1_);
   public final static native long DecorativeBrick_setBodyId(long jarg1, DecorativeBrick jarg1_, int jarg2);
-  public final static native long DecorativeBrick_setIndexOnBody(long jarg1, DecorativeBrick jarg1_, int jarg2);
-  public final static native long DecorativeBrick_setUserRef(long jarg1, DecorativeBrick jarg1_, long jarg2);
   public final static native long DecorativeBrick_setTransform(long jarg1, DecorativeBrick jarg1_, long jarg2, Transform jarg2_);
   public final static native long DecorativeBrick_setResolution(long jarg1, DecorativeBrick jarg1_, double jarg2);
   public final static native long DecorativeBrick_setScaleFactors(long jarg1, DecorativeBrick jarg1_, long jarg2, Vec3 jarg2_);
@@ -583,8 +571,6 @@ public class opensimModelJNI {
   public final static native double DecorativeCylinder_getRadius(long jarg1, DecorativeCylinder jarg1_);
   public final static native double DecorativeCylinder_getHalfHeight(long jarg1, DecorativeCylinder jarg1_);
   public final static native long DecorativeCylinder_setBodyId(long jarg1, DecorativeCylinder jarg1_, int jarg2);
-  public final static native long DecorativeCylinder_setIndexOnBody(long jarg1, DecorativeCylinder jarg1_, int jarg2);
-  public final static native long DecorativeCylinder_setUserRef(long jarg1, DecorativeCylinder jarg1_, long jarg2);
   public final static native long DecorativeCylinder_setTransform(long jarg1, DecorativeCylinder jarg1_, long jarg2, Transform jarg2_);
   public final static native long DecorativeCylinder_setResolution(long jarg1, DecorativeCylinder jarg1_, double jarg2);
   public final static native long DecorativeCylinder_setScaleFactors(long jarg1, DecorativeCylinder jarg1_, long jarg2, Vec3 jarg2_);
@@ -598,8 +584,6 @@ public class opensimModelJNI {
   public final static native long DecorativeFrame_setAxisLength(long jarg1, DecorativeFrame jarg1_, double jarg2);
   public final static native double DecorativeFrame_getAxisLength(long jarg1, DecorativeFrame jarg1_);
   public final static native long DecorativeFrame_setBodyId(long jarg1, DecorativeFrame jarg1_, int jarg2);
-  public final static native long DecorativeFrame_setIndexOnBody(long jarg1, DecorativeFrame jarg1_, int jarg2);
-  public final static native long DecorativeFrame_setUserRef(long jarg1, DecorativeFrame jarg1_, long jarg2);
   public final static native long DecorativeFrame_setTransform(long jarg1, DecorativeFrame jarg1_, long jarg2, Transform jarg2_);
   public final static native long DecorativeFrame_setResolution(long jarg1, DecorativeFrame jarg1_, double jarg2);
   public final static native long DecorativeFrame_setScaleFactors(long jarg1, DecorativeFrame jarg1_, long jarg2, Vec3 jarg2_);
@@ -615,8 +599,6 @@ public class opensimModelJNI {
   public final static native long DecorativeText_setIsScreenText(long jarg1, DecorativeText jarg1_, boolean jarg2);
   public final static native boolean DecorativeText_getIsScreenText(long jarg1, DecorativeText jarg1_);
   public final static native long DecorativeText_setBodyId(long jarg1, DecorativeText jarg1_, int jarg2);
-  public final static native long DecorativeText_setIndexOnBody(long jarg1, DecorativeText jarg1_, int jarg2);
-  public final static native long DecorativeText_setUserRef(long jarg1, DecorativeText jarg1_, long jarg2);
   public final static native long DecorativeText_setTransform(long jarg1, DecorativeText jarg1_, long jarg2, Transform jarg2_);
   public final static native long DecorativeText_setResolution(long jarg1, DecorativeText jarg1_, double jarg2);
   public final static native long DecorativeText_setScaleFactors(long jarg1, DecorativeText jarg1_, long jarg2, Vec3 jarg2_);
@@ -628,8 +610,6 @@ public class opensimModelJNI {
   public final static native long new_DecorativeMesh(long jarg1);
   public final static native long DecorativeMesh_getMesh(long jarg1, DecorativeMesh jarg1_);
   public final static native long DecorativeMesh_setBodyId(long jarg1, DecorativeMesh jarg1_, int jarg2);
-  public final static native long DecorativeMesh_setIndexOnBody(long jarg1, DecorativeMesh jarg1_, int jarg2);
-  public final static native long DecorativeMesh_setUserRef(long jarg1, DecorativeMesh jarg1_, long jarg2);
   public final static native long DecorativeMesh_setTransform(long jarg1, DecorativeMesh jarg1_, long jarg2, Transform jarg2_);
   public final static native long DecorativeMesh_setResolution(long jarg1, DecorativeMesh jarg1_, double jarg2);
   public final static native long DecorativeMesh_setScaleFactors(long jarg1, DecorativeMesh jarg1_, long jarg2, Vec3 jarg2_);
@@ -645,8 +625,6 @@ public class opensimModelJNI {
   public final static native int Decorations_getNumDecorations(long jarg1, Decorations jarg1_);
   public final static native long Decorations_getDecoration(long jarg1, Decorations jarg1_, int jarg2);
   public final static native long Decorations_setBodyId(long jarg1, Decorations jarg1_, int jarg2);
-  public final static native long Decorations_setIndexOnBody(long jarg1, Decorations jarg1_, int jarg2);
-  public final static native long Decorations_setUserRef(long jarg1, Decorations jarg1_, long jarg2);
   public final static native long Decorations_setTransform(long jarg1, Decorations jarg1_, long jarg2, Transform jarg2_);
   public final static native long Decorations_setResolution(long jarg1, Decorations jarg1_, double jarg2);
   public final static native long Decorations_setScaleFactors(long jarg1, Decorations jarg1_, long jarg2, Vec3 jarg2_);

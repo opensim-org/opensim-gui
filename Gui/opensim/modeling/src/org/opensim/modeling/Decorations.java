@@ -63,14 +63,6 @@ public class Decorations extends DecorativeGeometry {
     return new Decorations(opensimModelJNI.Decorations_setBodyId(swigCPtr, this, b), false);
   }
 
-  public Decorations setIndexOnBody(int x) {
-    return new Decorations(opensimModelJNI.Decorations_setIndexOnBody(swigCPtr, this, x), false);
-  }
-
-  public Decorations setUserRef(SWIGTYPE_p_void p) {
-    return new Decorations(opensimModelJNI.Decorations_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
-  }
-
   public Decorations setTransform(Transform X_BD) {
     return new Decorations(opensimModelJNI.Decorations_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
   }

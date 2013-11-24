@@ -67,14 +67,6 @@ public class DecorativeCylinder extends DecorativeGeometry {
     return new DecorativeCylinder(opensimModelJNI.DecorativeCylinder_setBodyId(swigCPtr, this, b), false);
   }
 
-  public DecorativeCylinder setIndexOnBody(int x) {
-    return new DecorativeCylinder(opensimModelJNI.DecorativeCylinder_setIndexOnBody(swigCPtr, this, x), false);
-  }
-
-  public DecorativeCylinder setUserRef(SWIGTYPE_p_void p) {
-    return new DecorativeCylinder(opensimModelJNI.DecorativeCylinder_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
-  }
-
   public DecorativeCylinder setTransform(Transform X_BD) {
     return new DecorativeCylinder(opensimModelJNI.DecorativeCylinder_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
   }

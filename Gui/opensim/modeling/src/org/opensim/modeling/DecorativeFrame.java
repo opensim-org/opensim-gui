@@ -55,14 +55,6 @@ public class DecorativeFrame extends DecorativeGeometry {
     return new DecorativeFrame(opensimModelJNI.DecorativeFrame_setBodyId(swigCPtr, this, b), false);
   }
 
-  public DecorativeFrame setIndexOnBody(int x) {
-    return new DecorativeFrame(opensimModelJNI.DecorativeFrame_setIndexOnBody(swigCPtr, this, x), false);
-  }
-
-  public DecorativeFrame setUserRef(SWIGTYPE_p_void p) {
-    return new DecorativeFrame(opensimModelJNI.DecorativeFrame_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
-  }
-
   public DecorativeFrame setTransform(Transform X_BD) {
     return new DecorativeFrame(opensimModelJNI.DecorativeFrame_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
   }
