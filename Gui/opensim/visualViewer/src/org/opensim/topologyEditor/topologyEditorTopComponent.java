@@ -45,16 +45,16 @@ import org.opensim.view.pub.ViewDB;
 /**
  * Top component which displays something.
  */
-@ConvertAsProperties(dtd = "-//org.opensim.graphlEditor//visualTopComponent//EN",
+@ConvertAsProperties(dtd = "-//org.opensim.graphlEditor//topologyEditorTopComponent//EN",
 autostore = false)
-@TopComponent.Description(preferredID = "Topological View",
+@TopComponent.Description(preferredID = "topologyEditorTopComponent",
 //iconBase="SET/PATH/TO/ICON/HERE", 
 persistenceType = TopComponent.PERSISTENCE_ALWAYS)
-@TopComponent.Registration(mode = "editor", openAtStartup = false)
-@ActionID(category = "Window", id = "org.opensim.graphlEditor.visualTopComponentTopComponent")
+@TopComponent.Registration(mode = "osimRightMode", openAtStartup = false)
+@ActionID(category = "Window", id = "org.opensim.graphlEditor.topologyEditorTopComponent")
 @ActionReference(path = "Menu/Window" /*, position = 333 */)
 @TopComponent.OpenActionRegistration(displayName = "#CTL_visualTopComponentAction",
-preferredID = "visualTopComponentTopComponent")
+preferredID = "topologyEditorTopComponent")
 public final class topologyEditorTopComponent extends TopComponent implements Observer, LookupListener{
     ModelGraphScene scene;
     GraphLayout<String,String> graphLayout = GraphLayoutFactory.createTreeGraphLayout (50, 50, 25, 20, true);
@@ -69,10 +69,15 @@ public final class topologyEditorTopComponent extends TopComponent implements Ob
         setToolTipText(NbBundle.getMessage(topologyEditorTopComponent.class, "HINT_visualTopComponentTopComponent"));
         scene = new ModelGraphScene();
         JScrollPane sPane = new JScrollPane(scene.createView());
+        String toolTip = "<html>Tree nodes with borders are bodies <br><br>";
+        toolTip = toolTip.concat(". You can drag nodes around <br>. Double click background for default layout<br>");
+        toolTip = toolTip.concat(". Hover over a body node to select<br></html>");
+        scene.setToolTipText(toolTip);
         add(sPane, BorderLayout.CENTER); 
         OpenSimDB.getInstance().addObserver(this);
         r = ViewDB.getLookup().lookupResult(OpenSimObject.class);
         r.addLookupListener (this);
+        
     }
 
     /** This method is called from within the constructor to
@@ -82,6 +87,8 @@ public final class topologyEditorTopComponent extends TopComponent implements Ob
      */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        setToolTipText(org.openide.util.NbBundle.getMessage(topologyEditorTopComponent.class, "topologyEditorTopComponent.toolTipText")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -246,4 +253,13 @@ public final class topologyEditorTopComponent extends TopComponent implements Ob
         }
 
     }
+       
+    public static synchronized topologyEditorTopComponent getDefault() {
+       if (instance == null) {
+          instance = new topologyEditorTopComponent();
+       }
+       return instance;
+    }
+    private static topologyEditorTopComponent instance;
+
 }

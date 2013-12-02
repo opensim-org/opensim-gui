@@ -747,6 +747,7 @@
             <file name="osimExplorerMode.wsmode" url="osimExplorerMode.wsmode"/>
             <file name="osimMessagesMode.wsmode" url="osimMessagesMode.wsmode"/>
             <file name="osimEditorsMode.wsmode" url="osimEditorsMode.wsmode"/>
+            <file name="osimRightMode.wsmode" url="osimRightMode.wsmode"/>
             <folder name="osimExplorerMode">
                 <file name="ExplorerTopComponent.wstcref" url="ExplorerTopComponentWstcref.xml"/>
             </folder>
