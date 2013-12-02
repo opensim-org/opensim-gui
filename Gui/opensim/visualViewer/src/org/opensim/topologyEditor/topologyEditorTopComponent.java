@@ -18,7 +18,6 @@ import org.openide.windows.TopComponent;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.netbeans.api.visual.action.ActionFactory;
 import org.netbeans.api.visual.action.EditProvider;
-import org.netbeans.api.visual.action.TwoStateHoverProvider;
 import org.netbeans.api.visual.action.WidgetAction;
 import org.netbeans.api.visual.graph.layout.GraphLayout;
 import org.netbeans.api.visual.graph.layout.GraphLayoutFactory;
@@ -71,7 +70,7 @@ public final class topologyEditorTopComponent extends TopComponent implements Ob
         JScrollPane sPane = new JScrollPane(scene.createView());
         String toolTip = "<html>Tree nodes with borders are bodies <br><br>";
         toolTip = toolTip.concat(". You can drag nodes around <br>. Double click background for default layout<br>");
-        toolTip = toolTip.concat(". Hover over a body node to select<br></html>");
+        toolTip = toolTip.concat(". Double-click a body node to select<br></html>");
         scene.setToolTipText(toolTip);
         add(sPane, BorderLayout.CENTER); 
         OpenSimDB.getInstance().addObserver(this);
@@ -132,8 +131,8 @@ public final class topologyEditorTopComponent extends TopComponent implements Ob
         GraphLayoutSupport.setTreeGraphLayoutRootNode (graphLayout, "ground");
         final SceneLayout sceneGraphLayout = LayoutFactory.createSceneGraphLayout (scene, graphLayout);
         
-        WidgetAction hoverAction = ActionFactory.createHoverAction (new MyHoverProvider ());
-        scene.getActions().addAction (hoverAction);
+        WidgetAction editAction = ActionFactory.createEditAction (new MyEditProvider (sceneGraphLayout));
+        scene.getActions().addAction (editAction);
         currentModel = OpenSimDB.getInstance().getCurrentModel();
         if (currentModel == null) return;
         BodySet bods = currentModel.getBodySet();
@@ -143,7 +142,7 @@ public final class topologyEditorTopComponent extends TopComponent implements Ob
             //LabelWidget bodyWidget= new LabelWidget(scene, "Body:"+bod.getName());
             Widget bodyWidget = scene.addNode(bod.getName());
             //bodyWidget.setPreferredLocation (new Point (b*30, b*50));
-            bodyWidget.getActions().addAction (hoverAction);
+            bodyWidget.getActions().addAction (editAction);
             if(bod.hasJoint()){
                 Joint jnt = bod.getJoint();
                 Widget jntWidget = scene.addNode(jnt.getName());
@@ -228,9 +227,13 @@ public final class topologyEditorTopComponent extends TopComponent implements Ob
         
     }
 
-   private static class MyHoverProvider implements TwoStateHoverProvider {
-
-        public void unsetHovering(Widget widget) {
+   private static class MyEditProvider implements EditProvider {
+       SceneLayout sceneGraphLayout;
+       MyEditProvider(SceneLayout sceneGraphLayout){
+           this.sceneGraphLayout = sceneGraphLayout;
+       }
+       /*
+        public void edit(Widget widget) {
             if (widget != null) {
                 //widget.setBackground (Color.WHITE);
                 //widget.setForeground (Color.BLACK);
@@ -239,16 +242,18 @@ public final class topologyEditorTopComponent extends TopComponent implements Ob
                 ViewDB.getInstance().removeObjectFromSelectedList(b);
             }
         }
-
-        public void setHovering(Widget widget) {
+        */
+        public void edit(Widget widget) {
             if (widget != null) {
                 //widget.setBackground (new Color (52, 124, 150));
                 //widget.setForeground (Color.RED);
-                LabelWidget selected = ((LabelWidget)widget);
-                Body b = OpenSimDB.getInstance().getCurrentModel().getBodySet().get(selected.getLabel());
-                ViewDB.getInstance().replaceSelectedObject(b);
-                
-                
+                if (widget instanceof LabelWidget){
+                    LabelWidget selected = ((LabelWidget)widget);
+                    Body b = OpenSimDB.getInstance().getCurrentModel().getBodySet().get(selected.getLabel());
+                    ViewDB.getInstance().replaceSelectedObject(b);
+                }
+                else
+                    sceneGraphLayout.invokeLayoutImmediately ();
             }
         }
 
