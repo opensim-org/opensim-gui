@@ -120,6 +120,8 @@ public class IKToolModel extends Observable implements Observer {
             progressHandle.finish();
             worker=null;
             cleanup=false;
+            getOriginalModel().removeAnalysis(interruptingCallback, false);
+            
          }
          return this;
       }
