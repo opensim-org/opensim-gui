@@ -118,7 +118,7 @@ public final class OpenSimPlotter {
      */
     static public PlotCurve addAnalysisCurve(JPlotterPanel panel, String qName, 
                 String muscleName, String genCoordName) {
-        return panel.showAnalysisCurve(qName, muscleName, genCoordName);
+            return panel.showAnalysisCurve(qName, muscleName, genCoordName);
     }
     /**
      * Create a curve representing momentArm of passed in PathActuator relative
