@@ -147,6 +147,7 @@ public class DisplayGeometryDisplayer extends vtkActor
             textureFile = GeometryFileLocator.getInstance().getFullname(modelFilePath,displayGeometry.getTextureFile(), false);
             vtkTexture texture = new vtkTexture();
             vtkImageReader2 textureReader=null;
+            if (textureFile!=null){
             if (textureFile.toLowerCase().endsWith(".bmp")){
                 textureReader = new vtkBMPReader();
                 textureReader.SetFileName(textureFile);
@@ -166,6 +167,7 @@ public class DisplayGeometryDisplayer extends vtkActor
             if (textureReader!=null){
                 texture.InterpolateOn();
                 SetTexture(texture);
+            }
             }
         } else { // We assume if there's texture then it includes color as well, otherwise we read it in'
             // Color
