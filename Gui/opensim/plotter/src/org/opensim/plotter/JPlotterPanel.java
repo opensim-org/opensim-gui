@@ -212,6 +212,7 @@ public class JPlotterPanel extends javax.swing.JPanel
       qNameSet.add("fiberforce");
     }
 
+
    public enum PlotDataSource {FileSource, MotionSource, AnalysisSource};
    JPlotterQuantitySelector xSelector = null;
    String currentCurveTitle="";
@@ -2293,9 +2294,14 @@ public class JPlotterPanel extends javax.swing.JPanel
         return plotterModel.getCurrentPlot().getChartPanel();
     
     }
+    
     public PlotCurve showAnalysisCurve(String qName, String muscleName, String genCoordName) {
        PlotCurve plotCurve=null;
        openSimContext = OpenSimDB.getInstance().getContext(currentModel);
+       String[] muscleNames = muscleName.split("\\+");
+       if (muscleNames.length>1){
+            sumCurve = true;
+       }
        if (qName.toLowerCase().startsWith("moment")){
            String coordName = qName.substring(qName.indexOf(".")+1);
            // Could be a moment or momentArm plot
@@ -2310,10 +2316,11 @@ public class JPlotterPanel extends javax.swing.JPanel
        else
             populateYQty(qName);
        populateXQty(genCoordName);
-       rangeNames = new String[]{muscleName};
+       rangeNames = (muscleNames.length>1)? muscleNames : new String[]{muscleName};
        jPlotterAddCurveButtonActionPerformed(null);
        plotCurve = currentCurve;
        refreshPanel(plotCurve, muscleName);
+       sumCurve = false;
        return plotCurve;
     }
     private void populateYQty(final String qtyName) {
