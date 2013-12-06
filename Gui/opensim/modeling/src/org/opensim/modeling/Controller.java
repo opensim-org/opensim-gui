@@ -57,24 +57,8 @@ public class Controller extends ModelComponent {
     return opensimModelJNI.Controller_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_isDisabled(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Controller_PropertyIndex_isDisabled_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_isDisabled() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Controller_PropertyIndex_isDisabled_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_isDisabled(Controller source) {
     opensimModelJNI.Controller_copyProperty_isDisabled(swigCPtr, this, Controller.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_isDisabled() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Controller_getProperty_isDisabled(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_isDisabled() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Controller_updProperty_isDisabled(swigCPtr, this), false);
   }
 
   public boolean get_isDisabled(int i) {
@@ -109,24 +93,8 @@ public class Controller extends ModelComponent {
     opensimModelJNI.Controller_set_isDisabled__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_actuator_list(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Controller_PropertyIndex_actuator_list_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_actuator_list() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Controller_PropertyIndex_actuator_list_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_actuator_list(Controller source) {
     opensimModelJNI.Controller_copyProperty_actuator_list(swigCPtr, this, Controller.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_actuator_list() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.Controller_getProperty_actuator_list(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_actuator_list() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.Controller_updProperty_actuator_list(swigCPtr, this), false);
   }
 
   public String get_actuator_list(int i) {

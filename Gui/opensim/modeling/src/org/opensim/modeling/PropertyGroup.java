@@ -72,10 +72,6 @@ public class PropertyGroup {
     opensimModelJNI.PropertyGroup_remove(swigCPtr, this, SWIGTYPE_p_Property_Deprecated.getCPtr(aProperty));
   }
 
-  public SWIGTYPE_p_OpenSim__ArrayT_Property_Deprecated_p_t getProperties() {
-    return new SWIGTYPE_p_OpenSim__ArrayT_Property_Deprecated_p_t(opensimModelJNI.PropertyGroup_getProperties(swigCPtr, this), false);
-  }
-
   public SWIGTYPE_p_Property_Deprecated get(int aIndex) {
     long cPtr = opensimModelJNI.PropertyGroup_get(swigCPtr, this, aIndex);
     return (cPtr == 0) ? null : new SWIGTYPE_p_Property_Deprecated(cPtr, false);

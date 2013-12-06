@@ -57,24 +57,8 @@ public class ExpressionBasedPointToPointForce extends Force {
     return opensimModelJNI.ExpressionBasedPointToPointForce_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_body1(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ExpressionBasedPointToPointForce_PropertyIndex_body1_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_body1() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ExpressionBasedPointToPointForce_PropertyIndex_body1_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_body1(ExpressionBasedPointToPointForce source) {
     opensimModelJNI.ExpressionBasedPointToPointForce_copyProperty_body1(swigCPtr, this, ExpressionBasedPointToPointForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_body1() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExpressionBasedPointToPointForce_getProperty_body1(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_body1() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExpressionBasedPointToPointForce_updProperty_body1(swigCPtr, this), false);
   }
 
   public String get_body1(int i) {
@@ -113,24 +97,8 @@ public class ExpressionBasedPointToPointForce extends Force {
     opensimModelJNI.ExpressionBasedPointToPointForce_set_body1__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_body2(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ExpressionBasedPointToPointForce_PropertyIndex_body2_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_body2() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ExpressionBasedPointToPointForce_PropertyIndex_body2_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_body2(ExpressionBasedPointToPointForce source) {
     opensimModelJNI.ExpressionBasedPointToPointForce_copyProperty_body2(swigCPtr, this, ExpressionBasedPointToPointForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_body2() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExpressionBasedPointToPointForce_getProperty_body2(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_body2() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExpressionBasedPointToPointForce_updProperty_body2(swigCPtr, this), false);
   }
 
   public String get_body2(int i) {
@@ -169,24 +137,8 @@ public class ExpressionBasedPointToPointForce extends Force {
     opensimModelJNI.ExpressionBasedPointToPointForce_set_body2__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_point1(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ExpressionBasedPointToPointForce_PropertyIndex_point1_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_point1() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ExpressionBasedPointToPointForce_PropertyIndex_point1_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_point1(ExpressionBasedPointToPointForce source) {
     opensimModelJNI.ExpressionBasedPointToPointForce_copyProperty_point1(swigCPtr, this, ExpressionBasedPointToPointForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t getProperty_point1() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.ExpressionBasedPointToPointForce_getProperty_point1(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t updProperty_point1() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.ExpressionBasedPointToPointForce_updProperty_point1(swigCPtr, this), false);
   }
 
   public Vec3 get_point1(int i) {
@@ -221,24 +173,8 @@ public class ExpressionBasedPointToPointForce extends Force {
     opensimModelJNI.ExpressionBasedPointToPointForce_set_point1__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_point2(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ExpressionBasedPointToPointForce_PropertyIndex_point2_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_point2() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ExpressionBasedPointToPointForce_PropertyIndex_point2_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_point2(ExpressionBasedPointToPointForce source) {
     opensimModelJNI.ExpressionBasedPointToPointForce_copyProperty_point2(swigCPtr, this, ExpressionBasedPointToPointForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t getProperty_point2() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.ExpressionBasedPointToPointForce_getProperty_point2(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t updProperty_point2() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.ExpressionBasedPointToPointForce_updProperty_point2(swigCPtr, this), false);
   }
 
   public Vec3 get_point2(int i) {
@@ -273,24 +209,8 @@ public class ExpressionBasedPointToPointForce extends Force {
     opensimModelJNI.ExpressionBasedPointToPointForce_set_point2__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_expression(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ExpressionBasedPointToPointForce_PropertyIndex_expression_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_expression() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ExpressionBasedPointToPointForce_PropertyIndex_expression_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_expression(ExpressionBasedPointToPointForce source) {
     opensimModelJNI.ExpressionBasedPointToPointForce_copyProperty_expression(swigCPtr, this, ExpressionBasedPointToPointForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_expression() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExpressionBasedPointToPointForce_getProperty_expression(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_expression() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ExpressionBasedPointToPointForce_updProperty_expression(swigCPtr, this), false);
   }
 
   public String get_expression(int i) {

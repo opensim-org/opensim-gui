@@ -65,8 +65,8 @@ public class MomentArmSolver extends Solver {
     return opensimModelJNI.MomentArmSolver_solve__SWIG_0(swigCPtr, this, State.getCPtr(state), state, Coordinate.getCPtr(coordinate), coordinate, GeometryPath.getCPtr(path), path);
   }
 
-  public double solve(State state, Coordinate coordinate, SWIGTYPE_p_OpenSim__ArrayT_OpenSim__PointForceDirection_p_t pfds) {
-    return opensimModelJNI.MomentArmSolver_solve__SWIG_1(swigCPtr, this, State.getCPtr(state), state, Coordinate.getCPtr(coordinate), coordinate, SWIGTYPE_p_OpenSim__ArrayT_OpenSim__PointForceDirection_p_t.getCPtr(pfds));
+  public double solve(State state, Coordinate coordinate, ArrayPointForceDirection pfds) {
+    return opensimModelJNI.MomentArmSolver_solve__SWIG_1(swigCPtr, this, State.getCPtr(state), state, Coordinate.getCPtr(coordinate), coordinate, ArrayPointForceDirection.getCPtr(pfds), pfds);
   }
 
 }

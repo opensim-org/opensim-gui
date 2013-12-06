@@ -57,24 +57,8 @@ public class RigidTendonMuscle extends Muscle {
     return opensimModelJNI.RigidTendonMuscle_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_active_force_length_curve(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.RigidTendonMuscle_PropertyIndex_active_force_length_curve_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_active_force_length_curve() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.RigidTendonMuscle_PropertyIndex_active_force_length_curve_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_active_force_length_curve(RigidTendonMuscle source) {
     opensimModelJNI.RigidTendonMuscle_copyProperty_active_force_length_curve(swigCPtr, this, RigidTendonMuscle.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t getProperty_active_force_length_curve() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.RigidTendonMuscle_getProperty_active_force_length_curve(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t updProperty_active_force_length_curve() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.RigidTendonMuscle_updProperty_active_force_length_curve(swigCPtr, this), false);
   }
 
   public Function get_active_force_length_curve(int i) {
@@ -109,24 +93,8 @@ public class RigidTendonMuscle extends Muscle {
     opensimModelJNI.RigidTendonMuscle_set_active_force_length_curve__SWIG_1(swigCPtr, this, Function.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_passive_force_length_curve(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.RigidTendonMuscle_PropertyIndex_passive_force_length_curve_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_passive_force_length_curve() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.RigidTendonMuscle_PropertyIndex_passive_force_length_curve_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_passive_force_length_curve(RigidTendonMuscle source) {
     opensimModelJNI.RigidTendonMuscle_copyProperty_passive_force_length_curve(swigCPtr, this, RigidTendonMuscle.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t getProperty_passive_force_length_curve() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.RigidTendonMuscle_getProperty_passive_force_length_curve(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t updProperty_passive_force_length_curve() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.RigidTendonMuscle_updProperty_passive_force_length_curve(swigCPtr, this), false);
   }
 
   public Function get_passive_force_length_curve(int i) {
@@ -161,24 +129,8 @@ public class RigidTendonMuscle extends Muscle {
     opensimModelJNI.RigidTendonMuscle_set_passive_force_length_curve__SWIG_1(swigCPtr, this, Function.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_force_velocity_curve(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.RigidTendonMuscle_PropertyIndex_force_velocity_curve_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_force_velocity_curve() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.RigidTendonMuscle_PropertyIndex_force_velocity_curve_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_force_velocity_curve(RigidTendonMuscle source) {
     opensimModelJNI.RigidTendonMuscle_copyProperty_force_velocity_curve(swigCPtr, this, RigidTendonMuscle.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t getProperty_force_velocity_curve() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.RigidTendonMuscle_getProperty_force_velocity_curve(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t updProperty_force_velocity_curve() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.RigidTendonMuscle_updProperty_force_velocity_curve(swigCPtr, this), false);
   }
 
   public Function get_force_velocity_curve(int i) {

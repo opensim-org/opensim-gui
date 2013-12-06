@@ -57,24 +57,8 @@ public class Actuator extends Actuator_ {
     return opensimModelJNI.Actuator_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_min_control(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Actuator_PropertyIndex_min_control_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_min_control() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Actuator_PropertyIndex_min_control_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_min_control(Actuator source) {
     opensimModelJNI.Actuator_copyProperty_min_control(swigCPtr, this, Actuator.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_min_control() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Actuator_getProperty_min_control(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_min_control() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Actuator_updProperty_min_control(swigCPtr, this), false);
   }
 
   public double get_min_control(int i) {
@@ -109,24 +93,8 @@ public class Actuator extends Actuator_ {
     opensimModelJNI.Actuator_set_min_control__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_max_control(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Actuator_PropertyIndex_max_control_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_max_control() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Actuator_PropertyIndex_max_control_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_max_control(Actuator source) {
     opensimModelJNI.Actuator_copyProperty_max_control(swigCPtr, this, Actuator.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_max_control() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Actuator_getProperty_max_control(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_max_control() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Actuator_updProperty_max_control(swigCPtr, this), false);
   }
 
   public double get_max_control(int i) {

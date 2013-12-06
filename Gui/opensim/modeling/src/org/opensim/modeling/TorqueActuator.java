@@ -57,24 +57,8 @@ public class TorqueActuator extends Actuator {
     return opensimModelJNI.TorqueActuator_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_bodyA(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.TorqueActuator_PropertyIndex_bodyA_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_bodyA() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.TorqueActuator_PropertyIndex_bodyA_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_bodyA(TorqueActuator source) {
     opensimModelJNI.TorqueActuator_copyProperty_bodyA(swigCPtr, this, TorqueActuator.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_bodyA() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.TorqueActuator_getProperty_bodyA(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_bodyA() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.TorqueActuator_updProperty_bodyA(swigCPtr, this), false);
   }
 
   public String get_bodyA(int i) {
@@ -113,24 +97,8 @@ public class TorqueActuator extends Actuator {
     opensimModelJNI.TorqueActuator_set_bodyA__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_bodyB(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.TorqueActuator_PropertyIndex_bodyB_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_bodyB() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.TorqueActuator_PropertyIndex_bodyB_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_bodyB(TorqueActuator source) {
     opensimModelJNI.TorqueActuator_copyProperty_bodyB(swigCPtr, this, TorqueActuator.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_bodyB() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.TorqueActuator_getProperty_bodyB(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_bodyB() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.TorqueActuator_updProperty_bodyB(swigCPtr, this), false);
   }
 
   public String get_bodyB(int i) {
@@ -169,24 +137,8 @@ public class TorqueActuator extends Actuator {
     opensimModelJNI.TorqueActuator_set_bodyB__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_torque_is_global(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.TorqueActuator_PropertyIndex_torque_is_global_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_torque_is_global() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.TorqueActuator_PropertyIndex_torque_is_global_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_torque_is_global(TorqueActuator source) {
     opensimModelJNI.TorqueActuator_copyProperty_torque_is_global(swigCPtr, this, TorqueActuator.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_torque_is_global() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.TorqueActuator_getProperty_torque_is_global(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_torque_is_global() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.TorqueActuator_updProperty_torque_is_global(swigCPtr, this), false);
   }
 
   public boolean get_torque_is_global(int i) {
@@ -221,24 +173,8 @@ public class TorqueActuator extends Actuator {
     opensimModelJNI.TorqueActuator_set_torque_is_global__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_axis(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.TorqueActuator_PropertyIndex_axis_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_axis() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.TorqueActuator_PropertyIndex_axis_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_axis(TorqueActuator source) {
     opensimModelJNI.TorqueActuator_copyProperty_axis(swigCPtr, this, TorqueActuator.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t getProperty_axis() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.TorqueActuator_getProperty_axis(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t updProperty_axis() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.TorqueActuator_updProperty_axis(swigCPtr, this), false);
   }
 
   public Vec3 get_axis(int i) {
@@ -273,24 +209,8 @@ public class TorqueActuator extends Actuator {
     opensimModelJNI.TorqueActuator_set_axis__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_optimal_force(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.TorqueActuator_PropertyIndex_optimal_force_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_optimal_force() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.TorqueActuator_PropertyIndex_optimal_force_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_optimal_force(TorqueActuator source) {
     opensimModelJNI.TorqueActuator_copyProperty_optimal_force(swigCPtr, this, TorqueActuator.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_optimal_force() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.TorqueActuator_getProperty_optimal_force(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_optimal_force() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.TorqueActuator_updProperty_optimal_force(swigCPtr, this), false);
   }
 
   public double get_optimal_force(int i) {

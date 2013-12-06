@@ -57,24 +57,8 @@ public class ActuatorForceProbe extends Probe {
     return opensimModelJNI.ActuatorForceProbe_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_actuator_names(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ActuatorForceProbe_PropertyIndex_actuator_names_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_actuator_names() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ActuatorForceProbe_PropertyIndex_actuator_names_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_actuator_names(ActuatorForceProbe source) {
     opensimModelJNI.ActuatorForceProbe_copyProperty_actuator_names(swigCPtr, this, ActuatorForceProbe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_actuator_names() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ActuatorForceProbe_getProperty_actuator_names(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_actuator_names() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ActuatorForceProbe_updProperty_actuator_names(swigCPtr, this), false);
   }
 
   public String get_actuator_names(int i) {
@@ -97,24 +81,8 @@ public class ActuatorForceProbe extends Probe {
     opensimModelJNI.ActuatorForceProbe_constructProperty_actuator_names(swigCPtr, this);
   }
 
-  public void setPropertyIndex_sum_forces_together(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ActuatorForceProbe_PropertyIndex_sum_forces_together_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_sum_forces_together() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ActuatorForceProbe_PropertyIndex_sum_forces_together_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_sum_forces_together(ActuatorForceProbe source) {
     opensimModelJNI.ActuatorForceProbe_copyProperty_sum_forces_together(swigCPtr, this, ActuatorForceProbe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_sum_forces_together() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.ActuatorForceProbe_getProperty_sum_forces_together(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_sum_forces_together() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.ActuatorForceProbe_updProperty_sum_forces_together(swigCPtr, this), false);
   }
 
   public boolean get_sum_forces_together(int i) {
@@ -149,24 +117,8 @@ public class ActuatorForceProbe extends Probe {
     opensimModelJNI.ActuatorForceProbe_set_sum_forces_together__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_exponent(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ActuatorForceProbe_PropertyIndex_exponent_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_exponent() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ActuatorForceProbe_PropertyIndex_exponent_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_exponent(ActuatorForceProbe source) {
     opensimModelJNI.ActuatorForceProbe_copyProperty_exponent(swigCPtr, this, ActuatorForceProbe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_exponent() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ActuatorForceProbe_getProperty_exponent(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_exponent() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ActuatorForceProbe_updProperty_exponent(swigCPtr, this), false);
   }
 
   public double get_exponent(int i) {

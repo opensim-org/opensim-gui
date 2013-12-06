@@ -57,24 +57,8 @@ public class FiberForceLengthCurve extends Function {
     return opensimModelJNI.FiberForceLengthCurve_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_strain_at_zero_force(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.FiberForceLengthCurve_PropertyIndex_strain_at_zero_force_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_strain_at_zero_force() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.FiberForceLengthCurve_PropertyIndex_strain_at_zero_force_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_strain_at_zero_force(FiberForceLengthCurve source) {
     opensimModelJNI.FiberForceLengthCurve_copyProperty_strain_at_zero_force(swigCPtr, this, FiberForceLengthCurve.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_strain_at_zero_force() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.FiberForceLengthCurve_getProperty_strain_at_zero_force(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_strain_at_zero_force() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.FiberForceLengthCurve_updProperty_strain_at_zero_force(swigCPtr, this), false);
   }
 
   public double get_strain_at_zero_force(int i) {
@@ -109,24 +93,8 @@ public class FiberForceLengthCurve extends Function {
     opensimModelJNI.FiberForceLengthCurve_set_strain_at_zero_force__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_strain_at_one_norm_force(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.FiberForceLengthCurve_PropertyIndex_strain_at_one_norm_force_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_strain_at_one_norm_force() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.FiberForceLengthCurve_PropertyIndex_strain_at_one_norm_force_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_strain_at_one_norm_force(FiberForceLengthCurve source) {
     opensimModelJNI.FiberForceLengthCurve_copyProperty_strain_at_one_norm_force(swigCPtr, this, FiberForceLengthCurve.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_strain_at_one_norm_force() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.FiberForceLengthCurve_getProperty_strain_at_one_norm_force(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_strain_at_one_norm_force() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.FiberForceLengthCurve_updProperty_strain_at_one_norm_force(swigCPtr, this), false);
   }
 
   public double get_strain_at_one_norm_force(int i) {
@@ -161,24 +129,8 @@ public class FiberForceLengthCurve extends Function {
     opensimModelJNI.FiberForceLengthCurve_set_strain_at_one_norm_force__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_stiffness_at_low_force(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.FiberForceLengthCurve_PropertyIndex_stiffness_at_low_force_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_stiffness_at_low_force() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.FiberForceLengthCurve_PropertyIndex_stiffness_at_low_force_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_stiffness_at_low_force(FiberForceLengthCurve source) {
     opensimModelJNI.FiberForceLengthCurve_copyProperty_stiffness_at_low_force(swigCPtr, this, FiberForceLengthCurve.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_stiffness_at_low_force() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.FiberForceLengthCurve_getProperty_stiffness_at_low_force(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_stiffness_at_low_force() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.FiberForceLengthCurve_updProperty_stiffness_at_low_force(swigCPtr, this), false);
   }
 
   public double get_stiffness_at_low_force(int i) {
@@ -217,24 +169,8 @@ public class FiberForceLengthCurve extends Function {
     opensimModelJNI.FiberForceLengthCurve_set_stiffness_at_low_force__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_stiffness_at_one_norm_force(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.FiberForceLengthCurve_PropertyIndex_stiffness_at_one_norm_force_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_stiffness_at_one_norm_force() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.FiberForceLengthCurve_PropertyIndex_stiffness_at_one_norm_force_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_stiffness_at_one_norm_force(FiberForceLengthCurve source) {
     opensimModelJNI.FiberForceLengthCurve_copyProperty_stiffness_at_one_norm_force(swigCPtr, this, FiberForceLengthCurve.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_stiffness_at_one_norm_force() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.FiberForceLengthCurve_getProperty_stiffness_at_one_norm_force(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_stiffness_at_one_norm_force() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.FiberForceLengthCurve_updProperty_stiffness_at_one_norm_force(swigCPtr, this), false);
   }
 
   public double get_stiffness_at_one_norm_force(int i) {
@@ -273,24 +209,8 @@ public class FiberForceLengthCurve extends Function {
     opensimModelJNI.FiberForceLengthCurve_set_stiffness_at_one_norm_force__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_curviness(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.FiberForceLengthCurve_PropertyIndex_curviness_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_curviness() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.FiberForceLengthCurve_PropertyIndex_curviness_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_curviness(FiberForceLengthCurve source) {
     opensimModelJNI.FiberForceLengthCurve_copyProperty_curviness(swigCPtr, this, FiberForceLengthCurve.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_curviness() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.FiberForceLengthCurve_getProperty_curviness(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_curviness() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.FiberForceLengthCurve_updProperty_curviness(swigCPtr, this), false);
   }
 
   public double get_curviness(int i) {

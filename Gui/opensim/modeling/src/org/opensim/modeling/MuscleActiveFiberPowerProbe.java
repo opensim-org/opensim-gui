@@ -57,24 +57,8 @@ public class MuscleActiveFiberPowerProbe extends Probe {
     return opensimModelJNI.MuscleActiveFiberPowerProbe_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_muscle_names(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.MuscleActiveFiberPowerProbe_PropertyIndex_muscle_names_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_muscle_names() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.MuscleActiveFiberPowerProbe_PropertyIndex_muscle_names_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_muscle_names(MuscleActiveFiberPowerProbe source) {
     opensimModelJNI.MuscleActiveFiberPowerProbe_copyProperty_muscle_names(swigCPtr, this, MuscleActiveFiberPowerProbe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_muscle_names() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.MuscleActiveFiberPowerProbe_getProperty_muscle_names(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_muscle_names() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.MuscleActiveFiberPowerProbe_updProperty_muscle_names(swigCPtr, this), false);
   }
 
   public String get_muscle_names(int i) {

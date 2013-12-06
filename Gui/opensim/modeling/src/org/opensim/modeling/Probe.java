@@ -57,24 +57,8 @@ public class Probe extends ModelComponent {
     return opensimModelJNI.Probe_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_isDisabled(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Probe_PropertyIndex_isDisabled_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_isDisabled() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Probe_PropertyIndex_isDisabled_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_isDisabled(Probe source) {
     opensimModelJNI.Probe_copyProperty_isDisabled(swigCPtr, this, Probe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_isDisabled() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Probe_getProperty_isDisabled(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_isDisabled() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Probe_updProperty_isDisabled(swigCPtr, this), false);
   }
 
   public boolean get_isDisabled(int i) {
@@ -109,24 +93,8 @@ public class Probe extends ModelComponent {
     opensimModelJNI.Probe_set_isDisabled__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_probe_operation(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Probe_PropertyIndex_probe_operation_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_probe_operation() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Probe_PropertyIndex_probe_operation_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_probe_operation(Probe source) {
     opensimModelJNI.Probe_copyProperty_probe_operation(swigCPtr, this, Probe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_probe_operation() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.Probe_getProperty_probe_operation(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_probe_operation() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.Probe_updProperty_probe_operation(swigCPtr, this), false);
   }
 
   public String get_probe_operation(int i) {
@@ -161,24 +129,8 @@ public class Probe extends ModelComponent {
     opensimModelJNI.Probe_set_probe_operation__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_initial_conditions_for_integration(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Probe_PropertyIndex_initial_conditions_for_integration_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_initial_conditions_for_integration() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Probe_PropertyIndex_initial_conditions_for_integration_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_initial_conditions_for_integration(Probe source) {
     opensimModelJNI.Probe_copyProperty_initial_conditions_for_integration(swigCPtr, this, Probe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_initial_conditions_for_integration() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Probe_getProperty_initial_conditions_for_integration(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_initial_conditions_for_integration() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Probe_updProperty_initial_conditions_for_integration(swigCPtr, this), false);
   }
 
   public double get_initial_conditions_for_integration(int i) {
@@ -201,24 +153,8 @@ public class Probe extends ModelComponent {
     opensimModelJNI.Probe_constructProperty_initial_conditions_for_integration(swigCPtr, this);
   }
 
-  public void setPropertyIndex_gain(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Probe_PropertyIndex_gain_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_gain() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Probe_PropertyIndex_gain_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_gain(Probe source) {
     opensimModelJNI.Probe_copyProperty_gain(swigCPtr, this, Probe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_gain() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Probe_getProperty_gain(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_gain() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Probe_updProperty_gain(swigCPtr, this), false);
   }
 
   public double get_gain(int i) {

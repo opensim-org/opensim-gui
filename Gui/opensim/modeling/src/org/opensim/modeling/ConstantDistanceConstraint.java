@@ -57,24 +57,8 @@ public class ConstantDistanceConstraint extends Constraint {
     return opensimModelJNI.ConstantDistanceConstraint_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_body_1(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ConstantDistanceConstraint_PropertyIndex_body_1_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_body_1() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ConstantDistanceConstraint_PropertyIndex_body_1_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_body_1(ConstantDistanceConstraint source) {
     opensimModelJNI.ConstantDistanceConstraint_copyProperty_body_1(swigCPtr, this, ConstantDistanceConstraint.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_body_1() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ConstantDistanceConstraint_getProperty_body_1(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_body_1() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ConstantDistanceConstraint_updProperty_body_1(swigCPtr, this), false);
   }
 
   public String get_body_1(int i) {
@@ -109,24 +93,8 @@ public class ConstantDistanceConstraint extends Constraint {
     opensimModelJNI.ConstantDistanceConstraint_set_body_1__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_body_2(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ConstantDistanceConstraint_PropertyIndex_body_2_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_body_2() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ConstantDistanceConstraint_PropertyIndex_body_2_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_body_2(ConstantDistanceConstraint source) {
     opensimModelJNI.ConstantDistanceConstraint_copyProperty_body_2(swigCPtr, this, ConstantDistanceConstraint.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_body_2() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ConstantDistanceConstraint_getProperty_body_2(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_body_2() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ConstantDistanceConstraint_updProperty_body_2(swigCPtr, this), false);
   }
 
   public String get_body_2(int i) {
@@ -161,24 +129,8 @@ public class ConstantDistanceConstraint extends Constraint {
     opensimModelJNI.ConstantDistanceConstraint_set_body_2__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_location_body_1(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ConstantDistanceConstraint_PropertyIndex_location_body_1_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_location_body_1() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ConstantDistanceConstraint_PropertyIndex_location_body_1_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_location_body_1(ConstantDistanceConstraint source) {
     opensimModelJNI.ConstantDistanceConstraint_copyProperty_location_body_1(swigCPtr, this, ConstantDistanceConstraint.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t getProperty_location_body_1() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.ConstantDistanceConstraint_getProperty_location_body_1(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t updProperty_location_body_1() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.ConstantDistanceConstraint_updProperty_location_body_1(swigCPtr, this), false);
   }
 
   public Vec3 get_location_body_1(int i) {
@@ -213,24 +165,8 @@ public class ConstantDistanceConstraint extends Constraint {
     opensimModelJNI.ConstantDistanceConstraint_set_location_body_1__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_location_body_2(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ConstantDistanceConstraint_PropertyIndex_location_body_2_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_location_body_2() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ConstantDistanceConstraint_PropertyIndex_location_body_2_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_location_body_2(ConstantDistanceConstraint source) {
     opensimModelJNI.ConstantDistanceConstraint_copyProperty_location_body_2(swigCPtr, this, ConstantDistanceConstraint.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t getProperty_location_body_2() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.ConstantDistanceConstraint_getProperty_location_body_2(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t updProperty_location_body_2() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.ConstantDistanceConstraint_updProperty_location_body_2(swigCPtr, this), false);
   }
 
   public Vec3 get_location_body_2(int i) {
@@ -265,24 +201,8 @@ public class ConstantDistanceConstraint extends Constraint {
     opensimModelJNI.ConstantDistanceConstraint_set_location_body_2__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_constant_distance(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ConstantDistanceConstraint_PropertyIndex_constant_distance_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_constant_distance() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ConstantDistanceConstraint_PropertyIndex_constant_distance_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_constant_distance(ConstantDistanceConstraint source) {
     opensimModelJNI.ConstantDistanceConstraint_copyProperty_constant_distance(swigCPtr, this, ConstantDistanceConstraint.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_constant_distance() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ConstantDistanceConstraint_getProperty_constant_distance(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_constant_distance() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ConstantDistanceConstraint_updProperty_constant_distance(swigCPtr, this), false);
   }
 
   public double get_constant_distance(int i) {

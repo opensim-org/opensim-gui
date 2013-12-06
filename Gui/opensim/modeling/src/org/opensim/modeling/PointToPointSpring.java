@@ -57,24 +57,8 @@ public class PointToPointSpring extends Force {
     return opensimModelJNI.PointToPointSpring_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_body1(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PointToPointSpring_PropertyIndex_body1_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_body1() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PointToPointSpring_PropertyIndex_body1_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_body1(PointToPointSpring source) {
     opensimModelJNI.PointToPointSpring_copyProperty_body1(swigCPtr, this, PointToPointSpring.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_body1() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.PointToPointSpring_getProperty_body1(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_body1() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.PointToPointSpring_updProperty_body1(swigCPtr, this), false);
   }
 
   public String get_body1(int i) {
@@ -113,24 +97,8 @@ public class PointToPointSpring extends Force {
     opensimModelJNI.PointToPointSpring_set_body1__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_body2(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PointToPointSpring_PropertyIndex_body2_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_body2() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PointToPointSpring_PropertyIndex_body2_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_body2(PointToPointSpring source) {
     opensimModelJNI.PointToPointSpring_copyProperty_body2(swigCPtr, this, PointToPointSpring.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_body2() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.PointToPointSpring_getProperty_body2(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_body2() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.PointToPointSpring_updProperty_body2(swigCPtr, this), false);
   }
 
   public String get_body2(int i) {
@@ -169,24 +137,8 @@ public class PointToPointSpring extends Force {
     opensimModelJNI.PointToPointSpring_set_body2__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_point1(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PointToPointSpring_PropertyIndex_point1_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_point1() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PointToPointSpring_PropertyIndex_point1_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_point1(PointToPointSpring source) {
     opensimModelJNI.PointToPointSpring_copyProperty_point1(swigCPtr, this, PointToPointSpring.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t getProperty_point1() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.PointToPointSpring_getProperty_point1(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t updProperty_point1() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.PointToPointSpring_updProperty_point1(swigCPtr, this), false);
   }
 
   public Vec3 get_point1(int i) {
@@ -221,24 +173,8 @@ public class PointToPointSpring extends Force {
     opensimModelJNI.PointToPointSpring_set_point1__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_point2(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PointToPointSpring_PropertyIndex_point2_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_point2() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PointToPointSpring_PropertyIndex_point2_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_point2(PointToPointSpring source) {
     opensimModelJNI.PointToPointSpring_copyProperty_point2(swigCPtr, this, PointToPointSpring.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t getProperty_point2() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.PointToPointSpring_getProperty_point2(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t updProperty_point2() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.PointToPointSpring_updProperty_point2(swigCPtr, this), false);
   }
 
   public Vec3 get_point2(int i) {
@@ -273,24 +209,8 @@ public class PointToPointSpring extends Force {
     opensimModelJNI.PointToPointSpring_set_point2__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_stiffness(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PointToPointSpring_PropertyIndex_stiffness_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_stiffness() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PointToPointSpring_PropertyIndex_stiffness_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_stiffness(PointToPointSpring source) {
     opensimModelJNI.PointToPointSpring_copyProperty_stiffness(swigCPtr, this, PointToPointSpring.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_stiffness() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.PointToPointSpring_getProperty_stiffness(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_stiffness() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.PointToPointSpring_updProperty_stiffness(swigCPtr, this), false);
   }
 
   public double get_stiffness(int i) {
@@ -325,24 +245,8 @@ public class PointToPointSpring extends Force {
     opensimModelJNI.PointToPointSpring_set_stiffness__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_rest_length(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PointToPointSpring_PropertyIndex_rest_length_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_rest_length() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PointToPointSpring_PropertyIndex_rest_length_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_rest_length(PointToPointSpring source) {
     opensimModelJNI.PointToPointSpring_copyProperty_rest_length(swigCPtr, this, PointToPointSpring.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_rest_length() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.PointToPointSpring_getProperty_rest_length(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_rest_length() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.PointToPointSpring_updProperty_rest_length(swigCPtr, this), false);
   }
 
   public double get_rest_length(int i) {

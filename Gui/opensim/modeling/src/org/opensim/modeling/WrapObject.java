@@ -57,24 +57,8 @@ public class WrapObject extends OpenSimObject {
     return opensimModelJNI.WrapObject_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_display_preference(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.WrapObject_PropertyIndex_display_preference_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_display_preference() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.WrapObject_PropertyIndex_display_preference_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_display_preference(WrapObject source) {
     opensimModelJNI.WrapObject_copyProperty_display_preference(swigCPtr, this, WrapObject.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_int_t getProperty_display_preference() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_int_t(opensimModelJNI.WrapObject_getProperty_display_preference(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_int_t updProperty_display_preference() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_int_t(opensimModelJNI.WrapObject_updProperty_display_preference(swigCPtr, this), false);
   }
 
   public int get_display_preference(int i) {
@@ -109,24 +93,8 @@ public class WrapObject extends OpenSimObject {
     opensimModelJNI.WrapObject_set_display_preference__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_color(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.WrapObject_PropertyIndex_color_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_color() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.WrapObject_PropertyIndex_color_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_color(WrapObject source) {
     opensimModelJNI.WrapObject_copyProperty_color(swigCPtr, this, WrapObject.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_color() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.WrapObject_getProperty_color(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_color() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.WrapObject_updProperty_color(swigCPtr, this), false);
   }
 
   public double get_color(int i) {

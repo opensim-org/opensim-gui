@@ -74,28 +74,8 @@ public class ArrayStr {
     return opensimModelJNI.ArrayStr_arrayEquals(swigCPtr, this, ArrayStr.getCPtr(aArray), aArray);
   }
 
-  public boolean computeNewCapacity(int aMinCapacity, SWIGTYPE_p_int rNewCapacity) {
-    return opensimModelJNI.ArrayStr_computeNewCapacity(swigCPtr, this, aMinCapacity, SWIGTYPE_p_int.getCPtr(rNewCapacity));
-  }
-
-  public boolean ensureCapacity(int aCapacity) {
-    return opensimModelJNI.ArrayStr_ensureCapacity(swigCPtr, this, aCapacity);
-  }
-
   public void trim() {
     opensimModelJNI.ArrayStr_trim(swigCPtr, this);
-  }
-
-  public int getCapacity() {
-    return opensimModelJNI.ArrayStr_getCapacity(swigCPtr, this);
-  }
-
-  public void setCapacityIncrement(int aIncrement) {
-    opensimModelJNI.ArrayStr_setCapacityIncrement(swigCPtr, this, aIncrement);
-  }
-
-  public int getCapacityIncrement() {
-    return opensimModelJNI.ArrayStr_getCapacityIncrement(swigCPtr, this);
   }
 
   public boolean setSize(int aSize) {
@@ -118,10 +98,6 @@ public class ArrayStr {
     return opensimModelJNI.ArrayStr_append__SWIG_1(swigCPtr, this, ArrayStr.getCPtr(aArray), aArray);
   }
 
-  public int append(int aSize, SWIGTYPE_p_std__string aArray) {
-    return opensimModelJNI.ArrayStr_append__SWIG_2(swigCPtr, this, aSize, SWIGTYPE_p_std__string.getCPtr(aArray));
-  }
-
   public int insert(int aIndex, String aValue) {
     return opensimModelJNI.ArrayStr_insert(swigCPtr, this, aIndex, aValue);
   }
@@ -134,13 +110,8 @@ public class ArrayStr {
     opensimModelJNI.ArrayStr_set(swigCPtr, this, aIndex, aValue);
   }
 
-  public SWIGTYPE_p_std__string get() {
-    long cPtr = opensimModelJNI.ArrayStr_get__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_std__string(cPtr, false);
-  }
-
-  public SWIGTYPE_p_std__string get(int aIndex) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.ArrayStr_get__SWIG_1(swigCPtr, this, aIndex), false);
+  public String get(int aIndex) {
+    return opensimModelJNI.ArrayStr_get(swigCPtr, this, aIndex);
   }
 
   public String getitem(int index) {
@@ -151,8 +122,8 @@ public class ArrayStr {
     opensimModelJNI.ArrayStr_setitem(swigCPtr, this, index, val);
   }
 
-  public SWIGTYPE_p_std__string getLast() {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.ArrayStr_getLast(swigCPtr, this), false);
+  public String getLast() {
+    return opensimModelJNI.ArrayStr_getLast(swigCPtr, this);
   }
 
   public int findIndex(String aValue) {

@@ -57,24 +57,8 @@ public class TendonForceLengthCurve extends Function {
     return opensimModelJNI.TendonForceLengthCurve_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_strain_at_one_norm_force(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.TendonForceLengthCurve_PropertyIndex_strain_at_one_norm_force_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_strain_at_one_norm_force() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.TendonForceLengthCurve_PropertyIndex_strain_at_one_norm_force_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_strain_at_one_norm_force(TendonForceLengthCurve source) {
     opensimModelJNI.TendonForceLengthCurve_copyProperty_strain_at_one_norm_force(swigCPtr, this, TendonForceLengthCurve.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_strain_at_one_norm_force() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.TendonForceLengthCurve_getProperty_strain_at_one_norm_force(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_strain_at_one_norm_force() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.TendonForceLengthCurve_updProperty_strain_at_one_norm_force(swigCPtr, this), false);
   }
 
   public double get_strain_at_one_norm_force(int i) {
@@ -109,24 +93,8 @@ public class TendonForceLengthCurve extends Function {
     opensimModelJNI.TendonForceLengthCurve_set_strain_at_one_norm_force__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_stiffness_at_one_norm_force(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.TendonForceLengthCurve_PropertyIndex_stiffness_at_one_norm_force_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_stiffness_at_one_norm_force() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.TendonForceLengthCurve_PropertyIndex_stiffness_at_one_norm_force_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_stiffness_at_one_norm_force(TendonForceLengthCurve source) {
     opensimModelJNI.TendonForceLengthCurve_copyProperty_stiffness_at_one_norm_force(swigCPtr, this, TendonForceLengthCurve.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_stiffness_at_one_norm_force() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.TendonForceLengthCurve_getProperty_stiffness_at_one_norm_force(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_stiffness_at_one_norm_force() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.TendonForceLengthCurve_updProperty_stiffness_at_one_norm_force(swigCPtr, this), false);
   }
 
   public double get_stiffness_at_one_norm_force(int i) {
@@ -165,24 +133,8 @@ public class TendonForceLengthCurve extends Function {
     opensimModelJNI.TendonForceLengthCurve_set_stiffness_at_one_norm_force__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_norm_force_at_toe_end(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.TendonForceLengthCurve_PropertyIndex_norm_force_at_toe_end_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_norm_force_at_toe_end() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.TendonForceLengthCurve_PropertyIndex_norm_force_at_toe_end_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_norm_force_at_toe_end(TendonForceLengthCurve source) {
     opensimModelJNI.TendonForceLengthCurve_copyProperty_norm_force_at_toe_end(swigCPtr, this, TendonForceLengthCurve.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_norm_force_at_toe_end() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.TendonForceLengthCurve_getProperty_norm_force_at_toe_end(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_norm_force_at_toe_end() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.TendonForceLengthCurve_updProperty_norm_force_at_toe_end(swigCPtr, this), false);
   }
 
   public double get_norm_force_at_toe_end(int i) {
@@ -221,24 +173,8 @@ public class TendonForceLengthCurve extends Function {
     opensimModelJNI.TendonForceLengthCurve_set_norm_force_at_toe_end__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_curviness(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.TendonForceLengthCurve_PropertyIndex_curviness_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_curviness() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.TendonForceLengthCurve_PropertyIndex_curviness_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_curviness(TendonForceLengthCurve source) {
     opensimModelJNI.TendonForceLengthCurve_copyProperty_curviness(swigCPtr, this, TendonForceLengthCurve.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_curviness() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.TendonForceLengthCurve_getProperty_curviness(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_curviness() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.TendonForceLengthCurve_updProperty_curviness(swigCPtr, this), false);
   }
 
   public double get_curviness(int i) {

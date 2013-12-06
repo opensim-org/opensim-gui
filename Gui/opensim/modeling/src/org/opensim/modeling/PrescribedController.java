@@ -57,24 +57,8 @@ public class PrescribedController extends Controller {
     return opensimModelJNI.PrescribedController_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_ControlFunctions(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PrescribedController_PropertyIndex_ControlFunctions_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_ControlFunctions() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PrescribedController_PropertyIndex_ControlFunctions_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_ControlFunctions(PrescribedController source) {
     opensimModelJNI.PrescribedController_copyProperty_ControlFunctions(swigCPtr, this, PrescribedController.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FunctionSet_t getProperty_ControlFunctions() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FunctionSet_t(opensimModelJNI.PrescribedController_getProperty_ControlFunctions(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FunctionSet_t updProperty_ControlFunctions() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FunctionSet_t(opensimModelJNI.PrescribedController_updProperty_ControlFunctions(swigCPtr, this), false);
   }
 
   public FunctionSet get_ControlFunctions(int i) {
@@ -109,24 +93,8 @@ public class PrescribedController extends Controller {
     opensimModelJNI.PrescribedController_set_ControlFunctions__SWIG_1(swigCPtr, this, FunctionSet.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_controls_file(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PrescribedController_PropertyIndex_controls_file_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_controls_file() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PrescribedController_PropertyIndex_controls_file_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_controls_file(PrescribedController source) {
     opensimModelJNI.PrescribedController_copyProperty_controls_file(swigCPtr, this, PrescribedController.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_controls_file() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.PrescribedController_getProperty_controls_file(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_controls_file() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.PrescribedController_updProperty_controls_file(swigCPtr, this), false);
   }
 
   public String get_controls_file(int i) {
@@ -165,24 +133,8 @@ public class PrescribedController extends Controller {
     opensimModelJNI.PrescribedController_set_controls_file__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_interpolation_method(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PrescribedController_PropertyIndex_interpolation_method_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_interpolation_method() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PrescribedController_PropertyIndex_interpolation_method_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_interpolation_method(PrescribedController source) {
     opensimModelJNI.PrescribedController_copyProperty_interpolation_method(swigCPtr, this, PrescribedController.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_int_t getProperty_interpolation_method() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_int_t(opensimModelJNI.PrescribedController_getProperty_interpolation_method(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_int_t updProperty_interpolation_method() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_int_t(opensimModelJNI.PrescribedController_updProperty_interpolation_method(swigCPtr, this), false);
   }
 
   public int get_interpolation_method(int i) {

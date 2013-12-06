@@ -193,10 +193,6 @@ public class ArrayDecorativeGeometry {
     return new DecorativeGeometry(opensimModelJNI.ArrayDecorativeGeometry_back__SWIG_0(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayView_T_SimTK__DecorativeGeometry_unsigned_int_t updSubArray(long index, long length) {
-    return new SWIGTYPE_p_SimTK__ArrayView_T_SimTK__DecorativeGeometry_unsigned_int_t(opensimModelJNI.ArrayDecorativeGeometry_updSubArray(swigCPtr, this, index, length), true);
-  }
-
   public void push_back(DecorativeGeometry value) {
     opensimModelJNI.ArrayDecorativeGeometry_push_back__SWIG_0(swigCPtr, this, DecorativeGeometry.getCPtr(value), value);
   }

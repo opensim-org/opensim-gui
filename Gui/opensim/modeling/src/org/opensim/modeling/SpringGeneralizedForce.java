@@ -57,24 +57,8 @@ public class SpringGeneralizedForce extends Force {
     return opensimModelJNI.SpringGeneralizedForce_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_coordinate(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.SpringGeneralizedForce_PropertyIndex_coordinate_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_coordinate() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.SpringGeneralizedForce_PropertyIndex_coordinate_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_coordinate(SpringGeneralizedForce source) {
     opensimModelJNI.SpringGeneralizedForce_copyProperty_coordinate(swigCPtr, this, SpringGeneralizedForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_coordinate() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.SpringGeneralizedForce_getProperty_coordinate(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_coordinate() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.SpringGeneralizedForce_updProperty_coordinate(swigCPtr, this), false);
   }
 
   public String get_coordinate(int i) {
@@ -113,24 +97,8 @@ public class SpringGeneralizedForce extends Force {
     opensimModelJNI.SpringGeneralizedForce_set_coordinate__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_stiffness(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.SpringGeneralizedForce_PropertyIndex_stiffness_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_stiffness() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.SpringGeneralizedForce_PropertyIndex_stiffness_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_stiffness(SpringGeneralizedForce source) {
     opensimModelJNI.SpringGeneralizedForce_copyProperty_stiffness(swigCPtr, this, SpringGeneralizedForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_stiffness() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.SpringGeneralizedForce_getProperty_stiffness(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_stiffness() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.SpringGeneralizedForce_updProperty_stiffness(swigCPtr, this), false);
   }
 
   public double get_stiffness(int i) {
@@ -165,24 +133,8 @@ public class SpringGeneralizedForce extends Force {
     opensimModelJNI.SpringGeneralizedForce_set_stiffness__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_rest_length(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.SpringGeneralizedForce_PropertyIndex_rest_length_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_rest_length() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.SpringGeneralizedForce_PropertyIndex_rest_length_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_rest_length(SpringGeneralizedForce source) {
     opensimModelJNI.SpringGeneralizedForce_copyProperty_rest_length(swigCPtr, this, SpringGeneralizedForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_rest_length() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.SpringGeneralizedForce_getProperty_rest_length(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_rest_length() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.SpringGeneralizedForce_updProperty_rest_length(swigCPtr, this), false);
   }
 
   public double get_rest_length(int i) {
@@ -217,24 +169,8 @@ public class SpringGeneralizedForce extends Force {
     opensimModelJNI.SpringGeneralizedForce_set_rest_length__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_viscosity(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.SpringGeneralizedForce_PropertyIndex_viscosity_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_viscosity() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.SpringGeneralizedForce_PropertyIndex_viscosity_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_viscosity(SpringGeneralizedForce source) {
     opensimModelJNI.SpringGeneralizedForce_copyProperty_viscosity(swigCPtr, this, SpringGeneralizedForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_viscosity() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.SpringGeneralizedForce_getProperty_viscosity(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_viscosity() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.SpringGeneralizedForce_updProperty_viscosity(swigCPtr, this), false);
   }
 
   public double get_viscosity(int i) {

@@ -59,28 +59,8 @@ public class ArrayBool {
     return opensimModelJNI.ArrayBool_arrayEquals(swigCPtr, this, ArrayBool.getCPtr(aArray), aArray);
   }
 
-  public boolean computeNewCapacity(int aMinCapacity, SWIGTYPE_p_int rNewCapacity) {
-    return opensimModelJNI.ArrayBool_computeNewCapacity(swigCPtr, this, aMinCapacity, SWIGTYPE_p_int.getCPtr(rNewCapacity));
-  }
-
-  public boolean ensureCapacity(int aCapacity) {
-    return opensimModelJNI.ArrayBool_ensureCapacity(swigCPtr, this, aCapacity);
-  }
-
   public void trim() {
     opensimModelJNI.ArrayBool_trim(swigCPtr, this);
-  }
-
-  public int getCapacity() {
-    return opensimModelJNI.ArrayBool_getCapacity(swigCPtr, this);
-  }
-
-  public void setCapacityIncrement(int aIncrement) {
-    opensimModelJNI.ArrayBool_setCapacityIncrement(swigCPtr, this, aIncrement);
-  }
-
-  public int getCapacityIncrement() {
-    return opensimModelJNI.ArrayBool_getCapacityIncrement(swigCPtr, this);
   }
 
   public boolean setSize(int aSize) {
@@ -103,10 +83,6 @@ public class ArrayBool {
     return opensimModelJNI.ArrayBool_append__SWIG_1(swigCPtr, this, ArrayBool.getCPtr(aArray), aArray);
   }
 
-  public int append(int aSize, SWIGTYPE_p_bool aArray) {
-    return opensimModelJNI.ArrayBool_append__SWIG_2(swigCPtr, this, aSize, SWIGTYPE_p_bool.getCPtr(aArray));
-  }
-
   public int insert(int aIndex, boolean aValue) {
     return opensimModelJNI.ArrayBool_insert(swigCPtr, this, aIndex, aValue);
   }
@@ -119,13 +95,8 @@ public class ArrayBool {
     opensimModelJNI.ArrayBool_set(swigCPtr, this, aIndex, aValue);
   }
 
-  public SWIGTYPE_p_bool get() {
-    long cPtr = opensimModelJNI.ArrayBool_get__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_bool(cPtr, false);
-  }
-
-  public SWIGTYPE_p_bool get(int aIndex) {
-    return new SWIGTYPE_p_bool(opensimModelJNI.ArrayBool_get__SWIG_1(swigCPtr, this, aIndex), false);
+  public boolean get(int aIndex) {
+    return opensimModelJNI.ArrayBool_get(swigCPtr, this, aIndex);
   }
 
   public boolean getitem(int index) {
@@ -136,8 +107,8 @@ public class ArrayBool {
     opensimModelJNI.ArrayBool_setitem(swigCPtr, this, index, val);
   }
 
-  public SWIGTYPE_p_bool getLast() {
-    return new SWIGTYPE_p_bool(opensimModelJNI.ArrayBool_getLast(swigCPtr, this), false);
+  public boolean getLast() {
+    return opensimModelJNI.ArrayBool_getLast(swigCPtr, this);
   }
 
   public int findIndex(boolean aValue) {

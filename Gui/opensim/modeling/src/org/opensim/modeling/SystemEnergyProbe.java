@@ -57,24 +57,8 @@ public class SystemEnergyProbe extends Probe {
     return opensimModelJNI.SystemEnergyProbe_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_compute_kinetic_energy(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.SystemEnergyProbe_PropertyIndex_compute_kinetic_energy_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_compute_kinetic_energy() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.SystemEnergyProbe_PropertyIndex_compute_kinetic_energy_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_compute_kinetic_energy(SystemEnergyProbe source) {
     opensimModelJNI.SystemEnergyProbe_copyProperty_compute_kinetic_energy(swigCPtr, this, SystemEnergyProbe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_compute_kinetic_energy() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.SystemEnergyProbe_getProperty_compute_kinetic_energy(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_compute_kinetic_energy() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.SystemEnergyProbe_updProperty_compute_kinetic_energy(swigCPtr, this), false);
   }
 
   public boolean get_compute_kinetic_energy(int i) {
@@ -109,24 +93,8 @@ public class SystemEnergyProbe extends Probe {
     opensimModelJNI.SystemEnergyProbe_set_compute_kinetic_energy__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_compute_potential_energy(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.SystemEnergyProbe_PropertyIndex_compute_potential_energy_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_compute_potential_energy() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.SystemEnergyProbe_PropertyIndex_compute_potential_energy_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_compute_potential_energy(SystemEnergyProbe source) {
     opensimModelJNI.SystemEnergyProbe_copyProperty_compute_potential_energy(swigCPtr, this, SystemEnergyProbe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_compute_potential_energy() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.SystemEnergyProbe_getProperty_compute_potential_energy(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_compute_potential_energy() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.SystemEnergyProbe_updProperty_compute_potential_energy(swigCPtr, this), false);
   }
 
   public boolean get_compute_potential_energy(int i) {

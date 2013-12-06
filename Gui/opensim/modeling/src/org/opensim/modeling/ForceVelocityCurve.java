@@ -57,24 +57,8 @@ public class ForceVelocityCurve extends Function {
     return opensimModelJNI.ForceVelocityCurve_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_concentric_slope_at_vmax(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ForceVelocityCurve_PropertyIndex_concentric_slope_at_vmax_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_concentric_slope_at_vmax() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ForceVelocityCurve_PropertyIndex_concentric_slope_at_vmax_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_concentric_slope_at_vmax(ForceVelocityCurve source) {
     opensimModelJNI.ForceVelocityCurve_copyProperty_concentric_slope_at_vmax(swigCPtr, this, ForceVelocityCurve.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_concentric_slope_at_vmax() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ForceVelocityCurve_getProperty_concentric_slope_at_vmax(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_concentric_slope_at_vmax() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ForceVelocityCurve_updProperty_concentric_slope_at_vmax(swigCPtr, this), false);
   }
 
   public double get_concentric_slope_at_vmax(int i) {
@@ -109,24 +93,8 @@ public class ForceVelocityCurve extends Function {
     opensimModelJNI.ForceVelocityCurve_set_concentric_slope_at_vmax__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_concentric_slope_near_vmax(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ForceVelocityCurve_PropertyIndex_concentric_slope_near_vmax_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_concentric_slope_near_vmax() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ForceVelocityCurve_PropertyIndex_concentric_slope_near_vmax_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_concentric_slope_near_vmax(ForceVelocityCurve source) {
     opensimModelJNI.ForceVelocityCurve_copyProperty_concentric_slope_near_vmax(swigCPtr, this, ForceVelocityCurve.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_concentric_slope_near_vmax() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ForceVelocityCurve_getProperty_concentric_slope_near_vmax(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_concentric_slope_near_vmax() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ForceVelocityCurve_updProperty_concentric_slope_near_vmax(swigCPtr, this), false);
   }
 
   public double get_concentric_slope_near_vmax(int i) {
@@ -161,24 +129,8 @@ public class ForceVelocityCurve extends Function {
     opensimModelJNI.ForceVelocityCurve_set_concentric_slope_near_vmax__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_isometric_slope(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ForceVelocityCurve_PropertyIndex_isometric_slope_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_isometric_slope() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ForceVelocityCurve_PropertyIndex_isometric_slope_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_isometric_slope(ForceVelocityCurve source) {
     opensimModelJNI.ForceVelocityCurve_copyProperty_isometric_slope(swigCPtr, this, ForceVelocityCurve.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_isometric_slope() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ForceVelocityCurve_getProperty_isometric_slope(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_isometric_slope() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ForceVelocityCurve_updProperty_isometric_slope(swigCPtr, this), false);
   }
 
   public double get_isometric_slope(int i) {
@@ -213,24 +165,8 @@ public class ForceVelocityCurve extends Function {
     opensimModelJNI.ForceVelocityCurve_set_isometric_slope__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_eccentric_slope_at_vmax(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ForceVelocityCurve_PropertyIndex_eccentric_slope_at_vmax_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_eccentric_slope_at_vmax() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ForceVelocityCurve_PropertyIndex_eccentric_slope_at_vmax_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_eccentric_slope_at_vmax(ForceVelocityCurve source) {
     opensimModelJNI.ForceVelocityCurve_copyProperty_eccentric_slope_at_vmax(swigCPtr, this, ForceVelocityCurve.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_eccentric_slope_at_vmax() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ForceVelocityCurve_getProperty_eccentric_slope_at_vmax(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_eccentric_slope_at_vmax() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ForceVelocityCurve_updProperty_eccentric_slope_at_vmax(swigCPtr, this), false);
   }
 
   public double get_eccentric_slope_at_vmax(int i) {
@@ -265,24 +201,8 @@ public class ForceVelocityCurve extends Function {
     opensimModelJNI.ForceVelocityCurve_set_eccentric_slope_at_vmax__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_eccentric_slope_near_vmax(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ForceVelocityCurve_PropertyIndex_eccentric_slope_near_vmax_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_eccentric_slope_near_vmax() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ForceVelocityCurve_PropertyIndex_eccentric_slope_near_vmax_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_eccentric_slope_near_vmax(ForceVelocityCurve source) {
     opensimModelJNI.ForceVelocityCurve_copyProperty_eccentric_slope_near_vmax(swigCPtr, this, ForceVelocityCurve.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_eccentric_slope_near_vmax() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ForceVelocityCurve_getProperty_eccentric_slope_near_vmax(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_eccentric_slope_near_vmax() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ForceVelocityCurve_updProperty_eccentric_slope_near_vmax(swigCPtr, this), false);
   }
 
   public double get_eccentric_slope_near_vmax(int i) {
@@ -317,24 +237,8 @@ public class ForceVelocityCurve extends Function {
     opensimModelJNI.ForceVelocityCurve_set_eccentric_slope_near_vmax__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_max_eccentric_velocity_force_multiplier(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ForceVelocityCurve_PropertyIndex_max_eccentric_velocity_force_multiplier_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_max_eccentric_velocity_force_multiplier() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ForceVelocityCurve_PropertyIndex_max_eccentric_velocity_force_multiplier_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_max_eccentric_velocity_force_multiplier(ForceVelocityCurve source) {
     opensimModelJNI.ForceVelocityCurve_copyProperty_max_eccentric_velocity_force_multiplier(swigCPtr, this, ForceVelocityCurve.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_max_eccentric_velocity_force_multiplier() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ForceVelocityCurve_getProperty_max_eccentric_velocity_force_multiplier(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_max_eccentric_velocity_force_multiplier() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ForceVelocityCurve_updProperty_max_eccentric_velocity_force_multiplier(swigCPtr, this), false);
   }
 
   public double get_max_eccentric_velocity_force_multiplier(int i) {
@@ -369,24 +273,8 @@ public class ForceVelocityCurve extends Function {
     opensimModelJNI.ForceVelocityCurve_set_max_eccentric_velocity_force_multiplier__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_concentric_curviness(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ForceVelocityCurve_PropertyIndex_concentric_curviness_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_concentric_curviness() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ForceVelocityCurve_PropertyIndex_concentric_curviness_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_concentric_curviness(ForceVelocityCurve source) {
     opensimModelJNI.ForceVelocityCurve_copyProperty_concentric_curviness(swigCPtr, this, ForceVelocityCurve.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_concentric_curviness() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ForceVelocityCurve_getProperty_concentric_curviness(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_concentric_curviness() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ForceVelocityCurve_updProperty_concentric_curviness(swigCPtr, this), false);
   }
 
   public double get_concentric_curviness(int i) {
@@ -421,24 +309,8 @@ public class ForceVelocityCurve extends Function {
     opensimModelJNI.ForceVelocityCurve_set_concentric_curviness__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_eccentric_curviness(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ForceVelocityCurve_PropertyIndex_eccentric_curviness_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_eccentric_curviness() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ForceVelocityCurve_PropertyIndex_eccentric_curviness_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_eccentric_curviness(ForceVelocityCurve source) {
     opensimModelJNI.ForceVelocityCurve_copyProperty_eccentric_curviness(swigCPtr, this, ForceVelocityCurve.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_eccentric_curviness() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ForceVelocityCurve_getProperty_eccentric_curviness(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_eccentric_curviness() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ForceVelocityCurve_updProperty_eccentric_curviness(swigCPtr, this), false);
   }
 
   public double get_eccentric_curviness(int i) {

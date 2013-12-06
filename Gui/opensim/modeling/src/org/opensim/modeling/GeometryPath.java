@@ -176,8 +176,8 @@ public class GeometryPath extends ModelComponent {
     opensimModelJNI.GeometryPath_setLengtheningSpeed(swigCPtr, this, State.getCPtr(s), s, speed);
   }
 
-  public void getPointForceDirections(State s, SWIGTYPE_p_OpenSim__ArrayT_OpenSim__PointForceDirection_p_t rPFDs) {
-    opensimModelJNI.GeometryPath_getPointForceDirections(swigCPtr, this, State.getCPtr(s), s, SWIGTYPE_p_OpenSim__ArrayT_OpenSim__PointForceDirection_p_t.getCPtr(rPFDs));
+  public void getPointForceDirections(State s, ArrayPointForceDirection rPFDs) {
+    opensimModelJNI.GeometryPath_getPointForceDirections(swigCPtr, this, State.getCPtr(s), s, ArrayPointForceDirection.getCPtr(rPFDs), rPFDs);
   }
 
   public void addInEquivalentForcesOnBodies(State state, double tension, VectorOfSpatialVec bodyForces) {

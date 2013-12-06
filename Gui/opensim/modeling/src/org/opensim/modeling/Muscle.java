@@ -57,24 +57,8 @@ public class Muscle extends PathActuator {
     return opensimModelJNI.Muscle_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_max_isometric_force(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Muscle_PropertyIndex_max_isometric_force_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_max_isometric_force() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Muscle_PropertyIndex_max_isometric_force_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_max_isometric_force(Muscle source) {
     opensimModelJNI.Muscle_copyProperty_max_isometric_force(swigCPtr, this, Muscle.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_max_isometric_force() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Muscle_getProperty_max_isometric_force(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_max_isometric_force() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Muscle_updProperty_max_isometric_force(swigCPtr, this), false);
   }
 
   public double get_max_isometric_force(int i) {
@@ -109,24 +93,8 @@ public class Muscle extends PathActuator {
     opensimModelJNI.Muscle_set_max_isometric_force__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_optimal_fiber_length(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Muscle_PropertyIndex_optimal_fiber_length_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_optimal_fiber_length() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Muscle_PropertyIndex_optimal_fiber_length_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_optimal_fiber_length(Muscle source) {
     opensimModelJNI.Muscle_copyProperty_optimal_fiber_length(swigCPtr, this, Muscle.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_optimal_fiber_length() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Muscle_getProperty_optimal_fiber_length(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_optimal_fiber_length() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Muscle_updProperty_optimal_fiber_length(swigCPtr, this), false);
   }
 
   public double get_optimal_fiber_length(int i) {
@@ -161,24 +129,8 @@ public class Muscle extends PathActuator {
     opensimModelJNI.Muscle_set_optimal_fiber_length__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_tendon_slack_length(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Muscle_PropertyIndex_tendon_slack_length_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_tendon_slack_length() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Muscle_PropertyIndex_tendon_slack_length_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_tendon_slack_length(Muscle source) {
     opensimModelJNI.Muscle_copyProperty_tendon_slack_length(swigCPtr, this, Muscle.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_tendon_slack_length() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Muscle_getProperty_tendon_slack_length(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_tendon_slack_length() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Muscle_updProperty_tendon_slack_length(swigCPtr, this), false);
   }
 
   public double get_tendon_slack_length(int i) {
@@ -213,24 +165,8 @@ public class Muscle extends PathActuator {
     opensimModelJNI.Muscle_set_tendon_slack_length__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_pennation_angle_at_optimal(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Muscle_PropertyIndex_pennation_angle_at_optimal_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_pennation_angle_at_optimal() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Muscle_PropertyIndex_pennation_angle_at_optimal_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_pennation_angle_at_optimal(Muscle source) {
     opensimModelJNI.Muscle_copyProperty_pennation_angle_at_optimal(swigCPtr, this, Muscle.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_pennation_angle_at_optimal() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Muscle_getProperty_pennation_angle_at_optimal(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_pennation_angle_at_optimal() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Muscle_updProperty_pennation_angle_at_optimal(swigCPtr, this), false);
   }
 
   public double get_pennation_angle_at_optimal(int i) {
@@ -265,24 +201,8 @@ public class Muscle extends PathActuator {
     opensimModelJNI.Muscle_set_pennation_angle_at_optimal__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_max_contraction_velocity(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Muscle_PropertyIndex_max_contraction_velocity_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_max_contraction_velocity() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Muscle_PropertyIndex_max_contraction_velocity_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_max_contraction_velocity(Muscle source) {
     opensimModelJNI.Muscle_copyProperty_max_contraction_velocity(swigCPtr, this, Muscle.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_max_contraction_velocity() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Muscle_getProperty_max_contraction_velocity(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_max_contraction_velocity() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Muscle_updProperty_max_contraction_velocity(swigCPtr, this), false);
   }
 
   public double get_max_contraction_velocity(int i) {
@@ -317,24 +237,8 @@ public class Muscle extends PathActuator {
     opensimModelJNI.Muscle_set_max_contraction_velocity__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_ignore_tendon_compliance(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Muscle_PropertyIndex_ignore_tendon_compliance_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_ignore_tendon_compliance() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Muscle_PropertyIndex_ignore_tendon_compliance_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_ignore_tendon_compliance(Muscle source) {
     opensimModelJNI.Muscle_copyProperty_ignore_tendon_compliance(swigCPtr, this, Muscle.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_ignore_tendon_compliance() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Muscle_getProperty_ignore_tendon_compliance(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_ignore_tendon_compliance() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Muscle_updProperty_ignore_tendon_compliance(swigCPtr, this), false);
   }
 
   public boolean get_ignore_tendon_compliance(int i) {
@@ -369,24 +273,8 @@ public class Muscle extends PathActuator {
     opensimModelJNI.Muscle_set_ignore_tendon_compliance__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_ignore_activation_dynamics(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Muscle_PropertyIndex_ignore_activation_dynamics_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_ignore_activation_dynamics() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Muscle_PropertyIndex_ignore_activation_dynamics_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_ignore_activation_dynamics(Muscle source) {
     opensimModelJNI.Muscle_copyProperty_ignore_activation_dynamics(swigCPtr, this, Muscle.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_ignore_activation_dynamics() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Muscle_getProperty_ignore_activation_dynamics(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_ignore_activation_dynamics() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Muscle_updProperty_ignore_activation_dynamics(swigCPtr, this), false);
   }
 
   public boolean get_ignore_activation_dynamics(int i) {

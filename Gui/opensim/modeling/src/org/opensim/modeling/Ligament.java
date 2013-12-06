@@ -57,24 +57,8 @@ public class Ligament extends Force {
     return opensimModelJNI.Ligament_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_GeometryPath(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Ligament_PropertyIndex_GeometryPath_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_GeometryPath() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Ligament_PropertyIndex_GeometryPath_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_GeometryPath(Ligament source) {
     opensimModelJNI.Ligament_copyProperty_GeometryPath(swigCPtr, this, Ligament.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__GeometryPath_t getProperty_GeometryPath() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__GeometryPath_t(opensimModelJNI.Ligament_getProperty_GeometryPath(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__GeometryPath_t updProperty_GeometryPath() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__GeometryPath_t(opensimModelJNI.Ligament_updProperty_GeometryPath(swigCPtr, this), false);
   }
 
   public GeometryPath get_GeometryPath(int i) {
@@ -109,24 +93,8 @@ public class Ligament extends Force {
     opensimModelJNI.Ligament_set_GeometryPath__SWIG_1(swigCPtr, this, GeometryPath.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_resting_length(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Ligament_PropertyIndex_resting_length_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_resting_length() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Ligament_PropertyIndex_resting_length_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_resting_length(Ligament source) {
     opensimModelJNI.Ligament_copyProperty_resting_length(swigCPtr, this, Ligament.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_resting_length() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Ligament_getProperty_resting_length(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_resting_length() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Ligament_updProperty_resting_length(swigCPtr, this), false);
   }
 
   public double get_resting_length(int i) {
@@ -161,24 +129,8 @@ public class Ligament extends Force {
     opensimModelJNI.Ligament_set_resting_length__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_pcsa_force(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Ligament_PropertyIndex_pcsa_force_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_pcsa_force() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Ligament_PropertyIndex_pcsa_force_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_pcsa_force(Ligament source) {
     opensimModelJNI.Ligament_copyProperty_pcsa_force(swigCPtr, this, Ligament.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_pcsa_force() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Ligament_getProperty_pcsa_force(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_pcsa_force() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Ligament_updProperty_pcsa_force(swigCPtr, this), false);
   }
 
   public double get_pcsa_force(int i) {
@@ -213,24 +165,8 @@ public class Ligament extends Force {
     opensimModelJNI.Ligament_set_pcsa_force__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_force_length_curve(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Ligament_PropertyIndex_force_length_curve_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_force_length_curve() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Ligament_PropertyIndex_force_length_curve_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_force_length_curve(Ligament source) {
     opensimModelJNI.Ligament_copyProperty_force_length_curve(swigCPtr, this, Ligament.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t getProperty_force_length_curve() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.Ligament_getProperty_force_length_curve(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t updProperty_force_length_curve() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.Ligament_updProperty_force_length_curve(swigCPtr, this), false);
   }
 
   public Function get_force_length_curve(int i) {

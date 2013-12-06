@@ -57,24 +57,8 @@ public class PathActuator extends Actuator {
     return opensimModelJNI.PathActuator_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_GeometryPath(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PathActuator_PropertyIndex_GeometryPath_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_GeometryPath() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PathActuator_PropertyIndex_GeometryPath_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_GeometryPath(PathActuator source) {
     opensimModelJNI.PathActuator_copyProperty_GeometryPath(swigCPtr, this, PathActuator.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__GeometryPath_t getProperty_GeometryPath() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__GeometryPath_t(opensimModelJNI.PathActuator_getProperty_GeometryPath(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__GeometryPath_t updProperty_GeometryPath() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__GeometryPath_t(opensimModelJNI.PathActuator_updProperty_GeometryPath(swigCPtr, this), false);
   }
 
   public GeometryPath get_GeometryPath(int i) {
@@ -109,24 +93,8 @@ public class PathActuator extends Actuator {
     opensimModelJNI.PathActuator_set_GeometryPath__SWIG_1(swigCPtr, this, GeometryPath.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_optimal_force(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PathActuator_PropertyIndex_optimal_force_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_optimal_force() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PathActuator_PropertyIndex_optimal_force_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_optimal_force(PathActuator source) {
     opensimModelJNI.PathActuator_copyProperty_optimal_force(swigCPtr, this, PathActuator.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_optimal_force() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.PathActuator_getProperty_optimal_force(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_optimal_force() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.PathActuator_updProperty_optimal_force(swigCPtr, this), false);
   }
 
   public double get_optimal_force(int i) {

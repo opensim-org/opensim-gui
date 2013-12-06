@@ -59,28 +59,8 @@ public class ArrayXYPoint {
     return opensimModelJNI.ArrayXYPoint_arrayEquals(swigCPtr, this, ArrayXYPoint.getCPtr(aArray), aArray);
   }
 
-  public boolean computeNewCapacity(int aMinCapacity, SWIGTYPE_p_int rNewCapacity) {
-    return opensimModelJNI.ArrayXYPoint_computeNewCapacity(swigCPtr, this, aMinCapacity, SWIGTYPE_p_int.getCPtr(rNewCapacity));
-  }
-
-  public boolean ensureCapacity(int aCapacity) {
-    return opensimModelJNI.ArrayXYPoint_ensureCapacity(swigCPtr, this, aCapacity);
-  }
-
   public void trim() {
     opensimModelJNI.ArrayXYPoint_trim(swigCPtr, this);
-  }
-
-  public int getCapacity() {
-    return opensimModelJNI.ArrayXYPoint_getCapacity(swigCPtr, this);
-  }
-
-  public void setCapacityIncrement(int aIncrement) {
-    opensimModelJNI.ArrayXYPoint_setCapacityIncrement(swigCPtr, this, aIncrement);
-  }
-
-  public int getCapacityIncrement() {
-    return opensimModelJNI.ArrayXYPoint_getCapacityIncrement(swigCPtr, this);
   }
 
   public boolean setSize(int aSize) {
@@ -103,10 +83,6 @@ public class ArrayXYPoint {
     return opensimModelJNI.ArrayXYPoint_append__SWIG_1(swigCPtr, this, ArrayXYPoint.getCPtr(aArray), aArray);
   }
 
-  public int append(int aSize, XYPoint aArray) {
-    return opensimModelJNI.ArrayXYPoint_append__SWIG_2(swigCPtr, this, aSize, XYPoint.getCPtr(aArray), aArray);
-  }
-
   public int insert(int aIndex, XYPoint aValue) {
     return opensimModelJNI.ArrayXYPoint_insert(swigCPtr, this, aIndex, XYPoint.getCPtr(aValue), aValue);
   }
@@ -119,13 +95,8 @@ public class ArrayXYPoint {
     opensimModelJNI.ArrayXYPoint_set(swigCPtr, this, aIndex, XYPoint.getCPtr(aValue), aValue);
   }
 
-  public XYPoint get() {
-    long cPtr = opensimModelJNI.ArrayXYPoint_get__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new XYPoint(cPtr, false);
-  }
-
   public XYPoint get(int aIndex) {
-    return new XYPoint(opensimModelJNI.ArrayXYPoint_get__SWIG_1(swigCPtr, this, aIndex), false);
+    return new XYPoint(opensimModelJNI.ArrayXYPoint_get(swigCPtr, this, aIndex), false);
   }
 
   public XYPoint getitem(int index) {

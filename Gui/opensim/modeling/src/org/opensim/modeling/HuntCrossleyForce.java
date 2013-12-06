@@ -57,24 +57,8 @@ public class HuntCrossleyForce extends Force {
     return opensimModelJNI.HuntCrossleyForce_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_contact_parameters(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.HuntCrossleyForce_PropertyIndex_contact_parameters_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_contact_parameters() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.HuntCrossleyForce_PropertyIndex_contact_parameters_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_contact_parameters(HuntCrossleyForce source) {
     opensimModelJNI.HuntCrossleyForce_copyProperty_contact_parameters(swigCPtr, this, HuntCrossleyForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__HuntCrossleyForce__ContactParametersSet_t getProperty_contact_parameters() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__HuntCrossleyForce__ContactParametersSet_t(opensimModelJNI.HuntCrossleyForce_getProperty_contact_parameters(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__HuntCrossleyForce__ContactParametersSet_t updProperty_contact_parameters() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__HuntCrossleyForce__ContactParametersSet_t(opensimModelJNI.HuntCrossleyForce_updProperty_contact_parameters(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_OpenSim__HuntCrossleyForce__ContactParametersSet get_contact_parameters(int i) {
@@ -109,24 +93,8 @@ public class HuntCrossleyForce extends Force {
     opensimModelJNI.HuntCrossleyForce_set_contact_parameters__SWIG_1(swigCPtr, this, SWIGTYPE_p_OpenSim__HuntCrossleyForce__ContactParametersSet.getCPtr(value));
   }
 
-  public void setPropertyIndex_transition_velocity(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.HuntCrossleyForce_PropertyIndex_transition_velocity_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_transition_velocity() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.HuntCrossleyForce_PropertyIndex_transition_velocity_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_transition_velocity(HuntCrossleyForce source) {
     opensimModelJNI.HuntCrossleyForce_copyProperty_transition_velocity(swigCPtr, this, HuntCrossleyForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_transition_velocity() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.HuntCrossleyForce_getProperty_transition_velocity(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_transition_velocity() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.HuntCrossleyForce_updProperty_transition_velocity(swigCPtr, this), false);
   }
 
   public double get_transition_velocity(int i) {

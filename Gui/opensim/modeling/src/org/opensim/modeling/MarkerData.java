@@ -95,8 +95,8 @@ public class MarkerData extends OpenSimObject {
     opensimModelJNI.MarkerData_makeRdStorage(swigCPtr, this, Storage.getCPtr(rStorage), rStorage);
   }
 
-  public SWIGTYPE_p_MarkerFrame getFrame(int aIndex) {
-    return new SWIGTYPE_p_MarkerFrame(opensimModelJNI.MarkerData_getFrame(swigCPtr, this, aIndex), false);
+  public MarkerFrame getFrame(int aIndex) {
+    return new MarkerFrame(opensimModelJNI.MarkerData_getFrame(swigCPtr, this, aIndex), false);
   }
 
   public int getMarkerIndex(String aName) {

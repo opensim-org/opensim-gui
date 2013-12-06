@@ -79,28 +79,8 @@ public class ArrayDouble {
     return opensimModelJNI.ArrayDouble_arrayEquals(swigCPtr, this, ArrayDouble.getCPtr(aArray), aArray);
   }
 
-  public boolean computeNewCapacity(int aMinCapacity, SWIGTYPE_p_int rNewCapacity) {
-    return opensimModelJNI.ArrayDouble_computeNewCapacity(swigCPtr, this, aMinCapacity, SWIGTYPE_p_int.getCPtr(rNewCapacity));
-  }
-
-  public boolean ensureCapacity(int aCapacity) {
-    return opensimModelJNI.ArrayDouble_ensureCapacity(swigCPtr, this, aCapacity);
-  }
-
   public void trim() {
     opensimModelJNI.ArrayDouble_trim(swigCPtr, this);
-  }
-
-  public int getCapacity() {
-    return opensimModelJNI.ArrayDouble_getCapacity(swigCPtr, this);
-  }
-
-  public void setCapacityIncrement(int aIncrement) {
-    opensimModelJNI.ArrayDouble_setCapacityIncrement(swigCPtr, this, aIncrement);
-  }
-
-  public int getCapacityIncrement() {
-    return opensimModelJNI.ArrayDouble_getCapacityIncrement(swigCPtr, this);
   }
 
   public boolean setSize(int aSize) {
@@ -123,10 +103,6 @@ public class ArrayDouble {
     return opensimModelJNI.ArrayDouble_append__SWIG_1(swigCPtr, this, ArrayDouble.getCPtr(aArray), aArray);
   }
 
-  public int append(int aSize, SWIGTYPE_p_double aArray) {
-    return opensimModelJNI.ArrayDouble_append__SWIG_2(swigCPtr, this, aSize, SWIGTYPE_p_double.getCPtr(aArray));
-  }
-
   public int insert(int aIndex, double aValue) {
     return opensimModelJNI.ArrayDouble_insert(swigCPtr, this, aIndex, aValue);
   }
@@ -139,13 +115,8 @@ public class ArrayDouble {
     opensimModelJNI.ArrayDouble_set(swigCPtr, this, aIndex, aValue);
   }
 
-  public SWIGTYPE_p_double get() {
-    long cPtr = opensimModelJNI.ArrayDouble_get__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_double(cPtr, false);
-  }
-
-  public SWIGTYPE_p_double get(int aIndex) {
-    return new SWIGTYPE_p_double(opensimModelJNI.ArrayDouble_get__SWIG_1(swigCPtr, this, aIndex), false);
+  public double get(int aIndex) {
+    return opensimModelJNI.ArrayDouble_get(swigCPtr, this, aIndex);
   }
 
   public double getitem(int index) {
@@ -156,8 +127,8 @@ public class ArrayDouble {
     opensimModelJNI.ArrayDouble_setitem(swigCPtr, this, index, val);
   }
 
-  public SWIGTYPE_p_double getLast() {
-    return new SWIGTYPE_p_double(opensimModelJNI.ArrayDouble_getLast(swigCPtr, this), false);
+  public double getLast() {
+    return opensimModelJNI.ArrayDouble_getLast(swigCPtr, this);
   }
 
   public int findIndex(double aValue) {

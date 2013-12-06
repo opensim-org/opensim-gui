@@ -115,14 +115,6 @@ public class Transform {
     return new SWIGTYPE_p_Rotation_T_double_t__ColType(opensimModelJNI.Transform_z(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_InverseRotation_T_double_t RInv() {
-    return new SWIGTYPE_p_InverseRotation_T_double_t(opensimModelJNI.Transform_RInv(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_InverseRotation_T_double_t updRInv() {
-    return new SWIGTYPE_p_InverseRotation_T_double_t(opensimModelJNI.Transform_updRInv(swigCPtr, this), false);
-  }
-
   public Vec3 p() {
     return new Vec3(opensimModelJNI.Transform_p(swigCPtr, this), false);
   }

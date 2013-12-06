@@ -57,24 +57,8 @@ public class PointToPointActuator extends Actuator {
     return opensimModelJNI.PointToPointActuator_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_bodyA(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PointToPointActuator_PropertyIndex_bodyA_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_bodyA() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PointToPointActuator_PropertyIndex_bodyA_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_bodyA(PointToPointActuator source) {
     opensimModelJNI.PointToPointActuator_copyProperty_bodyA(swigCPtr, this, PointToPointActuator.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_bodyA() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.PointToPointActuator_getProperty_bodyA(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_bodyA() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.PointToPointActuator_updProperty_bodyA(swigCPtr, this), false);
   }
 
   public String get_bodyA(int i) {
@@ -113,24 +97,8 @@ public class PointToPointActuator extends Actuator {
     opensimModelJNI.PointToPointActuator_set_bodyA__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_bodyB(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PointToPointActuator_PropertyIndex_bodyB_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_bodyB() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PointToPointActuator_PropertyIndex_bodyB_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_bodyB(PointToPointActuator source) {
     opensimModelJNI.PointToPointActuator_copyProperty_bodyB(swigCPtr, this, PointToPointActuator.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_bodyB() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.PointToPointActuator_getProperty_bodyB(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_bodyB() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.PointToPointActuator_updProperty_bodyB(swigCPtr, this), false);
   }
 
   public String get_bodyB(int i) {
@@ -169,24 +137,8 @@ public class PointToPointActuator extends Actuator {
     opensimModelJNI.PointToPointActuator_set_bodyB__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_points_are_global(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PointToPointActuator_PropertyIndex_points_are_global_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_points_are_global() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PointToPointActuator_PropertyIndex_points_are_global_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_points_are_global(PointToPointActuator source) {
     opensimModelJNI.PointToPointActuator_copyProperty_points_are_global(swigCPtr, this, PointToPointActuator.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_points_are_global() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.PointToPointActuator_getProperty_points_are_global(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_points_are_global() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.PointToPointActuator_updProperty_points_are_global(swigCPtr, this), false);
   }
 
   public boolean get_points_are_global(int i) {
@@ -221,24 +173,8 @@ public class PointToPointActuator extends Actuator {
     opensimModelJNI.PointToPointActuator_set_points_are_global__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_pointA(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PointToPointActuator_PropertyIndex_pointA_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_pointA() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PointToPointActuator_PropertyIndex_pointA_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_pointA(PointToPointActuator source) {
     opensimModelJNI.PointToPointActuator_copyProperty_pointA(swigCPtr, this, PointToPointActuator.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t getProperty_pointA() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.PointToPointActuator_getProperty_pointA(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t updProperty_pointA() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.PointToPointActuator_updProperty_pointA(swigCPtr, this), false);
   }
 
   public Vec3 get_pointA(int i) {
@@ -273,24 +209,8 @@ public class PointToPointActuator extends Actuator {
     opensimModelJNI.PointToPointActuator_set_pointA__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_pointB(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PointToPointActuator_PropertyIndex_pointB_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_pointB() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PointToPointActuator_PropertyIndex_pointB_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_pointB(PointToPointActuator source) {
     opensimModelJNI.PointToPointActuator_copyProperty_pointB(swigCPtr, this, PointToPointActuator.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t getProperty_pointB() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.PointToPointActuator_getProperty_pointB(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t updProperty_pointB() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.PointToPointActuator_updProperty_pointB(swigCPtr, this), false);
   }
 
   public Vec3 get_pointB(int i) {
@@ -325,24 +245,8 @@ public class PointToPointActuator extends Actuator {
     opensimModelJNI.PointToPointActuator_set_pointB__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_optimal_force(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PointToPointActuator_PropertyIndex_optimal_force_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_optimal_force() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PointToPointActuator_PropertyIndex_optimal_force_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_optimal_force(PointToPointActuator source) {
     opensimModelJNI.PointToPointActuator_copyProperty_optimal_force(swigCPtr, this, PointToPointActuator.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_optimal_force() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.PointToPointActuator_getProperty_optimal_force(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_optimal_force() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.PointToPointActuator_updProperty_optimal_force(swigCPtr, this), false);
   }
 
   public double get_optimal_force(int i) {

@@ -193,10 +193,6 @@ public class SimTKArrayDouble {
     return opensimModelJNI.SimTKArrayDouble_back__SWIG_0(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayView_T_double_unsigned_int_t updSubArray(long index, long length) {
-    return new SWIGTYPE_p_SimTK__ArrayView_T_double_unsigned_int_t(opensimModelJNI.SimTKArrayDouble_updSubArray(swigCPtr, this, index, length), true);
-  }
-
   public void push_back(double value) {
     opensimModelJNI.SimTKArrayDouble_push_back__SWIG_0(swigCPtr, this, value);
   }

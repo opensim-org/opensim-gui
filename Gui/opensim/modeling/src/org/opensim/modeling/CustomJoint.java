@@ -57,24 +57,8 @@ public class CustomJoint extends Joint {
     return opensimModelJNI.CustomJoint_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_SpatialTransform(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.CustomJoint_PropertyIndex_SpatialTransform_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_SpatialTransform() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.CustomJoint_PropertyIndex_SpatialTransform_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_SpatialTransform(CustomJoint source) {
     opensimModelJNI.CustomJoint_copyProperty_SpatialTransform(swigCPtr, this, CustomJoint.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__SpatialTransform_t getProperty_SpatialTransform() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__SpatialTransform_t(opensimModelJNI.CustomJoint_getProperty_SpatialTransform(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__SpatialTransform_t updProperty_SpatialTransform() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__SpatialTransform_t(opensimModelJNI.CustomJoint_updProperty_SpatialTransform(swigCPtr, this), false);
   }
 
   public SpatialTransform get_SpatialTransform(int i) {

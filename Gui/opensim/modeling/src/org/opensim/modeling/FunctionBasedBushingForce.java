@@ -57,24 +57,8 @@ public class FunctionBasedBushingForce extends Force {
     return opensimModelJNI.FunctionBasedBushingForce_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_body_1(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_body_1_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_body_1() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_body_1_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_body_1(FunctionBasedBushingForce source) {
     opensimModelJNI.FunctionBasedBushingForce_copyProperty_body_1(swigCPtr, this, FunctionBasedBushingForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_body_1() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.FunctionBasedBushingForce_getProperty_body_1(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_body_1() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.FunctionBasedBushingForce_updProperty_body_1(swigCPtr, this), false);
   }
 
   public String get_body_1(int i) {
@@ -113,24 +97,8 @@ public class FunctionBasedBushingForce extends Force {
     opensimModelJNI.FunctionBasedBushingForce_set_body_1__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_body_2(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_body_2_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_body_2() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_body_2_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_body_2(FunctionBasedBushingForce source) {
     opensimModelJNI.FunctionBasedBushingForce_copyProperty_body_2(swigCPtr, this, FunctionBasedBushingForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_body_2() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.FunctionBasedBushingForce_getProperty_body_2(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_body_2() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.FunctionBasedBushingForce_updProperty_body_2(swigCPtr, this), false);
   }
 
   public String get_body_2(int i) {
@@ -169,24 +137,8 @@ public class FunctionBasedBushingForce extends Force {
     opensimModelJNI.FunctionBasedBushingForce_set_body_2__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_location_body_1(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_location_body_1_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_location_body_1() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_location_body_1_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_location_body_1(FunctionBasedBushingForce source) {
     opensimModelJNI.FunctionBasedBushingForce_copyProperty_location_body_1(swigCPtr, this, FunctionBasedBushingForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t getProperty_location_body_1() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.FunctionBasedBushingForce_getProperty_location_body_1(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t updProperty_location_body_1() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.FunctionBasedBushingForce_updProperty_location_body_1(swigCPtr, this), false);
   }
 
   public Vec3 get_location_body_1(int i) {
@@ -221,24 +173,8 @@ public class FunctionBasedBushingForce extends Force {
     opensimModelJNI.FunctionBasedBushingForce_set_location_body_1__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_orientation_body_1(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_orientation_body_1_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_orientation_body_1() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_orientation_body_1_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_orientation_body_1(FunctionBasedBushingForce source) {
     opensimModelJNI.FunctionBasedBushingForce_copyProperty_orientation_body_1(swigCPtr, this, FunctionBasedBushingForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t getProperty_orientation_body_1() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.FunctionBasedBushingForce_getProperty_orientation_body_1(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t updProperty_orientation_body_1() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.FunctionBasedBushingForce_updProperty_orientation_body_1(swigCPtr, this), false);
   }
 
   public Vec3 get_orientation_body_1(int i) {
@@ -273,24 +209,8 @@ public class FunctionBasedBushingForce extends Force {
     opensimModelJNI.FunctionBasedBushingForce_set_orientation_body_1__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_location_body_2(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_location_body_2_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_location_body_2() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_location_body_2_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_location_body_2(FunctionBasedBushingForce source) {
     opensimModelJNI.FunctionBasedBushingForce_copyProperty_location_body_2(swigCPtr, this, FunctionBasedBushingForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t getProperty_location_body_2() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.FunctionBasedBushingForce_getProperty_location_body_2(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t updProperty_location_body_2() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.FunctionBasedBushingForce_updProperty_location_body_2(swigCPtr, this), false);
   }
 
   public Vec3 get_location_body_2(int i) {
@@ -325,24 +245,8 @@ public class FunctionBasedBushingForce extends Force {
     opensimModelJNI.FunctionBasedBushingForce_set_location_body_2__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_orientation_body_2(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_orientation_body_2_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_orientation_body_2() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_orientation_body_2_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_orientation_body_2(FunctionBasedBushingForce source) {
     opensimModelJNI.FunctionBasedBushingForce_copyProperty_orientation_body_2(swigCPtr, this, FunctionBasedBushingForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t getProperty_orientation_body_2() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.FunctionBasedBushingForce_getProperty_orientation_body_2(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t updProperty_orientation_body_2() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.FunctionBasedBushingForce_updProperty_orientation_body_2(swigCPtr, this), false);
   }
 
   public Vec3 get_orientation_body_2(int i) {
@@ -377,24 +281,8 @@ public class FunctionBasedBushingForce extends Force {
     opensimModelJNI.FunctionBasedBushingForce_set_orientation_body_2__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_m_x_theta_x_function(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_m_x_theta_x_function_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_m_x_theta_x_function() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_m_x_theta_x_function_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_m_x_theta_x_function(FunctionBasedBushingForce source) {
     opensimModelJNI.FunctionBasedBushingForce_copyProperty_m_x_theta_x_function(swigCPtr, this, FunctionBasedBushingForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t getProperty_m_x_theta_x_function() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.FunctionBasedBushingForce_getProperty_m_x_theta_x_function(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t updProperty_m_x_theta_x_function() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.FunctionBasedBushingForce_updProperty_m_x_theta_x_function(swigCPtr, this), false);
   }
 
   public Function get_m_x_theta_x_function(int i) {
@@ -433,24 +321,8 @@ public class FunctionBasedBushingForce extends Force {
     opensimModelJNI.FunctionBasedBushingForce_set_m_x_theta_x_function__SWIG_1(swigCPtr, this, Function.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_m_y_theta_y_function(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_m_y_theta_y_function_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_m_y_theta_y_function() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_m_y_theta_y_function_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_m_y_theta_y_function(FunctionBasedBushingForce source) {
     opensimModelJNI.FunctionBasedBushingForce_copyProperty_m_y_theta_y_function(swigCPtr, this, FunctionBasedBushingForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t getProperty_m_y_theta_y_function() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.FunctionBasedBushingForce_getProperty_m_y_theta_y_function(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t updProperty_m_y_theta_y_function() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.FunctionBasedBushingForce_updProperty_m_y_theta_y_function(swigCPtr, this), false);
   }
 
   public Function get_m_y_theta_y_function(int i) {
@@ -489,24 +361,8 @@ public class FunctionBasedBushingForce extends Force {
     opensimModelJNI.FunctionBasedBushingForce_set_m_y_theta_y_function__SWIG_1(swigCPtr, this, Function.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_m_z_theta_z_function(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_m_z_theta_z_function_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_m_z_theta_z_function() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_m_z_theta_z_function_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_m_z_theta_z_function(FunctionBasedBushingForce source) {
     opensimModelJNI.FunctionBasedBushingForce_copyProperty_m_z_theta_z_function(swigCPtr, this, FunctionBasedBushingForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t getProperty_m_z_theta_z_function() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.FunctionBasedBushingForce_getProperty_m_z_theta_z_function(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t updProperty_m_z_theta_z_function() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.FunctionBasedBushingForce_updProperty_m_z_theta_z_function(swigCPtr, this), false);
   }
 
   public Function get_m_z_theta_z_function(int i) {
@@ -545,24 +401,8 @@ public class FunctionBasedBushingForce extends Force {
     opensimModelJNI.FunctionBasedBushingForce_set_m_z_theta_z_function__SWIG_1(swigCPtr, this, Function.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_f_x_delta_x_function(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_f_x_delta_x_function_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_f_x_delta_x_function() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_f_x_delta_x_function_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_f_x_delta_x_function(FunctionBasedBushingForce source) {
     opensimModelJNI.FunctionBasedBushingForce_copyProperty_f_x_delta_x_function(swigCPtr, this, FunctionBasedBushingForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t getProperty_f_x_delta_x_function() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.FunctionBasedBushingForce_getProperty_f_x_delta_x_function(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t updProperty_f_x_delta_x_function() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.FunctionBasedBushingForce_updProperty_f_x_delta_x_function(swigCPtr, this), false);
   }
 
   public Function get_f_x_delta_x_function(int i) {
@@ -601,24 +441,8 @@ public class FunctionBasedBushingForce extends Force {
     opensimModelJNI.FunctionBasedBushingForce_set_f_x_delta_x_function__SWIG_1(swigCPtr, this, Function.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_f_y_delta_y_function(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_f_y_delta_y_function_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_f_y_delta_y_function() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_f_y_delta_y_function_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_f_y_delta_y_function(FunctionBasedBushingForce source) {
     opensimModelJNI.FunctionBasedBushingForce_copyProperty_f_y_delta_y_function(swigCPtr, this, FunctionBasedBushingForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t getProperty_f_y_delta_y_function() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.FunctionBasedBushingForce_getProperty_f_y_delta_y_function(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t updProperty_f_y_delta_y_function() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.FunctionBasedBushingForce_updProperty_f_y_delta_y_function(swigCPtr, this), false);
   }
 
   public Function get_f_y_delta_y_function(int i) {
@@ -657,24 +481,8 @@ public class FunctionBasedBushingForce extends Force {
     opensimModelJNI.FunctionBasedBushingForce_set_f_y_delta_y_function__SWIG_1(swigCPtr, this, Function.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_f_z_delta_z_function(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_f_z_delta_z_function_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_f_z_delta_z_function() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_f_z_delta_z_function_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_f_z_delta_z_function(FunctionBasedBushingForce source) {
     opensimModelJNI.FunctionBasedBushingForce_copyProperty_f_z_delta_z_function(swigCPtr, this, FunctionBasedBushingForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t getProperty_f_z_delta_z_function() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.FunctionBasedBushingForce_getProperty_f_z_delta_z_function(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t updProperty_f_z_delta_z_function() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Function_t(opensimModelJNI.FunctionBasedBushingForce_updProperty_f_z_delta_z_function(swigCPtr, this), false);
   }
 
   public Function get_f_z_delta_z_function(int i) {
@@ -713,24 +521,8 @@ public class FunctionBasedBushingForce extends Force {
     opensimModelJNI.FunctionBasedBushingForce_set_f_z_delta_z_function__SWIG_1(swigCPtr, this, Function.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_visual_aspect_ratio(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_visual_aspect_ratio_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_visual_aspect_ratio() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_visual_aspect_ratio_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_visual_aspect_ratio(FunctionBasedBushingForce source) {
     opensimModelJNI.FunctionBasedBushingForce_copyProperty_visual_aspect_ratio(swigCPtr, this, FunctionBasedBushingForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_visual_aspect_ratio() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.FunctionBasedBushingForce_getProperty_visual_aspect_ratio(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_visual_aspect_ratio() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.FunctionBasedBushingForce_updProperty_visual_aspect_ratio(swigCPtr, this), false);
   }
 
   public double get_visual_aspect_ratio(int i) {
@@ -769,24 +561,8 @@ public class FunctionBasedBushingForce extends Force {
     opensimModelJNI.FunctionBasedBushingForce_set_visual_aspect_ratio__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_moment_visual_scale(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_moment_visual_scale_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_moment_visual_scale() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_moment_visual_scale_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_moment_visual_scale(FunctionBasedBushingForce source) {
     opensimModelJNI.FunctionBasedBushingForce_copyProperty_moment_visual_scale(swigCPtr, this, FunctionBasedBushingForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_moment_visual_scale() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.FunctionBasedBushingForce_getProperty_moment_visual_scale(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_moment_visual_scale() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.FunctionBasedBushingForce_updProperty_moment_visual_scale(swigCPtr, this), false);
   }
 
   public double get_moment_visual_scale(int i) {
@@ -825,24 +601,8 @@ public class FunctionBasedBushingForce extends Force {
     opensimModelJNI.FunctionBasedBushingForce_set_moment_visual_scale__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_force_visual_scale(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_force_visual_scale_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_force_visual_scale() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_force_visual_scale_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_force_visual_scale(FunctionBasedBushingForce source) {
     opensimModelJNI.FunctionBasedBushingForce_copyProperty_force_visual_scale(swigCPtr, this, FunctionBasedBushingForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_force_visual_scale() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.FunctionBasedBushingForce_getProperty_force_visual_scale(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_force_visual_scale() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.FunctionBasedBushingForce_updProperty_force_visual_scale(swigCPtr, this), false);
   }
 
   public double get_force_visual_scale(int i) {
@@ -881,24 +641,8 @@ public class FunctionBasedBushingForce extends Force {
     opensimModelJNI.FunctionBasedBushingForce_set_force_visual_scale__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_rotational_damping(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_rotational_damping_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_rotational_damping() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_rotational_damping_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_rotational_damping(FunctionBasedBushingForce source) {
     opensimModelJNI.FunctionBasedBushingForce_copyProperty_rotational_damping(swigCPtr, this, FunctionBasedBushingForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t getProperty_rotational_damping() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.FunctionBasedBushingForce_getProperty_rotational_damping(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t updProperty_rotational_damping() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.FunctionBasedBushingForce_updProperty_rotational_damping(swigCPtr, this), false);
   }
 
   public Vec3 get_rotational_damping(int i) {
@@ -933,24 +677,8 @@ public class FunctionBasedBushingForce extends Force {
     opensimModelJNI.FunctionBasedBushingForce_set_rotational_damping__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_translational_damping(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_translational_damping_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_translational_damping() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.FunctionBasedBushingForce_PropertyIndex_translational_damping_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_translational_damping(FunctionBasedBushingForce source) {
     opensimModelJNI.FunctionBasedBushingForce_copyProperty_translational_damping(swigCPtr, this, FunctionBasedBushingForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t getProperty_translational_damping() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.FunctionBasedBushingForce_getProperty_translational_damping(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t updProperty_translational_damping() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.FunctionBasedBushingForce_updProperty_translational_damping(swigCPtr, this), false);
   }
 
   public Vec3 get_translational_damping(int i) {

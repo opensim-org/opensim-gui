@@ -123,30 +123,6 @@ public class DecorativeGeometry {
     opensimModelJNI.DecorativeGeometry_implementGeometry(swigCPtr, this, DecorativeGeometryImplementation.getCPtr(arg0), arg0);
   }
 
-  public boolean isOwnerHandle() {
-    return opensimModelJNI.DecorativeGeometry_isOwnerHandle(swigCPtr, this);
-  }
-
-  public boolean isEmptyHandle() {
-    return opensimModelJNI.DecorativeGeometry_isEmptyHandle(swigCPtr, this);
-  }
-
-  public DecorativeGeometry(SWIGTYPE_p_DecorativeGeometryRep r) {
-    this(opensimModelJNI.new_DecorativeGeometry__SWIG_2(SWIGTYPE_p_DecorativeGeometryRep.getCPtr(r)), true);
-  }
-
-  public boolean hasRep() {
-    return opensimModelJNI.DecorativeGeometry_hasRep(swigCPtr, this);
-  }
-
-  public SWIGTYPE_p_DecorativeGeometryRep getRep() {
-    return new SWIGTYPE_p_DecorativeGeometryRep(opensimModelJNI.DecorativeGeometry_getRep(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_DecorativeGeometryRep updRep() {
-    return new SWIGTYPE_p_DecorativeGeometryRep(opensimModelJNI.DecorativeGeometry_updRep(swigCPtr, this), false);
-  }
-
   public final static class Representation {
     public final static DecorativeGeometry.Representation DrawPoints = new DecorativeGeometry.Representation("DrawPoints", opensimModelJNI.DecorativeGeometry_DrawPoints_get());
     public final static DecorativeGeometry.Representation DrawWireframe = new DecorativeGeometry.Representation("DrawWireframe", opensimModelJNI.DecorativeGeometry_DrawWireframe_get());

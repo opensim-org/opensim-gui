@@ -57,24 +57,8 @@ public class EllipsoidJoint extends Joint {
     return opensimModelJNI.EllipsoidJoint_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_radii_x_y_z(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.EllipsoidJoint_PropertyIndex_radii_x_y_z_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_radii_x_y_z() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.EllipsoidJoint_PropertyIndex_radii_x_y_z_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_radii_x_y_z(EllipsoidJoint source) {
     opensimModelJNI.EllipsoidJoint_copyProperty_radii_x_y_z(swigCPtr, this, EllipsoidJoint.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t getProperty_radii_x_y_z() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.EllipsoidJoint_getProperty_radii_x_y_z(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t updProperty_radii_x_y_z() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.EllipsoidJoint_updProperty_radii_x_y_z(swigCPtr, this), false);
   }
 
   public Vec3 get_radii_x_y_z(int i) {

@@ -57,24 +57,8 @@ public class Joint extends ModelComponent {
     return opensimModelJNI.Joint_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_parent_body(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Joint_PropertyIndex_parent_body_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_parent_body() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Joint_PropertyIndex_parent_body_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_parent_body(Joint source) {
     opensimModelJNI.Joint_copyProperty_parent_body(swigCPtr, this, Joint.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_parent_body() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.Joint_getProperty_parent_body(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_parent_body() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.Joint_updProperty_parent_body(swigCPtr, this), false);
   }
 
   public String get_parent_body(int i) {
@@ -109,24 +93,8 @@ public class Joint extends ModelComponent {
     opensimModelJNI.Joint_set_parent_body__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_location_in_parent(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Joint_PropertyIndex_location_in_parent_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_location_in_parent() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Joint_PropertyIndex_location_in_parent_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_location_in_parent(Joint source) {
     opensimModelJNI.Joint_copyProperty_location_in_parent(swigCPtr, this, Joint.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t getProperty_location_in_parent() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.Joint_getProperty_location_in_parent(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t updProperty_location_in_parent() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.Joint_updProperty_location_in_parent(swigCPtr, this), false);
   }
 
   public Vec3 get_location_in_parent(int i) {
@@ -161,24 +129,8 @@ public class Joint extends ModelComponent {
     opensimModelJNI.Joint_set_location_in_parent__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_orientation_in_parent(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Joint_PropertyIndex_orientation_in_parent_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_orientation_in_parent() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Joint_PropertyIndex_orientation_in_parent_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_orientation_in_parent(Joint source) {
     opensimModelJNI.Joint_copyProperty_orientation_in_parent(swigCPtr, this, Joint.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t getProperty_orientation_in_parent() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.Joint_getProperty_orientation_in_parent(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t updProperty_orientation_in_parent() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.Joint_updProperty_orientation_in_parent(swigCPtr, this), false);
   }
 
   public Vec3 get_orientation_in_parent(int i) {
@@ -213,24 +165,8 @@ public class Joint extends ModelComponent {
     opensimModelJNI.Joint_set_orientation_in_parent__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_location(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Joint_PropertyIndex_location_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_location() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Joint_PropertyIndex_location_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_location(Joint source) {
     opensimModelJNI.Joint_copyProperty_location(swigCPtr, this, Joint.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t getProperty_location() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.Joint_getProperty_location(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t updProperty_location() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.Joint_updProperty_location(swigCPtr, this), false);
   }
 
   public Vec3 get_location(int i) {
@@ -265,24 +201,8 @@ public class Joint extends ModelComponent {
     opensimModelJNI.Joint_set_location__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_orientation(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Joint_PropertyIndex_orientation_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_orientation() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Joint_PropertyIndex_orientation_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_orientation(Joint source) {
     opensimModelJNI.Joint_copyProperty_orientation(swigCPtr, this, Joint.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t getProperty_orientation() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.Joint_getProperty_orientation(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t updProperty_orientation() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.Joint_updProperty_orientation(swigCPtr, this), false);
   }
 
   public Vec3 get_orientation(int i) {
@@ -317,24 +237,8 @@ public class Joint extends ModelComponent {
     opensimModelJNI.Joint_set_orientation__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_CoordinateSet(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Joint_PropertyIndex_CoordinateSet_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_CoordinateSet() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Joint_PropertyIndex_CoordinateSet_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_CoordinateSet(Joint source) {
     opensimModelJNI.Joint_copyProperty_CoordinateSet(swigCPtr, this, Joint.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__CoordinateSet_t getProperty_CoordinateSet() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__CoordinateSet_t(opensimModelJNI.Joint_getProperty_CoordinateSet(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__CoordinateSet_t updProperty_CoordinateSet() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__CoordinateSet_t(opensimModelJNI.Joint_updProperty_CoordinateSet(swigCPtr, this), false);
   }
 
   public CoordinateSet get_CoordinateSet(int i) {
@@ -369,24 +273,8 @@ public class Joint extends ModelComponent {
     opensimModelJNI.Joint_set_CoordinateSet__SWIG_1(swigCPtr, this, CoordinateSet.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_reverse(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Joint_PropertyIndex_reverse_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_reverse() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Joint_PropertyIndex_reverse_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_reverse(Joint source) {
     opensimModelJNI.Joint_copyProperty_reverse(swigCPtr, this, Joint.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_reverse() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Joint_getProperty_reverse(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_reverse() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Joint_updProperty_reverse(swigCPtr, this), false);
   }
 
   public boolean get_reverse(int i) {

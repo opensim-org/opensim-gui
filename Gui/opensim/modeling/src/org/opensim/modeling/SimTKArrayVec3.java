@@ -193,10 +193,6 @@ public class SimTKArrayVec3 {
     return new Vec3(opensimModelJNI.SimTKArrayVec3_back__SWIG_0(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayView_T_SimTK__VecT_3_double_1_t_unsigned_int_t updSubArray(long index, long length) {
-    return new SWIGTYPE_p_SimTK__ArrayView_T_SimTK__VecT_3_double_1_t_unsigned_int_t(opensimModelJNI.SimTKArrayVec3_updSubArray(swigCPtr, this, index, length), true);
-  }
-
   public void push_back(Vec3 value) {
     opensimModelJNI.SimTKArrayVec3_push_back__SWIG_0(swigCPtr, this, Vec3.getCPtr(value), value);
   }

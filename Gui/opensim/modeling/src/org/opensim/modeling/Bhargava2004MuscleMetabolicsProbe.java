@@ -57,24 +57,8 @@ public class Bhargava2004MuscleMetabolicsProbe extends Probe {
     return opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_activation_rate_on(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_activation_rate_on_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_activation_rate_on() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_activation_rate_on_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_activation_rate_on(Bhargava2004MuscleMetabolicsProbe source) {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_copyProperty_activation_rate_on(swigCPtr, this, Bhargava2004MuscleMetabolicsProbe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_activation_rate_on() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_getProperty_activation_rate_on(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_activation_rate_on() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_updProperty_activation_rate_on(swigCPtr, this), false);
   }
 
   public boolean get_activation_rate_on(int i) {
@@ -109,24 +93,8 @@ public class Bhargava2004MuscleMetabolicsProbe extends Probe {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_set_activation_rate_on__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_maintenance_rate_on(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_maintenance_rate_on_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_maintenance_rate_on() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_maintenance_rate_on_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_maintenance_rate_on(Bhargava2004MuscleMetabolicsProbe source) {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_copyProperty_maintenance_rate_on(swigCPtr, this, Bhargava2004MuscleMetabolicsProbe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_maintenance_rate_on() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_getProperty_maintenance_rate_on(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_maintenance_rate_on() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_updProperty_maintenance_rate_on(swigCPtr, this), false);
   }
 
   public boolean get_maintenance_rate_on(int i) {
@@ -161,24 +129,8 @@ public class Bhargava2004MuscleMetabolicsProbe extends Probe {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_set_maintenance_rate_on__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_shortening_rate_on(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_shortening_rate_on_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_shortening_rate_on() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_shortening_rate_on_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_shortening_rate_on(Bhargava2004MuscleMetabolicsProbe source) {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_copyProperty_shortening_rate_on(swigCPtr, this, Bhargava2004MuscleMetabolicsProbe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_shortening_rate_on() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_getProperty_shortening_rate_on(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_shortening_rate_on() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_updProperty_shortening_rate_on(swigCPtr, this), false);
   }
 
   public boolean get_shortening_rate_on(int i) {
@@ -213,24 +165,8 @@ public class Bhargava2004MuscleMetabolicsProbe extends Probe {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_set_shortening_rate_on__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_basal_rate_on(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_basal_rate_on_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_basal_rate_on() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_basal_rate_on_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_basal_rate_on(Bhargava2004MuscleMetabolicsProbe source) {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_copyProperty_basal_rate_on(swigCPtr, this, Bhargava2004MuscleMetabolicsProbe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_basal_rate_on() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_getProperty_basal_rate_on(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_basal_rate_on() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_updProperty_basal_rate_on(swigCPtr, this), false);
   }
 
   public boolean get_basal_rate_on(int i) {
@@ -265,24 +201,8 @@ public class Bhargava2004MuscleMetabolicsProbe extends Probe {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_set_basal_rate_on__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_mechanical_work_rate_on(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_mechanical_work_rate_on_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_mechanical_work_rate_on() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_mechanical_work_rate_on_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_mechanical_work_rate_on(Bhargava2004MuscleMetabolicsProbe source) {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_copyProperty_mechanical_work_rate_on(swigCPtr, this, Bhargava2004MuscleMetabolicsProbe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_mechanical_work_rate_on() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_getProperty_mechanical_work_rate_on(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_mechanical_work_rate_on() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_updProperty_mechanical_work_rate_on(swigCPtr, this), false);
   }
 
   public boolean get_mechanical_work_rate_on(int i) {
@@ -317,24 +237,8 @@ public class Bhargava2004MuscleMetabolicsProbe extends Probe {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_set_mechanical_work_rate_on__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_enforce_minimum_heat_rate_per_muscle(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_enforce_minimum_heat_rate_per_muscle_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_enforce_minimum_heat_rate_per_muscle() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_enforce_minimum_heat_rate_per_muscle_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_enforce_minimum_heat_rate_per_muscle(Bhargava2004MuscleMetabolicsProbe source) {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_copyProperty_enforce_minimum_heat_rate_per_muscle(swigCPtr, this, Bhargava2004MuscleMetabolicsProbe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_enforce_minimum_heat_rate_per_muscle() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_getProperty_enforce_minimum_heat_rate_per_muscle(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_enforce_minimum_heat_rate_per_muscle() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_updProperty_enforce_minimum_heat_rate_per_muscle(swigCPtr, this), false);
   }
 
   public boolean get_enforce_minimum_heat_rate_per_muscle(int i) {
@@ -369,24 +273,8 @@ public class Bhargava2004MuscleMetabolicsProbe extends Probe {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_set_enforce_minimum_heat_rate_per_muscle__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_normalized_fiber_length_dependence_on_maintenance_rate(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_normalized_fiber_length_dependence_on_maintenance_rate_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_normalized_fiber_length_dependence_on_maintenance_rate() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_normalized_fiber_length_dependence_on_maintenance_rate_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_normalized_fiber_length_dependence_on_maintenance_rate(Bhargava2004MuscleMetabolicsProbe source) {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_copyProperty_normalized_fiber_length_dependence_on_maintenance_rate(swigCPtr, this, Bhargava2004MuscleMetabolicsProbe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__PiecewiseLinearFunction_t getProperty_normalized_fiber_length_dependence_on_maintenance_rate() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__PiecewiseLinearFunction_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_getProperty_normalized_fiber_length_dependence_on_maintenance_rate(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__PiecewiseLinearFunction_t updProperty_normalized_fiber_length_dependence_on_maintenance_rate() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__PiecewiseLinearFunction_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_updProperty_normalized_fiber_length_dependence_on_maintenance_rate(swigCPtr, this), false);
   }
 
   public PiecewiseLinearFunction get_normalized_fiber_length_dependence_on_maintenance_rate(int i) {
@@ -421,24 +309,8 @@ public class Bhargava2004MuscleMetabolicsProbe extends Probe {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_set_normalized_fiber_length_dependence_on_maintenance_rate__SWIG_1(swigCPtr, this, PiecewiseLinearFunction.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_use_force_dependent_shortening_prop_constant(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_use_force_dependent_shortening_prop_constant_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_use_force_dependent_shortening_prop_constant() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_use_force_dependent_shortening_prop_constant_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_use_force_dependent_shortening_prop_constant(Bhargava2004MuscleMetabolicsProbe source) {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_copyProperty_use_force_dependent_shortening_prop_constant(swigCPtr, this, Bhargava2004MuscleMetabolicsProbe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_use_force_dependent_shortening_prop_constant() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_getProperty_use_force_dependent_shortening_prop_constant(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_use_force_dependent_shortening_prop_constant() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_updProperty_use_force_dependent_shortening_prop_constant(swigCPtr, this), false);
   }
 
   public boolean get_use_force_dependent_shortening_prop_constant(int i) {
@@ -473,24 +345,8 @@ public class Bhargava2004MuscleMetabolicsProbe extends Probe {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_set_use_force_dependent_shortening_prop_constant__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_basal_coefficient(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_basal_coefficient_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_basal_coefficient() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_basal_coefficient_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_basal_coefficient(Bhargava2004MuscleMetabolicsProbe source) {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_copyProperty_basal_coefficient(swigCPtr, this, Bhargava2004MuscleMetabolicsProbe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_basal_coefficient() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_getProperty_basal_coefficient(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_basal_coefficient() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_updProperty_basal_coefficient(swigCPtr, this), false);
   }
 
   public double get_basal_coefficient(int i) {
@@ -525,24 +381,8 @@ public class Bhargava2004MuscleMetabolicsProbe extends Probe {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_set_basal_coefficient__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_basal_exponent(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_basal_exponent_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_basal_exponent() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_basal_exponent_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_basal_exponent(Bhargava2004MuscleMetabolicsProbe source) {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_copyProperty_basal_exponent(swigCPtr, this, Bhargava2004MuscleMetabolicsProbe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_basal_exponent() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_getProperty_basal_exponent(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_basal_exponent() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_updProperty_basal_exponent(swigCPtr, this), false);
   }
 
   public double get_basal_exponent(int i) {
@@ -577,24 +417,8 @@ public class Bhargava2004MuscleMetabolicsProbe extends Probe {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_set_basal_exponent__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_report_total_metabolics_only(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_report_total_metabolics_only_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_report_total_metabolics_only() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_report_total_metabolics_only_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_report_total_metabolics_only(Bhargava2004MuscleMetabolicsProbe source) {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_copyProperty_report_total_metabolics_only(swigCPtr, this, Bhargava2004MuscleMetabolicsProbe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_report_total_metabolics_only() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_getProperty_report_total_metabolics_only(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_report_total_metabolics_only() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_updProperty_report_total_metabolics_only(swigCPtr, this), false);
   }
 
   public boolean get_report_total_metabolics_only(int i) {
@@ -629,24 +453,8 @@ public class Bhargava2004MuscleMetabolicsProbe extends Probe {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_set_report_total_metabolics_only__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_Bhargava2004MuscleMetabolicsProbe_MetabolicMuscleParameterSet(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_Bhargava2004MuscleMetabolicsProbe_MetabolicMuscleParameterSet_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_Bhargava2004MuscleMetabolicsProbe_MetabolicMuscleParameterSet() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_PropertyIndex_Bhargava2004MuscleMetabolicsProbe_MetabolicMuscleParameterSet_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_Bhargava2004MuscleMetabolicsProbe_MetabolicMuscleParameterSet(Bhargava2004MuscleMetabolicsProbe source) {
     opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_copyProperty_Bhargava2004MuscleMetabolicsProbe_MetabolicMuscleParameterSet(swigCPtr, this, Bhargava2004MuscleMetabolicsProbe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Bhargava2004MuscleMetabolicsProbe_MetabolicMuscleParameterSet_t getProperty_Bhargava2004MuscleMetabolicsProbe_MetabolicMuscleParameterSet() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Bhargava2004MuscleMetabolicsProbe_MetabolicMuscleParameterSet_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_getProperty_Bhargava2004MuscleMetabolicsProbe_MetabolicMuscleParameterSet(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Bhargava2004MuscleMetabolicsProbe_MetabolicMuscleParameterSet_t updProperty_Bhargava2004MuscleMetabolicsProbe_MetabolicMuscleParameterSet() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__Bhargava2004MuscleMetabolicsProbe_MetabolicMuscleParameterSet_t(opensimModelJNI.Bhargava2004MuscleMetabolicsProbe_updProperty_Bhargava2004MuscleMetabolicsProbe_MetabolicMuscleParameterSet(swigCPtr, this), false);
   }
 
   public Bhargava2004MuscleMetabolicsProbe_MetabolicMuscleParameterSet get_Bhargava2004MuscleMetabolicsProbe_MetabolicMuscleParameterSet(int i) {

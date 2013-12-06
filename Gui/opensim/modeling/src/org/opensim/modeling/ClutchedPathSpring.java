@@ -57,24 +57,8 @@ public class ClutchedPathSpring extends PathActuator {
     return opensimModelJNI.ClutchedPathSpring_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_stiffness(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ClutchedPathSpring_PropertyIndex_stiffness_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_stiffness() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ClutchedPathSpring_PropertyIndex_stiffness_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_stiffness(ClutchedPathSpring source) {
     opensimModelJNI.ClutchedPathSpring_copyProperty_stiffness(swigCPtr, this, ClutchedPathSpring.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_stiffness() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ClutchedPathSpring_getProperty_stiffness(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_stiffness() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ClutchedPathSpring_updProperty_stiffness(swigCPtr, this), false);
   }
 
   public double get_stiffness(int i) {
@@ -109,24 +93,8 @@ public class ClutchedPathSpring extends PathActuator {
     opensimModelJNI.ClutchedPathSpring_set_stiffness__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_dissipation(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ClutchedPathSpring_PropertyIndex_dissipation_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_dissipation() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ClutchedPathSpring_PropertyIndex_dissipation_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_dissipation(ClutchedPathSpring source) {
     opensimModelJNI.ClutchedPathSpring_copyProperty_dissipation(swigCPtr, this, ClutchedPathSpring.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_dissipation() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ClutchedPathSpring_getProperty_dissipation(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_dissipation() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ClutchedPathSpring_updProperty_dissipation(swigCPtr, this), false);
   }
 
   public double get_dissipation(int i) {
@@ -161,24 +129,8 @@ public class ClutchedPathSpring extends PathActuator {
     opensimModelJNI.ClutchedPathSpring_set_dissipation__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_relaxation_time_constant(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ClutchedPathSpring_PropertyIndex_relaxation_time_constant_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_relaxation_time_constant() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ClutchedPathSpring_PropertyIndex_relaxation_time_constant_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_relaxation_time_constant(ClutchedPathSpring source) {
     opensimModelJNI.ClutchedPathSpring_copyProperty_relaxation_time_constant(swigCPtr, this, ClutchedPathSpring.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_relaxation_time_constant() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ClutchedPathSpring_getProperty_relaxation_time_constant(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_relaxation_time_constant() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ClutchedPathSpring_updProperty_relaxation_time_constant(swigCPtr, this), false);
   }
 
   public double get_relaxation_time_constant(int i) {
@@ -213,24 +165,8 @@ public class ClutchedPathSpring extends PathActuator {
     opensimModelJNI.ClutchedPathSpring_set_relaxation_time_constant__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_initial_stretch(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ClutchedPathSpring_PropertyIndex_initial_stretch_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_initial_stretch() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ClutchedPathSpring_PropertyIndex_initial_stretch_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_initial_stretch(ClutchedPathSpring source) {
     opensimModelJNI.ClutchedPathSpring_copyProperty_initial_stretch(swigCPtr, this, ClutchedPathSpring.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_initial_stretch() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ClutchedPathSpring_getProperty_initial_stretch(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_initial_stretch() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ClutchedPathSpring_updProperty_initial_stretch(swigCPtr, this), false);
   }
 
   public double get_initial_stretch(int i) {

@@ -59,28 +59,8 @@ public class ArrayInt {
     return opensimModelJNI.ArrayInt_arrayEquals(swigCPtr, this, ArrayInt.getCPtr(aArray), aArray);
   }
 
-  public boolean computeNewCapacity(int aMinCapacity, SWIGTYPE_p_int rNewCapacity) {
-    return opensimModelJNI.ArrayInt_computeNewCapacity(swigCPtr, this, aMinCapacity, SWIGTYPE_p_int.getCPtr(rNewCapacity));
-  }
-
-  public boolean ensureCapacity(int aCapacity) {
-    return opensimModelJNI.ArrayInt_ensureCapacity(swigCPtr, this, aCapacity);
-  }
-
   public void trim() {
     opensimModelJNI.ArrayInt_trim(swigCPtr, this);
-  }
-
-  public int getCapacity() {
-    return opensimModelJNI.ArrayInt_getCapacity(swigCPtr, this);
-  }
-
-  public void setCapacityIncrement(int aIncrement) {
-    opensimModelJNI.ArrayInt_setCapacityIncrement(swigCPtr, this, aIncrement);
-  }
-
-  public int getCapacityIncrement() {
-    return opensimModelJNI.ArrayInt_getCapacityIncrement(swigCPtr, this);
   }
 
   public boolean setSize(int aSize) {
@@ -103,10 +83,6 @@ public class ArrayInt {
     return opensimModelJNI.ArrayInt_append__SWIG_1(swigCPtr, this, ArrayInt.getCPtr(aArray), aArray);
   }
 
-  public int append(int aSize, SWIGTYPE_p_int aArray) {
-    return opensimModelJNI.ArrayInt_append__SWIG_2(swigCPtr, this, aSize, SWIGTYPE_p_int.getCPtr(aArray));
-  }
-
   public int insert(int aIndex, int aValue) {
     return opensimModelJNI.ArrayInt_insert(swigCPtr, this, aIndex, aValue);
   }
@@ -119,13 +95,8 @@ public class ArrayInt {
     opensimModelJNI.ArrayInt_set(swigCPtr, this, aIndex, aValue);
   }
 
-  public SWIGTYPE_p_int get() {
-    long cPtr = opensimModelJNI.ArrayInt_get__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_int(cPtr, false);
-  }
-
-  public SWIGTYPE_p_int get(int aIndex) {
-    return new SWIGTYPE_p_int(opensimModelJNI.ArrayInt_get__SWIG_1(swigCPtr, this, aIndex), false);
+  public int get(int aIndex) {
+    return opensimModelJNI.ArrayInt_get(swigCPtr, this, aIndex);
   }
 
   public int getitem(int index) {
@@ -136,8 +107,8 @@ public class ArrayInt {
     opensimModelJNI.ArrayInt_setitem(swigCPtr, this, index, val);
   }
 
-  public SWIGTYPE_p_int getLast() {
-    return new SWIGTYPE_p_int(opensimModelJNI.ArrayInt_getLast(swigCPtr, this), false);
+  public int getLast() {
+    return opensimModelJNI.ArrayInt_getLast(swigCPtr, this);
   }
 
   public int findIndex(int aValue) {

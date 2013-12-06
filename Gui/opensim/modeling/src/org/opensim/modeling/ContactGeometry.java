@@ -57,24 +57,8 @@ public class ContactGeometry extends ModelComponent {
     return opensimModelJNI.ContactGeometry_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_body_name(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ContactGeometry_PropertyIndex_body_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_body_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ContactGeometry_PropertyIndex_body_name_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_body_name(ContactGeometry source) {
     opensimModelJNI.ContactGeometry_copyProperty_body_name(swigCPtr, this, ContactGeometry.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_body_name() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ContactGeometry_getProperty_body_name(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_body_name() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.ContactGeometry_updProperty_body_name(swigCPtr, this), false);
   }
 
   public String get_body_name(int i) {
@@ -109,24 +93,8 @@ public class ContactGeometry extends ModelComponent {
     opensimModelJNI.ContactGeometry_set_body_name__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_location(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ContactGeometry_PropertyIndex_location_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_location() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ContactGeometry_PropertyIndex_location_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_location(ContactGeometry source) {
     opensimModelJNI.ContactGeometry_copyProperty_location(swigCPtr, this, ContactGeometry.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t getProperty_location() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.ContactGeometry_getProperty_location(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t updProperty_location() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.ContactGeometry_updProperty_location(swigCPtr, this), false);
   }
 
   public Vec3 get_location(int i) {
@@ -161,24 +129,8 @@ public class ContactGeometry extends ModelComponent {
     opensimModelJNI.ContactGeometry_set_location__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_orientation(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ContactGeometry_PropertyIndex_orientation_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_orientation() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ContactGeometry_PropertyIndex_orientation_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_orientation(ContactGeometry source) {
     opensimModelJNI.ContactGeometry_copyProperty_orientation(swigCPtr, this, ContactGeometry.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t getProperty_orientation() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.ContactGeometry_getProperty_orientation(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t updProperty_orientation() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.ContactGeometry_updProperty_orientation(swigCPtr, this), false);
   }
 
   public Vec3 get_orientation(int i) {
@@ -213,24 +165,8 @@ public class ContactGeometry extends ModelComponent {
     opensimModelJNI.ContactGeometry_set_orientation__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_display_preference(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ContactGeometry_PropertyIndex_display_preference_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_display_preference() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ContactGeometry_PropertyIndex_display_preference_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_display_preference(ContactGeometry source) {
     opensimModelJNI.ContactGeometry_copyProperty_display_preference(swigCPtr, this, ContactGeometry.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_int_t getProperty_display_preference() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_int_t(opensimModelJNI.ContactGeometry_getProperty_display_preference(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_int_t updProperty_display_preference() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_int_t(opensimModelJNI.ContactGeometry_updProperty_display_preference(swigCPtr, this), false);
   }
 
   public int get_display_preference(int i) {
@@ -265,24 +201,8 @@ public class ContactGeometry extends ModelComponent {
     opensimModelJNI.ContactGeometry_set_display_preference__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_color(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.ContactGeometry_PropertyIndex_color_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_color() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.ContactGeometry_PropertyIndex_color_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_color(ContactGeometry source) {
     opensimModelJNI.ContactGeometry_copyProperty_color(swigCPtr, this, ContactGeometry.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_color() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ContactGeometry_getProperty_color(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_color() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.ContactGeometry_updProperty_color(swigCPtr, this), false);
   }
 
   public double get_color(int i) {

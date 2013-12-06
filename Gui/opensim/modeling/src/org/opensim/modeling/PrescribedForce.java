@@ -57,24 +57,8 @@ public class PrescribedForce extends Force {
     return opensimModelJNI.PrescribedForce_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_body(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PrescribedForce_PropertyIndex_body_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_body() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PrescribedForce_PropertyIndex_body_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_body(PrescribedForce source) {
     opensimModelJNI.PrescribedForce_copyProperty_body(swigCPtr, this, PrescribedForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_body() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.PrescribedForce_getProperty_body(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_body() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.PrescribedForce_updProperty_body(swigCPtr, this), false);
   }
 
   public String get_body(int i) {
@@ -113,24 +97,8 @@ public class PrescribedForce extends Force {
     opensimModelJNI.PrescribedForce_set_body__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_pointIsGlobal(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PrescribedForce_PropertyIndex_pointIsGlobal_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_pointIsGlobal() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PrescribedForce_PropertyIndex_pointIsGlobal_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_pointIsGlobal(PrescribedForce source) {
     opensimModelJNI.PrescribedForce_copyProperty_pointIsGlobal(swigCPtr, this, PrescribedForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_pointIsGlobal() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.PrescribedForce_getProperty_pointIsGlobal(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_pointIsGlobal() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.PrescribedForce_updProperty_pointIsGlobal(swigCPtr, this), false);
   }
 
   public boolean get_pointIsGlobal(int i) {
@@ -165,24 +133,8 @@ public class PrescribedForce extends Force {
     opensimModelJNI.PrescribedForce_set_pointIsGlobal__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_forceIsGlobal(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PrescribedForce_PropertyIndex_forceIsGlobal_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_forceIsGlobal() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PrescribedForce_PropertyIndex_forceIsGlobal_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_forceIsGlobal(PrescribedForce source) {
     opensimModelJNI.PrescribedForce_copyProperty_forceIsGlobal(swigCPtr, this, PrescribedForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_forceIsGlobal() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.PrescribedForce_getProperty_forceIsGlobal(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_forceIsGlobal() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.PrescribedForce_updProperty_forceIsGlobal(swigCPtr, this), false);
   }
 
   public boolean get_forceIsGlobal(int i) {
@@ -217,24 +169,8 @@ public class PrescribedForce extends Force {
     opensimModelJNI.PrescribedForce_set_forceIsGlobal__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_forceFunctions(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PrescribedForce_PropertyIndex_forceFunctions_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_forceFunctions() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PrescribedForce_PropertyIndex_forceFunctions_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_forceFunctions(PrescribedForce source) {
     opensimModelJNI.PrescribedForce_copyProperty_forceFunctions(swigCPtr, this, PrescribedForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FunctionSet_t getProperty_forceFunctions() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FunctionSet_t(opensimModelJNI.PrescribedForce_getProperty_forceFunctions(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FunctionSet_t updProperty_forceFunctions() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FunctionSet_t(opensimModelJNI.PrescribedForce_updProperty_forceFunctions(swigCPtr, this), false);
   }
 
   public FunctionSet get_forceFunctions(int i) {
@@ -269,24 +205,8 @@ public class PrescribedForce extends Force {
     opensimModelJNI.PrescribedForce_set_forceFunctions__SWIG_1(swigCPtr, this, FunctionSet.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_pointFunctions(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PrescribedForce_PropertyIndex_pointFunctions_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_pointFunctions() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PrescribedForce_PropertyIndex_pointFunctions_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_pointFunctions(PrescribedForce source) {
     opensimModelJNI.PrescribedForce_copyProperty_pointFunctions(swigCPtr, this, PrescribedForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FunctionSet_t getProperty_pointFunctions() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FunctionSet_t(opensimModelJNI.PrescribedForce_getProperty_pointFunctions(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FunctionSet_t updProperty_pointFunctions() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FunctionSet_t(opensimModelJNI.PrescribedForce_updProperty_pointFunctions(swigCPtr, this), false);
   }
 
   public FunctionSet get_pointFunctions(int i) {
@@ -321,24 +241,8 @@ public class PrescribedForce extends Force {
     opensimModelJNI.PrescribedForce_set_pointFunctions__SWIG_1(swigCPtr, this, FunctionSet.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_torqueFunctions(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.PrescribedForce_PropertyIndex_torqueFunctions_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_torqueFunctions() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.PrescribedForce_PropertyIndex_torqueFunctions_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_torqueFunctions(PrescribedForce source) {
     opensimModelJNI.PrescribedForce_copyProperty_torqueFunctions(swigCPtr, this, PrescribedForce.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FunctionSet_t getProperty_torqueFunctions() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FunctionSet_t(opensimModelJNI.PrescribedForce_getProperty_torqueFunctions(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FunctionSet_t updProperty_torqueFunctions() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_OpenSim__FunctionSet_t(opensimModelJNI.PrescribedForce_updProperty_torqueFunctions(swigCPtr, this), false);
   }
 
   public FunctionSet get_torqueFunctions(int i) {

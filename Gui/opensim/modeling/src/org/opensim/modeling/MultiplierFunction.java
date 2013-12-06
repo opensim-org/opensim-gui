@@ -98,8 +98,8 @@ public class MultiplierFunction extends Function {
     return opensimModelJNI.MultiplierFunction_calcValue(swigCPtr, this, Vector.getCPtr(x), x);
   }
 
-  public double calcDerivative(SWIGTYPE_p_std__vectorT_int_t derivComponents, Vector x) {
-    return opensimModelJNI.MultiplierFunction_calcDerivative(swigCPtr, this, SWIGTYPE_p_std__vectorT_int_t.getCPtr(derivComponents), Vector.getCPtr(x), x);
+  public double calcDerivative(StdVecInt derivComponents, Vector x) {
+    return opensimModelJNI.MultiplierFunction_calcDerivative(swigCPtr, this, StdVecInt.getCPtr(derivComponents), derivComponents, Vector.getCPtr(x), x);
   }
 
   public int getArgumentSize() {

@@ -193,10 +193,6 @@ public class ArrayCoordinateReference {
     return new CoordinateReference(opensimModelJNI.ArrayCoordinateReference_back__SWIG_0(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_SimTK__ArrayView_T_OpenSim__CoordinateReference_unsigned_int_t updSubArray(long index, long length) {
-    return new SWIGTYPE_p_SimTK__ArrayView_T_OpenSim__CoordinateReference_unsigned_int_t(opensimModelJNI.ArrayCoordinateReference_updSubArray(swigCPtr, this, index, length), true);
-  }
-
   public void push_back(CoordinateReference value) {
     opensimModelJNI.ArrayCoordinateReference_push_back__SWIG_0(swigCPtr, this, CoordinateReference.getCPtr(value), value);
   }

@@ -57,24 +57,8 @@ public class JointInternalPowerProbe extends Probe {
     return opensimModelJNI.JointInternalPowerProbe_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_joint_names(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.JointInternalPowerProbe_PropertyIndex_joint_names_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_joint_names() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.JointInternalPowerProbe_PropertyIndex_joint_names_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_joint_names(JointInternalPowerProbe source) {
     opensimModelJNI.JointInternalPowerProbe_copyProperty_joint_names(swigCPtr, this, JointInternalPowerProbe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t getProperty_joint_names() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.JointInternalPowerProbe_getProperty_joint_names(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_std__string_t updProperty_joint_names() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_std__string_t(opensimModelJNI.JointInternalPowerProbe_updProperty_joint_names(swigCPtr, this), false);
   }
 
   public String get_joint_names(int i) {
@@ -97,24 +81,8 @@ public class JointInternalPowerProbe extends Probe {
     opensimModelJNI.JointInternalPowerProbe_constructProperty_joint_names(swigCPtr, this);
   }
 
-  public void setPropertyIndex_sum_powers_together(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.JointInternalPowerProbe_PropertyIndex_sum_powers_together_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_sum_powers_together() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.JointInternalPowerProbe_PropertyIndex_sum_powers_together_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_sum_powers_together(JointInternalPowerProbe source) {
     opensimModelJNI.JointInternalPowerProbe_copyProperty_sum_powers_together(swigCPtr, this, JointInternalPowerProbe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_sum_powers_together() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.JointInternalPowerProbe_getProperty_sum_powers_together(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_sum_powers_together() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.JointInternalPowerProbe_updProperty_sum_powers_together(swigCPtr, this), false);
   }
 
   public boolean get_sum_powers_together(int i) {
@@ -149,24 +117,8 @@ public class JointInternalPowerProbe extends Probe {
     opensimModelJNI.JointInternalPowerProbe_set_sum_powers_together__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_exponent(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.JointInternalPowerProbe_PropertyIndex_exponent_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_exponent() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.JointInternalPowerProbe_PropertyIndex_exponent_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_exponent(JointInternalPowerProbe source) {
     opensimModelJNI.JointInternalPowerProbe_copyProperty_exponent(swigCPtr, this, JointInternalPowerProbe.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t getProperty_exponent() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.JointInternalPowerProbe_getProperty_exponent(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_double_t updProperty_exponent() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_double_t(opensimModelJNI.JointInternalPowerProbe_updProperty_exponent(swigCPtr, this), false);
   }
 
   public double get_exponent(int i) {

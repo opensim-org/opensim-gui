@@ -39,12 +39,8 @@ public class Stage {
     this(opensimModelJNI.new_Stage__SWIG_0(), true);
   }
 
-  public Stage(Stage.Level l) {
-    this(opensimModelJNI.new_Stage__SWIG_1(l.swigValue()), true);
-  }
-
   public Stage(int l) {
-    this(opensimModelJNI.new_Stage__SWIG_2(l), true);
+    this(opensimModelJNI.new_Stage__SWIG_1(l), true);
   }
 
   public Stage next() {

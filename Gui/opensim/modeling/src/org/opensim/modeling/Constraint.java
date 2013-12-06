@@ -57,24 +57,8 @@ public class Constraint extends ModelComponent {
     return opensimModelJNI.Constraint_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_isDisabled(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelJNI.Constraint_PropertyIndex_isDisabled_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_isDisabled() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.Constraint_PropertyIndex_isDisabled_get(swigCPtr, this), true);
-  }
-
   public void copyProperty_isDisabled(Constraint source) {
     opensimModelJNI.Constraint_copyProperty_isDisabled(swigCPtr, this, Constraint.getCPtr(source), source);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t getProperty_isDisabled() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Constraint_getProperty_isDisabled(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_OpenSim__PropertyT_bool_t updProperty_isDisabled() {
-    return new SWIGTYPE_p_OpenSim__PropertyT_bool_t(opensimModelJNI.Constraint_updProperty_isDisabled(swigCPtr, this), false);
   }
 
   public boolean get_isDisabled(int i) {
