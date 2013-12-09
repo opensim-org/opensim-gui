@@ -143,6 +143,10 @@ public class PathPoint extends OpenSimObject {
     opensimModelJNI.PathPoint_getVelocity(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(aVelocity), aVelocity);
   }
 
+  public Vec3 getdPointdQ(State s) {
+    return new Vec3(opensimModelJNI.PathPoint_getdPointdQ(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
   public VisibleObject getDisplayer() {
     long cPtr = opensimModelJNI.PathPoint_getDisplayer(swigCPtr, this);
     return (cPtr == 0) ? null : new VisibleObject(cPtr, false);

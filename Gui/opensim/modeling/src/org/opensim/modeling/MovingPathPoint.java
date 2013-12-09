@@ -92,6 +92,10 @@ public class MovingPathPoint extends PathPoint {
     return (cPtr == 0) ? null : new Coordinate(cPtr, false);
   }
 
+  public Vec3 getdPointdQ(State s) {
+    return new Vec3(opensimModelJNI.MovingPathPoint_getdPointdQ(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
   public String getXCoordinateName() {
     return opensimModelJNI.MovingPathPoint_getXCoordinateName(swigCPtr, this);
   }

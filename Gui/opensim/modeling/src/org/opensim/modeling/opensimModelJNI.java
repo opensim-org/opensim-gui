@@ -6370,6 +6370,7 @@ public class opensimModelJNI {
   public final static native void PathPoint_connectToModelAndPath(long jarg1, PathPoint jarg1_, long jarg2, Model jarg2_, long jarg3, GeometryPath jarg3_);
   public final static native void PathPoint_update(long jarg1, PathPoint jarg1_, long jarg2, State jarg2_);
   public final static native void PathPoint_getVelocity(long jarg1, PathPoint jarg1_, long jarg2, State jarg2_, long jarg3, Vec3 jarg3_);
+  public final static native long PathPoint_getdPointdQ(long jarg1, PathPoint jarg1_, long jarg2, State jarg2_);
   public final static native long PathPoint_getDisplayer(long jarg1, PathPoint jarg1_);
   public final static native long PathPoint_updDisplayer(long jarg1, PathPoint jarg1_);
   public final static native void PathPoint_updateGeometry(long jarg1, PathPoint jarg1_);
@@ -6418,6 +6419,7 @@ public class opensimModelJNI {
   public final static native long MovingPathPoint_getXCoordinate(long jarg1, MovingPathPoint jarg1_);
   public final static native long MovingPathPoint_getYCoordinate(long jarg1, MovingPathPoint jarg1_);
   public final static native long MovingPathPoint_getZCoordinate(long jarg1, MovingPathPoint jarg1_);
+  public final static native long MovingPathPoint_getdPointdQ(long jarg1, MovingPathPoint jarg1_, long jarg2, State jarg2_);
   public final static native String MovingPathPoint_getXCoordinateName(long jarg1, MovingPathPoint jarg1_);
   public final static native String MovingPathPoint_getYCoordinateName(long jarg1, MovingPathPoint jarg1_);
   public final static native String MovingPathPoint_getZCoordinateName(long jarg1, MovingPathPoint jarg1_);
@@ -6551,8 +6553,6 @@ public class opensimModelJNI {
   public final static native String GeometryPath_getConcreteClassName(long jarg1, GeometryPath jarg1_);
   public final static native long new_GeometryPath();
   public final static native void delete_GeometryPath(long jarg1);
-  public final static native void GeometryPath_setName(long jarg1, GeometryPath jarg1_, String jarg2);
-  public final static native void GeometryPath_copyData(long jarg1, GeometryPath jarg1_, long jarg2, GeometryPath jarg2_);
   public final static native long GeometryPath_getPathPointSet(long jarg1, GeometryPath jarg1_);
   public final static native long GeometryPath_updPathPointSet(long jarg1, GeometryPath jarg1_);
   public final static native long GeometryPath_getWrapSet(long jarg1, GeometryPath jarg1_);
@@ -6580,7 +6580,7 @@ public class opensimModelJNI {
   public final static native double GeometryPath_getLengtheningSpeed(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_);
   public final static native void GeometryPath_setLengtheningSpeed(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, double jarg3);
   public final static native void GeometryPath_getPointForceDirections(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, long jarg3, ArrayPointForceDirection jarg3_);
-  public final static native void GeometryPath_addInEquivalentForcesOnBodies(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, double jarg3, long jarg4, VectorOfSpatialVec jarg4_);
+  public final static native void GeometryPath_addInEquivalentForces(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, double jarg3, long jarg4, VectorOfSpatialVec jarg4_, long jarg5, Vector jarg5_);
   public final static native double GeometryPath_computeMomentArm(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, long jarg3, Coordinate jarg3_);
   public final static native void GeometryPath_preScale(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native void GeometryPath_scale(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);

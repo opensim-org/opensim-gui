@@ -61,14 +61,6 @@ public class GeometryPath extends ModelComponent {
     this(opensimModelJNI.new_GeometryPath(), true);
   }
 
-  public void setName(String aName) {
-    opensimModelJNI.GeometryPath_setName(swigCPtr, this, aName);
-  }
-
-  public void copyData(GeometryPath aPath) {
-    opensimModelJNI.GeometryPath_copyData(swigCPtr, this, GeometryPath.getCPtr(aPath), aPath);
-  }
-
   public PathPointSet getPathPointSet() {
     return new PathPointSet(opensimModelJNI.GeometryPath_getPathPointSet(swigCPtr, this), false);
   }
@@ -180,8 +172,8 @@ public class GeometryPath extends ModelComponent {
     opensimModelJNI.GeometryPath_getPointForceDirections(swigCPtr, this, State.getCPtr(s), s, ArrayPointForceDirection.getCPtr(rPFDs), rPFDs);
   }
 
-  public void addInEquivalentForcesOnBodies(State state, double tension, VectorOfSpatialVec bodyForces) {
-    opensimModelJNI.GeometryPath_addInEquivalentForcesOnBodies(swigCPtr, this, State.getCPtr(state), state, tension, VectorOfSpatialVec.getCPtr(bodyForces), bodyForces);
+  public void addInEquivalentForces(State state, double tension, VectorOfSpatialVec bodyForces, Vector mobilityForces) {
+    opensimModelJNI.GeometryPath_addInEquivalentForces(swigCPtr, this, State.getCPtr(state), state, tension, VectorOfSpatialVec.getCPtr(bodyForces), bodyForces, Vector.getCPtr(mobilityForces), mobilityForces);
   }
 
   public double computeMomentArm(State s, Coordinate aCoord) {
