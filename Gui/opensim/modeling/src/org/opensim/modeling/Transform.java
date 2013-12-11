@@ -39,20 +39,20 @@ public class Transform {
     this(opensimModelJNI.new_Transform__SWIG_0(), true);
   }
 
-  public Transform(SWIGTYPE_p_Rotation_T_double_t R, Vec3 p) {
-    this(opensimModelJNI.new_Transform__SWIG_1(SWIGTYPE_p_Rotation_T_double_t.getCPtr(R), Vec3.getCPtr(p), p), true);
+  public Transform(Rotation R, Vec3 p) {
+    this(opensimModelJNI.new_Transform__SWIG_1(Rotation.getCPtr(R), R, Vec3.getCPtr(p), p), true);
   }
 
-  public Transform(SWIGTYPE_p_Rotation_T_double_t R) {
-    this(opensimModelJNI.new_Transform__SWIG_2(SWIGTYPE_p_Rotation_T_double_t.getCPtr(R)), true);
+  public Transform(Rotation R) {
+    this(opensimModelJNI.new_Transform__SWIG_2(Rotation.getCPtr(R), R), true);
   }
 
   public Transform(Vec3 p) {
     this(opensimModelJNI.new_Transform__SWIG_3(Vec3.getCPtr(p), p), true);
   }
 
-  public Transform set(SWIGTYPE_p_Rotation_T_double_t R, Vec3 p) {
-    return new Transform(opensimModelJNI.Transform_set(swigCPtr, this, SWIGTYPE_p_Rotation_T_double_t.getCPtr(R), Vec3.getCPtr(p), p), false);
+  public Transform set(Rotation R, Vec3 p) {
+    return new Transform(opensimModelJNI.Transform_set(swigCPtr, this, Rotation.getCPtr(R), R, Vec3.getCPtr(p), p), false);
   }
 
   public Transform setToZero() {
@@ -95,32 +95,16 @@ public class Transform {
     return new Vec3(opensimModelJNI.Transform_shiftBaseStationToFrame(swigCPtr, this, Vec3.getCPtr(sB), sB), true);
   }
 
-  public SWIGTYPE_p_Rotation_T_double_t R() {
-    return new SWIGTYPE_p_Rotation_T_double_t(opensimModelJNI.Transform_R(swigCPtr, this), false);
+  public Rotation R() {
+    return new Rotation(opensimModelJNI.Transform_R(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_Rotation_T_double_t updR() {
-    return new SWIGTYPE_p_Rotation_T_double_t(opensimModelJNI.Transform_updR(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_Rotation_T_double_t__ColType x() {
-    return new SWIGTYPE_p_Rotation_T_double_t__ColType(opensimModelJNI.Transform_x(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_Rotation_T_double_t__ColType y() {
-    return new SWIGTYPE_p_Rotation_T_double_t__ColType(opensimModelJNI.Transform_y(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_Rotation_T_double_t__ColType z() {
-    return new SWIGTYPE_p_Rotation_T_double_t__ColType(opensimModelJNI.Transform_z(swigCPtr, this), false);
+  public InverseRotation RInv() {
+    return new InverseRotation(opensimModelJNI.Transform_RInv(swigCPtr, this), false);
   }
 
   public Vec3 p() {
     return new Vec3(opensimModelJNI.Transform_p(swigCPtr, this), false);
-  }
-
-  public Vec3 updP() {
-    return new Vec3(opensimModelJNI.Transform_updP(swigCPtr, this), false);
   }
 
   public Transform setP(Vec3 p) {
@@ -149,10 +133,6 @@ public class Transform {
 
   public Vec3 T() {
     return new Vec3(opensimModelJNI.Transform_T(swigCPtr, this), false);
-  }
-
-  public Vec3 updT() {
-    return new Vec3(opensimModelJNI.Transform_updT(swigCPtr, this), false);
   }
 
 }

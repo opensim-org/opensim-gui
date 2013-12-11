@@ -131,18 +131,6 @@ public class Mat33 {
     opensimModelJNI.Mat33_setToZero(swigCPtr, this);
   }
 
-  public static Mat33 getAs(SWIGTYPE_p_double p) {
-    return new Mat33(opensimModelJNI.Mat33_getAs(SWIGTYPE_p_double.getCPtr(p)), false);
-  }
-
-  public static Mat33 updAs(SWIGTYPE_p_double p) {
-    return new Mat33(opensimModelJNI.Mat33_updAs(SWIGTYPE_p_double.getCPtr(p)), false);
-  }
-
-  public static SWIGTYPE_p_SimTK__MatT_3_3_double_3_1_t getNaN() {
-    return new SWIGTYPE_p_SimTK__MatT_3_3_double_3_1_t(opensimModelJNI.Mat33_getNaN(), true);
-  }
-
   public boolean isNaN() {
     return opensimModelJNI.Mat33_isNaN(swigCPtr, this);
   }
