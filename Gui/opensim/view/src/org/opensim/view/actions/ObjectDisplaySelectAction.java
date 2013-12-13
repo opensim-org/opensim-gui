@@ -71,4 +71,9 @@ public final class ObjectDisplaySelectAction extends CallableSystemAction  {
         return HelpCtx.DEFAULT_HELP;
     }
 
+    @Override
+    protected boolean asynchronous() {
+        return false; //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
