@@ -26,6 +26,7 @@
 package org.opensim.view.motions;
 
 import java.awt.Component;
+import javax.swing.JToolBar;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
@@ -55,7 +56,9 @@ public final class ShowMotionSliderAction extends CallableSystemAction {
    }
 
    public Component getToolbarPresenter() {
-      return new MotionControlJPanel();
+      JToolBar tb =  new JToolBar();
+      tb.add(new MotionControlJPanel());
+      return tb;
    }
    
 }
