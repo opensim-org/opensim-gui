@@ -46,9 +46,9 @@ public final class FileLoadDataAction extends CallableSystemAction {
     static int nextNumber=0;
     public void performAction() {
         // TODO implement action body
-        String fileName = FileUtils.getInstance().browseForFilename(".trc,.mot", "Experimental data file");
+        String fileName = FileUtils.getInstance().browseForFilename(".trc,.mot,.sto", "Experimental data file");
         if (fileName != null){
-            if (fileName.endsWith(".trc")){
+            if (fileName.endsWith(".trc") || fileName.endsWith(".sto")){
                 MarkerData markerData;
                 try {
                     markerData = new MarkerData(fileName);
