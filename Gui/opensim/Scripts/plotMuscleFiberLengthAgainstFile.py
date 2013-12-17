@@ -25,7 +25,7 @@
 # that is included with the OpenSim distribution
 
 # Load the model BothLegs.osim
-filepath = getInstallDir() + "/Models/BothLegs/BothLegs.osim";
+filepath = getInstallDir() + "/Models/Gait2392_simbody/gait2392_simbody.osim";
 loadModel(filepath);
 
 # Create a plotter panel and set the title
@@ -38,7 +38,7 @@ crv1.setLegend("RF_BothLegs")
 crv2.setLegend("VASINT_BothLegs")
 
 # Load data from an external data source and plot
-src = addDataSource(plotterPanel, getScriptsDir()+"/testData/Subject01_FiberLengths.sto")
+src = addDataSource(plotterPanel, getScriptsDir()+"/GUI_Scripting/testData/Subject01_FiberLengths.sto")
 crv3 = addCurve(plotterPanel, src, "knee_angle_r", "rect_fem_r")
 crv4 = addCurve(plotterPanel, src, "knee_angle_r", "vas_int_r")
 crv3.setLegend("RF_Subject01")
@@ -61,4 +61,4 @@ plotterPanel.setYAxisLabel("Fiber Length (m)");
 # plotterPanel.setAxesLabels("Knee angle (deg)","Fiber length (mm)")
 
 # Export the data in the plotter window to a file
-exportData(plotterPanel, getScriptsDir()+"/testData/cvs_export.sto")
+exportData(plotterPanel, getScriptsDir()+"/GUI_Scripting/testData/cvs_export.sto")

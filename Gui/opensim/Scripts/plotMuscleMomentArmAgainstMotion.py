@@ -28,13 +28,13 @@
 # that is included with the OpenSim distribution
 
 # Load the model BothLegs.osim
-filepath = getInstallDir() + "/Models/BothLegs/BothLegs.osim";
+filepath = getInstallDir() + "/Models/Gait2392_Simbody/gait2392_simbody.osim";
 loadModel(filepath);
 
 # Create a plotter panel and set the title
 plotterPanel = createPlotterPanel("Plot Example")
 
-motionfilePath = getInstallDir() + "/Models/BothLegs/BothLegsWalk.mot"
+motionfilePath = getInstallDir() + "/Models/Gait2392_Simbody/subject01_walk1.mot"
 motSrc = addMotionSource(plotterPanel, motionfilePath)
 
 # Plot MomentArm of RF, VASINT about r_knee_angle through the motion

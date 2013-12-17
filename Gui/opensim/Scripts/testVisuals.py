@@ -24,7 +24,7 @@
 # femur transparent, and aligns the model view with the x axis.
 
 # Load model
-loadModel(getInstallDir()+"/Models/BothLegs/BothLegs.osim")
+loadModel(getInstallDir()+"/Models/Gait2392_Simbody/gait2392_simbody.osim")
 
 # Get a handle to the current model (the one just loaded)
 model = getCurrentModel()
@@ -34,7 +34,7 @@ pelvis = findObject(model, "Body", "pelvis")
 setObjectColor(pelvis, [0.0, 0.0, 1.0])
 
 # Make femur half transparent
-femur = findObject(model, "Body", "femur") 
+femur = findObject(model, "Body", "femur_r") 
 setObjectOpacity(femur, 0.5)
 
 # Orient view along x axis

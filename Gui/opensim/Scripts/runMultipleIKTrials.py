@@ -39,7 +39,7 @@ print "Acquiring folders with marker data"
 
 trcDataFolder = "thisdirectorydoesnotexist";
 # Uncomment the following line to manually assign directory.
-#trcDataFolder = getScriptsDir()+"/testData/Subject01/Marker_Data/"
+trcDataFolder = getScriptsDir()+"/GUI_Scripting/testData/Subject01/Marker_Data/"
 
 # Prompts user to select directory if above does not exist
 if not os.path.exists(trcDataFolder):
@@ -50,7 +50,7 @@ print trcDataFolder
 print "Acquiring setup file"
 
 # Prompts user to select file if above does not exist
-setupFile = getScriptsDir()+"/testData/Subject01/Generic_Setup_leg39_InverseKinematics.xml"
+setupFile = getScriptsDir()+"/GUI_Scripting/testData/Subject01/Generic_Setup_leg39_InverseKinematics.xml"
 if not os.path.exists(setupFile):
 	setupFile = utils.FileUtils.getInstance().browseForFilename(".xml", "Select the setup file for the IK tool", 1)
 print setupFile
@@ -58,7 +58,7 @@ print setupFile
 # Select folder to store output results
 print "Acquiring folder to store the IK results output files"
 
-resultsFolder = getScriptsDir()+"/testData/Subject01/IK_Results/"
+resultsFolder = getScriptsDir()+"/GUI_Scripting/testData/Subject01/IK_Results/"
 if not os.path.exists(resultsFolder):
 	resultsFolder = utils.FileUtils.getInstance().browseForFolder("Select the folder to store the IK results output files");
 print resultsFolder
@@ -69,7 +69,7 @@ ikTool = modeling.InverseKinematicsTool(setupFile)
 
 # Load the model to be used and and initialize
 print "Acquiring model"
-modelFile = getScriptsDir()+"/testData/Subject01/Subject01.osim"
+modelFile = getScriptsDir()+"/GUI_Scripting/testData/Subject01/Subject01.osim"
 if not os.path.exists(modelFile):
 	modelFile = utils.FileUtils.getInstance().browseForFilename(".osim", "Select the Model", 1)
 
