@@ -90,7 +90,7 @@ import vtk.vtkProp;
 
 public class MotionDisplayer implements SelectionListener {
 
-    double[] defaultExperimentalMarkerColor = new double[]{0.0, 0.0, 1.0};
+    double[] defaultExperimentalMarkerColor = new double[]{0.0, 0.35, 0.65};
     private double[] defaultForceColor = new double[]{0., 1.0, 0.};
      /**
      * @return the associatedMotions
