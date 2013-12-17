@@ -93,8 +93,8 @@ public class ControlConstant extends Control {
     return opensimModelJNI.ControlConstant_getParameterList__SWIG_1(swigCPtr, this, aT1, aT2, ArrayInt.getCPtr(rList), rList);
   }
 
-  public void setParameterValue(int aI, double aP) {
-    opensimModelJNI.ControlConstant_setParameterValue(swigCPtr, this, aI, aP);
+  public void setParameterValue(int aI, double aX) {
+    opensimModelJNI.ControlConstant_setParameterValue(swigCPtr, this, aI, aX);
   }
 
   public double getParameterValue(int aI) {

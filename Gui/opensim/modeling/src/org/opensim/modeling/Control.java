@@ -93,8 +93,8 @@ public class Control extends OpenSimObject {
     return opensimModelJNI.Control_getDefaultParameterMin(swigCPtr, this);
   }
 
-  public void setDefaultParameterMax(double aMin) {
-    opensimModelJNI.Control_setDefaultParameterMax(swigCPtr, this, aMin);
+  public void setDefaultParameterMax(double aMax) {
+    opensimModelJNI.Control_setDefaultParameterMax(swigCPtr, this, aMax);
   }
 
   public double getDefaultParameterMax() {
@@ -137,8 +137,8 @@ public class Control extends OpenSimObject {
     return opensimModelJNI.Control_getParameterValue(swigCPtr, this, aI);
   }
 
-  public void setParameterValue(int aI, double aP) {
-    opensimModelJNI.Control_setParameterValue(swigCPtr, this, aI, aP);
+  public void setParameterValue(int aI, double aX) {
+    opensimModelJNI.Control_setParameterValue(swigCPtr, this, aI, aX);
   }
 
   public double getControlValue(double aT) {
@@ -161,8 +161,8 @@ public class Control extends OpenSimObject {
     return opensimModelJNI.Control_getControlValueMin__SWIG_1(swigCPtr, this);
   }
 
-  public void setControlValueMin(double aT, double aX) {
-    opensimModelJNI.Control_setControlValueMin(swigCPtr, this, aT, aX);
+  public void setControlValueMin(double aT, double aMin) {
+    opensimModelJNI.Control_setControlValueMin(swigCPtr, this, aT, aMin);
   }
 
   public double getControlValueMax(double aT) {
@@ -173,8 +173,8 @@ public class Control extends OpenSimObject {
     return opensimModelJNI.Control_getControlValueMax__SWIG_1(swigCPtr, this);
   }
 
-  public void setControlValueMax(double aT, double aX) {
-    opensimModelJNI.Control_setControlValueMax(swigCPtr, this, aT, aX);
+  public void setControlValueMax(double aT, double aMax) {
+    opensimModelJNI.Control_setControlValueMax(swigCPtr, this, aT, aMax);
   }
 
   public double getFirstTime() {

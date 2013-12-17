@@ -249,8 +249,8 @@ public class TendonForceLengthCurve extends Function {
     opensimModelJNI.TendonForceLengthCurve_setStrainAtOneNormForce(swigCPtr, this, aStrainAtOneNormForce);
   }
 
-  public void setOptionalProperties(double aStiffnessAtOneNormForce, double aNormForceAtToeEnd, double aCurviness) {
-    opensimModelJNI.TendonForceLengthCurve_setOptionalProperties(swigCPtr, this, aStiffnessAtOneNormForce, aNormForceAtToeEnd, aCurviness);
+  public void setOptionalProperties(double stiffnessAtOneNormForce, double normForceAtToeEnd, double curviness) {
+    opensimModelJNI.TendonForceLengthCurve_setOptionalProperties(swigCPtr, this, stiffnessAtOneNormForce, normForceAtToeEnd, curviness);
   }
 
   public double calcValue(Vector x) {

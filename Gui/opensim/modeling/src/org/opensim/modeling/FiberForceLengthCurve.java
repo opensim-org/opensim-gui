@@ -285,8 +285,8 @@ public class FiberForceLengthCurve extends Function {
     opensimModelJNI.FiberForceLengthCurve_setCurveStrains(swigCPtr, this, aStrainAtZeroForce, aStrainAtOneNormForce);
   }
 
-  public void setOptionalProperties(double aStiffnessAtLowForce, double aStiffnessAtOneNormForce, double aCurviness) {
-    opensimModelJNI.FiberForceLengthCurve_setOptionalProperties(swigCPtr, this, aStiffnessAtLowForce, aStiffnessAtOneNormForce, aCurviness);
+  public void setOptionalProperties(double stiffnessAtLowForce, double stiffnessAtOneNormForce, double curviness) {
+    opensimModelJNI.FiberForceLengthCurve_setOptionalProperties(swigCPtr, this, stiffnessAtLowForce, stiffnessAtOneNormForce, curviness);
   }
 
   public double calcValue(Vector x) {
