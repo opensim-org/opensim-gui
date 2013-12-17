@@ -70,8 +70,8 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
         setShortDescription(bundle.getString("HINT_ExperimentalMarkerSetNode"));
         this.dMotion=dMotion;
         createChildren();
-        motionDisplayer= dMotion.getMotionDisplayer();
-        markersDisplayer = motionDisplayer.getMarkersRep();
+        //motionDisplayer= dMotion.getMotionDisplayer();
+        //markersDisplayer = motionDisplayer.getMarkersRep();
     }
     
     public String getHtmlDisplayName() {
@@ -166,6 +166,8 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
     
     public Color getColor()
     {
+        if (motionDisplayer==null)
+            motionDisplayer = dMotion.getMotionDisplayer();
         if (markersDisplayer==null)
             markersDisplayer = motionDisplayer.getMarkersRep();
         return markersDisplayer.getColor();
@@ -200,6 +202,8 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
 
     public double getMarkerScaleFactor()
     {
+        if (motionDisplayer==null)
+            motionDisplayer = dMotion.getMotionDisplayer();
         if (markersDisplayer==null)
             markersDisplayer = motionDisplayer.getMarkersRep();
         return markersDisplayer.getScaleFactor();

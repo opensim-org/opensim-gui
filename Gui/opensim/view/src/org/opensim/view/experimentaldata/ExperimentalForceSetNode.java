@@ -66,8 +66,15 @@ public class ExperimentalForceSetNode extends OpenSimNode {
         setDisplayName(nodeName);
         setShortDescription(bundle.getString("HINT_ExperimentalForceSetNode"));
         this.dMotion=dMotion;
-        forcesDisplayer = dMotion.getMotionDisplayer().getGroundForcesRep();
+        connectForceDisplayer(dMotion);
         createChildren();
+    }
+
+    private void connectForceDisplayer(AnnotatedMotion dMotion) {
+        if (forcesDisplayer==null){
+            if (dMotion.getMotionDisplayer()!= null)
+                forcesDisplayer = dMotion.getMotionDisplayer().getGroundForcesRep();
+        }
     }
     
     public String getHtmlDisplayName() {
@@ -164,7 +171,7 @@ public class ExperimentalForceSetNode extends OpenSimNode {
     public Color getColor()
     {
         if (forcesDisplayer==null)
-            forcesDisplayer = dMotion.getMotionDisplayer().getGroundForcesRep();
+            connectForceDisplayer(dMotion);
         return forcesDisplayer.getColor();
     }
    
@@ -198,7 +205,7 @@ public class ExperimentalForceSetNode extends OpenSimNode {
     public double getForceScaleFactor()
     {
         if (forcesDisplayer==null)
-            forcesDisplayer = dMotion.getMotionDisplayer().getGroundForcesRep();
+            connectForceDisplayer(dMotion);
         return forcesDisplayer.getScaleFactor();
     }
 
