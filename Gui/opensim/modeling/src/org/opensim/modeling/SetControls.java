@@ -81,34 +81,6 @@ public class SetControls extends OpenSimObject {
     opensimModelJNI.SetControls_setMemoryOwner(swigCPtr, this, aTrueFalse);
   }
 
-  public boolean getMemoryOwner() {
-    return opensimModelJNI.SetControls_getMemoryOwner(swigCPtr, this);
-  }
-
-  public boolean computeNewCapacity(int aMinCapacity, SWIGTYPE_p_int rNewCapacity) {
-    return opensimModelJNI.SetControls_computeNewCapacity(swigCPtr, this, aMinCapacity, SWIGTYPE_p_int.getCPtr(rNewCapacity));
-  }
-
-  public boolean ensureCapacity(int aCapacity) {
-    return opensimModelJNI.SetControls_ensureCapacity(swigCPtr, this, aCapacity);
-  }
-
-  public void trim() {
-    opensimModelJNI.SetControls_trim(swigCPtr, this);
-  }
-
-  public int getCapacity() {
-    return opensimModelJNI.SetControls_getCapacity(swigCPtr, this);
-  }
-
-  public void setCapacityIncrement(int aIncrement) {
-    opensimModelJNI.SetControls_setCapacityIncrement(swigCPtr, this, aIncrement);
-  }
-
-  public int getCapacityIncrement() {
-    return opensimModelJNI.SetControls_getCapacityIncrement(swigCPtr, this);
-  }
-
   public boolean setSize(int aSize) {
     return opensimModelJNI.SetControls_setSize(swigCPtr, this, aSize);
   }
@@ -183,27 +155,6 @@ public class SetControls extends OpenSimObject {
 
   public void getNames(ArrayStr rNames) {
     opensimModelJNI.SetControls_getNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
-  }
-
-  public Control getLast() {
-    long cPtr = opensimModelJNI.SetControls_getLast(swigCPtr, this);
-    return (cPtr == 0) ? null : new Control(cPtr, false);
-  }
-
-  public int searchBinary(Control aObject, boolean aFindFirst, int aLo, int aHi) {
-    return opensimModelJNI.SetControls_searchBinary__SWIG_0(swigCPtr, this, Control.getCPtr(aObject), aObject, aFindFirst, aLo, aHi);
-  }
-
-  public int searchBinary(Control aObject, boolean aFindFirst, int aLo) {
-    return opensimModelJNI.SetControls_searchBinary__SWIG_1(swigCPtr, this, Control.getCPtr(aObject), aObject, aFindFirst, aLo);
-  }
-
-  public int searchBinary(Control aObject, boolean aFindFirst) {
-    return opensimModelJNI.SetControls_searchBinary__SWIG_2(swigCPtr, this, Control.getCPtr(aObject), aObject, aFindFirst);
-  }
-
-  public int searchBinary(Control aObject) {
-    return opensimModelJNI.SetControls_searchBinary__SWIG_3(swigCPtr, this, Control.getCPtr(aObject), aObject);
   }
 
   public int getNumGroups() {

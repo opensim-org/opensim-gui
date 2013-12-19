@@ -81,34 +81,6 @@ public class SetPathWrap extends OpenSimObject {
     opensimModelJNI.SetPathWrap_setMemoryOwner(swigCPtr, this, aTrueFalse);
   }
 
-  public boolean getMemoryOwner() {
-    return opensimModelJNI.SetPathWrap_getMemoryOwner(swigCPtr, this);
-  }
-
-  public boolean computeNewCapacity(int aMinCapacity, SWIGTYPE_p_int rNewCapacity) {
-    return opensimModelJNI.SetPathWrap_computeNewCapacity(swigCPtr, this, aMinCapacity, SWIGTYPE_p_int.getCPtr(rNewCapacity));
-  }
-
-  public boolean ensureCapacity(int aCapacity) {
-    return opensimModelJNI.SetPathWrap_ensureCapacity(swigCPtr, this, aCapacity);
-  }
-
-  public void trim() {
-    opensimModelJNI.SetPathWrap_trim(swigCPtr, this);
-  }
-
-  public int getCapacity() {
-    return opensimModelJNI.SetPathWrap_getCapacity(swigCPtr, this);
-  }
-
-  public void setCapacityIncrement(int aIncrement) {
-    opensimModelJNI.SetPathWrap_setCapacityIncrement(swigCPtr, this, aIncrement);
-  }
-
-  public int getCapacityIncrement() {
-    return opensimModelJNI.SetPathWrap_getCapacityIncrement(swigCPtr, this);
-  }
-
   public boolean setSize(int aSize) {
     return opensimModelJNI.SetPathWrap_setSize(swigCPtr, this, aSize);
   }
@@ -183,27 +155,6 @@ public class SetPathWrap extends OpenSimObject {
 
   public void getNames(ArrayStr rNames) {
     opensimModelJNI.SetPathWrap_getNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
-  }
-
-  public PathWrap getLast() {
-    long cPtr = opensimModelJNI.SetPathWrap_getLast(swigCPtr, this);
-    return (cPtr == 0) ? null : new PathWrap(cPtr, false);
-  }
-
-  public int searchBinary(PathWrap aObject, boolean aFindFirst, int aLo, int aHi) {
-    return opensimModelJNI.SetPathWrap_searchBinary__SWIG_0(swigCPtr, this, PathWrap.getCPtr(aObject), aObject, aFindFirst, aLo, aHi);
-  }
-
-  public int searchBinary(PathWrap aObject, boolean aFindFirst, int aLo) {
-    return opensimModelJNI.SetPathWrap_searchBinary__SWIG_1(swigCPtr, this, PathWrap.getCPtr(aObject), aObject, aFindFirst, aLo);
-  }
-
-  public int searchBinary(PathWrap aObject, boolean aFindFirst) {
-    return opensimModelJNI.SetPathWrap_searchBinary__SWIG_2(swigCPtr, this, PathWrap.getCPtr(aObject), aObject, aFindFirst);
-  }
-
-  public int searchBinary(PathWrap aObject) {
-    return opensimModelJNI.SetPathWrap_searchBinary__SWIG_3(swigCPtr, this, PathWrap.getCPtr(aObject), aObject);
   }
 
   public int getNumGroups() {

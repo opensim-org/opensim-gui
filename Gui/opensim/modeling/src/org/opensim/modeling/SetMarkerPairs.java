@@ -81,34 +81,6 @@ public class SetMarkerPairs extends OpenSimObject {
     opensimModelJNI.SetMarkerPairs_setMemoryOwner(swigCPtr, this, aTrueFalse);
   }
 
-  public boolean getMemoryOwner() {
-    return opensimModelJNI.SetMarkerPairs_getMemoryOwner(swigCPtr, this);
-  }
-
-  public boolean computeNewCapacity(int aMinCapacity, SWIGTYPE_p_int rNewCapacity) {
-    return opensimModelJNI.SetMarkerPairs_computeNewCapacity(swigCPtr, this, aMinCapacity, SWIGTYPE_p_int.getCPtr(rNewCapacity));
-  }
-
-  public boolean ensureCapacity(int aCapacity) {
-    return opensimModelJNI.SetMarkerPairs_ensureCapacity(swigCPtr, this, aCapacity);
-  }
-
-  public void trim() {
-    opensimModelJNI.SetMarkerPairs_trim(swigCPtr, this);
-  }
-
-  public int getCapacity() {
-    return opensimModelJNI.SetMarkerPairs_getCapacity(swigCPtr, this);
-  }
-
-  public void setCapacityIncrement(int aIncrement) {
-    opensimModelJNI.SetMarkerPairs_setCapacityIncrement(swigCPtr, this, aIncrement);
-  }
-
-  public int getCapacityIncrement() {
-    return opensimModelJNI.SetMarkerPairs_getCapacityIncrement(swigCPtr, this);
-  }
-
   public boolean setSize(int aSize) {
     return opensimModelJNI.SetMarkerPairs_setSize(swigCPtr, this, aSize);
   }
@@ -183,27 +155,6 @@ public class SetMarkerPairs extends OpenSimObject {
 
   public void getNames(ArrayStr rNames) {
     opensimModelJNI.SetMarkerPairs_getNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
-  }
-
-  public MarkerPair getLast() {
-    long cPtr = opensimModelJNI.SetMarkerPairs_getLast(swigCPtr, this);
-    return (cPtr == 0) ? null : new MarkerPair(cPtr, false);
-  }
-
-  public int searchBinary(MarkerPair aObject, boolean aFindFirst, int aLo, int aHi) {
-    return opensimModelJNI.SetMarkerPairs_searchBinary__SWIG_0(swigCPtr, this, MarkerPair.getCPtr(aObject), aObject, aFindFirst, aLo, aHi);
-  }
-
-  public int searchBinary(MarkerPair aObject, boolean aFindFirst, int aLo) {
-    return opensimModelJNI.SetMarkerPairs_searchBinary__SWIG_1(swigCPtr, this, MarkerPair.getCPtr(aObject), aObject, aFindFirst, aLo);
-  }
-
-  public int searchBinary(MarkerPair aObject, boolean aFindFirst) {
-    return opensimModelJNI.SetMarkerPairs_searchBinary__SWIG_2(swigCPtr, this, MarkerPair.getCPtr(aObject), aObject, aFindFirst);
-  }
-
-  public int searchBinary(MarkerPair aObject) {
-    return opensimModelJNI.SetMarkerPairs_searchBinary__SWIG_3(swigCPtr, this, MarkerPair.getCPtr(aObject), aObject);
   }
 
   public int getNumGroups() {

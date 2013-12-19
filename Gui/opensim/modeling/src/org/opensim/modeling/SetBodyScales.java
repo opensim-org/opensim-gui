@@ -81,34 +81,6 @@ public class SetBodyScales extends OpenSimObject {
     opensimModelJNI.SetBodyScales_setMemoryOwner(swigCPtr, this, aTrueFalse);
   }
 
-  public boolean getMemoryOwner() {
-    return opensimModelJNI.SetBodyScales_getMemoryOwner(swigCPtr, this);
-  }
-
-  public boolean computeNewCapacity(int aMinCapacity, SWIGTYPE_p_int rNewCapacity) {
-    return opensimModelJNI.SetBodyScales_computeNewCapacity(swigCPtr, this, aMinCapacity, SWIGTYPE_p_int.getCPtr(rNewCapacity));
-  }
-
-  public boolean ensureCapacity(int aCapacity) {
-    return opensimModelJNI.SetBodyScales_ensureCapacity(swigCPtr, this, aCapacity);
-  }
-
-  public void trim() {
-    opensimModelJNI.SetBodyScales_trim(swigCPtr, this);
-  }
-
-  public int getCapacity() {
-    return opensimModelJNI.SetBodyScales_getCapacity(swigCPtr, this);
-  }
-
-  public void setCapacityIncrement(int aIncrement) {
-    opensimModelJNI.SetBodyScales_setCapacityIncrement(swigCPtr, this, aIncrement);
-  }
-
-  public int getCapacityIncrement() {
-    return opensimModelJNI.SetBodyScales_getCapacityIncrement(swigCPtr, this);
-  }
-
   public boolean setSize(int aSize) {
     return opensimModelJNI.SetBodyScales_setSize(swigCPtr, this, aSize);
   }
@@ -183,27 +155,6 @@ public class SetBodyScales extends OpenSimObject {
 
   public void getNames(ArrayStr rNames) {
     opensimModelJNI.SetBodyScales_getNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
-  }
-
-  public BodyScale getLast() {
-    long cPtr = opensimModelJNI.SetBodyScales_getLast(swigCPtr, this);
-    return (cPtr == 0) ? null : new BodyScale(cPtr, false);
-  }
-
-  public int searchBinary(BodyScale aObject, boolean aFindFirst, int aLo, int aHi) {
-    return opensimModelJNI.SetBodyScales_searchBinary__SWIG_0(swigCPtr, this, BodyScale.getCPtr(aObject), aObject, aFindFirst, aLo, aHi);
-  }
-
-  public int searchBinary(BodyScale aObject, boolean aFindFirst, int aLo) {
-    return opensimModelJNI.SetBodyScales_searchBinary__SWIG_1(swigCPtr, this, BodyScale.getCPtr(aObject), aObject, aFindFirst, aLo);
-  }
-
-  public int searchBinary(BodyScale aObject, boolean aFindFirst) {
-    return opensimModelJNI.SetBodyScales_searchBinary__SWIG_2(swigCPtr, this, BodyScale.getCPtr(aObject), aObject, aFindFirst);
-  }
-
-  public int searchBinary(BodyScale aObject) {
-    return opensimModelJNI.SetBodyScales_searchBinary__SWIG_3(swigCPtr, this, BodyScale.getCPtr(aObject), aObject);
   }
 
   public int getNumGroups() {

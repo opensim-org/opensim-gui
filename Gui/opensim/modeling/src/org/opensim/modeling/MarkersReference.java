@@ -69,8 +69,8 @@ public class MarkersReference extends ReferenceVec3 {
     this(opensimModelJNI.new_MarkersReference__SWIG_2(filename), true);
   }
 
-  public MarkersReference(MarkerData aMarkerData, SWIGTYPE_p_OpenSim__SetT_OpenSim__MarkerWeight_t aMarkerWeightSet) {
-    this(opensimModelJNI.new_MarkersReference__SWIG_3(MarkerData.getCPtr(aMarkerData), aMarkerData, SWIGTYPE_p_OpenSim__SetT_OpenSim__MarkerWeight_t.getCPtr(aMarkerWeightSet)), true);
+  public MarkersReference(MarkerData aMarkerData, SetMarkerWeights aMarkerWeightSet) {
+    this(opensimModelJNI.new_MarkersReference__SWIG_3(MarkerData.getCPtr(aMarkerData), aMarkerData, SetMarkerWeights.getCPtr(aMarkerWeightSet), aMarkerWeightSet), true);
   }
 
   public MarkersReference(MarkerData aMarkerData) {
@@ -121,12 +121,12 @@ public class MarkersReference extends ReferenceVec3 {
     return opensimModelJNI.MarkersReference_getSamplingFrequency(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_OpenSim__SetT_OpenSim__MarkerWeight_t updMarkerWeightSet() {
-    return new SWIGTYPE_p_OpenSim__SetT_OpenSim__MarkerWeight_t(opensimModelJNI.MarkersReference_updMarkerWeightSet(swigCPtr, this), false);
+  public SetMarkerWeights updMarkerWeightSet() {
+    return new SetMarkerWeights(opensimModelJNI.MarkersReference_updMarkerWeightSet(swigCPtr, this), false);
   }
 
-  public void setMarkerWeightSet(SWIGTYPE_p_OpenSim__SetT_OpenSim__MarkerWeight_t markerWeights) {
-    opensimModelJNI.MarkersReference_setMarkerWeightSet(swigCPtr, this, SWIGTYPE_p_OpenSim__SetT_OpenSim__MarkerWeight_t.getCPtr(markerWeights));
+  public void setMarkerWeightSet(SetMarkerWeights markerWeights) {
+    opensimModelJNI.MarkersReference_setMarkerWeightSet(swigCPtr, this, SetMarkerWeights.getCPtr(markerWeights), markerWeights);
   }
 
   public void setDefaultWeight(double weight) {

@@ -51,38 +51,6 @@ public class ArrayStorage {
     opensimModelJNI.ArrayStorage_clearAndDestroy(swigCPtr, this);
   }
 
-  public void setMemoryOwner(boolean aTrueFalse) {
-    opensimModelJNI.ArrayStorage_setMemoryOwner(swigCPtr, this, aTrueFalse);
-  }
-
-  public boolean getMemoryOwner() {
-    return opensimModelJNI.ArrayStorage_getMemoryOwner(swigCPtr, this);
-  }
-
-  public boolean computeNewCapacity(int aMinCapacity, SWIGTYPE_p_int rNewCapacity) {
-    return opensimModelJNI.ArrayStorage_computeNewCapacity(swigCPtr, this, aMinCapacity, SWIGTYPE_p_int.getCPtr(rNewCapacity));
-  }
-
-  public boolean ensureCapacity(int aCapacity) {
-    return opensimModelJNI.ArrayStorage_ensureCapacity(swigCPtr, this, aCapacity);
-  }
-
-  public void trim() {
-    opensimModelJNI.ArrayStorage_trim(swigCPtr, this);
-  }
-
-  public int getCapacity() {
-    return opensimModelJNI.ArrayStorage_getCapacity(swigCPtr, this);
-  }
-
-  public void setCapacityIncrement(int aIncrement) {
-    opensimModelJNI.ArrayStorage_setCapacityIncrement(swigCPtr, this, aIncrement);
-  }
-
-  public int getCapacityIncrement() {
-    return opensimModelJNI.ArrayStorage_getCapacityIncrement(swigCPtr, this);
-  }
-
   public boolean setSize(int aSize) {
     return opensimModelJNI.ArrayStorage_setSize(swigCPtr, this, aSize);
   }

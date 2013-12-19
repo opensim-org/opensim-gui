@@ -48,7 +48,7 @@ public class SetMarkerWeights extends OpenSimObject {
     return opensimModelJNI.SetMarkerWeights_getClassName();
   }
 
-  public SetMarkerWeights clone() {
+  public OpenSimObject clone() {
     long cPtr = opensimModelJNI.SetMarkerWeights_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new SetMarkerWeights(cPtr, false);
   }
@@ -81,34 +81,6 @@ public class SetMarkerWeights extends OpenSimObject {
     opensimModelJNI.SetMarkerWeights_setMemoryOwner(swigCPtr, this, aTrueFalse);
   }
 
-  public boolean getMemoryOwner() {
-    return opensimModelJNI.SetMarkerWeights_getMemoryOwner(swigCPtr, this);
-  }
-
-  public boolean computeNewCapacity(int aMinCapacity, SWIGTYPE_p_int rNewCapacity) {
-    return opensimModelJNI.SetMarkerWeights_computeNewCapacity(swigCPtr, this, aMinCapacity, SWIGTYPE_p_int.getCPtr(rNewCapacity));
-  }
-
-  public boolean ensureCapacity(int aCapacity) {
-    return opensimModelJNI.SetMarkerWeights_ensureCapacity(swigCPtr, this, aCapacity);
-  }
-
-  public void trim() {
-    opensimModelJNI.SetMarkerWeights_trim(swigCPtr, this);
-  }
-
-  public int getCapacity() {
-    return opensimModelJNI.SetMarkerWeights_getCapacity(swigCPtr, this);
-  }
-
-  public void setCapacityIncrement(int aIncrement) {
-    opensimModelJNI.SetMarkerWeights_setCapacityIncrement(swigCPtr, this, aIncrement);
-  }
-
-  public int getCapacityIncrement() {
-    return opensimModelJNI.SetMarkerWeights_getCapacityIncrement(swigCPtr, this);
-  }
-
   public boolean setSize(int aSize) {
     return opensimModelJNI.SetMarkerWeights_setSize(swigCPtr, this, aSize);
   }
@@ -117,12 +89,12 @@ public class SetMarkerWeights extends OpenSimObject {
     return opensimModelJNI.SetMarkerWeights_getSize(swigCPtr, this);
   }
 
-  public int getIndex(SWIGTYPE_p_MarkerWeight aObject, int aStartIndex) {
-    return opensimModelJNI.SetMarkerWeights_getIndex__SWIG_0(swigCPtr, this, SWIGTYPE_p_MarkerWeight.getCPtr(aObject), aStartIndex);
+  public int getIndex(MarkerWeight aObject, int aStartIndex) {
+    return opensimModelJNI.SetMarkerWeights_getIndex__SWIG_0(swigCPtr, this, MarkerWeight.getCPtr(aObject), aObject, aStartIndex);
   }
 
-  public int getIndex(SWIGTYPE_p_MarkerWeight aObject) {
-    return opensimModelJNI.SetMarkerWeights_getIndex__SWIG_1(swigCPtr, this, SWIGTYPE_p_MarkerWeight.getCPtr(aObject));
+  public int getIndex(MarkerWeight aObject) {
+    return opensimModelJNI.SetMarkerWeights_getIndex__SWIG_1(swigCPtr, this, MarkerWeight.getCPtr(aObject), aObject);
   }
 
   public int getIndex(String aName, int aStartIndex) {
@@ -137,44 +109,44 @@ public class SetMarkerWeights extends OpenSimObject {
     opensimModelJNI.SetMarkerWeights_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean adoptAndAppend(SWIGTYPE_p_MarkerWeight aObject) {
-    return opensimModelJNI.SetMarkerWeights_adoptAndAppend(swigCPtr, this, SWIGTYPE_p_MarkerWeight.getCPtr(aObject));
+  public boolean adoptAndAppend(MarkerWeight aObject) {
+    return opensimModelJNI.SetMarkerWeights_adoptAndAppend(swigCPtr, this, MarkerWeight.getCPtr(aObject), aObject);
   }
 
-  public boolean cloneAndAppend(SWIGTYPE_p_MarkerWeight aObject) {
-    return opensimModelJNI.SetMarkerWeights_cloneAndAppend(swigCPtr, this, SWIGTYPE_p_MarkerWeight.getCPtr(aObject));
+  public boolean cloneAndAppend(MarkerWeight aObject) {
+    return opensimModelJNI.SetMarkerWeights_cloneAndAppend(swigCPtr, this, MarkerWeight.getCPtr(aObject), aObject);
   }
 
-  public boolean insert(int aIndex, SWIGTYPE_p_MarkerWeight aObject) {
-    return opensimModelJNI.SetMarkerWeights_insert(swigCPtr, this, aIndex, SWIGTYPE_p_MarkerWeight.getCPtr(aObject));
+  public boolean insert(int aIndex, MarkerWeight aObject) {
+    return opensimModelJNI.SetMarkerWeights_insert(swigCPtr, this, aIndex, MarkerWeight.getCPtr(aObject), aObject);
   }
 
   public boolean remove(int aIndex) {
     return opensimModelJNI.SetMarkerWeights_remove__SWIG_0(swigCPtr, this, aIndex);
   }
 
-  public boolean remove(SWIGTYPE_p_MarkerWeight aObject) {
-    return opensimModelJNI.SetMarkerWeights_remove__SWIG_1(swigCPtr, this, SWIGTYPE_p_MarkerWeight.getCPtr(aObject));
+  public boolean remove(MarkerWeight aObject) {
+    return opensimModelJNI.SetMarkerWeights_remove__SWIG_1(swigCPtr, this, MarkerWeight.getCPtr(aObject), aObject);
   }
 
   public void clearAndDestroy() {
     opensimModelJNI.SetMarkerWeights_clearAndDestroy(swigCPtr, this);
   }
 
-  public boolean set(int aIndex, SWIGTYPE_p_MarkerWeight aObject, boolean preserveGroups) {
-    return opensimModelJNI.SetMarkerWeights_set__SWIG_0(swigCPtr, this, aIndex, SWIGTYPE_p_MarkerWeight.getCPtr(aObject), preserveGroups);
+  public boolean set(int aIndex, MarkerWeight aObject, boolean preserveGroups) {
+    return opensimModelJNI.SetMarkerWeights_set__SWIG_0(swigCPtr, this, aIndex, MarkerWeight.getCPtr(aObject), aObject, preserveGroups);
   }
 
-  public boolean set(int aIndex, SWIGTYPE_p_MarkerWeight aObject) {
-    return opensimModelJNI.SetMarkerWeights_set__SWIG_1(swigCPtr, this, aIndex, SWIGTYPE_p_MarkerWeight.getCPtr(aObject));
+  public boolean set(int aIndex, MarkerWeight aObject) {
+    return opensimModelJNI.SetMarkerWeights_set__SWIG_1(swigCPtr, this, aIndex, MarkerWeight.getCPtr(aObject), aObject);
   }
 
-  public SWIGTYPE_p_MarkerWeight get(int aIndex) {
-    return new SWIGTYPE_p_MarkerWeight(opensimModelJNI.SetMarkerWeights_get__SWIG_0(swigCPtr, this, aIndex), false);
+  public MarkerWeight get(int aIndex) {
+    return new MarkerWeight(opensimModelJNI.SetMarkerWeights_get__SWIG_0(swigCPtr, this, aIndex), false);
   }
 
-  public SWIGTYPE_p_MarkerWeight get(String aName) {
-    return new SWIGTYPE_p_MarkerWeight(opensimModelJNI.SetMarkerWeights_get__SWIG_1(swigCPtr, this, aName), false);
+  public MarkerWeight get(String aName) {
+    return new MarkerWeight(opensimModelJNI.SetMarkerWeights_get__SWIG_1(swigCPtr, this, aName), false);
   }
 
   public boolean contains(String aName) {
@@ -183,27 +155,6 @@ public class SetMarkerWeights extends OpenSimObject {
 
   public void getNames(ArrayStr rNames) {
     opensimModelJNI.SetMarkerWeights_getNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
-  }
-
-  public SWIGTYPE_p_MarkerWeight getLast() {
-    long cPtr = opensimModelJNI.SetMarkerWeights_getLast(swigCPtr, this);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_MarkerWeight(cPtr, false);
-  }
-
-  public int searchBinary(SWIGTYPE_p_MarkerWeight aObject, boolean aFindFirst, int aLo, int aHi) {
-    return opensimModelJNI.SetMarkerWeights_searchBinary__SWIG_0(swigCPtr, this, SWIGTYPE_p_MarkerWeight.getCPtr(aObject), aFindFirst, aLo, aHi);
-  }
-
-  public int searchBinary(SWIGTYPE_p_MarkerWeight aObject, boolean aFindFirst, int aLo) {
-    return opensimModelJNI.SetMarkerWeights_searchBinary__SWIG_1(swigCPtr, this, SWIGTYPE_p_MarkerWeight.getCPtr(aObject), aFindFirst, aLo);
-  }
-
-  public int searchBinary(SWIGTYPE_p_MarkerWeight aObject, boolean aFindFirst) {
-    return opensimModelJNI.SetMarkerWeights_searchBinary__SWIG_2(swigCPtr, this, SWIGTYPE_p_MarkerWeight.getCPtr(aObject), aFindFirst);
-  }
-
-  public int searchBinary(SWIGTYPE_p_MarkerWeight aObject) {
-    return opensimModelJNI.SetMarkerWeights_searchBinary__SWIG_3(swigCPtr, this, SWIGTYPE_p_MarkerWeight.getCPtr(aObject));
   }
 
   public int getNumGroups() {
