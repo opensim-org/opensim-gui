@@ -310,8 +310,10 @@ final class ParametersTopComponent extends TopComponent
     }
 
     public ToolExecutor createExecutor(ToolSerializer tool, Model model) throws IOException {
-         OpenSimObject obj = OpenSimObject.makeObjectFromFile(tool.getSetupFile());
-         toolExecutor = ToolFactory.createExecutor(model, tool.getSetupFile(), obj.getConcreteClassName(), this);
+         String relativePathSetupFile = tool.getSetupFile();
+         String absolutePathSetupFile = new File(relativePathSetupFile).getAbsolutePath();
+         OpenSimObject obj = OpenSimObject.makeObjectFromFile(absolutePathSetupFile);
+         toolExecutor = ToolFactory.createExecutor(model, absolutePathSetupFile, obj.getConcreteClassName(), this);
          return toolExecutor;
     }
 
