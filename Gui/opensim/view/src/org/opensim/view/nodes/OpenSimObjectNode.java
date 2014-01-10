@@ -350,11 +350,10 @@ public class OpenSimObjectNode extends OpenSimNode {
 
         for (int p = 0; p < obj.getNumProperties(); ++p) {
             try {
-                AbstractProperty ap = obj.getPropertyByIndex(p);
-                //System.out.println("type=" + ap.getTypeName() + " name=" + ap.getName());
-                if (!ap.isListProperty()) {
+                AbstractProperty ap = obj.getPropertyByIndex(p);              
+                if (!ap.isListProperty() && !ap.isOptionalProperty()) {
                     if (ap.isObjectProperty() && ap.size() == 1) {
-                        OpenSimObject objectFromProperty = ap.isOptionalProperty()?ap.getValueAsObject(0): ap.getValueAsObject();
+                        OpenSimObject objectFromProperty = ap.getValueAsObject();
                         OpenSimBaseObjectProperty customProp=null;
                         if (GeometryPath.safeDownCast(objectFromProperty)!= null){
                             customProp  = new OpenSimGeometryPathProperty(ap, this);
