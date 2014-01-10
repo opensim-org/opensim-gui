@@ -128,12 +128,12 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    public void setMinRenderTimeInterval(double interval) { minRenderTimeInterval = interval; }
 
    public void setRenderMuscleActivations(boolean render) {
-      if(getModelForDisplayCompatibleStates()) {
         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(getModelForDisplay());
         if(vis!=null) vis.setApplyMuscleColors(render);
-      }
+      
    }
 
+   
    public void startProgressUsingTime(double startTime, double endTime) {
       progressUsingTime = true;
       this.startTime = startTime;
@@ -243,10 +243,6 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    
     private Model getModelForDisplay() {
         return modelForDisplay;//get_model();
-    }
-
-    private boolean getModelForDisplayCompatibleStates() {
-        return true;
     }
 
     public int step(State s, int stepNumber) {
