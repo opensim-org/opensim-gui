@@ -95,22 +95,27 @@ public class CustomJoint extends Joint {
 
   public CustomJoint() {
     this(opensimModelJNI.new_CustomJoint__SWIG_0(), true);
+    markAdopted();
   }
 
   public CustomJoint(String name, Body parent, Vec3 locationInParent, Vec3 orientationInParent, Body body, Vec3 locationInBody, Vec3 orientationInBody, SpatialTransform aSpatialTransform, boolean reverse) {
     this(opensimModelJNI.new_CustomJoint__SWIG_1(name, Body.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, Body.getCPtr(body), body, Vec3.getCPtr(locationInBody), locationInBody, Vec3.getCPtr(orientationInBody), orientationInBody, SpatialTransform.getCPtr(aSpatialTransform), aSpatialTransform, reverse), true);
+   markAdopted();
   }
 
   public CustomJoint(String name, Body parent, Vec3 locationInParent, Vec3 orientationInParent, Body body, Vec3 locationInBody, Vec3 orientationInBody, SpatialTransform aSpatialTransform) {
     this(opensimModelJNI.new_CustomJoint__SWIG_2(name, Body.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, Body.getCPtr(body), body, Vec3.getCPtr(locationInBody), locationInBody, Vec3.getCPtr(orientationInBody), orientationInBody, SpatialTransform.getCPtr(aSpatialTransform), aSpatialTransform), true);
+   markAdopted();
   }
 
   public CustomJoint(String name, Body parent, Vec3 locationInParent, Vec3 orientationInParent, Body body, Vec3 locationInBody, Vec3 orientationInBody, boolean reverse) {
     this(opensimModelJNI.new_CustomJoint__SWIG_3(name, Body.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, Body.getCPtr(body), body, Vec3.getCPtr(locationInBody), locationInBody, Vec3.getCPtr(orientationInBody), orientationInBody, reverse), true);
+   markAdopted();
   }
 
   public CustomJoint(String name, Body parent, Vec3 locationInParent, Vec3 orientationInParent, Body body, Vec3 locationInBody, Vec3 orientationInBody) {
     this(opensimModelJNI.new_CustomJoint__SWIG_4(name, Body.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, Body.getCPtr(body), body, Vec3.getCPtr(locationInBody), locationInBody, Vec3.getCPtr(orientationInBody), orientationInBody), true);
+   markAdopted();
   }
 
   public int numCoordinates() {

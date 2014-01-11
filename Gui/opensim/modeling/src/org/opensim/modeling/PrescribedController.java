@@ -191,10 +191,12 @@ public class PrescribedController extends Controller {
 
   public void prescribeControlForActuator(int index, Function prescribedFunction) {
     opensimModelJNI.PrescribedController_prescribeControlForActuator__SWIG_0(swigCPtr, this, index, Function.getCPtr(prescribedFunction), prescribedFunction);
+    prescribedFunction.markAdopted();
   }
 
   public void prescribeControlForActuator(String actName, Function prescribedFunction) {
     opensimModelJNI.PrescribedController_prescribeControlForActuator__SWIG_1(swigCPtr, this, actName, Function.getCPtr(prescribedFunction), prescribedFunction);
+    prescribedFunction.markAdopted();
   }
 
 }
