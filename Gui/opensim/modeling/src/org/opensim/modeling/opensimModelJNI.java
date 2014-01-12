@@ -10000,6 +10000,8 @@ public class opensimModelJNI {
   public final static native void OpenSimContext_recreateSystemKeepStage(long jarg1, OpenSimContext jarg1_);
   public final static native void OpenSimContext_realizePosition(long jarg1, OpenSimContext jarg1_);
   public final static native void OpenSimContext_realizeVelocity(long jarg1, OpenSimContext jarg1_);
+  public final static native void OpenSimContext_cacheModelAndState(long jarg1, OpenSimContext jarg1_);
+  public final static native void OpenSimContext_restoreStateFromCachedModel(long jarg1, OpenSimContext jarg1_) throws java.io.IOException;
   public final static native void delete_OpenSimContext(long jarg1);
   public final static native long OpenSimJavaObject_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void OpenSimJavaObject_assign(long jarg1, OpenSimJavaObject jarg1_, long jarg2, OpenSimObject jarg2_);
