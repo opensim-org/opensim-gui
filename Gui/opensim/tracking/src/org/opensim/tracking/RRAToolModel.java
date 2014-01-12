@@ -27,14 +27,11 @@ package org.opensim.tracking;
 
 import java.io.File;
 import java.io.IOException;
-import javax.swing.JFrame;
 import org.netbeans.api.progress.ProgressHandle;
 import org.netbeans.api.progress.ProgressHandleFactory;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.openide.util.Cancellable;
-import org.openide.windows.WindowManager;
-import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.ExternalLoads;
 import org.opensim.modeling.InterruptCallback;
 import org.opensim.modeling.Kinematics;
@@ -44,11 +41,9 @@ import org.opensim.modeling.Storage;
 import org.opensim.view.motions.JavaMotionDisplayerCallback;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.swingui.SwingWorker;
-import org.opensim.utils.DialogUtils;
+import org.opensim.tracking.tools.SimulationDB;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
-import org.opensim.utils.OpenSimDialog;
-import org.opensim.view.excitationEditor.FilterableStringArray;
 import org.opensim.view.excitationEditor.NameFilterJPanel;
 import org.opensim.view.pub.OpenSimDB;
 
@@ -101,7 +96,8 @@ public class RRAToolModel extends TrackingToolModel {
                               new Cancellable() {
                                  public boolean cancel() {
                                     interrupt(false);
-                                    return true;
+                                    SimulationDB.getInstance().fireToolFinish();
+                                       return true;
                                  }
                               });
 
@@ -129,7 +125,8 @@ public class RRAToolModel extends TrackingToolModel {
          //getModel().addAnalysis(kinematicsAnalysis);
 
          setExecuting(true);
-      }
+         SimulationDB.getInstance().fireToolStart();
+     }
 
       public void interrupt(boolean promptToKeepPartialResult) {
          this.promptToKeepPartialResult = promptToKeepPartialResult;
@@ -138,10 +135,12 @@ public class RRAToolModel extends TrackingToolModel {
 
       public Object construct() {
          try {
+            SimulationDB.getInstance().fireToolStart();
             result = tool.run();
          } catch (IOException ex) {
             DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message("Tool execution failed. Check Messages window for details."));
             ex.printStackTrace();
+            SimulationDB.getInstance().fireToolFinish();
          }
 
          return this;

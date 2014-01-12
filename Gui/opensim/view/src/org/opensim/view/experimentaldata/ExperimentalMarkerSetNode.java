@@ -166,8 +166,10 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
     
     public Color getColor()
     {
-        if (motionDisplayer==null)
+        if (motionDisplayer==null){
             motionDisplayer = dMotion.getMotionDisplayer();
+            markersDisplayer = motionDisplayer.getMarkersRep();
+        }
         if (markersDisplayer==null)
             markersDisplayer = motionDisplayer.getMarkersRep();
         return markersDisplayer.getColor();
@@ -202,8 +204,10 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
 
     public double getMarkerScaleFactor()
     {
-        if (motionDisplayer==null)
+       if (motionDisplayer==null){
             motionDisplayer = dMotion.getMotionDisplayer();
+            markersDisplayer = motionDisplayer.getMarkersRep();
+       }
         if (markersDisplayer==null)
             markersDisplayer = motionDisplayer.getMarkersRep();
         return markersDisplayer.getScaleFactor();

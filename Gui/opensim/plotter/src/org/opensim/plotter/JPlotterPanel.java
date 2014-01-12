@@ -52,6 +52,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.event.TreeSelectionEvent;
@@ -1523,14 +1524,19 @@ public class JPlotterPanel extends javax.swing.JPanel
     */
    public void update(Observable o, Object arg) {
       if (o instanceof MotionsDB) {
-         if (arg instanceof MotionTimeChangeEvent){
-            MotionTimeChangeEvent motionTimeEvent = (MotionTimeChangeEvent)arg;
-            double time=motionTimeEvent.getTime();
+           if (arg instanceof MotionTimeChangeEvent) {
+               MotionTimeChangeEvent motionTimeEvent = (MotionTimeChangeEvent) arg;
+               final double time = motionTimeEvent.getTime();
+               SwingUtilities.invokeLater(new Runnable() {
             // Should cast arg to proper event and set X-crosshairs
-            if (getDomainName().compareTo("time")==0){
+
+                   public void run() {
+                       if (getDomainName().compareTo("time") == 0) {
                plotterModel.getCurrentPlot().setDomainCrosshair(time);
             }
          }
+               });
+           }
          else if (arg instanceof MotionEvent){
             MotionEvent mev = (MotionEvent) arg;
             if (mev.getOperation()==mev.getOperation().Open && mev.getModel()==currentModel){

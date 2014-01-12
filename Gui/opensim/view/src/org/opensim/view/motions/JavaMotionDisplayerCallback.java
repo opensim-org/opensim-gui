@@ -31,10 +31,10 @@
 package org.opensim.view.motions;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.TimerTask;
 import java.util.prefs.Preferences;
 import javax.swing.SwingUtilities;
 import org.netbeans.api.progress.ProgressHandle;
+import org.openide.awt.StatusDisplayer;
 import org.opensim.modeling.*;
 import org.opensim.utils.TheApp;
 import org.opensim.view.SingleModelVisuals;
@@ -72,6 +72,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    int numStates=0;
    ArrayStr stateLabels=null;
    private double[] statesBuffer;
+   private boolean displayTimeProgress=false;
    private boolean coordinatesOnly=false;
    //private int stepNumber=0;
    
@@ -100,7 +101,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
             get_model().getCoordinateSet().getNames(stateLabels);
         }
         else {
-        stateLabels = getModelForDisplay().getStateVariableNames();
+            stateLabels = getModelForDisplay().getStateVariableNames();
             
         }
         stateLabels.insert(0, "time");
@@ -128,12 +129,12 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    public void setMinRenderTimeInterval(double interval) { minRenderTimeInterval = interval; }
 
    public void setRenderMuscleActivations(boolean render) {
+      if(getModelForDisplayCompatibleStates()) {
         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(getModelForDisplay());
         if(vis!=null) vis.setApplyMuscleColors(render);
-      
+      }
    }
 
-   
    public void startProgressUsingTime(double startTime, double endTime) {
       progressUsingTime = true;
       this.startTime = startTime;
@@ -186,7 +187,12 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
           else {
          int progressStep = (int)((getSimulationTime()-startTime)*progressTimeResolution);
          if(progressStep > lastProgressStep) { // make sure we only advance progress (else an exception is thrown)
+            String msg = String.format("Forward Simulation, t=%.4f", getSimulationTime());
+            if (displayTimeProgress) {
+                progressHandle.setDisplayName(msg);
+            }
             progressHandle.progress(progressStep);
+            //StatusDisplayer.getDefault().setStatusText(msg);
             lastProgressStep = progressStep;
          }
       }
@@ -204,9 +210,9 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
               getStorage().append(nextResult);
           }
           else {
-          super.getStates(statesBuffer);
-          //System.out.println("Simulation time="+currentSimTime+" state[0]="+statesBuffer[0]);
-          nextResult.setStates(currentSimTime, numStates, statesBuffer);
+              super.getStates(statesBuffer);
+            //System.out.println("Simulation time="+currentSimTime+" state[0]="+statesBuffer[0]);
+            nextResult.setStates(currentSimTime, numStates, statesBuffer);
           }
           getStorage().append(nextResult);
       }
@@ -245,6 +251,10 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
         return modelForDisplay;//get_model();
     }
 
+    private boolean getModelForDisplayCompatibleStates() {
+        return true;
+    }
+
     public int step(State s, int stepNumber) {
         int retValue;
         retValue = super.step(s, stepNumber);
@@ -278,6 +288,13 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
 
     public Storage getStorage() {
         return storage;
+    }
+
+    /**
+     * @param displayTimeProgress the displayTimeProgress to set
+     */
+    public void setDisplayTimeProgress(boolean displayTimeProgress) {
+        this.displayTimeProgress = displayTimeProgress;
     }
 
     /**

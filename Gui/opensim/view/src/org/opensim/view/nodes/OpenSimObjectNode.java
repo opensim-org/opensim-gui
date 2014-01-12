@@ -367,11 +367,22 @@ public class OpenSimObjectNode extends OpenSimNode {
                         if (customProp!=null)
                             set.put(customProp);
                     } else {
+                        // This could be optional if so treat as  a list, else noList
+                        if (ap.isOptionalProperty()){
+                            Reflection nextNodeProp = createNodePropForOpenSimListProperty(obj, p, theModel);
+                            if (nextNodeProp != null) {
+                                nextNodeProp.setName(ap.getName());
+                                nextNodeProp.setShortDescription(ap.getComment());
+                                set.put(nextNodeProp);
+                            }
+                        }
+                        else {
                         Reflection nextNodeProp = createNodePropForOpenSimNoListProperty(obj, p, theModel);
                         if (nextNodeProp != null) {
                             nextNodeProp.setName(ap.getName());
                             nextNodeProp.setShortDescription(ap.getComment());
                             set.put(nextNodeProp);
+                        }
                         }
 
                     }
