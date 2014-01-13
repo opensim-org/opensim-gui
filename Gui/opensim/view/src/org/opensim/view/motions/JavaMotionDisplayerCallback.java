@@ -31,12 +31,15 @@
 package org.opensim.view.motions;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.prefs.Preferences;
 import javax.swing.SwingUtilities;
 import org.netbeans.api.progress.ProgressHandle;
 import org.openide.awt.StatusDisplayer;
 import org.opensim.modeling.*;
 import org.opensim.utils.TheApp;
+import org.opensim.view.MuscleColorByActivationStorage;
+import org.opensim.view.MuscleColoringFunction;
 import org.opensim.view.SingleModelVisuals;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
@@ -74,7 +77,10 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    private double[] statesBuffer;
    private boolean displayTimeProgress=false;
    private boolean coordinatesOnly=false;
-   //private int stepNumber=0;
+   private boolean staticOptimization = false;
+   private Storage activationStorage=null;
+   HashMap<Integer, Integer> mapActivationIndex2State = new HashMap<Integer, Integer>(10);
+   //private int stepNumbIntegerer=0;
    
    // Creates a new instance of JavaMotionDisplayerCallback 
    public JavaMotionDisplayerCallback(Model aModel, Storage aStorage, ProgressHandle progressHandle, boolean coordinatesOnly) {
@@ -101,7 +107,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
             get_model().getCoordinateSet().getNames(stateLabels);
         }
         else {
-            stateLabels = getModelForDisplay().getStateVariableNames();
+        stateLabels = getModelForDisplay().getStateVariableNames();
             
         }
         stateLabels.insert(0, "time");
@@ -111,10 +117,11 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
         ownsStorage=true;
     }
    
-   public JavaMotionDisplayerCallback(Model aModel, Model aModelForDisplay, Storage aStorage, ProgressHandle progressHandle) {
+   public JavaMotionDisplayerCallback(Model aModel, Model aModelForDisplay, Storage aStorage, ProgressHandle progressHandle, boolean staticOptimization) {
       super(aModel);
       modelForDisplay=aModelForDisplay;
       context = OpenSimDB.getInstance().getContext(aModelForDisplay);
+      this.staticOptimization = staticOptimization;
       if(aStorage!=null) {
          this.storage = aStorage;
       }
@@ -132,7 +139,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
       if(getModelForDisplayCompatibleStates()) {
         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(getModelForDisplay());
         if(vis!=null) vis.setApplyMuscleColors(render);
-      }
+   }
    }
 
    public void startProgressUsingTime(double startTime, double endTime) {
@@ -210,9 +217,18 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
               getStorage().append(nextResult);
           }
           else {
-              super.getStates(statesBuffer);
-            //System.out.println("Simulation time="+currentSimTime+" state[0]="+statesBuffer[0]);
-            nextResult.setStates(currentSimTime, numStates, statesBuffer);
+          super.getStates(statesBuffer);
+          /*
+              if (staticOptimization){
+                  StateVector sv = activationStorage.getLastStateVector();
+                  ArrayDouble actData = sv.getData();
+                  for (Integer actKey:mapActivationIndex2State.keySet()){
+                      int stateIdx = mapActivationIndex2State.get(actKey);
+                      statesBuffer[stateIdx] = actData.get(actKey.intValue());
+                  }
+              }*/
+          //System.out.println("Simulation time="+currentSimTime+" state[0]="+statesBuffer[0]);
+          nextResult.setStates(currentSimTime, numStates, statesBuffer);
           }
           getStorage().append(nextResult);
       }
@@ -259,13 +275,26 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
         int retValue;
         retValue = super.step(s, stepNumber);
         processStep(s, stepNumber);
+        if (staticOptimization){
+            int sz = activationStorage.getSize();
+        }
         return retValue;
     }
 
     public int begin(State s) {
         int retValue=0;
         if (!isInitialized()){
-			initializeTimer();
+            initializeTimer();
+            if (staticOptimization){
+                
+                StaticOptimization staticOptimizationAnalysis = StaticOptimization.safeDownCast(get_model().getAnalysisSet().get("StaticOptimization"));
+                activationStorage = staticOptimizationAnalysis.getActivationStorage();
+
+                // Change coloring function for model
+                MuscleColoringFunction mcbya = new MuscleColorByActivationStorage(context, activationStorage);
+                motionDisplayer.setMuscleColoringFunction(mcbya);
+                
+            }
         }
         processStep(s, 0);
         return retValue;
@@ -309,5 +338,19 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
      */
     public void setCoordinatesOnly(boolean coordinatesOnly) {
         this.coordinatesOnly = coordinatesOnly;
+    }
+
+    /**
+     * @return the activationStorage
+     */
+    public Storage getActivationStorage() {
+        return activationStorage;
+    }
+
+    /**
+     * @param activationStorage the activationStorage to set
+     */
+    public void setActivationStorage(Storage activationStorage) {
+        this.activationStorage = activationStorage;
     }
 }

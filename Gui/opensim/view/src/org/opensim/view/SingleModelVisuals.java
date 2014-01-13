@@ -111,12 +111,18 @@ public class SingleModelVisuals {
     private vtkProp3DCollection  bodiesCollection = new vtkProp3DCollection();
     private ModelComDisplayer comDisplayer;
     private boolean showCOM=false;
+    private MuscleColoringFunction defaultColoringFunction;
+    private MuscleColoringFunction noColoringFunction;
+    private MuscleColoringFunction currentColoringFunction;
     /**
      * Creates a new instance of SingleModelVisuals
      */
     public SingleModelVisuals(Model aModel) {
         initDefaultShapesAndColors();
         modelDisplayAssembly = createModelAssembly(aModel);
+        OpenSimContext context=OpenSimDB.getInstance().getContext(aModel);
+        defaultColoringFunction = new MuscleColorByActivationFunction(context);
+        noColoringFunction = new MuscleNoColoringFunction(context);
         setVisible(true);
     }
  
@@ -246,6 +252,13 @@ public class SingleModelVisuals {
         updateUserObjects();
    }
 
+    private void pushColoringFunctionToMuscles() {
+        Iterator<LineSegmentMuscleDisplayer> dispIter = mapActuator2Displayer.values().iterator();
+        while(dispIter.hasNext()) dispIter.next().setApplyColoringFunction(currentColoringFunction);
+        getMuscleSegmentsRep().setModified();
+        getMusclePointsRep().setModified();
+    }
+
    private void updateMarkersGeometry(MarkerSet markers) {
       for (int i=0; i<markers.getSize(); i++)
          getMarkersRep().updateMarkerGeometry(markers.get(i));
@@ -356,10 +369,11 @@ public class SingleModelVisuals {
    }
 
    public void setApplyMuscleColors(boolean enabled) {
-      Iterator<LineSegmentMuscleDisplayer> dispIter = mapActuator2Displayer.values().iterator();
-      while(dispIter.hasNext()) dispIter.next().setApplyColoringFunction(enabled);
-      getMuscleSegmentsRep().setModified();
-      getMusclePointsRep().setModified();
+      if (enabled)
+          currentColoringFunction = defaultColoringFunction;
+      else
+          currentColoringFunction = noColoringFunction;
+       pushColoringFunctionToMuscles();
    }
 
    public void addMarkerGeometry(Marker marker) {
@@ -610,6 +624,8 @@ public class SingleModelVisuals {
        getForcesRep().setShape(strip3.GetOutput());
        // Update global preference for Contact and Wrap geometry
        DisplayGeometryFactory.updateDisplayPreference();
+       
+       
     }
 
     private void createMuscleSegmentRep(OpenSimvtkOrientedGlyphCloud aMuscleSegmentsRep) {
@@ -831,6 +847,11 @@ public class SingleModelVisuals {
             updateObjectDisplay(jnt.getBody());
             updateObjectDisplay(jnt.getParentBody());            
         }
+    }
+
+    public void setMuscleColoringFunction(MuscleColoringFunction mcf) {
+        currentColoringFunction = mcf;
+        pushColoringFunctionToMuscles();
     }
 }
 

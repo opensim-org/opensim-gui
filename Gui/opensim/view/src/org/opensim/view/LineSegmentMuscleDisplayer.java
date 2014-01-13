@@ -57,7 +57,6 @@ public class LineSegmentMuscleDisplayer {
    Vector<Integer> muscleSegmentGlyphIds = new Vector<Integer>(10);
    protected GeometryPath geomPath;
    private MuscleColoringFunction muscleColoringFunction; 
-   private MuscleColoringFunction defaultColoringFunction; //current function to use during simulation
    
    public LineSegmentMuscleDisplayer(PathActuator act, OpenSimvtkGlyphCloud musclePointsRep, OpenSimvtkOrientedGlyphCloud muscleSegmentsRep)
     {
@@ -69,15 +68,11 @@ public class LineSegmentMuscleDisplayer {
         this.muscleSegmentsRep = muscleSegmentsRep;
         openSimContext = OpenSimDB.getInstance().getContext(act.getModel());
         muscleColoringFunction = new MuscleNoColoringFunction(openSimContext);
-        defaultColoringFunction = new MuscleColorByActivationFunction(openSimContext);
+        
     }
 
-   public void setApplyColoringFunction(boolean enabled) {
-      if (enabled)
-          muscleColoringFunction = defaultColoringFunction;
-      else
-          muscleColoringFunction = new MuscleNoColoringFunction(openSimContext);
-          
+   public void setApplyColoringFunction(MuscleColoringFunction colorFunction) {
+      setMuscleColoringFunction(colorFunction);
       updateGeometry(true);
    }
 
@@ -181,7 +176,7 @@ public class LineSegmentMuscleDisplayer {
       double activation = 0;
       Muscle msl = Muscle.safeDownCast(act);
       if (msl!=null)
-          activation = muscleColoringFunction.getColor(msl); 
+          activation = getMuscleColoringFunction().getColor(msl); 
       // A displayer is found, get geometry
       int geomSize = actuatorDisplayer.countGeometry();
       if (geomSize > 0) {
@@ -324,10 +319,18 @@ public class LineSegmentMuscleDisplayer {
         return length;
     }
 
+
     /**
-     * @param defaultColoringFunction the defaultColoringFunction to set
+     * @return the muscleColoringFunction
      */
-    public void setDefaultColoringFunction(MuscleColoringFunction newColoringFunction) {
-        this.defaultColoringFunction = newColoringFunction;
+    public MuscleColoringFunction getMuscleColoringFunction() {
+        return muscleColoringFunction;
+    }
+
+    /**
+     * @param muscleColoringFunction the muscleColoringFunction to set
+     */
+    public void setMuscleColoringFunction(MuscleColoringFunction muscleColoringFunction) {
+        this.muscleColoringFunction = muscleColoringFunction;
     }
 }

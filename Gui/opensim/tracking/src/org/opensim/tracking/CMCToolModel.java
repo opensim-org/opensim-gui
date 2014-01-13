@@ -109,7 +109,7 @@ public class CMCToolModel extends TrackingToolModel {
                               });
 
          // Animation callback will update the display during forward
-         animationCallback = new JavaMotionDisplayerCallback(workersModel, getOriginalModel(), null, progressHandle);
+         animationCallback = new JavaMotionDisplayerCallback(workersModel, getOriginalModel(), null, progressHandle, false);
          
          getModel().addAnalysis(animationCallback);
          animationCallback.setStepInterval(1);
