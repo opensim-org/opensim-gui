@@ -205,6 +205,7 @@ public final class gui {
                             a.performAction();
                         }
                     }
+                    break;
                 } catch (Exception e) {
                     ErrorManager.getDefault().notify(ErrorManager.WARNING, e);
                  }
