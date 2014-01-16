@@ -96,6 +96,8 @@ public class OneMotionNode extends OpenSimObjectNode {
                      (Class)Class.forName("org.opensim.view.motions.MotionRenameAction"), true),
                 (MotionAssociateMotionAction) MotionAssociateMotionAction.findObject(
                      (Class)Class.forName("org.opensim.view.motions.MotionAssociateMotionAction"), true),
+                (MotionCustomColorByAction) MotionCustomColorByAction.findObject(
+                     (Class)Class.forName("org.opensim.view.motions.MotionCustomColorByAction"), true),                
                 (MotionsSynchronizeAction) MotionsSynchronizeAction.findObject(
                      (Class)Class.forName("org.opensim.view.motions.MotionsSynchronizeAction"), true),
                 (MotionsSaveAsAction) MotionsSaveAsAction.findObject(

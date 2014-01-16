@@ -549,6 +549,7 @@ public class MotionDisplayer implements SelectionListener {
       // if we're playing this motion synced with another motion)
       double clampedTime = (currentTime < simmMotionData.getFirstTime()) ? simmMotionData.getFirstTime() : 
                            (currentTime > simmMotionData.getLastTime()) ? simmMotionData.getLastTime() : currentTime;
+      OpenSimDB.getInstance().getContext(model).getCurrentStateRef().setTime(clampedTime);
       simmMotionData.getDataAtTime(clampedTime, interpolatedStates.getSize(), interpolatedStates);
       applyStatesToModel(interpolatedStates);
       // Repeat for associated motions
@@ -776,7 +777,7 @@ public class MotionDisplayer implements SelectionListener {
         for (MotionDisplayer assocMotion:associatedMotions){
           assocMotion.cleanupDisplay();
       }
-
+      setMuscleColoringFunction(null);
     }
 
    public Storage getSimmMotionData() {

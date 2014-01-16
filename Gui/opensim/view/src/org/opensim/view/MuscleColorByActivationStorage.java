@@ -25,10 +25,13 @@ public class MuscleColorByActivationStorage extends MuscleColoringFunction {
         activationStorage = storage;
         activationLabels = storage.getColumnLabels();
     }
+    
     @Override
     double getColor(Muscle msl){
-        StateVector actData = activationStorage.getLastStateVector();
-        //System.out.println("coloring by data time ="+actData.getTime()+" sim time = "+dContext.getTime());
+        double displayTime = dContext.getTime();
+        int aTimeIndex = activationStorage.findIndex(0, displayTime);
+        StateVector actData = activationStorage.getStateVector(aTimeIndex);
+        //System.out.println("coloring by data at time ="+actData.getTime()+" sim time = "+dContext.getTime());
         
         int idx = activationLabels.findIndex(msl.getName())-1;
         if (idx <= 0) return 0;

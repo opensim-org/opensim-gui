@@ -850,7 +850,10 @@ public class SingleModelVisuals {
     }
 
     public void setMuscleColoringFunction(MuscleColoringFunction mcf) {
-        currentColoringFunction = mcf;
+        if (mcf == null)
+            currentColoringFunction = defaultColoringFunction;
+        else
+            currentColoringFunction = mcf;
         pushColoringFunctionToMuscles();
     }
 }
