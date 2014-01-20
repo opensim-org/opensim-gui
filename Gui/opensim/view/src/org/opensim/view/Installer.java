@@ -196,5 +196,9 @@ public class Installer extends ModuleInstall {
          String displayContactGeometry = "On";
          saved = Preferences.userNodeForPackage(TheApp.class).get("Display Contact Geometry", displayContactGeometry);
          Preferences.userNodeForPackage(TheApp.class).put("Display Contact Geometry", saved);
+         
+         String saveMovieAsFrames = "Off";
+         saved = Preferences.userNodeForPackage(TheApp.class).get("Save Movie Frames", saveMovieAsFrames);
+         Preferences.userNodeForPackage(TheApp.class).put("Save Movie Frames", saved);
     }
 }

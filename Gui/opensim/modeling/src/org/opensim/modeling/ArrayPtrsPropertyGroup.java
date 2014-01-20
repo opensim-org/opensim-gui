@@ -51,38 +51,6 @@ public class ArrayPtrsPropertyGroup {
     opensimModelJNI.ArrayPtrsPropertyGroup_clearAndDestroy(swigCPtr, this);
   }
 
-  public void setMemoryOwner(boolean aTrueFalse) {
-    opensimModelJNI.ArrayPtrsPropertyGroup_setMemoryOwner(swigCPtr, this, aTrueFalse);
-  }
-
-  public boolean getMemoryOwner() {
-    return opensimModelJNI.ArrayPtrsPropertyGroup_getMemoryOwner(swigCPtr, this);
-  }
-
-  public boolean computeNewCapacity(int aMinCapacity, SWIGTYPE_p_int rNewCapacity) {
-    return opensimModelJNI.ArrayPtrsPropertyGroup_computeNewCapacity(swigCPtr, this, aMinCapacity, SWIGTYPE_p_int.getCPtr(rNewCapacity));
-  }
-
-  public boolean ensureCapacity(int aCapacity) {
-    return opensimModelJNI.ArrayPtrsPropertyGroup_ensureCapacity(swigCPtr, this, aCapacity);
-  }
-
-  public void trim() {
-    opensimModelJNI.ArrayPtrsPropertyGroup_trim(swigCPtr, this);
-  }
-
-  public int getCapacity() {
-    return opensimModelJNI.ArrayPtrsPropertyGroup_getCapacity(swigCPtr, this);
-  }
-
-  public void setCapacityIncrement(int aIncrement) {
-    opensimModelJNI.ArrayPtrsPropertyGroup_setCapacityIncrement(swigCPtr, this, aIncrement);
-  }
-
-  public int getCapacityIncrement() {
-    return opensimModelJNI.ArrayPtrsPropertyGroup_getCapacityIncrement(swigCPtr, this);
-  }
-
   public boolean setSize(int aSize) {
     return opensimModelJNI.ArrayPtrsPropertyGroup_setSize(swigCPtr, this, aSize);
   }

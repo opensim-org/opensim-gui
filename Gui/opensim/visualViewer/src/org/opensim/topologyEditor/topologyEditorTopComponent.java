@@ -198,7 +198,7 @@ public final class topologyEditorTopComponent extends TopComponent implements Ob
             if (((ModelEvent)o1).getOperation()==ModelEvent.Operation.Close ||
                     (((ModelEvent)o1).getOperation()==ModelEvent.Operation.Open))
                 scene.clearAll();
-                //populateDefault();
+                populateDefault();
                 return;
             
         }
@@ -221,6 +221,7 @@ public final class topologyEditorTopComponent extends TopComponent implements Ob
                     widget.setBackground (Color.WHITE);
                     widget.setForeground (Color.RED);
                     selectedObjects.add(sel.getName());
+                    repaint();
                 }
             }
         }

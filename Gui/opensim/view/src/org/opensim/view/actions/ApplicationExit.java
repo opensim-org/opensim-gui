@@ -81,7 +81,7 @@ public class ApplicationExit extends WindowAdapter
          null,
          options,
          options[1]);
-      if (answer == 1)
+      if (answer == JOptionPane.NO_OPTION || answer == JOptionPane.CLOSED_OPTION)
          return false;
 
       System.out.println("Start saving application state.");

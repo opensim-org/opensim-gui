@@ -42,6 +42,7 @@ import java.util.Enumeration;
 import java.util.Vector;
 import org.opensim.logger.OpenSimLogger;
 import org.opensim.modeling.SimbodyEngine;
+import org.opensim.view.MuscleColoringFunction;
 import org.opensim.view.SelectedGlyphUserObject;
 import org.opensim.view.SelectionListener;
 import org.opensim.view.experimentaldata.AnnotatedMotion;
@@ -92,6 +93,7 @@ public class MotionDisplayer implements SelectionListener {
 
     double[] defaultExperimentalMarkerColor = new double[]{0.0, 0.35, 0.65};
     private double[] defaultForceColor = new double[]{0., 1.0, 0.};
+    private MuscleColoringFunction mcf=null;
      /**
      * @return the associatedMotions
      */
@@ -152,6 +154,14 @@ public class MotionDisplayer implements SelectionListener {
         defaultForceColor.getColorComponents(colorFloat);
         for (int i=0;i<3;i++) this.defaultForceColor[i] = (double) colorFloat[i];
         getGroundForcesRep().setColor(defaultForceColor);
+        
+    }
+
+    void setMuscleColoringFunction(MuscleColoringFunction mcbya) {
+        mcf = mcbya;
+        // Push it down to muscle displayers
+        SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
+        vis.setMuscleColoringFunction(mcf);
         
     }
     
@@ -539,6 +549,7 @@ public class MotionDisplayer implements SelectionListener {
       // if we're playing this motion synced with another motion)
       double clampedTime = (currentTime < simmMotionData.getFirstTime()) ? simmMotionData.getFirstTime() : 
                            (currentTime > simmMotionData.getLastTime()) ? simmMotionData.getLastTime() : currentTime;
+      OpenSimDB.getInstance().getContext(model).getCurrentStateRef().setTime(clampedTime);
       simmMotionData.getDataAtTime(clampedTime, interpolatedStates.getSize(), interpolatedStates);
       applyStatesToModel(interpolatedStates);
       // Repeat for associated motions
@@ -766,7 +777,7 @@ public class MotionDisplayer implements SelectionListener {
         for (MotionDisplayer assocMotion:associatedMotions){
           assocMotion.cleanupDisplay();
       }
-
+      setMuscleColoringFunction(null);
     }
 
    public Storage getSimmMotionData() {

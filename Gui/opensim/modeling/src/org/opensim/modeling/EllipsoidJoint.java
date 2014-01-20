@@ -95,14 +95,17 @@ public class EllipsoidJoint extends Joint {
 
   public EllipsoidJoint() {
     this(opensimModelJNI.new_EllipsoidJoint__SWIG_0(), true);
+    markAdopted();
   }
 
   public EllipsoidJoint(String name, Body parent, Vec3 locationInParent, Vec3 orientationInParent, Body body, Vec3 locationInBody, Vec3 orientationInBody, Vec3 ellipsoidRadii, boolean reverse) {
     this(opensimModelJNI.new_EllipsoidJoint__SWIG_1(name, Body.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, Body.getCPtr(body), body, Vec3.getCPtr(locationInBody), locationInBody, Vec3.getCPtr(orientationInBody), orientationInBody, Vec3.getCPtr(ellipsoidRadii), ellipsoidRadii, reverse), true);
+   markAdopted();
   }
 
   public EllipsoidJoint(String name, Body parent, Vec3 locationInParent, Vec3 orientationInParent, Body body, Vec3 locationInBody, Vec3 orientationInBody, Vec3 ellipsoidRadii) {
     this(opensimModelJNI.new_EllipsoidJoint__SWIG_2(name, Body.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, Body.getCPtr(body), body, Vec3.getCPtr(locationInBody), locationInBody, Vec3.getCPtr(orientationInBody), orientationInBody, Vec3.getCPtr(ellipsoidRadii), ellipsoidRadii), true);
+   markAdopted();
   }
 
   public int numCoordinates() {

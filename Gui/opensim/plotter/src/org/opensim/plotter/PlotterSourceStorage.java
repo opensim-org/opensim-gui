@@ -31,6 +31,7 @@ package org.opensim.plotter;
 import java.util.Vector;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
+import org.opensim.logger.OpenSimLogger;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.Storage;
@@ -161,7 +162,7 @@ public class PlotterSourceStorage implements PlotterSourceInterface {
 
     public boolean hasFullState(Model model) {
         ArrayStr stateNames = model.getStateVariableNames();
-        stateNames.append("time");
+        stateNames.insert(0, "time");
         //outStringArray(stateNames);
         ArrayStr storageLabels = storage.getColumnLabels();
         //outStringArray(storageLabels);
@@ -171,9 +172,9 @@ public class PlotterSourceStorage implements PlotterSourceInterface {
         //        System.out.println("Index "+i+" matches");
         
         if (isStatesStorage) 
-            System.out.println("Using states from input/states file");
+            OpenSimLogger.logMessage("Using states from input/states file\n", OpenSimLogger.INFO);
         else
-            System.out.println("Computing equilibrium for musle states");            
+            OpenSimLogger.logMessage("Computing equilibrium for musle states\n", OpenSimLogger.INFO);            
         return isStatesStorage;
     }
 

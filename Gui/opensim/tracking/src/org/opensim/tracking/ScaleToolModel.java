@@ -300,7 +300,8 @@ public class ScaleToolModel extends Observable implements Observer {
          progressHandle = ProgressHandleFactory.createHandle("Executing scaling...",
                               new Cancellable() {
                                  public boolean cancel() {
-                                    interrupt();
+                                    result = false;
+                                    finished();
                                     return true;
                                  }
                               });
@@ -337,7 +338,7 @@ public class ScaleToolModel extends Observable implements Observer {
                return this;
             }
          }
-
+         
          if(getMarkerPlacerEnabled()) {
             // Pass empty path as path to subject, since we already have the static trial as an absolute path
             if(!processedModelContext.processModelMarkerPlacer(scaleTool.getMarkerPlacer(), processedModel, "")) {
@@ -349,6 +350,7 @@ public class ScaleToolModel extends Observable implements Observer {
          return this;
       }
 
+      @Override
       public void finished() {
          progressHandle.finish();
 

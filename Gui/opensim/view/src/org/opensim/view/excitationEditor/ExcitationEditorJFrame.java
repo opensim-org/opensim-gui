@@ -342,7 +342,7 @@ public class ExcitationEditorJFrame extends javax.swing.JFrame {
             String fileNameWithExtention = FileUtils.addExtensionIfNeeded(fileName, ".xml");
             dPanel.getControlSet().print(fileNameWithExtention);  // We should also switch current set to use the saveAs file
             String temp=dPanel.getControlSet().getDocumentFileName();
-            
+            setTitle("Excitation Editor: Editing file "+temp);
          }
 // TODO add your handling code here:
     }//GEN-LAST:event_jSaveAsMenuItemActionPerformed

@@ -81,34 +81,6 @@ public class SetExternalForces extends OpenSimObject {
     opensimModelJNI.SetExternalForces_setMemoryOwner(swigCPtr, this, aTrueFalse);
   }
 
-  public boolean getMemoryOwner() {
-    return opensimModelJNI.SetExternalForces_getMemoryOwner(swigCPtr, this);
-  }
-
-  public boolean computeNewCapacity(int aMinCapacity, SWIGTYPE_p_int rNewCapacity) {
-    return opensimModelJNI.SetExternalForces_computeNewCapacity(swigCPtr, this, aMinCapacity, SWIGTYPE_p_int.getCPtr(rNewCapacity));
-  }
-
-  public boolean ensureCapacity(int aCapacity) {
-    return opensimModelJNI.SetExternalForces_ensureCapacity(swigCPtr, this, aCapacity);
-  }
-
-  public void trim() {
-    opensimModelJNI.SetExternalForces_trim(swigCPtr, this);
-  }
-
-  public int getCapacity() {
-    return opensimModelJNI.SetExternalForces_getCapacity(swigCPtr, this);
-  }
-
-  public void setCapacityIncrement(int aIncrement) {
-    opensimModelJNI.SetExternalForces_setCapacityIncrement(swigCPtr, this, aIncrement);
-  }
-
-  public int getCapacityIncrement() {
-    return opensimModelJNI.SetExternalForces_getCapacityIncrement(swigCPtr, this);
-  }
-
   public boolean setSize(int aSize) {
     return opensimModelJNI.SetExternalForces_setSize(swigCPtr, this, aSize);
   }
@@ -183,27 +155,6 @@ public class SetExternalForces extends OpenSimObject {
 
   public void getNames(ArrayStr rNames) {
     opensimModelJNI.SetExternalForces_getNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
-  }
-
-  public ExternalForce getLast() {
-    long cPtr = opensimModelJNI.SetExternalForces_getLast(swigCPtr, this);
-    return (cPtr == 0) ? null : new ExternalForce(cPtr, false);
-  }
-
-  public int searchBinary(ExternalForce aObject, boolean aFindFirst, int aLo, int aHi) {
-    return opensimModelJNI.SetExternalForces_searchBinary__SWIG_0(swigCPtr, this, ExternalForce.getCPtr(aObject), aObject, aFindFirst, aLo, aHi);
-  }
-
-  public int searchBinary(ExternalForce aObject, boolean aFindFirst, int aLo) {
-    return opensimModelJNI.SetExternalForces_searchBinary__SWIG_1(swigCPtr, this, ExternalForce.getCPtr(aObject), aObject, aFindFirst, aLo);
-  }
-
-  public int searchBinary(ExternalForce aObject, boolean aFindFirst) {
-    return opensimModelJNI.SetExternalForces_searchBinary__SWIG_2(swigCPtr, this, ExternalForce.getCPtr(aObject), aObject, aFindFirst);
-  }
-
-  public int searchBinary(ExternalForce aObject) {
-    return opensimModelJNI.SetExternalForces_searchBinary__SWIG_3(swigCPtr, this, ExternalForce.getCPtr(aObject), aObject);
   }
 
   public int getNumGroups() {

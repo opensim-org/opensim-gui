@@ -2,10 +2,13 @@ package org.opensim.view.nodes;
 
 
 import java.awt.Color;
+import java.io.IOException;
+import javax.swing.JOptionPane;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import org.openide.ErrorManager;
+import org.openide.util.Exceptions;
 import org.opensim.modeling.*;
 import org.opensim.utils.Vec3;
 import org.opensim.view.ExplorerTopComponent;
@@ -262,6 +265,7 @@ public class PropertyEditorAdaptor {
         setValueStringListFromString(aString, true);
     }
     public void setValueStringListFromArrayStr(ArrayStr oldValue, boolean b) {
+
          String stringStr = new String("(");
          for(int i=0;i<oldValue.getSize(); i++) {
              stringStr = stringStr.concat(oldValue.getitem(i));
@@ -271,7 +275,9 @@ public class PropertyEditorAdaptor {
          setValueStringListFromString(stringStr);
     }
 
-    private void setValueStringListFromString(String aString, boolean allowUndo) {
+    private void setValueStringListFromString(String aString, boolean allowUndo) {        
+        System.out.println("Property type: " + prop.getTypeName());
+        
         // Parse String into an array of doubles, check that it's the right size for prop then assign
         ArrayStr d = new ArrayStr();
         // Remove open and close parenth if any
@@ -339,56 +345,23 @@ public class PropertyEditorAdaptor {
         }
         handlePropertyChangeTransform(oldArray, d, allowUndo);
     }
-
-    private void cacheModelAndState() {
-
-        clonedModel = (Model)model.clone();
-        clonedState = context.getCurrentStateCopy();
         
-    }
-    
-    private void restoreStateFromCachedModel() {
-
-        try {
-            model.initSystem();
-            clonedModel.initSystem();
-
-        } catch (Exception e) {
-            // Any issues in initSystem gets thrown
-            IllegalArgumentException iae = new IllegalArgumentException(e.getMessage());
-            throw iae;
-        }
-        // Find all the state variables
-        ArrayStr modelVariableNames = model.getStateVariableNames();
-        ArrayStr clonedModelVariableNames = clonedModel.getStateVariableNames();
-
-        for(int i = 0; i < modelVariableNames.getSize(); i++) {
-
-            // Going through the state variables in the model
-            String name = modelVariableNames.getitem(i);
-
-            // If finds it in the clonedState, copies value over
-            if(clonedModelVariableNames.findIndex(name) >=0 ) {
-                double value = clonedModel.getStateVariable(clonedState, name);
-                model.setStateVariable(model.getWorkingState(), name, value); 
-            }
-        }
-
-        context.setState(model.getWorkingState());
-        context.realizePosition();
-    }
-    
     private void handlePropertyChange(final double oldValue, final double v, boolean supportUndo) {
         
-        cacheModelAndState();
+        context.cacheModelAndState();
         PropertyHelper.setValueDouble(v, prop);        
         try {
-            restoreStateFromCachedModel();
-        } catch (IllegalArgumentException iae) {
-            ErrorManager.getDefault().annotate(iae, ErrorManager.ERROR, null, iae.getMessage(), null, null);
+            context.restoreStateFromCachedModel();
+        } catch (IOException iae) {
+            try {
+                 new JOptionPane(iae.getMessage(), 
+				JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+                
             PropertyHelper.setValueDouble(oldValue, prop);
-            restoreStateFromCachedModel();  
-            throw iae;
+                context.restoreStateFromCachedModel();  
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+        }
         }
         handlePropertyChangeCommon();
         
@@ -421,15 +394,20 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChange(final String oldValue, final String v, boolean supportUndo) {
-        cacheModelAndState();
+        context.cacheModelAndState();
         PropertyHelper.setValueString(v, prop);        
         try {
-            restoreStateFromCachedModel();
-        } catch (IllegalArgumentException iae) {
-            ErrorManager.getDefault().annotate(iae, ErrorManager.ERROR, null, iae.getMessage(), null, null);
+            context.restoreStateFromCachedModel();
+         } catch (IOException iae) {
+            try {
+                 new JOptionPane(iae.getMessage(), 
+				JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+                
             PropertyHelper.setValueString(oldValue, prop);
-            restoreStateFromCachedModel();  
-            throw iae;
+                context.restoreStateFromCachedModel();  
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+        }
         }
         handlePropertyChangeCommon();
         
@@ -462,15 +440,20 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChange(final boolean oldValue, final boolean v, boolean supportUndo) {
-        cacheModelAndState();
+        context.cacheModelAndState();
         PropertyHelper.setValueBool(v, prop);        
         try {
-            restoreStateFromCachedModel();
-        } catch (IllegalArgumentException iae) {
-            ErrorManager.getDefault().annotate(iae, ErrorManager.ERROR, null, iae.getMessage(), null, null);
+            context.restoreStateFromCachedModel();
+        } catch (IOException iae) {
+            try {
+                new JOptionPane(iae.getMessage(), 
+				JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+                
             PropertyHelper.setValueBool(oldValue, prop);
-            restoreStateFromCachedModel();  
-            throw iae;
+                context.restoreStateFromCachedModel();  
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+        }
         }
         handlePropertyChangeCommon();
 
@@ -503,15 +486,20 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChange(final int oldValue, final int v, boolean supportUndo) {
-        cacheModelAndState();
+        context.cacheModelAndState();
         PropertyHelper.setValueInt(v, prop);
         try {
-            restoreStateFromCachedModel();
-        } catch (IllegalArgumentException iae) {
-            ErrorManager.getDefault().annotate(iae, ErrorManager.ERROR, null, iae.getMessage(), null, null);
+            context.restoreStateFromCachedModel();
+        } catch (IOException iae) {
+            try {
+                new JOptionPane(iae.getMessage(), 
+				JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+                
             PropertyHelper.setValueInt(oldValue, prop);
-            restoreStateFromCachedModel();  
-            throw iae;
+                context.restoreStateFromCachedModel();  
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+        }
         }
         handlePropertyChangeCommon();
 
@@ -544,20 +532,25 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChange(final ArrayDouble oldValue, final ArrayDouble v, boolean supportUndo) {
-        cacheModelAndState();
+        context.cacheModelAndState();
         int sz = v.size();
         for (int i = 0; i < sz; i++) {
             PropertyHelper.setValueDouble(v.getitem(i), prop, i);
         }
         try {
-            restoreStateFromCachedModel();
-        } catch (IllegalArgumentException iae) {
-            ErrorManager.getDefault().annotate(iae, ErrorManager.ERROR, null, iae.getMessage(), null, null);
-            for (int i = 0; i < sz; i++) {
+            context.restoreStateFromCachedModel();
+        } catch (IOException iae) {
+            try {
+                new JOptionPane(iae.getMessage(),
+                        JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+                int oldSize = oldValue.size();
+                for (int i = 0; i < oldSize; i++) {
                 PropertyHelper.setValueDouble(oldValue.getitem(i), prop, i);
             }
-            restoreStateFromCachedModel();  
-            throw iae;
+                context.restoreStateFromCachedModel();
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+        }
         }
         handlePropertyChangeCommon();
 
@@ -590,20 +583,25 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChange(final Vec3 oldValue, final Vec3 v, boolean supportUndo) {
-        cacheModelAndState();
+        context.cacheModelAndState();
         for (int i = 0; i < 3; i++) {
             PropertyHelper.setValueVec3(v.get()[i], prop , i);
         }
 
         try {
-            restoreStateFromCachedModel();
-        } catch (IllegalArgumentException iae) {
-            ErrorManager.getDefault().annotate(iae, ErrorManager.ERROR, null, iae.getMessage(), null, null);
+            context.restoreStateFromCachedModel();
+        } catch (IOException iae) {
+            try {
+                new JOptionPane(iae.getMessage(),
+                        JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+
             for (int i = 0; i < 3; i++) {
-                PropertyHelper.setValueVec3(oldValue.get()[i], prop , i);
+                    PropertyHelper.setValueVec3(oldValue.get()[i], prop, i);
             }
-            restoreStateFromCachedModel();  
-            throw iae;
+                context.restoreStateFromCachedModel();
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+        }
         }
         
         handlePropertyChangeCommon();
@@ -639,7 +637,7 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChangeTransform(final ArrayDouble oldValue, final ArrayDouble v, boolean supportUndo) {
-        cacheModelAndState();
+        context.cacheModelAndState();
         int sz = prop.size();
 
         for (int i = 0; i < sz; i++) {
@@ -647,15 +645,20 @@ public class PropertyEditorAdaptor {
         }
 
         try {
-            restoreStateFromCachedModel();
-        } catch (IllegalArgumentException iae) {
-            ErrorManager.getDefault().annotate(iae, ErrorManager.ERROR, null, iae.getMessage(), null, null);
+            context.restoreStateFromCachedModel();
+        } catch (IOException iae) {
+            try {
+                new JOptionPane(iae.getMessage(),
+                        JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+
             for (int i = 0; i < sz; i++) {
                 PropertyHelper.setValueTransform(oldValue.getitem(i), prop, i);
             }
-            restoreStateFromCachedModel();  
-            throw iae;
-        }        
+                context.restoreStateFromCachedModel();
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+            }
+        }
         handlePropertyChangeCommon();
 
         if (supportUndo) {
@@ -688,8 +691,21 @@ public class PropertyEditorAdaptor {
     
     private void handlePropertyChange(final OpenSimObject oldObject, final OpenSimObject v, boolean supportUndo) {
 
-        //context.setPropertiesFromState();
+        context.cacheModelAndState();
         //prop.setValueAsObject(v);
+        try {
+            context.restoreStateFromCachedModel();
+        } catch (IOException iae) {
+            try {
+                new JOptionPane(iae.getMessage(), 
+				JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+                
+                 prop.setValueAsObject(oldObject);
+                context.restoreStateFromCachedModel();  
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+            }
+        }
         handlePropertyChangeCommon();
         if (false) {
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
@@ -727,21 +743,36 @@ public class PropertyEditorAdaptor {
         }
         final ArrayStr newArray = new ArrayStr();
         for (int i = 0; i < splits.length; i++) {
+            System.out.println("Splits: " + splits[i]);
             newArray.append(splits[i]);
         }
        
         handlePropertyChange(oldArray, newArray, allowUndo);    
     }
     private void handlePropertyChange(final ArrayStr oldValue, final ArrayStr newValue, boolean supportUndo) {
-        cacheModelAndState();    
-        PropertyHelper.setValueStringArray(prop, newValue);
+        System.out.println("Property: " + prop.getTypeName());
+        System.out.println("Editing string");
+        context.cacheModelAndState();    
+        System.out.println("Got here though");
         try {
-            restoreStateFromCachedModel();
-        } catch (IllegalArgumentException iae) {
-            ErrorManager.getDefault().annotate(iae, ErrorManager.ERROR, null, iae.getMessage(), null, null);
+        PropertyHelper.setValueStringArray(prop, newValue);
+            System.out.println("Set up string");
+
+            System.out.println("Exception?");
+            context.restoreStateFromCachedModel();
+         } catch (Exception iae) {
+             System.out.println("Caught.");
+        try {
+                System.out.println("Exception again?");
+                new JOptionPane(iae.getMessage(), 
+				JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+                
             PropertyHelper.setValueStringArray(prop, oldValue);
-            restoreStateFromCachedModel();  
-            throw iae;
+                context.restoreStateFromCachedModel();  
+            } catch (Exception ex) {
+                System.out.println("Caught again.");
+                Exceptions.printStackTrace(ex);
+        }
         }
         handlePropertyChangeCommon();
 
@@ -778,8 +809,12 @@ public class PropertyEditorAdaptor {
      */
     public void handleModelChange()
     {
-        cacheModelAndState();
-        restoreStateFromCachedModel();
+        try {
+            context.cacheModelAndState();
+            context.restoreStateFromCachedModel();
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+    }
     }
             
 }

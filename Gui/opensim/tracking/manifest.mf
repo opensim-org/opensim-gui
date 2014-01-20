@@ -3,5 +3,5 @@ OpenIDE-Module: org.opensim.tracking
 OpenIDE-Module-Layer: org/opensim/tracking/layer.xml
 OpenIDE-Module-Localizing-Bundle: org/opensim/tracking/Bundle.properties
 OpenIDE-Module-Requires: org.netbeans.api.javahelp.Help
-OpenIDE-Module-Specification-Version: 1.0
+OpenIDE-Module-Specification-Version: 3.204
 

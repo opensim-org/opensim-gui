@@ -51,38 +51,6 @@ public class SetControlNodes {
     opensimModelJNI.SetControlNodes_clearAndDestroy(swigCPtr, this);
   }
 
-  public void setMemoryOwner(boolean aTrueFalse) {
-    opensimModelJNI.SetControlNodes_setMemoryOwner(swigCPtr, this, aTrueFalse);
-  }
-
-  public boolean getMemoryOwner() {
-    return opensimModelJNI.SetControlNodes_getMemoryOwner(swigCPtr, this);
-  }
-
-  public boolean computeNewCapacity(int aMinCapacity, SWIGTYPE_p_int rNewCapacity) {
-    return opensimModelJNI.SetControlNodes_computeNewCapacity(swigCPtr, this, aMinCapacity, SWIGTYPE_p_int.getCPtr(rNewCapacity));
-  }
-
-  public boolean ensureCapacity(int aCapacity) {
-    return opensimModelJNI.SetControlNodes_ensureCapacity(swigCPtr, this, aCapacity);
-  }
-
-  public void trim() {
-    opensimModelJNI.SetControlNodes_trim(swigCPtr, this);
-  }
-
-  public int getCapacity() {
-    return opensimModelJNI.SetControlNodes_getCapacity(swigCPtr, this);
-  }
-
-  public void setCapacityIncrement(int aIncrement) {
-    opensimModelJNI.SetControlNodes_setCapacityIncrement(swigCPtr, this, aIncrement);
-  }
-
-  public int getCapacityIncrement() {
-    return opensimModelJNI.SetControlNodes_getCapacityIncrement(swigCPtr, this);
-  }
-
   public boolean setSize(int aSize) {
     return opensimModelJNI.SetControlNodes_setSize(swigCPtr, this, aSize);
   }

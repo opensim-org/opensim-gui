@@ -4,5 +4,5 @@ OpenIDE-Module-Install: org/opensim/view/Installer.class
 OpenIDE-Module-Layer: org/opensim/view/layer.xml
 OpenIDE-Module-Localizing-Bundle: org/opensim/view/Bundle.properties
 OpenIDE-Module-Requires: org.netbeans.api.javahelp.Help
-OpenIDE-Module-Specification-Version: 1.0
+OpenIDE-Module-Specification-Version: 3.204
 

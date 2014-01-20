@@ -81,34 +81,6 @@ public class SetContactGeometry extends OpenSimObject {
     opensimModelJNI.SetContactGeometry_setMemoryOwner(swigCPtr, this, aTrueFalse);
   }
 
-  public boolean getMemoryOwner() {
-    return opensimModelJNI.SetContactGeometry_getMemoryOwner(swigCPtr, this);
-  }
-
-  public boolean computeNewCapacity(int aMinCapacity, SWIGTYPE_p_int rNewCapacity) {
-    return opensimModelJNI.SetContactGeometry_computeNewCapacity(swigCPtr, this, aMinCapacity, SWIGTYPE_p_int.getCPtr(rNewCapacity));
-  }
-
-  public boolean ensureCapacity(int aCapacity) {
-    return opensimModelJNI.SetContactGeometry_ensureCapacity(swigCPtr, this, aCapacity);
-  }
-
-  public void trim() {
-    opensimModelJNI.SetContactGeometry_trim(swigCPtr, this);
-  }
-
-  public int getCapacity() {
-    return opensimModelJNI.SetContactGeometry_getCapacity(swigCPtr, this);
-  }
-
-  public void setCapacityIncrement(int aIncrement) {
-    opensimModelJNI.SetContactGeometry_setCapacityIncrement(swigCPtr, this, aIncrement);
-  }
-
-  public int getCapacityIncrement() {
-    return opensimModelJNI.SetContactGeometry_getCapacityIncrement(swigCPtr, this);
-  }
-
   public boolean setSize(int aSize) {
     return opensimModelJNI.SetContactGeometry_setSize(swigCPtr, this, aSize);
   }
@@ -183,27 +155,6 @@ public class SetContactGeometry extends OpenSimObject {
 
   public void getNames(ArrayStr rNames) {
     opensimModelJNI.SetContactGeometry_getNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
-  }
-
-  public ContactGeometry getLast() {
-    long cPtr = opensimModelJNI.SetContactGeometry_getLast(swigCPtr, this);
-    return (cPtr == 0) ? null : new ContactGeometry(cPtr, false);
-  }
-
-  public int searchBinary(ContactGeometry aObject, boolean aFindFirst, int aLo, int aHi) {
-    return opensimModelJNI.SetContactGeometry_searchBinary__SWIG_0(swigCPtr, this, ContactGeometry.getCPtr(aObject), aObject, aFindFirst, aLo, aHi);
-  }
-
-  public int searchBinary(ContactGeometry aObject, boolean aFindFirst, int aLo) {
-    return opensimModelJNI.SetContactGeometry_searchBinary__SWIG_1(swigCPtr, this, ContactGeometry.getCPtr(aObject), aObject, aFindFirst, aLo);
-  }
-
-  public int searchBinary(ContactGeometry aObject, boolean aFindFirst) {
-    return opensimModelJNI.SetContactGeometry_searchBinary__SWIG_2(swigCPtr, this, ContactGeometry.getCPtr(aObject), aObject, aFindFirst);
-  }
-
-  public int searchBinary(ContactGeometry aObject) {
-    return opensimModelJNI.SetContactGeometry_searchBinary__SWIG_3(swigCPtr, this, ContactGeometry.getCPtr(aObject), aObject);
   }
 
   public int getNumGroups() {

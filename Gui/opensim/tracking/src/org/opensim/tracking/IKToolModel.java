@@ -42,6 +42,7 @@ import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.Storage;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.swingui.SwingWorker;
+import org.opensim.tracking.tools.SimulationDB;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.motions.JavaMotionDisplayerCallback;
@@ -85,6 +86,7 @@ public class IKToolModel extends Observable implements Observer {
                               new Cancellable() {
                                  public boolean cancel() {
                                     interrupt(true);
+                                    SimulationDB.getInstance().fireToolFinish();
                                     return true;
                                  }
                               });
@@ -103,6 +105,8 @@ public class IKToolModel extends Observable implements Observer {
          interruptingCallback = new InterruptCallback(getOriginalModel());
          getOriginalModel().addAnalysis(interruptingCallback);
          setExecuting(true);
+         SimulationDB.getInstance().fireToolStart();
+
       }
 
       public void interrupt(boolean promptToKeepPartialResult)  {
@@ -118,6 +122,7 @@ public class IKToolModel extends Observable implements Observer {
          }
          catch(Exception ex) {
             progressHandle.finish();
+            SimulationDB.getInstance().fireToolFinish();
             worker=null;
             cleanup=false;
             getOriginalModel().removeAnalysis(interruptingCallback, false);
@@ -128,6 +133,7 @@ public class IKToolModel extends Observable implements Observer {
 
       public void finished() {
          progressHandle.finish();
+         SimulationDB.getInstance().fireToolFinish();
          if (!cleanup) {         
              setExecuting(false);
             return;
@@ -223,6 +229,7 @@ public class IKToolModel extends Observable implements Observer {
       if(isModified() && worker==null) {
          try {
             worker = new IKToolWorker();
+            SimulationDB.getInstance().fireToolStart();
             worker.start();
          } catch (Exception ex) {
             DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message(ex.getMessage(), NotifyDescriptor.ERROR_MESSAGE));

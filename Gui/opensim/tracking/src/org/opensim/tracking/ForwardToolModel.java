@@ -94,7 +94,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
          // Initialize progress bar, given we know the number of frames to process
          double ti = getInitialTime();
          double tf = getFinalTime();
-         progressHandle = ProgressHandleFactory.createHandle("Executing forward integration...",
+         progressHandle = ProgressHandleFactory.createHandle("Forward integration...",
                               new Cancellable() {
                                  public boolean cancel() {
                                     interrupt(true);
@@ -105,12 +105,13 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
          //getOriginalModel().setName("Originial");
          //model.setName("daCopy");
          // Animation callback will update the display *of the original model* during forward
-         animationCallback = new JavaMotionDisplayerCallback(model, getOriginalModel(), null, progressHandle);
+         animationCallback = new JavaMotionDisplayerCallback(model, getOriginalModel(), null, progressHandle, false);
          getModel().addAnalysis(animationCallback);
          animationCallback.setStepInterval(1);
          animationCallback.setMinRenderTimeInterval(0.1); // to avoid rendering really frequently which can slow down our execution
          animationCallback.setRenderMuscleActivations(true);
          animationCallback.startProgressUsingTime(ti,tf);
+         animationCallback.setDisplayTimeProgress(true);
 
          // Do this manouver (there's gotta be a nicer way) to create the object so that C++ owns it and not Java (since 
          // removeIntegCallback in finished() will cause the C++-side callback to be deleted, and if Java owned this object
@@ -126,7 +127,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
       public void interrupt(boolean promptToKeepPartialResult) {
          this.promptToKeepPartialResult = promptToKeepPartialResult;
          if(interruptingCallback!=null) interruptingCallback.interrupt();
-         // Remove Stoppable from lookup to Enable run and disable stop
+         
       }
 
       public Object construct() {
@@ -144,7 +145,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
          System.out.println("Finished running forward tool.");
          boolean processResults = result;
          if(!result && promptToKeepPartialResult) {
-            Object answer = DialogDisplayer.getDefault().notify(new NotifyDescriptor.Confirmation("Forward integration did not complete.  Keep partial result?",NotifyDescriptor.YES_NO_OPTION));
+            Object answer = NotifyDescriptor.YES_OPTION;//DialogDisplayer.getDefault().notify(new NotifyDescriptor.Confirmation("Do you want to keep your forward simulation results?",NotifyDescriptor.YES_NO_OPTION));
             if(answer==NotifyDescriptor.YES_OPTION) processResults = true;
          }
          //animationCallback.getStateStorage().print("AccumulatedState.sto");
@@ -246,6 +247,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
       motion = newMotion;
       if(motion!=null) {
          MotionsDB.getInstance().addMotion(getOriginalModel(), motion, null);
+         MotionsDB.getInstance().setMotionModified(motion, true);
          //MotionControlJPanel.getInstance().setUserTime(motion.getLastTime());
       }
    }

@@ -357,15 +357,16 @@ public class OpenSimDB extends Observable implements Externalizable{
             String nextFilename = files.get(i);                
             File nextFile = new File(nextFilename);
             if (nextFile.exists()){
+               String absolutePath = nextFile.getAbsolutePath();
                try {
                     // Display original model
                     ((FileOpenOsimModelAction) FileOpenOsimModelAction.findObject(
-                            (Class)Class.forName("org.opensim.view.FileOpenOsimModelAction"), true)).loadModel(nextFilename, true);
+                            (Class)Class.forName("org.opensim.view.FileOpenOsimModelAction"), true)).loadModel(absolutePath, true);
                 } catch (ClassNotFoundException ex) {
                     ex.printStackTrace();
                 } catch (IOException ex) {
                     DialogDisplayer.getDefault().notify(
-                            new NotifyDescriptor.Message("Error opening model file "+nextFilename));
+                            new NotifyDescriptor.Message("Error opening model file "+absolutePath));
                 };
                 if (i==descriptor.getCurrentModelIndex()){
                     saveCurrentModel=OpenSimDB.getInstance().getCurrentModel();

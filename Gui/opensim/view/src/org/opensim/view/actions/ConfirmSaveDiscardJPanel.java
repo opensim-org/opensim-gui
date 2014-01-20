@@ -80,8 +80,11 @@ public class ConfirmSaveDiscardJPanel extends javax.swing.JPanel {
     private javax.swing.JCheckBox remeberDecisionCheckBox;
     // End of variables declaration//GEN-END:variables
 
-    boolean rememberUserChoice() {
+    public boolean rememberUserChoice() {
         return rememberChoice;
     }
 
+    public void setConformationText(String text){
+        jLabel1.setText(text);
+    }
 }

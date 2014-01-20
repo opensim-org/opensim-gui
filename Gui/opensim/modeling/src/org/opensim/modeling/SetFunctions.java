@@ -81,34 +81,6 @@ public class SetFunctions extends OpenSimObject {
     opensimModelJNI.SetFunctions_setMemoryOwner(swigCPtr, this, aTrueFalse);
   }
 
-  public boolean getMemoryOwner() {
-    return opensimModelJNI.SetFunctions_getMemoryOwner(swigCPtr, this);
-  }
-
-  public boolean computeNewCapacity(int aMinCapacity, SWIGTYPE_p_int rNewCapacity) {
-    return opensimModelJNI.SetFunctions_computeNewCapacity(swigCPtr, this, aMinCapacity, SWIGTYPE_p_int.getCPtr(rNewCapacity));
-  }
-
-  public boolean ensureCapacity(int aCapacity) {
-    return opensimModelJNI.SetFunctions_ensureCapacity(swigCPtr, this, aCapacity);
-  }
-
-  public void trim() {
-    opensimModelJNI.SetFunctions_trim(swigCPtr, this);
-  }
-
-  public int getCapacity() {
-    return opensimModelJNI.SetFunctions_getCapacity(swigCPtr, this);
-  }
-
-  public void setCapacityIncrement(int aIncrement) {
-    opensimModelJNI.SetFunctions_setCapacityIncrement(swigCPtr, this, aIncrement);
-  }
-
-  public int getCapacityIncrement() {
-    return opensimModelJNI.SetFunctions_getCapacityIncrement(swigCPtr, this);
-  }
-
   public boolean setSize(int aSize) {
     return opensimModelJNI.SetFunctions_setSize(swigCPtr, this, aSize);
   }
@@ -183,27 +155,6 @@ public class SetFunctions extends OpenSimObject {
 
   public void getNames(ArrayStr rNames) {
     opensimModelJNI.SetFunctions_getNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
-  }
-
-  public Function getLast() {
-    long cPtr = opensimModelJNI.SetFunctions_getLast(swigCPtr, this);
-    return (cPtr == 0) ? null : new Function(cPtr, false);
-  }
-
-  public int searchBinary(Function aObject, boolean aFindFirst, int aLo, int aHi) {
-    return opensimModelJNI.SetFunctions_searchBinary__SWIG_0(swigCPtr, this, Function.getCPtr(aObject), aObject, aFindFirst, aLo, aHi);
-  }
-
-  public int searchBinary(Function aObject, boolean aFindFirst, int aLo) {
-    return opensimModelJNI.SetFunctions_searchBinary__SWIG_1(swigCPtr, this, Function.getCPtr(aObject), aObject, aFindFirst, aLo);
-  }
-
-  public int searchBinary(Function aObject, boolean aFindFirst) {
-    return opensimModelJNI.SetFunctions_searchBinary__SWIG_2(swigCPtr, this, Function.getCPtr(aObject), aObject, aFindFirst);
-  }
-
-  public int searchBinary(Function aObject) {
-    return opensimModelJNI.SetFunctions_searchBinary__SWIG_3(swigCPtr, this, Function.getCPtr(aObject), aObject);
   }
 
   public int getNumGroups() {

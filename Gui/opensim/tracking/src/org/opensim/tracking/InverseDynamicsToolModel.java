@@ -107,7 +107,7 @@ public class InverseDynamicsToolModel extends AbstractToolModelWithExternalLoads
                               });
 
          // Animation callback will update the display during forward
-         animationCallback = new JavaMotionDisplayerCallback(getModel(), getOriginalModel(), null, progressHandle);
+         animationCallback = new JavaMotionDisplayerCallback(getModel(), getOriginalModel(), null, progressHandle, false);
          getModel().addAnalysis(animationCallback);
          animationCallback.setStepInterval(1);
          animationCallback.setMinRenderTimeInterval(0.1); // to avoid rendering really frequently which can slow down our execution

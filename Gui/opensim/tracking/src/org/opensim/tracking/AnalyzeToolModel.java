@@ -42,6 +42,7 @@ import org.opensim.modeling.InverseDynamics;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.StaticOptimization;
 import org.opensim.swingui.SwingWorker;
+import org.opensim.tracking.tools.SimulationDB;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.motions.JavaMotionDisplayerCallback;
@@ -102,12 +103,13 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
                               new Cancellable() {
                                  public boolean cancel() {
                                     interrupt(false);
+                                    SimulationDB.getInstance().fireToolFinish();
                                     return true;
                                  }
                               });
 
          // Animation callback will update the display during forward
-         animationCallback = new JavaMotionDisplayerCallback(getModel(), getOriginalModel(), null, progressHandle);
+         animationCallback = new JavaMotionDisplayerCallback(getModel(), getOriginalModel(), null, progressHandle, staticOptimizationMode);
          getModel().addAnalysis(animationCallback);
          animationCallback.setStepInterval(1);
          animationCallback.setMinRenderTimeInterval(0.1); // to avoid rendering really frequently which can slow down our execution
@@ -120,7 +122,8 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
          getModel().addAnalysis(interruptingCallback);
          addResultDisplayers(getModel());   // Create all analyses that need to be created on analysis model
          setExecuting(true);
-      }
+         SimulationDB.getInstance().fireToolStart();
+   }
 
       public void interrupt(boolean promptToKeepPartialResult) {
          this.promptToKeepPartialResult = promptToKeepPartialResult;
@@ -129,10 +132,12 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
 
       public Object construct() {
          try {
+            SimulationDB.getInstance().fireToolStart();
             result = tool.run();
          } catch (IOException ex) {
             DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message("Tool execution failed. Check Messages window for details."));
             ex.printStackTrace();
+            SimulationDB.getInstance().fireToolFinish();
          }
 
          return this;
@@ -164,6 +169,7 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
          if(result) resetModified();
 
          setExecuting(false);
+         SimulationDB.getInstance().fireToolFinish();
 
          worker = null;
       }

@@ -81,34 +81,6 @@ public class SetPathPoint extends OpenSimObject {
     opensimModelJNI.SetPathPoint_setMemoryOwner(swigCPtr, this, aTrueFalse);
   }
 
-  public boolean getMemoryOwner() {
-    return opensimModelJNI.SetPathPoint_getMemoryOwner(swigCPtr, this);
-  }
-
-  public boolean computeNewCapacity(int aMinCapacity, SWIGTYPE_p_int rNewCapacity) {
-    return opensimModelJNI.SetPathPoint_computeNewCapacity(swigCPtr, this, aMinCapacity, SWIGTYPE_p_int.getCPtr(rNewCapacity));
-  }
-
-  public boolean ensureCapacity(int aCapacity) {
-    return opensimModelJNI.SetPathPoint_ensureCapacity(swigCPtr, this, aCapacity);
-  }
-
-  public void trim() {
-    opensimModelJNI.SetPathPoint_trim(swigCPtr, this);
-  }
-
-  public int getCapacity() {
-    return opensimModelJNI.SetPathPoint_getCapacity(swigCPtr, this);
-  }
-
-  public void setCapacityIncrement(int aIncrement) {
-    opensimModelJNI.SetPathPoint_setCapacityIncrement(swigCPtr, this, aIncrement);
-  }
-
-  public int getCapacityIncrement() {
-    return opensimModelJNI.SetPathPoint_getCapacityIncrement(swigCPtr, this);
-  }
-
   public boolean setSize(int aSize) {
     return opensimModelJNI.SetPathPoint_setSize(swigCPtr, this, aSize);
   }
@@ -183,27 +155,6 @@ public class SetPathPoint extends OpenSimObject {
 
   public void getNames(ArrayStr rNames) {
     opensimModelJNI.SetPathPoint_getNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
-  }
-
-  public PathPoint getLast() {
-    long cPtr = opensimModelJNI.SetPathPoint_getLast(swigCPtr, this);
-    return (cPtr == 0) ? null : new PathPoint(cPtr, false);
-  }
-
-  public int searchBinary(PathPoint aObject, boolean aFindFirst, int aLo, int aHi) {
-    return opensimModelJNI.SetPathPoint_searchBinary__SWIG_0(swigCPtr, this, PathPoint.getCPtr(aObject), aObject, aFindFirst, aLo, aHi);
-  }
-
-  public int searchBinary(PathPoint aObject, boolean aFindFirst, int aLo) {
-    return opensimModelJNI.SetPathPoint_searchBinary__SWIG_1(swigCPtr, this, PathPoint.getCPtr(aObject), aObject, aFindFirst, aLo);
-  }
-
-  public int searchBinary(PathPoint aObject, boolean aFindFirst) {
-    return opensimModelJNI.SetPathPoint_searchBinary__SWIG_2(swigCPtr, this, PathPoint.getCPtr(aObject), aObject, aFindFirst);
-  }
-
-  public int searchBinary(PathPoint aObject) {
-    return opensimModelJNI.SetPathPoint_searchBinary__SWIG_3(swigCPtr, this, PathPoint.getCPtr(aObject), aObject);
   }
 
   public int getNumGroups() {

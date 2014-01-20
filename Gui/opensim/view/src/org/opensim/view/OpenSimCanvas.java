@@ -40,11 +40,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.util.prefs.Preferences;
 import javax.swing.JPopupMenu;
 import org.opensim.logger.OpenSimLogger;
-import org.opensim.modeling.Body;
 import org.opensim.modeling.MovingPathPoint;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.utils.TheApp;
 import org.opensim.view.base.OpenSimBaseCanvas;
 import org.opensim.view.editors.ObjectEditDialogMaker;
 import org.opensim.view.pub.ViewDB;
@@ -377,23 +378,34 @@ public class OpenSimCanvas extends OpenSimBaseCanvas implements MouseWheelListen
    
    // support for writing AVI movies.
    vtkAVIWriter movieWriter=null;
+   String movieFilePath = "";
+   int frameCounter = 1;
    static public boolean movieWriterReady=false; // static to represent if movie is being written in any view
    vtkWindowToImageFilter imageFilter=null;
+   boolean saveramesOnly = false;
    /**
     * Create a movie with the specified filename
     */
    public void createMovie(String fileName) {
-       movieWriter = new vtkAVIWriter();
-       movieWriter.SetFileName(fileName);
-              
-       imageFilter = new vtkWindowToImageFilter();
-       imageFilter.SetMagnification(1);
-       imageFilter.SetInput(rw);
-       imageFilter.ReadFrontBufferOff();
-       imageFilter.Update();
-       
-       movieWriter.SetInputConnection(imageFilter.GetOutputPort());
-       movieWriter.Start();
+       // Workaround failure to create movies on 64 bit windows
+       String saved = Preferences.userNodeForPackage(TheApp.class).get("Save Movie Frames", "Off");
+       saveramesOnly = saved.equalsIgnoreCase("On");
+       if (saveramesOnly){
+            movieFilePath = fileName;    
+            frameCounter = 1;           
+       }
+       else {
+           movieWriter = new vtkAVIWriter();
+           movieWriter.SetFileName(fileName);
+           imageFilter = new vtkWindowToImageFilter();
+           imageFilter.SetMagnification(1);
+           imageFilter.SetInput(rw);
+           imageFilter.ReadFrontBufferOff();
+           imageFilter.Update();
+
+           movieWriter.SetInputConnection(imageFilter.GetOutputPort());
+           movieWriter.Start();
+       }
        movieWriterReady=true;
    }
 
@@ -406,15 +418,25 @@ public class OpenSimCanvas extends OpenSimBaseCanvas implements MouseWheelListen
           long after=System.nanoTime();
           OpenSimLogger.logMessage("Render time: "+1e-6*(after-before)+" ms.\n", OpenSimLogger.INFO);
         }
-        if (movieWriter!=null && movieWriterReady){
-            imageFilter.Modified();
-            imageFilter.Update();
-            movieWriter.Write();
+        if (movieWriterReady){
+            if (saveramesOnly){
+                String fullPath = movieFilePath.concat(String.valueOf(frameCounter))+".tiff";
+                HardCopy(fullPath, 1);
+                frameCounter++;
+            } else{
+                if (movieWriter!=null){
+                    imageFilter.Modified();
+                    imageFilter.Update();
+                    movieWriter.Write();
+                }
+            }
         }
     }
     
     public void finishMovie() {
-        movieWriter.End();
+        if (!saveramesOnly){
+            movieWriter.End();
+        }
         movieWriter=null;
         movieWriterReady=false;
     }
