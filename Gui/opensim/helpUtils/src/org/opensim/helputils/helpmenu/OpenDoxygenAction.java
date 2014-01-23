@@ -22,7 +22,7 @@ public final class OpenDoxygenAction extends CallableSystemAction {
     
     public void performAction() {
         String basePath = TheApp.getInstallDir();
-        String doxygenPath = BrowserLauncher.isConnected() ? "https://simtk.org/api_docs/opensim/api_docs31/" :
+        String doxygenPath = BrowserLauncher.isConnected() ? "https://simtk.org/api_docs/opensim/api_docs32/" :
                 basePath + File.separator + "sdk" + File.separator + "doc" + File.separator + "OpenSimAPI.html";     
 
         BrowserLauncher.openURL(doxygenPath);
