@@ -64,7 +64,7 @@ public final class TutorialsAction extends CallableSystemAction {
       JMenu displayMenu = new JMenu("Examples & Tutorials");
       FileFilter fileFilter = new FileFilter() {
                 public boolean accept(File file) {
-                    return (!file.isDirectory()&& file.getName().endsWith(".pdf"));
+                    return (!file.isDirectory()&& file.getName().endsWith(".html"));
                 }
       };
       

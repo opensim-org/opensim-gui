@@ -43,4 +43,5 @@ INSTALL(DIRECTORY ${JRE_TO_PACKAGE} DESTINATION jdk)
 # Should also have -J-Dsun.java2d.ddoffscreen=false -J-Dsun.java2d.gdiblit=false
 # in addition first line should have
 # default_userdir="${HOME}/.${APPNAME}/1.0/dev"
+SUBDIRS(Documentation)
 ENDIF(OPENSIM_INSTALL_PACKAGE_BUILD)

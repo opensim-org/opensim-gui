@@ -27,9 +27,10 @@ package org.opensim.helputils.helpmenu;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
-import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import javax.swing.AbstractAction;
+import org.openide.util.Exceptions;
 import org.opensim.utils.BrowserLauncher;
 import org.opensim.utils.TheApp;
 
@@ -55,11 +56,20 @@ class BrowserPageDisplayerAction extends AbstractAction
         
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        String file="";
+        try {
+            URL onlineURL = new URL(url);
+            file = onlineURL.getFile();
+            int lastSeparatorIndex = file.lastIndexOf('/');
+            file = file.substring(lastSeparatorIndex);
+        } catch (MalformedURLException ex) {
+            Exceptions.printStackTrace(ex);
+        }
         // If issues with online tutorials then open local file
-        String path = BrowserLauncher.isConnected() ? url : TheApp.getInstallDir() + File.separator + "doc" + File.separator + displayName+".pdf";
+        String path = BrowserLauncher.isConnected() ? url : TheApp.getInstallDir() + File.separator + "doc" + File.separator + file+".html";
         
-        System.out.println("Path: " + path);
+        System.out.println("Path: " + path + "or "+
+                TheApp.getInstallDir() + File.separator + "doc" + File.separator + file+".html");
         BrowserLauncher.openURL(path);            
     }
     
