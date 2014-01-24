@@ -2327,7 +2327,7 @@ private void StepIntervalSpinnerStateChanged(javax.swing.event.ChangeEvent evt) 
 // TODO add your handling code here:
           SpinnerModel stepModel = StepIntervalSpinner.getModel();
           int newStepInterval = (Integer) stepModel.getValue();
-          System.out.println("New step = "+newStepInterval);
+          //System.out.println("New step = "+newStepInterval);
          ((AnalyzeToolModel)toolModel).setAnalysisStepInterval(newStepInterval);
     
 }//GEN-LAST:event_StepIntervalSpinnerStateChanged
