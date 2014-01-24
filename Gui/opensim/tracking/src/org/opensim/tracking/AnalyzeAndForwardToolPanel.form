@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.1" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.3" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.JCheckBox" name="SelectCmcTargetCheckBox">
       <Properties>
@@ -400,18 +400,18 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="statesFileName" pref="337" max="32767" attributes="2"/>
+                                      <Component id="statesFileName" pref="346" max="32767" attributes="2"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="filterCoordinatesCheckBox" linkSize="7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="loadedMotionRadioButton" linkSize="7" max="32767" attributes="1"/>
+                                              <Component id="loadedMotionRadioButton" linkSize="7" pref="101" max="32767" attributes="1"/>
                                               <Component id="fromFileMotionRadioButton" linkSize="7" min="-2" max="-2" attributes="1"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="motionsComboBox" pref="230" max="32767" attributes="2"/>
-                                              <Component id="coordinatesFileName" pref="230" max="32767" attributes="2"/>
-                                              <Component id="cutoffFrequency" alignment="0" pref="230" max="32767" attributes="0"/>
+                                              <Component id="motionsComboBox" pref="239" max="32767" attributes="2"/>
+                                              <Component id="coordinatesFileName" pref="239" max="32767" attributes="2"/>
+                                              <Component id="cutoffFrequency" alignment="0" pref="239" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -422,7 +422,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="analyzeControlsCheckBox" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="analyzeControlsFileName" pref="320" max="32767" attributes="2"/>
+                                  <Component id="analyzeControlsFileName" pref="329" max="32767" attributes="2"/>
                                   <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                                   <Component id="editAnalyzeExcitationsButton" min="-2" pref="33" max="-2" attributes="0"/>
                               </Group>
@@ -691,11 +691,11 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="outputPrecision" alignment="0" min="-2" pref="64" max="-2" attributes="1"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="outputName" pref="303" max="32767" attributes="1"/>
+                                  <Component id="outputName" pref="312" max="32767" attributes="1"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="availableFinalTime" linkSize="5" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="outputDirectory" alignment="0" pref="368" max="32767" attributes="3"/>
+                              <Component id="outputDirectory" alignment="0" pref="377" max="32767" attributes="3"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -825,7 +825,7 @@
                                   <Component id="finalTime" min="-2" pref="64" max="-2" attributes="2"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="102" max="32767" attributes="0"/>
+                          <EmptySpace pref="111" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -939,7 +939,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="modelName" pref="385" max="32767" attributes="1"/>
+                          <Component id="modelName" pref="394" max="32767" attributes="1"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -992,7 +992,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="activeAnalyses" pref="290" max="32767" attributes="3"/>
+                          <Component id="activeAnalyses" pref="299" max="32767" attributes="3"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="editAnalysesButton" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -1060,8 +1060,8 @@
                                   </Group>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="initialStatesFileName" pref="286" max="32767" attributes="3"/>
-                                      <Component id="controlsFileName" alignment="0" pref="305" max="32767" attributes="3"/>
+                                      <Component id="initialStatesFileName" pref="314" max="32767" attributes="3"/>
+                                      <Component id="controlsFileName" alignment="0" pref="314" max="32767" attributes="3"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                                   <Component id="editForwardExcitationsButton" min="-2" pref="33" max="-2" attributes="0"/>
@@ -1176,11 +1176,11 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="cmcFilterKinematicsCheckBox" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="cmcCutoffFrequency" pref="180" max="32767" attributes="0"/>
+                                  <Component id="cmcCutoffFrequency" pref="189" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="cmcDesiredKinematicsFileName" alignment="1" pref="279" max="32767" attributes="2"/>
-                              <Component id="cmcTaskSetFileName" alignment="0" pref="279" max="32767" attributes="3"/>
-                              <Component id="cmcConstraintsFileName" alignment="0" pref="279" max="32767" attributes="3"/>
+                              <Component id="cmcDesiredKinematicsFileName" alignment="1" pref="288" max="32767" attributes="2"/>
+                              <Component id="cmcTaskSetFileName" alignment="0" pref="288" max="32767" attributes="3"/>
+                              <Component id="cmcConstraintsFileName" alignment="0" pref="288" max="32767" attributes="3"/>
                           </Group>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
@@ -1330,7 +1330,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="rraOutputModelFileName" alignment="0" pref="316" max="32767" attributes="0"/>
+                              <Component id="rraOutputModelFileName" alignment="0" pref="325" max="32767" attributes="0"/>
                               <Component id="rraAdjustedBodyComboBox" alignment="0" min="-2" pref="154" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -1441,12 +1441,12 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="motionsComboBox1" alignment="1" pref="225" max="32767" attributes="2"/>
-                                      <Component id="coordinatesFileName1" alignment="1" pref="225" max="32767" attributes="2"/>
-                                      <Component id="cutoffFrequency1" alignment="1" pref="225" max="32767" attributes="0"/>
+                                      <Component id="motionsComboBox1" alignment="1" pref="234" max="32767" attributes="2"/>
+                                      <Component id="coordinatesFileName1" alignment="1" pref="234" max="32767" attributes="2"/>
+                                      <Component id="cutoffFrequency1" alignment="1" pref="234" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Component id="statesFileName1" pref="332" max="32767" attributes="2"/>
+                              <Component id="statesFileName1" pref="341" max="32767" attributes="2"/>
                           </Group>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="HzJLabel" min="-2" max="-2" attributes="0"/>
@@ -1626,7 +1626,7 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Objective Function">
+                    <TitledBorder title="Static Optimization">
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
@@ -1638,70 +1638,166 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="useForceLengthStaticOptCheckBox" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="staticOptActivationExponentTextField" min="-2" pref="42" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace pref="213" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jPanel2" min="-2" max="-2" attributes="2"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <Component id="jPanel1" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel24" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="staticOptActivationExponentTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jPanel1" alignment="1" max="32767" attributes="2"/>
+                              <Component id="jPanel2" alignment="1" min="0" pref="92" max="32767" attributes="2"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="useForceLengthStaticOptCheckBox" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="jLabel24">
+                <Container class="javax.swing.JPanel" name="jPanel1">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="2"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Sum of (muscle activation) ^"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="staticOptActivationExponentTextField">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="2"/>
-                    <Property name="toolTipText" type="java.lang.String" value="power to raise muscle activation while solving"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="staticOptActivationExponentTextFieldActionPerformed"/>
-                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="staticOptActivationExponentTextFieldFocusLost"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="useForceLengthStaticOptCheckBox">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Use muscle force-length-velocity relation"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                        <EmptyBorder bottom="0" left="0" right="0" top="0"/>
+                      <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                        <TitledBorder title="Step Size"/>
                       </Border>
                     </Property>
-                    <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                      <Insets value="[0, 0, 0, 0]"/>
+                  </Properties>
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="StepIntervalSpinner" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="18" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="StepIntervalSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="34" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                  <SubComponents>
+                    <Component class="javax.swing.JLabel" name="jLabel14">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Analyze every "/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="StepIntervalSpinner">
+                      <Properties>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="1" maximum="100" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="StepIntervalSpinnerStateChanged"/>
+                        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="StepIntervalSpinnerFocusLost"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel18">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="step"/>
+                      </Properties>
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JPanel" name="jPanel2">
+                  <Properties>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                        <TitledBorder title="Objective Function"/>
+                      </Border>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="useForceLengthStaticOptCheckBoxActionPerformed"/>
-                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="useForceLengthStaticOptCheckBoxFocusLost"/>
-                  </Events>
-                </Component>
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="staticOptActivationExponentTextField" min="-2" pref="42" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="useForceLengthStaticOptCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel24" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="staticOptActivationExponentTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="useForceLengthStaticOptCheckBox" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                  <SubComponents>
+                    <Component class="javax.swing.JLabel" name="jLabel24">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Tahoma" size="11" style="2"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Sum of (muscle activation) ^"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="staticOptActivationExponentTextField">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="2"/>
+                        <Property name="toolTipText" type="java.lang.String" value="power to raise muscle activation while solving"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="staticOptActivationExponentTextFieldActionPerformed"/>
+                        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="staticOptActivationExponentTextFieldFocusLost"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JCheckBox" name="useForceLengthStaticOptCheckBox">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Use muscle force-length-velocity relation"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                            <EmptyBorder bottom="0" left="0" right="0" top="0"/>
+                          </Border>
+                        </Property>
+                        <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                          <Insets value="[0, 0, 0, 0]"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="useForceLengthStaticOptCheckBoxActionPerformed"/>
+                        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="useForceLengthStaticOptCheckBoxFocusLost"/>
+                      </Events>
+                    </Component>
+                  </SubComponents>
+                </Container>
               </SubComponents>
             </Container>
           </SubComponents>

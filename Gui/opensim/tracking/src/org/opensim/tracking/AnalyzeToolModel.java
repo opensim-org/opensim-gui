@@ -45,8 +45,12 @@ import org.opensim.swingui.SwingWorker;
 import org.opensim.tracking.tools.SimulationDB;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
+import org.opensim.view.MuscleColorByActivationStorage;
+import org.opensim.view.MuscleColoringFunction;
 import org.opensim.view.motions.JavaMotionDisplayerCallback;
+import org.opensim.view.motions.MotionDisplayer;
 import org.opensim.view.motions.MotionsDB;
+import org.opensim.view.pub.OpenSimDB;
 
 public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
    //========================================================================
@@ -161,7 +165,16 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
                motion.resampleLinear(0.001);
          }
          updateMotion(motion); // replaces current motion
-            
+		/*
+         if (staticOptimizationMode){
+             // Color by Activation from SO output
+            StaticOptimization soA = StaticOptimization.safeDownCast(getModel().getAnalysisSet().get("StaticOptimization"));
+            Storage storage = soA.getActivationStorage();
+            MotionDisplayer motionDisplayer = new MotionDisplayer(storage, getOriginalModel());
+            MuscleColoringFunction mcbya = new MuscleColorByActivationStorage(
+            OpenSimDB.getInstance().getContext(getOriginalModel()), storage);
+            motionDisplayer.setMuscleColoringFunction(mcbya);
+         } */
          getModel().removeAnalysis(animationCallback, false);
          getModel().removeAnalysis(interruptingCallback, false);
          interruptingCallback = null;
@@ -471,6 +484,17 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
          StaticOptimization.safeDownCast(an).setActivationExponent(p);
          setModified(AbstractToolModel.Operation.InputDataChanged);
       }
+   }
+   
+   public int getAnalysisStepInterval() { 
+      Analysis an= analyzeTool().getAnalysisSet().get("StaticOptimization");
+      return  StaticOptimization.safeDownCast(an).getStepInterval();
+   }
+   
+   void setAnalysisStepInterval(int p) {
+         Analysis an= analyzeTool().getAnalysisSet().get("StaticOptimization");
+         StaticOptimization.safeDownCast(an).setStepInterval(p);
+         setModified(AbstractToolModel.Operation.InputDataChanged);
    }
    
    public boolean getUseMusclePhysiology() {
