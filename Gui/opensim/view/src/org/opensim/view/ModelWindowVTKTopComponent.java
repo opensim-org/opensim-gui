@@ -563,14 +563,22 @@ public class ModelWindowVTKTopComponent extends TopComponent
     private void jStartStopMovieToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStartStopMovieToggleButtonActionPerformed
 // TODO add your handling code here:
         javax.swing.JToggleButton btn = (javax.swing.JToggleButton)(evt.getSource());
+        String saved = Preferences.userNodeForPackage(TheApp.class).get("Save Movie Frames", "Off");
+        boolean saveFramesOnly = saved.equalsIgnoreCase("On");
         if (btn.getModel().isSelected()){
-            String fileName = FileUtils.getInstance().browseForFilename(".avi", "Movie file to create", false);
+            String fileName = null;
+            if (saveFramesOnly){
+                fileName = FileUtils.getInstance().browseForFolder("Folder to save movie frames");
+            }
+            else {
+                fileName = FileUtils.getInstance().browseForFilename(".avi", "Movie file to create", false);
+            }
             //System.out.println("Create movie to file"+fileName);
             if (fileName!=null){
                 // Append .avi to the end if not done by user
-                if (!fileName.endsWith(".avi"))
+                if (!fileName.endsWith(".avi") && !saveFramesOnly)
                     fileName = fileName+".avi";
-                getCanvas().createMovie(fileName);
+                getCanvas().createMovie(fileName, saveFramesOnly);
                // correct selected mode
                jStartStopMovieToggleButton.setSelected(true);
             }
@@ -580,7 +588,7 @@ public class ModelWindowVTKTopComponent extends TopComponent
             }
         }
         else {
-            getCanvas().finishMovie();
+            getCanvas().finishMovie(saveFramesOnly);
             //System.out.println("Finish movie");
             // correct selected mode
             jStartStopMovieToggleButton.setSelected(false);

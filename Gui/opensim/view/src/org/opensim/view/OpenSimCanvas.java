@@ -40,6 +40,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.io.File;
 import java.util.prefs.Preferences;
 import javax.swing.JPopupMenu;
 import org.opensim.logger.OpenSimLogger;
@@ -382,16 +383,15 @@ public class OpenSimCanvas extends OpenSimBaseCanvas implements MouseWheelListen
    int frameCounter = 1;
    static public boolean movieWriterReady=false; // static to represent if movie is being written in any view
    vtkWindowToImageFilter imageFilter=null;
-   boolean saveramesOnly = false;
+   boolean saveFramesLocal = false;
    /**
     * Create a movie with the specified filename
     */
-   public void createMovie(String fileName) {
+   public void createMovie(String fileName, boolean saveFramesOnly) {
        // Workaround failure to create movies on 64 bit windows
-       String saved = Preferences.userNodeForPackage(TheApp.class).get("Save Movie Frames", "Off");
-       saveramesOnly = saved.equalsIgnoreCase("On");
-       if (saveramesOnly){
-            movieFilePath = fileName;    
+       saveFramesLocal = saveFramesOnly;
+       if (saveFramesOnly){
+            movieFilePath = fileName+File.separator;    
             frameCounter = 1;           
        }
        else {
@@ -419,8 +419,8 @@ public class OpenSimCanvas extends OpenSimBaseCanvas implements MouseWheelListen
           OpenSimLogger.logMessage("Render time: "+1e-6*(after-before)+" ms.\n", OpenSimLogger.INFO);
         }
         if (movieWriterReady){
-            if (saveramesOnly){
-                String fullPath = movieFilePath.concat(String.valueOf(frameCounter))+".tiff";
+            if (saveFramesLocal){
+                String fullPath = movieFilePath.concat("Frame"+String.valueOf(frameCounter))+".tiff";
                 HardCopy(fullPath, 1);
                 frameCounter++;
             } else{
@@ -433,8 +433,8 @@ public class OpenSimCanvas extends OpenSimBaseCanvas implements MouseWheelListen
         }
     }
     
-    public void finishMovie() {
-        if (!saveramesOnly){
+    public void finishMovie(boolean saveFramesOnly) {
+        if (!saveFramesOnly){
             movieWriter.End();
         }
         movieWriter=null;
