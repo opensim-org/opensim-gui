@@ -357,6 +357,16 @@ public class JConsole extends JTextArea implements KeyListener {
                     }
                 }
             } 
+            if (e.getKeyCode() == KeyEvent.VK_C && !e.isShiftDown() && !e.isAltDown()) {
+                // Ctrl+C pressed. Abort current sequence and get
+                StringBuilder text = new StringBuilder(getText()); 
+                text.append("^C");
+                text.append(System.getProperty("line.separator"));
+                text.append(ps1);
+                setText(text.toString(), true);
+                moreCommand = "";
+                e.consume();
+            }
         } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             // handle script execution
             if (!e.isShiftDown() && !e.isAltDown()) {
