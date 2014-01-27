@@ -196,11 +196,11 @@ public final class topologyEditorTopComponent extends TopComponent implements Ob
         }
         else if (o1 instanceof ModelEvent){
             if (((ModelEvent)o1).getOperation()==ModelEvent.Operation.Close ||
-                    (((ModelEvent)o1).getOperation()==ModelEvent.Operation.Open))
+                    (((ModelEvent)o1).getOperation()==ModelEvent.Operation.Open)){
                 scene.clearAll();
                 populateDefault();
                 return;
-            
+            }
         }
     }
 
