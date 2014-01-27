@@ -157,7 +157,7 @@ public class MotionDisplayer implements SelectionListener {
         
     }
 
-    void setMuscleColoringFunction(MuscleColoringFunction mcbya) {
+    public void setMuscleColoringFunction(MuscleColoringFunction mcbya) {
         mcf = mcbya;
         // Push it down to muscle displayers
         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);

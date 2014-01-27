@@ -205,6 +205,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
       }
       }
       currentSimTime = getSimulationTime();   
+      context.getCurrentStateRef().setTime(currentSimTime);
       if (ownsStorage) {    // Callback is the one accumulating results //ASSERTS downlstream 0327
           // Need to make sure nextResult is not Freed by gc
           StateVector nextResult = new StateVector();
@@ -218,7 +219,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
           }
           else {
           super.getStates(statesBuffer);
-          /*
+              /*
               if (staticOptimization){
                   StateVector sv = activationStorage.getLastStateVector();
                   ArrayDouble actData = sv.getData();
@@ -275,9 +276,10 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
         int retValue;
         retValue = super.step(s, stepNumber);
         processStep(s, stepNumber);
-        if (staticOptimization){
+        /*
+         * if (staticOptimization){
             int sz = activationStorage.getSize();
-        }
+        }*/
         return retValue;
     }
 
@@ -285,6 +287,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
         int retValue=0;
         if (!isInitialized()){
             initializeTimer();
+            
             if (staticOptimization){
                 
                 StaticOptimization staticOptimizationAnalysis = StaticOptimization.safeDownCast(get_model().getAnalysisSet().get("StaticOptimization"));
