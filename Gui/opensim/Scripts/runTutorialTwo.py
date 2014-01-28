@@ -43,7 +43,7 @@ myModel = modeling.Model(oldModel)
 myState = myModel.initSystem()
 
 # Change the name of the model
-myModel.setName("Wrist - Tendon Surgery.")
+myModel.setName("Wrist - Tendon Surgery")
 
 
 ## Change the path points of the ECU_pre-surgery to match the existing ECU_post-surgery muscle 
@@ -52,7 +52,7 @@ myModel.setName("Wrist - Tendon Surgery.")
 
 for i in range(myModel.getMuscles().get("ECU_post-surgery").getGeometryPath().getPathPointSet().getSize()):
 	# find the path point information for ECU_post-surgery (Body and location (in body) of PathPoint
-	ECUPostpathPoint			=	myModel.getMuscles().get("ECU_post-surgery").getGeometryPath().getPathPointSet().get(i)
+	ECUPostpathPoint		=	myModel.getMuscles().get("ECU_post-surgery").getGeometryPath().getPathPointSet().get(i)
 	ECUPostpathPoint_body		=	ECUPostpathPoint.getBody()
 	ECUPostpathPoint_location	=	ECUPostpathPoint.getLocation()
 	
@@ -77,7 +77,7 @@ loadModel(newName)
 	
 	
 
-## IV. Biomechanical Effects of Tendon Transfer  **** NOT COMPLETED- NEED TO FIGURE OUT HOW TO PLOT THE SUM OF ALL MUSCLES  *****
+## IV. Biomechanical Effects of Tendon Transfer 
 
 loadModel(fullPathName)
 currentModel = getCurrentModel()
@@ -87,26 +87,26 @@ myState = currentModel.initSystem()
 
 # Wrist Moment VS Flexion
 plotterPanel = createPlotterPanel("Wrist Moment VS Flexion Angle")
-crv1 = addAnalysisCurve(plotterPanel, "moment.flexion", "ECU_pre-surgery","flexion")
+crv1 = addAnalysisCurve(plotterPanel, "moment.flexion", "ECRB+ECRL+EDCI+EDCL+EDCM+EDCR+EDM+EIP+EPL+ECU_pre-surgery","flexion")
 setCurveLegend(crv1, "Pre-Surgery")
-crv2 = addAnalysisCurve(plotterPanel, "moment.flexion", "ECU_post-surgery","flexion")
-setCurveLegend(crv2, "post-surgery")
+crv2 = addAnalysisCurve(plotterPanel, "moment.flexion", "ECRB+ECRL+EDCI+EDCL+EDCM+EDCR+EDM+EIP+EPL+ECU_post-surgery","flexion")
+setCurveLegend(crv2, "Post-Surgery")
 
 
 # Tendon force VS Flexion
-plotterPane2 = createPlotterPanel("Tendon force VS Flexion Angle")
+plotterPane2 = createPlotterPanel("Tendon Force VS Flexion Angle")
 crv1 = addAnalysisCurve(plotterPane2, "tendon force", "ECU_pre-surgery","flexion")
 setCurveLegend(crv1, "Pre-Surgery")
 crv2 = addAnalysisCurve(plotterPane2, "tendon force", "ECU_post-surgery","flexion")
-setCurveLegend(crv2, "post-surgery")
+setCurveLegend(crv2, "Post-Surgery")
 
 
 # flexion moment arm VS Flexion
-plotterPane3 = createPlotterPanel("flexion moment arm VS Flexion Angle")
+plotterPane3 = createPlotterPanel("Flexion Moment Arm VS Flexion Angle")
 crv1 = addAnalysisCurve(plotterPane3, "momentArm.flexion", "ECU_pre-surgery","flexion")
 setCurveLegend(crv1, "Pre-Surgery")
 crv2 = addAnalysisCurve(plotterPane3, "momentArm.flexion", "ECU_post-surgery","flexion")
-setCurveLegend(crv2, "post-surgery")
+setCurveLegend(crv2, "Post-Surgery")
 
 
 # Create muscle objects for both a ECU pre- & post- surgery 
@@ -123,15 +123,15 @@ myModel		= 	getCurrentModel()
 
 # Plot the muscle properties with existing Tendon-slack Length
 # Tendon force VS Flexion
-plotterPane1 = createPlotterPanel("Tendon force VS Flexion Angle")
+plotterPane1 = createPlotterPanel("Tendon Force VS Flexion Angle")
 crv1 = addAnalysisCurve(plotterPane1, "tendon force", "ECRB","flexion")
 setCurveLegend(crv1, "ECRB")
 # Muscle-tendon length VS Flexion
-plotterPane2 = createPlotterPanel("Muscle-tendon length VS Flexion Angle")
+plotterPane2 = createPlotterPanel("Muscle-tendon Length VS Flexion Angle")
 crv2 = addAnalysisCurve(plotterPane2, "muscle-tendon length", "ECRB","flexion")
 setCurveLegend(crv2, "ECRB")
 # Fibre length VS Flexion
-plotterPane3 = createPlotterPanel("Fibre length VS Flexion Angle")
+plotterPane3 = createPlotterPanel("Fibre Length VS Flexion Angle")
 crv3 = addAnalysisCurve(plotterPane3, "fiber-length", "ECRB","flexion")
 setCurveLegend(crv3, "ECRB")
 
@@ -150,7 +150,7 @@ myModel.initSystem()
 # Tendon force VS Flexion
 crv4 = addAnalysisCurve(plotterPane1, "tendon force", "ECRB","flexion")
 setCurveLegend(crv4, "ECRB_0.210")
-# Muscle-tendon length VS Flexion
+# Muscle-tendon Length VS Flexion
 crv5 = addAnalysisCurve(plotterPane2, "muscle-tendon length", "ECRB","flexion")
 setCurveLegend(crv5, "ECRB_0.210")
 # Fibre length VS Flexion

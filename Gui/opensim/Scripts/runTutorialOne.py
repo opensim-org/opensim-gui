@@ -25,24 +25,23 @@
 
 # Define the files and folders we will be using
 installDir 		= 	getInstallDir()
-modelFolder		=	installDir+"\Models\Gait2392_Simbody" 
-modelName		=	modelFolder+"\gait2392_simbody.osim"
+modelFolder		=	installDir+"/Models/Gait2392_Simbody" 
+modelName		=	modelFolder+"/gait2392_simbody.osim"
 
 # Data folder and filenames
-dataFolder		=	modelFolder+"\Gait2392_Tutorial1_data"
-exampleWalk		=	dataFolder+"\gait2392_walking.mot"
-normalWalk		=	dataFolder+"\\normal.mot"
-crouch1Walk		=	dataFolder+"\crouch1.mot"
-crouch2Walk		=	dataFolder+"\crouch2.mot"
-crouch3Walk		=	dataFolder+"\crouch3.mot"
-crouch4Walk		=	dataFolder+"\crouch4.mot"
+dataFolder		=	modelFolder+"/Tutorial1"
+normalWalk		=	dataFolder+"/normal.mot"
+crouch1Walk		=	dataFolder+"/crouch1.mot"
+crouch2Walk		=	dataFolder+"/crouch2.mot"
+crouch3Walk		=	dataFolder+"/crouch3.mot"
+crouch4Walk		=	dataFolder+"/crouch4.mot"
 
 
 # Load the model 
 loadModel(modelName)
 
 # Load a motion
-loadMotion(exampleWalk)
+loadMotion(normalWalk)
 
 # Get a handle to the current model
 myModel = getCurrentModel()
@@ -54,15 +53,19 @@ for i in range(myModel.getCoordinateSet().getSize()):
 	
 # Get the number of Joints in the model (different from Dof's)
 numberJoints= myModel.getJointSet().getSize()
+print("Number of Joints in the Model")
+print(numberJoints)
 	
 # Get the number of Dof's	
 numberCoords= myModel.getNumCoordinates()
+print("Number of Coordinates in the Model")
+print(numberCoords)
 	
 ## Plot fiber length VS Knee Angle	
 	
 # Plot the RF and VASINT fiber lengths with the model in the default pose
 plotterPanel = createPlotterPanel("Plot ")
-crv1 = addAnalysisCurve(plotterPanel, "fiber-length", "rect_fem_r", "knee_angle_r")S
+crv1 = addAnalysisCurve(plotterPanel, "fiber-length", "rect_fem_r", "knee_angle_r")
 setCurveLegend(crv1, "RF")
 crv2 = addAnalysisCurve(plotterPanel, "fiber-length", "vas_int_r", "knee_angle_r")
 setCurveLegend(crv2, "VASINT")
@@ -76,7 +79,7 @@ crv4 = addAnalysisCurve(plotterPanel, "fiber-length", "vas_int_r", "knee_angle_r
 setCurveLegend(crv4, "VASINT_hip45")
 
 # Save the results to file
-exportData(plotterPanel, dataFolder+"\RF_VASINT_FiberLengths.sto")
+exportData(plotterPanel, dataFolder+"/RF_VASINT_FiberLengths.sto")
 
 ## Plot Moment Arms VS Knee Angle 
 
@@ -86,7 +89,7 @@ for i in range(myModel.getCoordinateSet().getSize()):
 	setCoordinateValue(coord, coord.getDefaultValue())
 
 
-# Plot the RF and VASINT knee extension moment arm vs knee angle for 
+# Plot the RF and VASINT knee extension moment arm vs knee angle
 plotterPanel = createPlotterPanel("Moment Arm: Knee Extension ")
 crv1 = addAnalysisCurve(plotterPanel, "moment arm.knee_angle_r", "rect_fem_r", "knee_angle_r")
 setCurveLegend(crv1, "RF")
@@ -102,13 +105,13 @@ crv4 = addAnalysisCurve(plotterPanel, "moment arm.knee_angle_r", "vas_int_r", "k
 setCurveLegend(crv4, "VASINT_hip45")
 
 # Save the results to file
-exportData(plotterPanel, dataFolder+"RF_VASINT_FiberLengths.sto")
+exportData(plotterPanel, dataFolder+"/RF_VASINT_MomentArms.sto")
 
 
 ## Knee angle during walking
 
 # Create a plotter panel
-plotterPanel = createPlotterPanel("Knee angle for Crouch Gait")
+plotterPanel = createPlotterPanel("Knee Angle for Crouch Gait")
 
 # Add data source (File) to the list of sources available to the passed in Plotter Panel
 src = addDataSource(plotterPanel, normalWalk)
@@ -118,7 +121,7 @@ crv.setLegend("Normal")
 # Add data source (File) to the list of sources available to the passed in Plotter Panel
 src = addDataSource(plotterPanel, crouch1Walk)
 crv = addCurve(plotterPanel, src, "time", "knee_angle_r")
-crv.setLegend("crouch")
+crv.setLegend("Crouch")
 
 # Save the results to file
 exportData(plotterPanel, dataFolder+"/normal_crouch_KneeAngle.sto")
@@ -133,15 +136,15 @@ plotterPanel = createPlotterPanel("Hamstring length over the Gait Cycle")
 motSrc = addMotionSource(plotterPanel, normalWalk)
 # Print the muscle length of the semiten during the motion 
 crv1  = addMotionCurve(plotterPanel, "Length", "semiten_r", motSrc)
-crv1.setLegend("normal")
+crv1.setLegend("Normal")
 
 # Create a motion object 
 motSrc = addMotionSource(plotterPanel, crouch1Walk)
 crv2  = addMotionCurve(plotterPanel, "Length", "semiten_r", motSrc)
-crv2.setLegend("crouch")
+crv2.setLegend("Crouch")
 
 # Save the results to file
-exportData(plotterPanel, dataFolder+"/normal_crouch_HamstringMuscle-tendonLength.sto")
+exportData(plotterPanel, dataFolder+"/normal_crouch_HamstringMuscleTendonLength.sto")
 
 
 
