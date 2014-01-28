@@ -18,8 +18,8 @@
 # implied. See the License for the specific language governing            #
 # permissions and limitations under the License.                          #
 # ----------------------------------------------------------------------- #
-# This example performs a number of scaling steps.
-# Modified from script written By David Saxby (Griffith University).
+# This example (and runTutorialThree.py) perform model scaling. 
+# Modified from script written by David Saxby (Griffith University).
 
 # Folder paths
 installDir 		= 	getInstallDir()
@@ -32,10 +32,10 @@ genericModelName=	"gait2354_simbody.osim"
 scaledModelName	=	"scaled_gait2392.osim"
 movedModelName	=	"moved_gait2392.osim"
 
-# inout xml files
+# input xml files
 scaleSetup		=	modelFolder+"\subject01_Setup_Scale.xml"
 markerSetFile	=	modelFolder+"\gait2354_Scale_MarkerSet.xml"
-# ouput xml files
+# output xml files
 appliedscaleSet	=	modelFolder+"\subject01_scaleSet_applied.xml"
 movedMarkers	=	modelFolder+"\subject01_Markers_moved.xml"
 
@@ -86,15 +86,15 @@ TimeArray.set(1,final_time)
 # Create the scale tool object from existing xml
 scaleTool 	= 	modeling.ScaleTool(scaleSetup)
 
-# Construct the scale tool from an existing xml
+# Modify some properties to match subject
 scaleTool.setSubjectMass(subjectMass)
 scaleTool.setSubjectHeight(subjectHeight)
 scaleTool.setSubjectHeight(subjectAge)
 
-## Inistialize GenericModelMaker
+## Initialize GenericModelMaker
 # Tell scale tool to use the loaded model
 scaleTool.getGenericModelMaker().setModelFileName(genericModelName)
-# Set the Marker Set file (encase a markerset isnt attached to the model)
+# Set the Marker Set file (encase a markerset isn't attached to the model)
 scaleTool.getGenericModelMaker().setMarkerSetFileName(markerSetFile)
 
 ## Initialize & Run ModelScaler

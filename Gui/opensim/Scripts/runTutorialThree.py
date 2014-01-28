@@ -20,7 +20,7 @@
 # ----------------------------------------------------------------------- #
 
 # This example performs the steps of Tutorial Three in scripting form
-# Load model
+# Written by: James Dunne (2013)
 
 # Folder paths
 installDir 		= 	getInstallDir()
@@ -99,7 +99,6 @@ scaleTool = modeling.ScaleTool(scaleSetup)
 scaleTool.setSubjectMass(subjectMass)
 scaleTool.setSubjectHeight(subjectHeight)
 scaleTool.setSubjectHeight(subjectAge)
-scaleTool.setNotes("This is an axample of scaling from scripting")
 
 ## GenericModelMaker-
 # Tell scale tool to use the loaded model
@@ -186,6 +185,8 @@ ikTool.run()
 
 # Create the ID tool object from existing xml
 idTool = modeling.InverseDynamicsTool(idSetupFile)
+# Set current model in tool 
+idTool.setModel(myModel)
 # Define the external loads file
 idTool.setExternalLoadsFileName(extLoadsFile)
 # Coordinate data
