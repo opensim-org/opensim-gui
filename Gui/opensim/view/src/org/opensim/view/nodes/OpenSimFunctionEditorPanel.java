@@ -42,6 +42,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Vector;
@@ -81,6 +82,15 @@ import org.opensim.view.pub.OpenSimDB;
  */
 public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Observer, FunctionPanelListener {
 
+    
+    public void addListener(FunctionPanelListener fpl){
+        functionPanel.addFunctionPanelListener(fpl);
+    }
+    
+    public void removeListener(FunctionPanelListener fpl){
+        functionPanel.removeFunctionPanelListener(fpl);
+    }
+   
     private void setPendingChanges(boolean b, boolean b0) {
         //throw new UnsupportedOperationException("Not yet implemented");
     }
