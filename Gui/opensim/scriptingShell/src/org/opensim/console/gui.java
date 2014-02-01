@@ -15,6 +15,8 @@ import org.openide.filesystems.FileUtil;
 import org.openide.loaders.DataObject;
 import org.openide.util.Exceptions;
 import org.openide.util.actions.CallableSystemAction;
+import org.openide.windows.TopComponent;
+import org.opensim.customGui.ParametersTopComponent;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.Constraint;
 import org.opensim.modeling.Coordinate;
@@ -397,4 +399,12 @@ public final class gui {
         ConcreteModelNode modelNode = ExplorerTopComponent.getDefault().getModelNode(getCurrentModel());
         modelNode.updateSelfFromObject();
     }
+    
+    static public ParametersTopComponent createParametersWindow()
+    {
+        ParametersTopComponent win = ParametersTopComponent.findInstance();
+        win.open();
+        return win;
+    }
+    
 }

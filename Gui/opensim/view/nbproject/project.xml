@@ -209,6 +209,7 @@
                 <package>org.opensim.view.editors</package>
                 <package>org.opensim.view.excitationEditor</package>
                 <package>org.opensim.view.experimentaldata</package>
+                <package>org.opensim.view.functionEditor</package>
                 <package>org.opensim.view.motions</package>
                 <package>org.opensim.view.nodes</package>
                 <package>org.opensim.view.pub</package>

@@ -62,9 +62,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import org.jfree.chart.ChartPanel;
-import org.jfree.chart.axis.ValueAxis;
 import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYSeries;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.openide.util.Exceptions;
@@ -1532,7 +1530,7 @@ public class JPlotterPanel extends javax.swing.JPanel
 
                    public void run() {
                        if (getDomainName().compareTo("time") == 0) {
-               plotterModel.getCurrentPlot().setDomainCrosshair(time);
+                            addDomainTickmark(time);
             }
          }
                });
@@ -2363,4 +2361,9 @@ public class JPlotterPanel extends javax.swing.JPanel
         }
 
     }
+    
+    public void addDomainTickmark(double domValue) {
+        plotterModel.getCurrentPlot().setDomainCrosshair(domValue);
+    }
+
 }
