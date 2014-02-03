@@ -25,15 +25,15 @@
 # that is included with the OpenSim distribution
 
 # Load the model BothLegs.osim
-filepath = getInstallDir() + "/Models/Gait2392_simbody/gait2392_simbody.osim";
+filepath = getInstallDir() + "/Models/Gait2392_Simbody/gait2392_simbody.osim";
 loadModel(filepath);
 
 # Create a plotter panel and set the title
 plotterPanel = createPlotterPanel("Plot Example")
 
 # Add curves showing rectus femoris and vasti fiber lengths vs. right knee angle and set the legend
-crv1 = addAnalysisCurve(plotterPanel, "fiber-length", "RF", "r_knee_angle")
-crv2 = addAnalysisCurve(plotterPanel, "fiber-length", "VASINT", "r_knee_angle")
+crv1 = addAnalysisCurve(plotterPanel, "fiber-length", "rect_fem_r", "knee_angle_r")
+crv2 = addAnalysisCurve(plotterPanel, "fiber-length", "vas_int_r", "knee_angle_r")
 crv1.setLegend("RF_BothLegs")
 crv2.setLegend("VASINT_BothLegs")
 
