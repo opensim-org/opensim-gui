@@ -1803,6 +1803,17 @@ public class opensimModelJNI {
   public final static native long Sine_createSimTKFunction(long jarg1, Sine jarg1_);
   public final static native int Sine_getArgumentSize(long jarg1, Sine jarg1_);
   public final static native int Sine_getMaxDerivativeOrder(long jarg1, Sine jarg1_);
+  public final static native long PolynomialFunction_safeDownCast(long jarg1, OpenSimObject jarg1_);
+  public final static native void PolynomialFunction_assign(long jarg1, PolynomialFunction jarg1_, long jarg2, OpenSimObject jarg2_);
+  public final static native String PolynomialFunction_getClassName();
+  public final static native long PolynomialFunction_clone(long jarg1, PolynomialFunction jarg1_);
+  public final static native String PolynomialFunction_getConcreteClassName(long jarg1, PolynomialFunction jarg1_);
+  public final static native long new_PolynomialFunction__SWIG_0();
+  public final static native long new_PolynomialFunction__SWIG_1(long jarg1, Vector jarg1_);
+  public final static native void delete_PolynomialFunction(long jarg1);
+  public final static native void PolynomialFunction_setCoefficients(long jarg1, PolynomialFunction jarg1_, long jarg2, Vector jarg2_);
+  public final static native long PolynomialFunction_getCoefficients(long jarg1, PolynomialFunction jarg1_);
+  public final static native long PolynomialFunction_createSimTKFunction(long jarg1, PolynomialFunction jarg1_);
   public final static native long SmoothSegmentedFunctionFactory_createFiberActiveForceLengthCurve(double jarg1, double jarg2, double jarg3, double jarg4, double jarg5, double jarg6, double jarg7, boolean jarg8, String jarg9);
   public final static native long SmoothSegmentedFunctionFactory_createFiberForceVelocityCurve(double jarg1, double jarg2, double jarg3, double jarg4, double jarg5, double jarg6, double jarg7, double jarg8, boolean jarg9, String jarg10);
   public final static native long SmoothSegmentedFunctionFactory_createFiberForceVelocityInverseCurve(double jarg1, double jarg2, double jarg3, double jarg4, double jarg5, double jarg6, double jarg7, double jarg8, boolean jarg9, String jarg10);
@@ -10145,6 +10156,7 @@ public class opensimModelJNI {
   public final static native long MultiplierFunction_SWIGUpcast(long jarg1);
   public final static native long GCVSpline_SWIGUpcast(long jarg1);
   public final static native long Sine_SWIGUpcast(long jarg1);
+  public final static native long PolynomialFunction_SWIGUpcast(long jarg1);
   public final static native long XYFunctionInterface_SWIGUpcast(long jarg1);
   public final static native long Scale_SWIGUpcast(long jarg1);
   public final static native long SetScales_SWIGUpcast(long jarg1);
