@@ -11,6 +11,7 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.Box;
 import org.openide.ErrorManager;
+import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
@@ -394,11 +395,11 @@ public final class ParametersTopComponent extends TopComponent
         model.removeAnalysis(resultDisplayer, false);
 }
 
-    void setDefaultView(ArrayList<double[]> aCameraAttributes) {
+    public void setDefaultView(ArrayList<double[]> aCameraAttributes) {
         cameraAttributes = aCameraAttributes;
     }
 
-    void createResetViewButton() {
+    public void createResetViewButton() {
          knobsPanel.add(resetViewButton);
          //knobsPanel.add(Box.createRigidArea(new Dimension(10,10)));
          knobsPanel.validate();
@@ -472,6 +473,22 @@ public final class ParametersTopComponent extends TopComponent
         knobsPanel.add(ppanel);
         knobsPanel.validate();
         return ppanel;
+    }
+    
+    public void addToolButton(String setupFile, String buttonLabel){
+        tool = new ToolSerializer();
+        tool.setSetupFile(setupFile);
+        Model model = OpenSimDB.getInstance().getCurrentModel();
+        tool.setModel(model);
+        OpenSimObject obj = OpenSimObject.makeObjectFromFile(setupFile);
+        try {
+            toolExecutor = ToolFactory.createExecutor(model, setupFile, obj.getConcreteClassName(), this);
+            setRunLabel(buttonLabel);
+            createRunButton();
+            
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
     }
     
 }
