@@ -27,9 +27,9 @@ package org.opensim.view;
 
 import java.awt.Color;
 import java.awt.Dialog;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
+import java.io.File;
 import java.util.prefs.Preferences;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -42,6 +42,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
+import org.openide.NotifyDescriptor;
 import org.openide.awt.UndoRedo;
 import org.openide.util.NbBundle;
 import org.openide.util.SharedClassObject;
@@ -562,32 +563,39 @@ public class ModelWindowVTKTopComponent extends TopComponent
 
     private void jStartStopMovieToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStartStopMovieToggleButtonActionPerformed
 // TODO add your handling code here:
-        javax.swing.JToggleButton btn = (javax.swing.JToggleButton)(evt.getSource());
+        javax.swing.JToggleButton btn = (javax.swing.JToggleButton) (evt.getSource());
         String saved = Preferences.userNodeForPackage(TheApp.class).get("Save Movie Frames", "Off");
         boolean saveFramesOnly = saved.equalsIgnoreCase("On");
-        if (btn.getModel().isSelected()){
+        if (btn.getModel().isSelected()) {
             String fileName = null;
-            if (saveFramesOnly){
+            if (saveFramesOnly) {
                 fileName = FileUtils.getInstance().browseForFolder("Folder to save movie frames");
-            }
-            else {
+                if (fileName != null && !(new File(fileName).exists())) {
+                    boolean exists = false;
+                    if (!exists) {
+                        DialogDisplayer.getDefault().notify(
+                                new NotifyDescriptor.Message("Directory " + fileName + " does not exist, please create it first."));
+                        fileName = null;
+                    }
+                }
+
+            } else {
                 fileName = FileUtils.getInstance().browseForFilename(".avi", "Movie file to create", false);
             }
             //System.out.println("Create movie to file"+fileName);
-            if (fileName!=null){
+            if (fileName != null) {
                 // Append .avi to the end if not done by user
-                if (!fileName.endsWith(".avi") && !saveFramesOnly)
-                    fileName = fileName+".avi";
+                if (!fileName.endsWith(".avi") && !saveFramesOnly) {
+                    fileName = fileName + ".avi";
+                }
                 getCanvas().createMovie(fileName, saveFramesOnly);
-               // correct selected mode
-               jStartStopMovieToggleButton.setSelected(true);
-            }
-            else {
+                // correct selected mode
+                jStartStopMovieToggleButton.setSelected(true);
+            } else {
                 btn.getModel().setSelected(false);
                 btn.getModel().setArmed(false);
             }
-        }
-        else {
+        } else {
             getCanvas().finishMovie(saveFramesOnly);
             //System.out.println("Finish movie");
             // correct selected mode
