@@ -23,10 +23,11 @@
 # Stanford University
 #
 # This example loads controls from a storage file and creates an xml file 
-# that has a ControlSet. The col umn labels are assumed to be names of 
+# that has a ControlSet. The column labels are assumed to be names of 
 # actuators, unless they have a trailing "_min", or "_max" then they're used
 # as control constraints. If no min or max is specified in the file then the same
 # value is used for Control's min, max and value.
+# Do NOT append ".excitation" to the end of your column names.
 
 # Utils contains tools to browse for files and folders
 import org.opensim.utils as utils
