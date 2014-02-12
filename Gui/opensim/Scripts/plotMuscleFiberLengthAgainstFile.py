@@ -25,7 +25,7 @@
 # that is included with the OpenSim distribution
 
 # Load the model BothLegs.osim
-filepath = getInstallDir() + "/Models/Gait2392_Simbody/gait2392_simbody.osim";
+filepath = getInstallDir() + "/Models/Gait2392_simbody/gait2392_simbody.osim";
 loadModel(filepath);
 
 # Create a plotter panel and set the title
@@ -44,7 +44,7 @@ crv4 = addCurve(plotterPanel, src, "knee_angle_r", "vas_int_r")
 crv3.setLegend("RF_Subject01")
 crv4.setLegend("VASINT_Subject01") 
 
-crv5 =  addAnalysisCurve(plotterPanel, "MomentArm.r_knee_angle", "RF", "r_knee_angle")
+crv5 =  addAnalysisCurve(plotterPanel, "MomentArm.r_knee_angle", "rect_fem_r", "r_knee_angle")
 
 # Change the color of the first curve in the plot
 setCurveColor(plotterPanel, 0, 0.0, 1.0, 1.0)
