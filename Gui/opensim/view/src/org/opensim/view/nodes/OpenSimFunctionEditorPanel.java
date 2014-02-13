@@ -399,33 +399,22 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
         FunctionEditorScrollPane = new javax.swing.JScrollPane();
         functionDescriptionLabel = new javax.swing.JLabel();
         FunctionEditorPanel = new javax.swing.JPanel();
-        xValueTextField = new javax.swing.JTextField();
         functionJPanel = new javax.swing.JPanel();
-        xValueLabel = new javax.swing.JLabel();
-        yValueLabel = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        typeComboBox = new javax.swing.JComboBox();
+        restoreFunctionButton = new javax.swing.JButton();
+        PropertiesButton = new javax.swing.JButton();
         yValueTextField = new javax.swing.JTextField();
         typeLabel = new javax.swing.JLabel();
-        typeComboBox = new javax.swing.JComboBox();
+        xValueTextField = new javax.swing.JTextField();
         crosshairsCheckBox = new javax.swing.JCheckBox();
-        PropertiesButton = new javax.swing.JButton();
-        restoreFunctionButton = new javax.swing.JButton();
+        yValueLabel = new javax.swing.JLabel();
+        xValueLabel = new javax.swing.JLabel();
 
         functionDescriptionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         functionDescriptionLabel.setText(org.openide.util.NbBundle.getMessage(OpenSimFunctionEditorPanel.class, "OpenSimFunctionEditorPanel.functionDescriptionLabel.text")); // NOI18N
 
-        xValueTextField.setMaximumSize(new java.awt.Dimension(100, 21));
-        xValueTextField.setMinimumSize(new java.awt.Dimension(100, 21));
-        xValueTextField.setPreferredSize(new java.awt.Dimension(100, 21));
-        xValueTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                xValueTextFieldxValueActionPerformed(evt);
-            }
-        });
-        xValueTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                xValueTextFieldxValueFocusLost(evt);
-            }
-        });
+        setLayout(new java.awt.BorderLayout());
 
         functionJPanel.setMinimumSize(new java.awt.Dimension(25, 25));
 
@@ -433,16 +422,46 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
         functionJPanel.setLayout(functionJPanelLayout);
         functionJPanelLayout.setHorizontalGroup(
             functionJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 508, Short.MAX_VALUE)
+            .addGap(0, 498, Short.MAX_VALUE)
         );
         functionJPanelLayout.setVerticalGroup(
             functionJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 290, Short.MAX_VALUE)
+            .addGap(0, 195, Short.MAX_VALUE)
         );
 
-        xValueLabel.setText(org.openide.util.NbBundle.getMessage(OpenSimFunctionEditorPanel.class, "OpenSimFunctionEditorPanel.xValueLabel.text")); // NOI18N
+        javax.swing.GroupLayout FunctionEditorPanelLayout = new javax.swing.GroupLayout(FunctionEditorPanel);
+        FunctionEditorPanel.setLayout(FunctionEditorPanelLayout);
+        FunctionEditorPanelLayout.setHorizontalGroup(
+            FunctionEditorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(functionJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        FunctionEditorPanelLayout.setVerticalGroup(
+            FunctionEditorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FunctionEditorPanelLayout.createSequentialGroup()
+                .addComponent(functionJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
-        yValueLabel.setText(org.openide.util.NbBundle.getMessage(OpenSimFunctionEditorPanel.class, "OpenSimFunctionEditorPanel.yValueLabel.text")); // NOI18N
+        add(FunctionEditorPanel, java.awt.BorderLayout.CENTER);
+
+        typeComboBox.setEnabled(false);
+        typeComboBox.setMaximumSize(new java.awt.Dimension(145, 24));
+        typeComboBox.setMinimumSize(new java.awt.Dimension(145, 24));
+        typeComboBox.setPreferredSize(new java.awt.Dimension(145, 24));
+
+        restoreFunctionButton.setText(org.openide.util.NbBundle.getMessage(OpenSimFunctionEditorPanel.class, "OpenSimFunctionEditorPanel.restoreFunctionButton.text")); // NOI18N
+        restoreFunctionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restoreFunctionButtonrestoreFunctionActionPerformed(evt);
+            }
+        });
+
+        PropertiesButton.setText(org.openide.util.NbBundle.getMessage(OpenSimFunctionEditorPanel.class, "OpenSimFunctionEditorPanel.PropertiesButton.text")); // NOI18N
+        PropertiesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PropertiesButtonActionPerformed(evt);
+            }
+        });
 
         yValueTextField.setMaximumSize(new java.awt.Dimension(100, 21));
         yValueTextField.setMinimumSize(new java.awt.Dimension(100, 21));
@@ -460,10 +479,19 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
 
         typeLabel.setText(org.openide.util.NbBundle.getMessage(OpenSimFunctionEditorPanel.class, "OpenSimFunctionEditorPanel.typeLabel.text")); // NOI18N
 
-        typeComboBox.setEnabled(false);
-        typeComboBox.setMaximumSize(new java.awt.Dimension(145, 24));
-        typeComboBox.setMinimumSize(new java.awt.Dimension(145, 24));
-        typeComboBox.setPreferredSize(new java.awt.Dimension(145, 24));
+        xValueTextField.setMaximumSize(new java.awt.Dimension(100, 21));
+        xValueTextField.setMinimumSize(new java.awt.Dimension(100, 21));
+        xValueTextField.setPreferredSize(new java.awt.Dimension(100, 21));
+        xValueTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xValueTextFieldxValueActionPerformed(evt);
+            }
+        });
+        xValueTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                xValueTextFieldxValueFocusLost(evt);
+            }
+        });
 
         crosshairsCheckBox.setText(org.openide.util.NbBundle.getMessage(OpenSimFunctionEditorPanel.class, "OpenSimFunctionEditorPanel.crosshairsCheckBox.text")); // NOI18N
         crosshairsCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -474,32 +502,21 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
             }
         });
 
-        PropertiesButton.setText(org.openide.util.NbBundle.getMessage(OpenSimFunctionEditorPanel.class, "OpenSimFunctionEditorPanel.PropertiesButton.text")); // NOI18N
-        PropertiesButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PropertiesButtonActionPerformed(evt);
-            }
-        });
+        yValueLabel.setText(org.openide.util.NbBundle.getMessage(OpenSimFunctionEditorPanel.class, "OpenSimFunctionEditorPanel.yValueLabel.text")); // NOI18N
 
-        restoreFunctionButton.setText(org.openide.util.NbBundle.getMessage(OpenSimFunctionEditorPanel.class, "OpenSimFunctionEditorPanel.restoreFunctionButton.text")); // NOI18N
-        restoreFunctionButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                restoreFunctionButtonrestoreFunctionActionPerformed(evt);
-            }
-        });
+        xValueLabel.setText(org.openide.util.NbBundle.getMessage(OpenSimFunctionEditorPanel.class, "OpenSimFunctionEditorPanel.xValueLabel.text")); // NOI18N
 
-        javax.swing.GroupLayout FunctionEditorPanelLayout = new javax.swing.GroupLayout(FunctionEditorPanel);
-        FunctionEditorPanel.setLayout(FunctionEditorPanelLayout);
-        FunctionEditorPanelLayout.setHorizontalGroup(
-            FunctionEditorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FunctionEditorPanelLayout.createSequentialGroup()
-                .addGroup(FunctionEditorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(FunctionEditorPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(functionJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(FunctionEditorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, FunctionEditorPanelLayout.createSequentialGroup()
-                            .addGap(22, 22, 22)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 498, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(50, 50, 50)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGap(12, 12, 12)
                             .addComponent(xValueLabel)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(xValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -511,52 +528,36 @@ public class OpenSimFunctionEditorPanel extends javax.swing.JPanel implements Ob
                             .addComponent(crosshairsCheckBox)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(PropertiesButton))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, FunctionEditorPanelLayout.createSequentialGroup()
-                            .addContainerGap()
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                             .addComponent(typeLabel)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(restoreFunctionButton))))
-                .addContainerGap())
+                            .addComponent(restoreFunctionButton)))
+                    .addContainerGap(11, Short.MAX_VALUE)))
         );
-        FunctionEditorPanelLayout.setVerticalGroup(
-            FunctionEditorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FunctionEditorPanelLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(functionJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(17, 17, 17)
-                .addGroup(FunctionEditorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(xValueLabel)
-                    .addComponent(xValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(yValueLabel)
-                    .addComponent(yValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(crosshairsCheckBox)
-                    .addComponent(PropertiesButton))
-                .addGap(26, 26, 26)
-                .addGroup(FunctionEditorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(typeLabel)
-                    .addComponent(restoreFunctionButton))
-                .addContainerGap())
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(13, 13, 13)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(xValueLabel)
+                        .addComponent(xValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(yValueLabel)
+                        .addComponent(yValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(crosshairsCheckBox)
+                        .addComponent(PropertiesButton))
+                    .addGap(26, 26, 26)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(typeLabel)
+                        .addComponent(restoreFunctionButton))
+                    .addContainerGap(14, Short.MAX_VALUE)))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(FunctionEditorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(FunctionEditorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        add(jPanel1, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
     private void xValueTextFieldxValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xValueTextFieldxValueActionPerformed
@@ -753,9 +754,9 @@ private void restoreFunctionButtonrestoreFunctionActionPerformed(java.awt.event.
             //clearChangeListenerList();
         }
         /*functionDescriptionLabel.setText(functionDescriptionLabel.getText()+
-                "editable="+String.valueOf(xyFunction.isSpecifiedByControlPoints()));*/
+                "editable="+String.valueOf(xyFunction.isSpecifiedByControlPoints()));
         Dimension d = new Dimension(500, 430);
-        FunctionEditorPanel.setPreferredSize(d);
+        FunctionEditorPanel.setPreferredSize(d);*/
     }
 
     private void updateFunctionTitle() {
@@ -842,6 +843,13 @@ private void restoreFunctionButtonrestoreFunctionActionPerformed(java.awt.event.
          //backupFunction();
       }
    }
+    
+   public void hideControlPanel(boolean hide){
+       if (hide){
+           jPanel1.setVisible(!hide);
+           validate();
+       }
+   }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel FunctionEditorPanel;
     private javax.swing.JScrollPane FunctionEditorScrollPane;
@@ -849,6 +857,7 @@ private void restoreFunctionButtonrestoreFunctionActionPerformed(java.awt.event.
     private javax.swing.JCheckBox crosshairsCheckBox;
     private javax.swing.JLabel functionDescriptionLabel;
     private javax.swing.JPanel functionJPanel;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton restoreFunctionButton;
     private javax.swing.JComboBox typeComboBox;
