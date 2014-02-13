@@ -211,6 +211,10 @@ public class JPlotterPanel extends javax.swing.JPanel
       qNameSet.add("fiberforce");
     }
 
+    public void hideControlPanel(boolean b) {
+        jPlotControlPanel.setVisible(!b);
+     }
+
 
    public enum PlotDataSource {FileSource, MotionSource, AnalysisSource};
    JPlotterQuantitySelector xSelector = null;
