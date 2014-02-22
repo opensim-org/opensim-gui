@@ -357,10 +357,10 @@ public class JConsole extends JTextArea implements KeyListener {
                     }
                 }
             } 
-            if (e.getKeyCode() == KeyEvent.VK_C && !e.isShiftDown() && !e.isAltDown()) {
-                // Ctrl+C pressed. Abort current sequence and get
+            if (e.getKeyCode() == KeyEvent.VK_Z && !e.isShiftDown() && !e.isAltDown()) {
+                // Ctrl+Z pressed. Abort current sequence and get
                 StringBuilder text = new StringBuilder(getText()); 
-                text.append("^C");
+                text.append("^Z");
                 text.append(System.getProperty("line.separator"));
                 text.append(ps1);
                 setText(text.toString(), true);
