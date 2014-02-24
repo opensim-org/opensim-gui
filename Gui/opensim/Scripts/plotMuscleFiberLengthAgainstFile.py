@@ -44,7 +44,7 @@ crv4 = addCurve(plotterPanel, src, "knee_angle_r", "vas_int_r")
 crv3.setLegend("RF_Subject01")
 crv4.setLegend("VASINT_Subject01") 
 
-crv5 =  addAnalysisCurve(plotterPanel, "MomentArm.r_knee_angle", "rect_fem_r", "r_knee_angle")
+crv5 =  addAnalysisCurve(plotterPanel, "MomentArm.r_knee_angle", "rect_fem_r", "knee_angle_r")
 
 # Change the color of the first curve in the plot
 setCurveColor(plotterPanel, 0, 0.0, 1.0, 1.0)
