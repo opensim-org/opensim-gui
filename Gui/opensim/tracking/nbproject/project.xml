@@ -125,6 +125,7 @@
             <public-packages>
                 <package>org.opensim.tools.serializers</package>
                 <package>org.opensim.tracking</package>
+                <package>org.opensim.tracking.tools</package>
             </public-packages>
         </data>
     </configuration>

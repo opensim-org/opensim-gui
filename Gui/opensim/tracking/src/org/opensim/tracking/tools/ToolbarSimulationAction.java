@@ -47,7 +47,7 @@ import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 
 public final class ToolbarSimulationAction extends CallableSystemAction {
-   
+   JPanel tb;
    public void performAction() {
       // TODO implement action body
    }
@@ -71,7 +71,7 @@ public final class ToolbarSimulationAction extends CallableSystemAction {
    }
 
    public Component getToolbarPresenter() {
-      JPanel tb = new JPanel();
+      tb = new JPanel();
       tb.setLayout(new FlowLayout());
       tb.setPreferredSize(new Dimension(230, 50));
       tb.setMaximumSize(new Dimension(230, 50));
@@ -121,6 +121,10 @@ public final class ToolbarSimulationAction extends CallableSystemAction {
         }
       //tb.addSeparator(new Dimension(10,40));
       return tb;
+   }
+   public void setToolbarVisiblity(boolean show)
+   {
+       tb.setVisible(show);
    }
    
 }

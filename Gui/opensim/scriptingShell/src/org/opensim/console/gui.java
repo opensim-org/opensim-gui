@@ -1,6 +1,7 @@
 
 package org.opensim.console;
 
+import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
 import java.util.prefs.Preferences;
@@ -9,13 +10,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import org.openide.ErrorManager;
+import org.openide.awt.ToolbarPool;
 import org.openide.cookies.InstanceCookie;
 import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;
 import org.openide.loaders.DataObject;
 import org.openide.util.Exceptions;
 import org.openide.util.actions.CallableSystemAction;
-import org.openide.windows.TopComponent;
 import org.opensim.customGui.ParametersTopComponent;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.Constraint;
@@ -29,6 +30,7 @@ import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.Probe;
 import org.opensim.modeling.State;
 import org.opensim.modeling.Storage;
+import org.opensim.tracking.tools.ToolbarSimulationAction;
 import org.opensim.utils.TheApp;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.motions.MotionsDB;
@@ -406,5 +408,14 @@ public final class gui {
         win.open();
         return win;
     }
-    
+        
+    static public void setSimulationToolBarVisibility(boolean show) {
+        try {
+            ToolbarSimulationAction simAct = (ToolbarSimulationAction) ToolbarSimulationAction.findObject(
+                        (Class)Class.forName("org.opensim.tracking.tools.ToolbarSimulationAction"), false);
+            simAct.setToolbarVisiblity(show);
+        } catch (ClassNotFoundException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+    }
 }
