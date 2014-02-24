@@ -39,7 +39,7 @@ public class ForwardToolExecutor extends ToolExecutor  {
     }
 
     public void cancel() {
-        toolModel.cancel();
+        toolModel.interrupt(true);
     }
 
     public void update(Observable o, Object arg) {
