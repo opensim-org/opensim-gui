@@ -138,7 +138,7 @@ public class Lab implements Serializable {
             parametersTC.setInputs(params);
             if (getObject("ViewDB")!=null){
                 ViewDBDescriptor vdb = (ViewDBDescriptor) getObject("ViewDB");
-                parametersTC.setDefaultView(vdb.getCameraAttributes());
+                parametersTC.setDefaultView(vdb.getCameraAttributes().get(0));
             }
         }
         //displayStatusText("Loading tool ...");

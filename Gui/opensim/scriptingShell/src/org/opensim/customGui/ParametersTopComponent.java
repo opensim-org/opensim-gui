@@ -26,9 +26,9 @@ import org.opensim.tools.serializers.ToolFactory;
 import org.opensim.tools.serializers.ToolSerializer;
 import org.opensim.tracking.ResultDisplayerInterface;
 import org.opensim.view.ModelEvent;
-import org.opensim.view.functionEditor.FunctionModifiedEvent;
 import org.opensim.view.pub.OpenSimDB;
 import java.applet.*;
+import javax.swing.JPanel;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Function;
 import org.opensim.plotter.JPlotterPanel;
@@ -67,7 +67,7 @@ public final class ParametersTopComponent extends TopComponent
 
     private URL urlForAudio;
     private AudioClip clip;
-    private ArrayList<double[]> cameraAttributes;
+    private double[] cameraAttributes;
     
     private ParametersTopComponent() {
         initComponents();
@@ -75,14 +75,24 @@ public final class ParametersTopComponent extends TopComponent
         setName(NbBundle.getMessage(ParametersTopComponent.class, "CTL_ParametersTopComponent"));
         setToolTipText(NbBundle.getMessage(ParametersTopComponent.class, "HINT_ParametersTopComponent"));
 //        setIcon(Utilities.loadImage(ICON_PATH, true));
+        createAnalysis(OpenSimDB.getInstance().getCurrentModel());
+        
 
     }
 
     public void createKnobForCoordinate(Coordinate c, String displayName) {
         CoordinateAdaptor ca = new CoordinateAdaptor(c);
-        knobsPanel.add(new SliderWithTextBox(ca,
+        inputPanel.add(new SliderWithTextBox(ca,
                 (c.getMotionType()==Coordinate.MotionType.Rotational)?convertRadiansToDegrees:1.0,
                 displayName));
+    }
+    /** Create a text box tht updates while a tool is running. The specification of what to display
+     * and formatting is embedded in the passed in LabOutputTextToPanel
+     */
+    public void createTextualOutput(LabOutputTextToPanel nextOutput) {
+        TextOutputPanel resultPanel = new TextOutputPanel(nextOutput);
+        outputChannels.add(resultPanel);
+        outputPanel.add(resultPanel);
     }
     
     /** This method is called from within the constructor to
@@ -96,8 +106,11 @@ public final class ParametersTopComponent extends TopComponent
         runButton = new javax.swing.JToggleButton();
         resultsPanel = new javax.swing.JPanel();
         resetViewButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
         knobsPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jSplitPane1 = new javax.swing.JSplitPane();
+        inputPanel = new javax.swing.JPanel();
+        outputPanel = new javax.swing.JPanel();
 
         org.openide.awt.Mnemonics.setLocalizedText(runButton, "Run >");
         runButton.setToolTipText("Execute tool");
@@ -117,19 +130,34 @@ public final class ParametersTopComponent extends TopComponent
             }
         });
 
+        knobsPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        knobsPanel.setLayout(new javax.swing.BoxLayout(knobsPanel, javax.swing.BoxLayout.Y_AXIS));
+
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setLayout(new java.awt.BorderLayout());
 
-        knobsPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        knobsPanel.setLayout(new javax.swing.BoxLayout(knobsPanel, javax.swing.BoxLayout.Y_AXIS));
-        jScrollPane1.setViewportView(knobsPanel);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane1.setHorizontalScrollBar(null);
+
+        jSplitPane1.setDividerLocation(150);
+        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        inputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Inputs"));
+        inputPanel.setLayout(new javax.swing.BoxLayout(inputPanel, javax.swing.BoxLayout.Y_AXIS));
+        jSplitPane1.setLeftComponent(inputPanel);
+
+        outputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Results"));
+        outputPanel.setLayout(new javax.swing.BoxLayout(outputPanel, javax.swing.BoxLayout.Y_AXIS));
+        jSplitPane1.setRightComponent(outputPanel);
+
+        jScrollPane1.setViewportView(jSplitPane1);
 
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void resetViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetViewButtonActionPerformed
 // TODO add your handling code here:
-        ViewDB.getCurrentModelWindow().applyCameraAttributes(cameraAttributes.get(0));
+        ViewDB.getCurrentModelWindow().applyCameraAttributes(cameraAttributes);
         ViewDB.getCurrentModelWindow().getCanvas().Render();
     }//GEN-LAST:event_resetViewButtonActionPerformed
 
@@ -160,8 +188,11 @@ public final class ParametersTopComponent extends TopComponent
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel inputPanel;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel knobsPanel;
+    private javax.swing.JPanel outputPanel;
     private javax.swing.JButton resetViewButton;
     private javax.swing.JPanel resultsPanel;
     private javax.swing.JToggleButton runButton;
@@ -226,8 +257,8 @@ public final class ParametersTopComponent extends TopComponent
     private void createInputsGUI() {
         // For each parameter in parametersNode, create a slider for it based on corresponding
         // DblBoundedRangeModel
-        knobsPanel.removeAll();
-        knobsPanel.add(Box.createRigidArea(new Dimension(10,10)));
+        inputPanel.removeAll();
+        inputPanel.add(Box.createRigidArea(new Dimension(10,10)));
         Model mdl=OpenSimDB.getInstance().getCurrentModel();
         if (parametersNode!=null ) {
             ArrayList<LabParameter> params = parametersNode.getParameters();
@@ -251,9 +282,9 @@ public final class ParametersTopComponent extends TopComponent
                 }
             }
         }
-        //knobsPanel.add(Box.createVerticalGlue());
-        //knobsPanel.add(Box.createRigidArea(new Dimension(10,10)));
-        knobsPanel.validate();
+        //inputPanel.add(Box.createVerticalGlue());
+        //inputPanel.add(Box.createRigidArea(new Dimension(10,10)));
+        inputPanel.validate();
     }
 
     private void createGUIForProperty(final AbstractProperty prop, final String displayName, final Model mdl,
@@ -261,7 +292,7 @@ public final class ParametersTopComponent extends TopComponent
         if (((String)userInterface).equalsIgnoreCase("Slider")){
             if (prop.getTypeName().equals("double")){
                 DynamicPropertyAdaptor objAdaptor = new DynamicPropertyAdaptor(obj, mdl, prop, min, max);
-                knobsPanel.add(new SliderWithTextBox(objAdaptor,
+                inputPanel.add(new SliderWithTextBox(objAdaptor,
                         1.0,
                         displayName));
             } /*else if (prop.getType()==prop.getType().DblVec||
@@ -270,13 +301,13 @@ public final class ParametersTopComponent extends TopComponent
                 if (propertyComponent==-1){
                     for(int comp=0; comp<prop.getArraySize(); comp++){
                         DynamicPropertyComponentAdaptor objAdaptor = new DynamicPropertyComponentAdaptor(obj, mdl, prop, comp, min, max);
-                        knobsPanel.add(new SliderWithTextBox(objAdaptor,
+                        inputPanel.add(new SliderWithTextBox(objAdaptor,
                                 1.0,
                                 displayName+"."+String.valueOf(comp)));
                     }
                 } else {  // Component was specified
                     DynamicPropertyComponentAdaptor objAdaptor = new DynamicPropertyComponentAdaptor(obj, mdl, prop, propertyComponent, min, max);
-                    knobsPanel.add(new SliderWithTextBox(objAdaptor,
+                    inputPanel.add(new SliderWithTextBox(objAdaptor,
                             1.0,
                             displayName));
                 }
@@ -304,13 +335,14 @@ public final class ParametersTopComponent extends TopComponent
                     arg instanceof ObjectsDeletedEvent ||
                     arg instanceof ModelEvent && ((ModelEvent) arg).getOperation()==ModelEvent.Operation.Close){
                 // Current model changed, cleanup!
-                knobsPanel.removeAll();
+                inputPanel.removeAll();
                 for (LabOutputInterface nextOutput:outputChannels)
                     nextOutput.cleanup();
 
                 close();
             }
         }
+        
     }
 
     public ToolExecutor createExecutor(ToolSerializer tool, Model model) throws IOException {
@@ -330,9 +362,7 @@ public final class ParametersTopComponent extends TopComponent
             for(int i=0; i<outs.size(); i++){
                 LabOutput nextOutput = outs.get(i);
                 if (nextOutput instanceof LabOutputTextToPanel){
-                    TextOutputPanel resultPanel = new TextOutputPanel((LabOutputTextToPanel)nextOutput);
-                    outputChannels.add(resultPanel);
-                    knobsPanel.add(resultPanel);
+                    createTextualOutput((LabOutputTextToPanel)nextOutput);
                 }
                 else if (nextOutput instanceof LabOutputPlot) {
                     plotPanel = new PlotOutputPanel((LabOutputPlot)nextOutput, this);
@@ -353,13 +383,14 @@ public final class ParametersTopComponent extends TopComponent
         }
             }
         }
-        knobsPanel.validate();
+        outputPanel.validate();
     }
-
+    
     public void createRunButton() {
-         knobsPanel.add(runButton);
-         knobsPanel.add(Box.createRigidArea(new Dimension(10,10)));
-         knobsPanel.validate();
+         inputPanel.add(Box.createRigidArea(new Dimension(10,10)));
+         inputPanel.add(runButton);
+         inputPanel.add(Box.createRigidArea(new Dimension(10,10)));
+         inputPanel.validate();
     }
     public Analysis createAnalysis(Model model) {
         resultDisplayer = new ResultsDisplayerCallback(model);
@@ -393,26 +424,49 @@ public final class ParametersTopComponent extends TopComponent
     
     public void removeAnalysis(Model model) {
         model.removeAnalysis(resultDisplayer, false);
-}
-
-    public void setDefaultView(ArrayList<double[]> aCameraAttributes) {
+    }
+    /**
+     * Attributes to set camera position. These can be obtained from the AppState.xml file saved
+     * when the application is closed to restore view on entry.
+     * @param aCameraAttributes 
+     */
+    public void setDefaultView(double[] aCameraAttributes) {
         cameraAttributes = aCameraAttributes;
     }
-
+    /**
+     * Built-in "reset view" button is added to inputPanel.
+     */
     public void createResetViewButton() {
-         knobsPanel.add(resetViewButton);
-         //knobsPanel.add(Box.createRigidArea(new Dimension(10,10)));
-         knobsPanel.validate();
+         inputPanel.add(resetViewButton);
+         //inputPanel.add(Box.createRigidArea(new Dimension(10,10)));
+         inputPanel.validate();
     }
+    /**
+     * Create a Slider in the inputPanel for a specific property that has a single double value
+     * @param prop reference to property
+     * @param displayName user friendly name to display around the slider
+     * @param mdl model to which the object being edited belongs
+     * @param obj object to which the property being edited belongs
+     * @param min user specified slider min
+     * @param max  user specified slider max
+     */
     public void createKnobForProperty(AbstractProperty prop, String displayName, Model mdl,
             OpenSimObject obj, double min, double max) {   
         
         createGUIForProperty(prop, displayName, mdl, obj, -1, 
                                 min, max, "Slider");
-        knobsPanel.validate();
+        inputPanel.validate();
     }
+    /**
+     * Create panel to display and allow live editing of Functions. supported functions are those
+     * built in OpenSim proper types.
+     * 
+     * @param func 
+     */
     public void createEditPanelForFunction(Function func){
         OpenSimFunctionEditorPanel osfep = new OpenSimFunctionEditorPanel(func);
+        osfep.hideControlPanel(true);
+        osfep.setPreferredSize(new Dimension(120, 50));
         // Recreatesystem on edits
         osfep.addListener(new FunctionPanelListener(){
 
@@ -461,20 +515,31 @@ public final class ParametersTopComponent extends TopComponent
             }
             private void reportChange(){
                 int x = 0;
-                System.out.println("reportChange in ParametersTopComponent");
+                //System.out.println("reportChange in ParametersTopComponent");
             }
         });
-        knobsPanel.add(osfep);
-        knobsPanel.validate();
+        inputPanel.add(osfep);
+        inputPanel.validate();
     }
+    /**
+     * Add an instance of JPlotterPanel to the outputPanel with specified title
+     * @param title
+     * @return handle to added JPlotterPanel
+     */
     public JPlotterPanel addPlotterPanel(String title){
         JPlotterPanel ppanel = new JPlotterPanel();
+        ppanel.hideControlPanel(true);
         ppanel.setTitle(title);
-        knobsPanel.add(ppanel);
-        knobsPanel.validate();
+        outputPanel.add(ppanel);
+        outputPanel.validate();
         return ppanel;
     }
-    
+    /**
+     * Create a button on inputPanel that will run a tool using the passed in setup file
+     * 
+     * @param setupFile (a setup file to run any of the standard tools (IK, ID, Analyze, FD, CMC)
+     * @param buttonLabel (user friendly label to display on button)
+     */
     public void addToolButton(String setupFile, String buttonLabel){
         tool = new ToolSerializer();
         tool.setSetupFile(setupFile);
@@ -490,5 +555,38 @@ public final class ParametersTopComponent extends TopComponent
             Exceptions.printStackTrace(ex);
         }
     }
-    
+    /**
+     * Add quantity to keep track of and update as the tool is run.
+     * 
+     * @param htmlSpec Format string, taining place holder ___ to be replaced
+     * @param qtySpec Specification of quantity to display
+     */
+    public void addOutputQuantity(String htmlSpec, String qtySpec){
+        LabOutputTextToPanel textToPanel = new LabOutputTextToPanel();
+        textToPanel.setHtmlTemplate(htmlSpec);
+        textToPanel.setQuantitySpecfication(qtySpec);
+        TextOutputPanel textOutput = new TextOutputPanel(textToPanel);
+        outputChannels.add(textOutput);
+        resultDisplayer.addOutput(textOutput);
+        outputPanel.add(textOutput);
+    }
+    /**
+     * Add a new JPanel to the outputPanel of the custom gui and return a handle to it.
+     * Typically you use this call to add a panel then add custom buttons to the returned panel
+     * using standard swing syntax.
+     * 
+     * @return handle to JPanel that was created.
+     */
+    public JPanel addOutputPanel(){
+        JPanel panel = new JPanel();
+        outputPanel.add(panel);
+        return panel;
+    }
+    /**
+     * Clear the contents of both inputPanel and outputPanel
+     */
+    public void reset() {
+        inputPanel.removeAll();
+        outputPanel.removeAll();
+    }
 }
