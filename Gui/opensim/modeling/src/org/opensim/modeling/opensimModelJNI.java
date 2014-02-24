@@ -7894,6 +7894,14 @@ public class opensimModelJNI {
   public final static native long new_JointReaction__SWIG_3(long jarg1, JointReaction jarg1_);
   public final static native void delete_JointReaction(long jarg1);
   public final static native void JointReaction_setModel(long jarg1, JointReaction jarg1_, long jarg2, Model jarg2_);
+  public final static native String JointReaction_getForcesFileName(long jarg1, JointReaction jarg1_);
+  public final static native void JointReaction_setForcesFileName(long jarg1, JointReaction jarg1_, String jarg2);
+  public final static native long JointReaction_getJointNames(long jarg1, JointReaction jarg1_);
+  public final static native void JointReaction_setJointNames(long jarg1, JointReaction jarg1_, long jarg2, ArrayStr jarg2_);
+  public final static native long JointReaction_getOnBody(long jarg1, JointReaction jarg1_);
+  public final static native void JointReaction_setOnBody(long jarg1, JointReaction jarg1_, long jarg2, ArrayStr jarg2_);
+  public final static native long JointReaction_getInFrame(long jarg1, JointReaction jarg1_);
+  public final static native void JointReaction_setInFrame(long jarg1, JointReaction jarg1_, long jarg2, ArrayStr jarg2_);
   public final static native int JointReaction_begin(long jarg1, JointReaction jarg1_, long jarg2, State jarg2_);
   public final static native int JointReaction_step(long jarg1, JointReaction jarg1_, long jarg2, State jarg2_, int jarg3);
   public final static native int JointReaction_end(long jarg1, JointReaction jarg1_, long jarg2, State jarg2_);

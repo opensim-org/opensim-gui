@@ -77,6 +77,38 @@ public class JointReaction extends Analysis {
     opensimModelJNI.JointReaction_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
+  public String getForcesFileName() {
+    return opensimModelJNI.JointReaction_getForcesFileName(swigCPtr, this);
+  }
+
+  public void setForcesFileName(String newForcesFile) {
+    opensimModelJNI.JointReaction_setForcesFileName(swigCPtr, this, newForcesFile);
+  }
+
+  public ArrayStr getJointNames() {
+    return new ArrayStr(opensimModelJNI.JointReaction_getJointNames(swigCPtr, this), false);
+  }
+
+  public void setJointNames(ArrayStr jointNames) {
+    opensimModelJNI.JointReaction_setJointNames(swigCPtr, this, ArrayStr.getCPtr(jointNames), jointNames);
+  }
+
+  public ArrayStr getOnBody() {
+    return new ArrayStr(opensimModelJNI.JointReaction_getOnBody(swigCPtr, this), false);
+  }
+
+  public void setOnBody(ArrayStr onBody) {
+    opensimModelJNI.JointReaction_setOnBody(swigCPtr, this, ArrayStr.getCPtr(onBody), onBody);
+  }
+
+  public ArrayStr getInFrame() {
+    return new ArrayStr(opensimModelJNI.JointReaction_getInFrame(swigCPtr, this), false);
+  }
+
+  public void setInFrame(ArrayStr inFrame) {
+    opensimModelJNI.JointReaction_setInFrame(swigCPtr, this, ArrayStr.getCPtr(inFrame), inFrame);
+  }
+
   public int begin(State s) {
     return opensimModelJNI.JointReaction_begin(swigCPtr, this, State.getCPtr(s), s);
   }
