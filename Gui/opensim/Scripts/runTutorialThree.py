@@ -18,12 +18,12 @@
 # implied. See the License for the specific language governing            #
 # permissions and limitations under the License.                          #
 # ----------------------------------------------------------------------- #
+# Written by James Dunne, Stanford University
 
 # This example performs the steps of Tutorial Three in scripting form
-# Load model
 
 # Folder paths
-installDir 		= 	getInstallDir()
+installDir 		= 	getInstallDiR()
 modelFolder		=	installDir+"\Models\Gait2354_Simbody" 
 
 # Input Model 
@@ -128,10 +128,5 @@ idTool = modeling.InverseDynamicsTool(idSetupFile)
 idTool.setModel(myModel)
 # Run the tool
 idTool.run()
-
-
-
-
-
 
 

@@ -18,10 +18,11 @@
 # implied. See the License for the specific language governing            #
 # permissions and limitations under the License.                          #
 # ----------------------------------------------------------------------- #
+# Adapted from script donated by David Saxby, Griffith University 
+# Written by James Dunne, Stanford University
 
-# Adapted from script from David Saxby, Griffith University 
-# This example performs the steps of Tutorial Three in scripting form
-# Load model
+
+## This example shows detailed steps for scaling a model.  
 
 # Folder paths
 installDir 		= 	getInstallDir()

@@ -18,9 +18,9 @@
 # implied. See the License for the specific language governing            #
 # permissions and limitations under the License.                          #
 # ----------------------------------------------------------------------- #
+# Written by James Dunne, Stanford University
 
-# This example performs the steps of Tutorial Two in scripting form
-# Written by: James Dunne (2013)
+## This example performs the steps of Tutorial Two in scripting form
 
 # Define the files and folders we will be using
 installDir 		= 	getInstallDir()
