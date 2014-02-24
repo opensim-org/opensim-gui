@@ -324,6 +324,17 @@ public class JConsole extends JTextArea implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            // Ctrl+Z pressed. Abort current sequence and get
+            StringBuilder text = new StringBuilder(getText()); 
+            text.append(" ESC.");
+            text.append(System.getProperty("line.separator"));
+            text.append(ps1);
+            setText(text.toString(), true);
+            moreCommand = "";
+            e.consume();
+            return;
+        }
         if (e.getKeyCode() == KeyEvent.VK_UP && !e.isShiftDown() && !e.isAltDown()) {
             // prev in history
             StringBuilder temp = new StringBuilder(getText());
@@ -357,16 +368,6 @@ public class JConsole extends JTextArea implements KeyListener {
                     }
                 }
             } 
-            if (e.getKeyCode() == KeyEvent.VK_Z && !e.isShiftDown() && !e.isAltDown()) {
-                // Ctrl+Z pressed. Abort current sequence and get
-                StringBuilder text = new StringBuilder(getText()); 
-                text.append("^Z");
-                text.append(System.getProperty("line.separator"));
-                text.append(ps1);
-                setText(text.toString(), true);
-                moreCommand = "";
-                e.consume();
-            }
         } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             // handle script execution
             if (!e.isShiftDown() && !e.isAltDown()) {
