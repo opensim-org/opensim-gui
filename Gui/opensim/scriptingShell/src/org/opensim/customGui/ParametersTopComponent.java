@@ -577,9 +577,25 @@ public final class ParametersTopComponent extends TopComponent
      * 
      * @return handle to JPanel that was created.
      */
-    public JPanel addOutputPanel(){
+    public JPanel addOutputPanel(String label){
         JPanel panel = new JPanel();
+        if (!label.isEmpty())
+            panel.setBorder(javax.swing.BorderFactory.createTitledBorder(label));
         outputPanel.add(panel);
+        return panel;
+    }
+    /**
+     * Add a new JPanel to the inputPanel of the custom gui and return a handle to it.
+     * Typically you use this call to add a panel then add custom buttons to the returned panel
+     * using standard swing syntax.
+     * 
+     * @return handle to JPanel that was created.
+     */
+    public JPanel addInputPanel(String label){
+        JPanel panel = new JPanel();
+        if (!label.isEmpty())
+            panel.setBorder(javax.swing.BorderFactory.createTitledBorder(label));
+        inputPanel.add(panel);
         return panel;
     }
     /**
@@ -589,4 +605,5 @@ public final class ParametersTopComponent extends TopComponent
         inputPanel.removeAll();
         outputPanel.removeAll();
     }
+    
 }
