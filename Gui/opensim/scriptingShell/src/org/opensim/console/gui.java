@@ -1,7 +1,6 @@
 
 package org.opensim.console;
 
-import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
 import java.util.prefs.Preferences;
@@ -10,13 +9,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import org.openide.ErrorManager;
-import org.openide.awt.ToolbarPool;
 import org.openide.cookies.InstanceCookie;
 import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;
 import org.openide.loaders.DataObject;
 import org.openide.util.Exceptions;
 import org.openide.util.actions.CallableSystemAction;
+import org.opensim.customGui.InstructionsTopComponent;
 import org.opensim.customGui.ParametersTopComponent;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.Constraint;
@@ -401,7 +400,13 @@ public final class gui {
         ConcreteModelNode modelNode = ExplorerTopComponent.getDefault().getModelNode(getCurrentModel());
         modelNode.updateSelfFromObject();
     }
-    
+    /**
+     * createParametersWindow Creates and open a window for custom GUI, the window is a singleton type (1 per application)
+     * and is normally docked. You can close() and open() it as needed. It should be treated
+     * as a JComponent (in Java Swing terms)
+     * 
+     * @return handle to the opened window
+     */
     static public ParametersTopComponent createParametersWindow()
     {
         ParametersTopComponent win = ParametersTopComponent.findInstance();
@@ -409,6 +414,21 @@ public final class gui {
         return win;
     }
         
+    /**
+     * createInstructionsWindow Creates and open a window for Instructions, the window is a singleton type (1 per application)
+     * and is normally docked. You can close() and open() it as needed. It should be treated
+     * as a JComponent (in Java Swing terms)
+     * The function takes in a full path name for an html document to display on opening.
+     * 
+     * @return handle to the opened window
+     */
+    static public InstructionsTopComponent createInstructionsWindow(String fileName)
+    {
+        InstructionsTopComponent win = InstructionsTopComponent.findInstance();
+        win.setDocument(fileName);
+        win.open();
+        return win;
+    }
     static public void setSimulationToolBarVisibility(boolean show) {
         try {
             ToolbarSimulationAction simAct = (ToolbarSimulationAction) ToolbarSimulationAction.findObject(

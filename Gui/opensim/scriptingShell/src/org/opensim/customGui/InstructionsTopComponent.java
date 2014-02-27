@@ -9,7 +9,7 @@ import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
 
 /**
- * Top component which displays something.
+ * Top component/Docked Window which displays helpful html instructions document.
  */
 public final class InstructionsTopComponent extends TopComponent {
     
@@ -106,8 +106,12 @@ public final class InstructionsTopComponent extends TopComponent {
     protected String preferredID() {
         return PREFERRED_ID;
     }
-
-    void setDocument(String instructionsFileName) {
+    /**
+     * setDocument sets the html page passed in for display
+     * 
+     * @param instructionsFileName 
+     */
+    public void setDocument(String instructionsFileName) {
         try {
             File file = new File(instructionsFileName);
             jEditorPane1.setPage(file.toURL());
