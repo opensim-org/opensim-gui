@@ -147,7 +147,6 @@
             </module-dependencies>
             <public-packages>
                 <package>org.opensim.console</package>
-                <package>org.opensim.k12</package>
             </public-packages>
             <class-path-extension>
                 <runtime-relative-path>ext/jython.jar</runtime-relative-path>
