@@ -15,7 +15,8 @@ ENDIF()
 # etc
 INSTALL(DIRECTORY opensim/dist/opensim/opensim/etc/ DESTINATION etc)
 # Scripts
-INSTALL(DIRECTORY opensim/Scripts/ DESTINATION Scripts/GUI_Scripting PATTERN ".svn" EXCLUDE)
+INSTALL(DIRECTORY opensim/Scripts/ DESTINATION Scripts/GUI_Scripting PATTERN ".svn" EXCLUDE
+																	 PATTERN "opensim/Scripts/Metabolics_example_scripts" EXCLUDE)
 # remaining folders
 INSTALL(DIRECTORY opensim/dist/opensim/opensim/ide/ DESTINATION ide)
 INSTALL(DIRECTORY opensim/dist/opensim/opensim/platform/ DESTINATION platform)
@@ -43,4 +44,5 @@ INSTALL(DIRECTORY ${JRE_TO_PACKAGE} DESTINATION jdk)
 # Should also have -J-Dsun.java2d.ddoffscreen=false -J-Dsun.java2d.gdiblit=false
 # in addition first line should have
 # default_userdir="${HOME}/.${APPNAME}/1.0/dev"
+SUBDIRS(Documentation)
 ENDIF(OPENSIM_INSTALL_PACKAGE_BUILD)
