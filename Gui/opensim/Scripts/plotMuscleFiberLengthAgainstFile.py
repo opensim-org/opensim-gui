@@ -32,8 +32,8 @@ loadModel(filepath);
 plotterPanel = createPlotterPanel("Plot Example")
 
 # Add curves showing rectus femoris and vasti fiber lengths vs. right knee angle and set the legend
-crv1 = addAnalysisCurve(plotterPanel, "fiber-length", "RF", "r_knee_angle")
-crv2 = addAnalysisCurve(plotterPanel, "fiber-length", "VASINT", "r_knee_angle")
+crv1 = addAnalysisCurve(plotterPanel, "fiber-length", "rect_fem_r", "knee_angle_r")
+crv2 = addAnalysisCurve(plotterPanel, "fiber-length", "vas_int_r", "knee_angle_r")
 crv1.setLegend("RF_BothLegs")
 crv2.setLegend("VASINT_BothLegs")
 
@@ -44,7 +44,7 @@ crv4 = addCurve(plotterPanel, src, "knee_angle_r", "vas_int_r")
 crv3.setLegend("RF_Subject01")
 crv4.setLegend("VASINT_Subject01") 
 
-crv5 =  addAnalysisCurve(plotterPanel, "MomentArm.r_knee_angle", "RF", "r_knee_angle")
+crv5 =  addAnalysisCurve(plotterPanel, "MomentArm.r_knee_angle", "rect_fem_r", "knee_angle_r")
 
 # Change the color of the first curve in the plot
 setCurveColor(plotterPanel, 0, 0.0, 1.0, 1.0)

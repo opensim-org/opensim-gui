@@ -18,19 +18,18 @@
 # implied. See the License for the specific language governing            #
 # permissions and limitations under the License.                          #
 # ----------------------------------------------------------------------- #
+# Written by James Dunne, Stanford University
 
-# This example performs some of the initial steps of Tutorial One
-# Load model
-
+## This example performs the steps of Tutorial One in scripting form
 
 # Define the files and folders we will be using
 installDir 		= 	getInstallDir()
 modelFolder		=	installDir+"\Models\Gait2392_Simbody" 
 modelName		=	modelFolder+"\gait2392_simbody.osim"
 
-# Data folder and filenames
-dataFolder		=	modelFolder+"\Gait2392_Tutorial1_data"
-exampleWalk		=	dataFolder+"\gait2392_walking.mot"
+# Data folder and file names
+dataFolder		=	modelFolder+"\Tutorial1"
+exampleWalk		=	dataFolder+"\\normal.mot"
 normalWalk		=	dataFolder+"\\normal.mot"
 crouch1Walk		=	dataFolder+"\crouch1.mot"
 crouch2Walk		=	dataFolder+"\crouch2.mot"
@@ -61,8 +60,8 @@ numberCoords= myModel.getNumCoordinates()
 ## Plot fiber length VS Knee Angle	
 	
 # Plot the RF and VASINT fiber lengths with the model in the default pose
-plotterPanel = createPlotterPanel("Plot ")
-crv1 = addAnalysisCurve(plotterPanel, "fiber-length", "rect_fem_r", "knee_angle_r")S
+plotterPanel = createPlotterPanel("fiber-length VS Knee Angle ")
+crv1 = addAnalysisCurve(plotterPanel, "fiber-length", "rect_fem_r", "knee_angle_r")
 setCurveLegend(crv1, "RF")
 crv2 = addAnalysisCurve(plotterPanel, "fiber-length", "vas_int_r", "knee_angle_r")
 setCurveLegend(crv2, "VASINT")
@@ -74,6 +73,7 @@ crv3 = addAnalysisCurve(plotterPanel, "fiber-length", "rect_fem_r", "knee_angle_
 setCurveLegend(crv3, "RF_hip45")
 crv4 = addAnalysisCurve(plotterPanel, "fiber-length", "vas_int_r", "knee_angle_r")
 setCurveLegend(crv4, "VASINT_hip45")
+
 
 # Save the results to file
 exportData(plotterPanel, dataFolder+"\RF_VASINT_FiberLengths.sto")
@@ -88,22 +88,22 @@ for i in range(myModel.getCoordinateSet().getSize()):
 
 # Plot the RF and VASINT knee extension moment arm vs knee angle for 
 plotterPanel = createPlotterPanel("Moment Arm: Knee Extension ")
-crv1 = addAnalysisCurve(plotterPanel, "moment arm.knee_angle_r", "rect_fem_r", "knee_angle_r")
+crv1 = addAnalysisCurve(plotterPanel, "momentArm.knee_angle_r", "rect_fem_r", "knee_angle_r")
 setCurveLegend(crv1, "RF")
-crv1 = addAnalysisCurve(plotterPanel, "moment arm.knee_angle_r", "vas_int_r", "knee_angle_r")
+crv1 = addAnalysisCurve(plotterPanel, "momentArm.knee_angle_r", "vas_int_r", "knee_angle_r")
 setCurveLegend(crv2, "VASINT")
 
 # Plot the RF and VASINT fiber lengths with the model with the hip flexed to 45 deg
 hip_coord = myModel.getCoordinateSet().get("hip_flexion_r")
 setCoordinateValueDegrees(hip_coord,45)
-crv3 = addAnalysisCurve(plotterPanel, "moment arm.knee_angle_r", "rect_fem_r", "knee_angle_r")
+crv3 = addAnalysisCurve(plotterPanel, "momentArm.knee_angle_r", "rect_fem_r", "knee_angle_r")
 setCurveLegend(crv3, "RF_hip45")
-crv4 = addAnalysisCurve(plotterPanel, "moment arm.knee_angle_r", "vas_int_r", "knee_angle_r")
+crv4 = addAnalysisCurve(plotterPanel, "momentArm.knee_angle_r", "vas_int_r", "knee_angle_r")
 setCurveLegend(crv4, "VASINT_hip45")
+
 
 # Save the results to file
 exportData(plotterPanel, dataFolder+"RF_VASINT_FiberLengths.sto")
-
 
 ## Knee angle during walking
 
@@ -142,12 +142,6 @@ crv2.setLegend("crouch")
 
 # Save the results to file
 exportData(plotterPanel, dataFolder+"/normal_crouch_HamstringMuscle-tendonLength.sto")
-
-
-
-
-
-
 
 
 

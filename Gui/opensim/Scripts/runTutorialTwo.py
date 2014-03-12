@@ -18,10 +18,9 @@
 # implied. See the License for the specific language governing            #
 # permissions and limitations under the License.                          #
 # ----------------------------------------------------------------------- #
+# Written by James Dunne, Stanford University
 
-# This example performs some of the initial steps of Tutorial One
-# Load model
-
+## This example performs the steps of Tutorial Two in scripting form
 
 # Define the files and folders we will be using
 installDir 		= 	getInstallDir()
@@ -77,11 +76,17 @@ loadModel(newName)
 	
 	
 
-## IV. Biomechanical Effects of Tendon Transfer  **** NOT COMPLETED- NEED TO FIGURE OUT HOW TO PLOT THE SUM OF ALL MUSCLES  *****
+## IV. Biomechanical Effects of Tendon Transfer 
 
 loadModel(fullPathName)
 currentModel = getCurrentModel()
 myState = currentModel.initSystem()
+# Plot the RF and VASINT fiber lengths with the model in the default pose
+plotterPanel = createPlotterPanel("Wrist Deviation Moment vs. Deviation Angle. ")
+crv1 = addAnalysisCurve(plotterPanel, "moment.flexion", "ECRB+ECRL+ECU_pre-surgery+EDCI+EDCL+EDCM+EDCR+EDM+EIP+EPL","flexion")
+setCurveLegend(crv1, "Before Transfer")
+crv2 = addAnalysisCurve(plotterPanel, "moment.flexion", "ECRB+ECRL+ECU_post-surgery+EDCI+EDCL+EDCM+EDCR+EDM+EIP+EPL","flexion")
+setCurveLegend(crv2, "After Transfer")
 
 ## Effect of Tendon transfer on ECU muscle
 

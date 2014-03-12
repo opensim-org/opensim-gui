@@ -37,10 +37,10 @@ plotterPanel = createPlotterPanel("Plot Example")
 motionfilePath = getInstallDir() + "/Models/Gait2392_Simbody/subject01_walk1.mot"
 motSrc = addMotionSource(plotterPanel, motionfilePath)
 
-# Plot MomentArm of RF, VASINT about r_knee_angle through the motion
-crv1 = addMotionCurve(plotterPanel, 'momentArm.r_knee_angle', 'RF', motSrc)
-crv2 = addMotionCurve(plotterPanel, 'Length', 'RF', motSrc)
-# addMotionCurve(plotterPanel, 'momentArm.r_knee_angle', 'VASINT', motSrc)
+# Plot MomentArm of rect_fem_r, vas_int_r about r_knee_angle through the motion
+crv1 = addMotionCurve(plotterPanel, 'momentArm.knee_angle_r', 'rect_fem_r', motSrc)
+crv2 = addMotionCurve(plotterPanel, 'Length', 'rect_fem_r', motSrc)
+# addMotionCurve(plotterPanel, 'momentArm.knee_angle_r', 'vas_int_r', motSrc)
 
 crv1.setLegend("Moment Arm")
 crv2.setLegend("Muscle-Tendon Length")
