@@ -40,6 +40,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import org.opensim.modeling.*;
 import org.opensim.modeling.DisplayGeometry.DisplayPreference;
+import org.opensim.view.pub.ModelVisualsVtk;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 import vtk.vtkActor;
@@ -72,7 +73,7 @@ import vtk.vtkLineSource;
  * 3. Selection is slow because hashing vtkProp3D apparently doesn't destribute objects evenly use 
  *       some form of Id instead (e.g. vtkId).
  */
-public class SingleModelVisuals {
+public class SingleModelVisuals implements ModelVisualsVtk {
     
     protected vtkAssembly modelDisplayAssembly;   // assembly representing the model
     protected vtkLinearTransform modelDisplayTransform; // extra transform to shift, rotate model
@@ -114,6 +115,7 @@ public class SingleModelVisuals {
     private MuscleColoringFunction defaultColoringFunction;
     private MuscleColoringFunction noColoringFunction;
     private MuscleColoringFunction currentColoringFunction;
+    DecorativeGeometryImplementationGUI dgi = new DecorativeGeometryImplementationGUI();
     /**
      * Creates a new instance of SingleModelVisuals
      */
@@ -148,10 +150,10 @@ public class SingleModelVisuals {
      * Create one vtkAssembly representing the model and return it.
      */
     private vtkAssembly createModelAssembly(Model model)
-    {                
+    {           
+        //int bid0 = dg.getBodyId();
         vtkAssembly modelAssembly = new vtkAssembly();
         // Keep track of ground body to avoid recomputation
-        Body gnd = model.getGroundBody();
         BodySet bodies = model.getBodySet();
  
         for(int bodyNum=0; bodyNum<bodies.getSize();  bodyNum++)
@@ -162,7 +164,32 @@ public class SingleModelVisuals {
             BodyDisplayer bodyRep = new BodyDisplayer(modelAssembly, body,
                     mapObject2VtkObjects, mapVtkObjects2Objects);
             vtkMatrix4x4 bXform = getBodyTransform(model, body);
-            double[] bodyBounds = bodyRep.getBodyBounds();
+        }
+        dgi.setModelAssembly(modelAssembly, mapObject2VtkObjects, model);
+        ModelDisplayHints mdh = new ModelDisplayHints();
+        ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
+        model.generateDecorations(true, mdh, model.getWorkingState(), adg);
+        DecorativeGeometry dg = adg.begin();
+        System.out.println("Size ="+adg.size());
+        int idx=0;
+        while (idx <adg.size()){
+            dg = adg.getElt(idx);
+            dg.implementGeometry(dgi);
+            idx++;
+        }
+        /*
+        ArrayDecorativeGeometry vadg = new ArrayDecorativeGeometry();
+        model.generateDecorations(false, mdh, model.updWorkingState(), vadg);
+        DecorativeGeometry vdg = vadg.begin();
+        System.out.println("Size ="+vadg.size());
+        int vidx=0;
+        while (vidx <vadg.size()){
+            vdg = vadg.getElt(idx);
+            vdg.implementGeometry(dgi);
+            vidx++;
+        }*/
+            /*
+             * double[] bodyBounds = bodyRep.getBodyBounds();
             //ViewDB.printBounds(body.getName(), bodyBounds);
             for(int c=0; c<3; c++){
                 bodyBounds[2*c] += bXform.GetElement(c, 3);
@@ -172,7 +199,9 @@ public class SingleModelVisuals {
             // Bodies have things attached to them as handled by the
             // dependents mechanism. For each one of these a new vtkActor is created and attached 
             // to the same xform as the owner body.
+            
             VisibleObject bodyDisplayer = body.getDisplayer();
+            
             for(int j=0; j < bodyDisplayer.countDependents();j++){
                 VisibleObject Dependent = bodyDisplayer.getDependent(j);
                 
@@ -195,10 +224,13 @@ public class SingleModelVisuals {
                    }
                 }
             }
+             * 
         } //body
 
         // Add markers
         modelAssembly.AddPart(getMarkersRep().getVtkActor());
+             * 
+             */
         /*
         vtkPolyDataMapper markerLineMapper = new vtkPolyDataMapper();
         markerLineMapper.SetInput(markerLinePolyData.GetOutput());
@@ -209,7 +241,7 @@ public class SingleModelVisuals {
             modelAssembly.AddPart(comDisplayer.getVtkActor());
 
         // Now the muscles and other actuators
-        addGeometryForForces(model, modelAssembly);
+        //addGeometryForForces(model, modelAssembly);
 
         // Add whole model assembly to object map
         mapObject2VtkObjects.put(model, modelAssembly);
@@ -242,14 +274,14 @@ public class SingleModelVisuals {
             if (bodyRep!=null)
                bodyRep.SetUserMatrix(bodyVtkTransform);
 
-            bodyRep.applyDisplayPreferences();
+            //bodyRep.applyDisplayPreferences();
             
         }
        
-        updateMarkersGeometry(model.getMarkerSet());
-        updateForceGeometry(model);
+        //updateMarkersGeometry(model.getMarkerSet());
+        //updateForceGeometry(model);
         comDisplayer.updateCOMLocation();
-        updateUserObjects();
+        //updateUserObjects();
    }
 
     private void pushColoringFunctionToMuscles() {
@@ -369,11 +401,10 @@ public class SingleModelVisuals {
    }
 
    public void setApplyMuscleColors(boolean enabled) {
-      if (enabled)
-          currentColoringFunction = defaultColoringFunction;
-      else
-          currentColoringFunction = noColoringFunction;
-       pushColoringFunctionToMuscles();
+      Iterator<LineSegmentMuscleDisplayer> dispIter = mapActuator2Displayer.values().iterator();
+      while(dispIter.hasNext()) dispIter.next().setApplyColoringFunction(currentColoringFunction);
+      getMuscleSegmentsRep().setModified();
+      getMusclePointsRep().setModified();
    }
 
    public void addMarkerGeometry(Marker marker) {
@@ -624,8 +655,6 @@ public class SingleModelVisuals {
        getForcesRep().setShape(strip3.GetOutput());
        // Update global preference for Contact and Wrap geometry
        DisplayGeometryFactory.updateDisplayPreference();
-       
-       
     }
 
     private void createMuscleSegmentRep(OpenSimvtkOrientedGlyphCloud aMuscleSegmentsRep) {

@@ -125,7 +125,7 @@ public class BodyDisplayer extends vtkAssembly
       outlineMapper.AddInputConnection(outlineFilter.GetOutputPort());
       boolean hasGeometry=false;
       vtkAppendPolyData boundingBoxPolyData = new vtkAppendPolyData();
-
+/*
       // For each bone in the current body.
       for (int k = 0; k < bodyVisibleObject.getNumGeometryFiles(); ++k) {
           GeometrySet gSet = bodyVisibleObject.getGeometrySet();
@@ -172,6 +172,7 @@ public class BodyDisplayer extends vtkAssembly
 
       centerOfMassActor.GetProperty().SetLineStipplePattern(0xF0F0);
       if (showCOM) AddPart(centerOfMassActor);
+       */
       updateMapsToSupportPicking(body, mapObject2VtkObjects, mapVtkObjects2Objects);
       modelAssembly.AddPart(this);
     }

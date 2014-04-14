@@ -56,7 +56,7 @@ public abstract class ObjectDisplayer extends vtkActor {
         } else {
             GetProperty().SetColor(new double[]{0.0, 1.0, 1.0});
         }
-        applyDisplayPrefs(obj);
+        //applyDisplayPrefs(obj);
         Modified();
     }
 
