@@ -110,7 +110,6 @@ public class SetMarkerWeights extends OpenSimObject {
   }
 
   public boolean adoptAndAppend(MarkerWeight aObject) {
-    aObject.markAdopted();
     return opensimModelJNI.SetMarkerWeights_adoptAndAppend(swigCPtr, this, MarkerWeight.getCPtr(aObject), aObject);
   }
 

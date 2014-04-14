@@ -90,4 +90,8 @@ public class MarkerSet extends SetMarkers {
     return (cPtr == 0) ? null : new Marker(cPtr, false);
   }
 
+  public void invokeGenerateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
+    opensimModelJNI.MarkerSet_invokeGenerateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
+  }
+
 }

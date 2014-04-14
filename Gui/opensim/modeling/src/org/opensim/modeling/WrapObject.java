@@ -180,6 +180,10 @@ public class WrapObject extends OpenSimObject {
     opensimModelJNI.WrapObject_updateGeometry(swigCPtr, this);
   }
 
+  public void generateDecorations(Model model, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
+    opensimModelJNI.WrapObject_generateDecorations(swigCPtr, this, Model.getCPtr(model), model, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
+  }
+
   public final static class WrapQuadrant {
     public final static WrapObject.WrapQuadrant allQuadrants = new WrapObject.WrapQuadrant("allQuadrants");
     public final static WrapObject.WrapQuadrant negativeX = new WrapObject.WrapQuadrant("negativeX");

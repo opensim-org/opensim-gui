@@ -89,4 +89,8 @@ public class WrapEllipsoid extends WrapObject {
     opensimModelJNI.WrapEllipsoid_connectToModelAndBody(swigCPtr, this, Model.getCPtr(aModel), aModel, Body.getCPtr(aBody), aBody);
   }
 
+  public void generateDecorations(Model model, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
+    opensimModelJNI.WrapEllipsoid_generateDecorations(swigCPtr, this, Model.getCPtr(model), model, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
+  }
+
 }

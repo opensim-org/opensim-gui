@@ -101,4 +101,8 @@ public class WrapCylinder extends WrapObject {
     opensimModelJNI.WrapCylinder_connectToModelAndBody(swigCPtr, this, Model.getCPtr(aModel), aModel, Body.getCPtr(aBody), aBody);
   }
 
+  public void generateDecorations(Model model, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
+    opensimModelJNI.WrapCylinder_generateDecorations(swigCPtr, this, Model.getCPtr(model), model, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
+  }
+
 }
