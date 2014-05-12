@@ -63,6 +63,14 @@ public class DecorativeText extends DecorativeGeometry {
     return new DecorativeText(opensimModelJNI.DecorativeText_setBodyId(swigCPtr, this, b), false);
   }
 
+  public DecorativeText setIndexOnBody(int x) {
+    return new DecorativeText(opensimModelJNI.DecorativeText_setIndexOnBody(swigCPtr, this, x), false);
+  }
+
+  public DecorativeText setUserRef(SWIGTYPE_p_void p) {
+    return new DecorativeText(opensimModelJNI.DecorativeText_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
+  }
+
   public DecorativeText setTransform(Transform X_BD) {
     return new DecorativeText(opensimModelJNI.DecorativeText_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
   }

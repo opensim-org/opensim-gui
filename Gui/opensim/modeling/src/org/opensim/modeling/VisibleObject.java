@@ -179,30 +179,30 @@ public class VisibleObject extends OpenSimObject {
     return (cPtr == 0) ? null : new VisibleObject(cPtr, false);
   }
 
-  public void addGeometry(Geometry aGeometry) {
-    opensimModelJNI.VisibleObject_addGeometry(swigCPtr, this, Geometry.getCPtr(aGeometry), aGeometry);
+  public void addGeometry(SWIGTYPE_p_OpenSim__Geometry aGeometry) {
+    opensimModelJNI.VisibleObject_addGeometry(swigCPtr, this, SWIGTYPE_p_OpenSim__Geometry.getCPtr(aGeometry));
   }
 
-  public void removeGeometry(Geometry aGeometry) {
-    opensimModelJNI.VisibleObject_removeGeometry(swigCPtr, this, Geometry.getCPtr(aGeometry), aGeometry);
+  public void removeGeometry(SWIGTYPE_p_OpenSim__Geometry aGeometry) {
+    opensimModelJNI.VisibleObject_removeGeometry(swigCPtr, this, SWIGTYPE_p_OpenSim__Geometry.getCPtr(aGeometry));
   }
 
   public void freeGeometry() {
     opensimModelJNI.VisibleObject_freeGeometry(swigCPtr, this);
   }
 
-  public Geometry getGeometry(int i) {
+  public SWIGTYPE_p_OpenSim__Geometry getGeometry(int i) {
     long cPtr = opensimModelJNI.VisibleObject_getGeometry(swigCPtr, this, i);
-    return (cPtr == 0) ? null : new Geometry(cPtr, false);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_OpenSim__Geometry(cPtr, false);
   }
 
   public int countGeometry() {
     return opensimModelJNI.VisibleObject_countGeometry(swigCPtr, this);
   }
 
-  public Geometry getDefaultGeometry() {
+  public SWIGTYPE_p_OpenSim__Geometry getDefaultGeometry() {
     long cPtr = opensimModelJNI.VisibleObject_getDefaultGeometry(swigCPtr, this);
-    return (cPtr == 0) ? null : new Geometry(cPtr, false);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_OpenSim__Geometry(cPtr, false);
   }
 
   public void setupProperties() {

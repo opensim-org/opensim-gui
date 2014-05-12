@@ -47,6 +47,14 @@ public class DecorativeGeometry {
     return new DecorativeGeometry(opensimModelJNI.DecorativeGeometry_setBodyId(swigCPtr, this, bodyId), false);
   }
 
+  public DecorativeGeometry setIndexOnBody(int index) {
+    return new DecorativeGeometry(opensimModelJNI.DecorativeGeometry_setIndexOnBody(swigCPtr, this, index), false);
+  }
+
+  public DecorativeGeometry setUserRef(SWIGTYPE_p_void userRef) {
+    return new DecorativeGeometry(opensimModelJNI.DecorativeGeometry_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(userRef)), false);
+  }
+
   public DecorativeGeometry setTransform(Transform X_BG) {
     return new DecorativeGeometry(opensimModelJNI.DecorativeGeometry_setTransform(swigCPtr, this, Transform.getCPtr(X_BG), X_BG), false);
   }
@@ -65,6 +73,15 @@ public class DecorativeGeometry {
 
   public int getBodyId() {
     return opensimModelJNI.DecorativeGeometry_getBodyId(swigCPtr, this);
+  }
+
+  public int getIndexOnBody() {
+    return opensimModelJNI.DecorativeGeometry_getIndexOnBody(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_void getUserRef() {
+    long cPtr = opensimModelJNI.DecorativeGeometry_getUserRef(swigCPtr, this);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_void(cPtr, false);
   }
 
   public double getResolution() {

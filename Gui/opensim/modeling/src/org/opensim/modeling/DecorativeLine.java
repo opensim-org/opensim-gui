@@ -63,6 +63,14 @@ public class DecorativeLine extends DecorativeGeometry {
     return new DecorativeLine(opensimModelJNI.DecorativeLine_setBodyId(swigCPtr, this, b), false);
   }
 
+  public DecorativeLine setIndexOnBody(int x) {
+    return new DecorativeLine(opensimModelJNI.DecorativeLine_setIndexOnBody(swigCPtr, this, x), false);
+  }
+
+  public DecorativeLine setUserRef(SWIGTYPE_p_void p) {
+    return new DecorativeLine(opensimModelJNI.DecorativeLine_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
+  }
+
   public DecorativeLine setTransform(Transform X_BD) {
     return new DecorativeLine(opensimModelJNI.DecorativeLine_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
   }

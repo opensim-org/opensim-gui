@@ -287,4 +287,8 @@ public class ContactGeometry extends ModelComponent {
     opensimModelJNI.ContactGeometry_updateGeometry(swigCPtr, this);
   }
 
+  public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
+    opensimModelJNI.ContactGeometry_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
+  }
+
 }

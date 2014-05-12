@@ -55,6 +55,14 @@ public class DecorativeCircle extends DecorativeGeometry {
     return new DecorativeCircle(opensimModelJNI.DecorativeCircle_setBodyId(swigCPtr, this, b), false);
   }
 
+  public DecorativeCircle setIndexOnBody(int x) {
+    return new DecorativeCircle(opensimModelJNI.DecorativeCircle_setIndexOnBody(swigCPtr, this, x), false);
+  }
+
+  public DecorativeCircle setUserRef(SWIGTYPE_p_void p) {
+    return new DecorativeCircle(opensimModelJNI.DecorativeCircle_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
+  }
+
   public DecorativeCircle setTransform(Transform X_BD) {
     return new DecorativeCircle(opensimModelJNI.DecorativeCircle_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
   }

@@ -77,4 +77,8 @@ public class ContactHalfSpace extends ContactGeometry {
     return new SWIGTYPE_p_SimTK__ContactGeometry(opensimModelJNI.ContactHalfSpace_createSimTKContactGeometry(swigCPtr, this), true);
   }
 
+  public void generateDecorations(boolean fixed, ModelDisplayHints hints, State s, ArrayDecorativeGeometry geometry) {
+    opensimModelJNI.ContactHalfSpace_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(s), s, ArrayDecorativeGeometry.getCPtr(geometry), geometry);
+  }
+
 }

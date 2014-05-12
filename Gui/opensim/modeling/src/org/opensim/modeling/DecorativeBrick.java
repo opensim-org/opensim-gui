@@ -55,6 +55,14 @@ public class DecorativeBrick extends DecorativeGeometry {
     return new DecorativeBrick(opensimModelJNI.DecorativeBrick_setBodyId(swigCPtr, this, b), false);
   }
 
+  public DecorativeBrick setIndexOnBody(int x) {
+    return new DecorativeBrick(opensimModelJNI.DecorativeBrick_setIndexOnBody(swigCPtr, this, x), false);
+  }
+
+  public DecorativeBrick setUserRef(SWIGTYPE_p_void p) {
+    return new DecorativeBrick(opensimModelJNI.DecorativeBrick_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
+  }
+
   public DecorativeBrick setTransform(Transform X_BD) {
     return new DecorativeBrick(opensimModelJNI.DecorativeBrick_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
   }

@@ -205,4 +205,8 @@ public class GeometryPath extends ModelComponent {
     opensimModelJNI.GeometryPath_updateGeometry(swigCPtr, this, State.getCPtr(s), s);
   }
 
+  public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
+    opensimModelJNI.GeometryPath_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
+  }
+
 }

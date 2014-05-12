@@ -55,6 +55,14 @@ public class DecorativeEllipsoid extends DecorativeGeometry {
     return new DecorativeEllipsoid(opensimModelJNI.DecorativeEllipsoid_setBodyId(swigCPtr, this, b), false);
   }
 
+  public DecorativeEllipsoid setIndexOnBody(int x) {
+    return new DecorativeEllipsoid(opensimModelJNI.DecorativeEllipsoid_setIndexOnBody(swigCPtr, this, x), false);
+  }
+
+  public DecorativeEllipsoid setUserRef(SWIGTYPE_p_void p) {
+    return new DecorativeEllipsoid(opensimModelJNI.DecorativeEllipsoid_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
+  }
+
   public DecorativeEllipsoid setTransform(Transform X_BD) {
     return new DecorativeEllipsoid(opensimModelJNI.DecorativeEllipsoid_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
   }

@@ -55,6 +55,14 @@ public class DecorativePoint extends DecorativeGeometry {
     return new DecorativePoint(opensimModelJNI.DecorativePoint_setBodyId(swigCPtr, this, b), false);
   }
 
+  public DecorativePoint setIndexOnBody(int x) {
+    return new DecorativePoint(opensimModelJNI.DecorativePoint_setIndexOnBody(swigCPtr, this, x), false);
+  }
+
+  public DecorativePoint setUserRef(SWIGTYPE_p_void p) {
+    return new DecorativePoint(opensimModelJNI.DecorativePoint_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
+  }
+
   public DecorativePoint setTransform(Transform X_BD) {
     return new DecorativePoint(opensimModelJNI.DecorativePoint_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
   }

@@ -77,8 +77,4 @@ public class ContactGeometrySet extends ModelComponentSetContactGeometry {
     opensimModelJNI.ContactGeometrySet_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
   }
 
-  public void invokeGenerateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
-    opensimModelJNI.ContactGeometrySet_invokeGenerateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
-  }
-
 }

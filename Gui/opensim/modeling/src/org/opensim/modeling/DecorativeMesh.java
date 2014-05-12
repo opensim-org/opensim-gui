@@ -47,6 +47,14 @@ public class DecorativeMesh extends DecorativeGeometry {
     return new DecorativeMesh(opensimModelJNI.DecorativeMesh_setBodyId(swigCPtr, this, b), false);
   }
 
+  public DecorativeMesh setIndexOnBody(int x) {
+    return new DecorativeMesh(opensimModelJNI.DecorativeMesh_setIndexOnBody(swigCPtr, this, x), false);
+  }
+
+  public DecorativeMesh setUserRef(SWIGTYPE_p_void p) {
+    return new DecorativeMesh(opensimModelJNI.DecorativeMesh_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
+  }
+
   public DecorativeMesh setTransform(Transform X_BD) {
     return new DecorativeMesh(opensimModelJNI.DecorativeMesh_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
   }

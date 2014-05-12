@@ -781,4 +781,8 @@ public class FunctionBasedBushingForce extends Force {
     return new ArrayDouble(opensimModelJNI.FunctionBasedBushingForce_getRecordValues(swigCPtr, this, State.getCPtr(state), state), true);
   }
 
+  public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry geometryArray) {
+    opensimModelJNI.FunctionBasedBushingForce_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(geometryArray), geometryArray);
+  }
+
 }

@@ -55,6 +55,14 @@ public class DecorativeSphere extends DecorativeGeometry {
     return new DecorativeSphere(opensimModelJNI.DecorativeSphere_setBodyId(swigCPtr, this, b), false);
   }
 
+  public DecorativeSphere setIndexOnBody(int x) {
+    return new DecorativeSphere(opensimModelJNI.DecorativeSphere_setIndexOnBody(swigCPtr, this, x), false);
+  }
+
+  public DecorativeSphere setUserRef(SWIGTYPE_p_void p) {
+    return new DecorativeSphere(opensimModelJNI.DecorativeSphere_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
+  }
+
   public DecorativeSphere setTransform(Transform X_BD) {
     return new DecorativeSphere(opensimModelJNI.DecorativeSphere_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
   }
