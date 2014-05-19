@@ -27,92 +27,38 @@ package org.opensim.view;
 
 import org.opensim.modeling.*;
 import vtk.vtkActor;
-import vtk.vtkClipPolyData;
-import vtk.vtkPlane;
+import vtk.vtkLineSource;
 import vtk.vtkPolyData;
-import vtk.vtkSphereSource;
 
-public class DecorativeSphereDisplayer extends DecorativeGeometryDisplayer {
-    private static int RESOLUTION_PHI=32;
-    private static int RESOLUTION_THETA=32;
-    private static int CYL_RESOLUTION=32;
-    private DecorativeSphere ag;
+public class DecorativeLineDisplayer extends DecorativeGeometryDisplayer {
+
+    private DecorativeLine ag;
+    private vtkLineSource line;
     //protected OpenSimObject obj;
     /** 
      * Displayer for Wrap Geometry
      * @param ag
      * @param object 
      */
-    DecorativeSphereDisplayer(DecorativeSphere ag, OpenSimObject object) {
+    DecorativeLineDisplayer(DecorativeLine ag, OpenSimObject object) {
         super(object);
         this.ag = ag;
-     }
+      }
 
     /**
      * Convert DecorativeGeometry object passed in to the corresponding vtk polyhedral representation.
      * Transform is passed in as well since the way it applies to PolyData depends on source
      */
-    public static vtkPolyData getPolyData(DecorativeSphere ag) {
+    private vtkPolyData getPolyData(DecorativeLine ag) {
         //Geometry.GeometryType analyticType = ag.
-        boolean quadrants[] = new boolean[6];
-        //ag.getQuadrants(quadrants);
-        double[] pos = new double[3];
-        vtkSphereSource sphere = new vtkSphereSource();
-        sphere.LatLongTessellationOn();
-        sphere.SetPhiResolution(RESOLUTION_PHI);
-        sphere.SetThetaResolution(RESOLUTION_THETA);
-        sphere.SetRadius(ag.getRadius());
-
-        return sphere.GetOutput();
+        
+        line = new vtkLineSource();
+        line.SetPoint1(ag.getPoint1().get(0),ag.getPoint1().get(1),ag.getPoint1().get(2));
+        line.SetPoint2(ag.getPoint2().get(0),ag.getPoint2().get(1),ag.getPoint2().get(2));
+        return line.GetOutput();
     }
 
-    /**
-     * Based on the array of quadrants, clip the wrap-object sphere/ellipsoid 
-     */
-    public static void setQuadrants(final boolean quadrants[], final vtkSphereSource sphere) {
-      if (!quadrants[0]){ 
-         sphere.SetStartTheta(270.0);
-         sphere.SetEndTheta(90.0);
-      }
-      else if (!quadrants[1]){
-         sphere.SetStartTheta(90.0);
-         sphere.SetEndTheta(270.0);
-      }
-      else if (!quadrants[2]){
-        sphere.SetEndTheta(180.0);
-      }
-      else if (!quadrants[3]){  
-         sphere.SetStartTheta(180.0);
-      }
-      else if (!quadrants[4])   
-        sphere.SetEndPhi(90.0);
-      else if (!quadrants[5])
-         sphere.SetStartPhi(90.0);
-   }
-
-   /** 
-    * Clip poly data of Cylinder, torus to proper half per passed in quadrants array
-    * only x, y are considered here as they are supported by the kinematics engine
-    */
-   public static vtkPolyData clipPolyData(boolean[] quadrants, vtkPolyData full) {
-      vtkPlane cutPlane = new vtkPlane();
-      if (!quadrants[0])
-         cutPlane.SetNormal(1.0, 0.0, 0.0);
-      else if (!quadrants[1])
-         cutPlane.SetNormal(-1.0, 0.0, 0.0);
-      else if (!quadrants[2]) 
-         cutPlane.SetNormal(0.0, 1.0, 0.0);
-      else if (!quadrants[3])
-         cutPlane.SetNormal(0.0, -1.0, 0.0);
-      else  // do nothing
-         return full;
-      vtkClipPolyData clipper = new vtkClipPolyData();
-      clipper.SetClipFunction(cutPlane);
-      clipper.SetInput(full);
-      
-      return clipper.GetOutput();
-   }
-
+ 
     @Override
     void updateDisplayFromDecorativeGeometry() {
         vtkPolyData polyData = getPolyData(ag);
@@ -122,8 +68,8 @@ public class DecorativeSphereDisplayer extends DecorativeGeometryDisplayer {
 
     @Override
     vtkActor getVisuals() {
-        updateDisplayFromDecorativeGeometry();
-        return this;
+       updateDisplayFromDecorativeGeometry();
+       return this;
     }
 
     int getBodyId() {
@@ -132,4 +78,17 @@ public class DecorativeSphereDisplayer extends DecorativeGeometryDisplayer {
     int getIndexOnBody() {
         return ag.getIndexOnBody();
     }
+
+    @Override
+    void copyAttributesFromDecorativeGeometry(DecorativeGeometry arg0) {
+        DecorativeLine newLine = (DecorativeLine) arg0;
+        ag.setPoint1(newLine.getPoint1());
+        ag.setPoint2(newLine.getPoint2());
+        line.SetPoint1(ag.getPoint1().get(0),ag.getPoint1().get(1),ag.getPoint1().get(2));
+        line.SetPoint2(ag.getPoint2().get(0),ag.getPoint2().get(1),ag.getPoint2().get(2));
+        line.Modified();
+        super.copyAttributesFromDecorativeGeometry(arg0);
+    }
+    
+    
 }

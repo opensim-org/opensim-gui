@@ -9,22 +9,15 @@
 
 package org.opensim.view;
 
-import java.util.Enumeration;
-import java.util.Hashtable;
 import org.opensim.modeling.DisplayGeometry.DisplayPreference;
 import org.opensim.modeling.Force;
-import org.opensim.modeling.Geometry;
-import org.opensim.modeling.LineGeometry;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.pub.OpenSimDB;
-import org.opensim.view.pub.ViewDB;
 import vtk.vtkActor;
-import vtk.vtkAppendPolyData;
 import vtk.vtkAssembly;
 import vtk.vtkLineSource;
 import vtk.vtkPolyData;
-import vtk.vtkPolyDataMapper;
 import vtk.vtkTubeFilter;
 
 /**
@@ -41,11 +34,10 @@ public class TwoBodyForceDisplayer extends vtkActor implements ObjectDisplayerIn
     private vtkPolyData baseShapePolyData=null;
     private double baseSize=0.001;
     private boolean visible=true;
-    private Hashtable<LineGeometry, vtkLineSource> mapGeometryToDisplayGeometry = 
-            new Hashtable<LineGeometry, vtkLineSource>();
 
     /** Creates a new instance of TwoBodyForceDisplayer */
     public TwoBodyForceDisplayer(Force force, vtkAssembly modelAssembly){
+        /*
         super();
         this.force = force;
         this.modelAssembly = modelAssembly;
@@ -81,7 +73,7 @@ public class TwoBodyForceDisplayer extends vtkActor implements ObjectDisplayerIn
             if (visible)
                 modelAssembly.AddPart(this);
 
-        }
+        }*/
    } 
 
     void addGeometry() {
@@ -103,6 +95,7 @@ public class TwoBodyForceDisplayer extends vtkActor implements ObjectDisplayerIn
      }
      visible = true;
      modelAssembly.AddPart(this);
+     /*
      Enumeration<LineGeometry> dispIter = mapGeometryToDisplayGeometry.keys();
       while(dispIter.hasMoreElements()){
          LineGeometry ag = dispIter.nextElement();
@@ -112,7 +105,7 @@ public class TwoBodyForceDisplayer extends vtkActor implements ObjectDisplayerIn
          vtkLineSource lineSource = mapGeometryToDisplayGeometry.get(ag);
          lineSource.SetPoint1(p1);
          lineSource.SetPoint2(p2);
-      }
+      }*/
       setModified();
     }
 

@@ -35,7 +35,7 @@ public class ModelComDisplayer{
         if (comboneFile==null)
             comboneFile = GeometryFileLocator.getInstance().getFullname("", "sphere.vtp", false);
         if (comboneFile==null) return;
-        GeometryFactory.populateActorFromFile(comboneFile, centerOfMassActor);
+        GeometryFactory.populatePolyDatarFromFile(comboneFile, centerOfMassActor);
 
        centerOfMassActor.GetProperty().SetColor(0.0, 1.0, 0.0); // Green COM for now, 3X marker size
        centerOfMassActor.SetScale(ViewDB.getInstance().getMarkerDisplayRadius()*3);

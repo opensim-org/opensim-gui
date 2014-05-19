@@ -12,17 +12,12 @@ package org.opensim.view;
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Vector;
-import org.opensim.modeling.ArrayPathPoint;
-import org.opensim.modeling.DisplayGeometry.DisplayPreference;
 import org.opensim.modeling.Force;
-import org.opensim.modeling.Geometry;
 import org.opensim.modeling.GeometryPath;
-import org.opensim.modeling.LineGeometry;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.PathPointSet;
-import org.opensim.modeling.PathWrapPoint;
 import org.opensim.modeling.VisibleObject;
 import org.opensim.view.pub.OpenSimDB;
 import vtk.vtkMatrix4x4;
@@ -190,6 +185,7 @@ public class LineSegmentForceDisplayer {
 
    public void updateGeometry(boolean callUpdateDisplayer)
    {
+       /*
       // Get attachments and connect them
       if(callUpdateDisplayer) openSimContext.updateDisplayer(forceAlongPath);
       VisibleObject actuatorDisplayer = forceAlongPath.getDisplayer();
@@ -215,7 +211,7 @@ public class LineSegmentForceDisplayer {
          double[] position2 = new double[3];
 
          ArrayPathPoint path=openSimContext.getCurrentDisplayPath(geomPath);
-
+         
          // Points are already in inertial frame
          for(int i=0; i<geomSize; i++) {
             Geometry geomEntry = actuatorDisplayer.getGeometry(i);
@@ -264,7 +260,7 @@ public class LineSegmentForceDisplayer {
                }
             }
          }
-      }
+      }*/
    }
 
 }

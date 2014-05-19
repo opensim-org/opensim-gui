@@ -289,6 +289,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                // add to map from models to modelVisuals so that it's accesisble
                // thru tree picks
                mapModelsToVisuals.put(model, newModelVisual);
+               // add to list of models
+               getModelVisuals().add(newModelVisual); //Too late??
                modelOpacities.put(model, 1.0);
                addVisObjectToAllViews();
                // Compute placement so that model does not intersect others
@@ -298,8 +300,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                newModelVisual.getModelDisplayAssembly().SetUserMatrix(m);
                
                sceneAssembly.AddPart(newModelVisual.getModelDisplayAssembly());
-                // add to list of models
-               getModelVisuals().add(newModelVisual); //Too late??
+                
               // Check if this refits scene into window
                // int rc = newModelVisual.getModelDisplayAssembly().GetReferenceCount();
                if(OpenSimDB.getInstance().getNumModels()==1) { 
@@ -585,7 +586,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     * Return a flag indicating whether the model is currently shown or hidden
     */
    public boolean getDisplayStatus(Model m) {
-      return mapModelsToVisuals.get(m).isVisible();
+      return false;//mapModelsToVisuals.get(m).isVisible();
       
    }
    
@@ -616,25 +617,12 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     * Set the color of the passed in object.
     */
    public void setObjectColor(OpenSimObject object, double[] colorComponents) {
-      if(PathPoint.safeDownCast(object)!=null) {
-      } else{ // should check for body here
-         vtkProp3D asm = ViewDB.getInstance().getVtkRepForObject(object);
-         /** make sure the object is not selected, if so change only in database */
-         if (ViewDB.getInstance().findObjectInSelectedList(object)!=-1){
-             //OpenSim211 if (object.getDisplayer()!=null)
-             //   object.getDisplayer().setColor(colorComponents);
-         }
-         else
-            if(asm!=null) {
-                applyColor(colorComponents, asm, true);
-                if (object instanceof Body){
-                    ((BodyDisplayer)asm).setColor(colorComponents);
-                }
-                else if (object instanceof DisplayGeometry)
-                    ((DisplayGeometry)object).setColor(colorComponents);
-            }
-         
-      }
+
+          ModelComponent mc = ModelComponent.safeDownCast(object);
+          if (mc!=null){
+              getModelVisuals(mc.getModel()).setObjectColor(object, colorComponents);
+          }
+      
       renderAll();
    }
    
@@ -1488,6 +1476,16 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             int x=0;
         }
 
+    }
+
+    public void setSelectedObject(OpenSimObject openSimObject, Model modelForNode) {
+        clearSelectedObjects();
+        getModelVisuals(modelForNode).selectObject(openSimObject);
+        repaintAll();
+    }
+
+    public void updateDisplay(Model model, ModelComponent ownerModelComponent) {
+        getModelVisuals(model).upateDisplay(ownerModelComponent);
     }
 
    /**

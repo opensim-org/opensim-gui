@@ -495,6 +495,7 @@ final public class MarkerEditorTopComponent extends TopComponent implements Obse
    // End of variables declaration//GEN-END:variables
 
    public void setupComponent(Marker newMarker) {
+       /*
       SingleModelGuiElements guiElem = null;
       MarkerSet markerSet = null;
 
@@ -530,7 +531,7 @@ final public class MarkerEditorTopComponent extends TopComponent implements Obse
          ModelNameLabel.setText("Model: " + currentModel.getName());
          if (markerSet.getSize() > 0) {
             MarkerComboBox.setEnabled(true);
-            MarkerComboBox.setModel(new javax.swing.DefaultComboBoxModel(guiElem.getMarkerNames()));
+            //MarkerComboBox.setModel(new javax.swing.DefaultComboBoxModel(guiElem.getMarkerNames()));
          } else {
             MarkerComboBox.setEnabled(false);
          }
@@ -583,7 +584,7 @@ final public class MarkerEditorTopComponent extends TopComponent implements Obse
       MarkerEditorPanel.setPreferredSize(d);
       
       this.revalidate();
-      this.repaint();
+      this.repaint();*/
    }
 
    private void updateOffsetFields() {

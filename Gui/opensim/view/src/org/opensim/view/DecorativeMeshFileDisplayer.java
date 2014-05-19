@@ -25,38 +25,75 @@
  */
 package org.opensim.view;
 
+import java.awt.Color;
 import org.opensim.modeling.*;
 import org.opensim.view.pub.GeometryFileLocator;
-import vtk.*;
+import vtk.vtkActor;
+import vtk.vtkPolyData;
+import vtk.vtkPolyDataMapper;
 
-public class PolyhedralGeometryDisplayer extends ObjectDisplayer {
-    private PolyhedralGeometry pg;
-    protected vtkPolyData meshPoly;
+public class DecorativeMeshFileDisplayer extends DecorativeGeometryDisplayer {
+    private DecorativeMeshFile ag;
+    private String modelFilePath;
+    //protected OpenSimObject obj;
     /** 
      * Displayer for Wrap Geometry
      * @param ag
      * @param object 
      */
-    PolyhedralGeometryDisplayer(PolyhedralGeometry pg, OpenSimObject object, String modelPath) {
+    DecorativeMeshFileDisplayer(DecorativeMeshFile ag, 
+            String modelFilePath, OpenSimObject object) {
         super(object);
-        this.pg = pg;
-        String geometryFile = pg.getGeometryFilename();
-        String meshFile = GeometryFileLocator.getInstance().getFullname(modelPath, geometryFile, false);
-        if (meshFile == null || (!meshFile.endsWith(".obj"))) {
-            return;
-        }
-        vtkOBJReader polyReader = new vtkOBJReader();
-        polyReader.SetFileName(meshFile);
-        meshPoly = polyReader.GetOutput();
-        //addPolyDataToActorApplyProperties(meshPoly, obj.getDisplayer());
+        this.ag = ag;
+        this.modelFilePath = modelFilePath;
+     }
 
-        updateFromProperties();
+    /**
+     * Convert DecorativeGeometry object passed in to the corresponding vtk polyhedral representation.
+     * Transform is passed in as well since the way it applies to PolyData depends on source
+     */
+    private vtkPolyData getPolyData(DecorativeMeshFile ag) {
+        String boneFile = GeometryFileLocator.getInstance().getFullname(modelFilePath,ag.getMeshFile(), false);
+        if (boneFile==null) return null;
+        return GeometryFactory.populatePolyDatarFromFile(boneFile, this);
     }
 
     @Override
-    void updateFromProperties() {
-        vtkPolyData polyData = meshPoly;
-        updatePropertiesForPolyData(polyData);
+    void updateDisplayFromDecorativeGeometry() {
+         setXformAndAttributesFromDecorativeGeometry(ag);
+    }
+
+    private void createDisplayFromDecorativeGeometry() {
+        vtkPolyData polyData = getPolyData(ag);
+        //updatePropertiesForPolyData(polyData);
+        createAndConnectMapper(polyData);
+    }
+
+    
+    public void setColorGUI(Color newColor) {
+        float[] floats = new float[3];
+        newColor.getRGBColorComponents(floats);
+        // Push change to object
 
     }
+
+    public Color getColor() {
+        Vec3 clr = ag.getColor();
+        return new Color((float)clr.get(0), (float)clr.get(1), (float)clr.get(2));
+    }
+
+    @Override
+    vtkActor getVisuals() {
+        createDisplayFromDecorativeGeometry();
+        updateDisplayFromDecorativeGeometry();
+        return this;
+    }
+
+    int getBodyId() {
+        return ag.getBodyId();
+    }
+    int getIndexOnBody() {
+        return ag.getIndexOnBody();
+    }
+
 }

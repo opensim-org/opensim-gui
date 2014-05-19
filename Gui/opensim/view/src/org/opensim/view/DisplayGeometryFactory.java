@@ -12,9 +12,7 @@ package org.opensim.view;
 import java.util.prefs.Preferences;
 import org.opensim.modeling.*;
 import org.opensim.utils.TheApp;
-import org.opensim.view.pub.GeometryFileLocator;
 import vtk.vtkActor;
-import vtk.vtkOBJReader;
 import vtk.vtkPolyData;
 import vtk.vtkPolyDataMapper;
 import vtk.vtkProp3D;
@@ -36,29 +34,6 @@ public class DisplayGeometryFactory {
         else
             displayContactGeometry = false;
 
-    }
-    public static vtkActor createGeometryDisplayer(OpenSimObject object, String modelPath) {
-        vtkActor attachmentRep = null;
-        VisibleObject visibleObject = object.getDisplayer();
-        int numGeometryPieces = visibleObject.countGeometry();
-        //assert(numGeometryPieces<= 1);
-        if (numGeometryPieces>0) {
-        for(int gc=0; gc< numGeometryPieces; gc++){
-            Geometry g = visibleObject.getGeometry(gc);
-            AnalyticGeometry ag=null;
-            ag = AnalyticGeometry.dynamic_cast(g);
-            if (ag != null){
-                attachmentRep= new AnalyticGeometryDisplayer(ag, object);
-                
-            } else {  // Contact geometry
-                 PolyhedralGeometry pg = PolyhedralGeometry.dynamic_cast(g);
-                if (pg !=null){
-                    attachmentRep = new PolyhedralGeometryDisplayer(pg, object, modelPath);
-                 }
-            }
-        } //for
-        }
-        return attachmentRep;
     }
     
     private static vtkActor createActorForPolyData(final vtkPolyData meshPoly, final VisibleObject visibleObject) {

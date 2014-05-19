@@ -25,21 +25,15 @@
  */
 package org.opensim.view;
 
-import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Vector;
 import org.opensim.modeling.PathActuator;
-import org.opensim.modeling.ArrayPathPoint;
-import org.opensim.modeling.Geometry;
-import org.opensim.modeling.LineGeometry;
 import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.PathPointSet;
-import org.opensim.modeling.PathWrapPoint;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.VisibleObject;
 import org.opensim.modeling.DisplayGeometry.DisplayPreference;
 import org.opensim.modeling.GeometryPath;
-import org.opensim.modeling.Muscle;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.pub.OpenSimDB;
 import vtk.vtkMatrix4x4;
@@ -157,6 +151,7 @@ public class LineSegmentMuscleDisplayer {
 
    public void updateGeometry(boolean callUpdateDisplayer)
    {
+       /*
       // Get attachments and connect them
       if(callUpdateDisplayer) openSimContext.updateDisplayer(act);
       VisibleObject actuatorDisplayer = act.getDisplayer();
@@ -249,7 +244,7 @@ public class LineSegmentMuscleDisplayer {
             }
          }
       }
-
+        * */
       // We'll let SingleModelVisuals call setModified() as necessary so we avoid calling it repeatedly when unnecessary
       //muscleSegmentsRep.setModified();
       //musclePointsRep.setModified();

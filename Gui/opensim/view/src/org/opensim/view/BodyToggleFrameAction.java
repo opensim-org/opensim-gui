@@ -102,7 +102,9 @@ public final class BodyToggleFrameAction extends BooleanStateAction {
     public static BodyDisplayer  GetBodyDisplayerForBody( OpenSimObject openSimObjectAssociatedWithBody )
     {
        Body b = Body.safeDownCast( openSimObjectAssociatedWithBody );
-       vtkProp3D visuals = ViewDB.getInstance().getModelVisuals( b.getModel() ).getVtkRepForObject(b);
+       SingleModelVisuals viz = ViewDB.getInstance().getModelVisuals( b.getModel() );
+       if (viz == null) return null;
+       vtkProp3D visuals = viz.getVtkRepForObject(b);
        return ( visuals instanceof BodyDisplayer ) ? (BodyDisplayer)visuals : null;
     }
     

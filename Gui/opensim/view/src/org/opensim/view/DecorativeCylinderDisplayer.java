@@ -22,28 +22,29 @@
  *  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
  *  OR BUSINESS INTERRUPTION) OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
  *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
  */
 package org.opensim.view;
 
 import org.opensim.modeling.*;
 import vtk.vtkActor;
 import vtk.vtkClipPolyData;
+import vtk.vtkCylinderSource;
 import vtk.vtkPlane;
 import vtk.vtkPolyData;
-import vtk.vtkSphereSource;
+import vtk.vtkTransform;
+import vtk.vtkTransformPolyDataFilter;
 
-public class DecorativeSphereDisplayer extends DecorativeGeometryDisplayer {
-    private static int RESOLUTION_PHI=32;
-    private static int RESOLUTION_THETA=32;
-    private static int CYL_RESOLUTION=32;
-    private DecorativeSphere ag;
+public class DecorativeCylinderDisplayer extends DecorativeGeometryDisplayer {
+    private DecorativeCylinder ag;
     //protected OpenSimObject obj;
     /** 
      * Displayer for Wrap Geometry
      * @param ag
      * @param object 
      */
-    DecorativeSphereDisplayer(DecorativeSphere ag, OpenSimObject object) {
+    DecorativeCylinderDisplayer(DecorativeCylinder ag, OpenSimObject object) {
         super(object);
         this.ag = ag;
      }
@@ -52,44 +53,45 @@ public class DecorativeSphereDisplayer extends DecorativeGeometryDisplayer {
      * Convert DecorativeGeometry object passed in to the corresponding vtk polyhedral representation.
      * Transform is passed in as well since the way it applies to PolyData depends on source
      */
-    public static vtkPolyData getPolyData(DecorativeSphere ag) {
-        //Geometry.GeometryType analyticType = ag.
-        boolean quadrants[] = new boolean[6];
-        //ag.getQuadrants(quadrants);
-        double[] pos = new double[3];
-        vtkSphereSource sphere = new vtkSphereSource();
-        sphere.LatLongTessellationOn();
-        sphere.SetPhiResolution(RESOLUTION_PHI);
-        sphere.SetThetaResolution(RESOLUTION_THETA);
-        sphere.SetRadius(ag.getRadius());
-
-        return sphere.GetOutput();
+    private vtkPolyData getPolyData(DecorativeCylinder ag) {
+        vtkCylinderSource cyl = new vtkCylinderSource();
+        //System.out.println("Processing cyl (r, l)"+params[0]+","+params[1]);
+        cyl.SetRadius(ag.getRadius());
+        cyl.SetHeight(ag.getHalfHeight() * 2);
+        // Transform vtk brick (Y-axis aligned at origin) to match SIMM's along Z-axis at center
+        vtkTransformPolyDataFilter xformOriginDirsFilter = new vtkTransformPolyDataFilter();
+        vtkTransform xformOriginDirs = new vtkTransform();
+        xformOriginDirs.RotateX(90);
+        xformOriginDirsFilter.SetTransform(xformOriginDirs);
+        xformOriginDirsFilter.SetInputConnection(cyl.GetOutputPort());
+        vtkPolyData full = xformOriginDirsFilter.GetOutput();
+        return full;
     }
 
     /**
-     * Based on the array of quadrants, clip the wrap-object sphere/ellipsoid 
-     */
-    public static void setQuadrants(final boolean quadrants[], final vtkSphereSource sphere) {
+     * Based on the array of quadrants, clip the wrap-object brick/ellipsoid 
+     *
+    public static void setQuadrants(final boolean quadrants[], final vtkCylinderSource brick) {
       if (!quadrants[0]){ 
-         sphere.SetStartTheta(270.0);
-         sphere.SetEndTheta(90.0);
+         brick.SetStartTheta(270.0);
+         brick.SetEndTheta(90.0);
       }
       else if (!quadrants[1]){
-         sphere.SetStartTheta(90.0);
-         sphere.SetEndTheta(270.0);
+         brick.SetStartTheta(90.0);
+         brick.SetEndTheta(270.0);
       }
       else if (!quadrants[2]){
-        sphere.SetEndTheta(180.0);
+        brick.SetEndTheta(180.0);
       }
       else if (!quadrants[3]){  
-         sphere.SetStartTheta(180.0);
+         brick.SetStartTheta(180.0);
       }
       else if (!quadrants[4])   
-        sphere.SetEndPhi(90.0);
+        brick.SetEndPhi(90.0);
       else if (!quadrants[5])
-         sphere.SetStartPhi(90.0);
+         brick.SetStartPhi(90.0);
    }
-
+*/
    /** 
     * Clip poly data of Cylinder, torus to proper half per passed in quadrants array
     * only x, y are considered here as they are supported by the kinematics engine
@@ -116,14 +118,16 @@ public class DecorativeSphereDisplayer extends DecorativeGeometryDisplayer {
     @Override
     void updateDisplayFromDecorativeGeometry() {
         vtkPolyData polyData = getPolyData(ag);
+        //updatePropertiesForPolyData(polyData);
         createAndConnectMapper(polyData);
         setXformAndAttributesFromDecorativeGeometry(ag);
+
     }
 
     @Override
     vtkActor getVisuals() {
-        updateDisplayFromDecorativeGeometry();
-        return this;
+       updateDisplayFromDecorativeGeometry();
+       return this;
     }
 
     int getBodyId() {

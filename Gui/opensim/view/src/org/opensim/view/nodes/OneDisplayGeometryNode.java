@@ -109,7 +109,7 @@ public class OneDisplayGeometryNode extends OpenSimObjectNode implements Colorab
         Sheet.Set set = sheet.get("properties");
         // Add property for Location
         DisplayGeometry obj = DisplayGeometry.safeDownCast(getOpenSimObject());
-        DisplayGeometryDisplayer disp = (DisplayGeometryDisplayer) ViewDB.getInstance().getVtkRepForObject(obj);
+        DecorativeGeometryDisplayer disp = (DecorativeGeometryDisplayer) ViewDB.getInstance().getVtkRepForObject(obj);
         if (disp==null) return sheet;
         try {
             set.remove("display_preference");

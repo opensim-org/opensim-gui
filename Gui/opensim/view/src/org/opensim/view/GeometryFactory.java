@@ -44,38 +44,32 @@ import vtk.vtkXMLPolyDataReader;
  */
 public class GeometryFactory {
 
-    static void populateActorFromFile(String boneFile, vtkActor boneActor) {
+    static vtkPolyData populatePolyDatarFromFile(String boneFile, vtkActor boneActor) {
         vtkPolyData poly=null;
           if (boneFile.toLowerCase().endsWith(".vtp")){
               vtkXMLPolyDataReader polyReader = new vtkXMLPolyDataReader();
               polyReader.SetFileName(boneFile);
               poly = polyReader.GetOutput();
               polyReader.GetOutput().ReleaseDataFlagOn();
-              attachPolyDataToActor(poly, boneActor);
+              //attachPolyDataToActor(poly, boneActor);
           }
           else if (boneFile.toLowerCase().endsWith(".stl")){
               vtkSTLReader polyReader = new vtkSTLReader();
               polyReader.SetFileName(boneFile);
               poly = polyReader.GetOutput();
               polyReader.GetOutput().ReleaseDataFlagOn();
-              attachPolyDataToActor(poly, boneActor);
+              //attachPolyDataToActor(poly, boneActor);
           }
           else if (boneFile.toLowerCase().endsWith(".obj")){
               vtkOBJReader polyReader = new vtkOBJReader();
               polyReader.SetFileName(boneFile);
               poly = polyReader.GetOutput();
               polyReader.GetOutput().ReleaseDataFlagOn();
-              attachPolyDataToActor(poly, boneActor);
+              //attachPolyDataToActor(poly, boneActor);
            }
           else
               System.out.println("Unexpected extension for geometry file"+boneFile);
-    }
-
-    private static void attachPolyDataToActor(vtkPolyData polyData, vtkActor boneActor) {
-        vtkPolyDataMapper boneMapper = new vtkPolyDataMapper();
-        boneActor.SetMapper(boneMapper);
-        // Create polyData and append it to one common polyData object
-        boneMapper.SetInput(polyData);
+          return poly;
     }
     
 }

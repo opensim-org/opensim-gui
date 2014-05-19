@@ -67,7 +67,7 @@ public class DisplayGeometryDisplayer extends vtkActor
         this.displayGeometry = displayGeometry;
         this.modelFilePath=modelFilePath;
         String boneFile = GeometryFileLocator.getInstance().getFullname(modelFilePath,displayGeometry.getGeometryFile(), false);
-        GeometryFactory.populateActorFromFile(boneFile, this);
+        GeometryFactory.populatePolyDatarFromFile(boneFile, this);
         applyAttributesAndTransformToActor();        
     }
     

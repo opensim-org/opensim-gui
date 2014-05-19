@@ -33,6 +33,7 @@ import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.Marker;
+import org.opensim.modeling.ModelComponent;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.PathActuator;
 import org.opensim.modeling.PathPoint;
@@ -81,7 +82,8 @@ public class SelectedObject implements Selectable {
       if(marker != null) return getModel(marker);
       WrapObject wrapObj = WrapObject.safeDownCast(object);
       if(wrapObj != null) return getModel(wrapObj.getBody());
-      
+      ModelComponent mc = ModelComponent.safeDownCast(object);
+      if (mc != null) return mc.getModel();
       return null;
    }
 
@@ -111,33 +113,19 @@ public class SelectedObject implements Selectable {
             cloud.setModified();
          }
       } else if (Body.safeDownCast(object) != null ) {
-         BodyDisplayer asm = (BodyDisplayer) ViewDB.getInstance().getVtkRepForObject(object);
-         //double unselectedColor[] = {1.0, 1.0, 1.0};
-         if(highlight){
-             // Save existing color with the body for later restoration
-             Body b=Body.safeDownCast(object);
-             vtkProp3DCollection props =asm.getDisplayGeometryAssembly().GetParts();
-             //vtkProp3D lastProp = props.GetLastProp3D();
-             //double[] currentColor = ((vtkActor)props.GetLastProp3D()).GetProperty().GetColor();
-             //b.getDisplayer().getVisibleProperties().setColor(currentColor);
-             ViewDB.getInstance().applyColor(defaultSelectedColor, asm.getDisplayGeometryAssembly(), false);
-         }
-         else{
-            //Body b=Body.safeDownCast(object);
-            //double[] actualColor = new double[3];
-            asm.applyColorsFromModel();
-         }
+          SingleModelVisuals viz = ViewDB.getInstance().getModelVisuals(this.getOwnerModel());
+          viz.highLightObject(object, highlight);
       }
       else {
           vtkProp3D prop = ViewDB.getInstance().getVtkRepForObject(object);
-          if (prop instanceof ObjectDisplayer){
-             ObjectDisplayer asm = (ObjectDisplayer) prop;
+          if (prop instanceof DecorativeGeometryDisplayer){
+             DecorativeGeometryDisplayer asm = (DecorativeGeometryDisplayer) prop;
              if(highlight){
                  //b.getDisplayer().getVisibleProperties().setColor(currentColor);
                  ViewDB.getInstance().applyColor(defaultSelectedColor, asm, false);
              }
              else{
-                asm.updateFromProperties();
+                asm.updateDisplayFromDecorativeGeometry();
              }
           }
           else if (prop instanceof DisplayGeometryDisplayer){

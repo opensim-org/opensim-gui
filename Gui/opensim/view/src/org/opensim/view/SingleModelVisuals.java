@@ -35,7 +35,9 @@
 package org.opensim.view;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import org.opensim.modeling.*;
@@ -59,6 +61,7 @@ import vtk.vtkTransform;
 import vtk.vtkTransformPolyDataFilter;
 import vtk.vtkArrowSource;
 import vtk.vtkLineSource;
+import vtk.vtkProp;
 
 /**
  *
@@ -115,12 +118,18 @@ public class SingleModelVisuals implements ModelVisualsVtk {
     private MuscleColoringFunction defaultColoringFunction;
     private MuscleColoringFunction noColoringFunction;
     private MuscleColoringFunction currentColoringFunction;
+    
+    // Following declarations support the new Vis
+    ModelDisplayHints mdh = new ModelDisplayHints();
     DecorativeGeometryImplementationGUI dgi = new DecorativeGeometryImplementationGUI();
+    ArrayList<ModelComponent> modelComponents = new ArrayList<ModelComponent>();
+    protected HashMap<Integer, BodyDisplayer> mapBodyIndicesToDisplayers = new HashMap<Integer, BodyDisplayer>();
     /**
      * Creates a new instance of SingleModelVisuals
      */
     public SingleModelVisuals(Model aModel) {
         initDefaultShapesAndColors();
+        buildModelComponentList(aModel);
         modelDisplayAssembly = createModelAssembly(aModel);
         OpenSimContext context=OpenSimDB.getInstance().getContext(aModel);
         defaultColoringFunction = new MuscleColorByActivationFunction(context);
@@ -159,83 +168,41 @@ public class SingleModelVisuals implements ModelVisualsVtk {
         for(int bodyNum=0; bodyNum<bodies.getSize();  bodyNum++)
         {
             Body body = bodies.get(bodyNum);
-
+            int id = body.getIndex();
             // Body actor
             BodyDisplayer bodyRep = new BodyDisplayer(modelAssembly, body,
                     mapObject2VtkObjects, mapVtkObjects2Objects);
-            vtkMatrix4x4 bXform = getBodyTransform(model, body);
+            mapBodyIndicesToDisplayers.put(id, bodyRep);
         }
-        dgi.setModelAssembly(modelAssembly, mapObject2VtkObjects, model);
-        ModelDisplayHints mdh = new ModelDisplayHints();
-        ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
-        model.generateDecorations(true, mdh, model.getWorkingState(), adg);
-        DecorativeGeometry dg = adg.begin();
-        System.out.println("Size ="+adg.size());
-        int idx=0;
-        while (idx <adg.size()){
-            dg = adg.getElt(idx);
-            dg.implementGeometry(dgi);
-            idx++;
-        }
-        /*
-        ArrayDecorativeGeometry vadg = new ArrayDecorativeGeometry();
-        model.generateDecorations(false, mdh, model.updWorkingState(), vadg);
-        DecorativeGeometry vdg = vadg.begin();
-        System.out.println("Size ="+vadg.size());
-        int vidx=0;
-        while (vidx <vadg.size()){
-            vdg = vadg.getElt(idx);
-            vdg.implementGeometry(dgi);
-            vidx++;
-        }*/
-            /*
-             * double[] bodyBounds = bodyRep.getBodyBounds();
-            //ViewDB.printBounds(body.getName(), bodyBounds);
-            for(int c=0; c<3; c++){
-                bodyBounds[2*c] += bXform.GetElement(c, 3);
-                bodyBounds[2*c+1] += bXform.GetElement(c, 3);
-            }
-            bounds = ViewDB.boundsUnion(bounds, bodyBounds);
-            // Bodies have things attached to them as handled by the
-            // dependents mechanism. For each one of these a new vtkActor is created and attached 
-            // to the same xform as the owner body.
-            
-            VisibleObject bodyDisplayer = body.getDisplayer();
-            
-            for(int j=0; j < bodyDisplayer.countDependents();j++){
-                VisibleObject Dependent = bodyDisplayer.getDependent(j);
-                
-                OpenSimObject owner = Dependent.getOwner();
-                if (Marker.safeDownCast(owner)!=null){
-                    
-                    getMarkersRep().addMarker(Marker.safeDownCast(owner));
-                    continue;
-                } else if (PathPoint.safeDownCast(owner)!=null||
-                           ConditionalPathPoint.safeDownCast(owner)!=null){
-                   // Muscle points are handled in addGeometryForForces
-                } else { // WrapObjects, Contact Geometry and any other geometry attached to body
-                    String cl  = owner.getConcreteClassName();
-                   vtkActor attachmentRep = DisplayGeometryFactory.createGeometryDisplayer(owner, model.getFilePath());
-                   if(attachmentRep!=null) {
-                      mapObject2VtkObjects.put(owner, attachmentRep);
-                      mapVtkObjects2Objects.put(attachmentRep, owner);
-                      bodyRep.AddPart(attachmentRep);
-
-                   }
+        dgi.setModelAssembly(modelAssembly, mapBodyIndicesToDisplayers, model, mdh);
+        for (int mcIndex = 0; mcIndex < modelComponents.size(); mcIndex++){
+            ModelComponent mc = modelComponents.get(mcIndex);
+            ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
+            mc.generateDecorations(true, mdh, model.getWorkingState(), adg);
+            System.out.println("Size ="+adg.size());
+            dgi.setCurrentModelComponent(mc);
+            if (adg.size()>0){  // Component has some geometry
+                DecorativeGeometry dg;
+                for (int idx=0; idx <adg.size(); idx++){
+                    dg = adg.getElt(idx);
+                    dg.implementGeometry(dgi);
                 }
             }
-             * 
-        } //body
+            ArrayDecorativeGeometry avdg = new ArrayDecorativeGeometry();
+            mc.generateDecorations(false, mdh, model.getWorkingState(), avdg);
+            System.out.println("Size var ="+avdg.size());
+            if (avdg.size()>0){  // Component has some variable geometry
+                dgi.startVariableGeometry();
+                DecorativeGeometry dg;
+                for (int idx=0; idx <avdg.size(); idx++){
+                    dg = avdg.getElt(idx);
+                    dg.implementGeometry(dgi);
+                }
+                dgi.finishVariableGeometry();
+            }
+            dgi.finishCurrentModelComponent(mc);
+        };
 
-        // Add markers
-        modelAssembly.AddPart(getMarkersRep().getVtkActor());
-             * 
-             */
-        /*
-        vtkPolyDataMapper markerLineMapper = new vtkPolyDataMapper();
-        markerLineMapper.SetInput(markerLinePolyData.GetOutput());
-        markerLineActor.SetMapper(markerLineMapper);
-        modelAssembly.AddPart(markerLineActor);*/
         comDisplayer = new ModelComDisplayer(model);
         if (isShowCOM())
             modelAssembly.AddPart(comDisplayer.getVtkActor());
@@ -260,6 +227,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
      * of simulations and/or analyses (ala IK).
      */
    public void updateModelDisplay(Model model) {
+       
       // Cycle thru bodies and update their transforms from the kinematics engine
         BodySet bodies = model.getBodySet();
         int bodiesSize = bodies.getSize();
@@ -277,7 +245,8 @@ public class SingleModelVisuals implements ModelVisualsVtk {
             //bodyRep.applyDisplayPreferences();
             
         }
-       
+        
+        updateVariableGeometry(model);
         //updateMarkersGeometry(model.getMarkerSet());
         //updateForceGeometry(model);
         comDisplayer.updateCOMLocation();
@@ -318,7 +287,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
         getMuscleSegmentsRep().setModified();
         modelAssembly.AddPart(getMusclePointsRep().getVtkActor());
         getMusclePointsRep().setModified();
-        //Ligaments ropes, other forces acting along a path
+        //Ligaments ropes, other joints acting along a path
         modelAssembly.AddPart(getForceAlongPathPointsRep().getVtkActor());
         getForceAlongPathPointsRep().setModified();
         modelAssembly.AddPart(getForceAlongPathSegmentsRep().getVtkActor());
@@ -327,7 +296,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
 
     public void addPathActuatorGeometry(Force act, boolean callSetModified) {
        PathActuator muscle = PathActuator.safeDownCast(act);
-       if(muscle == null) return;   // Could be just a force, in this case add and mark modified
+       if(muscle == null) return;   // Could be just a contactGeom, in this case add and mark modified
        OpenSimContext context=OpenSimDB.getInstance().getContext(muscle.getModel());
         if (context.isDisabled(act)) return;
        LineSegmentMuscleDisplayer disp = new LineSegmentMuscleDisplayer(muscle, getMusclePointsRep(), getMuscleSegmentsRep());
@@ -462,7 +431,8 @@ public class SingleModelVisuals implements ModelVisualsVtk {
     public OpenSimObject pickObject(vtkAssemblyPath asmPath) {
         if (asmPath != null) {
          vtkAssemblyNode pickedAsm = asmPath.GetLastNode();
-         return mapVtkObjects2Objects.get(pickedAsm.GetViewProp());
+         vtkProp p = pickedAsm.GetViewProp();
+         return dgi.pickObject((vtkActor)p);
         }  
         return null;    // No selection
     }
@@ -549,6 +519,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
       }
     }
 
+    @Override
    public double[] getBoundsBodiesOnly() {
       double[] bounds = getBounds();
       /*bodiesCollection.InitTraversal();
@@ -640,12 +611,12 @@ public class SingleModelVisuals implements ModelVisualsVtk {
        // Muscles
        createMusclePointRep(musclePointsRep);
        createMuscleSegmentRep(muscleSegmentsRep);
-       // Ropes, other forces acting along path
+       // Ropes, other joints acting along path
        createMusclePointRep(otherPathPointsRep);
        createMuscleSegmentRep(otherPathSegmentsRep);
        otherPathPointsRep.setColorRange(forceAlongPathColor, forceAlongPathColor);
        otherPathSegmentsRep.setColorRange(forceAlongPathColor, forceAlongPathColor);
-       // Arbitrary forces
+       // Arbitrary joints
        vtkArrowSource aForceDisplay=new vtkArrowSource();
        aForceDisplay.SetShaftRadius(0.02);
        aForceDisplay.SetTipLength(0.2);
@@ -748,7 +719,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
     public vtkProp3DCollection getUserObjects() {
         return userObjects;
     }
-    // Springs and other forces
+    // Springs and other joints
     private void addNonPathForceGeometry(vtkAssembly modelAssembly, OpenSimObject fObject) {
         Force f = Force.safeDownCast(fObject);
         OpenSimContext context=OpenSimDB.getInstance().getContext(f.getModel());
@@ -859,22 +830,12 @@ public class SingleModelVisuals implements ModelVisualsVtk {
     public void updateObjectDisplay(OpenSimObject specificObject) {
         vtkProp3D prop3D = mapObject2VtkObjects.get(specificObject);
         if (prop3D!= null){
-            if (specificObject instanceof Body){
-                ((BodyDisplayer)prop3D).updateFromProperties();
-            }
-            else if (specificObject instanceof DisplayGeometry){
-                ((DisplayGeometryDisplayer)prop3D).updateFromProperties();
-            }
-            else if (prop3D instanceof ObjectDisplayer ){
-                ((ObjectDisplayer)prop3D).updateFromProperties();
-            }
-            else if (prop3D instanceof ObjectDisplayerInterface)
-                ((ObjectDisplayerInterface)prop3D).updateFromProperties();
-        }
-        else if (specificObject instanceof Joint){
-            Joint jnt = Joint.safeDownCast(specificObject);
-            updateObjectDisplay(jnt.getBody());
-            updateObjectDisplay(jnt.getParentBody());            
+
+          if (prop3D instanceof DecorativeGeometryDisplayer ){
+                DecorativeGeometryDisplayer dgd = (DecorativeGeometryDisplayer)prop3D;
+                dgd.updateDecorativeGeometryFromObject();
+                ((DecorativeGeometryDisplayer)prop3D).updateDisplayFromDecorativeGeometry();
+          }
         }
     }
 
@@ -884,6 +845,83 @@ public class SingleModelVisuals implements ModelVisualsVtk {
         else
             currentColoringFunction = mcf;
         pushColoringFunctionToMuscles();
+    }
+
+    private void buildModelComponentList(Model aModel) {
+        BodySet bodies = aModel.getBodySet();
+ 
+        for(int bodyNum=0; bodyNum<bodies.getSize();  bodyNum++)
+        {
+            Body body = bodies.get(bodyNum);
+            modelComponents.add(body);
+        }
+        JointSet joints = aModel.getJointSet();
+        for(int jointNum=0; jointNum<joints.getSize();  jointNum++)
+        {
+            Joint jnt = joints.get(jointNum);
+            modelComponents.add(jnt);
+        }
+        
+        ForceSet forces = aModel.getForceSet();
+        for(int forceNum=0; forceNum<forces.getSize();  forceNum++)
+        {
+            Force force = forces.get(forceNum);
+            modelComponents.add(force);
+        }
+        ContactGeometrySet cgSet = aModel.getContactGeometrySet();
+        for(int cgNum=0; cgNum<cgSet.getSize();  cgNum++)
+        {
+            ContactGeometry contactGeom = cgSet.get(cgNum);
+            modelComponents.add(contactGeom);
+        }
+
+   }
+
+    public void selectObject(OpenSimObject openSimObject) {
+        dgi.selectObject(openSimObject); // Delegate call to DecorativeGeometryImplmentation for now
+    }
+
+    void highLightObject(OpenSimObject object, boolean highlight) {
+        if (highlight)
+            dgi.selectObject(object);
+        else {
+            // Call method on owner ModelCompoent
+            System.out.println("Trying to unhighlight "+object.getName());
+            // Assume ModelComponent
+            ModelComponent mc = ModelComponent.safeDownCast(object);
+            if (mc != null){
+                dgi.updateDecorations(mc);
+            }
+        }
+    }
+
+    public void setObjectColor(OpenSimObject object, double[] color) {
+        ModelComponent mc = ModelComponent.safeDownCast(object);
+        if (mc != null){
+            dgi.setObjectColor(mc, color);
+        }
+    }
+    
+    public void upateDisplay(ModelComponent mc) {
+        dgi.updateDecorations(mc);
+    }
+    /**
+     * Cycle thru components and if they have VariableGeometry update it.
+     * @param model 
+     */
+    private void updateVariableGeometry(Model model) {
+        dgi.startVariableGeometry();
+        for (int mcIndex = 0; mcIndex < modelComponents.size(); mcIndex++){
+            ModelComponent mc = modelComponents.get(mcIndex);
+            ArrayDecorativeGeometry avdg = new ArrayDecorativeGeometry();
+            mc.generateDecorations(false, mdh, model.getWorkingState(), avdg);
+            System.out.println("Size var ="+avdg.size());
+            dgi.setCurrentModelComponent(mc);
+            if (avdg.size()>0){  // Component has some variable geometry
+                dgi.updateDecorations(mc, true);
+             }
+        };
+        dgi.finishVariableGeometry();
     }
 }
 

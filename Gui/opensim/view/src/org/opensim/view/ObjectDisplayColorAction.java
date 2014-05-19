@@ -81,7 +81,7 @@ public final class ObjectDisplayColorAction extends CallableSystemAction {
     private static void applyOperationToNode(final OpenSimObjectNode objectNode, double[] newColorComponents) {
         OpenSimObject obj = objectNode.getOpenSimObject();
         Children ch = objectNode.getChildren();
-        if (ch.getNodesCount() > 0 && !(objectNode instanceof OneBodyNode)) {
+        if (ch.getNodesCount() > 0 ) {
             // apply action recursively
             Node[] childNodes = ch.getNodes();
             for (int child = 0; child < childNodes.length; child++) {
@@ -107,12 +107,16 @@ public final class ObjectDisplayColorAction extends CallableSystemAction {
                 ViewDB.getInstance().setObjectColor(obj, newColorComponents);
             }
             objectNode.refreshNode();
+            ViewDB.getInstance().updateDisplay(objectNode.getModelForNode(), 
+                    ((OpenSimObjectNode)objectNode).getOwnerModelComponent());
+
         }
         // If objectNode is OneBodyNode, do not change color of center of mass.
+        /*
         if (objectNode instanceof OneBodyNode) {
             BodyDisplayer rep = BodyToggleFrameAction.GetBodyDisplayerForBody(obj);
             rep.SetCMSphereColorToGreen();
-        }
+        }*/
     }
 
     // Make it available only if selected objects have representation and belong to same model
