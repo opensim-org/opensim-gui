@@ -203,6 +203,7 @@ public final class FileUtils {
         dlog.setName("");
         if(filter!=null) { dlog.resetChoosableFileFilters(); dlog.setFileFilter(filter); }
         
+        dlog.setDialogTitle(filter.getDescription());
         String outFilename=null;
         Component topWindow;
         if (parent==null)
