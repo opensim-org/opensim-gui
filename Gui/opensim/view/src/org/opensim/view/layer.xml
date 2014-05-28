@@ -49,7 +49,6 @@
         <folder name="Window">
             <file name="org-netbeans-core-actions-ViewRuntimeTabAction.instance_hidden"/>
             <file name="org-opensim-view-ExplorerAction.instance"/>
-            <file name="org-opensim-view-editors-MuscleEditorAction.instance"/>
             <file name="org-opensim-view-markerEditor-MarkerEditorAction.instance"/>
         </folder>
     </folder>
