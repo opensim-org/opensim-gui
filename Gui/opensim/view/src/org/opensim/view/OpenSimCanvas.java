@@ -301,7 +301,7 @@ public class OpenSimCanvas extends OpenSimBaseCanvas implements MouseWheelListen
             return null;
          
         OpenSimObject obj= ViewDB.getInstance().pickObject(asmPath);
-
+        /*
         if (obj == null) {
            // Could be an object that's part of a glyph
            // Try point Picker void GetCellPoints(vtkIdType cellId, vtkIdList *ptIds);
@@ -318,7 +318,7 @@ public class OpenSimCanvas extends OpenSimBaseCanvas implements MouseWheelListen
            int cellId = pPicker.GetCellId();
            obj = ViewDB.getInstance().getSelectedGlyphObject(cellId, candidateActor);
         }
-        
+        */
         if (obj != null) {
            // Get x,y,z, world for debugging
            vtkWorldPointPicker wpPicker=new vtkWorldPointPicker();

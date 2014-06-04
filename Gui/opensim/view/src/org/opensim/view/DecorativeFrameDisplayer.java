@@ -18,9 +18,11 @@ import vtk.vtkPolyData;
 class DecorativeFrameDisplayer extends DecorativeGeometryDisplayer {
 
     private DecorativeFrame ag;
-    public DecorativeFrameDisplayer(DecorativeFrame arg0, OpenSimObject object) {
-        super(object);
+    public DecorativeFrameDisplayer(DecorativeFrame arg0) {
+        //super(object);
         this.ag = arg0;
+        if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
+
     }
 
     private vtkPolyData getPolyData(DecorativeFrame ag) {
@@ -38,7 +40,7 @@ class DecorativeFrameDisplayer extends DecorativeGeometryDisplayer {
     }
 
     @Override
-    vtkActor getVisuals() {
+    vtkActor computeVisuals() {
         updateDisplayFromDecorativeGeometry();
         return this;
     }

@@ -35,34 +35,41 @@ import vtk.vtkSphereSource;
 public class DecorativeSphereDisplayer extends DecorativeGeometryDisplayer {
     private static int RESOLUTION_PHI=32;
     private static int RESOLUTION_THETA=32;
-    private static int CYL_RESOLUTION=32;
-    private DecorativeSphere ag;
+    private double radius;
+    private int bodyId=-1;
+    private int indexOnBody = -1;
+    DecorativeGeometry agLocal;
+    vtkSphereSource sphere = null;
     //protected OpenSimObject obj;
     /** 
      * Displayer for Wrap Geometry
      * @param ag
      * @param object 
      */
-    DecorativeSphereDisplayer(DecorativeSphere ag, OpenSimObject object) {
-        super(object);
-        this.ag = ag;
+    DecorativeSphereDisplayer(DecorativeSphere ag) {
+        this.radius = ag.getRadius();
+        bodyId = ag.getBodyId();
+        indexOnBody = ag.getIndexOnBody();
+        agLocal = new DecorativeGeometry(ag);
+        if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
      }
 
     /**
      * Convert DecorativeGeometry object passed in to the corresponding vtk polyhedral representation.
      * Transform is passed in as well since the way it applies to PolyData depends on source
      */
-    public static vtkPolyData getPolyData(DecorativeSphere ag) {
+    public vtkPolyData getPolyData() {
         //Geometry.GeometryType analyticType = ag.
         boolean quadrants[] = new boolean[6];
         //ag.getQuadrants(quadrants);
         double[] pos = new double[3];
-        vtkSphereSource sphere = new vtkSphereSource();
-        sphere.LatLongTessellationOn();
-        sphere.SetPhiResolution(RESOLUTION_PHI);
-        sphere.SetThetaResolution(RESOLUTION_THETA);
-        sphere.SetRadius(ag.getRadius());
-
+        if (sphere == null){
+            sphere = new vtkSphereSource();
+            sphere.LatLongTessellationOn();
+            sphere.SetPhiResolution(RESOLUTION_PHI);
+            sphere.SetThetaResolution(RESOLUTION_THETA);
+            sphere.SetRadius(radius);
+        }
         return sphere.GetOutput();
     }
 
@@ -115,21 +122,21 @@ public class DecorativeSphereDisplayer extends DecorativeGeometryDisplayer {
 
     @Override
     void updateDisplayFromDecorativeGeometry() {
-        vtkPolyData polyData = getPolyData(ag);
+        vtkPolyData polyData = getPolyData();
         createAndConnectMapper(polyData);
-        setXformAndAttributesFromDecorativeGeometry(ag);
+        setXformAndAttributesFromDecorativeGeometry(agLocal);
     }
 
     @Override
-    vtkActor getVisuals() {
+    vtkActor computeVisuals() {
         updateDisplayFromDecorativeGeometry();
         return this;
     }
 
     int getBodyId() {
-        return ag.getBodyId();
+        return bodyId;
     }
     int getIndexOnBody() {
-        return ag.getIndexOnBody();
+        return indexOnBody;
     }
 }

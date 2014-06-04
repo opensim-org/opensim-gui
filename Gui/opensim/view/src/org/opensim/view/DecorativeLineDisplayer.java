@@ -32,62 +32,99 @@ import vtk.vtkPolyData;
 
 public class DecorativeLineDisplayer extends DecorativeGeometryDisplayer {
 
-    private DecorativeLine ag;
-    private vtkLineSource line;
+    private int bodyId=-1;
+    private int indexOnBody = -1;
+    private DecorativeGeometry agLocal;
+    private vtkLineSource line = null;
+    private Vec3 point1, point2;
     //protected OpenSimObject obj;
     /** 
      * Displayer for Wrap Geometry
      * @param ag
      * @param object 
      */
-    DecorativeLineDisplayer(DecorativeLine ag, OpenSimObject object) {
-        super(object);
-        this.ag = ag;
+    DecorativeLineDisplayer(DecorativeLine ag) {
+        point1 = new Vec3(ag.getPoint1());
+        point2 = new Vec3(ag.getPoint2());
+        bodyId = ag.getBodyId();
+        indexOnBody = ag.getIndexOnBody();
+        agLocal = new DecorativeGeometry(ag);
+        if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
+
       }
 
     /**
      * Convert DecorativeGeometry object passed in to the corresponding vtk polyhedral representation.
      * Transform is passed in as well since the way it applies to PolyData depends on source
      */
-    private vtkPolyData getPolyData(DecorativeLine ag) {
+    private vtkPolyData getPolyData() {
         //Geometry.GeometryType analyticType = ag.
-        
-        line = new vtkLineSource();
-        line.SetPoint1(ag.getPoint1().get(0),ag.getPoint1().get(1),ag.getPoint1().get(2));
-        line.SetPoint2(ag.getPoint2().get(0),ag.getPoint2().get(1),ag.getPoint2().get(2));
+        if (line == null){
+            line = new vtkLineSource();
+            line.SetPoint1(getPoint1().get(0),getPoint1().get(1),getPoint1().get(2));
+            line.SetPoint2(getPoint2().get(0),getPoint2().get(1),getPoint2().get(2));
+        }
         return line.GetOutput();
     }
 
  
     @Override
     void updateDisplayFromDecorativeGeometry() {
-        vtkPolyData polyData = getPolyData(ag);
+        vtkPolyData polyData = getPolyData();
         createAndConnectMapper(polyData);
-        setXformAndAttributesFromDecorativeGeometry(ag);
+        setXformAndAttributesFromDecorativeGeometry(agLocal);
     }
 
     @Override
-    vtkActor getVisuals() {
+    vtkActor computeVisuals() {
        updateDisplayFromDecorativeGeometry();
        return this;
     }
 
     int getBodyId() {
-        return ag.getBodyId();
+        return bodyId;
     }
     int getIndexOnBody() {
-        return ag.getIndexOnBody();
+        return indexOnBody;
     }
 
     @Override
     void copyAttributesFromDecorativeGeometry(DecorativeGeometry arg0) {
         DecorativeLine newLine = (DecorativeLine) arg0;
-        ag.setPoint1(newLine.getPoint1());
-        ag.setPoint2(newLine.getPoint2());
-        line.SetPoint1(ag.getPoint1().get(0),ag.getPoint1().get(1),ag.getPoint1().get(2));
-        line.SetPoint2(ag.getPoint2().get(0),ag.getPoint2().get(1),ag.getPoint2().get(2));
+        setPoint1(newLine.getPoint1());
+        setPoint2(newLine.getPoint2());
+        line.SetPoint1(getPoint1().get(0),getPoint1().get(1),getPoint1().get(2));
+        line.SetPoint2(getPoint2().get(0),getPoint2().get(1),getPoint2().get(2));
         line.Modified();
         super.copyAttributesFromDecorativeGeometry(arg0);
+    }
+
+    /**
+     * @return the point1
+     */
+    public Vec3 getPoint1() {
+        return point1;
+    }
+
+    /**
+     * @param point1 the point1 to set
+     */
+    public void setPoint1(Vec3 point1) {
+        this.point1 = point1;
+    }
+
+    /**
+     * @return the point2
+     */
+    public Vec3 getPoint2() {
+        return point2;
+    }
+
+    /**
+     * @param point2 the point2 to set
+     */
+    public void setPoint2(Vec3 point2) {
+        this.point2 = point2;
     }
     
     

@@ -32,14 +32,15 @@
 
 package org.opensim.view.experimentaldata;
 
-import org.opensim.modeling.OpenSimJavaObject;
+import org.opensim.modeling.ArrayDouble;
+import org.opensim.modeling.ModelComponent;
 import org.opensim.view.OpenSimvtkGlyphCloud;
 
 /**
  * An Object representing data to be visualized from a data/motion file e.g. Marker, GRF, etc.
  * @author ayman
  */
-public class ExperimentalDataObject extends OpenSimJavaObject {
+public class ExperimentalDataObject extends ModelComponent {
     
     private ExperimentalDataItemType objectType=ExperimentalDataItemType.Unknown;
     //private String baseName="";
@@ -50,6 +51,7 @@ public class ExperimentalDataObject extends OpenSimJavaObject {
     private OpenSimvtkGlyphCloud myGlyph;
     /** Creates a new instance of ExperimentalDataObject */
     public ExperimentalDataObject(ExperimentalDataItemType objectType, String baseName, int index) {
+        super();
         this.setObjectType(objectType);
         this.setName(baseName);
         this.startIndexInFileNotIncludingTime = index;
@@ -106,5 +108,8 @@ public class ExperimentalDataObject extends OpenSimJavaObject {
         this.startIndexInFileNotIncludingTime = startIndexInFileNotIncludingTime;
     }
 
+    void updateGeometry(ArrayDouble interpolatedStates) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 
 }

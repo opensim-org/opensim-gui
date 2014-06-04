@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Vector;
 import org.opensim.logger.OpenSimLogger;
+import org.opensim.modeling.ArrayDecorativeGeometry;
 import org.opensim.modeling.SimbodyEngine;
 import org.opensim.view.MuscleColoringFunction;
 import org.opensim.view.SelectedGlyphUserObject;
@@ -57,6 +58,7 @@ import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.BodySet;
 import org.opensim.modeling.CoordinateSet;
 import org.opensim.modeling.MarkerSet;
+import org.opensim.modeling.ModelDisplayHints;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.experimentaldata.ExperimentalDataObject;
@@ -94,6 +96,8 @@ public class MotionDisplayer implements SelectionListener {
     double[] defaultExperimentalMarkerColor = new double[]{0.0, 0.35, 0.65};
     private double[] defaultForceColor = new double[]{0., 1.0, 0.};
     private MuscleColoringFunction mcf=null;
+    ModelDisplayHints mdh = new ModelDisplayHints();
+
      /**
      * @return the associatedMotions
      */
@@ -551,6 +555,14 @@ public class MotionDisplayer implements SelectionListener {
                            (currentTime > simmMotionData.getLastTime()) ? simmMotionData.getLastTime() : currentTime;
       OpenSimDB.getInstance().getContext(model).getCurrentStateRef().setTime(clampedTime);
       simmMotionData.getDataAtTime(clampedTime, interpolatedStates.getSize(), interpolatedStates);
+      // update positions in ModelComponents so that generateDecorations works then call generateDecorations
+      if (simmMotionData instanceof AnnotatedMotion){
+         AnnotatedMotion amot = (AnnotatedMotion) simmMotionData;
+         /*
+         for (int i=0; i< interpolatedStates.size(); i++) 
+             interpolatedStates.set(i, interpolatedStates.get(i)/amot.getUnitConversion());*/
+         amot.updateComponentGeometry(interpolatedStates);
+      }
       applyStatesToModel(interpolatedStates);
       // Repeat for associated motions
       for (MotionDisplayer assocMotion:associatedMotions){
@@ -570,15 +582,21 @@ public class MotionDisplayer implements SelectionListener {
           Vector<ExperimentalDataObject> objects=mot.getClassified();
           boolean markersModified=false;
           boolean forcesModified=false;
+          SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
            for(ExperimentalDataObject nextObject:objects){
                 if (!nextObject.isDisplayed()) continue;
+                vis.upateDisplay(nextObject);
+                
                 if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
+                    
                     int startIndex = nextObject.getStartIndexInFileNotIncludingTime();
+                    /*
                     markersRep.setLocation(nextObject.getGlyphIndex(), 
                             states.getitem(startIndex)/mot.getUnitConversion(), 
                             states.getitem(startIndex+1)/mot.getUnitConversion(), 
                             states.getitem(startIndex+2)/mot.getUnitConversion());
-                    markersModified = true;
+                    markersModified = true;*/
+
                 }
                 else if (nextObject.getObjectType()==ExperimentalDataItemType.PointForceData){
                     String pointId = ((MotionObjectPointForce)nextObject).getPointIdentifier();

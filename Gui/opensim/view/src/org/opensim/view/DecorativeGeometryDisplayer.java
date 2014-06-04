@@ -18,17 +18,16 @@ import vtk.*;
  * 
  */
 public abstract class DecorativeGeometryDisplayer extends vtkActor {
-    private OpenSimObject obj;
+    private OpenSimObject obj=null;
     
-    public DecorativeGeometryDisplayer(OpenSimObject object) {
-        obj = object;
+    public DecorativeGeometryDisplayer() {
      }
 
     /**
      * Apply user display preference (None, wireframe, shading)
      */
     protected void applyDisplayPrefs(OpenSimObject object) {
-        AbstractProperty ap = obj.getPropertyByName("display_preference");
+        AbstractProperty ap = getObj().getPropertyByName("display_preference");
         if (ap == null) return;
         int prefInt = PropertyHelper.getValueInt(ap);
         DisplayGeometry.DisplayPreference pref = DisplayGeometry.DisplayPreference.swigToEnum(prefInt);
@@ -66,6 +65,8 @@ public abstract class DecorativeGeometryDisplayer extends vtkActor {
 
     private void setScaleFromDecorativeGeometry(DecorativeGeometry cs) {
         Vec3 scales = cs.getScaleFactors();
+        System.out.println("Set scale to:"+scales.toString());
+
         if (scales.get(0)>0.0)
             SetScale(scales.get(0), scales.get(1), scales.get(2));
     }
@@ -75,10 +76,14 @@ public abstract class DecorativeGeometryDisplayer extends vtkActor {
         Rotation rot = xform.R();
         Vec3 threeAngles = rot.convertRotationToBodyFixedXYZ();
         SetOrientation(0, 0, 0);
-        RotateX(threeAngles.get(0)*180.0/Math.PI);
-        RotateY(threeAngles.get(1)*180.0/Math.PI);
-        RotateZ(threeAngles.get(2)*180.0/Math.PI);
-        Vec3 trans = xform.T();
+        System.out.println("Set rotation to:"+rot.toString());
+        if (!threeAngles.isNumericallyEqual(0.)){
+            RotateX(threeAngles.get(0)*180.0/Math.PI);
+            RotateY(threeAngles.get(1)*180.0/Math.PI);
+            RotateZ(threeAngles.get(2)*180.0/Math.PI);
+        }
+        Vec3 trans = xform.p();
+        System.out.println("Set translation to:"+trans.toString());
         SetPosition(trans.get(0), trans.get(1), trans.get(2));
     }
 
@@ -114,13 +119,13 @@ public abstract class DecorativeGeometryDisplayer extends vtkActor {
             GetProperty().SetOpacity(cs.getOpacity());
     }
 
-    abstract vtkActor getVisuals();
+    abstract vtkActor computeVisuals();
 
     void updateDecorativeGeometryFromObject() {
         // if Object has properties for transform, color, pref, scale then update DG
-        DisplayGeometry dg = DisplayGeometry.safeDownCast(obj);
+        DisplayGeometry dg = DisplayGeometry.safeDownCast(getObj());
         if (dg == null){
-            ModelComponent mc = ModelComponent.safeDownCast(obj);
+            ModelComponent mc = ModelComponent.safeDownCast(getObj());
         }
 
     }
@@ -130,4 +135,11 @@ public abstract class DecorativeGeometryDisplayer extends vtkActor {
     }
 
     abstract int getBodyId();
+
+    /**
+     * @param obj the obj to set
+     */
+    public void setObj(OpenSimObject obj) {
+        this.obj = obj;
+    }
 }

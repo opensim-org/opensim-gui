@@ -42,10 +42,10 @@ public class DecorativeMeshFileDisplayer extends DecorativeGeometryDisplayer {
      * @param object 
      */
     DecorativeMeshFileDisplayer(DecorativeMeshFile ag, 
-            String modelFilePath, OpenSimObject object) {
-        super(object);
+            String modelFilePath) {
         this.ag = ag;
         this.modelFilePath = modelFilePath;
+        if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
      }
 
     /**
@@ -83,7 +83,7 @@ public class DecorativeMeshFileDisplayer extends DecorativeGeometryDisplayer {
     }
 
     @Override
-    vtkActor getVisuals() {
+    vtkActor computeVisuals() {
         createDisplayFromDecorativeGeometry();
         updateDisplayFromDecorativeGeometry();
         return this;

@@ -44,9 +44,9 @@ public class DecorativeCylinderDisplayer extends DecorativeGeometryDisplayer {
      * @param ag
      * @param object 
      */
-    DecorativeCylinderDisplayer(DecorativeCylinder ag, OpenSimObject object) {
-        super(object);
+    DecorativeCylinderDisplayer(DecorativeCylinder ag) {
         this.ag = ag;
+        if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
      }
 
     /**
@@ -125,7 +125,7 @@ public class DecorativeCylinderDisplayer extends DecorativeGeometryDisplayer {
     }
 
     @Override
-    vtkActor getVisuals() {
+    vtkActor computeVisuals() {
        updateDisplayFromDecorativeGeometry();
        return this;
     }

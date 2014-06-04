@@ -94,14 +94,10 @@ public class SelectedObject implements Selectable {
          OpenSimObject owner = mp.getPath().getOwner();
          SingleModelVisuals visuals = ViewDB.getInstance().getModelVisuals(getModel(mp));
          OpenSimvtkGlyphCloud cloud = null;
-         if (PathActuator.safeDownCast(owner) != null)
-             cloud = visuals.getMusclePointsRep();
-         else 
-             cloud = visuals.getForceAlongPathPointsRep();
          int id = cloud.getPointId(object);
          if(id>=0) { // just to be safe
             cloud.setSelected(id, highlight);
-            visuals.updateMuscleOrForceAlongPathGeometry(owner, false); //TODO: perhaps overkill for getting musclepoint to update?
+            visuals.updateObjectDisplay(owner); //TODO: perhaps overkill for getting musclepoint to update?
          }
       } else if (Marker.safeDownCast(object) != null) {
          Marker marker = Marker.safeDownCast(object);
@@ -166,7 +162,7 @@ public class SelectedObject implements Selectable {
          // If muscle is now hidden return
          int displayStatus = ViewDB.getInstance().getDisplayStatus(mp.getPath().getOwner());
          if (displayStatus==0) return null;
-         bounds = getGlyphPointBounds(visuals.getMusclePointsRep(), visuals, object);
+         //bounds = getGlyphPointBounds(visuals.getMusclePointsRep(), visuals, object);
       } else if (Marker.safeDownCast(object) != null) {
          Marker marker = Marker.safeDownCast(object);
          SingleModelVisuals visuals = ViewDB.getInstance().getModelVisuals(getModel(marker));

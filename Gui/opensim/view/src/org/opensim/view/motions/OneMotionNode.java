@@ -30,20 +30,10 @@ package org.opensim.view.motions;
 
 import java.awt.Image;
 import java.net.URL;
-import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.Action;
-import org.openide.nodes.Node;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.Storage;
-import org.opensim.view.experimentaldata.AnnotatedMotion;
-import org.opensim.view.experimentaldata.ExperimentalDataItemType;
-import org.opensim.view.experimentaldata.ExperimentalDataObject;
-import org.opensim.view.experimentaldata.ExperimentalForceSetNode;
-import org.opensim.view.experimentaldata.ExperimentalMarkerSetNode;
-import org.opensim.view.experimentaldata.ExperimentalOtherDataSetNode;
-import org.opensim.view.experimentaldata.MotionEditMotionObjectsAction;
-import org.opensim.view.experimentaldata.MotionReclassifyAction;
 import org.opensim.view.nodes.*;
 
 /**

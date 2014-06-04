@@ -5,15 +5,12 @@ import org.openide.nodes.Node;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.BooleanStateAction;
-import org.opensim.modeling.Body;
-import org.opensim.modeling.Joint;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.BodyDisplayer;
 import org.opensim.view.BodyToggleFrameAction;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.pub.ViewDB;
-import vtk.vtkProp3D;
 
 public final class BodyToggleCOMAction extends BooleanStateAction {
     

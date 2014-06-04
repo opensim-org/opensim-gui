@@ -30,14 +30,10 @@ package org.opensim.view.nodes;
 
 import java.awt.Image;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
-import javax.swing.Action;
 import javax.swing.ImageIcon;
 import org.openide.util.NbBundle;
-import org.openide.nodes.Children;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.view.editors.MuscleEditorAction;
 
 /**
  *

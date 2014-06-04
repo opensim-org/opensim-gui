@@ -1916,7 +1916,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
             
             // Update the geometry of the muscle.
             SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(mp.getPath().getModel());
-            vis.updateMuscleOrForceAlongPathGeometry(mp.getPath().getOwner(), true);
+            //vis.updateMuscleOrForceAlongPathGeometry(mp.getPath().getOwner(), true);
          }
       }
       // If m is not null, then at least one selected object is a muscle point

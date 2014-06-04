@@ -33,9 +33,9 @@ class DecorativeEllipsoidDisplayer extends DecorativeGeometryDisplayer {
      * @param ag
      * @param object 
      */
-    DecorativeEllipsoidDisplayer(DecorativeEllipsoid ag, OpenSimObject object) {
-        super(object);
+    DecorativeEllipsoidDisplayer(DecorativeEllipsoid ag) {
         this.ag = ag;
+        if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
      }
 
     /**
@@ -117,7 +117,7 @@ class DecorativeEllipsoidDisplayer extends DecorativeGeometryDisplayer {
     }
 
     @Override
-    vtkActor getVisuals() {
+    vtkActor computeVisuals() {
        updateDisplayFromDecorativeGeometry();
        return this;
     }

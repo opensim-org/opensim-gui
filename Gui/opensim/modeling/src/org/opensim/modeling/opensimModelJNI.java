@@ -2164,16 +2164,26 @@ public class opensimModelJNI {
   public final static native double MarkerData_getCameraRate(long jarg1, MarkerData jarg1_);
   public final static native long ModelComponent_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void ModelComponent_assign(long jarg1, ModelComponent jarg1_, long jarg2, OpenSimObject jarg2_);
+  public final static native void ModelComponent_assignSwigExplicitModelComponent(long jarg1, ModelComponent jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String ModelComponent_getClassName();
   public final static native long ModelComponent_clone(long jarg1, ModelComponent jarg1_);
   public final static native String ModelComponent_getConcreteClassName(long jarg1, ModelComponent jarg1_);
+  public final static native long new_ModelComponent__SWIG_0();
+  public final static native long new_ModelComponent__SWIG_1(String jarg1, boolean jarg2) throws java.io.IOException;
+  public final static native long new_ModelComponent__SWIG_2(String jarg1) throws java.io.IOException;
+  public final static native long new_ModelComponent__SWIG_3(long jarg1);
+  public final static native long new_ModelComponent__SWIG_4(long jarg1, ModelComponent jarg1_);
   public final static native void delete_ModelComponent(long jarg1);
   public final static native long ModelComponent_getModel(long jarg1, ModelComponent jarg1_);
   public final static native long ModelComponent_updModel(long jarg1, ModelComponent jarg1_);
   public final static native void ModelComponent_updateDisplayer(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native void ModelComponent_updateDisplayerSwigExplicitModelComponent(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
   public final static native int ModelComponent_getNumStateVariables(long jarg1, ModelComponent jarg1_);
+  public final static native int ModelComponent_getNumStateVariablesSwigExplicitModelComponent(long jarg1, ModelComponent jarg1_);
   public final static native long ModelComponent_getStateVariableNames(long jarg1, ModelComponent jarg1_);
+  public final static native long ModelComponent_getStateVariableNamesSwigExplicitModelComponent(long jarg1, ModelComponent jarg1_);
   public final static native int ModelComponent_getStateVariableSystemIndex(long jarg1, ModelComponent jarg1_, String jarg2);
+  public final static native int ModelComponent_getStateVariableSystemIndexSwigExplicitModelComponent(long jarg1, ModelComponent jarg1_, String jarg2);
   public final static native int ModelComponent_getModelingOption(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native void ModelComponent_setModelingOption(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_, String jarg3, int jarg4);
   public final static native double ModelComponent_getStateVariable(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_, String jarg3);
@@ -2183,7 +2193,38 @@ public class opensimModelJNI {
   public final static native void ModelComponent_markCacheVariableValid(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native void ModelComponent_markCacheVariableInvalid(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native boolean ModelComponent_isCacheVariableValid(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_, String jarg3);
+  public final static native void ModelComponent_connectToModel(long jarg1, ModelComponent jarg1_, long jarg2, Model jarg2_);
+  public final static native void ModelComponent_connectToModelSwigExplicitModelComponent(long jarg1, ModelComponent jarg1_, long jarg2, Model jarg2_);
+  public final static native void ModelComponent_addToSystem(long jarg1, ModelComponent jarg1_, long jarg2);
+  public final static native void ModelComponent_addToSystemSwigExplicitModelComponent(long jarg1, ModelComponent jarg1_, long jarg2);
+  public final static native void ModelComponent_initStateFromProperties(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native void ModelComponent_initStateFromPropertiesSwigExplicitModelComponent(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native void ModelComponent_setPropertiesFromState(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native void ModelComponent_setPropertiesFromStateSwigExplicitModelComponent(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native long ModelComponent_computeStateVariableDerivatives(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native long ModelComponent_computeStateVariableDerivativesSwigExplicitModelComponent(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
   public final static native void ModelComponent_generateDecorations(long jarg1, ModelComponent jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
+  public final static native void ModelComponent_generateDecorationsSwigExplicitModelComponent(long jarg1, ModelComponent jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
+  public final static native void ModelComponent_realizeTopology(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native void ModelComponent_realizeTopologySwigExplicitModelComponent(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native void ModelComponent_realizeModel(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native void ModelComponent_realizeModelSwigExplicitModelComponent(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native void ModelComponent_realizeInstance(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native void ModelComponent_realizeInstanceSwigExplicitModelComponent(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native void ModelComponent_realizeTime(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native void ModelComponent_realizeTimeSwigExplicitModelComponent(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native void ModelComponent_realizePosition(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native void ModelComponent_realizePositionSwigExplicitModelComponent(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native void ModelComponent_realizeVelocity(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native void ModelComponent_realizeVelocitySwigExplicitModelComponent(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native void ModelComponent_realizeDynamics(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native void ModelComponent_realizeDynamicsSwigExplicitModelComponent(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native void ModelComponent_realizeAcceleration(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native void ModelComponent_realizeAccelerationSwigExplicitModelComponent(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native void ModelComponent_realizeReport(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native void ModelComponent_realizeReportSwigExplicitModelComponent(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_);
+  public final static native void ModelComponent_director_connect(ModelComponent obj, long cptr, boolean mem_own, boolean weak_global);
+  public final static native void ModelComponent_change_ownership(ModelComponent obj, long cptr, boolean take_or_release);
   public final static native long SetModelComponents_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void SetModelComponents_assign(long jarg1, SetModelComponents jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String SetModelComponents_getClassName();
@@ -10399,6 +10440,87 @@ public class opensimModelJNI {
   }
   public static void SwigDirector_DecorativeGeometryImplementation_implementMeshFileGeometry(DecorativeGeometryImplementation self, long arg0) {
     self.implementMeshFileGeometry(new DecorativeMeshFile(arg0, false));
+  }
+  public static long SwigDirector_ModelComponent_clone(ModelComponent self) {
+    return ModelComponent.getCPtr(self.clone());
+  }
+  public static String SwigDirector_ModelComponent_getConcreteClassName(ModelComponent self) {
+    return self.getConcreteClassName();
+  }
+  public static long SwigDirector_ModelComponent_getDisplayer(ModelComponent self) {
+    return VisibleObject.getCPtr(self.getDisplayer());
+  }
+  public static long SwigDirector_ModelComponent_updDisplayer(ModelComponent self) {
+    return VisibleObject.getCPtr(self.updDisplayer());
+  }
+  public static void SwigDirector_ModelComponent_updateFromXMLNode(ModelComponent self, long objectElement, int versionNumber) {
+    self.updateFromXMLNode(new SWIGTYPE_p_SimTK__Xml__Element(objectElement, false), versionNumber);
+  }
+  public static void SwigDirector_ModelComponent_updateXMLNode(ModelComponent self, long parent) {
+    self.updateXMLNode(new SWIGTYPE_p_SimTK__Xml__Element(parent, false));
+  }
+  public static boolean SwigDirector_ModelComponent_isA(ModelComponent self, String type) {
+    return self.isA(type);
+  }
+  public static void SwigDirector_ModelComponent_assign(ModelComponent self, long aObject) {
+    self.assign(new OpenSimObject(aObject, false));
+  }
+  public static void SwigDirector_ModelComponent_updateDisplayer(ModelComponent self, long s) {
+    self.updateDisplayer(new State(s, false));
+  }
+  public static int SwigDirector_ModelComponent_getNumStateVariables(ModelComponent self) {
+    return self.getNumStateVariables();
+  }
+  public static long SwigDirector_ModelComponent_getStateVariableNames(ModelComponent self) {
+    return ArrayStr.getCPtr(self.getStateVariableNames());
+  }
+  public static int SwigDirector_ModelComponent_getStateVariableSystemIndex(ModelComponent self, String stateVariableName) {
+    return self.getStateVariableSystemIndex(stateVariableName);
+  }
+  public static void SwigDirector_ModelComponent_connectToModel(ModelComponent self, long model) {
+    self.connectToModel(new Model(model, false));
+  }
+  public static void SwigDirector_ModelComponent_addToSystem(ModelComponent self, long system) {
+    self.addToSystem(new SWIGTYPE_p_SimTK__MultibodySystem(system, false));
+  }
+  public static void SwigDirector_ModelComponent_initStateFromProperties(ModelComponent self, long state) {
+    self.initStateFromProperties(new State(state, false));
+  }
+  public static void SwigDirector_ModelComponent_setPropertiesFromState(ModelComponent self, long state) {
+    self.setPropertiesFromState(new State(state, false));
+  }
+  public static long SwigDirector_ModelComponent_computeStateVariableDerivatives(ModelComponent self, long s) {
+    return Vector.getCPtr(self.computeStateVariableDerivatives(new State(s, false)));
+  }
+  public static void SwigDirector_ModelComponent_generateDecorations(ModelComponent self, boolean fixed, long hints, long state, long appendToThis) {
+    self.generateDecorations(fixed, new ModelDisplayHints(hints, false), new State(state, false), new ArrayDecorativeGeometry(appendToThis, false));
+  }
+  public static void SwigDirector_ModelComponent_realizeTopology(ModelComponent self, long state) {
+    self.realizeTopology(new State(state, false));
+  }
+  public static void SwigDirector_ModelComponent_realizeModel(ModelComponent self, long state) {
+    self.realizeModel(new State(state, false));
+  }
+  public static void SwigDirector_ModelComponent_realizeInstance(ModelComponent self, long state) {
+    self.realizeInstance(new State(state, false));
+  }
+  public static void SwigDirector_ModelComponent_realizeTime(ModelComponent self, long state) {
+    self.realizeTime(new State(state, false));
+  }
+  public static void SwigDirector_ModelComponent_realizePosition(ModelComponent self, long state) {
+    self.realizePosition(new State(state, false));
+  }
+  public static void SwigDirector_ModelComponent_realizeVelocity(ModelComponent self, long state) {
+    self.realizeVelocity(new State(state, false));
+  }
+  public static void SwigDirector_ModelComponent_realizeDynamics(ModelComponent self, long state) {
+    self.realizeDynamics(new State(state, false));
+  }
+  public static void SwigDirector_ModelComponent_realizeAcceleration(ModelComponent self, long state) {
+    self.realizeAcceleration(new State(state, false));
+  }
+  public static void SwigDirector_ModelComponent_realizeReport(ModelComponent self, long state) {
+    self.realizeReport(new State(state, false));
   }
   public static long SwigDirector_AnalysisWrapper_clone(AnalysisWrapper self) {
     return AnalysisWrapper.getCPtr(self.clone());

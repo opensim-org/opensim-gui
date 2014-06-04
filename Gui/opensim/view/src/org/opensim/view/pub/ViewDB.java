@@ -212,7 +212,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                      }
                if (objs.get(i) instanceof Marker) {
                   SingleModelVisuals vis = mapModelsToVisuals.get(ev.getModel());
-                  vis.addMarkerGeometry((Marker)objs.get(i));
+                  //vis.addGeometry((Marker)objs.get(i));
                   repaintAll();
                } 
             }
@@ -382,11 +382,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
               // TODO: do same stuff as ModelEvent.Operation.Close event
            } else if (obj instanceof PathActuator) {
               removeObjectsBelongingToMuscleFromSelection(obj);
-              getModelVisuals(ev.getModel()).removeActuatorGeometry((Actuator)obj);
+              getModelVisuals(ev.getModel()).removeGeometry((Actuator)obj);
               repaint = true;
            } else if (obj instanceof Marker) {
               SingleModelVisuals vis = mapModelsToVisuals.get(ev.getModel());
-              vis.removeMarkerGeometry((Marker)obj);
+              vis.removeGeometry((Marker)obj);
               repaint = true;
            }
         }
@@ -1196,7 +1196,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       Marker marker = Marker.safeDownCast(openSimObject);
       if (marker != null) {
          SingleModelVisuals vis = getModelVisuals(marker.getBody().getModel());
-         vis.setMarkerVisibility(marker, visible);
+         //vis.setMarkerVisibility(marker, visible);
          updateAnnotationAnchors(); // in case object had annotations
          return;
       }
@@ -1822,7 +1822,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                if (f instanceof Muscle) {
                    PathActuator m = PathActuator.safeDownCast(f);
                    if (!newState){
-                       getModelVisuals(m.getModel()).addPathActuatorGeometry(m, true);
+                       //getModelVisuals(m.getModel()).addPathActuatorGeometry(m, true);
                        toggleObjectsDisplay(m, true);
                    } else{  // turning off
                        removeObjectsBelongingToMuscleFromSelection(obj);
@@ -1833,7 +1833,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                else {   // Other forces
                     if (!newState){ // turn on
                         f.getDisplayer().setDisplayPreference(DisplayPreference.GouraudShaded);
-                        getModelVisuals(ev.getModel()).updateForceGeometry(ev.getModel());
+                        getModelVisuals(ev.getModel()).upateDisplay(f);
                     }
                     else {  // turning off
                         getModelVisuals(ev.getModel()).removeGeometry(obj);

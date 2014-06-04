@@ -61,37 +61,24 @@ public class ExperimentalDataVisuals extends SingleModelVisuals{
      */
     public ExperimentalDataVisuals(Model mdl) {
         super(mdl);
+        
         bbox = new vtkCubeSource();
         model = (ModelForExperimentalData) mdl;
         AnnotatedMotion mot = model.getMotionData();
+        for (ExperimentalDataObject obj:mot.getClassified()){
+           addGeometryForModelComponent(obj, mdl);
+        }
         if (mot.isBoundingBoxComputed()){
             double[] bounds = mot.getBoundingBox();
 
             bbox.SetBounds(bounds);
             ViewDB.getInstance().setObjectRepresentation(model.getGround(), 1, 0);
             BodyDisplayer groundRep = (BodyDisplayer) getVtkRepForObject(model.getGround());
-            //groundRep.GetMapper().AddInputConnection(bbox.GetOutputPort());
-            //groundRep.GetMapper().Modified();
-            //System.out.println("Origin at "+bounds[0]+", "+bounds[1]+", "+bounds[2]);
-            //System.out.println("Scale by "+(bounds[3]-bounds[0])+
-            //        ", "+(bounds[4]-bounds[1])+
-            //        ", "+(bounds[5]-bounds[2]));
-            groundRep.SetScale(bounds[3]-bounds[0], bounds[4]-bounds[1], bounds[5]-bounds[2]);
-            groundRep.SetPosition(bounds[0], bounds[1], bounds[2]);
 
+            //groundRep.SetScale(bounds[3]-bounds[0], bounds[4]-bounds[1], bounds[5]-bounds[2]);
+            groundRep.SetPosition(bounds[0], bounds[1], bounds[2]);
         }
-         /*
-        // Make a plane for Lab frame.
-        // We really need a cube, with unit length size in X-Z, small number in Y then scale it
-        labFloor.SetNormal(0., 1., 0.);
-        labFloor.SetOrigin(0., 0., 0.);
-        labFloor.SetPoint1(1, 1, 1);
-        labFloor.SetPoint2(2, 2, 2);
-        vtkActor labActor = new vtkActor();
-        vtkPolyDataMapper labMapper = new vtkPolyDataMapper();
-        labMapper.SetInput(labFloor.GetOutput());  
-        labActor.SetMapper(labMapper);
-        modelDisplayAssembly.AddPart(labActor); */
+
     }
 
     public void toggleTraceDisplay(OpenSimObject openSimObject) {
@@ -128,8 +115,4 @@ public class ExperimentalDataVisuals extends SingleModelVisuals{
         modelDisplayAssembly.AddPart(traceLineActor);
         traceLineActor.Modified();
     }
-
-    public void updateModelDisplay(Model model) {
-    }
-
 }

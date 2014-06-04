@@ -62,10 +62,10 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
 
     @Override
   public void implementLineGeometry(DecorativeLine arg0) {
-    System.out.println("Type: DecorativeLine P1, P2"
-                + arg0.getPoint1().toString() + arg0.getPoint2().toString() + ", [" + arg0.getTransform().T().toString() + "]");
+    System.out.println("Type: DecorativeLine P1, P2, Color"
+                + arg0.getPoint1().toString() + arg0.getPoint2().toString() + ", [" + arg0.getTransform().T().toString() + "]" + arg0.getColor());
 
-        if (updateMode) {
+        if (updateMode) { System.out.println("updating");
             ListIterator<DecorativeGeometryDisplayer> listIterator = getCurrentGeometryDisplayers();
             boolean found = false;
             while (listIterator.hasNext() && !found) {
@@ -82,10 +82,10 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
             }
         } else {
             BodyDisplayer bd = mapBodyIndicesToDisplayers.get(arg0.getBodyId());
-            DecorativeLineDisplayer lineDisplayer=new DecorativeLineDisplayer(arg0, arg0.getUserRefAsObject());
-            bd.AddPart(lineDisplayer.getVisuals());
+            DecorativeLineDisplayer lineDisplayer=new DecorativeLineDisplayer(arg0);
+            bd.AddPart(lineDisplayer.computeVisuals());
             addDisplayerToCurrentList(lineDisplayer);
-            mapVisualsToObjects.put(lineDisplayer.getVisuals(), currentModelComponent);
+            mapVisualsToObjects.put(lineDisplayer.computeVisuals(), currentModelComponent);
         }
     
   }
@@ -97,18 +97,20 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
             currentFixedGeometryDisplayers.add(lineDisplayer);
     }
 
+    @Override
   public void implementBrickGeometry(DecorativeBrick arg0) {
     //System.out.println("Type: DecorativeBrick");
     BodyDisplayer bd = mapBodyIndicesToDisplayers.get(arg0.getBodyId());
-    DecorativeBrickDisplayer brickDisplayer=new DecorativeBrickDisplayer(arg0, arg0.getUserRefAsObject());
-    bd.AddPart(brickDisplayer.getVisuals());
+    DecorativeBrickDisplayer brickDisplayer=new DecorativeBrickDisplayer(arg0);
+    bd.AddPart(brickDisplayer.computeVisuals());
     addDisplayerToCurrentList(brickDisplayer);
-    mapVisualsToObjects.put(brickDisplayer.getVisuals(), currentModelComponent);
+    mapVisualsToObjects.put(brickDisplayer.computeVisuals(), currentModelComponent);
     //mapBodyIndicesToDisplayers.put(arg0.getUserRefAsObject(), brickDisplayer);
   }
 
+    @Override
   public void implementCylinderGeometry(DecorativeCylinder arg0) {
-        if (updateMode) {
+        if (updateMode) { System.out.println("updating");
             ListIterator<DecorativeGeometryDisplayer> listIterator = getCurrentGeometryDisplayers();
             boolean found = false;
             while (listIterator.hasNext() && !found) {
@@ -125,10 +127,10 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
             }
         } else {
             BodyDisplayer bd = mapBodyIndicesToDisplayers.get(arg0.getBodyId());
-            DecorativeCylinderDisplayer cylDisplayer = new DecorativeCylinderDisplayer(arg0, arg0.getUserRefAsObject());
-            bd.AddPart(cylDisplayer.getVisuals());
+            DecorativeCylinderDisplayer cylDisplayer = new DecorativeCylinderDisplayer(arg0);
+            bd.AddPart(cylDisplayer.computeVisuals());
             addDisplayerToCurrentList(cylDisplayer);
-            mapVisualsToObjects.put(cylDisplayer.getVisuals(), currentModelComponent);
+            mapVisualsToObjects.put(cylDisplayer.computeVisuals(), currentModelComponent);
             //mapBodyIndicesToDisplayers.put(arg0.getUserRefAsObject(), brickDisplayer);
         }
     }
@@ -139,8 +141,9 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
         return listIterator;
     }
 
+    @Override
   public void implementCircleGeometry(DecorativeCircle arg0) {
-    //System.out.println("Type: DecorativeCircle Unsupported");
+    System.out.println("Type: DecorativeCircle Unsupported");
     //opensimModelJNI.DecorativeGeometryImplementation_implementCircleGeometry(swigCPtr, this, DecorativeCircle.getCPtr(arg0), arg0);
   }
 
@@ -149,7 +152,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
         System.out.println("Type: DecorativeSphere Radius, transform, Body, index "
                 + arg0.getRadius() + ", [" + arg0.getTransform().T().toString() + "]"+ arg0.getBodyId()+", "+arg0.getIndexOnBody());
         
-        if (updateMode) {
+        if (updateMode) { System.out.println("updating");
             ListIterator<DecorativeGeometryDisplayer> listIterator = getCurrentGeometryDisplayers();
             boolean found = false;
             while (listIterator.hasNext() && !found) {
@@ -166,17 +169,18 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
             }
         } else {
             BodyDisplayer bd = mapBodyIndicesToDisplayers.get(arg0.getBodyId());
-            DecorativeSphereDisplayer sphereDisplayer = new DecorativeSphereDisplayer(arg0, arg0.getUserRefAsObject());
-            bd.AddPart(sphereDisplayer.getVisuals());
+            DecorativeSphereDisplayer sphereDisplayer = new DecorativeSphereDisplayer(arg0);
+            bd.AddPart(sphereDisplayer.computeVisuals());
             addDisplayerToCurrentList(sphereDisplayer);
-            mapVisualsToObjects.put(sphereDisplayer.getVisuals(), currentModelComponent);
+            mapVisualsToObjects.put(sphereDisplayer.computeVisuals(), currentModelComponent);
             //mapBodyIndicesToDisplayers.put(arg0.getUserRefAsObject(), sphereDisplayer);
         }
     }
 
+    @Override
   public void implementEllipsoidGeometry(DecorativeEllipsoid arg0) {
     //System.out.println("Type: DecorativeEllipsoid");
-    if (updateMode){
+    if (updateMode){ System.out.println("updating");
             ListIterator<DecorativeGeometryDisplayer> listIterator = getCurrentGeometryDisplayers();
             boolean found = false;
             while(listIterator.hasNext() && !found){
@@ -195,36 +199,40 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
     else {
     //opensimModelJNI.DecorativeGeometryImplementation_implementEllipsoidGeometry(swigCPtr, this, DecorativeEllipsoid.getCPtr(arg0), arg0);
         BodyDisplayer bd = mapBodyIndicesToDisplayers.get(arg0.getBodyId());
-        DecorativeEllipsoidDisplayer ellipsoidDisplayer=new DecorativeEllipsoidDisplayer(arg0, arg0.getUserRefAsObject());
-        bd.AddPart(ellipsoidDisplayer.getVisuals());
+        DecorativeEllipsoidDisplayer ellipsoidDisplayer=new DecorativeEllipsoidDisplayer(arg0);
+        bd.AddPart(ellipsoidDisplayer.computeVisuals());
         addDisplayerToCurrentList(ellipsoidDisplayer);
-        mapVisualsToObjects.put(ellipsoidDisplayer.getVisuals(), currentModelComponent);
+        mapVisualsToObjects.put(ellipsoidDisplayer.computeVisuals(), currentModelComponent);
     }
     //mapBodyIndicesToDisplayers.put(arg0.getUserRefAsObject(), displayer);
   }
 
+    @Override
   public void implementFrameGeometry(DecorativeFrame arg0) {
     //System.out.println("Type: DecorativeFrame"+arg0.getIndexOnBody());
     BodyDisplayer bd = mapBodyIndicesToDisplayers.get(arg0.getBodyId());
-    DecorativeFrameDisplayer frameDisplayer=new DecorativeFrameDisplayer(arg0, arg0.getUserRefAsObject());
-    bd.AddPart(frameDisplayer.getVisuals());
+    DecorativeFrameDisplayer frameDisplayer=new DecorativeFrameDisplayer(arg0);
+    bd.AddPart(frameDisplayer.computeVisuals());
     addDisplayerToCurrentList(frameDisplayer);
-    mapVisualsToObjects.put(frameDisplayer.getVisuals(), currentModelComponent);
+    mapVisualsToObjects.put(frameDisplayer.computeVisuals(), currentModelComponent);
     //opensimModelJNI.DecorativeGeometryImplementation_implementFrameGeometry(swigCPtr, this, DecorativeFrame.getCPtr(arg0), arg0);
   }
 
+    @Override
   public void implementTextGeometry(DecorativeText arg0) {
-    //System.out.println("Type: DecorativeText");
+    System.out.println("Type: DecorativeText");
     //opensimModelJNI.DecorativeGeometryImplementation_implementTextGeometry(swigCPtr, this, DecorativeText.getCPtr(arg0), arg0);
   }
 
+    @Override
   public void implementMeshGeometry(DecorativeMesh arg0) {
-    //System.out.println("Type: DecorativeMesh is unsupported");
+    System.out.println("Type: DecorativeMesh is unsupported");
     //opensimModelJNI.DecorativeGeometryImplementation_implementMeshGeometry(swigCPtr, this, DecorativeMesh.getCPtr(arg0), arg0);
   }
+    @Override
   public void implementMeshFileGeometry(DecorativeMeshFile arg0) {
 
-     if (updateMode){
+     if (updateMode){ System.out.println("updating");
             ListIterator<DecorativeGeometryDisplayer> listIterator = getCurrentGeometryDisplayers();
             boolean found = false;
             while(listIterator.hasNext() && !found){
@@ -244,10 +252,10 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
        BodyDisplayer bd = mapBodyIndicesToDisplayers.get(arg0.getBodyId());
         String fullFileName = GeometryFileLocator.getInstance().getFullname(modelFilePath,arg0.getMeshFile(), false);
         if (fullFileName==null) return;
-        DecorativeMeshFileDisplayer meshDisplayer=new DecorativeMeshFileDisplayer(arg0, modelFilePath, arg0.getUserRefAsObject());
-        bd.AddPart(meshDisplayer.getVisuals());
+        DecorativeMeshFileDisplayer meshDisplayer=new DecorativeMeshFileDisplayer(arg0, modelFilePath);
+        bd.AddPart(meshDisplayer.computeVisuals());
         addDisplayerToCurrentList(meshDisplayer);
-        mapVisualsToObjects.put(meshDisplayer.getVisuals(), currentModelComponent);
+        mapVisualsToObjects.put(meshDisplayer.computeVisuals(), currentModelComponent);
      }
     //mapBodyIndicesToDisplayers.put(arg0.getUserRefAsObject(), meshDisplayer);
   }
@@ -317,16 +325,18 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
         return mapVisualsToObjects.get(GetViewProp);
     }
 
-    void updateDecorations(ModelComponent mc) {
+    public void updateDecorations(ModelComponent mc) {
         updateDecorations(mc, false);
     }
     
-    void updateDecorations(ModelComponent mc, boolean varGeometryOnly) {
+    public void updateDecorations(ModelComponent mc, boolean varGeometryOnly) {
         updateMode = true;
         
         if (!varGeometryOnly)
             updateFixedDecorations(mc);
+        startVariableGeometry();
         updateVariableDecorations(mc);
+        finishVariableGeometry();
         updateMode = false;
     }
 
@@ -345,20 +355,22 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
         mc.generateDecorations(false, modelDisplayHints, model.getWorkingState(), adg);
         // Sync. 
         currentVariableGeometryDisplayers = mapComponentsToVariableVisuals.get(mc);
-        int oldSize = currentVariableGeometryDisplayers.size();
+        int oldSize = (currentVariableGeometryDisplayers==null)?0:currentVariableGeometryDisplayers.size();
         int newSize = (int) adg.size();
-        System.out.println("Old Size="+oldSize);
-        System.out.println("New Size="+adg.size());
+        //System.out.println("Old Size="+oldSize);
+        //System.out.println("New Size="+adg.size());
         if (oldSize != newSize){
-            removeDisplayersFromScene(currentVariableGeometryDisplayers);
+            if (oldSize != 0)
+                removeDisplayersFromScene(currentVariableGeometryDisplayers);
             updateMode = false;
         }
+        
         for(int i=0; i<adg.size(); i++){
             adg.getElt(i).implementGeometry(this);
         }
     }
 
-    void setObjectColor(ModelComponent mc, double[] color) {
+    public void setObjectColor(ModelComponent mc, double[] color) {
         currentFixedGeometryDisplayers = mapComponentsToFixedVisuals.get(mc);
         updateMode = true;
         for(int i=0; i<currentFixedGeometryDisplayers.size(); i++){
@@ -366,21 +378,29 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
         }
     }
 
-    void startVariableGeometry() {
+    public void startVariableGeometry() {
         processingVariableGeometry = true;
     }
     
-    void finishVariableGeometry() {
+    public void finishVariableGeometry() {
         processingVariableGeometry = false;
     }
 
     private void removeDisplayersFromScene(LinkedList<DecorativeGeometryDisplayer> currentGeometryDisplayers) {
+        if (currentGeometryDisplayers==null) return;
         for(int i=0; i< currentGeometryDisplayers.size(); i++){
             DecorativeGeometryDisplayer dgd = currentGeometryDisplayers.get(i);
             BodyDisplayer bd = mapBodyIndicesToDisplayers.get(dgd.getBodyId());
-            bd.RemovePart(dgd.getVisuals());
+            bd.RemovePart(dgd);
         }
         currentGeometryDisplayers.clear();
+    }
+
+    void removeGeometry(ModelComponent mc) {
+        setCurrentModelComponent(mc);
+        removeDisplayersFromScene(currentFixedGeometryDisplayers);
+        removeDisplayersFromScene(currentVariableGeometryDisplayers);
+        this.currentModelComponent = null;
     }
     
 }

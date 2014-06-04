@@ -4,9 +4,13 @@
  */
 package org.opensim.view.experimentaldata;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import org.opensim.utils.Vec3;
+import org.opensim.modeling.ArrayDecorativeGeometry;
+import org.opensim.modeling.ArrayDouble;
+import org.opensim.modeling.DecorativeSphere;
+import org.opensim.modeling.ModelDisplayHints;
+import org.opensim.modeling.State;
+import org.opensim.modeling.Transform;
+import org.opensim.modeling.Vec3;
 
 /**
  *
@@ -45,7 +49,10 @@ public class MotionObjectBodyMarker extends MotionObjectBodyPoint {
     public MotionObjectBodyMarker(ExperimentalDataItemType objectType, String baseName, int index) {
         super(objectType, baseName, index);
     }
-
+    
+    public String getConcreteClassName() {
+        return "Experimental Marker";
+    }
     /**
      * @return the markerName
      */
@@ -60,4 +67,20 @@ public class MotionObjectBodyMarker extends MotionObjectBodyPoint {
         this.markerName = markerName;
     }
 
+    @Override
+    public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
+        if (!fixed){
+            Transform xform = new Transform();
+            xform.setP(new Vec3(point[0], point[1], point[2]));
+            appendToThis.push_back(new DecorativeSphere(0.007).setBodyId(0).setColor(new Vec3(0., 1., 1.0)).setOpacity(0.5).setIndexOnBody(getStartIndexInFileNotIncludingTime()).setTransform(xform));            
+        }
+    }
+
+    @Override
+    void updateGeometry(ArrayDouble interpolatedStates) {
+        int idx = getStartIndexInFileNotIncludingTime();
+        setPoint(new double[]{interpolatedStates.get(idx)/1000., interpolatedStates.get(idx+1)/1000., interpolatedStates.get(idx+2)/1000.});
+    }
+
+    
  }

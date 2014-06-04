@@ -496,5 +496,13 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
     public MotionDisplayer getMotionDisplayer() {
         return motionDisplayer;
     }
+
+    public void updateComponentGeometry(ArrayDouble interpolatedStates) {
+        if (classified !=null && classified.size()!=0){
+            for(ExperimentalDataObject dataObject:classified){
+                dataObject.updateGeometry(interpolatedStates);
+            }
+        }
+    }
     
 }

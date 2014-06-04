@@ -39,9 +39,10 @@ public class DecorativeBrickDisplayer extends DecorativeGeometryDisplayer {
      * @param ag
      * @param object 
      */
-    DecorativeBrickDisplayer(DecorativeBrick ag, OpenSimObject object) {
-        super(object);
+    DecorativeBrickDisplayer(DecorativeBrick ag) {
         this.ag = ag;
+        if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
+
      }
 
     /**
@@ -116,7 +117,7 @@ public class DecorativeBrickDisplayer extends DecorativeGeometryDisplayer {
     }
 
     @Override
-    vtkActor getVisuals() {
+    vtkActor computeVisuals() {
        updateDisplayFromDecorativeGeometry();
        return this;
     }

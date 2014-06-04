@@ -79,14 +79,6 @@ public class Installer extends ModuleInstall {
              // Put your startup code here.
             UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
             UIManager.put("SliderUI", "org.opensim.view.OpenSimSliderUI");
-            SwingUtilities.invokeLater(new Runnable(){
-            public void run() {
-               // This line is important because it forces the muscle editor to initialize at the start
-               // which is necessary to allow moving muscle points even if the muscle editor top component is not shown
-               // Note that this may cause a warning exception "Cannot find MuscleEditor component" to be shown... just ignore it.
-               MuscleEditorTopComponent.findInstance();
-               MarkerEditorTopComponent.findInstance();
-            }});
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         } catch (IllegalAccessException ex) {

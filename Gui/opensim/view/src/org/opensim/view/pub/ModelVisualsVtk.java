@@ -91,28 +91,16 @@ public interface ModelVisualsVtk {
 
     void updateObjectDisplay(OpenSimObject specificObject);
 
-    public void addMarkerGeometry(Marker marker);
-
     public void setPickable(boolean b);
 
     public boolean isVisible();
 
     public void setVisible(boolean b);
 
-    public OpenSimvtkGlyphCloud getMusclePointsRep();
-
-    public OpenSimvtkGlyphCloud getForceAlongPathPointsRep();
-
-    public void updateMuscleOrForceAlongPathGeometry(OpenSimObject owner, boolean b);
-
-    public MarkersDisplayer getMarkersRep();
-
     public void setShowCOM(boolean newState);
 
     public boolean isShowCOM();
 
     public void setApplyMuscleColors(boolean render);
-
-    public void updateActuatorGeometry(Actuator muscle, boolean b);
     
 }
