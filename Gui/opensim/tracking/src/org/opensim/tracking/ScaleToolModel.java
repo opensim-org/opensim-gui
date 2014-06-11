@@ -41,6 +41,8 @@ import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.BodyScale;
 import org.opensim.modeling.BodyScaleSet;
 import org.opensim.modeling.BodySet;
+import org.opensim.modeling.Coordinate;
+import org.opensim.modeling.CoordinateSet;
 import org.opensim.modeling.GenericModelMaker;
 import org.opensim.modeling.MarkerData;
 import org.opensim.modeling.MarkerPair;
@@ -54,6 +56,8 @@ import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.Scale;
 import org.opensim.modeling.ScaleSet;
 import org.opensim.modeling.ScaleTool;
+import org.opensim.modeling.State;
+import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Storage;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.swingui.SwingWorker;
@@ -309,7 +313,7 @@ public class ScaleToolModel extends Observable implements Observer {
 
          processedModel = new Model(unscaledModel);
          processedModel.setName(scaleTool.getName());
-         processedModel.setInputFileName("");
+         //processedModel.setInputFileName("");
          processedModel.setOriginalModelPathFromModel(unscaledModel); // important to keep track of the original path so bone loading works
          //processedModel.setup();
 
@@ -355,13 +359,16 @@ public class ScaleToolModel extends Observable implements Observer {
          progressHandle.finish();
 
          if(result) {
+            processedModel.setInputFileName("");
             OpenSimDB.getInstance().replaceModel(scaledModel, processedModel, processedModelContext);
             scaledModel = processedModel;
             if(ViewDB.getInstance().getModelGuiElements(scaledModel)!=null)
                ViewDB.getInstance().getModelGuiElements(scaledModel).setUnsavedChangesFlag(true);
                
             if(getMarkerPlacerEnabled() && scaleTool.getMarkerPlacer().getOutputStorage()!=null) {
-               Storage motion = new Storage(scaleTool.getMarkerPlacer().getOutputStorage());
+               // Need coordinates only
+               Storage outStorage = scaleTool.getMarkerPlacer().getOutputStorage();
+               Storage motion = createCoordinatesOnlyMotionFile(outStorage);
                motion.setName("static pose");
                MotionsDB.getInstance().addMotion(scaledModel, motion, null);
             }
@@ -374,6 +381,27 @@ public class ScaleToolModel extends Observable implements Observer {
          processedModel = null;
          worker = null;
       }
+
+        private Storage createCoordinatesOnlyMotionFile(Storage outStorage) {
+            ArrayStr oLabels = outStorage.getColumnLabels();
+            StateVector oVector = outStorage.getStateVector(0);
+            CoordinateSet cs =  processedModel.getCoordinateSet();
+            ArrayStr labels = new ArrayStr();
+            labels.append("time");
+            StateVector sv = new StateVector(oVector.getTime());
+            ArrayDouble coordinateValues = new ArrayDouble();
+            for (int i=0; i< cs.getSize(); i++){
+                Coordinate c = cs.get(i);
+                labels.append(c.getName());
+                int idx = oLabels.findIndex(c.getName());
+                coordinateValues.append(oVector.getData().get(idx));
+            }
+            sv.getData().append(coordinateValues);
+            Storage motion = new Storage();
+            motion.setColumnLabels(labels);
+            motion.append(sv);
+            return motion;
+        }
    }
    private ScaleToolWorker worker = null;
    //========================================================================
@@ -411,7 +439,7 @@ public class ScaleToolModel extends Observable implements Observer {
       // Store original model; create copy of the original model as our unscaled model (i.e. the model we'll scale)
       this.originalModel = originalModel;
       unscaledModel = new Model(originalModel);
-      unscaledModel.setInputFileName("");
+      String fn = unscaledModel.getInputFileName();
       unscaledModel.setOriginalModelPathFromModel(originalModel); // important to keep track of the original path so bone loading works
       //unscaledModel.setup();
       originalMarkerSet = new MarkerSet(unscaledModel.getMarkerSet());
