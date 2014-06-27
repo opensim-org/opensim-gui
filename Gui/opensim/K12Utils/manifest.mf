@@ -1,6 +1,0 @@
-Manifest-Version: 1.0
-OpenIDE-Module: org.opensim.k12utils
-OpenIDE-Module-Layer: org/opensim/k12utils/layer.xml
-OpenIDE-Module-Localizing-Bundle: org/opensim/k12utils/Bundle.properties
-OpenIDE-Module-Specification-Version: 1.0
-

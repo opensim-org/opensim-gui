@@ -1,6 +1,0 @@
-Manifest-Version: 1.0
-OpenIDE-Module: org.opensim.annotationtool
-OpenIDE-Module-Layer: org/opensim/annotationtool/layer.xml
-OpenIDE-Module-Localizing-Bundle: org/opensim/annotationtool/Bundle.properties
-OpenIDE-Module-Specification-Version: 1.0
-
