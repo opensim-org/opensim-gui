@@ -90,18 +90,18 @@ public class TreeDropTarget extends DropTarget {
     }
     private final void paintImage(JTree tree, Point location) {
         Point pt = new Point(location);
-        BufferedImage[] image = handler.getDragImage();
+        BufferedImage image = handler.getDragImage();
         if(image != null) {
             tree.paintImmediately(rect2D.getBounds());
             rect2D.setLocation(pt.x-15, pt.y-15);
             int wRect2D = 0;
             int hRect2D= 0;
-            for (int i = 0; i < image.length; i++) {
-                tree.getGraphics().drawImage(image[i], pt.x-15, pt.y-15, tree);
-                pt.y += image[i].getHeight();
-                if(wRect2D < image[i].getWidth())
-                    wRect2D = image[i].getWidth();
-                hRect2D += image[i].getHeight();
+            for (int i = 0; i < 1; i++) {
+                tree.getGraphics().drawImage(image, pt.x-15, pt.y-15, tree);
+                pt.y += image.getHeight();
+                if(wRect2D < image.getWidth())
+                    wRect2D = image.getWidth();
+                hRect2D += image.getHeight();
             }
             rect2D.setSize(wRect2D, hRect2D);
         }

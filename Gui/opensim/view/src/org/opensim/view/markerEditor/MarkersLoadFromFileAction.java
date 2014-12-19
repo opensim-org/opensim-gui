@@ -24,6 +24,7 @@ import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.Vec3;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.ObjectsAddedEvent;
@@ -56,16 +57,15 @@ public class MarkersLoadFromFileAction extends AbstractAction {
         if (fileName==null) return;
         MarkerSet newMarkerSet;
         try {
-            newMarkerSet = new MarkerSet(fileName);
+            newMarkerSet = new MarkerSet(model, fileName);
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
             return;
         }
         for (int i=0; i<newMarkerSet.getSize(); i++){
             Marker m = newMarkerSet.get(i);
-            double[] offset = new double[]{0., 0., 0.};
-            m.getOffset(offset);
-            String newMarkerBodyName = m.getBodyName();
+            Vec3 offset = m.get_location();
+            String newMarkerBodyName = m.getFrameName();
             if (model.getBodySet().contains(newMarkerBodyName)){
                 Body body  = model.getBodySet().get(newMarkerBodyName);
                 Marker newMarker = markerset.addMarker(m.getName(), offset, body);
@@ -85,10 +85,9 @@ public class MarkersLoadFromFileAction extends AbstractAction {
     public void addMarker(final Marker marker, boolean supportUndo) {
         // Update the marker name list in the ViewDB.
         final String saveMarkerName = marker.getName();
-        final String saveBodyName = marker.getBodyName();
-        final double[] saveMarkerOffset = new double[]{0., 0., 0.};
-        marker.getOffset(saveMarkerOffset);
-        final Model model = marker.getBody().getModel();
+        final String saveBodyName = marker.getFrameName();
+        final Vec3 saveMarkerOffset = marker.get_location();
+        final Model model = marker.getModel();
         ViewDB.getInstance().getModelGuiElements(model).updateMarkerNames();
 
         Vector<OpenSimObject> objs = new Vector<OpenSimObject>(1);

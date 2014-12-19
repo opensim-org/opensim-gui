@@ -15,6 +15,7 @@ import org.opensim.modeling.Body;
 import org.opensim.modeling.BodySet;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.Storage;
+import org.opensim.modeling.Vec3;
 
 /**
  *
@@ -669,8 +670,8 @@ private void jComboBoxTZupdateForceFromPanel(java.awt.event.ActionEvent evt) {//
                 motionForce.setForceAppliedToBody(forceBodyame);
                 if (!motionForce.specifiesPoint()){
                     Body b = aModel.getBodySet().get(forceBodyame);
-                    double[] com = new double[]{0., 0., 0.};
-                    b.getCenterOfMass(com);
+                    Vec3 mc = b.getMassCenter();
+                    double[] com = new double[]{mc.get(0), mc.get(1), mc.get(2)};
                     motionForce.setPoint(com);
                 }
                 else {

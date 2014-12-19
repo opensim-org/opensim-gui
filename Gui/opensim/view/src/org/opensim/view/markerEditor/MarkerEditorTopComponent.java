@@ -344,7 +344,7 @@ private void AddMarkerButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
 
 private void BodyComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BodyComboBoxActionPerformed
       javax.swing.JComboBox bodyComboBox = (javax.swing.JComboBox)evt.getSource();
-      Body oldBody = currentMarker.getBody();
+      Body oldBody = currentModel.getBodySet().get(currentMarker.getFrameName());
       BodySet bodies = currentModel.getBodySet();
       Body newBody = bodies.get(bodyComboBox.getSelectedIndex());
       OpenSimContext context = OpenSimDB.getInstance().getContext(newBody.getModel());

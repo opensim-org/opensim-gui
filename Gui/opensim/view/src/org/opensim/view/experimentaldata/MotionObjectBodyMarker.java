@@ -67,7 +67,7 @@ public class MotionObjectBodyMarker extends MotionObjectBodyPoint {
         this.markerName = markerName;
     }
 
-    @Override
+
     public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
         if (!fixed){
             Transform xform = new Transform();

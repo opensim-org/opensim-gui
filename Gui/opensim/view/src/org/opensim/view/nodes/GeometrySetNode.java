@@ -36,7 +36,6 @@ import javax.swing.Action;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.util.NbBundle;
-import org.opensim.modeling.GeometrySet;
 import org.opensim.view.nodes.OneDisplayGeometryNode;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 

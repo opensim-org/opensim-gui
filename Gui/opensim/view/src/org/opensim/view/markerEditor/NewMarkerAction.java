@@ -21,6 +21,7 @@ import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.Vec3;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.ObjectsAddedEvent;
 import org.opensim.view.nodes.MarkersNode;
@@ -46,7 +47,7 @@ public class NewMarkerAction extends AbstractAction {
    }
         MarkersNode markersNode = (MarkersNode) selected[0];
         Model model = markersNode.getModelForNode();
-        double[] offset = {0.11, 0.22, 0.33};
+        Vec3 offset = new Vec3(0.11, 0.22, 0.33);
         MarkerSet markerset = model.getMarkerSet();
         Body body = model.getBodySet().get(0);
         if (body == null) {
@@ -60,10 +61,9 @@ public class NewMarkerAction extends AbstractAction {
     public void addMarker(final Marker marker, boolean supportUndo) {
         // Update the marker name list in the ViewDB.
         final String saveMarkerName = marker.getName();
-        final String saveBodyName = marker.getBodyName();
-        final double[] saveMarkerOffset = new double[]{0., 0., 0.};
-        marker.getOffset(saveMarkerOffset);
-        final Model model = marker.getBody().getModel();
+        final String saveBodyName = marker.getFrameName();
+        final Vec3 saveMarkerOffset = marker.get_location();
+        final Model model = marker.getModel();
         ViewDB.getInstance().getModelGuiElements(model).updateMarkerNames();
 
         Vector<OpenSimObject> objs = new Vector<OpenSimObject>(1);

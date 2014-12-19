@@ -18,7 +18,6 @@ import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.PathPointSet;
-import org.opensim.modeling.VisibleObject;
 import org.opensim.view.pub.OpenSimDB;
 import vtk.vtkMatrix4x4;
 
@@ -117,7 +116,7 @@ public class LineSegmentForceDisplayer {
     }
 
     void addGeometry() {
-        openSimContext.updateDisplayer(forceAlongPath);
+        //openSimContext.updateDisplayer(forceAlongPath);
         updateGlyphIds();
         updateGeometry(false);
     }
@@ -129,8 +128,8 @@ public class LineSegmentForceDisplayer {
 
       int newPointsSize;
       int newSegmentsSize;
-
-      VisibleObject actuatorDisplayer = forceAlongPath.getDisplayer();
+/*
+      VisibleObject actuatorDisplayer = null;//forceAlongPath.getDisplayer();
       if (actuatorDisplayer == null) {
          newPointsSize = 0;
          newSegmentsSize = 0;
@@ -181,6 +180,7 @@ public class LineSegmentForceDisplayer {
             segmentGlyphIds.set(i, index);
          }
       }
+      */
    }
 
    public void updateGeometry(boolean callUpdateDisplayer)

@@ -8362,7 +8362,7 @@
 						    .obj-->
 						<GeometrySet name="">
 							<objects>
-								<DisplayGeometry name="">
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> sacrum.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -8378,8 +8378,8 @@
 							<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> pelvis.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -8395,8 +8395,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> l_pelvis.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -8412,7 +8412,7 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups/>
 						</GeometrySet>
@@ -8572,7 +8572,7 @@
 						    .obj-->
 						<GeometrySet name="">
 							<objects>
-								<DisplayGeometry name="">
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> femur.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -8588,7 +8588,7 @@
 							<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups/>
 						</GeometrySet>
@@ -8726,7 +8726,7 @@
 						    .obj-->
 						<GeometrySet name="">
 							<objects>
-								<DisplayGeometry name="">
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> tibia.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -8742,8 +8742,8 @@
 							<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> fibula.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -8759,7 +8759,7 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups/>
 						</GeometrySet>
@@ -8895,7 +8895,7 @@
 						    .obj-->
 						<GeometrySet name="">
 							<objects>
-								<DisplayGeometry name="">
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> talus.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -8911,7 +8911,7 @@
 							<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups/>
 						</GeometrySet>
@@ -9047,7 +9047,7 @@
 						    .obj-->
 						<GeometrySet name="">
 							<objects>
-								<DisplayGeometry name="">
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> foot.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -9063,7 +9063,7 @@
 							<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups/>
 						</GeometrySet>
@@ -9199,7 +9199,7 @@
 						    .obj-->
 						<GeometrySet name="">
 							<objects>
-								<DisplayGeometry name="">
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> bofoot.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -9215,7 +9215,7 @@
 							<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups/>
 						</GeometrySet>
@@ -9375,7 +9375,7 @@
 						    .obj-->
 						<GeometrySet name="">
 							<objects>
-								<DisplayGeometry name="">
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> l_femur.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -9391,7 +9391,7 @@
 							<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups/>
 						</GeometrySet>
@@ -9529,7 +9529,7 @@
 						    .obj-->
 						<GeometrySet name="">
 							<objects>
-								<DisplayGeometry name="">
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> l_tibia.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -9545,8 +9545,8 @@
 							<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> l_fibula.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -9562,7 +9562,7 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups/>
 						</GeometrySet>
@@ -9698,7 +9698,7 @@
 						    .obj-->
 						<GeometrySet name="">
 							<objects>
-								<DisplayGeometry name="">
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> l_talus.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -9714,7 +9714,7 @@
 							<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups/>
 						</GeometrySet>
@@ -9850,7 +9850,7 @@
 						    .obj-->
 						<GeometrySet name="">
 							<objects>
-								<DisplayGeometry name="">
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> l_foot.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -9866,7 +9866,7 @@
 							<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups/>
 						</GeometrySet>
@@ -10002,7 +10002,7 @@
 						    .obj-->
 						<GeometrySet name="">
 							<objects>
-								<DisplayGeometry name="">
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> l_bofoot.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -10018,7 +10018,7 @@
 							<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups/>
 						</GeometrySet>
@@ -10178,7 +10178,7 @@
 						    .obj-->
 						<GeometrySet name="">
 							<objects>
-								<DisplayGeometry name="">
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> hat_spine.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -10194,8 +10194,8 @@
 							<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> hat_jaw.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -10211,8 +10211,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> hat_skull.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -10228,8 +10228,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> hat_ribs.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -10245,7 +10245,7 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups/>
 						</GeometrySet>

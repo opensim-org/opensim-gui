@@ -73,7 +73,7 @@ public class ModelForExperimentalData extends Model{
     public void addMarkers(Vector<String> experimentalMarkers)
     {
         for (int i=0; i<experimentalMarkers.size(); i++){
-            markers.addMarker(experimentalMarkers.get(i), new double[]{0., 0., 0.}, getGround());
+            markers.addMarker(experimentalMarkers.get(i), new Vec3(0.), getGround());
         }
     }
     

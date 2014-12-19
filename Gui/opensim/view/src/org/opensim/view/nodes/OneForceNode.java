@@ -55,11 +55,11 @@ public class OneForceNode extends DisablableOpenSimObjectNode {
         setShortDescription(bundle.getString("HINT_OtherForceNode"));
         setChildren(Children.LEAF);
         Force f= Force.safeDownCast(force);
-        if (f.getDisplayer()!=null){
-            addDisplayOption(displayOption.Showable);
-            if (!f.hasGeometryPath())
-                addDisplayOption(displayOption.Colorable);
-        }
+//        if (f.getDisplayer()!=null){
+//            addDisplayOption(displayOption.Showable);
+//            if (!f.hasGeometryPath())
+//                addDisplayOption(displayOption.Colorable);
+//        }
         //addDisplayOption(displayOption.Isolatable);
     }
     @Override

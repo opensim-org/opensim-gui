@@ -30,22 +30,16 @@ package org.opensim.view.nodes;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
 import org.openide.nodes.Children;
-import org.openide.nodes.PropertySupport;
-import org.openide.nodes.Sheet;
 import org.openide.util.NbBundle;
-import org.opensim.modeling.DisplayGeometry;
-import org.opensim.utils.Vec3;
+import org.opensim.modeling.Geometry;
+import org.opensim.modeling.Mesh;
 import org.opensim.view.ColorableInterface;
 import org.opensim.view.DisplayGeometryDisplayer;
-import org.opensim.view.editors.DisplayPreferenceEditor;
-import org.opensim.view.editors.PositionEditor;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 import org.opensim.view.pub.ViewDB;
 
@@ -59,13 +53,13 @@ public class OneDisplayGeometryNode extends OpenSimObjectNode implements Colorab
     /**
     * Creates a new instance of OneContactForceNode
     */
-    public OneDisplayGeometryNode(DisplayGeometry cg) {
+    public OneDisplayGeometryNode(Geometry cg) {
         super(cg);
         String gName=cg.getName();
         if (cg.getName().equalsIgnoreCase("")){
-            gName=cg.getGeometryFile();
-            setDisplayName(cg.getGeometryFile());
-            setName(cg.getGeometryFile());
+            gName=cg.getName();
+            setDisplayName(cg.getName());
+            setName(cg.getName());
         }
         setShortDescription(bundle.getString("HINT_DisplayGeometryNode"));
         setChildren(Children.LEAF);
@@ -96,7 +90,7 @@ public class OneDisplayGeometryNode extends OpenSimObjectNode implements Colorab
         
         retValue = super.getHtmlDisplayName();
         if (retValue.equalsIgnoreCase("")){
-            retValue = ((DisplayGeometry)getOpenSimObject()).getGeometryFile();
+            retValue = ((Geometry)getOpenSimObject()).getName();
         }
         return retValue;
     }
@@ -108,13 +102,13 @@ public class OneDisplayGeometryNode extends OpenSimObjectNode implements Colorab
         sheet = super.createSheet();
         Sheet.Set set = sheet.get("properties");
         // Add property for Location
-        DisplayGeometry obj = DisplayGeometry.safeDownCast(getOpenSimObject());
+        Geometry obj = Geometry.safeDownCast(getOpenSimObject());
         DecorativeGeometryDisplayer disp = (DecorativeGeometryDisplayer) ViewDB.getInstance().getVtkRepForObject(obj);
         if (disp==null) return sheet;
         try {
             set.remove("display_preference");
             PropertySupport.Reflection nextNodeProp4;
-            nextNodeProp4 = new PropertySupport.Reflection(disp, DisplayGeometry.DisplayPreference.class, "getDisplayPreference", "setDisplayPreference");
+            nextNodeProp4 = new PropertySupport.Reflection(disp, Geometry.DisplayPreference.class, "getDisplayPreference", "setDisplayPreference");
             nextNodeProp4.setPropertyEditorClass(DisplayPreferenceEditor.class);
             nextNodeProp4.setName("display_preference");        
             set.put(nextNodeProp4);
@@ -127,25 +121,25 @@ public class OneDisplayGeometryNode extends OpenSimObjectNode implements Colorab
     }
      * */
     public Color getColor() {
-        DisplayGeometry obj = DisplayGeometry.safeDownCast(getOpenSimObject());
+        Geometry obj = Geometry.safeDownCast(getOpenSimObject());
         DisplayGeometryDisplayer disp = (DisplayGeometryDisplayer) ViewDB.getInstance().getVtkRepForObject(obj);
         return disp.getColor();
     }
 
     public void setColor(Color newColor) {
-        DisplayGeometry obj = DisplayGeometry.safeDownCast(getOpenSimObject());
+        Geometry obj = Geometry.safeDownCast(getOpenSimObject());
         DisplayGeometryDisplayer disp = (DisplayGeometryDisplayer) ViewDB.getInstance().getVtkRepForObject(obj);
         disp.setColorGUI(newColor);
     }
 
-    public DisplayGeometry.DisplayPreference getDisplayPreference() {
-        DisplayGeometry obj = DisplayGeometry.safeDownCast(getOpenSimObject());
+    public Geometry.Representation getDisplayPreference() {
+        Geometry obj = Geometry.safeDownCast(getOpenSimObject());
         DisplayGeometryDisplayer disp = (DisplayGeometryDisplayer) ViewDB.getInstance().getVtkRepForObject(obj);
         return disp.getDisplayPreference();
    }
 
-    public void setDisplayPreference(DisplayGeometry.DisplayPreference newPref) {
-        DisplayGeometry obj = DisplayGeometry.safeDownCast(getOpenSimObject());
+    public void setDisplayPreference(Geometry.Representation newPref) {
+        Geometry obj = Geometry.safeDownCast(getOpenSimObject());
         DisplayGeometryDisplayer disp = (DisplayGeometryDisplayer) ViewDB.getInstance().getVtkRepForObject(obj);
         disp.setDisplayPreference(newPref);
     }

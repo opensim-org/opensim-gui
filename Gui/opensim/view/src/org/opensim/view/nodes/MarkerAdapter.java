@@ -13,6 +13,7 @@ import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.Vec3;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.ObjectsRenamedEvent;
 import org.opensim.view.SingleModelVisuals;
@@ -54,7 +55,7 @@ public class MarkerAdapter  {
     
     public MarkerAdapter(Marker obj) {
         marker = obj;
-        model = obj.getBody().getModel();
+        model = obj.getModel();
         context = OpenSimDB.getInstance().getContext(model);
     }
 
@@ -62,7 +63,7 @@ public class MarkerAdapter  {
      * @return the bodyName
      */
     public String getBodyName() {
-        return marker.getBodyName();
+        return marker.getFrameName();
     }
 
     /**
@@ -75,7 +76,7 @@ public class MarkerAdapter  {
     private void setBodyName(final String bodyName, boolean enableUndo) {
         final String oldName = getBodyName();
         if (bodyName.equals(oldName)) return; // Nothing to do
-        marker.setBodyName(bodyName);
+        marker.setFrameName(bodyName);
         context.setBody(marker, model.getBodySet().get(bodyName), true);
         updateDisplay();
         if (enableUndo){
@@ -105,11 +106,8 @@ public class MarkerAdapter  {
      * @return the offset
      */
     public String getOffsetString() {
-        double[] offset= {0., 0., 0.};
-        marker.getOffset(offset);
-        ArrayDouble ret = new ArrayDouble();
-        ret.setValues(offset, 3);
-        return ret.toString();
+        Vec3 offset= marker.get_location();
+        return offset.toString();
     }
 
     /**
@@ -126,11 +124,10 @@ public class MarkerAdapter  {
        setOffset(d, true);
     }
     private void setOffset(final ArrayDouble newOffset, boolean enableUndo) {
-        double[] rOffset = new double[]{0., 0., 0.};
-        marker.getOffset(rOffset);
-        final ArrayDouble oldOffset = new ArrayDouble();
-        oldOffset.setValues(rOffset, 3);
-        marker.setOffset(newOffset.getAsVec3());
+        Vec3 rOffest = marker.get_location();
+        final ArrayDouble oldOffset = new ArrayDouble(3);
+        for(int i=0; i<3; i++) oldOffset.set(i, rOffest.get(i));
+         marker.set_location(newOffset.getAsVec3());
         updateDisplay(); 
         if (enableUndo){
              AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){

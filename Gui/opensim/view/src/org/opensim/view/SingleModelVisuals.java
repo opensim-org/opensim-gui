@@ -41,7 +41,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import org.opensim.modeling.*;
-import org.opensim.modeling.DisplayGeometry.DisplayPreference;
+import org.opensim.modeling.Geometry.Representation;
 import org.opensim.view.pub.ModelVisualsVtk;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
@@ -97,8 +97,8 @@ public class SingleModelVisuals implements ModelVisualsVtk {
     protected Hashtable<OpenSimObject, vtkProp3D> mapObject2VtkObjects = new Hashtable<OpenSimObject, vtkProp3D>();
     protected Hashtable<vtkProp3D, OpenSimObject> mapVtkObjects2Objects = new Hashtable<vtkProp3D, OpenSimObject>(50);
    
-    private Hashtable<OpenSimObject, LineSegmentMuscleDisplayer> mapActuator2Displayer = new Hashtable<OpenSimObject, LineSegmentMuscleDisplayer>();
-    private Hashtable<OpenSimObject, LineSegmentForceDisplayer> mapPathForces2Displayer = new Hashtable<OpenSimObject, LineSegmentForceDisplayer>();
+    //private Hashtable<OpenSimObject, LineSegmentMuscleDisplayer> mapActuator2Displayer = new Hashtable<OpenSimObject, LineSegmentMuscleDisplayer>();
+    //private Hashtable<OpenSimObject, LineSegmentForceDisplayer> mapPathForces2Displayer = new Hashtable<OpenSimObject, LineSegmentForceDisplayer>();
     private Hashtable<Force, ObjectDisplayerInterface> mapNoPathForces2Displayer = new Hashtable<Force, ObjectDisplayerInterface>();
 
     protected Hashtable<OpenSimObject, vtkLineSource> mapMarkers2Lines = new Hashtable<OpenSimObject, vtkLineSource>(50);
@@ -240,7 +240,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
             if (bodyRep!=null)
                bodyRep.SetUserMatrix(bodyVtkTransform);
 
-            //bodyRep.applyDisplayPreferences();
+            //bodyRep.applyRepresentations();
             
         }
         
@@ -251,11 +251,6 @@ public class SingleModelVisuals implements ModelVisualsVtk {
         //updateUserObjects();
    }
 
-    private void pushColoringFunctionToMuscles() {
-        Iterator<LineSegmentMuscleDisplayer> dispIter = mapActuator2Displayer.values().iterator();
-        while(dispIter.hasNext()) dispIter.next().setApplyColoringFunction(currentColoringFunction);
-    }
-
    private void updateMarkersGeometry(MarkerSet markers) {
       for (int i=0; i<markers.getSize(); i++)
          getMarkersRep().updateMarkerGeometry(markers.get(i));
@@ -264,27 +259,9 @@ public class SingleModelVisuals implements ModelVisualsVtk {
    /**
     * Functions for dealing with actuator geometry
     */
- 
-   private void updateForceGeometry(ForceSet acts) {
-      Iterator<LineSegmentMuscleDisplayer> dispIter = mapActuator2Displayer.values().iterator();
-      while(dispIter.hasNext()) dispIter.next().updateGeometry(true);
-      Iterator<LineSegmentForceDisplayer> fDispIter = mapPathForces2Displayer.values().iterator();
-      while(fDispIter.hasNext()) fDispIter.next().updateGeometry(true);
-      Enumeration<Force> fNoPathIter = mapNoPathForces2Displayer.keys();
-      while(fNoPathIter.hasMoreElements()){
-          Force f = fNoPathIter.nextElement();
-          OpenSimContext context=OpenSimDB.getInstance().getContext(f.getModel());
-          
-          if (context.isDisabled(f)) continue;
-          if (f.getDisplayer()==null) continue;
-          context.updateDisplayer(f);
-          mapNoPathForces2Displayer.get(f).updateGeometry();
-      }
-
-   }
 
    public void updateActuatorGeometry(Actuator act, boolean callUpdateDisplayer) {
-      LineSegmentMuscleDisplayer disp = mapActuator2Displayer.get(act);
+      LineSegmentMuscleDisplayer disp = null;//mapActuator2Displayer.get(act);
       if(disp != null) {
          disp.updateGeometry(callUpdateDisplayer);
 
@@ -292,9 +269,10 @@ public class SingleModelVisuals implements ModelVisualsVtk {
    }
 
    public void setApplyMuscleColors(boolean enabled) {
+      /*
       Iterator<LineSegmentMuscleDisplayer> dispIter = mapActuator2Displayer.values().iterator();
       while(dispIter.hasNext()) dispIter.next().setApplyColoringFunction(currentColoringFunction);
-
+       */
    }
 
      /**
@@ -567,14 +545,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
         Force f = Force.safeDownCast(fObject);
         OpenSimContext context=OpenSimDB.getInstance().getContext(f.getModel());
         if (context.isDisabled(f)) return;
-        if (f.getDisplayer()==null) return;
-        TwoBodyForceDisplayer foceDisplayer = new TwoBodyForceDisplayer(f, modelAssembly);
-        vtkActor forceActor = foceDisplayer;
-        if (forceActor!=null){
-            mapNoPathForces2Displayer.put(f, foceDisplayer);
-            mapVtkObjects2Objects.put(forceActor,f);
-            mapObject2VtkObjects.put(f, forceActor);
-        }
+
     }
 
     public boolean isShowCOM() {

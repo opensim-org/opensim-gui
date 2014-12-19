@@ -74,8 +74,9 @@ public abstract class NodeMoveTransferHandler extends TransferHandler {
     public int getSourceActions(JComponent c) {
         return TransferHandler.MOVE;
     }
-    public BufferedImage[] getDragImage() {
-        return image;
+    @Override
+    public BufferedImage getDragImage() {
+        return image[0];
     }
     private void createDragImage(JTree tree) {
         if (dragPath != null) {

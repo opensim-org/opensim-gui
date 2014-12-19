@@ -73,13 +73,13 @@ import org.opensim.modeling.SetWrapObject;
 import org.opensim.modeling.PathActuator;
 import org.opensim.modeling.ForceSet;
 import org.opensim.modeling.Constant;
-import org.opensim.modeling.DisplayGeometry;
+import org.opensim.modeling.Geometry;
 import org.opensim.view.Selectable;
 import org.opensim.modeling.MovingPathPoint;
 import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.PathPointSet;
 import org.opensim.modeling.Units;
-import org.opensim.modeling.DisplayGeometry.DisplayPreference;
+import org.opensim.modeling.Geometry.Representation;
 import org.opensim.modeling.PropertyHelper;
 import org.opensim.view.ClearSelectedObjectsEvent;
 import org.opensim.view.DragObjectsEvent;
@@ -817,7 +817,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
    
    public void addPathWrap(int menuChoice) {
       PathActuator asm = PathActuator.safeDownCast(currentAct);
-      WrapObject awo = asm.getModel().getSimbodyEngine().getWrapObject(wrapObjectNames[menuChoice]);
+      WrapObject awo = null;//asm.getModel().getSimbodyEngine().getWrapObject(wrapObjectNames[menuChoice]);
       OpenSimContext context =OpenSimDB.getInstance().getContext(asm.getModel());
       context.addPathWrap(asm.getGeometryPath(), awo);
       //setPendingChanges(true, currentAct, true);

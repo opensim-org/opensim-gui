@@ -12,6 +12,7 @@ import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.Vec3;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.ObjectsDeletedEvent;
 import org.opensim.view.nodes.OneMarkerNode;
@@ -42,13 +43,13 @@ public class MarkerDeleteAction extends AbstractAction {
     public void deleteMarker(final Marker marker, boolean supportUndo) {
         // Delete the marker's visuals.
         final String saveMarkerName = marker.getName();
-        final String saveBodyName = marker.getBodyName();
-        final double[] saveMarkerOffset = new double[]{0., 0., 0.};
-        marker.getOffset(saveMarkerOffset);
-        marker.removeSelfFromDisplay();
+        final String saveBodyName = marker.getFrameName();
+        final Vec3 saveMarkerOffset = marker.get_location();
+        
+        //marker.removeSelfFromDisplay();
 
         // Remove the marker from the model's marker set.
-        final Model model = marker.getBody().getModel();
+        final Model model = marker.getModel();
         MarkerSet markerset = model.getMarkerSet();
         markerset.remove(marker);
 

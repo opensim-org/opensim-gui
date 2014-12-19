@@ -10,7 +10,7 @@ import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.Body;
-import org.opensim.modeling.GeometrySet;
+import org.opensim.modeling.Geometry;
 import org.opensim.modeling.WrapObject;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.WrapObjectSet;
@@ -26,15 +26,16 @@ public class OneBodyNode extends OpenSimObjectNode{
       // Create children for wrap objects associated with body
       Body bdy = (Body) b;
 	  Children children = getChildren();
+      int geomSize = bdy.getGeometrySize();
+       // Create node for geometry
+       for (int g = 0; g < geomSize; g++) {
+           Geometry oneG = bdy.get_GeometrySet(g);
 
-      // Create node for geometry
-	  GeometrySet gSet = bdy.getDisplayer().getGeometrySet();
-	  {
-              GeometrySetNode node = new GeometrySetNode(gSet);
-              Node[] arrNodes = new Node[1];
-              arrNodes[0] = node;
-              children.add(arrNodes);
-	  }
+           OneDisplayGeometryNode node = new OneDisplayGeometryNode(oneG);
+           Node[] arrNodes = new Node[1];
+           arrNodes[0] = node;
+           children.add(arrNodes);
+       }
 	  // Create nodes for wrap objects      
       WrapObjectSet wrapObjects = bdy.getWrapObjectSet();
       for (int index=0; index < wrapObjects.getSize(); index++ ){

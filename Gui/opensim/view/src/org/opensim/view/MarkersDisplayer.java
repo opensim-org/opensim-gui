@@ -56,8 +56,8 @@ public class MarkersDisplayer extends OpenSimvtkGlyphCloud {
       double[] origin = {0.0, 0.0, 0.0};
       double[] gOrigin = new double[3];
       int index = mapMarkers2Glyphs.get(marker).intValue();
-      SimbodyEngine de = marker.getBody().getModel().getSimbodyEngine();
-      Model model =marker.getBody().getModel();
+      SimbodyEngine de = marker.getModel().getSimbodyEngine();
+      Model model =marker.getModel();
       marker.getOffset(offset);
       OpenSimContext context=OpenSimDB.getInstance().getContext(model);
       context.transformPosition(marker.getBody(), offset, gOffset);

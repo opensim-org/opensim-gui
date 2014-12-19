@@ -21,7 +21,7 @@ class DecorativeFrameDisplayer extends DecorativeGeometryDisplayer {
     public DecorativeFrameDisplayer(DecorativeFrame arg0) {
         //super(object);
         this.ag = arg0;
-        if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
+        //if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
 
     }
 
@@ -49,7 +49,7 @@ class DecorativeFrameDisplayer extends DecorativeGeometryDisplayer {
         return ag.getBodyId();
     }
     int getIndexOnBody() {
-        return ag.getIndexOnBody();
+        return 0;//ag.getIndexOnBody();
     }
    
 }

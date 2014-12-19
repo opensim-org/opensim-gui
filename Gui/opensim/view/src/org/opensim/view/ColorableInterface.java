@@ -10,8 +10,8 @@
 package org.opensim.view;
 
 import java.awt.Color;
-import org.opensim.modeling.DisplayGeometry;
-import org.opensim.modeling.DisplayGeometry.DisplayPreference;
+import org.opensim.modeling.Geometry;
+import org.opensim.modeling.Geometry.Representation;
 
 /**
  *
@@ -22,8 +22,8 @@ public interface ColorableInterface {
 
     void setColor(Color newColor);
 
-    DisplayGeometry.DisplayPreference getDisplayPreference();
+    Geometry.Representation getDisplayPreference();
 
-    void setDisplayPreference(DisplayPreference newPref);
+    void setDisplayPreference(Geometry.Representation newPref);
     
 }

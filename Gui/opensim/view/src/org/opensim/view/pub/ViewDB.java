@@ -53,7 +53,7 @@ import org.openide.util.lookup.AbstractLookup;
 import org.openide.util.lookup.InstanceContent;
 import org.opensim.modeling.*;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
-import org.opensim.modeling.DisplayGeometry.DisplayPreference;
+import org.opensim.modeling.Geometry.Representation;
 import org.opensim.utils.Prefs;
 import org.opensim.utils.TheApp;
 import org.opensim.view.*;
@@ -635,10 +635,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
 
       if( object instanceof Body )
          return ((BodyDisplayer)asm).GetColorOrReturnNull();
-      else if( object instanceof DisplayGeometry )
+      else if( object instanceof Geometry )
       {
          double[] colorToReturn = {-1, -1, -1};
-         ((DisplayGeometry)object).getColor( colorToReturn );
+         Vec3 vecColorToReturn =((Geometry)object).getColor();
+         for (int i=0; i<3; i++) colorToReturn[i]=vecColorToReturn.get(i);
          return colorToReturn;
       }
       return null;
@@ -725,8 +726,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       ViewDB.applyOpacity( newOpacity, asm );
       if( asm instanceof BodyDisplayer )
           ((BodyDisplayer) asm).setOpacity(newOpacity);
-      else if (object instanceof DisplayGeometry)
-          ((DisplayGeometry)object).setOpacity(newOpacity);
+      else if (object instanceof Geometry)
+          ((Geometry)object).setOpacity(newOpacity);
    }
    
    //-----------------------------------------------------------------------------
@@ -1180,6 +1181,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       // do not repaint the windows or update any geometry because
       // this is now handled by the functions that call toggleObjectDisplay().
       //System.out.println("Toggle object "+openSimObject.getName()+" "+ (visible?"On":"Off"));
+       /*
       VisibleObject vo = openSimObject.getDisplayer();
       if (vo != null) {
          DisplayPreference dp = vo.getDisplayPreference();
@@ -1188,8 +1190,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
          else
             vo.setDisplayPreference(DisplayPreference.None);
       }
-      else if (openSimObject instanceof DisplayGeometry){
-          ((DisplayGeometry)openSimObject).setDisplayPreference(visible? DisplayPreference.GouraudShaded:
+      else if (openSimObject instanceof Geometry){
+          ((Geometry)openSimObject).setDisplayPreference(visible? DisplayPreference.GouraudShaded:
               DisplayPreference.None); // TODO: assumes gouraud is the default
          
       }
@@ -1231,6 +1233,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             actor.SetVisibility(vtkVisible);
             actor.SetPickable(vtkVisible);
          }});
+       */
    }
    /**
     * Return a flag indicating if an object is displayed or not
@@ -1238,6 +1241,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    public static int getDisplayStatus(OpenSimObject openSimObject) {
       int visible = 0;
       ObjectGroup group = ObjectGroup.safeDownCast(openSimObject);
+      
+      /*
       if (group != null) {
          boolean foundHidden = false;
          boolean foundShown = false;
@@ -1277,6 +1282,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                visible = 1;
          }
       }
+      */
       return visible;
    }
    /**
@@ -1294,17 +1300,17 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     */
    public static void setObjectRepresentation(final OpenSimObject object, final int rep, final int newShading) {
       // Set new rep in model so that it's persistent.'
-      DisplayGeometry.DisplayPreference newPref = DisplayGeometry.DisplayPreference.GouraudShaded;
-      if (rep==1)  newPref = DisplayGeometry.DisplayPreference.WireFrame;
-      else if (rep==2 && newShading==0 ) newPref = DisplayGeometry.DisplayPreference.FlatShaded;
+      Geometry.Representation newPref = Geometry.Representation.DrawSurface;
+      if (rep==1)  newPref = Geometry.Representation.DrawWireframe;
+      /*
       if (object.getDisplayer()!=null){
-        final DisplayGeometry.DisplayPreference oldPref = object.getDisplayer().getDisplayPreference();
-        final DisplayGeometry.DisplayPreference finalNewPref = newPref;
+        final Geometry.DisplayPreference oldPref = object.getDisplayer().getDisplayPreference();
+        final Geometry.DisplayPreference finalNewPref = newPref;
         object.getDisplayer().setDisplayPreference(newPref);
       }
-      else if (object instanceof DisplayGeometry)
-          ((DisplayGeometry)object).setDisplayPreference(newPref);
-            
+      else if (object instanceof Geometry)
+          ((Geometry)object).setDisplayPreference(newPref);
+            */
       vtkProp3D asm = ViewDB.getInstance().getVtkRepForObject(object);
       ApplyFunctionToActors(asm, new ActorFunctionApplier() {
          public void apply(vtkActor actor) {
@@ -1832,7 +1838,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                }
                else {   // Other forces
                     if (!newState){ // turn on
-                        f.getDisplayer().setDisplayPreference(DisplayPreference.GouraudShaded);
+                        //f.getDisplayer().setDisplayPreference(DisplayPreference.GouraudShaded);
                         getModelVisuals(ev.getModel()).upateDisplay(f);
                     }
                     else {  // turning off

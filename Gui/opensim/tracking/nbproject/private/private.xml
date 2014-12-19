@@ -6,4 +6,20 @@
             <line>97</line>
         </file>
     </editor-bookmarks>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0">
+        <file>
+            <url>src/org/opensim/tracking/WorkflowWizardIterator.java</url>
+            <bookmark id="0">
+                <name/>
+                <line>97</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/tracking/src/org/opensim/tracking/ScaleToolModel.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/tracking/src/org/opensim/tracking/ScaleToolPanel.java</file>
+        </group>
+    </open-files>
 </project-private>

@@ -45,7 +45,7 @@ public class DecorativeMeshFileDisplayer extends DecorativeGeometryDisplayer {
             String modelFilePath) {
         this.ag = ag;
         this.modelFilePath = modelFilePath;
-        if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
+        //if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
      }
 
     /**
@@ -93,7 +93,7 @@ public class DecorativeMeshFileDisplayer extends DecorativeGeometryDisplayer {
         return ag.getBodyId();
     }
     int getIndexOnBody() {
-        return ag.getIndexOnBody();
+        return 0;//ag.getIndexOnBody();
     }
 
 }

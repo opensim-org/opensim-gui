@@ -38,8 +38,8 @@ public final class BodyToggleCOMAction extends BooleanStateAction {
    //-------------------------------------------------------------------------
    public static boolean  IsShowCMForBody( OpenSimObject openSimObjectAssociatedWithBody )
    {
-      BodyDisplayer rep = BodyToggleFrameAction.GetBodyDisplayerForBody( openSimObjectAssociatedWithBody );  
-      return rep==null ? false : rep.isShowCOM();
+      //BodyDisplayer rep = BodyToggleFrameAction.GetBodyDisplayerForBody( openSimObjectAssociatedWithBody );  
+      return false;//rep==null ? false : rep.isShowCOM();
    }
     
     
@@ -54,12 +54,14 @@ public final class BodyToggleCOMAction extends BooleanStateAction {
    //-------------------------------------------------------------------------
    public static void  ShowCMForBody( OpenSimObject openSimObjectAssociatedWithBody, boolean showCMIsTrueHideIsFalse, boolean renderAll )
    {
+     /*
       BodyDisplayer rep = BodyToggleFrameAction.GetBodyDisplayerForBody( openSimObjectAssociatedWithBody );
       if( rep != null )
       {
           rep.setShowCOM( showCMIsTrueHideIsFalse ); 
           if( renderAll ) ViewDB.renderAll();
-      }     
+      }    
+      */
    }
     
     
@@ -87,7 +89,7 @@ public final class BodyToggleCOMAction extends BooleanStateAction {
         // Action shouldn't be available otherwise
         if( selected[0] instanceof OneBodyNode ){
             OneBodyNode dNode = (OneBodyNode)selected[0];
-            BodyDisplayer rep = BodyToggleFrameAction.GetBodyDisplayerForBody( dNode.getOpenSimObject() );
+            BodyDisplayer rep = null;//BodyToggleFrameAction.GetBodyDisplayerForBody( dNode.getOpenSimObject() );
             if( rep != null ) super.setBooleanState( rep.isShowCOM() );
             return true;
         }

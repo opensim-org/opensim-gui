@@ -665,7 +665,7 @@ public class MotionDisplayer implements SelectionListener {
       OpenSimContext context = OpenSimDB.getInstance().getContext(model);
 
       if(statesFile) {
-         context.setStates(states);
+         //context.setStates(states);
       } else {
          boolean realize=false;
          int which=-1;
@@ -685,7 +685,7 @@ public class MotionDisplayer implements SelectionListener {
             }
          }
          // update states to make sure constraints are valid
-         context.getStates(statesBuffer);
+         //context.getStates(statesBuffer);
          //OpenSim20 model.getDynamicsEngine().computeConstrainedCoordinates(statesBuffer);
          // Any other states including muscles
          for(int i=0; i<anyStateColumns.size(); i++) {
@@ -696,7 +696,7 @@ public class MotionDisplayer implements SelectionListener {
               int bufferIndex = ((Integer)o).intValue();
               statesBuffer[bufferIndex]=newValue;
          }
-         context.setStates(statesBuffer);
+         //context.setStates(statesBuffer);
          
          for(int i=0; i<segmentMarkerColumns.size(); i++) {
             int markerIndex = ((Integer)(segmentMarkerColumns.get(i).object)).intValue();

@@ -35,8 +35,9 @@ import java.beans.PropertyChangeSupport;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
-import org.opensim.modeling.DisplayGeometry;
-import org.opensim.utils.Vec3;
+import org.opensim.modeling.Geometry;
+import org.opensim.modeling.Mesh;
+import org.opensim.modeling.Vec3;
 import org.opensim.view.pub.GeometryFileLocator;
 import org.opensim.view.pub.ViewDB;
 import vtk.vtkActor;
@@ -56,18 +57,22 @@ import vtk.vtkTransform;
 public class DisplayGeometryDisplayer extends vtkActor 
 //        implements ColorableInterface, HidableInterface
 {
-    DisplayGeometry displayGeometry;
+    Geometry displayGeometry;
     private Color color=Color.WHITE;    // Property
     String modelFilePath;
     //private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
     /**
      * Creates a new instance of BodyDisplayer
      */
-    public DisplayGeometryDisplayer(DisplayGeometry displayGeometry, String modelFilePath) {
+    public DisplayGeometryDisplayer(Geometry displayGeometry, String modelFilePath) {
         this.displayGeometry = displayGeometry;
         this.modelFilePath=modelFilePath;
-        String boneFile = GeometryFileLocator.getInstance().getFullname(modelFilePath,displayGeometry.getGeometryFile(), false);
-        GeometryFactory.populatePolyDatarFromFile(boneFile, this);
+        Mesh msh = Mesh.safeDownCast(displayGeometry);
+        if (msh !=null){
+            String fileName = msh.getGeometryFilename();
+            String boneFile = GeometryFileLocator.getInstance().getFullname(modelFilePath,fileName, false);
+            GeometryFactory.populatePolyDatarFromFile(boneFile, this);
+        }
         applyAttributesAndTransformToActor();        
     }
     
@@ -111,6 +116,7 @@ public class DisplayGeometryDisplayer extends vtkActor
            public void undo() throws CannotUndoException {
                super.undo();
                ViewDB.getInstance().applyColor(oldColorCompDbl, DisplayGeometryDisplayer.this, false);
+               for (int i=0; i<3; i++) 
                displayGeometry.setColor(oldColorCompDbl);
                assignColor(oldColorCompDbl);
                ExplorerTopComponent.getDefault().requestActive();
@@ -141,6 +147,7 @@ public class DisplayGeometryDisplayer extends vtkActor
     
     public void applyAttributesAndTransformToActor() {        
         // Apply texture if any
+        /*
         String textureFile = displayGeometry.getTextureFile();
         if (textureFile!=null && !textureFile.equalsIgnoreCase("")){
             // Get full path
@@ -169,10 +176,11 @@ public class DisplayGeometryDisplayer extends vtkActor
                 SetTexture(texture);
             }
             }
-        } else { // We assume if there's texture then it includes color as well, otherwise we read it in'
+        } else */
+        { // We assume if there's texture then it includes color as well, otherwise we read it in'
             // Color
             double[] dColor = new double[]{1., 1., 1.};
-            displayGeometry.getColor(dColor);
+            Vec3 clr = displayGeometry.getColor();
             GetProperty().SetColor(dColor);
             color = new Color((float)dColor[0], (float)dColor[1], (float)dColor[2]);
         }
@@ -180,11 +188,11 @@ public class DisplayGeometryDisplayer extends vtkActor
          * Scale
          */
         double[] scales = new double[]{1., 1., 1.};
-        displayGeometry.getScaleFactors(scales);
-        SetScale(scales);
+        Vec3 sf = displayGeometry.get_scale_factors();
+        SetScale(sf.get(0), sf.get(1), sf.get(2));
         // Transform
         double[] rotationsAndTranslations = new double[6];
-        displayGeometry.getRotationsAndTranslationsAsArray6(rotationsAndTranslations);
+        //displayGeometry.getRotationsAndTranslationsAsArray6(rotationsAndTranslations);
         vtkTransform xform = new vtkTransform();
         BodyDisplayer.setTransformFromArray6(rotationsAndTranslations, xform);
         SetUserTransform(xform);
@@ -200,7 +208,7 @@ public class DisplayGeometryDisplayer extends vtkActor
         
     public void applyDisplayPreferenceToActor() {
         
-        switch(displayGeometry.getDisplayPreference().swigValue()) {
+        switch(displayGeometry.getRepresentation().swigValue()) {
             case 0:
                 SetVisibility(0);
                 break;
@@ -222,10 +230,6 @@ public class DisplayGeometryDisplayer extends vtkActor
         }
     }
     
-    public void setColor(double[] colorComponents) {
-        displayGeometry.setColor(colorComponents);
-    }
-    
     public void setOpacity(double newOpacity) {
         displayGeometry.setOpacity(newOpacity);
     }
@@ -234,16 +238,16 @@ public class DisplayGeometryDisplayer extends vtkActor
         return displayGeometry.getOpacity();
     }
 
-    public DisplayGeometry.DisplayPreference getDisplayPreference() {
-        return displayGeometry.getDisplayPreference();
+    public Geometry.Representation getDisplayPreference() {
+        return displayGeometry.getRepresentation();
     }
 
-    public void setDisplayPreference(DisplayGeometry.DisplayPreference newPref) {
+    public void setDisplayPreference(Geometry.Representation newPref) {
         setDisplayPreferenceGUI(newPref, true);
     }
-    public void setDisplayPreferenceGUI(final DisplayGeometry.DisplayPreference newPref, boolean allowUndo) {
+    public void setDisplayPreferenceGUI(final Geometry.Representation newPref, boolean allowUndo) {
         if (allowUndo){
-            final DisplayGeometry.DisplayPreference oldPref = displayGeometry.getDisplayPreference();
+            final Geometry.Representation oldPref = displayGeometry.getRepresentation();
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
                public boolean canUndo() {
                    return true;
@@ -270,7 +274,7 @@ public class DisplayGeometryDisplayer extends vtkActor
            };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }
-        displayGeometry.setDisplayPreference(newPref);
+        displayGeometry.setRepresentation(newPref);
         applyDisplayPreferenceToActor();
         Modified();
         ViewDB.getInstance().renderAll();
@@ -281,11 +285,11 @@ public class DisplayGeometryDisplayer extends vtkActor
     }
     public void setLocationGUI(final Vec3 loc, boolean allowUndo){
         double[] rotationsAndTranslations = new double[6];
-        displayGeometry.getRotationsAndTranslationsAsArray6(rotationsAndTranslations);
+        //displayGeometry.getRotationsAndTranslationsAsArray6(rotationsAndTranslations);
         final Vec3 oldLoc = new Vec3(rotationsAndTranslations[3], 
         rotationsAndTranslations[4], rotationsAndTranslations[5]);
         for(int i=0; i<3;i++) rotationsAndTranslations[i+3]=loc.get(i);
-        displayGeometry.setRotationsAndTRanslations(rotationsAndTranslations);
+        //displayGeometry.setRotationsAndTRanslations(rotationsAndTranslations);
         vtkTransform xform = new vtkTransform();
         BodyDisplayer.setTransformFromArray6(rotationsAndTranslations, xform);
         SetUserTransform(xform);
@@ -321,14 +325,14 @@ public class DisplayGeometryDisplayer extends vtkActor
     }
     public Vec3 getLocation() {
         double[] rotationsAndTranslations = new double[6];
-        displayGeometry.getRotationsAndTranslationsAsArray6(rotationsAndTranslations);
+        //displayGeometry.getRotationsAndTranslationsAsArray6(rotationsAndTranslations);
         return new Vec3(rotationsAndTranslations[3], rotationsAndTranslations[4], rotationsAndTranslations[5]);
     }
     public void setOrientation(Vec3 loc){
         double[] rotationsAndTranslations = new double[6];
-        displayGeometry.getRotationsAndTranslationsAsArray6(rotationsAndTranslations);
+        //displayGeometry.getRotationsAndTranslationsAsArray6(rotationsAndTranslations);
         for(int i=0; i<3;i++) rotationsAndTranslations[i]=Math.toRadians(loc.get(i));
-        displayGeometry.setRotationsAndTRanslations(rotationsAndTranslations);
+        //displayGeometry.setRotationsAndTRanslations(rotationsAndTranslations);
         vtkTransform xform = new vtkTransform();
         BodyDisplayer.setTransformFromArray6(rotationsAndTranslations, xform);
         SetUserTransform(xform);
@@ -337,7 +341,7 @@ public class DisplayGeometryDisplayer extends vtkActor
     }
     public Vec3 getOrientation() {
         double[] rotationsAndTranslations = new double[6];
-        displayGeometry.getRotationsAndTranslationsAsArray6(rotationsAndTranslations);
+        //displayGeometry.getRotationsAndTranslationsAsArray6(rotationsAndTranslations);
         for(int i=0; i<3; i++) rotationsAndTranslations[i]=Math.toDegrees(rotationsAndTranslations[i]);
         return new Vec3(rotationsAndTranslations[0], rotationsAndTranslations[1], rotationsAndTranslations[2]);
     }

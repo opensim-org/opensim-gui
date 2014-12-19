@@ -36,11 +36,9 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.prefs.Preferences;
 import org.opensim.modeling.Body;
-import org.opensim.modeling.DisplayGeometry;
-import org.opensim.modeling.GeometrySet;
+import org.opensim.modeling.Geometry;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.Vec3;
-import org.opensim.modeling.VisibleObject;
 import org.opensim.utils.TheApp;
 import org.opensim.view.pub.GeometryFileLocator;
 import org.opensim.view.pub.ViewDB;
@@ -118,7 +116,7 @@ public class BodyDisplayer extends vtkAssembly
       this.SetCMToGreenSphereWhoseSizeDependsOnMarkerRadius();
 
       //jointBFrame.GetProperty().SetLineStipplePattern(1);
-      VisibleObject bodyVisibleObject = body.getDisplayer();
+      //VisibleObject bodyVisibleObject = body.getDisplayer();
 
       // Also optionally add outlineActor to this
       outlineActor.SetMapper(outlineMapper);
@@ -129,7 +127,7 @@ public class BodyDisplayer extends vtkAssembly
       // For each bone in the current body.
       for (int k = 0; k < bodyVisibleObject.getNumGeometryFiles(); ++k) {
           GeometrySet gSet = bodyVisibleObject.getGeometrySet();
-          DisplayGeometry gPiece = gSet.get(k);
+          Geometry gPiece = gSet.get(k);
           // Make sure we have a valid geometry before creating DisplayGeometryDisplayer
           String fullFileName = GeometryFileLocator.getInstance().getFullname(modelFilePath,gPiece.getGeometryFile(), false);
           if (fullFileName==null) continue;
@@ -177,21 +175,6 @@ public class BodyDisplayer extends vtkAssembly
       modelAssembly.AddPart(this);
     }
 
-    private void applyVisibleObjectScaleAndTransform(VisibleObject bodyVisibleObject, vtkProp3D vtkObjectToTransform) {
-        // Scale
-        double[] bodyScales = new double[3];
-        bodyVisibleObject.getScaleFactors(bodyScales);
-        double[] bodyRotTrans = new double[6];
-        bodyVisibleObject.getRotationsAndTranslationsAsArray6(bodyRotTrans);
-         /*
-          * Scale
-          */
-         vtkObjectToTransform.SetScale(bodyScales);
-         // Transform
-         vtkTransform xform = new vtkTransform();
-         setTransformFromArray6(bodyRotTrans, xform);
-         vtkObjectToTransform.SetUserTransform(xform);
-    }
 
     public void applyPositionAndOrientation(FrameActor frame, Vec3 orientation, Vec3 location) {
         frame.SetOrientation(0., 0., 0.);
@@ -216,60 +199,19 @@ public class BodyDisplayer extends vtkAssembly
             AddPart(getBodyAxes());
         }
         this.showAxes = showAxes;
-        body.getDisplayer().setShowAxes(showAxes);
+        //body.getDisplayer().setShowAxes(showAxes);
     }
 
     public boolean isShowJointBFrame() {
         return showJointBFrame;
     }
 
-    public void setShowJointBFrame(boolean showJointBFrame) {
-        this.showJointBFrame = showJointBFrame;
-        // if turning On, add jointBFrame Part, else remove it
-        if (showJointBFrame==false){
-            RemovePart(jointBFrame);
-        }
-        else {
-            if (!body.hasJoint()) return;
-            Vec3 location = body.getJoint().getLocationInChild();
-            Vec3 orientation = new Vec3();
-            body.getJoint().getOrientation(orientation);
-            for (int i=0; i<3; i++) orientation.set(i, Math.toDegrees(orientation.get(i)));
-            applyPositionAndOrientation(jointBFrame, orientation, location);
-            AddPart(jointBFrame);
-            Modified();
-        }
-    }
-
-    public void setShowJointPFrame(Body body, boolean state){
-        if (state){
-            FrameActor jointPFrame = new FrameActor();
-            String defaultSize = "1.0";
-            defaultSize = Preferences.userNodeForPackage(TheApp.class).get("Joint Frame Scale", defaultSize);
-            double userScale = Double.parseDouble(defaultSize);
-            jointPFrame.SetScale(pFrameScale*userScale); //.2
-            jointPFrame.setRadius(pFrameRadius*userScale); //.02
-            updateJointPFrame(body, jointPFrame);
-            //jointPFrame.SetOrientation(orientation);
-            jointPFrame.GetProperty().SetOpacity(0.75);
-            jointPFrame.GetProperty().SetLineStipplePattern(2);
-            AddPart(jointPFrame);
-            Modified();
-            mapChildren2Frames.put(body, jointPFrame);
-        } else {  // Removing
-            FrameActor jointPFrame = mapChildren2Frames.get(body);
-            RemovePart(jointPFrame);
-            Modified();
-            mapChildren2Frames.remove(body);
-        }
-    }
-
     private void updateJointPFrame(Body body, FrameActor jointPFrame) {
         Vec3 location = new Vec3();
         Vec3 orientation = new Vec3();
-        body.getJoint().getLocationInParent(location);
+        //body.getJoint().getLocationInParent(location);
         //jointPFrame.SetPosition(location);
-        body.getJoint().getOrientationInParent(orientation);
+        //body.getJoint().getOrientationInParent(orientation);
         for (int i=0; i<3; i++) orientation.set(i,Math.toDegrees(orientation.get(i)));
         applyPositionAndOrientation(jointPFrame, orientation, location);
     }
@@ -311,14 +253,14 @@ public class BodyDisplayer extends vtkAssembly
         return color;
     }
 
-    private void applyAttributesToActor(vtkActor boneActor, DisplayGeometry gPiece) {
+    private void applyAttributesToActor(vtkActor boneActor, Geometry gPiece) {
         if (boneActor==null) return;    // Nothing to be done
         
         // Apply texture if any
-        String textureFile = gPiece.getTextureFile();
+        String textureFile = gPiece.get_Appearance().get_texture_file();
         if (textureFile!=null && !textureFile.equalsIgnoreCase("")){
             // Get full path
-            textureFile = GeometryFileLocator.getInstance().getFullname(modelFilePath,gPiece.getTextureFile(), false);
+            textureFile = GeometryFileLocator.getInstance().getFullname(modelFilePath,gPiece.get_Appearance().get_texture_file(), false);
             vtkTexture texture = new vtkTexture();
             vtkImageReader2 textureReader=null;
             if (textureFile.toLowerCase().endsWith(".bmp")){
@@ -345,26 +287,24 @@ public class BodyDisplayer extends vtkAssembly
         }
         else { // We assume if there's texture then it includes color as well, otherwise we read it in'
             // Color
-            double[] dColor = new double[]{1., 1., 1.};
-            gPiece.getColor(dColor);
-            boneActor.GetProperty().SetColor(dColor);
+            Vec3 dColor = gPiece.getColor();
+            boneActor.GetProperty().SetColor(dColor.get(0), dColor.get(1), dColor.get(2));
         }
         // Transform
         double[] rotationsAndTranslations = new double[6];
-        gPiece.getRotationsAndTranslationsAsArray6(rotationsAndTranslations);
+        //gPiece.getRotationsAndTranslationsAsArray6(rotationsAndTranslations);
         vtkTransform xform = new vtkTransform();
         setTransformFromArray6(rotationsAndTranslations, xform);
         boneActor.SetUserTransform(xform);
         /*
          * Scale
          */
-        double[] scales = new double[]{1., 1., 1.};
-        gPiece.getScaleFactors(scales);
-        boneActor.SetScale(scales);
+        Vec3 scales = gPiece.get_scale_factors();
+        boneActor.SetScale(scales.get(0), scales.get(1), scales.get(2));
         /**
          * Representation
          */
-        DisplayGeometry.DisplayPreference pref=gPiece.getDisplayPreference();
+        Geometry.Representation pref=gPiece.getRepresentation();
         applyDisplayPreferenceToActor(boneActor, pref);
         /**
          * Opacity
@@ -381,7 +321,7 @@ public class BodyDisplayer extends vtkAssembly
         xform.Translate(rotationsAndTranslations[3], rotationsAndTranslations[4], rotationsAndTranslations[5]);
     }
 
-    protected void applyDisplayPreferenceToActor(final vtkActor boneActor, final DisplayGeometry.DisplayPreference pref) {
+    protected void applyDisplayPreferenceToActor(final vtkActor boneActor, final Geometry.Representation pref) {
         switch(pref.swigValue()) {
             case 0:
                 boneActor.SetVisibility(0);
@@ -407,7 +347,7 @@ public class BodyDisplayer extends vtkAssembly
       // For each bone in the current body.
       GeometrySet gSet = bodyVisibleObject.getGeometrySet();
       for (int k = 0; k < gSet.getSize(); ++k) {
-          DisplayGeometry gPiece = gSet.get(k);
+          Geometry gPiece = gSet.get(k);
           gPiece.setColor(colorComponents);
       }
     }
@@ -421,7 +361,7 @@ public class BodyDisplayer extends vtkAssembly
        int numberOfPieces = bodyDisplayerGeometrySet==null ? 0 : bodyDisplayerGeometrySet.getSize();
        for( int i=0;  i < numberOfPieces;  i++) 
        {
-          DisplayGeometry gi = bodyDisplayerGeometrySet.get( i );
+          Geometry gi = bodyDisplayerGeometrySet.get( i );
           double[] colorOfCurrentPiece = {-1, -1, -1 };
           gi.getColor( colorOfCurrentPiece );
           for( int j=0;  j<3;  j++ ) { if( colorOfCurrentPiece[i] < 0 || colorOfCurrentPiece[i] > 1 ) return null; }
@@ -436,16 +376,16 @@ public class BodyDisplayer extends vtkAssembly
       // For each bone in the current body.
       GeometrySet gSet = bodyVisibleObject.getGeometrySet();
       for (int k = 0; k < gSet.getSize(); ++k) {
-          DisplayGeometry gPiece = gSet.get(k);
+          Geometry gPiece = gSet.get(k);
           gPiece.setOpacity(newOpacity);
       }
     }
     
-     public DisplayGeometry.DisplayPreference getDisplayPreference() {
+     public Geometry.Representation getDisplayPreference() {
          return body.getDisplayer().getDisplayPreference();
      }
 
-    public void setDisplayPreference(DisplayGeometry.DisplayPreference newPref) {
+    public void setDisplayPreference(Geometry.Representation newPref) {
         body.getDisplayer().setDisplayPreference(newPref);
     }
 
@@ -453,7 +393,7 @@ public class BodyDisplayer extends vtkAssembly
       VisibleObject bodyVisibleObject = body.getDisplayer();
       GeometrySet gSet = bodyVisibleObject.getGeometrySet();
       for (int k = 0; k < gSet.getSize(); ++k) {
-          DisplayGeometry gPiece = gSet.get(k);
+          Geometry gPiece = gSet.get(k);
           double[] colorOnFile = new double[3];
           gPiece.getColor(colorOnFile);
           //gPiece.setColor(colorOnFile);
@@ -602,7 +542,7 @@ public class BodyDisplayer extends vtkAssembly
        GeometrySet gSet = bodyVisibleObject.getGeometrySet();
         // Cycle thru GeometrySet and apply preferences
        for(int i=0; i<gSet.getSize(); i++) {
-           DisplayGeometry gPiece=gSet.get(i);
+           Geometry gPiece=gSet.get(i);
            DisplayGeometryDisplayer gActor = (DisplayGeometryDisplayer) mapGeometryToVtkObjects.get(gPiece);
            if (gActor==null) continue;
            gActor.applyDisplayPreferenceToActor();
@@ -618,10 +558,6 @@ public class BodyDisplayer extends vtkAssembly
         applyColorsFromModel();
         applyDisplayPreferences();
         // update Joint frames
-        if (showJointBFrame){
-            setShowJointBFrame(false);
-            setShowJointBFrame(true); // This recomputes frame locations
-        }
         Enumeration<Body> childBodies = mapChildren2Frames.keys();
         while(childBodies.hasMoreElements()){
             Body child = childBodies.nextElement();

@@ -28,12 +28,14 @@ public final class JointToggleChildFrameAction extends BooleanStateAction {
             if (selectedNode instanceof OneJointNode){
                 OpenSimObject object=((OneJointNode) selectedNode).getOpenSimObject();
                 Joint jnt = Joint.safeDownCast(object);
+                /*
                 Body b = jnt.getBody();
                 vtkProp3D visuals=ViewDB.getInstance().getModelVisuals(b.getModel()).getVtkRepForObject(b);
                 if (visuals instanceof BodyDisplayer){
                     BodyDisplayer rep = (BodyDisplayer) visuals;
                     rep.setShowJointBFrame(newState);
                 }
+                */
             }
         }
          setBooleanState(newState);
@@ -65,7 +67,7 @@ public final class JointToggleChildFrameAction extends BooleanStateAction {
         if (selected[0] instanceof OneJointNode){
             OneJointNode dNode = (OneJointNode)selected[0];
             Joint jnt = Joint.safeDownCast(dNode.getOpenSimObject());
-            Body b = jnt.getBody();
+            Body b = jnt.getChildBody();
             vtkProp3D visuals=ViewDB.getInstance().getModelVisuals(b.getModel()).getVtkRepForObject(b);
             if (visuals instanceof BodyDisplayer){
                BodyDisplayer rep = (BodyDisplayer) visuals;

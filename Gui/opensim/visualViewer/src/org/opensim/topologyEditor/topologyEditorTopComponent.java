@@ -31,7 +31,7 @@ import org.openide.awt.ActionReference;
 import org.openide.util.Lookup;
 import org.openide.util.LookupListener;
 import org.opensim.modeling.Body;
-import org.opensim.modeling.BodySet;
+import org.opensim.modeling.JointSet;
 import org.opensim.modeling.Joint;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
@@ -135,29 +135,26 @@ public final class topologyEditorTopComponent extends TopComponent implements Ob
         scene.getActions().addAction (editAction);
         currentModel = OpenSimDB.getInstance().getCurrentModel();
         if (currentModel == null) return;
-        BodySet bods = currentModel.getBodySet();
-        int numBodies = bods.getSize();
-        for (int b=0; b<numBodies; b++ ){
-            Body bod = bods.get(b);
+        JointSet jnts = currentModel.getJointSet();
+        int numJoints = jnts.getSize();
+        for (int j=0; j<numJoints; j++ ){
+            Joint jnt = jnts.get(j);
             //LabelWidget bodyWidget= new LabelWidget(scene, "Body:"+bod.getName());
-            Widget bodyWidget = scene.addNode(bod.getName());
+            Widget bodyWidget = scene.addNode(jnt.getChildBodyName());
             //bodyWidget.setPreferredLocation (new Point (b*30, b*50));
             bodyWidget.getActions().addAction (editAction);
-            if(bod.hasJoint()){
-                Joint jnt = bod.getJoint();
-                Widget jntWidget = scene.addNode(jnt.getName());
-                jntWidget.setBorder(ModelGraphScene.getBORDER_0());
-                //String edgeID = bod.getJoint().getName();
-                String jntToParent = bod.getJoint().getParentName() + "_"+jnt.getName();
-                scene.addEdge(jntToParent);
-                scene.setEdgeSource (jntToParent, bod.getJoint().getParentName());
-                scene.setEdgeTarget (jntToParent, jnt.getName());
-                String jntToChild = jnt.getName() + "_"+bod.getName();
-                scene.addEdge(jntToChild);
-                scene.setEdgeSource (jntToChild, jnt.getName());
-                scene.setEdgeTarget (jntToChild, bod.getName());
-            }
-        }
+            Widget jntWidget = scene.addNode(jnt.getName());
+            jntWidget.setBorder(ModelGraphScene.getBORDER_0());
+            //String edgeID = bod.getJoint().getName();
+            String jntToParent = jnt.getParentBodyName()+ "_"+jnt.getName();
+            scene.addEdge(jntToParent);
+            scene.setEdgeSource (jntToParent, jnt.getParentBodyName());
+            scene.setEdgeTarget (jntToParent, jnt.getName());
+            String jntToChild = jnt.getChildBodyName()+ "_"+jnt.getName();
+            scene.addEdge(jntToChild);
+            scene.setEdgeSource (jntToChild, jnt.getName());
+            scene.setEdgeTarget (jntToChild, jnt.getChildBodyName());
+    }
         scene.validate();
         
         

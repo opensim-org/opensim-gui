@@ -50,7 +50,7 @@ public final class BodyToggleFrameAction extends BooleanStateAction {
         if( selected[0] instanceof OneBodyNode ){
             OneBodyNode dNode = (OneBodyNode)selected[0];
             Body b = Body.safeDownCast( dNode.getOpenSimObject() );
-            super.setBooleanState( b.getDisplayer().getShowAxes() );
+//            super.setBooleanState( b.getDisplayer().getShowAxes() );
             return true;
         }
         return false;
@@ -74,8 +74,10 @@ public final class BodyToggleFrameAction extends BooleanStateAction {
     //-------------------------------------------------------------------------
     public static boolean  IsShowAxesForBody( OpenSimObject openSimObjectAssociatedWithBody )
     {
+        return false;
+        /*
        BodyDisplayer rep = BodyToggleFrameAction.GetBodyDisplayerForBody( openSimObjectAssociatedWithBody );  
-       return rep==null ? false : rep.isShowAxes();
+       return rep==null ? false : rep.isShowAxes();*/
     }
     
     
@@ -89,16 +91,18 @@ public final class BodyToggleFrameAction extends BooleanStateAction {
     //-------------------------------------------------------------------------
     public static void  ShowAxesForBody( OpenSimObject openSimObjectAssociatedWithBody, boolean showAxesTrueHideIsFalse, boolean renderAll )
     {
+        /*
        BodyDisplayer rep = BodyToggleFrameAction.GetBodyDisplayerForBody( openSimObjectAssociatedWithBody );
        if( rep != null )
        {
            rep.setShowAxes( showAxesTrueHideIsFalse );
            if( renderAll ) ViewDB.ViewDBGetInstanceRenderAll();
-       }     
+       }    */ 
     }
     
     
     //-------------------------------------------------------------------------
+    /*
     public static BodyDisplayer  GetBodyDisplayerForBody( OpenSimObject openSimObjectAssociatedWithBody )
     {
        Body b = Body.safeDownCast( openSimObjectAssociatedWithBody );
@@ -107,5 +111,5 @@ public final class BodyToggleFrameAction extends BooleanStateAction {
        vtkProp3D visuals = viz.getVtkRepForObject(b);
        return ( visuals instanceof BodyDisplayer ) ? (BodyDisplayer)visuals : null;
     }
-    
+    */
 }

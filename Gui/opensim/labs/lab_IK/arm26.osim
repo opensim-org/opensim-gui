@@ -1467,7 +1467,7 @@
 						    .obj-->
 						<GeometrySet name="">
 							<objects>
-								<DisplayGeometry name="">
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> ground_ribs.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -1483,8 +1483,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> ground_spine.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -1500,8 +1500,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> ground_skull.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -1517,8 +1517,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> ground_jaw.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -1534,8 +1534,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> ground_r_clavicle.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -1551,8 +1551,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> ground_r_scapula.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -1568,8 +1568,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> junk.wrl </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -1585,7 +1585,7 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups/>
 						</GeometrySet>
@@ -1733,7 +1733,7 @@
 						    .obj-->
 						<GeometrySet name="">
 							<objects>
-								<DisplayGeometry name="">
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_humerus.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -1749,7 +1749,7 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups/>
 						</GeometrySet>
@@ -1947,7 +1947,7 @@
 						    .obj-->
 						<GeometrySet name="">
 							<objects>
-								<DisplayGeometry name="">
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_ulna.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -1963,8 +1963,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_radius.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -1980,8 +1980,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_lunate.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -1997,8 +1997,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_scaphoid.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2014,8 +2014,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_pisiform.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2031,8 +2031,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_triquetrum.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2048,8 +2048,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_capitate.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2065,8 +2065,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_trapezium.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2082,8 +2082,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_trapezoid.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2099,8 +2099,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_hamate.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2116,8 +2116,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_1mc.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2133,8 +2133,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_2mc.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2150,8 +2150,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_3mc.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2167,8 +2167,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_4mc.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2184,8 +2184,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_5mc.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2201,8 +2201,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_thumbprox.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2218,8 +2218,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_thumbdist.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2235,8 +2235,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_2proxph.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2252,8 +2252,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_2midph.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2269,8 +2269,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_2distph.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2286,8 +2286,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_3proxph.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2303,8 +2303,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_3midph.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2320,8 +2320,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_3distph.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2337,8 +2337,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_4proxph.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2354,8 +2354,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_4midph.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2371,8 +2371,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_4distph.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2388,8 +2388,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_5proxph.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2405,8 +2405,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_5midph.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2422,8 +2422,8 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
-								<DisplayGeometry name="">
+								</Geometry>
+								<Geometry name="">
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file> arm_r_5distph.vtp </geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -2439,7 +2439,7 @@
 									<display_preference> 4 </display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>       1.00000000 </opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups/>
 						</GeometrySet>

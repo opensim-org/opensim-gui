@@ -70,7 +70,7 @@ public class SelectedObject implements Selectable {
    private Model getModel(PathPoint mp) { return mp.getBody().getModel(); }
    private Model getModel(Body body) { return body.getModel(); }
    private Model getModel(WrapObject wrapObj) { return getModel(wrapObj.getBody()); }
-   private Model getModel(Marker marker) { return marker.getBody().getModel(); }
+   private Model getModel(Marker marker) { return marker.getModel(); }
 
    public Model getOwnerModel()
    {

@@ -164,7 +164,7 @@
 						<!--Set of geometry files and associated attributes, allow .vtp, .stl, .obj-->
 						<GeometrySet>
 							<objects>
-								<DisplayGeometry>
+								<Geometry>
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file>sacrum.vtp</geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -179,8 +179,8 @@
 									<display_preference>4</display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>1</opacity>
-								</DisplayGeometry>
-								<DisplayGeometry>
+								</Geometry>
+								<Geometry>
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file>pelvis.vtp</geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -195,8 +195,8 @@
 									<display_preference>4</display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>1</opacity>
-								</DisplayGeometry>
-								<DisplayGeometry>
+								</Geometry>
+								<Geometry>
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file>l_pelvis.vtp</geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -211,7 +211,7 @@
 									<display_preference>4</display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>1</opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups />
 						</GeometrySet>
@@ -352,7 +352,7 @@
 						<!--Set of geometry files and associated attributes, allow .vtp, .stl, .obj-->
 						<GeometrySet>
 							<objects>
-								<DisplayGeometry>
+								<Geometry>
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file>femur_r.vtp</geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -367,7 +367,7 @@
 									<display_preference>4</display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>1</opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups />
 						</GeometrySet>
@@ -540,7 +540,7 @@
 						<!--Set of geometry files and associated attributes, allow .vtp, .stl, .obj-->
 						<GeometrySet>
 							<objects>
-								<DisplayGeometry>
+								<Geometry>
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file>tibia.vtp</geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -555,8 +555,8 @@
 									<display_preference>4</display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>1</opacity>
-								</DisplayGeometry>
-								<DisplayGeometry>
+								</Geometry>
+								<Geometry>
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file>fibula.vtp</geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -571,7 +571,7 @@
 									<display_preference>4</display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>1</opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups />
 						</GeometrySet>
@@ -744,7 +744,7 @@
 						<!--Set of geometry files and associated attributes, allow .vtp, .stl, .obj-->
 						<GeometrySet>
 							<objects>
-								<DisplayGeometry>
+								<Geometry>
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file>pat.vtp</geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -759,7 +759,7 @@
 									<display_preference>4</display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>1</opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups />
 						</GeometrySet>
@@ -900,7 +900,7 @@
 						<!--Set of geometry files and associated attributes, allow .vtp, .stl, .obj-->
 						<GeometrySet>
 							<objects>
-								<DisplayGeometry>
+								<Geometry>
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file>talus.vtp</geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -915,7 +915,7 @@
 									<display_preference>4</display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>1</opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups />
 						</GeometrySet>
@@ -1056,7 +1056,7 @@
 						<!--Set of geometry files and associated attributes, allow .vtp, .stl, .obj-->
 						<GeometrySet>
 							<objects>
-								<DisplayGeometry>
+								<Geometry>
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file>foot.vtp</geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -1071,7 +1071,7 @@
 									<display_preference>4</display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>1</opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups />
 						</GeometrySet>
@@ -1212,7 +1212,7 @@
 						<!--Set of geometry files and associated attributes, allow .vtp, .stl, .obj-->
 						<GeometrySet>
 							<objects>
-								<DisplayGeometry>
+								<Geometry>
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file>bofoot.vtp</geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -1227,7 +1227,7 @@
 									<display_preference>4</display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>1</opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups />
 						</GeometrySet>

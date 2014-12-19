@@ -45,7 +45,7 @@ import org.openide.explorer.propertysheet.ExPropertyEditor;
 import org.openide.explorer.propertysheet.InplaceEditor;
 import org.openide.explorer.propertysheet.PropertyEnv;
 import org.openide.explorer.propertysheet.PropertyModel;
-import org.opensim.modeling.DisplayGeometry;
+import org.opensim.modeling.Geometry;
 
 /**
  *
@@ -110,10 +110,9 @@ public class DisplayPreferenceEditor extends PropertyEditorSupport
     
         private final JComboBox picker = new JComboBox();
         private PropertyEditor editor = null;
-        private DisplayGeometry.DisplayPreference[] options = new DisplayGeometry.DisplayPreference[]{
-            DisplayGeometry.DisplayPreference.None, DisplayGeometry.DisplayPreference.WireFrame,
-            DisplayGeometry.DisplayPreference.SolidFill, DisplayGeometry.DisplayPreference.FlatShaded,
-            DisplayGeometry.DisplayPreference.GouraudShaded};
+        private Geometry.Representation[] options = new Geometry.Representation[]{
+            Geometry.Representation.Hide, Geometry.Representation.DrawWireframe,
+            Geometry.Representation.DrawSurface};
         
         public void connect(PropertyEditor propertyEditor, PropertyEnv env) {
             editor = propertyEditor;
@@ -144,7 +143,7 @@ public class DisplayPreferenceEditor extends PropertyEditorSupport
         }
 
         public void reset() {
-            DisplayGeometry.DisplayPreference d = (DisplayGeometry.DisplayPreference) editor.getValue();
+            Geometry.Representation d = (Geometry.Representation) editor.getValue();
             if (d != null) {
                 //picker.setVec3(d);
             }

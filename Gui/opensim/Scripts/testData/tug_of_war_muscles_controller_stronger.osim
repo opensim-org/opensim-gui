@@ -25,7 +25,7 @@
 						<!--Set of geometry files and associated attributes, allow .vtp, .stl, .obj-->
 						<GeometrySet>
 							<objects>
-								<DisplayGeometry>
+								<Geometry>
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file>ground.vtp</geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -40,8 +40,8 @@
 									<display_preference>4</display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>1</opacity>
-								</DisplayGeometry>
-								<DisplayGeometry>
+								</Geometry>
+								<Geometry>
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file>anchor1.vtp</geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -56,8 +56,8 @@
 									<display_preference>4</display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>1</opacity>
-								</DisplayGeometry>
-								<DisplayGeometry>
+								</Geometry>
+								<Geometry>
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file>anchor2.vtp</geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -72,7 +72,7 @@
 									<display_preference>4</display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>1</opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups />
 						</GeometrySet>
@@ -216,7 +216,7 @@
 						<!--Set of geometry files and associated attributes, allow .vtp, .stl, .obj-->
 						<GeometrySet>
 							<objects>
-								<DisplayGeometry>
+								<Geometry>
 									<!--Name of geometry file .vtp, .stl, .obj-->
 									<geometry_file>block.vtp</geometry_file>
 									<!--Color used to display the geometry when visible-->
@@ -231,7 +231,7 @@
 									<display_preference>4</display_preference>
 									<!--Display opacity between 0.0 and 1.0-->
 									<opacity>1</opacity>
-								</DisplayGeometry>
+								</Geometry>
 							</objects>
 							<groups />
 						</GeometrySet>

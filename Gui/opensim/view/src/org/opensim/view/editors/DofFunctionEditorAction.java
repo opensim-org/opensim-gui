@@ -62,7 +62,7 @@ public class DofFunctionEditorAction extends AbstractAction {
 			Function currentFunction = functionEditor.getFunction();
 			Model currentModel = OpenSimDB.getInstance().getCurrentModel();
 			Function newFunction = Function.safeDownCast(funcNode.getOpenSimObject());
-			Model newModel = dof.getJoint().getBody().getModel();
+			Model newModel = dof.getJoint().getModel();
 			if (newFunction != null && Function.getCPtr(newFunction) != Function.getCPtr(currentFunction)) {
 				if (Model.getCPtr(newModel) != Model.getCPtr(currentModel)) {
 					Object[] options = { "OK" };

@@ -218,8 +218,9 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
               getStorage().append(nextResult);
           }
           else {
-          super.getStates(statesBuffer);
               /*
+          super.getStates(statesBuffer);
+              
               if (staticOptimization){
                   StateVector sv = activationStorage.getLastStateVector();
                   ArrayDouble actData = sv.getData();
