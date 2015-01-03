@@ -2215,6 +2215,7 @@ public class opensimModelJNI {
   public final static native long MuscleIterator_get_GeometrySet(long jarg1, MuscleIterator jarg1_, int jarg2);
   public final static native long MuscleIterator_getModel(long jarg1, MuscleIterator jarg1_);
   public final static native int MuscleIterator_getGeometrySize(long jarg1, MuscleIterator jarg1_);
+  public final static native void MuscleIterator_generateDecorations(long jarg1, MuscleIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native void MuscleIterator_addToSystem(long jarg1, MuscleIterator jarg1_, long jarg2);
   public final static native void MuscleIterator_initStateFromProperties(long jarg1, MuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native long MuscleIterator_getSystem(long jarg1, MuscleIterator jarg1_);
@@ -2360,6 +2361,7 @@ public class opensimModelJNI {
   public final static native long ForceIterator_get_GeometrySet(long jarg1, ForceIterator jarg1_, int jarg2);
   public final static native long ForceIterator_getModel(long jarg1, ForceIterator jarg1_);
   public final static native int ForceIterator_getGeometrySize(long jarg1, ForceIterator jarg1_);
+  public final static native void ForceIterator_generateDecorations(long jarg1, ForceIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native void ForceIterator_addToSystem(long jarg1, ForceIterator jarg1_, long jarg2);
   public final static native void ForceIterator_initStateFromProperties(long jarg1, ForceIterator jarg1_, long jarg2, State jarg2_);
   public final static native long ForceIterator_getSystem(long jarg1, ForceIterator jarg1_);
@@ -2582,6 +2584,7 @@ public class opensimModelJNI {
   public final static native long JointIterator_get_GeometrySet(long jarg1, JointIterator jarg1_, int jarg2);
   public final static native long JointIterator_getModel(long jarg1, JointIterator jarg1_);
   public final static native int JointIterator_getGeometrySize(long jarg1, JointIterator jarg1_);
+  public final static native void JointIterator_generateDecorations(long jarg1, JointIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native void JointIterator_addToSystem(long jarg1, JointIterator jarg1_, long jarg2);
   public final static native void JointIterator_initStateFromProperties(long jarg1, JointIterator jarg1_, long jarg2, State jarg2_);
   public final static native long JointIterator_getSystem(long jarg1, JointIterator jarg1_);
@@ -2830,6 +2833,7 @@ public class opensimModelJNI {
   public final static native void Appearance_set_texture_file__SWIG_1(long jarg1, Appearance jarg1_, String jarg2);
   public final static native long new_Appearance();
   public final static native void delete_Appearance(long jarg1);
+  public final static native boolean Appearance_hasTexture(long jarg1, Appearance jarg1_);
   public final static native long Geometry_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void Geometry_assign(long jarg1, Geometry jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String Geometry_getClassName();
@@ -3061,6 +3065,7 @@ public class opensimModelJNI {
   public final static native int ModelComponent_getGeometrySize(long jarg1, ModelComponent jarg1_);
   public final static native void ModelComponent_adoptGeometry(long jarg1, ModelComponent jarg1_, long jarg2, Geometry jarg2_);
   public final static native void ModelComponent_extendFinalizeFromProperties(long jarg1, ModelComponent jarg1_);
+  public final static native void ModelComponent_generateDecorations(long jarg1, ModelComponent jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native long SetModelComponents_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void SetModelComponents_assign(long jarg1, SetModelComponents jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String SetModelComponents_getClassName();

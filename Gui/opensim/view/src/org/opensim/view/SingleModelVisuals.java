@@ -189,7 +189,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
         for(int bodyNum=0; bodyNum<bodies.getSize();  bodyNum++)
         {
             Body body = bodies.get(bodyNum);
-            int id = body.getIndex();
+            int id = body.getMobilizedBodyIndex();
             // Body actor
             BodyDisplayer bodyRep = new BodyDisplayer(modelAssembly, body,
                     mapObject2VtkObjects, mapVtkObjects2Objects);
@@ -261,11 +261,13 @@ public class SingleModelVisuals implements ModelVisualsVtk {
     */
 
    public void updateActuatorGeometry(Actuator act, boolean callUpdateDisplayer) {
-      LineSegmentMuscleDisplayer disp = null;//mapActuator2Displayer.get(act);
+      /*
+       LineSegmentMuscleDisplayer disp = null;//mapActuator2Displayer.get(act);
       if(disp != null) {
          disp.updateGeometry(callUpdateDisplayer);
 
       }
+       */
    }
 
    public void setApplyMuscleColors(boolean enabled) {
@@ -564,24 +566,26 @@ public class SingleModelVisuals implements ModelVisualsVtk {
     }
 
     private void removePathForceGeometry(Force f) {
+        /*
         if (f.getDisplayer()!=null){
             f.getDisplayer().setDisplayPreference(DisplayPreference.None);
             mapPathForces2Displayer.get(f).updateGeometry(false);
-        }
+        }*/
     }
 
     private void removeNonPathForceGeometry(Force f) {
+        /*
         if (f.getDisplayer()!=null){
             f.getDisplayer().setDisplayPreference(DisplayPreference.None);
             mapNoPathForces2Displayer.get(f).updateGeometry();
-        }
+        }*/
     }
 
     public void updateForceGeometry(Force f, boolean visible) {
         if (!visible){  // turning off
             removeGeometry(f);
         }
-        else{
+        else{/*
             if (mapPathForces2Displayer.get(f)!=null){
                 mapPathForces2Displayer.get(f).updateGeometry(true);
                 LineSegmentForceDisplayer disp = mapPathForces2Displayer.get(f);
@@ -589,7 +593,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
             }
             else if (mapNoPathForces2Displayer.get(f)!=null){
                 mapNoPathForces2Displayer.get(f).updateGeometry();
-            }
+            }*/
         }
     }
 
@@ -618,7 +622,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
             currentColoringFunction = defaultColoringFunction;
         else
             currentColoringFunction = mcf;
-        pushColoringFunctionToMuscles();
+        //pushColoringFunctionToMuscles();
     }
 
     private void buildModelComponentList(Model aModel) {

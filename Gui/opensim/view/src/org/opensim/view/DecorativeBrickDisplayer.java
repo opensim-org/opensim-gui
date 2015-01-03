@@ -112,7 +112,7 @@ public class DecorativeBrickDisplayer extends DecorativeGeometryDisplayer {
         vtkPolyData polyData = getPolyData(ag);
         //updatePropertiesForPolyData(polyData);
         createAndConnectMapper(polyData);
-        setXformAndAttributesFromDecorativeGeometry(ag);
+        //setXformAndAttributesFromDecorativeGeometry(ag);
 
     }
 

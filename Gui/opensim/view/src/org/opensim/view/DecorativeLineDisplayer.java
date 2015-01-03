@@ -72,7 +72,7 @@ public class DecorativeLineDisplayer extends DecorativeGeometryDisplayer {
     void updateDisplayFromDecorativeGeometry() {
         vtkPolyData polyData = getPolyData();
         createAndConnectMapper(polyData);
-        setXformAndAttributesFromDecorativeGeometry(agLocal);
+        //setXformAndAttributesFromDecorativeGeometry(agLocal);
     }
 
     @Override
@@ -88,7 +88,6 @@ public class DecorativeLineDisplayer extends DecorativeGeometryDisplayer {
         return indexOnBody;
     }
 
-    @Override
     void copyAttributesFromDecorativeGeometry(DecorativeGeometry arg0) {
         DecorativeLine newLine = (DecorativeLine) arg0;
         setPoint1(newLine.getPoint1());
@@ -96,7 +95,7 @@ public class DecorativeLineDisplayer extends DecorativeGeometryDisplayer {
         line.SetPoint1(getPoint1().get(0),getPoint1().get(1),getPoint1().get(2));
         line.SetPoint2(getPoint2().get(0),getPoint2().get(1),getPoint2().get(2));
         line.Modified();
-        super.copyAttributesFromDecorativeGeometry(arg0);
+        //super.copyAttributesFromDecorativeGeometry(arg0);
     }
 
     /**

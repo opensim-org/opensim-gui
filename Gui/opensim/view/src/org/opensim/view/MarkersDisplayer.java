@@ -58,10 +58,10 @@ public class MarkersDisplayer extends OpenSimvtkGlyphCloud {
       int index = mapMarkers2Glyphs.get(marker).intValue();
       SimbodyEngine de = marker.getModel().getSimbodyEngine();
       Model model =marker.getModel();
-      marker.getOffset(offset);
+      /*marker.getOffset(offset);
       OpenSimContext context=OpenSimDB.getInstance().getContext(model);
       context.transformPosition(marker.getBody(), offset, gOffset);
-      context.transformPosition(marker.getBody(), origin, gOrigin);
+      context.transformPosition(marker.getBody(), origin, gOrigin);*/
       setLocation(index, gOffset);
       setModified();
    }
@@ -83,11 +83,12 @@ public class MarkersDisplayer extends OpenSimvtkGlyphCloud {
          double[] gPos = new double[3];
          double[] origin = {0.0, 0.0, 0.0};
          double[] gOrigin = new double[3];
+         /*
          Body body = marker.getBody();
          marker.getOffset(pos);
          OpenSimContext context=OpenSimDB.getInstance().getContext(body.getModel());
          context.transformPosition(body, origin, gOrigin);
-         context.transformPosition(body, pos, gPos);
+         context.transformPosition(body, pos, gPos);*/
          //markerLine.SetPoint2(gPos);
       } else {
          hide(index);

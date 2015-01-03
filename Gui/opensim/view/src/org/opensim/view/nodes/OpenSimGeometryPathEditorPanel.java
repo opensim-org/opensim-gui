@@ -1133,12 +1133,14 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       WrapPanel.setPreferredSize(d);
    }
    public void addPathWrap(int menuChoice) {
+       /* FIX40
       //Muscle asm = Muscle.safeDownCast(objectWithPath);
       WrapObject awo = currentPath.getModel().getSimbodyEngine().getWrapObject(wrapObjectNames[menuChoice]);
       OpenSimContext context =OpenSimDB.getInstance().getContext(currentPath.getModel());
       context.addPathWrap(currentPath, awo);
       
       setupComponent(objectWithPath);
+               */
       updateDisplay();
    }
    

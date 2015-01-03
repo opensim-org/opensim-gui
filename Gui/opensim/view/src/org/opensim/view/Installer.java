@@ -49,7 +49,6 @@ import org.opensim.view.editors.MuscleEditorTopComponent;
 import javax.swing.JPopupMenu;
 import org.opensim.utils.ApplicationState;
 import org.opensim.view.actions.ApplicationExit;
-import org.opensim.view.markerEditor.MarkerEditorTopComponent;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.view.motions.MotionsDBDescriptor;
 import org.opensim.view.pub.ViewDBDescriptor;

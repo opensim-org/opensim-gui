@@ -343,19 +343,20 @@ public class BodyDisplayer extends vtkAssembly
 
     public void setColor(double[] colorComponents) {
         // Cycle thru Pieces and set their Color accordingly
-      VisibleObject bodyVisibleObject = body.getDisplayer();
+      /*VisibleObject bodyVisibleObject = body.getDisplayer();
       // For each bone in the current body.
       GeometrySet gSet = bodyVisibleObject.getGeometrySet();
       for (int k = 0; k < gSet.getSize(); ++k) {
           Geometry gPiece = gSet.get(k);
           gPiece.setColor(colorComponents);
-      }
+      }*/
     }
     
     //---------------------------------------------------------------
     public double[]  GetColorOrReturnNull(  )
     {
        double[] colorOfAllPiecesOrNullIfColorOfPiecesDiffer = null; 
+       /*
        VisibleObject bodyVisibleObject = body.getDisplayer();
        GeometrySet bodyDisplayerGeometrySet = bodyVisibleObject.getGeometrySet();
        int numberOfPieces = bodyDisplayerGeometrySet==null ? 0 : bodyDisplayerGeometrySet.getSize();
@@ -368,28 +369,31 @@ public class BodyDisplayer extends vtkAssembly
           if( colorOfAllPiecesOrNullIfColorOfPiecesDiffer == null ) colorOfAllPiecesOrNullIfColorOfPiecesDiffer = colorOfCurrentPiece;
           else for( int k=0;  k<3;  k++ ) { if( colorOfCurrentPiece[i] != colorOfAllPiecesOrNullIfColorOfPiecesDiffer[i] ) return null; }
        }      
+       */
        return colorOfAllPiecesOrNullIfColorOfPiecesDiffer; 
     }
 
     public void setOpacity(double newOpacity) {
+       /*
        VisibleObject bodyVisibleObject = body.getDisplayer();
       // For each bone in the current body.
       GeometrySet gSet = bodyVisibleObject.getGeometrySet();
       for (int k = 0; k < gSet.getSize(); ++k) {
           Geometry gPiece = gSet.get(k);
           gPiece.setOpacity(newOpacity);
-      }
+      }*/
     }
     
      public Geometry.Representation getDisplayPreference() {
-         return body.getDisplayer().getDisplayPreference();
+         return Geometry.Representation.DrawSurface; //body.getDisplayer().getDisplayPreference();
      }
 
     public void setDisplayPreference(Geometry.Representation newPref) {
-        body.getDisplayer().setDisplayPreference(newPref);
+        //body.getDisplayer().setDisplayPreference(newPref);
     }
 
     void applyColorsFromModel() {
+        /*
       VisibleObject bodyVisibleObject = body.getDisplayer();
       GeometrySet gSet = bodyVisibleObject.getGeometrySet();
       for (int k = 0; k < gSet.getSize(); ++k) {
@@ -401,7 +405,7 @@ public class BodyDisplayer extends vtkAssembly
           if (gd==null) continue;
           gd.GetProperty().SetColor(colorOnFile);
           gd.Modified();
-      }
+      }*/
     }
     
     private void updateMapsToSupportPicking(final Body body, 
@@ -417,6 +421,7 @@ public class BodyDisplayer extends vtkAssembly
         props.InitTraversal();
         ArrayList<vtkActor> actors = new ArrayList<vtkActor>();
         int idx=0;
+        /*
         GeometrySet gSet = body.getDisplayer().getGeometrySet();
         for(int act=0; act < props.GetNumberOfItems(); act++){
              vtkProp3D nextActor = props.GetNextProp3D();
@@ -424,10 +429,11 @@ public class BodyDisplayer extends vtkAssembly
              if (nextActor instanceof vtkActor)
                  actors.add((vtkActor)nextActor);
              if (nextActor instanceof FrameActor || nextActor == centerOfMassActor /*||
-                     nextActor == outlineActor*/) continue;
+                     nextActor == outlineActor) continue;
              mapObject2VtkObjects.put(gSet.get(idx), nextActor);
              idx++;
         }
+    */
     }
 
     public boolean isShowCOM() { return showCOM; }
@@ -444,9 +450,8 @@ public class BodyDisplayer extends vtkAssembly
     //--------------------------------------------------------------------------
     public void  SetCMLocationFromPropertyTable( boolean updateView )
     {
-       double[] cmLocationToFill = new double[3];
-       body.getCenterOfMass( cmLocationToFill );
-       myCMSphereSourceVTK.SetCenter( cmLocationToFill );
+       Vec3 cmLocationToFill = body.getMassCenter();
+       myCMSphereSourceVTK.SetCenter( cmLocationToFill.get(0),  cmLocationToFill.get(1), cmLocationToFill.get(2));
        if( updateView )
        {
           super.Modified();
@@ -538,6 +543,7 @@ public class BodyDisplayer extends vtkAssembly
      */
     public void applyDisplayPreferences() 
     {
+        /*
        VisibleObject bodyVisibleObject = body.getDisplayer();
        GeometrySet gSet = bodyVisibleObject.getGeometrySet();
         // Cycle thru GeometrySet and apply preferences
@@ -547,6 +553,7 @@ public class BodyDisplayer extends vtkAssembly
            if (gActor==null) continue;
            gActor.applyDisplayPreferenceToActor();
        }
+        */
        // Now frames and COM
     }
 
@@ -554,7 +561,7 @@ public class BodyDisplayer extends vtkAssembly
      * Update display of Body to correspond to latest Properties
      */
    void updateFromProperties() {
-        applyVisibleObjectScaleAndTransform(body.getDisplayer(), displayGeometryAssembly);
+        //applyVisibleObjectScaleAndTransform(body.getDisplayer(), displayGeometryAssembly);
         applyColorsFromModel();
         applyDisplayPreferences();
         // update Joint frames
@@ -563,8 +570,8 @@ public class BodyDisplayer extends vtkAssembly
             Body child = childBodies.nextElement();
 
             if (mapChildren2Frames.containsKey(child)){
-                setShowJointPFrame(child, false);
-                setShowJointPFrame(child, true);
+                //setShowJointPFrame(child, false);
+                //setShowJointPFrame(child, true);
             }
         }
         SetCMLocationFromPropertyTable(true);

@@ -209,4 +209,8 @@ public class Appearance extends OpenSimObject {
     this(opensimModelJNI.new_Appearance(), true);
   }
 
+  public boolean hasTexture() {
+    return opensimModelJNI.Appearance_hasTexture(swigCPtr, this);
+  }
+
 }

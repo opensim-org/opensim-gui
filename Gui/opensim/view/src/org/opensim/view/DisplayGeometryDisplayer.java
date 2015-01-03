@@ -117,7 +117,7 @@ public class DisplayGeometryDisplayer extends vtkActor
                super.undo();
                ViewDB.getInstance().applyColor(oldColorCompDbl, DisplayGeometryDisplayer.this, false);
                for (int i=0; i<3; i++) 
-               displayGeometry.setColor(oldColorCompDbl);
+               //displayGeometry.setColor(oldColorCompDbl);
                assignColor(oldColorCompDbl);
                ExplorerTopComponent.getDefault().requestActive();
            }
@@ -128,7 +128,7 @@ public class DisplayGeometryDisplayer extends vtkActor
            public void redo() throws CannotRedoException {
                super.redo();
                ViewDB.getInstance().applyColor(colorCompDbl, DisplayGeometryDisplayer.this, false);
-               displayGeometry.setColor(colorCompDbl);
+               //displayGeometry.setColor(colorCompDbl);
                assignColor(colorCompDbl);
                ExplorerTopComponent.getDefault().requestActive();
            }

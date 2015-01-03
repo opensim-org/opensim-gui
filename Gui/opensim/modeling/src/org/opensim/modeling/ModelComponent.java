@@ -105,4 +105,8 @@ public class ModelComponent extends Component {
     opensimModelJNI.ModelComponent_extendFinalizeFromProperties(swigCPtr, this);
   }
 
+  public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
+    opensimModelJNI.ModelComponent_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
+  }
+
 }
