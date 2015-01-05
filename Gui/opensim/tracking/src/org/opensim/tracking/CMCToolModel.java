@@ -79,7 +79,7 @@ public class CMCToolModel extends TrackingToolModel {
          cmcTool().setOriginalForceSet(getOriginalModel().getForceSet());
 
          // Re-initialize our copy of the workersModel
-         Model workersModel = new Model(getOriginalModel());
+         Model workersModel = Model.safeDownCast(getOriginalModel().clone());
          workersModel.updAnalysisSet().setSize(0);
          String tempFileName=getOriginalModel().getInputFileName();
          //int loc = tempFileName.lastIndexOf(".");

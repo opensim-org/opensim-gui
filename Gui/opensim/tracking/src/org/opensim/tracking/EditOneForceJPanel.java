@@ -504,7 +504,7 @@ public class EditOneForceJPanel extends javax.swing.JPanel {
     private void initComboBoxes() {
         // Body name combobox
         
-        Model model=loads.getModel();
+        Model model=externalForce.getModel(); //FIX40
         BodySet bodySet = model.getBodySet();
         populateBodyList(bodySet, BodiesComboBox);
          BodiesComboBox.setSelectedItem(externalForce.getAppliedToBodyName());

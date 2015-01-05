@@ -173,10 +173,6 @@ public class Geometry extends Component {
     return new Transform(opensimModelJNI.Geometry_getTransform(swigCPtr, this, State.getCPtr(state), state, RigidFrame.getCPtr(frame), frame), true);
   }
 
-  public void createDecorativeGeometry(ArrayDecorativeGeometry arg0) {
-    opensimModelJNI.Geometry_createDecorativeGeometry(swigCPtr, this, ArrayDecorativeGeometry.getCPtr(arg0), arg0);
-  }
-
   public void setDecorativeGeometryAppearance(DecorativeGeometry decoration) {
     opensimModelJNI.Geometry_setDecorativeGeometryAppearance(swigCPtr, this, DecorativeGeometry.getCPtr(decoration), decoration);
   }
@@ -215,6 +211,10 @@ public class Geometry extends Component {
 
   public String getFrameName() {
     return opensimModelJNI.Geometry_getFrameName(swigCPtr, this);
+  }
+
+  public void createDecorativeGeometry(ArrayDecorativeGeometry arg0) {
+    opensimModelJNI.Geometry_createDecorativeGeometry(swigCPtr, this, ArrayDecorativeGeometry.getCPtr(arg0), arg0);
   }
 
   public final static class Representation {

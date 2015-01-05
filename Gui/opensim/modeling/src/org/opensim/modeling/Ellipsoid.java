@@ -105,10 +105,6 @@ public class Ellipsoid extends AnalyticGeometry {
     opensimModelJNI.Ellipsoid_setEllipsoidParams(swigCPtr, this, radius1, radius2, radius3);
   }
 
-  public void getEllipsoidParams(Vec3 params) {
-    opensimModelJNI.Ellipsoid_getEllipsoidParams(swigCPtr, this, Vec3.getCPtr(params), params);
-  }
-
   public void createDecorativeGeometry(ArrayDecorativeGeometry decoGeoms) {
     opensimModelJNI.Ellipsoid_createDecorativeGeometry(swigCPtr, this, ArrayDecorativeGeometry.getCPtr(decoGeoms), decoGeoms);
   }

@@ -1635,7 +1635,7 @@ public class JPlotterPanel extends javax.swing.JPanel
       ArrayStr stateNames = currentModel.getStateVariableNames();
       // Save states for later restoration so that the GUI and model are in sync. after analysis
       double[] saveStates = new double[numStates];
-      openSimContext.getStates(saveStates);
+      // FIX40 openSimContext.getStates(saveStates);
       
       Storage extendedMotionStorage;
       int key = (int) (java.lang.Math.random()*100);
@@ -1651,7 +1651,7 @@ public class JPlotterPanel extends javax.swing.JPanel
          
           // make states for analysis by setting fiberlength and activation and form complete storage
          double[] statesForAnalysis = new double[numStates];
-         openSimContext.getStates(statesForAnalysis);
+         // FIX40 openSimContext.getStates(statesForAnalysis);
          setNonzeroDefaultValues(stateNames, statesForAnalysis, isActivationOverride(), getActivationValue());
          double NUM_STEPS=100.0;
          int xIndex = statesStorage.getStateIndex(getDomainName());
@@ -1677,7 +1677,7 @@ public class JPlotterPanel extends javax.swing.JPanel
             //System.out.println("Step="+i+", val="+degVal);
             statesForAnalysis[xIndex]=val;
             StateVector newVector = new StateVector();
-            openSimContext.computeConstrainedCoordinates(statesForAnalysis);
+            //FIX40 openSimContext.computeConstrainedCoordinates(statesForAnalysis);
             newVector.setStates(time, numStates, statesForAnalysis);            
             statesStorage.append(newVector);
          }
@@ -1697,7 +1697,7 @@ public class JPlotterPanel extends javax.swing.JPanel
       } catch (IOException ex) {
          ex.printStackTrace();
       }
-      openSimContext.setStates(saveStates);
+      //FIX40 openSimContext.setStates(saveStates);
       int na = currentModel.getAnalysisSet().getSize();
       Analysis analysis = currentModel.getAnalysisSet().get("MuscleAnalysis");
       analysisSource.updateStorage(analysis);
@@ -2258,7 +2258,7 @@ public class JPlotterPanel extends javax.swing.JPanel
             if (activationColumns.get(j) && overrideActivation)
                buffer[j]=newActivation;
          }
-         openSimContext.computeConstrainedCoordinates(buffer);
+         //FIX40 openSimContext.computeConstrainedCoordinates(buffer);
          outputStateVector.setStates(statesFromMotion.getTime(), numStates, buffer);
          outputStorage.append(outputStateVector);
       }

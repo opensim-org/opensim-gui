@@ -2874,7 +2874,6 @@ public class opensimModelJNI {
   public final static native int Geometry_DrawDefault_get();
   public final static native void delete_Geometry(long jarg1);
   public final static native long Geometry_getTransform(long jarg1, Geometry jarg1_, long jarg2, State jarg2_, long jarg3, RigidFrame jarg3_);
-  public final static native void Geometry_createDecorativeGeometry(long jarg1, Geometry jarg1_, long jarg2, ArrayDecorativeGeometry jarg2_);
   public final static native void Geometry_setDecorativeGeometryAppearance(long jarg1, Geometry jarg1_, long jarg2, DecorativeGeometry jarg2_);
   public final static native void Geometry_setColor(long jarg1, Geometry jarg1_, long jarg2, Vec3 jarg2_);
   public final static native long Geometry_getColor(long jarg1, Geometry jarg1_);
@@ -2885,11 +2884,30 @@ public class opensimModelJNI {
   public final static native void Geometry_setOwnerModelComponent(long jarg1, Geometry jarg1_, long jarg2, ModelComponent jarg2_);
   public final static native long Geometry_getOwnerModelComponent(long jarg1, Geometry jarg1_);
   public final static native String Geometry_getFrameName(long jarg1, Geometry jarg1_);
+  public final static native void Geometry_createDecorativeGeometry(long jarg1, Geometry jarg1_, long jarg2, ArrayDecorativeGeometry jarg2_);
   public final static native long LineGeometry_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void LineGeometry_assign(long jarg1, LineGeometry jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String LineGeometry_getClassName();
   public final static native long LineGeometry_clone(long jarg1, LineGeometry jarg1_);
   public final static native String LineGeometry_getConcreteClassName(long jarg1, LineGeometry jarg1_);
+  public final static native void LineGeometry_copyProperty_start_point(long jarg1, LineGeometry jarg1_, long jarg2, LineGeometry jarg2_);
+  public final static native long LineGeometry_get_start_point__SWIG_0(long jarg1, LineGeometry jarg1_, int jarg2);
+  public final static native long LineGeometry_upd_start_point__SWIG_0(long jarg1, LineGeometry jarg1_, int jarg2);
+  public final static native void LineGeometry_set_start_point__SWIG_0(long jarg1, LineGeometry jarg1_, int jarg2, long jarg3, Vec3 jarg3_);
+  public final static native int LineGeometry_append_start_point(long jarg1, LineGeometry jarg1_, long jarg2, Vec3 jarg2_);
+  public final static native void LineGeometry_constructProperty_start_point(long jarg1, LineGeometry jarg1_, long jarg2, Vec3 jarg2_);
+  public final static native long LineGeometry_get_start_point__SWIG_1(long jarg1, LineGeometry jarg1_);
+  public final static native long LineGeometry_upd_start_point__SWIG_1(long jarg1, LineGeometry jarg1_);
+  public final static native void LineGeometry_set_start_point__SWIG_1(long jarg1, LineGeometry jarg1_, long jarg2, Vec3 jarg2_);
+  public final static native void LineGeometry_copyProperty_end_point(long jarg1, LineGeometry jarg1_, long jarg2, LineGeometry jarg2_);
+  public final static native long LineGeometry_get_end_point__SWIG_0(long jarg1, LineGeometry jarg1_, int jarg2);
+  public final static native long LineGeometry_upd_end_point__SWIG_0(long jarg1, LineGeometry jarg1_, int jarg2);
+  public final static native void LineGeometry_set_end_point__SWIG_0(long jarg1, LineGeometry jarg1_, int jarg2, long jarg3, Vec3 jarg3_);
+  public final static native int LineGeometry_append_end_point(long jarg1, LineGeometry jarg1_, long jarg2, Vec3 jarg2_);
+  public final static native void LineGeometry_constructProperty_end_point(long jarg1, LineGeometry jarg1_, long jarg2, Vec3 jarg2_);
+  public final static native long LineGeometry_get_end_point__SWIG_1(long jarg1, LineGeometry jarg1_);
+  public final static native long LineGeometry_upd_end_point__SWIG_1(long jarg1, LineGeometry jarg1_);
+  public final static native void LineGeometry_set_end_point__SWIG_1(long jarg1, LineGeometry jarg1_, long jarg2, Vec3 jarg2_);
   public final static native long new_LineGeometry__SWIG_0(long jarg1, Vec3 jarg1_, long jarg2, Vec3 jarg2_);
   public final static native long new_LineGeometry__SWIG_1();
   public final static native void delete_LineGeometry(long jarg1);
@@ -2952,7 +2970,6 @@ public class opensimModelJNI {
   public final static native long new_Ellipsoid__SWIG_1(double jarg1, double jarg2, double jarg3);
   public final static native void delete_Ellipsoid(long jarg1);
   public final static native void Ellipsoid_setEllipsoidParams(long jarg1, Ellipsoid jarg1_, double jarg2, double jarg3, double jarg4);
-  public final static native void Ellipsoid_getEllipsoidParams(long jarg1, Ellipsoid jarg1_, long jarg2, Vec3 jarg2_);
   public final static native void Ellipsoid_createDecorativeGeometry(long jarg1, Ellipsoid jarg1_, long jarg2, ArrayDecorativeGeometry jarg2_);
   public final static native long Cylinder_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void Cylinder_assign(long jarg1, Cylinder jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -3049,6 +3066,7 @@ public class opensimModelJNI {
   public final static native void Mesh_createDecorativeGeometry(long jarg1, Mesh jarg1_, long jarg2, ArrayDecorativeGeometry jarg2_);
   public final static native long ModelComponent_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void ModelComponent_assign(long jarg1, ModelComponent jarg1_, long jarg2, OpenSimObject jarg2_);
+  public final static native void ModelComponent_assignSwigExplicitModelComponent(long jarg1, ModelComponent jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String ModelComponent_getClassName();
   public final static native long ModelComponent_clone(long jarg1, ModelComponent jarg1_);
   public final static native String ModelComponent_getConcreteClassName(long jarg1, ModelComponent jarg1_);
@@ -3058,6 +3076,10 @@ public class opensimModelJNI {
   public final static native void ModelComponent_set_GeometrySet(long jarg1, ModelComponent jarg1_, int jarg2, long jarg3, Geometry jarg3_);
   public final static native int ModelComponent_append_GeometrySet(long jarg1, ModelComponent jarg1_, long jarg2, Geometry jarg2_);
   public final static native void ModelComponent_constructProperty_GeometrySet(long jarg1, ModelComponent jarg1_);
+  public final static native long new_ModelComponent__SWIG_0();
+  public final static native long new_ModelComponent__SWIG_1(String jarg1, boolean jarg2) throws java.io.IOException;
+  public final static native long new_ModelComponent__SWIG_2(String jarg1) throws java.io.IOException;
+  public final static native long new_ModelComponent__SWIG_3(long jarg1);
   public final static native void delete_ModelComponent(long jarg1);
   public final static native void ModelComponent_connectToModel(long jarg1, ModelComponent jarg1_, long jarg2, Model jarg2_);
   public final static native long ModelComponent_getModel(long jarg1, ModelComponent jarg1_);
@@ -3065,7 +3087,13 @@ public class opensimModelJNI {
   public final static native int ModelComponent_getGeometrySize(long jarg1, ModelComponent jarg1_);
   public final static native void ModelComponent_adoptGeometry(long jarg1, ModelComponent jarg1_, long jarg2, Geometry jarg2_);
   public final static native void ModelComponent_extendFinalizeFromProperties(long jarg1, ModelComponent jarg1_);
+  public final static native void ModelComponent_extendFinalizeFromPropertiesSwigExplicitModelComponent(long jarg1, ModelComponent jarg1_);
+  public final static native void ModelComponent_extendConnectToModel(long jarg1, ModelComponent jarg1_, long jarg2, Model jarg2_);
+  public final static native void ModelComponent_extendConnectToModelSwigExplicitModelComponent(long jarg1, ModelComponent jarg1_, long jarg2, Model jarg2_);
   public final static native void ModelComponent_generateDecorations(long jarg1, ModelComponent jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
+  public final static native void ModelComponent_generateDecorationsSwigExplicitModelComponent(long jarg1, ModelComponent jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
+  public final static native void ModelComponent_director_connect(ModelComponent obj, long cptr, boolean mem_own, boolean weak_global);
+  public final static native void ModelComponent_change_ownership(ModelComponent obj, long cptr, boolean take_or_release);
   public final static native long SetModelComponents_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void SetModelComponents_assign(long jarg1, SetModelComponents jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String SetModelComponents_getClassName();
@@ -11679,6 +11707,75 @@ public class opensimModelJNI {
   }
   public static void SwigDirector_DecorativeGeometryImplementation_implementMeshFileGeometry(DecorativeGeometryImplementation self, long arg0) {
     self.implementMeshFileGeometry(new DecorativeMeshFile(arg0, false));
+  }
+  public static long SwigDirector_ModelComponent_clone(ModelComponent self) {
+    return ModelComponent.getCPtr(self.clone());
+  }
+  public static String SwigDirector_ModelComponent_getConcreteClassName(ModelComponent self) {
+    return self.getConcreteClassName();
+  }
+  public static void SwigDirector_ModelComponent_updateFromXMLNode(ModelComponent self, long objectElement, int versionNumber) {
+    self.updateFromXMLNode(new SWIGTYPE_p_SimTK__Xml__Element(objectElement, false), versionNumber);
+  }
+  public static void SwigDirector_ModelComponent_updateXMLNode(ModelComponent self, long parent) {
+    self.updateXMLNode(new SWIGTYPE_p_SimTK__Xml__Element(parent, false));
+  }
+  public static boolean SwigDirector_ModelComponent_isA(ModelComponent self, String type) {
+    return self.isA(type);
+  }
+  public static void SwigDirector_ModelComponent_assign(ModelComponent self, long aObject) {
+    self.assign(new OpenSimObject(aObject, false));
+  }
+  public static void SwigDirector_ModelComponent_extendFinalizeFromProperties(ModelComponent self) {
+    self.extendFinalizeFromProperties();
+  }
+  public static void SwigDirector_ModelComponent_extendConnect(ModelComponent self, long root) {
+    //self.extendConnect(new Component(root, false));
+  }
+  public static void SwigDirector_ModelComponent_extendAddToSystem(ModelComponent self, long system) {
+    //self.extendAddToSystem(new SWIGTYPE_p_SimTK__MultibodySystem(system, false));
+  }
+  public static void SwigDirector_ModelComponent_extendInitStateFromProperties(ModelComponent self, long state) {
+    //self.extendInitStateFromProperties(new State(state, false));
+  }
+  public static void SwigDirector_ModelComponent_extendSetPropertiesFromState(ModelComponent self, long state) {
+    //self.extendSetPropertiesFromState(new State(state, false));
+  }
+  public static void SwigDirector_ModelComponent_computeStateVariableDerivatives(ModelComponent self, long s) {
+    //self.computeStateVariableDerivatives(new State(s, false));
+  }
+  public static void SwigDirector_ModelComponent_extendRealizeTopology(ModelComponent self, long state) {
+    //self.extendRealizeTopology(new State(state, false));
+  }
+  public static void SwigDirector_ModelComponent_extendRealizeModel(ModelComponent self, long state) {
+    //self.extendRealizeModel(new State(state, false));
+  }
+  public static void SwigDirector_ModelComponent_extendRealizeInstance(ModelComponent self, long state) {
+    //self.extendRealizeInstance(new State(state, false));
+  }
+  public static void SwigDirector_ModelComponent_extendRealizeTime(ModelComponent self, long state) {
+    //self.extendRealizeTime(new State(state, false));
+  }
+  public static void SwigDirector_ModelComponent_extendRealizePosition(ModelComponent self, long state) {
+    //self.extendRealizePosition(new State(state, false));
+  }
+  public static void SwigDirector_ModelComponent_extendRealizeVelocity(ModelComponent self, long state) {
+    //self.extendRealizeVelocity(new State(state, false));
+  }
+  public static void SwigDirector_ModelComponent_extendRealizeDynamics(ModelComponent self, long state) {
+    //self.extendRealizeDynamics(new State(state, false));
+  }
+  public static void SwigDirector_ModelComponent_extendRealizeAcceleration(ModelComponent self, long state) {
+    //self.extendRealizeAcceleration(new State(state, false));
+  }
+  public static void SwigDirector_ModelComponent_extendRealizeReport(ModelComponent self, long state) {
+    //self.extendRealizeReport(new State(state, false));
+  }
+  public static void SwigDirector_ModelComponent_extendConnectToModel(ModelComponent self, long model) {
+    self.extendConnectToModel(new Model(model, false));
+  }
+  public static void SwigDirector_ModelComponent_generateDecorations(ModelComponent self, boolean fixed, long hints, long state, long appendToThis) {
+    self.generateDecorations(fixed, new ModelDisplayHints(hints, false), new State(state, false), new ArrayDecorativeGeometry(appendToThis, false));
   }
   public static long SwigDirector_AnalysisWrapper_clone(AnalysisWrapper self) {
     return AnalysisWrapper.getCPtr(self.clone());

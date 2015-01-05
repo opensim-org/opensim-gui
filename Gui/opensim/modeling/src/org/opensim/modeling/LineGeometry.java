@@ -57,6 +57,78 @@ public class LineGeometry extends Geometry {
     return opensimModelJNI.LineGeometry_getConcreteClassName(swigCPtr, this);
   }
 
+  public void copyProperty_start_point(LineGeometry source) {
+    opensimModelJNI.LineGeometry_copyProperty_start_point(swigCPtr, this, LineGeometry.getCPtr(source), source);
+  }
+
+  public Vec3 get_start_point(int i) {
+    return new Vec3(opensimModelJNI.LineGeometry_get_start_point__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public Vec3 upd_start_point(int i) {
+    return new Vec3(opensimModelJNI.LineGeometry_upd_start_point__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_start_point(int i, Vec3 value) {
+    opensimModelJNI.LineGeometry_set_start_point__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+  }
+
+  public int append_start_point(Vec3 value) {
+    return opensimModelJNI.LineGeometry_append_start_point(swigCPtr, this, Vec3.getCPtr(value), value);
+  }
+
+  public void constructProperty_start_point(Vec3 initValue) {
+    opensimModelJNI.LineGeometry_constructProperty_start_point(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+  }
+
+  public Vec3 get_start_point() {
+    return new Vec3(opensimModelJNI.LineGeometry_get_start_point__SWIG_1(swigCPtr, this), false);
+  }
+
+  public Vec3 upd_start_point() {
+    return new Vec3(opensimModelJNI.LineGeometry_upd_start_point__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_start_point(Vec3 value) {
+    opensimModelJNI.LineGeometry_set_start_point__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+  }
+
+  public void copyProperty_end_point(LineGeometry source) {
+    opensimModelJNI.LineGeometry_copyProperty_end_point(swigCPtr, this, LineGeometry.getCPtr(source), source);
+  }
+
+  public Vec3 get_end_point(int i) {
+    return new Vec3(opensimModelJNI.LineGeometry_get_end_point__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public Vec3 upd_end_point(int i) {
+    return new Vec3(opensimModelJNI.LineGeometry_upd_end_point__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_end_point(int i, Vec3 value) {
+    opensimModelJNI.LineGeometry_set_end_point__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+  }
+
+  public int append_end_point(Vec3 value) {
+    return opensimModelJNI.LineGeometry_append_end_point(swigCPtr, this, Vec3.getCPtr(value), value);
+  }
+
+  public void constructProperty_end_point(Vec3 initValue) {
+    opensimModelJNI.LineGeometry_constructProperty_end_point(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+  }
+
+  public Vec3 get_end_point() {
+    return new Vec3(opensimModelJNI.LineGeometry_get_end_point__SWIG_1(swigCPtr, this), false);
+  }
+
+  public Vec3 upd_end_point() {
+    return new Vec3(opensimModelJNI.LineGeometry_upd_end_point__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_end_point(Vec3 value) {
+    opensimModelJNI.LineGeometry_set_end_point__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+  }
+
   public LineGeometry(Vec3 aPoint1, Vec3 aPoint2) {
     this(opensimModelJNI.new_LineGeometry__SWIG_0(Vec3.getCPtr(aPoint1), aPoint1, Vec3.getCPtr(aPoint2), aPoint2), true);
   }

@@ -307,7 +307,7 @@ public class ScaleToolModel extends Observable implements Observer {
                               });
          progressHandle.start();
 
-         processedModel = new Model(unscaledModel);
+         processedModel = Model.safeDownCast(unscaledModel.clone());;
          processedModel.setName(scaleTool.getName());
          processedModel.setInputFileName("");
          processedModel.setOriginalModelPathFromModel(unscaledModel); // important to keep track of the original path so bone loading works
@@ -410,7 +410,7 @@ public class ScaleToolModel extends Observable implements Observer {
    public ScaleToolModel(Model originalModel) throws IOException {
       // Store original model; create copy of the original model as our unscaled model (i.e. the model we'll scale)
       this.originalModel = originalModel;
-      unscaledModel = new Model(originalModel);
+      unscaledModel = Model.safeDownCast(originalModel.clone());;
       unscaledModel.setInputFileName("");
       unscaledModel.setOriginalModelPathFromModel(originalModel); // important to keep track of the original path so bone loading works
       //unscaledModel.setup();
@@ -581,6 +581,7 @@ public class ScaleToolModel extends Observable implements Observer {
    private boolean loadExtraMarkerSet(boolean recompute) {
       boolean success = true;
       extraMarkerSet = null;
+      /* FIX40
       if(extraMarkerSetFile.isValid()) {
          try {
             extraMarkerSet = new MarkerSet(extraMarkerSetFile.fileName);
@@ -589,6 +590,7 @@ public class ScaleToolModel extends Observable implements Observer {
             success = false;
          }
       }
+      */
       resetMarkers(); // reset markers in our unscaled model
       if(recompute) recomputeMeasurements();
       ikCommonModel.getIKMarkerTasksModel().markerSetChanged();
