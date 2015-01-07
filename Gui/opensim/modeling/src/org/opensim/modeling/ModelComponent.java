@@ -35,28 +35,13 @@ public class ModelComponent extends Component {
     super.delete();
   }
 
-  protected void swigDirectorDisconnect() {
-    swigCMemOwn = false;
-    delete();
-  }
-
-  public void swigReleaseOwnership() {
-    swigCMemOwn = false;
-    opensimModelJNI.ModelComponent_change_ownership(this, swigCPtr, false);
-  }
-
-  public void swigTakeOwnership() {
-    swigCMemOwn = true;
-    opensimModelJNI.ModelComponent_change_ownership(this, swigCPtr, true);
-  }
-
   public static ModelComponent safeDownCast(OpenSimObject obj) {
     long cPtr = opensimModelJNI.ModelComponent_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ModelComponent(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    if (getClass() == ModelComponent.class) opensimModelJNI.ModelComponent_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject); else opensimModelJNI.ModelComponent_assignSwigExplicitModelComponent(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelJNI.ModelComponent_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
@@ -96,26 +81,6 @@ public class ModelComponent extends Component {
     opensimModelJNI.ModelComponent_constructProperty_GeometrySet(swigCPtr, this);
   }
 
-  public ModelComponent() {
-    this(opensimModelJNI.new_ModelComponent__SWIG_0(), true);
-    opensimModelJNI.ModelComponent_director_connect(this, swigCPtr, swigCMemOwn, true);
-  }
-
-  public ModelComponent(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
-    this(opensimModelJNI.new_ModelComponent__SWIG_1(aFileName, aUpdateFromXMLNode), true);
-    opensimModelJNI.ModelComponent_director_connect(this, swigCPtr, swigCMemOwn, true);
-  }
-
-  public ModelComponent(String aFileName) throws java.io.IOException {
-    this(opensimModelJNI.new_ModelComponent__SWIG_2(aFileName), true);
-    opensimModelJNI.ModelComponent_director_connect(this, swigCPtr, swigCMemOwn, true);
-  }
-
-  public ModelComponent(SWIGTYPE_p_SimTK__Xml__Element aNode) {
-    this(opensimModelJNI.new_ModelComponent__SWIG_3(SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode)), true);
-    opensimModelJNI.ModelComponent_director_connect(this, swigCPtr, swigCMemOwn, true);
-  }
-
   public void connectToModel(Model model) {
     opensimModelJNI.ModelComponent_connectToModel(swigCPtr, this, Model.getCPtr(model), model);
   }
@@ -137,15 +102,11 @@ public class ModelComponent extends Component {
   }
 
   public void extendFinalizeFromProperties() {
-    if (getClass() == ModelComponent.class) opensimModelJNI.ModelComponent_extendFinalizeFromProperties(swigCPtr, this); else opensimModelJNI.ModelComponent_extendFinalizeFromPropertiesSwigExplicitModelComponent(swigCPtr, this);
-  }
-
-  protected void extendConnectToModel(Model model) {
-    if (getClass() == ModelComponent.class) opensimModelJNI.ModelComponent_extendConnectToModel(swigCPtr, this, Model.getCPtr(model), model); else opensimModelJNI.ModelComponent_extendConnectToModelSwigExplicitModelComponent(swigCPtr, this, Model.getCPtr(model), model);
+    opensimModelJNI.ModelComponent_extendFinalizeFromProperties(swigCPtr, this);
   }
 
   public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
-    if (getClass() == ModelComponent.class) opensimModelJNI.ModelComponent_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis); else opensimModelJNI.ModelComponent_generateDecorationsSwigExplicitModelComponent(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
+    opensimModelJNI.ModelComponent_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
   }
 
 }

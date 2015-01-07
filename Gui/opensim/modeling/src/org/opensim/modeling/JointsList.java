@@ -8,16 +8,16 @@
 
 package org.opensim.modeling;
 
-public class ComponentList_Joints {
+public class JointsList {
   private long swigCPtr;
   protected boolean swigCMemOwn;
 
-  public ComponentList_Joints(long cPtr, boolean cMemoryOwn) {
+  public JointsList(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(ComponentList_Joints obj) {
+  public static long getCPtr(JointsList obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,30 +29,30 @@ public class ComponentList_Joints {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ComponentList_Joints(swigCPtr);
+        opensimModelJNI.delete_JointsList(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
-  public ComponentList_Joints(Component root, ComponentFilter f) {
-    this(opensimModelJNI.new_ComponentList_Joints__SWIG_0(Component.getCPtr(root), root, ComponentFilter.getCPtr(f), f), true);
+  public JointsList(Component root, ComponentFilter f) {
+    this(opensimModelJNI.new_JointsList__SWIG_0(Component.getCPtr(root), root, ComponentFilter.getCPtr(f), f), true);
   }
 
-  public ComponentList_Joints(Component root) {
-    this(opensimModelJNI.new_ComponentList_Joints__SWIG_1(Component.getCPtr(root), root), true);
+  public JointsList(Component root) {
+    this(opensimModelJNI.new_JointsList__SWIG_1(Component.getCPtr(root), root), true);
   }
 
   public JointIterator begin() {
-    return new JointIterator(opensimModelJNI.ComponentList_Joints_begin(swigCPtr, this), true);
+    return new JointIterator(opensimModelJNI.JointsList_begin(swigCPtr, this), true);
   }
 
   public void setFilter(ComponentFilter filter) {
-    opensimModelJNI.ComponentList_Joints_setFilter(swigCPtr, this, ComponentFilter.getCPtr(filter), filter);
+    opensimModelJNI.JointsList_setFilter(swigCPtr, this, ComponentFilter.getCPtr(filter), filter);
   }
 
   public JointIterator end() {
-    return new JointIterator(opensimModelJNI.ComponentList_Joints_end(swigCPtr, this), true);
+    return new JointIterator(opensimModelJNI.JointsList_end(swigCPtr, this), true);
   }
 
 }

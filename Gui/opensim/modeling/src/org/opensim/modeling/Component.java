@@ -185,4 +185,24 @@ public class Component extends OpenSimObject {
     opensimModelJNI.Component_dumpPathName(swigCPtr, this);
   }
 
+  public BodiesList getBodiesList() {
+    return new BodiesList(opensimModelJNI.Component_getBodiesList(swigCPtr, this), true);
+  }
+
+  public MusclesList getMusclesList() {
+    return new MusclesList(opensimModelJNI.Component_getMusclesList(swigCPtr, this), true);
+  }
+
+  public ComponentsList getComponentsList() {
+    return new ComponentsList(opensimModelJNI.Component_getComponentsList(swigCPtr, this), true);
+  }
+
+  public ModelComponentList getModelComponentList() {
+    return new ModelComponentList(opensimModelJNI.Component_getModelComponentList(swigCPtr, this), true);
+  }
+
+  public JointsList getJointList() {
+    return new JointsList(opensimModelJNI.Component_getJointList(swigCPtr, this), true);
+  }
+
 }

@@ -35,6 +35,10 @@ public class JointIterator {
     }
   }
 
+  public boolean equals(JointIterator iter) {
+    return opensimModelJNI.JointIterator_equals(swigCPtr, this, JointIterator.getCPtr(iter), iter);
+  }
+
   public Joint __ref__() {
     return new Joint(opensimModelJNI.JointIterator___ref__(swigCPtr, this), false);
   }
@@ -287,6 +291,26 @@ public class JointIterator {
 
   public void dumpPathName() {
     opensimModelJNI.JointIterator_dumpPathName(swigCPtr, this);
+  }
+
+  public BodiesList getBodiesList() {
+    return new BodiesList(opensimModelJNI.JointIterator_getBodiesList(swigCPtr, this), true);
+  }
+
+  public MusclesList getMusclesList() {
+    return new MusclesList(opensimModelJNI.JointIterator_getMusclesList(swigCPtr, this), true);
+  }
+
+  public ComponentsList getComponentsList() {
+    return new ComponentsList(opensimModelJNI.JointIterator_getComponentsList(swigCPtr, this), true);
+  }
+
+  public ModelComponentList getModelComponentList() {
+    return new ModelComponentList(opensimModelJNI.JointIterator_getModelComponentList(swigCPtr, this), true);
+  }
+
+  public JointsList getJointList() {
+    return new JointsList(opensimModelJNI.JointIterator_getJointList(swigCPtr, this), true);
   }
 
   public boolean isEqualTo(OpenSimObject aObject) {
