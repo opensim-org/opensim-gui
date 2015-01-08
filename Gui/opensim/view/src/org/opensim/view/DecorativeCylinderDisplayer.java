@@ -58,10 +58,10 @@ public class DecorativeCylinderDisplayer extends DecorativeGeometryDisplayer {
         //System.out.println("Processing cyl (r, l)"+params[0]+","+params[1]);
         cyl.SetRadius(ag.getRadius());
         cyl.SetHeight(ag.getHalfHeight() * 2);
+        cyl.SetResolution(32);
         // Transform vtk brick (Y-axis aligned at origin) to match SIMM's along Z-axis at center
         vtkTransformPolyDataFilter xformOriginDirsFilter = new vtkTransformPolyDataFilter();
         vtkTransform xformOriginDirs = new vtkTransform();
-        xformOriginDirs.RotateX(90);
         xformOriginDirsFilter.SetTransform(xformOriginDirs);
         xformOriginDirsFilter.SetInputConnection(cyl.GetOutputPort());
         vtkPolyData full = xformOriginDirsFilter.GetOutput();
@@ -120,7 +120,7 @@ public class DecorativeCylinderDisplayer extends DecorativeGeometryDisplayer {
         vtkPolyData polyData = getPolyData(ag);
         //updatePropertiesForPolyData(polyData);
         createAndConnectMapper(polyData);
-        //setXformAndAttributesFromDecorativeGeometry(ag);
+        setXformAndAttributesFromDecorativeGeometry(ag);
 
     }
 

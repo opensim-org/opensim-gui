@@ -60,7 +60,7 @@ public class DecorativeMeshFileDisplayer extends DecorativeGeometryDisplayer {
 
     @Override
     void updateDisplayFromDecorativeGeometry() {
-         //setXformAndAttributesFromDecorativeGeometry(ag);
+         setXformAndAttributesFromDecorativeGeometry(ag);
     }
 
     private void createDisplayFromDecorativeGeometry() {

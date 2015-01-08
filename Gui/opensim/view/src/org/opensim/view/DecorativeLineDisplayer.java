@@ -72,7 +72,7 @@ public class DecorativeLineDisplayer extends DecorativeGeometryDisplayer {
     void updateDisplayFromDecorativeGeometry() {
         vtkPolyData polyData = getPolyData();
         createAndConnectMapper(polyData);
-        //setXformAndAttributesFromDecorativeGeometry(agLocal);
+        setXformAndAttributesFromDecorativeGeometry(agLocal);
     }
 
     @Override

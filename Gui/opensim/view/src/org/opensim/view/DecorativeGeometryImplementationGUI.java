@@ -161,7 +161,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
                     DecorativeSphereDisplayer displayer = (DecorativeSphereDisplayer) nextDisplayer;
                     if (displayer.getBodyId() == arg0.getBodyId()
                             && displayer.getIndexOnBody() == arg0.getIndexOnBody()) {
-                        //displayer.copyAttributesFromDecorativeGeometry(arg0);
+                        displayer.copyAttributesFromDecorativeGeometry(arg0);
                         found = true;
                         displayer.Modified();
                     }

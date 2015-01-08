@@ -124,7 +124,7 @@ public class DecorativeSphereDisplayer extends DecorativeGeometryDisplayer {
     void updateDisplayFromDecorativeGeometry() {
         vtkPolyData polyData = getPolyData();
         createAndConnectMapper(polyData);
-        //setXformAndAttributesFromDecorativeGeometry(agLocal);
+        setXformAndAttributesFromDecorativeGeometry(agLocal);
     }
 
     @Override
