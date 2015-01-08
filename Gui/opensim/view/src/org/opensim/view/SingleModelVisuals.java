@@ -184,21 +184,23 @@ public class SingleModelVisuals implements ModelVisualsVtk {
         //int bid0 = dg.getBodyId();
         vtkAssembly modelAssembly = new vtkAssembly();
         // Keep track of ground body to avoid recomputation
-        BodySet bodies = model.getBodySet();
- 
-        for(int bodyNum=0; bodyNum<bodies.getSize();  bodyNum++)
-        {
-            Body body = bodies.get(bodyNum);
-            int id = body.getMobilizedBodyIndex();
+        BodiesList bodies = model.getBodiesList();
+        BodyIterator body = bodies.begin();
+        while (!body.equals(bodies.end())) {
+             int id = body.getMobilizedBodyIndex();
             // Body actor
-            BodyDisplayer bodyRep = new BodyDisplayer(modelAssembly, body,
+            BodyDisplayer bodyRep = new BodyDisplayer(modelAssembly, body.__deref__(),
                     mapObject2VtkObjects, mapVtkObjects2Objects);
             mapBodyIndicesToDisplayers.put(id, bodyRep);
+            body.next();
         }
         dgi.setModelAssembly(modelAssembly, mapBodyIndicesToDisplayers, model, mdh);
-        for (int mcIndex = 0; mcIndex < modelComponents.size(); mcIndex++){
-            ModelComponent mc = modelComponents.get(mcIndex);
-            addGeometryForModelComponent(mc, model);
+        ModelComponentList mcList = model.getModelComponentList();
+        ModelComponentIterator mcIter = mcList.begin();
+        mcIter.next(); // Skip model itself
+        while (!mcIter.equals(mcList.end())){
+            addGeometryForModelComponent(mcIter.__deref__(), model);
+            mcIter.next();
         }
 
         //comDisplayer = new ModelComDisplayer(model);

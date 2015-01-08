@@ -41,8 +41,9 @@ import org.opensim.modeling.Muscle;
 import org.opensim.modeling.ForceSet;
 import org.opensim.modeling.ArrayObjPtr;
 import org.opensim.modeling.ArrayStr;
+import org.opensim.modeling.BodyIterator;
 import org.opensim.modeling.Model;
-import org.opensim.modeling.BodySet;
+import org.opensim.modeling.BodiesList;
 import org.opensim.modeling.Coordinate;
 import org.opensim.modeling.CoordinateSet;
 import org.opensim.modeling.MarkerSet;
@@ -139,15 +140,19 @@ public class SingleModelGuiElements {
      */
     public String[] getBodyNames()
     {
-       if (bodyNames==null){
-         BodySet bodies = model.getBodySet();
-         bodyNames = new String[bodies.getSize()];
-         for (int i = 0; i < bodies.getSize(); i++)
-            bodyNames[i] = new String(bodies.get(i).getName());
-           
-       }
-       return bodyNames;
-    }
+        if (bodyNames == null) {
+            BodiesList bodies = model.getBodiesList();
+            BodyIterator bi = bodies.begin();
+            ArrayList<String> bNames = new ArrayList<String>();
+            while (!bi.equals(bodies.end())) {
+                bNames.add(bi.getName());
+                bi.next();
+            }
+            bodyNames = new String[bNames.size()];
+            bNames.toArray(bodyNames);
+        }
+        return bodyNames;
+   }
     
     /**
      * Get a list of names for model coordinates
