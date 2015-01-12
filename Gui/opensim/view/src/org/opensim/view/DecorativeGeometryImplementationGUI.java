@@ -62,8 +62,8 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
 
     @Override
   public void implementLineGeometry(DecorativeLine arg0) {
-    System.out.println("Type: DecorativeLine P1, P2, Color"
-                + arg0.getPoint1().toString() + arg0.getPoint2().toString() + ", [" + arg0.getTransform().T().toString() + "]" + arg0.getColor());
+    //System.out.println("Type: DecorativeLine P1, P2, id, Color"
+    //            + arg0.getPoint1().toString() + arg0.getPoint2().toString() + ", [" + arg0.getIndexOnBody()+" "+arg0.getTransform().T().toString() + "]" + arg0.getColor());
 
         if (updateMode) { System.out.println("updating");
             ListIterator<DecorativeGeometryDisplayer> listIterator = getCurrentGeometryDisplayers();
@@ -74,7 +74,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
                     DecorativeLineDisplayer displayer = (DecorativeLineDisplayer) nextDisplayer;
                     if (displayer.getBodyId() == arg0.getBodyId()
                             && displayer.getIndexOnBody() == arg0.getIndexOnBody()) {
-                        //displayer.copyAttributesFromDecorativeGeometry(arg0);
+                        displayer.copyAttributesFromDecorativeGeometry(arg0);
                         found = true;
                         displayer.Modified();
                     }
@@ -82,6 +82,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
             }
         } else {
             BodyDisplayer bd = mapBodyIndicesToDisplayers.get(arg0.getBodyId());
+            //System.out.println("MC:"+currentModelComponent.getConcreteClassName()+currentModelComponent.getName());
             DecorativeLineDisplayer lineDisplayer=new DecorativeLineDisplayer(arg0);
             bd.AddPart(lineDisplayer.computeVisuals());
             addDisplayerToCurrentList(lineDisplayer);
@@ -149,8 +150,8 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
 
     @Override
   public void implementSphereGeometry(DecorativeSphere arg0) {
-        System.out.println("Type: DecorativeSphere Radius, transform, Body, index "
-                + arg0.getRadius() + ", [" + arg0.getTransform().T().toString() + "]"+ arg0.getBodyId()+", "+arg0.getIndexOnBody());
+        //System.out.println("Type: DecorativeSphere Radius, transform, Body, index "
+        //        + arg0.getRadius() + ", [" + arg0.getTransform().T().toString() + "]"+ arg0.getBodyId()+", "+arg0.getIndexOnBody());
         
         if (updateMode) { System.out.println("updating");
             ListIterator<DecorativeGeometryDisplayer> listIterator = getCurrentGeometryDisplayers();
@@ -352,7 +353,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
 
     private void updateVariableDecorations(ModelComponent mc) {
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
-        //mc.generateDecorations(false, modelDisplayHints, model.getWorkingState(), adg);
+        mc.generateDecorations(false, modelDisplayHints, model.getWorkingState(), adg);
         // Sync. 
         currentVariableGeometryDisplayers = mapComponentsToVariableVisuals.get(mc);
         int oldSize = (currentVariableGeometryDisplayers==null)?0:currentVariableGeometryDisplayers.size();
