@@ -19,7 +19,8 @@ import vtk.*;
  */
 public abstract class DecorativeGeometryDisplayer extends vtkActor {
     private OpenSimObject obj=null;
-    
+    vtkPolyDataMapper mapper = new vtkPolyDataMapper();
+
     public DecorativeGeometryDisplayer() {
      }
 
@@ -76,14 +77,14 @@ public abstract class DecorativeGeometryDisplayer extends vtkActor {
         Rotation rot = xform.R();
         Vec3 threeAngles = rot.convertRotationToBodyFixedXYZ();
         SetOrientation(0, 0, 0);
-        System.out.println("Set rotation to:"+rot.toString());
+        //System.out.println("Set rotation to:"+rot.toString());
         if (!threeAngles.isNumericallyEqual(0.)){
             RotateX(threeAngles.get(0)*180.0/Math.PI);
             RotateY(threeAngles.get(1)*180.0/Math.PI);
             RotateZ(threeAngles.get(2)*180.0/Math.PI);
         }
         Vec3 trans = xform.p();
-        System.out.println("Set translation to:"+trans.toString());
+        //System.out.println("Set translation to:"+trans.toString());
         SetPosition(trans.get(0), trans.get(1), trans.get(2));
     }
 
@@ -97,7 +98,6 @@ public abstract class DecorativeGeometryDisplayer extends vtkActor {
 
     protected void createAndConnectMapper(vtkPolyData polyData) {
         //updatePropertiesForPolyData(polyData);
-        vtkPolyDataMapper mapper = new vtkPolyDataMapper();
         mapper.SetInput(polyData);
         SetMapper(mapper);
     }
