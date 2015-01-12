@@ -199,7 +199,9 @@ public class SingleModelVisuals implements ModelVisualsVtk {
         ModelComponentIterator mcIter = mcList.begin();
         mcIter.next(); // Skip model itself
         while (!mcIter.equals(mcList.end())){
-            addGeometryForModelComponent(mcIter.__deref__(), model);
+            System.out.println("Type, name:"+mcIter.__deref__().getConcreteClassName()+mcIter.__deref__().getName());
+            if (!mcIter.__deref__().getConcreteClassName().equalsIgnoreCase("GeometryPath"))
+                addGeometryForModelComponent(mcIter.__deref__(), model);
             mcIter.next();
         }
 
@@ -229,12 +231,10 @@ public class SingleModelVisuals implements ModelVisualsVtk {
    public void updateModelDisplay(Model model) {
        
       // Cycle thru bodies and update their transforms from the kinematics engine
-        BodySet bodies = model.getBodySet();
-        int bodiesSize = bodies.getSize();
-        for(int bodyNum=0; bodyNum<bodiesSize;  bodyNum++){
-
-            Body body = bodies.get(bodyNum);
-
+        BodiesList bodies = model.getBodiesList();
+        BodyIterator bodyIter = bodies.begin();
+        while (!bodyIter.equals(bodies.end())) {
+            Body body = bodyIter.__deref__();
             // Fill the maps between objects and display to support picking, highlighting, etc..
             // The reverse map takes an actor to an Object and is filled as actors are created.
             BodyDisplayer bodyRep= (BodyDisplayer) mapObject2VtkObjects.get(body);
@@ -243,7 +243,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
                bodyRep.SetUserMatrix(bodyVtkTransform);
 
             //bodyRep.applyRepresentations();
-            
+            bodyIter.next();
         }
         
         updateVariableGeometry(model);
