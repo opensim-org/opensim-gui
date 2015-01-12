@@ -29,6 +29,7 @@ import org.opensim.modeling.*;
 import vtk.vtkActor;
 import vtk.vtkLineSource;
 import vtk.vtkPolyData;
+import vtk.vtkTubeFilter;
 
 public class DecorativeLineDisplayer extends DecorativeGeometryDisplayer {
 
@@ -36,6 +37,8 @@ public class DecorativeLineDisplayer extends DecorativeGeometryDisplayer {
     private int indexOnBody = -1;
     private DecorativeGeometry agLocal;
     private vtkLineSource line = null;
+    private vtkTubeFilter dFilter = new vtkTubeFilter();
+
     private Vec3 point1, point2;
     //protected OpenSimObject obj;
     /** 
@@ -47,7 +50,7 @@ public class DecorativeLineDisplayer extends DecorativeGeometryDisplayer {
         point1 = new Vec3(ag.getPoint1());
         point2 = new Vec3(ag.getPoint2());
         bodyId = ag.getBodyId();
-        indexOnBody = 0;//ag.getIndexOnBody();
+        indexOnBody = ag.getIndexOnBody();
         agLocal = new DecorativeGeometry(ag);
         //if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
 
@@ -63,8 +66,11 @@ public class DecorativeLineDisplayer extends DecorativeGeometryDisplayer {
             line = new vtkLineSource();
             line.SetPoint1(getPoint1().get(0),getPoint1().get(1),getPoint1().get(2));
             line.SetPoint2(getPoint2().get(0),getPoint2().get(1),getPoint2().get(2));
+            dFilter.SetInput(line.GetOutput());
+            dFilter.SetRadius(.005);
+ 
         }
-        return line.GetOutput();
+        return dFilter.GetOutput();
     }
 
  
@@ -95,7 +101,7 @@ public class DecorativeLineDisplayer extends DecorativeGeometryDisplayer {
         line.SetPoint1(getPoint1().get(0),getPoint1().get(1),getPoint1().get(2));
         line.SetPoint2(getPoint2().get(0),getPoint2().get(1),getPoint2().get(2));
         line.Modified();
-        //super.copyAttributesFromDecorativeGeometry(arg0);
+        super.copyAttributesFromDecorativeGeometry(arg0);
     }
 
     /**
