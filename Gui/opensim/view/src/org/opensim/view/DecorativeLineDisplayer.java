@@ -51,7 +51,7 @@ public class DecorativeLineDisplayer extends DecorativeGeometryDisplayer {
         point2 = new Vec3(ag.getPoint2());
         bodyId = ag.getBodyId();
         indexOnBody = ag.getIndexOnBody();
-        agLocal = new DecorativeGeometry(ag);
+        agLocal = ag.clone();
         //if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
 
       }

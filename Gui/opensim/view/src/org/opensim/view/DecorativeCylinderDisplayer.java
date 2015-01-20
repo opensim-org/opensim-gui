@@ -45,7 +45,7 @@ public class DecorativeCylinderDisplayer extends DecorativeGeometryDisplayer {
      * @param object 
      */
     DecorativeCylinderDisplayer(DecorativeCylinder ag) {
-        this.ag = ag;
+        this.ag = ag.clone();
         //if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
      }
 
@@ -134,6 +134,6 @@ public class DecorativeCylinderDisplayer extends DecorativeGeometryDisplayer {
         return ag.getBodyId();
     }
     int getIndexOnBody() {
-        return 0;//ag.getIndexOnBody();
+        return ag.getIndexOnBody();
     }
 }

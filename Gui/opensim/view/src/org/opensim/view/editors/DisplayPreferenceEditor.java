@@ -111,8 +111,11 @@ public class DisplayPreferenceEditor extends PropertyEditorSupport
         private final JComboBox picker = new JComboBox();
         private PropertyEditor editor = null;
         private Geometry.Representation[] options = new Geometry.Representation[]{
-            Geometry.Representation.Hide, Geometry.Representation.DrawWireframe,
-            Geometry.Representation.DrawSurface};
+            Geometry.Representation.Hide, 
+            Geometry.Representation.DrawPoints,
+            Geometry.Representation.DrawWireframe,
+            Geometry.Representation.DrawSurface,
+            Geometry.Representation.DrawDefault};
         
         public void connect(PropertyEditor propertyEditor, PropertyEnv env) {
             editor = propertyEditor;

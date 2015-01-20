@@ -49,8 +49,8 @@ public class DecorativeSphereDisplayer extends DecorativeGeometryDisplayer {
     DecorativeSphereDisplayer(DecorativeSphere ag) {
         this.radius = ag.getRadius();
         bodyId = ag.getBodyId();
-        indexOnBody = 0;//ag.getIndexOnBody();
-        agLocal = new DecorativeGeometry(ag);
+        indexOnBody = ag.getIndexOnBody();
+        agLocal = ag.clone();
         //if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
      }
 

@@ -34,8 +34,8 @@ class DecorativeEllipsoidDisplayer extends DecorativeGeometryDisplayer {
      * @param object 
      */
     DecorativeEllipsoidDisplayer(DecorativeEllipsoid ag) {
-        this.ag = ag;
-        //if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
+        this.ag = ag.clone();
+         //if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
      }
 
     /**
@@ -126,6 +126,6 @@ class DecorativeEllipsoidDisplayer extends DecorativeGeometryDisplayer {
         return ag.getBodyId();
     }
     int getIndexOnBody() {
-        return 0;//ag.getIndexOnBody();
+        return ag.getIndexOnBody();
     }
 }

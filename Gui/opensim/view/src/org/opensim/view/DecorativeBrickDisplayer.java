@@ -40,7 +40,7 @@ public class DecorativeBrickDisplayer extends DecorativeGeometryDisplayer {
      * @param object 
      */
     DecorativeBrickDisplayer(DecorativeBrick ag) {
-        this.ag = ag;
+        this.ag = ag.clone();
         //if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
 
      }
@@ -126,6 +126,6 @@ public class DecorativeBrickDisplayer extends DecorativeGeometryDisplayer {
         return ag.getBodyId();
     }
     int getIndexOnBody() {
-        return 0;//ag.getIndexOnBody();
+        return ag.getIndexOnBody();
     }
 }

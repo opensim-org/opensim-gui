@@ -31,7 +31,7 @@ public class OneBodyNode extends OpenSimObjectNode{
        for (int g = 0; g < geomSize; g++) {
            Geometry oneG = bdy.get_GeometrySet(g);
 
-           OneDisplayGeometryNode node = new OneDisplayGeometryNode(oneG);
+           OneGeometryNode node = new OneGeometryNode(oneG);
            Node[] arrNodes = new Node[1];
            arrNodes[0] = node;
            children.add(arrNodes);

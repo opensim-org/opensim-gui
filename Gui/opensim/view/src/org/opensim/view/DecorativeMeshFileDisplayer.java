@@ -35,7 +35,7 @@ import vtk.vtkPolyDataMapper;
 public class DecorativeMeshFileDisplayer extends DecorativeGeometryDisplayer {
     private DecorativeMeshFile ag;
     private String modelFilePath;
-    //protected OpenSimObject obj;
+    protected OpenSimObject obj;
     /** 
      * Displayer for Wrap Geometry
      * @param ag
@@ -43,9 +43,9 @@ public class DecorativeMeshFileDisplayer extends DecorativeGeometryDisplayer {
      */
     DecorativeMeshFileDisplayer(DecorativeMeshFile ag, 
             String modelFilePath) {
-        this.ag = ag;
+        this.ag = ag.clone();
         this.modelFilePath = modelFilePath;
-        //if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
+        if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
      }
 
     /**
@@ -93,7 +93,14 @@ public class DecorativeMeshFileDisplayer extends DecorativeGeometryDisplayer {
         return ag.getBodyId();
     }
     int getIndexOnBody() {
-        return 0;//ag.getIndexOnBody();
+        return ag.getIndexOnBody();
+    }
+
+    /**
+     * @return the ag
+     */
+    public DecorativeMeshFile getAg() {
+        return ag;
     }
 
 }

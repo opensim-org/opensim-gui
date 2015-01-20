@@ -365,6 +365,7 @@ public class OpenSimObjectNode extends OpenSimNode {
                 AbstractProperty ap = obj.getPropertyByIndex(p);              
                 if (!ap.isListProperty()) {
                     if (ap.isObjectProperty() && ap.size() == 1) {
+                        
                         OpenSimObject objectFromProperty = ap.isOptionalProperty()?ap.getValueAsObject(0):ap.getValueAsObject();
                         OpenSimBaseObjectProperty customProp=null;
                         if (GeometryPath.safeDownCast(objectFromProperty)!= null){

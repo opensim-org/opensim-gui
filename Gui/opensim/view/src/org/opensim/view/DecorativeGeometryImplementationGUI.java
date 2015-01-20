@@ -65,7 +65,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
     //System.out.println("Type: DecorativeLine P1, P2, id, Color"
     //            + arg0.getPoint1().toString() + arg0.getPoint2().toString() + ", [" + arg0.getIndexOnBody()+" "+arg0.getTransform().T().toString() + "]" + arg0.getColor());
 
-        if (updateMode) { System.out.println("updating");
+        if (updateMode) { //// System.out.println("updating");
             ListIterator<DecorativeGeometryDisplayer> listIterator = getCurrentGeometryDisplayers();
             boolean found = false;
             while (listIterator.hasNext() && !found) {
@@ -111,7 +111,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
 
     @Override
   public void implementCylinderGeometry(DecorativeCylinder arg0) {
-        if (updateMode) { System.out.println("updating");
+        if (updateMode) { // System.out.println("updating");
             ListIterator<DecorativeGeometryDisplayer> listIterator = getCurrentGeometryDisplayers();
             boolean found = false;
             while (listIterator.hasNext() && !found) {
@@ -120,7 +120,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
                     DecorativeCylinderDisplayer displayer = (DecorativeCylinderDisplayer) nextDisplayer;
                     if (displayer.getBodyId() == arg0.getBodyId()
                             && displayer.getIndexOnBody() == arg0.getIndexOnBody()) {
-                        //displayer.copyAttributesFromDecorativeGeometry(arg0);
+                        displayer.copyAttributesFromDecorativeGeometry(arg0);
                         found = true;
                         displayer.Modified();
                     }
@@ -153,7 +153,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
         //System.out.println("Type: DecorativeSphere Radius, transform, Body, index "
         //        + arg0.getRadius() + ", [" + arg0.getTransform().T().toString() + "]"+ arg0.getBodyId()+", "+arg0.getIndexOnBody());
         
-        if (updateMode) { System.out.println("updating");
+        if (updateMode) { // System.out.println("updating");
             ListIterator<DecorativeGeometryDisplayer> listIterator = getCurrentGeometryDisplayers();
             boolean found = false;
             while (listIterator.hasNext() && !found) {
@@ -181,7 +181,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
     @Override
   public void implementEllipsoidGeometry(DecorativeEllipsoid arg0) {
     //System.out.println("Type: DecorativeEllipsoid");
-    if (updateMode){ System.out.println("updating");
+    if (updateMode){ // System.out.println("updating");
             ListIterator<DecorativeGeometryDisplayer> listIterator = getCurrentGeometryDisplayers();
             boolean found = false;
             while(listIterator.hasNext() && !found){
@@ -190,7 +190,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
                     DecorativeEllipsoidDisplayer ellipsoidDisplayer = (DecorativeEllipsoidDisplayer) nextDisplayer;
                     if (ellipsoidDisplayer.getBodyId()==arg0.getBodyId() && 
                             ellipsoidDisplayer.getIndexOnBody()==arg0.getIndexOnBody()){
-                        //ellipsoidDisplayer.copyAttributesFromDecorativeGeometry(arg0);
+                        ellipsoidDisplayer.copyAttributesFromDecorativeGeometry(arg0);
                         found = true;
                         ellipsoidDisplayer.Modified();
                     }
@@ -233,7 +233,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
     @Override
   public void implementMeshFileGeometry(DecorativeMeshFile arg0) {
 
-     if (updateMode){ System.out.println("updating");
+     if (updateMode){ //// System.out.println("updating");
             ListIterator<DecorativeGeometryDisplayer> listIterator = getCurrentGeometryDisplayers();
             boolean found = false;
             while(listIterator.hasNext() && !found){
@@ -242,7 +242,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
                     DecorativeMeshFileDisplayer displayer = (DecorativeMeshFileDisplayer) nextDisplayer;
                     if (displayer.getBodyId()==arg0.getBodyId() && 
                             displayer.getIndexOnBody()==arg0.getIndexOnBody()){
-                        //displayer.copyAttributesFromDecorativeGeometry(arg0);
+                        displayer.copyAttributesFromDecorativeGeometry(arg0);
                         found = true;
                         displayer.Modified();
                     }
@@ -343,10 +343,11 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
 
     private void updateFixedDecorations(ModelComponent mc) {
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
-        //mc.generateDecorations(true, modelDisplayHints, model.getWorkingState(), adg);
+        mc.generateDecorations(true, modelDisplayHints, model.getWorkingState(), adg);
         // Sync. 
         currentFixedGeometryDisplayers = mapComponentsToFixedVisuals.get(mc);
         for(int i=0; i<adg.size(); i++){
+            //System.out.println("update fixedVisuals index "+i+" dump:");
             adg.getElt(i).implementGeometry(this);
         }
     }

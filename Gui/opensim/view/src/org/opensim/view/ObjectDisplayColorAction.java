@@ -96,12 +96,12 @@ public final class ObjectDisplayColorAction extends CallableSystemAction {
              * The following is cleaner and more maintainable but fails for
              * objects that don't have "color" as property
              */
-            boolean hasColorProperty = obj.hasProperty("color");
-            if (hasColorProperty) {
-                PropertyEditorAdaptor pea = new PropertyEditorAdaptor("color", objectNode);
+            boolean hasColor = (objectNode instanceof ColorableInterface);
+            if (hasColor) {
+                //PropertyEditorAdaptor pea = new PropertyEditorAdaptor("color", objectNode);
                 Color newColor = new Color((float) newColorComponents[0],
                         (float) newColorComponents[1], (float) newColorComponents[2]);
-                pea.setValueDoubleListFromColor(newColor);
+                ((ColorableInterface)objectNode).setColor(newColor);
             } else {
 
                 ViewDB.getInstance().setObjectColor(obj, newColorComponents);

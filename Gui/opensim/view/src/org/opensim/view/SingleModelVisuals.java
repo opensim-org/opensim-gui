@@ -141,7 +141,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
             DecorativeGeometry dg;
             for (int idx=0; idx <adg.size(); idx++){
                 dg = adg.getElt(idx);
-                dg.implementGeometry(dgi);
+                 dg.implementGeometry(dgi);
             }
         }
         ArrayDecorativeGeometry avdg = new ArrayDecorativeGeometry();
@@ -151,6 +151,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
             DecorativeGeometry dg;
             for (int idx=0; idx <avdg.size(); idx++){
                 dg = avdg.getElt(idx);
+                ////System.out.println("Variable Visuals for "+mc.getName()+ "index:"+idx+"is");
                 dg.implementGeometry(dgi);
             }
             dgi.finishVariableGeometry();
@@ -199,7 +200,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
         ModelComponentIterator mcIter = mcList.begin();
         mcIter.next(); // Skip model itself
         while (!mcIter.equals(mcList.end())){
-            System.out.println("Type, name:"+mcIter.__deref__().getConcreteClassName()+mcIter.__deref__().getName());
+            //System.out.println("Type, name:"+mcIter.__deref__().getConcreteClassName()+mcIter.__deref__().getName());
             if (!mcIter.__deref__().getConcreteClassName().equalsIgnoreCase("GeometryPath"))
                 addGeometryForModelComponent(mcIter.__deref__(), model);
             mcIter.next();
@@ -286,7 +287,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
      {
             double[] flattenedXform = new double[16];
             OpenSimContext dContext = OpenSimDB.getInstance().getContext(model);
-            dContext.getTransformAsDouble16(dContext.getTransform(body), flattenedXform);
+            dContext.getTransformAsDouble16(body.getGroundTransform(dContext.getCurrentStateRef()), flattenedXform);
             return convertTransformToVtkMatrix4x4(flattenedXform);
      }
     /**
@@ -692,7 +693,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
         dgi.startVariableGeometry();
         for (int mcIndex = 0; mcIndex < modelComponents.size(); mcIndex++){
             ModelComponent mc = modelComponents.get(mcIndex);
-            System.out.print("Processing model component "+mc.getConcreteClassName()+":"+mc.getName());
+            //System.out.print("Processing model component "+mc.getConcreteClassName()+":"+mc.getName());
             ArrayDecorativeGeometry avdg = new ArrayDecorativeGeometry();
             mc.generateDecorations(false, mdh, model.getWorkingState(), avdg);
             //System.out.println("Size var ="+avdg.size());
@@ -700,7 +701,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
             if (avdg.size()>0){  // Component has some variable geometry
                 dgi.updateDecorations(mc, true);
              }
-            System.out.println("...Finished");
+            //System.out.println("...Finished");
         };
         dgi.finishVariableGeometry();
     }

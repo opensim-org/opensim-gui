@@ -66,7 +66,7 @@ public abstract class DecorativeGeometryDisplayer extends vtkActor {
 
     private void setScaleFromDecorativeGeometry(DecorativeGeometry cs) {
         Vec3 scales = cs.getScaleFactors();
-        System.out.println("Set scale to:"+scales.toString());
+        //System.out.println("Set scale to:"+scales.toString());
 
         if (scales.get(0)>0.0)
             SetScale(scales.get(0), scales.get(1), scales.get(2));
