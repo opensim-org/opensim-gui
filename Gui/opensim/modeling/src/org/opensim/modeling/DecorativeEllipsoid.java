@@ -91,4 +91,13 @@ public class DecorativeEllipsoid extends DecorativeGeometry {
     return new DecorativeEllipsoid(opensimModelJNI.DecorativeEllipsoid_setRepresentation(swigCPtr, this, r.swigValue()), false);
   }
 
+  public DecorativeEllipsoid clone() {
+    long cPtr = opensimModelJNI.DecorativeEllipsoid_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new DecorativeEllipsoid(cPtr, true);
+  }
+
+  public boolean equals(DecorativeEllipsoid other) {
+    return opensimModelJNI.DecorativeEllipsoid_equals(swigCPtr, this, DecorativeEllipsoid.getCPtr(other), other);
+  }
+
 }

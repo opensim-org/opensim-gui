@@ -91,4 +91,13 @@ public class DecorativeSphere extends DecorativeGeometry {
     return new DecorativeSphere(opensimModelJNI.DecorativeSphere_setRepresentation(swigCPtr, this, r.swigValue()), false);
   }
 
+  public DecorativeSphere clone() {
+    long cPtr = opensimModelJNI.DecorativeSphere_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new DecorativeSphere(cPtr, true);
+  }
+
+  public boolean equals(DecorativeSphere other) {
+    return opensimModelJNI.DecorativeSphere_equals(swigCPtr, this, DecorativeSphere.getCPtr(other), other);
+  }
+
 }

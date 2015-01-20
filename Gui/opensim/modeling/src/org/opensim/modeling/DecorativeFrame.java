@@ -91,4 +91,13 @@ public class DecorativeFrame extends DecorativeGeometry {
     return new DecorativeFrame(opensimModelJNI.DecorativeFrame_setRepresentation(swigCPtr, this, r.swigValue()), false);
   }
 
+  public DecorativeFrame clone() {
+    long cPtr = opensimModelJNI.DecorativeFrame_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new DecorativeFrame(cPtr, true);
+  }
+
+  public boolean equals(DecorativeFrame other) {
+    return opensimModelJNI.DecorativeFrame_equals(swigCPtr, this, DecorativeFrame.getCPtr(other), other);
+  }
+
 }

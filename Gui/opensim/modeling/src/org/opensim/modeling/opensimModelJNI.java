@@ -588,6 +588,9 @@ public class opensimModelJNI {
   public final static native long DecorativeGeometry_setRepresentation(long jarg1, DecorativeGeometry jarg1_, int jarg2);
   public final static native int DecorativeGeometry_getRepresentation(long jarg1, DecorativeGeometry jarg1_);
   public final static native void DecorativeGeometry_implementGeometry(long jarg1, DecorativeGeometry jarg1_, long jarg2, DecorativeGeometryImplementation jarg2_);
+  public final static native boolean DecorativeGeometry_hasUserRef(long jarg1, DecorativeGeometry jarg1_);
+  public final static native long DecorativeGeometry_getUserRefAsObject(long jarg1, DecorativeGeometry jarg1_);
+  public final static native boolean DecorativeGeometry_attributesEquals(long jarg1, DecorativeGeometry jarg1_, long jarg2, DecorativeGeometry jarg2_);
   public final static native long new_DecorativePoint__SWIG_0(long jarg1, Vec3 jarg1_);
   public final static native long new_DecorativePoint__SWIG_1();
   public final static native long DecorativePoint_setPoint(long jarg1, DecorativePoint jarg1_, long jarg2, Vec3 jarg2_);
@@ -624,6 +627,8 @@ public class opensimModelJNI {
   public final static native boolean DecorativeLine_isInstanceOf(long jarg1, DecorativeGeometry jarg1_);
   public final static native long DecorativeLine_downcast(long jarg1, DecorativeGeometry jarg1_);
   public final static native long DecorativeLine_updDowncast(long jarg1, DecorativeGeometry jarg1_);
+  public final static native long DecorativeLine_clone(long jarg1, DecorativeLine jarg1_);
+  public final static native boolean DecorativeLine_equals(long jarg1, DecorativeLine jarg1_, long jarg2, DecorativeLine jarg2_);
   public final static native void delete_DecorativeLine(long jarg1);
   public final static native long new_DecorativeCircle__SWIG_0(double jarg1);
   public final static native long new_DecorativeCircle__SWIG_1();
@@ -654,6 +659,8 @@ public class opensimModelJNI {
   public final static native long DecorativeSphere_setOpacity(long jarg1, DecorativeSphere jarg1_, double jarg2);
   public final static native long DecorativeSphere_setLineThickness(long jarg1, DecorativeSphere jarg1_, double jarg2);
   public final static native long DecorativeSphere_setRepresentation(long jarg1, DecorativeSphere jarg1_, int jarg2);
+  public final static native long DecorativeSphere_clone(long jarg1, DecorativeSphere jarg1_);
+  public final static native boolean DecorativeSphere_equals(long jarg1, DecorativeSphere jarg1_, long jarg2, DecorativeSphere jarg2_);
   public final static native void delete_DecorativeSphere(long jarg1);
   public final static native long new_DecorativeEllipsoid__SWIG_0(long jarg1, Vec3 jarg1_);
   public final static native long new_DecorativeEllipsoid__SWIG_1();
@@ -669,6 +676,8 @@ public class opensimModelJNI {
   public final static native long DecorativeEllipsoid_setOpacity(long jarg1, DecorativeEllipsoid jarg1_, double jarg2);
   public final static native long DecorativeEllipsoid_setLineThickness(long jarg1, DecorativeEllipsoid jarg1_, double jarg2);
   public final static native long DecorativeEllipsoid_setRepresentation(long jarg1, DecorativeEllipsoid jarg1_, int jarg2);
+  public final static native long DecorativeEllipsoid_clone(long jarg1, DecorativeEllipsoid jarg1_);
+  public final static native boolean DecorativeEllipsoid_equals(long jarg1, DecorativeEllipsoid jarg1_, long jarg2, DecorativeEllipsoid jarg2_);
   public final static native void delete_DecorativeEllipsoid(long jarg1);
   public final static native long new_DecorativeBrick__SWIG_0(long jarg1, Vec3 jarg1_);
   public final static native long new_DecorativeBrick__SWIG_1();
@@ -684,6 +693,8 @@ public class opensimModelJNI {
   public final static native long DecorativeBrick_setOpacity(long jarg1, DecorativeBrick jarg1_, double jarg2);
   public final static native long DecorativeBrick_setLineThickness(long jarg1, DecorativeBrick jarg1_, double jarg2);
   public final static native long DecorativeBrick_setRepresentation(long jarg1, DecorativeBrick jarg1_, int jarg2);
+  public final static native long DecorativeBrick_clone(long jarg1, DecorativeBrick jarg1_);
+  public final static native boolean DecorativeBrick_equals(long jarg1, DecorativeBrick jarg1_, long jarg2, DecorativeBrick jarg2_);
   public final static native void delete_DecorativeBrick(long jarg1);
   public final static native long new_DecorativeCylinder__SWIG_0(double jarg1, double jarg2);
   public final static native long new_DecorativeCylinder__SWIG_1(double jarg1);
@@ -702,6 +713,8 @@ public class opensimModelJNI {
   public final static native long DecorativeCylinder_setOpacity(long jarg1, DecorativeCylinder jarg1_, double jarg2);
   public final static native long DecorativeCylinder_setLineThickness(long jarg1, DecorativeCylinder jarg1_, double jarg2);
   public final static native long DecorativeCylinder_setRepresentation(long jarg1, DecorativeCylinder jarg1_, int jarg2);
+  public final static native long DecorativeCylinder_clone(long jarg1, DecorativeCylinder jarg1_);
+  public final static native boolean DecorativeCylinder_equals(long jarg1, DecorativeCylinder jarg1_, long jarg2, DecorativeCylinder jarg2_);
   public final static native void delete_DecorativeCylinder(long jarg1);
   public final static native long new_DecorativeFrame__SWIG_0(double jarg1);
   public final static native long new_DecorativeFrame__SWIG_1();
@@ -717,6 +730,8 @@ public class opensimModelJNI {
   public final static native long DecorativeFrame_setOpacity(long jarg1, DecorativeFrame jarg1_, double jarg2);
   public final static native long DecorativeFrame_setLineThickness(long jarg1, DecorativeFrame jarg1_, double jarg2);
   public final static native long DecorativeFrame_setRepresentation(long jarg1, DecorativeFrame jarg1_, int jarg2);
+  public final static native long DecorativeFrame_clone(long jarg1, DecorativeFrame jarg1_);
+  public final static native boolean DecorativeFrame_equals(long jarg1, DecorativeFrame jarg1_, long jarg2, DecorativeFrame jarg2_);
   public final static native void delete_DecorativeFrame(long jarg1);
   public final static native long new_DecorativeText__SWIG_0(String jarg1);
   public final static native long new_DecorativeText__SWIG_1();
@@ -760,6 +775,8 @@ public class opensimModelJNI {
   public final static native long DecorativeMeshFile_setOpacity(long jarg1, DecorativeMeshFile jarg1_, double jarg2);
   public final static native long DecorativeMeshFile_setLineThickness(long jarg1, DecorativeMeshFile jarg1_, double jarg2);
   public final static native long DecorativeMeshFile_setRepresentation(long jarg1, DecorativeMeshFile jarg1_, int jarg2);
+  public final static native long DecorativeMeshFile_clone(long jarg1, DecorativeMeshFile jarg1_);
+  public final static native boolean DecorativeMeshFile_equals(long jarg1, DecorativeMeshFile jarg1_, long jarg2, DecorativeMeshFile jarg2_);
   public final static native void delete_DecorativeMeshFile(long jarg1);
   public final static native long new_Decorations__SWIG_0();
   public final static native long new_Decorations__SWIG_1(long jarg1, DecorativeGeometry jarg1_);

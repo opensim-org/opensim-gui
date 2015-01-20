@@ -35,11 +35,17 @@ import java.util.ResourceBundle;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
 import org.openide.nodes.Children;
+import org.openide.nodes.PropertySupport;
+import org.openide.nodes.Sheet;
 import org.openide.util.NbBundle;
+import org.opensim.modeling.Appearance;
 import org.opensim.modeling.Geometry;
-import org.opensim.modeling.Mesh;
+import org.opensim.modeling.ModelComponent;
+import org.opensim.modeling.Vec3;
 import org.opensim.view.ColorableInterface;
+import org.opensim.view.DecorativeGeometryDisplayer;
 import org.opensim.view.DisplayGeometryDisplayer;
+import org.opensim.view.editors.DisplayPreferenceEditor;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 import org.opensim.view.pub.ViewDB;
 
@@ -47,13 +53,13 @@ import org.opensim.view.pub.ViewDB;
  *
  * @author Ayman Habib
  */
-public class OneDisplayGeometryNode extends OpenSimObjectNode implements ColorableInterface {
+public class OneGeometryNode extends OpenSimObjectNode implements ColorableInterface {
     
-    private static ResourceBundle bundle = NbBundle.getBundle(OneDisplayGeometryNode.class);
+    private static ResourceBundle bundle = NbBundle.getBundle(OneGeometryNode.class);
     /**
     * Creates a new instance of OneContactForceNode
     */
-    public OneDisplayGeometryNode(Geometry cg) {
+    public OneGeometryNode(Geometry cg) {
         super(cg);
         String gName=cg.getName();
         if (cg.getName().equalsIgnoreCase("")){
@@ -94,7 +100,7 @@ public class OneDisplayGeometryNode extends OpenSimObjectNode implements Colorab
         }
         return retValue;
     }
-    /*
+    
     @Override
     public Sheet createSheet() {
         Sheet sheet;
@@ -103,44 +109,80 @@ public class OneDisplayGeometryNode extends OpenSimObjectNode implements Colorab
         Sheet.Set set = sheet.get("properties");
         // Add property for Location
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        DecorativeGeometryDisplayer disp = (DecorativeGeometryDisplayer) ViewDB.getInstance().getVtkRepForObject(obj);
+        Appearance disp = obj.get_Appearance();
         if (disp==null) return sheet;
+        addAppearanceProperties(disp, set);
+        
+        return sheet;
+    }
+
+    private void addAppearanceProperties(Appearance disp, Sheet.Set set) {
         try {
-            set.remove("display_preference");
+            set.remove("Appearance");
             PropertySupport.Reflection nextNodeProp4;
-            nextNodeProp4 = new PropertySupport.Reflection(disp, Geometry.DisplayPreference.class, "getDisplayPreference", "setDisplayPreference");
-            nextNodeProp4.setPropertyEditorClass(DisplayPreferenceEditor.class);
-            nextNodeProp4.setName("display_preference");        
+            nextNodeProp4 = new PropertySupport.Reflection(this, Color.class, "getColor", "setColor");
+            nextNodeProp4.setName("Color");        
             set.put(nextNodeProp4);
+            PropertySupport.Reflection nextNodeProp5;
+            nextNodeProp5 = new PropertySupport.Reflection(this, double.class, "getOpacity", "setOpacity");
+            nextNodeProp5.setName("Opacity");        
+            set.put(nextNodeProp5);
+            PropertySupport.Reflection nextNodePropRepresentation;
+            nextNodePropRepresentation = new PropertySupport.Reflection(this, Geometry.Representation.class, 
+                    "getDisplayPreference", "setDisplayPreference");
+            nextNodePropRepresentation.setPropertyEditorClass(DisplayPreferenceEditor.class);
+            nextNodePropRepresentation.setName("Representation");        
+            set.put(nextNodePropRepresentation);
         }
         catch (NoSuchMethodException ex) {
             ex.printStackTrace();
         }
-        
-        return sheet;
     }
-     * */
+    
     public Color getColor() {
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        DisplayGeometryDisplayer disp = (DisplayGeometryDisplayer) ViewDB.getInstance().getVtkRepForObject(obj);
-        return disp.getColor();
+        Vec3 c3 = obj.get_Appearance().get_color();
+        return new Color((float)c3.get(0), (float)c3.get(1), (float)c3.get(2));
     }
 
     public void setColor(Color newColor) {
+        float[] colorComp = new float[3];
+        newColor.getColorComponents(colorComp);
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        DisplayGeometryDisplayer disp = (DisplayGeometryDisplayer) ViewDB.getInstance().getVtkRepForObject(obj);
-        disp.setColorGUI(newColor);
+        // FIX40 support undo
+        obj.setColor(new Vec3(colorComp[0], colorComp[1], colorComp[2]));
+        updateObjectDisplay(obj);
+        
+    }
+    
+    public double getOpacity() {
+        Geometry obj = Geometry.safeDownCast(getOpenSimObject());
+        return obj.get_Appearance().get_opacity();
+    }
+
+    public void setOpacity(double newOpacity) {
+        Geometry obj = Geometry.safeDownCast(getOpenSimObject());
+        // FIX40 support undo
+        obj.setOpacity(newOpacity);
+        updateObjectDisplay(obj);
+        
+    }
+
+    private void updateObjectDisplay(Geometry obj) {
+        // Tell the world that the owner modelComponent need to regenerate
+        ModelComponent mc = obj.getOwnerModelComponent();
+        ViewDB.getInstance().getModelVisuals(mc.getModel()).upateDisplay(mc);
+        ViewDB.getInstance().repaintAll();
     }
 
     public Geometry.Representation getDisplayPreference() {
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        DisplayGeometryDisplayer disp = (DisplayGeometryDisplayer) ViewDB.getInstance().getVtkRepForObject(obj);
-        return disp.getDisplayPreference();
+        return obj.getRepresentation();
    }
 
     public void setDisplayPreference(Geometry.Representation newPref) {
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        DisplayGeometryDisplayer disp = (DisplayGeometryDisplayer) ViewDB.getInstance().getVtkRepForObject(obj);
-        disp.setDisplayPreference(newPref);
+        obj.setRepresentation(newPref);
+        updateObjectDisplay(obj);
     }
 }

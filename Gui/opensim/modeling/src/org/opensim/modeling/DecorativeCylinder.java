@@ -103,4 +103,13 @@ public class DecorativeCylinder extends DecorativeGeometry {
     return new DecorativeCylinder(opensimModelJNI.DecorativeCylinder_setRepresentation(swigCPtr, this, r.swigValue()), false);
   }
 
+  public DecorativeCylinder clone() {
+    long cPtr = opensimModelJNI.DecorativeCylinder_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new DecorativeCylinder(cPtr, true);
+  }
+
+  public boolean equals(DecorativeCylinder other) {
+    return opensimModelJNI.DecorativeCylinder_equals(swigCPtr, this, DecorativeCylinder.getCPtr(other), other);
+  }
+
 }

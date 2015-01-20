@@ -91,4 +91,13 @@ public class DecorativeBrick extends DecorativeGeometry {
     return new DecorativeBrick(opensimModelJNI.DecorativeBrick_setRepresentation(swigCPtr, this, r.swigValue()), false);
   }
 
+  public DecorativeBrick clone() {
+    long cPtr = opensimModelJNI.DecorativeBrick_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new DecorativeBrick(cPtr, true);
+  }
+
+  public boolean equals(DecorativeBrick other) {
+    return opensimModelJNI.DecorativeBrick_equals(swigCPtr, this, DecorativeBrick.getCPtr(other), other);
+  }
+
 }

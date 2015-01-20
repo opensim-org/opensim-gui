@@ -119,4 +119,13 @@ public class DecorativeLine extends DecorativeGeometry {
     return new DecorativeLine(opensimModelJNI.DecorativeLine_updDowncast(DecorativeGeometry.getCPtr(arg0), arg0), false);
   }
 
+  public DecorativeLine clone() {
+    long cPtr = opensimModelJNI.DecorativeLine_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new DecorativeLine(cPtr, true);
+  }
+
+  public boolean equals(DecorativeLine other) {
+    return opensimModelJNI.DecorativeLine_equals(swigCPtr, this, DecorativeLine.getCPtr(other), other);
+  }
+
 }

@@ -83,4 +83,13 @@ public class DecorativeMeshFile extends DecorativeGeometry {
     return new DecorativeMeshFile(opensimModelJNI.DecorativeMeshFile_setRepresentation(swigCPtr, this, r.swigValue()), false);
   }
 
+  public DecorativeMeshFile clone() {
+    long cPtr = opensimModelJNI.DecorativeMeshFile_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new DecorativeMeshFile(cPtr, true);
+  }
+
+  public boolean equals(DecorativeMeshFile other) {
+    return opensimModelJNI.DecorativeMeshFile_equals(swigCPtr, this, DecorativeMeshFile.getCPtr(other), other);
+  }
+
 }
