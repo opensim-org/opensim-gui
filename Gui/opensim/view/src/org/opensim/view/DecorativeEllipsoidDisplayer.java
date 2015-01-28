@@ -117,7 +117,7 @@ class DecorativeEllipsoidDisplayer extends DecorativeGeometryDisplayer {
     }
 
     @Override
-    vtkActor computeVisuals() {
+    vtkActor getVisuals() {
        updateDisplayFromDecorativeGeometry();
        return this;
     }
@@ -127,5 +127,10 @@ class DecorativeEllipsoidDisplayer extends DecorativeGeometryDisplayer {
     }
     int getIndexOnBody() {
         return ag.getIndexOnBody();
+    }
+    
+    @Override
+    DecorativeGeometry getDecorativeGeometry() {
+        return ag;
     }
 }

@@ -59,6 +59,8 @@ public abstract class DecorativeGeometryDisplayer extends vtkActor {
         return obj;
     }
 
+    abstract DecorativeGeometry getDecorativeGeometry();
+    
     private void setColorFromDecorativeGeometry(DecorativeGeometry cs) {
         final Vec3 color = cs.getColor();
         GetProperty().SetColor(color.get(0), color.get(1), color.get(2));
@@ -119,7 +121,7 @@ public abstract class DecorativeGeometryDisplayer extends vtkActor {
             GetProperty().SetOpacity(cs.getOpacity());
     }
 
-    abstract vtkActor computeVisuals();
+    abstract vtkActor getVisuals();
 
     void updateDecorativeGeometryFromObject() {
         // if Object has properties for transform, color, pref, scale then update DG

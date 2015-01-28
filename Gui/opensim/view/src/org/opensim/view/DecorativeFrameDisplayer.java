@@ -5,6 +5,7 @@
 package org.opensim.view;
 
 import org.opensim.modeling.DecorativeFrame;
+import org.opensim.modeling.DecorativeGeometry;
 import org.opensim.modeling.OpenSimObject;
 import vtk.vtkActor;
 import vtk.vtkAxes;
@@ -40,7 +41,7 @@ class DecorativeFrameDisplayer extends DecorativeGeometryDisplayer {
     }
 
     @Override
-    vtkActor computeVisuals() {
+    vtkActor getVisuals() {
         updateDisplayFromDecorativeGeometry();
         return this;
     }
@@ -51,5 +52,9 @@ class DecorativeFrameDisplayer extends DecorativeGeometryDisplayer {
     int getIndexOnBody() {
         return ag.getIndexOnBody();
     }
-   
+    
+    @Override
+    DecorativeGeometry getDecorativeGeometry() {
+        return ag;
+    }   
 }

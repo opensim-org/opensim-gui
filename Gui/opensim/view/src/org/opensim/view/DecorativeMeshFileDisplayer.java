@@ -83,7 +83,7 @@ public class DecorativeMeshFileDisplayer extends DecorativeGeometryDisplayer {
     }
 
     @Override
-    vtkActor computeVisuals() {
+    vtkActor getVisuals() {
         createDisplayFromDecorativeGeometry();
         updateDisplayFromDecorativeGeometry();
         return this;
@@ -95,12 +95,9 @@ public class DecorativeMeshFileDisplayer extends DecorativeGeometryDisplayer {
     int getIndexOnBody() {
         return ag.getIndexOnBody();
     }
-
-    /**
-     * @return the ag
-     */
-    public DecorativeMeshFile getAg() {
+    
+    @Override
+    DecorativeGeometry getDecorativeGeometry() {
         return ag;
     }
-
 }

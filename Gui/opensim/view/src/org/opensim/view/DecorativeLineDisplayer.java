@@ -32,10 +32,7 @@ import vtk.vtkPolyData;
 import vtk.vtkTubeFilter;
 
 public class DecorativeLineDisplayer extends DecorativeGeometryDisplayer {
-
-    private int bodyId=-1;
-    private int indexOnBody = -1;
-    private DecorativeGeometry agLocal;
+    private DecorativeLine agLocal;
     private vtkLineSource line = null;
     private vtkTubeFilter dFilter = new vtkTubeFilter();
 
@@ -49,8 +46,6 @@ public class DecorativeLineDisplayer extends DecorativeGeometryDisplayer {
     DecorativeLineDisplayer(DecorativeLine ag) {
         point1 = new Vec3(ag.getPoint1());
         point2 = new Vec3(ag.getPoint2());
-        bodyId = ag.getBodyId();
-        indexOnBody = ag.getIndexOnBody();
         agLocal = ag.clone();
         //if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
 
@@ -82,16 +77,16 @@ public class DecorativeLineDisplayer extends DecorativeGeometryDisplayer {
     }
 
     @Override
-    vtkActor computeVisuals() {
+    vtkActor getVisuals() {
        updateDisplayFromDecorativeGeometry();
        return this;
     }
 
     int getBodyId() {
-        return bodyId;
+        return agLocal.getBodyId();
     }
     int getIndexOnBody() {
-        return indexOnBody;
+        return agLocal.getIndexOnBody();
     }
 
     void copyAttributesFromDecorativeGeometry(DecorativeGeometry arg0) {
@@ -131,6 +126,10 @@ public class DecorativeLineDisplayer extends DecorativeGeometryDisplayer {
     public void setPoint2(Vec3 point2) {
         this.point2 = point2;
     }
-    
+        
+    @Override
+    DecorativeGeometry getDecorativeGeometry() {
+        return agLocal;
+    }
     
 }

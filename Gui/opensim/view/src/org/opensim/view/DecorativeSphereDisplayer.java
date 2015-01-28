@@ -35,10 +35,7 @@ import vtk.vtkSphereSource;
 public class DecorativeSphereDisplayer extends DecorativeGeometryDisplayer {
     private static int RESOLUTION_PHI=32;
     private static int RESOLUTION_THETA=32;
-    private double radius;
-    private int bodyId=-1;
-    private int indexOnBody = -1;
-    DecorativeGeometry agLocal;
+    DecorativeSphere ag;
     vtkSphereSource sphere = null;
     //protected OpenSimObject obj;
     /** 
@@ -47,10 +44,7 @@ public class DecorativeSphereDisplayer extends DecorativeGeometryDisplayer {
      * @param object 
      */
     DecorativeSphereDisplayer(DecorativeSphere ag) {
-        this.radius = ag.getRadius();
-        bodyId = ag.getBodyId();
-        indexOnBody = ag.getIndexOnBody();
-        agLocal = ag.clone();
+        this.ag = ag.clone();
         //if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
      }
 
@@ -68,7 +62,7 @@ public class DecorativeSphereDisplayer extends DecorativeGeometryDisplayer {
             sphere.LatLongTessellationOn();
             sphere.SetPhiResolution(RESOLUTION_PHI);
             sphere.SetThetaResolution(RESOLUTION_THETA);
-            sphere.SetRadius(radius);
+            sphere.SetRadius(ag.getRadius());
         }
         return sphere.GetOutput();
     }
@@ -124,19 +118,24 @@ public class DecorativeSphereDisplayer extends DecorativeGeometryDisplayer {
     void updateDisplayFromDecorativeGeometry() {
         vtkPolyData polyData = getPolyData();
         createAndConnectMapper(polyData);
-        setXformAndAttributesFromDecorativeGeometry(agLocal);
+        setXformAndAttributesFromDecorativeGeometry(ag);
     }
 
     @Override
-    vtkActor computeVisuals() {
+    vtkActor getVisuals() {
         updateDisplayFromDecorativeGeometry();
         return this;
     }
 
     int getBodyId() {
-        return bodyId;
+        return ag.getBodyId();
     }
     int getIndexOnBody() {
-        return indexOnBody;
+        return ag.getIndexOnBody();
+    }
+    
+    @Override
+    DecorativeGeometry getDecorativeGeometry() {
+        return ag;
     }
 }

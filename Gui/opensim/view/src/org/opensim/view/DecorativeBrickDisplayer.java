@@ -117,7 +117,7 @@ public class DecorativeBrickDisplayer extends DecorativeGeometryDisplayer {
     }
 
     @Override
-    vtkActor computeVisuals() {
+    vtkActor getVisuals() {
        updateDisplayFromDecorativeGeometry();
        return this;
     }
@@ -127,5 +127,10 @@ public class DecorativeBrickDisplayer extends DecorativeGeometryDisplayer {
     }
     int getIndexOnBody() {
         return ag.getIndexOnBody();
+    }
+
+    @Override
+    DecorativeGeometry getDecorativeGeometry() {
+        return ag;
     }
 }

@@ -151,7 +151,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
             DecorativeGeometry dg;
             for (int idx=0; idx <avdg.size(); idx++){
                 dg = avdg.getElt(idx);
-                ////System.out.println("Variable Visuals for "+mc.getName()+ "index:"+idx+"is");
+                //System.out.println("Variable Visuals for "+mc.getName()+ "index:"+idx+"is");
                 dg.implementGeometry(dgi);
             }
             dgi.finishVariableGeometry();
@@ -200,9 +200,8 @@ public class SingleModelVisuals implements ModelVisualsVtk {
         ModelComponentIterator mcIter = mcList.begin();
         mcIter.next(); // Skip model itself
         while (!mcIter.equals(mcList.end())){
-            //System.out.println("Type, name:"+mcIter.__deref__().getConcreteClassName()+mcIter.__deref__().getName());
-            if (!mcIter.__deref__().getConcreteClassName().equalsIgnoreCase("GeometryPath"))
-                addGeometryForModelComponent(mcIter.__deref__(), model);
+            //System.out.println("In createModelAssembly Type, name:"+mcIter.__deref__().getConcreteClassName()+mcIter.__deref__().getName());
+            addGeometryForModelComponent(mcIter.__deref__(), model);
             mcIter.next();
         }
 
@@ -628,32 +627,13 @@ public class SingleModelVisuals implements ModelVisualsVtk {
         //pushColoringFunctionToMuscles();
     }
 
-    private void buildModelComponentList(Model aModel) {
-        BodySet bodies = aModel.getBodySet();
- 
-        for(int bodyNum=0; bodyNum<bodies.getSize();  bodyNum++)
-        {
-            Body body = bodies.get(bodyNum);
-            modelComponents.add(body);
-        }
-        JointSet joints = aModel.getJointSet();
-        for(int jointNum=0; jointNum<joints.getSize();  jointNum++)
-        {
-            Joint jnt = joints.get(jointNum);
-            modelComponents.add(jnt);
-        }
-        
-        ForceSet forces = aModel.getForceSet();
-        for(int forceNum=0; forceNum<forces.getSize();  forceNum++)
-        {
-            Force force = forces.get(forceNum);
-            modelComponents.add(force);
-        }
-        ContactGeometrySet cgSet = aModel.getContactGeometrySet();
-        for(int cgNum=0; cgNum<cgSet.getSize();  cgNum++)
-        {
-            ContactGeometry contactGeom = cgSet.get(cgNum);
-            modelComponents.add(contactGeom);
+    private void buildModelComponentList(Model model) {
+        ModelComponentList mcList = model.getModelComponentList();
+        ModelComponentIterator mcIter = mcList.begin();
+        mcIter.next(); // Skip model itself
+        while (!mcIter.equals(mcList.end())){
+            modelComponents.add(mcIter.__deref__());
+            mcIter.next();
         }
    }
 

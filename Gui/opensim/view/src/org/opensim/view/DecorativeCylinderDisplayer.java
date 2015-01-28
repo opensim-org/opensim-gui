@@ -125,7 +125,7 @@ public class DecorativeCylinderDisplayer extends DecorativeGeometryDisplayer {
     }
 
     @Override
-    vtkActor computeVisuals() {
+    vtkActor getVisuals() {
        updateDisplayFromDecorativeGeometry();
        return this;
     }
@@ -135,5 +135,10 @@ public class DecorativeCylinderDisplayer extends DecorativeGeometryDisplayer {
     }
     int getIndexOnBody() {
         return ag.getIndexOnBody();
+    }
+    
+    @Override
+    DecorativeGeometry getDecorativeGeometry() {
+        return ag;
     }
 }
