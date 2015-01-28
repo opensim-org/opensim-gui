@@ -173,6 +173,10 @@ public class JointIterator {
     return opensimModelJNI.JointIterator_calcPower(swigCPtr, this, State.getCPtr(s), s);
   }
 
+  public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
+    opensimModelJNI.JointIterator_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
+  }
+
   public Geometry get_GeometrySet(int i) {
     return new Geometry(opensimModelJNI.JointIterator_get_GeometrySet(swigCPtr, this, i), false);
   }
@@ -183,10 +187,6 @@ public class JointIterator {
 
   public int getGeometrySize() {
     return opensimModelJNI.JointIterator_getGeometrySize(swigCPtr, this);
-  }
-
-  public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
-    opensimModelJNI.JointIterator_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
   }
 
   public void addToSystem(SWIGTYPE_p_SimTK__MultibodySystem system) {

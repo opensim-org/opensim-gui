@@ -58,7 +58,11 @@ public class ArrowGeometry extends LineGeometry {
   }
 
   public ArrowGeometry(Vec3 aPoint1, Vec3 aUnitDirTo, double aLength) {
-    this(opensimModelJNI.new_ArrowGeometry(Vec3.getCPtr(aPoint1), aPoint1, Vec3.getCPtr(aUnitDirTo), aUnitDirTo, aLength), true);
+    this(opensimModelJNI.new_ArrowGeometry__SWIG_0(Vec3.getCPtr(aPoint1), aPoint1, Vec3.getCPtr(aUnitDirTo), aUnitDirTo, aLength), true);
+  }
+
+  public ArrowGeometry() {
+    this(opensimModelJNI.new_ArrowGeometry__SWIG_1(), true);
   }
 
   public void createDecorativeGeometry(ArrayDecorativeGeometry decoGeoms) {

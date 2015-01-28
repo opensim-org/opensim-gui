@@ -257,10 +257,6 @@ public class Body extends RigidFrame {
     opensimModelJNI.Body_scaleMass(swigCPtr, this, aScaleFactor);
   }
 
-  public void getScaleFactors(Vec3 aScaleFactors) {
-    opensimModelJNI.Body_getScaleFactors(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
-  }
-
   public void addMeshGeometry(String aGeometryFileName, Vec3 scale) {
     opensimModelJNI.Body_addMeshGeometry__SWIG_0(swigCPtr, this, aGeometryFileName, Vec3.getCPtr(scale), scale);
   }

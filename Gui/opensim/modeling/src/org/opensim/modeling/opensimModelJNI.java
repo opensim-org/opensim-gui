@@ -2164,7 +2164,6 @@ public class opensimModelJNI {
   public final static native long BodyIterator_getMassCenter(long jarg1, BodyIterator jarg1_);
   public final static native long BodyIterator_getInertia__SWIG_0(long jarg1, BodyIterator jarg1_);
   public final static native long BodyIterator_getMassProperties(long jarg1, BodyIterator jarg1_);
-  public final static native void BodyIterator_getScaleFactors(long jarg1, BodyIterator jarg1_, long jarg2, Vec3 jarg2_);
   public final static native void BodyIterator_generateDecorations(long jarg1, BodyIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native long BodyIterator_getWrapObject(long jarg1, BodyIterator jarg1_, String jarg2);
   public final static native long BodyIterator_getWrapObjectSet(long jarg1, BodyIterator jarg1_);
@@ -2494,10 +2493,10 @@ public class opensimModelJNI {
   public final static native boolean JointIterator_isCoordinateUsed(long jarg1, JointIterator jarg1_, long jarg2, Coordinate jarg2_);
   public final static native long JointIterator_calcEquivalentSpatialForce(long jarg1, JointIterator jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
   public final static native double JointIterator_calcPower(long jarg1, JointIterator jarg1_, long jarg2, State jarg2_);
+  public final static native void JointIterator_generateDecorations(long jarg1, JointIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native long JointIterator_get_GeometrySet(long jarg1, JointIterator jarg1_, int jarg2);
   public final static native long JointIterator_getModel(long jarg1, JointIterator jarg1_);
   public final static native int JointIterator_getGeometrySize(long jarg1, JointIterator jarg1_);
-  public final static native void JointIterator_generateDecorations(long jarg1, JointIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native void JointIterator_addToSystem(long jarg1, JointIterator jarg1_, long jarg2);
   public final static native void JointIterator_initStateFromProperties(long jarg1, JointIterator jarg1_, long jarg2, State jarg2_);
   public final static native long JointIterator_getSystem(long jarg1, JointIterator jarg1_);
@@ -2828,7 +2827,8 @@ public class opensimModelJNI {
   public final static native String ArrowGeometry_getClassName();
   public final static native long ArrowGeometry_clone(long jarg1, ArrowGeometry jarg1_);
   public final static native String ArrowGeometry_getConcreteClassName(long jarg1, ArrowGeometry jarg1_);
-  public final static native long new_ArrowGeometry(long jarg1, Vec3 jarg1_, long jarg2, Vec3 jarg2_, double jarg3);
+  public final static native long new_ArrowGeometry__SWIG_0(long jarg1, Vec3 jarg1_, long jarg2, Vec3 jarg2_, double jarg3);
+  public final static native long new_ArrowGeometry__SWIG_1();
   public final static native void delete_ArrowGeometry(long jarg1);
   public final static native void ArrowGeometry_createDecorativeGeometry(long jarg1, ArrowGeometry jarg1_, long jarg2, ArrayDecorativeGeometry jarg2_);
   public final static native long AnalyticGeometry_safeDownCast(long jarg1, OpenSimObject jarg1_);
@@ -2990,6 +2990,7 @@ public class opensimModelJNI {
   public final static native void ModelComponent_adoptGeometry(long jarg1, ModelComponent jarg1_, long jarg2, Geometry jarg2_);
   public final static native void ModelComponent_extendFinalizeFromProperties(long jarg1, ModelComponent jarg1_);
   public final static native void ModelComponent_generateDecorations(long jarg1, ModelComponent jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
+  public final static native void ModelComponent_setDisplayDelegate(long jarg1, ModelComponent jarg1_, long jarg2);
   public final static native long SetModelComponents_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void SetModelComponents_assign(long jarg1, SetModelComponents jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String SetModelComponents_getClassName();
@@ -5504,6 +5505,7 @@ public class opensimModelJNI {
   public final static native long Joint_calcEquivalentSpatialForce(long jarg1, Joint jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
   public final static native double Joint_calcPower(long jarg1, Joint jarg1_, long jarg2, State jarg2_);
   public final static native void Joint_scale(long jarg1, Joint jarg1_, long jarg2, ScaleSet jarg2_);
+  public final static native void Joint_generateDecorations(long jarg1, Joint jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native long FreeJoint_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void FreeJoint_assign(long jarg1, FreeJoint jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String FreeJoint_getClassName();
@@ -5686,7 +5688,6 @@ public class opensimModelJNI {
   public final static native void Body_scaleInertialProperties__SWIG_0(long jarg1, Body jarg1_, long jarg2, Vec3 jarg2_, boolean jarg3);
   public final static native void Body_scaleInertialProperties__SWIG_1(long jarg1, Body jarg1_, long jarg2, Vec3 jarg2_);
   public final static native void Body_scaleMass(long jarg1, Body jarg1_, double jarg2);
-  public final static native void Body_getScaleFactors(long jarg1, Body jarg1_, long jarg2, Vec3 jarg2_);
   public final static native void Body_addMeshGeometry__SWIG_0(long jarg1, Body jarg1_, String jarg2, long jarg3, Vec3 jarg3_);
   public final static native void Body_addMeshGeometry__SWIG_1(long jarg1, Body jarg1_, String jarg2);
   public final static native void Body_generateDecorations(long jarg1, Body jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
