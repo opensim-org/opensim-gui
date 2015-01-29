@@ -36,7 +36,7 @@ public class DecorativeSphereDisplayer extends DecorativeGeometryDisplayer {
     private static int RESOLUTION_PHI=32;
     private static int RESOLUTION_THETA=32;
     DecorativeSphere ag;
-    vtkSphereSource sphere = null;
+    vtkSphereSource sphere = new vtkSphereSource();
     //protected OpenSimObject obj;
     /** 
      * Displayer for Wrap Geometry
@@ -57,13 +57,11 @@ public class DecorativeSphereDisplayer extends DecorativeGeometryDisplayer {
         boolean quadrants[] = new boolean[6];
         //ag.getQuadrants(quadrants);
         double[] pos = new double[3];
-        if (sphere == null){
-            sphere = new vtkSphereSource();
-            sphere.LatLongTessellationOn();
-            sphere.SetPhiResolution(RESOLUTION_PHI);
-            sphere.SetThetaResolution(RESOLUTION_THETA);
-            sphere.SetRadius(ag.getRadius());
-        }
+        sphere.LatLongTessellationOn();
+        sphere.SetPhiResolution(RESOLUTION_PHI);
+        sphere.SetThetaResolution(RESOLUTION_THETA);
+        sphere.SetRadius(ag.getRadius());
+        
         return sphere.GetOutput();
     }
 
@@ -137,5 +135,10 @@ public class DecorativeSphereDisplayer extends DecorativeGeometryDisplayer {
     @Override
     DecorativeGeometry getDecorativeGeometry() {
         return ag;
+    }
+     
+    void updateGeometry(DecorativeSphere arg0) {
+         ag.setRadius(arg0.getRadius());
+        updateDisplayFromDecorativeGeometry();
     }
 }

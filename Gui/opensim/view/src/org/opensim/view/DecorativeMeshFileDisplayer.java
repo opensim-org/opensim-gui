@@ -100,4 +100,11 @@ public class DecorativeMeshFileDisplayer extends DecorativeGeometryDisplayer {
     DecorativeGeometry getDecorativeGeometry() {
         return ag;
     }
+
+    void updateGeometry(DecorativeMeshFile arg0) {
+        if (!arg0.getMeshFile().equalsIgnoreCase(ag.getMeshFile())){
+            ag = arg0.clone();
+            createDisplayFromDecorativeGeometry();
+        }
+    }
 }

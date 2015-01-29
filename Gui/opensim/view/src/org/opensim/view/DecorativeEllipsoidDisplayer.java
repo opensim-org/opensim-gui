@@ -23,9 +23,11 @@ import vtk.vtkTransformPolyDataFilter;
  */
 class DecorativeEllipsoidDisplayer extends DecorativeGeometryDisplayer {
 
-    private static int RESOLUTION_PHI = 32;
-    private static int RESOLUTION_THETA = 32;
+    private static final int RESOLUTION_PHI = 32;
+    private static final int RESOLUTION_THETA = 32;
     private DecorativeEllipsoid ag;
+    vtkSphereSource ellipsoid = new vtkSphereSource();
+
     //protected OpenSimObject obj;
 
     /** 
@@ -42,8 +44,7 @@ class DecorativeEllipsoidDisplayer extends DecorativeGeometryDisplayer {
      * Convert DecorativeGeometry object passed in to the corresponding vtk polyhedral representation.
      * Transform is passed in as well since the way it applies to PolyData depends on source
      */
-    private vtkPolyData getPolyData(DecorativeEllipsoid ag) {
-        vtkSphereSource ellipsoid = new vtkSphereSource();
+    private vtkPolyData getPolyData() {
         ellipsoid.SetRadius(1.0);
         ellipsoid.SetPhiResolution(RESOLUTION_PHI);
         ellipsoid.SetThetaResolution(RESOLUTION_THETA);
@@ -110,7 +111,7 @@ class DecorativeEllipsoidDisplayer extends DecorativeGeometryDisplayer {
 
     @Override
     void updateDisplayFromDecorativeGeometry() {
-        vtkPolyData polyData = getPolyData(ag);
+        vtkPolyData polyData = getPolyData();
         //updatePropertiesForPolyData(polyData);
         createAndConnectMapper(polyData);
         setXformAndAttributesFromDecorativeGeometry(ag);
@@ -132,5 +133,10 @@ class DecorativeEllipsoidDisplayer extends DecorativeGeometryDisplayer {
     @Override
     DecorativeGeometry getDecorativeGeometry() {
         return ag;
+    }
+
+    void updateGeometry(DecorativeEllipsoid arg0) {
+        ag.setRadii(arg0.getRadii());
+        updateDisplayFromDecorativeGeometry();
     }
 }

@@ -34,6 +34,7 @@ import vtk.vtkPolyData;
 
 public class DecorativeBrickDisplayer extends DecorativeGeometryDisplayer {
     private DecorativeBrick ag;
+    private vtkCubeSource brick = new vtkCubeSource();
     //protected OpenSimObject obj;
     /** 
      * @param ag
@@ -41,7 +42,7 @@ public class DecorativeBrickDisplayer extends DecorativeGeometryDisplayer {
      */
     DecorativeBrickDisplayer(DecorativeBrick ag) {
         this.ag = ag.clone();
-        //if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
+         //if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
 
      }
 
@@ -50,7 +51,6 @@ public class DecorativeBrickDisplayer extends DecorativeGeometryDisplayer {
      * Transform is passed in as well since the way it applies to PolyData depends on source
      */
     private vtkPolyData getPolyData(DecorativeBrick ag) {
-        vtkCubeSource brick = new vtkCubeSource();
         //System.out.println("Processing cyl (r, l)"+params[0]+","+params[1]);
         Vec3 halfLengths = ag.getHalfLengths();
         brick.SetXLength(halfLengths.get(0)*2);
@@ -132,5 +132,10 @@ public class DecorativeBrickDisplayer extends DecorativeGeometryDisplayer {
     @Override
     DecorativeGeometry getDecorativeGeometry() {
         return ag;
+    }
+ 
+    void updateGeometry(DecorativeBrick arg0) {
+        ag.setHalfLengths(arg0.getHalfLengths());
+        updateDisplayFromDecorativeGeometry();
     }
 }

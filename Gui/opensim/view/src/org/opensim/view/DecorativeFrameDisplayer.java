@@ -19,6 +19,8 @@ import vtk.vtkPolyData;
 class DecorativeFrameDisplayer extends DecorativeGeometryDisplayer {
 
     private DecorativeFrame ag;
+    vtkAxes frameSrc = new vtkAxes();
+    
     public DecorativeFrameDisplayer(DecorativeFrame arg0) {
         //super(object);
         this.ag = arg0.clone();
@@ -27,7 +29,6 @@ class DecorativeFrameDisplayer extends DecorativeGeometryDisplayer {
     }
 
     private vtkPolyData getPolyData(DecorativeFrame ag) {
-        vtkAxes frameSrc = new vtkAxes();
         frameSrc.SetScaleFactor(ag.getAxisLength());
         return frameSrc.GetOutput();
     }

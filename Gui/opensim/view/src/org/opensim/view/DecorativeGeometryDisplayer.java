@@ -144,4 +144,5 @@ public abstract class DecorativeGeometryDisplayer extends vtkActor {
     public void setObj(OpenSimObject obj) {
         this.obj = obj;
     }
+    
 }

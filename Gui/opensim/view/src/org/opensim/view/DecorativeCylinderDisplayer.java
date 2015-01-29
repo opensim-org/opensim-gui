@@ -38,6 +38,7 @@ import vtk.vtkTransformPolyDataFilter;
 
 public class DecorativeCylinderDisplayer extends DecorativeGeometryDisplayer {
     private DecorativeCylinder ag;
+    vtkCylinderSource cyl = new vtkCylinderSource();
     //protected OpenSimObject obj;
     /** 
      * Displayer for Wrap Geometry
@@ -54,7 +55,6 @@ public class DecorativeCylinderDisplayer extends DecorativeGeometryDisplayer {
      * Transform is passed in as well since the way it applies to PolyData depends on source
      */
     private vtkPolyData getPolyData(DecorativeCylinder ag) {
-        vtkCylinderSource cyl = new vtkCylinderSource();
         //System.out.println("Processing cyl (r, l)"+params[0]+","+params[1]);
         cyl.SetRadius(ag.getRadius());
         cyl.SetHeight(ag.getHalfHeight() * 2);
@@ -140,5 +140,11 @@ public class DecorativeCylinderDisplayer extends DecorativeGeometryDisplayer {
     @Override
     DecorativeGeometry getDecorativeGeometry() {
         return ag;
+    }
+    
+    void updateGeometry(DecorativeCylinder arg0) {
+        ag.setRadius(arg0.getRadius());
+        ag.setHalfHeight(arg0.getHalfHeight());
+        updateDisplayFromDecorativeGeometry();
     }
 }

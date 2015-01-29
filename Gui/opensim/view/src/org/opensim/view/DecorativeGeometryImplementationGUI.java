@@ -121,6 +121,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
                     DecorativeCylinderDisplayer displayer = (DecorativeCylinderDisplayer) nextDisplayer;
                     if (displayer.getBodyId() == arg0.getBodyId()
                             && displayer.getIndexOnBody() == arg0.getIndexOnBody()) {
+                        displayer.updateGeometry(arg0);
                         displayer.copyAttributesFromDecorativeGeometry(arg0);
                         found = true;
                         displayer.Modified();
@@ -163,6 +164,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
                     DecorativeSphereDisplayer displayer = (DecorativeSphereDisplayer) nextDisplayer;
                     if (displayer.getBodyId() == arg0.getBodyId()
                             && displayer.getIndexOnBody() == arg0.getIndexOnBody()) {
+                        displayer.updateGeometry(arg0);
                         displayer.copyAttributesFromDecorativeGeometry(arg0);
                         found = true;
                         displayer.Modified();
@@ -191,6 +193,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
                     DecorativeEllipsoidDisplayer ellipsoidDisplayer = (DecorativeEllipsoidDisplayer) nextDisplayer;
                     if (ellipsoidDisplayer.getBodyId()==arg0.getBodyId() && 
                             ellipsoidDisplayer.getIndexOnBody()==arg0.getIndexOnBody()){
+                        ellipsoidDisplayer.updateGeometry(arg0);
                         ellipsoidDisplayer.copyAttributesFromDecorativeGeometry(arg0);
                         found = true;
                         ellipsoidDisplayer.Modified();
@@ -243,6 +246,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
                     DecorativeMeshFileDisplayer displayer = (DecorativeMeshFileDisplayer) nextDisplayer;
                     if (displayer.getBodyId()==arg0.getBodyId() && 
                             displayer.getIndexOnBody()==arg0.getIndexOnBody()){
+                        displayer.updateGeometry(arg0);
                         displayer.copyAttributesFromDecorativeGeometry(arg0);
                         found = true;
                         displayer.Modified();
