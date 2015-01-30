@@ -102,11 +102,30 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
     @Override
   public void implementBrickGeometry(DecorativeBrick arg0) {
     //System.out.println("Type: DecorativeBrick");
-    BodyDisplayer bd = mapBodyIndicesToDisplayers.get(arg0.getBodyId());
-    DecorativeBrickDisplayer brickDisplayer=new DecorativeBrickDisplayer(arg0);
-    bd.AddPart(brickDisplayer.getVisuals());
-    addDisplayerToCurrentList(brickDisplayer);
-    mapVisualsToObjects.put(brickDisplayer.getVisuals(), currentModelComponent);
+        if (updateMode) { // System.out.println("updating");
+            ListIterator<DecorativeGeometryDisplayer> listIterator = getCurrentGeometryDisplayers();
+            boolean found = false;
+            while (listIterator.hasNext() && !found) {
+                DecorativeGeometryDisplayer nextDisplayer = listIterator.next();
+                if (nextDisplayer instanceof DecorativeBrickDisplayer) {
+                    DecorativeBrickDisplayer displayer = (DecorativeBrickDisplayer) nextDisplayer;
+                    if (displayer.getBodyId() == arg0.getBodyId()
+                            && displayer.getIndexOnBody() == arg0.getIndexOnBody()) {
+                        displayer.updateGeometry(arg0);
+                        displayer.copyAttributesFromDecorativeGeometry(arg0);
+                        found = true;
+                        displayer.Modified();
+                    }
+                }
+            }
+        } else {
+            BodyDisplayer bd = mapBodyIndicesToDisplayers.get(arg0.getBodyId());
+            DecorativeBrickDisplayer brickDisplayer=new DecorativeBrickDisplayer(arg0);
+            bd.AddPart(brickDisplayer.getVisuals());
+            addDisplayerToCurrentList(brickDisplayer);
+            mapVisualsToObjects.put(brickDisplayer.getVisuals(), currentModelComponent);           
+            //mapBodyIndicesToDisplayers.put(arg0.getUserRefAsObject(), brickDisplayer);
+        }    
     //mapBodyIndicesToDisplayers.put(arg0.getUserRefAsObject(), brickDisplayer);
   }
 
