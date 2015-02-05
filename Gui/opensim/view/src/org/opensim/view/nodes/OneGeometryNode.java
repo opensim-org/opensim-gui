@@ -43,8 +43,6 @@ import org.opensim.modeling.Geometry;
 import org.opensim.modeling.ModelComponent;
 import org.opensim.modeling.Vec3;
 import org.opensim.view.ColorableInterface;
-import org.opensim.view.DecorativeGeometryDisplayer;
-import org.opensim.view.DisplayGeometryDisplayer;
 import org.opensim.view.editors.DisplayPreferenceEditor;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 import org.opensim.view.pub.ViewDB;
@@ -182,6 +180,7 @@ public class OneGeometryNode extends OpenSimObjectNode implements ColorableInter
 
     public void setDisplayPreference(Geometry.Representation newPref) {
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
+        // FIX40 support undo
         obj.setRepresentation(newPref);
         updateObjectDisplay(obj);
     }

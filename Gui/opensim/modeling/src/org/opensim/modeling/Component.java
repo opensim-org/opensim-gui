@@ -185,6 +185,10 @@ public class Component extends OpenSimObject {
     opensimModelJNI.Component_dumpPathName(swigCPtr, this);
   }
 
+  public FramesList getFramesList() {
+    return new FramesList(opensimModelJNI.Component_getFramesList(swigCPtr, this), true);
+  }
+
   public BodiesList getBodiesList() {
     return new BodiesList(opensimModelJNI.Component_getBodiesList(swigCPtr, this), true);
   }

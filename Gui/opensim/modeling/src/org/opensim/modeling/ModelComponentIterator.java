@@ -181,6 +181,10 @@ public class ModelComponentIterator {
     opensimModelJNI.ModelComponentIterator_dumpPathName(swigCPtr, this);
   }
 
+  public FramesList getFramesList() {
+    return new FramesList(opensimModelJNI.ModelComponentIterator_getFramesList(swigCPtr, this), true);
+  }
+
   public BodiesList getBodiesList() {
     return new BodiesList(opensimModelJNI.ModelComponentIterator_getBodiesList(swigCPtr, this), true);
   }

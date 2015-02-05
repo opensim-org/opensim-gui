@@ -16,18 +16,20 @@ public class ConcreteModelNode extends OpenSimObjectNode {
 	boolean isDataHolderOnly = false;
     public ConcreteModelNode(Model m) {
         super(m);
-		isDataHolderOnly = (m instanceof ModelForExperimentalData);
-		if (!isDataHolderOnly)
-		{   // Data Import model has no engine or Actuators
-        getChildren().add(new Node[] {new BodiesNode(m.getBodySet())});
-        getChildren().add(new Node[] {new JointsNode(m.getJointSet())});
-        getChildren().add(new Node[] {new ConstraintsNode(m.getConstraintSet())});        
-        getChildren().add(new Node[] {new ContactGeometriesNode(m.getContactGeometrySet())});
-        getChildren().add(new Node[] {new AllForcesNode(m.getForceSet())});
-        getChildren().add(new Node[] {new MarkersNode(m.getMarkerSet(), m)});
-        getChildren().add(new Node[] {new ControllersNode(m.getControllerSet())});
-        getChildren().add(new Node[] {new ProbesNode(m.getProbeSet())});
-        getChildren().add(new Node[] {new OtherComponentsNode(m.getMiscModelComponentSet())});
+	isDataHolderOnly = (m instanceof ModelForExperimentalData);
+	if (!isDataHolderOnly)
+	{   // Data Import model has no engine or Actuators
+            getChildren().add(new Node[] {new FramesNode(m)});
+            getChildren().add(new Node[] {new BodiesNode(m.getBodySet())});
+            getChildren().add(new Node[] {new JointsNode(m.getJointSet())});
+            getChildren().add(new Node[] {new ConstraintsNode(m.getConstraintSet())});        
+            getChildren().add(new Node[] {new ContactGeometriesNode(m.getContactGeometrySet())});
+            getChildren().add(new Node[] {new AllForcesNode(m.getForceSet())});
+            getChildren().add(new Node[] {new MarkersNode(m.getMarkerSet(), m)});
+            getChildren().add(new Node[] {new ControllersNode(m.getControllerSet())});
+            getChildren().add(new Node[] {new ProbesNode(m.getProbeSet())});
+            getChildren().add(new Node[] {new OtherComponentsNode(m.getMiscModelComponentSet())});
+            
         }
         addDisplayOption(displayOption.Isolatable);
         addDisplayOption(displayOption.Showable);

@@ -25,17 +25,8 @@ public class OneBodyNode extends OpenSimObjectNode{
       setShortDescription(bundle.getString("HINT_BodyNode"));
       // Create children for wrap objects associated with body
       Body bdy = (Body) b;
-	  Children children = getChildren();
-      int geomSize = bdy.getGeometrySize();
-       // Create node for geometry
-       for (int g = 0; g < geomSize; g++) {
-           Geometry oneG = bdy.get_GeometrySet(g);
-
-           OneGeometryNode node = new OneGeometryNode(oneG);
-           Node[] arrNodes = new Node[1];
-           arrNodes[0] = node;
-           children.add(arrNodes);
-       }
+      Children children = getChildren();
+      createGeometryNodes(bdy, children);
 	  // Create nodes for wrap objects      
       WrapObjectSet wrapObjects = bdy.getWrapObjectSet();
       for (int index=0; index < wrapObjects.getSize(); index++ ){
@@ -52,6 +43,19 @@ public class OneBodyNode extends OpenSimObjectNode{
       addDisplayOption(displayOption.Isolatable);
       addDisplayOption(displayOption.Showable);
    }
+
+    protected void createGeometryNodes(Body bdy, Children children) {
+        int geomSize = bdy.getGeometrySize();
+        // Create node for geometry
+        for (int g = 0; g < geomSize; g++) {
+            Geometry oneG = bdy.get_GeometrySet(g);
+            
+            OneGeometryNode node = new OneGeometryNode(oneG);
+            Node[] arrNodes = new Node[1];
+            arrNodes[0] = node;
+            children.add(arrNodes);
+        }
+    }
 
    
    //----------------------------------------------------------------
@@ -75,12 +79,14 @@ public class OneBodyNode extends OpenSimObjectNode{
    }
 
    
+   @Override
     public Node cloneNode() {
         return new OneBodyNode(getOpenSimObject());
     }
     /**
      * Icon for the body node 
      **/
+   @Override
     public Image getIcon(int i) {
         URL imageURL = this.getClass().getResource("/org/opensim/view/nodes/icons/bodyNode.png");
         if (imageURL != null) {
@@ -90,6 +96,7 @@ public class OneBodyNode extends OpenSimObjectNode{
         }
     }
 
+   @Override
     public Image getOpenedIcon(int i) {
         return getIcon(i);
     }

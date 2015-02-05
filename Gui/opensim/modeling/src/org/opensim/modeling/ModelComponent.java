@@ -109,8 +109,8 @@ public class ModelComponent extends Component {
     opensimModelJNI.ModelComponent_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
   }
 
-  public void setDisplayDelegate(SWIGTYPE_p_OpenSim__DisplayerInterface newDelegate) {
-    opensimModelJNI.ModelComponent_setDisplayDelegate(swigCPtr, this, SWIGTYPE_p_OpenSim__DisplayerInterface.getCPtr(newDelegate));
+  public void setDisplayDelegate(DisplayerInterface newDelegate) {
+    opensimModelJNI.ModelComponent_setDisplayDelegate(swigCPtr, this, DisplayerInterface.getCPtr(newDelegate), newDelegate);
   }
 
 }

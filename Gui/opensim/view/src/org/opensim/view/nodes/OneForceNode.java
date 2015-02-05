@@ -35,8 +35,10 @@ import java.util.ResourceBundle;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
 import org.openide.nodes.Children;
+import org.openide.nodes.Node;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.Force;
+import org.opensim.modeling.Geometry;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.ObjectDisplayMenuAction;
 
@@ -53,8 +55,19 @@ public class OneForceNode extends DisablableOpenSimObjectNode {
     public OneForceNode(OpenSimObject force) {
         super(force);
         setShortDescription(bundle.getString("HINT_OtherForceNode"));
-        setChildren(Children.LEAF);
+        Children children = getChildren();
         Force f= Force.safeDownCast(force);
+        int geomSize = f.getGeometrySize();
+        // Create node for geometry
+        for (int g = 0; g < geomSize; g++) {
+            Geometry oneG = f.get_GeometrySet(g);
+            
+            OneGeometryNode node = new OneGeometryNode(oneG);
+            Node[] arrNodes = new Node[1];
+            arrNodes[0] = node;
+            children.add(arrNodes);
+        }
+
 //        if (f.getDisplayer()!=null){
 //            addDisplayOption(displayOption.Showable);
 //            if (!f.hasGeometryPath())

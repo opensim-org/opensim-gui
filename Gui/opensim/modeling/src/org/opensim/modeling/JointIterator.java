@@ -293,6 +293,10 @@ public class JointIterator {
     opensimModelJNI.JointIterator_dumpPathName(swigCPtr, this);
   }
 
+  public FramesList getFramesList() {
+    return new FramesList(opensimModelJNI.JointIterator_getFramesList(swigCPtr, this), true);
+  }
+
   public BodiesList getBodiesList() {
     return new BodiesList(opensimModelJNI.JointIterator_getBodiesList(swigCPtr, this), true);
   }

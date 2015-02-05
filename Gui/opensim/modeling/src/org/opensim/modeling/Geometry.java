@@ -213,6 +213,10 @@ public class Geometry extends Component {
     return opensimModelJNI.Geometry_getFrameName(swigCPtr, this);
   }
 
+  public boolean isFrameSpecified() {
+    return opensimModelJNI.Geometry_isFrameSpecified(swigCPtr, this);
+  }
+
   public void createDecorativeGeometry(ArrayDecorativeGeometry arg0) {
     opensimModelJNI.Geometry_createDecorativeGeometry(swigCPtr, this, ArrayDecorativeGeometry.getCPtr(arg0), arg0);
   }

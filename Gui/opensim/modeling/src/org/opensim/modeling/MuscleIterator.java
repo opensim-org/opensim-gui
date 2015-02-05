@@ -581,6 +581,10 @@ public class MuscleIterator {
     opensimModelJNI.MuscleIterator_dumpPathName(swigCPtr, this);
   }
 
+  public FramesList getFramesList() {
+    return new FramesList(opensimModelJNI.MuscleIterator_getFramesList(swigCPtr, this), true);
+  }
+
   public BodiesList getBodiesList() {
     return new BodiesList(opensimModelJNI.MuscleIterator_getBodiesList(swigCPtr, this), true);
   }
