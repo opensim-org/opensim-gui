@@ -19,14 +19,14 @@ public class OtherComponentsNode extends OpenSimObjectSetNode {
 
     public OtherComponentsNode(ComponentSet componentSet) {
         super(componentSet);
-        setDisplayName(NbBundle.getMessage(OtherComponentsNode.class, "CTL_Components"));
+        setDisplayName(NbBundle.getMessage(OtherComponentsNode.class, "CTL_ModelComponents"));
 
         for (int index=0; index < componentSet.getSize(); index++ ){
 
             ModelComponent component = componentSet.get(index);
             Children children = getChildren();
 
-            OneComponentNode node = new OneComponentNode(component);
+            OneModelComponentNode node = new OneModelComponentNode(component);
             Node[] arrNodes = new Node[1];
             arrNodes[0] = node;
             children.add(arrNodes);

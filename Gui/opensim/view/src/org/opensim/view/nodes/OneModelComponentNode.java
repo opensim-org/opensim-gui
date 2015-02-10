@@ -6,12 +6,12 @@ import org.openide.util.NbBundle;
 import org.opensim.modeling.OpenSimObject;
 
 /** Node class to wrap generic ModelComponent objects */
-public class OneComponentNode extends OpenSimObjectNode{
-   private static ResourceBundle bundle = NbBundle.getBundle(OneComponentNode.class);
+public class OneModelComponentNode extends OpenSimObjectNode{
+   private static ResourceBundle bundle = NbBundle.getBundle(OneModelComponentNode.class);
    
-   public OneComponentNode(OpenSimObject b) {
+   public OneModelComponentNode(OpenSimObject b) {
       super(b);
-      setShortDescription(bundle.getString("HINT_ComponentNode"));
+      setShortDescription(bundle.getString("CTL_ModelComponents"));
       setChildren(Children.LEAF);      
    }
  
