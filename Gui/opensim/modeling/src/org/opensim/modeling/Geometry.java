@@ -169,8 +169,8 @@ public class Geometry extends Component {
     opensimModelJNI.Geometry_set_Appearance__SWIG_1(swigCPtr, this, Appearance.getCPtr(value), value);
   }
 
-  public Transform getTransform(State state, RigidFrame frame) {
-    return new Transform(opensimModelJNI.Geometry_getTransform(swigCPtr, this, State.getCPtr(state), state, RigidFrame.getCPtr(frame), frame), true);
+  public Transform getTransform(State state, PhysicalFrame frame) {
+    return new Transform(opensimModelJNI.Geometry_getTransform(swigCPtr, this, State.getCPtr(state), state, PhysicalFrame.getCPtr(frame), frame), true);
   }
 
   public void setDecorativeGeometryAppearance(DecorativeGeometry decoration) {

@@ -12,7 +12,7 @@ public class opensimModelJNI {
 
   static {
       try{
-        System.loadLibrary("osimJavaJNI_d");		// All OpenSim classes required for GUI operation.
+        System.loadLibrary("osimJavaJNI");		// All OpenSim classes required for GUI operation.
       }
       catch(UnsatisfiedLinkError e){
            new JOptionPane("Required library failed to load. Check that the dynamic library osimJavaJNI is in your PATH\n"+e, 
@@ -2157,6 +2157,8 @@ public class opensimModelJNI {
   public final static native long FrameIterator_findTransformBetween(long jarg1, FrameIterator jarg1_, long jarg2, State jarg2_, long jarg3, Frame jarg3_);
   public final static native long FrameIterator_expressVectorInAnotherFrame(long jarg1, FrameIterator jarg1_, long jarg2, State jarg2_, long jarg3, Vec3 jarg3_, long jarg4, Frame jarg4_);
   public final static native long FrameIterator_findLocationInAnotherFrame(long jarg1, FrameIterator jarg1_, long jarg2, State jarg2_, long jarg3, Vec3 jarg3_, long jarg4, Frame jarg4_);
+  public final static native long FrameIterator_findBaseFrame(long jarg1, FrameIterator jarg1_);
+  public final static native long FrameIterator_findTransformInBaseFrame(long jarg1, FrameIterator jarg1_);
   public final static native long FrameIterator_get_GeometrySet(long jarg1, FrameIterator jarg1_, int jarg2);
   public final static native long FrameIterator_getModel(long jarg1, FrameIterator jarg1_);
   public final static native int FrameIterator_getGeometrySize(long jarg1, FrameIterator jarg1_);
@@ -2239,11 +2241,12 @@ public class opensimModelJNI {
   public final static native long BodyIterator_getWrapObjectSet(long jarg1, BodyIterator jarg1_);
   public final static native int BodyIterator_getMobilizedBodyIndex(long jarg1, BodyIterator jarg1_);
   public final static native long BodyIterator_getMobilizedBody(long jarg1, BodyIterator jarg1_);
-  public final static native long BodyIterator_getTransformInMobilizedBody(long jarg1, BodyIterator jarg1_);
   public final static native long BodyIterator_getGroundTransform(long jarg1, BodyIterator jarg1_, long jarg2, State jarg2_);
   public final static native long BodyIterator_findTransformBetween(long jarg1, BodyIterator jarg1_, long jarg2, State jarg2_, long jarg3, Frame jarg3_);
   public final static native long BodyIterator_expressVectorInAnotherFrame(long jarg1, BodyIterator jarg1_, long jarg2, State jarg2_, long jarg3, Vec3 jarg3_, long jarg4, Frame jarg4_);
   public final static native long BodyIterator_findLocationInAnotherFrame(long jarg1, BodyIterator jarg1_, long jarg2, State jarg2_, long jarg3, Vec3 jarg3_, long jarg4, Frame jarg4_);
+  public final static native long BodyIterator_findBaseFrame(long jarg1, BodyIterator jarg1_);
+  public final static native long BodyIterator_findTransformInBaseFrame(long jarg1, BodyIterator jarg1_);
   public final static native long BodyIterator_get_GeometrySet(long jarg1, BodyIterator jarg1_, int jarg2);
   public final static native long BodyIterator_getModel(long jarg1, BodyIterator jarg1_);
   public final static native int BodyIterator_getGeometrySize(long jarg1, BodyIterator jarg1_);
@@ -2886,7 +2889,7 @@ public class opensimModelJNI {
   public final static native int Geometry_DrawSurface_get();
   public final static native int Geometry_DrawDefault_get();
   public final static native void delete_Geometry(long jarg1);
-  public final static native long Geometry_getTransform(long jarg1, Geometry jarg1_, long jarg2, State jarg2_, long jarg3, RigidFrame jarg3_);
+  public final static native long Geometry_getTransform(long jarg1, Geometry jarg1_, long jarg2, State jarg2_, long jarg3, PhysicalFrame jarg3_);
   public final static native void Geometry_setDecorativeGeometryAppearance(long jarg1, Geometry jarg1_, long jarg2, DecorativeGeometry jarg2_);
   public final static native void Geometry_setColor(long jarg1, Geometry jarg1_, long jarg2, Vec3 jarg2_);
   public final static native long Geometry_getColor(long jarg1, Geometry jarg1_);
@@ -3253,48 +3256,27 @@ public class opensimModelJNI {
   public final static native long Frame_findTransformBetween(long jarg1, Frame jarg1_, long jarg2, State jarg2_, long jarg3, Frame jarg3_);
   public final static native long Frame_expressVectorInAnotherFrame(long jarg1, Frame jarg1_, long jarg2, State jarg2_, long jarg3, Vec3 jarg3_, long jarg4, Frame jarg4_);
   public final static native long Frame_findLocationInAnotherFrame(long jarg1, Frame jarg1_, long jarg2, State jarg2_, long jarg3, Vec3 jarg3_, long jarg4, Frame jarg4_);
-  public final static native long RigidFrame_safeDownCast(long jarg1, OpenSimObject jarg1_);
-  public final static native void RigidFrame_assign(long jarg1, RigidFrame jarg1_, long jarg2, OpenSimObject jarg2_);
-  public final static native String RigidFrame_getClassName();
-  public final static native long RigidFrame_clone(long jarg1, RigidFrame jarg1_);
-  public final static native String RigidFrame_getConcreteClassName(long jarg1, RigidFrame jarg1_);
-  public final static native void delete_RigidFrame(long jarg1);
-  public final static native int RigidFrame_getMobilizedBodyIndex(long jarg1, RigidFrame jarg1_);
-  public final static native long RigidFrame_getMobilizedBody(long jarg1, RigidFrame jarg1_);
-  public final static native long RigidFrame_updMobilizedBody(long jarg1, RigidFrame jarg1_);
-  public final static native long RigidFrame_getTransformInMobilizedBody(long jarg1, RigidFrame jarg1_);
-  public final static native void RigidFrame_generateDecorations(long jarg1, RigidFrame jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
-  public final static native long FixedFrame_safeDownCast(long jarg1, OpenSimObject jarg1_);
-  public final static native void FixedFrame_assign(long jarg1, FixedFrame jarg1_, long jarg2, OpenSimObject jarg2_);
-  public final static native String FixedFrame_getClassName();
-  public final static native long FixedFrame_clone(long jarg1, FixedFrame jarg1_);
-  public final static native String FixedFrame_getConcreteClassName(long jarg1, FixedFrame jarg1_);
-  public final static native void FixedFrame_copyProperty_translation(long jarg1, FixedFrame jarg1_, long jarg2, FixedFrame jarg2_);
-  public final static native long FixedFrame_get_translation__SWIG_0(long jarg1, FixedFrame jarg1_, int jarg2);
-  public final static native long FixedFrame_upd_translation__SWIG_0(long jarg1, FixedFrame jarg1_, int jarg2);
-  public final static native void FixedFrame_set_translation__SWIG_0(long jarg1, FixedFrame jarg1_, int jarg2, long jarg3, Vec3 jarg3_);
-  public final static native int FixedFrame_append_translation(long jarg1, FixedFrame jarg1_, long jarg2, Vec3 jarg2_);
-  public final static native void FixedFrame_constructProperty_translation(long jarg1, FixedFrame jarg1_, long jarg2, Vec3 jarg2_);
-  public final static native long FixedFrame_get_translation__SWIG_1(long jarg1, FixedFrame jarg1_);
-  public final static native long FixedFrame_upd_translation__SWIG_1(long jarg1, FixedFrame jarg1_);
-  public final static native void FixedFrame_set_translation__SWIG_1(long jarg1, FixedFrame jarg1_, long jarg2, Vec3 jarg2_);
-  public final static native void FixedFrame_copyProperty_orientation(long jarg1, FixedFrame jarg1_, long jarg2, FixedFrame jarg2_);
-  public final static native long FixedFrame_get_orientation__SWIG_0(long jarg1, FixedFrame jarg1_, int jarg2);
-  public final static native long FixedFrame_upd_orientation__SWIG_0(long jarg1, FixedFrame jarg1_, int jarg2);
-  public final static native void FixedFrame_set_orientation__SWIG_0(long jarg1, FixedFrame jarg1_, int jarg2, long jarg3, Vec3 jarg3_);
-  public final static native int FixedFrame_append_orientation(long jarg1, FixedFrame jarg1_, long jarg2, Vec3 jarg2_);
-  public final static native void FixedFrame_constructProperty_orientation(long jarg1, FixedFrame jarg1_, long jarg2, Vec3 jarg2_);
-  public final static native long FixedFrame_get_orientation__SWIG_1(long jarg1, FixedFrame jarg1_);
-  public final static native long FixedFrame_upd_orientation__SWIG_1(long jarg1, FixedFrame jarg1_);
-  public final static native void FixedFrame_set_orientation__SWIG_1(long jarg1, FixedFrame jarg1_, long jarg2, Vec3 jarg2_);
-  public final static native long new_FixedFrame__SWIG_0();
-  public final static native void delete_FixedFrame(long jarg1);
-  public final static native long new_FixedFrame__SWIG_1(long jarg1, RigidFrame jarg1_);
-  public final static native long new_FixedFrame__SWIG_2(long jarg1, RigidFrame jarg1_, long jarg2, Transform jarg2_);
-  public final static native void FixedFrame_setParentFrame(long jarg1, FixedFrame jarg1_, long jarg2, RigidFrame jarg2_);
-  public final static native long FixedFrame_getParentFrame(long jarg1, FixedFrame jarg1_);
-  public final static native long FixedFrame_getTransform(long jarg1, FixedFrame jarg1_);
-  public final static native void FixedFrame_setTransform(long jarg1, FixedFrame jarg1_, long jarg2, Transform jarg2_);
+  public final static native long Frame_findBaseFrame(long jarg1, Frame jarg1_);
+  public final static native long Frame_findTransformInBaseFrame(long jarg1, Frame jarg1_);
+  public final static native long PhysicalFrame_safeDownCast(long jarg1, OpenSimObject jarg1_);
+  public final static native void PhysicalFrame_assign(long jarg1, PhysicalFrame jarg1_, long jarg2, OpenSimObject jarg2_);
+  public final static native String PhysicalFrame_getClassName();
+  public final static native long PhysicalFrame_clone(long jarg1, PhysicalFrame jarg1_);
+  public final static native String PhysicalFrame_getConcreteClassName(long jarg1, PhysicalFrame jarg1_);
+  public final static native long new_PhysicalFrame();
+  public final static native void delete_PhysicalFrame(long jarg1);
+  public final static native int PhysicalFrame_getMobilizedBodyIndex(long jarg1, PhysicalFrame jarg1_);
+  public final static native long PhysicalFrame_getMobilizedBody(long jarg1, PhysicalFrame jarg1_);
+  public final static native long PhysicalFrame_updMobilizedBody(long jarg1, PhysicalFrame jarg1_);
+  public final static native void PhysicalFrame_generateDecorations(long jarg1, PhysicalFrame jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
+  public final static native long PhysicalOffsetFrame_safeDownCast(long jarg1, OpenSimObject jarg1_);
+  public final static native void PhysicalOffsetFrame_assign(long jarg1, PhysicalOffsetFrame jarg1_, long jarg2, OpenSimObject jarg2_);
+  public final static native String PhysicalOffsetFrame_getClassName();
+  public final static native long PhysicalOffsetFrame_clone(long jarg1, PhysicalOffsetFrame jarg1_);
+  public final static native String PhysicalOffsetFrame_getConcreteClassName(long jarg1, PhysicalOffsetFrame jarg1_);
+  public final static native long new_PhysicalOffsetFrame__SWIG_0();
+  public final static native void delete_PhysicalOffsetFrame(long jarg1);
+  public final static native long new_PhysicalOffsetFrame__SWIG_1(long jarg1, PhysicalFrame jarg1_, long jarg2, Transform jarg2_);
   public final static native long SetFrames_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void SetFrames_assign(long jarg1, SetFrames jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String SetFrames_getClassName();
@@ -4830,7 +4812,7 @@ public class opensimModelJNI {
   public final static native long new_Station();
   public final static native void delete_Station(long jarg1);
   public final static native long Station_getReferenceFrame(long jarg1, Station jarg1_);
-  public final static native void Station_setReferenceFrame(long jarg1, Station jarg1_, long jarg2, RigidFrame jarg2_);
+  public final static native void Station_setReferenceFrame(long jarg1, Station jarg1_, long jarg2, PhysicalFrame jarg2_);
   public final static native long Station_findLocationInFrame(long jarg1, Station jarg1_, long jarg2, State jarg2_, long jarg3, Frame jarg3_);
   public final static native long Marker_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void Marker_assign(long jarg1, Marker jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -4841,8 +4823,8 @@ public class opensimModelJNI {
   public final static native void delete_Marker(long jarg1);
   public final static native String Marker_getFrameName(long jarg1, Marker jarg1_);
   public final static native void Marker_setFrameName(long jarg1, Marker jarg1_, String jarg2);
-  public final static native void Marker_changeFrame(long jarg1, Marker jarg1_, long jarg2, RigidFrame jarg2_);
-  public final static native void Marker_changeFramePreserveLocation(long jarg1, Marker jarg1_, long jarg2, State jarg2_, long jarg3, RigidFrame jarg3_);
+  public final static native void Marker_changeFrame(long jarg1, Marker jarg1_, long jarg2, PhysicalFrame jarg2_);
+  public final static native void Marker_changeFramePreserveLocation(long jarg1, Marker jarg1_, long jarg2, State jarg2_, long jarg3, PhysicalFrame jarg3_);
   public final static native void Marker_scale(long jarg1, Marker jarg1_, long jarg2, Vec3 jarg2_);
   public final static native void Marker_updateFromXMLNode__SWIG_0(long jarg1, Marker jarg1_, long jarg2, int jarg3);
   public final static native void Marker_updateFromXMLNode__SWIG_1(long jarg1, Marker jarg1_, long jarg2);
@@ -4916,7 +4898,7 @@ public class opensimModelJNI {
   public final static native void MarkerSet_getMarkerNames(long jarg1, MarkerSet jarg1_, long jarg2, ArrayStr jarg2_);
   public final static native void MarkerSet_scale(long jarg1, MarkerSet jarg1_, long jarg2, ScaleSet jarg2_);
   public final static native void MarkerSet_addNamePrefix(long jarg1, MarkerSet jarg1_, String jarg2);
-  public final static native long MarkerSet_addMarker(long jarg1, MarkerSet jarg1_, String jarg2, long jarg3, Vec3 jarg3_, long jarg4, RigidFrame jarg4_);
+  public final static native long MarkerSet_addMarker(long jarg1, MarkerSet jarg1_, String jarg2, long jarg3, Vec3 jarg3_, long jarg4, PhysicalFrame jarg4_);
   public final static native long WrapObject_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void WrapObject_assign(long jarg1, WrapObject jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String WrapObject_getClassName();
@@ -11504,8 +11486,7 @@ public class opensimModelJNI {
   public final static native long InverseDynamicsSolver_SWIGUpcast(long jarg1);
   public final static native long MomentArmSolver_SWIGUpcast(long jarg1);
   public final static native long Frame_SWIGUpcast(long jarg1);
-  public final static native long RigidFrame_SWIGUpcast(long jarg1);
-  public final static native long FixedFrame_SWIGUpcast(long jarg1);
+  public final static native long PhysicalFrame_SWIGUpcast(long jarg1);
   public final static native long SetFrames_SWIGUpcast(long jarg1);
   public final static native long ModelComponentSetFrames_SWIGUpcast(long jarg1);
   public final static native long Force_SWIGUpcast(long jarg1);

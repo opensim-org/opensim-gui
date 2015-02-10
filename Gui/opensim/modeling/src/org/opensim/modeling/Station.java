@@ -97,12 +97,12 @@ public class Station extends ModelComponent {
     this(opensimModelJNI.new_Station(), true);
   }
 
-  public RigidFrame getReferenceFrame() {
-    return new RigidFrame(opensimModelJNI.Station_getReferenceFrame(swigCPtr, this), false);
+  public PhysicalFrame getReferenceFrame() {
+    return new PhysicalFrame(opensimModelJNI.Station_getReferenceFrame(swigCPtr, this), false);
   }
 
-  public void setReferenceFrame(RigidFrame aFrame) {
-    opensimModelJNI.Station_setReferenceFrame(swigCPtr, this, RigidFrame.getCPtr(aFrame), aFrame);
+  public void setReferenceFrame(PhysicalFrame aFrame) {
+    opensimModelJNI.Station_setReferenceFrame(swigCPtr, this, PhysicalFrame.getCPtr(aFrame), aFrame);
   }
 
   public Vec3 findLocationInFrame(State s, Frame aFrame) {

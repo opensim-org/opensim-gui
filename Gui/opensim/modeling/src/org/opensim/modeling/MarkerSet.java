@@ -81,8 +81,8 @@ public class MarkerSet extends ModelComponentSetMarkers {
     opensimModelJNI.MarkerSet_addNamePrefix(swigCPtr, this, prefix);
   }
 
-  public Marker addMarker(String aName, Vec3 aOffset, RigidFrame aRigidFrame) {
-    long cPtr = opensimModelJNI.MarkerSet_addMarker(swigCPtr, this, aName, Vec3.getCPtr(aOffset), aOffset, RigidFrame.getCPtr(aRigidFrame), aRigidFrame);
+  public Marker addMarker(String aName, Vec3 aOffset, PhysicalFrame aPhysicalFrame) {
+    long cPtr = opensimModelJNI.MarkerSet_addMarker(swigCPtr, this, aName, Vec3.getCPtr(aOffset), aOffset, PhysicalFrame.getCPtr(aPhysicalFrame), aPhysicalFrame);
     return (cPtr == 0) ? null : new Marker(cPtr, false);
   }
 

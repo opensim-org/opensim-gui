@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class Body extends RigidFrame {
+public class Body extends PhysicalFrame {
   private long swigCPtr;
 
   public Body(long cPtr, boolean cMemoryOwn) {

@@ -69,12 +69,12 @@ public class Marker extends Station {
     opensimModelJNI.Marker_setFrameName(swigCPtr, this, aName);
   }
 
-  public void changeFrame(RigidFrame aRigidFrame) {
-    opensimModelJNI.Marker_changeFrame(swigCPtr, this, RigidFrame.getCPtr(aRigidFrame), aRigidFrame);
+  public void changeFrame(PhysicalFrame aPhysicalFrame) {
+    opensimModelJNI.Marker_changeFrame(swigCPtr, this, PhysicalFrame.getCPtr(aPhysicalFrame), aPhysicalFrame);
   }
 
-  public void changeFramePreserveLocation(State s, RigidFrame aRigidFrame) {
-    opensimModelJNI.Marker_changeFramePreserveLocation(swigCPtr, this, State.getCPtr(s), s, RigidFrame.getCPtr(aRigidFrame), aRigidFrame);
+  public void changeFramePreserveLocation(State s, PhysicalFrame aPhysicalFrame) {
+    opensimModelJNI.Marker_changeFramePreserveLocation(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aPhysicalFrame), aPhysicalFrame);
   }
 
   public void scale(Vec3 aScaleFactors) {

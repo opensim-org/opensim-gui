@@ -58,19 +58,27 @@ public class Frame extends ModelComponent {
   }
 
   public Transform getGroundTransform(State state) {
-    return new Transform(opensimModelJNI.Frame_getGroundTransform(swigCPtr, this, State.getCPtr(state), state), true);
+    return new Transform(opensimModelJNI.Frame_getGroundTransform(swigCPtr, this, State.getCPtr(state), state), false);
   }
 
   public Transform findTransformBetween(State state, Frame otherFrame) {
     return new Transform(opensimModelJNI.Frame_findTransformBetween(swigCPtr, this, State.getCPtr(state), state, Frame.getCPtr(otherFrame), otherFrame), true);
   }
 
-  public Vec3 expressVectorInAnotherFrame(State state, Vec3 vec, Frame otherFrame) {
-    return new Vec3(opensimModelJNI.Frame_expressVectorInAnotherFrame(swigCPtr, this, State.getCPtr(state), state, Vec3.getCPtr(vec), vec, Frame.getCPtr(otherFrame), otherFrame), true);
+  public Vec3 expressVectorInAnotherFrame(State state, Vec3 vec_F, Frame otherFrame) {
+    return new Vec3(opensimModelJNI.Frame_expressVectorInAnotherFrame(swigCPtr, this, State.getCPtr(state), state, Vec3.getCPtr(vec_F), vec_F, Frame.getCPtr(otherFrame), otherFrame), true);
   }
 
-  public Vec3 findLocationInAnotherFrame(State state, Vec3 point, Frame otherFrame) {
-    return new Vec3(opensimModelJNI.Frame_findLocationInAnotherFrame(swigCPtr, this, State.getCPtr(state), state, Vec3.getCPtr(point), point, Frame.getCPtr(otherFrame), otherFrame), true);
+  public Vec3 findLocationInAnotherFrame(State state, Vec3 point_F, Frame otherFrame) {
+    return new Vec3(opensimModelJNI.Frame_findLocationInAnotherFrame(swigCPtr, this, State.getCPtr(state), state, Vec3.getCPtr(point_F), point_F, Frame.getCPtr(otherFrame), otherFrame), true);
+  }
+
+  public Frame findBaseFrame() {
+    return new Frame(opensimModelJNI.Frame_findBaseFrame(swigCPtr, this), false);
+  }
+
+  public Transform findTransformInBaseFrame() {
+    return new Transform(opensimModelJNI.Frame_findTransformInBaseFrame(swigCPtr, this), true);
   }
 
 }
