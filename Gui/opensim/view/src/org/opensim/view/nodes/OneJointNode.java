@@ -36,16 +36,12 @@ import javax.swing.Action;
 import javax.swing.ImageIcon;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
-import org.openide.nodes.PropertySupport;
-import org.openide.nodes.Sheet;
-import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.CustomJoint;
 import org.opensim.modeling.Joint;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.SpatialTransform;
 import org.opensim.modeling.TransformAxis;
-import org.opensim.view.editors.BodyNameEditor;
 
 /**
  *
@@ -55,10 +51,10 @@ public class OneJointNode extends OpenSimObjectNode {
 
 	private static ResourceBundle bundle = NbBundle.getBundle(OneJointNode.class);
 	/** Creates a new instance of OneMuscleNode */
-	public OneJointNode(OpenSimObject j) {
-		super(j);
+	public OneJointNode(OpenSimObject jnt) {
+		super(jnt);
 		setShortDescription(bundle.getString("HINT_JointNode"));
-		Joint joint = Joint.safeDownCast(j);
+		Joint joint = Joint.safeDownCast(jnt);
 		CustomJoint cj = CustomJoint.safeDownCast(joint);
 		if (cj != null) {
 			SpatialTransform spt = cj.getSpatialTransform();
@@ -98,32 +94,5 @@ public class OneJointNode extends OpenSimObjectNode {
             ex.printStackTrace();
         }
         return retActions;
-    }
-
-    @Override
-    public Sheet createSheet() {
-        Sheet sheet = super.createSheet();
-        Sheet.Set set = sheet.get(Sheet.PROPERTIES);
-       try {
-            set.remove("parent_body");
-            PropertySupport.Reflection nextNodeProp2;
-            nextNodeProp2 = new PropertySupport.Reflection(this, String.class, "getParentBodyName", null);
-            nextNodeProp2.setPropertyEditorClass(BodyNameEditor.class);
-            nextNodeProp2.setName("parent_body");
-            set.put(nextNodeProp2);
-        } catch (NoSuchMethodException ex) {
-            Exceptions.printStackTrace(ex);
-        }      
-        return sheet;
-   }
-    
-   public void setParentBodyName(String newParentName) {
-       new PropertyEditorAdaptor("parent_body", this).setValueString(newParentName);
-   }
-
-   public String getParentBodyName() {
-        return new PropertyEditorAdaptor("parent_body", this).getValueString();
-   }
-
-    
+    }    
 }

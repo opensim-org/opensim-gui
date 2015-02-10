@@ -35,24 +35,27 @@ import org.openide.nodes.Children;
 import org.openide.nodes.PropertySupport;
 import org.openide.nodes.PropertySupport.Reflection;
 import org.openide.nodes.Sheet;
+import org.openide.nodes.Sheet.Set;
+import static org.openide.nodes.Sheet.createExpertSet;
+import static org.openide.nodes.Sheet.createPropertiesSet;
 import org.openide.util.Exceptions;
 import org.openide.util.lookup.Lookups;
-import org.opensim.modeling.OpenSimObject;
-import org.opensim.view.ObjectDisplayMenuAction;
-import org.opensim.view.ObjectDisplayShowAction;
-import org.opensim.view.pub.ViewDB;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Function;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelComponent;
+import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PropertyHelper;
 import org.opensim.modeling.XYFunctionInterface;
+import org.opensim.view.ObjectDisplayMenuAction;
+import org.opensim.view.ObjectDisplayShowAction;
 import org.opensim.view.OpenSimBaseObjectProperty;
 import org.opensim.view.OpenSimFunctionProperty;
 import org.opensim.view.OpenSimGeometryPathProperty;
 import org.opensim.view.OpenSimObjectProperty;
 import org.opensim.view.actions.ObjectDisplaySelectAction;
+import org.opensim.view.pub.ViewDB;
 
 /**
  *
@@ -359,7 +362,7 @@ public class OpenSimObjectNode extends OpenSimNode {
         } catch (NoSuchMethodException ex) {
             Exceptions.printStackTrace(ex);
         }
-
+        // Skip connections and add them in another group or Sheet
         for (int p = 0; p < obj.getNumProperties(); ++p) {
             try {
                 AbstractProperty ap = obj.getPropertyByIndex(p);              
@@ -401,11 +404,16 @@ public class OpenSimObjectNode extends OpenSimNode {
                     }
                 }
                 else { 
-                    Reflection nextNodeProp = createNodePropForOpenSimListProperty(obj, p, theModel);
-                    if (nextNodeProp != null) {
-                        nextNodeProp.setName(ap.getName());
-                        nextNodeProp.setShortDescription(ap.getComment());
-                        set.put(nextNodeProp);
+                    if (ap.getName().equalsIgnoreCase("connectors")){
+                        createConnectorProperties(ap, retValue);
+                    }
+                    else {
+                        Reflection nextNodeProp = createNodePropForOpenSimListProperty(obj, p, theModel);
+                        if (nextNodeProp != null) {
+                            nextNodeProp.setName(ap.getName());
+                            nextNodeProp.setShortDescription(ap.getComment());
+                            set.put(nextNodeProp);
+                        }
                     }
                 }
             } catch (NoSuchMethodException ex) {
@@ -413,5 +421,32 @@ public class OpenSimObjectNode extends OpenSimNode {
             }
         }
         return retValue;
+    }
+    private void createConnectorProperties(AbstractProperty ap, Sheet sheet) {
+        int numConnectors = ap.size();
+        if (numConnectors > 0) {
+            Set connectorSheet = createExpertSet();
+            connectorSheet.setDisplayName("Connectors");
+            for (int i = 0; i < numConnectors; i++) {
+                try {
+                    OpenSimObject connector = ap.getValueAsObject(i);
+                    String templatedType = connector.getConcreteClassName();
+                    String connecteeType = templatedType.substring(10, templatedType.length() - 1);
+                    String connectionName = connector.getName();
+                    PropertySupport.Reflection nextNodeProp = null;
+                    nextNodeProp = new PropertySupport.Reflection(this,
+                            String.class,
+                            "getName",
+                            null);
+                    nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
+                    nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
+                    nextNodeProp.setName(connecteeType + ":" + connectionName);
+                    connectorSheet.put(nextNodeProp);
+                } catch (NoSuchMethodException ex) {
+                    Exceptions.printStackTrace(ex);
+                }
+            }
+            sheet.put(connectorSheet);
+        }
     }
 }
