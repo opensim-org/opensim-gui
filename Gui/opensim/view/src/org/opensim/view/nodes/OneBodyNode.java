@@ -18,7 +18,7 @@ import org.opensim.view.BodyToggleFrameAction;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 
 /** Node class to wrap Body objects */
-public class OneBodyNode extends OpenSimObjectNode{
+public class OneBodyNode extends OneComponentNode{
    private static ResourceBundle bundle = NbBundle.getBundle(OneBodyNode.class);
    public OneBodyNode(OpenSimObject b) {
       super(b);

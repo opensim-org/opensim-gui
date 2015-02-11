@@ -17,12 +17,11 @@ import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.editors.BodyNameEditor;
-import org.opensim.view.markerEditor.MarkerEditorAction;
 import org.opensim.view.markerEditor.OneMarkerDeleteAction;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 
 /** Node class to wrap AbstractMarker objects */
-public class OneMarkerNode extends OpenSimObjectNode{
+public class OneMarkerNode extends OneComponentNode{
    private static ResourceBundle bundle = NbBundle.getBundle(OneMarkerNode.class);
    public OneMarkerNode(OpenSimObject b) {
       super(b);

@@ -405,7 +405,7 @@ public class OpenSimObjectNode extends OpenSimNode {
                 }
                 else { 
                     if (ap.getName().equalsIgnoreCase("connectors")){
-                        createConnectorProperties(ap, retValue);
+                        ;//createConnectorProperties(ap, retValue);
                     }
                     else {
                         Reflection nextNodeProp = createNodePropForOpenSimListProperty(obj, p, theModel);
@@ -421,32 +421,5 @@ public class OpenSimObjectNode extends OpenSimNode {
             }
         }
         return retValue;
-    }
-    private void createConnectorProperties(AbstractProperty ap, Sheet sheet) {
-        int numConnectors = ap.size();
-        if (numConnectors > 0) {
-            Set connectorSheet = createExpertSet();
-            connectorSheet.setDisplayName("Connectors");
-            for (int i = 0; i < numConnectors; i++) {
-                try {
-                    OpenSimObject connector = ap.getValueAsObject(i);
-                    String templatedType = connector.getConcreteClassName();
-                    String connecteeType = templatedType.substring(10, templatedType.length() - 1);
-                    String connectionName = connector.getName();
-                    PropertySupport.Reflection nextNodeProp = null;
-                    nextNodeProp = new PropertySupport.Reflection(this,
-                            String.class,
-                            "getName",
-                            null);
-                    nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
-                    nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
-                    nextNodeProp.setName(connecteeType + ":" + connectionName);
-                    connectorSheet.put(nextNodeProp);
-                } catch (NoSuchMethodException ex) {
-                    Exceptions.printStackTrace(ex);
-                }
-            }
-            sheet.put(connectorSheet);
-        }
     }
 }

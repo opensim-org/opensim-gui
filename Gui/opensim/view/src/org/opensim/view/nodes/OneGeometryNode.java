@@ -51,7 +51,7 @@ import org.opensim.view.pub.ViewDB;
  *
  * @author Ayman Habib
  */
-public class OneGeometryNode extends OpenSimObjectNode implements ColorableInterface {
+public class OneGeometryNode extends OneComponentNode implements ColorableInterface {
     
     private static ResourceBundle bundle = NbBundle.getBundle(OneGeometryNode.class);
     /**

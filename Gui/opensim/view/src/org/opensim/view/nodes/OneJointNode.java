@@ -37,6 +37,7 @@ import javax.swing.ImageIcon;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.util.NbBundle;
+import org.opensim.modeling.Component;
 import org.opensim.modeling.CustomJoint;
 import org.opensim.modeling.Joint;
 import org.opensim.modeling.OpenSimObject;
@@ -47,12 +48,11 @@ import org.opensim.modeling.TransformAxis;
  *
  * @author Ayman Habib
  */
-public class OneJointNode extends OpenSimObjectNode {
-
-	private static ResourceBundle bundle = NbBundle.getBundle(OneJointNode.class);
+public class OneJointNode extends OneComponentNode {
 	/** Creates a new instance of OneMuscleNode */
 	public OneJointNode(OpenSimObject jnt) {
 		super(jnt);
+                comp = Component.safeDownCast(jnt);
 		setShortDescription(bundle.getString("HINT_JointNode"));
 		Joint joint = Joint.safeDownCast(jnt);
 		CustomJoint cj = CustomJoint.safeDownCast(joint);
@@ -75,24 +75,4 @@ public class OneJointNode extends OpenSimObjectNode {
 		}
 	}
 
-    public Action[] getActions(boolean b) {
-        Action[] superActions = (Action[]) super.getActions(b);        
-        // Arrays are fixed size, onvert to a List
-        List<Action> actions = java.util.Arrays.asList(superActions);
-        // Create new Array of proper size
-        Action[] retActions = new Action[actions.size()+2];
-        
-        actions.toArray(retActions);
-        
-        try {
-            // append new command to the end of the list of actions
-            retActions[actions.size()] = (JointToggleChildFrameAction) JointToggleChildFrameAction.findObject(
-                     (Class)Class.forName("org.opensim.view.nodes.JointToggleChildFrameAction"), true);
-            retActions[actions.size()+1] = (JointToggleParentFrameAction) JointToggleParentFrameAction.findObject(
-                     (Class)Class.forName("org.opensim.view.nodes.JointToggleParentFrameAction"), true);
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        return retActions;
-    }    
 }

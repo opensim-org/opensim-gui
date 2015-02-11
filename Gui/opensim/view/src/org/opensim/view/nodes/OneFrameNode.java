@@ -19,7 +19,7 @@ import org.opensim.modeling.Frame;
  *
  * @author Ayman
  */
-class OneFrameNode extends OpenSimObjectNode {
+class OneFrameNode extends OneComponentNode {
    private static ResourceBundle bundle = NbBundle.getBundle(OneFrameNode.class);
     public OneFrameNode(Frame frame) {
         super(frame);
