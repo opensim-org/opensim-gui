@@ -245,7 +245,15 @@ public class SingleModelVisuals implements ModelVisualsVtk {
             //bodyRep.applyRepresentations();
             bodyIter.next();
         }
-        
+        ModelComponentList mcList = model.getModelComponentList();
+        ModelComponentIterator mcIter = mcList.begin();
+        mcIter.next(); // Skip model itself
+        while (!mcIter.equals(mcList.end())){
+            //System.out.println("In createModelAssembly Type, name:"+mcIter.__deref__().getConcreteClassName()+mcIter.__deref__().getName());
+            dgi.updateDecorations(mcIter.__deref__());
+            mcIter.next();
+        }
+       
         updateVariableGeometry(model);
         //updateMarkersGeometry(model.getMarkerSet());
         //updateForceGeometry(model);
