@@ -119,13 +119,8 @@ public class PropertyEditorAdaptor {
             ViewDB.getInstance().getModelVisuals(model).upateDisplay(mc);  
             ViewDB.repaintAll();
         }
-        else if (ModelComponent.safeDownCast(obj)!= null){
-            ModelComponent mc = ModelComponent.safeDownCast(obj);
-            ViewDB.getInstance().getModelVisuals(model).upateDisplay(mc);
-            ViewDB.repaintAll();
-        }
-        else
-            ViewDB.getInstance().updateModelDisplay(model, obj);
+        else 
+            ViewDB.getInstance().updateModelDisplay(model);
         if (node!= null) node.refreshNode();
         SingleModelGuiElements guiElem = ViewDB.getInstance().getModelGuiElements(model);
         guiElem.setUnsavedChangesFlag(true);
