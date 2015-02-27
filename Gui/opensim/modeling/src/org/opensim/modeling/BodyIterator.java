@@ -109,10 +109,6 @@ public class BodyIterator {
     return new MassProperties(opensimModelJNI.BodyIterator_getMassProperties(swigCPtr, this), true);
   }
 
-  public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
-    opensimModelJNI.BodyIterator_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
-  }
-
   public WrapObject getWrapObject(String aName) {
     long cPtr = opensimModelJNI.BodyIterator_getWrapObject(swigCPtr, this, aName);
     return (cPtr == 0) ? null : new WrapObject(cPtr, false);
@@ -128,6 +124,10 @@ public class BodyIterator {
 
   public SWIGTYPE_p_SimTK__MobilizedBody getMobilizedBody() {
     return new SWIGTYPE_p_SimTK__MobilizedBody(opensimModelJNI.BodyIterator_getMobilizedBody(swigCPtr, this), false);
+  }
+
+  public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
+    opensimModelJNI.BodyIterator_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
   }
 
   public Transform getGroundTransform(State state) {

@@ -115,7 +115,7 @@ public class PropertyEditorAdaptor {
     
     private void handlePropertyChangeCommon() {
         if (Geometry.safeDownCast(obj)!= null){
-            ModelComponent mc = Geometry.safeDownCast(obj).getOwnerModelComponent();
+            Component mc = Component.safeDownCast(obj);
             ViewDB.getInstance().getModelVisuals(model).upateDisplay(mc);  
             ViewDB.repaintAll();
         }

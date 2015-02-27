@@ -108,7 +108,7 @@ public final class ObjectDisplayColorAction extends CallableSystemAction {
             }
             objectNode.refreshNode();
             ViewDB.getInstance().updateDisplay(objectNode.getModelForNode(), 
-                    ((OpenSimObjectNode)objectNode).getOwnerModelComponent());
+                    ((OpenSimObjectNode)objectNode).getOwnerComponent());
 
         }
         // If objectNode is OneBodyNode, do not change color of center of mass.

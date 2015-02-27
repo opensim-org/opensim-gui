@@ -18,7 +18,7 @@ import org.opensim.view.BodyToggleFrameAction;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 
 /** Node class to wrap Body objects */
-public class OneBodyNode extends OneComponentNode{
+public class OneBodyNode extends OneModelComponentNode{
    private static ResourceBundle bundle = NbBundle.getBundle(OneBodyNode.class);
    public OneBodyNode(OpenSimObject b) {
       super(b);
@@ -26,8 +26,7 @@ public class OneBodyNode extends OneComponentNode{
       // Create children for wrap objects associated with body
       Body bdy = (Body) b;
       Children children = getChildren();
-      createGeometryNodes(bdy, children);
-	  // Create nodes for wrap objects      
+      // Create nodes for wrap objects      
       WrapObjectSet wrapObjects = bdy.getWrapObjectSet();
       for (int index=0; index < wrapObjects.getSize(); index++ ){
          WrapObject wrapObject = wrapObjects.get(index);
@@ -44,18 +43,6 @@ public class OneBodyNode extends OneComponentNode{
       addDisplayOption(displayOption.Showable);
    }
 
-    protected void createGeometryNodes(Body bdy, Children children) {
-        int geomSize = bdy.getGeometrySize();
-        // Create node for geometry
-        for (int g = 0; g < geomSize; g++) {
-            Geometry oneG = bdy.get_GeometrySet(g);
-            
-            OneGeometryNode node = new OneGeometryNode(oneG);
-            Node[] arrNodes = new Node[1];
-            arrNodes[0] = node;
-            children.add(arrNodes);
-        }
-    }
 
    
    //----------------------------------------------------------------
@@ -79,10 +66,6 @@ public class OneBodyNode extends OneComponentNode{
    }
 
    
-   @Override
-    public Node cloneNode() {
-        return new OneBodyNode(getOpenSimObject());
-    }
     /**
      * Icon for the body node 
      **/
@@ -101,23 +84,5 @@ public class OneBodyNode extends OneComponentNode{
         return getIcon(i);
     }
 
-    public Action[] getActions(boolean b) {
-        Action[] superActions = (Action[]) super.getActions(b);        
-        // Arrays are fixed size, onvert to a List
-        List<Action> actions = java.util.Arrays.asList(superActions);
-        // Create new Array of proper size
-        Action[] retActions = new Action[actions.size()+2];
-        actions.toArray(retActions);
-        try {
-            // append new command to the end of the list of actions
-            retActions[actions.size()] = (BodyToggleFrameAction) BodyToggleFrameAction.findObject(
-                     (Class)Class.forName("org.opensim.view.BodyToggleFrameAction"), true);
-            retActions[actions.size()+1] = (BodyToggleCOMAction) BodyToggleCOMAction.findObject(
-                     (Class)Class.forName("org.opensim.view.nodes.BodyToggleCOMAction"), true);
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        return retActions;
-    }
 
 }

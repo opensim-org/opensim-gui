@@ -22,7 +22,7 @@ import org.opensim.modeling.DecorativePoint;
 import org.opensim.modeling.DecorativeSphere;
 import org.opensim.modeling.DecorativeText;
 import org.opensim.modeling.Model;
-import org.opensim.modeling.ModelComponent;
+import org.opensim.modeling.Component;
 import org.opensim.modeling.ModelDisplayHints;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.pub.GeometryFileLocator;
@@ -39,10 +39,10 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
   HashMap<Integer, BodyDisplayer> mapBodyIndicesToDisplayers;
   private Model model;
   String modelFilePath;
-  private ModelComponent currentModelComponent=null;
+  private Component currentComponent=null;
   // Two maps one for Fixed geometry other for Variable geometry
-  HashMap<ModelComponent, LinkedList<DecorativeGeometryDisplayer>> mapComponentsToFixedVisuals = new HashMap<ModelComponent, LinkedList<DecorativeGeometryDisplayer>>();
-  HashMap<ModelComponent, LinkedList<DecorativeGeometryDisplayer>> mapComponentsToVariableVisuals = new HashMap<ModelComponent, LinkedList<DecorativeGeometryDisplayer>>();
+  HashMap<Component, LinkedList<DecorativeGeometryDisplayer>> mapComponentsToFixedVisuals = new HashMap<Component, LinkedList<DecorativeGeometryDisplayer>>();
+  HashMap<Component, LinkedList<DecorativeGeometryDisplayer>> mapComponentsToVariableVisuals = new HashMap<Component, LinkedList<DecorativeGeometryDisplayer>>();
   HashMap<vtkActor, OpenSimObject> mapVisualsToObjects = new HashMap<vtkActor, OpenSimObject>();
   
   LinkedList<DecorativeGeometryDisplayer> currentFixedGeometryDisplayers;
@@ -83,11 +83,11 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
             }
         } else {
             BodyDisplayer bd = mapBodyIndicesToDisplayers.get(arg0.getBodyId());
-            //System.out.println("MC:"+currentModelComponent.getConcreteClassName()+currentModelComponent.getName());
+            //System.out.println("MC:"+currentComponent.getConcreteClassName()+currentComponent.getName());
             DecorativeLineDisplayer lineDisplayer=new DecorativeLineDisplayer(arg0);
             bd.AddPart(lineDisplayer.getVisuals());
             addDisplayerToCurrentList(lineDisplayer);
-            mapVisualsToObjects.put(lineDisplayer.getVisuals(), currentModelComponent);
+            mapVisualsToObjects.put(lineDisplayer.getVisuals(), currentComponent);
         }
     
   }
@@ -123,7 +123,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
             DecorativeBrickDisplayer brickDisplayer=new DecorativeBrickDisplayer(arg0);
             bd.AddPart(brickDisplayer.getVisuals());
             addDisplayerToCurrentList(brickDisplayer);
-            mapVisualsToObjects.put(brickDisplayer.getVisuals(), currentModelComponent);           
+            mapVisualsToObjects.put(brickDisplayer.getVisuals(), currentComponent);           
             //mapBodyIndicesToDisplayers.put(arg0.getUserRefAsObject(), brickDisplayer);
         }    
     //mapBodyIndicesToDisplayers.put(arg0.getUserRefAsObject(), brickDisplayer);
@@ -152,7 +152,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
             DecorativeCylinderDisplayer cylDisplayer = new DecorativeCylinderDisplayer(arg0);
             bd.AddPart(cylDisplayer.getVisuals());
             addDisplayerToCurrentList(cylDisplayer);
-            mapVisualsToObjects.put(cylDisplayer.getVisuals(), currentModelComponent);
+            mapVisualsToObjects.put(cylDisplayer.getVisuals(), currentComponent);
             //mapBodyIndicesToDisplayers.put(arg0.getUserRefAsObject(), brickDisplayer);
         }
     }
@@ -195,7 +195,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
             DecorativeSphereDisplayer sphereDisplayer = new DecorativeSphereDisplayer(arg0);
             bd.AddPart(sphereDisplayer.getVisuals());
             addDisplayerToCurrentList(sphereDisplayer);
-            mapVisualsToObjects.put(sphereDisplayer.getVisuals(), currentModelComponent);
+            mapVisualsToObjects.put(sphereDisplayer.getVisuals(), currentComponent);
             //mapBodyIndicesToDisplayers.put(arg0.getUserRefAsObject(), sphereDisplayer);
         }
     }
@@ -226,7 +226,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
         DecorativeEllipsoidDisplayer ellipsoidDisplayer=new DecorativeEllipsoidDisplayer(arg0);
         bd.AddPart(ellipsoidDisplayer.getVisuals());
         addDisplayerToCurrentList(ellipsoidDisplayer);
-        mapVisualsToObjects.put(ellipsoidDisplayer.getVisuals(), currentModelComponent);
+        mapVisualsToObjects.put(ellipsoidDisplayer.getVisuals(), currentComponent);
     }
     //mapBodyIndicesToDisplayers.put(arg0.getUserRefAsObject(), displayer);
   }
@@ -234,12 +234,31 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
     @Override
   public void implementFrameGeometry(DecorativeFrame arg0) {
     //System.out.println("Type: DecorativeFrame"+arg0.getIndexOnBody());
-    BodyDisplayer bd = mapBodyIndicesToDisplayers.get(arg0.getBodyId());
-    DecorativeFrameDisplayer frameDisplayer=new DecorativeFrameDisplayer(arg0);
-    bd.AddPart(frameDisplayer.getVisuals());
-    addDisplayerToCurrentList(frameDisplayer);
-    mapVisualsToObjects.put(frameDisplayer.getVisuals(), currentModelComponent);
-    //opensimModelJNI.DecorativeGeometryImplementation_implementFrameGeometry(swigCPtr, this, DecorativeFrame.getCPtr(arg0), arg0);
+    if (updateMode){ // System.out.println("updating");
+            ListIterator<DecorativeGeometryDisplayer> listIterator = getCurrentGeometryDisplayers();
+            boolean found = false;
+            while(listIterator.hasNext() && !found){
+                DecorativeGeometryDisplayer nextDisplayer = listIterator.next();
+                if (nextDisplayer instanceof DecorativeFrameDisplayer){
+                    DecorativeFrameDisplayer frameDisplayer = (DecorativeFrameDisplayer) nextDisplayer;
+                    if (frameDisplayer.getBodyId()==arg0.getBodyId() && 
+                            frameDisplayer.getIndexOnBody()==arg0.getIndexOnBody()){
+                        frameDisplayer.updateGeometry(arg0);
+                        frameDisplayer.copyAttributesFromDecorativeGeometry(arg0);
+                        found = true;
+                        frameDisplayer.Modified();
+                    }
+                }
+            }
+    }
+    else {
+        BodyDisplayer bd = mapBodyIndicesToDisplayers.get(arg0.getBodyId());
+        DecorativeFrameDisplayer frameDisplayer=new DecorativeFrameDisplayer(arg0);
+        bd.AddPart(frameDisplayer.getVisuals());
+        addDisplayerToCurrentList(frameDisplayer);
+        mapVisualsToObjects.put(frameDisplayer.getVisuals(), currentComponent);
+        //opensimModelJNI.DecorativeGeometryImplementation_implementFrameGeometry(swigCPtr, this, DecorativeFrame.getCPtr(arg0), arg0);
+    }
   }
 
     @Override
@@ -280,7 +299,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
         DecorativeMeshFileDisplayer meshDisplayer=new DecorativeMeshFileDisplayer(arg0, modelFilePath);
         bd.AddPart(meshDisplayer.getVisuals());
         addDisplayerToCurrentList(meshDisplayer);
-        mapVisualsToObjects.put(meshDisplayer.getVisuals(), currentModelComponent);
+        mapVisualsToObjects.put(meshDisplayer.getVisuals(), currentComponent);
      }
     //mapBodyIndicesToDisplayers.put(arg0.getUserRefAsObject(), meshDisplayer);
   }
@@ -306,37 +325,37 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
     }
 
     /**
-     * @return the currentModelComponent
+     * @return the currentComponent
      */
-    public ModelComponent getCurrentModelComponent() {
-        return currentModelComponent;
+    public Component getCurrentComponent() {
+        return currentComponent;
     }
 
     /**
-     * @param currentModelComponent the currentModelComponent to set
+     * @param currentComponent the currentComponent to set
      */
-    public void setCurrentModelComponent(ModelComponent currentModelComponent) {
-        this.currentModelComponent = currentModelComponent;
+    public void setCurrentComponent(Component currentComponent) {
+        this.currentComponent = currentComponent;
         if (!updateMode){
             currentFixedGeometryDisplayers = new LinkedList<DecorativeGeometryDisplayer>();
             currentVariableGeometryDisplayers = new LinkedList<DecorativeGeometryDisplayer>();
         }
         else{
-            currentFixedGeometryDisplayers = mapComponentsToFixedVisuals.get(currentModelComponent);
-            currentVariableGeometryDisplayers = mapComponentsToVariableVisuals.get(currentModelComponent);
+            currentFixedGeometryDisplayers = mapComponentsToFixedVisuals.get(currentComponent);
+            currentVariableGeometryDisplayers = mapComponentsToVariableVisuals.get(currentComponent);
             
         }
         
     }
    
-    public void finishCurrentModelComponent(ModelComponent currentModelComponent) {
-        mapComponentsToFixedVisuals.put(currentModelComponent, currentFixedGeometryDisplayers);
-        mapComponentsToVariableVisuals.put(currentModelComponent, currentVariableGeometryDisplayers);
-        this.currentModelComponent = null;
+    public void finishCurrentComponent(Component currentComponent) {
+        mapComponentsToFixedVisuals.put(currentComponent, currentFixedGeometryDisplayers);
+        mapComponentsToVariableVisuals.put(currentComponent, currentVariableGeometryDisplayers);
+        this.currentComponent = null;
    }
 
     void selectObject(OpenSimObject openSimObject) {
-        LinkedList<DecorativeGeometryDisplayer> visuals = mapComponentsToFixedVisuals.get(ModelComponent.safeDownCast(openSimObject));
+        LinkedList<DecorativeGeometryDisplayer> visuals = mapComponentsToFixedVisuals.get(Component.safeDownCast(openSimObject));
         if (visuals!=null){
             int sz = visuals.size();
             for(int i=0; i<sz; i++){
@@ -350,11 +369,11 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
         return mapVisualsToObjects.get(GetViewProp);
     }
 
-    public void updateDecorations(ModelComponent mc) {
+    public void updateDecorations(Component mc) {
         updateDecorations(mc, false);
     }
     
-    public void updateDecorations(ModelComponent mc, boolean varGeometryOnly) {
+    public void updateDecorations(Component mc, boolean varGeometryOnly) {
         updateMode = true;
         
         if (!varGeometryOnly)
@@ -365,7 +384,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
         updateMode = false;
     }
 
-    private void updateFixedDecorations(ModelComponent mc) {
+    private void updateFixedDecorations(Component mc) {
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
         mc.generateDecorations(true, modelDisplayHints, model.getWorkingState(), adg);
         // Sync. 
@@ -378,7 +397,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
         }
     }
 
-    private void updateVariableDecorations(ModelComponent mc) {
+    private void updateVariableDecorations(Component mc) {
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
         mc.generateDecorations(false, modelDisplayHints, model.getWorkingState(), adg);
         // Sync. 
@@ -398,7 +417,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
         }
     }
 
-    public void setObjectColor(ModelComponent mc, double[] color) {
+    public void setObjectColor(Component mc, double[] color) {
         currentFixedGeometryDisplayers = mapComponentsToFixedVisuals.get(mc);
         updateMode = true;
         for(int i=0; i<currentFixedGeometryDisplayers.size(); i++){
@@ -424,11 +443,11 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
         currentGeometryDisplayers.clear();
     }
 
-    void removeGeometry(ModelComponent mc) {
-        setCurrentModelComponent(mc);
+    void removeGeometry(Component mc) {
+        setCurrentComponent(mc);
         removeDisplayersFromScene(currentFixedGeometryDisplayers);
         removeDisplayersFromScene(currentVariableGeometryDisplayers);
-        this.currentModelComponent = null;
+        this.currentComponent = null;
     }
     
 }

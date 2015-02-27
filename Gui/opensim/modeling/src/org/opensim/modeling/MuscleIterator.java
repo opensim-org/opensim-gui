@@ -473,16 +473,16 @@ public class MuscleIterator {
     return opensimModelJNI.MuscleIterator_getGeometrySize(swigCPtr, this);
   }
 
-  public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
-    opensimModelJNI.MuscleIterator_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
-  }
-
   public void addToSystem(SWIGTYPE_p_SimTK__MultibodySystem system) {
     opensimModelJNI.MuscleIterator_addToSystem(swigCPtr, this, SWIGTYPE_p_SimTK__MultibodySystem.getCPtr(system));
   }
 
   public void initStateFromProperties(State state) {
     opensimModelJNI.MuscleIterator_initStateFromProperties(swigCPtr, this, State.getCPtr(state), state);
+  }
+
+  public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
+    opensimModelJNI.MuscleIterator_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
   }
 
   public SWIGTYPE_p_SimTK__MultibodySystem getSystem() {

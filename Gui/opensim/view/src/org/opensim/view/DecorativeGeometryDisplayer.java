@@ -127,7 +127,7 @@ public abstract class DecorativeGeometryDisplayer extends vtkActor {
         // if Object has properties for transform, color, pref, scale then update DG
         Geometry dg = Geometry.safeDownCast(getObj());
         if (dg == null){
-            ModelComponent mc = ModelComponent.safeDownCast(getObj());
+            Component mc = Component.safeDownCast(getObj());
         }
 
     }

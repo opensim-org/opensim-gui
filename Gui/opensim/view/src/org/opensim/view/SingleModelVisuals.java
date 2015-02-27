@@ -117,14 +117,14 @@ public class SingleModelVisuals implements ModelVisualsVtk {
     // Following declarations support the new Vis
     ModelDisplayHints mdh = new ModelDisplayHints();
     private DecorativeGeometryImplementationGUI dgi = new DecorativeGeometryImplementationGUI();
-    ArrayList<ModelComponent> modelComponents = new ArrayList<ModelComponent>();
+    ArrayList<Component> modelComponents = new ArrayList<Component>();
     protected HashMap<Integer, BodyDisplayer> mapBodyIndicesToDisplayers = new HashMap<Integer, BodyDisplayer>();
     /**
      * Creates a new instance of SingleModelVisuals
      */
     public SingleModelVisuals(Model aModel) {
         //initDefaultShapesAndColors();
-        buildModelComponentList(aModel);
+        buildComponentList(aModel);
         modelDisplayAssembly = createModelAssembly(aModel);
         OpenSimContext context=OpenSimDB.getInstance().getContext(aModel);
         defaultColoringFunction = new MuscleColorByActivationFunction(context);
@@ -132,11 +132,11 @@ public class SingleModelVisuals implements ModelVisualsVtk {
         setVisible(true);
     }
 
-    public void addGeometryForModelComponent(ModelComponent mc, Model model) {
+    public void addGeometryForComponent(Component mc, Model model) {
         //System.out.println("Process object:"+mc.getConcreteClassName()+":"+mc.getName()+" "+mc.isObjectUpToDateWithProperties());
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
         mc.generateDecorations(true, mdh, model.getWorkingState(), adg);
-        dgi.setCurrentModelComponent(mc);
+        dgi.setCurrentComponent(mc);
         if (adg.size()>0){  // Component has some geometry
             DecorativeGeometry dg;
             for (int idx=0; idx <adg.size(); idx++){
@@ -156,7 +156,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
             }
             dgi.finishVariableGeometry();
         }
-        dgi.finishCurrentModelComponent(mc);
+        dgi.finishCurrentComponent(mc);
     }
  
     /**
@@ -196,12 +196,12 @@ public class SingleModelVisuals implements ModelVisualsVtk {
             body.next();
         }
         dgi.setModelAssembly(modelAssembly, mapBodyIndicesToDisplayers, model, mdh);
-        ModelComponentList mcList = model.getModelComponentList();
-        ModelComponentIterator mcIter = mcList.begin();
+        ComponentsList mcList = model.getComponentsList();
+        ComponentIterator mcIter = mcList.begin();
         mcIter.next(); // Skip model itself
         while (!mcIter.equals(mcList.end())){
             //System.out.println("In createModelAssembly Type, name:"+mcIter.__deref__().getConcreteClassName()+mcIter.__deref__().getName());
-            addGeometryForModelComponent(mcIter.__deref__(), model);
+            addGeometryForComponent(mcIter.__deref__(), model);
             mcIter.next();
         }
 
@@ -245,8 +245,8 @@ public class SingleModelVisuals implements ModelVisualsVtk {
             //bodyRep.applyRepresentations();
             bodyIter.next();
         }
-        ModelComponentList mcList = model.getModelComponentList();
-        ModelComponentIterator mcIter = mcList.begin();
+        ComponentsList mcList = model.getComponentsList();
+        ComponentIterator mcIter = mcList.begin();
         mcIter.next(); // Skip model itself
         while (!mcIter.equals(mcList.end())){
             //System.out.println("In createModelAssembly Type, name:"+mcIter.__deref__().getConcreteClassName()+mcIter.__deref__().getName());
@@ -635,11 +635,12 @@ public class SingleModelVisuals implements ModelVisualsVtk {
         //pushColoringFunctionToMuscles();
     }
 
-    private void buildModelComponentList(Model model) {
-        ModelComponentList mcList = model.getModelComponentList();
-        ModelComponentIterator mcIter = mcList.begin();
+    private void buildComponentList(Model model) {
+        ComponentsList mcList = model.getComponentsList();
+        ComponentIterator mcIter = mcList.begin();
         mcIter.next(); // Skip model itself
         while (!mcIter.equals(mcList.end())){
+            System.out.println("Object:Type,Name:"+ mcIter.getConcreteClassName()+","+mcIter.getName());
             modelComponents.add(mcIter.__deref__());
             mcIter.next();
         }
@@ -655,8 +656,8 @@ public class SingleModelVisuals implements ModelVisualsVtk {
         else {
             // Call method on owner ModelCompoent
             System.out.println("Trying to unhighlight "+object.getName());
-            // Assume ModelComponent
-            ModelComponent mc = ModelComponent.safeDownCast(object);
+            // Assume Component
+            Component mc = Component.safeDownCast(object);
             if (mc != null){
                 dgi.updateDecorations(mc);
             }
@@ -664,13 +665,13 @@ public class SingleModelVisuals implements ModelVisualsVtk {
     }
 
     public void setObjectColor(OpenSimObject object, double[] color) {
-        ModelComponent mc = ModelComponent.safeDownCast(object);
+        Component mc = Component.safeDownCast(object);
         if (mc != null){
             dgi.setObjectColor(mc, color);
         }
     }
     
-    public void upateDisplay(ModelComponent mc) {
+    public void upateDisplay(Component mc) {
         dgi.updateDecorations(mc);
     }
     /**
@@ -680,12 +681,12 @@ public class SingleModelVisuals implements ModelVisualsVtk {
     private void updateVariableGeometry(Model model) {
         dgi.startVariableGeometry();
         for (int mcIndex = 0; mcIndex < modelComponents.size(); mcIndex++){
-            ModelComponent mc = modelComponents.get(mcIndex);
+            Component mc = modelComponents.get(mcIndex);
             //System.out.print("Processing model component "+mc.getConcreteClassName()+":"+mc.getName());
             ArrayDecorativeGeometry avdg = new ArrayDecorativeGeometry();
             mc.generateDecorations(false, mdh, model.getWorkingState(), avdg);
             //System.out.println("Size var ="+avdg.size());
-            dgi.setCurrentModelComponent(mc);
+            dgi.setCurrentComponent(mc);
             if (avdg.size()>0){  // Component has some variable geometry
                 dgi.updateDecorations(mc, true);
              }

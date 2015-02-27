@@ -40,6 +40,7 @@ import org.openide.nodes.Sheet;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.Appearance;
 import org.opensim.modeling.Geometry;
+import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelComponent;
 import org.opensim.modeling.Vec3;
 import org.opensim.view.ColorableInterface;
@@ -168,8 +169,8 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
 
     private void updateObjectDisplay(Geometry obj) {
         // Tell the world that the owner modelComponent need to regenerate
-        ModelComponent mc = obj.getOwnerModelComponent();
-        ViewDB.getInstance().getModelVisuals(mc.getModel()).upateDisplay(mc);
+        Model mdl = getModelForNode();
+        ViewDB.getInstance().getModelVisuals(mdl).upateDisplay(obj);
         ViewDB.getInstance().repaintAll();
     }
 

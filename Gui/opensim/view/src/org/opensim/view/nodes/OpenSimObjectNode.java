@@ -44,7 +44,7 @@ import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Function;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Model;
-import org.opensim.modeling.ModelComponent;
+import org.opensim.modeling.Component;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PropertyHelper;
 import org.opensim.modeling.XYFunctionInterface;
@@ -309,16 +309,16 @@ public class OpenSimObjectNode extends OpenSimNode {
      */
     public OpenSimObject getOpenSimObject()  { return openSimObject; }
 
-    public ModelComponent getOwnerModelComponent() {
+    public Component getOwnerComponent() {
         OpenSimObject obj = getOpenSimObject();
         
-        if (ModelComponent.safeDownCast(obj)!= null) 
-            return ModelComponent.safeDownCast(obj);
+        if (Component.safeDownCast(obj)!= null) 
+            return Component.safeDownCast(obj);
         else {
             if (this instanceof ConcreteModelNode)
             return ((ConcreteModelNode)this).getModel();
         else 
-            return ((OpenSimObjectNode)getParentNode()).getOwnerModelComponent();
+            return ((OpenSimObjectNode)getParentNode()).getOwnerComponent();
         }
     }
    protected void addDisplayOption(displayOption newOption)

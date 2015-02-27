@@ -29,7 +29,6 @@
  */
 package org.opensim.view.nodes;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.*;
@@ -51,12 +50,10 @@ import org.opensim.modeling.CoordinateSet;
 import org.opensim.modeling.Function;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Model;
-import org.opensim.modeling.ModelComponent;
+import org.opensim.modeling.Component;
 import org.opensim.modeling.MovingPathPoint;
-import org.opensim.modeling.Muscle;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.PathActuator;
 import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.PathPointSet;
 import org.opensim.modeling.PathWrap;
@@ -180,7 +177,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
 
       // Save the currently selected GUI tab.
       if (objectWithPath != null) {
-         Component comp = ParametersTabbedPanel.getSelectedComponent();
+         java.awt.Component comp = ParametersTabbedPanel.getSelectedComponent();
          if (comp != null)
             selectedTabName = comp.getName();
          else
@@ -231,7 +228,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
             
       // Set the selected tab in the ParametersTabbedPanel to the
       // one whose name matches selectedTabName.
-      Component[] components = ParametersTabbedPanel.getComponents();
+      java.awt.Component[] components = ParametersTabbedPanel.getComponents();
       if (selectedTabName == null) {
          ParametersTabbedPanel.setSelectedComponent(components[0]);
       } else {
@@ -353,7 +350,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          OpenSimDB.getInstance().notifyObservers(evnt);
          // Update the display.
          SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-         vis.upateDisplay(ModelComponent.safeDownCast(objectWithPath));
+         vis.upateDisplay(Component.safeDownCast(objectWithPath));
          ViewDB.getInstance().repaintAll();
       }
    }
@@ -1165,7 +1162,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
    private void updateDisplay() {
         Model model = currentPath.getModel();
         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-        vis.upateDisplay(ModelComponent.safeDownCast(objectWithPath));
+        vis.upateDisplay(Component.safeDownCast(objectWithPath));
         ViewDB.getInstance().repaintAll();
    }
    
@@ -1214,7 +1211,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          Model model = currentPath.getModel();
          // tell the ViewDB to redraw the model
          SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-         vis.upateDisplay(ModelComponent.safeDownCast(objectWithPath));
+         vis.upateDisplay(Component.safeDownCast(objectWithPath));
          ViewDB.getInstance().repaintAll();
          // update the current path panel
          updateCurrentPathPanel();
@@ -1237,7 +1234,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          
          // tell the ViewDB to redraw the model
          SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-         vis.upateDisplay(ModelComponent.safeDownCast(objectWithPath));
+         vis.upateDisplay(Component.safeDownCast(objectWithPath));
          ViewDB.getInstance().repaintAll();
          // update the current path panel
          updateCurrentPathPanel();
@@ -1474,7 +1471,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          
          // tell the ViewDB to redraw the model
          SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-         vis.upateDisplay(ModelComponent.safeDownCast(objectWithPath));
+         vis.upateDisplay(Component.safeDownCast(objectWithPath));
          ViewDB.getInstance().repaintAll();
          // update the current path panel
          updateCurrentPathPanel();
@@ -1494,7 +1491,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          
          // tell the ViewDB to redraw the model
          SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-         vis.upateDisplay(ModelComponent.safeDownCast(objectWithPath));
+         vis.upateDisplay(Component.safeDownCast(objectWithPath));
          ViewDB.getInstance().repaintAll();
          // update the panels
          updateAttachmentPanel();
@@ -1539,7 +1536,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
             
             // tell the ViewDB to redraw the model
             SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-         vis.upateDisplay(ModelComponent.safeDownCast(objectWithPath));
+         vis.upateDisplay(Component.safeDownCast(objectWithPath));
             ViewDB.getInstance().repaintAll();
             // update the current path panel
             updateCurrentPathPanel();
@@ -1583,7 +1580,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
             // tell the ViewDB to redraw the model
             Model model = currentPath.getModel();
             SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-            vis.upateDisplay(ModelComponent.safeDownCast(objectWithPath));
+            vis.upateDisplay(Component.safeDownCast(objectWithPath));
             ViewDB.getInstance().repaintAll();
             // update the current path panel
             updateCurrentPathPanel();
@@ -1607,7 +1604,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
         setupComponent(objectWithPath);
         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(currentModel);
         //Muscle asm = Muscle.safeDownCast(objectWithPath);
-        vis.upateDisplay(ModelComponent.safeDownCast(objectWithPath));
+        vis.upateDisplay(Component.safeDownCast(objectWithPath));
         ViewDB.getInstance().repaintAll();
    }
 }

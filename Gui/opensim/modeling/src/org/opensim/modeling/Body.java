@@ -265,8 +265,8 @@ public class Body extends PhysicalFrame {
     opensimModelJNI.Body_addMeshGeometry__SWIG_1(swigCPtr, this, aGeometryFileName);
   }
 
-  public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
-    opensimModelJNI.Body_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
+  public void adoptGeometry(Geometry geom) {
+    opensimModelJNI.Body_adoptGeometry(swigCPtr, this, Geometry.getCPtr(geom), geom);
   }
 
   public WrapObject getWrapObject(String aName) {

@@ -33,24 +33,28 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.prefs.Preferences;
+import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.openide.modules.ModuleInstall;
 import org.openide.util.NbBundle;
+import org.opensim.modeling.Body;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.utils.ApplicationState;
 import org.opensim.utils.TheApp;
+import org.opensim.view.actions.ApplicationExit;
 import org.opensim.view.base.OpenSimBaseCanvas;
+import org.opensim.view.editors.BodyNameEditor;
+import org.opensim.view.editors.FrameNameEditor;
+import org.opensim.view.editors.MuscleEditorTopComponent;
+import org.opensim.view.motions.MotionsDB;
+import org.opensim.view.motions.MotionsDBDescriptor;
+import org.opensim.view.nodes.EditorRegistry;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.OpenSimDBDescriptor;
 import org.opensim.view.pub.PluginsDB;
 import org.opensim.view.pub.ViewDB;
-import org.opensim.view.editors.MuscleEditorTopComponent;
-import javax.swing.JPopupMenu;
-import org.opensim.utils.ApplicationState;
-import org.opensim.view.actions.ApplicationExit;
-import org.opensim.view.motions.MotionsDB;
-import org.opensim.view.motions.MotionsDBDescriptor;
 import org.opensim.view.pub.ViewDBDescriptor;
 
 /**
@@ -111,9 +115,7 @@ public class Installer extends ModuleInstall {
                 // First time, no file yet
                 ApplicationState as = ApplicationState.getInstance();
                 as.addObject("OpenSimDB", new OpenSimDBDescriptor(OpenSimDB.getInstance()));
-                //as.addObject("OpenSimDB", OpenSimDB.getInstance());
                 as.addObject("ViewDB", new ViewDBDescriptor(ViewDB.getInstance()));
-                //ex.printStackTrace();
                 as.addObject("PluginsDB", PluginsDB.getInstance());
                 as.addObject("MotionsDB", new MotionsDBDescriptor(MotionsDB.getInstance()));
             } catch (IOException ex) {
@@ -122,6 +124,8 @@ public class Installer extends ModuleInstall {
         }
         //
         //PropertyEditorManager.registerEditor(OpenSimObject.class, OpenSimObjectEditor.class);
+        EditorRegistry.addEditor("Body", new BodyNameEditor());
+        EditorRegistry.addEditor("PhysicalFrame", new FrameNameEditor());
     }
     /**
      * restorePrefs is primarily used for the first time around where there are no pref values

@@ -46,6 +46,8 @@ import org.opensim.modeling.Model;
 import org.opensim.modeling.BodiesList;
 import org.opensim.modeling.Coordinate;
 import org.opensim.modeling.CoordinateSet;
+import org.opensim.modeling.FrameIterator;
+import org.opensim.modeling.FramesList;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.ObjectGroup;
 import org.opensim.modeling.OpenSimContext;
@@ -60,6 +62,7 @@ public class SingleModelGuiElements {
     Model model;   // model that Gui elements are created for
     
     private String[] bodyNames=null;
+    private String[] frameNames=null;
     private String[] coordinateNames=null;
     private String[] unconstrainedCoordinateNames=null;
     private String[] actuatorClassNames=null;
@@ -136,7 +139,7 @@ public class SingleModelGuiElements {
     }
 
     /**
-     * Get a list of names for model bodies
+     * Get a list of names for model frames
      */
     public String[] getBodyNames()
     {
@@ -152,6 +155,22 @@ public class SingleModelGuiElements {
             bNames.toArray(bodyNames);
         }
         return bodyNames;
+   }
+    
+    public String[] getFrameNames()
+    {
+        if (frameNames == null) {
+            FramesList frames = model.getFramesList();
+            FrameIterator bi = frames.begin();
+            ArrayList<String> bNames = new ArrayList<String>();
+            while (!bi.equals(frames.end())) {
+                bNames.add(bi.getName());
+                bi.next();
+            }
+            frameNames = new String[bNames.size()];
+            bNames.toArray(frameNames);
+        }
+        return frameNames;
    }
     
     /**

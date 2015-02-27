@@ -188,7 +188,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    public void processStep(State s, int stepNumber) {
       if(!getOn()) return;
       if (!proceed(stepNumber)) return;
-      super.step(s, stepNumber);
+      //super.step(s, stepNumber);
       if(progressHandle!=null) {
           if (!progressUsingTime) progressHandle.progress(stepNumber-startStep);
           else {
@@ -274,8 +274,8 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
     }
 
     public int step(State s, int stepNumber) {
-        int retValue;
-        retValue = super.step(s, stepNumber);
+        int retValue=0;
+        //retValue = super.step(s, stepNumber);
         processStep(s, stepNumber);
         /*
          * if (staticOptimization){

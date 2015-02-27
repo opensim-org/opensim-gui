@@ -12,6 +12,7 @@ import org.openide.util.NbBundle;
 import org.opensim.modeling.BodiesList;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.BodyIterator;
+import org.opensim.modeling.Frame;
 import org.opensim.modeling.FrameIterator;
 import org.opensim.modeling.FramesList;
 import org.opensim.modeling.Model;
@@ -32,11 +33,14 @@ public class FramesNode extends OpenSimNode {
         FramesList frames = model.getFramesList();
         FrameIterator frm = frames.begin();
         while (!frm.equals(frames.end())) {
-                OneFrameNode node = new OneFrameNode(frm.__deref__());
+            Frame deref = frm.__deref__();
+            if (Body.safeDownCast(deref)==null){ // Exclude bodies
+                OneFrameNode node = new OneFrameNode(deref);
                 Node[] arrNodes = new Node[1];
                 arrNodes[0] = node;
                 children.add(arrNodes);
-                frm.next();
+            }
+            frm.next();
         }
     }
 

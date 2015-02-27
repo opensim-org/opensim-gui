@@ -19,12 +19,11 @@ import org.opensim.modeling.Frame;
  *
  * @author Ayman
  */
-class OneFrameNode extends OneComponentNode {
+class OneFrameNode extends OneModelComponentNode {
    private static ResourceBundle bundle = NbBundle.getBundle(OneFrameNode.class);
     public OneFrameNode(Frame frame) {
         super(frame);
         setShortDescription(bundle.getString("HINT_FrameNode"));
-        setChildren(Children.LEAF); 
     }
    
    @Override

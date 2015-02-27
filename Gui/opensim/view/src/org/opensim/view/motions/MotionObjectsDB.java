@@ -96,6 +96,8 @@ public class MotionObjectsDB {
       vtkSphereSource ball = new vtkSphereSource();
       ball.SetRadius(1.0);
       ball.SetCenter(0., 0., 0.);
+      ball.SetThetaResolution(32);
+      ball.SetPhiResolution(32);
       return ball.GetOutput();
    }
 
@@ -110,6 +112,8 @@ public class MotionObjectsDB {
       vtkSphereSource mp=new vtkSphereSource();
       mp.SetRadius(1.); // will be scaled by preference
       mp.SetCenter(0., 0., 0.);
+      mp.SetThetaResolution(32);
+      mp.SetPhiResolution(32);
       return mp.GetOutput();
    }
 

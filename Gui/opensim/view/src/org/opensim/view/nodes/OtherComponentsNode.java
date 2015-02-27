@@ -26,7 +26,7 @@ public class OtherComponentsNode extends OpenSimObjectSetNode {
             ModelComponent component = componentSet.get(index);
             Children children = getChildren();
 
-            OneModelComponentNode node = new OneModelComponentNode(component);
+            OneOtherModelComponentNode node = new OneOtherModelComponentNode(component);
             Node[] arrNodes = new Node[1];
             arrNodes[0] = node;
             children.add(arrNodes);

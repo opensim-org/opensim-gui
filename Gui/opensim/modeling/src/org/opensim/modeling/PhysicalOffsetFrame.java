@@ -8,12 +8,11 @@
 
 package org.opensim.modeling;
 
-public class PhysicalOffsetFrame {
+public class PhysicalOffsetFrame extends PhysicalFrameWithOffset {
   private long swigCPtr;
-  protected boolean swigCMemOwn;
 
   public PhysicalOffsetFrame(long cPtr, boolean cMemoryOwn) {
-    swigCMemOwn = cMemoryOwn;
+    super(opensimModelJNI.PhysicalOffsetFrame_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -33,6 +32,7 @@ public class PhysicalOffsetFrame {
       }
       swigCPtr = 0;
     }
+    super.delete();
   }
 
   public static PhysicalOffsetFrame safeDownCast(OpenSimObject obj) {
@@ -48,7 +48,7 @@ public class PhysicalOffsetFrame {
     return opensimModelJNI.PhysicalOffsetFrame_getClassName();
   }
 
-  public PhysicalOffsetFrame clone() {
+  public OpenSimObject clone() {
     long cPtr = opensimModelJNI.PhysicalOffsetFrame_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new PhysicalOffsetFrame(cPtr, true);
   }

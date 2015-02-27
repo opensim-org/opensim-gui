@@ -618,9 +618,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     */
    public void setObjectColor(OpenSimObject object, double[] colorComponents) {
 
-          ModelComponent mc = ModelComponent.safeDownCast(object);
+          Component mc = Component.safeDownCast(object);
           if (mc!=null){
-              getModelVisuals(mc.getModel()).setObjectColor(object, colorComponents);
+              // FOX40 getModelVisuals(mc.getModel()).setObjectColor(object, colorComponents);
           }
       
       renderAll();
@@ -1490,7 +1490,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         repaintAll();
     }
 
-    public void updateDisplay(Model model, ModelComponent ownerModelComponent) {
+    public void updateDisplay(Model model, Component ownerModelComponent) {
         getModelVisuals(model).upateDisplay(ownerModelComponent);
     }
 

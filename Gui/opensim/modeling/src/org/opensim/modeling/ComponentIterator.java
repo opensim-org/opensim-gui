@@ -69,6 +69,10 @@ public class ComponentIterator {
     opensimModelJNI.ComponentIterator_initStateFromProperties(swigCPtr, this, State.getCPtr(state), state);
   }
 
+  public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
+    opensimModelJNI.ComponentIterator_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
+  }
+
   public SWIGTYPE_p_SimTK__MultibodySystem getSystem() {
     return new SWIGTYPE_p_SimTK__MultibodySystem(opensimModelJNI.ComponentIterator_getSystem(swigCPtr, this), false);
   }

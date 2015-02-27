@@ -58,4 +58,10 @@ class DecorativeFrameDisplayer extends DecorativeGeometryDisplayer {
     DecorativeGeometry getDecorativeGeometry() {
         return ag;
     }   
+    
+    void updateGeometry(DecorativeFrame arg0) {
+        ag.setAxisLength(arg0.getAxisLength());
+        updateDisplayFromDecorativeGeometry();
+    }
+
 }

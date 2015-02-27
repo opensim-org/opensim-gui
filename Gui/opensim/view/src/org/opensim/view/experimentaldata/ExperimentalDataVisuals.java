@@ -66,7 +66,7 @@ public class ExperimentalDataVisuals extends SingleModelVisuals{
         model = (ModelForExperimentalData) mdl;
         AnnotatedMotion mot = model.getMotionData();
         for (ExperimentalDataObject obj:mot.getClassified()){
-           addGeometryForModelComponent(obj, mdl);
+           addGeometryForComponent(obj, mdl);
         }
         if (mot.isBoundingBoxComputed()){
             double[] bounds = mot.getBoundingBox();

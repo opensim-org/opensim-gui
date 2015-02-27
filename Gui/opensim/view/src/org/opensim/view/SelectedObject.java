@@ -33,7 +33,7 @@ import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.Marker;
-import org.opensim.modeling.ModelComponent;
+import org.opensim.modeling.Component;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.PathActuator;
 import org.opensim.modeling.PathPoint;
@@ -82,8 +82,8 @@ public class SelectedObject implements Selectable {
       if(marker != null) return getModel(marker);
       WrapObject wrapObj = WrapObject.safeDownCast(object);
       if(wrapObj != null) return getModel(wrapObj.getBody());
-      ModelComponent mc = ModelComponent.safeDownCast(object);
-      if (mc != null) return mc.getModel();
+      Component mc = Component.safeDownCast(object);
+      // FIX40 if (mc != null) return mc.getModel();
       return null;
    }
 

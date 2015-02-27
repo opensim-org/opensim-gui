@@ -6,6 +6,7 @@
 
 package org.opensim.view.nodes;
 
+import java.beans.PropertyEditorSupport;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -17,6 +18,7 @@ import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.AbstractConnector;
 import org.opensim.modeling.AbstractProperty;
+import org.opensim.modeling.Body;
 import org.opensim.modeling.Component;
 import org.opensim.modeling.OpenSimObject;
 
@@ -54,17 +56,19 @@ public class OneComponentNode extends OpenSimObjectNode {
     
     private void createConnectorProperty(AbstractConnector connector, Sheet.Set sheetSet) {
         try {
-            String templatedType = connector.getConcreteClassName();
-            String connecteeType = templatedType.substring(10, templatedType.length() - 1);
+            String connecteeType = connector.getConnectedToTypeName();
             String connectionName = connector.getName();
-            PropertySupport.Reflection nextNodeProp = null;
-            nextNodeProp = new PropertySupport.Reflection(connector,
+            PropertySupport.Reflection nextNodeProp = 
+                    new PropertySupport.Reflection(connector,
                     String.class,
-                    "getName",
-                    null);
+                    "get_connected_to_name",
+                    "set_connected_to_name");
             nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
             nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
             nextNodeProp.setName(connecteeType + ":" + connectionName);
+            PropertyEditorSupport editor = EditorRegistry.getEditor(connecteeType);
+            if (editor != null)
+                nextNodeProp.setPropertyEditorClass(editor.getClass());
             sheetSet.put(nextNodeProp);
         } catch (NoSuchMethodException ex) {
             Exceptions.printStackTrace(ex);
