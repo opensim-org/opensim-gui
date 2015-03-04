@@ -640,7 +640,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
         ComponentIterator mcIter = mcList.begin();
         mcIter.next(); // Skip model itself
         while (!mcIter.equals(mcList.end())){
-            System.out.println("Object:Type,Name:"+ mcIter.getConcreteClassName()+","+mcIter.getName());
+            //System.out.println("Object:Type,Name:"+ mcIter.getConcreteClassName()+","+mcIter.getName());
             modelComponents.add(mcIter.__deref__());
             mcIter.next();
         }
