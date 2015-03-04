@@ -79,15 +79,6 @@ public class PropertyEditorAdaptor {
         this.context = OpenSimDB.getInstance().getContext(model);
         this.obj = ownerNode.getOpenSimObject();
         this.node = ownerNode;
-        //defaultPose = new ModelPose(model.getCoordinateSet(), "_saveDefault", true);
-    }
-    public PropertyEditorAdaptor(AbstractProperty prop, OpenSimObject obj, Model model, OpenSimObjectNode ownerNode) {
-        this.prop = prop;
-        this.context = OpenSimDB.getInstance().getContext(model);
-        this.model = model;
-        this.obj = obj;
-        this.node = ownerNode;
-        //defaultPose = new ModelPose(model.getCoordinateSet(), "_saveDefault", true);
     }
     /**
      * Constructor that only takes a model. This's NOY to be used for specific Property editing
@@ -103,6 +94,14 @@ public class PropertyEditorAdaptor {
         this.node = null;
         //defaultPose = new ModelPose(model.getCoordinateSet(), "_saveDefault", true);
     }
+    public PropertyEditorAdaptor(Model aModel, OpenSimObject obj, AbstractProperty prop, OpenSimObjectNode node) {
+        this.model = aModel;
+        this.context = OpenSimDB.getInstance().getContext(model);
+        this.obj = obj;
+        this.prop = prop;
+        this.node = node;
+        //defaultPose = new ModelPose(model.getCoordinateSet(), "_saveDefault", true);
+    }
     // Double Properties
 
     public double getValueDouble() {
@@ -113,7 +112,7 @@ public class PropertyEditorAdaptor {
         setValueDouble(v, true);
     }
     
-    private void handlePropertyChangeCommon() {
+    public void handlePropertyChangeCommon() {
         if (Geometry.safeDownCast(obj)!= null){
             Component mc = Component.safeDownCast(obj);
             ViewDB.getInstance().getModelVisuals(model).upateDisplay(mc);  
@@ -818,6 +817,8 @@ public class PropertyEditorAdaptor {
         try {
             context.cacheModelAndState();
             context.restoreStateFromCachedModel();
+            ViewDB.getInstance().updateModelDisplay(model);
+            ViewDB.repaintAll();
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
     }

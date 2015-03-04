@@ -148,9 +148,11 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
         float[] colorComp = new float[3];
         newColor.getColorComponents(colorComp);
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        // FIX40 support undo
-        obj.setColor(new Vec3(colorComp[0], colorComp[1], colorComp[2]));
-        updateObjectDisplay(obj);
+        PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.get_Appearance(),
+                obj.get_Appearance().getPropertyByName("color"), this
+                );
+        pea.setValueVec3(new org.opensim.utils.Vec3(colorComp[0], colorComp[1], colorComp[2]));
+
         
     }
     
@@ -161,10 +163,10 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
 
     public void setOpacity(double newOpacity) {
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        // FIX40 support undo
-        obj.setOpacity(newOpacity);
-        updateObjectDisplay(obj);
-        
+        PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.get_Appearance(),
+        obj.get_Appearance().getPropertyByName("opacity"), this
+        );
+        pea.setValueDouble(newOpacity);
     }
 
     private void updateObjectDisplay(Geometry obj) {
