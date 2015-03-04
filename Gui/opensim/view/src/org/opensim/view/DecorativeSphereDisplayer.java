@@ -125,9 +125,11 @@ public class DecorativeSphereDisplayer extends DecorativeGeometryDisplayer {
         return this;
     }
 
+    @Override
     int getBodyId() {
         return ag.getBodyId();
     }
+    @Override
     int getIndexOnBody() {
         return ag.getIndexOnBody();
     }
@@ -136,9 +138,11 @@ public class DecorativeSphereDisplayer extends DecorativeGeometryDisplayer {
     DecorativeGeometry getDecorativeGeometry() {
         return ag;
     }
-     
-    void updateGeometry(DecorativeSphere arg0) {
-         ag.setRadius(arg0.getRadius());
+
+    @Override
+    void updateGeometry(DecorativeGeometry arg) {
+        DecorativeSphere arg0 = (DecorativeSphere) ag;
+        ag.setRadius(arg0.getRadius());
         updateDisplayFromDecorativeGeometry();
     }
 }

@@ -130,9 +130,11 @@ public class DecorativeCylinderDisplayer extends DecorativeGeometryDisplayer {
        return this;
     }
 
+    @Override
     int getBodyId() {
         return ag.getBodyId();
     }
+    @Override
     int getIndexOnBody() {
         return ag.getIndexOnBody();
     }
@@ -141,8 +143,10 @@ public class DecorativeCylinderDisplayer extends DecorativeGeometryDisplayer {
     DecorativeGeometry getDecorativeGeometry() {
         return ag;
     }
-    
-    void updateGeometry(DecorativeCylinder arg0) {
+
+    @Override
+    void updateGeometry(DecorativeGeometry arg) {
+        DecorativeCylinder arg0 = (DecorativeCylinder)arg;
         ag.setRadius(arg0.getRadius());
         ag.setHalfHeight(arg0.getHalfHeight());
         updateDisplayFromDecorativeGeometry();

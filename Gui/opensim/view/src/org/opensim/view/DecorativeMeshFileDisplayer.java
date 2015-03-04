@@ -30,7 +30,6 @@ import org.opensim.modeling.*;
 import org.opensim.view.pub.GeometryFileLocator;
 import vtk.vtkActor;
 import vtk.vtkPolyData;
-import vtk.vtkPolyDataMapper;
 
 public class DecorativeMeshFileDisplayer extends DecorativeGeometryDisplayer {
     private DecorativeMeshFile ag;
@@ -89,9 +88,11 @@ public class DecorativeMeshFileDisplayer extends DecorativeGeometryDisplayer {
         return this;
     }
 
+    @Override
     int getBodyId() {
         return ag.getBodyId();
     }
+    @Override
     int getIndexOnBody() {
         return ag.getIndexOnBody();
     }
@@ -101,7 +102,9 @@ public class DecorativeMeshFileDisplayer extends DecorativeGeometryDisplayer {
         return ag;
     }
 
-    void updateGeometry(DecorativeMeshFile arg0) {
+    @Override
+    void updateGeometry(DecorativeGeometry arg) {
+        DecorativeMeshFile arg0 = (DecorativeMeshFile) arg;
         if (!arg0.getMeshFile().equalsIgnoreCase(ag.getMeshFile())){
             ag = arg0.clone();
             createDisplayFromDecorativeGeometry();

@@ -18,7 +18,7 @@ import vtk.vtkPolyData;
  */
 class DecorativeFrameDisplayer extends DecorativeGeometryDisplayer {
 
-    private DecorativeFrame ag;
+    private final DecorativeFrame ag;
     vtkAxes frameSrc = new vtkAxes();
     
     public DecorativeFrameDisplayer(DecorativeFrame arg0) {
@@ -47,9 +47,11 @@ class DecorativeFrameDisplayer extends DecorativeGeometryDisplayer {
         return this;
     }
  
+    @Override
     int getBodyId() {
         return ag.getBodyId();
     }
+    @Override
     int getIndexOnBody() {
         return ag.getIndexOnBody();
     }
@@ -59,7 +61,9 @@ class DecorativeFrameDisplayer extends DecorativeGeometryDisplayer {
         return ag;
     }   
     
-    void updateGeometry(DecorativeFrame arg0) {
+    @Override
+    void updateGeometry(DecorativeGeometry arg) {
+        DecorativeFrame arg0 = (DecorativeFrame) arg;
         ag.setAxisLength(arg0.getAxisLength());
         updateDisplayFromDecorativeGeometry();
     }

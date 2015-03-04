@@ -123,9 +123,11 @@ class DecorativeEllipsoidDisplayer extends DecorativeGeometryDisplayer {
        return this;
     }
 
+    @Override
     int getBodyId() {
         return ag.getBodyId();
     }
+    @Override
     int getIndexOnBody() {
         return ag.getIndexOnBody();
     }
@@ -135,7 +137,9 @@ class DecorativeEllipsoidDisplayer extends DecorativeGeometryDisplayer {
         return ag;
     }
 
-    void updateGeometry(DecorativeEllipsoid arg0) {
+    @Override
+    void updateGeometry(DecorativeGeometry arg) {
+        DecorativeEllipsoid arg0 = (DecorativeEllipsoid) arg;
         ag.setRadii(arg0.getRadii());
         updateDisplayFromDecorativeGeometry();
     }

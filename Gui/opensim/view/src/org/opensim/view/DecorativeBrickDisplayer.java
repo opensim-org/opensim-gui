@@ -122,9 +122,11 @@ public class DecorativeBrickDisplayer extends DecorativeGeometryDisplayer {
        return this;
     }
 
+    @Override
     int getBodyId() {
         return ag.getBodyId();
     }
+    @Override
     int getIndexOnBody() {
         return ag.getIndexOnBody();
     }
@@ -134,7 +136,9 @@ public class DecorativeBrickDisplayer extends DecorativeGeometryDisplayer {
         return ag;
     }
  
-    void updateGeometry(DecorativeBrick arg0) {
+    @Override
+    void updateGeometry(DecorativeGeometry arg) {
+        DecorativeBrick arg0 = (DecorativeBrick)arg;
         ag.setHalfLengths(arg0.getHalfLengths());
         updateDisplayFromDecorativeGeometry();
     }
