@@ -818,7 +818,7 @@ public class PropertyEditorAdaptor {
             context.cacheModelAndState();
             context.restoreStateFromCachedModel();
             ViewDB.getInstance().updateModelDisplay(model);
-            ViewDB.repaintAll();
+            ViewDB.renderAll();
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
     }

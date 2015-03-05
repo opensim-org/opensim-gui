@@ -110,12 +110,12 @@ public class DisplayPreferenceEditor extends PropertyEditorSupport
     
         private final JComboBox picker = new JComboBox();
         private PropertyEditor editor = null;
-        private Geometry.Representation[] options = new Geometry.Representation[]{
-            Geometry.Representation.Hide, 
-            Geometry.Representation.DrawPoints,
-            Geometry.Representation.DrawWireframe,
-            Geometry.Representation.DrawSurface,
-            Geometry.Representation.DrawDefault};
+        private Geometry.DisplayPreference[] options = new Geometry.DisplayPreference[]{
+            Geometry.DisplayPreference.Hide, 
+            Geometry.DisplayPreference.DrawPoints,
+            Geometry.DisplayPreference.DrawWireframe,
+            Geometry.DisplayPreference.DrawSurface,
+            Geometry.DisplayPreference.DrawDefault};
         
         public void connect(PropertyEditor propertyEditor, PropertyEnv env) {
             editor = propertyEditor;
@@ -146,7 +146,7 @@ public class DisplayPreferenceEditor extends PropertyEditorSupport
         }
 
         public void reset() {
-            Geometry.Representation d = (Geometry.Representation) editor.getValue();
+            Geometry.DisplayPreference d = (Geometry.DisplayPreference) editor.getValue();
             if (d != null) {
                 //picker.setVec3(d);
             }

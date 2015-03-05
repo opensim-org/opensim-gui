@@ -238,16 +238,16 @@ public class DisplayGeometryDisplayer extends vtkActor
         return displayGeometry.getOpacity();
     }
 
-    public Geometry.Representation getDisplayPreference() {
+    public Geometry.DisplayPreference getDisplayPreference() {
         return displayGeometry.getRepresentation();
     }
 
-    public void setDisplayPreference(Geometry.Representation newPref) {
+    public void setDisplayPreference(Geometry.DisplayPreference newPref) {
         setDisplayPreferenceGUI(newPref, true);
     }
-    public void setDisplayPreferenceGUI(final Geometry.Representation newPref, boolean allowUndo) {
+    public void setDisplayPreferenceGUI(final Geometry.DisplayPreference newPref, boolean allowUndo) {
         if (allowUndo){
-            final Geometry.Representation oldPref = displayGeometry.getRepresentation();
+            final Geometry.DisplayPreference oldPref = displayGeometry.getRepresentation();
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
                public boolean canUndo() {
                    return true;

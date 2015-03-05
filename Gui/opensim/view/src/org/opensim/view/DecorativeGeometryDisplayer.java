@@ -4,7 +4,6 @@
  */
 package org.opensim.view;
 
-import java.awt.Color;
 import org.opensim.modeling.*;
 import org.opensim.modeling.DecorativeGeometry.Representation;
 import vtk.*;
@@ -31,18 +30,18 @@ public abstract class DecorativeGeometryDisplayer extends vtkActor {
         AbstractProperty ap = getObj().getPropertyByName("display_preference");
         if (ap == null) return;
         int prefInt = PropertyHelper.getValueInt(ap);
-        Geometry.Representation pref = Geometry.Representation.swigToEnum(prefInt);
+        Geometry.DisplayPreference pref = Geometry.DisplayPreference.swigToEnum(prefInt);
         // Show vs. HideDisplayGeometry
-        if (pref == Geometry.Representation.Hide) {
+        if (pref == Geometry.DisplayPreference.Hide) {
             SetVisibility(0);
             return;
         }
         SetVisibility(1);
-        if (pref == Geometry.Representation.DrawWireframe) {
+        if (pref == Geometry.DisplayPreference.DrawWireframe) {
             GetProperty().SetRepresentationToWireframe();
         } else {
             GetProperty().SetRepresentationToSurface();
-            if (pref == Geometry.Representation.DrawSurface) {
+            if (pref == Geometry.DisplayPreference.DrawSurface) {
                 GetProperty().SetInterpolationToFlat();
             } else {
                 GetProperty().SetInterpolationToGouraud();
@@ -106,6 +105,11 @@ public abstract class DecorativeGeometryDisplayer extends vtkActor {
 
     private void setRepresentationFromDecorativeGeometry(DecorativeGeometry cs) {
         Representation representation = cs.getRepresentation();
+        if (representation==Representation.DrawNone){
+            SetVisibility(0);
+            return;
+        }
+        SetVisibility(1);
         if (representation==Representation.DrawSurface)
             GetProperty().SetRepresentationToSurface();
         else if (representation==Representation.DrawWireframe)
@@ -113,7 +117,8 @@ public abstract class DecorativeGeometryDisplayer extends vtkActor {
         else if (representation==Representation.DrawPoints)
             GetProperty().SetRepresentationToPoints();
         else if (representation==Representation.DrawDefault)
-            GetProperty().SetRepresentationToSurface();            
+            GetProperty().SetRepresentationToSurface();   
+        
     }
 
     private void setOpacityFromDecorativeGeometry(DecorativeGeometry cs) {

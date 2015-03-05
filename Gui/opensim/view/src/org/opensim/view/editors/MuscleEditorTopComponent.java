@@ -79,7 +79,7 @@ import org.opensim.modeling.MovingPathPoint;
 import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.PathPointSet;
 import org.opensim.modeling.Units;
-import org.opensim.modeling.Geometry.Representation;
+import org.opensim.modeling.Geometry.DisplayPreference;
 import org.opensim.modeling.PropertyHelper;
 import org.opensim.view.ClearSelectedObjectsEvent;
 import org.opensim.view.DragObjectsEvent;

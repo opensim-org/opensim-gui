@@ -127,7 +127,7 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
             nextNodeProp5.setName("Opacity");        
             set.put(nextNodeProp5);
             PropertySupport.Reflection nextNodePropRepresentation;
-            nextNodePropRepresentation = new PropertySupport.Reflection(this, Geometry.Representation.class, 
+            nextNodePropRepresentation = new PropertySupport.Reflection(this, Geometry.DisplayPreference.class, 
                     "getDisplayPreference", "setDisplayPreference");
             nextNodePropRepresentation.setPropertyEditorClass(DisplayPreferenceEditor.class);
             nextNodePropRepresentation.setName("Representation");        
@@ -176,12 +176,12 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
         ViewDB.getInstance().repaintAll();
     }
 
-    public Geometry.Representation getDisplayPreference() {
+    public Geometry.DisplayPreference getDisplayPreference() {
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
         return obj.getRepresentation();
    }
 
-    public void setDisplayPreference(Geometry.Representation newPref) {
+    public void setDisplayPreference(Geometry.DisplayPreference newPref) {
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
         // FIX40 support undo
         obj.setRepresentation(newPref);

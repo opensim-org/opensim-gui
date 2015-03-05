@@ -32,12 +32,13 @@ import vtk.vtkPolyData;
 import vtk.vtkTubeFilter;
 
 public class DecorativeLineDisplayer extends DecorativeGeometryDisplayer {
+
     private final DecorativeLine agLocal;
     private vtkLineSource line = null;
     private final vtkTubeFilter dFilter = new vtkTubeFilter();
 
     private Vec3 point1, point2;
-    //protected OpenSimObject obj;
+   //protected OpenSimObject obj;
     /** 
      * Displayer for Wrap Geometry
      * @param ag

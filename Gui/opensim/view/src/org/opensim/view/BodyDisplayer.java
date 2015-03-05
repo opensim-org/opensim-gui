@@ -304,7 +304,7 @@ public class BodyDisplayer extends vtkAssembly
         /**
          * Representation
          */
-        Geometry.Representation pref=gPiece.getRepresentation();
+        Geometry.DisplayPreference pref=gPiece.getRepresentation();
         applyDisplayPreferenceToActor(boneActor, pref);
         /**
          * Opacity
@@ -321,7 +321,7 @@ public class BodyDisplayer extends vtkAssembly
         xform.Translate(rotationsAndTranslations[3], rotationsAndTranslations[4], rotationsAndTranslations[5]);
     }
 
-    protected void applyDisplayPreferenceToActor(final vtkActor boneActor, final Geometry.Representation pref) {
+    protected void applyDisplayPreferenceToActor(final vtkActor boneActor, final Geometry.DisplayPreference pref) {
         switch(pref.swigValue()) {
             case 0:
                 boneActor.SetVisibility(0);
@@ -384,11 +384,11 @@ public class BodyDisplayer extends vtkAssembly
       }*/
     }
     
-     public Geometry.Representation getDisplayPreference() {
-         return Geometry.Representation.DrawSurface; //body.getDisplayer().getDisplayPreference();
+     public Geometry.DisplayPreference getDisplayPreference() {
+         return Geometry.DisplayPreference.DrawSurface; //body.getDisplayer().getDisplayPreference();
      }
 
-    public void setDisplayPreference(Geometry.Representation newPref) {
+    public void setDisplayPreference(Geometry.DisplayPreference newPref) {
         //body.getDisplayer().setDisplayPreference(newPref);
     }
 

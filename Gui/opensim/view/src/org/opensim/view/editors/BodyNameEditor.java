@@ -47,7 +47,9 @@ import org.openide.explorer.propertysheet.ExPropertyEditor;
 import org.openide.explorer.propertysheet.InplaceEditor;
 import org.openide.explorer.propertysheet.PropertyEnv;
 import org.openide.explorer.propertysheet.PropertyModel;
+import org.opensim.modeling.Model;
 import org.opensim.view.SingleModelGuiElements;
+import org.opensim.view.nodes.PropertyEditorAdaptor;
 import org.opensim.view.pub.ViewDB;
 
 /**
@@ -60,6 +62,7 @@ public class BodyNameEditor extends PropertyEditorSupport
      * Creates a new instance of PositionEditor
      */
     public BodyNameEditor() {
+        addPropertyChangeListener(this);
     }
 
     public void setAsText(String text) throws IllegalArgumentException {
@@ -106,6 +109,9 @@ public class BodyNameEditor extends PropertyEditorSupport
     }
 
     public void propertyChange(PropertyChangeEvent evt) {
+        Model mdl = ViewDB.getCurrentModel();
+        PropertyEditorAdaptor pea = new PropertyEditorAdaptor(mdl);
+        pea.handleModelChange();
     }
 
     public void actionPerformed(ActionEvent e) {

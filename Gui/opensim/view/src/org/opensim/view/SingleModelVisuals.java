@@ -41,7 +41,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import org.opensim.modeling.*;
-import org.opensim.modeling.Geometry.Representation;
+import org.opensim.modeling.Geometry.DisplayPreference;
 import org.opensim.view.pub.ModelVisualsVtk;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
