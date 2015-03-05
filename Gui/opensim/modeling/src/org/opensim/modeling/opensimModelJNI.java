@@ -560,6 +560,7 @@ public class opensimModelJNI {
   public final static native long new_DecorativeGeometry__SWIG_0();
   public final static native void delete_DecorativeGeometry(long jarg1);
   public final static native long new_DecorativeGeometry__SWIG_1(long jarg1, DecorativeGeometry jarg1_);
+  public final static native int DecorativeGeometry_DrawNone_get();
   public final static native int DecorativeGeometry_DrawPoints_get();
   public final static native int DecorativeGeometry_DrawWireframe_get();
   public final static native int DecorativeGeometry_DrawSurface_get();
@@ -3081,6 +3082,15 @@ public class opensimModelJNI {
   public final static native String FrameGeometry_getClassName();
   public final static native long FrameGeometry_clone(long jarg1, FrameGeometry jarg1_);
   public final static native String FrameGeometry_getConcreteClassName(long jarg1, FrameGeometry jarg1_);
+  public final static native void FrameGeometry_copyProperty_display_radius(long jarg1, FrameGeometry jarg1_, long jarg2, FrameGeometry jarg2_);
+  public final static native double FrameGeometry_get_display_radius__SWIG_0(long jarg1, FrameGeometry jarg1_, int jarg2);
+  public final static native long FrameGeometry_upd_display_radius__SWIG_0(long jarg1, FrameGeometry jarg1_, int jarg2);
+  public final static native void FrameGeometry_set_display_radius__SWIG_0(long jarg1, FrameGeometry jarg1_, int jarg2, double jarg3);
+  public final static native int FrameGeometry_append_display_radius(long jarg1, FrameGeometry jarg1_, double jarg2);
+  public final static native void FrameGeometry_constructProperty_display_radius(long jarg1, FrameGeometry jarg1_, double jarg2);
+  public final static native double FrameGeometry_get_display_radius__SWIG_1(long jarg1, FrameGeometry jarg1_);
+  public final static native long FrameGeometry_upd_display_radius__SWIG_1(long jarg1, FrameGeometry jarg1_);
+  public final static native void FrameGeometry_set_display_radius__SWIG_1(long jarg1, FrameGeometry jarg1_, double jarg2);
   public final static native long new_FrameGeometry__SWIG_0(double jarg1);
   public final static native long new_FrameGeometry__SWIG_1();
   public final static native void delete_FrameGeometry(long jarg1);

@@ -57,6 +57,42 @@ public class FrameGeometry extends Geometry {
     return opensimModelJNI.FrameGeometry_getConcreteClassName(swigCPtr, this);
   }
 
+  public void copyProperty_display_radius(FrameGeometry source) {
+    opensimModelJNI.FrameGeometry_copyProperty_display_radius(swigCPtr, this, FrameGeometry.getCPtr(source), source);
+  }
+
+  public double get_display_radius(int i) {
+    return opensimModelJNI.FrameGeometry_get_display_radius__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double upd_display_radius(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.FrameGeometry_upd_display_radius__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_display_radius(int i, double value) {
+    opensimModelJNI.FrameGeometry_set_display_radius__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_display_radius(double value) {
+    return opensimModelJNI.FrameGeometry_append_display_radius(swigCPtr, this, value);
+  }
+
+  public void constructProperty_display_radius(double initValue) {
+    opensimModelJNI.FrameGeometry_constructProperty_display_radius(swigCPtr, this, initValue);
+  }
+
+  public double get_display_radius() {
+    return opensimModelJNI.FrameGeometry_get_display_radius__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_double upd_display_radius() {
+    return new SWIGTYPE_p_double(opensimModelJNI.FrameGeometry_upd_display_radius__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_display_radius(double value) {
+    opensimModelJNI.FrameGeometry_set_display_radius__SWIG_1(swigCPtr, this, value);
+  }
+
   public FrameGeometry(double scale) {
     this(opensimModelJNI.new_FrameGeometry__SWIG_0(scale), true);
   }

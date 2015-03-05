@@ -169,12 +169,12 @@ public class Geometry extends Component {
     return opensimModelJNI.Geometry_getOpacity(swigCPtr, this);
   }
 
-  public void setRepresentation(Geometry.Representation rep) {
+  public void setRepresentation(Geometry.DisplayPreference rep) {
     opensimModelJNI.Geometry_setRepresentation(swigCPtr, this, rep.swigValue());
   }
 
-  public Geometry.Representation getRepresentation() {
-    return Geometry.Representation.swigToEnum(opensimModelJNI.Geometry_getRepresentation(swigCPtr, this));
+  public Geometry.DisplayPreference getRepresentation() {
+    return Geometry.DisplayPreference.swigToEnum(opensimModelJNI.Geometry_getRepresentation(swigCPtr, this));
   }
 
   public boolean isFrameSpecified() {
@@ -189,12 +189,12 @@ public class Geometry extends Component {
     opensimModelJNI.Geometry_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
   }
 
-  public final static class Representation {
-    public final static Geometry.Representation Hide = new Geometry.Representation("Hide", opensimModelJNI.Geometry_Hide_get());
-    public final static Geometry.Representation DrawPoints = new Geometry.Representation("DrawPoints", opensimModelJNI.Geometry_DrawPoints_get());
-    public final static Geometry.Representation DrawWireframe = new Geometry.Representation("DrawWireframe", opensimModelJNI.Geometry_DrawWireframe_get());
-    public final static Geometry.Representation DrawSurface = new Geometry.Representation("DrawSurface", opensimModelJNI.Geometry_DrawSurface_get());
-    public final static Geometry.Representation DrawDefault = new Geometry.Representation("DrawDefault", opensimModelJNI.Geometry_DrawDefault_get());
+  public final static class DisplayPreference {
+    public final static Geometry.DisplayPreference Hide = new Geometry.DisplayPreference("Hide", opensimModelJNI.Geometry_Hide_get());
+    public final static Geometry.DisplayPreference DrawPoints = new Geometry.DisplayPreference("DrawPoints", opensimModelJNI.Geometry_DrawPoints_get());
+    public final static Geometry.DisplayPreference DrawWireframe = new Geometry.DisplayPreference("DrawWireframe", opensimModelJNI.Geometry_DrawWireframe_get());
+    public final static Geometry.DisplayPreference DrawSurface = new Geometry.DisplayPreference("DrawSurface", opensimModelJNI.Geometry_DrawSurface_get());
+    public final static Geometry.DisplayPreference DrawDefault = new Geometry.DisplayPreference("DrawDefault", opensimModelJNI.Geometry_DrawDefault_get());
 
     public final int swigValue() {
       return swigValue;
@@ -204,33 +204,33 @@ public class Geometry extends Component {
       return swigName;
     }
 
-    public static Representation swigToEnum(int swigValue) {
+    public static DisplayPreference swigToEnum(int swigValue) {
       if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
         return swigValues[swigValue];
       for (int i = 0; i < swigValues.length; i++)
         if (swigValues[i].swigValue == swigValue)
           return swigValues[i];
-      throw new IllegalArgumentException("No enum " + Representation.class + " with value " + swigValue);
+      throw new IllegalArgumentException("No enum " + DisplayPreference.class + " with value " + swigValue);
     }
 
-    private Representation(String swigName) {
+    private DisplayPreference(String swigName) {
       this.swigName = swigName;
       this.swigValue = swigNext++;
     }
 
-    private Representation(String swigName, int swigValue) {
+    private DisplayPreference(String swigName, int swigValue) {
       this.swigName = swigName;
       this.swigValue = swigValue;
       swigNext = swigValue+1;
     }
 
-    private Representation(String swigName, Representation swigEnum) {
+    private DisplayPreference(String swigName, DisplayPreference swigEnum) {
       this.swigName = swigName;
       this.swigValue = swigEnum.swigValue;
       swigNext = this.swigValue+1;
     }
 
-    private static Representation[] swigValues = { Hide, DrawPoints, DrawWireframe, DrawSurface, DrawDefault };
+    private static DisplayPreference[] swigValues = { Hide, DrawPoints, DrawWireframe, DrawSurface, DrawDefault };
     private static int swigNext = 0;
     private final int swigValue;
     private final String swigName;

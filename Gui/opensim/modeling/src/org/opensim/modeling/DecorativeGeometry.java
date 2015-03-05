@@ -153,6 +153,7 @@ public class DecorativeGeometry {
   }
 
   public final static class Representation {
+    public final static DecorativeGeometry.Representation DrawNone = new DecorativeGeometry.Representation("DrawNone", opensimModelJNI.DecorativeGeometry_DrawNone_get());
     public final static DecorativeGeometry.Representation DrawPoints = new DecorativeGeometry.Representation("DrawPoints", opensimModelJNI.DecorativeGeometry_DrawPoints_get());
     public final static DecorativeGeometry.Representation DrawWireframe = new DecorativeGeometry.Representation("DrawWireframe", opensimModelJNI.DecorativeGeometry_DrawWireframe_get());
     public final static DecorativeGeometry.Representation DrawSurface = new DecorativeGeometry.Representation("DrawSurface", opensimModelJNI.DecorativeGeometry_DrawSurface_get());
@@ -192,7 +193,7 @@ public class DecorativeGeometry {
       swigNext = this.swigValue+1;
     }
 
-    private static Representation[] swigValues = { DrawPoints, DrawWireframe, DrawSurface, DrawDefault };
+    private static Representation[] swigValues = { DrawNone, DrawPoints, DrawWireframe, DrawSurface, DrawDefault };
     private static int swigNext = 0;
     private final int swigValue;
     private final String swigName;
