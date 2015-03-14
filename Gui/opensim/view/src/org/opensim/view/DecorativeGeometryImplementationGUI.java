@@ -291,9 +291,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
         mc.generateDecorations(true, modelDisplayHints, model.getWorkingState(), adg);
         // Sync. 
         currentFixedGeometryDisplayers = mapComponentsToFixedVisuals.get(mc);
-        if (currentFixedGeometryDisplayers.size()!= adg.size())
-            System.out.println("Number of geometry items changed");
-         for(int i=0; i<adg.size(); i++){
+        for(int i=0; i<adg.size(); i++){
             //System.out.println("update fixedVisuals index "+i+" dump:");
             adg.getElt(i).implementGeometry(this);
         }
