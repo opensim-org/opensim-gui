@@ -128,13 +128,13 @@ public final class topologyEditorTopComponent extends TopComponent implements Ob
     }
 
     private void populateDefault() {
+        currentModel = OpenSimDB.getInstance().getCurrentModel();
+        if (currentModel == null) return;
+        scene.addNode("ground");
         GraphLayoutSupport.setTreeGraphLayoutRootNode (graphLayout, "ground");
         final SceneLayout sceneGraphLayout = LayoutFactory.createSceneGraphLayout (scene, graphLayout);
         WidgetAction editAction = ActionFactory.createEditAction (new MyEditProvider (sceneGraphLayout));
         scene.getActions().addAction (editAction);
-        currentModel = OpenSimDB.getInstance().getCurrentModel();
-        if (currentModel == null) return;
-        scene.addNode("ground");
         JointSet jnts = currentModel.getJointSet();
         int numJoints = jnts.getSize();
         for (int j=0; j<numJoints; j++ ){
