@@ -21,6 +21,7 @@ public class AnalysisWrapperWithTimer extends AnalysisWrapper {
     private Timer aTimer;
     private long refreshRateInMillis=1000L;
     private TimerTask theTask;
+    private double simulationTime=0.0;
     /** Creates a new instance of AnalysisWrapperWithTimer */
     public AnalysisWrapperWithTimer() {
     }
@@ -30,15 +31,16 @@ public class AnalysisWrapperWithTimer extends AnalysisWrapper {
     }
     
     public int step(State s, int stepNumber) {
-        int retValue;
-        
-        retValue = super.step(s, stepNumber);
+        int retValue=0;
+        simulationTime = s.getTime();
+       
+        //retValue = super.step(s, stepNumber);
         return retValue;
     }
 
     public int begin(State s) {
         int retValue;
-        
+        simulationTime = s.getTime();
         retValue = super.begin(s);
         createTimer();
         return retValue;
@@ -107,4 +109,7 @@ public class AnalysisWrapperWithTimer extends AnalysisWrapper {
         setInitialized(true);
     }
     
+    public double getSimulationTime() {
+        return simulationTime;
+    }
 }
