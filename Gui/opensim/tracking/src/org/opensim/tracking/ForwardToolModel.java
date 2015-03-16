@@ -103,7 +103,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
                                  }
                               });
          //getOriginalModel().setName("Originial");
-         //model.setName("daCopy");
+         model.setName("daCopy");
          // Animation callback will update the display *of the original model* during forward
          animationCallback = new JavaMotionDisplayerCallback(model, getOriginalModel(), null, progressHandle, false);
          getModel().addAnalysis(animationCallback);

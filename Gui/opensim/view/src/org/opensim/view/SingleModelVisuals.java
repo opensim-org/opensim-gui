@@ -231,6 +231,8 @@ public class SingleModelVisuals implements ModelVisualsVtk {
    public void updateModelDisplay(Model model) {
        
       // Cycle thru bodies and update their transforms from the kinematics engine
+       OpenSimContext context=OpenSimDB.getInstance().getContext(model);
+        context.realizePosition();
         BodiesList bodies = model.getBodiesList();
         BodyIterator bodyIter = bodies.begin();
         while (!bodyIter.equals(bodies.end())) {

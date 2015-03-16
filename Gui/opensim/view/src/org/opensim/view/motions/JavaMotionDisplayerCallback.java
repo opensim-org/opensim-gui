@@ -114,6 +114,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
         getStorage().setColumnLabels(stateLabels);
         numStates = isCoordinatesOnly()?getModelForDisplay().getNumCoordinates(): getModelForDisplay().getNumStateVariables();
         statesBuffer = new double[numStates];
+        // Create map int->int from Y vector to statesBuffer
         ownsStorage=true;
     }
    
@@ -188,7 +189,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    public void processStep(State s, int stepNumber) {
       if(!getOn()) return;
       if (!proceed(stepNumber)) return;
-      //super.step(s, stepNumber);
+      super.step(s, stepNumber);
       if(progressHandle!=null) {
           if (!progressUsingTime) progressHandle.progress(stepNumber-startStep);
           else {
@@ -218,9 +219,10 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
               getStorage().append(nextResult);
           }
           else {
-              /*
-          super.getStates(statesBuffer);
-              
+              for(int i=0; i< numStates; i++)
+                  statesBuffer[i] = modelForDisplay.getStateVariableValue(s, stateLabels.get(i+1));
+          
+              /* FIX40
               if (staticOptimization){
                   StateVector sv = activationStorage.getLastStateVector();
                   ArrayDouble actData = sv.getData();

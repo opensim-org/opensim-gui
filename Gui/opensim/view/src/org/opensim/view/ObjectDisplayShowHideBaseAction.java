@@ -29,7 +29,9 @@ import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.util.HelpCtx;
 import org.openide.util.actions.CallableSystemAction;
+import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Actuator;
+import org.opensim.modeling.Appearance;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.Joint;
 import org.opensim.modeling.Model;
@@ -108,10 +110,17 @@ public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemActi
         }
         //else
         OpenSimObject obj = objectNode.getOpenSimObject();
-        boolean hasPreferenceProperty = obj.hasProperty("display_preference");
+        boolean hasPreferenceProperty = obj.hasProperty("Appearance");
+        
         if (hasPreferenceProperty){
-            PropertyEditorAdaptor pea = new PropertyEditorAdaptor("display_preference", objectNode);
-            pea.setValueInt(show?4:0);
+            AbstractProperty apbn = obj.getPropertyByName("Appearance");
+            boolean iso = apbn.isObjectProperty();
+            //Model aModel, OpenSimObject obj, AbstractProperty prop, OpenSimObjectNode node
+            OpenSimObject ap =  obj.getPropertyByName("Appearance").getValueAsObject();
+            PropertyEditorAdaptor pea = new PropertyEditorAdaptor(objectNode.getModelForNode(),
+                    ap,
+                    ap.getPropertyByName("representation"), objectNode);
+            pea.setValueInt(show?3:0);
         }
         else {
             ViewDB.getInstance().toggleObjectsDisplay(obj, show);

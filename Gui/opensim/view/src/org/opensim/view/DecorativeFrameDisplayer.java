@@ -11,6 +11,7 @@ import vtk.vtkActor;
 import vtk.vtkAxes;
 import vtk.vtkAxesActor;
 import vtk.vtkPolyData;
+import vtk.vtkTubeFilter;
 
 /**
  *
@@ -20,7 +21,8 @@ class DecorativeFrameDisplayer extends DecorativeGeometryDisplayer {
 
     private final DecorativeFrame ag;
     vtkAxes frameSrc = new vtkAxes();
-    
+    private final vtkTubeFilter dFilter = new vtkTubeFilter();
+
     public DecorativeFrameDisplayer(DecorativeFrame arg0) {
         //super(object);
         this.ag = arg0.clone();
@@ -30,7 +32,10 @@ class DecorativeFrameDisplayer extends DecorativeGeometryDisplayer {
 
     private vtkPolyData getPolyData(DecorativeFrame ag) {
         frameSrc.SetScaleFactor(ag.getAxisLength());
-        return frameSrc.GetOutput();
+        dFilter.SetInput(frameSrc.GetOutput());
+        dFilter.SetRadius(ag.getLineThickness());
+        dFilter.SetNumberOfSides(16);
+        return dFilter.GetOutput();
     }
     
     @Override
@@ -65,6 +70,7 @@ class DecorativeFrameDisplayer extends DecorativeGeometryDisplayer {
     void updateGeometry(DecorativeGeometry arg) {
         DecorativeFrame arg0 = (DecorativeFrame) arg;
         ag.setAxisLength(arg0.getAxisLength());
+        ag.setLineThickness(arg0.getLineThickness());
         updateDisplayFromDecorativeGeometry();
     }
 

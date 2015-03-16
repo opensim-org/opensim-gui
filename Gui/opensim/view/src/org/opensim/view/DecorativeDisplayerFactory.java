@@ -29,6 +29,7 @@ import org.opensim.modeling.*;
 
 
 public class DecorativeDisplayerFactory  {
+    // TODO This needs to be converted to map-lookup.
     static DecorativeLineDisplayer createDisplayer(DecorativeLine dl) {
         return new DecorativeLineDisplayer(dl);
      }

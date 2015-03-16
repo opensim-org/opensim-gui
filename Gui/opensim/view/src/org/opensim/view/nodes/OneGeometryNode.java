@@ -130,7 +130,7 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
             nextNodePropRepresentation = new PropertySupport.Reflection(this, Geometry.DisplayPreference.class, 
                     "getDisplayPreference", "setDisplayPreference");
             nextNodePropRepresentation.setPropertyEditorClass(DisplayPreferenceEditor.class);
-            nextNodePropRepresentation.setName("Representation");        
+            nextNodePropRepresentation.setName("DisplayPreference");        
             set.put(nextNodePropRepresentation);
         }
         catch (NoSuchMethodException ex) {

@@ -215,6 +215,8 @@ public class MotionDisplayer implements SelectionListener {
     protected Hashtable<ExperimentalDataObject, vtkActor> objectTrails = new Hashtable<ExperimentalDataObject, vtkActor>();
 
     private ArrayList<MotionDisplayer> associatedMotions = new  ArrayList<MotionDisplayer>();
+    private ArrayStr colNames; // Will cache in labels and construct map to states for quick setting
+    
     public class ObjectIndexPair {
        public Object object;
        public int stateVectorIndex; // Actual (0-based) index into state vector
@@ -254,8 +256,11 @@ public class MotionDisplayer implements SelectionListener {
            return;
 
 
-        ArrayStr colNames = simmMotionData.getColumnLabels();
+        colNames = simmMotionData.getColumnLabels();
         int numColumnsIncludingTime = colNames.getSize();
+        //for(int i=0; i< numColumnsIncludingTime; i++ )
+        //    System.out.print(" "+colNames.get(i));
+        //System.out.println("");
         interpolatedStates = new ArrayDouble(0.0, numColumnsIncludingTime-1);
         AddMotionObjectsRep(model);
         if (simmMotionData instanceof AnnotatedMotion){
@@ -665,7 +670,13 @@ public class MotionDisplayer implements SelectionListener {
       OpenSimContext context = OpenSimDB.getInstance().getContext(model);
 
       if(statesFile) {
-         //context.setStates(states);
+          // FIX40 speed this up by using map or YIndex
+          for (int i=0; i<states.getSize();i++){
+              String nmForIndex = colNames.get(i+1);
+              double val = states.get(i);
+              //System.out.print(nmForIndex+"="+val+",");
+              model.setStateVariableValue(context.getCurrentStateRef(), nmForIndex, val);
+          }
       } else {
          boolean realize=false;
          int which=-1;
