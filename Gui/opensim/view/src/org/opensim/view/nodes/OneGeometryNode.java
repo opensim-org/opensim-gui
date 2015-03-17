@@ -34,16 +34,20 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
+import javax.swing.undo.AbstractUndoableEdit;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
 import org.openide.nodes.Children;
 import org.openide.nodes.PropertySupport;
 import org.openide.nodes.Sheet;
 import org.openide.util.NbBundle;
+import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Appearance;
 import org.opensim.modeling.Geometry;
 import org.opensim.modeling.Model;
-import org.opensim.modeling.ModelComponent;
 import org.opensim.modeling.Vec3;
 import org.opensim.view.ColorableInterface;
+import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.editors.DisplayPreferenceEditor;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 import org.opensim.view.pub.ViewDB;
@@ -148,12 +152,39 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
         float[] colorComp = new float[3];
         newColor.getColorComponents(colorComp);
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.get_Appearance(),
-                obj.get_Appearance().getPropertyByName("color"), this
+        final AbstractProperty ap = obj.get_Appearance().getPropertyByName("color");
+        final Vec3 oldValue = new Vec3(obj.get_Appearance().get_color());
+        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.get_Appearance(),
+                ap, this
                 );
-        pea.setValueVec3(new org.opensim.utils.Vec3(colorComp[0], colorComp[1], colorComp[2]));
+        final Vec3 newColorVec3 = new Vec3(colorComp[0], colorComp[1], colorComp[2]);
+        pea.setValueVec3(newColorVec3, false);
+        AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
 
-        
+                @Override
+                public void undo() throws CannotUndoException {
+                    super.undo();
+                    pea.setValueVec3(oldValue, false);
+                }
+
+                @Override
+                public String getUndoPresentationName() {
+                    return "Undo color change";
+                }
+
+                @Override
+                public void redo() throws CannotRedoException {
+                    super.redo();
+                    pea.setValueVec3(newColorVec3, false);
+                }
+
+                @Override
+                public String getRedoPresentationName() {
+                    return "Redo color change";
+                }
+                
+            };
+        ExplorerTopComponent.addUndoableEdit(auEdit);
     }
     
     public double getOpacity() {
@@ -161,19 +192,49 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
         return obj.get_Appearance().get_opacity();
     }
 
-    public void setOpacity(double newOpacity) {
+    public void setOpacity(double opacity) {
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.get_Appearance(),
-        obj.get_Appearance().getPropertyByName("opacity"), this
+        final AbstractProperty ap = obj.get_Appearance().getPropertyByName("opacity");
+        final double oldOpacity = obj.get_Appearance().get_opacity();
+        final double newOpacity = opacity;
+        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.get_Appearance(),
+        ap, this
         );
-        pea.setValueDouble(newOpacity);
+        pea.setValueDouble(newOpacity, false);
+        AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
+
+                @Override
+                public void undo() throws CannotUndoException {
+                    super.undo();
+                    pea.setValueDouble(oldOpacity, false);
+                }
+
+                @Override
+                public String getUndoPresentationName() {
+                    return "Undo opacity change";
+                }
+
+                @Override
+                public void redo() throws CannotRedoException {
+                    super.redo();
+                    pea.setValueDouble(newOpacity, false);
+                }
+
+                @Override
+                public String getRedoPresentationName() {
+                    return "Redo opacity change";
+                }
+                
+            };
+        ExplorerTopComponent.addUndoableEdit(auEdit);
+        
     }
 
     private void updateObjectDisplay(Geometry obj) {
         // Tell the world that the owner modelComponent need to regenerate
         Model mdl = getModelForNode();
         ViewDB.getInstance().getModelVisuals(mdl).upateDisplay(obj);
-        ViewDB.getInstance().repaintAll();
+        //ViewDB.getInstance().repaintAll();
     }
 
     public Geometry.DisplayPreference getDisplayPreference() {
@@ -181,10 +242,44 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
         return obj.getRepresentation();
    }
 
-    public void setDisplayPreference(Geometry.DisplayPreference newPref) {
-        Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        // FIX40 support undo
-        obj.setRepresentation(newPref);
+    public void setDisplayPreference(Geometry.DisplayPreference pref) {
+        final Geometry obj = Geometry.safeDownCast(getOpenSimObject());
+        final AbstractProperty ap = obj.get_Appearance().getPropertyByName("representation");
+        final int oldRep = obj.get_Appearance().get_representation();
+        final int newRep = pref.swigValue();
+        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.get_Appearance(),
+        ap, this
+        );
+        pea.setValueInt(newRep, false);
         updateObjectDisplay(obj);
+                AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
+
+                @Override
+                public void undo() throws CannotUndoException {
+                    super.undo();
+                    pea.setValueInt(oldRep, false);
+                    updateObjectDisplay(obj);
+                }
+
+                @Override
+                public String getUndoPresentationName() {
+                    return "Undo representation change";
+                }
+
+                @Override
+                public void redo() throws CannotRedoException {
+                    super.redo();
+                    pea.setValueInt(newRep, false);
+                    updateObjectDisplay(obj);
+                }
+
+                @Override
+                public String getRedoPresentationName() {
+                    return "Redo representation change";
+                }
+                
+            };
+        ExplorerTopComponent.addUndoableEdit(auEdit);
+
     }
 }

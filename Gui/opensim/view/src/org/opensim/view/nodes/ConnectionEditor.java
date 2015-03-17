@@ -1,16 +1,13 @@
 package org.opensim.view.nodes;
 
 
-import java.awt.Color;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
-import org.openide.ErrorManager;
 import org.openide.util.Exceptions;
 import org.opensim.modeling.*;
-import org.opensim.utils.Vec3;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.SingleModelGuiElements;
 import org.opensim.view.pub.OpenSimDB;
