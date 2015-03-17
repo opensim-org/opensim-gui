@@ -24,7 +24,7 @@
  *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  *
- * PositionEditor.java
+ * BodyNameEditor.java
  *
  * Created on September 26, 2010, 2:12 AM
  *
@@ -59,7 +59,7 @@ import org.opensim.view.pub.ViewDB;
 public class BodyNameEditor extends PropertyEditorSupport 
         implements ExPropertyEditor, InplaceEditor.Factory, ActionListener {
     /**
-     * Creates a new instance of PositionEditor
+     * Creates a new instance of BodyNameEditor
      */
     
     public BodyNameEditor() {

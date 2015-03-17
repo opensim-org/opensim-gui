@@ -1,7 +1,5 @@
 package org.opensim.view.experimentaldata;
 
-import org.opensim.utils.Vec3;
-
 /**
  *
  * @author ayman

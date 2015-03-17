@@ -24,7 +24,7 @@
  *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  *
- * PositionEditor.java
+ * DisplayPreferenceEditor.java
  *
  * Created on September 26, 2010, 2:12 AM
  *
@@ -56,7 +56,7 @@ public class DisplayPreferenceEditor extends PropertyEditorSupport
 {
     ///Vec3 value = null;
     /**
-     * Creates a new instance of PositionEditor
+     * Creates a new instance of DisplayPreferenceEditor
      */
     public DisplayPreferenceEditor() {
     }
@@ -70,8 +70,6 @@ public class DisplayPreferenceEditor extends PropertyEditorSupport
     }
 
     public void setValue(Object value) {
-        ///System.out.println("PositionEditor:setValue"+value);
-        ///this.value=new Vec3(((Vec3) value).get());
         super.setValue(value);
     }
 

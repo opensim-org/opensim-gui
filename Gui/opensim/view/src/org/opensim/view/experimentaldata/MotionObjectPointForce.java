@@ -4,10 +4,6 @@
  */
 package org.opensim.view.experimentaldata;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import org.opensim.utils.Vec3;
-
 /**
  *
  * @author ayman
