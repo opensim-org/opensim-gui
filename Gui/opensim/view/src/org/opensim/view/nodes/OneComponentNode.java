@@ -59,10 +59,10 @@ public class OneComponentNode extends OpenSimObjectNode {
             String connecteeType = connector.getConnectedToTypeName();
             String connectionName = connector.getName();
             PropertySupport.Reflection nextNodeProp = 
-                    new PropertySupport.Reflection(connector,
+                    new PropertySupport.Reflection(new ConnectionEditor(connector, this),
                     String.class,
-                    "get_connected_to_name",
-                    "set_connected_to_name");
+                    "getConnectedToName",
+                    "setConnectedToName");
             nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
             nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
             nextNodeProp.setName(connecteeType + ":" + connectionName);

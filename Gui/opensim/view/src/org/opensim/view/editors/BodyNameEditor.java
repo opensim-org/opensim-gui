@@ -57,12 +57,13 @@ import org.opensim.view.pub.ViewDB;
  * @author ayman
  */
 public class BodyNameEditor extends PropertyEditorSupport 
-        implements ExPropertyEditor, InplaceEditor.Factory, PropertyChangeListener, ActionListener {
+        implements ExPropertyEditor, InplaceEditor.Factory, ActionListener {
     /**
      * Creates a new instance of PositionEditor
      */
+    
     public BodyNameEditor() {
-        addPropertyChangeListener(this);
+        //addPropertyChangeListener(this);
     }
 
     public void setAsText(String text) throws IllegalArgumentException {
@@ -71,7 +72,7 @@ public class BodyNameEditor extends PropertyEditorSupport
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         super.addPropertyChangeListener(listener);
-    }
+     }
 
     public void setValue(Object value) {
         super.setValue(value);
@@ -96,6 +97,7 @@ public class BodyNameEditor extends PropertyEditorSupport
 
     public void attachEnv(PropertyEnv propertyEnv) {
         propertyEnv.registerInplaceEditorFactory(this);
+        
     }
 
     private InplaceEditor ed = null;
@@ -103,15 +105,12 @@ public class BodyNameEditor extends PropertyEditorSupport
     public InplaceEditor getInplaceEditor() {
         if (ed == null) {
             ed = new Inplace();
-            
+            //ed.addActionListener(this);
         }
         return ed;
     }
 
     public void propertyChange(PropertyChangeEvent evt) {
-        Model mdl = ViewDB.getCurrentModel();
-        PropertyEditorAdaptor pea = new PropertyEditorAdaptor(mdl);
-        pea.handleModelChange();
     }
 
     public void actionPerformed(ActionEvent e) {
