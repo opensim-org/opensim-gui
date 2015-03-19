@@ -739,7 +739,6 @@
     <folder name="Windows2">
         <folder name="Components">
             <file name="ExplorerTopComponent.settings" url="ExplorerTopComponentSettings.xml"/>
-            <file name="MarkerEditorTopComponent.settings" url="MarkerEditorTopComponentSettings.xml"/>
             <file name="MuscleEditorTopComponent.settings" url="editors/MuscleEditorTopComponentSettings.xml"/>
         </folder>
         <folder name="Modes">
@@ -751,7 +750,6 @@
                 <file name="ExplorerTopComponent.wstcref" url="ExplorerTopComponentWstcref.xml"/>
             </folder>
             <folder name="osimEditorsMode">
-                <file name="MarkerEditorTopComponent.wstcref" url="MarkerEditorTopComponentWstcref.xml"/>
                 <file name="MuscleEditorTopComponent.wstcref" url="editors/MuscleEditorTopComponentWstcref.xml"/>
                 <file name="properties.wstcref" url="propertiesWstcref_1.xml"/>
             </folder>
