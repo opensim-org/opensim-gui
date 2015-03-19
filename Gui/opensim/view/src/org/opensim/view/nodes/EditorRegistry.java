@@ -17,7 +17,7 @@ public final class EditorRegistry {
     static HashMap<String, PropertyEditorSupport> registry = new HashMap<String, PropertyEditorSupport>();
     
     static public PropertyEditorSupport getEditor(String clazzName) {
-        System.out.println("get editor for type:"+clazzName);
+        //System.out.println("get editor for type:"+clazzName);
         return registry.get(clazzName);
     }
     
