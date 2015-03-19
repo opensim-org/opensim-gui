@@ -312,7 +312,7 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
             updateMode = false;
         }
         
-        for(int i=0; i<adg.size(); i++){
+        for(int i=0; i<newSize; i++){
             adg.getElt(i).implementGeometry(this);
         }
     }

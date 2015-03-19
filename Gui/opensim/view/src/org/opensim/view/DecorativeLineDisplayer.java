@@ -34,10 +34,8 @@ import vtk.vtkTubeFilter;
 public class DecorativeLineDisplayer extends DecorativeGeometryDisplayer {
 
     private final DecorativeLine agLocal;
-    private vtkLineSource line = null;
+    private vtkLineSource line = new vtkLineSource();
     private final vtkTubeFilter dFilter = new vtkTubeFilter();
-
-    private Vec3 point1, point2;
    //protected OpenSimObject obj;
     /** 
      * Displayer for Wrap Geometry
@@ -45,8 +43,6 @@ public class DecorativeLineDisplayer extends DecorativeGeometryDisplayer {
      * @param object 
      */
     DecorativeLineDisplayer(DecorativeLine ag) {
-        point1 = new Vec3(ag.getPoint1());
-        point2 = new Vec3(ag.getPoint2());
         agLocal = ag.clone();
         //if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
 
@@ -58,14 +54,13 @@ public class DecorativeLineDisplayer extends DecorativeGeometryDisplayer {
      */
     private vtkPolyData getPolyData() {
         //Geometry.GeometryType analyticType = ag.
-        if (line == null){
-            line = new vtkLineSource();
-            line.SetPoint1(getPoint1().get(0),getPoint1().get(1),getPoint1().get(2));
-            line.SetPoint2(getPoint2().get(0),getPoint2().get(1),getPoint2().get(2));
-            dFilter.SetInput(line.GetOutput());
-            dFilter.SetRadius(.005);
- 
-        }
+        Vec3 p1 = agLocal.getPoint1();
+        Vec3 p2 = agLocal.getPoint2();
+        line.SetPoint1(p1.get(0), p1.get(1), p1.get(2));
+        line.SetPoint2(p2.get(0), p2.get(1), p2.get(2));
+        line.Modified();
+        dFilter.SetInput(line.GetOutput());
+        dFilter.SetRadius(.005);           
         return dFilter.GetOutput();
     }
 
@@ -103,34 +98,6 @@ public class DecorativeLineDisplayer extends DecorativeGeometryDisplayer {
         super.copyAttributesFromDecorativeGeometry(arg0);
     }
 */
-    /**
-     * @return the point1
-     */
-    public Vec3 getPoint1() {
-        return point1;
-    }
-
-    /**
-     * @param point1 the point1 to set
-     */
-    public void setPoint1(Vec3 point1) {
-        this.point1 = point1;
-    }
-
-    /**
-     * @return the point2
-     */
-    public Vec3 getPoint2() {
-        return point2;
-    }
-
-    /**
-     * @param point2 the point2 to set
-     */
-    public void setPoint2(Vec3 point2) {
-        this.point2 = point2;
-    }
-        
     @Override
     DecorativeGeometry getDecorativeGeometry() {
         return agLocal;
@@ -139,8 +106,9 @@ public class DecorativeLineDisplayer extends DecorativeGeometryDisplayer {
     @Override
     void updateGeometry(DecorativeGeometry arg) {
         DecorativeLine arg0 = (DecorativeLine) arg;
-        agLocal.setPoint1(arg0.getPoint1());
-        agLocal.setPoint2(arg0.getPoint2());
+        agLocal.setPoint1(new Vec3(arg0.getPoint1()));
+        agLocal.setPoint2(new Vec3(arg0.getPoint2()));
+        //System.out.println("NewLine"+agLocal.getPoint1().toString()+","+agLocal.getPoint2().toString());
         updateDisplayFromDecorativeGeometry();    
     }
     
