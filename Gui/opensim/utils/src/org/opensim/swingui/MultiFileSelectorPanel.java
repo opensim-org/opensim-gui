@@ -48,10 +48,11 @@ public class MultiFileSelectorPanel extends javax.swing.JPanel {
  
    Vector<String> fileNames;
    int currentSelectedIndex = -1;
-   DefaultListModel listModel = new DefaultListModel();
+   DefaultListModel listModel;
 
    /** Creates new form MultiFileSelectorPanel */
    public MultiFileSelectorPanel(Vector<String> initialFileNames, FileFilter fileFilter) {
+      this.listModel = new DefaultListModel();
       this.fileNames = initialFileNames;
 
       initComponents();
@@ -59,7 +60,9 @@ public class MultiFileSelectorPanel extends javax.swing.JPanel {
       fileName.setFileFilter(fileFilter);
 
       fileList.setModel(listModel);
-      for(int i=0; i<fileNames.size(); i++) listModel.addElement(fileNames.get(i));
+       for (String fileName1 : fileNames) {
+           listModel.addElement(fileName1);
+       }
 
       fileList.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
          public void valueChanged(ListSelectionEvent event) {
