@@ -9,8 +9,10 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import org.opensim.modeling.ArrayDecorativeGeometry;
 import org.opensim.modeling.Component;
+import org.opensim.modeling.DecorativeArrow;
 import org.opensim.modeling.DecorativeBrick;
 import org.opensim.modeling.DecorativeCircle;
+import org.opensim.modeling.DecorativeCone;
 import org.opensim.modeling.DecorativeCylinder;
 import org.opensim.modeling.DecorativeEllipsoid;
 import org.opensim.modeling.DecorativeFrame;
@@ -22,6 +24,7 @@ import org.opensim.modeling.DecorativeMeshFile;
 import org.opensim.modeling.DecorativePoint;
 import org.opensim.modeling.DecorativeSphere;
 import org.opensim.modeling.DecorativeText;
+import org.opensim.modeling.DecorativeTorus;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
 import org.opensim.modeling.OpenSimObject;
@@ -116,17 +119,43 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
         }
     }
 
-    @Override
+  @Override
   public void implementCylinderGeometry(DecorativeCylinder arg0) {
         if (updateMode) { 
             updateDecorativeGeometryDisplayer(arg0);
         } else {
             DecorativeGeometryDisplayer displayer=DecorativeDisplayerFactory.createDisplayer(arg0);
             processGeometryDisplayer(arg0, displayer);
-            //mapBodyIndicesToDisplayers.put(arg0.getUserRefAsObject(), brickDisplayer);
         }
+  }
+
+  
+  @Override
+  public void implementConeGeometry(DecorativeCone arg0) {
+        if (updateMode) { 
+            updateDecorativeGeometryDisplayer(arg0);
+        } else {
+            DecorativeGeometryDisplayer displayer=DecorativeDisplayerFactory.createDisplayer(arg0);
+            processGeometryDisplayer(arg0, displayer);
+        }
+  }
+
+    @Override
+    public void implementArrowGeometry(DecorativeArrow arg0) {
+          if (updateMode) { 
+            updateDecorativeGeometryDisplayer(arg0);
+        } else {
+            DecorativeGeometryDisplayer displayer=DecorativeDisplayerFactory.createDisplayer(arg0);
+            processGeometryDisplayer(arg0, displayer);
+        }   
     }
 
+    @Override
+    public void implementTorusGeometry(DecorativeTorus arg0) {
+        super.implementTorusGeometry(arg0); //To change body of generated methods, choose Tools | Templates.
+    }
+
+  
     private ListIterator<DecorativeGeometryDisplayer> getCurrentGeometryDisplayers() {
         ListIterator<DecorativeGeometryDisplayer> listIterator = (processingVariableGeometry?
             currentVariableGeometryDisplayers.listIterator() : currentFixedGeometryDisplayers.listIterator());
@@ -286,6 +315,9 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
         updateMode = false;
     }
 
+    public boolean isNewComponent(Component mc) {
+        return (mapComponentsToFixedVisuals.get(mc)==null);
+    }
     private void updateFixedDecorations(Component mc) {
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
         mc.generateDecorations(true, modelDisplayHints, model.getWorkingState(), adg);

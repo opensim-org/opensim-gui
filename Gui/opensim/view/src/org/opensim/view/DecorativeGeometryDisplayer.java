@@ -105,7 +105,7 @@ public abstract class DecorativeGeometryDisplayer extends vtkActor {
 
     private void setRepresentationFromDecorativeGeometry(DecorativeGeometry cs) {
         Representation representation = cs.getRepresentation();
-        if (representation==Representation.DrawNone){
+        if (representation==Representation.Hide){
             SetVisibility(0);
             return;
         }
@@ -119,7 +119,7 @@ public abstract class DecorativeGeometryDisplayer extends vtkActor {
         else if (representation==Representation.DrawDefault)
             GetProperty().SetRepresentationToSurface();   
         
-    }
+        }
 
     private void setOpacityFromDecorativeGeometry(DecorativeGeometry cs) {
         if (cs.getOpacity()>=0. && cs.getOpacity() <= 1.0)

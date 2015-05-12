@@ -141,7 +141,7 @@ public class DecorativeSphereDisplayer extends DecorativeGeometryDisplayer {
 
     @Override
     void updateGeometry(DecorativeGeometry arg) {
-        DecorativeSphere arg0 = (DecorativeSphere) ag;
+        DecorativeSphere arg0 = (DecorativeSphere) arg;
         ag.setRadius(arg0.getRadius());
         updateDisplayFromDecorativeGeometry();
     }

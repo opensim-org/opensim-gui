@@ -45,8 +45,14 @@ public class DecorativeDisplayerFactory  {
     static DecorativeEllipsoidDisplayer createDisplayer(DecorativeEllipsoid dl) {
         return new DecorativeEllipsoidDisplayer(dl);
      }
-   static DecorativeFrameDisplayer createDisplayer(DecorativeFrame dl) {
+    static DecorativeFrameDisplayer createDisplayer(DecorativeFrame dl) {
         return new DecorativeFrameDisplayer(dl);
+     }
+    static DecorativeConeDisplayer createDisplayer(DecorativeCone dl) {
+        return new DecorativeConeDisplayer(dl);
+     }
+    static DecorativeArrowDisplayer createDisplayer(DecorativeArrow dl) {
+        return new DecorativeArrowDisplayer(dl);
      }
 
     
