@@ -205,32 +205,24 @@ public class PointToPointSpring extends Force {
     this(opensimModelJNI.new_PointToPointSpring__SWIG_0(), true);
   }
 
-  public PointToPointSpring(Body body1, Vec3 point1, Body body2, Vec3 point2, double stiffness, double restlength) {
-    this(opensimModelJNI.new_PointToPointSpring__SWIG_1(Body.getCPtr(body1), body1, Vec3.getCPtr(point1), point1, Body.getCPtr(body2), body2, Vec3.getCPtr(point2), point2, stiffness, restlength), true);
+  public PointToPointSpring(PhysicalFrame body1, Vec3 point1, PhysicalFrame body2, Vec3 point2, double stiffness, double restlength) {
+    this(opensimModelJNI.new_PointToPointSpring__SWIG_1(PhysicalFrame.getCPtr(body1), body1, Vec3.getCPtr(point1), point1, PhysicalFrame.getCPtr(body2), body2, Vec3.getCPtr(point2), point2, stiffness, restlength), true);
   }
 
-  public void updateDisplayer(State s) {
-    opensimModelJNI.PointToPointSpring_updateDisplayer(swigCPtr, this, State.getCPtr(s), s);
+  public void setBody1(PhysicalFrame body) {
+    opensimModelJNI.PointToPointSpring_setBody1(swigCPtr, this, PhysicalFrame.getCPtr(body), body);
   }
 
-  public void updateGeometry(State s) {
-    opensimModelJNI.PointToPointSpring_updateGeometry(swigCPtr, this, State.getCPtr(s), s);
+  public void setBody2(PhysicalFrame body) {
+    opensimModelJNI.PointToPointSpring_setBody2(swigCPtr, this, PhysicalFrame.getCPtr(body), body);
   }
 
-  public void setBody1(Body body) {
-    opensimModelJNI.PointToPointSpring_setBody1(swigCPtr, this, Body.getCPtr(body), body);
+  public PhysicalFrame getBody1() {
+    return new PhysicalFrame(opensimModelJNI.PointToPointSpring_getBody1(swigCPtr, this), false);
   }
 
-  public void setBody2(Body Body) {
-    opensimModelJNI.PointToPointSpring_setBody2(swigCPtr, this, Body.getCPtr(Body), Body);
-  }
-
-  public Body getBody1() {
-    return new Body(opensimModelJNI.PointToPointSpring_getBody1(swigCPtr, this), false);
-  }
-
-  public Body getBody2() {
-    return new Body(opensimModelJNI.PointToPointSpring_getBody2(swigCPtr, this), false);
+  public PhysicalFrame getBody2() {
+    return new PhysicalFrame(opensimModelJNI.PointToPointSpring_getBody2(swigCPtr, this), false);
   }
 
   public void setPoint1(Vec3 aPosition) {

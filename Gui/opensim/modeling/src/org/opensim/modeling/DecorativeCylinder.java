@@ -108,8 +108,4 @@ public class DecorativeCylinder extends DecorativeGeometry {
     return (cPtr == 0) ? null : new DecorativeCylinder(cPtr, true);
   }
 
-  public boolean equals(DecorativeCylinder other) {
-    return opensimModelJNI.DecorativeCylinder_equals(swigCPtr, this, DecorativeCylinder.getCPtr(other), other);
-  }
-
 }

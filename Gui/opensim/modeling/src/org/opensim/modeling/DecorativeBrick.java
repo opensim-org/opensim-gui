@@ -96,8 +96,4 @@ public class DecorativeBrick extends DecorativeGeometry {
     return (cPtr == 0) ? null : new DecorativeBrick(cPtr, true);
   }
 
-  public boolean equals(DecorativeBrick other) {
-    return opensimModelJNI.DecorativeBrick_equals(swigCPtr, this, DecorativeBrick.getCPtr(other), other);
-  }
-
 }

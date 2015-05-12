@@ -57,78 +57,6 @@ public class WeldConstraint extends Constraint {
     return opensimModelJNI.WeldConstraint_getConcreteClassName(swigCPtr, this);
   }
 
-  public void copyProperty_body_1(WeldConstraint source) {
-    opensimModelJNI.WeldConstraint_copyProperty_body_1(swigCPtr, this, WeldConstraint.getCPtr(source), source);
-  }
-
-  public String get_body_1(int i) {
-    return opensimModelJNI.WeldConstraint_get_body_1__SWIG_0(swigCPtr, this, i);
-  }
-
-  public SWIGTYPE_p_std__string upd_body_1(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.WeldConstraint_upd_body_1__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_body_1(int i, String value) {
-    opensimModelJNI.WeldConstraint_set_body_1__SWIG_0(swigCPtr, this, i, value);
-  }
-
-  public int append_body_1(String value) {
-    return opensimModelJNI.WeldConstraint_append_body_1(swigCPtr, this, value);
-  }
-
-  public void constructProperty_body_1(String initValue) {
-    opensimModelJNI.WeldConstraint_constructProperty_body_1(swigCPtr, this, initValue);
-  }
-
-  public String get_body_1() {
-    return opensimModelJNI.WeldConstraint_get_body_1__SWIG_1(swigCPtr, this);
-  }
-
-  public SWIGTYPE_p_std__string upd_body_1() {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.WeldConstraint_upd_body_1__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_body_1(String value) {
-    opensimModelJNI.WeldConstraint_set_body_1__SWIG_1(swigCPtr, this, value);
-  }
-
-  public void copyProperty_body_2(WeldConstraint source) {
-    opensimModelJNI.WeldConstraint_copyProperty_body_2(swigCPtr, this, WeldConstraint.getCPtr(source), source);
-  }
-
-  public String get_body_2(int i) {
-    return opensimModelJNI.WeldConstraint_get_body_2__SWIG_0(swigCPtr, this, i);
-  }
-
-  public SWIGTYPE_p_std__string upd_body_2(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.WeldConstraint_upd_body_2__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_body_2(int i, String value) {
-    opensimModelJNI.WeldConstraint_set_body_2__SWIG_0(swigCPtr, this, i, value);
-  }
-
-  public int append_body_2(String value) {
-    return opensimModelJNI.WeldConstraint_append_body_2(swigCPtr, this, value);
-  }
-
-  public void constructProperty_body_2(String initValue) {
-    opensimModelJNI.WeldConstraint_constructProperty_body_2(swigCPtr, this, initValue);
-  }
-
-  public String get_body_2() {
-    return opensimModelJNI.WeldConstraint_get_body_2__SWIG_1(swigCPtr, this);
-  }
-
-  public SWIGTYPE_p_std__string upd_body_2() {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.WeldConstraint_upd_body_2__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_body_2(String value) {
-    opensimModelJNI.WeldConstraint_set_body_2__SWIG_1(swigCPtr, this, value);
-  }
-
   public void copyProperty_location_body_1(WeldConstraint source) {
     opensimModelJNI.WeldConstraint_copyProperty_location_body_1(swigCPtr, this, WeldConstraint.getCPtr(source), source);
   }
@@ -277,12 +205,12 @@ public class WeldConstraint extends Constraint {
     this(opensimModelJNI.new_WeldConstraint__SWIG_0(), true);
   }
 
-  public WeldConstraint(String name, Body body1, Vec3 locationInBody1, Vec3 orientationInBody1, Body body2, Vec3 locationInBody2, Vec3 orientationInBody2) {
-    this(opensimModelJNI.new_WeldConstraint__SWIG_1(name, Body.getCPtr(body1), body1, Vec3.getCPtr(locationInBody1), locationInBody1, Vec3.getCPtr(orientationInBody1), orientationInBody1, Body.getCPtr(body2), body2, Vec3.getCPtr(locationInBody2), locationInBody2, Vec3.getCPtr(orientationInBody2), orientationInBody2), true);
+  public WeldConstraint(String name, PhysicalFrame body1, Vec3 locationInBody1, Vec3 orientationInBody1, PhysicalFrame body2, Vec3 locationInBody2, Vec3 orientationInBody2) {
+    this(opensimModelJNI.new_WeldConstraint__SWIG_1(name, PhysicalFrame.getCPtr(body1), body1, Vec3.getCPtr(locationInBody1), locationInBody1, Vec3.getCPtr(orientationInBody1), orientationInBody1, PhysicalFrame.getCPtr(body2), body2, Vec3.getCPtr(locationInBody2), locationInBody2, Vec3.getCPtr(orientationInBody2), orientationInBody2), true);
   }
 
-  public WeldConstraint(String name, Body body1, Transform transformInBody1, Body body2, Transform transformInBody2) {
-    this(opensimModelJNI.new_WeldConstraint__SWIG_2(name, Body.getCPtr(body1), body1, Transform.getCPtr(transformInBody1), transformInBody1, Body.getCPtr(body2), body2, Transform.getCPtr(transformInBody2), transformInBody2), true);
+  public WeldConstraint(String name, PhysicalFrame body1, Transform transformInBody1, PhysicalFrame body2, Transform transformInBody2) {
+    this(opensimModelJNI.new_WeldConstraint__SWIG_2(name, PhysicalFrame.getCPtr(body1), body1, Transform.getCPtr(transformInBody1), transformInBody1, PhysicalFrame.getCPtr(body2), body2, Transform.getCPtr(transformInBody2), transformInBody2), true);
   }
 
   public void setBody1ByName(String aBodyName) {

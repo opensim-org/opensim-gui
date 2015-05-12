@@ -237,12 +237,12 @@ public class ContactGeometry extends ModelComponent {
     opensimModelJNI.ContactGeometry_setOrientation(swigCPtr, this, Vec3.getCPtr(orientation), orientation);
   }
 
-  public Body getBody() {
-    return new Body(opensimModelJNI.ContactGeometry_getBody(swigCPtr, this), false);
+  public PhysicalFrame updBody() {
+    return new PhysicalFrame(opensimModelJNI.ContactGeometry_updBody(swigCPtr, this), false);
   }
 
-  public void setBody(Body body) {
-    opensimModelJNI.ContactGeometry_setBody(swigCPtr, this, Body.getCPtr(body), body);
+  public void setBody(PhysicalFrame body) {
+    opensimModelJNI.ContactGeometry_setBody(swigCPtr, this, PhysicalFrame.getCPtr(body), body);
   }
 
   public String getBodyName() {

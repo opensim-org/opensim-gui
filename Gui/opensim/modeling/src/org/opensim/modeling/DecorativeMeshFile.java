@@ -88,8 +88,4 @@ public class DecorativeMeshFile extends DecorativeGeometry {
     return (cPtr == 0) ? null : new DecorativeMeshFile(cPtr, true);
   }
 
-  public boolean equals(DecorativeMeshFile other) {
-    return opensimModelJNI.DecorativeMeshFile_equals(swigCPtr, this, DecorativeMeshFile.getCPtr(other), other);
-  }
-
 }

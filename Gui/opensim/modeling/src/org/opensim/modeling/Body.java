@@ -165,42 +165,6 @@ public class Body extends PhysicalFrame {
     opensimModelJNI.Body_set_inertia__SWIG_1(swigCPtr, this, Vec6.getCPtr(value), value);
   }
 
-  public void copyProperty_WrapObjectSet(Body source) {
-    opensimModelJNI.Body_copyProperty_WrapObjectSet(swigCPtr, this, Body.getCPtr(source), source);
-  }
-
-  public WrapObjectSet get_WrapObjectSet(int i) {
-    return new WrapObjectSet(opensimModelJNI.Body_get_WrapObjectSet__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public WrapObjectSet upd_WrapObjectSet(int i) {
-    return new WrapObjectSet(opensimModelJNI.Body_upd_WrapObjectSet__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_WrapObjectSet(int i, WrapObjectSet value) {
-    opensimModelJNI.Body_set_WrapObjectSet__SWIG_0(swigCPtr, this, i, WrapObjectSet.getCPtr(value), value);
-  }
-
-  public int append_WrapObjectSet(WrapObjectSet value) {
-    return opensimModelJNI.Body_append_WrapObjectSet(swigCPtr, this, WrapObjectSet.getCPtr(value), value);
-  }
-
-  public void constructProperty_WrapObjectSet(WrapObjectSet initValue) {
-    opensimModelJNI.Body_constructProperty_WrapObjectSet(swigCPtr, this, WrapObjectSet.getCPtr(initValue), initValue);
-  }
-
-  public WrapObjectSet get_WrapObjectSet() {
-    return new WrapObjectSet(opensimModelJNI.Body_get_WrapObjectSet__SWIG_1(swigCPtr, this), false);
-  }
-
-  public WrapObjectSet upd_WrapObjectSet() {
-    return new WrapObjectSet(opensimModelJNI.Body_upd_WrapObjectSet__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_WrapObjectSet(WrapObjectSet value) {
-    opensimModelJNI.Body_set_WrapObjectSet__SWIG_1(swigCPtr, this, WrapObjectSet.getCPtr(value), value);
-  }
-
   public Body() {
     this(opensimModelJNI.new_Body__SWIG_0(), true);
   }
@@ -263,23 +227,6 @@ public class Body extends PhysicalFrame {
 
   public void addMeshGeometry(String aGeometryFileName) {
     opensimModelJNI.Body_addMeshGeometry__SWIG_1(swigCPtr, this, aGeometryFileName);
-  }
-
-  public void adoptGeometry(Geometry geom) {
-    opensimModelJNI.Body_adoptGeometry(swigCPtr, this, Geometry.getCPtr(geom), geom);
-  }
-
-  public WrapObject getWrapObject(String aName) {
-    long cPtr = opensimModelJNI.Body_getWrapObject(swigCPtr, this, aName);
-    return (cPtr == 0) ? null : new WrapObject(cPtr, false);
-  }
-
-  public WrapObjectSet getWrapObjectSet() {
-    return new WrapObjectSet(opensimModelJNI.Body_getWrapObjectSet(swigCPtr, this), false);
-  }
-
-  public void addWrapObject(WrapObject wrapObject) {
-    opensimModelJNI.Body_addWrapObject(swigCPtr, this, WrapObject.getCPtr(wrapObject), wrapObject);
   }
 
   public void getInertia(ArrayDouble rInertia) {

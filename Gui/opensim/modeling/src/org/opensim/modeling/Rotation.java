@@ -8,11 +8,12 @@
 
 package org.opensim.modeling;
 
-public class Rotation extends Mat33 {
+public class Rotation {
   private long swigCPtr;
+  protected boolean swigCMemOwn;
 
   public Rotation(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.Rotation_SWIGUpcast(cPtr), cMemoryOwn);
+    swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
@@ -32,7 +33,6 @@ public class Rotation extends Mat33 {
       }
       swigCPtr = 0;
     }
-    super.delete();
   }
 
   public Rotation() {
@@ -115,16 +115,16 @@ public class Rotation extends Mat33 {
     opensimModelJNI.Rotation_setRotationToBodyFixedXYZ__SWIG_0(swigCPtr, this, Vec3.getCPtr(v), v);
   }
 
-  public Rotation(Mat33 m, boolean arg1) {
-    this(opensimModelJNI.new_Rotation__SWIG_6(Mat33.getCPtr(m), m, arg1), true);
+  public Rotation(SWIGTYPE_p_Mat33 m, boolean arg1) {
+    this(opensimModelJNI.new_Rotation__SWIG_6(SWIGTYPE_p_Mat33.getCPtr(m), arg1), true);
   }
 
-  public Rotation(Mat33 m) {
-    this(opensimModelJNI.new_Rotation__SWIG_7(Mat33.getCPtr(m), m), true);
+  public Rotation(SWIGTYPE_p_Mat33 m) {
+    this(opensimModelJNI.new_Rotation__SWIG_7(SWIGTYPE_p_Mat33.getCPtr(m)), true);
   }
 
-  public Rotation setRotationFromApproximateMat33(Mat33 m) {
-    return new Rotation(opensimModelJNI.Rotation_setRotationFromApproximateMat33(swigCPtr, this, Mat33.getCPtr(m), m), false);
+  public Rotation setRotationFromApproximateMat33(SWIGTYPE_p_Mat33 m) {
+    return new Rotation(opensimModelJNI.Rotation_setRotationFromApproximateMat33(swigCPtr, this, SWIGTYPE_p_Mat33.getCPtr(m)), false);
   }
 
   public double convertOneAxisRotationToOneAngle(CoordinateAxis axis1) {
@@ -183,12 +183,12 @@ public class Rotation extends Mat33 {
     return new InverseRotation(opensimModelJNI.Rotation_transpose(swigCPtr, this), false);
   }
 
-  public Mat33 asMat33() {
-    return new Mat33(opensimModelJNI.Rotation_asMat33(swigCPtr, this), false);
+  public SWIGTYPE_p_Mat33 asMat33() {
+    return new SWIGTYPE_p_Mat33(opensimModelJNI.Rotation_asMat33(swigCPtr, this), false);
   }
 
-  public Mat33 toMat33() {
-    return new Mat33(opensimModelJNI.Rotation_toMat33(swigCPtr, this), true);
+  public SWIGTYPE_p_Mat33 toMat33() {
+    return new SWIGTYPE_p_Mat33(opensimModelJNI.Rotation_toMat33(swigCPtr, this), true);
   }
 
   public void setRotationToBodyFixedXYZ(Vec3 c, Vec3 s) {
@@ -207,20 +207,20 @@ public class Rotation extends Mat33 {
     return new Vec3(opensimModelJNI.Rotation_convertAngVelDotToBodyFixed321DotDot(Vec3.getCPtr(q), q, Vec3.getCPtr(w_PB_B), w_PB_B, Vec3.getCPtr(wdot_PB_B), wdot_PB_B), true);
   }
 
-  public static Mat33 calcNForBodyXYZInBodyFrame(Vec3 q) {
-    return new Mat33(opensimModelJNI.Rotation_calcNForBodyXYZInBodyFrame__SWIG_0(Vec3.getCPtr(q), q), true);
+  public static SWIGTYPE_p_Mat33 calcNForBodyXYZInBodyFrame(Vec3 q) {
+    return new SWIGTYPE_p_Mat33(opensimModelJNI.Rotation_calcNForBodyXYZInBodyFrame__SWIG_0(Vec3.getCPtr(q), q), true);
   }
 
-  public static Mat33 calcNForBodyXYZInBodyFrame(Vec3 cq, Vec3 sq) {
-    return new Mat33(opensimModelJNI.Rotation_calcNForBodyXYZInBodyFrame__SWIG_1(Vec3.getCPtr(cq), cq, Vec3.getCPtr(sq), sq), true);
+  public static SWIGTYPE_p_Mat33 calcNForBodyXYZInBodyFrame(Vec3 cq, Vec3 sq) {
+    return new SWIGTYPE_p_Mat33(opensimModelJNI.Rotation_calcNForBodyXYZInBodyFrame__SWIG_1(Vec3.getCPtr(cq), cq, Vec3.getCPtr(sq), sq), true);
   }
 
-  public static Mat33 calcNForBodyXYZInParentFrame(Vec3 q) {
-    return new Mat33(opensimModelJNI.Rotation_calcNForBodyXYZInParentFrame__SWIG_0(Vec3.getCPtr(q), q), true);
+  public static SWIGTYPE_p_Mat33 calcNForBodyXYZInParentFrame(Vec3 q) {
+    return new SWIGTYPE_p_Mat33(opensimModelJNI.Rotation_calcNForBodyXYZInParentFrame__SWIG_0(Vec3.getCPtr(q), q), true);
   }
 
-  public static Mat33 calcNForBodyXYZInParentFrame(Vec3 cq, Vec3 sq) {
-    return new Mat33(opensimModelJNI.Rotation_calcNForBodyXYZInParentFrame__SWIG_1(Vec3.getCPtr(cq), cq, Vec3.getCPtr(sq), sq), true);
+  public static SWIGTYPE_p_Mat33 calcNForBodyXYZInParentFrame(Vec3 cq, Vec3 sq) {
+    return new SWIGTYPE_p_Mat33(opensimModelJNI.Rotation_calcNForBodyXYZInParentFrame__SWIG_1(Vec3.getCPtr(cq), cq, Vec3.getCPtr(sq), sq), true);
   }
 
   public static Vec3 multiplyByBodyXYZ_N_P(Vec2 cosxy, Vec2 sinxy, double oocosy, Vec3 w_PB) {
@@ -247,36 +247,36 @@ public class Rotation extends Mat33 {
     return new Vec3(opensimModelJNI.Rotation_multiplyByBodyXYZ_NInvT_P(Vec2.getCPtr(cosxy), cosxy, Vec2.getCPtr(sinxy), sinxy, Vec3.getCPtr(v_P), v_P), true);
   }
 
-  public static Mat33 calcNDotForBodyXYZInBodyFrame(Vec3 q, Vec3 qdot) {
-    return new Mat33(opensimModelJNI.Rotation_calcNDotForBodyXYZInBodyFrame__SWIG_0(Vec3.getCPtr(q), q, Vec3.getCPtr(qdot), qdot), true);
+  public static SWIGTYPE_p_Mat33 calcNDotForBodyXYZInBodyFrame(Vec3 q, Vec3 qdot) {
+    return new SWIGTYPE_p_Mat33(opensimModelJNI.Rotation_calcNDotForBodyXYZInBodyFrame__SWIG_0(Vec3.getCPtr(q), q, Vec3.getCPtr(qdot), qdot), true);
   }
 
-  public static Mat33 calcNDotForBodyXYZInBodyFrame(Vec3 cq, Vec3 sq, Vec3 qdot) {
-    return new Mat33(opensimModelJNI.Rotation_calcNDotForBodyXYZInBodyFrame__SWIG_1(Vec3.getCPtr(cq), cq, Vec3.getCPtr(sq), sq, Vec3.getCPtr(qdot), qdot), true);
+  public static SWIGTYPE_p_Mat33 calcNDotForBodyXYZInBodyFrame(Vec3 cq, Vec3 sq, Vec3 qdot) {
+    return new SWIGTYPE_p_Mat33(opensimModelJNI.Rotation_calcNDotForBodyXYZInBodyFrame__SWIG_1(Vec3.getCPtr(cq), cq, Vec3.getCPtr(sq), sq, Vec3.getCPtr(qdot), qdot), true);
   }
 
-  public static Mat33 calcNDotForBodyXYZInParentFrame(Vec3 q, Vec3 qdot) {
-    return new Mat33(opensimModelJNI.Rotation_calcNDotForBodyXYZInParentFrame__SWIG_0(Vec3.getCPtr(q), q, Vec3.getCPtr(qdot), qdot), true);
+  public static SWIGTYPE_p_Mat33 calcNDotForBodyXYZInParentFrame(Vec3 q, Vec3 qdot) {
+    return new SWIGTYPE_p_Mat33(opensimModelJNI.Rotation_calcNDotForBodyXYZInParentFrame__SWIG_0(Vec3.getCPtr(q), q, Vec3.getCPtr(qdot), qdot), true);
   }
 
-  public static Mat33 calcNDotForBodyXYZInParentFrame(Vec2 cq, Vec2 sq, double ooc1, Vec3 qdot) {
-    return new Mat33(opensimModelJNI.Rotation_calcNDotForBodyXYZInParentFrame__SWIG_1(Vec2.getCPtr(cq), cq, Vec2.getCPtr(sq), sq, ooc1, Vec3.getCPtr(qdot), qdot), true);
+  public static SWIGTYPE_p_Mat33 calcNDotForBodyXYZInParentFrame(Vec2 cq, Vec2 sq, double ooc1, Vec3 qdot) {
+    return new SWIGTYPE_p_Mat33(opensimModelJNI.Rotation_calcNDotForBodyXYZInParentFrame__SWIG_1(Vec2.getCPtr(cq), cq, Vec2.getCPtr(sq), sq, ooc1, Vec3.getCPtr(qdot), qdot), true);
   }
 
-  public static Mat33 calcNInvForBodyXYZInBodyFrame(Vec3 q) {
-    return new Mat33(opensimModelJNI.Rotation_calcNInvForBodyXYZInBodyFrame__SWIG_0(Vec3.getCPtr(q), q), true);
+  public static SWIGTYPE_p_Mat33 calcNInvForBodyXYZInBodyFrame(Vec3 q) {
+    return new SWIGTYPE_p_Mat33(opensimModelJNI.Rotation_calcNInvForBodyXYZInBodyFrame__SWIG_0(Vec3.getCPtr(q), q), true);
   }
 
-  public static Mat33 calcNInvForBodyXYZInBodyFrame(Vec3 cq, Vec3 sq) {
-    return new Mat33(opensimModelJNI.Rotation_calcNInvForBodyXYZInBodyFrame__SWIG_1(Vec3.getCPtr(cq), cq, Vec3.getCPtr(sq), sq), true);
+  public static SWIGTYPE_p_Mat33 calcNInvForBodyXYZInBodyFrame(Vec3 cq, Vec3 sq) {
+    return new SWIGTYPE_p_Mat33(opensimModelJNI.Rotation_calcNInvForBodyXYZInBodyFrame__SWIG_1(Vec3.getCPtr(cq), cq, Vec3.getCPtr(sq), sq), true);
   }
 
-  public static Mat33 calcNInvForBodyXYZInParentFrame(Vec3 q) {
-    return new Mat33(opensimModelJNI.Rotation_calcNInvForBodyXYZInParentFrame__SWIG_0(Vec3.getCPtr(q), q), true);
+  public static SWIGTYPE_p_Mat33 calcNInvForBodyXYZInParentFrame(Vec3 q) {
+    return new SWIGTYPE_p_Mat33(opensimModelJNI.Rotation_calcNInvForBodyXYZInParentFrame__SWIG_0(Vec3.getCPtr(q), q), true);
   }
 
-  public static Mat33 calcNInvForBodyXYZInParentFrame(Vec3 cq, Vec3 sq) {
-    return new Mat33(opensimModelJNI.Rotation_calcNInvForBodyXYZInParentFrame__SWIG_1(Vec3.getCPtr(cq), cq, Vec3.getCPtr(sq), sq), true);
+  public static SWIGTYPE_p_Mat33 calcNInvForBodyXYZInParentFrame(Vec3 cq, Vec3 sq) {
+    return new SWIGTYPE_p_Mat33(opensimModelJNI.Rotation_calcNInvForBodyXYZInParentFrame__SWIG_1(Vec3.getCPtr(cq), cq, Vec3.getCPtr(sq), sq), true);
   }
 
   public static Vec3 convertAngVelInBodyFrameToBodyXYZDot(Vec3 q, Vec3 w_PB_B) {

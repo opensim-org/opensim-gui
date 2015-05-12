@@ -97,12 +97,12 @@ public class EllipsoidJoint extends Joint {
     this(opensimModelJNI.new_EllipsoidJoint__SWIG_0(), true);
   }
 
-  public EllipsoidJoint(String name, Body parent, Vec3 locationInParent, Vec3 orientationInParent, Body body, Vec3 locationInBody, Vec3 orientationInBody, Vec3 ellipsoidRadii, boolean reverse) {
-    this(opensimModelJNI.new_EllipsoidJoint__SWIG_1(name, Body.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, Body.getCPtr(body), body, Vec3.getCPtr(locationInBody), locationInBody, Vec3.getCPtr(orientationInBody), orientationInBody, Vec3.getCPtr(ellipsoidRadii), ellipsoidRadii, reverse), true);
+  public EllipsoidJoint(String name, PhysicalFrame parent, Vec3 locationInParent, Vec3 orientationInParent, PhysicalFrame child, Vec3 locationInChild, Vec3 orientationInChild, Vec3 ellipsoidRadii, boolean reverse) {
+    this(opensimModelJNI.new_EllipsoidJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild, Vec3.getCPtr(ellipsoidRadii), ellipsoidRadii, reverse), true);
   }
 
-  public EllipsoidJoint(String name, Body parent, Vec3 locationInParent, Vec3 orientationInParent, Body body, Vec3 locationInBody, Vec3 orientationInBody, Vec3 ellipsoidRadii) {
-    this(opensimModelJNI.new_EllipsoidJoint__SWIG_2(name, Body.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, Body.getCPtr(body), body, Vec3.getCPtr(locationInBody), locationInBody, Vec3.getCPtr(orientationInBody), orientationInBody, Vec3.getCPtr(ellipsoidRadii), ellipsoidRadii), true);
+  public EllipsoidJoint(String name, PhysicalFrame parent, Vec3 locationInParent, Vec3 orientationInParent, PhysicalFrame child, Vec3 locationInChild, Vec3 orientationInChild, Vec3 ellipsoidRadii) {
+    this(opensimModelJNI.new_EllipsoidJoint__SWIG_2(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild, Vec3.getCPtr(ellipsoidRadii), ellipsoidRadii), true);
   }
 
   public int numCoordinates() {

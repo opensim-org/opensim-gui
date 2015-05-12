@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class MuscleFirstOrderActivationDynamicModel extends OpenSimObject {
+public class MuscleFirstOrderActivationDynamicModel extends ModelComponent {
   private long swigCPtr;
 
   public MuscleFirstOrderActivationDynamicModel(long cPtr, boolean cMemoryOwn) {
@@ -171,38 +171,6 @@ public class MuscleFirstOrderActivationDynamicModel extends OpenSimObject {
 
   public MuscleFirstOrderActivationDynamicModel(double tauActivation, double tauDeactivation, double minActivation, String muscleName) {
     this(opensimModelJNI.new_MuscleFirstOrderActivationDynamicModel__SWIG_1(tauActivation, tauDeactivation, minActivation, muscleName), true);
-  }
-
-  public void ensureModelUpToDate() {
-    opensimModelJNI.MuscleFirstOrderActivationDynamicModel_ensureModelUpToDate(swigCPtr, this);
-  }
-
-  public double getActivationTimeConstant() {
-    return opensimModelJNI.MuscleFirstOrderActivationDynamicModel_getActivationTimeConstant(swigCPtr, this);
-  }
-
-  public double getDeactivationTimeConstant() {
-    return opensimModelJNI.MuscleFirstOrderActivationDynamicModel_getDeactivationTimeConstant(swigCPtr, this);
-  }
-
-  public double getMinimumActivation() {
-    return opensimModelJNI.MuscleFirstOrderActivationDynamicModel_getMinimumActivation(swigCPtr, this);
-  }
-
-  public double getMaximumActivation() {
-    return opensimModelJNI.MuscleFirstOrderActivationDynamicModel_getMaximumActivation(swigCPtr, this);
-  }
-
-  public boolean setActivationTimeConstant(double activationTimeConstant) {
-    return opensimModelJNI.MuscleFirstOrderActivationDynamicModel_setActivationTimeConstant(swigCPtr, this, activationTimeConstant);
-  }
-
-  public boolean setDeactivationTimeConstant(double deactivationTimeConstant) {
-    return opensimModelJNI.MuscleFirstOrderActivationDynamicModel_setDeactivationTimeConstant(swigCPtr, this, deactivationTimeConstant);
-  }
-
-  public boolean setMinimumActivation(double minimumActivation) {
-    return opensimModelJNI.MuscleFirstOrderActivationDynamicModel_setMinimumActivation(swigCPtr, this, minimumActivation);
   }
 
   public double clampActivation(double activation) {

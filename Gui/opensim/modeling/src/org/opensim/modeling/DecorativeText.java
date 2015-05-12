@@ -95,6 +95,10 @@ public class DecorativeText extends DecorativeGeometry {
     return new DecorativeText(opensimModelJNI.DecorativeText_setLineThickness(swigCPtr, this, t), false);
   }
 
+  public DecorativeText setFaceCamera(int yn) {
+    return new DecorativeText(opensimModelJNI.DecorativeText_setFaceCamera(swigCPtr, this, yn), false);
+  }
+
   public DecorativeText setRepresentation(DecorativeGeometry.Representation r) {
     return new DecorativeText(opensimModelJNI.DecorativeText_setRepresentation(swigCPtr, this, r.swigValue()), false);
   }

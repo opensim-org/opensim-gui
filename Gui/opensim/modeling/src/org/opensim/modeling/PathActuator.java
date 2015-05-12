@@ -169,8 +169,8 @@ public class PathActuator extends ScalarActuator {
     return opensimModelJNI.PathActuator_getStress(swigCPtr, this, State.getCPtr(s), s);
   }
 
-  public void addNewPathPoint(String proposedName, Body aBody, Vec3 aPositionOnBody) {
-    opensimModelJNI.PathActuator_addNewPathPoint(swigCPtr, this, proposedName, Body.getCPtr(aBody), aBody, Vec3.getCPtr(aPositionOnBody), aPositionOnBody);
+  public void addNewPathPoint(String proposedName, PhysicalFrame aBody, Vec3 aPositionOnBody) {
+    opensimModelJNI.PathActuator_addNewPathPoint(swigCPtr, this, proposedName, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(aPositionOnBody), aPositionOnBody);
   }
 
   public void computeForce(State state, VectorOfSpatialVec bodyForces, Vector mobilityForces) {

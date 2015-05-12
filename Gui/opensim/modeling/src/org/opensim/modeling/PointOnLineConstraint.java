@@ -57,12 +57,120 @@ public class PointOnLineConstraint extends Constraint {
     return opensimModelJNI.PointOnLineConstraint_getConcreteClassName(swigCPtr, this);
   }
 
+  public void copyProperty_line_direction_vec(PointOnLineConstraint source) {
+    opensimModelJNI.PointOnLineConstraint_copyProperty_line_direction_vec(swigCPtr, this, PointOnLineConstraint.getCPtr(source), source);
+  }
+
+  public Vec3 get_line_direction_vec(int i) {
+    return new Vec3(opensimModelJNI.PointOnLineConstraint_get_line_direction_vec__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public Vec3 upd_line_direction_vec(int i) {
+    return new Vec3(opensimModelJNI.PointOnLineConstraint_upd_line_direction_vec__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_line_direction_vec(int i, Vec3 value) {
+    opensimModelJNI.PointOnLineConstraint_set_line_direction_vec__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+  }
+
+  public int append_line_direction_vec(Vec3 value) {
+    return opensimModelJNI.PointOnLineConstraint_append_line_direction_vec(swigCPtr, this, Vec3.getCPtr(value), value);
+  }
+
+  public void constructProperty_line_direction_vec(Vec3 initValue) {
+    opensimModelJNI.PointOnLineConstraint_constructProperty_line_direction_vec(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+  }
+
+  public Vec3 get_line_direction_vec() {
+    return new Vec3(opensimModelJNI.PointOnLineConstraint_get_line_direction_vec__SWIG_1(swigCPtr, this), false);
+  }
+
+  public Vec3 upd_line_direction_vec() {
+    return new Vec3(opensimModelJNI.PointOnLineConstraint_upd_line_direction_vec__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_line_direction_vec(Vec3 value) {
+    opensimModelJNI.PointOnLineConstraint_set_line_direction_vec__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+  }
+
+  public void copyProperty_point_on_line(PointOnLineConstraint source) {
+    opensimModelJNI.PointOnLineConstraint_copyProperty_point_on_line(swigCPtr, this, PointOnLineConstraint.getCPtr(source), source);
+  }
+
+  public Vec3 get_point_on_line(int i) {
+    return new Vec3(opensimModelJNI.PointOnLineConstraint_get_point_on_line__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public Vec3 upd_point_on_line(int i) {
+    return new Vec3(opensimModelJNI.PointOnLineConstraint_upd_point_on_line__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_point_on_line(int i, Vec3 value) {
+    opensimModelJNI.PointOnLineConstraint_set_point_on_line__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+  }
+
+  public int append_point_on_line(Vec3 value) {
+    return opensimModelJNI.PointOnLineConstraint_append_point_on_line(swigCPtr, this, Vec3.getCPtr(value), value);
+  }
+
+  public void constructProperty_point_on_line(Vec3 initValue) {
+    opensimModelJNI.PointOnLineConstraint_constructProperty_point_on_line(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+  }
+
+  public Vec3 get_point_on_line() {
+    return new Vec3(opensimModelJNI.PointOnLineConstraint_get_point_on_line__SWIG_1(swigCPtr, this), false);
+  }
+
+  public Vec3 upd_point_on_line() {
+    return new Vec3(opensimModelJNI.PointOnLineConstraint_upd_point_on_line__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_point_on_line(Vec3 value) {
+    opensimModelJNI.PointOnLineConstraint_set_point_on_line__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+  }
+
+  public void copyProperty_point_on_follower(PointOnLineConstraint source) {
+    opensimModelJNI.PointOnLineConstraint_copyProperty_point_on_follower(swigCPtr, this, PointOnLineConstraint.getCPtr(source), source);
+  }
+
+  public Vec3 get_point_on_follower(int i) {
+    return new Vec3(opensimModelJNI.PointOnLineConstraint_get_point_on_follower__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public Vec3 upd_point_on_follower(int i) {
+    return new Vec3(opensimModelJNI.PointOnLineConstraint_upd_point_on_follower__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_point_on_follower(int i, Vec3 value) {
+    opensimModelJNI.PointOnLineConstraint_set_point_on_follower__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+  }
+
+  public int append_point_on_follower(Vec3 value) {
+    return opensimModelJNI.PointOnLineConstraint_append_point_on_follower(swigCPtr, this, Vec3.getCPtr(value), value);
+  }
+
+  public void constructProperty_point_on_follower(Vec3 initValue) {
+    opensimModelJNI.PointOnLineConstraint_constructProperty_point_on_follower(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+  }
+
+  public Vec3 get_point_on_follower() {
+    return new Vec3(opensimModelJNI.PointOnLineConstraint_get_point_on_follower__SWIG_1(swigCPtr, this), false);
+  }
+
+  public Vec3 upd_point_on_follower() {
+    return new Vec3(opensimModelJNI.PointOnLineConstraint_upd_point_on_follower__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_point_on_follower(Vec3 value) {
+    opensimModelJNI.PointOnLineConstraint_set_point_on_follower__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+  }
+
   public PointOnLineConstraint() {
     this(opensimModelJNI.new_PointOnLineConstraint__SWIG_0(), true);
   }
 
-  public PointOnLineConstraint(Body lineBody, Vec3 lineDirection, Vec3 pointOnLine, Body followerBody, Vec3 followerPoint) {
-    this(opensimModelJNI.new_PointOnLineConstraint__SWIG_1(Body.getCPtr(lineBody), lineBody, Vec3.getCPtr(lineDirection), lineDirection, Vec3.getCPtr(pointOnLine), pointOnLine, Body.getCPtr(followerBody), followerBody, Vec3.getCPtr(followerPoint), followerPoint), true);
+  public PointOnLineConstraint(PhysicalFrame lineBody, Vec3 lineDirection, Vec3 pointOnLine, PhysicalFrame followerBody, Vec3 followerPoint) {
+    this(opensimModelJNI.new_PointOnLineConstraint__SWIG_1(PhysicalFrame.getCPtr(lineBody), lineBody, Vec3.getCPtr(lineDirection), lineDirection, Vec3.getCPtr(pointOnLine), pointOnLine, PhysicalFrame.getCPtr(followerBody), followerBody, Vec3.getCPtr(followerPoint), followerPoint), true);
   }
 
   public void setLineBodyByName(String aBodyName) {

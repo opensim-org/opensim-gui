@@ -109,12 +109,12 @@ public class JointIterator {
     return opensimModelJNI.JointIterator_get_reverse__SWIG_1(swigCPtr, this);
   }
 
-  public String getChildBodyName() {
-    return opensimModelJNI.JointIterator_getChildBodyName(swigCPtr, this);
+  public String getChildFrameName() {
+    return opensimModelJNI.JointIterator_getChildFrameName(swigCPtr, this);
   }
 
-  public Body getChildBody() {
-    return new Body(opensimModelJNI.JointIterator_getChildBody(swigCPtr, this), false);
+  public PhysicalFrame getChildFrame() {
+    return new PhysicalFrame(opensimModelJNI.JointIterator_getChildFrame(swigCPtr, this), false);
   }
 
   public Vec3 getLocationInChild() {
@@ -125,12 +125,12 @@ public class JointIterator {
     return new Vec3(opensimModelJNI.JointIterator_getOrientationInChild(swigCPtr, this), false);
   }
 
-  public String getParentBodyName() {
-    return opensimModelJNI.JointIterator_getParentBodyName(swigCPtr, this);
+  public String getParentFrameName() {
+    return opensimModelJNI.JointIterator_getParentFrameName(swigCPtr, this);
   }
 
-  public Body getParentBody() {
-    return new Body(opensimModelJNI.JointIterator_getParentBody(swigCPtr, this), false);
+  public PhysicalFrame getParentFrame() {
+    return new PhysicalFrame(opensimModelJNI.JointIterator_getParentFrame(swigCPtr, this), false);
   }
 
   public Vec3 getLocationInParent() {
@@ -177,16 +177,16 @@ public class JointIterator {
     opensimModelJNI.JointIterator_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
   }
 
-  public Geometry get_GeometrySet(int i) {
-    return new Geometry(opensimModelJNI.JointIterator_get_GeometrySet(swigCPtr, this, i), false);
+  public Geometry get_geometry(int i) {
+    return new Geometry(opensimModelJNI.JointIterator_get_geometry(swigCPtr, this, i), false);
   }
 
   public Model getModel() {
     return new Model(opensimModelJNI.JointIterator_getModel(swigCPtr, this), false);
   }
 
-  public int getGeometrySize() {
-    return opensimModelJNI.JointIterator_getGeometrySize(swigCPtr, this);
+  public int getNumGeometry() {
+    return opensimModelJNI.JointIterator_getNumGeometry(swigCPtr, this);
   }
 
   public void addToSystem(SWIGTYPE_p_SimTK__MultibodySystem system) {

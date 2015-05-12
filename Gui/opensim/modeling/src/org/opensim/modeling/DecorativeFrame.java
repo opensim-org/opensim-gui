@@ -96,8 +96,4 @@ public class DecorativeFrame extends DecorativeGeometry {
     return (cPtr == 0) ? null : new DecorativeFrame(cPtr, true);
   }
 
-  public boolean equals(DecorativeFrame other) {
-    return opensimModelJNI.DecorativeFrame_equals(swigCPtr, this, DecorativeFrame.getCPtr(other), other);
-  }
-
 }

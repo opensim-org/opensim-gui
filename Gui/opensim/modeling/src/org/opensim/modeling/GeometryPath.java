@@ -77,13 +77,13 @@ public class GeometryPath extends ModelComponent {
     opensimModelJNI.GeometryPath_addPathWrap(swigCPtr, this, WrapObject.getCPtr(aWrapObject), aWrapObject);
   }
 
-  public PathPoint addPathPoint(State s, int aIndex, Body aBody) {
-    long cPtr = opensimModelJNI.GeometryPath_addPathPoint(swigCPtr, this, State.getCPtr(s), s, aIndex, Body.getCPtr(aBody), aBody);
+  public PathPoint addPathPoint(State s, int aIndex, PhysicalFrame aBody) {
+    long cPtr = opensimModelJNI.GeometryPath_addPathPoint(swigCPtr, this, State.getCPtr(s), s, aIndex, PhysicalFrame.getCPtr(aBody), aBody);
     return (cPtr == 0) ? null : new PathPoint(cPtr, false);
   }
 
-  public PathPoint appendNewPathPoint(String proposedName, Body aBody, Vec3 aPositionOnBody) {
-    long cPtr = opensimModelJNI.GeometryPath_appendNewPathPoint(swigCPtr, this, proposedName, Body.getCPtr(aBody), aBody, Vec3.getCPtr(aPositionOnBody), aPositionOnBody);
+  public PathPoint appendNewPathPoint(String proposedName, PhysicalFrame aBody, Vec3 aPositionOnBody) {
+    long cPtr = opensimModelJNI.GeometryPath_appendNewPathPoint(swigCPtr, this, proposedName, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(aPositionOnBody), aPositionOnBody);
     return (cPtr == 0) ? null : new PathPoint(cPtr, false);
   }
 

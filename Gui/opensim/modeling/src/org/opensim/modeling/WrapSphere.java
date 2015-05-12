@@ -85,8 +85,8 @@ public class WrapSphere extends WrapObject {
     opensimModelJNI.WrapSphere_scale(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
   }
 
-  public void connectToModelAndBody(Model aModel, Body aBody) {
-    opensimModelJNI.WrapSphere_connectToModelAndBody(swigCPtr, this, Model.getCPtr(aModel), aModel, Body.getCPtr(aBody), aBody);
+  public void connectToModelAndBody(Model aModel, PhysicalFrame aBody) {
+    opensimModelJNI.WrapSphere_connectToModelAndBody(swigCPtr, this, Model.getCPtr(aModel), aModel, PhysicalFrame.getCPtr(aBody), aBody);
   }
 
 }

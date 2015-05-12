@@ -96,8 +96,4 @@ public class DecorativeEllipsoid extends DecorativeGeometry {
     return (cPtr == 0) ? null : new DecorativeEllipsoid(cPtr, true);
   }
 
-  public boolean equals(DecorativeEllipsoid other) {
-    return opensimModelJNI.DecorativeEllipsoid_equals(swigCPtr, this, DecorativeEllipsoid.getCPtr(other), other);
-  }
-
 }

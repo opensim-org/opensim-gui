@@ -94,6 +94,18 @@ public class DecorativeGeometryImplementation {
     opensimModelJNI.DecorativeGeometryImplementation_implementMeshFileGeometry(swigCPtr, this, DecorativeMeshFile.getCPtr(arg0), arg0);
   }
 
+  public void implementTorusGeometry(DecorativeTorus arg0) {
+    opensimModelJNI.DecorativeGeometryImplementation_implementTorusGeometry(swigCPtr, this, DecorativeTorus.getCPtr(arg0), arg0);
+  }
+
+  public void implementArrowGeometry(DecorativeArrow arg0) {
+    opensimModelJNI.DecorativeGeometryImplementation_implementArrowGeometry(swigCPtr, this, DecorativeArrow.getCPtr(arg0), arg0);
+  }
+
+  public void implementConeGeometry(DecorativeCone arg0) {
+    opensimModelJNI.DecorativeGeometryImplementation_implementConeGeometry(swigCPtr, this, DecorativeCone.getCPtr(arg0), arg0);
+  }
+
   public DecorativeGeometryImplementation() {
     this(opensimModelJNI.new_DecorativeGeometryImplementation(), true);
     opensimModelJNI.DecorativeGeometryImplementation_director_connect(this, swigCPtr, swigCMemOwn, true);

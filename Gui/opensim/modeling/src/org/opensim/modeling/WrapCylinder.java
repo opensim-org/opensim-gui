@@ -97,8 +97,8 @@ public class WrapCylinder extends WrapObject {
     opensimModelJNI.WrapCylinder_scale(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
   }
 
-  public void connectToModelAndBody(Model aModel, Body aBody) {
-    opensimModelJNI.WrapCylinder_connectToModelAndBody(swigCPtr, this, Model.getCPtr(aModel), aModel, Body.getCPtr(aBody), aBody);
+  public void connectToModelAndBody(Model aModel, PhysicalFrame aBody) {
+    opensimModelJNI.WrapCylinder_connectToModelAndBody(swigCPtr, this, Model.getCPtr(aModel), aModel, PhysicalFrame.getCPtr(aBody), aBody);
   }
 
 }

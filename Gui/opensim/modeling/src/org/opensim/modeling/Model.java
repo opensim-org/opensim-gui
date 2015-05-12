@@ -150,6 +150,42 @@ public class Model extends ModelComponent {
     opensimModelJNI.Model_set_assembly_accuracy__SWIG_1(swigCPtr, this, value);
   }
 
+  public void copyProperty_ground(Model source) {
+    opensimModelJNI.Model_copyProperty_ground(swigCPtr, this, Model.getCPtr(source), source);
+  }
+
+  public Ground get_ground(int i) {
+    return new Ground(opensimModelJNI.Model_get_ground__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public Ground upd_ground(int i) {
+    return new Ground(opensimModelJNI.Model_upd_ground__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_ground(int i, Ground value) {
+    opensimModelJNI.Model_set_ground__SWIG_0(swigCPtr, this, i, Ground.getCPtr(value), value);
+  }
+
+  public int append_ground(Ground value) {
+    return opensimModelJNI.Model_append_ground(swigCPtr, this, Ground.getCPtr(value), value);
+  }
+
+  public void constructProperty_ground(Ground initValue) {
+    opensimModelJNI.Model_constructProperty_ground(swigCPtr, this, Ground.getCPtr(initValue), initValue);
+  }
+
+  public Ground get_ground() {
+    return new Ground(opensimModelJNI.Model_get_ground__SWIG_1(swigCPtr, this), false);
+  }
+
+  public Ground upd_ground() {
+    return new Ground(opensimModelJNI.Model_upd_ground__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_ground(Ground value) {
+    opensimModelJNI.Model_set_ground__SWIG_1(swigCPtr, this, Ground.getCPtr(value), value);
+  }
+
   public void copyProperty_gravity(Model source) {
     opensimModelJNI.Model_copyProperty_gravity(swigCPtr, this, Model.getCPtr(source), source);
   }
@@ -658,72 +694,72 @@ public class Model extends ModelComponent {
     opensimModelJNI.Model_copyProperty_FrameSet(swigCPtr, this, Model.getCPtr(source), source);
   }
 
-  public SWIGTYPE_p_OpenSim__FrameSet get_FrameSet(int i) {
-    return new SWIGTYPE_p_OpenSim__FrameSet(opensimModelJNI.Model_get_FrameSet__SWIG_0(swigCPtr, this, i), false);
+  public FrameSet get_FrameSet(int i) {
+    return new FrameSet(opensimModelJNI.Model_get_FrameSet__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public SWIGTYPE_p_OpenSim__FrameSet upd_FrameSet(int i) {
-    return new SWIGTYPE_p_OpenSim__FrameSet(opensimModelJNI.Model_upd_FrameSet__SWIG_0(swigCPtr, this, i), false);
+  public FrameSet upd_FrameSet(int i) {
+    return new FrameSet(opensimModelJNI.Model_upd_FrameSet__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_FrameSet(int i, SWIGTYPE_p_OpenSim__FrameSet value) {
-    opensimModelJNI.Model_set_FrameSet__SWIG_0(swigCPtr, this, i, SWIGTYPE_p_OpenSim__FrameSet.getCPtr(value));
+  public void set_FrameSet(int i, FrameSet value) {
+    opensimModelJNI.Model_set_FrameSet__SWIG_0(swigCPtr, this, i, FrameSet.getCPtr(value), value);
   }
 
-  public int append_FrameSet(SWIGTYPE_p_OpenSim__FrameSet value) {
-    return opensimModelJNI.Model_append_FrameSet(swigCPtr, this, SWIGTYPE_p_OpenSim__FrameSet.getCPtr(value));
+  public int append_FrameSet(FrameSet value) {
+    return opensimModelJNI.Model_append_FrameSet(swigCPtr, this, FrameSet.getCPtr(value), value);
   }
 
-  public void constructProperty_FrameSet(SWIGTYPE_p_OpenSim__FrameSet initValue) {
-    opensimModelJNI.Model_constructProperty_FrameSet(swigCPtr, this, SWIGTYPE_p_OpenSim__FrameSet.getCPtr(initValue));
+  public void constructProperty_FrameSet(FrameSet initValue) {
+    opensimModelJNI.Model_constructProperty_FrameSet(swigCPtr, this, FrameSet.getCPtr(initValue), initValue);
   }
 
-  public SWIGTYPE_p_OpenSim__FrameSet get_FrameSet() {
-    return new SWIGTYPE_p_OpenSim__FrameSet(opensimModelJNI.Model_get_FrameSet__SWIG_1(swigCPtr, this), false);
+  public FrameSet get_FrameSet() {
+    return new FrameSet(opensimModelJNI.Model_get_FrameSet__SWIG_1(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_OpenSim__FrameSet upd_FrameSet() {
-    return new SWIGTYPE_p_OpenSim__FrameSet(opensimModelJNI.Model_upd_FrameSet__SWIG_1(swigCPtr, this), false);
+  public FrameSet upd_FrameSet() {
+    return new FrameSet(opensimModelJNI.Model_upd_FrameSet__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_FrameSet(SWIGTYPE_p_OpenSim__FrameSet value) {
-    opensimModelJNI.Model_set_FrameSet__SWIG_1(swigCPtr, this, SWIGTYPE_p_OpenSim__FrameSet.getCPtr(value));
+  public void set_FrameSet(FrameSet value) {
+    opensimModelJNI.Model_set_FrameSet__SWIG_1(swigCPtr, this, FrameSet.getCPtr(value), value);
   }
 
-  public void copyProperty_ModelDisplay(Model source) {
-    opensimModelJNI.Model_copyProperty_ModelDisplay(swigCPtr, this, Model.getCPtr(source), source);
+  public void copyProperty_ModelVisualPreferences(Model source) {
+    opensimModelJNI.Model_copyProperty_ModelVisualPreferences(swigCPtr, this, Model.getCPtr(source), source);
   }
 
-  public ModelDisplay get_ModelDisplay(int i) {
-    return new ModelDisplay(opensimModelJNI.Model_get_ModelDisplay__SWIG_0(swigCPtr, this, i), false);
+  public ModelVisualPreferences get_ModelVisualPreferences(int i) {
+    return new ModelVisualPreferences(opensimModelJNI.Model_get_ModelVisualPreferences__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public ModelDisplay upd_ModelDisplay(int i) {
-    return new ModelDisplay(opensimModelJNI.Model_upd_ModelDisplay__SWIG_0(swigCPtr, this, i), false);
+  public ModelVisualPreferences upd_ModelVisualPreferences(int i) {
+    return new ModelVisualPreferences(opensimModelJNI.Model_upd_ModelVisualPreferences__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_ModelDisplay(int i, ModelDisplay value) {
-    opensimModelJNI.Model_set_ModelDisplay__SWIG_0(swigCPtr, this, i, ModelDisplay.getCPtr(value), value);
+  public void set_ModelVisualPreferences(int i, ModelVisualPreferences value) {
+    opensimModelJNI.Model_set_ModelVisualPreferences__SWIG_0(swigCPtr, this, i, ModelVisualPreferences.getCPtr(value), value);
   }
 
-  public int append_ModelDisplay(ModelDisplay value) {
-    return opensimModelJNI.Model_append_ModelDisplay(swigCPtr, this, ModelDisplay.getCPtr(value), value);
+  public int append_ModelVisualPreferences(ModelVisualPreferences value) {
+    return opensimModelJNI.Model_append_ModelVisualPreferences(swigCPtr, this, ModelVisualPreferences.getCPtr(value), value);
   }
 
-  public void constructProperty_ModelDisplay(ModelDisplay initValue) {
-    opensimModelJNI.Model_constructProperty_ModelDisplay(swigCPtr, this, ModelDisplay.getCPtr(initValue), initValue);
+  public void constructProperty_ModelVisualPreferences(ModelVisualPreferences initValue) {
+    opensimModelJNI.Model_constructProperty_ModelVisualPreferences(swigCPtr, this, ModelVisualPreferences.getCPtr(initValue), initValue);
   }
 
-  public ModelDisplay get_ModelDisplay() {
-    return new ModelDisplay(opensimModelJNI.Model_get_ModelDisplay__SWIG_1(swigCPtr, this), false);
+  public ModelVisualPreferences get_ModelVisualPreferences() {
+    return new ModelVisualPreferences(opensimModelJNI.Model_get_ModelVisualPreferences__SWIG_1(swigCPtr, this), false);
   }
 
-  public ModelDisplay upd_ModelDisplay() {
-    return new ModelDisplay(opensimModelJNI.Model_upd_ModelDisplay__SWIG_1(swigCPtr, this), false);
+  public ModelVisualPreferences upd_ModelVisualPreferences() {
+    return new ModelVisualPreferences(opensimModelJNI.Model_upd_ModelVisualPreferences__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_ModelDisplay(ModelDisplay value) {
-    opensimModelJNI.Model_set_ModelDisplay__SWIG_1(swigCPtr, this, ModelDisplay.getCPtr(value), value);
+  public void set_ModelVisualPreferences(ModelVisualPreferences value) {
+    opensimModelJNI.Model_set_ModelVisualPreferences__SWIG_1(swigCPtr, this, ModelVisualPreferences.getCPtr(value), value);
   }
 
   public Model() {
@@ -1206,16 +1242,20 @@ public class Model extends ModelComponent {
     return new ContactGeometrySet(opensimModelJNI.Model_getContactGeometrySet(swigCPtr, this), false);
   }
 
-  public Body getGroundBody() {
-    return new Body(opensimModelJNI.Model_getGroundBody(swigCPtr, this), false);
+  public Ground getGround() {
+    return new Ground(opensimModelJNI.Model_getGround(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_OpenSim__FrameSet updFrameSet() {
-    return new SWIGTYPE_p_OpenSim__FrameSet(opensimModelJNI.Model_updFrameSet(swigCPtr, this), false);
+  public Ground updGround() {
+    return new Ground(opensimModelJNI.Model_updGround(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_OpenSim__FrameSet getFrameSet() {
-    return new SWIGTYPE_p_OpenSim__FrameSet(opensimModelJNI.Model_getFrameSet(swigCPtr, this), false);
+  public FrameSet updFrameSet() {
+    return new FrameSet(opensimModelJNI.Model_updFrameSet(swigCPtr, this), false);
+  }
+
+  public FrameSet getFrameSet() {
+    return new FrameSet(opensimModelJNI.Model_getFrameSet(swigCPtr, this), false);
   }
 
   public ConstraintSet updConstraintSet() {

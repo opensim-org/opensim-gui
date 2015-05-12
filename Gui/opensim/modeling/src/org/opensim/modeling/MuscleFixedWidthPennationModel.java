@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class MuscleFixedWidthPennationModel extends OpenSimObject {
+public class MuscleFixedWidthPennationModel extends ModelComponent {
   private long swigCPtr;
 
   public MuscleFixedWidthPennationModel(long cPtr, boolean cMemoryOwn) {
@@ -93,40 +93,40 @@ public class MuscleFixedWidthPennationModel extends OpenSimObject {
     opensimModelJNI.MuscleFixedWidthPennationModel_set_optimal_fiber_length__SWIG_1(swigCPtr, this, value);
   }
 
-  public void copyProperty_optimal_pennation_angle(MuscleFixedWidthPennationModel source) {
-    opensimModelJNI.MuscleFixedWidthPennationModel_copyProperty_optimal_pennation_angle(swigCPtr, this, MuscleFixedWidthPennationModel.getCPtr(source), source);
+  public void copyProperty_pennation_angle_at_optimal(MuscleFixedWidthPennationModel source) {
+    opensimModelJNI.MuscleFixedWidthPennationModel_copyProperty_pennation_angle_at_optimal(swigCPtr, this, MuscleFixedWidthPennationModel.getCPtr(source), source);
   }
 
-  public double get_optimal_pennation_angle(int i) {
-    return opensimModelJNI.MuscleFixedWidthPennationModel_get_optimal_pennation_angle__SWIG_0(swigCPtr, this, i);
+  public double get_pennation_angle_at_optimal(int i) {
+    return opensimModelJNI.MuscleFixedWidthPennationModel_get_pennation_angle_at_optimal__SWIG_0(swigCPtr, this, i);
   }
 
-  public SWIGTYPE_p_double upd_optimal_pennation_angle(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.MuscleFixedWidthPennationModel_upd_optimal_pennation_angle__SWIG_0(swigCPtr, this, i), false);
+  public SWIGTYPE_p_double upd_pennation_angle_at_optimal(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.MuscleFixedWidthPennationModel_upd_pennation_angle_at_optimal__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_optimal_pennation_angle(int i, double value) {
-    opensimModelJNI.MuscleFixedWidthPennationModel_set_optimal_pennation_angle__SWIG_0(swigCPtr, this, i, value);
+  public void set_pennation_angle_at_optimal(int i, double value) {
+    opensimModelJNI.MuscleFixedWidthPennationModel_set_pennation_angle_at_optimal__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int append_optimal_pennation_angle(double value) {
-    return opensimModelJNI.MuscleFixedWidthPennationModel_append_optimal_pennation_angle(swigCPtr, this, value);
+  public int append_pennation_angle_at_optimal(double value) {
+    return opensimModelJNI.MuscleFixedWidthPennationModel_append_pennation_angle_at_optimal(swigCPtr, this, value);
   }
 
-  public void constructProperty_optimal_pennation_angle(double initValue) {
-    opensimModelJNI.MuscleFixedWidthPennationModel_constructProperty_optimal_pennation_angle(swigCPtr, this, initValue);
+  public void constructProperty_pennation_angle_at_optimal(double initValue) {
+    opensimModelJNI.MuscleFixedWidthPennationModel_constructProperty_pennation_angle_at_optimal(swigCPtr, this, initValue);
   }
 
-  public double get_optimal_pennation_angle() {
-    return opensimModelJNI.MuscleFixedWidthPennationModel_get_optimal_pennation_angle__SWIG_1(swigCPtr, this);
+  public double get_pennation_angle_at_optimal() {
+    return opensimModelJNI.MuscleFixedWidthPennationModel_get_pennation_angle_at_optimal__SWIG_1(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_double upd_optimal_pennation_angle() {
-    return new SWIGTYPE_p_double(opensimModelJNI.MuscleFixedWidthPennationModel_upd_optimal_pennation_angle__SWIG_1(swigCPtr, this), false);
+  public SWIGTYPE_p_double upd_pennation_angle_at_optimal() {
+    return new SWIGTYPE_p_double(opensimModelJNI.MuscleFixedWidthPennationModel_upd_pennation_angle_at_optimal__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_optimal_pennation_angle(double value) {
-    opensimModelJNI.MuscleFixedWidthPennationModel_set_optimal_pennation_angle__SWIG_1(swigCPtr, this, value);
+  public void set_pennation_angle_at_optimal(double value) {
+    opensimModelJNI.MuscleFixedWidthPennationModel_set_pennation_angle_at_optimal__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_maximum_pennation_angle(MuscleFixedWidthPennationModel source) {
@@ -177,40 +177,12 @@ public class MuscleFixedWidthPennationModel extends OpenSimObject {
     return opensimModelJNI.MuscleFixedWidthPennationModel_getParallelogramHeight(swigCPtr, this);
   }
 
-  public double getOptimalFiberLength() {
-    return opensimModelJNI.MuscleFixedWidthPennationModel_getOptimalFiberLength(swigCPtr, this);
-  }
-
   public double getMinimumFiberLength() {
     return opensimModelJNI.MuscleFixedWidthPennationModel_getMinimumFiberLength(swigCPtr, this);
   }
 
   public double getMinimumFiberLengthAlongTendon() {
     return opensimModelJNI.MuscleFixedWidthPennationModel_getMinimumFiberLengthAlongTendon(swigCPtr, this);
-  }
-
-  public double getOptimalPennationAngle() {
-    return opensimModelJNI.MuscleFixedWidthPennationModel_getOptimalPennationAngle(swigCPtr, this);
-  }
-
-  public double getMaximumPennationAngle() {
-    return opensimModelJNI.MuscleFixedWidthPennationModel_getMaximumPennationAngle(swigCPtr, this);
-  }
-
-  public boolean setOptimalFiberLength(double aOptimalFiberLength) {
-    return opensimModelJNI.MuscleFixedWidthPennationModel_setOptimalFiberLength(swigCPtr, this, aOptimalFiberLength);
-  }
-
-  public boolean setOptimalPennationAngle(double aOptimalPennationAngle) {
-    return opensimModelJNI.MuscleFixedWidthPennationModel_setOptimalPennationAngle(swigCPtr, this, aOptimalPennationAngle);
-  }
-
-  public boolean setMaximumPennationAngle(double aMaximumPennationAngle) {
-    return opensimModelJNI.MuscleFixedWidthPennationModel_setMaximumPennationAngle(swigCPtr, this, aMaximumPennationAngle);
-  }
-
-  public double clampFiberLength(double fiberLength) {
-    return opensimModelJNI.MuscleFixedWidthPennationModel_clampFiberLength(swigCPtr, this, fiberLength);
   }
 
   public double calcPennationAngle(double fiberLength) {
@@ -271,10 +243,6 @@ public class MuscleFixedWidthPennationModel extends OpenSimObject {
 
   public double calcFiberVelocity(double cosPennationAngle, double muscleVelocity, double tendonVelocity) {
     return opensimModelJNI.MuscleFixedWidthPennationModel_calcFiberVelocity(swigCPtr, this, cosPennationAngle, muscleVelocity, tendonVelocity);
-  }
-
-  public void ensureModelUpToDate() {
-    opensimModelJNI.MuscleFixedWidthPennationModel_ensureModelUpToDate(swigCPtr, this);
   }
 
 }

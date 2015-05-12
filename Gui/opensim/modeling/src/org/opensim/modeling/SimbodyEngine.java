@@ -90,48 +90,44 @@ public class SimbodyEngine extends OpenSimObject {
     opensimModelJNI.SimbodyEngine_connectSimbodyEngineToModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
-  public Body getGroundBody() {
-    return new Body(opensimModelJNI.SimbodyEngine_getGroundBody(swigCPtr, this), false);
+  public void getPosition(State s, PhysicalFrame aBody, Vec3 aPoint, Vec3 rPos) {
+    opensimModelJNI.SimbodyEngine_getPosition(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(aPoint), aPoint, Vec3.getCPtr(rPos), rPos);
   }
 
-  public void getPosition(State s, Body aBody, Vec3 aPoint, Vec3 rPos) {
-    opensimModelJNI.SimbodyEngine_getPosition(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, Vec3.getCPtr(aPoint), aPoint, Vec3.getCPtr(rPos), rPos);
+  public void getVelocity(State s, PhysicalFrame aBody, Vec3 aPoint, Vec3 rVel) {
+    opensimModelJNI.SimbodyEngine_getVelocity(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(aPoint), aPoint, Vec3.getCPtr(rVel), rVel);
   }
 
-  public void getVelocity(State s, Body aBody, Vec3 aPoint, Vec3 rVel) {
-    opensimModelJNI.SimbodyEngine_getVelocity(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, Vec3.getCPtr(aPoint), aPoint, Vec3.getCPtr(rVel), rVel);
+  public void getAcceleration(State s, PhysicalFrame aBody, Vec3 aPoint, Vec3 rAcc) {
+    opensimModelJNI.SimbodyEngine_getAcceleration(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(aPoint), aPoint, Vec3.getCPtr(rAcc), rAcc);
   }
 
-  public void getAcceleration(State s, Body aBody, Vec3 aPoint, Vec3 rAcc) {
-    opensimModelJNI.SimbodyEngine_getAcceleration(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, Vec3.getCPtr(aPoint), aPoint, Vec3.getCPtr(rAcc), rAcc);
+  public void getDirectionCosines(State s, PhysicalFrame aBody, SWIGTYPE_p_a_3__double rDirCos) {
+    opensimModelJNI.SimbodyEngine_getDirectionCosines__SWIG_0(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, SWIGTYPE_p_a_3__double.getCPtr(rDirCos));
   }
 
-  public void getDirectionCosines(State s, Body aBody, SWIGTYPE_p_a_3__double rDirCos) {
-    opensimModelJNI.SimbodyEngine_getDirectionCosines__SWIG_0(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, SWIGTYPE_p_a_3__double.getCPtr(rDirCos));
+  public void getDirectionCosines(State s, PhysicalFrame aBody, SWIGTYPE_p_double rDirCos) {
+    opensimModelJNI.SimbodyEngine_getDirectionCosines__SWIG_1(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, SWIGTYPE_p_double.getCPtr(rDirCos));
   }
 
-  public void getDirectionCosines(State s, Body aBody, SWIGTYPE_p_double rDirCos) {
-    opensimModelJNI.SimbodyEngine_getDirectionCosines__SWIG_1(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, SWIGTYPE_p_double.getCPtr(rDirCos));
+  public void getAngularVelocity(State s, PhysicalFrame aBody, Vec3 rAngVel) {
+    opensimModelJNI.SimbodyEngine_getAngularVelocity(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(rAngVel), rAngVel);
   }
 
-  public void getAngularVelocity(State s, Body aBody, Vec3 rAngVel) {
-    opensimModelJNI.SimbodyEngine_getAngularVelocity(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, Vec3.getCPtr(rAngVel), rAngVel);
+  public void getAngularVelocityBodyLocal(State s, PhysicalFrame aBody, Vec3 rAngVel) {
+    opensimModelJNI.SimbodyEngine_getAngularVelocityBodyLocal(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(rAngVel), rAngVel);
   }
 
-  public void getAngularVelocityBodyLocal(State s, Body aBody, Vec3 rAngVel) {
-    opensimModelJNI.SimbodyEngine_getAngularVelocityBodyLocal(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, Vec3.getCPtr(rAngVel), rAngVel);
+  public void getAngularAcceleration(State s, PhysicalFrame aBody, Vec3 rAngAcc) {
+    opensimModelJNI.SimbodyEngine_getAngularAcceleration(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(rAngAcc), rAngAcc);
   }
 
-  public void getAngularAcceleration(State s, Body aBody, Vec3 rAngAcc) {
-    opensimModelJNI.SimbodyEngine_getAngularAcceleration(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, Vec3.getCPtr(rAngAcc), rAngAcc);
+  public void getAngularAccelerationBodyLocal(State s, PhysicalFrame aBody, Vec3 rAngAcc) {
+    opensimModelJNI.SimbodyEngine_getAngularAccelerationBodyLocal(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(rAngAcc), rAngAcc);
   }
 
-  public void getAngularAccelerationBodyLocal(State s, Body aBody, Vec3 rAngAcc) {
-    opensimModelJNI.SimbodyEngine_getAngularAccelerationBodyLocal(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, Vec3.getCPtr(rAngAcc), rAngAcc);
-  }
-
-  public Transform getTransform(State s, Body aBody) {
-    return new Transform(opensimModelJNI.SimbodyEngine_getTransform(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody), true);
+  public Transform getTransform(State s, PhysicalFrame aBody) {
+    return new Transform(opensimModelJNI.SimbodyEngine_getTransform(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody), true);
   }
 
   public void computeReactions(State s, VectorOfVec3 rForces, VectorOfVec3 rTorques) {
@@ -142,40 +138,40 @@ public class SimbodyEngine extends OpenSimObject {
     opensimModelJNI.SimbodyEngine_formCompleteStorages(swigCPtr, this, State.getCPtr(s), s, Storage.getCPtr(aQIn), aQIn, SWIGTYPE_p_p_OpenSim__Storage.getCPtr(rQComplete), SWIGTYPE_p_p_OpenSim__Storage.getCPtr(rUComplete));
   }
 
-  public void formEulerTransform(State s, Body aBody, SWIGTYPE_p_double rE) {
-    opensimModelJNI.SimbodyEngine_formEulerTransform(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody, SWIGTYPE_p_double.getCPtr(rE));
+  public void formEulerTransform(State s, PhysicalFrame aBody, SWIGTYPE_p_double rE) {
+    opensimModelJNI.SimbodyEngine_formEulerTransform(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, SWIGTYPE_p_double.getCPtr(rE));
   }
 
-  public void transform(State s, Body aBodyFrom, double[] aVec, Body aBodyTo, double[] rVec) {
-    opensimModelJNI.SimbodyEngine_transform__SWIG_0(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBodyFrom), aBodyFrom, aVec, Body.getCPtr(aBodyTo), aBodyTo, rVec);
+  public void transform(State s, PhysicalFrame aBodyFrom, double[] aVec, PhysicalFrame aBodyTo, double[] rVec) {
+    opensimModelJNI.SimbodyEngine_transform__SWIG_0(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBodyFrom), aBodyFrom, aVec, PhysicalFrame.getCPtr(aBodyTo), aBodyTo, rVec);
   }
 
-  public void transform(State s, Body aBodyFrom, Vec3 aVec, Body aBodyTo, Vec3 rVec) {
-    opensimModelJNI.SimbodyEngine_transform__SWIG_1(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBodyFrom), aBodyFrom, Vec3.getCPtr(aVec), aVec, Body.getCPtr(aBodyTo), aBodyTo, Vec3.getCPtr(rVec), rVec);
+  public void transform(State s, PhysicalFrame aBodyFrom, Vec3 aVec, PhysicalFrame aBodyTo, Vec3 rVec) {
+    opensimModelJNI.SimbodyEngine_transform__SWIG_1(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBodyFrom), aBodyFrom, Vec3.getCPtr(aVec), aVec, PhysicalFrame.getCPtr(aBodyTo), aBodyTo, Vec3.getCPtr(rVec), rVec);
   }
 
-  public void transformPosition(State s, Body aBodyFrom, double[] aPos, Body aBodyTo, double[] rPos) {
-    opensimModelJNI.SimbodyEngine_transformPosition__SWIG_0(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBodyFrom), aBodyFrom, aPos, Body.getCPtr(aBodyTo), aBodyTo, rPos);
+  public void transformPosition(State s, PhysicalFrame aBodyFrom, double[] aPos, PhysicalFrame aBodyTo, double[] rPos) {
+    opensimModelJNI.SimbodyEngine_transformPosition__SWIG_0(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBodyFrom), aBodyFrom, aPos, PhysicalFrame.getCPtr(aBodyTo), aBodyTo, rPos);
   }
 
-  public void transformPosition(State s, Body aBodyFrom, Vec3 aPos, Body aBodyTo, Vec3 rPos) {
-    opensimModelJNI.SimbodyEngine_transformPosition__SWIG_1(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBodyFrom), aBodyFrom, Vec3.getCPtr(aPos), aPos, Body.getCPtr(aBodyTo), aBodyTo, Vec3.getCPtr(rPos), rPos);
+  public void transformPosition(State s, PhysicalFrame aBodyFrom, Vec3 aPos, PhysicalFrame aBodyTo, Vec3 rPos) {
+    opensimModelJNI.SimbodyEngine_transformPosition__SWIG_1(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBodyFrom), aBodyFrom, Vec3.getCPtr(aPos), aPos, PhysicalFrame.getCPtr(aBodyTo), aBodyTo, Vec3.getCPtr(rPos), rPos);
   }
 
-  public void transformPosition(State s, Body aBodyFrom, double[] aPos, double[] rPos) {
-    opensimModelJNI.SimbodyEngine_transformPosition__SWIG_2(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBodyFrom), aBodyFrom, aPos, rPos);
+  public void transformPosition(State s, PhysicalFrame aBodyFrom, double[] aPos, double[] rPos) {
+    opensimModelJNI.SimbodyEngine_transformPosition__SWIG_2(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBodyFrom), aBodyFrom, aPos, rPos);
   }
 
-  public void transformPosition(State s, Body aBodyFrom, Vec3 aPos, Vec3 rPos) {
-    opensimModelJNI.SimbodyEngine_transformPosition__SWIG_3(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBodyFrom), aBodyFrom, Vec3.getCPtr(aPos), aPos, Vec3.getCPtr(rPos), rPos);
+  public void transformPosition(State s, PhysicalFrame aBodyFrom, Vec3 aPos, Vec3 rPos) {
+    opensimModelJNI.SimbodyEngine_transformPosition__SWIG_3(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBodyFrom), aBodyFrom, Vec3.getCPtr(aPos), aPos, Vec3.getCPtr(rPos), rPos);
   }
 
-  public double calcDistance(State s, Body aBody1, double[] aPoint1, Body aBody2, double[] aPoint2) {
-    return opensimModelJNI.SimbodyEngine_calcDistance__SWIG_0(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody1), aBody1, aPoint1, Body.getCPtr(aBody2), aBody2, aPoint2);
+  public double calcDistance(State s, PhysicalFrame aBody1, Vec3 aPoint1, PhysicalFrame aBody2, Vec3 aPoint2) {
+    return opensimModelJNI.SimbodyEngine_calcDistance__SWIG_0(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody1), aBody1, Vec3.getCPtr(aPoint1), aPoint1, PhysicalFrame.getCPtr(aBody2), aBody2, Vec3.getCPtr(aPoint2), aPoint2);
   }
 
-  public double calcDistance(State s, Body aBody1, Vec3 aPoint1, Body aBody2, Vec3 aPoint2) {
-    return opensimModelJNI.SimbodyEngine_calcDistance__SWIG_1(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody1), aBody1, Vec3.getCPtr(aPoint1), aPoint1, Body.getCPtr(aBody2), aBody2, Vec3.getCPtr(aPoint2), aPoint2);
+  public double calcDistance(State s, PhysicalFrame aBody1, double[] aPoint1, PhysicalFrame aBody2, double[] aPoint2) {
+    return opensimModelJNI.SimbodyEngine_calcDistance__SWIG_1(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody1), aBody1, aPoint1, PhysicalFrame.getCPtr(aBody2), aBody2, aPoint2);
   }
 
   public void convertRadiansToDegrees(Storage rStorage) {

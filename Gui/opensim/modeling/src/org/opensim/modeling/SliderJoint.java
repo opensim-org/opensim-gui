@@ -61,12 +61,12 @@ public class SliderJoint extends Joint {
     this(opensimModelJNI.new_SliderJoint__SWIG_0(), true);
   }
 
-  public SliderJoint(String name, Body parent, Vec3 locationInParent, Vec3 orientationInParent, Body child, Vec3 locationInchild, Vec3 orientationInChild, boolean reverse) {
-    this(opensimModelJNI.new_SliderJoint__SWIG_1(name, Body.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, Body.getCPtr(child), child, Vec3.getCPtr(locationInchild), locationInchild, Vec3.getCPtr(orientationInChild), orientationInChild, reverse), true);
+  public SliderJoint(String name, PhysicalFrame parent, Vec3 locationInParent, Vec3 orientationInParent, PhysicalFrame child, Vec3 locationInchild, Vec3 orientationInChild, boolean reverse) {
+    this(opensimModelJNI.new_SliderJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInchild), locationInchild, Vec3.getCPtr(orientationInChild), orientationInChild, reverse), true);
   }
 
-  public SliderJoint(String name, Body parent, Vec3 locationInParent, Vec3 orientationInParent, Body child, Vec3 locationInchild, Vec3 orientationInChild) {
-    this(opensimModelJNI.new_SliderJoint__SWIG_2(name, Body.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, Body.getCPtr(child), child, Vec3.getCPtr(locationInchild), locationInchild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
+  public SliderJoint(String name, PhysicalFrame parent, Vec3 locationInParent, Vec3 orientationInParent, PhysicalFrame child, Vec3 locationInchild, Vec3 orientationInChild) {
+    this(opensimModelJNI.new_SliderJoint__SWIG_2(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInchild), locationInchild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
   }
 
   public int numCoordinates() {

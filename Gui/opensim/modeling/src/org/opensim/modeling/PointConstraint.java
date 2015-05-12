@@ -57,78 +57,6 @@ public class PointConstraint extends Constraint {
     return opensimModelJNI.PointConstraint_getConcreteClassName(swigCPtr, this);
   }
 
-  public void copyProperty_body_1(PointConstraint source) {
-    opensimModelJNI.PointConstraint_copyProperty_body_1(swigCPtr, this, PointConstraint.getCPtr(source), source);
-  }
-
-  public String get_body_1(int i) {
-    return opensimModelJNI.PointConstraint_get_body_1__SWIG_0(swigCPtr, this, i);
-  }
-
-  public SWIGTYPE_p_std__string upd_body_1(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.PointConstraint_upd_body_1__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_body_1(int i, String value) {
-    opensimModelJNI.PointConstraint_set_body_1__SWIG_0(swigCPtr, this, i, value);
-  }
-
-  public int append_body_1(String value) {
-    return opensimModelJNI.PointConstraint_append_body_1(swigCPtr, this, value);
-  }
-
-  public void constructProperty_body_1(String initValue) {
-    opensimModelJNI.PointConstraint_constructProperty_body_1(swigCPtr, this, initValue);
-  }
-
-  public String get_body_1() {
-    return opensimModelJNI.PointConstraint_get_body_1__SWIG_1(swigCPtr, this);
-  }
-
-  public SWIGTYPE_p_std__string upd_body_1() {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.PointConstraint_upd_body_1__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_body_1(String value) {
-    opensimModelJNI.PointConstraint_set_body_1__SWIG_1(swigCPtr, this, value);
-  }
-
-  public void copyProperty_body_2(PointConstraint source) {
-    opensimModelJNI.PointConstraint_copyProperty_body_2(swigCPtr, this, PointConstraint.getCPtr(source), source);
-  }
-
-  public String get_body_2(int i) {
-    return opensimModelJNI.PointConstraint_get_body_2__SWIG_0(swigCPtr, this, i);
-  }
-
-  public SWIGTYPE_p_std__string upd_body_2(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.PointConstraint_upd_body_2__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_body_2(int i, String value) {
-    opensimModelJNI.PointConstraint_set_body_2__SWIG_0(swigCPtr, this, i, value);
-  }
-
-  public int append_body_2(String value) {
-    return opensimModelJNI.PointConstraint_append_body_2(swigCPtr, this, value);
-  }
-
-  public void constructProperty_body_2(String initValue) {
-    opensimModelJNI.PointConstraint_constructProperty_body_2(swigCPtr, this, initValue);
-  }
-
-  public String get_body_2() {
-    return opensimModelJNI.PointConstraint_get_body_2__SWIG_1(swigCPtr, this);
-  }
-
-  public SWIGTYPE_p_std__string upd_body_2() {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.PointConstraint_upd_body_2__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_body_2(String value) {
-    opensimModelJNI.PointConstraint_set_body_2__SWIG_1(swigCPtr, this, value);
-  }
-
   public void copyProperty_location_body_1(PointConstraint source) {
     opensimModelJNI.PointConstraint_copyProperty_location_body_1(swigCPtr, this, PointConstraint.getCPtr(source), source);
   }
@@ -205,8 +133,8 @@ public class PointConstraint extends Constraint {
     this(opensimModelJNI.new_PointConstraint__SWIG_0(), true);
   }
 
-  public PointConstraint(Body body1, Vec3 locationBody1, Body body2, Vec3 locationBody2) {
-    this(opensimModelJNI.new_PointConstraint__SWIG_1(Body.getCPtr(body1), body1, Vec3.getCPtr(locationBody1), locationBody1, Body.getCPtr(body2), body2, Vec3.getCPtr(locationBody2), locationBody2), true);
+  public PointConstraint(PhysicalFrame body1, Vec3 locationBody1, PhysicalFrame body2, Vec3 locationBody2) {
+    this(opensimModelJNI.new_PointConstraint__SWIG_1(PhysicalFrame.getCPtr(body1), body1, Vec3.getCPtr(locationBody1), locationBody1, PhysicalFrame.getCPtr(body2), body2, Vec3.getCPtr(locationBody2), locationBody2), true);
   }
 
   public void setBody1ByName(String aBodyName) {

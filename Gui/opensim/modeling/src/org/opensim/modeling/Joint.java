@@ -273,20 +273,20 @@ public class Joint extends ModelComponent {
     opensimModelJNI.Joint_set_reverse__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setChildBodyName(String name) {
-    opensimModelJNI.Joint_setChildBodyName(swigCPtr, this, name);
+  public void setChildFrameName(String name) {
+    opensimModelJNI.Joint_setChildFrameName(swigCPtr, this, name);
   }
 
-  public String getChildBodyName() {
-    return opensimModelJNI.Joint_getChildBodyName(swigCPtr, this);
+  public String getChildFrameName() {
+    return opensimModelJNI.Joint_getChildFrameName(swigCPtr, this);
   }
 
-  public void setChildBody(Body child) {
-    opensimModelJNI.Joint_setChildBody(swigCPtr, this, Body.getCPtr(child), child);
+  public void setChildFrame(PhysicalFrame child) {
+    opensimModelJNI.Joint_setChildFrame(swigCPtr, this, PhysicalFrame.getCPtr(child), child);
   }
 
-  public Body getChildBody() {
-    return new Body(opensimModelJNI.Joint_getChildBody(swigCPtr, this), false);
+  public PhysicalFrame getChildFrame() {
+    return new PhysicalFrame(opensimModelJNI.Joint_getChildFrame(swigCPtr, this), false);
   }
 
   public void setLocationInChild(Vec3 aLocation) {
@@ -305,20 +305,20 @@ public class Joint extends ModelComponent {
     return new Vec3(opensimModelJNI.Joint_getOrientationInChild(swigCPtr, this), false);
   }
 
-  public void setParentBodyName(String aName) {
-    opensimModelJNI.Joint_setParentBodyName(swigCPtr, this, aName);
+  public void setParentFrameName(String aName) {
+    opensimModelJNI.Joint_setParentFrameName(swigCPtr, this, aName);
   }
 
-  public String getParentBodyName() {
-    return opensimModelJNI.Joint_getParentBodyName(swigCPtr, this);
+  public String getParentFrameName() {
+    return opensimModelJNI.Joint_getParentFrameName(swigCPtr, this);
   }
 
-  public void setParentBody(Body parent) {
-    opensimModelJNI.Joint_setParentBody(swigCPtr, this, Body.getCPtr(parent), parent);
+  public void setParentFrame(PhysicalFrame parent) {
+    opensimModelJNI.Joint_setParentFrame(swigCPtr, this, PhysicalFrame.getCPtr(parent), parent);
   }
 
-  public Body getParentBody() {
-    return new Body(opensimModelJNI.Joint_getParentBody(swigCPtr, this), false);
+  public PhysicalFrame getParentFrame() {
+    return new PhysicalFrame(opensimModelJNI.Joint_getParentFrame(swigCPtr, this), false);
   }
 
   public void setLocationInParent(Vec3 aLocation) {

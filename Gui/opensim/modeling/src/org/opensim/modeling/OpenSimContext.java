@@ -89,16 +89,16 @@ public class OpenSimContext extends OpenSimObject {
     opensimModelJNI.OpenSimContext_resetStateToDefault(swigCPtr, this);
   }
 
-  public void transformPosition(Body body, double[] offset, double[] gOffset) {
-    opensimModelJNI.OpenSimContext_transformPosition(swigCPtr, this, Body.getCPtr(body), body, offset, gOffset);
+  public void transformPosition(PhysicalFrame body, double[] offset, double[] gOffset) {
+    opensimModelJNI.OpenSimContext_transformPosition(swigCPtr, this, PhysicalFrame.getCPtr(body), body, offset, gOffset);
   }
 
-  public Transform getTransform(Body body) {
-    return new Transform(opensimModelJNI.OpenSimContext_getTransform(swigCPtr, this, Body.getCPtr(body), body), true);
+  public Transform getTransform(PhysicalFrame body) {
+    return new Transform(opensimModelJNI.OpenSimContext_getTransform(swigCPtr, this, PhysicalFrame.getCPtr(body), body), true);
   }
 
-  public void transform(Body ground, double[] d, Body body, double[] dragVectorBody) {
-    opensimModelJNI.OpenSimContext_transform(swigCPtr, this, Body.getCPtr(ground), ground, d, Body.getCPtr(body), body, dragVectorBody);
+  public void transform(PhysicalFrame ground, double[] d, PhysicalFrame body, double[] dragVectorBody) {
+    opensimModelJNI.OpenSimContext_transform(swigCPtr, this, PhysicalFrame.getCPtr(ground), ground, d, PhysicalFrame.getCPtr(body), body, dragVectorBody);
   }
 
   public double getValue(Coordinate coord) {
@@ -201,8 +201,8 @@ public class OpenSimContext extends OpenSimObject {
     opensimModelJNI.OpenSimContext_setZCoordinate(swigCPtr, this, MovingPathPoint.getCPtr(mmp), mmp, Coordinate.getCPtr(newCoord), newCoord);
   }
 
-  public void setBody(PathPoint pathPoint, Body newBody) {
-    opensimModelJNI.OpenSimContext_setBody__SWIG_0(swigCPtr, this, PathPoint.getCPtr(pathPoint), pathPoint, Body.getCPtr(newBody), newBody);
+  public void setBody(PathPoint pathPoint, PhysicalFrame newBody) {
+    opensimModelJNI.OpenSimContext_setBody__SWIG_0(swigCPtr, this, PathPoint.getCPtr(pathPoint), pathPoint, PhysicalFrame.getCPtr(newBody), newBody);
   }
 
   public void setCoordinate(ConditionalPathPoint via, Coordinate newCoord) {
@@ -229,8 +229,8 @@ public class OpenSimContext extends OpenSimObject {
     opensimModelJNI.OpenSimContext_setEndPoint(swigCPtr, this, PathWrap.getCPtr(mw), mw, newEndPt);
   }
 
-  public void addPathPoint(GeometryPath p, int menuChoice, Body body) {
-    opensimModelJNI.OpenSimContext_addPathPoint(swigCPtr, this, GeometryPath.getCPtr(p), p, menuChoice, Body.getCPtr(body), body);
+  public void addPathPoint(GeometryPath p, int menuChoice, PhysicalFrame body) {
+    opensimModelJNI.OpenSimContext_addPathPoint(swigCPtr, this, GeometryPath.getCPtr(p), p, menuChoice, PhysicalFrame.getCPtr(body), body);
   }
 
   public boolean deletePathPoint(GeometryPath p, int menuChoice) {
@@ -261,8 +261,8 @@ public class OpenSimContext extends OpenSimObject {
     opensimModelJNI.OpenSimContext_deletePathWrap(swigCPtr, this, GeometryPath.getCPtr(p), p, num);
   }
 
-  public void setBody(Marker currentMarker, Body newBody, boolean b) {
-    opensimModelJNI.OpenSimContext_setBody__SWIG_1(swigCPtr, this, Marker.getCPtr(currentMarker), currentMarker, Body.getCPtr(newBody), newBody, b);
+  public void setBody(Marker currentMarker, PhysicalFrame newBody, boolean b) {
+    opensimModelJNI.OpenSimContext_setBody__SWIG_1(swigCPtr, this, Marker.getCPtr(currentMarker), currentMarker, PhysicalFrame.getCPtr(newBody), newBody, b);
   }
 
   public int replaceMarkerSet(Model model, MarkerSet aMarkerSet) {

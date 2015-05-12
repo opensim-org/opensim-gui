@@ -97,16 +97,16 @@ public class PathPoint extends OpenSimObject {
     opensimModelJNI.PathPoint_setLocation__SWIG_2(swigCPtr, this, State.getCPtr(s), s, pt);
   }
 
-  public void setBody(Body aBody) {
-    opensimModelJNI.PathPoint_setBody(swigCPtr, this, Body.getCPtr(aBody), aBody);
+  public void setBody(PhysicalFrame aBody) {
+    opensimModelJNI.PathPoint_setBody(swigCPtr, this, PhysicalFrame.getCPtr(aBody), aBody);
   }
 
-  public void changeBodyPreserveLocation(State s, Body aBody) {
-    opensimModelJNI.PathPoint_changeBodyPreserveLocation(swigCPtr, this, State.getCPtr(s), s, Body.getCPtr(aBody), aBody);
+  public void changeBodyPreserveLocation(State s, PhysicalFrame aBody) {
+    opensimModelJNI.PathPoint_changeBodyPreserveLocation(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody);
   }
 
-  public Body getBody() {
-    return new Body(opensimModelJNI.PathPoint_getBody(swigCPtr, this), false);
+  public PhysicalFrame getBody() {
+    return new PhysicalFrame(opensimModelJNI.PathPoint_getBody(swigCPtr, this), false);
   }
 
   public String getBodyName() {

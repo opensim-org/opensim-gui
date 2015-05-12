@@ -82,8 +82,4 @@ public class AnalysisWrapper extends Analysis {
     opensimModelJNI.AnalysisWrapper_director_connect(this, swigCPtr, swigCMemOwn, true);
   }
 
-  public double getSimulationTime() {
-    return opensimModelJNI.AnalysisWrapper_getSimulationTime(swigCPtr, this);
-  }
-
 }

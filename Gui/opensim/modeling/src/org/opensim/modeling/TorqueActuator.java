@@ -249,12 +249,12 @@ public class TorqueActuator extends ScalarActuator {
     this(opensimModelJNI.new_TorqueActuator__SWIG_0(), true);
   }
 
-  public TorqueActuator(Body bodyA, Body bodyB, Vec3 axis, boolean axisInGround) {
-    this(opensimModelJNI.new_TorqueActuator__SWIG_1(Body.getCPtr(bodyA), bodyA, Body.getCPtr(bodyB), bodyB, Vec3.getCPtr(axis), axis, axisInGround), true);
+  public TorqueActuator(PhysicalFrame bodyA, PhysicalFrame bodyB, Vec3 axis, boolean axisInGround) {
+    this(opensimModelJNI.new_TorqueActuator__SWIG_1(PhysicalFrame.getCPtr(bodyA), bodyA, PhysicalFrame.getCPtr(bodyB), bodyB, Vec3.getCPtr(axis), axis, axisInGround), true);
   }
 
-  public TorqueActuator(Body bodyA, Body bodyB, Vec3 axis) {
-    this(opensimModelJNI.new_TorqueActuator__SWIG_2(Body.getCPtr(bodyA), bodyA, Body.getCPtr(bodyB), bodyB, Vec3.getCPtr(axis), axis), true);
+  public TorqueActuator(PhysicalFrame bodyA, PhysicalFrame bodyB, Vec3 axis) {
+    this(opensimModelJNI.new_TorqueActuator__SWIG_2(PhysicalFrame.getCPtr(bodyA), bodyA, PhysicalFrame.getCPtr(bodyB), bodyB, Vec3.getCPtr(axis), axis), true);
   }
 
   public void setAxis(Vec3 axis) {
@@ -281,20 +281,20 @@ public class TorqueActuator extends ScalarActuator {
     return opensimModelJNI.TorqueActuator_getOptimalForce(swigCPtr, this);
   }
 
-  public void setBodyA(Body body) {
-    opensimModelJNI.TorqueActuator_setBodyA(swigCPtr, this, Body.getCPtr(body), body);
+  public void setBodyA(PhysicalFrame body) {
+    opensimModelJNI.TorqueActuator_setBodyA(swigCPtr, this, PhysicalFrame.getCPtr(body), body);
   }
 
-  public void setBodyB(Body body) {
-    opensimModelJNI.TorqueActuator_setBodyB(swigCPtr, this, Body.getCPtr(body), body);
+  public void setBodyB(PhysicalFrame body) {
+    opensimModelJNI.TorqueActuator_setBodyB(swigCPtr, this, PhysicalFrame.getCPtr(body), body);
   }
 
-  public Body getBodyA() {
-    return new Body(opensimModelJNI.TorqueActuator_getBodyA(swigCPtr, this), false);
+  public PhysicalFrame getBodyA() {
+    return new PhysicalFrame(opensimModelJNI.TorqueActuator_getBodyA(swigCPtr, this), false);
   }
 
-  public Body getBodyB() {
-    return new Body(opensimModelJNI.TorqueActuator_getBodyB(swigCPtr, this), false);
+  public PhysicalFrame getBodyB() {
+    return new PhysicalFrame(opensimModelJNI.TorqueActuator_getBodyB(swigCPtr, this), false);
   }
 
 }

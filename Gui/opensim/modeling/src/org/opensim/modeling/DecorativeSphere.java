@@ -96,8 +96,4 @@ public class DecorativeSphere extends DecorativeGeometry {
     return (cPtr == 0) ? null : new DecorativeSphere(cPtr, true);
   }
 
-  public boolean equals(DecorativeSphere other) {
-    return opensimModelJNI.DecorativeSphere_equals(swigCPtr, this, DecorativeSphere.getCPtr(other), other);
-  }
-
 }
