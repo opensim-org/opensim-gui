@@ -34,14 +34,11 @@
 
 package org.opensim.view;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.Iterator;
 import org.opensim.modeling.*;
-import org.opensim.modeling.Geometry.DisplayPreference;
 import org.opensim.view.pub.ModelVisualsVtk;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
@@ -56,10 +53,8 @@ import vtk.vtkPolyDataAlgorithm;
 import vtk.vtkProp3D;
 import vtk.vtkProp3DCollection;
 import vtk.vtkSphereSource;
-import vtk.vtkStripper;
 import vtk.vtkTransform;
 import vtk.vtkTransformPolyDataFilter;
-import vtk.vtkArrowSource;
 import vtk.vtkLineSource;
 import vtk.vtkProp;
 
@@ -184,16 +179,19 @@ public class SingleModelVisuals implements ModelVisualsVtk {
     {           
         //int bid0 = dg.getBodyId();
         vtkAssembly modelAssembly = new vtkAssembly();
-        // Keep track of ground body to avoid recomputation
-        BodiesList bodies = model.getBodiesList();
-        BodyIterator body = bodies.begin();
-        while (!body.equals(bodies.end())) {
-             int id = body.getMobilizedBodyIndex();
-            // Body actor
-            BodyDisplayer bodyRep = new BodyDisplayer(modelAssembly, body.__deref__(),
-                    mapObject2VtkObjects, mapVtkObjects2Objects);
-            mapBodyIndicesToDisplayers.put(id, bodyRep);
-            body.next();
+        // Keep track of ground frame to avoid recomputation
+        FramesList frames = model.getFramesList();
+        FrameIterator frame = frames.begin();
+        while (!frame.equals(frames.end())) {
+            PhysicalFrame physicalFrame = PhysicalFrame.safeDownCast(frame.__deref__());
+            if (physicalFrame!=null){
+                int id = physicalFrame.getMobilizedBodyIndex();
+               // Body actor
+               BodyDisplayer bodyRep = new BodyDisplayer(modelAssembly, physicalFrame,
+                       mapObject2VtkObjects, mapVtkObjects2Objects);
+               mapBodyIndicesToDisplayers.put(id, bodyRep);
+               }
+            frame.next();
         }
         dgi.setModelAssembly(modelAssembly, mapBodyIndicesToDisplayers, model, mdh);
         ComponentsList mcList = model.getComponentsList();
@@ -230,7 +228,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
      */
    public void updateModelDisplay(Model model) {
        
-      // Cycle thru bodies and update their transforms from the kinematics engine
+      // Cycle thru frames and update their transforms from the kinematics engine
        OpenSimContext context=OpenSimDB.getInstance().getContext(model);
         context.realizePosition();
         BodiesList bodies = model.getBodiesList();
@@ -251,8 +249,13 @@ public class SingleModelVisuals implements ModelVisualsVtk {
         ComponentIterator mcIter = mcList.begin();
         mcIter.next(); // Skip model itself
         while (!mcIter.equals(mcList.end())){
-            //System.out.println("In createModelAssembly Type, name:"+mcIter.__deref__().getConcreteClassName()+mcIter.__deref__().getName());
-            dgi.updateDecorations(mcIter.__deref__());
+            //System.out.println("In updateModelDisplay Type, name:"+mcIter.__deref__().getConcreteClassName()+" "+mcIter.__deref__().getName());
+            if (dgi.isNewComponent(mcIter.__deref__())){
+                System.out.println("New Component "+mcIter.__deref__().getName());
+                addGeometryForComponent(mcIter.__deref__(), model);
+            }
+            else
+                dgi.updateDecorations(mcIter.__deref__());
             mcIter.next();
         }
        
@@ -290,7 +293,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
    }
 
      /**
-      * Get the vtkTransform matrix between ground and a body frame,
+      * Get the vtkTransform matrix between ground and a frame frame,
       */
      vtkMatrix4x4 getBodyTransform(Model model, Body body)
      {
