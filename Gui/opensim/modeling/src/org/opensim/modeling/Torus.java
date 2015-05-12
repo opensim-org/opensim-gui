@@ -137,10 +137,6 @@ public class Torus extends AnalyticGeometry {
     this(opensimModelJNI.new_Torus__SWIG_1(ringRadius, crossSectionRadius), true);
   }
 
-  public void getTorusParams(double[] params) {
-    opensimModelJNI.Torus_getTorusParams(swigCPtr, this, params);
-  }
-
   public void createDecorativeGeometry(ArrayDecorativeGeometry decoGeoms) {
     opensimModelJNI.Torus_createDecorativeGeometry(swigCPtr, this, ArrayDecorativeGeometry.getCPtr(decoGeoms), decoGeoms);
   }

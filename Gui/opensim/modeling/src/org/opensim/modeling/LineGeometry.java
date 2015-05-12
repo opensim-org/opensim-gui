@@ -138,19 +138,11 @@ public class LineGeometry extends Geometry {
   }
 
   public void getPoints(Vec3 rPoint1, Vec3 rPoint2) {
-    opensimModelJNI.LineGeometry_getPoints__SWIG_0(swigCPtr, this, Vec3.getCPtr(rPoint1), rPoint1, Vec3.getCPtr(rPoint2), rPoint2);
-  }
-
-  public void getPoints(double[] rPoint1, double[] rPoint2) {
-    opensimModelJNI.LineGeometry_getPoints__SWIG_1(swigCPtr, this, rPoint1, rPoint2);
+    opensimModelJNI.LineGeometry_getPoints(swigCPtr, this, Vec3.getCPtr(rPoint1), rPoint1, Vec3.getCPtr(rPoint2), rPoint2);
   }
 
   public void setPoints(Vec3 aPoint1, Vec3 aPoint2) {
-    opensimModelJNI.LineGeometry_setPoints__SWIG_0(swigCPtr, this, Vec3.getCPtr(aPoint1), aPoint1, Vec3.getCPtr(aPoint2), aPoint2);
-  }
-
-  public void setPoints(double[] aPoint1, double[] aPoint2) {
-    opensimModelJNI.LineGeometry_setPoints__SWIG_1(swigCPtr, this, aPoint1, aPoint2);
+    opensimModelJNI.LineGeometry_setPoints(swigCPtr, this, Vec3.getCPtr(aPoint1), aPoint1, Vec3.getCPtr(aPoint2), aPoint2);
   }
 
   public void createDecorativeGeometry(ArrayDecorativeGeometry decoGeoms) {

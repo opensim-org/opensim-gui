@@ -61,16 +61,16 @@ public class ModelComponentIterator {
     return opensimModelJNI.ModelComponentIterator_getConcreteClassName(swigCPtr, this);
   }
 
-  public Geometry get_GeometrySet(int i) {
-    return new Geometry(opensimModelJNI.ModelComponentIterator_get_GeometrySet(swigCPtr, this, i), false);
+  public Geometry get_geometry(int i) {
+    return new Geometry(opensimModelJNI.ModelComponentIterator_get_geometry(swigCPtr, this, i), false);
   }
 
   public Model getModel() {
     return new Model(opensimModelJNI.ModelComponentIterator_getModel(swigCPtr, this), false);
   }
 
-  public int getGeometrySize() {
-    return opensimModelJNI.ModelComponentIterator_getGeometrySize(swigCPtr, this);
+  public int getNumGeometry() {
+    return opensimModelJNI.ModelComponentIterator_getNumGeometry(swigCPtr, this);
   }
 
   public void addToSystem(SWIGTYPE_p_SimTK__MultibodySystem system) {

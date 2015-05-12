@@ -57,76 +57,40 @@ public class LineAppearance extends BaseAppearance {
     return opensimModelJNI.LineAppearance_getConcreteClassName(swigCPtr, this);
   }
 
-  public void copyProperty_radius(LineAppearance source) {
-    opensimModelJNI.LineAppearance_copyProperty_radius(swigCPtr, this, LineAppearance.getCPtr(source), source);
+  public void copyProperty_thickness(LineAppearance source) {
+    opensimModelJNI.LineAppearance_copyProperty_thickness(swigCPtr, this, LineAppearance.getCPtr(source), source);
   }
 
-  public double get_radius(int i) {
-    return opensimModelJNI.LineAppearance_get_radius__SWIG_0(swigCPtr, this, i);
+  public double get_thickness(int i) {
+    return opensimModelJNI.LineAppearance_get_thickness__SWIG_0(swigCPtr, this, i);
   }
 
-  public SWIGTYPE_p_double upd_radius(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.LineAppearance_upd_radius__SWIG_0(swigCPtr, this, i), false);
+  public SWIGTYPE_p_double upd_thickness(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.LineAppearance_upd_thickness__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_radius(int i, double value) {
-    opensimModelJNI.LineAppearance_set_radius__SWIG_0(swigCPtr, this, i, value);
+  public void set_thickness(int i, double value) {
+    opensimModelJNI.LineAppearance_set_thickness__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int append_radius(double value) {
-    return opensimModelJNI.LineAppearance_append_radius(swigCPtr, this, value);
+  public int append_thickness(double value) {
+    return opensimModelJNI.LineAppearance_append_thickness(swigCPtr, this, value);
   }
 
-  public void constructProperty_radius(double initValue) {
-    opensimModelJNI.LineAppearance_constructProperty_radius(swigCPtr, this, initValue);
+  public void constructProperty_thickness(double initValue) {
+    opensimModelJNI.LineAppearance_constructProperty_thickness(swigCPtr, this, initValue);
   }
 
-  public double get_radius() {
-    return opensimModelJNI.LineAppearance_get_radius__SWIG_1(swigCPtr, this);
+  public double get_thickness() {
+    return opensimModelJNI.LineAppearance_get_thickness__SWIG_1(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_double upd_radius() {
-    return new SWIGTYPE_p_double(opensimModelJNI.LineAppearance_upd_radius__SWIG_1(swigCPtr, this), false);
+  public SWIGTYPE_p_double upd_thickness() {
+    return new SWIGTYPE_p_double(opensimModelJNI.LineAppearance_upd_thickness__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_radius(double value) {
-    opensimModelJNI.LineAppearance_set_radius__SWIG_1(swigCPtr, this, value);
-  }
-
-  public void copyProperty_size(LineAppearance source) {
-    opensimModelJNI.LineAppearance_copyProperty_size(swigCPtr, this, LineAppearance.getCPtr(source), source);
-  }
-
-  public double get_size(int i) {
-    return opensimModelJNI.LineAppearance_get_size__SWIG_0(swigCPtr, this, i);
-  }
-
-  public SWIGTYPE_p_double upd_size(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.LineAppearance_upd_size__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_size(int i, double value) {
-    opensimModelJNI.LineAppearance_set_size__SWIG_0(swigCPtr, this, i, value);
-  }
-
-  public int append_size(double value) {
-    return opensimModelJNI.LineAppearance_append_size(swigCPtr, this, value);
-  }
-
-  public void constructProperty_size(double initValue) {
-    opensimModelJNI.LineAppearance_constructProperty_size(swigCPtr, this, initValue);
-  }
-
-  public double get_size() {
-    return opensimModelJNI.LineAppearance_get_size__SWIG_1(swigCPtr, this);
-  }
-
-  public SWIGTYPE_p_double upd_size() {
-    return new SWIGTYPE_p_double(opensimModelJNI.LineAppearance_upd_size__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_size(double value) {
-    opensimModelJNI.LineAppearance_set_size__SWIG_1(swigCPtr, this, value);
+  public void set_thickness(double value) {
+    opensimModelJNI.LineAppearance_set_thickness__SWIG_1(swigCPtr, this, value);
   }
 
   public LineAppearance() {

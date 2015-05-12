@@ -81,4 +81,12 @@ public class Frame extends ModelComponent {
     return new Transform(opensimModelJNI.Frame_findTransformInBaseFrame(swigCPtr, this), true);
   }
 
+  public void addMeshGeometry(String aGeometryFileName, Vec3 scale) {
+    opensimModelJNI.Frame_addMeshGeometry__SWIG_0(swigCPtr, this, aGeometryFileName, Vec3.getCPtr(scale), scale);
+  }
+
+  public void addMeshGeometry(String aGeometryFileName) {
+    opensimModelJNI.Frame_addMeshGeometry__SWIG_1(swigCPtr, this, aGeometryFileName);
+  }
+
 }

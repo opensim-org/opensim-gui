@@ -129,20 +129,20 @@ public class Geometry extends Component {
     opensimModelJNI.Geometry_set_Appearance__SWIG_1(swigCPtr, this, Appearance.getCPtr(value), value);
   }
 
-  public void constructConnectors() {
-    opensimModelJNI.Geometry_constructConnectors(swigCPtr, this);
-  }
-
   public void setFrameName(String name) {
     opensimModelJNI.Geometry_setFrameName(swigCPtr, this, name);
+  }
+
+  public void setFrame(Frame frame) {
+    opensimModelJNI.Geometry_setFrame(swigCPtr, this, Frame.getCPtr(frame), frame);
   }
 
   public String getFrameName() {
     return opensimModelJNI.Geometry_getFrameName(swigCPtr, this);
   }
 
-  public PhysicalFrame getFrame() {
-    return new PhysicalFrame(opensimModelJNI.Geometry_getFrame(swigCPtr, this), false);
+  public Frame getFrame() {
+    return new Frame(opensimModelJNI.Geometry_getFrame(swigCPtr, this), false);
   }
 
   public void setDecorativeGeometryTransform(ArrayDecorativeGeometry decorations, State state) {
@@ -177,16 +177,16 @@ public class Geometry extends Component {
     return Geometry.DisplayPreference.swigToEnum(opensimModelJNI.Geometry_getRepresentation(swigCPtr, this));
   }
 
-  public boolean isFrameSpecified() {
-    return opensimModelJNI.Geometry_isFrameSpecified(swigCPtr, this);
-  }
-
   public void createDecorativeGeometry(ArrayDecorativeGeometry arg0) {
     opensimModelJNI.Geometry_createDecorativeGeometry(swigCPtr, this, ArrayDecorativeGeometry.getCPtr(arg0), arg0);
   }
 
   public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
     opensimModelJNI.Geometry_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
+  }
+
+  public void constructConnectors() {
+    opensimModelJNI.Geometry_constructConnectors(swigCPtr, this);
   }
 
   public final static class DisplayPreference {

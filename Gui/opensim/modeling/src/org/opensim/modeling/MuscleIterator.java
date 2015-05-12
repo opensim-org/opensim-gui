@@ -461,16 +461,16 @@ public class MuscleIterator {
     opensimModelJNI.MuscleIterator_setDisabled(swigCPtr, this, State.getCPtr(s), s, disabled);
   }
 
-  public Geometry get_GeometrySet(int i) {
-    return new Geometry(opensimModelJNI.MuscleIterator_get_GeometrySet(swigCPtr, this, i), false);
+  public Geometry get_geometry(int i) {
+    return new Geometry(opensimModelJNI.MuscleIterator_get_geometry(swigCPtr, this, i), false);
   }
 
   public Model getModel() {
     return new Model(opensimModelJNI.MuscleIterator_getModel(swigCPtr, this), false);
   }
 
-  public int getGeometrySize() {
-    return opensimModelJNI.MuscleIterator_getGeometrySize(swigCPtr, this);
+  public int getNumGeometry() {
+    return opensimModelJNI.MuscleIterator_getNumGeometry(swigCPtr, this);
   }
 
   public void addToSystem(SWIGTYPE_p_SimTK__MultibodySystem system) {

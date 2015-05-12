@@ -305,12 +305,4 @@ public class ExpressionBasedPointToPointForce extends Force {
     return new ArrayDouble(opensimModelJNI.ExpressionBasedPointToPointForce_getRecordValues(swigCPtr, this, State.getCPtr(state), state), true);
   }
 
-  public void updateDisplayer(State s) {
-    opensimModelJNI.ExpressionBasedPointToPointForce_updateDisplayer(swigCPtr, this, State.getCPtr(s), s);
-  }
-
-  public void updateGeometry(State s) {
-    opensimModelJNI.ExpressionBasedPointToPointForce_updateGeometry(swigCPtr, this, State.getCPtr(s), s);
-  }
-
 }

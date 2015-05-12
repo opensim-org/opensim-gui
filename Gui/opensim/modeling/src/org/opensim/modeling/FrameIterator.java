@@ -85,16 +85,16 @@ public class FrameIterator {
     return new Transform(opensimModelJNI.FrameIterator_findTransformInBaseFrame(swigCPtr, this), true);
   }
 
-  public Geometry get_GeometrySet(int i) {
-    return new Geometry(opensimModelJNI.FrameIterator_get_GeometrySet(swigCPtr, this, i), false);
+  public Geometry get_geometry(int i) {
+    return new Geometry(opensimModelJNI.FrameIterator_get_geometry(swigCPtr, this, i), false);
   }
 
   public Model getModel() {
     return new Model(opensimModelJNI.FrameIterator_getModel(swigCPtr, this), false);
   }
 
-  public int getGeometrySize() {
-    return opensimModelJNI.FrameIterator_getGeometrySize(swigCPtr, this);
+  public int getNumGeometry() {
+    return opensimModelJNI.FrameIterator_getNumGeometry(swigCPtr, this);
   }
 
   public void addToSystem(SWIGTYPE_p_SimTK__MultibodySystem system) {
