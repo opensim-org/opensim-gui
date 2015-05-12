@@ -6,25 +6,18 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
-import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.util.NbBundle;
-import org.opensim.modeling.AbstractProperty;
-import org.opensim.modeling.Constraint;
-import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.PropertyHelper;
 import org.opensim.view.ObjectDisplayMenuAction;
-import org.opensim.view.pub.OpenSimDB;
 
 /** Node class to wrap Constraint objects */
-public class OneConstraintNode extends DisablableOpenSimObjectNode {
+public class OneConstraintNode extends DisablablModelComponentNode {
    private static ResourceBundle bundle = NbBundle.getBundle(OneConstraintNode.class);
    
    public OneConstraintNode(OpenSimObject b) {
       super(b);
       setShortDescription(bundle.getString("HINT_ConstraintNode"));
-      setChildren(Children.LEAF);      
       
    }
 

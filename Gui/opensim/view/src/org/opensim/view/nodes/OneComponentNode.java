@@ -74,5 +74,12 @@ public class OneComponentNode extends OpenSimObjectNode {
             Exceptions.printStackTrace(ex);
         }
     }
+
+    /**
+     * @return the comp
+     */
+    public Component getComp() {
+        return comp;
+    }
     
 }

@@ -13,7 +13,7 @@ import org.opensim.view.ObjectDisplayMenuAction;
 
 
 /** Node class to wrap Probe objects */
-public class OneProbeNode  extends DisablableOpenSimObjectNode {
+public class OneProbeNode  extends DisablablModelComponentNode {
    private static ResourceBundle bundle = NbBundle.getBundle(OneProbeNode.class);
    
    public OneProbeNode(OpenSimObject b) {

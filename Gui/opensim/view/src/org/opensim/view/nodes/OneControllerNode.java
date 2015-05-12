@@ -15,7 +15,7 @@ import org.opensim.modeling.PropertyHelper;
 import org.opensim.view.ObjectDisplayMenuAction;
 
 /** Node class to wrap Controller objects */
-public class OneControllerNode extends DisablableOpenSimObjectNode {
+public class OneControllerNode extends DisablablModelComponentNode {
    private static ResourceBundle bundle = NbBundle.getBundle(OneControllerNode.class);
    
    public OneControllerNode(OpenSimObject b) {
