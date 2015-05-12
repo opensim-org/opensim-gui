@@ -139,21 +139,23 @@ public final class topologyEditorTopComponent extends TopComponent implements Ob
         int numJoints = jnts.getSize();
         for (int j=0; j<numJoints; j++ ){
             Joint jnt = jnts.get(j);
+            String childFrameName = jnt.getChildFrame().findBaseFrame().getName();
+            String parentFrameName = jnt.getParentFrame().findBaseFrame().getName();
             //LabelWidget bodyWidget= new LabelWidget(scene, "Body:"+bod.getName());
-            Widget bodyWidget = scene.addNode(jnt.getChildBodyName());
+            Widget bodyWidget = scene.addNode(childFrameName);
             //bodyWidget.setPreferredLocation (new Point (b*30, b*50));
             bodyWidget.getActions().addAction (editAction);
             Widget jntWidget = scene.addNode(jnt.getName());
             jntWidget.setBorder(ModelGraphScene.getBORDER_0());
             //String edgeID = bod.getJoint().getName();
-            String jntToParent = jnt.getParentBodyName()+ "_"+jnt.getName();
+            String jntToParent = parentFrameName+ "_"+jnt.getName();
             scene.addEdge(jntToParent);
-            scene.setEdgeSource (jntToParent, jnt.getParentBodyName());
+            scene.setEdgeSource (jntToParent, parentFrameName);
             scene.setEdgeTarget (jntToParent, jnt.getName());
-            String jntToChild = jnt.getChildBodyName()+ "_"+jnt.getName();
+            String jntToChild = childFrameName+ "_"+jnt.getName();
             scene.addEdge(jntToChild);
             scene.setEdgeSource (jntToChild, jnt.getName());
-            scene.setEdgeTarget (jntToChild, jnt.getChildBodyName());
+            scene.setEdgeTarget (jntToChild, childFrameName);
     }
         scene.validate();
         
