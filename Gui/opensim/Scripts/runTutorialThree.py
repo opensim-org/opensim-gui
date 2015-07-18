@@ -23,7 +23,7 @@
 # This example performs the steps of Tutorial Three in scripting form
 
 # Folder paths
-installDir 		= 	getInstallDiR()
+installDir 		= 	getInstallDir()
 modelFolder		=	installDir+"\Models\Gait2354_Simbody" 
 
 # Input Model 
