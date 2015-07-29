@@ -90,7 +90,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
         int maxXIndex=-1;
         for(int i=0; i<markerNames.getSize(); i++){
             String markerName=markerNames.getitem(i);
-            ExperimentalDataObject markerObject = new MotionObjectBodyMarker(
+            ExperimentalDataObject markerObject = new ExperimentalMarker(
                     ExperimentalDataItemType.MarkerData, markerName, i*3);
             classified.add(markerObject);
             for(int coord=0; coord<3; coord++){
@@ -208,7 +208,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
                                 break;
                             case PointData:
                             case MarkerData:
-                                classified.add(new MotionObjectBodyMarker(columnType, baseName+prefix, i-1));
+                                classified.add(new ExperimentalMarker(columnType, baseName+prefix, i-1));
                                 break;
                             case BodyForceData:
                                  classified.add(new MotionObjectPointForce(columnType, baseName+prefix, i-1));

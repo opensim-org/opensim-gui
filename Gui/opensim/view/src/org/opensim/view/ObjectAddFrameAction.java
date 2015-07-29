@@ -29,7 +29,9 @@ import org.openide.nodes.Node;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
+import org.opensim.modeling.Frame;
 import org.opensim.modeling.FrameGeometry;
+import org.opensim.modeling.Geometry;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelComponent;
 import org.opensim.modeling.PhysicalFrame;
@@ -67,9 +69,8 @@ public class ObjectAddFrameAction extends CallableSystemAction {
         ModelComponent mc = ocn.getModelComp();
         Model model = mc.getModel();
         FrameGeometry sp = new FrameGeometry(0.2);
-        sp.get_Appearance().set_representation(3);
-        sp.markAdopted();
-        if (PhysicalFrame.safeDownCast(mc) != null) {
+        sp.getAppearance().set_representation(3);
+        if (Frame.safeDownCast(mc) != null) {
             sp.setFrameName(mc.getName());
         } else {
             sp.setFrameName("ground");
@@ -77,7 +78,8 @@ public class ObjectAddFrameAction extends CallableSystemAction {
         mc.addGeometry(sp);
         PropertyEditorAdaptor pea = new PropertyEditorAdaptor(model);
         pea.handleModelChange();
-        ocn.getChildren().add(new Node[]{new OneGeometryNode(mc.get_geometry(mc.getNumGeometry()-1))});
+        Geometry g = mc.get_geometry(mc.getNumGeometry()-1);
+        ocn.getChildren().add(new Node[]{new OneGeometryNode(g)});
     }
 
 }

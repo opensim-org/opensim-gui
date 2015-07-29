@@ -50,6 +50,7 @@ public class OneModelComponentNode extends OneComponentNode {
         Action[] superActions = (Action[]) super.getActions(b);
         
         // Arrays are fixed size, onvert to a List
+        /*
         List<Action> actions = Arrays.asList(superActions);
         // Create new Array of proper size
         Action[] retActions = new Action[actions.size() + 1];
@@ -59,8 +60,8 @@ public class OneModelComponentNode extends OneComponentNode {
             retActions[actions.size()] = (ObjectAddGeometryMenuAction) ObjectAddGeometryMenuAction.findObject((Class) Class.forName("org.opensim.view.ObjectAddGeometryMenuAction"), true);
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
-        }
-        return retActions;
+        }*/
+        return superActions;
     }
 
     /**

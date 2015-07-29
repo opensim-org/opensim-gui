@@ -334,6 +334,7 @@ public class OpenSimCanvas extends OpenSimBaseCanvas implements MouseWheelListen
         // Kluge around Moving Muscle Points!
         if (obj != null && MovingPathPoint.safeDownCast(obj)!=null)
               return null;
+        /*
         if (obj==null){  // Could be user object
            vtkCellPicker pPicker=new vtkCellPicker();
            // Important to set tolerance to something small, else it may pick glyphs not directly under cursor
@@ -348,7 +349,7 @@ public class OpenSimCanvas extends OpenSimBaseCanvas implements MouseWheelListen
            int cellId = pPicker.GetCellId();
            obj = ViewDB.getInstance().getSelectedGlyphObject(cellId, candidateActor);
             ViewDB.getInstance().pickUserObject(asmPath, cellId);
-        }
+        }*/
         return obj;
     }
  

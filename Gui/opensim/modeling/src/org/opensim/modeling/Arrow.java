@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class Arrow extends Geometry {
+public class Arrow extends DrawingGeometry {
   private long swigCPtr;
 
   public Arrow(long cPtr, boolean cMemoryOwn) {

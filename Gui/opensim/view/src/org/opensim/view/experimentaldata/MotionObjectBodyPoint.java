@@ -1,5 +1,7 @@
 package org.opensim.view.experimentaldata;
 
+import org.opensim.modeling.Sphere;
+
 /**
  *
  * @author ayman
@@ -33,10 +35,12 @@ package org.opensim.view.experimentaldata;
  */
 public class MotionObjectBodyPoint extends ExperimentalDataObject {
     protected double[] point = new double[]{0, 0, 0};
-
+    Sphere sphere = new Sphere(.01);
     public MotionObjectBodyPoint(ExperimentalDataItemType objectType, String baseName, int index) {
         super(objectType, baseName, index);
         setPointIdentifier(baseName);
+        sphere.setFrameName("ground");
+        // Will get point and set it as Sphere.center, this's a hack
     }
     protected String pointExpressedInBody = "ground";
     private String pointIdentifier="";

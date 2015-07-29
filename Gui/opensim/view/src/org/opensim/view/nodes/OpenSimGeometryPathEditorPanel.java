@@ -43,6 +43,7 @@ import javax.swing.SwingConstants;
 import org.opensim.modeling.ArrayPathPoint;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.BodySet;
+import org.opensim.modeling.Component;
 import org.opensim.modeling.ConditionalPathPoint;
 import org.opensim.modeling.Constant;
 import org.opensim.modeling.Coordinate;
@@ -50,13 +51,13 @@ import org.opensim.modeling.CoordinateSet;
 import org.opensim.modeling.Function;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Model;
-import org.opensim.modeling.Component;
 import org.opensim.modeling.MovingPathPoint;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.PathPointSet;
 import org.opensim.modeling.PathWrap;
+import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.SetPathWrap;
 import org.opensim.modeling.SetWrapObject;
 import org.opensim.modeling.Units;
@@ -1480,8 +1481,9 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
    
    public void AttachmentBodyChosen(javax.swing.JComboBox bodyComboBox, int attachmentNum) {
       //Muscle asm = Muscle.safeDownCast(objectWithPath);
+      
       PathPointSet pathPoints = currentPath.getPathPointSet();
-      Body oldBody = pathPoints.get(attachmentNum).getBody();
+      PhysicalFrame oldBody = pathPoints.get(attachmentNum).getBody();
       Model model = currentPath.getModel();
       BodySet bodies = model.getBodySet();
       Body newBody = bodies.get(bodyComboBox.getSelectedIndex());

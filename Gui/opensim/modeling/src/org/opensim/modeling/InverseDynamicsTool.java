@@ -89,10 +89,6 @@ public class InverseDynamicsTool extends DynamicsTool {
     opensimModelJNI.InverseDynamicsTool_setCoordinateValues(swigCPtr, this, Storage.getCPtr(aStorage), aStorage);
   }
 
-  public boolean hasCoordinateValues() {
-    return opensimModelJNI.InverseDynamicsTool_hasCoordinateValues(swigCPtr, this);
-  }
-
   public String getOutputGenForceFileName() {
     return opensimModelJNI.InverseDynamicsTool_getOutputGenForceFileName(swigCPtr, this);
   }

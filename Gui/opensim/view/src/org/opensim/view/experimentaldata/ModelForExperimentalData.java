@@ -49,7 +49,7 @@ import org.opensim.utils.TheApp;
 public class ModelForExperimentalData extends Model{
     
     MarkerSet markers;
-    private Body    ground;
+    private Ground    ground;
     SimbodyEngine dEngine;
     private AnnotatedMotion motionData;
     private ForceSet forces;
@@ -63,7 +63,7 @@ public class ModelForExperimentalData extends Model{
         //setup();
         dEngine = this.getSimbodyEngine();
         markers = this.getMarkerSet();
-        ground = this.getGroundBody();
+        ground = this.get_ground();
         forces = this.getForceSet();
         // blank filename to make sure it doesn't get overwritten
         this.setInputFileName("");
@@ -94,7 +94,7 @@ public class ModelForExperimentalData extends Model{
         this.motionData = motionData;
     }
 
-    public Body getGround() {
+    public Ground getGround() {
         return ground;
     }
 

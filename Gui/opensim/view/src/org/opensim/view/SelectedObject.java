@@ -28,15 +28,16 @@
  */
 package org.opensim.view;
 
-import org.opensim.modeling.WrapObject;
-import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.Model;
 import org.opensim.modeling.Body;
-import org.opensim.modeling.Marker;
 import org.opensim.modeling.Component;
+import org.opensim.modeling.Marker;
+import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
+import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PathActuator;
 import org.opensim.modeling.PathPoint;
+import org.opensim.modeling.PhysicalFrame;
+import org.opensim.modeling.WrapObject;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 import vtk.vtkActor;
@@ -69,6 +70,7 @@ public class SelectedObject implements Selectable {
 
    private Model getModel(PathPoint mp) { return mp.getBody().getModel(); }
    private Model getModel(Body body) { return body.getModel(); }
+   private Model getModel(PhysicalFrame phys) { return phys.getModel(); }
    private Model getModel(WrapObject wrapObj) { return getModel(wrapObj.getBody()); }
    private Model getModel(Marker marker) { return marker.getModel(); }
 
@@ -182,7 +184,7 @@ public class SelectedObject implements Selectable {
             if (Body.safeDownCast(object)!=null )
                 dBody = Body.safeDownCast(object);
             else if (WrapObject.safeDownCast(object)!=null)
-                dBody = (WrapObject.safeDownCast(object)).getBody();
+                dBody = Body.safeDownCast(WrapObject.safeDownCast(object).getBody());
             if (dBody != null){
                 SingleModelVisuals visuals = ViewDB.getInstance().getModelVisuals(getModel(dBody));
             if(bounds!=null && visuals!=null) visuals.transformModelToWorldBounds(bounds);

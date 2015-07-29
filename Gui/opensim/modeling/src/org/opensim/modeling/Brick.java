@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class Brick extends Geometry {
+public class Brick extends SurfaceGeometry {
   private long swigCPtr;
 
   public Brick(long cPtr, boolean cMemoryOwn) {

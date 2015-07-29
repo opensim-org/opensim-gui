@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class AnalyticGeometry extends Geometry {
+public class AnalyticGeometry extends SurfaceGeometry {
   private long swigCPtr;
 
   public AnalyticGeometry(long cPtr, boolean cMemoryOwn) {

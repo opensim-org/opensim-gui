@@ -85,20 +85,24 @@ public final class ModelRenameAction extends CallableSystemAction {
       }
    }
    
+   @Override
    public String getName() {
       return NbBundle.getMessage(ModelRenameAction.class, "CTL_ObjectRenameAction");
    }
    
+   @Override
    protected void initialize() {
       super.initialize();
       // see org.openide.util.actions.SystemAction.iconResource() javadoc for more details
       putValue("noIconInMenu", Boolean.TRUE);
    }
    
+   @Override
    public HelpCtx getHelpCtx() {
       return HelpCtx.DEFAULT_HELP;
    }
    
+   @Override
    protected boolean asynchronous() {
       return false;
    }

@@ -35,6 +35,11 @@ public class ForceSet extends ModelComponentSetForces {
     super.delete();
   }
 
+   public boolean append(Force aFroce) {
+      aFroce.markAdopted();
+	  return private_append(aFroce);
+   }
+
   public static ForceSet safeDownCast(OpenSimObject obj) {
     long cPtr = opensimModelJNI.ForceSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ForceSet(cPtr, false);
@@ -85,16 +90,16 @@ public class ForceSet extends ModelComponentSetForces {
     return opensimModelJNI.ForceSet_remove(swigCPtr, this, aIndex);
   }
 
-  public boolean append(Force aForce) {
-    return opensimModelJNI.ForceSet_append__SWIG_0(swigCPtr, this, Force.getCPtr(aForce), aForce);
+  private boolean private_append(Force aForce) {
+    return opensimModelJNI.ForceSet_private_append__SWIG_0(swigCPtr, this, Force.getCPtr(aForce), aForce);
   }
 
-  public boolean append(ForceSet aForceSet, boolean aAllowDuplicateNames) {
-    return opensimModelJNI.ForceSet_append__SWIG_1(swigCPtr, this, ForceSet.getCPtr(aForceSet), aForceSet, aAllowDuplicateNames);
+  private boolean private_append(ForceSet aForceSet, boolean aAllowDuplicateNames) {
+    return opensimModelJNI.ForceSet_private_append__SWIG_1(swigCPtr, this, ForceSet.getCPtr(aForceSet), aForceSet, aAllowDuplicateNames);
   }
 
-  public boolean append(ForceSet aForceSet) {
-    return opensimModelJNI.ForceSet_append__SWIG_2(swigCPtr, this, ForceSet.getCPtr(aForceSet), aForceSet);
+  private boolean private_append(ForceSet aForceSet) {
+    return opensimModelJNI.ForceSet_private_append__SWIG_2(swigCPtr, this, ForceSet.getCPtr(aForceSet), aForceSet);
   }
 
   public boolean set(int aIndex, Force aForce) {

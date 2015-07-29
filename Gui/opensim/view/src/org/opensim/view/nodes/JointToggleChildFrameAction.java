@@ -6,8 +6,13 @@ import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.BooleanStateAction;
 import org.opensim.modeling.Body;
+import org.opensim.modeling.ComponentIterator;
+import org.opensim.modeling.ComponentsList;
+import org.opensim.modeling.FrameGeometry;
+import org.opensim.modeling.Geometry;
 import org.opensim.modeling.Joint;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PhysicalFrame;
 import org.opensim.view.BodyDisplayer;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.pub.ViewDB;
@@ -28,18 +33,27 @@ public final class JointToggleChildFrameAction extends BooleanStateAction {
             if (selectedNode instanceof OneJointNode){
                 OpenSimObject object=((OneJointNode) selectedNode).getOpenSimObject();
                 Joint jnt = Joint.safeDownCast(object);
-                /*
-                Body b = jnt.getBody();
-                vtkProp3D visuals=ViewDB.getInstance().getModelVisuals(b.getModel()).getVtkRepForObject(b);
-                if (visuals instanceof BodyDisplayer){
-                    BodyDisplayer rep = (BodyDisplayer) visuals;
-                    rep.setShowJointBFrame(newState);
+                PhysicalFrame b = jnt.getChildFrame();
+                ComponentsList clist = b.getComponentsList();
+                ComponentIterator mcIter = clist.begin();
+                boolean found = false;
+                while (!mcIter.equals(clist.end())&&!found){
+                    if (mcIter.__deref__() instanceof FrameGeometry){
+                        found = true;
+                        FrameGeometry fg = ((FrameGeometry) mcIter.__deref__());
+                        Geometry.DisplayPreference oldRep = fg.getRepresentation();
+                        if (oldRep == Geometry.DisplayPreference.Hide)
+                            fg.setRepresentation(Geometry.DisplayPreference.DrawSurface);
+                        else
+                            fg.setRepresentation(Geometry.DisplayPreference.Hide);
+                    }
+                    mcIter.next(); 
                 }
-                */
+                setBooleanState(newState);
+                PropertyEditorAdaptor pea = new PropertyEditorAdaptor(jnt.getModel());
+                pea.handleModelChange();
             }
         }
-         setBooleanState(newState);
-        ViewDB.getInstance().renderAll();
    }
     
     public String getName() {
@@ -64,6 +78,7 @@ public final class JointToggleChildFrameAction extends BooleanStateAction {
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         //if(selected.length!=1) return false; // only if a single item is selected
         // Action shouldn't be available otherwise
+        /*
         if (selected[0] instanceof OneJointNode){
             OneJointNode dNode = (OneJointNode)selected[0];
             Joint jnt = Joint.safeDownCast(dNode.getOpenSimObject());
@@ -74,7 +89,7 @@ public final class JointToggleChildFrameAction extends BooleanStateAction {
                setBooleanState(rep.isShowJointBFrame());
             }
             return true;
-        }
+        }*/
         return false;
     }
 }

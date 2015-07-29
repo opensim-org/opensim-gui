@@ -35,42 +35,44 @@
 package org.opensim.view.motions;
 
 import java.awt.Color;
-import java.util.Collection;
-import java.util.Hashtable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Enumeration;
+import java.util.Hashtable;
 import java.util.Vector;
 import org.opensim.logger.OpenSimLogger;
 import org.opensim.modeling.ArrayDecorativeGeometry;
-import org.opensim.modeling.SimbodyEngine;
-import org.opensim.view.MuscleColoringFunction;
-import org.opensim.view.SelectedGlyphUserObject;
-import org.opensim.view.SelectionListener;
-import org.opensim.view.experimentaldata.AnnotatedMotion;
-import org.opensim.modeling.Body;
-import org.opensim.modeling.Coordinate;
-import org.opensim.modeling.TransformAxis;
-import org.opensim.modeling.Marker;
-import org.opensim.modeling.ForceSet;
 import org.opensim.modeling.ArrayDouble;
-import org.opensim.modeling.Model;
 import org.opensim.modeling.ArrayStr;
+import org.opensim.modeling.Body;
 import org.opensim.modeling.BodySet;
+import org.opensim.modeling.Coordinate;
 import org.opensim.modeling.CoordinateSet;
+import org.opensim.modeling.ForceSet;
+import org.opensim.modeling.Ground;
+import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
+import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.view.experimentaldata.ExperimentalDataObject;
-import org.opensim.view.experimentaldata.ModelForExperimentalData;
+import org.opensim.modeling.PhysicalFrame;
+import org.opensim.modeling.SimbodyEngine;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Storage;
+import org.opensim.modeling.TransformAxis;
 import org.opensim.modeling.Vec3;
+import org.opensim.view.MuscleColoringFunction;
 import org.opensim.view.OpenSimvtkGlyphCloud;
+import org.opensim.view.SelectedGlyphUserObject;
+import org.opensim.view.SelectionListener;
 import org.opensim.view.SingleModelVisuals;
+import org.opensim.view.experimentaldata.AnnotatedMotion;
 import org.opensim.view.experimentaldata.ExperimentalDataItemType;
-import org.opensim.view.experimentaldata.MotionObjectPointForce;
+import org.opensim.view.experimentaldata.ExperimentalDataObject;
+import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.view.experimentaldata.MotionObjectBodyPoint;
+import org.opensim.view.experimentaldata.MotionObjectPointForce;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 import vtk.vtkActor;
@@ -623,7 +625,7 @@ public class MotionDisplayer implements SelectionListener {
                             states.getitem(startForceIndex+2)};
                     maskForceComponent(forceLocal, ((MotionObjectPointForce)nextObject).getForceComponent());
                     double[] forceGlobal = new double[3]; 
-                    dContext.transform(b, forceLocal, model.getGroundBody(), forceGlobal);
+                    dContext.transform(b, forceLocal, model.get_ground(), forceGlobal);
                     groundForcesRep.setNormalAtLocation(nextObject.getGlyphIndex(), 
                             forceGlobal[0], 
                             forceGlobal[1], 
@@ -633,7 +635,7 @@ public class MotionDisplayer implements SelectionListener {
                     int startIndex = nextObject.getStartIndexInFileNotIncludingTime();
                     MotionObjectBodyPoint bodyPointObject = (MotionObjectBodyPoint)nextObject;
                     double[] bodyPoint =bodyPointObject.getPoint();
-                    Body b = model.getBodySet().get(bodyPointObject.getPointExpressedInBody());
+                    PhysicalFrame b = model.getBodySet().get(bodyPointObject.getPointExpressedInBody());
                     double[] bodyPointGlobal = new double[3]; 
                     // Transform to ground from body frame
                     dContext.transformPosition(b, bodyPoint, bodyPointGlobal);
@@ -643,7 +645,7 @@ public class MotionDisplayer implements SelectionListener {
                             states.getitem(startIndex+1), 
                             states.getitem(startIndex+2)}; 
                    
-                    if (b==model.getGroundBody())
+                    if (b==model.get_ground())
                          maskForceComponent(vectorGlobal, ((MotionObjectPointForce)nextObject).getForceComponent());
                     else{
                         double[] vectorLocal = new double[]{
@@ -653,7 +655,7 @@ public class MotionDisplayer implements SelectionListener {
                         };
                         maskForceComponent(vectorLocal, ((MotionObjectPointForce)nextObject).getForceComponent());
                         // Transform to ground from body frame
-                        dContext.transform(b, vectorLocal, model.getGroundBody(), vectorGlobal);
+                        dContext.transform(b, vectorLocal, model.get_ground(), vectorGlobal);
                     }
                     
                     groundForcesRep.setNormalAtLocation(nextObject.getGlyphIndex(), 
@@ -715,7 +717,8 @@ public class MotionDisplayer implements SelectionListener {
             markersRep.setLocation(markerIndex, states.getitem(index), states.getitem(index+1), states.getitem(index+2));
          }
          if(segmentMarkerColumns.size()>0) markersRep.setModified();
-
+         Ground gnd = model.getGround();
+ 
          for(int i=0; i<genCoordForceColumns.size(); i++) {
             int forceIndex = ((Integer)(genCoordForceColumns.get(i).object)).intValue();
             int index = genCoordForceColumns.get(i).stateVectorIndex;
@@ -729,7 +732,7 @@ public class MotionDisplayer implements SelectionListener {
             double magnitude = states.getitem(index);
             for (int j=0; j<3; j++)
                offset[j] *= (magnitude * 10.0); // * 10.0 because test data is small
-            context.transform(body, offset, de.getGroundBody(), gOffset);
+            context.transform(body, offset, gnd, gOffset);
             generalizedForcesRep.setNormalAtLocation(forceIndex, gOffset[0], gOffset[1], gOffset[2]);
             vOffset = dof.getJoint().getLocationInChild();
             for (int ix=0; ix<3; ix++) offset[ix]=vOffset.get(ix);
@@ -739,25 +742,23 @@ public class MotionDisplayer implements SelectionListener {
          if(genCoordForceColumns.size()>0) {
             generalizedForcesRep.setModified();
          }
-
          for(int i=0; i<segmentForceColumns.size(); i++) {
             int forceIndex = ((Integer)(segmentForceColumns.get(i).object)).intValue();
             int index = segmentForceColumns.get(i).stateVectorIndex;
-            SimbodyEngine de = model.getSimbodyEngine();
             Body body = mapIndicesToBodies.get(index+1);
             double[] offset = new double[3];
             double[] gOffset = new double[3];
             for (int j=0; j<3; j++)
                offset[j] = states.getitem(index+j);
-            if (body.equals(de.getGroundBody())) {
+            if (body.equals(gnd)) {
                groundForcesRep.setNormalAtLocation(forceIndex, offset[0], offset[1], offset[2]);
             } else {
-               context.transform(body, offset, de.getGroundBody(), gOffset);
+               context.transform(body, offset, gnd, gOffset);
                bodyForcesRep.setNormalAtLocation(forceIndex, gOffset[0], gOffset[1], gOffset[2]);
             }
             for (int j=0; j<3; j++)
                offset[j] = states.getitem(index+j+3);
-            if (body.equals(de.getGroundBody())) {
+            if (body.equals(gnd)) {
                groundForcesRep.setLocation(forceIndex, offset[0], offset[1], offset[2]);
             } else {
                context.transformPosition(body, offset, gOffset);

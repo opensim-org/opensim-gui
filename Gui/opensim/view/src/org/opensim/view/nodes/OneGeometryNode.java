@@ -40,7 +40,9 @@ import javax.swing.undo.CannotUndoException;
 import org.openide.nodes.Children;
 import org.openide.nodes.PropertySupport;
 import org.openide.nodes.Sheet;
+import static org.openide.nodes.Sheet.createExpertSet;
 import org.openide.util.NbBundle;
+import org.opensim.modeling.AbstractConnector;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Appearance;
 import org.opensim.modeling.Geometry;
@@ -112,30 +114,33 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
         Sheet.Set set = sheet.get("properties");
         // Add property for Location
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        Appearance disp = obj.get_Appearance();
+        Appearance disp = obj.getAppearance();
         if (disp==null) return sheet;
-        addAppearanceProperties(disp, set);
+        addAppearanceProperties(disp, sheet);
         
         return sheet;
     }
 
-    private void addAppearanceProperties(Appearance disp, Sheet.Set set) {
+    private void addAppearanceProperties(Appearance disp,Sheet sheet) {
         try {
-            set.remove("Appearance");
+            sheet.remove("Appearance");
+            Sheet.Set appearanceSheet = createExpertSet();
+            appearanceSheet.setDisplayName("Appearance");
+            sheet.put(appearanceSheet);
             PropertySupport.Reflection nextNodeProp4;
             nextNodeProp4 = new PropertySupport.Reflection(this, Color.class, "getColor", "setColor");
             nextNodeProp4.setName("Color");        
-            set.put(nextNodeProp4);
+            appearanceSheet.put(nextNodeProp4);
             PropertySupport.Reflection nextNodeProp5;
             nextNodeProp5 = new PropertySupport.Reflection(this, double.class, "getOpacity", "setOpacity");
             nextNodeProp5.setName("Opacity");        
-            set.put(nextNodeProp5);
+            appearanceSheet.put(nextNodeProp5);
             PropertySupport.Reflection nextNodePropRepresentation;
             nextNodePropRepresentation = new PropertySupport.Reflection(this, Geometry.DisplayPreference.class, 
                     "getDisplayPreference", "setDisplayPreference");
             nextNodePropRepresentation.setPropertyEditorClass(DisplayPreferenceEditor.class);
             nextNodePropRepresentation.setName("DisplayPreference");        
-            set.put(nextNodePropRepresentation);
+            appearanceSheet.put(nextNodePropRepresentation);
         }
         catch (NoSuchMethodException ex) {
             ex.printStackTrace();
@@ -144,7 +149,7 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
     
     public Color getColor() {
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        Vec3 c3 = obj.get_Appearance().get_color();
+        Vec3 c3 = obj.getAppearance().get_color();
         return new Color((float)c3.get(0), (float)c3.get(1), (float)c3.get(2));
     }
 
@@ -152,9 +157,9 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
         float[] colorComp = new float[3];
         newColor.getColorComponents(colorComp);
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        final AbstractProperty ap = obj.get_Appearance().getPropertyByName("color");
-        final Vec3 oldValue = new Vec3(obj.get_Appearance().get_color());
-        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.get_Appearance(),
+        final AbstractProperty ap = obj.getAppearance().getPropertyByName("color");
+        final Vec3 oldValue = new Vec3(obj.getAppearance().get_color());
+        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.getAppearance(),
                 ap, this
                 );
         final Vec3 newColorVec3 = new Vec3(colorComp[0], colorComp[1], colorComp[2]);
@@ -189,15 +194,15 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
     
     public double getOpacity() {
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        return obj.get_Appearance().get_opacity();
+        return obj.getAppearance().get_opacity();
     }
 
     public void setOpacity(double opacity) {
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        final AbstractProperty ap = obj.get_Appearance().getPropertyByName("opacity");
-        final double oldOpacity = obj.get_Appearance().get_opacity();
+        final AbstractProperty ap = obj.getAppearance().getPropertyByName("opacity");
+        final double oldOpacity = obj.getAppearance().get_opacity();
         final double newOpacity = opacity;
-        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.get_Appearance(),
+        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.getAppearance(),
         ap, this
         );
         pea.setValueDouble(newOpacity, false);
@@ -244,10 +249,10 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
 
     public void setDisplayPreference(Geometry.DisplayPreference pref) {
         final Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        final AbstractProperty ap = obj.get_Appearance().getPropertyByName("representation");
-        final int oldRep = obj.get_Appearance().get_representation();
+        final AbstractProperty ap = obj.getAppearance().getPropertyByName("representation");
+        final int oldRep = obj.getAppearance().get_representation();
         final int newRep = pref.swigValue();
-        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.get_Appearance(),
+        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.getAppearance(),
         ap, this
         );
         pea.setValueInt(newRep, false);

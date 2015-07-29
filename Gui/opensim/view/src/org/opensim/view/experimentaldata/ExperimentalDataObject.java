@@ -33,7 +33,10 @@
 package org.opensim.view.experimentaldata;
 
 import org.opensim.modeling.AdhocModelComponent;
+import org.opensim.modeling.ArrayDecorativeGeometry;
 import org.opensim.modeling.ArrayDouble;
+import org.opensim.modeling.ModelDisplayHints;
+import org.opensim.modeling.State;
 import org.opensim.view.OpenSimvtkGlyphCloud;
 
 /**
@@ -110,6 +113,11 @@ public class ExperimentalDataObject extends AdhocModelComponent {
 
     void updateGeometry(ArrayDouble interpolatedStates) {
         throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    @Override
+    public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
+        super.generateDecorations(fixed, hints, state, appendToThis); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

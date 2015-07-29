@@ -38,6 +38,7 @@ import java.util.prefs.Preferences;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.Geometry;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.Vec3;
 import org.opensim.utils.TheApp;
 import org.opensim.view.pub.GeometryFileLocator;
@@ -63,8 +64,8 @@ import vtk.vtkTransformPolyDataFilter;
 /**
  *
  * @author ayman
- *
- * The visual Representation of one body (bones, base-frame, ..
+
+ The visual Representation of one frame (bones, base-frame, ..
  */
 public class BodyDisplayer extends vtkAssembly 
         //implements OrientableInterface, ColorableInterface, HidableInterface 
@@ -91,21 +92,21 @@ public class BodyDisplayer extends vtkAssembly
     private double pFrameScale = 1.6;
     private double pFrameRadius = .003;
     
-    private Body body;
+    private PhysicalFrame frame;
     private String modelFilePath;
     private Color color=Color.WHITE;
     /**
      * Creates a new instance of BodyDisplayer
      */
-    public BodyDisplayer(vtkAssembly modelAssembly, Body body, 
+    public BodyDisplayer(vtkAssembly modelAssembly, PhysicalFrame frame, 
             Hashtable<OpenSimObject, vtkProp3D> mapObject2VtkObjects,
             Hashtable<vtkProp3D, OpenSimObject> mapVtkObjects2Objects)
    {
-      String modelFilePath=body.getModel().getFilePath();
+      String modelFilePath=frame.getModel().getFilePath();
       String defaultSize = "1.0";
       defaultSize = Preferences.userNodeForPackage(TheApp.class).get("Joint Frame Scale", defaultSize);
       double userScale = Double.parseDouble(defaultSize);
-      this.body = body;
+      this.frame = frame;
       this.modelFilePath = modelFilePath;
       jointBFrame.SetScale(bFrameScale*userScale);
       jointBFrame.setRadius(bFrameRadius*userScale);
@@ -116,7 +117,7 @@ public class BodyDisplayer extends vtkAssembly
       this.SetCMToGreenSphereWhoseSizeDependsOnMarkerRadius();
 
       //jointBFrame.GetProperty().SetLineStipplePattern(1);
-      //VisibleObject bodyVisibleObject = body.getDisplayer();
+      //VisibleObject bodyVisibleObject = frame.getDisplayer();
 
       // Also optionally add outlineActor to this
       outlineActor.SetMapper(outlineMapper);
@@ -124,7 +125,7 @@ public class BodyDisplayer extends vtkAssembly
       boolean hasGeometry=false;
       vtkAppendPolyData boundingBoxPolyData = new vtkAppendPolyData();
 /*
-      // For each bone in the current body.
+      // For each bone in the current frame.
       for (int k = 0; k < bodyVisibleObject.getNumGeometryFiles(); ++k) {
           GeometrySet gSet = bodyVisibleObject.getGeometrySet();
           Geometry gPiece = gSet.get(k);
@@ -163,7 +164,7 @@ public class BodyDisplayer extends vtkAssembly
       this.SetCMLocationFromPropertyTable( false );
       
        if (hasGeometry){
-         applyVisibleObjectScaleAndTransform(body.getDisplayer(), outlineActor);
+         applyVisibleObjectScaleAndTransform(frame.getDisplayer(), outlineActor);
          bodyBounds = outlineActor.GetBounds();
          //AddPart(outlineActor);
       }
@@ -171,7 +172,7 @@ public class BodyDisplayer extends vtkAssembly
       centerOfMassActor.GetProperty().SetLineStipplePattern(0xF0F0);
       if (showCOM) AddPart(centerOfMassActor);
        */
-      updateMapsToSupportPicking(body, mapObject2VtkObjects, mapVtkObjects2Objects);
+      updateMapsToSupportPicking(frame, mapObject2VtkObjects, mapVtkObjects2Objects);
       modelAssembly.AddPart(this);
     }
 
@@ -221,23 +222,23 @@ public class BodyDisplayer extends vtkAssembly
     }
 
     public void setHidden(boolean toHide) {
-        ViewDB.getInstance().toggleObjectDisplay(body, !toHide);
+        ViewDB.getInstance().toggleObjectDisplay(frame, !toHide);
         Modified();
         ViewDB.getInstance().repaintAll();
     }
 
     public boolean isHidden() {
-        return (ViewDB.getInstance().getDisplayStatus(body)!=1);
+        return (ViewDB.getInstance().getDisplayStatus(frame)!=1);
     }
 
     public void setShading(int shading) {
-        ViewDB.getInstance().setObjectRepresentation(body, shading, shading);
+        ViewDB.getInstance().setObjectRepresentation(frame, shading, shading);
         Modified();
         ViewDB.getInstance().repaintAll();
     }
 
     public int getShading() {
-        return ViewDB.getInstance().getDisplayStatus(body);
+        return ViewDB.getInstance().getDisplayStatus(frame);
     }
 
     public void setColor(Color newColor) {
@@ -245,7 +246,7 @@ public class BodyDisplayer extends vtkAssembly
       newColor.getRGBColorComponents(colorComp);
       double[] colorCompDbl = new double[3];
       for(int i=0;i<3;i++) colorCompDbl[i]=colorComp[i];
-      ViewDB.getInstance().setObjectColor(body, colorCompDbl);
+      ViewDB.getInstance().setObjectColor(frame, colorCompDbl);
       color = newColor;
     }
 
@@ -257,10 +258,10 @@ public class BodyDisplayer extends vtkAssembly
         if (boneActor==null) return;    // Nothing to be done
         
         // Apply texture if any
-        String textureFile = gPiece.get_Appearance().get_texture_file();
+        String textureFile = null;//gPiece.get_Appearance().get_texture_file();
         if (textureFile!=null && !textureFile.equalsIgnoreCase("")){
             // Get full path
-            textureFile = GeometryFileLocator.getInstance().getFullname(modelFilePath,gPiece.get_Appearance().get_texture_file(), false);
+            //textureFile = GeometryFileLocator.getInstance().getFullname(modelFilePath,gPiece.get_Appearance().get_texture_file(), false);
             vtkTexture texture = new vtkTexture();
             vtkImageReader2 textureReader=null;
             if (textureFile.toLowerCase().endsWith(".bmp")){
@@ -343,8 +344,8 @@ public class BodyDisplayer extends vtkAssembly
 
     public void setColor(double[] colorComponents) {
         // Cycle thru Pieces and set their Color accordingly
-      /*VisibleObject bodyVisibleObject = body.getDisplayer();
-      // For each bone in the current body.
+      /*VisibleObject bodyVisibleObject = frame.getDisplayer();
+      // For each bone in the current frame.
       GeometrySet gSet = bodyVisibleObject.getGeometrySet();
       for (int k = 0; k < gSet.getSize(); ++k) {
           Geometry gPiece = gSet.get(k);
@@ -357,7 +358,7 @@ public class BodyDisplayer extends vtkAssembly
     {
        double[] colorOfAllPiecesOrNullIfColorOfPiecesDiffer = null; 
        /*
-       VisibleObject bodyVisibleObject = body.getDisplayer();
+       VisibleObject bodyVisibleObject = frame.getDisplayer();
        GeometrySet bodyDisplayerGeometrySet = bodyVisibleObject.getGeometrySet();
        int numberOfPieces = bodyDisplayerGeometrySet==null ? 0 : bodyDisplayerGeometrySet.getSize();
        for( int i=0;  i < numberOfPieces;  i++) 
@@ -375,8 +376,8 @@ public class BodyDisplayer extends vtkAssembly
 
     public void setOpacity(double newOpacity) {
        /*
-       VisibleObject bodyVisibleObject = body.getDisplayer();
-      // For each bone in the current body.
+       VisibleObject bodyVisibleObject = frame.getDisplayer();
+      // For each bone in the current frame.
       GeometrySet gSet = bodyVisibleObject.getGeometrySet();
       for (int k = 0; k < gSet.getSize(); ++k) {
           Geometry gPiece = gSet.get(k);
@@ -394,7 +395,7 @@ public class BodyDisplayer extends vtkAssembly
 
     void applyColorsFromModel() {
         /*
-      VisibleObject bodyVisibleObject = body.getDisplayer();
+      VisibleObject bodyVisibleObject = frame.getDisplayer();
       GeometrySet gSet = bodyVisibleObject.getGeometrySet();
       for (int k = 0; k < gSet.getSize(); ++k) {
           Geometry gPiece = gSet.get(k);
@@ -408,13 +409,11 @@ public class BodyDisplayer extends vtkAssembly
       }*/
     }
     
-    private void updateMapsToSupportPicking(final Body body, 
-            Hashtable<OpenSimObject, vtkProp3D> mapObject2VtkObjects,
-            Hashtable<vtkProp3D, OpenSimObject> mapVtkObjects2Objects) {
+    private void updateMapsToSupportPicking(final PhysicalFrame frame, Hashtable<OpenSimObject, vtkProp3D> mapObject2VtkObjects, Hashtable<vtkProp3D, OpenSimObject> mapVtkObjects2Objects) {
 
         // Fill the maps between objects and display to support picking, highlighting, etc..
         // The reverse map takes an actor to an Object and is filled as actors are created.
-        mapObject2VtkObjects.put(body, this);
+        mapObject2VtkObjects.put(frame, this);
         
         // Picker picks Actors only, put those in reverseMap instead of BodyDisplayer
         vtkProp3DCollection props = displayGeometryAssembly.GetParts();
@@ -422,10 +421,10 @@ public class BodyDisplayer extends vtkAssembly
         ArrayList<vtkActor> actors = new ArrayList<vtkActor>();
         int idx=0;
         /*
-        GeometrySet gSet = body.getDisplayer().getGeometrySet();
+        GeometrySet gSet = frame.getDisplayer().getGeometrySet();
         for(int act=0; act < props.GetNumberOfItems(); act++){
              vtkProp3D nextActor = props.GetNextProp3D();
-             mapVtkObjects2Objects.put(nextActor, body);
+             mapVtkObjects2Objects.put(nextActor, frame);
              if (nextActor instanceof vtkActor)
                  actors.add((vtkActor)nextActor);
              if (nextActor instanceof FrameActor || nextActor == centerOfMassActor /*||
@@ -450,7 +449,7 @@ public class BodyDisplayer extends vtkAssembly
     //--------------------------------------------------------------------------
     public void  SetCMLocationFromPropertyTable( boolean updateView )
     {
-       Vec3 cmLocationToFill = body.getMassCenter();
+       Vec3 cmLocationToFill = Body.safeDownCast(frame).getMassCenter();
        myCMSphereSourceVTK.SetCenter( cmLocationToFill.get(0),  cmLocationToFill.get(1), cmLocationToFill.get(2));
        if( updateView )
        {
@@ -544,7 +543,7 @@ public class BodyDisplayer extends vtkAssembly
     public void applyDisplayPreferences() 
     {
         /*
-       VisibleObject bodyVisibleObject = body.getDisplayer();
+       VisibleObject bodyVisibleObject = frame.getDisplayer();
        GeometrySet gSet = bodyVisibleObject.getGeometrySet();
         // Cycle thru GeometrySet and apply preferences
        for(int i=0; i<gSet.getSize(); i++) {
@@ -561,7 +560,7 @@ public class BodyDisplayer extends vtkAssembly
      * Update display of Body to correspond to latest Properties
      */
    void updateFromProperties() {
-        //applyVisibleObjectScaleAndTransform(body.getDisplayer(), displayGeometryAssembly);
+        //applyVisibleObjectScaleAndTransform(frame.getDisplayer(), displayGeometryAssembly);
         applyColorsFromModel();
         applyDisplayPreferences();
         // update Joint frames

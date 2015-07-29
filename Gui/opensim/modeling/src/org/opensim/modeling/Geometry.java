@@ -93,42 +93,6 @@ public class Geometry extends Component {
     opensimModelJNI.Geometry_set_scale_factors__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void copyProperty_Appearance(Geometry source) {
-    opensimModelJNI.Geometry_copyProperty_Appearance(swigCPtr, this, Geometry.getCPtr(source), source);
-  }
-
-  public Appearance get_Appearance(int i) {
-    return new Appearance(opensimModelJNI.Geometry_get_Appearance__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public Appearance upd_Appearance(int i) {
-    return new Appearance(opensimModelJNI.Geometry_upd_Appearance__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_Appearance(int i, Appearance value) {
-    opensimModelJNI.Geometry_set_Appearance__SWIG_0(swigCPtr, this, i, Appearance.getCPtr(value), value);
-  }
-
-  public int append_Appearance(Appearance value) {
-    return opensimModelJNI.Geometry_append_Appearance(swigCPtr, this, Appearance.getCPtr(value), value);
-  }
-
-  public void constructProperty_Appearance(Appearance initValue) {
-    opensimModelJNI.Geometry_constructProperty_Appearance(swigCPtr, this, Appearance.getCPtr(initValue), initValue);
-  }
-
-  public Appearance get_Appearance() {
-    return new Appearance(opensimModelJNI.Geometry_get_Appearance__SWIG_1(swigCPtr, this), false);
-  }
-
-  public Appearance upd_Appearance() {
-    return new Appearance(opensimModelJNI.Geometry_upd_Appearance__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_Appearance(Appearance value) {
-    opensimModelJNI.Geometry_set_Appearance__SWIG_1(swigCPtr, this, Appearance.getCPtr(value), value);
-  }
-
   public void setFrameName(String name) {
     opensimModelJNI.Geometry_setFrameName(swigCPtr, this, name);
   }
@@ -143,6 +107,14 @@ public class Geometry extends Component {
 
   public Frame getFrame() {
     return new Frame(opensimModelJNI.Geometry_getFrame(swigCPtr, this), false);
+  }
+
+  public Appearance getAppearance() {
+    return new Appearance(opensimModelJNI.Geometry_getAppearance(swigCPtr, this), false);
+  }
+
+  public Appearance updAppearance() {
+    return new Appearance(opensimModelJNI.Geometry_updAppearance(swigCPtr, this), false);
   }
 
   public void setDecorativeGeometryTransform(ArrayDecorativeGeometry decorations, State state) {
