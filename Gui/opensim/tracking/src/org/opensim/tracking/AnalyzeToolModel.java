@@ -162,7 +162,7 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
          Storage motion = null;
          if(analyzeTool().getStatesStorage()!=null) {
                motion = new Storage(analyzeTool().getStatesStorage());
-               motion.resampleLinear(0.001);
+               //motion.resampleLinear(0.001);
          }
          updateMotion(motion); // replaces current motion
          if (staticOptimizationMode){ // Color by activations from SO

@@ -158,7 +158,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
             Storage motion = animationCallback.getStateStorage();
             if(motion!=null) {
                 motion = new Storage(motion);
-                motion.resampleLinear(0.001);
+                //motion.resampleLinear(0.001);
             }
             updateMotion(motion); // replaces current motion
          }

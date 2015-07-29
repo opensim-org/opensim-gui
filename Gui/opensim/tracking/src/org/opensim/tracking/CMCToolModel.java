@@ -211,7 +211,7 @@ public class CMCToolModel extends TrackingToolModel {
             motion = animationCallback.getStateStorage();
             if(motion!=null) {
                motion = new Storage(motion);
-               motion.resampleLinear(0.001); // so that we don't get a crazy oversampled storage
+               //motion.resampleLinear(0.001); // so that we don't get a crazy oversampled storage
             }
          }
          if (motion!=null)
