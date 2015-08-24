@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class LineGeometry extends DrawingGeometry {
+public class LineGeometry extends Geometry {
   private long swigCPtr;
 
   public LineGeometry(long cPtr, boolean cMemoryOwn) {

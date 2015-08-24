@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class Mesh extends SurfaceGeometry {
+public class Mesh extends Geometry {
   private long swigCPtr;
 
   public Mesh(long cPtr, boolean cMemoryOwn) {

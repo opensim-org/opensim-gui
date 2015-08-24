@@ -73,8 +73,8 @@ public class AbstractInput extends AbstractConnector {
     return opensimModelJNI.AbstractInput_isConnected(swigCPtr, this);
   }
 
-  public String getConnectedToTypeName() {
-    return opensimModelJNI.AbstractInput_getConnectedToTypeName(swigCPtr, this);
+  public String getConnecteeTypeName() {
+    return opensimModelJNI.AbstractInput_getConnecteeTypeName(swigCPtr, this);
   }
 
 }

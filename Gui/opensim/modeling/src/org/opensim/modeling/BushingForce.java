@@ -57,230 +57,6 @@ public class BushingForce extends Force {
     return opensimModelJNI.BushingForce_getConcreteClassName(swigCPtr, this);
   }
 
-  public void copyProperty_body_1(BushingForce source) {
-    opensimModelJNI.BushingForce_copyProperty_body_1(swigCPtr, this, BushingForce.getCPtr(source), source);
-  }
-
-  public String get_body_1(int i) {
-    return opensimModelJNI.BushingForce_get_body_1__SWIG_0(swigCPtr, this, i);
-  }
-
-  public SWIGTYPE_p_std__string upd_body_1(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.BushingForce_upd_body_1__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_body_1(int i, String value) {
-    opensimModelJNI.BushingForce_set_body_1__SWIG_0(swigCPtr, this, i, value);
-  }
-
-  public int append_body_1(String value) {
-    return opensimModelJNI.BushingForce_append_body_1(swigCPtr, this, value);
-  }
-
-  public void constructProperty_body_1() {
-    opensimModelJNI.BushingForce_constructProperty_body_1__SWIG_0(swigCPtr, this);
-  }
-
-  public void constructProperty_body_1(String initValue) {
-    opensimModelJNI.BushingForce_constructProperty_body_1__SWIG_1(swigCPtr, this, initValue);
-  }
-
-  public String get_body_1() {
-    return opensimModelJNI.BushingForce_get_body_1__SWIG_1(swigCPtr, this);
-  }
-
-  public SWIGTYPE_p_std__string upd_body_1() {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.BushingForce_upd_body_1__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_body_1(String value) {
-    opensimModelJNI.BushingForce_set_body_1__SWIG_1(swigCPtr, this, value);
-  }
-
-  public void copyProperty_body_2(BushingForce source) {
-    opensimModelJNI.BushingForce_copyProperty_body_2(swigCPtr, this, BushingForce.getCPtr(source), source);
-  }
-
-  public String get_body_2(int i) {
-    return opensimModelJNI.BushingForce_get_body_2__SWIG_0(swigCPtr, this, i);
-  }
-
-  public SWIGTYPE_p_std__string upd_body_2(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.BushingForce_upd_body_2__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_body_2(int i, String value) {
-    opensimModelJNI.BushingForce_set_body_2__SWIG_0(swigCPtr, this, i, value);
-  }
-
-  public int append_body_2(String value) {
-    return opensimModelJNI.BushingForce_append_body_2(swigCPtr, this, value);
-  }
-
-  public void constructProperty_body_2() {
-    opensimModelJNI.BushingForce_constructProperty_body_2__SWIG_0(swigCPtr, this);
-  }
-
-  public void constructProperty_body_2(String initValue) {
-    opensimModelJNI.BushingForce_constructProperty_body_2__SWIG_1(swigCPtr, this, initValue);
-  }
-
-  public String get_body_2() {
-    return opensimModelJNI.BushingForce_get_body_2__SWIG_1(swigCPtr, this);
-  }
-
-  public SWIGTYPE_p_std__string upd_body_2() {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.BushingForce_upd_body_2__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_body_2(String value) {
-    opensimModelJNI.BushingForce_set_body_2__SWIG_1(swigCPtr, this, value);
-  }
-
-  public void copyProperty_location_body_1(BushingForce source) {
-    opensimModelJNI.BushingForce_copyProperty_location_body_1(swigCPtr, this, BushingForce.getCPtr(source), source);
-  }
-
-  public Vec3 get_location_body_1(int i) {
-    return new Vec3(opensimModelJNI.BushingForce_get_location_body_1__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public Vec3 upd_location_body_1(int i) {
-    return new Vec3(opensimModelJNI.BushingForce_upd_location_body_1__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_location_body_1(int i, Vec3 value) {
-    opensimModelJNI.BushingForce_set_location_body_1__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
-  }
-
-  public int append_location_body_1(Vec3 value) {
-    return opensimModelJNI.BushingForce_append_location_body_1(swigCPtr, this, Vec3.getCPtr(value), value);
-  }
-
-  public void constructProperty_location_body_1(Vec3 initValue) {
-    opensimModelJNI.BushingForce_constructProperty_location_body_1(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
-  }
-
-  public Vec3 get_location_body_1() {
-    return new Vec3(opensimModelJNI.BushingForce_get_location_body_1__SWIG_1(swigCPtr, this), false);
-  }
-
-  public Vec3 upd_location_body_1() {
-    return new Vec3(opensimModelJNI.BushingForce_upd_location_body_1__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_location_body_1(Vec3 value) {
-    opensimModelJNI.BushingForce_set_location_body_1__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
-  }
-
-  public void copyProperty_orientation_body_1(BushingForce source) {
-    opensimModelJNI.BushingForce_copyProperty_orientation_body_1(swigCPtr, this, BushingForce.getCPtr(source), source);
-  }
-
-  public Vec3 get_orientation_body_1(int i) {
-    return new Vec3(opensimModelJNI.BushingForce_get_orientation_body_1__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public Vec3 upd_orientation_body_1(int i) {
-    return new Vec3(opensimModelJNI.BushingForce_upd_orientation_body_1__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_orientation_body_1(int i, Vec3 value) {
-    opensimModelJNI.BushingForce_set_orientation_body_1__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
-  }
-
-  public int append_orientation_body_1(Vec3 value) {
-    return opensimModelJNI.BushingForce_append_orientation_body_1(swigCPtr, this, Vec3.getCPtr(value), value);
-  }
-
-  public void constructProperty_orientation_body_1(Vec3 initValue) {
-    opensimModelJNI.BushingForce_constructProperty_orientation_body_1(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
-  }
-
-  public Vec3 get_orientation_body_1() {
-    return new Vec3(opensimModelJNI.BushingForce_get_orientation_body_1__SWIG_1(swigCPtr, this), false);
-  }
-
-  public Vec3 upd_orientation_body_1() {
-    return new Vec3(opensimModelJNI.BushingForce_upd_orientation_body_1__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_orientation_body_1(Vec3 value) {
-    opensimModelJNI.BushingForce_set_orientation_body_1__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
-  }
-
-  public void copyProperty_location_body_2(BushingForce source) {
-    opensimModelJNI.BushingForce_copyProperty_location_body_2(swigCPtr, this, BushingForce.getCPtr(source), source);
-  }
-
-  public Vec3 get_location_body_2(int i) {
-    return new Vec3(opensimModelJNI.BushingForce_get_location_body_2__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public Vec3 upd_location_body_2(int i) {
-    return new Vec3(opensimModelJNI.BushingForce_upd_location_body_2__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_location_body_2(int i, Vec3 value) {
-    opensimModelJNI.BushingForce_set_location_body_2__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
-  }
-
-  public int append_location_body_2(Vec3 value) {
-    return opensimModelJNI.BushingForce_append_location_body_2(swigCPtr, this, Vec3.getCPtr(value), value);
-  }
-
-  public void constructProperty_location_body_2(Vec3 initValue) {
-    opensimModelJNI.BushingForce_constructProperty_location_body_2(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
-  }
-
-  public Vec3 get_location_body_2() {
-    return new Vec3(opensimModelJNI.BushingForce_get_location_body_2__SWIG_1(swigCPtr, this), false);
-  }
-
-  public Vec3 upd_location_body_2() {
-    return new Vec3(opensimModelJNI.BushingForce_upd_location_body_2__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_location_body_2(Vec3 value) {
-    opensimModelJNI.BushingForce_set_location_body_2__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
-  }
-
-  public void copyProperty_orientation_body_2(BushingForce source) {
-    opensimModelJNI.BushingForce_copyProperty_orientation_body_2(swigCPtr, this, BushingForce.getCPtr(source), source);
-  }
-
-  public Vec3 get_orientation_body_2(int i) {
-    return new Vec3(opensimModelJNI.BushingForce_get_orientation_body_2__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public Vec3 upd_orientation_body_2(int i) {
-    return new Vec3(opensimModelJNI.BushingForce_upd_orientation_body_2__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_orientation_body_2(int i, Vec3 value) {
-    opensimModelJNI.BushingForce_set_orientation_body_2__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
-  }
-
-  public int append_orientation_body_2(Vec3 value) {
-    return opensimModelJNI.BushingForce_append_orientation_body_2(swigCPtr, this, Vec3.getCPtr(value), value);
-  }
-
-  public void constructProperty_orientation_body_2(Vec3 initValue) {
-    opensimModelJNI.BushingForce_constructProperty_orientation_body_2(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
-  }
-
-  public Vec3 get_orientation_body_2() {
-    return new Vec3(opensimModelJNI.BushingForce_get_orientation_body_2__SWIG_1(swigCPtr, this), false);
-  }
-
-  public Vec3 upd_orientation_body_2() {
-    return new Vec3(opensimModelJNI.BushingForce_upd_orientation_body_2__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_orientation_body_2(Vec3 value) {
-    opensimModelJNI.BushingForce_set_orientation_body_2__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
-  }
-
   public void copyProperty_rotational_stiffness(BushingForce source) {
     opensimModelJNI.BushingForce_copyProperty_rotational_stiffness(swigCPtr, this, BushingForce.getCPtr(source), source);
   }
@@ -425,36 +201,40 @@ public class BushingForce extends Force {
     opensimModelJNI.BushingForce_set_translational_damping__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
+  public void copyProperty_frames(BushingForce source) {
+    opensimModelJNI.BushingForce_copyProperty_frames(swigCPtr, this, BushingForce.getCPtr(source), source);
+  }
+
+  public PhysicalFrame get_frames(int i) {
+    return new PhysicalFrame(opensimModelJNI.BushingForce_get_frames(swigCPtr, this, i), false);
+  }
+
+  public PhysicalFrame upd_frames(int i) {
+    return new PhysicalFrame(opensimModelJNI.BushingForce_upd_frames(swigCPtr, this, i), false);
+  }
+
+  public void set_frames(int i, PhysicalFrame value) {
+    opensimModelJNI.BushingForce_set_frames(swigCPtr, this, i, PhysicalFrame.getCPtr(value), value);
+  }
+
+  public int append_frames(PhysicalFrame value) {
+    return opensimModelJNI.BushingForce_append_frames(swigCPtr, this, PhysicalFrame.getCPtr(value), value);
+  }
+
+  public void constructProperty_frames() {
+    opensimModelJNI.BushingForce_constructProperty_frames(swigCPtr, this);
+  }
+
   public BushingForce() {
     this(opensimModelJNI.new_BushingForce__SWIG_0(), true);
   }
 
-  public BushingForce(String body1Name, Vec3 point1, Vec3 orientation1, String body2Name, Vec3 point2, Vec3 orientation2, Vec3 transStiffness, Vec3 rotStiffness, Vec3 transDamping, Vec3 rotDamping) {
-    this(opensimModelJNI.new_BushingForce__SWIG_1(body1Name, Vec3.getCPtr(point1), point1, Vec3.getCPtr(orientation1), orientation1, body2Name, Vec3.getCPtr(point2), point2, Vec3.getCPtr(orientation2), orientation2, Vec3.getCPtr(transStiffness), transStiffness, Vec3.getCPtr(rotStiffness), rotStiffness, Vec3.getCPtr(transDamping), transDamping, Vec3.getCPtr(rotDamping), rotDamping), true);
+  public BushingForce(String frame1Name, String frame2Name, Vec3 transStiffness, Vec3 rotStiffness, Vec3 transDamping, Vec3 rotDamping) {
+    this(opensimModelJNI.new_BushingForce__SWIG_1(frame1Name, frame2Name, Vec3.getCPtr(transStiffness), transStiffness, Vec3.getCPtr(rotStiffness), rotStiffness, Vec3.getCPtr(transDamping), transDamping, Vec3.getCPtr(rotDamping), rotDamping), true);
   }
 
-  public void setBody1ByName(String aBodyName) {
-    opensimModelJNI.BushingForce_setBody1ByName(swigCPtr, this, aBodyName);
-  }
-
-  public void setBody1BushingLocation(Vec3 location, Vec3 orientation) {
-    opensimModelJNI.BushingForce_setBody1BushingLocation__SWIG_0(swigCPtr, this, Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation);
-  }
-
-  public void setBody1BushingLocation(Vec3 location) {
-    opensimModelJNI.BushingForce_setBody1BushingLocation__SWIG_1(swigCPtr, this, Vec3.getCPtr(location), location);
-  }
-
-  public void setBody2ByName(String aBodyName) {
-    opensimModelJNI.BushingForce_setBody2ByName(swigCPtr, this, aBodyName);
-  }
-
-  public void setBody2BushingLocation(Vec3 location, Vec3 orientation) {
-    opensimModelJNI.BushingForce_setBody2BushingLocation__SWIG_0(swigCPtr, this, Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation);
-  }
-
-  public void setBody2BushingLocation(Vec3 location) {
-    opensimModelJNI.BushingForce_setBody2BushingLocation__SWIG_1(swigCPtr, this, Vec3.getCPtr(location), location);
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
+    opensimModelJNI.BushingForce_updateFromXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
   }
 
   public double computePotentialEnergy(State s) {

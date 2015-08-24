@@ -57,40 +57,40 @@ public class AbstractConnector extends OpenSimObject {
     return opensimModelJNI.AbstractConnector_getConcreteClassName(swigCPtr, this);
   }
 
-  public void copyProperty_connected_to_name(AbstractConnector source) {
-    opensimModelJNI.AbstractConnector_copyProperty_connected_to_name(swigCPtr, this, AbstractConnector.getCPtr(source), source);
+  public void copyProperty_connectee_name(AbstractConnector source) {
+    opensimModelJNI.AbstractConnector_copyProperty_connectee_name(swigCPtr, this, AbstractConnector.getCPtr(source), source);
   }
 
-  public String get_connected_to_name(int i) {
-    return opensimModelJNI.AbstractConnector_get_connected_to_name__SWIG_0(swigCPtr, this, i);
+  public String get_connectee_name(int i) {
+    return opensimModelJNI.AbstractConnector_get_connectee_name__SWIG_0(swigCPtr, this, i);
   }
 
-  public SWIGTYPE_p_std__string upd_connected_to_name(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.AbstractConnector_upd_connected_to_name__SWIG_0(swigCPtr, this, i), false);
+  public SWIGTYPE_p_std__string upd_connectee_name(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.AbstractConnector_upd_connectee_name__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_connected_to_name(int i, String value) {
-    opensimModelJNI.AbstractConnector_set_connected_to_name__SWIG_0(swigCPtr, this, i, value);
+  public void set_connectee_name(int i, String value) {
+    opensimModelJNI.AbstractConnector_set_connectee_name__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int append_connected_to_name(String value) {
-    return opensimModelJNI.AbstractConnector_append_connected_to_name(swigCPtr, this, value);
+  public int append_connectee_name(String value) {
+    return opensimModelJNI.AbstractConnector_append_connectee_name(swigCPtr, this, value);
   }
 
-  public void constructProperty_connected_to_name(String initValue) {
-    opensimModelJNI.AbstractConnector_constructProperty_connected_to_name(swigCPtr, this, initValue);
+  public void constructProperty_connectee_name(String initValue) {
+    opensimModelJNI.AbstractConnector_constructProperty_connectee_name(swigCPtr, this, initValue);
   }
 
-  public String get_connected_to_name() {
-    return opensimModelJNI.AbstractConnector_get_connected_to_name__SWIG_1(swigCPtr, this);
+  public String get_connectee_name() {
+    return opensimModelJNI.AbstractConnector_get_connectee_name__SWIG_1(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_std__string upd_connected_to_name() {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.AbstractConnector_upd_connected_to_name__SWIG_1(swigCPtr, this), false);
+  public SWIGTYPE_p_std__string upd_connectee_name() {
+    return new SWIGTYPE_p_std__string(opensimModelJNI.AbstractConnector_upd_connectee_name__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_connected_to_name(String value) {
-    opensimModelJNI.AbstractConnector_set_connected_to_name__SWIG_1(swigCPtr, this, value);
+  public void set_connectee_name(String value) {
+    opensimModelJNI.AbstractConnector_set_connectee_name__SWIG_1(swigCPtr, this, value);
   }
 
   public Stage getConnectAtStage() {
@@ -101,8 +101,8 @@ public class AbstractConnector extends OpenSimObject {
     return opensimModelJNI.AbstractConnector_isConnected(swigCPtr, this);
   }
 
-  public String getConnectedToTypeName() {
-    return opensimModelJNI.AbstractConnector_getConnectedToTypeName(swigCPtr, this);
+  public String getConnecteeTypeName() {
+    return opensimModelJNI.AbstractConnector_getConnecteeTypeName(swigCPtr, this);
   }
 
   public void connect(OpenSimObject connectee) {
