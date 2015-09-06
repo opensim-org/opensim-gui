@@ -26,7 +26,7 @@ install:
   
   ## OpenSim (and Simbody).
   # OpenSim's installation is pushed to our Appveyor NuGet account feed.
-  - nuget install opensim -Version 0.0.0 -ExcludeVersion -OutputDirectory C:\
+  - nuget install opensim-core -Version 0.0.0 -ExcludeVersion -OutputDirectory C:\
 
 build_script:
   - cd Gui/opensim
