@@ -1,0 +1,5 @@
+Gui/opensim/build/
+Gui/opensim/updater/nbproject/private/
+Gui/opensim/dist/
+build
+!Gui/opensim/vtk50/build
