@@ -25,10 +25,10 @@ nuget:
 install:
 
   ## The GUI is built with the Netbeans platform.
-  - choco install netbeans -y
+  - choco install netbeans --yes --limit-output
 
   ## Apache Ant for building Java projects.
-  - choco install ant -y
+  - choco install ant --yes --limit-output
   
   ## OpenSim (and Simbody).
   # OpenSim's installation is pushed to our Appveyor NuGet account feed.
