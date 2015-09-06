@@ -36,7 +36,7 @@ install:
 
 build_script:
   - cd Gui/opensim
-  - ant build
+  - ant build -Dnbplatform.default.netbeans.dest.dir="C:/Program Files/NetBeans/8.0.2" -Dnbplatform.default.harness.dir="C:/Program Files/NetBeans/8.0.2/harness"
   
 test_script:
   ## Run tests.
@@ -47,7 +47,7 @@ after_test:
   # Detect if we are on the master branch.
   - IF %APPVEYOR_REPO_BRANCH% EQU master IF NOT DEFINED APPVEYOR_PULL_REQUEST_NUMBER SET DISTR=TRUE
   # Create and upload package.
-  #- IF DEFINED DISTR <CREATE PACKAGE>
+  #- IF DEFINED DISTR <CREATE PACKAGE: ant build-zip>
   #- IF DEFINED DISTR cd %APPVEYOR_BUILD_FOLDER%
   #- IF DEFINED DISTR cd dist
   #- IF DEFINED DISTR appveyor PushArtifact opensim.zip
