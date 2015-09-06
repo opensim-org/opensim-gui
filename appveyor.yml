@@ -23,6 +23,9 @@ nuget:
   account_feed: true
 
 install:
+
+  ## Apache Ant for building Java projects.
+  - choco install ant
   
   ## OpenSim (and Simbody).
   # OpenSim's installation is pushed to our Appveyor NuGet account feed.
