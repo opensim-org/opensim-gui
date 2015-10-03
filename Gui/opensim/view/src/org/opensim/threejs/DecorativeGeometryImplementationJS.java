@@ -36,14 +36,22 @@ import org.opensim.modeling.Vec3;
 public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplementation {
     private JSONArray jsonArr;
     private UUID geomID;
-    
-    public DecorativeGeometryImplementationJS(JSONArray jsonArr) {
+    private double visualizerScaleFactor = 100;
+    public DecorativeGeometryImplementationJS(JSONArray jsonArr, double scale) {
         this.jsonArr = jsonArr;
+        this.visualizerScaleFactor = scale;
     }
     
     @Override
     public void implementConeGeometry(DecorativeCone arg0) {
-        //super.implementConeGeometry(arg0); //To change body of generated methods, choose Tools | Templates.
+        Map dg_json = new LinkedHashMap();
+        dg_json.put("uuid", geomID.toString());
+        dg_json.put("type", "CylinderGeometry");
+	dg_json.put("radiusTop", 0.);
+	dg_json.put("radiusBottom", arg0.getBaseRadius()*visualizerScaleFactor);
+	dg_json.put("widthSegments", 32);
+	dg_json.put("heightSegments", 1);
+        jsonArr.add(dg_json);     
     }
 
     @Override
@@ -53,8 +61,22 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 
     @Override
     public void implementTorusGeometry(DecorativeTorus arg0) {
-        //super.implementTorusGeometry(arg0); //To change body of generated methods, choose Tools | Templates.
-    }
+        /*
+            "type": "TorusGeometry",
+            "radius": 100,
+            "tube": 40,
+            "radialSegments": 8,
+            "tubularSegments": 6,
+            "arc": 6.283185307179586 */
+        Map dg_json = new LinkedHashMap();
+        dg_json.put("uuid", geomID.toString());
+        dg_json.put("type", "TorusGeometry");
+	dg_json.put("radius", arg0.getTorusRadius()*visualizerScaleFactor);
+	dg_json.put("tube", arg0.getTubeRadius()*visualizerScaleFactor);
+	dg_json.put("radialSegments", 32);
+	dg_json.put("tubularSegments", 24);
+        jsonArr.add(dg_json);        
+     }
 
     @Override
     public void implementMeshFileGeometry(DecorativeMeshFile arg0) {
@@ -85,45 +107,62 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
     @Override
     public void implementSphereGeometry(DecorativeSphere arg0) {
         Map dg_json = new LinkedHashMap();
-        dg_json.put("uuid", geomID);
+        dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "SphereGeometry");
-	dg_json.put("radius", arg0.getRadius());
-	dg_json.put("radialSegments", 32);
-	dg_json.put("heightSegments", 1);
-        setTransformAndScale(dg_json, arg0);
-        String temp=dg_json.toString();
+	dg_json.put("radius", arg0.getRadius()*visualizerScaleFactor);
+	dg_json.put("widthSegments", 32);
+	dg_json.put("heightSegments", 16);
+	dg_json.put("phiStart", 0);
+	dg_json.put("phiLength", 6.28);
+	dg_json.put("thetaStart", 0);
+	dg_json.put("thetaLength", 3.14);
         jsonArr.add(dg_json);        
     }
 
     @Override
     public void implementCircleGeometry(DecorativeCircle arg0) {
-        //super.implementCircleGeometry(arg0); //To change body of generated methods, choose Tools | Templates.
+        /* "uuid": "B3E01AF2-C356-4018-A7EA-CA17C38CD8E0",
+            "type": "CircleGeometry",
+            "radius": 20,
+            "segments": 32 */
+        Map dg_json = new LinkedHashMap();
+        dg_json.put("uuid", geomID.toString());
+        dg_json.put("type", "CircleGeometry");
+	dg_json.put("radius", arg0.getRadius()*visualizerScaleFactor);
+	dg_json.put("segments", 32);
+        jsonArr.add(dg_json); 
     }
 
     @Override
     public void implementCylinderGeometry(DecorativeCylinder arg0) {
         Map dg_json = new LinkedHashMap();
-        dg_json.put("uuid", geomID);
+        dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "CylinderGeometry");
-	dg_json.put("radiusTop", arg0.getRadius());
-	dg_json.put("radiusBottom", arg0.getRadius());
-	dg_json.put("height", arg0.getHalfHeight()*2);
+	dg_json.put("radiusTop", arg0.getRadius()*visualizerScaleFactor);
+	dg_json.put("radiusBottom", arg0.getRadius()*visualizerScaleFactor);
+	dg_json.put("height", arg0.getHalfHeight()*2*visualizerScaleFactor);
 	dg_json.put("radialSegments", 32);
 	dg_json.put("heightSegments", 1);
-        setTransformAndScale(dg_json, arg0);
-        String temp=dg_json.toString();
         jsonArr.add(dg_json);        
     }
 
     private void setTransformAndScale(Map dg_json, DecorativeGeometry arg0) {
-        dg_json.put("position", new Vec3(arg0.getTransform().p()));
-        dg_json.put("rotation", new Vec3(arg0.getTransform().R().convertRotationToBodyFixedXYZ()));
-        dg_json.put("scale", arg0.getScaleFactors());
+        dg_json.put("position", JSONUtilities.stringifyVec3(arg0.getTransform().p()));
+        dg_json.put("rotation", JSONUtilities.stringifyVec3(arg0.getTransform().R().convertRotationToBodyFixedXYZ()));
+        dg_json.put("scale", JSONUtilities.stringifyVec3(arg0.getScaleFactors()));
     }
 
     @Override
     public void implementBrickGeometry(DecorativeBrick arg0) {
-        //super.implementBrickGeometry(arg0); //To change body of generated methods, choose Tools | Templates.
+        Map dg_json = new LinkedHashMap();
+        dg_json.put("uuid", geomID.toString());
+        dg_json.put("type", "BoxGeometry");
+	dg_json.put("width", arg0.getHalfLengths().get(0)*visualizerScaleFactor);
+	dg_json.put("height", arg0.getHalfLengths().get(1)*visualizerScaleFactor);
+	dg_json.put("depth", arg0.getHalfLengths().get(2)*visualizerScaleFactor);
+	dg_json.put("radialSegments", 1);
+	dg_json.put("heightSegments", 1);
+        jsonArr.add(dg_json);        
     }
 
     @Override
@@ -144,5 +183,19 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 
     void setGeomID(UUID hexGeom) {
         geomID = hexGeom;
+    }
+
+    /**
+     * @return the visualizerScaleFactor
+     */
+    public double getVisualizerScaleFactor() {
+        return visualizerScaleFactor;
+    }
+
+    /**
+     * @param visualizerScaleFactor the visualizerScaleFactor to set
+     */
+    public void setVisualizerScaleFactor(double visualizerScaleFactor) {
+        this.visualizerScaleFactor = visualizerScaleFactor;
     }
 }
