@@ -5,18 +5,14 @@ import org.openide.nodes.Node;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.BooleanStateAction;
-import org.opensim.modeling.Body;
 import org.opensim.modeling.ComponentIterator;
 import org.opensim.modeling.ComponentsList;
+import org.opensim.modeling.DecorativeGeometry;
 import org.opensim.modeling.FrameGeometry;
-import org.opensim.modeling.Geometry;
 import org.opensim.modeling.Joint;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PhysicalFrame;
-import org.opensim.view.BodyDisplayer;
 import org.opensim.view.ExplorerTopComponent;
-import org.opensim.view.pub.ViewDB;
-import vtk.vtkProp3D;
 
 public final class JointToggleParentFrameAction extends BooleanStateAction {
     
@@ -42,11 +38,11 @@ public final class JointToggleParentFrameAction extends BooleanStateAction {
                     if (mcIter.__deref__() instanceof FrameGeometry){
                         found = true;
                         FrameGeometry fg = ((FrameGeometry) mcIter.__deref__());
-                        Geometry.DisplayPreference oldRep = fg.getRepresentation();
-                        if (oldRep == Geometry.DisplayPreference.Hide)
-                            fg.setRepresentation(Geometry.DisplayPreference.DrawSurface);
+                        DecorativeGeometry.Representation oldRep = fg.getRepresentation();
+                        if (oldRep == DecorativeGeometry.Representation.Hide)
+                            fg.setRepresentation(DecorativeGeometry.Representation.DrawSurface);
                         else
-                            fg.setRepresentation(Geometry.DisplayPreference.Hide);
+                            fg.setRepresentation(DecorativeGeometry.Representation.Hide);
                     }
                     mcIter.next(); 
                 }

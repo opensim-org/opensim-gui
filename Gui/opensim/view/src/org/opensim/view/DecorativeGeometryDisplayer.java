@@ -30,18 +30,18 @@ public abstract class DecorativeGeometryDisplayer extends vtkActor {
         AbstractProperty ap = getObj().getPropertyByName("display_preference");
         if (ap == null) return;
         int prefInt = PropertyHelper.getValueInt(ap);
-        Geometry.DisplayPreference pref = Geometry.DisplayPreference.swigToEnum(prefInt);
+        DecorativeGeometry.Representation pref = DecorativeGeometry.Representation.swigToEnum(prefInt);
         // Show vs. HideDisplayGeometry
-        if (pref == Geometry.DisplayPreference.Hide) {
+        if (pref == DecorativeGeometry.Representation.Hide) {
             SetVisibility(0);
             return;
         }
         SetVisibility(1);
-        if (pref == Geometry.DisplayPreference.DrawWireframe) {
+        if (pref == DecorativeGeometry.Representation.DrawWireframe) {
             GetProperty().SetRepresentationToWireframe();
         } else {
             GetProperty().SetRepresentationToSurface();
-            if (pref == Geometry.DisplayPreference.DrawSurface) {
+            if (pref == DecorativeGeometry.Representation.DrawSurface) {
                 GetProperty().SetInterpolationToFlat();
             } else {
                 GetProperty().SetInterpolationToGouraud();

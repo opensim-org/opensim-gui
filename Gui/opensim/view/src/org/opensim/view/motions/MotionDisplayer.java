@@ -734,7 +734,7 @@ public class MotionDisplayer implements SelectionListener {
                offset[j] *= (magnitude * 10.0); // * 10.0 because test data is small
             context.transform(body, offset, gnd, gOffset);
             generalizedForcesRep.setNormalAtLocation(forceIndex, gOffset[0], gOffset[1], gOffset[2]);
-            vOffset = dof.getJoint().getLocationInChild();
+            ///vOffset = dof.getJoint().getLocationInChild();
             for (int ix=0; ix<3; ix++) offset[ix]=vOffset.get(ix);
             context.transformPosition(body, offset, gOffset);
             generalizedForcesRep.setLocation(forceIndex, gOffset[0], gOffset[1], gOffset[2]);

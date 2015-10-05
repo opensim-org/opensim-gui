@@ -56,7 +56,7 @@ public class OneComponentNode extends OpenSimObjectNode {
     
     private void createConnectorProperty(AbstractConnector connector, Sheet.Set sheetSet) {
         try {
-            String connecteeType = connector.getConnectedToTypeName();
+            String connecteeType = connector.getConnecteeTypeName();
             String connectionName = connector.getName();
             PropertySupport.Reflection nextNodeProp = 
                     new PropertySupport.Reflection(new ConnectionEditor(connector, this),

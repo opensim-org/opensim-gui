@@ -1,0 +1,78 @@
+{
+	"object": {
+		"uuid": "48EA0291-024E-47E6-9ACE-C6B3B5BED3D0",
+		"type": "Scene",
+		"name": "Scene",
+		"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+		"children": [
+                        {
+				"uuid": "E2939A7B-5E40-438A-8C1B-32126FBC6892",
+				"type": "PointLight",
+				"name": "PointLight 1",
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,19.842361450195312,274.3404235839844,-296.1676330566406,1],
+				"color": 9474221,
+				"intensity": 0.75,
+				"distance": 0,
+				"decay": 1
+			},
+			{
+				"uuid": "3412781E-27CC-43C3-A5DB-54C0C8E42ED6",
+				"type": "PointLight",
+				"name": "PointLight 2",
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,88.12999725341797,8.3100004196167,125.44999694824219,1],
+				"color": 12773063,
+				"intensity": 1,
+				"distance": 0,
+				"decay": 1
+			},
+                        {
+				"uuid": "A460C230-DC88-4A8F-A3FB-AA0FE735F3ED",
+				"type": "Mesh",
+				"name": "Plane",
+				"matrix": [1,0,0,0,0,0,-1,0,0,1,0.0,0,0,-50,0,1],
+				"geometry": "51BB3E54-D2DF-4576-9953-FB8E940588B5",
+				"material": "4AE8130E-B6A8-47BC-ACCF-060973C74044"
+			}
+                        ]
+	},
+	"metadata": {
+		"version": 4.4,
+		"type": "Object",
+		"generator": "Object3D.toJSON"
+	},
+	"geometries": [
+                {
+			"uuid": "51BB3E54-D2DF-4576-9953-FB8E940588B5",
+			"type": "PlaneGeometry",
+			"width": 1000,
+			"height": 1000,
+			"widthSegments": 1,
+			"heightSegments": 1
+		}],
+	"materials": [
+		{
+			"uuid": "4AE8130E-B6A8-47BC-ACCF-060973C74044",
+			"type": "MeshPhongMaterial",
+			"color": 16777215,
+			"emissive": 0,
+			"specular": 1118481,
+			"shininess": 30
+		},
+                {
+			"uuid": "B0D463A8-01CD-4BAC-9EB7-8D2E4F780372",
+			"type": "MeshPhongMaterial",
+			"color": 16777215,
+			"emissive": 0,
+			"specular": 1118481,
+			"shininess": 30
+		},
+		{
+			"uuid": "5D8C9607-D2D4-4137-98BD-B637914E00D4",
+			"type": "MeshPhongMaterial",
+			"name": "anyMaterial",
+			"color": 16777215,
+			"emissive": 0,
+			"specular": 335117,
+			"shininess": 30
+		}]
+}

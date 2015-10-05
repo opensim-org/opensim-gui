@@ -31,21 +31,16 @@
 package org.opensim.view;
 
 import java.awt.Color;
-import java.beans.PropertyChangeSupport;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
+import org.opensim.modeling.DecorativeGeometry;
 import org.opensim.modeling.Geometry;
 import org.opensim.modeling.Mesh;
 import org.opensim.modeling.Vec3;
 import org.opensim.view.pub.GeometryFileLocator;
 import org.opensim.view.pub.ViewDB;
 import vtk.vtkActor;
-import vtk.vtkBMPReader;
-import vtk.vtkImageReader2;
-import vtk.vtkJPEGReader;
-import vtk.vtkPNGReader;
-import vtk.vtkTexture;
 import vtk.vtkTransform;
 
 /**
@@ -238,16 +233,16 @@ public class DisplayGeometryDisplayer extends vtkActor
         return displayGeometry.getOpacity();
     }
 
-    public Geometry.DisplayPreference getDisplayPreference() {
+    public DecorativeGeometry.Representation getDisplayPreference() {
         return displayGeometry.getRepresentation();
     }
 
-    public void setDisplayPreference(Geometry.DisplayPreference newPref) {
+    public void setDisplayPreference(DecorativeGeometry.Representation newPref) {
         setDisplayPreferenceGUI(newPref, true);
     }
-    public void setDisplayPreferenceGUI(final Geometry.DisplayPreference newPref, boolean allowUndo) {
+    public void setDisplayPreferenceGUI(final DecorativeGeometry.Representation newPref, boolean allowUndo) {
         if (allowUndo){
-            final Geometry.DisplayPreference oldPref = displayGeometry.getRepresentation();
+            final DecorativeGeometry.Representation oldPref = displayGeometry.getRepresentation();
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
                public boolean canUndo() {
                    return true;

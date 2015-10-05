@@ -85,7 +85,7 @@ public class ConnectionEditor {
 
     // String Properties
     public String getConnectedToName() {
-        return connector.get_connected_to_name();
+        return connector.get_connectee_name();
     }
 
     public void setConnectedToName(String v) {
@@ -99,7 +99,7 @@ public class ConnectionEditor {
 
     private void handleConnectionChange(final String oldValue, final String v, boolean supportUndo) {
         context.cacheModelAndState();
-        connector.set_connected_to_name(v);
+        connector.set_connectee_name(v);
         try {
             context.restoreStateFromCachedModel();
          } catch (IOException iae) {
@@ -107,7 +107,7 @@ public class ConnectionEditor {
                  new JOptionPane(iae.getMessage(), 
 				JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
                 
-                connector.set_connected_to_name(oldValue);
+                connector.set_connectee_name(oldValue);
                 context.restoreStateFromCachedModel();  
             } catch (IOException ex) {
                 Exceptions.printStackTrace(ex);

@@ -63,7 +63,7 @@ import org.opensim.modeling.CoordinateSet;
 import org.opensim.modeling.ForceSet;
 import org.opensim.modeling.Function;
 import org.opensim.modeling.Geometry;
-import org.opensim.modeling.Geometry.DisplayPreference;
+import org.opensim.modeling.DecorativeGeometry.Representation;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.MovingPathPoint;
 import org.opensim.modeling.OpenSimContext;

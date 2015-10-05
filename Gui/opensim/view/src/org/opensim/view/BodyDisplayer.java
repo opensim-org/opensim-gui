@@ -36,12 +36,12 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.prefs.Preferences;
 import org.opensim.modeling.Body;
+import org.opensim.modeling.DecorativeGeometry;
 import org.opensim.modeling.Geometry;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.Vec3;
 import org.opensim.utils.TheApp;
-import org.opensim.view.pub.GeometryFileLocator;
 import org.opensim.view.pub.ViewDB;
 import vtk.FrameActor;
 import vtk.vtkActor;
@@ -50,7 +50,6 @@ import vtk.vtkAssembly;
 import vtk.vtkBMPReader;
 import vtk.vtkImageReader2;
 import vtk.vtkJPEGReader;
-import vtk.vtkMatrix4x4;
 import vtk.vtkOutlineFilter;
 import vtk.vtkPNGReader;
 import vtk.vtkPolyDataMapper;
@@ -59,7 +58,6 @@ import vtk.vtkProp3DCollection;
 import vtk.vtkSphereSource;
 import vtk.vtkTexture;
 import vtk.vtkTransform;
-import vtk.vtkTransformPolyDataFilter;
 
 /**
  *
@@ -305,7 +303,7 @@ public class BodyDisplayer extends vtkAssembly
         /**
          * Representation
          */
-        Geometry.DisplayPreference pref=gPiece.getRepresentation();
+        DecorativeGeometry.Representation pref=gPiece.getRepresentation();
         applyDisplayPreferenceToActor(boneActor, pref);
         /**
          * Opacity
@@ -322,7 +320,7 @@ public class BodyDisplayer extends vtkAssembly
         xform.Translate(rotationsAndTranslations[3], rotationsAndTranslations[4], rotationsAndTranslations[5]);
     }
 
-    protected void applyDisplayPreferenceToActor(final vtkActor boneActor, final Geometry.DisplayPreference pref) {
+    protected void applyDisplayPreferenceToActor(final vtkActor boneActor, final DecorativeGeometry.Representation pref) {
         switch(pref.swigValue()) {
             case 0:
                 boneActor.SetVisibility(0);
@@ -385,11 +383,11 @@ public class BodyDisplayer extends vtkAssembly
       }*/
     }
     
-     public Geometry.DisplayPreference getDisplayPreference() {
-         return Geometry.DisplayPreference.DrawSurface; //body.getDisplayer().getDisplayPreference();
+     public DecorativeGeometry.Representation getDisplayPreference() {
+         return DecorativeGeometry.Representation.DrawSurface; //body.getDisplayer().getDisplayPreference();
      }
 
-    public void setDisplayPreference(Geometry.DisplayPreference newPref) {
+    public void setDisplayPreference(DecorativeGeometry.Representation newPref) {
         //body.getDisplayer().setDisplayPreference(newPref);
     }
 

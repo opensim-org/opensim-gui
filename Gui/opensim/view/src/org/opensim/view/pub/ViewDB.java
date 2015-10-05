@@ -53,7 +53,7 @@ import org.openide.util.lookup.AbstractLookup;
 import org.openide.util.lookup.InstanceContent;
 import org.opensim.modeling.*;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
-import org.opensim.modeling.Geometry.DisplayPreference;
+import org.opensim.modeling.DecorativeGeometry.Representation;
 import org.opensim.utils.Prefs;
 import org.opensim.utils.TheApp;
 import org.opensim.view.*;
@@ -1300,12 +1300,12 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     */
    public static void setObjectRepresentation(final OpenSimObject object, final int rep, final int newShading) {
       // Set new rep in model so that it's persistent.'
-      Geometry.DisplayPreference newPref = Geometry.DisplayPreference.DrawSurface;
-      if (rep==1)  newPref = Geometry.DisplayPreference.DrawWireframe;
+      DecorativeGeometry.Representation newPref = DecorativeGeometry.Representation.DrawSurface;
+      if (rep==1)  newPref = DecorativeGeometry.Representation.DrawWireframe;
       /*
       if (object.getDisplayer()!=null){
-        final Geometry.DisplayPreference oldPref = object.getDisplayer().getDisplayPreference();
-        final Geometry.DisplayPreference finalNewPref = newPref;
+        final DecorativeGeometry.Representation oldPref = object.getDisplayer().getDisplayPreference();
+        final DecorativeGeometry.Representation finalNewPref = newPref;
         object.getDisplayer().setDisplayPreference(newPref);
       }
       else if (object instanceof Geometry)

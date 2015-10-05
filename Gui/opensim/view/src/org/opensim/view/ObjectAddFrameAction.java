@@ -69,7 +69,7 @@ public class ObjectAddFrameAction extends CallableSystemAction {
         ModelComponent mc = ocn.getModelComp();
         Model model = mc.getModel();
         FrameGeometry sp = new FrameGeometry(0.2);
-        sp.getAppearance().set_representation(3);
+        sp.get_Appearance().get_surface_appearance().set_representation(3);
         if (Frame.safeDownCast(mc) != null) {
             sp.setFrameName(mc.getName());
         } else {

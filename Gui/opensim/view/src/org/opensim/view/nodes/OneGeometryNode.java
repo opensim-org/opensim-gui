@@ -42,9 +42,9 @@ import org.openide.nodes.PropertySupport;
 import org.openide.nodes.Sheet;
 import static org.openide.nodes.Sheet.createExpertSet;
 import org.openide.util.NbBundle;
-import org.opensim.modeling.AbstractConnector;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Appearance;
+import org.opensim.modeling.DecorativeGeometry;
 import org.opensim.modeling.Geometry;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.Vec3;
@@ -114,7 +114,7 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
         Sheet.Set set = sheet.get("properties");
         // Add property for Location
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        Appearance disp = obj.getAppearance();
+        Appearance disp = obj.get_Appearance();
         if (disp==null) return sheet;
         addAppearanceProperties(disp, sheet);
         
@@ -136,7 +136,7 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
             nextNodeProp5.setName("Opacity");        
             appearanceSheet.put(nextNodeProp5);
             PropertySupport.Reflection nextNodePropRepresentation;
-            nextNodePropRepresentation = new PropertySupport.Reflection(this, Geometry.DisplayPreference.class, 
+            nextNodePropRepresentation = new PropertySupport.Reflection(this, DecorativeGeometry.Representation.class, 
                     "getDisplayPreference", "setDisplayPreference");
             nextNodePropRepresentation.setPropertyEditorClass(DisplayPreferenceEditor.class);
             nextNodePropRepresentation.setName("DisplayPreference");        
@@ -149,7 +149,7 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
     
     public Color getColor() {
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        Vec3 c3 = obj.getAppearance().get_color();
+        Vec3 c3 = obj.getColor();
         return new Color((float)c3.get(0), (float)c3.get(1), (float)c3.get(2));
     }
 
@@ -157,9 +157,9 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
         float[] colorComp = new float[3];
         newColor.getColorComponents(colorComp);
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        final AbstractProperty ap = obj.getAppearance().getPropertyByName("color");
-        final Vec3 oldValue = new Vec3(obj.getAppearance().get_color());
-        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.getAppearance(),
+        final AbstractProperty ap = obj.get_Appearance().getPropertyByName("color");
+        final Vec3 oldValue = new Vec3(obj.get_Appearance().get_color());
+        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.get_Appearance(),
                 ap, this
                 );
         final Vec3 newColorVec3 = new Vec3(colorComp[0], colorComp[1], colorComp[2]);
@@ -194,15 +194,15 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
     
     public double getOpacity() {
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        return obj.getAppearance().get_opacity();
+        return obj.get_Appearance().get_opacity();
     }
 
     public void setOpacity(double opacity) {
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        final AbstractProperty ap = obj.getAppearance().getPropertyByName("opacity");
-        final double oldOpacity = obj.getAppearance().get_opacity();
+        final AbstractProperty ap = obj.get_Appearance().getPropertyByName("opacity");
+        final double oldOpacity = obj.get_Appearance().get_opacity();
         final double newOpacity = opacity;
-        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.getAppearance(),
+        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.get_Appearance(),
         ap, this
         );
         pea.setValueDouble(newOpacity, false);
@@ -242,17 +242,17 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
         //ViewDB.getInstance().repaintAll();
     }
 
-    public Geometry.DisplayPreference getDisplayPreference() {
+    public DecorativeGeometry.Representation getDisplayPreference() {
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
         return obj.getRepresentation();
    }
 
-    public void setDisplayPreference(Geometry.DisplayPreference pref) {
+    public void setDisplayPreference(DecorativeGeometry.Representation pref) {
         final Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        final AbstractProperty ap = obj.getAppearance().getPropertyByName("representation");
-        final int oldRep = obj.getAppearance().get_representation();
+        final AbstractProperty ap = obj.get_Appearance().getPropertyByName("representation");
+        final DecorativeGeometry.Representation oldRep = obj.get_Appearance().get_representation();
         final int newRep = pref.swigValue();
-        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.getAppearance(),
+        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.get_Appearance(),
         ap, this
         );
         pea.setValueInt(newRep, false);
@@ -262,7 +262,7 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
                 @Override
                 public void undo() throws CannotUndoException {
                     super.undo();
-                    pea.setValueInt(oldRep, false);
+                    pea.setValueInt(oldRep.swigValue(), false);
                     updateObjectDisplay(obj);
                 }
 

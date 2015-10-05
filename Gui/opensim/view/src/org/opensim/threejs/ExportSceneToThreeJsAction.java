@@ -176,7 +176,7 @@ public final class ExportSceneToThreeJsAction implements ActionListener {
         try {
  
             Object obj = parser.parse(new FileReader(
-                    "templateScene.json"));
+                    "visResources/templateScene.json"));
  
             jsonObject = (JSONObject) obj;
         } catch (Exception e) {
