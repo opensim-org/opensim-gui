@@ -8,18 +8,18 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_PropertySet {
+public class SWIGTYPE_p_std__istream {
   private transient long swigCPtr;
 
-  protected SWIGTYPE_p_PropertySet(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
+  protected SWIGTYPE_p_std__istream(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_PropertySet() {
+  protected SWIGTYPE_p_std__istream() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_PropertySet obj) {
+  protected static long getCPtr(SWIGTYPE_p_std__istream obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }
