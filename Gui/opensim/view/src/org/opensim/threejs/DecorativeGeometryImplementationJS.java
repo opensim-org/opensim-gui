@@ -26,8 +26,10 @@ import org.opensim.modeling.DecorativePoint;
 import org.opensim.modeling.DecorativeSphere;
 import org.opensim.modeling.DecorativeText;
 import org.opensim.modeling.DecorativeTorus;
-import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PolygonalMesh;
 import org.opensim.modeling.Vec3;
+import org.opensim.view.pub.GeometryFileLocator;
+
 
 /**
  *
@@ -81,6 +83,70 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
     @Override
     public void implementMeshFileGeometry(DecorativeMeshFile arg0) {
         //super.implementMeshFileGeometry(arg0); //To change body of generated methods, choose Tools | Templates.
+        String meshFile = arg0.getMeshFile();
+        String fullFileName = GeometryFileLocator.getInstance().getFullname("C:\\OpenSim3.3x64\\Geometry",meshFile, false);
+        if (fullFileName==null) return;
+        if (fullFileName.endsWith(".vtp")){
+            // Create json for vtp
+            Map dg_json = new LinkedHashMap();
+            dg_json.put("uuid", geomID.toString());
+            dg_json.put("type", "BufferGeometry");
+            Map attributes_json = new LinkedHashMap();
+            // Make position json entry
+            /*
+                    "position": {
+                        "itemSize": 3,
+                        "type": "Float32Array",
+                        "array": [0,0,0,100,0,0,100,100,0]
+                    }
+            */
+            Map pos_json = new LinkedHashMap();
+            pos_json.put("itemSize", 3);
+            pos_json.put("type", "Float32Array");
+            
+            // Build JSONArrays for attributes, normal
+            JSONArray pos_array = new JSONArray();
+            Map data_json = new LinkedHashMap();
+            PolygonalMesh mesh = new PolygonalMesh();
+            mesh.loadFile(fullFileName);
+            int nv = mesh.getNumVertices();
+            for (int v=0; v < nv; v++){
+                Vec3 vec3 = mesh.getVertexPosition(v);
+                for (int coord=0; coord <3; coord++){
+                    pos_array.add(vec3.get(coord)*visualizerScaleFactor);
+                 }
+            }
+            pos_json.put("array", pos_array);
+            attributes_json.put("position", pos_json);
+            // Now the index to pass connectivity
+            /*
+            "index": {
+                        "itemSize": 3,
+                        "type" : "Uint16Array",
+                        "array": [3,0,1,3,2,0]
+                 }
+            */
+            Map index_json = new LinkedHashMap();
+            JSONArray index_array = new JSONArray();
+            int nf = mesh.getNumFaces();
+            for (int f=0; f < nf; f++){
+                int numVerts = mesh.getNumVerticesForFace(f);
+                for (int vi=0; vi <numVerts-2; vi++){
+                    index_array.add(mesh.getFaceVertex(f, 0));
+                    index_array.add(mesh.getFaceVertex(f, vi+1));
+                    index_array.add(mesh.getFaceVertex(f, vi+2));
+                 }
+            }
+            index_json.put("array", index_array);
+            index_json.put("itemSize", 3);
+            index_json.put("type", "Uint16Array");
+            attributes_json.put("index", index_json);
+            
+            // Now attributes
+            data_json.put("attributes", attributes_json);
+            dg_json.put("data", data_json);
+            jsonArr.add(dg_json);
+        }
     }
 
     @Override
@@ -95,8 +161,17 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 
     @Override
     public void implementFrameGeometry(DecorativeFrame arg0) {
-        //json.put("name", arg0.getUserRefAsObject());
-        //super.implementFrameGeometry(arg0); //To change body of generated methods, choose Tools | Templates.
+        Map dg_json = new LinkedHashMap();
+        dg_json.put("uuid", geomID.toString());
+        dg_json.put("type", "SphereGeometry");
+	dg_json.put("radius", .01*visualizerScaleFactor);
+	dg_json.put("widthSegments", 32);
+	dg_json.put("heightSegments", 16);
+	dg_json.put("phiStart", 0);
+	dg_json.put("phiLength", 6.28);
+	dg_json.put("thetaStart", 0);
+	dg_json.put("thetaLength", 3.14);
+        jsonArr.add(dg_json);    
     }
 
     @Override
@@ -144,12 +219,6 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 	dg_json.put("radialSegments", 32);
 	dg_json.put("heightSegments", 1);
         jsonArr.add(dg_json);        
-    }
-
-    private void setTransformAndScale(Map dg_json, DecorativeGeometry arg0) {
-        dg_json.put("position", JSONUtilities.stringifyVec3(arg0.getTransform().p()));
-        dg_json.put("rotation", JSONUtilities.stringifyVec3(arg0.getTransform().R().convertRotationToBodyFixedXYZ()));
-        dg_json.put("scale", JSONUtilities.stringifyVec3(arg0.getScaleFactors()));
     }
 
     @Override

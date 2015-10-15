@@ -7,13 +7,14 @@
 		"children": [
                         {
 				"uuid": "E2939A7B-5E40-438A-8C1B-32126FBC6892",
-				"type": "PointLight",
-				"name": "PointLight 1",
+				"type": "AmbientLight",
+				"name": "AmbientLight 1",
 				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,19.842361450195312,274.3404235839844,-296.1676330566406,1],
 				"color": 9474221,
 				"intensity": 0.75,
 				"distance": 0,
-				"decay": 1
+				"decay": 1,
+                                "visible": false
 			},
 			{
 				"uuid": "3412781E-27CC-43C3-A5DB-54C0C8E42ED6",
@@ -24,14 +25,6 @@
 				"intensity": 1,
 				"distance": 0,
 				"decay": 1
-			},
-                        {
-				"uuid": "A460C230-DC88-4A8F-A3FB-AA0FE735F3ED",
-				"type": "Mesh",
-				"name": "Plane",
-				"matrix": [1,0,0,0,0,0,-1,0,0,1,0.0,0,0,-50,0,1],
-				"geometry": "51BB3E54-D2DF-4576-9953-FB8E940588B5",
-				"material": "4AE8130E-B6A8-47BC-ACCF-060973C74044"
 			}
                         ]
 	},
@@ -41,14 +34,7 @@
 		"generator": "Object3D.toJSON"
 	},
 	"geometries": [
-                {
-			"uuid": "51BB3E54-D2DF-4576-9953-FB8E940588B5",
-			"type": "PlaneGeometry",
-			"width": 1000,
-			"height": 1000,
-			"widthSegments": 1,
-			"heightSegments": 1
-		}],
+                ],
 	"materials": [
 		{
 			"uuid": "4AE8130E-B6A8-47BC-ACCF-060973C74044",

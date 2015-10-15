@@ -5,19 +5,13 @@
  */
 package org.opensim.threejs;
 
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.StringWriter;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -37,16 +31,14 @@ import org.opensim.modeling.Component;
 import org.opensim.modeling.ComponentIterator;
 import org.opensim.modeling.ComponentsList;
 import org.opensim.modeling.DecorativeGeometry;
-import org.opensim.modeling.Frame;
-import org.opensim.modeling.FrameIterator;
-import org.opensim.modeling.FramesList;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
 import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.State;
 import org.opensim.modeling.Transform;
-import org.opensim.view.BodyDisplayer;
+import org.opensim.utils.BrowserLauncher;
 import org.opensim.view.pub.OpenSimDB;
+import org.eclipse.jetty.JettyMain;
 
 @ActionID(
         category = "File",
@@ -56,24 +48,32 @@ import org.opensim.view.pub.OpenSimDB;
         displayName = "#CTL_ExportSceneToThreeJsAction"
 )
 @ActionReference(path = "Menu/File", position = 1429)
-@Messages("CTL_ExportSceneToThreeJsAction=Export to Browser")
+@Messages("CTL_ExportSceneToThreeJsAction=Export model to json")
 public final class ExportSceneToThreeJsAction implements ActionListener {
 
     private HashMap<Integer, JSONObject> mapBodyIndicesToGroups = new HashMap<Integer, JSONObject>();
     private HashMap<Integer, PhysicalFrame> mapBodyIndicesToFrames = new HashMap<Integer, PhysicalFrame>();
     private State state;
     private double visScaleFactor = 1000.0;
+    private static String workDir = "C:\\Dev\\DemoOct2015\\";
     
     @Override
     public void actionPerformed(ActionEvent e) {
         BufferedWriter out = null;
         try {
             //HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
-            //server.createContext("/scene", new MyHandler());
+            //server.createContext("/threejsEditor/index.html", new MyHandler());
             //server.setExecutor(null); // creates a default executor
             //server.start();
-            //BrowserLauncher.openURL("http://localhost:8000/scene/v0.html");
-            out = new BufferedWriter(new FileWriter("C:\\Dev\\opensim3js\\scene.js", false));
+            /*
+            String[] args=null;
+            try {
+                JettyMain.main(args);
+            } catch (Exception ex) {
+                Exceptions.printStackTrace(ex);
+            }*/
+            //BrowserLauncher.openURL("http://localhost:8000/threejsEditor/editor/index.html");
+            out = new BufferedWriter(new FileWriter(workDir+"scene.json", false));
             // TODO implement action body
             Model model = OpenSimDB.getInstance().getCurrentModel();
             state = model.getWorkingState();
@@ -111,7 +111,7 @@ public final class ExportSceneToThreeJsAction implements ActionListener {
             while (!mcIter.equals(mcList.end())) {
                 //System.out.println("Object:Type,Name:"+ mcIter.getConcreteClassName()+","+mcIter.getName());
                 Component comp = mcIter.__deref__();
-                System.out.println("Comp:"+comp.getConcreteClassName()+"ID="+comp.getPathName());
+                //System.out.println("Comp:"+comp.getConcreteClassName()+"ID="+comp.getPathName());
                 ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
                 comp.generateDecorations(true, mdh, model.getWorkingState(), adg);
                 //comp.generateDecorations(false, mdh, model.getWorkingState(), adg);
@@ -143,7 +143,7 @@ public final class ExportSceneToThreeJsAction implements ActionListener {
             String jsonText = outString.toString();
             //System.out.print(jsonText);
             //System.out.println("---------------");
-            System.out.print(jsonText);
+            //System.out.print(jsonText);
             out.write(jsonText);
             out.flush();
             out.close();
@@ -161,6 +161,7 @@ public final class ExportSceneToThreeJsAction implements ActionListener {
         mat_json.put("shininess", 30);
         mat_json.put("emissive", 0);
         mat_json.put("specular", 1118481);
+        mat_json.put("side", 2);
         double opacity = dg.getOpacity();
         if (opacity < .999){
             mat_json.put("opacity", opacity);  
@@ -186,14 +187,6 @@ public final class ExportSceneToThreeJsAction implements ActionListener {
    }
 
     private void addSceneJsonObject(Model model, DecorativeGeometry dg, String geomName, UUID uuid, UUID uuid_mat, JSONArray scene_objects) {
-        /*
-            "uuid": "70FF93EA-A50B-4740-A27A-E4413101C2ED",
-            "type": "Mesh",
-            "name": "Cylinder 1",
-            "matrix": [1,0,0,0,0,1,0,0,0,0,1,0,99.17096710205078,74.63541412353516,0,1],
-            "geometry": "EB07513A-4426-450D-AAF8-45A7E8BA6551",
-            "material": "B0D463A8-01CD-4BAC-9EB7-8D2E4F780372"
-        */
         Map obj_json = new LinkedHashMap();
         obj_json.put("uuid", UUID.randomUUID().toString());
         obj_json.put("type", "Mesh");
@@ -208,34 +201,5 @@ public final class ExportSceneToThreeJsAction implements ActionListener {
         Transform fullTransform = xform.compose(relativeTransform);
         obj_json.put("matrix", JSONUtilities.createMatrixFromTransform(fullTransform, visScaleFactor));
         scene_objects.add(obj_json);
-    }
-    
-    static class MyHandler implements HttpHandler {
-        @Override
-        public void handle(HttpExchange t) throws IOException {
-            //URI uri = t.getRequestURI();
-            File file = new File("scene/v1.html").getCanonicalFile();
-            if (!file.isFile()) {
-                // Object does not exist or is not a file: reject with 404 error.
-                String response = "404 (Not Found)\n";
-                t.sendResponseHeaders(404, response.length());
-                OutputStream os = t.getResponseBody();
-                os.write(response.getBytes());
-                os.close();
-            } else {
-                // Object exists and is a file: accept with response code 200.
-                t.sendResponseHeaders(200, 0);
-                t.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
-                OutputStream os = t.getResponseBody();
-                FileInputStream fs = new FileInputStream(file);
-                final byte[] buffer = new byte[0x10000];
-                int count = 0;
-                while ((count = fs.read(buffer)) >= 0) {
-                    os.write(buffer, 0, count);
-                }
-                fs.close();
-                os.close();
-            }
-        }
     }
 }
