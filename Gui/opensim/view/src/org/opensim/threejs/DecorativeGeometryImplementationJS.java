@@ -86,7 +86,8 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         String meshFile = arg0.getMeshFile();
         String fullFileName = GeometryFileLocator.getInstance().getFullname("C:\\OpenSim3.3x64\\Geometry",meshFile, false);
         if (fullFileName==null) return;
-        if (fullFileName.endsWith(".vtp")){
+        String filenameLower = fullFileName.toLowerCase();
+        if (filenameLower.endsWith(".vtp") || filenameLower.endsWith(".stl") || filenameLower.endsWith(".obj")){
             // Create json for vtp
             Map dg_json = new LinkedHashMap();
             dg_json.put("uuid", geomID.toString());
