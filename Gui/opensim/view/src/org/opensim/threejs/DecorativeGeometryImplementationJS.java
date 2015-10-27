@@ -84,8 +84,10 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
     public void implementMeshFileGeometry(DecorativeMeshFile arg0) {
         //super.implementMeshFileGeometry(arg0); //To change body of generated methods, choose Tools | Templates.
         String meshFile = arg0.getMeshFile();
-        String fullFileName = GeometryFileLocator.getInstance().getFullname("C:\\OpenSim3.3x64\\Geometry",meshFile, false);
+        String fullFileName = GeometryFileLocator.getInstance().getFullname("",meshFile, false);
+        System.out.print("Processing file"+fullFileName);
         if (fullFileName==null) return;
+        System.out.println("...Found");
         String filenameLower = fullFileName.toLowerCase();
         if (filenameLower.endsWith(".vtp") || filenameLower.endsWith(".stl") || filenameLower.endsWith(".obj")){
             // Create json for vtp

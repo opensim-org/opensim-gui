@@ -39,6 +39,7 @@ import org.opensim.modeling.Transform;
 import org.opensim.utils.BrowserLauncher;
 import org.opensim.view.pub.OpenSimDB;
 import org.eclipse.jetty.JettyMain;
+import org.opensim.utils.FileUtils;
 
 @ActionID(
         category = "File",
@@ -51,31 +52,30 @@ import org.eclipse.jetty.JettyMain;
 @Messages("CTL_ExportSceneToThreeJsAction=Export model to json")
 public final class ExportSceneToThreeJsAction implements ActionListener {
 
-    private HashMap<Integer, JSONObject> mapBodyIndicesToGroups = new HashMap<Integer, JSONObject>();
-    private HashMap<Integer, PhysicalFrame> mapBodyIndicesToFrames = new HashMap<Integer, PhysicalFrame>();
+    private final HashMap<Integer, JSONObject> mapBodyIndicesToGroups = new HashMap<Integer, JSONObject>();
+    private final HashMap<Integer, PhysicalFrame> mapBodyIndicesToFrames = new HashMap<Integer, PhysicalFrame>();
     private State state;
-    private double visScaleFactor = 1000.0;
-    private static String workDir = "C:\\Dev\\DemoOct2015\\";
+    private final double visScaleFactor = 1000.0;
+
     
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+       Model model = OpenSimDB.getInstance().getCurrentModel();
+       String fileName = FileUtils.getInstance().browseForFilenameToSave(
+                    FileUtils.getFileFilter(".json", "Threejs scene file"), 
+                true, model.getInputFileName().replace(".osim", ".json"));
+
+        exportCurrentModelToJson(fileName, model);
+    }
+
+    public void exportCurrentModelToJson(String fileName, Model model) {
         BufferedWriter out = null;
         try {
-            //HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
-            //server.createContext("/threejsEditor/index.html", new MyHandler());
-            //server.setExecutor(null); // creates a default executor
-            //server.start();
-            /*
-            String[] args=null;
-            try {
-                JettyMain.main(args);
-            } catch (Exception ex) {
-                Exceptions.printStackTrace(ex);
-            }*/
-            //BrowserLauncher.openURL("http://localhost:8000/threejsEditor/editor/index.html");
-            out = new BufferedWriter(new FileWriter(workDir+"scene.json", false));
+
+            //
+            out = new BufferedWriter(new FileWriter(fileName, false));
             // TODO implement action body
-            Model model = OpenSimDB.getInstance().getCurrentModel();
             state = model.getWorkingState();
             ModelDisplayHints mdh = model.getDisplayHints();
             ComponentsList mcList = model.getComponentsList();
@@ -120,7 +120,7 @@ public final class ExportSceneToThreeJsAction implements ActionListener {
                     for (int idx = 0; idx < adg.size(); idx++) {
                         dg = adg.getElt(idx);
                         String geomId =comp.getPathName().concat(String.valueOf(dg.getIndexOnBody()));
-                         // pad to 4 hex digits
+                        // pad to 4 hex digits
                         UUID uuid = UUID.randomUUID();
                         mapGeometryToUUID.put(geomId, uuid);
                         //System.out.println("hexGeom uuid:"+uuid+" type="+dg.toString());                       
@@ -157,10 +157,11 @@ public final class ExportSceneToThreeJsAction implements ActionListener {
         Map mat_json = new LinkedHashMap();
         mat_json.put("uuid", uuid_mat.toString());
         mat_json.put("type", "MeshPhongMaterial");
-        mat_json.put("color", JSONUtilities.mapColorToRGBA(dg.getColor()));
-        mat_json.put("shininess", 30);
-        mat_json.put("emissive", 0);
-        mat_json.put("specular", 1118481);
+        String colorString = JSONUtilities.mapColorToRGBA(dg.getColor());
+        mat_json.put("color", colorString);
+        mat_json.put("shininess", 50);
+        mat_json.put("emissive", colorString);
+        mat_json.put("specular", colorString);
         mat_json.put("side", 2);
         double opacity = dg.getOpacity();
         if (opacity < .999){
@@ -199,6 +200,8 @@ public final class ExportSceneToThreeJsAction implements ActionListener {
         PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(bod);
         Transform xform = bodyFrame.getGroundTransform(state);
         Transform fullTransform = xform.compose(relativeTransform);
+        //Transform scale = new Transform(dg.getScaleFactors());
+        //fullTransform = fullTransform.compose(scale);
         obj_json.put("matrix", JSONUtilities.createMatrixFromTransform(fullTransform, visScaleFactor));
         scene_objects.add(obj_json);
     }
