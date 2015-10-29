@@ -34,7 +34,7 @@ public final class VisualizerWindow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
             // launch server and open page in fixed location to be used as a view
         
-            new ExportSceneToThreeJsAction().exportCurrentModelToJson(JettyMain.getServerRootDir()+"/scene.json", OpenSimDB.getInstance().getCurrentModel());
+            new ExportSceneToThreeJsAction().exportCurrentModelToJson(JettyMain.getServerRootDir()+"/threejs/editor/scene.json", OpenSimDB.getInstance().getCurrentModel());
             class VizWorker extends SwingWorker {
                 public Object construct() {
                 JettyMain.main(null);

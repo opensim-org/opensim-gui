@@ -14,8 +14,6 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.util.resource.Resource;
-import org.eclipse.jetty.websocket.server.WebSocketHandler;
-import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
 import org.opensim.utils.TheApp;
 
 /**
@@ -25,9 +23,9 @@ import org.opensim.utils.TheApp;
 public class JettyMain {
 
     static boolean serverup = false;
-    private static String serverRootDir = TheApp.getInstallDir();
-    private static String pathToStartPage = "/threejs/editor/";
-    private static int serverPort = 8087;
+    private static final String serverRootDir = TheApp.getInstallDir();
+    private static final String pathToStartPage = "/threejs/editor/";
+    private static final int serverPort = 8082;
     /**
      * @param args the command line arguments
      */

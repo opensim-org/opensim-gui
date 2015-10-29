@@ -39,6 +39,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Hashtable;
 import org.opensim.modeling.*;
+import org.opensim.threejs.DecorativeGeometryImplementationJS;
 import org.opensim.view.pub.ModelVisualsVtk;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
