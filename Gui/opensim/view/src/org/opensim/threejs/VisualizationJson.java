@@ -138,7 +138,7 @@ public class VisualizationJson implements Observer{
         PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(bod);
         Transform xform = bodyFrame.getGroundTransform(state);
         Transform fullTransform = xform.compose(relativeTransform);
-        obj_json.put("matrix", JSONUtilities.createMatrixFromTransform(fullTransform, visScaleFactor));
+        obj_json.put("matrix", JSONUtilities.createMatrixFromTransform(fullTransform, dg.getScaleFactors(), visScaleFactor));
         scene_objects.add(obj_json);
     }
 
