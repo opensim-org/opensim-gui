@@ -42,7 +42,7 @@ public final class ExportSceneToThreeJsAction implements ActionListener {
         exportCurrentModelToJson(fileName, model);
     }
 
-    public VisualizationJson exportCurrentModelToJson(String fileName, Model model) {
+    public static VisualizationJson exportCurrentModelToJson(String fileName, Model model) {
         BufferedWriter out = null;
         VisualizationJson vizJson = null;
         try {
