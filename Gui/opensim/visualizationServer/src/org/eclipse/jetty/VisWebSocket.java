@@ -5,8 +5,10 @@
  */
 package org.eclipse.jetty;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Observable;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,17 +21,16 @@ import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.openide.DialogDisplayer;
-import org.openide.NotifyDescriptor;
+
 
 /**
  *
  * @author Ayman
  */
 @WebSocket(maxTextMessageSize = 64 * 1024, maxIdleTime=10000000)
-public class VisWebSocket {
-    private static Set<Session> peers = Collections.synchronizedSet(new HashSet<Session>());
-        
+public class VisWebSocket extends Observable { // Socket to handle incoming traffic from Browser
+    private static final Set<Session> peers = Collections.synchronizedSet(new HashSet<Session>());
+    
     public VisWebSocket(){
         // Register socket with WebSocketDB so it can be called back
         WebSocketDB.registerNewSocket(this);
@@ -37,8 +38,10 @@ public class VisWebSocket {
     
     @OnWebSocketConnect
     public void onOpen (Session peer) {
-        peers.add(peer);
-        System.out.println("Connected...");
+        if (!peers.contains(peer)){
+            peers.add(peer);
+            System.out.println("Connected...");
+        }
     }
     
     @OnWebSocketClose
@@ -57,19 +60,22 @@ public class VisWebSocket {
             System.out.println("visMessage: " + stringToParse);
             JSONParser parser = new JSONParser();
             JSONObject jsonObj = (JSONObject) parser.parse(stringToParse);
-            System.out.println(jsonObj.get("uuid"));
-            System.out.println(jsonObj.get("name"));
-            DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message("Selected uuid:"+jsonObj.get("uuid")
-                    +" name:"+jsonObj.get("name")));
-            for (Session peer : peers) {
-                //if (!peer.equals(session)) {
-                //    peer.getBasicRemote().sendObject(objJson);
-                //}
-                int x=0;
-            }
+            setChanged();
+            notifyObservers(jsonObj);
         } catch (ParseException ex) {
             Logger.getLogger(VisWebSocket.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    void sendSelection(JSONObject selected) {
+        for (Session peer:peers){          
+            try {
+                peer.getRemote().sendString(selected.toJSONString());
+                break;
+            } catch (IOException ex) {
+                Logger.getLogger(VisWebSocket.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+     }
     
 }

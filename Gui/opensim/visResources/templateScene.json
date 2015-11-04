@@ -15,16 +15,6 @@
 				"distance": 0,
 				"decay": 1,
                                 "visible": false
-			},
-			{
-				"uuid": "3412781E-27CC-43C3-A5DB-54C0C8E42ED6",
-				"type": "PointLight",
-				"name": "PointLight 2",
-				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,88.12999725341797,8.3100004196167,125.44999694824219,1],
-				"color": 12773063,
-				"intensity": 1,
-				"distance": 0,
-				"decay": 1
 			}
                         ]
 	},

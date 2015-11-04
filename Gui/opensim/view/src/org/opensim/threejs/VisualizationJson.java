@@ -28,6 +28,7 @@ import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.State;
 import org.opensim.modeling.Transform;
+import org.opensim.modeling.Vec3;
 import org.opensim.view.ObjectSelectedEvent;
 import org.opensim.view.pub.ViewDB;
 
@@ -35,19 +36,19 @@ import org.opensim.view.pub.ViewDB;
  *
  * @author Ayman
  */
-public class VisualizationJson implements Observer{
+public class VisualizationJson {
     State state;
     private final JSONObject topJson;
-    private final HashMap<Integer, JSONObject> mapBodyIndicesToGroups = new HashMap<Integer, JSONObject>();
     private final HashMap<Integer, PhysicalFrame> mapBodyIndicesToFrames = new HashMap<Integer, PhysicalFrame>();
     private final double visScaleFactor = 1000.0;
     private HashMap<String, UUID> mapDecorativeGeometryToUUID = new HashMap<String, UUID>();
     private HashMap<String, UUID> mapMaterialToUUID = new HashMap<String, UUID>();
     private HashMap<UUID, Component> mapUUIDToComponent = new HashMap<UUID, Component>();
-
+    private HashMap<OpenSimObject, UUID> mapComponentToUUID = new HashMap<OpenSimObject, UUID>();
+    private static String GEOMETRY_SEP = ".";
+    
     public VisualizationJson(Model model) {
         topJson =  createJsonForModel(model);
-        ViewDB.getInstance().addObserver(this);
     }
     private JSONObject createJsonForModel(Model model) {
         state = model.getWorkingState();
@@ -79,16 +80,19 @@ public class VisualizationJson implements Observer{
                 DecorativeGeometry dg;
                 for (int idx = 0; idx < adg.size(); idx++) {
                     dg = adg.getElt(idx);
-                    String geomId = comp.getPathName().concat(String.valueOf(dg.getIndexOnBody()));
+                    String geomId = comp.getPathName().concat(GEOMETRY_SEP+String.valueOf(dg.getIndexOnBody()));
                     UUID uuid = UUID.randomUUID();
                     mapDecorativeGeometryToUUID.put(geomId, uuid);
-                    mapUUIDToComponent.put(uuid, comp);
                     dgimp.setGeomID(uuid);
                     dg.implementGeometry(dgimp);
                     UUID uuid_mat = UUID.randomUUID();
                     mapMaterialToUUID.put(geomId, uuid_mat);
                     addMaterialJsonForGeometry(uuid_mat, dg, json_materials);
-                    addSceneJsonObject(model, dg, geomId, uuid, uuid_mat, json_scene_objects, null);
+                    UUID uuid_mesh = addSceneJsonObject(dg, geomId, uuid, uuid_mat, json_scene_objects);
+                    mapUUIDToComponent.put(uuid_mesh, comp);
+                    // HACK since comp in general has multiple meshes
+                    // FIXME
+                    mapComponentToUUID.put(comp, uuid_mesh);
                 }
             }
             mcIter.next();
@@ -102,9 +106,9 @@ public class VisualizationJson implements Observer{
         mat_json.put("type", "MeshPhongMaterial");
         String colorString = JSONUtilities.mapColorToRGBA(dg.getColor());
         mat_json.put("color", colorString);
-        mat_json.put("shininess", 50);
-        mat_json.put("emissive", colorString);
-        mat_json.put("specular", colorString);
+        mat_json.put("shininess", 30);
+        mat_json.put("emissive", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
+        mat_json.put("specular", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
         mat_json.put("side", 2);
         double opacity = dg.getOpacity();
         if (opacity < 0.999) {
@@ -126,9 +130,10 @@ public class VisualizationJson implements Observer{
         return jsonObject;
     }
 
-    private void addSceneJsonObject(Model model, DecorativeGeometry dg, String geomName, UUID uuid, UUID uuid_mat, JSONArray scene_objects, Component comp) {
+    private UUID addSceneJsonObject(DecorativeGeometry dg, String geomName, UUID uuid, UUID uuid_mat, JSONArray scene_objects) {
         Map obj_json = new LinkedHashMap();
-        obj_json.put("uuid", UUID.randomUUID().toString());
+        UUID mesh_uuid = UUID.randomUUID();
+        obj_json.put("uuid", mesh_uuid.toString());
         obj_json.put("type", "Mesh");
         obj_json.put("name", geomName);
         obj_json.put("geometry", uuid.toString());
@@ -140,6 +145,7 @@ public class VisualizationJson implements Observer{
         Transform fullTransform = xform.compose(relativeTransform);
         obj_json.put("matrix", JSONUtilities.createMatrixFromTransform(fullTransform, dg.getScaleFactors(), visScaleFactor));
         scene_objects.add(obj_json);
+        return mesh_uuid;
     }
 
     /**
@@ -147,18 +153,13 @@ public class VisualizationJson implements Observer{
      */
     public JSONObject getJson() {
         return topJson;
+    }    
+
+    public OpenSimObject findObjectForUUID(String uuidString) {
+        return mapUUIDToComponent.get(UUID.fromString(uuidString));
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        if (o instanceof ViewDB ){
-            if (arg instanceof ObjectSelectedEvent){
-                ObjectSelectedEvent evt = (ObjectSelectedEvent) arg;
-                OpenSimObject obj = evt.getSelectedObject().getOpenSimObject();
-                //List<UUID> uuids = mapComponentToUUIDList.get(obj);
-                //System.out.println(uuids.toString());
-            }
-        }
+    public UUID findUUIDForObject(OpenSimObject obj) {
+        return mapComponentToUUID.get(obj);
     }
-    
 }

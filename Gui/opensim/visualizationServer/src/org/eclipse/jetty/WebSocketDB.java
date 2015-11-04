@@ -7,8 +7,9 @@ package org.eclipse.jetty;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Observer;
 import java.util.Set;
-import org.eclipse.jetty.websocket.api.annotations.WebSocket;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -17,6 +18,7 @@ import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 public class WebSocketDB {
     static WebSocketDB instance;
     private static Set<VisWebSocket> sockets = Collections.synchronizedSet(new HashSet<VisWebSocket>());
+    private static Observer observer;
     
     /** Creates a new instance of WebSocketDB */
     private WebSocketDB() {
@@ -25,16 +27,32 @@ public class WebSocketDB {
     
     static void registerNewSocket(VisWebSocket socket) {
         sockets.add(socket);
+        socket.addObserver(observer);
     }
     
-    static void unRegisterSocket(WebSocket socket) {
+    static void unRegisterSocket(VisWebSocket socket) {
         sockets.remove(socket);
     }
     
-    public WebSocketDB getInstance() {
+    static public WebSocketDB getInstance() {
         if (instance == null)
             instance = new WebSocketDB();
         
         return instance;
+    }
+
+    /**
+     * @param observer the observer to set
+     */
+    public void setObserver(Observer observer) {
+        this.observer = observer;
+    }
+    
+    public void broadcastSelection(JSONObject selected)
+    {
+        /*for (VisWebSocket sock : sockets){
+            sock.sendSelection(selected);
+        }*/
+        sockets.iterator().next().sendSelection(selected);
     }
 }

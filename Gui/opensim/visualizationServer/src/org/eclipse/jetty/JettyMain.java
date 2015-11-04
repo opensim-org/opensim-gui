@@ -21,11 +21,10 @@ import org.opensim.utils.TheApp;
  * @author Ayman
  */
 public class JettyMain {
-
     static boolean serverup = false;
     private static final String serverRootDir = TheApp.getInstallDir();
     private static final String pathToStartPage = "/threejs/editor/";
-    private static final int serverPort = 8082;
+    private static final int serverPort = 8085;
     /**
      * @param args the command line arguments
      */

@@ -38,12 +38,16 @@ import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
+import java.util.UUID;
 import java.util.Vector;
 import java.util.prefs.Preferences;
 import javax.swing.SwingUtilities;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
+import org.eclipse.jetty.JettyMain;
+import org.eclipse.jetty.WebSocketDB;
+import org.json.simple.JSONObject;
 import org.openide.awt.StatusDisplayer;
 import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
@@ -53,7 +57,8 @@ import org.openide.util.lookup.AbstractLookup;
 import org.openide.util.lookup.InstanceContent;
 import org.opensim.modeling.*;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
-import org.opensim.modeling.DecorativeGeometry.Representation;
+import org.opensim.swingui.SwingWorker;
+import org.opensim.threejs.VisualizationJson;
 import org.opensim.utils.Prefs;
 import org.opensim.utils.TheApp;
 import org.opensim.view.*;
@@ -93,7 +98,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    private static ArrayList<Boolean> saveStatus = new ArrayList<Boolean>(4);
    // One single vtAssemby for the whole Scene
    private static vtkAssembly sceneAssembly;
-
+   private static WebSocketDB websocketdb;
     /**
      * @return the myLookup
      */
@@ -142,6 +147,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     private final static Lookup myLookup = new AbstractLookup (lookupContents);
     Lookup.Result<OpenSimObject> r;
 
+    private VisualizationJson visJson;
    /** Creates a new instance of ViewDB */
    private ViewDB() {
         applyPreferences();
@@ -202,6 +208,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     */
    public void update(Observable o, Object arg) {
       if (!isGraphicsAvailable()) return;
+      if (arg instanceof JSONObject){
+          handleJson((JSONObject) arg);
+      }
       if (o instanceof OpenSimDB){
          if (arg instanceof ObjectsAddedEvent) {
             ObjectsAddedEvent ev = (ObjectsAddedEvent)arg;
@@ -900,6 +909,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    }
 
    public void setSelectedObject(OpenSimObject obj) {
+      if (findObjectInSelectedList(obj)!=-1)
+          return;
       clearSelectedObjects();
 
       if (obj != null) {
@@ -907,6 +918,12 @@ public final class ViewDB extends Observable implements Observer, LookupListener
          selectedObjects.add(selectedObject);
          markSelected(selectedObject, true, true, true);
          ExplorerTopComponent.getDefault().selectNodeForSelectedObject(selectedObject);
+         if (websocketdb != null){
+             UUID obj_uuid = visJson.findUUIDForObject(obj);
+             JSONObject formJSON = new JSONObject();
+             formJSON.put("UUID", obj_uuid.toString());
+             websocketdb.broadcastSelection(formJSON);
+         }
       } else { // this function should never be called with obj = null
          ClearSelectedObjectsEvent evnt = new ClearSelectedObjectsEvent(this);
          setChanged();
@@ -1878,4 +1895,31 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         System.out.println("\n============");
     }
 
+    public static void startVisualizationServer() {
+        class VizWorker extends SwingWorker {
+                public Object construct() {
+                JettyMain.main(null);
+                    return this;
+                }
+            }
+            VizWorker viz = new VizWorker();
+            viz.start();
+            websocketdb = WebSocketDB.getInstance();
+            websocketdb.setObserver(instance);
+    }
+
+    public void setJson(VisualizationJson json) {
+        visJson = json;
+    }
+
+    private void handleJson(JSONObject jsonObject) {
+       Object uuid = jsonObject.get("uuid");
+       String uuidString = (String) uuid;
+       final OpenSimObject selectedObject = visJson.findObjectForUUID(uuidString);
+       SwingUtilities.invokeLater(new Runnable(){
+                @Override
+                public void run() {
+                    setSelectedObject(selectedObject);
+                }});
+    }
 }
