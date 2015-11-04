@@ -180,11 +180,15 @@ public class SingleModelVisuals implements ModelVisualsVtk {
     {           
         //int bid0 = dg.getBodyId();
         vtkAssembly modelAssembly = new vtkAssembly();
-        // Keep track of ground frame to avoid recomputation
-        FramesList frames = model.getFramesList();
-        FrameIterator frame = frames.begin();
-        while (!frame.equals(frames.end())) {
-            PhysicalFrame physicalFrame = PhysicalFrame.safeDownCast(frame.__deref__());
+        // Keep track of ground body to avoid recomputation
+        BodiesList bodies = model.getBodiesList();
+        BodyIterator body = bodies.begin();
+        // Handle Ground separately since it's a PhysicalFrame not a Body
+        BodyDisplayer groundRep = new BodyDisplayer(modelAssembly, model.getGround(),
+                       mapObject2VtkObjects, mapVtkObjects2Objects);
+        mapBodyIndicesToDisplayers.put(0, groundRep);
+        while (!body.equals(bodies.end())) {
+            PhysicalFrame physicalFrame = PhysicalFrame.safeDownCast(body.__deref__());
             if (physicalFrame!=null){
                 int id = physicalFrame.getMobilizedBodyIndex();
                // Body actor
@@ -192,12 +196,11 @@ public class SingleModelVisuals implements ModelVisualsVtk {
                        mapObject2VtkObjects, mapVtkObjects2Objects);
                mapBodyIndicesToDisplayers.put(id, bodyRep);
                }
-            frame.next();
+            body.next();
         }
         dgi.setModelAssembly(modelAssembly, mapBodyIndicesToDisplayers, model, mdh);
         ComponentsList mcList = model.getComponentsList();
         ComponentIterator mcIter = mcList.begin();
-        mcIter.next(); // Skip model itself
         while (!mcIter.equals(mcList.end())){
             //System.out.println("In createModelAssembly Type, name:"+mcIter.__deref__().getConcreteClassName()+mcIter.__deref__().getName());
             addGeometryForComponent(mcIter.__deref__(), model);
@@ -229,7 +232,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
      */
    public void updateModelDisplay(Model model) {
        
-      // Cycle thru frames and update their transforms from the kinematics engine
+      // Cycle thru bodies and update their transforms from the kinematics engine
        OpenSimContext context=OpenSimDB.getInstance().getContext(model);
         context.realizePosition();
         BodiesList bodies = model.getBodiesList();
@@ -294,7 +297,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
    }
 
      /**
-      * Get the vtkTransform matrix between ground and a frame frame,
+      * Get the vtkTransform matrix between ground and a body body,
       */
      vtkMatrix4x4 getBodyTransform(Model model, Body body)
      {
@@ -644,7 +647,6 @@ public class SingleModelVisuals implements ModelVisualsVtk {
     private void buildComponentList(Model model) {
         ComponentsList mcList = model.getComponentsList();
         ComponentIterator mcIter = mcList.begin();
-        mcIter.next(); // Skip model itself
         while (!mcIter.equals(mcList.end())){
             //System.out.println("Object:Type,Name:"+ mcIter.getConcreteClassName()+","+mcIter.getName());
             modelComponents.add(mcIter.__deref__());
