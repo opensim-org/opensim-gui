@@ -251,7 +251,6 @@ public class SingleModelVisuals implements ModelVisualsVtk {
         }
         ComponentsList mcList = model.getComponentsList();
         ComponentIterator mcIter = mcList.begin();
-        mcIter.next(); // Skip model itself
         while (!mcIter.equals(mcList.end())){
             //System.out.println("In updateModelDisplay Type, name:"+mcIter.__deref__().getConcreteClassName()+" "+mcIter.__deref__().getName());
             if (dgi.isNewComponent(mcIter.__deref__())){

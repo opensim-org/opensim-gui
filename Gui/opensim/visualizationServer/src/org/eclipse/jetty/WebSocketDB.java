@@ -48,7 +48,7 @@ public class WebSocketDB {
         this.observer = observer;
     }
     
-    public void broadcastSelection(JSONObject selected)
+    public void broadcastMessageJson(JSONObject selected)
     {
         /*for (VisWebSocket sock : sockets){
             sock.sendSelection(selected);

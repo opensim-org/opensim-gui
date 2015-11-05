@@ -7,6 +7,7 @@ package org.opensim.threejs;
 
 import java.io.FileReader;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Observable;
@@ -22,6 +23,7 @@ import org.opensim.modeling.Component;
 import org.opensim.modeling.ComponentIterator;
 import org.opensim.modeling.ComponentsList;
 import org.opensim.modeling.DecorativeGeometry;
+import org.opensim.modeling.Mesh;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
 import org.opensim.modeling.OpenSimObject;
@@ -37,9 +39,11 @@ import org.opensim.view.pub.ViewDB;
  * @author Ayman
  */
 public class VisualizationJson {
-    State state;
+    private State state;
+    private Model model;
     private final JSONObject topJson;
     private final HashMap<Integer, PhysicalFrame> mapBodyIndicesToFrames = new HashMap<Integer, PhysicalFrame>();
+    private final HashMap<Integer, String> mapBodyIndicesToVisNames = new HashMap<Integer, String>();
     private final double visScaleFactor = 1000.0;
     private HashMap<String, UUID> mapDecorativeGeometryToUUID = new HashMap<String, UUID>();
     private HashMap<String, UUID> mapMaterialToUUID = new HashMap<String, UUID>();
@@ -51,6 +55,7 @@ public class VisualizationJson {
         topJson =  createJsonForModel(model);
     }
     private JSONObject createJsonForModel(Model model) {
+        this.model = model;
         state = model.getWorkingState();
         ModelDisplayHints mdh = model.getDisplayHints();
         ComponentsList mcList = model.getComponentsList();
@@ -93,6 +98,10 @@ public class VisualizationJson {
                     // HACK since comp in general has multiple meshes
                     // FIXME
                     mapComponentToUUID.put(comp, uuid_mesh);
+                    if (mapBodyIndicesToVisNames.get(dg.getBodyId())==null && Mesh.safeDownCast(comp)!=null){
+                        mapBodyIndicesToVisNames.put(dg.getBodyId(), geomId);
+                        //System.out.println("Map body id="+dg.getBodyId()+" to mesh uuid"+uuid_mesh+" obj="+geomId);
+                    }
                 }
             }
             mcIter.next();
@@ -138,14 +147,19 @@ public class VisualizationJson {
         obj_json.put("name", geomName);
         obj_json.put("geometry", uuid.toString());
         obj_json.put("material", uuid_mat.toString());
+        Transform fullTransform = computeTransform(dg);
+        obj_json.put("matrix", JSONUtilities.createMatrixFromTransform(fullTransform, dg.getScaleFactors(), visScaleFactor));
+        scene_objects.add(obj_json);
+        return mesh_uuid;
+    }
+
+    protected Transform computeTransform(DecorativeGeometry dg) {
         int bod = dg.getBodyId();
         Transform relativeTransform = dg.getTransform();
         PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(bod);
         Transform xform = bodyFrame.getGroundTransform(state);
         Transform fullTransform = xform.compose(relativeTransform);
-        obj_json.put("matrix", JSONUtilities.createMatrixFromTransform(fullTransform, dg.getScaleFactors(), visScaleFactor));
-        scene_objects.add(obj_json);
-        return mesh_uuid;
+        return fullTransform;
     }
 
     /**
@@ -161,5 +175,31 @@ public class VisualizationJson {
 
     public UUID findUUIDForObject(OpenSimObject obj) {
         return mapComponentToUUID.get(obj);
+    }
+
+    public JSONObject makeXformsJson() {
+        JSONObject msg = new JSONObject();
+        Iterator<Integer> bodyIdIter = mapBodyIndicesToFrames.keySet().iterator();
+        msg.put("Op", "Frame");
+        while (bodyIdIter.hasNext()){
+            int bodyId = bodyIdIter.next();
+            PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(bodyId);
+            Transform xform = bodyFrame.getGroundTransform(state);
+            // Get uuid for first Mesh in body
+            
+            msg.put("name", mapBodyIndicesToVisNames.get(bodyId));
+            msg.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1., 1., 1.), visScaleFactor));
+            
+        }
+        //System.out.println("Sending:"+msg.toJSONString());
+        return msg;
+    }
+
+    public JSONObject createSelectionJson(OpenSimObject obj) {
+        JSONObject formJSON = new JSONObject();
+        UUID obj_uuid = findUUIDForObject(obj);
+        formJSON.put("UUID", obj_uuid.toString());  
+        formJSON.put("Op", "Select");  
+        return formJSON;
     }
 }

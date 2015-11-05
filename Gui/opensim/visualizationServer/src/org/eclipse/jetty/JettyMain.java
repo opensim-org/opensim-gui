@@ -21,10 +21,10 @@ import org.opensim.utils.TheApp;
  * @author Ayman
  */
 public class JettyMain {
-    static boolean serverup = false;
+    private static boolean serverup = false;
     private static final String serverRootDir = TheApp.getInstallDir();
     private static final String pathToStartPage = "/threejs/editor/";
-    private static final int serverPort = 8085;
+    private static final int serverPort = 8084;
     /**
      * @param args the command line arguments
      */
@@ -78,6 +78,13 @@ public class JettyMain {
      */
     public static String getPathToStartPage() {
         return pathToStartPage;
+    }
+
+    /**
+     * @return the serverup
+     */
+    public static boolean isServerup() {
+        return serverup;
     }
 
 }

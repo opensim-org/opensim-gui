@@ -919,10 +919,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
          markSelected(selectedObject, true, true, true);
          ExplorerTopComponent.getDefault().selectNodeForSelectedObject(selectedObject);
          if (websocketdb != null){
-             UUID obj_uuid = visJson.findUUIDForObject(obj);
-             JSONObject formJSON = new JSONObject();
-             formJSON.put("UUID", obj_uuid.toString());
-             websocketdb.broadcastSelection(formJSON);
+             websocketdb.broadcastMessageJson(visJson.createSelectionJson(obj));
          }
       } else { // this function should never be called with obj = null
          ClearSelectedObjectsEvent evnt = new ClearSelectedObjectsEvent(this);
@@ -1175,6 +1172,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       lockDrawingSurfaces(true);
       mapModelsToVisuals.get(aModel).updateModelDisplay(aModel);
       lockDrawingSurfaces(false);
+      if (websocketdb != null){
+        // Make xforms JSON
+        websocketdb.broadcastMessageJson(visJson.makeXformsJson());
+      }
    }
 
    /**
@@ -1902,10 +1903,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                     return this;
                 }
             }
-            VizWorker viz = new VizWorker();
-            viz.start();
-            websocketdb = WebSocketDB.getInstance();
-            websocketdb.setObserver(instance);
+        VizWorker viz = new VizWorker();
+        viz.start();
+        websocketdb = WebSocketDB.getInstance();
+        websocketdb.setObserver(instance);
     }
 
     public void setJson(VisualizationJson json) {
