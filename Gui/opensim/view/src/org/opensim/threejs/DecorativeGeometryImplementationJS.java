@@ -6,6 +6,7 @@
 
 package org.opensim.threejs;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -17,7 +18,6 @@ import org.opensim.modeling.DecorativeCone;
 import org.opensim.modeling.DecorativeCylinder;
 import org.opensim.modeling.DecorativeEllipsoid;
 import org.opensim.modeling.DecorativeFrame;
-import org.opensim.modeling.DecorativeGeometry;
 import org.opensim.modeling.DecorativeGeometryImplementation;
 import org.opensim.modeling.DecorativeLine;
 import org.opensim.modeling.DecorativeMesh;
@@ -106,21 +106,68 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
             Map pos_json = new LinkedHashMap();
             pos_json.put("itemSize", 3);
             pos_json.put("type", "Float32Array");
+            Map normals_json = new LinkedHashMap();
+            normals_json.put("itemSize", 3);
+            normals_json.put("type", "Float32Array");
             
-            // Build JSONArrays for attributes, normal
-            JSONArray pos_array = new JSONArray();
-            Map data_json = new LinkedHashMap();
             PolygonalMesh mesh = new PolygonalMesh();
             mesh.loadFile(fullFileName);
             int nv = mesh.getNumVertices();
+            
+            int nf = mesh.getNumFaces();
+            Vec3[] normals = new Vec3[nv];
+            for (int f=0; f < nf; f++){
+                 // get first three face indices, form normal from cross product
+                //System.out.println("f="+f);
+                Vec3[] verts = new Vec3[3];
+                for (int i=0; i<3; i++){
+                    verts[i] = mesh.getVertexPosition(mesh.getFaceVertex(f, i));
+                }
+                Vec3 side1 = new Vec3();
+                Vec3 side2 = new Vec3();
+                for (int i=0; i<3; i++){
+                    side1.set(i, verts[1].get(i) - verts[0].get(i));
+                    side2.set(i, verts[2].get(i) - verts[0].get(i));
+                }
+                Vec3 cross = new Vec3(side1.get(1)*side2.get(2)-side1.get(2)*side2.get(1),
+                                    side1.get(0)*side2.get(2)-side1.get(2)*side2.get(0),
+                                    side1.get(0)*side2.get(1)-side1.get(1)*side2.get(0));
+                double norm = Math.sqrt(cross.get(0)*cross.get(0)+
+                        cross.get(1)*cross.get(1)+cross.get(2)*cross.get(2));
+                for (int i=0; i<3; i++) cross.set(i, cross.get(i)/norm);
+                int nvf = mesh.getNumVerticesForFace(f);
+                for (int i=0; i<nvf; i++){
+                    int vindex = mesh.getFaceVertex(f, i);
+                    //System.out.print("f-v:"+vindex);
+                    normals[vindex]= cross;
+                }
+                //System.out.println("");   
+            }
+            // Build JSONArrays for attributes, normal
+            JSONArray pos_array = new JSONArray();
+            JSONArray normals_array = new JSONArray();
+            Map data_json = new LinkedHashMap();
             for (int v=0; v < nv; v++){
                 Vec3 vec3 = mesh.getVertexPosition(v);
                 for (int coord=0; coord <3; coord++){
                     pos_array.add(vec3.get(coord)*visualizerScaleFactor);
                  }
+                //System.out.println("v="+v+" normal =:"+normals[v].toString());
+                if (normals[v]!=null){
+                    normals_array.add(normals[v].get(0));
+                    normals_array.add(normals[v].get(1));
+                    normals_array.add(normals[v].get(2));
+                }
+                else {
+                    normals_array.add(0.0);
+                    normals_array.add(0.0);
+                    normals_array.add(0.0);
+                }
             }
             pos_json.put("array", pos_array);
+            normals_json.put("array", normals_array);
             attributes_json.put("position", pos_json);
+            attributes_json.put("normal", normals_json);
             // Now the index to pass connectivity
             /*
             "index": {
@@ -131,7 +178,6 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
             */
             Map index_json = new LinkedHashMap();
             JSONArray index_array = new JSONArray();
-            int nf = mesh.getNumFaces();
             for (int f=0; f < nf; f++){
                 int numVerts = mesh.getNumVerticesForFace(f);
                 for (int vi=0; vi <numVerts-2; vi++){
