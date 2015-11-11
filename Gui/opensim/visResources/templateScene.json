@@ -15,7 +15,15 @@
 				"distance": 0,
 				"decay": 1,
                                 "visible": false
-			}
+			},
+                        {
+                                "uuid": "1C07B478-981B-4DCA-B59D-CA2031DE4406",
+                                "type": "DirectionalLight",
+                                "name": "DirectionalLight 1",
+                                "matrix": [1,0,0,0,0,1,0,0,0,0,1,0,500,500,100,1],
+                                "color": 16777215,
+                                "intensity": 1
+                        }
                         ]
 	},
 	"metadata": {
