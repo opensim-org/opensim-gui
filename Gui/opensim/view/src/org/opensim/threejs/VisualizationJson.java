@@ -110,7 +110,7 @@ public class VisualizationJson {
     }
 
     private void addMaterialJsonForGeometry(UUID uuid_mat, DecorativeGeometry dg, JSONArray json_materials) {
-        Map mat_json = new LinkedHashMap();
+        Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
         mat_json.put("uuid", uuid_mat.toString());
         mat_json.put("type", "MeshPhongMaterial");
         String colorString = JSONUtilities.mapColorToRGBA(dg.getColor());
@@ -140,7 +140,7 @@ public class VisualizationJson {
     }
 
     private UUID addSceneJsonObject(DecorativeGeometry dg, String geomName, UUID uuid, UUID uuid_mat, JSONArray scene_objects) {
-        Map obj_json = new LinkedHashMap();
+        Map<String, Object> obj_json = new LinkedHashMap<String, Object>();
         UUID mesh_uuid = UUID.randomUUID();
         obj_json.put("uuid", mesh_uuid.toString());
         obj_json.put("type", "Mesh");

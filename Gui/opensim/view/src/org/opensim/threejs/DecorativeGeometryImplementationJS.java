@@ -46,7 +46,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
     
     @Override
     public void implementConeGeometry(DecorativeCone arg0) {
-        Map dg_json = new LinkedHashMap();
+        Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "CylinderGeometry");
 	dg_json.put("radiusTop", 0.);
@@ -70,7 +70,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
             "radialSegments": 8,
             "tubularSegments": 6,
             "arc": 6.283185307179586 */
-        Map dg_json = new LinkedHashMap();
+        Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "TorusGeometry");
 	dg_json.put("radius", arg0.getTorusRadius()*visualizerScaleFactor);
@@ -91,10 +91,10 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         String filenameLower = fullFileName.toLowerCase();
         if (filenameLower.endsWith(".vtp") || filenameLower.endsWith(".stl") || filenameLower.endsWith(".obj")){
             // Create json for vtp
-            Map dg_json = new LinkedHashMap();
+            Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
             dg_json.put("uuid", geomID.toString());
             dg_json.put("type", "BufferGeometry");
-            Map attributes_json = new LinkedHashMap();
+            Map<String, Object> attributes_json = new LinkedHashMap<String, Object>();
             // Make position json entry
             /*
                     "position": {
@@ -103,10 +103,10 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
                         "array": [0,0,0,100,0,0,100,100,0]
                     }
             */
-            Map pos_json = new LinkedHashMap();
+            Map<String, Object> pos_json = new LinkedHashMap<String, Object>();
             pos_json.put("itemSize", 3);
             pos_json.put("type", "Float32Array");
-            Map normals_json = new LinkedHashMap();
+            Map<String, Object> normals_json = new LinkedHashMap<String, Object>();
             normals_json.put("itemSize", 3);
             normals_json.put("type", "Float32Array");
             
@@ -146,7 +146,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
             // Build JSONArrays for attributes, normal
             JSONArray pos_array = new JSONArray();
             JSONArray normals_array = new JSONArray();
-            Map data_json = new LinkedHashMap();
+            Map<String, Object> data_json = new LinkedHashMap<String, Object>();
             for (int v=0; v < nv; v++){
                 Vec3 vec3 = mesh.getVertexPosition(v);
                 for (int coord=0; coord <3; coord++){
@@ -176,7 +176,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
                         "array": [3,0,1,3,2,0]
                  }
             */
-            Map index_json = new LinkedHashMap();
+            Map<String, Object> index_json = new LinkedHashMap<String, Object>();
             JSONArray index_array = new JSONArray();
             for (int f=0; f < nf; f++){
                 int numVerts = mesh.getNumVerticesForFace(f);
@@ -210,7 +210,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 
     @Override
     public void implementFrameGeometry(DecorativeFrame arg0) {
-        Map dg_json = new LinkedHashMap();
+        Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "SphereGeometry");
 	dg_json.put("radius", .01*visualizerScaleFactor);
@@ -230,7 +230,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 
     @Override
     public void implementSphereGeometry(DecorativeSphere arg0) {
-        Map dg_json = new LinkedHashMap();
+        Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "SphereGeometry");
 	dg_json.put("radius", arg0.getRadius()*visualizerScaleFactor);
@@ -249,7 +249,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
             "type": "CircleGeometry",
             "radius": 20,
             "segments": 32 */
-        Map dg_json = new LinkedHashMap();
+        Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "CircleGeometry");
 	dg_json.put("radius", arg0.getRadius()*visualizerScaleFactor);
@@ -259,7 +259,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 
     @Override
     public void implementCylinderGeometry(DecorativeCylinder arg0) {
-        Map dg_json = new LinkedHashMap();
+        Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "CylinderGeometry");
 	dg_json.put("radiusTop", arg0.getRadius()*visualizerScaleFactor);
@@ -272,7 +272,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 
     @Override
     public void implementBrickGeometry(DecorativeBrick arg0) {
-        Map dg_json = new LinkedHashMap();
+        Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "BoxGeometry");
 	dg_json.put("width", arg0.getHalfLengths().get(0)*visualizerScaleFactor);
