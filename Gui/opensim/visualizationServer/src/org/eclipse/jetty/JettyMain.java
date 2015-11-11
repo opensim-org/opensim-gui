@@ -24,7 +24,7 @@ public class JettyMain {
     private static boolean serverup = false;
     private static final String serverRootDir = TheApp.getInstallDir();
     private static final String pathToStartPage = "/threejs/editor/";
-    private static final int serverPort = 8084;
+    private static final int serverPort = 8086;
     /**
      * @param args the command line arguments
      */
@@ -49,8 +49,9 @@ public class JettyMain {
                 server.setHandler(context);
 
                 server.start();
-                server.join();
                 serverup = true;
+                server.join();
+
             }
         } catch (MalformedURLException ex) {
             Logger.getLogger(JettyMain.class.getName()).log(Level.SEVERE, null, ex);
