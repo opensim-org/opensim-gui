@@ -1,0 +1,13 @@
+# ant-specific
+dist/
+build/
+
+# netbeans-specific
+nbproject/private/
+#nbproject/*
+#!nbproject/project.properties
+#!nbproject/project.xml
+
+# general back-up files
+*~
+/Gui/opensim/nbproject/private/
