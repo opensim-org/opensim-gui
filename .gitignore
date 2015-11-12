@@ -11,5 +11,14 @@ build/
 #!nbproject/project.properties
 #!nbproject/project.xml
 
+Gui/opensim/nbproject/platform.xml
+Gui/opensim/nbproject/genfiles.properties
+
 # general back-up files
 *~
+
+# OpenSim
+AppState.xml
+err.log
+out.log
+*.swp
