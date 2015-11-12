@@ -23,7 +23,15 @@
                                 "matrix": [1,0,0,0,0,1,0,0,0,0,1,0,500,500,100,1],
                                 "color": 16777215,
                                 "intensity": 1
-                        }
+                        },
+                        {
+				"uuid": "AE6F5E63-5985-4BB0-A8AB-C9A64273E669",
+				"type": "Mesh",
+				"name": "GroundPlane",
+				"matrix": [1,0,0,0,0,0,1,0,0,-1,0,0,0,0,0,1],
+				"geometry": "A42B8018-CE2A-4A76-93FD-754385EF0444",
+				"material": "F408C3DE-FF2B-4229-A254-0FBD9BDB6207"
+			}
                         ]
 	},
 	"metadata": {
@@ -31,10 +39,25 @@
 		"type": "Object",
 		"generator": "Object3D.toJSON"
 	},
-	"geometries": [
+	"geometries": [{
+			"uuid": "A42B8018-CE2A-4A76-93FD-754385EF0444",
+			"type": "PlaneGeometry",
+			"width": 200,
+			"height": 200,
+			"widthSegments": 1,
+			"heightSegments": 1
+		}
                 ],
 	"materials": [
 		{
+			"uuid": "F408C3DE-FF2B-4229-A254-0FBD9BDB6207",
+			"type": "MeshPhongMaterial",
+			"color": 16777215,
+			"emissive": 0,
+			"specular": 1118481,
+			"shininess": 30
+		},
+                {
 			"uuid": "4AE8130E-B6A8-47BC-ACCF-060973C74044",
 			"type": "MeshPhongMaterial",
 			"color": 16777215,
