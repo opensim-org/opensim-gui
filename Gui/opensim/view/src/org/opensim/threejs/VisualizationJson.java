@@ -10,14 +10,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.opensim.modeling.ArrayDecorativeGeometry;
 import org.opensim.modeling.BodiesList;
+import org.opensim.modeling.Body;
 import org.opensim.modeling.BodyIterator;
 import org.opensim.modeling.Component;
 import org.opensim.modeling.ComponentIterator;
@@ -31,8 +30,6 @@ import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.State;
 import org.opensim.modeling.Transform;
 import org.opensim.modeling.Vec3;
-import org.opensim.view.ObjectSelectedEvent;
-import org.opensim.view.pub.ViewDB;
 
 /**
  *
@@ -43,6 +40,7 @@ public class VisualizationJson {
     private Model model;
     private final JSONObject topJson;
     private final HashMap<Integer, PhysicalFrame> mapBodyIndicesToFrames = new HashMap<Integer, PhysicalFrame>();
+    private final HashMap<Integer, JSONObject> mapBodyIndicesToJson = new HashMap<Integer, JSONObject>();
     private final HashMap<Integer, String> mapBodyIndicesToVisNames = new HashMap<Integer, String>();
     private final double visScaleFactor = 1000.0;
     private HashMap<String, UUID> mapDecorativeGeometryToUUID = new HashMap<String, UUID>();
@@ -50,6 +48,7 @@ public class VisualizationJson {
     private HashMap<UUID, Component> mapUUIDToComponent = new HashMap<UUID, Component>();
     private HashMap<OpenSimObject, UUID> mapComponentToUUID = new HashMap<OpenSimObject, UUID>();
     private static String GEOMETRY_SEP = ".";
+    private Vec3 vec3Unit = new Vec3(1.0, 1.0, 1.0);
     
     public VisualizationJson(Model model) {
         topJson =  createJsonForModel(model);
@@ -60,22 +59,37 @@ public class VisualizationJson {
         ModelDisplayHints mdh = model.getDisplayHints();
         ComponentsList mcList = model.getComponentsList();
         ComponentIterator mcIter = mcList.begin();
+        // Load template 
         JSONObject jsonTop = loadTemplateJSON();
-        if (jsonTop == null) {
-        }
         BodiesList bodies = model.getBodiesList();
         BodyIterator body = bodies.begin();
         mapBodyIndicesToFrames.put(0, model.getGround());
-        while (!body.equals(bodies.end())) {
-            int id = body.getMobilizedBodyIndex();
-            mapBodyIndicesToFrames.put(id, PhysicalFrame.safeDownCast(body.__deref__()));
-            System.out.println("id=" + id + " body =" + body.getName());
-            body.next();
-        }
+        
         JSONArray json_geometries = (JSONArray) jsonTop.get("geometries");
         JSONArray json_materials = (JSONArray) jsonTop.get("materials");
         JSONObject sceneObject = (JSONObject) jsonTop.get("object");
-        JSONArray json_scene_objects = (JSONArray) sceneObject.get("children");
+        JSONArray json_scene_children = (JSONArray) sceneObject.get("children");
+        
+        JSONObject model_json = new JSONObject();
+        json_scene_children.add(model_json);
+        // create model node
+        model_json.put("uuid", UUID.randomUUID().toString());
+        model_json.put("type", "Group");
+        model_json.put("name", model.getName()+":Ground");
+        //System.out.println(model_json.toJSONString());
+        JSONArray bodies_json = new JSONArray();
+        model_json.put("children", bodies_json);
+        mapBodyIndicesToJson.put(0, model_json);
+        while (!body.equals(bodies.end())) {
+            int id = body.getMobilizedBodyIndex();
+            mapBodyIndicesToFrames.put(id, body.__deref__());
+            //System.out.println("id=" + id + " body =" + body.getName());
+            JSONObject bodyJson = createBodyJson(body.__deref__());
+            mapBodyIndicesToJson.put(id, bodyJson);
+            bodies_json.add(bodyJson);
+            //System.out.println(bodyJson.toJSONString());
+            body.next();
+        }
         DecorativeGeometryImplementationJS dgimp = new DecorativeGeometryImplementationJS(json_geometries, visScaleFactor);
         while (!mcIter.equals(mcList.end())) {
             Component comp = mcIter.__deref__();
@@ -93,7 +107,11 @@ public class VisualizationJson {
                     UUID uuid_mat = UUID.randomUUID();
                     mapMaterialToUUID.put(geomId, uuid_mat);
                     addMaterialJsonForGeometry(uuid_mat, dg, json_materials);
-                    UUID uuid_mesh = addSceneJsonObject(dg, geomId, uuid, uuid_mat, json_scene_objects);
+                    JSONObject bodyJson = mapBodyIndicesToJson.get(dg.getBodyId());
+                    if (bodyJson.get("children")==null)
+                        bodyJson.put("children", new JSONArray());
+                    UUID uuid_mesh = addtoFrameJsonObject(dg, geomId, uuid, uuid_mat, (JSONArray)bodyJson.get("children"));
+
                     mapUUIDToComponent.put(uuid_mesh, comp);
                     // HACK since comp in general has multiple meshes
                     // FIXME
@@ -139,7 +157,7 @@ public class VisualizationJson {
         return jsonObject;
     }
 
-    private UUID addSceneJsonObject(DecorativeGeometry dg, String geomName, UUID uuid, UUID uuid_mat, JSONArray scene_objects) {
+    private UUID addtoFrameJsonObject(DecorativeGeometry dg, String geomName, UUID uuid, UUID uuid_mat, JSONArray mobody_objects) {
         Map<String, Object> obj_json = new LinkedHashMap<String, Object>();
         UUID mesh_uuid = UUID.randomUUID();
         obj_json.put("uuid", mesh_uuid.toString());
@@ -147,20 +165,11 @@ public class VisualizationJson {
         obj_json.put("name", geomName);
         obj_json.put("geometry", uuid.toString());
         obj_json.put("material", uuid_mat.toString());
-        Transform fullTransform = computeTransform(dg);
-        obj_json.put("matrix", JSONUtilities.createMatrixFromTransform(fullTransform, dg.getScaleFactors(), visScaleFactor));
-        scene_objects.add(obj_json);
+        obj_json.put("matrix", JSONUtilities.createMatrixFromTransform(dg.getTransform(), dg.getScaleFactors(), visScaleFactor));
+        mobody_objects.add(obj_json);
         return mesh_uuid;
     }
 
-    protected Transform computeTransform(DecorativeGeometry dg) {
-        int bod = dg.getBodyId();
-        Transform relativeTransform = dg.getTransform();
-        PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(bod);
-        Transform xform = bodyFrame.getGroundTransform(state);
-        Transform fullTransform = xform.compose(relativeTransform);
-        return fullTransform;
-    }
 
     /**
      * @return the topJson
@@ -169,6 +178,17 @@ public class VisualizationJson {
         return topJson;
     }    
 
+    private JSONObject createBodyJson(Body body){
+        JSONObject bdyJson = new JSONObject();
+        bdyJson.put("uuid", UUID.randomUUID().toString());
+        bdyJson.put("type", "Group");
+        bdyJson.put("name", body.getName());
+        PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(body.getMobilizedBodyIndex());
+        Transform bodyXform = bodyFrame.getGroundTransform(state);
+        bdyJson.put("matrix", JSONUtilities.createMatrixFromTransform(bodyXform, vec3Unit, visScaleFactor));
+        return bdyJson;
+    }
+    
     public OpenSimObject findObjectForUUID(String uuidString) {
         return mapUUIDToComponent.get(UUID.fromString(uuidString));
     }
