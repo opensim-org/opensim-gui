@@ -1,0 +1,54 @@
+# Windows testing using Visual Studio.
+
+# Syntax for this file:
+# http://www.appveyor.com/docs/appveyor-yml
+
+# Speeding up a Visual Studio build.
+# http://blogs.msdn.com/b/vcblog/archive/2011/01/05/damn-my-vc-project-is-building-slower-in-vs2010-what-do-i-do-now-a-step-by-step-guide.aspx
+  
+shallow_clone: true
+
+os: Visual Studio 2015
+
+platform: x64
+
+init:
+  # Note: python 2.7 32bit is already on the path. We want v2.7 64bit,
+  # so we must add v2.7 64bit earlier on the PATH.
+  # http://www.appveyor.com/docs/installed-software
+  - SET OPENSIM_HOME=C:/OpenSim
+  - SET PATH=%OPENSIM_HOME%/bin;%PATH%
+  #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+nuget:
+  account_feed: true
+
+install:
+
+  ## The GUI is built with the Netbeans platform.
+  - ps: choco install netbeans --yes --limit-output | Out-Null
+
+  ## Apache Ant for building Java projects.
+  - choco install ant --yes --limit-output
+  
+  ## OpenSim (and Simbody).
+  # OpenSim's installation is pushed to our Appveyor NuGet account feed.
+  - nuget install opensim-core -Version 0.0.0 -ExcludeVersion -OutputDirectory C:\
+
+build_script:
+  - cd Gui/opensim
+  - ant build #-Dnbplatform.default.netbeans.dest.dir="C:/Program Files/NetBeans/8.0.2" -Dnbplatform.default.harness.dir="C:/Program Files/NetBeans/8.0.2/harness"
+  
+test_script:
+  ## Run tests.
+  - echo "No tests yet."
+  # ant run
+
+after_test:
+  ## On master branch, create package for OpenSim.
+  # Detect if we are on the master branch.
+  - IF %APPVEYOR_REPO_BRANCH% EQU master IF NOT DEFINED APPVEYOR_PULL_REQUEST_NUMBER SET DISTR=TRUE
+  # Create and upload package.
+  #- IF DEFINED DISTR <CREATE PACKAGE: ant build-zip>
+  #- IF DEFINED DISTR cd %APPVEYOR_BUILD_FOLDER%
+  #- IF DEFINED DISTR cd dist
+  #- IF DEFINED DISTR appveyor PushArtifact opensim.zip
