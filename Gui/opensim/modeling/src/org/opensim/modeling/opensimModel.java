@@ -9,34 +9,6 @@
 package org.opensim.modeling;
 
 public class opensimModel implements opensimModelConstants {
-  public static void setOpenSimVersion(String value) {
-    opensimModelJNI.OpenSimVersion_set(value);
-  }
-
-  public static String getOpenSimVersion() {
-    return opensimModelJNI.OpenSimVersion_get();
-  }
-
-  public static String GetVersionAndDate() {
-    return opensimModelJNI.GetVersionAndDate();
-  }
-
-  public static String GetVersion() {
-    return opensimModelJNI.GetVersion();
-  }
-
-  public static String GetOSInfoVerbose() {
-    return opensimModelJNI.GetOSInfoVerbose();
-  }
-
-  public static String GetOSInfo() {
-    return opensimModelJNI.GetOSInfo();
-  }
-
-  public static String GetCompilerVersion() {
-    return opensimModelJNI.GetCompilerVersion();
-  }
-
   public static SpatialVec findRelativeVelocity(SWIGTYPE_p_Transform X_FA, SpatialVec V_FA, SWIGTYPE_p_Transform X_FB, SpatialVec V_FB) {
     return new SpatialVec(opensimModelJNI.findRelativeVelocity(SWIGTYPE_p_Transform.getCPtr(X_FA), SpatialVec.getCPtr(V_FA), V_FA, SWIGTYPE_p_Transform.getCPtr(X_FB), SpatialVec.getCPtr(V_FB), V_FB), true);
   }
@@ -254,6 +226,34 @@ public class opensimModel implements opensimModelConstants {
   public static Vec3 getWhite() {
     long cPtr = opensimModelJNI.White_get();
     return (cPtr == 0) ? null : new Vec3(cPtr, false);
+  }
+
+  public static void setOpenSimVersion(String value) {
+    opensimModelJNI.OpenSimVersion_set(value);
+  }
+
+  public static String getOpenSimVersion() {
+    return opensimModelJNI.OpenSimVersion_get();
+  }
+
+  public static String GetVersionAndDate() {
+    return opensimModelJNI.GetVersionAndDate();
+  }
+
+  public static String GetVersion() {
+    return opensimModelJNI.GetVersion();
+  }
+
+  public static String GetOSInfoVerbose() {
+    return opensimModelJNI.GetOSInfoVerbose();
+  }
+
+  public static String GetOSInfo() {
+    return opensimModelJNI.GetOSInfo();
+  }
+
+  public static String GetCompilerVersion() {
+    return opensimModelJNI.GetCompilerVersion();
   }
 
   public static int getArray_CAPMIN() {

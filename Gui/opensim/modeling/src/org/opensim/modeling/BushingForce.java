@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class BushingForce extends Force {
+public class BushingForce extends TwoFrameLinkerForce {
   private transient long swigCPtr;
 
   public BushingForce(long cPtr, boolean cMemoryOwn) {
@@ -201,40 +201,24 @@ public class BushingForce extends Force {
     opensimModelJNI.BushingForce_set_translational_damping__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void copyProperty_frames(BushingForce source) {
-    opensimModelJNI.BushingForce_copyProperty_frames(swigCPtr, this, BushingForce.getCPtr(source), source);
-  }
-
-  public PhysicalFrame get_frames(int i) {
-    return new PhysicalFrame(opensimModelJNI.BushingForce_get_frames(swigCPtr, this, i), false);
-  }
-
-  public PhysicalFrame upd_frames(int i) {
-    return new PhysicalFrame(opensimModelJNI.BushingForce_upd_frames(swigCPtr, this, i), false);
-  }
-
-  public void set_frames(int i, PhysicalFrame value) {
-    opensimModelJNI.BushingForce_set_frames(swigCPtr, this, i, PhysicalFrame.getCPtr(value), value);
-  }
-
-  public int append_frames(PhysicalFrame value) {
-    return opensimModelJNI.BushingForce_append_frames(swigCPtr, this, PhysicalFrame.getCPtr(value), value);
-  }
-
-  public void constructProperty_frames() {
-    opensimModelJNI.BushingForce_constructProperty_frames(swigCPtr, this);
-  }
-
   public BushingForce() {
     this(opensimModelJNI.new_BushingForce__SWIG_0(), true);
   }
 
-  public BushingForce(String frame1Name, String frame2Name, Vec3 transStiffness, Vec3 rotStiffness, Vec3 transDamping, Vec3 rotDamping) {
-    this(opensimModelJNI.new_BushingForce__SWIG_1(frame1Name, frame2Name, Vec3.getCPtr(transStiffness), transStiffness, Vec3.getCPtr(rotStiffness), rotStiffness, Vec3.getCPtr(transDamping), transDamping, Vec3.getCPtr(rotDamping), rotDamping), true);
+  public BushingForce(String name, String frame1Name, String frame2Name) {
+    this(opensimModelJNI.new_BushingForce__SWIG_1(name, frame1Name, frame2Name), true);
   }
 
-  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
-    opensimModelJNI.BushingForce_updateFromXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+  public BushingForce(String name, String frame1Name, String frame2Name, Vec3 transStiffness, Vec3 rotStiffness, Vec3 transDamping, Vec3 rotDamping) {
+    this(opensimModelJNI.new_BushingForce__SWIG_2(name, frame1Name, frame2Name, Vec3.getCPtr(transStiffness), transStiffness, Vec3.getCPtr(rotStiffness), rotStiffness, Vec3.getCPtr(transDamping), transDamping, Vec3.getCPtr(rotDamping), rotDamping), true);
+  }
+
+  public BushingForce(String name, String frame1Name, Transform transformInFrame1, String frame2Name, Transform transformInFrame2, Vec3 transStiffness, Vec3 rotStiffness, Vec3 transDamping, Vec3 rotDamping) {
+    this(opensimModelJNI.new_BushingForce__SWIG_3(name, frame1Name, Transform.getCPtr(transformInFrame1), transformInFrame1, frame2Name, Transform.getCPtr(transformInFrame2), transformInFrame2, Vec3.getCPtr(transStiffness), transStiffness, Vec3.getCPtr(rotStiffness), rotStiffness, Vec3.getCPtr(transDamping), transDamping, Vec3.getCPtr(rotDamping), rotDamping), true);
+  }
+
+  public BushingForce(String name, String frame1Name, Vec3 locationInFrame1, Vec3 orientationInFrame1, String frame2Name, Vec3 locationInFrame2, Vec3 orientationInFrame2, Vec3 transStiffness, Vec3 rotStiffness, Vec3 transDamping, Vec3 rotDamping) {
+    this(opensimModelJNI.new_BushingForce__SWIG_4(name, frame1Name, Vec3.getCPtr(locationInFrame1), locationInFrame1, Vec3.getCPtr(orientationInFrame1), orientationInFrame1, frame2Name, Vec3.getCPtr(locationInFrame2), locationInFrame2, Vec3.getCPtr(orientationInFrame2), orientationInFrame2, Vec3.getCPtr(transStiffness), transStiffness, Vec3.getCPtr(rotStiffness), rotStiffness, Vec3.getCPtr(transDamping), transDamping, Vec3.getCPtr(rotDamping), rotDamping), true);
   }
 
   public double computePotentialEnergy(State s) {

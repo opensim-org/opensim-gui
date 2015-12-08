@@ -173,8 +173,4 @@ public class Arrow extends Geometry {
     this(opensimModelJNI.new_Arrow__SWIG_1(), true);
   }
 
-  public void createDecorativeGeometry(ArrayDecorativeGeometry decoGeoms) {
-    opensimModelJNI.Arrow_createDecorativeGeometry(swigCPtr, this, ArrayDecorativeGeometry.getCPtr(decoGeoms), decoGeoms);
-  }
-
 }

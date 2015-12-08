@@ -149,6 +149,10 @@ public class JointIterator {
     return new SWIGTYPE_p_SimTK__MultibodySystem(opensimModelJNI.JointIterator_getSystem(swigCPtr, this), false);
   }
 
+  public boolean hasSystem() {
+    return opensimModelJNI.JointIterator_hasSystem(swigCPtr, this);
+  }
+
   public Component getComponent(String name) {
     return new Component(opensimModelJNI.JointIterator_getComponent(swigCPtr, this, name), false);
   }
@@ -241,6 +245,10 @@ public class JointIterator {
     opensimModelJNI.JointIterator_dumpPathName(swigCPtr, this);
   }
 
+  public ComponentsList getComponentsList() {
+    return new ComponentsList(opensimModelJNI.JointIterator_getComponentsList(swigCPtr, this), true);
+  }
+
   public FramesList getFramesList() {
     return new FramesList(opensimModelJNI.JointIterator_getFramesList(swigCPtr, this), true);
   }
@@ -251,10 +259,6 @@ public class JointIterator {
 
   public MusclesList getMusclesList() {
     return new MusclesList(opensimModelJNI.JointIterator_getMusclesList(swigCPtr, this), true);
-  }
-
-  public ComponentsList getComponentsList() {
-    return new ComponentsList(opensimModelJNI.JointIterator_getComponentsList(swigCPtr, this), true);
   }
 
   public ModelComponentList getModelComponentList() {

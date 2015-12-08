@@ -101,8 +101,4 @@ public class Brick extends Geometry {
     this(opensimModelJNI.new_Brick__SWIG_1(Vec3.getCPtr(halfLengths), halfLengths), true);
   }
 
-  public void createDecorativeGeometry(ArrayDecorativeGeometry decoGeoms) {
-    opensimModelJNI.Brick_createDecorativeGeometry(swigCPtr, this, ArrayDecorativeGeometry.getCPtr(decoGeoms), decoGeoms);
-  }
-
 }

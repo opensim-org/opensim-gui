@@ -76,6 +76,10 @@ public class OpenSimObject {
     return opensimModelJNI.OpenSimObject_getConcreteClassName(swigCPtr, this);
   }
 
+  public void assign(OpenSimObject aObject) {
+    opensimModelJNI.OpenSimObject_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+  }
+
   public boolean isEqualTo(OpenSimObject aObject) {
     return opensimModelJNI.OpenSimObject_isEqualTo(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }

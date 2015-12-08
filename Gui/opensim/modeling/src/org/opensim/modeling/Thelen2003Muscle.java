@@ -313,72 +313,72 @@ public class Thelen2003Muscle extends ActivationFiberLengthMuscle {
     opensimModelJNI.Thelen2003Muscle_copyProperty_MuscleFirstOrderActivationDynamicModel(swigCPtr, this, Thelen2003Muscle.getCPtr(source), source);
   }
 
-  public SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel get_MuscleFirstOrderActivationDynamicModel(int i) {
-    return new SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel(opensimModelJNI.Thelen2003Muscle_get_MuscleFirstOrderActivationDynamicModel__SWIG_0(swigCPtr, this, i), false);
+  public MuscleFirstOrderActivationDynamicModel get_MuscleFirstOrderActivationDynamicModel(int i) {
+    return new MuscleFirstOrderActivationDynamicModel(opensimModelJNI.Thelen2003Muscle_get_MuscleFirstOrderActivationDynamicModel__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel upd_MuscleFirstOrderActivationDynamicModel(int i) {
-    return new SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel(opensimModelJNI.Thelen2003Muscle_upd_MuscleFirstOrderActivationDynamicModel__SWIG_0(swigCPtr, this, i), false);
+  public MuscleFirstOrderActivationDynamicModel upd_MuscleFirstOrderActivationDynamicModel(int i) {
+    return new MuscleFirstOrderActivationDynamicModel(opensimModelJNI.Thelen2003Muscle_upd_MuscleFirstOrderActivationDynamicModel__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_MuscleFirstOrderActivationDynamicModel(int i, SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel value) {
-    opensimModelJNI.Thelen2003Muscle_set_MuscleFirstOrderActivationDynamicModel__SWIG_0(swigCPtr, this, i, SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel.getCPtr(value));
+  public void set_MuscleFirstOrderActivationDynamicModel(int i, MuscleFirstOrderActivationDynamicModel value) {
+    opensimModelJNI.Thelen2003Muscle_set_MuscleFirstOrderActivationDynamicModel__SWIG_0(swigCPtr, this, i, MuscleFirstOrderActivationDynamicModel.getCPtr(value), value);
   }
 
-  public int append_MuscleFirstOrderActivationDynamicModel(SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel value) {
-    return opensimModelJNI.Thelen2003Muscle_append_MuscleFirstOrderActivationDynamicModel(swigCPtr, this, SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel.getCPtr(value));
+  public int append_MuscleFirstOrderActivationDynamicModel(MuscleFirstOrderActivationDynamicModel value) {
+    return opensimModelJNI.Thelen2003Muscle_append_MuscleFirstOrderActivationDynamicModel(swigCPtr, this, MuscleFirstOrderActivationDynamicModel.getCPtr(value), value);
   }
 
-  public void constructProperty_MuscleFirstOrderActivationDynamicModel(SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel initValue) {
-    opensimModelJNI.Thelen2003Muscle_constructProperty_MuscleFirstOrderActivationDynamicModel(swigCPtr, this, SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel.getCPtr(initValue));
+  public void constructProperty_MuscleFirstOrderActivationDynamicModel(MuscleFirstOrderActivationDynamicModel initValue) {
+    opensimModelJNI.Thelen2003Muscle_constructProperty_MuscleFirstOrderActivationDynamicModel(swigCPtr, this, MuscleFirstOrderActivationDynamicModel.getCPtr(initValue), initValue);
   }
 
-  public SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel get_MuscleFirstOrderActivationDynamicModel() {
-    return new SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel(opensimModelJNI.Thelen2003Muscle_get_MuscleFirstOrderActivationDynamicModel__SWIG_1(swigCPtr, this), false);
+  public MuscleFirstOrderActivationDynamicModel get_MuscleFirstOrderActivationDynamicModel() {
+    return new MuscleFirstOrderActivationDynamicModel(opensimModelJNI.Thelen2003Muscle_get_MuscleFirstOrderActivationDynamicModel__SWIG_1(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel upd_MuscleFirstOrderActivationDynamicModel() {
-    return new SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel(opensimModelJNI.Thelen2003Muscle_upd_MuscleFirstOrderActivationDynamicModel__SWIG_1(swigCPtr, this), false);
+  public MuscleFirstOrderActivationDynamicModel upd_MuscleFirstOrderActivationDynamicModel() {
+    return new MuscleFirstOrderActivationDynamicModel(opensimModelJNI.Thelen2003Muscle_upd_MuscleFirstOrderActivationDynamicModel__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_MuscleFirstOrderActivationDynamicModel(SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel value) {
-    opensimModelJNI.Thelen2003Muscle_set_MuscleFirstOrderActivationDynamicModel__SWIG_1(swigCPtr, this, SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel.getCPtr(value));
+  public void set_MuscleFirstOrderActivationDynamicModel(MuscleFirstOrderActivationDynamicModel value) {
+    opensimModelJNI.Thelen2003Muscle_set_MuscleFirstOrderActivationDynamicModel__SWIG_1(swigCPtr, this, MuscleFirstOrderActivationDynamicModel.getCPtr(value), value);
   }
 
   public void copyProperty_MuscleFixedWidthPennationModel(Thelen2003Muscle source) {
     opensimModelJNI.Thelen2003Muscle_copyProperty_MuscleFixedWidthPennationModel(swigCPtr, this, Thelen2003Muscle.getCPtr(source), source);
   }
 
-  public SWIGTYPE_p_MuscleFixedWidthPennationModel get_MuscleFixedWidthPennationModel(int i) {
-    return new SWIGTYPE_p_MuscleFixedWidthPennationModel(opensimModelJNI.Thelen2003Muscle_get_MuscleFixedWidthPennationModel__SWIG_0(swigCPtr, this, i), false);
+  public MuscleFixedWidthPennationModel get_MuscleFixedWidthPennationModel(int i) {
+    return new MuscleFixedWidthPennationModel(opensimModelJNI.Thelen2003Muscle_get_MuscleFixedWidthPennationModel__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public SWIGTYPE_p_MuscleFixedWidthPennationModel upd_MuscleFixedWidthPennationModel(int i) {
-    return new SWIGTYPE_p_MuscleFixedWidthPennationModel(opensimModelJNI.Thelen2003Muscle_upd_MuscleFixedWidthPennationModel__SWIG_0(swigCPtr, this, i), false);
+  public MuscleFixedWidthPennationModel upd_MuscleFixedWidthPennationModel(int i) {
+    return new MuscleFixedWidthPennationModel(opensimModelJNI.Thelen2003Muscle_upd_MuscleFixedWidthPennationModel__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_MuscleFixedWidthPennationModel(int i, SWIGTYPE_p_MuscleFixedWidthPennationModel value) {
-    opensimModelJNI.Thelen2003Muscle_set_MuscleFixedWidthPennationModel__SWIG_0(swigCPtr, this, i, SWIGTYPE_p_MuscleFixedWidthPennationModel.getCPtr(value));
+  public void set_MuscleFixedWidthPennationModel(int i, MuscleFixedWidthPennationModel value) {
+    opensimModelJNI.Thelen2003Muscle_set_MuscleFixedWidthPennationModel__SWIG_0(swigCPtr, this, i, MuscleFixedWidthPennationModel.getCPtr(value), value);
   }
 
-  public int append_MuscleFixedWidthPennationModel(SWIGTYPE_p_MuscleFixedWidthPennationModel value) {
-    return opensimModelJNI.Thelen2003Muscle_append_MuscleFixedWidthPennationModel(swigCPtr, this, SWIGTYPE_p_MuscleFixedWidthPennationModel.getCPtr(value));
+  public int append_MuscleFixedWidthPennationModel(MuscleFixedWidthPennationModel value) {
+    return opensimModelJNI.Thelen2003Muscle_append_MuscleFixedWidthPennationModel(swigCPtr, this, MuscleFixedWidthPennationModel.getCPtr(value), value);
   }
 
-  public void constructProperty_MuscleFixedWidthPennationModel(SWIGTYPE_p_MuscleFixedWidthPennationModel initValue) {
-    opensimModelJNI.Thelen2003Muscle_constructProperty_MuscleFixedWidthPennationModel(swigCPtr, this, SWIGTYPE_p_MuscleFixedWidthPennationModel.getCPtr(initValue));
+  public void constructProperty_MuscleFixedWidthPennationModel(MuscleFixedWidthPennationModel initValue) {
+    opensimModelJNI.Thelen2003Muscle_constructProperty_MuscleFixedWidthPennationModel(swigCPtr, this, MuscleFixedWidthPennationModel.getCPtr(initValue), initValue);
   }
 
-  public SWIGTYPE_p_MuscleFixedWidthPennationModel get_MuscleFixedWidthPennationModel() {
-    return new SWIGTYPE_p_MuscleFixedWidthPennationModel(opensimModelJNI.Thelen2003Muscle_get_MuscleFixedWidthPennationModel__SWIG_1(swigCPtr, this), false);
+  public MuscleFixedWidthPennationModel get_MuscleFixedWidthPennationModel() {
+    return new MuscleFixedWidthPennationModel(opensimModelJNI.Thelen2003Muscle_get_MuscleFixedWidthPennationModel__SWIG_1(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_MuscleFixedWidthPennationModel upd_MuscleFixedWidthPennationModel() {
-    return new SWIGTYPE_p_MuscleFixedWidthPennationModel(opensimModelJNI.Thelen2003Muscle_upd_MuscleFixedWidthPennationModel__SWIG_1(swigCPtr, this), false);
+  public MuscleFixedWidthPennationModel upd_MuscleFixedWidthPennationModel() {
+    return new MuscleFixedWidthPennationModel(opensimModelJNI.Thelen2003Muscle_upd_MuscleFixedWidthPennationModel__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_MuscleFixedWidthPennationModel(SWIGTYPE_p_MuscleFixedWidthPennationModel value) {
-    opensimModelJNI.Thelen2003Muscle_set_MuscleFixedWidthPennationModel__SWIG_1(swigCPtr, this, SWIGTYPE_p_MuscleFixedWidthPennationModel.getCPtr(value));
+  public void set_MuscleFixedWidthPennationModel(MuscleFixedWidthPennationModel value) {
+    opensimModelJNI.Thelen2003Muscle_set_MuscleFixedWidthPennationModel__SWIG_1(swigCPtr, this, MuscleFixedWidthPennationModel.getCPtr(value), value);
   }
 
   public Thelen2003Muscle() {
@@ -425,12 +425,12 @@ public class Thelen2003Muscle extends ActivationFiberLengthMuscle {
     return opensimModelJNI.Thelen2003Muscle_getMinimumFiberLength(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel getActivationModel() {
-    return new SWIGTYPE_p_MuscleFirstOrderActivationDynamicModel(opensimModelJNI.Thelen2003Muscle_getActivationModel(swigCPtr, this), false);
+  public MuscleFirstOrderActivationDynamicModel getActivationModel() {
+    return new MuscleFirstOrderActivationDynamicModel(opensimModelJNI.Thelen2003Muscle_getActivationModel(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_MuscleFixedWidthPennationModel getPennationModel() {
-    return new SWIGTYPE_p_MuscleFixedWidthPennationModel(opensimModelJNI.Thelen2003Muscle_getPennationModel(swigCPtr, this), false);
+  public MuscleFixedWidthPennationModel getPennationModel() {
+    return new MuscleFixedWidthPennationModel(opensimModelJNI.Thelen2003Muscle_getPennationModel(swigCPtr, this), false);
   }
 
   public void printCurveToCSVFile(Thelen2003Muscle.CurveType ctype, String path) {
