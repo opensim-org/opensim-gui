@@ -67,7 +67,7 @@ public class ObjectAddSphereAction extends CallableSystemAction {
         ModelComponent mc = ocn.getModelComp();
         Model model = mc.getModel();
         Sphere sp = new Sphere(0.2);
-        sp.get_Appearance().get_surface_appearance().set_representation(3);
+        sp.get_Appearance().get_surface_properties().set_representation(3);
         sp.markAdopted();
         if (PhysicalFrame.safeDownCast(mc) != null) {
             sp.setFrameName(mc.getName());

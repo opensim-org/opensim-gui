@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class WeldConstraint extends Constraint {
+public class WeldConstraint extends TwoFrameLinkerConstraint {
   private transient long swigCPtr;
 
   public WeldConstraint(long cPtr, boolean cMemoryOwn) {
@@ -57,184 +57,20 @@ public class WeldConstraint extends Constraint {
     return opensimModelJNI.WeldConstraint_getConcreteClassName(swigCPtr, this);
   }
 
-  public void copyProperty_location_body_1(WeldConstraint source) {
-    opensimModelJNI.WeldConstraint_copyProperty_location_body_1(swigCPtr, this, WeldConstraint.getCPtr(source), source);
-  }
-
-  public Vec3 get_location_body_1(int i) {
-    return new Vec3(opensimModelJNI.WeldConstraint_get_location_body_1__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public Vec3 upd_location_body_1(int i) {
-    return new Vec3(opensimModelJNI.WeldConstraint_upd_location_body_1__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_location_body_1(int i, Vec3 value) {
-    opensimModelJNI.WeldConstraint_set_location_body_1__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
-  }
-
-  public int append_location_body_1(Vec3 value) {
-    return opensimModelJNI.WeldConstraint_append_location_body_1(swigCPtr, this, Vec3.getCPtr(value), value);
-  }
-
-  public void constructProperty_location_body_1(Vec3 initValue) {
-    opensimModelJNI.WeldConstraint_constructProperty_location_body_1(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
-  }
-
-  public Vec3 get_location_body_1() {
-    return new Vec3(opensimModelJNI.WeldConstraint_get_location_body_1__SWIG_1(swigCPtr, this), false);
-  }
-
-  public Vec3 upd_location_body_1() {
-    return new Vec3(opensimModelJNI.WeldConstraint_upd_location_body_1__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_location_body_1(Vec3 value) {
-    opensimModelJNI.WeldConstraint_set_location_body_1__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
-  }
-
-  public void copyProperty_location_body_2(WeldConstraint source) {
-    opensimModelJNI.WeldConstraint_copyProperty_location_body_2(swigCPtr, this, WeldConstraint.getCPtr(source), source);
-  }
-
-  public Vec3 get_location_body_2(int i) {
-    return new Vec3(opensimModelJNI.WeldConstraint_get_location_body_2__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public Vec3 upd_location_body_2(int i) {
-    return new Vec3(opensimModelJNI.WeldConstraint_upd_location_body_2__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_location_body_2(int i, Vec3 value) {
-    opensimModelJNI.WeldConstraint_set_location_body_2__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
-  }
-
-  public int append_location_body_2(Vec3 value) {
-    return opensimModelJNI.WeldConstraint_append_location_body_2(swigCPtr, this, Vec3.getCPtr(value), value);
-  }
-
-  public void constructProperty_location_body_2(Vec3 initValue) {
-    opensimModelJNI.WeldConstraint_constructProperty_location_body_2(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
-  }
-
-  public Vec3 get_location_body_2() {
-    return new Vec3(opensimModelJNI.WeldConstraint_get_location_body_2__SWIG_1(swigCPtr, this), false);
-  }
-
-  public Vec3 upd_location_body_2() {
-    return new Vec3(opensimModelJNI.WeldConstraint_upd_location_body_2__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_location_body_2(Vec3 value) {
-    opensimModelJNI.WeldConstraint_set_location_body_2__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
-  }
-
-  public void copyProperty_orientation_body_1(WeldConstraint source) {
-    opensimModelJNI.WeldConstraint_copyProperty_orientation_body_1(swigCPtr, this, WeldConstraint.getCPtr(source), source);
-  }
-
-  public Vec3 get_orientation_body_1(int i) {
-    return new Vec3(opensimModelJNI.WeldConstraint_get_orientation_body_1__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public Vec3 upd_orientation_body_1(int i) {
-    return new Vec3(opensimModelJNI.WeldConstraint_upd_orientation_body_1__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_orientation_body_1(int i, Vec3 value) {
-    opensimModelJNI.WeldConstraint_set_orientation_body_1__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
-  }
-
-  public int append_orientation_body_1(Vec3 value) {
-    return opensimModelJNI.WeldConstraint_append_orientation_body_1(swigCPtr, this, Vec3.getCPtr(value), value);
-  }
-
-  public void constructProperty_orientation_body_1(Vec3 initValue) {
-    opensimModelJNI.WeldConstraint_constructProperty_orientation_body_1(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
-  }
-
-  public Vec3 get_orientation_body_1() {
-    return new Vec3(opensimModelJNI.WeldConstraint_get_orientation_body_1__SWIG_1(swigCPtr, this), false);
-  }
-
-  public Vec3 upd_orientation_body_1() {
-    return new Vec3(opensimModelJNI.WeldConstraint_upd_orientation_body_1__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_orientation_body_1(Vec3 value) {
-    opensimModelJNI.WeldConstraint_set_orientation_body_1__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
-  }
-
-  public void copyProperty_orientation_body_2(WeldConstraint source) {
-    opensimModelJNI.WeldConstraint_copyProperty_orientation_body_2(swigCPtr, this, WeldConstraint.getCPtr(source), source);
-  }
-
-  public Vec3 get_orientation_body_2(int i) {
-    return new Vec3(opensimModelJNI.WeldConstraint_get_orientation_body_2__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public Vec3 upd_orientation_body_2(int i) {
-    return new Vec3(opensimModelJNI.WeldConstraint_upd_orientation_body_2__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_orientation_body_2(int i, Vec3 value) {
-    opensimModelJNI.WeldConstraint_set_orientation_body_2__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
-  }
-
-  public int append_orientation_body_2(Vec3 value) {
-    return opensimModelJNI.WeldConstraint_append_orientation_body_2(swigCPtr, this, Vec3.getCPtr(value), value);
-  }
-
-  public void constructProperty_orientation_body_2(Vec3 initValue) {
-    opensimModelJNI.WeldConstraint_constructProperty_orientation_body_2(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
-  }
-
-  public Vec3 get_orientation_body_2() {
-    return new Vec3(opensimModelJNI.WeldConstraint_get_orientation_body_2__SWIG_1(swigCPtr, this), false);
-  }
-
-  public Vec3 upd_orientation_body_2() {
-    return new Vec3(opensimModelJNI.WeldConstraint_upd_orientation_body_2__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_orientation_body_2(Vec3 value) {
-    opensimModelJNI.WeldConstraint_set_orientation_body_2__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
-  }
-
   public WeldConstraint() {
     this(opensimModelJNI.new_WeldConstraint__SWIG_0(), true);
   }
 
-  public WeldConstraint(String name, PhysicalFrame body1, Vec3 locationInBody1, Vec3 orientationInBody1, PhysicalFrame body2, Vec3 locationInBody2, Vec3 orientationInBody2) {
-    this(opensimModelJNI.new_WeldConstraint__SWIG_1(name, PhysicalFrame.getCPtr(body1), body1, Vec3.getCPtr(locationInBody1), locationInBody1, Vec3.getCPtr(orientationInBody1), orientationInBody1, PhysicalFrame.getCPtr(body2), body2, Vec3.getCPtr(locationInBody2), locationInBody2, Vec3.getCPtr(orientationInBody2), orientationInBody2), true);
+  public WeldConstraint(String name, String frame1Name, String frame2Name) {
+    this(opensimModelJNI.new_WeldConstraint__SWIG_1(name, frame1Name, frame2Name), true);
   }
 
-  public WeldConstraint(String name, PhysicalFrame body1, Transform transformInBody1, PhysicalFrame body2, Transform transformInBody2) {
-    this(opensimModelJNI.new_WeldConstraint__SWIG_2(name, PhysicalFrame.getCPtr(body1), body1, Transform.getCPtr(transformInBody1), transformInBody1, PhysicalFrame.getCPtr(body2), body2, Transform.getCPtr(transformInBody2), transformInBody2), true);
+  public WeldConstraint(String name, PhysicalFrame frame1, Vec3 locationInFrame1, Vec3 orientationInFrame1, PhysicalFrame frame2, Vec3 locationInFrame2, Vec3 orientationInFrame2) {
+    this(opensimModelJNI.new_WeldConstraint__SWIG_2(name, PhysicalFrame.getCPtr(frame1), frame1, Vec3.getCPtr(locationInFrame1), locationInFrame1, Vec3.getCPtr(orientationInFrame1), orientationInFrame1, PhysicalFrame.getCPtr(frame2), frame2, Vec3.getCPtr(locationInFrame2), locationInFrame2, Vec3.getCPtr(orientationInFrame2), orientationInFrame2), true);
   }
 
-  public void setBody1ByName(String aBodyName) {
-    opensimModelJNI.WeldConstraint_setBody1ByName(swigCPtr, this, aBodyName);
-  }
-
-  public void setBody1WeldLocation(Vec3 location, Vec3 orientation) {
-    opensimModelJNI.WeldConstraint_setBody1WeldLocation__SWIG_0(swigCPtr, this, Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation);
-  }
-
-  public void setBody1WeldLocation(Vec3 location) {
-    opensimModelJNI.WeldConstraint_setBody1WeldLocation__SWIG_1(swigCPtr, this, Vec3.getCPtr(location), location);
-  }
-
-  public void setBody2ByName(String aBodyName) {
-    opensimModelJNI.WeldConstraint_setBody2ByName(swigCPtr, this, aBodyName);
-  }
-
-  public void setBody2WeldLocation(Vec3 location, Vec3 orientation) {
-    opensimModelJNI.WeldConstraint_setBody2WeldLocation__SWIG_0(swigCPtr, this, Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation);
-  }
-
-  public void setBody2WeldLocation(Vec3 location) {
-    opensimModelJNI.WeldConstraint_setBody2WeldLocation__SWIG_1(swigCPtr, this, Vec3.getCPtr(location), location);
+  public WeldConstraint(String name, PhysicalFrame frame1, Transform transformInFrame1, PhysicalFrame frame2, Transform transformInFrame2) {
+    this(opensimModelJNI.new_WeldConstraint__SWIG_3(name, PhysicalFrame.getCPtr(frame1), frame1, Transform.getCPtr(transformInFrame1), transformInFrame1, PhysicalFrame.getCPtr(frame2), frame2, Transform.getCPtr(transformInFrame2), transformInFrame2), true);
   }
 
   public void setContactPointForInducedAccelerations(State s, Vec3 point) {

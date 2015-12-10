@@ -185,8 +185,8 @@ public class ScalarActuator extends Actuator {
     opensimModelJNI.ScalarActuator_overrideActuation(swigCPtr, this, State.getCPtr(s), s, flag);
   }
 
-  public boolean isActuationOverriden(State s) {
-    return opensimModelJNI.ScalarActuator_isActuationOverriden(swigCPtr, this, State.getCPtr(s), s);
+  public boolean isActuationOverridden(State s) {
+    return opensimModelJNI.ScalarActuator_isActuationOverridden(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setOverrideActuation(State s, double value) {

@@ -1,0 +1,24 @@
+# ant-specific
+dist/
+build/
+
+# netbeans-specific
+**/nbproject/private/
+# TODO the following is more strict, but would force people to load the project
+# in NetBeans to regenerate some files. This would prevent people from
+# building directly with Ant.
+#nbproject/*
+#!nbproject/project.properties
+#!nbproject/project.xml
+
+Gui/opensim/nbproject/platform.xml
+Gui/opensim/nbproject/genfiles.properties
+
+# general back-up files
+*~
+
+# OpenSim
+AppState.xml
+err.log
+out.log
+*.swp

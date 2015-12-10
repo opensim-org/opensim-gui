@@ -165,76 +165,76 @@ public class Appearance extends OpenSimObject {
     opensimModelJNI.Appearance_set_color__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void copyProperty_surface_appearance(Appearance source) {
-    opensimModelJNI.Appearance_copyProperty_surface_appearance(swigCPtr, this, Appearance.getCPtr(source), source);
+  public void copyProperty_surface_properties(Appearance source) {
+    opensimModelJNI.Appearance_copyProperty_surface_properties(swigCPtr, this, Appearance.getCPtr(source), source);
   }
 
-  public SurfaceAppearance get_surface_appearance(int i) {
-    return new SurfaceAppearance(opensimModelJNI.Appearance_get_surface_appearance__SWIG_0(swigCPtr, this, i), false);
+  public SurfaceProperties get_surface_properties(int i) {
+    return new SurfaceProperties(opensimModelJNI.Appearance_get_surface_properties__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public SurfaceAppearance upd_surface_appearance(int i) {
-    return new SurfaceAppearance(opensimModelJNI.Appearance_upd_surface_appearance__SWIG_0(swigCPtr, this, i), false);
+  public SurfaceProperties upd_surface_properties(int i) {
+    return new SurfaceProperties(opensimModelJNI.Appearance_upd_surface_properties__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_surface_appearance(int i, SurfaceAppearance value) {
-    opensimModelJNI.Appearance_set_surface_appearance__SWIG_0(swigCPtr, this, i, SurfaceAppearance.getCPtr(value), value);
+  public void set_surface_properties(int i, SurfaceProperties value) {
+    opensimModelJNI.Appearance_set_surface_properties__SWIG_0(swigCPtr, this, i, SurfaceProperties.getCPtr(value), value);
   }
 
-  public int append_surface_appearance(SurfaceAppearance value) {
-    return opensimModelJNI.Appearance_append_surface_appearance(swigCPtr, this, SurfaceAppearance.getCPtr(value), value);
+  public int append_surface_properties(SurfaceProperties value) {
+    return opensimModelJNI.Appearance_append_surface_properties(swigCPtr, this, SurfaceProperties.getCPtr(value), value);
   }
 
-  public void constructProperty_surface_appearance(SurfaceAppearance initValue) {
-    opensimModelJNI.Appearance_constructProperty_surface_appearance(swigCPtr, this, SurfaceAppearance.getCPtr(initValue), initValue);
+  public void constructProperty_surface_properties(SurfaceProperties initValue) {
+    opensimModelJNI.Appearance_constructProperty_surface_properties(swigCPtr, this, SurfaceProperties.getCPtr(initValue), initValue);
   }
 
-  public SurfaceAppearance get_surface_appearance() {
-    return new SurfaceAppearance(opensimModelJNI.Appearance_get_surface_appearance__SWIG_1(swigCPtr, this), false);
+  public SurfaceProperties get_surface_properties() {
+    return new SurfaceProperties(opensimModelJNI.Appearance_get_surface_properties__SWIG_1(swigCPtr, this), false);
   }
 
-  public SurfaceAppearance upd_surface_appearance() {
-    return new SurfaceAppearance(opensimModelJNI.Appearance_upd_surface_appearance__SWIG_1(swigCPtr, this), false);
+  public SurfaceProperties upd_surface_properties() {
+    return new SurfaceProperties(opensimModelJNI.Appearance_upd_surface_properties__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_surface_appearance(SurfaceAppearance value) {
-    opensimModelJNI.Appearance_set_surface_appearance__SWIG_1(swigCPtr, this, SurfaceAppearance.getCPtr(value), value);
+  public void set_surface_properties(SurfaceProperties value) {
+    opensimModelJNI.Appearance_set_surface_properties__SWIG_1(swigCPtr, this, SurfaceProperties.getCPtr(value), value);
   }
 
-  public void copyProperty_curve_appearance(Appearance source) {
-    opensimModelJNI.Appearance_copyProperty_curve_appearance(swigCPtr, this, Appearance.getCPtr(source), source);
+  public void copyProperty_curve_properties(Appearance source) {
+    opensimModelJNI.Appearance_copyProperty_curve_properties(swigCPtr, this, Appearance.getCPtr(source), source);
   }
 
-  public CurveAppearance get_curve_appearance(int i) {
-    return new CurveAppearance(opensimModelJNI.Appearance_get_curve_appearance__SWIG_0(swigCPtr, this, i), false);
+  public CurveProperties get_curve_properties(int i) {
+    return new CurveProperties(opensimModelJNI.Appearance_get_curve_properties__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public CurveAppearance upd_curve_appearance(int i) {
-    return new CurveAppearance(opensimModelJNI.Appearance_upd_curve_appearance__SWIG_0(swigCPtr, this, i), false);
+  public CurveProperties upd_curve_properties(int i) {
+    return new CurveProperties(opensimModelJNI.Appearance_upd_curve_properties__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_curve_appearance(int i, CurveAppearance value) {
-    opensimModelJNI.Appearance_set_curve_appearance__SWIG_0(swigCPtr, this, i, CurveAppearance.getCPtr(value), value);
+  public void set_curve_properties(int i, CurveProperties value) {
+    opensimModelJNI.Appearance_set_curve_properties__SWIG_0(swigCPtr, this, i, CurveProperties.getCPtr(value), value);
   }
 
-  public int append_curve_appearance(CurveAppearance value) {
-    return opensimModelJNI.Appearance_append_curve_appearance(swigCPtr, this, CurveAppearance.getCPtr(value), value);
+  public int append_curve_properties(CurveProperties value) {
+    return opensimModelJNI.Appearance_append_curve_properties(swigCPtr, this, CurveProperties.getCPtr(value), value);
   }
 
-  public void constructProperty_curve_appearance(CurveAppearance initValue) {
-    opensimModelJNI.Appearance_constructProperty_curve_appearance(swigCPtr, this, CurveAppearance.getCPtr(initValue), initValue);
+  public void constructProperty_curve_properties(CurveProperties initValue) {
+    opensimModelJNI.Appearance_constructProperty_curve_properties(swigCPtr, this, CurveProperties.getCPtr(initValue), initValue);
   }
 
-  public CurveAppearance get_curve_appearance() {
-    return new CurveAppearance(opensimModelJNI.Appearance_get_curve_appearance__SWIG_1(swigCPtr, this), false);
+  public CurveProperties get_curve_properties() {
+    return new CurveProperties(opensimModelJNI.Appearance_get_curve_properties__SWIG_1(swigCPtr, this), false);
   }
 
-  public CurveAppearance upd_curve_appearance() {
-    return new CurveAppearance(opensimModelJNI.Appearance_upd_curve_appearance__SWIG_1(swigCPtr, this), false);
+  public CurveProperties upd_curve_properties() {
+    return new CurveProperties(opensimModelJNI.Appearance_upd_curve_properties__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_curve_appearance(CurveAppearance value) {
-    opensimModelJNI.Appearance_set_curve_appearance__SWIG_1(swigCPtr, this, CurveAppearance.getCPtr(value), value);
+  public void set_curve_properties(CurveProperties value) {
+    opensimModelJNI.Appearance_set_curve_properties__SWIG_1(swigCPtr, this, CurveProperties.getCPtr(value), value);
   }
 
   public Appearance() {

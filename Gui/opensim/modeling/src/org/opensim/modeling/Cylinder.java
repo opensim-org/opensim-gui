@@ -141,8 +141,4 @@ public class Cylinder extends AnalyticGeometry {
     opensimModelJNI.Cylinder_getCylinderParams(swigCPtr, this, Vec2.getCPtr(params), params);
   }
 
-  public void createDecorativeGeometry(ArrayDecorativeGeometry decoGeoms) {
-    opensimModelJNI.Cylinder_createDecorativeGeometry(swigCPtr, this, ArrayDecorativeGeometry.getCPtr(decoGeoms), decoGeoms);
-  }
-
 }

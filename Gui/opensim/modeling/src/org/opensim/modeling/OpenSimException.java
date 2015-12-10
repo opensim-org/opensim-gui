@@ -51,6 +51,10 @@ public class OpenSimException {
     this(opensimModelJNI.new_OpenSimException__SWIG_3(), true);
   }
 
+  public OpenSimException(String file, long line, String func) {
+    this(opensimModelJNI.new_OpenSimException__SWIG_4(file, line, func), true);
+  }
+
   public void setMessage(String aMsg) {
     opensimModelJNI.OpenSimException_setMessage(swigCPtr, this, aMsg);
   }

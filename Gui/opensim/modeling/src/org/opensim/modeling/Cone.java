@@ -209,8 +209,4 @@ public class Cone extends AnalyticGeometry {
     this(opensimModelJNI.new_Cone__SWIG_1(Vec3.getCPtr(o), o, UnitVec3.getCPtr(dir), dir, height, base), true);
   }
 
-  public void createDecorativeGeometry(ArrayDecorativeGeometry decoGeoms) {
-    opensimModelJNI.Cone_createDecorativeGeometry(swigCPtr, this, ArrayDecorativeGeometry.getCPtr(decoGeoms), decoGeoms);
-  }
-
 }

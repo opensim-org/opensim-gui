@@ -145,8 +145,4 @@ public class LineGeometry extends Geometry {
     opensimModelJNI.LineGeometry_setPoints(swigCPtr, this, Vec3.getCPtr(aPoint1), aPoint1, Vec3.getCPtr(aPoint2), aPoint2);
   }
 
-  public void createDecorativeGeometry(ArrayDecorativeGeometry decoGeoms) {
-    opensimModelJNI.LineGeometry_createDecorativeGeometry(swigCPtr, this, ArrayDecorativeGeometry.getCPtr(decoGeoms), decoGeoms);
-  }
-
 }

@@ -101,8 +101,4 @@ public class FrameGeometry extends Geometry {
     this(opensimModelJNI.new_FrameGeometry__SWIG_1(), true);
   }
 
-  public void createDecorativeGeometry(ArrayDecorativeGeometry decoGeoms) {
-    opensimModelJNI.FrameGeometry_createDecorativeGeometry(swigCPtr, this, ArrayDecorativeGeometry.getCPtr(decoGeoms), decoGeoms);
-  }
-
 }

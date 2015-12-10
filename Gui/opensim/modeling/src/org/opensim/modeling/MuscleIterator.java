@@ -413,8 +413,8 @@ public class MuscleIterator {
     opensimModelJNI.MuscleIterator_overrideActuation(swigCPtr, this, State.getCPtr(s), s, flag);
   }
 
-  public boolean isActuationOverriden(State s) {
-    return opensimModelJNI.MuscleIterator_isActuationOverriden(swigCPtr, this, State.getCPtr(s), s);
+  public boolean isActuationOverridden(State s) {
+    return opensimModelJNI.MuscleIterator_isActuationOverridden(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setOverrideActuation(State s, double value) {
@@ -487,6 +487,10 @@ public class MuscleIterator {
 
   public SWIGTYPE_p_SimTK__MultibodySystem getSystem() {
     return new SWIGTYPE_p_SimTK__MultibodySystem(opensimModelJNI.MuscleIterator_getSystem(swigCPtr, this), false);
+  }
+
+  public boolean hasSystem() {
+    return opensimModelJNI.MuscleIterator_hasSystem(swigCPtr, this);
   }
 
   public Component getComponent(String name) {
@@ -581,6 +585,10 @@ public class MuscleIterator {
     opensimModelJNI.MuscleIterator_dumpPathName(swigCPtr, this);
   }
 
+  public ComponentsList getComponentsList() {
+    return new ComponentsList(opensimModelJNI.MuscleIterator_getComponentsList(swigCPtr, this), true);
+  }
+
   public FramesList getFramesList() {
     return new FramesList(opensimModelJNI.MuscleIterator_getFramesList(swigCPtr, this), true);
   }
@@ -591,10 +599,6 @@ public class MuscleIterator {
 
   public MusclesList getMusclesList() {
     return new MusclesList(opensimModelJNI.MuscleIterator_getMusclesList(swigCPtr, this), true);
-  }
-
-  public ComponentsList getComponentsList() {
-    return new ComponentsList(opensimModelJNI.MuscleIterator_getComponentsList(swigCPtr, this), true);
   }
 
   public ModelComponentList getModelComponentList() {

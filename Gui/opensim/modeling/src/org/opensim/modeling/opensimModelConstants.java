@@ -9,10 +9,6 @@
 package org.opensim.modeling;
 
 public interface opensimModelConstants {
-  public final static String GET_SYSTEM_INFO = opensimModelJNI.GET_SYSTEM_INFO_get();
-  public final static String GET_COMPILER_INFO = opensimModelJNI.GET_COMPILER_INFO_get();
-  public final static String GET_OS_NAME = opensimModelJNI.GET_OS_NAME_get();
-  public final static String GET_OSIM_VERSION = opensimModelJNI.GET_OSIM_VERSION_get();
   public final static double SimTK_PI = opensimModelJNI.SimTK_PI_get();
   public final static double SimTK_E = opensimModelJNI.SimTK_E_get();
   public final static double SimTK_LN2 = opensimModelJNI.SimTK_LN2_get();
@@ -62,4 +58,8 @@ public interface opensimModelConstants {
   public final static double SimTK_E_TO_COULOMB = opensimModelJNI.SimTK_E_TO_COULOMB_get();
   public final static double SimTK_EV_TO_JOULE = opensimModelJNI.SimTK_EV_TO_JOULE_get();
   public final static int SimTK_DEFAULT_PRECISION = opensimModelJNI.SimTK_DEFAULT_PRECISION_get();
+  public final static String GET_SYSTEM_INFO = opensimModelJNI.GET_SYSTEM_INFO_get();
+  public final static String GET_COMPILER_INFO = opensimModelJNI.GET_COMPILER_INFO_get();
+  public final static String GET_OS_NAME = opensimModelJNI.GET_OS_NAME_get();
+  public final static String GET_OSIM_VERSION = opensimModelJNI.GET_OSIM_VERSION_get();
 }

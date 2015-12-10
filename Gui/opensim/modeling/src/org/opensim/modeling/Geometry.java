@@ -169,10 +169,6 @@ public class Geometry extends Component {
     return DecorativeGeometry.Representation.swigToEnum(opensimModelJNI.Geometry_getRepresentation(swigCPtr, this));
   }
 
-  public void createDecorativeGeometry(ArrayDecorativeGeometry arg0) {
-    opensimModelJNI.Geometry_createDecorativeGeometry(swigCPtr, this, ArrayDecorativeGeometry.getCPtr(arg0), arg0);
-  }
-
   public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
     opensimModelJNI.Geometry_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
   }

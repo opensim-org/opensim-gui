@@ -105,8 +105,4 @@ public class Mesh extends Geometry {
     return opensimModelJNI.Mesh_getGeometryFilename(swigCPtr, this);
   }
 
-  public void createDecorativeGeometry(ArrayDecorativeGeometry decoGeoms) {
-    opensimModelJNI.Mesh_createDecorativeGeometry(swigCPtr, this, ArrayDecorativeGeometry.getCPtr(decoGeoms), decoGeoms);
-  }
-
 }

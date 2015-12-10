@@ -105,8 +105,4 @@ public class Sphere extends AnalyticGeometry {
     opensimModelJNI.Sphere_setSphereRadius(swigCPtr, this, radius);
   }
 
-  public void createDecorativeGeometry(ArrayDecorativeGeometry decoGeoms) {
-    opensimModelJNI.Sphere_createDecorativeGeometry(swigCPtr, this, ArrayDecorativeGeometry.getCPtr(decoGeoms), decoGeoms);
-  }
-
 }
