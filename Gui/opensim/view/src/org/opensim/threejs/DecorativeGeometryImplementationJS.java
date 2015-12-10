@@ -91,9 +91,9 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         //super.implementMeshFileGeometry(arg0); //To change body of generated methods, choose Tools | Templates.
         String meshFile = arg0.getMeshFile();
         String fullFileName = GeometryFileLocator.getInstance().getFullname("",meshFile, false);
-        System.out.print("Processing file"+fullFileName);
+        //System.out.print("Processing file"+fullFileName);
         if (fullFileName==null) return;
-        System.out.println("...Found");
+        //System.out.println("...Found");
         String filenameLower = fullFileName.toLowerCase();
         if (filenameLower.endsWith(".vtp") || filenameLower.endsWith(".stl") || filenameLower.endsWith(".obj")){
             // Create json for vtp
@@ -301,9 +301,6 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         Map<String, Object> data_json = new LinkedHashMap<String, Object>();
         verts_array.add(arg0.getPoint1().get(0)*visualizerScaleFactor);
         verts_array.add(arg0.getPoint1().get(1)*visualizerScaleFactor);
-        verts_array.add(arg0.getPoint1().get(2)*visualizerScaleFactor);
-        verts_array.add(arg0.getPoint1().get(0)*visualizerScaleFactor);
-        verts_array.add((arg0.getPoint1().get(1)+0.5)*visualizerScaleFactor);
         verts_array.add(arg0.getPoint1().get(2)*visualizerScaleFactor);
         
         verts_array.add(arg0.getPoint2().get(0)*visualizerScaleFactor);

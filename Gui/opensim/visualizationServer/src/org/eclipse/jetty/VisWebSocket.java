@@ -57,7 +57,7 @@ public class VisWebSocket extends Observable { // Socket to handle incoming traf
     @OnWebSocketMessage
     public void visMessage(String stringToParse) {
         try {
-            System.out.println("visMessage: " + stringToParse);
+            //System.out.println("visMessage: " + stringToParse);
             JSONParser parser = new JSONParser();
             JSONObject jsonObj = (JSONObject) parser.parse(stringToParse);
             setChanged();

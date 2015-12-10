@@ -36,7 +36,7 @@ import org.opensim.modeling.Body;
 import org.opensim.modeling.Joint;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.SurfaceAppearance;
+import org.opensim.modeling.SurfaceProperties;
 import org.opensim.view.nodes.ConcreteModelNode;
 import org.opensim.view.nodes.OneWrapObjectNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
@@ -119,7 +119,7 @@ public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemActi
             //Model aModel, OpenSimObject obj, AbstractProperty prop, OpenSimObjectNode node
             OpenSimObject ap =  obj.getPropertyByName("Appearance").getValueAsObject();
             Appearance apObj = Appearance.safeDownCast(ap);
-            SurfaceAppearance surfApp = apObj.get_surface_appearance();
+            SurfaceProperties surfApp = apObj.get_surface_properties();
             PropertyEditorAdaptor pea = new PropertyEditorAdaptor(objectNode.getModelForNode(),
                     surfApp,
                     surfApp.getPropertyByName("representation"), objectNode);
