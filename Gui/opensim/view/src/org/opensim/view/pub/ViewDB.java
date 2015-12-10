@@ -1166,7 +1166,12 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       mapModelsToVisuals.get(aModel).updateModelDisplay(aModel);
       lockDrawingSurfaces(false);
       repaintAll();
+      if (websocketdb != null){
+        // Make xforms JSON
+        websocketdb.broadcastMessageJson(visJson.makeXformsJson());
+      }
    }
+   
    public void updateModelDisplayNoRepaint(Model aModel) {
       if (!isGraphicsAvailable()) return;
       lockDrawingSurfaces(true);

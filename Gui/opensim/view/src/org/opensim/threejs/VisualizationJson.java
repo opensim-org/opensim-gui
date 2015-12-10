@@ -37,24 +37,21 @@ import org.opensim.modeling.Vec3;
  */
 public class VisualizationJson {
     private State state;
-    private Model model;
     private final JSONObject topJson;
     private final HashMap<Integer, PhysicalFrame> mapBodyIndicesToFrames = new HashMap<Integer, PhysicalFrame>();
     private final HashMap<Integer, JSONObject> mapBodyIndicesToJson = new HashMap<Integer, JSONObject>();
     private final HashMap<Integer, String> mapBodyIndicesToVisNames = new HashMap<Integer, String>();
     private final double visScaleFactor = 1000.0;
-    private HashMap<String, UUID> mapDecorativeGeometryToUUID = new HashMap<String, UUID>();
-    private HashMap<String, UUID> mapMaterialToUUID = new HashMap<String, UUID>();
-    private HashMap<UUID, Component> mapUUIDToComponent = new HashMap<UUID, Component>();
-    private HashMap<OpenSimObject, UUID> mapComponentToUUID = new HashMap<OpenSimObject, UUID>();
-    private static String GEOMETRY_SEP = ".";
-    private Vec3 vec3Unit = new Vec3(1.0, 1.0, 1.0);
+    private final HashMap<String, UUID> mapDecorativeGeometryToUUID = new HashMap<String, UUID>();
+    private final HashMap<UUID, Component> mapUUIDToComponent = new HashMap<UUID, Component>();
+    private final HashMap<OpenSimObject, UUID> mapComponentToUUID = new HashMap<OpenSimObject, UUID>();
+    private static final String GEOMETRY_SEP = ".";
+    private final Vec3 vec3Unit = new Vec3(1.0, 1.0, 1.0);
     
     public VisualizationJson(Model model) {
         topJson =  createJsonForModel(model);
     }
     private JSONObject createJsonForModel(Model model) {
-        this.model = model;
         state = model.getWorkingState();
         ModelDisplayHints mdh = model.getDisplayHints();
         ComponentsList mcList = model.getComponentsList();
@@ -90,59 +87,49 @@ public class VisualizationJson {
             //System.out.println(bodyJson.toJSONString());
             body.next();
         }
-        DecorativeGeometryImplementationJS dgimp = new DecorativeGeometryImplementationJS(json_geometries, visScaleFactor);
+        DecorativeGeometryImplementationJS dgimp = new DecorativeGeometryImplementationJS(json_geometries, json_materials, visScaleFactor);
         while (!mcIter.equals(mcList.end())) {
             Component comp = mcIter.__deref__();
             ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
             comp.generateDecorations(true, mdh, model.getWorkingState(), adg);
             if (adg.size() > 0) {
-                DecorativeGeometry dg;
-                for (int idx = 0; idx < adg.size(); idx++) {
-                    dg = adg.getElt(idx);
-                    String geomId = comp.getPathName().concat(GEOMETRY_SEP+String.valueOf(dg.getIndexOnBody()));
-                    UUID uuid = UUID.randomUUID();
-                    mapDecorativeGeometryToUUID.put(geomId, uuid);
-                    dgimp.setGeomID(uuid);
-                    dg.implementGeometry(dgimp);
-                    UUID uuid_mat = UUID.randomUUID();
-                    mapMaterialToUUID.put(geomId, uuid_mat);
-                    addMaterialJsonForGeometry(uuid_mat, dg, json_materials);
-                    JSONObject bodyJson = mapBodyIndicesToJson.get(dg.getBodyId());
-                    if (bodyJson.get("children")==null)
-                        bodyJson.put("children", new JSONArray());
-                    UUID uuid_mesh = addtoFrameJsonObject(dg, geomId, uuid, uuid_mat, (JSONArray)bodyJson.get("children"));
-
-                    mapUUIDToComponent.put(uuid_mesh, comp);
-                    // HACK since comp in general has multiple meshes
-                    // FIXME
-                    mapComponentToUUID.put(comp, uuid_mesh);
-                    if (mapBodyIndicesToVisNames.get(dg.getBodyId())==null && Mesh.safeDownCast(comp)!=null){
-                        mapBodyIndicesToVisNames.put(dg.getBodyId(), geomId);
-                        //System.out.println("Map body id="+dg.getBodyId()+" to mesh uuid"+uuid_mesh+" obj="+geomId);
-                    }
-                }
+                processDecorativeGeometry(adg, comp, dgimp, json_materials);
+            }
+            adg.clear();
+            comp.generateDecorations(false, mdh, model.getWorkingState(), adg);
+            if (adg.size() > 0) {
+                processDecorativeGeometry(adg, comp, dgimp, json_materials);
             }
             mcIter.next();
         }
         return jsonTop;
     }
 
-    private void addMaterialJsonForGeometry(UUID uuid_mat, DecorativeGeometry dg, JSONArray json_materials) {
-        Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
-        mat_json.put("uuid", uuid_mat.toString());
-        mat_json.put("type", "MeshPhongMaterial");
-        String colorString = JSONUtilities.mapColorToRGBA(dg.getColor());
-        mat_json.put("color", colorString);
-        mat_json.put("shininess", 30);
-        mat_json.put("emissive", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
-        mat_json.put("specular", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
-        mat_json.put("side", 2);
-        double opacity = dg.getOpacity();
-        if (opacity < 0.999) {
-            mat_json.put("opacity", opacity);
-            mat_json.put("transparent", true);
+    private void processDecorativeGeometry(ArrayDecorativeGeometry adg, Component comp, DecorativeGeometryImplementationJS dgimp, JSONArray json_materials) {
+        DecorativeGeometry dg;
+        for (int idx = 0; idx < adg.size(); idx++) {
+            dg = adg.getElt(idx);
+            String geomId = comp.getPathName();
+            if (adg.size()>0)
+                geomId = geomId.concat(GEOMETRY_SEP+String.valueOf(dg.getIndexOnBody()));
+            UUID uuid = UUID.randomUUID();
+            mapDecorativeGeometryToUUID.put(geomId, uuid);
+            dgimp.setGeomID(uuid);
+            dg.implementGeometry(dgimp);
+            JSONObject bodyJson = mapBodyIndicesToJson.get(dg.getBodyId());
+            if (bodyJson.get("children")==null)
+                bodyJson.put("children", new JSONArray());
+            UUID uuid_mesh = addtoFrameJsonObject(dg, geomId, uuid, dgimp.getMat_uuid(), (JSONArray)bodyJson.get("children"));
+            
+            mapUUIDToComponent.put(uuid_mesh, comp);
+            // HACK since comp in general has multiple meshes
+            // FIXME
+            mapComponentToUUID.put(comp, uuid_mesh);
+            if (mapBodyIndicesToVisNames.get(dg.getBodyId())==null && Mesh.safeDownCast(comp)!=null){
+                mapBodyIndicesToVisNames.put(dg.getBodyId(), geomId);
+                //System.out.println("Map body id="+dg.getBodyId()+" to mesh uuid"+uuid_mesh+" obj="+geomId);
+            }
         }
-        json_materials.add(mat_json);
     }
 
     private JSONObject loadTemplateJSON() {
@@ -201,15 +188,17 @@ public class VisualizationJson {
         JSONObject msg = new JSONObject();
         Iterator<Integer> bodyIdIter = mapBodyIndicesToFrames.keySet().iterator();
         msg.put("Op", "Frame");
+        JSONArray bodyTransforms_json = new JSONArray();
+        msg.put("Transforms", bodyTransforms_json);
         while (bodyIdIter.hasNext()){
             int bodyId = bodyIdIter.next();
+            JSONObject oneBodyXform_json = new JSONObject();
             PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(bodyId);
             Transform xform = bodyFrame.getGroundTransform(state);
             // Get uuid for first Mesh in body
-            
-            msg.put("name", mapBodyIndicesToVisNames.get(bodyId));
-            msg.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1., 1., 1.), visScaleFactor));
-            
+            oneBodyXform_json.put("name", mapBodyIndicesToJson.get(bodyId).get("name"));
+            oneBodyXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1., 1., 1.), visScaleFactor));
+            bodyTransforms_json.add(oneBodyXform_json);
         }
         //System.out.println("Sending:"+msg.toJSONString());
         return msg;

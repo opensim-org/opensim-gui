@@ -18,6 +18,7 @@ import org.opensim.modeling.DecorativeCone;
 import org.opensim.modeling.DecorativeCylinder;
 import org.opensim.modeling.DecorativeEllipsoid;
 import org.opensim.modeling.DecorativeFrame;
+import org.opensim.modeling.DecorativeGeometry;
 import org.opensim.modeling.DecorativeGeometryImplementation;
 import org.opensim.modeling.DecorativeLine;
 import org.opensim.modeling.DecorativeMesh;
@@ -37,10 +38,13 @@ import org.opensim.view.pub.GeometryFileLocator;
  */ 
 public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplementation {
     private JSONArray jsonArr;
+    private JSONArray json_materials;
     private UUID geomID;
+    private UUID mat_uuid;
     private double visualizerScaleFactor = 100;
-    public DecorativeGeometryImplementationJS(JSONArray jsonArr, double scale) {
+    public DecorativeGeometryImplementationJS(JSONArray jsonArr, JSONArray jsonArrMaterials, double scale) {
         this.jsonArr = jsonArr;
+        this.json_materials = jsonArrMaterials;
         this.visualizerScaleFactor = scale;
     }
     
@@ -54,6 +58,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 	dg_json.put("widthSegments", 32);
 	dg_json.put("heightSegments", 1);
         jsonArr.add(dg_json);     
+        createMaterialJson(arg0, true);
     }
 
     @Override
@@ -77,7 +82,8 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 	dg_json.put("tube", arg0.getTubeRadius()*visualizerScaleFactor);
 	dg_json.put("radialSegments", 32);
 	dg_json.put("tubularSegments", 24);
-        jsonArr.add(dg_json);        
+        jsonArr.add(dg_json);  
+        createMaterialJson(arg0, true);
      }
 
     @Override
@@ -95,14 +101,6 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
             dg_json.put("uuid", geomID.toString());
             dg_json.put("type", "BufferGeometry");
             Map<String, Object> attributes_json = new LinkedHashMap<String, Object>();
-            // Make position json entry
-            /*
-                    "position": {
-                        "itemSize": 3,
-                        "type": "Float32Array",
-                        "array": [0,0,0,100,0,0,100,100,0]
-                    }
-            */
             Map<String, Object> pos_json = new LinkedHashMap<String, Object>();
             pos_json.put("itemSize", 3);
             pos_json.put("type", "Float32Array");
@@ -116,6 +114,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
             
             int nf = mesh.getNumFaces();
             Vec3[] normals = new Vec3[nv];
+ 
             for (int f=0; f < nf; f++){
                  // get first three face indices, form normal from cross product
                 //System.out.println("f="+f);
@@ -130,7 +129,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
                     side2.set(i, verts[2].get(i) - verts[0].get(i));
                 }
                 Vec3 cross = new Vec3(side1.get(1)*side2.get(2)-side1.get(2)*side2.get(1),
-                                    side1.get(0)*side2.get(2)-side1.get(2)*side2.get(0),
+                                    side1.get(2)*side2.get(0)-side1.get(0)*side2.get(2),
                                     side1.get(0)*side2.get(1)-side1.get(1)*side2.get(0));
                 double norm = Math.sqrt(cross.get(0)*cross.get(0)+
                         cross.get(1)*cross.get(1)+cross.get(2)*cross.get(2));
@@ -195,6 +194,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
             data_json.put("attributes", attributes_json);
             dg_json.put("data", data_json);
             jsonArr.add(dg_json);
+            createMaterialJson(arg0, true);
         }
     }
 
@@ -212,15 +212,11 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
     public void implementFrameGeometry(DecorativeFrame arg0) {
         Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
         dg_json.put("uuid", geomID.toString());
-        dg_json.put("type", "SphereGeometry");
-	dg_json.put("radius", .01*visualizerScaleFactor);
-	dg_json.put("widthSegments", 32);
-	dg_json.put("heightSegments", 16);
-	dg_json.put("phiStart", 0);
-	dg_json.put("phiLength", 6.28);
-	dg_json.put("thetaStart", 0);
-	dg_json.put("thetaLength", 3.14);
+        dg_json.put("type", "OpenSim.FrameGeometry");
+	dg_json.put("radius", .005*visualizerScaleFactor);
+	//dg_json.put("size", arg0.getAxisLength()*visualizerScaleFactor);
         jsonArr.add(dg_json);    
+        createMaterialJson(arg0, false);
     }
 
     @Override
@@ -241,6 +237,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 	dg_json.put("thetaStart", 0);
 	dg_json.put("thetaLength", 3.14);
         jsonArr.add(dg_json);        
+        createMaterialJson(arg0, true);
     }
 
     @Override
@@ -255,6 +252,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 	dg_json.put("radius", arg0.getRadius()*visualizerScaleFactor);
 	dg_json.put("segments", 32);
         jsonArr.add(dg_json); 
+        createMaterialJson(arg0, false);
     }
 
     @Override
@@ -268,6 +266,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 	dg_json.put("radialSegments", 32);
 	dg_json.put("heightSegments", 1);
         jsonArr.add(dg_json);        
+        createMaterialJson(arg0, true);
     }
 
     @Override
@@ -281,11 +280,42 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 	dg_json.put("radialSegments", 1);
 	dg_json.put("heightSegments", 1);
         jsonArr.add(dg_json);        
+        createMaterialJson(arg0, true);
     }
 
     @Override
     public void implementLineGeometry(DecorativeLine arg0) {
-        //super.implementLineGeometry(arg0); //To change body of generated methods, choose Tools | Templates.
+        Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
+        dg_json.put("uuid", geomID.toString());
+        dg_json.put("type", "OpenSim.PathGeometry");
+        String colorString = JSONUtilities.mapColorToRGBA(arg0.getColor());
+        dg_json.put("color", colorString);
+        /*
+	"data": {
+        "indices": [0,1,2,...],
+        "vertices": [50,50,50,...],
+        "normals": [1,0,0,...],
+        "uvs": [0,1,...]
+        */
+        JSONArray verts_array = new JSONArray();
+        Map<String, Object> data_json = new LinkedHashMap<String, Object>();
+        verts_array.add(arg0.getPoint1().get(0)*visualizerScaleFactor);
+        verts_array.add(arg0.getPoint1().get(1)*visualizerScaleFactor);
+        verts_array.add(arg0.getPoint1().get(2)*visualizerScaleFactor);
+        verts_array.add(arg0.getPoint1().get(0)*visualizerScaleFactor);
+        verts_array.add((arg0.getPoint1().get(1)+0.5)*visualizerScaleFactor);
+        verts_array.add(arg0.getPoint1().get(2)*visualizerScaleFactor);
+        
+        verts_array.add(arg0.getPoint2().get(0)*visualizerScaleFactor);
+        verts_array.add(arg0.getPoint2().get(1)*visualizerScaleFactor);
+        verts_array.add(arg0.getPoint2().get(2)*visualizerScaleFactor);
+        //data_json.put("vertices", verts_array);
+        data_json.put("itemSize", 3);
+        data_json.put("type", "Float32Array");
+        data_json.put("array", verts_array);
+        dg_json.put("positions", data_json);
+        jsonArr.add(dg_json);        
+        createMaterialJson(arg0, true);
     }
 
     @Override
@@ -315,5 +345,42 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
      */
     public void setVisualizerScaleFactor(double visualizerScaleFactor) {
         this.visualizerScaleFactor = visualizerScaleFactor;
+    }
+
+    private void createMaterialJson(DecorativeGeometry dg, boolean isSurface) {
+        mat_uuid = UUID.randomUUID();
+        addMaterialJsonForGeometry(mat_uuid, dg, isSurface);
+
+    }
+
+    private void addMaterialJsonForGeometry(UUID uuid_mat, DecorativeGeometry dg, boolean isSurface) {
+        Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
+        mat_json.put("uuid", uuid_mat.toString());
+        if (isSurface){
+            mat_json.put("type", "MeshPhongMaterial");
+            mat_json.put("shininess", 30);
+            mat_json.put("emissive", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
+            mat_json.put("specular", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
+            mat_json.put("side", 2);
+        }
+        else {
+            mat_json.put("type", "LineBasicMaterial");           
+        }
+        String colorString = JSONUtilities.mapColorToRGBA(dg.getColor());
+        mat_json.put("color", colorString);
+
+        double opacity = dg.getOpacity();
+        if (Math.abs(opacity) < 0.999) {
+            mat_json.put("opacity", opacity);
+            mat_json.put("transparent", true);
+        }
+        json_materials.add(mat_json);
+    }
+
+    /**
+     * @return the mat_uuid
+     */
+    public UUID getMat_uuid() {
+        return mat_uuid;
     }
 }

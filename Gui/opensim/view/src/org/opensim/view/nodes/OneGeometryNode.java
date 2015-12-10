@@ -47,6 +47,7 @@ import org.opensim.modeling.Appearance;
 import org.opensim.modeling.DecorativeGeometry;
 import org.opensim.modeling.Geometry;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.SurfaceAppearance;
 import org.opensim.modeling.Vec3;
 import org.opensim.view.ColorableInterface;
 import org.opensim.view.ExplorerTopComponent;
@@ -136,9 +137,10 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
             nextNodeProp5.setName("Opacity");        
             appearanceSheet.put(nextNodeProp5);
             PropertySupport.Reflection nextNodePropRepresentation;
-            nextNodePropRepresentation = new PropertySupport.Reflection(this, DecorativeGeometry.Representation.class, 
-                    "getDisplayPreference", "setDisplayPreference");
-            nextNodePropRepresentation.setPropertyEditorClass(DisplayPreferenceEditor.class);
+            SurfaceAppearance surfApp = disp.get_surface_appearance();
+            nextNodePropRepresentation = new PropertySupport.Reflection(surfApp, int.class, 
+                    "get_representation", "set_representation");
+            //nextNodePropRepresentation.setPropertyEditorClass(DisplayPreferenceEditor.class);
             nextNodePropRepresentation.setName("DisplayPreference");        
             appearanceSheet.put(nextNodePropRepresentation);
         }

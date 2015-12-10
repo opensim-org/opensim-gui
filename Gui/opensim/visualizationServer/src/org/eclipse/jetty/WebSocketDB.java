@@ -48,11 +48,11 @@ public class WebSocketDB {
         this.observer = observer;
     }
     
-    public void broadcastMessageJson(JSONObject selected)
+    public void broadcastMessageJson(JSONObject msg)
     {
-        /*for (VisWebSocket sock : sockets){
-            sock.sendSelection(selected);
-        }*/
-        sockets.iterator().next().sendSelection(selected);
+        for (VisWebSocket sock : sockets){
+            sock.sendVisualizerMessage(msg);
+        }
+        //sockets.iterator().next().sendVisualizerMessage(msg);
     }
 }
