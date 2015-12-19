@@ -115,6 +115,10 @@ public class Plot {
       new JOpenSimChartMouseListener(chartPanel);
       chartPanel.setDisplayToolTips(true);
       chartPanel.setInitialDelay(0);
+      // Prevent text (axis labels, title) from stretching when enlarging
+      // the plot window.
+      chartPanel.setMaximumDrawWidth(3000);
+      chartPanel.setMaximumDrawHeight(3000);
       
       // Add Export Data option
       JPopupMenu stdPopup = chartPanel.getPopupMenu();
