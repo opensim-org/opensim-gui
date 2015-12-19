@@ -26,6 +26,8 @@ install:
 
   ## The GUI is built with the Netbeans platform.
   - ps: choco install netbeans --yes --limit-output
+  - dir "C:\Program Files\Java\jdk1.8.0_66\bin"
+  - echo %PATH%
 
   ## Apache Ant for building Java projects.
   - choco install ant --yes --limit-output
