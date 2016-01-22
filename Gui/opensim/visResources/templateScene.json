@@ -15,7 +15,9 @@
 						"uuid": "AE6F5E63-5985-4BB0-A8AB-C9A64273E669",
 						"type": "Mesh",
 						"name": "GroundPlane",
-                        "visible": false,
+						"visible": true,
+						"receiveShadow": true,
+						"castShadow": false,
 						"matrix": [1,0,0,0,0,0.0007963267271406949,-0.9999997019767761,0,0,0.9999997019767761,0.0007963267271406949,0,0,0,0,1],
 						"geometry": "A42B8018-CE2A-4A76-93FD-754385EF0444",
 						"material": "F408C3DE-FF2B-4229-A254-0FBD9BDB6207"
@@ -26,7 +28,9 @@
 						"name": "DirectionalLight 1",
 						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,100,100,1],
 						"color": 16777215,
-						"intensity": 1
+						"intensity": 1,
+						"castShadow": true,
+						"receiveShadow": false
 					},
 					{
 						"uuid": "E2939A7B-5E40-438A-8C1B-32126FBC6892",

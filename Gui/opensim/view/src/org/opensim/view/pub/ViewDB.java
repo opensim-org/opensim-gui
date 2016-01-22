@@ -58,6 +58,7 @@ import org.openide.util.lookup.InstanceContent;
 import org.opensim.modeling.*;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.swingui.SwingWorker;
+import org.opensim.threejs.JSONMessageHandler;
 import org.opensim.threejs.VisualizationJson;
 import org.opensim.utils.Prefs;
 import org.opensim.utils.TheApp;
@@ -1168,7 +1169,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       repaintAll();
       if (websocketdb != null){
         // Make xforms JSON
-        websocketdb.broadcastMessageJson(visJson.makeXformsJson());
+        websocketdb.broadcastMessageJson(visJson.createFrameMessageJson());
       }
    }
    
@@ -1179,7 +1180,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       lockDrawingSurfaces(false);
       if (websocketdb != null){
         // Make xforms JSON
-        websocketdb.broadcastMessageJson(visJson.makeXformsJson());
+        websocketdb.broadcastMessageJson(visJson.createFrameMessageJson());
       }
    }
 
@@ -1922,10 +1923,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
        Object uuid = jsonObject.get("uuid");
        String uuidString = (String) uuid;
        final OpenSimObject selectedObject = visJson.findObjectForUUID(uuidString);
-       SwingUtilities.invokeLater(new Runnable(){
-                @Override
-                public void run() {
-                    setSelectedObject(selectedObject);
-                }});
+       JSONMessageHandler.handleJSON(getCurrentModel(), selectedObject, jsonObject);
     }
 }

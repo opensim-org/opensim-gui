@@ -6,6 +6,8 @@
 package org.opensim.threejs;
 
 import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -14,6 +16,7 @@ import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.openide.util.Exceptions;
 import org.opensim.modeling.ArrayDecorativeGeometry;
 import org.opensim.modeling.BodiesList;
 import org.opensim.modeling.Body;
@@ -22,9 +25,12 @@ import org.opensim.modeling.Component;
 import org.opensim.modeling.ComponentIterator;
 import org.opensim.modeling.ComponentsList;
 import org.opensim.modeling.DecorativeGeometry;
+import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Mesh;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
+import org.opensim.modeling.MuscleIterator;
+import org.opensim.modeling.MusclesList;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.State;
@@ -40,21 +46,25 @@ public class VisualizationJson {
     private final JSONObject topJson;
     private final HashMap<Integer, PhysicalFrame> mapBodyIndicesToFrames = new HashMap<Integer, PhysicalFrame>();
     private final HashMap<Integer, JSONObject> mapBodyIndicesToJson = new HashMap<Integer, JSONObject>();
-    private final HashMap<Integer, String> mapBodyIndicesToVisNames = new HashMap<Integer, String>();
-    private final double visScaleFactor = 1000.0;
+    private final static double visScaleFactor = 1000.0;
     private final HashMap<String, UUID> mapDecorativeGeometryToUUID = new HashMap<String, UUID>();
     private final HashMap<UUID, Component> mapUUIDToComponent = new HashMap<UUID, Component>();
-    private final HashMap<OpenSimObject, UUID> mapComponentToUUID = new HashMap<OpenSimObject, UUID>();
+    private final HashMap<OpenSimObject, ArrayList<UUID>> mapComponentToUUID = 
+            new HashMap<OpenSimObject, ArrayList<UUID>>();
     private static final String GEOMETRY_SEP = ".";
     private final Vec3 vec3Unit = new Vec3(1.0, 1.0, 1.0);
+    private MusclesList muscleList = null;
+    private ModelDisplayHints mdh;
+    private DecorativeGeometryImplementationJS dgimp = null;
     
     public VisualizationJson(Model model) {
         topJson =  createJsonForModel(model);
     }
     private JSONObject createJsonForModel(Model model) {
         state = model.getWorkingState();
-        ModelDisplayHints mdh = model.getDisplayHints();
+        mdh = model.getDisplayHints();
         ComponentsList mcList = model.getComponentsList();
+        muscleList = model.getMusclesList();
         ComponentIterator mcIter = mcList.begin();
         // Load template 
         JSONObject jsonTop = loadTemplateJSON();
@@ -87,7 +97,7 @@ public class VisualizationJson {
             //System.out.println(bodyJson.toJSONString());
             body.next();
         }
-        DecorativeGeometryImplementationJS dgimp = new DecorativeGeometryImplementationJS(json_geometries, json_materials, visScaleFactor);
+        dgimp = new DecorativeGeometryImplementationJS(json_geometries, json_materials, visScaleFactor);
         while (!mcIter.equals(mcList.end())) {
             Component comp = mcIter.__deref__();
             ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
@@ -97,6 +107,7 @@ public class VisualizationJson {
             }
             adg.clear();
             comp.generateDecorations(false, mdh, model.getWorkingState(), adg);
+            boolean isGeometryPath = (GeometryPath.safeDownCast(comp)!=null);
             if (adg.size() > 0) {
                 processDecorativeGeometry(adg, comp, dgimp, json_materials);
             }
@@ -105,12 +116,14 @@ public class VisualizationJson {
         return jsonTop;
     }
 
-    private void processDecorativeGeometry(ArrayDecorativeGeometry adg, Component comp, DecorativeGeometryImplementationJS dgimp, JSONArray json_materials) {
+    private void processDecorativeGeometry(ArrayDecorativeGeometry adg, Component comp, 
+            DecorativeGeometryImplementationJS dgimp, JSONArray json_materials) {
         DecorativeGeometry dg;
+        ArrayList<UUID> vis_uuidList = new ArrayList<UUID>(1);
         for (int idx = 0; idx < adg.size(); idx++) {
             dg = adg.getElt(idx);
             String geomId = comp.getPathName();
-            if (adg.size()>0)
+            if (adg.size()>1)
                 geomId = geomId.concat(GEOMETRY_SEP+String.valueOf(dg.getIndexOnBody()));
             UUID uuid = UUID.randomUUID();
             mapDecorativeGeometryToUUID.put(geomId, uuid);
@@ -120,21 +133,26 @@ public class VisualizationJson {
             if (bodyJson.get("children")==null)
                 bodyJson.put("children", new JSONArray());
             UUID uuid_mesh = addtoFrameJsonObject(dg, geomId, uuid, dgimp.getMat_uuid(), (JSONArray)bodyJson.get("children"));
+            vis_uuidList.add(uuid_mesh);
             
             mapUUIDToComponent.put(uuid_mesh, comp);
-            // HACK since comp in general has multiple meshes
-            // FIXME
-            mapComponentToUUID.put(comp, uuid_mesh);
-            if (mapBodyIndicesToVisNames.get(dg.getBodyId())==null && Mesh.safeDownCast(comp)!=null){
-                mapBodyIndicesToVisNames.put(dg.getBodyId(), geomId);
-                //System.out.println("Map body id="+dg.getBodyId()+" to mesh uuid"+uuid_mesh+" obj="+geomId);
-            }
         }
+        mapComponentToUUID.put(comp, vis_uuidList);
+        System.out.println("Map component="+comp.getPathName()+" to "+vis_uuidList.size());   
+ 
     }
 
     private JSONObject loadTemplateJSON() {
         JSONParser parser = new JSONParser();
         JSONObject jsonObject = null;
+        String current;
+        try {
+            current = new java.io.File( "." ).getCanonicalPath();
+            System.out.println("Current dir:"+current);
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        
         try {
             Object obj = parser.parse(new FileReader("visResources/templateScene.json"));
             jsonObject = (JSONObject) obj;
@@ -181,10 +199,10 @@ public class VisualizationJson {
     }
 
     public UUID findUUIDForObject(OpenSimObject obj) {
-        return mapComponentToUUID.get(obj);
+        return mapComponentToUUID.get(obj).get(0);
     }
 
-    public JSONObject makeXformsJson() {
+    public JSONObject createFrameMessageJson() {
         JSONObject msg = new JSONObject();
         Iterator<Integer> bodyIdIter = mapBodyIndicesToFrames.keySet().iterator();
         msg.put("Op", "Frame");
@@ -200,6 +218,33 @@ public class VisualizationJson {
             oneBodyXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1., 1., 1.), visScaleFactor));
             bodyTransforms_json.add(oneBodyXform_json);
         }
+        /*
+        JSONArray geompaths_json = new JSONArray();
+        msg.put("paths", geompaths_json);
+        MuscleIterator muscleIter = muscleList.begin();
+        while(!muscleIter.equals(muscleList.end())){
+            // get path and call generateDecorations on it
+            GeometryPath geomPathObject = muscleIter.getGeometryPath();
+            ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
+            JSONObject pathUpdate_json = new JSONObject();
+            geomPathObject.generateDecorations(false, mdh, state, adg);
+            ArrayList<UUID> existing_uuids = mapComponentToUUID.get(geomPathObject);
+            // segments are at index 2, 4, 6, ... in uuid_list
+            for(int decoGeomIndex = 2; decoGeomIndex < adg.size(); decoGeomIndex+=2){
+                DecorativeGeometry dg = adg.getElt(decoGeomIndex);
+                UUID current_uuid = existing_uuids.get(decoGeomIndex);
+                dgimp.updateGeometry(dg, current_uuid);
+                System.out.println("Update decorative geomtry for uuid "+existing_uuids.get(decoGeomIndex).toString());
+                pathUpdate_json.put("uuid", existing_uuids.get(decoGeomIndex).toString());
+                Map<String, Object> positionsJson = (Map<String, Object>)dgimp.getLast_json().get("positions");
+                pathUpdate_json.put("positions", positionsJson.get("array"));
+                geompaths_json.add(pathUpdate_json);
+       
+            }
+            // Find uuid for muscle based on Path and send new coordinates
+            muscleIter.next();
+        }
+        */
         //System.out.println("Sending:"+msg.toJSONString());
         return msg;
     }
@@ -210,5 +255,12 @@ public class VisualizationJson {
         formJSON.put("UUID", obj_uuid.toString());  
         formJSON.put("Op", "Select");  
         return formJSON;
+    }
+
+    /**
+     * @return the visScaleFactor
+     */
+    public static double getVisScaleFactor() {
+        return visScaleFactor;
     }
 }
