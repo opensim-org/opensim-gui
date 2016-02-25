@@ -350,6 +350,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                modelOpacities.remove(dModel);
                //rc = visModel.getModelDisplayAssembly().GetReferenceCount();
                if (visModel != null) visModel.cleanup();
+               if (websocketdb != null){
+                    websocketdb.broadcastMessageJson(visJson.createCloseModelJson(dModel));
+                }
                
             } else if (ev.getOperation()==ModelEvent.Operation.SetCurrent) {
                // Current model has changed. For view purposes this affects available commands
@@ -1922,6 +1925,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     private void handleJson(JSONObject jsonObject) {
        Object uuid = jsonObject.get("uuid");
        String uuidString = (String) uuid;
+       if (uuidString.length()==0) return;
        final OpenSimObject selectedObject = visJson.findObjectForUUID(uuidString);
        JSONMessageHandler.handleJSON(getCurrentModel(), selectedObject, jsonObject);
     }

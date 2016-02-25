@@ -26,12 +26,12 @@ import org.opensim.modeling.ComponentIterator;
 import org.opensim.modeling.ComponentsList;
 import org.opensim.modeling.DecorativeGeometry;
 import org.opensim.modeling.GeometryPath;
-import org.opensim.modeling.Mesh;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
-import org.opensim.modeling.MuscleIterator;
 import org.opensim.modeling.MusclesList;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PathPoint;
+import org.opensim.modeling.PathPointSet;
 import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.State;
 import org.opensim.modeling.Transform;
@@ -56,6 +56,7 @@ public class VisualizationJson {
     private MusclesList muscleList = null;
     private ModelDisplayHints mdh;
     private DecorativeGeometryImplementationJS dgimp = null;
+    private static String boneSuffix = "_Bone";
     
     public VisualizationJson(Model model) {
         topJson =  createJsonForModel(model);
@@ -82,7 +83,9 @@ public class VisualizationJson {
         // create model node
         model_json.put("uuid", UUID.randomUUID().toString());
         model_json.put("type", "Group");
-        model_json.put("name", model.getName()+":Ground");
+        model_json.put("opensimtype", "Frame");
+        model_json.put("name", model.getGround().getPathName());
+        model_json.put("model_ground", true);
         //System.out.println(model_json.toJSONString());
         JSONArray bodies_json = new JSONArray();
         model_json.put("children", bodies_json);
@@ -97,6 +100,7 @@ public class VisualizationJson {
             //System.out.println(bodyJson.toJSONString());
             body.next();
         }
+        createSkeleton(model, jsonTop);
         dgimp = new DecorativeGeometryImplementationJS(json_geometries, json_materials, visScaleFactor);
         while (!mcIter.equals(mcList.end())) {
             Component comp = mcIter.__deref__();
@@ -105,11 +109,16 @@ public class VisualizationJson {
             if (adg.size() > 0) {
                 processDecorativeGeometry(adg, comp, dgimp, json_materials);
             }
-            adg.clear();
-            comp.generateDecorations(false, mdh, model.getWorkingState(), adg);
-            boolean isGeometryPath = (GeometryPath.safeDownCast(comp)!=null);
-            if (adg.size() > 0) {
-                processDecorativeGeometry(adg, comp, dgimp, json_materials);
+            GeometryPath gPath = GeometryPath.safeDownCast(comp);
+            boolean isGeometryPath = (gPath!=null);
+            if (isGeometryPath)
+                createJsonForGeometryPath(gPath, mdh, model.getWorkingState(), json_geometries, json_materials);
+            else{
+                adg.clear();
+                comp.generateDecorations(false, mdh, model.getWorkingState(), adg);
+                 if (adg.size() > 0) {
+                    processDecorativeGeometry(adg, comp, dgimp, json_materials);
+                }
             }
             mcIter.next();
         }
@@ -187,7 +196,8 @@ public class VisualizationJson {
         JSONObject bdyJson = new JSONObject();
         bdyJson.put("uuid", UUID.randomUUID().toString());
         bdyJson.put("type", "Group");
-        bdyJson.put("name", body.getName());
+        bdyJson.put("opensimtype", "Frame");
+        bdyJson.put("name", body.getPathName());
         PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(body.getMobilizedBodyIndex());
         Transform bodyXform = bodyFrame.getGroundTransform(state);
         bdyJson.put("matrix", JSONUtilities.createMatrixFromTransform(bodyXform, vec3Unit, visScaleFactor));
@@ -262,5 +272,142 @@ public class VisualizationJson {
      */
     public static double getVisScaleFactor() {
         return visScaleFactor;
+    }
+
+    public JSONObject createCloseModelJson(Model model) {
+       JSONObject guiJson = new JSONObject();
+        UUID obj_uuid = findUUIDForObject(model);
+        guiJson.put("UUID", obj_uuid.toString());  
+        guiJson.put("Op", "CloseModel");  
+        return guiJson;
+    }
+
+    private void createJsonForGeometryPath(GeometryPath path, ModelDisplayHints mdh, State workingState, JSONArray json_geometries, JSONArray json_materials) {
+        JSONArray pathpoint_jsonArr = new JSONArray();
+        PathPointSet ppts = path.getPathPointSet();
+        for (int i=0; i< ppts.getSize(); i++){
+            PathPoint pathPoint = ppts.get(i);
+            // Create a Sphere with internal opensimType PathPoint
+            // attach it to the frame it lives on.
+            UUID pathpoint_uuid = addPathPointGeometryToParent(pathPoint, json_geometries);
+            //UUID ppt_json = createJsonForPathPoint(pathPoint);
+            pathpoint_jsonArr.add(pathpoint_uuid.toString());
+        }
+        JSONObject gndJson = mapBodyIndicesToJson.get(0);
+        if (gndJson.get("children")==null)
+                gndJson.put("children", new JSONArray());
+        JSONArray gndChildren = (JSONArray) gndJson.get("children");
+        Map<String, Object> obj_json = new LinkedHashMap<String, Object>();
+        UUID mesh_uuid = UUID.randomUUID();
+        obj_json.put("uuid", mesh_uuid.toString());
+        obj_json.put("type", "GeometryPath");
+        obj_json.put("name", path.getPathName());
+        obj_json.put("points", pathpoint_jsonArr);
+        obj_json.put("opensimType", "Path");
+        gndChildren.add(obj_json);
+        // Create json entry for material (path_material) and set skinning to true
+        Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
+        UUID mat_uuid = UUID.randomUUID();
+        mat_json.put("uuid", mat_uuid.toString());
+        mat_json.put("type", "MeshBasicMaterial");
+        String colorString = JSONUtilities.mapColorToRGBA(new Vec3(1.0, 0., 0.));
+        mat_json.put("color", colorString);
+        mat_json.put("side", 2);
+        mat_json.put("skinning", true);
+        json_materials.add(mat_json);
+        obj_json.put("material", mat_uuid.toString());
+        return;       
+    }
+
+    private UUID createJsonForPathPoint(PathPoint ppt) {
+        Map<String, Object> ppt_json = new LinkedHashMap<String, Object>();
+        JSONArray locationArray = new JSONArray();
+        UUID uuid_ppt = UUID.randomUUID();
+        ppt_json.put("uuid", uuid_ppt.toString());
+        ppt_json.put("name", ppt.getName());
+        ppt_json.put("opensimtype", "PathPoint");
+        // insert inappropriate body/frame
+        PhysicalFrame bdy = ppt.getBody();
+        JSONObject bodyJson = mapBodyIndicesToJson.get(bdy.getMobilizedBodyIndex());
+        if (bodyJson.get("children")==null)
+            bodyJson.put("children", new JSONArray());
+        ((JSONArray)bodyJson.get("children")).add(ppt_json);
+        return uuid_ppt;
+    }
+
+    private void createSkeleton(Model model, JSONObject top_model_json) {
+        Map<String, Object> skel_json = new LinkedHashMap<String, Object>();
+        UUID skel_uuid = UUID.randomUUID();
+        skel_json.put("uuid", skel_uuid.toString());
+        skel_json.put("type", "Skeleton");
+        skel_json.put("name", "ModelSkeleton");
+        skel_json.put("opensimType", "Skeleton");
+        //{"parent":-1,"name":"Bone.000","pos":[-1.2628,0.155812,0.0214679],"rotq":[0,0,0,1]}
+         JSONArray bones_json = new JSONArray();
+         skel_json.put("children", bones_json);
+         BodiesList bodies = model.getBodiesList();
+         BodyIterator body = bodies.begin();
+         JSONArray posVec3 = new JSONArray();
+         JSONArray unitQuaternion = new JSONArray();
+         for (int i=0; i<3; i++){
+            posVec3.add(0.0);
+            unitQuaternion.add(0.0);
+         }
+         unitQuaternion.add(1.0);
+         Map<String, Object> groundBone_json = new LinkedHashMap<String, Object>();
+         groundBone_json.put("parent", -1);
+         groundBone_json.put("name", model.getGround().getPathName()+boneSuffix);
+         groundBone_json.put("pos", posVec3);
+         groundBone_json.put("rotq", unitQuaternion);
+         UUID bone_uuid = UUID.randomUUID();
+         bones_json.add(groundBone_json);
+         while (!body.equals(bodies.end())) {
+            Map<String, Object> obj_json = new LinkedHashMap<String, Object>();
+            obj_json.put("name", body.getPathName()+boneSuffix);
+            obj_json.put("parent", 0);
+            Transform xform = body.findTransformBetween(state, model.get_ground());
+            Vec3 pos = xform.p();
+            JSONArray bodyPosVec3 = new JSONArray();
+            for (int i=0; i<3; i++){
+                bodyPosVec3.add(visScaleFactor*pos.get(i));
+            }
+            obj_json.put("pos", bodyPosVec3);
+            obj_json.put("rotq", unitQuaternion);
+            bones_json.add(obj_json);
+            body.next();
+         }
+        //if (top_model_json.get("children")==null)
+        //        top_model_json.put("children", new JSONArray());
+        top_model_json.put("skeleton", skel_json);
+    }
+
+    private UUID addPathPointGeometryToParent(PathPoint pathPoint, JSONArray json_geometries ) {
+        JSONObject bpptJson = new JSONObject();
+        UUID uuidForPathpointGeometry = UUID.randomUUID();
+        bpptJson.put("uuid", uuidForPathpointGeometry.toString());
+        bpptJson.put("type", "SphereGeometry");
+        bpptJson.put("radius", 5);
+        bpptJson.put("opensimtype", "PathPoint");
+        bpptJson.put("name", pathPoint.getName());
+ 	bpptJson.put("widthSegments", 32);
+	bpptJson.put("heightSegments", 16);
+        json_geometries.add(bpptJson);
+        // Now add to scene graph
+        JSONObject bpptInBodyJson = new JSONObject();
+        UUID ppoint_uuid = UUID.randomUUID();
+        bpptInBodyJson.put("uuid", ppoint_uuid.toString());
+        bpptInBodyJson.put("type", "Mesh");
+        bpptInBodyJson.put("name", pathPoint.getName());
+        bpptInBodyJson.put("geometry", uuidForPathpointGeometry.toString());
+ 
+        PhysicalFrame bodyFrame = pathPoint.getBody();
+        JSONObject bodyJson = mapBodyIndicesToJson.get(bodyFrame.getMobilizedBodyIndex());
+        JSONArray children = (JSONArray)bodyJson.get("children");
+        Transform localTransform = new Transform();
+        Vec3 location = pathPoint.getLocation();
+        localTransform.setP(location);
+        bpptInBodyJson.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1.0), visScaleFactor));
+        children.add(bpptInBodyJson);
+        return ppoint_uuid;
     }
 }

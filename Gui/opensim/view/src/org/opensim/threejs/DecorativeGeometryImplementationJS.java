@@ -42,6 +42,9 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
     private UUID geomID;
     private UUID mat_uuid;
     private double visualizerScaleFactor = 100;
+    boolean updateMode = false;
+    private Map<String, Object> last_json = null;
+    
     public DecorativeGeometryImplementationJS(JSONArray jsonArr, JSONArray jsonArrMaterials, double scale) {
         this.jsonArr = jsonArr;
         this.json_materials = jsonArrMaterials;
@@ -212,8 +215,8 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
     public void implementFrameGeometry(DecorativeFrame arg0) {
         Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
         dg_json.put("uuid", geomID.toString());
-        dg_json.put("type", "OpenSim.FrameGeometry");
-	dg_json.put("radius", .005*visualizerScaleFactor);
+        dg_json.put("type", "SphereGeometry");
+	dg_json.put("radius", .00005*visualizerScaleFactor);
 	//dg_json.put("size", arg0.getAxisLength()*visualizerScaleFactor);
         jsonArr.add(dg_json);    
         createMaterialJson(arg0, false);
@@ -297,22 +300,29 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         "normals": [1,0,0,...],
         "uvs": [0,1,...]
         */
-        JSONArray verts_array = new JSONArray();
         Map<String, Object> data_json = new LinkedHashMap<String, Object>();
-        verts_array.add(arg0.getPoint1().get(0)*visualizerScaleFactor);
-        verts_array.add(arg0.getPoint1().get(1)*visualizerScaleFactor);
-        verts_array.add(arg0.getPoint1().get(2)*visualizerScaleFactor);
-        
-        verts_array.add(arg0.getPoint2().get(0)*visualizerScaleFactor);
-        verts_array.add(arg0.getPoint2().get(1)*visualizerScaleFactor);
-        verts_array.add(arg0.getPoint2().get(2)*visualizerScaleFactor);
+        JSONArray verts_array = createVertexArray(arg0);
         //data_json.put("vertices", verts_array);
         data_json.put("itemSize", 3);
         data_json.put("type", "Float32Array");
         data_json.put("array", verts_array);
         dg_json.put("positions", data_json);
-        jsonArr.add(dg_json);        
-        createMaterialJson(arg0, true);
+        last_json = dg_json;
+        if (!updateMode) {
+            jsonArr.add(dg_json);        
+            createMaterialJson(arg0, false);
+        }
+    }
+
+    private JSONArray createVertexArray(DecorativeLine arg0) {
+        JSONArray verts_array = new JSONArray();
+        verts_array.add(arg0.getPoint1().get(0)*visualizerScaleFactor);
+        verts_array.add(arg0.getPoint1().get(1)*visualizerScaleFactor);
+        verts_array.add(arg0.getPoint1().get(2)*visualizerScaleFactor);
+        verts_array.add(arg0.getPoint2().get(0)*visualizerScaleFactor);
+        verts_array.add(arg0.getPoint2().get(1)*visualizerScaleFactor);
+        verts_array.add(arg0.getPoint2().get(2)*visualizerScaleFactor);
+        return verts_array;
     }
 
     @Override
@@ -379,5 +389,19 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
      */
     public UUID getMat_uuid() {
         return mat_uuid;
+    }
+
+    void updateGeometry(DecorativeGeometry dg, UUID current_uuid) {
+        geomID = current_uuid;
+        updateMode = true;
+        dg.implementGeometry(this);
+        updateMode = false;
+    }
+
+    /**
+     * @return the last_json
+     */
+    public Map<String, Object> getLast_json() {
+        return last_json;
     }
 }

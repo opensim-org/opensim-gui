@@ -104,12 +104,7 @@ public class SelectedObject implements Selectable {
       } else if (Marker.safeDownCast(object) != null) {
          Marker marker = Marker.safeDownCast(object);
          SingleModelVisuals visuals = ViewDB.getInstance().getModelVisuals(getModel(marker));
-         OpenSimvtkGlyphCloud cloud = visuals.getMarkersRep();
-         int id = cloud.getPointId(object);
-         if(id>=0) { // just to be safe
-            cloud.setSelected(id, highlight);
-            cloud.setModified();
-         }
+         visuals.highLightObject(object, highlight);
       } else if (Body.safeDownCast(object) != null ) {
           SingleModelVisuals viz = ViewDB.getInstance().getModelVisuals(this.getOwnerModel());
           viz.highLightObject(object, highlight);

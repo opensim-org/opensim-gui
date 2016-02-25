@@ -30,10 +30,12 @@ public class JSONMessageHandler {
                     // Find property and modify
                     // From Visualizer side, we always get "position", "rotation", "scale"
                     // The corresponding Properties are adhoc and vary as follows:
-                    final AbstractProperty ap = opensimObj.getPropertyByName("location");
-                    final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(model, opensimObj, ap, null);
-                    String locationString = (String) jsonObject.get("location");
-                    pea.setValueVec3FromString(convertLocationStringToPropertyFormat(jsonObject));
+                    if (opensimObj != null && opensimObj.hasProperty("location")){
+                        final AbstractProperty ap = opensimObj.getPropertyByName("location");
+                        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(model, opensimObj, ap, null);
+                        String locationString = (String) jsonObject.get("location");
+                        pea.setValueVec3FromString(convertLocationStringToPropertyFormat(jsonObject));
+                    }
                 }
                 else if (eventType.equals("geometry-changed")){
                     // update Preoperties from Json
