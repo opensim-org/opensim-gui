@@ -278,9 +278,10 @@ public class VisualizationJson {
 
     public JSONObject createCloseModelJson(Model model) {
        JSONObject guiJson = new JSONObject();
+       /*
         UUID obj_uuid = findUUIDForObject(model);
         guiJson.put("UUID", obj_uuid.toString());  
-        guiJson.put("Op", "CloseModel");  
+        guiJson.put("Op", "CloseModel");  */
         return guiJson;
     }
 
