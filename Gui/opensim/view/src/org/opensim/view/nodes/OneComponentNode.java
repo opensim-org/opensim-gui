@@ -17,10 +17,12 @@ import static org.openide.nodes.Sheet.createExpertSet;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.AbstractConnector;
+import org.opensim.modeling.AbstractOutput;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.Component;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.StdVectorString;
 
 /**
  *
@@ -51,6 +53,17 @@ public class OneComponentNode extends OpenSimObjectNode {
                 createConnectorProperty(ac, connectorSheet);
             }
         }
+        if (comp.getNumOutputs()>0){
+            Sheet.Set outputsSheet = createExpertSet();
+            outputsSheet.setDisplayName("Outputs (name:type)");
+            StdVectorString outputNames = comp.getOutputNames();
+            parentSheet.put(outputsSheet);
+            for (int i=0; i< comp.getNumOutputs();i++ ){
+                String oName = outputNames.get(i);
+                AbstractOutput ac = comp.getOutput(oName);
+                createOutputProperty(ac, outputsSheet);
+            }
+        }
         return parentSheet;
     }
     
@@ -69,6 +82,22 @@ public class OneComponentNode extends OpenSimObjectNode {
             PropertyEditorSupport editor = EditorRegistry.getEditor(connecteeType);
             if (editor != null)
                 nextNodeProp.setPropertyEditorClass(editor.getClass());
+            sheetSet.put(nextNodeProp);
+        } catch (NoSuchMethodException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+    }
+
+    private void createOutputProperty(AbstractOutput anOutput, Sheet.Set sheetSet) {
+        try {
+            String outputName = anOutput.getName();
+            PropertySupport.Reflection nextNodeProp = 
+                    new PropertySupport.Reflection(anOutput,
+                    String.class,
+                    "getTypeName",null);
+            nextNodeProp.setValue("canEditAsText", Boolean.FALSE);
+            nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
+            nextNodeProp.setName(outputName);
             sheetSet.put(nextNodeProp);
         } catch (NoSuchMethodException ex) {
             Exceptions.printStackTrace(ex);
