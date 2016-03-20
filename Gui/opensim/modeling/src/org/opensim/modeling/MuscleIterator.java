@@ -117,6 +117,134 @@ public class MuscleIterator {
     return opensimModelJNI.MuscleIterator_get_ignore_activation_dynamics__SWIG_1(swigCPtr, this);
   }
 
+  public boolean get_has_output_excitation() {
+    return opensimModelJNI.MuscleIterator__has_output_excitation_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_activation() {
+    return opensimModelJNI.MuscleIterator__has_output_activation_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_fiber_length() {
+    return opensimModelJNI.MuscleIterator__has_output_fiber_length_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_pennation_angle() {
+    return opensimModelJNI.MuscleIterator__has_output_pennation_angle_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_cos_pennation_angle() {
+    return opensimModelJNI.MuscleIterator__has_output_cos_pennation_angle_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_tendon_length() {
+    return opensimModelJNI.MuscleIterator__has_output_tendon_length_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_normalized_fiber_length() {
+    return opensimModelJNI.MuscleIterator__has_output_normalized_fiber_length_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_fiber_length_along_tendon() {
+    return opensimModelJNI.MuscleIterator__has_output_fiber_length_along_tendon_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_tendon_strain() {
+    return opensimModelJNI.MuscleIterator__has_output_tendon_strain_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_passive_force_multiplier() {
+    return opensimModelJNI.MuscleIterator__has_output_passive_force_multiplier_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_active_force_length_multiplier() {
+    return opensimModelJNI.MuscleIterator__has_output_active_force_length_multiplier_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_fiber_velocity() {
+    return opensimModelJNI.MuscleIterator__has_output_fiber_velocity_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_normalized_fiber_velocity() {
+    return opensimModelJNI.MuscleIterator__has_output_normalized_fiber_velocity_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_fiber_velocity_along_tendon() {
+    return opensimModelJNI.MuscleIterator__has_output_fiber_velocity_along_tendon_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_tendon_velocity() {
+    return opensimModelJNI.MuscleIterator__has_output_tendon_velocity_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_force_velocity_multiplier() {
+    return opensimModelJNI.MuscleIterator__has_output_force_velocity_multiplier_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_pennation_angular_velocity() {
+    return opensimModelJNI.MuscleIterator__has_output_pennation_angular_velocity_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_fiber_force() {
+    return opensimModelJNI.MuscleIterator__has_output_fiber_force_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_fiber_force_along_tendon() {
+    return opensimModelJNI.MuscleIterator__has_output_fiber_force_along_tendon_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_active_fiber_force() {
+    return opensimModelJNI.MuscleIterator__has_output_active_fiber_force_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_passive_fiber_force() {
+    return opensimModelJNI.MuscleIterator__has_output_passive_fiber_force_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_active_fiber_force_along_tendon() {
+    return opensimModelJNI.MuscleIterator__has_output_active_fiber_force_along_tendon_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_passive_fiber_force_along_tendon() {
+    return opensimModelJNI.MuscleIterator__has_output_passive_fiber_force_along_tendon_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_tendon_force() {
+    return opensimModelJNI.MuscleIterator__has_output_tendon_force_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_fiber_stiffness() {
+    return opensimModelJNI.MuscleIterator__has_output_fiber_stiffness_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_fiber_stiffness_along_tendon() {
+    return opensimModelJNI.MuscleIterator__has_output_fiber_stiffness_along_tendon_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_tendon_stiffness() {
+    return opensimModelJNI.MuscleIterator__has_output_tendon_stiffness_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_muscle_stiffness() {
+    return opensimModelJNI.MuscleIterator__has_output_muscle_stiffness_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_fiber_active_power() {
+    return opensimModelJNI.MuscleIterator__has_output_fiber_active_power_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_fiber_passive_power() {
+    return opensimModelJNI.MuscleIterator__has_output_fiber_passive_power_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_tendon_power() {
+    return opensimModelJNI.MuscleIterator__has_output_tendon_power_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_muscle_power() {
+    return opensimModelJNI.MuscleIterator__has_output_muscle_power_get(swigCPtr, this);
+  }
+
   public double getMaxIsometricForce() {
     return opensimModelJNI.MuscleIterator_getMaxIsometricForce(swigCPtr, this);
   }
@@ -377,6 +505,14 @@ public class MuscleIterator {
     return opensimModelJNI.MuscleIterator_get_max_control__SWIG_1(swigCPtr, this);
   }
 
+  public boolean get_has_output_actuation() {
+    return opensimModelJNI.MuscleIterator__has_output_actuation_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_speed() {
+    return opensimModelJNI.MuscleIterator__has_output_speed_get(swigCPtr, this);
+  }
+
   public double getControl(State s) {
     return opensimModelJNI.MuscleIterator_getControl(swigCPtr, this, State.getCPtr(s), s);
   }
@@ -449,6 +585,10 @@ public class MuscleIterator {
     return opensimModelJNI.MuscleIterator_get_isDisabled__SWIG_1(swigCPtr, this);
   }
 
+  public boolean get_has_output_potential_energy() {
+    return opensimModelJNI.MuscleIterator__has_output_potential_energy_get(swigCPtr, this);
+  }
+
   public boolean shouldBeParallelized() {
     return opensimModelJNI.MuscleIterator_shouldBeParallelized(swigCPtr, this);
   }
@@ -493,12 +633,12 @@ public class MuscleIterator {
     return opensimModelJNI.MuscleIterator_hasSystem(swigCPtr, this);
   }
 
-  public Component getComponent(String name) {
-    return new Component(opensimModelJNI.MuscleIterator_getComponent(swigCPtr, this, name), false);
+  public String getFullPathName() {
+    return opensimModelJNI.MuscleIterator_getFullPathName(swigCPtr, this);
   }
 
-  public Component updComponent(String name) {
-    return new Component(opensimModelJNI.MuscleIterator_updComponent(swigCPtr, this, name), false);
+  public String getRelativePathName(Component wrt) {
+    return opensimModelJNI.MuscleIterator_getRelativePathName(swigCPtr, this, Component.getCPtr(wrt), wrt);
   }
 
   public int getNumStateVariables() {
@@ -513,6 +653,18 @@ public class MuscleIterator {
     return opensimModelJNI.MuscleIterator_getNumConnectors(swigCPtr, this);
   }
 
+  public int getNumInputs() {
+    return opensimModelJNI.MuscleIterator_getNumInputs(swigCPtr, this);
+  }
+
+  public int getNumOutputs() {
+    return opensimModelJNI.MuscleIterator_getNumOutputs(swigCPtr, this);
+  }
+
+  public StdVectorString getOutputNames() {
+    return new StdVectorString(opensimModelJNI.MuscleIterator_getOutputNames(swigCPtr, this), true);
+  }
+
   public AbstractConnector getConnector(int i) {
     return new AbstractConnector(opensimModelJNI.MuscleIterator_getConnector(swigCPtr, this, i), false);
   }
@@ -525,12 +677,12 @@ public class MuscleIterator {
     return new AbstractOutput(opensimModelJNI.MuscleIterator_getOutput(swigCPtr, this, name), false);
   }
 
-  public SWIGTYPE_p_std__mapT_std__string_std__unique_ptrT_OpenSim__AbstractOutput_const_t_t__const_iterator getOutputsBegin() {
-    return new SWIGTYPE_p_std__mapT_std__string_std__unique_ptrT_OpenSim__AbstractOutput_const_t_t__const_iterator(opensimModelJNI.MuscleIterator_getOutputsBegin(swigCPtr, this), true);
+  public SWIGTYPE_p_std__mapT_std__string_SimTK__ClonePtrT_OpenSim__AbstractOutput_t_t__const_iterator getOutputsBegin() {
+    return new SWIGTYPE_p_std__mapT_std__string_SimTK__ClonePtrT_OpenSim__AbstractOutput_t_t__const_iterator(opensimModelJNI.MuscleIterator_getOutputsBegin(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_std__mapT_std__string_std__unique_ptrT_OpenSim__AbstractOutput_const_t_t__const_iterator getOutputsEnd() {
-    return new SWIGTYPE_p_std__mapT_std__string_std__unique_ptrT_OpenSim__AbstractOutput_const_t_t__const_iterator(opensimModelJNI.MuscleIterator_getOutputsEnd(swigCPtr, this), true);
+  public SWIGTYPE_p_std__mapT_std__string_SimTK__ClonePtrT_OpenSim__AbstractOutput_t_t__const_iterator getOutputsEnd() {
+    return new SWIGTYPE_p_std__mapT_std__string_SimTK__ClonePtrT_OpenSim__AbstractOutput_t_t__const_iterator(opensimModelJNI.MuscleIterator_getOutputsEnd(swigCPtr, this), true);
   }
 
   public int getModelingOption(State state, String name) {
@@ -577,36 +729,40 @@ public class MuscleIterator {
     return opensimModelJNI.MuscleIterator_isCacheVariableValid(swigCPtr, this, State.getCPtr(state), state, name);
   }
 
-  public String getPathName() {
-    return opensimModelJNI.MuscleIterator_getPathName(swigCPtr, this);
+  public void dumpSubcomponents(int depth) {
+    opensimModelJNI.MuscleIterator_dumpSubcomponents__SWIG_0(swigCPtr, this, depth);
   }
 
-  public void dumpPathName() {
-    opensimModelJNI.MuscleIterator_dumpPathName(swigCPtr, this);
+  public void dumpSubcomponents() {
+    opensimModelJNI.MuscleIterator_dumpSubcomponents__SWIG_1(swigCPtr, this);
+  }
+
+  public void dumpConnections() {
+    opensimModelJNI.MuscleIterator_dumpConnections(swigCPtr, this);
   }
 
   public ComponentsList getComponentsList() {
     return new ComponentsList(opensimModelJNI.MuscleIterator_getComponentsList(swigCPtr, this), true);
   }
 
-  public FramesList getFramesList() {
-    return new FramesList(opensimModelJNI.MuscleIterator_getFramesList(swigCPtr, this), true);
+  public FrameList getFrameList() {
+    return new FrameList(opensimModelJNI.MuscleIterator_getFrameList(swigCPtr, this), true);
   }
 
-  public BodiesList getBodiesList() {
-    return new BodiesList(opensimModelJNI.MuscleIterator_getBodiesList(swigCPtr, this), true);
+  public BodyList getBodyList() {
+    return new BodyList(opensimModelJNI.MuscleIterator_getBodyList(swigCPtr, this), true);
   }
 
-  public MusclesList getMusclesList() {
-    return new MusclesList(opensimModelJNI.MuscleIterator_getMusclesList(swigCPtr, this), true);
+  public MuscleList getMuscleList() {
+    return new MuscleList(opensimModelJNI.MuscleIterator_getMuscleList(swigCPtr, this), true);
   }
 
   public ModelComponentList getModelComponentList() {
     return new ModelComponentList(opensimModelJNI.MuscleIterator_getModelComponentList(swigCPtr, this), true);
   }
 
-  public JointsList getJointList() {
-    return new JointsList(opensimModelJNI.MuscleIterator_getJointList(swigCPtr, this), true);
+  public JointList getJointList() {
+    return new JointList(opensimModelJNI.MuscleIterator_getJointList(swigCPtr, this), true);
   }
 
   public boolean isEqualTo(OpenSimObject aObject) {

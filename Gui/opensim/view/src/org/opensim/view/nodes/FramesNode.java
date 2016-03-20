@@ -2,21 +2,17 @@ package org.opensim.view.nodes;
 
 import java.awt.Image;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.util.NbBundle;
-import org.opensim.modeling.BodiesList;
 import org.opensim.modeling.Body;
-import org.opensim.modeling.BodyIterator;
 import org.opensim.modeling.Frame;
 import org.opensim.modeling.FrameIterator;
-import org.opensim.modeling.FramesList;
+import org.opensim.modeling.FrameList;
 import org.opensim.modeling.Model;
-import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 
 /**
  * Node class to wrap Model's collection of SimmBodies
@@ -30,7 +26,7 @@ public class FramesNode extends OpenSimNode {
         setDisplayName(NbBundle.getMessage(FramesNode.class, "CTL_Bodies"));
         //Stack<OneBodyNode> stack = new Stack<OneBodyNode>();
         Children children = getChildren();
-        FramesList frames = model.getFramesList();
+        FrameList frames = model.getFrameList();
         FrameIterator frm = frames.begin();
         while (!frm.equals(frames.end())) {
             Frame deref = frm.__deref__();

@@ -107,20 +107,4 @@ public class PolygonalMesh {
     opensimModelJNI.PolygonalMesh_loadFile(swigCPtr, this, pathname);
   }
 
-  public void loadObjFile(SWIGTYPE_p_String pathname) {
-    opensimModelJNI.PolygonalMesh_loadObjFile__SWIG_0(swigCPtr, this, SWIGTYPE_p_String.getCPtr(pathname));
-  }
-
-  public void loadObjFile(SWIGTYPE_p_std__istream file) {
-    opensimModelJNI.PolygonalMesh_loadObjFile__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__istream.getCPtr(file));
-  }
-
-  public void loadVtpFile(SWIGTYPE_p_String pathname) {
-    opensimModelJNI.PolygonalMesh_loadVtpFile(swigCPtr, this, SWIGTYPE_p_String.getCPtr(pathname));
-  }
-
-  public void loadStlFile(SWIGTYPE_p_String pathname) {
-    opensimModelJNI.PolygonalMesh_loadStlFile(swigCPtr, this, SWIGTYPE_p_String.getCPtr(pathname));
-  }
-
 }

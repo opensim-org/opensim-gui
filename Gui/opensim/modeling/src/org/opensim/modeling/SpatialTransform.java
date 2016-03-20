@@ -293,8 +293,8 @@ public class SpatialTransform extends OpenSimObject {
     return new SWIGTYPE_p_std__vectorT_SimTK__Function_const_p_t(opensimModelJNI.SpatialTransform_getFunctions(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_std__vectorT_SimTK__VecT_3_double_1_t_t getAxes() {
-    return new SWIGTYPE_p_std__vectorT_SimTK__VecT_3_double_1_t_t(opensimModelJNI.SpatialTransform_getAxes(swigCPtr, this), true);
+  public StdVectorVec3 getAxes() {
+    return new StdVectorVec3(opensimModelJNI.SpatialTransform_getAxes(swigCPtr, this), true);
   }
 
   public void scale(Vec3 scaleFactors) {

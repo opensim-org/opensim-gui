@@ -18,7 +18,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.openide.util.Exceptions;
 import org.opensim.modeling.ArrayDecorativeGeometry;
-import org.opensim.modeling.BodiesList;
+import org.opensim.modeling.BodyList;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.BodyIterator;
 import org.opensim.modeling.Component;
@@ -28,7 +28,7 @@ import org.opensim.modeling.DecorativeGeometry;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
-import org.opensim.modeling.MusclesList;
+import org.opensim.modeling.MuscleList;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.PathPointSet;
@@ -54,7 +54,7 @@ public class VisualizationJson {
     private final HashMap<String, UUID> mapPathMaterialToUUID = new HashMap<String, UUID>();
     private static final String GEOMETRY_SEP = ".";
     private final Vec3 vec3Unit = new Vec3(1.0, 1.0, 1.0);
-    private MusclesList muscleList = null;
+    private MuscleList muscleList = null;
     private ModelDisplayHints mdh;
     private DecorativeGeometryImplementationJS dgimp = null;
     private static String boneSuffix = "_Bone";
@@ -66,11 +66,11 @@ public class VisualizationJson {
         state = model.getWorkingState();
         mdh = model.getDisplayHints();
         ComponentsList mcList = model.getComponentsList();
-        muscleList = model.getMusclesList();
+        muscleList = model.getMuscleList();
         ComponentIterator mcIter = mcList.begin();
         // Load template 
         JSONObject jsonTop = loadTemplateJSON();
-        BodiesList bodies = model.getBodiesList();
+        BodyList bodies = model.getBodyList();
         BodyIterator body = bodies.begin();
         mapBodyIndicesToFrames.put(0, model.getGround());
         
@@ -85,7 +85,7 @@ public class VisualizationJson {
         model_json.put("uuid", UUID.randomUUID().toString());
         model_json.put("type", "Group");
         model_json.put("opensimtype", "Frame");
-        model_json.put("name", model.getGround().getPathName());
+        model_json.put("name", model.getGround().getFullPathName());
         model_json.put("model_ground", true);
         //System.out.println(model_json.toJSONString());
         JSONArray bodies_json = new JSONArray();
@@ -132,7 +132,7 @@ public class VisualizationJson {
         ArrayList<UUID> vis_uuidList = new ArrayList<UUID>(1);
         for (int idx = 0; idx < adg.size(); idx++) {
             dg = adg.getElt(idx);
-            String geomId = comp.getPathName();
+            String geomId = comp.getFullPathName();
             if (adg.size()>1)
                 geomId = geomId.concat(GEOMETRY_SEP+String.valueOf(dg.getIndexOnBody()));
             UUID uuid = UUID.randomUUID();
@@ -148,7 +148,7 @@ public class VisualizationJson {
             mapUUIDToComponent.put(uuid_mesh, comp);
         }
         mapComponentToUUID.put(comp, vis_uuidList);
-        System.out.println("Map component="+comp.getPathName()+" to "+vis_uuidList.size());   
+        System.out.println("Map component="+comp.getFullPathName()+" to "+vis_uuidList.size());   
  
     }
 
@@ -199,7 +199,7 @@ public class VisualizationJson {
         bdyJson.put("uuid", UUID.randomUUID().toString());
         bdyJson.put("type", "Group");
         bdyJson.put("opensimtype", "Frame");
-        bdyJson.put("name", body.getPathName());
+        bdyJson.put("name", body.getFullPathName());
         PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(body.getMobilizedBodyIndex());
         Transform bodyXform = bodyFrame.getGroundTransform(state);
         bdyJson.put("matrix", JSONUtilities.createMatrixFromTransform(bodyXform, vec3Unit, visScaleFactor));
@@ -217,7 +217,6 @@ public class VisualizationJson {
     public JSONObject createFrameMessageJson() {
         JSONObject msg = new JSONObject();
         Iterator<Integer> bodyIdIter = mapBodyIndicesToFrames.keySet().iterator();
-        int count = Component.pahtNameCount;
         msg.put("Op", "Frame");
         JSONArray bodyTransforms_json = new JSONArray();
         msg.put("Transforms", bodyTransforms_json);
@@ -289,9 +288,9 @@ public class VisualizationJson {
         // Create material for path
         Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
         UUID mat_uuid = UUID.randomUUID();
-        mapPathMaterialToUUID.put(path.getPathName(), mat_uuid);
+        mapPathMaterialToUUID.put(path.getFullPathName(), mat_uuid);
         mat_json.put("uuid", mat_uuid.toString());
-        mat_json.put("name", path.getPathName()+"Mat");
+        mat_json.put("name", path.getFullPathName()+"Mat");
         mat_json.put("type", "MeshBasicMaterial");
         String colorString = JSONUtilities.mapColorToRGBA(new Vec3(1.0, 0., 0.));
         mat_json.put("color", colorString);
@@ -317,7 +316,7 @@ public class VisualizationJson {
         UUID mesh_uuid = UUID.randomUUID();
         obj_json.put("uuid", mesh_uuid.toString());
         obj_json.put("type", "GeometryPath");
-        obj_json.put("name", path.getPathName());
+        obj_json.put("name", path.getFullPathName());
         obj_json.put("points", pathpoint_jsonArr);
         obj_json.put("opensimType", "Path");
         gndChildren.add(obj_json);
@@ -352,7 +351,7 @@ public class VisualizationJson {
         //{"parent":-1,"name":"Bone.000","pos":[-1.2628,0.155812,0.0214679],"rotq":[0,0,0,1]}
          JSONArray bones_json = new JSONArray();
          skel_json.put("children", bones_json);
-         BodiesList bodies = model.getBodiesList();
+         BodyList bodies = model.getBodyList();
          BodyIterator body = bodies.begin();
          JSONArray posVec3 = new JSONArray();
          JSONArray unitQuaternion = new JSONArray();
@@ -363,14 +362,14 @@ public class VisualizationJson {
          unitQuaternion.add(1.0);
          Map<String, Object> groundBone_json = new LinkedHashMap<String, Object>();
          groundBone_json.put("parent", -1);
-         groundBone_json.put("name", model.getGround().getPathName()+boneSuffix);
+         groundBone_json.put("name", model.getGround().getFullPathName()+boneSuffix);
          groundBone_json.put("pos", posVec3);
          groundBone_json.put("rotq", unitQuaternion);
          UUID bone_uuid = UUID.randomUUID();
          bones_json.add(groundBone_json);
          while (!body.equals(bodies.end())) {
             Map<String, Object> obj_json = new LinkedHashMap<String, Object>();
-            obj_json.put("name", body.getPathName()+boneSuffix);
+            obj_json.put("name", body.getFullPathName()+boneSuffix);
             obj_json.put("parent", 0);
             Transform xform = body.findTransformBetween(state, model.get_ground());
             Vec3 pos = xform.p();

@@ -8,16 +8,16 @@
 
 package org.opensim.modeling;
 
-public class MusclesList {
+public class BodyList {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  public MusclesList(long cPtr, boolean cMemoryOwn) {
+  public BodyList(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(MusclesList obj) {
+  public static long getCPtr(BodyList obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,30 +29,30 @@ public class MusclesList {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_MusclesList(swigCPtr);
+        opensimModelJNI.delete_BodyList(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
-  public MusclesList(Component root, ComponentFilter f) {
-    this(opensimModelJNI.new_MusclesList__SWIG_0(Component.getCPtr(root), root, ComponentFilter.getCPtr(f), f), true);
+  public BodyList(Component root, ComponentFilter f) {
+    this(opensimModelJNI.new_BodyList__SWIG_0(Component.getCPtr(root), root, ComponentFilter.getCPtr(f), f), true);
   }
 
-  public MusclesList(Component root) {
-    this(opensimModelJNI.new_MusclesList__SWIG_1(Component.getCPtr(root), root), true);
+  public BodyList(Component root) {
+    this(opensimModelJNI.new_BodyList__SWIG_1(Component.getCPtr(root), root), true);
   }
 
-  public MuscleIterator begin() {
-    return new MuscleIterator(opensimModelJNI.MusclesList_begin(swigCPtr, this), true);
+  public BodyIterator begin() {
+    return new BodyIterator(opensimModelJNI.BodyList_begin(swigCPtr, this), true);
   }
 
   public void setFilter(ComponentFilter filter) {
-    opensimModelJNI.MusclesList_setFilter(swigCPtr, this, ComponentFilter.getCPtr(filter), filter);
+    opensimModelJNI.BodyList_setFilter(swigCPtr, this, ComponentFilter.getCPtr(filter), filter);
   }
 
-  public MuscleIterator end() {
-    return new MuscleIterator(opensimModelJNI.MusclesList_end(swigCPtr, this), true);
+  public BodyIterator end() {
+    return new BodyIterator(opensimModelJNI.BodyList_end(swigCPtr, this), true);
   }
 
 }

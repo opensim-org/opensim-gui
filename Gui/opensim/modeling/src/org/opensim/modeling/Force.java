@@ -93,6 +93,14 @@ public class Force extends ModelComponent {
     opensimModelJNI.Force_set_isDisabled__SWIG_1(swigCPtr, this, value);
   }
 
+  public void set_has_output_potential_energy(boolean value) {
+    opensimModelJNI.Force__has_output_potential_energy_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_potential_energy() {
+    return opensimModelJNI.Force__has_output_potential_energy_get(swigCPtr, this);
+  }
+
   public boolean shouldBeParallelized() {
     return opensimModelJNI.Force_shouldBeParallelized(swigCPtr, this);
   }

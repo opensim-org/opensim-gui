@@ -201,6 +201,38 @@ public class PathSpring extends Force {
     opensimModelJNI.PathSpring_set_GeometryPath__SWIG_1(swigCPtr, this, GeometryPath.getCPtr(value), value);
   }
 
+  public void set_has_output_length(boolean value) {
+    opensimModelJNI.PathSpring__has_output_length_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_length() {
+    return opensimModelJNI.PathSpring__has_output_length_get(swigCPtr, this);
+  }
+
+  public void set_has_output_stretch(boolean value) {
+    opensimModelJNI.PathSpring__has_output_stretch_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_stretch() {
+    return opensimModelJNI.PathSpring__has_output_stretch_get(swigCPtr, this);
+  }
+
+  public void set_has_output_lengthening_speed(boolean value) {
+    opensimModelJNI.PathSpring__has_output_lengthening_speed_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_lengthening_speed() {
+    return opensimModelJNI.PathSpring__has_output_lengthening_speed_get(swigCPtr, this);
+  }
+
+  public void set_has_output_tension(boolean value) {
+    opensimModelJNI.PathSpring__has_output_tension_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_tension() {
+    return opensimModelJNI.PathSpring__has_output_tension_get(swigCPtr, this);
+  }
+
   public PathSpring() {
     this(opensimModelJNI.new_PathSpring__SWIG_0(), true);
   }

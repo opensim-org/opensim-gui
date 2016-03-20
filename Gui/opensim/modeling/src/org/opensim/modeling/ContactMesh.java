@@ -61,12 +61,12 @@ public class ContactMesh extends ContactGeometry {
     this(opensimModelJNI.new_ContactMesh__SWIG_0(), true);
   }
 
-  public ContactMesh(String filename, Vec3 location, Vec3 orientation, Body body) {
-    this(opensimModelJNI.new_ContactMesh__SWIG_1(filename, Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation, Body.getCPtr(body), body), true);
+  public ContactMesh(String filename, Vec3 location, Vec3 orientation, PhysicalFrame frame) {
+    this(opensimModelJNI.new_ContactMesh__SWIG_1(filename, Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation, PhysicalFrame.getCPtr(frame), frame), true);
   }
 
-  public ContactMesh(String filename, Vec3 location, Vec3 orientation, Body body, String name) {
-    this(opensimModelJNI.new_ContactMesh__SWIG_2(filename, Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation, Body.getCPtr(body), body, name), true);
+  public ContactMesh(String filename, Vec3 location, Vec3 orientation, PhysicalFrame frame, String name) {
+    this(opensimModelJNI.new_ContactMesh__SWIG_2(filename, Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation, PhysicalFrame.getCPtr(frame), frame, name), true);
   }
 
   public ContactMesh(ContactMesh geom) {

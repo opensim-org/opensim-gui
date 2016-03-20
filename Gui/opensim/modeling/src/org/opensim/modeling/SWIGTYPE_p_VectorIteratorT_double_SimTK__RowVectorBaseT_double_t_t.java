@@ -8,18 +8,18 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_Component {
+public class SWIGTYPE_p_VectorIteratorT_double_SimTK__RowVectorBaseT_double_t_t {
   private transient long swigCPtr;
 
-  protected SWIGTYPE_p_Component(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
+  protected SWIGTYPE_p_VectorIteratorT_double_SimTK__RowVectorBaseT_double_t_t(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_Component() {
+  protected SWIGTYPE_p_VectorIteratorT_double_SimTK__RowVectorBaseT_double_t_t() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_Component obj) {
+  protected static long getCPtr(SWIGTYPE_p_VectorIteratorT_double_SimTK__RowVectorBaseT_double_t_t obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }

@@ -4,13 +4,25 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/ModelComponentSetMarkers.java</file>
-            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/Joint.java</file>
-            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/MarkerSet.java</file>
-            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/SetJoints.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/Component.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/AnalysisWrapperWithTimer.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/Geometry.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/Frame.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/Mesh.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/Mat33.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/DecorativeCylinder.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/PropertyHelper.java</file>
             <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/Model.java</file>
-            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/ModelComponentSetJoints.java</file>
-            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/JointSet.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/Rotation.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/Vec3.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/DecorativeGeometry.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/ModelComponent.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/Transform.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/Matrix.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/SetAnalysis.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/Analysis.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/OpenSimObject.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/Appearance.java</file>
         </group>
     </open-files>
 </project-private>

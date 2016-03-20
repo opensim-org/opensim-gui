@@ -137,7 +137,7 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
             nextNodeProp5.setName("Opacity");        
             appearanceSheet.put(nextNodeProp5);
             PropertySupport.Reflection nextNodePropRepresentation;
-            SurfaceProperties surfApp = disp.get_surface_properties();
+            SurfaceProperties surfApp = disp.get_SurfaceProperties();
             nextNodePropRepresentation = new PropertySupport.Reflection(surfApp, int.class, 
                     "get_representation", "set_representation");
             //nextNodePropRepresentation.setPropertyEditorClass(DisplayPreferenceEditor.class);

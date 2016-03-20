@@ -55,6 +55,18 @@ public class OpenSimException {
     this(opensimModelJNI.new_OpenSimException__SWIG_4(file, line, func), true);
   }
 
+  public OpenSimException(String file, long line, String func, String msg) {
+    this(opensimModelJNI.new_OpenSimException__SWIG_5(file, line, func, msg), true);
+  }
+
+  public OpenSimException(String file, long line, String func, OpenSimObject obj) {
+    this(opensimModelJNI.new_OpenSimException__SWIG_6(file, line, func, OpenSimObject.getCPtr(obj), obj), true);
+  }
+
+  public OpenSimException(String file, long line, String func, OpenSimObject obj, String msg) {
+    this(opensimModelJNI.new_OpenSimException__SWIG_7(file, line, func, OpenSimObject.getCPtr(obj), obj, msg), true);
+  }
+
   public void setMessage(String aMsg) {
     opensimModelJNI.OpenSimException_setMessage(swigCPtr, this, aMsg);
   }

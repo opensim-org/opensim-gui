@@ -369,6 +369,30 @@ public class Coordinate extends ModelComponent {
     opensimModelJNI.Coordinate_set_is_free_to_satisfy_constraints__SWIG_1(swigCPtr, this, value);
   }
 
+  public void set_has_output_value(boolean value) {
+    opensimModelJNI.Coordinate__has_output_value_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_value() {
+    return opensimModelJNI.Coordinate__has_output_value_get(swigCPtr, this);
+  }
+
+  public void set_has_output_speed(boolean value) {
+    opensimModelJNI.Coordinate__has_output_speed_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_speed() {
+    return opensimModelJNI.Coordinate__has_output_speed_get(swigCPtr, this);
+  }
+
+  public void set_has_output_acceleration(boolean value) {
+    opensimModelJNI.Coordinate__has_output_acceleration_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_acceleration() {
+    return opensimModelJNI.Coordinate__has_output_acceleration_get(swigCPtr, this);
+  }
+
   public Joint getJoint() {
     return new Joint(opensimModelJNI.Coordinate_getJoint(swigCPtr, this), false);
   }

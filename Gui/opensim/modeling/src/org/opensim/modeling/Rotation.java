@@ -8,12 +8,11 @@
 
 package org.opensim.modeling;
 
-public class Rotation {
+public class Rotation extends Mat33 {
   private transient long swigCPtr;
-  protected transient boolean swigCMemOwn;
 
   public Rotation(long cPtr, boolean cMemoryOwn) {
-    swigCMemOwn = cMemoryOwn;
+    super(opensimModelJNI.Rotation_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -33,6 +32,7 @@ public class Rotation {
       }
       swigCPtr = 0;
     }
+    super.delete();
   }
 
   public Rotation() {

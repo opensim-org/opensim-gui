@@ -59,7 +59,7 @@ public class GeometryFileLocator {
    }
 
    public String getFullname(String modelFilePath, String bareFileName, boolean debug) {
-      String candidate=modelFilePath+File.separator+bareFileName;
+      String candidate=bareFileName;
       if (debug) OpenSimLogger.logMessage("Debug: Trying "+candidate+"\n", OpenSimLogger.INFO);
       if (isValidFile(candidate))
          return candidate;

@@ -4,7 +4,7 @@
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/nb-module-project/3">
             <code-name-base>org.opensim.console</code-name-base>
-            <standalone/>
+            <suite-component/>
             <module-dependencies>
                 <dependency>
                     <code-name-base>org.jdesktop.layout</code-name-base>
@@ -101,7 +101,7 @@
                     <build-prerequisite/>
                     <compile-dependency/>
                     <run-dependency>
-                        <specification-version>1.0</specification-version>
+                        <specification-version>3.1</specification-version>
                     </run-dependency>
                 </dependency>
                 <dependency>
@@ -117,7 +117,7 @@
                     <build-prerequisite/>
                     <compile-dependency/>
                     <run-dependency>
-                        <specification-version>3.204</specification-version>
+                        <specification-version>3.207</specification-version>
                     </run-dependency>
                 </dependency>
                 <dependency>
@@ -133,7 +133,7 @@
                     <build-prerequisite/>
                     <compile-dependency/>
                     <run-dependency>
-                        <specification-version>1.0</specification-version>
+                        <specification-version>3.204</specification-version>
                     </run-dependency>
                 </dependency>
                 <dependency>

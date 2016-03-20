@@ -397,8 +397,7 @@ public final class gui {
      * and support other object types as well
      */
     static public void updateDisplay() {
-        ConcreteModelNode modelNode = ExplorerTopComponent.getDefault().getModelNode(getCurrentModel());
-        modelNode.updateSelfFromObject();
+        ViewDB.getInstance().updateModelDisplay(getCurrentModel());
     }
     /**
      * createParametersWindow Creates and open a window for custom GUI, the window is a singleton type (1 per application)

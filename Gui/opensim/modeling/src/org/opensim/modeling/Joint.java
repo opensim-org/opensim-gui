@@ -153,6 +153,30 @@ public class Joint extends ModelComponent {
     opensimModelJNI.Joint_constructProperty_frames(swigCPtr, this);
   }
 
+  public void set_has_output_power(boolean value) {
+    opensimModelJNI.Joint__has_output_power_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_power() {
+    return opensimModelJNI.Joint__has_output_power_get(swigCPtr, this);
+  }
+
+  public void set_has_output_reaction_load_at_parent_frame_in_ground_frame(boolean value) {
+    opensimModelJNI.Joint__has_output_reaction_load_at_parent_frame_in_ground_frame_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_reaction_load_at_parent_frame_in_ground_frame() {
+    return opensimModelJNI.Joint__has_output_reaction_load_at_parent_frame_in_ground_frame_get(swigCPtr, this);
+  }
+
+  public void set_has_output_reaction_load_at_child_frame_in_ground_frame(boolean value) {
+    opensimModelJNI.Joint__has_output_reaction_load_at_child_frame_in_ground_frame_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_reaction_load_at_child_frame_in_ground_frame() {
+    return opensimModelJNI.Joint__has_output_reaction_load_at_child_frame_in_ground_frame_get(swigCPtr, this);
+  }
+
   public void setChildFrameName(String name) {
     opensimModelJNI.Joint_setChildFrameName(swigCPtr, this, name);
   }
@@ -195,6 +219,14 @@ public class Joint extends ModelComponent {
 
   public SpatialVec calcEquivalentSpatialForce(State s, Vector mobilityForces) {
     return new SpatialVec(opensimModelJNI.Joint_calcEquivalentSpatialForce(swigCPtr, this, State.getCPtr(s), s, Vector.getCPtr(mobilityForces), mobilityForces), true);
+  }
+
+  public SpatialVec calcReactionAtParentFrameInGround(State s) {
+    return new SpatialVec(opensimModelJNI.Joint_calcReactionAtParentFrameInGround(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
+  public SpatialVec calcReactionAtChildFrameInGround(State s) {
+    return new SpatialVec(opensimModelJNI.Joint_calcReactionAtChildFrameInGround(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
   public double calcPower(State s) {

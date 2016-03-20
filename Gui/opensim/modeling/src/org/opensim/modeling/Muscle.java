@@ -309,6 +309,262 @@ public class Muscle extends PathActuator {
     opensimModelJNI.Muscle_set_ignore_activation_dynamics__SWIG_1(swigCPtr, this, value);
   }
 
+  public void set_has_output_excitation(boolean value) {
+    opensimModelJNI.Muscle__has_output_excitation_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_excitation() {
+    return opensimModelJNI.Muscle__has_output_excitation_get(swigCPtr, this);
+  }
+
+  public void set_has_output_activation(boolean value) {
+    opensimModelJNI.Muscle__has_output_activation_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_activation() {
+    return opensimModelJNI.Muscle__has_output_activation_get(swigCPtr, this);
+  }
+
+  public void set_has_output_fiber_length(boolean value) {
+    opensimModelJNI.Muscle__has_output_fiber_length_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_fiber_length() {
+    return opensimModelJNI.Muscle__has_output_fiber_length_get(swigCPtr, this);
+  }
+
+  public void set_has_output_pennation_angle(boolean value) {
+    opensimModelJNI.Muscle__has_output_pennation_angle_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_pennation_angle() {
+    return opensimModelJNI.Muscle__has_output_pennation_angle_get(swigCPtr, this);
+  }
+
+  public void set_has_output_cos_pennation_angle(boolean value) {
+    opensimModelJNI.Muscle__has_output_cos_pennation_angle_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_cos_pennation_angle() {
+    return opensimModelJNI.Muscle__has_output_cos_pennation_angle_get(swigCPtr, this);
+  }
+
+  public void set_has_output_tendon_length(boolean value) {
+    opensimModelJNI.Muscle__has_output_tendon_length_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_tendon_length() {
+    return opensimModelJNI.Muscle__has_output_tendon_length_get(swigCPtr, this);
+  }
+
+  public void set_has_output_normalized_fiber_length(boolean value) {
+    opensimModelJNI.Muscle__has_output_normalized_fiber_length_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_normalized_fiber_length() {
+    return opensimModelJNI.Muscle__has_output_normalized_fiber_length_get(swigCPtr, this);
+  }
+
+  public void set_has_output_fiber_length_along_tendon(boolean value) {
+    opensimModelJNI.Muscle__has_output_fiber_length_along_tendon_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_fiber_length_along_tendon() {
+    return opensimModelJNI.Muscle__has_output_fiber_length_along_tendon_get(swigCPtr, this);
+  }
+
+  public void set_has_output_tendon_strain(boolean value) {
+    opensimModelJNI.Muscle__has_output_tendon_strain_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_tendon_strain() {
+    return opensimModelJNI.Muscle__has_output_tendon_strain_get(swigCPtr, this);
+  }
+
+  public void set_has_output_passive_force_multiplier(boolean value) {
+    opensimModelJNI.Muscle__has_output_passive_force_multiplier_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_passive_force_multiplier() {
+    return opensimModelJNI.Muscle__has_output_passive_force_multiplier_get(swigCPtr, this);
+  }
+
+  public void set_has_output_active_force_length_multiplier(boolean value) {
+    opensimModelJNI.Muscle__has_output_active_force_length_multiplier_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_active_force_length_multiplier() {
+    return opensimModelJNI.Muscle__has_output_active_force_length_multiplier_get(swigCPtr, this);
+  }
+
+  public void set_has_output_fiber_velocity(boolean value) {
+    opensimModelJNI.Muscle__has_output_fiber_velocity_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_fiber_velocity() {
+    return opensimModelJNI.Muscle__has_output_fiber_velocity_get(swigCPtr, this);
+  }
+
+  public void set_has_output_normalized_fiber_velocity(boolean value) {
+    opensimModelJNI.Muscle__has_output_normalized_fiber_velocity_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_normalized_fiber_velocity() {
+    return opensimModelJNI.Muscle__has_output_normalized_fiber_velocity_get(swigCPtr, this);
+  }
+
+  public void set_has_output_fiber_velocity_along_tendon(boolean value) {
+    opensimModelJNI.Muscle__has_output_fiber_velocity_along_tendon_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_fiber_velocity_along_tendon() {
+    return opensimModelJNI.Muscle__has_output_fiber_velocity_along_tendon_get(swigCPtr, this);
+  }
+
+  public void set_has_output_tendon_velocity(boolean value) {
+    opensimModelJNI.Muscle__has_output_tendon_velocity_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_tendon_velocity() {
+    return opensimModelJNI.Muscle__has_output_tendon_velocity_get(swigCPtr, this);
+  }
+
+  public void set_has_output_force_velocity_multiplier(boolean value) {
+    opensimModelJNI.Muscle__has_output_force_velocity_multiplier_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_force_velocity_multiplier() {
+    return opensimModelJNI.Muscle__has_output_force_velocity_multiplier_get(swigCPtr, this);
+  }
+
+  public void set_has_output_pennation_angular_velocity(boolean value) {
+    opensimModelJNI.Muscle__has_output_pennation_angular_velocity_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_pennation_angular_velocity() {
+    return opensimModelJNI.Muscle__has_output_pennation_angular_velocity_get(swigCPtr, this);
+  }
+
+  public void set_has_output_fiber_force(boolean value) {
+    opensimModelJNI.Muscle__has_output_fiber_force_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_fiber_force() {
+    return opensimModelJNI.Muscle__has_output_fiber_force_get(swigCPtr, this);
+  }
+
+  public void set_has_output_fiber_force_along_tendon(boolean value) {
+    opensimModelJNI.Muscle__has_output_fiber_force_along_tendon_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_fiber_force_along_tendon() {
+    return opensimModelJNI.Muscle__has_output_fiber_force_along_tendon_get(swigCPtr, this);
+  }
+
+  public void set_has_output_active_fiber_force(boolean value) {
+    opensimModelJNI.Muscle__has_output_active_fiber_force_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_active_fiber_force() {
+    return opensimModelJNI.Muscle__has_output_active_fiber_force_get(swigCPtr, this);
+  }
+
+  public void set_has_output_passive_fiber_force(boolean value) {
+    opensimModelJNI.Muscle__has_output_passive_fiber_force_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_passive_fiber_force() {
+    return opensimModelJNI.Muscle__has_output_passive_fiber_force_get(swigCPtr, this);
+  }
+
+  public void set_has_output_active_fiber_force_along_tendon(boolean value) {
+    opensimModelJNI.Muscle__has_output_active_fiber_force_along_tendon_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_active_fiber_force_along_tendon() {
+    return opensimModelJNI.Muscle__has_output_active_fiber_force_along_tendon_get(swigCPtr, this);
+  }
+
+  public void set_has_output_passive_fiber_force_along_tendon(boolean value) {
+    opensimModelJNI.Muscle__has_output_passive_fiber_force_along_tendon_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_passive_fiber_force_along_tendon() {
+    return opensimModelJNI.Muscle__has_output_passive_fiber_force_along_tendon_get(swigCPtr, this);
+  }
+
+  public void set_has_output_tendon_force(boolean value) {
+    opensimModelJNI.Muscle__has_output_tendon_force_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_tendon_force() {
+    return opensimModelJNI.Muscle__has_output_tendon_force_get(swigCPtr, this);
+  }
+
+  public void set_has_output_fiber_stiffness(boolean value) {
+    opensimModelJNI.Muscle__has_output_fiber_stiffness_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_fiber_stiffness() {
+    return opensimModelJNI.Muscle__has_output_fiber_stiffness_get(swigCPtr, this);
+  }
+
+  public void set_has_output_fiber_stiffness_along_tendon(boolean value) {
+    opensimModelJNI.Muscle__has_output_fiber_stiffness_along_tendon_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_fiber_stiffness_along_tendon() {
+    return opensimModelJNI.Muscle__has_output_fiber_stiffness_along_tendon_get(swigCPtr, this);
+  }
+
+  public void set_has_output_tendon_stiffness(boolean value) {
+    opensimModelJNI.Muscle__has_output_tendon_stiffness_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_tendon_stiffness() {
+    return opensimModelJNI.Muscle__has_output_tendon_stiffness_get(swigCPtr, this);
+  }
+
+  public void set_has_output_muscle_stiffness(boolean value) {
+    opensimModelJNI.Muscle__has_output_muscle_stiffness_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_muscle_stiffness() {
+    return opensimModelJNI.Muscle__has_output_muscle_stiffness_get(swigCPtr, this);
+  }
+
+  public void set_has_output_fiber_active_power(boolean value) {
+    opensimModelJNI.Muscle__has_output_fiber_active_power_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_fiber_active_power() {
+    return opensimModelJNI.Muscle__has_output_fiber_active_power_get(swigCPtr, this);
+  }
+
+  public void set_has_output_fiber_passive_power(boolean value) {
+    opensimModelJNI.Muscle__has_output_fiber_passive_power_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_fiber_passive_power() {
+    return opensimModelJNI.Muscle__has_output_fiber_passive_power_get(swigCPtr, this);
+  }
+
+  public void set_has_output_tendon_power(boolean value) {
+    opensimModelJNI.Muscle__has_output_tendon_power_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_tendon_power() {
+    return opensimModelJNI.Muscle__has_output_tendon_power_get(swigCPtr, this);
+  }
+
+  public void set_has_output_muscle_power(boolean value) {
+    opensimModelJNI.Muscle__has_output_muscle_power_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_muscle_power() {
+    return opensimModelJNI.Muscle__has_output_muscle_power_get(swigCPtr, this);
+  }
+
   public double getMaxIsometricForce() {
     return opensimModelJNI.Muscle_getMaxIsometricForce(swigCPtr, this);
   }

@@ -8,12 +8,11 @@
 
 package org.opensim.modeling;
 
-public class VectorOfVec3 {
+public class VectorOfVec3 extends VectorBaseVec3 {
   private transient long swigCPtr;
-  protected transient boolean swigCMemOwn;
 
   public VectorOfVec3(long cPtr, boolean cMemoryOwn) {
-    swigCMemOwn = cMemoryOwn;
+    super(opensimModelJNI.VectorOfVec3_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -33,6 +32,7 @@ public class VectorOfVec3 {
       }
       swigCPtr = 0;
     }
+    super.delete();
   }
 
   public VectorOfVec3() {
@@ -57,6 +57,10 @@ public class VectorOfVec3 {
 
   public void set(int i, Vec3 value) {
     opensimModelJNI.VectorOfVec3_set(swigCPtr, this, i, Vec3.getCPtr(value), value);
+  }
+
+  public VectorOfVec3(StdVectorVec3 row) {
+    this(opensimModelJNI.new_VectorOfVec3__SWIG_3(StdVectorVec3.getCPtr(row), row), true);
   }
 
 }

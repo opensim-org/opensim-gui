@@ -57,6 +57,22 @@ public class Frame extends ModelComponent {
     return opensimModelJNI.Frame_getConcreteClassName(swigCPtr, this);
   }
 
+  public void set_has_output_position(boolean value) {
+    opensimModelJNI.Frame__has_output_position_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_position() {
+    return opensimModelJNI.Frame__has_output_position_get(swigCPtr, this);
+  }
+
+  public void set_has_output_transform(boolean value) {
+    opensimModelJNI.Frame__has_output_transform_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_transform() {
+    return opensimModelJNI.Frame__has_output_transform_get(swigCPtr, this);
+  }
+
   public Transform getGroundTransform(State state) {
     return new Transform(opensimModelJNI.Frame_getGroundTransform(swigCPtr, this, State.getCPtr(state), state), false);
   }
@@ -81,12 +97,24 @@ public class Frame extends ModelComponent {
     return new Transform(opensimModelJNI.Frame_findTransformInBaseFrame(swigCPtr, this), true);
   }
 
-  public void addMeshGeometry(String aGeometryFileName, Vec3 scale) {
-    opensimModelJNI.Frame_addMeshGeometry__SWIG_0(swigCPtr, this, aGeometryFileName, Vec3.getCPtr(scale), scale);
+  public Vec3 getPositionInGround(State state) {
+    return new Vec3(opensimModelJNI.Frame_getPositionInGround(swigCPtr, this, State.getCPtr(state), state), true);
   }
 
-  public void addMeshGeometry(String aGeometryFileName) {
-    opensimModelJNI.Frame_addMeshGeometry__SWIG_1(swigCPtr, this, aGeometryFileName);
+  public void attachMeshGeometry(String aGeometryFileName, Vec3 scale) {
+    opensimModelJNI.Frame_attachMeshGeometry__SWIG_0(swigCPtr, this, aGeometryFileName, Vec3.getCPtr(scale), scale);
+  }
+
+  public void attachMeshGeometry(String aGeometryFileName) {
+    opensimModelJNI.Frame_attachMeshGeometry__SWIG_1(swigCPtr, this, aGeometryFileName);
+  }
+
+  public void attachGeometry(Geometry geom, Vec3 scale) {
+    opensimModelJNI.Frame_attachGeometry__SWIG_0(swigCPtr, this, Geometry.getCPtr(geom), geom, Vec3.getCPtr(scale), scale);
+  }
+
+  public void attachGeometry(Geometry geom) {
+    opensimModelJNI.Frame_attachGeometry__SWIG_1(swigCPtr, this, Geometry.getCPtr(geom), geom);
   }
 
 }

@@ -257,14 +257,6 @@ public class PointToPointSpring extends Force {
     return opensimModelJNI.PointToPointSpring_getRestlength(swigCPtr, this);
   }
 
-  public void extendConnectToModel(Model model) {
-    opensimModelJNI.PointToPointSpring_extendConnectToModel(swigCPtr, this, Model.getCPtr(model), model);
-  }
-
-  public void extendAddToSystem(SWIGTYPE_p_SimTK__MultibodySystem system) {
-    opensimModelJNI.PointToPointSpring_extendAddToSystem(swigCPtr, this, SWIGTYPE_p_SimTK__MultibodySystem.getCPtr(system));
-  }
-
   public ArrayStr getRecordLabels() {
     return new ArrayStr(opensimModelJNI.PointToPointSpring_getRecordLabels(swigCPtr, this), true);
   }

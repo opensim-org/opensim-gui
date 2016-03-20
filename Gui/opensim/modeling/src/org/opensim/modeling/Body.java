@@ -221,14 +221,6 @@ public class Body extends PhysicalFrame {
     opensimModelJNI.Body_scaleMass(swigCPtr, this, aScaleFactor);
   }
 
-  public void addMeshGeometry(String aGeometryFileName, Vec3 scale) {
-    opensimModelJNI.Body_addMeshGeometry__SWIG_0(swigCPtr, this, aGeometryFileName, Vec3.getCPtr(scale), scale);
-  }
-
-  public void addMeshGeometry(String aGeometryFileName) {
-    opensimModelJNI.Body_addMeshGeometry__SWIG_1(swigCPtr, this, aGeometryFileName);
-  }
-
   public void getInertia(ArrayDouble rInertia) {
     opensimModelJNI.Body_getInertia__SWIG_1(swigCPtr, this, ArrayDouble.getCPtr(rInertia), rInertia);
   }

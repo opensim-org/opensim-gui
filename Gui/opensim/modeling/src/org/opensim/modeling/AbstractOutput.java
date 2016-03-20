@@ -43,6 +43,26 @@ public class AbstractOutput {
     return new Stage(opensimModelJNI.AbstractOutput_getDependsOnStage(swigCPtr, this), false);
   }
 
+  public boolean isListOutput() {
+    return opensimModelJNI.AbstractOutput_isListOutput(swigCPtr, this);
+  }
+
+  public Component getOwner() {
+    return new Component(opensimModelJNI.AbstractOutput_getOwner(swigCPtr, this), false);
+  }
+
+  public void clearChannels() {
+    opensimModelJNI.AbstractOutput_clearChannels(swigCPtr, this);
+  }
+
+  public void addChannel(String channelName) {
+    opensimModelJNI.AbstractOutput_addChannel(swigCPtr, this, channelName);
+  }
+
+  public AbstractChannel getChannel(String name) {
+    return new AbstractChannel(opensimModelJNI.AbstractOutput_getChannel(swigCPtr, this, name), false);
+  }
+
   public String getTypeName() {
     return opensimModelJNI.AbstractOutput_getTypeName(swigCPtr, this);
   }

@@ -181,7 +181,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
         //int bid0 = dg.getBodyId();
         vtkAssembly modelAssembly = new vtkAssembly();
         // Keep track of ground body to avoid recomputation
-        BodiesList bodies = model.getBodiesList();
+        BodyList bodies = model.getBodyList();
         BodyIterator body = bodies.begin();
         // Handle Ground separately since it's a PhysicalFrame not a Body
         BodyDisplayer groundRep = new BodyDisplayer(modelAssembly, model.getGround(),
@@ -235,7 +235,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
       // Cycle thru bodies and update their transforms from the kinematics engine
        OpenSimContext context=OpenSimDB.getInstance().getContext(model);
         context.realizePosition();
-        BodiesList bodies = model.getBodiesList();
+        BodyList bodies = model.getBodyList();
         BodyIterator bodyIter = bodies.begin();
         while (!bodyIter.equals(bodies.end())) {
             Body body = bodyIter.__deref__();

@@ -61,12 +61,12 @@ public class ContactSphere extends ContactGeometry {
     this(opensimModelJNI.new_ContactSphere__SWIG_0(), true);
   }
 
-  public ContactSphere(double radius, Vec3 location, Body body) {
-    this(opensimModelJNI.new_ContactSphere__SWIG_1(radius, Vec3.getCPtr(location), location, Body.getCPtr(body), body), true);
+  public ContactSphere(double radius, Vec3 location, PhysicalFrame frame) {
+    this(opensimModelJNI.new_ContactSphere__SWIG_1(radius, Vec3.getCPtr(location), location, PhysicalFrame.getCPtr(frame), frame), true);
   }
 
-  public ContactSphere(double radius, Vec3 location, Body body, String name) {
-    this(opensimModelJNI.new_ContactSphere__SWIG_2(radius, Vec3.getCPtr(location), location, Body.getCPtr(body), body, name), true);
+  public ContactSphere(double radius, Vec3 location, PhysicalFrame frame, String name) {
+    this(opensimModelJNI.new_ContactSphere__SWIG_2(radius, Vec3.getCPtr(location), location, PhysicalFrame.getCPtr(frame), frame, name), true);
   }
 
   public ContactSphere(ContactSphere geom) {

@@ -63,10 +63,6 @@ public class MatrixBaseDouble {
     return new MatrixBaseDouble(opensimModelJNI.MatrixBaseDouble_elementwiseAssign(swigCPtr, this, s), false);
   }
 
-  public MatrixBaseDouble elementwiseInvertInPlace() {
-    return new MatrixBaseDouble(opensimModelJNI.MatrixBaseDouble_elementwiseInvertInPlace(swigCPtr, this), false);
-  }
-
   public MatrixBaseDouble setTo(double t) {
     return new MatrixBaseDouble(opensimModelJNI.MatrixBaseDouble_setTo(swigCPtr, this, t), false);
   }

@@ -61,20 +61,32 @@ public class AbstractInput extends AbstractConnector {
     opensimModelJNI.AbstractInput_connect__SWIG_0(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
+  public void connect(AbstractOutput output, String annotation) {
+    opensimModelJNI.AbstractInput_connect__SWIG_1(swigCPtr, this, AbstractOutput.getCPtr(output), output, annotation);
+  }
+
   public void connect(AbstractOutput output) {
-    opensimModelJNI.AbstractInput_connect__SWIG_1(swigCPtr, this, AbstractOutput.getCPtr(output), output);
+    opensimModelJNI.AbstractInput_connect__SWIG_2(swigCPtr, this, AbstractOutput.getCPtr(output), output);
   }
 
-  public void disconnect() {
-    opensimModelJNI.AbstractInput_disconnect(swigCPtr, this);
+  public void connect(AbstractChannel channel, String annotation) {
+    opensimModelJNI.AbstractInput_connect__SWIG_3(swigCPtr, this, AbstractChannel.getCPtr(channel), channel, annotation);
   }
 
-  public boolean isConnected() {
-    return opensimModelJNI.AbstractInput_isConnected(swigCPtr, this);
+  public void connect(AbstractChannel channel) {
+    opensimModelJNI.AbstractInput_connect__SWIG_4(swigCPtr, this, AbstractChannel.getCPtr(channel), channel);
   }
 
-  public String getConnecteeTypeName() {
-    return opensimModelJNI.AbstractInput_getConnecteeTypeName(swigCPtr, this);
+  public String getAnnotation(int index) {
+    return opensimModelJNI.AbstractInput_getAnnotation__SWIG_0(swigCPtr, this, index);
+  }
+
+  public String getAnnotation() {
+    return opensimModelJNI.AbstractInput_getAnnotation__SWIG_1(swigCPtr, this);
+  }
+
+  public static boolean parseConnecteeName(String connecteeName, SWIGTYPE_p_std__string outputPath, SWIGTYPE_p_std__string channelName, SWIGTYPE_p_std__string annotation) {
+    return opensimModelJNI.AbstractInput_parseConnecteeName(connecteeName, SWIGTYPE_p_std__string.getCPtr(outputPath), SWIGTYPE_p_std__string.getCPtr(channelName), SWIGTYPE_p_std__string.getCPtr(annotation));
   }
 
 }

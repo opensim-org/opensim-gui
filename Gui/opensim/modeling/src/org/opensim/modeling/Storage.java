@@ -575,6 +575,10 @@ public class Storage extends StorageInterface {
     return opensimModelJNI.Storage_makeStorageLabelsUnique(swigCPtr, this);
   }
 
+  public boolean storageLabelsAreUnique() {
+    return opensimModelJNI.Storage_storageLabelsAreUnique(swigCPtr, this);
+  }
+
   public boolean print(String aFileName, String aMode, String aComment) {
     return opensimModelJNI.Storage_print__SWIG_0(swigCPtr, this, aFileName, aMode, aComment);
   }

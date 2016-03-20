@@ -129,6 +129,22 @@ public class ScalarActuator extends Actuator {
     opensimModelJNI.ScalarActuator_set_max_control__SWIG_1(swigCPtr, this, value);
   }
 
+  public void set_has_output_actuation(boolean value) {
+    opensimModelJNI.ScalarActuator__has_output_actuation_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_actuation() {
+    return opensimModelJNI.ScalarActuator__has_output_actuation_get(swigCPtr, this);
+  }
+
+  public void set_has_output_speed(boolean value) {
+    opensimModelJNI.ScalarActuator__has_output_speed_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_speed() {
+    return opensimModelJNI.ScalarActuator__has_output_speed_get(swigCPtr, this);
+  }
+
   public double getControl(State s) {
     return opensimModelJNI.ScalarActuator_getControl(swigCPtr, this, State.getCPtr(s), s);
   }

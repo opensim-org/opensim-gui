@@ -119,7 +119,7 @@ public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemActi
             //Model aModel, OpenSimObject obj, AbstractProperty prop, OpenSimObjectNode node
             OpenSimObject ap =  obj.getPropertyByName("Appearance").getValueAsObject();
             Appearance apObj = Appearance.safeDownCast(ap);
-            SurfaceProperties surfApp = apObj.get_surface_properties();
+            SurfaceProperties surfApp = apObj.get_SurfaceProperties();
             PropertyEditorAdaptor pea = new PropertyEditorAdaptor(objectNode.getModelForNode(),
                     surfApp,
                     surfApp.getPropertyByName("representation"), objectNode);

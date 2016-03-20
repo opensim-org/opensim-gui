@@ -22,3 +22,4 @@ AppState.xml
 err.log
 out.log
 *.swp
+/OpenSimAPI-install/sdk/Java/org/opensim/modeling/*.class

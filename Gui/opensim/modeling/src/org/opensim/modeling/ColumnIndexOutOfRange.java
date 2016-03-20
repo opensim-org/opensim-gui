@@ -8,15 +8,15 @@
 
 package org.opensim.modeling;
 
-public class IndexOutOfRange extends OpenSimException {
+public class ColumnIndexOutOfRange extends IndexOutOfRangeSizeT {
   private transient long swigCPtr;
 
-  public IndexOutOfRange(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.IndexOutOfRange_SWIGUpcast(cPtr), cMemoryOwn);
+  public ColumnIndexOutOfRange(long cPtr, boolean cMemoryOwn) {
+    super(opensimModelJNI.ColumnIndexOutOfRange_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(IndexOutOfRange obj) {
+  public static long getCPtr(ColumnIndexOutOfRange obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,15 +28,11 @@ public class IndexOutOfRange extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_IndexOutOfRange(swigCPtr);
+        opensimModelJNI.delete_ColumnIndexOutOfRange(swigCPtr);
       }
       swigCPtr = 0;
     }
     super.delete();
-  }
-
-  public IndexOutOfRange(String file, long line, String func, long index, long min, long max) {
-    this(opensimModelJNI.new_IndexOutOfRange(file, line, func, index, min, max), true);
   }
 
 }

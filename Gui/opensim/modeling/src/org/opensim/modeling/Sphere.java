@@ -101,8 +101,4 @@ public class Sphere extends AnalyticGeometry {
     this(opensimModelJNI.new_Sphere__SWIG_1(radius), true);
   }
 
-  public void setSphereRadius(double radius) {
-    opensimModelJNI.Sphere_setSphereRadius(swigCPtr, this, radius);
-  }
-
 }

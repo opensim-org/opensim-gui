@@ -18,8 +18,11 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/tracking/src/org/opensim/tracking/ScaleToolModel.java</file>
-            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/tracking/src/org/opensim/tracking/ScaleToolPanel.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/tracking/src/org/opensim/tracking/AnalyzeToolModel.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/tracking/src/org/opensim/tracking/IKToolModel.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/tracking/src/org/opensim/tracking/ForwardToolModel.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/tracking/src/org/opensim/tracking/ActuatorsAndExternalLoadsPanel.java</file>
+            <file>file:/C:/Dev/gui/opensim-gui/Gui/opensim/tracking/src/org/opensim/tracking/AbstractToolModel.java</file>
         </group>
     </open-files>
 </project-private>

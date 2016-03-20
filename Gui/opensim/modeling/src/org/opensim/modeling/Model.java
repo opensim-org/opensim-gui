@@ -762,6 +762,46 @@ public class Model extends ModelComponent {
     opensimModelJNI.Model_set_ModelVisualPreferences__SWIG_1(swigCPtr, this, ModelVisualPreferences.getCPtr(value), value);
   }
 
+  public void set_has_output_com_position(boolean value) {
+    opensimModelJNI.Model__has_output_com_position_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_com_position() {
+    return opensimModelJNI.Model__has_output_com_position_get(swigCPtr, this);
+  }
+
+  public void set_has_output_com_velocity(boolean value) {
+    opensimModelJNI.Model__has_output_com_velocity_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_com_velocity() {
+    return opensimModelJNI.Model__has_output_com_velocity_get(swigCPtr, this);
+  }
+
+  public void set_has_output_com_acceleration(boolean value) {
+    opensimModelJNI.Model__has_output_com_acceleration_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_com_acceleration() {
+    return opensimModelJNI.Model__has_output_com_acceleration_get(swigCPtr, this);
+  }
+
+  public void set_has_output_kinetic_energy(boolean value) {
+    opensimModelJNI.Model__has_output_kinetic_energy_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_kinetic_energy() {
+    return opensimModelJNI.Model__has_output_kinetic_energy_get(swigCPtr, this);
+  }
+
+  public void set_has_output_potential_energy(boolean value) {
+    opensimModelJNI.Model__has_output_potential_energy_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_potential_energy() {
+    return opensimModelJNI.Model__has_output_potential_energy_get(swigCPtr, this);
+  }
+
   public Model() {
     this(opensimModelJNI.new_Model__SWIG_0(), true);
   }
@@ -1192,6 +1232,14 @@ public class Model extends ModelComponent {
 
   public Vec3 calcMassCenterAcceleration(State s) {
     return new Vec3(opensimModelJNI.Model_calcMassCenterAcceleration(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
+  public double calcKineticEnergy(State s) {
+    return opensimModelJNI.Model_calcKineticEnergy(swigCPtr, this, State.getCPtr(s), s);
+  }
+
+  public double calcPotentialEnergy(State s) {
+    return opensimModelJNI.Model_calcPotentialEnergy(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public int getNumMuscleStates() {

@@ -173,8 +173,4 @@ public class Geometry extends Component {
     opensimModelJNI.Geometry_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
   }
 
-  public void constructConnectors() {
-    opensimModelJNI.Geometry_constructConnectors(swigCPtr, this);
-  }
-
 }

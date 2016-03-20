@@ -126,6 +126,14 @@ public class BodyIterator {
     return new WrapObjectSet(opensimModelJNI.BodyIterator_getWrapObjectSet(swigCPtr, this), false);
   }
 
+  public boolean get_has_output_position() {
+    return opensimModelJNI.BodyIterator__has_output_position_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_transform() {
+    return opensimModelJNI.BodyIterator__has_output_transform_get(swigCPtr, this);
+  }
+
   public Transform getGroundTransform(State state) {
     return new Transform(opensimModelJNI.BodyIterator_getGroundTransform(swigCPtr, this, State.getCPtr(state), state), false);
   }
@@ -148,6 +156,10 @@ public class BodyIterator {
 
   public Transform findTransformInBaseFrame() {
     return new Transform(opensimModelJNI.BodyIterator_findTransformInBaseFrame(swigCPtr, this), true);
+  }
+
+  public Vec3 getPositionInGround(State state) {
+    return new Vec3(opensimModelJNI.BodyIterator_getPositionInGround(swigCPtr, this, State.getCPtr(state), state), true);
   }
 
   public Geometry get_geometry(int i) {
@@ -182,12 +194,12 @@ public class BodyIterator {
     return opensimModelJNI.BodyIterator_hasSystem(swigCPtr, this);
   }
 
-  public Component getComponent(String name) {
-    return new Component(opensimModelJNI.BodyIterator_getComponent(swigCPtr, this, name), false);
+  public String getFullPathName() {
+    return opensimModelJNI.BodyIterator_getFullPathName(swigCPtr, this);
   }
 
-  public Component updComponent(String name) {
-    return new Component(opensimModelJNI.BodyIterator_updComponent(swigCPtr, this, name), false);
+  public String getRelativePathName(Component wrt) {
+    return opensimModelJNI.BodyIterator_getRelativePathName(swigCPtr, this, Component.getCPtr(wrt), wrt);
   }
 
   public int getNumStateVariables() {
@@ -202,6 +214,18 @@ public class BodyIterator {
     return opensimModelJNI.BodyIterator_getNumConnectors(swigCPtr, this);
   }
 
+  public int getNumInputs() {
+    return opensimModelJNI.BodyIterator_getNumInputs(swigCPtr, this);
+  }
+
+  public int getNumOutputs() {
+    return opensimModelJNI.BodyIterator_getNumOutputs(swigCPtr, this);
+  }
+
+  public StdVectorString getOutputNames() {
+    return new StdVectorString(opensimModelJNI.BodyIterator_getOutputNames(swigCPtr, this), true);
+  }
+
   public AbstractConnector getConnector(int i) {
     return new AbstractConnector(opensimModelJNI.BodyIterator_getConnector(swigCPtr, this, i), false);
   }
@@ -214,12 +238,12 @@ public class BodyIterator {
     return new AbstractOutput(opensimModelJNI.BodyIterator_getOutput(swigCPtr, this, name), false);
   }
 
-  public SWIGTYPE_p_std__mapT_std__string_std__unique_ptrT_OpenSim__AbstractOutput_const_t_t__const_iterator getOutputsBegin() {
-    return new SWIGTYPE_p_std__mapT_std__string_std__unique_ptrT_OpenSim__AbstractOutput_const_t_t__const_iterator(opensimModelJNI.BodyIterator_getOutputsBegin(swigCPtr, this), true);
+  public SWIGTYPE_p_std__mapT_std__string_SimTK__ClonePtrT_OpenSim__AbstractOutput_t_t__const_iterator getOutputsBegin() {
+    return new SWIGTYPE_p_std__mapT_std__string_SimTK__ClonePtrT_OpenSim__AbstractOutput_t_t__const_iterator(opensimModelJNI.BodyIterator_getOutputsBegin(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_std__mapT_std__string_std__unique_ptrT_OpenSim__AbstractOutput_const_t_t__const_iterator getOutputsEnd() {
-    return new SWIGTYPE_p_std__mapT_std__string_std__unique_ptrT_OpenSim__AbstractOutput_const_t_t__const_iterator(opensimModelJNI.BodyIterator_getOutputsEnd(swigCPtr, this), true);
+  public SWIGTYPE_p_std__mapT_std__string_SimTK__ClonePtrT_OpenSim__AbstractOutput_t_t__const_iterator getOutputsEnd() {
+    return new SWIGTYPE_p_std__mapT_std__string_SimTK__ClonePtrT_OpenSim__AbstractOutput_t_t__const_iterator(opensimModelJNI.BodyIterator_getOutputsEnd(swigCPtr, this), true);
   }
 
   public int getModelingOption(State state, String name) {
@@ -266,36 +290,40 @@ public class BodyIterator {
     return opensimModelJNI.BodyIterator_isCacheVariableValid(swigCPtr, this, State.getCPtr(state), state, name);
   }
 
-  public String getPathName() {
-    return opensimModelJNI.BodyIterator_getPathName(swigCPtr, this);
+  public void dumpSubcomponents(int depth) {
+    opensimModelJNI.BodyIterator_dumpSubcomponents__SWIG_0(swigCPtr, this, depth);
   }
 
-  public void dumpPathName() {
-    opensimModelJNI.BodyIterator_dumpPathName(swigCPtr, this);
+  public void dumpSubcomponents() {
+    opensimModelJNI.BodyIterator_dumpSubcomponents__SWIG_1(swigCPtr, this);
+  }
+
+  public void dumpConnections() {
+    opensimModelJNI.BodyIterator_dumpConnections(swigCPtr, this);
   }
 
   public ComponentsList getComponentsList() {
     return new ComponentsList(opensimModelJNI.BodyIterator_getComponentsList(swigCPtr, this), true);
   }
 
-  public FramesList getFramesList() {
-    return new FramesList(opensimModelJNI.BodyIterator_getFramesList(swigCPtr, this), true);
+  public FrameList getFrameList() {
+    return new FrameList(opensimModelJNI.BodyIterator_getFrameList(swigCPtr, this), true);
   }
 
-  public BodiesList getBodiesList() {
-    return new BodiesList(opensimModelJNI.BodyIterator_getBodiesList(swigCPtr, this), true);
+  public BodyList getBodyList() {
+    return new BodyList(opensimModelJNI.BodyIterator_getBodyList(swigCPtr, this), true);
   }
 
-  public MusclesList getMusclesList() {
-    return new MusclesList(opensimModelJNI.BodyIterator_getMusclesList(swigCPtr, this), true);
+  public MuscleList getMuscleList() {
+    return new MuscleList(opensimModelJNI.BodyIterator_getMuscleList(swigCPtr, this), true);
   }
 
   public ModelComponentList getModelComponentList() {
     return new ModelComponentList(opensimModelJNI.BodyIterator_getModelComponentList(swigCPtr, this), true);
   }
 
-  public JointsList getJointList() {
-    return new JointsList(opensimModelJNI.BodyIterator_getJointList(swigCPtr, this), true);
+  public JointList getJointList() {
+    return new JointList(opensimModelJNI.BodyIterator_getJointList(swigCPtr, this), true);
   }
 
   public boolean isEqualTo(OpenSimObject aObject) {

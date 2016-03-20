@@ -42,12 +42,12 @@ import org.opensim.modeling.ForceSet;
 import org.opensim.modeling.ArrayObjPtr;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.BodyIterator;
+import org.opensim.modeling.BodyList;
 import org.opensim.modeling.Model;
-import org.opensim.modeling.BodiesList;
 import org.opensim.modeling.Coordinate;
 import org.opensim.modeling.CoordinateSet;
 import org.opensim.modeling.FrameIterator;
-import org.opensim.modeling.FramesList;
+import org.opensim.modeling.FrameList;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.ObjectGroup;
 import org.opensim.modeling.OpenSimContext;
@@ -144,7 +144,7 @@ public class SingleModelGuiElements {
     public String[] getBodyNames()
     {
         if (bodyNames == null) {
-            BodiesList bodies = model.getBodiesList();
+            BodyList bodies = model.getBodyList();
             BodyIterator bi = bodies.begin();
             ArrayList<String> bNames = new ArrayList<String>();
             while (!bi.equals(bodies.end())) {
@@ -160,7 +160,7 @@ public class SingleModelGuiElements {
     public String[] getFrameNames()
     {
         if (frameNames == null) {
-            FramesList frames = model.getFramesList();
+            FrameList frames = model.getFrameList();
             FrameIterator bi = frames.begin();
             ArrayList<String> bNames = new ArrayList<String>();
             while (!bi.equals(frames.end())) {

@@ -189,6 +189,14 @@ public class Probe extends ModelComponent {
     opensimModelJNI.Probe_set_gain__SWIG_1(swigCPtr, this, value);
   }
 
+  public void set_has_output_probe_outputs(boolean value) {
+    opensimModelJNI.Probe__has_output_probe_outputs_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_probe_outputs() {
+    return opensimModelJNI.Probe__has_output_probe_outputs_get(swigCPtr, this);
+  }
+
   public void reset(State s) {
     opensimModelJNI.Probe_reset(swigCPtr, this, State.getCPtr(s), s);
   }

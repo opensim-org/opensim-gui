@@ -59,4 +59,8 @@ public class Vector extends VectorBaseDouble {
     opensimModelJNI.Vector_set(swigCPtr, this, i, value);
   }
 
+  public Vector(StdVectorDouble row) {
+    this(opensimModelJNI.new_Vector__SWIG_3(StdVectorDouble.getCPtr(row), row), true);
+  }
+
 }
