@@ -45,7 +45,7 @@ public class OneComponentNode extends OpenSimObjectNode {
     public Sheet createSheet() {
         Sheet parentSheet =  super.createSheet(); 
         if (comp.getNumConnectors() >0){
-            Sheet.Set connectorSheet = createExpertSet();
+            Sheet.Set connectorSheet = parentSheet.createExpertSet();
             connectorSheet.setDisplayName("Connectors");
             parentSheet.put(connectorSheet);
             for (int i=0; i< comp.getNumConnectors();i++ ){
@@ -54,15 +54,18 @@ public class OneComponentNode extends OpenSimObjectNode {
             }
         }
         if (comp.getNumOutputs()>0){
-            Sheet.Set outputsSheet = createExpertSet();
-            outputsSheet.setDisplayName("Outputs (name:type)");
+            Sheet.Set outputSet = Sheet.createPropertiesSet(); 
+            outputSet.setName("Outputs");
+            outputSet.setDisplayName("Outputs (name:type)");
+            outputSet.setValue("tabName", "Outputs");
             StdVectorString outputNames = comp.getOutputNames();
-            parentSheet.put(outputsSheet);
+            parentSheet.put(outputSet);
             for (int i=0; i< comp.getNumOutputs();i++ ){
                 String oName = outputNames.get(i);
                 AbstractOutput ac = comp.getOutput(oName);
-                createOutputProperty(ac, outputsSheet);
+                createOutputProperty(ac, outputSet);
             }
+            parentSheet.put(outputSet);
         }
         return parentSheet;
     }
