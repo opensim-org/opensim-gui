@@ -181,7 +181,7 @@ public class VisualizationJson {
         obj_json.put("geometry", uuid.toString());
         obj_json.put("material", uuid_mat.toString());
         obj_json.put("matrix", JSONUtilities.createMatrixFromTransform(dg.getTransform(), dg.getScaleFactors(), visScaleFactor));
-        obj_json.put("castShadow", true);
+        obj_json.put("castShadow", false);
         mobody_objects.add(obj_json);
         return mesh_uuid;
     }
@@ -293,7 +293,7 @@ public class VisualizationJson {
         mat_json.put("uuid", mat_uuid.toString());
         mat_json.put("name", path.getFullPathName()+"Mat");
         mat_json.put("type", "MeshBasicMaterial");
-        String colorString = JSONUtilities.mapColorToRGBA(new Vec3(1.0, 0., 0.));
+        String colorString = JSONUtilities.mapColorToRGBA(new Vec3(0.62, 0.31, 0.31));
         mat_json.put("color", colorString);
         mat_json.put("side", 2);
         mat_json.put("skinning", true);
