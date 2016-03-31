@@ -7,19 +7,14 @@
 package org.opensim.view.nodes;
 
 import java.beans.PropertyEditorSupport;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 import javax.swing.Action;
 import org.openide.nodes.PropertySupport;
 import org.openide.nodes.Sheet;
-import static org.openide.nodes.Sheet.createExpertSet;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.AbstractConnector;
 import org.opensim.modeling.AbstractOutput;
-import org.opensim.modeling.AbstractProperty;
-import org.opensim.modeling.Body;
 import org.opensim.modeling.Component;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.StdVectorString;

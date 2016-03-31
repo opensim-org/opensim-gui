@@ -53,6 +53,9 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
   private ModelDisplayHints modelDisplayHints;
   private boolean updateMode = false;
   private boolean processingVariableGeometry = false;
+  private ArrayDecorativeGeometry afixeddg = new ArrayDecorativeGeometry();
+  private ArrayDecorativeGeometry avardg = new ArrayDecorativeGeometry();
+
   public DecorativeGeometryImplementationGUI() {
       // Default constructor
       unused = 1;
@@ -319,25 +322,24 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
         return (mapComponentsToFixedVisuals.get(mc)==null);
     }
     private void updateFixedDecorations(Component mc) {
-        ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
-        mc.generateDecorations(true, modelDisplayHints, model.getWorkingState(), adg);
+        mc.generateDecorations(true, modelDisplayHints, model.getWorkingState(), afixeddg);
         // Sync. 
         currentFixedGeometryDisplayers = mapComponentsToFixedVisuals.get(mc);
-        for(int i=0; i<adg.size(); i++){
+        for(int i=0; i<afixeddg.size(); i++){
             //System.out.println("update fixedVisuals index "+i+" dump:");
-            adg.getElt(i).implementGeometry(this);
+            afixeddg.getElt(i).implementGeometry(this);
         }
+        afixeddg.clear();
     }
 
     private void updateVariableDecorations(Component mc) {
-        ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
-        mc.generateDecorations(false, modelDisplayHints, model.getWorkingState(), adg);
+        mc.generateDecorations(false, modelDisplayHints, model.getWorkingState(), avardg);
         // Sync. 
         currentVariableGeometryDisplayers = mapComponentsToVariableVisuals.get(mc);
         int oldSize = (currentVariableGeometryDisplayers==null)?0:currentVariableGeometryDisplayers.size();
-        int newSize = (int) adg.size();
+        int newSize = (int) avardg.size();
         //System.out.println("Old Size="+oldSize);
-        //System.out.println("New Size="+adg.size());
+        //System.out.println("New Size="+afixeddg.size());
         if (oldSize != newSize){
             if (oldSize != 0)
                 removeDisplayersFromScene(currentVariableGeometryDisplayers);
@@ -345,8 +347,9 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
         }
         
         for(int i=0; i<newSize; i++){
-            adg.getElt(i).implementGeometry(this);
+            avardg.getElt(i).implementGeometry(this);
         }
+        avardg.clear();
     }
 
     public void setObjectColor(Component mc, double[] color) {
