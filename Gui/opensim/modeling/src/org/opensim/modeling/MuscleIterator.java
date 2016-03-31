@@ -741,6 +741,11 @@ public class MuscleIterator {
     opensimModelJNI.MuscleIterator_dumpConnections(swigCPtr, this);
   }
 
+  public AbstractConnector findConnector(String name) {
+    long cPtr = opensimModelJNI.MuscleIterator_findConnector(swigCPtr, this, name);
+    return (cPtr == 0) ? null : new AbstractConnector(cPtr, false);
+  }
+
   public ComponentsList getComponentsList() {
     return new ComponentsList(opensimModelJNI.MuscleIterator_getComponentsList(swigCPtr, this), true);
   }

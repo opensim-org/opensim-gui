@@ -302,6 +302,11 @@ public class BodyIterator {
     opensimModelJNI.BodyIterator_dumpConnections(swigCPtr, this);
   }
 
+  public AbstractConnector findConnector(String name) {
+    long cPtr = opensimModelJNI.BodyIterator_findConnector(swigCPtr, this, name);
+    return (cPtr == 0) ? null : new AbstractConnector(cPtr, false);
+  }
+
   public ComponentsList getComponentsList() {
     return new ComponentsList(opensimModelJNI.BodyIterator_getComponentsList(swigCPtr, this), true);
   }

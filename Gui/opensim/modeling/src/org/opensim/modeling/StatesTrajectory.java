@@ -83,6 +83,14 @@ public class StatesTrajectory {
     return opensimModelJNI.StatesTrajectory_isCompatibleWith(swigCPtr, this, Model.getCPtr(model), model);
   }
 
+  public TimeSeriesTable exportToTable(Model model, StdVectorString stateVars) {
+    return new TimeSeriesTable(opensimModelJNI.StatesTrajectory_exportToTable__SWIG_0(swigCPtr, this, Model.getCPtr(model), model, StdVectorString.getCPtr(stateVars), stateVars), true);
+  }
+
+  public TimeSeriesTable exportToTable(Model model) {
+    return new TimeSeriesTable(opensimModelJNI.StatesTrajectory_exportToTable__SWIG_1(swigCPtr, this, Model.getCPtr(model), model), true);
+  }
+
   static public class InconsistentState extends OpenSimException {
     private transient long swigCPtr;
   

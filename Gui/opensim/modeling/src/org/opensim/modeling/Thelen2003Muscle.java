@@ -309,76 +309,148 @@ public class Thelen2003Muscle extends ActivationFiberLengthMuscle {
     opensimModelJNI.Thelen2003Muscle_set_fv_linear_extrap_threshold__SWIG_1(swigCPtr, this, value);
   }
 
-  public void copyProperty_MuscleFirstOrderActivationDynamicModel(Thelen2003Muscle source) {
-    opensimModelJNI.Thelen2003Muscle_copyProperty_MuscleFirstOrderActivationDynamicModel(swigCPtr, this, Thelen2003Muscle.getCPtr(source), source);
+  public void copyProperty_maximum_pennation_angle(Thelen2003Muscle source) {
+    opensimModelJNI.Thelen2003Muscle_copyProperty_maximum_pennation_angle(swigCPtr, this, Thelen2003Muscle.getCPtr(source), source);
   }
 
-  public MuscleFirstOrderActivationDynamicModel get_MuscleFirstOrderActivationDynamicModel(int i) {
-    return new MuscleFirstOrderActivationDynamicModel(opensimModelJNI.Thelen2003Muscle_get_MuscleFirstOrderActivationDynamicModel__SWIG_0(swigCPtr, this, i), false);
+  public double get_maximum_pennation_angle(int i) {
+    return opensimModelJNI.Thelen2003Muscle_get_maximum_pennation_angle__SWIG_0(swigCPtr, this, i);
   }
 
-  public MuscleFirstOrderActivationDynamicModel upd_MuscleFirstOrderActivationDynamicModel(int i) {
-    return new MuscleFirstOrderActivationDynamicModel(opensimModelJNI.Thelen2003Muscle_upd_MuscleFirstOrderActivationDynamicModel__SWIG_0(swigCPtr, this, i), false);
+  public SWIGTYPE_p_double upd_maximum_pennation_angle(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.Thelen2003Muscle_upd_maximum_pennation_angle__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_MuscleFirstOrderActivationDynamicModel(int i, MuscleFirstOrderActivationDynamicModel value) {
-    opensimModelJNI.Thelen2003Muscle_set_MuscleFirstOrderActivationDynamicModel__SWIG_0(swigCPtr, this, i, MuscleFirstOrderActivationDynamicModel.getCPtr(value), value);
+  public void set_maximum_pennation_angle(int i, double value) {
+    opensimModelJNI.Thelen2003Muscle_set_maximum_pennation_angle__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int append_MuscleFirstOrderActivationDynamicModel(MuscleFirstOrderActivationDynamicModel value) {
-    return opensimModelJNI.Thelen2003Muscle_append_MuscleFirstOrderActivationDynamicModel(swigCPtr, this, MuscleFirstOrderActivationDynamicModel.getCPtr(value), value);
+  public int append_maximum_pennation_angle(double value) {
+    return opensimModelJNI.Thelen2003Muscle_append_maximum_pennation_angle(swigCPtr, this, value);
   }
 
-  public void constructProperty_MuscleFirstOrderActivationDynamicModel(MuscleFirstOrderActivationDynamicModel initValue) {
-    opensimModelJNI.Thelen2003Muscle_constructProperty_MuscleFirstOrderActivationDynamicModel(swigCPtr, this, MuscleFirstOrderActivationDynamicModel.getCPtr(initValue), initValue);
+  public void constructProperty_maximum_pennation_angle(double initValue) {
+    opensimModelJNI.Thelen2003Muscle_constructProperty_maximum_pennation_angle(swigCPtr, this, initValue);
   }
 
-  public MuscleFirstOrderActivationDynamicModel get_MuscleFirstOrderActivationDynamicModel() {
-    return new MuscleFirstOrderActivationDynamicModel(opensimModelJNI.Thelen2003Muscle_get_MuscleFirstOrderActivationDynamicModel__SWIG_1(swigCPtr, this), false);
+  public double get_maximum_pennation_angle() {
+    return opensimModelJNI.Thelen2003Muscle_get_maximum_pennation_angle__SWIG_1(swigCPtr, this);
   }
 
-  public MuscleFirstOrderActivationDynamicModel upd_MuscleFirstOrderActivationDynamicModel() {
-    return new MuscleFirstOrderActivationDynamicModel(opensimModelJNI.Thelen2003Muscle_upd_MuscleFirstOrderActivationDynamicModel__SWIG_1(swigCPtr, this), false);
+  public SWIGTYPE_p_double upd_maximum_pennation_angle() {
+    return new SWIGTYPE_p_double(opensimModelJNI.Thelen2003Muscle_upd_maximum_pennation_angle__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_MuscleFirstOrderActivationDynamicModel(MuscleFirstOrderActivationDynamicModel value) {
-    opensimModelJNI.Thelen2003Muscle_set_MuscleFirstOrderActivationDynamicModel__SWIG_1(swigCPtr, this, MuscleFirstOrderActivationDynamicModel.getCPtr(value), value);
+  public void set_maximum_pennation_angle(double value) {
+    opensimModelJNI.Thelen2003Muscle_set_maximum_pennation_angle__SWIG_1(swigCPtr, this, value);
   }
 
-  public void copyProperty_MuscleFixedWidthPennationModel(Thelen2003Muscle source) {
-    opensimModelJNI.Thelen2003Muscle_copyProperty_MuscleFixedWidthPennationModel(swigCPtr, this, Thelen2003Muscle.getCPtr(source), source);
+  public void copyProperty_activation_time_constant(Thelen2003Muscle source) {
+    opensimModelJNI.Thelen2003Muscle_copyProperty_activation_time_constant(swigCPtr, this, Thelen2003Muscle.getCPtr(source), source);
   }
 
-  public MuscleFixedWidthPennationModel get_MuscleFixedWidthPennationModel(int i) {
-    return new MuscleFixedWidthPennationModel(opensimModelJNI.Thelen2003Muscle_get_MuscleFixedWidthPennationModel__SWIG_0(swigCPtr, this, i), false);
+  public double get_activation_time_constant(int i) {
+    return opensimModelJNI.Thelen2003Muscle_get_activation_time_constant__SWIG_0(swigCPtr, this, i);
   }
 
-  public MuscleFixedWidthPennationModel upd_MuscleFixedWidthPennationModel(int i) {
-    return new MuscleFixedWidthPennationModel(opensimModelJNI.Thelen2003Muscle_upd_MuscleFixedWidthPennationModel__SWIG_0(swigCPtr, this, i), false);
+  public SWIGTYPE_p_double upd_activation_time_constant(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.Thelen2003Muscle_upd_activation_time_constant__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_MuscleFixedWidthPennationModel(int i, MuscleFixedWidthPennationModel value) {
-    opensimModelJNI.Thelen2003Muscle_set_MuscleFixedWidthPennationModel__SWIG_0(swigCPtr, this, i, MuscleFixedWidthPennationModel.getCPtr(value), value);
+  public void set_activation_time_constant(int i, double value) {
+    opensimModelJNI.Thelen2003Muscle_set_activation_time_constant__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int append_MuscleFixedWidthPennationModel(MuscleFixedWidthPennationModel value) {
-    return opensimModelJNI.Thelen2003Muscle_append_MuscleFixedWidthPennationModel(swigCPtr, this, MuscleFixedWidthPennationModel.getCPtr(value), value);
+  public int append_activation_time_constant(double value) {
+    return opensimModelJNI.Thelen2003Muscle_append_activation_time_constant(swigCPtr, this, value);
   }
 
-  public void constructProperty_MuscleFixedWidthPennationModel(MuscleFixedWidthPennationModel initValue) {
-    opensimModelJNI.Thelen2003Muscle_constructProperty_MuscleFixedWidthPennationModel(swigCPtr, this, MuscleFixedWidthPennationModel.getCPtr(initValue), initValue);
+  public void constructProperty_activation_time_constant(double initValue) {
+    opensimModelJNI.Thelen2003Muscle_constructProperty_activation_time_constant(swigCPtr, this, initValue);
   }
 
-  public MuscleFixedWidthPennationModel get_MuscleFixedWidthPennationModel() {
-    return new MuscleFixedWidthPennationModel(opensimModelJNI.Thelen2003Muscle_get_MuscleFixedWidthPennationModel__SWIG_1(swigCPtr, this), false);
+  public double get_activation_time_constant() {
+    return opensimModelJNI.Thelen2003Muscle_get_activation_time_constant__SWIG_1(swigCPtr, this);
   }
 
-  public MuscleFixedWidthPennationModel upd_MuscleFixedWidthPennationModel() {
-    return new MuscleFixedWidthPennationModel(opensimModelJNI.Thelen2003Muscle_upd_MuscleFixedWidthPennationModel__SWIG_1(swigCPtr, this), false);
+  public SWIGTYPE_p_double upd_activation_time_constant() {
+    return new SWIGTYPE_p_double(opensimModelJNI.Thelen2003Muscle_upd_activation_time_constant__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_MuscleFixedWidthPennationModel(MuscleFixedWidthPennationModel value) {
-    opensimModelJNI.Thelen2003Muscle_set_MuscleFixedWidthPennationModel__SWIG_1(swigCPtr, this, MuscleFixedWidthPennationModel.getCPtr(value), value);
+  public void set_activation_time_constant(double value) {
+    opensimModelJNI.Thelen2003Muscle_set_activation_time_constant__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void copyProperty_deactivation_time_constant(Thelen2003Muscle source) {
+    opensimModelJNI.Thelen2003Muscle_copyProperty_deactivation_time_constant(swigCPtr, this, Thelen2003Muscle.getCPtr(source), source);
+  }
+
+  public double get_deactivation_time_constant(int i) {
+    return opensimModelJNI.Thelen2003Muscle_get_deactivation_time_constant__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double upd_deactivation_time_constant(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.Thelen2003Muscle_upd_deactivation_time_constant__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_deactivation_time_constant(int i, double value) {
+    opensimModelJNI.Thelen2003Muscle_set_deactivation_time_constant__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_deactivation_time_constant(double value) {
+    return opensimModelJNI.Thelen2003Muscle_append_deactivation_time_constant(swigCPtr, this, value);
+  }
+
+  public void constructProperty_deactivation_time_constant(double initValue) {
+    opensimModelJNI.Thelen2003Muscle_constructProperty_deactivation_time_constant(swigCPtr, this, initValue);
+  }
+
+  public double get_deactivation_time_constant() {
+    return opensimModelJNI.Thelen2003Muscle_get_deactivation_time_constant__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_double upd_deactivation_time_constant() {
+    return new SWIGTYPE_p_double(opensimModelJNI.Thelen2003Muscle_upd_deactivation_time_constant__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_deactivation_time_constant(double value) {
+    opensimModelJNI.Thelen2003Muscle_set_deactivation_time_constant__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void copyProperty_minimum_activation(Thelen2003Muscle source) {
+    opensimModelJNI.Thelen2003Muscle_copyProperty_minimum_activation(swigCPtr, this, Thelen2003Muscle.getCPtr(source), source);
+  }
+
+  public double get_minimum_activation(int i) {
+    return opensimModelJNI.Thelen2003Muscle_get_minimum_activation__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double upd_minimum_activation(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.Thelen2003Muscle_upd_minimum_activation__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_minimum_activation(int i, double value) {
+    opensimModelJNI.Thelen2003Muscle_set_minimum_activation__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_minimum_activation(double value) {
+    return opensimModelJNI.Thelen2003Muscle_append_minimum_activation(swigCPtr, this, value);
+  }
+
+  public void constructProperty_minimum_activation(double initValue) {
+    opensimModelJNI.Thelen2003Muscle_constructProperty_minimum_activation(swigCPtr, this, initValue);
+  }
+
+  public double get_minimum_activation() {
+    return opensimModelJNI.Thelen2003Muscle_get_minimum_activation__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_double upd_minimum_activation() {
+    return new SWIGTYPE_p_double(opensimModelJNI.Thelen2003Muscle_upd_minimum_activation__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_minimum_activation(double value) {
+    opensimModelJNI.Thelen2003Muscle_set_minimum_activation__SWIG_1(swigCPtr, this, value);
   }
 
   public Thelen2003Muscle() {
