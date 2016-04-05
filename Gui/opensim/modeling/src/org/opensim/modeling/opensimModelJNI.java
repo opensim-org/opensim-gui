@@ -4072,15 +4072,6 @@ public class opensimModelJNI {
   public final static native String Coordinate_getClassName();
   public final static native long Coordinate_clone(long jarg1, Coordinate jarg1_);
   public final static native String Coordinate_getConcreteClassName(long jarg1, Coordinate jarg1_);
-  public final static native void Coordinate_copyProperty_motion_type(long jarg1, Coordinate jarg1_, long jarg2, Coordinate jarg2_);
-  public final static native String Coordinate_get_motion_type__SWIG_0(long jarg1, Coordinate jarg1_, int jarg2);
-  public final static native long Coordinate_upd_motion_type__SWIG_0(long jarg1, Coordinate jarg1_, int jarg2);
-  public final static native void Coordinate_set_motion_type__SWIG_0(long jarg1, Coordinate jarg1_, int jarg2, String jarg3);
-  public final static native int Coordinate_append_motion_type(long jarg1, Coordinate jarg1_, String jarg2);
-  public final static native void Coordinate_constructProperty_motion_type(long jarg1, Coordinate jarg1_, String jarg2);
-  public final static native String Coordinate_get_motion_type__SWIG_1(long jarg1, Coordinate jarg1_);
-  public final static native long Coordinate_upd_motion_type__SWIG_1(long jarg1, Coordinate jarg1_);
-  public final static native void Coordinate_set_motion_type__SWIG_1(long jarg1, Coordinate jarg1_, String jarg2);
   public final static native void Coordinate_copyProperty_default_value(long jarg1, Coordinate jarg1_, long jarg2, Coordinate jarg2_);
   public final static native double Coordinate_get_default_value__SWIG_0(long jarg1, Coordinate jarg1_, int jarg2);
   public final static native long Coordinate_upd_default_value__SWIG_0(long jarg1, Coordinate jarg1_, int jarg2);
@@ -4158,7 +4149,6 @@ public class opensimModelJNI {
   public final static native boolean Coordinate__has_output_acceleration_get(long jarg1, Coordinate jarg1_);
   public final static native long Coordinate_getJoint(long jarg1, Coordinate jarg1_);
   public final static native int Coordinate_getMotionType(long jarg1, Coordinate jarg1_);
-  public final static native void Coordinate_setMotionType(long jarg1, Coordinate jarg1_, int jarg2);
   public final static native double Coordinate_getValue(long jarg1, Coordinate jarg1_, long jarg2, State jarg2_);
   public final static native void Coordinate_setValue__SWIG_0(long jarg1, Coordinate jarg1_, long jarg2, State jarg2_, double jarg3, boolean jarg4);
   public final static native void Coordinate_setValue__SWIG_1(long jarg1, Coordinate jarg1_, long jarg2, State jarg2_, double jarg3);

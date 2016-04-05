@@ -57,42 +57,6 @@ public class Coordinate extends ModelComponent {
     return opensimModelJNI.Coordinate_getConcreteClassName(swigCPtr, this);
   }
 
-  public void copyProperty_motion_type(Coordinate source) {
-    opensimModelJNI.Coordinate_copyProperty_motion_type(swigCPtr, this, Coordinate.getCPtr(source), source);
-  }
-
-  public String get_motion_type(int i) {
-    return opensimModelJNI.Coordinate_get_motion_type__SWIG_0(swigCPtr, this, i);
-  }
-
-  public SWIGTYPE_p_std__string upd_motion_type(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.Coordinate_upd_motion_type__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_motion_type(int i, String value) {
-    opensimModelJNI.Coordinate_set_motion_type__SWIG_0(swigCPtr, this, i, value);
-  }
-
-  public int append_motion_type(String value) {
-    return opensimModelJNI.Coordinate_append_motion_type(swigCPtr, this, value);
-  }
-
-  public void constructProperty_motion_type(String initValue) {
-    opensimModelJNI.Coordinate_constructProperty_motion_type(swigCPtr, this, initValue);
-  }
-
-  public String get_motion_type() {
-    return opensimModelJNI.Coordinate_get_motion_type__SWIG_1(swigCPtr, this);
-  }
-
-  public SWIGTYPE_p_std__string upd_motion_type() {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.Coordinate_upd_motion_type__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_motion_type(String value) {
-    opensimModelJNI.Coordinate_set_motion_type__SWIG_1(swigCPtr, this, value);
-  }
-
   public void copyProperty_default_value(Coordinate source) {
     opensimModelJNI.Coordinate_copyProperty_default_value(swigCPtr, this, Coordinate.getCPtr(source), source);
   }
@@ -401,10 +365,6 @@ public class Coordinate extends ModelComponent {
     return Coordinate.MotionType.swigToEnum(opensimModelJNI.Coordinate_getMotionType(swigCPtr, this));
   }
 
-  public void setMotionType(Coordinate.MotionType aMotionType) {
-    opensimModelJNI.Coordinate_setMotionType(swigCPtr, this, aMotionType.swigValue());
-  }
-
   public double getValue(State s) {
     return opensimModelJNI.Coordinate_getValue(swigCPtr, this, State.getCPtr(s), s);
   }
@@ -550,6 +510,7 @@ public class Coordinate extends ModelComponent {
   }
 
   public final static class MotionType {
+    public final static Coordinate.MotionType Undefined = new Coordinate.MotionType("Undefined");
     public final static Coordinate.MotionType Rotational = new Coordinate.MotionType("Rotational");
     public final static Coordinate.MotionType Translational = new Coordinate.MotionType("Translational");
     public final static Coordinate.MotionType Coupled = new Coordinate.MotionType("Coupled");
@@ -588,7 +549,7 @@ public class Coordinate extends ModelComponent {
       swigNext = this.swigValue+1;
     }
 
-    private static MotionType[] swigValues = { Rotational, Translational, Coupled };
+    private static MotionType[] swigValues = { Undefined, Rotational, Translational, Coupled };
     private static int swigNext = 0;
     private final int swigValue;
     private final String swigName;
