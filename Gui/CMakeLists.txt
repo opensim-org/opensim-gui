@@ -1,6 +1,3 @@
-IF(OPENSIM_INSTALL_PACKAGE_BUILD)
-
-
 SET(OPENSIM_INSTALL_PACKAGE_BUILD OFF CACHE BOOL "Build an installer (to post on simtk.org)")
 # The following lines assume that these steps are done from inside netbeans first
 # build zip distribution
@@ -26,8 +23,6 @@ INSTALL(DIRECTORY opensim/dist/opensim/opensim/opensim/ DESTINATION opensim)
 FILE(GLOB VTK_LIBS ${VTK_LIB_DIR}/*.dll)
 INSTALL_FILES(/bin/ FILES  ${VTK_LIBS})
 
-INSTALL(DIRECTORY Internal DESTINATION Models PATTERN ".svn" EXCLUDE)
-
 INSTALL_FILES(/plugins/ FILES plugins/readme.txt)
 
 # Install Tutorials to doc folder
@@ -40,9 +35,3 @@ INCLUDE(${CMAKE_ROOT}/Modules/FindJava.cmake)
 SET(JRE_TO_PACKAGE "" CACHE PATH "jdk folder to include with distro")
 INSTALL(DIRECTORY ${JRE_TO_PACKAGE} DESTINATION jdk)
 
-#etc/opensim.conf should have jdkhome=jdk, 
-# Should also have -J-Dsun.java2d.ddoffscreen=false -J-Dsun.java2d.gdiblit=false
-# in addition first line should have
-# default_userdir="${HOME}/.${APPNAME}/1.0/dev"
-SUBDIRS(Documentation)
-ENDIF(OPENSIM_INSTALL_PACKAGE_BUILD)
