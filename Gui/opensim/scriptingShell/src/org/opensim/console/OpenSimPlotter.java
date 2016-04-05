@@ -144,8 +144,8 @@ public final class OpenSimPlotter {
         PiecewiseLinearFunction f = new PiecewiseLinearFunction();
         f.setName("MomentArm_"+pathActuatorName);
         double convToDegrees = 1.0;
-        String mtype = coord.get_motion_type();
-        if (coord.get_motion_type().equalsIgnoreCase("rotational")) 
+        Coordinate.MotionType mtype = coord.getMotionType();
+        if (mtype == Coordinate.MotionType.Rotational) 
             convToDegrees = 180.0/Math.PI;
         for(double g=rmin; g<rmax; g+=step){
             coord.setValue(s, g);
