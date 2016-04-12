@@ -10,6 +10,10 @@
 # Step (1) -- Locate OpenSim package.
 find_package(OpenSim REQUIRED)
 
+if(NOT OpenSim_JAVA_WRAPPING)
+    message(FATAL_ERROR "OpenSim core needs be compiled with Java wrapping ON.")
+endif()
+
 # Step (2) -- Copy OpenSim's jar file to opensim-gui.
 file(REMOVE_RECURSE "${CMAKE_CURRENT_SOURCE_DIR}/modeling/src/org")
 file(COPY ${OpenSim_JAVA_FILES_DIR}
