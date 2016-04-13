@@ -7,17 +7,22 @@
 #    (4) Merge/install API install from (1) with launcher from (3) to make final installer 
 #----------------------------------------------------
 
-# Step (1) -- Locate OpenSim package.
 find_package(OpenSim REQUIRED)
 
 if(NOT OpenSim_JAVA_WRAPPING)
     message(FATAL_ERROR "OpenSim core needs be compiled with Java wrapping ON.")
 endif()
 
-# Step (2) -- Copy OpenSim's jar file to opensim-gui.
+message(STATUS "Replacing exising Java files with ones from opensim-core.")
 file(REMOVE_RECURSE "${CMAKE_CURRENT_SOURCE_DIR}/modeling/src/org")
 file(COPY ${OpenSim_JAVA_FILES_DIR}
     DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/modeling/src"
     FILES_MATCHING PATTERN "*.java")
 
-# add_custom_command()
+find_package(Ant REQUIRED)
+
+add_custom_target(DistributionZip ALL
+                  COMMAND ${Ant_EXECUTABLE} build-zip
+                  DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
+                  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                  COMMENT "Building the OpenSim zip distribution.")
