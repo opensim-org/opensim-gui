@@ -29,109 +29,109 @@ public class SetControlNodes {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_SetControlNodes(swigCPtr);
+        opensimModelSimulationJNI.delete_SetControlNodes(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public SetControlNodes(int aCapacity) {
-    this(opensimModelJNI.new_SetControlNodes__SWIG_0(aCapacity), true);
+    this(opensimModelSimulationJNI.new_SetControlNodes__SWIG_0(aCapacity), true);
   }
 
   public SetControlNodes() {
-    this(opensimModelJNI.new_SetControlNodes__SWIG_1(), true);
+    this(opensimModelSimulationJNI.new_SetControlNodes__SWIG_1(), true);
   }
 
   public SetControlNodes(SetControlNodes aArray) {
-    this(opensimModelJNI.new_SetControlNodes__SWIG_2(SetControlNodes.getCPtr(aArray), aArray), true);
+    this(opensimModelSimulationJNI.new_SetControlNodes__SWIG_2(SetControlNodes.getCPtr(aArray), aArray), true);
   }
 
   public void clearAndDestroy() {
-    opensimModelJNI.SetControlNodes_clearAndDestroy(swigCPtr, this);
+    opensimModelSimulationJNI.SetControlNodes_clearAndDestroy(swigCPtr, this);
   }
 
   public boolean setSize(int aSize) {
-    return opensimModelJNI.SetControlNodes_setSize(swigCPtr, this, aSize);
+    return opensimModelSimulationJNI.SetControlNodes_setSize(swigCPtr, this, aSize);
   }
 
   public int getSize() {
-    return opensimModelJNI.SetControlNodes_getSize(swigCPtr, this);
+    return opensimModelSimulationJNI.SetControlNodes_getSize(swigCPtr, this);
   }
 
   public int size() {
-    return opensimModelJNI.SetControlNodes_size(swigCPtr, this);
+    return opensimModelSimulationJNI.SetControlNodes_size(swigCPtr, this);
   }
 
   public int getIndex(ControlLinearNode aObject, int aStartIndex) {
-    return opensimModelJNI.SetControlNodes_getIndex__SWIG_0(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject, aStartIndex);
+    return opensimModelSimulationJNI.SetControlNodes_getIndex__SWIG_0(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject, aStartIndex);
   }
 
   public int getIndex(ControlLinearNode aObject) {
-    return opensimModelJNI.SetControlNodes_getIndex__SWIG_1(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject);
+    return opensimModelSimulationJNI.SetControlNodes_getIndex__SWIG_1(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject);
   }
 
   public int getIndex(String aName, int aStartIndex) {
-    return opensimModelJNI.SetControlNodes_getIndex__SWIG_2(swigCPtr, this, aName, aStartIndex);
+    return opensimModelSimulationJNI.SetControlNodes_getIndex__SWIG_2(swigCPtr, this, aName, aStartIndex);
   }
 
   public int getIndex(String aName) {
-    return opensimModelJNI.SetControlNodes_getIndex__SWIG_3(swigCPtr, this, aName);
+    return opensimModelSimulationJNI.SetControlNodes_getIndex__SWIG_3(swigCPtr, this, aName);
   }
 
   public boolean append(ControlLinearNode aObject) {
-    return opensimModelJNI.SetControlNodes_append__SWIG_0(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject);
+    return opensimModelSimulationJNI.SetControlNodes_append__SWIG_0(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject);
   }
 
   public boolean append(SetControlNodes aArray) {
-    return opensimModelJNI.SetControlNodes_append__SWIG_1(swigCPtr, this, SetControlNodes.getCPtr(aArray), aArray);
+    return opensimModelSimulationJNI.SetControlNodes_append__SWIG_1(swigCPtr, this, SetControlNodes.getCPtr(aArray), aArray);
   }
 
   public boolean insert(int aIndex, ControlLinearNode aObject) {
-    return opensimModelJNI.SetControlNodes_insert(swigCPtr, this, aIndex, ControlLinearNode.getCPtr(aObject), aObject);
+    return opensimModelSimulationJNI.SetControlNodes_insert(swigCPtr, this, aIndex, ControlLinearNode.getCPtr(aObject), aObject);
   }
 
   public boolean remove(int aIndex) {
-    return opensimModelJNI.SetControlNodes_remove__SWIG_0(swigCPtr, this, aIndex);
+    return opensimModelSimulationJNI.SetControlNodes_remove__SWIG_0(swigCPtr, this, aIndex);
   }
 
   public boolean remove(ControlLinearNode aObject) {
-    return opensimModelJNI.SetControlNodes_remove__SWIG_1(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject);
+    return opensimModelSimulationJNI.SetControlNodes_remove__SWIG_1(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject);
   }
 
   public boolean set(int aIndex, ControlLinearNode aObject) {
-    return opensimModelJNI.SetControlNodes_set(swigCPtr, this, aIndex, ControlLinearNode.getCPtr(aObject), aObject);
+    return opensimModelSimulationJNI.SetControlNodes_set(swigCPtr, this, aIndex, ControlLinearNode.getCPtr(aObject), aObject);
   }
 
   public ControlLinearNode get(int aIndex) {
-    long cPtr = opensimModelJNI.SetControlNodes_get__SWIG_0(swigCPtr, this, aIndex);
+    long cPtr = opensimModelSimulationJNI.SetControlNodes_get__SWIG_0(swigCPtr, this, aIndex);
     return (cPtr == 0) ? null : new ControlLinearNode(cPtr, false);
   }
 
   public ControlLinearNode get(String aName) {
-    long cPtr = opensimModelJNI.SetControlNodes_get__SWIG_1(swigCPtr, this, aName);
+    long cPtr = opensimModelSimulationJNI.SetControlNodes_get__SWIG_1(swigCPtr, this, aName);
     return (cPtr == 0) ? null : new ControlLinearNode(cPtr, false);
   }
 
   public ControlLinearNode getLast() {
-    long cPtr = opensimModelJNI.SetControlNodes_getLast(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.SetControlNodes_getLast(swigCPtr, this);
     return (cPtr == 0) ? null : new ControlLinearNode(cPtr, false);
   }
 
   public int searchBinary(ControlLinearNode aObject, boolean aFindFirst, int aLo, int aHi) {
-    return opensimModelJNI.SetControlNodes_searchBinary__SWIG_0(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject, aFindFirst, aLo, aHi);
+    return opensimModelSimulationJNI.SetControlNodes_searchBinary__SWIG_0(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject, aFindFirst, aLo, aHi);
   }
 
   public int searchBinary(ControlLinearNode aObject, boolean aFindFirst, int aLo) {
-    return opensimModelJNI.SetControlNodes_searchBinary__SWIG_1(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject, aFindFirst, aLo);
+    return opensimModelSimulationJNI.SetControlNodes_searchBinary__SWIG_1(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject, aFindFirst, aLo);
   }
 
   public int searchBinary(ControlLinearNode aObject, boolean aFindFirst) {
-    return opensimModelJNI.SetControlNodes_searchBinary__SWIG_2(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject, aFindFirst);
+    return opensimModelSimulationJNI.SetControlNodes_searchBinary__SWIG_2(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject, aFindFirst);
   }
 
   public int searchBinary(ControlLinearNode aObject) {
-    return opensimModelJNI.SetControlNodes_searchBinary__SWIG_3(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject);
+    return opensimModelSimulationJNI.SetControlNodes_searchBinary__SWIG_3(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject);
   }
 
 }

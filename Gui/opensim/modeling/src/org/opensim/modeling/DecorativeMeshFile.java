@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class DecorativeMeshFile extends DecorativeGeometry {
   private transient long swigCPtr;
 
-  public DecorativeMeshFile(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.DecorativeMeshFile_SWIGUpcast(cPtr), cMemoryOwn);
+  protected DecorativeMeshFile(long cPtr, boolean cMemoryOwn) {
+    super(opensimSimbodyJNI.DecorativeMeshFile_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(DecorativeMeshFile obj) {
+  protected static long getCPtr(DecorativeMeshFile obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,7 +28,7 @@ public class DecorativeMeshFile extends DecorativeGeometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_DecorativeMeshFile(swigCPtr);
+        opensimSimbodyJNI.delete_DecorativeMeshFile(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,56 +36,56 @@ public class DecorativeMeshFile extends DecorativeGeometry {
   }
 
   public DecorativeMeshFile(String meshFileName) {
-    this(opensimModelJNI.new_DecorativeMeshFile(meshFileName), true);
+    this(opensimSimbodyJNI.new_DecorativeMeshFile(meshFileName), true);
   }
 
   public String getMeshFile() {
-    return opensimModelJNI.DecorativeMeshFile_getMeshFile(swigCPtr, this);
+    return opensimSimbodyJNI.DecorativeMeshFile_getMeshFile(swigCPtr, this);
   }
 
   public DecorativeMeshFile setBodyId(int b) {
-    return new DecorativeMeshFile(opensimModelJNI.DecorativeMeshFile_setBodyId(swigCPtr, this, b), false);
+    return new DecorativeMeshFile(opensimSimbodyJNI.DecorativeMeshFile_setBodyId(swigCPtr, this, b), false);
   }
 
   public DecorativeMeshFile setIndexOnBody(int x) {
-    return new DecorativeMeshFile(opensimModelJNI.DecorativeMeshFile_setIndexOnBody(swigCPtr, this, x), false);
+    return new DecorativeMeshFile(opensimSimbodyJNI.DecorativeMeshFile_setIndexOnBody(swigCPtr, this, x), false);
   }
 
   public DecorativeMeshFile setUserRef(SWIGTYPE_p_void p) {
-    return new DecorativeMeshFile(opensimModelJNI.DecorativeMeshFile_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
+    return new DecorativeMeshFile(opensimSimbodyJNI.DecorativeMeshFile_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
   }
 
   public DecorativeMeshFile setTransform(Transform X_BD) {
-    return new DecorativeMeshFile(opensimModelJNI.DecorativeMeshFile_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
+    return new DecorativeMeshFile(opensimSimbodyJNI.DecorativeMeshFile_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
   }
 
   public DecorativeMeshFile setResolution(double r) {
-    return new DecorativeMeshFile(opensimModelJNI.DecorativeMeshFile_setResolution(swigCPtr, this, r), false);
+    return new DecorativeMeshFile(opensimSimbodyJNI.DecorativeMeshFile_setResolution(swigCPtr, this, r), false);
   }
 
   public DecorativeMeshFile setScaleFactors(Vec3 s) {
-    return new DecorativeMeshFile(opensimModelJNI.DecorativeMeshFile_setScaleFactors(swigCPtr, this, Vec3.getCPtr(s), s), false);
+    return new DecorativeMeshFile(opensimSimbodyJNI.DecorativeMeshFile_setScaleFactors(swigCPtr, this, Vec3.getCPtr(s), s), false);
   }
 
   public DecorativeMeshFile setColor(Vec3 rgb) {
-    return new DecorativeMeshFile(opensimModelJNI.DecorativeMeshFile_setColor(swigCPtr, this, Vec3.getCPtr(rgb), rgb), false);
+    return new DecorativeMeshFile(opensimSimbodyJNI.DecorativeMeshFile_setColor(swigCPtr, this, Vec3.getCPtr(rgb), rgb), false);
   }
 
   public DecorativeMeshFile setOpacity(double o) {
-    return new DecorativeMeshFile(opensimModelJNI.DecorativeMeshFile_setOpacity(swigCPtr, this, o), false);
+    return new DecorativeMeshFile(opensimSimbodyJNI.DecorativeMeshFile_setOpacity(swigCPtr, this, o), false);
   }
 
   public DecorativeMeshFile setLineThickness(double t) {
-    return new DecorativeMeshFile(opensimModelJNI.DecorativeMeshFile_setLineThickness(swigCPtr, this, t), false);
+    return new DecorativeMeshFile(opensimSimbodyJNI.DecorativeMeshFile_setLineThickness(swigCPtr, this, t), false);
   }
 
   public DecorativeMeshFile setRepresentation(DecorativeGeometry.Representation r) {
-    return new DecorativeMeshFile(opensimModelJNI.DecorativeMeshFile_setRepresentation(swigCPtr, this, r.swigValue()), false);
+    return new DecorativeMeshFile(opensimSimbodyJNI.DecorativeMeshFile_setRepresentation(swigCPtr, this, r.swigValue()), false);
   }
 
   public DecorativeMeshFile clone() {
-    long cPtr = opensimModelJNI.DecorativeMeshFile_clone(swigCPtr, this);
-    return (cPtr == 0) ? null : new DecorativeMeshFile(cPtr, true);
+    long cPtr = opensimSimbodyJNI.DecorativeMeshFile_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new DecorativeMeshFile(cPtr, false);
   }
 
 }

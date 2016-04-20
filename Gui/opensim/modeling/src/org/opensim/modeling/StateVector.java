@@ -29,118 +29,118 @@ public class StateVector {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_StateVector(swigCPtr);
+        opensimModelCommonJNI.delete_StateVector(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public StateVector(double aT, int aN, SWIGTYPE_p_double aData) {
-    this(opensimModelJNI.new_StateVector__SWIG_0(aT, aN, SWIGTYPE_p_double.getCPtr(aData)), true);
+    this(opensimModelCommonJNI.new_StateVector__SWIG_0(aT, aN, SWIGTYPE_p_double.getCPtr(aData)), true);
   }
 
   public StateVector(double aT, int aN) {
-    this(opensimModelJNI.new_StateVector__SWIG_1(aT, aN), true);
+    this(opensimModelCommonJNI.new_StateVector__SWIG_1(aT, aN), true);
   }
 
   public StateVector(double aT) {
-    this(opensimModelJNI.new_StateVector__SWIG_2(aT), true);
+    this(opensimModelCommonJNI.new_StateVector__SWIG_2(aT), true);
   }
 
   public StateVector() {
-    this(opensimModelJNI.new_StateVector__SWIG_3(), true);
+    this(opensimModelCommonJNI.new_StateVector__SWIG_3(), true);
   }
 
   public StateVector(StateVector aVector) {
-    this(opensimModelJNI.new_StateVector__SWIG_4(StateVector.getCPtr(aVector), aVector), true);
+    this(opensimModelCommonJNI.new_StateVector__SWIG_4(StateVector.getCPtr(aVector), aVector), true);
   }
 
   public void setStates(double aT, int aN, double[] aY) {
-    opensimModelJNI.StateVector_setStates(swigCPtr, this, aT, aN, aY);
+    opensimModelCommonJNI.StateVector_setStates(swigCPtr, this, aT, aN, aY);
   }
 
   public int getSize() {
-    return opensimModelJNI.StateVector_getSize(swigCPtr, this);
+    return opensimModelCommonJNI.StateVector_getSize(swigCPtr, this);
   }
 
   public void setTime(double aT) {
-    opensimModelJNI.StateVector_setTime(swigCPtr, this, aT);
+    opensimModelCommonJNI.StateVector_setTime(swigCPtr, this, aT);
   }
 
   public double getTime() {
-    return opensimModelJNI.StateVector_getTime(swigCPtr, this);
+    return opensimModelCommonJNI.StateVector_getTime(swigCPtr, this);
   }
 
   public int getDataValue(int aIndex, SWIGTYPE_p_double rValue) {
-    return opensimModelJNI.StateVector_getDataValue(swigCPtr, this, aIndex, SWIGTYPE_p_double.getCPtr(rValue));
+    return opensimModelCommonJNI.StateVector_getDataValue(swigCPtr, this, aIndex, SWIGTYPE_p_double.getCPtr(rValue));
   }
 
   public void setDataValue(int aIndex, SWIGTYPE_p_double aValue) {
-    opensimModelJNI.StateVector_setDataValue(swigCPtr, this, aIndex, SWIGTYPE_p_double.getCPtr(aValue));
+    opensimModelCommonJNI.StateVector_setDataValue(swigCPtr, this, aIndex, SWIGTYPE_p_double.getCPtr(aValue));
   }
 
   public ArrayDouble getData() {
-    return new ArrayDouble(opensimModelJNI.StateVector_getData(swigCPtr, this), false);
+    return new ArrayDouble(opensimModelCommonJNI.StateVector_getData(swigCPtr, this), false);
   }
 
   public void shiftTime(double aValue) {
-    opensimModelJNI.StateVector_shiftTime(swigCPtr, this, aValue);
+    opensimModelCommonJNI.StateVector_shiftTime(swigCPtr, this, aValue);
   }
 
   public void scaleTime(double aValue) {
-    opensimModelJNI.StateVector_scaleTime(swigCPtr, this, aValue);
+    opensimModelCommonJNI.StateVector_scaleTime(swigCPtr, this, aValue);
   }
 
   public void add(double aValue) {
-    opensimModelJNI.StateVector_add__SWIG_0(swigCPtr, this, aValue);
+    opensimModelCommonJNI.StateVector_add__SWIG_0(swigCPtr, this, aValue);
   }
 
   public void add(int aN, double[] aY) {
-    opensimModelJNI.StateVector_add__SWIG_1(swigCPtr, this, aN, aY);
+    opensimModelCommonJNI.StateVector_add__SWIG_1(swigCPtr, this, aN, aY);
   }
 
   public void add(int aN, double aValue) {
-    opensimModelJNI.StateVector_add__SWIG_2(swigCPtr, this, aN, aValue);
+    opensimModelCommonJNI.StateVector_add__SWIG_2(swigCPtr, this, aN, aValue);
   }
 
   public void add(StateVector aStateVector) {
-    opensimModelJNI.StateVector_add__SWIG_3(swigCPtr, this, StateVector.getCPtr(aStateVector), aStateVector);
+    opensimModelCommonJNI.StateVector_add__SWIG_3(swigCPtr, this, StateVector.getCPtr(aStateVector), aStateVector);
   }
 
   public void subtract(double aValue) {
-    opensimModelJNI.StateVector_subtract__SWIG_0(swigCPtr, this, aValue);
+    opensimModelCommonJNI.StateVector_subtract__SWIG_0(swigCPtr, this, aValue);
   }
 
   public void subtract(int aN, double[] aY) {
-    opensimModelJNI.StateVector_subtract__SWIG_1(swigCPtr, this, aN, aY);
+    opensimModelCommonJNI.StateVector_subtract__SWIG_1(swigCPtr, this, aN, aY);
   }
 
   public void subtract(StateVector aStateVector) {
-    opensimModelJNI.StateVector_subtract__SWIG_2(swigCPtr, this, StateVector.getCPtr(aStateVector), aStateVector);
+    opensimModelCommonJNI.StateVector_subtract__SWIG_2(swigCPtr, this, StateVector.getCPtr(aStateVector), aStateVector);
   }
 
   public void multiply(double aValue) {
-    opensimModelJNI.StateVector_multiply__SWIG_0(swigCPtr, this, aValue);
+    opensimModelCommonJNI.StateVector_multiply__SWIG_0(swigCPtr, this, aValue);
   }
 
   public void multiply(int aN, double[] aY) {
-    opensimModelJNI.StateVector_multiply__SWIG_1(swigCPtr, this, aN, aY);
+    opensimModelCommonJNI.StateVector_multiply__SWIG_1(swigCPtr, this, aN, aY);
   }
 
   public void multiply(StateVector aStateVector) {
-    opensimModelJNI.StateVector_multiply__SWIG_2(swigCPtr, this, StateVector.getCPtr(aStateVector), aStateVector);
+    opensimModelCommonJNI.StateVector_multiply__SWIG_2(swigCPtr, this, StateVector.getCPtr(aStateVector), aStateVector);
   }
 
   public void divide(double aValue) {
-    opensimModelJNI.StateVector_divide__SWIG_0(swigCPtr, this, aValue);
+    opensimModelCommonJNI.StateVector_divide__SWIG_0(swigCPtr, this, aValue);
   }
 
   public void divide(int aN, double[] aY) {
-    opensimModelJNI.StateVector_divide__SWIG_1(swigCPtr, this, aN, aY);
+    opensimModelCommonJNI.StateVector_divide__SWIG_1(swigCPtr, this, aN, aY);
   }
 
   public void divide(StateVector aStateVector) {
-    opensimModelJNI.StateVector_divide__SWIG_2(swigCPtr, this, StateVector.getCPtr(aStateVector), aStateVector);
+    opensimModelCommonJNI.StateVector_divide__SWIG_2(swigCPtr, this, StateVector.getCPtr(aStateVector), aStateVector);
   }
 
 }

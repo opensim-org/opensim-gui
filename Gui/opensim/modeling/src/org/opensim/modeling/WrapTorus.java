@@ -12,7 +12,7 @@ public class WrapTorus extends WrapObject {
   private transient long swigCPtr;
 
   public WrapTorus(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.WrapTorus_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.WrapTorus_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class WrapTorus extends WrapObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_WrapTorus(swigCPtr);
+        opensimModelSimulationJNI.delete_WrapTorus(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,61 +36,61 @@ public class WrapTorus extends WrapObject {
   }
 
   public static WrapTorus safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.WrapTorus_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.WrapTorus_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new WrapTorus(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.WrapTorus_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.WrapTorus_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.WrapTorus_getClassName();
+    return opensimModelSimulationJNI.WrapTorus_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.WrapTorus_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.WrapTorus_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new WrapTorus(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.WrapTorus_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.WrapTorus_getConcreteClassName(swigCPtr, this);
   }
 
   public WrapTorus() {
-    this(opensimModelJNI.new_WrapTorus__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_WrapTorus__SWIG_0(), true);
   }
 
   public WrapTorus(WrapTorus aWrapTorus) {
-    this(opensimModelJNI.new_WrapTorus__SWIG_1(WrapTorus.getCPtr(aWrapTorus), aWrapTorus), true);
+    this(opensimModelSimulationJNI.new_WrapTorus__SWIG_1(WrapTorus.getCPtr(aWrapTorus), aWrapTorus), true);
   }
 
   public void copyData(WrapTorus aWrapTorus) {
-    opensimModelJNI.WrapTorus_copyData(swigCPtr, this, WrapTorus.getCPtr(aWrapTorus), aWrapTorus);
+    opensimModelSimulationJNI.WrapTorus_copyData(swigCPtr, this, WrapTorus.getCPtr(aWrapTorus), aWrapTorus);
   }
 
   public String getWrapTypeName() {
-    return opensimModelJNI.WrapTorus_getWrapTypeName(swigCPtr, this);
+    return opensimModelSimulationJNI.WrapTorus_getWrapTypeName(swigCPtr, this);
   }
 
   public String getDimensionsString() {
-    return opensimModelJNI.WrapTorus_getDimensionsString(swigCPtr, this);
+    return opensimModelSimulationJNI.WrapTorus_getDimensionsString(swigCPtr, this);
   }
 
   public double getInnerRadius() {
-    return opensimModelJNI.WrapTorus_getInnerRadius(swigCPtr, this);
+    return opensimModelSimulationJNI.WrapTorus_getInnerRadius(swigCPtr, this);
   }
 
   public double getOuterRadius() {
-    return opensimModelJNI.WrapTorus_getOuterRadius(swigCPtr, this);
+    return opensimModelSimulationJNI.WrapTorus_getOuterRadius(swigCPtr, this);
   }
 
   public void scale(Vec3 aScaleFactors) {
-    opensimModelJNI.WrapTorus_scale(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
+    opensimModelSimulationJNI.WrapTorus_scale(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
   }
 
   public void connectToModelAndBody(Model aModel, PhysicalFrame aBody) {
-    opensimModelJNI.WrapTorus_connectToModelAndBody(swigCPtr, this, Model.getCPtr(aModel), aModel, PhysicalFrame.getCPtr(aBody), aBody);
+    opensimModelSimulationJNI.WrapTorus_connectToModelAndBody(swigCPtr, this, Model.getCPtr(aModel), aModel, PhysicalFrame.getCPtr(aBody), aBody);
   }
 
 }

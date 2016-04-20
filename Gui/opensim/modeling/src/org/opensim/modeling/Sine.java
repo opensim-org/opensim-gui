@@ -12,7 +12,7 @@ public class Sine extends Function {
   private transient long swigCPtr;
 
   public Sine(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.Sine_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.Sine_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Sine extends Function {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_Sine(swigCPtr);
+        opensimModelCommonJNI.delete_Sine(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,58 +36,58 @@ public class Sine extends Function {
   }
 
   public static Sine safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Sine_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelCommonJNI.Sine_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Sine(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.Sine_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelCommonJNI.Sine_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.Sine_getClassName();
+    return opensimModelCommonJNI.Sine_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.Sine_clone(swigCPtr, this);
+    long cPtr = opensimModelCommonJNI.Sine_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Sine(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.Sine_getConcreteClassName(swigCPtr, this);
+    return opensimModelCommonJNI.Sine_getConcreteClassName(swigCPtr, this);
   }
 
   public Sine() {
-    this(opensimModelJNI.new_Sine__SWIG_0(), true);
+    this(opensimModelCommonJNI.new_Sine__SWIG_0(), true);
   }
 
   public Sine(double amplitude, double omega, double phase) {
-    this(opensimModelJNI.new_Sine__SWIG_1(amplitude, omega, phase), true);
+    this(opensimModelCommonJNI.new_Sine__SWIG_1(amplitude, omega, phase), true);
   }
 
   public Sine(Sine aFunc) {
-    this(opensimModelJNI.new_Sine__SWIG_2(Sine.getCPtr(aFunc), aFunc), true);
+    this(opensimModelCommonJNI.new_Sine__SWIG_2(Sine.getCPtr(aFunc), aFunc), true);
   }
 
   public double calcValue(Vector x) {
-    return opensimModelJNI.Sine_calcValue(swigCPtr, this, Vector.getCPtr(x), x);
+    return opensimModelCommonJNI.Sine_calcValue(swigCPtr, this, Vector.getCPtr(x), x);
   }
 
-  public double calcDerivative(StdVecInt derivComponents, Vector x) {
-    return opensimModelJNI.Sine_calcDerivative(swigCPtr, this, StdVecInt.getCPtr(derivComponents), derivComponents, Vector.getCPtr(x), x);
+  public double calcDerivative(StdVectorInt derivComponents, Vector x) {
+    return opensimModelCommonJNI.Sine_calcDerivative(swigCPtr, this, StdVectorInt.getCPtr(derivComponents), derivComponents, Vector.getCPtr(x), x);
   }
 
   public SWIGTYPE_p_SimTK__Function createSimTKFunction() {
-    long cPtr = opensimModelJNI.Sine_createSimTKFunction(swigCPtr, this);
+    long cPtr = opensimModelCommonJNI.Sine_createSimTKFunction(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_SimTK__Function(cPtr, false);
   }
 
   public int getArgumentSize() {
-    return opensimModelJNI.Sine_getArgumentSize(swigCPtr, this);
+    return opensimModelCommonJNI.Sine_getArgumentSize(swigCPtr, this);
   }
 
   public int getMaxDerivativeOrder() {
-    return opensimModelJNI.Sine_getMaxDerivativeOrder(swigCPtr, this);
+    return opensimModelCommonJNI.Sine_getMaxDerivativeOrder(swigCPtr, this);
   }
 
 }

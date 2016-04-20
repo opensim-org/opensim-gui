@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class RowVector extends RowVectorBaseDouble {
   private transient long swigCPtr;
 
-  public RowVector(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.RowVector_SWIGUpcast(cPtr), cMemoryOwn);
+  protected RowVector(long cPtr, boolean cMemoryOwn) {
+    super(opensimSimbodyJNI.RowVector_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(RowVector obj) {
+  protected static long getCPtr(RowVector obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,7 +28,7 @@ public class RowVector extends RowVectorBaseDouble {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_RowVector(swigCPtr);
+        opensimSimbodyJNI.delete_RowVector(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,27 +36,27 @@ public class RowVector extends RowVectorBaseDouble {
   }
 
   public RowVector() {
-    this(opensimModelJNI.new_RowVector__SWIG_0(), true);
+    this(opensimSimbodyJNI.new_RowVector__SWIG_0(), true);
   }
 
   public RowVector(RowVector src) {
-    this(opensimModelJNI.new_RowVector__SWIG_1(RowVector.getCPtr(src), src), true);
+    this(opensimSimbodyJNI.new_RowVector__SWIG_1(RowVector.getCPtr(src), src), true);
   }
 
   public RowVector(int n) {
-    this(opensimModelJNI.new_RowVector__SWIG_2(n), true);
+    this(opensimSimbodyJNI.new_RowVector__SWIG_2(n), true);
   }
 
   public RowVector(int n, SWIGTYPE_p_double cppInitialValues) {
-    this(opensimModelJNI.new_RowVector__SWIG_3(n, SWIGTYPE_p_double.getCPtr(cppInitialValues)), true);
+    this(opensimSimbodyJNI.new_RowVector__SWIG_3(n, SWIGTYPE_p_double.getCPtr(cppInitialValues)), true);
   }
 
   public RowVector(int n, double initialValue) {
-    this(opensimModelJNI.new_RowVector__SWIG_4(n, initialValue), true);
+    this(opensimSimbodyJNI.new_RowVector__SWIG_4(n, initialValue), true);
   }
 
   public RowVector(StdVectorDouble row) {
-    this(opensimModelJNI.new_RowVector__SWIG_5(StdVectorDouble.getCPtr(row), row), true);
+    this(opensimSimbodyJNI.new_RowVector__SWIG_5(StdVectorDouble.getCPtr(row), row), true);
   }
 
 }

@@ -12,7 +12,7 @@ public class SetPathWrap extends OpenSimObject {
   private transient long swigCPtr;
 
   public SetPathWrap(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.SetPathWrap_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.SetPathWrap_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class SetPathWrap extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_SetPathWrap(swigCPtr);
+        opensimModelSimulationJNI.delete_SetPathWrap(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,158 +36,158 @@ public class SetPathWrap extends OpenSimObject {
   }
 
   public static SetPathWrap safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.SetPathWrap_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.SetPathWrap_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new SetPathWrap(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.SetPathWrap_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.SetPathWrap_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.SetPathWrap_getClassName();
+    return opensimModelSimulationJNI.SetPathWrap_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.SetPathWrap_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.SetPathWrap_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new SetPathWrap(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.SetPathWrap_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.SetPathWrap_getConcreteClassName(swigCPtr, this);
   }
 
   public SetPathWrap() {
-    this(opensimModelJNI.new_SetPathWrap__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_SetPathWrap__SWIG_0(), true);
   }
 
   public SetPathWrap(String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelJNI.new_SetPathWrap__SWIG_1(aFileName, aUpdateFromXMLNode), true);
+    this(opensimModelSimulationJNI.new_SetPathWrap__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
   public SetPathWrap(String aFileName) {
-    this(opensimModelJNI.new_SetPathWrap__SWIG_2(aFileName), true);
+    this(opensimModelSimulationJNI.new_SetPathWrap__SWIG_2(aFileName), true);
   }
 
   public SetPathWrap(SetPathWrap aSet) {
-    this(opensimModelJNI.new_SetPathWrap__SWIG_3(SetPathWrap.getCPtr(aSet), aSet), true);
+    this(opensimModelSimulationJNI.new_SetPathWrap__SWIG_3(SetPathWrap.getCPtr(aSet), aSet), true);
   }
 
   public void setupGroups() {
-    opensimModelJNI.SetPathWrap_setupGroups(swigCPtr, this);
+    opensimModelSimulationJNI.SetPathWrap_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {
-    opensimModelJNI.SetPathWrap_setMemoryOwner(swigCPtr, this, aTrueFalse);
+    opensimModelSimulationJNI.SetPathWrap_setMemoryOwner(swigCPtr, this, aTrueFalse);
   }
 
   public boolean setSize(int aSize) {
-    return opensimModelJNI.SetPathWrap_setSize(swigCPtr, this, aSize);
+    return opensimModelSimulationJNI.SetPathWrap_setSize(swigCPtr, this, aSize);
   }
 
   public int getSize() {
-    return opensimModelJNI.SetPathWrap_getSize(swigCPtr, this);
+    return opensimModelSimulationJNI.SetPathWrap_getSize(swigCPtr, this);
   }
 
   public int getIndex(PathWrap aObject, int aStartIndex) {
-    return opensimModelJNI.SetPathWrap_getIndex__SWIG_0(swigCPtr, this, PathWrap.getCPtr(aObject), aObject, aStartIndex);
+    return opensimModelSimulationJNI.SetPathWrap_getIndex__SWIG_0(swigCPtr, this, PathWrap.getCPtr(aObject), aObject, aStartIndex);
   }
 
   public int getIndex(PathWrap aObject) {
-    return opensimModelJNI.SetPathWrap_getIndex__SWIG_1(swigCPtr, this, PathWrap.getCPtr(aObject), aObject);
+    return opensimModelSimulationJNI.SetPathWrap_getIndex__SWIG_1(swigCPtr, this, PathWrap.getCPtr(aObject), aObject);
   }
 
   public int getIndex(String aName, int aStartIndex) {
-    return opensimModelJNI.SetPathWrap_getIndex__SWIG_2(swigCPtr, this, aName, aStartIndex);
+    return opensimModelSimulationJNI.SetPathWrap_getIndex__SWIG_2(swigCPtr, this, aName, aStartIndex);
   }
 
   public int getIndex(String aName) {
-    return opensimModelJNI.SetPathWrap_getIndex__SWIG_3(swigCPtr, this, aName);
+    return opensimModelSimulationJNI.SetPathWrap_getIndex__SWIG_3(swigCPtr, this, aName);
   }
 
   public void getGroupNamesContaining(String aObjectName, ArrayStr rGroupNames) {
-    opensimModelJNI.SetPathWrap_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
+    opensimModelSimulationJNI.SetPathWrap_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
   public boolean adoptAndAppend(PathWrap aObject) {
-    return opensimModelJNI.SetPathWrap_adoptAndAppend(swigCPtr, this, PathWrap.getCPtr(aObject), aObject);
+    return opensimModelSimulationJNI.SetPathWrap_adoptAndAppend(swigCPtr, this, PathWrap.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(PathWrap aObject) {
-    return opensimModelJNI.SetPathWrap_cloneAndAppend(swigCPtr, this, PathWrap.getCPtr(aObject), aObject);
+    return opensimModelSimulationJNI.SetPathWrap_cloneAndAppend(swigCPtr, this, PathWrap.getCPtr(aObject), aObject);
   }
 
   public boolean insert(int aIndex, PathWrap aObject) {
-    return opensimModelJNI.SetPathWrap_insert(swigCPtr, this, aIndex, PathWrap.getCPtr(aObject), aObject);
+    return opensimModelSimulationJNI.SetPathWrap_insert(swigCPtr, this, aIndex, PathWrap.getCPtr(aObject), aObject);
   }
 
   public boolean remove(int aIndex) {
-    return opensimModelJNI.SetPathWrap_remove__SWIG_0(swigCPtr, this, aIndex);
+    return opensimModelSimulationJNI.SetPathWrap_remove__SWIG_0(swigCPtr, this, aIndex);
   }
 
   public boolean remove(PathWrap aObject) {
-    return opensimModelJNI.SetPathWrap_remove__SWIG_1(swigCPtr, this, PathWrap.getCPtr(aObject), aObject);
+    return opensimModelSimulationJNI.SetPathWrap_remove__SWIG_1(swigCPtr, this, PathWrap.getCPtr(aObject), aObject);
   }
 
   public void clearAndDestroy() {
-    opensimModelJNI.SetPathWrap_clearAndDestroy(swigCPtr, this);
+    opensimModelSimulationJNI.SetPathWrap_clearAndDestroy(swigCPtr, this);
   }
 
   public boolean set(int aIndex, PathWrap aObject, boolean preserveGroups) {
-    return opensimModelJNI.SetPathWrap_set__SWIG_0(swigCPtr, this, aIndex, PathWrap.getCPtr(aObject), aObject, preserveGroups);
+    return opensimModelSimulationJNI.SetPathWrap_set__SWIG_0(swigCPtr, this, aIndex, PathWrap.getCPtr(aObject), aObject, preserveGroups);
   }
 
   public boolean set(int aIndex, PathWrap aObject) {
-    return opensimModelJNI.SetPathWrap_set__SWIG_1(swigCPtr, this, aIndex, PathWrap.getCPtr(aObject), aObject);
+    return opensimModelSimulationJNI.SetPathWrap_set__SWIG_1(swigCPtr, this, aIndex, PathWrap.getCPtr(aObject), aObject);
   }
 
   public PathWrap get(int aIndex) {
-    return new PathWrap(opensimModelJNI.SetPathWrap_get__SWIG_0(swigCPtr, this, aIndex), false);
+    return new PathWrap(opensimModelSimulationJNI.SetPathWrap_get__SWIG_0(swigCPtr, this, aIndex), false);
   }
 
   public PathWrap get(String aName) {
-    return new PathWrap(opensimModelJNI.SetPathWrap_get__SWIG_1(swigCPtr, this, aName), false);
+    return new PathWrap(opensimModelSimulationJNI.SetPathWrap_get__SWIG_1(swigCPtr, this, aName), false);
   }
 
   public boolean contains(String aName) {
-    return opensimModelJNI.SetPathWrap_contains(swigCPtr, this, aName);
+    return opensimModelSimulationJNI.SetPathWrap_contains(swigCPtr, this, aName);
   }
 
   public void getNames(ArrayStr rNames) {
-    opensimModelJNI.SetPathWrap_getNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
+    opensimModelSimulationJNI.SetPathWrap_getNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
   }
 
   public int getNumGroups() {
-    return opensimModelJNI.SetPathWrap_getNumGroups(swigCPtr, this);
+    return opensimModelSimulationJNI.SetPathWrap_getNumGroups(swigCPtr, this);
   }
 
   public void addGroup(String aGroupName) {
-    opensimModelJNI.SetPathWrap_addGroup(swigCPtr, this, aGroupName);
+    opensimModelSimulationJNI.SetPathWrap_addGroup(swigCPtr, this, aGroupName);
   }
 
   public void removeGroup(String aGroupName) {
-    opensimModelJNI.SetPathWrap_removeGroup(swigCPtr, this, aGroupName);
+    opensimModelSimulationJNI.SetPathWrap_removeGroup(swigCPtr, this, aGroupName);
   }
 
   public void renameGroup(String oldGroupName, String newGroupName) {
-    opensimModelJNI.SetPathWrap_renameGroup(swigCPtr, this, oldGroupName, newGroupName);
+    opensimModelSimulationJNI.SetPathWrap_renameGroup(swigCPtr, this, oldGroupName, newGroupName);
   }
 
   public void addObjectToGroup(String aGroupName, String aObjectName) {
-    opensimModelJNI.SetPathWrap_addObjectToGroup(swigCPtr, this, aGroupName, aObjectName);
+    opensimModelSimulationJNI.SetPathWrap_addObjectToGroup(swigCPtr, this, aGroupName, aObjectName);
   }
 
   public void getGroupNames(ArrayStr rGroupNames) {
-    opensimModelJNI.SetPathWrap_getGroupNames(swigCPtr, this, ArrayStr.getCPtr(rGroupNames), rGroupNames);
+    opensimModelSimulationJNI.SetPathWrap_getGroupNames(swigCPtr, this, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
   public ObjectGroup getGroup(String aGroupName) {
-    long cPtr = opensimModelJNI.SetPathWrap_getGroup__SWIG_0(swigCPtr, this, aGroupName);
+    long cPtr = opensimModelSimulationJNI.SetPathWrap_getGroup__SWIG_0(swigCPtr, this, aGroupName);
     return (cPtr == 0) ? null : new ObjectGroup(cPtr, false);
   }
 
   public ObjectGroup getGroup(int aIndex) {
-    long cPtr = opensimModelJNI.SetPathWrap_getGroup__SWIG_1(swigCPtr, this, aIndex);
+    long cPtr = opensimModelSimulationJNI.SetPathWrap_getGroup__SWIG_1(swigCPtr, this, aIndex);
     return (cPtr == 0) ? null : new ObjectGroup(cPtr, false);
   }
 

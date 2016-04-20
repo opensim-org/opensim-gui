@@ -12,12 +12,12 @@ public class Vec4 {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  public Vec4(long cPtr, boolean cMemoryOwn) {
+  protected Vec4(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(Vec4 obj) {
+  protected static long getCPtr(Vec4 obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,114 +29,114 @@ public class Vec4 {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_Vec4(swigCPtr);
+        opensimSimbodyJNI.delete_Vec4(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public static int size() {
-    return opensimModelJNI.Vec4_size();
+    return opensimSimbodyJNI.Vec4_size();
   }
 
   public static int nrow() {
-    return opensimModelJNI.Vec4_nrow();
+    return opensimSimbodyJNI.Vec4_nrow();
   }
 
   public static int ncol() {
-    return opensimModelJNI.Vec4_ncol();
+    return opensimSimbodyJNI.Vec4_ncol();
   }
 
   public Vec4() {
-    this(opensimModelJNI.new_Vec4__SWIG_0(), true);
+    this(opensimSimbodyJNI.new_Vec4__SWIG_0(), true);
   }
 
   public Vec4(Vec4 src) {
-    this(opensimModelJNI.new_Vec4__SWIG_1(Vec4.getCPtr(src), src), true);
+    this(opensimSimbodyJNI.new_Vec4__SWIG_1(Vec4.getCPtr(src), src), true);
   }
 
   public Vec4(double e) {
-    this(opensimModelJNI.new_Vec4__SWIG_2(e), true);
+    this(opensimSimbodyJNI.new_Vec4__SWIG_2(e), true);
   }
 
   public Vec4(int i) {
-    this(opensimModelJNI.new_Vec4__SWIG_3(i), true);
+    this(opensimSimbodyJNI.new_Vec4__SWIG_3(i), true);
   }
 
   public Vec4(double e0, double e1) {
-    this(opensimModelJNI.new_Vec4__SWIG_4(e0, e1), true);
+    this(opensimSimbodyJNI.new_Vec4__SWIG_4(e0, e1), true);
   }
 
   public Vec4(double e0, double e1, double e2) {
-    this(opensimModelJNI.new_Vec4__SWIG_5(e0, e1, e2), true);
+    this(opensimSimbodyJNI.new_Vec4__SWIG_5(e0, e1, e2), true);
   }
 
   public Vec4(double e0, double e1, double e2, double e3) {
-    this(opensimModelJNI.new_Vec4__SWIG_6(e0, e1, e2, e3), true);
+    this(opensimSimbodyJNI.new_Vec4__SWIG_6(e0, e1, e2, e3), true);
   }
 
   public Vec4(double e0, double e1, double e2, double e3, double e4) {
-    this(opensimModelJNI.new_Vec4__SWIG_7(e0, e1, e2, e3, e4), true);
+    this(opensimSimbodyJNI.new_Vec4__SWIG_7(e0, e1, e2, e3, e4), true);
   }
 
   public Vec4(double e0, double e1, double e2, double e3, double e4, double e5) {
-    this(opensimModelJNI.new_Vec4__SWIG_8(e0, e1, e2, e3, e4, e5), true);
+    this(opensimSimbodyJNI.new_Vec4__SWIG_8(e0, e1, e2, e3, e4, e5), true);
   }
 
   public Vec4(double e0, double e1, double e2, double e3, double e4, double e5, double e6) {
-    this(opensimModelJNI.new_Vec4__SWIG_9(e0, e1, e2, e3, e4, e5, e6), true);
+    this(opensimSimbodyJNI.new_Vec4__SWIG_9(e0, e1, e2, e3, e4, e5, e6), true);
   }
 
   public Vec4(double e0, double e1, double e2, double e3, double e4, double e5, double e6, double e7) {
-    this(opensimModelJNI.new_Vec4__SWIG_10(e0, e1, e2, e3, e4, e5, e6, e7), true);
+    this(opensimSimbodyJNI.new_Vec4__SWIG_10(e0, e1, e2, e3, e4, e5, e6, e7), true);
   }
 
   public Vec4(double e0, double e1, double e2, double e3, double e4, double e5, double e6, double e7, double e8) {
-    this(opensimModelJNI.new_Vec4__SWIG_11(e0, e1, e2, e3, e4, e5, e6, e7, e8), true);
+    this(opensimSimbodyJNI.new_Vec4__SWIG_11(e0, e1, e2, e3, e4, e5, e6, e7, e8), true);
   }
 
   public void setToNaN() {
-    opensimModelJNI.Vec4_setToNaN(swigCPtr, this);
+    opensimSimbodyJNI.Vec4_setToNaN(swigCPtr, this);
   }
 
   public void setToZero() {
-    opensimModelJNI.Vec4_setToZero(swigCPtr, this);
+    opensimSimbodyJNI.Vec4_setToZero(swigCPtr, this);
   }
 
   public boolean isNaN() {
-    return opensimModelJNI.Vec4_isNaN(swigCPtr, this);
+    return opensimSimbodyJNI.Vec4_isNaN(swigCPtr, this);
   }
 
   public boolean isInf() {
-    return opensimModelJNI.Vec4_isInf(swigCPtr, this);
+    return opensimSimbodyJNI.Vec4_isInf(swigCPtr, this);
   }
 
   public boolean isFinite() {
-    return opensimModelJNI.Vec4_isFinite(swigCPtr, this);
+    return opensimSimbodyJNI.Vec4_isFinite(swigCPtr, this);
   }
 
   public static double getDefaultTolerance() {
-    return opensimModelJNI.Vec4_getDefaultTolerance();
+    return opensimSimbodyJNI.Vec4_getDefaultTolerance();
   }
 
   public boolean isNumericallyEqual(double e, double tol) {
-    return opensimModelJNI.Vec4_isNumericallyEqual__SWIG_2(swigCPtr, this, e, tol);
+    return opensimSimbodyJNI.Vec4_isNumericallyEqual__SWIG_2(swigCPtr, this, e, tol);
   }
 
   public boolean isNumericallyEqual(double e) {
-    return opensimModelJNI.Vec4_isNumericallyEqual__SWIG_3(swigCPtr, this, e);
+    return opensimSimbodyJNI.Vec4_isNumericallyEqual__SWIG_3(swigCPtr, this, e);
   }
 
   public String toString() {
-    return opensimModelJNI.Vec4_toString(swigCPtr, this);
+    return opensimSimbodyJNI.Vec4_toString(swigCPtr, this);
   }
 
   public void set(int i, double value) {
-    opensimModelJNI.Vec4_set(swigCPtr, this, i, value);
+    opensimSimbodyJNI.Vec4_set(swigCPtr, this, i, value);
   }
 
   public double get(int i) {
-    return opensimModelJNI.Vec4_get(swigCPtr, this, i);
+    return opensimSimbodyJNI.Vec4_get(swigCPtr, this, i);
   }
 
 }

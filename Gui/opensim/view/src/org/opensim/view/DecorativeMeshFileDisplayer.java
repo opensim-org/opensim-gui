@@ -44,7 +44,7 @@ public class DecorativeMeshFileDisplayer extends DecorativeGeometryDisplayer {
             String modelFilePath) {
         this.ag = ag.clone();
         this.modelFilePath = modelFilePath;
-        if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
+        //if (ag.hasUserRef()) setObj(ag.getUserRefAsObject());
      }
 
     /**

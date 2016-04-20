@@ -12,7 +12,7 @@ public class FrameGeometry extends Geometry {
   private transient long swigCPtr;
 
   public FrameGeometry(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.FrameGeometry_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.FrameGeometry_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class FrameGeometry extends Geometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_FrameGeometry(swigCPtr);
+        opensimModelSimulationJNI.delete_FrameGeometry(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,69 +36,69 @@ public class FrameGeometry extends Geometry {
   }
 
   public static FrameGeometry safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.FrameGeometry_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.FrameGeometry_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new FrameGeometry(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.FrameGeometry_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.FrameGeometry_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.FrameGeometry_getClassName();
+    return opensimModelSimulationJNI.FrameGeometry_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.FrameGeometry_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.FrameGeometry_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new FrameGeometry(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.FrameGeometry_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.FrameGeometry_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_display_radius(FrameGeometry source) {
-    opensimModelJNI.FrameGeometry_copyProperty_display_radius(swigCPtr, this, FrameGeometry.getCPtr(source), source);
+    opensimModelSimulationJNI.FrameGeometry_copyProperty_display_radius(swigCPtr, this, FrameGeometry.getCPtr(source), source);
   }
 
   public double get_display_radius(int i) {
-    return opensimModelJNI.FrameGeometry_get_display_radius__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.FrameGeometry_get_display_radius__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_display_radius(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.FrameGeometry_upd_display_radius__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.FrameGeometry_upd_display_radius__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_display_radius(int i, double value) {
-    opensimModelJNI.FrameGeometry_set_display_radius__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.FrameGeometry_set_display_radius__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_display_radius(double value) {
-    return opensimModelJNI.FrameGeometry_append_display_radius(swigCPtr, this, value);
+    return opensimModelSimulationJNI.FrameGeometry_append_display_radius(swigCPtr, this, value);
   }
 
   public void constructProperty_display_radius(double initValue) {
-    opensimModelJNI.FrameGeometry_constructProperty_display_radius(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.FrameGeometry_constructProperty_display_radius(swigCPtr, this, initValue);
   }
 
   public double get_display_radius() {
-    return opensimModelJNI.FrameGeometry_get_display_radius__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.FrameGeometry_get_display_radius__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_display_radius() {
-    return new SWIGTYPE_p_double(opensimModelJNI.FrameGeometry_upd_display_radius__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.FrameGeometry_upd_display_radius__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_display_radius(double value) {
-    opensimModelJNI.FrameGeometry_set_display_radius__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.FrameGeometry_set_display_radius__SWIG_1(swigCPtr, this, value);
   }
 
   public FrameGeometry(double scale) {
-    this(opensimModelJNI.new_FrameGeometry__SWIG_0(scale), true);
+    this(opensimModelSimulationJNI.new_FrameGeometry__SWIG_0(scale), true);
   }
 
   public FrameGeometry() {
-    this(opensimModelJNI.new_FrameGeometry__SWIG_1(), true);
+    this(opensimModelSimulationJNI.new_FrameGeometry__SWIG_1(), true);
   }
 
 }

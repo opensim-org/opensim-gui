@@ -12,7 +12,7 @@ public class Geometry extends Component {
   private transient long swigCPtr;
 
   public Geometry(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.Geometry_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.Geometry_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Geometry extends Component {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_Geometry(swigCPtr);
+        opensimModelSimulationJNI.delete_Geometry(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,141 +36,141 @@ public class Geometry extends Component {
   }
 
   public static Geometry safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Geometry_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.Geometry_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Geometry(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.Geometry_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.Geometry_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.Geometry_getClassName();
+    return opensimModelSimulationJNI.Geometry_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.Geometry_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.Geometry_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Geometry(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.Geometry_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.Geometry_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_scale_factors(Geometry source) {
-    opensimModelJNI.Geometry_copyProperty_scale_factors(swigCPtr, this, Geometry.getCPtr(source), source);
+    opensimModelSimulationJNI.Geometry_copyProperty_scale_factors(swigCPtr, this, Geometry.getCPtr(source), source);
   }
 
   public Vec3 get_scale_factors(int i) {
-    return new Vec3(opensimModelJNI.Geometry_get_scale_factors__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimModelSimulationJNI.Geometry_get_scale_factors__SWIG_0(swigCPtr, this, i), false);
   }
 
   public Vec3 upd_scale_factors(int i) {
-    return new Vec3(opensimModelJNI.Geometry_upd_scale_factors__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimModelSimulationJNI.Geometry_upd_scale_factors__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_scale_factors(int i, Vec3 value) {
-    opensimModelJNI.Geometry_set_scale_factors__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+    opensimModelSimulationJNI.Geometry_set_scale_factors__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
   }
 
   public int append_scale_factors(Vec3 value) {
-    return opensimModelJNI.Geometry_append_scale_factors(swigCPtr, this, Vec3.getCPtr(value), value);
+    return opensimModelSimulationJNI.Geometry_append_scale_factors(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void constructProperty_scale_factors(Vec3 initValue) {
-    opensimModelJNI.Geometry_constructProperty_scale_factors(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+    opensimModelSimulationJNI.Geometry_constructProperty_scale_factors(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
   }
 
   public Vec3 get_scale_factors() {
-    return new Vec3(opensimModelJNI.Geometry_get_scale_factors__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimModelSimulationJNI.Geometry_get_scale_factors__SWIG_1(swigCPtr, this), false);
   }
 
   public Vec3 upd_scale_factors() {
-    return new Vec3(opensimModelJNI.Geometry_upd_scale_factors__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimModelSimulationJNI.Geometry_upd_scale_factors__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_scale_factors(Vec3 value) {
-    opensimModelJNI.Geometry_set_scale_factors__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+    opensimModelSimulationJNI.Geometry_set_scale_factors__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void copyProperty_Appearance(Geometry source) {
-    opensimModelJNI.Geometry_copyProperty_Appearance(swigCPtr, this, Geometry.getCPtr(source), source);
+    opensimModelSimulationJNI.Geometry_copyProperty_Appearance(swigCPtr, this, Geometry.getCPtr(source), source);
   }
 
   public Appearance get_Appearance(int i) {
-    return new Appearance(opensimModelJNI.Geometry_get_Appearance__SWIG_0(swigCPtr, this, i), false);
+    return new Appearance(opensimModelSimulationJNI.Geometry_get_Appearance__SWIG_0(swigCPtr, this, i), false);
   }
 
   public Appearance upd_Appearance(int i) {
-    return new Appearance(opensimModelJNI.Geometry_upd_Appearance__SWIG_0(swigCPtr, this, i), false);
+    return new Appearance(opensimModelSimulationJNI.Geometry_upd_Appearance__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_Appearance(int i, Appearance value) {
-    opensimModelJNI.Geometry_set_Appearance__SWIG_0(swigCPtr, this, i, Appearance.getCPtr(value), value);
+    opensimModelSimulationJNI.Geometry_set_Appearance__SWIG_0(swigCPtr, this, i, Appearance.getCPtr(value), value);
   }
 
   public int append_Appearance(Appearance value) {
-    return opensimModelJNI.Geometry_append_Appearance(swigCPtr, this, Appearance.getCPtr(value), value);
+    return opensimModelSimulationJNI.Geometry_append_Appearance(swigCPtr, this, Appearance.getCPtr(value), value);
   }
 
   public void constructProperty_Appearance(Appearance initValue) {
-    opensimModelJNI.Geometry_constructProperty_Appearance(swigCPtr, this, Appearance.getCPtr(initValue), initValue);
+    opensimModelSimulationJNI.Geometry_constructProperty_Appearance(swigCPtr, this, Appearance.getCPtr(initValue), initValue);
   }
 
   public Appearance get_Appearance() {
-    return new Appearance(opensimModelJNI.Geometry_get_Appearance__SWIG_1(swigCPtr, this), false);
+    return new Appearance(opensimModelSimulationJNI.Geometry_get_Appearance__SWIG_1(swigCPtr, this), false);
   }
 
   public Appearance upd_Appearance() {
-    return new Appearance(opensimModelJNI.Geometry_upd_Appearance__SWIG_1(swigCPtr, this), false);
+    return new Appearance(opensimModelSimulationJNI.Geometry_upd_Appearance__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_Appearance(Appearance value) {
-    opensimModelJNI.Geometry_set_Appearance__SWIG_1(swigCPtr, this, Appearance.getCPtr(value), value);
+    opensimModelSimulationJNI.Geometry_set_Appearance__SWIG_1(swigCPtr, this, Appearance.getCPtr(value), value);
   }
 
   public void setFrameName(String name) {
-    opensimModelJNI.Geometry_setFrameName(swigCPtr, this, name);
+    opensimModelSimulationJNI.Geometry_setFrameName(swigCPtr, this, name);
   }
 
   public void setFrame(Frame frame) {
-    opensimModelJNI.Geometry_setFrame(swigCPtr, this, Frame.getCPtr(frame), frame);
+    opensimModelSimulationJNI.Geometry_setFrame(swigCPtr, this, Frame.getCPtr(frame), frame);
   }
 
   public String getFrameName() {
-    return opensimModelJNI.Geometry_getFrameName(swigCPtr, this);
+    return opensimModelSimulationJNI.Geometry_getFrameName(swigCPtr, this);
   }
 
   public Frame getFrame() {
-    return new Frame(opensimModelJNI.Geometry_getFrame(swigCPtr, this), false);
+    return new Frame(opensimModelSimulationJNI.Geometry_getFrame(swigCPtr, this), false);
   }
 
   public void setColor(Vec3 color) {
-    opensimModelJNI.Geometry_setColor(swigCPtr, this, Vec3.getCPtr(color), color);
+    opensimModelSimulationJNI.Geometry_setColor(swigCPtr, this, Vec3.getCPtr(color), color);
   }
 
   public Vec3 getColor() {
-    return new Vec3(opensimModelJNI.Geometry_getColor(swigCPtr, this), false);
+    return new Vec3(opensimModelSimulationJNI.Geometry_getColor(swigCPtr, this), false);
   }
 
   public void setOpacity(double opacity) {
-    opensimModelJNI.Geometry_setOpacity(swigCPtr, this, opacity);
+    opensimModelSimulationJNI.Geometry_setOpacity(swigCPtr, this, opacity);
   }
 
   public double getOpacity() {
-    return opensimModelJNI.Geometry_getOpacity(swigCPtr, this);
+    return opensimModelSimulationJNI.Geometry_getOpacity(swigCPtr, this);
   }
 
   public void setRepresentation(DecorativeGeometry.Representation rep) {
-    opensimModelJNI.Geometry_setRepresentation(swigCPtr, this, rep.swigValue());
+    opensimModelSimulationJNI.Geometry_setRepresentation(swigCPtr, this, rep.swigValue());
   }
 
   public DecorativeGeometry.Representation getRepresentation() {
-    return DecorativeGeometry.Representation.swigToEnum(opensimModelJNI.Geometry_getRepresentation(swigCPtr, this));
+    return DecorativeGeometry.Representation.swigToEnum(opensimModelSimulationJNI.Geometry_getRepresentation(swigCPtr, this));
   }
 
   public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
-    opensimModelJNI.Geometry_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
+    opensimModelSimulationJNI.Geometry_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
   }
 
 }

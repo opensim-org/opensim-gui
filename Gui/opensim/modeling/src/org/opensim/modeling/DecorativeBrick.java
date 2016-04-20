@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class DecorativeBrick extends DecorativeGeometry {
   private transient long swigCPtr;
 
-  public DecorativeBrick(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.DecorativeBrick_SWIGUpcast(cPtr), cMemoryOwn);
+  protected DecorativeBrick(long cPtr, boolean cMemoryOwn) {
+    super(opensimSimbodyJNI.DecorativeBrick_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(DecorativeBrick obj) {
+  protected static long getCPtr(DecorativeBrick obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,7 +28,7 @@ public class DecorativeBrick extends DecorativeGeometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_DecorativeBrick(swigCPtr);
+        opensimSimbodyJNI.delete_DecorativeBrick(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,64 +36,64 @@ public class DecorativeBrick extends DecorativeGeometry {
   }
 
   public DecorativeBrick(Vec3 halfLengths) {
-    this(opensimModelJNI.new_DecorativeBrick__SWIG_0(Vec3.getCPtr(halfLengths), halfLengths), true);
+    this(opensimSimbodyJNI.new_DecorativeBrick__SWIG_0(Vec3.getCPtr(halfLengths), halfLengths), true);
   }
 
   public DecorativeBrick() {
-    this(opensimModelJNI.new_DecorativeBrick__SWIG_1(), true);
+    this(opensimSimbodyJNI.new_DecorativeBrick__SWIG_1(), true);
   }
 
   public DecorativeBrick setHalfLengths(Vec3 arg0) {
-    return new DecorativeBrick(opensimModelJNI.DecorativeBrick_setHalfLengths(swigCPtr, this, Vec3.getCPtr(arg0), arg0), false);
+    return new DecorativeBrick(opensimSimbodyJNI.DecorativeBrick_setHalfLengths(swigCPtr, this, Vec3.getCPtr(arg0), arg0), false);
   }
 
   public Vec3 getHalfLengths() {
-    return new Vec3(opensimModelJNI.DecorativeBrick_getHalfLengths(swigCPtr, this), false);
+    return new Vec3(opensimSimbodyJNI.DecorativeBrick_getHalfLengths(swigCPtr, this), false);
   }
 
   public DecorativeBrick setBodyId(int b) {
-    return new DecorativeBrick(opensimModelJNI.DecorativeBrick_setBodyId(swigCPtr, this, b), false);
+    return new DecorativeBrick(opensimSimbodyJNI.DecorativeBrick_setBodyId(swigCPtr, this, b), false);
   }
 
   public DecorativeBrick setIndexOnBody(int x) {
-    return new DecorativeBrick(opensimModelJNI.DecorativeBrick_setIndexOnBody(swigCPtr, this, x), false);
+    return new DecorativeBrick(opensimSimbodyJNI.DecorativeBrick_setIndexOnBody(swigCPtr, this, x), false);
   }
 
   public DecorativeBrick setUserRef(SWIGTYPE_p_void p) {
-    return new DecorativeBrick(opensimModelJNI.DecorativeBrick_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
+    return new DecorativeBrick(opensimSimbodyJNI.DecorativeBrick_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
   }
 
   public DecorativeBrick setTransform(Transform X_BD) {
-    return new DecorativeBrick(opensimModelJNI.DecorativeBrick_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
+    return new DecorativeBrick(opensimSimbodyJNI.DecorativeBrick_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
   }
 
   public DecorativeBrick setResolution(double r) {
-    return new DecorativeBrick(opensimModelJNI.DecorativeBrick_setResolution(swigCPtr, this, r), false);
+    return new DecorativeBrick(opensimSimbodyJNI.DecorativeBrick_setResolution(swigCPtr, this, r), false);
   }
 
   public DecorativeBrick setScaleFactors(Vec3 s) {
-    return new DecorativeBrick(opensimModelJNI.DecorativeBrick_setScaleFactors(swigCPtr, this, Vec3.getCPtr(s), s), false);
+    return new DecorativeBrick(opensimSimbodyJNI.DecorativeBrick_setScaleFactors(swigCPtr, this, Vec3.getCPtr(s), s), false);
   }
 
   public DecorativeBrick setColor(Vec3 rgb) {
-    return new DecorativeBrick(opensimModelJNI.DecorativeBrick_setColor(swigCPtr, this, Vec3.getCPtr(rgb), rgb), false);
+    return new DecorativeBrick(opensimSimbodyJNI.DecorativeBrick_setColor(swigCPtr, this, Vec3.getCPtr(rgb), rgb), false);
   }
 
   public DecorativeBrick setOpacity(double o) {
-    return new DecorativeBrick(opensimModelJNI.DecorativeBrick_setOpacity(swigCPtr, this, o), false);
+    return new DecorativeBrick(opensimSimbodyJNI.DecorativeBrick_setOpacity(swigCPtr, this, o), false);
   }
 
   public DecorativeBrick setLineThickness(double t) {
-    return new DecorativeBrick(opensimModelJNI.DecorativeBrick_setLineThickness(swigCPtr, this, t), false);
+    return new DecorativeBrick(opensimSimbodyJNI.DecorativeBrick_setLineThickness(swigCPtr, this, t), false);
   }
 
   public DecorativeBrick setRepresentation(DecorativeGeometry.Representation r) {
-    return new DecorativeBrick(opensimModelJNI.DecorativeBrick_setRepresentation(swigCPtr, this, r.swigValue()), false);
+    return new DecorativeBrick(opensimSimbodyJNI.DecorativeBrick_setRepresentation(swigCPtr, this, r.swigValue()), false);
   }
 
   public DecorativeBrick clone() {
-    long cPtr = opensimModelJNI.DecorativeBrick_clone(swigCPtr, this);
-    return (cPtr == 0) ? null : new DecorativeBrick(cPtr, true);
+    long cPtr = opensimSimbodyJNI.DecorativeBrick_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new DecorativeBrick(cPtr, false);
   }
 
 }

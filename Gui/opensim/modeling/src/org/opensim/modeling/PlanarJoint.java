@@ -12,7 +12,7 @@ public class PlanarJoint extends Joint {
   private transient long swigCPtr;
 
   public PlanarJoint(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.PlanarJoint_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.PlanarJoint_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class PlanarJoint extends Joint {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_PlanarJoint(swigCPtr);
+        opensimModelSimulationJNI.delete_PlanarJoint(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,33 +36,33 @@ public class PlanarJoint extends Joint {
   }
 
   public static PlanarJoint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.PlanarJoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.PlanarJoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new PlanarJoint(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.PlanarJoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.PlanarJoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.PlanarJoint_getClassName();
+    return opensimModelSimulationJNI.PlanarJoint_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.PlanarJoint_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.PlanarJoint_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new PlanarJoint(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.PlanarJoint_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.PlanarJoint_getConcreteClassName(swigCPtr, this);
   }
 
-  public PlanarJoint(String name, String parentName, String childName) {
-    this(opensimModelJNI.new_PlanarJoint__SWIG_0(name, parentName, childName), true);
+  public PlanarJoint(String name, PhysicalFrame parent, PhysicalFrame child) {
+    this(opensimModelSimulationJNI.new_PlanarJoint__SWIG_0(name, PhysicalFrame.getCPtr(parent), parent, PhysicalFrame.getCPtr(child), child), true);
   }
 
   public PlanarJoint(String name, PhysicalFrame parent, Vec3 locationInParent, Vec3 orientationInParent, PhysicalFrame child, Vec3 locationInChild, Vec3 orientationInChild) {
-    this(opensimModelJNI.new_PlanarJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
+    this(opensimModelSimulationJNI.new_PlanarJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
   }
 
 }

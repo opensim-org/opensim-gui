@@ -12,7 +12,7 @@ public class Brick extends Geometry {
   private transient long swigCPtr;
 
   public Brick(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.Brick_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.Brick_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Brick extends Geometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_Brick(swigCPtr);
+        opensimModelSimulationJNI.delete_Brick(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,69 +36,69 @@ public class Brick extends Geometry {
   }
 
   public static Brick safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Brick_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.Brick_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Brick(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.Brick_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.Brick_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.Brick_getClassName();
+    return opensimModelSimulationJNI.Brick_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.Brick_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.Brick_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Brick(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.Brick_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.Brick_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_half_lengths(Brick source) {
-    opensimModelJNI.Brick_copyProperty_half_lengths(swigCPtr, this, Brick.getCPtr(source), source);
+    opensimModelSimulationJNI.Brick_copyProperty_half_lengths(swigCPtr, this, Brick.getCPtr(source), source);
   }
 
   public Vec3 get_half_lengths(int i) {
-    return new Vec3(opensimModelJNI.Brick_get_half_lengths__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimModelSimulationJNI.Brick_get_half_lengths__SWIG_0(swigCPtr, this, i), false);
   }
 
   public Vec3 upd_half_lengths(int i) {
-    return new Vec3(opensimModelJNI.Brick_upd_half_lengths__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimModelSimulationJNI.Brick_upd_half_lengths__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_half_lengths(int i, Vec3 value) {
-    opensimModelJNI.Brick_set_half_lengths__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+    opensimModelSimulationJNI.Brick_set_half_lengths__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
   }
 
   public int append_half_lengths(Vec3 value) {
-    return opensimModelJNI.Brick_append_half_lengths(swigCPtr, this, Vec3.getCPtr(value), value);
+    return opensimModelSimulationJNI.Brick_append_half_lengths(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void constructProperty_half_lengths(Vec3 initValue) {
-    opensimModelJNI.Brick_constructProperty_half_lengths(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+    opensimModelSimulationJNI.Brick_constructProperty_half_lengths(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
   }
 
   public Vec3 get_half_lengths() {
-    return new Vec3(opensimModelJNI.Brick_get_half_lengths__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimModelSimulationJNI.Brick_get_half_lengths__SWIG_1(swigCPtr, this), false);
   }
 
   public Vec3 upd_half_lengths() {
-    return new Vec3(opensimModelJNI.Brick_upd_half_lengths__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimModelSimulationJNI.Brick_upd_half_lengths__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_half_lengths(Vec3 value) {
-    opensimModelJNI.Brick_set_half_lengths__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+    opensimModelSimulationJNI.Brick_set_half_lengths__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public Brick() {
-    this(opensimModelJNI.new_Brick__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_Brick__SWIG_0(), true);
   }
 
   public Brick(Vec3 halfLengths) {
-    this(opensimModelJNI.new_Brick__SWIG_1(Vec3.getCPtr(halfLengths), halfLengths), true);
+    this(opensimModelSimulationJNI.new_Brick__SWIG_1(Vec3.getCPtr(halfLengths), halfLengths), true);
   }
 
 }

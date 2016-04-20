@@ -12,7 +12,7 @@ public class Solver extends OpenSimObject {
   private transient long swigCPtr;
 
   public Solver(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.Solver_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.Solver_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Solver extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_Solver(swigCPtr);
+        opensimModelSimulationJNI.delete_Solver(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,29 +36,29 @@ public class Solver extends OpenSimObject {
   }
 
   public static Solver safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Solver_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.Solver_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Solver(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.Solver_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.Solver_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.Solver_getClassName();
+    return opensimModelSimulationJNI.Solver_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.Solver_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.Solver_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Solver(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.Solver_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.Solver_getConcreteClassName(swigCPtr, this);
   }
 
   public Model getModel() {
-    return new Model(opensimModelJNI.Solver_getModel(swigCPtr, this), false);
+    return new Model(opensimModelSimulationJNI.Solver_getModel(swigCPtr, this), false);
   }
 
 }

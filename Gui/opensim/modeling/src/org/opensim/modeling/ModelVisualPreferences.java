@@ -12,7 +12,7 @@ public class ModelVisualPreferences extends OpenSimObject {
   private transient long swigCPtr;
 
   public ModelVisualPreferences(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ModelVisualPreferences_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.ModelVisualPreferences_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ModelVisualPreferences extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ModelVisualPreferences(swigCPtr);
+        opensimModelSimulationJNI.delete_ModelVisualPreferences(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,65 +36,65 @@ public class ModelVisualPreferences extends OpenSimObject {
   }
 
   public static ModelVisualPreferences safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ModelVisualPreferences_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.ModelVisualPreferences_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ModelVisualPreferences(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.ModelVisualPreferences_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.ModelVisualPreferences_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.ModelVisualPreferences_getClassName();
+    return opensimModelSimulationJNI.ModelVisualPreferences_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.ModelVisualPreferences_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.ModelVisualPreferences_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ModelVisualPreferences(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.ModelVisualPreferences_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.ModelVisualPreferences_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_ModelDisplayHints(ModelVisualPreferences source) {
-    opensimModelJNI.ModelVisualPreferences_copyProperty_ModelDisplayHints(swigCPtr, this, ModelVisualPreferences.getCPtr(source), source);
+    opensimModelSimulationJNI.ModelVisualPreferences_copyProperty_ModelDisplayHints(swigCPtr, this, ModelVisualPreferences.getCPtr(source), source);
   }
 
   public ModelDisplayHints get_ModelDisplayHints(int i) {
-    return new ModelDisplayHints(opensimModelJNI.ModelVisualPreferences_get_ModelDisplayHints__SWIG_0(swigCPtr, this, i), false);
+    return new ModelDisplayHints(opensimModelSimulationJNI.ModelVisualPreferences_get_ModelDisplayHints__SWIG_0(swigCPtr, this, i), false);
   }
 
   public ModelDisplayHints upd_ModelDisplayHints(int i) {
-    return new ModelDisplayHints(opensimModelJNI.ModelVisualPreferences_upd_ModelDisplayHints__SWIG_0(swigCPtr, this, i), false);
+    return new ModelDisplayHints(opensimModelSimulationJNI.ModelVisualPreferences_upd_ModelDisplayHints__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_ModelDisplayHints(int i, ModelDisplayHints value) {
-    opensimModelJNI.ModelVisualPreferences_set_ModelDisplayHints__SWIG_0(swigCPtr, this, i, ModelDisplayHints.getCPtr(value), value);
+    opensimModelSimulationJNI.ModelVisualPreferences_set_ModelDisplayHints__SWIG_0(swigCPtr, this, i, ModelDisplayHints.getCPtr(value), value);
   }
 
   public int append_ModelDisplayHints(ModelDisplayHints value) {
-    return opensimModelJNI.ModelVisualPreferences_append_ModelDisplayHints(swigCPtr, this, ModelDisplayHints.getCPtr(value), value);
+    return opensimModelSimulationJNI.ModelVisualPreferences_append_ModelDisplayHints(swigCPtr, this, ModelDisplayHints.getCPtr(value), value);
   }
 
   public void constructProperty_ModelDisplayHints(ModelDisplayHints initValue) {
-    opensimModelJNI.ModelVisualPreferences_constructProperty_ModelDisplayHints(swigCPtr, this, ModelDisplayHints.getCPtr(initValue), initValue);
+    opensimModelSimulationJNI.ModelVisualPreferences_constructProperty_ModelDisplayHints(swigCPtr, this, ModelDisplayHints.getCPtr(initValue), initValue);
   }
 
   public ModelDisplayHints get_ModelDisplayHints() {
-    return new ModelDisplayHints(opensimModelJNI.ModelVisualPreferences_get_ModelDisplayHints__SWIG_1(swigCPtr, this), false);
+    return new ModelDisplayHints(opensimModelSimulationJNI.ModelVisualPreferences_get_ModelDisplayHints__SWIG_1(swigCPtr, this), false);
   }
 
   public ModelDisplayHints upd_ModelDisplayHints() {
-    return new ModelDisplayHints(opensimModelJNI.ModelVisualPreferences_upd_ModelDisplayHints__SWIG_1(swigCPtr, this), false);
+    return new ModelDisplayHints(opensimModelSimulationJNI.ModelVisualPreferences_upd_ModelDisplayHints__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_ModelDisplayHints(ModelDisplayHints value) {
-    opensimModelJNI.ModelVisualPreferences_set_ModelDisplayHints__SWIG_1(swigCPtr, this, ModelDisplayHints.getCPtr(value), value);
+    opensimModelSimulationJNI.ModelVisualPreferences_set_ModelDisplayHints__SWIG_1(swigCPtr, this, ModelDisplayHints.getCPtr(value), value);
   }
 
   public ModelVisualPreferences() {
-    this(opensimModelJNI.new_ModelVisualPreferences(), true);
+    this(opensimModelSimulationJNI.new_ModelVisualPreferences(), true);
   }
 
 }

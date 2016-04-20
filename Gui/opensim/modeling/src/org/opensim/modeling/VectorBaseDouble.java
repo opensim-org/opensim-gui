@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class VectorBaseDouble extends MatrixBaseDouble {
   private transient long swigCPtr;
 
-  public VectorBaseDouble(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.VectorBaseDouble_SWIGUpcast(cPtr), cMemoryOwn);
+  protected VectorBaseDouble(long cPtr, boolean cMemoryOwn) {
+    super(opensimSimbodyJNI.VectorBaseDouble_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(VectorBaseDouble obj) {
+  protected static long getCPtr(VectorBaseDouble obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,7 +28,7 @@ public class VectorBaseDouble extends MatrixBaseDouble {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_VectorBaseDouble(swigCPtr);
+        opensimSimbodyJNI.delete_VectorBaseDouble(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,51 +36,51 @@ public class VectorBaseDouble extends MatrixBaseDouble {
   }
 
   public VectorBaseDouble(int m) {
-    this(opensimModelJNI.new_VectorBaseDouble__SWIG_0(m), true);
+    this(opensimSimbodyJNI.new_VectorBaseDouble__SWIG_0(m), true);
   }
 
   public VectorBaseDouble() {
-    this(opensimModelJNI.new_VectorBaseDouble__SWIG_1(), true);
+    this(opensimSimbodyJNI.new_VectorBaseDouble__SWIG_1(), true);
   }
 
   public VectorBaseDouble(VectorBaseDouble source) {
-    this(opensimModelJNI.new_VectorBaseDouble__SWIG_2(VectorBaseDouble.getCPtr(source), source), true);
+    this(opensimSimbodyJNI.new_VectorBaseDouble__SWIG_2(VectorBaseDouble.getCPtr(source), source), true);
   }
 
   public int size() {
-    return opensimModelJNI.VectorBaseDouble_size(swigCPtr, this);
+    return opensimSimbodyJNI.VectorBaseDouble_size(swigCPtr, this);
   }
 
   public int nrow() {
-    return opensimModelJNI.VectorBaseDouble_nrow(swigCPtr, this);
+    return opensimSimbodyJNI.VectorBaseDouble_nrow(swigCPtr, this);
   }
 
   public int ncol() {
-    return opensimModelJNI.VectorBaseDouble_ncol(swigCPtr, this);
+    return opensimSimbodyJNI.VectorBaseDouble_ncol(swigCPtr, this);
   }
 
   public VectorBaseDouble resize(int m) {
-    return new VectorBaseDouble(opensimModelJNI.VectorBaseDouble_resize(swigCPtr, this, m), false);
+    return new VectorBaseDouble(opensimSimbodyJNI.VectorBaseDouble_resize(swigCPtr, this, m), false);
   }
 
   public VectorBaseDouble resizeKeep(int m) {
-    return new VectorBaseDouble(opensimModelJNI.VectorBaseDouble_resizeKeep(swigCPtr, this, m), false);
+    return new VectorBaseDouble(opensimSimbodyJNI.VectorBaseDouble_resizeKeep(swigCPtr, this, m), false);
   }
 
   public void clear() {
-    opensimModelJNI.VectorBaseDouble_clear(swigCPtr, this);
+    opensimSimbodyJNI.VectorBaseDouble_clear(swigCPtr, this);
   }
 
   public double sum() {
-    return opensimModelJNI.VectorBaseDouble_sum(swigCPtr, this);
+    return opensimSimbodyJNI.VectorBaseDouble_sum(swigCPtr, this);
   }
 
   public double __getitem__(long i) {
-    return opensimModelJNI.VectorBaseDouble___getitem__(swigCPtr, this, i);
+    return opensimSimbodyJNI.VectorBaseDouble___getitem__(swigCPtr, this, i);
   }
 
   public void __setitem__(long i, double value) {
-    opensimModelJNI.VectorBaseDouble___setitem__(swigCPtr, this, i, value);
+    opensimSimbodyJNI.VectorBaseDouble___setitem__(swigCPtr, this, i, value);
   }
 
 }

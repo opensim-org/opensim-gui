@@ -12,7 +12,7 @@ public class ComponentAlreadyPartOfOwnershipTree extends OpenSimException {
   private transient long swigCPtr;
 
   public ComponentAlreadyPartOfOwnershipTree(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ComponentAlreadyPartOfOwnershipTree_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.ComponentAlreadyPartOfOwnershipTree_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ComponentAlreadyPartOfOwnershipTree extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ComponentAlreadyPartOfOwnershipTree(swigCPtr);
+        opensimModelSimulationJNI.delete_ComponentAlreadyPartOfOwnershipTree(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class ComponentAlreadyPartOfOwnershipTree extends OpenSimException {
   }
 
   public ComponentAlreadyPartOfOwnershipTree(String file, long line, String func, String compName, String thisName) {
-    this(opensimModelJNI.new_ComponentAlreadyPartOfOwnershipTree(file, line, func, compName, thisName), true);
+    this(opensimModelSimulationJNI.new_ComponentAlreadyPartOfOwnershipTree(file, line, func, compName, thisName), true);
   }
 
 }

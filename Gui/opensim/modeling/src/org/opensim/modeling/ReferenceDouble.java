@@ -12,7 +12,7 @@ public class ReferenceDouble extends OpenSimObject {
   private transient long swigCPtr;
 
   public ReferenceDouble(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ReferenceDouble_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.ReferenceDouble_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ReferenceDouble extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ReferenceDouble(swigCPtr);
+        opensimModelSimulationJNI.delete_ReferenceDouble(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,53 +36,53 @@ public class ReferenceDouble extends OpenSimObject {
   }
 
   public static ReferenceDouble safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ReferenceDouble_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.ReferenceDouble_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ReferenceDouble(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.ReferenceDouble_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.ReferenceDouble_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.ReferenceDouble_getClassName();
+    return opensimModelSimulationJNI.ReferenceDouble_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.ReferenceDouble_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.ReferenceDouble_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ReferenceDouble(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.ReferenceDouble_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.ReferenceDouble_getConcreteClassName(swigCPtr, this);
   }
 
   public int getNumRefs() {
-    return opensimModelJNI.ReferenceDouble_getNumRefs(swigCPtr, this);
+    return opensimModelSimulationJNI.ReferenceDouble_getNumRefs(swigCPtr, this);
   }
 
   public Vec2 getValidTimeRange() {
-    return new Vec2(opensimModelJNI.ReferenceDouble_getValidTimeRange(swigCPtr, this), true);
+    return new Vec2(opensimModelSimulationJNI.ReferenceDouble_getValidTimeRange(swigCPtr, this), true);
   }
 
   public SimTKArrayString getNames() {
-    return new SimTKArrayString(opensimModelJNI.ReferenceDouble_getNames(swigCPtr, this), false);
+    return new SimTKArrayString(opensimModelSimulationJNI.ReferenceDouble_getNames(swigCPtr, this), false);
   }
 
   public void getValues(State s, SimTKArrayDouble values) {
-    opensimModelJNI.ReferenceDouble_getValues__SWIG_0(swigCPtr, this, State.getCPtr(s), s, SimTKArrayDouble.getCPtr(values), values);
+    opensimModelSimulationJNI.ReferenceDouble_getValues__SWIG_0(swigCPtr, this, State.getCPtr(s), s, SimTKArrayDouble.getCPtr(values), values);
   }
 
   public void getWeights(State s, SimTKArrayDouble weights) {
-    opensimModelJNI.ReferenceDouble_getWeights__SWIG_0(swigCPtr, this, State.getCPtr(s), s, SimTKArrayDouble.getCPtr(weights), weights);
+    opensimModelSimulationJNI.ReferenceDouble_getWeights__SWIG_0(swigCPtr, this, State.getCPtr(s), s, SimTKArrayDouble.getCPtr(weights), weights);
   }
 
   public SimTKArrayDouble getValues(State s) {
-    return new SimTKArrayDouble(opensimModelJNI.ReferenceDouble_getValues__SWIG_1(swigCPtr, this, State.getCPtr(s), s), true);
+    return new SimTKArrayDouble(opensimModelSimulationJNI.ReferenceDouble_getValues__SWIG_1(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
   public SimTKArrayDouble getWeights(State s) {
-    return new SimTKArrayDouble(opensimModelJNI.ReferenceDouble_getWeights__SWIG_1(swigCPtr, this, State.getCPtr(s), s), true);
+    return new SimTKArrayDouble(opensimModelSimulationJNI.ReferenceDouble_getWeights__SWIG_1(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
 }

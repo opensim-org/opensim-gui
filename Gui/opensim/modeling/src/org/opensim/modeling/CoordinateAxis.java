@@ -12,12 +12,12 @@ public class CoordinateAxis {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  public CoordinateAxis(long cPtr, boolean cMemoryOwn) {
+  protected CoordinateAxis(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(CoordinateAxis obj) {
+  protected static long getCPtr(CoordinateAxis obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,94 +29,94 @@ public class CoordinateAxis {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_CoordinateAxis(swigCPtr);
+        opensimSimbodyJNI.delete_CoordinateAxis(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public CoordinateAxis(int i) {
-    this(opensimModelJNI.new_CoordinateAxis(i), true);
+    this(opensimSimbodyJNI.new_CoordinateAxis(i), true);
   }
 
   public CoordinateAxis getNextAxis() {
-    return new CoordinateAxis(opensimModelJNI.CoordinateAxis_getNextAxis(swigCPtr, this), true);
+    return new CoordinateAxis(opensimSimbodyJNI.CoordinateAxis_getNextAxis(swigCPtr, this), true);
   }
 
   public CoordinateAxis getPreviousAxis() {
-    return new CoordinateAxis(opensimModelJNI.CoordinateAxis_getPreviousAxis(swigCPtr, this), true);
+    return new CoordinateAxis(opensimSimbodyJNI.CoordinateAxis_getPreviousAxis(swigCPtr, this), true);
   }
 
   public CoordinateAxis getThirdAxis(CoordinateAxis axis2) {
-    return new CoordinateAxis(opensimModelJNI.CoordinateAxis_getThirdAxis(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2), true);
+    return new CoordinateAxis(opensimSimbodyJNI.CoordinateAxis_getThirdAxis(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2), true);
   }
 
   public boolean isXAxis() {
-    return opensimModelJNI.CoordinateAxis_isXAxis(swigCPtr, this);
+    return opensimSimbodyJNI.CoordinateAxis_isXAxis(swigCPtr, this);
   }
 
   public boolean isYAxis() {
-    return opensimModelJNI.CoordinateAxis_isYAxis(swigCPtr, this);
+    return opensimSimbodyJNI.CoordinateAxis_isYAxis(swigCPtr, this);
   }
 
   public boolean isZAxis() {
-    return opensimModelJNI.CoordinateAxis_isZAxis(swigCPtr, this);
+    return opensimSimbodyJNI.CoordinateAxis_isZAxis(swigCPtr, this);
   }
 
   public boolean isNextAxis(CoordinateAxis axis2) {
-    return opensimModelJNI.CoordinateAxis_isNextAxis(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2);
+    return opensimSimbodyJNI.CoordinateAxis_isNextAxis(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2);
   }
 
   public boolean isPreviousAxis(CoordinateAxis axis2) {
-    return opensimModelJNI.CoordinateAxis_isPreviousAxis(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2);
+    return opensimSimbodyJNI.CoordinateAxis_isPreviousAxis(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2);
   }
 
   public boolean isSameAxis(CoordinateAxis axis2) {
-    return opensimModelJNI.CoordinateAxis_isSameAxis(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2);
+    return opensimSimbodyJNI.CoordinateAxis_isSameAxis(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2);
   }
 
   public boolean areAllSameAxes(CoordinateAxis axis2, CoordinateAxis axis3) {
-    return opensimModelJNI.CoordinateAxis_areAllSameAxes(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2, CoordinateAxis.getCPtr(axis3), axis3);
+    return opensimSimbodyJNI.CoordinateAxis_areAllSameAxes(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2, CoordinateAxis.getCPtr(axis3), axis3);
   }
 
   public boolean isDifferentAxis(CoordinateAxis axis2) {
-    return opensimModelJNI.CoordinateAxis_isDifferentAxis(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2);
+    return opensimSimbodyJNI.CoordinateAxis_isDifferentAxis(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2);
   }
 
   public boolean areAllDifferentAxes(CoordinateAxis axis2, CoordinateAxis axis3) {
-    return opensimModelJNI.CoordinateAxis_areAllDifferentAxes(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2, CoordinateAxis.getCPtr(axis3), axis3);
+    return opensimSimbodyJNI.CoordinateAxis_areAllDifferentAxes(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2, CoordinateAxis.getCPtr(axis3), axis3);
   }
 
   public boolean isForwardCyclical(CoordinateAxis axis2) {
-    return opensimModelJNI.CoordinateAxis_isForwardCyclical(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2);
+    return opensimSimbodyJNI.CoordinateAxis_isForwardCyclical(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2);
   }
 
   public boolean isReverseCyclical(CoordinateAxis axis2) {
-    return opensimModelJNI.CoordinateAxis_isReverseCyclical(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2);
+    return opensimSimbodyJNI.CoordinateAxis_isReverseCyclical(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2);
   }
 
   public int dotProduct(CoordinateAxis axis2) {
-    return opensimModelJNI.CoordinateAxis_dotProduct(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2);
+    return opensimSimbodyJNI.CoordinateAxis_dotProduct(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2);
   }
 
   public int crossProductSign(CoordinateAxis axis2) {
-    return opensimModelJNI.CoordinateAxis_crossProductSign(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2);
+    return opensimSimbodyJNI.CoordinateAxis_crossProductSign(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2);
   }
 
   public CoordinateAxis crossProductAxis(CoordinateAxis axis2) {
-    return new CoordinateAxis(opensimModelJNI.CoordinateAxis_crossProductAxis(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2), true);
+    return new CoordinateAxis(opensimSimbodyJNI.CoordinateAxis_crossProductAxis(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2), true);
   }
 
   public CoordinateAxis crossProduct(CoordinateAxis axis2, SWIGTYPE_p_int sign) {
-    return new CoordinateAxis(opensimModelJNI.CoordinateAxis_crossProduct(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2, SWIGTYPE_p_int.getCPtr(sign)), true);
+    return new CoordinateAxis(opensimSimbodyJNI.CoordinateAxis_crossProduct(swigCPtr, this, CoordinateAxis.getCPtr(axis2), axis2, SWIGTYPE_p_int.getCPtr(sign)), true);
   }
 
   public static CoordinateAxis getCoordinateAxis(int i) {
-    return new CoordinateAxis(opensimModelJNI.CoordinateAxis_getCoordinateAxis(i), false);
+    return new CoordinateAxis(opensimSimbodyJNI.CoordinateAxis_getCoordinateAxis(i), false);
   }
 
   public static boolean isIndexInRange(int i) {
-    return opensimModelJNI.CoordinateAxis_isIndexInRange(i);
+    return opensimSimbodyJNI.CoordinateAxis_isIndexInRange(i);
   }
 
 }

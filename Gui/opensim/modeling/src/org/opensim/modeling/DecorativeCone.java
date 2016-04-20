@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class DecorativeCone extends DecorativeGeometry {
   private transient long swigCPtr;
 
-  public DecorativeCone(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.DecorativeCone_SWIGUpcast(cPtr), cMemoryOwn);
+  protected DecorativeCone(long cPtr, boolean cMemoryOwn) {
+    super(opensimSimbodyJNI.DecorativeCone_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(DecorativeCone obj) {
+  protected static long getCPtr(DecorativeCone obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,7 +28,7 @@ public class DecorativeCone extends DecorativeGeometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_DecorativeCone(swigCPtr);
+        opensimSimbodyJNI.delete_DecorativeCone(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,100 +36,100 @@ public class DecorativeCone extends DecorativeGeometry {
   }
 
   public DecorativeCone(Vec3 p1, UnitVec3 dir, double height, double base) {
-    this(opensimModelJNI.new_DecorativeCone__SWIG_0(Vec3.getCPtr(p1), p1, UnitVec3.getCPtr(dir), dir, height, base), true);
+    this(opensimSimbodyJNI.new_DecorativeCone__SWIG_0(Vec3.getCPtr(p1), p1, UnitVec3.getCPtr(dir), dir, height, base), true);
   }
 
   public DecorativeCone(Vec3 p1, UnitVec3 dir, double height) {
-    this(opensimModelJNI.new_DecorativeCone__SWIG_1(Vec3.getCPtr(p1), p1, UnitVec3.getCPtr(dir), dir, height), true);
+    this(opensimSimbodyJNI.new_DecorativeCone__SWIG_1(Vec3.getCPtr(p1), p1, UnitVec3.getCPtr(dir), dir, height), true);
   }
 
   public DecorativeCone(Vec3 p1, UnitVec3 dir) {
-    this(opensimModelJNI.new_DecorativeCone__SWIG_2(Vec3.getCPtr(p1), p1, UnitVec3.getCPtr(dir), dir), true);
+    this(opensimSimbodyJNI.new_DecorativeCone__SWIG_2(Vec3.getCPtr(p1), p1, UnitVec3.getCPtr(dir), dir), true);
   }
 
   public DecorativeCone(Vec3 p1) {
-    this(opensimModelJNI.new_DecorativeCone__SWIG_3(Vec3.getCPtr(p1), p1), true);
+    this(opensimSimbodyJNI.new_DecorativeCone__SWIG_3(Vec3.getCPtr(p1), p1), true);
   }
 
   public DecorativeCone() {
-    this(opensimModelJNI.new_DecorativeCone__SWIG_4(), true);
+    this(opensimSimbodyJNI.new_DecorativeCone__SWIG_4(), true);
   }
 
   public Vec3 getOrigin() {
-    return new Vec3(opensimModelJNI.DecorativeCone_getOrigin(swigCPtr, this), false);
+    return new Vec3(opensimSimbodyJNI.DecorativeCone_getOrigin(swigCPtr, this), false);
   }
 
   public UnitVec3 getDirection() {
-    return new UnitVec3(opensimModelJNI.DecorativeCone_getDirection(swigCPtr, this), false);
+    return new UnitVec3(opensimSimbodyJNI.DecorativeCone_getDirection(swigCPtr, this), false);
   }
 
   public double getHeight() {
-    return opensimModelJNI.DecorativeCone_getHeight(swigCPtr, this);
+    return opensimSimbodyJNI.DecorativeCone_getHeight(swigCPtr, this);
   }
 
   public double getBaseRadius() {
-    return opensimModelJNI.DecorativeCone_getBaseRadius(swigCPtr, this);
+    return opensimSimbodyJNI.DecorativeCone_getBaseRadius(swigCPtr, this);
   }
 
   public DecorativeCone setOrigin(Vec3 origin) {
-    return new DecorativeCone(opensimModelJNI.DecorativeCone_setOrigin(swigCPtr, this, Vec3.getCPtr(origin), origin), false);
+    return new DecorativeCone(opensimSimbodyJNI.DecorativeCone_setOrigin(swigCPtr, this, Vec3.getCPtr(origin), origin), false);
   }
 
   public DecorativeCone setDirection(UnitVec3 direction) {
-    return new DecorativeCone(opensimModelJNI.DecorativeCone_setDirection(swigCPtr, this, UnitVec3.getCPtr(direction), direction), false);
+    return new DecorativeCone(opensimSimbodyJNI.DecorativeCone_setDirection(swigCPtr, this, UnitVec3.getCPtr(direction), direction), false);
   }
 
   public DecorativeCone setHeight(double length) {
-    return new DecorativeCone(opensimModelJNI.DecorativeCone_setHeight(swigCPtr, this, length), false);
+    return new DecorativeCone(opensimSimbodyJNI.DecorativeCone_setHeight(swigCPtr, this, length), false);
   }
 
   public DecorativeCone setBaseRadius(double base) {
-    return new DecorativeCone(opensimModelJNI.DecorativeCone_setBaseRadius(swigCPtr, this, base), false);
+    return new DecorativeCone(opensimSimbodyJNI.DecorativeCone_setBaseRadius(swigCPtr, this, base), false);
   }
 
   public DecorativeCone setBodyId(int b) {
-    return new DecorativeCone(opensimModelJNI.DecorativeCone_setBodyId(swigCPtr, this, b), false);
+    return new DecorativeCone(opensimSimbodyJNI.DecorativeCone_setBodyId(swigCPtr, this, b), false);
   }
 
   public DecorativeCone setIndexOnBody(int x) {
-    return new DecorativeCone(opensimModelJNI.DecorativeCone_setIndexOnBody(swigCPtr, this, x), false);
+    return new DecorativeCone(opensimSimbodyJNI.DecorativeCone_setIndexOnBody(swigCPtr, this, x), false);
   }
 
   public DecorativeCone setUserRef(SWIGTYPE_p_void p) {
-    return new DecorativeCone(opensimModelJNI.DecorativeCone_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
+    return new DecorativeCone(opensimSimbodyJNI.DecorativeCone_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
   }
 
   public DecorativeCone setTransform(Transform X_BD) {
-    return new DecorativeCone(opensimModelJNI.DecorativeCone_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
+    return new DecorativeCone(opensimSimbodyJNI.DecorativeCone_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
   }
 
   public DecorativeCone setResolution(double r) {
-    return new DecorativeCone(opensimModelJNI.DecorativeCone_setResolution(swigCPtr, this, r), false);
+    return new DecorativeCone(opensimSimbodyJNI.DecorativeCone_setResolution(swigCPtr, this, r), false);
   }
 
   public DecorativeCone setScaleFactors(Vec3 s) {
-    return new DecorativeCone(opensimModelJNI.DecorativeCone_setScaleFactors(swigCPtr, this, Vec3.getCPtr(s), s), false);
+    return new DecorativeCone(opensimSimbodyJNI.DecorativeCone_setScaleFactors(swigCPtr, this, Vec3.getCPtr(s), s), false);
   }
 
   public DecorativeCone setColor(Vec3 rgb) {
-    return new DecorativeCone(opensimModelJNI.DecorativeCone_setColor(swigCPtr, this, Vec3.getCPtr(rgb), rgb), false);
+    return new DecorativeCone(opensimSimbodyJNI.DecorativeCone_setColor(swigCPtr, this, Vec3.getCPtr(rgb), rgb), false);
   }
 
   public DecorativeCone setOpacity(double o) {
-    return new DecorativeCone(opensimModelJNI.DecorativeCone_setOpacity(swigCPtr, this, o), false);
+    return new DecorativeCone(opensimSimbodyJNI.DecorativeCone_setOpacity(swigCPtr, this, o), false);
   }
 
   public DecorativeCone setLineThickness(double t) {
-    return new DecorativeCone(opensimModelJNI.DecorativeCone_setLineThickness(swigCPtr, this, t), false);
+    return new DecorativeCone(opensimSimbodyJNI.DecorativeCone_setLineThickness(swigCPtr, this, t), false);
   }
 
   public DecorativeCone setRepresentation(DecorativeGeometry.Representation r) {
-    return new DecorativeCone(opensimModelJNI.DecorativeCone_setRepresentation(swigCPtr, this, r.swigValue()), false);
+    return new DecorativeCone(opensimSimbodyJNI.DecorativeCone_setRepresentation(swigCPtr, this, r.swigValue()), false);
   }
 
   public DecorativeCone clone() {
-    long cPtr = opensimModelJNI.DecorativeCone_clone(swigCPtr, this);
-    return (cPtr == 0) ? null : new DecorativeCone(cPtr, true);
+    long cPtr = opensimSimbodyJNI.DecorativeCone_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new DecorativeCone(cPtr, false);
   }
 
 }

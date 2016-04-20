@@ -12,12 +12,12 @@ public class DontCopy {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  public DontCopy(long cPtr, boolean cMemoryOwn) {
+  protected DontCopy(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(DontCopy obj) {
+  protected static long getCPtr(DontCopy obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,14 +29,14 @@ public class DontCopy {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_DontCopy(swigCPtr);
+        opensimSimbodyJNI.delete_DontCopy(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public DontCopy() {
-    this(opensimModelJNI.new_DontCopy(), true);
+    this(opensimSimbodyJNI.new_DontCopy(), true);
   }
 
 }

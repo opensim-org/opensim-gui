@@ -12,7 +12,7 @@ public class Torus extends AnalyticGeometry {
   private transient long swigCPtr;
 
   public Torus(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.Torus_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.Torus_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Torus extends AnalyticGeometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_Torus(swigCPtr);
+        opensimModelSimulationJNI.delete_Torus(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,105 +36,105 @@ public class Torus extends AnalyticGeometry {
   }
 
   public static Torus safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Torus_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.Torus_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Torus(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.Torus_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.Torus_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.Torus_getClassName();
+    return opensimModelSimulationJNI.Torus_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.Torus_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.Torus_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Torus(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.Torus_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.Torus_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_cross_section(Torus source) {
-    opensimModelJNI.Torus_copyProperty_cross_section(swigCPtr, this, Torus.getCPtr(source), source);
+    opensimModelSimulationJNI.Torus_copyProperty_cross_section(swigCPtr, this, Torus.getCPtr(source), source);
   }
 
   public double get_cross_section(int i) {
-    return opensimModelJNI.Torus_get_cross_section__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.Torus_get_cross_section__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_cross_section(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.Torus_upd_cross_section__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Torus_upd_cross_section__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_cross_section(int i, double value) {
-    opensimModelJNI.Torus_set_cross_section__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.Torus_set_cross_section__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_cross_section(double value) {
-    return opensimModelJNI.Torus_append_cross_section(swigCPtr, this, value);
+    return opensimModelSimulationJNI.Torus_append_cross_section(swigCPtr, this, value);
   }
 
   public void constructProperty_cross_section(double initValue) {
-    opensimModelJNI.Torus_constructProperty_cross_section(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.Torus_constructProperty_cross_section(swigCPtr, this, initValue);
   }
 
   public double get_cross_section() {
-    return opensimModelJNI.Torus_get_cross_section__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.Torus_get_cross_section__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_cross_section() {
-    return new SWIGTYPE_p_double(opensimModelJNI.Torus_upd_cross_section__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Torus_upd_cross_section__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_cross_section(double value) {
-    opensimModelJNI.Torus_set_cross_section__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.Torus_set_cross_section__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_ring_radius(Torus source) {
-    opensimModelJNI.Torus_copyProperty_ring_radius(swigCPtr, this, Torus.getCPtr(source), source);
+    opensimModelSimulationJNI.Torus_copyProperty_ring_radius(swigCPtr, this, Torus.getCPtr(source), source);
   }
 
   public double get_ring_radius(int i) {
-    return opensimModelJNI.Torus_get_ring_radius__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.Torus_get_ring_radius__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_ring_radius(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.Torus_upd_ring_radius__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Torus_upd_ring_radius__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_ring_radius(int i, double value) {
-    opensimModelJNI.Torus_set_ring_radius__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.Torus_set_ring_radius__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_ring_radius(double value) {
-    return opensimModelJNI.Torus_append_ring_radius(swigCPtr, this, value);
+    return opensimModelSimulationJNI.Torus_append_ring_radius(swigCPtr, this, value);
   }
 
   public void constructProperty_ring_radius(double initValue) {
-    opensimModelJNI.Torus_constructProperty_ring_radius(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.Torus_constructProperty_ring_radius(swigCPtr, this, initValue);
   }
 
   public double get_ring_radius() {
-    return opensimModelJNI.Torus_get_ring_radius__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.Torus_get_ring_radius__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_ring_radius() {
-    return new SWIGTYPE_p_double(opensimModelJNI.Torus_upd_ring_radius__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Torus_upd_ring_radius__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_ring_radius(double value) {
-    opensimModelJNI.Torus_set_ring_radius__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.Torus_set_ring_radius__SWIG_1(swigCPtr, this, value);
   }
 
   public Torus() {
-    this(opensimModelJNI.new_Torus__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_Torus__SWIG_0(), true);
   }
 
   public Torus(double ringRadius, double crossSectionRadius) {
-    this(opensimModelJNI.new_Torus__SWIG_1(ringRadius, crossSectionRadius), true);
+    this(opensimModelSimulationJNI.new_Torus__SWIG_1(ringRadius, crossSectionRadius), true);
   }
 
 }

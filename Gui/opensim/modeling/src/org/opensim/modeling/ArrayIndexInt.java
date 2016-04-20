@@ -12,12 +12,12 @@ public class ArrayIndexInt {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  public ArrayIndexInt(long cPtr, boolean cMemoryOwn) {
+  protected ArrayIndexInt(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(ArrayIndexInt obj) {
+  protected static long getCPtr(ArrayIndexInt obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,18 +29,18 @@ public class ArrayIndexInt {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ArrayIndexInt(swigCPtr);
+        opensimSimbodyJNI.delete_ArrayIndexInt(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public static int max_size() {
-    return opensimModelJNI.ArrayIndexInt_max_size();
+    return opensimSimbodyJNI.ArrayIndexInt_max_size();
   }
 
   public ArrayIndexInt() {
-    this(opensimModelJNI.new_ArrayIndexInt(), true);
+    this(opensimSimbodyJNI.new_ArrayIndexInt(), true);
   }
 
 }

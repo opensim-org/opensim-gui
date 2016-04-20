@@ -12,7 +12,7 @@ public class CoordinateReference extends ReferenceDouble {
   private transient long swigCPtr;
 
   public CoordinateReference(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.CoordinateReference_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.CoordinateReference_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class CoordinateReference extends ReferenceDouble {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_CoordinateReference(swigCPtr);
+        opensimModelSimulationJNI.delete_CoordinateReference(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,77 +36,77 @@ public class CoordinateReference extends ReferenceDouble {
   }
 
   public static CoordinateReference safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.CoordinateReference_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.CoordinateReference_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new CoordinateReference(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.CoordinateReference_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.CoordinateReference_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.CoordinateReference_getClassName();
+    return opensimModelSimulationJNI.CoordinateReference_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.CoordinateReference_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.CoordinateReference_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new CoordinateReference(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.CoordinateReference_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.CoordinateReference_getConcreteClassName(swigCPtr, this);
   }
 
   public CoordinateReference() {
-    this(opensimModelJNI.new_CoordinateReference__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_CoordinateReference__SWIG_0(), true);
   }
 
   public CoordinateReference(String name, Function ReferenceFunction) {
-    this(opensimModelJNI.new_CoordinateReference__SWIG_1(name, Function.getCPtr(ReferenceFunction), ReferenceFunction), true);
+    this(opensimModelSimulationJNI.new_CoordinateReference__SWIG_1(name, Function.getCPtr(ReferenceFunction), ReferenceFunction), true);
   }
 
   public CoordinateReference(CoordinateReference source) {
-    this(opensimModelJNI.new_CoordinateReference__SWIG_2(CoordinateReference.getCPtr(source), source), true);
+    this(opensimModelSimulationJNI.new_CoordinateReference__SWIG_2(CoordinateReference.getCPtr(source), source), true);
   }
 
   public int getNumRefs() {
-    return opensimModelJNI.CoordinateReference_getNumRefs(swigCPtr, this);
+    return opensimModelSimulationJNI.CoordinateReference_getNumRefs(swigCPtr, this);
   }
 
   public SimTKArrayString getNames() {
-    return new SimTKArrayString(opensimModelJNI.CoordinateReference_getNames(swigCPtr, this), false);
+    return new SimTKArrayString(opensimModelSimulationJNI.CoordinateReference_getNames(swigCPtr, this), false);
   }
 
   public void getValues(State s, SimTKArrayDouble values) {
-    opensimModelJNI.CoordinateReference_getValues(swigCPtr, this, State.getCPtr(s), s, SimTKArrayDouble.getCPtr(values), values);
+    opensimModelSimulationJNI.CoordinateReference_getValues(swigCPtr, this, State.getCPtr(s), s, SimTKArrayDouble.getCPtr(values), values);
   }
 
   public void getWeights(State s, SimTKArrayDouble weights) {
-    opensimModelJNI.CoordinateReference_getWeights(swigCPtr, this, State.getCPtr(s), s, SimTKArrayDouble.getCPtr(weights), weights);
+    opensimModelSimulationJNI.CoordinateReference_getWeights(swigCPtr, this, State.getCPtr(s), s, SimTKArrayDouble.getCPtr(weights), weights);
   }
 
   public double getValue(State s) {
-    return opensimModelJNI.CoordinateReference_getValue(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.CoordinateReference_getValue(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getSpeedValue(State s) {
-    return opensimModelJNI.CoordinateReference_getSpeedValue(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.CoordinateReference_getSpeedValue(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getAccelerationValue(State s) {
-    return opensimModelJNI.CoordinateReference_getAccelerationValue(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.CoordinateReference_getAccelerationValue(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getWeight(State s) {
-    return opensimModelJNI.CoordinateReference_getWeight(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.CoordinateReference_getWeight(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setWeight(double weight) {
-    opensimModelJNI.CoordinateReference_setWeight(swigCPtr, this, weight);
+    opensimModelSimulationJNI.CoordinateReference_setWeight(swigCPtr, this, weight);
   }
 
   public void setValueFunction(Function function) {
-    opensimModelJNI.CoordinateReference_setValueFunction(swigCPtr, this, Function.getCPtr(function), function);
+    opensimModelSimulationJNI.CoordinateReference_setValueFunction(swigCPtr, this, Function.getCPtr(function), function);
   }
 
 }

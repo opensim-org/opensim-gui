@@ -13,7 +13,7 @@ public class TimeSeriesTable extends DataTable {
   private boolean swigCMemOwnDerived;
 
   protected TimeSeriesTable(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.TimeSeriesTable_SWIGSmartPtrUpcast(cPtr), true);
+    super(opensimModelCommonJNI.TimeSeriesTable_SWIGSmartPtrUpcast(cPtr), true);
     swigCMemOwnDerived = cMemoryOwn;
     swigCPtr = cPtr;
   }
@@ -30,7 +30,7 @@ public class TimeSeriesTable extends DataTable {
     if (swigCPtr != 0) {
       if (swigCMemOwnDerived) {
         swigCMemOwnDerived = false;
-        opensimModelJNI.delete_TimeSeriesTable(swigCPtr);
+        opensimModelCommonJNI.delete_TimeSeriesTable(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -38,15 +38,15 @@ public class TimeSeriesTable extends DataTable {
   }
 
   public TimeSeriesTable() {
-    this(opensimModelJNI.new_TimeSeriesTable__SWIG_0(), true);
+    this(opensimModelCommonJNI.new_TimeSeriesTable__SWIG_0(), true);
   }
 
   public TimeSeriesTable(TimeSeriesTable arg0) {
-    this(opensimModelJNI.new_TimeSeriesTable__SWIG_1(TimeSeriesTable.getCPtr(arg0), arg0), true);
+    this(opensimModelCommonJNI.new_TimeSeriesTable__SWIG_1(TimeSeriesTable.getCPtr(arg0), arg0), true);
   }
 
   public TimeSeriesTable(DataTable datatable) {
-    this(opensimModelJNI.new_TimeSeriesTable__SWIG_3(DataTable.getCPtr(datatable), datatable), true);
+    this(opensimModelCommonJNI.new_TimeSeriesTable__SWIG_3(DataTable.getCPtr(datatable), datatable), true);
   }
 
 }

@@ -12,12 +12,12 @@ public class TrustMe {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  public TrustMe(long cPtr, boolean cMemoryOwn) {
+  protected TrustMe(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(TrustMe obj) {
+  protected static long getCPtr(TrustMe obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,14 +29,14 @@ public class TrustMe {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_TrustMe(swigCPtr);
+        opensimSimbodyJNI.delete_TrustMe(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public TrustMe() {
-    this(opensimModelJNI.new_TrustMe(), true);
+    this(opensimSimbodyJNI.new_TrustMe(), true);
   }
 
 }

@@ -9,8 +9,8 @@
 package org.opensim.modeling;
 
 public final class BodyOrSpaceType {
-  public final static BodyOrSpaceType BodyRotationSequence = new BodyOrSpaceType("BodyRotationSequence", opensimModelJNI.BodyRotationSequence_get());
-  public final static BodyOrSpaceType SpaceRotationSequence = new BodyOrSpaceType("SpaceRotationSequence", opensimModelJNI.SpaceRotationSequence_get());
+  public final static BodyOrSpaceType BodyRotationSequence = new BodyOrSpaceType("BodyRotationSequence", opensimSimbodyJNI.BodyRotationSequence_get());
+  public final static BodyOrSpaceType SpaceRotationSequence = new BodyOrSpaceType("SpaceRotationSequence", opensimSimbodyJNI.SpaceRotationSequence_get());
 
   public final int swigValue() {
     return swigValue;

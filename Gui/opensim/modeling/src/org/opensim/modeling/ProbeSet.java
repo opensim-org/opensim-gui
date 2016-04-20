@@ -12,7 +12,7 @@ public class ProbeSet extends ModelComponentSetProbes {
   private transient long swigCPtr;
 
   public ProbeSet(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ProbeSet_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.ProbeSet_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ProbeSet extends ModelComponentSetProbes {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ProbeSet(swigCPtr);
+        opensimModelSimulationJNI.delete_ProbeSet(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,33 +36,33 @@ public class ProbeSet extends ModelComponentSetProbes {
   }
 
   public static ProbeSet safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ProbeSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.ProbeSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ProbeSet(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.ProbeSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.ProbeSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.ProbeSet_getClassName();
+    return opensimModelSimulationJNI.ProbeSet_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.ProbeSet_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.ProbeSet_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ProbeSet(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.ProbeSet_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.ProbeSet_getConcreteClassName(swigCPtr, this);
   }
 
   public ProbeSet() {
-    this(opensimModelJNI.new_ProbeSet__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_ProbeSet__SWIG_0(), true);
   }
 
   public ProbeSet(ProbeSet aAbsProbeSet) {
-    this(opensimModelJNI.new_ProbeSet__SWIG_1(ProbeSet.getCPtr(aAbsProbeSet), aAbsProbeSet), true);
+    this(opensimModelSimulationJNI.new_ProbeSet__SWIG_1(ProbeSet.getCPtr(aAbsProbeSet), aAbsProbeSet), true);
   }
 
 }

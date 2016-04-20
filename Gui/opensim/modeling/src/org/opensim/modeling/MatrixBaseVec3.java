@@ -12,12 +12,12 @@ public class MatrixBaseVec3 {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  public MatrixBaseVec3(long cPtr, boolean cMemoryOwn) {
+  protected MatrixBaseVec3(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(MatrixBaseVec3 obj) {
+  protected static long getCPtr(MatrixBaseVec3 obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,77 +29,77 @@ public class MatrixBaseVec3 {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_MatrixBaseVec3(swigCPtr);
+        opensimSimbodyJNI.delete_MatrixBaseVec3(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public int nrow() {
-    return opensimModelJNI.MatrixBaseVec3_nrow(swigCPtr, this);
+    return opensimSimbodyJNI.MatrixBaseVec3_nrow(swigCPtr, this);
   }
 
   public int ncol() {
-    return opensimModelJNI.MatrixBaseVec3_ncol(swigCPtr, this);
+    return opensimSimbodyJNI.MatrixBaseVec3_ncol(swigCPtr, this);
   }
 
   public boolean isResizeable() {
-    return opensimModelJNI.MatrixBaseVec3_isResizeable(swigCPtr, this);
+    return opensimSimbodyJNI.MatrixBaseVec3_isResizeable(swigCPtr, this);
   }
 
   public MatrixBaseVec3() {
-    this(opensimModelJNI.new_MatrixBaseVec3__SWIG_0(), true);
+    this(opensimSimbodyJNI.new_MatrixBaseVec3__SWIG_0(), true);
   }
 
   public MatrixBaseVec3(int m, int n) {
-    this(opensimModelJNI.new_MatrixBaseVec3__SWIG_1(m, n), true);
+    this(opensimSimbodyJNI.new_MatrixBaseVec3__SWIG_1(m, n), true);
   }
 
   public void clear() {
-    opensimModelJNI.MatrixBaseVec3_clear(swigCPtr, this);
+    opensimSimbodyJNI.MatrixBaseVec3_clear(swigCPtr, this);
   }
 
   public MatrixBaseVec3 elementwiseAssign(int s) {
-    return new MatrixBaseVec3(opensimModelJNI.MatrixBaseVec3_elementwiseAssign(swigCPtr, this, s), false);
+    return new MatrixBaseVec3(opensimSimbodyJNI.MatrixBaseVec3_elementwiseAssign(swigCPtr, this, s), false);
   }
 
   public MatrixBaseVec3 setTo(Vec3 t) {
-    return new MatrixBaseVec3(opensimModelJNI.MatrixBaseVec3_setTo(swigCPtr, this, Vec3.getCPtr(t), t), false);
+    return new MatrixBaseVec3(opensimSimbodyJNI.MatrixBaseVec3_setTo(swigCPtr, this, Vec3.getCPtr(t), t), false);
   }
 
   public MatrixBaseVec3 setToNaN() {
-    return new MatrixBaseVec3(opensimModelJNI.MatrixBaseVec3_setToNaN(swigCPtr, this), false);
+    return new MatrixBaseVec3(opensimSimbodyJNI.MatrixBaseVec3_setToNaN(swigCPtr, this), false);
   }
 
   public MatrixBaseVec3 setToZero() {
-    return new MatrixBaseVec3(opensimModelJNI.MatrixBaseVec3_setToZero(swigCPtr, this), false);
+    return new MatrixBaseVec3(opensimSimbodyJNI.MatrixBaseVec3_setToZero(swigCPtr, this), false);
   }
 
   public Vec3 getElt(int i, int j) {
-    return new Vec3(opensimModelJNI.MatrixBaseVec3_getElt(swigCPtr, this, i, j), false);
+    return new Vec3(opensimSimbodyJNI.MatrixBaseVec3_getElt(swigCPtr, this, i, j), false);
   }
 
   public MatrixBaseVec3 negateInPlace() {
-    return new MatrixBaseVec3(opensimModelJNI.MatrixBaseVec3_negateInPlace(swigCPtr, this), false);
+    return new MatrixBaseVec3(opensimSimbodyJNI.MatrixBaseVec3_negateInPlace(swigCPtr, this), false);
   }
 
   public MatrixBaseVec3 resize(int m, int n) {
-    return new MatrixBaseVec3(opensimModelJNI.MatrixBaseVec3_resize(swigCPtr, this, m, n), false);
+    return new MatrixBaseVec3(opensimSimbodyJNI.MatrixBaseVec3_resize(swigCPtr, this, m, n), false);
   }
 
   public MatrixBaseVec3 resizeKeep(int m, int n) {
-    return new MatrixBaseVec3(opensimModelJNI.MatrixBaseVec3_resizeKeep(swigCPtr, this, m, n), false);
+    return new MatrixBaseVec3(opensimSimbodyJNI.MatrixBaseVec3_resizeKeep(swigCPtr, this, m, n), false);
   }
 
   public void lockShape() {
-    opensimModelJNI.MatrixBaseVec3_lockShape(swigCPtr, this);
+    opensimSimbodyJNI.MatrixBaseVec3_lockShape(swigCPtr, this);
   }
 
   public void unlockShape() {
-    opensimModelJNI.MatrixBaseVec3_unlockShape(swigCPtr, this);
+    opensimSimbodyJNI.MatrixBaseVec3_unlockShape(swigCPtr, this);
   }
 
-  public final static int NScalarsPerElement = opensimModelJNI.MatrixBaseVec3_NScalarsPerElement_get();
-  public final static int CppNScalarsPerElement = opensimModelJNI.MatrixBaseVec3_CppNScalarsPerElement_get();
+  public final static int NScalarsPerElement = opensimSimbodyJNI.MatrixBaseVec3_NScalarsPerElement_get();
+  public final static int CppNScalarsPerElement = opensimSimbodyJNI.MatrixBaseVec3_CppNScalarsPerElement_get();
 
 }

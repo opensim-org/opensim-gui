@@ -12,7 +12,7 @@ public class ElasticFoundationForce extends Force {
   private transient long swigCPtr;
 
   public ElasticFoundationForce(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ElasticFoundationForce_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.ElasticFoundationForce_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ElasticFoundationForce extends Force {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ElasticFoundationForce(swigCPtr);
+        opensimModelSimulationJNI.delete_ElasticFoundationForce(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,181 +36,181 @@ public class ElasticFoundationForce extends Force {
   }
 
   public static ElasticFoundationForce safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ElasticFoundationForce_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.ElasticFoundationForce_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ElasticFoundationForce(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.ElasticFoundationForce_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.ElasticFoundationForce_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.ElasticFoundationForce_getClassName();
+    return opensimModelSimulationJNI.ElasticFoundationForce_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.ElasticFoundationForce_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.ElasticFoundationForce_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ElasticFoundationForce(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.ElasticFoundationForce_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.ElasticFoundationForce_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_contact_parameters(ElasticFoundationForce source) {
-    opensimModelJNI.ElasticFoundationForce_copyProperty_contact_parameters(swigCPtr, this, ElasticFoundationForce.getCPtr(source), source);
+    opensimModelSimulationJNI.ElasticFoundationForce_copyProperty_contact_parameters(swigCPtr, this, ElasticFoundationForce.getCPtr(source), source);
   }
 
   public SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet get_contact_parameters(int i) {
-    return new SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet(opensimModelJNI.ElasticFoundationForce_get_contact_parameters__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet(opensimModelSimulationJNI.ElasticFoundationForce_get_contact_parameters__SWIG_0(swigCPtr, this, i), false);
   }
 
   public SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet upd_contact_parameters(int i) {
-    return new SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet(opensimModelJNI.ElasticFoundationForce_upd_contact_parameters__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet(opensimModelSimulationJNI.ElasticFoundationForce_upd_contact_parameters__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_contact_parameters(int i, SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet value) {
-    opensimModelJNI.ElasticFoundationForce_set_contact_parameters__SWIG_0(swigCPtr, this, i, SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet.getCPtr(value));
+    opensimModelSimulationJNI.ElasticFoundationForce_set_contact_parameters__SWIG_0(swigCPtr, this, i, SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet.getCPtr(value));
   }
 
   public int append_contact_parameters(SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet value) {
-    return opensimModelJNI.ElasticFoundationForce_append_contact_parameters(swigCPtr, this, SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet.getCPtr(value));
+    return opensimModelSimulationJNI.ElasticFoundationForce_append_contact_parameters(swigCPtr, this, SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet.getCPtr(value));
   }
 
   public void constructProperty_contact_parameters(SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet initValue) {
-    opensimModelJNI.ElasticFoundationForce_constructProperty_contact_parameters(swigCPtr, this, SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet.getCPtr(initValue));
+    opensimModelSimulationJNI.ElasticFoundationForce_constructProperty_contact_parameters(swigCPtr, this, SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet.getCPtr(initValue));
   }
 
   public SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet get_contact_parameters() {
-    return new SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet(opensimModelJNI.ElasticFoundationForce_get_contact_parameters__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet(opensimModelSimulationJNI.ElasticFoundationForce_get_contact_parameters__SWIG_1(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet upd_contact_parameters() {
-    return new SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet(opensimModelJNI.ElasticFoundationForce_upd_contact_parameters__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet(opensimModelSimulationJNI.ElasticFoundationForce_upd_contact_parameters__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_contact_parameters(SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet value) {
-    opensimModelJNI.ElasticFoundationForce_set_contact_parameters__SWIG_1(swigCPtr, this, SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet.getCPtr(value));
+    opensimModelSimulationJNI.ElasticFoundationForce_set_contact_parameters__SWIG_1(swigCPtr, this, SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet.getCPtr(value));
   }
 
   public void copyProperty_transition_velocity(ElasticFoundationForce source) {
-    opensimModelJNI.ElasticFoundationForce_copyProperty_transition_velocity(swigCPtr, this, ElasticFoundationForce.getCPtr(source), source);
+    opensimModelSimulationJNI.ElasticFoundationForce_copyProperty_transition_velocity(swigCPtr, this, ElasticFoundationForce.getCPtr(source), source);
   }
 
   public double get_transition_velocity(int i) {
-    return opensimModelJNI.ElasticFoundationForce_get_transition_velocity__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.ElasticFoundationForce_get_transition_velocity__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_transition_velocity(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.ElasticFoundationForce_upd_transition_velocity__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.ElasticFoundationForce_upd_transition_velocity__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_transition_velocity(int i, double value) {
-    opensimModelJNI.ElasticFoundationForce_set_transition_velocity__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.ElasticFoundationForce_set_transition_velocity__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_transition_velocity(double value) {
-    return opensimModelJNI.ElasticFoundationForce_append_transition_velocity(swigCPtr, this, value);
+    return opensimModelSimulationJNI.ElasticFoundationForce_append_transition_velocity(swigCPtr, this, value);
   }
 
   public void constructProperty_transition_velocity(double initValue) {
-    opensimModelJNI.ElasticFoundationForce_constructProperty_transition_velocity(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.ElasticFoundationForce_constructProperty_transition_velocity(swigCPtr, this, initValue);
   }
 
   public double get_transition_velocity() {
-    return opensimModelJNI.ElasticFoundationForce_get_transition_velocity__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.ElasticFoundationForce_get_transition_velocity__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_transition_velocity() {
-    return new SWIGTYPE_p_double(opensimModelJNI.ElasticFoundationForce_upd_transition_velocity__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.ElasticFoundationForce_upd_transition_velocity__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_transition_velocity(double value) {
-    opensimModelJNI.ElasticFoundationForce_set_transition_velocity__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.ElasticFoundationForce_set_transition_velocity__SWIG_1(swigCPtr, this, value);
   }
 
   public ElasticFoundationForce() {
-    this(opensimModelJNI.new_ElasticFoundationForce__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_ElasticFoundationForce__SWIG_0(), true);
   }
 
   public ElasticFoundationForce(SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParameters params) {
-    this(opensimModelJNI.new_ElasticFoundationForce__SWIG_1(SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParameters.getCPtr(params)), true);
+    this(opensimModelSimulationJNI.new_ElasticFoundationForce__SWIG_1(SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParameters.getCPtr(params)), true);
   }
 
   public void extendAddToSystem(SWIGTYPE_p_SimTK__MultibodySystem system) {
-    opensimModelJNI.ElasticFoundationForce_extendAddToSystem(swigCPtr, this, SWIGTYPE_p_SimTK__MultibodySystem.getCPtr(system));
+    opensimModelSimulationJNI.ElasticFoundationForce_extendAddToSystem(swigCPtr, this, SWIGTYPE_p_SimTK__MultibodySystem.getCPtr(system));
   }
 
   public SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet updContactParametersSet() {
-    return new SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet(opensimModelJNI.ElasticFoundationForce_updContactParametersSet(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet(opensimModelSimulationJNI.ElasticFoundationForce_updContactParametersSet(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet getContactParametersSet() {
-    return new SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet(opensimModelJNI.ElasticFoundationForce_getContactParametersSet(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParametersSet(opensimModelSimulationJNI.ElasticFoundationForce_getContactParametersSet(swigCPtr, this), false);
   }
 
   public void addContactParameters(SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParameters params) {
-    opensimModelJNI.ElasticFoundationForce_addContactParameters(swigCPtr, this, SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParameters.getCPtr(params));
+    opensimModelSimulationJNI.ElasticFoundationForce_addContactParameters(swigCPtr, this, SWIGTYPE_p_OpenSim__ElasticFoundationForce__ContactParameters.getCPtr(params));
   }
 
   public double getTransitionVelocity() {
-    return opensimModelJNI.ElasticFoundationForce_getTransitionVelocity(swigCPtr, this);
+    return opensimModelSimulationJNI.ElasticFoundationForce_getTransitionVelocity(swigCPtr, this);
   }
 
   public void setTransitionVelocity(double velocity) {
-    opensimModelJNI.ElasticFoundationForce_setTransitionVelocity(swigCPtr, this, velocity);
+    opensimModelSimulationJNI.ElasticFoundationForce_setTransitionVelocity(swigCPtr, this, velocity);
   }
 
   public double getStiffness() {
-    return opensimModelJNI.ElasticFoundationForce_getStiffness(swigCPtr, this);
+    return opensimModelSimulationJNI.ElasticFoundationForce_getStiffness(swigCPtr, this);
   }
 
   public void setStiffness(double stiffness) {
-    opensimModelJNI.ElasticFoundationForce_setStiffness(swigCPtr, this, stiffness);
+    opensimModelSimulationJNI.ElasticFoundationForce_setStiffness(swigCPtr, this, stiffness);
   }
 
   public double getDissipation() {
-    return opensimModelJNI.ElasticFoundationForce_getDissipation(swigCPtr, this);
+    return opensimModelSimulationJNI.ElasticFoundationForce_getDissipation(swigCPtr, this);
   }
 
   public void setDissipation(double dissipation) {
-    opensimModelJNI.ElasticFoundationForce_setDissipation(swigCPtr, this, dissipation);
+    opensimModelSimulationJNI.ElasticFoundationForce_setDissipation(swigCPtr, this, dissipation);
   }
 
   public double getStaticFriction() {
-    return opensimModelJNI.ElasticFoundationForce_getStaticFriction(swigCPtr, this);
+    return opensimModelSimulationJNI.ElasticFoundationForce_getStaticFriction(swigCPtr, this);
   }
 
   public void setStaticFriction(double friction) {
-    opensimModelJNI.ElasticFoundationForce_setStaticFriction(swigCPtr, this, friction);
+    opensimModelSimulationJNI.ElasticFoundationForce_setStaticFriction(swigCPtr, this, friction);
   }
 
   public double getDynamicFriction() {
-    return opensimModelJNI.ElasticFoundationForce_getDynamicFriction(swigCPtr, this);
+    return opensimModelSimulationJNI.ElasticFoundationForce_getDynamicFriction(swigCPtr, this);
   }
 
   public void setDynamicFriction(double friction) {
-    opensimModelJNI.ElasticFoundationForce_setDynamicFriction(swigCPtr, this, friction);
+    opensimModelSimulationJNI.ElasticFoundationForce_setDynamicFriction(swigCPtr, this, friction);
   }
 
   public double getViscousFriction() {
-    return opensimModelJNI.ElasticFoundationForce_getViscousFriction(swigCPtr, this);
+    return opensimModelSimulationJNI.ElasticFoundationForce_getViscousFriction(swigCPtr, this);
   }
 
   public void setViscousFriction(double friction) {
-    opensimModelJNI.ElasticFoundationForce_setViscousFriction(swigCPtr, this, friction);
+    opensimModelSimulationJNI.ElasticFoundationForce_setViscousFriction(swigCPtr, this, friction);
   }
 
   public void addGeometry(String name) {
-    opensimModelJNI.ElasticFoundationForce_addGeometry(swigCPtr, this, name);
+    opensimModelSimulationJNI.ElasticFoundationForce_addGeometry(swigCPtr, this, name);
   }
 
   public ArrayStr getRecordLabels() {
-    return new ArrayStr(opensimModelJNI.ElasticFoundationForce_getRecordLabels(swigCPtr, this), true);
+    return new ArrayStr(opensimModelSimulationJNI.ElasticFoundationForce_getRecordLabels(swigCPtr, this), true);
   }
 
   public ArrayDouble getRecordValues(State state) {
-    return new ArrayDouble(opensimModelJNI.ElasticFoundationForce_getRecordValues(swigCPtr, this, State.getCPtr(state), state), true);
+    return new ArrayDouble(opensimModelSimulationJNI.ElasticFoundationForce_getRecordValues(swigCPtr, this, State.getCPtr(state), state), true);
   }
 
 }

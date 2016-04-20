@@ -12,7 +12,7 @@ public class ComponentFilterMatchAll extends ComponentFilter {
   private transient long swigCPtr;
 
   public ComponentFilterMatchAll(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ComponentFilterMatchAll_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.ComponentFilterMatchAll_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ComponentFilterMatchAll extends ComponentFilter {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ComponentFilterMatchAll(swigCPtr);
+        opensimModelCommonJNI.delete_ComponentFilterMatchAll(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,15 +36,15 @@ public class ComponentFilterMatchAll extends ComponentFilter {
   }
 
   public ComponentFilterMatchAll() {
-    this(opensimModelJNI.new_ComponentFilterMatchAll(), true);
+    this(opensimModelCommonJNI.new_ComponentFilterMatchAll(), true);
   }
 
-  public boolean isMatch(Component comp) {
-    return opensimModelJNI.ComponentFilterMatchAll_isMatch(swigCPtr, this, Component.getCPtr(comp), comp);
+  public boolean isMatch(SWIGTYPE_p_OpenSim__Component comp) {
+    return opensimModelCommonJNI.ComponentFilterMatchAll_isMatch(swigCPtr, this, SWIGTYPE_p_OpenSim__Component.getCPtr(comp));
   }
 
   public ComponentFilter clone() {
-    long cPtr = opensimModelJNI.ComponentFilterMatchAll_clone(swigCPtr, this);
+    long cPtr = opensimModelCommonJNI.ComponentFilterMatchAll_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ComponentFilterMatchAll(cPtr, true);
   }
 

@@ -13,7 +13,7 @@ public class MOTFileAdapter extends DelimFileAdapter {
   private boolean swigCMemOwnDerived;
 
   protected MOTFileAdapter(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.MOTFileAdapter_SWIGSmartPtrUpcast(cPtr), true);
+    super(opensimModelCommonJNI.MOTFileAdapter_SWIGSmartPtrUpcast(cPtr), true);
     swigCMemOwnDerived = cMemoryOwn;
     swigCPtr = cPtr;
   }
@@ -30,7 +30,7 @@ public class MOTFileAdapter extends DelimFileAdapter {
     if (swigCPtr != 0) {
       if (swigCMemOwnDerived) {
         swigCMemOwnDerived = false;
-        opensimModelJNI.delete_MOTFileAdapter(swigCPtr);
+        opensimModelCommonJNI.delete_MOTFileAdapter(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -38,15 +38,15 @@ public class MOTFileAdapter extends DelimFileAdapter {
   }
 
   public MOTFileAdapter() {
-    this(opensimModelJNI.new_MOTFileAdapter__SWIG_0(), true);
+    this(opensimModelCommonJNI.new_MOTFileAdapter__SWIG_0(), true);
   }
 
   public MOTFileAdapter(MOTFileAdapter arg0) {
-    this(opensimModelJNI.new_MOTFileAdapter__SWIG_1(MOTFileAdapter.getCPtr(arg0), arg0), true);
+    this(opensimModelCommonJNI.new_MOTFileAdapter__SWIG_1(MOTFileAdapter.getCPtr(arg0), arg0), true);
   }
 
   public DataAdapter clone() {
-    long cPtr = opensimModelJNI.MOTFileAdapter_clone(swigCPtr, this);
+    long cPtr = opensimModelCommonJNI.MOTFileAdapter_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new MOTFileAdapter(cPtr, true);
   }
 

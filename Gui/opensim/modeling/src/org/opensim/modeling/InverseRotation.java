@@ -12,12 +12,12 @@ public class InverseRotation {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  public InverseRotation(long cPtr, boolean cMemoryOwn) {
+  protected InverseRotation(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(InverseRotation obj) {
+  protected static long getCPtr(InverseRotation obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,26 +29,26 @@ public class InverseRotation {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_InverseRotation(swigCPtr);
+        opensimSimbodyJNI.delete_InverseRotation(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public InverseRotation() {
-    this(opensimModelJNI.new_InverseRotation__SWIG_0(), true);
+    this(opensimSimbodyJNI.new_InverseRotation__SWIG_0(), true);
   }
 
   public InverseRotation(InverseRotation R) {
-    this(opensimModelJNI.new_InverseRotation__SWIG_1(InverseRotation.getCPtr(R), R), true);
+    this(opensimSimbodyJNI.new_InverseRotation__SWIG_1(InverseRotation.getCPtr(R), R), true);
   }
 
   public Rotation invert() {
-    return new Rotation(opensimModelJNI.InverseRotation_invert(swigCPtr, this), false);
+    return new Rotation(opensimSimbodyJNI.InverseRotation_invert(swigCPtr, this), false);
   }
 
   public Rotation transpose() {
-    return new Rotation(opensimModelJNI.InverseRotation_transpose(swigCPtr, this), false);
+    return new Rotation(opensimSimbodyJNI.InverseRotation_transpose(swigCPtr, this), false);
   }
 
 }

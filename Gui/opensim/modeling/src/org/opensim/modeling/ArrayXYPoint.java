@@ -29,110 +29,110 @@ public class ArrayXYPoint {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ArrayXYPoint(swigCPtr);
+        opensimModelCommonJNI.delete_ArrayXYPoint(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public ArrayXYPoint(XYPoint aDefaultValue, int aSize, int aCapacity) {
-    this(opensimModelJNI.new_ArrayXYPoint__SWIG_0(XYPoint.getCPtr(aDefaultValue), aDefaultValue, aSize, aCapacity), true);
+    this(opensimModelCommonJNI.new_ArrayXYPoint__SWIG_0(XYPoint.getCPtr(aDefaultValue), aDefaultValue, aSize, aCapacity), true);
   }
 
   public ArrayXYPoint(XYPoint aDefaultValue, int aSize) {
-    this(opensimModelJNI.new_ArrayXYPoint__SWIG_1(XYPoint.getCPtr(aDefaultValue), aDefaultValue, aSize), true);
+    this(opensimModelCommonJNI.new_ArrayXYPoint__SWIG_1(XYPoint.getCPtr(aDefaultValue), aDefaultValue, aSize), true);
   }
 
   public ArrayXYPoint(XYPoint aDefaultValue) {
-    this(opensimModelJNI.new_ArrayXYPoint__SWIG_2(XYPoint.getCPtr(aDefaultValue), aDefaultValue), true);
+    this(opensimModelCommonJNI.new_ArrayXYPoint__SWIG_2(XYPoint.getCPtr(aDefaultValue), aDefaultValue), true);
   }
 
   public ArrayXYPoint() {
-    this(opensimModelJNI.new_ArrayXYPoint__SWIG_3(), true);
+    this(opensimModelCommonJNI.new_ArrayXYPoint__SWIG_3(), true);
   }
 
   public ArrayXYPoint(ArrayXYPoint aArray) {
-    this(opensimModelJNI.new_ArrayXYPoint__SWIG_4(ArrayXYPoint.getCPtr(aArray), aArray), true);
+    this(opensimModelCommonJNI.new_ArrayXYPoint__SWIG_4(ArrayXYPoint.getCPtr(aArray), aArray), true);
   }
 
   public boolean arrayEquals(ArrayXYPoint aArray) {
-    return opensimModelJNI.ArrayXYPoint_arrayEquals(swigCPtr, this, ArrayXYPoint.getCPtr(aArray), aArray);
+    return opensimModelCommonJNI.ArrayXYPoint_arrayEquals(swigCPtr, this, ArrayXYPoint.getCPtr(aArray), aArray);
   }
 
   public void trim() {
-    opensimModelJNI.ArrayXYPoint_trim(swigCPtr, this);
+    opensimModelCommonJNI.ArrayXYPoint_trim(swigCPtr, this);
   }
 
   public boolean setSize(int aSize) {
-    return opensimModelJNI.ArrayXYPoint_setSize(swigCPtr, this, aSize);
+    return opensimModelCommonJNI.ArrayXYPoint_setSize(swigCPtr, this, aSize);
   }
 
   public int getSize() {
-    return opensimModelJNI.ArrayXYPoint_getSize(swigCPtr, this);
+    return opensimModelCommonJNI.ArrayXYPoint_getSize(swigCPtr, this);
   }
 
   public int size() {
-    return opensimModelJNI.ArrayXYPoint_size(swigCPtr, this);
+    return opensimModelCommonJNI.ArrayXYPoint_size(swigCPtr, this);
   }
 
   public int append(XYPoint aValue) {
-    return opensimModelJNI.ArrayXYPoint_append__SWIG_0(swigCPtr, this, XYPoint.getCPtr(aValue), aValue);
+    return opensimModelCommonJNI.ArrayXYPoint_append__SWIG_0(swigCPtr, this, XYPoint.getCPtr(aValue), aValue);
   }
 
   public int append(ArrayXYPoint aArray) {
-    return opensimModelJNI.ArrayXYPoint_append__SWIG_1(swigCPtr, this, ArrayXYPoint.getCPtr(aArray), aArray);
+    return opensimModelCommonJNI.ArrayXYPoint_append__SWIG_1(swigCPtr, this, ArrayXYPoint.getCPtr(aArray), aArray);
   }
 
   public int insert(int aIndex, XYPoint aValue) {
-    return opensimModelJNI.ArrayXYPoint_insert(swigCPtr, this, aIndex, XYPoint.getCPtr(aValue), aValue);
+    return opensimModelCommonJNI.ArrayXYPoint_insert(swigCPtr, this, aIndex, XYPoint.getCPtr(aValue), aValue);
   }
 
   public int remove(int aIndex) {
-    return opensimModelJNI.ArrayXYPoint_remove(swigCPtr, this, aIndex);
+    return opensimModelCommonJNI.ArrayXYPoint_remove(swigCPtr, this, aIndex);
   }
 
   public void set(int aIndex, XYPoint aValue) {
-    opensimModelJNI.ArrayXYPoint_set(swigCPtr, this, aIndex, XYPoint.getCPtr(aValue), aValue);
+    opensimModelCommonJNI.ArrayXYPoint_set(swigCPtr, this, aIndex, XYPoint.getCPtr(aValue), aValue);
   }
 
   public XYPoint get(int aIndex) {
-    return new XYPoint(opensimModelJNI.ArrayXYPoint_get(swigCPtr, this, aIndex), false);
+    return new XYPoint(opensimModelCommonJNI.ArrayXYPoint_get(swigCPtr, this, aIndex), false);
   }
 
   public XYPoint getitem(int index) {
-    return new XYPoint(opensimModelJNI.ArrayXYPoint_getitem(swigCPtr, this, index), true);
+    return new XYPoint(opensimModelCommonJNI.ArrayXYPoint_getitem(swigCPtr, this, index), true);
   }
 
   public void setitem(int index, XYPoint val) {
-    opensimModelJNI.ArrayXYPoint_setitem(swigCPtr, this, index, XYPoint.getCPtr(val), val);
+    opensimModelCommonJNI.ArrayXYPoint_setitem(swigCPtr, this, index, XYPoint.getCPtr(val), val);
   }
 
   public XYPoint getLast() {
-    return new XYPoint(opensimModelJNI.ArrayXYPoint_getLast(swigCPtr, this), false);
+    return new XYPoint(opensimModelCommonJNI.ArrayXYPoint_getLast(swigCPtr, this), false);
   }
 
   public int findIndex(XYPoint aValue) {
-    return opensimModelJNI.ArrayXYPoint_findIndex(swigCPtr, this, XYPoint.getCPtr(aValue), aValue);
+    return opensimModelCommonJNI.ArrayXYPoint_findIndex(swigCPtr, this, XYPoint.getCPtr(aValue), aValue);
   }
 
   public int rfindIndex(XYPoint aValue) {
-    return opensimModelJNI.ArrayXYPoint_rfindIndex(swigCPtr, this, XYPoint.getCPtr(aValue), aValue);
+    return opensimModelCommonJNI.ArrayXYPoint_rfindIndex(swigCPtr, this, XYPoint.getCPtr(aValue), aValue);
   }
 
   public int searchBinary(XYPoint aValue, boolean aFindFirst, int aLo, int aHi) {
-    return opensimModelJNI.ArrayXYPoint_searchBinary__SWIG_0(swigCPtr, this, XYPoint.getCPtr(aValue), aValue, aFindFirst, aLo, aHi);
+    return opensimModelCommonJNI.ArrayXYPoint_searchBinary__SWIG_0(swigCPtr, this, XYPoint.getCPtr(aValue), aValue, aFindFirst, aLo, aHi);
   }
 
   public int searchBinary(XYPoint aValue, boolean aFindFirst, int aLo) {
-    return opensimModelJNI.ArrayXYPoint_searchBinary__SWIG_1(swigCPtr, this, XYPoint.getCPtr(aValue), aValue, aFindFirst, aLo);
+    return opensimModelCommonJNI.ArrayXYPoint_searchBinary__SWIG_1(swigCPtr, this, XYPoint.getCPtr(aValue), aValue, aFindFirst, aLo);
   }
 
   public int searchBinary(XYPoint aValue, boolean aFindFirst) {
-    return opensimModelJNI.ArrayXYPoint_searchBinary__SWIG_2(swigCPtr, this, XYPoint.getCPtr(aValue), aValue, aFindFirst);
+    return opensimModelCommonJNI.ArrayXYPoint_searchBinary__SWIG_2(swigCPtr, this, XYPoint.getCPtr(aValue), aValue, aFindFirst);
   }
 
   public int searchBinary(XYPoint aValue) {
-    return opensimModelJNI.ArrayXYPoint_searchBinary__SWIG_3(swigCPtr, this, XYPoint.getCPtr(aValue), aValue);
+    return opensimModelCommonJNI.ArrayXYPoint_searchBinary__SWIG_3(swigCPtr, this, XYPoint.getCPtr(aValue), aValue);
   }
 
 }

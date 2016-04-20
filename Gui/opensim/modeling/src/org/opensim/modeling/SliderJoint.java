@@ -12,7 +12,7 @@ public class SliderJoint extends Joint {
   private transient long swigCPtr;
 
   public SliderJoint(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.SliderJoint_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.SliderJoint_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class SliderJoint extends Joint {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_SliderJoint(swigCPtr);
+        opensimModelSimulationJNI.delete_SliderJoint(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,33 +36,33 @@ public class SliderJoint extends Joint {
   }
 
   public static SliderJoint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.SliderJoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.SliderJoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new SliderJoint(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.SliderJoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.SliderJoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.SliderJoint_getClassName();
+    return opensimModelSimulationJNI.SliderJoint_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.SliderJoint_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.SliderJoint_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new SliderJoint(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.SliderJoint_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.SliderJoint_getConcreteClassName(swigCPtr, this);
   }
 
-  public SliderJoint(String name, String parentName, String childName) {
-    this(opensimModelJNI.new_SliderJoint__SWIG_0(name, parentName, childName), true);
+  public SliderJoint(String name, PhysicalFrame parent, PhysicalFrame child) {
+    this(opensimModelSimulationJNI.new_SliderJoint__SWIG_0(name, PhysicalFrame.getCPtr(parent), parent, PhysicalFrame.getCPtr(child), child), true);
   }
 
   public SliderJoint(String name, PhysicalFrame parent, Vec3 locationInParent, Vec3 orientationInParent, PhysicalFrame child, Vec3 locationInChild, Vec3 orientationInChild) {
-    this(opensimModelJNI.new_SliderJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
+    this(opensimModelSimulationJNI.new_SliderJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
   }
 
 }

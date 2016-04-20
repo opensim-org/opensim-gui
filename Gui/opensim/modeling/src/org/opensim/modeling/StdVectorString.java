@@ -12,12 +12,12 @@ public class StdVectorString {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  public StdVectorString(long cPtr, boolean cMemoryOwn) {
+  protected StdVectorString(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(StdVectorString obj) {
+  protected static long getCPtr(StdVectorString obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,50 +29,50 @@ public class StdVectorString {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_StdVectorString(swigCPtr);
+        opensimSimbodyJNI.delete_StdVectorString(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public StdVectorString() {
-    this(opensimModelJNI.new_StdVectorString__SWIG_0(), true);
+    this(opensimSimbodyJNI.new_StdVectorString__SWIG_0(), true);
   }
 
   public StdVectorString(long n) {
-    this(opensimModelJNI.new_StdVectorString__SWIG_1(n), true);
+    this(opensimSimbodyJNI.new_StdVectorString__SWIG_1(n), true);
   }
 
   public long size() {
-    return opensimModelJNI.StdVectorString_size(swigCPtr, this);
+    return opensimSimbodyJNI.StdVectorString_size(swigCPtr, this);
   }
 
   public long capacity() {
-    return opensimModelJNI.StdVectorString_capacity(swigCPtr, this);
+    return opensimSimbodyJNI.StdVectorString_capacity(swigCPtr, this);
   }
 
   public void reserve(long n) {
-    opensimModelJNI.StdVectorString_reserve(swigCPtr, this, n);
+    opensimSimbodyJNI.StdVectorString_reserve(swigCPtr, this, n);
   }
 
   public boolean isEmpty() {
-    return opensimModelJNI.StdVectorString_isEmpty(swigCPtr, this);
+    return opensimSimbodyJNI.StdVectorString_isEmpty(swigCPtr, this);
   }
 
   public void clear() {
-    opensimModelJNI.StdVectorString_clear(swigCPtr, this);
+    opensimSimbodyJNI.StdVectorString_clear(swigCPtr, this);
   }
 
   public void add(String x) {
-    opensimModelJNI.StdVectorString_add(swigCPtr, this, x);
+    opensimSimbodyJNI.StdVectorString_add(swigCPtr, this, x);
   }
 
   public String get(int i) {
-    return opensimModelJNI.StdVectorString_get(swigCPtr, this, i);
+    return opensimSimbodyJNI.StdVectorString_get(swigCPtr, this, i);
   }
 
   public void set(int i, String val) {
-    opensimModelJNI.StdVectorString_set(swigCPtr, this, i, val);
+    opensimSimbodyJNI.StdVectorString_set(swigCPtr, this, i, val);
   }
 
 }

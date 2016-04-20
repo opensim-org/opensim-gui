@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class DecorativeSphere extends DecorativeGeometry {
   private transient long swigCPtr;
 
-  public DecorativeSphere(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.DecorativeSphere_SWIGUpcast(cPtr), cMemoryOwn);
+  protected DecorativeSphere(long cPtr, boolean cMemoryOwn) {
+    super(opensimSimbodyJNI.DecorativeSphere_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(DecorativeSphere obj) {
+  protected static long getCPtr(DecorativeSphere obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,7 +28,7 @@ public class DecorativeSphere extends DecorativeGeometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_DecorativeSphere(swigCPtr);
+        opensimSimbodyJNI.delete_DecorativeSphere(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,64 +36,64 @@ public class DecorativeSphere extends DecorativeGeometry {
   }
 
   public DecorativeSphere(double radius) {
-    this(opensimModelJNI.new_DecorativeSphere__SWIG_0(radius), true);
+    this(opensimSimbodyJNI.new_DecorativeSphere__SWIG_0(radius), true);
   }
 
   public DecorativeSphere() {
-    this(opensimModelJNI.new_DecorativeSphere__SWIG_1(), true);
+    this(opensimSimbodyJNI.new_DecorativeSphere__SWIG_1(), true);
   }
 
   public DecorativeSphere setRadius(double arg0) {
-    return new DecorativeSphere(opensimModelJNI.DecorativeSphere_setRadius(swigCPtr, this, arg0), false);
+    return new DecorativeSphere(opensimSimbodyJNI.DecorativeSphere_setRadius(swigCPtr, this, arg0), false);
   }
 
   public double getRadius() {
-    return opensimModelJNI.DecorativeSphere_getRadius(swigCPtr, this);
+    return opensimSimbodyJNI.DecorativeSphere_getRadius(swigCPtr, this);
   }
 
   public DecorativeSphere setBodyId(int b) {
-    return new DecorativeSphere(opensimModelJNI.DecorativeSphere_setBodyId(swigCPtr, this, b), false);
+    return new DecorativeSphere(opensimSimbodyJNI.DecorativeSphere_setBodyId(swigCPtr, this, b), false);
   }
 
   public DecorativeSphere setIndexOnBody(int x) {
-    return new DecorativeSphere(opensimModelJNI.DecorativeSphere_setIndexOnBody(swigCPtr, this, x), false);
+    return new DecorativeSphere(opensimSimbodyJNI.DecorativeSphere_setIndexOnBody(swigCPtr, this, x), false);
   }
 
   public DecorativeSphere setUserRef(SWIGTYPE_p_void p) {
-    return new DecorativeSphere(opensimModelJNI.DecorativeSphere_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
+    return new DecorativeSphere(opensimSimbodyJNI.DecorativeSphere_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
   }
 
   public DecorativeSphere setTransform(Transform X_BD) {
-    return new DecorativeSphere(opensimModelJNI.DecorativeSphere_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
+    return new DecorativeSphere(opensimSimbodyJNI.DecorativeSphere_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
   }
 
   public DecorativeSphere setResolution(double r) {
-    return new DecorativeSphere(opensimModelJNI.DecorativeSphere_setResolution(swigCPtr, this, r), false);
+    return new DecorativeSphere(opensimSimbodyJNI.DecorativeSphere_setResolution(swigCPtr, this, r), false);
   }
 
   public DecorativeSphere setScaleFactors(Vec3 s) {
-    return new DecorativeSphere(opensimModelJNI.DecorativeSphere_setScaleFactors(swigCPtr, this, Vec3.getCPtr(s), s), false);
+    return new DecorativeSphere(opensimSimbodyJNI.DecorativeSphere_setScaleFactors(swigCPtr, this, Vec3.getCPtr(s), s), false);
   }
 
   public DecorativeSphere setColor(Vec3 rgb) {
-    return new DecorativeSphere(opensimModelJNI.DecorativeSphere_setColor(swigCPtr, this, Vec3.getCPtr(rgb), rgb), false);
+    return new DecorativeSphere(opensimSimbodyJNI.DecorativeSphere_setColor(swigCPtr, this, Vec3.getCPtr(rgb), rgb), false);
   }
 
   public DecorativeSphere setOpacity(double o) {
-    return new DecorativeSphere(opensimModelJNI.DecorativeSphere_setOpacity(swigCPtr, this, o), false);
+    return new DecorativeSphere(opensimSimbodyJNI.DecorativeSphere_setOpacity(swigCPtr, this, o), false);
   }
 
   public DecorativeSphere setLineThickness(double t) {
-    return new DecorativeSphere(opensimModelJNI.DecorativeSphere_setLineThickness(swigCPtr, this, t), false);
+    return new DecorativeSphere(opensimSimbodyJNI.DecorativeSphere_setLineThickness(swigCPtr, this, t), false);
   }
 
   public DecorativeSphere setRepresentation(DecorativeGeometry.Representation r) {
-    return new DecorativeSphere(opensimModelJNI.DecorativeSphere_setRepresentation(swigCPtr, this, r.swigValue()), false);
+    return new DecorativeSphere(opensimSimbodyJNI.DecorativeSphere_setRepresentation(swigCPtr, this, r.swigValue()), false);
   }
 
   public DecorativeSphere clone() {
-    long cPtr = opensimModelJNI.DecorativeSphere_clone(swigCPtr, this);
-    return (cPtr == 0) ? null : new DecorativeSphere(cPtr, true);
+    long cPtr = opensimSimbodyJNI.DecorativeSphere_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new DecorativeSphere(cPtr, false);
   }
 
 }

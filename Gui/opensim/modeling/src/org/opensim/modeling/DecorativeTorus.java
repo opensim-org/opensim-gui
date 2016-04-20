@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class DecorativeTorus extends DecorativeGeometry {
   private transient long swigCPtr;
 
-  public DecorativeTorus(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.DecorativeTorus_SWIGUpcast(cPtr), cMemoryOwn);
+  protected DecorativeTorus(long cPtr, boolean cMemoryOwn) {
+    super(opensimSimbodyJNI.DecorativeTorus_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(DecorativeTorus obj) {
+  protected static long getCPtr(DecorativeTorus obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,7 +28,7 @@ public class DecorativeTorus extends DecorativeGeometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_DecorativeTorus(swigCPtr);
+        opensimSimbodyJNI.delete_DecorativeTorus(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,76 +36,76 @@ public class DecorativeTorus extends DecorativeGeometry {
   }
 
   public DecorativeTorus(double torusR, double tubeR) {
-    this(opensimModelJNI.new_DecorativeTorus__SWIG_0(torusR, tubeR), true);
+    this(opensimSimbodyJNI.new_DecorativeTorus__SWIG_0(torusR, tubeR), true);
   }
 
   public DecorativeTorus(double torusR) {
-    this(opensimModelJNI.new_DecorativeTorus__SWIG_1(torusR), true);
+    this(opensimSimbodyJNI.new_DecorativeTorus__SWIG_1(torusR), true);
   }
 
   public DecorativeTorus() {
-    this(opensimModelJNI.new_DecorativeTorus__SWIG_2(), true);
+    this(opensimSimbodyJNI.new_DecorativeTorus__SWIG_2(), true);
   }
 
   public DecorativeTorus setTorusRadius(double arg0) {
-    return new DecorativeTorus(opensimModelJNI.DecorativeTorus_setTorusRadius(swigCPtr, this, arg0), false);
+    return new DecorativeTorus(opensimSimbodyJNI.DecorativeTorus_setTorusRadius(swigCPtr, this, arg0), false);
   }
 
   public DecorativeTorus setTubeRadius(double arg0) {
-    return new DecorativeTorus(opensimModelJNI.DecorativeTorus_setTubeRadius(swigCPtr, this, arg0), false);
+    return new DecorativeTorus(opensimSimbodyJNI.DecorativeTorus_setTubeRadius(swigCPtr, this, arg0), false);
   }
 
   public double getTorusRadius() {
-    return opensimModelJNI.DecorativeTorus_getTorusRadius(swigCPtr, this);
+    return opensimSimbodyJNI.DecorativeTorus_getTorusRadius(swigCPtr, this);
   }
 
   public double getTubeRadius() {
-    return opensimModelJNI.DecorativeTorus_getTubeRadius(swigCPtr, this);
+    return opensimSimbodyJNI.DecorativeTorus_getTubeRadius(swigCPtr, this);
   }
 
   public DecorativeTorus setBodyId(int b) {
-    return new DecorativeTorus(opensimModelJNI.DecorativeTorus_setBodyId(swigCPtr, this, b), false);
+    return new DecorativeTorus(opensimSimbodyJNI.DecorativeTorus_setBodyId(swigCPtr, this, b), false);
   }
 
   public DecorativeTorus setIndexOnBody(int x) {
-    return new DecorativeTorus(opensimModelJNI.DecorativeTorus_setIndexOnBody(swigCPtr, this, x), false);
+    return new DecorativeTorus(opensimSimbodyJNI.DecorativeTorus_setIndexOnBody(swigCPtr, this, x), false);
   }
 
   public DecorativeTorus setUserRef(SWIGTYPE_p_void p) {
-    return new DecorativeTorus(opensimModelJNI.DecorativeTorus_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
+    return new DecorativeTorus(opensimSimbodyJNI.DecorativeTorus_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
   }
 
   public DecorativeTorus setTransform(Transform X_BD) {
-    return new DecorativeTorus(opensimModelJNI.DecorativeTorus_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
+    return new DecorativeTorus(opensimSimbodyJNI.DecorativeTorus_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
   }
 
   public DecorativeTorus setResolution(double r) {
-    return new DecorativeTorus(opensimModelJNI.DecorativeTorus_setResolution(swigCPtr, this, r), false);
+    return new DecorativeTorus(opensimSimbodyJNI.DecorativeTorus_setResolution(swigCPtr, this, r), false);
   }
 
   public DecorativeTorus setScaleFactors(Vec3 s) {
-    return new DecorativeTorus(opensimModelJNI.DecorativeTorus_setScaleFactors(swigCPtr, this, Vec3.getCPtr(s), s), false);
+    return new DecorativeTorus(opensimSimbodyJNI.DecorativeTorus_setScaleFactors(swigCPtr, this, Vec3.getCPtr(s), s), false);
   }
 
   public DecorativeTorus setColor(Vec3 rgb) {
-    return new DecorativeTorus(opensimModelJNI.DecorativeTorus_setColor(swigCPtr, this, Vec3.getCPtr(rgb), rgb), false);
+    return new DecorativeTorus(opensimSimbodyJNI.DecorativeTorus_setColor(swigCPtr, this, Vec3.getCPtr(rgb), rgb), false);
   }
 
   public DecorativeTorus setOpacity(double o) {
-    return new DecorativeTorus(opensimModelJNI.DecorativeTorus_setOpacity(swigCPtr, this, o), false);
+    return new DecorativeTorus(opensimSimbodyJNI.DecorativeTorus_setOpacity(swigCPtr, this, o), false);
   }
 
   public DecorativeTorus setLineThickness(double t) {
-    return new DecorativeTorus(opensimModelJNI.DecorativeTorus_setLineThickness(swigCPtr, this, t), false);
+    return new DecorativeTorus(opensimSimbodyJNI.DecorativeTorus_setLineThickness(swigCPtr, this, t), false);
   }
 
   public DecorativeTorus setRepresentation(DecorativeGeometry.Representation r) {
-    return new DecorativeTorus(opensimModelJNI.DecorativeTorus_setRepresentation(swigCPtr, this, r.swigValue()), false);
+    return new DecorativeTorus(opensimSimbodyJNI.DecorativeTorus_setRepresentation(swigCPtr, this, r.swigValue()), false);
   }
 
   public DecorativeTorus clone() {
-    long cPtr = opensimModelJNI.DecorativeTorus_clone(swigCPtr, this);
-    return (cPtr == 0) ? null : new DecorativeTorus(cPtr, true);
+    long cPtr = opensimSimbodyJNI.DecorativeTorus_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new DecorativeTorus(cPtr, false);
   }
 
 }

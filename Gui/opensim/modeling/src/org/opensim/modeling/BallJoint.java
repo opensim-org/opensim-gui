@@ -12,7 +12,7 @@ public class BallJoint extends Joint {
   private transient long swigCPtr;
 
   public BallJoint(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.BallJoint_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.BallJoint_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class BallJoint extends Joint {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_BallJoint(swigCPtr);
+        opensimModelSimulationJNI.delete_BallJoint(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,33 +36,33 @@ public class BallJoint extends Joint {
   }
 
   public static BallJoint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.BallJoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.BallJoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new BallJoint(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.BallJoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.BallJoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.BallJoint_getClassName();
+    return opensimModelSimulationJNI.BallJoint_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.BallJoint_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.BallJoint_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new BallJoint(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.BallJoint_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.BallJoint_getConcreteClassName(swigCPtr, this);
   }
 
-  public BallJoint(String name, String parentName, String childName) {
-    this(opensimModelJNI.new_BallJoint__SWIG_0(name, parentName, childName), true);
+  public BallJoint(String name, PhysicalFrame parent, PhysicalFrame child) {
+    this(opensimModelSimulationJNI.new_BallJoint__SWIG_0(name, PhysicalFrame.getCPtr(parent), parent, PhysicalFrame.getCPtr(child), child), true);
   }
 
   public BallJoint(String name, PhysicalFrame parent, Vec3 locationInParent, Vec3 orientationInParent, PhysicalFrame child, Vec3 locationInChild, Vec3 orientationInChild) {
-    this(opensimModelJNI.new_BallJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
+    this(opensimModelSimulationJNI.new_BallJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
   }
 
 }

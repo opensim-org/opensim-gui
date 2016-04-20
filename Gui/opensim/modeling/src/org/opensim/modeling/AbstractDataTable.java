@@ -29,30 +29,46 @@ public class AbstractDataTable {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_AbstractDataTable(swigCPtr);
+        opensimModelCommonJNI.delete_AbstractDataTable(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public long getNumRows() {
-    return opensimModelJNI.AbstractDataTable_getNumRows(swigCPtr, this);
+    return opensimModelCommonJNI.AbstractDataTable_getNumRows(swigCPtr, this);
   }
 
   public long getNumColumns() {
-    return opensimModelJNI.AbstractDataTable_getNumColumns(swigCPtr, this);
+    return opensimModelCommonJNI.AbstractDataTable_getNumColumns(swigCPtr, this);
   }
 
   public StdVectorString getColumnLabels() {
-    return new StdVectorString(opensimModelJNI.AbstractDataTable_getColumnLabels(swigCPtr, this), true);
+    return new StdVectorString(opensimModelCommonJNI.AbstractDataTable_getColumnLabels(swigCPtr, this), true);
   }
 
-  public void setColumnLabels(StdVectorString columnLabels) {
-    opensimModelJNI.AbstractDataTable_setColumnLabels(swigCPtr, this, StdVectorString.getCPtr(columnLabels), columnLabels);
+  public String getColumnLabel(long columnIndex) {
+    return opensimModelCommonJNI.AbstractDataTable_getColumnLabel(swigCPtr, this, columnIndex);
+  }
+
+  public void setColumnLabel(long columnIndex, String columnLabel) {
+    opensimModelCommonJNI.AbstractDataTable_setColumnLabel(swigCPtr, this, columnIndex, columnLabel);
   }
 
   public long getColumnIndex(String columnLabel) {
-    return opensimModelJNI.AbstractDataTable_getColumnIndex(swigCPtr, this, columnLabel);
+    return opensimModelCommonJNI.AbstractDataTable_getColumnIndex(swigCPtr, this, columnLabel);
+  }
+
+  public boolean hasColumn(String columnLabel) {
+    return opensimModelCommonJNI.AbstractDataTable_hasColumn__SWIG_0(swigCPtr, this, columnLabel);
+  }
+
+  public boolean hasColumn(long columnIndex) {
+    return opensimModelCommonJNI.AbstractDataTable_hasColumn__SWIG_1(swigCPtr, this, columnIndex);
+  }
+
+  public void setColumnLabels(StdVectorString columnLabels) {
+    opensimModelCommonJNI.AbstractDataTable_setColumnLabels(swigCPtr, this, StdVectorString.getCPtr(columnLabels), columnLabels);
   }
 
 }

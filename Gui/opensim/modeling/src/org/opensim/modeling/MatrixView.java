@@ -8,15 +8,15 @@
 
 package org.opensim.modeling;
 
-public class IndexOutOfRangeSizeT extends OpenSimException {
+public class MatrixView extends MatrixBaseDouble {
   private transient long swigCPtr;
 
-  public IndexOutOfRangeSizeT(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.IndexOutOfRangeSizeT_SWIGUpcast(cPtr), cMemoryOwn);
+  protected MatrixView(long cPtr, boolean cMemoryOwn) {
+    super(opensimSimbodyJNI.MatrixView_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(IndexOutOfRangeSizeT obj) {
+  protected static long getCPtr(MatrixView obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,15 +28,15 @@ public class IndexOutOfRangeSizeT extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_IndexOutOfRangeSizeT(swigCPtr);
+        opensimSimbodyJNI.delete_MatrixView(swigCPtr);
       }
       swigCPtr = 0;
     }
     super.delete();
   }
 
-  public IndexOutOfRangeSizeT(String file, long line, String func, long index, long min, long max) {
-    this(opensimModelJNI.new_IndexOutOfRangeSizeT(file, line, func, index, min, max), true);
+  public MatrixView(MatrixView m) {
+    this(opensimSimbodyJNI.new_MatrixView(MatrixView.getCPtr(m), m), true);
   }
 
 }

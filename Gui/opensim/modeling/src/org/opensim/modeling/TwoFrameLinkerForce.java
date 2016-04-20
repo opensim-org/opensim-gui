@@ -12,7 +12,7 @@ public class TwoFrameLinkerForce extends Force {
   private transient long swigCPtr;
 
   public TwoFrameLinkerForce(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.TwoFrameLinkerForce_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.TwoFrameLinkerForce_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class TwoFrameLinkerForce extends Force {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_TwoFrameLinkerForce(swigCPtr);
+        opensimModelSimulationJNI.delete_TwoFrameLinkerForce(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,77 +36,77 @@ public class TwoFrameLinkerForce extends Force {
   }
 
   public static TwoFrameLinkerForce safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.TwoFrameLinkerForce_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.TwoFrameLinkerForce_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new TwoFrameLinkerForce(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.TwoFrameLinkerForce_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.TwoFrameLinkerForce_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.TwoFrameLinkerForce_getClassName();
+    return opensimModelSimulationJNI.TwoFrameLinkerForce_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.TwoFrameLinkerForce_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.TwoFrameLinkerForce_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new TwoFrameLinkerForce(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.TwoFrameLinkerForce_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.TwoFrameLinkerForce_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_frames(TwoFrameLinkerForce source) {
-    opensimModelJNI.TwoFrameLinkerForce_copyProperty_frames(swigCPtr, this, TwoFrameLinkerForce.getCPtr(source), source);
+    opensimModelSimulationJNI.TwoFrameLinkerForce_copyProperty_frames(swigCPtr, this, TwoFrameLinkerForce.getCPtr(source), source);
   }
 
   public PhysicalFrame get_frames(int i) {
-    return new PhysicalFrame(opensimModelJNI.TwoFrameLinkerForce_get_frames(swigCPtr, this, i), false);
+    return new PhysicalFrame(opensimModelSimulationJNI.TwoFrameLinkerForce_get_frames(swigCPtr, this, i), false);
   }
 
   public PhysicalFrame upd_frames(int i) {
-    return new PhysicalFrame(opensimModelJNI.TwoFrameLinkerForce_upd_frames(swigCPtr, this, i), false);
+    return new PhysicalFrame(opensimModelSimulationJNI.TwoFrameLinkerForce_upd_frames(swigCPtr, this, i), false);
   }
 
   public void set_frames(int i, PhysicalFrame value) {
-    opensimModelJNI.TwoFrameLinkerForce_set_frames(swigCPtr, this, i, PhysicalFrame.getCPtr(value), value);
+    opensimModelSimulationJNI.TwoFrameLinkerForce_set_frames(swigCPtr, this, i, PhysicalFrame.getCPtr(value), value);
   }
 
   public int append_frames(PhysicalFrame value) {
-    return opensimModelJNI.TwoFrameLinkerForce_append_frames(swigCPtr, this, PhysicalFrame.getCPtr(value), value);
+    return opensimModelSimulationJNI.TwoFrameLinkerForce_append_frames(swigCPtr, this, PhysicalFrame.getCPtr(value), value);
   }
 
   public void constructProperty_frames() {
-    opensimModelJNI.TwoFrameLinkerForce_constructProperty_frames(swigCPtr, this);
+    opensimModelSimulationJNI.TwoFrameLinkerForce_constructProperty_frames(swigCPtr, this);
   }
 
   public PhysicalFrame getFrame1() {
-    return new PhysicalFrame(opensimModelJNI.TwoFrameLinkerForce_getFrame1(swigCPtr, this), false);
+    return new PhysicalFrame(opensimModelSimulationJNI.TwoFrameLinkerForce_getFrame1(swigCPtr, this), false);
   }
 
   public PhysicalFrame getFrame2() {
-    return new PhysicalFrame(opensimModelJNI.TwoFrameLinkerForce_getFrame2(swigCPtr, this), false);
+    return new PhysicalFrame(opensimModelSimulationJNI.TwoFrameLinkerForce_getFrame2(swigCPtr, this), false);
   }
 
   public Transform computeRelativeOffset(State s) {
-    return new Transform(opensimModelJNI.TwoFrameLinkerForce_computeRelativeOffset(swigCPtr, this, State.getCPtr(s), s), true);
+    return new Transform(opensimModelSimulationJNI.TwoFrameLinkerForce_computeRelativeOffset(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
   public SpatialVec computeRelativeVelocity(State s) {
-    return new SpatialVec(opensimModelJNI.TwoFrameLinkerForce_computeRelativeVelocity(swigCPtr, this, State.getCPtr(s), s), true);
+    return new SpatialVec(opensimModelSimulationJNI.TwoFrameLinkerForce_computeRelativeVelocity(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
   public Vec6 computeDeflection(State s) {
-    return new Vec6(opensimModelJNI.TwoFrameLinkerForce_computeDeflection(swigCPtr, this, State.getCPtr(s), s), true);
+    return new Vec6(opensimModelSimulationJNI.TwoFrameLinkerForce_computeDeflection(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
   public Vec6 computeDeflectionRate(State s) {
-    return new Vec6(opensimModelJNI.TwoFrameLinkerForce_computeDeflectionRate(swigCPtr, this, State.getCPtr(s), s), true);
+    return new Vec6(opensimModelSimulationJNI.TwoFrameLinkerForce_computeDeflectionRate(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
   public void scale(ScaleSet scaleSet) {
-    opensimModelJNI.TwoFrameLinkerForce_scale(swigCPtr, this, ScaleSet.getCPtr(scaleSet), scaleSet);
+    opensimModelSimulationJNI.TwoFrameLinkerForce_scale(swigCPtr, this, ScaleSet.getCPtr(scaleSet), scaleSet);
   }
 
 }

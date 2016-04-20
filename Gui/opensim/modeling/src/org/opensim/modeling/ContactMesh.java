@@ -12,7 +12,7 @@ public class ContactMesh extends ContactGeometry {
   private transient long swigCPtr;
 
   public ContactMesh(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ContactMesh_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.ContactMesh_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ContactMesh extends ContactGeometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ContactMesh(swigCPtr);
+        opensimModelSimulationJNI.delete_ContactMesh(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,57 +36,57 @@ public class ContactMesh extends ContactGeometry {
   }
 
   public static ContactMesh safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ContactMesh_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.ContactMesh_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ContactMesh(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.ContactMesh_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.ContactMesh_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.ContactMesh_getClassName();
+    return opensimModelSimulationJNI.ContactMesh_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.ContactMesh_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.ContactMesh_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ContactMesh(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.ContactMesh_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.ContactMesh_getConcreteClassName(swigCPtr, this);
   }
 
   public ContactMesh() {
-    this(opensimModelJNI.new_ContactMesh__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_ContactMesh__SWIG_0(), true);
   }
 
   public ContactMesh(String filename, Vec3 location, Vec3 orientation, PhysicalFrame frame) {
-    this(opensimModelJNI.new_ContactMesh__SWIG_1(filename, Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation, PhysicalFrame.getCPtr(frame), frame), true);
+    this(opensimModelSimulationJNI.new_ContactMesh__SWIG_1(filename, Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation, PhysicalFrame.getCPtr(frame), frame), true);
   }
 
   public ContactMesh(String filename, Vec3 location, Vec3 orientation, PhysicalFrame frame, String name) {
-    this(opensimModelJNI.new_ContactMesh__SWIG_2(filename, Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation, PhysicalFrame.getCPtr(frame), frame, name), true);
+    this(opensimModelSimulationJNI.new_ContactMesh__SWIG_2(filename, Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation, PhysicalFrame.getCPtr(frame), frame, name), true);
   }
 
   public ContactMesh(ContactMesh geom) {
-    this(opensimModelJNI.new_ContactMesh__SWIG_3(ContactMesh.getCPtr(geom), geom), true);
+    this(opensimModelSimulationJNI.new_ContactMesh__SWIG_3(ContactMesh.getCPtr(geom), geom), true);
   }
 
   public void copyData(ContactMesh source) {
-    opensimModelJNI.ContactMesh_copyData(swigCPtr, this, ContactMesh.getCPtr(source), source);
+    opensimModelSimulationJNI.ContactMesh_copyData(swigCPtr, this, ContactMesh.getCPtr(source), source);
   }
 
   public SWIGTYPE_p_SimTK__ContactGeometry createSimTKContactGeometry() {
-    return new SWIGTYPE_p_SimTK__ContactGeometry(opensimModelJNI.ContactMesh_createSimTKContactGeometry(swigCPtr, this), true);
+    return new SWIGTYPE_p_SimTK__ContactGeometry(opensimModelSimulationJNI.ContactMesh_createSimTKContactGeometry(swigCPtr, this), true);
   }
 
   public String getFilename() {
-    return opensimModelJNI.ContactMesh_getFilename(swigCPtr, this);
+    return opensimModelSimulationJNI.ContactMesh_getFilename(swigCPtr, this);
   }
 
   public void setFilename(String filename) {
-    opensimModelJNI.ContactMesh_setFilename(swigCPtr, this, filename);
+    opensimModelSimulationJNI.ContactMesh_setFilename(swigCPtr, this, filename);
   }
 
 }

@@ -12,7 +12,7 @@ public class ContactGeometrySet extends ModelComponentSetContactGeometry {
   private transient long swigCPtr;
 
   public ContactGeometrySet(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ContactGeometrySet_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.ContactGeometrySet_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ContactGeometrySet extends ModelComponentSetContactGeometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ContactGeometrySet(swigCPtr);
+        opensimModelSimulationJNI.delete_ContactGeometrySet(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,45 +36,45 @@ public class ContactGeometrySet extends ModelComponentSetContactGeometry {
   }
 
   public static ContactGeometrySet safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ContactGeometrySet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.ContactGeometrySet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ContactGeometrySet(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.ContactGeometrySet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.ContactGeometrySet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.ContactGeometrySet_getClassName();
+    return opensimModelSimulationJNI.ContactGeometrySet_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.ContactGeometrySet_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.ContactGeometrySet_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ContactGeometrySet(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.ContactGeometrySet_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.ContactGeometrySet_getConcreteClassName(swigCPtr, this);
   }
 
   public ContactGeometrySet() {
-    this(opensimModelJNI.new_ContactGeometrySet__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_ContactGeometrySet__SWIG_0(), true);
   }
 
   public ContactGeometrySet(Model model) {
-    this(opensimModelJNI.new_ContactGeometrySet__SWIG_1(Model.getCPtr(model), model), true);
+    this(opensimModelSimulationJNI.new_ContactGeometrySet__SWIG_1(Model.getCPtr(model), model), true);
   }
 
   public ContactGeometrySet(Model model, String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelJNI.new_ContactGeometrySet__SWIG_2(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
+    this(opensimModelSimulationJNI.new_ContactGeometrySet__SWIG_2(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
   }
 
   public ContactGeometrySet(ContactGeometrySet aContactGeometrySet) {
-    this(opensimModelJNI.new_ContactGeometrySet__SWIG_3(ContactGeometrySet.getCPtr(aContactGeometrySet), aContactGeometrySet), true);
+    this(opensimModelSimulationJNI.new_ContactGeometrySet__SWIG_3(ContactGeometrySet.getCPtr(aContactGeometrySet), aContactGeometrySet), true);
   }
 
   public void scale(ScaleSet aScaleSet) {
-    opensimModelJNI.ContactGeometrySet_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
+    opensimModelSimulationJNI.ContactGeometrySet_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
   }
 
 }

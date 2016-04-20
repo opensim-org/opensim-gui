@@ -12,7 +12,7 @@ public class AnalyticGeometry extends Geometry {
   private transient long swigCPtr;
 
   public AnalyticGeometry(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.AnalyticGeometry_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.AnalyticGeometry_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class AnalyticGeometry extends Geometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_AnalyticGeometry(swigCPtr);
+        opensimModelSimulationJNI.delete_AnalyticGeometry(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,37 +36,37 @@ public class AnalyticGeometry extends Geometry {
   }
 
   public static AnalyticGeometry safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.AnalyticGeometry_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.AnalyticGeometry_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new AnalyticGeometry(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.AnalyticGeometry_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.AnalyticGeometry_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.AnalyticGeometry_getClassName();
+    return opensimModelSimulationJNI.AnalyticGeometry_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.AnalyticGeometry_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.AnalyticGeometry_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new AnalyticGeometry(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.AnalyticGeometry_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.AnalyticGeometry_getConcreteClassName(swigCPtr, this);
   }
 
   public void setQuadrants(boolean[] quadrants) {
-    opensimModelJNI.AnalyticGeometry_setQuadrants(swigCPtr, this, quadrants);
+    opensimModelSimulationJNI.AnalyticGeometry_setQuadrants(swigCPtr, this, quadrants);
   }
 
   public void getQuadrants(boolean[] quadrants) {
-    opensimModelJNI.AnalyticGeometry_getQuadrants(swigCPtr, this, quadrants);
+    opensimModelSimulationJNI.AnalyticGeometry_getQuadrants(swigCPtr, this, quadrants);
   }
 
   public boolean isPiece() {
-    return opensimModelJNI.AnalyticGeometry_isPiece(swigCPtr, this);
+    return opensimModelSimulationJNI.AnalyticGeometry_isPiece(swigCPtr, this);
   }
 
 }

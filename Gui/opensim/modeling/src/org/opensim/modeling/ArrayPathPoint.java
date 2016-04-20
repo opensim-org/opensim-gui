@@ -29,113 +29,113 @@ public class ArrayPathPoint {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ArrayPathPoint(swigCPtr);
+        opensimModelSimulationJNI.delete_ArrayPathPoint(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public ArrayPathPoint(PathPoint aDefaultValue, int aSize, int aCapacity) {
-    this(opensimModelJNI.new_ArrayPathPoint__SWIG_0(PathPoint.getCPtr(aDefaultValue), aDefaultValue, aSize, aCapacity), true);
+    this(opensimModelSimulationJNI.new_ArrayPathPoint__SWIG_0(PathPoint.getCPtr(aDefaultValue), aDefaultValue, aSize, aCapacity), true);
   }
 
   public ArrayPathPoint(PathPoint aDefaultValue, int aSize) {
-    this(opensimModelJNI.new_ArrayPathPoint__SWIG_1(PathPoint.getCPtr(aDefaultValue), aDefaultValue, aSize), true);
+    this(opensimModelSimulationJNI.new_ArrayPathPoint__SWIG_1(PathPoint.getCPtr(aDefaultValue), aDefaultValue, aSize), true);
   }
 
   public ArrayPathPoint(PathPoint aDefaultValue) {
-    this(opensimModelJNI.new_ArrayPathPoint__SWIG_2(PathPoint.getCPtr(aDefaultValue), aDefaultValue), true);
+    this(opensimModelSimulationJNI.new_ArrayPathPoint__SWIG_2(PathPoint.getCPtr(aDefaultValue), aDefaultValue), true);
   }
 
   public ArrayPathPoint() {
-    this(opensimModelJNI.new_ArrayPathPoint__SWIG_3(), true);
+    this(opensimModelSimulationJNI.new_ArrayPathPoint__SWIG_3(), true);
   }
 
   public ArrayPathPoint(ArrayPathPoint aArray) {
-    this(opensimModelJNI.new_ArrayPathPoint__SWIG_4(ArrayPathPoint.getCPtr(aArray), aArray), true);
+    this(opensimModelSimulationJNI.new_ArrayPathPoint__SWIG_4(ArrayPathPoint.getCPtr(aArray), aArray), true);
   }
 
   public boolean arrayEquals(ArrayPathPoint aArray) {
-    return opensimModelJNI.ArrayPathPoint_arrayEquals(swigCPtr, this, ArrayPathPoint.getCPtr(aArray), aArray);
+    return opensimModelSimulationJNI.ArrayPathPoint_arrayEquals(swigCPtr, this, ArrayPathPoint.getCPtr(aArray), aArray);
   }
 
   public void trim() {
-    opensimModelJNI.ArrayPathPoint_trim(swigCPtr, this);
+    opensimModelSimulationJNI.ArrayPathPoint_trim(swigCPtr, this);
   }
 
   public boolean setSize(int aSize) {
-    return opensimModelJNI.ArrayPathPoint_setSize(swigCPtr, this, aSize);
+    return opensimModelSimulationJNI.ArrayPathPoint_setSize(swigCPtr, this, aSize);
   }
 
   public int getSize() {
-    return opensimModelJNI.ArrayPathPoint_getSize(swigCPtr, this);
+    return opensimModelSimulationJNI.ArrayPathPoint_getSize(swigCPtr, this);
   }
 
   public int size() {
-    return opensimModelJNI.ArrayPathPoint_size(swigCPtr, this);
+    return opensimModelSimulationJNI.ArrayPathPoint_size(swigCPtr, this);
   }
 
   public int append(PathPoint aValue) {
-    return opensimModelJNI.ArrayPathPoint_append__SWIG_0(swigCPtr, this, PathPoint.getCPtr(aValue), aValue);
+    return opensimModelSimulationJNI.ArrayPathPoint_append__SWIG_0(swigCPtr, this, PathPoint.getCPtr(aValue), aValue);
   }
 
   public int append(ArrayPathPoint aArray) {
-    return opensimModelJNI.ArrayPathPoint_append__SWIG_1(swigCPtr, this, ArrayPathPoint.getCPtr(aArray), aArray);
+    return opensimModelSimulationJNI.ArrayPathPoint_append__SWIG_1(swigCPtr, this, ArrayPathPoint.getCPtr(aArray), aArray);
   }
 
   public int insert(int aIndex, PathPoint aValue) {
-    return opensimModelJNI.ArrayPathPoint_insert(swigCPtr, this, aIndex, PathPoint.getCPtr(aValue), aValue);
+    return opensimModelSimulationJNI.ArrayPathPoint_insert(swigCPtr, this, aIndex, PathPoint.getCPtr(aValue), aValue);
   }
 
   public int remove(int aIndex) {
-    return opensimModelJNI.ArrayPathPoint_remove(swigCPtr, this, aIndex);
+    return opensimModelSimulationJNI.ArrayPathPoint_remove(swigCPtr, this, aIndex);
   }
 
   public void set(int aIndex, PathPoint aValue) {
-    opensimModelJNI.ArrayPathPoint_set(swigCPtr, this, aIndex, PathPoint.getCPtr(aValue), aValue);
+    opensimModelSimulationJNI.ArrayPathPoint_set(swigCPtr, this, aIndex, PathPoint.getCPtr(aValue), aValue);
   }
 
   public PathPoint get(int aIndex) {
-    long cPtr = opensimModelJNI.ArrayPathPoint_get(swigCPtr, this, aIndex);
+    long cPtr = opensimModelSimulationJNI.ArrayPathPoint_get(swigCPtr, this, aIndex);
     return (cPtr == 0) ? null : new PathPoint(cPtr, false);
   }
 
   public PathPoint getitem(int index) {
-    long cPtr = opensimModelJNI.ArrayPathPoint_getitem(swigCPtr, this, index);
+    long cPtr = opensimModelSimulationJNI.ArrayPathPoint_getitem(swigCPtr, this, index);
     return (cPtr == 0) ? null : new PathPoint(cPtr, false);
   }
 
   public void setitem(int index, PathPoint val) {
-    opensimModelJNI.ArrayPathPoint_setitem(swigCPtr, this, index, PathPoint.getCPtr(val), val);
+    opensimModelSimulationJNI.ArrayPathPoint_setitem(swigCPtr, this, index, PathPoint.getCPtr(val), val);
   }
 
   public PathPoint getLast() {
-    long cPtr = opensimModelJNI.ArrayPathPoint_getLast(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.ArrayPathPoint_getLast(swigCPtr, this);
     return (cPtr == 0) ? null : new PathPoint(cPtr, false);
   }
 
   public int findIndex(PathPoint aValue) {
-    return opensimModelJNI.ArrayPathPoint_findIndex(swigCPtr, this, PathPoint.getCPtr(aValue), aValue);
+    return opensimModelSimulationJNI.ArrayPathPoint_findIndex(swigCPtr, this, PathPoint.getCPtr(aValue), aValue);
   }
 
   public int rfindIndex(PathPoint aValue) {
-    return opensimModelJNI.ArrayPathPoint_rfindIndex(swigCPtr, this, PathPoint.getCPtr(aValue), aValue);
+    return opensimModelSimulationJNI.ArrayPathPoint_rfindIndex(swigCPtr, this, PathPoint.getCPtr(aValue), aValue);
   }
 
   public int searchBinary(PathPoint aValue, boolean aFindFirst, int aLo, int aHi) {
-    return opensimModelJNI.ArrayPathPoint_searchBinary__SWIG_0(swigCPtr, this, PathPoint.getCPtr(aValue), aValue, aFindFirst, aLo, aHi);
+    return opensimModelSimulationJNI.ArrayPathPoint_searchBinary__SWIG_0(swigCPtr, this, PathPoint.getCPtr(aValue), aValue, aFindFirst, aLo, aHi);
   }
 
   public int searchBinary(PathPoint aValue, boolean aFindFirst, int aLo) {
-    return opensimModelJNI.ArrayPathPoint_searchBinary__SWIG_1(swigCPtr, this, PathPoint.getCPtr(aValue), aValue, aFindFirst, aLo);
+    return opensimModelSimulationJNI.ArrayPathPoint_searchBinary__SWIG_1(swigCPtr, this, PathPoint.getCPtr(aValue), aValue, aFindFirst, aLo);
   }
 
   public int searchBinary(PathPoint aValue, boolean aFindFirst) {
-    return opensimModelJNI.ArrayPathPoint_searchBinary__SWIG_2(swigCPtr, this, PathPoint.getCPtr(aValue), aValue, aFindFirst);
+    return opensimModelSimulationJNI.ArrayPathPoint_searchBinary__SWIG_2(swigCPtr, this, PathPoint.getCPtr(aValue), aValue, aFindFirst);
   }
 
   public int searchBinary(PathPoint aValue) {
-    return opensimModelJNI.ArrayPathPoint_searchBinary__SWIG_3(swigCPtr, this, PathPoint.getCPtr(aValue), aValue);
+    return opensimModelSimulationJNI.ArrayPathPoint_searchBinary__SWIG_3(swigCPtr, this, PathPoint.getCPtr(aValue), aValue);
   }
 
 }

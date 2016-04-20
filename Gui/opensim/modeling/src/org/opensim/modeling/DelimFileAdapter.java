@@ -13,7 +13,7 @@ public class DelimFileAdapter extends FileAdapter {
   private boolean swigCMemOwnDerived;
 
   protected DelimFileAdapter(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.DelimFileAdapter_SWIGSmartPtrUpcast(cPtr), true);
+    super(opensimModelCommonJNI.DelimFileAdapter_SWIGSmartPtrUpcast(cPtr), true);
     swigCMemOwnDerived = cMemoryOwn;
     swigCPtr = cPtr;
   }
@@ -30,7 +30,7 @@ public class DelimFileAdapter extends FileAdapter {
     if (swigCPtr != 0) {
       if (swigCMemOwnDerived) {
         swigCMemOwnDerived = false;
-        opensimModelJNI.delete_DelimFileAdapter(swigCPtr);
+        opensimModelCommonJNI.delete_DelimFileAdapter(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -38,28 +38,28 @@ public class DelimFileAdapter extends FileAdapter {
   }
 
   public DelimFileAdapter(DelimFileAdapter arg0) {
-    this(opensimModelJNI.new_DelimFileAdapter__SWIG_0(DelimFileAdapter.getCPtr(arg0), arg0), true);
+    this(opensimModelCommonJNI.new_DelimFileAdapter__SWIG_0(DelimFileAdapter.getCPtr(arg0), arg0), true);
   }
 
   public DelimFileAdapter(String delimitersRead, String delimterWrite) {
-    this(opensimModelJNI.new_DelimFileAdapter__SWIG_2(delimitersRead, delimterWrite), true);
+    this(opensimModelCommonJNI.new_DelimFileAdapter__SWIG_2(delimitersRead, delimterWrite), true);
   }
 
   public DataAdapter clone() {
-    long cPtr = opensimModelJNI.DelimFileAdapter_clone(swigCPtr, this);
+    long cPtr = opensimModelCommonJNI.DelimFileAdapter_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new DelimFileAdapter(cPtr, true);
   }
 
   public TimeSeriesTable read(String filename) {
-    return new TimeSeriesTable(opensimModelJNI.DelimFileAdapter_read(swigCPtr, this, filename), true);
+    return new TimeSeriesTable(opensimModelCommonJNI.DelimFileAdapter_read(swigCPtr, this, filename), true);
   }
 
   public void write(TimeSeriesTable table, String filename) {
-    opensimModelJNI.DelimFileAdapter_write(swigCPtr, this, TimeSeriesTable.getCPtr(table), table, filename);
+    opensimModelCommonJNI.DelimFileAdapter_write(swigCPtr, this, TimeSeriesTable.getCPtr(table), table, filename);
   }
 
   public static String get_table() {
-    return opensimModelJNI.DelimFileAdapter__table_get();
+    return opensimModelCommonJNI.DelimFileAdapter__table_get();
   }
 
 }
