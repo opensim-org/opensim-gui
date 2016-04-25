@@ -4,5 +4,25 @@
 <!-- If you delete this file and reopen the project it will be recreated. -->
 <project name="opensim" basedir=".">
     <description>Builds the module suite opensim.</description>
+    <property name="api.dir" value="C:/Dev/gui/opensim-gui/OpenSimAPI-install"/>
     <import file="nbproject/build-impl.xml"/>
+    <target name="unzip-distro" depends="build-zip" 
+            description="unZIP distribution of the suite, launchers, and selected modules from the platform.">
+        <unzip src="dist/opensim.zip" dest="dist/installer" />
+    </target>
+    <target name="copy-opensim-core" depends="unzip-distro" 
+            description="Copy prebuilt opensim-core installayion into installer folder">
+        <copy todir="dist/installer/opensim/bin">
+            <fileset dir="${api.dir}/bin"/>
+        </copy>
+        <copy todir="dist/installer/opensim/cmake">
+            <fileset dir="${api.dir}/cmake"/>
+        </copy>
+        <copy todir="dist/installer/opensim/Scripts">
+            <fileset dir="${api.dir}/Scripts"/>
+        </copy>
+        <copy todir="dist/installer/opensim/sdk">
+            <fileset dir="${api.dir}/sdk"/>
+        </copy>
+    </target>
 </project>
