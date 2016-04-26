@@ -14,15 +14,21 @@ if(NOT OpenSim_JAVA_WRAPPING)
 endif()
 
 message(STATUS "Replacing exising Java files with ones from opensim-core.")
-file(REMOVE_RECURSE "${CMAKE_CURRENT_SOURCE_DIR}/modeling/src/org")
+#file(REMOVE_RECURSE "${CMAKE_CURRENT_SOURCE_DIR}/modeling/src/org")
 file(COPY ${OpenSim_JAVA_FILES_DIR}
     DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/modeling/src"
     FILES_MATCHING PATTERN "*.java")
 
 find_package(Ant REQUIRED)
 
-add_custom_target(DistributionZip ALL
-                  COMMAND ${Ant_EXECUTABLE} build-zip
+add_custom_target(CopyOpenSimCore ALL
+                  COMMAND ${Ant_EXECUTABLE} copy-java-bindings 
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-                  COMMENT "Building the OpenSim zip distribution.")
+                  COMMENT "Copy opensim-core Java Bindings to GUI.")
+
+add_custom_target(PrepareInstaller ALL
+                  COMMAND ${Ant_EXECUTABLE} copy-installer-files
+                  DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
+                  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                  COMMENT "Merge GUI build and opensim-core install into one folder.")
