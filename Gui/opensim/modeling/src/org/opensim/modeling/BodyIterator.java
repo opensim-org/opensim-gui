@@ -134,8 +134,24 @@ public class BodyIterator {
     return opensimModelSimulationJNI.BodyIterator__has_output_transform_get(swigCPtr, this);
   }
 
-  public Transform getGroundTransform(State state) {
-    return new Transform(opensimModelSimulationJNI.BodyIterator_getGroundTransform(swigCPtr, this, State.getCPtr(state), state), false);
+  public boolean get_has_output_velocity() {
+    return opensimModelSimulationJNI.BodyIterator__has_output_velocity_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_acceleration() {
+    return opensimModelSimulationJNI.BodyIterator__has_output_acceleration_get(swigCPtr, this);
+  }
+
+  public Transform getTransformInGround(State state) {
+    return new Transform(opensimModelSimulationJNI.BodyIterator_getTransformInGround(swigCPtr, this, State.getCPtr(state), state), false);
+  }
+
+  public SpatialVec getVelocityInGround(State state) {
+    return new SpatialVec(opensimModelSimulationJNI.BodyIterator_getVelocityInGround(swigCPtr, this, State.getCPtr(state), state), false);
+  }
+
+  public SpatialVec getAccelerationInGround(State state) {
+    return new SpatialVec(opensimModelSimulationJNI.BodyIterator_getAccelerationInGround(swigCPtr, this, State.getCPtr(state), state), false);
   }
 
   public Transform findTransformBetween(State state, Frame otherFrame) {
@@ -305,6 +321,14 @@ public class BodyIterator {
   public AbstractConnector findConnector(String name) {
     long cPtr = opensimModelSimulationJNI.BodyIterator_findConnector(swigCPtr, this, name);
     return (cPtr == 0) ? null : new AbstractConnector(cPtr, false);
+  }
+
+  public Component getParent() {
+    return new Component(opensimModelSimulationJNI.BodyIterator_getParent(swigCPtr, this), false);
+  }
+
+  public boolean hasParent() {
+    return opensimModelSimulationJNI.BodyIterator_hasParent(swigCPtr, this);
   }
 
   public ComponentsList getComponentsList() {

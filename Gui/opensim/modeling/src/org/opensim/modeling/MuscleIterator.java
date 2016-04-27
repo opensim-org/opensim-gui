@@ -461,6 +461,10 @@ public class MuscleIterator {
     return opensimModelSimulationJNI.MuscleIterator_get_optimal_force__SWIG_1(swigCPtr, this);
   }
 
+  public boolean get_has_output_tension() {
+    return opensimModelSimulationJNI.MuscleIterator__has_output_tension_get(swigCPtr, this);
+  }
+
   public GeometryPath getGeometryPath() {
     return new GeometryPath(opensimModelSimulationJNI.MuscleIterator_getGeometryPath(swigCPtr, this), false);
   }
@@ -744,6 +748,14 @@ public class MuscleIterator {
   public AbstractConnector findConnector(String name) {
     long cPtr = opensimModelSimulationJNI.MuscleIterator_findConnector(swigCPtr, this, name);
     return (cPtr == 0) ? null : new AbstractConnector(cPtr, false);
+  }
+
+  public Component getParent() {
+    return new Component(opensimModelSimulationJNI.MuscleIterator_getParent(swigCPtr, this), false);
+  }
+
+  public boolean hasParent() {
+    return opensimModelSimulationJNI.MuscleIterator_hasParent(swigCPtr, this);
   }
 
   public ComponentsList getComponentsList() {

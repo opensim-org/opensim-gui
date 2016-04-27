@@ -278,6 +278,14 @@ public class JointIterator {
     return (cPtr == 0) ? null : new AbstractConnector(cPtr, false);
   }
 
+  public Component getParent() {
+    return new Component(opensimModelSimulationJNI.JointIterator_getParent(swigCPtr, this), false);
+  }
+
+  public boolean hasParent() {
+    return opensimModelSimulationJNI.JointIterator_hasParent(swigCPtr, this);
+  }
+
   public ComponentsList getComponentsList() {
     return new ComponentsList(opensimModelSimulationJNI.JointIterator_getComponentsList(swigCPtr, this), true);
   }

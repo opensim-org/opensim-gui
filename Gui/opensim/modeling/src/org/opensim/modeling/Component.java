@@ -226,6 +226,14 @@ public class Component extends OpenSimObject {
     return (cPtr == 0) ? null : new AbstractConnector(cPtr, false);
   }
 
+  public Component getParent() {
+    return new Component(opensimModelSimulationJNI.Component_getParent(swigCPtr, this), false);
+  }
+
+  public boolean hasParent() {
+    return opensimModelSimulationJNI.Component_hasParent(swigCPtr, this);
+  }
+
   public ComponentsList getComponentsList() {
     return new ComponentsList(opensimModelSimulationJNI.Component_getComponentsList(swigCPtr, this), true);
   }

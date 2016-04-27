@@ -90,8 +90,8 @@ public class PathWrap extends OpenSimObject {
     opensimModelSimulationJNI.PathWrap_setWrapObject(swigCPtr, this, WrapObject.getCPtr(aWrapObject), aWrapObject);
   }
 
-  public SWIGTYPE_p_PathWrapPoint getWrapPoint(int aIndex) {
-    return new SWIGTYPE_p_PathWrapPoint(opensimModelSimulationJNI.PathWrap_getWrapPoint(swigCPtr, this, aIndex), false);
+  public PathWrapPoint getWrapPoint(int aIndex) {
+    return new PathWrapPoint(opensimModelSimulationJNI.PathWrap_getWrapPoint(swigCPtr, this, aIndex), false);
   }
 
   public PathWrap.WrapMethod getMethod() {

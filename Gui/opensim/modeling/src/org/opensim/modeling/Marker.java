@@ -48,7 +48,7 @@ public class Marker extends Station {
     return opensimModelSimulationJNI.Marker_getClassName();
   }
 
-  public OpenSimObject clone() {
+  public Marker clone() {
     long cPtr = opensimModelSimulationJNI.Marker_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Marker(cPtr, true);
   }

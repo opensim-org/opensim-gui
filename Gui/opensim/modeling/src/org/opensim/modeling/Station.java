@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class Station extends ModelComponent {
+public class Station extends Point {
   private transient long swigCPtr;
 
   public Station(long cPtr, boolean cMemoryOwn) {
@@ -48,7 +48,7 @@ public class Station extends ModelComponent {
     return opensimModelSimulationJNI.Station_getClassName();
   }
 
-  public OpenSimObject clone() {
+  public Station clone() {
     long cPtr = opensimModelSimulationJNI.Station_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Station(cPtr, true);
   }
@@ -94,19 +94,23 @@ public class Station extends ModelComponent {
   }
 
   public Station() {
-    this(opensimModelSimulationJNI.new_Station(), true);
+    this(opensimModelSimulationJNI.new_Station__SWIG_0(), true);
   }
 
-  public PhysicalFrame getReferenceFrame() {
-    return new PhysicalFrame(opensimModelSimulationJNI.Station_getReferenceFrame(swigCPtr, this), false);
+  public Station(PhysicalFrame frame, Vec3 location) {
+    this(opensimModelSimulationJNI.new_Station__SWIG_1(PhysicalFrame.getCPtr(frame), frame, Vec3.getCPtr(location), location), true);
   }
 
-  public void setReferenceFrame(PhysicalFrame aFrame) {
-    opensimModelSimulationJNI.Station_setReferenceFrame(swigCPtr, this, PhysicalFrame.getCPtr(aFrame), aFrame);
+  public PhysicalFrame getParentFrame() {
+    return new PhysicalFrame(opensimModelSimulationJNI.Station_getParentFrame(swigCPtr, this), false);
   }
 
-  public Vec3 findLocationInFrame(State s, Frame aFrame) {
-    return new Vec3(opensimModelSimulationJNI.Station_findLocationInFrame(swigCPtr, this, State.getCPtr(s), s, Frame.getCPtr(aFrame), aFrame), true);
+  public void setParentFrame(PhysicalFrame aFrame) {
+    opensimModelSimulationJNI.Station_setParentFrame(swigCPtr, this, PhysicalFrame.getCPtr(aFrame), aFrame);
+  }
+
+  public Vec3 findLocationInFrame(State s, Frame frame) {
+    return new Vec3(opensimModelSimulationJNI.Station_findLocationInFrame(swigCPtr, this, State.getCPtr(s), s, Frame.getCPtr(frame), frame), true);
   }
 
 }

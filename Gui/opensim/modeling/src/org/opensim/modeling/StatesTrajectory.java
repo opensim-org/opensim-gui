@@ -63,6 +63,10 @@ public class StatesTrajectory {
     return new SWIGTYPE_p_std__vectorT_SimTK__State_t__const_iterator(opensimModelSimulationJNI.StatesTrajectory_end(swigCPtr, this), true);
   }
 
+  public void clear() {
+    opensimModelSimulationJNI.StatesTrajectory_clear(swigCPtr, this);
+  }
+
   public void append(State state) {
     opensimModelSimulationJNI.StatesTrajectory_append(swigCPtr, this, State.getCPtr(state), state);
   }

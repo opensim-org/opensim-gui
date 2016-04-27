@@ -73,8 +73,32 @@ public class Frame extends ModelComponent {
     return opensimModelSimulationJNI.Frame__has_output_transform_get(swigCPtr, this);
   }
 
-  public Transform getGroundTransform(State state) {
-    return new Transform(opensimModelSimulationJNI.Frame_getGroundTransform(swigCPtr, this, State.getCPtr(state), state), false);
+  public void set_has_output_velocity(boolean value) {
+    opensimModelSimulationJNI.Frame__has_output_velocity_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_velocity() {
+    return opensimModelSimulationJNI.Frame__has_output_velocity_get(swigCPtr, this);
+  }
+
+  public void set_has_output_acceleration(boolean value) {
+    opensimModelSimulationJNI.Frame__has_output_acceleration_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_acceleration() {
+    return opensimModelSimulationJNI.Frame__has_output_acceleration_get(swigCPtr, this);
+  }
+
+  public Transform getTransformInGround(State state) {
+    return new Transform(opensimModelSimulationJNI.Frame_getTransformInGround(swigCPtr, this, State.getCPtr(state), state), false);
+  }
+
+  public SpatialVec getVelocityInGround(State state) {
+    return new SpatialVec(opensimModelSimulationJNI.Frame_getVelocityInGround(swigCPtr, this, State.getCPtr(state), state), false);
+  }
+
+  public SpatialVec getAccelerationInGround(State state) {
+    return new SpatialVec(opensimModelSimulationJNI.Frame_getAccelerationInGround(swigCPtr, this, State.getCPtr(state), state), false);
   }
 
   public Transform findTransformBetween(State state, Frame otherFrame) {

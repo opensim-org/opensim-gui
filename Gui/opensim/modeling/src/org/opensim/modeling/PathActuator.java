@@ -129,6 +129,14 @@ public class PathActuator extends ScalarActuator {
     opensimModelSimulationJNI.PathActuator_set_optimal_force__SWIG_1(swigCPtr, this, value);
   }
 
+  public void set_has_output_tension(boolean value) {
+    opensimModelSimulationJNI.PathActuator__has_output_tension_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_tension() {
+    return opensimModelSimulationJNI.PathActuator__has_output_tension_get(swigCPtr, this);
+  }
+
   public PathActuator() {
     this(opensimModelSimulationJNI.new_PathActuator(), true);
   }
@@ -183,14 +191,6 @@ public class PathActuator extends ScalarActuator {
 
   public double computeMomentArm(State s, Coordinate aCoord) {
     return opensimModelSimulationJNI.PathActuator_computeMomentArm(swigCPtr, this, State.getCPtr(s), s, Coordinate.getCPtr(aCoord), aCoord);
-  }
-
-  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
-    opensimModelSimulationJNI.PathActuator_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
-  }
-
-  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
-    opensimModelSimulationJNI.PathActuator_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
   public void preScale(State s, ScaleSet aScaleSet) {
