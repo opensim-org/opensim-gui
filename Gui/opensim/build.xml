@@ -23,9 +23,6 @@
         <copy todir="dist/installer/opensim/cmake">
             <fileset dir="${api.dir}/cmake"/>
         </copy>
-        <copy todir="dist/installer/opensim/Scripts">
-            <fileset dir="${api.dir}/Scripts"/>
-        </copy>
         <copy todir="dist/installer/opensim/sdk">
             <fileset dir="${api.dir}/sdk"/>
         </copy>
