@@ -25,7 +25,7 @@ nuget:
 install:
 
   ## The GUI is built with the Netbeans platform.
-  - ps: choco install netbeans --yes --limit-output | Out-Null
+  - ps: choco install netbeans --yes --limit-output
 
   ## Apache Ant for building Java projects.
   - choco install ant --yes --limit-output
