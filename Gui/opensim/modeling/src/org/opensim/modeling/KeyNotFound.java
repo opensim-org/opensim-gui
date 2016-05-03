@@ -12,7 +12,7 @@ public class KeyNotFound extends OpenSimException {
   private transient long swigCPtr;
 
   public KeyNotFound(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.KeyNotFound_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.KeyNotFound_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class KeyNotFound extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_KeyNotFound(swigCPtr);
+        opensimModelCommonJNI.delete_KeyNotFound(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class KeyNotFound extends OpenSimException {
   }
 
   public KeyNotFound(String file, long line, String func, String key) {
-    this(opensimModelJNI.new_KeyNotFound(file, line, func, key), true);
+    this(opensimModelCommonJNI.new_KeyNotFound(file, line, func, key), true);
   }
 
 }

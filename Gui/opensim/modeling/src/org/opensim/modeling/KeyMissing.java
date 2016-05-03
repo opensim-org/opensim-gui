@@ -12,7 +12,7 @@ public class KeyMissing extends InvalidArgument {
   private transient long swigCPtr;
 
   public KeyMissing(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.KeyMissing_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.KeyMissing_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class KeyMissing extends InvalidArgument {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_KeyMissing(swigCPtr);
+        opensimModelCommonJNI.delete_KeyMissing(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class KeyMissing extends InvalidArgument {
   }
 
   public KeyMissing(String file, long line, String func, String key) {
-    this(opensimModelJNI.new_KeyMissing(file, line, func, key), true);
+    this(opensimModelCommonJNI.new_KeyMissing(file, line, func, key), true);
   }
 
 }

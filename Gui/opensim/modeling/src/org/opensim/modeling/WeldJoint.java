@@ -12,7 +12,7 @@ public class WeldJoint extends Joint {
   private transient long swigCPtr;
 
   public WeldJoint(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.WeldJoint_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.WeldJoint_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class WeldJoint extends Joint {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_WeldJoint(swigCPtr);
+        opensimModelSimulationJNI.delete_WeldJoint(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,33 +36,33 @@ public class WeldJoint extends Joint {
   }
 
   public static WeldJoint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.WeldJoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.WeldJoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new WeldJoint(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.WeldJoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.WeldJoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.WeldJoint_getClassName();
+    return opensimModelSimulationJNI.WeldJoint_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.WeldJoint_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.WeldJoint_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new WeldJoint(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.WeldJoint_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.WeldJoint_getConcreteClassName(swigCPtr, this);
   }
 
-  public WeldJoint(String name, String parentName, String childName) {
-    this(opensimModelJNI.new_WeldJoint__SWIG_0(name, parentName, childName), true);
+  public WeldJoint(String name, PhysicalFrame parent, PhysicalFrame child) {
+    this(opensimModelSimulationJNI.new_WeldJoint__SWIG_0(name, PhysicalFrame.getCPtr(parent), parent, PhysicalFrame.getCPtr(child), child), true);
   }
 
   public WeldJoint(String name, PhysicalFrame parent, Vec3 locationInParent, Vec3 orientationInParent, PhysicalFrame child, Vec3 locationInChild, Vec3 orientationInChild) {
-    this(opensimModelJNI.new_WeldJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
+    this(opensimModelSimulationJNI.new_WeldJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
   }
 
 }

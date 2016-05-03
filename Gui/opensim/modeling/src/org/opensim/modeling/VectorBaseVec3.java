@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class VectorBaseVec3 extends MatrixBaseVec3 {
   private transient long swigCPtr;
 
-  public VectorBaseVec3(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.VectorBaseVec3_SWIGUpcast(cPtr), cMemoryOwn);
+  protected VectorBaseVec3(long cPtr, boolean cMemoryOwn) {
+    super(opensimSimbodyJNI.VectorBaseVec3_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(VectorBaseVec3 obj) {
+  protected static long getCPtr(VectorBaseVec3 obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,7 +28,7 @@ public class VectorBaseVec3 extends MatrixBaseVec3 {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_VectorBaseVec3(swigCPtr);
+        opensimSimbodyJNI.delete_VectorBaseVec3(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,51 +36,51 @@ public class VectorBaseVec3 extends MatrixBaseVec3 {
   }
 
   public VectorBaseVec3(int m) {
-    this(opensimModelJNI.new_VectorBaseVec3__SWIG_0(m), true);
+    this(opensimSimbodyJNI.new_VectorBaseVec3__SWIG_0(m), true);
   }
 
   public VectorBaseVec3() {
-    this(opensimModelJNI.new_VectorBaseVec3__SWIG_1(), true);
+    this(opensimSimbodyJNI.new_VectorBaseVec3__SWIG_1(), true);
   }
 
   public VectorBaseVec3(VectorBaseVec3 source) {
-    this(opensimModelJNI.new_VectorBaseVec3__SWIG_2(VectorBaseVec3.getCPtr(source), source), true);
+    this(opensimSimbodyJNI.new_VectorBaseVec3__SWIG_2(VectorBaseVec3.getCPtr(source), source), true);
   }
 
   public int size() {
-    return opensimModelJNI.VectorBaseVec3_size(swigCPtr, this);
+    return opensimSimbodyJNI.VectorBaseVec3_size(swigCPtr, this);
   }
 
   public int nrow() {
-    return opensimModelJNI.VectorBaseVec3_nrow(swigCPtr, this);
+    return opensimSimbodyJNI.VectorBaseVec3_nrow(swigCPtr, this);
   }
 
   public int ncol() {
-    return opensimModelJNI.VectorBaseVec3_ncol(swigCPtr, this);
+    return opensimSimbodyJNI.VectorBaseVec3_ncol(swigCPtr, this);
   }
 
   public VectorBaseVec3 resize(int m) {
-    return new VectorBaseVec3(opensimModelJNI.VectorBaseVec3_resize(swigCPtr, this, m), false);
+    return new VectorBaseVec3(opensimSimbodyJNI.VectorBaseVec3_resize(swigCPtr, this, m), false);
   }
 
   public VectorBaseVec3 resizeKeep(int m) {
-    return new VectorBaseVec3(opensimModelJNI.VectorBaseVec3_resizeKeep(swigCPtr, this, m), false);
+    return new VectorBaseVec3(opensimSimbodyJNI.VectorBaseVec3_resizeKeep(swigCPtr, this, m), false);
   }
 
   public void clear() {
-    opensimModelJNI.VectorBaseVec3_clear(swigCPtr, this);
+    opensimSimbodyJNI.VectorBaseVec3_clear(swigCPtr, this);
   }
 
   public Vec3 sum() {
-    return new Vec3(opensimModelJNI.VectorBaseVec3_sum(swigCPtr, this), true);
+    return new Vec3(opensimSimbodyJNI.VectorBaseVec3_sum(swigCPtr, this), true);
   }
 
   public Vec3 __getitem__(long i) {
-    return new Vec3(opensimModelJNI.VectorBaseVec3___getitem__(swigCPtr, this, i), true);
+    return new Vec3(opensimSimbodyJNI.VectorBaseVec3___getitem__(swigCPtr, this, i), true);
   }
 
   public void __setitem__(long i, Vec3 value) {
-    opensimModelJNI.VectorBaseVec3___setitem__(swigCPtr, this, i, Vec3.getCPtr(value), value);
+    opensimSimbodyJNI.VectorBaseVec3___setitem__(swigCPtr, this, i, Vec3.getCPtr(value), value);
   }
 
 }

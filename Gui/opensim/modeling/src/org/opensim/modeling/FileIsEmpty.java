@@ -12,7 +12,7 @@ public class FileIsEmpty extends IOError {
   private transient long swigCPtr;
 
   public FileIsEmpty(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.FileIsEmpty_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.FileIsEmpty_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class FileIsEmpty extends IOError {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_FileIsEmpty(swigCPtr);
+        opensimModelCommonJNI.delete_FileIsEmpty(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class FileIsEmpty extends IOError {
   }
 
   public FileIsEmpty(String file, long line, String func, String filename) {
-    this(opensimModelJNI.new_FileIsEmpty(file, line, func, filename), true);
+    this(opensimModelCommonJNI.new_FileIsEmpty(file, line, func, filename), true);
   }
 
 }

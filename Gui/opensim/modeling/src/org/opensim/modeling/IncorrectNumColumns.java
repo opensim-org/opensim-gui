@@ -12,7 +12,7 @@ public class IncorrectNumColumns extends InvalidRow {
   private transient long swigCPtr;
 
   public IncorrectNumColumns(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.IncorrectNumColumns_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.IncorrectNumColumns_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class IncorrectNumColumns extends InvalidRow {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_IncorrectNumColumns(swigCPtr);
+        opensimModelCommonJNI.delete_IncorrectNumColumns(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class IncorrectNumColumns extends InvalidRow {
   }
 
   public IncorrectNumColumns(String file, long line, String func, long expected, long received) {
-    this(opensimModelJNI.new_IncorrectNumColumns(file, line, func, expected, received), true);
+    this(opensimModelCommonJNI.new_IncorrectNumColumns(file, line, func, expected, received), true);
   }
 
 }

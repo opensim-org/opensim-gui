@@ -12,7 +12,7 @@ public class SimmSpline extends Function {
   private transient long swigCPtr;
 
   public SimmSpline(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.SimmSpline_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.SimmSpline_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class SimmSpline extends Function {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_SimmSpline(swigCPtr);
+        opensimModelCommonJNI.delete_SimmSpline(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,132 +36,132 @@ public class SimmSpline extends Function {
   }
 
   public static SimmSpline safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.SimmSpline_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelCommonJNI.SimmSpline_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new SimmSpline(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.SimmSpline_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelCommonJNI.SimmSpline_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.SimmSpline_getClassName();
+    return opensimModelCommonJNI.SimmSpline_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.SimmSpline_clone(swigCPtr, this);
+    long cPtr = opensimModelCommonJNI.SimmSpline_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new SimmSpline(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.SimmSpline_getConcreteClassName(swigCPtr, this);
+    return opensimModelCommonJNI.SimmSpline_getConcreteClassName(swigCPtr, this);
   }
 
   public SimmSpline() {
-    this(opensimModelJNI.new_SimmSpline__SWIG_0(), true);
+    this(opensimModelCommonJNI.new_SimmSpline__SWIG_0(), true);
   }
 
   public SimmSpline(int aN, SWIGTYPE_p_double aTimes, SWIGTYPE_p_double aValues, String aName) {
-    this(opensimModelJNI.new_SimmSpline__SWIG_1(aN, SWIGTYPE_p_double.getCPtr(aTimes), SWIGTYPE_p_double.getCPtr(aValues), aName), true);
+    this(opensimModelCommonJNI.new_SimmSpline__SWIG_1(aN, SWIGTYPE_p_double.getCPtr(aTimes), SWIGTYPE_p_double.getCPtr(aValues), aName), true);
   }
 
   public SimmSpline(int aN, SWIGTYPE_p_double aTimes, SWIGTYPE_p_double aValues) {
-    this(opensimModelJNI.new_SimmSpline__SWIG_2(aN, SWIGTYPE_p_double.getCPtr(aTimes), SWIGTYPE_p_double.getCPtr(aValues)), true);
+    this(opensimModelCommonJNI.new_SimmSpline__SWIG_2(aN, SWIGTYPE_p_double.getCPtr(aTimes), SWIGTYPE_p_double.getCPtr(aValues)), true);
   }
 
   public SimmSpline(SimmSpline aSpline) {
-    this(opensimModelJNI.new_SimmSpline__SWIG_3(SimmSpline.getCPtr(aSpline), aSpline), true);
+    this(opensimModelCommonJNI.new_SimmSpline__SWIG_3(SimmSpline.getCPtr(aSpline), aSpline), true);
   }
 
   public void init(Function aFunction) {
-    opensimModelJNI.SimmSpline_init(swigCPtr, this, Function.getCPtr(aFunction), aFunction);
+    opensimModelCommonJNI.SimmSpline_init(swigCPtr, this, Function.getCPtr(aFunction), aFunction);
   }
 
   public int getSize() {
-    return opensimModelJNI.SimmSpline_getSize(swigCPtr, this);
+    return opensimModelCommonJNI.SimmSpline_getSize(swigCPtr, this);
   }
 
   public ArrayDouble getX() {
-    return new ArrayDouble(opensimModelJNI.SimmSpline_getX__SWIG_0(swigCPtr, this), false);
+    return new ArrayDouble(opensimModelCommonJNI.SimmSpline_getX__SWIG_0(swigCPtr, this), false);
   }
 
   public ArrayDouble getY() {
-    return new ArrayDouble(opensimModelJNI.SimmSpline_getY__SWIG_0(swigCPtr, this), false);
+    return new ArrayDouble(opensimModelCommonJNI.SimmSpline_getY__SWIG_0(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_double getXValues() {
-    long cPtr = opensimModelJNI.SimmSpline_getXValues(swigCPtr, this);
+    long cPtr = opensimModelCommonJNI.SimmSpline_getXValues(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_double(cPtr, false);
   }
 
   public SWIGTYPE_p_double getYValues() {
-    long cPtr = opensimModelJNI.SimmSpline_getYValues(swigCPtr, this);
+    long cPtr = opensimModelCommonJNI.SimmSpline_getYValues(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_double(cPtr, false);
   }
 
   public int getNumberOfPoints() {
-    return opensimModelJNI.SimmSpline_getNumberOfPoints(swigCPtr, this);
+    return opensimModelCommonJNI.SimmSpline_getNumberOfPoints(swigCPtr, this);
   }
 
   public double getX(int aIndex) {
-    return opensimModelJNI.SimmSpline_getX__SWIG_1(swigCPtr, this, aIndex);
+    return opensimModelCommonJNI.SimmSpline_getX__SWIG_1(swigCPtr, this, aIndex);
   }
 
   public double getY(int aIndex) {
-    return opensimModelJNI.SimmSpline_getY__SWIG_1(swigCPtr, this, aIndex);
+    return opensimModelCommonJNI.SimmSpline_getY__SWIG_1(swigCPtr, this, aIndex);
   }
 
   public double getZ(int aIndex) {
-    return opensimModelJNI.SimmSpline_getZ(swigCPtr, this, aIndex);
+    return opensimModelCommonJNI.SimmSpline_getZ(swigCPtr, this, aIndex);
   }
 
   public void setX(int aIndex, double aValue) {
-    opensimModelJNI.SimmSpline_setX(swigCPtr, this, aIndex, aValue);
+    opensimModelCommonJNI.SimmSpline_setX(swigCPtr, this, aIndex, aValue);
   }
 
   public void setY(int aIndex, double aValue) {
-    opensimModelJNI.SimmSpline_setY(swigCPtr, this, aIndex, aValue);
+    opensimModelCommonJNI.SimmSpline_setY(swigCPtr, this, aIndex, aValue);
   }
 
   public boolean deletePoint(int aIndex) {
-    return opensimModelJNI.SimmSpline_deletePoint(swigCPtr, this, aIndex);
+    return opensimModelCommonJNI.SimmSpline_deletePoint(swigCPtr, this, aIndex);
   }
 
   public boolean deletePoints(ArrayInt indices) {
-    return opensimModelJNI.SimmSpline_deletePoints(swigCPtr, this, ArrayInt.getCPtr(indices), indices);
+    return opensimModelCommonJNI.SimmSpline_deletePoints(swigCPtr, this, ArrayInt.getCPtr(indices), indices);
   }
 
   public int addPoint(double aX, double aY) {
-    return opensimModelJNI.SimmSpline_addPoint(swigCPtr, this, aX, aY);
+    return opensimModelCommonJNI.SimmSpline_addPoint(swigCPtr, this, aX, aY);
   }
 
   public double calcValue(Vector x) {
-    return opensimModelJNI.SimmSpline_calcValue(swigCPtr, this, Vector.getCPtr(x), x);
+    return opensimModelCommonJNI.SimmSpline_calcValue(swigCPtr, this, Vector.getCPtr(x), x);
   }
 
-  public double calcDerivative(StdVecInt derivComponents, Vector x) {
-    return opensimModelJNI.SimmSpline_calcDerivative(swigCPtr, this, StdVecInt.getCPtr(derivComponents), derivComponents, Vector.getCPtr(x), x);
+  public double calcDerivative(StdVectorInt derivComponents, Vector x) {
+    return opensimModelCommonJNI.SimmSpline_calcDerivative(swigCPtr, this, StdVectorInt.getCPtr(derivComponents), derivComponents, Vector.getCPtr(x), x);
   }
 
   public int getArgumentSize() {
-    return opensimModelJNI.SimmSpline_getArgumentSize(swigCPtr, this);
+    return opensimModelCommonJNI.SimmSpline_getArgumentSize(swigCPtr, this);
   }
 
   public int getMaxDerivativeOrder() {
-    return opensimModelJNI.SimmSpline_getMaxDerivativeOrder(swigCPtr, this);
+    return opensimModelCommonJNI.SimmSpline_getMaxDerivativeOrder(swigCPtr, this);
   }
 
   public SWIGTYPE_p_SimTK__Function createSimTKFunction() {
-    long cPtr = opensimModelJNI.SimmSpline_createSimTKFunction(swigCPtr, this);
+    long cPtr = opensimModelCommonJNI.SimmSpline_createSimTKFunction(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_SimTK__Function(cPtr, false);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
-    opensimModelJNI.SimmSpline_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+    opensimModelCommonJNI.SimmSpline_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
-    opensimModelJNI.SimmSpline_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
+    opensimModelCommonJNI.SimmSpline_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
 }

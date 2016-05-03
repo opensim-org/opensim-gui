@@ -12,7 +12,7 @@ public class Sphere extends AnalyticGeometry {
   private transient long swigCPtr;
 
   public Sphere(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.Sphere_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.Sphere_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Sphere extends AnalyticGeometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_Sphere(swigCPtr);
+        opensimModelSimulationJNI.delete_Sphere(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,69 +36,69 @@ public class Sphere extends AnalyticGeometry {
   }
 
   public static Sphere safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Sphere_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.Sphere_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Sphere(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.Sphere_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.Sphere_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.Sphere_getClassName();
+    return opensimModelSimulationJNI.Sphere_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.Sphere_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.Sphere_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Sphere(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.Sphere_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.Sphere_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_radius(Sphere source) {
-    opensimModelJNI.Sphere_copyProperty_radius(swigCPtr, this, Sphere.getCPtr(source), source);
+    opensimModelSimulationJNI.Sphere_copyProperty_radius(swigCPtr, this, Sphere.getCPtr(source), source);
   }
 
   public double get_radius(int i) {
-    return opensimModelJNI.Sphere_get_radius__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.Sphere_get_radius__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_radius(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.Sphere_upd_radius__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Sphere_upd_radius__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_radius(int i, double value) {
-    opensimModelJNI.Sphere_set_radius__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.Sphere_set_radius__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_radius(double value) {
-    return opensimModelJNI.Sphere_append_radius(swigCPtr, this, value);
+    return opensimModelSimulationJNI.Sphere_append_radius(swigCPtr, this, value);
   }
 
   public void constructProperty_radius(double initValue) {
-    opensimModelJNI.Sphere_constructProperty_radius(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.Sphere_constructProperty_radius(swigCPtr, this, initValue);
   }
 
   public double get_radius() {
-    return opensimModelJNI.Sphere_get_radius__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.Sphere_get_radius__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_radius() {
-    return new SWIGTYPE_p_double(opensimModelJNI.Sphere_upd_radius__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Sphere_upd_radius__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_radius(double value) {
-    opensimModelJNI.Sphere_set_radius__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.Sphere_set_radius__SWIG_1(swigCPtr, this, value);
   }
 
   public Sphere() {
-    this(opensimModelJNI.new_Sphere__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_Sphere__SWIG_0(), true);
   }
 
   public Sphere(double radius) {
-    this(opensimModelJNI.new_Sphere__SWIG_1(radius), true);
+    this(opensimModelSimulationJNI.new_Sphere__SWIG_1(radius), true);
   }
 
 }

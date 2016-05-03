@@ -13,7 +13,7 @@ public class DataTable extends AbstractDataTable {
   private boolean swigCMemOwnDerived;
 
   protected DataTable(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.DataTable_SWIGSmartPtrUpcast(cPtr), true);
+    super(opensimModelCommonJNI.DataTable_SWIGSmartPtrUpcast(cPtr), true);
     swigCMemOwnDerived = cMemoryOwn;
     swigCPtr = cPtr;
   }
@@ -30,7 +30,7 @@ public class DataTable extends AbstractDataTable {
     if (swigCPtr != 0) {
       if (swigCMemOwnDerived) {
         swigCMemOwnDerived = false;
-        opensimModelJNI.delete_DataTable(swigCPtr);
+        opensimModelCommonJNI.delete_DataTable(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -38,47 +38,71 @@ public class DataTable extends AbstractDataTable {
   }
 
   public DataTable() {
-    this(opensimModelJNI.new_DataTable__SWIG_0(), true);
+    this(opensimModelCommonJNI.new_DataTable__SWIG_0(), true);
   }
 
   public DataTable(DataTable arg0) {
-    this(opensimModelJNI.new_DataTable__SWIG_1(DataTable.getCPtr(arg0), arg0), true);
+    this(opensimModelCommonJNI.new_DataTable__SWIG_1(DataTable.getCPtr(arg0), arg0), true);
   }
 
   public void appendRow(double indRow, RowVector depRow) {
-    opensimModelJNI.DataTable_appendRow(swigCPtr, this, indRow, RowVector.getCPtr(depRow), depRow);
+    opensimModelCommonJNI.DataTable_appendRow(swigCPtr, this, indRow, RowVector.getCPtr(depRow), depRow);
   }
 
   public RowVectorView getRowAtIndex(long index) {
-    return new RowVectorView(opensimModelJNI.DataTable_getRowAtIndex(swigCPtr, this, index), true);
+    return new RowVectorView(opensimModelCommonJNI.DataTable_getRowAtIndex(swigCPtr, this, index), true);
   }
 
   public RowVectorView getRow(double ind) {
-    return new RowVectorView(opensimModelJNI.DataTable_getRow(swigCPtr, this, ind), true);
+    return new RowVectorView(opensimModelCommonJNI.DataTable_getRow(swigCPtr, this, ind), true);
   }
 
   public RowVectorView updRowAtIndex(long index) {
-    return new RowVectorView(opensimModelJNI.DataTable_updRowAtIndex(swigCPtr, this, index), true);
+    return new RowVectorView(opensimModelCommonJNI.DataTable_updRowAtIndex(swigCPtr, this, index), true);
   }
 
   public RowVectorView updRow(double ind) {
-    return new RowVectorView(opensimModelJNI.DataTable_updRow(swigCPtr, this, ind), true);
+    return new RowVectorView(opensimModelCommonJNI.DataTable_updRow(swigCPtr, this, ind), true);
   }
 
   public StdVectorDouble getIndependentColumn() {
-    return new StdVectorDouble(opensimModelJNI.DataTable_getIndependentColumn(swigCPtr, this), false);
+    return new StdVectorDouble(opensimModelCommonJNI.DataTable_getIndependentColumn(swigCPtr, this), false);
   }
 
   public VectorView getDependentColumnAtIndex(long index) {
-    return new VectorView(opensimModelJNI.DataTable_getDependentColumnAtIndex(swigCPtr, this, index), true);
+    return new VectorView(opensimModelCommonJNI.DataTable_getDependentColumnAtIndex(swigCPtr, this, index), true);
   }
 
   public VectorView getDependentColumn(String columnLabel) {
-    return new VectorView(opensimModelJNI.DataTable_getDependentColumn(swigCPtr, this, columnLabel), true);
+    return new VectorView(opensimModelCommonJNI.DataTable_getDependentColumn(swigCPtr, this, columnLabel), true);
   }
 
-  public void setIndependentColumnAtIndex(long index, double value) {
-    opensimModelJNI.DataTable_setIndependentColumnAtIndex(swigCPtr, this, index, value);
+  public VectorView updDependentColumnAtIndex(long index) {
+    return new VectorView(opensimModelCommonJNI.DataTable_updDependentColumnAtIndex(swigCPtr, this, index), true);
+  }
+
+  public VectorView updDependentColumn(String columnLabel) {
+    return new VectorView(opensimModelCommonJNI.DataTable_updDependentColumn(swigCPtr, this, columnLabel), true);
+  }
+
+  public void setIndependentValueAtIndex(long rowIndex, double value) {
+    opensimModelCommonJNI.DataTable_setIndependentValueAtIndex(swigCPtr, this, rowIndex, value);
+  }
+
+  public MatrixView getMatrix() {
+    return new MatrixView(opensimModelCommonJNI.DataTable_getMatrix(swigCPtr, this), false);
+  }
+
+  public MatrixView getMatrixBlock(long rowStart, long columnStart, long numRows, long numColumns) {
+    return new MatrixView(opensimModelCommonJNI.DataTable_getMatrixBlock(swigCPtr, this, rowStart, columnStart, numRows, numColumns), true);
+  }
+
+  public MatrixView updMatrix() {
+    return new MatrixView(opensimModelCommonJNI.DataTable_updMatrix(swigCPtr, this), false);
+  }
+
+  public MatrixView updMatrixBlock(long rowStart, long columnStart, long numRows, long numColumns) {
+    return new MatrixView(opensimModelCommonJNI.DataTable_updMatrixBlock(swigCPtr, this, rowStart, columnStart, numRows, numColumns), true);
   }
 
 }

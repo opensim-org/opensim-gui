@@ -12,7 +12,7 @@ public class NoTableFound extends InvalidArgument {
   private transient long swigCPtr;
 
   public NoTableFound(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.NoTableFound_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.NoTableFound_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class NoTableFound extends InvalidArgument {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_NoTableFound(swigCPtr);
+        opensimModelCommonJNI.delete_NoTableFound(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class NoTableFound extends InvalidArgument {
   }
 
   public NoTableFound(String file, long line, String func) {
-    this(opensimModelJNI.new_NoTableFound(file, line, func), true);
+    this(opensimModelCommonJNI.new_NoTableFound(file, line, func), true);
   }
 
 }

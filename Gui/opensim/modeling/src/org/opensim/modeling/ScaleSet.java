@@ -12,7 +12,7 @@ public class ScaleSet extends SetScales {
   private transient long swigCPtr;
 
   public ScaleSet(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ScaleSet_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.ScaleSet_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ScaleSet extends SetScales {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ScaleSet(swigCPtr);
+        opensimModelCommonJNI.delete_ScaleSet(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,33 +36,33 @@ public class ScaleSet extends SetScales {
   }
 
   public static ScaleSet safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ScaleSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelCommonJNI.ScaleSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ScaleSet(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.ScaleSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelCommonJNI.ScaleSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.ScaleSet_getClassName();
+    return opensimModelCommonJNI.ScaleSet_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.ScaleSet_clone(swigCPtr, this);
+    long cPtr = opensimModelCommonJNI.ScaleSet_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ScaleSet(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.ScaleSet_getConcreteClassName(swigCPtr, this);
+    return opensimModelCommonJNI.ScaleSet_getConcreteClassName(swigCPtr, this);
   }
 
   public ScaleSet() {
-    this(opensimModelJNI.new_ScaleSet__SWIG_0(), true);
+    this(opensimModelCommonJNI.new_ScaleSet__SWIG_0(), true);
   }
 
   public ScaleSet(String scalesFileName) {
-    this(opensimModelJNI.new_ScaleSet__SWIG_1(scalesFileName), true);
+    this(opensimModelCommonJNI.new_ScaleSet__SWIG_1(scalesFileName), true);
   }
 
 }

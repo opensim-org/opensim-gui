@@ -12,12 +12,12 @@ public class FalseType {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  public FalseType(long cPtr, boolean cMemoryOwn) {
+  protected FalseType(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(FalseType obj) {
+  protected static long getCPtr(FalseType obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,14 +29,14 @@ public class FalseType {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_FalseType(swigCPtr);
+        opensimSimbodyJNI.delete_FalseType(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public FalseType() {
-    this(opensimModelJNI.new_FalseType(), true);
+    this(opensimSimbodyJNI.new_FalseType(), true);
   }
 
 }

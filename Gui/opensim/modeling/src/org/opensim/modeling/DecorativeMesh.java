@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class DecorativeMesh extends DecorativeGeometry {
   private transient long swigCPtr;
 
-  public DecorativeMesh(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.DecorativeMesh_SWIGUpcast(cPtr), cMemoryOwn);
+  protected DecorativeMesh(long cPtr, boolean cMemoryOwn) {
+    super(opensimSimbodyJNI.DecorativeMesh_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(DecorativeMesh obj) {
+  protected static long getCPtr(DecorativeMesh obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,7 +28,7 @@ public class DecorativeMesh extends DecorativeGeometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_DecorativeMesh(swigCPtr);
+        opensimSimbodyJNI.delete_DecorativeMesh(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,51 +36,51 @@ public class DecorativeMesh extends DecorativeGeometry {
   }
 
   public DecorativeMesh(SWIGTYPE_p_PolygonalMesh mesh) {
-    this(opensimModelJNI.new_DecorativeMesh(SWIGTYPE_p_PolygonalMesh.getCPtr(mesh)), true);
+    this(opensimSimbodyJNI.new_DecorativeMesh(SWIGTYPE_p_PolygonalMesh.getCPtr(mesh)), true);
   }
 
   public SWIGTYPE_p_PolygonalMesh getMesh() {
-    return new SWIGTYPE_p_PolygonalMesh(opensimModelJNI.DecorativeMesh_getMesh(swigCPtr, this), false);
+    return new SWIGTYPE_p_PolygonalMesh(opensimSimbodyJNI.DecorativeMesh_getMesh(swigCPtr, this), false);
   }
 
   public DecorativeMesh setBodyId(int b) {
-    return new DecorativeMesh(opensimModelJNI.DecorativeMesh_setBodyId(swigCPtr, this, b), false);
+    return new DecorativeMesh(opensimSimbodyJNI.DecorativeMesh_setBodyId(swigCPtr, this, b), false);
   }
 
   public DecorativeMesh setIndexOnBody(int x) {
-    return new DecorativeMesh(opensimModelJNI.DecorativeMesh_setIndexOnBody(swigCPtr, this, x), false);
+    return new DecorativeMesh(opensimSimbodyJNI.DecorativeMesh_setIndexOnBody(swigCPtr, this, x), false);
   }
 
   public DecorativeMesh setUserRef(SWIGTYPE_p_void p) {
-    return new DecorativeMesh(opensimModelJNI.DecorativeMesh_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
+    return new DecorativeMesh(opensimSimbodyJNI.DecorativeMesh_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
   }
 
   public DecorativeMesh setTransform(Transform X_BD) {
-    return new DecorativeMesh(opensimModelJNI.DecorativeMesh_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
+    return new DecorativeMesh(opensimSimbodyJNI.DecorativeMesh_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
   }
 
   public DecorativeMesh setResolution(double r) {
-    return new DecorativeMesh(opensimModelJNI.DecorativeMesh_setResolution(swigCPtr, this, r), false);
+    return new DecorativeMesh(opensimSimbodyJNI.DecorativeMesh_setResolution(swigCPtr, this, r), false);
   }
 
   public DecorativeMesh setScaleFactors(Vec3 s) {
-    return new DecorativeMesh(opensimModelJNI.DecorativeMesh_setScaleFactors(swigCPtr, this, Vec3.getCPtr(s), s), false);
+    return new DecorativeMesh(opensimSimbodyJNI.DecorativeMesh_setScaleFactors(swigCPtr, this, Vec3.getCPtr(s), s), false);
   }
 
   public DecorativeMesh setColor(Vec3 rgb) {
-    return new DecorativeMesh(opensimModelJNI.DecorativeMesh_setColor(swigCPtr, this, Vec3.getCPtr(rgb), rgb), false);
+    return new DecorativeMesh(opensimSimbodyJNI.DecorativeMesh_setColor(swigCPtr, this, Vec3.getCPtr(rgb), rgb), false);
   }
 
   public DecorativeMesh setOpacity(double o) {
-    return new DecorativeMesh(opensimModelJNI.DecorativeMesh_setOpacity(swigCPtr, this, o), false);
+    return new DecorativeMesh(opensimSimbodyJNI.DecorativeMesh_setOpacity(swigCPtr, this, o), false);
   }
 
   public DecorativeMesh setLineThickness(double t) {
-    return new DecorativeMesh(opensimModelJNI.DecorativeMesh_setLineThickness(swigCPtr, this, t), false);
+    return new DecorativeMesh(opensimSimbodyJNI.DecorativeMesh_setLineThickness(swigCPtr, this, t), false);
   }
 
   public DecorativeMesh setRepresentation(DecorativeGeometry.Representation r) {
-    return new DecorativeMesh(opensimModelJNI.DecorativeMesh_setRepresentation(swigCPtr, this, r.swigValue()), false);
+    return new DecorativeMesh(opensimSimbodyJNI.DecorativeMesh_setRepresentation(swigCPtr, this, r.swigValue()), false);
   }
 
 }

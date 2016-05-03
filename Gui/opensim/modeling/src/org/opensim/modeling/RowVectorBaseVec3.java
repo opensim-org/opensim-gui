@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class RowVectorBaseVec3 extends MatrixBaseVec3 {
   private transient long swigCPtr;
 
-  public RowVectorBaseVec3(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.RowVectorBaseVec3_SWIGUpcast(cPtr), cMemoryOwn);
+  protected RowVectorBaseVec3(long cPtr, boolean cMemoryOwn) {
+    super(opensimSimbodyJNI.RowVectorBaseVec3_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(RowVectorBaseVec3 obj) {
+  protected static long getCPtr(RowVectorBaseVec3 obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,7 +28,7 @@ public class RowVectorBaseVec3 extends MatrixBaseVec3 {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_RowVectorBaseVec3(swigCPtr);
+        opensimSimbodyJNI.delete_RowVectorBaseVec3(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,75 +36,75 @@ public class RowVectorBaseVec3 extends MatrixBaseVec3 {
   }
 
   public RowVectorBaseVec3(int n) {
-    this(opensimModelJNI.new_RowVectorBaseVec3__SWIG_0(n), true);
+    this(opensimSimbodyJNI.new_RowVectorBaseVec3__SWIG_0(n), true);
   }
 
   public RowVectorBaseVec3() {
-    this(opensimModelJNI.new_RowVectorBaseVec3__SWIG_1(), true);
+    this(opensimSimbodyJNI.new_RowVectorBaseVec3__SWIG_1(), true);
   }
 
   public RowVectorBaseVec3(RowVectorBaseVec3 source) {
-    this(opensimModelJNI.new_RowVectorBaseVec3__SWIG_2(RowVectorBaseVec3.getCPtr(source), source), true);
+    this(opensimSimbodyJNI.new_RowVectorBaseVec3__SWIG_2(RowVectorBaseVec3.getCPtr(source), source), true);
   }
 
   public RowVectorBaseVec3(int n, Vec3 initialValue) {
-    this(opensimModelJNI.new_RowVectorBaseVec3__SWIG_3(n, Vec3.getCPtr(initialValue), initialValue), true);
+    this(opensimSimbodyJNI.new_RowVectorBaseVec3__SWIG_3(n, Vec3.getCPtr(initialValue), initialValue), true);
   }
 
   public int size() {
-    return opensimModelJNI.RowVectorBaseVec3_size(swigCPtr, this);
+    return opensimSimbodyJNI.RowVectorBaseVec3_size(swigCPtr, this);
   }
 
   public int nrow() {
-    return opensimModelJNI.RowVectorBaseVec3_nrow(swigCPtr, this);
+    return opensimSimbodyJNI.RowVectorBaseVec3_nrow(swigCPtr, this);
   }
 
   public int ncol() {
-    return opensimModelJNI.RowVectorBaseVec3_ncol(swigCPtr, this);
+    return opensimSimbodyJNI.RowVectorBaseVec3_ncol(swigCPtr, this);
   }
 
   public SWIGTYPE_p_ptrdiff_t nelt() {
-    return new SWIGTYPE_p_ptrdiff_t(opensimModelJNI.RowVectorBaseVec3_nelt(swigCPtr, this), true);
+    return new SWIGTYPE_p_ptrdiff_t(opensimSimbodyJNI.RowVectorBaseVec3_nelt(swigCPtr, this), true);
   }
 
   public RowVectorViewVec3 index(SWIGTYPE_p_Array_T_int_t indices) {
-    return new RowVectorViewVec3(opensimModelJNI.RowVectorBaseVec3_index(swigCPtr, this, SWIGTYPE_p_Array_T_int_t.getCPtr(indices)), true);
+    return new RowVectorViewVec3(opensimSimbodyJNI.RowVectorBaseVec3_index(swigCPtr, this, SWIGTYPE_p_Array_T_int_t.getCPtr(indices)), true);
   }
 
   public RowVectorViewVec3 updIndex(SWIGTYPE_p_Array_T_int_t indices) {
-    return new RowVectorViewVec3(opensimModelJNI.RowVectorBaseVec3_updIndex(swigCPtr, this, SWIGTYPE_p_Array_T_int_t.getCPtr(indices)), true);
+    return new RowVectorViewVec3(opensimSimbodyJNI.RowVectorBaseVec3_updIndex(swigCPtr, this, SWIGTYPE_p_Array_T_int_t.getCPtr(indices)), true);
   }
 
   public RowVectorBaseVec3 resize(int n) {
-    return new RowVectorBaseVec3(opensimModelJNI.RowVectorBaseVec3_resize(swigCPtr, this, n), false);
+    return new RowVectorBaseVec3(opensimSimbodyJNI.RowVectorBaseVec3_resize(swigCPtr, this, n), false);
   }
 
   public RowVectorBaseVec3 resizeKeep(int n) {
-    return new RowVectorBaseVec3(opensimModelJNI.RowVectorBaseVec3_resizeKeep(swigCPtr, this, n), false);
+    return new RowVectorBaseVec3(opensimSimbodyJNI.RowVectorBaseVec3_resizeKeep(swigCPtr, this, n), false);
   }
 
   public void clear() {
-    opensimModelJNI.RowVectorBaseVec3_clear(swigCPtr, this);
+    opensimSimbodyJNI.RowVectorBaseVec3_clear(swigCPtr, this);
   }
 
   public Vec3 sum() {
-    return new Vec3(opensimModelJNI.RowVectorBaseVec3_sum(swigCPtr, this), true);
+    return new Vec3(opensimSimbodyJNI.RowVectorBaseVec3_sum(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_VectorIteratorT_SimTK__VecT_3_double_1_t_SimTK__RowVectorBaseT_SimTK__VecT_3_double_1_t_t_t begin() {
-    return new SWIGTYPE_p_VectorIteratorT_SimTK__VecT_3_double_1_t_SimTK__RowVectorBaseT_SimTK__VecT_3_double_1_t_t_t(opensimModelJNI.RowVectorBaseVec3_begin(swigCPtr, this), true);
+    return new SWIGTYPE_p_VectorIteratorT_SimTK__VecT_3_double_1_t_SimTK__RowVectorBaseT_SimTK__VecT_3_double_1_t_t_t(opensimSimbodyJNI.RowVectorBaseVec3_begin(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_VectorIteratorT_SimTK__VecT_3_double_1_t_SimTK__RowVectorBaseT_SimTK__VecT_3_double_1_t_t_t end() {
-    return new SWIGTYPE_p_VectorIteratorT_SimTK__VecT_3_double_1_t_SimTK__RowVectorBaseT_SimTK__VecT_3_double_1_t_t_t(opensimModelJNI.RowVectorBaseVec3_end(swigCPtr, this), true);
+    return new SWIGTYPE_p_VectorIteratorT_SimTK__VecT_3_double_1_t_SimTK__RowVectorBaseT_SimTK__VecT_3_double_1_t_t_t(opensimSimbodyJNI.RowVectorBaseVec3_end(swigCPtr, this), true);
   }
 
   public Vec3 __getitem__(long i) {
-    return new Vec3(opensimModelJNI.RowVectorBaseVec3___getitem__(swigCPtr, this, i), true);
+    return new Vec3(opensimSimbodyJNI.RowVectorBaseVec3___getitem__(swigCPtr, this, i), true);
   }
 
   public void __setitem__(long i, Vec3 value) {
-    opensimModelJNI.RowVectorBaseVec3___setitem__(swigCPtr, this, i, Vec3.getCPtr(value), value);
+    opensimSimbodyJNI.RowVectorBaseVec3___setitem__(swigCPtr, this, i, Vec3.getCPtr(value), value);
   }
 
 }

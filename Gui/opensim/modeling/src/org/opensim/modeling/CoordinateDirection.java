@@ -12,12 +12,12 @@ public class CoordinateDirection {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  public CoordinateDirection(long cPtr, boolean cMemoryOwn) {
+  protected CoordinateDirection(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(CoordinateDirection obj) {
+  protected static long getCPtr(CoordinateDirection obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,7 +29,7 @@ public class CoordinateDirection {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_CoordinateDirection(swigCPtr);
+        opensimSimbodyJNI.delete_CoordinateDirection(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -39,12 +39,12 @@ public class CoordinateDirection {
     private transient long swigCPtr;
     protected transient boolean swigCMemOwn;
   
-    public Negative(long cPtr, boolean cMemoryOwn) {
+    protected Negative(long cPtr, boolean cMemoryOwn) {
       swigCMemOwn = cMemoryOwn;
       swigCPtr = cPtr;
     }
   
-    public static long getCPtr(Negative obj) {
+    protected static long getCPtr(Negative obj) {
       return (obj == null) ? 0 : obj.swigCPtr;
     }
   
@@ -56,56 +56,56 @@ public class CoordinateDirection {
       if (swigCPtr != 0) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          opensimModelJNI.delete_CoordinateDirection_Negative(swigCPtr);
+          opensimSimbodyJNI.delete_CoordinateDirection_Negative(swigCPtr);
         }
         swigCPtr = 0;
       }
     }
   
     public Negative() {
-      this(opensimModelJNI.new_CoordinateDirection_Negative(), true);
+      this(opensimSimbodyJNI.new_CoordinateDirection_Negative(), true);
     }
   
   }
 
   public CoordinateDirection(CoordinateAxis axis) {
-    this(opensimModelJNI.new_CoordinateDirection__SWIG_0(CoordinateAxis.getCPtr(axis), axis), true);
+    this(opensimSimbodyJNI.new_CoordinateDirection__SWIG_0(CoordinateAxis.getCPtr(axis), axis), true);
   }
 
   public CoordinateDirection(CoordinateAxis axis, int direction) {
-    this(opensimModelJNI.new_CoordinateDirection__SWIG_1(CoordinateAxis.getCPtr(axis), axis, direction), true);
+    this(opensimSimbodyJNI.new_CoordinateDirection__SWIG_1(CoordinateAxis.getCPtr(axis), axis, direction), true);
   }
 
   public CoordinateAxis getAxis() {
-    return new CoordinateAxis(opensimModelJNI.CoordinateDirection_getAxis(swigCPtr, this), true);
+    return new CoordinateAxis(opensimSimbodyJNI.CoordinateDirection_getAxis(swigCPtr, this), true);
   }
 
   public int getDirection() {
-    return opensimModelJNI.CoordinateDirection_getDirection(swigCPtr, this);
+    return opensimSimbodyJNI.CoordinateDirection_getDirection(swigCPtr, this);
   }
 
   public boolean hasSameAxis(CoordinateDirection dir2) {
-    return opensimModelJNI.CoordinateDirection_hasSameAxis(swigCPtr, this, CoordinateDirection.getCPtr(dir2), dir2);
+    return opensimSimbodyJNI.CoordinateDirection_hasSameAxis(swigCPtr, this, CoordinateDirection.getCPtr(dir2), dir2);
   }
 
   public boolean isSameAxisAndDirection(CoordinateDirection dir2) {
-    return opensimModelJNI.CoordinateDirection_isSameAxisAndDirection(swigCPtr, this, CoordinateDirection.getCPtr(dir2), dir2);
+    return opensimSimbodyJNI.CoordinateDirection_isSameAxisAndDirection(swigCPtr, this, CoordinateDirection.getCPtr(dir2), dir2);
   }
 
   public int dotProduct(CoordinateDirection dir2) {
-    return opensimModelJNI.CoordinateDirection_dotProduct(swigCPtr, this, CoordinateDirection.getCPtr(dir2), dir2);
+    return opensimSimbodyJNI.CoordinateDirection_dotProduct(swigCPtr, this, CoordinateDirection.getCPtr(dir2), dir2);
   }
 
   public int crossProductSign(CoordinateDirection dir2) {
-    return opensimModelJNI.CoordinateDirection_crossProductSign(swigCPtr, this, CoordinateDirection.getCPtr(dir2), dir2);
+    return opensimSimbodyJNI.CoordinateDirection_crossProductSign(swigCPtr, this, CoordinateDirection.getCPtr(dir2), dir2);
   }
 
   public CoordinateAxis crossProductAxis(CoordinateDirection dir2) {
-    return new CoordinateAxis(opensimModelJNI.CoordinateDirection_crossProductAxis(swigCPtr, this, CoordinateDirection.getCPtr(dir2), dir2), true);
+    return new CoordinateAxis(opensimSimbodyJNI.CoordinateDirection_crossProductAxis(swigCPtr, this, CoordinateDirection.getCPtr(dir2), dir2), true);
   }
 
   public CoordinateAxis crossProduct(CoordinateDirection dir2, SWIGTYPE_p_int sign) {
-    return new CoordinateAxis(opensimModelJNI.CoordinateDirection_crossProduct(swigCPtr, this, CoordinateDirection.getCPtr(dir2), dir2, SWIGTYPE_p_int.getCPtr(sign)), true);
+    return new CoordinateAxis(opensimSimbodyJNI.CoordinateDirection_crossProduct(swigCPtr, this, CoordinateDirection.getCPtr(dir2), dir2, SWIGTYPE_p_int.getCPtr(sign)), true);
   }
 
 }

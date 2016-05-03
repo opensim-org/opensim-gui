@@ -40,6 +40,7 @@ import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.util.MissingResourceException;
+import static org.opensim.modeling.opensimModelCommonJNI.GetCompilerVersion;
 import org.opensim.modeling.opensimModelJNI;
 
 /**
@@ -530,7 +531,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         jHomeDirString.setText(System.getProperty("user.home"));
         jHomeDirString.setToolTipText("<html>"+System.getProperty("user.home")+"</html");
         libraryPathString.setText(System.getProperty("java.library.path"));
-        compilerVersionLabel.setText(opensimModelJNI.GetCompilerVersion());
+        compilerVersionLabel.setText(GetCompilerVersion());
         libraryPathString.setToolTipText("<html>"+System.getProperty("java.library.path").replace(";", "<br>")+"</html>");
     }
     

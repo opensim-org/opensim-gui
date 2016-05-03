@@ -29,18 +29,18 @@ public class ComponentFilter {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ComponentFilter(swigCPtr);
+        opensimModelCommonJNI.delete_ComponentFilter(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
-  public boolean isMatch(Component comp) {
-    return opensimModelJNI.ComponentFilter_isMatch(swigCPtr, this, Component.getCPtr(comp), comp);
+  public boolean isMatch(SWIGTYPE_p_OpenSim__Component comp) {
+    return opensimModelCommonJNI.ComponentFilter_isMatch(swigCPtr, this, SWIGTYPE_p_OpenSim__Component.getCPtr(comp));
   }
 
   public ComponentFilter clone() {
-    long cPtr = opensimModelJNI.ComponentFilter_clone(swigCPtr, this);
+    long cPtr = opensimModelCommonJNI.ComponentFilter_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ComponentFilter(cPtr, true);
   }
 

@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class VectorView extends VectorBaseDouble {
   private transient long swigCPtr;
 
-  public VectorView(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.VectorView_SWIGUpcast(cPtr), cMemoryOwn);
+  protected VectorView(long cPtr, boolean cMemoryOwn) {
+    super(opensimSimbodyJNI.VectorView_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(VectorView obj) {
+  protected static long getCPtr(VectorView obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,7 +28,7 @@ public class VectorView extends VectorBaseDouble {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_VectorView(swigCPtr);
+        opensimSimbodyJNI.delete_VectorView(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class VectorView extends VectorBaseDouble {
   }
 
   public VectorView(VectorView v) {
-    this(opensimModelJNI.new_VectorView(VectorView.getCPtr(v), v), true);
+    this(opensimSimbodyJNI.new_VectorView(VectorView.getCPtr(v), v), true);
   }
 
 }

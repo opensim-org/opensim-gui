@@ -13,7 +13,7 @@ public class FileAdapter extends DataAdapter {
   private boolean swigCMemOwnDerived;
 
   protected FileAdapter(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.FileAdapter_SWIGSmartPtrUpcast(cPtr), true);
+    super(opensimModelCommonJNI.FileAdapter_SWIGSmartPtrUpcast(cPtr), true);
     swigCMemOwnDerived = cMemoryOwn;
     swigCPtr = cPtr;
   }
@@ -30,7 +30,7 @@ public class FileAdapter extends DataAdapter {
     if (swigCPtr != 0) {
       if (swigCMemOwnDerived) {
         swigCMemOwnDerived = false;
-        opensimModelJNI.delete_FileAdapter(swigCPtr);
+        opensimModelCommonJNI.delete_FileAdapter(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -38,11 +38,11 @@ public class FileAdapter extends DataAdapter {
   }
 
   public static StdMapStringAbstractDataTable readFile(String fileName) {
-    return new StdMapStringAbstractDataTable(opensimModelJNI.FileAdapter_readFile(fileName), true);
+    return new StdMapStringAbstractDataTable(opensimModelCommonJNI.FileAdapter_readFile(fileName), true);
   }
 
   public static void writeFile(SWIGTYPE_p_std__mapT_std__string_OpenSim__AbstractDataTable_const_p_t tables, String fileName) {
-    opensimModelJNI.FileAdapter_writeFile(SWIGTYPE_p_std__mapT_std__string_OpenSim__AbstractDataTable_const_p_t.getCPtr(tables), fileName);
+    opensimModelCommonJNI.FileAdapter_writeFile(SWIGTYPE_p_std__mapT_std__string_OpenSim__AbstractDataTable_const_p_t.getCPtr(tables), fileName);
   }
 
 }

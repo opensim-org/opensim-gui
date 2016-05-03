@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class Matrix extends MatrixBaseDouble {
   private transient long swigCPtr;
 
-  public Matrix(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.Matrix_SWIGUpcast(cPtr), cMemoryOwn);
+  protected Matrix(long cPtr, boolean cMemoryOwn) {
+    super(opensimSimbodyJNI.Matrix_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(Matrix obj) {
+  protected static long getCPtr(Matrix obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,7 +28,7 @@ public class Matrix extends MatrixBaseDouble {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_Matrix(swigCPtr);
+        opensimSimbodyJNI.delete_Matrix(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,31 +36,31 @@ public class Matrix extends MatrixBaseDouble {
   }
 
   public Matrix() {
-    this(opensimModelJNI.new_Matrix__SWIG_0(), true);
+    this(opensimSimbodyJNI.new_Matrix__SWIG_0(), true);
   }
 
   public Matrix(Matrix src) {
-    this(opensimModelJNI.new_Matrix__SWIG_1(Matrix.getCPtr(src), src), true);
+    this(opensimSimbodyJNI.new_Matrix__SWIG_1(Matrix.getCPtr(src), src), true);
   }
 
   public Matrix(int m, int n) {
-    this(opensimModelJNI.new_Matrix__SWIG_2(m, n), true);
+    this(opensimSimbodyJNI.new_Matrix__SWIG_2(m, n), true);
   }
 
   public Matrix(int m, int n, double initialValue) {
-    this(opensimModelJNI.new_Matrix__SWIG_3(m, n, initialValue), true);
+    this(opensimSimbodyJNI.new_Matrix__SWIG_3(m, n, initialValue), true);
   }
 
   public String toString() {
-    return opensimModelJNI.Matrix_toString(swigCPtr, this);
+    return opensimSimbodyJNI.Matrix_toString(swigCPtr, this);
   }
 
   public double get(int i, int j) {
-    return opensimModelJNI.Matrix_get(swigCPtr, this, i, j);
+    return opensimSimbodyJNI.Matrix_get(swigCPtr, this, i, j);
   }
 
   public void set(int i, int j, double value) {
-    opensimModelJNI.Matrix_set(swigCPtr, this, i, j, value);
+    opensimSimbodyJNI.Matrix_set(swigCPtr, this, i, j, value);
   }
 
 }

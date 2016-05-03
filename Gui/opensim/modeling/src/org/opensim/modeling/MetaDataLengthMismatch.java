@@ -12,7 +12,7 @@ public class MetaDataLengthMismatch extends IOError {
   private transient long swigCPtr;
 
   public MetaDataLengthMismatch(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.MetaDataLengthMismatch_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.MetaDataLengthMismatch_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class MetaDataLengthMismatch extends IOError {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_MetaDataLengthMismatch(swigCPtr);
+        opensimModelCommonJNI.delete_MetaDataLengthMismatch(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class MetaDataLengthMismatch extends IOError {
   }
 
   public MetaDataLengthMismatch(String file, long line, String func, String filename, long keys_len, long values_len) {
-    this(opensimModelJNI.new_MetaDataLengthMismatch(file, line, func, filename, keys_len, values_len), true);
+    this(opensimModelCommonJNI.new_MetaDataLengthMismatch(file, line, func, filename, keys_len, values_len), true);
   }
 
 }

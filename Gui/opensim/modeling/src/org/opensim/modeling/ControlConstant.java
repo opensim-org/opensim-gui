@@ -12,7 +12,7 @@ public class ControlConstant extends Control {
   private transient long swigCPtr;
 
   public ControlConstant(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ControlConstant_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.ControlConstant_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ControlConstant extends Control {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ControlConstant(swigCPtr);
+        opensimModelSimulationJNI.delete_ControlConstant(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,101 +36,101 @@ public class ControlConstant extends Control {
   }
 
   public static ControlConstant safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ControlConstant_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.ControlConstant_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ControlConstant(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.ControlConstant_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.ControlConstant_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.ControlConstant_getClassName();
+    return opensimModelSimulationJNI.ControlConstant_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.ControlConstant_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.ControlConstant_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ControlConstant(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.ControlConstant_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.ControlConstant_getConcreteClassName(swigCPtr, this);
   }
 
   public int getNumParameters() {
-    return opensimModelJNI.ControlConstant_getNumParameters(swigCPtr, this);
+    return opensimModelSimulationJNI.ControlConstant_getNumParameters(swigCPtr, this);
   }
 
   public void setParameterMin(int aI, double aMin) {
-    opensimModelJNI.ControlConstant_setParameterMin(swigCPtr, this, aI, aMin);
+    opensimModelSimulationJNI.ControlConstant_setParameterMin(swigCPtr, this, aI, aMin);
   }
 
   public double getParameterMin(int aI) {
-    return opensimModelJNI.ControlConstant_getParameterMin(swigCPtr, this, aI);
+    return opensimModelSimulationJNI.ControlConstant_getParameterMin(swigCPtr, this, aI);
   }
 
   public void setParameterMax(int aI, double aMax) {
-    opensimModelJNI.ControlConstant_setParameterMax(swigCPtr, this, aI, aMax);
+    opensimModelSimulationJNI.ControlConstant_setParameterMax(swigCPtr, this, aI, aMax);
   }
 
   public double getParameterMax(int aI) {
-    return opensimModelJNI.ControlConstant_getParameterMax(swigCPtr, this, aI);
+    return opensimModelSimulationJNI.ControlConstant_getParameterMax(swigCPtr, this, aI);
   }
 
   public double getParameterTime(int aI) {
-    return opensimModelJNI.ControlConstant_getParameterTime(swigCPtr, this, aI);
+    return opensimModelSimulationJNI.ControlConstant_getParameterTime(swigCPtr, this, aI);
   }
 
   public void getParameterNeighborhood(int aI, SWIGTYPE_p_double rTLower, SWIGTYPE_p_double rTUpper) {
-    opensimModelJNI.ControlConstant_getParameterNeighborhood(swigCPtr, this, aI, SWIGTYPE_p_double.getCPtr(rTLower), SWIGTYPE_p_double.getCPtr(rTUpper));
+    opensimModelSimulationJNI.ControlConstant_getParameterNeighborhood(swigCPtr, this, aI, SWIGTYPE_p_double.getCPtr(rTLower), SWIGTYPE_p_double.getCPtr(rTUpper));
   }
 
   public int getParameterList(double aT, ArrayInt rList) {
-    return opensimModelJNI.ControlConstant_getParameterList__SWIG_0(swigCPtr, this, aT, ArrayInt.getCPtr(rList), rList);
+    return opensimModelSimulationJNI.ControlConstant_getParameterList__SWIG_0(swigCPtr, this, aT, ArrayInt.getCPtr(rList), rList);
   }
 
   public int getParameterList(double aT1, double aT2, ArrayInt rList) {
-    return opensimModelJNI.ControlConstant_getParameterList__SWIG_1(swigCPtr, this, aT1, aT2, ArrayInt.getCPtr(rList), rList);
+    return opensimModelSimulationJNI.ControlConstant_getParameterList__SWIG_1(swigCPtr, this, aT1, aT2, ArrayInt.getCPtr(rList), rList);
   }
 
   public void setParameterValue(int aI, double aX) {
-    opensimModelJNI.ControlConstant_setParameterValue(swigCPtr, this, aI, aX);
+    opensimModelSimulationJNI.ControlConstant_setParameterValue(swigCPtr, this, aI, aX);
   }
 
   public double getParameterValue(int aI) {
-    return opensimModelJNI.ControlConstant_getParameterValue(swigCPtr, this, aI);
+    return opensimModelSimulationJNI.ControlConstant_getParameterValue(swigCPtr, this, aI);
   }
 
   public void setControlValue(double aT, double aX) {
-    opensimModelJNI.ControlConstant_setControlValue(swigCPtr, this, aT, aX);
+    opensimModelSimulationJNI.ControlConstant_setControlValue(swigCPtr, this, aT, aX);
   }
 
   public double getControlValue(double aT) {
-    return opensimModelJNI.ControlConstant_getControlValue(swigCPtr, this, aT);
+    return opensimModelSimulationJNI.ControlConstant_getControlValue(swigCPtr, this, aT);
   }
 
   public double getControlValueMin(double aT) {
-    return opensimModelJNI.ControlConstant_getControlValueMin__SWIG_0(swigCPtr, this, aT);
+    return opensimModelSimulationJNI.ControlConstant_getControlValueMin__SWIG_0(swigCPtr, this, aT);
   }
 
   public double getControlValueMin() {
-    return opensimModelJNI.ControlConstant_getControlValueMin__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.ControlConstant_getControlValueMin__SWIG_1(swigCPtr, this);
   }
 
   public void setControlValueMin(double aT, double aX) {
-    opensimModelJNI.ControlConstant_setControlValueMin(swigCPtr, this, aT, aX);
+    opensimModelSimulationJNI.ControlConstant_setControlValueMin(swigCPtr, this, aT, aX);
   }
 
   public double getControlValueMax(double aT) {
-    return opensimModelJNI.ControlConstant_getControlValueMax__SWIG_0(swigCPtr, this, aT);
+    return opensimModelSimulationJNI.ControlConstant_getControlValueMax__SWIG_0(swigCPtr, this, aT);
   }
 
   public double getControlValueMax() {
-    return opensimModelJNI.ControlConstant_getControlValueMax__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.ControlConstant_getControlValueMax__SWIG_1(swigCPtr, this);
   }
 
   public void setControlValueMax(double aT, double aX) {
-    opensimModelJNI.ControlConstant_setControlValueMax(swigCPtr, this, aT, aX);
+    opensimModelSimulationJNI.ControlConstant_setControlValueMax(swigCPtr, this, aT, aX);
   }
 
 }

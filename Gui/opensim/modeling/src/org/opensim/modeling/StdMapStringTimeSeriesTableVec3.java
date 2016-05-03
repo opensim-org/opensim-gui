@@ -29,47 +29,47 @@ public class StdMapStringTimeSeriesTableVec3 {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_StdMapStringTimeSeriesTableVec3(swigCPtr);
+        opensimModelCommonJNI.delete_StdMapStringTimeSeriesTableVec3(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public StdMapStringTimeSeriesTableVec3() {
-    this(opensimModelJNI.new_StdMapStringTimeSeriesTableVec3__SWIG_0(), true);
+    this(opensimModelCommonJNI.new_StdMapStringTimeSeriesTableVec3__SWIG_0(), true);
   }
 
   public StdMapStringTimeSeriesTableVec3(StdMapStringTimeSeriesTableVec3 arg0) {
-    this(opensimModelJNI.new_StdMapStringTimeSeriesTableVec3__SWIG_1(StdMapStringTimeSeriesTableVec3.getCPtr(arg0), arg0), true);
+    this(opensimModelCommonJNI.new_StdMapStringTimeSeriesTableVec3__SWIG_1(StdMapStringTimeSeriesTableVec3.getCPtr(arg0), arg0), true);
   }
 
   public long size() {
-    return opensimModelJNI.StdMapStringTimeSeriesTableVec3_size(swigCPtr, this);
+    return opensimModelCommonJNI.StdMapStringTimeSeriesTableVec3_size(swigCPtr, this);
   }
 
   public boolean empty() {
-    return opensimModelJNI.StdMapStringTimeSeriesTableVec3_empty(swigCPtr, this);
+    return opensimModelCommonJNI.StdMapStringTimeSeriesTableVec3_empty(swigCPtr, this);
   }
 
   public void clear() {
-    opensimModelJNI.StdMapStringTimeSeriesTableVec3_clear(swigCPtr, this);
+    opensimModelCommonJNI.StdMapStringTimeSeriesTableVec3_clear(swigCPtr, this);
   }
 
   public TimeSeriesTableVec3 get(String key) {
-    long cPtr = opensimModelJNI.StdMapStringTimeSeriesTableVec3_get(swigCPtr, this, key);
+    long cPtr = opensimModelCommonJNI.StdMapStringTimeSeriesTableVec3_get(swigCPtr, this, key);
     return (cPtr == 0) ? null : new TimeSeriesTableVec3(cPtr, true);
   }
 
   public void set(String key, TimeSeriesTableVec3 x) {
-    opensimModelJNI.StdMapStringTimeSeriesTableVec3_set(swigCPtr, this, key, TimeSeriesTableVec3.getCPtr(x), x);
+    opensimModelCommonJNI.StdMapStringTimeSeriesTableVec3_set(swigCPtr, this, key, TimeSeriesTableVec3.getCPtr(x), x);
   }
 
   public void del(String key) {
-    opensimModelJNI.StdMapStringTimeSeriesTableVec3_del(swigCPtr, this, key);
+    opensimModelCommonJNI.StdMapStringTimeSeriesTableVec3_del(swigCPtr, this, key);
   }
 
   public boolean has_key(String key) {
-    return opensimModelJNI.StdMapStringTimeSeriesTableVec3_has_key(swigCPtr, this, key);
+    return opensimModelCommonJNI.StdMapStringTimeSeriesTableVec3_has_key(swigCPtr, this, key);
   }
 
 }

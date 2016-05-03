@@ -12,7 +12,7 @@ public class GimbalJoint extends Joint {
   private transient long swigCPtr;
 
   public GimbalJoint(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.GimbalJoint_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.GimbalJoint_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class GimbalJoint extends Joint {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_GimbalJoint(swigCPtr);
+        opensimModelSimulationJNI.delete_GimbalJoint(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,33 +36,33 @@ public class GimbalJoint extends Joint {
   }
 
   public static GimbalJoint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.GimbalJoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.GimbalJoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new GimbalJoint(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.GimbalJoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.GimbalJoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.GimbalJoint_getClassName();
+    return opensimModelSimulationJNI.GimbalJoint_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.GimbalJoint_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.GimbalJoint_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new GimbalJoint(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.GimbalJoint_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.GimbalJoint_getConcreteClassName(swigCPtr, this);
   }
 
-  public GimbalJoint(String name, String parentName, String childName) {
-    this(opensimModelJNI.new_GimbalJoint__SWIG_0(name, parentName, childName), true);
+  public GimbalJoint(String name, PhysicalFrame parent, PhysicalFrame child) {
+    this(opensimModelSimulationJNI.new_GimbalJoint__SWIG_0(name, PhysicalFrame.getCPtr(parent), parent, PhysicalFrame.getCPtr(child), child), true);
   }
 
   public GimbalJoint(String name, PhysicalFrame parent, Vec3 locationInParent, Vec3 orientationInParent, PhysicalFrame child, Vec3 locationInChild, Vec3 orientationInChild) {
-    this(opensimModelJNI.new_GimbalJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
+    this(opensimModelSimulationJNI.new_GimbalJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
   }
 
 }

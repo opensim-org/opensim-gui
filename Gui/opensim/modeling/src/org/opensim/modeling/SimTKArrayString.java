@@ -12,12 +12,12 @@ public class SimTKArrayString {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  public SimTKArrayString(long cPtr, boolean cMemoryOwn) {
+  protected SimTKArrayString(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(SimTKArrayString obj) {
+  protected static long getCPtr(SimTKArrayString obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,213 +29,213 @@ public class SimTKArrayString {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_SimTKArrayString(swigCPtr);
+        opensimSimbodyJNI.delete_SimTKArrayString(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public SimTKArrayString() {
-    this(opensimModelJNI.new_SimTKArrayString__SWIG_0(), true);
+    this(opensimSimbodyJNI.new_SimTKArrayString__SWIG_0(), true);
   }
 
   public SimTKArrayString(long n) {
-    this(opensimModelJNI.new_SimTKArrayString__SWIG_1(n), true);
+    this(opensimSimbodyJNI.new_SimTKArrayString__SWIG_1(n), true);
   }
 
   public SimTKArrayString(long n, String initVal) {
-    this(opensimModelJNI.new_SimTKArrayString__SWIG_2(n, initVal), true);
+    this(opensimSimbodyJNI.new_SimTKArrayString__SWIG_2(n, initVal), true);
   }
 
   public SimTKArrayString(SimTKArrayString src) {
-    this(opensimModelJNI.new_SimTKArrayString__SWIG_3(SimTKArrayString.getCPtr(src), src), true);
+    this(opensimSimbodyJNI.new_SimTKArrayString__SWIG_3(SimTKArrayString.getCPtr(src), src), true);
   }
 
   public SimTKArrayString(SWIGTYPE_p_std__string first, SWIGTYPE_p_std__string last1, DontCopy arg2) {
-    this(opensimModelJNI.new_SimTKArrayString__SWIG_4(SWIGTYPE_p_std__string.getCPtr(first), SWIGTYPE_p_std__string.getCPtr(last1), DontCopy.getCPtr(arg2), arg2), true);
+    this(opensimSimbodyJNI.new_SimTKArrayString__SWIG_4(SWIGTYPE_p_std__string.getCPtr(first), SWIGTYPE_p_std__string.getCPtr(last1), DontCopy.getCPtr(arg2), arg2), true);
   }
 
   public SimTKArrayString deallocate() {
-    return new SimTKArrayString(opensimModelJNI.SimTKArrayString_deallocate(swigCPtr, this), false);
+    return new SimTKArrayString(opensimSimbodyJNI.SimTKArrayString_deallocate(swigCPtr, this), false);
   }
 
   public void assign(long n, String fillValue) {
-    opensimModelJNI.SimTKArrayString_assign(swigCPtr, this, n, fillValue);
+    opensimSimbodyJNI.SimTKArrayString_assign(swigCPtr, this, n, fillValue);
   }
 
   public void fill(String fillValue) {
-    opensimModelJNI.SimTKArrayString_fill(swigCPtr, this, fillValue);
+    opensimSimbodyJNI.SimTKArrayString_fill(swigCPtr, this, fillValue);
   }
 
   public void swap(SimTKArrayString other) {
-    opensimModelJNI.SimTKArrayString_swap(swigCPtr, this, SimTKArrayString.getCPtr(other), other);
+    opensimSimbodyJNI.SimTKArrayString_swap(swigCPtr, this, SimTKArrayString.getCPtr(other), other);
   }
 
   public SimTKArrayString adoptData(SWIGTYPE_p_std__string newData, long dataSize, long dataCapacity) {
-    return new SimTKArrayString(opensimModelJNI.SimTKArrayString_adoptData__SWIG_0(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(newData), dataSize, dataCapacity), false);
+    return new SimTKArrayString(opensimSimbodyJNI.SimTKArrayString_adoptData__SWIG_0(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(newData), dataSize, dataCapacity), false);
   }
 
   public SimTKArrayString adoptData(SWIGTYPE_p_std__string newData, long dataSize) {
-    return new SimTKArrayString(opensimModelJNI.SimTKArrayString_adoptData__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(newData), dataSize), false);
+    return new SimTKArrayString(opensimSimbodyJNI.SimTKArrayString_adoptData__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(newData), dataSize), false);
   }
 
   public SimTKArrayString shareData(SWIGTYPE_p_std__string newData, long dataSize) {
-    return new SimTKArrayString(opensimModelJNI.SimTKArrayString_shareData__SWIG_0(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(newData), dataSize), false);
+    return new SimTKArrayString(opensimSimbodyJNI.SimTKArrayString_shareData__SWIG_0(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(newData), dataSize), false);
   }
 
   public SimTKArrayString shareData(SWIGTYPE_p_std__string first, SWIGTYPE_p_std__string last1) {
-    return new SimTKArrayString(opensimModelJNI.SimTKArrayString_shareData__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(first), SWIGTYPE_p_std__string.getCPtr(last1)), false);
+    return new SimTKArrayString(opensimSimbodyJNI.SimTKArrayString_shareData__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(first), SWIGTYPE_p_std__string.getCPtr(last1)), false);
   }
 
   public long size() {
-    return opensimModelJNI.SimTKArrayString_size(swigCPtr, this);
+    return opensimSimbodyJNI.SimTKArrayString_size(swigCPtr, this);
   }
 
   public long max_size() {
-    return opensimModelJNI.SimTKArrayString_max_size(swigCPtr, this);
+    return opensimSimbodyJNI.SimTKArrayString_max_size(swigCPtr, this);
   }
 
   public boolean empty() {
-    return opensimModelJNI.SimTKArrayString_empty(swigCPtr, this);
+    return opensimSimbodyJNI.SimTKArrayString_empty(swigCPtr, this);
   }
 
   public long capacity() {
-    return opensimModelJNI.SimTKArrayString_capacity(swigCPtr, this);
+    return opensimSimbodyJNI.SimTKArrayString_capacity(swigCPtr, this);
   }
 
   public void resize(long n) {
-    opensimModelJNI.SimTKArrayString_resize__SWIG_0(swigCPtr, this, n);
+    opensimSimbodyJNI.SimTKArrayString_resize__SWIG_0(swigCPtr, this, n);
   }
 
   public void resize(long n, String initVal) {
-    opensimModelJNI.SimTKArrayString_resize__SWIG_1(swigCPtr, this, n, initVal);
+    opensimSimbodyJNI.SimTKArrayString_resize__SWIG_1(swigCPtr, this, n, initVal);
   }
 
   public void reserve(long n) {
-    opensimModelJNI.SimTKArrayString_reserve(swigCPtr, this, n);
+    opensimSimbodyJNI.SimTKArrayString_reserve(swigCPtr, this, n);
   }
 
   public void shrink_to_fit() {
-    opensimModelJNI.SimTKArrayString_shrink_to_fit(swigCPtr, this);
+    opensimSimbodyJNI.SimTKArrayString_shrink_to_fit(swigCPtr, this);
   }
 
   public long allocated() {
-    return opensimModelJNI.SimTKArrayString_allocated(swigCPtr, this);
+    return opensimSimbodyJNI.SimTKArrayString_allocated(swigCPtr, this);
   }
 
   public boolean isOwner() {
-    return opensimModelJNI.SimTKArrayString_isOwner(swigCPtr, this);
+    return opensimSimbodyJNI.SimTKArrayString_isOwner(swigCPtr, this);
   }
 
   public SWIGTYPE_p_std__string cbegin() {
-    long cPtr = opensimModelJNI.SimTKArrayString_cbegin(swigCPtr, this);
+    long cPtr = opensimSimbodyJNI.SimTKArrayString_cbegin(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_std__string(cPtr, false);
   }
 
   public SWIGTYPE_p_std__string begin() {
-    long cPtr = opensimModelJNI.SimTKArrayString_begin__SWIG_0(swigCPtr, this);
+    long cPtr = opensimSimbodyJNI.SimTKArrayString_begin__SWIG_0(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_std__string(cPtr, false);
   }
 
   public SWIGTYPE_p_std__string cend() {
-    long cPtr = opensimModelJNI.SimTKArrayString_cend(swigCPtr, this);
+    long cPtr = opensimSimbodyJNI.SimTKArrayString_cend(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_std__string(cPtr, false);
   }
 
   public SWIGTYPE_p_std__string end() {
-    long cPtr = opensimModelJNI.SimTKArrayString_end__SWIG_0(swigCPtr, this);
+    long cPtr = opensimSimbodyJNI.SimTKArrayString_end__SWIG_0(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_std__string(cPtr, false);
   }
 
   public SWIGTYPE_p_std__reverse_iteratorT_std__string_const_p_t crbegin() {
-    return new SWIGTYPE_p_std__reverse_iteratorT_std__string_const_p_t(opensimModelJNI.SimTKArrayString_crbegin(swigCPtr, this), true);
+    return new SWIGTYPE_p_std__reverse_iteratorT_std__string_const_p_t(opensimSimbodyJNI.SimTKArrayString_crbegin(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_std__reverse_iteratorT_std__string_const_p_t rbegin() {
-    return new SWIGTYPE_p_std__reverse_iteratorT_std__string_const_p_t(opensimModelJNI.SimTKArrayString_rbegin__SWIG_0(swigCPtr, this), true);
+    return new SWIGTYPE_p_std__reverse_iteratorT_std__string_const_p_t(opensimSimbodyJNI.SimTKArrayString_rbegin__SWIG_0(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_std__reverse_iteratorT_std__string_const_p_t crend() {
-    return new SWIGTYPE_p_std__reverse_iteratorT_std__string_const_p_t(opensimModelJNI.SimTKArrayString_crend(swigCPtr, this), true);
+    return new SWIGTYPE_p_std__reverse_iteratorT_std__string_const_p_t(opensimSimbodyJNI.SimTKArrayString_crend(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_std__reverse_iteratorT_std__string_const_p_t rend() {
-    return new SWIGTYPE_p_std__reverse_iteratorT_std__string_const_p_t(opensimModelJNI.SimTKArrayString_rend__SWIG_0(swigCPtr, this), true);
+    return new SWIGTYPE_p_std__reverse_iteratorT_std__string_const_p_t(opensimSimbodyJNI.SimTKArrayString_rend__SWIG_0(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_std__string cdata() {
-    long cPtr = opensimModelJNI.SimTKArrayString_cdata(swigCPtr, this);
+    long cPtr = opensimSimbodyJNI.SimTKArrayString_cdata(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_std__string(cPtr, false);
   }
 
   public SWIGTYPE_p_std__string data() {
-    long cPtr = opensimModelJNI.SimTKArrayString_data__SWIG_0(swigCPtr, this);
+    long cPtr = opensimSimbodyJNI.SimTKArrayString_data__SWIG_0(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_std__string(cPtr, false);
   }
 
   public String at(long i) {
-    return opensimModelJNI.SimTKArrayString_at__SWIG_0(swigCPtr, this, i);
+    return opensimSimbodyJNI.SimTKArrayString_at__SWIG_0(swigCPtr, this, i);
   }
 
   public String getElt(long i) {
-    return opensimModelJNI.SimTKArrayString_getElt(swigCPtr, this, i);
+    return opensimSimbodyJNI.SimTKArrayString_getElt(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_std__string updElt(long i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.SimTKArrayString_updElt(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_std__string(opensimSimbodyJNI.SimTKArrayString_updElt(swigCPtr, this, i), false);
   }
 
   public String front() {
-    return opensimModelJNI.SimTKArrayString_front__SWIG_0(swigCPtr, this);
+    return opensimSimbodyJNI.SimTKArrayString_front__SWIG_0(swigCPtr, this);
   }
 
   public String back() {
-    return opensimModelJNI.SimTKArrayString_back__SWIG_0(swigCPtr, this);
+    return opensimSimbodyJNI.SimTKArrayString_back__SWIG_0(swigCPtr, this);
   }
 
   public void push_back(String value) {
-    opensimModelJNI.SimTKArrayString_push_back__SWIG_0(swigCPtr, this, value);
+    opensimSimbodyJNI.SimTKArrayString_push_back__SWIG_0(swigCPtr, this, value);
   }
 
   public void push_back() {
-    opensimModelJNI.SimTKArrayString_push_back__SWIG_1(swigCPtr, this);
+    opensimSimbodyJNI.SimTKArrayString_push_back__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_std__string raw_push_back() {
-    long cPtr = opensimModelJNI.SimTKArrayString_raw_push_back(swigCPtr, this);
+    long cPtr = opensimSimbodyJNI.SimTKArrayString_raw_push_back(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_std__string(cPtr, false);
   }
 
   public void pop_back() {
-    opensimModelJNI.SimTKArrayString_pop_back(swigCPtr, this);
+    opensimSimbodyJNI.SimTKArrayString_pop_back(swigCPtr, this);
   }
 
   public SWIGTYPE_p_std__string erase(SWIGTYPE_p_std__string first, SWIGTYPE_p_std__string last1) {
-    long cPtr = opensimModelJNI.SimTKArrayString_erase__SWIG_0(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(first), SWIGTYPE_p_std__string.getCPtr(last1));
+    long cPtr = opensimSimbodyJNI.SimTKArrayString_erase__SWIG_0(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(first), SWIGTYPE_p_std__string.getCPtr(last1));
     return (cPtr == 0) ? null : new SWIGTYPE_p_std__string(cPtr, false);
   }
 
   public SWIGTYPE_p_std__string erase(SWIGTYPE_p_std__string p) {
-    long cPtr = opensimModelJNI.SimTKArrayString_erase__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(p));
+    long cPtr = opensimSimbodyJNI.SimTKArrayString_erase__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(p));
     return (cPtr == 0) ? null : new SWIGTYPE_p_std__string(cPtr, false);
   }
 
   public SWIGTYPE_p_std__string eraseFast(SWIGTYPE_p_std__string p) {
-    long cPtr = opensimModelJNI.SimTKArrayString_eraseFast(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(p));
+    long cPtr = opensimSimbodyJNI.SimTKArrayString_eraseFast(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(p));
     return (cPtr == 0) ? null : new SWIGTYPE_p_std__string(cPtr, false);
   }
 
   public void clear() {
-    opensimModelJNI.SimTKArrayString_clear(swigCPtr, this);
+    opensimSimbodyJNI.SimTKArrayString_clear(swigCPtr, this);
   }
 
   public SWIGTYPE_p_std__string insert(SWIGTYPE_p_std__string p, long n, String value) {
-    long cPtr = opensimModelJNI.SimTKArrayString_insert__SWIG_0(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(p), n, value);
+    long cPtr = opensimSimbodyJNI.SimTKArrayString_insert__SWIG_0(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(p), n, value);
     return (cPtr == 0) ? null : new SWIGTYPE_p_std__string(cPtr, false);
   }
 
   public SWIGTYPE_p_std__string insert(SWIGTYPE_p_std__string p, String value) {
-    long cPtr = opensimModelJNI.SimTKArrayString_insert__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(p), value);
+    long cPtr = opensimSimbodyJNI.SimTKArrayString_insert__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(p), value);
     return (cPtr == 0) ? null : new SWIGTYPE_p_std__string(cPtr, false);
   }
 

@@ -29,54 +29,54 @@ public class OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_OpenSimException(swigCPtr);
+        opensimModelCommonJNI.delete_OpenSimException(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public OpenSimException(String aMsg, String aFile, int aLine) {
-    this(opensimModelJNI.new_OpenSimException__SWIG_0(aMsg, aFile, aLine), true);
+    this(opensimModelCommonJNI.new_OpenSimException__SWIG_0(aMsg, aFile, aLine), true);
   }
 
   public OpenSimException(String aMsg, String aFile) {
-    this(opensimModelJNI.new_OpenSimException__SWIG_1(aMsg, aFile), true);
+    this(opensimModelCommonJNI.new_OpenSimException__SWIG_1(aMsg, aFile), true);
   }
 
   public OpenSimException(String aMsg) {
-    this(opensimModelJNI.new_OpenSimException__SWIG_2(aMsg), true);
+    this(opensimModelCommonJNI.new_OpenSimException__SWIG_2(aMsg), true);
   }
 
   public OpenSimException() {
-    this(opensimModelJNI.new_OpenSimException__SWIG_3(), true);
+    this(opensimModelCommonJNI.new_OpenSimException__SWIG_3(), true);
   }
 
   public OpenSimException(String file, long line, String func) {
-    this(opensimModelJNI.new_OpenSimException__SWIG_4(file, line, func), true);
+    this(opensimModelCommonJNI.new_OpenSimException__SWIG_4(file, line, func), true);
   }
 
   public OpenSimException(String file, long line, String func, String msg) {
-    this(opensimModelJNI.new_OpenSimException__SWIG_5(file, line, func, msg), true);
+    this(opensimModelCommonJNI.new_OpenSimException__SWIG_5(file, line, func, msg), true);
   }
 
   public OpenSimException(String file, long line, String func, OpenSimObject obj) {
-    this(opensimModelJNI.new_OpenSimException__SWIG_6(file, line, func, OpenSimObject.getCPtr(obj), obj), true);
+    this(opensimModelCommonJNI.new_OpenSimException__SWIG_6(file, line, func, OpenSimObject.getCPtr(obj), obj), true);
   }
 
   public OpenSimException(String file, long line, String func, OpenSimObject obj, String msg) {
-    this(opensimModelJNI.new_OpenSimException__SWIG_7(file, line, func, OpenSimObject.getCPtr(obj), obj, msg), true);
+    this(opensimModelCommonJNI.new_OpenSimException__SWIG_7(file, line, func, OpenSimObject.getCPtr(obj), obj, msg), true);
   }
 
   public void setMessage(String aMsg) {
-    opensimModelJNI.OpenSimException_setMessage(swigCPtr, this, aMsg);
+    opensimModelCommonJNI.OpenSimException_setMessage(swigCPtr, this, aMsg);
   }
 
   public String getMessage() {
-    return opensimModelJNI.OpenSimException_getMessage(swigCPtr, this);
+    return opensimModelCommonJNI.OpenSimException_getMessage(swigCPtr, this);
   }
 
   public String what() {
-    return opensimModelJNI.OpenSimException_what(swigCPtr, this);
+    return opensimModelCommonJNI.OpenSimException_what(swigCPtr, this);
   }
 
 }

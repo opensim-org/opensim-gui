@@ -12,7 +12,7 @@ public class FrameSet extends ModelComponentSetFrames {
   private transient long swigCPtr;
 
   public FrameSet(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.FrameSet_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.FrameSet_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class FrameSet extends ModelComponentSetFrames {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_FrameSet(swigCPtr);
+        opensimModelSimulationJNI.delete_FrameSet(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,41 +36,41 @@ public class FrameSet extends ModelComponentSetFrames {
   }
 
   public static FrameSet safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.FrameSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.FrameSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new FrameSet(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.FrameSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.FrameSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.FrameSet_getClassName();
+    return opensimModelSimulationJNI.FrameSet_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.FrameSet_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.FrameSet_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new FrameSet(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.FrameSet_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.FrameSet_getConcreteClassName(swigCPtr, this);
   }
 
   public FrameSet() {
-    this(opensimModelJNI.new_FrameSet__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_FrameSet__SWIG_0(), true);
   }
 
   public FrameSet(Model model) {
-    this(opensimModelJNI.new_FrameSet__SWIG_1(Model.getCPtr(model), model), true);
+    this(opensimModelSimulationJNI.new_FrameSet__SWIG_1(Model.getCPtr(model), model), true);
   }
 
   public FrameSet(Model model, String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelJNI.new_FrameSet__SWIG_2(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
+    this(opensimModelSimulationJNI.new_FrameSet__SWIG_2(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
   }
 
   public FrameSet(Model model, String aFileName) {
-    this(opensimModelJNI.new_FrameSet__SWIG_3(Model.getCPtr(model), model, aFileName), true);
+    this(opensimModelSimulationJNI.new_FrameSet__SWIG_3(Model.getCPtr(model), model, aFileName), true);
   }
 
 }

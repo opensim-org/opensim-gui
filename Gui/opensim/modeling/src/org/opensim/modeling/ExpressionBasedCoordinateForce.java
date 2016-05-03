@@ -12,7 +12,7 @@ public class ExpressionBasedCoordinateForce extends Force {
   private transient long swigCPtr;
 
   public ExpressionBasedCoordinateForce(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ExpressionBasedCoordinateForce_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.ExpressionBasedCoordinateForce_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ExpressionBasedCoordinateForce extends Force {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ExpressionBasedCoordinateForce(swigCPtr);
+        opensimModelSimulationJNI.delete_ExpressionBasedCoordinateForce(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,137 +36,137 @@ public class ExpressionBasedCoordinateForce extends Force {
   }
 
   public static ExpressionBasedCoordinateForce safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ExpressionBasedCoordinateForce_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.ExpressionBasedCoordinateForce_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ExpressionBasedCoordinateForce(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.ExpressionBasedCoordinateForce_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.ExpressionBasedCoordinateForce_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.ExpressionBasedCoordinateForce_getClassName();
+    return opensimModelSimulationJNI.ExpressionBasedCoordinateForce_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.ExpressionBasedCoordinateForce_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.ExpressionBasedCoordinateForce_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ExpressionBasedCoordinateForce(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.ExpressionBasedCoordinateForce_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.ExpressionBasedCoordinateForce_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_coordinate(ExpressionBasedCoordinateForce source) {
-    opensimModelJNI.ExpressionBasedCoordinateForce_copyProperty_coordinate(swigCPtr, this, ExpressionBasedCoordinateForce.getCPtr(source), source);
+    opensimModelSimulationJNI.ExpressionBasedCoordinateForce_copyProperty_coordinate(swigCPtr, this, ExpressionBasedCoordinateForce.getCPtr(source), source);
   }
 
   public String get_coordinate(int i) {
-    return opensimModelJNI.ExpressionBasedCoordinateForce_get_coordinate__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.ExpressionBasedCoordinateForce_get_coordinate__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_std__string upd_coordinate(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.ExpressionBasedCoordinateForce_upd_coordinate__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_std__string(opensimModelSimulationJNI.ExpressionBasedCoordinateForce_upd_coordinate__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_coordinate(int i, String value) {
-    opensimModelJNI.ExpressionBasedCoordinateForce_set_coordinate__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.ExpressionBasedCoordinateForce_set_coordinate__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_coordinate(String value) {
-    return opensimModelJNI.ExpressionBasedCoordinateForce_append_coordinate(swigCPtr, this, value);
+    return opensimModelSimulationJNI.ExpressionBasedCoordinateForce_append_coordinate(swigCPtr, this, value);
   }
 
   public void constructProperty_coordinate(String initValue) {
-    opensimModelJNI.ExpressionBasedCoordinateForce_constructProperty_coordinate(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.ExpressionBasedCoordinateForce_constructProperty_coordinate(swigCPtr, this, initValue);
   }
 
   public String get_coordinate() {
-    return opensimModelJNI.ExpressionBasedCoordinateForce_get_coordinate__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.ExpressionBasedCoordinateForce_get_coordinate__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_std__string upd_coordinate() {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.ExpressionBasedCoordinateForce_upd_coordinate__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_std__string(opensimModelSimulationJNI.ExpressionBasedCoordinateForce_upd_coordinate__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_coordinate(String value) {
-    opensimModelJNI.ExpressionBasedCoordinateForce_set_coordinate__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.ExpressionBasedCoordinateForce_set_coordinate__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_expression(ExpressionBasedCoordinateForce source) {
-    opensimModelJNI.ExpressionBasedCoordinateForce_copyProperty_expression(swigCPtr, this, ExpressionBasedCoordinateForce.getCPtr(source), source);
+    opensimModelSimulationJNI.ExpressionBasedCoordinateForce_copyProperty_expression(swigCPtr, this, ExpressionBasedCoordinateForce.getCPtr(source), source);
   }
 
   public String get_expression(int i) {
-    return opensimModelJNI.ExpressionBasedCoordinateForce_get_expression__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.ExpressionBasedCoordinateForce_get_expression__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_std__string upd_expression(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.ExpressionBasedCoordinateForce_upd_expression__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_std__string(opensimModelSimulationJNI.ExpressionBasedCoordinateForce_upd_expression__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_expression(int i, String value) {
-    opensimModelJNI.ExpressionBasedCoordinateForce_set_expression__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.ExpressionBasedCoordinateForce_set_expression__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_expression(String value) {
-    return opensimModelJNI.ExpressionBasedCoordinateForce_append_expression(swigCPtr, this, value);
+    return opensimModelSimulationJNI.ExpressionBasedCoordinateForce_append_expression(swigCPtr, this, value);
   }
 
   public void constructProperty_expression(String initValue) {
-    opensimModelJNI.ExpressionBasedCoordinateForce_constructProperty_expression(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.ExpressionBasedCoordinateForce_constructProperty_expression(swigCPtr, this, initValue);
   }
 
   public String get_expression() {
-    return opensimModelJNI.ExpressionBasedCoordinateForce_get_expression__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.ExpressionBasedCoordinateForce_get_expression__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_std__string upd_expression() {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.ExpressionBasedCoordinateForce_upd_expression__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_std__string(opensimModelSimulationJNI.ExpressionBasedCoordinateForce_upd_expression__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_expression(String value) {
-    opensimModelJNI.ExpressionBasedCoordinateForce_set_expression__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.ExpressionBasedCoordinateForce_set_expression__SWIG_1(swigCPtr, this, value);
   }
 
   public ExpressionBasedCoordinateForce() {
-    this(opensimModelJNI.new_ExpressionBasedCoordinateForce__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_ExpressionBasedCoordinateForce__SWIG_0(), true);
   }
 
   public ExpressionBasedCoordinateForce(String coordinate, String expression) {
-    this(opensimModelJNI.new_ExpressionBasedCoordinateForce__SWIG_1(coordinate, expression), true);
+    this(opensimModelSimulationJNI.new_ExpressionBasedCoordinateForce__SWIG_1(coordinate, expression), true);
   }
 
   public void setCoordinateName(String coord) {
-    opensimModelJNI.ExpressionBasedCoordinateForce_setCoordinateName(swigCPtr, this, coord);
+    opensimModelSimulationJNI.ExpressionBasedCoordinateForce_setCoordinateName(swigCPtr, this, coord);
   }
 
   public String getCoordinateName() {
-    return opensimModelJNI.ExpressionBasedCoordinateForce_getCoordinateName(swigCPtr, this);
+    return opensimModelSimulationJNI.ExpressionBasedCoordinateForce_getCoordinateName(swigCPtr, this);
   }
 
   public void setExpression(String expression) {
-    opensimModelJNI.ExpressionBasedCoordinateForce_setExpression(swigCPtr, this, expression);
+    opensimModelSimulationJNI.ExpressionBasedCoordinateForce_setExpression(swigCPtr, this, expression);
   }
 
   public double getForceMagnitude(State state) {
-    return opensimModelJNI.ExpressionBasedCoordinateForce_getForceMagnitude(swigCPtr, this, State.getCPtr(state), state);
+    return opensimModelSimulationJNI.ExpressionBasedCoordinateForce_getForceMagnitude(swigCPtr, this, State.getCPtr(state), state);
   }
 
   public void computeForce(State state, VectorOfSpatialVec bodyForces, Vector generalizedForces) {
-    opensimModelJNI.ExpressionBasedCoordinateForce_computeForce(swigCPtr, this, State.getCPtr(state), state, VectorOfSpatialVec.getCPtr(bodyForces), bodyForces, Vector.getCPtr(generalizedForces), generalizedForces);
+    opensimModelSimulationJNI.ExpressionBasedCoordinateForce_computeForce(swigCPtr, this, State.getCPtr(state), state, VectorOfSpatialVec.getCPtr(bodyForces), bodyForces, Vector.getCPtr(generalizedForces), generalizedForces);
   }
 
   public double calcExpressionForce(State s) {
-    return opensimModelJNI.ExpressionBasedCoordinateForce_calcExpressionForce(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.ExpressionBasedCoordinateForce_calcExpressionForce(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public ArrayStr getRecordLabels() {
-    return new ArrayStr(opensimModelJNI.ExpressionBasedCoordinateForce_getRecordLabels(swigCPtr, this), true);
+    return new ArrayStr(opensimModelSimulationJNI.ExpressionBasedCoordinateForce_getRecordLabels(swigCPtr, this), true);
   }
 
   public ArrayDouble getRecordValues(State state) {
-    return new ArrayDouble(opensimModelJNI.ExpressionBasedCoordinateForce_getRecordValues(swigCPtr, this, State.getCPtr(state), state), true);
+    return new ArrayDouble(opensimModelSimulationJNI.ExpressionBasedCoordinateForce_getRecordValues(swigCPtr, this, State.getCPtr(state), state), true);
   }
 
 }

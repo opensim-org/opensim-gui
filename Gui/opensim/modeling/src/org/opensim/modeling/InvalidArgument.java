@@ -12,7 +12,7 @@ public class InvalidArgument extends OpenSimException {
   private transient long swigCPtr;
 
   public InvalidArgument(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.InvalidArgument_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.InvalidArgument_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,15 +28,19 @@ public class InvalidArgument extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_InvalidArgument(swigCPtr);
+        opensimModelCommonJNI.delete_InvalidArgument(swigCPtr);
       }
       swigCPtr = 0;
     }
     super.delete();
   }
 
+  public InvalidArgument(String file, long line, String func, String msg) {
+    this(opensimModelCommonJNI.new_InvalidArgument__SWIG_0(file, line, func, msg), true);
+  }
+
   public InvalidArgument(String file, long line, String func) {
-    this(opensimModelJNI.new_InvalidArgument(file, line, func), true);
+    this(opensimModelCommonJNI.new_InvalidArgument__SWIG_1(file, line, func), true);
   }
 
 }

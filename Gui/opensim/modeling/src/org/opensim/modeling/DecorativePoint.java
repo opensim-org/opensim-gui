@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class DecorativePoint extends DecorativeGeometry {
   private transient long swigCPtr;
 
-  public DecorativePoint(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.DecorativePoint_SWIGUpcast(cPtr), cMemoryOwn);
+  protected DecorativePoint(long cPtr, boolean cMemoryOwn) {
+    super(opensimSimbodyJNI.DecorativePoint_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(DecorativePoint obj) {
+  protected static long getCPtr(DecorativePoint obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,7 +28,7 @@ public class DecorativePoint extends DecorativeGeometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_DecorativePoint(swigCPtr);
+        opensimSimbodyJNI.delete_DecorativePoint(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,59 +36,59 @@ public class DecorativePoint extends DecorativeGeometry {
   }
 
   public DecorativePoint(Vec3 p) {
-    this(opensimModelJNI.new_DecorativePoint__SWIG_0(Vec3.getCPtr(p), p), true);
+    this(opensimSimbodyJNI.new_DecorativePoint__SWIG_0(Vec3.getCPtr(p), p), true);
   }
 
   public DecorativePoint() {
-    this(opensimModelJNI.new_DecorativePoint__SWIG_1(), true);
+    this(opensimSimbodyJNI.new_DecorativePoint__SWIG_1(), true);
   }
 
   public DecorativePoint setPoint(Vec3 p) {
-    return new DecorativePoint(opensimModelJNI.DecorativePoint_setPoint(swigCPtr, this, Vec3.getCPtr(p), p), false);
+    return new DecorativePoint(opensimSimbodyJNI.DecorativePoint_setPoint(swigCPtr, this, Vec3.getCPtr(p), p), false);
   }
 
   public Vec3 getPoint() {
-    return new Vec3(opensimModelJNI.DecorativePoint_getPoint(swigCPtr, this), false);
+    return new Vec3(opensimSimbodyJNI.DecorativePoint_getPoint(swigCPtr, this), false);
   }
 
   public DecorativePoint setBodyId(int b) {
-    return new DecorativePoint(opensimModelJNI.DecorativePoint_setBodyId(swigCPtr, this, b), false);
+    return new DecorativePoint(opensimSimbodyJNI.DecorativePoint_setBodyId(swigCPtr, this, b), false);
   }
 
   public DecorativePoint setIndexOnBody(int x) {
-    return new DecorativePoint(opensimModelJNI.DecorativePoint_setIndexOnBody(swigCPtr, this, x), false);
+    return new DecorativePoint(opensimSimbodyJNI.DecorativePoint_setIndexOnBody(swigCPtr, this, x), false);
   }
 
   public DecorativePoint setUserRef(SWIGTYPE_p_void p) {
-    return new DecorativePoint(opensimModelJNI.DecorativePoint_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
+    return new DecorativePoint(opensimSimbodyJNI.DecorativePoint_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
   }
 
   public DecorativePoint setTransform(Transform X_BD) {
-    return new DecorativePoint(opensimModelJNI.DecorativePoint_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
+    return new DecorativePoint(opensimSimbodyJNI.DecorativePoint_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
   }
 
   public DecorativePoint setResolution(double r) {
-    return new DecorativePoint(opensimModelJNI.DecorativePoint_setResolution(swigCPtr, this, r), false);
+    return new DecorativePoint(opensimSimbodyJNI.DecorativePoint_setResolution(swigCPtr, this, r), false);
   }
 
   public DecorativePoint setScaleFactors(Vec3 s) {
-    return new DecorativePoint(opensimModelJNI.DecorativePoint_setScaleFactors(swigCPtr, this, Vec3.getCPtr(s), s), false);
+    return new DecorativePoint(opensimSimbodyJNI.DecorativePoint_setScaleFactors(swigCPtr, this, Vec3.getCPtr(s), s), false);
   }
 
   public DecorativePoint setColor(Vec3 rgb) {
-    return new DecorativePoint(opensimModelJNI.DecorativePoint_setColor(swigCPtr, this, Vec3.getCPtr(rgb), rgb), false);
+    return new DecorativePoint(opensimSimbodyJNI.DecorativePoint_setColor(swigCPtr, this, Vec3.getCPtr(rgb), rgb), false);
   }
 
   public DecorativePoint setOpacity(double o) {
-    return new DecorativePoint(opensimModelJNI.DecorativePoint_setOpacity(swigCPtr, this, o), false);
+    return new DecorativePoint(opensimSimbodyJNI.DecorativePoint_setOpacity(swigCPtr, this, o), false);
   }
 
   public DecorativePoint setLineThickness(double t) {
-    return new DecorativePoint(opensimModelJNI.DecorativePoint_setLineThickness(swigCPtr, this, t), false);
+    return new DecorativePoint(opensimSimbodyJNI.DecorativePoint_setLineThickness(swigCPtr, this, t), false);
   }
 
   public DecorativePoint setRepresentation(DecorativeGeometry.Representation r) {
-    return new DecorativePoint(opensimModelJNI.DecorativePoint_setRepresentation(swigCPtr, this, r.swigValue()), false);
+    return new DecorativePoint(opensimSimbodyJNI.DecorativePoint_setRepresentation(swigCPtr, this, r.swigValue()), false);
   }
 
 }

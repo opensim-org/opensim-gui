@@ -13,7 +13,7 @@ public class TimeSeriesTableVec3 extends DataTableVec3 {
   private boolean swigCMemOwnDerived;
 
   protected TimeSeriesTableVec3(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.TimeSeriesTableVec3_SWIGSmartPtrUpcast(cPtr), true);
+    super(opensimModelCommonJNI.TimeSeriesTableVec3_SWIGSmartPtrUpcast(cPtr), true);
     swigCMemOwnDerived = cMemoryOwn;
     swigCPtr = cPtr;
   }
@@ -30,7 +30,7 @@ public class TimeSeriesTableVec3 extends DataTableVec3 {
     if (swigCPtr != 0) {
       if (swigCMemOwnDerived) {
         swigCMemOwnDerived = false;
-        opensimModelJNI.delete_TimeSeriesTableVec3(swigCPtr);
+        opensimModelCommonJNI.delete_TimeSeriesTableVec3(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -38,15 +38,15 @@ public class TimeSeriesTableVec3 extends DataTableVec3 {
   }
 
   public TimeSeriesTableVec3() {
-    this(opensimModelJNI.new_TimeSeriesTableVec3__SWIG_0(), true);
+    this(opensimModelCommonJNI.new_TimeSeriesTableVec3__SWIG_0(), true);
   }
 
   public TimeSeriesTableVec3(TimeSeriesTableVec3 arg0) {
-    this(opensimModelJNI.new_TimeSeriesTableVec3__SWIG_1(TimeSeriesTableVec3.getCPtr(arg0), arg0), true);
+    this(opensimModelCommonJNI.new_TimeSeriesTableVec3__SWIG_1(TimeSeriesTableVec3.getCPtr(arg0), arg0), true);
   }
 
   public TimeSeriesTableVec3(DataTableVec3 datatable) {
-    this(opensimModelJNI.new_TimeSeriesTableVec3__SWIG_3(DataTableVec3.getCPtr(datatable), datatable), true);
+    this(opensimModelCommonJNI.new_TimeSeriesTableVec3__SWIG_3(DataTableVec3.getCPtr(datatable), datatable), true);
   }
 
 }

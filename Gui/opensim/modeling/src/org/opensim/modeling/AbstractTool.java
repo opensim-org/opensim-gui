@@ -12,7 +12,7 @@ public class AbstractTool extends OpenSimObject {
   private transient long swigCPtr;
 
   public AbstractTool(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.AbstractTool_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.AbstractTool_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class AbstractTool extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_AbstractTool(swigCPtr);
+        opensimModelSimulationJNI.delete_AbstractTool(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,253 +36,253 @@ public class AbstractTool extends OpenSimObject {
   }
 
   public static AbstractTool safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.AbstractTool_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.AbstractTool_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new AbstractTool(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.AbstractTool_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.AbstractTool_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.AbstractTool_getClassName();
+    return opensimModelSimulationJNI.AbstractTool_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.AbstractTool_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.AbstractTool_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new AbstractTool(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.AbstractTool_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.AbstractTool_getConcreteClassName(swigCPtr, this);
   }
 
   public void setModel(Model aModel) throws java.io.IOException {
-    opensimModelJNI.AbstractTool_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
+    opensimModelSimulationJNI.AbstractTool_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
   public Model getModel() {
-    return new Model(opensimModelJNI.AbstractTool_getModel(swigCPtr, this), false);
+    return new Model(opensimModelSimulationJNI.AbstractTool_getModel(swigCPtr, this), false);
   }
 
   public boolean getReplaceForceSet() {
-    return opensimModelJNI.AbstractTool_getReplaceForceSet(swigCPtr, this);
+    return opensimModelSimulationJNI.AbstractTool_getReplaceForceSet(swigCPtr, this);
   }
 
   public void setReplaceForceSet(boolean aReplace) {
-    opensimModelJNI.AbstractTool_setReplaceForceSet(swigCPtr, this, aReplace);
+    opensimModelSimulationJNI.AbstractTool_setReplaceForceSet(swigCPtr, this, aReplace);
   }
 
   public String getNextAvailableForceName(String prefix) {
-    return opensimModelJNI.AbstractTool_getNextAvailableForceName__SWIG_0(swigCPtr, this, prefix);
+    return opensimModelSimulationJNI.AbstractTool_getNextAvailableForceName__SWIG_0(swigCPtr, this, prefix);
   }
 
   public String getNextAvailableForceName() {
-    return opensimModelJNI.AbstractTool_getNextAvailableForceName__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.AbstractTool_getNextAvailableForceName__SWIG_1(swigCPtr, this);
   }
 
   public ExternalLoads getExternalLoads() {
-    return new ExternalLoads(opensimModelJNI.AbstractTool_getExternalLoads(swigCPtr, this), false);
+    return new ExternalLoads(opensimModelSimulationJNI.AbstractTool_getExternalLoads(swigCPtr, this), false);
   }
 
   public ExternalLoads updExternalLoads() {
-    return new ExternalLoads(opensimModelJNI.AbstractTool_updExternalLoads(swigCPtr, this), false);
+    return new ExternalLoads(opensimModelSimulationJNI.AbstractTool_updExternalLoads(swigCPtr, this), false);
   }
 
   public void setExternalLoads(ExternalLoads el) {
-    opensimModelJNI.AbstractTool_setExternalLoads(swigCPtr, this, ExternalLoads.getCPtr(el), el);
+    opensimModelSimulationJNI.AbstractTool_setExternalLoads(swigCPtr, this, ExternalLoads.getCPtr(el), el);
   }
 
   public String getExternalLoadsFileName() {
-    return opensimModelJNI.AbstractTool_getExternalLoadsFileName(swigCPtr, this);
+    return opensimModelSimulationJNI.AbstractTool_getExternalLoadsFileName(swigCPtr, this);
   }
 
   public void setExternalLoadsFileName(String aFileName) {
-    opensimModelJNI.AbstractTool_setExternalLoadsFileName(swigCPtr, this, aFileName);
+    opensimModelSimulationJNI.AbstractTool_setExternalLoadsFileName(swigCPtr, this, aFileName);
   }
 
   public ArrayStr getForceSetFiles() {
-    return new ArrayStr(opensimModelJNI.AbstractTool_getForceSetFiles(swigCPtr, this), false);
+    return new ArrayStr(opensimModelSimulationJNI.AbstractTool_getForceSetFiles(swigCPtr, this), false);
   }
 
   public void setForceSetFiles(ArrayStr aForceSetFiles) {
-    opensimModelJNI.AbstractTool_setForceSetFiles(swigCPtr, this, ArrayStr.getCPtr(aForceSetFiles), aForceSetFiles);
+    opensimModelSimulationJNI.AbstractTool_setForceSetFiles(swigCPtr, this, ArrayStr.getCPtr(aForceSetFiles), aForceSetFiles);
   }
 
   public int getOutputPrecision() {
-    return opensimModelJNI.AbstractTool_getOutputPrecision(swigCPtr, this);
+    return opensimModelSimulationJNI.AbstractTool_getOutputPrecision(swigCPtr, this);
   }
 
   public void setOutputPrecision(int aPrecision) {
-    opensimModelJNI.AbstractTool_setOutputPrecision(swigCPtr, this, aPrecision);
+    opensimModelSimulationJNI.AbstractTool_setOutputPrecision(swigCPtr, this, aPrecision);
   }
 
   public AnalysisSet getAnalysisSet() {
-    return new AnalysisSet(opensimModelJNI.AbstractTool_getAnalysisSet(swigCPtr, this), false);
+    return new AnalysisSet(opensimModelSimulationJNI.AbstractTool_getAnalysisSet(swigCPtr, this), false);
   }
 
   public String getResultsDir() {
-    return opensimModelJNI.AbstractTool_getResultsDir(swigCPtr, this);
+    return opensimModelSimulationJNI.AbstractTool_getResultsDir(swigCPtr, this);
   }
 
   public void setResultsDir(String aString) {
-    opensimModelJNI.AbstractTool_setResultsDir(swigCPtr, this, aString);
+    opensimModelSimulationJNI.AbstractTool_setResultsDir(swigCPtr, this, aString);
   }
 
   public double getInitialTime() {
-    return opensimModelJNI.AbstractTool_getInitialTime(swigCPtr, this);
+    return opensimModelSimulationJNI.AbstractTool_getInitialTime(swigCPtr, this);
   }
 
   public double getFinalTime() {
-    return opensimModelJNI.AbstractTool_getFinalTime(swigCPtr, this);
+    return opensimModelSimulationJNI.AbstractTool_getFinalTime(swigCPtr, this);
   }
 
   public void setInitialTime(double aInitialTime) {
-    opensimModelJNI.AbstractTool_setInitialTime(swigCPtr, this, aInitialTime);
+    opensimModelSimulationJNI.AbstractTool_setInitialTime(swigCPtr, this, aInitialTime);
   }
 
   public void setFinalTime(double aFinalTime) {
-    opensimModelJNI.AbstractTool_setFinalTime(swigCPtr, this, aFinalTime);
+    opensimModelSimulationJNI.AbstractTool_setFinalTime(swigCPtr, this, aFinalTime);
   }
 
   public double getStartTime() {
-    return opensimModelJNI.AbstractTool_getStartTime(swigCPtr, this);
+    return opensimModelSimulationJNI.AbstractTool_getStartTime(swigCPtr, this);
   }
 
   public void setStartTime(double aStartTime) {
-    opensimModelJNI.AbstractTool_setStartTime(swigCPtr, this, aStartTime);
+    opensimModelSimulationJNI.AbstractTool_setStartTime(swigCPtr, this, aStartTime);
   }
 
   public int getMaximumNumberOfSteps() {
-    return opensimModelJNI.AbstractTool_getMaximumNumberOfSteps(swigCPtr, this);
+    return opensimModelSimulationJNI.AbstractTool_getMaximumNumberOfSteps(swigCPtr, this);
   }
 
   public void setMaximumNumberOfSteps(int aMaxSteps) {
-    opensimModelJNI.AbstractTool_setMaximumNumberOfSteps(swigCPtr, this, aMaxSteps);
+    opensimModelSimulationJNI.AbstractTool_setMaximumNumberOfSteps(swigCPtr, this, aMaxSteps);
   }
 
   public double getMaxDT() {
-    return opensimModelJNI.AbstractTool_getMaxDT(swigCPtr, this);
+    return opensimModelSimulationJNI.AbstractTool_getMaxDT(swigCPtr, this);
   }
 
   public void setMaxDT(double aMaxDT) {
-    opensimModelJNI.AbstractTool_setMaxDT(swigCPtr, this, aMaxDT);
+    opensimModelSimulationJNI.AbstractTool_setMaxDT(swigCPtr, this, aMaxDT);
   }
 
   public double getMinDT() {
-    return opensimModelJNI.AbstractTool_getMinDT(swigCPtr, this);
+    return opensimModelSimulationJNI.AbstractTool_getMinDT(swigCPtr, this);
   }
 
   public void setMinDT(double aMinDT) {
-    opensimModelJNI.AbstractTool_setMinDT(swigCPtr, this, aMinDT);
+    opensimModelSimulationJNI.AbstractTool_setMinDT(swigCPtr, this, aMinDT);
   }
 
   public double getErrorTolerance() {
-    return opensimModelJNI.AbstractTool_getErrorTolerance(swigCPtr, this);
+    return opensimModelSimulationJNI.AbstractTool_getErrorTolerance(swigCPtr, this);
   }
 
   public void setErrorTolerance(double aErrorTolerance) {
-    opensimModelJNI.AbstractTool_setErrorTolerance(swigCPtr, this, aErrorTolerance);
+    opensimModelSimulationJNI.AbstractTool_setErrorTolerance(swigCPtr, this, aErrorTolerance);
   }
 
   public String getModelFilename() {
-    return opensimModelJNI.AbstractTool_getModelFilename(swigCPtr, this);
+    return opensimModelSimulationJNI.AbstractTool_getModelFilename(swigCPtr, this);
   }
 
   public void setModelFilename(String aModelFile) {
-    opensimModelJNI.AbstractTool_setModelFilename(swigCPtr, this, aModelFile);
+    opensimModelSimulationJNI.AbstractTool_setModelFilename(swigCPtr, this, aModelFile);
   }
 
   public boolean getSolveForEquilibrium() {
-    return opensimModelJNI.AbstractTool_getSolveForEquilibrium(swigCPtr, this);
+    return opensimModelSimulationJNI.AbstractTool_getSolveForEquilibrium(swigCPtr, this);
   }
 
   public void setSolveForEquilibrium(boolean aSolve) {
-    opensimModelJNI.AbstractTool_setSolveForEquilibrium(swigCPtr, this, aSolve);
+    opensimModelSimulationJNI.AbstractTool_setSolveForEquilibrium(swigCPtr, this, aSolve);
   }
 
   public void loadModel(String aToolSetupFileName, ForceSet rOriginalForceSet) {
-    opensimModelJNI.AbstractTool_loadModel__SWIG_0(swigCPtr, this, aToolSetupFileName, ForceSet.getCPtr(rOriginalForceSet), rOriginalForceSet);
+    opensimModelSimulationJNI.AbstractTool_loadModel__SWIG_0(swigCPtr, this, aToolSetupFileName, ForceSet.getCPtr(rOriginalForceSet), rOriginalForceSet);
   }
 
   public void loadModel(String aToolSetupFileName) {
-    opensimModelJNI.AbstractTool_loadModel__SWIG_1(swigCPtr, this, aToolSetupFileName);
+    opensimModelSimulationJNI.AbstractTool_loadModel__SWIG_1(swigCPtr, this, aToolSetupFileName);
   }
 
   public void updateModelForces(Model model, String aToolSetupFileName, ForceSet rOriginalForceSet) throws java.io.IOException {
-    opensimModelJNI.AbstractTool_updateModelForces__SWIG_0(swigCPtr, this, Model.getCPtr(model), model, aToolSetupFileName, ForceSet.getCPtr(rOriginalForceSet), rOriginalForceSet);
+    opensimModelSimulationJNI.AbstractTool_updateModelForces__SWIG_0(swigCPtr, this, Model.getCPtr(model), model, aToolSetupFileName, ForceSet.getCPtr(rOriginalForceSet), rOriginalForceSet);
   }
 
   public void updateModelForces(Model model, String aToolSetupFileName) throws java.io.IOException {
-    opensimModelJNI.AbstractTool_updateModelForces__SWIG_1(swigCPtr, this, Model.getCPtr(model), model, aToolSetupFileName);
+    opensimModelSimulationJNI.AbstractTool_updateModelForces__SWIG_1(swigCPtr, this, Model.getCPtr(model), model, aToolSetupFileName);
   }
 
   public void addAnalysisSetToModel() {
-    opensimModelJNI.AbstractTool_addAnalysisSetToModel(swigCPtr, this);
+    opensimModelSimulationJNI.AbstractTool_addAnalysisSetToModel(swigCPtr, this);
   }
 
   public void addControllerSetToModel() {
-    opensimModelJNI.AbstractTool_addControllerSetToModel(swigCPtr, this);
+    opensimModelSimulationJNI.AbstractTool_addControllerSetToModel(swigCPtr, this);
   }
 
   public void removeControllerSetFromModel() {
-    opensimModelJNI.AbstractTool_removeControllerSetFromModel(swigCPtr, this);
+    opensimModelSimulationJNI.AbstractTool_removeControllerSetFromModel(swigCPtr, this);
   }
 
   public void removeAnalysisSetFromModel() {
-    opensimModelJNI.AbstractTool_removeAnalysisSetFromModel(swigCPtr, this);
+    opensimModelSimulationJNI.AbstractTool_removeAnalysisSetFromModel(swigCPtr, this);
   }
 
   public void setToolOwnsModel(boolean trueFalse) {
-    opensimModelJNI.AbstractTool_setToolOwnsModel(swigCPtr, this, trueFalse);
+    opensimModelSimulationJNI.AbstractTool_setToolOwnsModel(swigCPtr, this, trueFalse);
   }
 
   public boolean getToolOwnsModel() {
-    return opensimModelJNI.AbstractTool_getToolOwnsModel(swigCPtr, this);
+    return opensimModelSimulationJNI.AbstractTool_getToolOwnsModel(swigCPtr, this);
   }
 
   public String getControlsFileName() {
-    return opensimModelJNI.AbstractTool_getControlsFileName(swigCPtr, this);
+    return opensimModelSimulationJNI.AbstractTool_getControlsFileName(swigCPtr, this);
   }
 
   public void setControlsFileName(String controlsFilename) {
-    opensimModelJNI.AbstractTool_setControlsFileName(swigCPtr, this, controlsFilename);
+    opensimModelSimulationJNI.AbstractTool_setControlsFileName(swigCPtr, this, controlsFilename);
   }
 
   public boolean run() throws java.io.IOException {
-    return opensimModelJNI.AbstractTool_run(swigCPtr, this);
+    return opensimModelSimulationJNI.AbstractTool_run(swigCPtr, this);
   }
 
   public void printResults(String aBaseName, String aDir, double aDT, String aExtension) {
-    opensimModelJNI.AbstractTool_printResults__SWIG_0(swigCPtr, this, aBaseName, aDir, aDT, aExtension);
+    opensimModelSimulationJNI.AbstractTool_printResults__SWIG_0(swigCPtr, this, aBaseName, aDir, aDT, aExtension);
   }
 
   public void printResults(String aBaseName, String aDir, double aDT) {
-    opensimModelJNI.AbstractTool_printResults__SWIG_1(swigCPtr, this, aBaseName, aDir, aDT);
+    opensimModelSimulationJNI.AbstractTool_printResults__SWIG_1(swigCPtr, this, aBaseName, aDir, aDT);
   }
 
   public void printResults(String aBaseName, String aDir) {
-    opensimModelJNI.AbstractTool_printResults__SWIG_2(swigCPtr, this, aBaseName, aDir);
+    opensimModelSimulationJNI.AbstractTool_printResults__SWIG_2(swigCPtr, this, aBaseName, aDir);
   }
 
   public void printResults(String aBaseName) {
-    opensimModelJNI.AbstractTool_printResults__SWIG_3(swigCPtr, this, aBaseName);
+    opensimModelSimulationJNI.AbstractTool_printResults__SWIG_3(swigCPtr, this, aBaseName);
   }
 
   public boolean createExternalLoads(String aExternalLoadsFileName, Model aModel, Storage loadKinematics) {
-    return opensimModelJNI.AbstractTool_createExternalLoads__SWIG_0(swigCPtr, this, aExternalLoadsFileName, Model.getCPtr(aModel), aModel, Storage.getCPtr(loadKinematics), loadKinematics);
+    return opensimModelSimulationJNI.AbstractTool_createExternalLoads__SWIG_0(swigCPtr, this, aExternalLoadsFileName, Model.getCPtr(aModel), aModel, Storage.getCPtr(loadKinematics), loadKinematics);
   }
 
   public boolean createExternalLoads(String aExternalLoadsFileName, Model aModel) {
-    return opensimModelJNI.AbstractTool_createExternalLoads__SWIG_1(swigCPtr, this, aExternalLoadsFileName, Model.getCPtr(aModel), aModel);
+    return opensimModelSimulationJNI.AbstractTool_createExternalLoads__SWIG_1(swigCPtr, this, aExternalLoadsFileName, Model.getCPtr(aModel), aModel);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
-    opensimModelJNI.AbstractTool_updateFromXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+    opensimModelSimulationJNI.AbstractTool_updateFromXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
   }
 
   public void loadQStorage(String statesFileName, Storage rQStore) {
-    opensimModelJNI.AbstractTool_loadQStorage(swigCPtr, this, statesFileName, Storage.getCPtr(rQStore), rQStore);
+    opensimModelSimulationJNI.AbstractTool_loadQStorage(swigCPtr, this, statesFileName, Storage.getCPtr(rQStore), rQStore);
   }
 
 }

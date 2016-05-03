@@ -12,7 +12,7 @@ public class ControlLinearNode extends OpenSimObject {
   private transient long swigCPtr;
 
   public ControlLinearNode(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ControlLinearNode_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.ControlLinearNode_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ControlLinearNode extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ControlLinearNode(swigCPtr);
+        opensimModelSimulationJNI.delete_ControlLinearNode(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,61 +36,61 @@ public class ControlLinearNode extends OpenSimObject {
   }
 
   public static ControlLinearNode safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ControlLinearNode_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.ControlLinearNode_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ControlLinearNode(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.ControlLinearNode_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.ControlLinearNode_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.ControlLinearNode_getClassName();
+    return opensimModelSimulationJNI.ControlLinearNode_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.ControlLinearNode_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.ControlLinearNode_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ControlLinearNode(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.ControlLinearNode_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.ControlLinearNode_getConcreteClassName(swigCPtr, this);
   }
 
   public ControlLinearNode(double aT, double aValue) {
-    this(opensimModelJNI.new_ControlLinearNode__SWIG_0(aT, aValue), true);
+    this(opensimModelSimulationJNI.new_ControlLinearNode__SWIG_0(aT, aValue), true);
   }
 
   public ControlLinearNode(double aT) {
-    this(opensimModelJNI.new_ControlLinearNode__SWIG_1(aT), true);
+    this(opensimModelSimulationJNI.new_ControlLinearNode__SWIG_1(aT), true);
   }
 
   public ControlLinearNode() {
-    this(opensimModelJNI.new_ControlLinearNode__SWIG_2(), true);
+    this(opensimModelSimulationJNI.new_ControlLinearNode__SWIG_2(), true);
   }
 
   public ControlLinearNode(ControlLinearNode aNode) {
-    this(opensimModelJNI.new_ControlLinearNode__SWIG_3(ControlLinearNode.getCPtr(aNode), aNode), true);
+    this(opensimModelSimulationJNI.new_ControlLinearNode__SWIG_3(ControlLinearNode.getCPtr(aNode), aNode), true);
   }
 
   public void setTime(double aT) {
-    opensimModelJNI.ControlLinearNode_setTime(swigCPtr, this, aT);
+    opensimModelSimulationJNI.ControlLinearNode_setTime(swigCPtr, this, aT);
   }
 
   public double getTime() {
-    return opensimModelJNI.ControlLinearNode_getTime(swigCPtr, this);
+    return opensimModelSimulationJNI.ControlLinearNode_getTime(swigCPtr, this);
   }
 
   public void setValue(double aValue) {
-    opensimModelJNI.ControlLinearNode_setValue(swigCPtr, this, aValue);
+    opensimModelSimulationJNI.ControlLinearNode_setValue(swigCPtr, this, aValue);
   }
 
   public double getValue() {
-    return opensimModelJNI.ControlLinearNode_getValue(swigCPtr, this);
+    return opensimModelSimulationJNI.ControlLinearNode_getValue(swigCPtr, this);
   }
 
   public String toString() {
-    return opensimModelJNI.ControlLinearNode_toString(swigCPtr, this);
+    return opensimModelSimulationJNI.ControlLinearNode_toString(swigCPtr, this);
   }
 
 }

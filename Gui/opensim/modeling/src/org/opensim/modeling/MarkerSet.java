@@ -12,7 +12,7 @@ public class MarkerSet extends ModelComponentSetMarkers {
   private transient long swigCPtr;
 
   public MarkerSet(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.MarkerSet_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.MarkerSet_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class MarkerSet extends ModelComponentSetMarkers {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_MarkerSet(swigCPtr);
+        opensimModelSimulationJNI.delete_MarkerSet(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,53 +36,53 @@ public class MarkerSet extends ModelComponentSetMarkers {
   }
 
   public static MarkerSet safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.MarkerSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.MarkerSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new MarkerSet(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.MarkerSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.MarkerSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.MarkerSet_getClassName();
+    return opensimModelSimulationJNI.MarkerSet_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.MarkerSet_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.MarkerSet_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new MarkerSet(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.MarkerSet_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.MarkerSet_getConcreteClassName(swigCPtr, this);
   }
 
   public MarkerSet() {
-    this(opensimModelJNI.new_MarkerSet__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_MarkerSet__SWIG_0(), true);
   }
 
   public MarkerSet(Model aModel, String aMarkersFileName) throws java.io.IOException {
-    this(opensimModelJNI.new_MarkerSet__SWIG_1(Model.getCPtr(aModel), aModel, aMarkersFileName), true);
+    this(opensimModelSimulationJNI.new_MarkerSet__SWIG_1(Model.getCPtr(aModel), aModel, aMarkersFileName), true);
   }
 
   public MarkerSet(MarkerSet aMarkerSet) {
-    this(opensimModelJNI.new_MarkerSet__SWIG_2(MarkerSet.getCPtr(aMarkerSet), aMarkerSet), true);
+    this(opensimModelSimulationJNI.new_MarkerSet__SWIG_2(MarkerSet.getCPtr(aMarkerSet), aMarkerSet), true);
   }
 
   public void getMarkerNames(ArrayStr aMarkerNamesArray) {
-    opensimModelJNI.MarkerSet_getMarkerNames(swigCPtr, this, ArrayStr.getCPtr(aMarkerNamesArray), aMarkerNamesArray);
+    opensimModelSimulationJNI.MarkerSet_getMarkerNames(swigCPtr, this, ArrayStr.getCPtr(aMarkerNamesArray), aMarkerNamesArray);
   }
 
   public void scale(ScaleSet aScaleSet) {
-    opensimModelJNI.MarkerSet_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
+    opensimModelSimulationJNI.MarkerSet_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
   }
 
   public void addNamePrefix(String prefix) {
-    opensimModelJNI.MarkerSet_addNamePrefix(swigCPtr, this, prefix);
+    opensimModelSimulationJNI.MarkerSet_addNamePrefix(swigCPtr, this, prefix);
   }
 
   public Marker addMarker(String aName, Vec3 aOffset, PhysicalFrame aPhysicalFrame) {
-    long cPtr = opensimModelJNI.MarkerSet_addMarker(swigCPtr, this, aName, Vec3.getCPtr(aOffset), aOffset, PhysicalFrame.getCPtr(aPhysicalFrame), aPhysicalFrame);
+    long cPtr = opensimModelSimulationJNI.MarkerSet_addMarker(swigCPtr, this, aName, Vec3.getCPtr(aOffset), aOffset, PhysicalFrame.getCPtr(aPhysicalFrame), aPhysicalFrame);
     return (cPtr == 0) ? null : new Marker(cPtr, false);
   }
 

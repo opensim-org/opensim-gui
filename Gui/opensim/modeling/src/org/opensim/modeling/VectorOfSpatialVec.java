@@ -12,12 +12,12 @@ public class VectorOfSpatialVec {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  public VectorOfSpatialVec(long cPtr, boolean cMemoryOwn) {
+  protected VectorOfSpatialVec(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(VectorOfSpatialVec obj) {
+  protected static long getCPtr(VectorOfSpatialVec obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,34 +29,34 @@ public class VectorOfSpatialVec {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_VectorOfSpatialVec(swigCPtr);
+        opensimSimbodyJNI.delete_VectorOfSpatialVec(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public VectorOfSpatialVec() {
-    this(opensimModelJNI.new_VectorOfSpatialVec__SWIG_0(), true);
+    this(opensimSimbodyJNI.new_VectorOfSpatialVec__SWIG_0(), true);
   }
 
   public VectorOfSpatialVec(VectorOfSpatialVec src) {
-    this(opensimModelJNI.new_VectorOfSpatialVec__SWIG_1(VectorOfSpatialVec.getCPtr(src), src), true);
+    this(opensimSimbodyJNI.new_VectorOfSpatialVec__SWIG_1(VectorOfSpatialVec.getCPtr(src), src), true);
   }
 
   public VectorOfSpatialVec(int m, SpatialVec initialValue) {
-    this(opensimModelJNI.new_VectorOfSpatialVec__SWIG_2(m, SpatialVec.getCPtr(initialValue), initialValue), true);
+    this(opensimSimbodyJNI.new_VectorOfSpatialVec__SWIG_2(m, SpatialVec.getCPtr(initialValue), initialValue), true);
   }
 
   public String toString() {
-    return opensimModelJNI.VectorOfSpatialVec_toString(swigCPtr, this);
+    return opensimSimbodyJNI.VectorOfSpatialVec_toString(swigCPtr, this);
   }
 
   public SpatialVec get(int i) {
-    return new SpatialVec(opensimModelJNI.VectorOfSpatialVec_get(swigCPtr, this, i), false);
+    return new SpatialVec(opensimSimbodyJNI.VectorOfSpatialVec_get(swigCPtr, this, i), false);
   }
 
   public void set(int i, SpatialVec value) {
-    opensimModelJNI.VectorOfSpatialVec_set(swigCPtr, this, i, SpatialVec.getCPtr(value), value);
+    opensimSimbodyJNI.VectorOfSpatialVec_set(swigCPtr, this, i, SpatialVec.getCPtr(value), value);
   }
 
 }

@@ -12,12 +12,12 @@ public class Segment {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  public Segment(long cPtr, boolean cMemoryOwn) {
+  protected Segment(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(Segment obj) {
+  protected static long getCPtr(Segment obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,38 +29,38 @@ public class Segment {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_Segment(swigCPtr);
+        opensimSimbodyJNI.delete_Segment(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public Segment() {
-    this(opensimModelJNI.new_Segment__SWIG_0(), true);
+    this(opensimSimbodyJNI.new_Segment__SWIG_0(), true);
   }
 
   public Segment(int l, int ofs) {
-    this(opensimModelJNI.new_Segment__SWIG_1(l, ofs), true);
+    this(opensimSimbodyJNI.new_Segment__SWIG_1(l, ofs), true);
   }
 
   public Segment(int l) {
-    this(opensimModelJNI.new_Segment__SWIG_2(l), true);
+    this(opensimSimbodyJNI.new_Segment__SWIG_2(l), true);
   }
 
   public void setLength(int value) {
-    opensimModelJNI.Segment_length_set(swigCPtr, this, value);
+    opensimSimbodyJNI.Segment_length_set(swigCPtr, this, value);
   }
 
   public int getLength() {
-    return opensimModelJNI.Segment_length_get(swigCPtr, this);
+    return opensimSimbodyJNI.Segment_length_get(swigCPtr, this);
   }
 
   public void setOffset(int value) {
-    opensimModelJNI.Segment_offset_set(swigCPtr, this, value);
+    opensimSimbodyJNI.Segment_offset_set(swigCPtr, this, value);
   }
 
   public int getOffset() {
-    return opensimModelJNI.Segment_offset_get(swigCPtr, this);
+    return opensimSimbodyJNI.Segment_offset_get(swigCPtr, this);
   }
 
 }

@@ -12,7 +12,7 @@ public class MetaDataLengthZero extends OpenSimException {
   private transient long swigCPtr;
 
   public MetaDataLengthZero(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.MetaDataLengthZero_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.MetaDataLengthZero_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class MetaDataLengthZero extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_MetaDataLengthZero(swigCPtr);
+        opensimModelCommonJNI.delete_MetaDataLengthZero(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class MetaDataLengthZero extends OpenSimException {
   }
 
   public MetaDataLengthZero(String file, long line, String func, String key) {
-    this(opensimModelJNI.new_MetaDataLengthZero(file, line, func, key), true);
+    this(opensimModelCommonJNI.new_MetaDataLengthZero(file, line, func, key), true);
   }
 
 }

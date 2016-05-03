@@ -12,7 +12,7 @@ public class InvalidTable extends OpenSimException {
   private transient long swigCPtr;
 
   public InvalidTable(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.InvalidTable_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.InvalidTable_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class InvalidTable extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_InvalidTable(swigCPtr);
+        opensimModelCommonJNI.delete_InvalidTable(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class InvalidTable extends OpenSimException {
   }
 
   public InvalidTable() {
-    this(opensimModelJNI.new_InvalidTable(), true);
+    this(opensimModelCommonJNI.new_InvalidTable(), true);
   }
 
 }
