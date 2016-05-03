@@ -12,12 +12,12 @@ public class StdVectorDouble {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  public StdVectorDouble(long cPtr, boolean cMemoryOwn) {
+  protected StdVectorDouble(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(StdVectorDouble obj) {
+  protected static long getCPtr(StdVectorDouble obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,50 +29,50 @@ public class StdVectorDouble {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_StdVectorDouble(swigCPtr);
+        opensimSimbodyJNI.delete_StdVectorDouble(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public StdVectorDouble() {
-    this(opensimModelJNI.new_StdVectorDouble__SWIG_0(), true);
+    this(opensimSimbodyJNI.new_StdVectorDouble__SWIG_0(), true);
   }
 
   public StdVectorDouble(long n) {
-    this(opensimModelJNI.new_StdVectorDouble__SWIG_1(n), true);
+    this(opensimSimbodyJNI.new_StdVectorDouble__SWIG_1(n), true);
   }
 
   public long size() {
-    return opensimModelJNI.StdVectorDouble_size(swigCPtr, this);
+    return opensimSimbodyJNI.StdVectorDouble_size(swigCPtr, this);
   }
 
   public long capacity() {
-    return opensimModelJNI.StdVectorDouble_capacity(swigCPtr, this);
+    return opensimSimbodyJNI.StdVectorDouble_capacity(swigCPtr, this);
   }
 
   public void reserve(long n) {
-    opensimModelJNI.StdVectorDouble_reserve(swigCPtr, this, n);
+    opensimSimbodyJNI.StdVectorDouble_reserve(swigCPtr, this, n);
   }
 
   public boolean isEmpty() {
-    return opensimModelJNI.StdVectorDouble_isEmpty(swigCPtr, this);
+    return opensimSimbodyJNI.StdVectorDouble_isEmpty(swigCPtr, this);
   }
 
   public void clear() {
-    opensimModelJNI.StdVectorDouble_clear(swigCPtr, this);
+    opensimSimbodyJNI.StdVectorDouble_clear(swigCPtr, this);
   }
 
   public void add(double x) {
-    opensimModelJNI.StdVectorDouble_add(swigCPtr, this, x);
+    opensimSimbodyJNI.StdVectorDouble_add(swigCPtr, this, x);
   }
 
   public double get(int i) {
-    return opensimModelJNI.StdVectorDouble_get(swigCPtr, this, i);
+    return opensimSimbodyJNI.StdVectorDouble_get(swigCPtr, this, i);
   }
 
   public void set(int i, double val) {
-    opensimModelJNI.StdVectorDouble_set(swigCPtr, this, i, val);
+    opensimSimbodyJNI.StdVectorDouble_set(swigCPtr, this, i, val);
   }
 
 }

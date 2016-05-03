@@ -12,7 +12,7 @@ public class ModelComponent extends Component {
   private transient long swigCPtr;
 
   public ModelComponent(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ModelComponent_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.ModelComponent_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ModelComponent extends Component {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ModelComponent(swigCPtr);
+        opensimModelSimulationJNI.delete_ModelComponent(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,73 +36,73 @@ public class ModelComponent extends Component {
   }
 
   public static ModelComponent safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ModelComponent_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.ModelComponent_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ModelComponent(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.ModelComponent_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.ModelComponent_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.ModelComponent_getClassName();
+    return opensimModelSimulationJNI.ModelComponent_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.ModelComponent_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.ModelComponent_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ModelComponent(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.ModelComponent_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.ModelComponent_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_geometry(ModelComponent source) {
-    opensimModelJNI.ModelComponent_copyProperty_geometry(swigCPtr, this, ModelComponent.getCPtr(source), source);
+    opensimModelSimulationJNI.ModelComponent_copyProperty_geometry(swigCPtr, this, ModelComponent.getCPtr(source), source);
   }
 
   public Geometry get_geometry(int i) {
-    return new Geometry(opensimModelJNI.ModelComponent_get_geometry(swigCPtr, this, i), false);
+    return new Geometry(opensimModelSimulationJNI.ModelComponent_get_geometry(swigCPtr, this, i), false);
   }
 
   public Geometry upd_geometry(int i) {
-    return new Geometry(opensimModelJNI.ModelComponent_upd_geometry(swigCPtr, this, i), false);
+    return new Geometry(opensimModelSimulationJNI.ModelComponent_upd_geometry(swigCPtr, this, i), false);
   }
 
   public void set_geometry(int i, Geometry value) {
-    opensimModelJNI.ModelComponent_set_geometry(swigCPtr, this, i, Geometry.getCPtr(value), value);
+    opensimModelSimulationJNI.ModelComponent_set_geometry(swigCPtr, this, i, Geometry.getCPtr(value), value);
   }
 
   public int append_geometry(Geometry value) {
-    return opensimModelJNI.ModelComponent_append_geometry(swigCPtr, this, Geometry.getCPtr(value), value);
+    return opensimModelSimulationJNI.ModelComponent_append_geometry(swigCPtr, this, Geometry.getCPtr(value), value);
   }
 
   public void constructProperty_geometry() {
-    opensimModelJNI.ModelComponent_constructProperty_geometry(swigCPtr, this);
+    opensimModelSimulationJNI.ModelComponent_constructProperty_geometry(swigCPtr, this);
   }
 
   public void connectToModel(Model model) {
-    opensimModelJNI.ModelComponent_connectToModel(swigCPtr, this, Model.getCPtr(model), model);
+    opensimModelSimulationJNI.ModelComponent_connectToModel(swigCPtr, this, Model.getCPtr(model), model);
   }
 
   public Model getModel() {
-    return new Model(opensimModelJNI.ModelComponent_getModel(swigCPtr, this), false);
+    return new Model(opensimModelSimulationJNI.ModelComponent_getModel(swigCPtr, this), false);
   }
 
   public Model updModel() {
-    return new Model(opensimModelJNI.ModelComponent_updModel(swigCPtr, this), false);
+    return new Model(opensimModelSimulationJNI.ModelComponent_updModel(swigCPtr, this), false);
   }
 
   public int getNumGeometry() {
-    return opensimModelJNI.ModelComponent_getNumGeometry(swigCPtr, this);
+    return opensimModelSimulationJNI.ModelComponent_getNumGeometry(swigCPtr, this);
   }
 
   public void addGeometry(Geometry aGeometry) {
-    opensimModelJNI.ModelComponent_addGeometry(swigCPtr, this, Geometry.getCPtr(aGeometry), aGeometry);
+    opensimModelSimulationJNI.ModelComponent_addGeometry(swigCPtr, this, Geometry.getCPtr(aGeometry), aGeometry);
   }
 
   public void extendFinalizeFromProperties() {
-    opensimModelJNI.ModelComponent_extendFinalizeFromProperties(swigCPtr, this);
+    opensimModelSimulationJNI.ModelComponent_extendFinalizeFromProperties(swigCPtr, this);
   }
 
 }

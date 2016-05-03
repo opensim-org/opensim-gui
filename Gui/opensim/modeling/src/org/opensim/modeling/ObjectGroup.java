@@ -12,7 +12,7 @@ public class ObjectGroup extends OpenSimObject {
   private transient long swigCPtr;
 
   public ObjectGroup(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ObjectGroup_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.ObjectGroup_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ObjectGroup extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ObjectGroup(swigCPtr);
+        opensimModelCommonJNI.delete_ObjectGroup(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,65 +36,65 @@ public class ObjectGroup extends OpenSimObject {
   }
 
   public static ObjectGroup safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ObjectGroup_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelCommonJNI.ObjectGroup_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ObjectGroup(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.ObjectGroup_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelCommonJNI.ObjectGroup_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.ObjectGroup_getClassName();
+    return opensimModelCommonJNI.ObjectGroup_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.ObjectGroup_clone(swigCPtr, this);
+    long cPtr = opensimModelCommonJNI.ObjectGroup_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ObjectGroup(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.ObjectGroup_getConcreteClassName(swigCPtr, this);
+    return opensimModelCommonJNI.ObjectGroup_getConcreteClassName(swigCPtr, this);
   }
 
   public ObjectGroup() {
-    this(opensimModelJNI.new_ObjectGroup__SWIG_0(), true);
+    this(opensimModelCommonJNI.new_ObjectGroup__SWIG_0(), true);
   }
 
   public ObjectGroup(String aName) {
-    this(opensimModelJNI.new_ObjectGroup__SWIG_1(aName), true);
+    this(opensimModelCommonJNI.new_ObjectGroup__SWIG_1(aName), true);
   }
 
   public ObjectGroup(ObjectGroup aGroup) {
-    this(opensimModelJNI.new_ObjectGroup__SWIG_2(ObjectGroup.getCPtr(aGroup), aGroup), true);
+    this(opensimModelCommonJNI.new_ObjectGroup__SWIG_2(ObjectGroup.getCPtr(aGroup), aGroup), true);
   }
 
   public void copyData(ObjectGroup aGroup) {
-    opensimModelJNI.ObjectGroup_copyData(swigCPtr, this, ObjectGroup.getCPtr(aGroup), aGroup);
+    opensimModelCommonJNI.ObjectGroup_copyData(swigCPtr, this, ObjectGroup.getCPtr(aGroup), aGroup);
   }
 
   public boolean contains(String aName) {
-    return opensimModelJNI.ObjectGroup_contains(swigCPtr, this, aName);
+    return opensimModelCommonJNI.ObjectGroup_contains(swigCPtr, this, aName);
   }
 
   public void add(OpenSimObject aObject) {
-    opensimModelJNI.ObjectGroup_add(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelCommonJNI.ObjectGroup_add(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public void remove(OpenSimObject aObject) {
-    opensimModelJNI.ObjectGroup_remove(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelCommonJNI.ObjectGroup_remove(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public void replace(OpenSimObject aOldObject, OpenSimObject aNewObject) {
-    opensimModelJNI.ObjectGroup_replace(swigCPtr, this, OpenSimObject.getCPtr(aOldObject), aOldObject, OpenSimObject.getCPtr(aNewObject), aNewObject);
+    opensimModelCommonJNI.ObjectGroup_replace(swigCPtr, this, OpenSimObject.getCPtr(aOldObject), aOldObject, OpenSimObject.getCPtr(aNewObject), aNewObject);
   }
 
   public void setupGroup(ArrayPtrsObj aObjects) {
-    opensimModelJNI.ObjectGroup_setupGroup(swigCPtr, this, ArrayPtrsObj.getCPtr(aObjects), aObjects);
+    opensimModelCommonJNI.ObjectGroup_setupGroup(swigCPtr, this, ArrayPtrsObj.getCPtr(aObjects), aObjects);
   }
 
   public ArrayObjPtr getMembers() {
-    return new ArrayObjPtr(opensimModelJNI.ObjectGroup_getMembers(swigCPtr, this), false);
+    return new ArrayObjPtr(opensimModelCommonJNI.ObjectGroup_getMembers(swigCPtr, this), false);
   }
 
 }

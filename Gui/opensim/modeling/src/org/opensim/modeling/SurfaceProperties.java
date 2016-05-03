@@ -12,7 +12,7 @@ public class SurfaceProperties extends OpenSimObject {
   private transient long swigCPtr;
 
   public SurfaceProperties(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.SurfaceProperties_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.SurfaceProperties_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class SurfaceProperties extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_SurfaceProperties(swigCPtr);
+        opensimModelSimulationJNI.delete_SurfaceProperties(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,109 +36,109 @@ public class SurfaceProperties extends OpenSimObject {
   }
 
   public static SurfaceProperties safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.SurfaceProperties_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.SurfaceProperties_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new SurfaceProperties(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.SurfaceProperties_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.SurfaceProperties_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.SurfaceProperties_getClassName();
+    return opensimModelSimulationJNI.SurfaceProperties_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.SurfaceProperties_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.SurfaceProperties_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new SurfaceProperties(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.SurfaceProperties_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.SurfaceProperties_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_representation(SurfaceProperties source) {
-    opensimModelJNI.SurfaceProperties_copyProperty_representation(swigCPtr, this, SurfaceProperties.getCPtr(source), source);
+    opensimModelSimulationJNI.SurfaceProperties_copyProperty_representation(swigCPtr, this, SurfaceProperties.getCPtr(source), source);
   }
 
   public int get_representation(int i) {
-    return opensimModelJNI.SurfaceProperties_get_representation__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.SurfaceProperties_get_representation__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_int upd_representation(int i) {
-    return new SWIGTYPE_p_int(opensimModelJNI.SurfaceProperties_upd_representation__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_int(opensimModelSimulationJNI.SurfaceProperties_upd_representation__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_representation(int i, int value) {
-    opensimModelJNI.SurfaceProperties_set_representation__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.SurfaceProperties_set_representation__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_representation(int value) {
-    return opensimModelJNI.SurfaceProperties_append_representation(swigCPtr, this, value);
+    return opensimModelSimulationJNI.SurfaceProperties_append_representation(swigCPtr, this, value);
   }
 
   public void constructProperty_representation(int initValue) {
-    opensimModelJNI.SurfaceProperties_constructProperty_representation(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.SurfaceProperties_constructProperty_representation(swigCPtr, this, initValue);
   }
 
   public int get_representation() {
-    return opensimModelJNI.SurfaceProperties_get_representation__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.SurfaceProperties_get_representation__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_int upd_representation() {
-    return new SWIGTYPE_p_int(opensimModelJNI.SurfaceProperties_upd_representation__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_int(opensimModelSimulationJNI.SurfaceProperties_upd_representation__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_representation(int value) {
-    opensimModelJNI.SurfaceProperties_set_representation__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.SurfaceProperties_set_representation__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_texture_file(SurfaceProperties source) {
-    opensimModelJNI.SurfaceProperties_copyProperty_texture_file(swigCPtr, this, SurfaceProperties.getCPtr(source), source);
+    opensimModelSimulationJNI.SurfaceProperties_copyProperty_texture_file(swigCPtr, this, SurfaceProperties.getCPtr(source), source);
   }
 
   public String get_texture_file(int i) {
-    return opensimModelJNI.SurfaceProperties_get_texture_file__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.SurfaceProperties_get_texture_file__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_std__string upd_texture_file(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.SurfaceProperties_upd_texture_file__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_std__string(opensimModelSimulationJNI.SurfaceProperties_upd_texture_file__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_texture_file(int i, String value) {
-    opensimModelJNI.SurfaceProperties_set_texture_file__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.SurfaceProperties_set_texture_file__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_texture_file(String value) {
-    return opensimModelJNI.SurfaceProperties_append_texture_file(swigCPtr, this, value);
+    return opensimModelSimulationJNI.SurfaceProperties_append_texture_file(swigCPtr, this, value);
   }
 
   public void constructProperty_texture_file() {
-    opensimModelJNI.SurfaceProperties_constructProperty_texture_file__SWIG_0(swigCPtr, this);
+    opensimModelSimulationJNI.SurfaceProperties_constructProperty_texture_file__SWIG_0(swigCPtr, this);
   }
 
   public void constructProperty_texture_file(String initValue) {
-    opensimModelJNI.SurfaceProperties_constructProperty_texture_file__SWIG_1(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.SurfaceProperties_constructProperty_texture_file__SWIG_1(swigCPtr, this, initValue);
   }
 
   public String get_texture_file() {
-    return opensimModelJNI.SurfaceProperties_get_texture_file__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.SurfaceProperties_get_texture_file__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_std__string upd_texture_file() {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.SurfaceProperties_upd_texture_file__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_std__string(opensimModelSimulationJNI.SurfaceProperties_upd_texture_file__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_texture_file(String value) {
-    opensimModelJNI.SurfaceProperties_set_texture_file__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.SurfaceProperties_set_texture_file__SWIG_1(swigCPtr, this, value);
   }
 
   public SurfaceProperties() {
-    this(opensimModelJNI.new_SurfaceProperties(), true);
+    this(opensimModelSimulationJNI.new_SurfaceProperties(), true);
   }
 
   public boolean hasTexture() {
-    return opensimModelJNI.SurfaceProperties_hasTexture(swigCPtr, this);
+    return opensimModelSimulationJNI.SurfaceProperties_hasTexture(swigCPtr, this);
   }
 
 }

@@ -8,11 +8,11 @@
 
 package org.opensim.modeling;
 
-public class ColumnIndexOutOfRange extends IndexOutOfRangeSizeT {
+public class ColumnIndexOutOfRange extends IndexOutOfRange {
   private transient long swigCPtr;
 
   public ColumnIndexOutOfRange(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ColumnIndexOutOfRange_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.ColumnIndexOutOfRange_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ColumnIndexOutOfRange extends IndexOutOfRangeSizeT {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ColumnIndexOutOfRange(swigCPtr);
+        opensimModelCommonJNI.delete_ColumnIndexOutOfRange(swigCPtr);
       }
       swigCPtr = 0;
     }

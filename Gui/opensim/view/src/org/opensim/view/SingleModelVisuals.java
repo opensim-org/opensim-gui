@@ -302,7 +302,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
      {
             double[] flattenedXform = new double[16];
             OpenSimContext dContext = OpenSimDB.getInstance().getContext(model);
-            dContext.getTransformAsDouble16(body.getGroundTransform(dContext.getCurrentStateRef()), flattenedXform);
+            dContext.getTransformAsDouble16(body.getTransformInGround(dContext.getCurrentStateRef()), flattenedXform);
             return convertTransformToVtkMatrix4x4(flattenedXform);
      }
     /**

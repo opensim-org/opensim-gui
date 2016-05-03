@@ -29,67 +29,67 @@ public class AbstractOutput {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_AbstractOutput(swigCPtr);
+        opensimModelCommonJNI.delete_AbstractOutput(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public String getName() {
-    return opensimModelJNI.AbstractOutput_getName(swigCPtr, this);
+    return opensimModelCommonJNI.AbstractOutput_getName(swigCPtr, this);
   }
 
   public Stage getDependsOnStage() {
-    return new Stage(opensimModelJNI.AbstractOutput_getDependsOnStage(swigCPtr, this), false);
+    return new Stage(opensimModelCommonJNI.AbstractOutput_getDependsOnStage(swigCPtr, this), false);
   }
 
   public boolean isListOutput() {
-    return opensimModelJNI.AbstractOutput_isListOutput(swigCPtr, this);
+    return opensimModelCommonJNI.AbstractOutput_isListOutput(swigCPtr, this);
   }
 
-  public Component getOwner() {
-    return new Component(opensimModelJNI.AbstractOutput_getOwner(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__Component getOwner() {
+    return new SWIGTYPE_p_OpenSim__Component(opensimModelCommonJNI.AbstractOutput_getOwner(swigCPtr, this), false);
   }
 
   public void clearChannels() {
-    opensimModelJNI.AbstractOutput_clearChannels(swigCPtr, this);
+    opensimModelCommonJNI.AbstractOutput_clearChannels(swigCPtr, this);
   }
 
   public void addChannel(String channelName) {
-    opensimModelJNI.AbstractOutput_addChannel(swigCPtr, this, channelName);
+    opensimModelCommonJNI.AbstractOutput_addChannel(swigCPtr, this, channelName);
   }
 
   public AbstractChannel getChannel(String name) {
-    return new AbstractChannel(opensimModelJNI.AbstractOutput_getChannel(swigCPtr, this, name), false);
+    return new AbstractChannel(opensimModelCommonJNI.AbstractOutput_getChannel(swigCPtr, this, name), false);
   }
 
   public String getTypeName() {
-    return opensimModelJNI.AbstractOutput_getTypeName(swigCPtr, this);
+    return opensimModelCommonJNI.AbstractOutput_getTypeName(swigCPtr, this);
   }
 
   public String getValueAsString(State state) {
-    return opensimModelJNI.AbstractOutput_getValueAsString(swigCPtr, this, State.getCPtr(state), state);
+    return opensimModelCommonJNI.AbstractOutput_getValueAsString(swigCPtr, this, State.getCPtr(state), state);
   }
 
   public boolean isCompatible(AbstractOutput arg0) {
-    return opensimModelJNI.AbstractOutput_isCompatible(swigCPtr, this, AbstractOutput.getCPtr(arg0), arg0);
+    return opensimModelCommonJNI.AbstractOutput_isCompatible(swigCPtr, this, AbstractOutput.getCPtr(arg0), arg0);
   }
 
   public void compatibleAssign(AbstractOutput arg0) {
-    opensimModelJNI.AbstractOutput_compatibleAssign(swigCPtr, this, AbstractOutput.getCPtr(arg0), arg0);
+    opensimModelCommonJNI.AbstractOutput_compatibleAssign(swigCPtr, this, AbstractOutput.getCPtr(arg0), arg0);
   }
 
   public AbstractOutput clone() {
-    long cPtr = opensimModelJNI.AbstractOutput_clone(swigCPtr, this);
+    long cPtr = opensimModelCommonJNI.AbstractOutput_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new AbstractOutput(cPtr, true);
   }
 
   public long getNumberOfSignificantDigits() {
-    return opensimModelJNI.AbstractOutput_getNumberOfSignificantDigits(swigCPtr, this);
+    return opensimModelCommonJNI.AbstractOutput_getNumberOfSignificantDigits(swigCPtr, this);
   }
 
   public void setNumberOfSignificantDigits(long numSigFigs) {
-    opensimModelJNI.AbstractOutput_setNumberOfSignificantDigits(swigCPtr, this, numSigFigs);
+    opensimModelCommonJNI.AbstractOutput_setNumberOfSignificantDigits(swigCPtr, this, numSigFigs);
   }
 
 }

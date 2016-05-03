@@ -201,7 +201,7 @@ public class VisualizationJson {
         bdyJson.put("opensimtype", "Frame");
         bdyJson.put("name", body.getFullPathName());
         PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(body.getMobilizedBodyIndex());
-        Transform bodyXform = bodyFrame.getGroundTransform(state);
+        Transform bodyXform = bodyFrame.getTransformInGround(state);
         bdyJson.put("matrix", JSONUtilities.createMatrixFromTransform(bodyXform, vec3Unit, visScaleFactor));
         return bdyJson;
     }
@@ -224,7 +224,7 @@ public class VisualizationJson {
             int bodyId = bodyIdIter.next();
             JSONObject oneBodyXform_json = new JSONObject();
             PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(bodyId);
-            Transform xform = bodyFrame.getGroundTransform(state);
+            Transform xform = bodyFrame.getTransformInGround(state);
             // Get uuid for first Mesh in body
             oneBodyXform_json.put("name", mapBodyIndicesToJson.get(bodyId).get("name"));
             oneBodyXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1., 1., 1.), visScaleFactor));

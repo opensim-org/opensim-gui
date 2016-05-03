@@ -12,12 +12,12 @@ public class TrueType {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  public TrueType(long cPtr, boolean cMemoryOwn) {
+  protected TrueType(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(TrueType obj) {
+  protected static long getCPtr(TrueType obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,14 +29,14 @@ public class TrueType {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_TrueType(swigCPtr);
+        opensimSimbodyJNI.delete_TrueType(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public TrueType() {
-    this(opensimModelJNI.new_TrueType(), true);
+    this(opensimSimbodyJNI.new_TrueType(), true);
   }
 
 }

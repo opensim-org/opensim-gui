@@ -12,7 +12,7 @@ public class ConstraintSet extends ModelComponentSetConstraints {
   private transient long swigCPtr;
 
   public ConstraintSet(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ConstraintSet_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.ConstraintSet_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ConstraintSet extends ModelComponentSetConstraints {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ConstraintSet(swigCPtr);
+        opensimModelSimulationJNI.delete_ConstraintSet(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,49 +36,49 @@ public class ConstraintSet extends ModelComponentSetConstraints {
   }
 
   public static ConstraintSet safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ConstraintSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.ConstraintSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ConstraintSet(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.ConstraintSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.ConstraintSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.ConstraintSet_getClassName();
+    return opensimModelSimulationJNI.ConstraintSet_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.ConstraintSet_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.ConstraintSet_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ConstraintSet(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.ConstraintSet_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.ConstraintSet_getConcreteClassName(swigCPtr, this);
   }
 
   public ConstraintSet() {
-    this(opensimModelJNI.new_ConstraintSet__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_ConstraintSet__SWIG_0(), true);
   }
 
   public ConstraintSet(Model model) {
-    this(opensimModelJNI.new_ConstraintSet__SWIG_1(Model.getCPtr(model), model), true);
+    this(opensimModelSimulationJNI.new_ConstraintSet__SWIG_1(Model.getCPtr(model), model), true);
   }
 
   public ConstraintSet(Model model, String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelJNI.new_ConstraintSet__SWIG_2(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
+    this(opensimModelSimulationJNI.new_ConstraintSet__SWIG_2(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
   }
 
   public ConstraintSet(Model model, String aFileName) {
-    this(opensimModelJNI.new_ConstraintSet__SWIG_3(Model.getCPtr(model), model, aFileName), true);
+    this(opensimModelSimulationJNI.new_ConstraintSet__SWIG_3(Model.getCPtr(model), model, aFileName), true);
   }
 
   public ConstraintSet(ConstraintSet aAbsConstraintSet) {
-    this(opensimModelJNI.new_ConstraintSet__SWIG_4(ConstraintSet.getCPtr(aAbsConstraintSet), aAbsConstraintSet), true);
+    this(opensimModelSimulationJNI.new_ConstraintSet__SWIG_4(ConstraintSet.getCPtr(aAbsConstraintSet), aAbsConstraintSet), true);
   }
 
   public void scale(ScaleSet aScaleSet) {
-    opensimModelJNI.ConstraintSet_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
+    opensimModelSimulationJNI.ConstraintSet_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
   }
 
 }

@@ -12,7 +12,7 @@ public class PolynomialFunction extends Function {
   private transient long swigCPtr;
 
   public PolynomialFunction(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.PolynomialFunction_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.PolynomialFunction_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class PolynomialFunction extends Function {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_PolynomialFunction(swigCPtr);
+        opensimModelCommonJNI.delete_PolynomialFunction(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,45 +36,45 @@ public class PolynomialFunction extends Function {
   }
 
   public static PolynomialFunction safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.PolynomialFunction_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelCommonJNI.PolynomialFunction_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new PolynomialFunction(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.PolynomialFunction_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelCommonJNI.PolynomialFunction_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.PolynomialFunction_getClassName();
+    return opensimModelCommonJNI.PolynomialFunction_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.PolynomialFunction_clone(swigCPtr, this);
+    long cPtr = opensimModelCommonJNI.PolynomialFunction_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new PolynomialFunction(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.PolynomialFunction_getConcreteClassName(swigCPtr, this);
+    return opensimModelCommonJNI.PolynomialFunction_getConcreteClassName(swigCPtr, this);
   }
 
   public PolynomialFunction() {
-    this(opensimModelJNI.new_PolynomialFunction__SWIG_0(), true);
+    this(opensimModelCommonJNI.new_PolynomialFunction__SWIG_0(), true);
   }
 
   public PolynomialFunction(Vector coefficients) {
-    this(opensimModelJNI.new_PolynomialFunction__SWIG_1(Vector.getCPtr(coefficients), coefficients), true);
+    this(opensimModelCommonJNI.new_PolynomialFunction__SWIG_1(Vector.getCPtr(coefficients), coefficients), true);
   }
 
   public void setCoefficients(Vector coefficients) {
-    opensimModelJNI.PolynomialFunction_setCoefficients(swigCPtr, this, Vector.getCPtr(coefficients), coefficients);
+    opensimModelCommonJNI.PolynomialFunction_setCoefficients(swigCPtr, this, Vector.getCPtr(coefficients), coefficients);
   }
 
   public Vector getCoefficients() {
-    return new Vector(opensimModelJNI.PolynomialFunction_getCoefficients(swigCPtr, this), true);
+    return new Vector(opensimModelCommonJNI.PolynomialFunction_getCoefficients(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_SimTK__Function createSimTKFunction() {
-    long cPtr = opensimModelJNI.PolynomialFunction_createSimTKFunction(swigCPtr, this);
+    long cPtr = opensimModelCommonJNI.PolynomialFunction_createSimTKFunction(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_SimTK__Function(cPtr, false);
   }
 

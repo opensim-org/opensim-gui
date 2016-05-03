@@ -12,7 +12,7 @@ public class MovingPathPoint extends PathPoint {
   private transient long swigCPtr;
 
   public MovingPathPoint(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.MovingPathPoint_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.MovingPathPoint_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class MovingPathPoint extends PathPoint {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_MovingPathPoint(swigCPtr);
+        opensimModelSimulationJNI.delete_MovingPathPoint(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,95 +36,95 @@ public class MovingPathPoint extends PathPoint {
   }
 
   public static MovingPathPoint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.MovingPathPoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.MovingPathPoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new MovingPathPoint(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.MovingPathPoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.MovingPathPoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.MovingPathPoint_getClassName();
+    return opensimModelSimulationJNI.MovingPathPoint_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.MovingPathPoint_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.MovingPathPoint_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new MovingPathPoint(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.MovingPathPoint_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.MovingPathPoint_getConcreteClassName(swigCPtr, this);
   }
 
   public MovingPathPoint() {
-    this(opensimModelJNI.new_MovingPathPoint__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_MovingPathPoint__SWIG_0(), true);
   }
 
   public MovingPathPoint(MovingPathPoint aPoint) {
-    this(opensimModelJNI.new_MovingPathPoint__SWIG_1(MovingPathPoint.getCPtr(aPoint), aPoint), true);
+    this(opensimModelSimulationJNI.new_MovingPathPoint__SWIG_1(MovingPathPoint.getCPtr(aPoint), aPoint), true);
   }
 
   public void copyData(MovingPathPoint aPoint) {
-    opensimModelJNI.MovingPathPoint_copyData(swigCPtr, this, MovingPathPoint.getCPtr(aPoint), aPoint);
+    opensimModelSimulationJNI.MovingPathPoint_copyData(swigCPtr, this, MovingPathPoint.getCPtr(aPoint), aPoint);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
-    opensimModelJNI.MovingPathPoint_updateFromXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+    opensimModelSimulationJNI.MovingPathPoint_updateFromXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
   }
 
   public void init(PathPoint aPoint) {
-    opensimModelJNI.MovingPathPoint_init(swigCPtr, this, PathPoint.getCPtr(aPoint), aPoint);
+    opensimModelSimulationJNI.MovingPathPoint_init(swigCPtr, this, PathPoint.getCPtr(aPoint), aPoint);
   }
 
   public Coordinate getXCoordinate() {
-    long cPtr = opensimModelJNI.MovingPathPoint_getXCoordinate(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.MovingPathPoint_getXCoordinate(swigCPtr, this);
     return (cPtr == 0) ? null : new Coordinate(cPtr, false);
   }
 
   public Coordinate getYCoordinate() {
-    long cPtr = opensimModelJNI.MovingPathPoint_getYCoordinate(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.MovingPathPoint_getYCoordinate(swigCPtr, this);
     return (cPtr == 0) ? null : new Coordinate(cPtr, false);
   }
 
   public Coordinate getZCoordinate() {
-    long cPtr = opensimModelJNI.MovingPathPoint_getZCoordinate(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.MovingPathPoint_getZCoordinate(swigCPtr, this);
     return (cPtr == 0) ? null : new Coordinate(cPtr, false);
   }
 
   public Vec3 getdPointdQ(State s) {
-    return new Vec3(opensimModelJNI.MovingPathPoint_getdPointdQ(swigCPtr, this, State.getCPtr(s), s), true);
+    return new Vec3(opensimModelSimulationJNI.MovingPathPoint_getdPointdQ(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
   public String getXCoordinateName() {
-    return opensimModelJNI.MovingPathPoint_getXCoordinateName(swigCPtr, this);
+    return opensimModelSimulationJNI.MovingPathPoint_getXCoordinateName(swigCPtr, this);
   }
 
   public String getYCoordinateName() {
-    return opensimModelJNI.MovingPathPoint_getYCoordinateName(swigCPtr, this);
+    return opensimModelSimulationJNI.MovingPathPoint_getYCoordinateName(swigCPtr, this);
   }
 
   public String getZCoordinateName() {
-    return opensimModelJNI.MovingPathPoint_getZCoordinateName(swigCPtr, this);
+    return opensimModelSimulationJNI.MovingPathPoint_getZCoordinateName(swigCPtr, this);
   }
 
   public Function getXFunction() {
-    long cPtr = opensimModelJNI.MovingPathPoint_getXFunction(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.MovingPathPoint_getXFunction(swigCPtr, this);
     return (cPtr == 0) ? null : new Function(cPtr, false);
   }
 
   public Function getYFunction() {
-    long cPtr = opensimModelJNI.MovingPathPoint_getYFunction(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.MovingPathPoint_getYFunction(swigCPtr, this);
     return (cPtr == 0) ? null : new Function(cPtr, false);
   }
 
   public Function getZFunction() {
-    long cPtr = opensimModelJNI.MovingPathPoint_getZFunction(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.MovingPathPoint_getZFunction(swigCPtr, this);
     return (cPtr == 0) ? null : new Function(cPtr, false);
   }
 
   public void scale(State s, Vec3 aScaleFactors) {
-    opensimModelJNI.MovingPathPoint_scale(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(aScaleFactors), aScaleFactors);
+    opensimModelSimulationJNI.MovingPathPoint_scale(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(aScaleFactors), aScaleFactors);
   }
 
 }

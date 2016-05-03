@@ -29,30 +29,30 @@ public class JointList {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_JointList(swigCPtr);
+        opensimModelSimulationJNI.delete_JointList(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public JointList(Component root, ComponentFilter f) {
-    this(opensimModelJNI.new_JointList__SWIG_0(Component.getCPtr(root), root, ComponentFilter.getCPtr(f), f), true);
+    this(opensimModelSimulationJNI.new_JointList__SWIG_0(Component.getCPtr(root), root, ComponentFilter.getCPtr(f), f), true);
   }
 
   public JointList(Component root) {
-    this(opensimModelJNI.new_JointList__SWIG_1(Component.getCPtr(root), root), true);
+    this(opensimModelSimulationJNI.new_JointList__SWIG_1(Component.getCPtr(root), root), true);
   }
 
   public JointIterator begin() {
-    return new JointIterator(opensimModelJNI.JointList_begin(swigCPtr, this), true);
+    return new JointIterator(opensimModelSimulationJNI.JointList_begin(swigCPtr, this), true);
   }
 
   public void setFilter(ComponentFilter filter) {
-    opensimModelJNI.JointList_setFilter(swigCPtr, this, ComponentFilter.getCPtr(filter), filter);
+    opensimModelSimulationJNI.JointList_setFilter(swigCPtr, this, ComponentFilter.getCPtr(filter), filter);
   }
 
   public JointIterator end() {
-    return new JointIterator(opensimModelJNI.JointList_end(swigCPtr, this), true);
+    return new JointIterator(opensimModelSimulationJNI.JointList_end(swigCPtr, this), true);
   }
 
 }

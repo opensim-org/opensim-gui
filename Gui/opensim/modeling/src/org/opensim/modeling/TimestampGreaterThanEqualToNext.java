@@ -12,7 +12,7 @@ public class TimestampGreaterThanEqualToNext extends InvalidTimestamp {
   private transient long swigCPtr;
 
   public TimestampGreaterThanEqualToNext(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.TimestampGreaterThanEqualToNext_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.TimestampGreaterThanEqualToNext_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class TimestampGreaterThanEqualToNext extends InvalidTimestamp {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_TimestampGreaterThanEqualToNext(swigCPtr);
+        opensimModelCommonJNI.delete_TimestampGreaterThanEqualToNext(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class TimestampGreaterThanEqualToNext extends InvalidTimestamp {
   }
 
   public TimestampGreaterThanEqualToNext(String file, long line, String func, long rowIndex, double new_timestamp, double next_timestamp) {
-    this(opensimModelJNI.new_TimestampGreaterThanEqualToNext(file, line, func, rowIndex, new_timestamp, next_timestamp), true);
+    this(opensimModelCommonJNI.new_TimestampGreaterThanEqualToNext(file, line, func, rowIndex, new_timestamp, next_timestamp), true);
   }
 
 }

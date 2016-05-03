@@ -12,7 +12,7 @@ public class NoRegisteredDataAdapter extends OpenSimException {
   private transient long swigCPtr;
 
   public NoRegisteredDataAdapter(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.NoRegisteredDataAdapter_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.NoRegisteredDataAdapter_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class NoRegisteredDataAdapter extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_NoRegisteredDataAdapter(swigCPtr);
+        opensimModelCommonJNI.delete_NoRegisteredDataAdapter(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class NoRegisteredDataAdapter extends OpenSimException {
   }
 
   public NoRegisteredDataAdapter(String file, long line, String func, String key) {
-    this(opensimModelJNI.new_NoRegisteredDataAdapter(file, line, func, key), true);
+    this(opensimModelCommonJNI.new_NoRegisteredDataAdapter(file, line, func, key), true);
   }
 
 }

@@ -12,7 +12,7 @@ public class ContactSphere extends ContactGeometry {
   private transient long swigCPtr;
 
   public ContactSphere(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ContactSphere_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.ContactSphere_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ContactSphere extends ContactGeometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ContactSphere(swigCPtr);
+        opensimModelSimulationJNI.delete_ContactSphere(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,57 +36,57 @@ public class ContactSphere extends ContactGeometry {
   }
 
   public static ContactSphere safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ContactSphere_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.ContactSphere_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ContactSphere(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.ContactSphere_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.ContactSphere_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.ContactSphere_getClassName();
+    return opensimModelSimulationJNI.ContactSphere_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.ContactSphere_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.ContactSphere_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ContactSphere(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.ContactSphere_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.ContactSphere_getConcreteClassName(swigCPtr, this);
   }
 
   public ContactSphere() {
-    this(opensimModelJNI.new_ContactSphere__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_ContactSphere__SWIG_0(), true);
   }
 
   public ContactSphere(double radius, Vec3 location, PhysicalFrame frame) {
-    this(opensimModelJNI.new_ContactSphere__SWIG_1(radius, Vec3.getCPtr(location), location, PhysicalFrame.getCPtr(frame), frame), true);
+    this(opensimModelSimulationJNI.new_ContactSphere__SWIG_1(radius, Vec3.getCPtr(location), location, PhysicalFrame.getCPtr(frame), frame), true);
   }
 
   public ContactSphere(double radius, Vec3 location, PhysicalFrame frame, String name) {
-    this(opensimModelJNI.new_ContactSphere__SWIG_2(radius, Vec3.getCPtr(location), location, PhysicalFrame.getCPtr(frame), frame, name), true);
+    this(opensimModelSimulationJNI.new_ContactSphere__SWIG_2(radius, Vec3.getCPtr(location), location, PhysicalFrame.getCPtr(frame), frame, name), true);
   }
 
   public ContactSphere(ContactSphere geom) {
-    this(opensimModelJNI.new_ContactSphere__SWIG_3(ContactSphere.getCPtr(geom), geom), true);
+    this(opensimModelSimulationJNI.new_ContactSphere__SWIG_3(ContactSphere.getCPtr(geom), geom), true);
   }
 
   public void copyData(ContactSphere source) {
-    opensimModelJNI.ContactSphere_copyData(swigCPtr, this, ContactSphere.getCPtr(source), source);
+    opensimModelSimulationJNI.ContactSphere_copyData(swigCPtr, this, ContactSphere.getCPtr(source), source);
   }
 
   public SWIGTYPE_p_SimTK__ContactGeometry createSimTKContactGeometry() {
-    return new SWIGTYPE_p_SimTK__ContactGeometry(opensimModelJNI.ContactSphere_createSimTKContactGeometry(swigCPtr, this), true);
+    return new SWIGTYPE_p_SimTK__ContactGeometry(opensimModelSimulationJNI.ContactSphere_createSimTKContactGeometry(swigCPtr, this), true);
   }
 
   public double getRadius() {
-    return opensimModelJNI.ContactSphere_getRadius(swigCPtr, this);
+    return opensimModelSimulationJNI.ContactSphere_getRadius(swigCPtr, this);
   }
 
   public void setRadius(double radius) {
-    opensimModelJNI.ContactSphere_setRadius(swigCPtr, this, radius);
+    opensimModelSimulationJNI.ContactSphere_setRadius(swigCPtr, this, radius);
   }
 
 }

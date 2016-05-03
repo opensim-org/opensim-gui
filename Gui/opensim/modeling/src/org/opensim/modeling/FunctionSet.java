@@ -12,7 +12,7 @@ public class FunctionSet extends SetFunctions {
   private transient long swigCPtr;
 
   public FunctionSet(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.FunctionSet_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.FunctionSet_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class FunctionSet extends SetFunctions {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_FunctionSet(swigCPtr);
+        opensimModelCommonJNI.delete_FunctionSet(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -41,49 +41,49 @@ public class FunctionSet extends SetFunctions {
   }
 
   public static FunctionSet safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.FunctionSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelCommonJNI.FunctionSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new FunctionSet(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.FunctionSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelCommonJNI.FunctionSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.FunctionSet_getClassName();
+    return opensimModelCommonJNI.FunctionSet_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.FunctionSet_clone(swigCPtr, this);
+    long cPtr = opensimModelCommonJNI.FunctionSet_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new FunctionSet(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.FunctionSet_getConcreteClassName(swigCPtr, this);
+    return opensimModelCommonJNI.FunctionSet_getConcreteClassName(swigCPtr, this);
   }
 
   public FunctionSet() {
-    this(opensimModelJNI.new_FunctionSet__SWIG_0(), true);
+    this(opensimModelCommonJNI.new_FunctionSet__SWIG_0(), true);
   }
 
   public FunctionSet(String aFileName) {
-    this(opensimModelJNI.new_FunctionSet__SWIG_1(aFileName), true);
+    this(opensimModelCommonJNI.new_FunctionSet__SWIG_1(aFileName), true);
   }
 
   public double evaluate(int aIndex, int aDerivOrder, double aX) {
-    return opensimModelJNI.FunctionSet_evaluate__SWIG_0(swigCPtr, this, aIndex, aDerivOrder, aX);
+    return opensimModelCommonJNI.FunctionSet_evaluate__SWIG_0(swigCPtr, this, aIndex, aDerivOrder, aX);
   }
 
   public double evaluate(int aIndex, int aDerivOrder) {
-    return opensimModelJNI.FunctionSet_evaluate__SWIG_1(swigCPtr, this, aIndex, aDerivOrder);
+    return opensimModelCommonJNI.FunctionSet_evaluate__SWIG_1(swigCPtr, this, aIndex, aDerivOrder);
   }
 
   public void evaluate(ArrayDouble rValues, int aDerivOrder, double aX) {
-    opensimModelJNI.FunctionSet_evaluate__SWIG_2(swigCPtr, this, ArrayDouble.getCPtr(rValues), rValues, aDerivOrder, aX);
+    opensimModelCommonJNI.FunctionSet_evaluate__SWIG_2(swigCPtr, this, ArrayDouble.getCPtr(rValues), rValues, aDerivOrder, aX);
   }
 
   public void evaluate(ArrayDouble rValues, int aDerivOrder) {
-    opensimModelJNI.FunctionSet_evaluate__SWIG_3(swigCPtr, this, ArrayDouble.getCPtr(rValues), rValues, aDerivOrder);
+    opensimModelCommonJNI.FunctionSet_evaluate__SWIG_3(swigCPtr, this, ArrayDouble.getCPtr(rValues), rValues, aDerivOrder);
   }
 
 }

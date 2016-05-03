@@ -29,30 +29,30 @@ public class BodyList {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_BodyList(swigCPtr);
+        opensimModelSimulationJNI.delete_BodyList(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public BodyList(Component root, ComponentFilter f) {
-    this(opensimModelJNI.new_BodyList__SWIG_0(Component.getCPtr(root), root, ComponentFilter.getCPtr(f), f), true);
+    this(opensimModelSimulationJNI.new_BodyList__SWIG_0(Component.getCPtr(root), root, ComponentFilter.getCPtr(f), f), true);
   }
 
   public BodyList(Component root) {
-    this(opensimModelJNI.new_BodyList__SWIG_1(Component.getCPtr(root), root), true);
+    this(opensimModelSimulationJNI.new_BodyList__SWIG_1(Component.getCPtr(root), root), true);
   }
 
   public BodyIterator begin() {
-    return new BodyIterator(opensimModelJNI.BodyList_begin(swigCPtr, this), true);
+    return new BodyIterator(opensimModelSimulationJNI.BodyList_begin(swigCPtr, this), true);
   }
 
   public void setFilter(ComponentFilter filter) {
-    opensimModelJNI.BodyList_setFilter(swigCPtr, this, ComponentFilter.getCPtr(filter), filter);
+    opensimModelSimulationJNI.BodyList_setFilter(swigCPtr, this, ComponentFilter.getCPtr(filter), filter);
   }
 
   public BodyIterator end() {
-    return new BodyIterator(opensimModelJNI.BodyList_end(swigCPtr, this), true);
+    return new BodyIterator(opensimModelSimulationJNI.BodyList_end(swigCPtr, this), true);
   }
 
 }

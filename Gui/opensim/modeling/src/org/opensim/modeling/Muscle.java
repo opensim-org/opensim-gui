@@ -12,7 +12,7 @@ public class Muscle extends PathActuator {
   private transient long swigCPtr;
 
   public Muscle(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.Muscle_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.Muscle_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Muscle extends PathActuator {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_Muscle(swigCPtr);
+        opensimModelSimulationJNI.delete_Muscle(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,753 +36,753 @@ public class Muscle extends PathActuator {
   }
 
   public static Muscle safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Muscle_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.Muscle_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Muscle(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.Muscle_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.Muscle_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.Muscle_getClassName();
+    return opensimModelSimulationJNI.Muscle_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.Muscle_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.Muscle_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Muscle(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.Muscle_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_max_isometric_force(Muscle source) {
-    opensimModelJNI.Muscle_copyProperty_max_isometric_force(swigCPtr, this, Muscle.getCPtr(source), source);
+    opensimModelSimulationJNI.Muscle_copyProperty_max_isometric_force(swigCPtr, this, Muscle.getCPtr(source), source);
   }
 
   public double get_max_isometric_force(int i) {
-    return opensimModelJNI.Muscle_get_max_isometric_force__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.Muscle_get_max_isometric_force__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_max_isometric_force(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.Muscle_upd_max_isometric_force__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Muscle_upd_max_isometric_force__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_max_isometric_force(int i, double value) {
-    opensimModelJNI.Muscle_set_max_isometric_force__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.Muscle_set_max_isometric_force__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_max_isometric_force(double value) {
-    return opensimModelJNI.Muscle_append_max_isometric_force(swigCPtr, this, value);
+    return opensimModelSimulationJNI.Muscle_append_max_isometric_force(swigCPtr, this, value);
   }
 
   public void constructProperty_max_isometric_force(double initValue) {
-    opensimModelJNI.Muscle_constructProperty_max_isometric_force(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.Muscle_constructProperty_max_isometric_force(swigCPtr, this, initValue);
   }
 
   public double get_max_isometric_force() {
-    return opensimModelJNI.Muscle_get_max_isometric_force__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle_get_max_isometric_force__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_max_isometric_force() {
-    return new SWIGTYPE_p_double(opensimModelJNI.Muscle_upd_max_isometric_force__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Muscle_upd_max_isometric_force__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_max_isometric_force(double value) {
-    opensimModelJNI.Muscle_set_max_isometric_force__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle_set_max_isometric_force__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_optimal_fiber_length(Muscle source) {
-    opensimModelJNI.Muscle_copyProperty_optimal_fiber_length(swigCPtr, this, Muscle.getCPtr(source), source);
+    opensimModelSimulationJNI.Muscle_copyProperty_optimal_fiber_length(swigCPtr, this, Muscle.getCPtr(source), source);
   }
 
   public double get_optimal_fiber_length(int i) {
-    return opensimModelJNI.Muscle_get_optimal_fiber_length__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.Muscle_get_optimal_fiber_length__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_optimal_fiber_length(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.Muscle_upd_optimal_fiber_length__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Muscle_upd_optimal_fiber_length__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_optimal_fiber_length(int i, double value) {
-    opensimModelJNI.Muscle_set_optimal_fiber_length__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.Muscle_set_optimal_fiber_length__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_optimal_fiber_length(double value) {
-    return opensimModelJNI.Muscle_append_optimal_fiber_length(swigCPtr, this, value);
+    return opensimModelSimulationJNI.Muscle_append_optimal_fiber_length(swigCPtr, this, value);
   }
 
   public void constructProperty_optimal_fiber_length(double initValue) {
-    opensimModelJNI.Muscle_constructProperty_optimal_fiber_length(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.Muscle_constructProperty_optimal_fiber_length(swigCPtr, this, initValue);
   }
 
   public double get_optimal_fiber_length() {
-    return opensimModelJNI.Muscle_get_optimal_fiber_length__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle_get_optimal_fiber_length__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_optimal_fiber_length() {
-    return new SWIGTYPE_p_double(opensimModelJNI.Muscle_upd_optimal_fiber_length__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Muscle_upd_optimal_fiber_length__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_optimal_fiber_length(double value) {
-    opensimModelJNI.Muscle_set_optimal_fiber_length__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle_set_optimal_fiber_length__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_tendon_slack_length(Muscle source) {
-    opensimModelJNI.Muscle_copyProperty_tendon_slack_length(swigCPtr, this, Muscle.getCPtr(source), source);
+    opensimModelSimulationJNI.Muscle_copyProperty_tendon_slack_length(swigCPtr, this, Muscle.getCPtr(source), source);
   }
 
   public double get_tendon_slack_length(int i) {
-    return opensimModelJNI.Muscle_get_tendon_slack_length__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.Muscle_get_tendon_slack_length__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_tendon_slack_length(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.Muscle_upd_tendon_slack_length__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Muscle_upd_tendon_slack_length__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_tendon_slack_length(int i, double value) {
-    opensimModelJNI.Muscle_set_tendon_slack_length__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.Muscle_set_tendon_slack_length__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_tendon_slack_length(double value) {
-    return opensimModelJNI.Muscle_append_tendon_slack_length(swigCPtr, this, value);
+    return opensimModelSimulationJNI.Muscle_append_tendon_slack_length(swigCPtr, this, value);
   }
 
   public void constructProperty_tendon_slack_length(double initValue) {
-    opensimModelJNI.Muscle_constructProperty_tendon_slack_length(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.Muscle_constructProperty_tendon_slack_length(swigCPtr, this, initValue);
   }
 
   public double get_tendon_slack_length() {
-    return opensimModelJNI.Muscle_get_tendon_slack_length__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle_get_tendon_slack_length__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_tendon_slack_length() {
-    return new SWIGTYPE_p_double(opensimModelJNI.Muscle_upd_tendon_slack_length__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Muscle_upd_tendon_slack_length__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_tendon_slack_length(double value) {
-    opensimModelJNI.Muscle_set_tendon_slack_length__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle_set_tendon_slack_length__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_pennation_angle_at_optimal(Muscle source) {
-    opensimModelJNI.Muscle_copyProperty_pennation_angle_at_optimal(swigCPtr, this, Muscle.getCPtr(source), source);
+    opensimModelSimulationJNI.Muscle_copyProperty_pennation_angle_at_optimal(swigCPtr, this, Muscle.getCPtr(source), source);
   }
 
   public double get_pennation_angle_at_optimal(int i) {
-    return opensimModelJNI.Muscle_get_pennation_angle_at_optimal__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.Muscle_get_pennation_angle_at_optimal__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_pennation_angle_at_optimal(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.Muscle_upd_pennation_angle_at_optimal__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Muscle_upd_pennation_angle_at_optimal__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_pennation_angle_at_optimal(int i, double value) {
-    opensimModelJNI.Muscle_set_pennation_angle_at_optimal__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.Muscle_set_pennation_angle_at_optimal__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_pennation_angle_at_optimal(double value) {
-    return opensimModelJNI.Muscle_append_pennation_angle_at_optimal(swigCPtr, this, value);
+    return opensimModelSimulationJNI.Muscle_append_pennation_angle_at_optimal(swigCPtr, this, value);
   }
 
   public void constructProperty_pennation_angle_at_optimal(double initValue) {
-    opensimModelJNI.Muscle_constructProperty_pennation_angle_at_optimal(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.Muscle_constructProperty_pennation_angle_at_optimal(swigCPtr, this, initValue);
   }
 
   public double get_pennation_angle_at_optimal() {
-    return opensimModelJNI.Muscle_get_pennation_angle_at_optimal__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle_get_pennation_angle_at_optimal__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_pennation_angle_at_optimal() {
-    return new SWIGTYPE_p_double(opensimModelJNI.Muscle_upd_pennation_angle_at_optimal__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Muscle_upd_pennation_angle_at_optimal__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_pennation_angle_at_optimal(double value) {
-    opensimModelJNI.Muscle_set_pennation_angle_at_optimal__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle_set_pennation_angle_at_optimal__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_max_contraction_velocity(Muscle source) {
-    opensimModelJNI.Muscle_copyProperty_max_contraction_velocity(swigCPtr, this, Muscle.getCPtr(source), source);
+    opensimModelSimulationJNI.Muscle_copyProperty_max_contraction_velocity(swigCPtr, this, Muscle.getCPtr(source), source);
   }
 
   public double get_max_contraction_velocity(int i) {
-    return opensimModelJNI.Muscle_get_max_contraction_velocity__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.Muscle_get_max_contraction_velocity__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_max_contraction_velocity(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.Muscle_upd_max_contraction_velocity__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Muscle_upd_max_contraction_velocity__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_max_contraction_velocity(int i, double value) {
-    opensimModelJNI.Muscle_set_max_contraction_velocity__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.Muscle_set_max_contraction_velocity__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_max_contraction_velocity(double value) {
-    return opensimModelJNI.Muscle_append_max_contraction_velocity(swigCPtr, this, value);
+    return opensimModelSimulationJNI.Muscle_append_max_contraction_velocity(swigCPtr, this, value);
   }
 
   public void constructProperty_max_contraction_velocity(double initValue) {
-    opensimModelJNI.Muscle_constructProperty_max_contraction_velocity(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.Muscle_constructProperty_max_contraction_velocity(swigCPtr, this, initValue);
   }
 
   public double get_max_contraction_velocity() {
-    return opensimModelJNI.Muscle_get_max_contraction_velocity__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle_get_max_contraction_velocity__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_max_contraction_velocity() {
-    return new SWIGTYPE_p_double(opensimModelJNI.Muscle_upd_max_contraction_velocity__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Muscle_upd_max_contraction_velocity__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_max_contraction_velocity(double value) {
-    opensimModelJNI.Muscle_set_max_contraction_velocity__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle_set_max_contraction_velocity__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_ignore_tendon_compliance(Muscle source) {
-    opensimModelJNI.Muscle_copyProperty_ignore_tendon_compliance(swigCPtr, this, Muscle.getCPtr(source), source);
+    opensimModelSimulationJNI.Muscle_copyProperty_ignore_tendon_compliance(swigCPtr, this, Muscle.getCPtr(source), source);
   }
 
   public boolean get_ignore_tendon_compliance(int i) {
-    return opensimModelJNI.Muscle_get_ignore_tendon_compliance__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.Muscle_get_ignore_tendon_compliance__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_bool upd_ignore_tendon_compliance(int i) {
-    return new SWIGTYPE_p_bool(opensimModelJNI.Muscle_upd_ignore_tendon_compliance__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.Muscle_upd_ignore_tendon_compliance__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_ignore_tendon_compliance(int i, boolean value) {
-    opensimModelJNI.Muscle_set_ignore_tendon_compliance__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.Muscle_set_ignore_tendon_compliance__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_ignore_tendon_compliance(boolean value) {
-    return opensimModelJNI.Muscle_append_ignore_tendon_compliance(swigCPtr, this, value);
+    return opensimModelSimulationJNI.Muscle_append_ignore_tendon_compliance(swigCPtr, this, value);
   }
 
   public void constructProperty_ignore_tendon_compliance(boolean initValue) {
-    opensimModelJNI.Muscle_constructProperty_ignore_tendon_compliance(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.Muscle_constructProperty_ignore_tendon_compliance(swigCPtr, this, initValue);
   }
 
   public boolean get_ignore_tendon_compliance() {
-    return opensimModelJNI.Muscle_get_ignore_tendon_compliance__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle_get_ignore_tendon_compliance__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_bool upd_ignore_tendon_compliance() {
-    return new SWIGTYPE_p_bool(opensimModelJNI.Muscle_upd_ignore_tendon_compliance__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.Muscle_upd_ignore_tendon_compliance__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_ignore_tendon_compliance(boolean value) {
-    opensimModelJNI.Muscle_set_ignore_tendon_compliance__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle_set_ignore_tendon_compliance__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_ignore_activation_dynamics(Muscle source) {
-    opensimModelJNI.Muscle_copyProperty_ignore_activation_dynamics(swigCPtr, this, Muscle.getCPtr(source), source);
+    opensimModelSimulationJNI.Muscle_copyProperty_ignore_activation_dynamics(swigCPtr, this, Muscle.getCPtr(source), source);
   }
 
   public boolean get_ignore_activation_dynamics(int i) {
-    return opensimModelJNI.Muscle_get_ignore_activation_dynamics__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.Muscle_get_ignore_activation_dynamics__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_bool upd_ignore_activation_dynamics(int i) {
-    return new SWIGTYPE_p_bool(opensimModelJNI.Muscle_upd_ignore_activation_dynamics__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.Muscle_upd_ignore_activation_dynamics__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_ignore_activation_dynamics(int i, boolean value) {
-    opensimModelJNI.Muscle_set_ignore_activation_dynamics__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.Muscle_set_ignore_activation_dynamics__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_ignore_activation_dynamics(boolean value) {
-    return opensimModelJNI.Muscle_append_ignore_activation_dynamics(swigCPtr, this, value);
+    return opensimModelSimulationJNI.Muscle_append_ignore_activation_dynamics(swigCPtr, this, value);
   }
 
   public void constructProperty_ignore_activation_dynamics(boolean initValue) {
-    opensimModelJNI.Muscle_constructProperty_ignore_activation_dynamics(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.Muscle_constructProperty_ignore_activation_dynamics(swigCPtr, this, initValue);
   }
 
   public boolean get_ignore_activation_dynamics() {
-    return opensimModelJNI.Muscle_get_ignore_activation_dynamics__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle_get_ignore_activation_dynamics__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_bool upd_ignore_activation_dynamics() {
-    return new SWIGTYPE_p_bool(opensimModelJNI.Muscle_upd_ignore_activation_dynamics__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.Muscle_upd_ignore_activation_dynamics__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_ignore_activation_dynamics(boolean value) {
-    opensimModelJNI.Muscle_set_ignore_activation_dynamics__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle_set_ignore_activation_dynamics__SWIG_1(swigCPtr, this, value);
   }
 
   public void set_has_output_excitation(boolean value) {
-    opensimModelJNI.Muscle__has_output_excitation_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_excitation_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_excitation() {
-    return opensimModelJNI.Muscle__has_output_excitation_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_excitation_get(swigCPtr, this);
   }
 
   public void set_has_output_activation(boolean value) {
-    opensimModelJNI.Muscle__has_output_activation_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_activation_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_activation() {
-    return opensimModelJNI.Muscle__has_output_activation_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_activation_get(swigCPtr, this);
   }
 
   public void set_has_output_fiber_length(boolean value) {
-    opensimModelJNI.Muscle__has_output_fiber_length_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_fiber_length_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_fiber_length() {
-    return opensimModelJNI.Muscle__has_output_fiber_length_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_fiber_length_get(swigCPtr, this);
   }
 
   public void set_has_output_pennation_angle(boolean value) {
-    opensimModelJNI.Muscle__has_output_pennation_angle_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_pennation_angle_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_pennation_angle() {
-    return opensimModelJNI.Muscle__has_output_pennation_angle_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_pennation_angle_get(swigCPtr, this);
   }
 
   public void set_has_output_cos_pennation_angle(boolean value) {
-    opensimModelJNI.Muscle__has_output_cos_pennation_angle_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_cos_pennation_angle_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_cos_pennation_angle() {
-    return opensimModelJNI.Muscle__has_output_cos_pennation_angle_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_cos_pennation_angle_get(swigCPtr, this);
   }
 
   public void set_has_output_tendon_length(boolean value) {
-    opensimModelJNI.Muscle__has_output_tendon_length_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_tendon_length_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_tendon_length() {
-    return opensimModelJNI.Muscle__has_output_tendon_length_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_tendon_length_get(swigCPtr, this);
   }
 
   public void set_has_output_normalized_fiber_length(boolean value) {
-    opensimModelJNI.Muscle__has_output_normalized_fiber_length_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_normalized_fiber_length_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_normalized_fiber_length() {
-    return opensimModelJNI.Muscle__has_output_normalized_fiber_length_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_normalized_fiber_length_get(swigCPtr, this);
   }
 
   public void set_has_output_fiber_length_along_tendon(boolean value) {
-    opensimModelJNI.Muscle__has_output_fiber_length_along_tendon_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_fiber_length_along_tendon_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_fiber_length_along_tendon() {
-    return opensimModelJNI.Muscle__has_output_fiber_length_along_tendon_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_fiber_length_along_tendon_get(swigCPtr, this);
   }
 
   public void set_has_output_tendon_strain(boolean value) {
-    opensimModelJNI.Muscle__has_output_tendon_strain_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_tendon_strain_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_tendon_strain() {
-    return opensimModelJNI.Muscle__has_output_tendon_strain_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_tendon_strain_get(swigCPtr, this);
   }
 
   public void set_has_output_passive_force_multiplier(boolean value) {
-    opensimModelJNI.Muscle__has_output_passive_force_multiplier_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_passive_force_multiplier_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_passive_force_multiplier() {
-    return opensimModelJNI.Muscle__has_output_passive_force_multiplier_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_passive_force_multiplier_get(swigCPtr, this);
   }
 
   public void set_has_output_active_force_length_multiplier(boolean value) {
-    opensimModelJNI.Muscle__has_output_active_force_length_multiplier_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_active_force_length_multiplier_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_active_force_length_multiplier() {
-    return opensimModelJNI.Muscle__has_output_active_force_length_multiplier_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_active_force_length_multiplier_get(swigCPtr, this);
   }
 
   public void set_has_output_fiber_velocity(boolean value) {
-    opensimModelJNI.Muscle__has_output_fiber_velocity_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_fiber_velocity_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_fiber_velocity() {
-    return opensimModelJNI.Muscle__has_output_fiber_velocity_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_fiber_velocity_get(swigCPtr, this);
   }
 
   public void set_has_output_normalized_fiber_velocity(boolean value) {
-    opensimModelJNI.Muscle__has_output_normalized_fiber_velocity_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_normalized_fiber_velocity_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_normalized_fiber_velocity() {
-    return opensimModelJNI.Muscle__has_output_normalized_fiber_velocity_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_normalized_fiber_velocity_get(swigCPtr, this);
   }
 
   public void set_has_output_fiber_velocity_along_tendon(boolean value) {
-    opensimModelJNI.Muscle__has_output_fiber_velocity_along_tendon_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_fiber_velocity_along_tendon_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_fiber_velocity_along_tendon() {
-    return opensimModelJNI.Muscle__has_output_fiber_velocity_along_tendon_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_fiber_velocity_along_tendon_get(swigCPtr, this);
   }
 
   public void set_has_output_tendon_velocity(boolean value) {
-    opensimModelJNI.Muscle__has_output_tendon_velocity_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_tendon_velocity_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_tendon_velocity() {
-    return opensimModelJNI.Muscle__has_output_tendon_velocity_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_tendon_velocity_get(swigCPtr, this);
   }
 
   public void set_has_output_force_velocity_multiplier(boolean value) {
-    opensimModelJNI.Muscle__has_output_force_velocity_multiplier_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_force_velocity_multiplier_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_force_velocity_multiplier() {
-    return opensimModelJNI.Muscle__has_output_force_velocity_multiplier_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_force_velocity_multiplier_get(swigCPtr, this);
   }
 
   public void set_has_output_pennation_angular_velocity(boolean value) {
-    opensimModelJNI.Muscle__has_output_pennation_angular_velocity_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_pennation_angular_velocity_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_pennation_angular_velocity() {
-    return opensimModelJNI.Muscle__has_output_pennation_angular_velocity_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_pennation_angular_velocity_get(swigCPtr, this);
   }
 
   public void set_has_output_fiber_force(boolean value) {
-    opensimModelJNI.Muscle__has_output_fiber_force_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_fiber_force_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_fiber_force() {
-    return opensimModelJNI.Muscle__has_output_fiber_force_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_fiber_force_get(swigCPtr, this);
   }
 
   public void set_has_output_fiber_force_along_tendon(boolean value) {
-    opensimModelJNI.Muscle__has_output_fiber_force_along_tendon_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_fiber_force_along_tendon_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_fiber_force_along_tendon() {
-    return opensimModelJNI.Muscle__has_output_fiber_force_along_tendon_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_fiber_force_along_tendon_get(swigCPtr, this);
   }
 
   public void set_has_output_active_fiber_force(boolean value) {
-    opensimModelJNI.Muscle__has_output_active_fiber_force_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_active_fiber_force_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_active_fiber_force() {
-    return opensimModelJNI.Muscle__has_output_active_fiber_force_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_active_fiber_force_get(swigCPtr, this);
   }
 
   public void set_has_output_passive_fiber_force(boolean value) {
-    opensimModelJNI.Muscle__has_output_passive_fiber_force_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_passive_fiber_force_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_passive_fiber_force() {
-    return opensimModelJNI.Muscle__has_output_passive_fiber_force_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_passive_fiber_force_get(swigCPtr, this);
   }
 
   public void set_has_output_active_fiber_force_along_tendon(boolean value) {
-    opensimModelJNI.Muscle__has_output_active_fiber_force_along_tendon_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_active_fiber_force_along_tendon_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_active_fiber_force_along_tendon() {
-    return opensimModelJNI.Muscle__has_output_active_fiber_force_along_tendon_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_active_fiber_force_along_tendon_get(swigCPtr, this);
   }
 
   public void set_has_output_passive_fiber_force_along_tendon(boolean value) {
-    opensimModelJNI.Muscle__has_output_passive_fiber_force_along_tendon_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_passive_fiber_force_along_tendon_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_passive_fiber_force_along_tendon() {
-    return opensimModelJNI.Muscle__has_output_passive_fiber_force_along_tendon_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_passive_fiber_force_along_tendon_get(swigCPtr, this);
   }
 
   public void set_has_output_tendon_force(boolean value) {
-    opensimModelJNI.Muscle__has_output_tendon_force_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_tendon_force_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_tendon_force() {
-    return opensimModelJNI.Muscle__has_output_tendon_force_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_tendon_force_get(swigCPtr, this);
   }
 
   public void set_has_output_fiber_stiffness(boolean value) {
-    opensimModelJNI.Muscle__has_output_fiber_stiffness_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_fiber_stiffness_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_fiber_stiffness() {
-    return opensimModelJNI.Muscle__has_output_fiber_stiffness_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_fiber_stiffness_get(swigCPtr, this);
   }
 
   public void set_has_output_fiber_stiffness_along_tendon(boolean value) {
-    opensimModelJNI.Muscle__has_output_fiber_stiffness_along_tendon_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_fiber_stiffness_along_tendon_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_fiber_stiffness_along_tendon() {
-    return opensimModelJNI.Muscle__has_output_fiber_stiffness_along_tendon_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_fiber_stiffness_along_tendon_get(swigCPtr, this);
   }
 
   public void set_has_output_tendon_stiffness(boolean value) {
-    opensimModelJNI.Muscle__has_output_tendon_stiffness_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_tendon_stiffness_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_tendon_stiffness() {
-    return opensimModelJNI.Muscle__has_output_tendon_stiffness_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_tendon_stiffness_get(swigCPtr, this);
   }
 
   public void set_has_output_muscle_stiffness(boolean value) {
-    opensimModelJNI.Muscle__has_output_muscle_stiffness_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_muscle_stiffness_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_muscle_stiffness() {
-    return opensimModelJNI.Muscle__has_output_muscle_stiffness_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_muscle_stiffness_get(swigCPtr, this);
   }
 
   public void set_has_output_fiber_active_power(boolean value) {
-    opensimModelJNI.Muscle__has_output_fiber_active_power_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_fiber_active_power_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_fiber_active_power() {
-    return opensimModelJNI.Muscle__has_output_fiber_active_power_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_fiber_active_power_get(swigCPtr, this);
   }
 
   public void set_has_output_fiber_passive_power(boolean value) {
-    opensimModelJNI.Muscle__has_output_fiber_passive_power_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_fiber_passive_power_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_fiber_passive_power() {
-    return opensimModelJNI.Muscle__has_output_fiber_passive_power_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_fiber_passive_power_get(swigCPtr, this);
   }
 
   public void set_has_output_tendon_power(boolean value) {
-    opensimModelJNI.Muscle__has_output_tendon_power_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_tendon_power_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_tendon_power() {
-    return opensimModelJNI.Muscle__has_output_tendon_power_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_tendon_power_get(swigCPtr, this);
   }
 
   public void set_has_output_muscle_power(boolean value) {
-    opensimModelJNI.Muscle__has_output_muscle_power_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Muscle__has_output_muscle_power_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_muscle_power() {
-    return opensimModelJNI.Muscle__has_output_muscle_power_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle__has_output_muscle_power_get(swigCPtr, this);
   }
 
   public double getMaxIsometricForce() {
-    return opensimModelJNI.Muscle_getMaxIsometricForce(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle_getMaxIsometricForce(swigCPtr, this);
   }
 
   public void setMaxIsometricForce(double maxIsometricForce) {
-    opensimModelJNI.Muscle_setMaxIsometricForce(swigCPtr, this, maxIsometricForce);
+    opensimModelSimulationJNI.Muscle_setMaxIsometricForce(swigCPtr, this, maxIsometricForce);
   }
 
   public double getOptimalFiberLength() {
-    return opensimModelJNI.Muscle_getOptimalFiberLength(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle_getOptimalFiberLength(swigCPtr, this);
   }
 
   public void setOptimalFiberLength(double optimalFiberLength) {
-    opensimModelJNI.Muscle_setOptimalFiberLength(swigCPtr, this, optimalFiberLength);
+    opensimModelSimulationJNI.Muscle_setOptimalFiberLength(swigCPtr, this, optimalFiberLength);
   }
 
   public double getTendonSlackLength() {
-    return opensimModelJNI.Muscle_getTendonSlackLength(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle_getTendonSlackLength(swigCPtr, this);
   }
 
   public void setTendonSlackLength(double tendonSlackLength) {
-    opensimModelJNI.Muscle_setTendonSlackLength(swigCPtr, this, tendonSlackLength);
+    opensimModelSimulationJNI.Muscle_setTendonSlackLength(swigCPtr, this, tendonSlackLength);
   }
 
   public double getPennationAngleAtOptimalFiberLength() {
-    return opensimModelJNI.Muscle_getPennationAngleAtOptimalFiberLength(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle_getPennationAngleAtOptimalFiberLength(swigCPtr, this);
   }
 
   public void setPennationAngleAtOptimalFiberLength(double pennationAngle) {
-    opensimModelJNI.Muscle_setPennationAngleAtOptimalFiberLength(swigCPtr, this, pennationAngle);
+    opensimModelSimulationJNI.Muscle_setPennationAngleAtOptimalFiberLength(swigCPtr, this, pennationAngle);
   }
 
   public double getMaxContractionVelocity() {
-    return opensimModelJNI.Muscle_getMaxContractionVelocity(swigCPtr, this);
+    return opensimModelSimulationJNI.Muscle_getMaxContractionVelocity(swigCPtr, this);
   }
 
   public void setMaxContractionVelocity(double maxContractionVelocity) {
-    opensimModelJNI.Muscle_setMaxContractionVelocity(swigCPtr, this, maxContractionVelocity);
+    opensimModelSimulationJNI.Muscle_setMaxContractionVelocity(swigCPtr, this, maxContractionVelocity);
   }
 
   public boolean getIgnoreTendonCompliance(State s) {
-    return opensimModelJNI.Muscle_getIgnoreTendonCompliance(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getIgnoreTendonCompliance(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setIgnoreTendonCompliance(State s, boolean ignore) {
-    opensimModelJNI.Muscle_setIgnoreTendonCompliance(swigCPtr, this, State.getCPtr(s), s, ignore);
+    opensimModelSimulationJNI.Muscle_setIgnoreTendonCompliance(swigCPtr, this, State.getCPtr(s), s, ignore);
   }
 
   public boolean getIgnoreActivationDynamics(State s) {
-    return opensimModelJNI.Muscle_getIgnoreActivationDynamics(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getIgnoreActivationDynamics(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setIgnoreActivationDynamics(State s, boolean ignore) {
-    opensimModelJNI.Muscle_setIgnoreActivationDynamics(swigCPtr, this, State.getCPtr(s), s, ignore);
+    opensimModelSimulationJNI.Muscle_setIgnoreActivationDynamics(swigCPtr, this, State.getCPtr(s), s, ignore);
   }
 
   public double getActivation(State s) {
-    return opensimModelJNI.Muscle_getActivation(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getActivation(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFiberLength(State s) {
-    return opensimModelJNI.Muscle_getFiberLength(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getFiberLength(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getPennationAngle(State s) {
-    return opensimModelJNI.Muscle_getPennationAngle(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getPennationAngle(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getCosPennationAngle(State s) {
-    return opensimModelJNI.Muscle_getCosPennationAngle(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getCosPennationAngle(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getTendonLength(State s) {
-    return opensimModelJNI.Muscle_getTendonLength(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getTendonLength(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getNormalizedFiberLength(State s) {
-    return opensimModelJNI.Muscle_getNormalizedFiberLength(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getNormalizedFiberLength(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFiberLengthAlongTendon(State s) {
-    return opensimModelJNI.Muscle_getFiberLengthAlongTendon(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getFiberLengthAlongTendon(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getTendonStrain(State s) {
-    return opensimModelJNI.Muscle_getTendonStrain(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getTendonStrain(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFiberPotentialEnergy(State s) {
-    return opensimModelJNI.Muscle_getFiberPotentialEnergy(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getFiberPotentialEnergy(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getTendonPotentialEnergy(State s) {
-    return opensimModelJNI.Muscle_getTendonPotentialEnergy(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getTendonPotentialEnergy(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getMusclePotentialEnergy(State s) {
-    return opensimModelJNI.Muscle_getMusclePotentialEnergy(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getMusclePotentialEnergy(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getPassiveForceMultiplier(State s) {
-    return opensimModelJNI.Muscle_getPassiveForceMultiplier(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getPassiveForceMultiplier(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getActiveForceLengthMultiplier(State s) {
-    return opensimModelJNI.Muscle_getActiveForceLengthMultiplier(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getActiveForceLengthMultiplier(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFiberVelocity(State s) {
-    return opensimModelJNI.Muscle_getFiberVelocity(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getFiberVelocity(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getNormalizedFiberVelocity(State s) {
-    return opensimModelJNI.Muscle_getNormalizedFiberVelocity(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getNormalizedFiberVelocity(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFiberVelocityAlongTendon(State s) {
-    return opensimModelJNI.Muscle_getFiberVelocityAlongTendon(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getFiberVelocityAlongTendon(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getPennationAngularVelocity(State s) {
-    return opensimModelJNI.Muscle_getPennationAngularVelocity(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getPennationAngularVelocity(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getTendonVelocity(State s) {
-    return opensimModelJNI.Muscle_getTendonVelocity(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getTendonVelocity(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getForceVelocityMultiplier(State s) {
-    return opensimModelJNI.Muscle_getForceVelocityMultiplier(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getForceVelocityMultiplier(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFiberForce(State s) {
-    return opensimModelJNI.Muscle_getFiberForce(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getFiberForce(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFiberForceAlongTendon(State s) {
-    return opensimModelJNI.Muscle_getFiberForceAlongTendon(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getFiberForceAlongTendon(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getActiveFiberForce(State s) {
-    return opensimModelJNI.Muscle_getActiveFiberForce(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getActiveFiberForce(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getPassiveFiberForce(State s) {
-    return opensimModelJNI.Muscle_getPassiveFiberForce(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getPassiveFiberForce(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getActiveFiberForceAlongTendon(State s) {
-    return opensimModelJNI.Muscle_getActiveFiberForceAlongTendon(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getActiveFiberForceAlongTendon(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getPassiveFiberForceAlongTendon(State s) {
-    return opensimModelJNI.Muscle_getPassiveFiberForceAlongTendon(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getPassiveFiberForceAlongTendon(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getTendonForce(State s) {
-    return opensimModelJNI.Muscle_getTendonForce(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getTendonForce(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFiberStiffness(State s) {
-    return opensimModelJNI.Muscle_getFiberStiffness(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getFiberStiffness(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFiberStiffnessAlongTendon(State s) {
-    return opensimModelJNI.Muscle_getFiberStiffnessAlongTendon(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getFiberStiffnessAlongTendon(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getTendonStiffness(State s) {
-    return opensimModelJNI.Muscle_getTendonStiffness(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getTendonStiffness(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getMuscleStiffness(State s) {
-    return opensimModelJNI.Muscle_getMuscleStiffness(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getMuscleStiffness(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFiberActivePower(State s) {
-    return opensimModelJNI.Muscle_getFiberActivePower(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getFiberActivePower(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFiberPassivePower(State s) {
-    return opensimModelJNI.Muscle_getFiberPassivePower(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getFiberPassivePower(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getTendonPower(State s) {
-    return opensimModelJNI.Muscle_getTendonPower(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getTendonPower(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getMusclePower(State s) {
-    return opensimModelJNI.Muscle_getMusclePower(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getMusclePower(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getStress(State s) {
-    return opensimModelJNI.Muscle_getStress(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getStress(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setExcitation(State s, double excitation) {
-    opensimModelJNI.Muscle_setExcitation(swigCPtr, this, State.getCPtr(s), s, excitation);
+    opensimModelSimulationJNI.Muscle_setExcitation(swigCPtr, this, State.getCPtr(s), s, excitation);
   }
 
   public double getExcitation(State s) {
-    return opensimModelJNI.Muscle_getExcitation(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_getExcitation(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setActivation(State s, double activation) {
-    opensimModelJNI.Muscle_setActivation(swigCPtr, this, State.getCPtr(s), s, activation);
+    opensimModelSimulationJNI.Muscle_setActivation(swigCPtr, this, State.getCPtr(s), s, activation);
   }
 
   public double computeActuation(State s) {
-    return opensimModelJNI.Muscle_computeActuation(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Muscle_computeActuation(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void equilibrate(State s) {
-    opensimModelJNI.Muscle_equilibrate(swigCPtr, this, State.getCPtr(s), s);
+    opensimModelSimulationJNI.Muscle_equilibrate(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double calcInextensibleTendonActiveFiberForce(State s, double aActivation) {
-    return opensimModelJNI.Muscle_calcInextensibleTendonActiveFiberForce(swigCPtr, this, State.getCPtr(s), s, aActivation);
+    return opensimModelSimulationJNI.Muscle_calcInextensibleTendonActiveFiberForce(swigCPtr, this, State.getCPtr(s), s, aActivation);
   }
 
 }

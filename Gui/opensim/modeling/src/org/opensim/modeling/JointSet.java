@@ -12,7 +12,7 @@ public class JointSet extends ModelComponentSetJoints {
   private transient long swigCPtr;
 
   public JointSet(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.JointSet_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.JointSet_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class JointSet extends ModelComponentSetJoints {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_JointSet(swigCPtr);
+        opensimModelSimulationJNI.delete_JointSet(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,49 +36,49 @@ public class JointSet extends ModelComponentSetJoints {
   }
 
   public static JointSet safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.JointSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.JointSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new JointSet(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.JointSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.JointSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.JointSet_getClassName();
+    return opensimModelSimulationJNI.JointSet_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.JointSet_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.JointSet_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new JointSet(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.JointSet_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.JointSet_getConcreteClassName(swigCPtr, this);
   }
 
   public JointSet() {
-    this(opensimModelJNI.new_JointSet__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_JointSet__SWIG_0(), true);
   }
 
   public JointSet(Model model) {
-    this(opensimModelJNI.new_JointSet__SWIG_1(Model.getCPtr(model), model), true);
+    this(opensimModelSimulationJNI.new_JointSet__SWIG_1(Model.getCPtr(model), model), true);
   }
 
   public JointSet(JointSet aJointSet) {
-    this(opensimModelJNI.new_JointSet__SWIG_2(JointSet.getCPtr(aJointSet), aJointSet), true);
+    this(opensimModelSimulationJNI.new_JointSet__SWIG_2(JointSet.getCPtr(aJointSet), aJointSet), true);
   }
 
   public JointSet(Model model, String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelJNI.new_JointSet__SWIG_3(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
+    this(opensimModelSimulationJNI.new_JointSet__SWIG_3(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
   }
 
   public JointSet(Model model, String aFileName) {
-    this(opensimModelJNI.new_JointSet__SWIG_4(Model.getCPtr(model), model, aFileName), true);
+    this(opensimModelSimulationJNI.new_JointSet__SWIG_4(Model.getCPtr(model), model, aFileName), true);
   }
 
   public void scale(ScaleSet aScaleSet) {
-    opensimModelJNI.JointSet_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
+    opensimModelSimulationJNI.JointSet_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
   }
 
 }

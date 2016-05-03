@@ -12,7 +12,7 @@ public class UniversalJoint extends Joint {
   private transient long swigCPtr;
 
   public UniversalJoint(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.UniversalJoint_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.UniversalJoint_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class UniversalJoint extends Joint {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_UniversalJoint(swigCPtr);
+        opensimModelSimulationJNI.delete_UniversalJoint(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,33 +36,33 @@ public class UniversalJoint extends Joint {
   }
 
   public static UniversalJoint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.UniversalJoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.UniversalJoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new UniversalJoint(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.UniversalJoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.UniversalJoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.UniversalJoint_getClassName();
+    return opensimModelSimulationJNI.UniversalJoint_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.UniversalJoint_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.UniversalJoint_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new UniversalJoint(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.UniversalJoint_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.UniversalJoint_getConcreteClassName(swigCPtr, this);
   }
 
-  public UniversalJoint(String name, String parentName, String childName) {
-    this(opensimModelJNI.new_UniversalJoint__SWIG_0(name, parentName, childName), true);
+  public UniversalJoint(String name, PhysicalFrame parent, PhysicalFrame child) {
+    this(opensimModelSimulationJNI.new_UniversalJoint__SWIG_0(name, PhysicalFrame.getCPtr(parent), parent, PhysicalFrame.getCPtr(child), child), true);
   }
 
   public UniversalJoint(String name, PhysicalFrame parent, Vec3 locationInParent, Vec3 orientationInParent, PhysicalFrame child, Vec3 locationInChild, Vec3 orientationInChild) {
-    this(opensimModelJNI.new_UniversalJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
+    this(opensimModelSimulationJNI.new_UniversalJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
   }
 
 }

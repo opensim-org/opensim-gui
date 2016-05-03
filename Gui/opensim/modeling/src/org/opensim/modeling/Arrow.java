@@ -12,7 +12,7 @@ public class Arrow extends Geometry {
   private transient long swigCPtr;
 
   public Arrow(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.Arrow_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.Arrow_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Arrow extends Geometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_Arrow(swigCPtr);
+        opensimModelSimulationJNI.delete_Arrow(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,141 +36,141 @@ public class Arrow extends Geometry {
   }
 
   public static Arrow safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Arrow_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.Arrow_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Arrow(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.Arrow_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.Arrow_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.Arrow_getClassName();
+    return opensimModelSimulationJNI.Arrow_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.Arrow_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.Arrow_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Arrow(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.Arrow_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.Arrow_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_start_point(Arrow source) {
-    opensimModelJNI.Arrow_copyProperty_start_point(swigCPtr, this, Arrow.getCPtr(source), source);
+    opensimModelSimulationJNI.Arrow_copyProperty_start_point(swigCPtr, this, Arrow.getCPtr(source), source);
   }
 
   public Vec3 get_start_point(int i) {
-    return new Vec3(opensimModelJNI.Arrow_get_start_point__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimModelSimulationJNI.Arrow_get_start_point__SWIG_0(swigCPtr, this, i), false);
   }
 
   public Vec3 upd_start_point(int i) {
-    return new Vec3(opensimModelJNI.Arrow_upd_start_point__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimModelSimulationJNI.Arrow_upd_start_point__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_start_point(int i, Vec3 value) {
-    opensimModelJNI.Arrow_set_start_point__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+    opensimModelSimulationJNI.Arrow_set_start_point__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
   }
 
   public int append_start_point(Vec3 value) {
-    return opensimModelJNI.Arrow_append_start_point(swigCPtr, this, Vec3.getCPtr(value), value);
+    return opensimModelSimulationJNI.Arrow_append_start_point(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void constructProperty_start_point(Vec3 initValue) {
-    opensimModelJNI.Arrow_constructProperty_start_point(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+    opensimModelSimulationJNI.Arrow_constructProperty_start_point(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
   }
 
   public Vec3 get_start_point() {
-    return new Vec3(opensimModelJNI.Arrow_get_start_point__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimModelSimulationJNI.Arrow_get_start_point__SWIG_1(swigCPtr, this), false);
   }
 
   public Vec3 upd_start_point() {
-    return new Vec3(opensimModelJNI.Arrow_upd_start_point__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimModelSimulationJNI.Arrow_upd_start_point__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_start_point(Vec3 value) {
-    opensimModelJNI.Arrow_set_start_point__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+    opensimModelSimulationJNI.Arrow_set_start_point__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void copyProperty_direction(Arrow source) {
-    opensimModelJNI.Arrow_copyProperty_direction(swigCPtr, this, Arrow.getCPtr(source), source);
+    opensimModelSimulationJNI.Arrow_copyProperty_direction(swigCPtr, this, Arrow.getCPtr(source), source);
   }
 
   public Vec3 get_direction(int i) {
-    return new Vec3(opensimModelJNI.Arrow_get_direction__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimModelSimulationJNI.Arrow_get_direction__SWIG_0(swigCPtr, this, i), false);
   }
 
   public Vec3 upd_direction(int i) {
-    return new Vec3(opensimModelJNI.Arrow_upd_direction__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimModelSimulationJNI.Arrow_upd_direction__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_direction(int i, Vec3 value) {
-    opensimModelJNI.Arrow_set_direction__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+    opensimModelSimulationJNI.Arrow_set_direction__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
   }
 
   public int append_direction(Vec3 value) {
-    return opensimModelJNI.Arrow_append_direction(swigCPtr, this, Vec3.getCPtr(value), value);
+    return opensimModelSimulationJNI.Arrow_append_direction(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void constructProperty_direction(Vec3 initValue) {
-    opensimModelJNI.Arrow_constructProperty_direction(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+    opensimModelSimulationJNI.Arrow_constructProperty_direction(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
   }
 
   public Vec3 get_direction() {
-    return new Vec3(opensimModelJNI.Arrow_get_direction__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimModelSimulationJNI.Arrow_get_direction__SWIG_1(swigCPtr, this), false);
   }
 
   public Vec3 upd_direction() {
-    return new Vec3(opensimModelJNI.Arrow_upd_direction__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimModelSimulationJNI.Arrow_upd_direction__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_direction(Vec3 value) {
-    opensimModelJNI.Arrow_set_direction__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+    opensimModelSimulationJNI.Arrow_set_direction__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void copyProperty_length(Arrow source) {
-    opensimModelJNI.Arrow_copyProperty_length(swigCPtr, this, Arrow.getCPtr(source), source);
+    opensimModelSimulationJNI.Arrow_copyProperty_length(swigCPtr, this, Arrow.getCPtr(source), source);
   }
 
   public double get_length(int i) {
-    return opensimModelJNI.Arrow_get_length__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.Arrow_get_length__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_length(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.Arrow_upd_length__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Arrow_upd_length__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_length(int i, double value) {
-    opensimModelJNI.Arrow_set_length__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.Arrow_set_length__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_length(double value) {
-    return opensimModelJNI.Arrow_append_length(swigCPtr, this, value);
+    return opensimModelSimulationJNI.Arrow_append_length(swigCPtr, this, value);
   }
 
   public void constructProperty_length(double initValue) {
-    opensimModelJNI.Arrow_constructProperty_length(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.Arrow_constructProperty_length(swigCPtr, this, initValue);
   }
 
   public double get_length() {
-    return opensimModelJNI.Arrow_get_length__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.Arrow_get_length__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_length() {
-    return new SWIGTYPE_p_double(opensimModelJNI.Arrow_upd_length__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Arrow_upd_length__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_length(double value) {
-    opensimModelJNI.Arrow_set_length__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.Arrow_set_length__SWIG_1(swigCPtr, this, value);
   }
 
   public Arrow(Vec3 aPoint1, UnitVec3 aUnitDir, double aLength) {
-    this(opensimModelJNI.new_Arrow__SWIG_0(Vec3.getCPtr(aPoint1), aPoint1, UnitVec3.getCPtr(aUnitDir), aUnitDir, aLength), true);
+    this(opensimModelSimulationJNI.new_Arrow__SWIG_0(Vec3.getCPtr(aPoint1), aPoint1, UnitVec3.getCPtr(aUnitDir), aUnitDir, aLength), true);
   }
 
   public Arrow() {
-    this(opensimModelJNI.new_Arrow__SWIG_1(), true);
+    this(opensimModelSimulationJNI.new_Arrow__SWIG_1(), true);
   }
 
 }

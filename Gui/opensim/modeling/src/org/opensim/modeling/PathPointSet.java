@@ -12,7 +12,7 @@ public class PathPointSet extends SetPathPoint {
   private transient long swigCPtr;
 
   public PathPointSet(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.PathPointSet_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.PathPointSet_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class PathPointSet extends SetPathPoint {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_PathPointSet(swigCPtr);
+        opensimModelSimulationJNI.delete_PathPointSet(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,33 +36,33 @@ public class PathPointSet extends SetPathPoint {
   }
 
   public static PathPointSet safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.PathPointSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.PathPointSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new PathPointSet(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.PathPointSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.PathPointSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.PathPointSet_getClassName();
+    return opensimModelSimulationJNI.PathPointSet_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.PathPointSet_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.PathPointSet_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new PathPointSet(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.PathPointSet_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.PathPointSet_getConcreteClassName(swigCPtr, this);
   }
 
   public PathPointSet() {
-    this(opensimModelJNI.new_PathPointSet__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_PathPointSet__SWIG_0(), true);
   }
 
   public PathPointSet(PathPointSet aPathPointSet) {
-    this(opensimModelJNI.new_PathPointSet__SWIG_1(PathPointSet.getCPtr(aPathPointSet), aPathPointSet), true);
+    this(opensimModelSimulationJNI.new_PathPointSet__SWIG_1(PathPointSet.getCPtr(aPathPointSet), aPathPointSet), true);
   }
 
 }

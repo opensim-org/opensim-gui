@@ -12,7 +12,7 @@ public class MissingHeader extends IOError {
   private transient long swigCPtr;
 
   public MissingHeader(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.MissingHeader_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.MissingHeader_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class MissingHeader extends IOError {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_MissingHeader(swigCPtr);
+        opensimModelCommonJNI.delete_MissingHeader(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class MissingHeader extends IOError {
   }
 
   public MissingHeader() {
-    this(opensimModelJNI.new_MissingHeader(), true);
+    this(opensimModelCommonJNI.new_MissingHeader(), true);
   }
 
 }

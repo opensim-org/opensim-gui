@@ -12,7 +12,7 @@ public class Ground extends PhysicalFrame {
   private transient long swigCPtr;
 
   public Ground(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.Ground_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.Ground_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Ground extends PhysicalFrame {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_Ground(swigCPtr);
+        opensimModelSimulationJNI.delete_Ground(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,29 +36,29 @@ public class Ground extends PhysicalFrame {
   }
 
   public static Ground safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Ground_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.Ground_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Ground(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.Ground_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.Ground_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.Ground_getClassName();
+    return opensimModelSimulationJNI.Ground_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.Ground_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.Ground_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Ground(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.Ground_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.Ground_getConcreteClassName(swigCPtr, this);
   }
 
   public Ground() {
-    this(opensimModelJNI.new_Ground(), true);
+    this(opensimModelSimulationJNI.new_Ground(), true);
   }
 
 }

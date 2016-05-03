@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class DecorativeArrow extends DecorativeGeometry {
   private transient long swigCPtr;
 
-  public DecorativeArrow(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.DecorativeArrow_SWIGUpcast(cPtr), cMemoryOwn);
+  protected DecorativeArrow(long cPtr, boolean cMemoryOwn) {
+    super(opensimSimbodyJNI.DecorativeArrow_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(DecorativeArrow obj) {
+  protected static long getCPtr(DecorativeArrow obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,7 +28,7 @@ public class DecorativeArrow extends DecorativeGeometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_DecorativeArrow(swigCPtr);
+        opensimSimbodyJNI.delete_DecorativeArrow(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,88 +36,88 @@ public class DecorativeArrow extends DecorativeGeometry {
   }
 
   public DecorativeArrow(Vec3 startPoint, Vec3 endPoint, double tipLength) {
-    this(opensimModelJNI.new_DecorativeArrow__SWIG_0(Vec3.getCPtr(startPoint), startPoint, Vec3.getCPtr(endPoint), endPoint, tipLength), true);
+    this(opensimSimbodyJNI.new_DecorativeArrow__SWIG_0(Vec3.getCPtr(startPoint), startPoint, Vec3.getCPtr(endPoint), endPoint, tipLength), true);
   }
 
   public DecorativeArrow(Vec3 startPoint, Vec3 endPoint) {
-    this(opensimModelJNI.new_DecorativeArrow__SWIG_1(Vec3.getCPtr(startPoint), startPoint, Vec3.getCPtr(endPoint), endPoint), true);
+    this(opensimSimbodyJNI.new_DecorativeArrow__SWIG_1(Vec3.getCPtr(startPoint), startPoint, Vec3.getCPtr(endPoint), endPoint), true);
   }
 
   public DecorativeArrow(Vec3 startPoint) {
-    this(opensimModelJNI.new_DecorativeArrow__SWIG_2(Vec3.getCPtr(startPoint), startPoint), true);
+    this(opensimSimbodyJNI.new_DecorativeArrow__SWIG_2(Vec3.getCPtr(startPoint), startPoint), true);
   }
 
   public DecorativeArrow() {
-    this(opensimModelJNI.new_DecorativeArrow__SWIG_3(), true);
+    this(opensimSimbodyJNI.new_DecorativeArrow__SWIG_3(), true);
   }
 
   public Vec3 getStartPoint() {
-    return new Vec3(opensimModelJNI.DecorativeArrow_getStartPoint(swigCPtr, this), false);
+    return new Vec3(opensimSimbodyJNI.DecorativeArrow_getStartPoint(swigCPtr, this), false);
   }
 
   public Vec3 getEndPoint() {
-    return new Vec3(opensimModelJNI.DecorativeArrow_getEndPoint(swigCPtr, this), false);
+    return new Vec3(opensimSimbodyJNI.DecorativeArrow_getEndPoint(swigCPtr, this), false);
   }
 
   public double getTipLength() {
-    return opensimModelJNI.DecorativeArrow_getTipLength(swigCPtr, this);
+    return opensimSimbodyJNI.DecorativeArrow_getTipLength(swigCPtr, this);
   }
 
   public DecorativeArrow setStartPoint(Vec3 start) {
-    return new DecorativeArrow(opensimModelJNI.DecorativeArrow_setStartPoint(swigCPtr, this, Vec3.getCPtr(start), start), false);
+    return new DecorativeArrow(opensimSimbodyJNI.DecorativeArrow_setStartPoint(swigCPtr, this, Vec3.getCPtr(start), start), false);
   }
 
   public DecorativeArrow setEndPoint(Vec3 end) {
-    return new DecorativeArrow(opensimModelJNI.DecorativeArrow_setEndPoint(swigCPtr, this, Vec3.getCPtr(end), end), false);
+    return new DecorativeArrow(opensimSimbodyJNI.DecorativeArrow_setEndPoint(swigCPtr, this, Vec3.getCPtr(end), end), false);
   }
 
   public DecorativeArrow setTipLength(double arg0) {
-    return new DecorativeArrow(opensimModelJNI.DecorativeArrow_setTipLength(swigCPtr, this, arg0), false);
+    return new DecorativeArrow(opensimSimbodyJNI.DecorativeArrow_setTipLength(swigCPtr, this, arg0), false);
   }
 
   public DecorativeArrow setBodyId(int b) {
-    return new DecorativeArrow(opensimModelJNI.DecorativeArrow_setBodyId(swigCPtr, this, b), false);
+    return new DecorativeArrow(opensimSimbodyJNI.DecorativeArrow_setBodyId(swigCPtr, this, b), false);
   }
 
   public DecorativeArrow setIndexOnBody(int x) {
-    return new DecorativeArrow(opensimModelJNI.DecorativeArrow_setIndexOnBody(swigCPtr, this, x), false);
+    return new DecorativeArrow(opensimSimbodyJNI.DecorativeArrow_setIndexOnBody(swigCPtr, this, x), false);
   }
 
   public DecorativeArrow setUserRef(SWIGTYPE_p_void p) {
-    return new DecorativeArrow(opensimModelJNI.DecorativeArrow_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
+    return new DecorativeArrow(opensimSimbodyJNI.DecorativeArrow_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
   }
 
   public DecorativeArrow setTransform(Transform X_BD) {
-    return new DecorativeArrow(opensimModelJNI.DecorativeArrow_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
+    return new DecorativeArrow(opensimSimbodyJNI.DecorativeArrow_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
   }
 
   public DecorativeArrow setResolution(double r) {
-    return new DecorativeArrow(opensimModelJNI.DecorativeArrow_setResolution(swigCPtr, this, r), false);
+    return new DecorativeArrow(opensimSimbodyJNI.DecorativeArrow_setResolution(swigCPtr, this, r), false);
   }
 
   public DecorativeArrow setScaleFactors(Vec3 s) {
-    return new DecorativeArrow(opensimModelJNI.DecorativeArrow_setScaleFactors(swigCPtr, this, Vec3.getCPtr(s), s), false);
+    return new DecorativeArrow(opensimSimbodyJNI.DecorativeArrow_setScaleFactors(swigCPtr, this, Vec3.getCPtr(s), s), false);
   }
 
   public DecorativeArrow setColor(Vec3 rgb) {
-    return new DecorativeArrow(opensimModelJNI.DecorativeArrow_setColor(swigCPtr, this, Vec3.getCPtr(rgb), rgb), false);
+    return new DecorativeArrow(opensimSimbodyJNI.DecorativeArrow_setColor(swigCPtr, this, Vec3.getCPtr(rgb), rgb), false);
   }
 
   public DecorativeArrow setOpacity(double o) {
-    return new DecorativeArrow(opensimModelJNI.DecorativeArrow_setOpacity(swigCPtr, this, o), false);
+    return new DecorativeArrow(opensimSimbodyJNI.DecorativeArrow_setOpacity(swigCPtr, this, o), false);
   }
 
   public DecorativeArrow setLineThickness(double t) {
-    return new DecorativeArrow(opensimModelJNI.DecorativeArrow_setLineThickness(swigCPtr, this, t), false);
+    return new DecorativeArrow(opensimSimbodyJNI.DecorativeArrow_setLineThickness(swigCPtr, this, t), false);
   }
 
   public DecorativeArrow setRepresentation(DecorativeGeometry.Representation r) {
-    return new DecorativeArrow(opensimModelJNI.DecorativeArrow_setRepresentation(swigCPtr, this, r.swigValue()), false);
+    return new DecorativeArrow(opensimSimbodyJNI.DecorativeArrow_setRepresentation(swigCPtr, this, r.swigValue()), false);
   }
 
   public DecorativeArrow clone() {
-    long cPtr = opensimModelJNI.DecorativeArrow_clone(swigCPtr, this);
-    return (cPtr == 0) ? null : new DecorativeArrow(cPtr, true);
+    long cPtr = opensimSimbodyJNI.DecorativeArrow_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new DecorativeArrow(cPtr, false);
   }
 
 }

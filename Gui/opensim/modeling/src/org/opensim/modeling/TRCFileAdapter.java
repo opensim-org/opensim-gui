@@ -13,7 +13,7 @@ public class TRCFileAdapter extends FileAdapter {
   private boolean swigCMemOwnDerived;
 
   protected TRCFileAdapter(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.TRCFileAdapter_SWIGSmartPtrUpcast(cPtr), true);
+    super(opensimModelCommonJNI.TRCFileAdapter_SWIGSmartPtrUpcast(cPtr), true);
     swigCMemOwnDerived = cMemoryOwn;
     swigCPtr = cPtr;
   }
@@ -30,7 +30,7 @@ public class TRCFileAdapter extends FileAdapter {
     if (swigCPtr != 0) {
       if (swigCMemOwnDerived) {
         swigCMemOwnDerived = false;
-        opensimModelJNI.delete_TRCFileAdapter(swigCPtr);
+        opensimModelCommonJNI.delete_TRCFileAdapter(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -38,28 +38,28 @@ public class TRCFileAdapter extends FileAdapter {
   }
 
   public TRCFileAdapter() {
-    this(opensimModelJNI.new_TRCFileAdapter__SWIG_0(), true);
+    this(opensimModelCommonJNI.new_TRCFileAdapter__SWIG_0(), true);
   }
 
   public TRCFileAdapter(TRCFileAdapter arg0) {
-    this(opensimModelJNI.new_TRCFileAdapter__SWIG_1(TRCFileAdapter.getCPtr(arg0), arg0), true);
+    this(opensimModelCommonJNI.new_TRCFileAdapter__SWIG_1(TRCFileAdapter.getCPtr(arg0), arg0), true);
   }
 
   public DataAdapter clone() {
-    long cPtr = opensimModelJNI.TRCFileAdapter_clone(swigCPtr, this);
+    long cPtr = opensimModelCommonJNI.TRCFileAdapter_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new TRCFileAdapter(cPtr, true);
   }
 
   public TimeSeriesTableVec3 read(String filename) {
-    return new TimeSeriesTableVec3(opensimModelJNI.TRCFileAdapter_read(swigCPtr, this, filename), true);
+    return new TimeSeriesTableVec3(opensimModelCommonJNI.TRCFileAdapter_read(swigCPtr, this, filename), true);
   }
 
   public void write(TimeSeriesTableVec3 table, String filename) {
-    opensimModelJNI.TRCFileAdapter_write(swigCPtr, this, TimeSeriesTableVec3.getCPtr(table), table, filename);
+    opensimModelCommonJNI.TRCFileAdapter_write(swigCPtr, this, TimeSeriesTableVec3.getCPtr(table), table, filename);
   }
 
   public static String get_markers() {
-    return opensimModelJNI.TRCFileAdapter__markers_get();
+    return opensimModelCommonJNI.TRCFileAdapter__markers_get();
   }
 
 }

@@ -13,7 +13,7 @@ public class CSVFileAdapter extends DelimFileAdapter {
   private boolean swigCMemOwnDerived;
 
   protected CSVFileAdapter(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.CSVFileAdapter_SWIGSmartPtrUpcast(cPtr), true);
+    super(opensimModelCommonJNI.CSVFileAdapter_SWIGSmartPtrUpcast(cPtr), true);
     swigCMemOwnDerived = cMemoryOwn;
     swigCPtr = cPtr;
   }
@@ -30,7 +30,7 @@ public class CSVFileAdapter extends DelimFileAdapter {
     if (swigCPtr != 0) {
       if (swigCMemOwnDerived) {
         swigCMemOwnDerived = false;
-        opensimModelJNI.delete_CSVFileAdapter(swigCPtr);
+        opensimModelCommonJNI.delete_CSVFileAdapter(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -38,15 +38,15 @@ public class CSVFileAdapter extends DelimFileAdapter {
   }
 
   public CSVFileAdapter() {
-    this(opensimModelJNI.new_CSVFileAdapter__SWIG_0(), true);
+    this(opensimModelCommonJNI.new_CSVFileAdapter__SWIG_0(), true);
   }
 
   public CSVFileAdapter(CSVFileAdapter arg0) {
-    this(opensimModelJNI.new_CSVFileAdapter__SWIG_1(CSVFileAdapter.getCPtr(arg0), arg0), true);
+    this(opensimModelCommonJNI.new_CSVFileAdapter__SWIG_1(CSVFileAdapter.getCPtr(arg0), arg0), true);
   }
 
   public DataAdapter clone() {
-    long cPtr = opensimModelJNI.CSVFileAdapter_clone(swigCPtr, this);
+    long cPtr = opensimModelCommonJNI.CSVFileAdapter_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new CSVFileAdapter(cPtr, true);
   }
 

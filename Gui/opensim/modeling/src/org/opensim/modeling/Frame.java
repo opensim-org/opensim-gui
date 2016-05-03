@@ -12,7 +12,7 @@ public class Frame extends ModelComponent {
   private transient long swigCPtr;
 
   public Frame(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.Frame_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.Frame_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Frame extends ModelComponent {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_Frame(swigCPtr);
+        opensimModelSimulationJNI.delete_Frame(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,85 +36,109 @@ public class Frame extends ModelComponent {
   }
 
   public static Frame safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Frame_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.Frame_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Frame(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.Frame_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.Frame_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.Frame_getClassName();
+    return opensimModelSimulationJNI.Frame_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.Frame_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.Frame_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Frame(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.Frame_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.Frame_getConcreteClassName(swigCPtr, this);
   }
 
   public void set_has_output_position(boolean value) {
-    opensimModelJNI.Frame__has_output_position_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Frame__has_output_position_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_position() {
-    return opensimModelJNI.Frame__has_output_position_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Frame__has_output_position_get(swigCPtr, this);
   }
 
   public void set_has_output_transform(boolean value) {
-    opensimModelJNI.Frame__has_output_transform_set(swigCPtr, this, value);
+    opensimModelSimulationJNI.Frame__has_output_transform_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_transform() {
-    return opensimModelJNI.Frame__has_output_transform_get(swigCPtr, this);
+    return opensimModelSimulationJNI.Frame__has_output_transform_get(swigCPtr, this);
   }
 
-  public Transform getGroundTransform(State state) {
-    return new Transform(opensimModelJNI.Frame_getGroundTransform(swigCPtr, this, State.getCPtr(state), state), false);
+  public void set_has_output_velocity(boolean value) {
+    opensimModelSimulationJNI.Frame__has_output_velocity_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_velocity() {
+    return opensimModelSimulationJNI.Frame__has_output_velocity_get(swigCPtr, this);
+  }
+
+  public void set_has_output_acceleration(boolean value) {
+    opensimModelSimulationJNI.Frame__has_output_acceleration_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_acceleration() {
+    return opensimModelSimulationJNI.Frame__has_output_acceleration_get(swigCPtr, this);
+  }
+
+  public Transform getTransformInGround(State state) {
+    return new Transform(opensimModelSimulationJNI.Frame_getTransformInGround(swigCPtr, this, State.getCPtr(state), state), false);
+  }
+
+  public SpatialVec getVelocityInGround(State state) {
+    return new SpatialVec(opensimModelSimulationJNI.Frame_getVelocityInGround(swigCPtr, this, State.getCPtr(state), state), false);
+  }
+
+  public SpatialVec getAccelerationInGround(State state) {
+    return new SpatialVec(opensimModelSimulationJNI.Frame_getAccelerationInGround(swigCPtr, this, State.getCPtr(state), state), false);
   }
 
   public Transform findTransformBetween(State state, Frame otherFrame) {
-    return new Transform(opensimModelJNI.Frame_findTransformBetween(swigCPtr, this, State.getCPtr(state), state, Frame.getCPtr(otherFrame), otherFrame), true);
+    return new Transform(opensimModelSimulationJNI.Frame_findTransformBetween(swigCPtr, this, State.getCPtr(state), state, Frame.getCPtr(otherFrame), otherFrame), true);
   }
 
   public Vec3 expressVectorInAnotherFrame(State state, Vec3 vec_F, Frame otherFrame) {
-    return new Vec3(opensimModelJNI.Frame_expressVectorInAnotherFrame(swigCPtr, this, State.getCPtr(state), state, Vec3.getCPtr(vec_F), vec_F, Frame.getCPtr(otherFrame), otherFrame), true);
+    return new Vec3(opensimModelSimulationJNI.Frame_expressVectorInAnotherFrame(swigCPtr, this, State.getCPtr(state), state, Vec3.getCPtr(vec_F), vec_F, Frame.getCPtr(otherFrame), otherFrame), true);
   }
 
   public Vec3 findLocationInAnotherFrame(State state, Vec3 point_F, Frame otherFrame) {
-    return new Vec3(opensimModelJNI.Frame_findLocationInAnotherFrame(swigCPtr, this, State.getCPtr(state), state, Vec3.getCPtr(point_F), point_F, Frame.getCPtr(otherFrame), otherFrame), true);
+    return new Vec3(opensimModelSimulationJNI.Frame_findLocationInAnotherFrame(swigCPtr, this, State.getCPtr(state), state, Vec3.getCPtr(point_F), point_F, Frame.getCPtr(otherFrame), otherFrame), true);
   }
 
   public Frame findBaseFrame() {
-    return new Frame(opensimModelJNI.Frame_findBaseFrame(swigCPtr, this), false);
+    return new Frame(opensimModelSimulationJNI.Frame_findBaseFrame(swigCPtr, this), false);
   }
 
   public Transform findTransformInBaseFrame() {
-    return new Transform(opensimModelJNI.Frame_findTransformInBaseFrame(swigCPtr, this), true);
+    return new Transform(opensimModelSimulationJNI.Frame_findTransformInBaseFrame(swigCPtr, this), true);
   }
 
   public Vec3 getPositionInGround(State state) {
-    return new Vec3(opensimModelJNI.Frame_getPositionInGround(swigCPtr, this, State.getCPtr(state), state), true);
+    return new Vec3(opensimModelSimulationJNI.Frame_getPositionInGround(swigCPtr, this, State.getCPtr(state), state), true);
   }
 
   public void attachMeshGeometry(String aGeometryFileName, Vec3 scale) {
-    opensimModelJNI.Frame_attachMeshGeometry__SWIG_0(swigCPtr, this, aGeometryFileName, Vec3.getCPtr(scale), scale);
+    opensimModelSimulationJNI.Frame_attachMeshGeometry__SWIG_0(swigCPtr, this, aGeometryFileName, Vec3.getCPtr(scale), scale);
   }
 
   public void attachMeshGeometry(String aGeometryFileName) {
-    opensimModelJNI.Frame_attachMeshGeometry__SWIG_1(swigCPtr, this, aGeometryFileName);
+    opensimModelSimulationJNI.Frame_attachMeshGeometry__SWIG_1(swigCPtr, this, aGeometryFileName);
   }
 
   public void attachGeometry(Geometry geom, Vec3 scale) {
-    opensimModelJNI.Frame_attachGeometry__SWIG_0(swigCPtr, this, Geometry.getCPtr(geom), geom, Vec3.getCPtr(scale), scale);
+    opensimModelSimulationJNI.Frame_attachGeometry__SWIG_0(swigCPtr, this, Geometry.getCPtr(geom), geom, Vec3.getCPtr(scale), scale);
   }
 
   public void attachGeometry(Geometry geom) {
-    opensimModelJNI.Frame_attachGeometry__SWIG_1(swigCPtr, this, Geometry.getCPtr(geom), geom);
+    opensimModelSimulationJNI.Frame_attachGeometry__SWIG_1(swigCPtr, this, Geometry.getCPtr(geom), geom);
   }
 
 }

@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class DecorativeLine extends DecorativeGeometry {
   private transient long swigCPtr;
 
-  public DecorativeLine(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.DecorativeLine_SWIGUpcast(cPtr), cMemoryOwn);
+  protected DecorativeLine(long cPtr, boolean cMemoryOwn) {
+    super(opensimSimbodyJNI.DecorativeLine_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(DecorativeLine obj) {
+  protected static long getCPtr(DecorativeLine obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,7 +28,7 @@ public class DecorativeLine extends DecorativeGeometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_DecorativeLine(swigCPtr);
+        opensimSimbodyJNI.delete_DecorativeLine(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,80 +36,80 @@ public class DecorativeLine extends DecorativeGeometry {
   }
 
   public DecorativeLine(Vec3 p1, Vec3 p2) {
-    this(opensimModelJNI.new_DecorativeLine__SWIG_0(Vec3.getCPtr(p1), p1, Vec3.getCPtr(p2), p2), true);
+    this(opensimSimbodyJNI.new_DecorativeLine__SWIG_0(Vec3.getCPtr(p1), p1, Vec3.getCPtr(p2), p2), true);
   }
 
   public DecorativeLine(Vec3 p1) {
-    this(opensimModelJNI.new_DecorativeLine__SWIG_1(Vec3.getCPtr(p1), p1), true);
+    this(opensimSimbodyJNI.new_DecorativeLine__SWIG_1(Vec3.getCPtr(p1), p1), true);
   }
 
   public DecorativeLine() {
-    this(opensimModelJNI.new_DecorativeLine__SWIG_2(), true);
+    this(opensimSimbodyJNI.new_DecorativeLine__SWIG_2(), true);
   }
 
   public DecorativeLine setPoint1(Vec3 p1) {
-    return new DecorativeLine(opensimModelJNI.DecorativeLine_setPoint1(swigCPtr, this, Vec3.getCPtr(p1), p1), false);
+    return new DecorativeLine(opensimSimbodyJNI.DecorativeLine_setPoint1(swigCPtr, this, Vec3.getCPtr(p1), p1), false);
   }
 
   public DecorativeLine setPoint2(Vec3 p2) {
-    return new DecorativeLine(opensimModelJNI.DecorativeLine_setPoint2(swigCPtr, this, Vec3.getCPtr(p2), p2), false);
+    return new DecorativeLine(opensimSimbodyJNI.DecorativeLine_setPoint2(swigCPtr, this, Vec3.getCPtr(p2), p2), false);
   }
 
   public DecorativeLine setEndpoints(Vec3 p1, Vec3 p2) {
-    return new DecorativeLine(opensimModelJNI.DecorativeLine_setEndpoints(swigCPtr, this, Vec3.getCPtr(p1), p1, Vec3.getCPtr(p2), p2), false);
+    return new DecorativeLine(opensimSimbodyJNI.DecorativeLine_setEndpoints(swigCPtr, this, Vec3.getCPtr(p1), p1, Vec3.getCPtr(p2), p2), false);
   }
 
   public DecorativeLine setBodyId(int b) {
-    return new DecorativeLine(opensimModelJNI.DecorativeLine_setBodyId(swigCPtr, this, b), false);
+    return new DecorativeLine(opensimSimbodyJNI.DecorativeLine_setBodyId(swigCPtr, this, b), false);
   }
 
   public DecorativeLine setIndexOnBody(int x) {
-    return new DecorativeLine(opensimModelJNI.DecorativeLine_setIndexOnBody(swigCPtr, this, x), false);
+    return new DecorativeLine(opensimSimbodyJNI.DecorativeLine_setIndexOnBody(swigCPtr, this, x), false);
   }
 
   public DecorativeLine setUserRef(SWIGTYPE_p_void p) {
-    return new DecorativeLine(opensimModelJNI.DecorativeLine_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
+    return new DecorativeLine(opensimSimbodyJNI.DecorativeLine_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
   }
 
   public DecorativeLine setTransform(Transform X_BD) {
-    return new DecorativeLine(opensimModelJNI.DecorativeLine_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
+    return new DecorativeLine(opensimSimbodyJNI.DecorativeLine_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
   }
 
   public DecorativeLine setResolution(double r) {
-    return new DecorativeLine(opensimModelJNI.DecorativeLine_setResolution(swigCPtr, this, r), false);
+    return new DecorativeLine(opensimSimbodyJNI.DecorativeLine_setResolution(swigCPtr, this, r), false);
   }
 
   public DecorativeLine setScaleFactors(Vec3 s) {
-    return new DecorativeLine(opensimModelJNI.DecorativeLine_setScaleFactors(swigCPtr, this, Vec3.getCPtr(s), s), false);
+    return new DecorativeLine(opensimSimbodyJNI.DecorativeLine_setScaleFactors(swigCPtr, this, Vec3.getCPtr(s), s), false);
   }
 
   public DecorativeLine setColor(Vec3 rgb) {
-    return new DecorativeLine(opensimModelJNI.DecorativeLine_setColor(swigCPtr, this, Vec3.getCPtr(rgb), rgb), false);
+    return new DecorativeLine(opensimSimbodyJNI.DecorativeLine_setColor(swigCPtr, this, Vec3.getCPtr(rgb), rgb), false);
   }
 
   public DecorativeLine setOpacity(double o) {
-    return new DecorativeLine(opensimModelJNI.DecorativeLine_setOpacity(swigCPtr, this, o), false);
+    return new DecorativeLine(opensimSimbodyJNI.DecorativeLine_setOpacity(swigCPtr, this, o), false);
   }
 
   public DecorativeLine setLineThickness(double t) {
-    return new DecorativeLine(opensimModelJNI.DecorativeLine_setLineThickness(swigCPtr, this, t), false);
+    return new DecorativeLine(opensimSimbodyJNI.DecorativeLine_setLineThickness(swigCPtr, this, t), false);
   }
 
   public DecorativeLine setRepresentation(DecorativeGeometry.Representation r) {
-    return new DecorativeLine(opensimModelJNI.DecorativeLine_setRepresentation(swigCPtr, this, r.swigValue()), false);
+    return new DecorativeLine(opensimSimbodyJNI.DecorativeLine_setRepresentation(swigCPtr, this, r.swigValue()), false);
   }
 
   public Vec3 getPoint1() {
-    return new Vec3(opensimModelJNI.DecorativeLine_getPoint1(swigCPtr, this), false);
+    return new Vec3(opensimSimbodyJNI.DecorativeLine_getPoint1(swigCPtr, this), false);
   }
 
   public Vec3 getPoint2() {
-    return new Vec3(opensimModelJNI.DecorativeLine_getPoint2(swigCPtr, this), false);
+    return new Vec3(opensimSimbodyJNI.DecorativeLine_getPoint2(swigCPtr, this), false);
   }
 
   public DecorativeLine clone() {
-    long cPtr = opensimModelJNI.DecorativeLine_clone(swigCPtr, this);
-    return (cPtr == 0) ? null : new DecorativeLine(cPtr, true);
+    long cPtr = opensimSimbodyJNI.DecorativeLine_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new DecorativeLine(cPtr, false);
   }
 
 }

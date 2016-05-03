@@ -12,7 +12,7 @@ public class FileDoesNotExist extends IOError {
   private transient long swigCPtr;
 
   public FileDoesNotExist(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.FileDoesNotExist_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.FileDoesNotExist_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class FileDoesNotExist extends IOError {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_FileDoesNotExist(swigCPtr);
+        opensimModelCommonJNI.delete_FileDoesNotExist(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class FileDoesNotExist extends IOError {
   }
 
   public FileDoesNotExist(String file, long line, String func, String filename) {
-    this(opensimModelJNI.new_FileDoesNotExist(file, line, func, filename), true);
+    this(opensimModelCommonJNI.new_FileDoesNotExist(file, line, func, filename), true);
   }
 
 }

@@ -12,7 +12,7 @@ public class MomentArmSolver extends Solver {
   private transient long swigCPtr;
 
   public MomentArmSolver(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.MomentArmSolver_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.MomentArmSolver_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class MomentArmSolver extends Solver {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_MomentArmSolver(swigCPtr);
+        opensimModelSimulationJNI.delete_MomentArmSolver(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,37 +36,37 @@ public class MomentArmSolver extends Solver {
   }
 
   public static MomentArmSolver safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.MomentArmSolver_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.MomentArmSolver_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new MomentArmSolver(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.MomentArmSolver_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.MomentArmSolver_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.MomentArmSolver_getClassName();
+    return opensimModelSimulationJNI.MomentArmSolver_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.MomentArmSolver_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.MomentArmSolver_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new MomentArmSolver(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.MomentArmSolver_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.MomentArmSolver_getConcreteClassName(swigCPtr, this);
   }
 
   public MomentArmSolver(Model model) {
-    this(opensimModelJNI.new_MomentArmSolver(Model.getCPtr(model), model), true);
+    this(opensimModelSimulationJNI.new_MomentArmSolver(Model.getCPtr(model), model), true);
   }
 
   public double solve(State state, Coordinate coordinate, GeometryPath path) {
-    return opensimModelJNI.MomentArmSolver_solve__SWIG_0(swigCPtr, this, State.getCPtr(state), state, Coordinate.getCPtr(coordinate), coordinate, GeometryPath.getCPtr(path), path);
+    return opensimModelSimulationJNI.MomentArmSolver_solve__SWIG_0(swigCPtr, this, State.getCPtr(state), state, Coordinate.getCPtr(coordinate), coordinate, GeometryPath.getCPtr(path), path);
   }
 
   public double solve(State state, Coordinate coordinate, ArrayPointForceDirection pfds) {
-    return opensimModelJNI.MomentArmSolver_solve__SWIG_1(swigCPtr, this, State.getCPtr(state), state, Coordinate.getCPtr(coordinate), coordinate, ArrayPointForceDirection.getCPtr(pfds), pfds);
+    return opensimModelSimulationJNI.MomentArmSolver_solve__SWIG_1(swigCPtr, this, State.getCPtr(state), state, Coordinate.getCPtr(coordinate), coordinate, ArrayPointForceDirection.getCPtr(pfds), pfds);
   }
 
 }

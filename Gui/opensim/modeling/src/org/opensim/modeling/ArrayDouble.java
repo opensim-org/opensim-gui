@@ -29,7 +29,7 @@ public class ArrayDouble {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ArrayDouble(swigCPtr);
+        opensimModelCommonJNI.delete_ArrayDouble(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -44,7 +44,9 @@ public class ArrayDouble {
           workString = workString.substring(liveStart+1, liveEnd);
       }
       else if (liveStart!=liveEnd){
-          //throw new ParseException("Illegal format: Expect space separated values, optionally between matched parentheses", liveEnd);
+          // throw new ParseException("Illegal format: Expect space separated" +
+          //                          " values, optionally between matched " +
+          //                          "parentheses", liveEnd);
           return;
       }
       String[] splits = workString.split(" ");
@@ -56,139 +58,139 @@ public class ArrayDouble {
 	}
 
   public ArrayDouble(double aDefaultValue, int aSize, int aCapacity) {
-    this(opensimModelJNI.new_ArrayDouble__SWIG_0(aDefaultValue, aSize, aCapacity), true);
+    this(opensimModelCommonJNI.new_ArrayDouble__SWIG_0(aDefaultValue, aSize, aCapacity), true);
   }
 
   public ArrayDouble(double aDefaultValue, int aSize) {
-    this(opensimModelJNI.new_ArrayDouble__SWIG_1(aDefaultValue, aSize), true);
+    this(opensimModelCommonJNI.new_ArrayDouble__SWIG_1(aDefaultValue, aSize), true);
   }
 
   public ArrayDouble(double aDefaultValue) {
-    this(opensimModelJNI.new_ArrayDouble__SWIG_2(aDefaultValue), true);
+    this(opensimModelCommonJNI.new_ArrayDouble__SWIG_2(aDefaultValue), true);
   }
 
   public ArrayDouble() {
-    this(opensimModelJNI.new_ArrayDouble__SWIG_3(), true);
+    this(opensimModelCommonJNI.new_ArrayDouble__SWIG_3(), true);
   }
 
   public ArrayDouble(ArrayDouble aArray) {
-    this(opensimModelJNI.new_ArrayDouble__SWIG_4(ArrayDouble.getCPtr(aArray), aArray), true);
+    this(opensimModelCommonJNI.new_ArrayDouble__SWIG_4(ArrayDouble.getCPtr(aArray), aArray), true);
   }
 
   public boolean arrayEquals(ArrayDouble aArray) {
-    return opensimModelJNI.ArrayDouble_arrayEquals(swigCPtr, this, ArrayDouble.getCPtr(aArray), aArray);
+    return opensimModelCommonJNI.ArrayDouble_arrayEquals(swigCPtr, this, ArrayDouble.getCPtr(aArray), aArray);
   }
 
   public void trim() {
-    opensimModelJNI.ArrayDouble_trim(swigCPtr, this);
+    opensimModelCommonJNI.ArrayDouble_trim(swigCPtr, this);
   }
 
   public boolean setSize(int aSize) {
-    return opensimModelJNI.ArrayDouble_setSize(swigCPtr, this, aSize);
+    return opensimModelCommonJNI.ArrayDouble_setSize(swigCPtr, this, aSize);
   }
 
   public int getSize() {
-    return opensimModelJNI.ArrayDouble_getSize(swigCPtr, this);
+    return opensimModelCommonJNI.ArrayDouble_getSize(swigCPtr, this);
   }
 
   public int size() {
-    return opensimModelJNI.ArrayDouble_size(swigCPtr, this);
+    return opensimModelCommonJNI.ArrayDouble_size(swigCPtr, this);
   }
 
   public int append(double aValue) {
-    return opensimModelJNI.ArrayDouble_append__SWIG_0(swigCPtr, this, aValue);
+    return opensimModelCommonJNI.ArrayDouble_append__SWIG_0(swigCPtr, this, aValue);
   }
 
   public int append(ArrayDouble aArray) {
-    return opensimModelJNI.ArrayDouble_append__SWIG_1(swigCPtr, this, ArrayDouble.getCPtr(aArray), aArray);
+    return opensimModelCommonJNI.ArrayDouble_append__SWIG_1(swigCPtr, this, ArrayDouble.getCPtr(aArray), aArray);
   }
 
   public int insert(int aIndex, double aValue) {
-    return opensimModelJNI.ArrayDouble_insert(swigCPtr, this, aIndex, aValue);
+    return opensimModelCommonJNI.ArrayDouble_insert(swigCPtr, this, aIndex, aValue);
   }
 
   public int remove(int aIndex) {
-    return opensimModelJNI.ArrayDouble_remove(swigCPtr, this, aIndex);
+    return opensimModelCommonJNI.ArrayDouble_remove(swigCPtr, this, aIndex);
   }
 
   public void set(int aIndex, double aValue) {
-    opensimModelJNI.ArrayDouble_set(swigCPtr, this, aIndex, aValue);
+    opensimModelCommonJNI.ArrayDouble_set(swigCPtr, this, aIndex, aValue);
   }
 
   public double get(int aIndex) {
-    return opensimModelJNI.ArrayDouble_get(swigCPtr, this, aIndex);
+    return opensimModelCommonJNI.ArrayDouble_get(swigCPtr, this, aIndex);
   }
 
   public double getitem(int index) {
-    return opensimModelJNI.ArrayDouble_getitem(swigCPtr, this, index);
+    return opensimModelCommonJNI.ArrayDouble_getitem(swigCPtr, this, index);
   }
 
   public void setitem(int index, double val) {
-    opensimModelJNI.ArrayDouble_setitem(swigCPtr, this, index, val);
+    opensimModelCommonJNI.ArrayDouble_setitem(swigCPtr, this, index, val);
   }
 
   public double getLast() {
-    return opensimModelJNI.ArrayDouble_getLast(swigCPtr, this);
+    return opensimModelCommonJNI.ArrayDouble_getLast(swigCPtr, this);
   }
 
   public int findIndex(double aValue) {
-    return opensimModelJNI.ArrayDouble_findIndex(swigCPtr, this, aValue);
+    return opensimModelCommonJNI.ArrayDouble_findIndex(swigCPtr, this, aValue);
   }
 
   public int rfindIndex(double aValue) {
-    return opensimModelJNI.ArrayDouble_rfindIndex(swigCPtr, this, aValue);
+    return opensimModelCommonJNI.ArrayDouble_rfindIndex(swigCPtr, this, aValue);
   }
 
   public int searchBinary(double aValue, boolean aFindFirst, int aLo, int aHi) {
-    return opensimModelJNI.ArrayDouble_searchBinary__SWIG_0(swigCPtr, this, aValue, aFindFirst, aLo, aHi);
+    return opensimModelCommonJNI.ArrayDouble_searchBinary__SWIG_0(swigCPtr, this, aValue, aFindFirst, aLo, aHi);
   }
 
   public int searchBinary(double aValue, boolean aFindFirst, int aLo) {
-    return opensimModelJNI.ArrayDouble_searchBinary__SWIG_1(swigCPtr, this, aValue, aFindFirst, aLo);
+    return opensimModelCommonJNI.ArrayDouble_searchBinary__SWIG_1(swigCPtr, this, aValue, aFindFirst, aLo);
   }
 
   public int searchBinary(double aValue, boolean aFindFirst) {
-    return opensimModelJNI.ArrayDouble_searchBinary__SWIG_2(swigCPtr, this, aValue, aFindFirst);
+    return opensimModelCommonJNI.ArrayDouble_searchBinary__SWIG_2(swigCPtr, this, aValue, aFindFirst);
   }
 
   public int searchBinary(double aValue) {
-    return opensimModelJNI.ArrayDouble_searchBinary__SWIG_3(swigCPtr, this, aValue);
+    return opensimModelCommonJNI.ArrayDouble_searchBinary__SWIG_3(swigCPtr, this, aValue);
   }
 
   public void setValues(double[] dValues, int size) {
-    opensimModelJNI.ArrayDouble_setValues(swigCPtr, this, dValues, size);
+    opensimModelCommonJNI.ArrayDouble_setValues(swigCPtr, this, dValues, size);
   }
 
   public Vec3 getAsVec3() {
-    return new Vec3(opensimModelJNI.ArrayDouble_getAsVec3(swigCPtr, this), true);
+    return new Vec3(opensimModelCommonJNI.ArrayDouble_getAsVec3(swigCPtr, this), true);
   }
 
   public static Vec3 createVec3(double e1, double e2, double e3) {
-    return new Vec3(opensimModelJNI.ArrayDouble_createVec3__SWIG_0(e1, e2, e3), true);
+    return new Vec3(opensimModelCommonJNI.ArrayDouble_createVec3__SWIG_0(e1, e2, e3), true);
   }
 
   public static Vec3 createVec3(double e1) {
-    return new Vec3(opensimModelJNI.ArrayDouble_createVec3__SWIG_1(e1), true);
+    return new Vec3(opensimModelCommonJNI.ArrayDouble_createVec3__SWIG_1(e1), true);
   }
 
   public static Vec3 createVec3(double[] es) {
-    return new Vec3(opensimModelJNI.ArrayDouble_createVec3__SWIG_2(es), true);
+    return new Vec3(opensimModelCommonJNI.ArrayDouble_createVec3__SWIG_2(es), true);
   }
 
   public Vector getAsVector() {
-    return new Vector(opensimModelJNI.ArrayDouble_getAsVector(swigCPtr, this), true);
+    return new Vector(opensimModelCommonJNI.ArrayDouble_getAsVector(swigCPtr, this), true);
   }
 
   public void populateFromVector(Vector aVector) {
-    opensimModelJNI.ArrayDouble_populateFromVector(swigCPtr, this, Vector.getCPtr(aVector), aVector);
+    opensimModelCommonJNI.ArrayDouble_populateFromVector(swigCPtr, this, Vector.getCPtr(aVector), aVector);
   }
 
   public static ArrayDouble getValuesFromVec3(Vec3 vec3) {
-    return new ArrayDouble(opensimModelJNI.ArrayDouble_getValuesFromVec3(Vec3.getCPtr(vec3), vec3), true);
+    return new ArrayDouble(opensimModelCommonJNI.ArrayDouble_getValuesFromVec3(Vec3.getCPtr(vec3), vec3), true);
   }
 
   public String toString() {
-    return opensimModelJNI.ArrayDouble_toString(swigCPtr, this);
+    return opensimModelCommonJNI.ArrayDouble_toString(swigCPtr, this);
   }
 
 }

@@ -12,7 +12,7 @@ public class SetMarkers extends OpenSimObject {
   private transient long swigCPtr;
 
   public SetMarkers(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.SetMarkers_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.SetMarkers_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class SetMarkers extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_SetMarkers(swigCPtr);
+        opensimModelSimulationJNI.delete_SetMarkers(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,158 +36,158 @@ public class SetMarkers extends OpenSimObject {
   }
 
   public static SetMarkers safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.SetMarkers_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.SetMarkers_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new SetMarkers(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.SetMarkers_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.SetMarkers_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.SetMarkers_getClassName();
+    return opensimModelSimulationJNI.SetMarkers_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.SetMarkers_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.SetMarkers_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new SetMarkers(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.SetMarkers_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.SetMarkers_getConcreteClassName(swigCPtr, this);
   }
 
   public SetMarkers() {
-    this(opensimModelJNI.new_SetMarkers__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_SetMarkers__SWIG_0(), true);
   }
 
   public SetMarkers(String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelJNI.new_SetMarkers__SWIG_1(aFileName, aUpdateFromXMLNode), true);
+    this(opensimModelSimulationJNI.new_SetMarkers__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
   public SetMarkers(String aFileName) {
-    this(opensimModelJNI.new_SetMarkers__SWIG_2(aFileName), true);
+    this(opensimModelSimulationJNI.new_SetMarkers__SWIG_2(aFileName), true);
   }
 
   public SetMarkers(SetMarkers aSet) {
-    this(opensimModelJNI.new_SetMarkers__SWIG_3(SetMarkers.getCPtr(aSet), aSet), true);
+    this(opensimModelSimulationJNI.new_SetMarkers__SWIG_3(SetMarkers.getCPtr(aSet), aSet), true);
   }
 
   public void setupGroups() {
-    opensimModelJNI.SetMarkers_setupGroups(swigCPtr, this);
+    opensimModelSimulationJNI.SetMarkers_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {
-    opensimModelJNI.SetMarkers_setMemoryOwner(swigCPtr, this, aTrueFalse);
+    opensimModelSimulationJNI.SetMarkers_setMemoryOwner(swigCPtr, this, aTrueFalse);
   }
 
   public boolean setSize(int aSize) {
-    return opensimModelJNI.SetMarkers_setSize(swigCPtr, this, aSize);
+    return opensimModelSimulationJNI.SetMarkers_setSize(swigCPtr, this, aSize);
   }
 
   public int getSize() {
-    return opensimModelJNI.SetMarkers_getSize(swigCPtr, this);
+    return opensimModelSimulationJNI.SetMarkers_getSize(swigCPtr, this);
   }
 
   public int getIndex(Marker aObject, int aStartIndex) {
-    return opensimModelJNI.SetMarkers_getIndex__SWIG_0(swigCPtr, this, Marker.getCPtr(aObject), aObject, aStartIndex);
+    return opensimModelSimulationJNI.SetMarkers_getIndex__SWIG_0(swigCPtr, this, Marker.getCPtr(aObject), aObject, aStartIndex);
   }
 
   public int getIndex(Marker aObject) {
-    return opensimModelJNI.SetMarkers_getIndex__SWIG_1(swigCPtr, this, Marker.getCPtr(aObject), aObject);
+    return opensimModelSimulationJNI.SetMarkers_getIndex__SWIG_1(swigCPtr, this, Marker.getCPtr(aObject), aObject);
   }
 
   public int getIndex(String aName, int aStartIndex) {
-    return opensimModelJNI.SetMarkers_getIndex__SWIG_2(swigCPtr, this, aName, aStartIndex);
+    return opensimModelSimulationJNI.SetMarkers_getIndex__SWIG_2(swigCPtr, this, aName, aStartIndex);
   }
 
   public int getIndex(String aName) {
-    return opensimModelJNI.SetMarkers_getIndex__SWIG_3(swigCPtr, this, aName);
+    return opensimModelSimulationJNI.SetMarkers_getIndex__SWIG_3(swigCPtr, this, aName);
   }
 
   public void getGroupNamesContaining(String aObjectName, ArrayStr rGroupNames) {
-    opensimModelJNI.SetMarkers_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
+    opensimModelSimulationJNI.SetMarkers_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
   public boolean adoptAndAppend(Marker aObject) {
-    return opensimModelJNI.SetMarkers_adoptAndAppend(swigCPtr, this, Marker.getCPtr(aObject), aObject);
+    return opensimModelSimulationJNI.SetMarkers_adoptAndAppend(swigCPtr, this, Marker.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(Marker aObject) {
-    return opensimModelJNI.SetMarkers_cloneAndAppend(swigCPtr, this, Marker.getCPtr(aObject), aObject);
+    return opensimModelSimulationJNI.SetMarkers_cloneAndAppend(swigCPtr, this, Marker.getCPtr(aObject), aObject);
   }
 
   public boolean insert(int aIndex, Marker aObject) {
-    return opensimModelJNI.SetMarkers_insert(swigCPtr, this, aIndex, Marker.getCPtr(aObject), aObject);
+    return opensimModelSimulationJNI.SetMarkers_insert(swigCPtr, this, aIndex, Marker.getCPtr(aObject), aObject);
   }
 
   public boolean remove(int aIndex) {
-    return opensimModelJNI.SetMarkers_remove__SWIG_0(swigCPtr, this, aIndex);
+    return opensimModelSimulationJNI.SetMarkers_remove__SWIG_0(swigCPtr, this, aIndex);
   }
 
   public boolean remove(Marker aObject) {
-    return opensimModelJNI.SetMarkers_remove__SWIG_1(swigCPtr, this, Marker.getCPtr(aObject), aObject);
+    return opensimModelSimulationJNI.SetMarkers_remove__SWIG_1(swigCPtr, this, Marker.getCPtr(aObject), aObject);
   }
 
   public void clearAndDestroy() {
-    opensimModelJNI.SetMarkers_clearAndDestroy(swigCPtr, this);
+    opensimModelSimulationJNI.SetMarkers_clearAndDestroy(swigCPtr, this);
   }
 
   public boolean set(int aIndex, Marker aObject, boolean preserveGroups) {
-    return opensimModelJNI.SetMarkers_set__SWIG_0(swigCPtr, this, aIndex, Marker.getCPtr(aObject), aObject, preserveGroups);
+    return opensimModelSimulationJNI.SetMarkers_set__SWIG_0(swigCPtr, this, aIndex, Marker.getCPtr(aObject), aObject, preserveGroups);
   }
 
   public boolean set(int aIndex, Marker aObject) {
-    return opensimModelJNI.SetMarkers_set__SWIG_1(swigCPtr, this, aIndex, Marker.getCPtr(aObject), aObject);
+    return opensimModelSimulationJNI.SetMarkers_set__SWIG_1(swigCPtr, this, aIndex, Marker.getCPtr(aObject), aObject);
   }
 
   public Marker get(int aIndex) {
-    return new Marker(opensimModelJNI.SetMarkers_get__SWIG_0(swigCPtr, this, aIndex), false);
+    return new Marker(opensimModelSimulationJNI.SetMarkers_get__SWIG_0(swigCPtr, this, aIndex), false);
   }
 
   public Marker get(String aName) {
-    return new Marker(opensimModelJNI.SetMarkers_get__SWIG_1(swigCPtr, this, aName), false);
+    return new Marker(opensimModelSimulationJNI.SetMarkers_get__SWIG_1(swigCPtr, this, aName), false);
   }
 
   public boolean contains(String aName) {
-    return opensimModelJNI.SetMarkers_contains(swigCPtr, this, aName);
+    return opensimModelSimulationJNI.SetMarkers_contains(swigCPtr, this, aName);
   }
 
   public void getNames(ArrayStr rNames) {
-    opensimModelJNI.SetMarkers_getNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
+    opensimModelSimulationJNI.SetMarkers_getNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
   }
 
   public int getNumGroups() {
-    return opensimModelJNI.SetMarkers_getNumGroups(swigCPtr, this);
+    return opensimModelSimulationJNI.SetMarkers_getNumGroups(swigCPtr, this);
   }
 
   public void addGroup(String aGroupName) {
-    opensimModelJNI.SetMarkers_addGroup(swigCPtr, this, aGroupName);
+    opensimModelSimulationJNI.SetMarkers_addGroup(swigCPtr, this, aGroupName);
   }
 
   public void removeGroup(String aGroupName) {
-    opensimModelJNI.SetMarkers_removeGroup(swigCPtr, this, aGroupName);
+    opensimModelSimulationJNI.SetMarkers_removeGroup(swigCPtr, this, aGroupName);
   }
 
   public void renameGroup(String oldGroupName, String newGroupName) {
-    opensimModelJNI.SetMarkers_renameGroup(swigCPtr, this, oldGroupName, newGroupName);
+    opensimModelSimulationJNI.SetMarkers_renameGroup(swigCPtr, this, oldGroupName, newGroupName);
   }
 
   public void addObjectToGroup(String aGroupName, String aObjectName) {
-    opensimModelJNI.SetMarkers_addObjectToGroup(swigCPtr, this, aGroupName, aObjectName);
+    opensimModelSimulationJNI.SetMarkers_addObjectToGroup(swigCPtr, this, aGroupName, aObjectName);
   }
 
   public void getGroupNames(ArrayStr rGroupNames) {
-    opensimModelJNI.SetMarkers_getGroupNames(swigCPtr, this, ArrayStr.getCPtr(rGroupNames), rGroupNames);
+    opensimModelSimulationJNI.SetMarkers_getGroupNames(swigCPtr, this, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
   public ObjectGroup getGroup(String aGroupName) {
-    long cPtr = opensimModelJNI.SetMarkers_getGroup__SWIG_0(swigCPtr, this, aGroupName);
+    long cPtr = opensimModelSimulationJNI.SetMarkers_getGroup__SWIG_0(swigCPtr, this, aGroupName);
     return (cPtr == 0) ? null : new ObjectGroup(cPtr, false);
   }
 
   public ObjectGroup getGroup(int aIndex) {
-    long cPtr = opensimModelJNI.SetMarkers_getGroup__SWIG_1(swigCPtr, this, aIndex);
+    long cPtr = opensimModelSimulationJNI.SetMarkers_getGroup__SWIG_1(swigCPtr, this, aIndex);
     return (cPtr == 0) ? null : new ObjectGroup(cPtr, false);
   }
 

@@ -12,12 +12,12 @@ public class Stage {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  public Stage(long cPtr, boolean cMemoryOwn) {
+  protected Stage(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(Stage obj) {
+  protected static long getCPtr(Stage obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,56 +29,56 @@ public class Stage {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_Stage(swigCPtr);
+        opensimSimbodyJNI.delete_Stage(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public Stage() {
-    this(opensimModelJNI.new_Stage__SWIG_0(), true);
+    this(opensimSimbodyJNI.new_Stage__SWIG_0(), true);
   }
 
   public Stage(int l) {
-    this(opensimModelJNI.new_Stage__SWIG_1(l), true);
+    this(opensimSimbodyJNI.new_Stage__SWIG_1(l), true);
   }
 
   public Stage next() {
-    return new Stage(opensimModelJNI.Stage_next(swigCPtr, this), true);
+    return new Stage(opensimSimbodyJNI.Stage_next(swigCPtr, this), true);
   }
 
   public Stage prev() {
-    return new Stage(opensimModelJNI.Stage_prev(swigCPtr, this), true);
+    return new Stage(opensimSimbodyJNI.Stage_prev(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_String getName() {
-    return new SWIGTYPE_p_String(opensimModelJNI.Stage_getName(swigCPtr, this), true);
+    return new SWIGTYPE_p_String(opensimSimbodyJNI.Stage_getName(swigCPtr, this), true);
   }
 
   public void invalidate(Stage tooHigh) {
-    opensimModelJNI.Stage_invalidate(swigCPtr, this, Stage.getCPtr(tooHigh), tooHigh);
+    opensimSimbodyJNI.Stage_invalidate(swigCPtr, this, Stage.getCPtr(tooHigh), tooHigh);
   }
 
   public boolean isInRuntimeRange() {
-    return opensimModelJNI.Stage_isInRuntimeRange(swigCPtr, this);
+    return opensimSimbodyJNI.Stage_isInRuntimeRange(swigCPtr, this);
   }
 
   public final static class Level {
-    public final static Stage.Level Empty = new Stage.Level("Empty", opensimModelJNI.Stage_Empty_get());
-    public final static Stage.Level Topology = new Stage.Level("Topology", opensimModelJNI.Stage_Topology_get());
-    public final static Stage.Level Model = new Stage.Level("Model", opensimModelJNI.Stage_Model_get());
-    public final static Stage.Level Instance = new Stage.Level("Instance", opensimModelJNI.Stage_Instance_get());
-    public final static Stage.Level Time = new Stage.Level("Time", opensimModelJNI.Stage_Time_get());
-    public final static Stage.Level Position = new Stage.Level("Position", opensimModelJNI.Stage_Position_get());
-    public final static Stage.Level Velocity = new Stage.Level("Velocity", opensimModelJNI.Stage_Velocity_get());
-    public final static Stage.Level Dynamics = new Stage.Level("Dynamics", opensimModelJNI.Stage_Dynamics_get());
-    public final static Stage.Level Acceleration = new Stage.Level("Acceleration", opensimModelJNI.Stage_Acceleration_get());
-    public final static Stage.Level Report = new Stage.Level("Report", opensimModelJNI.Stage_Report_get());
-    public final static Stage.Level Infinity = new Stage.Level("Infinity", opensimModelJNI.Stage_Infinity_get());
-    public final static Stage.Level LowestValid = new Stage.Level("LowestValid", opensimModelJNI.Stage_LowestValid_get());
-    public final static Stage.Level HighestValid = new Stage.Level("HighestValid", opensimModelJNI.Stage_HighestValid_get());
-    public final static Stage.Level LowestRuntime = new Stage.Level("LowestRuntime", opensimModelJNI.Stage_LowestRuntime_get());
-    public final static Stage.Level HighestRuntime = new Stage.Level("HighestRuntime", opensimModelJNI.Stage_HighestRuntime_get());
+    public final static Stage.Level Empty = new Stage.Level("Empty", opensimSimbodyJNI.Stage_Empty_get());
+    public final static Stage.Level Topology = new Stage.Level("Topology", opensimSimbodyJNI.Stage_Topology_get());
+    public final static Stage.Level Model = new Stage.Level("Model", opensimSimbodyJNI.Stage_Model_get());
+    public final static Stage.Level Instance = new Stage.Level("Instance", opensimSimbodyJNI.Stage_Instance_get());
+    public final static Stage.Level Time = new Stage.Level("Time", opensimSimbodyJNI.Stage_Time_get());
+    public final static Stage.Level Position = new Stage.Level("Position", opensimSimbodyJNI.Stage_Position_get());
+    public final static Stage.Level Velocity = new Stage.Level("Velocity", opensimSimbodyJNI.Stage_Velocity_get());
+    public final static Stage.Level Dynamics = new Stage.Level("Dynamics", opensimSimbodyJNI.Stage_Dynamics_get());
+    public final static Stage.Level Acceleration = new Stage.Level("Acceleration", opensimSimbodyJNI.Stage_Acceleration_get());
+    public final static Stage.Level Report = new Stage.Level("Report", opensimSimbodyJNI.Stage_Report_get());
+    public final static Stage.Level Infinity = new Stage.Level("Infinity", opensimSimbodyJNI.Stage_Infinity_get());
+    public final static Stage.Level LowestValid = new Stage.Level("LowestValid", opensimSimbodyJNI.Stage_LowestValid_get());
+    public final static Stage.Level HighestValid = new Stage.Level("HighestValid", opensimSimbodyJNI.Stage_HighestValid_get());
+    public final static Stage.Level LowestRuntime = new Stage.Level("LowestRuntime", opensimSimbodyJNI.Stage_LowestRuntime_get());
+    public final static Stage.Level HighestRuntime = new Stage.Level("HighestRuntime", opensimSimbodyJNI.Stage_HighestRuntime_get());
 
     public final int swigValue() {
       return swigValue;
@@ -120,7 +120,7 @@ public class Stage {
     private final String swigName;
   }
 
-  public final static int NValid = opensimModelJNI.Stage_NValid_get();
-  public final static int NRuntime = opensimModelJNI.Stage_NRuntime_get();
+  public final static int NValid = opensimSimbodyJNI.Stage_NValid_get();
+  public final static int NRuntime = opensimSimbodyJNI.Stage_NRuntime_get();
 
 }

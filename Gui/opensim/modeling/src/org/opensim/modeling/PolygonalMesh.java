@@ -12,12 +12,12 @@ public class PolygonalMesh {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  public PolygonalMesh(long cPtr, boolean cMemoryOwn) {
+  protected PolygonalMesh(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(PolygonalMesh obj) {
+  protected static long getCPtr(PolygonalMesh obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,82 +29,82 @@ public class PolygonalMesh {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_PolygonalMesh(swigCPtr);
+        opensimSimbodyJNI.delete_PolygonalMesh(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public PolygonalMesh() {
-    this(opensimModelJNI.new_PolygonalMesh(), true);
+    this(opensimSimbodyJNI.new_PolygonalMesh(), true);
   }
 
   public static PolygonalMesh createSphereMesh(double radius, int resolution) {
-    return new PolygonalMesh(opensimModelJNI.PolygonalMesh_createSphereMesh__SWIG_0(radius, resolution), true);
+    return new PolygonalMesh(opensimSimbodyJNI.PolygonalMesh_createSphereMesh__SWIG_0(radius, resolution), true);
   }
 
   public static PolygonalMesh createSphereMesh(double radius) {
-    return new PolygonalMesh(opensimModelJNI.PolygonalMesh_createSphereMesh__SWIG_1(radius), true);
+    return new PolygonalMesh(opensimSimbodyJNI.PolygonalMesh_createSphereMesh__SWIG_1(radius), true);
   }
 
   public static PolygonalMesh createBrickMesh(Vec3 halfDims, int resolution) {
-    return new PolygonalMesh(opensimModelJNI.PolygonalMesh_createBrickMesh__SWIG_0(Vec3.getCPtr(halfDims), halfDims, resolution), true);
+    return new PolygonalMesh(opensimSimbodyJNI.PolygonalMesh_createBrickMesh__SWIG_0(Vec3.getCPtr(halfDims), halfDims, resolution), true);
   }
 
   public static PolygonalMesh createBrickMesh(Vec3 halfDims) {
-    return new PolygonalMesh(opensimModelJNI.PolygonalMesh_createBrickMesh__SWIG_1(Vec3.getCPtr(halfDims), halfDims), true);
+    return new PolygonalMesh(opensimSimbodyJNI.PolygonalMesh_createBrickMesh__SWIG_1(Vec3.getCPtr(halfDims), halfDims), true);
   }
 
   public static PolygonalMesh createCylinderMesh(UnitVec3 axis, double radius, double halfLength, int resolution) {
-    return new PolygonalMesh(opensimModelJNI.PolygonalMesh_createCylinderMesh__SWIG_0(UnitVec3.getCPtr(axis), axis, radius, halfLength, resolution), true);
+    return new PolygonalMesh(opensimSimbodyJNI.PolygonalMesh_createCylinderMesh__SWIG_0(UnitVec3.getCPtr(axis), axis, radius, halfLength, resolution), true);
   }
 
   public static PolygonalMesh createCylinderMesh(UnitVec3 axis, double radius, double halfLength) {
-    return new PolygonalMesh(opensimModelJNI.PolygonalMesh_createCylinderMesh__SWIG_1(UnitVec3.getCPtr(axis), axis, radius, halfLength), true);
+    return new PolygonalMesh(opensimSimbodyJNI.PolygonalMesh_createCylinderMesh__SWIG_1(UnitVec3.getCPtr(axis), axis, radius, halfLength), true);
   }
 
   public void clear() {
-    opensimModelJNI.PolygonalMesh_clear(swigCPtr, this);
+    opensimSimbodyJNI.PolygonalMesh_clear(swigCPtr, this);
   }
 
   public int getNumFaces() {
-    return opensimModelJNI.PolygonalMesh_getNumFaces(swigCPtr, this);
+    return opensimSimbodyJNI.PolygonalMesh_getNumFaces(swigCPtr, this);
   }
 
   public int getNumVertices() {
-    return opensimModelJNI.PolygonalMesh_getNumVertices(swigCPtr, this);
+    return opensimSimbodyJNI.PolygonalMesh_getNumVertices(swigCPtr, this);
   }
 
   public Vec3 getVertexPosition(int vertex) {
-    return new Vec3(opensimModelJNI.PolygonalMesh_getVertexPosition(swigCPtr, this, vertex), false);
+    return new Vec3(opensimSimbodyJNI.PolygonalMesh_getVertexPosition(swigCPtr, this, vertex), false);
   }
 
   public int getNumVerticesForFace(int face) {
-    return opensimModelJNI.PolygonalMesh_getNumVerticesForFace(swigCPtr, this, face);
+    return opensimSimbodyJNI.PolygonalMesh_getNumVerticesForFace(swigCPtr, this, face);
   }
 
   public int getFaceVertex(int face, int vertex) {
-    return opensimModelJNI.PolygonalMesh_getFaceVertex(swigCPtr, this, face, vertex);
+    return opensimSimbodyJNI.PolygonalMesh_getFaceVertex(swigCPtr, this, face, vertex);
   }
 
   public int addVertex(Vec3 position) {
-    return opensimModelJNI.PolygonalMesh_addVertex(swigCPtr, this, Vec3.getCPtr(position), position);
+    return opensimSimbodyJNI.PolygonalMesh_addVertex(swigCPtr, this, Vec3.getCPtr(position), position);
   }
 
   public int addFace(SWIGTYPE_p_SimTK__Array_T_int_unsigned_int_t vertices) {
-    return opensimModelJNI.PolygonalMesh_addFace(swigCPtr, this, SWIGTYPE_p_SimTK__Array_T_int_unsigned_int_t.getCPtr(vertices));
+    return opensimSimbodyJNI.PolygonalMesh_addFace(swigCPtr, this, SWIGTYPE_p_SimTK__Array_T_int_unsigned_int_t.getCPtr(vertices));
   }
 
   public PolygonalMesh scaleMesh(double scale) {
-    return new PolygonalMesh(opensimModelJNI.PolygonalMesh_scaleMesh(swigCPtr, this, scale), false);
+    return new PolygonalMesh(opensimSimbodyJNI.PolygonalMesh_scaleMesh(swigCPtr, this, scale), false);
   }
 
   public PolygonalMesh transformMesh(Transform X_AM) {
-    return new PolygonalMesh(opensimModelJNI.PolygonalMesh_transformMesh(swigCPtr, this, Transform.getCPtr(X_AM), X_AM), false);
+    return new PolygonalMesh(opensimSimbodyJNI.PolygonalMesh_transformMesh(swigCPtr, this, Transform.getCPtr(X_AM), X_AM), false);
   }
 
   public void loadFile(String pathname) {
-    opensimModelJNI.PolygonalMesh_loadFile(swigCPtr, this, pathname);
+    opensimSimbodyJNI.PolygonalMesh_loadFile(swigCPtr, this, pathname);
   }
 
 }

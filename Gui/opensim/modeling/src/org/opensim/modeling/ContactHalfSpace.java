@@ -12,7 +12,7 @@ public class ContactHalfSpace extends ContactGeometry {
   private transient long swigCPtr;
 
   public ContactHalfSpace(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ContactHalfSpace_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.ContactHalfSpace_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ContactHalfSpace extends ContactGeometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ContactHalfSpace(swigCPtr);
+        opensimModelSimulationJNI.delete_ContactHalfSpace(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,45 +36,45 @@ public class ContactHalfSpace extends ContactGeometry {
   }
 
   public static ContactHalfSpace safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ContactHalfSpace_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.ContactHalfSpace_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ContactHalfSpace(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.ContactHalfSpace_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.ContactHalfSpace_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.ContactHalfSpace_getClassName();
+    return opensimModelSimulationJNI.ContactHalfSpace_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.ContactHalfSpace_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.ContactHalfSpace_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ContactHalfSpace(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.ContactHalfSpace_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.ContactHalfSpace_getConcreteClassName(swigCPtr, this);
   }
 
   public ContactHalfSpace() {
-    this(opensimModelJNI.new_ContactHalfSpace__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_ContactHalfSpace__SWIG_0(), true);
   }
 
   public ContactHalfSpace(Vec3 location, Vec3 orientation, PhysicalFrame body) {
-    this(opensimModelJNI.new_ContactHalfSpace__SWIG_1(Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation, PhysicalFrame.getCPtr(body), body), true);
+    this(opensimModelSimulationJNI.new_ContactHalfSpace__SWIG_1(Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation, PhysicalFrame.getCPtr(body), body), true);
   }
 
   public ContactHalfSpace(Vec3 location, Vec3 orientation, PhysicalFrame body, String name) {
-    this(opensimModelJNI.new_ContactHalfSpace__SWIG_2(Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation, PhysicalFrame.getCPtr(body), body, name), true);
+    this(opensimModelSimulationJNI.new_ContactHalfSpace__SWIG_2(Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation, PhysicalFrame.getCPtr(body), body, name), true);
   }
 
   public ContactHalfSpace(ContactHalfSpace geom) {
-    this(opensimModelJNI.new_ContactHalfSpace__SWIG_3(ContactHalfSpace.getCPtr(geom), geom), true);
+    this(opensimModelSimulationJNI.new_ContactHalfSpace__SWIG_3(ContactHalfSpace.getCPtr(geom), geom), true);
   }
 
   public SWIGTYPE_p_SimTK__ContactGeometry createSimTKContactGeometry() {
-    return new SWIGTYPE_p_SimTK__ContactGeometry(opensimModelJNI.ContactHalfSpace_createSimTKContactGeometry(swigCPtr, this), true);
+    return new SWIGTYPE_p_SimTK__ContactGeometry(opensimModelSimulationJNI.ContactHalfSpace_createSimTKContactGeometry(swigCPtr, this), true);
   }
 
 }

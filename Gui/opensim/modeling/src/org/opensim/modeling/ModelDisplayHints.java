@@ -12,7 +12,7 @@ public class ModelDisplayHints extends OpenSimObject {
   private transient long swigCPtr;
 
   public ModelDisplayHints(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ModelDisplayHints_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.ModelDisplayHints_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ModelDisplayHints extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ModelDisplayHints(swigCPtr);
+        opensimModelSimulationJNI.delete_ModelDisplayHints(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,353 +36,353 @@ public class ModelDisplayHints extends OpenSimObject {
   }
 
   public static ModelDisplayHints safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ModelDisplayHints_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.ModelDisplayHints_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ModelDisplayHints(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.ModelDisplayHints_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.ModelDisplayHints_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.ModelDisplayHints_getClassName();
+    return opensimModelSimulationJNI.ModelDisplayHints_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.ModelDisplayHints_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.ModelDisplayHints_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ModelDisplayHints(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.ModelDisplayHints_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.ModelDisplayHints_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_show_wrap_geometry(ModelDisplayHints source) {
-    opensimModelJNI.ModelDisplayHints_copyProperty_show_wrap_geometry(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
+    opensimModelSimulationJNI.ModelDisplayHints_copyProperty_show_wrap_geometry(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
   }
 
   public boolean get_show_wrap_geometry(int i) {
-    return opensimModelJNI.ModelDisplayHints_get_show_wrap_geometry__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.ModelDisplayHints_get_show_wrap_geometry__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_bool upd_show_wrap_geometry(int i) {
-    return new SWIGTYPE_p_bool(opensimModelJNI.ModelDisplayHints_upd_show_wrap_geometry__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.ModelDisplayHints_upd_show_wrap_geometry__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_show_wrap_geometry(int i, boolean value) {
-    opensimModelJNI.ModelDisplayHints_set_show_wrap_geometry__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.ModelDisplayHints_set_show_wrap_geometry__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_show_wrap_geometry(boolean value) {
-    return opensimModelJNI.ModelDisplayHints_append_show_wrap_geometry(swigCPtr, this, value);
+    return opensimModelSimulationJNI.ModelDisplayHints_append_show_wrap_geometry(swigCPtr, this, value);
   }
 
   public void constructProperty_show_wrap_geometry(boolean initValue) {
-    opensimModelJNI.ModelDisplayHints_constructProperty_show_wrap_geometry(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.ModelDisplayHints_constructProperty_show_wrap_geometry(swigCPtr, this, initValue);
   }
 
   public boolean get_show_wrap_geometry() {
-    return opensimModelJNI.ModelDisplayHints_get_show_wrap_geometry__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.ModelDisplayHints_get_show_wrap_geometry__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_bool upd_show_wrap_geometry() {
-    return new SWIGTYPE_p_bool(opensimModelJNI.ModelDisplayHints_upd_show_wrap_geometry__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.ModelDisplayHints_upd_show_wrap_geometry__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_show_wrap_geometry(boolean value) {
-    opensimModelJNI.ModelDisplayHints_set_show_wrap_geometry__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.ModelDisplayHints_set_show_wrap_geometry__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_show_contact_geometry(ModelDisplayHints source) {
-    opensimModelJNI.ModelDisplayHints_copyProperty_show_contact_geometry(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
+    opensimModelSimulationJNI.ModelDisplayHints_copyProperty_show_contact_geometry(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
   }
 
   public boolean get_show_contact_geometry(int i) {
-    return opensimModelJNI.ModelDisplayHints_get_show_contact_geometry__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.ModelDisplayHints_get_show_contact_geometry__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_bool upd_show_contact_geometry(int i) {
-    return new SWIGTYPE_p_bool(opensimModelJNI.ModelDisplayHints_upd_show_contact_geometry__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.ModelDisplayHints_upd_show_contact_geometry__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_show_contact_geometry(int i, boolean value) {
-    opensimModelJNI.ModelDisplayHints_set_show_contact_geometry__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.ModelDisplayHints_set_show_contact_geometry__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_show_contact_geometry(boolean value) {
-    return opensimModelJNI.ModelDisplayHints_append_show_contact_geometry(swigCPtr, this, value);
+    return opensimModelSimulationJNI.ModelDisplayHints_append_show_contact_geometry(swigCPtr, this, value);
   }
 
   public void constructProperty_show_contact_geometry(boolean initValue) {
-    opensimModelJNI.ModelDisplayHints_constructProperty_show_contact_geometry(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.ModelDisplayHints_constructProperty_show_contact_geometry(swigCPtr, this, initValue);
   }
 
   public boolean get_show_contact_geometry() {
-    return opensimModelJNI.ModelDisplayHints_get_show_contact_geometry__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.ModelDisplayHints_get_show_contact_geometry__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_bool upd_show_contact_geometry() {
-    return new SWIGTYPE_p_bool(opensimModelJNI.ModelDisplayHints_upd_show_contact_geometry__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.ModelDisplayHints_upd_show_contact_geometry__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_show_contact_geometry(boolean value) {
-    opensimModelJNI.ModelDisplayHints_set_show_contact_geometry__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.ModelDisplayHints_set_show_contact_geometry__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_show_path_geometry(ModelDisplayHints source) {
-    opensimModelJNI.ModelDisplayHints_copyProperty_show_path_geometry(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
+    opensimModelSimulationJNI.ModelDisplayHints_copyProperty_show_path_geometry(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
   }
 
   public boolean get_show_path_geometry(int i) {
-    return opensimModelJNI.ModelDisplayHints_get_show_path_geometry__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.ModelDisplayHints_get_show_path_geometry__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_bool upd_show_path_geometry(int i) {
-    return new SWIGTYPE_p_bool(opensimModelJNI.ModelDisplayHints_upd_show_path_geometry__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.ModelDisplayHints_upd_show_path_geometry__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_show_path_geometry(int i, boolean value) {
-    opensimModelJNI.ModelDisplayHints_set_show_path_geometry__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.ModelDisplayHints_set_show_path_geometry__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_show_path_geometry(boolean value) {
-    return opensimModelJNI.ModelDisplayHints_append_show_path_geometry(swigCPtr, this, value);
+    return opensimModelSimulationJNI.ModelDisplayHints_append_show_path_geometry(swigCPtr, this, value);
   }
 
   public void constructProperty_show_path_geometry(boolean initValue) {
-    opensimModelJNI.ModelDisplayHints_constructProperty_show_path_geometry(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.ModelDisplayHints_constructProperty_show_path_geometry(swigCPtr, this, initValue);
   }
 
   public boolean get_show_path_geometry() {
-    return opensimModelJNI.ModelDisplayHints_get_show_path_geometry__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.ModelDisplayHints_get_show_path_geometry__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_bool upd_show_path_geometry() {
-    return new SWIGTYPE_p_bool(opensimModelJNI.ModelDisplayHints_upd_show_path_geometry__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.ModelDisplayHints_upd_show_path_geometry__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_show_path_geometry(boolean value) {
-    opensimModelJNI.ModelDisplayHints_set_show_path_geometry__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.ModelDisplayHints_set_show_path_geometry__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_show_path_points(ModelDisplayHints source) {
-    opensimModelJNI.ModelDisplayHints_copyProperty_show_path_points(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
+    opensimModelSimulationJNI.ModelDisplayHints_copyProperty_show_path_points(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
   }
 
   public boolean get_show_path_points(int i) {
-    return opensimModelJNI.ModelDisplayHints_get_show_path_points__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.ModelDisplayHints_get_show_path_points__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_bool upd_show_path_points(int i) {
-    return new SWIGTYPE_p_bool(opensimModelJNI.ModelDisplayHints_upd_show_path_points__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.ModelDisplayHints_upd_show_path_points__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_show_path_points(int i, boolean value) {
-    opensimModelJNI.ModelDisplayHints_set_show_path_points__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.ModelDisplayHints_set_show_path_points__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_show_path_points(boolean value) {
-    return opensimModelJNI.ModelDisplayHints_append_show_path_points(swigCPtr, this, value);
+    return opensimModelSimulationJNI.ModelDisplayHints_append_show_path_points(swigCPtr, this, value);
   }
 
   public void constructProperty_show_path_points(boolean initValue) {
-    opensimModelJNI.ModelDisplayHints_constructProperty_show_path_points(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.ModelDisplayHints_constructProperty_show_path_points(swigCPtr, this, initValue);
   }
 
   public boolean get_show_path_points() {
-    return opensimModelJNI.ModelDisplayHints_get_show_path_points__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.ModelDisplayHints_get_show_path_points__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_bool upd_show_path_points() {
-    return new SWIGTYPE_p_bool(opensimModelJNI.ModelDisplayHints_upd_show_path_points__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.ModelDisplayHints_upd_show_path_points__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_show_path_points(boolean value) {
-    opensimModelJNI.ModelDisplayHints_set_show_path_points__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.ModelDisplayHints_set_show_path_points__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_show_markers(ModelDisplayHints source) {
-    opensimModelJNI.ModelDisplayHints_copyProperty_show_markers(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
+    opensimModelSimulationJNI.ModelDisplayHints_copyProperty_show_markers(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
   }
 
   public boolean get_show_markers(int i) {
-    return opensimModelJNI.ModelDisplayHints_get_show_markers__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.ModelDisplayHints_get_show_markers__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_bool upd_show_markers(int i) {
-    return new SWIGTYPE_p_bool(opensimModelJNI.ModelDisplayHints_upd_show_markers__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.ModelDisplayHints_upd_show_markers__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_show_markers(int i, boolean value) {
-    opensimModelJNI.ModelDisplayHints_set_show_markers__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.ModelDisplayHints_set_show_markers__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_show_markers(boolean value) {
-    return opensimModelJNI.ModelDisplayHints_append_show_markers(swigCPtr, this, value);
+    return opensimModelSimulationJNI.ModelDisplayHints_append_show_markers(swigCPtr, this, value);
   }
 
   public void constructProperty_show_markers(boolean initValue) {
-    opensimModelJNI.ModelDisplayHints_constructProperty_show_markers(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.ModelDisplayHints_constructProperty_show_markers(swigCPtr, this, initValue);
   }
 
   public boolean get_show_markers() {
-    return opensimModelJNI.ModelDisplayHints_get_show_markers__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.ModelDisplayHints_get_show_markers__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_bool upd_show_markers() {
-    return new SWIGTYPE_p_bool(opensimModelJNI.ModelDisplayHints_upd_show_markers__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.ModelDisplayHints_upd_show_markers__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_show_markers(boolean value) {
-    opensimModelJNI.ModelDisplayHints_set_show_markers__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.ModelDisplayHints_set_show_markers__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_show_forces(ModelDisplayHints source) {
-    opensimModelJNI.ModelDisplayHints_copyProperty_show_forces(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
+    opensimModelSimulationJNI.ModelDisplayHints_copyProperty_show_forces(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
   }
 
   public boolean get_show_forces(int i) {
-    return opensimModelJNI.ModelDisplayHints_get_show_forces__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.ModelDisplayHints_get_show_forces__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_bool upd_show_forces(int i) {
-    return new SWIGTYPE_p_bool(opensimModelJNI.ModelDisplayHints_upd_show_forces__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.ModelDisplayHints_upd_show_forces__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_show_forces(int i, boolean value) {
-    opensimModelJNI.ModelDisplayHints_set_show_forces__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.ModelDisplayHints_set_show_forces__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_show_forces(boolean value) {
-    return opensimModelJNI.ModelDisplayHints_append_show_forces(swigCPtr, this, value);
+    return opensimModelSimulationJNI.ModelDisplayHints_append_show_forces(swigCPtr, this, value);
   }
 
   public void constructProperty_show_forces(boolean initValue) {
-    opensimModelJNI.ModelDisplayHints_constructProperty_show_forces(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.ModelDisplayHints_constructProperty_show_forces(swigCPtr, this, initValue);
   }
 
   public boolean get_show_forces() {
-    return opensimModelJNI.ModelDisplayHints_get_show_forces__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.ModelDisplayHints_get_show_forces__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_bool upd_show_forces() {
-    return new SWIGTYPE_p_bool(opensimModelJNI.ModelDisplayHints_upd_show_forces__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.ModelDisplayHints_upd_show_forces__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_show_forces(boolean value) {
-    opensimModelJNI.ModelDisplayHints_set_show_forces__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.ModelDisplayHints_set_show_forces__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_show_frames(ModelDisplayHints source) {
-    opensimModelJNI.ModelDisplayHints_copyProperty_show_frames(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
+    opensimModelSimulationJNI.ModelDisplayHints_copyProperty_show_frames(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
   }
 
   public boolean get_show_frames(int i) {
-    return opensimModelJNI.ModelDisplayHints_get_show_frames__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.ModelDisplayHints_get_show_frames__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_bool upd_show_frames(int i) {
-    return new SWIGTYPE_p_bool(opensimModelJNI.ModelDisplayHints_upd_show_frames__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.ModelDisplayHints_upd_show_frames__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_show_frames(int i, boolean value) {
-    opensimModelJNI.ModelDisplayHints_set_show_frames__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.ModelDisplayHints_set_show_frames__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_show_frames(boolean value) {
-    return opensimModelJNI.ModelDisplayHints_append_show_frames(swigCPtr, this, value);
+    return opensimModelSimulationJNI.ModelDisplayHints_append_show_frames(swigCPtr, this, value);
   }
 
   public void constructProperty_show_frames(boolean initValue) {
-    opensimModelJNI.ModelDisplayHints_constructProperty_show_frames(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.ModelDisplayHints_constructProperty_show_frames(swigCPtr, this, initValue);
   }
 
   public boolean get_show_frames() {
-    return opensimModelJNI.ModelDisplayHints_get_show_frames__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.ModelDisplayHints_get_show_frames__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_bool upd_show_frames() {
-    return new SWIGTYPE_p_bool(opensimModelJNI.ModelDisplayHints_upd_show_frames__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.ModelDisplayHints_upd_show_frames__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_show_frames(boolean value) {
-    opensimModelJNI.ModelDisplayHints_set_show_frames__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.ModelDisplayHints_set_show_frames__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_show_labels(ModelDisplayHints source) {
-    opensimModelJNI.ModelDisplayHints_copyProperty_show_labels(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
+    opensimModelSimulationJNI.ModelDisplayHints_copyProperty_show_labels(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
   }
 
   public boolean get_show_labels(int i) {
-    return opensimModelJNI.ModelDisplayHints_get_show_labels__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.ModelDisplayHints_get_show_labels__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_bool upd_show_labels(int i) {
-    return new SWIGTYPE_p_bool(opensimModelJNI.ModelDisplayHints_upd_show_labels__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.ModelDisplayHints_upd_show_labels__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_show_labels(int i, boolean value) {
-    opensimModelJNI.ModelDisplayHints_set_show_labels__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.ModelDisplayHints_set_show_labels__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_show_labels(boolean value) {
-    return opensimModelJNI.ModelDisplayHints_append_show_labels(swigCPtr, this, value);
+    return opensimModelSimulationJNI.ModelDisplayHints_append_show_labels(swigCPtr, this, value);
   }
 
   public void constructProperty_show_labels(boolean initValue) {
-    opensimModelJNI.ModelDisplayHints_constructProperty_show_labels(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.ModelDisplayHints_constructProperty_show_labels(swigCPtr, this, initValue);
   }
 
   public boolean get_show_labels() {
-    return opensimModelJNI.ModelDisplayHints_get_show_labels__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.ModelDisplayHints_get_show_labels__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_bool upd_show_labels() {
-    return new SWIGTYPE_p_bool(opensimModelJNI.ModelDisplayHints_upd_show_labels__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.ModelDisplayHints_upd_show_labels__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_show_labels(boolean value) {
-    opensimModelJNI.ModelDisplayHints_set_show_labels__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.ModelDisplayHints_set_show_labels__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_show_debug_geometry(ModelDisplayHints source) {
-    opensimModelJNI.ModelDisplayHints_copyProperty_show_debug_geometry(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
+    opensimModelSimulationJNI.ModelDisplayHints_copyProperty_show_debug_geometry(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
   }
 
   public boolean get_show_debug_geometry(int i) {
-    return opensimModelJNI.ModelDisplayHints_get_show_debug_geometry__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.ModelDisplayHints_get_show_debug_geometry__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_bool upd_show_debug_geometry(int i) {
-    return new SWIGTYPE_p_bool(opensimModelJNI.ModelDisplayHints_upd_show_debug_geometry__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.ModelDisplayHints_upd_show_debug_geometry__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_show_debug_geometry(int i, boolean value) {
-    opensimModelJNI.ModelDisplayHints_set_show_debug_geometry__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.ModelDisplayHints_set_show_debug_geometry__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_show_debug_geometry(boolean value) {
-    return opensimModelJNI.ModelDisplayHints_append_show_debug_geometry(swigCPtr, this, value);
+    return opensimModelSimulationJNI.ModelDisplayHints_append_show_debug_geometry(swigCPtr, this, value);
   }
 
   public void constructProperty_show_debug_geometry(boolean initValue) {
-    opensimModelJNI.ModelDisplayHints_constructProperty_show_debug_geometry(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.ModelDisplayHints_constructProperty_show_debug_geometry(swigCPtr, this, initValue);
   }
 
   public boolean get_show_debug_geometry() {
-    return opensimModelJNI.ModelDisplayHints_get_show_debug_geometry__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.ModelDisplayHints_get_show_debug_geometry__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_bool upd_show_debug_geometry() {
-    return new SWIGTYPE_p_bool(opensimModelJNI.ModelDisplayHints_upd_show_debug_geometry__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.ModelDisplayHints_upd_show_debug_geometry__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_show_debug_geometry(boolean value) {
-    opensimModelJNI.ModelDisplayHints_set_show_debug_geometry__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.ModelDisplayHints_set_show_debug_geometry__SWIG_1(swigCPtr, this, value);
   }
 
   public ModelDisplayHints() {
-    this(opensimModelJNI.new_ModelDisplayHints(), true);
+    this(opensimModelSimulationJNI.new_ModelDisplayHints(), true);
   }
 
 }

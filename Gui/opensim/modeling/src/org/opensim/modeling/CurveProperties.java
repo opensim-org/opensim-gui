@@ -12,7 +12,7 @@ public class CurveProperties extends OpenSimObject {
   private transient long swigCPtr;
 
   public CurveProperties(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.CurveProperties_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.CurveProperties_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class CurveProperties extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_CurveProperties(swigCPtr);
+        opensimModelSimulationJNI.delete_CurveProperties(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,65 +36,65 @@ public class CurveProperties extends OpenSimObject {
   }
 
   public static CurveProperties safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.CurveProperties_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.CurveProperties_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new CurveProperties(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.CurveProperties_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.CurveProperties_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.CurveProperties_getClassName();
+    return opensimModelSimulationJNI.CurveProperties_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.CurveProperties_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.CurveProperties_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new CurveProperties(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.CurveProperties_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.CurveProperties_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_thickness(CurveProperties source) {
-    opensimModelJNI.CurveProperties_copyProperty_thickness(swigCPtr, this, CurveProperties.getCPtr(source), source);
+    opensimModelSimulationJNI.CurveProperties_copyProperty_thickness(swigCPtr, this, CurveProperties.getCPtr(source), source);
   }
 
   public double get_thickness(int i) {
-    return opensimModelJNI.CurveProperties_get_thickness__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.CurveProperties_get_thickness__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_thickness(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.CurveProperties_upd_thickness__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.CurveProperties_upd_thickness__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_thickness(int i, double value) {
-    opensimModelJNI.CurveProperties_set_thickness__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.CurveProperties_set_thickness__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_thickness(double value) {
-    return opensimModelJNI.CurveProperties_append_thickness(swigCPtr, this, value);
+    return opensimModelSimulationJNI.CurveProperties_append_thickness(swigCPtr, this, value);
   }
 
   public void constructProperty_thickness(double initValue) {
-    opensimModelJNI.CurveProperties_constructProperty_thickness(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.CurveProperties_constructProperty_thickness(swigCPtr, this, initValue);
   }
 
   public double get_thickness() {
-    return opensimModelJNI.CurveProperties_get_thickness__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.CurveProperties_get_thickness__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_thickness() {
-    return new SWIGTYPE_p_double(opensimModelJNI.CurveProperties_upd_thickness__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.CurveProperties_upd_thickness__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_thickness(double value) {
-    opensimModelJNI.CurveProperties_set_thickness__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.CurveProperties_set_thickness__SWIG_1(swigCPtr, this, value);
   }
 
   public CurveProperties() {
-    this(opensimModelJNI.new_CurveProperties(), true);
+    this(opensimModelSimulationJNI.new_CurveProperties(), true);
   }
 
 }

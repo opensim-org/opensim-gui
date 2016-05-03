@@ -12,7 +12,7 @@ public class MarkersReference extends ReferenceVec3 {
   private transient long swigCPtr;
 
   public MarkersReference(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.MarkersReference_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.MarkersReference_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class MarkersReference extends ReferenceVec3 {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_MarkersReference(swigCPtr);
+        opensimModelSimulationJNI.delete_MarkersReference(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,101 +36,101 @@ public class MarkersReference extends ReferenceVec3 {
   }
 
   public static MarkersReference safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.MarkersReference_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.MarkersReference_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new MarkersReference(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.MarkersReference_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.MarkersReference_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.MarkersReference_getClassName();
+    return opensimModelSimulationJNI.MarkersReference_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.MarkersReference_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.MarkersReference_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new MarkersReference(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.MarkersReference_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.MarkersReference_getConcreteClassName(swigCPtr, this);
   }
 
   public MarkersReference() {
-    this(opensimModelJNI.new_MarkersReference__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_MarkersReference__SWIG_0(), true);
   }
 
   public MarkersReference(String filename, Units modelUnits) {
-    this(opensimModelJNI.new_MarkersReference__SWIG_1(filename, Units.getCPtr(modelUnits), modelUnits), true);
+    this(opensimModelSimulationJNI.new_MarkersReference__SWIG_1(filename, Units.getCPtr(modelUnits), modelUnits), true);
   }
 
   public MarkersReference(String filename) {
-    this(opensimModelJNI.new_MarkersReference__SWIG_2(filename), true);
+    this(opensimModelSimulationJNI.new_MarkersReference__SWIG_2(filename), true);
   }
 
-  public MarkersReference(MarkerData aMarkerData, SetMarkerWeights aMarkerWeightSet) {
-    this(opensimModelJNI.new_MarkersReference__SWIG_3(MarkerData.getCPtr(aMarkerData), aMarkerData, SetMarkerWeights.getCPtr(aMarkerWeightSet), aMarkerWeightSet), true);
+  public MarkersReference(MarkerData aMarkerData, SWIGTYPE_p_OpenSim__SetT_OpenSim__MarkerWeight_t aMarkerWeightSet) {
+    this(opensimModelSimulationJNI.new_MarkersReference__SWIG_3(MarkerData.getCPtr(aMarkerData), aMarkerData, SWIGTYPE_p_OpenSim__SetT_OpenSim__MarkerWeight_t.getCPtr(aMarkerWeightSet)), true);
   }
 
   public MarkersReference(MarkerData aMarkerData) {
-    this(opensimModelJNI.new_MarkersReference__SWIG_4(MarkerData.getCPtr(aMarkerData), aMarkerData), true);
+    this(opensimModelSimulationJNI.new_MarkersReference__SWIG_4(MarkerData.getCPtr(aMarkerData), aMarkerData), true);
   }
 
   public void copyData(MarkersReference aRef) {
-    opensimModelJNI.MarkersReference_copyData(swigCPtr, this, MarkersReference.getCPtr(aRef), aRef);
+    opensimModelSimulationJNI.MarkersReference_copyData(swigCPtr, this, MarkersReference.getCPtr(aRef), aRef);
   }
 
   public void loadMarkersFile(String markerFile, Units modelUnits) {
-    opensimModelJNI.MarkersReference_loadMarkersFile__SWIG_0(swigCPtr, this, markerFile, Units.getCPtr(modelUnits), modelUnits);
+    opensimModelSimulationJNI.MarkersReference_loadMarkersFile__SWIG_0(swigCPtr, this, markerFile, Units.getCPtr(modelUnits), modelUnits);
   }
 
   public void loadMarkersFile(String markerFile) {
-    opensimModelJNI.MarkersReference_loadMarkersFile__SWIG_1(swigCPtr, this, markerFile);
+    opensimModelSimulationJNI.MarkersReference_loadMarkersFile__SWIG_1(swigCPtr, this, markerFile);
   }
 
   public int getNumRefs() {
-    return opensimModelJNI.MarkersReference_getNumRefs(swigCPtr, this);
+    return opensimModelSimulationJNI.MarkersReference_getNumRefs(swigCPtr, this);
   }
 
   public Vec2 getValidTimeRange() {
-    return new Vec2(opensimModelJNI.MarkersReference_getValidTimeRange(swigCPtr, this), true);
+    return new Vec2(opensimModelSimulationJNI.MarkersReference_getValidTimeRange(swigCPtr, this), true);
   }
 
   public SimTKArrayString getNames() {
-    return new SimTKArrayString(opensimModelJNI.MarkersReference_getNames(swigCPtr, this), false);
+    return new SimTKArrayString(opensimModelSimulationJNI.MarkersReference_getNames(swigCPtr, this), false);
   }
 
   public void getValues(State s, SimTKArrayVec3 values) {
-    opensimModelJNI.MarkersReference_getValues(swigCPtr, this, State.getCPtr(s), s, SimTKArrayVec3.getCPtr(values), values);
+    opensimModelSimulationJNI.MarkersReference_getValues(swigCPtr, this, State.getCPtr(s), s, SimTKArrayVec3.getCPtr(values), values);
   }
 
   public void getSpeedValues(State s, SimTKArrayVec3 speedValues) {
-    opensimModelJNI.MarkersReference_getSpeedValues(swigCPtr, this, State.getCPtr(s), s, SimTKArrayVec3.getCPtr(speedValues), speedValues);
+    opensimModelSimulationJNI.MarkersReference_getSpeedValues(swigCPtr, this, State.getCPtr(s), s, SimTKArrayVec3.getCPtr(speedValues), speedValues);
   }
 
   public void getAccelerationValues(State s, SimTKArrayVec3 accValues) {
-    opensimModelJNI.MarkersReference_getAccelerationValues(swigCPtr, this, State.getCPtr(s), s, SimTKArrayVec3.getCPtr(accValues), accValues);
+    opensimModelSimulationJNI.MarkersReference_getAccelerationValues(swigCPtr, this, State.getCPtr(s), s, SimTKArrayVec3.getCPtr(accValues), accValues);
   }
 
   public void getWeights(State s, SimTKArrayDouble weights) {
-    opensimModelJNI.MarkersReference_getWeights(swigCPtr, this, State.getCPtr(s), s, SimTKArrayDouble.getCPtr(weights), weights);
+    opensimModelSimulationJNI.MarkersReference_getWeights(swigCPtr, this, State.getCPtr(s), s, SimTKArrayDouble.getCPtr(weights), weights);
   }
 
   public double getSamplingFrequency() {
-    return opensimModelJNI.MarkersReference_getSamplingFrequency(swigCPtr, this);
+    return opensimModelSimulationJNI.MarkersReference_getSamplingFrequency(swigCPtr, this);
   }
 
-  public SetMarkerWeights updMarkerWeightSet() {
-    return new SetMarkerWeights(opensimModelJNI.MarkersReference_updMarkerWeightSet(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__SetT_OpenSim__MarkerWeight_t updMarkerWeightSet() {
+    return new SWIGTYPE_p_OpenSim__SetT_OpenSim__MarkerWeight_t(opensimModelSimulationJNI.MarkersReference_updMarkerWeightSet(swigCPtr, this), false);
   }
 
-  public void setMarkerWeightSet(SetMarkerWeights markerWeights) {
-    opensimModelJNI.MarkersReference_setMarkerWeightSet(swigCPtr, this, SetMarkerWeights.getCPtr(markerWeights), markerWeights);
+  public void setMarkerWeightSet(SWIGTYPE_p_OpenSim__SetT_OpenSim__MarkerWeight_t markerWeights) {
+    opensimModelSimulationJNI.MarkersReference_setMarkerWeightSet(swigCPtr, this, SWIGTYPE_p_OpenSim__SetT_OpenSim__MarkerWeight_t.getCPtr(markerWeights));
   }
 
   public void setDefaultWeight(double weight) {
-    opensimModelJNI.MarkersReference_setDefaultWeight(swigCPtr, this, weight);
+    opensimModelSimulationJNI.MarkersReference_setDefaultWeight(swigCPtr, this, weight);
   }
 
 }

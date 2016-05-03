@@ -12,7 +12,7 @@ public class ComponentNotFoundOnSpecifiedPath extends OpenSimException {
   private transient long swigCPtr;
 
   public ComponentNotFoundOnSpecifiedPath(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ComponentNotFoundOnSpecifiedPath_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.ComponentNotFoundOnSpecifiedPath_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ComponentNotFoundOnSpecifiedPath extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ComponentNotFoundOnSpecifiedPath(swigCPtr);
+        opensimModelSimulationJNI.delete_ComponentNotFoundOnSpecifiedPath(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class ComponentNotFoundOnSpecifiedPath extends OpenSimException {
   }
 
   public ComponentNotFoundOnSpecifiedPath(String file, long line, String func, String toFindName, String toFindClassName, String thisName) {
-    this(opensimModelJNI.new_ComponentNotFoundOnSpecifiedPath(file, line, func, toFindName, toFindClassName, thisName), true);
+    this(opensimModelSimulationJNI.new_ComponentNotFoundOnSpecifiedPath(file, line, func, toFindName, toFindClassName, thisName), true);
   }
 
 }

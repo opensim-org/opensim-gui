@@ -12,7 +12,7 @@ public class PathActuator extends ScalarActuator {
   private transient long swigCPtr;
 
   public PathActuator(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.PathActuator_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.PathActuator_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class PathActuator extends ScalarActuator {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_PathActuator(swigCPtr);
+        opensimModelSimulationJNI.delete_PathActuator(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,173 +36,173 @@ public class PathActuator extends ScalarActuator {
   }
 
   public static PathActuator safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.PathActuator_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.PathActuator_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new PathActuator(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.PathActuator_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.PathActuator_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.PathActuator_getClassName();
+    return opensimModelSimulationJNI.PathActuator_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.PathActuator_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.PathActuator_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new PathActuator(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.PathActuator_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.PathActuator_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_GeometryPath(PathActuator source) {
-    opensimModelJNI.PathActuator_copyProperty_GeometryPath(swigCPtr, this, PathActuator.getCPtr(source), source);
+    opensimModelSimulationJNI.PathActuator_copyProperty_GeometryPath(swigCPtr, this, PathActuator.getCPtr(source), source);
   }
 
   public GeometryPath get_GeometryPath(int i) {
-    return new GeometryPath(opensimModelJNI.PathActuator_get_GeometryPath__SWIG_0(swigCPtr, this, i), false);
+    return new GeometryPath(opensimModelSimulationJNI.PathActuator_get_GeometryPath__SWIG_0(swigCPtr, this, i), false);
   }
 
   public GeometryPath upd_GeometryPath(int i) {
-    return new GeometryPath(opensimModelJNI.PathActuator_upd_GeometryPath__SWIG_0(swigCPtr, this, i), false);
+    return new GeometryPath(opensimModelSimulationJNI.PathActuator_upd_GeometryPath__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_GeometryPath(int i, GeometryPath value) {
-    opensimModelJNI.PathActuator_set_GeometryPath__SWIG_0(swigCPtr, this, i, GeometryPath.getCPtr(value), value);
+    opensimModelSimulationJNI.PathActuator_set_GeometryPath__SWIG_0(swigCPtr, this, i, GeometryPath.getCPtr(value), value);
   }
 
   public int append_GeometryPath(GeometryPath value) {
-    return opensimModelJNI.PathActuator_append_GeometryPath(swigCPtr, this, GeometryPath.getCPtr(value), value);
+    return opensimModelSimulationJNI.PathActuator_append_GeometryPath(swigCPtr, this, GeometryPath.getCPtr(value), value);
   }
 
   public void constructProperty_GeometryPath(GeometryPath initValue) {
-    opensimModelJNI.PathActuator_constructProperty_GeometryPath(swigCPtr, this, GeometryPath.getCPtr(initValue), initValue);
+    opensimModelSimulationJNI.PathActuator_constructProperty_GeometryPath(swigCPtr, this, GeometryPath.getCPtr(initValue), initValue);
   }
 
   public GeometryPath get_GeometryPath() {
-    return new GeometryPath(opensimModelJNI.PathActuator_get_GeometryPath__SWIG_1(swigCPtr, this), false);
+    return new GeometryPath(opensimModelSimulationJNI.PathActuator_get_GeometryPath__SWIG_1(swigCPtr, this), false);
   }
 
   public GeometryPath upd_GeometryPath() {
-    return new GeometryPath(opensimModelJNI.PathActuator_upd_GeometryPath__SWIG_1(swigCPtr, this), false);
+    return new GeometryPath(opensimModelSimulationJNI.PathActuator_upd_GeometryPath__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_GeometryPath(GeometryPath value) {
-    opensimModelJNI.PathActuator_set_GeometryPath__SWIG_1(swigCPtr, this, GeometryPath.getCPtr(value), value);
+    opensimModelSimulationJNI.PathActuator_set_GeometryPath__SWIG_1(swigCPtr, this, GeometryPath.getCPtr(value), value);
   }
 
   public void copyProperty_optimal_force(PathActuator source) {
-    opensimModelJNI.PathActuator_copyProperty_optimal_force(swigCPtr, this, PathActuator.getCPtr(source), source);
+    opensimModelSimulationJNI.PathActuator_copyProperty_optimal_force(swigCPtr, this, PathActuator.getCPtr(source), source);
   }
 
   public double get_optimal_force(int i) {
-    return opensimModelJNI.PathActuator_get_optimal_force__SWIG_0(swigCPtr, this, i);
+    return opensimModelSimulationJNI.PathActuator_get_optimal_force__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_optimal_force(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.PathActuator_upd_optimal_force__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.PathActuator_upd_optimal_force__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_optimal_force(int i, double value) {
-    opensimModelJNI.PathActuator_set_optimal_force__SWIG_0(swigCPtr, this, i, value);
+    opensimModelSimulationJNI.PathActuator_set_optimal_force__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_optimal_force(double value) {
-    return opensimModelJNI.PathActuator_append_optimal_force(swigCPtr, this, value);
+    return opensimModelSimulationJNI.PathActuator_append_optimal_force(swigCPtr, this, value);
   }
 
   public void constructProperty_optimal_force(double initValue) {
-    opensimModelJNI.PathActuator_constructProperty_optimal_force(swigCPtr, this, initValue);
+    opensimModelSimulationJNI.PathActuator_constructProperty_optimal_force(swigCPtr, this, initValue);
   }
 
   public double get_optimal_force() {
-    return opensimModelJNI.PathActuator_get_optimal_force__SWIG_1(swigCPtr, this);
+    return opensimModelSimulationJNI.PathActuator_get_optimal_force__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_optimal_force() {
-    return new SWIGTYPE_p_double(opensimModelJNI.PathActuator_upd_optimal_force__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.PathActuator_upd_optimal_force__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_optimal_force(double value) {
-    opensimModelJNI.PathActuator_set_optimal_force__SWIG_1(swigCPtr, this, value);
+    opensimModelSimulationJNI.PathActuator_set_optimal_force__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void set_has_output_tension(boolean value) {
+    opensimModelSimulationJNI.PathActuator__has_output_tension_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_tension() {
+    return opensimModelSimulationJNI.PathActuator__has_output_tension_get(swigCPtr, this);
   }
 
   public PathActuator() {
-    this(opensimModelJNI.new_PathActuator(), true);
+    this(opensimModelSimulationJNI.new_PathActuator(), true);
   }
 
   public GeometryPath updGeometryPath() {
-    return new GeometryPath(opensimModelJNI.PathActuator_updGeometryPath(swigCPtr, this), false);
+    return new GeometryPath(opensimModelSimulationJNI.PathActuator_updGeometryPath(swigCPtr, this), false);
   }
 
   public GeometryPath getGeometryPath() {
-    return new GeometryPath(opensimModelJNI.PathActuator_getGeometryPath(swigCPtr, this), false);
+    return new GeometryPath(opensimModelSimulationJNI.PathActuator_getGeometryPath(swigCPtr, this), false);
   }
 
   public boolean hasGeometryPath() {
-    return opensimModelJNI.PathActuator_hasGeometryPath(swigCPtr, this);
+    return opensimModelSimulationJNI.PathActuator_hasGeometryPath(swigCPtr, this);
   }
 
   public void setOptimalForce(double aOptimalForce) {
-    opensimModelJNI.PathActuator_setOptimalForce(swigCPtr, this, aOptimalForce);
+    opensimModelSimulationJNI.PathActuator_setOptimalForce(swigCPtr, this, aOptimalForce);
   }
 
   public double getOptimalForce() {
-    return opensimModelJNI.PathActuator_getOptimalForce(swigCPtr, this);
+    return opensimModelSimulationJNI.PathActuator_getOptimalForce(swigCPtr, this);
   }
 
   public double getLength(State s) {
-    return opensimModelJNI.PathActuator_getLength(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.PathActuator_getLength(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getLengtheningSpeed(State s) {
-    return opensimModelJNI.PathActuator_getLengtheningSpeed(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.PathActuator_getLengtheningSpeed(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getPower(State s) {
-    return opensimModelJNI.PathActuator_getPower(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.PathActuator_getPower(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getStress(State s) {
-    return opensimModelJNI.PathActuator_getStress(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.PathActuator_getStress(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void addNewPathPoint(String proposedName, PhysicalFrame aBody, Vec3 aPositionOnBody) {
-    opensimModelJNI.PathActuator_addNewPathPoint(swigCPtr, this, proposedName, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(aPositionOnBody), aPositionOnBody);
+    opensimModelSimulationJNI.PathActuator_addNewPathPoint(swigCPtr, this, proposedName, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(aPositionOnBody), aPositionOnBody);
   }
 
   public void computeForce(State state, VectorOfSpatialVec bodyForces, Vector mobilityForces) {
-    opensimModelJNI.PathActuator_computeForce(swigCPtr, this, State.getCPtr(state), state, VectorOfSpatialVec.getCPtr(bodyForces), bodyForces, Vector.getCPtr(mobilityForces), mobilityForces);
+    opensimModelSimulationJNI.PathActuator_computeForce(swigCPtr, this, State.getCPtr(state), state, VectorOfSpatialVec.getCPtr(bodyForces), bodyForces, Vector.getCPtr(mobilityForces), mobilityForces);
   }
 
   public double computeActuation(State s) {
-    return opensimModelJNI.PathActuator_computeActuation(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.PathActuator_computeActuation(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double computeMomentArm(State s, Coordinate aCoord) {
-    return opensimModelJNI.PathActuator_computeMomentArm(swigCPtr, this, State.getCPtr(s), s, Coordinate.getCPtr(aCoord), aCoord);
-  }
-
-  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
-    opensimModelJNI.PathActuator_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
-  }
-
-  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
-    opensimModelJNI.PathActuator_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
+    return opensimModelSimulationJNI.PathActuator_computeMomentArm(swigCPtr, this, State.getCPtr(s), s, Coordinate.getCPtr(aCoord), aCoord);
   }
 
   public void preScale(State s, ScaleSet aScaleSet) {
-    opensimModelJNI.PathActuator_preScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(aScaleSet), aScaleSet);
+    opensimModelSimulationJNI.PathActuator_preScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(aScaleSet), aScaleSet);
   }
 
   public void scale(State s, ScaleSet aScaleSet) {
-    opensimModelJNI.PathActuator_scale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(aScaleSet), aScaleSet);
+    opensimModelSimulationJNI.PathActuator_scale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(aScaleSet), aScaleSet);
   }
 
   public void postScale(State s, ScaleSet aScaleSet) {
-    opensimModelJNI.PathActuator_postScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(aScaleSet), aScaleSet);
+    opensimModelSimulationJNI.PathActuator_postScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(aScaleSet), aScaleSet);
   }
 
 }

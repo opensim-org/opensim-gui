@@ -12,7 +12,7 @@ public class SimbodyEngine extends OpenSimObject {
   private transient long swigCPtr;
 
   public SimbodyEngine(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.SimbodyEngine_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.SimbodyEngine_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class SimbodyEngine extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_SimbodyEngine(swigCPtr);
+        opensimModelSimulationJNI.delete_SimbodyEngine(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,190 +36,190 @@ public class SimbodyEngine extends OpenSimObject {
   }
 
   public static SimbodyEngine safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.SimbodyEngine_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.SimbodyEngine_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new SimbodyEngine(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.SimbodyEngine_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.SimbodyEngine_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.SimbodyEngine_getClassName();
+    return opensimModelSimulationJNI.SimbodyEngine_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.SimbodyEngine_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.SimbodyEngine_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new SimbodyEngine(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.SimbodyEngine_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.SimbodyEngine_getConcreteClassName(swigCPtr, this);
   }
 
   public void set_model(Model value) {
-    opensimModelJNI.SimbodyEngine__model_set(swigCPtr, this, Model.getCPtr(value), value);
+    opensimModelSimulationJNI.SimbodyEngine__model_set(swigCPtr, this, Model.getCPtr(value), value);
   }
 
   public Model get_model() {
-    long cPtr = opensimModelJNI.SimbodyEngine__model_get(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.SimbodyEngine__model_get(swigCPtr, this);
     return (cPtr == 0) ? null : new Model(cPtr, false);
   }
 
   public SimbodyEngine() {
-    this(opensimModelJNI.new_SimbodyEngine__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_SimbodyEngine__SWIG_0(), true);
   }
 
   public SimbodyEngine(String aFileName) {
-    this(opensimModelJNI.new_SimbodyEngine__SWIG_1(aFileName), true);
+    this(opensimModelSimulationJNI.new_SimbodyEngine__SWIG_1(aFileName), true);
   }
 
   public SimbodyEngine(SimbodyEngine aEngine) {
-    this(opensimModelJNI.new_SimbodyEngine__SWIG_2(SimbodyEngine.getCPtr(aEngine), aEngine), true);
+    this(opensimModelSimulationJNI.new_SimbodyEngine__SWIG_2(SimbodyEngine.getCPtr(aEngine), aEngine), true);
   }
 
   public Model getModel() {
-    return new Model(opensimModelJNI.SimbodyEngine_getModel(swigCPtr, this), false);
+    return new Model(opensimModelSimulationJNI.SimbodyEngine_getModel(swigCPtr, this), false);
   }
 
   public void setModel(Model aModel) {
-    opensimModelJNI.SimbodyEngine_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
+    opensimModelSimulationJNI.SimbodyEngine_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
   public void connectSimbodyEngineToModel(Model aModel) {
-    opensimModelJNI.SimbodyEngine_connectSimbodyEngineToModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
+    opensimModelSimulationJNI.SimbodyEngine_connectSimbodyEngineToModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
   public void getPosition(State s, PhysicalFrame aBody, Vec3 aPoint, Vec3 rPos) {
-    opensimModelJNI.SimbodyEngine_getPosition(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(aPoint), aPoint, Vec3.getCPtr(rPos), rPos);
+    opensimModelSimulationJNI.SimbodyEngine_getPosition(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(aPoint), aPoint, Vec3.getCPtr(rPos), rPos);
   }
 
   public void getVelocity(State s, PhysicalFrame aBody, Vec3 aPoint, Vec3 rVel) {
-    opensimModelJNI.SimbodyEngine_getVelocity(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(aPoint), aPoint, Vec3.getCPtr(rVel), rVel);
+    opensimModelSimulationJNI.SimbodyEngine_getVelocity(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(aPoint), aPoint, Vec3.getCPtr(rVel), rVel);
   }
 
   public void getAcceleration(State s, PhysicalFrame aBody, Vec3 aPoint, Vec3 rAcc) {
-    opensimModelJNI.SimbodyEngine_getAcceleration(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(aPoint), aPoint, Vec3.getCPtr(rAcc), rAcc);
+    opensimModelSimulationJNI.SimbodyEngine_getAcceleration(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(aPoint), aPoint, Vec3.getCPtr(rAcc), rAcc);
   }
 
   public void getDirectionCosines(State s, PhysicalFrame aBody, SWIGTYPE_p_a_3__double rDirCos) {
-    opensimModelJNI.SimbodyEngine_getDirectionCosines__SWIG_0(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, SWIGTYPE_p_a_3__double.getCPtr(rDirCos));
+    opensimModelSimulationJNI.SimbodyEngine_getDirectionCosines__SWIG_0(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, SWIGTYPE_p_a_3__double.getCPtr(rDirCos));
   }
 
   public void getDirectionCosines(State s, PhysicalFrame aBody, SWIGTYPE_p_double rDirCos) {
-    opensimModelJNI.SimbodyEngine_getDirectionCosines__SWIG_1(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, SWIGTYPE_p_double.getCPtr(rDirCos));
+    opensimModelSimulationJNI.SimbodyEngine_getDirectionCosines__SWIG_1(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, SWIGTYPE_p_double.getCPtr(rDirCos));
   }
 
   public void getAngularVelocity(State s, PhysicalFrame aBody, Vec3 rAngVel) {
-    opensimModelJNI.SimbodyEngine_getAngularVelocity(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(rAngVel), rAngVel);
+    opensimModelSimulationJNI.SimbodyEngine_getAngularVelocity(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(rAngVel), rAngVel);
   }
 
   public void getAngularVelocityBodyLocal(State s, PhysicalFrame aBody, Vec3 rAngVel) {
-    opensimModelJNI.SimbodyEngine_getAngularVelocityBodyLocal(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(rAngVel), rAngVel);
+    opensimModelSimulationJNI.SimbodyEngine_getAngularVelocityBodyLocal(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(rAngVel), rAngVel);
   }
 
   public void getAngularAcceleration(State s, PhysicalFrame aBody, Vec3 rAngAcc) {
-    opensimModelJNI.SimbodyEngine_getAngularAcceleration(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(rAngAcc), rAngAcc);
+    opensimModelSimulationJNI.SimbodyEngine_getAngularAcceleration(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(rAngAcc), rAngAcc);
   }
 
   public void getAngularAccelerationBodyLocal(State s, PhysicalFrame aBody, Vec3 rAngAcc) {
-    opensimModelJNI.SimbodyEngine_getAngularAccelerationBodyLocal(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(rAngAcc), rAngAcc);
+    opensimModelSimulationJNI.SimbodyEngine_getAngularAccelerationBodyLocal(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(rAngAcc), rAngAcc);
   }
 
   public Transform getTransform(State s, PhysicalFrame aBody) {
-    return new Transform(opensimModelJNI.SimbodyEngine_getTransform(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody), true);
+    return new Transform(opensimModelSimulationJNI.SimbodyEngine_getTransform(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody), true);
   }
 
   public void computeReactions(State s, VectorOfVec3 rForces, VectorOfVec3 rTorques) {
-    opensimModelJNI.SimbodyEngine_computeReactions(swigCPtr, this, State.getCPtr(s), s, VectorOfVec3.getCPtr(rForces), rForces, VectorOfVec3.getCPtr(rTorques), rTorques);
+    opensimModelSimulationJNI.SimbodyEngine_computeReactions(swigCPtr, this, State.getCPtr(s), s, VectorOfVec3.getCPtr(rForces), rForces, VectorOfVec3.getCPtr(rTorques), rTorques);
   }
 
   public void formCompleteStorages(State s, Storage aQIn, SWIGTYPE_p_p_OpenSim__Storage rQComplete, SWIGTYPE_p_p_OpenSim__Storage rUComplete) {
-    opensimModelJNI.SimbodyEngine_formCompleteStorages(swigCPtr, this, State.getCPtr(s), s, Storage.getCPtr(aQIn), aQIn, SWIGTYPE_p_p_OpenSim__Storage.getCPtr(rQComplete), SWIGTYPE_p_p_OpenSim__Storage.getCPtr(rUComplete));
+    opensimModelSimulationJNI.SimbodyEngine_formCompleteStorages(swigCPtr, this, State.getCPtr(s), s, Storage.getCPtr(aQIn), aQIn, SWIGTYPE_p_p_OpenSim__Storage.getCPtr(rQComplete), SWIGTYPE_p_p_OpenSim__Storage.getCPtr(rUComplete));
   }
 
   public void formEulerTransform(State s, PhysicalFrame aBody, SWIGTYPE_p_double rE) {
-    opensimModelJNI.SimbodyEngine_formEulerTransform(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, SWIGTYPE_p_double.getCPtr(rE));
+    opensimModelSimulationJNI.SimbodyEngine_formEulerTransform(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody, SWIGTYPE_p_double.getCPtr(rE));
   }
 
   public void transform(State s, PhysicalFrame aBodyFrom, double[] aVec, PhysicalFrame aBodyTo, double[] rVec) {
-    opensimModelJNI.SimbodyEngine_transform__SWIG_0(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBodyFrom), aBodyFrom, aVec, PhysicalFrame.getCPtr(aBodyTo), aBodyTo, rVec);
+    opensimModelSimulationJNI.SimbodyEngine_transform__SWIG_0(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBodyFrom), aBodyFrom, aVec, PhysicalFrame.getCPtr(aBodyTo), aBodyTo, rVec);
   }
 
   public void transform(State s, PhysicalFrame aBodyFrom, Vec3 aVec, PhysicalFrame aBodyTo, Vec3 rVec) {
-    opensimModelJNI.SimbodyEngine_transform__SWIG_1(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBodyFrom), aBodyFrom, Vec3.getCPtr(aVec), aVec, PhysicalFrame.getCPtr(aBodyTo), aBodyTo, Vec3.getCPtr(rVec), rVec);
+    opensimModelSimulationJNI.SimbodyEngine_transform__SWIG_1(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBodyFrom), aBodyFrom, Vec3.getCPtr(aVec), aVec, PhysicalFrame.getCPtr(aBodyTo), aBodyTo, Vec3.getCPtr(rVec), rVec);
   }
 
   public void transformPosition(State s, PhysicalFrame aBodyFrom, double[] aPos, PhysicalFrame aBodyTo, double[] rPos) {
-    opensimModelJNI.SimbodyEngine_transformPosition__SWIG_0(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBodyFrom), aBodyFrom, aPos, PhysicalFrame.getCPtr(aBodyTo), aBodyTo, rPos);
+    opensimModelSimulationJNI.SimbodyEngine_transformPosition__SWIG_0(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBodyFrom), aBodyFrom, aPos, PhysicalFrame.getCPtr(aBodyTo), aBodyTo, rPos);
   }
 
   public void transformPosition(State s, PhysicalFrame aBodyFrom, Vec3 aPos, PhysicalFrame aBodyTo, Vec3 rPos) {
-    opensimModelJNI.SimbodyEngine_transformPosition__SWIG_1(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBodyFrom), aBodyFrom, Vec3.getCPtr(aPos), aPos, PhysicalFrame.getCPtr(aBodyTo), aBodyTo, Vec3.getCPtr(rPos), rPos);
+    opensimModelSimulationJNI.SimbodyEngine_transformPosition__SWIG_1(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBodyFrom), aBodyFrom, Vec3.getCPtr(aPos), aPos, PhysicalFrame.getCPtr(aBodyTo), aBodyTo, Vec3.getCPtr(rPos), rPos);
   }
 
   public void transformPosition(State s, PhysicalFrame aBodyFrom, double[] aPos, double[] rPos) {
-    opensimModelJNI.SimbodyEngine_transformPosition__SWIG_2(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBodyFrom), aBodyFrom, aPos, rPos);
+    opensimModelSimulationJNI.SimbodyEngine_transformPosition__SWIG_2(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBodyFrom), aBodyFrom, aPos, rPos);
   }
 
   public void transformPosition(State s, PhysicalFrame aBodyFrom, Vec3 aPos, Vec3 rPos) {
-    opensimModelJNI.SimbodyEngine_transformPosition__SWIG_3(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBodyFrom), aBodyFrom, Vec3.getCPtr(aPos), aPos, Vec3.getCPtr(rPos), rPos);
+    opensimModelSimulationJNI.SimbodyEngine_transformPosition__SWIG_3(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBodyFrom), aBodyFrom, Vec3.getCPtr(aPos), aPos, Vec3.getCPtr(rPos), rPos);
   }
 
   public double calcDistance(State s, PhysicalFrame aBody1, Vec3 aPoint1, PhysicalFrame aBody2, Vec3 aPoint2) {
-    return opensimModelJNI.SimbodyEngine_calcDistance__SWIG_0(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody1), aBody1, Vec3.getCPtr(aPoint1), aPoint1, PhysicalFrame.getCPtr(aBody2), aBody2, Vec3.getCPtr(aPoint2), aPoint2);
+    return opensimModelSimulationJNI.SimbodyEngine_calcDistance__SWIG_0(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody1), aBody1, Vec3.getCPtr(aPoint1), aPoint1, PhysicalFrame.getCPtr(aBody2), aBody2, Vec3.getCPtr(aPoint2), aPoint2);
   }
 
   public double calcDistance(State s, PhysicalFrame aBody1, double[] aPoint1, PhysicalFrame aBody2, double[] aPoint2) {
-    return opensimModelJNI.SimbodyEngine_calcDistance__SWIG_1(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody1), aBody1, aPoint1, PhysicalFrame.getCPtr(aBody2), aBody2, aPoint2);
+    return opensimModelSimulationJNI.SimbodyEngine_calcDistance__SWIG_1(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody1), aBody1, aPoint1, PhysicalFrame.getCPtr(aBody2), aBody2, aPoint2);
   }
 
   public void convertRadiansToDegrees(Storage rStorage) {
-    opensimModelJNI.SimbodyEngine_convertRadiansToDegrees__SWIG_0(swigCPtr, this, Storage.getCPtr(rStorage), rStorage);
+    opensimModelSimulationJNI.SimbodyEngine_convertRadiansToDegrees__SWIG_0(swigCPtr, this, Storage.getCPtr(rStorage), rStorage);
   }
 
   public void convertDegreesToRadians(Storage rStorage) {
-    opensimModelJNI.SimbodyEngine_convertDegreesToRadians__SWIG_0(swigCPtr, this, Storage.getCPtr(rStorage), rStorage);
+    opensimModelSimulationJNI.SimbodyEngine_convertDegreesToRadians__SWIG_0(swigCPtr, this, Storage.getCPtr(rStorage), rStorage);
   }
 
   public void convertDegreesToRadians(SWIGTYPE_p_double aQDeg, SWIGTYPE_p_double rQRad) {
-    opensimModelJNI.SimbodyEngine_convertDegreesToRadians__SWIG_1(swigCPtr, this, SWIGTYPE_p_double.getCPtr(aQDeg), SWIGTYPE_p_double.getCPtr(rQRad));
+    opensimModelSimulationJNI.SimbodyEngine_convertDegreesToRadians__SWIG_1(swigCPtr, this, SWIGTYPE_p_double.getCPtr(aQDeg), SWIGTYPE_p_double.getCPtr(rQRad));
   }
 
   public void convertRadiansToDegrees(SWIGTYPE_p_double aQRad, SWIGTYPE_p_double rQDeg) {
-    opensimModelJNI.SimbodyEngine_convertRadiansToDegrees__SWIG_1(swigCPtr, this, SWIGTYPE_p_double.getCPtr(aQRad), SWIGTYPE_p_double.getCPtr(rQDeg));
+    opensimModelSimulationJNI.SimbodyEngine_convertRadiansToDegrees__SWIG_1(swigCPtr, this, SWIGTYPE_p_double.getCPtr(aQRad), SWIGTYPE_p_double.getCPtr(rQDeg));
   }
 
   public void convertAnglesToDirectionCosines(double aE1, double aE2, double aE3, SWIGTYPE_p_a_3__double rDirCos) {
-    opensimModelJNI.SimbodyEngine_convertAnglesToDirectionCosines__SWIG_0(swigCPtr, this, aE1, aE2, aE3, SWIGTYPE_p_a_3__double.getCPtr(rDirCos));
+    opensimModelSimulationJNI.SimbodyEngine_convertAnglesToDirectionCosines__SWIG_0(swigCPtr, this, aE1, aE2, aE3, SWIGTYPE_p_a_3__double.getCPtr(rDirCos));
   }
 
   public void convertAnglesToDirectionCosines(double aE1, double aE2, double aE3, SWIGTYPE_p_double rDirCos) {
-    opensimModelJNI.SimbodyEngine_convertAnglesToDirectionCosines__SWIG_1(swigCPtr, this, aE1, aE2, aE3, SWIGTYPE_p_double.getCPtr(rDirCos));
+    opensimModelSimulationJNI.SimbodyEngine_convertAnglesToDirectionCosines__SWIG_1(swigCPtr, this, aE1, aE2, aE3, SWIGTYPE_p_double.getCPtr(rDirCos));
   }
 
   public void convertDirectionCosinesToAngles(SWIGTYPE_p_a_3__double aDirCos, SWIGTYPE_p_double rE1, SWIGTYPE_p_double rE2, SWIGTYPE_p_double rE3) {
-    opensimModelJNI.SimbodyEngine_convertDirectionCosinesToAngles__SWIG_0(swigCPtr, this, SWIGTYPE_p_a_3__double.getCPtr(aDirCos), SWIGTYPE_p_double.getCPtr(rE1), SWIGTYPE_p_double.getCPtr(rE2), SWIGTYPE_p_double.getCPtr(rE3));
+    opensimModelSimulationJNI.SimbodyEngine_convertDirectionCosinesToAngles__SWIG_0(swigCPtr, this, SWIGTYPE_p_a_3__double.getCPtr(aDirCos), SWIGTYPE_p_double.getCPtr(rE1), SWIGTYPE_p_double.getCPtr(rE2), SWIGTYPE_p_double.getCPtr(rE3));
   }
 
   public void convertDirectionCosinesToAngles(SWIGTYPE_p_double aDirCos, SWIGTYPE_p_double rE1, SWIGTYPE_p_double rE2, SWIGTYPE_p_double rE3) {
-    opensimModelJNI.SimbodyEngine_convertDirectionCosinesToAngles__SWIG_1(swigCPtr, this, SWIGTYPE_p_double.getCPtr(aDirCos), SWIGTYPE_p_double.getCPtr(rE1), SWIGTYPE_p_double.getCPtr(rE2), SWIGTYPE_p_double.getCPtr(rE3));
+    opensimModelSimulationJNI.SimbodyEngine_convertDirectionCosinesToAngles__SWIG_1(swigCPtr, this, SWIGTYPE_p_double.getCPtr(aDirCos), SWIGTYPE_p_double.getCPtr(rE1), SWIGTYPE_p_double.getCPtr(rE2), SWIGTYPE_p_double.getCPtr(rE3));
   }
 
   public void convertDirectionCosinesToQuaternions(SWIGTYPE_p_a_3__double aDirCos, SWIGTYPE_p_double rQ1, SWIGTYPE_p_double rQ2, SWIGTYPE_p_double rQ3, SWIGTYPE_p_double rQ4) {
-    opensimModelJNI.SimbodyEngine_convertDirectionCosinesToQuaternions__SWIG_0(swigCPtr, this, SWIGTYPE_p_a_3__double.getCPtr(aDirCos), SWIGTYPE_p_double.getCPtr(rQ1), SWIGTYPE_p_double.getCPtr(rQ2), SWIGTYPE_p_double.getCPtr(rQ3), SWIGTYPE_p_double.getCPtr(rQ4));
+    opensimModelSimulationJNI.SimbodyEngine_convertDirectionCosinesToQuaternions__SWIG_0(swigCPtr, this, SWIGTYPE_p_a_3__double.getCPtr(aDirCos), SWIGTYPE_p_double.getCPtr(rQ1), SWIGTYPE_p_double.getCPtr(rQ2), SWIGTYPE_p_double.getCPtr(rQ3), SWIGTYPE_p_double.getCPtr(rQ4));
   }
 
   public void convertDirectionCosinesToQuaternions(SWIGTYPE_p_double aDirCos, SWIGTYPE_p_double rQ1, SWIGTYPE_p_double rQ2, SWIGTYPE_p_double rQ3, SWIGTYPE_p_double rQ4) {
-    opensimModelJNI.SimbodyEngine_convertDirectionCosinesToQuaternions__SWIG_1(swigCPtr, this, SWIGTYPE_p_double.getCPtr(aDirCos), SWIGTYPE_p_double.getCPtr(rQ1), SWIGTYPE_p_double.getCPtr(rQ2), SWIGTYPE_p_double.getCPtr(rQ3), SWIGTYPE_p_double.getCPtr(rQ4));
+    opensimModelSimulationJNI.SimbodyEngine_convertDirectionCosinesToQuaternions__SWIG_1(swigCPtr, this, SWIGTYPE_p_double.getCPtr(aDirCos), SWIGTYPE_p_double.getCPtr(rQ1), SWIGTYPE_p_double.getCPtr(rQ2), SWIGTYPE_p_double.getCPtr(rQ3), SWIGTYPE_p_double.getCPtr(rQ4));
   }
 
   public void convertQuaternionsToDirectionCosines(double aQ1, double aQ2, double aQ3, double aQ4, SWIGTYPE_p_a_3__double rDirCos) {
-    opensimModelJNI.SimbodyEngine_convertQuaternionsToDirectionCosines__SWIG_0(swigCPtr, this, aQ1, aQ2, aQ3, aQ4, SWIGTYPE_p_a_3__double.getCPtr(rDirCos));
+    opensimModelSimulationJNI.SimbodyEngine_convertQuaternionsToDirectionCosines__SWIG_0(swigCPtr, this, aQ1, aQ2, aQ3, aQ4, SWIGTYPE_p_a_3__double.getCPtr(rDirCos));
   }
 
   public void convertQuaternionsToDirectionCosines(double aQ1, double aQ2, double aQ3, double aQ4, SWIGTYPE_p_double rDirCos) {
-    opensimModelJNI.SimbodyEngine_convertQuaternionsToDirectionCosines__SWIG_1(swigCPtr, this, aQ1, aQ2, aQ3, aQ4, SWIGTYPE_p_double.getCPtr(rDirCos));
+    opensimModelSimulationJNI.SimbodyEngine_convertQuaternionsToDirectionCosines__SWIG_1(swigCPtr, this, aQ1, aQ2, aQ3, aQ4, SWIGTYPE_p_double.getCPtr(rDirCos));
   }
 
 }

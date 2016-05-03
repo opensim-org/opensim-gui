@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class UnitVec3 extends Vec3 {
   private transient long swigCPtr;
 
-  public UnitVec3(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.UnitVec3_SWIGUpcast(cPtr), cMemoryOwn);
+  protected UnitVec3(long cPtr, boolean cMemoryOwn) {
+    super(opensimSimbodyJNI.UnitVec3_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(UnitVec3 obj) {
+  protected static long getCPtr(UnitVec3 obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,7 +28,7 @@ public class UnitVec3 extends Vec3 {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_UnitVec3(swigCPtr);
+        opensimSimbodyJNI.delete_UnitVec3(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,55 +36,55 @@ public class UnitVec3 extends Vec3 {
   }
 
   public UnitVec3() {
-    this(opensimModelJNI.new_UnitVec3__SWIG_0(), true);
+    this(opensimSimbodyJNI.new_UnitVec3__SWIG_0(), true);
   }
 
   public UnitVec3(UnitVec3 u) {
-    this(opensimModelJNI.new_UnitVec3__SWIG_1(UnitVec3.getCPtr(u), u), true);
+    this(opensimSimbodyJNI.new_UnitVec3__SWIG_1(UnitVec3.getCPtr(u), u), true);
   }
 
   public UnitVec3(Vec3 v) {
-    this(opensimModelJNI.new_UnitVec3__SWIG_2(Vec3.getCPtr(v), v), true);
+    this(opensimSimbodyJNI.new_UnitVec3__SWIG_2(Vec3.getCPtr(v), v), true);
   }
 
   public UnitVec3(double x, double y, double z) {
-    this(opensimModelJNI.new_UnitVec3__SWIG_3(x, y, z), true);
+    this(opensimSimbodyJNI.new_UnitVec3__SWIG_3(x, y, z), true);
   }
 
   public UnitVec3(CoordinateAxis axis) {
-    this(opensimModelJNI.new_UnitVec3__SWIG_4(CoordinateAxis.getCPtr(axis), axis), true);
+    this(opensimSimbodyJNI.new_UnitVec3__SWIG_4(CoordinateAxis.getCPtr(axis), axis), true);
   }
 
   public UnitVec3(CoordinateDirection dir) {
-    this(opensimModelJNI.new_UnitVec3__SWIG_5(CoordinateDirection.getCPtr(dir), dir), true);
+    this(opensimSimbodyJNI.new_UnitVec3__SWIG_5(CoordinateDirection.getCPtr(dir), dir), true);
   }
 
   public UnitVec3(int axis) {
-    this(opensimModelJNI.new_UnitVec3__SWIG_6(axis), true);
+    this(opensimSimbodyJNI.new_UnitVec3__SWIG_6(axis), true);
   }
 
   public Vec3 asVec3() {
-    return new Vec3(opensimModelJNI.UnitVec3_asVec3(swigCPtr, this), false);
+    return new Vec3(opensimSimbodyJNI.UnitVec3_asVec3(swigCPtr, this), false);
   }
 
   public UnitVec3 negate() {
-    return new UnitVec3(opensimModelJNI.UnitVec3_negate(swigCPtr, this), true);
+    return new UnitVec3(opensimSimbodyJNI.UnitVec3_negate(swigCPtr, this), true);
   }
 
   public UnitVec3 abs() {
-    return new UnitVec3(opensimModelJNI.UnitVec3_abs(swigCPtr, this), true);
+    return new UnitVec3(opensimSimbodyJNI.UnitVec3_abs(swigCPtr, this), true);
   }
 
   public UnitVec3 perp() {
-    return new UnitVec3(opensimModelJNI.UnitVec3_perp(swigCPtr, this), true);
+    return new UnitVec3(opensimSimbodyJNI.UnitVec3_perp(swigCPtr, this), true);
   }
 
   public UnitVec3(Vec3 v, boolean arg1) {
-    this(opensimModelJNI.new_UnitVec3__SWIG_7(Vec3.getCPtr(v), v, arg1), true);
+    this(opensimSimbodyJNI.new_UnitVec3__SWIG_7(Vec3.getCPtr(v), v, arg1), true);
   }
 
   public static UnitVec3 getAs(SWIGTYPE_p_double p) {
-    return new UnitVec3(opensimModelJNI.UnitVec3_getAs(SWIGTYPE_p_double.getCPtr(p)), false);
+    return new UnitVec3(opensimSimbodyJNI.UnitVec3_getAs(SWIGTYPE_p_double.getCPtr(p)), false);
   }
 
 }

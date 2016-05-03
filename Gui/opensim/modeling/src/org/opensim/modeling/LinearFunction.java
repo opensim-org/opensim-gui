@@ -12,7 +12,7 @@ public class LinearFunction extends Function {
   private transient long swigCPtr;
 
   public LinearFunction(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.LinearFunction_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.LinearFunction_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class LinearFunction extends Function {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_LinearFunction(swigCPtr);
+        opensimModelCommonJNI.delete_LinearFunction(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,69 +36,69 @@ public class LinearFunction extends Function {
   }
 
   public static LinearFunction safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.LinearFunction_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelCommonJNI.LinearFunction_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new LinearFunction(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.LinearFunction_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelCommonJNI.LinearFunction_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.LinearFunction_getClassName();
+    return opensimModelCommonJNI.LinearFunction_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.LinearFunction_clone(swigCPtr, this);
+    long cPtr = opensimModelCommonJNI.LinearFunction_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new LinearFunction(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.LinearFunction_getConcreteClassName(swigCPtr, this);
+    return opensimModelCommonJNI.LinearFunction_getConcreteClassName(swigCPtr, this);
   }
 
   public LinearFunction() {
-    this(opensimModelJNI.new_LinearFunction__SWIG_0(), true);
+    this(opensimModelCommonJNI.new_LinearFunction__SWIG_0(), true);
   }
 
   public LinearFunction(ArrayDouble coefficients) {
-    this(opensimModelJNI.new_LinearFunction__SWIG_1(ArrayDouble.getCPtr(coefficients), coefficients), true);
+    this(opensimModelCommonJNI.new_LinearFunction__SWIG_1(ArrayDouble.getCPtr(coefficients), coefficients), true);
   }
 
   public LinearFunction(double slope, double intercept) {
-    this(opensimModelJNI.new_LinearFunction__SWIG_2(slope, intercept), true);
+    this(opensimModelCommonJNI.new_LinearFunction__SWIG_2(slope, intercept), true);
   }
 
   public LinearFunction(LinearFunction aSpline) {
-    this(opensimModelJNI.new_LinearFunction__SWIG_3(LinearFunction.getCPtr(aSpline), aSpline), true);
+    this(opensimModelCommonJNI.new_LinearFunction__SWIG_3(LinearFunction.getCPtr(aSpline), aSpline), true);
   }
 
   public void setCoefficients(ArrayDouble coefficients) {
-    opensimModelJNI.LinearFunction_setCoefficients(swigCPtr, this, ArrayDouble.getCPtr(coefficients), coefficients);
+    opensimModelCommonJNI.LinearFunction_setCoefficients(swigCPtr, this, ArrayDouble.getCPtr(coefficients), coefficients);
   }
 
   public void setSlope(double slope) {
-    opensimModelJNI.LinearFunction_setSlope(swigCPtr, this, slope);
+    opensimModelCommonJNI.LinearFunction_setSlope(swigCPtr, this, slope);
   }
 
   public void setIntercept(double intercept) {
-    opensimModelJNI.LinearFunction_setIntercept(swigCPtr, this, intercept);
+    opensimModelCommonJNI.LinearFunction_setIntercept(swigCPtr, this, intercept);
   }
 
   public ArrayDouble getCoefficients() {
-    return new ArrayDouble(opensimModelJNI.LinearFunction_getCoefficients(swigCPtr, this), true);
+    return new ArrayDouble(opensimModelCommonJNI.LinearFunction_getCoefficients(swigCPtr, this), true);
   }
 
   public double getSlope() {
-    return opensimModelJNI.LinearFunction_getSlope(swigCPtr, this);
+    return opensimModelCommonJNI.LinearFunction_getSlope(swigCPtr, this);
   }
 
   public double getIntercept() {
-    return opensimModelJNI.LinearFunction_getIntercept(swigCPtr, this);
+    return opensimModelCommonJNI.LinearFunction_getIntercept(swigCPtr, this);
   }
 
   public SWIGTYPE_p_SimTK__Function createSimTKFunction() {
-    long cPtr = opensimModelJNI.LinearFunction_createSimTKFunction(swigCPtr, this);
+    long cPtr = opensimModelCommonJNI.LinearFunction_createSimTKFunction(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_SimTK__Function(cPtr, false);
   }
 

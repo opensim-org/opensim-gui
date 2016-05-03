@@ -12,7 +12,7 @@ public class MarkerWeight extends OpenSimObject {
   private transient long swigCPtr;
 
   public MarkerWeight(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.MarkerWeight_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.MarkerWeight_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class MarkerWeight extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_MarkerWeight(swigCPtr);
+        opensimModelSimulationJNI.delete_MarkerWeight(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,45 +36,45 @@ public class MarkerWeight extends OpenSimObject {
   }
 
   public static MarkerWeight safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.MarkerWeight_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.MarkerWeight_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new MarkerWeight(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.MarkerWeight_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.MarkerWeight_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.MarkerWeight_getClassName();
+    return opensimModelSimulationJNI.MarkerWeight_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.MarkerWeight_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.MarkerWeight_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new MarkerWeight(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.MarkerWeight_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.MarkerWeight_getConcreteClassName(swigCPtr, this);
   }
 
   public MarkerWeight() {
-    this(opensimModelJNI.new_MarkerWeight__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_MarkerWeight__SWIG_0(), true);
   }
 
   public MarkerWeight(String name, double weight) {
-    this(opensimModelJNI.new_MarkerWeight__SWIG_1(name, weight), true);
+    this(opensimModelSimulationJNI.new_MarkerWeight__SWIG_1(name, weight), true);
   }
 
   public MarkerWeight(MarkerWeight source) {
-    this(opensimModelJNI.new_MarkerWeight__SWIG_2(MarkerWeight.getCPtr(source), source), true);
+    this(opensimModelSimulationJNI.new_MarkerWeight__SWIG_2(MarkerWeight.getCPtr(source), source), true);
   }
 
   public void setWeight(double weight) {
-    opensimModelJNI.MarkerWeight_setWeight(swigCPtr, this, weight);
+    opensimModelSimulationJNI.MarkerWeight_setWeight(swigCPtr, this, weight);
   }
 
   public double getWeight() {
-    return opensimModelJNI.MarkerWeight_getWeight(swigCPtr, this);
+    return opensimModelSimulationJNI.MarkerWeight_getWeight(swigCPtr, this);
   }
 
 }

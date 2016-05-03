@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class MatrixVec3 extends MatrixBaseVec3 {
   private transient long swigCPtr;
 
-  public MatrixVec3(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.MatrixVec3_SWIGUpcast(cPtr), cMemoryOwn);
+  protected MatrixVec3(long cPtr, boolean cMemoryOwn) {
+    super(opensimSimbodyJNI.MatrixVec3_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(MatrixVec3 obj) {
+  protected static long getCPtr(MatrixVec3 obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,7 +28,7 @@ public class MatrixVec3 extends MatrixBaseVec3 {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_MatrixVec3(swigCPtr);
+        opensimSimbodyJNI.delete_MatrixVec3(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,31 +36,31 @@ public class MatrixVec3 extends MatrixBaseVec3 {
   }
 
   public MatrixVec3() {
-    this(opensimModelJNI.new_MatrixVec3__SWIG_0(), true);
+    this(opensimSimbodyJNI.new_MatrixVec3__SWIG_0(), true);
   }
 
   public MatrixVec3(MatrixVec3 src) {
-    this(opensimModelJNI.new_MatrixVec3__SWIG_1(MatrixVec3.getCPtr(src), src), true);
+    this(opensimSimbodyJNI.new_MatrixVec3__SWIG_1(MatrixVec3.getCPtr(src), src), true);
   }
 
   public MatrixVec3(int m, int n) {
-    this(opensimModelJNI.new_MatrixVec3__SWIG_2(m, n), true);
+    this(opensimSimbodyJNI.new_MatrixVec3__SWIG_2(m, n), true);
   }
 
   public MatrixVec3(int m, int n, Vec3 initialValue) {
-    this(opensimModelJNI.new_MatrixVec3__SWIG_3(m, n, Vec3.getCPtr(initialValue), initialValue), true);
+    this(opensimSimbodyJNI.new_MatrixVec3__SWIG_3(m, n, Vec3.getCPtr(initialValue), initialValue), true);
   }
 
   public String toString() {
-    return opensimModelJNI.MatrixVec3_toString(swigCPtr, this);
+    return opensimSimbodyJNI.MatrixVec3_toString(swigCPtr, this);
   }
 
   public Vec3 get(int i, int j) {
-    return new Vec3(opensimModelJNI.MatrixVec3_get(swigCPtr, this, i, j), false);
+    return new Vec3(opensimSimbodyJNI.MatrixVec3_get(swigCPtr, this, i, j), false);
   }
 
   public void set(int i, int j, Vec3 value) {
-    opensimModelJNI.MatrixVec3_set(swigCPtr, this, i, j, Vec3.getCPtr(value), value);
+    opensimSimbodyJNI.MatrixVec3_set(swigCPtr, this, i, j, Vec3.getCPtr(value), value);
   }
 
 }

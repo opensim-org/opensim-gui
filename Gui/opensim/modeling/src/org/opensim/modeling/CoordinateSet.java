@@ -12,7 +12,7 @@ public class CoordinateSet extends ModelComponentSetCoordinates {
   private transient long swigCPtr;
 
   public CoordinateSet(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.CoordinateSet_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.CoordinateSet_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class CoordinateSet extends ModelComponentSetCoordinates {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_CoordinateSet(swigCPtr);
+        opensimModelSimulationJNI.delete_CoordinateSet(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,53 +36,53 @@ public class CoordinateSet extends ModelComponentSetCoordinates {
   }
 
   public static CoordinateSet safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.CoordinateSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.CoordinateSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new CoordinateSet(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.CoordinateSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.CoordinateSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.CoordinateSet_getClassName();
+    return opensimModelSimulationJNI.CoordinateSet_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.CoordinateSet_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.CoordinateSet_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new CoordinateSet(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.CoordinateSet_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.CoordinateSet_getConcreteClassName(swigCPtr, this);
   }
 
   public CoordinateSet() {
-    this(opensimModelJNI.new_CoordinateSet__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_CoordinateSet__SWIG_0(), true);
   }
 
   public CoordinateSet(Model model) {
-    this(opensimModelJNI.new_CoordinateSet__SWIG_1(Model.getCPtr(model), model), true);
+    this(opensimModelSimulationJNI.new_CoordinateSet__SWIG_1(Model.getCPtr(model), model), true);
   }
 
   public CoordinateSet(Model model, String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelJNI.new_CoordinateSet__SWIG_2(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
+    this(opensimModelSimulationJNI.new_CoordinateSet__SWIG_2(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
   }
 
   public CoordinateSet(Model model, String aFileName) {
-    this(opensimModelJNI.new_CoordinateSet__SWIG_3(Model.getCPtr(model), model, aFileName), true);
+    this(opensimModelSimulationJNI.new_CoordinateSet__SWIG_3(Model.getCPtr(model), model, aFileName), true);
   }
 
   public CoordinateSet(CoordinateSet aCoordinateSet) {
-    this(opensimModelJNI.new_CoordinateSet__SWIG_4(CoordinateSet.getCPtr(aCoordinateSet), aCoordinateSet), true);
+    this(opensimModelSimulationJNI.new_CoordinateSet__SWIG_4(CoordinateSet.getCPtr(aCoordinateSet), aCoordinateSet), true);
   }
 
   public void populate(Model model) {
-    opensimModelJNI.CoordinateSet_populate(swigCPtr, this, Model.getCPtr(model), model);
+    opensimModelSimulationJNI.CoordinateSet_populate(swigCPtr, this, Model.getCPtr(model), model);
   }
 
   public void getSpeedNames(ArrayStr rNames) {
-    opensimModelJNI.CoordinateSet_getSpeedNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
+    opensimModelSimulationJNI.CoordinateSet_getSpeedNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
   }
 
 }

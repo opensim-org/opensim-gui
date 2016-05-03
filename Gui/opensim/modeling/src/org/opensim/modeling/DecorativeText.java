@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class DecorativeText extends DecorativeGeometry {
   private transient long swigCPtr;
 
-  public DecorativeText(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.DecorativeText_SWIGUpcast(cPtr), cMemoryOwn);
+  protected DecorativeText(long cPtr, boolean cMemoryOwn) {
+    super(opensimSimbodyJNI.DecorativeText_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(DecorativeText obj) {
+  protected static long getCPtr(DecorativeText obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,7 +28,7 @@ public class DecorativeText extends DecorativeGeometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_DecorativeText(swigCPtr);
+        opensimSimbodyJNI.delete_DecorativeText(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,71 +36,71 @@ public class DecorativeText extends DecorativeGeometry {
   }
 
   public DecorativeText(String label) {
-    this(opensimModelJNI.new_DecorativeText__SWIG_0(label), true);
+    this(opensimSimbodyJNI.new_DecorativeText__SWIG_0(label), true);
   }
 
   public DecorativeText() {
-    this(opensimModelJNI.new_DecorativeText__SWIG_1(), true);
+    this(opensimSimbodyJNI.new_DecorativeText__SWIG_1(), true);
   }
 
   public DecorativeText setText(String label) {
-    return new DecorativeText(opensimModelJNI.DecorativeText_setText(swigCPtr, this, label), false);
+    return new DecorativeText(opensimSimbodyJNI.DecorativeText_setText(swigCPtr, this, label), false);
   }
 
   public String getText() {
-    return opensimModelJNI.DecorativeText_getText(swigCPtr, this);
+    return opensimSimbodyJNI.DecorativeText_getText(swigCPtr, this);
   }
 
   public DecorativeText setIsScreenText(boolean isScreen) {
-    return new DecorativeText(opensimModelJNI.DecorativeText_setIsScreenText(swigCPtr, this, isScreen), false);
+    return new DecorativeText(opensimSimbodyJNI.DecorativeText_setIsScreenText(swigCPtr, this, isScreen), false);
   }
 
   public boolean getIsScreenText() {
-    return opensimModelJNI.DecorativeText_getIsScreenText(swigCPtr, this);
+    return opensimSimbodyJNI.DecorativeText_getIsScreenText(swigCPtr, this);
   }
 
   public DecorativeText setBodyId(int b) {
-    return new DecorativeText(opensimModelJNI.DecorativeText_setBodyId(swigCPtr, this, b), false);
+    return new DecorativeText(opensimSimbodyJNI.DecorativeText_setBodyId(swigCPtr, this, b), false);
   }
 
   public DecorativeText setIndexOnBody(int x) {
-    return new DecorativeText(opensimModelJNI.DecorativeText_setIndexOnBody(swigCPtr, this, x), false);
+    return new DecorativeText(opensimSimbodyJNI.DecorativeText_setIndexOnBody(swigCPtr, this, x), false);
   }
 
   public DecorativeText setUserRef(SWIGTYPE_p_void p) {
-    return new DecorativeText(opensimModelJNI.DecorativeText_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
+    return new DecorativeText(opensimSimbodyJNI.DecorativeText_setUserRef(swigCPtr, this, SWIGTYPE_p_void.getCPtr(p)), false);
   }
 
   public DecorativeText setTransform(Transform X_BD) {
-    return new DecorativeText(opensimModelJNI.DecorativeText_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
+    return new DecorativeText(opensimSimbodyJNI.DecorativeText_setTransform(swigCPtr, this, Transform.getCPtr(X_BD), X_BD), false);
   }
 
   public DecorativeText setResolution(double r) {
-    return new DecorativeText(opensimModelJNI.DecorativeText_setResolution(swigCPtr, this, r), false);
+    return new DecorativeText(opensimSimbodyJNI.DecorativeText_setResolution(swigCPtr, this, r), false);
   }
 
   public DecorativeText setScaleFactors(Vec3 s) {
-    return new DecorativeText(opensimModelJNI.DecorativeText_setScaleFactors(swigCPtr, this, Vec3.getCPtr(s), s), false);
+    return new DecorativeText(opensimSimbodyJNI.DecorativeText_setScaleFactors(swigCPtr, this, Vec3.getCPtr(s), s), false);
   }
 
   public DecorativeText setColor(Vec3 rgb) {
-    return new DecorativeText(opensimModelJNI.DecorativeText_setColor(swigCPtr, this, Vec3.getCPtr(rgb), rgb), false);
+    return new DecorativeText(opensimSimbodyJNI.DecorativeText_setColor(swigCPtr, this, Vec3.getCPtr(rgb), rgb), false);
   }
 
   public DecorativeText setOpacity(double o) {
-    return new DecorativeText(opensimModelJNI.DecorativeText_setOpacity(swigCPtr, this, o), false);
+    return new DecorativeText(opensimSimbodyJNI.DecorativeText_setOpacity(swigCPtr, this, o), false);
   }
 
   public DecorativeText setLineThickness(double t) {
-    return new DecorativeText(opensimModelJNI.DecorativeText_setLineThickness(swigCPtr, this, t), false);
+    return new DecorativeText(opensimSimbodyJNI.DecorativeText_setLineThickness(swigCPtr, this, t), false);
   }
 
   public DecorativeText setFaceCamera(int yn) {
-    return new DecorativeText(opensimModelJNI.DecorativeText_setFaceCamera(swigCPtr, this, yn), false);
+    return new DecorativeText(opensimSimbodyJNI.DecorativeText_setFaceCamera(swigCPtr, this, yn), false);
   }
 
   public DecorativeText setRepresentation(DecorativeGeometry.Representation r) {
-    return new DecorativeText(opensimModelJNI.DecorativeText_setRepresentation(swigCPtr, this, r.swigValue()), false);
+    return new DecorativeText(opensimSimbodyJNI.DecorativeText_setRepresentation(swigCPtr, this, r.swigValue()), false);
   }
 
 }

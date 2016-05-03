@@ -12,7 +12,7 @@ public class UnexpectedMetaDataKey extends IOError {
   private transient long swigCPtr;
 
   public UnexpectedMetaDataKey(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.UnexpectedMetaDataKey_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelCommonJNI.UnexpectedMetaDataKey_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class UnexpectedMetaDataKey extends IOError {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_UnexpectedMetaDataKey(swigCPtr);
+        opensimModelCommonJNI.delete_UnexpectedMetaDataKey(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class UnexpectedMetaDataKey extends IOError {
   }
 
   public UnexpectedMetaDataKey(String file, long line, String func, String filename, String expected, String received) {
-    this(opensimModelJNI.new_UnexpectedMetaDataKey(file, line, func, filename, expected, received), true);
+    this(opensimModelCommonJNI.new_UnexpectedMetaDataKey(file, line, func, filename, expected, received), true);
   }
 
 }

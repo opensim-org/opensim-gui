@@ -12,7 +12,7 @@ public class ConditionalPathPoint extends PathPoint {
   private transient long swigCPtr;
 
   public ConditionalPathPoint(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ConditionalPathPoint_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.ConditionalPathPoint_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ConditionalPathPoint extends PathPoint {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ConditionalPathPoint(swigCPtr);
+        opensimModelSimulationJNI.delete_ConditionalPathPoint(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,62 +36,62 @@ public class ConditionalPathPoint extends PathPoint {
   }
 
   public static ConditionalPathPoint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ConditionalPathPoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.ConditionalPathPoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ConditionalPathPoint(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.ConditionalPathPoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.ConditionalPathPoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.ConditionalPathPoint_getClassName();
+    return opensimModelSimulationJNI.ConditionalPathPoint_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.ConditionalPathPoint_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.ConditionalPathPoint_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ConditionalPathPoint(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.ConditionalPathPoint_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.ConditionalPathPoint_getConcreteClassName(swigCPtr, this);
   }
 
   public ConditionalPathPoint() {
-    this(opensimModelJNI.new_ConditionalPathPoint__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_ConditionalPathPoint__SWIG_0(), true);
   }
 
   public ConditionalPathPoint(ConditionalPathPoint aPoint) {
-    this(opensimModelJNI.new_ConditionalPathPoint__SWIG_1(ConditionalPathPoint.getCPtr(aPoint), aPoint), true);
+    this(opensimModelSimulationJNI.new_ConditionalPathPoint__SWIG_1(ConditionalPathPoint.getCPtr(aPoint), aPoint), true);
   }
 
   public void copyData(ConditionalPathPoint aPoint) {
-    opensimModelJNI.ConditionalPathPoint_copyData(swigCPtr, this, ConditionalPathPoint.getCPtr(aPoint), aPoint);
+    opensimModelSimulationJNI.ConditionalPathPoint_copyData(swigCPtr, this, ConditionalPathPoint.getCPtr(aPoint), aPoint);
   }
 
   public void init(PathPoint aPoint) {
-    opensimModelJNI.ConditionalPathPoint_init(swigCPtr, this, PathPoint.getCPtr(aPoint), aPoint);
+    opensimModelSimulationJNI.ConditionalPathPoint_init(swigCPtr, this, PathPoint.getCPtr(aPoint), aPoint);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
-    opensimModelJNI.ConditionalPathPoint_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+    opensimModelSimulationJNI.ConditionalPathPoint_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
-    opensimModelJNI.ConditionalPathPoint_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
+    opensimModelSimulationJNI.ConditionalPathPoint_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
   public ArrayDouble getRange() {
-    return new ArrayDouble(opensimModelJNI.ConditionalPathPoint_getRange(swigCPtr, this), false);
+    return new ArrayDouble(opensimModelSimulationJNI.ConditionalPathPoint_getRange(swigCPtr, this), false);
   }
 
   public Coordinate getCoordinate() {
-    long cPtr = opensimModelJNI.ConditionalPathPoint_getCoordinate(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.ConditionalPathPoint_getCoordinate(swigCPtr, this);
     return (cPtr == 0) ? null : new Coordinate(cPtr, false);
   }
 
   public String getCoordinateName() {
-    return opensimModelJNI.ConditionalPathPoint_getCoordinateName(swigCPtr, this);
+    return opensimModelSimulationJNI.ConditionalPathPoint_getCoordinateName(swigCPtr, this);
   }
 
 }

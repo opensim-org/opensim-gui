@@ -12,7 +12,7 @@ public class ModelComponentSetBodies extends SetBodies {
   private transient long swigCPtr;
 
   public ModelComponentSetBodies(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ModelComponentSetBodies_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimModelSimulationJNI.ModelComponentSetBodies_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ModelComponentSetBodies extends SetBodies {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ModelComponentSetBodies(swigCPtr);
+        opensimModelSimulationJNI.delete_ModelComponentSetBodies(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,73 +36,73 @@ public class ModelComponentSetBodies extends SetBodies {
   }
 
   public static ModelComponentSetBodies safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ModelComponentSetBodies_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimModelSimulationJNI.ModelComponentSetBodies_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ModelComponentSetBodies(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.ModelComponentSetBodies_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimModelSimulationJNI.ModelComponentSetBodies_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.ModelComponentSetBodies_getClassName();
+    return opensimModelSimulationJNI.ModelComponentSetBodies_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.ModelComponentSetBodies_clone(swigCPtr, this);
+    long cPtr = opensimModelSimulationJNI.ModelComponentSetBodies_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ModelComponentSetBodies(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.ModelComponentSetBodies_getConcreteClassName(swigCPtr, this);
+    return opensimModelSimulationJNI.ModelComponentSetBodies_getConcreteClassName(swigCPtr, this);
   }
 
   public ModelComponentSetBodies() {
-    this(opensimModelJNI.new_ModelComponentSetBodies__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_ModelComponentSetBodies__SWIG_0(), true);
   }
 
   public ModelComponentSetBodies(Model model) {
-    this(opensimModelJNI.new_ModelComponentSetBodies__SWIG_1(Model.getCPtr(model), model), true);
+    this(opensimModelSimulationJNI.new_ModelComponentSetBodies__SWIG_1(Model.getCPtr(model), model), true);
   }
 
   public ModelComponentSetBodies(Model model, String fileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelJNI.new_ModelComponentSetBodies__SWIG_2(Model.getCPtr(model), model, fileName, aUpdateFromXMLNode), true);
+    this(opensimModelSimulationJNI.new_ModelComponentSetBodies__SWIG_2(Model.getCPtr(model), model, fileName, aUpdateFromXMLNode), true);
   }
 
   public ModelComponentSetBodies(Model model, String fileName) {
-    this(opensimModelJNI.new_ModelComponentSetBodies__SWIG_3(Model.getCPtr(model), model, fileName), true);
+    this(opensimModelSimulationJNI.new_ModelComponentSetBodies__SWIG_3(Model.getCPtr(model), model, fileName), true);
   }
 
   public ModelComponentSetBodies(ModelComponentSetBodies source) {
-    this(opensimModelJNI.new_ModelComponentSetBodies__SWIG_4(ModelComponentSetBodies.getCPtr(source), source), true);
+    this(opensimModelSimulationJNI.new_ModelComponentSetBodies__SWIG_4(ModelComponentSetBodies.getCPtr(source), source), true);
   }
 
   public boolean insert(int aIndex, Body aObject) {
-    return opensimModelJNI.ModelComponentSetBodies_insert(swigCPtr, this, aIndex, Body.getCPtr(aObject), aObject);
+    return opensimModelSimulationJNI.ModelComponentSetBodies_insert(swigCPtr, this, aIndex, Body.getCPtr(aObject), aObject);
   }
 
   public boolean set(int aIndex, Body aObject, boolean preserveGroups) {
-    return opensimModelJNI.ModelComponentSetBodies_set__SWIG_0(swigCPtr, this, aIndex, Body.getCPtr(aObject), aObject, preserveGroups);
+    return opensimModelSimulationJNI.ModelComponentSetBodies_set__SWIG_0(swigCPtr, this, aIndex, Body.getCPtr(aObject), aObject, preserveGroups);
   }
 
   public boolean set(int aIndex, Body aObject) {
-    return opensimModelJNI.ModelComponentSetBodies_set__SWIG_1(swigCPtr, this, aIndex, Body.getCPtr(aObject), aObject);
+    return opensimModelSimulationJNI.ModelComponentSetBodies_set__SWIG_1(swigCPtr, this, aIndex, Body.getCPtr(aObject), aObject);
   }
 
   public void invokeConnectToModel(Model model) {
-    opensimModelJNI.ModelComponentSetBodies_invokeConnectToModel(swigCPtr, this, Model.getCPtr(model), model);
+    opensimModelSimulationJNI.ModelComponentSetBodies_invokeConnectToModel(swigCPtr, this, Model.getCPtr(model), model);
   }
 
   public void invokeInitStateFromProperties(State state) {
-    opensimModelJNI.ModelComponentSetBodies_invokeInitStateFromProperties(swigCPtr, this, State.getCPtr(state), state);
+    opensimModelSimulationJNI.ModelComponentSetBodies_invokeInitStateFromProperties(swigCPtr, this, State.getCPtr(state), state);
   }
 
   public void invokeSetPropertiesFromState(State state) {
-    opensimModelJNI.ModelComponentSetBodies_invokeSetPropertiesFromState(swigCPtr, this, State.getCPtr(state), state);
+    opensimModelSimulationJNI.ModelComponentSetBodies_invokeSetPropertiesFromState(swigCPtr, this, State.getCPtr(state), state);
   }
 
   public void invokeGenerateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
-    opensimModelJNI.ModelComponentSetBodies_invokeGenerateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
+    opensimModelSimulationJNI.ModelComponentSetBodies_invokeGenerateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
   }
 
 }
