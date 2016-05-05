@@ -48,7 +48,7 @@ public class Station extends Point {
     return opensimModelSimulationJNI.Station_getClassName();
   }
 
-  public Station clone() {
+  public OpenSimObject clone() {
     long cPtr = opensimModelSimulationJNI.Station_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Station(cPtr, true);
   }

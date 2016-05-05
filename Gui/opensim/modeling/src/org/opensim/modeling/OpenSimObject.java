@@ -67,7 +67,6 @@ public class OpenSimObject {
     }
   }  
 
-
   public OpenSimObject clone() {
     long cPtr = opensimModelCommonJNI.OpenSimObject_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new OpenSimObject(cPtr, true);

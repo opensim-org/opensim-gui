@@ -1295,6 +1295,8 @@ public class opensimModelCommonJNI {
   public final static native void delete_IncorrectMetaDataLength(long jarg1);
   public final static native long new_MetaDataLengthZero(String jarg1, long jarg2, String jarg3, String jarg4);
   public final static native void delete_MetaDataLengthZero(long jarg1);
+  public final static native long new_EmptyTable();
+  public final static native void delete_EmptyTable(long jarg1);
   public final static native void delete_AbstractDataTable(long jarg1);
   public final static native long AbstractDataTable_getNumRows(long jarg1, AbstractDataTable jarg1_);
   public final static native long AbstractDataTable_getNumColumns(long jarg1, AbstractDataTable jarg1_);
@@ -1513,6 +1515,7 @@ public class opensimModelCommonJNI {
   public final static native long MissingMetaData_SWIGUpcast(long jarg1);
   public final static native long IncorrectMetaDataLength_SWIGUpcast(long jarg1);
   public final static native long MetaDataLengthZero_SWIGUpcast(long jarg1);
+  public final static native long EmptyTable_SWIGUpcast(long jarg1);
   public final static native long InvalidTable_SWIGUpcast(long jarg1);
   public final static native long TimeColumnNotIncreasing_SWIGUpcast(long jarg1);
   public final static native long InvalidTimestamp_SWIGUpcast(long jarg1);

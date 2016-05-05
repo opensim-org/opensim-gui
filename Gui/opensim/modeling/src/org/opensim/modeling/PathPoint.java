@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class PathPoint extends OpenSimObject {
+public class PathPoint extends Station {
   private transient long swigCPtr;
 
   public PathPoint(long cPtr, boolean cMemoryOwn) {
@@ -58,19 +58,15 @@ public class PathPoint extends OpenSimObject {
   }
 
   public PathPoint() {
-    this(opensimModelSimulationJNI.new_PathPoint__SWIG_0(), true);
+    this(opensimModelSimulationJNI.new_PathPoint(), true);
   }
 
-  public PathPoint(PathPoint aPoint) {
-    this(opensimModelSimulationJNI.new_PathPoint__SWIG_1(PathPoint.getCPtr(aPoint), aPoint), true);
+  public void init(PathPoint point) {
+    opensimModelSimulationJNI.PathPoint_init(swigCPtr, this, PathPoint.getCPtr(point), point);
   }
 
   public void copyData(PathPoint aPoint) {
     opensimModelSimulationJNI.PathPoint_copyData(swigCPtr, this, PathPoint.getCPtr(aPoint), aPoint);
-  }
-
-  public void init(PathPoint aPoint) {
-    opensimModelSimulationJNI.PathPoint_init(swigCPtr, this, PathPoint.getCPtr(aPoint), aPoint);
   }
 
   public Vec3 getLocation() {
@@ -85,8 +81,8 @@ public class PathPoint extends OpenSimObject {
     opensimModelSimulationJNI.PathPoint_setLocationCoord(swigCPtr, this, aXYZ, aValue);
   }
 
-  public void setLocation(State s, Vec3 aLocation) {
-    opensimModelSimulationJNI.PathPoint_setLocation__SWIG_0(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(aLocation), aLocation);
+  public void setLocation(State s, Vec3 location) {
+    opensimModelSimulationJNI.PathPoint_setLocation__SWIG_0(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(location), location);
   }
 
   public void setLocation(State s, int aCoordIndex, double aLocation) {
@@ -97,12 +93,12 @@ public class PathPoint extends OpenSimObject {
     opensimModelSimulationJNI.PathPoint_setLocation__SWIG_2(swigCPtr, this, State.getCPtr(s), s, pt);
   }
 
-  public void setBody(PhysicalFrame aBody) {
-    opensimModelSimulationJNI.PathPoint_setBody(swigCPtr, this, PhysicalFrame.getCPtr(aBody), aBody);
+  public void setBody(PhysicalFrame body) {
+    opensimModelSimulationJNI.PathPoint_setBody(swigCPtr, this, PhysicalFrame.getCPtr(body), body);
   }
 
-  public void changeBodyPreserveLocation(State s, PhysicalFrame aBody) {
-    opensimModelSimulationJNI.PathPoint_changeBodyPreserveLocation(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aBody), aBody);
+  public void changeBodyPreserveLocation(State s, PhysicalFrame body) {
+    opensimModelSimulationJNI.PathPoint_changeBodyPreserveLocation(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(body), body);
   }
 
   public PhysicalFrame getBody() {
@@ -118,8 +114,8 @@ public class PathPoint extends OpenSimObject {
     return (cPtr == 0) ? null : new GeometryPath(cPtr, false);
   }
 
-  public void scale(State s, Vec3 aScaleFactors) {
-    opensimModelSimulationJNI.PathPoint_scale(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(aScaleFactors), aScaleFactors);
+  public void scale(State s, Vec3 scaleFactors) {
+    opensimModelSimulationJNI.PathPoint_scale(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(scaleFactors), scaleFactors);
   }
 
   public WrapObject getWrapObject() {
@@ -139,8 +135,8 @@ public class PathPoint extends OpenSimObject {
     opensimModelSimulationJNI.PathPoint_update(swigCPtr, this, State.getCPtr(s), s);
   }
 
-  public void getVelocity(State s, Vec3 aVelocity) {
-    opensimModelSimulationJNI.PathPoint_getVelocity(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(aVelocity), aVelocity);
+  public void getVelocity(State s, Vec3 velocity) {
+    opensimModelSimulationJNI.PathPoint_getVelocity(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(velocity), velocity);
   }
 
   public Vec3 getdPointdQ(State s) {
@@ -158,6 +154,10 @@ public class PathPoint extends OpenSimObject {
 
   public static void deletePathPoint(PathPoint aPoint) {
     opensimModelSimulationJNI.PathPoint_deletePathPoint(PathPoint.getCPtr(aPoint), aPoint);
+  }
+
+  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
+    opensimModelSimulationJNI.PathPoint_updateFromXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
   }
 
 }
