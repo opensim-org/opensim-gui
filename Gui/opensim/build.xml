@@ -5,7 +5,12 @@
 <project name="opensim" basedir=".">
     <description>Builds the module suite opensim.</description>
     <property name="api.dir" value="C:/Dev/gui/opensim-gui/OpenSimAPI-install"/>
+    <property name="models.dir" value="C:/Dev/gui/opensim-models"/>
+    <property name="visualizer.dir" value="C:/Dev/opensim-threejs"/>
     <import file="nbproject/build-impl.xml"/>
+    <target name="debug-properties">
+        <echoproperties/>
+    </target>
     <target name="copy-java-bindings" description="Copy results of builing opensim-core with Java Bindings to gui">
          <copy todir="modeling/src/org/opensim/modeling">
             <fileset dir="${api.dir}/sdk/Java/org/opensim/modeling" />
@@ -27,4 +32,23 @@
             <fileset dir="${api.dir}/sdk"/>
         </copy>
     </target>
+    <target name="copy-jre" description="Copy JRE to installer">
+        <copy todir="dist/installer/opensim/jdk/jre">
+            <fileset dir="${platforms.1.8.home}/jre"/>
+        </copy>
+    </target>
+    <target name="copy-models" description="Copy Models and Geometry to installer">
+        <copy todir="dist/installer/opensim/Geometry">
+            <fileset dir="${models.dir}/Geometry"/>
+        </copy>
+        <copy todir="dist/installer/opensim/models">
+            <fileset dir="${models.dir}/models"/>
+        </copy>
+    </target>
+    <target name="copy-visualizer" description="Copy Visualizer to installer">
+        <copy todir="dist/installer/opensim/threejs/editor">
+            <fileset dir="${visualizer.dir}/three.js/editor"/>
+        </copy>
+    </target>
+    
 </project>
