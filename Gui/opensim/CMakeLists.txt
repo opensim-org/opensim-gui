@@ -21,17 +21,14 @@ message(STATUS "Replacing exising Java files with ones from opensim-core.")
 
 find_package(Ant REQUIRED)
 
-get_filename_component(PARENT_DIR ${OpenSim_DIR} DIRECTORY)
-
-MESSAGE(STATUS, ${PARENT_DIR})
 add_custom_target(CopyOpenSimCore ALL
-                  COMMAND ${Ant_EXECUTABLE} copy-java-bindings -Dapi.dir="${PARENT_DIR}"
+                  COMMAND ${Ant_EXECUTABLE} copy-java-bindings -Dapi.dir="${OpenSim_ROOT_DIR}"
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Copy opensim-core Java Bindings to GUI.")
 
 add_custom_target(PrepareInstaller ALL
-                  COMMAND ${Ant_EXECUTABLE} copy-installer-files -Dapi.dir="${PARENT_DIR}"
+                  COMMAND ${Ant_EXECUTABLE} copy-installer-files -Dapi.dir="${OpenSim_ROOT_DIR}"
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Merge GUI build and opensim-core install into one folder.")
@@ -45,17 +42,21 @@ add_custom_target(CopyJRE ALL
 set(VIS_REPO "" CACHE
     PATH "The location of the opensim-threejs repository to copy into installation.")
 
+if (VIS_REPO)
 add_custom_target(CopyVisualizer ALL
                   COMMAND ${Ant_EXECUTABLE} copy-visualizer -Dvisualizer.dir="${VIS_REPO}"
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Copy Visualizer to installer folder.")
+endif()
 
 set(MODELS_REPO "" CACHE
     PATH "The location of the Models repository to copy into installation.")
 
+if (MODELS_REPO)
 add_custom_target(CopyModels ALL
                   COMMAND ${Ant_EXECUTABLE} copy-models -Dmodels.dir="${MODELS_REPO}"
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Copy models and examples-to installer folder.")
+endif()
