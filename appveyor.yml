@@ -36,6 +36,7 @@ install:
 
 build_script:
   - cd Gui/opensim
+  - echo %PATH%
   - ant build -Dnbplatform.default.netbeans.dest.dir="C:/Program Files/NetBeans 8.0.2" -Dnbplatform.default.harness.dir="C:/Program Files/NetBeans 8.0.2/harness"
   
 test_script:
