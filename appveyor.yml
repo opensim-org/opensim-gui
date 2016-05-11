@@ -17,8 +17,8 @@ init:
   # so we must add v2.7 64bit earlier on the PATH.
   # http://www.appveyor.com/docs/installed-software
   - SET OPENSIM_HOME=C:/OpenSim
-  - SET PATH=%OPENSIM_HOME%/bin;C:/Program Files/Java/jdk1.8.0_66/bin;%PATH%
-  - SET JAVA_HOME=C:/Program Files/Java/jdk1.8.0_66
+  - SET PATH=%OPENSIM_HOME%/bin;C:/Program Files/Java/jdk1.8.0/bin;%PATH%
+  - SET JAVA_HOME=C:/Program Files/Java/jdk1.8.0/
   #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 nuget:
   account_feed: true
@@ -38,6 +38,8 @@ install:
 build_script:
   - cd Gui/opensim
   - echo %PATH%
+  - echo %JAVA_HOME%
+  - java -version
   - ant build -Dnbplatform.default.netbeans.dest.dir="C:/Program Files/NetBeans 8.0.2" -Dnbplatform.default.harness.dir="C:/Program Files/NetBeans 8.0.2/harness"
   
 test_script:
