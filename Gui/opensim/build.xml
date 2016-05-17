@@ -51,5 +51,11 @@
             <fileset dir="${visualizer.dir}/three.js/editor"/>
         </copy>
     </target>
-    
+    <target name="build-mac-installer" depends="build-mac">
+       <property name="lib.dir" value="/Users/aymanhabib/dev/install/opensim-core-install/lib"/>
+       <echoproperties/>
+       <copy todir="dist/opensim.app/Contents/Resources/opensim/bin">
+           <fileset dir="${lib.dir}"/>
+       </copy>
+    </target>
 </project>
