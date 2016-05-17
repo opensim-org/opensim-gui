@@ -23,3 +23,4 @@ err.log
 out.log
 *.swp
 /OpenSimAPI-install/sdk/Java/org/opensim/modeling/*.class
+/Gui/opensim/modeling/src/org/opensim/modeling/*.class
