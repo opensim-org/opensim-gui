@@ -934,12 +934,12 @@ public class Model extends ModelComponent {
     return new SWIGTYPE_p_SimTK__DefaultSystemSubsystem(opensimModelSimulationJNI.Model_updDefaultSubsystem(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_SimTK__SimbodyMatterSubsystem getMatterSubsystem() {
-    return new SWIGTYPE_p_SimTK__SimbodyMatterSubsystem(opensimModelSimulationJNI.Model_getMatterSubsystem(swigCPtr, this), false);
+  public SimbodyMatterSubsystem getMatterSubsystem() {
+    return new SimbodyMatterSubsystem(opensimModelSimulationJNI.Model_getMatterSubsystem(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_SimTK__SimbodyMatterSubsystem updMatterSubsystem() {
-    return new SWIGTYPE_p_SimTK__SimbodyMatterSubsystem(opensimModelSimulationJNI.Model_updMatterSubsystem(swigCPtr, this), false);
+  public SimbodyMatterSubsystem updMatterSubsystem() {
+    return new SimbodyMatterSubsystem(opensimModelSimulationJNI.Model_updMatterSubsystem(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_SimTK__Force__Gravity getGravityForce() {

@@ -93,4 +93,8 @@ public class AssemblySolver extends Solver {
     opensimModelSimulationJNI.AssemblySolver_track(swigCPtr, this, State.getCPtr(s), s);
   }
 
+  public SWIGTYPE_p_SimTK__Assembler getAssembler() {
+    return new SWIGTYPE_p_SimTK__Assembler(opensimModelSimulationJNI.AssemblySolver_getAssembler(swigCPtr, this), false);
+  }
+
 }
