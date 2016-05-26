@@ -499,12 +499,12 @@ public class State {
     return new Vector(opensimSimbodyJNI.State_updMultipliers__SWIG_1(swigCPtr, this), false);
   }
 
-  public void getSystemStageVersions(SWIGTYPE_p_SimTK__Array_T_int_unsigned_int_t versions) {
-    opensimSimbodyJNI.State_getSystemStageVersions(swigCPtr, this, SWIGTYPE_p_SimTK__Array_T_int_unsigned_int_t.getCPtr(versions));
+  public void getSystemStageVersions(SimTKArrayInt versions) {
+    opensimSimbodyJNI.State_getSystemStageVersions(swigCPtr, this, SimTKArrayInt.getCPtr(versions), versions);
   }
 
-  public Stage getLowestSystemStageDifference(SWIGTYPE_p_SimTK__Array_T_int_unsigned_int_t prevVersions) {
-    return new Stage(opensimSimbodyJNI.State_getLowestSystemStageDifference(swigCPtr, this, SWIGTYPE_p_SimTK__Array_T_int_unsigned_int_t.getCPtr(prevVersions)), true);
+  public Stage getLowestSystemStageDifference(SimTKArrayInt prevVersions) {
+    return new Stage(opensimSimbodyJNI.State_getLowestSystemStageDifference(swigCPtr, this, SimTKArrayInt.getCPtr(prevVersions), prevVersions), true);
   }
 
   public void setSystemTopologyStageVersion(int topoVersion) {
