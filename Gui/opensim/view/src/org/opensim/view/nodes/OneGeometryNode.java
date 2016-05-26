@@ -70,10 +70,9 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
         String gName=cg.getName();
         if (cg.getName().equalsIgnoreCase("")){
             gName=cg.getName();
-            setDisplayName(cg.getName());
+            setDisplayName(cg.getFullPathName());
             setName(cg.getName());
         }
-        setShortDescription(bundle.getString("HINT_DisplayGeometryNode"));
         setChildren(Children.LEAF);
         addDisplayOption(displayOption.Colorable);
         addDisplayOption(displayOption.Isolatable);

@@ -53,7 +53,6 @@ public class OneMuscleNode extends OneForceNode {
     /** Creates a new instance of OneMuscleNode */
     public OneMuscleNode(OpenSimObject actuator) {
         super(actuator);
-        setShortDescription(bundle.getString("HINT_MuscleNode"));
         setChildren(Children.LEAF);
         addDisplayOption(displayOption.Showable);
         addDisplayOption(displayOption.Isolatable);

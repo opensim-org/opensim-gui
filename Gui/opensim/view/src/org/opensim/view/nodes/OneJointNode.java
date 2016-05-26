@@ -55,7 +55,6 @@ public class OneJointNode extends OneModelComponentNode {
     public OneJointNode(OpenSimObject jnt) {
         super(jnt);
         comp = Component.safeDownCast(jnt);
-        setShortDescription(bundle.getString("HINT_JointNode"));
         Joint joint = Joint.safeDownCast(jnt);
         CustomJoint cj = CustomJoint.safeDownCast(joint);
         if (cj != null) {
