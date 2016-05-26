@@ -22,7 +22,7 @@ message(STATUS "Replacing exising Java files with ones from opensim-core.")
 find_package(Ant REQUIRED)
 
 add_custom_target(CopyOpenSimCore ALL
-                  COMMAND ${Ant_EXECUTABLE} copy-java-bindings -Dapi.dir="${OpenSim_ROOT_DIR}"
+                  COMMAND ${Ant_EXECUTABLE} copy-java-bindings -DapiJava.dir="${OpenSim_JAVA_FILES_DIR}"
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Copy opensim-core Java Bindings to GUI.")

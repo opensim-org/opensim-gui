@@ -32,7 +32,6 @@ import java.awt.Image;
 import java.io.File;
 import java.util.Map;
 import javax.swing.JFrame;
-import org.openide.DialogDisplayer;
 import org.openide.LifecycleManager;
 import org.openide.NotifyDescriptor;
 import org.openide.util.ImageUtilities;
@@ -47,6 +46,7 @@ public final class TheApp {
     //static TheApp instance=null;
     private static JFrame appFrame;    // Application's frame, cached in for quick access
     private static Image appImage;
+    private static String installDir=null;
     /** Creates a new instance of TheApp 
     protected TheApp() {
     }
@@ -109,7 +109,27 @@ public final class TheApp {
      */
     public static String getInstallDir() {
         Map<String, String> env = System.getenv();
-        String installDir = env.get("OPENSIM_HOME");
+        //if (installDir == null) 
+        //    installDir = env.get("OPENSIM_HOME");
+        if (installDir == null){ // Test cross platform and cross platform with Spaces in path names etc.
+            String jarfile = TheApp.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+            File jarFile= new File(jarfile);
+            String parentDir = jarFile.getParent();
+            boolean buildEnvironment = parentDir.lastIndexOf("cluster")!=-1;
+            if (buildEnvironment){
+                installDir = parentDir.substring(6);
+                int lastIndex = installDir.lastIndexOf("cluster")-6;
+                installDir = installDir.substring(0, lastIndex);
+            }
+            else {
+                installDir = parentDir.substring(6);
+                // go up the tree twice
+                installDir = new File(installDir).getParent();
+                installDir = new File(installDir).getParent();
+            }
+            // Strip leading "file:/"
+            System.out.println("new OPENSIM_HOME ="+installDir);
+        }
         return installDir;
     }
     /**

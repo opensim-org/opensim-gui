@@ -8,18 +8,18 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_SimTK__SimbodyMatterSubsystem {
+public class SWIGTYPE_p_SimTK__Assembler {
   private transient long swigCPtr;
 
-  protected SWIGTYPE_p_SimTK__SimbodyMatterSubsystem(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
+  protected SWIGTYPE_p_SimTK__Assembler(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_SimTK__SimbodyMatterSubsystem() {
+  protected SWIGTYPE_p_SimTK__Assembler() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_SimTK__SimbodyMatterSubsystem obj) {
+  protected static long getCPtr(SWIGTYPE_p_SimTK__Assembler obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }

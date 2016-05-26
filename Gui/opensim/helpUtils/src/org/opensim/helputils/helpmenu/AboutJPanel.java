@@ -42,6 +42,7 @@ import java.net.URL;
 import java.util.MissingResourceException;
 import static org.opensim.modeling.opensimModelCommonJNI.GetCompilerVersion;
 import org.opensim.modeling.opensimModelJNI;
+import org.opensim.utils.TheApp;
 
 /**
  *
@@ -93,6 +94,8 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         libraryPathString = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         compilerVersionLabel = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabelOpenSimHomeString = new javax.swing.JLabel();
         jCreditsPanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -169,40 +172,51 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
 
         compilerVersionLabel.setText("Compiler Version");
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setText("OpenSim Home:");
+
+        jLabelOpenSimHomeString.setText("jLabel10");
+
         org.jdesktop.layout.GroupLayout jPanel5Layout = new org.jdesktop.layout.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel5Layout.createSequentialGroup()
                 .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel1)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel5Layout.createSequentialGroup()
+                    .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                .add(jPanel5Layout.createSequentialGroup()
-                                    .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                        .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .add(jLabel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
-                                        .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .add(jLabel6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jLabel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
-                                .add(jPanel5Layout.createSequentialGroup()
-                                    .add(jLabel7)
-                                    .add(56, 56, 56)))
                             .add(jPanel5Layout.createSequentialGroup()
-                                .add(jLabel8)
-                                .add(110, 110, 110)))
+                                .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .add(jLabel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .add(jLabel6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jLabel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
+                            .add(jPanel5Layout.createSequentialGroup()
+                                .add(jLabel7)
+                                .add(56, 56, 56)))
+                        .add(jPanel5Layout.createSequentialGroup()
+                            .add(jLabel8)
+                            .add(110, 110, 110)))
+                    .add(jPanel5Layout.createSequentialGroup()
                         .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jLabel1)
+                            .add(jLabel9))
+                        .add(120, 120, 120)))
+                .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(VMvendorString)
+                        .add(operatingSystemString, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                        .add(versionString, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                        .add(jreString, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                        .add(jHomeDirString))
+                    .add(jPanel5Layout.createSequentialGroup()
+                        .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jLabelOpenSimHomeString)
                             .add(compilerVersionLabel)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                .add(libraryPathString)
-                                .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(VMvendorString)
-                                    .add(operatingSystemString, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                                    .add(versionString, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                                    .add(jreString, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                                    .add(jHomeDirString))))))
+                            .add(libraryPathString))
+                        .add(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -238,7 +252,11 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
                 .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel7)
                     .add(libraryPathString))
-                .addContainerGap(286, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel9)
+                    .add(jLabelOpenSimHomeString))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         org.jdesktop.layout.GroupLayout jDetailsPanelLayout = new org.jdesktop.layout.GroupLayout(jDetailsPanel);
@@ -403,6 +421,8 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelOpenSimHomeString;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -533,6 +553,8 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         libraryPathString.setText(System.getProperty("java.library.path"));
         compilerVersionLabel.setText(GetCompilerVersion());
         libraryPathString.setToolTipText("<html>"+System.getProperty("java.library.path").replace(";", "<br>")+"</html>");
+        jLabelOpenSimHomeString.setText(TheApp.getInstallDir());
+        jLabelOpenSimHomeString.setToolTipText("<html>"+TheApp.getInstallDir()+"</html");
     }
     
 }

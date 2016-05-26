@@ -65,10 +65,6 @@ public class MarkerWeight extends OpenSimObject {
     this(opensimModelSimulationJNI.new_MarkerWeight__SWIG_1(name, weight), true);
   }
 
-  public MarkerWeight(MarkerWeight source) {
-    this(opensimModelSimulationJNI.new_MarkerWeight__SWIG_2(MarkerWeight.getCPtr(source), source), true);
-  }
-
   public void setWeight(double weight) {
     opensimModelSimulationJNI.MarkerWeight_setWeight(swigCPtr, this, weight);
   }

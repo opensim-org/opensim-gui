@@ -5,6 +5,7 @@
 <project name="opensim" basedir=".">
     <description>Builds the module suite opensim.</description>
     <property name="api.dir" value="C:/Dev/gui/opensim-gui/OpenSimAPI-install"/>
+    <property name="apiJava.dir" value="C:/Dev/gui/opensim-gui/OpenSimAPI-install/sdk/Java/org"/>
     <property name="models.dir" value="C:/Dev/gui/opensim-models"/>
     <property name="visualizer.dir" value="C:/Dev/opensim-threejs"/>
     <import file="nbproject/build-impl.xml"/>
@@ -13,7 +14,7 @@
     </target>
     <target name="copy-java-bindings" description="Copy results of builing opensim-core with Java Bindings to gui">
          <copy todir="modeling/src/org/opensim/modeling">
-            <fileset dir="${api.dir}/sdk/Java/org/opensim/modeling" />
+            <fileset dir="${apiJava.dir}/opensim/modeling" />
         </copy>
     </target>
     <target name="unzip-distro" depends="build-zip" 

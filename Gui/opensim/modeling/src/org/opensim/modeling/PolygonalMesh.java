@@ -91,8 +91,8 @@ public class PolygonalMesh {
     return opensimSimbodyJNI.PolygonalMesh_addVertex(swigCPtr, this, Vec3.getCPtr(position), position);
   }
 
-  public int addFace(SWIGTYPE_p_SimTK__Array_T_int_unsigned_int_t vertices) {
-    return opensimSimbodyJNI.PolygonalMesh_addFace(swigCPtr, this, SWIGTYPE_p_SimTK__Array_T_int_unsigned_int_t.getCPtr(vertices));
+  public int addFace(SimTKArrayInt vertices) {
+    return opensimSimbodyJNI.PolygonalMesh_addFace(swigCPtr, this, SimTKArrayInt.getCPtr(vertices), vertices);
   }
 
   public PolygonalMesh scaleMesh(double scale) {
