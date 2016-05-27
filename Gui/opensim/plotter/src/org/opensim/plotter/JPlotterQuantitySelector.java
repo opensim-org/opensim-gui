@@ -154,7 +154,7 @@ public class JPlotterQuantitySelector  {
        else {   //Analysis source, create a list 
            // Get a dropdown of coordinate names
            Model currentModel = OpenSimDB.getInstance().getCurrentModel();
-           SingleModelGuiElements guiElem = ViewDB.getInstance().getModelGuiElements(currentModel);
+           SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(currentModel);
            String[] coordinateNames = guiElem.getCoordinateNames();
            for(int i=0; i<coordinateNames.length; i++){
                final String coordinateName = coordinateNames[i];

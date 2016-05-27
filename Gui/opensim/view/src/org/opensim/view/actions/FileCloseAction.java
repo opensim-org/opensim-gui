@@ -57,7 +57,7 @@ public static boolean closeModel(Model model) {
         if(model==null) return true;
 
 
-        SingleModelGuiElements guiElem = ViewDB.getInstance().getModelGuiElements(model);
+        SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(model);
         
         // Do not allow the model to be closed if it is locked.
         if (guiElem != null && guiElem.isLocked()) {

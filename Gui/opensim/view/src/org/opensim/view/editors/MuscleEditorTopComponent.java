@@ -376,7 +376,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
       if (validName(MuscleNameTextField.getText()) == false)
          return;
       currentAct.setName(MuscleNameTextField.getText());
-      ViewDB.getInstance().getModelGuiElements(currentModel).updateActuatorNames();
+      OpenSimDB.getInstance().getModelGuiElements(currentModel).updateActuatorNames();
       // Update the muscle list in the ViewDB and then generate an event
       // so other tools can update accordingly.
       Vector<OpenSimObject> objs = new Vector<OpenSimObject>(1);
@@ -409,7 +409,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
    // the current model. It assumes that the actuator's name has already been
    // changed, so only the muscle editor needs to be updated.
    private void updateActuatorName(PathActuator act) {
-      SingleModelGuiElements guiElem = ViewDB.getInstance().getModelGuiElements(currentModel);
+      SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(currentModel);
       String [] actNames = guiElem.getActuatorNames();
       MuscleComboBox.setModel(new javax.swing.DefaultComboBoxModel(actNames));
       if (currentAct != null) {
@@ -1482,7 +1482,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
       currentAct = newAct;
 
       if (currentModel != null) {
-         guiElem = ViewDB.getInstance().getModelGuiElements(currentModel);
+         guiElem = OpenSimDB.getInstance().getModelGuiElements(currentModel);
          ModelNameLabel.setText("Model: " + currentModel.getName());
          if (currentModel.getForceSet().getSize() > 0) {
             MuscleComboBox.setEnabled(true);
@@ -1923,7 +1923,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
       // If m is not null, then at least one selected object is a muscle point
       // (that was just dragged). So redraw the model.
       //if (m != null) {
-         SingleModelGuiElements guiElem = ViewDB.getInstance().getModelGuiElements(currentModel);
+         SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(currentModel);
          guiElem.setUnsavedChangesFlag(true);
          // If the current muscle moved, update the necessary panels.
          //if (currentMuscleMoved) {

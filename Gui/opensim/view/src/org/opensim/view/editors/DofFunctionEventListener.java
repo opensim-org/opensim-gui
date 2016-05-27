@@ -66,7 +66,7 @@ public class DofFunctionEventListener implements FunctionEventListener {
 
       if (dof != null) {
          Model model = OpenSimDB.getInstance().getCurrentModel();
-         SingleModelGuiElements guiElem = ViewDB.getInstance().getModelGuiElements(model);
+         SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(model);
          OpenSimContext openSimContext = OpenSimDB.getInstance().getContext(model);
 
          if (event instanceof FunctionReplacedEvent) {

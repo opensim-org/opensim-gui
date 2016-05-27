@@ -378,7 +378,7 @@ public class QuantityNameFilterJPanel extends javax.swing.JPanel
         JComboBox cb = (JComboBox)evt.getSource();
         currentModel = (Model) cb.getSelectedItem();
         // Find model's muscle groups and fill in drop down'
-        Vector<String> groups=ViewDB.getInstance().getModelGuiElements(currentModel).getActuatorGroupNames();
+        Vector<String> groups=OpenSimDB.getInstance().getModelGuiElements(currentModel).getActuatorGroupNames();
         jMuscleGroupComboBox.setModel(new DefaultComboBoxModel(groups));
         if (groups.size()>0){
            jMuscleGroupComboBox.setSelectedIndex(0);
@@ -421,7 +421,7 @@ public class QuantityNameFilterJPanel extends javax.swing.JPanel
         jModelComboBox.setModel(new DefaultComboBoxModel(models));
         currentModel = OpenSimDB.getInstance().getCurrentModel();
         jModelComboBox.setSelectedItem(currentModel);
-        Vector<String> groups=ViewDB.getInstance().getModelGuiElements(currentModel).getActuatorGroupNames();
+        Vector<String> groups=OpenSimDB.getInstance().getModelGuiElements(currentModel).getActuatorGroupNames();
         jMuscleGroupComboBox.setModel(new DefaultComboBoxModel(groups));
         setFilter(currentFilter);
         if (groups.size()>0)
@@ -455,7 +455,7 @@ public class QuantityNameFilterJPanel extends javax.swing.JPanel
          // update names form model, muscle goup selection
          String muscleGroup = (String)jMuscleGroupComboBox.getSelectedItem();
          Model model = (Model)jModelComboBox.getSelectedItem();
-         Vector<String> names = ViewDB.getInstance().getModelGuiElements(model).getActuatorNamesForGroup(muscleGroup);
+         Vector<String> names = OpenSimDB.getInstance().getModelGuiElements(model).getActuatorNamesForGroup(muscleGroup);
          tableModel.markSelectedNames(names);
       }
       updateSelected();

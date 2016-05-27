@@ -1,5 +1,6 @@
 package org.opensim.view.nodes;
 
+import org.opensim.view.NavigatorByTypeModel;
 import javax.swing.Action;
 import org.openide.nodes.Node;
 import org.opensim.modeling.Model;

@@ -72,6 +72,8 @@ public class OpenSimDB extends Observable implements Externalizable{
     static ArrayList<Model>  models = new ArrayList<Model>();
     static private Hashtable<Model, OpenSimContext> mapModelsToContexts =
            new Hashtable<Model, OpenSimContext>();
+   private Hashtable<Model, SingleModelGuiElements> mapModelsToGuiElements =
+           new Hashtable<Model, SingleModelGuiElements>();
     static Model currentModel=null;
 
     /**
@@ -138,6 +140,8 @@ public class OpenSimDB extends Observable implements Externalizable{
         OpenSimContext dContext = context==null?new OpenSimContext(aModel.initSystem(), aModel):context;
         models.add(aModel);
         mapModelsToContexts.put(aModel, dContext);
+        SingleModelGuiElements newModelGuiElements = new SingleModelGuiElements(aModel);
+        mapModelsToGuiElements.put(aModel, newModelGuiElements);
         setChanged();
         ModelEvent evnt = new ModelEvent(aModel, ModelEvent.Operation.Open);
         notifyObservers(evnt); 
@@ -186,6 +190,7 @@ public class OpenSimDB extends Observable implements Externalizable{
         
         model.cleanup();    // Cleanup after removal 
         mapModelsToContexts.remove(model);
+        mapModelsToGuiElements.remove(model);
         System.gc();
         ExplorerTopComponent.addFinalEdit();
     }
@@ -224,7 +229,7 @@ public class OpenSimDB extends Observable implements Externalizable{
    public void saveModel(Model model, String fileName) {
        model.print(fileName);
        model.setInputFileName(fileName); // update the source filename of the model
-       SingleModelGuiElements guiElem = ViewDB.getInstance().getModelGuiElements(model);
+       SingleModelGuiElements guiElem = getInstance().getModelGuiElements(model);
        if(guiElem!=null) guiElem.setUnsavedChangesFlag(false);
        setChanged();
        ModelEvent evnt = new ModelEvent(model, ModelEvent.Operation.Save);
@@ -448,5 +453,12 @@ public class OpenSimDB extends Observable implements Externalizable{
         getInstance().setChanged();
         getInstance().notifyObservers(evnt);
     }
+    
+   /**
+    * Get gui elements for passed in model
+    */
+   public SingleModelGuiElements getModelGuiElements(Model aModel) {
+      return mapModelsToGuiElements.get(aModel);
+   }
 
  }

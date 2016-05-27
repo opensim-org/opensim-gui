@@ -50,6 +50,7 @@ import org.openide.explorer.propertysheet.PropertyModel;
 import org.opensim.modeling.Model;
 import org.opensim.view.SingleModelGuiElements;
 import org.opensim.view.nodes.PropertyEditorAdaptor;
+import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 
 /**
@@ -123,7 +124,7 @@ public class BodyNameEditor extends PropertyEditorSupport
         
         public void connect(PropertyEditor propertyEditor, PropertyEnv env) {
             editor = propertyEditor;
-            SingleModelGuiElements modelGuiElems = ViewDB.getInstance().getModelGuiElements(ViewDB.getCurrentModel());
+            SingleModelGuiElements modelGuiElems = OpenSimDB.getInstance().getModelGuiElements(ViewDB.getCurrentModel());
             picker.setModel(new DefaultComboBoxModel(modelGuiElems.getBodyNames()));
             reset();
         }

@@ -64,7 +64,7 @@ public class NewMarkerAction extends AbstractAction {
         final String saveBodyName = marker.getFrameName();
         final Vec3 saveMarkerOffset = marker.get_location();
         final Model model = marker.getModel();
-        ViewDB.getInstance().getModelGuiElements(model).updateMarkerNames();
+        OpenSimDB.getInstance().getModelGuiElements(model).updateMarkerNames();
 
         Vector<OpenSimObject> objs = new Vector<OpenSimObject>(1);
         objs.add(marker);

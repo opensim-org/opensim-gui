@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.opensim.view.nodes;
+package org.opensim.view;
 
 import java.beans.PropertyChangeSupport;
 import java.beans.VetoableChangeSupport;
