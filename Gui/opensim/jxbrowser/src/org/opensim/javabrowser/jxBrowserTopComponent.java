@@ -50,7 +50,6 @@ public final class jxBrowserTopComponent extends TopComponent {
     BrowserView view; 
 
     public jxBrowserTopComponent() {
-        boolean edt = EventQueue.isDispatchThread();
         initComponents();
 
         browser = new Browser(BrowserType.HEAVYWEIGHT);
@@ -58,8 +57,7 @@ public final class jxBrowserTopComponent extends TopComponent {
         jPanel1.add(view);
         browser.loadURL("http://threejs.org/editor");
         jPanel1.validate();
-        //browser.loadURL("http://www.google.com");
-        
+         
         setName(Bundle.CTL_jxBrowserTopComponent());
         setToolTipText(Bundle.HINT_jxBrowserTopComponent());
 
