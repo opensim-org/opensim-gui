@@ -1629,6 +1629,7 @@ public class opensimModelJNI {
   public final static native void delete_ForceReporter(long jarg1);
   public final static native long ForceReporter_getForceStorage(long jarg1, ForceReporter jarg1_);
   public final static native long ForceReporter_updForceStorage(long jarg1, ForceReporter jarg1_);
+  public final static native long ForceReporter_getForcesTable(long jarg1, ForceReporter jarg1_);
   public final static native void ForceReporter_setModel(long jarg1, ForceReporter jarg1_, long jarg2, Model jarg2_);
   public final static native void ForceReporter_includeConstraintForces(long jarg1, ForceReporter jarg1_, boolean jarg2);
   public final static native int ForceReporter_begin(long jarg1, ForceReporter jarg1_, long jarg2, State jarg2_);
@@ -2128,6 +2129,7 @@ public class opensimModelJNI {
   public final static native long ScaleTool_getGenericModelMaker(long jarg1, ScaleTool jarg1_);
   public final static native long ScaleTool_getModelScaler(long jarg1, ScaleTool jarg1_);
   public final static native long ScaleTool_getMarkerPlacer(long jarg1, ScaleTool jarg1_);
+  public final static native boolean ScaleTool_run(long jarg1, ScaleTool jarg1_);
   public final static native boolean ScaleTool_isDefaultGenericModelMaker(long jarg1, ScaleTool jarg1_);
   public final static native boolean ScaleTool_isDefaultModelScaler(long jarg1, ScaleTool jarg1_);
   public final static native boolean ScaleTool_isDefaultMarkerPlacer(long jarg1, ScaleTool jarg1_);

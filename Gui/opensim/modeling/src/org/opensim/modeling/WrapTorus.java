@@ -57,14 +57,6 @@ public class WrapTorus extends WrapObject {
     return opensimModelSimulationJNI.WrapTorus_getConcreteClassName(swigCPtr, this);
   }
 
-  public WrapTorus() {
-    this(opensimModelSimulationJNI.new_WrapTorus__SWIG_0(), true);
-  }
-
-  public WrapTorus(WrapTorus aWrapTorus) {
-    this(opensimModelSimulationJNI.new_WrapTorus__SWIG_1(WrapTorus.getCPtr(aWrapTorus), aWrapTorus), true);
-  }
-
   public void copyData(WrapTorus aWrapTorus) {
     opensimModelSimulationJNI.WrapTorus_copyData(swigCPtr, this, WrapTorus.getCPtr(aWrapTorus), aWrapTorus);
   }

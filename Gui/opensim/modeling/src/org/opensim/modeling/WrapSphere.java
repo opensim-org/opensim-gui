@@ -57,14 +57,6 @@ public class WrapSphere extends WrapObject {
     return opensimModelSimulationJNI.WrapSphere_getConcreteClassName(swigCPtr, this);
   }
 
-  public WrapSphere() {
-    this(opensimModelSimulationJNI.new_WrapSphere__SWIG_0(), true);
-  }
-
-  public WrapSphere(WrapSphere aWrapSphere) {
-    this(opensimModelSimulationJNI.new_WrapSphere__SWIG_1(WrapSphere.getCPtr(aWrapSphere), aWrapSphere), true);
-  }
-
   public void copyData(WrapSphere aWrapSphere) {
     opensimModelSimulationJNI.WrapSphere_copyData(swigCPtr, this, WrapSphere.getCPtr(aWrapSphere), aWrapSphere);
   }

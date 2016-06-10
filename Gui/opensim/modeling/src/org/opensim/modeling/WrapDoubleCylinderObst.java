@@ -57,14 +57,6 @@ public class WrapDoubleCylinderObst extends WrapObject {
     return opensimModelSimulationJNI.WrapDoubleCylinderObst_getConcreteClassName(swigCPtr, this);
   }
 
-  public WrapDoubleCylinderObst() {
-    this(opensimModelSimulationJNI.new_WrapDoubleCylinderObst__SWIG_0(), true);
-  }
-
-  public WrapDoubleCylinderObst(WrapDoubleCylinderObst aWrapDoubleCylinderObst) {
-    this(opensimModelSimulationJNI.new_WrapDoubleCylinderObst__SWIG_1(WrapDoubleCylinderObst.getCPtr(aWrapDoubleCylinderObst), aWrapDoubleCylinderObst), true);
-  }
-
   public void copyData(WrapDoubleCylinderObst aWrapDoubleCylinderObst) {
     opensimModelSimulationJNI.WrapDoubleCylinderObst_copyData(swigCPtr, this, WrapDoubleCylinderObst.getCPtr(aWrapDoubleCylinderObst), aWrapDoubleCylinderObst);
   }

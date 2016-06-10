@@ -8,17 +8,17 @@
 
 package org.opensim.modeling;
 
-public class CSVFileAdapter extends DelimFileAdapter {
+public class STOFileAdapter extends DelimFileAdapter {
   private transient long swigCPtr;
   private boolean swigCMemOwnDerived;
 
-  protected CSVFileAdapter(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.CSVFileAdapter_SWIGSmartPtrUpcast(cPtr), true);
+  protected STOFileAdapter(long cPtr, boolean cMemoryOwn) {
+    super(opensimModelCommonJNI.STOFileAdapter_SWIGSmartPtrUpcast(cPtr), true);
     swigCMemOwnDerived = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(CSVFileAdapter obj) {
+  protected static long getCPtr(STOFileAdapter obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -30,32 +30,32 @@ public class CSVFileAdapter extends DelimFileAdapter {
     if (swigCPtr != 0) {
       if (swigCMemOwnDerived) {
         swigCMemOwnDerived = false;
-        opensimModelCommonJNI.delete_CSVFileAdapter(swigCPtr);
+        opensimModelCommonJNI.delete_STOFileAdapter(swigCPtr);
       }
       swigCPtr = 0;
     }
     super.delete();
   }
 
-  public CSVFileAdapter() {
-    this(opensimModelCommonJNI.new_CSVFileAdapter__SWIG_0(), true);
+  public STOFileAdapter() {
+    this(opensimModelCommonJNI.new_STOFileAdapter__SWIG_0(), true);
   }
 
-  public CSVFileAdapter(CSVFileAdapter arg0) {
-    this(opensimModelCommonJNI.new_CSVFileAdapter__SWIG_1(CSVFileAdapter.getCPtr(arg0), arg0), true);
+  public STOFileAdapter(STOFileAdapter arg0) {
+    this(opensimModelCommonJNI.new_STOFileAdapter__SWIG_1(STOFileAdapter.getCPtr(arg0), arg0), true);
   }
 
   public DataAdapter clone() {
-    long cPtr = opensimModelCommonJNI.CSVFileAdapter_clone(swigCPtr, this);
-    return (cPtr == 0) ? null : new CSVFileAdapter(cPtr, true);
+    long cPtr = opensimModelCommonJNI.STOFileAdapter_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new STOFileAdapter(cPtr, true);
   }
 
   public static TimeSeriesTable read(String fileName) {
-    return new TimeSeriesTable(opensimModelCommonJNI.CSVFileAdapter_read(fileName), true);
+    return new TimeSeriesTable(opensimModelCommonJNI.STOFileAdapter_read(fileName), true);
   }
 
   public static void write(TimeSeriesTable table, String fileName) {
-    opensimModelCommonJNI.CSVFileAdapter_write(TimeSeriesTable.getCPtr(table), table, fileName);
+    opensimModelCommonJNI.STOFileAdapter_write(TimeSeriesTable.getCPtr(table), table, fileName);
   }
 
 }
