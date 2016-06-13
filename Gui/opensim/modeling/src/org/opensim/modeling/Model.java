@@ -1190,6 +1190,10 @@ public class Model extends ModelComponent {
     opensimModelSimulationJNI.Model_printControlStorage(swigCPtr, this, fileName);
   }
 
+  public TimeSeriesTable getControlsTable() {
+    return new TimeSeriesTable(opensimModelSimulationJNI.Model_getControlsTable(swigCPtr, this), true);
+  }
+
   public ControllerSet getControllerSet() {
     return new ControllerSet(opensimModelSimulationJNI.Model_getControllerSet(swigCPtr, this), false);
   }

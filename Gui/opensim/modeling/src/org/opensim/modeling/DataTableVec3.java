@@ -45,8 +45,16 @@ public class DataTableVec3 extends AbstractDataTable {
     this(opensimModelCommonJNI.new_DataTableVec3__SWIG_1(DataTableVec3.getCPtr(arg0), arg0), true);
   }
 
+  public DataTableVec3(String filename, String tablename) {
+    this(opensimModelCommonJNI.new_DataTableVec3__SWIG_3(filename, tablename), true);
+  }
+
+  public void appendRow(double indRow, SWIGTYPE_p_std__initializer_listT_SimTK__VecT_3_double_1_t_t container) {
+    opensimModelCommonJNI.DataTableVec3_appendRow__SWIG_1(swigCPtr, this, indRow, SWIGTYPE_p_std__initializer_listT_SimTK__VecT_3_double_1_t_t.getCPtr(container));
+  }
+
   public void appendRow(double indRow, RowVectorOfVec3 depRow) {
-    opensimModelCommonJNI.DataTableVec3_appendRow(swigCPtr, this, indRow, RowVectorOfVec3.getCPtr(depRow), depRow);
+    opensimModelCommonJNI.DataTableVec3_appendRow__SWIG_3(swigCPtr, this, indRow, RowVectorOfVec3.getCPtr(depRow), depRow);
   }
 
   public RowVectorViewVec3 getRowAtIndex(long index) {

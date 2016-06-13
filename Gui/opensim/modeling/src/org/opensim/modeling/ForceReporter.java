@@ -81,6 +81,10 @@ public class ForceReporter extends Analysis {
     return new Storage(opensimModelJNI.ForceReporter_updForceStorage(swigCPtr, this), false);
   }
 
+  public TimeSeriesTable getForcesTable() {
+    return new TimeSeriesTable(opensimModelJNI.ForceReporter_getForcesTable(swigCPtr, this), true);
+  }
+
   public void setModel(Model aModel) {
     opensimModelJNI.ForceReporter_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }

@@ -49,4 +49,12 @@ public class TimeSeriesTableVec3 extends DataTableVec3 {
     this(opensimModelCommonJNI.new_TimeSeriesTableVec3__SWIG_3(DataTableVec3.getCPtr(datatable), datatable), true);
   }
 
+  public TimeSeriesTableVec3(String filename, String tablename) {
+    this(opensimModelCommonJNI.new_TimeSeriesTableVec3__SWIG_4(filename, tablename), true);
+  }
+
+  public TimeSeriesTableVec3(String filename) {
+    this(opensimModelCommonJNI.new_TimeSeriesTableVec3__SWIG_5(filename), true);
+  }
+
 }

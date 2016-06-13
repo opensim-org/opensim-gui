@@ -58,15 +58,7 @@ public class PathWrapPoint extends PathPoint {
   }
 
   public PathWrapPoint() {
-    this(opensimModelSimulationJNI.new_PathWrapPoint__SWIG_0(), true);
-  }
-
-  public PathWrapPoint(PathWrapPoint aPoint) {
-    this(opensimModelSimulationJNI.new_PathWrapPoint__SWIG_1(PathWrapPoint.getCPtr(aPoint), aPoint), true);
-  }
-
-  public void copyData(PathWrapPoint aPoint) {
-    opensimModelSimulationJNI.PathWrapPoint_copyData(swigCPtr, this, PathWrapPoint.getCPtr(aPoint), aPoint);
+    this(opensimModelSimulationJNI.new_PathWrapPoint(), true);
   }
 
   public SWIGTYPE_p_OpenSim__ArrayT_SimTK__VecT_3_double_1_t_t getWrapPath() {
@@ -86,8 +78,8 @@ public class PathWrapPoint extends PathPoint {
     return (cPtr == 0) ? null : new WrapObject(cPtr, false);
   }
 
-  public void setWrapObject(WrapObject aWrapObject) {
-    opensimModelSimulationJNI.PathWrapPoint_setWrapObject(swigCPtr, this, WrapObject.getCPtr(aWrapObject), aWrapObject);
+  public void setWrapObject(WrapObject wrapObject) {
+    opensimModelSimulationJNI.PathWrapPoint_setWrapObject(swigCPtr, this, WrapObject.getCPtr(wrapObject), wrapObject);
   }
 
 }

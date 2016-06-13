@@ -57,14 +57,6 @@ public class WrapCylinderObst extends WrapObject {
     return opensimModelSimulationJNI.WrapCylinderObst_getConcreteClassName(swigCPtr, this);
   }
 
-  public WrapCylinderObst() {
-    this(opensimModelSimulationJNI.new_WrapCylinderObst__SWIG_0(), true);
-  }
-
-  public WrapCylinderObst(WrapCylinderObst aWrapCylinderObst) {
-    this(opensimModelSimulationJNI.new_WrapCylinderObst__SWIG_1(WrapCylinderObst.getCPtr(aWrapCylinderObst), aWrapCylinderObst), true);
-  }
-
   public void copyData(WrapCylinderObst aWrapCylinderObst) {
     opensimModelSimulationJNI.WrapCylinderObst_copyData(swigCPtr, this, WrapCylinderObst.getCPtr(aWrapCylinderObst), aWrapCylinderObst);
   }

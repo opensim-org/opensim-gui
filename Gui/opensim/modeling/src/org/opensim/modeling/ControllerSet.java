@@ -101,6 +101,10 @@ public class ControllerSet extends ModelComponentSetControllers {
     opensimModelSimulationJNI.ControllerSet_printControlStorage(swigCPtr, this, fileName);
   }
 
+  public TimeSeriesTable getControlTable() {
+    return new TimeSeriesTable(opensimModelSimulationJNI.ControllerSet_getControlTable(swigCPtr, this), true);
+  }
+
   public void setActuators(SetActuators actuators) {
     opensimModelSimulationJNI.ControllerSet_setActuators(swigCPtr, this, SetActuators.getCPtr(actuators), actuators);
   }

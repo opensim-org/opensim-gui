@@ -57,14 +57,6 @@ public class WrapEllipsoid extends WrapObject {
     return opensimModelSimulationJNI.WrapEllipsoid_getConcreteClassName(swigCPtr, this);
   }
 
-  public WrapEllipsoid() {
-    this(opensimModelSimulationJNI.new_WrapEllipsoid__SWIG_0(), true);
-  }
-
-  public WrapEllipsoid(WrapEllipsoid aWrapEllipsoid) {
-    this(opensimModelSimulationJNI.new_WrapEllipsoid__SWIG_1(WrapEllipsoid.getCPtr(aWrapEllipsoid), aWrapEllipsoid), true);
-  }
-
   public void copyData(WrapEllipsoid aWrapEllipsoid) {
     opensimModelSimulationJNI.WrapEllipsoid_copyData(swigCPtr, this, WrapEllipsoid.getCPtr(aWrapEllipsoid), aWrapEllipsoid);
   }

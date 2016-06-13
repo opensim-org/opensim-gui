@@ -50,14 +50,6 @@ public class DelimFileAdapter extends FileAdapter {
     return (cPtr == 0) ? null : new DelimFileAdapter(cPtr, true);
   }
 
-  public TimeSeriesTable read(String filename) {
-    return new TimeSeriesTable(opensimModelCommonJNI.DelimFileAdapter_read(swigCPtr, this, filename), true);
-  }
-
-  public void write(TimeSeriesTable table, String filename) {
-    opensimModelCommonJNI.DelimFileAdapter_write(swigCPtr, this, TimeSeriesTable.getCPtr(table), table, filename);
-  }
-
   public static String get_table() {
     return opensimModelCommonJNI.DelimFileAdapter__table_get();
   }
