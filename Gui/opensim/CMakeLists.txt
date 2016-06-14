@@ -13,11 +13,6 @@ if(NOT OpenSim_JAVA_WRAPPING)
     message(FATAL_ERROR "OpenSim core needs be compiled with Java wrapping ON.")
 endif()
 
-message(STATUS "Replacing exising Java files with ones from opensim-core.")
-#file(REMOVE_RECURSE "${CMAKE_CURRENT_SOURCE_DIR}/modeling/src/org")
-#file(COPY ${OpenSim_JAVA_FILES_DIR}
-#    DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/modeling/src"
-#    FILES_MATCHING PATTERN "*.java")
 
 find_package(Ant REQUIRED)
 
@@ -26,18 +21,26 @@ add_custom_target(CopyOpenSimCore ALL
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Copy opensim-core Java Bindings to GUI.")
-
-add_custom_target(PrepareInstaller ALL
+if (WIN32)
+    add_custom_target(PrepareInstaller ALL
                   COMMAND ${Ant_EXECUTABLE} copy-installer-files -Dapi.dir="${OpenSim_ROOT_DIR}"
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Merge GUI build and opensim-core install into one folder.")
 
-add_custom_target(CopyJRE ALL
+    add_custom_target(CopyJRE ALL
                   COMMAND ${Ant_EXECUTABLE} copy-jre
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Copy default JRE to installer folder.")
+endif()
+if (APPLE)
+    add_custom_target(PrepareInstaller ALL
+                  COMMAND ${Ant_EXECUTABLE} build-mac-installer -Dlib.dir="${OpenSim_LIB_DIR}"
+                  DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
+                  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                  COMMENT "Build opensim.app.")
+endif()
 
 set(VIS_REPO "" CACHE
     PATH "The location of the opensim-threejs repository to copy into installation.")
