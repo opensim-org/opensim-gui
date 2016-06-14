@@ -90,6 +90,10 @@ public class ScaleTool extends OpenSimObject {
     return new MarkerPlacer(opensimModelJNI.ScaleTool_getMarkerPlacer(swigCPtr, this), false);
   }
 
+  public boolean run() {
+    return opensimModelJNI.ScaleTool_run(swigCPtr, this);
+  }
+
   public boolean isDefaultGenericModelMaker() {
     return opensimModelJNI.ScaleTool_isDefaultGenericModelMaker(swigCPtr, this);
   }

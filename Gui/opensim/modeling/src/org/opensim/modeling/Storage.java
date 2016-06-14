@@ -271,6 +271,10 @@ public class Storage extends StorageInterface {
     opensimModelCommonJNI.Storage_getDataColumn__SWIG_4(swigCPtr, this, columnName, ArrayDouble.getCPtr(data), data);
   }
 
+  public SWIGTYPE_p_TimeSeriesTable getAsTimeSeriesTable() {
+    return new SWIGTYPE_p_TimeSeriesTable(opensimModelCommonJNI.Storage_getAsTimeSeriesTable(swigCPtr, this), true);
+  }
+
   public ArrayInt getColumnIndicesForIdentifier(String identifier) {
     return new ArrayInt(opensimModelCommonJNI.Storage_getColumnIndicesForIdentifier(swigCPtr, this, identifier), true);
   }

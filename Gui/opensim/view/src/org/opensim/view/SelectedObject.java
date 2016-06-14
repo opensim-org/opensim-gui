@@ -71,7 +71,7 @@ public class SelectedObject implements Selectable {
    private Model getModel(PathPoint mp) { return mp.getBody().getModel(); }
    private Model getModel(Body body) { return body.getModel(); }
    private Model getModel(PhysicalFrame phys) { return phys.getModel(); }
-   private Model getModel(WrapObject wrapObj) { return getModel(wrapObj.getBody()); }
+   private Model getModel(WrapObject wrapObj) { return getModel(wrapObj.getFrame()); }
    private Model getModel(Marker marker) { return marker.getModel(); }
 
    public Model getOwnerModel()
@@ -83,7 +83,7 @@ public class SelectedObject implements Selectable {
       Marker marker = Marker.safeDownCast(object);
       if(marker != null) return getModel(marker);
       WrapObject wrapObj = WrapObject.safeDownCast(object);
-      if(wrapObj != null) return getModel(wrapObj.getBody());
+      if(wrapObj != null) return getModel(wrapObj.getFrame());
       Component mc = Component.safeDownCast(object);
       // FIX40 if (mc != null) return mc.getModel();
       return null;
@@ -179,7 +179,7 @@ public class SelectedObject implements Selectable {
             if (Body.safeDownCast(object)!=null )
                 dBody = Body.safeDownCast(object);
             else if (WrapObject.safeDownCast(object)!=null)
-                dBody = Body.safeDownCast(WrapObject.safeDownCast(object).getBody());
+                dBody = Body.safeDownCast(WrapObject.safeDownCast(object).getFrame());
             if (dBody != null){
                 SingleModelVisuals visuals = ViewDB.getInstance().getModelVisuals(getModel(dBody));
             if(bounds!=null && visuals!=null) visuals.transformModelToWorldBounds(bounds);

@@ -50,12 +50,12 @@ public class TRCFileAdapter extends FileAdapter {
     return (cPtr == 0) ? null : new TRCFileAdapter(cPtr, true);
   }
 
-  public TimeSeriesTableVec3 read(String filename) {
-    return new TimeSeriesTableVec3(opensimModelCommonJNI.TRCFileAdapter_read(swigCPtr, this, filename), true);
+  public static TimeSeriesTableVec3 read(String filename) {
+    return new TimeSeriesTableVec3(opensimModelCommonJNI.TRCFileAdapter_read(filename), true);
   }
 
-  public void write(TimeSeriesTableVec3 table, String filename) {
-    opensimModelCommonJNI.TRCFileAdapter_write(swigCPtr, this, TimeSeriesTableVec3.getCPtr(table), table, filename);
+  public static void write(TimeSeriesTableVec3 table, String filename) {
+    opensimModelCommonJNI.TRCFileAdapter_write(TimeSeriesTableVec3.getCPtr(table), table, filename);
   }
 
   public static String get_markers() {

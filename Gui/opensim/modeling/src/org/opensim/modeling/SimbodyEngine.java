@@ -178,6 +178,10 @@ public class SimbodyEngine extends OpenSimObject {
     opensimModelSimulationJNI.SimbodyEngine_convertRadiansToDegrees__SWIG_0(swigCPtr, this, Storage.getCPtr(rStorage), rStorage);
   }
 
+  public void convertRadiansToDegrees(TimeSeriesTable table) {
+    opensimModelSimulationJNI.SimbodyEngine_convertRadiansToDegrees__SWIG_1(swigCPtr, this, TimeSeriesTable.getCPtr(table), table);
+  }
+
   public void convertDegreesToRadians(Storage rStorage) {
     opensimModelSimulationJNI.SimbodyEngine_convertDegreesToRadians__SWIG_0(swigCPtr, this, Storage.getCPtr(rStorage), rStorage);
   }
@@ -187,7 +191,7 @@ public class SimbodyEngine extends OpenSimObject {
   }
 
   public void convertRadiansToDegrees(SWIGTYPE_p_double aQRad, SWIGTYPE_p_double rQDeg) {
-    opensimModelSimulationJNI.SimbodyEngine_convertRadiansToDegrees__SWIG_1(swigCPtr, this, SWIGTYPE_p_double.getCPtr(aQRad), SWIGTYPE_p_double.getCPtr(rQDeg));
+    opensimModelSimulationJNI.SimbodyEngine_convertRadiansToDegrees__SWIG_2(swigCPtr, this, SWIGTYPE_p_double.getCPtr(aQRad), SWIGTYPE_p_double.getCPtr(rQDeg));
   }
 
   public void convertAnglesToDirectionCosines(double aE1, double aE2, double aE3, SWIGTYPE_p_a_3__double rDirCos) {

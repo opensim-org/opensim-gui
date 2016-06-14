@@ -57,42 +57,6 @@ public class ContactGeometry extends ModelComponent {
     return opensimModelSimulationJNI.ContactGeometry_getConcreteClassName(swigCPtr, this);
   }
 
-  public void copyProperty_body_name(ContactGeometry source) {
-    opensimModelSimulationJNI.ContactGeometry_copyProperty_body_name(swigCPtr, this, ContactGeometry.getCPtr(source), source);
-  }
-
-  public String get_body_name(int i) {
-    return opensimModelSimulationJNI.ContactGeometry_get_body_name__SWIG_0(swigCPtr, this, i);
-  }
-
-  public SWIGTYPE_p_std__string upd_body_name(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelSimulationJNI.ContactGeometry_upd_body_name__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_body_name(int i, String value) {
-    opensimModelSimulationJNI.ContactGeometry_set_body_name__SWIG_0(swigCPtr, this, i, value);
-  }
-
-  public int append_body_name(String value) {
-    return opensimModelSimulationJNI.ContactGeometry_append_body_name(swigCPtr, this, value);
-  }
-
-  public void constructProperty_body_name(String initValue) {
-    opensimModelSimulationJNI.ContactGeometry_constructProperty_body_name(swigCPtr, this, initValue);
-  }
-
-  public String get_body_name() {
-    return opensimModelSimulationJNI.ContactGeometry_get_body_name__SWIG_1(swigCPtr, this);
-  }
-
-  public SWIGTYPE_p_std__string upd_body_name() {
-    return new SWIGTYPE_p_std__string(opensimModelSimulationJNI.ContactGeometry_upd_body_name__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_body_name(String value) {
-    opensimModelSimulationJNI.ContactGeometry_set_body_name__SWIG_1(swigCPtr, this, value);
-  }
-
   public void copyProperty_location(ContactGeometry source) {
     opensimModelSimulationJNI.ContactGeometry_copyProperty_location(swigCPtr, this, ContactGeometry.getCPtr(source), source);
   }
@@ -221,36 +185,12 @@ public class ContactGeometry extends ModelComponent {
     return opensimModelSimulationJNI.ContactGeometry_append_color(swigCPtr, this, value);
   }
 
-  public Vec3 getLocation() {
-    return new Vec3(opensimModelSimulationJNI.ContactGeometry_getLocation(swigCPtr, this), false);
+  public PhysicalFrame getFrame() {
+    return new PhysicalFrame(opensimModelSimulationJNI.ContactGeometry_getFrame(swigCPtr, this), false);
   }
 
-  public void setLocation(Vec3 location) {
-    opensimModelSimulationJNI.ContactGeometry_setLocation(swigCPtr, this, Vec3.getCPtr(location), location);
-  }
-
-  public Vec3 getOrientation() {
-    return new Vec3(opensimModelSimulationJNI.ContactGeometry_getOrientation(swigCPtr, this), false);
-  }
-
-  public void setOrientation(Vec3 orientation) {
-    opensimModelSimulationJNI.ContactGeometry_setOrientation(swigCPtr, this, Vec3.getCPtr(orientation), orientation);
-  }
-
-  public PhysicalFrame updBody() {
-    return new PhysicalFrame(opensimModelSimulationJNI.ContactGeometry_updBody(swigCPtr, this), false);
-  }
-
-  public void setBody(PhysicalFrame body) {
-    opensimModelSimulationJNI.ContactGeometry_setBody(swigCPtr, this, PhysicalFrame.getCPtr(body), body);
-  }
-
-  public String getBodyName() {
-    return opensimModelSimulationJNI.ContactGeometry_getBodyName(swigCPtr, this);
-  }
-
-  public void setBodyName(String name) {
-    opensimModelSimulationJNI.ContactGeometry_setBodyName(swigCPtr, this, name);
+  public void setFrame(PhysicalFrame body) {
+    opensimModelSimulationJNI.ContactGeometry_setFrame(swigCPtr, this, PhysicalFrame.getCPtr(body), body);
   }
 
   public int getDisplayPreference() {
@@ -275,6 +215,30 @@ public class ContactGeometry extends ModelComponent {
 
   public void updateGeometry() {
     opensimModelSimulationJNI.ContactGeometry_updateGeometry(swigCPtr, this);
+  }
+
+  public Vec3 getLocation() {
+    return new Vec3(opensimModelSimulationJNI.ContactGeometry_getLocation(swigCPtr, this), false);
+  }
+
+  public void setLocation(Vec3 location) {
+    opensimModelSimulationJNI.ContactGeometry_setLocation(swigCPtr, this, Vec3.getCPtr(location), location);
+  }
+
+  public Vec3 getOrientation() {
+    return new Vec3(opensimModelSimulationJNI.ContactGeometry_getOrientation(swigCPtr, this), false);
+  }
+
+  public void setOrientation(Vec3 orientation) {
+    opensimModelSimulationJNI.ContactGeometry_setOrientation(swigCPtr, this, Vec3.getCPtr(orientation), orientation);
+  }
+
+  public PhysicalFrame getBody() {
+    return new PhysicalFrame(opensimModelSimulationJNI.ContactGeometry_getBody(swigCPtr, this), false);
+  }
+
+  public void setBody(PhysicalFrame body) {
+    opensimModelSimulationJNI.ContactGeometry_setBody(swigCPtr, this, PhysicalFrame.getCPtr(body), body);
   }
 
 }

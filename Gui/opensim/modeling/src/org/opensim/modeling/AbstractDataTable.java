@@ -43,6 +43,14 @@ public class AbstractDataTable {
     return opensimModelCommonJNI.AbstractDataTable_getNumColumns(swigCPtr, this);
   }
 
+  public void removeTableMetaDataKey(String key) {
+    opensimModelCommonJNI.AbstractDataTable_removeTableMetaDataKey(swigCPtr, this, key);
+  }
+
+  public StdVectorString getTableMetaDataKeys() {
+    return new StdVectorString(opensimModelCommonJNI.AbstractDataTable_getTableMetaDataKeys(swigCPtr, this), true);
+  }
+
   public StdVectorString getColumnLabels() {
     return new StdVectorString(opensimModelCommonJNI.AbstractDataTable_getColumnLabels(swigCPtr, this), true);
   }

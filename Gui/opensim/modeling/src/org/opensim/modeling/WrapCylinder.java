@@ -57,32 +57,76 @@ public class WrapCylinder extends WrapObject {
     return opensimModelSimulationJNI.WrapCylinder_getConcreteClassName(swigCPtr, this);
   }
 
-  public WrapCylinder() {
-    this(opensimModelSimulationJNI.new_WrapCylinder__SWIG_0(), true);
+  public void copyProperty_radius(WrapCylinder source) {
+    opensimModelSimulationJNI.WrapCylinder_copyProperty_radius(swigCPtr, this, WrapCylinder.getCPtr(source), source);
   }
 
-  public WrapCylinder(WrapCylinder aWrapCylinder) {
-    this(opensimModelSimulationJNI.new_WrapCylinder__SWIG_1(WrapCylinder.getCPtr(aWrapCylinder), aWrapCylinder), true);
+  public double get_radius(int i) {
+    return opensimModelSimulationJNI.WrapCylinder_get_radius__SWIG_0(swigCPtr, this, i);
   }
 
-  public void copyData(WrapCylinder aWrapCylinder) {
-    opensimModelSimulationJNI.WrapCylinder_copyData(swigCPtr, this, WrapCylinder.getCPtr(aWrapCylinder), aWrapCylinder);
+  public SWIGTYPE_p_double upd_radius(int i) {
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.WrapCylinder_upd_radius__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public double getRadius() {
-    return opensimModelSimulationJNI.WrapCylinder_getRadius(swigCPtr, this);
+  public void set_radius(int i, double value) {
+    opensimModelSimulationJNI.WrapCylinder_set_radius__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public void setRadius(double aRadius) {
-    opensimModelSimulationJNI.WrapCylinder_setRadius(swigCPtr, this, aRadius);
+  public int append_radius(double value) {
+    return opensimModelSimulationJNI.WrapCylinder_append_radius(swigCPtr, this, value);
   }
 
-  public double getLength() {
-    return opensimModelSimulationJNI.WrapCylinder_getLength(swigCPtr, this);
+  public void constructProperty_radius(double initValue) {
+    opensimModelSimulationJNI.WrapCylinder_constructProperty_radius(swigCPtr, this, initValue);
   }
 
-  public void setLength(double aLength) {
-    opensimModelSimulationJNI.WrapCylinder_setLength(swigCPtr, this, aLength);
+  public double get_radius() {
+    return opensimModelSimulationJNI.WrapCylinder_get_radius__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_double upd_radius() {
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.WrapCylinder_upd_radius__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_radius(double value) {
+    opensimModelSimulationJNI.WrapCylinder_set_radius__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void copyProperty_length(WrapCylinder source) {
+    opensimModelSimulationJNI.WrapCylinder_copyProperty_length(swigCPtr, this, WrapCylinder.getCPtr(source), source);
+  }
+
+  public double get_length(int i) {
+    return opensimModelSimulationJNI.WrapCylinder_get_length__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double upd_length(int i) {
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.WrapCylinder_upd_length__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_length(int i, double value) {
+    opensimModelSimulationJNI.WrapCylinder_set_length__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_length(double value) {
+    return opensimModelSimulationJNI.WrapCylinder_append_length(swigCPtr, this, value);
+  }
+
+  public void constructProperty_length(double initValue) {
+    opensimModelSimulationJNI.WrapCylinder_constructProperty_length(swigCPtr, this, initValue);
+  }
+
+  public double get_length() {
+    return opensimModelSimulationJNI.WrapCylinder_get_length__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_double upd_length() {
+    return new SWIGTYPE_p_double(opensimModelSimulationJNI.WrapCylinder_upd_length__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_length(double value) {
+    opensimModelSimulationJNI.WrapCylinder_set_length__SWIG_1(swigCPtr, this, value);
   }
 
   public String getWrapTypeName() {
@@ -95,10 +139,6 @@ public class WrapCylinder extends WrapObject {
 
   public void scale(Vec3 aScaleFactors) {
     opensimModelSimulationJNI.WrapCylinder_scale(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
-  }
-
-  public void connectToModelAndBody(Model aModel, PhysicalFrame aBody) {
-    opensimModelSimulationJNI.WrapCylinder_connectToModelAndBody(swigCPtr, this, Model.getCPtr(aModel), aModel, PhysicalFrame.getCPtr(aBody), aBody);
   }
 
 }

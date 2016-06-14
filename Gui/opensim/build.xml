@@ -8,6 +8,23 @@
     <property name="apiJava.dir" value="C:/Dev/gui/opensim-gui/OpenSimAPI-install/sdk/Java/org"/>
     <property name="models.dir" value="C:/Dev/gui/opensim-models"/>
     <property name="visualizer.dir" value="C:/Dev/opensim-threejs"/>
+    <condition property="installer-files.dir" value="installer_files/Windows">
+        <os family="windows"/>
+    </condition>
+    <condition property="installer-files.dir" value="installer_files/OSX">
+        <os family="mac"/>
+    </condition>
+    <condition property="installer-files.dir" value="installer_files/Linux">
+        <!-- Ant allows detecting unix, but not linux. We assume non-mac unix
+             is Linux.-->
+        <and>
+            <os family="unix"/>
+            <not>
+                <os family="mac"/>
+            </not>
+        </and>
+    </condition>
+    <property name="app.conf" value="${installer-files.dir}/opensim.conf"/>
     <import file="nbproject/build-impl.xml"/>
     <target name="debug-properties">
         <echoproperties/>
@@ -51,5 +68,12 @@
             <fileset dir="${visualizer.dir}/three.js/editor"/>
         </copy>
     </target>
-    
+    <target name="build-mac-installer" depends="build-mac">
+        <property name="lib.dir" value="/Users/aymanhabib/dev/install/opensim-core-install/lib"/>
+        <echoproperties/>
+        <copy todir="dist/opensim.app/Contents/Resources/opensim/lib">
+            <fileset dir="${lib.dir}"/>
+        </copy>
+        <!--<copy tofile="dist/opensim.app/Contents/Info.plist" file="installer_files/OSX/Info.plist"/>-->
+    </target>
 </project>

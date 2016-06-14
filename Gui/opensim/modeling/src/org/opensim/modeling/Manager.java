@@ -211,6 +211,10 @@ public class Manager {
     return new Storage(opensimModelSimulationJNI.Manager_getStateStorage(swigCPtr, this), false);
   }
 
+  public TimeSeriesTable getStatesTable() {
+    return new TimeSeriesTable(opensimModelSimulationJNI.Manager_getStatesTable(swigCPtr, this), true);
+  }
+
   public void halt() {
     opensimModelSimulationJNI.Manager_halt(swigCPtr, this);
   }

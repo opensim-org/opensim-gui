@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class WrapObject extends OpenSimObject {
+public class WrapObject extends ModelComponent {
   private transient long swigCPtr;
 
   public WrapObject(long cPtr, boolean cMemoryOwn) {
@@ -55,6 +55,114 @@ public class WrapObject extends OpenSimObject {
 
   public String getConcreteClassName() {
     return opensimModelSimulationJNI.WrapObject_getConcreteClassName(swigCPtr, this);
+  }
+
+  public void copyProperty_active(WrapObject source) {
+    opensimModelSimulationJNI.WrapObject_copyProperty_active(swigCPtr, this, WrapObject.getCPtr(source), source);
+  }
+
+  public boolean get_active(int i) {
+    return opensimModelSimulationJNI.WrapObject_get_active__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_bool upd_active(int i) {
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.WrapObject_upd_active__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_active(int i, boolean value) {
+    opensimModelSimulationJNI.WrapObject_set_active__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_active(boolean value) {
+    return opensimModelSimulationJNI.WrapObject_append_active(swigCPtr, this, value);
+  }
+
+  public void constructProperty_active(boolean initValue) {
+    opensimModelSimulationJNI.WrapObject_constructProperty_active(swigCPtr, this, initValue);
+  }
+
+  public boolean get_active() {
+    return opensimModelSimulationJNI.WrapObject_get_active__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_bool upd_active() {
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.WrapObject_upd_active__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_active(boolean value) {
+    opensimModelSimulationJNI.WrapObject_set_active__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void copyProperty_xyz_body_rotation(WrapObject source) {
+    opensimModelSimulationJNI.WrapObject_copyProperty_xyz_body_rotation(swigCPtr, this, WrapObject.getCPtr(source), source);
+  }
+
+  public Vec3 get_xyz_body_rotation(int i) {
+    return new Vec3(opensimModelSimulationJNI.WrapObject_get_xyz_body_rotation__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public Vec3 upd_xyz_body_rotation(int i) {
+    return new Vec3(opensimModelSimulationJNI.WrapObject_upd_xyz_body_rotation__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_xyz_body_rotation(int i, Vec3 value) {
+    opensimModelSimulationJNI.WrapObject_set_xyz_body_rotation__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+  }
+
+  public int append_xyz_body_rotation(Vec3 value) {
+    return opensimModelSimulationJNI.WrapObject_append_xyz_body_rotation(swigCPtr, this, Vec3.getCPtr(value), value);
+  }
+
+  public void constructProperty_xyz_body_rotation(Vec3 initValue) {
+    opensimModelSimulationJNI.WrapObject_constructProperty_xyz_body_rotation(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+  }
+
+  public Vec3 get_xyz_body_rotation() {
+    return new Vec3(opensimModelSimulationJNI.WrapObject_get_xyz_body_rotation__SWIG_1(swigCPtr, this), false);
+  }
+
+  public Vec3 upd_xyz_body_rotation() {
+    return new Vec3(opensimModelSimulationJNI.WrapObject_upd_xyz_body_rotation__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_xyz_body_rotation(Vec3 value) {
+    opensimModelSimulationJNI.WrapObject_set_xyz_body_rotation__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+  }
+
+  public void copyProperty_translation(WrapObject source) {
+    opensimModelSimulationJNI.WrapObject_copyProperty_translation(swigCPtr, this, WrapObject.getCPtr(source), source);
+  }
+
+  public Vec3 get_translation(int i) {
+    return new Vec3(opensimModelSimulationJNI.WrapObject_get_translation__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public Vec3 upd_translation(int i) {
+    return new Vec3(opensimModelSimulationJNI.WrapObject_upd_translation__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_translation(int i, Vec3 value) {
+    opensimModelSimulationJNI.WrapObject_set_translation__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+  }
+
+  public int append_translation(Vec3 value) {
+    return opensimModelSimulationJNI.WrapObject_append_translation(swigCPtr, this, Vec3.getCPtr(value), value);
+  }
+
+  public void constructProperty_translation(Vec3 initValue) {
+    opensimModelSimulationJNI.WrapObject_constructProperty_translation(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+  }
+
+  public Vec3 get_translation() {
+    return new Vec3(opensimModelSimulationJNI.WrapObject_get_translation__SWIG_1(swigCPtr, this), false);
+  }
+
+  public Vec3 upd_translation() {
+    return new Vec3(opensimModelSimulationJNI.WrapObject_upd_translation__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_translation(Vec3 value) {
+    opensimModelSimulationJNI.WrapObject_set_translation__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void copyProperty_display_preference(WrapObject source) {
@@ -113,8 +221,40 @@ public class WrapObject extends OpenSimObject {
     return opensimModelSimulationJNI.WrapObject_append_color(swigCPtr, this, value);
   }
 
-  public void copyData(WrapObject aWrapObject) {
-    opensimModelSimulationJNI.WrapObject_copyData(swigCPtr, this, WrapObject.getCPtr(aWrapObject), aWrapObject);
+  public void copyProperty_quadrant(WrapObject source) {
+    opensimModelSimulationJNI.WrapObject_copyProperty_quadrant(swigCPtr, this, WrapObject.getCPtr(source), source);
+  }
+
+  public String get_quadrant(int i) {
+    return opensimModelSimulationJNI.WrapObject_get_quadrant__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_std__string upd_quadrant(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelSimulationJNI.WrapObject_upd_quadrant__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_quadrant(int i, String value) {
+    opensimModelSimulationJNI.WrapObject_set_quadrant__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_quadrant(String value) {
+    return opensimModelSimulationJNI.WrapObject_append_quadrant(swigCPtr, this, value);
+  }
+
+  public void constructProperty_quadrant(String initValue) {
+    opensimModelSimulationJNI.WrapObject_constructProperty_quadrant(swigCPtr, this, initValue);
+  }
+
+  public String get_quadrant() {
+    return opensimModelSimulationJNI.WrapObject_get_quadrant__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_std__string upd_quadrant() {
+    return new SWIGTYPE_p_std__string(opensimModelSimulationJNI.WrapObject_upd_quadrant__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_quadrant(String value) {
+    opensimModelSimulationJNI.WrapObject_set_quadrant__SWIG_1(swigCPtr, this, value);
   }
 
   public void scale(Vec3 aScaleFactors) {
@@ -125,38 +265,20 @@ public class WrapObject extends OpenSimObject {
     opensimModelSimulationJNI.WrapObject_connectToModelAndBody(swigCPtr, this, Model.getCPtr(aModel), aModel, PhysicalFrame.getCPtr(aBody), aBody);
   }
 
-  public PhysicalFrame getBody() {
-    return new PhysicalFrame(opensimModelSimulationJNI.WrapObject_getBody(swigCPtr, this), false);
+  public PhysicalFrame getFrame() {
+    return new PhysicalFrame(opensimModelSimulationJNI.WrapObject_getFrame(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_double getXYZBodyRotation() {
-    long cPtr = opensimModelSimulationJNI.WrapObject_getXYZBodyRotation(swigCPtr, this);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_double(cPtr, false);
-  }
-
-  public SWIGTYPE_p_double getTranslation() {
-    long cPtr = opensimModelSimulationJNI.WrapObject_getTranslation(swigCPtr, this);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_double(cPtr, false);
-  }
-
-  public boolean getActive() {
-    return opensimModelSimulationJNI.WrapObject_getActive(swigCPtr, this);
+  public void setFrame(PhysicalFrame frame) {
+    opensimModelSimulationJNI.WrapObject_setFrame(swigCPtr, this, PhysicalFrame.getCPtr(frame), frame);
   }
 
   public boolean getActiveUseDefault() {
     return opensimModelSimulationJNI.WrapObject_getActiveUseDefault(swigCPtr, this);
   }
 
-  public String getQuadrantName() {
-    return opensimModelSimulationJNI.WrapObject_getQuadrantName(swigCPtr, this);
-  }
-
   public boolean getQuadrantNameUseDefault() {
     return opensimModelSimulationJNI.WrapObject_getQuadrantNameUseDefault(swigCPtr, this);
-  }
-
-  public void setQuadrantName(String aName) {
-    opensimModelSimulationJNI.WrapObject_setQuadrantName(swigCPtr, this, aName);
   }
 
   public Transform getTransform() {
@@ -169,6 +291,14 @@ public class WrapObject extends OpenSimObject {
 
   public String getDimensionsString() {
     return opensimModelSimulationJNI.WrapObject_getDimensionsString(swigCPtr, this);
+  }
+
+  public int wrapPathSegment(State state, PathPoint aPoint1, PathPoint aPoint2, PathWrap aPathWrap, SWIGTYPE_p_OpenSim__WrapResult aWrapResult) {
+    return opensimModelSimulationJNI.WrapObject_wrapPathSegment(swigCPtr, this, State.getCPtr(state), state, PathPoint.getCPtr(aPoint1), aPoint1, PathPoint.getCPtr(aPoint2), aPoint2, PathWrap.getCPtr(aPathWrap), aPathWrap, SWIGTYPE_p_OpenSim__WrapResult.getCPtr(aWrapResult));
+  }
+
+  public int wrapLine(State state, Vec3 aPoint1, Vec3 aPoint2, PathWrap aPathWrap, SWIGTYPE_p_OpenSim__WrapResult aWrapResult, SWIGTYPE_p_bool aFlag) {
+    return opensimModelSimulationJNI.WrapObject_wrapLine(swigCPtr, this, State.getCPtr(state), state, Vec3.getCPtr(aPoint1), aPoint1, Vec3.getCPtr(aPoint2), aPoint2, PathWrap.getCPtr(aPathWrap), aPathWrap, SWIGTYPE_p_OpenSim__WrapResult.getCPtr(aWrapResult), SWIGTYPE_p_bool.getCPtr(aFlag));
   }
 
   public void updateGeometry() {
