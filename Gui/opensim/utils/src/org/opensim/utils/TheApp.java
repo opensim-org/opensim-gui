@@ -30,10 +30,14 @@ package org.opensim.utils;
 
 import java.awt.Image;
 import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 import javax.swing.JFrame;
 import org.openide.LifecycleManager;
-import org.openide.NotifyDescriptor;
+import org.openide.util.Exceptions;
 import org.openide.util.ImageUtilities;
 
 /**
@@ -111,24 +115,32 @@ public final class TheApp {
         Map<String, String> env = System.getenv();
         //if (installDir == null) 
         //    installDir = env.get("OPENSIM_HOME");
-        if (installDir == null){ // Test cross platform and cross platform with Spaces in path names etc.
-            String jarfile = TheApp.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-            File jarFile= new File(jarfile);
-            String parentDir = jarFile.getParent();
+        if (installDir == null){ try {
+            // Test cross platform and cross platform with Spaces in path names etc.
+            URI jarfile = TheApp.class.getProtectionDomain().getCodeSource().getLocation().toURI();
+             // Remove the jar: prefix
+            String schemePart = jarfile.getSchemeSpecificPart();
+            // Remove trailing !/
+            schemePart = schemePart.substring(0, schemePart.length()-2);
+            URI jarAsFile = new URI(schemePart);
+            Path jarFilePath = Paths.get(jarAsFile);
+            Path parentPath = jarFilePath.getParent();
+            String parentDir = parentPath.toString();
             boolean buildEnvironment = parentDir.lastIndexOf("cluster")!=-1;
             if (buildEnvironment){
-                installDir = parentDir.substring(6);
-                int lastIndex = installDir.lastIndexOf("cluster")-6;
-                installDir = installDir.substring(0, lastIndex);
+                int lastIndex = parentDir.lastIndexOf("cluster")-6;
+                installDir = parentDir.substring(0, lastIndex);
             }
             else {
-                installDir = parentDir.substring(6);
                 // go up the tree twice
-                installDir = new File(installDir).getParent();
+                installDir = new File(parentDir).getParent();
                 installDir = new File(installDir).getParent();
             }
             // Strip leading "file:/"
             System.out.println("new OPENSIM_HOME ="+installDir);
+            } catch (URISyntaxException ex) {
+                Exceptions.printStackTrace(ex);
+            }
         }
         return installDir;
     }
