@@ -81,6 +81,14 @@ public class JointIterator {
     return new PhysicalFrame(opensimModelSimulationJNI.JointIterator_get_frames(swigCPtr, this, i), false);
   }
 
+  public int get_connector_parent_frame() {
+    return opensimModelSimulationJNI.JointIterator__connector_parent_frame_get(swigCPtr, this);
+  }
+
+  public int get_connector_child_frame() {
+    return opensimModelSimulationJNI.JointIterator__connector_child_frame_get(swigCPtr, this);
+  }
+
   public boolean get_has_output_power() {
     return opensimModelSimulationJNI.JointIterator__has_output_power_get(swigCPtr, this);
   }

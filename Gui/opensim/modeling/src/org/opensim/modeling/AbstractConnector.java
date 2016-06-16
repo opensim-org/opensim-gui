@@ -57,6 +57,30 @@ public class AbstractConnector extends OpenSimObject {
     return opensimModelCommonJNI.AbstractConnector_getConcreteClassName(swigCPtr, this);
   }
 
+  public void copyProperty_connectee_name(AbstractConnector source) {
+    opensimModelCommonJNI.AbstractConnector_copyProperty_connectee_name(swigCPtr, this, AbstractConnector.getCPtr(source), source);
+  }
+
+  public String get_connectee_name(int i) {
+    return opensimModelCommonJNI.AbstractConnector_get_connectee_name(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_std__string upd_connectee_name(int i) {
+    return new SWIGTYPE_p_std__string(opensimModelCommonJNI.AbstractConnector_upd_connectee_name(swigCPtr, this, i), false);
+  }
+
+  public void set_connectee_name(int i, String value) {
+    opensimModelCommonJNI.AbstractConnector_set_connectee_name(swigCPtr, this, i, value);
+  }
+
+  public int append_connectee_name(String value) {
+    return opensimModelCommonJNI.AbstractConnector_append_connectee_name(swigCPtr, this, value);
+  }
+
+  public void constructProperty_connectee_name() {
+    opensimModelCommonJNI.AbstractConnector_constructProperty_connectee_name(swigCPtr, this);
+  }
+
   public Stage getConnectAtStage() {
     return new Stage(opensimModelCommonJNI.AbstractConnector_getConnectAtStage(swigCPtr, this), true);
   }

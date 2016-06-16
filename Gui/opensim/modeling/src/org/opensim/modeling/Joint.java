@@ -153,6 +153,22 @@ public class Joint extends ModelComponent {
     opensimModelSimulationJNI.Joint_constructProperty_frames(swigCPtr, this);
   }
 
+  public void set_connector_parent_frame(int value) {
+    opensimModelSimulationJNI.Joint__connector_parent_frame_set(swigCPtr, this, value);
+  }
+
+  public int get_connector_parent_frame() {
+    return opensimModelSimulationJNI.Joint__connector_parent_frame_get(swigCPtr, this);
+  }
+
+  public void set_connector_child_frame(int value) {
+    opensimModelSimulationJNI.Joint__connector_child_frame_set(swigCPtr, this, value);
+  }
+
+  public int get_connector_child_frame() {
+    return opensimModelSimulationJNI.Joint__connector_child_frame_get(swigCPtr, this);
+  }
+
   public void set_has_output_power(boolean value) {
     opensimModelSimulationJNI.Joint__has_output_power_set(swigCPtr, this, value);
   }

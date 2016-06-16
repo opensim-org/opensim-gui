@@ -129,6 +129,22 @@ public class PointConstraint extends Constraint {
     opensimModelSimulationJNI.PointConstraint_set_location_body_2__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
+  public void set_connector_body_1(int value) {
+    opensimModelSimulationJNI.PointConstraint__connector_body_1_set(swigCPtr, this, value);
+  }
+
+  public int get_connector_body_1() {
+    return opensimModelSimulationJNI.PointConstraint__connector_body_1_get(swigCPtr, this);
+  }
+
+  public void set_connector_body_2(int value) {
+    opensimModelSimulationJNI.PointConstraint__connector_body_2_set(swigCPtr, this, value);
+  }
+
+  public int get_connector_body_2() {
+    return opensimModelSimulationJNI.PointConstraint__connector_body_2_get(swigCPtr, this);
+  }
+
   public PointConstraint() {
     this(opensimModelSimulationJNI.new_PointConstraint__SWIG_0(), true);
   }

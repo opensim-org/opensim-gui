@@ -81,6 +81,22 @@ public class TwoFrameLinkerForce extends Force {
     opensimModelSimulationJNI.TwoFrameLinkerForce_constructProperty_frames(swigCPtr, this);
   }
 
+  public void set_connector_frame1(int value) {
+    opensimModelSimulationJNI.TwoFrameLinkerForce__connector_frame1_set(swigCPtr, this, value);
+  }
+
+  public int get_connector_frame1() {
+    return opensimModelSimulationJNI.TwoFrameLinkerForce__connector_frame1_get(swigCPtr, this);
+  }
+
+  public void set_connector_frame2(int value) {
+    opensimModelSimulationJNI.TwoFrameLinkerForce__connector_frame2_set(swigCPtr, this, value);
+  }
+
+  public int get_connector_frame2() {
+    return opensimModelSimulationJNI.TwoFrameLinkerForce__connector_frame2_get(swigCPtr, this);
+  }
+
   public PhysicalFrame getFrame1() {
     return new PhysicalFrame(opensimModelSimulationJNI.TwoFrameLinkerForce_getFrame1(swigCPtr, this), false);
   }

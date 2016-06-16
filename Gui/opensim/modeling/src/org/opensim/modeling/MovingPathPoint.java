@@ -57,74 +57,188 @@ public class MovingPathPoint extends PathPoint {
     return opensimModelSimulationJNI.MovingPathPoint_getConcreteClassName(swigCPtr, this);
   }
 
+  public void copyProperty_x_location(MovingPathPoint source) {
+    opensimModelSimulationJNI.MovingPathPoint_copyProperty_x_location(swigCPtr, this, MovingPathPoint.getCPtr(source), source);
+  }
+
+  public Function get_x_location(int i) {
+    return new Function(opensimModelSimulationJNI.MovingPathPoint_get_x_location__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public Function upd_x_location(int i) {
+    return new Function(opensimModelSimulationJNI.MovingPathPoint_upd_x_location__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_x_location(int i, Function value) {
+    opensimModelSimulationJNI.MovingPathPoint_set_x_location__SWIG_0(swigCPtr, this, i, Function.getCPtr(value), value);
+  }
+
+  public int append_x_location(Function value) {
+    return opensimModelSimulationJNI.MovingPathPoint_append_x_location(swigCPtr, this, Function.getCPtr(value), value);
+  }
+
+  public void constructProperty_x_location() {
+    opensimModelSimulationJNI.MovingPathPoint_constructProperty_x_location__SWIG_0(swigCPtr, this);
+  }
+
+  public void constructProperty_x_location(Function initValue) {
+    opensimModelSimulationJNI.MovingPathPoint_constructProperty_x_location__SWIG_1(swigCPtr, this, Function.getCPtr(initValue), initValue);
+  }
+
+  public Function get_x_location() {
+    return new Function(opensimModelSimulationJNI.MovingPathPoint_get_x_location__SWIG_1(swigCPtr, this), false);
+  }
+
+  public Function upd_x_location() {
+    return new Function(opensimModelSimulationJNI.MovingPathPoint_upd_x_location__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_x_location(Function value) {
+    opensimModelSimulationJNI.MovingPathPoint_set_x_location__SWIG_1(swigCPtr, this, Function.getCPtr(value), value);
+  }
+
+  public void copyProperty_y_location(MovingPathPoint source) {
+    opensimModelSimulationJNI.MovingPathPoint_copyProperty_y_location(swigCPtr, this, MovingPathPoint.getCPtr(source), source);
+  }
+
+  public Function get_y_location(int i) {
+    return new Function(opensimModelSimulationJNI.MovingPathPoint_get_y_location__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public Function upd_y_location(int i) {
+    return new Function(opensimModelSimulationJNI.MovingPathPoint_upd_y_location__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_y_location(int i, Function value) {
+    opensimModelSimulationJNI.MovingPathPoint_set_y_location__SWIG_0(swigCPtr, this, i, Function.getCPtr(value), value);
+  }
+
+  public int append_y_location(Function value) {
+    return opensimModelSimulationJNI.MovingPathPoint_append_y_location(swigCPtr, this, Function.getCPtr(value), value);
+  }
+
+  public void constructProperty_y_location() {
+    opensimModelSimulationJNI.MovingPathPoint_constructProperty_y_location__SWIG_0(swigCPtr, this);
+  }
+
+  public void constructProperty_y_location(Function initValue) {
+    opensimModelSimulationJNI.MovingPathPoint_constructProperty_y_location__SWIG_1(swigCPtr, this, Function.getCPtr(initValue), initValue);
+  }
+
+  public Function get_y_location() {
+    return new Function(opensimModelSimulationJNI.MovingPathPoint_get_y_location__SWIG_1(swigCPtr, this), false);
+  }
+
+  public Function upd_y_location() {
+    return new Function(opensimModelSimulationJNI.MovingPathPoint_upd_y_location__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_y_location(Function value) {
+    opensimModelSimulationJNI.MovingPathPoint_set_y_location__SWIG_1(swigCPtr, this, Function.getCPtr(value), value);
+  }
+
+  public void copyProperty_z_location(MovingPathPoint source) {
+    opensimModelSimulationJNI.MovingPathPoint_copyProperty_z_location(swigCPtr, this, MovingPathPoint.getCPtr(source), source);
+  }
+
+  public Function get_z_location(int i) {
+    return new Function(opensimModelSimulationJNI.MovingPathPoint_get_z_location__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public Function upd_z_location(int i) {
+    return new Function(opensimModelSimulationJNI.MovingPathPoint_upd_z_location__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_z_location(int i, Function value) {
+    opensimModelSimulationJNI.MovingPathPoint_set_z_location__SWIG_0(swigCPtr, this, i, Function.getCPtr(value), value);
+  }
+
+  public int append_z_location(Function value) {
+    return opensimModelSimulationJNI.MovingPathPoint_append_z_location(swigCPtr, this, Function.getCPtr(value), value);
+  }
+
+  public void constructProperty_z_location() {
+    opensimModelSimulationJNI.MovingPathPoint_constructProperty_z_location__SWIG_0(swigCPtr, this);
+  }
+
+  public void constructProperty_z_location(Function initValue) {
+    opensimModelSimulationJNI.MovingPathPoint_constructProperty_z_location__SWIG_1(swigCPtr, this, Function.getCPtr(initValue), initValue);
+  }
+
+  public Function get_z_location() {
+    return new Function(opensimModelSimulationJNI.MovingPathPoint_get_z_location__SWIG_1(swigCPtr, this), false);
+  }
+
+  public Function upd_z_location() {
+    return new Function(opensimModelSimulationJNI.MovingPathPoint_upd_z_location__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_z_location(Function value) {
+    opensimModelSimulationJNI.MovingPathPoint_set_z_location__SWIG_1(swigCPtr, this, Function.getCPtr(value), value);
+  }
+
   public MovingPathPoint() {
-    this(opensimModelSimulationJNI.new_MovingPathPoint__SWIG_0(), true);
-  }
-
-  public MovingPathPoint(MovingPathPoint aPoint) {
-    this(opensimModelSimulationJNI.new_MovingPathPoint__SWIG_1(MovingPathPoint.getCPtr(aPoint), aPoint), true);
-  }
-
-  public void copyData(MovingPathPoint aPoint) {
-    opensimModelSimulationJNI.MovingPathPoint_copyData(swigCPtr, this, MovingPathPoint.getCPtr(aPoint), aPoint);
+    this(opensimModelSimulationJNI.new_MovingPathPoint(), true);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
     opensimModelSimulationJNI.MovingPathPoint_updateFromXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
   }
 
-  public void init(PathPoint aPoint) {
-    opensimModelSimulationJNI.MovingPathPoint_init(swigCPtr, this, PathPoint.getCPtr(aPoint), aPoint);
+  public boolean hasXCoordinate() {
+    return opensimModelSimulationJNI.MovingPathPoint_hasXCoordinate(swigCPtr, this);
+  }
+
+  public boolean hasYCoordinate() {
+    return opensimModelSimulationJNI.MovingPathPoint_hasYCoordinate(swigCPtr, this);
+  }
+
+  public boolean hasZCoordinate() {
+    return opensimModelSimulationJNI.MovingPathPoint_hasZCoordinate(swigCPtr, this);
   }
 
   public Coordinate getXCoordinate() {
-    long cPtr = opensimModelSimulationJNI.MovingPathPoint_getXCoordinate(swigCPtr, this);
-    return (cPtr == 0) ? null : new Coordinate(cPtr, false);
+    return new Coordinate(opensimModelSimulationJNI.MovingPathPoint_getXCoordinate(swigCPtr, this), false);
   }
 
   public Coordinate getYCoordinate() {
-    long cPtr = opensimModelSimulationJNI.MovingPathPoint_getYCoordinate(swigCPtr, this);
-    return (cPtr == 0) ? null : new Coordinate(cPtr, false);
+    return new Coordinate(opensimModelSimulationJNI.MovingPathPoint_getYCoordinate(swigCPtr, this), false);
   }
 
   public Coordinate getZCoordinate() {
-    long cPtr = opensimModelSimulationJNI.MovingPathPoint_getZCoordinate(swigCPtr, this);
-    return (cPtr == 0) ? null : new Coordinate(cPtr, false);
+    return new Coordinate(opensimModelSimulationJNI.MovingPathPoint_getZCoordinate(swigCPtr, this), false);
+  }
+
+  public void setXCoordinate(Coordinate coordinate) {
+    opensimModelSimulationJNI.MovingPathPoint_setXCoordinate(swigCPtr, this, Coordinate.getCPtr(coordinate), coordinate);
+  }
+
+  public void setYCoordinate(Coordinate coordinate) {
+    opensimModelSimulationJNI.MovingPathPoint_setYCoordinate(swigCPtr, this, Coordinate.getCPtr(coordinate), coordinate);
+  }
+
+  public void setZCoordinate(Coordinate coordinate) {
+    opensimModelSimulationJNI.MovingPathPoint_setZCoordinate(swigCPtr, this, Coordinate.getCPtr(coordinate), coordinate);
+  }
+
+  public boolean isActive(State s) {
+    return opensimModelSimulationJNI.MovingPathPoint_isActive(swigCPtr, this, State.getCPtr(s), s);
+  }
+
+  public Vec3 getLocation(State s) {
+    return new Vec3(opensimModelSimulationJNI.MovingPathPoint_getLocation(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
+  public Vec3 getVelocity(State s) {
+    return new Vec3(opensimModelSimulationJNI.MovingPathPoint_getVelocity(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
   public Vec3 getdPointdQ(State s) {
     return new Vec3(opensimModelSimulationJNI.MovingPathPoint_getdPointdQ(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
-  public String getXCoordinateName() {
-    return opensimModelSimulationJNI.MovingPathPoint_getXCoordinateName(swigCPtr, this);
-  }
-
-  public String getYCoordinateName() {
-    return opensimModelSimulationJNI.MovingPathPoint_getYCoordinateName(swigCPtr, this);
-  }
-
-  public String getZCoordinateName() {
-    return opensimModelSimulationJNI.MovingPathPoint_getZCoordinateName(swigCPtr, this);
-  }
-
-  public Function getXFunction() {
-    long cPtr = opensimModelSimulationJNI.MovingPathPoint_getXFunction(swigCPtr, this);
-    return (cPtr == 0) ? null : new Function(cPtr, false);
-  }
-
-  public Function getYFunction() {
-    long cPtr = opensimModelSimulationJNI.MovingPathPoint_getYFunction(swigCPtr, this);
-    return (cPtr == 0) ? null : new Function(cPtr, false);
-  }
-
-  public Function getZFunction() {
-    long cPtr = opensimModelSimulationJNI.MovingPathPoint_getZFunction(swigCPtr, this);
-    return (cPtr == 0) ? null : new Function(cPtr, false);
-  }
-
-  public void scale(State s, Vec3 aScaleFactors) {
-    opensimModelSimulationJNI.MovingPathPoint_scale(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(aScaleFactors), aScaleFactors);
+  public void scale(Vec3 aScaleFactors) {
+    opensimModelSimulationJNI.MovingPathPoint_scale(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
   }
 
 }

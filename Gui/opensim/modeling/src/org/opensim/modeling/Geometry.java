@@ -129,6 +129,18 @@ public class Geometry extends Component {
     opensimModelSimulationJNI.Geometry_set_Appearance__SWIG_1(swigCPtr, this, Appearance.getCPtr(value), value);
   }
 
+  public void set_connector_frame(int value) {
+    opensimModelSimulationJNI.Geometry__connector_frame_set(swigCPtr, this, value);
+  }
+
+  public int get_connector_frame() {
+    return opensimModelSimulationJNI.Geometry__connector_frame_get(swigCPtr, this);
+  }
+
+  public int constructConnector_frame() {
+    return opensimModelSimulationJNI.Geometry_constructConnector_frame(swigCPtr, this);
+  }
+
   public void setFrameName(String name) {
     opensimModelSimulationJNI.Geometry_setFrameName(swigCPtr, this, name);
   }

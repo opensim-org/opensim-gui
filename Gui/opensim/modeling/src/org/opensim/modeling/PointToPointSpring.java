@@ -201,6 +201,22 @@ public class PointToPointSpring extends Force {
     opensimModelSimulationJNI.PointToPointSpring_set_rest_length__SWIG_1(swigCPtr, this, value);
   }
 
+  public void set_connector_body1(int value) {
+    opensimModelSimulationJNI.PointToPointSpring__connector_body1_set(swigCPtr, this, value);
+  }
+
+  public int get_connector_body1() {
+    return opensimModelSimulationJNI.PointToPointSpring__connector_body1_get(swigCPtr, this);
+  }
+
+  public void set_connector_body2(int value) {
+    opensimModelSimulationJNI.PointToPointSpring__connector_body2_set(swigCPtr, this, value);
+  }
+
+  public int get_connector_body2() {
+    return opensimModelSimulationJNI.PointToPointSpring__connector_body2_get(swigCPtr, this);
+  }
+
   public PointToPointSpring() {
     this(opensimModelSimulationJNI.new_PointToPointSpring__SWIG_0(), true);
   }

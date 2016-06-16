@@ -1143,6 +1143,12 @@ public class opensimModelCommonJNI {
   public final static native String AbstractConnector_getClassName();
   public final static native long AbstractConnector_clone(long jarg1, AbstractConnector jarg1_);
   public final static native String AbstractConnector_getConcreteClassName(long jarg1, AbstractConnector jarg1_);
+  public final static native void AbstractConnector_copyProperty_connectee_name(long jarg1, AbstractConnector jarg1_, long jarg2, AbstractConnector jarg2_);
+  public final static native String AbstractConnector_get_connectee_name(long jarg1, AbstractConnector jarg1_, int jarg2);
+  public final static native long AbstractConnector_upd_connectee_name(long jarg1, AbstractConnector jarg1_, int jarg2);
+  public final static native void AbstractConnector_set_connectee_name(long jarg1, AbstractConnector jarg1_, int jarg2, String jarg3);
+  public final static native int AbstractConnector_append_connectee_name(long jarg1, AbstractConnector jarg1_, String jarg2);
+  public final static native void AbstractConnector_constructProperty_connectee_name(long jarg1, AbstractConnector jarg1_);
   public final static native void delete_AbstractConnector(long jarg1);
   public final static native long AbstractConnector_getConnectAtStage(long jarg1, AbstractConnector jarg1_);
   public final static native boolean AbstractConnector_isListConnector(long jarg1, AbstractConnector jarg1_);

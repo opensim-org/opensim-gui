@@ -165,6 +165,22 @@ public class ConstantDistanceConstraint extends Constraint {
     opensimModelSimulationJNI.ConstantDistanceConstraint_set_constant_distance__SWIG_1(swigCPtr, this, value);
   }
 
+  public void set_connector_body_1(int value) {
+    opensimModelSimulationJNI.ConstantDistanceConstraint__connector_body_1_set(swigCPtr, this, value);
+  }
+
+  public int get_connector_body_1() {
+    return opensimModelSimulationJNI.ConstantDistanceConstraint__connector_body_1_get(swigCPtr, this);
+  }
+
+  public void set_connector_body_2(int value) {
+    opensimModelSimulationJNI.ConstantDistanceConstraint__connector_body_2_set(swigCPtr, this, value);
+  }
+
+  public int get_connector_body_2() {
+    return opensimModelSimulationJNI.ConstantDistanceConstraint__connector_body_2_get(swigCPtr, this);
+  }
+
   public ConstantDistanceConstraint() {
     this(opensimModelSimulationJNI.new_ConstantDistanceConstraint__SWIG_0(), true);
   }
