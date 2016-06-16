@@ -258,15 +258,15 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
             Coordinate coordinate = null;
             FunctionEditorOptions options = new FunctionEditorOptions();
             if (xyz == 0) {
-               function = mmp.getXFunction();
+               function = mmp.get_x_location();
                coordinate = mmp.getXCoordinate();
                options.title = "X offset";
             } else if (xyz == 1) {
-               function = mmp.getYFunction();
+               function = mmp.get_y_location();
                coordinate = mmp.getYCoordinate();
                options.title = "Y offset";
             } else if (xyz == 2) {
-               function = mmp.getZFunction();
+               function = mmp.get_z_location();
                coordinate = mmp.getZCoordinate();
                options.title = "Z offset";
             }
@@ -514,7 +514,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
                   MovingPathPointCoordinateChosen(((javax.swing.JComboBox)evt.getSource()), num, 0);
                }
             });
-            Function Xfunction = mmp.getXFunction();
+            Function Xfunction = mmp.get_x_location();
             if (Xfunction != null && Xfunction instanceof Constant) {
                XCoordComboBox.setEnabled(false);
             } else {
@@ -566,7 +566,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
                   MovingPathPointCoordinateChosen(((javax.swing.JComboBox)evt.getSource()), num, 1);
                }
             });
-            Function Yfunction = mmp.getYFunction();
+            Function Yfunction = mmp.get_y_location();
             if (Yfunction != null && Yfunction instanceof Constant) {
                YCoordComboBox.setEnabled(false);
             } else {
@@ -618,7 +618,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
                   MovingPathPointCoordinateChosen(((javax.swing.JComboBox)evt.getSource()), num, 2);
                }
             });
-            Function Zfunction = mmp.getZFunction();
+            Function Zfunction = mmp.get_z_location();
             if (Zfunction != null && Zfunction instanceof Constant) {
                ZCoordComboBox.setEnabled(false);
             } else {
