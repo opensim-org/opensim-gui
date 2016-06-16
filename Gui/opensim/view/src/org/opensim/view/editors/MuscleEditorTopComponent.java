@@ -569,8 +569,8 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
       if (Coordinate.getCPtr(newCoord) != Coordinate.getCPtr(oldCoord)) {
          context.setCoordinate(via, newCoord);
          // make sure the range min and range max are valid for this new coordinate
-         double rangeMin = via.getRange().getitem(0);
-         double rangeMax = via.getRange().getitem(1);
+         double rangeMin = via.get_range(0);
+         double rangeMax = via.get_range(1);
          boolean needsUpdating = false;
          if (rangeMin > newCoord.getRangeMax() || rangeMax < newCoord.getRangeMin()) {
             // If there is no overlap between the old range and the new range, use new range
@@ -698,8 +698,8 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
          nf = positionFormat;
       }
 
-      double newValue, oldValue = via.getRange().getitem(0)*conversion;
-      double biggestAllowed = via.getRange().getitem(1)*conversion;
+      double newValue, oldValue = via.get_range(0)*conversion;
+      double biggestAllowed = via.get_range(1)*conversion;
       try {
          newValue = nf.parse(field.getText()).doubleValue();
       } catch (ParseException ex) {
@@ -743,8 +743,8 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
          nf = positionFormat;
       }
 
-      double newValue, oldValue = via.getRange().getitem(1)*conversion;
-      double smallestAllowed = via.getRange().getitem(0)*conversion;
+      double newValue, oldValue = via.get_range(1)*conversion;
+      double smallestAllowed = via.get_range(0)*conversion;
       try {
          newValue = nf.parse(field.getText()).doubleValue();
       } catch (ParseException ex) {

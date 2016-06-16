@@ -672,7 +672,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
 
             // The min range of the coordinate range
             javax.swing.JTextField rangeMinField = new javax.swing.JTextField();
-            rangeMinField.setText(nf.format(via.getRange().getitem(0)*conversion));
+            rangeMinField.setText(nf.format(via.get_range(0)*conversion));
             rangeMinField.setBounds(x, height, 60, 21);
             rangeMinField.addActionListener(new java.awt.event.ActionListener() {
                public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -690,7 +690,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
 
             // The max range of the coordinate range
             javax.swing.JTextField rangeMaxField = new javax.swing.JTextField();
-            rangeMaxField.setText(nf.format(via.getRange().getitem(1)*conversion));
+            rangeMaxField.setText(nf.format(via.get_range(1)*conversion));
             rangeMaxField.setBounds(x, height, 60, 21);
             rangeMaxField.addActionListener(new java.awt.event.ActionListener() {
                public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1337,8 +1337,8 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       if (Coordinate.getCPtr(newCoord) != Coordinate.getCPtr(oldCoord)) {
          context.setCoordinate(via, newCoord);
          // make sure the range min and range max are valid for this new coordinate
-         double rangeMin = via.getRange().getitem(0);
-         double rangeMax = via.getRange().getitem(1);
+         double rangeMin = via.get_range(0);
+         double rangeMax = via.get_range(1);
          boolean needsUpdating = false;
          if (rangeMin > newCoord.getRangeMax() || rangeMax < newCoord.getRangeMin()) {
             // If there is no overlap between the old range and the new range, use new range
@@ -1515,8 +1515,8 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          nf = positionFormat;
       }
 
-      double newValue, oldValue = via.getRange().getitem(0)*conversion;
-      double biggestAllowed = via.getRange().getitem(1)*conversion;
+      double newValue, oldValue = via.get_range(0)*conversion;
+      double biggestAllowed = via.get_range(1)*conversion;
       try {
          newValue = nf.parse(field.getText()).doubleValue();
       } catch (ParseException ex) {
@@ -1560,8 +1560,8 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          nf = positionFormat;
       }
 
-      double newValue, oldValue = via.getRange().getitem(1)*conversion;
-      double smallestAllowed = via.getRange().getitem(0)*conversion;
+      double newValue, oldValue = via.get_range(1)*conversion;
+      double smallestAllowed = via.get_range(0)*conversion;
       try {
          newValue = nf.parse(field.getText()).doubleValue();
       } catch (ParseException ex) {
