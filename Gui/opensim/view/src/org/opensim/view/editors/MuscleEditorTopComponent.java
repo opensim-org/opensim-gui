@@ -959,15 +959,15 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
             Coordinate coordinate = null;
             FunctionEditorOptions options = new FunctionEditorOptions();
             if (xyz == 0) {
-               function = mmp.getXFunction();
+               function = mmp.get_x_location();
                coordinate = mmp.getXCoordinate();
                options.title = "X offset";
             } else if (xyz == 1) {
-               function = mmp.getYFunction();
+               function = mmp.get_y_location();
                coordinate = mmp.getYCoordinate();
                options.title = "Y offset";
             } else if (xyz == 2) {
-               function = mmp.getZFunction();
+               function = mmp.upd_z_location();
                coordinate = mmp.getZCoordinate();
                options.title = "Z offset";
             }

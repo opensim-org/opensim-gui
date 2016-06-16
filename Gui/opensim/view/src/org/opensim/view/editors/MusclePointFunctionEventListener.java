@@ -66,22 +66,22 @@ public class MusclePointFunctionEventListener implements FunctionEventListener {
             Function oldFunction = fre.getFunction();
             Function newFunction = fre.getReplacementFunction();
             if (Function.getCPtr(oldFunction) != Function.getCPtr(newFunction)) {
-               if (Function.getCPtr(oldFunction) == Function.getCPtr(mmp.getXFunction()))
+               if (Function.getCPtr(oldFunction) == Function.getCPtr(mmp.get_x_location()))
                   context.setXFunction(mmp, newFunction);
-               else if (Function.getCPtr(oldFunction) == Function.getCPtr(mmp.getYFunction()))
+               else if (Function.getCPtr(oldFunction) == Function.getCPtr(mmp.get_y_location()))
                   context.setYFunction(mmp, newFunction);
-               else if (Function.getCPtr(oldFunction) == Function.getCPtr(mmp.getZFunction()))
+               else if (Function.getCPtr(oldFunction) == Function.getCPtr(mmp.get_z_location()))
                   context.setZFunction(mmp, newFunction);
                MuscleEditorTopComponent.findInstance().movingPointMoved(event.getModel(), Muscle.safeDownCast(mmp.getPath().getOwner()), mmp);
             }
          } else if (event instanceof FunctionModifiedEvent) {
             FunctionModifiedEvent fme = (FunctionModifiedEvent) event;
             Function function = fme.getFunction();
-            if (Function.getCPtr(function) == Function.getCPtr(mmp.getXFunction()))
+            if (Function.getCPtr(function) == Function.getCPtr(mmp.get_x_location()))
                context.setXFunction(mmp, function);
-            else if (Function.getCPtr(function) == Function.getCPtr(mmp.getYFunction()))
+            else if (Function.getCPtr(function) == Function.getCPtr(mmp.get_y_location()))
                context.setYFunction(mmp, function);
-            else if (Function.getCPtr(function) == Function.getCPtr(mmp.getZFunction()))
+            else if (Function.getCPtr(function) == Function.getCPtr(mmp.get_z_location()))
                context.setZFunction(mmp, function);
             MuscleEditorTopComponent.findInstance().movingPointMoved(event.getModel(), Muscle.safeDownCast(mmp.getPath().getOwner()), mmp);
          }
