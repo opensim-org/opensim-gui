@@ -8,6 +8,7 @@
     <property name="apiJava.dir" value="C:/Dev/gui/opensim-gui/OpenSimAPI-install/sdk/Java/org"/>
     <property name="models.dir" value="C:/Dev/gui/opensim-models"/>
     <property name="visualizer.dir" value="C:/Dev/opensim-threejs"/>
+    <property name="jre.dir" value="${java.home}"/>
     <condition property="installer-files.dir" value="installer_files/Windows">
         <os family="windows"/>
     </condition>
@@ -52,7 +53,7 @@
     </target>
     <target name="copy-jre" description="Copy JRE to installer">
         <copy todir="dist/installer/opensim/jdk/jre">
-            <fileset dir="${platforms.1.8.home}/jre"/>
+            <fileset dir="${jre.dir}"/>
         </copy>
     </target>
     <target name="copy-models" description="Copy Models and Geometry to installer">
