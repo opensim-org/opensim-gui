@@ -121,9 +121,8 @@ public final class TheApp {
              // Remove the jar: prefix
             String schemePart = jarfile.getSchemeSpecificPart();
             // Remove trailing !/
-            schemePart = schemePart.substring(0, schemePart.length()-2);
-            URI jarAsFile = new URI(schemePart);
-            Path jarFilePath = Paths.get(jarAsFile);
+            schemePart = schemePart.substring(6, schemePart.length()-2);
+            Path jarFilePath = Paths.get(schemePart);
             Path parentPath = jarFilePath.getParent();
             String parentDir = parentPath.toString();
             boolean buildEnvironment = parentDir.lastIndexOf("cluster")!=-1;
