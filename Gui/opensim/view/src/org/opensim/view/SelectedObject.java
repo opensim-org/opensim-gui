@@ -30,6 +30,7 @@ package org.opensim.view;
 
 import org.opensim.modeling.Body;
 import org.opensim.modeling.Component;
+import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
@@ -93,7 +94,7 @@ public class SelectedObject implements Selectable {
    {
       if (PathPoint.safeDownCast(object) != null) {
          PathPoint mp = PathPoint.safeDownCast(object);
-         OpenSimObject owner = mp.getPath().getOwner();
+         OpenSimObject owner = GeometryPath.safeDownCast(mp.getParent()).getOwner();
          SingleModelVisuals visuals = ViewDB.getInstance().getModelVisuals(getModel(mp));
          OpenSimvtkGlyphCloud cloud = null;
          int id = cloud.getPointId(object);
@@ -157,7 +158,7 @@ public class SelectedObject implements Selectable {
          if (!(context.isActivePathPoint(mp))) return null;
          SingleModelVisuals visuals = ViewDB.getInstance().getModelVisuals(dModel);
          // If muscle is now hidden return
-         int displayStatus = ViewDB.getInstance().getDisplayStatus(mp.getPath().getOwner());
+         int displayStatus = ViewDB.getInstance().getDisplayStatus(GeometryPath.safeDownCast(mp.getParent()).getOwner());
          if (displayStatus==0) return null;
          //bounds = getGlyphPointBounds(visuals.getMusclePointsRep(), visuals, object);
       } else if (Marker.safeDownCast(object) != null) {

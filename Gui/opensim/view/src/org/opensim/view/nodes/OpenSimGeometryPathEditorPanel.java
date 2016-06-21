@@ -518,7 +518,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
             if (Xfunction != null && Xfunction instanceof Constant) {
                XCoordComboBox.setEnabled(false);
             } else {
-               XCoordComboBox.setSelectedIndex(findElement(coordinateNames, mmp.getXCoordinateName()));
+               XCoordComboBox.setSelectedIndex(findElement(coordinateNames, mmp.getXCoordinate().getName()));
             }
             AttachmentsPanel.add(XCoordComboBox);
          }
@@ -570,7 +570,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
             if (Yfunction != null && Yfunction instanceof Constant) {
                YCoordComboBox.setEnabled(false);
             } else {
-               YCoordComboBox.setSelectedIndex(findElement(coordinateNames, mmp.getYCoordinateName()));
+               YCoordComboBox.setSelectedIndex(findElement(coordinateNames, mmp.getYCoordinate().getName()));
             }
             AttachmentsPanel.add(YCoordComboBox);
          }
@@ -622,7 +622,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
             if (Zfunction != null && Zfunction instanceof Constant) {
                ZCoordComboBox.setEnabled(false);
             } else {
-               ZCoordComboBox.setSelectedIndex(findElement(coordinateNames, mmp.getZCoordinateName()));
+               ZCoordComboBox.setSelectedIndex(findElement(coordinateNames, mmp.getZCoordinate().getName()));
             }
             AttachmentsPanel.add(ZCoordComboBox);
          }
@@ -660,7 +660,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
             // The combo box containing the coordinate for the via point
             javax.swing.JComboBox coordComboBox = new javax.swing.JComboBox();
             coordComboBox.setModel(new javax.swing.DefaultComboBoxModel(coordinateNames));
-            coordComboBox.setSelectedIndex(findElement(coordinateNames, via.getCoordinateName()));
+            coordComboBox.setSelectedIndex(findElement(coordinateNames, via.getCoordinate().getName()));
             coordComboBox.setBounds(x, height, 130, 21);
             coordComboBox.addActionListener(new java.awt.event.ActionListener() {
                public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1419,6 +1419,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       else if (mmp != null)
          oldType = 2;
       int newType = musclePointTypeComboBox.getSelectedIndex();
+      /* FIXME DEVWEEK
       if (newType != oldType) {
          PathPoint newPoint = PathPoint.makePathPointOfType(mp, musclePointClassNames[newType]);
          OpenSimContext context=OpenSimDB.getInstance().getContext(currentPath.getModel());
@@ -1449,7 +1450,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          // update the panels
          updateAttachmentPanel();
          updateCurrentPathPanel();
-      }
+      } */
    }
    public void AttachmentPointEntered(javax.swing.JTextField field, int attachmentNum, int coordNum) {
       //Muscle asm = Muscle.safeDownCast(objectWithPath);

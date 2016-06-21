@@ -31,39 +31,30 @@ import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Vector;
+import java.util.logging.ErrorManager;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
-import org.openide.ErrorManager;
 import org.openide.nodes.Node;
 import org.openide.util.NbBundle;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayPathPoint;
-import org.opensim.modeling.ArrayPtrsPropertyGroup;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.BodySet;
 import org.opensim.modeling.ConditionalPathPoint;
-import org.opensim.modeling.Constant;
 import org.opensim.modeling.Coordinate;
 import org.opensim.modeling.CoordinateSet;
-import org.opensim.modeling.ForceSet;
 import org.opensim.modeling.Function;
-import org.opensim.modeling.Geometry;
-import org.opensim.modeling.DecorativeGeometry.Representation;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.MovingPathPoint;
 import org.opensim.modeling.OpenSimContext;
@@ -73,7 +64,6 @@ import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.PathPointSet;
 import org.opensim.modeling.PathWrap;
 import org.opensim.modeling.PhysicalFrame;
-import org.opensim.modeling.PropertyGroup;
 import org.opensim.modeling.PropertyHelper;
 import org.opensim.modeling.SetPathWrap;
 import org.opensim.modeling.SetWrapObject;
@@ -84,6 +74,7 @@ import org.opensim.modeling.WrapObject;
 import org.opensim.view.ClearSelectedObjectsEvent;
 import org.opensim.view.DragObjectsEvent;
 import org.opensim.view.ExplorerTopComponent;
+import static org.opensim.view.ExplorerTopComponent.findInstance;
 import org.opensim.view.ModelEvent;
 import org.opensim.view.ObjectSelectedEvent;
 import org.opensim.view.ObjectSetCurrentEvent;
@@ -486,6 +477,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
     */
    public static synchronized MuscleEditorTopComponent findInstance() {
       TopComponent win = WindowManager.getDefault().findTopComponent(PREFERRED_ID);
+      /* FIXME DEVWEEK
       if (win == null) {
          ErrorManager.getDefault().log(ErrorManager.WARNING, "Cannot find MuscleEditor component. It will not be located properly in the window system.");
          return getDefault();
@@ -494,6 +486,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
          return (MuscleEditorTopComponent)win;
       }
       ErrorManager.getDefault().log(ErrorManager.WARNING, "There seem to be multiple components with the '" + PREFERRED_ID + "' ID. That is a potential source of errors and unexpected behavior.");
+      */
       return getDefault();
    }
    
@@ -651,6 +644,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
       else if (mmp != null)
          oldType = 2;
       int newType = musclePointTypeComboBox.getSelectedIndex();
+      /* FIXME DEVWEEK
       if (newType != oldType) {
          PathPoint newPoint = PathPoint.makePathPointOfType(mp, musclePointClassNames[newType]);
          OpenSimContext context=OpenSimDB.getInstance().getContext(asm.getModel());
@@ -671,7 +665,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
                options[0]);
             PathPoint.deletePathPoint(newPoint);
             return;
-         }
+         } 
          //setPendingChanges(true, currentAct, true);
          ParametersTabbedPanel.setSelectedComponent(AttachmentsTab);
          // tell the ViewDB to redraw the model
@@ -681,7 +675,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
          // update the panels
          //updateAttachmentPanel(asm);
          updateCurrentPathPanel(asm);
-      }
+      } */
    }
 
    public void RangeMinEntered(javax.swing.JTextField field, int attachmentNum) {
@@ -1916,7 +1910,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
             currentMuscleMoved = true;
             
             // Update the geometry of the muscle.
-            SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(mp.getPath().getModel());
+            SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(mp.getModel());
             //vis.updateMuscleOrForceAlongPathGeometry(mp.getPath().getOwner(), true);
          }
       }
