@@ -77,6 +77,14 @@ public class ConditionalPathPoint extends PathPoint {
     return opensimModelSimulationJNI.ConditionalPathPoint_append_range(swigCPtr, this, value);
   }
 
+  public void set_connector_coordinate(int value) {
+    opensimModelSimulationJNI.ConditionalPathPoint__connector_coordinate_set(swigCPtr, this, value);
+  }
+
+  public int get_connector_coordinate() {
+    return opensimModelSimulationJNI.ConditionalPathPoint__connector_coordinate_get(swigCPtr, this);
+  }
+
   public ConditionalPathPoint() {
     this(opensimModelSimulationJNI.new_ConditionalPathPoint(), true);
   }

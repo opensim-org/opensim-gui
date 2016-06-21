@@ -185,6 +185,14 @@ public class ContactGeometry extends ModelComponent {
     return opensimModelSimulationJNI.ContactGeometry_append_color(swigCPtr, this, value);
   }
 
+  public void set_connector_frame(int value) {
+    opensimModelSimulationJNI.ContactGeometry__connector_frame_set(swigCPtr, this, value);
+  }
+
+  public int get_connector_frame() {
+    return opensimModelSimulationJNI.ContactGeometry__connector_frame_get(swigCPtr, this);
+  }
+
   public PhysicalFrame getFrame() {
     return new PhysicalFrame(opensimModelSimulationJNI.ContactGeometry_getFrame(swigCPtr, this), false);
   }

@@ -177,6 +177,30 @@ public class MovingPathPoint extends PathPoint {
     opensimModelSimulationJNI.MovingPathPoint_set_z_location__SWIG_1(swigCPtr, this, Function.getCPtr(value), value);
   }
 
+  public void set_connector_x_coordinate(int value) {
+    opensimModelSimulationJNI.MovingPathPoint__connector_x_coordinate_set(swigCPtr, this, value);
+  }
+
+  public int get_connector_x_coordinate() {
+    return opensimModelSimulationJNI.MovingPathPoint__connector_x_coordinate_get(swigCPtr, this);
+  }
+
+  public void set_connector_y_coordinate(int value) {
+    opensimModelSimulationJNI.MovingPathPoint__connector_y_coordinate_set(swigCPtr, this, value);
+  }
+
+  public int get_connector_y_coordinate() {
+    return opensimModelSimulationJNI.MovingPathPoint__connector_y_coordinate_get(swigCPtr, this);
+  }
+
+  public void set_connector_z_coordinate(int value) {
+    opensimModelSimulationJNI.MovingPathPoint__connector_z_coordinate_set(swigCPtr, this, value);
+  }
+
+  public int get_connector_z_coordinate() {
+    return opensimModelSimulationJNI.MovingPathPoint__connector_z_coordinate_get(swigCPtr, this);
+  }
+
   public MovingPathPoint() {
     this(opensimModelSimulationJNI.new_MovingPathPoint(), true);
   }

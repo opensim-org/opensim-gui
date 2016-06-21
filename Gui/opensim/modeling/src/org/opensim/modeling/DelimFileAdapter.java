@@ -42,7 +42,7 @@ public class DelimFileAdapter extends FileAdapter {
   }
 
   public DelimFileAdapter(String delimitersRead, String delimterWrite) {
-    this(opensimModelCommonJNI.new_DelimFileAdapter__SWIG_2(delimitersRead, delimterWrite), true);
+    this(opensimModelCommonJNI.new_DelimFileAdapter__SWIG_1(delimitersRead, delimterWrite), true);
   }
 
   public DataAdapter clone() {

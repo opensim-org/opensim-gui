@@ -29,30 +29,30 @@ public class ComponentsList {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_ComponentsList(swigCPtr);
+        opensimModelCommonJNI.delete_ComponentsList(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public ComponentsList(Component root, ComponentFilter f) {
-    this(opensimModelSimulationJNI.new_ComponentsList__SWIG_0(Component.getCPtr(root), root, ComponentFilter.getCPtr(f), f), true);
+    this(opensimModelCommonJNI.new_ComponentsList__SWIG_0(Component.getCPtr(root), root, ComponentFilter.getCPtr(f), f), true);
   }
 
   public ComponentsList(Component root) {
-    this(opensimModelSimulationJNI.new_ComponentsList__SWIG_1(Component.getCPtr(root), root), true);
+    this(opensimModelCommonJNI.new_ComponentsList__SWIG_1(Component.getCPtr(root), root), true);
   }
 
   public ComponentIterator begin() {
-    return new ComponentIterator(opensimModelSimulationJNI.ComponentsList_begin(swigCPtr, this), true);
+    return new ComponentIterator(opensimModelCommonJNI.ComponentsList_begin(swigCPtr, this), true);
   }
 
   public void setFilter(ComponentFilter filter) {
-    opensimModelSimulationJNI.ComponentsList_setFilter(swigCPtr, this, ComponentFilter.getCPtr(filter), filter);
+    opensimModelCommonJNI.ComponentsList_setFilter(swigCPtr, this, ComponentFilter.getCPtr(filter), filter);
   }
 
   public ComponentIterator end() {
-    return new ComponentIterator(opensimModelSimulationJNI.ComponentsList_end(swigCPtr, this), true);
+    return new ComponentIterator(opensimModelCommonJNI.ComponentsList_end(swigCPtr, this), true);
   }
 
 }

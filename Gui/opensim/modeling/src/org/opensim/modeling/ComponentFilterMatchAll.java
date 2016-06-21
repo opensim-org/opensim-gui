@@ -39,8 +39,8 @@ public class ComponentFilterMatchAll extends ComponentFilter {
     this(opensimModelCommonJNI.new_ComponentFilterMatchAll(), true);
   }
 
-  public boolean isMatch(SWIGTYPE_p_OpenSim__Component comp) {
-    return opensimModelCommonJNI.ComponentFilterMatchAll_isMatch(swigCPtr, this, SWIGTYPE_p_OpenSim__Component.getCPtr(comp));
+  public boolean isMatch(Component comp) {
+    return opensimModelCommonJNI.ComponentFilterMatchAll_isMatch(swigCPtr, this, Component.getCPtr(comp), comp);
   }
 
   public ComponentFilter clone() {

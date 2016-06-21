@@ -46,7 +46,7 @@ public class DataTableVec3 extends AbstractDataTable {
   }
 
   public DataTableVec3(String filename, String tablename) {
-    this(opensimModelCommonJNI.new_DataTableVec3__SWIG_3(filename, tablename), true);
+    this(opensimModelCommonJNI.new_DataTableVec3__SWIG_2(filename, tablename), true);
   }
 
   public void appendRow(double indRow, SWIGTYPE_p_std__initializer_listT_SimTK__VecT_3_double_1_t_t container) {
