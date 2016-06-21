@@ -123,6 +123,7 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
       setTextfieldBounds(true);
       initComponents();
       
+      jCoordinateNameLabel.setToolTipText(coord.getFullPathName());
       jFormattedTextField.getInputMap().put(KeyStroke.getKeyStroke(
               KeyEvent.VK_ENTER, 0),
               "check");
@@ -253,7 +254,7 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
 
         jCoordinateNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jCoordinateNameLabel.setText("coordinate");
-        jCoordinateNameLabel.setToolTipText("Name");
+        jCoordinateNameLabel.setToolTipText("");
         jCoordinateNameLabel.setAlignmentX(1.0F);
         jCoordinateNameLabel.setMaximumSize(new java.awt.Dimension(100, 14));
         jCoordinateNameLabel.setMinimumSize(new java.awt.Dimension(100, 14));

@@ -357,8 +357,8 @@ public class ScaleToolModel extends Observable implements Observer {
          if(result) {
             OpenSimDB.getInstance().replaceModel(scaledModel, processedModel, processedModelContext);
             scaledModel = processedModel;
-            if(ViewDB.getInstance().getModelGuiElements(scaledModel)!=null)
-               ViewDB.getInstance().getModelGuiElements(scaledModel).setUnsavedChangesFlag(true);
+            if(OpenSimDB.getInstance().getModelGuiElements(scaledModel)!=null)
+               OpenSimDB.getInstance().getModelGuiElements(scaledModel).setUnsavedChangesFlag(true);
                
             if(getMarkerPlacerEnabled() && scaleTool.getMarkerPlacer().getOutputStorage()!=null) {
                Storage motion = new Storage(scaleTool.getMarkerPlacer().getOutputStorage());

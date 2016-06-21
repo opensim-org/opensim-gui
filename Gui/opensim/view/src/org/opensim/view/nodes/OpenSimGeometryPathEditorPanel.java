@@ -414,7 +414,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       AttachmentsPanel.add(attachmentZLabel);
       AttachmentsPanel.add(attachmentBodyLabel);
 
-      SingleModelGuiElements guiElem = ViewDB.getInstance().getModelGuiElements(currentPath.getModel());
+      SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(currentPath.getModel());
       String[] bodyNames = guiElem.getBodyNames();
       String[] coordinateNames = guiElem.getCoordinateNames();
       int numGuiLines = 0; // after for loop, will = numPoints + numMovingPathPoints

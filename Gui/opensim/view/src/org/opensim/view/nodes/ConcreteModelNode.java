@@ -1,5 +1,6 @@
 package org.opensim.view.nodes;
 
+import org.opensim.view.NavigatorByTypeModel;
 import javax.swing.Action;
 import org.openide.nodes.Node;
 import org.opensim.modeling.Model;
@@ -14,21 +15,23 @@ import org.opensim.view.pub.ViewDB;
  */
 public class ConcreteModelNode extends OpenSimObjectNode {
 	boolean isDataHolderOnly = false;
-    public ConcreteModelNode(Model m) {
-        super(m);
-	isDataHolderOnly = (m instanceof ModelForExperimentalData);
+        NavigatorByTypeModel byTypeModel;
+    public ConcreteModelNode(Model model) {
+        super(model);
+	isDataHolderOnly = (model instanceof ModelForExperimentalData);
 	if (!isDataHolderOnly)
 	{   // Data Import model has no engine or Actuators
-            getChildren().add(new Node[] {new FramesNode(m)});
-            getChildren().add(new Node[] {new BodiesNode(m.getBodySet())});
-            getChildren().add(new Node[] {new JointsNode(m.getJointSet())});
-            getChildren().add(new Node[] {new ConstraintsNode(m.getConstraintSet())});        
-            getChildren().add(new Node[] {new ContactGeometriesNode(m.getContactGeometrySet())});
-            getChildren().add(new Node[] {new AllForcesNode(m.getForceSet())});
-            getChildren().add(new Node[] {new MarkersNode(m.getMarkerSet(), m)});
-            getChildren().add(new Node[] {new ControllersNode(m.getControllerSet())});
-            getChildren().add(new Node[] {new ProbesNode(m.getProbeSet())});
-            getChildren().add(new Node[] {new OtherComponentsNode(m.getMiscModelComponentSet())});
+            byTypeModel = new NavigatorByTypeModel(model);
+            //getChildren().add(new Node[] {new FramesNode(byTypeModel.getSetOfFrames())});
+            getChildren().add(new Node[] {new BodiesNode(byTypeModel.getSetOfBodies())});
+            getChildren().add(new Node[] {new JointsNode(byTypeModel.getSetOfJoints())});
+            getChildren().add(new Node[] {new ConstraintsNode(byTypeModel.getSetOfConstraints())});        
+            getChildren().add(new Node[] {new ContactGeometriesNode(byTypeModel.getSetOfContactGeometry())});
+            getChildren().add(new Node[] {new AllForcesNode(byTypeModel.getSetOfForces())});
+            getChildren().add(new Node[] {new MarkersNode(byTypeModel.getSetOfMarkers(), model)});
+            getChildren().add(new Node[] {new ControllersNode(byTypeModel.getSetOfControllers())});
+            //getChildren().add(new Node[] {new ProbesNode(model.getProbeSet())});
+            //getChildren().add(new Node[] {new OtherComponentsNode(model.getMiscModelComponentSet())});
             
         }
         addDisplayOption(displayOption.Isolatable);

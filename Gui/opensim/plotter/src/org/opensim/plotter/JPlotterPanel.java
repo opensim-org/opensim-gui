@@ -922,7 +922,7 @@ public class JPlotterPanel extends javax.swing.JPanel
             return;
         if (muscleDialogUp==true) // An instance is already up
             return;
-        SingleModelGuiElements guiElem = ViewDB.getInstance().getModelGuiElements(currentModel);
+        SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(currentModel);
         String[] muscleNames = guiElem.getActuatorNames();
         final QuantityNameFilterJPanel filterPanel = new QuantityNameFilterJPanel(muscleNames, preSelected);
         //DialogDescriptor filterDlg = new DialogDescriptor(filterPanel, "Select Muscles", false, null);
@@ -984,7 +984,7 @@ public class JPlotterPanel extends javax.swing.JPanel
           openSimContext = OpenSimDB.getInstance().getContext(currentModel);
           // Guard against all models being deleted while the dialog is up
           if (currentModel==null) return;
-          SingleModelGuiElements guiElem = ViewDB.getInstance().getModelGuiElements(currentModel);
+          SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(currentModel);
           String[] coordNames = guiElem.getUnconstrainedCoordinateNames();
           for(int i=0; i<coordNames.length; i++){
              final String coordinateName=coordNames[i];
@@ -1776,7 +1776,7 @@ public class JPlotterPanel extends javax.swing.JPanel
             if (qName.startsWith("moment")){   // Need a cascade menu to select a GC
                final String internalName=(qName.equalsIgnoreCase("moment"))?"Moment_":"MomentArm_";
                JMenu gcMenu = new JMenu(qName);
-               SingleModelGuiElements guiElem = ViewDB.getInstance().getModelGuiElements(currentModel);
+               SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(currentModel);
                String[] coordNames = guiElem.getUnconstrainedCoordinateNames();
                for(int j=0; j<coordNames.length; j++){
                   final String coordinateName=coordNames[j];
@@ -2271,7 +2271,7 @@ public class JPlotterPanel extends javax.swing.JPanel
       if (rangeNames == null || currentModel==null)   // Have to have a model
          return false;
       
-      SingleModelGuiElements guiElem = ViewDB.getInstance().getModelGuiElements(currentModel);
+      SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(currentModel);
       Vector<String> muscleNames = guiElem.getMuscleNames();
       validMuscles = true;
       for(int i=0; i< rangeNames.length && validMuscles; i++){

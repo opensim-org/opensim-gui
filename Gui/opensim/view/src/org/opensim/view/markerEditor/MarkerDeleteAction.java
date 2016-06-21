@@ -54,7 +54,7 @@ public class MarkerDeleteAction extends AbstractAction {
         markerset.remove(marker);
 
         // Update the marker name list in the ViewDB.
-        ViewDB.getInstance().getModelGuiElements(model).updateMarkerNames();
+        OpenSimDB.getInstance().getModelGuiElements(model).updateMarkerNames();
 
         // Generate an event so everyone can update, including the marker editor.
         Vector<OpenSimObject> objs = new Vector<OpenSimObject>(1);

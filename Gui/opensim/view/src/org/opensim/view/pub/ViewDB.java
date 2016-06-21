@@ -110,8 +110,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    // Map models to visuals
    private Hashtable<Model, SingleModelVisuals> mapModelsToVisuals =
            new Hashtable<Model, SingleModelVisuals>();
-   private Hashtable<Model, SingleModelGuiElements> mapModelsToGuiElements =
-           new Hashtable<Model, SingleModelGuiElements>();
    
    private Hashtable<Model, ModelSettingsSerializer> mapModelsToSettings =
            new Hashtable<Model, ModelSettingsSerializer>();
@@ -282,10 +280,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             // display the new Model in existing views
             if (ev.getOperation()==ModelEvent.Operation.Open){
                Model model = ev.getModel();
-               SingleModelGuiElements newModelGuiElements = new SingleModelGuiElements(model);
                processSavedSettings(model);
-               mapModelsToGuiElements.put(model, newModelGuiElements);
-               try {
+                try {
                  createNewViewWindowIfNeeded();
                }
                catch(UnsatisfiedLinkError e){
@@ -331,7 +327,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                //rc = newModelVisual.getModelDisplayAssembly().GetReferenceCount();
             } else if (ev.getOperation()==ModelEvent.Operation.Close){
                Model dModel = ev.getModel();
-               mapModelsToGuiElements.remove(dModel);
                mapModelsToSettings.remove(dModel);
 
                // Remove model-associated objects from selection list!
@@ -1132,12 +1127,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       return mapModelsToVisuals.get(aModel);
    }
    
-   /**
-    * Get gui elements for passed in model
-    */
-   public SingleModelGuiElements getModelGuiElements(Model aModel) {
-      return mapModelsToGuiElements.get(aModel);
-   }
 
    public void applyTimeToViews(double time) {
       Iterator<ModelWindowVTKTopComponent> windowIter = openWindows.iterator();

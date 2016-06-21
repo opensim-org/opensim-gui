@@ -51,7 +51,6 @@ public class OneDofNode extends OpenSimObjectNode{
     /** Creates a new instance of OneDofNode */
     public OneDofNode(OpenSimObject dof) {
         super(dof);
-        setShortDescription(bundle.getString("HINT_DofNode"));
         Children children = getChildren();
         TransformAxis ad = TransformAxis.safeDownCast(dof);
         if (ad != null && ad.hasFunction()) {

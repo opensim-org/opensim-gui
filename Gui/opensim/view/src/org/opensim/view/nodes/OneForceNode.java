@@ -54,7 +54,6 @@ public class OneForceNode extends DisablablModelComponentNode {
      */
     public OneForceNode(OpenSimObject force) {
         super(force);
-        setShortDescription(bundle.getString("HINT_OtherForceNode"));
 
 
 //        if (f.getDisplayer()!=null){

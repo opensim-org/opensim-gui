@@ -171,7 +171,7 @@ public class MarkerAdapter  {
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }
-        ViewDB.getInstance().getModelGuiElements(model).updateMarkerNames();
+        OpenSimDB.getInstance().getModelGuiElements(model).updateMarkerNames();
         Vector<OpenSimObject> objs = new Vector<OpenSimObject>(1);
         objs.add(marker);
         ObjectsRenamedEvent evnt = new ObjectsRenamedEvent(this, model, objs);

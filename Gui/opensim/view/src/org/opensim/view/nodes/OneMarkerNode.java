@@ -25,7 +25,6 @@ public class OneMarkerNode extends OneComponentNode{
    private static ResourceBundle bundle = NbBundle.getBundle(OneMarkerNode.class);
    public OneMarkerNode(OpenSimObject b) {
       super(b);
-      setShortDescription(bundle.getString("HINT_MarkerNode"));
       setChildren(Children.LEAF);      
       addDisplayOption(displayOption.Isolatable);
       addDisplayOption(displayOption.Showable);

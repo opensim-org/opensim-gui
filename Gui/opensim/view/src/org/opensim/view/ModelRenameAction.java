@@ -72,7 +72,7 @@ public final class ModelRenameAction extends CallableSystemAction {
                     if (dModel==OpenSimDB.getInstance().getCurrentModel())
                        OpenSimDB.getInstance().setCurrentModel(dModel);   // Need to do this so that model dropdown updates
                     // Mark the model as dirty
-                    SingleModelGuiElements guiElem = ViewDB.getInstance().getModelGuiElements(dModel);
+                    SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(dModel);
                     guiElem.setUnsavedChangesFlag(true);
                  }
                  objectNode.refreshNode();

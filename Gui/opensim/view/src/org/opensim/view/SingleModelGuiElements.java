@@ -75,6 +75,7 @@ public class SingleModelGuiElements {
     private boolean locked = false;
     private String lockOwner = null;
     OpenSimContext context;
+    NavigatorByTypeModel navigatorByTypeModel;
     
     public SingleModelGuiElements(Model model)
     {

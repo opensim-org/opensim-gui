@@ -22,9 +22,9 @@ public class OneBodyNode extends OneModelComponentNode{
    private static ResourceBundle bundle = NbBundle.getBundle(OneBodyNode.class);
    public OneBodyNode(OpenSimObject b) {
       super(b);
-      setShortDescription(bundle.getString("HINT_BodyNode"));
       // Create children for wrap objects associated with body
       Body bdy = (Body) b;
+      setShortDescription(bdy.getFullPathName());
       Children children = getChildren();
       // Create nodes for wrap objects      
       WrapObjectSet wrapObjects = bdy.getWrapObjectSet();

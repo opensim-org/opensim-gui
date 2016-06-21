@@ -119,7 +119,7 @@ public class PropertyEditorAdaptor {
         else 
             ViewDB.getInstance().updateModelDisplay(model);
         if (node!= null) node.refreshNode();
-        SingleModelGuiElements guiElem = ViewDB.getInstance().getModelGuiElements(model);
+        SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(model);
         guiElem.setUnsavedChangesFlag(true);
     }
 
