@@ -366,7 +366,7 @@ final public class ExplorerTopComponent extends TopComponent
                 // Hack to select Muscle based on selected PathPoint
                 if (oObject instanceof PathPoint){
                     PathPoint ppt = (PathPoint)oObject;
-                    GeometryPath ppath = ppt.getPath();
+                    GeometryPath ppath = GeometryPath.safeDownCast(ppt.getParent());
                     OpenSimObject pathOwner = ppath.getOwner();
                     objectNode = findObjectNode(modelNode,pathOwner);
                     

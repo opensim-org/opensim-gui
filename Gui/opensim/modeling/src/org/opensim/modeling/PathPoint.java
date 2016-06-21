@@ -61,14 +61,6 @@ public class PathPoint extends Station {
     this(opensimModelSimulationJNI.new_PathPoint(), true);
   }
 
-  public void init(PathPoint point) {
-    opensimModelSimulationJNI.PathPoint_init(swigCPtr, this, PathPoint.getCPtr(point), point);
-  }
-
-  public void copyData(PathPoint aPoint) {
-    opensimModelSimulationJNI.PathPoint_copyData(swigCPtr, this, PathPoint.getCPtr(aPoint), aPoint);
-  }
-
   public Vec3 getLocation() {
     return new Vec3(opensimModelSimulationJNI.PathPoint_getLocation(swigCPtr, this), false);
   }
@@ -109,13 +101,8 @@ public class PathPoint extends Station {
     return opensimModelSimulationJNI.PathPoint_getBodyName(swigCPtr, this);
   }
 
-  public GeometryPath getPath() {
-    long cPtr = opensimModelSimulationJNI.PathPoint_getPath(swigCPtr, this);
-    return (cPtr == 0) ? null : new GeometryPath(cPtr, false);
-  }
-
-  public void scale(State s, Vec3 scaleFactors) {
-    opensimModelSimulationJNI.PathPoint_scale(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(scaleFactors), scaleFactors);
+  public void scale(Vec3 scaleFactors) {
+    opensimModelSimulationJNI.PathPoint_scale(swigCPtr, this, Vec3.getCPtr(scaleFactors), scaleFactors);
   }
 
   public WrapObject getWrapObject() {
@@ -125,14 +112,6 @@ public class PathPoint extends Station {
 
   public boolean isActive(State s) {
     return opensimModelSimulationJNI.PathPoint_isActive(swigCPtr, this, State.getCPtr(s), s);
-  }
-
-  public void connectToModelAndPath(Model aModel, GeometryPath aPath) {
-    opensimModelSimulationJNI.PathPoint_connectToModelAndPath(swigCPtr, this, Model.getCPtr(aModel), aModel, GeometryPath.getCPtr(aPath), aPath);
-  }
-
-  public void update(State s) {
-    opensimModelSimulationJNI.PathPoint_update(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void getVelocity(State s, Vec3 velocity) {
@@ -145,11 +124,6 @@ public class PathPoint extends Station {
 
   public void updateGeometry() {
     opensimModelSimulationJNI.PathPoint_updateGeometry(swigCPtr, this);
-  }
-
-  public static PathPoint makePathPointOfType(PathPoint aPoint, String aNewTypeName) {
-    long cPtr = opensimModelSimulationJNI.PathPoint_makePathPointOfType(PathPoint.getCPtr(aPoint), aPoint, aNewTypeName);
-    return (cPtr == 0) ? null : new PathPoint(cPtr, false);
   }
 
   public static void deletePathPoint(PathPoint aPoint) {

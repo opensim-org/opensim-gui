@@ -237,6 +237,14 @@ public class PrescribedForce extends Force {
     opensimModelSimulationJNI.PrescribedForce_set_torqueFunctions__SWIG_1(swigCPtr, this, FunctionSet.getCPtr(value), value);
   }
 
+  public void set_connector_frame(int value) {
+    opensimModelSimulationJNI.PrescribedForce__connector_frame_set(swigCPtr, this, value);
+  }
+
+  public int get_connector_frame() {
+    return opensimModelSimulationJNI.PrescribedForce__connector_frame_get(swigCPtr, this);
+  }
+
   public void set_has_output_force_applied(boolean value) {
     opensimModelSimulationJNI.PrescribedForce__has_output_force_applied_set(swigCPtr, this, value);
   }

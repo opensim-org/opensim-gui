@@ -81,6 +81,22 @@ public class TwoFrameLinkerConstraint extends Constraint {
     opensimModelSimulationJNI.TwoFrameLinkerConstraint_constructProperty_frames(swigCPtr, this);
   }
 
+  public void set_connector_frame1(int value) {
+    opensimModelSimulationJNI.TwoFrameLinkerConstraint__connector_frame1_set(swigCPtr, this, value);
+  }
+
+  public int get_connector_frame1() {
+    return opensimModelSimulationJNI.TwoFrameLinkerConstraint__connector_frame1_get(swigCPtr, this);
+  }
+
+  public void set_connector_frame2(int value) {
+    opensimModelSimulationJNI.TwoFrameLinkerConstraint__connector_frame2_set(swigCPtr, this, value);
+  }
+
+  public int get_connector_frame2() {
+    return opensimModelSimulationJNI.TwoFrameLinkerConstraint__connector_frame2_get(swigCPtr, this);
+  }
+
   public PhysicalFrame getFrame1() {
     return new PhysicalFrame(opensimModelSimulationJNI.TwoFrameLinkerConstraint_getFrame1(swigCPtr, this), false);
   }

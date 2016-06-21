@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class PathWrap extends Component {
+public class PathWrap extends ModelComponent {
   private transient long swigCPtr;
 
   public PathWrap(long cPtr, boolean cMemoryOwn) {
@@ -200,11 +200,6 @@ public class PathWrap extends Component {
 
   public String getMethodName() {
     return opensimModelSimulationJNI.PathWrap_getMethodName(swigCPtr, this);
-  }
-
-  public GeometryPath getPath() {
-    long cPtr = opensimModelSimulationJNI.PathWrap_getPath(swigCPtr, this);
-    return (cPtr == 0) ? null : new GeometryPath(cPtr, false);
   }
 
   public SWIGTYPE_p_OpenSim__WrapResult getPreviousWrap() {

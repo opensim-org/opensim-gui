@@ -46,15 +46,15 @@ public class TimeSeriesTable extends DataTable {
   }
 
   public TimeSeriesTable(DataTable datatable) {
-    this(opensimModelCommonJNI.new_TimeSeriesTable__SWIG_3(DataTable.getCPtr(datatable), datatable), true);
+    this(opensimModelCommonJNI.new_TimeSeriesTable__SWIG_2(DataTable.getCPtr(datatable), datatable), true);
+  }
+
+  public TimeSeriesTable(String filename) {
+    this(opensimModelCommonJNI.new_TimeSeriesTable__SWIG_3(filename), true);
   }
 
   public TimeSeriesTable(String filename, String tablename) {
     this(opensimModelCommonJNI.new_TimeSeriesTable__SWIG_4(filename, tablename), true);
-  }
-
-  public TimeSeriesTable(String filename) {
-    this(opensimModelCommonJNI.new_TimeSeriesTable__SWIG_5(filename), true);
   }
 
 }

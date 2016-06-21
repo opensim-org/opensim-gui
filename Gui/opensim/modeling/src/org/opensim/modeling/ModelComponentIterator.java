@@ -218,26 +218,6 @@ public class ModelComponentIterator {
     return new ComponentsList(opensimModelSimulationJNI.ModelComponentIterator_getComponentsList(swigCPtr, this), true);
   }
 
-  public FrameList getFrameList() {
-    return new FrameList(opensimModelSimulationJNI.ModelComponentIterator_getFrameList(swigCPtr, this), true);
-  }
-
-  public BodyList getBodyList() {
-    return new BodyList(opensimModelSimulationJNI.ModelComponentIterator_getBodyList(swigCPtr, this), true);
-  }
-
-  public MuscleList getMuscleList() {
-    return new MuscleList(opensimModelSimulationJNI.ModelComponentIterator_getMuscleList(swigCPtr, this), true);
-  }
-
-  public ModelComponentList getModelComponentList() {
-    return new ModelComponentList(opensimModelSimulationJNI.ModelComponentIterator_getModelComponentList(swigCPtr, this), true);
-  }
-
-  public JointList getJointList() {
-    return new JointList(opensimModelSimulationJNI.ModelComponentIterator_getJointList(swigCPtr, this), true);
-  }
-
   public boolean isEqualTo(OpenSimObject aObject) {
     return opensimModelSimulationJNI.ModelComponentIterator_isEqualTo(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }

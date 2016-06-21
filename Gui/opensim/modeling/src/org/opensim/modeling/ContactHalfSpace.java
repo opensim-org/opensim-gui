@@ -61,16 +61,12 @@ public class ContactHalfSpace extends ContactGeometry {
     this(opensimModelSimulationJNI.new_ContactHalfSpace__SWIG_0(), true);
   }
 
-  public ContactHalfSpace(Vec3 location, Vec3 orientation, PhysicalFrame body) {
-    this(opensimModelSimulationJNI.new_ContactHalfSpace__SWIG_1(Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation, PhysicalFrame.getCPtr(body), body), true);
+  public ContactHalfSpace(Vec3 location, Vec3 orientation, PhysicalFrame frame) {
+    this(opensimModelSimulationJNI.new_ContactHalfSpace__SWIG_1(Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation, PhysicalFrame.getCPtr(frame), frame), true);
   }
 
-  public ContactHalfSpace(Vec3 location, Vec3 orientation, PhysicalFrame body, String name) {
-    this(opensimModelSimulationJNI.new_ContactHalfSpace__SWIG_2(Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation, PhysicalFrame.getCPtr(body), body, name), true);
-  }
-
-  public ContactHalfSpace(ContactHalfSpace geom) {
-    this(opensimModelSimulationJNI.new_ContactHalfSpace__SWIG_3(ContactHalfSpace.getCPtr(geom), geom), true);
+  public ContactHalfSpace(Vec3 location, Vec3 orientation, PhysicalFrame frame, String name) {
+    this(opensimModelSimulationJNI.new_ContactHalfSpace__SWIG_2(Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation, PhysicalFrame.getCPtr(frame), frame, name), true);
   }
 
   public SWIGTYPE_p_SimTK__ContactGeometry createSimTKContactGeometry() {

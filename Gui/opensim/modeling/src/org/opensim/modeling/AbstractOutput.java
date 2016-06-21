@@ -47,8 +47,8 @@ public class AbstractOutput {
     return opensimModelCommonJNI.AbstractOutput_isListOutput(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_OpenSim__Component getOwner() {
-    return new SWIGTYPE_p_OpenSim__Component(opensimModelCommonJNI.AbstractOutput_getOwner(swigCPtr, this), false);
+  public Component getOwner() {
+    return new Component(opensimModelCommonJNI.AbstractOutput_getOwner(swigCPtr, this), false);
   }
 
   public void clearChannels() {

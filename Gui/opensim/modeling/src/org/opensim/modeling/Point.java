@@ -93,4 +93,16 @@ public class Point extends ModelComponent {
     return new Vec3(opensimModelSimulationJNI.Point_getAccelerationInGround(swigCPtr, this, State.getCPtr(state), state), false);
   }
 
+  public double calcDistanceBetween(State state, Point other) {
+    return opensimModelSimulationJNI.Point_calcDistanceBetween__SWIG_0(swigCPtr, this, State.getCPtr(state), state, Point.getCPtr(other), other);
+  }
+
+  public double calcDistanceBetween(State state, Frame frame, Vec3 location) {
+    return opensimModelSimulationJNI.Point_calcDistanceBetween__SWIG_1(swigCPtr, this, State.getCPtr(state), state, Frame.getCPtr(frame), frame, Vec3.getCPtr(location), location);
+  }
+
+  public double calcSpeedBetween(State state, Point other) {
+    return opensimModelSimulationJNI.Point_calcSpeedBetween(swigCPtr, this, State.getCPtr(state), state, Point.getCPtr(other), other);
+  }
+
 }

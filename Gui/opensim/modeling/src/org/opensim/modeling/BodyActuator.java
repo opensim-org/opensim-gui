@@ -165,6 +165,14 @@ public class BodyActuator extends Actuator {
     opensimModelJNI.BodyActuator_set_spatial_force_is_global__SWIG_1(swigCPtr, this, value);
   }
 
+  public void set_connector_body(int value) {
+    opensimModelJNI.BodyActuator__connector_body_set(swigCPtr, this, value);
+  }
+
+  public int get_connector_body() {
+    return opensimModelJNI.BodyActuator__connector_body_get(swigCPtr, this);
+  }
+
   public BodyActuator() {
     this(opensimModelJNI.new_BodyActuator__SWIG_0(), true);
   }

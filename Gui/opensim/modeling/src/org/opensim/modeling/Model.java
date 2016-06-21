@@ -1446,4 +1446,24 @@ public class Model extends ModelComponent {
     opensimModelSimulationJNI.Model_LoadOpenSimLibrary(libraryName);
   }
 
+  public FrameList getFrameList() {
+    return new FrameList(opensimModelSimulationJNI.Model_getFrameList(swigCPtr, this), true);
+  }
+
+  public BodyList getBodyList() {
+    return new BodyList(opensimModelSimulationJNI.Model_getBodyList(swigCPtr, this), true);
+  }
+
+  public MuscleList getMuscleList() {
+    return new MuscleList(opensimModelSimulationJNI.Model_getMuscleList(swigCPtr, this), true);
+  }
+
+  public ModelComponentList getModelComponentList() {
+    return new ModelComponentList(opensimModelSimulationJNI.Model_getModelComponentList(swigCPtr, this), true);
+  }
+
+  public JointList getJointList() {
+    return new JointList(opensimModelSimulationJNI.Model_getJointList(swigCPtr, this), true);
+  }
+
 }

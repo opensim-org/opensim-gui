@@ -221,6 +221,8 @@ public class opensimModelJNI {
   public final static native boolean BodyActuator_get_spatial_force_is_global__SWIG_1(long jarg1, BodyActuator jarg1_);
   public final static native long BodyActuator_upd_spatial_force_is_global__SWIG_1(long jarg1, BodyActuator jarg1_);
   public final static native void BodyActuator_set_spatial_force_is_global__SWIG_1(long jarg1, BodyActuator jarg1_, boolean jarg2);
+  public final static native void BodyActuator__connector_body_set(long jarg1, BodyActuator jarg1_, int jarg2);
+  public final static native int BodyActuator__connector_body_get(long jarg1, BodyActuator jarg1_);
   public final static native long new_BodyActuator__SWIG_0();
   public final static native long new_BodyActuator__SWIG_1(long jarg1, Body jarg1_, long jarg2, Vec3 jarg2_, boolean jarg3, boolean jarg4);
   public final static native long new_BodyActuator__SWIG_2(long jarg1, Body jarg1_, long jarg2, Vec3 jarg2_, boolean jarg3);

@@ -46,7 +46,7 @@ public class DataTable extends AbstractDataTable {
   }
 
   public DataTable(String filename, String tablename) {
-    this(opensimModelCommonJNI.new_DataTable__SWIG_3(filename, tablename), true);
+    this(opensimModelCommonJNI.new_DataTable__SWIG_2(filename, tablename), true);
   }
 
   public void appendRow(double indRow, SWIGTYPE_p_std__initializer_listT_double_t container) {

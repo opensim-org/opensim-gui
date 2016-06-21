@@ -69,14 +69,6 @@ public class ContactSphere extends ContactGeometry {
     this(opensimModelSimulationJNI.new_ContactSphere__SWIG_2(radius, Vec3.getCPtr(location), location, PhysicalFrame.getCPtr(frame), frame, name), true);
   }
 
-  public ContactSphere(ContactSphere geom) {
-    this(opensimModelSimulationJNI.new_ContactSphere__SWIG_3(ContactSphere.getCPtr(geom), geom), true);
-  }
-
-  public void copyData(ContactSphere source) {
-    opensimModelSimulationJNI.ContactSphere_copyData(swigCPtr, this, ContactSphere.getCPtr(source), source);
-  }
-
   public SWIGTYPE_p_SimTK__ContactGeometry createSimTKContactGeometry() {
     return new SWIGTYPE_p_SimTK__ContactGeometry(opensimModelSimulationJNI.ContactSphere_createSimTKContactGeometry(swigCPtr, this), true);
   }

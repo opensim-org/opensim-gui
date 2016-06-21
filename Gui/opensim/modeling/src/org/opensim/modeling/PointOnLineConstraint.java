@@ -165,6 +165,22 @@ public class PointOnLineConstraint extends Constraint {
     opensimModelSimulationJNI.PointOnLineConstraint_set_point_on_follower__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
+  public void set_connector_line_body(int value) {
+    opensimModelSimulationJNI.PointOnLineConstraint__connector_line_body_set(swigCPtr, this, value);
+  }
+
+  public int get_connector_line_body() {
+    return opensimModelSimulationJNI.PointOnLineConstraint__connector_line_body_get(swigCPtr, this);
+  }
+
+  public void set_connector_follower_body(int value) {
+    opensimModelSimulationJNI.PointOnLineConstraint__connector_follower_body_set(swigCPtr, this, value);
+  }
+
+  public int get_connector_follower_body() {
+    return opensimModelSimulationJNI.PointOnLineConstraint__connector_follower_body_get(swigCPtr, this);
+  }
+
   public PointOnLineConstraint() {
     this(opensimModelSimulationJNI.new_PointOnLineConstraint__SWIG_0(), true);
   }
