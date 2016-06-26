@@ -40,6 +40,7 @@ build_script:
   - ps: ls
   - ps: ls ..
   - ps: mkdir ../build
+  - ps: ls c:\
   - cd ../build
   - cmake ../opensim-gui -DCMAKE_PREFIX_PATH=%OPENSIM_HOME%
   - cmake --build . --target CopyOpenSimCore --config Release
