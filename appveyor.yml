@@ -46,13 +46,7 @@ install:
   - nuget install opensim-core-x64 -Version 0.0.0 -ExcludeVersion -OutputDirectory C:\
 
 build_script:
-  - ps: ls
-  - ps: ls ..
   - ps: mkdir ../build
-  - ps: ls c:\
-  - cd Gui/opensim
-  #- ant build -Dnbplatform.default.netbeans.dest.dir="C:/Program Files/NetBeans 8.0.2" -Dnbplatform.default.harness.dir="C:/Program Files/NetBeans 8.0.2/harness"
-  - cd ../../
   - cd ../build
   - cmake ../opensim-gui -DCMAKE_PREFIX_PATH=%OPENSIM_HOME% -G"Visual Studio 14 2015 Win64" -DAnt_EXTRA_ARGS="-Dnbplatform.default.netbeans.dest.dir=\"C:/Program Files/NetBeans 8.0.2\" -Dnbplatform.default.harness.dir=\"C:/Program Files/NetBeans 8.0.2/harness\""
   - cmake --build . --target PrepareInstaller --config Release
@@ -77,3 +71,8 @@ after_test:
   #- IF DEFINED DISTR cd %APPVEYOR_BUILD_FOLDER%
   #- IF DEFINED DISTR cd dist
   #- IF DEFINED DISTR appveyor PushArtifact opensim.zip
+
+artifacts:
+  - path: c:\projects\build\Gui\opensim\dist\installer\OpenSim
+  - name: OpenSimGUI
+  - type: zip
