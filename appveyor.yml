@@ -75,6 +75,5 @@ after_test:
   #- path: c:\projects\build\Gui\opensim\dist\installer\OpenSim
 
 artifacts:
+
   - path: Gui
-  - name: OpenSimGUI
-  - type: zip
