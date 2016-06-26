@@ -17,7 +17,7 @@ init:
   # so we must add v2.7 64bit earlier on the PATH.
   # http://www.appveyor.com/docs/installed-software
   - SET OPENSIM_HOME=C:/opensim-core-x64 # TODO unnecessary?
-  - SET JAVA_HOME=C:\\Program Files\\Java\\jdk1.8.0
+  - SET JAVA_HOME=C:\\Program Files\\Java\\jdk1.8.0_92
   - SET PATH=%OPENSIM_HOME%/bin;%JAVA_HOME%/bin;%PATH%
   #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 nuget:
