@@ -24,6 +24,8 @@ nuget:
   account_feed: true
 
 install:
+  - dir %JAVA_HOME%/bin
+  - ps: $env:PATH
   # AppVeyor images already have jdk8.
   #- ps: choco install jdk8
   ## The GUI is built with the Netbeans platform.
