@@ -13,30 +13,31 @@ if(NOT OpenSim_JAVA_WRAPPING)
     message(FATAL_ERROR "OpenSim core needs be compiled with Java wrapping ON.")
 endif()
 
+message(STATUS "Ant_EXTRA_ARGS: ${Ant_EXTRA_ARGS}")
 
 find_package(Ant REQUIRED)
 
 add_custom_target(CopyOpenSimCore ALL
-                  COMMAND ${Ant_EXECUTABLE} copy-java-bindings -DapiJava.dir="${OpenSim_JAVA_FILES_DIR}"
+	          COMMAND ${Ant_EXECUTABLE} copy-java-bindings -DapiJava.dir="${OpenSim_JAVA_FILES_DIR}" ${Ant_EXTRA_ARGS}
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Copy opensim-core Java Bindings to GUI.")
 if (WIN32)
     add_custom_target(PrepareInstaller ALL
-                  COMMAND ${Ant_EXECUTABLE} copy-installer-files -Dapi.dir="${OpenSim_ROOT_DIR}"
+                  COMMAND ${Ant_EXECUTABLE} copy-installer-files -Dapi.dir="${OpenSim_ROOT_DIR}" ${Ant_EXTRA_ARGS} 
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Merge GUI build and opensim-core install into one folder.")
 
     add_custom_target(CopyJRE ALL
-                  COMMAND ${Ant_EXECUTABLE} copy-jre
+                  COMMAND ${Ant_EXECUTABLE} copy-jre ${Ant_EXTRA_ARGS}
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Copy default JRE to installer folder.")
 endif()
 if (APPLE)
     add_custom_target(PrepareInstaller ALL
-                  COMMAND ${Ant_EXECUTABLE} build-mac-installer -Dlib.dir="${OpenSim_LIB_DIR}"
+                  COMMAND ${Ant_EXECUTABLE} build-mac-installer -Dlib.dir="${OpenSim_LIB_DIR}" ${Ant_EXTRA_ARGS}
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Build opensim.app.")
@@ -47,7 +48,7 @@ set(VIS_REPO "" CACHE
 
 if (VIS_REPO)
 add_custom_target(CopyVisualizer ALL
-                  COMMAND ${Ant_EXECUTABLE} copy-visualizer -Dvisualizer.dir="${VIS_REPO}"
+                  COMMAND ${Ant_EXECUTABLE} copy-visualizer -Dvisualizer.dir="${VIS_REPO}" ${Ant_EXTRA_ARGS}
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Copy Visualizer to installer folder.")
@@ -58,7 +59,7 @@ set(MODELS_REPO "" CACHE
 
 if (MODELS_REPO)
 add_custom_target(CopyModels ALL
-                  COMMAND ${Ant_EXECUTABLE} copy-models -Dmodels.dir="${MODELS_REPO}"
+                  COMMAND ${Ant_EXECUTABLE} copy-models -Dmodels.dir="${MODELS_REPO}" ${Ant_EXTRA_ARGS}
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Copy models and examples-to installer folder.")
