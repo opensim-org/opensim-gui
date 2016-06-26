@@ -38,7 +38,8 @@ install:
   - ps: choco install netbeans-jee --version 8.0.2 --yes --limit-output | Out-Null
 
   ## Apache Ant for building Java projects.
-  - ps: choco install ant --yes --limit-output
+  - ps: choco install ant --version 1.9.6 --yes
+  # --limit-output | Out-Null
   
   ## OpenSim (and Simbody).
   # OpenSim's installation is pushed to our Appveyor NuGet account feed.
