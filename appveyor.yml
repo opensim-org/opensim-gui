@@ -24,7 +24,8 @@ nuget:
   account_feed: true
 
 install:
-  - dir 'C:/Program Files/Java/jdk1.8.0/bin'
+  - dir 'C:\Program Files\Java\jdk1.8.0'
+  - dir 'C:\Program Files\Java\jdk1.8.0\bin'
   - ps: $env:PATH
   # AppVeyor images already have jdk8.
   #- ps: choco install jdk8
