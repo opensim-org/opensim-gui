@@ -24,9 +24,11 @@ nuget:
   account_feed: true
 
 install:
-  - dir 'C:\Program Files\Java\jdk1.8.0'
-  - dir 'C:\Program Files\Java\jdk1.8.0\bin'
   - ps: $env:PATH
+  - dir "C:/Program Files/"
+  - dir "C:/Program Files/Java"
+  - dir "C:/Program Files/Java/jdk1.8.0"
+  - dir 'C:\Program Files\Java\jdk1.8.0\bin'
   # AppVeyor images already have jdk8.
   #- ps: choco install jdk8
   ## The GUI is built with the Netbeans platform.
