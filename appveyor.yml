@@ -42,7 +42,7 @@ build_script:
   - ps: mkdir ../build
   - ps: ls c:\
   - cd ../build
-  - cmake ../opensim-gui -DCMAKE_PREFIX_PATH=%OPENSIM_HOME%
+  - cmake ../opensim-gui -DCMAKE_PREFIX_PATH=%OPENSIM_HOME% -G"Visual Studio 14 2015 Win64"
   - cmake --build . --target CopyOpenSimCore --config Release
   - cmake --build . --target PrepareInstaller --config Release
   - cmake --build . --target CopyJRE --config Release
