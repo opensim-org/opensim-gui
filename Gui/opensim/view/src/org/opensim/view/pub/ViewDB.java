@@ -1182,7 +1182,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    public void toggleObjectsDisplay(OpenSimObject openSimObject, boolean visible) {
       ObjectGroup group = ObjectGroup.safeDownCast(openSimObject);
       if (group != null) {
-         ArrayObjPtr members = group.getMembers();
+         ArrayConstObjPtr members = group.getMembers();
          for (int i = 0; i < members.getSize(); i++) {
             toggleObjectDisplay(members.getitem(i), visible);
          }

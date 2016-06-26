@@ -47,7 +47,7 @@ import javax.swing.table.TableColumn;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.opensim.modeling.ForceSet;
-import org.opensim.modeling.ArrayObjPtr;
+import org.opensim.modeling.ArrayConstObjPtr;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ObjectGroup;
 import org.opensim.view.pub.OpenSimDB;
@@ -361,7 +361,7 @@ public class QuantityNameFilterJPanel extends javax.swing.JPanel
        // get members and use them to filter
       ForceSet acts=currentModel.getForceSet();
       ObjectGroup gp=acts.getGroup(groupName);
-      ArrayObjPtr members=gp.getMembers();
+      ArrayConstObjPtr members=gp.getMembers();
       // Form a vector of muscle names
       String tempPattern="";
       for(int i=0;i<members.getSize();i++){

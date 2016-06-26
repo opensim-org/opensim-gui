@@ -37,7 +37,7 @@ import org.openide.nodes.Node;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.Muscle;
 import org.opensim.modeling.ForceSet;
-import org.opensim.modeling.ArrayObjPtr;
+import org.opensim.modeling.ArrayConstObjPtr;
 import org.opensim.modeling.ObjectGroup;
 import org.opensim.modeling.SetActuators;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
@@ -81,7 +81,7 @@ public class MusclesNode extends OpenSimObjectSetNode {
          // See if "all" group is already defined.
          for (int i = 0; i < as.getNumGroups(); i++) {
             ObjectGroup grp = as.getGroup(i);
-            ArrayObjPtr apo = grp.getMembers();
+            ArrayConstObjPtr apo = grp.getMembers();
             if (apo.getSize() > 0) {
                Muscle muscle = Muscle.safeDownCast(apo.getitem(0));
                // If the first member of the group is an Muscle, then
@@ -107,7 +107,7 @@ public class MusclesNode extends OpenSimObjectSetNode {
          // Now add the user-defined groups.
          for (int i = 0; i < as.getNumGroups(); i++) {
             ObjectGroup grp = as.getGroup(i);
-            ArrayObjPtr apo = grp.getMembers();
+            ArrayConstObjPtr apo = grp.getMembers();
             if (apo.getSize() > 0) {
                Muscle muscle = Muscle.safeDownCast(apo.getitem(0));
                // If the first member of the group is an Muscle, then
@@ -147,7 +147,7 @@ public class MusclesNode extends OpenSimObjectSetNode {
       int count = 0;
       for (int i = 0; i < as.getNumGroups(); i++) {
          ObjectGroup grp = as.getGroup(i);
-         ArrayObjPtr apo = grp.getMembers();
+         ArrayConstObjPtr apo = grp.getMembers();
          if (apo.getSize()==0) continue;  // Gaurd against empty groups
          Muscle muscle = Muscle.safeDownCast(apo.getitem(0)); 
          // If the first member of the group is an Muscle, then
