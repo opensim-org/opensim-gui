@@ -24,19 +24,22 @@ nuget:
   account_feed: true
 
 install:
-  - ps: choco install jdk8
+  # AppVeyor images already have jdk8.
+  #- ps: choco install jdk8
   ## The GUI is built with the Netbeans platform.
   - ps: choco install netbeans-jee --version 8.0.2 --yes --limit-output | Out-Null
 
   ## Apache Ant for building Java projects.
-  - choco install ant --yes --limit-output
+  - choco install ant --yes --limit-output | Out-Null
   
   ## OpenSim (and Simbody).
   # OpenSim's installation is pushed to our Appveyor NuGet account feed.
   - nuget install opensim-core-x86 -Version 0.0.0 -ExcludeVersion -OutputDirectory C:\
 
 build_script:
-  - mkdir ../build
+  - ps: ls
+  - ps: ls ..
+  - ps: mkdir ../build
   - cd ../build
   - cmake ../opensim-gui -DCMAKE_PREFIX_PATH=%OPENSIM_HOME%
   - cmake --build . --target CopyOpenSimCore --config Release
