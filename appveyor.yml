@@ -76,4 +76,4 @@ after_test:
 
 artifacts:
 
-  - path: Gui
+  - path: Gui\opensim\dist\installer\OpenSim
