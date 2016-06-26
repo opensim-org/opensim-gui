@@ -71,8 +71,10 @@ after_test:
   #- IF DEFINED DISTR cd %APPVEYOR_BUILD_FOLDER%
   #- IF DEFINED DISTR cd dist
   #- IF DEFINED DISTR appveyor PushArtifact opensim.zip
+  #- path: c:\projects\build\Gui\opensim\dist\installer\OpenSim
+  - cd %APPVEYOR_BUILD_FOLDER%
 
 artifacts:
-  - path: c:\projects\build\Gui\opensim\dist\installer\OpenSim
+  - path: Gui
   - name: OpenSimGUI
   - type: zip
