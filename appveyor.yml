@@ -29,11 +29,11 @@ install:
   - dir "C:/Program Files/Java"
   - dir "C:/Program Files/Java/jdk1.8.0"
   - dir "C:/Program Files/Java/jdk1.8.0/bin"
-  - SET PATH=C:/Program Files/Java/jdk1.8.0/bin;%PATH%
+   #- SET PATH=C:/Program Files/Java/jdk1.8.0/bin;%PATH%
   - ps: $env:PATH
   - java.exe -version
   # AppVeyor images already have jdk8.
-  #- ps: choco install jdk8
+  - ps: choco install jdk8
   ## The GUI is built with the Netbeans platform.
   - ps: choco install netbeans-jee --version 8.0.2 --yes --limit-output | Out-Null
 
