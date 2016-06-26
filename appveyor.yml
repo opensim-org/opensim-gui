@@ -16,7 +16,7 @@ init:
   # Note: python 2.7 32bit is already on the path. We want v2.7 64bit,
   # so we must add v2.7 64bit earlier on the PATH.
   # http://www.appveyor.com/docs/installed-software
-  - SET OPENSIM_HOME=C:/OpenSim # TODO unnecessary?
+  - SET OPENSIM_HOME=C:/opensim-core-x64 # TODO unnecessary?
   - SET PATH=%OPENSIM_HOME%/bin;%PATH%
   - SET JAVA_HOME=C:\\Program Files\\Java\\jdk1.8.0
   #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
@@ -34,7 +34,7 @@ install:
   
   ## OpenSim (and Simbody).
   # OpenSim's installation is pushed to our Appveyor NuGet account feed.
-  - nuget install opensim-core-x86 -Version 0.0.0 -ExcludeVersion -OutputDirectory C:\
+  - nuget install opensim-core-x64 -Version 0.0.0 -ExcludeVersion -OutputDirectory C:\
 
 build_script:
   - ps: ls
