@@ -61,6 +61,7 @@ test_script:
   # ant run
 
 after_test:
+  - cd %APPVEYOR_BUILD_FOLDER%
   ## On master branch, create package for OpenSim.
   # Detect if we are on the master branch.
   # TODO for now, distribute on dev-workshop branch.
@@ -72,7 +73,6 @@ after_test:
   #- IF DEFINED DISTR cd dist
   #- IF DEFINED DISTR appveyor PushArtifact opensim.zip
   #- path: c:\projects\build\Gui\opensim\dist\installer\OpenSim
-  - cd %APPVEYOR_BUILD_FOLDER%
 
 artifacts:
   - path: Gui
