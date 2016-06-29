@@ -101,6 +101,10 @@ public class AbstractConnector extends OpenSimObject {
     return opensimModelCommonJNI.AbstractConnector_getConnecteeTypeName(swigCPtr, this);
   }
 
+  public OpenSimObject getConnecteeAsObject() {
+    return new OpenSimObject(opensimModelCommonJNI.AbstractConnector_getConnecteeAsObject(swigCPtr, this), false);
+  }
+
   public void connect(OpenSimObject connectee) {
     opensimModelCommonJNI.AbstractConnector_connect(swigCPtr, this, OpenSimObject.getCPtr(connectee), connectee);
   }

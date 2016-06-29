@@ -35,8 +35,8 @@ public class MuscleIterator {
     }
   }
 
-  public boolean equals(MuscleIterator iter) {
-    return opensimModelSimulationJNI.MuscleIterator_equals(swigCPtr, this, MuscleIterator.getCPtr(iter), iter);
+  public boolean equals(MuscleIterator other) {
+    return opensimModelSimulationJNI.MuscleIterator_equals(swigCPtr, this, MuscleIterator.getCPtr(other), other);
   }
 
   public Muscle __ref__() {
@@ -605,16 +605,8 @@ public class MuscleIterator {
     opensimModelSimulationJNI.MuscleIterator_setDisabled(swigCPtr, this, State.getCPtr(s), s, disabled);
   }
 
-  public Geometry get_geometry(int i) {
-    return new Geometry(opensimModelSimulationJNI.MuscleIterator_get_geometry(swigCPtr, this, i), false);
-  }
-
   public Model getModel() {
     return new Model(opensimModelSimulationJNI.MuscleIterator_getModel(swigCPtr, this), false);
-  }
-
-  public int getNumGeometry() {
-    return opensimModelSimulationJNI.MuscleIterator_getNumGeometry(swigCPtr, this);
   }
 
   public void addToSystem(SWIGTYPE_p_SimTK__MultibodySystem system) {
@@ -645,6 +637,18 @@ public class MuscleIterator {
     return opensimModelSimulationJNI.MuscleIterator_getRelativePathName(swigCPtr, this, Component.getCPtr(wrt), wrt);
   }
 
+  public boolean hasComponent(String pathname) {
+    return opensimModelSimulationJNI.MuscleIterator_hasComponent(swigCPtr, this, pathname);
+  }
+
+  public Component getComponent(String pathname) {
+    return new Component(opensimModelSimulationJNI.MuscleIterator_getComponent(swigCPtr, this, pathname), false);
+  }
+
+  public long printComponentsMatching(String substring) {
+    return opensimModelSimulationJNI.MuscleIterator_printComponentsMatching(swigCPtr, this, substring);
+  }
+
   public int getNumStateVariables() {
     return opensimModelSimulationJNI.MuscleIterator_getNumStateVariables(swigCPtr, this);
   }
@@ -657,6 +661,18 @@ public class MuscleIterator {
     return opensimModelSimulationJNI.MuscleIterator_getNumConnectors(swigCPtr, this);
   }
 
+  public OpenSimObject getConnectee(String name) {
+    return new OpenSimObject(opensimModelSimulationJNI.MuscleIterator_getConnectee(swigCPtr, this, name), false);
+  }
+
+  public AbstractConnector getConnector(String name) {
+    return new AbstractConnector(opensimModelSimulationJNI.MuscleIterator_getConnector__SWIG_0(swigCPtr, this, name), false);
+  }
+
+  public AbstractConnector getConnector(int i) {
+    return new AbstractConnector(opensimModelSimulationJNI.MuscleIterator_getConnector__SWIG_2(swigCPtr, this, i), false);
+  }
+
   public int getNumInputs() {
     return opensimModelSimulationJNI.MuscleIterator_getNumInputs(swigCPtr, this);
   }
@@ -665,12 +681,12 @@ public class MuscleIterator {
     return opensimModelSimulationJNI.MuscleIterator_getNumOutputs(swigCPtr, this);
   }
 
-  public StdVectorString getOutputNames() {
-    return new StdVectorString(opensimModelSimulationJNI.MuscleIterator_getOutputNames(swigCPtr, this), true);
+  public StdVectorString getInputNames() {
+    return new StdVectorString(opensimModelSimulationJNI.MuscleIterator_getInputNames(swigCPtr, this), true);
   }
 
-  public AbstractConnector getConnector(int i) {
-    return new AbstractConnector(opensimModelSimulationJNI.MuscleIterator_getConnector(swigCPtr, this, i), false);
+  public StdVectorString getOutputNames() {
+    return new StdVectorString(opensimModelSimulationJNI.MuscleIterator_getOutputNames(swigCPtr, this), true);
   }
 
   public AbstractInput getInput(String name) {
@@ -679,14 +695,6 @@ public class MuscleIterator {
 
   public AbstractOutput getOutput(String name) {
     return new AbstractOutput(opensimModelSimulationJNI.MuscleIterator_getOutput(swigCPtr, this, name), false);
-  }
-
-  public SWIGTYPE_p_std__mapT_std__string_SimTK__ClonePtrT_OpenSim__AbstractOutput_t_t__const_iterator getOutputsBegin() {
-    return new SWIGTYPE_p_std__mapT_std__string_SimTK__ClonePtrT_OpenSim__AbstractOutput_t_t__const_iterator(opensimModelSimulationJNI.MuscleIterator_getOutputsBegin(swigCPtr, this), true);
-  }
-
-  public SWIGTYPE_p_std__mapT_std__string_SimTK__ClonePtrT_OpenSim__AbstractOutput_t_t__const_iterator getOutputsEnd() {
-    return new SWIGTYPE_p_std__mapT_std__string_SimTK__ClonePtrT_OpenSim__AbstractOutput_t_t__const_iterator(opensimModelSimulationJNI.MuscleIterator_getOutputsEnd(swigCPtr, this), true);
   }
 
   public int getModelingOption(State state, String name) {

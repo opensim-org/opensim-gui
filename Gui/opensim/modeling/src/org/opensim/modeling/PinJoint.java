@@ -57,12 +57,16 @@ public class PinJoint extends Joint {
     return opensimModelSimulationJNI.PinJoint_getConcreteClassName(swigCPtr, this);
   }
 
+  public PinJoint() {
+    this(opensimModelSimulationJNI.new_PinJoint__SWIG_0(), true);
+  }
+
   public PinJoint(String name, PhysicalFrame parent, PhysicalFrame child) {
-    this(opensimModelSimulationJNI.new_PinJoint__SWIG_0(name, PhysicalFrame.getCPtr(parent), parent, PhysicalFrame.getCPtr(child), child), true);
+    this(opensimModelSimulationJNI.new_PinJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, PhysicalFrame.getCPtr(child), child), true);
   }
 
   public PinJoint(String name, PhysicalFrame parent, Vec3 locationInParent, Vec3 orientationInParent, PhysicalFrame child, Vec3 locationInChild, Vec3 orientationInChild) {
-    this(opensimModelSimulationJNI.new_PinJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
+    this(opensimModelSimulationJNI.new_PinJoint__SWIG_2(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
   }
 
 }

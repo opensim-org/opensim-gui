@@ -35,20 +35,20 @@ public class PointForceDirection {
     }
   }
 
-  public PointForceDirection(Vec3 point, Body body, Vec3 direction, double scale) {
-    this(opensimModelSimulationJNI.new_PointForceDirection__SWIG_0(Vec3.getCPtr(point), point, Body.getCPtr(body), body, Vec3.getCPtr(direction), direction, scale), true);
+  public PointForceDirection(Vec3 point, PhysicalFrame frame, Vec3 direction, double scale) {
+    this(opensimModelSimulationJNI.new_PointForceDirection__SWIG_0(Vec3.getCPtr(point), point, PhysicalFrame.getCPtr(frame), frame, Vec3.getCPtr(direction), direction, scale), true);
   }
 
-  public PointForceDirection(Vec3 point, Body body, Vec3 direction) {
-    this(opensimModelSimulationJNI.new_PointForceDirection__SWIG_1(Vec3.getCPtr(point), point, Body.getCPtr(body), body, Vec3.getCPtr(direction), direction), true);
+  public PointForceDirection(Vec3 point, PhysicalFrame frame, Vec3 direction) {
+    this(opensimModelSimulationJNI.new_PointForceDirection__SWIG_1(Vec3.getCPtr(point), point, PhysicalFrame.getCPtr(frame), frame, Vec3.getCPtr(direction), direction), true);
   }
 
   public Vec3 point() {
     return new Vec3(opensimModelSimulationJNI.PointForceDirection_point(swigCPtr, this), true);
   }
 
-  public Body body() {
-    return new Body(opensimModelSimulationJNI.PointForceDirection_body(swigCPtr, this), false);
+  public PhysicalFrame frame() {
+    return new PhysicalFrame(opensimModelSimulationJNI.PointForceDirection_frame(swigCPtr, this), false);
   }
 
   public Vec3 direction() {

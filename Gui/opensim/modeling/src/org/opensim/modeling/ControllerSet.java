@@ -81,14 +81,6 @@ public class ControllerSet extends ModelComponentSetControllers {
     opensimModelSimulationJNI.ControllerSet_copyData(swigCPtr, this, ControllerSet.getCPtr(aAbsControllerSet), aAbsControllerSet);
   }
 
-  public boolean set(int aIndex, Controller aController) {
-    return opensimModelSimulationJNI.ControllerSet_set(swigCPtr, this, aIndex, Controller.getCPtr(aController), aController);
-  }
-
-  public boolean addController(Controller aController) {
-    return opensimModelSimulationJNI.ControllerSet_addController(swigCPtr, this, Controller.getCPtr(aController), aController);
-  }
-
   public void constructStorage() {
     opensimModelSimulationJNI.ControllerSet_constructStorage(swigCPtr, this);
   }

@@ -141,16 +141,16 @@ public class Geometry extends Component {
     return opensimModelSimulationJNI.Geometry_constructConnector_frame(swigCPtr, this);
   }
 
-  public void setFrameName(String name) {
-    opensimModelSimulationJNI.Geometry_setFrameName(swigCPtr, this, name);
+  public void set_has_input_transform(boolean value) {
+    opensimModelSimulationJNI.Geometry__has_input_transform_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_input_transform() {
+    return opensimModelSimulationJNI.Geometry__has_input_transform_get(swigCPtr, this);
   }
 
   public void setFrame(Frame frame) {
     opensimModelSimulationJNI.Geometry_setFrame(swigCPtr, this, Frame.getCPtr(frame), frame);
-  }
-
-  public String getFrameName() {
-    return opensimModelSimulationJNI.Geometry_getFrameName(swigCPtr, this);
   }
 
   public Frame getFrame() {

@@ -35,6 +35,11 @@ public class Frame extends ModelComponent {
     super.delete();
   }
 
+  public void attachGeometry(Geometry geom) {
+      geom.markAdopted();
+      private_attachGeometry(geom);
+  }
+
   public static Frame safeDownCast(OpenSimObject obj) {
     long cPtr = opensimModelSimulationJNI.Frame_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Frame(cPtr, false);
@@ -55,6 +60,66 @@ public class Frame extends ModelComponent {
 
   public String getConcreteClassName() {
     return opensimModelSimulationJNI.Frame_getConcreteClassName(swigCPtr, this);
+  }
+
+  public void copyProperty_frame_geometry(Frame source) {
+    opensimModelSimulationJNI.Frame_copyProperty_frame_geometry(swigCPtr, this, Frame.getCPtr(source), source);
+  }
+
+  public FrameGeometry get_frame_geometry(int i) {
+    return new FrameGeometry(opensimModelSimulationJNI.Frame_get_frame_geometry__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public FrameGeometry upd_frame_geometry(int i) {
+    return new FrameGeometry(opensimModelSimulationJNI.Frame_upd_frame_geometry__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_frame_geometry(int i, FrameGeometry value) {
+    opensimModelSimulationJNI.Frame_set_frame_geometry__SWIG_0(swigCPtr, this, i, FrameGeometry.getCPtr(value), value);
+  }
+
+  public int append_frame_geometry(FrameGeometry value) {
+    return opensimModelSimulationJNI.Frame_append_frame_geometry(swigCPtr, this, FrameGeometry.getCPtr(value), value);
+  }
+
+  public void constructProperty_frame_geometry(FrameGeometry initValue) {
+    opensimModelSimulationJNI.Frame_constructProperty_frame_geometry(swigCPtr, this, FrameGeometry.getCPtr(initValue), initValue);
+  }
+
+  public FrameGeometry get_frame_geometry() {
+    return new FrameGeometry(opensimModelSimulationJNI.Frame_get_frame_geometry__SWIG_1(swigCPtr, this), false);
+  }
+
+  public FrameGeometry upd_frame_geometry() {
+    return new FrameGeometry(opensimModelSimulationJNI.Frame_upd_frame_geometry__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_frame_geometry(FrameGeometry value) {
+    opensimModelSimulationJNI.Frame_set_frame_geometry__SWIG_1(swigCPtr, this, FrameGeometry.getCPtr(value), value);
+  }
+
+  public void copyProperty_attached_geometry(Frame source) {
+    opensimModelSimulationJNI.Frame_copyProperty_attached_geometry(swigCPtr, this, Frame.getCPtr(source), source);
+  }
+
+  public Geometry get_attached_geometry(int i) {
+    return new Geometry(opensimModelSimulationJNI.Frame_get_attached_geometry(swigCPtr, this, i), false);
+  }
+
+  public Geometry upd_attached_geometry(int i) {
+    return new Geometry(opensimModelSimulationJNI.Frame_upd_attached_geometry(swigCPtr, this, i), false);
+  }
+
+  public void set_attached_geometry(int i, Geometry value) {
+    opensimModelSimulationJNI.Frame_set_attached_geometry(swigCPtr, this, i, Geometry.getCPtr(value), value);
+  }
+
+  public int append_attached_geometry(Geometry value) {
+    return opensimModelSimulationJNI.Frame_append_attached_geometry(swigCPtr, this, Geometry.getCPtr(value), value);
+  }
+
+  public void constructProperty_attached_geometry() {
+    opensimModelSimulationJNI.Frame_constructProperty_attached_geometry(swigCPtr, this);
   }
 
   public void set_has_output_position(boolean value) {
@@ -125,20 +190,8 @@ public class Frame extends ModelComponent {
     return new Vec3(opensimModelSimulationJNI.Frame_getPositionInGround(swigCPtr, this, State.getCPtr(state), state), true);
   }
 
-  public void attachMeshGeometry(String aGeometryFileName, Vec3 scale) {
-    opensimModelSimulationJNI.Frame_attachMeshGeometry__SWIG_0(swigCPtr, this, aGeometryFileName, Vec3.getCPtr(scale), scale);
-  }
-
-  public void attachMeshGeometry(String aGeometryFileName) {
-    opensimModelSimulationJNI.Frame_attachMeshGeometry__SWIG_1(swigCPtr, this, aGeometryFileName);
-  }
-
-  public void attachGeometry(Geometry geom, Vec3 scale) {
-    opensimModelSimulationJNI.Frame_attachGeometry__SWIG_0(swigCPtr, this, Geometry.getCPtr(geom), geom, Vec3.getCPtr(scale), scale);
-  }
-
-  public void attachGeometry(Geometry geom) {
-    opensimModelSimulationJNI.Frame_attachGeometry__SWIG_1(swigCPtr, this, Geometry.getCPtr(geom), geom);
+  private void private_attachGeometry(Geometry geom) {
+    opensimModelSimulationJNI.Frame_private_attachGeometry(swigCPtr, this, Geometry.getCPtr(geom), geom);
   }
 
 }
