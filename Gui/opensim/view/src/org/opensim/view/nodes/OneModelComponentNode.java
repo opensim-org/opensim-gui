@@ -25,20 +25,6 @@ public class OneModelComponentNode extends OneComponentNode {
     public OneModelComponentNode(OpenSimObject obj) {
         super(obj);
         modelComp = ModelComponent.safeDownCast(obj);
-        createGeometryNodes();
-    }
-
-    protected final void createGeometryNodes() {
-        int geomSize = modelComp.getNumGeometry();
-        // Create node for geometry
-        Children children = getChildren();
-        for (int g = 0; g < geomSize; g++) {
-            Geometry oneG = modelComp.get_geometry(g);
-            OneGeometryNode node = new OneGeometryNode(oneG);
-            Node[] arrNodes = new Node[1];
-            arrNodes[0] = node;
-            children.add(arrNodes);
-        }
     }
 
     @Override

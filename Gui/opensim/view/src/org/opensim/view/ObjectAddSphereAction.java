@@ -69,16 +69,13 @@ public class ObjectAddSphereAction extends CallableSystemAction {
         Sphere sp = new Sphere(0.2);
         sp.get_Appearance().get_SurfaceProperties().set_representation(3);
         sp.markAdopted();
-        if (PhysicalFrame.safeDownCast(mc) != null) {
-            sp.setFrameName(mc.getName());
-        } else {
-            sp.setFrameName("ground");
+        PhysicalFrame frame = PhysicalFrame.safeDownCast(mc);
+        if (frame != null) {
+            frame.attachGeometry(sp);
         }
-        mc.addGeometry(sp);
         PropertyEditorAdaptor pea = new PropertyEditorAdaptor(model);
         pea.handleModelChange();
-        Geometry g = mc.get_geometry(mc.getNumGeometry()-1);
-        ocn.getChildren().add(new Node[]{new OneGeometryNode(g)});
+        ocn.getChildren().add(new Node[]{new OneGeometryNode(sp)});
     }
 
 }
