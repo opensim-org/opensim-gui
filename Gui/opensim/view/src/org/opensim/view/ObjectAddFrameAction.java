@@ -70,16 +70,13 @@ public class ObjectAddFrameAction extends CallableSystemAction {
         Model model = mc.getModel();
         FrameGeometry sp = new FrameGeometry(0.2);
         sp.get_Appearance().get_SurfaceProperties().set_representation(3);
-        if (Frame.safeDownCast(mc) != null) {
-            sp.setFrameName(mc.getName());
-        } else {
-            sp.setFrameName("ground");
+        Frame frm = Frame.safeDownCast(mc);
+        if (frm != null) {
+            frm.attachGeometry(sp);
         }
-        mc.addGeometry(sp);
         PropertyEditorAdaptor pea = new PropertyEditorAdaptor(model);
         pea.handleModelChange();
-        Geometry g = mc.get_geometry(mc.getNumGeometry()-1);
-        ocn.getChildren().add(new Node[]{new OneGeometryNode(g)});
+        ocn.getChildren().add(new Node[]{new OneGeometryNode(sp)});
     }
 
 }

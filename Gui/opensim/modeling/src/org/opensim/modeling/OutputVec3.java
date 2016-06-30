@@ -93,11 +93,16 @@ public class OutputVec3 extends AbstractOutput {
   }
 
   public static OutputVec3 downcast(AbstractOutput p) {
-    return new OutputVec3(opensimModelCommonJNI.OutputVec3_downcast__SWIG_0(AbstractOutput.getCPtr(p), p), false);
+    return new OutputVec3(opensimModelCommonJNI.OutputVec3_downcast(AbstractOutput.getCPtr(p), p), false);
   }
 
   public static OutputVec3 updDowncast(AbstractOutput p) {
     return new OutputVec3(opensimModelCommonJNI.OutputVec3_updDowncast(AbstractOutput.getCPtr(p), p), false);
+  }
+
+  public static OutputVec3 safeDownCast(AbstractOutput parent) {
+    long cPtr = opensimModelCommonJNI.OutputVec3_safeDownCast(AbstractOutput.getCPtr(parent), parent);
+    return (cPtr == 0) ? null : new OutputVec3(cPtr, false);
   }
 
 }

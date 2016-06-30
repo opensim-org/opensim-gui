@@ -44,15 +44,23 @@ public class BodyList {
   }
 
   public BodyIterator begin() {
-    return new BodyIterator(opensimModelSimulationJNI.BodyList_begin(swigCPtr, this), true);
+    return new BodyIterator(opensimModelSimulationJNI.BodyList_begin__SWIG_0(swigCPtr, this), true);
+  }
+
+  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_OpenSim__Body_const_const_t cbegin() {
+    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_OpenSim__Body_const_const_t(opensimModelSimulationJNI.BodyList_cbegin(swigCPtr, this), true);
+  }
+
+  public BodyIterator end() {
+    return new BodyIterator(opensimModelSimulationJNI.BodyList_end__SWIG_0(swigCPtr, this), true);
+  }
+
+  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_OpenSim__Body_const_const_t cend() {
+    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_OpenSim__Body_const_const_t(opensimModelSimulationJNI.BodyList_cend(swigCPtr, this), true);
   }
 
   public void setFilter(ComponentFilter filter) {
     opensimModelSimulationJNI.BodyList_setFilter(swigCPtr, this, ComponentFilter.getCPtr(filter), filter);
-  }
-
-  public BodyIterator end() {
-    return new BodyIterator(opensimModelSimulationJNI.BodyList_end(swigCPtr, this), true);
   }
 
 }

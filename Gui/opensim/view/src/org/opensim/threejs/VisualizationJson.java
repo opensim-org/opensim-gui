@@ -164,7 +164,7 @@ public class VisualizationJson {
         }
         
         try {
-            Object obj = parser.parse(new FileReader("visResources/templateScene.json"));
+            Object obj = parser.parse(new FileReader("threejs/editor/templateScene.json"));
             jsonObject = (JSONObject) obj;
         } catch (Exception e) {
             e.printStackTrace();

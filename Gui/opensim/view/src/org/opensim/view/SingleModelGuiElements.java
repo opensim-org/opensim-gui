@@ -36,10 +36,10 @@ package org.opensim.view;
 
 import java.util.ArrayList;
 import java.util.Vector;
+import org.opensim.modeling.ArrayConstObjPtr;
 import org.opensim.modeling.Force;
 import org.opensim.modeling.Muscle;
 import org.opensim.modeling.ForceSet;
-import org.opensim.modeling.ArrayObjPtr;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.BodyIterator;
 import org.opensim.modeling.BodyList;
@@ -233,7 +233,7 @@ public class SingleModelGuiElements {
         if (actuators !=null){
            ObjectGroup group=actuators.getGroup(groupName);
            assert(group!=null);
-           ArrayObjPtr objects = group.getMembers();
+           ArrayConstObjPtr objects = group.getMembers();
            for(int i=0; i<objects.getSize();i++){
                 ret.add(objects.getitem(i).getName());
            }

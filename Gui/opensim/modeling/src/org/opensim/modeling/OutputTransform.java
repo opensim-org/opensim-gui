@@ -93,11 +93,16 @@ public class OutputTransform extends AbstractOutput {
   }
 
   public static OutputTransform downcast(AbstractOutput p) {
-    return new OutputTransform(opensimModelCommonJNI.OutputTransform_downcast__SWIG_0(AbstractOutput.getCPtr(p), p), false);
+    return new OutputTransform(opensimModelCommonJNI.OutputTransform_downcast(AbstractOutput.getCPtr(p), p), false);
   }
 
   public static OutputTransform updDowncast(AbstractOutput p) {
     return new OutputTransform(opensimModelCommonJNI.OutputTransform_updDowncast(AbstractOutput.getCPtr(p), p), false);
+  }
+
+  public static OutputTransform safeDownCast(AbstractOutput parent) {
+    long cPtr = opensimModelCommonJNI.OutputTransform_safeDownCast(AbstractOutput.getCPtr(parent), parent);
+    return (cPtr == 0) ? null : new OutputTransform(cPtr, false);
   }
 
 }

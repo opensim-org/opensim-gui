@@ -38,7 +38,6 @@ import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
-import java.util.UUID;
 import java.util.Vector;
 import java.util.prefs.Preferences;
 import javax.swing.SwingUtilities;
@@ -1182,7 +1181,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    public void toggleObjectsDisplay(OpenSimObject openSimObject, boolean visible) {
       ObjectGroup group = ObjectGroup.safeDownCast(openSimObject);
       if (group != null) {
-         ArrayObjPtr members = group.getMembers();
+         ArrayConstObjPtr members = group.getMembers();
          for (int i = 0; i < members.getSize(); i++) {
             toggleObjectDisplay(members.getitem(i), visible);
          }

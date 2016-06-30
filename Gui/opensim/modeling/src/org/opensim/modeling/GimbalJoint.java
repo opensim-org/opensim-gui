@@ -57,12 +57,16 @@ public class GimbalJoint extends Joint {
     return opensimModelSimulationJNI.GimbalJoint_getConcreteClassName(swigCPtr, this);
   }
 
+  public GimbalJoint() {
+    this(opensimModelSimulationJNI.new_GimbalJoint__SWIG_0(), true);
+  }
+
   public GimbalJoint(String name, PhysicalFrame parent, PhysicalFrame child) {
-    this(opensimModelSimulationJNI.new_GimbalJoint__SWIG_0(name, PhysicalFrame.getCPtr(parent), parent, PhysicalFrame.getCPtr(child), child), true);
+    this(opensimModelSimulationJNI.new_GimbalJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, PhysicalFrame.getCPtr(child), child), true);
   }
 
   public GimbalJoint(String name, PhysicalFrame parent, Vec3 locationInParent, Vec3 orientationInParent, PhysicalFrame child, Vec3 locationInChild, Vec3 orientationInChild) {
-    this(opensimModelSimulationJNI.new_GimbalJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
+    this(opensimModelSimulationJNI.new_GimbalJoint__SWIG_2(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
   }
 
 }

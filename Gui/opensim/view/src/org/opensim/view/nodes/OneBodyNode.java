@@ -10,6 +10,7 @@ import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.Body;
+import org.opensim.modeling.Frame;
 import org.opensim.modeling.Geometry;
 import org.opensim.modeling.WrapObject;
 import org.opensim.modeling.OpenSimObject;
@@ -18,10 +19,10 @@ import org.opensim.view.BodyToggleFrameAction;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 
 /** Node class to wrap Body objects */
-public class OneBodyNode extends OneModelComponentNode{
+public class OneBodyNode extends OneFrameNode{
    private static ResourceBundle bundle = NbBundle.getBundle(OneBodyNode.class);
    public OneBodyNode(OpenSimObject b) {
-      super(b);
+      super(Frame.safeDownCast(b));
       // Create children for wrap objects associated with body
       Body bdy = (Body) b;
       setShortDescription(bdy.getFullPathName());

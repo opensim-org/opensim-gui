@@ -133,12 +133,12 @@ public class Controller extends ModelComponent {
     opensimModelSimulationJNI.Controller_addActuator(swigCPtr, this, Actuator.getCPtr(actuator), actuator);
   }
 
-  public SetActuators getActuatorSet() {
-    return new SetActuators(opensimModelSimulationJNI.Controller_getActuatorSet(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__SetT_OpenSim__Actuator_const_t getActuatorSet() {
+    return new SWIGTYPE_p_OpenSim__SetT_OpenSim__Actuator_const_t(opensimModelSimulationJNI.Controller_getActuatorSet(swigCPtr, this), false);
   }
 
-  public SetActuators updActuators() {
-    return new SetActuators(opensimModelSimulationJNI.Controller_updActuators(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__SetT_OpenSim__Actuator_const_t updActuators() {
+    return new SWIGTYPE_p_OpenSim__SetT_OpenSim__Actuator_const_t(opensimModelSimulationJNI.Controller_updActuators(swigCPtr, this), false);
   }
 
   public void computeControls(State s, Vector controls) {

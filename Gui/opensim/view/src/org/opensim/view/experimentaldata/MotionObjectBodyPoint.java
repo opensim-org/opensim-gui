@@ -39,7 +39,7 @@ public class MotionObjectBodyPoint extends ExperimentalDataObject {
     public MotionObjectBodyPoint(ExperimentalDataItemType objectType, String baseName, int index) {
         super(objectType, baseName, index);
         setPointIdentifier(baseName);
-        sphere.setFrameName("ground");
+        //FIXME DEVWEEK sphere.setFrameName("ground");
         // Will get point and set it as Sphere.center, this's a hack
     }
     protected String pointExpressedInBody = "ground";

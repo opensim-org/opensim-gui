@@ -93,8 +93,8 @@ public class ObjectGroup extends OpenSimObject {
     opensimModelCommonJNI.ObjectGroup_setupGroup(swigCPtr, this, ArrayPtrsObj.getCPtr(aObjects), aObjects);
   }
 
-  public ArrayObjPtr getMembers() {
-    return new ArrayObjPtr(opensimModelCommonJNI.ObjectGroup_getMembers(swigCPtr, this), false);
+  public ArrayConstObjPtr getMembers() {
+    return new ArrayConstObjPtr(opensimModelCommonJNI.ObjectGroup_getMembers(swigCPtr, this), false);
   }
 
 }
