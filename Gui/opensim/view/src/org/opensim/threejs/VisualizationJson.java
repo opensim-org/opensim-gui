@@ -113,7 +113,7 @@ public class VisualizationJson {
             GeometryPath gPath = GeometryPath.safeDownCast(comp);
             boolean isGeometryPath = (gPath!=null);
             if (isGeometryPath)
-                createJsonForGeometryPath(gPath, mdh, model.getWorkingState(), json_geometries, json_materials);
+                ;//NOMUSCLES createJsonForGeometryPath(gPath, mdh, model.getWorkingState(), json_geometries, json_materials);
             else{
                 adg.clear();
                 comp.generateDecorations(false, mdh, model.getWorkingState(), adg);
