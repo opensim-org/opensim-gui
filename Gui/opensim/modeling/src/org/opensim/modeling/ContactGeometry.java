@@ -129,60 +129,40 @@ public class ContactGeometry extends ModelComponent {
     opensimModelSimulationJNI.ContactGeometry_set_orientation__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void copyProperty_display_preference(ContactGeometry source) {
-    opensimModelSimulationJNI.ContactGeometry_copyProperty_display_preference(swigCPtr, this, ContactGeometry.getCPtr(source), source);
+  public void copyProperty_Appearance(ContactGeometry source) {
+    opensimModelSimulationJNI.ContactGeometry_copyProperty_Appearance(swigCPtr, this, ContactGeometry.getCPtr(source), source);
   }
 
-  public int get_display_preference(int i) {
-    return opensimModelSimulationJNI.ContactGeometry_get_display_preference__SWIG_0(swigCPtr, this, i);
+  public Appearance get_Appearance(int i) {
+    return new Appearance(opensimModelSimulationJNI.ContactGeometry_get_Appearance__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public SWIGTYPE_p_int upd_display_preference(int i) {
-    return new SWIGTYPE_p_int(opensimModelSimulationJNI.ContactGeometry_upd_display_preference__SWIG_0(swigCPtr, this, i), false);
+  public Appearance upd_Appearance(int i) {
+    return new Appearance(opensimModelSimulationJNI.ContactGeometry_upd_Appearance__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_display_preference(int i, int value) {
-    opensimModelSimulationJNI.ContactGeometry_set_display_preference__SWIG_0(swigCPtr, this, i, value);
+  public void set_Appearance(int i, Appearance value) {
+    opensimModelSimulationJNI.ContactGeometry_set_Appearance__SWIG_0(swigCPtr, this, i, Appearance.getCPtr(value), value);
   }
 
-  public int append_display_preference(int value) {
-    return opensimModelSimulationJNI.ContactGeometry_append_display_preference(swigCPtr, this, value);
+  public int append_Appearance(Appearance value) {
+    return opensimModelSimulationJNI.ContactGeometry_append_Appearance(swigCPtr, this, Appearance.getCPtr(value), value);
   }
 
-  public void constructProperty_display_preference(int initValue) {
-    opensimModelSimulationJNI.ContactGeometry_constructProperty_display_preference(swigCPtr, this, initValue);
+  public void constructProperty_Appearance(Appearance initValue) {
+    opensimModelSimulationJNI.ContactGeometry_constructProperty_Appearance(swigCPtr, this, Appearance.getCPtr(initValue), initValue);
   }
 
-  public int get_display_preference() {
-    return opensimModelSimulationJNI.ContactGeometry_get_display_preference__SWIG_1(swigCPtr, this);
+  public Appearance get_Appearance() {
+    return new Appearance(opensimModelSimulationJNI.ContactGeometry_get_Appearance__SWIG_1(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_int upd_display_preference() {
-    return new SWIGTYPE_p_int(opensimModelSimulationJNI.ContactGeometry_upd_display_preference__SWIG_1(swigCPtr, this), false);
+  public Appearance upd_Appearance() {
+    return new Appearance(opensimModelSimulationJNI.ContactGeometry_upd_Appearance__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_display_preference(int value) {
-    opensimModelSimulationJNI.ContactGeometry_set_display_preference__SWIG_1(swigCPtr, this, value);
-  }
-
-  public void copyProperty_color(ContactGeometry source) {
-    opensimModelSimulationJNI.ContactGeometry_copyProperty_color(swigCPtr, this, ContactGeometry.getCPtr(source), source);
-  }
-
-  public double get_color(int i) {
-    return opensimModelSimulationJNI.ContactGeometry_get_color(swigCPtr, this, i);
-  }
-
-  public SWIGTYPE_p_double upd_color(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.ContactGeometry_upd_color(swigCPtr, this, i), false);
-  }
-
-  public void set_color(int i, double value) {
-    opensimModelSimulationJNI.ContactGeometry_set_color(swigCPtr, this, i, value);
-  }
-
-  public int append_color(double value) {
-    return opensimModelSimulationJNI.ContactGeometry_append_color(swigCPtr, this, value);
+  public void set_Appearance(Appearance value) {
+    opensimModelSimulationJNI.ContactGeometry_set_Appearance__SWIG_1(swigCPtr, this, Appearance.getCPtr(value), value);
   }
 
   public void set_connector_frame(int value) {
@@ -199,14 +179,6 @@ public class ContactGeometry extends ModelComponent {
 
   public void setFrame(PhysicalFrame body) {
     opensimModelSimulationJNI.ContactGeometry_setFrame(swigCPtr, this, PhysicalFrame.getCPtr(body), body);
-  }
-
-  public int getDisplayPreference() {
-    return opensimModelSimulationJNI.ContactGeometry_getDisplayPreference(swigCPtr, this);
-  }
-
-  public void setDisplayPreference(int dispPref) {
-    opensimModelSimulationJNI.ContactGeometry_setDisplayPreference(swigCPtr, this, dispPref);
   }
 
   public SWIGTYPE_p_SimTK__ContactGeometry createSimTKContactGeometry() {

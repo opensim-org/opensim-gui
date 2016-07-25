@@ -63,12 +63,12 @@ public class SetControlNodes {
     return opensimModelSimulationJNI.SetControlNodes_size(swigCPtr, this);
   }
 
-  public int getIndex(ControlLinearNode aObject, int aStartIndex) {
-    return opensimModelSimulationJNI.SetControlNodes_getIndex__SWIG_0(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject, aStartIndex);
+  public int getIndex(SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type aObject, int aStartIndex) {
+    return opensimModelSimulationJNI.SetControlNodes_getIndex__SWIG_0(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type.getCPtr(aObject), aStartIndex);
   }
 
-  public int getIndex(ControlLinearNode aObject) {
-    return opensimModelSimulationJNI.SetControlNodes_getIndex__SWIG_1(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject);
+  public int getIndex(SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type aObject) {
+    return opensimModelSimulationJNI.SetControlNodes_getIndex__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type.getCPtr(aObject));
   }
 
   public int getIndex(String aName, int aStartIndex) {
@@ -95,8 +95,8 @@ public class SetControlNodes {
     return opensimModelSimulationJNI.SetControlNodes_remove__SWIG_0(swigCPtr, this, aIndex);
   }
 
-  public boolean remove(ControlLinearNode aObject) {
-    return opensimModelSimulationJNI.SetControlNodes_remove__SWIG_1(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject);
+  public boolean remove(SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type aObject) {
+    return opensimModelSimulationJNI.SetControlNodes_remove__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type.getCPtr(aObject));
   }
 
   public boolean set(int aIndex, ControlLinearNode aObject) {
@@ -118,20 +118,20 @@ public class SetControlNodes {
     return (cPtr == 0) ? null : new ControlLinearNode(cPtr, false);
   }
 
-  public int searchBinary(ControlLinearNode aObject, boolean aFindFirst, int aLo, int aHi) {
-    return opensimModelSimulationJNI.SetControlNodes_searchBinary__SWIG_0(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject, aFindFirst, aLo, aHi);
+  public int searchBinary(SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type aObject, boolean aFindFirst, int aLo, int aHi) {
+    return opensimModelSimulationJNI.SetControlNodes_searchBinary__SWIG_0(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type.getCPtr(aObject), aFindFirst, aLo, aHi);
   }
 
-  public int searchBinary(ControlLinearNode aObject, boolean aFindFirst, int aLo) {
-    return opensimModelSimulationJNI.SetControlNodes_searchBinary__SWIG_1(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject, aFindFirst, aLo);
+  public int searchBinary(SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type aObject, boolean aFindFirst, int aLo) {
+    return opensimModelSimulationJNI.SetControlNodes_searchBinary__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type.getCPtr(aObject), aFindFirst, aLo);
   }
 
-  public int searchBinary(ControlLinearNode aObject, boolean aFindFirst) {
-    return opensimModelSimulationJNI.SetControlNodes_searchBinary__SWIG_2(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject, aFindFirst);
+  public int searchBinary(SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type aObject, boolean aFindFirst) {
+    return opensimModelSimulationJNI.SetControlNodes_searchBinary__SWIG_2(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type.getCPtr(aObject), aFindFirst);
   }
 
-  public int searchBinary(ControlLinearNode aObject) {
-    return opensimModelSimulationJNI.SetControlNodes_searchBinary__SWIG_3(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject);
+  public int searchBinary(SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type aObject) {
+    return opensimModelSimulationJNI.SetControlNodes_searchBinary__SWIG_3(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type.getCPtr(aObject));
   }
 
 }

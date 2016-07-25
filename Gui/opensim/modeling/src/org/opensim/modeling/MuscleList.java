@@ -47,16 +47,16 @@ public class MuscleList {
     return new MuscleIterator(opensimModelSimulationJNI.MuscleList_begin__SWIG_0(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_OpenSim__Muscle_const_const_t cbegin() {
-    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_OpenSim__Muscle_const_const_t(opensimModelSimulationJNI.MuscleList_cbegin(swigCPtr, this), true);
+  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Muscle_const_t__type_t cbegin() {
+    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Muscle_const_t__type_t(opensimModelSimulationJNI.MuscleList_cbegin(swigCPtr, this), true);
   }
 
   public MuscleIterator end() {
     return new MuscleIterator(opensimModelSimulationJNI.MuscleList_end__SWIG_0(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_OpenSim__Muscle_const_const_t cend() {
-    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_OpenSim__Muscle_const_const_t(opensimModelSimulationJNI.MuscleList_cend(swigCPtr, this), true);
+  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Muscle_const_t__type_t cend() {
+    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Muscle_const_t__type_t(opensimModelSimulationJNI.MuscleList_cend(swigCPtr, this), true);
   }
 
   public void setFilter(ComponentFilter filter) {

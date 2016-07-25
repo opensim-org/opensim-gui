@@ -63,12 +63,12 @@ public class ArrayStorage {
     return opensimModelCommonJNI.ArrayStorage_size(swigCPtr, this);
   }
 
-  public int getIndex(Storage aObject, int aStartIndex) {
-    return opensimModelCommonJNI.ArrayStorage_getIndex__SWIG_0(swigCPtr, this, Storage.getCPtr(aObject), aObject, aStartIndex);
+  public int getIndex(SWIGTYPE_p_std__add_constT_OpenSim__Storage_t__type aObject, int aStartIndex) {
+    return opensimModelCommonJNI.ArrayStorage_getIndex__SWIG_0(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__Storage_t__type.getCPtr(aObject), aStartIndex);
   }
 
-  public int getIndex(Storage aObject) {
-    return opensimModelCommonJNI.ArrayStorage_getIndex__SWIG_1(swigCPtr, this, Storage.getCPtr(aObject), aObject);
+  public int getIndex(SWIGTYPE_p_std__add_constT_OpenSim__Storage_t__type aObject) {
+    return opensimModelCommonJNI.ArrayStorage_getIndex__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__Storage_t__type.getCPtr(aObject));
   }
 
   public int getIndex(String aName, int aStartIndex) {
@@ -95,8 +95,8 @@ public class ArrayStorage {
     return opensimModelCommonJNI.ArrayStorage_remove__SWIG_0(swigCPtr, this, aIndex);
   }
 
-  public boolean remove(Storage aObject) {
-    return opensimModelCommonJNI.ArrayStorage_remove__SWIG_1(swigCPtr, this, Storage.getCPtr(aObject), aObject);
+  public boolean remove(SWIGTYPE_p_std__add_constT_OpenSim__Storage_t__type aObject) {
+    return opensimModelCommonJNI.ArrayStorage_remove__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__Storage_t__type.getCPtr(aObject));
   }
 
   public boolean set(int aIndex, Storage aObject) {
@@ -118,20 +118,20 @@ public class ArrayStorage {
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
-  public int searchBinary(Storage aObject, boolean aFindFirst, int aLo, int aHi) {
-    return opensimModelCommonJNI.ArrayStorage_searchBinary__SWIG_0(swigCPtr, this, Storage.getCPtr(aObject), aObject, aFindFirst, aLo, aHi);
+  public int searchBinary(SWIGTYPE_p_std__add_constT_OpenSim__Storage_t__type aObject, boolean aFindFirst, int aLo, int aHi) {
+    return opensimModelCommonJNI.ArrayStorage_searchBinary__SWIG_0(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__Storage_t__type.getCPtr(aObject), aFindFirst, aLo, aHi);
   }
 
-  public int searchBinary(Storage aObject, boolean aFindFirst, int aLo) {
-    return opensimModelCommonJNI.ArrayStorage_searchBinary__SWIG_1(swigCPtr, this, Storage.getCPtr(aObject), aObject, aFindFirst, aLo);
+  public int searchBinary(SWIGTYPE_p_std__add_constT_OpenSim__Storage_t__type aObject, boolean aFindFirst, int aLo) {
+    return opensimModelCommonJNI.ArrayStorage_searchBinary__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__Storage_t__type.getCPtr(aObject), aFindFirst, aLo);
   }
 
-  public int searchBinary(Storage aObject, boolean aFindFirst) {
-    return opensimModelCommonJNI.ArrayStorage_searchBinary__SWIG_2(swigCPtr, this, Storage.getCPtr(aObject), aObject, aFindFirst);
+  public int searchBinary(SWIGTYPE_p_std__add_constT_OpenSim__Storage_t__type aObject, boolean aFindFirst) {
+    return opensimModelCommonJNI.ArrayStorage_searchBinary__SWIG_2(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__Storage_t__type.getCPtr(aObject), aFindFirst);
   }
 
-  public int searchBinary(Storage aObject) {
-    return opensimModelCommonJNI.ArrayStorage_searchBinary__SWIG_3(swigCPtr, this, Storage.getCPtr(aObject), aObject);
+  public int searchBinary(SWIGTYPE_p_std__add_constT_OpenSim__Storage_t__type aObject) {
+    return opensimModelCommonJNI.ArrayStorage_searchBinary__SWIG_3(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__Storage_t__type.getCPtr(aObject));
   }
 
 }

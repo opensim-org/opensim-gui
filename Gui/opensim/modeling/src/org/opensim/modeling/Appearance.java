@@ -201,42 +201,6 @@ public class Appearance extends OpenSimObject {
     opensimModelSimulationJNI.Appearance_set_SurfaceProperties__SWIG_1(swigCPtr, this, SurfaceProperties.getCPtr(value), value);
   }
 
-  public void copyProperty_CurveProperties(Appearance source) {
-    opensimModelSimulationJNI.Appearance_copyProperty_CurveProperties(swigCPtr, this, Appearance.getCPtr(source), source);
-  }
-
-  public CurveProperties get_CurveProperties(int i) {
-    return new CurveProperties(opensimModelSimulationJNI.Appearance_get_CurveProperties__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public CurveProperties upd_CurveProperties(int i) {
-    return new CurveProperties(opensimModelSimulationJNI.Appearance_upd_CurveProperties__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_CurveProperties(int i, CurveProperties value) {
-    opensimModelSimulationJNI.Appearance_set_CurveProperties__SWIG_0(swigCPtr, this, i, CurveProperties.getCPtr(value), value);
-  }
-
-  public int append_CurveProperties(CurveProperties value) {
-    return opensimModelSimulationJNI.Appearance_append_CurveProperties(swigCPtr, this, CurveProperties.getCPtr(value), value);
-  }
-
-  public void constructProperty_CurveProperties(CurveProperties initValue) {
-    opensimModelSimulationJNI.Appearance_constructProperty_CurveProperties(swigCPtr, this, CurveProperties.getCPtr(initValue), initValue);
-  }
-
-  public CurveProperties get_CurveProperties() {
-    return new CurveProperties(opensimModelSimulationJNI.Appearance_get_CurveProperties__SWIG_1(swigCPtr, this), false);
-  }
-
-  public CurveProperties upd_CurveProperties() {
-    return new CurveProperties(opensimModelSimulationJNI.Appearance_upd_CurveProperties__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_CurveProperties(CurveProperties value) {
-    opensimModelSimulationJNI.Appearance_set_CurveProperties__SWIG_1(swigCPtr, this, CurveProperties.getCPtr(value), value);
-  }
-
   public Appearance() {
     this(opensimModelSimulationJNI.new_Appearance(), true);
   }

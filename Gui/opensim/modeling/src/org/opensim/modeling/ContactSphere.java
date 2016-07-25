@@ -81,4 +81,8 @@ public class ContactSphere extends ContactGeometry {
     opensimModelSimulationJNI.ContactSphere_setRadius(swigCPtr, this, radius);
   }
 
+  public void generateDecorations(boolean fixed, ModelDisplayHints hints, State s, ArrayDecorativeGeometry geometry) {
+    opensimModelSimulationJNI.ContactSphere_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(s), s, ArrayDecorativeGeometry.getCPtr(geometry), geometry);
+  }
+
 }
