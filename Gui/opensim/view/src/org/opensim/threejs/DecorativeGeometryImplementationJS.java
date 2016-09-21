@@ -191,7 +191,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
             index_json.put("array", index_array);
             index_json.put("itemSize", 3);
             index_json.put("type", "Uint16Array");
-            attributes_json.put("index", index_json);
+            data_json.put("index", index_json);
             
             // Now attributes
             data_json.put("attributes", attributes_json);
