@@ -24,7 +24,7 @@ public class JettyMain {
     private static boolean serverup = false;
     private static final String serverRootDir = TheApp.getInstallDir();
     private static final String pathToStartPage = "/threejs/editor/";
-    private static final int serverPort = 8040;
+    private static final int serverPort = 8000;
     /**
      * @param args the command line arguments
      */

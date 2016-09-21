@@ -57,40 +57,28 @@ public class Joint extends ModelComponent {
     return opensimModelSimulationJNI.Joint_getConcreteClassName(swigCPtr, this);
   }
 
-  public void copyProperty_CoordinateSet(Joint source) {
-    opensimModelSimulationJNI.Joint_copyProperty_CoordinateSet(swigCPtr, this, Joint.getCPtr(source), source);
+  public void copyProperty_coordinates(Joint source) {
+    opensimModelSimulationJNI.Joint_copyProperty_coordinates(swigCPtr, this, Joint.getCPtr(source), source);
   }
 
-  public CoordinateSet get_CoordinateSet(int i) {
-    return new CoordinateSet(opensimModelSimulationJNI.Joint_get_CoordinateSet__SWIG_0(swigCPtr, this, i), false);
+  public Coordinate get_coordinates(int i) {
+    return new Coordinate(opensimModelSimulationJNI.Joint_get_coordinates(swigCPtr, this, i), false);
   }
 
-  public CoordinateSet upd_CoordinateSet(int i) {
-    return new CoordinateSet(opensimModelSimulationJNI.Joint_upd_CoordinateSet__SWIG_0(swigCPtr, this, i), false);
+  public Coordinate upd_coordinates(int i) {
+    return new Coordinate(opensimModelSimulationJNI.Joint_upd_coordinates(swigCPtr, this, i), false);
   }
 
-  public void set_CoordinateSet(int i, CoordinateSet value) {
-    opensimModelSimulationJNI.Joint_set_CoordinateSet__SWIG_0(swigCPtr, this, i, CoordinateSet.getCPtr(value), value);
+  public void set_coordinates(int i, Coordinate value) {
+    opensimModelSimulationJNI.Joint_set_coordinates(swigCPtr, this, i, Coordinate.getCPtr(value), value);
   }
 
-  public int append_CoordinateSet(CoordinateSet value) {
-    return opensimModelSimulationJNI.Joint_append_CoordinateSet(swigCPtr, this, CoordinateSet.getCPtr(value), value);
+  public int append_coordinates(Coordinate value) {
+    return opensimModelSimulationJNI.Joint_append_coordinates(swigCPtr, this, Coordinate.getCPtr(value), value);
   }
 
-  public void constructProperty_CoordinateSet(CoordinateSet initValue) {
-    opensimModelSimulationJNI.Joint_constructProperty_CoordinateSet(swigCPtr, this, CoordinateSet.getCPtr(initValue), initValue);
-  }
-
-  public CoordinateSet get_CoordinateSet() {
-    return new CoordinateSet(opensimModelSimulationJNI.Joint_get_CoordinateSet__SWIG_1(swigCPtr, this), false);
-  }
-
-  public CoordinateSet upd_CoordinateSet() {
-    return new CoordinateSet(opensimModelSimulationJNI.Joint_upd_CoordinateSet__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_CoordinateSet(CoordinateSet value) {
-    opensimModelSimulationJNI.Joint_set_CoordinateSet__SWIG_1(swigCPtr, this, CoordinateSet.getCPtr(value), value);
+  public void constructProperty_coordinates() {
+    opensimModelSimulationJNI.Joint_constructProperty_coordinates(swigCPtr, this);
   }
 
   public void copyProperty_reverse(Joint source) {
@@ -201,8 +189,12 @@ public class Joint extends ModelComponent {
     return new PhysicalFrame(opensimModelSimulationJNI.Joint_getParentFrame(swigCPtr, this), false);
   }
 
-  public CoordinateSet getCoordinateSet() {
-    return new CoordinateSet(opensimModelSimulationJNI.Joint_getCoordinateSet(swigCPtr, this), false);
+  public Coordinate getCoordinate() {
+    return new Coordinate(opensimModelSimulationJNI.Joint_getCoordinate(swigCPtr, this), false);
+  }
+
+  public Coordinate updCoordinate() {
+    return new Coordinate(opensimModelSimulationJNI.Joint_updCoordinate(swigCPtr, this), false);
   }
 
   public boolean getReverse() {

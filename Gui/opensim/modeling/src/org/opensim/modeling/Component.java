@@ -254,11 +254,6 @@ public class Component extends OpenSimObject {
     opensimModelCommonJNI.Component_dumpConnections(swigCPtr, this);
   }
 
-  public AbstractConnector findConnector(String name) {
-    long cPtr = opensimModelCommonJNI.Component_findConnector(swigCPtr, this, name);
-    return (cPtr == 0) ? null : new AbstractConnector(cPtr, false);
-  }
-
   public Component getParent() {
     return new Component(opensimModelCommonJNI.Component_getParent(swigCPtr, this), false);
   }

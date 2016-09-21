@@ -209,11 +209,6 @@ public class ModelComponentIterator {
     opensimModelSimulationJNI.ModelComponentIterator_dumpConnections(swigCPtr, this);
   }
 
-  public AbstractConnector findConnector(String name) {
-    long cPtr = opensimModelSimulationJNI.ModelComponentIterator_findConnector(swigCPtr, this, name);
-    return (cPtr == 0) ? null : new AbstractConnector(cPtr, false);
-  }
-
   public Component getParent() {
     return new Component(opensimModelSimulationJNI.ModelComponentIterator_getParent(swigCPtr, this), false);
   }

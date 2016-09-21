@@ -117,4 +117,8 @@ public class ContactMesh extends ContactGeometry {
     opensimModelSimulationJNI.ContactMesh_setFilename(swigCPtr, this, filename);
   }
 
+  public void generateDecorations(boolean fixed, ModelDisplayHints hints, State s, ArrayDecorativeGeometry geometry) {
+    opensimModelSimulationJNI.ContactMesh_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(s), s, ArrayDecorativeGeometry.getCPtr(geometry), geometry);
+  }
+
 }

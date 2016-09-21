@@ -85,7 +85,7 @@ public class DofFunctionEventListener implements FunctionEventListener {
                //TODO: not a good way to force a joint recalculation!!
                // TODO: for now, deal only with the first coordinate.
                String coordName = dof.getCoordinateNamesInArray().getitem(0);
-               Coordinate coord = dof.getJoint().getCoordinateSet().get(coordName);
+               Coordinate coord = Coordinate.safeDownCast(dof.getJoint().getComponent(coordName));
                openSimContext.setValue(coord, openSimContext.getValue(coord));
                ViewDB.getInstance().updateModelDisplayNoRepaint(model);
                ViewDB.getInstance().renderAll();
