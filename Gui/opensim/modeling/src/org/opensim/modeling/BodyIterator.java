@@ -338,11 +338,6 @@ public class BodyIterator {
     opensimModelSimulationJNI.BodyIterator_dumpConnections(swigCPtr, this);
   }
 
-  public AbstractConnector findConnector(String name) {
-    long cPtr = opensimModelSimulationJNI.BodyIterator_findConnector(swigCPtr, this, name);
-    return (cPtr == 0) ? null : new AbstractConnector(cPtr, false);
-  }
-
   public Component getParent() {
     return new Component(opensimModelSimulationJNI.BodyIterator_getParent(swigCPtr, this), false);
   }

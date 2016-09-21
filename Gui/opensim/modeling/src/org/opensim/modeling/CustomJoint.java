@@ -121,6 +121,22 @@ public class CustomJoint extends Joint {
     return new SpatialTransform(opensimModelSimulationJNI.CustomJoint_updSpatialTransform(swigCPtr, this), false);
   }
 
+  public Coordinate getCoordinate() {
+    return new Coordinate(opensimModelSimulationJNI.CustomJoint_getCoordinate__SWIG_0_0(swigCPtr, this), false);
+  }
+
+  public Coordinate updCoordinate() {
+    return new Coordinate(opensimModelSimulationJNI.CustomJoint_updCoordinate__SWIG_0_0(swigCPtr, this), false);
+  }
+
+  public Coordinate getCoordinate(long idx) {
+    return new Coordinate(opensimModelSimulationJNI.CustomJoint_getCoordinate__SWIG_1(swigCPtr, this, idx), false);
+  }
+
+  public Coordinate updCoordinate(long idx) {
+    return new Coordinate(opensimModelSimulationJNI.CustomJoint_updCoordinate__SWIG_1(swigCPtr, this, idx), false);
+  }
+
   public void scale(ScaleSet aScaleSet) {
     opensimModelSimulationJNI.CustomJoint_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
   }

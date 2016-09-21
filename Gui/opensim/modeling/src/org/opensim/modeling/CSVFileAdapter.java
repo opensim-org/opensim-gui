@@ -8,13 +8,12 @@
 
 package org.opensim.modeling;
 
-public class CSVFileAdapter extends DelimFileAdapter {
+public class CSVFileAdapter {
   private transient long swigCPtr;
-  private boolean swigCMemOwnDerived;
+  private transient boolean swigCMemOwn;
 
   protected CSVFileAdapter(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.CSVFileAdapter_SWIGSmartPtrUpcast(cPtr), true);
-    swigCMemOwnDerived = cMemoryOwn;
+    swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
@@ -28,13 +27,12 @@ public class CSVFileAdapter extends DelimFileAdapter {
 
   public synchronized void delete() {
     if (swigCPtr != 0) {
-      if (swigCMemOwnDerived) {
-        swigCMemOwnDerived = false;
+      if (swigCMemOwn) {
+        swigCMemOwn = false;
         opensimModelCommonJNI.delete_CSVFileAdapter(swigCPtr);
       }
       swigCPtr = 0;
     }
-    super.delete();
   }
 
   public CSVFileAdapter() {
@@ -45,7 +43,7 @@ public class CSVFileAdapter extends DelimFileAdapter {
     this(opensimModelCommonJNI.new_CSVFileAdapter__SWIG_1(CSVFileAdapter.getCPtr(arg0), arg0), true);
   }
 
-  public DataAdapter clone() {
+  public CSVFileAdapter clone() {
     long cPtr = opensimModelCommonJNI.CSVFileAdapter_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new CSVFileAdapter(cPtr, true);
   }

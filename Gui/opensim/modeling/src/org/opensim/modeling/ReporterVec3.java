@@ -61,4 +61,12 @@ public class ReporterVec3 extends AbstractReporter {
     return opensimModelCommonJNI.ReporterVec3__has_input_inputs_get(swigCPtr, this);
   }
 
+  public AbstractInput updInput(String name) {
+    return new AbstractInput(opensimModelCommonJNI.ReporterVec3_updInput__SWIG_0_0(swigCPtr, this, name), false);
+  }
+
+  public AbstractInput updInput() {
+    return new AbstractInput(opensimModelCommonJNI.ReporterVec3_updInput__SWIG_1(swigCPtr, this), false);
+  }
+
 }

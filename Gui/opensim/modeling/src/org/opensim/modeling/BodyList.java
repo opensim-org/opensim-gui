@@ -47,16 +47,16 @@ public class BodyList {
     return new BodyIterator(opensimModelSimulationJNI.BodyList_begin__SWIG_0(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_OpenSim__Body_const_const_t cbegin() {
-    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_OpenSim__Body_const_const_t(opensimModelSimulationJNI.BodyList_cbegin(swigCPtr, this), true);
+  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Body_const_t__type_t cbegin() {
+    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Body_const_t__type_t(opensimModelSimulationJNI.BodyList_cbegin(swigCPtr, this), true);
   }
 
   public BodyIterator end() {
     return new BodyIterator(opensimModelSimulationJNI.BodyList_end__SWIG_0(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_OpenSim__Body_const_const_t cend() {
-    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_OpenSim__Body_const_const_t(opensimModelSimulationJNI.BodyList_cend(swigCPtr, this), true);
+  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Body_const_t__type_t cend() {
+    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Body_const_t__type_t(opensimModelSimulationJNI.BodyList_cend(swigCPtr, this), true);
   }
 
   public void setFilter(ComponentFilter filter) {

@@ -8,18 +8,18 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_std__mapT_std__string_SimTK__ClonePtrT_OpenSim__AbstractOutput_t_t__const_iterator {
+public class SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Frame_const_t__type_t {
   private transient long swigCPtr;
 
-  protected SWIGTYPE_p_std__mapT_std__string_SimTK__ClonePtrT_OpenSim__AbstractOutput_t_t__const_iterator(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
+  protected SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Frame_const_t__type_t(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_std__mapT_std__string_SimTK__ClonePtrT_OpenSim__AbstractOutput_t_t__const_iterator() {
+  protected SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Frame_const_t__type_t() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_std__mapT_std__string_SimTK__ClonePtrT_OpenSim__AbstractOutput_t_t__const_iterator obj) {
+  protected static long getCPtr(SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Frame_const_t__type_t obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }

@@ -273,11 +273,6 @@ public class FrameIterator {
     opensimModelSimulationJNI.FrameIterator_dumpConnections(swigCPtr, this);
   }
 
-  public AbstractConnector findConnector(String name) {
-    long cPtr = opensimModelSimulationJNI.FrameIterator_findConnector(swigCPtr, this, name);
-    return (cPtr == 0) ? null : new AbstractConnector(cPtr, false);
-  }
-
   public Component getParent() {
     return new Component(opensimModelSimulationJNI.FrameIterator_getParent(swigCPtr, this), false);
   }

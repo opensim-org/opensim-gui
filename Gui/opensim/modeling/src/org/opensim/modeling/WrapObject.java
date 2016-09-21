@@ -165,60 +165,40 @@ public class WrapObject extends ModelComponent {
     opensimModelSimulationJNI.WrapObject_set_translation__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void copyProperty_display_preference(WrapObject source) {
-    opensimModelSimulationJNI.WrapObject_copyProperty_display_preference(swigCPtr, this, WrapObject.getCPtr(source), source);
+  public void copyProperty_Appearance(WrapObject source) {
+    opensimModelSimulationJNI.WrapObject_copyProperty_Appearance(swigCPtr, this, WrapObject.getCPtr(source), source);
   }
 
-  public int get_display_preference(int i) {
-    return opensimModelSimulationJNI.WrapObject_get_display_preference__SWIG_0(swigCPtr, this, i);
+  public Appearance get_Appearance(int i) {
+    return new Appearance(opensimModelSimulationJNI.WrapObject_get_Appearance__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public SWIGTYPE_p_int upd_display_preference(int i) {
-    return new SWIGTYPE_p_int(opensimModelSimulationJNI.WrapObject_upd_display_preference__SWIG_0(swigCPtr, this, i), false);
+  public Appearance upd_Appearance(int i) {
+    return new Appearance(opensimModelSimulationJNI.WrapObject_upd_Appearance__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_display_preference(int i, int value) {
-    opensimModelSimulationJNI.WrapObject_set_display_preference__SWIG_0(swigCPtr, this, i, value);
+  public void set_Appearance(int i, Appearance value) {
+    opensimModelSimulationJNI.WrapObject_set_Appearance__SWIG_0(swigCPtr, this, i, Appearance.getCPtr(value), value);
   }
 
-  public int append_display_preference(int value) {
-    return opensimModelSimulationJNI.WrapObject_append_display_preference(swigCPtr, this, value);
+  public int append_Appearance(Appearance value) {
+    return opensimModelSimulationJNI.WrapObject_append_Appearance(swigCPtr, this, Appearance.getCPtr(value), value);
   }
 
-  public void constructProperty_display_preference(int initValue) {
-    opensimModelSimulationJNI.WrapObject_constructProperty_display_preference(swigCPtr, this, initValue);
+  public void constructProperty_Appearance(Appearance initValue) {
+    opensimModelSimulationJNI.WrapObject_constructProperty_Appearance(swigCPtr, this, Appearance.getCPtr(initValue), initValue);
   }
 
-  public int get_display_preference() {
-    return opensimModelSimulationJNI.WrapObject_get_display_preference__SWIG_1(swigCPtr, this);
+  public Appearance get_Appearance() {
+    return new Appearance(opensimModelSimulationJNI.WrapObject_get_Appearance__SWIG_1(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_int upd_display_preference() {
-    return new SWIGTYPE_p_int(opensimModelSimulationJNI.WrapObject_upd_display_preference__SWIG_1(swigCPtr, this), false);
+  public Appearance upd_Appearance() {
+    return new Appearance(opensimModelSimulationJNI.WrapObject_upd_Appearance__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_display_preference(int value) {
-    opensimModelSimulationJNI.WrapObject_set_display_preference__SWIG_1(swigCPtr, this, value);
-  }
-
-  public void copyProperty_color(WrapObject source) {
-    opensimModelSimulationJNI.WrapObject_copyProperty_color(swigCPtr, this, WrapObject.getCPtr(source), source);
-  }
-
-  public double get_color(int i) {
-    return opensimModelSimulationJNI.WrapObject_get_color(swigCPtr, this, i);
-  }
-
-  public SWIGTYPE_p_double upd_color(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.WrapObject_upd_color(swigCPtr, this, i), false);
-  }
-
-  public void set_color(int i, double value) {
-    opensimModelSimulationJNI.WrapObject_set_color(swigCPtr, this, i, value);
-  }
-
-  public int append_color(double value) {
-    return opensimModelSimulationJNI.WrapObject_append_color(swigCPtr, this, value);
+  public void set_Appearance(Appearance value) {
+    opensimModelSimulationJNI.WrapObject_set_Appearance__SWIG_1(swigCPtr, this, Appearance.getCPtr(value), value);
   }
 
   public void copyProperty_quadrant(WrapObject source) {

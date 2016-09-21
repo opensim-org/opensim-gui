@@ -61,12 +61,8 @@ public class JointIterator {
     return opensimModelSimulationJNI.JointIterator_getConcreteClassName(swigCPtr, this);
   }
 
-  public CoordinateSet get_CoordinateSet(int i) {
-    return new CoordinateSet(opensimModelSimulationJNI.JointIterator_get_CoordinateSet__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public CoordinateSet get_CoordinateSet() {
-    return new CoordinateSet(opensimModelSimulationJNI.JointIterator_get_CoordinateSet__SWIG_1(swigCPtr, this), false);
+  public Coordinate get_coordinates(int i) {
+    return new Coordinate(opensimModelSimulationJNI.JointIterator_get_coordinates(swigCPtr, this, i), false);
   }
 
   public boolean get_reverse(int i) {
@@ -109,8 +105,8 @@ public class JointIterator {
     return new PhysicalFrame(opensimModelSimulationJNI.JointIterator_getParentFrame(swigCPtr, this), false);
   }
 
-  public CoordinateSet getCoordinateSet() {
-    return new CoordinateSet(opensimModelSimulationJNI.JointIterator_getCoordinateSet(swigCPtr, this), false);
+  public Coordinate getCoordinate() {
+    return new Coordinate(opensimModelSimulationJNI.JointIterator_getCoordinate(swigCPtr, this), false);
   }
 
   public boolean getReverse() {
@@ -287,11 +283,6 @@ public class JointIterator {
 
   public void dumpConnections() {
     opensimModelSimulationJNI.JointIterator_dumpConnections(swigCPtr, this);
-  }
-
-  public AbstractConnector findConnector(String name) {
-    long cPtr = opensimModelSimulationJNI.JointIterator_findConnector(swigCPtr, this, name);
-    return (cPtr == 0) ? null : new AbstractConnector(cPtr, false);
   }
 
   public Component getParent() {

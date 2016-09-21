@@ -57,6 +57,22 @@ public class PlanarJoint extends Joint {
     return opensimModelSimulationJNI.PlanarJoint_getConcreteClassName(swigCPtr, this);
   }
 
+  public Coordinate getCoordinate() {
+    return new Coordinate(opensimModelSimulationJNI.PlanarJoint_getCoordinate__SWIG_0_0(swigCPtr, this), false);
+  }
+
+  public Coordinate updCoordinate() {
+    return new Coordinate(opensimModelSimulationJNI.PlanarJoint_updCoordinate__SWIG_0_0(swigCPtr, this), false);
+  }
+
+  public Coordinate getCoordinate(PlanarJoint.Coord idx) {
+    return new Coordinate(opensimModelSimulationJNI.PlanarJoint_getCoordinate__SWIG_1(swigCPtr, this, idx.swigValue()), false);
+  }
+
+  public Coordinate updCoordinate(PlanarJoint.Coord idx) {
+    return new Coordinate(opensimModelSimulationJNI.PlanarJoint_updCoordinate__SWIG_1(swigCPtr, this, idx.swigValue()), false);
+  }
+
   public PlanarJoint() {
     this(opensimModelSimulationJNI.new_PlanarJoint__SWIG_0(), true);
   }
@@ -67,6 +83,51 @@ public class PlanarJoint extends Joint {
 
   public PlanarJoint(String name, PhysicalFrame parent, Vec3 locationInParent, Vec3 orientationInParent, PhysicalFrame child, Vec3 locationInChild, Vec3 orientationInChild) {
     this(opensimModelSimulationJNI.new_PlanarJoint__SWIG_2(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
+  }
+
+  public final static class Coord {
+    public final static PlanarJoint.Coord RotationZ = new PlanarJoint.Coord("RotationZ");
+    public final static PlanarJoint.Coord TranslationX = new PlanarJoint.Coord("TranslationX");
+    public final static PlanarJoint.Coord TranslationY = new PlanarJoint.Coord("TranslationY");
+
+    public final int swigValue() {
+      return swigValue;
+    }
+
+    public String toString() {
+      return swigName;
+    }
+
+    public static Coord swigToEnum(int swigValue) {
+      if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
+        return swigValues[swigValue];
+      for (int i = 0; i < swigValues.length; i++)
+        if (swigValues[i].swigValue == swigValue)
+          return swigValues[i];
+      throw new IllegalArgumentException("No enum " + Coord.class + " with value " + swigValue);
+    }
+
+    private Coord(String swigName) {
+      this.swigName = swigName;
+      this.swigValue = swigNext++;
+    }
+
+    private Coord(String swigName, int swigValue) {
+      this.swigName = swigName;
+      this.swigValue = swigValue;
+      swigNext = swigValue+1;
+    }
+
+    private Coord(String swigName, Coord swigEnum) {
+      this.swigName = swigName;
+      this.swigValue = swigEnum.swigValue;
+      swigNext = this.swigValue+1;
+    }
+
+    private static Coord[] swigValues = { RotationZ, TranslationX, TranslationY };
+    private static int swigNext = 0;
+    private final int swigValue;
+    private final String swigName;
   }
 
 }

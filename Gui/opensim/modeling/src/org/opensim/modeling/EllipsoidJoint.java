@@ -117,8 +117,69 @@ public class EllipsoidJoint extends Joint {
     opensimModelSimulationJNI.EllipsoidJoint_setEllipsoidRadii(swigCPtr, this, Vec3.getCPtr(radii), radii);
   }
 
+  public Coordinate getCoordinate() {
+    return new Coordinate(opensimModelSimulationJNI.EllipsoidJoint_getCoordinate__SWIG_0_0(swigCPtr, this), false);
+  }
+
+  public Coordinate updCoordinate() {
+    return new Coordinate(opensimModelSimulationJNI.EllipsoidJoint_updCoordinate__SWIG_0_0(swigCPtr, this), false);
+  }
+
+  public Coordinate getCoordinate(EllipsoidJoint.Coord idx) {
+    return new Coordinate(opensimModelSimulationJNI.EllipsoidJoint_getCoordinate__SWIG_1(swigCPtr, this, idx.swigValue()), false);
+  }
+
+  public Coordinate updCoordinate(EllipsoidJoint.Coord idx) {
+    return new Coordinate(opensimModelSimulationJNI.EllipsoidJoint_updCoordinate__SWIG_1(swigCPtr, this, idx.swigValue()), false);
+  }
+
   public void scale(ScaleSet aScaleSet) {
     opensimModelSimulationJNI.EllipsoidJoint_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
+  }
+
+  public final static class Coord {
+    public final static EllipsoidJoint.Coord Rotation1X = new EllipsoidJoint.Coord("Rotation1X");
+    public final static EllipsoidJoint.Coord Rotation2Y = new EllipsoidJoint.Coord("Rotation2Y");
+    public final static EllipsoidJoint.Coord Rotation3Z = new EllipsoidJoint.Coord("Rotation3Z");
+
+    public final int swigValue() {
+      return swigValue;
+    }
+
+    public String toString() {
+      return swigName;
+    }
+
+    public static Coord swigToEnum(int swigValue) {
+      if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
+        return swigValues[swigValue];
+      for (int i = 0; i < swigValues.length; i++)
+        if (swigValues[i].swigValue == swigValue)
+          return swigValues[i];
+      throw new IllegalArgumentException("No enum " + Coord.class + " with value " + swigValue);
+    }
+
+    private Coord(String swigName) {
+      this.swigName = swigName;
+      this.swigValue = swigNext++;
+    }
+
+    private Coord(String swigName, int swigValue) {
+      this.swigName = swigName;
+      this.swigValue = swigValue;
+      swigNext = swigValue+1;
+    }
+
+    private Coord(String swigName, Coord swigEnum) {
+      this.swigName = swigName;
+      this.swigValue = swigEnum.swigValue;
+      swigNext = this.swigValue+1;
+    }
+
+    private static Coord[] swigValues = { Rotation1X, Rotation2Y, Rotation3Z };
+    private static int swigNext = 0;
+    private final int swigValue;
+    private final String swigName;
   }
 
 }

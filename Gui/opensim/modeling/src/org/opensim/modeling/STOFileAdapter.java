@@ -8,17 +8,16 @@
 
 package org.opensim.modeling;
 
-public class STOFileAdapter extends DelimFileAdapter {
+public class STOFileAdapter {
   private transient long swigCPtr;
-  private boolean swigCMemOwnDerived;
+  protected transient boolean swigCMemOwn;
 
-  protected STOFileAdapter(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.STOFileAdapter_SWIGSmartPtrUpcast(cPtr), true);
-    swigCMemOwnDerived = cMemoryOwn;
+  public STOFileAdapter(long cPtr, boolean cMemoryOwn) {
+    swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(STOFileAdapter obj) {
+  public static long getCPtr(STOFileAdapter obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,13 +27,12 @@ public class STOFileAdapter extends DelimFileAdapter {
 
   public synchronized void delete() {
     if (swigCPtr != 0) {
-      if (swigCMemOwnDerived) {
-        swigCMemOwnDerived = false;
+      if (swigCMemOwn) {
+        swigCMemOwn = false;
         opensimModelCommonJNI.delete_STOFileAdapter(swigCPtr);
       }
       swigCPtr = 0;
     }
-    super.delete();
   }
 
   public STOFileAdapter() {
@@ -45,7 +43,7 @@ public class STOFileAdapter extends DelimFileAdapter {
     this(opensimModelCommonJNI.new_STOFileAdapter__SWIG_1(STOFileAdapter.getCPtr(arg0), arg0), true);
   }
 
-  public DataAdapter clone() {
+  public STOFileAdapter clone() {
     long cPtr = opensimModelCommonJNI.STOFileAdapter_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new STOFileAdapter(cPtr, true);
   }

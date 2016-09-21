@@ -417,6 +417,38 @@ public class Millard2012EquilibriumMuscle extends Muscle {
     opensimModelJNI.Millard2012EquilibriumMuscle_set_TendonForceLengthCurve__SWIG_1(swigCPtr, this, TendonForceLengthCurve.getCPtr(value), value);
   }
 
+  public void set_has_output_passive_fiber_elastic_force(boolean value) {
+    opensimModelJNI.Millard2012EquilibriumMuscle__has_output_passive_fiber_elastic_force_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_passive_fiber_elastic_force() {
+    return opensimModelJNI.Millard2012EquilibriumMuscle__has_output_passive_fiber_elastic_force_get(swigCPtr, this);
+  }
+
+  public void set_has_output_passive_fiber_elastic_force_along_tendon(boolean value) {
+    opensimModelJNI.Millard2012EquilibriumMuscle__has_output_passive_fiber_elastic_force_along_tendon_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_passive_fiber_elastic_force_along_tendon() {
+    return opensimModelJNI.Millard2012EquilibriumMuscle__has_output_passive_fiber_elastic_force_along_tendon_get(swigCPtr, this);
+  }
+
+  public void set_has_output_passive_fiber_damping_force(boolean value) {
+    opensimModelJNI.Millard2012EquilibriumMuscle__has_output_passive_fiber_damping_force_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_passive_fiber_damping_force() {
+    return opensimModelJNI.Millard2012EquilibriumMuscle__has_output_passive_fiber_damping_force_get(swigCPtr, this);
+  }
+
+  public void set_has_output_passive_fiber_damping_force_along_tendon(boolean value) {
+    opensimModelJNI.Millard2012EquilibriumMuscle__has_output_passive_fiber_damping_force_along_tendon_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_passive_fiber_damping_force_along_tendon() {
+    return opensimModelJNI.Millard2012EquilibriumMuscle__has_output_passive_fiber_damping_force_along_tendon_get(swigCPtr, this);
+  }
+
   public Millard2012EquilibriumMuscle() {
     this(opensimModelJNI.new_Millard2012EquilibriumMuscle__SWIG_0(), true);
   }
@@ -499,6 +531,22 @@ public class Millard2012EquilibriumMuscle extends Muscle {
 
   public double getActivationDerivative(State s) {
     return opensimModelJNI.Millard2012EquilibriumMuscle_getActivationDerivative(swigCPtr, this, State.getCPtr(s), s);
+  }
+
+  public double getPassiveFiberElasticForce(State s) {
+    return opensimModelJNI.Millard2012EquilibriumMuscle_getPassiveFiberElasticForce(swigCPtr, this, State.getCPtr(s), s);
+  }
+
+  public double getPassiveFiberElasticForceAlongTendon(State s) {
+    return opensimModelJNI.Millard2012EquilibriumMuscle_getPassiveFiberElasticForceAlongTendon(swigCPtr, this, State.getCPtr(s), s);
+  }
+
+  public double getPassiveFiberDampingForce(State s) {
+    return opensimModelJNI.Millard2012EquilibriumMuscle_getPassiveFiberDampingForce(swigCPtr, this, State.getCPtr(s), s);
+  }
+
+  public double getPassiveFiberDampingForceAlongTendon(State s) {
+    return opensimModelJNI.Millard2012EquilibriumMuscle_getPassiveFiberDampingForceAlongTendon(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setMuscleConfiguration(boolean ignoreTendonCompliance, boolean ignoreActivationDynamics, double dampingCoefficient) {

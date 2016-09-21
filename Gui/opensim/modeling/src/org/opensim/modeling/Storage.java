@@ -571,8 +571,8 @@ public class Storage extends StorageInterface {
     return opensimModelCommonJNI.Storage_compareColumnRMS__SWIG_2(swigCPtr, this, Storage.getCPtr(aOtherStorage), aOtherStorage, aColumnName);
   }
 
-  public void compareWithStandard(Storage standard, ArrayStr columnsUsed, ArrayDouble comparisons) {
-    opensimModelCommonJNI.Storage_compareWithStandard(swigCPtr, this, Storage.getCPtr(standard), standard, ArrayStr.getCPtr(columnsUsed), columnsUsed, ArrayDouble.getCPtr(comparisons), comparisons);
+  public void compareWithStandard(Storage standard, StdVectorString columnsUsed, StdVectorDouble comparisons) {
+    opensimModelCommonJNI.Storage_compareWithStandard(swigCPtr, this, Storage.getCPtr(standard), standard, StdVectorString.getCPtr(columnsUsed), columnsUsed, StdVectorDouble.getCPtr(comparisons), comparisons);
   }
 
   public boolean makeStorageLabelsUnique() {
