@@ -8,18 +8,18 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_Mat33 {
+public class SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type {
   private transient long swigCPtr;
 
-  protected SWIGTYPE_p_Mat33(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
+  protected SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_Mat33() {
+  protected SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_Mat33 obj) {
+  protected static long getCPtr(SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }

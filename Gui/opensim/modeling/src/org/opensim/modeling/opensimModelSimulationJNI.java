@@ -1349,15 +1349,12 @@ public class opensimModelSimulationJNI {
   public final static native String Joint_getClassName();
   public final static native long Joint_clone(long jarg1, Joint jarg1_);
   public final static native String Joint_getConcreteClassName(long jarg1, Joint jarg1_);
-  public final static native void Joint_copyProperty_CoordinateSet(long jarg1, Joint jarg1_, long jarg2, Joint jarg2_);
-  public final static native long Joint_get_CoordinateSet__SWIG_0(long jarg1, Joint jarg1_, int jarg2);
-  public final static native long Joint_upd_CoordinateSet__SWIG_0(long jarg1, Joint jarg1_, int jarg2);
-  public final static native void Joint_set_CoordinateSet__SWIG_0(long jarg1, Joint jarg1_, int jarg2, long jarg3, CoordinateSet jarg3_);
-  public final static native int Joint_append_CoordinateSet(long jarg1, Joint jarg1_, long jarg2, CoordinateSet jarg2_);
-  public final static native void Joint_constructProperty_CoordinateSet(long jarg1, Joint jarg1_, long jarg2, CoordinateSet jarg2_);
-  public final static native long Joint_get_CoordinateSet__SWIG_1(long jarg1, Joint jarg1_);
-  public final static native long Joint_upd_CoordinateSet__SWIG_1(long jarg1, Joint jarg1_);
-  public final static native void Joint_set_CoordinateSet__SWIG_1(long jarg1, Joint jarg1_, long jarg2, CoordinateSet jarg2_);
+  public final static native void Joint_copyProperty_coordinates(long jarg1, Joint jarg1_, long jarg2, Joint jarg2_);
+  public final static native long Joint_get_coordinates(long jarg1, Joint jarg1_, int jarg2);
+  public final static native long Joint_upd_coordinates(long jarg1, Joint jarg1_, int jarg2);
+  public final static native void Joint_set_coordinates(long jarg1, Joint jarg1_, int jarg2, long jarg3, Coordinate jarg3_);
+  public final static native int Joint_append_coordinates(long jarg1, Joint jarg1_, long jarg2, Coordinate jarg2_);
+  public final static native void Joint_constructProperty_coordinates(long jarg1, Joint jarg1_);
   public final static native void Joint_copyProperty_reverse(long jarg1, Joint jarg1_, long jarg2, Joint jarg2_);
   public final static native boolean Joint_get_reverse__SWIG_0(long jarg1, Joint jarg1_, int jarg2);
   public final static native long Joint_upd_reverse__SWIG_0(long jarg1, Joint jarg1_, int jarg2);
@@ -1386,7 +1383,8 @@ public class opensimModelSimulationJNI {
   public final static native void delete_Joint(long jarg1);
   public final static native long Joint_getChildFrame(long jarg1, Joint jarg1_);
   public final static native long Joint_getParentFrame(long jarg1, Joint jarg1_);
-  public final static native long Joint_getCoordinateSet(long jarg1, Joint jarg1_);
+  public final static native long Joint_getCoordinate(long jarg1, Joint jarg1_);
+  public final static native long Joint_updCoordinate(long jarg1, Joint jarg1_);
   public final static native boolean Joint_getReverse(long jarg1, Joint jarg1_);
   public final static native int Joint_numCoordinates(long jarg1, Joint jarg1_);
   public final static native boolean Joint_isCoordinateUsed(long jarg1, Joint jarg1_, long jarg2, Coordinate jarg2_);
@@ -1395,6 +1393,8 @@ public class opensimModelSimulationJNI {
   public final static native long Joint_calcReactionOnChildExpressedInGround(long jarg1, Joint jarg1_, long jarg2, State jarg2_);
   public final static native double Joint_calcPower(long jarg1, Joint jarg1_, long jarg2, State jarg2_);
   public final static native void Joint_scale(long jarg1, Joint jarg1_, long jarg2, ScaleSet jarg2_);
+  public final static native long new_JointHasNoCoordinates(String jarg1, long jarg2, String jarg3);
+  public final static native void delete_JointHasNoCoordinates(long jarg1);
   public final static native long SetJoints_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void SetJoints_assign(long jarg1, SetJoints jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String SetJoints_getClassName();
@@ -1857,6 +1857,10 @@ public class opensimModelSimulationJNI {
   public final static native String FreeJoint_getClassName();
   public final static native long FreeJoint_clone(long jarg1, FreeJoint jarg1_);
   public final static native String FreeJoint_getConcreteClassName(long jarg1, FreeJoint jarg1_);
+  public final static native long FreeJoint_getCoordinate__SWIG_0_0(long jarg1, FreeJoint jarg1_);
+  public final static native long FreeJoint_updCoordinate__SWIG_0_0(long jarg1, FreeJoint jarg1_);
+  public final static native long FreeJoint_getCoordinate__SWIG_1(long jarg1, FreeJoint jarg1_, int jarg2);
+  public final static native long FreeJoint_updCoordinate__SWIG_1(long jarg1, FreeJoint jarg1_, int jarg2);
   public final static native long new_FreeJoint__SWIG_0();
   public final static native long new_FreeJoint__SWIG_1(String jarg1, long jarg2, PhysicalFrame jarg2_, long jarg3, PhysicalFrame jarg3_);
   public final static native long new_FreeJoint__SWIG_2(String jarg1, long jarg2, PhysicalFrame jarg2_, long jarg3, Vec3 jarg3_, long jarg4, Vec3 jarg4_, long jarg5, PhysicalFrame jarg5_, long jarg6, Vec3 jarg6_, long jarg7, Vec3 jarg7_);
@@ -1882,6 +1886,10 @@ public class opensimModelSimulationJNI {
   public final static native long new_CustomJoint__SWIG_4(String jarg1, long jarg2, PhysicalFrame jarg2_, long jarg3, Vec3 jarg3_, long jarg4, Vec3 jarg4_, long jarg5, PhysicalFrame jarg5_, long jarg6, Vec3 jarg6_, long jarg7, Vec3 jarg7_, long jarg8, SpatialTransform jarg8_);
   public final static native long CustomJoint_getSpatialTransform(long jarg1, CustomJoint jarg1_);
   public final static native long CustomJoint_updSpatialTransform(long jarg1, CustomJoint jarg1_);
+  public final static native long CustomJoint_getCoordinate__SWIG_0_0(long jarg1, CustomJoint jarg1_);
+  public final static native long CustomJoint_updCoordinate__SWIG_0_0(long jarg1, CustomJoint jarg1_);
+  public final static native long CustomJoint_getCoordinate__SWIG_1(long jarg1, CustomJoint jarg1_, long jarg2);
+  public final static native long CustomJoint_updCoordinate__SWIG_1(long jarg1, CustomJoint jarg1_, long jarg2);
   public final static native void CustomJoint_scale(long jarg1, CustomJoint jarg1_, long jarg2, ScaleSet jarg2_);
   public final static native void CustomJoint_updateFromXMLNode__SWIG_0(long jarg1, CustomJoint jarg1_, long jarg2, int jarg3);
   public final static native void CustomJoint_updateFromXMLNode__SWIG_1(long jarg1, CustomJoint jarg1_, long jarg2);
@@ -1906,6 +1914,10 @@ public class opensimModelSimulationJNI {
   public final static native long new_EllipsoidJoint__SWIG_3(String jarg1, long jarg2, PhysicalFrame jarg2_, long jarg3, Vec3 jarg3_, long jarg4, Vec3 jarg4_, long jarg5, PhysicalFrame jarg5_, long jarg6, Vec3 jarg6_, long jarg7, Vec3 jarg7_, long jarg8, Vec3 jarg8_, boolean jarg9);
   public final static native long new_EllipsoidJoint__SWIG_4(String jarg1, long jarg2, PhysicalFrame jarg2_, long jarg3, Vec3 jarg3_, long jarg4, Vec3 jarg4_, long jarg5, PhysicalFrame jarg5_, long jarg6, Vec3 jarg6_, long jarg7, Vec3 jarg7_, long jarg8, Vec3 jarg8_);
   public final static native void EllipsoidJoint_setEllipsoidRadii(long jarg1, EllipsoidJoint jarg1_, long jarg2, Vec3 jarg2_);
+  public final static native long EllipsoidJoint_getCoordinate__SWIG_0_0(long jarg1, EllipsoidJoint jarg1_);
+  public final static native long EllipsoidJoint_updCoordinate__SWIG_0_0(long jarg1, EllipsoidJoint jarg1_);
+  public final static native long EllipsoidJoint_getCoordinate__SWIG_1(long jarg1, EllipsoidJoint jarg1_, int jarg2);
+  public final static native long EllipsoidJoint_updCoordinate__SWIG_1(long jarg1, EllipsoidJoint jarg1_, int jarg2);
   public final static native void EllipsoidJoint_scale(long jarg1, EllipsoidJoint jarg1_, long jarg2, ScaleSet jarg2_);
   public final static native void delete_EllipsoidJoint(long jarg1);
   public final static native long BallJoint_safeDownCast(long jarg1, OpenSimObject jarg1_);
@@ -1913,6 +1925,10 @@ public class opensimModelSimulationJNI {
   public final static native String BallJoint_getClassName();
   public final static native long BallJoint_clone(long jarg1, BallJoint jarg1_);
   public final static native String BallJoint_getConcreteClassName(long jarg1, BallJoint jarg1_);
+  public final static native long BallJoint_getCoordinate__SWIG_0_0(long jarg1, BallJoint jarg1_);
+  public final static native long BallJoint_updCoordinate__SWIG_0_0(long jarg1, BallJoint jarg1_);
+  public final static native long BallJoint_getCoordinate__SWIG_1(long jarg1, BallJoint jarg1_, int jarg2);
+  public final static native long BallJoint_updCoordinate__SWIG_1(long jarg1, BallJoint jarg1_, int jarg2);
   public final static native long new_BallJoint__SWIG_0();
   public final static native long new_BallJoint__SWIG_1(String jarg1, long jarg2, PhysicalFrame jarg2_, long jarg3, PhysicalFrame jarg3_);
   public final static native long new_BallJoint__SWIG_2(String jarg1, long jarg2, PhysicalFrame jarg2_, long jarg3, Vec3 jarg3_, long jarg4, Vec3 jarg4_, long jarg5, PhysicalFrame jarg5_, long jarg6, Vec3 jarg6_, long jarg7, Vec3 jarg7_);
@@ -1922,6 +1938,10 @@ public class opensimModelSimulationJNI {
   public final static native String PinJoint_getClassName();
   public final static native long PinJoint_clone(long jarg1, PinJoint jarg1_);
   public final static native String PinJoint_getConcreteClassName(long jarg1, PinJoint jarg1_);
+  public final static native long PinJoint_getCoordinate__SWIG_0_0(long jarg1, PinJoint jarg1_);
+  public final static native long PinJoint_updCoordinate__SWIG_0_0(long jarg1, PinJoint jarg1_);
+  public final static native long PinJoint_getCoordinate__SWIG_1(long jarg1, PinJoint jarg1_, int jarg2);
+  public final static native long PinJoint_updCoordinate__SWIG_1(long jarg1, PinJoint jarg1_, int jarg2);
   public final static native long new_PinJoint__SWIG_0();
   public final static native long new_PinJoint__SWIG_1(String jarg1, long jarg2, PhysicalFrame jarg2_, long jarg3, PhysicalFrame jarg3_);
   public final static native long new_PinJoint__SWIG_2(String jarg1, long jarg2, PhysicalFrame jarg2_, long jarg3, Vec3 jarg3_, long jarg4, Vec3 jarg4_, long jarg5, PhysicalFrame jarg5_, long jarg6, Vec3 jarg6_, long jarg7, Vec3 jarg7_);
@@ -1931,6 +1951,10 @@ public class opensimModelSimulationJNI {
   public final static native String SliderJoint_getClassName();
   public final static native long SliderJoint_clone(long jarg1, SliderJoint jarg1_);
   public final static native String SliderJoint_getConcreteClassName(long jarg1, SliderJoint jarg1_);
+  public final static native long SliderJoint_getCoordinate__SWIG_0_0(long jarg1, SliderJoint jarg1_);
+  public final static native long SliderJoint_updCoordinate__SWIG_0_0(long jarg1, SliderJoint jarg1_);
+  public final static native long SliderJoint_getCoordinate__SWIG_1(long jarg1, SliderJoint jarg1_, int jarg2);
+  public final static native long SliderJoint_updCoordinate__SWIG_1(long jarg1, SliderJoint jarg1_, int jarg2);
   public final static native long new_SliderJoint__SWIG_0();
   public final static native long new_SliderJoint__SWIG_1(String jarg1, long jarg2, PhysicalFrame jarg2_, long jarg3, PhysicalFrame jarg3_);
   public final static native long new_SliderJoint__SWIG_2(String jarg1, long jarg2, PhysicalFrame jarg2_, long jarg3, Vec3 jarg3_, long jarg4, Vec3 jarg4_, long jarg5, PhysicalFrame jarg5_, long jarg6, Vec3 jarg6_, long jarg7, Vec3 jarg7_);
@@ -1949,6 +1973,10 @@ public class opensimModelSimulationJNI {
   public final static native String GimbalJoint_getClassName();
   public final static native long GimbalJoint_clone(long jarg1, GimbalJoint jarg1_);
   public final static native String GimbalJoint_getConcreteClassName(long jarg1, GimbalJoint jarg1_);
+  public final static native long GimbalJoint_getCoordinate__SWIG_0_0(long jarg1, GimbalJoint jarg1_);
+  public final static native long GimbalJoint_updCoordinate__SWIG_0_0(long jarg1, GimbalJoint jarg1_);
+  public final static native long GimbalJoint_getCoordinate__SWIG_1(long jarg1, GimbalJoint jarg1_, int jarg2);
+  public final static native long GimbalJoint_updCoordinate__SWIG_1(long jarg1, GimbalJoint jarg1_, int jarg2);
   public final static native long new_GimbalJoint__SWIG_0();
   public final static native long new_GimbalJoint__SWIG_1(String jarg1, long jarg2, PhysicalFrame jarg2_, long jarg3, PhysicalFrame jarg3_);
   public final static native long new_GimbalJoint__SWIG_2(String jarg1, long jarg2, PhysicalFrame jarg2_, long jarg3, Vec3 jarg3_, long jarg4, Vec3 jarg4_, long jarg5, PhysicalFrame jarg5_, long jarg6, Vec3 jarg6_, long jarg7, Vec3 jarg7_);
@@ -1958,6 +1986,10 @@ public class opensimModelSimulationJNI {
   public final static native String UniversalJoint_getClassName();
   public final static native long UniversalJoint_clone(long jarg1, UniversalJoint jarg1_);
   public final static native String UniversalJoint_getConcreteClassName(long jarg1, UniversalJoint jarg1_);
+  public final static native long UniversalJoint_getCoordinate__SWIG_0_0(long jarg1, UniversalJoint jarg1_);
+  public final static native long UniversalJoint_updCoordinate__SWIG_0_0(long jarg1, UniversalJoint jarg1_);
+  public final static native long UniversalJoint_getCoordinate__SWIG_1(long jarg1, UniversalJoint jarg1_, int jarg2);
+  public final static native long UniversalJoint_updCoordinate__SWIG_1(long jarg1, UniversalJoint jarg1_, int jarg2);
   public final static native long new_UniversalJoint__SWIG_0();
   public final static native long new_UniversalJoint__SWIG_1(String jarg1, long jarg2, PhysicalFrame jarg2_, long jarg3, PhysicalFrame jarg3_);
   public final static native long new_UniversalJoint__SWIG_2(String jarg1, long jarg2, PhysicalFrame jarg2_, long jarg3, Vec3 jarg3_, long jarg4, Vec3 jarg4_, long jarg5, PhysicalFrame jarg5_, long jarg6, Vec3 jarg6_, long jarg7, Vec3 jarg7_);
@@ -1967,6 +1999,10 @@ public class opensimModelSimulationJNI {
   public final static native String PlanarJoint_getClassName();
   public final static native long PlanarJoint_clone(long jarg1, PlanarJoint jarg1_);
   public final static native String PlanarJoint_getConcreteClassName(long jarg1, PlanarJoint jarg1_);
+  public final static native long PlanarJoint_getCoordinate__SWIG_0_0(long jarg1, PlanarJoint jarg1_);
+  public final static native long PlanarJoint_updCoordinate__SWIG_0_0(long jarg1, PlanarJoint jarg1_);
+  public final static native long PlanarJoint_getCoordinate__SWIG_1(long jarg1, PlanarJoint jarg1_, int jarg2);
+  public final static native long PlanarJoint_updCoordinate__SWIG_1(long jarg1, PlanarJoint jarg1_, int jarg2);
   public final static native long new_PlanarJoint__SWIG_0();
   public final static native long new_PlanarJoint__SWIG_1(String jarg1, long jarg2, PhysicalFrame jarg2_, long jarg3, PhysicalFrame jarg3_);
   public final static native long new_PlanarJoint__SWIG_2(String jarg1, long jarg2, PhysicalFrame jarg2_, long jarg3, Vec3 jarg3_, long jarg4, Vec3 jarg4_, long jarg5, PhysicalFrame jarg5_, long jarg6, Vec3 jarg6_, long jarg7, Vec3 jarg7_);
@@ -3195,7 +3231,6 @@ public class opensimModelSimulationJNI {
   public final static native void PrescribedController_computeControls(long jarg1, PrescribedController jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
   public final static native void PrescribedController_prescribeControlForActuator__SWIG_0(long jarg1, PrescribedController jarg1_, int jarg2, long jarg3, Function jarg3_);
   public final static native void PrescribedController_prescribeControlForActuator__SWIG_1(long jarg1, PrescribedController jarg1_, String jarg2, long jarg3, Function jarg3_);
-  public final static native void delete_Manager(long jarg1);
   public final static native long new_Manager__SWIG_0(long jarg1, Model jarg1_, long jarg2);
   public final static native long new_Manager__SWIG_1(long jarg1, Model jarg1_);
   public final static native long new_Manager__SWIG_2();
@@ -3245,6 +3280,7 @@ public class opensimModelSimulationJNI {
   public final static native void Manager_clearHalt(long jarg1, Manager jarg1_);
   public final static native boolean Manager_checkHalt(long jarg1, Manager jarg1_);
   public final static native void Manager_setIntegratorAccuracy(long jarg1, Manager jarg1_, double jarg2);
+  public final static native void delete_Manager(long jarg1);
   public final static native long AbstractTool_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void AbstractTool_assign(long jarg1, AbstractTool jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String AbstractTool_getClassName();
@@ -5043,7 +5079,6 @@ public class opensimModelSimulationJNI {
   public final static native double GeometryPath_getPreScaleLength(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_);
   public final static native void GeometryPath_setPreScaleLength(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, double jarg3);
   public final static native long GeometryPath_getCurrentPath(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_);
-  public final static native long GeometryPath_getCurrentDisplayPath(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_);
   public final static native double GeometryPath_getLengtheningSpeed(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_);
   public final static native void GeometryPath_setLengtheningSpeed(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, double jarg3);
   public final static native void GeometryPath_getPointForceDirections(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, long jarg3, ArrayPointForceDirection jarg3_);
@@ -5155,6 +5190,8 @@ public class opensimModelSimulationJNI {
   public final static native void PathActuator_scale(long jarg1, PathActuator jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native void PathActuator_postScale(long jarg1, PathActuator jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native void delete_PathActuator(long jarg1);
+  public final static native long new_MuscleCannotEquilibrate(String jarg1, long jarg2, String jarg3, long jarg4, OpenSimObject jarg4_, String jarg5);
+  public final static native void delete_MuscleCannotEquilibrate(long jarg1);
   public final static native long Muscle_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void Muscle_assign(long jarg1, Muscle jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String Muscle_getClassName();
@@ -6182,7 +6219,7 @@ public class opensimModelSimulationJNI {
   public final static native void FrameIterator_generateDecorations(long jarg1, FrameIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native long FrameIterator_getSystem(long jarg1, FrameIterator jarg1_);
   public final static native boolean FrameIterator_hasSystem(long jarg1, FrameIterator jarg1_);
-  public final static native String FrameIterator_getFullPathName(long jarg1, FrameIterator jarg1_);
+  public final static native String FrameIterator_getAbsolutePathName(long jarg1, FrameIterator jarg1_);
   public final static native String FrameIterator_getRelativePathName(long jarg1, FrameIterator jarg1_, long jarg2, Component jarg2_);
   public final static native boolean FrameIterator_hasComponent(long jarg1, FrameIterator jarg1_, String jarg2);
   public final static native long FrameIterator_getComponent(long jarg1, FrameIterator jarg1_, String jarg2);
@@ -6213,7 +6250,6 @@ public class opensimModelSimulationJNI {
   public final static native void FrameIterator_dumpSubcomponents__SWIG_0(long jarg1, FrameIterator jarg1_, int jarg2);
   public final static native void FrameIterator_dumpSubcomponents__SWIG_1(long jarg1, FrameIterator jarg1_);
   public final static native void FrameIterator_dumpConnections(long jarg1, FrameIterator jarg1_);
-  public final static native long FrameIterator_findConnector(long jarg1, FrameIterator jarg1_, String jarg2);
   public final static native long FrameIterator_getParent(long jarg1, FrameIterator jarg1_);
   public final static native boolean FrameIterator_hasParent(long jarg1, FrameIterator jarg1_);
   public final static native long FrameIterator_getComponentsList(long jarg1, FrameIterator jarg1_);
@@ -6286,7 +6322,7 @@ public class opensimModelSimulationJNI {
   public final static native void BodyIterator_generateDecorations(long jarg1, BodyIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native long BodyIterator_getSystem(long jarg1, BodyIterator jarg1_);
   public final static native boolean BodyIterator_hasSystem(long jarg1, BodyIterator jarg1_);
-  public final static native String BodyIterator_getFullPathName(long jarg1, BodyIterator jarg1_);
+  public final static native String BodyIterator_getAbsolutePathName(long jarg1, BodyIterator jarg1_);
   public final static native String BodyIterator_getRelativePathName(long jarg1, BodyIterator jarg1_, long jarg2, Component jarg2_);
   public final static native boolean BodyIterator_hasComponent(long jarg1, BodyIterator jarg1_, String jarg2);
   public final static native long BodyIterator_getComponent(long jarg1, BodyIterator jarg1_, String jarg2);
@@ -6317,7 +6353,6 @@ public class opensimModelSimulationJNI {
   public final static native void BodyIterator_dumpSubcomponents__SWIG_0(long jarg1, BodyIterator jarg1_, int jarg2);
   public final static native void BodyIterator_dumpSubcomponents__SWIG_1(long jarg1, BodyIterator jarg1_);
   public final static native void BodyIterator_dumpConnections(long jarg1, BodyIterator jarg1_);
-  public final static native long BodyIterator_findConnector(long jarg1, BodyIterator jarg1_, String jarg2);
   public final static native long BodyIterator_getParent(long jarg1, BodyIterator jarg1_);
   public final static native boolean BodyIterator_hasParent(long jarg1, BodyIterator jarg1_);
   public final static native long BodyIterator_getComponentsList(long jarg1, BodyIterator jarg1_);
@@ -6494,7 +6529,7 @@ public class opensimModelSimulationJNI {
   public final static native void MuscleIterator_generateDecorations(long jarg1, MuscleIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native long MuscleIterator_getSystem(long jarg1, MuscleIterator jarg1_);
   public final static native boolean MuscleIterator_hasSystem(long jarg1, MuscleIterator jarg1_);
-  public final static native String MuscleIterator_getFullPathName(long jarg1, MuscleIterator jarg1_);
+  public final static native String MuscleIterator_getAbsolutePathName(long jarg1, MuscleIterator jarg1_);
   public final static native String MuscleIterator_getRelativePathName(long jarg1, MuscleIterator jarg1_, long jarg2, Component jarg2_);
   public final static native boolean MuscleIterator_hasComponent(long jarg1, MuscleIterator jarg1_, String jarg2);
   public final static native long MuscleIterator_getComponent(long jarg1, MuscleIterator jarg1_, String jarg2);
@@ -6525,7 +6560,6 @@ public class opensimModelSimulationJNI {
   public final static native void MuscleIterator_dumpSubcomponents__SWIG_0(long jarg1, MuscleIterator jarg1_, int jarg2);
   public final static native void MuscleIterator_dumpSubcomponents__SWIG_1(long jarg1, MuscleIterator jarg1_);
   public final static native void MuscleIterator_dumpConnections(long jarg1, MuscleIterator jarg1_);
-  public final static native long MuscleIterator_findConnector(long jarg1, MuscleIterator jarg1_, String jarg2);
   public final static native long MuscleIterator_getParent(long jarg1, MuscleIterator jarg1_);
   public final static native boolean MuscleIterator_hasParent(long jarg1, MuscleIterator jarg1_);
   public final static native long MuscleIterator_getComponentsList(long jarg1, MuscleIterator jarg1_);
@@ -6566,7 +6600,7 @@ public class opensimModelSimulationJNI {
   public final static native void ModelComponentIterator_generateDecorations(long jarg1, ModelComponentIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native long ModelComponentIterator_getSystem(long jarg1, ModelComponentIterator jarg1_);
   public final static native boolean ModelComponentIterator_hasSystem(long jarg1, ModelComponentIterator jarg1_);
-  public final static native String ModelComponentIterator_getFullPathName(long jarg1, ModelComponentIterator jarg1_);
+  public final static native String ModelComponentIterator_getAbsolutePathName(long jarg1, ModelComponentIterator jarg1_);
   public final static native String ModelComponentIterator_getRelativePathName(long jarg1, ModelComponentIterator jarg1_, long jarg2, Component jarg2_);
   public final static native boolean ModelComponentIterator_hasComponent(long jarg1, ModelComponentIterator jarg1_, String jarg2);
   public final static native long ModelComponentIterator_getComponent(long jarg1, ModelComponentIterator jarg1_, String jarg2);
@@ -6597,7 +6631,6 @@ public class opensimModelSimulationJNI {
   public final static native void ModelComponentIterator_dumpSubcomponents__SWIG_0(long jarg1, ModelComponentIterator jarg1_, int jarg2);
   public final static native void ModelComponentIterator_dumpSubcomponents__SWIG_1(long jarg1, ModelComponentIterator jarg1_);
   public final static native void ModelComponentIterator_dumpConnections(long jarg1, ModelComponentIterator jarg1_);
-  public final static native long ModelComponentIterator_findConnector(long jarg1, ModelComponentIterator jarg1_, String jarg2);
   public final static native long ModelComponentIterator_getParent(long jarg1, ModelComponentIterator jarg1_);
   public final static native boolean ModelComponentIterator_hasParent(long jarg1, ModelComponentIterator jarg1_);
   public final static native long ModelComponentIterator_getComponentsList(long jarg1, ModelComponentIterator jarg1_);
@@ -6632,8 +6665,7 @@ public class opensimModelSimulationJNI {
   public final static native void delete_JointIterator(long jarg1);
   public final static native long JointIterator_clone(long jarg1, JointIterator jarg1_);
   public final static native String JointIterator_getConcreteClassName(long jarg1, JointIterator jarg1_);
-  public final static native long JointIterator_get_CoordinateSet__SWIG_0(long jarg1, JointIterator jarg1_, int jarg2);
-  public final static native long JointIterator_get_CoordinateSet__SWIG_1(long jarg1, JointIterator jarg1_);
+  public final static native long JointIterator_get_coordinates(long jarg1, JointIterator jarg1_, int jarg2);
   public final static native boolean JointIterator_get_reverse__SWIG_0(long jarg1, JointIterator jarg1_, int jarg2);
   public final static native boolean JointIterator_get_reverse__SWIG_1(long jarg1, JointIterator jarg1_);
   public final static native long JointIterator_get_frames(long jarg1, JointIterator jarg1_, int jarg2);
@@ -6644,7 +6676,7 @@ public class opensimModelSimulationJNI {
   public final static native boolean JointIterator__has_output_reaction_on_child_get(long jarg1, JointIterator jarg1_);
   public final static native long JointIterator_getChildFrame(long jarg1, JointIterator jarg1_);
   public final static native long JointIterator_getParentFrame(long jarg1, JointIterator jarg1_);
-  public final static native long JointIterator_getCoordinateSet(long jarg1, JointIterator jarg1_);
+  public final static native long JointIterator_getCoordinate(long jarg1, JointIterator jarg1_);
   public final static native boolean JointIterator_getReverse(long jarg1, JointIterator jarg1_);
   public final static native int JointIterator_numCoordinates(long jarg1, JointIterator jarg1_);
   public final static native boolean JointIterator_isCoordinateUsed(long jarg1, JointIterator jarg1_, long jarg2, Coordinate jarg2_);
@@ -6658,7 +6690,7 @@ public class opensimModelSimulationJNI {
   public final static native void JointIterator_generateDecorations(long jarg1, JointIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native long JointIterator_getSystem(long jarg1, JointIterator jarg1_);
   public final static native boolean JointIterator_hasSystem(long jarg1, JointIterator jarg1_);
-  public final static native String JointIterator_getFullPathName(long jarg1, JointIterator jarg1_);
+  public final static native String JointIterator_getAbsolutePathName(long jarg1, JointIterator jarg1_);
   public final static native String JointIterator_getRelativePathName(long jarg1, JointIterator jarg1_, long jarg2, Component jarg2_);
   public final static native boolean JointIterator_hasComponent(long jarg1, JointIterator jarg1_, String jarg2);
   public final static native long JointIterator_getComponent(long jarg1, JointIterator jarg1_, String jarg2);
@@ -6689,7 +6721,6 @@ public class opensimModelSimulationJNI {
   public final static native void JointIterator_dumpSubcomponents__SWIG_0(long jarg1, JointIterator jarg1_, int jarg2);
   public final static native void JointIterator_dumpSubcomponents__SWIG_1(long jarg1, JointIterator jarg1_);
   public final static native void JointIterator_dumpConnections(long jarg1, JointIterator jarg1_);
-  public final static native long JointIterator_findConnector(long jarg1, JointIterator jarg1_, String jarg2);
   public final static native long JointIterator_getParent(long jarg1, JointIterator jarg1_);
   public final static native boolean JointIterator_hasParent(long jarg1, JointIterator jarg1_);
   public final static native long JointIterator_getComponentsList(long jarg1, JointIterator jarg1_);
@@ -6757,6 +6788,7 @@ public class opensimModelSimulationJNI {
   public final static native long ModelComponentSetCoordinates_SWIGUpcast(long jarg1);
   public final static native long CoordinateSet_SWIGUpcast(long jarg1);
   public final static native long Joint_SWIGUpcast(long jarg1);
+  public final static native long JointHasNoCoordinates_SWIGUpcast(long jarg1);
   public final static native long SetJoints_SWIGUpcast(long jarg1);
   public final static native long ModelComponentSetJoints_SWIGUpcast(long jarg1);
   public final static native long JointSet_SWIGUpcast(long jarg1);
@@ -6858,6 +6890,7 @@ public class opensimModelSimulationJNI {
   public final static native long GeometryPath_SWIGUpcast(long jarg1);
   public final static native long Ligament_SWIGUpcast(long jarg1);
   public final static native long PathActuator_SWIGUpcast(long jarg1);
+  public final static native long MuscleCannotEquilibrate_SWIGUpcast(long jarg1);
   public final static native long Muscle_SWIGUpcast(long jarg1);
   public final static native long ActivationFiberLengthMuscle_SWIGUpcast(long jarg1);
   public final static native long PointToPointSpring_SWIGUpcast(long jarg1);

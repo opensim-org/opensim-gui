@@ -531,9 +531,9 @@ public class opensimSimbodyJNI {
   public final static native long Rotation_setRotationFromThreeAnglesThreeAxes(long jarg1, Rotation jarg1_, int jarg2, double jarg3, long jarg4, CoordinateAxis jarg4_, double jarg5, long jarg6, CoordinateAxis jarg6_, double jarg7, long jarg8, CoordinateAxis jarg8_);
   public final static native void Rotation_setRotationToBodyFixedXY(long jarg1, Rotation jarg1_, long jarg2, Vec2 jarg2_);
   public final static native void Rotation_setRotationToBodyFixedXYZ__SWIG_0(long jarg1, Rotation jarg1_, long jarg2, Vec3 jarg2_);
-  public final static native long new_Rotation__SWIG_6(long jarg1, boolean jarg2);
-  public final static native long new_Rotation__SWIG_7(long jarg1);
-  public final static native long Rotation_setRotationFromApproximateMat33(long jarg1, Rotation jarg1_, long jarg2);
+  public final static native long new_Rotation__SWIG_6(long jarg1, Mat33 jarg1_, boolean jarg2);
+  public final static native long new_Rotation__SWIG_7(long jarg1, Mat33 jarg1_);
+  public final static native long Rotation_setRotationFromApproximateMat33(long jarg1, Rotation jarg1_, long jarg2, Mat33 jarg2_);
   public final static native double Rotation_convertOneAxisRotationToOneAngle(long jarg1, Rotation jarg1_, long jarg2, CoordinateAxis jarg2_);
   public final static native long Rotation_convertTwoAxesRotationToTwoAngles(long jarg1, Rotation jarg1_, int jarg2, long jarg3, CoordinateAxis jarg3_, long jarg4, CoordinateAxis jarg4_);
   public final static native long Rotation_convertThreeAxesRotationToThreeAngles(long jarg1, Rotation jarg1_, int jarg2, long jarg3, CoordinateAxis jarg3_, long jarg4, CoordinateAxis jarg4_, long jarg5, CoordinateAxis jarg5_);

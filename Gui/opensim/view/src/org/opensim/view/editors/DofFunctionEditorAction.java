@@ -82,7 +82,7 @@ public class DofFunctionEditorAction extends AbstractAction {
 				    if (dof.getCoordinateNamesInArray().getSize() > 0) {
 					//TODO: For now, just get the first coordinate name.
 					String coordName = dof.getCoordinateNamesInArray().getitem(0);
-					Coordinate coord = dof.getJoint().getCoordinateSet().get(coordName);
+					Coordinate coord = dof.getJoint().get_coordinates(0);
 					if (coord != null) {
 					    // Determine the units of the X axis
 					    if (coord.getMotionType() == Coordinate.MotionType.Rotational) {

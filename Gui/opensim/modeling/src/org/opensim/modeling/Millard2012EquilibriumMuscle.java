@@ -273,6 +273,42 @@ public class Millard2012EquilibriumMuscle extends Muscle {
     opensimModelJNI.Millard2012EquilibriumMuscle_set_minimum_activation__SWIG_1(swigCPtr, this, value);
   }
 
+  public void copyProperty_maximum_pennation_angle(Millard2012EquilibriumMuscle source) {
+    opensimModelJNI.Millard2012EquilibriumMuscle_copyProperty_maximum_pennation_angle(swigCPtr, this, Millard2012EquilibriumMuscle.getCPtr(source), source);
+  }
+
+  public double get_maximum_pennation_angle(int i) {
+    return opensimModelJNI.Millard2012EquilibriumMuscle_get_maximum_pennation_angle__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double upd_maximum_pennation_angle(int i) {
+    return new SWIGTYPE_p_double(opensimModelJNI.Millard2012EquilibriumMuscle_upd_maximum_pennation_angle__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_maximum_pennation_angle(int i, double value) {
+    opensimModelJNI.Millard2012EquilibriumMuscle_set_maximum_pennation_angle__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_maximum_pennation_angle(double value) {
+    return opensimModelJNI.Millard2012EquilibriumMuscle_append_maximum_pennation_angle(swigCPtr, this, value);
+  }
+
+  public void constructProperty_maximum_pennation_angle(double initValue) {
+    opensimModelJNI.Millard2012EquilibriumMuscle_constructProperty_maximum_pennation_angle(swigCPtr, this, initValue);
+  }
+
+  public double get_maximum_pennation_angle() {
+    return opensimModelJNI.Millard2012EquilibriumMuscle_get_maximum_pennation_angle__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_double upd_maximum_pennation_angle() {
+    return new SWIGTYPE_p_double(opensimModelJNI.Millard2012EquilibriumMuscle_upd_maximum_pennation_angle__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_maximum_pennation_angle(double value) {
+    opensimModelJNI.Millard2012EquilibriumMuscle_set_maximum_pennation_angle__SWIG_1(swigCPtr, this, value);
+  }
+
   public void copyProperty_ActiveForceLengthCurve(Millard2012EquilibriumMuscle source) {
     opensimModelJNI.Millard2012EquilibriumMuscle_copyProperty_ActiveForceLengthCurve(swigCPtr, this, Millard2012EquilibriumMuscle.getCPtr(source), source);
   }
@@ -417,6 +453,38 @@ public class Millard2012EquilibriumMuscle extends Muscle {
     opensimModelJNI.Millard2012EquilibriumMuscle_set_TendonForceLengthCurve__SWIG_1(swigCPtr, this, TendonForceLengthCurve.getCPtr(value), value);
   }
 
+  public void set_has_output_passive_fiber_elastic_force(boolean value) {
+    opensimModelJNI.Millard2012EquilibriumMuscle__has_output_passive_fiber_elastic_force_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_passive_fiber_elastic_force() {
+    return opensimModelJNI.Millard2012EquilibriumMuscle__has_output_passive_fiber_elastic_force_get(swigCPtr, this);
+  }
+
+  public void set_has_output_passive_fiber_elastic_force_along_tendon(boolean value) {
+    opensimModelJNI.Millard2012EquilibriumMuscle__has_output_passive_fiber_elastic_force_along_tendon_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_passive_fiber_elastic_force_along_tendon() {
+    return opensimModelJNI.Millard2012EquilibriumMuscle__has_output_passive_fiber_elastic_force_along_tendon_get(swigCPtr, this);
+  }
+
+  public void set_has_output_passive_fiber_damping_force(boolean value) {
+    opensimModelJNI.Millard2012EquilibriumMuscle__has_output_passive_fiber_damping_force_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_passive_fiber_damping_force() {
+    return opensimModelJNI.Millard2012EquilibriumMuscle__has_output_passive_fiber_damping_force_get(swigCPtr, this);
+  }
+
+  public void set_has_output_passive_fiber_damping_force_along_tendon(boolean value) {
+    opensimModelJNI.Millard2012EquilibriumMuscle__has_output_passive_fiber_damping_force_along_tendon_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_passive_fiber_damping_force_along_tendon() {
+    return opensimModelJNI.Millard2012EquilibriumMuscle__has_output_passive_fiber_damping_force_along_tendon_get(swigCPtr, this);
+  }
+
   public Millard2012EquilibriumMuscle() {
     this(opensimModelJNI.new_Millard2012EquilibriumMuscle__SWIG_0(), true);
   }
@@ -473,8 +541,8 @@ public class Millard2012EquilibriumMuscle extends Muscle {
     return new MuscleFixedWidthPennationModel(opensimModelJNI.Millard2012EquilibriumMuscle_getPennationModel(swigCPtr, this), false);
   }
 
-  public double getMaximumPennationAngle() {
-    return opensimModelJNI.Millard2012EquilibriumMuscle_getMaximumPennationAngle(swigCPtr, this);
+  public MuscleFirstOrderActivationDynamicModel getActivationModel() {
+    return new MuscleFirstOrderActivationDynamicModel(opensimModelJNI.Millard2012EquilibriumMuscle_getActivationModel(swigCPtr, this), false);
   }
 
   public double getMinimumFiberLength() {
@@ -499,6 +567,22 @@ public class Millard2012EquilibriumMuscle extends Muscle {
 
   public double getActivationDerivative(State s) {
     return opensimModelJNI.Millard2012EquilibriumMuscle_getActivationDerivative(swigCPtr, this, State.getCPtr(s), s);
+  }
+
+  public double getPassiveFiberElasticForce(State s) {
+    return opensimModelJNI.Millard2012EquilibriumMuscle_getPassiveFiberElasticForce(swigCPtr, this, State.getCPtr(s), s);
+  }
+
+  public double getPassiveFiberElasticForceAlongTendon(State s) {
+    return opensimModelJNI.Millard2012EquilibriumMuscle_getPassiveFiberElasticForceAlongTendon(swigCPtr, this, State.getCPtr(s), s);
+  }
+
+  public double getPassiveFiberDampingForce(State s) {
+    return opensimModelJNI.Millard2012EquilibriumMuscle_getPassiveFiberDampingForce(swigCPtr, this, State.getCPtr(s), s);
+  }
+
+  public double getPassiveFiberDampingForceAlongTendon(State s) {
+    return opensimModelJNI.Millard2012EquilibriumMuscle_getPassiveFiberDampingForceAlongTendon(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setMuscleConfiguration(boolean ignoreTendonCompliance, boolean ignoreActivationDynamics, double dampingCoefficient) {

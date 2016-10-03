@@ -214,8 +214,8 @@ public class BodyIterator {
     return opensimModelSimulationJNI.BodyIterator_hasSystem(swigCPtr, this);
   }
 
-  public String getFullPathName() {
-    return opensimModelSimulationJNI.BodyIterator_getFullPathName(swigCPtr, this);
+  public String getAbsolutePathName() {
+    return opensimModelSimulationJNI.BodyIterator_getAbsolutePathName(swigCPtr, this);
   }
 
   public String getRelativePathName(Component wrt) {
@@ -336,11 +336,6 @@ public class BodyIterator {
 
   public void dumpConnections() {
     opensimModelSimulationJNI.BodyIterator_dumpConnections(swigCPtr, this);
-  }
-
-  public AbstractConnector findConnector(String name) {
-    long cPtr = opensimModelSimulationJNI.BodyIterator_findConnector(swigCPtr, this, name);
-    return (cPtr == 0) ? null : new AbstractConnector(cPtr, false);
   }
 
   public Component getParent() {

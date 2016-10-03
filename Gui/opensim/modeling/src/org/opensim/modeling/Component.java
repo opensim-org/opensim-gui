@@ -102,8 +102,8 @@ public class Component extends OpenSimObject {
     opensimModelCommonJNI.Component_private_addComponent(swigCPtr, this, Component.getCPtr(subcomponent), subcomponent);
   }
 
-  public String getFullPathName() {
-    return opensimModelCommonJNI.Component_getFullPathName(swigCPtr, this);
+  public String getAbsolutePathName() {
+    return opensimModelCommonJNI.Component_getAbsolutePathName(swigCPtr, this);
   }
 
   public String getRelativePathName(Component wrt) {
@@ -252,11 +252,6 @@ public class Component extends OpenSimObject {
 
   public void dumpConnections() {
     opensimModelCommonJNI.Component_dumpConnections(swigCPtr, this);
-  }
-
-  public AbstractConnector findConnector(String name) {
-    long cPtr = opensimModelCommonJNI.Component_findConnector(swigCPtr, this, name);
-    return (cPtr == 0) ? null : new AbstractConnector(cPtr, false);
   }
 
   public Component getParent() {

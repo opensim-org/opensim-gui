@@ -85,7 +85,7 @@ public class VisualizationJson {
         model_json.put("uuid", UUID.randomUUID().toString());
         model_json.put("type", "Group");
         model_json.put("opensimtype", "Frame");
-        model_json.put("name", model.getGround().getFullPathName());
+        model_json.put("name", model.getGround().getAbsolutePathName());
         model_json.put("model_ground", true);
         //System.out.println(model_json.toJSONString());
         JSONArray bodies_json = new JSONArray();
@@ -132,7 +132,7 @@ public class VisualizationJson {
         ArrayList<UUID> vis_uuidList = new ArrayList<UUID>(1);
         for (int idx = 0; idx < adg.size(); idx++) {
             dg = adg.getElt(idx);
-            String geomId = comp.getFullPathName();
+            String geomId = comp.getAbsolutePathName();
             if (adg.size()>1)
                 geomId = geomId.concat(GEOMETRY_SEP+String.valueOf(dg.getIndexOnBody()));
             UUID uuid = UUID.randomUUID();
@@ -148,7 +148,7 @@ public class VisualizationJson {
             mapUUIDToComponent.put(uuid_mesh, comp);
         }
         mapComponentToUUID.put(comp, vis_uuidList);
-        System.out.println("Map component="+comp.getFullPathName()+" to "+vis_uuidList.size());   
+        System.out.println("Map component="+comp.getAbsolutePathName()+" to "+vis_uuidList.size());   
  
     }
 
@@ -199,7 +199,7 @@ public class VisualizationJson {
         bdyJson.put("uuid", UUID.randomUUID().toString());
         bdyJson.put("type", "Group");
         bdyJson.put("opensimtype", "Frame");
-        bdyJson.put("name", body.getFullPathName());
+        bdyJson.put("name", body.getAbsolutePathName());
         PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(body.getMobilizedBodyIndex());
         Transform bodyXform = bodyFrame.getTransformInGround(state);
         bdyJson.put("matrix", JSONUtilities.createMatrixFromTransform(bodyXform, vec3Unit, visScaleFactor));
@@ -289,9 +289,9 @@ public class VisualizationJson {
         // Create material for path
         Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
         UUID mat_uuid = UUID.randomUUID();
-        mapPathMaterialToUUID.put(path.getFullPathName(), mat_uuid);
+        mapPathMaterialToUUID.put(path.getAbsolutePathName(), mat_uuid);
         mat_json.put("uuid", mat_uuid.toString());
-        mat_json.put("name", path.getFullPathName()+"Mat");
+        mat_json.put("name", path.getAbsolutePathName()+"Mat");
         mat_json.put("type", "MeshBasicMaterial");
         String colorString = JSONUtilities.mapColorToRGBA(new Vec3(0.62, 0.31, 0.31));
         mat_json.put("color", colorString);
@@ -317,7 +317,7 @@ public class VisualizationJson {
         UUID mesh_uuid = UUID.randomUUID();
         obj_json.put("uuid", mesh_uuid.toString());
         obj_json.put("type", "GeometryPath");
-        obj_json.put("name", path.getFullPathName());
+        obj_json.put("name", path.getAbsolutePathName());
         obj_json.put("points", pathpoint_jsonArr);
         obj_json.put("opensimType", "Path");
         gndChildren.add(obj_json);
@@ -363,14 +363,14 @@ public class VisualizationJson {
          unitQuaternion.add(1.0);
          Map<String, Object> groundBone_json = new LinkedHashMap<String, Object>();
          groundBone_json.put("parent", -1);
-         groundBone_json.put("name", model.getGround().getFullPathName()+boneSuffix);
+         groundBone_json.put("name", model.getGround().getAbsolutePathName()+boneSuffix);
          groundBone_json.put("pos", posVec3);
          groundBone_json.put("rotq", unitQuaternion);
          UUID bone_uuid = UUID.randomUUID();
          bones_json.add(groundBone_json);
          while (!body.equals(bodies.end())) {
             Map<String, Object> obj_json = new LinkedHashMap<String, Object>();
-            obj_json.put("name", body.getFullPathName()+boneSuffix);
+            obj_json.put("name", body.getAbsolutePathName()+boneSuffix);
             obj_json.put("parent", 0);
             Transform xform = body.findTransformBetween(state, model.get_ground());
             Vec3 pos = xform.p();

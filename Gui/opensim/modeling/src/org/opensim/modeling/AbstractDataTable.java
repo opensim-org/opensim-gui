@@ -51,6 +51,10 @@ public class AbstractDataTable {
     return new StdVectorString(opensimModelCommonJNI.AbstractDataTable_getTableMetaDataKeys(swigCPtr, this), true);
   }
 
+  public boolean hasColumnLabels() {
+    return opensimModelCommonJNI.AbstractDataTable_hasColumnLabels(swigCPtr, this);
+  }
+
   public StdVectorString getColumnLabels() {
     return new StdVectorString(opensimModelCommonJNI.AbstractDataTable_getColumnLabels(swigCPtr, this), true);
   }

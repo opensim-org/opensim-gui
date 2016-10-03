@@ -30,7 +30,7 @@ public class OneComponentNode extends OpenSimObjectNode {
     public OneComponentNode(OpenSimObject obj) {
         super(obj);
         comp = Component.safeDownCast(obj);
-        setShortDescription(comp.getFullPathName());
+        setShortDescription(comp.getAbsolutePathName());
     }
 
     public Action[] getActions(boolean b) {

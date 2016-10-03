@@ -70,7 +70,7 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
         String gName=cg.getName();
         if (cg.getName().equalsIgnoreCase("")){
             gName=cg.getName();
-            setDisplayName(cg.getFullPathName());
+            setDisplayName(cg.getAbsolutePathName());
             setName(cg.getName());
         }
         setChildren(Children.LEAF);

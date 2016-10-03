@@ -25,7 +25,7 @@ public class OneBodyNode extends OneFrameNode{
       super(Frame.safeDownCast(b));
       // Create children for wrap objects associated with body
       Body bdy = (Body) b;
-      setShortDescription(bdy.getFullPathName());
+      setShortDescription(bdy.getAbsolutePathName());
       Children children = getChildren();
       // Create nodes for wrap objects      
       WrapObjectSet wrapObjects = bdy.getWrapObjectSet();

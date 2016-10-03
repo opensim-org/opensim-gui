@@ -177,8 +177,8 @@ public class ContactGeometry extends ModelComponent {
     return new PhysicalFrame(opensimModelSimulationJNI.ContactGeometry_getFrame(swigCPtr, this), false);
   }
 
-  public void setFrame(PhysicalFrame body) {
-    opensimModelSimulationJNI.ContactGeometry_setFrame(swigCPtr, this, PhysicalFrame.getCPtr(body), body);
+  public void setFrame(PhysicalFrame frame) {
+    opensimModelSimulationJNI.ContactGeometry_setFrame(swigCPtr, this, PhysicalFrame.getCPtr(frame), frame);
   }
 
   public SWIGTYPE_p_SimTK__ContactGeometry createSimTKContactGeometry() {
