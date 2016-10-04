@@ -35,6 +35,16 @@ public class PrescribedController extends Controller {
     super.delete();
   }
 
+    public void prescribeControlForActuator(int index, Function prescribedFunction) {
+       prescribedFunction.markAdopted();
+       prescribeControlForActuator_private(index, prescribedFunction);
+    }
+    
+    public void prescribeControlForActuator(String name, Function prescribedFunction) {
+       prescribedFunction.markAdopted();
+       prescribeControlForActuator_private(name, prescribedFunction);
+    }
+
   public static PrescribedController safeDownCast(OpenSimObject obj) {
     long cPtr = opensimModelSimulationJNI.PrescribedController_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new PrescribedController(cPtr, false);
@@ -189,12 +199,12 @@ public class PrescribedController extends Controller {
     opensimModelSimulationJNI.PrescribedController_computeControls(swigCPtr, this, State.getCPtr(s), s, Vector.getCPtr(controls), controls);
   }
 
-  public void prescribeControlForActuator(int index, Function prescribedFunction) {
-    opensimModelSimulationJNI.PrescribedController_prescribeControlForActuator__SWIG_0(swigCPtr, this, index, Function.getCPtr(prescribedFunction), prescribedFunction);
+  public void prescribeControlForActuator_private(int index, Function prescribedFunction) {
+    opensimModelSimulationJNI.PrescribedController_prescribeControlForActuator_private__SWIG_0(swigCPtr, this, index, Function.getCPtr(prescribedFunction), prescribedFunction);
   }
 
-  public void prescribeControlForActuator(String actName, Function prescribedFunction) {
-    opensimModelSimulationJNI.PrescribedController_prescribeControlForActuator__SWIG_1(swigCPtr, this, actName, Function.getCPtr(prescribedFunction), prescribedFunction);
+  public void prescribeControlForActuator_private(String actName, Function prescribedFunction) {
+    opensimModelSimulationJNI.PrescribedController_prescribeControlForActuator_private__SWIG_1(swigCPtr, this, actName, Function.getCPtr(prescribedFunction), prescribedFunction);
   }
 
 }
