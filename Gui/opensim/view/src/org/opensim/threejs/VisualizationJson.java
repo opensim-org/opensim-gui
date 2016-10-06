@@ -87,6 +87,7 @@ public class VisualizationJson {
         model_json.put("opensimtype", "Frame");
         model_json.put("name", model.getGround().getAbsolutePathName());
         model_json.put("model_ground", true);
+        model_json.put("userData", "NonEditable");
         //System.out.println(model_json.toJSONString());
         JSONArray bodies_json = new JSONArray();
         model_json.put("children", bodies_json);
@@ -181,7 +182,8 @@ public class VisualizationJson {
         obj_json.put("geometry", uuid.toString());
         obj_json.put("material", uuid_mat.toString());
         obj_json.put("matrix", JSONUtilities.createMatrixFromTransform(dg.getTransform(), dg.getScaleFactors(), visScaleFactor));
-        obj_json.put("castShadow", false);
+        obj_json.put("castShadow", true);
+        obj_json.put("userData", "NonEditable");
         mobody_objects.add(obj_json);
         return mesh_uuid;
     }
@@ -200,6 +202,7 @@ public class VisualizationJson {
         bdyJson.put("type", "Group");
         bdyJson.put("opensimtype", "Frame");
         bdyJson.put("name", body.getAbsolutePathName());
+        bdyJson.put("userData", "NonEditable");
         PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(body.getMobilizedBodyIndex());
         Transform bodyXform = bodyFrame.getTransformInGround(state);
         bdyJson.put("matrix", JSONUtilities.createMatrixFromTransform(bodyXform, vec3Unit, visScaleFactor));
