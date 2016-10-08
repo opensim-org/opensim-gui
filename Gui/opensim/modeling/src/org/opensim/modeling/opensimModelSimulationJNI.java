@@ -3229,8 +3229,8 @@ public class opensimModelSimulationJNI {
   public final static native long new_PrescribedController__SWIG_2(String jarg1);
   public final static native void delete_PrescribedController(long jarg1);
   public final static native void PrescribedController_computeControls(long jarg1, PrescribedController jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
-  public final static native void PrescribedController_prescribeControlForActuator_private__SWIG_0(long jarg1, PrescribedController jarg1_, int jarg2, long jarg3, Function jarg3_);
-  public final static native void PrescribedController_prescribeControlForActuator_private__SWIG_1(long jarg1, PrescribedController jarg1_, String jarg2, long jarg3, Function jarg3_);
+  public final static native void PrescribedController_prescribeControlForActuator__SWIG_0(long jarg1, PrescribedController jarg1_, int jarg2, long jarg3, Function jarg3_);
+  public final static native void PrescribedController_prescribeControlForActuator__SWIG_1(long jarg1, PrescribedController jarg1_, String jarg2, long jarg3, Function jarg3_);
   public final static native long new_Manager__SWIG_0(long jarg1, Model jarg1_, long jarg2);
   public final static native long new_Manager__SWIG_1(long jarg1, Model jarg1_);
   public final static native long new_Manager__SWIG_2();
@@ -4707,7 +4707,7 @@ public class opensimModelSimulationJNI {
   public final static native void Model_realizeReport(long jarg1, Model jarg1_, long jarg2, State jarg2_);
   public final static native void Model_private_addModelComponent(long jarg1, Model jarg1_, long jarg2, ModelComponent jarg2_);
   public final static native void Model_private_addBody(long jarg1, Model jarg1_, long jarg2, Body jarg2_);
-  public final static native void Model_private_addJoint(long jarg1, Model jarg1_, long jarg2, Joint jarg2_);
+  public final static native void Model_addJoint(long jarg1, Model jarg1_, long jarg2, Joint jarg2_);
   public final static native void Model_private_addConstraint(long jarg1, Model jarg1_, long jarg2, Constraint jarg2_);
   public final static native void Model_private_addForce(long jarg1, Model jarg1_, long jarg2, Force jarg2_);
   public final static native void Model_private_addProbe(long jarg1, Model jarg1_, long jarg2, Probe jarg2_);

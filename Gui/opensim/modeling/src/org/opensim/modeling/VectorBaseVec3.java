@@ -75,14 +75,6 @@ public class VectorBaseVec3 extends MatrixBaseVec3 {
     return new Vec3(opensimSimbodyJNI.VectorBaseVec3_sum(swigCPtr, this), true);
   }
 
-  public Vec3 get(long i) {
-    return new Vec3(opensimSimbodyJNI.VectorBaseVec3_get(swigCPtr, this, i), true);
-  }
-
-  public Vec3 set(long i, Vec3 value) {
-    return new Vec3(opensimSimbodyJNI.VectorBaseVec3_set(swigCPtr, this, i, Vec3.getCPtr(value), value), true);
-  }
-
   public Vec3 __getitem__(long i) {
     return new Vec3(opensimSimbodyJNI.VectorBaseVec3___getitem__(swigCPtr, this, i), true);
   }

@@ -35,12 +35,12 @@ public class DecorativeMesh extends DecorativeGeometry {
     super.delete();
   }
 
-  public DecorativeMesh(SWIGTYPE_p_PolygonalMesh mesh) {
-    this(opensimSimbodyJNI.new_DecorativeMesh(SWIGTYPE_p_PolygonalMesh.getCPtr(mesh)), true);
+  public DecorativeMesh(PolygonalMesh mesh) {
+    this(opensimSimbodyJNI.new_DecorativeMesh(PolygonalMesh.getCPtr(mesh), mesh), true);
   }
 
-  public SWIGTYPE_p_PolygonalMesh getMesh() {
-    return new SWIGTYPE_p_PolygonalMesh(opensimSimbodyJNI.DecorativeMesh_getMesh(swigCPtr, this), false);
+  public PolygonalMesh getMesh() {
+    return new PolygonalMesh(opensimSimbodyJNI.DecorativeMesh_getMesh(swigCPtr, this), false);
   }
 
   public DecorativeMesh setBodyId(int b) {

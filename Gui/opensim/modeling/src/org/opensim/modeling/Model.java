@@ -100,11 +100,6 @@ public class Model extends ModelComponent {
       private_addController(aController);
   }
 
-  public void addJoint(Joint aJoint) {
-      aJoint.markAdopted();
-      private_addJoint(aJoint);
-  }
-
   public static Model safeDownCast(OpenSimObject obj) {
     long cPtr = opensimModelSimulationJNI.Model_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Model(cPtr, false);
@@ -995,8 +990,8 @@ public class Model extends ModelComponent {
     opensimModelSimulationJNI.Model_private_addBody(swigCPtr, this, Body.getCPtr(adoptee), adoptee);
   }
 
-  private void private_addJoint(Joint adoptee) {
-    opensimModelSimulationJNI.Model_private_addJoint(swigCPtr, this, Joint.getCPtr(adoptee), adoptee);
+  public void addJoint(Joint adoptee) {
+    opensimModelSimulationJNI.Model_addJoint(swigCPtr, this, Joint.getCPtr(adoptee), adoptee);
   }
 
   private void private_addConstraint(Constraint adoptee) {

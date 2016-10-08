@@ -99,14 +99,6 @@ public class RowVectorBaseVec3 extends MatrixBaseVec3 {
     return new SWIGTYPE_p_VectorIteratorT_SimTK__VecT_3_double_1_t_SimTK__RowVectorBaseT_SimTK__VecT_3_double_1_t_t_t(opensimSimbodyJNI.RowVectorBaseVec3_end(swigCPtr, this), true);
   }
 
-  public Vec3 get(long i) {
-    return new Vec3(opensimSimbodyJNI.RowVectorBaseVec3_get(swigCPtr, this, i), true);
-  }
-
-  public Vec3 set(long i, Vec3 value) {
-    return new Vec3(opensimSimbodyJNI.RowVectorBaseVec3_set(swigCPtr, this, i, Vec3.getCPtr(value), value), true);
-  }
-
   public Vec3 __getitem__(long i) {
     return new Vec3(opensimSimbodyJNI.RowVectorBaseVec3___getitem__(swigCPtr, this, i), true);
   }

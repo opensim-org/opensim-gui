@@ -75,14 +75,6 @@ public class VectorBaseDouble extends MatrixBaseDouble {
     return opensimSimbodyJNI.VectorBaseDouble_sum(swigCPtr, this);
   }
 
-  public double get(long i) {
-    return opensimSimbodyJNI.VectorBaseDouble_get(swigCPtr, this, i);
-  }
-
-  public double set(long i, double value) {
-    return opensimSimbodyJNI.VectorBaseDouble_set(swigCPtr, this, i, value);
-  }
-
   public double __getitem__(long i) {
     return opensimSimbodyJNI.VectorBaseDouble___getitem__(swigCPtr, this, i);
   }

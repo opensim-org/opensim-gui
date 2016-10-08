@@ -106,6 +106,8 @@ public class VisualizationJson {
         dgimp = new DecorativeGeometryImplementationJS(json_geometries, json_materials, visScaleFactor);
         while (!mcIter.equals(mcList.end())) {
             Component comp = mcIter.__deref__();
+            System.out.println("Processing generateDecorations for "
+                    +comp.getAbsolutePathName()+" of type:"+comp.getConcreteClassName());
             ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
             comp.generateDecorations(true, mdh, model.getWorkingState(), adg);
             if (adg.size() > 0) {
@@ -177,7 +179,7 @@ public class VisualizationJson {
         Map<String, Object> obj_json = new LinkedHashMap<String, Object>();
         UUID mesh_uuid = UUID.randomUUID();
         obj_json.put("uuid", mesh_uuid.toString());
-        obj_json.put("type", "Mesh");
+                obj_json.put("type", "Mesh");
         obj_json.put("name", geomName);
         obj_json.put("geometry", uuid.toString());
         obj_json.put("material", uuid_mat.toString());
