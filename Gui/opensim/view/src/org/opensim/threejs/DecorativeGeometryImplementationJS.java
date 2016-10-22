@@ -225,11 +225,10 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
         dg_json.put("uuid", geomID.toString());
         setRepresentationInJson(arg0, dg_json);
-        dg_json.put("type", "SphereGeometry");
-        dg_json.put("radius", .00005*visualizerScaleFactor);
+        dg_json.put("type", "Frame");
         dg_json.put("size", arg0.getAxisLength()*visualizerScaleFactor);
         jsonArr.add(dg_json);    
-        createMaterialJson(arg0, false);
+        //createMaterialJson(arg0, false);
     }
 
     @Override
