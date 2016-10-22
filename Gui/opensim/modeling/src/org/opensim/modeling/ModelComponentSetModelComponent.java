@@ -77,6 +77,22 @@ public class ModelComponentSetModelComponent extends SetModelComponents {
     this(opensimModelSimulationJNI.new_ModelComponentSetModelComponent__SWIG_4(ModelComponentSetModelComponent.getCPtr(source), source), true);
   }
 
+  public boolean hasModel() {
+    return opensimModelSimulationJNI.ModelComponentSetModelComponent_hasModel(swigCPtr, this);
+  }
+
+  public Model getModel() {
+    return new Model(opensimModelSimulationJNI.ModelComponentSetModelComponent_getModel(swigCPtr, this), false);
+  }
+
+  public Model updModel() {
+    return new Model(opensimModelSimulationJNI.ModelComponentSetModelComponent_updModel(swigCPtr, this), false);
+  }
+
+  public void setModel(Model model) {
+    opensimModelSimulationJNI.ModelComponentSetModelComponent_setModel(swigCPtr, this, Model.getCPtr(model), model);
+  }
+
   public boolean insert(int aIndex, ModelComponent aObject) {
     return opensimModelSimulationJNI.ModelComponentSetModelComponent_insert(swigCPtr, this, aIndex, ModelComponent.getCPtr(aObject), aObject);
   }

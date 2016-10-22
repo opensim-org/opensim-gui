@@ -446,6 +446,10 @@ public class opensimModelSimulationJNI {
   public final static native long new_ModelComponentSetModelComponent__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ModelComponentSetModelComponent__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ModelComponentSetModelComponent__SWIG_4(long jarg1, ModelComponentSetModelComponent jarg1_);
+  public final static native boolean ModelComponentSetModelComponent_hasModel(long jarg1, ModelComponentSetModelComponent jarg1_);
+  public final static native long ModelComponentSetModelComponent_getModel(long jarg1, ModelComponentSetModelComponent jarg1_);
+  public final static native long ModelComponentSetModelComponent_updModel(long jarg1, ModelComponentSetModelComponent jarg1_);
+  public final static native void ModelComponentSetModelComponent_setModel(long jarg1, ModelComponentSetModelComponent jarg1_, long jarg2, Model jarg2_);
   public final static native boolean ModelComponentSetModelComponent_insert(long jarg1, ModelComponentSetModelComponent jarg1_, int jarg2, long jarg3, ModelComponent jarg3_);
   public final static native boolean ModelComponentSetModelComponent_set__SWIG_0(long jarg1, ModelComponentSetModelComponent jarg1_, int jarg2, long jarg3, ModelComponent jarg3_, boolean jarg4);
   public final static native boolean ModelComponentSetModelComponent_set__SWIG_1(long jarg1, ModelComponentSetModelComponent jarg1_, int jarg2, long jarg3, ModelComponent jarg3_);
@@ -795,6 +799,10 @@ public class opensimModelSimulationJNI {
   public final static native long new_ModelComponentSetFrames__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ModelComponentSetFrames__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ModelComponentSetFrames__SWIG_4(long jarg1, ModelComponentSetFrames jarg1_);
+  public final static native boolean ModelComponentSetFrames_hasModel(long jarg1, ModelComponentSetFrames jarg1_);
+  public final static native long ModelComponentSetFrames_getModel(long jarg1, ModelComponentSetFrames jarg1_);
+  public final static native long ModelComponentSetFrames_updModel(long jarg1, ModelComponentSetFrames jarg1_);
+  public final static native void ModelComponentSetFrames_setModel(long jarg1, ModelComponentSetFrames jarg1_, long jarg2, Model jarg2_);
   public final static native boolean ModelComponentSetFrames_insert(long jarg1, ModelComponentSetFrames jarg1_, int jarg2, long jarg3, Frame jarg3_);
   public final static native boolean ModelComponentSetFrames_set__SWIG_0(long jarg1, ModelComponentSetFrames jarg1_, int jarg2, long jarg3, Frame jarg3_, boolean jarg4);
   public final static native boolean ModelComponentSetFrames_set__SWIG_1(long jarg1, ModelComponentSetFrames jarg1_, int jarg2, long jarg3, Frame jarg3_);
@@ -911,6 +919,10 @@ public class opensimModelSimulationJNI {
   public final static native long new_ModelComponentSetBodies__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ModelComponentSetBodies__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ModelComponentSetBodies__SWIG_4(long jarg1, ModelComponentSetBodies jarg1_);
+  public final static native boolean ModelComponentSetBodies_hasModel(long jarg1, ModelComponentSetBodies jarg1_);
+  public final static native long ModelComponentSetBodies_getModel(long jarg1, ModelComponentSetBodies jarg1_);
+  public final static native long ModelComponentSetBodies_updModel(long jarg1, ModelComponentSetBodies jarg1_);
+  public final static native void ModelComponentSetBodies_setModel(long jarg1, ModelComponentSetBodies jarg1_, long jarg2, Model jarg2_);
   public final static native boolean ModelComponentSetBodies_insert(long jarg1, ModelComponentSetBodies jarg1_, int jarg2, long jarg3, Body jarg3_);
   public final static native boolean ModelComponentSetBodies_set__SWIG_0(long jarg1, ModelComponentSetBodies jarg1_, int jarg2, long jarg3, Body jarg3_, boolean jarg4);
   public final static native boolean ModelComponentSetBodies_set__SWIG_1(long jarg1, ModelComponentSetBodies jarg1_, int jarg2, long jarg3, Body jarg3_);
@@ -1323,6 +1335,10 @@ public class opensimModelSimulationJNI {
   public final static native long new_ModelComponentSetCoordinates__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ModelComponentSetCoordinates__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ModelComponentSetCoordinates__SWIG_4(long jarg1, ModelComponentSetCoordinates jarg1_);
+  public final static native boolean ModelComponentSetCoordinates_hasModel(long jarg1, ModelComponentSetCoordinates jarg1_);
+  public final static native long ModelComponentSetCoordinates_getModel(long jarg1, ModelComponentSetCoordinates jarg1_);
+  public final static native long ModelComponentSetCoordinates_updModel(long jarg1, ModelComponentSetCoordinates jarg1_);
+  public final static native void ModelComponentSetCoordinates_setModel(long jarg1, ModelComponentSetCoordinates jarg1_, long jarg2, Model jarg2_);
   public final static native boolean ModelComponentSetCoordinates_insert(long jarg1, ModelComponentSetCoordinates jarg1_, int jarg2, long jarg3, Coordinate jarg3_);
   public final static native boolean ModelComponentSetCoordinates_set__SWIG_0(long jarg1, ModelComponentSetCoordinates jarg1_, int jarg2, long jarg3, Coordinate jarg3_, boolean jarg4);
   public final static native boolean ModelComponentSetCoordinates_set__SWIG_1(long jarg1, ModelComponentSetCoordinates jarg1_, int jarg2, long jarg3, Coordinate jarg3_);
@@ -1444,6 +1460,10 @@ public class opensimModelSimulationJNI {
   public final static native long new_ModelComponentSetJoints__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ModelComponentSetJoints__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ModelComponentSetJoints__SWIG_4(long jarg1, ModelComponentSetJoints jarg1_);
+  public final static native boolean ModelComponentSetJoints_hasModel(long jarg1, ModelComponentSetJoints jarg1_);
+  public final static native long ModelComponentSetJoints_getModel(long jarg1, ModelComponentSetJoints jarg1_);
+  public final static native long ModelComponentSetJoints_updModel(long jarg1, ModelComponentSetJoints jarg1_);
+  public final static native void ModelComponentSetJoints_setModel(long jarg1, ModelComponentSetJoints jarg1_, long jarg2, Model jarg2_);
   public final static native boolean ModelComponentSetJoints_insert(long jarg1, ModelComponentSetJoints jarg1_, int jarg2, long jarg3, Joint jarg3_);
   public final static native boolean ModelComponentSetJoints_set__SWIG_0(long jarg1, ModelComponentSetJoints jarg1_, int jarg2, long jarg3, Joint jarg3_, boolean jarg4);
   public final static native boolean ModelComponentSetJoints_set__SWIG_1(long jarg1, ModelComponentSetJoints jarg1_, int jarg2, long jarg3, Joint jarg3_);
@@ -1536,6 +1556,10 @@ public class opensimModelSimulationJNI {
   public final static native long new_ModelComponentSetConstraints__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ModelComponentSetConstraints__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ModelComponentSetConstraints__SWIG_4(long jarg1, ModelComponentSetConstraints jarg1_);
+  public final static native boolean ModelComponentSetConstraints_hasModel(long jarg1, ModelComponentSetConstraints jarg1_);
+  public final static native long ModelComponentSetConstraints_getModel(long jarg1, ModelComponentSetConstraints jarg1_);
+  public final static native long ModelComponentSetConstraints_updModel(long jarg1, ModelComponentSetConstraints jarg1_);
+  public final static native void ModelComponentSetConstraints_setModel(long jarg1, ModelComponentSetConstraints jarg1_, long jarg2, Model jarg2_);
   public final static native boolean ModelComponentSetConstraints_insert(long jarg1, ModelComponentSetConstraints jarg1_, int jarg2, long jarg3, Constraint jarg3_);
   public final static native boolean ModelComponentSetConstraints_set__SWIG_0(long jarg1, ModelComponentSetConstraints jarg1_, int jarg2, long jarg3, Constraint jarg3_, boolean jarg4);
   public final static native boolean ModelComponentSetConstraints_set__SWIG_1(long jarg1, ModelComponentSetConstraints jarg1_, int jarg2, long jarg3, Constraint jarg3_);
@@ -1628,6 +1652,10 @@ public class opensimModelSimulationJNI {
   public final static native long new_ModelComponentSetForces__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ModelComponentSetForces__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ModelComponentSetForces__SWIG_4(long jarg1, ModelComponentSetForces jarg1_);
+  public final static native boolean ModelComponentSetForces_hasModel(long jarg1, ModelComponentSetForces jarg1_);
+  public final static native long ModelComponentSetForces_getModel(long jarg1, ModelComponentSetForces jarg1_);
+  public final static native long ModelComponentSetForces_updModel(long jarg1, ModelComponentSetForces jarg1_);
+  public final static native void ModelComponentSetForces_setModel(long jarg1, ModelComponentSetForces jarg1_, long jarg2, Model jarg2_);
   public final static native boolean ModelComponentSetForces_insert(long jarg1, ModelComponentSetForces jarg1_, int jarg2, long jarg3, Force jarg3_);
   public final static native boolean ModelComponentSetForces_set__SWIG_0(long jarg1, ModelComponentSetForces jarg1_, int jarg2, long jarg3, Force jarg3_, boolean jarg4);
   public final static native boolean ModelComponentSetForces_set__SWIG_1(long jarg1, ModelComponentSetForces jarg1_, int jarg2, long jarg3, Force jarg3_);
@@ -2235,6 +2263,10 @@ public class opensimModelSimulationJNI {
   public final static native long new_ModelComponentSetControllers__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ModelComponentSetControllers__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ModelComponentSetControllers__SWIG_4(long jarg1, ModelComponentSetControllers jarg1_);
+  public final static native boolean ModelComponentSetControllers_hasModel(long jarg1, ModelComponentSetControllers jarg1_);
+  public final static native long ModelComponentSetControllers_getModel(long jarg1, ModelComponentSetControllers jarg1_);
+  public final static native long ModelComponentSetControllers_updModel(long jarg1, ModelComponentSetControllers jarg1_);
+  public final static native void ModelComponentSetControllers_setModel(long jarg1, ModelComponentSetControllers jarg1_, long jarg2, Model jarg2_);
   public final static native boolean ModelComponentSetControllers_insert(long jarg1, ModelComponentSetControllers jarg1_, int jarg2, long jarg3, Controller jarg3_);
   public final static native boolean ModelComponentSetControllers_set__SWIG_0(long jarg1, ModelComponentSetControllers jarg1_, int jarg2, long jarg3, Controller jarg3_, boolean jarg4);
   public final static native boolean ModelComponentSetControllers_set__SWIG_1(long jarg1, ModelComponentSetControllers jarg1_, int jarg2, long jarg3, Controller jarg3_);
@@ -2273,6 +2305,10 @@ public class opensimModelSimulationJNI {
   public final static native long new_ModelComponentSetExternalForces__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ModelComponentSetExternalForces__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ModelComponentSetExternalForces__SWIG_4(long jarg1, ModelComponentSetExternalForces jarg1_);
+  public final static native boolean ModelComponentSetExternalForces_hasModel(long jarg1, ModelComponentSetExternalForces jarg1_);
+  public final static native long ModelComponentSetExternalForces_getModel(long jarg1, ModelComponentSetExternalForces jarg1_);
+  public final static native long ModelComponentSetExternalForces_updModel(long jarg1, ModelComponentSetExternalForces jarg1_);
+  public final static native void ModelComponentSetExternalForces_setModel(long jarg1, ModelComponentSetExternalForces jarg1_, long jarg2, Model jarg2_);
   public final static native boolean ModelComponentSetExternalForces_insert(long jarg1, ModelComponentSetExternalForces jarg1_, int jarg2, long jarg3, ExternalForce jarg3_);
   public final static native boolean ModelComponentSetExternalForces_set__SWIG_0(long jarg1, ModelComponentSetExternalForces jarg1_, int jarg2, long jarg3, ExternalForce jarg3_, boolean jarg4);
   public final static native boolean ModelComponentSetExternalForces_set__SWIG_1(long jarg1, ModelComponentSetExternalForces jarg1_, int jarg2, long jarg3, ExternalForce jarg3_);
@@ -2602,6 +2638,10 @@ public class opensimModelSimulationJNI {
   public final static native long new_ModelComponentSetContactGeometry__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ModelComponentSetContactGeometry__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ModelComponentSetContactGeometry__SWIG_4(long jarg1, ModelComponentSetContactGeometry jarg1_);
+  public final static native boolean ModelComponentSetContactGeometry_hasModel(long jarg1, ModelComponentSetContactGeometry jarg1_);
+  public final static native long ModelComponentSetContactGeometry_getModel(long jarg1, ModelComponentSetContactGeometry jarg1_);
+  public final static native long ModelComponentSetContactGeometry_updModel(long jarg1, ModelComponentSetContactGeometry jarg1_);
+  public final static native void ModelComponentSetContactGeometry_setModel(long jarg1, ModelComponentSetContactGeometry jarg1_, long jarg2, Model jarg2_);
   public final static native boolean ModelComponentSetContactGeometry_insert(long jarg1, ModelComponentSetContactGeometry jarg1_, int jarg2, long jarg3, ContactGeometry jarg3_);
   public final static native boolean ModelComponentSetContactGeometry_set__SWIG_0(long jarg1, ModelComponentSetContactGeometry jarg1_, int jarg2, long jarg3, ContactGeometry jarg3_, boolean jarg4);
   public final static native boolean ModelComponentSetContactGeometry_set__SWIG_1(long jarg1, ModelComponentSetContactGeometry jarg1_, int jarg2, long jarg3, ContactGeometry jarg3_);
@@ -2630,6 +2670,7 @@ public class opensimModelSimulationJNI {
   public final static native long new_ContactHalfSpace__SWIG_1(long jarg1, Vec3 jarg1_, long jarg2, Vec3 jarg2_, long jarg3, PhysicalFrame jarg3_);
   public final static native long new_ContactHalfSpace__SWIG_2(long jarg1, Vec3 jarg1_, long jarg2, Vec3 jarg2_, long jarg3, PhysicalFrame jarg3_, String jarg4);
   public final static native long ContactHalfSpace_createSimTKContactGeometry(long jarg1, ContactHalfSpace jarg1_);
+  public final static native void ContactHalfSpace_generateDecorations(long jarg1, ContactHalfSpace jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native void delete_ContactHalfSpace(long jarg1);
   public final static native long ContactMesh_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void ContactMesh_assign(long jarg1, ContactMesh jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -3229,8 +3270,8 @@ public class opensimModelSimulationJNI {
   public final static native long new_PrescribedController__SWIG_2(String jarg1);
   public final static native void delete_PrescribedController(long jarg1);
   public final static native void PrescribedController_computeControls(long jarg1, PrescribedController jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
-  public final static native void PrescribedController_prescribeControlForActuator__SWIG_0(long jarg1, PrescribedController jarg1_, int jarg2, long jarg3, Function jarg3_);
-  public final static native void PrescribedController_prescribeControlForActuator__SWIG_1(long jarg1, PrescribedController jarg1_, String jarg2, long jarg3, Function jarg3_);
+  public final static native void PrescribedController_prescribeControlForActuator_private__SWIG_0(long jarg1, PrescribedController jarg1_, int jarg2, long jarg3, Function jarg3_);
+  public final static native void PrescribedController_prescribeControlForActuator_private__SWIG_1(long jarg1, PrescribedController jarg1_, String jarg2, long jarg3, Function jarg3_);
   public final static native long new_Manager__SWIG_0(long jarg1, Model jarg1_, long jarg2);
   public final static native long new_Manager__SWIG_1(long jarg1, Model jarg1_);
   public final static native long new_Manager__SWIG_2();
@@ -3448,6 +3489,10 @@ public class opensimModelSimulationJNI {
   public final static native long new_ModelComponentSetMarkers__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ModelComponentSetMarkers__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ModelComponentSetMarkers__SWIG_4(long jarg1, ModelComponentSetMarkers jarg1_);
+  public final static native boolean ModelComponentSetMarkers_hasModel(long jarg1, ModelComponentSetMarkers jarg1_);
+  public final static native long ModelComponentSetMarkers_getModel(long jarg1, ModelComponentSetMarkers jarg1_);
+  public final static native long ModelComponentSetMarkers_updModel(long jarg1, ModelComponentSetMarkers jarg1_);
+  public final static native void ModelComponentSetMarkers_setModel(long jarg1, ModelComponentSetMarkers jarg1_, long jarg2, Model jarg2_);
   public final static native boolean ModelComponentSetMarkers_insert(long jarg1, ModelComponentSetMarkers jarg1_, int jarg2, long jarg3, Marker jarg3_);
   public final static native boolean ModelComponentSetMarkers_set__SWIG_0(long jarg1, ModelComponentSetMarkers jarg1_, int jarg2, long jarg3, Marker jarg3_, boolean jarg4);
   public final static native boolean ModelComponentSetMarkers_set__SWIG_1(long jarg1, ModelComponentSetMarkers jarg1_, int jarg2, long jarg3, Marker jarg3_);
@@ -3777,6 +3822,10 @@ public class opensimModelSimulationJNI {
   public final static native long new_ModelComponentSetProbes__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ModelComponentSetProbes__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ModelComponentSetProbes__SWIG_4(long jarg1, ModelComponentSetProbes jarg1_);
+  public final static native boolean ModelComponentSetProbes_hasModel(long jarg1, ModelComponentSetProbes jarg1_);
+  public final static native long ModelComponentSetProbes_getModel(long jarg1, ModelComponentSetProbes jarg1_);
+  public final static native long ModelComponentSetProbes_updModel(long jarg1, ModelComponentSetProbes jarg1_);
+  public final static native void ModelComponentSetProbes_setModel(long jarg1, ModelComponentSetProbes jarg1_, long jarg2, Model jarg2_);
   public final static native boolean ModelComponentSetProbes_insert(long jarg1, ModelComponentSetProbes jarg1_, int jarg2, long jarg3, Probe jarg3_);
   public final static native boolean ModelComponentSetProbes_set__SWIG_0(long jarg1, ModelComponentSetProbes jarg1_, int jarg2, long jarg3, Probe jarg3_, boolean jarg4);
   public final static native boolean ModelComponentSetProbes_set__SWIG_1(long jarg1, ModelComponentSetProbes jarg1_, int jarg2, long jarg3, Probe jarg3_);
@@ -4485,6 +4534,8 @@ public class opensimModelSimulationJNI {
   public final static native long ModelVisualizer_getModel(long jarg1, ModelVisualizer jarg1_);
   public final static native long ModelVisualizer_updModel(long jarg1, ModelVisualizer jarg1_);
   public final static native boolean ModelVisualizer_findGeometryFile(long jarg1, Model jarg1_, String jarg2, long jarg3, long jarg4, SimTKArrayString jarg4_);
+  public final static native long new_PhysicalOffsetFramesFormLoop(String jarg1, long jarg2, String jarg3, long jarg4, OpenSimObject jarg4_, String jarg5);
+  public final static native void delete_PhysicalOffsetFramesFormLoop(long jarg1);
   public final static native long Model_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void Model_assign(long jarg1, Model jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String Model_getClassName();
@@ -4707,7 +4758,7 @@ public class opensimModelSimulationJNI {
   public final static native void Model_realizeReport(long jarg1, Model jarg1_, long jarg2, State jarg2_);
   public final static native void Model_private_addModelComponent(long jarg1, Model jarg1_, long jarg2, ModelComponent jarg2_);
   public final static native void Model_private_addBody(long jarg1, Model jarg1_, long jarg2, Body jarg2_);
-  public final static native void Model_addJoint(long jarg1, Model jarg1_, long jarg2, Joint jarg2_);
+  public final static native void Model_private_addJoint(long jarg1, Model jarg1_, long jarg2, Joint jarg2_);
   public final static native void Model_private_addConstraint(long jarg1, Model jarg1_, long jarg2, Constraint jarg2_);
   public final static native void Model_private_addForce(long jarg1, Model jarg1_, long jarg2, Force jarg2_);
   public final static native void Model_private_addProbe(long jarg1, Model jarg1_, long jarg2, Probe jarg2_);
@@ -4777,6 +4828,7 @@ public class opensimModelSimulationJNI {
   public final static native int Model_getNumProbeStates(long jarg1, Model jarg1_);
   public final static native long Model_updCoordinateSet(long jarg1, Model jarg1_);
   public final static native long Model_getCoordinateSet(long jarg1, Model jarg1_);
+  public final static native long Model_getCoordinatesInMultibodyTreeOrder(long jarg1, Model jarg1_);
   public final static native long Model_updBodySet(long jarg1, Model jarg1_);
   public final static native long Model_getBodySet(long jarg1, Model jarg1_);
   public final static native long Model_updJointSet(long jarg1, Model jarg1_);
@@ -6880,6 +6932,7 @@ public class opensimModelSimulationJNI {
   public final static native long Umberger2010MuscleMetabolicsProbe_SWIGUpcast(long jarg1);
   public final static native long Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameter_SWIGUpcast(long jarg1);
   public final static native long ModelVisualPreferences_SWIGUpcast(long jarg1);
+  public final static native long PhysicalOffsetFramesFormLoop_SWIGUpcast(long jarg1);
   public final static native long Model_SWIGUpcast(long jarg1);
   public final static native long PathPoint_SWIGUpcast(long jarg1);
   public final static native long PathWrapPoint_SWIGUpcast(long jarg1);

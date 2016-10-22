@@ -334,6 +334,8 @@ public class opensimSimbodyJNI {
   public final static native long VectorBaseDouble_resizeKeep(long jarg1, VectorBaseDouble jarg1_, int jarg2);
   public final static native void VectorBaseDouble_clear(long jarg1, VectorBaseDouble jarg1_);
   public final static native double VectorBaseDouble_sum(long jarg1, VectorBaseDouble jarg1_);
+  public final static native double VectorBaseDouble_get(long jarg1, VectorBaseDouble jarg1_, long jarg2);
+  public final static native double VectorBaseDouble_set(long jarg1, VectorBaseDouble jarg1_, long jarg2, double jarg3);
   public final static native double VectorBaseDouble___getitem__(long jarg1, VectorBaseDouble jarg1_, long jarg2);
   public final static native void VectorBaseDouble___setitem__(long jarg1, VectorBaseDouble jarg1_, long jarg2, double jarg3);
   public final static native void delete_VectorBaseDouble(long jarg1);
@@ -364,6 +366,8 @@ public class opensimSimbodyJNI {
   public final static native double RowVectorBaseDouble_sum(long jarg1, RowVectorBaseDouble jarg1_);
   public final static native long RowVectorBaseDouble_begin(long jarg1, RowVectorBaseDouble jarg1_);
   public final static native long RowVectorBaseDouble_end(long jarg1, RowVectorBaseDouble jarg1_);
+  public final static native double RowVectorBaseDouble_get(long jarg1, RowVectorBaseDouble jarg1_, long jarg2);
+  public final static native double RowVectorBaseDouble_set(long jarg1, RowVectorBaseDouble jarg1_, long jarg2, double jarg3);
   public final static native double RowVectorBaseDouble___getitem__(long jarg1, RowVectorBaseDouble jarg1_, long jarg2);
   public final static native void RowVectorBaseDouble___setitem__(long jarg1, RowVectorBaseDouble jarg1_, long jarg2, double jarg3);
   public final static native void delete_RowVectorBaseDouble(long jarg1);
@@ -415,6 +419,8 @@ public class opensimSimbodyJNI {
   public final static native long VectorBaseVec3_resizeKeep(long jarg1, VectorBaseVec3 jarg1_, int jarg2);
   public final static native void VectorBaseVec3_clear(long jarg1, VectorBaseVec3 jarg1_);
   public final static native long VectorBaseVec3_sum(long jarg1, VectorBaseVec3 jarg1_);
+  public final static native long VectorBaseVec3_get(long jarg1, VectorBaseVec3 jarg1_, long jarg2);
+  public final static native long VectorBaseVec3_set(long jarg1, VectorBaseVec3 jarg1_, long jarg2, long jarg3, Vec3 jarg3_);
   public final static native long VectorBaseVec3___getitem__(long jarg1, VectorBaseVec3 jarg1_, long jarg2);
   public final static native void VectorBaseVec3___setitem__(long jarg1, VectorBaseVec3 jarg1_, long jarg2, long jarg3, Vec3 jarg3_);
   public final static native void delete_VectorBaseVec3(long jarg1);
@@ -436,6 +442,8 @@ public class opensimSimbodyJNI {
   public final static native long RowVectorBaseVec3_sum(long jarg1, RowVectorBaseVec3 jarg1_);
   public final static native long RowVectorBaseVec3_begin(long jarg1, RowVectorBaseVec3 jarg1_);
   public final static native long RowVectorBaseVec3_end(long jarg1, RowVectorBaseVec3 jarg1_);
+  public final static native long RowVectorBaseVec3_get(long jarg1, RowVectorBaseVec3 jarg1_, long jarg2);
+  public final static native long RowVectorBaseVec3_set(long jarg1, RowVectorBaseVec3 jarg1_, long jarg2, long jarg3, Vec3 jarg3_);
   public final static native long RowVectorBaseVec3___getitem__(long jarg1, RowVectorBaseVec3 jarg1_, long jarg2);
   public final static native void RowVectorBaseVec3___setitem__(long jarg1, RowVectorBaseVec3 jarg1_, long jarg2, long jarg3, Vec3 jarg3_);
   public final static native void delete_RowVectorBaseVec3(long jarg1);

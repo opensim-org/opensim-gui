@@ -77,6 +77,22 @@ public class ModelComponentSetMarkers extends SetMarkers {
     this(opensimModelSimulationJNI.new_ModelComponentSetMarkers__SWIG_4(ModelComponentSetMarkers.getCPtr(source), source), true);
   }
 
+  public boolean hasModel() {
+    return opensimModelSimulationJNI.ModelComponentSetMarkers_hasModel(swigCPtr, this);
+  }
+
+  public Model getModel() {
+    return new Model(opensimModelSimulationJNI.ModelComponentSetMarkers_getModel(swigCPtr, this), false);
+  }
+
+  public Model updModel() {
+    return new Model(opensimModelSimulationJNI.ModelComponentSetMarkers_updModel(swigCPtr, this), false);
+  }
+
+  public void setModel(Model model) {
+    opensimModelSimulationJNI.ModelComponentSetMarkers_setModel(swigCPtr, this, Model.getCPtr(model), model);
+  }
+
   public boolean insert(int aIndex, Marker aObject) {
     return opensimModelSimulationJNI.ModelComponentSetMarkers_insert(swigCPtr, this, aIndex, Marker.getCPtr(aObject), aObject);
   }

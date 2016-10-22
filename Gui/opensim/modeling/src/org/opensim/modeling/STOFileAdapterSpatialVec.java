@@ -48,12 +48,12 @@ public class STOFileAdapterSpatialVec {
     return (cPtr == 0) ? null : new STOFileAdapterSpatialVec(cPtr, true);
   }
 
-  public static SWIGTYPE_p_OpenSim__TimeSeriesTable_T_SimTK__VecT_2_SimTK__Vec3_1_t_t read(String fileName) {
-    return new SWIGTYPE_p_OpenSim__TimeSeriesTable_T_SimTK__VecT_2_SimTK__Vec3_1_t_t(opensimModelCommonJNI.STOFileAdapterSpatialVec_read(fileName), true);
+  public static TimeSeriesTableSpatialVec read(String fileName) {
+    return new TimeSeriesTableSpatialVec(opensimModelCommonJNI.STOFileAdapterSpatialVec_read(fileName), true);
   }
 
-  public static void write(SWIGTYPE_p_OpenSim__TimeSeriesTable_T_SimTK__VecT_2_SimTK__Vec3_1_t_t table, String fileName) {
-    opensimModelCommonJNI.STOFileAdapterSpatialVec_write(SWIGTYPE_p_OpenSim__TimeSeriesTable_T_SimTK__VecT_2_SimTK__Vec3_1_t_t.getCPtr(table), fileName);
+  public static void write(TimeSeriesTableSpatialVec table, String fileName) {
+    opensimModelCommonJNI.STOFileAdapterSpatialVec_write(TimeSeriesTableSpatialVec.getCPtr(table), table, fileName);
   }
 
 }

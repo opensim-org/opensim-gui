@@ -57,4 +57,12 @@ public class TimeSeriesTableVec3 extends DataTableVec3 {
     this(opensimModelCommonJNI.new_TimeSeriesTableVec3__SWIG_4(filename, tablename), true);
   }
 
+  public TimeSeriesTable flatten() {
+    return new TimeSeriesTable(opensimModelCommonJNI.TimeSeriesTableVec3_flatten__SWIG_1(swigCPtr, this), true);
+  }
+
+  public TimeSeriesTable flatten(StdVectorString suffixes) {
+    return new TimeSeriesTable(opensimModelCommonJNI.TimeSeriesTableVec3_flatten__SWIG_2(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
+  }
+
 }

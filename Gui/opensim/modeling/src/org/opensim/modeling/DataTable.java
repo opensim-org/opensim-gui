@@ -49,6 +49,10 @@ public class DataTable extends AbstractDataTable {
     this(opensimModelCommonJNI.new_DataTable__SWIG_2(filename, tablename), true);
   }
 
+  public long numComponentsPerElement() {
+    return opensimModelCommonJNI.DataTable_numComponentsPerElement(swigCPtr, this);
+  }
+
   public void appendRow(double indRow, SWIGTYPE_p_std__initializer_listT_double_t container) {
     opensimModelCommonJNI.DataTable_appendRow__SWIG_1(swigCPtr, this, indRow, SWIGTYPE_p_std__initializer_listT_double_t.getCPtr(container));
   }

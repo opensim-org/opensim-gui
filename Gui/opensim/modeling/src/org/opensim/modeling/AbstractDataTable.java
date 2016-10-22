@@ -35,6 +35,10 @@ public class AbstractDataTable {
     }
   }
 
+  public long numComponentsPerElement() {
+    return opensimModelCommonJNI.AbstractDataTable_numComponentsPerElement(swigCPtr, this);
+  }
+
   public long getNumRows() {
     return opensimModelCommonJNI.AbstractDataTable_getNumRows(swigCPtr, this);
   }

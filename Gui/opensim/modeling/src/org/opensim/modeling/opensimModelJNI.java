@@ -2339,8 +2339,6 @@ public class opensimModelJNI {
   public final static native void CMC_Task_computeAccelerations(long jarg1, CMC_Task jarg1_, long jarg2, State jarg2_);
   public final static native void CMC_Task_computeJacobian(long jarg1, CMC_Task jarg1_);
   public final static native void CMC_Task_computeEffectiveMassMatrix(long jarg1, CMC_Task jarg1_);
-  public final static native void CMC_Task_updateFromXMLNode__SWIG_0(long jarg1, CMC_Task jarg1_, long jarg2, int jarg3);
-  public final static native void CMC_Task_updateFromXMLNode__SWIG_1(long jarg1, CMC_Task jarg1_, long jarg2);
   public final static native long CMC_Joint_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void CMC_Joint_assign(long jarg1, CMC_Joint jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String CMC_Joint_getClassName();

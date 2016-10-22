@@ -49,6 +49,18 @@ public class DataTableVec3 extends AbstractDataTable {
     this(opensimModelCommonJNI.new_DataTableVec3__SWIG_2(filename, tablename), true);
   }
 
+  public DataTable flatten() {
+    return new DataTable(opensimModelCommonJNI.DataTableVec3_flatten__SWIG_0(swigCPtr, this), true);
+  }
+
+  public DataTable flatten(StdVectorString suffixes) {
+    return new DataTable(opensimModelCommonJNI.DataTableVec3_flatten__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
+  }
+
+  public long numComponentsPerElement() {
+    return opensimModelCommonJNI.DataTableVec3_numComponentsPerElement(swigCPtr, this);
+  }
+
   public void appendRow(double indRow, SWIGTYPE_p_std__initializer_listT_SimTK__VecT_3_double_1_t_t container) {
     opensimModelCommonJNI.DataTableVec3_appendRow__SWIG_1(swigCPtr, this, indRow, SWIGTYPE_p_std__initializer_listT_SimTK__VecT_3_double_1_t_t.getCPtr(container));
   }

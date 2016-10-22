@@ -103,6 +103,14 @@ public class RowVectorBaseDouble extends MatrixBaseDouble {
     return new SWIGTYPE_p_VectorIteratorT_double_SimTK__RowVectorBaseT_double_t_t(opensimSimbodyJNI.RowVectorBaseDouble_end(swigCPtr, this), true);
   }
 
+  public double get(long i) {
+    return opensimSimbodyJNI.RowVectorBaseDouble_get(swigCPtr, this, i);
+  }
+
+  public double set(long i, double value) {
+    return opensimSimbodyJNI.RowVectorBaseDouble_set(swigCPtr, this, i, value);
+  }
+
   public double __getitem__(long i) {
     return opensimSimbodyJNI.RowVectorBaseDouble___getitem__(swigCPtr, this, i);
   }

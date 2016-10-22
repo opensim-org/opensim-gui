@@ -100,6 +100,11 @@ public class Model extends ModelComponent {
       private_addController(aController);
   }
 
+  public void addJoint(Joint aJoint) {
+      aJoint.markAdopted();
+      private_addJoint(aJoint);
+  }
+
   public static Model safeDownCast(OpenSimObject obj) {
     long cPtr = opensimModelSimulationJNI.Model_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Model(cPtr, false);
@@ -990,8 +995,8 @@ public class Model extends ModelComponent {
     opensimModelSimulationJNI.Model_private_addBody(swigCPtr, this, Body.getCPtr(adoptee), adoptee);
   }
 
-  public void addJoint(Joint adoptee) {
-    opensimModelSimulationJNI.Model_addJoint(swigCPtr, this, Joint.getCPtr(adoptee), adoptee);
+  private void private_addJoint(Joint adoptee) {
+    opensimModelSimulationJNI.Model_private_addJoint(swigCPtr, this, Joint.getCPtr(adoptee), adoptee);
   }
 
   private void private_addConstraint(Constraint adoptee) {
@@ -1268,6 +1273,10 @@ public class Model extends ModelComponent {
 
   public CoordinateSet getCoordinateSet() {
     return new CoordinateSet(opensimModelSimulationJNI.Model_getCoordinateSet(swigCPtr, this), false);
+  }
+
+  public SWIGTYPE_p_std__vectorT_SimTK__ReferencePtrT_OpenSim__Coordinate_const_t_t getCoordinatesInMultibodyTreeOrder() {
+    return new SWIGTYPE_p_std__vectorT_SimTK__ReferencePtrT_OpenSim__Coordinate_const_t_t(opensimModelSimulationJNI.Model_getCoordinatesInMultibodyTreeOrder(swigCPtr, this), true);
   }
 
   public BodySet updBodySet() {
