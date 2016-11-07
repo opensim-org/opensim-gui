@@ -125,4 +125,32 @@ public class DataTableVec6 extends AbstractDataTable {
     return new SWIGTYPE_p_SimTK__MatrixView_T_SimTK__VecT_6_double_1_t_t(opensimModelCommonJNI.DataTableVec6_updMatrixBlock(swigCPtr, this, rowStart, columnStart, numRows, numColumns), true);
   }
 
+  public String toString(StdVectorInt rows, StdVectorString columnLabels, boolean withMetaData, long splitSize, long maxWidth, long precision) {
+    return opensimModelCommonJNI.DataTableVec6_toString__SWIG_0(swigCPtr, this, StdVectorInt.getCPtr(rows), rows, StdVectorString.getCPtr(columnLabels), columnLabels, withMetaData, splitSize, maxWidth, precision);
+  }
+
+  public String toString(StdVectorInt rows, StdVectorString columnLabels, boolean withMetaData, long splitSize, long maxWidth) {
+    return opensimModelCommonJNI.DataTableVec6_toString__SWIG_1(swigCPtr, this, StdVectorInt.getCPtr(rows), rows, StdVectorString.getCPtr(columnLabels), columnLabels, withMetaData, splitSize, maxWidth);
+  }
+
+  public String toString(StdVectorInt rows, StdVectorString columnLabels, boolean withMetaData, long splitSize) {
+    return opensimModelCommonJNI.DataTableVec6_toString__SWIG_2(swigCPtr, this, StdVectorInt.getCPtr(rows), rows, StdVectorString.getCPtr(columnLabels), columnLabels, withMetaData, splitSize);
+  }
+
+  public String toString(StdVectorInt rows, StdVectorString columnLabels, boolean withMetaData) {
+    return opensimModelCommonJNI.DataTableVec6_toString__SWIG_3(swigCPtr, this, StdVectorInt.getCPtr(rows), rows, StdVectorString.getCPtr(columnLabels), columnLabels, withMetaData);
+  }
+
+  public String toString(StdVectorInt rows, StdVectorString columnLabels) {
+    return opensimModelCommonJNI.DataTableVec6_toString__SWIG_4(swigCPtr, this, StdVectorInt.getCPtr(rows), rows, StdVectorString.getCPtr(columnLabels), columnLabels);
+  }
+
+  public String toString(StdVectorInt rows) {
+    return opensimModelCommonJNI.DataTableVec6_toString__SWIG_5(swigCPtr, this, StdVectorInt.getCPtr(rows), rows);
+  }
+
+  public String toString() {
+    return opensimModelCommonJNI.DataTableVec6_toString__SWIG_6(swigCPtr, this);
+  }
+
 }

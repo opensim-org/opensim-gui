@@ -1475,4 +1475,12 @@ public class Model extends ModelComponent {
     return new JointList(opensimModelSimulationJNI.Model_getJointList(swigCPtr, this), true);
   }
 
+  public Thelen2003MuscleList getThelen2003MuscleList() {
+    return new Thelen2003MuscleList(opensimModelSimulationJNI.Model_getThelen2003MuscleList(swigCPtr, this), true);
+  }
+
+  public Millard2012EquilibriumMuscleList getMillard2012EquilibriumMuscleList() {
+    return new Millard2012EquilibriumMuscleList(opensimModelSimulationJNI.Model_getMillard2012EquilibriumMuscleList(swigCPtr, this), true);
+  }
+
 }
