@@ -236,10 +236,12 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
         dg_json.put("uuid", geomID.toString());
         setRepresentationInJson(arg0, dg_json);
-        dg_json.put("type", "SphereGeometry");
-	dg_json.put("radius", visualizerScaleFactor);
+        dg_json.put("type", "EllipsoidGeometry");
+	dg_json.put("radiusx", arg0.getRadii().get(0)*visualizerScaleFactor);
+	dg_json.put("radiusy", arg0.getRadii().get(1)*visualizerScaleFactor);
+	dg_json.put("radiusz", arg0.getRadii().get(2)*visualizerScaleFactor);
 	dg_json.put("widthSegments", 32);
-	dg_json.put("heightSegments", 16);
+	dg_json.put("heightSegments", 32);
 	dg_json.put("phiStart", 0);
 	dg_json.put("phiLength", 6.28);
 	dg_json.put("thetaStart", 0);
@@ -256,7 +258,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         dg_json.put("type", "SphereGeometry");
 	dg_json.put("radius", arg0.getRadius()*visualizerScaleFactor);
 	dg_json.put("widthSegments", 32);
-	dg_json.put("heightSegments", 16);
+	dg_json.put("heightSegments", 32);
 	dg_json.put("phiStart", 0);
 	dg_json.put("phiLength", 6.28);
 	dg_json.put("thetaStart", 0);

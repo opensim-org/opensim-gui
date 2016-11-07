@@ -155,7 +155,12 @@ public class DecorativeGeometryImplementationGUI extends DecorativeGeometryImple
 
     @Override
     public void implementTorusGeometry(DecorativeTorus arg0) {
-        super.implementTorusGeometry(arg0); //To change body of generated methods, choose Tools | Templates.
+        if (updateMode) { 
+            updateDecorativeGeometryDisplayer(arg0);
+        } else {
+            DecorativeGeometryDisplayer displayer=DecorativeDisplayerFactory.createDisplayer(arg0);
+            processGeometryDisplayer(arg0, displayer);
+        }
     }
 
   
