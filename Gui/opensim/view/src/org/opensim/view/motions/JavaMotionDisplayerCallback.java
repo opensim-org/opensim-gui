@@ -74,7 +74,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    boolean ownsStorage=false;
    int numStates=0;
    ArrayStr stateLabels=null;
-   private double[] statesBuffer;
+   private Vector statesBuffer;
    private boolean displayTimeProgress=false;
    private boolean coordinatesOnly=false;
    private boolean staticOptimization = false;
@@ -113,7 +113,8 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
         stateLabels.insert(0, "time");
         getStorage().setColumnLabels(stateLabels);
         numStates = isCoordinatesOnly()?getModelForDisplay().getNumCoordinates(): getModelForDisplay().getNumStateVariables();
-        statesBuffer = new double[numStates];
+        statesBuffer = new Vector();
+        statesBuffer.resize(numStates);
         // Create map int->int from Y vector to statesBuffer
         ownsStorage=true;
     }
@@ -220,7 +221,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
           }
           else {
               for(int i=0; i< numStates; i++)
-                  statesBuffer[i] = modelForDisplay.getStateVariableValue(s, stateLabels.get(i+1));
+                 statesBuffer.set(i, modelForDisplay.getStateVariableValue(s, stateLabels.get(i+1)));
           
               /* FIX40
               if (staticOptimization){
@@ -232,7 +233,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
                   }
               }*/
           //System.out.println("Simulation time="+currentSimTime+" state[0]="+statesBuffer[0]);
-          // FIX40 nextResult.setStates(currentSimTime, numStates, statesBuffer);
+          nextResult.setStates(currentSimTime, statesBuffer);
           }
           getStorage().append(nextResult);
       }
