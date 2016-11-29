@@ -237,6 +237,42 @@ public class ModelDisplayHints extends OpenSimObject {
     opensimModelCommonJNI.ModelDisplayHints_set_show_markers__SWIG_1(swigCPtr, this, value);
   }
 
+  public void copyProperty_marker_color(ModelDisplayHints source) {
+    opensimModelCommonJNI.ModelDisplayHints_copyProperty_marker_color(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
+  }
+
+  public Vec3 get_marker_color(int i) {
+    return new Vec3(opensimModelCommonJNI.ModelDisplayHints_get_marker_color__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public Vec3 upd_marker_color(int i) {
+    return new Vec3(opensimModelCommonJNI.ModelDisplayHints_upd_marker_color__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_marker_color(int i, Vec3 value) {
+    opensimModelCommonJNI.ModelDisplayHints_set_marker_color__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+  }
+
+  public int append_marker_color(Vec3 value) {
+    return opensimModelCommonJNI.ModelDisplayHints_append_marker_color(swigCPtr, this, Vec3.getCPtr(value), value);
+  }
+
+  public void constructProperty_marker_color(Vec3 initValue) {
+    opensimModelCommonJNI.ModelDisplayHints_constructProperty_marker_color(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+  }
+
+  public Vec3 get_marker_color() {
+    return new Vec3(opensimModelCommonJNI.ModelDisplayHints_get_marker_color__SWIG_1(swigCPtr, this), false);
+  }
+
+  public Vec3 upd_marker_color() {
+    return new Vec3(opensimModelCommonJNI.ModelDisplayHints_upd_marker_color__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_marker_color(Vec3 value) {
+    opensimModelCommonJNI.ModelDisplayHints_set_marker_color__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+  }
+
   public void copyProperty_show_forces(ModelDisplayHints source) {
     opensimModelCommonJNI.ModelDisplayHints_copyProperty_show_forces(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
   }

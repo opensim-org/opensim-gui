@@ -407,8 +407,8 @@ public class Storage extends StorageInterface {
     opensimModelCommonJNI.Storage_add__SWIG_0(swigCPtr, this, aValue);
   }
 
-  public void add(int aN, double[] aY) {
-    opensimModelCommonJNI.Storage_add__SWIG_1(swigCPtr, this, aN, aY);
+  public void add(Vector values) {
+    opensimModelCommonJNI.Storage_add__SWIG_1(swigCPtr, this, Vector.getCPtr(values), values);
   }
 
   public void add(int aN, double aValue) {
@@ -427,8 +427,8 @@ public class Storage extends StorageInterface {
     opensimModelCommonJNI.Storage_subtract__SWIG_0(swigCPtr, this, aValue);
   }
 
-  public void subtract(int aN, double[] aY) {
-    opensimModelCommonJNI.Storage_subtract__SWIG_1(swigCPtr, this, aN, aY);
+  public void subtract(Vector values) {
+    opensimModelCommonJNI.Storage_subtract__SWIG_1(swigCPtr, this, Vector.getCPtr(values), values);
   }
 
   public void subtract(StateVector aStateVector) {
@@ -447,8 +447,8 @@ public class Storage extends StorageInterface {
     opensimModelCommonJNI.Storage_multiplyColumn(swigCPtr, this, aIndex, aValue);
   }
 
-  public void multiply(int aN, double[] aY) {
-    opensimModelCommonJNI.Storage_multiply__SWIG_1(swigCPtr, this, aN, aY);
+  public void multiply(Vector values) {
+    opensimModelCommonJNI.Storage_multiply__SWIG_1(swigCPtr, this, Vector.getCPtr(values), values);
   }
 
   public void multiply(StateVector aStateVector) {
@@ -463,8 +463,8 @@ public class Storage extends StorageInterface {
     opensimModelCommonJNI.Storage_divide__SWIG_0(swigCPtr, this, aValue);
   }
 
-  public void divide(int aN, double[] aY) {
-    opensimModelCommonJNI.Storage_divide__SWIG_1(swigCPtr, this, aN, aY);
+  public void divide(Vector values) {
+    opensimModelCommonJNI.Storage_divide__SWIG_1(swigCPtr, this, Vector.getCPtr(values), values);
   }
 
   public void divide(StateVector aStateVector) {

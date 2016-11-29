@@ -189,12 +189,8 @@ public class TransformAxis extends OpenSimObject {
     opensimModelSimulationJNI.TransformAxis_getAxis__SWIG_1(swigCPtr, this, Vec3.getCPtr(axis), axis);
   }
 
-  public void getAxis(double[] rAxis) {
-    opensimModelSimulationJNI.TransformAxis_getAxis__SWIG_2(swigCPtr, this, rAxis);
-  }
-
   public double getAxis(int which) {
-    return opensimModelSimulationJNI.TransformAxis_getAxis__SWIG_3(swigCPtr, this, which);
+    return opensimModelSimulationJNI.TransformAxis_getAxis__SWIG_2(swigCPtr, this, which);
   }
 
   public boolean hasFunction() {

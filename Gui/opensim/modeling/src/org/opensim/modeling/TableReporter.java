@@ -61,8 +61,12 @@ public class TableReporter extends ReporterDouble {
     this(opensimModelCommonJNI.new_TableReporter(), true);
   }
 
-  public TimeSeriesTable getReport() {
-    return new TimeSeriesTable(opensimModelCommonJNI.TableReporter_getReport(swigCPtr, this), true);
+  public TimeSeriesTable getTable() {
+    return new TimeSeriesTable(opensimModelCommonJNI.TableReporter_getTable(swigCPtr, this), true);
+  }
+
+  public void clearTable() {
+    opensimModelCommonJNI.TableReporter_clearTable(swigCPtr, this);
   }
 
 }

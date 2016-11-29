@@ -49,6 +49,18 @@ public class DataTableVec3 extends AbstractDataTable {
     this(opensimModelCommonJNI.new_DataTableVec3__SWIG_2(filename, tablename), true);
   }
 
+  public DataTable flatten() {
+    return new DataTable(opensimModelCommonJNI.DataTableVec3_flatten__SWIG_0(swigCPtr, this), true);
+  }
+
+  public DataTable flatten(StdVectorString suffixes) {
+    return new DataTable(opensimModelCommonJNI.DataTableVec3_flatten__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
+  }
+
+  public long numComponentsPerElement() {
+    return opensimModelCommonJNI.DataTableVec3_numComponentsPerElement(swigCPtr, this);
+  }
+
   public void appendRow(double indRow, SWIGTYPE_p_std__initializer_listT_SimTK__VecT_3_double_1_t_t container) {
     opensimModelCommonJNI.DataTableVec3_appendRow__SWIG_1(swigCPtr, this, indRow, SWIGTYPE_p_std__initializer_listT_SimTK__VecT_3_double_1_t_t.getCPtr(container));
   }
@@ -111,6 +123,34 @@ public class DataTableVec3 extends AbstractDataTable {
 
   public MatrixViewVec3 updMatrixBlock(long rowStart, long columnStart, long numRows, long numColumns) {
     return new MatrixViewVec3(opensimModelCommonJNI.DataTableVec3_updMatrixBlock(swigCPtr, this, rowStart, columnStart, numRows, numColumns), true);
+  }
+
+  public String toString(StdVectorInt rows, StdVectorString columnLabels, boolean withMetaData, long splitSize, long maxWidth, long precision) {
+    return opensimModelCommonJNI.DataTableVec3_toString__SWIG_0(swigCPtr, this, StdVectorInt.getCPtr(rows), rows, StdVectorString.getCPtr(columnLabels), columnLabels, withMetaData, splitSize, maxWidth, precision);
+  }
+
+  public String toString(StdVectorInt rows, StdVectorString columnLabels, boolean withMetaData, long splitSize, long maxWidth) {
+    return opensimModelCommonJNI.DataTableVec3_toString__SWIG_1(swigCPtr, this, StdVectorInt.getCPtr(rows), rows, StdVectorString.getCPtr(columnLabels), columnLabels, withMetaData, splitSize, maxWidth);
+  }
+
+  public String toString(StdVectorInt rows, StdVectorString columnLabels, boolean withMetaData, long splitSize) {
+    return opensimModelCommonJNI.DataTableVec3_toString__SWIG_2(swigCPtr, this, StdVectorInt.getCPtr(rows), rows, StdVectorString.getCPtr(columnLabels), columnLabels, withMetaData, splitSize);
+  }
+
+  public String toString(StdVectorInt rows, StdVectorString columnLabels, boolean withMetaData) {
+    return opensimModelCommonJNI.DataTableVec3_toString__SWIG_3(swigCPtr, this, StdVectorInt.getCPtr(rows), rows, StdVectorString.getCPtr(columnLabels), columnLabels, withMetaData);
+  }
+
+  public String toString(StdVectorInt rows, StdVectorString columnLabels) {
+    return opensimModelCommonJNI.DataTableVec3_toString__SWIG_4(swigCPtr, this, StdVectorInt.getCPtr(rows), rows, StdVectorString.getCPtr(columnLabels), columnLabels);
+  }
+
+  public String toString(StdVectorInt rows) {
+    return opensimModelCommonJNI.DataTableVec3_toString__SWIG_5(swigCPtr, this, StdVectorInt.getCPtr(rows), rows);
+  }
+
+  public String toString() {
+    return opensimModelCommonJNI.DataTableVec3_toString__SWIG_6(swigCPtr, this);
   }
 
 }

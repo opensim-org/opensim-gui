@@ -77,6 +77,22 @@ public class ModelComponentSetProbes extends SetProbes {
     this(opensimModelSimulationJNI.new_ModelComponentSetProbes__SWIG_4(ModelComponentSetProbes.getCPtr(source), source), true);
   }
 
+  public boolean hasModel() {
+    return opensimModelSimulationJNI.ModelComponentSetProbes_hasModel(swigCPtr, this);
+  }
+
+  public Model getModel() {
+    return new Model(opensimModelSimulationJNI.ModelComponentSetProbes_getModel(swigCPtr, this), false);
+  }
+
+  public Model updModel() {
+    return new Model(opensimModelSimulationJNI.ModelComponentSetProbes_updModel(swigCPtr, this), false);
+  }
+
+  public void setModel(Model model) {
+    opensimModelSimulationJNI.ModelComponentSetProbes_setModel(swigCPtr, this, Model.getCPtr(model), model);
+  }
+
   public boolean insert(int aIndex, Probe aObject) {
     return opensimModelSimulationJNI.ModelComponentSetProbes_insert(swigCPtr, this, aIndex, Probe.getCPtr(aObject), aObject);
   }

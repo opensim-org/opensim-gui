@@ -61,8 +61,12 @@ public class TableReporterVec3 extends ReporterVec3 {
     this(opensimModelCommonJNI.new_TableReporterVec3(), true);
   }
 
-  public TimeSeriesTableVec3 getReport() {
-    return new TimeSeriesTableVec3(opensimModelCommonJNI.TableReporterVec3_getReport(swigCPtr, this), true);
+  public TimeSeriesTableVec3 getTable() {
+    return new TimeSeriesTableVec3(opensimModelCommonJNI.TableReporterVec3_getTable(swigCPtr, this), true);
+  }
+
+  public void clearTable() {
+    opensimModelCommonJNI.TableReporterVec3_clearTable(swigCPtr, this);
   }
 
 }

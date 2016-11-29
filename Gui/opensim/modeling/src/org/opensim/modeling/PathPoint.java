@@ -81,10 +81,6 @@ public class PathPoint extends Station {
     opensimModelSimulationJNI.PathPoint_setLocation__SWIG_1(swigCPtr, this, State.getCPtr(s), s, aCoordIndex, aLocation);
   }
 
-  public void setLocation(State s, double[] pt) {
-    opensimModelSimulationJNI.PathPoint_setLocation__SWIG_2(swigCPtr, this, State.getCPtr(s), s, pt);
-  }
-
   public void setBody(PhysicalFrame body) {
     opensimModelSimulationJNI.PathPoint_setBody(swigCPtr, this, PhysicalFrame.getCPtr(body), body);
   }

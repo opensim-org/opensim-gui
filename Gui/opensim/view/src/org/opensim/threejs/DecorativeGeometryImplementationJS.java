@@ -224,7 +224,21 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 
     @Override
     public void implementEllipsoidGeometry(DecorativeEllipsoid arg0) {
-        //super.implementEllipsoidGeometry(arg0); //To change body of generated methods, choose Tools | Templates.
+        Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
+        Vec3 radii = arg0.getRadii();
+        double sphereRadius = radii.get(0);
+        // Will make a Sphere with largest radius and scale down using the Transform
+        dg_json.put("uuid", geomID.toString());
+        dg_json.put("type", "SphereGeometry");
+	dg_json.put("radius", sphereRadius*visualizerScaleFactor);
+	dg_json.put("widthSegments", 32);
+	dg_json.put("heightSegments", 16);
+	dg_json.put("phiStart", 0);
+	dg_json.put("phiLength", 6.28);
+	dg_json.put("thetaStart", 0);
+	dg_json.put("thetaLength", 3.14);
+        jsonArr.add(dg_json);        
+        createMaterialJson(arg0, true);
     }
 
     @Override

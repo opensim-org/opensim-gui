@@ -1275,6 +1275,10 @@ public class Model extends ModelComponent {
     return new CoordinateSet(opensimModelSimulationJNI.Model_getCoordinateSet(swigCPtr, this), false);
   }
 
+  public SWIGTYPE_p_std__vectorT_SimTK__ReferencePtrT_OpenSim__Coordinate_const_t_t getCoordinatesInMultibodyTreeOrder() {
+    return new SWIGTYPE_p_std__vectorT_SimTK__ReferencePtrT_OpenSim__Coordinate_const_t_t(opensimModelSimulationJNI.Model_getCoordinatesInMultibodyTreeOrder(swigCPtr, this), true);
+  }
+
   public BodySet updBodySet() {
     return new BodySet(opensimModelSimulationJNI.Model_updBodySet(swigCPtr, this), false);
   }
@@ -1469,6 +1473,14 @@ public class Model extends ModelComponent {
 
   public JointList getJointList() {
     return new JointList(opensimModelSimulationJNI.Model_getJointList(swigCPtr, this), true);
+  }
+
+  public Thelen2003MuscleList getThelen2003MuscleList() {
+    return new Thelen2003MuscleList(opensimModelSimulationJNI.Model_getThelen2003MuscleList(swigCPtr, this), true);
+  }
+
+  public Millard2012EquilibriumMuscleList getMillard2012EquilibriumMuscleList() {
+    return new Millard2012EquilibriumMuscleList(opensimModelSimulationJNI.Model_getMillard2012EquilibriumMuscleList(swigCPtr, this), true);
   }
 
 }

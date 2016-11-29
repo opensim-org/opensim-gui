@@ -61,8 +61,12 @@ public class TableReporterVector extends ReporterVector {
     this(opensimModelCommonJNI.new_TableReporterVector(), true);
   }
 
-  public TimeSeriesTable getReport() {
-    return new TimeSeriesTable(opensimModelCommonJNI.TableReporterVector_getReport(swigCPtr, this), true);
+  public TimeSeriesTable getTable() {
+    return new TimeSeriesTable(opensimModelCommonJNI.TableReporterVector_getTable(swigCPtr, this), true);
+  }
+
+  public void clearTable() {
+    opensimModelCommonJNI.TableReporterVector_clearTable(swigCPtr, this);
   }
 
 }

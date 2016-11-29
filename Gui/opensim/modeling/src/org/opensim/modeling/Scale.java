@@ -85,16 +85,8 @@ public class Scale extends OpenSimObject {
     return new Vec3(opensimModelCommonJNI.Scale_getScaleFactors__SWIG_1(swigCPtr, this), false);
   }
 
-  public void getScaleFactors(double[] rScaleFactors) {
-    opensimModelCommonJNI.Scale_getScaleFactors__SWIG_2(swigCPtr, this, rScaleFactors);
-  }
-
   public void setScaleFactors(Vec3 aScaleFactors) {
-    opensimModelCommonJNI.Scale_setScaleFactors__SWIG_0(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
-  }
-
-  public void setScaleFactors(double[] aScaleFactors) {
-    opensimModelCommonJNI.Scale_setScaleFactors__SWIG_1(swigCPtr, this, aScaleFactors);
+    opensimModelCommonJNI.Scale_setScaleFactors(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
   }
 
   public boolean getApply() {

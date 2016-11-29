@@ -35,12 +35,20 @@ public class AbstractDataTable {
     }
   }
 
+  public long numComponentsPerElement() {
+    return opensimModelCommonJNI.AbstractDataTable_numComponentsPerElement(swigCPtr, this);
+  }
+
   public long getNumRows() {
     return opensimModelCommonJNI.AbstractDataTable_getNumRows(swigCPtr, this);
   }
 
   public long getNumColumns() {
     return opensimModelCommonJNI.AbstractDataTable_getNumColumns(swigCPtr, this);
+  }
+
+  public String getTableMetaDataAsString(String key) {
+    return opensimModelCommonJNI.AbstractDataTable_getTableMetaDataAsString(swigCPtr, this, key);
   }
 
   public void removeTableMetaDataKey(String key) {
