@@ -232,7 +232,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
                   }
               }*/
           //System.out.println("Simulation time="+currentSimTime+" state[0]="+statesBuffer[0]);
-          nextResult.setStates(currentSimTime, numStates, statesBuffer);
+          // FIX40 nextResult.setStates(currentSimTime, numStates, statesBuffer);
           }
           getStorage().append(nextResult);
       }
