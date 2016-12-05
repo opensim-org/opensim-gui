@@ -161,8 +161,8 @@ public class JointIterator {
     return opensimModelSimulationJNI.JointIterator_hasSystem(swigCPtr, this);
   }
 
-  public String getFullPathName() {
-    return opensimModelSimulationJNI.JointIterator_getFullPathName(swigCPtr, this);
+  public String getAbsolutePathName() {
+    return opensimModelSimulationJNI.JointIterator_getAbsolutePathName(swigCPtr, this);
   }
 
   public String getRelativePathName(Component wrt) {

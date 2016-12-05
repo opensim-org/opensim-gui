@@ -165,10 +165,6 @@ public class OpenSimContext extends OpenSimObject {
     return new ArrayPathPoint(opensimModelJNI.OpenSimContext_getCurrentPath(swigCPtr, this, Muscle.getCPtr(act), act), false);
   }
 
-  public ArrayPathPoint getCurrentDisplayPath(GeometryPath path) {
-    return new ArrayPathPoint(opensimModelJNI.OpenSimContext_getCurrentDisplayPath(swigCPtr, this, GeometryPath.getCPtr(path), path), false);
-  }
-
   public void copyMuscle(Muscle from, Muscle to) {
     opensimModelJNI.OpenSimContext_copyMuscle(swigCPtr, this, Muscle.getCPtr(from), from, Muscle.getCPtr(to), to);
   }

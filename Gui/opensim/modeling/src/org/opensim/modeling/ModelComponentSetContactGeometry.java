@@ -77,6 +77,22 @@ public class ModelComponentSetContactGeometry extends SetContactGeometry {
     this(opensimModelSimulationJNI.new_ModelComponentSetContactGeometry__SWIG_4(ModelComponentSetContactGeometry.getCPtr(source), source), true);
   }
 
+  public boolean hasModel() {
+    return opensimModelSimulationJNI.ModelComponentSetContactGeometry_hasModel(swigCPtr, this);
+  }
+
+  public Model getModel() {
+    return new Model(opensimModelSimulationJNI.ModelComponentSetContactGeometry_getModel(swigCPtr, this), false);
+  }
+
+  public Model updModel() {
+    return new Model(opensimModelSimulationJNI.ModelComponentSetContactGeometry_updModel(swigCPtr, this), false);
+  }
+
+  public void setModel(Model model) {
+    opensimModelSimulationJNI.ModelComponentSetContactGeometry_setModel(swigCPtr, this, Model.getCPtr(model), model);
+  }
+
   public boolean insert(int aIndex, ContactGeometry aObject) {
     return opensimModelSimulationJNI.ModelComponentSetContactGeometry_insert(swigCPtr, this, aIndex, ContactGeometry.getCPtr(aObject), aObject);
   }

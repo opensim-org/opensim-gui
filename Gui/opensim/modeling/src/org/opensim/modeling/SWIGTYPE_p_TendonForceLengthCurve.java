@@ -8,18 +8,18 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_OpenSim__TimeSeriesTable_T_SimTK__VecT_6_double_1_t_t {
+public class SWIGTYPE_p_TendonForceLengthCurve {
   private transient long swigCPtr;
 
-  protected SWIGTYPE_p_OpenSim__TimeSeriesTable_T_SimTK__VecT_6_double_1_t_t(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
+  protected SWIGTYPE_p_TendonForceLengthCurve(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_OpenSim__TimeSeriesTable_T_SimTK__VecT_6_double_1_t_t() {
+  protected SWIGTYPE_p_TendonForceLengthCurve() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_OpenSim__TimeSeriesTable_T_SimTK__VecT_6_double_1_t_t obj) {
+  protected static long getCPtr(SWIGTYPE_p_TendonForceLengthCurve obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }

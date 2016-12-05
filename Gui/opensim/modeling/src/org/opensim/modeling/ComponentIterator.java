@@ -81,8 +81,8 @@ public class ComponentIterator {
     return opensimModelCommonJNI.ComponentIterator_hasSystem(swigCPtr, this);
   }
 
-  public String getFullPathName() {
-    return opensimModelCommonJNI.ComponentIterator_getFullPathName(swigCPtr, this);
+  public String getAbsolutePathName() {
+    return opensimModelCommonJNI.ComponentIterator_getAbsolutePathName(swigCPtr, this);
   }
 
   public String getRelativePathName(Component wrt) {

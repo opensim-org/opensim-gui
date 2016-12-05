@@ -35,8 +35,12 @@ public class IncorrectTableType extends InvalidArgument {
     super.delete();
   }
 
+  public IncorrectTableType(String file, long line, String func, String message) {
+    this(opensimModelCommonJNI.new_IncorrectTableType__SWIG_0(file, line, func, message), true);
+  }
+
   public IncorrectTableType(String file, long line, String func) {
-    this(opensimModelCommonJNI.new_IncorrectTableType(file, line, func), true);
+    this(opensimModelCommonJNI.new_IncorrectTableType__SWIG_1(file, line, func), true);
   }
 
 }

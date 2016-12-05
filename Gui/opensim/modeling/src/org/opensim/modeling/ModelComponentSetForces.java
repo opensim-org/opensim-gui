@@ -77,6 +77,22 @@ public class ModelComponentSetForces extends SetForces {
     this(opensimModelSimulationJNI.new_ModelComponentSetForces__SWIG_4(ModelComponentSetForces.getCPtr(source), source), true);
   }
 
+  public boolean hasModel() {
+    return opensimModelSimulationJNI.ModelComponentSetForces_hasModel(swigCPtr, this);
+  }
+
+  public Model getModel() {
+    return new Model(opensimModelSimulationJNI.ModelComponentSetForces_getModel(swigCPtr, this), false);
+  }
+
+  public Model updModel() {
+    return new Model(opensimModelSimulationJNI.ModelComponentSetForces_updModel(swigCPtr, this), false);
+  }
+
+  public void setModel(Model model) {
+    opensimModelSimulationJNI.ModelComponentSetForces_setModel(swigCPtr, this, Model.getCPtr(model), model);
+  }
+
   public boolean insert(int aIndex, Force aObject) {
     return opensimModelSimulationJNI.ModelComponentSetForces_insert(swigCPtr, this, aIndex, Force.getCPtr(aObject), aObject);
   }

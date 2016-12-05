@@ -55,6 +55,7 @@ import org.opensim.modeling.Scale;
 import org.opensim.modeling.ScaleSet;
 import org.opensim.modeling.ScaleTool;
 import org.opensim.modeling.Storage;
+import org.opensim.modeling.Vec3;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.swingui.SwingWorker;
 import org.opensim.utils.ErrorDialog;
@@ -187,9 +188,9 @@ class BodySetScaleFactors extends Vector<BodyScaleFactors> {
                if(bodyIndex!=null) {
                   BodyScaleFactors scaleFactors = get(bodyIndex);
                   scaleFactors.useManual = scale.getApply();
-                  double[] scales = new double[3];
+                  Vec3 scales = new Vec3();
                   scale.getScaleFactors(scales);
-                  for(int j=0; j<3; j++) scaleFactors.manualScales[j] = scales[j];
+                  for(int j=0; j<3; j++) scaleFactors.manualScales[j] = scales.get(j);
                } else {
                   System.out.println("ERROR: Body '"+scale.getSegmentName()+"' referred to by scale '"+scale.getName()+"' doesn't exist!");
                }
@@ -237,9 +238,9 @@ class BodySetScaleFactors extends Vector<BodyScaleFactors> {
             Scale scale = new Scale();
             scale.setSegmentName(bodySet.get(i).getName());
             scale.setApply(get(i).useManualScale());
-            double[] scales=new double[3];
+            Vec3 scales=new Vec3();
             for(int j=0; j<3; j++){ 
-                scales[j]=get(i).manualScales[j];
+                scales.set(j, get(i).manualScales[j]);
             }
             scale.setScaleFactors(scales);
             modelScaler.getScaleSet().adoptAndAppend(Scale.safeDownCast(scale.clone()));
@@ -760,7 +761,7 @@ public class ScaleToolModel extends Observable implements Observer {
    private ScaleSet createIdentityScaleSet() {
       BodySet bodySet = getUnscaledModel().getBodySet();
       ScaleSet scaleSet = new ScaleSet();
-      double[] identityScale = new double[]{1., 1., 1.};
+      Vec3 identityScale = new Vec3(1.);
       for(int i=0; i<bodySet.getSize(); i++) {
          Scale scale = new Scale();
          scale.setSegmentName(bodySet.get(i).getName());

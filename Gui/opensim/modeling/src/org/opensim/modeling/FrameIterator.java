@@ -149,8 +149,8 @@ public class FrameIterator {
     return opensimModelSimulationJNI.FrameIterator_hasSystem(swigCPtr, this);
   }
 
-  public String getFullPathName() {
-    return opensimModelSimulationJNI.FrameIterator_getFullPathName(swigCPtr, this);
+  public String getAbsolutePathName() {
+    return opensimModelSimulationJNI.FrameIterator_getAbsolutePathName(swigCPtr, this);
   }
 
   public String getRelativePathName(Component wrt) {

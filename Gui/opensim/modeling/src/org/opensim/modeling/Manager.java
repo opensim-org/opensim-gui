@@ -123,12 +123,12 @@ public class Manager {
     return new ArrayDouble(opensimModelSimulationJNI.Manager_getDTArray(swigCPtr, this), false);
   }
 
-  public void setDTArray(int aN, double[] aDT, double aTI) {
-    opensimModelSimulationJNI.Manager_setDTArray__SWIG_0(swigCPtr, this, aN, aDT, aTI);
+  public void setDTArray(Vector aDT, double aTI) {
+    opensimModelSimulationJNI.Manager_setDTArray__SWIG_0(swigCPtr, this, Vector.getCPtr(aDT), aDT, aTI);
   }
 
-  public void setDTArray(int aN, double[] aDT) {
-    opensimModelSimulationJNI.Manager_setDTArray__SWIG_1(swigCPtr, this, aN, aDT);
+  public void setDTArray(Vector aDT) {
+    opensimModelSimulationJNI.Manager_setDTArray__SWIG_1(swigCPtr, this, Vector.getCPtr(aDT), aDT);
   }
 
   public double getDTArrayDT(int aStep) {

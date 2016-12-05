@@ -1678,7 +1678,7 @@ public class JPlotterPanel extends javax.swing.JPanel
             statesForAnalysis[xIndex]=val;
             StateVector newVector = new StateVector();
             //FIX40 openSimContext.computeConstrainedCoordinates(statesForAnalysis);
-            newVector.setStates(time, numStates, statesForAnalysis);            
+            //FIX40 newVector.setStates(time, numStates, statesForAnalysis);            
             statesStorage.append(newVector);
          }
          tool.setStatesStorage(statesStorage);
@@ -2259,7 +2259,7 @@ public class JPlotterPanel extends javax.swing.JPanel
                buffer[j]=newActivation;
          }
          //FIX40 openSimContext.computeConstrainedCoordinates(buffer);
-         outputStateVector.setStates(statesFromMotion.getTime(), numStates, buffer);
+         //FIX40 outputStateVector.setStates(statesFromMotion.getTime(), numStates, buffer);
          outputStorage.append(outputStateVector);
       }
       //outputStorage.print("motion2State.sto");

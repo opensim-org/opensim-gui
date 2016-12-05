@@ -48,12 +48,12 @@ public class STOFileAdapterVec6 {
     return (cPtr == 0) ? null : new STOFileAdapterVec6(cPtr, true);
   }
 
-  public static SWIGTYPE_p_OpenSim__TimeSeriesTable_T_SimTK__VecT_6_double_1_t_t read(String fileName) {
-    return new SWIGTYPE_p_OpenSim__TimeSeriesTable_T_SimTK__VecT_6_double_1_t_t(opensimModelCommonJNI.STOFileAdapterVec6_read(fileName), true);
+  public static TimeSeriesTableVec6 read(String fileName) {
+    return new TimeSeriesTableVec6(opensimModelCommonJNI.STOFileAdapterVec6_read(fileName), true);
   }
 
-  public static void write(SWIGTYPE_p_OpenSim__TimeSeriesTable_T_SimTK__VecT_6_double_1_t_t table, String fileName) {
-    opensimModelCommonJNI.STOFileAdapterVec6_write(SWIGTYPE_p_OpenSim__TimeSeriesTable_T_SimTK__VecT_6_double_1_t_t.getCPtr(table), fileName);
+  public static void write(TimeSeriesTableVec6 table, String fileName) {
+    opensimModelCommonJNI.STOFileAdapterVec6_write(TimeSeriesTableVec6.getCPtr(table), table, fileName);
   }
 
 }

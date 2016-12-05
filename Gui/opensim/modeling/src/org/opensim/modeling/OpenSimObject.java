@@ -144,12 +144,20 @@ public class OpenSimObject {
     return opensimModelCommonJNI.OpenSimObject_isObjectUpToDateWithProperties(swigCPtr, this);
   }
 
-  public static void PrintPropertyInfo(SWIGTYPE_p_std__ostream os, String classNameDotPropertyName) {
-    opensimModelCommonJNI.OpenSimObject_PrintPropertyInfo__SWIG_0(SWIGTYPE_p_std__ostream.getCPtr(os), classNameDotPropertyName);
+  public static boolean PrintPropertyInfo(SWIGTYPE_p_std__ostream os, String classNameDotPropertyName, boolean printFlagInfo) {
+    return opensimModelCommonJNI.OpenSimObject_PrintPropertyInfo__SWIG_0(SWIGTYPE_p_std__ostream.getCPtr(os), classNameDotPropertyName, printFlagInfo);
   }
 
-  public static void PrintPropertyInfo(SWIGTYPE_p_std__ostream os, String className, String propertyName) {
-    opensimModelCommonJNI.OpenSimObject_PrintPropertyInfo__SWIG_1(SWIGTYPE_p_std__ostream.getCPtr(os), className, propertyName);
+  public static boolean PrintPropertyInfo(SWIGTYPE_p_std__ostream os, String classNameDotPropertyName) {
+    return opensimModelCommonJNI.OpenSimObject_PrintPropertyInfo__SWIG_1(SWIGTYPE_p_std__ostream.getCPtr(os), classNameDotPropertyName);
+  }
+
+  public static boolean PrintPropertyInfo(SWIGTYPE_p_std__ostream os, String className, String propertyName, boolean printFlagInfo) {
+    return opensimModelCommonJNI.OpenSimObject_PrintPropertyInfo__SWIG_2(SWIGTYPE_p_std__ostream.getCPtr(os), className, propertyName, printFlagInfo);
+  }
+
+  public static boolean PrintPropertyInfo(SWIGTYPE_p_std__ostream os, String className, String propertyName) {
+    return opensimModelCommonJNI.OpenSimObject_PrintPropertyInfo__SWIG_3(SWIGTYPE_p_std__ostream.getCPtr(os), className, propertyName);
   }
 
   public static void registerType(OpenSimObject defaultObject) {

@@ -156,10 +156,6 @@ public class GeometryPath extends ModelComponent {
     return new ArrayPathPoint(opensimModelSimulationJNI.GeometryPath_getCurrentPath(swigCPtr, this, State.getCPtr(s), s), false);
   }
 
-  public ArrayPathPoint getCurrentDisplayPath(State s) {
-    return new ArrayPathPoint(opensimModelSimulationJNI.GeometryPath_getCurrentDisplayPath(swigCPtr, this, State.getCPtr(s), s), false);
-  }
-
   public double getLengtheningSpeed(State s) {
     return opensimModelSimulationJNI.GeometryPath_getLengtheningSpeed(swigCPtr, this, State.getCPtr(s), s);
   }

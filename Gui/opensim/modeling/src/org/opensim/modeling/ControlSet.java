@@ -97,36 +97,20 @@ public class ControlSet extends SetControls {
     opensimModelSimulationJNI.ControlSet_getControlList__SWIG_1(swigCPtr, this, aType, ArrayInt.getCPtr(rList), rList);
   }
 
-  public void getControlValues(double aT, double[] rX, boolean aForModelControls) {
-    opensimModelSimulationJNI.ControlSet_getControlValues__SWIG_0(swigCPtr, this, aT, rX, aForModelControls);
-  }
-
-  public void getControlValues(double aT, double[] rX) {
-    opensimModelSimulationJNI.ControlSet_getControlValues__SWIG_1(swigCPtr, this, aT, rX);
-  }
-
   public void getControlValues(double aT, ArrayDouble rX, boolean aForModelControls) {
-    opensimModelSimulationJNI.ControlSet_getControlValues__SWIG_2(swigCPtr, this, aT, ArrayDouble.getCPtr(rX), rX, aForModelControls);
+    opensimModelSimulationJNI.ControlSet_getControlValues__SWIG_0(swigCPtr, this, aT, ArrayDouble.getCPtr(rX), rX, aForModelControls);
   }
 
   public void getControlValues(double aT, ArrayDouble rX) {
-    opensimModelSimulationJNI.ControlSet_getControlValues__SWIG_3(swigCPtr, this, aT, ArrayDouble.getCPtr(rX), rX);
-  }
-
-  public void setControlValues(double aT, double[] aX, boolean aForModelControls) {
-    opensimModelSimulationJNI.ControlSet_setControlValues__SWIG_0(swigCPtr, this, aT, aX, aForModelControls);
-  }
-
-  public void setControlValues(double aT, double[] aX) {
-    opensimModelSimulationJNI.ControlSet_setControlValues__SWIG_1(swigCPtr, this, aT, aX);
+    opensimModelSimulationJNI.ControlSet_getControlValues__SWIG_1(swigCPtr, this, aT, ArrayDouble.getCPtr(rX), rX);
   }
 
   public void setControlValues(double aT, ArrayDouble aX, boolean aForModelControls) {
-    opensimModelSimulationJNI.ControlSet_setControlValues__SWIG_2(swigCPtr, this, aT, ArrayDouble.getCPtr(aX), aX, aForModelControls);
+    opensimModelSimulationJNI.ControlSet_setControlValues__SWIG_0(swigCPtr, this, aT, ArrayDouble.getCPtr(aX), aX, aForModelControls);
   }
 
   public void setControlValues(double aT, ArrayDouble aX) {
-    opensimModelSimulationJNI.ControlSet_setControlValues__SWIG_3(swigCPtr, this, aT, ArrayDouble.getCPtr(aX), aX);
+    opensimModelSimulationJNI.ControlSet_setControlValues__SWIG_1(swigCPtr, this, aT, ArrayDouble.getCPtr(aX), aX);
   }
 
   public int getNumParameters(boolean aForModelControls) {
@@ -177,36 +161,20 @@ public class ControlSet extends SetControls {
     opensimModelSimulationJNI.ControlSet_getParameterMaxs__SWIG_1(swigCPtr, this, ArrayDouble.getCPtr(rMaxs), rMaxs);
   }
 
-  public void getParameterValues(double[] rP, ArrayInt aList) {
-    opensimModelSimulationJNI.ControlSet_getParameterValues__SWIG_0(swigCPtr, this, rP, ArrayInt.getCPtr(aList), aList);
-  }
-
-  public void getParameterValues(double[] rP) {
-    opensimModelSimulationJNI.ControlSet_getParameterValues__SWIG_1(swigCPtr, this, rP);
-  }
-
   public void getParameterValues(ArrayDouble rP, ArrayInt aList) {
-    opensimModelSimulationJNI.ControlSet_getParameterValues__SWIG_2(swigCPtr, this, ArrayDouble.getCPtr(rP), rP, ArrayInt.getCPtr(aList), aList);
+    opensimModelSimulationJNI.ControlSet_getParameterValues__SWIG_0(swigCPtr, this, ArrayDouble.getCPtr(rP), rP, ArrayInt.getCPtr(aList), aList);
   }
 
   public void getParameterValues(ArrayDouble rP) {
-    opensimModelSimulationJNI.ControlSet_getParameterValues__SWIG_3(swigCPtr, this, ArrayDouble.getCPtr(rP), rP);
-  }
-
-  public void setParameterValues(double[] aP, ArrayInt aList) {
-    opensimModelSimulationJNI.ControlSet_setParameterValues__SWIG_0(swigCPtr, this, aP, ArrayInt.getCPtr(aList), aList);
-  }
-
-  public void setParameterValues(double[] aP) {
-    opensimModelSimulationJNI.ControlSet_setParameterValues__SWIG_1(swigCPtr, this, aP);
+    opensimModelSimulationJNI.ControlSet_getParameterValues__SWIG_1(swigCPtr, this, ArrayDouble.getCPtr(rP), rP);
   }
 
   public void setParameterValues(ArrayDouble aP, ArrayInt aList) {
-    opensimModelSimulationJNI.ControlSet_setParameterValues__SWIG_2(swigCPtr, this, ArrayDouble.getCPtr(aP), aP, ArrayInt.getCPtr(aList), aList);
+    opensimModelSimulationJNI.ControlSet_setParameterValues__SWIG_0(swigCPtr, this, ArrayDouble.getCPtr(aP), aP, ArrayInt.getCPtr(aList), aList);
   }
 
   public void setParameterValues(ArrayDouble aP) {
-    opensimModelSimulationJNI.ControlSet_setParameterValues__SWIG_3(swigCPtr, this, ArrayDouble.getCPtr(aP), aP);
+    opensimModelSimulationJNI.ControlSet_setParameterValues__SWIG_1(swigCPtr, this, ArrayDouble.getCPtr(aP), aP);
   }
 
   public void simplify(SWIGTYPE_p_PropertySet aProperties) {

@@ -45,4 +45,8 @@ public class FileAdapter extends DataAdapter {
     opensimModelCommonJNI.FileAdapter_writeFile(SWIGTYPE_p_std__mapT_std__string_OpenSim__AbstractDataTable_const_p_t.getCPtr(tables), fileName);
   }
 
+  public static String findExtension(String filename) {
+    return opensimModelCommonJNI.FileAdapter_findExtension(filename);
+  }
+
 }

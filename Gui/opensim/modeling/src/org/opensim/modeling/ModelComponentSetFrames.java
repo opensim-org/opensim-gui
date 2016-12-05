@@ -77,6 +77,22 @@ public class ModelComponentSetFrames extends SetFrames {
     this(opensimModelSimulationJNI.new_ModelComponentSetFrames__SWIG_4(ModelComponentSetFrames.getCPtr(source), source), true);
   }
 
+  public boolean hasModel() {
+    return opensimModelSimulationJNI.ModelComponentSetFrames_hasModel(swigCPtr, this);
+  }
+
+  public Model getModel() {
+    return new Model(opensimModelSimulationJNI.ModelComponentSetFrames_getModel(swigCPtr, this), false);
+  }
+
+  public Model updModel() {
+    return new Model(opensimModelSimulationJNI.ModelComponentSetFrames_updModel(swigCPtr, this), false);
+  }
+
+  public void setModel(Model model) {
+    opensimModelSimulationJNI.ModelComponentSetFrames_setModel(swigCPtr, this, Model.getCPtr(model), model);
+  }
+
   public boolean insert(int aIndex, Frame aObject) {
     return opensimModelSimulationJNI.ModelComponentSetFrames_insert(swigCPtr, this, aIndex, Frame.getCPtr(aObject), aObject);
   }

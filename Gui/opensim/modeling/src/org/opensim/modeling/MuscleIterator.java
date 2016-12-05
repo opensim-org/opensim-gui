@@ -629,8 +629,8 @@ public class MuscleIterator {
     return opensimModelSimulationJNI.MuscleIterator_hasSystem(swigCPtr, this);
   }
 
-  public String getFullPathName() {
-    return opensimModelSimulationJNI.MuscleIterator_getFullPathName(swigCPtr, this);
+  public String getAbsolutePathName() {
+    return opensimModelSimulationJNI.MuscleIterator_getAbsolutePathName(swigCPtr, this);
   }
 
   public String getRelativePathName(Component wrt) {

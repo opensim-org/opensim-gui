@@ -35,28 +35,24 @@ public class StateVector {
     }
   }
 
-  public StateVector(double aT, int aN, SWIGTYPE_p_double aData) {
-    this(opensimModelCommonJNI.new_StateVector__SWIG_0(aT, aN, SWIGTYPE_p_double.getCPtr(aData)), true);
+  public StateVector() {
+    this(opensimModelCommonJNI.new_StateVector__SWIG_0(), true);
   }
 
-  public StateVector(double aT, int aN) {
-    this(opensimModelCommonJNI.new_StateVector__SWIG_1(aT, aN), true);
+  public StateVector(StateVector arg0) {
+    this(opensimModelCommonJNI.new_StateVector__SWIG_1(StateVector.getCPtr(arg0), arg0), true);
   }
 
   public StateVector(double aT) {
     this(opensimModelCommonJNI.new_StateVector__SWIG_2(aT), true);
   }
 
-  public StateVector() {
-    this(opensimModelCommonJNI.new_StateVector__SWIG_3(), true);
+  public StateVector(double aT, Vector data) {
+    this(opensimModelCommonJNI.new_StateVector__SWIG_3(aT, Vector.getCPtr(data), data), true);
   }
 
-  public StateVector(StateVector aVector) {
-    this(opensimModelCommonJNI.new_StateVector__SWIG_4(StateVector.getCPtr(aVector), aVector), true);
-  }
-
-  public void setStates(double aT, int aN, double[] aY) {
-    opensimModelCommonJNI.StateVector_setStates(swigCPtr, this, aT, aN, aY);
+  public void setStates(double aT, Vector data) {
+    opensimModelCommonJNI.StateVector_setStates(swigCPtr, this, aT, Vector.getCPtr(data), data);
   }
 
   public int getSize() {
@@ -95,8 +91,8 @@ public class StateVector {
     opensimModelCommonJNI.StateVector_add__SWIG_0(swigCPtr, this, aValue);
   }
 
-  public void add(int aN, double[] aY) {
-    opensimModelCommonJNI.StateVector_add__SWIG_1(swigCPtr, this, aN, aY);
+  public void add(Vector values) {
+    opensimModelCommonJNI.StateVector_add__SWIG_1(swigCPtr, this, Vector.getCPtr(values), values);
   }
 
   public void add(int aN, double aValue) {
@@ -111,8 +107,8 @@ public class StateVector {
     opensimModelCommonJNI.StateVector_subtract__SWIG_0(swigCPtr, this, aValue);
   }
 
-  public void subtract(int aN, double[] aY) {
-    opensimModelCommonJNI.StateVector_subtract__SWIG_1(swigCPtr, this, aN, aY);
+  public void subtract(Vector values) {
+    opensimModelCommonJNI.StateVector_subtract__SWIG_1(swigCPtr, this, Vector.getCPtr(values), values);
   }
 
   public void subtract(StateVector aStateVector) {
@@ -123,8 +119,8 @@ public class StateVector {
     opensimModelCommonJNI.StateVector_multiply__SWIG_0(swigCPtr, this, aValue);
   }
 
-  public void multiply(int aN, double[] aY) {
-    opensimModelCommonJNI.StateVector_multiply__SWIG_1(swigCPtr, this, aN, aY);
+  public void multiply(Vector values) {
+    opensimModelCommonJNI.StateVector_multiply__SWIG_1(swigCPtr, this, Vector.getCPtr(values), values);
   }
 
   public void multiply(StateVector aStateVector) {
@@ -135,8 +131,8 @@ public class StateVector {
     opensimModelCommonJNI.StateVector_divide__SWIG_0(swigCPtr, this, aValue);
   }
 
-  public void divide(int aN, double[] aY) {
-    opensimModelCommonJNI.StateVector_divide__SWIG_1(swigCPtr, this, aN, aY);
+  public void divide(Vector values) {
+    opensimModelCommonJNI.StateVector_divide__SWIG_1(swigCPtr, this, Vector.getCPtr(values), values);
   }
 
   public void divide(StateVector aStateVector) {

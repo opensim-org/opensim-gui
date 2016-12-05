@@ -728,10 +728,10 @@ public class MotionDisplayer implements SelectionListener {
             Vec3 vOffset = new Vec3();
             double[] offset = new double[3];
             double[] gOffset = new double[3];
-            dof.getAxis(offset); // in parent frame, right?
+            dof.getAxis(vOffset); // in parent frame, right?
             double magnitude = states.getitem(index);
             for (int j=0; j<3; j++)
-               offset[j] *= (magnitude * 10.0); // * 10.0 because test data is small
+               offset[j] = vOffset.get(j) * magnitude * 10.0; // * 10.0 because test data is small
             context.transform(body, offset, gnd, gOffset);
             generalizedForcesRep.setNormalAtLocation(forceIndex, gOffset[0], gOffset[1], gOffset[2]);
             ///vOffset = dof.getJoint().getLocationInChild();

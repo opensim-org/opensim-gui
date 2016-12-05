@@ -214,8 +214,8 @@ public class BodyIterator {
     return opensimModelSimulationJNI.BodyIterator_hasSystem(swigCPtr, this);
   }
 
-  public String getFullPathName() {
-    return opensimModelSimulationJNI.BodyIterator_getFullPathName(swigCPtr, this);
+  public String getAbsolutePathName() {
+    return opensimModelSimulationJNI.BodyIterator_getAbsolutePathName(swigCPtr, this);
   }
 
   public String getRelativePathName(Component wrt) {

@@ -65,16 +65,16 @@ public class InputDouble extends AbstractInput {
     this(opensimModelCommonJNI.new_InputDouble__SWIG_1(name, Stage.getCPtr(connectAtStage), connectAtStage, isList, Component.getCPtr(owner), owner), true);
   }
 
-  public void connect(AbstractOutput output, String annotation) {
-    opensimModelCommonJNI.InputDouble_connect__SWIG_0(swigCPtr, this, AbstractOutput.getCPtr(output), output, annotation);
+  public void connect(AbstractOutput output, String alias) {
+    opensimModelCommonJNI.InputDouble_connect__SWIG_0(swigCPtr, this, AbstractOutput.getCPtr(output), output, alias);
   }
 
   public void connect(AbstractOutput output) {
     opensimModelCommonJNI.InputDouble_connect__SWIG_1(swigCPtr, this, AbstractOutput.getCPtr(output), output);
   }
 
-  public void connect(AbstractChannel channel, String annotation) {
-    opensimModelCommonJNI.InputDouble_connect__SWIG_2(swigCPtr, this, AbstractChannel.getCPtr(channel), channel, annotation);
+  public void connect(AbstractChannel channel, String alias) {
+    opensimModelCommonJNI.InputDouble_connect__SWIG_2(swigCPtr, this, AbstractChannel.getCPtr(channel), channel, alias);
   }
 
   public void connect(AbstractChannel channel) {
@@ -109,12 +109,28 @@ public class InputDouble extends AbstractInput {
     return new SWIGTYPE_p_OpenSim__OutputT_double_t__Channel(opensimModelCommonJNI.InputDouble_getChannel__SWIG_1(swigCPtr, this, index), false);
   }
 
-  public String getAnnotation() {
-    return opensimModelCommonJNI.InputDouble_getAnnotation__SWIG_0(swigCPtr, this);
+  public String getAlias() {
+    return opensimModelCommonJNI.InputDouble_getAlias__SWIG_0(swigCPtr, this);
   }
 
-  public String getAnnotation(long index) {
-    return opensimModelCommonJNI.InputDouble_getAnnotation__SWIG_1(swigCPtr, this, index);
+  public String getAlias(long index) {
+    return opensimModelCommonJNI.InputDouble_getAlias__SWIG_1(swigCPtr, this, index);
+  }
+
+  public void setAlias(String alias) {
+    opensimModelCommonJNI.InputDouble_setAlias__SWIG_0(swigCPtr, this, alias);
+  }
+
+  public void setAlias(long index, String alias) {
+    opensimModelCommonJNI.InputDouble_setAlias__SWIG_1(swigCPtr, this, index, alias);
+  }
+
+  public String getLabel() {
+    return opensimModelCommonJNI.InputDouble_getLabel__SWIG_0(swigCPtr, this);
+  }
+
+  public String getLabel(long index) {
+    return opensimModelCommonJNI.InputDouble_getLabel__SWIG_1(swigCPtr, this, index);
   }
 
   public Vector getVector(State state) {

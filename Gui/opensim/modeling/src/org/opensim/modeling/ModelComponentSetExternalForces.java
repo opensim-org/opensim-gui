@@ -77,6 +77,22 @@ public class ModelComponentSetExternalForces extends SetExternalForces {
     this(opensimModelSimulationJNI.new_ModelComponentSetExternalForces__SWIG_4(ModelComponentSetExternalForces.getCPtr(source), source), true);
   }
 
+  public boolean hasModel() {
+    return opensimModelSimulationJNI.ModelComponentSetExternalForces_hasModel(swigCPtr, this);
+  }
+
+  public Model getModel() {
+    return new Model(opensimModelSimulationJNI.ModelComponentSetExternalForces_getModel(swigCPtr, this), false);
+  }
+
+  public Model updModel() {
+    return new Model(opensimModelSimulationJNI.ModelComponentSetExternalForces_updModel(swigCPtr, this), false);
+  }
+
+  public void setModel(Model model) {
+    opensimModelSimulationJNI.ModelComponentSetExternalForces_setModel(swigCPtr, this, Model.getCPtr(model), model);
+  }
+
   public boolean insert(int aIndex, ExternalForce aObject) {
     return opensimModelSimulationJNI.ModelComponentSetExternalForces_insert(swigCPtr, this, aIndex, ExternalForce.getCPtr(aObject), aObject);
   }

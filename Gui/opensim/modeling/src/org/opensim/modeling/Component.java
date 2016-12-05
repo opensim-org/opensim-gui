@@ -102,8 +102,8 @@ public class Component extends OpenSimObject {
     opensimModelCommonJNI.Component_private_addComponent(swigCPtr, this, Component.getCPtr(subcomponent), subcomponent);
   }
 
-  public String getFullPathName() {
-    return opensimModelCommonJNI.Component_getFullPathName(swigCPtr, this);
+  public String getAbsolutePathName() {
+    return opensimModelCommonJNI.Component_getAbsolutePathName(swigCPtr, this);
   }
 
   public String getRelativePathName(Component wrt) {
