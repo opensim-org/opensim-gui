@@ -47,6 +47,10 @@ public class AbstractDataTable {
     return opensimModelCommonJNI.AbstractDataTable_getNumColumns(swigCPtr, this);
   }
 
+  public boolean hasTableMetaDataKey(String key) {
+    return opensimModelCommonJNI.AbstractDataTable_hasTableMetaDataKey(swigCPtr, this, key);
+  }
+
   public String getTableMetaDataAsString(String key) {
     return opensimModelCommonJNI.AbstractDataTable_getTableMetaDataAsString(swigCPtr, this, key);
   }
@@ -89,6 +93,26 @@ public class AbstractDataTable {
 
   public void setColumnLabels(StdVectorString columnLabels) {
     opensimModelCommonJNI.AbstractDataTable_setColumnLabels(swigCPtr, this, StdVectorString.getCPtr(columnLabels), columnLabels);
+  }
+
+  public void addTableMetaDataString(String key, String value) {
+    opensimModelCommonJNI.AbstractDataTable_addTableMetaDataString(swigCPtr, this, key, value);
+  }
+
+  public StdVectorMatrix getTableMetaDataVectorMatrix(String key) {
+    return new StdVectorMatrix(opensimModelCommonJNI.AbstractDataTable_getTableMetaDataVectorMatrix(swigCPtr, this, key), true);
+  }
+
+  public StdVectorUnsigned getTableMetaDataVectorUnsigned(String key) {
+    return new StdVectorUnsigned(opensimModelCommonJNI.AbstractDataTable_getTableMetaDataVectorUnsigned(swigCPtr, this, key), true);
+  }
+
+  public String getTableMetaDataString(String key) {
+    return opensimModelCommonJNI.AbstractDataTable_getTableMetaDataString(swigCPtr, this, key);
+  }
+
+  public StdVectorString getDependentsMetaDataString(String key) {
+    return new StdVectorString(opensimModelCommonJNI.AbstractDataTable_getDependentsMetaDataString(swigCPtr, this, key), true);
   }
 
 }

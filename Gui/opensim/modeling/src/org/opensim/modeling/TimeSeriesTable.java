@@ -57,4 +57,56 @@ public class TimeSeriesTable extends DataTable {
     this(opensimModelCommonJNI.new_TimeSeriesTable__SWIG_4(filename, tablename), true);
   }
 
+  public RowVectorView getNearestRow(double time, boolean restrictToTimeRange) {
+    return new RowVectorView(opensimModelCommonJNI.TimeSeriesTable_getNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
+  }
+
+  public RowVectorView getNearestRow(double time) {
+    return new RowVectorView(opensimModelCommonJNI.TimeSeriesTable_getNearestRow__SWIG_1(swigCPtr, this, time), true);
+  }
+
+  public RowVectorView updNearestRow(double time, boolean restrictToTimeRange) {
+    return new RowVectorView(opensimModelCommonJNI.TimeSeriesTable_updNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
+  }
+
+  public RowVectorView updNearestRow(double time) {
+    return new RowVectorView(opensimModelCommonJNI.TimeSeriesTable_updNearestRow__SWIG_1(swigCPtr, this, time), true);
+  }
+
+  public RowVector averageRow(double beginTime, double endTime) {
+    return new RowVector(opensimModelCommonJNI.TimeSeriesTable_averageRow(swigCPtr, this, beginTime, endTime), true);
+  }
+
+  public TimeSeriesTableVec3 packVec3() {
+    return new TimeSeriesTableVec3(opensimModelCommonJNI.TimeSeriesTable_packVec3__SWIG_0(swigCPtr, this), true);
+  }
+
+  public TimeSeriesTableVec3 packVec3(StdVectorString suffixes) {
+    return new TimeSeriesTableVec3(opensimModelCommonJNI.TimeSeriesTable_packVec3__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
+  }
+
+  public TimeSeriesTableUnitVec3 packUnitVec3() {
+    return new TimeSeriesTableUnitVec3(opensimModelCommonJNI.TimeSeriesTable_packUnitVec3__SWIG_0(swigCPtr, this), true);
+  }
+
+  public TimeSeriesTableUnitVec3 packUnitVec3(StdVectorString suffixes) {
+    return new TimeSeriesTableUnitVec3(opensimModelCommonJNI.TimeSeriesTable_packUnitVec3__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
+  }
+
+  public TimeSeriesTableQuaternion packQuaternion() {
+    return new TimeSeriesTableQuaternion(opensimModelCommonJNI.TimeSeriesTable_packQuaternion__SWIG_0(swigCPtr, this), true);
+  }
+
+  public TimeSeriesTableQuaternion packQuaternion(StdVectorString suffixes) {
+    return new TimeSeriesTableQuaternion(opensimModelCommonJNI.TimeSeriesTable_packQuaternion__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
+  }
+
+  public TimeSeriesTableSpatialVec packSpatialVec() {
+    return new TimeSeriesTableSpatialVec(opensimModelCommonJNI.TimeSeriesTable_packSpatialVec__SWIG_0(swigCPtr, this), true);
+  }
+
+  public TimeSeriesTableSpatialVec packSpatialVec(StdVectorString suffixes) {
+    return new TimeSeriesTableSpatialVec(opensimModelCommonJNI.TimeSeriesTable_packSpatialVec__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
+  }
+
 }

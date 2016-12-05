@@ -61,6 +61,10 @@ public class DataTable extends AbstractDataTable {
     opensimModelCommonJNI.DataTable_appendRow__SWIG_3(swigCPtr, this, indRow, RowVector.getCPtr(depRow), depRow);
   }
 
+  public void appendRow(double indRow, RowVectorView depRow) {
+    opensimModelCommonJNI.DataTable_appendRow__SWIG_4(swigCPtr, this, indRow, RowVectorView.getCPtr(depRow), depRow);
+  }
+
   public RowVectorView getRowAtIndex(long index) {
     return new RowVectorView(opensimModelCommonJNI.DataTable_getRowAtIndex(swigCPtr, this, index), true);
   }
@@ -75,6 +79,14 @@ public class DataTable extends AbstractDataTable {
 
   public RowVectorView updRow(double ind) {
     return new RowVectorView(opensimModelCommonJNI.DataTable_updRow(swigCPtr, this, ind), true);
+  }
+
+  public void removeRowAtIndex(long index) {
+    opensimModelCommonJNI.DataTable_removeRowAtIndex(swigCPtr, this, index);
+  }
+
+  public void removeRow(double ind) {
+    opensimModelCommonJNI.DataTable_removeRow(swigCPtr, this, ind);
   }
 
   public StdVectorDouble getIndependentColumn() {
@@ -143,6 +155,38 @@ public class DataTable extends AbstractDataTable {
 
   public String toString() {
     return opensimModelCommonJNI.DataTable_toString__SWIG_6(swigCPtr, this);
+  }
+
+  public DataTableVec3 packVec3() {
+    return new DataTableVec3(opensimModelCommonJNI.DataTable_packVec3__SWIG_0(swigCPtr, this), true);
+  }
+
+  public DataTableVec3 packVec3(StdVectorString suffixes) {
+    return new DataTableVec3(opensimModelCommonJNI.DataTable_packVec3__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
+  }
+
+  public DataTableUnitVec3 packUnitVec3() {
+    return new DataTableUnitVec3(opensimModelCommonJNI.DataTable_packUnitVec3__SWIG_0(swigCPtr, this), true);
+  }
+
+  public DataTableUnitVec3 packUnitVec3(StdVectorString suffixes) {
+    return new DataTableUnitVec3(opensimModelCommonJNI.DataTable_packUnitVec3__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
+  }
+
+  public DataTableQuaternion packQuaternion() {
+    return new DataTableQuaternion(opensimModelCommonJNI.DataTable_packQuaternion__SWIG_0(swigCPtr, this), true);
+  }
+
+  public DataTableQuaternion packQuaternion(StdVectorString suffixes) {
+    return new DataTableQuaternion(opensimModelCommonJNI.DataTable_packQuaternion__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
+  }
+
+  public DataTableSpatialVec packSpatialVec() {
+    return new DataTableSpatialVec(opensimModelCommonJNI.DataTable_packSpatialVec__SWIG_0(swigCPtr, this), true);
+  }
+
+  public DataTableSpatialVec packSpatialVec(StdVectorString suffixes) {
+    return new DataTableSpatialVec(opensimModelCommonJNI.DataTable_packSpatialVec__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
   }
 
 }

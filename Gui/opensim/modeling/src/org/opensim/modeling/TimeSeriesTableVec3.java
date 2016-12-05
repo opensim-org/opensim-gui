@@ -57,6 +57,26 @@ public class TimeSeriesTableVec3 extends DataTableVec3 {
     this(opensimModelCommonJNI.new_TimeSeriesTableVec3__SWIG_4(filename, tablename), true);
   }
 
+  public RowVectorViewVec3 getNearestRow(double time, boolean restrictToTimeRange) {
+    return new RowVectorViewVec3(opensimModelCommonJNI.TimeSeriesTableVec3_getNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
+  }
+
+  public RowVectorViewVec3 getNearestRow(double time) {
+    return new RowVectorViewVec3(opensimModelCommonJNI.TimeSeriesTableVec3_getNearestRow__SWIG_1(swigCPtr, this, time), true);
+  }
+
+  public RowVectorViewVec3 updNearestRow(double time, boolean restrictToTimeRange) {
+    return new RowVectorViewVec3(opensimModelCommonJNI.TimeSeriesTableVec3_updNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
+  }
+
+  public RowVectorViewVec3 updNearestRow(double time) {
+    return new RowVectorViewVec3(opensimModelCommonJNI.TimeSeriesTableVec3_updNearestRow__SWIG_1(swigCPtr, this, time), true);
+  }
+
+  public RowVectorOfVec3 averageRow(double beginTime, double endTime) {
+    return new RowVectorOfVec3(opensimModelCommonJNI.TimeSeriesTableVec3_averageRow(swigCPtr, this, beginTime, endTime), true);
+  }
+
   public TimeSeriesTable flatten() {
     return new TimeSeriesTable(opensimModelCommonJNI.TimeSeriesTableVec3_flatten__SWIG_0(swigCPtr, this), true);
   }

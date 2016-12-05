@@ -8,15 +8,15 @@
 
 package org.opensim.modeling;
 
-public class IncorrectTableType extends InvalidArgument {
+public class InvalidTimeRange extends OpenSimException {
   private transient long swigCPtr;
 
-  public IncorrectTableType(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.IncorrectTableType_SWIGUpcast(cPtr), cMemoryOwn);
+  public InvalidTimeRange(long cPtr, boolean cMemoryOwn) {
+    super(opensimModelCommonJNI.InvalidTimeRange_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(IncorrectTableType obj) {
+  public static long getCPtr(InvalidTimeRange obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,19 +28,15 @@ public class IncorrectTableType extends InvalidArgument {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_IncorrectTableType(swigCPtr);
+        opensimModelCommonJNI.delete_InvalidTimeRange(swigCPtr);
       }
       swigCPtr = 0;
     }
     super.delete();
   }
 
-  public IncorrectTableType(String file, long line, String func, String message) {
-    this(opensimModelCommonJNI.new_IncorrectTableType__SWIG_0(file, line, func, message), true);
-  }
-
-  public IncorrectTableType(String file, long line, String func) {
-    this(opensimModelCommonJNI.new_IncorrectTableType__SWIG_1(file, line, func), true);
+  public InvalidTimeRange(String file, long line, String func, double begTime, double endTime) {
+    this(opensimModelCommonJNI.new_InvalidTimeRange(file, line, func, begTime, endTime), true);
   }
 
 }

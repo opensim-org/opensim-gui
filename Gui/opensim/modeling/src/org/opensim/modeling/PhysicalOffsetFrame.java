@@ -58,7 +58,19 @@ public class PhysicalOffsetFrame extends PhysicalFrameWithOffset {
   }
 
   public PhysicalOffsetFrame() {
-    this(opensimModelSimulationJNI.new_PhysicalOffsetFrame(), true);
+    this(opensimModelSimulationJNI.new_PhysicalOffsetFrame__SWIG_0(), true);
+  }
+
+  public PhysicalOffsetFrame(PhysicalFrame parent, Transform offset) {
+    this(opensimModelSimulationJNI.new_PhysicalOffsetFrame__SWIG_1(PhysicalFrame.getCPtr(parent), parent, Transform.getCPtr(offset), offset), true);
+  }
+
+  public PhysicalOffsetFrame(String name, PhysicalFrame parent, Transform offset) {
+    this(opensimModelSimulationJNI.new_PhysicalOffsetFrame__SWIG_2(name, PhysicalFrame.getCPtr(parent), parent, Transform.getCPtr(offset), offset), true);
+  }
+
+  public PhysicalOffsetFrame(String name, String parentName, Transform offset) {
+    this(opensimModelSimulationJNI.new_PhysicalOffsetFrame__SWIG_3(name, parentName, Transform.getCPtr(offset), offset), true);
   }
 
 }

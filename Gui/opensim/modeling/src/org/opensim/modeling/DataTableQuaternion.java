@@ -69,6 +69,10 @@ public class DataTableQuaternion extends AbstractDataTable {
     opensimModelCommonJNI.DataTableQuaternion_appendRow__SWIG_3(swigCPtr, this, indRow, SWIGTYPE_p_SimTK__RowVector_T_SimTK__Quaternion_t.getCPtr(depRow));
   }
 
+  public void appendRow(double indRow, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t depRow) {
+    opensimModelCommonJNI.DataTableQuaternion_appendRow__SWIG_4(swigCPtr, this, indRow, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t.getCPtr(depRow));
+  }
+
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t getRowAtIndex(long index) {
     return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t(opensimModelCommonJNI.DataTableQuaternion_getRowAtIndex(swigCPtr, this, index), true);
   }
@@ -83,6 +87,14 @@ public class DataTableQuaternion extends AbstractDataTable {
 
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t updRow(double ind) {
     return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t(opensimModelCommonJNI.DataTableQuaternion_updRow(swigCPtr, this, ind), true);
+  }
+
+  public void removeRowAtIndex(long index) {
+    opensimModelCommonJNI.DataTableQuaternion_removeRowAtIndex(swigCPtr, this, index);
+  }
+
+  public void removeRow(double ind) {
+    opensimModelCommonJNI.DataTableQuaternion_removeRow(swigCPtr, this, ind);
   }
 
   public StdVectorDouble getIndependentColumn() {

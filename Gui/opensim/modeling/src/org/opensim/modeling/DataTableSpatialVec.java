@@ -69,6 +69,10 @@ public class DataTableSpatialVec extends AbstractDataTable {
     opensimModelCommonJNI.DataTableSpatialVec_appendRow__SWIG_3(swigCPtr, this, indRow, SWIGTYPE_p_SimTK__RowVector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t.getCPtr(depRow));
   }
 
+  public void appendRow(double indRow, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t depRow) {
+    opensimModelCommonJNI.DataTableSpatialVec_appendRow__SWIG_4(swigCPtr, this, indRow, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t.getCPtr(depRow));
+  }
+
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t getRowAtIndex(long index) {
     return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t(opensimModelCommonJNI.DataTableSpatialVec_getRowAtIndex(swigCPtr, this, index), true);
   }
@@ -83,6 +87,14 @@ public class DataTableSpatialVec extends AbstractDataTable {
 
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t updRow(double ind) {
     return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t(opensimModelCommonJNI.DataTableSpatialVec_updRow(swigCPtr, this, ind), true);
+  }
+
+  public void removeRowAtIndex(long index) {
+    opensimModelCommonJNI.DataTableSpatialVec_removeRowAtIndex(swigCPtr, this, index);
+  }
+
+  public void removeRow(double ind) {
+    opensimModelCommonJNI.DataTableSpatialVec_removeRow(swigCPtr, this, ind);
   }
 
   public StdVectorDouble getIndependentColumn() {

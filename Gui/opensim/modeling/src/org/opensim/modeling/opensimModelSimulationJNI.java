@@ -749,7 +749,10 @@ public class opensimModelSimulationJNI {
   public final static native long PhysicalOffsetFrame_clone(long jarg1, PhysicalOffsetFrame jarg1_);
   public final static native String PhysicalOffsetFrame_getConcreteClassName(long jarg1, PhysicalOffsetFrame jarg1_);
   public final static native void delete_PhysicalOffsetFrame(long jarg1);
-  public final static native long new_PhysicalOffsetFrame();
+  public final static native long new_PhysicalOffsetFrame__SWIG_0();
+  public final static native long new_PhysicalOffsetFrame__SWIG_1(long jarg1, PhysicalFrame jarg1_, long jarg2, Transform jarg2_);
+  public final static native long new_PhysicalOffsetFrame__SWIG_2(String jarg1, long jarg2, PhysicalFrame jarg2_, long jarg3, Transform jarg3_);
+  public final static native long new_PhysicalOffsetFrame__SWIG_3(String jarg1, String jarg2, long jarg3, Transform jarg3_);
   public final static native long SetFrames_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void SetFrames_assign(long jarg1, SetFrames jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String SetFrames_getClassName();
@@ -6068,6 +6071,8 @@ public class opensimModelSimulationJNI {
   public final static native void ArrayCoordinateReference_clear(long jarg1, ArrayCoordinateReference jarg1_);
   public final static native long ArrayCoordinateReference_insert__SWIG_0(long jarg1, ArrayCoordinateReference jarg1_, long jarg2, CoordinateReference jarg2_, long jarg3, long jarg4, CoordinateReference jarg4_);
   public final static native long ArrayCoordinateReference_insert__SWIG_1(long jarg1, ArrayCoordinateReference jarg1_, long jarg2, CoordinateReference jarg2_, long jarg3, CoordinateReference jarg3_);
+  public final static native long new_UnsupportedFileType(String jarg1, long jarg2, String jarg3, String jarg4, String jarg5);
+  public final static native void delete_UnsupportedFileType(long jarg1);
   public final static native long MarkerWeight_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void MarkerWeight_assign(long jarg1, MarkerWeight jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String MarkerWeight_getClassName();
@@ -6113,8 +6118,9 @@ public class opensimModelSimulationJNI {
   public final static native long new_MarkersReference__SWIG_0();
   public final static native long new_MarkersReference__SWIG_1(String jarg1, long jarg2, Units jarg2_);
   public final static native long new_MarkersReference__SWIG_2(String jarg1);
-  public final static native long new_MarkersReference__SWIG_3(long jarg1, MarkerData jarg1_, long jarg2);
-  public final static native long new_MarkersReference__SWIG_4(long jarg1, MarkerData jarg1_);
+  public final static native long new_MarkersReference__SWIG_3(long jarg1, TimeSeriesTableVec3 jarg1_, long jarg2, long jarg3, Units jarg3_);
+  public final static native long new_MarkersReference__SWIG_4(long jarg1, TimeSeriesTableVec3 jarg1_, long jarg2);
+  public final static native long new_MarkersReference__SWIG_5(long jarg1, TimeSeriesTableVec3 jarg1_);
   public final static native void delete_MarkersReference(long jarg1);
   public final static native void MarkersReference_loadMarkersFile__SWIG_0(long jarg1, MarkersReference jarg1_, String jarg2, long jarg3, Units jarg3_);
   public final static native void MarkersReference_loadMarkersFile__SWIG_1(long jarg1, MarkersReference jarg1_, String jarg2);
@@ -6122,13 +6128,12 @@ public class opensimModelSimulationJNI {
   public final static native long MarkersReference_getValidTimeRange(long jarg1, MarkersReference jarg1_);
   public final static native long MarkersReference_getNames(long jarg1, MarkersReference jarg1_);
   public final static native void MarkersReference_getValues(long jarg1, MarkersReference jarg1_, long jarg2, State jarg2_, long jarg3, SimTKArrayVec3 jarg3_);
-  public final static native void MarkersReference_getSpeedValues(long jarg1, MarkersReference jarg1_, long jarg2, State jarg2_, long jarg3, SimTKArrayVec3 jarg3_);
-  public final static native void MarkersReference_getAccelerationValues(long jarg1, MarkersReference jarg1_, long jarg2, State jarg2_, long jarg3, SimTKArrayVec3 jarg3_);
   public final static native void MarkersReference_getWeights(long jarg1, MarkersReference jarg1_, long jarg2, State jarg2_, long jarg3, SimTKArrayDouble jarg3_);
   public final static native double MarkersReference_getSamplingFrequency(long jarg1, MarkersReference jarg1_);
   public final static native long MarkersReference_updMarkerWeightSet(long jarg1, MarkersReference jarg1_);
   public final static native void MarkersReference_setMarkerWeightSet(long jarg1, MarkersReference jarg1_, long jarg2);
   public final static native void MarkersReference_setDefaultWeight(long jarg1, MarkersReference jarg1_, double jarg2);
+  public final static native long MarkersReference_getNumFrames(long jarg1, MarkersReference jarg1_);
   public final static native long CoordinateReference_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void CoordinateReference_assign(long jarg1, CoordinateReference jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String CoordinateReference_getClassName();
@@ -7822,6 +7827,7 @@ public class opensimModelSimulationJNI {
   public final static native long ExpressionBasedBushingForce_SWIGUpcast(long jarg1);
   public final static native long ReferenceVec3_SWIGUpcast(long jarg1);
   public final static native long ReferenceDouble_SWIGUpcast(long jarg1);
+  public final static native long UnsupportedFileType_SWIGUpcast(long jarg1);
   public final static native long MarkerWeight_SWIGUpcast(long jarg1);
   public final static native long MarkersReference_SWIGUpcast(long jarg1);
   public final static native long CoordinateReference_SWIGUpcast(long jarg1);

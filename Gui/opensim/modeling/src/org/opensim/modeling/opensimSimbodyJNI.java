@@ -9,6 +9,17 @@
 package org.opensim.modeling;
 
 public class opensimSimbodyJNI {
+  public final static native long new_StdVectorUnsigned__SWIG_0();
+  public final static native long new_StdVectorUnsigned__SWIG_1(long jarg1);
+  public final static native long StdVectorUnsigned_size(long jarg1, StdVectorUnsigned jarg1_);
+  public final static native long StdVectorUnsigned_capacity(long jarg1, StdVectorUnsigned jarg1_);
+  public final static native void StdVectorUnsigned_reserve(long jarg1, StdVectorUnsigned jarg1_, long jarg2);
+  public final static native boolean StdVectorUnsigned_isEmpty(long jarg1, StdVectorUnsigned jarg1_);
+  public final static native void StdVectorUnsigned_clear(long jarg1, StdVectorUnsigned jarg1_);
+  public final static native void StdVectorUnsigned_add(long jarg1, StdVectorUnsigned jarg1_, long jarg2);
+  public final static native long StdVectorUnsigned_get(long jarg1, StdVectorUnsigned jarg1_, int jarg2);
+  public final static native void StdVectorUnsigned_set(long jarg1, StdVectorUnsigned jarg1_, int jarg2, long jarg3);
+  public final static native void delete_StdVectorUnsigned(long jarg1);
   public final static native long new_StdVectorInt__SWIG_0();
   public final static native long new_StdVectorInt__SWIG_1(long jarg1);
   public final static native long StdVectorInt_size(long jarg1, StdVectorInt jarg1_);

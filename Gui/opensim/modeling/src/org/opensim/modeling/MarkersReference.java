@@ -177,12 +177,16 @@ public class MarkersReference extends ReferenceVec3 {
     this(opensimModelSimulationJNI.new_MarkersReference__SWIG_2(markerFileName), true);
   }
 
-  public MarkersReference(MarkerData markerData, SWIGTYPE_p_OpenSim__SetT_OpenSim__MarkerWeight_t markerWeightSet) {
-    this(opensimModelSimulationJNI.new_MarkersReference__SWIG_3(MarkerData.getCPtr(markerData), markerData, SWIGTYPE_p_OpenSim__SetT_OpenSim__MarkerWeight_t.getCPtr(markerWeightSet)), true);
+  public MarkersReference(TimeSeriesTableVec3 markerData, SWIGTYPE_p_OpenSim__SetT_OpenSim__MarkerWeight_t markerWeightSet, Units units) {
+    this(opensimModelSimulationJNI.new_MarkersReference__SWIG_3(TimeSeriesTableVec3.getCPtr(markerData), markerData, SWIGTYPE_p_OpenSim__SetT_OpenSim__MarkerWeight_t.getCPtr(markerWeightSet), Units.getCPtr(units), units), true);
   }
 
-  public MarkersReference(MarkerData markerData) {
-    this(opensimModelSimulationJNI.new_MarkersReference__SWIG_4(MarkerData.getCPtr(markerData), markerData), true);
+  public MarkersReference(TimeSeriesTableVec3 markerData, SWIGTYPE_p_OpenSim__SetT_OpenSim__MarkerWeight_t markerWeightSet) {
+    this(opensimModelSimulationJNI.new_MarkersReference__SWIG_4(TimeSeriesTableVec3.getCPtr(markerData), markerData, SWIGTYPE_p_OpenSim__SetT_OpenSim__MarkerWeight_t.getCPtr(markerWeightSet)), true);
+  }
+
+  public MarkersReference(TimeSeriesTableVec3 markerData) {
+    this(opensimModelSimulationJNI.new_MarkersReference__SWIG_5(TimeSeriesTableVec3.getCPtr(markerData), markerData), true);
   }
 
   public void loadMarkersFile(String markerFile, Units modelUnits) {
@@ -209,14 +213,6 @@ public class MarkersReference extends ReferenceVec3 {
     opensimModelSimulationJNI.MarkersReference_getValues(swigCPtr, this, State.getCPtr(s), s, SimTKArrayVec3.getCPtr(values), values);
   }
 
-  public void getSpeedValues(State s, SimTKArrayVec3 speedValues) {
-    opensimModelSimulationJNI.MarkersReference_getSpeedValues(swigCPtr, this, State.getCPtr(s), s, SimTKArrayVec3.getCPtr(speedValues), speedValues);
-  }
-
-  public void getAccelerationValues(State s, SimTKArrayVec3 accValues) {
-    opensimModelSimulationJNI.MarkersReference_getAccelerationValues(swigCPtr, this, State.getCPtr(s), s, SimTKArrayVec3.getCPtr(accValues), accValues);
-  }
-
   public void getWeights(State s, SimTKArrayDouble weights) {
     opensimModelSimulationJNI.MarkersReference_getWeights(swigCPtr, this, State.getCPtr(s), s, SimTKArrayDouble.getCPtr(weights), weights);
   }
@@ -235,6 +231,10 @@ public class MarkersReference extends ReferenceVec3 {
 
   public void setDefaultWeight(double weight) {
     opensimModelSimulationJNI.MarkersReference_setDefaultWeight(swigCPtr, this, weight);
+  }
+
+  public long getNumFrames() {
+    return opensimModelSimulationJNI.MarkersReference_getNumFrames(swigCPtr, this);
   }
 
 }

@@ -69,6 +69,10 @@ public class DataTableVec3 extends AbstractDataTable {
     opensimModelCommonJNI.DataTableVec3_appendRow__SWIG_3(swigCPtr, this, indRow, RowVectorOfVec3.getCPtr(depRow), depRow);
   }
 
+  public void appendRow(double indRow, RowVectorViewVec3 depRow) {
+    opensimModelCommonJNI.DataTableVec3_appendRow__SWIG_4(swigCPtr, this, indRow, RowVectorViewVec3.getCPtr(depRow), depRow);
+  }
+
   public RowVectorViewVec3 getRowAtIndex(long index) {
     return new RowVectorViewVec3(opensimModelCommonJNI.DataTableVec3_getRowAtIndex(swigCPtr, this, index), true);
   }
@@ -83,6 +87,14 @@ public class DataTableVec3 extends AbstractDataTable {
 
   public RowVectorViewVec3 updRow(double ind) {
     return new RowVectorViewVec3(opensimModelCommonJNI.DataTableVec3_updRow(swigCPtr, this, ind), true);
+  }
+
+  public void removeRowAtIndex(long index) {
+    opensimModelCommonJNI.DataTableVec3_removeRowAtIndex(swigCPtr, this, index);
+  }
+
+  public void removeRow(double ind) {
+    opensimModelCommonJNI.DataTableVec3_removeRow(swigCPtr, this, ind);
   }
 
   public StdVectorDouble getIndependentColumn() {

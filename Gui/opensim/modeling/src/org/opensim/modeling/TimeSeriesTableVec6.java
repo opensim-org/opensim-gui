@@ -57,4 +57,32 @@ public class TimeSeriesTableVec6 extends DataTableVec6 {
     this(opensimModelCommonJNI.new_TimeSeriesTableVec6__SWIG_4(filename, tablename), true);
   }
 
+  public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t getNearestRow(double time, boolean restrictToTimeRange) {
+    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t(opensimModelCommonJNI.TimeSeriesTableVec6_getNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
+  }
+
+  public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t getNearestRow(double time) {
+    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t(opensimModelCommonJNI.TimeSeriesTableVec6_getNearestRow__SWIG_1(swigCPtr, this, time), true);
+  }
+
+  public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t updNearestRow(double time, boolean restrictToTimeRange) {
+    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t(opensimModelCommonJNI.TimeSeriesTableVec6_updNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
+  }
+
+  public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t updNearestRow(double time) {
+    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t(opensimModelCommonJNI.TimeSeriesTableVec6_updNearestRow__SWIG_1(swigCPtr, this, time), true);
+  }
+
+  public SWIGTYPE_p_SimTK__RowVector_T_SimTK__VecT_6_double_1_t_t averageRow(double beginTime, double endTime) {
+    return new SWIGTYPE_p_SimTK__RowVector_T_SimTK__VecT_6_double_1_t_t(opensimModelCommonJNI.TimeSeriesTableVec6_averageRow(swigCPtr, this, beginTime, endTime), true);
+  }
+
+  public TimeSeriesTable flatten() {
+    return new TimeSeriesTable(opensimModelCommonJNI.TimeSeriesTableVec6_flatten__SWIG_0(swigCPtr, this), true);
+  }
+
+  public TimeSeriesTable flatten(StdVectorString suffixes) {
+    return new TimeSeriesTable(opensimModelCommonJNI.TimeSeriesTableVec6_flatten__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
+  }
+
 }

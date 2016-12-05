@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class TimeOutOfRange extends InvalidTimestamp {
+public class TimeOutOfRange extends OpenSimException {
   private transient long swigCPtr;
 
   public TimeOutOfRange(long cPtr, boolean cMemoryOwn) {
@@ -35,8 +35,8 @@ public class TimeOutOfRange extends InvalidTimestamp {
     super.delete();
   }
 
-  public TimeOutOfRange(String file, long line, String func, double timestamp, double minTimestamp, double maxTimestamp) {
-    this(opensimModelCommonJNI.new_TimeOutOfRange(file, line, func, timestamp, minTimestamp, maxTimestamp), true);
+  public TimeOutOfRange(String file, long line, String func, double time, double min, double max) {
+    this(opensimModelCommonJNI.new_TimeOutOfRange(file, line, func, time, min, max), true);
   }
 
 }
