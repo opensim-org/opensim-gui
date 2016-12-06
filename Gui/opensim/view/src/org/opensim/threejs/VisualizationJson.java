@@ -36,6 +36,7 @@ import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.State;
 import org.opensim.modeling.Transform;
 import org.opensim.modeling.Vec3;
+import org.opensim.modeling.WrapObject;
 
 /**
  *
@@ -118,7 +119,7 @@ public class VisualizationJson {
                 adg.clear();
                 comp.generateDecorations(false, mdh, model.getWorkingState(), adg);
                  if (adg.size() > 0) {
-                    processDecorativeGeometry(adg, comp, dgimp, json_materials);
+                     processDecorativeGeometry(adg, comp, dgimp, json_materials);
                 }
             }
             mcIter.next();
@@ -130,6 +131,11 @@ public class VisualizationJson {
             DecorativeGeometryImplementationJS dgimp, JSONArray json_materials) {
         DecorativeGeometry dg;
         ArrayList<UUID> vis_uuidList = new ArrayList<UUID>(1);
+        // Detect partial wrap object and if true set quadrant in dgimp so it's observed
+        WrapObject wo = WrapObject.safeDownCast(comp);
+        boolean partialWrapObject = (wo != null) && !wo.get_quadrant().toLowerCase().equals("all");
+        if (partialWrapObject)
+            dgimp.setQuadrants(wo.get_quadrant());
         for (int idx = 0; idx < adg.size(); idx++) {
             dg = adg.getElt(idx);
             String geomId = comp.getAbsolutePathName();
@@ -138,6 +144,8 @@ public class VisualizationJson {
             UUID uuid = UUID.randomUUID();
             mapDecorativeGeometryToUUID.put(geomId, uuid);
             dgimp.setGeomID(uuid);
+            // If partialWrapObject set value in dgimp 
+
             dg.implementGeometry(dgimp);
             JSONObject bodyJson = mapBodyIndicesToJson.get(dg.getBodyId());
             if (bodyJson.get("children")==null)
@@ -147,7 +155,9 @@ public class VisualizationJson {
             
             mapUUIDToComponent.put(uuid_mesh, comp);
         }
-        mapComponentToUUID.put(comp, vis_uuidList);
+        if (partialWrapObject)
+            dgimp.setQuadrants("");
+         mapComponentToUUID.put(comp, vis_uuidList);
         System.out.println("Map component="+comp.getAbsolutePathName()+" to "+vis_uuidList.size());   
  
     }

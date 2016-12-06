@@ -44,6 +44,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
     private double visualizerScaleFactor = 100;
     boolean updateMode = false;
     private Map<String, Object> last_json = null;
+    private String quadrants = "";
     
     public DecorativeGeometryImplementationJS(JSONArray jsonArr, JSONArray jsonArrMaterials, double scale) {
         this.jsonArr = jsonArr;
@@ -249,10 +250,32 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 	dg_json.put("radius", arg0.getRadius()*visualizerScaleFactor);
 	dg_json.put("widthSegments", 32);
 	dg_json.put("heightSegments", 16);
-	dg_json.put("phiStart", 0);
-	dg_json.put("phiLength", 6.28);
-	dg_json.put("thetaStart", 0);
-	dg_json.put("thetaLength", 3.14);
+        if (quadrants.equals("")){
+           dg_json.put("phiStart", 0);
+           dg_json.put("phiLength", 6.28);
+           dg_json.put("thetaStart", 0);
+           dg_json.put("thetaLength", 3.14159);
+        }
+        else{
+            if (quadrants.contains("x")){
+                dg_json.put("thetaStart", 0);
+                dg_json.put("thetaLength", 3.14159);
+                dg_json.put("phiLength", 3.14159);
+                if (quadrants.equalsIgnoreCase("-x"))
+                    dg_json.put("phiStart", -1.5709);
+                else
+                    dg_json.put("phiStart", 1.5709);
+            }
+            else if (quadrants.contains("y")){ // untested
+                dg_json.put("thetaStart", -1.5709);
+                dg_json.put("thetaLength", 3.14159);
+                dg_json.put("phiLength", 3.14159);
+                if (quadrants.equalsIgnoreCase("-y"))
+                    dg_json.put("phiStart", 1.5709);
+                else
+                    dg_json.put("phiStart", -1.5709);
+                }
+        }
         jsonArr.add(dg_json);        
         createMaterialJson(arg0, true);
     }
@@ -282,6 +305,13 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 	dg_json.put("height", arg0.getHalfHeight()*2*visualizerScaleFactor);
 	dg_json.put("radialSegments", 32);
 	dg_json.put("heightSegments", 1);
+        if (!quadrants.equals("")){
+            dg_json.put("thetaLength", 3.14159);
+            if (quadrants.equalsIgnoreCase("-y"))
+                dg_json.put("thetaStart", -1.5709);
+            else
+                dg_json.put("thetaStart", 1.5709);
+        }
         jsonArr.add(dg_json);        
         createMaterialJson(arg0, true);
     }
@@ -417,5 +447,9 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
      */
     public Map<String, Object> getLast_json() {
         return last_json;
+    }
+
+    void setQuadrants(String _quadrant) {
+        quadrants = _quadrant;
     }
 }
