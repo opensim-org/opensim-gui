@@ -234,10 +234,36 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 	dg_json.put("radius", sphereRadius*visualizerScaleFactor);
 	dg_json.put("widthSegments", 32);
 	dg_json.put("heightSegments", 16);
-	dg_json.put("phiStart", 0);
-	dg_json.put("phiLength", 6.28);
-	dg_json.put("thetaStart", 0);
-	dg_json.put("thetaLength", 3.14);
+        if (quadrants.equals("")){
+           dg_json.put("phiStart", 0);
+           dg_json.put("phiLength", 6.28);
+           dg_json.put("thetaStart", 0);
+           dg_json.put("thetaLength", 3.14159);
+        }
+        else{
+            if (quadrants.contains("y")){ // untested
+                dg_json.put("phiStart", 0);
+                dg_json.put("phiLength", 6.28);
+                dg_json.put("thetaLength", 1.5709);
+                if (quadrants.equalsIgnoreCase("-y"))
+                    dg_json.put("thetaStart", 1.5709);
+                else
+                    dg_json.put("thetaStart", 0);
+            }
+            else if (quadrants.contains("z")){ 
+                dg_json.put("thetaLength", 3.14159);
+                dg_json.put("thetaStart", 0);
+                dg_json.put("phiLength", 3.14);
+                if (quadrants.equalsIgnoreCase("-z"))
+                    dg_json.put("phiStart", 1.57);
+                else
+                    dg_json.put("phiStart", 0);
+            }
+            else { // Z
+                
+            }
+        }
+
         jsonArr.add(dg_json);        
         createMaterialJson(arg0, true);
     }
@@ -266,7 +292,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
                 else
                     dg_json.put("phiStart", 1.5709);
             }
-            else if (quadrants.contains("y")){ // untested
+            else if (quadrants.contains("y")){ 
                 dg_json.put("thetaStart", -1.5709);
                 dg_json.put("thetaLength", 3.14159);
                 dg_json.put("phiLength", 3.14159);
