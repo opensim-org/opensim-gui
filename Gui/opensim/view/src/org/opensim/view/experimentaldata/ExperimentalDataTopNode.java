@@ -49,7 +49,7 @@ import org.opensim.view.nodes.*;
  * Top level external(=experimental) data node in Navigator view. 
  * This node implements Observer so that it can make the motion underneath it uncurrent
  */
-public class ExperimentalDataTopNode extends ConcreteModelNode implements Observer {
+public class ExperimentalDataTopNode extends OneModelNode implements Observer {
    
    private static ResourceBundle bundle = NbBundle.getBundle(ExperimentalDataTopNode.class);
    

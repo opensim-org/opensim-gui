@@ -129,7 +129,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
     }
 
     public void addGeometryForComponent(Component mc, Model model) {
-        //System.out.println("Process object:"+mc.getConcreteClassName()+":"+mc.getName()+" "+mc.isObjectUpToDateWithProperties());
+        System.out.println("Process object:"+mc.getConcreteClassName()+":"+mc.getName()+" "+mc.isObjectUpToDateWithProperties());
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
         mc.generateDecorations(true, mdh, model.getWorkingState(), adg);
         dgi.setCurrentComponent(mc);

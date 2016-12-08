@@ -22,11 +22,13 @@ import org.opensim.modeling.ControllerSet;
 import org.opensim.modeling.Force;
 import org.opensim.modeling.ForceSet;
 import org.opensim.modeling.FrameSet;
+import org.opensim.modeling.Ground;
 import org.opensim.modeling.Joint;
 import org.opensim.modeling.JointSet;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.OpenSimObject;
 
 /**
  *
@@ -56,7 +58,7 @@ public class NavigatorByTypeModel {
     private final ControllerSet setOfControllers = new ControllerSet();
     private final transient PropertyChangeSupport propertyChangeSupport = new java.beans.PropertyChangeSupport(this);
     private final transient VetoableChangeSupport vetoableChangeSupport = new java.beans.VetoableChangeSupport(this);
-
+    private Ground ground;
     
     public NavigatorByTypeModel(Model model) {
         setOfFrames.setMemoryOwner(false);
@@ -94,6 +96,7 @@ public class NavigatorByTypeModel {
             }
             compIter.next();
         }
+        ground = model.getGround();
     }
 
     private void classifyJoint(Component comp) {
@@ -192,6 +195,10 @@ public class NavigatorByTypeModel {
      */
     public ControllerSet getSetOfControllers() {
         return setOfControllers;
+    }
+
+    public Ground getGround() {
+        return ground;
     }
 
 }

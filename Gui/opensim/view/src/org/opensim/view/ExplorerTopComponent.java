@@ -60,7 +60,7 @@ import org.opensim.modeling.Muscle;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PathPoint;
-import org.opensim.view.nodes.ConcreteModelNode;
+import org.opensim.view.nodes.OneModelNode;
 import org.opensim.view.experimentaldata.ExperimentalDataTopNode;
 import org.opensim.view.nodes.MarkersNode;
 import org.opensim.view.nodes.OneMarkerNode;
@@ -222,14 +222,14 @@ final public class ExplorerTopComponent extends TopComponent
                       ExplorerTopComponent tree = ExplorerTopComponent.findInstance();
                       Node rootNode = tree.getExplorerManager().getRootContext();
                       Model newModel = (Model)objs.get(index);
-                      ConcreteModelNode newModelNode = new ConcreteModelNode(newModel);
+                      OneModelNode newModelNode = new OneModelNode(newModel);
                       rootNode.getChildren().add(new Node[] { newModelNode});
                       updateCurrentModelNode(newModel);
 
                  } else if (objs.get(i) instanceof Marker) {
                     Marker marker = (Marker)objs.get(i);
                     Model model = evnt.getModel();
-                    ConcreteModelNode modelNode = getModelNode(model);
+                    OneModelNode modelNode = getModelNode(model);
                     Children children = modelNode.getChildren();
                     Node[] nodes = children.getNodes();
                     String markersNodeName = NbBundle.getMessage(MarkersNode.class, "CTL_Markers");
@@ -249,7 +249,7 @@ final public class ExplorerTopComponent extends TopComponent
                  if (objs.get(i) instanceof Marker) {
                     Marker marker = (Marker)objs.get(i);
                     Model model = evnt.getModel();
-                    ConcreteModelNode modelNode = getModelNode(model);
+                    OneModelNode modelNode = getModelNode(model);
                     Children children = modelNode.getChildren();
                     Node[] nodes = children.getNodes();
                     String markersNodeName = NbBundle.getMessage(MarkersNode.class, "CTL_Markers");
@@ -301,11 +301,11 @@ final public class ExplorerTopComponent extends TopComponent
                        case Open :
                        {
                           Model newModel = evnt.getModel();
-                          ConcreteModelNode newModelNode;
+                          OneModelNode newModelNode;
                           if (newModel instanceof ModelForExperimentalData)
                               newModelNode = new ExperimentalDataTopNode(newModel);
                           else
-                            newModelNode = new ConcreteModelNode(newModel);
+                            newModelNode = new OneModelNode(newModel);
                           rootNode.getChildren().add(new Node[] { newModelNode});
                           updateCurrentModelNode(newModel);
                           break;
@@ -313,7 +313,7 @@ final public class ExplorerTopComponent extends TopComponent
                        case Close:
                        {
                           Model closingModel = evnt.getModel();
-                          ConcreteModelNode modelNode = getModelNode(closingModel);
+                          OneModelNode modelNode = getModelNode(closingModel);
                           try {
                              rootNode.getChildren().remove(new Node[] {modelNode});
                              if(modelNode != null) modelNode.destroy();
@@ -360,8 +360,8 @@ final public class ExplorerTopComponent extends TopComponent
         Children children = getExplorerManager().getRootContext().getChildren();
         Node[] nodes = children.getNodes();
         for (int i = 0; i < nodes.length; i++) {
-            if (nodes[i] instanceof ConcreteModelNode) {
-                ConcreteModelNode modelNode = ((ConcreteModelNode) (nodes[i]));
+            if (nodes[i] instanceof OneModelNode) {
+                OneModelNode modelNode = ((OneModelNode) (nodes[i]));
                 Node objectNode = findObjectNode(modelNode, oObject);
                 // Hack to select Muscle based on selected PathPoint
                 if (oObject instanceof PathPoint){
@@ -424,7 +424,7 @@ final public class ExplorerTopComponent extends TopComponent
            Object[] models = db.getAllModels();
            rootNode.getChildren().remove(rootNode.getChildren().getNodes());
            for(int i=0; i < models.length; i++)
-              rootNode.getChildren().add(new Node[] { new ConcreteModelNode((Model)models[i]) });
+              rootNode.getChildren().add(new Node[] { new OneModelNode((Model)models[i]) });
            
         }
         /**
@@ -436,8 +436,8 @@ final public class ExplorerTopComponent extends TopComponent
            Children children = getExplorerManager().getRootContext().getChildren();
            Node[] nodes = children.getNodes();
            for(int i=0; i < nodes.length; i++) {
-              if (nodes[i] instanceof ConcreteModelNode) {
-                 ConcreteModelNode node = ((ConcreteModelNode)(nodes[i]));
+              if (nodes[i] instanceof OneModelNode) {
+                 OneModelNode node = ((OneModelNode)(nodes[i]));
                  node.setName(node.getModel().getName());
               }
            }
@@ -447,11 +447,11 @@ final public class ExplorerTopComponent extends TopComponent
         /**
          * Get a reference to the navigator/explorer node represtning the passed in model
          */
-        public ConcreteModelNode getModelNode(final Model abstractModel) {
+        public OneModelNode getModelNode(final Model abstractModel) {
            Node rootNode = getExplorerManager().getRootContext();
            for(Node child : rootNode.getChildren().getNodes())
-              if((child instanceof ConcreteModelNode) && ((ConcreteModelNode)child).getModel().equals(abstractModel))
-                 return (ConcreteModelNode)child;
+              if((child instanceof OneModelNode) && ((OneModelNode)child).getModel().equals(abstractModel))
+                 return (OneModelNode)child;
            return null;
         }
 

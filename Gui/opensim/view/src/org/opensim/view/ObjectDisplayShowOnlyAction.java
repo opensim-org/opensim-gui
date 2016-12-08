@@ -30,7 +30,7 @@ import org.openide.nodes.Node;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
-import org.opensim.view.nodes.ConcreteModelNode;
+import org.opensim.view.nodes.OneModelNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.nodes.OpenSimObjectSetNode;
 import org.opensim.view.pub.ViewDB;
@@ -67,7 +67,7 @@ public final class ObjectDisplayShowOnlyAction extends CallableSystemAction {
             // A cleaner solution would be to make nodes hold pointer to which node would
             // show only be relative to.
             while (!(parentNode instanceof OpenSimObjectSetNode) && 
-                    !(parentNode instanceof ConcreteModelNode))
+                    !(parentNode instanceof OneModelNode))
                 parentNode = (OpenSimObjectNode) (parentNode.getParentNode());
             
             if (parentNode instanceof OpenSimObjectSetNode){

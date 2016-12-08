@@ -14,7 +14,7 @@ public final class ModelMakeCurrentAction extends CallableSystemAction {
     public void performAction() {
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         // Action shouldn't be available otherwise'
-        ConcreteModelNode modelNode = (ConcreteModelNode) selected[0];
+        OneModelNode modelNode = (OneModelNode) selected[0];
         Model mdl = modelNode.getModel();
         OpenSimDB.getInstance().setCurrentModel(mdl);
     }
@@ -41,7 +41,7 @@ public final class ModelMakeCurrentAction extends CallableSystemAction {
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         if(selected.length!=1) return false; // only if a single item is selected
         // Action shouldn't be available otherwise'
-        ConcreteModelNode modelNode = (ConcreteModelNode) selected[0];
+        OneModelNode modelNode = (OneModelNode) selected[0];
         Model mdl = modelNode.getModel();
         return OpenSimDB.getInstance().getCurrentModel()!=mdl;
     }

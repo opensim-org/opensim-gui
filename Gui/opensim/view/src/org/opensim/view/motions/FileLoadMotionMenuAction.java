@@ -35,7 +35,7 @@ import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.ExplorerTopComponent;
-import org.opensim.view.nodes.ConcreteModelNode;
+import org.opensim.view.nodes.OneModelNode;
 import org.opensim.view.pub.OpenSimDB;
 
 public final class FileLoadMotionMenuAction extends CallableSystemAction {

@@ -35,14 +35,14 @@ import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.modeling.Model;
-import org.opensim.view.nodes.ConcreteModelNode;
+import org.opensim.view.nodes.OneModelNode;
 
 public final class ModelDisplayEditAction extends CallableSystemAction {
     
     public void performAction() {
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         // Action shouldn't be available otherwise'
-        ConcreteModelNode modelNode = (ConcreteModelNode) selected[0];
+        OneModelNode modelNode = (OneModelNode) selected[0];
         adjustModelDisplayOffset(modelNode.getModel());
     }
        /**

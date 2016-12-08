@@ -37,7 +37,7 @@ import org.opensim.modeling.Joint;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.SurfaceProperties;
-import org.opensim.view.nodes.ConcreteModelNode;
+import org.opensim.view.nodes.OneModelNode;
 import org.opensim.view.nodes.OneWrapObjectNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.nodes.PropertyEditorAdaptor;
@@ -68,8 +68,8 @@ public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemActi
       // If show==false: The "hide" option is enabled unless every selected node is hidden.
       Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
       for( int i=0; i < selected.length; i++ ) {
-         if( selected[i] instanceof ConcreteModelNode ) {
-            if( ViewDB.getInstance().getDisplayStatus(((ConcreteModelNode)selected[i]).getModel()) != show )
+         if( selected[i] instanceof OneModelNode ) {
+            if( ViewDB.getInstance().getDisplayStatus(((OneModelNode)selected[i]).getModel()) != show )
                return true;
          } else if ( selected[i] instanceof OpenSimObjectNode ) {
             OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[i];
@@ -86,8 +86,8 @@ public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemActi
    public void performAction() {
       Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
       for(int i=0; i < selected.length; i++){
-         if(selected[i] instanceof ConcreteModelNode) {
-            ViewDB.getInstance().toggleModelDisplay(((ConcreteModelNode)selected[i]).getModel(), show);
+         if(selected[i] instanceof OneModelNode) {
+            ViewDB.getInstance().toggleModelDisplay(((OneModelNode)selected[i]).getModel(), show);
          } else if(selected[i] instanceof OpenSimObjectNode) {
             this.applyOperationToNode( (OpenSimObjectNode)selected[i] );
          }
