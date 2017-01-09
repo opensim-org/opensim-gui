@@ -39,6 +39,10 @@ public class AbstractChannel {
     return opensimModelCommonJNI.AbstractChannel_getChannelName(swigCPtr, this);
   }
 
+  public String getTypeName() {
+    return opensimModelCommonJNI.AbstractChannel_getTypeName(swigCPtr, this);
+  }
+
   public String getName() {
     return opensimModelCommonJNI.AbstractChannel_getName(swigCPtr, this);
   }

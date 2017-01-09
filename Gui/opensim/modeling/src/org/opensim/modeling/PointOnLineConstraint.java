@@ -165,20 +165,28 @@ public class PointOnLineConstraint extends Constraint {
     opensimModelSimulationJNI.PointOnLineConstraint_set_point_on_follower__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void set_connector_line_body(int value) {
-    opensimModelSimulationJNI.PointOnLineConstraint__connector_line_body_set(swigCPtr, this, value);
+  public void setPropertyIndex_connector_line_body_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelSimulationJNI.PointOnLineConstraint_PropertyIndex_connector_line_body_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public int get_connector_line_body() {
-    return opensimModelSimulationJNI.PointOnLineConstraint__connector_line_body_get(swigCPtr, this);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_line_body_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.PointOnLineConstraint_PropertyIndex_connector_line_body_connectee_name_get(swigCPtr, this), true);
   }
 
-  public void set_connector_follower_body(int value) {
-    opensimModelSimulationJNI.PointOnLineConstraint__connector_follower_body_set(swigCPtr, this, value);
+  public void connectConnector_line_body(OpenSimObject object) {
+    opensimModelSimulationJNI.PointOnLineConstraint_connectConnector_line_body(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
-  public int get_connector_follower_body() {
-    return opensimModelSimulationJNI.PointOnLineConstraint__connector_follower_body_get(swigCPtr, this);
+  public void setPropertyIndex_connector_follower_body_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelSimulationJNI.PointOnLineConstraint_PropertyIndex_connector_follower_body_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_follower_body_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.PointOnLineConstraint_PropertyIndex_connector_follower_body_connectee_name_get(swigCPtr, this), true);
+  }
+
+  public void connectConnector_follower_body(OpenSimObject object) {
+    opensimModelSimulationJNI.PointOnLineConstraint_connectConnector_follower_body(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
   public PointOnLineConstraint() {

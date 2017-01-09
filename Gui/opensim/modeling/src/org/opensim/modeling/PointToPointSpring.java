@@ -201,20 +201,28 @@ public class PointToPointSpring extends Force {
     opensimModelSimulationJNI.PointToPointSpring_set_rest_length__SWIG_1(swigCPtr, this, value);
   }
 
-  public void set_connector_body1(int value) {
-    opensimModelSimulationJNI.PointToPointSpring__connector_body1_set(swigCPtr, this, value);
+  public void setPropertyIndex_connector_body1_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelSimulationJNI.PointToPointSpring_PropertyIndex_connector_body1_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public int get_connector_body1() {
-    return opensimModelSimulationJNI.PointToPointSpring__connector_body1_get(swigCPtr, this);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_body1_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.PointToPointSpring_PropertyIndex_connector_body1_connectee_name_get(swigCPtr, this), true);
   }
 
-  public void set_connector_body2(int value) {
-    opensimModelSimulationJNI.PointToPointSpring__connector_body2_set(swigCPtr, this, value);
+  public void connectConnector_body1(OpenSimObject object) {
+    opensimModelSimulationJNI.PointToPointSpring_connectConnector_body1(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
-  public int get_connector_body2() {
-    return opensimModelSimulationJNI.PointToPointSpring__connector_body2_get(swigCPtr, this);
+  public void setPropertyIndex_connector_body2_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelSimulationJNI.PointToPointSpring_PropertyIndex_connector_body2_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_body2_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.PointToPointSpring_PropertyIndex_connector_body2_connectee_name_get(swigCPtr, this), true);
+  }
+
+  public void connectConnector_body2(OpenSimObject object) {
+    opensimModelSimulationJNI.PointToPointSpring_connectConnector_body2(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
   public PointToPointSpring() {

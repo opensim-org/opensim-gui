@@ -51,6 +51,10 @@ public class AbstractOutput {
     return new Component(opensimModelCommonJNI.AbstractOutput_getOwner(swigCPtr, this), false);
   }
 
+  public String getPathName() {
+    return opensimModelCommonJNI.AbstractOutput_getPathName(swigCPtr, this);
+  }
+
   public void clearChannels() {
     opensimModelCommonJNI.AbstractOutput_clearChannels(swigCPtr, this);
   }

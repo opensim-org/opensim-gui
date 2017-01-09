@@ -221,8 +221,9 @@ public class opensimModelJNI {
   public final static native boolean BodyActuator_get_spatial_force_is_global__SWIG_1(long jarg1, BodyActuator jarg1_);
   public final static native long BodyActuator_upd_spatial_force_is_global__SWIG_1(long jarg1, BodyActuator jarg1_);
   public final static native void BodyActuator_set_spatial_force_is_global__SWIG_1(long jarg1, BodyActuator jarg1_, boolean jarg2);
-  public final static native void BodyActuator__connector_body_set(long jarg1, BodyActuator jarg1_, int jarg2);
-  public final static native int BodyActuator__connector_body_get(long jarg1, BodyActuator jarg1_);
+  public final static native void BodyActuator_PropertyIndex_connector_body_connectee_name_set(long jarg1, BodyActuator jarg1_, long jarg2);
+  public final static native long BodyActuator_PropertyIndex_connector_body_connectee_name_get(long jarg1, BodyActuator jarg1_);
+  public final static native void BodyActuator_connectConnector_body(long jarg1, BodyActuator jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native long new_BodyActuator__SWIG_0();
   public final static native long new_BodyActuator__SWIG_1(long jarg1, Body jarg1_, long jarg2, Vec3 jarg2_, boolean jarg3, boolean jarg4);
   public final static native long new_BodyActuator__SWIG_2(long jarg1, Body jarg1_, long jarg2, Vec3 jarg2_, boolean jarg3);
@@ -2234,10 +2235,10 @@ public class opensimModelJNI {
   public final static native void OpenSimContext_setLocked(long jarg1, OpenSimContext jarg1_, long jarg2, Coordinate jarg2_, boolean jarg3);
   public final static native boolean OpenSimContext_isPrescribed(long jarg1, OpenSimContext jarg1_, long jarg2, Coordinate jarg2_);
   public final static native boolean OpenSimContext_isConstrained(long jarg1, OpenSimContext jarg1_, long jarg2, Coordinate jarg2_);
-  public final static native boolean OpenSimContext_isDisabled__SWIG_0(long jarg1, OpenSimContext jarg1_, long jarg2, Constraint jarg2_);
-  public final static native void OpenSimContext_setDisabled__SWIG_0(long jarg1, OpenSimContext jarg1_, long jarg2, Constraint jarg2_, boolean jarg3);
-  public final static native boolean OpenSimContext_isDisabled__SWIG_1(long jarg1, OpenSimContext jarg1_, long jarg2, Force jarg2_);
-  public final static native void OpenSimContext_setDisabled__SWIG_1(long jarg1, OpenSimContext jarg1_, long jarg2, Force jarg2_, boolean jarg3);
+  public final static native boolean OpenSimContext_isEnforced(long jarg1, OpenSimContext jarg1_, long jarg2, Constraint jarg2_);
+  public final static native void OpenSimContext_setIsEnforced(long jarg1, OpenSimContext jarg1_, long jarg2, Constraint jarg2_, boolean jarg3);
+  public final static native boolean OpenSimContext_appliesForce(long jarg1, OpenSimContext jarg1_, long jarg2, Force jarg2_);
+  public final static native void OpenSimContext_setAppliesForce(long jarg1, OpenSimContext jarg1_, long jarg2, Force jarg2_, boolean jarg3);
   public final static native double OpenSimContext_getActivation(long jarg1, OpenSimContext jarg1_, long jarg2, Muscle jarg2_);
   public final static native double OpenSimContext_getMuscleLength(long jarg1, OpenSimContext jarg1_, long jarg2, Muscle jarg2_);
   public final static native long OpenSimContext_getCurrentPath(long jarg1, OpenSimContext jarg1_, long jarg2, Muscle jarg2_);

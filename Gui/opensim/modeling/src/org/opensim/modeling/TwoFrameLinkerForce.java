@@ -81,20 +81,28 @@ public class TwoFrameLinkerForce extends Force {
     opensimModelSimulationJNI.TwoFrameLinkerForce_constructProperty_frames(swigCPtr, this);
   }
 
-  public void set_connector_frame1(int value) {
-    opensimModelSimulationJNI.TwoFrameLinkerForce__connector_frame1_set(swigCPtr, this, value);
+  public void setPropertyIndex_connector_frame1_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelSimulationJNI.TwoFrameLinkerForce_PropertyIndex_connector_frame1_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public int get_connector_frame1() {
-    return opensimModelSimulationJNI.TwoFrameLinkerForce__connector_frame1_get(swigCPtr, this);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_frame1_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.TwoFrameLinkerForce_PropertyIndex_connector_frame1_connectee_name_get(swigCPtr, this), true);
   }
 
-  public void set_connector_frame2(int value) {
-    opensimModelSimulationJNI.TwoFrameLinkerForce__connector_frame2_set(swigCPtr, this, value);
+  public void connectConnector_frame1(OpenSimObject object) {
+    opensimModelSimulationJNI.TwoFrameLinkerForce_connectConnector_frame1(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
-  public int get_connector_frame2() {
-    return opensimModelSimulationJNI.TwoFrameLinkerForce__connector_frame2_get(swigCPtr, this);
+  public void setPropertyIndex_connector_frame2_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelSimulationJNI.TwoFrameLinkerForce_PropertyIndex_connector_frame2_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_frame2_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.TwoFrameLinkerForce_PropertyIndex_connector_frame2_connectee_name_get(swigCPtr, this), true);
+  }
+
+  public void connectConnector_frame2(OpenSimObject object) {
+    opensimModelSimulationJNI.TwoFrameLinkerForce_connectConnector_frame2(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
   public PhysicalFrame getFrame1() {
@@ -119,10 +127,6 @@ public class TwoFrameLinkerForce extends Force {
 
   public Vec6 computeDeflectionRate(State s) {
     return new Vec6(opensimModelSimulationJNI.TwoFrameLinkerForce_computeDeflectionRate(swigCPtr, this, State.getCPtr(s), s), true);
-  }
-
-  public void scale(ScaleSet scaleSet) {
-    opensimModelSimulationJNI.TwoFrameLinkerForce_scale(swigCPtr, this, ScaleSet.getCPtr(scaleSet), scaleSet);
   }
 
 }

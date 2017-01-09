@@ -95,14 +95,6 @@ public class Manager {
     return opensimModelSimulationJNI.Manager_getFinalTime(swigCPtr, this);
   }
 
-  public void setFirstDT(double aDT) {
-    opensimModelSimulationJNI.Manager_setFirstDT(swigCPtr, this, aDT);
-  }
-
-  public double getFirstDT() {
-    return opensimModelSimulationJNI.Manager_getFirstDT(swigCPtr, this);
-  }
-
   public void setUseSpecifiedDT(boolean aTrueFalse) {
     opensimModelSimulationJNI.Manager_setUseSpecifiedDT(swigCPtr, this, aTrueFalse);
   }
@@ -171,24 +163,12 @@ public class Manager {
     return opensimModelSimulationJNI.Manager_getNextTimeArrayTime(swigCPtr, this, aTime);
   }
 
-  public void setSystem(SWIGTYPE_p_SimTK__System system) {
-    opensimModelSimulationJNI.Manager_setSystem(swigCPtr, this, SWIGTYPE_p_SimTK__System.getCPtr(system));
-  }
-
-  public boolean integrate(State s, double dtFirst) {
-    return opensimModelSimulationJNI.Manager_integrate__SWIG_0(swigCPtr, this, State.getCPtr(s), s, dtFirst);
-  }
-
   public boolean integrate(State s) {
-    return opensimModelSimulationJNI.Manager_integrate__SWIG_1(swigCPtr, this, State.getCPtr(s), s);
+    return opensimModelSimulationJNI.Manager_integrate(swigCPtr, this, State.getCPtr(s), s);
   }
 
-  public boolean doIntegration(State s, int step, double dtFirst) {
-    return opensimModelSimulationJNI.Manager_doIntegration(swigCPtr, this, State.getCPtr(s), s, step, dtFirst);
-  }
-
-  public void initialize(State s, double dt) {
-    opensimModelSimulationJNI.Manager_initialize(swigCPtr, this, State.getCPtr(s), s, dt);
+  public boolean doIntegration(State s, int step) {
+    return opensimModelSimulationJNI.Manager_doIntegration(swigCPtr, this, State.getCPtr(s), s, step);
   }
 
   public void finalize(State s) {

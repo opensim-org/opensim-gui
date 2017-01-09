@@ -147,19 +147,11 @@ public class Component extends OpenSimObject {
   }
 
   public AbstractConnector getConnector(String name) {
-    return new AbstractConnector(opensimModelCommonJNI.Component_getConnector__SWIG_0(swigCPtr, this, name), false);
+    return new AbstractConnector(opensimModelCommonJNI.Component_getConnector(swigCPtr, this, name), false);
   }
 
   public AbstractConnector updConnector(String name) {
-    return new AbstractConnector(opensimModelCommonJNI.Component_updConnector__SWIG_0(swigCPtr, this, name), false);
-  }
-
-  public AbstractConnector getConnector(int i) {
-    return new AbstractConnector(opensimModelCommonJNI.Component_getConnector__SWIG_2(swigCPtr, this, i), false);
-  }
-
-  public AbstractConnector updConnector(int i) {
-    return new AbstractConnector(opensimModelCommonJNI.Component_updConnector__SWIG_2(swigCPtr, this, i), false);
+    return new AbstractConnector(opensimModelCommonJNI.Component_updConnector(swigCPtr, this, name), false);
   }
 
   public int getNumInputs() {

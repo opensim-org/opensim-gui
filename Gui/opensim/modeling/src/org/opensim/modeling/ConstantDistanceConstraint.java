@@ -165,20 +165,28 @@ public class ConstantDistanceConstraint extends Constraint {
     opensimModelSimulationJNI.ConstantDistanceConstraint_set_constant_distance__SWIG_1(swigCPtr, this, value);
   }
 
-  public void set_connector_body_1(int value) {
-    opensimModelSimulationJNI.ConstantDistanceConstraint__connector_body_1_set(swigCPtr, this, value);
+  public void setPropertyIndex_connector_body_1_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelSimulationJNI.ConstantDistanceConstraint_PropertyIndex_connector_body_1_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public int get_connector_body_1() {
-    return opensimModelSimulationJNI.ConstantDistanceConstraint__connector_body_1_get(swigCPtr, this);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_body_1_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.ConstantDistanceConstraint_PropertyIndex_connector_body_1_connectee_name_get(swigCPtr, this), true);
   }
 
-  public void set_connector_body_2(int value) {
-    opensimModelSimulationJNI.ConstantDistanceConstraint__connector_body_2_set(swigCPtr, this, value);
+  public void connectConnector_body_1(OpenSimObject object) {
+    opensimModelSimulationJNI.ConstantDistanceConstraint_connectConnector_body_1(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
-  public int get_connector_body_2() {
-    return opensimModelSimulationJNI.ConstantDistanceConstraint__connector_body_2_get(swigCPtr, this);
+  public void setPropertyIndex_connector_body_2_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelSimulationJNI.ConstantDistanceConstraint_PropertyIndex_connector_body_2_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_body_2_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.ConstantDistanceConstraint_PropertyIndex_connector_body_2_connectee_name_get(swigCPtr, this), true);
+  }
+
+  public void connectConnector_body_2(OpenSimObject object) {
+    opensimModelSimulationJNI.ConstantDistanceConstraint_connectConnector_body_2(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
   public ConstantDistanceConstraint() {

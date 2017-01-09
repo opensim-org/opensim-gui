@@ -77,12 +77,12 @@ public class JointIterator {
     return new PhysicalFrame(opensimModelSimulationJNI.JointIterator_get_frames(swigCPtr, this, i), false);
   }
 
-  public int get_connector_parent_frame() {
-    return opensimModelSimulationJNI.JointIterator__connector_parent_frame_get(swigCPtr, this);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_parent_frame_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.JointIterator_PropertyIndex_connector_parent_frame_connectee_name_get(swigCPtr, this), true);
   }
 
-  public int get_connector_child_frame() {
-    return opensimModelSimulationJNI.JointIterator__connector_child_frame_get(swigCPtr, this);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_child_frame_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.JointIterator_PropertyIndex_connector_child_frame_connectee_name_get(swigCPtr, this), true);
   }
 
   public boolean get_has_output_power() {
@@ -198,11 +198,7 @@ public class JointIterator {
   }
 
   public AbstractConnector getConnector(String name) {
-    return new AbstractConnector(opensimModelSimulationJNI.JointIterator_getConnector__SWIG_0(swigCPtr, this, name), false);
-  }
-
-  public AbstractConnector getConnector(int i) {
-    return new AbstractConnector(opensimModelSimulationJNI.JointIterator_getConnector__SWIG_2(swigCPtr, this, i), false);
+    return new AbstractConnector(opensimModelSimulationJNI.JointIterator_getConnector(swigCPtr, this, name), false);
   }
 
   public int getNumInputs() {

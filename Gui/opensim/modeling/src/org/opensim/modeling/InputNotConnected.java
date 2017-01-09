@@ -35,8 +35,8 @@ public class InputNotConnected extends OpenSimException {
     super.delete();
   }
 
-  public InputNotConnected(String file, long line, String func, OpenSimObject obj, String inputName) {
-    this(opensimModelCommonJNI.new_InputNotConnected(file, line, func, OpenSimObject.getCPtr(obj), obj, inputName), true);
+  public InputNotConnected(String file, long line, String func, String inputName) {
+    this(opensimModelCommonJNI.new_InputNotConnected(file, line, func, inputName), true);
   }
 
 }

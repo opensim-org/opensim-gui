@@ -237,12 +237,16 @@ public class PrescribedForce extends Force {
     opensimModelSimulationJNI.PrescribedForce_set_torqueFunctions__SWIG_1(swigCPtr, this, FunctionSet.getCPtr(value), value);
   }
 
-  public void set_connector_frame(int value) {
-    opensimModelSimulationJNI.PrescribedForce__connector_frame_set(swigCPtr, this, value);
+  public void setPropertyIndex_connector_frame_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelSimulationJNI.PrescribedForce_PropertyIndex_connector_frame_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public int get_connector_frame() {
-    return opensimModelSimulationJNI.PrescribedForce__connector_frame_get(swigCPtr, this);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_frame_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.PrescribedForce_PropertyIndex_connector_frame_connectee_name_get(swigCPtr, this), true);
+  }
+
+  public void connectConnector_frame(OpenSimObject object) {
+    opensimModelSimulationJNI.PrescribedForce_connectConnector_frame(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
   public void set_has_output_force_applied(boolean value) {

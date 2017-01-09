@@ -57,40 +57,40 @@ public class Controller extends ModelComponent {
     return opensimModelSimulationJNI.Controller_getConcreteClassName(swigCPtr, this);
   }
 
-  public void copyProperty_isDisabled(Controller source) {
-    opensimModelSimulationJNI.Controller_copyProperty_isDisabled(swigCPtr, this, Controller.getCPtr(source), source);
+  public void copyProperty_enabled(Controller source) {
+    opensimModelSimulationJNI.Controller_copyProperty_enabled(swigCPtr, this, Controller.getCPtr(source), source);
   }
 
-  public boolean get_isDisabled(int i) {
-    return opensimModelSimulationJNI.Controller_get_isDisabled__SWIG_0(swigCPtr, this, i);
+  public boolean get_enabled(int i) {
+    return opensimModelSimulationJNI.Controller_get_enabled__SWIG_0(swigCPtr, this, i);
   }
 
-  public SWIGTYPE_p_bool upd_isDisabled(int i) {
-    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.Controller_upd_isDisabled__SWIG_0(swigCPtr, this, i), false);
+  public SWIGTYPE_p_bool upd_enabled(int i) {
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.Controller_upd_enabled__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_isDisabled(int i, boolean value) {
-    opensimModelSimulationJNI.Controller_set_isDisabled__SWIG_0(swigCPtr, this, i, value);
+  public void set_enabled(int i, boolean value) {
+    opensimModelSimulationJNI.Controller_set_enabled__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int append_isDisabled(boolean value) {
-    return opensimModelSimulationJNI.Controller_append_isDisabled(swigCPtr, this, value);
+  public int append_enabled(boolean value) {
+    return opensimModelSimulationJNI.Controller_append_enabled(swigCPtr, this, value);
   }
 
-  public void constructProperty_isDisabled(boolean initValue) {
-    opensimModelSimulationJNI.Controller_constructProperty_isDisabled(swigCPtr, this, initValue);
+  public void constructProperty_enabled(boolean initValue) {
+    opensimModelSimulationJNI.Controller_constructProperty_enabled(swigCPtr, this, initValue);
   }
 
-  public boolean get_isDisabled() {
-    return opensimModelSimulationJNI.Controller_get_isDisabled__SWIG_1(swigCPtr, this);
+  public boolean get_enabled() {
+    return opensimModelSimulationJNI.Controller_get_enabled__SWIG_1(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_bool upd_isDisabled() {
-    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.Controller_upd_isDisabled__SWIG_1(swigCPtr, this), false);
+  public SWIGTYPE_p_bool upd_enabled() {
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.Controller_upd_enabled__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_isDisabled(boolean value) {
-    opensimModelSimulationJNI.Controller_set_isDisabled__SWIG_1(swigCPtr, this, value);
+  public void set_enabled(boolean value) {
+    opensimModelSimulationJNI.Controller_set_enabled__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_actuator_list(Controller source) {
@@ -117,12 +117,12 @@ public class Controller extends ModelComponent {
     opensimModelSimulationJNI.Controller_constructProperty_actuator_list(swigCPtr, this);
   }
 
-  public boolean isDisabled() {
-    return opensimModelSimulationJNI.Controller_isDisabled(swigCPtr, this);
+  public boolean isEnabled() {
+    return opensimModelSimulationJNI.Controller_isEnabled(swigCPtr, this);
   }
 
-  public void setDisabled(boolean disableFlag) {
-    opensimModelSimulationJNI.Controller_setDisabled(swigCPtr, this, disableFlag);
+  public void setEnabled(boolean enableFlag) {
+    opensimModelSimulationJNI.Controller_setEnabled(swigCPtr, this, enableFlag);
   }
 
   public void setActuators(SetActuators actuators) {

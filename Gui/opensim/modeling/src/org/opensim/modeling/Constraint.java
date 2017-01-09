@@ -57,52 +57,52 @@ public class Constraint extends ModelComponent {
     return opensimModelSimulationJNI.Constraint_getConcreteClassName(swigCPtr, this);
   }
 
-  public void copyProperty_isDisabled(Constraint source) {
-    opensimModelSimulationJNI.Constraint_copyProperty_isDisabled(swigCPtr, this, Constraint.getCPtr(source), source);
+  public void copyProperty_isEnforced(Constraint source) {
+    opensimModelSimulationJNI.Constraint_copyProperty_isEnforced(swigCPtr, this, Constraint.getCPtr(source), source);
   }
 
-  public boolean get_isDisabled(int i) {
-    return opensimModelSimulationJNI.Constraint_get_isDisabled__SWIG_0(swigCPtr, this, i);
+  public boolean get_isEnforced(int i) {
+    return opensimModelSimulationJNI.Constraint_get_isEnforced__SWIG_0(swigCPtr, this, i);
   }
 
-  public SWIGTYPE_p_bool upd_isDisabled(int i) {
-    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.Constraint_upd_isDisabled__SWIG_0(swigCPtr, this, i), false);
+  public SWIGTYPE_p_bool upd_isEnforced(int i) {
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.Constraint_upd_isEnforced__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_isDisabled(int i, boolean value) {
-    opensimModelSimulationJNI.Constraint_set_isDisabled__SWIG_0(swigCPtr, this, i, value);
+  public void set_isEnforced(int i, boolean value) {
+    opensimModelSimulationJNI.Constraint_set_isEnforced__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int append_isDisabled(boolean value) {
-    return opensimModelSimulationJNI.Constraint_append_isDisabled(swigCPtr, this, value);
+  public int append_isEnforced(boolean value) {
+    return opensimModelSimulationJNI.Constraint_append_isEnforced(swigCPtr, this, value);
   }
 
-  public void constructProperty_isDisabled(boolean initValue) {
-    opensimModelSimulationJNI.Constraint_constructProperty_isDisabled(swigCPtr, this, initValue);
+  public void constructProperty_isEnforced(boolean initValue) {
+    opensimModelSimulationJNI.Constraint_constructProperty_isEnforced(swigCPtr, this, initValue);
   }
 
-  public boolean get_isDisabled() {
-    return opensimModelSimulationJNI.Constraint_get_isDisabled__SWIG_1(swigCPtr, this);
+  public boolean get_isEnforced() {
+    return opensimModelSimulationJNI.Constraint_get_isEnforced__SWIG_1(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_bool upd_isDisabled() {
-    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.Constraint_upd_isDisabled__SWIG_1(swigCPtr, this), false);
+  public SWIGTYPE_p_bool upd_isEnforced() {
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.Constraint_upd_isEnforced__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_isDisabled(boolean value) {
-    opensimModelSimulationJNI.Constraint_set_isDisabled__SWIG_1(swigCPtr, this, value);
+  public void set_isEnforced(boolean value) {
+    opensimModelSimulationJNI.Constraint_set_isEnforced__SWIG_1(swigCPtr, this, value);
   }
 
   public void updateFromConstraint(State s, Constraint aConstraint) {
     opensimModelSimulationJNI.Constraint_updateFromConstraint(swigCPtr, this, State.getCPtr(s), s, Constraint.getCPtr(aConstraint), aConstraint);
   }
 
-  public boolean isDisabled(State s) {
-    return opensimModelSimulationJNI.Constraint_isDisabled(swigCPtr, this, State.getCPtr(s), s);
+  public boolean isEnforced(State s) {
+    return opensimModelSimulationJNI.Constraint_isEnforced(swigCPtr, this, State.getCPtr(s), s);
   }
 
-  public boolean setDisabled(State s, boolean isDisabled) {
-    return opensimModelSimulationJNI.Constraint_setDisabled(swigCPtr, this, State.getCPtr(s), s, isDisabled);
+  public boolean setIsEnforced(State s, boolean isEnforced) {
+    return opensimModelSimulationJNI.Constraint_setIsEnforced(swigCPtr, this, State.getCPtr(s), s, isEnforced);
   }
 
   public void calcConstraintForces(State s, VectorOfSpatialVec bodyForcesInAncestor, Vector mobilityForces) {

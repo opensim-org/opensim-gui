@@ -129,24 +129,44 @@ public class Geometry extends Component {
     opensimModelSimulationJNI.Geometry_set_Appearance__SWIG_1(swigCPtr, this, Appearance.getCPtr(value), value);
   }
 
-  public void set_connector_frame(int value) {
-    opensimModelSimulationJNI.Geometry__connector_frame_set(swigCPtr, this, value);
+  public void setPropertyIndex_connector_frame_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelSimulationJNI.Geometry_PropertyIndex_connector_frame_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public int get_connector_frame() {
-    return opensimModelSimulationJNI.Geometry__connector_frame_get(swigCPtr, this);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_frame_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.Geometry_PropertyIndex_connector_frame_connectee_name_get(swigCPtr, this), true);
   }
 
-  public int constructConnector_frame() {
-    return opensimModelSimulationJNI.Geometry_constructConnector_frame(swigCPtr, this);
+  public SWIGTYPE_p_PropertyIndex constructConnector_frame() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.Geometry_constructConnector_frame(swigCPtr, this), true);
   }
 
-  public void set_has_input_transform(boolean value) {
-    opensimModelSimulationJNI.Geometry__has_input_transform_set(swigCPtr, this, value);
+  public void connectConnector_frame(OpenSimObject object) {
+    opensimModelSimulationJNI.Geometry_connectConnector_frame(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
-  public boolean get_has_input_transform() {
-    return opensimModelSimulationJNI.Geometry__has_input_transform_get(swigCPtr, this);
+  public void setPropertyIndex_input_transform_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelSimulationJNI.Geometry_PropertyIndex_input_transform_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_input_transform_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.Geometry_PropertyIndex_input_transform_connectee_name_get(swigCPtr, this), true);
+  }
+
+  public void connectInput_transform(AbstractOutput output, String alias) {
+    opensimModelSimulationJNI.Geometry_connectInput_transform__SWIG_0(swigCPtr, this, AbstractOutput.getCPtr(output), output, alias);
+  }
+
+  public void connectInput_transform(AbstractOutput output) {
+    opensimModelSimulationJNI.Geometry_connectInput_transform__SWIG_1(swigCPtr, this, AbstractOutput.getCPtr(output), output);
+  }
+
+  public void connectInput_transform(AbstractChannel channel, String alias) {
+    opensimModelSimulationJNI.Geometry_connectInput_transform__SWIG_2(swigCPtr, this, AbstractChannel.getCPtr(channel), channel, alias);
+  }
+
+  public void connectInput_transform(AbstractChannel channel) {
+    opensimModelSimulationJNI.Geometry_connectInput_transform__SWIG_3(swigCPtr, this, AbstractChannel.getCPtr(channel), channel);
   }
 
   public void setFrame(Frame frame) {

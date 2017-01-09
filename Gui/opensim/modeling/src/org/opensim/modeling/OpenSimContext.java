@@ -137,20 +137,20 @@ public class OpenSimContext extends OpenSimObject {
     return opensimModelJNI.OpenSimContext_isConstrained(swigCPtr, this, Coordinate.getCPtr(coord), coord);
   }
 
-  public boolean isDisabled(Constraint constraint) {
-    return opensimModelJNI.OpenSimContext_isDisabled__SWIG_0(swigCPtr, this, Constraint.getCPtr(constraint), constraint);
+  public boolean isEnforced(Constraint constraint) {
+    return opensimModelJNI.OpenSimContext_isEnforced(swigCPtr, this, Constraint.getCPtr(constraint), constraint);
   }
 
-  public void setDisabled(Constraint constraint, boolean disable) {
-    opensimModelJNI.OpenSimContext_setDisabled__SWIG_0(swigCPtr, this, Constraint.getCPtr(constraint), constraint, disable);
+  public void setIsEnforced(Constraint constraint, boolean isEnforced) {
+    opensimModelJNI.OpenSimContext_setIsEnforced(swigCPtr, this, Constraint.getCPtr(constraint), constraint, isEnforced);
   }
 
-  public boolean isDisabled(Force force) {
-    return opensimModelJNI.OpenSimContext_isDisabled__SWIG_1(swigCPtr, this, Force.getCPtr(force), force);
+  public boolean appliesForce(Force force) {
+    return opensimModelJNI.OpenSimContext_appliesForce(swigCPtr, this, Force.getCPtr(force), force);
   }
 
-  public void setDisabled(Force force, boolean disable) {
-    opensimModelJNI.OpenSimContext_setDisabled__SWIG_1(swigCPtr, this, Force.getCPtr(force), force, disable);
+  public void setAppliesForce(Force force, boolean applyForce) {
+    opensimModelJNI.OpenSimContext_setAppliesForce(swigCPtr, this, Force.getCPtr(force), force, applyForce);
   }
 
   public double getActivation(Muscle act) {

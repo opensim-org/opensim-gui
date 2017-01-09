@@ -118,11 +118,7 @@ public class ComponentIterator {
   }
 
   public AbstractConnector getConnector(String name) {
-    return new AbstractConnector(opensimModelCommonJNI.ComponentIterator_getConnector__SWIG_0(swigCPtr, this, name), false);
-  }
-
-  public AbstractConnector getConnector(int i) {
-    return new AbstractConnector(opensimModelCommonJNI.ComponentIterator_getConnector__SWIG_2(swigCPtr, this, i), false);
+    return new AbstractConnector(opensimModelCommonJNI.ComponentIterator_getConnector(swigCPtr, this, name), false);
   }
 
   public int getNumInputs() {

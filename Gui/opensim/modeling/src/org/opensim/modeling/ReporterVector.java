@@ -53,20 +53,44 @@ public class ReporterVector extends AbstractReporter {
     return opensimModelCommonJNI.ReporterVector_getConcreteClassName(swigCPtr, this);
   }
 
-  public void set_has_input_inputs(boolean value) {
-    opensimModelCommonJNI.ReporterVector__has_input_inputs_set(swigCPtr, this, value);
+  public void setPropertyIndex_input_inputs_connectee_names(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelCommonJNI.ReporterVector_PropertyIndex_input_inputs_connectee_names_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public boolean get_has_input_inputs() {
-    return opensimModelCommonJNI.ReporterVector__has_input_inputs_get(swigCPtr, this);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_input_inputs_connectee_names() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelCommonJNI.ReporterVector_PropertyIndex_input_inputs_connectee_names_get(swigCPtr, this), true);
   }
 
-  public AbstractInput updInput(String name) {
-    return new AbstractInput(opensimModelCommonJNI.ReporterVector_updInput__SWIG_0_0(swigCPtr, this, name), false);
+  public void connectInput_inputs(AbstractOutput output, String alias) {
+    opensimModelCommonJNI.ReporterVector_connectInput_inputs__SWIG_0(swigCPtr, this, AbstractOutput.getCPtr(output), output, alias);
   }
 
-  public AbstractInput updInput() {
-    return new AbstractInput(opensimModelCommonJNI.ReporterVector_updInput__SWIG_1(swigCPtr, this), false);
+  public void connectInput_inputs(AbstractOutput output) {
+    opensimModelCommonJNI.ReporterVector_connectInput_inputs__SWIG_1(swigCPtr, this, AbstractOutput.getCPtr(output), output);
+  }
+
+  public void connectInput_inputs(AbstractChannel channel, String alias) {
+    opensimModelCommonJNI.ReporterVector_connectInput_inputs__SWIG_2(swigCPtr, this, AbstractChannel.getCPtr(channel), channel, alias);
+  }
+
+  public void connectInput_inputs(AbstractChannel channel) {
+    opensimModelCommonJNI.ReporterVector_connectInput_inputs__SWIG_3(swigCPtr, this, AbstractChannel.getCPtr(channel), channel);
+  }
+
+  public void addToReport(AbstractOutput output, String alias) {
+    opensimModelCommonJNI.ReporterVector_addToReport__SWIG_0(swigCPtr, this, AbstractOutput.getCPtr(output), output, alias);
+  }
+
+  public void addToReport(AbstractOutput output) {
+    opensimModelCommonJNI.ReporterVector_addToReport__SWIG_1(swigCPtr, this, AbstractOutput.getCPtr(output), output);
+  }
+
+  public void addToReport(AbstractChannel channel, String alias) {
+    opensimModelCommonJNI.ReporterVector_addToReport__SWIG_2(swigCPtr, this, AbstractChannel.getCPtr(channel), channel, alias);
+  }
+
+  public void addToReport(AbstractChannel channel) {
+    opensimModelCommonJNI.ReporterVector_addToReport__SWIG_3(swigCPtr, this, AbstractChannel.getCPtr(channel), channel);
   }
 
 }

@@ -129,12 +129,16 @@ public class PhysicalFrameWithOffset extends PhysicalFrame {
     opensimModelSimulationJNI.PhysicalFrameWithOffset_set_orientation__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void set_connector_parent(int value) {
-    opensimModelSimulationJNI.PhysicalFrameWithOffset__connector_parent_set(swigCPtr, this, value);
+  public void setPropertyIndex_connector_parent_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelSimulationJNI.PhysicalFrameWithOffset_PropertyIndex_connector_parent_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public int get_connector_parent() {
-    return opensimModelSimulationJNI.PhysicalFrameWithOffset__connector_parent_get(swigCPtr, this);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_parent_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.PhysicalFrameWithOffset_PropertyIndex_connector_parent_connectee_name_get(swigCPtr, this), true);
+  }
+
+  public void connectConnector_parent(OpenSimObject object) {
+    opensimModelSimulationJNI.PhysicalFrameWithOffset_connectConnector_parent(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
   public void setParentFrame(PhysicalFrame parent) {
