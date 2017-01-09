@@ -44,8 +44,9 @@ public class OneComponentNode extends OpenSimObjectNode {
             Sheet.Set connectorSheet = parentSheet.createExpertSet();
             connectorSheet.setDisplayName("Connectors");
             parentSheet.put(connectorSheet);
+            StdVectorString cNames = comp.getConnectorNames();
             for (int i=0; i< comp.getNumConnectors();i++ ){
-                AbstractConnector ac = comp.getConnector(i);
+                AbstractConnector ac = comp.getConnector(cNames.get(i));
                 createConnectorProperty(ac, connectorSheet);
             }
         }

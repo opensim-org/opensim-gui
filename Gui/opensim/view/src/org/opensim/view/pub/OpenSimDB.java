@@ -422,9 +422,9 @@ public class OpenSimDB extends Observable implements Externalizable{
     public void disableForce(OpenSimObject openSimObject, boolean disabled) {
         Force f = Force.safeDownCast(openSimObject);
         OpenSimContext context = getContext(f.getModel());
-        boolean oldState = f.get_isDisabled();
+        boolean oldState = f.get_appliesForce();
         if (oldState != disabled){
-            context.setDisabled(f, disabled);
+            context.setAppliesForce(f, disabled);
             // Fire an event so that other interested parties (e.g. Opened tools, view can update)
             Vector<OpenSimObject> objs = new Vector<OpenSimObject>(1);
             objs.add(openSimObject);
@@ -437,9 +437,9 @@ public class OpenSimDB extends Observable implements Externalizable{
     public void disableConstraint(OpenSimObject openSimObject, boolean disabled) {
         Constraint c = Constraint.safeDownCast(openSimObject);
         OpenSimContext context = getContext(c.getModel());
-        boolean oldState = context.isDisabled(c);
+        boolean oldState = context.isEnforced(c);
         if (oldState != disabled){
-            context.setDisabled(c, disabled);
+            context.setIsEnforced(c, disabled);
             // Fire an event so that other interested parties (e.g. Opened tools, view can update)
             Vector<OpenSimObject> objs = new Vector<OpenSimObject>(1);
             objs.add(openSimObject);
