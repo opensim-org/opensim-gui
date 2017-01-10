@@ -6,7 +6,7 @@ import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.motions.MotionControlJPanel;
-import org.opensim.view.nodes.ConcreteModelNode;
+import org.opensim.view.nodes.OneModelNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.pub.ViewDB;
 

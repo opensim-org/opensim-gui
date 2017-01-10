@@ -34,7 +34,7 @@ import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.view.nodes.ConcreteModelNode;
+import org.opensim.view.nodes.OneModelNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
@@ -67,8 +67,8 @@ public final class ModelRenameAction extends CallableSystemAction {
                  // The following is specific to renaming a model since
                  // other windows may display currentModel's name
                  // A more generic scheme using events should be used.
-                 if (objectNode instanceof ConcreteModelNode) {
-                    Model dModel = ((ConcreteModelNode)objectNode).getModel();
+                 if (objectNode instanceof OneModelNode) {
+                    Model dModel = ((OneModelNode)objectNode).getModel();
                     if (dModel==OpenSimDB.getInstance().getCurrentModel())
                        OpenSimDB.getInstance().setCurrentModel(dModel);   // Need to do this so that model dropdown updates
                     // Mark the model as dirty

@@ -35,7 +35,7 @@ import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.ExplorerTopComponent;
-import org.opensim.view.nodes.ConcreteModelNode;
+import org.opensim.view.nodes.OneModelNode;
 import org.opensim.view.pub.OpenSimDB;
 
 public final class FileLoadMotionAction extends CallableSystemAction {
@@ -76,8 +76,8 @@ public final class FileLoadMotionAction extends CallableSystemAction {
    public boolean isEnabled() {
        Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
        if (selected.length!=1) return false;
-       if (!(selected[0] instanceof ConcreteModelNode)) return false;
-       ConcreteModelNode selectedModelNode = (ConcreteModelNode) selected[0];
+       if (!(selected[0] instanceof OneModelNode)) return false;
+       OneModelNode selectedModelNode = (OneModelNode) selected[0];
        return (OpenSimDB.getInstance().getCurrentModel()==selectedModelNode.getModel());
    }
 

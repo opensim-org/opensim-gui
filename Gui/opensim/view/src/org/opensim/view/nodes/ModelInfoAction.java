@@ -18,7 +18,7 @@ public final class ModelInfoAction extends CallableSystemAction {
         ModelInfoJPanel infoPanel=new ModelInfoJPanel();
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         // Action shouldn't be available otherwise'
-        ConcreteModelNode modelNode = (ConcreteModelNode) selected[0];
+        OneModelNode modelNode = (OneModelNode) selected[0];
         Model mdl = modelNode.getModel();
         infoPanel.setModelName(mdl.getName());
         infoPanel.setModelFile(mdl.getInputFileName());

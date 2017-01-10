@@ -72,8 +72,8 @@ public class OpenSimNode extends AbstractNode {
      * Find the Model for a node by traversing up the tree
      */
     public Model getModelForNode() {
-        if (this instanceof ConcreteModelNode)
-            return ((ConcreteModelNode)this).getModel();
+        if (this instanceof OneModelNode)
+            return ((OneModelNode)this).getModel();
         else 
             return ((OpenSimNode)getParentNode()).getModelForNode();
     }

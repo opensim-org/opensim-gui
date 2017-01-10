@@ -13,16 +13,16 @@ import org.opensim.view.pub.ViewDB;
 /**
  * Node class to wrap Model objects
  */
-public class ConcreteModelNode extends OpenSimObjectNode {
+public class OneModelNode extends OpenSimObjectNode {
 	boolean isDataHolderOnly = false;
         NavigatorByTypeModel byTypeModel;
-    public ConcreteModelNode(Model model) {
+    public OneModelNode(Model model) {
         super(model);
 	isDataHolderOnly = (model instanceof ModelForExperimentalData);
 	if (!isDataHolderOnly)
 	{   // Data Import model has no engine or Actuators
             byTypeModel = new NavigatorByTypeModel(model);
-            //getChildren().add(new Node[] {new FramesNode(byTypeModel.getSetOfFrames())});
+            getChildren().add(new Node[] {new GroundNode(byTypeModel.getGround())});
             getChildren().add(new Node[] {new BodiesNode(byTypeModel.getSetOfBodies())});
             getChildren().add(new Node[] {new JointsNode(byTypeModel.getSetOfJoints())});
             getChildren().add(new Node[] {new ConstraintsNode(byTypeModel.getSetOfConstraints())});        

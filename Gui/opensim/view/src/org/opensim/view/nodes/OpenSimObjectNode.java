@@ -315,8 +315,8 @@ public class OpenSimObjectNode extends OpenSimNode {
         if (Component.safeDownCast(obj)!= null) 
             return Component.safeDownCast(obj);
         else {
-            if (this instanceof ConcreteModelNode)
-            return ((ConcreteModelNode)this).getModel();
+            if (this instanceof OneModelNode)
+            return ((OneModelNode)this).getModel();
         else 
             return ((OpenSimObjectNode)getParentNode()).getOwnerComponent();
         }
