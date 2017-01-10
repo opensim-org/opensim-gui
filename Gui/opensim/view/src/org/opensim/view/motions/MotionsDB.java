@@ -54,7 +54,7 @@ import org.opensim.view.ModelEvent;
 import org.opensim.view.ObjectsRenamedEvent;
 import org.opensim.view.actions.ConfirmSaveDiscardJPanel;
 import org.opensim.view.experimentaldata.AnnotatedMotion;
-import org.opensim.view.nodes.ConcreteModelNode;
+import org.opensim.view.nodes.OneModelNode;
 import org.opensim.view.pub.*;
 
 /**
@@ -438,7 +438,7 @@ public class MotionsDB extends Observable // Observed by other entities in motio
 
    // Get the motion node from the explorer
    public OneMotionNode getMotionNode(final Model model, final Storage motion) {
-      ConcreteModelNode modelNode = ExplorerTopComponent.findInstance().getModelNode(model);
+      OneModelNode modelNode = ExplorerTopComponent.findInstance().getModelNode(model);
       if(modelNode!=null) {
          Node motionsNode = modelNode.getChildren().findChild("Motions");
          if(motionsNode!=null) {

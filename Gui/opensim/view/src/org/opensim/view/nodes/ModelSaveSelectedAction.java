@@ -17,8 +17,8 @@ public final class ModelSaveSelectedAction extends CallableSystemAction {
         // Cycle thru selected models and cache referenes since closing a model changes selected nodes
         ArrayList<Model> modelsToSave = new ArrayList<Model>();
         for(int i=0; i<selected.length; i++){
-            if (selected[i] instanceof ConcreteModelNode){
-                ConcreteModelNode modelNode = (ConcreteModelNode) selected[i];
+            if (selected[i] instanceof OneModelNode){
+                OneModelNode modelNode = (OneModelNode) selected[i];
                 Model mdl = modelNode.getModel();
                 modelsToSave.add(mdl);
             }

@@ -17,7 +17,7 @@ import org.openide.nodes.Node;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle.Messages;
 import org.opensim.view.ExplorerTopComponent;
-import org.opensim.view.nodes.ConcreteModelNode;
+import org.opensim.view.nodes.OneModelNode;
 import org.opensim.view.nodes.ModelCloseSelectedAction;
 
 @ActionID(category = "File",
@@ -38,8 +38,8 @@ public final class FileCloseAllAction implements ActionListener {
          if (numChildren==0) return;
          ArrayList<Node> modelsToClose = new ArrayList<Node>();
          for(int i=0; i < numChildren; i++){
-             if (ch.getNodeAt(i) instanceof ConcreteModelNode){
-                ConcreteModelNode modelNode = (ConcreteModelNode) ch.getNodeAt(i);
+             if (ch.getNodeAt(i) instanceof OneModelNode){
+                OneModelNode modelNode = (OneModelNode) ch.getNodeAt(i);
                 modelsToClose.add(modelNode);
             }
          }

@@ -34,7 +34,7 @@ import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.view.ExplorerTopComponent;
-import org.opensim.view.nodes.ConcreteModelNode;
+import org.opensim.view.nodes.OneModelNode;
 import org.opensim.view.nodes.ModelCloseSelectedAction;
 import org.opensim.view.nodes.ModelSaveSelectedAction;
 import org.opensim.view.pub.OpenSimDB;
@@ -49,8 +49,8 @@ public final class FileSaveAllAction extends CallableSystemAction {
          if (numChildren==0) return;
          ArrayList<Node> modelsToSave = new ArrayList<Node>();
          for(int i=0; i < numChildren; i++){
-             if (ch.getNodeAt(i) instanceof ConcreteModelNode){
-                ConcreteModelNode modelNode = (ConcreteModelNode) ch.getNodeAt(i);
+             if (ch.getNodeAt(i) instanceof OneModelNode){
+                OneModelNode modelNode = (OneModelNode) ch.getNodeAt(i);
                 modelsToSave.add(modelNode);
             }
          }
