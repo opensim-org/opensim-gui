@@ -16,44 +16,44 @@ import org.opensim.modeling.PropertyHelper;
  * @author Ayman
  */
 public abstract class DisablablModelComponentNode extends OneModelComponentNode implements DisableableObject {
-    protected boolean disabled = false;
+    protected boolean enabled = true;
 
     public DisablablModelComponentNode(OpenSimObject obj) {
         super(obj);
-        updateDisabledFlag();
+        updateEnabledFlag();
     }
 
-    public boolean isDisabled() {
-        return disabled;
+    public boolean isEnabled() {
+        return enabled;
     }
 
     @Override
-    public void setDisabled(boolean disabled) {
-        //OpenSimDB.getInstance().disableConstraint(getOpenSimObject(), disabled);
-        this.disabled = disabled;
-        if (disabled) {
+    public void setEnabled(boolean enabled) {
+        //OpenSimDB.getInstance().disableConstraint(getOpenSimObject(), enabled);
+        this.enabled = enabled;
+        if (!enabled) {
             setIconBaseWithExtension("/org/opensim/view/nodes/icons/disabledNode.png");
         } 
     }
 
-    private void updateDisabledFlag() {
+    private void updateEnabledFlag() {
         OpenSimObject c = getOpenSimObject();
-        AbstractProperty ap = c.getPropertyByName("isDisabled");
-        disabled = PropertyHelper.getValueBool(ap);
+        AbstractProperty ap = c.getPropertyByName(getDisablePropertyName());
+        enabled = PropertyHelper.getValueBool(ap);
     }
 
     @Override
     public void refreshNode() {
         super.refreshNode();
-        updateDisabledFlag();
-        setDisabled(disabled);
+        updateEnabledFlag();
+        setEnabled(enabled);
     }
 
     @Override
-    // return diabled icon if disabled is true else null
+    // return diabled icon if enabled is true else null
     public Image getIcon(int i) {
         URL imageURL;
-        if (disabled){
+        if (!enabled){
             imageURL = this.getClass().getResource("icons/disabledNode.png");
         
             if (imageURL != null) { 

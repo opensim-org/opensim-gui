@@ -55,7 +55,7 @@ public class OneActuatorNode extends OneForceNode{
     }
     public Image getIcon(int i) {
         URL imageURL;
-        if (disabled)
+        if (!enabled)
             imageURL = this.getClass().getResource("icons/disabledNode.png");
         else
             imageURL = this.getClass().getResource("icons/muscleNode.png");

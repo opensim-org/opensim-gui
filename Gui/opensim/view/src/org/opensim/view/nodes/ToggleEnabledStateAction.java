@@ -35,7 +35,7 @@ public final class ToggleEnabledStateAction extends BooleanStateAction {
         // Action shouldn't be available otherwise
         if (selected[0] instanceof DisableableObject){
             DisableableObject dNode = (DisableableObject)selected[0];
-            setBooleanState(!dNode.isDisabled());
+            setBooleanState(dNode.isEnabled());
             return true;
         }
         return false;
@@ -54,11 +54,11 @@ public final class ToggleEnabledStateAction extends BooleanStateAction {
             Node selectedNode = selected[i];
             if (selectedNode instanceof DisableableObject){
                 DisableableObject object=(DisableableObject) selectedNode;
-                object.setDisabled(!newState);
+                object.setEnabled(newState);
                 OpenSimObjectNode oNode= (OpenSimObjectNode) selectedNode;
-                PropertyEditorAdaptor pea = new PropertyEditorAdaptor("isDisabled", oNode);
-                pea.setValueBool(!newState);
-            }
+                PropertyEditorAdaptor pea = new PropertyEditorAdaptor(object.getDisablePropertyName(), oNode);
+                pea.setValueBool(newState);
+             }
         }
         setBooleanState(newState);
     }

@@ -29,7 +29,7 @@ public class OneConstraintNode extends DisablablModelComponentNode {
      **/
     public Image getIcon(int i) {
         URL imageURL;
-        if (disabled)
+        if (!enabled)
             return super.getIcon(i);
         
         imageURL = this.getClass().getResource("icons/constraintNode.png");
@@ -41,9 +41,9 @@ public class OneConstraintNode extends DisablablModelComponentNode {
     }
 
     @Override
-    public void setDisabled(boolean disabled) {
-        super.setDisabled(disabled);
-        if (!disabled){
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        if (enabled){
             setIconBaseWithExtension("/org/opensim/view/nodes/icons/constraintNode.png");
         }
     }
@@ -55,7 +55,7 @@ public class OneConstraintNode extends DisablablModelComponentNode {
         // Create new Array of proper size
         Action[] retActions = new Action[actions.size()+1];
         actions.toArray(retActions);
-        if (disabled){  // take out display menu ObjectDisplayMenuAction
+        if (!enabled){  // take out display menu ObjectDisplayMenuAction
             for (int i=0; i< retActions.length; i++){
                 if (retActions[i] instanceof ObjectDisplayMenuAction){
                     retActions[i] = null; 
@@ -72,4 +72,15 @@ public class OneConstraintNode extends DisablablModelComponentNode {
         }
         return retActions;
     }
+
+    @Override
+    public String getDisablePropertyName() {
+        return ("isEnforced");
+    }
+    
+    @Override
+    public boolean enableWhenPropertyIsTrue() {
+        return true;
+    }
+
 }
