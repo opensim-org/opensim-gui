@@ -26,7 +26,7 @@ nuget:
 install:
   - ps: choco install jdk8
   ## The GUI is built with the Netbeans platform.
-  - ps: choco install netbeans-jee --version 8.0.2 --yes --limit-output | Out-Null
+  - ps: choco install netbeans-jee --version 8.0.2 --yes --limit-output
 
   ## Apache Ant for building Java projects.
   - choco install ant --yes --limit-output
