@@ -81,9 +81,5 @@ public class OneProbeNode  extends DisablablModelComponentNode {
         return("isDisabled"); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public boolean enableWhenPropertyIsTrue() {
-        return false;
-    }
 
 }
