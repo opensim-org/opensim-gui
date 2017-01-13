@@ -57,40 +57,40 @@ public class Force extends ModelComponent {
     return opensimModelSimulationJNI.Force_getConcreteClassName(swigCPtr, this);
   }
 
-  public void copyProperty_isDisabled(Force source) {
-    opensimModelSimulationJNI.Force_copyProperty_isDisabled(swigCPtr, this, Force.getCPtr(source), source);
+  public void copyProperty_appliesForce(Force source) {
+    opensimModelSimulationJNI.Force_copyProperty_appliesForce(swigCPtr, this, Force.getCPtr(source), source);
   }
 
-  public boolean get_isDisabled(int i) {
-    return opensimModelSimulationJNI.Force_get_isDisabled__SWIG_0(swigCPtr, this, i);
+  public boolean get_appliesForce(int i) {
+    return opensimModelSimulationJNI.Force_get_appliesForce__SWIG_0(swigCPtr, this, i);
   }
 
-  public SWIGTYPE_p_bool upd_isDisabled(int i) {
-    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.Force_upd_isDisabled__SWIG_0(swigCPtr, this, i), false);
+  public SWIGTYPE_p_bool upd_appliesForce(int i) {
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.Force_upd_appliesForce__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_isDisabled(int i, boolean value) {
-    opensimModelSimulationJNI.Force_set_isDisabled__SWIG_0(swigCPtr, this, i, value);
+  public void set_appliesForce(int i, boolean value) {
+    opensimModelSimulationJNI.Force_set_appliesForce__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int append_isDisabled(boolean value) {
-    return opensimModelSimulationJNI.Force_append_isDisabled(swigCPtr, this, value);
+  public int append_appliesForce(boolean value) {
+    return opensimModelSimulationJNI.Force_append_appliesForce(swigCPtr, this, value);
   }
 
-  public void constructProperty_isDisabled(boolean initValue) {
-    opensimModelSimulationJNI.Force_constructProperty_isDisabled(swigCPtr, this, initValue);
+  public void constructProperty_appliesForce(boolean initValue) {
+    opensimModelSimulationJNI.Force_constructProperty_appliesForce(swigCPtr, this, initValue);
   }
 
-  public boolean get_isDisabled() {
-    return opensimModelSimulationJNI.Force_get_isDisabled__SWIG_1(swigCPtr, this);
+  public boolean get_appliesForce() {
+    return opensimModelSimulationJNI.Force_get_appliesForce__SWIG_1(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_bool upd_isDisabled() {
-    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.Force_upd_isDisabled__SWIG_1(swigCPtr, this), false);
+  public SWIGTYPE_p_bool upd_appliesForce() {
+    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.Force_upd_appliesForce__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_isDisabled(boolean value) {
-    opensimModelSimulationJNI.Force_set_isDisabled__SWIG_1(swigCPtr, this, value);
+  public void set_appliesForce(boolean value) {
+    opensimModelSimulationJNI.Force_set_appliesForce__SWIG_1(swigCPtr, this, value);
   }
 
   public void set_has_output_potential_energy(boolean value) {
@@ -105,12 +105,12 @@ public class Force extends ModelComponent {
     return opensimModelSimulationJNI.Force_shouldBeParallelized(swigCPtr, this);
   }
 
-  public boolean isDisabled(State s) {
-    return opensimModelSimulationJNI.Force_isDisabled(swigCPtr, this, State.getCPtr(s), s);
+  public boolean appliesForce(State s) {
+    return opensimModelSimulationJNI.Force_appliesForce(swigCPtr, this, State.getCPtr(s), s);
   }
 
-  public void setDisabled(State s, boolean disabled) {
-    opensimModelSimulationJNI.Force_setDisabled(swigCPtr, this, State.getCPtr(s), s, disabled);
+  public void setAppliesForce(State s, boolean applyForce) {
+    opensimModelSimulationJNI.Force_setAppliesForce(swigCPtr, this, State.getCPtr(s), s, applyForce);
   }
 
   public ArrayStr getRecordLabels() {

@@ -35,34 +35,9 @@ public class InputVec3 extends AbstractInput {
     super.delete();
   }
 
-  public static InputVec3 safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelCommonJNI.InputVec3_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new InputVec3(cPtr, false);
-  }
-
-  public void assign(OpenSimObject aObject) {
-    opensimModelCommonJNI.InputVec3_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
-  }
-
-  public static String getClassName() {
-    return opensimModelCommonJNI.InputVec3_getClassName();
-  }
-
-  public OpenSimObject clone() {
+  public AbstractConnector clone() {
     long cPtr = opensimModelCommonJNI.InputVec3_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new InputVec3(cPtr, true);
-  }
-
-  public String getConcreteClassName() {
-    return opensimModelCommonJNI.InputVec3_getConcreteClassName(swigCPtr, this);
-  }
-
-  public InputVec3() {
-    this(opensimModelCommonJNI.new_InputVec3__SWIG_0(), true);
-  }
-
-  public InputVec3(String name, Stage connectAtStage, boolean isList, Component owner) {
-    this(opensimModelCommonJNI.new_InputVec3__SWIG_1(name, Stage.getCPtr(connectAtStage), connectAtStage, isList, Component.getCPtr(owner), owner), true);
   }
 
   public void connect(AbstractOutput output, String alias) {
@@ -155,6 +130,11 @@ public class InputVec3 extends AbstractInput {
 
   public static InputVec3 updDowncast(AbstractInput p) {
     return new InputVec3(opensimModelCommonJNI.InputVec3_updDowncast(AbstractInput.getCPtr(p), p), false);
+  }
+
+  public static InputVec3 safeDownCast(AbstractInput base) {
+    long cPtr = opensimModelCommonJNI.InputVec3_safeDownCast(AbstractInput.getCPtr(base), base);
+    return (cPtr == 0) ? null : new InputVec3(cPtr, false);
   }
 
 }

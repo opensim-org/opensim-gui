@@ -35,26 +35,9 @@ public class AbstractInput extends AbstractConnector {
     super.delete();
   }
 
-  public static AbstractInput safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelCommonJNI.AbstractInput_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new AbstractInput(cPtr, false);
-  }
-
-  public void assign(OpenSimObject aObject) {
-    opensimModelCommonJNI.AbstractInput_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
-  }
-
-  public static String getClassName() {
-    return opensimModelCommonJNI.AbstractInput_getClassName();
-  }
-
-  public OpenSimObject clone() {
+  public AbstractConnector clone() {
     long cPtr = opensimModelCommonJNI.AbstractInput_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new AbstractInput(cPtr, true);
-  }
-
-  public String getConcreteClassName() {
-    return opensimModelCommonJNI.AbstractInput_getConcreteClassName(swigCPtr, this);
   }
 
   public void connect(OpenSimObject object) {
@@ -101,8 +84,8 @@ public class AbstractInput extends AbstractConnector {
     return opensimModelCommonJNI.AbstractInput_getLabel__SWIG_1(swigCPtr, this, index);
   }
 
-  public static boolean parseConnecteeName(String connecteeName, SWIGTYPE_p_std__string outputPath, SWIGTYPE_p_std__string channelName, SWIGTYPE_p_std__string alias) {
-    return opensimModelCommonJNI.AbstractInput_parseConnecteeName(connecteeName, SWIGTYPE_p_std__string.getCPtr(outputPath), SWIGTYPE_p_std__string.getCPtr(channelName), SWIGTYPE_p_std__string.getCPtr(alias));
+  public static boolean parseConnecteeName(String connecteeName, SWIGTYPE_p_std__string componentPath, SWIGTYPE_p_std__string outputName, SWIGTYPE_p_std__string channelName, SWIGTYPE_p_std__string alias) {
+    return opensimModelCommonJNI.AbstractInput_parseConnecteeName(connecteeName, SWIGTYPE_p_std__string.getCPtr(componentPath), SWIGTYPE_p_std__string.getCPtr(outputName), SWIGTYPE_p_std__string.getCPtr(channelName), SWIGTYPE_p_std__string.getCPtr(alias));
   }
 
 }

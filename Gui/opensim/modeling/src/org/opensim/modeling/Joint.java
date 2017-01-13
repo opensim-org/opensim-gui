@@ -141,20 +141,28 @@ public class Joint extends ModelComponent {
     opensimModelSimulationJNI.Joint_constructProperty_frames(swigCPtr, this);
   }
 
-  public void set_connector_parent_frame(int value) {
-    opensimModelSimulationJNI.Joint__connector_parent_frame_set(swigCPtr, this, value);
+  public void setPropertyIndex_connector_parent_frame_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelSimulationJNI.Joint_PropertyIndex_connector_parent_frame_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public int get_connector_parent_frame() {
-    return opensimModelSimulationJNI.Joint__connector_parent_frame_get(swigCPtr, this);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_parent_frame_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.Joint_PropertyIndex_connector_parent_frame_connectee_name_get(swigCPtr, this), true);
   }
 
-  public void set_connector_child_frame(int value) {
-    opensimModelSimulationJNI.Joint__connector_child_frame_set(swigCPtr, this, value);
+  public void connectConnector_parent_frame(OpenSimObject object) {
+    opensimModelSimulationJNI.Joint_connectConnector_parent_frame(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
-  public int get_connector_child_frame() {
-    return opensimModelSimulationJNI.Joint__connector_child_frame_get(swigCPtr, this);
+  public void setPropertyIndex_connector_child_frame_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelSimulationJNI.Joint_PropertyIndex_connector_child_frame_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_child_frame_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.Joint_PropertyIndex_connector_child_frame_connectee_name_get(swigCPtr, this), true);
+  }
+
+  public void connectConnector_child_frame(OpenSimObject object) {
+    opensimModelSimulationJNI.Joint_connectConnector_child_frame(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
   public void set_has_output_power(boolean value) {

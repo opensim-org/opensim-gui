@@ -165,12 +165,16 @@ public class BodyActuator extends Actuator {
     opensimModelJNI.BodyActuator_set_spatial_force_is_global__SWIG_1(swigCPtr, this, value);
   }
 
-  public void set_connector_body(int value) {
-    opensimModelJNI.BodyActuator__connector_body_set(swigCPtr, this, value);
+  public void setPropertyIndex_connector_body_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelJNI.BodyActuator_PropertyIndex_connector_body_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public int get_connector_body() {
-    return opensimModelJNI.BodyActuator__connector_body_get(swigCPtr, this);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_body_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelJNI.BodyActuator_PropertyIndex_connector_body_connectee_name_get(swigCPtr, this), true);
+  }
+
+  public void connectConnector_body(OpenSimObject object) {
+    opensimModelJNI.BodyActuator_connectConnector_body(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
   public BodyActuator() {

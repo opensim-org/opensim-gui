@@ -26,7 +26,7 @@ public class OneProbeNode  extends DisablablModelComponentNode {
     @Override
     public Image getIcon(int i) {
         URL imageURL;
-        if (disabled)
+        if (!enabled)
             return super.getIcon(i);
         
         imageURL = this.getClass().getResource("icons/probe_single.png");
@@ -37,9 +37,9 @@ public class OneProbeNode  extends DisablablModelComponentNode {
         }
     }
     
-    public void setDisabled(boolean disabled) {
-        super.setDisabled(disabled);
-        if (!disabled){
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        if (enabled){
             setIconBaseWithExtension("/org/opensim/view/nodes/icons/probe_single.png");
         }
     }
@@ -53,7 +53,7 @@ public class OneProbeNode  extends DisablablModelComponentNode {
         Action[] retActions = new Action[actions.size()+2];
         actions.toArray(retActions);
         retActions[actions.size()]=new DeleteProbeAction();
-        if (disabled){  // take out display menu ObjectDisplayMenuAction
+        if (enabled){  // take out display menu ObjectDisplayMenuAction
             for (int i=0; i< retActions.length; i++){
                 if (retActions[i] instanceof ObjectDisplayMenuAction){
                     retActions[i] = null; 
@@ -75,5 +75,11 @@ public class OneProbeNode  extends DisablablModelComponentNode {
     public void updateSelfFromObject() {
         super.updateSelfFromObject();
     }
+
+    @Override
+    public String getDisablePropertyName() {
+        return("isDisabled"); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 }

@@ -581,12 +581,12 @@ public class MuscleIterator {
     opensimModelSimulationJNI.MuscleIterator_computeEquilibrium(swigCPtr, this, State.getCPtr(s), s);
   }
 
-  public boolean get_isDisabled(int i) {
-    return opensimModelSimulationJNI.MuscleIterator_get_isDisabled__SWIG_0(swigCPtr, this, i);
+  public boolean get_appliesForce(int i) {
+    return opensimModelSimulationJNI.MuscleIterator_get_appliesForce__SWIG_0(swigCPtr, this, i);
   }
 
-  public boolean get_isDisabled() {
-    return opensimModelSimulationJNI.MuscleIterator_get_isDisabled__SWIG_1(swigCPtr, this);
+  public boolean get_appliesForce() {
+    return opensimModelSimulationJNI.MuscleIterator_get_appliesForce__SWIG_1(swigCPtr, this);
   }
 
   public boolean get_has_output_potential_energy() {
@@ -597,12 +597,12 @@ public class MuscleIterator {
     return opensimModelSimulationJNI.MuscleIterator_shouldBeParallelized(swigCPtr, this);
   }
 
-  public boolean isDisabled(State s) {
-    return opensimModelSimulationJNI.MuscleIterator_isDisabled(swigCPtr, this, State.getCPtr(s), s);
+  public boolean appliesForce(State s) {
+    return opensimModelSimulationJNI.MuscleIterator_appliesForce(swigCPtr, this, State.getCPtr(s), s);
   }
 
-  public void setDisabled(State s, boolean disabled) {
-    opensimModelSimulationJNI.MuscleIterator_setDisabled(swigCPtr, this, State.getCPtr(s), s, disabled);
+  public void setAppliesForce(State s, boolean applyForce) {
+    opensimModelSimulationJNI.MuscleIterator_setAppliesForce(swigCPtr, this, State.getCPtr(s), s, applyForce);
   }
 
   public Model getModel() {
@@ -666,11 +666,7 @@ public class MuscleIterator {
   }
 
   public AbstractConnector getConnector(String name) {
-    return new AbstractConnector(opensimModelSimulationJNI.MuscleIterator_getConnector__SWIG_0(swigCPtr, this, name), false);
-  }
-
-  public AbstractConnector getConnector(int i) {
-    return new AbstractConnector(opensimModelSimulationJNI.MuscleIterator_getConnector__SWIG_2(swigCPtr, this, i), false);
+    return new AbstractConnector(opensimModelSimulationJNI.MuscleIterator_getConnector(swigCPtr, this, name), false);
   }
 
   public int getNumInputs() {

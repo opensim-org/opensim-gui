@@ -177,28 +177,40 @@ public class MovingPathPoint extends PathPoint {
     opensimModelSimulationJNI.MovingPathPoint_set_z_location__SWIG_1(swigCPtr, this, Function.getCPtr(value), value);
   }
 
-  public void set_connector_x_coordinate(int value) {
-    opensimModelSimulationJNI.MovingPathPoint__connector_x_coordinate_set(swigCPtr, this, value);
+  public void setPropertyIndex_connector_x_coordinate_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelSimulationJNI.MovingPathPoint_PropertyIndex_connector_x_coordinate_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public int get_connector_x_coordinate() {
-    return opensimModelSimulationJNI.MovingPathPoint__connector_x_coordinate_get(swigCPtr, this);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_x_coordinate_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.MovingPathPoint_PropertyIndex_connector_x_coordinate_connectee_name_get(swigCPtr, this), true);
   }
 
-  public void set_connector_y_coordinate(int value) {
-    opensimModelSimulationJNI.MovingPathPoint__connector_y_coordinate_set(swigCPtr, this, value);
+  public void connectConnector_x_coordinate(OpenSimObject object) {
+    opensimModelSimulationJNI.MovingPathPoint_connectConnector_x_coordinate(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
-  public int get_connector_y_coordinate() {
-    return opensimModelSimulationJNI.MovingPathPoint__connector_y_coordinate_get(swigCPtr, this);
+  public void setPropertyIndex_connector_y_coordinate_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelSimulationJNI.MovingPathPoint_PropertyIndex_connector_y_coordinate_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public void set_connector_z_coordinate(int value) {
-    opensimModelSimulationJNI.MovingPathPoint__connector_z_coordinate_set(swigCPtr, this, value);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_y_coordinate_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.MovingPathPoint_PropertyIndex_connector_y_coordinate_connectee_name_get(swigCPtr, this), true);
   }
 
-  public int get_connector_z_coordinate() {
-    return opensimModelSimulationJNI.MovingPathPoint__connector_z_coordinate_get(swigCPtr, this);
+  public void connectConnector_y_coordinate(OpenSimObject object) {
+    opensimModelSimulationJNI.MovingPathPoint_connectConnector_y_coordinate(swigCPtr, this, OpenSimObject.getCPtr(object), object);
+  }
+
+  public void setPropertyIndex_connector_z_coordinate_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimModelSimulationJNI.MovingPathPoint_PropertyIndex_connector_z_coordinate_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  }
+
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_z_coordinate_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.MovingPathPoint_PropertyIndex_connector_z_coordinate_connectee_name_get(swigCPtr, this), true);
+  }
+
+  public void connectConnector_z_coordinate(OpenSimObject object) {
+    opensimModelSimulationJNI.MovingPathPoint_connectConnector_z_coordinate(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
   public MovingPathPoint() {

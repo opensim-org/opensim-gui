@@ -564,7 +564,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
     private void addNonPathForceGeometry(vtkAssembly modelAssembly, OpenSimObject fObject) {
         Force f = Force.safeDownCast(fObject);
         OpenSimContext context=OpenSimDB.getInstance().getContext(f.getModel());
-        if (context.isDisabled(f)) return;
+        if (context.appliesForce(f)) return;
 
     }
 

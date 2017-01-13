@@ -14,7 +14,10 @@ package org.opensim.view.nodes;
  * @author ayman
  */
 public interface DisableableObject {
-    public boolean isDisabled() ;
+    public boolean isEnabled();
 
-    public void setDisabled(boolean disabled) ;
+    public void setEnabled(boolean disabled);
+    
+    public String getDisablePropertyName();
+    
 }

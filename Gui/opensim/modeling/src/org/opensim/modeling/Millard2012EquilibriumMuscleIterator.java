@@ -789,12 +789,12 @@ public class Millard2012EquilibriumMuscleIterator {
     opensimModelSimulationJNI.Millard2012EquilibriumMuscleIterator_computeEquilibrium(swigCPtr, this, State.getCPtr(s), s);
   }
 
-  public boolean get_isDisabled(int i) {
-    return opensimModelSimulationJNI.Millard2012EquilibriumMuscleIterator_get_isDisabled__SWIG_0(swigCPtr, this, i);
+  public boolean get_appliesForce(int i) {
+    return opensimModelSimulationJNI.Millard2012EquilibriumMuscleIterator_get_appliesForce__SWIG_0(swigCPtr, this, i);
   }
 
-  public boolean get_isDisabled() {
-    return opensimModelSimulationJNI.Millard2012EquilibriumMuscleIterator_get_isDisabled__SWIG_1(swigCPtr, this);
+  public boolean get_appliesForce() {
+    return opensimModelSimulationJNI.Millard2012EquilibriumMuscleIterator_get_appliesForce__SWIG_1(swigCPtr, this);
   }
 
   public boolean get_has_output_potential_energy() {
@@ -805,12 +805,12 @@ public class Millard2012EquilibriumMuscleIterator {
     return opensimModelSimulationJNI.Millard2012EquilibriumMuscleIterator_shouldBeParallelized(swigCPtr, this);
   }
 
-  public boolean isDisabled(State s) {
-    return opensimModelSimulationJNI.Millard2012EquilibriumMuscleIterator_isDisabled(swigCPtr, this, State.getCPtr(s), s);
+  public boolean appliesForce(State s) {
+    return opensimModelSimulationJNI.Millard2012EquilibriumMuscleIterator_appliesForce(swigCPtr, this, State.getCPtr(s), s);
   }
 
-  public void setDisabled(State s, boolean disabled) {
-    opensimModelSimulationJNI.Millard2012EquilibriumMuscleIterator_setDisabled(swigCPtr, this, State.getCPtr(s), s, disabled);
+  public void setAppliesForce(State s, boolean applyForce) {
+    opensimModelSimulationJNI.Millard2012EquilibriumMuscleIterator_setAppliesForce(swigCPtr, this, State.getCPtr(s), s, applyForce);
   }
 
   public Model getModel() {
@@ -874,11 +874,7 @@ public class Millard2012EquilibriumMuscleIterator {
   }
 
   public AbstractConnector getConnector(String name) {
-    return new AbstractConnector(opensimModelSimulationJNI.Millard2012EquilibriumMuscleIterator_getConnector__SWIG_0(swigCPtr, this, name), false);
-  }
-
-  public AbstractConnector getConnector(int i) {
-    return new AbstractConnector(opensimModelSimulationJNI.Millard2012EquilibriumMuscleIterator_getConnector__SWIG_2(swigCPtr, this, i), false);
+    return new AbstractConnector(opensimModelSimulationJNI.Millard2012EquilibriumMuscleIterator_getConnector(swigCPtr, this, name), false);
   }
 
   public int getNumInputs() {

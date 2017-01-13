@@ -1839,7 +1839,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
            // Forces now
            if (obj instanceof Force){
                Force f = Force.safeDownCast(obj);
-               boolean newState = f.get_isDisabled();
+               boolean newState = f.get_appliesForce();
                if (f instanceof Muscle) {
                    PathActuator m = PathActuator.safeDownCast(f);
                    if (!newState){

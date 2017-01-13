@@ -66,7 +66,7 @@ public class OneForceNode extends DisablablModelComponentNode {
     @Override
     public Image getIcon(int i) {
         URL imageURL;
-        if (disabled)
+        if (!enabled)
             return super.getIcon(i);
         
         imageURL = this.getClass().getResource("icons/forceNode.png");
@@ -79,10 +79,10 @@ public class OneForceNode extends DisablablModelComponentNode {
 
 
     @Override
-    public void setDisabled(boolean disabled) {
-        //OpenSimDB.getInstance().disableForce(getOpenSimObject(), disabled);
-        super.setDisabled(disabled);
-        if (!disabled)
+    public void setEnabled(boolean enabled) {
+        //OpenSimDB.getInstance().disableForce(getOpenSimObject(), enabled);
+        super.setEnabled(enabled);
+        if (enabled)
             setIconBaseWithExtension("/org/opensim/view/nodes/icons/muscleNode.png");
         //refreshNode();
 
@@ -95,7 +95,7 @@ public class OneForceNode extends DisablablModelComponentNode {
         // Create new Array of proper size
         Action[] retActions = new Action[actions.size()+1];
         actions.toArray(retActions);
-        if (disabled){  // take out display menu ObjectDisplayMenuAction
+        if (enabled){  // take out display menu ObjectDisplayMenuAction
             for (int i=0; i< retActions.length; i++){
                 if (retActions[i] instanceof ObjectDisplayMenuAction){
                     retActions[i] = null; 
@@ -111,6 +111,11 @@ public class OneForceNode extends DisablablModelComponentNode {
             ex.printStackTrace();
         }
         return retActions;
+    }
+
+    @Override
+    public String getDisablePropertyName() {
+        return ("appliesForce");
     }
    
 }

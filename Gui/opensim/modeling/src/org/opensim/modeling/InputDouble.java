@@ -35,34 +35,9 @@ public class InputDouble extends AbstractInput {
     super.delete();
   }
 
-  public static InputDouble safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelCommonJNI.InputDouble_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new InputDouble(cPtr, false);
-  }
-
-  public void assign(OpenSimObject aObject) {
-    opensimModelCommonJNI.InputDouble_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
-  }
-
-  public static String getClassName() {
-    return opensimModelCommonJNI.InputDouble_getClassName();
-  }
-
-  public OpenSimObject clone() {
+  public AbstractConnector clone() {
     long cPtr = opensimModelCommonJNI.InputDouble_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new InputDouble(cPtr, true);
-  }
-
-  public String getConcreteClassName() {
-    return opensimModelCommonJNI.InputDouble_getConcreteClassName(swigCPtr, this);
-  }
-
-  public InputDouble() {
-    this(opensimModelCommonJNI.new_InputDouble__SWIG_0(), true);
-  }
-
-  public InputDouble(String name, Stage connectAtStage, boolean isList, Component owner) {
-    this(opensimModelCommonJNI.new_InputDouble__SWIG_1(name, Stage.getCPtr(connectAtStage), connectAtStage, isList, Component.getCPtr(owner), owner), true);
   }
 
   public void connect(AbstractOutput output, String alias) {
@@ -155,6 +130,11 @@ public class InputDouble extends AbstractInput {
 
   public static InputDouble updDowncast(AbstractInput p) {
     return new InputDouble(opensimModelCommonJNI.InputDouble_updDowncast(AbstractInput.getCPtr(p), p), false);
+  }
+
+  public static InputDouble safeDownCast(AbstractInput base) {
+    long cPtr = opensimModelCommonJNI.InputDouble_safeDownCast(AbstractInput.getCPtr(base), base);
+    return (cPtr == 0) ? null : new InputDouble(cPtr, false);
   }
 
 }
