@@ -81,8 +81,4 @@ public class OneControllerNode extends DisablablModelComponentNode {
         return("enabled"); 
     }
 
-    @Override
-    public boolean enableWhenPropertyIsTrue() {
-        return true;
-    }
 }

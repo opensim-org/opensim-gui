@@ -77,10 +77,5 @@ public class OneConstraintNode extends DisablablModelComponentNode {
     public String getDisablePropertyName() {
         return ("isEnforced");
     }
-    
-    @Override
-    public boolean enableWhenPropertyIsTrue() {
-        return true;
-    }
 
 }
