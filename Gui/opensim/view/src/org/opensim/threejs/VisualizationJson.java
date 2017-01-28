@@ -70,7 +70,7 @@ public class VisualizationJson {
         muscleList = model.getMuscleList();
         ComponentIterator mcIter = mcList.begin();
         // Load template 
-        JSONObject jsonTop = loadTemplateJSON();
+        JSONObject jsonTop = createTopLevelJson(model);
         BodyList bodies = model.getBodyList();
         BodyIterator body = bodies.begin();
         mapBodyIndicesToFrames.put(0, model.getGround());
@@ -162,24 +162,23 @@ public class VisualizationJson {
  
     }
 
-    private JSONObject loadTemplateJSON() {
-        JSONParser parser = new JSONParser();
-        JSONObject jsonObject = null;
-        String current;
-        try {
-            current = new java.io.File( "." ).getCanonicalPath();
-            System.out.println("Current dir:"+current);
-        } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
-        }
-        
-        try {
-            Object obj = parser.parse(new FileReader("threejs/editor/templateScene.json"));
-            jsonObject = (JSONObject) obj;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return jsonObject;
+    private JSONObject createTopLevelJson(Model model) {
+        JSONObject topLevelJson = new JSONObject();
+        JSONObject modelJson = new JSONObject();
+        createOneModelJson(modelJson, model);
+        topLevelJson.put("object", modelJson);
+        topLevelJson.put("geometries", new JSONArray());
+        topLevelJson.put("materials", new JSONArray());
+        return topLevelJson;
+    }
+
+    private void createOneModelJson(JSONObject modelJson, Model model) {
+        modelJson.put("uuid", UUID.randomUUID().toString());
+        modelJson.put("type", "Model");
+        modelJson.put("opensimtype", "Model");
+        modelJson.put("name", "OpenSimModel");
+        modelJson.put("matrix", JSONUtilities.createMatrixFromTransform(new Transform(), new Vec3(1.), 1.0));
+        modelJson.put("children", new JSONArray());
     }
 
     private UUID addtoFrameJsonObject(DecorativeGeometry dg, String geomName, UUID uuid, UUID uuid_mat, JSONArray mobody_objects) {
