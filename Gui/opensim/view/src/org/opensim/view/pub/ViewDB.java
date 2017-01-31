@@ -58,6 +58,7 @@ import org.opensim.modeling.*;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.swingui.SwingWorker;
 import org.opensim.threejs.JSONMessageHandler;
+import org.opensim.threejs.JSONUtilities;
 import org.opensim.threejs.VisualizationJson;
 import org.opensim.utils.Prefs;
 import org.opensim.utils.TheApp;
@@ -95,15 +96,24 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    static ArrayList<ModelWindowVTKTopComponent> openWindows = new ArrayList<ModelWindowVTKTopComponent>(4);
    // List of models currently available in all views
    private static ArrayList<SingleModelVisuals> modelVisuals = new ArrayList<SingleModelVisuals>(4);
+   private static final ArrayList<VisualizationJson> modelJsons = new ArrayList<VisualizationJson>(4);
    private static ArrayList<Boolean> saveStatus = new ArrayList<Boolean>(4);
    // One single vtAssemby for the whole Scene
    private static vtkAssembly sceneAssembly;
    private static WebSocketDB websocketdb;
+   private static JSONObject jsondb;
     /**
      * @return the myLookup
      */
     public static Lookup getLookup() {
         return myLookup;
+    }
+
+    /**
+     * @return the jsondb
+     */
+    public static JSONObject getJsondb() {
+        return jsondb;
     }
 
    // Map models to visuals
@@ -145,11 +155,12 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     private final static Lookup myLookup = new AbstractLookup (lookupContents);
     Lookup.Result<OpenSimObject> r;
 
-    private VisualizationJson visJson;
+    private VisualizationJson currentJson;
    /** Creates a new instance of ViewDB */
    private ViewDB() {
         applyPreferences();
         r = myLookup.lookupResult(OpenSimObject.class);
+        jsondb = JSONUtilities.createTopLevelJson();
      }
 
     public void applyPreferences() {
@@ -345,7 +356,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                //rc = visModel.getModelDisplayAssembly().GetReferenceCount();
                if (visModel != null) visModel.cleanup();
                if (websocketdb != null){
-                    websocketdb.broadcastMessageJson(visJson.createCloseModelJson(dModel));
+                    websocketdb.broadcastMessageJson(currentJson.createCloseModelJson(dModel));
                 }
                
             } else if (ev.getOperation()==ModelEvent.Operation.SetCurrent) {
@@ -917,7 +928,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
          markSelected(selectedObject, true, true, true);
          ExplorerTopComponent.getDefault().selectNodeForSelectedObject(selectedObject);
          if (websocketdb != null){
-             websocketdb.broadcastMessageJson(visJson.createSelectionJson(obj));
+             websocketdb.broadcastMessageJson(currentJson.createSelectionJson(obj));
          }
       } else { // this function should never be called with obj = null
          ClearSelectedObjectsEvent evnt = new ClearSelectedObjectsEvent(this);
@@ -1160,7 +1171,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       repaintAll();
       if (websocketdb != null){
         // Make xforms JSON
-        websocketdb.broadcastMessageJson(visJson.createFrameMessageJson());
+        websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson());
       }
    }
    
@@ -1171,7 +1182,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       lockDrawingSurfaces(false);
       if (websocketdb != null){
         // Make xforms JSON
-        websocketdb.broadcastMessageJson(visJson.createFrameMessageJson());
+        websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson());
       }
    }
 
@@ -1507,6 +1518,13 @@ public final class ViewDB extends Observable implements Observer, LookupListener
 
     public void updateDisplay(Model model, Component ownerModelComponent) {
         getModelVisuals(model).upateDisplay(ownerModelComponent);
+    }
+
+    /**
+     * @return the currentJson
+     */
+    public VisualizationJson getCurrentJson() {
+        return currentJson;
     }
 
    /**
@@ -1907,14 +1925,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
 
     public void setJson(VisualizationJson json) {
-        visJson = json;
+        currentJson = json;
     }
 
     private void handleJson(JSONObject jsonObject) {
        Object uuid = jsonObject.get("uuid");
        String uuidString = (String) uuid;
        if (uuidString.length()==0) return;
-       final OpenSimObject selectedObject = visJson.findObjectForUUID(uuidString);
+       final OpenSimObject selectedObject = currentJson.findObjectForUUID(uuidString);
        JSONMessageHandler.handleJSON(getCurrentModel(), selectedObject, jsonObject);
     }
 }

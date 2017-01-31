@@ -6,6 +6,7 @@
 
 package org.opensim.threejs;
 
+import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.opensim.modeling.Rotation;
@@ -18,6 +19,21 @@ import org.opensim.modeling.Vec3;
  */
 public class JSONUtilities {
 
+    static public JSONObject createTopLevelJson() {
+        JSONObject topLevelJson = new JSONObject();
+        topLevelJson.put("geometries", new JSONArray());
+        topLevelJson.put("materials", new JSONArray());
+        JSONObject models_json = new JSONObject();
+        models_json.put("uuid", UUID.randomUUID().toString());
+        models_json.put("type", "Group");
+        models_json.put("name", "Models");
+        //System.out.println(model_json.toJSONString());
+        JSONArray models_json_arr = new JSONArray();
+        models_json.put("children", models_json_arr);
+        topLevelJson.put("object", models_json);
+        return topLevelJson;
+    }
+    
     static String mapColorToRGBA(Vec3 color) {
         int r = (int) (color.get(0) * 255);
         int g = (int) (color.get(1) * 255);

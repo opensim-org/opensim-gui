@@ -102,6 +102,10 @@ public class OpenSimDB extends Observable implements Externalizable{
             closeAction="save";
         Preferences.userNodeForPackage(TheApp.class).put("DefaultCloseAction", closeAction);
     }
+
+    public Model getModelByIndex(int i) {
+        return models.get(i);
+    }
     public enum CloseModelDefaultAction {
         SAVE,
         DISCARD,

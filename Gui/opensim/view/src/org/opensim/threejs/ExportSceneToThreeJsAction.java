@@ -20,6 +20,7 @@ import org.openide.util.NbBundle.Messages;
 import org.opensim.modeling.Model;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.utils.FileUtils;
+import org.opensim.view.pub.ViewDB;
 
 @ActionID(
         category = "File",
@@ -42,13 +43,38 @@ public final class ExportSceneToThreeJsAction implements ActionListener {
         exportCurrentModelToJson(fileName, model);
     }
 
+    public static VisualizationJson exportAllModelsToJson(String fileName) {
+        BufferedWriter out = null;
+        VisualizationJson vizJson = null;
+        try {
+            JSONObject jsonTop = ViewDB.getInstance().getJsondb();
+            int numModels = OpenSimDB.getInstance().getNumModels();
+            // Create Json rep for model
+            for (int i=0; i<numModels; i++){
+                vizJson = new VisualizationJson(jsonTop, 
+                        OpenSimDB.getInstance().getModelByIndex(i));
+            }
+            StringWriter outString = new JSONWriter();
+            jsonTop.writeJSONString(outString);
+            String jsonText = outString.toString();
+            out = new BufferedWriter(new FileWriter(fileName, false));
+            out.write(jsonText);
+            out.flush();
+            out.close();
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        } finally {
+        }
+        return vizJson;
+    }
+        
     public static VisualizationJson exportCurrentModelToJson(String fileName, Model model) {
         BufferedWriter out = null;
         VisualizationJson vizJson = null;
         try {
 
             // Create Json rep for model
-            vizJson = new VisualizationJson(model);
+            vizJson = new VisualizationJson(ViewDB.getInstance().getJsondb(), model);
             JSONObject jsonTop = vizJson.getJson();
             StringWriter outString = new JSONWriter();
             jsonTop.writeJSONString(outString);

@@ -7,6 +7,7 @@ package org.opensim.threejs;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -44,7 +45,7 @@ import org.opensim.modeling.WrapObject;
  */
 public class VisualizationJson {
     private State state;
-    private final JSONObject topJson;
+    private JSONObject jsonModel = null;
     private final HashMap<Integer, PhysicalFrame> mapBodyIndicesToFrames = new HashMap<Integer, PhysicalFrame>();
     private final HashMap<Integer, JSONObject> mapBodyIndicesToJson = new HashMap<Integer, JSONObject>();
     private final static double visScaleFactor = 1000.0;
@@ -59,35 +60,50 @@ public class VisualizationJson {
     private ModelDisplayHints mdh;
     private DecorativeGeometryImplementationJS dgimp = null;
     private static String boneSuffix = "_Bone";
+    private JSONObject jsonTop;
     
-    public VisualizationJson(Model model) {
-        topJson =  createJsonForModel(model);
+    public VisualizationJson(JSONObject jsonTopIn, Model model) {
+        try {
+            JSONObject modelJson = createModelNode(); // Model node
+            jsonTop = jsonTopIn;
+            StringWriter outString = new JSONWriter();
+            
+            jsonTop.writeJSONString(outString);
+            String jsonText = outString.toString();
+            JSONObject modelsGroup = (JSONObject) jsonTop.get("object");
+            JSONArray modelsChildren = (JSONArray)modelsGroup.get("children");
+            createJsonForModel(model, modelJson);
+            modelsChildren.add(modelJson);
+            jsonTop.writeJSONString(outString);
+       } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
     }
-    private JSONObject createJsonForModel(Model model) {
+    private JSONObject createJsonForModel(Model model, JSONObject model_json) {
         state = model.getWorkingState();
         mdh = model.getDisplayHints();
         ComponentsList mcList = model.getComponentsList();
         muscleList = model.getMuscleList();
         ComponentIterator mcIter = mcList.begin();
-        // Load template 
-        JSONObject jsonTop = createTopLevelJson(model);
+        
         BodyList bodies = model.getBodyList();
         BodyIterator body = bodies.begin();
         mapBodyIndicesToFrames.put(0, model.getGround());
         
         JSONArray json_geometries = (JSONArray) jsonTop.get("geometries");
         JSONArray json_materials = (JSONArray) jsonTop.get("materials");
-        JSONObject sceneObject = (JSONObject) jsonTop.get("object");
-        JSONArray json_scene_children = (JSONArray) sceneObject.get("children");
+        ///JSONObject modelsGroupObject = (JSONObject) jsonTop.get("object");
+        JSONArray json_model_children = (JSONArray) model_json.get("children");
         
-        JSONObject model_json = new JSONObject();
-        json_scene_children.add(model_json);
+        JSONObject model_ground_json = new JSONObject();
+        ///json_models_children.add(model_json);
         // create model node
-        model_json.put("uuid", UUID.randomUUID().toString());
-        model_json.put("type", "Group");
-        model_json.put("opensimtype", "Frame");
-        model_json.put("name", model.getGround().getAbsolutePathName());
-        model_json.put("model_ground", true);
+        model_ground_json.put("uuid", UUID.randomUUID().toString());
+        model_ground_json.put("type", "Group");
+        model_ground_json.put("opensimtype", "Frame");
+        model_ground_json.put("name", model.getGround().getAbsolutePathName());
+        model_ground_json.put("model_ground", true);
+        json_model_children.add(model_ground_json);
         //System.out.println(model_json.toJSONString());
         JSONArray bodies_json = new JSONArray();
         model_json.put("children", bodies_json);
@@ -162,23 +178,15 @@ public class VisualizationJson {
  
     }
 
-    private JSONObject createTopLevelJson(Model model) {
-        JSONObject topLevelJson = new JSONObject();
+    private JSONObject createModelNode() {
         JSONObject modelJson = new JSONObject();
-        createOneModelJson(modelJson, model);
-        topLevelJson.put("object", modelJson);
-        topLevelJson.put("geometries", new JSONArray());
-        topLevelJson.put("materials", new JSONArray());
-        return topLevelJson;
-    }
-
-    private void createOneModelJson(JSONObject modelJson, Model model) {
         modelJson.put("uuid", UUID.randomUUID().toString());
         modelJson.put("type", "Model");
         modelJson.put("opensimtype", "Model");
         modelJson.put("name", "OpenSimModel");
         modelJson.put("matrix", JSONUtilities.createMatrixFromTransform(new Transform(), new Vec3(1.), 1.0));
         modelJson.put("children", new JSONArray());
+        return modelJson;
     }
 
     private UUID addtoFrameJsonObject(DecorativeGeometry dg, String geomName, UUID uuid, UUID uuid_mat, JSONArray mobody_objects) {
@@ -197,10 +205,10 @@ public class VisualizationJson {
 
 
     /**
-     * @return the topJson
+     * @return the jsonModel
      */
     public JSONObject getJson() {
-        return topJson;
+        return jsonModel;
     }    
 
     private JSONObject createBodyJson(Body body){
