@@ -5,7 +5,6 @@
  */
 package org.opensim.threejs;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ import java.util.Map;
 import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.openide.util.Exceptions;
 import org.opensim.modeling.ArrayDecorativeGeometry;
 import org.opensim.modeling.BodyList;
@@ -61,6 +59,7 @@ public class VisualizationJson {
     private DecorativeGeometryImplementationJS dgimp = null;
     private static String boneSuffix = "_Bone";
     private JSONObject jsonTop;
+    private UUID modelUUID;
     
     public VisualizationJson(JSONObject jsonTopIn, Model model) {
         try {
@@ -180,7 +179,8 @@ public class VisualizationJson {
 
     private JSONObject createModelNode() {
         JSONObject modelJson = new JSONObject();
-        modelJson.put("uuid", UUID.randomUUID().toString());
+        modelUUID = UUID.randomUUID();
+        modelJson.put("uuid", modelUUID.toString());
         modelJson.put("type", "Model");
         modelJson.put("opensimtype", "Model");
         modelJson.put("name", "OpenSimModel");
@@ -434,5 +434,12 @@ public class VisualizationJson {
         bpptInBodyJson.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1.0), visScaleFactor));
         children.add(bpptInBodyJson);
         return ppoint_uuid;
+    }
+
+    /**
+     * @return the modelUUID
+     */
+    public UUID getModelUUID() {
+        return modelUUID;
     }
 }

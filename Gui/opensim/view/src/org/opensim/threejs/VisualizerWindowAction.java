@@ -32,9 +32,9 @@ public final class VisualizerWindowAction implements ActionListener {
     public void actionPerformed(ActionEvent e) {
             // launch server and open page in fixed location to be used as a view
         
-            VisualizationJson json = ExportSceneToThreeJsAction.exportAllModelsToJson(JettyMain.getServerRootDir()+"/threejs/editor/model.json");
+            ExportSceneToThreeJsAction.exportAllModelsToJson(JettyMain.getServerRootDir()+"/threejs/editor/model.json");
             ViewDB.getInstance().startVisualizationServer();
             BrowserLauncher.openURL("http://localhost:"+JettyMain.getServerPort()+JettyMain.getPathToStartPage()+"index.html");
-            ViewDB.getInstance().setJson(json);
+            ViewDB.getInstance().setCurrentJson();
     }
 }

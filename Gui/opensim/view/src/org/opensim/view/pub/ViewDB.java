@@ -38,6 +38,7 @@ import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
+import java.util.UUID;
 import java.util.Vector;
 import java.util.prefs.Preferences;
 import javax.swing.SwingUtilities;
@@ -120,6 +121,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    private Hashtable<Model, SingleModelVisuals> mapModelsToVisuals =
            new Hashtable<Model, SingleModelVisuals>();
    
+   private Hashtable<Model, VisualizationJson> mapModelsToJsons =
+           new Hashtable<Model, VisualizationJson>();
+
    private Hashtable<Model, ModelSettingsSerializer> mapModelsToSettings =
            new Hashtable<Model, ModelSettingsSerializer>();
    private Hashtable<Model, Double> modelOpacities = new Hashtable<Model, Double>();
@@ -216,7 +220,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     * Observable should be of type OpenSimDB.
     */
    public void update(Observable o, Object arg) {
-      if (!isGraphicsAvailable()) return;
+      //if (!isVtkGraphicsAvailable()) return;
       if (arg instanceof JSONObject){
           handleJson((JSONObject) arg);
       }
@@ -464,7 +468,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     * Get the vtk object corresponding to passed in opensim object
     **/
    public vtkProp3D getVtkRepForObject(OpenSimObject obj) {
-      if (!isGraphicsAvailable()) return null;
+      if (!isVtkGraphicsAvailable()) return null;
       Iterator<SingleModelVisuals> iter = modelVisuals.iterator();
       while(iter.hasNext()){
          SingleModelVisuals nextModel = iter.next();
@@ -1162,7 +1166,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
      *  This excludes transforms since these are obtained from the system on the fly.
      */
    public void updateModelDisplay(Model aModel, OpenSimObject specificObject) {
-      if (!isGraphicsAvailable()) return;
+      if (!isVtkGraphicsAvailable()) return;
       lockDrawingSurfaces(true);
       if (specificObject!=null)
             mapModelsToVisuals.get(aModel).updateObjectDisplay(specificObject);
@@ -1176,10 +1180,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    }
    
    public void updateModelDisplayNoRepaint(Model aModel) {
-      if (!isGraphicsAvailable()) return;
-      lockDrawingSurfaces(true);
-      mapModelsToVisuals.get(aModel).updateModelDisplay(aModel);
-      lockDrawingSurfaces(false);
+      if (isVtkGraphicsAvailable()){
+        lockDrawingSurfaces(true);
+        mapModelsToVisuals.get(aModel).updateModelDisplay(aModel);
+        lockDrawingSurfaces(false);
+      }
       if (websocketdb != null){
         // Make xforms JSON
         websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson());
@@ -1683,7 +1688,12 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         mapModelsToVisuals.put(model, dataVisuals);
         sceneAssembly.AddPart(dataVisuals.getModelDisplayAssembly());
 }
-    
+
+        public void addModelVisuals(Model model, VisualizationJson modelJson) {
+        if (!modelJsons.contains(modelJson))
+            modelJsons.add(modelJson);
+        mapModelsToJsons.put(model, modelJson);
+}
     public void displayText(String text, int forntSize){
         textActor.SetInput(text);
         vtkTextProperty tprop = textActor.GetTextProperty();
@@ -1896,7 +1906,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         }
     }
 
-    public static boolean isGraphicsAvailable() {
+    public static boolean isVtkGraphicsAvailable() {
         return graphicsAvailable;
     }
 
@@ -1924,8 +1934,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         websocketdb.setObserver(instance);
     }
 
-    public void setJson(VisualizationJson json) {
-        currentJson = json;
+    public void setCurrentJson() {
+        currentJson = mapModelsToJsons.get(getCurrentModel());
     }
 
     private void handleJson(JSONObject jsonObject) {

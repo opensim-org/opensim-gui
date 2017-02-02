@@ -51,8 +51,9 @@ public final class ExportSceneToThreeJsAction implements ActionListener {
             int numModels = OpenSimDB.getInstance().getNumModels();
             // Create Json rep for model
             for (int i=0; i<numModels; i++){
-                vizJson = new VisualizationJson(jsonTop, 
-                        OpenSimDB.getInstance().getModelByIndex(i));
+                Model model = OpenSimDB.getInstance().getModelByIndex(i);
+                vizJson = new VisualizationJson(jsonTop, model);
+                ViewDB.getInstance().addModelVisuals(model, vizJson);
             }
             StringWriter outString = new JSONWriter();
             jsonTop.writeJSONString(outString);
