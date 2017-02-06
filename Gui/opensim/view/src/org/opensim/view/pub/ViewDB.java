@@ -65,6 +65,7 @@ import org.opensim.utils.Prefs;
 import org.opensim.utils.TheApp;
 import org.opensim.view.*;
 import org.opensim.view.experimentaldata.ExperimentalDataVisuals;
+import static org.opensim.view.pub.ViewDB.isVtkGraphicsAvailable;
 import vtk.AxesActor;
 import vtk.FrameActor;
 import vtk.vtkActor;
@@ -97,7 +98,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    static ArrayList<ModelWindowVTKTopComponent> openWindows = new ArrayList<ModelWindowVTKTopComponent>(4);
    // List of models currently available in all views
    private static ArrayList<SingleModelVisuals> modelVisuals = new ArrayList<SingleModelVisuals>(4);
-   private static final ArrayList<VisualizationJson> modelJsons = new ArrayList<VisualizationJson>(4);
    private static ArrayList<Boolean> saveStatus = new ArrayList<Boolean>(4);
    // One single vtAssemby for the whole Scene
    private static vtkAssembly sceneAssembly;
@@ -264,6 +264,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                         vis.setPickable(false);
                      }
                   }
+                  setCurrentJson();
                   break;
                }
             }
@@ -302,25 +303,26 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                    setGraphicsAvailable(false);
                    return;
                }
-               // Create visuals for the model
-               SingleModelVisuals newModelVisual = (model instanceof ModelForExperimentalData)?
-                   new ExperimentalDataVisuals(model):
-                   new SingleModelVisuals(model);
-               // add to map from models to modelVisuals so that it's accesisble
-               // thru tree picks
-               mapModelsToVisuals.put(model, newModelVisual);
-               // add to list of models
-               getModelVisuals().add(newModelVisual); //Too late??
-               modelOpacities.put(model, 1.0);
-               addVisObjectToAllViews();
-               // Compute placement so that model does not intersect others
-               vtkMatrix4x4 m= (model instanceof ModelForExperimentalData)?
-                      new vtkMatrix4x4():
-                      getInitialTransform(newModelVisual);
-               newModelVisual.getModelDisplayAssembly().SetUserMatrix(m);
-               
-               sceneAssembly.AddPart(newModelVisual.getModelDisplayAssembly());
-                
+               if (isVtkGraphicsAvailable()){
+                    // Create visuals for the model
+                    SingleModelVisuals newModelVisual = (model instanceof ModelForExperimentalData)?
+                        new ExperimentalDataVisuals(model):
+                        new SingleModelVisuals(model);
+                    // add to map from models to modelVisuals so that it's accesisble
+                    // thru tree picks
+                    mapModelsToVisuals.put(model, newModelVisual);
+                    // add to list of models
+                    getModelVisuals().add(newModelVisual); //Too late??
+                    modelOpacities.put(model, 1.0);
+                    addVisObjectToAllViews();
+                    // Compute placement so that model does not intersect others
+                    vtkMatrix4x4 m= (model instanceof ModelForExperimentalData)?
+                           new vtkMatrix4x4():
+                           getInitialTransform(newModelVisual);
+                    newModelVisual.getModelDisplayAssembly().SetUserMatrix(m);
+
+                    sceneAssembly.AddPart(newModelVisual.getModelDisplayAssembly());
+               }
               // Check if this refits scene into window
                // int rc = newModelVisual.getModelDisplayAssembly().GetReferenceCount();
                if(OpenSimDB.getInstance().getNumModels()==1) { 
@@ -361,6 +363,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                if (visModel != null) visModel.cleanup();
                if (websocketdb != null){
                     websocketdb.broadcastMessageJson(currentJson.createCloseModelJson(dModel));
+                    UUID modelUUID = mapModelsToJsons.get(dModel).getModelUUID();
+                    mapModelsToJsons.remove(dModel);
+                    JSONUtilities.removeModelJson(jsondb, modelUUID);
                 }
                
             } else if (ev.getOperation()==ModelEvent.Operation.SetCurrent) {
@@ -568,25 +573,27 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    private void createNewViewWindowIfNeeded() {
       if (openModelInNewWindow){
          boolean evt = SwingUtilities.isEventDispatchThread();
-         // The following line has the side effect of loading VTK libraries, can't move it to another thread'
-         final ModelWindowVTKTopComponent win = new ModelWindowVTKTopComponent(); 
-         openWindows.add(win);
-         openModelInNewWindow=false;
-         setCurrentModelWindow(win);
-         // open window later rather than now to avoid having a rectangular blank patch appearing over the GUI while
-         // the model is loading and the scene is set up
-         if (SwingUtilities.isEventDispatchThread()){
-             win.requestActive();
-             win.open();
+         if (isVtkGraphicsAvailable()){
+            // The following line has the side effect of loading VTK libraries, can't move it to another thread'
+            final ModelWindowVTKTopComponent win = new ModelWindowVTKTopComponent(); 
+            openWindows.add(win);
+            openModelInNewWindow=false;
+            setCurrentModelWindow(win);
+            // open window later rather than now to avoid having a rectangular blank patch appearing over the GUI while
+            // the model is loading and the scene is set up
+            if (SwingUtilities.isEventDispatchThread()){
+                win.requestActive();
+                win.open();
+            }
+            else 
+            {
+                       SwingUtilities.invokeLater(new Runnable(){ // Should change to WindowManager.getDefault().invokeWhenUIReady if/when we upgrade NB
+                           public void run(){
+                            win.open();
+                            win.requestActive();
+                           }});
+             } 
          }
-         else 
-         {
-                    SwingUtilities.invokeLater(new Runnable(){ // Should change to WindowManager.getDefault().invokeWhenUIReady if/when we upgrade NB
-                        public void run(){
-                         win.open();
-                         win.requestActive();
-                        }});
-          } 
       }
    }
    /**
@@ -1166,13 +1173,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
      *  This excludes transforms since these are obtained from the system on the fly.
      */
    public void updateModelDisplay(Model aModel, OpenSimObject specificObject) {
-      if (!isVtkGraphicsAvailable()) return;
-      lockDrawingSurfaces(true);
-      if (specificObject!=null)
-            mapModelsToVisuals.get(aModel).updateObjectDisplay(specificObject);
-      mapModelsToVisuals.get(aModel).updateModelDisplay(aModel);
-      lockDrawingSurfaces(false);
-      repaintAll();
+      if (isVtkGraphicsAvailable()){
+        lockDrawingSurfaces(true);
+        if (specificObject!=null)
+              mapModelsToVisuals.get(aModel).updateObjectDisplay(specificObject);
+        mapModelsToVisuals.get(aModel).updateModelDisplay(aModel);
+        lockDrawingSurfaces(false);
+        repaintAll();
+      }
       if (websocketdb != null){
         // Make xforms JSON
         websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson());
@@ -1690,9 +1698,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
 }
 
         public void addModelVisuals(Model model, VisualizationJson modelJson) {
-        if (!modelJsons.contains(modelJson))
-            modelJsons.add(modelJson);
-        mapModelsToJsons.put(model, modelJson);
+        if (!mapModelsToJsons.containsKey(model))
+            mapModelsToJsons.put(model, modelJson);
 }
     public void displayText(String text, int forntSize){
         textActor.SetInput(text);
@@ -1935,7 +1942,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
 
     public void setCurrentJson() {
-        currentJson = mapModelsToJsons.get(getCurrentModel());
+        Model cModel = getCurrentModel();
+        if (cModel != null && mapModelsToJsons.containsKey(cModel))
+            currentJson = mapModelsToJsons.get(cModel);
     }
 
     private void handleJson(JSONObject jsonObject) {

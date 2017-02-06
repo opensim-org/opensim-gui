@@ -63,7 +63,7 @@ public class VisualizationJson {
     
     public VisualizationJson(JSONObject jsonTopIn, Model model) {
         try {
-            JSONObject modelJson = createModelNode(); // Model node
+            JSONObject modelJson = createModelJsonNode(); // Model node
             jsonTop = jsonTopIn;
             StringWriter outString = new JSONWriter();
             
@@ -177,7 +177,7 @@ public class VisualizationJson {
  
     }
 
-    private JSONObject createModelNode() {
+    private JSONObject createModelJsonNode() {
         JSONObject modelJson = new JSONObject();
         modelUUID = UUID.randomUUID();
         modelJson.put("uuid", modelUUID.toString());
@@ -295,10 +295,8 @@ public class VisualizationJson {
 
     public JSONObject createCloseModelJson(Model model) {
        JSONObject guiJson = new JSONObject();
-       /*
-        UUID obj_uuid = findUUIDForObject(model);
-        guiJson.put("UUID", obj_uuid.toString());  
-        guiJson.put("Op", "CloseModel");  */
+        guiJson.put("UUID", modelUUID.toString());  
+        guiJson.put("Op", "CloseModel");
         return guiJson;
     }
 

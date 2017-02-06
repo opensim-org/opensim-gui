@@ -68,5 +68,20 @@ public class JSONUtilities {
             ret.add(retTransform[i]);
         return ret;
     }
+    // Method to remove Json of Model from Scene on Model closing
+    public static void removeModelJson(JSONObject jsondb, UUID modelUUID) {
+        // Find models node and remove modelUUID from list of children
+        JSONObject models_json = ((JSONObject) jsondb.get("object"));
+        JSONArray models_children = (JSONArray) models_json.get("children");
+
+        for (int index = 0; index < models_children.size(); index++){
+            JSONObject nextModelJson = (JSONObject) models_children.get(index);
+            String nextModelUUID =  (String) nextModelJson.get("uuid");
+            if (nextModelUUID.equals(modelUUID.toString())){
+                models_children.remove(index);
+                break;
+            }
+        }
+    }
 
 }
