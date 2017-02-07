@@ -5,7 +5,6 @@
  */
 package org.opensim.threejs;
 
-import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +14,6 @@ import java.util.Map;
 import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.openide.util.Exceptions;
 import org.opensim.modeling.ArrayDecorativeGeometry;
 import org.opensim.modeling.BodyList;
 import org.opensim.modeling.Body;
@@ -41,9 +39,8 @@ import org.opensim.modeling.WrapObject;
  *
  * @author Ayman
  */
-public class VisualizationJson {
+public class ModelVisualizationJson extends JSONObject {
     private State state;
-    private JSONObject jsonModel = null;
     private final HashMap<Integer, PhysicalFrame> mapBodyIndicesToFrames = new HashMap<Integer, PhysicalFrame>();
     private final HashMap<Integer, JSONObject> mapBodyIndicesToJson = new HashMap<Integer, JSONObject>();
     private final static double visScaleFactor = 1000.0;
@@ -61,24 +58,20 @@ public class VisualizationJson {
     private JSONObject jsonTop;
     private UUID modelUUID;
     
-    public VisualizationJson(JSONObject jsonTopIn, Model model) {
-        try {
-            JSONObject modelJson = createModelJsonNode(); // Model node
-            jsonTop = jsonTopIn;
-            StringWriter outString = new JSONWriter();
-            
-            jsonTop.writeJSONString(outString);
-            String jsonText = outString.toString();
-            JSONObject modelsGroup = (JSONObject) jsonTop.get("object");
-            JSONArray modelsChildren = (JSONArray)modelsGroup.get("children");
-            createJsonForModel(model, modelJson);
-            modelsChildren.add(modelJson);
-            jsonTop.writeJSONString(outString);
-       } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
-        }
+    public ModelVisualizationJson(JSONObject jsonTopIn, Model model) {
+        // implicit super()
+        createModelJsonNode(); // Model node
+        jsonTop = jsonTopIn;
+        StringWriter outString = new JSONWriter();
+
+        //jsonTop.writeJSONString(outString);
+        //String jsonText = outString.toString();
+        JSONObject modelsGroup = (JSONObject) jsonTop.get("object");
+        JSONArray modelsChildren = (JSONArray)modelsGroup.get("children");
+        createJsonForModel(model);
+        modelsChildren.add(this);
     }
-    private JSONObject createJsonForModel(Model model, JSONObject model_json) {
+    private JSONObject createJsonForModel(Model model) {
         state = model.getWorkingState();
         mdh = model.getDisplayHints();
         ComponentsList mcList = model.getComponentsList();
@@ -92,7 +85,7 @@ public class VisualizationJson {
         JSONArray json_geometries = (JSONArray) jsonTop.get("geometries");
         JSONArray json_materials = (JSONArray) jsonTop.get("materials");
         ///JSONObject modelsGroupObject = (JSONObject) jsonTop.get("object");
-        JSONArray json_model_children = (JSONArray) model_json.get("children");
+        JSONArray json_model_children = (JSONArray) get("children");
         
         JSONObject model_ground_json = new JSONObject();
         ///json_models_children.add(model_json);
@@ -105,8 +98,8 @@ public class VisualizationJson {
         json_model_children.add(model_ground_json);
         //System.out.println(model_json.toJSONString());
         JSONArray bodies_json = new JSONArray();
-        model_json.put("children", bodies_json);
-        mapBodyIndicesToJson.put(0, model_json);
+        put("children", bodies_json);
+        mapBodyIndicesToJson.put(0, this);
         while (!body.equals(bodies.end())) {
             int id = body.getMobilizedBodyIndex();
             mapBodyIndicesToFrames.put(id, body.__deref__());
@@ -177,16 +170,14 @@ public class VisualizationJson {
  
     }
 
-    private JSONObject createModelJsonNode() {
-        JSONObject modelJson = new JSONObject();
+    private void createModelJsonNode() {
         modelUUID = UUID.randomUUID();
-        modelJson.put("uuid", modelUUID.toString());
-        modelJson.put("type", "Model");
-        modelJson.put("opensimtype", "Model");
-        modelJson.put("name", "OpenSimModel");
-        modelJson.put("matrix", JSONUtilities.createMatrixFromTransform(new Transform(), new Vec3(1.), 1.0));
-        modelJson.put("children", new JSONArray());
-        return modelJson;
+        put("uuid", modelUUID.toString());
+        put("type", "Model");
+        put("opensimtype", "Model");
+        put("name", "OpenSimModel");
+        put("matrix", JSONUtilities.createMatrixFromTransform(new Transform(), new Vec3(1.), 1.0));
+        put("children", new JSONArray());
     }
 
     private UUID addtoFrameJsonObject(DecorativeGeometry dg, String geomName, UUID uuid, UUID uuid_mat, JSONArray mobody_objects) {
@@ -201,15 +192,7 @@ public class VisualizationJson {
         obj_json.put("castShadow", false);
         mobody_objects.add(obj_json);
         return mesh_uuid;
-    }
-
-
-    /**
-     * @return the jsonModel
-     */
-    public JSONObject getJson() {
-        return jsonModel;
-    }    
+    }   
 
     private JSONObject createBodyJson(Body body){
         JSONObject bdyJson = new JSONObject();
@@ -293,10 +276,18 @@ public class VisualizationJson {
         return visScaleFactor;
     }
 
-    public JSONObject createCloseModelJson(Model model) {
-       JSONObject guiJson = new JSONObject();
+    public JSONObject createCloseModelJson() {
+        JSONObject guiJson = new JSONObject();
         guiJson.put("UUID", modelUUID.toString());  
         guiJson.put("Op", "CloseModel");
+        return guiJson;
+    }
+
+    
+    public JSONObject createOpenModelJson() {
+       JSONObject guiJson = new JSONObject();
+        guiJson.put("UUID", modelUUID.toString());  
+        guiJson.put("Op", "OpenModel");
         return guiJson;
     }
 

@@ -28,6 +28,7 @@
  */
 package org.opensim.view.pub;
 
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ import org.eclipse.jetty.JettyMain;
 import org.eclipse.jetty.WebSocketDB;
 import org.json.simple.JSONObject;
 import org.openide.awt.StatusDisplayer;
+import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
@@ -58,9 +60,11 @@ import org.openide.util.lookup.InstanceContent;
 import org.opensim.modeling.*;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.swingui.SwingWorker;
+import org.opensim.threejs.ExportSceneToThreeJsAction;
 import org.opensim.threejs.JSONMessageHandler;
 import org.opensim.threejs.JSONUtilities;
-import org.opensim.threejs.VisualizationJson;
+import org.opensim.threejs.ModelVisualizationJson;
+import org.opensim.threejs.VisualizerWindowAction;
 import org.opensim.utils.Prefs;
 import org.opensim.utils.TheApp;
 import org.opensim.view.*;
@@ -121,8 +125,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    private Hashtable<Model, SingleModelVisuals> mapModelsToVisuals =
            new Hashtable<Model, SingleModelVisuals>();
    
-   private Hashtable<Model, VisualizationJson> mapModelsToJsons =
-           new Hashtable<Model, VisualizationJson>();
+   private Hashtable<Model, ModelVisualizationJson> mapModelsToJsons =
+           new Hashtable<Model, ModelVisualizationJson>();
 
    private Hashtable<Model, ModelSettingsSerializer> mapModelsToSettings =
            new Hashtable<Model, ModelSettingsSerializer>();
@@ -159,7 +163,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     private final static Lookup myLookup = new AbstractLookup (lookupContents);
     Lookup.Result<OpenSimObject> r;
 
-    private VisualizationJson currentJson;
+    private ModelVisualizationJson currentJson;
    /** Creates a new instance of ViewDB */
    private ViewDB() {
         applyPreferences();
@@ -301,7 +305,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                }
                catch(UnsatisfiedLinkError e){
                    setGraphicsAvailable(false);
-                   return;
                }
                if (isVtkGraphicsAvailable()){
                     // Create visuals for the model
@@ -322,6 +325,25 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                     newModelVisual.getModelDisplayAssembly().SetUserMatrix(m);
 
                     sceneAssembly.AddPart(newModelVisual.getModelDisplayAssembly());
+               }
+               if (websocketdb!=null){
+                   // create Json for model
+                   ModelVisualizationJson vizJson = new ModelVisualizationJson(jsondb, model);
+                   getInstance().addModelVisuals(model, vizJson);
+                   String fileName = JettyMain.getServerWorkingDir()+vizJson.getModelUUID().toString().substring(0, 6)+".json";
+                   try {
+                       // Write vizJson to file and send message to visualizer to open it
+                       ExportSceneToThreeJsAction.writeJsonFile(vizJson, fileName);
+                       // Send message to open the 
+                   } catch (IOException ex) {
+                       Exceptions.printStackTrace(ex);
+                   }
+                   // send message to visualizer to load model from file
+                   websocketdb.broadcastMessageJson(vizJson.createOpenModelJson());
+               }
+               else {
+                   // Same as open visualizer window 
+                   VisualizerWindowAction.openVisualizerWindow();
                }
               // Check if this refits scene into window
                // int rc = newModelVisual.getModelDisplayAssembly().GetReferenceCount();
@@ -362,7 +384,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                //rc = visModel.getModelDisplayAssembly().GetReferenceCount();
                if (visModel != null) visModel.cleanup();
                if (websocketdb != null){
-                    websocketdb.broadcastMessageJson(currentJson.createCloseModelJson(dModel));
+                    JSONObject msg = currentJson.createCloseModelJson();
+                    websocketdb.broadcastMessageJson(msg);
+                    System.out.println(msg.toJSONString());
                     UUID modelUUID = mapModelsToJsons.get(dModel).getModelUUID();
                     mapModelsToJsons.remove(dModel);
                     JSONUtilities.removeModelJson(jsondb, modelUUID);
@@ -594,10 +618,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                            }});
              } 
          }
+         if (websocketdb == null){
+             // Try to open a visualizer window
+             VisualizerWindowAction.openVisualizerWindow();
+         }
       }
    }
    /**
-    * Add an arbirary Object to the scene (all views)
+    * Add an arbitrary Object to the scene (all views)
     */
    public void addObjectToScene(vtkProp3D aProp) {
       sceneAssembly.AddPart(aProp);
@@ -1181,7 +1209,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         lockDrawingSurfaces(false);
         repaintAll();
       }
-      if (websocketdb != null){
+      if (websocketdb != null && currentJson != null){
         // Make xforms JSON
         websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson());
       }
@@ -1536,7 +1564,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     /**
      * @return the currentJson
      */
-    public VisualizationJson getCurrentJson() {
+    public ModelVisualizationJson getCurrentJson() {
         return currentJson;
     }
 
@@ -1695,12 +1723,13 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             modelVisuals.add(dataVisuals);
         mapModelsToVisuals.put(model, dataVisuals);
         sceneAssembly.AddPart(dataVisuals.getModelDisplayAssembly());
-}
+    }
 
-        public void addModelVisuals(Model model, VisualizationJson modelJson) {
+    public void addModelVisuals(Model model, ModelVisualizationJson modelJson) {
         if (!mapModelsToJsons.containsKey(model))
             mapModelsToJsons.put(model, modelJson);
-}
+    }
+    
     public void displayText(String text, int forntSize){
         textActor.SetInput(text);
         vtkTextProperty tprop = textActor.GetTextProperty();

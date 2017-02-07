@@ -58,7 +58,7 @@ public class JSONMessageHandler {
           JSONObject positionObj = (JSONObject) jsonObject.get("position");
           String returnString = "";
           double x, y, z;
-          double relativeScale = VisualizationJson.getVisScaleFactor();
+          double relativeScale = ModelVisualizationJson.getVisScaleFactor();
           x = (Double) positionObj.get("x")/relativeScale;
           returnString = returnString.concat(String.valueOf(x));
           returnString = returnString.concat(" ");

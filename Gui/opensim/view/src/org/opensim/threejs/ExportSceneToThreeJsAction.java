@@ -30,65 +30,48 @@ import org.opensim.view.pub.ViewDB;
         displayName = "#CTL_ExportSceneToThreeJsAction"
 )
 @ActionReference(path = "Menu/File", position = 1429)
-@Messages("CTL_ExportSceneToThreeJsAction=Export model to json")
+@Messages("CTL_ExportSceneToThreeJsAction=Export all models to json format")
 public final class ExportSceneToThreeJsAction implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         
        Model model = OpenSimDB.getInstance().getCurrentModel();
+       if (model == null) return; // Nothing to export
        String fileName = FileUtils.getInstance().browseForFilenameToSave(
                     FileUtils.getFileFilter(".json", "Threejs scene file"), 
                 true, model.getInputFileName().replace(".osim", ".json"));
 
-        exportCurrentModelToJson(fileName, model);
+        exportAllModelsToJson(fileName);
     }
 
-    public static VisualizationJson exportAllModelsToJson(String fileName) {
+    public static ModelVisualizationJson exportAllModelsToJson(String fileName) {
         BufferedWriter out = null;
-        VisualizationJson vizJson = null;
+        ModelVisualizationJson vizJson = null;
         try {
             JSONObject jsonTop = ViewDB.getInstance().getJsondb();
             int numModels = OpenSimDB.getInstance().getNumModels();
             // Create Json rep for model
             for (int i=0; i<numModels; i++){
                 Model model = OpenSimDB.getInstance().getModelByIndex(i);
-                vizJson = new VisualizationJson(jsonTop, model);
+                vizJson = new ModelVisualizationJson(jsonTop, model);
                 ViewDB.getInstance().addModelVisuals(model, vizJson);
             }
-            StringWriter outString = new JSONWriter();
-            jsonTop.writeJSONString(outString);
-            String jsonText = outString.toString();
-            out = new BufferedWriter(new FileWriter(fileName, false));
-            out.write(jsonText);
-            out.flush();
-            out.close();
+            writeJsonFile(jsonTop, fileName);
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         } finally {
         }
         return vizJson;
     }
-        
-    public static VisualizationJson exportCurrentModelToJson(String fileName, Model model) {
-        BufferedWriter out = null;
-        VisualizationJson vizJson = null;
-        try {
 
-            // Create Json rep for model
-            vizJson = new VisualizationJson(ViewDB.getInstance().getJsondb(), model);
-            JSONObject jsonTop = vizJson.getJson();
-            StringWriter outString = new JSONWriter();
-            jsonTop.writeJSONString(outString);
-            String jsonText = outString.toString();
-            out = new BufferedWriter(new FileWriter(fileName, false));
-            out.write(jsonText);
-            out.flush();
-            out.close();
-        } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
-        } finally {
-        }
-        return vizJson;
+    public static void writeJsonFile(JSONObject jsonTop, String fileName) throws IOException {
+        BufferedWriter out;
+        StringWriter outString = new JSONWriter();
+        jsonTop.writeJSONString(outString);
+        out = new BufferedWriter(new FileWriter(fileName, false));
+        out.write(outString.toString());
+        out.flush();
+        out.close();
     }
 
 }
