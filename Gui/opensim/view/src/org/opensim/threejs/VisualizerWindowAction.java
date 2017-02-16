@@ -35,10 +35,9 @@ public final class VisualizerWindowAction implements ActionListener {
     }
 
     public static void openVisualizerWindow() {
-        ExportSceneToThreeJsAction.exportAllModelsToJson(JettyMain.getServerWorkingDir()+"model.json");
         ViewDB.getInstance().startVisualizationServer();
         BrowserLauncher.openURL("http://localhost:"+JettyMain.getServerPort()+JettyMain.getPathToStartPage()+"index.html");
-        ViewDB.getInstance().setCurrentJson();
+        ViewDB.getInstance().exportAllModelsToJson();
     }
 
 }
