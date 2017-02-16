@@ -56,7 +56,7 @@ public final class ExportSceneToThreeJsAction implements ActionListener {
                 vizJson = new ModelVisualizationJson(jsonTop, model);
                 ViewDB.getInstance().addModelVisuals(model, vizJson);
             }
-            writeJsonFile(jsonTop, fileName);
+            JSONUtilities.writeJsonFile(jsonTop, fileName);
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         } finally {
@@ -64,14 +64,5 @@ public final class ExportSceneToThreeJsAction implements ActionListener {
         return vizJson;
     }
 
-    public static void writeJsonFile(JSONObject jsonTop, String fileName) throws IOException {
-        BufferedWriter out;
-        StringWriter outString = new JSONWriter();
-        jsonTop.writeJSONString(outString);
-        out = new BufferedWriter(new FileWriter(fileName, false));
-        out.write(outString.toString());
-        out.flush();
-        out.close();
-    }
 
 }
