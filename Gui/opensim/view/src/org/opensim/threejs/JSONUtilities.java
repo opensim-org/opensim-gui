@@ -6,6 +6,10 @@
 
 package org.opensim.threejs;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -23,6 +27,7 @@ public class JSONUtilities {
         JSONObject topLevelJson = new JSONObject();
         topLevelJson.put("geometries", new JSONArray());
         topLevelJson.put("materials", new JSONArray());
+        /*
         JSONObject models_json = new JSONObject();
         models_json.put("uuid", UUID.randomUUID().toString());
         models_json.put("type", "Group");
@@ -31,6 +36,7 @@ public class JSONUtilities {
         JSONArray models_json_arr = new JSONArray();
         models_json.put("children", models_json_arr);
         topLevelJson.put("object", models_json);
+        */
         return topLevelJson;
     }
     
@@ -82,6 +88,16 @@ public class JSONUtilities {
                 break;
             }
         }
+    }
+
+    public static void writeJsonFile(JSONObject jsonTop, String fileName) throws IOException {
+        BufferedWriter out;
+        StringWriter outString = new JSONWriter();
+        jsonTop.writeJSONString(outString);
+        out = new BufferedWriter(new FileWriter(fileName, false));
+        out.write(outString.toString());
+        out.flush();
+        out.close();
     }
 
 }
