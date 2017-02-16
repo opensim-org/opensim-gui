@@ -55,23 +55,17 @@ public class ModelVisualizationJson extends JSONObject {
     private ModelDisplayHints mdh;
     private DecorativeGeometryImplementationJS dgimp = null;
     private static String boneSuffix = "_Bone";
-    private JSONObject jsonTop;
+    private JSONArray json_geometries;
+    private JSONArray json_materials;
+    private JSONObject model_object;
     private UUID modelUUID;
     
     public ModelVisualizationJson(JSONObject jsonTopIn, Model model) {
         // implicit super()
         createModelJsonNode(); // Model node
-        jsonTop = jsonTopIn;
-        StringWriter outString = new JSONWriter();
-
-        //jsonTop.writeJSONString(outString);
-        //String jsonText = outString.toString();
-        JSONObject modelsGroup = (JSONObject) jsonTop.get("object");
-        JSONArray modelsChildren = (JSONArray)modelsGroup.get("children");
         createJsonForModel(model);
-        modelsChildren.add(this);
     }
-    private JSONObject createJsonForModel(Model model) {
+    private void createJsonForModel(Model model) {
         state = model.getWorkingState();
         mdh = model.getDisplayHints();
         ComponentsList mcList = model.getComponentsList();
@@ -82,13 +76,9 @@ public class ModelVisualizationJson extends JSONObject {
         BodyIterator body = bodies.begin();
         mapBodyIndicesToFrames.put(0, model.getGround());
         
-        JSONArray json_geometries = (JSONArray) jsonTop.get("geometries");
-        JSONArray json_materials = (JSONArray) jsonTop.get("materials");
-        ///JSONObject modelsGroupObject = (JSONObject) jsonTop.get("object");
-        JSONArray json_model_children = (JSONArray) get("children");
+        JSONArray json_model_children = (JSONArray) ((JSONObject) get("object")).get("children");
         
         JSONObject model_ground_json = new JSONObject();
-        ///json_models_children.add(model_json);
         // create model node
         model_ground_json.put("uuid", UUID.randomUUID().toString());
         model_ground_json.put("type", "Group");
@@ -98,8 +88,8 @@ public class ModelVisualizationJson extends JSONObject {
         json_model_children.add(model_ground_json);
         //System.out.println(model_json.toJSONString());
         JSONArray bodies_json = new JSONArray();
-        put("children", bodies_json);
-        mapBodyIndicesToJson.put(0, this);
+        model_ground_json.put("children", bodies_json);
+        mapBodyIndicesToJson.put(0, model_ground_json);
         while (!body.equals(bodies.end())) {
             int id = body.getMobilizedBodyIndex();
             mapBodyIndicesToFrames.put(id, body.__deref__());
@@ -132,7 +122,6 @@ public class ModelVisualizationJson extends JSONObject {
             }
             mcIter.next();
         }
-        return jsonTop;
     }
 
     private void processDecorativeGeometry(ArrayDecorativeGeometry adg, Component comp, 
@@ -172,12 +161,19 @@ public class ModelVisualizationJson extends JSONObject {
 
     private void createModelJsonNode() {
         modelUUID = UUID.randomUUID();
-        put("uuid", modelUUID.toString());
-        put("type", "Model");
-        put("opensimtype", "Model");
-        put("name", "OpenSimModel");
-        put("matrix", JSONUtilities.createMatrixFromTransform(new Transform(), new Vec3(1.), 1.0));
-        put("children", new JSONArray());
+        model_object = new JSONObject();
+        model_object.put("uuid", modelUUID.toString());
+        model_object.put("type", "Group");
+        model_object.put("opensimtype", "Model");
+        model_object.put("name", "OpenSimModel");
+        model_object.put("children", new JSONArray());
+        model_object.put("matrix", JSONUtilities.createMatrixFromTransform(new Transform(), new Vec3(1.), 1.0));
+        put("object", model_object);
+        json_geometries = new JSONArray();
+        put("geometries", json_geometries);
+        json_materials = new JSONArray();
+        put("materials", json_materials);
+
     }
 
     private UUID addtoFrameJsonObject(DecorativeGeometry dg, String geomName, UUID uuid, UUID uuid_mat, JSONArray mobody_objects) {
@@ -430,5 +426,12 @@ public class ModelVisualizationJson extends JSONObject {
      */
     public UUID getModelUUID() {
         return modelUUID;
+    }
+
+    public JSONObject createSetCurrentModelJson() {
+        JSONObject guiJson = new JSONObject();
+        guiJson.put("UUID", modelUUID.toString());  
+        guiJson.put("Op", "SetCurrentModel");
+        return guiJson;
     }
 }

@@ -330,16 +330,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                    // create Json for model
                    ModelVisualizationJson vizJson = new ModelVisualizationJson(jsondb, model);
                    getInstance().addModelVisuals(model, vizJson);
-                   String fileName = JettyMain.getServerWorkingDir()+vizJson.getModelUUID().toString().substring(0, 6)+".json";
-                   try {
-                       // Write vizJson to file and send message to visualizer to open it
-                       ExportSceneToThreeJsAction.writeJsonFile(vizJson, fileName);
-                       // Send message to open the 
-                   } catch (IOException ex) {
-                       Exceptions.printStackTrace(ex);
-                   }
-                   // send message to visualizer to load model from file
-                   websocketdb.broadcastMessageJson(vizJson.createOpenModelJson());
+                   exportModelJsonToVisualizer(vizJson);
                }
                else {
                    // Same as open visualizer window 
@@ -389,7 +380,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                     System.out.println(msg.toJSONString());
                     UUID modelUUID = mapModelsToJsons.get(dModel).getModelUUID();
                     mapModelsToJsons.remove(dModel);
-                    JSONUtilities.removeModelJson(jsondb, modelUUID);
                 }
                
             } else if (ev.getOperation()==ModelEvent.Operation.SetCurrent) {
@@ -409,6 +399,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                        setObjectOpacity(next, getNonCurrentModelOpacity()*nominalOpacity);
                   }
                }
+               if (websocketdb != null){
+                    Model cModel = ev.getModel();
+                    currentJson = mapModelsToJsons.get(cModel);
+                    JSONObject msg = currentJson.createSetCurrentModelJson();
+                    websocketdb.broadcastMessageJson(msg);
+                    System.out.println(msg.toJSONString());
+                }
+
             } else if (ev.getOperation()==ModelEvent.Operation.Save) {
                // If a model is saved then its document filename has changed and we should update the settings file accordingly
                updateSettingsSerializer(ev.getModel());
@@ -416,6 +414,18 @@ public final class ViewDB extends Observable implements Observer, LookupListener
          }
       }
    }
+
+    public void exportModelJsonToVisualizer(ModelVisualizationJson vizJson) {
+        String fileName = JettyMain.getServerWorkingDir()+vizJson.getModelUUID().toString().substring(0, 8)+".json";
+       try {
+           // Write vizJson to file and send message to visualizer to open it
+           JSONUtilities.writeJsonFile(vizJson, fileName);
+       } catch (IOException ex) {
+           Exceptions.printStackTrace(ex);
+       }
+        // send message to visualizer to load model from file
+        websocketdb.broadcastMessageJson(vizJson.createOpenModelJson());
+    }
 
     private void handleObjectsDeletedEvent(final Object arg) {
         ObjectsDeletedEvent ev = (ObjectsDeletedEvent)arg;
@@ -1568,6 +1578,23 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         return currentJson;
     }
 
+    public void exportAllModelsToJson() {
+        // if no models, then nothing to exportex
+        Object[] models = OpenSimDB.getInstance().getAllModels();
+        for (int i=0; i< models.length; i++){
+            Model model = (Model) models[i];
+            ModelVisualizationJson vizJson = null;
+            if (getInstance().mapModelsToJsons.containsKey(model)){
+                vizJson = getInstance().mapModelsToJsons.get(model);
+            }
+            else{
+                vizJson = new ModelVisualizationJson(jsondb, model);
+                getInstance().addModelVisuals(model, vizJson);
+            }
+            exportModelJsonToVisualizer(vizJson);
+        }
+    }
+
    /**
     * Utility: apply a function to given actor, or to all actors in assembly.
     */
@@ -1972,8 +1999,12 @@ public final class ViewDB extends Observable implements Observer, LookupListener
 
     public void setCurrentJson() {
         Model cModel = getCurrentModel();
-        if (cModel != null && mapModelsToJsons.containsKey(cModel))
+        if (cModel != null && mapModelsToJsons.containsKey(cModel)){
             currentJson = mapModelsToJsons.get(cModel);
+            JSONObject msg = currentJson.createSetCurrentModelJson();
+            websocketdb.broadcastMessageJson(msg);
+            System.out.println(msg.toJSONString());
+        }
     }
 
     private void handleJson(JSONObject jsonObject) {
