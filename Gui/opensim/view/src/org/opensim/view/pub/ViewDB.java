@@ -375,10 +375,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                //rc = visModel.getModelDisplayAssembly().GetReferenceCount();
                if (visModel != null) visModel.cleanup();
                if (websocketdb != null){
-                    JSONObject msg = currentJson.createCloseModelJson();
+                    ModelVisualizationJson dJson = mapModelsToJsons.get(dModel);
+                    JSONObject msg = dJson.createCloseModelJson();
                     websocketdb.broadcastMessageJson(msg);
                     System.out.println(msg.toJSONString());
-                    UUID modelUUID = mapModelsToJsons.get(dModel).getModelUUID();
+                    UUID modelUUID = dJson.getModelUUID();
                     mapModelsToJsons.remove(dModel);
                 }
                
