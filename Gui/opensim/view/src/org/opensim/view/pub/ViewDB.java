@@ -47,6 +47,7 @@ import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import org.eclipse.jetty.JettyMain;
+import org.eclipse.jetty.VisWebSocket;
 import org.eclipse.jetty.WebSocketDB;
 import org.json.simple.JSONObject;
 import org.openide.awt.StatusDisplayer;
@@ -228,6 +229,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       if (arg instanceof JSONObject){
           handleJson((JSONObject) arg);
       }
+      if (o instanceof VisWebSocket){
+          // Sync. socket with current ViweDB
+          getInstance().sync((VisWebSocket) o);
+          return;
+      }
       if (o instanceof OpenSimDB){
          if (arg instanceof ObjectsAddedEvent) {
             ObjectsAddedEvent ev = (ObjectsAddedEvent)arg;
@@ -330,7 +336,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                    // create Json for model
                    ModelVisualizationJson vizJson = new ModelVisualizationJson(jsondb, model);
                    getInstance().addModelVisuals(model, vizJson);
-                   exportModelJsonToVisualizer(vizJson);
+                   exportModelJsonToVisualizer(vizJson, null);
                }
                else {
                    // Same as open visualizer window 
@@ -377,7 +383,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                if (websocketdb != null){
                     ModelVisualizationJson dJson = mapModelsToJsons.get(dModel);
                     JSONObject msg = dJson.createCloseModelJson();
-                    websocketdb.broadcastMessageJson(msg);
+                    websocketdb.broadcastMessageJson(msg, null);
                     System.out.println(msg.toJSONString());
                     UUID modelUUID = dJson.getModelUUID();
                     mapModelsToJsons.remove(dModel);
@@ -404,7 +410,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                     Model cModel = ev.getModel();
                     currentJson = mapModelsToJsons.get(cModel);
                     JSONObject msg = currentJson.createSetCurrentModelJson();
-                    websocketdb.broadcastMessageJson(msg);
+                    websocketdb.broadcastMessageJson(msg, null);
                     System.out.println(msg.toJSONString());
                 }
 
@@ -416,7 +422,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       }
    }
 
-    public void exportModelJsonToVisualizer(ModelVisualizationJson vizJson) {
+    public void exportModelJsonToVisualizer(ModelVisualizationJson vizJson, VisWebSocket socket) {
         String fileName = JettyMain.getServerWorkingDir()+vizJson.getModelUUID().toString().substring(0, 8)+".json";
        try {
            // Write vizJson to file and send message to visualizer to open it
@@ -425,7 +431,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
            Exceptions.printStackTrace(ex);
        }
         // send message to visualizer to load model from file
-        websocketdb.broadcastMessageJson(vizJson.createOpenModelJson());
+        websocketdb.broadcastMessageJson(vizJson.createOpenModelJson(), socket);
     }
 
     private void handleObjectsDeletedEvent(final Object arg) {
@@ -978,7 +984,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
          markSelected(selectedObject, true, true, true);
          ExplorerTopComponent.getDefault().selectNodeForSelectedObject(selectedObject);
          if (websocketdb != null){
-             websocketdb.broadcastMessageJson(currentJson.createSelectionJson(obj));
+             websocketdb.broadcastMessageJson(currentJson.createSelectionJson(obj), null);
          }
       } else { // this function should never be called with obj = null
          ClearSelectedObjectsEvent evnt = new ClearSelectedObjectsEvent(this);
@@ -1222,7 +1228,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       }
       if (websocketdb != null && currentJson != null){
         // Make xforms JSON
-        websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson());
+        websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(), null);
       }
    }
    
@@ -1234,7 +1240,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       }
       if (websocketdb != null){
         // Make xforms JSON
-        websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson());
+        websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(), null);
       }
    }
 
@@ -1579,7 +1585,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         return currentJson;
     }
 
-    public void exportAllModelsToJson() {
+    public void exportAllModelsToJson(VisWebSocket socket) {
         // if no models, then nothing to exportex
         Object[] models = OpenSimDB.getInstance().getAllModels();
         for (int i=0; i< models.length; i++){
@@ -1592,8 +1598,12 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                 vizJson = new ModelVisualizationJson(jsondb, model);
                 getInstance().addModelVisuals(model, vizJson);
             }
-            exportModelJsonToVisualizer(vizJson);
+            exportModelJsonToVisualizer(vizJson, socket);
         }
+    }
+
+    private void sync(VisWebSocket visWebSocket) {
+        ViewDB.getInstance().exportAllModelsToJson(visWebSocket);
     }
 
    /**
@@ -2003,7 +2013,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         if (cModel != null && mapModelsToJsons.containsKey(cModel)){
             currentJson = mapModelsToJsons.get(cModel);
             JSONObject msg = currentJson.createSetCurrentModelJson();
-            websocketdb.broadcastMessageJson(msg);
+            websocketdb.broadcastMessageJson(msg, null);
             System.out.println(msg.toJSONString());
         }
     }
@@ -2013,6 +2023,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
        String uuidString = (String) uuid;
        if (uuidString.length()==0) return;
        final OpenSimObject selectedObject = currentJson.findObjectForUUID(uuidString);
+       if (selectedObject == null) return; // Not OpenSim Object, not interested
        JSONMessageHandler.handleJSON(getCurrentModel(), selectedObject, jsonObject);
     }
 }

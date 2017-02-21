@@ -31,6 +31,7 @@ public class WebSocketDB {
             sockets.add(socket);
         System.out.println("Socket count ="+sockets.size());
         socket.addObserver(observer);
+        observer.update(socket, null);
     }
     
     public void unRegisterSocket(VisWebSocket socket) {
@@ -53,8 +54,12 @@ public class WebSocketDB {
         this.observer = observer; // ViewDB
     }
     
-    public void broadcastMessageJson(JSONObject msg)
+    public void broadcastMessageJson(JSONObject msg, VisWebSocket specificSocket)
     {
+        if (specificSocket != null){
+            specificSocket.sendVisualizerMessage(msg);
+            return;
+        }
         for (VisWebSocket sock : sockets){
             System.out.println("Broadcast:"+msg.toJSONString()+"\n");
             sock.sendVisualizerMessage(msg);

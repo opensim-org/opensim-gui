@@ -37,7 +37,6 @@ public final class VisualizerWindowAction implements ActionListener {
     public static void openVisualizerWindow() {
         ViewDB.getInstance().startVisualizationServer();
         BrowserLauncher.openURL("http://localhost:"+JettyMain.getServerPort()+JettyMain.getPathToStartPage()+"index.html");
-        ViewDB.getInstance().exportAllModelsToJson();
     }
 
 }
