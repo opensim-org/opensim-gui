@@ -410,7 +410,7 @@ public class MotionDisplayer implements SelectionListener {
          Coordinate co = coords.get(i);
          // GenCoord
          String cName = co.getName();
-         if (cName.equals(columnName)){
+         if (cName.equals(columnName)||cName.equals(co.getAbsolutePathName())){
             mapIndicesToObjectTypes.put(columnIndex, ObjectTypesInMotionFiles.GenCoord);
             mapIndicesToObjects.put(columnIndex, co); //co.setValue();
             return 1;
