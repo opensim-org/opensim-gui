@@ -6,6 +6,11 @@
 
 package org.opensim.threejs;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.opensim.modeling.Rotation;
@@ -18,6 +23,23 @@ import org.opensim.modeling.Vec3;
  */
 public class JSONUtilities {
 
+    static public JSONObject createTopLevelJson() {
+        JSONObject topLevelJson = new JSONObject();
+        topLevelJson.put("geometries", new JSONArray());
+        topLevelJson.put("materials", new JSONArray());
+        /*
+        JSONObject models_json = new JSONObject();
+        models_json.put("uuid", UUID.randomUUID().toString());
+        models_json.put("type", "Group");
+        models_json.put("name", "Models");
+        //System.out.println(model_json.toJSONString());
+        JSONArray models_json_arr = new JSONArray();
+        models_json.put("children", models_json_arr);
+        topLevelJson.put("object", models_json);
+        */
+        return topLevelJson;
+    }
+    
     static String mapColorToRGBA(Vec3 color) {
         int r = (int) (color.get(0) * 255);
         int g = (int) (color.get(1) * 255);
@@ -51,6 +73,31 @@ public class JSONUtilities {
         for (int i=0; i<16; i++)
             ret.add(retTransform[i]);
         return ret;
+    }
+    // Method to remove Json of Model from Scene on Model closing
+    public static void removeModelJson(JSONObject jsondb, UUID modelUUID) {
+        // Find models node and remove modelUUID from list of children
+        JSONObject models_json = ((JSONObject) jsondb.get("object"));
+        JSONArray models_children = (JSONArray) models_json.get("children");
+
+        for (int index = 0; index < models_children.size(); index++){
+            JSONObject nextModelJson = (JSONObject) models_children.get(index);
+            String nextModelUUID =  (String) nextModelJson.get("uuid");
+            if (nextModelUUID.equals(modelUUID.toString())){
+                models_children.remove(index);
+                break;
+            }
+        }
+    }
+
+    public static void writeJsonFile(JSONObject jsonTop, String fileName) throws IOException {
+        BufferedWriter out;
+        StringWriter outString = new JSONWriter();
+        jsonTop.writeJSONString(outString);
+        out = new BufferedWriter(new FileWriter(fileName, false));
+        out.write(outString.toString());
+        out.flush();
+        out.close();
     }
 
 }

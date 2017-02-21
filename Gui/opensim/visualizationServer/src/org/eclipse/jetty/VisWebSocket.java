@@ -33,7 +33,7 @@ public class VisWebSocket extends Observable { // Socket to handle incoming traf
     
     public VisWebSocket(){
         // Register socket with WebSocketDB so it can be called back
-        WebSocketDB.registerNewSocket(this);
+        WebSocketDB.getInstance().registerNewSocket(this);
     }
     
     @OnWebSocketConnect
@@ -48,12 +48,14 @@ public class VisWebSocket extends Observable { // Socket to handle incoming traf
     public void onClose (Session peer, int in, String cause) {
         peers.remove(peer);
         System.out.println("onClose");
+        WebSocketDB.getInstance().unRegisterSocket(this);
     }
     
     @OnWebSocketError
      public void onError (Session peer, Throwable er) {
         System.out.println("onError");
     }        
+    // Receive message from Visualizer
     @OnWebSocketMessage
     public void visMessage(String stringToParse) {
         try {
@@ -71,7 +73,7 @@ public class VisWebSocket extends Observable { // Socket to handle incoming traf
         for (Session peer:peers){          
             try {
                 peer.getRemote().sendString(selected.toJSONString());
-                break;
+                
             } catch (IOException ex) {
                 Logger.getLogger(VisWebSocket.class.getName()).log(Level.SEVERE, null, ex);
             }

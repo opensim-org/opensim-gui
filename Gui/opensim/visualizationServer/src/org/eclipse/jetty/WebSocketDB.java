@@ -17,22 +17,28 @@ import org.json.simple.JSONObject;
  */
 public class WebSocketDB {
     static WebSocketDB instance;
-    private static Set<VisWebSocket> sockets = Collections.synchronizedSet(new HashSet<VisWebSocket>());
-    private static Observer observer;
+    private Set<VisWebSocket> sockets = Collections.synchronizedSet(new HashSet<VisWebSocket>());
+    private Observer observer;
     
     /** Creates a new instance of WebSocketDB */
     private WebSocketDB() {
         instance = this;
     }
     
-    static void registerNewSocket(VisWebSocket socket) {
-        sockets.add(socket);
+    public void registerNewSocket(VisWebSocket socket) {
+        System.out.println("Register new Socket");
+        if (!sockets.contains(socket))
+            sockets.add(socket);
+        System.out.println("Socket count ="+sockets.size());
         socket.addObserver(observer);
+        observer.update(socket, null);
     }
     
-    static void unRegisterSocket(VisWebSocket socket) {
+    public void unRegisterSocket(VisWebSocket socket) {
+        System.out.println("unRegister Socket");
         sockets.remove(socket);
-    }
+        System.out.println("Socket count ="+sockets.size());
+     }
     
     static public WebSocketDB getInstance() {
         if (instance == null)
@@ -45,12 +51,17 @@ public class WebSocketDB {
      * @param observer the observer to set
      */
     public void setObserver(Observer observer) {
-        this.observer = observer;
+        this.observer = observer; // ViewDB
     }
     
-    public void broadcastMessageJson(JSONObject msg)
+    public void broadcastMessageJson(JSONObject msg, VisWebSocket specificSocket)
     {
+        if (specificSocket != null){
+            specificSocket.sendVisualizerMessage(msg);
+            return;
+        }
         for (VisWebSocket sock : sockets){
+            System.out.println("Broadcast:"+msg.toJSONString()+"\n");
             sock.sendVisualizerMessage(msg);
         }
         //sockets.iterator().next().sendVisualizerMessage(msg);

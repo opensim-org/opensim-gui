@@ -20,6 +20,7 @@ import org.openide.util.NbBundle.Messages;
 import org.opensim.modeling.Model;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.utils.FileUtils;
+import org.opensim.view.pub.ViewDB;
 
 @ActionID(
         category = "File",
@@ -29,39 +30,39 @@ import org.opensim.utils.FileUtils;
         displayName = "#CTL_ExportSceneToThreeJsAction"
 )
 @ActionReference(path = "Menu/File", position = 1429)
-@Messages("CTL_ExportSceneToThreeJsAction=Export model to json")
+@Messages("CTL_ExportSceneToThreeJsAction=Export all models to json format")
 public final class ExportSceneToThreeJsAction implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         
        Model model = OpenSimDB.getInstance().getCurrentModel();
+       if (model == null) return; // Nothing to export
        String fileName = FileUtils.getInstance().browseForFilenameToSave(
                     FileUtils.getFileFilter(".json", "Threejs scene file"), 
                 true, model.getInputFileName().replace(".osim", ".json"));
 
-        exportCurrentModelToJson(fileName, model);
+        exportAllModelsToJson(fileName);
     }
 
-    public static VisualizationJson exportCurrentModelToJson(String fileName, Model model) {
+    public static ModelVisualizationJson exportAllModelsToJson(String fileName) {
         BufferedWriter out = null;
-        VisualizationJson vizJson = null;
+        ModelVisualizationJson vizJson = null;
         try {
-
+            JSONObject jsonTop = ViewDB.getInstance().getJsondb();
+            int numModels = OpenSimDB.getInstance().getNumModels();
             // Create Json rep for model
-            vizJson = new VisualizationJson(model);
-            JSONObject jsonTop = vizJson.getJson();
-            StringWriter outString = new JSONWriter();
-            jsonTop.writeJSONString(outString);
-            String jsonText = outString.toString();
-            out = new BufferedWriter(new FileWriter(fileName, false));
-            out.write(jsonText);
-            out.flush();
-            out.close();
+            for (int i=0; i<numModels; i++){
+                Model model = OpenSimDB.getInstance().getModelByIndex(i);
+                vizJson = new ModelVisualizationJson(jsonTop, model);
+                ViewDB.getInstance().addModelVisuals(model, vizJson);
+            }
+            JSONUtilities.writeJsonFile(jsonTop, fileName);
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         } finally {
         }
         return vizJson;
     }
+
 
 }
