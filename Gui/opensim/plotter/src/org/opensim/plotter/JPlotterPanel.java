@@ -1634,9 +1634,9 @@ public class JPlotterPanel extends javax.swing.JPanel
       int numStates = currentModel.getNumStateVariables();
       ArrayStr stateNames = currentModel.getStateVariableNames();
       // Save states for later restoration so that the GUI and model are in sync. after analysis
-      double[] saveStates = new double[numStates];
+      //double[] saveStates = new double[numStates];
       // FIX40 openSimContext.getStates(saveStates);
-      
+      State saveState = openSimContext.getCurrentStateCopy();
       Storage extendedMotionStorage;
       int key = (int) (java.lang.Math.random()*100);
       if (motion != null && motion instanceof PlotterSourceMotion){
@@ -1647,15 +1647,21 @@ public class JPlotterPanel extends javax.swing.JPanel
          //statesStorage.print(key+"statesFromMotion.sto");
       } else {
          // Recreate stateStorage
-         statesStorage=createStateStorageWithHeader(currentModel);
-         
+         StatesReporter reporter = new StatesReporter(currentModel);
+         reporter.begin(openSimContext.getCurrentStateRef());
+         reporter.step(saveState, key);
+         statesStorage=reporter.getStatesStorage();
+         statesStorage.print("StatesFromReporter.sto");
           // make states for analysis by setting fiberlength and activation and form complete storage
-         double[] statesForAnalysis = new double[numStates];
-         // FIX40 openSimContext.getStates(statesForAnalysis);
+         StateVector statevec = statesStorage.getStateVector(0);
+         ArrayDouble statesForAnalysis = new ArrayDouble(statevec.getData());
+         //int sz = statesForAnalysis.size();
          setNonzeroDefaultValues(stateNames, statesForAnalysis, isActivationOverride(), getActivationValue());
          double NUM_STEPS=100.0;
-         int xIndex = statesStorage.getStateIndex(getDomainName());
+         // Replace short coordinate name with fullpathname
          Coordinate coord = currentModel.getCoordinateSet().get(getDomainName());
+         domainName = coord.getRelativePathName(currentModel)+"/value";
+         int xIndex = statesStorage.getStateIndex(domainName);
          
          double domStart=(Double)jDomainStartTextField.getValue();
          double domEnd=(Double)jDomainEndTextField.getValue();
@@ -1668,17 +1674,18 @@ public class JPlotterPanel extends javax.swing.JPanel
                domEnd = coord.getRangeMax();
          }
          // Make 100 steps along the way, varying the quantity on sourceX by 1/100 of the distance between domStart & domEnd
-         statesStorage.purge();
+         //statesStorage.purge();
+         
           for(int i=0; i<NUM_STEPS; i++){
             double time = (double)i;
             double increment = 1./(NUM_STEPS-1)*(domEnd-domStart);
             double val=domStart+increment*i;
             //double degVal = Math.toDegrees(val);
             //System.out.println("Step="+i+", val="+degVal);
-            statesForAnalysis[xIndex]=val;
+            statesForAnalysis.set(xIndex, val);
             StateVector newVector = new StateVector();
-            //FIX40 openSimContext.computeConstrainedCoordinates(statesForAnalysis);
-            //FIX40 newVector.setStates(time, numStates, statesForAnalysis);            
+            // FIX40 openSimContext.computeConstrainedCoordinates(statesForAnalysis);
+            newVector.setStates(time, statesForAnalysis.getAsVector());            
             statesStorage.append(newVector);
          }
          tool.setStatesStorage(statesStorage);
@@ -1697,7 +1704,7 @@ public class JPlotterPanel extends javax.swing.JPanel
       } catch (IOException ex) {
          ex.printStackTrace();
       }
-      //FIX40 openSimContext.setStates(saveStates);
+      openSimContext.setState(saveState);
       int na = currentModel.getAnalysisSet().getSize();
       Analysis analysis = currentModel.getAnalysisSet().get("MuscleAnalysis");
       analysisSource.updateStorage(analysis);
@@ -1709,15 +1716,15 @@ public class JPlotterPanel extends javax.swing.JPanel
        MuscleAnalysis.safeDownCast(analysis).setCoordinates(coordsArray);   
    }
 
-    private void setNonzeroDefaultValues(final ArrayStr stateNames, final double[] statesForAnalysis, boolean activationOverride, double activationValue) {
-        for(int i=0; i<statesForAnalysis.length; i++){
+    private void setNonzeroDefaultValues(final ArrayStr stateNames, final ArrayDouble statesForAnalysis, boolean activationOverride, double activationValue) {
+        for(int i=0; i<statesForAnalysis.size(); i++){
            /*if (stateNames.getitem(i).endsWith(".fiber_length"))
               statesForAnalysis[i]=0.01;
-           else */if (stateNames.getitem(i).endsWith(".activation")) {
+           else */if (stateNames.getitem(i).endsWith("/activation")) {
               if (activationOverride)
-                 statesForAnalysis[i]=activationValue;
+                 statesForAnalysis.setitem(i, activationValue);
               else
-                 statesForAnalysis[i]=1.0;
+                 statesForAnalysis.setitem(i,1.0);
         }
     }
     }
