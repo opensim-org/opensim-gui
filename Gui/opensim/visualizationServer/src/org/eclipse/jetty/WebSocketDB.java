@@ -19,25 +19,25 @@ public class WebSocketDB {
     static WebSocketDB instance;
     private Set<VisWebSocket> sockets = Collections.synchronizedSet(new HashSet<VisWebSocket>());
     private Observer observer;
-    
+    public static boolean debug = false;
     /** Creates a new instance of WebSocketDB */
     private WebSocketDB() {
         instance = this;
     }
     
     public void registerNewSocket(VisWebSocket socket) {
-        System.out.println("Register new Socket");
+        if (debug) System.out.println("Register new Socket");
         if (!sockets.contains(socket))
             sockets.add(socket);
-        System.out.println("Socket count ="+sockets.size());
+        if (debug) System.out.println("Socket count ="+sockets.size());
         socket.addObserver(observer);
         observer.update(socket, null);
     }
     
     public void unRegisterSocket(VisWebSocket socket) {
-        System.out.println("unRegister Socket");
+        if (debug) System.out.println("unRegister Socket");
         sockets.remove(socket);
-        System.out.println("Socket count ="+sockets.size());
+        if (debug) System.out.println("Socket count ="+sockets.size());
      }
     
     static public WebSocketDB getInstance() {
@@ -61,9 +61,8 @@ public class WebSocketDB {
             return;
         }
         for (VisWebSocket sock : sockets){
-            System.out.println("Broadcast:"+msg.toJSONString()+"\n");
+            if (debug) System.out.println("Broadcast:"+msg.toJSONString()+"\n");
             sock.sendVisualizerMessage(msg);
         }
-        //sockets.iterator().next().sendVisualizerMessage(msg);
     }
 }
