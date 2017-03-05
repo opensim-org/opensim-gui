@@ -50,6 +50,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         this.jsonArr = jsonArr;
         this.json_materials = jsonArrMaterials;
         this.visualizerScaleFactor = scale;
+        System.out.println("Looking for Geometry files in :"+GeometryFileLocator.geometryInstallationDirectory);
     }
     
     @Override
@@ -95,7 +96,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         //super.implementMeshFileGeometry(arg0); //To change body of generated methods, choose Tools | Templates.
         String meshFile = arg0.getMeshFile();
         String fullFileName = GeometryFileLocator.getInstance().getFullname("",meshFile, false);
-        //System.out.print("Processing file"+fullFileName);
+        System.out.println("Processing file"+fullFileName);
         if (fullFileName==null) return;
         //System.out.println("...Found");
         String filenameLower = fullFileName.toLowerCase();

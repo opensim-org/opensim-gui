@@ -424,6 +424,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
 
     public void exportModelJsonToVisualizer(ModelVisualizationJson vizJson, VisWebSocket socket) {
         String fileName = JettyMain.getServerWorkingDir()+vizJson.getModelUUID().toString().substring(0, 8)+".json";
+        //System.out.println("Json file path ="+fileName);
        try {
            // Write vizJson to file and send message to visualizer to open it
            JSONUtilities.writeJsonFile(vizJson, fileName);
