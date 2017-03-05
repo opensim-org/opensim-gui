@@ -39,7 +39,6 @@ import javax.swing.JFrame;
 import org.openide.LifecycleManager;
 import org.openide.util.Exceptions;
 import org.openide.util.ImageUtilities;
-
 /**
  *
  * @author Ayman, a convenience class used for now as a place holder for common utilities/helper functions used
@@ -51,6 +50,7 @@ public final class TheApp {
     private static JFrame appFrame;    // Application's frame, cached in for quick access
     private static Image appImage;
     private static String installDir=null;
+    private static String OS = System.getProperty("os.name").toLowerCase();
     /** Creates a new instance of TheApp 
     protected TheApp() {
     }
@@ -121,10 +121,15 @@ public final class TheApp {
              // Remove the jar: prefix
             String schemePart = jarfile.getSchemeSpecificPart();
             // Remove trailing !/
-            schemePart = schemePart.substring(6, schemePart.length()-2);
+            schemePart = schemePart.substring(0, schemePart.length()-2);
             Path jarFilePath = Paths.get(schemePart);
             Path parentPath = jarFilePath.getParent();
-            String parentDir = parentPath.toString();
+            String parentDir = "";
+            if (OS.indexOf("win") >= 0){
+                parentDir = parentPath.toString().substring(6);
+            }
+            else
+                parentDir = parentPath.toString().substring(5);
             boolean buildEnvironment = parentDir.lastIndexOf("cluster")!=-1;
             if (buildEnvironment){
                 int lastIndex = parentDir.lastIndexOf("cluster")-6;
@@ -166,6 +171,6 @@ public final class TheApp {
      * @return $installDir/Geometry
      */
     public static String getDefaultGeometrySearchPath() {
-        return getInstallDir()+File.separatorChar+"Geometry";
+        return getInstallDir()+File.separatorChar+"Geometry"+File.separatorChar;
     }
 }
