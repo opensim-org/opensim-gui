@@ -46,7 +46,7 @@ public class JettyMain {
                 }
                 serverWorkingDir = appDir+"/threejs/editor/";
                 URI webRootUri = new File(appDir).toURI();
-                System.err.printf("Web Root URI: %s%n",webRootUri);
+                System.out.println("Web Root URI: %s%n"+webRootUri);
 
                 ServletContextHandler context = new ServletContextHandler();
                 context.setContextPath("/");
