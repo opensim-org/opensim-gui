@@ -122,14 +122,15 @@ public final class TheApp {
             String schemePart = jarfile.getSchemeSpecificPart();
             // Remove trailing !/
             schemePart = schemePart.substring(0, schemePart.length()-2);
-            Path jarFilePath = Paths.get(schemePart);
-            Path parentPath = jarFilePath.getParent();
             String parentDir = "";
             if (OS.indexOf("win") >= 0){
-                parentDir = parentPath.toString().substring(6);
+                parentDir = schemePart.substring(6);
             }
-            else
+            else {
+                Path jarFilePath = Paths.get(schemePart);
+                Path parentPath = jarFilePath.getParent();
                 parentDir = parentPath.toString().substring(5);
+            }
             boolean buildEnvironment = parentDir.lastIndexOf("cluster")!=-1;
             if (buildEnvironment){
                 int lastIndex = parentDir.lastIndexOf("cluster")-6;
