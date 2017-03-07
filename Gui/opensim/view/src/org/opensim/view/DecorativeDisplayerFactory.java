@@ -54,6 +54,9 @@ public class DecorativeDisplayerFactory  {
     static DecorativeArrowDisplayer createDisplayer(DecorativeArrow dl) {
         return new DecorativeArrowDisplayer(dl);
      }
+    static DecorativeTorusDisplayer createDisplayer(DecorativeTorus dl) {
+        return new DecorativeTorusDisplayer(dl);
+     }
 
     
 }
