@@ -1659,9 +1659,8 @@ public class JPlotterPanel extends javax.swing.JPanel
          setNonzeroDefaultValues(stateNames, statesForAnalysis, isActivationOverride(), getActivationValue());
          double NUM_STEPS=100.0;
          // Replace short coordinate name with fullpathname
-         Coordinate coord = currentModel.getCoordinateSet().get(getDomainName());
-         domainName = coord.getRelativePathName(currentModel)+"/value";
-         int xIndex = statesStorage.getStateIndex(domainName);
+         Coordinate coord = currentModel.getCoordinateSet().get(domainName);
+         int xIndex = statesStorage.getStateIndex(getDomainName());
          
          double domStart=(Double)jDomainStartTextField.getValue();
          double domEnd=(Double)jDomainEndTextField.getValue();
@@ -1914,6 +1913,11 @@ public class JPlotterPanel extends javax.swing.JPanel
    public String getDomainName() {
       if (domainName==null){
          return "select X";
+      }
+      // Coordinate name now changed to full path in states file for 4.0
+      if (builtinMuscleCurve){
+          Coordinate coord = currentModel.getCoordinateSet().get(domainName);
+          return (coord.getRelativePathName(currentModel)+"/value");
       }
       return domainName;
    }
