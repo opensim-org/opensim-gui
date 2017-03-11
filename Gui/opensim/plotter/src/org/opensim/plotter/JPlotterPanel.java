@@ -1674,7 +1674,7 @@ public class JPlotterPanel extends javax.swing.JPanel
                domEnd = coord.getRangeMax();
          }
          // Make 100 steps along the way, varying the quantity on sourceX by 1/100 of the distance between domStart & domEnd
-         //statesStorage.purge();
+         statesStorage.purge();
          
           for(int i=0; i<NUM_STEPS; i++){
             double time = (double)i;
