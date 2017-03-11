@@ -379,6 +379,7 @@ public class PlotterModel {
         int numStorages = analyses.get("MuscleAnalysis").getStorageList().getSize();
         if (analyses.get("MuscleAnalysis").getStorageList().getIndex(qName)==-1){
             //String anXml = analyses.get("MuscleAnalysis").dump();
+            MuscleAnalysis.safeDownCast(analyses.get("MuscleAnalysis")).setComputeMoments(true);
             MuscleAnalysis.safeDownCast(analyses.get("MuscleAnalysis")).allocateStorageObjects();
         }
         /*ArrayStorage ast = analyses.get("MuscleAnalysis").getStorageList();
