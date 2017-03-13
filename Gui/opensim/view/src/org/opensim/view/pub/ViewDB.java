@@ -596,6 +596,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     *
     */
    public void toggleModelDisplay(Model model, boolean onOff) {
+    if (isVtkGraphicsAvailable()){  
       SingleModelVisuals modelVis = mapModelsToVisuals.get(model);
       if (!modelVis.isVisible() && onOff){
          sceneAssembly.AddPart(modelVis.getModelDisplayAssembly());
@@ -606,6 +607,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
          modelVis.setVisible(false);
       }
       repaintAll();
+    }
+    if (websocketdb != null){
+       ModelVisualizationJson vizJson = getInstance().mapModelsToJsons.get(model);
+       websocketdb.broadcastMessageJson(vizJson.createToggleModelVisibilityCommand(onOff), null);
+    }
    }
    /**
     * Decide if a new window is needed to be created. Right now this's done only first time the application
@@ -660,7 +666,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     * Return a flag indicating whether the model is currently shown or hidden
     */
    public boolean getDisplayStatus(Model m) {
-      return false;//mapModelsToVisuals.get(m).isVisible();
+      return true;//mapModelsToVisuals.get(m).isVisible();
       
    }
    
@@ -1114,6 +1120,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       aModelVisual.getModelDisplayAssembly().SetUserMatrix(newTransform);
       updateAnnotationAnchors();
    }
+   
+    public void setModelOffset(ModelVisualizationJson modelJson, Vec3 offsetVec3) {
+        JSONObject msg =  modelJson.createTranslateObjectCommand(offsetVec3);
+        if (websocketdb!=null){
+             websocketdb.broadcastMessageJson(msg, null);
+        }
+    }
+
    /**
     * Get a box around the whole scene. Used to fill an intial guess of the bounds for the model display
     */
@@ -1193,6 +1207,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       return mapModelsToVisuals.get(aModel);
    }
    
+   public ModelVisualizationJson getModelVisualizationJson(Model aModel) {
+      return mapModelsToJsons.get(aModel);
+   }
 
    public void applyTimeToViews(double time) {
       Iterator<ModelWindowVTKTopComponent> windowIter = openWindows.iterator();
@@ -1318,12 +1335,18 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             actor.SetPickable(vtkVisible);
          }});
        */
+    if (websocketdb != null){
+        // Assume current model for now
+       ModelVisualizationJson vizJson = getInstance().mapModelsToJsons.get(getCurrentModel());
+       websocketdb.broadcastMessageJson(
+               vizJson.createToggleObjectVisibilityCommand(openSimObject, visible), null);
+    }
    }
    /**
     * Return a flag indicating if an object is displayed or not
     **/
    public static int getDisplayStatus(OpenSimObject openSimObject) {
-      int visible = 0;
+      int visible = 2;
       ObjectGroup group = ObjectGroup.safeDownCast(openSimObject);
       
       /*
@@ -1878,7 +1901,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             nextSelected.updateAnchor(selectedObjectsAnnotations.get(nextSelected));
         }
     }
-
+    // Change orientation based on passed in 3 Rotations, used to visualize mocap data
     public void setOrientation(Model model, double[] d) {
         SingleModelVisuals visuals = getModelVisuals(model);
         vtkMatrix4x4 currenTransform=getModelVisualsTransform(visuals);
@@ -2017,7 +2040,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             System.out.println(msg.toJSONString());
         }
     }
-
+    // Callback, invoked when a command is received from visualizer
+    // this operates only on currentJson
     private void handleJson(JSONObject jsonObject) {
        Object uuid = jsonObject.get("uuid");
        String uuidString = (String) uuid;

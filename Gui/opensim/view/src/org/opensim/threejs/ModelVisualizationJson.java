@@ -80,12 +80,14 @@ public class ModelVisualizationJson extends JSONObject {
         
         JSONObject model_ground_json = new JSONObject();
         // create model node
-        model_ground_json.put("uuid", UUID.randomUUID().toString());
+        UUID groundUuid = UUID.randomUUID();
+        model_ground_json.put("uuid", groundUuid.toString());
         model_ground_json.put("type", "Group");
         model_ground_json.put("opensimtype", "Frame");
         model_ground_json.put("name", model.getGround().getAbsolutePathName());
         model_ground_json.put("model_ground", true);
         json_model_children.add(model_ground_json);
+        addComponentToUUIDMap(model.getGround(), groundUuid);
         //System.out.println(model_json.toJSONString());
         JSONArray bodies_json = new JSONArray();
         model_ground_json.put("children", bodies_json);
@@ -94,8 +96,10 @@ public class ModelVisualizationJson extends JSONObject {
             int id = body.getMobilizedBodyIndex();
             mapBodyIndicesToFrames.put(id, body.__deref__());
             //System.out.println("id=" + id + " body =" + body.getName());
-            JSONObject bodyJson = createBodyJson(body.__deref__());
+            UUID body_uuid = UUID.randomUUID();
+            JSONObject bodyJson = createBodyJson(body.__deref__(), body_uuid);
             mapBodyIndicesToJson.put(id, bodyJson);
+            addComponentToUUIDMap(body.__deref__(), body_uuid);
             bodies_json.add(bodyJson);
             //System.out.println(bodyJson.toJSONString());
             body.next();
@@ -122,6 +126,12 @@ public class ModelVisualizationJson extends JSONObject {
             }
             mcIter.next();
         }
+    }
+
+    private void addComponentToUUIDMap(OpenSimObject comp, UUID groupUuid) {
+        ArrayList<UUID> comp_uuids = new ArrayList<UUID>();
+        comp_uuids.add(groupUuid);
+        mapComponentToUUID.put(comp, comp_uuids);
     }
 
     private void processDecorativeGeometry(ArrayDecorativeGeometry adg, Component comp, 
@@ -190,9 +200,9 @@ public class ModelVisualizationJson extends JSONObject {
         return mesh_uuid;
     }   
 
-    private JSONObject createBodyJson(Body body){
+    private JSONObject createBodyJson(Body body, UUID uuid){
         JSONObject bdyJson = new JSONObject();
-        bdyJson.put("uuid", UUID.randomUUID().toString());
+        bdyJson.put("uuid", uuid.toString());
         bdyJson.put("type", "Group");
         bdyJson.put("opensimtype", "Frame");
         bdyJson.put("name", body.getAbsolutePathName());
@@ -206,8 +216,8 @@ public class ModelVisualizationJson extends JSONObject {
         return mapUUIDToComponent.get(UUID.fromString(uuidString));
     }
 
-    public UUID findUUIDForObject(OpenSimObject obj) {
-        return mapComponentToUUID.get(obj).get(0);
+    public ArrayList<UUID> findUUIDForObject(OpenSimObject obj) {
+        return mapComponentToUUID.get(obj);
     }
 
     public JSONObject createFrameMessageJson() {
@@ -259,10 +269,13 @@ public class ModelVisualizationJson extends JSONObject {
 
     public JSONObject createSelectionJson(OpenSimObject obj) {
         JSONObject formJSON = new JSONObject();
-        UUID obj_uuid = findUUIDForObject(obj);
-        formJSON.put("UUID", obj_uuid.toString());  
-        formJSON.put("Op", "Select");  
-        return formJSON;
+        ArrayList<UUID> uuids = findUUIDForObject(obj);
+        if (uuids != null && uuids.size()==1){
+            UUID obj_uuid = uuids.get(0);
+            formJSON.put("UUID", obj_uuid.toString());  
+            formJSON.put("Op", "Select");  
+         }
+         return formJSON;
     }
 
     /**
@@ -434,4 +447,33 @@ public class ModelVisualizationJson extends JSONObject {
         guiJson.put("Op", "SetCurrentModel");
         return guiJson;
     }
+
+    public JSONObject createToggleModelVisibilityCommand(boolean newValue) {
+        JSONObject guiJson = new JSONObject();
+        guiJson.put("Op", "execute");
+        JSONObject commandJson = CommandComposerThreejs.createSetVisibleCommandJson(newValue, modelUUID);
+        guiJson.put("command", commandJson);
+        return guiJson;
+    }
+
+    public JSONObject createTranslateObjectCommand(Vec3 newValue) {
+        JSONObject guiJson = new JSONObject();
+        guiJson.put("Op", "execute");
+        JSONObject commandJson = CommandComposerThreejs.createTranslateObjectCommandJson(newValue, modelUUID);
+        guiJson.put("command", commandJson);
+        return guiJson;
+    }
+    
+    public JSONObject createToggleObjectVisibilityCommand(OpenSimObject obj, boolean newValue) {
+        JSONObject guiJson = new JSONObject();
+        guiJson.put("Op", "execute");
+        ArrayList<UUID> uuids = findUUIDForObject(obj);
+        if (uuids != null && uuids.size()==1){
+        UUID objectUuid = uuids.get(0);
+            JSONObject commandJson = CommandComposerThreejs.createSetVisibleCommandJson(newValue, objectUuid);
+            guiJson.put("command", commandJson);
+        }
+        return guiJson;
+    }
+
 }
