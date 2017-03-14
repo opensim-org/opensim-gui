@@ -1637,6 +1637,7 @@ public class JPlotterPanel extends javax.swing.JPanel
       //double[] saveStates = new double[numStates];
       // FIX40 openSimContext.getStates(saveStates);
       State saveState = openSimContext.getCurrentStateCopy();
+      //openSimContext.cacheModelAndState();
       Storage extendedMotionStorage;
       int key = (int) (java.lang.Math.random()*100);
       if (motion != null && motion instanceof PlotterSourceMotion){
@@ -1650,7 +1651,7 @@ public class JPlotterPanel extends javax.swing.JPanel
          StatesReporter reporter = new StatesReporter(currentModel);
          reporter.begin(openSimContext.getCurrentStateRef());
          reporter.step(saveState, key);
-         statesStorage=reporter.getStatesStorage();
+         statesStorage=(Storage) reporter.getStatesStorage().clone();
          statesStorage.print("StatesFromReporter.sto");
           // make states for analysis by setting fiberlength and activation and form complete storage
          StateVector statevec = statesStorage.getStateVector(0);
@@ -1659,9 +1660,8 @@ public class JPlotterPanel extends javax.swing.JPanel
          setNonzeroDefaultValues(stateNames, statesForAnalysis, isActivationOverride(), getActivationValue());
          double NUM_STEPS=100.0;
          // Replace short coordinate name with fullpathname
-         Coordinate coord = currentModel.getCoordinateSet().get(getDomainName());
-         domainName = coord.getRelativePathName(currentModel)+"/value";
-         int xIndex = statesStorage.getStateIndex(domainName);
+         Coordinate coord = currentModel.getCoordinateSet().get(domainName);
+         int xIndex = statesStorage.getStateIndex(getDomainName());
          
          double domStart=(Double)jDomainStartTextField.getValue();
          double domEnd=(Double)jDomainEndTextField.getValue();
@@ -1674,7 +1674,7 @@ public class JPlotterPanel extends javax.swing.JPanel
                domEnd = coord.getRangeMax();
          }
          // Make 100 steps along the way, varying the quantity on sourceX by 1/100 of the distance between domStart & domEnd
-         //statesStorage.purge();
+         statesStorage.purge();
          
           for(int i=0; i<NUM_STEPS; i++){
             double time = (double)i;
@@ -1704,16 +1704,21 @@ public class JPlotterPanel extends javax.swing.JPanel
       } catch (IOException ex) {
          ex.printStackTrace();
       }
-      openSimContext.setState(saveState);
-      int na = currentModel.getAnalysisSet().getSize();
-      Analysis analysis = currentModel.getAnalysisSet().get("MuscleAnalysis");
+      /*
+        try {
+            openSimContext.restoreStateFromCachedModel();
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        } */
+      openSimContext.realizeVelocity();
+      MuscleAnalysis analysis = MuscleAnalysis.safeDownCast(currentModel.getAnalysisSet().get("MuscleAnalysis"));
       analysisSource.updateStorage(analysis);
       //analysisSource.getStorage().print("toolOutput"/*+key*/+".sto");
       currentModel.getSimbodyEngine().convertRadiansToDegrees(analysisSource.getStorage());
       currentModel.getSimbodyEngine().convertRadiansToDegrees(statesStorage);
        ArrayStr coordsArray = new ArrayStr();
        coordsArray.append("all"); 
-       MuscleAnalysis.safeDownCast(analysis).setCoordinates(coordsArray);   
+       analysis.setCoordinates(coordsArray);   
    }
 
     private void setNonzeroDefaultValues(final ArrayStr stateNames, final ArrayDouble statesForAnalysis, boolean activationOverride, double activationValue) {
@@ -1814,37 +1819,6 @@ public class JPlotterPanel extends javax.swing.JPanel
             });
          }
          }
-         // Other Analyses
-         /*
-         for(int i=0;i<analyses.getSize();i++){
-            final Analysis nextAnalysis = analyses.get(i);
-            if (nextAnalysis.getName().equalsIgnoreCase("MuscleAnalysis"))
-               continue;
-            JMenu nextAnalysisSubmenu = new JMenu(nextAnalysis.getName());
-            // Get storages and create a menu item for each
-            ArrayStorage storages = nextAnalysis.getStorageList();
-            for(int storageIndex=0; storageIndex<storages.getSize(); storageIndex++){
-               final Storage resultStorage = storages.get(storageIndex);
-               JMenuItem quantityMenuItem = new JMenuItem(resultStorage.getName());
-               nextAnalysisSubmenu.add(quantityMenuItem);
-               quantityMenuItem.addActionListener(
-                       new ActionListener(){
-                  public void actionPerformed(ActionEvent e) {
-                     // Show multipleSelect dialog with all muscles
-                     // Populate YQty text field with selection
-                     //XX1
-                     jYQtyTextField.setText(nextAnalysis.getName()+":"+resultStorage.getName());
-                     useMuscles(true);
-                     updateContextGuiElements();
-                     sourceY=(new PlotterSourceAnalysis(currentModel, resultStorage, nextAnalysis.getName()+":"+resultStorage.getName()));
-                     //printPlotDescriptor();
-                  }
-               });
-            }
-            jSourcePopupMenu.add(nextAnalysisSubmenu);
-            addedSomething=true;
-         }  // Current model's analyses'
-          **/
          jSourcePopupMenu.addSeparator();
          // Now motions
          ////////////////////////////////////////////////////////////////////////
@@ -1914,6 +1888,11 @@ public class JPlotterPanel extends javax.swing.JPanel
    public String getDomainName() {
       if (domainName==null){
          return "select X";
+      }
+      // Coordinate name now changed to full path in states file for 4.0
+      if (builtinMuscleCurve && currentModel.getCoordinateSet().contains(domainName)){
+          Coordinate coord = currentModel.getCoordinateSet().get(domainName);
+          return (coord.getRelativePathName(currentModel)+"/value");
       }
       return domainName;
    }
