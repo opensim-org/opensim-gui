@@ -25,7 +25,7 @@ public class JettyMain {
     private static final String serverRootDir = TheApp.getInstallDir();
     private static final String pathToStartPage = "/threejs/editor/";
     private static final int serverPort = 8001;
-    private static final String serverWorkingDir = serverRootDir+"/threejs/editor/";
+    private static String serverWorkingDir = serverRootDir+"/threejs/editor/";
     /**
      * @param args the command line arguments
      */
@@ -36,8 +36,17 @@ public class JettyMain {
                 Server server = new Server(serverPort);
 
                 String appDir = serverRootDir;
+                File fp = new File(appDir);
+                if (!fp.exists()){
+                    // Try adding leading "/"
+                    fp = new File("/"+appDir);
+                    if (fp.exists())
+                        appDir = "/"+appDir;
+                    // else should abort
+                }
+                serverWorkingDir = appDir+"/threejs/editor/";
                 URI webRootUri = new File(appDir).toURI();
-                System.err.printf("Web Root URI: %s%n",webRootUri);
+                System.out.println("Web Root URI: %s%n"+webRootUri);
 
                 ServletContextHandler context = new ServletContextHandler();
                 context.setContextPath("/");
