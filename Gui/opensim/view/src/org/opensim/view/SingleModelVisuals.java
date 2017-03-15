@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Set;
 import org.opensim.modeling.*;
 import org.opensim.threejs.DecorativeGeometryImplementationJS;
 import org.opensim.view.pub.ModelVisualsVtk;
@@ -372,7 +373,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
      * Compute bounding box for model as this can be useful for initial placement
      *  This is supposed to be a ballpark rather than an accurate estimate so that minor changes to
      * model do not cause overlap, but the bboox is not intended to be kept up-to-date
-     * unused and turned out to be very slow for some reason
+     * unused and turned out to be very slow for some reason 
     private void computeModelBoundingbox() {
         modelDisplayAssembly.GetBounds(bounds);
     }*/
@@ -404,12 +405,22 @@ public class SingleModelVisuals implements ModelVisualsVtk {
     @Override
    public double[] getBoundsBodiesOnly() {
       double[] bounds = getBounds();
+      if (bounds!=null && bounds[0]==-.1){
+          Set<Integer> bodyIndices = mapBodyIndicesToDisplayers.keySet();
+          for (Integer bindex: bodyIndices){
+              double bodyBounds[] = new double[6];
+              mapBodyIndicesToDisplayers.get(bindex).GetBounds(bodyBounds);
+              bounds = ViewDB.boundsUnion(bounds, bodyBounds);
+          }
+          
+      }
       /*bodiesCollection.InitTraversal();
       for(;;) {
          vtkProp3D prop = bodiesCollection.GetNextProp3D();
          if(prop==null) break;
          if(prop.GetVisibility()!=0) bounds = ViewDB.boundsUnion(bounds, prop.GetBounds());
       }*/
+      modelDisplayAssembly.GetBounds(bounds);
       if (bounds!=null)
          transformModelToWorldBounds(bounds);
       return bounds;
