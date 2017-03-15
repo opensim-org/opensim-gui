@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayDecorativeGeometry;
 import org.opensim.modeling.BodyList;
 import org.opensim.modeling.Body;
@@ -59,6 +60,7 @@ public class ModelVisualizationJson extends JSONObject {
     private JSONArray json_materials;
     private JSONObject model_object;
     private UUID modelUUID;
+    public static boolean verbose=false;
     
     public ModelVisualizationJson(JSONObject jsonTopIn, Model model) {
         // implicit super()
@@ -128,16 +130,22 @@ public class ModelVisualizationJson extends JSONObject {
         }
     }
 
-    private void addComponentToUUIDMap(OpenSimObject comp, UUID groupUuid) {
+    private void addComponentToUUIDMap(Component comp, UUID groupUuid) {
         ArrayList<UUID> comp_uuids = new ArrayList<UUID>();
         comp_uuids.add(groupUuid);
         mapComponentToUUID.put(comp, comp_uuids);
+        if (verbose)
+            System.out.println("Map component="+comp.getAbsolutePathName()+" to "+comp_uuids.size());   
+        
     }
 
     private void processDecorativeGeometry(ArrayDecorativeGeometry adg, Component comp, 
             DecorativeGeometryImplementationJS dgimp, JSONArray json_materials) {
         DecorativeGeometry dg;
-        ArrayList<UUID> vis_uuidList = new ArrayList<UUID>(1);
+        
+        ArrayList<UUID> vis_uuidList = mapComponentToUUID.get(comp);
+        if (vis_uuidList == null)
+            vis_uuidList = new ArrayList<UUID>(1);
         // Detect partial wrap object and if true set quadrant in dgimp so it's observed
         WrapObject wo = WrapObject.safeDownCast(comp);
         boolean partialWrapObject = (wo != null) && !wo.get_quadrant().toLowerCase().equals("all");
@@ -165,7 +173,8 @@ public class ModelVisualizationJson extends JSONObject {
         if (partialWrapObject)
             dgimp.setQuadrants("");
          mapComponentToUUID.put(comp, vis_uuidList);
-        System.out.println("Map component="+comp.getAbsolutePathName()+" to "+vis_uuidList.size());   
+        if (verbose)
+            System.out.println("Map component="+comp.getAbsolutePathName()+" to "+vis_uuidList.size());   
  
     }
 
@@ -471,6 +480,18 @@ public class ModelVisualizationJson extends JSONObject {
         if (uuids != null && uuids.size()==1){
         UUID objectUuid = uuids.get(0);
             JSONObject commandJson = CommandComposerThreejs.createSetVisibleCommandJson(newValue, objectUuid);
+            guiJson.put("command", commandJson);
+        }
+        return guiJson;
+    }
+
+    public JSONObject createAppearanceMessage(Component mc, AbstractProperty prop) {
+        JSONObject guiJson = new JSONObject();
+        guiJson.put("Op", "execute");
+        ArrayList<UUID> uuids = findUUIDForObject(mc);
+        if (uuids != null && uuids.size()==1){
+        UUID objectUuid = uuids.get(0);
+            JSONObject commandJson = CommandComposerThreejs.createAppearanceChangeJson(prop, objectUuid);
             guiJson.put("command", commandJson);
         }
         return guiJson;

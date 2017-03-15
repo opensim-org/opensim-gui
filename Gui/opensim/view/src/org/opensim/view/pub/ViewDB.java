@@ -1206,9 +1206,20 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    public SingleModelVisuals getModelVisuals(Model aModel) {
       return mapModelsToVisuals.get(aModel);
    }
-   
    public ModelVisualizationJson getModelVisualizationJson(Model aModel) {
       return mapModelsToJsons.get(aModel);
+   }
+   
+   public void updateComponentDisplay(Model model, Component mc, AbstractProperty prop) {
+       if (isVtkGraphicsAvailable()){
+          getInstance().getModelVisuals(model).upateDisplay(mc);  
+          repaintAll();
+       }
+       if (websocketdb != null){
+           ModelVisualizationJson modelJson = getInstance().getModelVisualizationJson(model);
+           JSONObject msg = modelJson.createAppearanceMessage(mc, prop);
+           websocketdb.broadcastMessageJson(msg, null);
+       }
    }
 
    public void applyTimeToViews(double time) {
@@ -1572,7 +1583,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
 
     private double[] computeSceneBounds() {
      Iterator<SingleModelVisuals> iter = modelVisuals.iterator();
-     double[] bounds = new double[]{.1, -.1, .1, -.1, .1, -.1};
+     double[] bounds = new double[]{-.1, .1, -.1, .1, -.1, .1};
      while(iter.hasNext()){
          SingleModelVisuals nextModel = iter.next();
          bounds = boundsUnion(bounds, nextModel.getBoundsBodiesOnly());

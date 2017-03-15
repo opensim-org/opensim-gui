@@ -127,14 +127,22 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
             Sheet.Set appearanceSheet = createExpertSet();
             appearanceSheet.setDisplayName("Appearance");
             sheet.put(appearanceSheet);
+            // Visible boolean property
+            PropertySupport.Reflection nextNodePropeVis;
+            nextNodePropeVis = new PropertySupport.Reflection(this, Boolean.class, "getVisible", "setVisible");
+            nextNodePropeVis.setName("Visible");        
+            appearanceSheet.put(nextNodePropeVis);
+            // Opacity
+             PropertySupport.Reflection nextNodeProp5;
+            nextNodeProp5 = new PropertySupport.Reflection(this, double.class, "getOpacity", "setOpacity");
+            nextNodeProp5.setName("Opacity");        
+            appearanceSheet.put(nextNodeProp5);
+            // Color
             PropertySupport.Reflection nextNodeProp4;
             nextNodeProp4 = new PropertySupport.Reflection(this, Color.class, "getColor", "setColor");
             nextNodeProp4.setName("Color");        
             appearanceSheet.put(nextNodeProp4);
-            PropertySupport.Reflection nextNodeProp5;
-            nextNodeProp5 = new PropertySupport.Reflection(this, double.class, "getOpacity", "setOpacity");
-            nextNodeProp5.setName("Opacity");        
-            appearanceSheet.put(nextNodeProp5);
+            // Representation
             PropertySupport.Reflection nextNodePropRepresentation;
             SurfaceProperties surfApp = disp.get_SurfaceProperties();
             nextNodePropRepresentation = new PropertySupport.Reflection(surfApp, int.class, 
@@ -229,6 +237,52 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
                 @Override
                 public String getRedoPresentationName() {
                     return "Redo opacity change";
+                }
+                
+            };
+        ExplorerTopComponent.addUndoableEdit(auEdit);
+        
+    }
+    public Boolean getVisible() {
+        Geometry obj = Geometry.safeDownCast(getOpenSimObject());
+        return obj.get_Appearance().get_visible();
+    }
+
+    public void setVisible(Boolean newValue) {
+        Geometry obj = Geometry.safeDownCast(getOpenSimObject());
+        final AbstractProperty ap = obj.get_Appearance().getPropertyByName("visible");
+        final boolean oldVis = obj.get_Appearance().get_visible();
+        final boolean newVis = newValue;
+        final Model model = getModelForNode();
+        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(model, obj.get_Appearance(),
+        ap, this
+        );
+        pea.setValueBool(newVis, false);
+        ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
+        AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
+
+                @Override
+                public void undo() throws CannotUndoException {
+                    super.undo();
+                    pea.setValueBool(oldVis, false);
+                    ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
+                }
+
+                @Override
+                public String getUndoPresentationName() {
+                    return "Undo visibility change";
+                }
+
+                @Override
+                public void redo() throws CannotRedoException {
+                    super.redo();
+                    pea.setValueBool(newVis, false);
+                    ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
+                }
+
+                @Override
+                public String getRedoPresentationName() {
+                    return "Redo visibility change";
                 }
                 
             };
