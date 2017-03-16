@@ -32,14 +32,14 @@ import org.opensim.view.pub.ViewDB;
  */
 public class MarkersNode extends OpenSimObjectSetNode {
     private static ResourceBundle bundle = NbBundle.getBundle(MarkersNode.class);
-    private MarkersDisplayer markersDisplayer;
+    //private MarkersDisplayer markersDisplayer;
     private Model model;
     public MarkersNode(MarkerSet markerSet, Model m) {
         super(markerSet);
         setDisplayName(NbBundle.getMessage(MarkersNode.class, "CTL_Markers"));
         updateChildNodes(markerSet);
         model=m;
-        markersDisplayer=null;
+        //markersDisplayer=null;
         addDisplayOption(displayOption.Isolatable);
         addDisplayOption(displayOption.Showable);
     }
@@ -106,7 +106,7 @@ public class MarkersNode extends OpenSimObjectSetNode {
         retActions[actions.size()+2] = new MarkersLoadFromFileAction();
         return retActions;
     }
-
+    /*
     @Override
     public Sheet createSheet() {
         Sheet defaultSheet = super.createSheet();
@@ -126,7 +126,7 @@ public class MarkersNode extends OpenSimObjectSetNode {
         }
         return defaultSheet;
    }
-    
+   
     void setColorUI(final Color color, boolean allowUndo) {
         final Color oldColor = getColor();
         if (allowUndo){
@@ -192,4 +192,5 @@ public class MarkersNode extends OpenSimObjectSetNode {
             markersDisplayer = ViewDB.getInstance().getModelVisuals(model).getMarkersRep();
         return markersDisplayer.getScaleFactor();
     }
+    */
 } // class MarkersNode
