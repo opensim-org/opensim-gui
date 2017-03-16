@@ -50,6 +50,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         this.jsonArr = jsonArr;
         this.json_materials = jsonArrMaterials;
         this.visualizerScaleFactor = scale;
+        System.out.println("Looking for Geometry files in :"+GeometryFileLocator.geometryInstallationDirectory);
     }
     
     @Override
@@ -95,7 +96,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         //super.implementMeshFileGeometry(arg0); //To change body of generated methods, choose Tools | Templates.
         String meshFile = arg0.getMeshFile();
         String fullFileName = GeometryFileLocator.getInstance().getFullname("",meshFile, false);
-        //System.out.print("Processing file"+fullFileName);
+        System.out.println("Processing file"+fullFileName);
         if (fullFileName==null) return;
         //System.out.println("...Found");
         String filenameLower = fullFileName.toLowerCase();
@@ -227,11 +228,14 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
     public void implementEllipsoidGeometry(DecorativeEllipsoid arg0) {
         Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
         Vec3 radii = arg0.getRadii();
-        double sphereRadius = radii.get(0);
-        // Will make a Sphere with largest radius and scale down using the Transform
+        // This is a hack since threejs doesn't have a builtin Ellipsoid
+        // Should be transparent to users unless they use non unit scalefactors 
+        // on Ellipsoids
+        arg0.setScaleFactors(radii);
+        // Will make a Sphere with radius 1 and scale using the Transform
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "SphereGeometry");
-	dg_json.put("radius", sphereRadius*visualizerScaleFactor);
+	dg_json.put("radius", visualizerScaleFactor);
 	dg_json.put("widthSegments", 32);
 	dg_json.put("heightSegments", 16);
         if (quadrants.equals("")){

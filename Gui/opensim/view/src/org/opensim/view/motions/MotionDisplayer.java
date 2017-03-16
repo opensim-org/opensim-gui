@@ -341,49 +341,51 @@ public class MotionDisplayer implements SelectionListener {
     }
 
     private void AddMotionObjectsRep(final Model model) {
-        if (groundForcesRep != null)
-           ViewDB.getInstance().removeUserObjectFromModel(model, groundForcesRep.getVtkActor());
-        if (bodyForcesRep != null)
-           ViewDB.getInstance().removeUserObjectFromModel(model, bodyForcesRep.getVtkActor());
-        if (generalizedForcesRep != null)
-           ViewDB.getInstance().removeUserObjectFromModel(model, generalizedForcesRep.getVtkActor());
-        if (markersRep != null)
-           ViewDB.getInstance().removeUserObjectFromModel(model, markersRep.getVtkActor());
-        
-        groundForcesRep = new OpenSimvtkGlyphCloud(true);   groundForcesRep.setName("GRF");
-        bodyForcesRep = new OpenSimvtkGlyphCloud(true);     bodyForcesRep.setName("BodyForce");
-        generalizedForcesRep = new OpenSimvtkGlyphCloud(true); bodyForcesRep.setName("JointForce");
-        markersRep = new OpenSimvtkGlyphCloud(false);   bodyForcesRep.setName("Exp. Markers");
+        if (ViewDB.isVtkGraphicsAvailable()){
+            if (groundForcesRep != null)
+               ViewDB.getInstance().removeUserObjectFromModel(model, groundForcesRep.getVtkActor());
+            if (bodyForcesRep != null)
+               ViewDB.getInstance().removeUserObjectFromModel(model, bodyForcesRep.getVtkActor());
+            if (generalizedForcesRep != null)
+               ViewDB.getInstance().removeUserObjectFromModel(model, generalizedForcesRep.getVtkActor());
+            if (markersRep != null)
+               ViewDB.getInstance().removeUserObjectFromModel(model, markersRep.getVtkActor());
 
-        groundForcesRep.setShapeName(currentForceShape);
-        groundForcesRep.setColor(defaultForceColor);
-        groundForcesRep.setColorRange(defaultForceColor, defaultForceColor);
-        groundForcesRep.setOpacity(0.7);
-        groundForcesRep.setScaleFactor(currentScaleFactor);
-        groundForcesRep.orientByNormalAndScaleByVector();
+            groundForcesRep = new OpenSimvtkGlyphCloud(true);   groundForcesRep.setName("GRF");
+            bodyForcesRep = new OpenSimvtkGlyphCloud(true);     bodyForcesRep.setName("BodyForce");
+            generalizedForcesRep = new OpenSimvtkGlyphCloud(true); bodyForcesRep.setName("JointForce");
+            markersRep = new OpenSimvtkGlyphCloud(false);   bodyForcesRep.setName("Exp. Markers");
 
-        bodyForcesRep.setShapeName("arrow");
-        bodyForcesRep.setColor(new double[]{0., 0., 1.0});
-        bodyForcesRep.setOpacity(0.7);
-        bodyForcesRep.setScaleFactor(currentScaleFactor);
-        bodyForcesRep.orientByNormalAndScaleByVector();
+            groundForcesRep.setShapeName(currentForceShape);
+            groundForcesRep.setColor(defaultForceColor);
+            groundForcesRep.setColorRange(defaultForceColor, defaultForceColor);
+            groundForcesRep.setOpacity(0.7);
+            groundForcesRep.setScaleFactor(currentScaleFactor);
+            groundForcesRep.orientByNormalAndScaleByVector();
 
-        generalizedForcesRep.setShapeName("arrow");
-        generalizedForcesRep.setColor(new double[]{0., 1.0, 1.0});
-        generalizedForcesRep.setOpacity(0.7);
-        generalizedForcesRep.setScaleFactor(currentScaleFactor);
-        generalizedForcesRep.orientByNormalAndScaleByVector();
+            bodyForcesRep.setShapeName("arrow");
+            bodyForcesRep.setColor(new double[]{0., 0., 1.0});
+            bodyForcesRep.setOpacity(0.7);
+            bodyForcesRep.setScaleFactor(currentScaleFactor);
+            bodyForcesRep.orientByNormalAndScaleByVector();
 
-        markersRep.setShapeName("marker");
-        markersRep.setColor(defaultExperimentalMarkerColor); //Scale , scaleBy
-        markersRep.setColorRange(defaultExperimentalMarkerColor, defaultExperimentalMarkerColor);
-        markersRep.scaleByVectorComponents();
-        markersRep.setScaleFactor(ViewDB.getInstance().getExperimentalMarkerDisplayScale());
-        
-        ViewDB.getInstance().addUserObjectToModel(model, groundForcesRep.getVtkActor());
-        ViewDB.getInstance().addUserObjectToModel(model, bodyForcesRep.getVtkActor());
-        ViewDB.getInstance().addUserObjectToModel(model, generalizedForcesRep.getVtkActor());
-        ViewDB.getInstance().addUserObjectToModel(model, markersRep.getVtkActor());
+            generalizedForcesRep.setShapeName("arrow");
+            generalizedForcesRep.setColor(new double[]{0., 1.0, 1.0});
+            generalizedForcesRep.setOpacity(0.7);
+            generalizedForcesRep.setScaleFactor(currentScaleFactor);
+            generalizedForcesRep.orientByNormalAndScaleByVector();
+
+            markersRep.setShapeName("marker");
+            markersRep.setColor(defaultExperimentalMarkerColor); //Scale , scaleBy
+            markersRep.setColorRange(defaultExperimentalMarkerColor, defaultExperimentalMarkerColor);
+            markersRep.scaleByVectorComponents();
+            markersRep.setScaleFactor(ViewDB.getInstance().getExperimentalMarkerDisplayScale());
+
+            ViewDB.getInstance().addUserObjectToModel(model, groundForcesRep.getVtkActor());
+            ViewDB.getInstance().addUserObjectToModel(model, bodyForcesRep.getVtkActor());
+            ViewDB.getInstance().addUserObjectToModel(model, generalizedForcesRep.getVtkActor());
+            ViewDB.getInstance().addUserObjectToModel(model, markersRep.getVtkActor());
+        }
         ViewDB.getInstance().addSelectionListener(this);
     }
 
@@ -780,34 +782,42 @@ public class MotionDisplayer implements SelectionListener {
      * cleanupDisplay is called when the motion is mode non-current either explicitly by the user or by selecting
      * another motion for the same model and making it current */
     void cleanupDisplay() {
-        if (groundForcesRep!=null)
-            ViewDB.getInstance().removeUserObjectFromModel(model, groundForcesRep.getVtkActor());
-        if (bodyForcesRep!=null)
-            ViewDB.getInstance().removeUserObjectFromModel(model, bodyForcesRep.getVtkActor());
-        if (generalizedForcesRep!=null)
-            ViewDB.getInstance().removeUserObjectFromModel(model, generalizedForcesRep.getVtkActor());
-        if (markersRep!=null)
-            ViewDB.getInstance().removeUserObjectFromModel(model, markersRep.getVtkActor());
+        if (ViewDB.isVtkGraphicsAvailable()){
+            if (groundForcesRep != null) {
+                ViewDB.getInstance().removeUserObjectFromModel(model, groundForcesRep.getVtkActor());
+            }
+            if (bodyForcesRep != null) {
+                ViewDB.getInstance().removeUserObjectFromModel(model, bodyForcesRep.getVtkActor());
+            }
+            if (generalizedForcesRep != null) {
+                ViewDB.getInstance().removeUserObjectFromModel(model, generalizedForcesRep.getVtkActor());
+            }
+            if (markersRep != null) {
+                ViewDB.getInstance().removeUserObjectFromModel(model, markersRep.getVtkActor());
+            }
 
-        // Don't attempt to change muscle activation color if we're here because
-        // the model is closing... check this by checking model is still in models list
-        // This may help fix a crash that Sam got when he closed a model that had a MotionDisplayer
-        // associated with it.  It may be because setRenderMuscleActivations ends up updating the actuator
-        // geometry, and if the model is closing it may be that it was in the process of being deleted when
-        // those actuators were referred to...  So we avoid all that with this if statement.
-        if(OpenSimDB.getInstance().hasModel(model) && renderMuscleActivations) {
-           SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-           if(vis!=null) vis.setApplyMuscleColors(false);
+            // Don't attempt to change muscle activation color if we're here because
+            // the model is closing... check this by checking model is still in models list
+            // This may help fix a crash that Sam got when he closed a model that had a MotionDisplayer
+            // associated with it.  It may be because setRenderMuscleActivations ends up updating the actuator
+            // geometry, and if the model is closing it may be that it was in the process of being deleted when
+            // those actuators were referred to...  So we avoid all that with this if statement.
+            if (OpenSimDB.getInstance().hasModel(model) && renderMuscleActivations) {
+                SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
+                if (vis != null) {
+                    vis.setApplyMuscleColors(false);
+                }
+            }
+            // If trails are shown, hide them too
+            Enumeration<vtkActor> trailActors = objectTrails.elements();
+            while (trailActors.hasMoreElements()) {
+                ViewDB.getInstance().removeUserObjectFromModel(model, trailActors.nextElement());
+            }
+            for (MotionDisplayer assocMotion : associatedMotions) {
+                assocMotion.cleanupDisplay();
+            }
+            setMuscleColoringFunction(null);
         }
-        // If trails are shown, hide them too
-        Enumeration<vtkActor> trailActors = objectTrails.elements();
-        while (trailActors.hasMoreElements()){
-            ViewDB.getInstance().removeUserObjectFromModel(model, trailActors.nextElement());
-        }
-        for (MotionDisplayer assocMotion:associatedMotions){
-          assocMotion.cleanupDisplay();
-      }
-      setMuscleColoringFunction(null);
     }
 
    public Storage getSimmMotionData() {
