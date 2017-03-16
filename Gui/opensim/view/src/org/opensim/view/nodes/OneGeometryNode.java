@@ -167,18 +167,21 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
         newColor.getColorComponents(colorComp);
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
         final AbstractProperty ap = obj.get_Appearance().getPropertyByName("color");
+        final Model model = getModelForNode();
         final Vec3 oldValue = new Vec3(obj.get_Appearance().get_color());
         final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.get_Appearance(),
                 ap, this
                 );
         final Vec3 newColorVec3 = new Vec3(colorComp[0], colorComp[1], colorComp[2]);
         pea.setValueVec3(newColorVec3, false);
+        ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
         AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
 
                 @Override
                 public void undo() throws CannotUndoException {
                     super.undo();
                     pea.setValueVec3(oldValue, false);
+                    ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
                 }
 
                 @Override
@@ -190,6 +193,7 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
                 public void redo() throws CannotRedoException {
                     super.redo();
                     pea.setValueVec3(newColorVec3, false);
+                    ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
                 }
 
                 @Override
@@ -211,16 +215,19 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
         final AbstractProperty ap = obj.get_Appearance().getPropertyByName("opacity");
         final double oldOpacity = obj.get_Appearance().get_opacity();
         final double newOpacity = opacity;
+        final Model model = getModelForNode();
         final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.get_Appearance(),
         ap, this
         );
         pea.setValueDouble(newOpacity, false);
+        ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
         AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
 
                 @Override
                 public void undo() throws CannotUndoException {
                     super.undo();
                     pea.setValueDouble(oldOpacity, false);
+                    ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
                 }
 
                 @Override
@@ -232,6 +239,7 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
                 public void redo() throws CannotRedoException {
                     super.redo();
                     pea.setValueDouble(newOpacity, false);
+                    ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
                 }
 
                 @Override

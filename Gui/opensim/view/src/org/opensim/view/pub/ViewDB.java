@@ -802,12 +802,15 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     */
    //-----------------------------------------------------------------------------
    public static void setObjectOpacity( OpenSimObject object, double newOpacity ) {
+    if (object instanceof Geometry)
+          ((Geometry)object).setOpacity(newOpacity);
+    if (isVtkGraphicsAvailable()){
       vtkProp3D asm = ViewDB.getInstance().getVtkRepForObject(object);
       ViewDB.applyOpacity( newOpacity, asm );
       if( asm instanceof BodyDisplayer )
           ((BodyDisplayer) asm).setOpacity(newOpacity);
-      else if (object instanceof Geometry)
-          ((Geometry)object).setOpacity(newOpacity);
+     }
+    
    }
    
    //-----------------------------------------------------------------------------

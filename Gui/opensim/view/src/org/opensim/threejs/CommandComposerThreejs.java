@@ -27,9 +27,20 @@ public class CommandComposerThreejs {
         commandJson.put("objectUuid", uuid.toString());
         return commandJson;
     }
+    static public JSONObject createMaterialCommandJson(AbstractProperty ap, UUID uuid) {
+        JSONObject commandJson = new JSONObject();
+        if (ap.getName().equalsIgnoreCase("opacity")){
+            commandJson.put("type", "SetMaterialValueCommand");
+            commandJson.put("name", "SetMaterialOpacity");
+            commandJson.put("attributeName", "opacity");
+            commandJson.put("newValue", PropertyHelper.getValueDouble(ap));
+        }
+        commandJson.put("objectUuid", uuid.toString());
+        return commandJson;
+    }
 
     static public JSONObject createTranslateObjectCommandJson(Vec3 newValue, UUID objectuuid) {
-         JSONObject commandJson = new JSONObject();
+        JSONObject commandJson = new JSONObject();
         commandJson.put("type", "SetPositionCommand");
         commandJson.put("name", "Set Position");        // Avoid leading ~ of Vec3.toString
         JSONArray jsonVec3 = new JSONArray();
@@ -49,6 +60,27 @@ public class CommandComposerThreejs {
          if (prop.getName().equalsIgnoreCase("visible")){
              boolean newValue = PropertyHelper.getValueBool(prop);
              return createSetVisibleCommandJson(newValue, objectUuid);
+         }
+         if (prop.getName().equalsIgnoreCase("opacity")){
+             JSONObject commandJson = new JSONObject();
+             commandJson.put("type", "SetMaterialValueCommand");
+             commandJson.put("name", "SetMaterialOpacity");
+             commandJson.put("attributeName", "opacity");
+             commandJson.put("newValue", PropertyHelper.getValueDouble(prop));
+             commandJson.put("objectUuid", objectUuid.toString());
+             return commandJson;
+         }
+         if (prop.getName().equalsIgnoreCase("color")){
+             JSONObject commandJson = new JSONObject();
+             commandJson.put("type", "SetMaterialColorCommand");
+             commandJson.put("name", "SetMaterialColor");
+             commandJson.put("attributeName", "color");
+             Vec3 newColor = new Vec3();
+             for (int i=0; i<3; i++)
+                newColor.set(i, PropertyHelper.getValueVec3(prop, i));
+             commandJson.put("newValue", JSONUtilities.mapColorToRGBA(newColor));
+             commandJson.put("objectUuid", objectUuid.toString());
+             return commandJson;            
          }
          JSONObject commandJson = new JSONObject();
          return commandJson;
