@@ -55,41 +55,40 @@ public final class ObjectDisplayShowOnlyAction extends CallableSystemAction {
       // one exception is if the parent node is a model since hiding it in this case
       // makes it impossible to show selected node. This sitution is handled by overriding the behavior
       // in appropriate nodes.
-      for(int i=0; i < selected.length; i++){
-         if (!(selected[i] instanceof OpenSimObjectNode))
-                continue;
-         
-         OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[i];
-         Object  parent = objectNode.getParentNode();
-         if (parent instanceof OpenSimObjectNode){
-            OpenSimObjectNode parentNode = (OpenSimObjectNode) parent;
+      for (int i = 0; i < selected.length; i++) {
+           if (!(selected[i] instanceof OpenSimObjectNode)) {
+               continue;
+           }
+
+           OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[i];
+           Node parentNode = objectNode.getParentNode();
+           /*
             // For Actuators we want to go up to the ActuatorSet node rather than the group node
             // A cleaner solution would be to make nodes hold pointer to which node would
             // show only be relative to.
             while (!(parentNode instanceof OpenSimObjectSetNode) && 
-                    !(parentNode instanceof OneModelNode))
-                parentNode = (OpenSimObjectNode) (parentNode.getParentNode());
-            
-            if (parentNode instanceof OpenSimObjectSetNode){
-                OpenSimObjectSetNode setNode=(OpenSimObjectSetNode) parentNode;
-                Children children=setNode.getChildren();
-                Node[] childNodes = children.getNodes();
-                for(int j=0; j<childNodes.length; j++){
-                    OpenSimObjectNode n = (OpenSimObjectNode) childNodes[j];
-                    ViewDB.getInstance().toggleObjectsDisplay(n.getOpenSimObject(), false);                    
-                }
-            }
-            else
-                ViewDB.getInstance().toggleObjectsDisplay(parentNode.getOpenSimObject(), false);
-         }
-      }
-      for(int i=0; i < selected.length; i++){
-         if (!(selected[i] instanceof OpenSimObjectNode))
-                continue;
-         OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[i];
-         ViewDB.getInstance().toggleObjectDisplay(objectNode.getOpenSimObject(), true);
-      }
-      ViewDB.getInstance().repaintAll();
+            !(parentNode instanceof OneModelNode))
+            parentNode = (OpenSimObjectNode) (parentNode.getParentNode());
+            */
+           Children siblings = parentNode.getChildren();
+           Node[] siblingNodes = siblings.getNodes();
+           for (int j = 0; j < siblingNodes.length; j++) {
+               Node nextSibiling = siblingNodes[j];
+               if (nextSibiling == objectNode) {
+                   continue;
+               }
+               OpenSimObjectNode n = (OpenSimObjectNode) siblingNodes[j];
+               ViewDB.getInstance().toggleObjectsDisplay(n.getOpenSimObject(), false);
+           }
+       }
+       for (int i = 0; i < selected.length; i++) {
+           if (!(selected[i] instanceof OpenSimObjectNode)) {
+               continue;
+           }
+           OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[i];
+           ViewDB.getInstance().toggleObjectDisplay(objectNode.getOpenSimObject(), true);
+       }
+       ViewDB.getInstance().repaintAll();
    }
    
    public String getName() {
