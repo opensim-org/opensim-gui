@@ -27,22 +27,11 @@ public class CommandComposerThreejs {
         commandJson.put("objectUuid", uuid.toString());
         return commandJson;
     }
-    static public JSONObject createMaterialCommandJson(AbstractProperty ap, UUID uuid) {
-        JSONObject commandJson = new JSONObject();
-        if (ap.getName().equalsIgnoreCase("opacity")){
-            commandJson.put("type", "SetMaterialValueCommand");
-            commandJson.put("name", "SetMaterialOpacity");
-            commandJson.put("attributeName", "opacity");
-            commandJson.put("newValue", PropertyHelper.getValueDouble(ap));
-        }
-        commandJson.put("objectUuid", uuid.toString());
-        return commandJson;
-    }
 
     static public JSONObject createTranslateObjectCommandJson(Vec3 newValue, UUID objectuuid) {
         JSONObject commandJson = new JSONObject();
         commandJson.put("type", "SetPositionCommand");
-        commandJson.put("name", "Set Position");        // Avoid leading ~ of Vec3.toString
+        commandJson.put("name", "Set Position");        
         JSONArray jsonVec3 = new JSONArray();
         jsonVec3.add(newValue.get(0));
         jsonVec3.add(newValue.get(1));
@@ -57,9 +46,22 @@ public class CommandComposerThreejs {
 
     static JSONObject createAppearanceChangeJson(AbstractProperty prop, UUID objectUuid) {
         // Map prop.name to threejs command as follows
-         if (prop.getName().equalsIgnoreCase("visible")){
+         boolean visibilityChange = prop.getName().equalsIgnoreCase("visible");
+         if (visibilityChange){
              boolean newValue = PropertyHelper.getValueBool(prop);
              return createSetVisibleCommandJson(newValue, objectUuid);
+         }
+         boolean scaleChange = prop.getName().equalsIgnoreCase("scale_factors");
+         if (scaleChange){
+             JSONObject commandJson = new JSONObject();
+             commandJson.put("type", "SetScaleCommand");
+             commandJson.put("objectUuid", objectUuid.toString());
+             JSONArray jsonVec3 = new JSONArray();
+             for (int i=0; i<3; i++)
+                 jsonVec3.add(PropertyHelper.getValueVec3(prop, i));
+             commandJson.put("oldScale", jsonVec3);
+             commandJson.put("newScale", jsonVec3);
+             return commandJson;
          }
          boolean opacityChange = prop.getName().equalsIgnoreCase("opacity");
          boolean representationChange = prop.getName().equalsIgnoreCase("representation");
