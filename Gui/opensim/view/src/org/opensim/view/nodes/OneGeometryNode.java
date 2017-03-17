@@ -130,12 +130,14 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
             // Visible boolean property
             PropertySupport.Reflection nextNodePropeVis;
             nextNodePropeVis = new PropertySupport.Reflection(this, Boolean.class, "getVisible", "setVisible");
-            nextNodePropeVis.setName("Visible");        
+            nextNodePropeVis.setName("Visible");
+            nextNodePropeVis.setShortDescription(disp.getPropertyByName("visible").getComment());
             appearanceSheet.put(nextNodePropeVis);
             // Opacity
              PropertySupport.Reflection nextNodeProp5;
             nextNodeProp5 = new PropertySupport.Reflection(this, double.class, "getOpacity", "setOpacity");
             nextNodeProp5.setName("Opacity");        
+            nextNodeProp5.setShortDescription(disp.getPropertyByName("opacity").getComment());
             appearanceSheet.put(nextNodeProp5);
             // Color
             PropertySupport.Reflection nextNodeProp4;
@@ -145,10 +147,12 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
             // Representation
             PropertySupport.Reflection nextNodePropRepresentation;
             SurfaceProperties surfApp = disp.get_SurfaceProperties();
-            nextNodePropRepresentation = new PropertySupport.Reflection(surfApp, int.class, 
-                    "get_representation", "set_representation");
+            nextNodePropRepresentation = new PropertySupport.Reflection(this, 
+                    int.class, 
+                    "getDisplayPreference", "setDisplayPreference");
             //nextNodePropRepresentation.setPropertyEditorClass(DisplayPreferenceEditor.class);
-            nextNodePropRepresentation.setName("DisplayPreference");        
+            nextNodePropRepresentation.setName("DisplayPreference"); 
+            nextNodePropRepresentation.setShortDescription(surfApp.getPropertyByName("representation").getComment());
             appearanceSheet.put(nextNodePropRepresentation);
         }
         catch (NoSuchMethodException ex) {
@@ -305,20 +309,23 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
         //ViewDB.getInstance().repaintAll();
     }
 
-    public DecorativeGeometry.Representation getDisplayPreference() {
+    @Override
+    public int getDisplayPreference() {
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        return obj.getRepresentation();
+        return obj.getRepresentation().swigValue();
    }
 
-    public void setDisplayPreference(DecorativeGeometry.Representation pref) {
+    public void setDisplayPreference(int pref) {
         final Geometry obj = Geometry.safeDownCast(getOpenSimObject());
-        final AbstractProperty ap = obj.get_Appearance().getPropertyByName("representation");
+        final AbstractProperty ap = obj.get_Appearance().get_SurfaceProperties().getPropertyByName("representation");
+        final Model model = getModelForNode();
         final DecorativeGeometry.Representation oldRep = obj.get_Appearance().get_representation();
-        final int newRep = pref.swigValue();
-        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.get_Appearance(),
+        final int newRep = pref;
+        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), obj.get_Appearance().get_SurfaceProperties(),
         ap, this
         );
         pea.setValueInt(newRep, false);
+        ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
         updateObjectDisplay(obj);
                 AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
 
@@ -327,7 +334,8 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
                     super.undo();
                     pea.setValueInt(oldRep.swigValue(), false);
                     updateObjectDisplay(obj);
-                }
+                    ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
+                 }
 
                 @Override
                 public String getUndoPresentationName() {
@@ -338,6 +346,7 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
                 public void redo() throws CannotRedoException {
                     super.redo();
                     pea.setValueInt(newRep, false);
+                    ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
                     updateObjectDisplay(obj);
                 }
 

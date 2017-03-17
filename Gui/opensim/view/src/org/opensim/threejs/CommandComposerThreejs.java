@@ -61,13 +61,22 @@ public class CommandComposerThreejs {
              boolean newValue = PropertyHelper.getValueBool(prop);
              return createSetVisibleCommandJson(newValue, objectUuid);
          }
-         if (prop.getName().equalsIgnoreCase("opacity")){
+         boolean opacityChange = prop.getName().equalsIgnoreCase("opacity");
+         boolean representationChange = prop.getName().equalsIgnoreCase("representation");
+         if ( opacityChange || representationChange){
              JSONObject commandJson = new JSONObject();
              commandJson.put("type", "SetMaterialValueCommand");
-             commandJson.put("name", "SetMaterialOpacity");
-             commandJson.put("attributeName", "opacity");
-             commandJson.put("newValue", PropertyHelper.getValueDouble(prop));
              commandJson.put("objectUuid", objectUuid.toString());
+             if (opacityChange){
+                 commandJson.put("name", "SetMaterialOpacity");
+                 commandJson.put("attributeName", "opacity");
+                 commandJson.put("newValue", PropertyHelper.getValueDouble(prop));
+             }
+             else { // RepresentationChange
+                 commandJson.put("name", "SetMaterialShading");
+                 commandJson.put("attributeName", "wireframe");
+                 commandJson.put("newValue", PropertyHelper.getValueInt(prop)==2);
+             }
              return commandJson;
          }
          if (prop.getName().equalsIgnoreCase("color")){

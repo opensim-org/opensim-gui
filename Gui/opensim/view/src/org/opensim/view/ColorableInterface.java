@@ -21,8 +21,8 @@ public interface ColorableInterface {
 
     void setColor(Color newColor);
 
-    DecorativeGeometry.Representation getDisplayPreference();
+    int getDisplayPreference();
 
-    void setDisplayPreference(DecorativeGeometry.Representation newPref);
+    void setDisplayPreference(int newPref);
     
 }
