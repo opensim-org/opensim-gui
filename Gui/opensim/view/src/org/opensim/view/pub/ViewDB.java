@@ -304,8 +304,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             // (or new project) if so we'll open a window, otherwise we will
             // display the new Model in existing views
             if (ev.getOperation()==ModelEvent.Operation.Open){
-               Model model = ev.getModel();
-               processSavedSettings(model);
+               Model evModel = ev.getModel();
+               processSavedSettings(evModel);
                 try {
                  createNewViewWindowIfNeeded();
                }
@@ -313,19 +313,19 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                    setGraphicsAvailable(false);
                }
                if (isVtkGraphicsAvailable()){
-                    // Create visuals for the model
-                    SingleModelVisuals newModelVisual = (model instanceof ModelForExperimentalData)?
-                        new ExperimentalDataVisuals(model):
-                        new SingleModelVisuals(model);
+                    // Create visuals for the evModel
+                    SingleModelVisuals newModelVisual = (evModel instanceof ModelForExperimentalData)?
+                        new ExperimentalDataVisuals(evModel):
+                        new SingleModelVisuals(evModel);
                     // add to map from models to modelVisuals so that it's accesisble
                     // thru tree picks
-                    mapModelsToVisuals.put(model, newModelVisual);
+                    mapModelsToVisuals.put(evModel, newModelVisual);
                     // add to list of models
                     getModelVisuals().add(newModelVisual); //Too late??
-                    modelOpacities.put(model, 1.0);
+                    modelOpacities.put(evModel, 1.0);
                     addVisObjectToAllViews();
-                    // Compute placement so that model does not intersect others
-                    vtkMatrix4x4 m= (model instanceof ModelForExperimentalData)?
+                    // Compute placement so that evModel does not intersect others
+                    vtkMatrix4x4 m= (evModel instanceof ModelForExperimentalData)?
                            new vtkMatrix4x4():
                            getInitialTransform(newModelVisual);
                     newModelVisual.getModelDisplayAssembly().SetUserMatrix(m);
@@ -334,9 +334,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                }
                if (websocketdb!=null){
                    // create Json for model
-                   ModelVisualizationJson vizJson = new ModelVisualizationJson(jsondb, model);
-                   getInstance().addModelVisuals(model, vizJson);
+                   ModelVisualizationJson vizJson = new ModelVisualizationJson(jsondb, evModel);
+                   getInstance().addModelVisuals(evModel, vizJson);
                    exportModelJsonToVisualizer(vizJson, null);
+                   mapModelsToJsons.put(evModel, vizJson);
                }
                else {
                    // Same as open visualizer window 
@@ -1081,8 +1082,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     * To account for user prefs a property is made
     * just put the model somewhere so that it does not intersect other models.
     *
-    * newModelVisual has not been added to the list yet.
-    *
     * @todo should we allow for rotations as well?
     *
     */
@@ -1271,10 +1270,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         lockDrawingSurfaces(false);
       }
       if (websocketdb != null){
-        // If for some reason currentJson was not set, set it here before sending messages
-        if (currentJson==null) 
-            setCurrentJson();
-        websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(), null);
+        ModelVisualizationJson cJson = mapModelsToJsons.get(aModel);
+        websocketdb.broadcastMessageJson(cJson.createFrameMessageJson(), null);
       }
    }
 
@@ -1353,7 +1350,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
          }});
        */
     if (websocketdb != null){
-        // Assume current model for now
+       
        ModelVisualizationJson vizJson = getInstance().mapModelsToJsons.get(getCurrentModel());
        websocketdb.broadcastMessageJson(
                vizJson.createToggleObjectVisibilityCommand(openSimObject, visible), null);
