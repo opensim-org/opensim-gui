@@ -113,8 +113,7 @@ public class PropertyEditorAdaptor {
     public void handlePropertyChangeCommon() {
         if (Geometry.safeDownCast(obj)!= null){
             Component mc = Component.safeDownCast(obj);
-            ViewDB.getInstance().getModelVisuals(model).upateDisplay(mc);  
-            ViewDB.repaintAll();
+            ViewDB.getInstance().updateComponentDisplay(model, mc, prop);
         }
         else 
             ViewDB.getInstance().updateModelDisplay(model);
@@ -165,7 +164,7 @@ public class PropertyEditorAdaptor {
         setValueBool(v, true);
     }
 
-    private void setValueBool(boolean v, boolean supportUndo) {
+    public void setValueBool(boolean v, boolean supportUndo) {
         boolean oldValue = getValueBool();
         handlePropertyChange(oldValue, v, supportUndo);
     }

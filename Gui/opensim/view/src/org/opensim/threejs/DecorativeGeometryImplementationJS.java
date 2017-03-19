@@ -437,9 +437,11 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
     private void addMaterialJsonForGeometry(UUID uuid_mat, DecorativeGeometry dg, boolean isSurface) {
         Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
         mat_json.put("uuid", uuid_mat.toString());
+        String colorString = JSONUtilities.mapColorToRGBA(dg.getColor());
         if (isSurface){
             mat_json.put("type", "MeshPhongMaterial");
             mat_json.put("shininess", 30);
+            mat_json.put("transparent", true);
             mat_json.put("emissive", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
             mat_json.put("specular", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
             mat_json.put("side", 2);
@@ -447,7 +449,6 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         else {
             mat_json.put("type", "LineBasicMaterial");           
         }
-        String colorString = JSONUtilities.mapColorToRGBA(dg.getColor());
         mat_json.put("color", colorString);
 
         double opacity = dg.getOpacity();

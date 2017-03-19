@@ -37,6 +37,7 @@ import org.opensim.modeling.Joint;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.SurfaceProperties;
+import org.opensim.view.nodes.OneGeometryNode;
 import org.opensim.view.nodes.OneModelNode;
 import org.opensim.view.nodes.OneWrapObjectNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
@@ -69,8 +70,8 @@ public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemActi
       Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
       for( int i=0; i < selected.length; i++ ) {
          if( selected[i] instanceof OneModelNode ) {
-            if( ViewDB.getInstance().getDisplayStatus(((OneModelNode)selected[i]).getModel()) != show )
-               return true;
+            //if( ViewDB.getInstance().getDisplayStatus(((OneModelNode)selected[i]).getModel()) != show )
+               return true; // Too muuch communication with visualizer to decide if shown or not
          } else if ( selected[i] instanceof OpenSimObjectNode ) {
             OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[i];
             if (objectNode.getChildren().getNodesCount()>0) // TODO: actually check children
@@ -88,7 +89,10 @@ public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemActi
       for(int i=0; i < selected.length; i++){
          if(selected[i] instanceof OneModelNode) {
             ViewDB.getInstance().toggleModelDisplay(((OneModelNode)selected[i]).getModel(), show);
-         } else if(selected[i] instanceof OpenSimObjectNode) {
+         } else if (selected[i] instanceof OneGeometryNode){
+             ((OneGeometryNode)selected[i]).setVisible(show);
+         }
+         else if(selected[i] instanceof OpenSimObjectNode) {
             this.applyOperationToNode( (OpenSimObjectNode)selected[i] );
          }
       }

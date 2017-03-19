@@ -34,6 +34,8 @@ package org.opensim.view;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.Vec3;
+import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.pub.ViewDB;
 import vtk.vtkMatrix4x4;
 
@@ -46,6 +48,8 @@ public class ModelDisplayOffsetJPanel extends javax.swing.JPanel
                                       implements ChangeListener{
     
     private SingleModelVisuals rep;
+    private ModelVisualizationJson modelJson;
+    
     private Model dModel;
     private String modelName;
     private vtkMatrix4x4 offset;
@@ -55,8 +59,8 @@ public class ModelDisplayOffsetJPanel extends javax.swing.JPanel
     /** Creates new form ModelDisplayOffsetJPanel */
     public ModelDisplayOffsetJPanel(Model abstractModel) {
         rep = ViewDB.getInstance().getModelVisuals(abstractModel);
+        modelJson = ViewDB.getInstance().getModelVisualizationJson(abstractModel);
         offset= ViewDB.getInstance().getModelVisualsTransform(rep);
-        
         // Save offsets and opacity incase we need to restore them
         saveOffset.DeepCopy(offset);
         saveOpacity = ViewDB.getInstance().getNominalModelOpacity(abstractModel);
@@ -161,15 +165,20 @@ public class ModelDisplayOffsetJPanel extends javax.swing.JPanel
      * Callback when slide is moved 
      **/
     public void stateChanged(ChangeEvent e) {
+        Vec3 offsetVec3 = new Vec3(0.);
         if (e.getSource().equals(textSliderJPanel1.getJXSlider())){
             offset.SetElement(0, 3, textSliderJPanel1.getTheValue());
+            offsetVec3.set(0, textSliderJPanel1.getTheValue()*ModelVisualizationJson.getVisScaleFactor());
         } else if (e.getSource().equals(textSliderJPanel2.getJXSlider())){
             offset.SetElement(1, 3, textSliderJPanel2.getTheValue());
+            offsetVec3.set(1, textSliderJPanel2.getTheValue()*ModelVisualizationJson.getVisScaleFactor());
         } else if (e.getSource().equals(textSliderJPanel3.getJXSlider())){
             offset.SetElement(2, 3, textSliderJPanel3.getTheValue());
-        }
+             offsetVec3.set(2, textSliderJPanel3.getTheValue()*ModelVisualizationJson.getVisScaleFactor());
+       }
         // Apply transform on screen
         ViewDB.getInstance().setModelVisualsTransform(rep, offset);
+        ViewDB.getInstance().setModelOffset(modelJson, offsetVec3);
         ViewDB.getInstance().repaintAll();
     }
     /** Make up bounds for displacement. Initially it's 3 times the size of the bounding 
