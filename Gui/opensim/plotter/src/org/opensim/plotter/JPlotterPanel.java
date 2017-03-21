@@ -2207,6 +2207,9 @@ public class JPlotterPanel extends javax.swing.JPanel
         System.out.println("================================");
           
    }
+   // overrideActivation is now unused in the latest refactoring
+   // newActivation is obtained from dialog so defaults to 1.0
+   // States unspecified in motion are kept at current state.
    private Storage buildStatesStorageFromMotion(Storage motionsStorage, boolean overrideActivation, double newActivation) {
       // Make a new Storage with correct size/labels
       Storage outputStorage = new Storage();
@@ -2214,38 +2217,45 @@ public class JPlotterPanel extends javax.swing.JPanel
       ArrayStr stateNames = currentModel.getStateVariableNames();
       ArrayStr stateNamesWithTime = new ArrayStr(stateNames);
       stateNamesWithTime.insert(0, "time");
-      outputStorage.setColumnLabels(stateNames);
+      outputStorage.setColumnLabels(stateNamesWithTime);
       // Cycle thru stateNames if name exists in motionsStorage then use it,
-      // if activation orride with passed in value if desired
-      ArrayStr motionStateNames = motionsStorage.getColumnLabels();
+      // if activation then override with passed in value if desired
+      //ArrayStr motionStateNames = motionsStorage.getColumnLabels();
       ArrayList<Integer> mapColumns= new ArrayList<Integer>(stateNames.getSize());
       ArrayList<Boolean> activationColumns= new ArrayList<Boolean>(stateNames.getSize());
       int numRows = motionsStorage.getSize();
       for(int i=0; i<numStates;i++){
          String currentStateName=stateNames.getitem(i);
-         int indexInMotionFile = motionStateNames.findIndex(currentStateName)-1; // account 4 time
+         int indexInMotionFile = motionsStorage.getStateIndex(currentStateName); // account 4 time
+         // mapColumns has entry per state that's either index or -2
+         if (indexInMotionFile != -1)
+             System.out.println("currentStateName:"+currentStateName+", index:"+String.valueOf(indexInMotionFile));
          mapColumns.add(i, indexInMotionFile);
-         activationColumns.add(i, currentStateName.endsWith(".activation"));
+         activationColumns.add(i, currentStateName.endsWith("/activation"));
       }
-      double[] buffer = new double[numStates];
+      org.opensim.modeling.Vector buffer = new org.opensim.modeling.Vector();
+      buffer.resize(numStates);
+      org.opensim.modeling.Vector currentStateAsVector = openSimContext.getCurrentStateRef().getY();
+      
       for(int i=0; i<numRows; i++){
+         boolean debug = false;//(i==0);
          StateVector statesFromMotion = motionsStorage.getStateVector(i);
-         int numColumnsInMotionFile = statesFromMotion.getSize();
+         //int numColumnsInMotionFile = statesFromMotion.getSize();
          ArrayDouble dataFromMotion=statesFromMotion.getData();
          StateVector outputStateVector = new StateVector(numStates);
          for(int j=0; j<numStates;j++){
-            if (mapColumns.get(j)!=-2){
-               buffer[j]=dataFromMotion.getitem(mapColumns.get(j));
+            buffer.set(j, currentStateAsVector.get(j));
+            if (mapColumns.get(j)!=-1){
+               if (debug) System.out.println("Setting state:"+stateNames.getitem(j));
+               buffer.set(j, dataFromMotion.getitem(mapColumns.get(j)));
             }
-            else if (activationColumns.get(j))
-               buffer[j]=newActivation;
-            else
-               buffer[j]=1.0;
-            if (activationColumns.get(j) && overrideActivation)
-               buffer[j]=newActivation;
+            else if (activationColumns.get(j)){
+               if (debug) System.out.println("Setting activation:"+stateNames.getitem(j)+" to "+newActivation);
+               buffer.set(j, newActivation);
+            }
          }
          //FIX40 openSimContext.computeConstrainedCoordinates(buffer);
-         //FIX40 outputStateVector.setStates(statesFromMotion.getTime(), numStates, buffer);
+         outputStateVector.setStates(statesFromMotion.getTime(), buffer);
          outputStorage.append(outputStateVector);
       }
       //outputStorage.print("motion2State.sto");
