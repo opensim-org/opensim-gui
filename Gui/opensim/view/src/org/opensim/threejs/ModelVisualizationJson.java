@@ -241,7 +241,7 @@ public class ModelVisualizationJson extends JSONObject {
             PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(bodyId);
             Transform xform = bodyFrame.getTransformInGround(state);
             // Get uuid for first Mesh in body
-            oneBodyXform_json.put("name", mapBodyIndicesToJson.get(bodyId).get("name"));
+            oneBodyXform_json.put("uuid", mapBodyIndicesToJson.get(bodyId).get("uuid"));
             oneBodyXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1., 1., 1.), visScaleFactor));
             bodyTransforms_json.add(oneBodyXform_json);
         }

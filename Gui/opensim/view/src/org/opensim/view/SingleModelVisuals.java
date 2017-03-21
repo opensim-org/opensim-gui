@@ -80,7 +80,7 @@ public class SingleModelVisuals implements ModelVisualsVtk {
     private double opacity;
     private double[] bounds = new double[]{-.1, .1, -.1, .1, -.1, .1};
     private boolean visible;
-
+    public boolean debug = false;
     private double[] inactiveMuscleColor = new double[]{0.0, 0.0, 1.0};
     //private double[] forceAlongPathColor = new double[]{0.0, 1.0, 0.0};
     private double[] defaultMuscleColor = new double[]{0.8, 0.1, 0.1};
@@ -130,7 +130,8 @@ public class SingleModelVisuals implements ModelVisualsVtk {
     }
 
     public void addGeometryForComponent(Component mc, Model model) {
-        System.out.println("Process object:"+mc.getConcreteClassName()+":"+mc.getName()+" "+mc.isObjectUpToDateWithProperties());
+        if (debug) 
+            System.out.println("Process object:"+mc.getConcreteClassName()+":"+mc.getName()+" "+mc.isObjectUpToDateWithProperties());
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
         mc.generateDecorations(true, mdh, model.getWorkingState(), adg);
         dgi.setCurrentComponent(mc);
