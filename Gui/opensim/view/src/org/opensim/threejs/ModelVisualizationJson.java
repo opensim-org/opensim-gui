@@ -5,7 +5,6 @@
  */
 package org.opensim.threejs;
 
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -23,6 +22,7 @@ import org.opensim.modeling.Component;
 import org.opensim.modeling.ComponentIterator;
 import org.opensim.modeling.ComponentsList;
 import org.opensim.modeling.DecorativeGeometry;
+import org.opensim.modeling.FrameGeometry;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
@@ -87,6 +87,7 @@ public class ModelVisualizationJson extends JSONObject {
         model_ground_json.put("type", "Group");
         model_ground_json.put("opensimtype", "Frame");
         model_ground_json.put("name", model.getGround().getAbsolutePathName());
+        model_ground_json.put("userData", "NonEditable");
         model_ground_json.put("model_ground", true);
         json_model_children.add(model_ground_json);
         addComponentToUUIDMap(model.getGround(), groundUuid);
@@ -205,6 +206,7 @@ public class ModelVisualizationJson extends JSONObject {
         obj_json.put("material", uuid_mat.toString());
         obj_json.put("matrix", JSONUtilities.createMatrixFromTransform(dg.getTransform(), dg.getScaleFactors(), visScaleFactor));
         obj_json.put("castShadow", false);
+        obj_json.put("userData", "NonEditable");
         mobody_objects.add(obj_json);
         return mesh_uuid;
     }   
@@ -214,6 +216,7 @@ public class ModelVisualizationJson extends JSONObject {
         bdyJson.put("uuid", uuid.toString());
         bdyJson.put("type", "Group");
         bdyJson.put("opensimtype", "Frame");
+        bdyJson.put("userData", "NonEditable");
         bdyJson.put("name", body.getAbsolutePathName());
         PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(body.getMobilizedBodyIndex());
         Transform bodyXform = bodyFrame.getTransformInGround(state);
