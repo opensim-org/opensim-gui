@@ -221,8 +221,8 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "SphereGeometry");
-	dg_json.put("radius", .00005*visualizerScaleFactor);
-	//dg_json.put("size", arg0.getAxisLength()*visualizerScaleFactor);
+        dg_json.put("radius", .00005*visualizerScaleFactor);
+        //dg_json.put("size", arg0.getAxisLength()*visualizerScaleFactor);
         jsonArr.add(dg_json);    
         createMaterialJson(arg0, false);
     }
@@ -448,6 +448,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
             mat_json.put("emissive", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
             mat_json.put("specular", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
             mat_json.put("side", 2);
+            mat_json.put("wireframe", dg.getRepresentation() == DecorativeGeometry.Representation.DrawWireframe);     
         }
         else {
             mat_json.put("type", "LineBasicMaterial");           
