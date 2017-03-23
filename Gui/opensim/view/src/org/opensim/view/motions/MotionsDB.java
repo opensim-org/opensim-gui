@@ -187,7 +187,7 @@ public class MotionsDB extends Observable // Observed by other entities in motio
      * At least one genccord or marker (_tx?) in motion file/Storage
      */
    boolean motionAssociationPossible(Model modelForMotion, Storage newMotion) {
-      /*
+      
       ArrayStr coordinateNames = new ArrayStr();
       modelForMotion.getCoordinateSet().getNames(coordinateNames);
       int numCoordinates = coordinateNames.getSize();
@@ -204,8 +204,8 @@ public class MotionsDB extends Observable // Observed by other entities in motio
                  (newMotion.getStateIndex(markerNames.getitem(i)+"_TX")!=-1))
             numUsedColumns++;
       }
-      */
-      return (true);  // At least one column makes sense
+      
+      return (numUsedColumns>=1);  // At least one column makes sense
    }
 
    public void addMotion(Model model, Storage motion, Storage parentMotion) {
