@@ -12,7 +12,7 @@ public class BodyScaleSet extends SetBodyScales {
   private transient long swigCPtr;
 
   public BodyScaleSet(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.BodyScaleSet_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.BodyScaleSet_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class BodyScaleSet extends SetBodyScales {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_BodyScaleSet(swigCPtr);
+        opensimSimulationJNI.delete_BodyScaleSet(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,33 +36,33 @@ public class BodyScaleSet extends SetBodyScales {
   }
 
   public static BodyScaleSet safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.BodyScaleSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.BodyScaleSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new BodyScaleSet(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.BodyScaleSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.BodyScaleSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.BodyScaleSet_getClassName();
+    return opensimSimulationJNI.BodyScaleSet_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.BodyScaleSet_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.BodyScaleSet_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new BodyScaleSet(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.BodyScaleSet_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.BodyScaleSet_getConcreteClassName(swigCPtr, this);
   }
 
   public BodyScaleSet() {
-    this(opensimModelSimulationJNI.new_BodyScaleSet__SWIG_0(), true);
+    this(opensimSimulationJNI.new_BodyScaleSet__SWIG_0(), true);
   }
 
   public BodyScaleSet(BodyScaleSet aBodyScaleSet) {
-    this(opensimModelSimulationJNI.new_BodyScaleSet__SWIG_1(BodyScaleSet.getCPtr(aBodyScaleSet), aBodyScaleSet), true);
+    this(opensimSimulationJNI.new_BodyScaleSet__SWIG_1(BodyScaleSet.getCPtr(aBodyScaleSet), aBodyScaleSet), true);
   }
 
 }

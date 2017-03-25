@@ -12,7 +12,7 @@ public class MarkerData extends OpenSimObject {
   private transient long swigCPtr;
 
   public MarkerData(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.MarkerData_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.MarkerData_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class MarkerData extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_MarkerData(swigCPtr);
+        opensimCommonJNI.delete_MarkerData(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -40,105 +40,105 @@ public class MarkerData extends OpenSimObject {
   }
 
   public static MarkerData safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelCommonJNI.MarkerData_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimCommonJNI.MarkerData_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new MarkerData(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelCommonJNI.MarkerData_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimCommonJNI.MarkerData_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelCommonJNI.MarkerData_getClassName();
+    return opensimCommonJNI.MarkerData_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelCommonJNI.MarkerData_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.MarkerData_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new MarkerData(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelCommonJNI.MarkerData_getConcreteClassName(swigCPtr, this);
+    return opensimCommonJNI.MarkerData_getConcreteClassName(swigCPtr, this);
   }
 
   public MarkerData() {
-    this(opensimModelCommonJNI.new_MarkerData__SWIG_0(), true);
+    this(opensimCommonJNI.new_MarkerData__SWIG_0(), true);
   }
 
   public MarkerData(String aFileName) throws java.io.IOException {
-    this(opensimModelCommonJNI.new_MarkerData__SWIG_1(aFileName), true);
+    this(opensimCommonJNI.new_MarkerData__SWIG_1(aFileName), true);
   }
 
   public void findFrameRange(double aStartTime, double aEndTime, SWIGTYPE_p_int rStartFrame, SWIGTYPE_p_int rEndFrame) {
-    opensimModelCommonJNI.MarkerData_findFrameRange(swigCPtr, this, aStartTime, aEndTime, SWIGTYPE_p_int.getCPtr(rStartFrame), SWIGTYPE_p_int.getCPtr(rEndFrame));
+    opensimCommonJNI.MarkerData_findFrameRange(swigCPtr, this, aStartTime, aEndTime, SWIGTYPE_p_int.getCPtr(rStartFrame), SWIGTYPE_p_int.getCPtr(rEndFrame));
   }
 
   public void averageFrames(double aThreshold, double aStartTime, double aEndTime) {
-    opensimModelCommonJNI.MarkerData_averageFrames__SWIG_0(swigCPtr, this, aThreshold, aStartTime, aEndTime);
+    opensimCommonJNI.MarkerData_averageFrames__SWIG_0(swigCPtr, this, aThreshold, aStartTime, aEndTime);
   }
 
   public void averageFrames(double aThreshold, double aStartTime) {
-    opensimModelCommonJNI.MarkerData_averageFrames__SWIG_1(swigCPtr, this, aThreshold, aStartTime);
+    opensimCommonJNI.MarkerData_averageFrames__SWIG_1(swigCPtr, this, aThreshold, aStartTime);
   }
 
   public void averageFrames(double aThreshold) {
-    opensimModelCommonJNI.MarkerData_averageFrames__SWIG_2(swigCPtr, this, aThreshold);
+    opensimCommonJNI.MarkerData_averageFrames__SWIG_2(swigCPtr, this, aThreshold);
   }
 
   public void averageFrames() {
-    opensimModelCommonJNI.MarkerData_averageFrames__SWIG_3(swigCPtr, this);
+    opensimCommonJNI.MarkerData_averageFrames__SWIG_3(swigCPtr, this);
   }
 
   public String getFileName() {
-    return opensimModelCommonJNI.MarkerData_getFileName(swigCPtr, this);
+    return opensimCommonJNI.MarkerData_getFileName(swigCPtr, this);
   }
 
   public void makeRdStorage(Storage rStorage) {
-    opensimModelCommonJNI.MarkerData_makeRdStorage(swigCPtr, this, Storage.getCPtr(rStorage), rStorage);
+    opensimCommonJNI.MarkerData_makeRdStorage(swigCPtr, this, Storage.getCPtr(rStorage), rStorage);
   }
 
   public MarkerFrame getFrame(int aIndex) {
-    return new MarkerFrame(opensimModelCommonJNI.MarkerData_getFrame(swigCPtr, this, aIndex), false);
+    return new MarkerFrame(opensimCommonJNI.MarkerData_getFrame(swigCPtr, this, aIndex), false);
   }
 
   public int getMarkerIndex(String aName) {
-    return opensimModelCommonJNI.MarkerData_getMarkerIndex(swigCPtr, this, aName);
+    return opensimCommonJNI.MarkerData_getMarkerIndex(swigCPtr, this, aName);
   }
 
   public Units getUnits() {
-    return new Units(opensimModelCommonJNI.MarkerData_getUnits(swigCPtr, this), false);
+    return new Units(opensimCommonJNI.MarkerData_getUnits(swigCPtr, this), false);
   }
 
   public void convertToUnits(Units aUnits) {
-    opensimModelCommonJNI.MarkerData_convertToUnits(swigCPtr, this, Units.getCPtr(aUnits), aUnits);
+    opensimCommonJNI.MarkerData_convertToUnits(swigCPtr, this, Units.getCPtr(aUnits), aUnits);
   }
 
   public ArrayStr getMarkerNames() {
-    return new ArrayStr(opensimModelCommonJNI.MarkerData_getMarkerNames(swigCPtr, this), false);
+    return new ArrayStr(opensimCommonJNI.MarkerData_getMarkerNames(swigCPtr, this), false);
   }
 
   public int getNumMarkers() {
-    return opensimModelCommonJNI.MarkerData_getNumMarkers(swigCPtr, this);
+    return opensimCommonJNI.MarkerData_getNumMarkers(swigCPtr, this);
   }
 
   public int getNumFrames() {
-    return opensimModelCommonJNI.MarkerData_getNumFrames(swigCPtr, this);
+    return opensimCommonJNI.MarkerData_getNumFrames(swigCPtr, this);
   }
 
   public double getStartFrameTime() {
-    return opensimModelCommonJNI.MarkerData_getStartFrameTime(swigCPtr, this);
+    return opensimCommonJNI.MarkerData_getStartFrameTime(swigCPtr, this);
   }
 
   public double getLastFrameTime() {
-    return opensimModelCommonJNI.MarkerData_getLastFrameTime(swigCPtr, this);
+    return opensimCommonJNI.MarkerData_getLastFrameTime(swigCPtr, this);
   }
 
   public double getDataRate() {
-    return opensimModelCommonJNI.MarkerData_getDataRate(swigCPtr, this);
+    return opensimCommonJNI.MarkerData_getDataRate(swigCPtr, this);
   }
 
   public double getCameraRate() {
-    return opensimModelCommonJNI.MarkerData_getCameraRate(swigCPtr, this);
+    return opensimCommonJNI.MarkerData_getCameraRate(swigCPtr, this);
   }
 
 }

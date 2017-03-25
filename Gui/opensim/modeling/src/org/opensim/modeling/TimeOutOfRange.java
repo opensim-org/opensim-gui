@@ -12,7 +12,7 @@ public class TimeOutOfRange extends OpenSimException {
   private transient long swigCPtr;
 
   public TimeOutOfRange(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.TimeOutOfRange_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.TimeOutOfRange_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class TimeOutOfRange extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_TimeOutOfRange(swigCPtr);
+        opensimCommonJNI.delete_TimeOutOfRange(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class TimeOutOfRange extends OpenSimException {
   }
 
   public TimeOutOfRange(String file, long line, String func, double time, double min, double max) {
-    this(opensimModelCommonJNI.new_TimeOutOfRange(file, line, func, time, min, max), true);
+    this(opensimCommonJNI.new_TimeOutOfRange(file, line, func, time, min, max), true);
   }
 
 }

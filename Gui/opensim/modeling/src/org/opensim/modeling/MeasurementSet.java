@@ -12,7 +12,7 @@ public class MeasurementSet extends SetMeasurements {
   private transient long swigCPtr;
 
   public MeasurementSet(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.MeasurementSet_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.MeasurementSet_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class MeasurementSet extends SetMeasurements {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_MeasurementSet(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_MeasurementSet(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,33 +36,33 @@ public class MeasurementSet extends SetMeasurements {
   }
 
   public static MeasurementSet safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.MeasurementSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MeasurementSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new MeasurementSet(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.MeasurementSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.MeasurementSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.MeasurementSet_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.MeasurementSet_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.MeasurementSet_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MeasurementSet_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new MeasurementSet(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.MeasurementSet_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.MeasurementSet_getConcreteClassName(swigCPtr, this);
   }
 
   public MeasurementSet() {
-    this(opensimModelJNI.new_MeasurementSet__SWIG_0(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_MeasurementSet__SWIG_0(), true);
   }
 
   public MeasurementSet(MeasurementSet aSimmMeasurementSet) {
-    this(opensimModelJNI.new_MeasurementSet__SWIG_1(MeasurementSet.getCPtr(aSimmMeasurementSet), aSimmMeasurementSet), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_MeasurementSet__SWIG_1(MeasurementSet.getCPtr(aSimmMeasurementSet), aSimmMeasurementSet), true);
   }
 
 }

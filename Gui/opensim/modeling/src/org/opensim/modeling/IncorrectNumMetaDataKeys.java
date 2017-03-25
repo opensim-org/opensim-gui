@@ -12,7 +12,7 @@ public class IncorrectNumMetaDataKeys extends IOError {
   private transient long swigCPtr;
 
   public IncorrectNumMetaDataKeys(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.IncorrectNumMetaDataKeys_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.IncorrectNumMetaDataKeys_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class IncorrectNumMetaDataKeys extends IOError {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_IncorrectNumMetaDataKeys(swigCPtr);
+        opensimCommonJNI.delete_IncorrectNumMetaDataKeys(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class IncorrectNumMetaDataKeys extends IOError {
   }
 
   public IncorrectNumMetaDataKeys(String file, long line, String func, String filename, long expected, long received) {
-    this(opensimModelCommonJNI.new_IncorrectNumMetaDataKeys(file, line, func, filename, expected, received), true);
+    this(opensimCommonJNI.new_IncorrectNumMetaDataKeys(file, line, func, filename, expected, received), true);
   }
 
 }

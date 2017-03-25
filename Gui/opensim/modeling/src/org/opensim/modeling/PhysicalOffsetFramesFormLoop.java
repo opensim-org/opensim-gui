@@ -12,7 +12,7 @@ public class PhysicalOffsetFramesFormLoop extends OpenSimException {
   private transient long swigCPtr;
 
   public PhysicalOffsetFramesFormLoop(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.PhysicalOffsetFramesFormLoop_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.PhysicalOffsetFramesFormLoop_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class PhysicalOffsetFramesFormLoop extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_PhysicalOffsetFramesFormLoop(swigCPtr);
+        opensimSimulationJNI.delete_PhysicalOffsetFramesFormLoop(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class PhysicalOffsetFramesFormLoop extends OpenSimException {
   }
 
   public PhysicalOffsetFramesFormLoop(String file, long line, String func, OpenSimObject obj, String frameName) {
-    this(opensimModelSimulationJNI.new_PhysicalOffsetFramesFormLoop(file, line, func, OpenSimObject.getCPtr(obj), obj, frameName), true);
+    this(opensimSimulationJNI.new_PhysicalOffsetFramesFormLoop(file, line, func, OpenSimObject.getCPtr(obj), obj, frameName), true);
   }
 
 }

@@ -12,7 +12,7 @@ public class IKTaskSet extends SetIKTasks {
   private transient long swigCPtr;
 
   public IKTaskSet(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.IKTaskSet_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.IKTaskSet_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class IKTaskSet extends SetIKTasks {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_IKTaskSet(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_IKTaskSet(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,41 +36,41 @@ public class IKTaskSet extends SetIKTasks {
   }
 
   public static IKTaskSet safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.IKTaskSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.IKTaskSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new IKTaskSet(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.IKTaskSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.IKTaskSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.IKTaskSet_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.IKTaskSet_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.IKTaskSet_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.IKTaskSet_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new IKTaskSet(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.IKTaskSet_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.IKTaskSet_getConcreteClassName(swigCPtr, this);
   }
 
   public IKTaskSet() {
-    this(opensimModelJNI.new_IKTaskSet__SWIG_0(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_IKTaskSet__SWIG_0(), true);
   }
 
   public IKTaskSet(IKTaskSet aIKTaskSet) {
-    this(opensimModelJNI.new_IKTaskSet__SWIG_1(IKTaskSet.getCPtr(aIKTaskSet), aIKTaskSet), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_IKTaskSet__SWIG_1(IKTaskSet.getCPtr(aIKTaskSet), aIKTaskSet), true);
   }
 
   public IKTaskSet(String aFileName) {
-    this(opensimModelJNI.new_IKTaskSet__SWIG_2(aFileName), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_IKTaskSet__SWIG_2(aFileName), true);
   }
 
   public void createMarkerWeightSet(SetMarkerWeights aWeights) {
-    opensimModelJNI.IKTaskSet_createMarkerWeightSet(swigCPtr, this, SetMarkerWeights.getCPtr(aWeights), aWeights);
+    opensimActuatorsAnalysesToolsJNI.IKTaskSet_createMarkerWeightSet(swigCPtr, this, SetMarkerWeights.getCPtr(aWeights), aWeights);
   }
 
 }

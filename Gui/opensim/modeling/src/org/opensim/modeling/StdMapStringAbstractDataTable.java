@@ -29,47 +29,47 @@ public class StdMapStringAbstractDataTable {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_StdMapStringAbstractDataTable(swigCPtr);
+        opensimCommonJNI.delete_StdMapStringAbstractDataTable(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public StdMapStringAbstractDataTable() {
-    this(opensimModelCommonJNI.new_StdMapStringAbstractDataTable__SWIG_0(), true);
+    this(opensimCommonJNI.new_StdMapStringAbstractDataTable__SWIG_0(), true);
   }
 
   public StdMapStringAbstractDataTable(StdMapStringAbstractDataTable arg0) {
-    this(opensimModelCommonJNI.new_StdMapStringAbstractDataTable__SWIG_1(StdMapStringAbstractDataTable.getCPtr(arg0), arg0), true);
+    this(opensimCommonJNI.new_StdMapStringAbstractDataTable__SWIG_1(StdMapStringAbstractDataTable.getCPtr(arg0), arg0), true);
   }
 
   public long size() {
-    return opensimModelCommonJNI.StdMapStringAbstractDataTable_size(swigCPtr, this);
+    return opensimCommonJNI.StdMapStringAbstractDataTable_size(swigCPtr, this);
   }
 
   public boolean empty() {
-    return opensimModelCommonJNI.StdMapStringAbstractDataTable_empty(swigCPtr, this);
+    return opensimCommonJNI.StdMapStringAbstractDataTable_empty(swigCPtr, this);
   }
 
   public void clear() {
-    opensimModelCommonJNI.StdMapStringAbstractDataTable_clear(swigCPtr, this);
+    opensimCommonJNI.StdMapStringAbstractDataTable_clear(swigCPtr, this);
   }
 
   public AbstractDataTable get(String key) {
-    long cPtr = opensimModelCommonJNI.StdMapStringAbstractDataTable_get(swigCPtr, this, key);
+    long cPtr = opensimCommonJNI.StdMapStringAbstractDataTable_get(swigCPtr, this, key);
     return (cPtr == 0) ? null : new AbstractDataTable(cPtr, true);
   }
 
   public void set(String key, AbstractDataTable x) {
-    opensimModelCommonJNI.StdMapStringAbstractDataTable_set(swigCPtr, this, key, AbstractDataTable.getCPtr(x), x);
+    opensimCommonJNI.StdMapStringAbstractDataTable_set(swigCPtr, this, key, AbstractDataTable.getCPtr(x), x);
   }
 
   public void del(String key) {
-    opensimModelCommonJNI.StdMapStringAbstractDataTable_del(swigCPtr, this, key);
+    opensimCommonJNI.StdMapStringAbstractDataTable_del(swigCPtr, this, key);
   }
 
   public boolean has_key(String key) {
-    return opensimModelCommonJNI.StdMapStringAbstractDataTable_has_key(swigCPtr, this, key);
+    return opensimCommonJNI.StdMapStringAbstractDataTable_has_key(swigCPtr, this, key);
   }
 
 }

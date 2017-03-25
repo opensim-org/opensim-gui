@@ -12,7 +12,7 @@ public class PhysicalOffsetFrame extends PhysicalFrameWithOffset {
   private transient long swigCPtr;
 
   public PhysicalOffsetFrame(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.PhysicalOffsetFrame_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.PhysicalOffsetFrame_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class PhysicalOffsetFrame extends PhysicalFrameWithOffset {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_PhysicalOffsetFrame(swigCPtr);
+        opensimSimulationJNI.delete_PhysicalOffsetFrame(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,41 +36,41 @@ public class PhysicalOffsetFrame extends PhysicalFrameWithOffset {
   }
 
   public static PhysicalOffsetFrame safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.PhysicalOffsetFrame_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.PhysicalOffsetFrame_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new PhysicalOffsetFrame(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.PhysicalOffsetFrame_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.PhysicalOffsetFrame_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.PhysicalOffsetFrame_getClassName();
+    return opensimSimulationJNI.PhysicalOffsetFrame_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.PhysicalOffsetFrame_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.PhysicalOffsetFrame_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new PhysicalOffsetFrame(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.PhysicalOffsetFrame_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.PhysicalOffsetFrame_getConcreteClassName(swigCPtr, this);
   }
 
   public PhysicalOffsetFrame() {
-    this(opensimModelSimulationJNI.new_PhysicalOffsetFrame__SWIG_0(), true);
+    this(opensimSimulationJNI.new_PhysicalOffsetFrame__SWIG_0(), true);
   }
 
   public PhysicalOffsetFrame(PhysicalFrame parent, Transform offset) {
-    this(opensimModelSimulationJNI.new_PhysicalOffsetFrame__SWIG_1(PhysicalFrame.getCPtr(parent), parent, Transform.getCPtr(offset), offset), true);
+    this(opensimSimulationJNI.new_PhysicalOffsetFrame__SWIG_1(PhysicalFrame.getCPtr(parent), parent, Transform.getCPtr(offset), offset), true);
   }
 
   public PhysicalOffsetFrame(String name, PhysicalFrame parent, Transform offset) {
-    this(opensimModelSimulationJNI.new_PhysicalOffsetFrame__SWIG_2(name, PhysicalFrame.getCPtr(parent), parent, Transform.getCPtr(offset), offset), true);
+    this(opensimSimulationJNI.new_PhysicalOffsetFrame__SWIG_2(name, PhysicalFrame.getCPtr(parent), parent, Transform.getCPtr(offset), offset), true);
   }
 
   public PhysicalOffsetFrame(String name, String parentName, Transform offset) {
-    this(opensimModelSimulationJNI.new_PhysicalOffsetFrame__SWIG_3(name, parentName, Transform.getCPtr(offset), offset), true);
+    this(opensimSimulationJNI.new_PhysicalOffsetFrame__SWIG_3(name, parentName, Transform.getCPtr(offset), offset), true);
   }
 
 }

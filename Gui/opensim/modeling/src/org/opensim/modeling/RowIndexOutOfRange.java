@@ -12,7 +12,7 @@ public class RowIndexOutOfRange extends IndexOutOfRange {
   private transient long swigCPtr;
 
   public RowIndexOutOfRange(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.RowIndexOutOfRange_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.RowIndexOutOfRange_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class RowIndexOutOfRange extends IndexOutOfRange {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_RowIndexOutOfRange(swigCPtr);
+        opensimCommonJNI.delete_RowIndexOutOfRange(swigCPtr);
       }
       swigCPtr = 0;
     }

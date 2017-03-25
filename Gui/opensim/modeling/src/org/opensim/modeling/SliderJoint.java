@@ -12,7 +12,7 @@ public class SliderJoint extends Joint {
   private transient long swigCPtr;
 
   public SliderJoint(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.SliderJoint_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.SliderJoint_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class SliderJoint extends Joint {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_SliderJoint(swigCPtr);
+        opensimSimulationJNI.delete_SliderJoint(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,57 +36,57 @@ public class SliderJoint extends Joint {
   }
 
   public static SliderJoint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.SliderJoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.SliderJoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new SliderJoint(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.SliderJoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.SliderJoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.SliderJoint_getClassName();
+    return opensimSimulationJNI.SliderJoint_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.SliderJoint_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.SliderJoint_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new SliderJoint(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.SliderJoint_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.SliderJoint_getConcreteClassName(swigCPtr, this);
   }
 
   public Coordinate getCoordinate() {
-    return new Coordinate(opensimModelSimulationJNI.SliderJoint_getCoordinate__SWIG_0_0(swigCPtr, this), false);
+    return new Coordinate(opensimSimulationJNI.SliderJoint_getCoordinate__SWIG_0_0(swigCPtr, this), false);
   }
 
   public Coordinate updCoordinate() {
-    return new Coordinate(opensimModelSimulationJNI.SliderJoint_updCoordinate__SWIG_0_0(swigCPtr, this), false);
+    return new Coordinate(opensimSimulationJNI.SliderJoint_updCoordinate__SWIG_0_0(swigCPtr, this), false);
   }
 
   public Coordinate getCoordinate(SliderJoint.Coord idx) {
-    return new Coordinate(opensimModelSimulationJNI.SliderJoint_getCoordinate__SWIG_1(swigCPtr, this, idx.swigValue()), false);
+    return new Coordinate(opensimSimulationJNI.SliderJoint_getCoordinate__SWIG_1(swigCPtr, this, idx.swigValue()), false);
   }
 
   public Coordinate updCoordinate(SliderJoint.Coord idx) {
-    return new Coordinate(opensimModelSimulationJNI.SliderJoint_updCoordinate__SWIG_1(swigCPtr, this, idx.swigValue()), false);
+    return new Coordinate(opensimSimulationJNI.SliderJoint_updCoordinate__SWIG_1(swigCPtr, this, idx.swigValue()), false);
   }
 
   public SliderJoint() {
-    this(opensimModelSimulationJNI.new_SliderJoint__SWIG_0(), true);
+    this(opensimSimulationJNI.new_SliderJoint__SWIG_0(), true);
   }
 
   public SliderJoint(String name, PhysicalFrame parent, PhysicalFrame child) {
-    this(opensimModelSimulationJNI.new_SliderJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, PhysicalFrame.getCPtr(child), child), true);
+    this(opensimSimulationJNI.new_SliderJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, PhysicalFrame.getCPtr(child), child), true);
   }
 
   public SliderJoint(String name, PhysicalFrame parent, Vec3 locationInParent, Vec3 orientationInParent, PhysicalFrame child, Vec3 locationInChild, Vec3 orientationInChild) {
-    this(opensimModelSimulationJNI.new_SliderJoint__SWIG_2(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
+    this(opensimSimulationJNI.new_SliderJoint__SWIG_2(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
   }
 
   public final static class Coord {
-    public final static SliderJoint.Coord TranslationX = new SliderJoint.Coord("TranslationX");
+    public final static SliderJoint.Coord TranslationX = new SliderJoint.Coord("TranslationX", opensimSimulationJNI.SliderJoint_Coord_TranslationX_get());
 
     public final int swigValue() {
       return swigValue;

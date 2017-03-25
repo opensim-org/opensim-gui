@@ -12,7 +12,7 @@ public class OpenSimContext extends OpenSimObject {
   private transient long swigCPtr;
 
   public OpenSimContext(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.OpenSimContext_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.OpenSimContext_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class OpenSimContext extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_OpenSimContext(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_OpenSimContext(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,317 +36,317 @@ public class OpenSimContext extends OpenSimObject {
   }
 
   public static OpenSimContext safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.OpenSimContext_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.OpenSimContext_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new OpenSimContext(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.OpenSimContext_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.OpenSimContext_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.OpenSimContext_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.OpenSimContext_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new OpenSimContext(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.OpenSimContext_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_getConcreteClassName(swigCPtr, this);
   }
 
   public OpenSimContext(State s, Model model) {
-    this(opensimModelJNI.new_OpenSimContext(State.getCPtr(s), s, Model.getCPtr(model), model), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_OpenSimContext(State.getCPtr(s), s, Model.getCPtr(model), model), true);
   }
 
   public void setState(State s) {
-    opensimModelJNI.OpenSimContext_setState(swigCPtr, this, State.getCPtr(s), s);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setState(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setModel(Model m) {
-    opensimModelJNI.OpenSimContext_setModel(swigCPtr, this, Model.getCPtr(m), m);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setModel(swigCPtr, this, Model.getCPtr(m), m);
   }
 
   public State getCurrentStateRef() {
-    return new State(opensimModelJNI.OpenSimContext_getCurrentStateRef(swigCPtr, this), false);
+    return new State(opensimActuatorsAnalysesToolsJNI.OpenSimContext_getCurrentStateRef(swigCPtr, this), false);
   }
 
   public State getCurrentStateCopy() {
-    return new State(opensimModelJNI.OpenSimContext_getCurrentStateCopy(swigCPtr, this), true);
+    return new State(opensimActuatorsAnalysesToolsJNI.OpenSimContext_getCurrentStateCopy(swigCPtr, this), true);
   }
 
   public void recreateSystemAfterSystemExistsKeepStage() {
-    opensimModelJNI.OpenSimContext_recreateSystemAfterSystemExistsKeepStage(swigCPtr, this);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_recreateSystemAfterSystemExistsKeepStage(swigCPtr, this);
   }
 
   public void recreateSystemAfterSystemExists() {
-    opensimModelJNI.OpenSimContext_recreateSystemAfterSystemExists(swigCPtr, this);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_recreateSystemAfterSystemExists(swigCPtr, this);
   }
 
   public void resetStateToDefault() {
-    opensimModelJNI.OpenSimContext_resetStateToDefault(swigCPtr, this);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_resetStateToDefault(swigCPtr, this);
   }
 
   public void transformPosition(PhysicalFrame body, double[] offset, double[] gOffset) {
-    opensimModelJNI.OpenSimContext_transformPosition(swigCPtr, this, PhysicalFrame.getCPtr(body), body, offset, gOffset);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_transformPosition(swigCPtr, this, PhysicalFrame.getCPtr(body), body, offset, gOffset);
   }
 
   public Transform getTransform(PhysicalFrame body) {
-    return new Transform(opensimModelJNI.OpenSimContext_getTransform(swigCPtr, this, PhysicalFrame.getCPtr(body), body), true);
+    return new Transform(opensimActuatorsAnalysesToolsJNI.OpenSimContext_getTransform(swigCPtr, this, PhysicalFrame.getCPtr(body), body), true);
   }
 
   public void transform(PhysicalFrame ground, double[] d, PhysicalFrame body, double[] dragVectorBody) {
-    opensimModelJNI.OpenSimContext_transform(swigCPtr, this, PhysicalFrame.getCPtr(ground), ground, d, PhysicalFrame.getCPtr(body), body, dragVectorBody);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_transform(swigCPtr, this, PhysicalFrame.getCPtr(ground), ground, d, PhysicalFrame.getCPtr(body), body, dragVectorBody);
   }
 
   public double getValue(Coordinate coord) {
-    return opensimModelJNI.OpenSimContext_getValue(swigCPtr, this, Coordinate.getCPtr(coord), coord);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_getValue(swigCPtr, this, Coordinate.getCPtr(coord), coord);
   }
 
   public boolean getLocked(Coordinate coord) {
-    return opensimModelJNI.OpenSimContext_getLocked(swigCPtr, this, Coordinate.getCPtr(coord), coord);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_getLocked(swigCPtr, this, Coordinate.getCPtr(coord), coord);
   }
 
   public void setValue(Coordinate coord, double d, boolean enforceConstraints) {
-    opensimModelJNI.OpenSimContext_setValue__SWIG_0(swigCPtr, this, Coordinate.getCPtr(coord), coord, d, enforceConstraints);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setValue__SWIG_0(swigCPtr, this, Coordinate.getCPtr(coord), coord, d, enforceConstraints);
   }
 
   public void setValue(Coordinate coord, double d) {
-    opensimModelJNI.OpenSimContext_setValue__SWIG_1(swigCPtr, this, Coordinate.getCPtr(coord), coord, d);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setValue__SWIG_1(swigCPtr, this, Coordinate.getCPtr(coord), coord, d);
   }
 
   public void setClamped(Coordinate coord, boolean newValue) {
-    opensimModelJNI.OpenSimContext_setClamped(swigCPtr, this, Coordinate.getCPtr(coord), coord, newValue);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setClamped(swigCPtr, this, Coordinate.getCPtr(coord), coord, newValue);
   }
 
   public boolean getClamped(Coordinate coord) {
-    return opensimModelJNI.OpenSimContext_getClamped(swigCPtr, this, Coordinate.getCPtr(coord), coord);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_getClamped(swigCPtr, this, Coordinate.getCPtr(coord), coord);
   }
 
   public void setLocked(Coordinate coord, boolean newValue) {
-    opensimModelJNI.OpenSimContext_setLocked(swigCPtr, this, Coordinate.getCPtr(coord), coord, newValue);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setLocked(swigCPtr, this, Coordinate.getCPtr(coord), coord, newValue);
   }
 
   public boolean isPrescribed(Coordinate coord) {
-    return opensimModelJNI.OpenSimContext_isPrescribed(swigCPtr, this, Coordinate.getCPtr(coord), coord);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_isPrescribed(swigCPtr, this, Coordinate.getCPtr(coord), coord);
   }
 
   public boolean isConstrained(Coordinate coord) {
-    return opensimModelJNI.OpenSimContext_isConstrained(swigCPtr, this, Coordinate.getCPtr(coord), coord);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_isConstrained(swigCPtr, this, Coordinate.getCPtr(coord), coord);
   }
 
   public boolean isEnforced(Constraint constraint) {
-    return opensimModelJNI.OpenSimContext_isEnforced(swigCPtr, this, Constraint.getCPtr(constraint), constraint);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_isEnforced(swigCPtr, this, Constraint.getCPtr(constraint), constraint);
   }
 
   public void setIsEnforced(Constraint constraint, boolean isEnforced) {
-    opensimModelJNI.OpenSimContext_setIsEnforced(swigCPtr, this, Constraint.getCPtr(constraint), constraint, isEnforced);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setIsEnforced(swigCPtr, this, Constraint.getCPtr(constraint), constraint, isEnforced);
   }
 
   public boolean appliesForce(Force force) {
-    return opensimModelJNI.OpenSimContext_appliesForce(swigCPtr, this, Force.getCPtr(force), force);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_appliesForce(swigCPtr, this, Force.getCPtr(force), force);
   }
 
   public void setAppliesForce(Force force, boolean applyForce) {
-    opensimModelJNI.OpenSimContext_setAppliesForce(swigCPtr, this, Force.getCPtr(force), force, applyForce);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setAppliesForce(swigCPtr, this, Force.getCPtr(force), force, applyForce);
   }
 
   public double getActivation(Muscle act) {
-    return opensimModelJNI.OpenSimContext_getActivation(swigCPtr, this, Muscle.getCPtr(act), act);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_getActivation(swigCPtr, this, Muscle.getCPtr(act), act);
   }
 
   public double getMuscleLength(Muscle act) {
-    return opensimModelJNI.OpenSimContext_getMuscleLength(swigCPtr, this, Muscle.getCPtr(act), act);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_getMuscleLength(swigCPtr, this, Muscle.getCPtr(act), act);
   }
 
   public ArrayPathPoint getCurrentPath(Muscle act) {
-    return new ArrayPathPoint(opensimModelJNI.OpenSimContext_getCurrentPath(swigCPtr, this, Muscle.getCPtr(act), act), false);
+    return new ArrayPathPoint(opensimActuatorsAnalysesToolsJNI.OpenSimContext_getCurrentPath(swigCPtr, this, Muscle.getCPtr(act), act), false);
   }
 
   public void copyMuscle(Muscle from, Muscle to) {
-    opensimModelJNI.OpenSimContext_copyMuscle(swigCPtr, this, Muscle.getCPtr(from), from, Muscle.getCPtr(to), to);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_copyMuscle(swigCPtr, this, Muscle.getCPtr(from), from, Muscle.getCPtr(to), to);
   }
 
   public void replacePropertyFunction(OpenSimObject obj, Function aOldFunction, Function aNewFunction) {
-    opensimModelJNI.OpenSimContext_replacePropertyFunction(swigCPtr, this, OpenSimObject.getCPtr(obj), obj, Function.getCPtr(aOldFunction), aOldFunction, Function.getCPtr(aNewFunction), aNewFunction);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_replacePropertyFunction(swigCPtr, this, OpenSimObject.getCPtr(obj), obj, Function.getCPtr(aOldFunction), aOldFunction, Function.getCPtr(aNewFunction), aNewFunction);
   }
 
   public void setXFunction(MovingPathPoint mmp, Function newFunction) {
-    opensimModelJNI.OpenSimContext_setXFunction(swigCPtr, this, MovingPathPoint.getCPtr(mmp), mmp, Function.getCPtr(newFunction), newFunction);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setXFunction(swigCPtr, this, MovingPathPoint.getCPtr(mmp), mmp, Function.getCPtr(newFunction), newFunction);
   }
 
   public void setYFunction(MovingPathPoint mmp, Function newFunction) {
-    opensimModelJNI.OpenSimContext_setYFunction(swigCPtr, this, MovingPathPoint.getCPtr(mmp), mmp, Function.getCPtr(newFunction), newFunction);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setYFunction(swigCPtr, this, MovingPathPoint.getCPtr(mmp), mmp, Function.getCPtr(newFunction), newFunction);
   }
 
   public void setZFunction(MovingPathPoint mmp, Function newFunction) {
-    opensimModelJNI.OpenSimContext_setZFunction(swigCPtr, this, MovingPathPoint.getCPtr(mmp), mmp, Function.getCPtr(newFunction), newFunction);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setZFunction(swigCPtr, this, MovingPathPoint.getCPtr(mmp), mmp, Function.getCPtr(newFunction), newFunction);
   }
 
   public void setXCoordinate(MovingPathPoint mmp, Coordinate newCoord) {
-    opensimModelJNI.OpenSimContext_setXCoordinate(swigCPtr, this, MovingPathPoint.getCPtr(mmp), mmp, Coordinate.getCPtr(newCoord), newCoord);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setXCoordinate(swigCPtr, this, MovingPathPoint.getCPtr(mmp), mmp, Coordinate.getCPtr(newCoord), newCoord);
   }
 
   public void setYCoordinate(MovingPathPoint mmp, Coordinate newCoord) {
-    opensimModelJNI.OpenSimContext_setYCoordinate(swigCPtr, this, MovingPathPoint.getCPtr(mmp), mmp, Coordinate.getCPtr(newCoord), newCoord);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setYCoordinate(swigCPtr, this, MovingPathPoint.getCPtr(mmp), mmp, Coordinate.getCPtr(newCoord), newCoord);
   }
 
   public void setZCoordinate(MovingPathPoint mmp, Coordinate newCoord) {
-    opensimModelJNI.OpenSimContext_setZCoordinate(swigCPtr, this, MovingPathPoint.getCPtr(mmp), mmp, Coordinate.getCPtr(newCoord), newCoord);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setZCoordinate(swigCPtr, this, MovingPathPoint.getCPtr(mmp), mmp, Coordinate.getCPtr(newCoord), newCoord);
   }
 
-  public void setBody(PathPoint pathPoint, PhysicalFrame newBody) {
-    opensimModelJNI.OpenSimContext_setBody__SWIG_0(swigCPtr, this, PathPoint.getCPtr(pathPoint), pathPoint, PhysicalFrame.getCPtr(newBody), newBody);
+  public void setBody(AbstractPathPoint pathPoint, PhysicalFrame newBody) {
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setBody__SWIG_0(swigCPtr, this, AbstractPathPoint.getCPtr(pathPoint), pathPoint, PhysicalFrame.getCPtr(newBody), newBody);
   }
 
   public void setCoordinate(ConditionalPathPoint via, Coordinate newCoord) {
-    opensimModelJNI.OpenSimContext_setCoordinate(swigCPtr, this, ConditionalPathPoint.getCPtr(via), via, Coordinate.getCPtr(newCoord), newCoord);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setCoordinate(swigCPtr, this, ConditionalPathPoint.getCPtr(via), via, Coordinate.getCPtr(newCoord), newCoord);
   }
 
   public void setRangeMin(ConditionalPathPoint via, double d) {
-    opensimModelJNI.OpenSimContext_setRangeMin(swigCPtr, this, ConditionalPathPoint.getCPtr(via), via, d);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setRangeMin(swigCPtr, this, ConditionalPathPoint.getCPtr(via), via, d);
   }
 
   public void setRangeMax(ConditionalPathPoint via, double d) {
-    opensimModelJNI.OpenSimContext_setRangeMax(swigCPtr, this, ConditionalPathPoint.getCPtr(via), via, d);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setRangeMax(swigCPtr, this, ConditionalPathPoint.getCPtr(via), via, d);
   }
 
-  public boolean replacePathPoint(GeometryPath p, PathPoint mp, PathPoint newPoint) {
-    return opensimModelJNI.OpenSimContext_replacePathPoint(swigCPtr, this, GeometryPath.getCPtr(p), p, PathPoint.getCPtr(mp), mp, PathPoint.getCPtr(newPoint), newPoint);
+  public boolean replacePathPoint(GeometryPath p, AbstractPathPoint mp, AbstractPathPoint newPoint) {
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_replacePathPoint(swigCPtr, this, GeometryPath.getCPtr(p), p, AbstractPathPoint.getCPtr(mp), mp, AbstractPathPoint.getCPtr(newPoint), newPoint);
   }
 
   public void setLocation(PathPoint mp, int i, double d) {
-    opensimModelJNI.OpenSimContext_setLocation(swigCPtr, this, PathPoint.getCPtr(mp), mp, i, d);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setLocation(swigCPtr, this, PathPoint.getCPtr(mp), mp, i, d);
   }
 
   public void setEndPoint(PathWrap mw, int newEndPt) {
-    opensimModelJNI.OpenSimContext_setEndPoint(swigCPtr, this, PathWrap.getCPtr(mw), mw, newEndPt);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setEndPoint(swigCPtr, this, PathWrap.getCPtr(mw), mw, newEndPt);
   }
 
   public void addPathPoint(GeometryPath p, int menuChoice, PhysicalFrame body) {
-    opensimModelJNI.OpenSimContext_addPathPoint(swigCPtr, this, GeometryPath.getCPtr(p), p, menuChoice, PhysicalFrame.getCPtr(body), body);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_addPathPoint(swigCPtr, this, GeometryPath.getCPtr(p), p, menuChoice, PhysicalFrame.getCPtr(body), body);
   }
 
   public boolean deletePathPoint(GeometryPath p, int menuChoice) {
-    return opensimModelJNI.OpenSimContext_deletePathPoint(swigCPtr, this, GeometryPath.getCPtr(p), p, menuChoice);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_deletePathPoint(swigCPtr, this, GeometryPath.getCPtr(p), p, menuChoice);
   }
 
-  public boolean isActivePathPoint(PathPoint mp) {
-    return opensimModelJNI.OpenSimContext_isActivePathPoint(swigCPtr, this, PathPoint.getCPtr(mp), mp);
+  public boolean isActivePathPoint(AbstractPathPoint mp) {
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_isActivePathPoint(swigCPtr, this, AbstractPathPoint.getCPtr(mp), mp);
   }
 
   public void setStartPoint(PathWrap mw, int newStartPt) {
-    opensimModelJNI.OpenSimContext_setStartPoint(swigCPtr, this, PathWrap.getCPtr(mw), mw, newStartPt);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setStartPoint(swigCPtr, this, PathWrap.getCPtr(mw), mw, newStartPt);
   }
 
   public void addPathWrap(GeometryPath p, WrapObject awo) {
-    opensimModelJNI.OpenSimContext_addPathWrap(swigCPtr, this, GeometryPath.getCPtr(p), p, WrapObject.getCPtr(awo), awo);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_addPathWrap(swigCPtr, this, GeometryPath.getCPtr(p), p, WrapObject.getCPtr(awo), awo);
   }
 
   public void moveUpPathWrap(GeometryPath p, int num) {
-    opensimModelJNI.OpenSimContext_moveUpPathWrap(swigCPtr, this, GeometryPath.getCPtr(p), p, num);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_moveUpPathWrap(swigCPtr, this, GeometryPath.getCPtr(p), p, num);
   }
 
   public void moveDownPathWrap(GeometryPath p, int num) {
-    opensimModelJNI.OpenSimContext_moveDownPathWrap(swigCPtr, this, GeometryPath.getCPtr(p), p, num);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_moveDownPathWrap(swigCPtr, this, GeometryPath.getCPtr(p), p, num);
   }
 
   public void deletePathWrap(GeometryPath p, int num) {
-    opensimModelJNI.OpenSimContext_deletePathWrap(swigCPtr, this, GeometryPath.getCPtr(p), p, num);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_deletePathWrap(swigCPtr, this, GeometryPath.getCPtr(p), p, num);
   }
 
   public void setBody(Marker currentMarker, PhysicalFrame newBody, boolean b) {
-    opensimModelJNI.OpenSimContext_setBody__SWIG_1(swigCPtr, this, Marker.getCPtr(currentMarker), currentMarker, PhysicalFrame.getCPtr(newBody), newBody, b);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setBody__SWIG_1(swigCPtr, this, Marker.getCPtr(currentMarker), currentMarker, PhysicalFrame.getCPtr(newBody), newBody, b);
   }
 
   public int replaceMarkerSet(Model model, MarkerSet aMarkerSet) {
-    return opensimModelJNI.OpenSimContext_replaceMarkerSet(swigCPtr, this, Model.getCPtr(model), model, MarkerSet.getCPtr(aMarkerSet), aMarkerSet);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_replaceMarkerSet(swigCPtr, this, Model.getCPtr(model), model, MarkerSet.getCPtr(aMarkerSet), aMarkerSet);
   }
 
   public void getCenterOfMassInGround(double[] com) {
-    opensimModelJNI.OpenSimContext_getCenterOfMassInGround(swigCPtr, this, com);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_getCenterOfMassInGround(swigCPtr, this, com);
   }
 
   public int step(Analysis analysis) {
-    return opensimModelJNI.OpenSimContext_step(swigCPtr, this, Analysis.getCPtr(analysis), analysis);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_step(swigCPtr, this, Analysis.getCPtr(analysis), analysis);
   }
 
   public boolean solveInverseKinematics(InverseKinematicsTool ikTool) {
-    return opensimModelJNI.OpenSimContext_solveInverseKinematics(swigCPtr, this, InverseKinematicsTool.getCPtr(ikTool), ikTool);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_solveInverseKinematics(swigCPtr, this, InverseKinematicsTool.getCPtr(ikTool), ikTool);
   }
 
   public void setStatesFromMotion(AnalyzeTool analyzeTool, Storage aMotion, boolean aInDegrees) {
-    opensimModelJNI.OpenSimContext_setStatesFromMotion(swigCPtr, this, AnalyzeTool.getCPtr(analyzeTool), analyzeTool, Storage.getCPtr(aMotion), aMotion, aInDegrees);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setStatesFromMotion(swigCPtr, this, AnalyzeTool.getCPtr(analyzeTool), analyzeTool, Storage.getCPtr(aMotion), aMotion, aInDegrees);
   }
 
   public void loadStatesFromFile(AnalyzeTool analyzeTool) {
-    opensimModelJNI.OpenSimContext_loadStatesFromFile(swigCPtr, this, AnalyzeTool.getCPtr(analyzeTool), analyzeTool);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_loadStatesFromFile(swigCPtr, this, AnalyzeTool.getCPtr(analyzeTool), analyzeTool);
   }
 
   public boolean processModelScale(ModelScaler modelScaler, Model aModel, String aPathToSubject, double aFinalMass) {
-    return opensimModelJNI.OpenSimContext_processModelScale__SWIG_0(swigCPtr, this, ModelScaler.getCPtr(modelScaler), modelScaler, Model.getCPtr(aModel), aModel, aPathToSubject, aFinalMass);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_processModelScale__SWIG_0(swigCPtr, this, ModelScaler.getCPtr(modelScaler), modelScaler, Model.getCPtr(aModel), aModel, aPathToSubject, aFinalMass);
   }
 
   public boolean processModelScale(ModelScaler modelScaler, Model aModel, String aPathToSubject) {
-    return opensimModelJNI.OpenSimContext_processModelScale__SWIG_1(swigCPtr, this, ModelScaler.getCPtr(modelScaler), modelScaler, Model.getCPtr(aModel), aModel, aPathToSubject);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_processModelScale__SWIG_1(swigCPtr, this, ModelScaler.getCPtr(modelScaler), modelScaler, Model.getCPtr(aModel), aModel, aPathToSubject);
   }
 
   public boolean processModelScale(ModelScaler modelScaler, Model aModel) {
-    return opensimModelJNI.OpenSimContext_processModelScale__SWIG_2(swigCPtr, this, ModelScaler.getCPtr(modelScaler), modelScaler, Model.getCPtr(aModel), aModel);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_processModelScale__SWIG_2(swigCPtr, this, ModelScaler.getCPtr(modelScaler), modelScaler, Model.getCPtr(aModel), aModel);
   }
 
   public boolean processModelMarkerPlacer(MarkerPlacer markerPlacer, Model aModel, String aPathToSubject) {
-    return opensimModelJNI.OpenSimContext_processModelMarkerPlacer__SWIG_0(swigCPtr, this, MarkerPlacer.getCPtr(markerPlacer), markerPlacer, Model.getCPtr(aModel), aModel, aPathToSubject);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_processModelMarkerPlacer__SWIG_0(swigCPtr, this, MarkerPlacer.getCPtr(markerPlacer), markerPlacer, Model.getCPtr(aModel), aModel, aPathToSubject);
   }
 
   public boolean processModelMarkerPlacer(MarkerPlacer markerPlacer, Model aModel) {
-    return opensimModelJNI.OpenSimContext_processModelMarkerPlacer__SWIG_1(swigCPtr, this, MarkerPlacer.getCPtr(markerPlacer), markerPlacer, Model.getCPtr(aModel), aModel);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_processModelMarkerPlacer__SWIG_1(swigCPtr, this, MarkerPlacer.getCPtr(markerPlacer), markerPlacer, Model.getCPtr(aModel), aModel);
   }
 
   public double computeMeasurementScaleFactor(ModelScaler modelScaler, Model aModel, MarkerData aMarkerData, Measurement aMeasurement) {
-    return opensimModelJNI.OpenSimContext_computeMeasurementScaleFactor(swigCPtr, this, ModelScaler.getCPtr(modelScaler), modelScaler, Model.getCPtr(aModel), aModel, MarkerData.getCPtr(aMarkerData), aMarkerData, Measurement.getCPtr(aMeasurement), aMeasurement);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_computeMeasurementScaleFactor(swigCPtr, this, ModelScaler.getCPtr(modelScaler), modelScaler, Model.getCPtr(aModel), aModel, MarkerData.getCPtr(aMarkerData), aMarkerData, Measurement.getCPtr(aMeasurement), aMeasurement);
   }
 
   public void replaceTransformAxisFunction(TransformAxis aDof, Function aFunction) {
-    opensimModelJNI.OpenSimContext_replaceTransformAxisFunction(swigCPtr, this, TransformAxis.getCPtr(aDof), aDof, Function.getCPtr(aFunction), aFunction);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_replaceTransformAxisFunction(swigCPtr, this, TransformAxis.getCPtr(aDof), aDof, Function.getCPtr(aFunction), aFunction);
   }
 
   public static boolean isNaN(double v) {
-    return opensimModelJNI.OpenSimContext_isNaN(v);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_isNaN(v);
   }
 
   public double getTime() {
-    return opensimModelJNI.OpenSimContext_getTime(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimContext_getTime(swigCPtr, this);
   }
 
   public static void getTransformAsDouble16(Transform aTransform, double[] flattened) {
-    opensimModelJNI.OpenSimContext_getTransformAsDouble16(Transform.getCPtr(aTransform), aTransform, flattened);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_getTransformAsDouble16(Transform.getCPtr(aTransform), aTransform, flattened);
   }
 
   public void setPropertiesFromState() {
-    opensimModelJNI.OpenSimContext_setPropertiesFromState(swigCPtr, this);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setPropertiesFromState(swigCPtr, this);
   }
 
   public void recreateSystemKeepStage() {
-    opensimModelJNI.OpenSimContext_recreateSystemKeepStage(swigCPtr, this);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_recreateSystemKeepStage(swigCPtr, this);
   }
 
   public void realizePosition() {
-    opensimModelJNI.OpenSimContext_realizePosition(swigCPtr, this);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_realizePosition(swigCPtr, this);
   }
 
   public void realizeVelocity() {
-    opensimModelJNI.OpenSimContext_realizeVelocity(swigCPtr, this);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_realizeVelocity(swigCPtr, this);
   }
 
   public void cacheModelAndState() {
-    opensimModelJNI.OpenSimContext_cacheModelAndState(swigCPtr, this);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_cacheModelAndState(swigCPtr, this);
   }
 
   public void restoreStateFromCachedModel() throws java.io.IOException {
-    opensimModelJNI.OpenSimContext_restoreStateFromCachedModel(swigCPtr, this);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_restoreStateFromCachedModel(swigCPtr, this);
   }
 
 }

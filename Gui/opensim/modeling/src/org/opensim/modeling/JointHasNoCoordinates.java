@@ -12,7 +12,7 @@ public class JointHasNoCoordinates extends OpenSimException {
   private transient long swigCPtr;
 
   public JointHasNoCoordinates(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.JointHasNoCoordinates_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.JointHasNoCoordinates_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class JointHasNoCoordinates extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_JointHasNoCoordinates(swigCPtr);
+        opensimSimulationJNI.delete_JointHasNoCoordinates(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class JointHasNoCoordinates extends OpenSimException {
   }
 
   public JointHasNoCoordinates(String file, long line, String func) {
-    this(opensimModelSimulationJNI.new_JointHasNoCoordinates(file, line, func), true);
+    this(opensimSimulationJNI.new_JointHasNoCoordinates(file, line, func), true);
   }
 
 }

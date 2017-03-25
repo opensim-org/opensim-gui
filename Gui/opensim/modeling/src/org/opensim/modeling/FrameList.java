@@ -29,38 +29,38 @@ public class FrameList {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_FrameList(swigCPtr);
+        opensimSimulationJNI.delete_FrameList(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public FrameList(Component root, ComponentFilter f) {
-    this(opensimModelSimulationJNI.new_FrameList__SWIG_0(Component.getCPtr(root), root, ComponentFilter.getCPtr(f), f), true);
+    this(opensimSimulationJNI.new_FrameList__SWIG_0(Component.getCPtr(root), root, ComponentFilter.getCPtr(f), f), true);
   }
 
   public FrameList(Component root) {
-    this(opensimModelSimulationJNI.new_FrameList__SWIG_1(Component.getCPtr(root), root), true);
+    this(opensimSimulationJNI.new_FrameList__SWIG_1(Component.getCPtr(root), root), true);
   }
 
   public FrameIterator begin() {
-    return new FrameIterator(opensimModelSimulationJNI.FrameList_begin__SWIG_0(swigCPtr, this), true);
+    return new FrameIterator(opensimSimulationJNI.FrameList_begin__SWIG_0(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Frame_const_t__type_t cbegin() {
-    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Frame_const_t__type_t(opensimModelSimulationJNI.FrameList_cbegin(swigCPtr, this), true);
+    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Frame_const_t__type_t(opensimSimulationJNI.FrameList_cbegin(swigCPtr, this), true);
   }
 
   public FrameIterator end() {
-    return new FrameIterator(opensimModelSimulationJNI.FrameList_end__SWIG_0(swigCPtr, this), true);
+    return new FrameIterator(opensimSimulationJNI.FrameList_end__SWIG_0(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Frame_const_t__type_t cend() {
-    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Frame_const_t__type_t(opensimModelSimulationJNI.FrameList_cend(swigCPtr, this), true);
+    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Frame_const_t__type_t(opensimSimulationJNI.FrameList_cend(swigCPtr, this), true);
   }
 
   public void setFilter(ComponentFilter filter) {
-    opensimModelSimulationJNI.FrameList_setFilter(swigCPtr, this, ComponentFilter.getCPtr(filter), filter);
+    opensimSimulationJNI.FrameList_setFilter(swigCPtr, this, ComponentFilter.getCPtr(filter), filter);
   }
 
 }

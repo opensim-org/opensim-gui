@@ -12,7 +12,7 @@ public class UnexpectedColumnLabel extends IOError {
   private transient long swigCPtr;
 
   public UnexpectedColumnLabel(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.UnexpectedColumnLabel_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.UnexpectedColumnLabel_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class UnexpectedColumnLabel extends IOError {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_UnexpectedColumnLabel(swigCPtr);
+        opensimCommonJNI.delete_UnexpectedColumnLabel(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class UnexpectedColumnLabel extends IOError {
   }
 
   public UnexpectedColumnLabel(String file, long line, String func, String filename, String expected, String received) {
-    this(opensimModelCommonJNI.new_UnexpectedColumnLabel(file, line, func, filename, expected, received), true);
+    this(opensimCommonJNI.new_UnexpectedColumnLabel(file, line, func, filename, expected, received), true);
   }
 
 }

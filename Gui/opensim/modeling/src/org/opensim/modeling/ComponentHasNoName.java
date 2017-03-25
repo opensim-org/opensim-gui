@@ -12,7 +12,7 @@ public class ComponentHasNoName extends OpenSimException {
   private transient long swigCPtr;
 
   public ComponentHasNoName(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.ComponentHasNoName_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.ComponentHasNoName_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ComponentHasNoName extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_ComponentHasNoName(swigCPtr);
+        opensimCommonJNI.delete_ComponentHasNoName(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class ComponentHasNoName extends OpenSimException {
   }
 
   public ComponentHasNoName(String file, long line, String func, String componentConcreteClassName) {
-    this(opensimModelCommonJNI.new_ComponentHasNoName(file, line, func, componentConcreteClassName), true);
+    this(opensimCommonJNI.new_ComponentHasNoName(file, line, func, componentConcreteClassName), true);
   }
 
 }

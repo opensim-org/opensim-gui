@@ -12,7 +12,7 @@ public class RRATool extends AbstractTool {
   private transient long swigCPtr;
 
   public RRATool(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.RRATool_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.RRATool_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class RRATool extends AbstractTool {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_RRATool(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_RRATool(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,133 +36,133 @@ public class RRATool extends AbstractTool {
   }
 
   public static RRATool safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.RRATool_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.RRATool_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new RRATool(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.RRATool_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.RRATool_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.RRATool_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.RRATool_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.RRATool_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.RRATool_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new RRATool(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.RRATool_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.RRATool_getConcreteClassName(swigCPtr, this);
   }
 
   public RRATool() {
-    this(opensimModelJNI.new_RRATool__SWIG_0(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_RRATool__SWIG_0(), true);
   }
 
   public RRATool(String aFileName, boolean aLoadModel) throws java.io.IOException {
-    this(opensimModelJNI.new_RRATool__SWIG_1(aFileName, aLoadModel), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_RRATool__SWIG_1(aFileName, aLoadModel), true);
   }
 
   public RRATool(String aFileName) throws java.io.IOException {
-    this(opensimModelJNI.new_RRATool__SWIG_2(aFileName), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_RRATool__SWIG_2(aFileName), true);
   }
 
   public RRATool(RRATool aObject) {
-    this(opensimModelJNI.new_RRATool__SWIG_3(RRATool.getCPtr(aObject), aObject), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_RRATool__SWIG_3(RRATool.getCPtr(aObject), aObject), true);
   }
 
   public String getDesiredPointsFileName() {
-    return opensimModelJNI.RRATool_getDesiredPointsFileName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.RRATool_getDesiredPointsFileName(swigCPtr, this);
   }
 
   public void setDesiredPointsFileName(String aFileName) {
-    opensimModelJNI.RRATool_setDesiredPointsFileName(swigCPtr, this, aFileName);
+    opensimActuatorsAnalysesToolsJNI.RRATool_setDesiredPointsFileName(swigCPtr, this, aFileName);
   }
 
   public String getDesiredKinematicsFileName() {
-    return opensimModelJNI.RRATool_getDesiredKinematicsFileName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.RRATool_getDesiredKinematicsFileName(swigCPtr, this);
   }
 
   public void setDesiredKinematicsFileName(String aFileName) {
-    opensimModelJNI.RRATool_setDesiredKinematicsFileName(swigCPtr, this, aFileName);
+    opensimActuatorsAnalysesToolsJNI.RRATool_setDesiredKinematicsFileName(swigCPtr, this, aFileName);
   }
 
   public String getConstraintsFileName() {
-    return opensimModelJNI.RRATool_getConstraintsFileName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.RRATool_getConstraintsFileName(swigCPtr, this);
   }
 
   public void setConstraintsFileName(String aFileName) {
-    opensimModelJNI.RRATool_setConstraintsFileName(swigCPtr, this, aFileName);
+    opensimActuatorsAnalysesToolsJNI.RRATool_setConstraintsFileName(swigCPtr, this, aFileName);
   }
 
   public String getTaskSetFileName() {
-    return opensimModelJNI.RRATool_getTaskSetFileName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.RRATool_getTaskSetFileName(swigCPtr, this);
   }
 
   public void setTaskSetFileName(String aFileName) {
-    opensimModelJNI.RRATool_setTaskSetFileName(swigCPtr, this, aFileName);
+    opensimActuatorsAnalysesToolsJNI.RRATool_setTaskSetFileName(swigCPtr, this, aFileName);
   }
 
   public String getOutputModelFileName() {
-    return opensimModelJNI.RRATool_getOutputModelFileName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.RRATool_getOutputModelFileName(swigCPtr, this);
   }
 
   public void setOutputModelFileName(String aFileName) {
-    opensimModelJNI.RRATool_setOutputModelFileName(swigCPtr, this, aFileName);
+    opensimActuatorsAnalysesToolsJNI.RRATool_setOutputModelFileName(swigCPtr, this, aFileName);
   }
 
   public boolean getAdjustCOMToReduceResiduals() {
-    return opensimModelJNI.RRATool_getAdjustCOMToReduceResiduals(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.RRATool_getAdjustCOMToReduceResiduals(swigCPtr, this);
   }
 
   public void setAdjustCOMToReduceResiduals(boolean aAdjust) {
-    opensimModelJNI.RRATool_setAdjustCOMToReduceResiduals(swigCPtr, this, aAdjust);
+    opensimActuatorsAnalysesToolsJNI.RRATool_setAdjustCOMToReduceResiduals(swigCPtr, this, aAdjust);
   }
 
   public String getAdjustedCOMBody() {
-    return opensimModelJNI.RRATool_getAdjustedCOMBody(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.RRATool_getAdjustedCOMBody(swigCPtr, this);
   }
 
   public void setAdjustedCOMBody(String aBody) {
-    opensimModelJNI.RRATool_setAdjustedCOMBody(swigCPtr, this, aBody);
+    opensimActuatorsAnalysesToolsJNI.RRATool_setAdjustedCOMBody(swigCPtr, this, aBody);
   }
 
   public double getLowpassCutoffFrequency() {
-    return opensimModelJNI.RRATool_getLowpassCutoffFrequency(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.RRATool_getLowpassCutoffFrequency(swigCPtr, this);
   }
 
   public void setLowpassCutoffFrequency(double aLowpassCutoffFrequency) {
-    opensimModelJNI.RRATool_setLowpassCutoffFrequency(swigCPtr, this, aLowpassCutoffFrequency);
+    opensimActuatorsAnalysesToolsJNI.RRATool_setLowpassCutoffFrequency(swigCPtr, this, aLowpassCutoffFrequency);
   }
 
   public String getExternalLoadsFileName() {
-    return opensimModelJNI.RRATool_getExternalLoadsFileName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.RRATool_getExternalLoadsFileName(swigCPtr, this);
   }
 
   public void setExternalLoadsFileName(String aFileName) {
-    opensimModelJNI.RRATool_setExternalLoadsFileName(swigCPtr, this, aFileName);
+    opensimActuatorsAnalysesToolsJNI.RRATool_setExternalLoadsFileName(swigCPtr, this, aFileName);
   }
 
   public boolean run() throws java.io.IOException {
-    return opensimModelJNI.RRATool_run(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.RRATool_run(swigCPtr, this);
   }
 
   public Storage getForceStorage() {
-    return new Storage(opensimModelJNI.RRATool_getForceStorage(swigCPtr, this), false);
+    return new Storage(opensimActuatorsAnalysesToolsJNI.RRATool_getForceStorage(swigCPtr, this), false);
   }
 
   public void setOriginalForceSet(ForceSet aForceSet) {
-    opensimModelJNI.RRATool_setOriginalForceSet(swigCPtr, this, ForceSet.getCPtr(aForceSet), aForceSet);
+    opensimActuatorsAnalysesToolsJNI.RRATool_setOriginalForceSet(swigCPtr, this, ForceSet.getCPtr(aForceSet), aForceSet);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
-    opensimModelJNI.RRATool_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+    opensimActuatorsAnalysesToolsJNI.RRATool_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
-    opensimModelJNI.RRATool_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
+    opensimActuatorsAnalysesToolsJNI.RRATool_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
 }

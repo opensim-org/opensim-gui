@@ -12,7 +12,7 @@ public class KeyExists extends OpenSimException {
   private transient long swigCPtr;
 
   public KeyExists(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.KeyExists_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.KeyExists_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class KeyExists extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_KeyExists(swigCPtr);
+        opensimCommonJNI.delete_KeyExists(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class KeyExists extends OpenSimException {
   }
 
   public KeyExists(String file, long line, String func, String key) {
-    this(opensimModelCommonJNI.new_KeyExists(file, line, func, key), true);
+    this(opensimCommonJNI.new_KeyExists(file, line, func, key), true);
   }
 
 }

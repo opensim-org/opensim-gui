@@ -29,109 +29,109 @@ public class ArrayPtrsPropertyGroup {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_ArrayPtrsPropertyGroup(swigCPtr);
+        opensimCommonJNI.delete_ArrayPtrsPropertyGroup(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public ArrayPtrsPropertyGroup(int aCapacity) {
-    this(opensimModelCommonJNI.new_ArrayPtrsPropertyGroup__SWIG_0(aCapacity), true);
+    this(opensimCommonJNI.new_ArrayPtrsPropertyGroup__SWIG_0(aCapacity), true);
   }
 
   public ArrayPtrsPropertyGroup() {
-    this(opensimModelCommonJNI.new_ArrayPtrsPropertyGroup__SWIG_1(), true);
+    this(opensimCommonJNI.new_ArrayPtrsPropertyGroup__SWIG_1(), true);
   }
 
   public ArrayPtrsPropertyGroup(ArrayPtrsPropertyGroup aArray) {
-    this(opensimModelCommonJNI.new_ArrayPtrsPropertyGroup__SWIG_2(ArrayPtrsPropertyGroup.getCPtr(aArray), aArray), true);
+    this(opensimCommonJNI.new_ArrayPtrsPropertyGroup__SWIG_2(ArrayPtrsPropertyGroup.getCPtr(aArray), aArray), true);
   }
 
   public void clearAndDestroy() {
-    opensimModelCommonJNI.ArrayPtrsPropertyGroup_clearAndDestroy(swigCPtr, this);
+    opensimCommonJNI.ArrayPtrsPropertyGroup_clearAndDestroy(swigCPtr, this);
   }
 
   public boolean setSize(int aSize) {
-    return opensimModelCommonJNI.ArrayPtrsPropertyGroup_setSize(swigCPtr, this, aSize);
+    return opensimCommonJNI.ArrayPtrsPropertyGroup_setSize(swigCPtr, this, aSize);
   }
 
   public int getSize() {
-    return opensimModelCommonJNI.ArrayPtrsPropertyGroup_getSize(swigCPtr, this);
+    return opensimCommonJNI.ArrayPtrsPropertyGroup_getSize(swigCPtr, this);
   }
 
   public int size() {
-    return opensimModelCommonJNI.ArrayPtrsPropertyGroup_size(swigCPtr, this);
+    return opensimCommonJNI.ArrayPtrsPropertyGroup_size(swigCPtr, this);
   }
 
   public int getIndex(SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type aObject, int aStartIndex) {
-    return opensimModelCommonJNI.ArrayPtrsPropertyGroup_getIndex__SWIG_0(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type.getCPtr(aObject), aStartIndex);
+    return opensimCommonJNI.ArrayPtrsPropertyGroup_getIndex__SWIG_0(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type.getCPtr(aObject), aStartIndex);
   }
 
   public int getIndex(SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type aObject) {
-    return opensimModelCommonJNI.ArrayPtrsPropertyGroup_getIndex__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type.getCPtr(aObject));
+    return opensimCommonJNI.ArrayPtrsPropertyGroup_getIndex__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type.getCPtr(aObject));
   }
 
   public int getIndex(String aName, int aStartIndex) {
-    return opensimModelCommonJNI.ArrayPtrsPropertyGroup_getIndex__SWIG_2(swigCPtr, this, aName, aStartIndex);
+    return opensimCommonJNI.ArrayPtrsPropertyGroup_getIndex__SWIG_2(swigCPtr, this, aName, aStartIndex);
   }
 
   public int getIndex(String aName) {
-    return opensimModelCommonJNI.ArrayPtrsPropertyGroup_getIndex__SWIG_3(swigCPtr, this, aName);
+    return opensimCommonJNI.ArrayPtrsPropertyGroup_getIndex__SWIG_3(swigCPtr, this, aName);
   }
 
   public boolean append(PropertyGroup aObject) {
-    return opensimModelCommonJNI.ArrayPtrsPropertyGroup_append__SWIG_0(swigCPtr, this, PropertyGroup.getCPtr(aObject), aObject);
+    return opensimCommonJNI.ArrayPtrsPropertyGroup_append__SWIG_0(swigCPtr, this, PropertyGroup.getCPtr(aObject), aObject);
   }
 
   public boolean append(ArrayPtrsPropertyGroup aArray) {
-    return opensimModelCommonJNI.ArrayPtrsPropertyGroup_append__SWIG_1(swigCPtr, this, ArrayPtrsPropertyGroup.getCPtr(aArray), aArray);
+    return opensimCommonJNI.ArrayPtrsPropertyGroup_append__SWIG_1(swigCPtr, this, ArrayPtrsPropertyGroup.getCPtr(aArray), aArray);
   }
 
   public boolean insert(int aIndex, PropertyGroup aObject) {
-    return opensimModelCommonJNI.ArrayPtrsPropertyGroup_insert(swigCPtr, this, aIndex, PropertyGroup.getCPtr(aObject), aObject);
+    return opensimCommonJNI.ArrayPtrsPropertyGroup_insert(swigCPtr, this, aIndex, PropertyGroup.getCPtr(aObject), aObject);
   }
 
   public boolean remove(int aIndex) {
-    return opensimModelCommonJNI.ArrayPtrsPropertyGroup_remove__SWIG_0(swigCPtr, this, aIndex);
+    return opensimCommonJNI.ArrayPtrsPropertyGroup_remove__SWIG_0(swigCPtr, this, aIndex);
   }
 
   public boolean remove(SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type aObject) {
-    return opensimModelCommonJNI.ArrayPtrsPropertyGroup_remove__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type.getCPtr(aObject));
+    return opensimCommonJNI.ArrayPtrsPropertyGroup_remove__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type.getCPtr(aObject));
   }
 
   public boolean set(int aIndex, PropertyGroup aObject) {
-    return opensimModelCommonJNI.ArrayPtrsPropertyGroup_set(swigCPtr, this, aIndex, PropertyGroup.getCPtr(aObject), aObject);
+    return opensimCommonJNI.ArrayPtrsPropertyGroup_set(swigCPtr, this, aIndex, PropertyGroup.getCPtr(aObject), aObject);
   }
 
   public PropertyGroup get(int aIndex) {
-    long cPtr = opensimModelCommonJNI.ArrayPtrsPropertyGroup_get__SWIG_0(swigCPtr, this, aIndex);
+    long cPtr = opensimCommonJNI.ArrayPtrsPropertyGroup_get__SWIG_0(swigCPtr, this, aIndex);
     return (cPtr == 0) ? null : new PropertyGroup(cPtr, false);
   }
 
   public PropertyGroup get(String aName) {
-    long cPtr = opensimModelCommonJNI.ArrayPtrsPropertyGroup_get__SWIG_1(swigCPtr, this, aName);
+    long cPtr = opensimCommonJNI.ArrayPtrsPropertyGroup_get__SWIG_1(swigCPtr, this, aName);
     return (cPtr == 0) ? null : new PropertyGroup(cPtr, false);
   }
 
   public PropertyGroup getLast() {
-    long cPtr = opensimModelCommonJNI.ArrayPtrsPropertyGroup_getLast(swigCPtr, this);
+    long cPtr = opensimCommonJNI.ArrayPtrsPropertyGroup_getLast(swigCPtr, this);
     return (cPtr == 0) ? null : new PropertyGroup(cPtr, false);
   }
 
   public int searchBinary(SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type aObject, boolean aFindFirst, int aLo, int aHi) {
-    return opensimModelCommonJNI.ArrayPtrsPropertyGroup_searchBinary__SWIG_0(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type.getCPtr(aObject), aFindFirst, aLo, aHi);
+    return opensimCommonJNI.ArrayPtrsPropertyGroup_searchBinary__SWIG_0(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type.getCPtr(aObject), aFindFirst, aLo, aHi);
   }
 
   public int searchBinary(SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type aObject, boolean aFindFirst, int aLo) {
-    return opensimModelCommonJNI.ArrayPtrsPropertyGroup_searchBinary__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type.getCPtr(aObject), aFindFirst, aLo);
+    return opensimCommonJNI.ArrayPtrsPropertyGroup_searchBinary__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type.getCPtr(aObject), aFindFirst, aLo);
   }
 
   public int searchBinary(SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type aObject, boolean aFindFirst) {
-    return opensimModelCommonJNI.ArrayPtrsPropertyGroup_searchBinary__SWIG_2(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type.getCPtr(aObject), aFindFirst);
+    return opensimCommonJNI.ArrayPtrsPropertyGroup_searchBinary__SWIG_2(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type.getCPtr(aObject), aFindFirst);
   }
 
   public int searchBinary(SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type aObject) {
-    return opensimModelCommonJNI.ArrayPtrsPropertyGroup_searchBinary__SWIG_3(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type.getCPtr(aObject));
+    return opensimCommonJNI.ArrayPtrsPropertyGroup_searchBinary__SWIG_3(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__PropertyGroup_t__type.getCPtr(aObject));
   }
 
 }

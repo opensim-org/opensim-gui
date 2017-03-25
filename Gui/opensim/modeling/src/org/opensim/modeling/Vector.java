@@ -63,4 +63,8 @@ public class Vector extends VectorBaseDouble {
     this(opensimSimbodyJNI.new_Vector__SWIG_3(StdVectorDouble.getCPtr(row), row), true);
   }
 
+  public RowVector transpose() {
+    return new RowVector(opensimSimbodyJNI.Vector_transpose(swigCPtr, this), true);
+  }
+
 }

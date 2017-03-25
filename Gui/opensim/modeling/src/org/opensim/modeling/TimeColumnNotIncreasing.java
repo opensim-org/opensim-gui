@@ -12,7 +12,7 @@ public class TimeColumnNotIncreasing extends InvalidTable {
   private transient long swigCPtr;
 
   public TimeColumnNotIncreasing(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.TimeColumnNotIncreasing_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.TimeColumnNotIncreasing_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class TimeColumnNotIncreasing extends InvalidTable {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_TimeColumnNotIncreasing(swigCPtr);
+        opensimCommonJNI.delete_TimeColumnNotIncreasing(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class TimeColumnNotIncreasing extends InvalidTable {
   }
 
   public TimeColumnNotIncreasing(String file, long line, String func) {
-    this(opensimModelCommonJNI.new_TimeColumnNotIncreasing(file, line, func), true);
+    this(opensimCommonJNI.new_TimeColumnNotIncreasing(file, line, func), true);
   }
 
 }

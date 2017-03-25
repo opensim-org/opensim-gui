@@ -12,7 +12,7 @@ public class ScalarActuator extends Actuator {
   private transient long swigCPtr;
 
   public ScalarActuator(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.ScalarActuator_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.ScalarActuator_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ScalarActuator extends Actuator {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_ScalarActuator(swigCPtr);
+        opensimSimulationJNI.delete_ScalarActuator(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,181 +36,181 @@ public class ScalarActuator extends Actuator {
   }
 
   public static ScalarActuator safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.ScalarActuator_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.ScalarActuator_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ScalarActuator(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.ScalarActuator_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.ScalarActuator_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.ScalarActuator_getClassName();
+    return opensimSimulationJNI.ScalarActuator_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.ScalarActuator_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.ScalarActuator_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ScalarActuator(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.ScalarActuator_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.ScalarActuator_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_min_control(ScalarActuator source) {
-    opensimModelSimulationJNI.ScalarActuator_copyProperty_min_control(swigCPtr, this, ScalarActuator.getCPtr(source), source);
+    opensimSimulationJNI.ScalarActuator_copyProperty_min_control(swigCPtr, this, ScalarActuator.getCPtr(source), source);
   }
 
   public double get_min_control(int i) {
-    return opensimModelSimulationJNI.ScalarActuator_get_min_control__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.ScalarActuator_get_min_control__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_min_control(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.ScalarActuator_upd_min_control__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.ScalarActuator_upd_min_control__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_min_control(int i, double value) {
-    opensimModelSimulationJNI.ScalarActuator_set_min_control__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.ScalarActuator_set_min_control__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_min_control(double value) {
-    return opensimModelSimulationJNI.ScalarActuator_append_min_control(swigCPtr, this, value);
+    return opensimSimulationJNI.ScalarActuator_append_min_control(swigCPtr, this, value);
   }
 
   public void constructProperty_min_control(double initValue) {
-    opensimModelSimulationJNI.ScalarActuator_constructProperty_min_control(swigCPtr, this, initValue);
+    opensimSimulationJNI.ScalarActuator_constructProperty_min_control(swigCPtr, this, initValue);
   }
 
   public double get_min_control() {
-    return opensimModelSimulationJNI.ScalarActuator_get_min_control__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.ScalarActuator_get_min_control__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_min_control() {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.ScalarActuator_upd_min_control__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.ScalarActuator_upd_min_control__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_min_control(double value) {
-    opensimModelSimulationJNI.ScalarActuator_set_min_control__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.ScalarActuator_set_min_control__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_max_control(ScalarActuator source) {
-    opensimModelSimulationJNI.ScalarActuator_copyProperty_max_control(swigCPtr, this, ScalarActuator.getCPtr(source), source);
+    opensimSimulationJNI.ScalarActuator_copyProperty_max_control(swigCPtr, this, ScalarActuator.getCPtr(source), source);
   }
 
   public double get_max_control(int i) {
-    return opensimModelSimulationJNI.ScalarActuator_get_max_control__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.ScalarActuator_get_max_control__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_max_control(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.ScalarActuator_upd_max_control__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.ScalarActuator_upd_max_control__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_max_control(int i, double value) {
-    opensimModelSimulationJNI.ScalarActuator_set_max_control__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.ScalarActuator_set_max_control__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_max_control(double value) {
-    return opensimModelSimulationJNI.ScalarActuator_append_max_control(swigCPtr, this, value);
+    return opensimSimulationJNI.ScalarActuator_append_max_control(swigCPtr, this, value);
   }
 
   public void constructProperty_max_control(double initValue) {
-    opensimModelSimulationJNI.ScalarActuator_constructProperty_max_control(swigCPtr, this, initValue);
+    opensimSimulationJNI.ScalarActuator_constructProperty_max_control(swigCPtr, this, initValue);
   }
 
   public double get_max_control() {
-    return opensimModelSimulationJNI.ScalarActuator_get_max_control__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.ScalarActuator_get_max_control__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_max_control() {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.ScalarActuator_upd_max_control__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.ScalarActuator_upd_max_control__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_max_control(double value) {
-    opensimModelSimulationJNI.ScalarActuator_set_max_control__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.ScalarActuator_set_max_control__SWIG_1(swigCPtr, this, value);
   }
 
   public void set_has_output_actuation(boolean value) {
-    opensimModelSimulationJNI.ScalarActuator__has_output_actuation_set(swigCPtr, this, value);
+    opensimSimulationJNI.ScalarActuator__has_output_actuation_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_actuation() {
-    return opensimModelSimulationJNI.ScalarActuator__has_output_actuation_get(swigCPtr, this);
+    return opensimSimulationJNI.ScalarActuator__has_output_actuation_get(swigCPtr, this);
   }
 
   public void set_has_output_speed(boolean value) {
-    opensimModelSimulationJNI.ScalarActuator__has_output_speed_set(swigCPtr, this, value);
+    opensimSimulationJNI.ScalarActuator__has_output_speed_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_speed() {
-    return opensimModelSimulationJNI.ScalarActuator__has_output_speed_get(swigCPtr, this);
+    return opensimSimulationJNI.ScalarActuator__has_output_speed_get(swigCPtr, this);
   }
 
   public double getControl(State s) {
-    return opensimModelSimulationJNI.ScalarActuator_getControl(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.ScalarActuator_getControl(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public int numControls() {
-    return opensimModelSimulationJNI.ScalarActuator_numControls(swigCPtr, this);
+    return opensimSimulationJNI.ScalarActuator_numControls(swigCPtr, this);
   }
 
   public void setActuation(State s, double aActuation) {
-    opensimModelSimulationJNI.ScalarActuator_setActuation(swigCPtr, this, State.getCPtr(s), s, aActuation);
+    opensimSimulationJNI.ScalarActuator_setActuation(swigCPtr, this, State.getCPtr(s), s, aActuation);
   }
 
   public double getActuation(State s) {
-    return opensimModelSimulationJNI.ScalarActuator_getActuation(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.ScalarActuator_getActuation(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setSpeed(State s, double aspeed) {
-    opensimModelSimulationJNI.ScalarActuator_setSpeed(swigCPtr, this, State.getCPtr(s), s, aspeed);
+    opensimSimulationJNI.ScalarActuator_setSpeed(swigCPtr, this, State.getCPtr(s), s, aspeed);
   }
 
   public double getSpeed(State s) {
-    return opensimModelSimulationJNI.ScalarActuator_getSpeed(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.ScalarActuator_getSpeed(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getPower(State s) {
-    return opensimModelSimulationJNI.ScalarActuator_getPower(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.ScalarActuator_getPower(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getStress(State s) {
-    return opensimModelSimulationJNI.ScalarActuator_getStress(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.ScalarActuator_getStress(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getOptimalForce() {
-    return opensimModelSimulationJNI.ScalarActuator_getOptimalForce(swigCPtr, this);
+    return opensimSimulationJNI.ScalarActuator_getOptimalForce(swigCPtr, this);
   }
 
   public void setMinControl(double aMinControl) {
-    opensimModelSimulationJNI.ScalarActuator_setMinControl(swigCPtr, this, aMinControl);
+    opensimSimulationJNI.ScalarActuator_setMinControl(swigCPtr, this, aMinControl);
   }
 
   public double getMinControl() {
-    return opensimModelSimulationJNI.ScalarActuator_getMinControl(swigCPtr, this);
+    return opensimSimulationJNI.ScalarActuator_getMinControl(swigCPtr, this);
   }
 
   public void setMaxControl(double aMaxControl) {
-    opensimModelSimulationJNI.ScalarActuator_setMaxControl(swigCPtr, this, aMaxControl);
+    opensimSimulationJNI.ScalarActuator_setMaxControl(swigCPtr, this, aMaxControl);
   }
 
   public double getMaxControl() {
-    return opensimModelSimulationJNI.ScalarActuator_getMaxControl(swigCPtr, this);
+    return opensimSimulationJNI.ScalarActuator_getMaxControl(swigCPtr, this);
   }
 
   public void overrideActuation(State s, boolean flag) {
-    opensimModelSimulationJNI.ScalarActuator_overrideActuation(swigCPtr, this, State.getCPtr(s), s, flag);
+    opensimSimulationJNI.ScalarActuator_overrideActuation(swigCPtr, this, State.getCPtr(s), s, flag);
   }
 
   public boolean isActuationOverridden(State s) {
-    return opensimModelSimulationJNI.ScalarActuator_isActuationOverridden(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.ScalarActuator_isActuationOverridden(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setOverrideActuation(State s, double value) {
-    opensimModelSimulationJNI.ScalarActuator_setOverrideActuation(swigCPtr, this, State.getCPtr(s), s, value);
+    opensimSimulationJNI.ScalarActuator_setOverrideActuation(swigCPtr, this, State.getCPtr(s), s, value);
   }
 
   public double getOverrideActuation(State s) {
-    return opensimModelSimulationJNI.ScalarActuator_getOverrideActuation(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.ScalarActuator_getOverrideActuation(swigCPtr, this, State.getCPtr(s), s);
   }
 
 }

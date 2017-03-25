@@ -12,7 +12,7 @@ public class ComponentFilterAbsolutePathNameContainsString extends ComponentFilt
   private transient long swigCPtr;
 
   public ComponentFilterAbsolutePathNameContainsString(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.ComponentFilterAbsolutePathNameContainsString_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.ComponentFilterAbsolutePathNameContainsString_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ComponentFilterAbsolutePathNameContainsString extends ComponentFilt
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_ComponentFilterAbsolutePathNameContainsString(swigCPtr);
+        opensimCommonJNI.delete_ComponentFilterAbsolutePathNameContainsString(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,15 +36,15 @@ public class ComponentFilterAbsolutePathNameContainsString extends ComponentFilt
   }
 
   public ComponentFilterAbsolutePathNameContainsString(String substring) {
-    this(opensimModelCommonJNI.new_ComponentFilterAbsolutePathNameContainsString(substring), true);
+    this(opensimCommonJNI.new_ComponentFilterAbsolutePathNameContainsString(substring), true);
   }
 
   public boolean isMatch(Component comp) {
-    return opensimModelCommonJNI.ComponentFilterAbsolutePathNameContainsString_isMatch(swigCPtr, this, Component.getCPtr(comp), comp);
+    return opensimCommonJNI.ComponentFilterAbsolutePathNameContainsString_isMatch(swigCPtr, this, Component.getCPtr(comp), comp);
   }
 
   public ComponentFilter clone() {
-    long cPtr = opensimModelCommonJNI.ComponentFilterAbsolutePathNameContainsString_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.ComponentFilterAbsolutePathNameContainsString_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ComponentFilterAbsolutePathNameContainsString(cPtr, true);
   }
 

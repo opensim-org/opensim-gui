@@ -12,7 +12,7 @@ public class FiberCompressiveForceCosPennationCurve extends Function {
   private transient long swigCPtr;
 
   public FiberCompressiveForceCosPennationCurve(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.FiberCompressiveForceCosPennationCurve_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class FiberCompressiveForceCosPennationCurve extends Function {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_FiberCompressiveForceCosPennationCurve(swigCPtr);
+        opensimSimulationJNI.delete_FiberCompressiveForceCosPennationCurve(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,205 +36,205 @@ public class FiberCompressiveForceCosPennationCurve extends Function {
   }
 
   public static FiberCompressiveForceCosPennationCurve safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.FiberCompressiveForceCosPennationCurve_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new FiberCompressiveForceCosPennationCurve(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.FiberCompressiveForceCosPennationCurve_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.FiberCompressiveForceCosPennationCurve_getClassName();
+    return opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.FiberCompressiveForceCosPennationCurve_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new FiberCompressiveForceCosPennationCurve(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.FiberCompressiveForceCosPennationCurve_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_engagement_angle_in_degrees(FiberCompressiveForceCosPennationCurve source) {
-    opensimModelJNI.FiberCompressiveForceCosPennationCurve_copyProperty_engagement_angle_in_degrees(swigCPtr, this, FiberCompressiveForceCosPennationCurve.getCPtr(source), source);
+    opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_copyProperty_engagement_angle_in_degrees(swigCPtr, this, FiberCompressiveForceCosPennationCurve.getCPtr(source), source);
   }
 
   public double get_engagement_angle_in_degrees(int i) {
-    return opensimModelJNI.FiberCompressiveForceCosPennationCurve_get_engagement_angle_in_degrees__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_get_engagement_angle_in_degrees__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_engagement_angle_in_degrees(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.FiberCompressiveForceCosPennationCurve_upd_engagement_angle_in_degrees__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_upd_engagement_angle_in_degrees__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_engagement_angle_in_degrees(int i, double value) {
-    opensimModelJNI.FiberCompressiveForceCosPennationCurve_set_engagement_angle_in_degrees__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_set_engagement_angle_in_degrees__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_engagement_angle_in_degrees(double value) {
-    return opensimModelJNI.FiberCompressiveForceCosPennationCurve_append_engagement_angle_in_degrees(swigCPtr, this, value);
+    return opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_append_engagement_angle_in_degrees(swigCPtr, this, value);
   }
 
   public void constructProperty_engagement_angle_in_degrees(double initValue) {
-    opensimModelJNI.FiberCompressiveForceCosPennationCurve_constructProperty_engagement_angle_in_degrees(swigCPtr, this, initValue);
+    opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_constructProperty_engagement_angle_in_degrees(swigCPtr, this, initValue);
   }
 
   public double get_engagement_angle_in_degrees() {
-    return opensimModelJNI.FiberCompressiveForceCosPennationCurve_get_engagement_angle_in_degrees__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_get_engagement_angle_in_degrees__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_engagement_angle_in_degrees() {
-    return new SWIGTYPE_p_double(opensimModelJNI.FiberCompressiveForceCosPennationCurve_upd_engagement_angle_in_degrees__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_upd_engagement_angle_in_degrees__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_engagement_angle_in_degrees(double value) {
-    opensimModelJNI.FiberCompressiveForceCosPennationCurve_set_engagement_angle_in_degrees__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_set_engagement_angle_in_degrees__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_stiffness_at_perpendicular(FiberCompressiveForceCosPennationCurve source) {
-    opensimModelJNI.FiberCompressiveForceCosPennationCurve_copyProperty_stiffness_at_perpendicular(swigCPtr, this, FiberCompressiveForceCosPennationCurve.getCPtr(source), source);
+    opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_copyProperty_stiffness_at_perpendicular(swigCPtr, this, FiberCompressiveForceCosPennationCurve.getCPtr(source), source);
   }
 
   public double get_stiffness_at_perpendicular(int i) {
-    return opensimModelJNI.FiberCompressiveForceCosPennationCurve_get_stiffness_at_perpendicular__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_get_stiffness_at_perpendicular__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_stiffness_at_perpendicular(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.FiberCompressiveForceCosPennationCurve_upd_stiffness_at_perpendicular__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_upd_stiffness_at_perpendicular__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_stiffness_at_perpendicular(int i, double value) {
-    opensimModelJNI.FiberCompressiveForceCosPennationCurve_set_stiffness_at_perpendicular__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_set_stiffness_at_perpendicular__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_stiffness_at_perpendicular(double value) {
-    return opensimModelJNI.FiberCompressiveForceCosPennationCurve_append_stiffness_at_perpendicular(swigCPtr, this, value);
+    return opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_append_stiffness_at_perpendicular(swigCPtr, this, value);
   }
 
   public void constructProperty_stiffness_at_perpendicular() {
-    opensimModelJNI.FiberCompressiveForceCosPennationCurve_constructProperty_stiffness_at_perpendicular__SWIG_0(swigCPtr, this);
+    opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_constructProperty_stiffness_at_perpendicular__SWIG_0(swigCPtr, this);
   }
 
   public void constructProperty_stiffness_at_perpendicular(double initValue) {
-    opensimModelJNI.FiberCompressiveForceCosPennationCurve_constructProperty_stiffness_at_perpendicular__SWIG_1(swigCPtr, this, initValue);
+    opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_constructProperty_stiffness_at_perpendicular__SWIG_1(swigCPtr, this, initValue);
   }
 
   public double get_stiffness_at_perpendicular() {
-    return opensimModelJNI.FiberCompressiveForceCosPennationCurve_get_stiffness_at_perpendicular__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_get_stiffness_at_perpendicular__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_stiffness_at_perpendicular() {
-    return new SWIGTYPE_p_double(opensimModelJNI.FiberCompressiveForceCosPennationCurve_upd_stiffness_at_perpendicular__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_upd_stiffness_at_perpendicular__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_stiffness_at_perpendicular(double value) {
-    opensimModelJNI.FiberCompressiveForceCosPennationCurve_set_stiffness_at_perpendicular__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_set_stiffness_at_perpendicular__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_curviness(FiberCompressiveForceCosPennationCurve source) {
-    opensimModelJNI.FiberCompressiveForceCosPennationCurve_copyProperty_curviness(swigCPtr, this, FiberCompressiveForceCosPennationCurve.getCPtr(source), source);
+    opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_copyProperty_curviness(swigCPtr, this, FiberCompressiveForceCosPennationCurve.getCPtr(source), source);
   }
 
   public double get_curviness(int i) {
-    return opensimModelJNI.FiberCompressiveForceCosPennationCurve_get_curviness__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_get_curviness__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_curviness(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.FiberCompressiveForceCosPennationCurve_upd_curviness__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_upd_curviness__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_curviness(int i, double value) {
-    opensimModelJNI.FiberCompressiveForceCosPennationCurve_set_curviness__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_set_curviness__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_curviness(double value) {
-    return opensimModelJNI.FiberCompressiveForceCosPennationCurve_append_curviness(swigCPtr, this, value);
+    return opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_append_curviness(swigCPtr, this, value);
   }
 
   public void constructProperty_curviness() {
-    opensimModelJNI.FiberCompressiveForceCosPennationCurve_constructProperty_curviness__SWIG_0(swigCPtr, this);
+    opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_constructProperty_curviness__SWIG_0(swigCPtr, this);
   }
 
   public void constructProperty_curviness(double initValue) {
-    opensimModelJNI.FiberCompressiveForceCosPennationCurve_constructProperty_curviness__SWIG_1(swigCPtr, this, initValue);
+    opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_constructProperty_curviness__SWIG_1(swigCPtr, this, initValue);
   }
 
   public double get_curviness() {
-    return opensimModelJNI.FiberCompressiveForceCosPennationCurve_get_curviness__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_get_curviness__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_curviness() {
-    return new SWIGTYPE_p_double(opensimModelJNI.FiberCompressiveForceCosPennationCurve_upd_curviness__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_upd_curviness__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_curviness(double value) {
-    opensimModelJNI.FiberCompressiveForceCosPennationCurve_set_curviness__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_set_curviness__SWIG_1(swigCPtr, this, value);
   }
 
   public FiberCompressiveForceCosPennationCurve() {
-    this(opensimModelJNI.new_FiberCompressiveForceCosPennationCurve__SWIG_0(), true);
+    this(opensimSimulationJNI.new_FiberCompressiveForceCosPennationCurve__SWIG_0(), true);
   }
 
   public FiberCompressiveForceCosPennationCurve(double engagementAngleInDegrees, double stiffnessAtPerpendicular, double curviness, String muscleName) {
-    this(opensimModelJNI.new_FiberCompressiveForceCosPennationCurve__SWIG_1(engagementAngleInDegrees, stiffnessAtPerpendicular, curviness, muscleName), true);
+    this(opensimSimulationJNI.new_FiberCompressiveForceCosPennationCurve__SWIG_1(engagementAngleInDegrees, stiffnessAtPerpendicular, curviness, muscleName), true);
   }
 
   public FiberCompressiveForceCosPennationCurve(double engagementAngleInDegrees, String muscleName) {
-    this(opensimModelJNI.new_FiberCompressiveForceCosPennationCurve__SWIG_2(engagementAngleInDegrees, muscleName), true);
+    this(opensimSimulationJNI.new_FiberCompressiveForceCosPennationCurve__SWIG_2(engagementAngleInDegrees, muscleName), true);
   }
 
   public double getEngagementAngleInDegrees() {
-    return opensimModelJNI.FiberCompressiveForceCosPennationCurve_getEngagementAngleInDegrees(swigCPtr, this);
+    return opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_getEngagementAngleInDegrees(swigCPtr, this);
   }
 
   public double getStiffnessAtPerpendicularInUse() {
-    return opensimModelJNI.FiberCompressiveForceCosPennationCurve_getStiffnessAtPerpendicularInUse(swigCPtr, this);
+    return opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_getStiffnessAtPerpendicularInUse(swigCPtr, this);
   }
 
   public double getCurvinessInUse() {
-    return opensimModelJNI.FiberCompressiveForceCosPennationCurve_getCurvinessInUse(swigCPtr, this);
+    return opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_getCurvinessInUse(swigCPtr, this);
   }
 
   public boolean isFittedCurveBeingUsed() {
-    return opensimModelJNI.FiberCompressiveForceCosPennationCurve_isFittedCurveBeingUsed(swigCPtr, this);
+    return opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_isFittedCurveBeingUsed(swigCPtr, this);
   }
 
   public void setEngagementAngleInDegrees(double aEngagementAngleInDegrees) {
-    opensimModelJNI.FiberCompressiveForceCosPennationCurve_setEngagementAngleInDegrees(swigCPtr, this, aEngagementAngleInDegrees);
+    opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_setEngagementAngleInDegrees(swigCPtr, this, aEngagementAngleInDegrees);
   }
 
   public void setOptionalProperties(double aStiffnessAtPerpendicular, double aCurviness) {
-    opensimModelJNI.FiberCompressiveForceCosPennationCurve_setOptionalProperties(swigCPtr, this, aStiffnessAtPerpendicular, aCurviness);
+    opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_setOptionalProperties(swigCPtr, this, aStiffnessAtPerpendicular, aCurviness);
   }
 
   public double calcValue(double cosPennationAngle) {
-    return opensimModelJNI.FiberCompressiveForceCosPennationCurve_calcValue__SWIG_0(swigCPtr, this, cosPennationAngle);
+    return opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_calcValue__SWIG_0(swigCPtr, this, cosPennationAngle);
   }
 
   public double calcValue(Vector x) {
-    return opensimModelJNI.FiberCompressiveForceCosPennationCurve_calcValue__SWIG_1(swigCPtr, this, Vector.getCPtr(x), x);
+    return opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_calcValue__SWIG_1(swigCPtr, this, Vector.getCPtr(x), x);
   }
 
   public double calcDerivative(double cosPennationAngle, int order) {
-    return opensimModelJNI.FiberCompressiveForceCosPennationCurve_calcDerivative(swigCPtr, this, cosPennationAngle, order);
+    return opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_calcDerivative(swigCPtr, this, cosPennationAngle, order);
   }
 
   public double calcIntegral(double cosPennationAngle) {
-    return opensimModelJNI.FiberCompressiveForceCosPennationCurve_calcIntegral(swigCPtr, this, cosPennationAngle);
+    return opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_calcIntegral(swigCPtr, this, cosPennationAngle);
   }
 
   public Vec2 getCurveDomain() {
-    return new Vec2(opensimModelJNI.FiberCompressiveForceCosPennationCurve_getCurveDomain(swigCPtr, this), true);
+    return new Vec2(opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_getCurveDomain(swigCPtr, this), true);
   }
 
   public void printMuscleCurveToCSVFile(String path) {
-    opensimModelJNI.FiberCompressiveForceCosPennationCurve_printMuscleCurveToCSVFile(swigCPtr, this, path);
+    opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_printMuscleCurveToCSVFile(swigCPtr, this, path);
   }
 
   public void ensureCurveUpToDate() {
-    opensimModelJNI.FiberCompressiveForceCosPennationCurve_ensureCurveUpToDate(swigCPtr, this);
+    opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_ensureCurveUpToDate(swigCPtr, this);
   }
 
 }

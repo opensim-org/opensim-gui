@@ -12,7 +12,7 @@ public class IOError extends OpenSimException {
   private transient long swigCPtr;
 
   public IOError(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.IOError_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.IOError_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class IOError extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_IOError(swigCPtr);
+        opensimCommonJNI.delete_IOError(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class IOError extends OpenSimException {
   }
 
   public IOError() {
-    this(opensimModelCommonJNI.new_IOError(), true);
+    this(opensimCommonJNI.new_IOError(), true);
   }
 
 }

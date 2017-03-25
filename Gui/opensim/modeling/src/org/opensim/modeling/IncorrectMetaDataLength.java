@@ -12,7 +12,7 @@ public class IncorrectMetaDataLength extends OpenSimException {
   private transient long swigCPtr;
 
   public IncorrectMetaDataLength(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.IncorrectMetaDataLength_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.IncorrectMetaDataLength_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class IncorrectMetaDataLength extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_IncorrectMetaDataLength(swigCPtr);
+        opensimCommonJNI.delete_IncorrectMetaDataLength(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class IncorrectMetaDataLength extends OpenSimException {
   }
 
   public IncorrectMetaDataLength(String file, long line, String func, String key, long expected, long received) {
-    this(opensimModelCommonJNI.new_IncorrectMetaDataLength(file, line, func, key, expected, received), true);
+    this(opensimCommonJNI.new_IncorrectMetaDataLength(file, line, func, key, expected, received), true);
   }
 
 }

@@ -29,47 +29,47 @@ public class StdMapStringDataAdapter {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_StdMapStringDataAdapter(swigCPtr);
+        opensimCommonJNI.delete_StdMapStringDataAdapter(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public StdMapStringDataAdapter() {
-    this(opensimModelCommonJNI.new_StdMapStringDataAdapter__SWIG_0(), true);
+    this(opensimCommonJNI.new_StdMapStringDataAdapter__SWIG_0(), true);
   }
 
   public StdMapStringDataAdapter(StdMapStringDataAdapter arg0) {
-    this(opensimModelCommonJNI.new_StdMapStringDataAdapter__SWIG_1(StdMapStringDataAdapter.getCPtr(arg0), arg0), true);
+    this(opensimCommonJNI.new_StdMapStringDataAdapter__SWIG_1(StdMapStringDataAdapter.getCPtr(arg0), arg0), true);
   }
 
   public long size() {
-    return opensimModelCommonJNI.StdMapStringDataAdapter_size(swigCPtr, this);
+    return opensimCommonJNI.StdMapStringDataAdapter_size(swigCPtr, this);
   }
 
   public boolean empty() {
-    return opensimModelCommonJNI.StdMapStringDataAdapter_empty(swigCPtr, this);
+    return opensimCommonJNI.StdMapStringDataAdapter_empty(swigCPtr, this);
   }
 
   public void clear() {
-    opensimModelCommonJNI.StdMapStringDataAdapter_clear(swigCPtr, this);
+    opensimCommonJNI.StdMapStringDataAdapter_clear(swigCPtr, this);
   }
 
   public DataAdapter get(String key) {
-    long cPtr = opensimModelCommonJNI.StdMapStringDataAdapter_get(swigCPtr, this, key);
+    long cPtr = opensimCommonJNI.StdMapStringDataAdapter_get(swigCPtr, this, key);
     return (cPtr == 0) ? null : new DataAdapter(cPtr, true);
   }
 
   public void set(String key, DataAdapter x) {
-    opensimModelCommonJNI.StdMapStringDataAdapter_set(swigCPtr, this, key, DataAdapter.getCPtr(x), x);
+    opensimCommonJNI.StdMapStringDataAdapter_set(swigCPtr, this, key, DataAdapter.getCPtr(x), x);
   }
 
   public void del(String key) {
-    opensimModelCommonJNI.StdMapStringDataAdapter_del(swigCPtr, this, key);
+    opensimCommonJNI.StdMapStringDataAdapter_del(swigCPtr, this, key);
   }
 
   public boolean has_key(String key) {
-    return opensimModelCommonJNI.StdMapStringDataAdapter_has_key(swigCPtr, this, key);
+    return opensimCommonJNI.StdMapStringDataAdapter_has_key(swigCPtr, this, key);
   }
 
 }

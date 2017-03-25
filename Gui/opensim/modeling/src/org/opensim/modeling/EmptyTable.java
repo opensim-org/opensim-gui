@@ -12,7 +12,7 @@ public class EmptyTable extends OpenSimException {
   private transient long swigCPtr;
 
   public EmptyTable(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.EmptyTable_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.EmptyTable_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class EmptyTable extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_EmptyTable(swigCPtr);
+        opensimCommonJNI.delete_EmptyTable(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class EmptyTable extends OpenSimException {
   }
 
   public EmptyTable() {
-    this(opensimModelCommonJNI.new_EmptyTable(), true);
+    this(opensimCommonJNI.new_EmptyTable(), true);
   }
 
 }

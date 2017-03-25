@@ -29,38 +29,38 @@ public class ComponentsList {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_ComponentsList(swigCPtr);
+        opensimCommonJNI.delete_ComponentsList(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public ComponentsList(Component root, ComponentFilter f) {
-    this(opensimModelCommonJNI.new_ComponentsList__SWIG_0(Component.getCPtr(root), root, ComponentFilter.getCPtr(f), f), true);
+    this(opensimCommonJNI.new_ComponentsList__SWIG_0(Component.getCPtr(root), root, ComponentFilter.getCPtr(f), f), true);
   }
 
   public ComponentsList(Component root) {
-    this(opensimModelCommonJNI.new_ComponentsList__SWIG_1(Component.getCPtr(root), root), true);
+    this(opensimCommonJNI.new_ComponentsList__SWIG_1(Component.getCPtr(root), root), true);
   }
 
   public ComponentIterator begin() {
-    return new ComponentIterator(opensimModelCommonJNI.ComponentsList_begin__SWIG_0(swigCPtr, this), true);
+    return new ComponentIterator(opensimCommonJNI.ComponentsList_begin__SWIG_0(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Component_const_t__type_t cbegin() {
-    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Component_const_t__type_t(opensimModelCommonJNI.ComponentsList_cbegin(swigCPtr, this), true);
+    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Component_const_t__type_t(opensimCommonJNI.ComponentsList_cbegin(swigCPtr, this), true);
   }
 
   public ComponentIterator end() {
-    return new ComponentIterator(opensimModelCommonJNI.ComponentsList_end__SWIG_0(swigCPtr, this), true);
+    return new ComponentIterator(opensimCommonJNI.ComponentsList_end__SWIG_0(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Component_const_t__type_t cend() {
-    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Component_const_t__type_t(opensimModelCommonJNI.ComponentsList_cend(swigCPtr, this), true);
+    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Component_const_t__type_t(opensimCommonJNI.ComponentsList_cend(swigCPtr, this), true);
   }
 
   public void setFilter(ComponentFilter filter) {
-    opensimModelCommonJNI.ComponentsList_setFilter(swigCPtr, this, ComponentFilter.getCPtr(filter), filter);
+    opensimCommonJNI.ComponentsList_setFilter(swigCPtr, this, ComponentFilter.getCPtr(filter), filter);
   }
 
 }

@@ -12,7 +12,7 @@ public class Point extends ModelComponent {
   private transient long swigCPtr;
 
   public Point(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.Point_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.Point_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Point extends ModelComponent {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_Point(swigCPtr);
+        opensimSimulationJNI.delete_Point(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,73 +36,73 @@ public class Point extends ModelComponent {
   }
 
   public static Point safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.Point_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.Point_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Point(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.Point_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.Point_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.Point_getClassName();
+    return opensimSimulationJNI.Point_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.Point_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.Point_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Point(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.Point_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.Point_getConcreteClassName(swigCPtr, this);
   }
 
   public void set_has_output_location(boolean value) {
-    opensimModelSimulationJNI.Point__has_output_location_set(swigCPtr, this, value);
+    opensimSimulationJNI.Point__has_output_location_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_location() {
-    return opensimModelSimulationJNI.Point__has_output_location_get(swigCPtr, this);
+    return opensimSimulationJNI.Point__has_output_location_get(swigCPtr, this);
   }
 
   public void set_has_output_velocity(boolean value) {
-    opensimModelSimulationJNI.Point__has_output_velocity_set(swigCPtr, this, value);
+    opensimSimulationJNI.Point__has_output_velocity_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_velocity() {
-    return opensimModelSimulationJNI.Point__has_output_velocity_get(swigCPtr, this);
+    return opensimSimulationJNI.Point__has_output_velocity_get(swigCPtr, this);
   }
 
   public void set_has_output_acceleration(boolean value) {
-    opensimModelSimulationJNI.Point__has_output_acceleration_set(swigCPtr, this, value);
+    opensimSimulationJNI.Point__has_output_acceleration_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_acceleration() {
-    return opensimModelSimulationJNI.Point__has_output_acceleration_get(swigCPtr, this);
+    return opensimSimulationJNI.Point__has_output_acceleration_get(swigCPtr, this);
   }
 
   public Vec3 getLocationInGround(State state) {
-    return new Vec3(opensimModelSimulationJNI.Point_getLocationInGround(swigCPtr, this, State.getCPtr(state), state), false);
+    return new Vec3(opensimSimulationJNI.Point_getLocationInGround(swigCPtr, this, State.getCPtr(state), state), false);
   }
 
   public Vec3 getVelocityInGround(State state) {
-    return new Vec3(opensimModelSimulationJNI.Point_getVelocityInGround(swigCPtr, this, State.getCPtr(state), state), false);
+    return new Vec3(opensimSimulationJNI.Point_getVelocityInGround(swigCPtr, this, State.getCPtr(state), state), false);
   }
 
   public Vec3 getAccelerationInGround(State state) {
-    return new Vec3(opensimModelSimulationJNI.Point_getAccelerationInGround(swigCPtr, this, State.getCPtr(state), state), false);
+    return new Vec3(opensimSimulationJNI.Point_getAccelerationInGround(swigCPtr, this, State.getCPtr(state), state), false);
   }
 
   public double calcDistanceBetween(State state, Point other) {
-    return opensimModelSimulationJNI.Point_calcDistanceBetween__SWIG_0(swigCPtr, this, State.getCPtr(state), state, Point.getCPtr(other), other);
+    return opensimSimulationJNI.Point_calcDistanceBetween__SWIG_0(swigCPtr, this, State.getCPtr(state), state, Point.getCPtr(other), other);
   }
 
   public double calcDistanceBetween(State state, Frame frame, Vec3 location) {
-    return opensimModelSimulationJNI.Point_calcDistanceBetween__SWIG_1(swigCPtr, this, State.getCPtr(state), state, Frame.getCPtr(frame), frame, Vec3.getCPtr(location), location);
+    return opensimSimulationJNI.Point_calcDistanceBetween__SWIG_1(swigCPtr, this, State.getCPtr(state), state, Frame.getCPtr(frame), frame, Vec3.getCPtr(location), location);
   }
 
   public double calcSpeedBetween(State state, Point other) {
-    return opensimModelSimulationJNI.Point_calcSpeedBetween(swigCPtr, this, State.getCPtr(state), state, Point.getCPtr(other), other);
+    return opensimSimulationJNI.Point_calcSpeedBetween(swigCPtr, this, State.getCPtr(state), state, Point.getCPtr(other), other);
   }
 
 }

@@ -12,7 +12,7 @@ public class Solver extends OpenSimObject {
   private transient long swigCPtr;
 
   public Solver(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.Solver_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.Solver_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Solver extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_Solver(swigCPtr);
+        opensimSimulationJNI.delete_Solver(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,29 +36,29 @@ public class Solver extends OpenSimObject {
   }
 
   public static Solver safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.Solver_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.Solver_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Solver(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.Solver_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.Solver_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.Solver_getClassName();
+    return opensimSimulationJNI.Solver_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.Solver_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.Solver_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Solver(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.Solver_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.Solver_getConcreteClassName(swigCPtr, this);
   }
 
   public Model getModel() {
-    return new Model(opensimModelSimulationJNI.Solver_getModel(swigCPtr, this), false);
+    return new Model(opensimSimulationJNI.Solver_getModel(swigCPtr, this), false);
   }
 
 }

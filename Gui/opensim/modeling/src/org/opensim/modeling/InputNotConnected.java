@@ -12,7 +12,7 @@ public class InputNotConnected extends OpenSimException {
   private transient long swigCPtr;
 
   public InputNotConnected(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.InputNotConnected_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.InputNotConnected_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class InputNotConnected extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_InputNotConnected(swigCPtr);
+        opensimCommonJNI.delete_InputNotConnected(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class InputNotConnected extends OpenSimException {
   }
 
   public InputNotConnected(String file, long line, String func, String inputName) {
-    this(opensimModelCommonJNI.new_InputNotConnected(file, line, func, inputName), true);
+    this(opensimCommonJNI.new_InputNotConnected(file, line, func, inputName), true);
   }
 
 }

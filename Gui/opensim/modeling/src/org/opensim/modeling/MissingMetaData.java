@@ -12,7 +12,7 @@ public class MissingMetaData extends OpenSimException {
   private transient long swigCPtr;
 
   public MissingMetaData(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.MissingMetaData_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.MissingMetaData_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class MissingMetaData extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_MissingMetaData(swigCPtr);
+        opensimCommonJNI.delete_MissingMetaData(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class MissingMetaData extends OpenSimException {
   }
 
   public MissingMetaData(String file, long line, String func, String key) {
-    this(opensimModelCommonJNI.new_MissingMetaData(file, line, func, key), true);
+    this(opensimCommonJNI.new_MissingMetaData(file, line, func, key), true);
   }
 
 }

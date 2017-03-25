@@ -12,7 +12,7 @@ public class AnalysisSet extends SetAnalysis {
   private transient long swigCPtr;
 
   public AnalysisSet(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.AnalysisSet_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.AnalysisSet_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class AnalysisSet extends SetAnalysis {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_AnalysisSet(swigCPtr);
+        opensimSimulationJNI.delete_AnalysisSet(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,93 +36,93 @@ public class AnalysisSet extends SetAnalysis {
   }
 
   public static AnalysisSet safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.AnalysisSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.AnalysisSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new AnalysisSet(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.AnalysisSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.AnalysisSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.AnalysisSet_getClassName();
+    return opensimSimulationJNI.AnalysisSet_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.AnalysisSet_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.AnalysisSet_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new AnalysisSet(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.AnalysisSet_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.AnalysisSet_getConcreteClassName(swigCPtr, this);
   }
 
   public AnalysisSet() {
-    this(opensimModelSimulationJNI.new_AnalysisSet__SWIG_0(), true);
+    this(opensimSimulationJNI.new_AnalysisSet__SWIG_0(), true);
   }
 
   public AnalysisSet(Model aModel) {
-    this(opensimModelSimulationJNI.new_AnalysisSet__SWIG_1(Model.getCPtr(aModel), aModel), true);
+    this(opensimSimulationJNI.new_AnalysisSet__SWIG_1(Model.getCPtr(aModel), aModel), true);
   }
 
   public AnalysisSet(String aFileName) {
-    this(opensimModelSimulationJNI.new_AnalysisSet__SWIG_2(aFileName), true);
+    this(opensimSimulationJNI.new_AnalysisSet__SWIG_2(aFileName), true);
   }
 
   public AnalysisSet(AnalysisSet aSet) {
-    this(opensimModelSimulationJNI.new_AnalysisSet__SWIG_3(AnalysisSet.getCPtr(aSet), aSet), true);
+    this(opensimSimulationJNI.new_AnalysisSet__SWIG_3(AnalysisSet.getCPtr(aSet), aSet), true);
   }
 
   public void setModel(Model aModel) {
-    opensimModelSimulationJNI.AnalysisSet_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
+    opensimSimulationJNI.AnalysisSet_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
   public Model getModel() {
-    return new Model(opensimModelSimulationJNI.AnalysisSet_getModel(swigCPtr, this), false);
+    return new Model(opensimSimulationJNI.AnalysisSet_getModel(swigCPtr, this), false);
   }
 
   public void setOn(boolean aTrueFalse) {
-    opensimModelSimulationJNI.AnalysisSet_setOn__SWIG_0(swigCPtr, this, aTrueFalse);
+    opensimSimulationJNI.AnalysisSet_setOn__SWIG_0(swigCPtr, this, aTrueFalse);
   }
 
   public void setOn(ArrayBool aOn) {
-    opensimModelSimulationJNI.AnalysisSet_setOn__SWIG_1(swigCPtr, this, ArrayBool.getCPtr(aOn), aOn);
+    opensimSimulationJNI.AnalysisSet_setOn__SWIG_1(swigCPtr, this, ArrayBool.getCPtr(aOn), aOn);
   }
 
   public ArrayBool getOn() {
-    return new ArrayBool(opensimModelSimulationJNI.AnalysisSet_getOn(swigCPtr, this), true);
+    return new ArrayBool(opensimSimulationJNI.AnalysisSet_getOn(swigCPtr, this), true);
   }
 
   public void begin(State s) {
-    opensimModelSimulationJNI.AnalysisSet_begin(swigCPtr, this, State.getCPtr(s), s);
+    opensimSimulationJNI.AnalysisSet_begin(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void step(State s, int stepNumber) {
-    opensimModelSimulationJNI.AnalysisSet_step(swigCPtr, this, State.getCPtr(s), s, stepNumber);
+    opensimSimulationJNI.AnalysisSet_step(swigCPtr, this, State.getCPtr(s), s, stepNumber);
   }
 
   public void end(State s) {
-    opensimModelSimulationJNI.AnalysisSet_end(swigCPtr, this, State.getCPtr(s), s);
+    opensimSimulationJNI.AnalysisSet_end(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void printResults(String aBaseName, String aPath, double aDT, String aExtension) {
-    opensimModelSimulationJNI.AnalysisSet_printResults__SWIG_0(swigCPtr, this, aBaseName, aPath, aDT, aExtension);
+    opensimSimulationJNI.AnalysisSet_printResults__SWIG_0(swigCPtr, this, aBaseName, aPath, aDT, aExtension);
   }
 
   public void printResults(String aBaseName, String aPath, double aDT) {
-    opensimModelSimulationJNI.AnalysisSet_printResults__SWIG_1(swigCPtr, this, aBaseName, aPath, aDT);
+    opensimSimulationJNI.AnalysisSet_printResults__SWIG_1(swigCPtr, this, aBaseName, aPath, aDT);
   }
 
   public void printResults(String aBaseName, String aPath) {
-    opensimModelSimulationJNI.AnalysisSet_printResults__SWIG_2(swigCPtr, this, aBaseName, aPath);
+    opensimSimulationJNI.AnalysisSet_printResults__SWIG_2(swigCPtr, this, aBaseName, aPath);
   }
 
   public void printResults(String aBaseName) {
-    opensimModelSimulationJNI.AnalysisSet_printResults__SWIG_3(swigCPtr, this, aBaseName);
+    opensimSimulationJNI.AnalysisSet_printResults__SWIG_3(swigCPtr, this, aBaseName);
   }
 
   public static void getAvailableAnalyses(AnalysisSet analysisset) {
-    opensimModelSimulationJNI.AnalysisSet_getAvailableAnalyses(AnalysisSet.getCPtr(analysisset), analysisset);
+    opensimSimulationJNI.AnalysisSet_getAvailableAnalyses(AnalysisSet.getCPtr(analysisset), analysisset);
   }
 
 }

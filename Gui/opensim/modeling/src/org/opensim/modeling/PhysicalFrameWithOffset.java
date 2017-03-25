@@ -12,7 +12,7 @@ public class PhysicalFrameWithOffset extends PhysicalFrame {
   private transient long swigCPtr;
 
   public PhysicalFrameWithOffset(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.PhysicalFrameWithOffset_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.PhysicalFrameWithOffset_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class PhysicalFrameWithOffset extends PhysicalFrame {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_PhysicalFrameWithOffset(swigCPtr);
+        opensimSimulationJNI.delete_PhysicalFrameWithOffset(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,129 +36,129 @@ public class PhysicalFrameWithOffset extends PhysicalFrame {
   }
 
   public static PhysicalFrameWithOffset safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.PhysicalFrameWithOffset_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.PhysicalFrameWithOffset_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new PhysicalFrameWithOffset(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.PhysicalFrameWithOffset_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.PhysicalFrameWithOffset_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.PhysicalFrameWithOffset_getClassName();
+    return opensimSimulationJNI.PhysicalFrameWithOffset_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.PhysicalFrameWithOffset_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.PhysicalFrameWithOffset_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new PhysicalFrameWithOffset(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.PhysicalFrameWithOffset_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.PhysicalFrameWithOffset_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_translation(PhysicalFrameWithOffset source) {
-    opensimModelSimulationJNI.PhysicalFrameWithOffset_copyProperty_translation(swigCPtr, this, PhysicalFrameWithOffset.getCPtr(source), source);
+    opensimSimulationJNI.PhysicalFrameWithOffset_copyProperty_translation(swigCPtr, this, PhysicalFrameWithOffset.getCPtr(source), source);
   }
 
   public Vec3 get_translation(int i) {
-    return new Vec3(opensimModelSimulationJNI.PhysicalFrameWithOffset_get_translation__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimSimulationJNI.PhysicalFrameWithOffset_get_translation__SWIG_0(swigCPtr, this, i), false);
   }
 
   public Vec3 upd_translation(int i) {
-    return new Vec3(opensimModelSimulationJNI.PhysicalFrameWithOffset_upd_translation__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimSimulationJNI.PhysicalFrameWithOffset_upd_translation__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_translation(int i, Vec3 value) {
-    opensimModelSimulationJNI.PhysicalFrameWithOffset_set_translation__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+    opensimSimulationJNI.PhysicalFrameWithOffset_set_translation__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
   }
 
   public int append_translation(Vec3 value) {
-    return opensimModelSimulationJNI.PhysicalFrameWithOffset_append_translation(swigCPtr, this, Vec3.getCPtr(value), value);
+    return opensimSimulationJNI.PhysicalFrameWithOffset_append_translation(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void constructProperty_translation(Vec3 initValue) {
-    opensimModelSimulationJNI.PhysicalFrameWithOffset_constructProperty_translation(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+    opensimSimulationJNI.PhysicalFrameWithOffset_constructProperty_translation(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
   }
 
   public Vec3 get_translation() {
-    return new Vec3(opensimModelSimulationJNI.PhysicalFrameWithOffset_get_translation__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.PhysicalFrameWithOffset_get_translation__SWIG_1(swigCPtr, this), false);
   }
 
   public Vec3 upd_translation() {
-    return new Vec3(opensimModelSimulationJNI.PhysicalFrameWithOffset_upd_translation__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.PhysicalFrameWithOffset_upd_translation__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_translation(Vec3 value) {
-    opensimModelSimulationJNI.PhysicalFrameWithOffset_set_translation__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+    opensimSimulationJNI.PhysicalFrameWithOffset_set_translation__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void copyProperty_orientation(PhysicalFrameWithOffset source) {
-    opensimModelSimulationJNI.PhysicalFrameWithOffset_copyProperty_orientation(swigCPtr, this, PhysicalFrameWithOffset.getCPtr(source), source);
+    opensimSimulationJNI.PhysicalFrameWithOffset_copyProperty_orientation(swigCPtr, this, PhysicalFrameWithOffset.getCPtr(source), source);
   }
 
   public Vec3 get_orientation(int i) {
-    return new Vec3(opensimModelSimulationJNI.PhysicalFrameWithOffset_get_orientation__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimSimulationJNI.PhysicalFrameWithOffset_get_orientation__SWIG_0(swigCPtr, this, i), false);
   }
 
   public Vec3 upd_orientation(int i) {
-    return new Vec3(opensimModelSimulationJNI.PhysicalFrameWithOffset_upd_orientation__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimSimulationJNI.PhysicalFrameWithOffset_upd_orientation__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_orientation(int i, Vec3 value) {
-    opensimModelSimulationJNI.PhysicalFrameWithOffset_set_orientation__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+    opensimSimulationJNI.PhysicalFrameWithOffset_set_orientation__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
   }
 
   public int append_orientation(Vec3 value) {
-    return opensimModelSimulationJNI.PhysicalFrameWithOffset_append_orientation(swigCPtr, this, Vec3.getCPtr(value), value);
+    return opensimSimulationJNI.PhysicalFrameWithOffset_append_orientation(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void constructProperty_orientation(Vec3 initValue) {
-    opensimModelSimulationJNI.PhysicalFrameWithOffset_constructProperty_orientation(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+    opensimSimulationJNI.PhysicalFrameWithOffset_constructProperty_orientation(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
   }
 
   public Vec3 get_orientation() {
-    return new Vec3(opensimModelSimulationJNI.PhysicalFrameWithOffset_get_orientation__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.PhysicalFrameWithOffset_get_orientation__SWIG_1(swigCPtr, this), false);
   }
 
   public Vec3 upd_orientation() {
-    return new Vec3(opensimModelSimulationJNI.PhysicalFrameWithOffset_upd_orientation__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.PhysicalFrameWithOffset_upd_orientation__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_orientation(Vec3 value) {
-    opensimModelSimulationJNI.PhysicalFrameWithOffset_set_orientation__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+    opensimSimulationJNI.PhysicalFrameWithOffset_set_orientation__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_connector_parent_connectee_name(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelSimulationJNI.PhysicalFrameWithOffset_PropertyIndex_connector_parent_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_socket_parent_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimSimulationJNI.PhysicalFrameWithOffset_PropertyIndex_socket_parent_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_parent_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.PhysicalFrameWithOffset_PropertyIndex_connector_parent_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_parent_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.PhysicalFrameWithOffset_PropertyIndex_socket_parent_connectee_name_get(swigCPtr, this), true);
   }
 
-  public void connectConnector_parent(OpenSimObject object) {
-    opensimModelSimulationJNI.PhysicalFrameWithOffset_connectConnector_parent(swigCPtr, this, OpenSimObject.getCPtr(object), object);
+  public void connectSocket_parent(OpenSimObject object) {
+    opensimSimulationJNI.PhysicalFrameWithOffset_connectSocket_parent(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
   public void setParentFrame(PhysicalFrame parent) {
-    opensimModelSimulationJNI.PhysicalFrameWithOffset_setParentFrame(swigCPtr, this, PhysicalFrame.getCPtr(parent), parent);
+    opensimSimulationJNI.PhysicalFrameWithOffset_setParentFrame(swigCPtr, this, PhysicalFrame.getCPtr(parent), parent);
   }
 
   public PhysicalFrame getParentFrame() {
-    return new PhysicalFrame(opensimModelSimulationJNI.PhysicalFrameWithOffset_getParentFrame(swigCPtr, this), false);
+    return new PhysicalFrame(opensimSimulationJNI.PhysicalFrameWithOffset_getParentFrame(swigCPtr, this), false);
   }
 
   public Transform getOffsetTransform() {
-    return new Transform(opensimModelSimulationJNI.PhysicalFrameWithOffset_getOffsetTransform(swigCPtr, this), false);
+    return new Transform(opensimSimulationJNI.PhysicalFrameWithOffset_getOffsetTransform(swigCPtr, this), false);
   }
 
   public void setOffsetTransform(Transform offset) {
-    opensimModelSimulationJNI.PhysicalFrameWithOffset_setOffsetTransform(swigCPtr, this, Transform.getCPtr(offset), offset);
+    opensimSimulationJNI.PhysicalFrameWithOffset_setOffsetTransform(swigCPtr, this, Transform.getCPtr(offset), offset);
   }
 
   public void scale(Vec3 scaleFactors) {
-    opensimModelSimulationJNI.PhysicalFrameWithOffset_scale(swigCPtr, this, Vec3.getCPtr(scaleFactors), scaleFactors);
+    opensimSimulationJNI.PhysicalFrameWithOffset_scale(swigCPtr, this, Vec3.getCPtr(scaleFactors), scaleFactors);
   }
 
 }

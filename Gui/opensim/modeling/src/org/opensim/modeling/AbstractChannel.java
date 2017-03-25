@@ -29,26 +29,26 @@ public class AbstractChannel {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_AbstractChannel(swigCPtr);
+        opensimCommonJNI.delete_AbstractChannel(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public String getChannelName() {
-    return opensimModelCommonJNI.AbstractChannel_getChannelName(swigCPtr, this);
+    return opensimCommonJNI.AbstractChannel_getChannelName(swigCPtr, this);
   }
 
   public String getTypeName() {
-    return opensimModelCommonJNI.AbstractChannel_getTypeName(swigCPtr, this);
+    return opensimCommonJNI.AbstractChannel_getTypeName(swigCPtr, this);
   }
 
   public String getName() {
-    return opensimModelCommonJNI.AbstractChannel_getName(swigCPtr, this);
+    return opensimCommonJNI.AbstractChannel_getName(swigCPtr, this);
   }
 
   public String getPathName() {
-    return opensimModelCommonJNI.AbstractChannel_getPathName(swigCPtr, this);
+    return opensimCommonJNI.AbstractChannel_getPathName(swigCPtr, this);
   }
 
 }

@@ -12,7 +12,7 @@ public class SetWrapObject extends OpenSimObject {
   private transient long swigCPtr;
 
   public SetWrapObject(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.SetWrapObject_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.SetWrapObject_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class SetWrapObject extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_SetWrapObject(swigCPtr);
+        opensimSimulationJNI.delete_SetWrapObject(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,158 +36,158 @@ public class SetWrapObject extends OpenSimObject {
   }
 
   public static SetWrapObject safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.SetWrapObject_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.SetWrapObject_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new SetWrapObject(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.SetWrapObject_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.SetWrapObject_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.SetWrapObject_getClassName();
+    return opensimSimulationJNI.SetWrapObject_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.SetWrapObject_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.SetWrapObject_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new SetWrapObject(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.SetWrapObject_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.SetWrapObject_getConcreteClassName(swigCPtr, this);
   }
 
   public SetWrapObject() {
-    this(opensimModelSimulationJNI.new_SetWrapObject__SWIG_0(), true);
+    this(opensimSimulationJNI.new_SetWrapObject__SWIG_0(), true);
   }
 
   public SetWrapObject(String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelSimulationJNI.new_SetWrapObject__SWIG_1(aFileName, aUpdateFromXMLNode), true);
+    this(opensimSimulationJNI.new_SetWrapObject__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
   public SetWrapObject(String aFileName) {
-    this(opensimModelSimulationJNI.new_SetWrapObject__SWIG_2(aFileName), true);
+    this(opensimSimulationJNI.new_SetWrapObject__SWIG_2(aFileName), true);
   }
 
   public SetWrapObject(SetWrapObject aSet) {
-    this(opensimModelSimulationJNI.new_SetWrapObject__SWIG_3(SetWrapObject.getCPtr(aSet), aSet), true);
+    this(opensimSimulationJNI.new_SetWrapObject__SWIG_3(SetWrapObject.getCPtr(aSet), aSet), true);
   }
 
   public void setupGroups() {
-    opensimModelSimulationJNI.SetWrapObject_setupGroups(swigCPtr, this);
+    opensimSimulationJNI.SetWrapObject_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {
-    opensimModelSimulationJNI.SetWrapObject_setMemoryOwner(swigCPtr, this, aTrueFalse);
+    opensimSimulationJNI.SetWrapObject_setMemoryOwner(swigCPtr, this, aTrueFalse);
   }
 
   public boolean setSize(int aSize) {
-    return opensimModelSimulationJNI.SetWrapObject_setSize(swigCPtr, this, aSize);
+    return opensimSimulationJNI.SetWrapObject_setSize(swigCPtr, this, aSize);
   }
 
   public int getSize() {
-    return opensimModelSimulationJNI.SetWrapObject_getSize(swigCPtr, this);
+    return opensimSimulationJNI.SetWrapObject_getSize(swigCPtr, this);
   }
 
   public int getIndex(WrapObject aObject, int aStartIndex) {
-    return opensimModelSimulationJNI.SetWrapObject_getIndex__SWIG_0(swigCPtr, this, WrapObject.getCPtr(aObject), aObject, aStartIndex);
+    return opensimSimulationJNI.SetWrapObject_getIndex__SWIG_0(swigCPtr, this, WrapObject.getCPtr(aObject), aObject, aStartIndex);
   }
 
   public int getIndex(WrapObject aObject) {
-    return opensimModelSimulationJNI.SetWrapObject_getIndex__SWIG_1(swigCPtr, this, WrapObject.getCPtr(aObject), aObject);
+    return opensimSimulationJNI.SetWrapObject_getIndex__SWIG_1(swigCPtr, this, WrapObject.getCPtr(aObject), aObject);
   }
 
   public int getIndex(String aName, int aStartIndex) {
-    return opensimModelSimulationJNI.SetWrapObject_getIndex__SWIG_2(swigCPtr, this, aName, aStartIndex);
+    return opensimSimulationJNI.SetWrapObject_getIndex__SWIG_2(swigCPtr, this, aName, aStartIndex);
   }
 
   public int getIndex(String aName) {
-    return opensimModelSimulationJNI.SetWrapObject_getIndex__SWIG_3(swigCPtr, this, aName);
+    return opensimSimulationJNI.SetWrapObject_getIndex__SWIG_3(swigCPtr, this, aName);
   }
 
   public void getGroupNamesContaining(String aObjectName, ArrayStr rGroupNames) {
-    opensimModelSimulationJNI.SetWrapObject_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
+    opensimSimulationJNI.SetWrapObject_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
   public boolean adoptAndAppend(WrapObject aObject) {
-    return opensimModelSimulationJNI.SetWrapObject_adoptAndAppend(swigCPtr, this, WrapObject.getCPtr(aObject), aObject);
+    return opensimSimulationJNI.SetWrapObject_adoptAndAppend(swigCPtr, this, WrapObject.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(WrapObject aObject) {
-    return opensimModelSimulationJNI.SetWrapObject_cloneAndAppend(swigCPtr, this, WrapObject.getCPtr(aObject), aObject);
+    return opensimSimulationJNI.SetWrapObject_cloneAndAppend(swigCPtr, this, WrapObject.getCPtr(aObject), aObject);
   }
 
   public boolean insert(int aIndex, WrapObject aObject) {
-    return opensimModelSimulationJNI.SetWrapObject_insert(swigCPtr, this, aIndex, WrapObject.getCPtr(aObject), aObject);
+    return opensimSimulationJNI.SetWrapObject_insert(swigCPtr, this, aIndex, WrapObject.getCPtr(aObject), aObject);
   }
 
   public boolean remove(int aIndex) {
-    return opensimModelSimulationJNI.SetWrapObject_remove__SWIG_0(swigCPtr, this, aIndex);
+    return opensimSimulationJNI.SetWrapObject_remove__SWIG_0(swigCPtr, this, aIndex);
   }
 
   public boolean remove(WrapObject aObject) {
-    return opensimModelSimulationJNI.SetWrapObject_remove__SWIG_1(swigCPtr, this, WrapObject.getCPtr(aObject), aObject);
+    return opensimSimulationJNI.SetWrapObject_remove__SWIG_1(swigCPtr, this, WrapObject.getCPtr(aObject), aObject);
   }
 
   public void clearAndDestroy() {
-    opensimModelSimulationJNI.SetWrapObject_clearAndDestroy(swigCPtr, this);
+    opensimSimulationJNI.SetWrapObject_clearAndDestroy(swigCPtr, this);
   }
 
   public boolean set(int aIndex, WrapObject aObject, boolean preserveGroups) {
-    return opensimModelSimulationJNI.SetWrapObject_set__SWIG_0(swigCPtr, this, aIndex, WrapObject.getCPtr(aObject), aObject, preserveGroups);
+    return opensimSimulationJNI.SetWrapObject_set__SWIG_0(swigCPtr, this, aIndex, WrapObject.getCPtr(aObject), aObject, preserveGroups);
   }
 
   public boolean set(int aIndex, WrapObject aObject) {
-    return opensimModelSimulationJNI.SetWrapObject_set__SWIG_1(swigCPtr, this, aIndex, WrapObject.getCPtr(aObject), aObject);
+    return opensimSimulationJNI.SetWrapObject_set__SWIG_1(swigCPtr, this, aIndex, WrapObject.getCPtr(aObject), aObject);
   }
 
   public WrapObject get(int aIndex) {
-    return new WrapObject(opensimModelSimulationJNI.SetWrapObject_get__SWIG_0(swigCPtr, this, aIndex), false);
+    return new WrapObject(opensimSimulationJNI.SetWrapObject_get__SWIG_0(swigCPtr, this, aIndex), false);
   }
 
   public WrapObject get(String aName) {
-    return new WrapObject(opensimModelSimulationJNI.SetWrapObject_get__SWIG_1(swigCPtr, this, aName), false);
+    return new WrapObject(opensimSimulationJNI.SetWrapObject_get__SWIG_1(swigCPtr, this, aName), false);
   }
 
   public boolean contains(String aName) {
-    return opensimModelSimulationJNI.SetWrapObject_contains(swigCPtr, this, aName);
+    return opensimSimulationJNI.SetWrapObject_contains(swigCPtr, this, aName);
   }
 
   public void getNames(ArrayStr rNames) {
-    opensimModelSimulationJNI.SetWrapObject_getNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
+    opensimSimulationJNI.SetWrapObject_getNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
   }
 
   public int getNumGroups() {
-    return opensimModelSimulationJNI.SetWrapObject_getNumGroups(swigCPtr, this);
+    return opensimSimulationJNI.SetWrapObject_getNumGroups(swigCPtr, this);
   }
 
   public void addGroup(String aGroupName) {
-    opensimModelSimulationJNI.SetWrapObject_addGroup(swigCPtr, this, aGroupName);
+    opensimSimulationJNI.SetWrapObject_addGroup(swigCPtr, this, aGroupName);
   }
 
   public void removeGroup(String aGroupName) {
-    opensimModelSimulationJNI.SetWrapObject_removeGroup(swigCPtr, this, aGroupName);
+    opensimSimulationJNI.SetWrapObject_removeGroup(swigCPtr, this, aGroupName);
   }
 
   public void renameGroup(String oldGroupName, String newGroupName) {
-    opensimModelSimulationJNI.SetWrapObject_renameGroup(swigCPtr, this, oldGroupName, newGroupName);
+    opensimSimulationJNI.SetWrapObject_renameGroup(swigCPtr, this, oldGroupName, newGroupName);
   }
 
   public void addObjectToGroup(String aGroupName, String aObjectName) {
-    opensimModelSimulationJNI.SetWrapObject_addObjectToGroup(swigCPtr, this, aGroupName, aObjectName);
+    opensimSimulationJNI.SetWrapObject_addObjectToGroup(swigCPtr, this, aGroupName, aObjectName);
   }
 
   public void getGroupNames(ArrayStr rGroupNames) {
-    opensimModelSimulationJNI.SetWrapObject_getGroupNames(swigCPtr, this, ArrayStr.getCPtr(rGroupNames), rGroupNames);
+    opensimSimulationJNI.SetWrapObject_getGroupNames(swigCPtr, this, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
   public ObjectGroup getGroup(String aGroupName) {
-    long cPtr = opensimModelSimulationJNI.SetWrapObject_getGroup__SWIG_0(swigCPtr, this, aGroupName);
+    long cPtr = opensimSimulationJNI.SetWrapObject_getGroup__SWIG_0(swigCPtr, this, aGroupName);
     return (cPtr == 0) ? null : new ObjectGroup(cPtr, false);
   }
 
   public ObjectGroup getGroup(int aIndex) {
-    long cPtr = opensimModelSimulationJNI.SetWrapObject_getGroup__SWIG_1(swigCPtr, this, aIndex);
+    long cPtr = opensimSimulationJNI.SetWrapObject_getGroup__SWIG_1(swigCPtr, this, aIndex);
     return (cPtr == 0) ? null : new ObjectGroup(cPtr, false);
   }
 

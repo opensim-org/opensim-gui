@@ -29,54 +29,54 @@ public class SmoothSegmentedFunction {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_SmoothSegmentedFunction(swigCPtr);
+        opensimCommonJNI.delete_SmoothSegmentedFunction(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public SmoothSegmentedFunction() {
-    this(opensimModelCommonJNI.new_SmoothSegmentedFunction(), true);
+    this(opensimCommonJNI.new_SmoothSegmentedFunction(), true);
   }
 
   public double calcValue(double x) {
-    return opensimModelCommonJNI.SmoothSegmentedFunction_calcValue(swigCPtr, this, x);
+    return opensimCommonJNI.SmoothSegmentedFunction_calcValue(swigCPtr, this, x);
   }
 
   public double calcDerivative(double x, int order) {
-    return opensimModelCommonJNI.SmoothSegmentedFunction_calcDerivative(swigCPtr, this, x, order);
+    return opensimCommonJNI.SmoothSegmentedFunction_calcDerivative(swigCPtr, this, x, order);
   }
 
   public double calcIntegral(double x) {
-    return opensimModelCommonJNI.SmoothSegmentedFunction_calcIntegral(swigCPtr, this, x);
+    return opensimCommonJNI.SmoothSegmentedFunction_calcIntegral(swigCPtr, this, x);
   }
 
   public boolean isIntegralAvailable() {
-    return opensimModelCommonJNI.SmoothSegmentedFunction_isIntegralAvailable(swigCPtr, this);
+    return opensimCommonJNI.SmoothSegmentedFunction_isIntegralAvailable(swigCPtr, this);
   }
 
   public boolean isIntegralComputedLeftToRight() {
-    return opensimModelCommonJNI.SmoothSegmentedFunction_isIntegralComputedLeftToRight(swigCPtr, this);
+    return opensimCommonJNI.SmoothSegmentedFunction_isIntegralComputedLeftToRight(swigCPtr, this);
   }
 
   public String getName() {
-    return opensimModelCommonJNI.SmoothSegmentedFunction_getName(swigCPtr, this);
+    return opensimCommonJNI.SmoothSegmentedFunction_getName(swigCPtr, this);
   }
 
   public void setName(SWIGTYPE_p_std__string name) {
-    opensimModelCommonJNI.SmoothSegmentedFunction_setName(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(name));
+    opensimCommonJNI.SmoothSegmentedFunction_setName(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(name));
   }
 
   public Vec2 getCurveDomain() {
-    return new Vec2(opensimModelCommonJNI.SmoothSegmentedFunction_getCurveDomain(swigCPtr, this), true);
+    return new Vec2(opensimCommonJNI.SmoothSegmentedFunction_getCurveDomain(swigCPtr, this), true);
   }
 
   public void printMuscleCurveToCSVFile(String path, double domainMin, double domainMax) {
-    opensimModelCommonJNI.SmoothSegmentedFunction_printMuscleCurveToCSVFile(swigCPtr, this, path, domainMin, domainMax);
+    opensimCommonJNI.SmoothSegmentedFunction_printMuscleCurveToCSVFile(swigCPtr, this, path, domainMin, domainMax);
   }
 
   public Matrix calcSampledMuscleCurve(int maxOrder, double domainMin, double domainMax) {
-    return new Matrix(opensimModelCommonJNI.SmoothSegmentedFunction_calcSampledMuscleCurve(swigCPtr, this, maxOrder, domainMin, domainMax), true);
+    return new Matrix(opensimCommonJNI.SmoothSegmentedFunction_calcSampledMuscleCurve(swigCPtr, this, maxOrder, domainMin, domainMax), true);
   }
 
 }

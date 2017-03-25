@@ -315,4 +315,16 @@ public class Rotation extends Mat33 {
     return new Vec4(opensimSimbodyJNI.Rotation_convertAngVelDotToQuaternionDotDot(Vec4.getCPtr(q), q, Vec3.getCPtr(w_PB), w_PB, Vec3.getCPtr(b_PB), b_PB), true);
   }
 
+  public Vec3 multiply(Vec3 v) {
+    return new Vec3(opensimSimbodyJNI.Rotation_multiply__SWIG_0(swigCPtr, this, Vec3.getCPtr(v), v), true);
+  }
+
+  public RowVectorOfVec3 multiply(RowVectorOfVec3 row) {
+    return new RowVectorOfVec3(opensimSimbodyJNI.Rotation_multiply__SWIG_1(swigCPtr, this, RowVectorOfVec3.getCPtr(row), row), true);
+  }
+
+  public RowVectorOfVec3 multiply(RowVectorViewVec3 row) {
+    return new RowVectorOfVec3(opensimSimbodyJNI.Rotation_multiply__SWIG_2(swigCPtr, this, RowVectorViewVec3.getCPtr(row), row), true);
+  }
+
 }

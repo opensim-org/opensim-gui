@@ -29,54 +29,54 @@ public class Units {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_Units(swigCPtr);
+        opensimCommonJNI.delete_Units(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public Units() {
-    this(opensimModelCommonJNI.new_Units__SWIG_0(), true);
+    this(opensimCommonJNI.new_Units__SWIG_0(), true);
   }
 
   public Units(Units aUnits) {
-    this(opensimModelCommonJNI.new_Units__SWIG_1(Units.getCPtr(aUnits), aUnits), true);
+    this(opensimCommonJNI.new_Units__SWIG_1(Units.getCPtr(aUnits), aUnits), true);
   }
 
   public Units(String aString) {
-    this(opensimModelCommonJNI.new_Units__SWIG_2(aString), true);
+    this(opensimCommonJNI.new_Units__SWIG_2(aString), true);
   }
 
   public Units(Units.UnitType aType) {
-    this(opensimModelCommonJNI.new_Units__SWIG_3(aType.swigValue()), true);
+    this(opensimCommonJNI.new_Units__SWIG_3(aType.swigValue()), true);
   }
 
   public double convertTo(Units.UnitType aType, double aValue) {
-    return opensimModelCommonJNI.Units_convertTo__SWIG_0(swigCPtr, this, aType.swigValue(), aValue);
+    return opensimCommonJNI.Units_convertTo__SWIG_0(swigCPtr, this, aType.swigValue(), aValue);
   }
 
   public double convertTo(Units.UnitType aType) {
-    return opensimModelCommonJNI.Units_convertTo__SWIG_1(swigCPtr, this, aType.swigValue());
+    return opensimCommonJNI.Units_convertTo__SWIG_1(swigCPtr, this, aType.swigValue());
   }
 
   public double convertTo(Units aUnit) {
-    return opensimModelCommonJNI.Units_convertTo__SWIG_2(swigCPtr, this, Units.getCPtr(aUnit), aUnit);
+    return opensimCommonJNI.Units_convertTo__SWIG_2(swigCPtr, this, Units.getCPtr(aUnit), aUnit);
   }
 
   public Units.UnitType getType() {
-    return Units.UnitType.swigToEnum(opensimModelCommonJNI.Units_getType(swigCPtr, this));
+    return Units.UnitType.swigToEnum(opensimCommonJNI.Units_getType(swigCPtr, this));
   }
 
   public String getLabel() {
-    return opensimModelCommonJNI.Units_getLabel(swigCPtr, this);
+    return opensimCommonJNI.Units_getLabel(swigCPtr, this);
   }
 
   public String getAbbreviation() {
-    return opensimModelCommonJNI.Units_getAbbreviation(swigCPtr, this);
+    return opensimCommonJNI.Units_getAbbreviation(swigCPtr, this);
   }
 
   public final static class UnitType {
-    public final static Units.UnitType UnknownUnits = new Units.UnitType("UnknownUnits", opensimModelCommonJNI.Units_UnknownUnits_get());
+    public final static Units.UnitType UnknownUnits = new Units.UnitType("UnknownUnits", opensimCommonJNI.Units_UnknownUnits_get());
     public final static Units.UnitType Radians = new Units.UnitType("Radians");
     public final static Units.UnitType Degrees = new Units.UnitType("Degrees");
     public final static Units.UnitType Millimeters = new Units.UnitType("Millimeters");

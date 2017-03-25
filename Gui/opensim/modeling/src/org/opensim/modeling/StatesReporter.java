@@ -12,7 +12,7 @@ public class StatesReporter extends Analysis {
   private transient long swigCPtr;
 
   public StatesReporter(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.StatesReporter_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.StatesReporter_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class StatesReporter extends Analysis {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_StatesReporter(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_StatesReporter(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,77 +36,77 @@ public class StatesReporter extends Analysis {
   }
 
   public static StatesReporter safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.StatesReporter_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.StatesReporter_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new StatesReporter(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.StatesReporter_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.StatesReporter_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.StatesReporter_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.StatesReporter_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.StatesReporter_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.StatesReporter_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new StatesReporter(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.StatesReporter_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.StatesReporter_getConcreteClassName(swigCPtr, this);
   }
 
   public StatesReporter(Model aModel) {
-    this(opensimModelJNI.new_StatesReporter__SWIG_0(Model.getCPtr(aModel), aModel), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_StatesReporter__SWIG_0(Model.getCPtr(aModel), aModel), true);
   }
 
   public StatesReporter() {
-    this(opensimModelJNI.new_StatesReporter__SWIG_1(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_StatesReporter__SWIG_1(), true);
   }
 
   public StatesReporter(String aFileName) {
-    this(opensimModelJNI.new_StatesReporter__SWIG_2(aFileName), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_StatesReporter__SWIG_2(aFileName), true);
   }
 
   public StatesReporter(StatesReporter aObject) {
-    this(opensimModelJNI.new_StatesReporter__SWIG_3(StatesReporter.getCPtr(aObject), aObject), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_StatesReporter__SWIG_3(StatesReporter.getCPtr(aObject), aObject), true);
   }
 
   public Storage getStatesStorage() {
-    return new Storage(opensimModelJNI.StatesReporter_getStatesStorage(swigCPtr, this), false);
+    return new Storage(opensimActuatorsAnalysesToolsJNI.StatesReporter_getStatesStorage(swigCPtr, this), false);
   }
 
   public Storage updStatesStorage() {
-    return new Storage(opensimModelJNI.StatesReporter_updStatesStorage(swigCPtr, this), false);
+    return new Storage(opensimActuatorsAnalysesToolsJNI.StatesReporter_updStatesStorage(swigCPtr, this), false);
   }
 
   public int begin(State s) {
-    return opensimModelJNI.StatesReporter_begin(swigCPtr, this, State.getCPtr(s), s);
+    return opensimActuatorsAnalysesToolsJNI.StatesReporter_begin(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public int step(State s, int setNumber) {
-    return opensimModelJNI.StatesReporter_step(swigCPtr, this, State.getCPtr(s), s, setNumber);
+    return opensimActuatorsAnalysesToolsJNI.StatesReporter_step(swigCPtr, this, State.getCPtr(s), s, setNumber);
   }
 
   public int end(State s) {
-    return opensimModelJNI.StatesReporter_end(swigCPtr, this, State.getCPtr(s), s);
+    return opensimActuatorsAnalysesToolsJNI.StatesReporter_end(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public int printResults(String aBaseName, String aDir, double aDT, String aExtension) {
-    return opensimModelJNI.StatesReporter_printResults__SWIG_0(swigCPtr, this, aBaseName, aDir, aDT, aExtension);
+    return opensimActuatorsAnalysesToolsJNI.StatesReporter_printResults__SWIG_0(swigCPtr, this, aBaseName, aDir, aDT, aExtension);
   }
 
   public int printResults(String aBaseName, String aDir, double aDT) {
-    return opensimModelJNI.StatesReporter_printResults__SWIG_1(swigCPtr, this, aBaseName, aDir, aDT);
+    return opensimActuatorsAnalysesToolsJNI.StatesReporter_printResults__SWIG_1(swigCPtr, this, aBaseName, aDir, aDT);
   }
 
   public int printResults(String aBaseName, String aDir) {
-    return opensimModelJNI.StatesReporter_printResults__SWIG_2(swigCPtr, this, aBaseName, aDir);
+    return opensimActuatorsAnalysesToolsJNI.StatesReporter_printResults__SWIG_2(swigCPtr, this, aBaseName, aDir);
   }
 
   public int printResults(String aBaseName) {
-    return opensimModelJNI.StatesReporter_printResults__SWIG_3(swigCPtr, this, aBaseName);
+    return opensimActuatorsAnalysesToolsJNI.StatesReporter_printResults__SWIG_3(swigCPtr, this, aBaseName);
   }
 
 }

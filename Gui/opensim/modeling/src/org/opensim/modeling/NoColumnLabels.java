@@ -12,7 +12,7 @@ public class NoColumnLabels extends OpenSimException {
   private transient long swigCPtr;
 
   public NoColumnLabels(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.NoColumnLabels_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.NoColumnLabels_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class NoColumnLabels extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_NoColumnLabels(swigCPtr);
+        opensimCommonJNI.delete_NoColumnLabels(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class NoColumnLabels extends OpenSimException {
   }
 
   public NoColumnLabels(String file, long line, String func) {
-    this(opensimModelCommonJNI.new_NoColumnLabels(file, line, func), true);
+    this(opensimCommonJNI.new_NoColumnLabels(file, line, func), true);
   }
 
 }

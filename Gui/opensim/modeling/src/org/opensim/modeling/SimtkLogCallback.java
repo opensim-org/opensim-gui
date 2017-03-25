@@ -29,7 +29,7 @@ public class SimtkLogCallback {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_SimtkLogCallback(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_SimtkLogCallback(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -42,29 +42,29 @@ public class SimtkLogCallback {
 
   public void swigReleaseOwnership() {
     swigCMemOwn = false;
-    opensimModelJNI.SimtkLogCallback_change_ownership(this, swigCPtr, false);
+    opensimActuatorsAnalysesToolsJNI.SimtkLogCallback_change_ownership(this, swigCPtr, false);
   }
 
   public void swigTakeOwnership() {
     swigCMemOwn = true;
-    opensimModelJNI.SimtkLogCallback_change_ownership(this, swigCPtr, true);
+    opensimActuatorsAnalysesToolsJNI.SimtkLogCallback_change_ownership(this, swigCPtr, true);
   }
 
   public void log(String str) {
-    if (getClass() == SimtkLogCallback.class) opensimModelJNI.SimtkLogCallback_log(swigCPtr, this, str); else opensimModelJNI.SimtkLogCallback_logSwigExplicitSimtkLogCallback(swigCPtr, this, str);
+    if (getClass() == SimtkLogCallback.class) opensimActuatorsAnalysesToolsJNI.SimtkLogCallback_log(swigCPtr, this, str); else opensimActuatorsAnalysesToolsJNI.SimtkLogCallback_logSwigExplicitSimtkLogCallback(swigCPtr, this, str);
   }
 
   public void addToLogManager() {
-    opensimModelJNI.SimtkLogCallback_addToLogManager(swigCPtr, this);
+    opensimActuatorsAnalysesToolsJNI.SimtkLogCallback_addToLogManager(swigCPtr, this);
   }
 
   public void removeFromLogManager() {
-    opensimModelJNI.SimtkLogCallback_removeFromLogManager(swigCPtr, this);
+    opensimActuatorsAnalysesToolsJNI.SimtkLogCallback_removeFromLogManager(swigCPtr, this);
   }
 
   public SimtkLogCallback() {
-    this(opensimModelJNI.new_SimtkLogCallback(), true);
-    opensimModelJNI.SimtkLogCallback_director_connect(this, swigCPtr, swigCMemOwn, true);
+    this(opensimActuatorsAnalysesToolsJNI.new_SimtkLogCallback(), true);
+    opensimActuatorsAnalysesToolsJNI.SimtkLogCallback_director_connect(this, swigCPtr, swigCMemOwn, true);
   }
 
 }

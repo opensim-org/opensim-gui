@@ -12,7 +12,7 @@ public class TableMissingHeader extends OpenSimException {
   private transient long swigCPtr;
 
   public TableMissingHeader(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.TableMissingHeader_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.TableMissingHeader_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class TableMissingHeader extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_TableMissingHeader(swigCPtr);
+        opensimCommonJNI.delete_TableMissingHeader(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class TableMissingHeader extends OpenSimException {
   }
 
   public TableMissingHeader(String file, long line, String func) {
-    this(opensimModelCommonJNI.new_TableMissingHeader(file, line, func), true);
+    this(opensimCommonJNI.new_TableMissingHeader(file, line, func), true);
   }
 
 }

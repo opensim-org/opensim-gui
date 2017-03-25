@@ -12,7 +12,7 @@ public class InverseDynamics extends Analysis {
   private transient long swigCPtr;
 
   public InverseDynamics(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.InverseDynamics_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.InverseDynamics_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class InverseDynamics extends Analysis {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_InverseDynamics(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_InverseDynamics(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,74 +36,74 @@ public class InverseDynamics extends Analysis {
   }
 
   public static InverseDynamics safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.InverseDynamics_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.InverseDynamics_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new InverseDynamics(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.InverseDynamics_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.InverseDynamics_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.InverseDynamics_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.InverseDynamics_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.InverseDynamics_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.InverseDynamics_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new InverseDynamics(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.InverseDynamics_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.InverseDynamics_getConcreteClassName(swigCPtr, this);
   }
 
   public InverseDynamics(Model aModel) {
-    this(opensimModelJNI.new_InverseDynamics__SWIG_0(Model.getCPtr(aModel), aModel), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_InverseDynamics__SWIG_0(Model.getCPtr(aModel), aModel), true);
   }
 
   public InverseDynamics() {
-    this(opensimModelJNI.new_InverseDynamics__SWIG_1(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_InverseDynamics__SWIG_1(), true);
   }
 
   public InverseDynamics(InverseDynamics aObject) {
-    this(opensimModelJNI.new_InverseDynamics__SWIG_2(InverseDynamics.getCPtr(aObject), aObject), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_InverseDynamics__SWIG_2(InverseDynamics.getCPtr(aObject), aObject), true);
   }
 
   public void setStorageCapacityIncrements(int aIncrement) {
-    opensimModelJNI.InverseDynamics_setStorageCapacityIncrements(swigCPtr, this, aIncrement);
+    opensimActuatorsAnalysesToolsJNI.InverseDynamics_setStorageCapacityIncrements(swigCPtr, this, aIncrement);
   }
 
   public Storage getStorage() {
-    long cPtr = opensimModelJNI.InverseDynamics_getStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.InverseDynamics_getStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public boolean getUseModelForceSet() {
-    return opensimModelJNI.InverseDynamics_getUseModelForceSet(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.InverseDynamics_getUseModelForceSet(swigCPtr, this);
   }
 
   public void setUseModelForceSet(boolean aUseModelForceSet) {
-    opensimModelJNI.InverseDynamics_setUseModelForceSet(swigCPtr, this, aUseModelForceSet);
+    opensimActuatorsAnalysesToolsJNI.InverseDynamics_setUseModelForceSet(swigCPtr, this, aUseModelForceSet);
   }
 
   public void setModel(Model aModel) {
-    opensimModelJNI.InverseDynamics_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
+    opensimActuatorsAnalysesToolsJNI.InverseDynamics_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
   public int printResults(String aBaseName, String aDir, double aDT, String aExtension) {
-    return opensimModelJNI.InverseDynamics_printResults__SWIG_0(swigCPtr, this, aBaseName, aDir, aDT, aExtension);
+    return opensimActuatorsAnalysesToolsJNI.InverseDynamics_printResults__SWIG_0(swigCPtr, this, aBaseName, aDir, aDT, aExtension);
   }
 
   public int printResults(String aBaseName, String aDir, double aDT) {
-    return opensimModelJNI.InverseDynamics_printResults__SWIG_1(swigCPtr, this, aBaseName, aDir, aDT);
+    return opensimActuatorsAnalysesToolsJNI.InverseDynamics_printResults__SWIG_1(swigCPtr, this, aBaseName, aDir, aDT);
   }
 
   public int printResults(String aBaseName, String aDir) {
-    return opensimModelJNI.InverseDynamics_printResults__SWIG_2(swigCPtr, this, aBaseName, aDir);
+    return opensimActuatorsAnalysesToolsJNI.InverseDynamics_printResults__SWIG_2(swigCPtr, this, aBaseName, aDir);
   }
 
   public int printResults(String aBaseName) {
-    return opensimModelJNI.InverseDynamics_printResults__SWIG_3(swigCPtr, this, aBaseName);
+    return opensimActuatorsAnalysesToolsJNI.InverseDynamics_printResults__SWIG_3(swigCPtr, this, aBaseName);
   }
 
 }

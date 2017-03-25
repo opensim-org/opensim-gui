@@ -12,7 +12,7 @@ public class IncorrectNumColumnLabels extends IOError {
   private transient long swigCPtr;
 
   public IncorrectNumColumnLabels(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.IncorrectNumColumnLabels_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.IncorrectNumColumnLabels_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class IncorrectNumColumnLabels extends IOError {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_IncorrectNumColumnLabels(swigCPtr);
+        opensimCommonJNI.delete_IncorrectNumColumnLabels(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class IncorrectNumColumnLabels extends IOError {
   }
 
   public IncorrectNumColumnLabels(String file, long line, String func, String filename, long expected, long received) {
-    this(opensimModelCommonJNI.new_IncorrectNumColumnLabels(file, line, func, filename, expected, received), true);
+    this(opensimCommonJNI.new_IncorrectNumColumnLabels(file, line, func, filename, expected, received), true);
   }
 
 }

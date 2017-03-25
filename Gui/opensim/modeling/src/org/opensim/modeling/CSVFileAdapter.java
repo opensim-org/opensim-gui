@@ -29,31 +29,31 @@ public class CSVFileAdapter {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_CSVFileAdapter(swigCPtr);
+        opensimCommonJNI.delete_CSVFileAdapter(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public CSVFileAdapter() {
-    this(opensimModelCommonJNI.new_CSVFileAdapter__SWIG_0(), true);
+    this(opensimCommonJNI.new_CSVFileAdapter__SWIG_0(), true);
   }
 
   public CSVFileAdapter(CSVFileAdapter arg0) {
-    this(opensimModelCommonJNI.new_CSVFileAdapter__SWIG_1(CSVFileAdapter.getCPtr(arg0), arg0), true);
+    this(opensimCommonJNI.new_CSVFileAdapter__SWIG_1(CSVFileAdapter.getCPtr(arg0), arg0), true);
   }
 
   public CSVFileAdapter clone() {
-    long cPtr = opensimModelCommonJNI.CSVFileAdapter_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.CSVFileAdapter_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new CSVFileAdapter(cPtr, true);
   }
 
   public static TimeSeriesTable read(String fileName) {
-    return new TimeSeriesTable(opensimModelCommonJNI.CSVFileAdapter_read(fileName), true);
+    return new TimeSeriesTable(opensimCommonJNI.CSVFileAdapter_read(fileName), true);
   }
 
   public static void write(TimeSeriesTable table, String fileName) {
-    opensimModelCommonJNI.CSVFileAdapter_write(TimeSeriesTable.getCPtr(table), table, fileName);
+    opensimCommonJNI.CSVFileAdapter_write(TimeSeriesTable.getCPtr(table), table, fileName);
   }
 
 }

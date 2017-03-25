@@ -55,4 +55,8 @@ public class RowVectorOfVec3 extends RowVectorBaseVec3 {
     this(opensimSimbodyJNI.new_RowVectorOfVec3__SWIG_5(StdVectorVec3.getCPtr(row), row), true);
   }
 
+  public VectorOfVec3 transpose() {
+    return new VectorOfVec3(opensimSimbodyJNI.RowVectorOfVec3_transpose(swigCPtr, this), true);
+  }
+
 }

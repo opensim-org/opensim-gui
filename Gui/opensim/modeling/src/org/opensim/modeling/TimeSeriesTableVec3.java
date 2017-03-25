@@ -13,7 +13,7 @@ public class TimeSeriesTableVec3 extends DataTableVec3 {
   private boolean swigCMemOwnDerived;
 
   protected TimeSeriesTableVec3(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.TimeSeriesTableVec3_SWIGSmartPtrUpcast(cPtr), true);
+    super(opensimCommonJNI.TimeSeriesTableVec3_SWIGSmartPtrUpcast(cPtr), true);
     swigCMemOwnDerived = cMemoryOwn;
     swigCPtr = cPtr;
   }
@@ -30,7 +30,7 @@ public class TimeSeriesTableVec3 extends DataTableVec3 {
     if (swigCPtr != 0) {
       if (swigCMemOwnDerived) {
         swigCMemOwnDerived = false;
-        opensimModelCommonJNI.delete_TimeSeriesTableVec3(swigCPtr);
+        opensimCommonJNI.delete_TimeSeriesTableVec3(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -38,51 +38,51 @@ public class TimeSeriesTableVec3 extends DataTableVec3 {
   }
 
   public TimeSeriesTableVec3() {
-    this(opensimModelCommonJNI.new_TimeSeriesTableVec3__SWIG_0(), true);
+    this(opensimCommonJNI.new_TimeSeriesTableVec3__SWIG_0(), true);
   }
 
   public TimeSeriesTableVec3(TimeSeriesTableVec3 arg0) {
-    this(opensimModelCommonJNI.new_TimeSeriesTableVec3__SWIG_1(TimeSeriesTableVec3.getCPtr(arg0), arg0), true);
+    this(opensimCommonJNI.new_TimeSeriesTableVec3__SWIG_1(TimeSeriesTableVec3.getCPtr(arg0), arg0), true);
   }
 
   public TimeSeriesTableVec3(DataTableVec3 datatable) {
-    this(opensimModelCommonJNI.new_TimeSeriesTableVec3__SWIG_2(DataTableVec3.getCPtr(datatable), datatable), true);
+    this(opensimCommonJNI.new_TimeSeriesTableVec3__SWIG_2(DataTableVec3.getCPtr(datatable), datatable), true);
   }
 
   public TimeSeriesTableVec3(String filename) {
-    this(opensimModelCommonJNI.new_TimeSeriesTableVec3__SWIG_3(filename), true);
+    this(opensimCommonJNI.new_TimeSeriesTableVec3__SWIG_3(filename), true);
   }
 
   public TimeSeriesTableVec3(String filename, String tablename) {
-    this(opensimModelCommonJNI.new_TimeSeriesTableVec3__SWIG_4(filename, tablename), true);
+    this(opensimCommonJNI.new_TimeSeriesTableVec3__SWIG_4(filename, tablename), true);
   }
 
   public RowVectorViewVec3 getNearestRow(double time, boolean restrictToTimeRange) {
-    return new RowVectorViewVec3(opensimModelCommonJNI.TimeSeriesTableVec3_getNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
+    return new RowVectorViewVec3(opensimCommonJNI.TimeSeriesTableVec3_getNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
   }
 
   public RowVectorViewVec3 getNearestRow(double time) {
-    return new RowVectorViewVec3(opensimModelCommonJNI.TimeSeriesTableVec3_getNearestRow__SWIG_1(swigCPtr, this, time), true);
+    return new RowVectorViewVec3(opensimCommonJNI.TimeSeriesTableVec3_getNearestRow__SWIG_1(swigCPtr, this, time), true);
   }
 
   public RowVectorViewVec3 updNearestRow(double time, boolean restrictToTimeRange) {
-    return new RowVectorViewVec3(opensimModelCommonJNI.TimeSeriesTableVec3_updNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
+    return new RowVectorViewVec3(opensimCommonJNI.TimeSeriesTableVec3_updNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
   }
 
   public RowVectorViewVec3 updNearestRow(double time) {
-    return new RowVectorViewVec3(opensimModelCommonJNI.TimeSeriesTableVec3_updNearestRow__SWIG_1(swigCPtr, this, time), true);
+    return new RowVectorViewVec3(opensimCommonJNI.TimeSeriesTableVec3_updNearestRow__SWIG_1(swigCPtr, this, time), true);
   }
 
   public RowVectorOfVec3 averageRow(double beginTime, double endTime) {
-    return new RowVectorOfVec3(opensimModelCommonJNI.TimeSeriesTableVec3_averageRow(swigCPtr, this, beginTime, endTime), true);
+    return new RowVectorOfVec3(opensimCommonJNI.TimeSeriesTableVec3_averageRow(swigCPtr, this, beginTime, endTime), true);
   }
 
   public TimeSeriesTable flatten() {
-    return new TimeSeriesTable(opensimModelCommonJNI.TimeSeriesTableVec3_flatten__SWIG_0(swigCPtr, this), true);
+    return new TimeSeriesTable(opensimCommonJNI.TimeSeriesTableVec3_flatten__SWIG_0(swigCPtr, this), true);
   }
 
   public TimeSeriesTable flatten(StdVectorString suffixes) {
-    return new TimeSeriesTable(opensimModelCommonJNI.TimeSeriesTableVec3_flatten__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
+    return new TimeSeriesTable(opensimCommonJNI.TimeSeriesTableVec3_flatten__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
   }
 
 }

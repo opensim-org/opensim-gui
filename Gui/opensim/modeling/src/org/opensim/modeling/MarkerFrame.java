@@ -12,7 +12,7 @@ public class MarkerFrame extends OpenSimObject {
   private transient long swigCPtr;
 
   public MarkerFrame(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.MarkerFrame_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.MarkerFrame_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class MarkerFrame extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_MarkerFrame(swigCPtr);
+        opensimCommonJNI.delete_MarkerFrame(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,69 +36,69 @@ public class MarkerFrame extends OpenSimObject {
   }
 
   public static MarkerFrame safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelCommonJNI.MarkerFrame_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimCommonJNI.MarkerFrame_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new MarkerFrame(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelCommonJNI.MarkerFrame_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimCommonJNI.MarkerFrame_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelCommonJNI.MarkerFrame_getClassName();
+    return opensimCommonJNI.MarkerFrame_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelCommonJNI.MarkerFrame_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.MarkerFrame_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new MarkerFrame(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelCommonJNI.MarkerFrame_getConcreteClassName(swigCPtr, this);
+    return opensimCommonJNI.MarkerFrame_getConcreteClassName(swigCPtr, this);
   }
 
   public MarkerFrame() {
-    this(opensimModelCommonJNI.new_MarkerFrame__SWIG_0(), true);
+    this(opensimCommonJNI.new_MarkerFrame__SWIG_0(), true);
   }
 
   public MarkerFrame(int aNumMarkers, int aFrameNumber, double aTime, Units aUnits) {
-    this(opensimModelCommonJNI.new_MarkerFrame__SWIG_1(aNumMarkers, aFrameNumber, aTime, Units.getCPtr(aUnits), aUnits), true);
+    this(opensimCommonJNI.new_MarkerFrame__SWIG_1(aNumMarkers, aFrameNumber, aTime, Units.getCPtr(aUnits), aUnits), true);
   }
 
   public MarkerFrame(MarkerFrame aFrame) {
-    this(opensimModelCommonJNI.new_MarkerFrame__SWIG_2(MarkerFrame.getCPtr(aFrame), aFrame), true);
+    this(opensimCommonJNI.new_MarkerFrame__SWIG_2(MarkerFrame.getCPtr(aFrame), aFrame), true);
   }
 
   public void addMarker(Vec3 aCoords) {
-    opensimModelCommonJNI.MarkerFrame_addMarker(swigCPtr, this, Vec3.getCPtr(aCoords), aCoords);
+    opensimCommonJNI.MarkerFrame_addMarker(swigCPtr, this, Vec3.getCPtr(aCoords), aCoords);
   }
 
   public Vec3 getMarker(int aIndex) {
-    return new Vec3(opensimModelCommonJNI.MarkerFrame_getMarker(swigCPtr, this, aIndex), true);
+    return new Vec3(opensimCommonJNI.MarkerFrame_getMarker(swigCPtr, this, aIndex), true);
   }
 
   public Vec3 updMarker(int aIndex) {
-    return new Vec3(opensimModelCommonJNI.MarkerFrame_updMarker(swigCPtr, this, aIndex), false);
+    return new Vec3(opensimCommonJNI.MarkerFrame_updMarker(swigCPtr, this, aIndex), false);
   }
 
   public int getFrameNumber() {
-    return opensimModelCommonJNI.MarkerFrame_getFrameNumber(swigCPtr, this);
+    return opensimCommonJNI.MarkerFrame_getFrameNumber(swigCPtr, this);
   }
 
   public void setFrameNumber(int aNumber) {
-    opensimModelCommonJNI.MarkerFrame_setFrameNumber(swigCPtr, this, aNumber);
+    opensimCommonJNI.MarkerFrame_setFrameNumber(swigCPtr, this, aNumber);
   }
 
   public double getFrameTime() {
-    return opensimModelCommonJNI.MarkerFrame_getFrameTime(swigCPtr, this);
+    return opensimCommonJNI.MarkerFrame_getFrameTime(swigCPtr, this);
   }
 
   public void scale(double aScaleFactor) {
-    opensimModelCommonJNI.MarkerFrame_scale(swigCPtr, this, aScaleFactor);
+    opensimCommonJNI.MarkerFrame_scale(swigCPtr, this, aScaleFactor);
   }
 
   public SimTKArrayVec3 getMarkers() {
-    return new SimTKArrayVec3(opensimModelCommonJNI.MarkerFrame_getMarkers(swigCPtr, this), false);
+    return new SimTKArrayVec3(opensimCommonJNI.MarkerFrame_getMarkers(swigCPtr, this), false);
   }
 
 }

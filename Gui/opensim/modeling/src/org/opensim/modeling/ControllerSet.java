@@ -12,7 +12,7 @@ public class ControllerSet extends ModelComponentSetControllers {
   private transient long swigCPtr;
 
   public ControllerSet(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.ControllerSet_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.ControllerSet_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ControllerSet extends ModelComponentSetControllers {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_ControllerSet(swigCPtr);
+        opensimSimulationJNI.delete_ControllerSet(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,81 +36,81 @@ public class ControllerSet extends ModelComponentSetControllers {
   }
 
   public static ControllerSet safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.ControllerSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.ControllerSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ControllerSet(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.ControllerSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.ControllerSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.ControllerSet_getClassName();
+    return opensimSimulationJNI.ControllerSet_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.ControllerSet_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.ControllerSet_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ControllerSet(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.ControllerSet_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.ControllerSet_getConcreteClassName(swigCPtr, this);
   }
 
   public ControllerSet() {
-    this(opensimModelSimulationJNI.new_ControllerSet__SWIG_0(), true);
+    this(opensimSimulationJNI.new_ControllerSet__SWIG_0(), true);
   }
 
   public ControllerSet(Model model) {
-    this(opensimModelSimulationJNI.new_ControllerSet__SWIG_1(Model.getCPtr(model), model), true);
+    this(opensimSimulationJNI.new_ControllerSet__SWIG_1(Model.getCPtr(model), model), true);
   }
 
   public ControllerSet(ControllerSet aControllerSet) {
-    this(opensimModelSimulationJNI.new_ControllerSet__SWIG_2(ControllerSet.getCPtr(aControllerSet), aControllerSet), true);
+    this(opensimSimulationJNI.new_ControllerSet__SWIG_2(ControllerSet.getCPtr(aControllerSet), aControllerSet), true);
   }
 
   public ControllerSet(Model model, String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelSimulationJNI.new_ControllerSet__SWIG_3(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
+    this(opensimSimulationJNI.new_ControllerSet__SWIG_3(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
   }
 
   public ControllerSet(Model model, String aFileName) {
-    this(opensimModelSimulationJNI.new_ControllerSet__SWIG_4(Model.getCPtr(model), model, aFileName), true);
+    this(opensimSimulationJNI.new_ControllerSet__SWIG_4(Model.getCPtr(model), model, aFileName), true);
   }
 
   public void copyData(ControllerSet aAbsControllerSet) {
-    opensimModelSimulationJNI.ControllerSet_copyData(swigCPtr, this, ControllerSet.getCPtr(aAbsControllerSet), aAbsControllerSet);
+    opensimSimulationJNI.ControllerSet_copyData(swigCPtr, this, ControllerSet.getCPtr(aAbsControllerSet), aAbsControllerSet);
   }
 
   public void constructStorage() {
-    opensimModelSimulationJNI.ControllerSet_constructStorage(swigCPtr, this);
+    opensimSimulationJNI.ControllerSet_constructStorage(swigCPtr, this);
   }
 
   public void storeControls(State s, int step) {
-    opensimModelSimulationJNI.ControllerSet_storeControls(swigCPtr, this, State.getCPtr(s), s, step);
+    opensimSimulationJNI.ControllerSet_storeControls(swigCPtr, this, State.getCPtr(s), s, step);
   }
 
   public void printControlStorage(String fileName) {
-    opensimModelSimulationJNI.ControllerSet_printControlStorage(swigCPtr, this, fileName);
+    opensimSimulationJNI.ControllerSet_printControlStorage(swigCPtr, this, fileName);
   }
 
   public TimeSeriesTable getControlTable() {
-    return new TimeSeriesTable(opensimModelSimulationJNI.ControllerSet_getControlTable(swigCPtr, this), true);
+    return new TimeSeriesTable(opensimSimulationJNI.ControllerSet_getControlTable(swigCPtr, this), true);
   }
 
   public void setActuators(SetActuators actuators) {
-    opensimModelSimulationJNI.ControllerSet_setActuators(swigCPtr, this, SetActuators.getCPtr(actuators), actuators);
+    opensimSimulationJNI.ControllerSet_setActuators(swigCPtr, this, SetActuators.getCPtr(actuators), actuators);
   }
 
   public void setDesiredStates(Storage yStore) {
-    opensimModelSimulationJNI.ControllerSet_setDesiredStates(swigCPtr, this, Storage.getCPtr(yStore), yStore);
+    opensimSimulationJNI.ControllerSet_setDesiredStates(swigCPtr, this, Storage.getCPtr(yStore), yStore);
   }
 
   public void computeControls(State s, Vector controls) {
-    opensimModelSimulationJNI.ControllerSet_computeControls(swigCPtr, this, State.getCPtr(s), s, Vector.getCPtr(controls), controls);
+    opensimSimulationJNI.ControllerSet_computeControls(swigCPtr, this, State.getCPtr(s), s, Vector.getCPtr(controls), controls);
   }
 
   public void printInfo() {
-    opensimModelSimulationJNI.ControllerSet_printInfo(swigCPtr, this);
+    opensimSimulationJNI.ControllerSet_printInfo(swigCPtr, this);
   }
 
 }

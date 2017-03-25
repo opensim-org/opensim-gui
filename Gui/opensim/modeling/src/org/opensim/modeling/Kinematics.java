@@ -12,7 +12,7 @@ public class Kinematics extends Analysis {
   private transient long swigCPtr;
 
   public Kinematics(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.Kinematics_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.Kinematics_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Kinematics extends Analysis {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_Kinematics(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_Kinematics(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,92 +36,92 @@ public class Kinematics extends Analysis {
   }
 
   public static Kinematics safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Kinematics_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.Kinematics_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Kinematics(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.Kinematics_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.Kinematics_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.Kinematics_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.Kinematics_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.Kinematics_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.Kinematics_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Kinematics(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.Kinematics_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.Kinematics_getConcreteClassName(swigCPtr, this);
   }
 
   public Kinematics(Model aModel) {
-    this(opensimModelJNI.new_Kinematics__SWIG_0(Model.getCPtr(aModel), aModel), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_Kinematics__SWIG_0(Model.getCPtr(aModel), aModel), true);
   }
 
   public Kinematics() {
-    this(opensimModelJNI.new_Kinematics__SWIG_1(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_Kinematics__SWIG_1(), true);
   }
 
   public Kinematics(String aFileName) {
-    this(opensimModelJNI.new_Kinematics__SWIG_2(aFileName), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_Kinematics__SWIG_2(aFileName), true);
   }
 
   public void setStorageCapacityIncrements(int aIncrement) {
-    opensimModelJNI.Kinematics_setStorageCapacityIncrements(swigCPtr, this, aIncrement);
+    opensimActuatorsAnalysesToolsJNI.Kinematics_setStorageCapacityIncrements(swigCPtr, this, aIncrement);
   }
 
   public Storage getAccelerationStorage() {
-    long cPtr = opensimModelJNI.Kinematics_getAccelerationStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.Kinematics_getAccelerationStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public Storage getVelocityStorage() {
-    long cPtr = opensimModelJNI.Kinematics_getVelocityStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.Kinematics_getVelocityStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public Storage getPositionStorage() {
-    long cPtr = opensimModelJNI.Kinematics_getPositionStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.Kinematics_getPositionStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public void setModel(Model aModel) {
-    opensimModelJNI.Kinematics_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
+    opensimActuatorsAnalysesToolsJNI.Kinematics_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
   public void setRecordAccelerations(boolean aRecordAccelerations) {
-    opensimModelJNI.Kinematics_setRecordAccelerations(swigCPtr, this, aRecordAccelerations);
+    opensimActuatorsAnalysesToolsJNI.Kinematics_setRecordAccelerations(swigCPtr, this, aRecordAccelerations);
   }
 
   public int begin(State s) {
-    return opensimModelJNI.Kinematics_begin(swigCPtr, this, State.getCPtr(s), s);
+    return opensimActuatorsAnalysesToolsJNI.Kinematics_begin(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public int step(State s, int setNumber) {
-    return opensimModelJNI.Kinematics_step(swigCPtr, this, State.getCPtr(s), s, setNumber);
+    return opensimActuatorsAnalysesToolsJNI.Kinematics_step(swigCPtr, this, State.getCPtr(s), s, setNumber);
   }
 
   public int end(State s) {
-    return opensimModelJNI.Kinematics_end(swigCPtr, this, State.getCPtr(s), s);
+    return opensimActuatorsAnalysesToolsJNI.Kinematics_end(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public int printResults(String aBaseName, String aDir, double aDT, String aExtension) {
-    return opensimModelJNI.Kinematics_printResults__SWIG_0(swigCPtr, this, aBaseName, aDir, aDT, aExtension);
+    return opensimActuatorsAnalysesToolsJNI.Kinematics_printResults__SWIG_0(swigCPtr, this, aBaseName, aDir, aDT, aExtension);
   }
 
   public int printResults(String aBaseName, String aDir, double aDT) {
-    return opensimModelJNI.Kinematics_printResults__SWIG_1(swigCPtr, this, aBaseName, aDir, aDT);
+    return opensimActuatorsAnalysesToolsJNI.Kinematics_printResults__SWIG_1(swigCPtr, this, aBaseName, aDir, aDT);
   }
 
   public int printResults(String aBaseName, String aDir) {
-    return opensimModelJNI.Kinematics_printResults__SWIG_2(swigCPtr, this, aBaseName, aDir);
+    return opensimActuatorsAnalysesToolsJNI.Kinematics_printResults__SWIG_2(swigCPtr, this, aBaseName, aDir);
   }
 
   public int printResults(String aBaseName) {
-    return opensimModelJNI.Kinematics_printResults__SWIG_3(swigCPtr, this, aBaseName);
+    return opensimActuatorsAnalysesToolsJNI.Kinematics_printResults__SWIG_3(swigCPtr, this, aBaseName);
   }
 
 }

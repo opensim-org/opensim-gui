@@ -12,7 +12,7 @@ public class PrescribedController extends Controller {
   private transient long swigCPtr;
 
   public PrescribedController(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.PrescribedController_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.PrescribedController_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class PrescribedController extends Controller {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_PrescribedController(swigCPtr);
+        opensimSimulationJNI.delete_PrescribedController(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -46,165 +46,165 @@ public class PrescribedController extends Controller {
     }
 
   public static PrescribedController safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.PrescribedController_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.PrescribedController_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new PrescribedController(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.PrescribedController_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.PrescribedController_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.PrescribedController_getClassName();
+    return opensimSimulationJNI.PrescribedController_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.PrescribedController_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.PrescribedController_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new PrescribedController(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.PrescribedController_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.PrescribedController_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_ControlFunctions(PrescribedController source) {
-    opensimModelSimulationJNI.PrescribedController_copyProperty_ControlFunctions(swigCPtr, this, PrescribedController.getCPtr(source), source);
+    opensimSimulationJNI.PrescribedController_copyProperty_ControlFunctions(swigCPtr, this, PrescribedController.getCPtr(source), source);
   }
 
   public FunctionSet get_ControlFunctions(int i) {
-    return new FunctionSet(opensimModelSimulationJNI.PrescribedController_get_ControlFunctions__SWIG_0(swigCPtr, this, i), false);
+    return new FunctionSet(opensimSimulationJNI.PrescribedController_get_ControlFunctions__SWIG_0(swigCPtr, this, i), false);
   }
 
   public FunctionSet upd_ControlFunctions(int i) {
-    return new FunctionSet(opensimModelSimulationJNI.PrescribedController_upd_ControlFunctions__SWIG_0(swigCPtr, this, i), false);
+    return new FunctionSet(opensimSimulationJNI.PrescribedController_upd_ControlFunctions__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_ControlFunctions(int i, FunctionSet value) {
-    opensimModelSimulationJNI.PrescribedController_set_ControlFunctions__SWIG_0(swigCPtr, this, i, FunctionSet.getCPtr(value), value);
+    opensimSimulationJNI.PrescribedController_set_ControlFunctions__SWIG_0(swigCPtr, this, i, FunctionSet.getCPtr(value), value);
   }
 
   public int append_ControlFunctions(FunctionSet value) {
-    return opensimModelSimulationJNI.PrescribedController_append_ControlFunctions(swigCPtr, this, FunctionSet.getCPtr(value), value);
+    return opensimSimulationJNI.PrescribedController_append_ControlFunctions(swigCPtr, this, FunctionSet.getCPtr(value), value);
   }
 
   public void constructProperty_ControlFunctions(FunctionSet initValue) {
-    opensimModelSimulationJNI.PrescribedController_constructProperty_ControlFunctions(swigCPtr, this, FunctionSet.getCPtr(initValue), initValue);
+    opensimSimulationJNI.PrescribedController_constructProperty_ControlFunctions(swigCPtr, this, FunctionSet.getCPtr(initValue), initValue);
   }
 
   public FunctionSet get_ControlFunctions() {
-    return new FunctionSet(opensimModelSimulationJNI.PrescribedController_get_ControlFunctions__SWIG_1(swigCPtr, this), false);
+    return new FunctionSet(opensimSimulationJNI.PrescribedController_get_ControlFunctions__SWIG_1(swigCPtr, this), false);
   }
 
   public FunctionSet upd_ControlFunctions() {
-    return new FunctionSet(opensimModelSimulationJNI.PrescribedController_upd_ControlFunctions__SWIG_1(swigCPtr, this), false);
+    return new FunctionSet(opensimSimulationJNI.PrescribedController_upd_ControlFunctions__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_ControlFunctions(FunctionSet value) {
-    opensimModelSimulationJNI.PrescribedController_set_ControlFunctions__SWIG_1(swigCPtr, this, FunctionSet.getCPtr(value), value);
+    opensimSimulationJNI.PrescribedController_set_ControlFunctions__SWIG_1(swigCPtr, this, FunctionSet.getCPtr(value), value);
   }
 
   public void copyProperty_controls_file(PrescribedController source) {
-    opensimModelSimulationJNI.PrescribedController_copyProperty_controls_file(swigCPtr, this, PrescribedController.getCPtr(source), source);
+    opensimSimulationJNI.PrescribedController_copyProperty_controls_file(swigCPtr, this, PrescribedController.getCPtr(source), source);
   }
 
   public String get_controls_file(int i) {
-    return opensimModelSimulationJNI.PrescribedController_get_controls_file__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.PrescribedController_get_controls_file__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_std__string upd_controls_file(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelSimulationJNI.PrescribedController_upd_controls_file__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_std__string(opensimSimulationJNI.PrescribedController_upd_controls_file__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_controls_file(int i, String value) {
-    opensimModelSimulationJNI.PrescribedController_set_controls_file__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.PrescribedController_set_controls_file__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_controls_file(String value) {
-    return opensimModelSimulationJNI.PrescribedController_append_controls_file(swigCPtr, this, value);
+    return opensimSimulationJNI.PrescribedController_append_controls_file(swigCPtr, this, value);
   }
 
   public void constructProperty_controls_file() {
-    opensimModelSimulationJNI.PrescribedController_constructProperty_controls_file__SWIG_0(swigCPtr, this);
+    opensimSimulationJNI.PrescribedController_constructProperty_controls_file__SWIG_0(swigCPtr, this);
   }
 
   public void constructProperty_controls_file(String initValue) {
-    opensimModelSimulationJNI.PrescribedController_constructProperty_controls_file__SWIG_1(swigCPtr, this, initValue);
+    opensimSimulationJNI.PrescribedController_constructProperty_controls_file__SWIG_1(swigCPtr, this, initValue);
   }
 
   public String get_controls_file() {
-    return opensimModelSimulationJNI.PrescribedController_get_controls_file__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.PrescribedController_get_controls_file__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_std__string upd_controls_file() {
-    return new SWIGTYPE_p_std__string(opensimModelSimulationJNI.PrescribedController_upd_controls_file__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_std__string(opensimSimulationJNI.PrescribedController_upd_controls_file__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_controls_file(String value) {
-    opensimModelSimulationJNI.PrescribedController_set_controls_file__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.PrescribedController_set_controls_file__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_interpolation_method(PrescribedController source) {
-    opensimModelSimulationJNI.PrescribedController_copyProperty_interpolation_method(swigCPtr, this, PrescribedController.getCPtr(source), source);
+    opensimSimulationJNI.PrescribedController_copyProperty_interpolation_method(swigCPtr, this, PrescribedController.getCPtr(source), source);
   }
 
   public int get_interpolation_method(int i) {
-    return opensimModelSimulationJNI.PrescribedController_get_interpolation_method__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.PrescribedController_get_interpolation_method__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_int upd_interpolation_method(int i) {
-    return new SWIGTYPE_p_int(opensimModelSimulationJNI.PrescribedController_upd_interpolation_method__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_int(opensimSimulationJNI.PrescribedController_upd_interpolation_method__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_interpolation_method(int i, int value) {
-    opensimModelSimulationJNI.PrescribedController_set_interpolation_method__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.PrescribedController_set_interpolation_method__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_interpolation_method(int value) {
-    return opensimModelSimulationJNI.PrescribedController_append_interpolation_method(swigCPtr, this, value);
+    return opensimSimulationJNI.PrescribedController_append_interpolation_method(swigCPtr, this, value);
   }
 
   public void constructProperty_interpolation_method() {
-    opensimModelSimulationJNI.PrescribedController_constructProperty_interpolation_method__SWIG_0(swigCPtr, this);
+    opensimSimulationJNI.PrescribedController_constructProperty_interpolation_method__SWIG_0(swigCPtr, this);
   }
 
   public void constructProperty_interpolation_method(int initValue) {
-    opensimModelSimulationJNI.PrescribedController_constructProperty_interpolation_method__SWIG_1(swigCPtr, this, initValue);
+    opensimSimulationJNI.PrescribedController_constructProperty_interpolation_method__SWIG_1(swigCPtr, this, initValue);
   }
 
   public int get_interpolation_method() {
-    return opensimModelSimulationJNI.PrescribedController_get_interpolation_method__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.PrescribedController_get_interpolation_method__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_int upd_interpolation_method() {
-    return new SWIGTYPE_p_int(opensimModelSimulationJNI.PrescribedController_upd_interpolation_method__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_int(opensimSimulationJNI.PrescribedController_upd_interpolation_method__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_interpolation_method(int value) {
-    opensimModelSimulationJNI.PrescribedController_set_interpolation_method__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.PrescribedController_set_interpolation_method__SWIG_1(swigCPtr, this, value);
   }
 
   public PrescribedController() {
-    this(opensimModelSimulationJNI.new_PrescribedController__SWIG_0(), true);
+    this(opensimSimulationJNI.new_PrescribedController__SWIG_0(), true);
   }
 
   public PrescribedController(String controlsFileName, int interpMethodType) {
-    this(opensimModelSimulationJNI.new_PrescribedController__SWIG_1(controlsFileName, interpMethodType), true);
+    this(opensimSimulationJNI.new_PrescribedController__SWIG_1(controlsFileName, interpMethodType), true);
   }
 
   public PrescribedController(String controlsFileName) {
-    this(opensimModelSimulationJNI.new_PrescribedController__SWIG_2(controlsFileName), true);
+    this(opensimSimulationJNI.new_PrescribedController__SWIG_2(controlsFileName), true);
   }
 
   public void computeControls(State s, Vector controls) {
-    opensimModelSimulationJNI.PrescribedController_computeControls(swigCPtr, this, State.getCPtr(s), s, Vector.getCPtr(controls), controls);
+    opensimSimulationJNI.PrescribedController_computeControls(swigCPtr, this, State.getCPtr(s), s, Vector.getCPtr(controls), controls);
   }
 
   public void prescribeControlForActuator_private(int index, Function prescribedFunction) {
-    opensimModelSimulationJNI.PrescribedController_prescribeControlForActuator_private__SWIG_0(swigCPtr, this, index, Function.getCPtr(prescribedFunction), prescribedFunction);
+    opensimSimulationJNI.PrescribedController_prescribeControlForActuator_private__SWIG_0(swigCPtr, this, index, Function.getCPtr(prescribedFunction), prescribedFunction);
   }
 
   public void prescribeControlForActuator_private(String actName, Function prescribedFunction) {
-    opensimModelSimulationJNI.PrescribedController_prescribeControlForActuator_private__SWIG_1(swigCPtr, this, actName, Function.getCPtr(prescribedFunction), prescribedFunction);
+    opensimSimulationJNI.PrescribedController_prescribeControlForActuator_private__SWIG_1(swigCPtr, this, actName, Function.getCPtr(prescribedFunction), prescribedFunction);
   }
 
 }

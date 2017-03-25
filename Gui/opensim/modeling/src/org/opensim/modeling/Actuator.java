@@ -12,7 +12,7 @@ public class Actuator extends Force {
   private transient long swigCPtr;
 
   public Actuator(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.Actuator_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.Actuator_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Actuator extends Force {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_Actuator(swigCPtr);
+        opensimSimulationJNI.delete_Actuator(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,53 +36,53 @@ public class Actuator extends Force {
   }
 
   public static Actuator safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.Actuator_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.Actuator_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Actuator(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.Actuator_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.Actuator_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.Actuator_getClassName();
+    return opensimSimulationJNI.Actuator_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.Actuator_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.Actuator_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Actuator(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.Actuator_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.Actuator_getConcreteClassName(swigCPtr, this);
   }
 
   public int numControls() {
-    return opensimModelSimulationJNI.Actuator_numControls(swigCPtr, this);
+    return opensimSimulationJNI.Actuator_numControls(swigCPtr, this);
   }
 
   public Vector getDefaultControls() {
-    return new Vector(opensimModelSimulationJNI.Actuator_getDefaultControls(swigCPtr, this), true);
+    return new Vector(opensimSimulationJNI.Actuator_getDefaultControls(swigCPtr, this), true);
   }
 
   public void getControls(Vector modelControls, Vector actuatorControls) {
-    opensimModelSimulationJNI.Actuator_getControls(swigCPtr, this, Vector.getCPtr(modelControls), modelControls, Vector.getCPtr(actuatorControls), actuatorControls);
+    opensimSimulationJNI.Actuator_getControls(swigCPtr, this, Vector.getCPtr(modelControls), modelControls, Vector.getCPtr(actuatorControls), actuatorControls);
   }
 
   public void setControls(Vector actuatorControls, Vector modelControls) {
-    opensimModelSimulationJNI.Actuator_setControls(swigCPtr, this, Vector.getCPtr(actuatorControls), actuatorControls, Vector.getCPtr(modelControls), modelControls);
+    opensimSimulationJNI.Actuator_setControls(swigCPtr, this, Vector.getCPtr(actuatorControls), actuatorControls, Vector.getCPtr(modelControls), modelControls);
   }
 
   public void addInControls(Vector actuatorControls, Vector modelControls) {
-    opensimModelSimulationJNI.Actuator_addInControls(swigCPtr, this, Vector.getCPtr(actuatorControls), actuatorControls, Vector.getCPtr(modelControls), modelControls);
+    opensimSimulationJNI.Actuator_addInControls(swigCPtr, this, Vector.getCPtr(actuatorControls), actuatorControls, Vector.getCPtr(modelControls), modelControls);
   }
 
   public double getPower(State s) {
-    return opensimModelSimulationJNI.Actuator_getPower(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Actuator_getPower(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void computeEquilibrium(State s) {
-    opensimModelSimulationJNI.Actuator_computeEquilibrium(swigCPtr, this, State.getCPtr(s), s);
+    opensimSimulationJNI.Actuator_computeEquilibrium(swigCPtr, this, State.getCPtr(s), s);
   }
 
 }

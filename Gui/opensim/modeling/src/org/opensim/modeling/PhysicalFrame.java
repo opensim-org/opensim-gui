@@ -12,7 +12,7 @@ public class PhysicalFrame extends Frame {
   private transient long swigCPtr;
 
   public PhysicalFrame(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.PhysicalFrame_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.PhysicalFrame_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,98 +28,103 @@ public class PhysicalFrame extends Frame {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_PhysicalFrame(swigCPtr);
+        opensimSimulationJNI.delete_PhysicalFrame(swigCPtr);
       }
       swigCPtr = 0;
     }
     super.delete();
   }
 
+  public void addWrapObject(WrapObject wrapObject) {
+      wrapObject.markAdopted();
+      private_addWrapObject(wrapObject);
+  }
+
   public static PhysicalFrame safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.PhysicalFrame_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.PhysicalFrame_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new PhysicalFrame(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.PhysicalFrame_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.PhysicalFrame_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.PhysicalFrame_getClassName();
+    return opensimSimulationJNI.PhysicalFrame_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.PhysicalFrame_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.PhysicalFrame_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new PhysicalFrame(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.PhysicalFrame_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.PhysicalFrame_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_WrapObjectSet(PhysicalFrame source) {
-    opensimModelSimulationJNI.PhysicalFrame_copyProperty_WrapObjectSet(swigCPtr, this, PhysicalFrame.getCPtr(source), source);
+    opensimSimulationJNI.PhysicalFrame_copyProperty_WrapObjectSet(swigCPtr, this, PhysicalFrame.getCPtr(source), source);
   }
 
   public WrapObjectSet get_WrapObjectSet(int i) {
-    return new WrapObjectSet(opensimModelSimulationJNI.PhysicalFrame_get_WrapObjectSet__SWIG_0(swigCPtr, this, i), false);
+    return new WrapObjectSet(opensimSimulationJNI.PhysicalFrame_get_WrapObjectSet__SWIG_0(swigCPtr, this, i), false);
   }
 
   public WrapObjectSet upd_WrapObjectSet(int i) {
-    return new WrapObjectSet(opensimModelSimulationJNI.PhysicalFrame_upd_WrapObjectSet__SWIG_0(swigCPtr, this, i), false);
+    return new WrapObjectSet(opensimSimulationJNI.PhysicalFrame_upd_WrapObjectSet__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_WrapObjectSet(int i, WrapObjectSet value) {
-    opensimModelSimulationJNI.PhysicalFrame_set_WrapObjectSet__SWIG_0(swigCPtr, this, i, WrapObjectSet.getCPtr(value), value);
+    opensimSimulationJNI.PhysicalFrame_set_WrapObjectSet__SWIG_0(swigCPtr, this, i, WrapObjectSet.getCPtr(value), value);
   }
 
   public int append_WrapObjectSet(WrapObjectSet value) {
-    return opensimModelSimulationJNI.PhysicalFrame_append_WrapObjectSet(swigCPtr, this, WrapObjectSet.getCPtr(value), value);
+    return opensimSimulationJNI.PhysicalFrame_append_WrapObjectSet(swigCPtr, this, WrapObjectSet.getCPtr(value), value);
   }
 
   public void constructProperty_WrapObjectSet(WrapObjectSet initValue) {
-    opensimModelSimulationJNI.PhysicalFrame_constructProperty_WrapObjectSet(swigCPtr, this, WrapObjectSet.getCPtr(initValue), initValue);
+    opensimSimulationJNI.PhysicalFrame_constructProperty_WrapObjectSet(swigCPtr, this, WrapObjectSet.getCPtr(initValue), initValue);
   }
 
   public WrapObjectSet get_WrapObjectSet() {
-    return new WrapObjectSet(opensimModelSimulationJNI.PhysicalFrame_get_WrapObjectSet__SWIG_1(swigCPtr, this), false);
+    return new WrapObjectSet(opensimSimulationJNI.PhysicalFrame_get_WrapObjectSet__SWIG_1(swigCPtr, this), false);
   }
 
   public WrapObjectSet upd_WrapObjectSet() {
-    return new WrapObjectSet(opensimModelSimulationJNI.PhysicalFrame_upd_WrapObjectSet__SWIG_1(swigCPtr, this), false);
+    return new WrapObjectSet(opensimSimulationJNI.PhysicalFrame_upd_WrapObjectSet__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_WrapObjectSet(WrapObjectSet value) {
-    opensimModelSimulationJNI.PhysicalFrame_set_WrapObjectSet__SWIG_1(swigCPtr, this, WrapObjectSet.getCPtr(value), value);
+    opensimSimulationJNI.PhysicalFrame_set_WrapObjectSet__SWIG_1(swigCPtr, this, WrapObjectSet.getCPtr(value), value);
   }
 
   public int getMobilizedBodyIndex() {
-    return opensimModelSimulationJNI.PhysicalFrame_getMobilizedBodyIndex(swigCPtr, this);
+    return opensimSimulationJNI.PhysicalFrame_getMobilizedBodyIndex(swigCPtr, this);
   }
 
   public SWIGTYPE_p_SimTK__MobilizedBody getMobilizedBody() {
-    return new SWIGTYPE_p_SimTK__MobilizedBody(opensimModelSimulationJNI.PhysicalFrame_getMobilizedBody(swigCPtr, this), false);
+    return new SWIGTYPE_p_SimTK__MobilizedBody(opensimSimulationJNI.PhysicalFrame_getMobilizedBody(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_SimTK__MobilizedBody updMobilizedBody() {
-    return new SWIGTYPE_p_SimTK__MobilizedBody(opensimModelSimulationJNI.PhysicalFrame_updMobilizedBody(swigCPtr, this), false);
+    return new SWIGTYPE_p_SimTK__MobilizedBody(opensimSimulationJNI.PhysicalFrame_updMobilizedBody(swigCPtr, this), false);
   }
 
   public void scale(Vec3 scaleFactors) {
-    opensimModelSimulationJNI.PhysicalFrame_scale(swigCPtr, this, Vec3.getCPtr(scaleFactors), scaleFactors);
+    opensimSimulationJNI.PhysicalFrame_scale(swigCPtr, this, Vec3.getCPtr(scaleFactors), scaleFactors);
   }
 
   public WrapObject getWrapObject(String aName) {
-    long cPtr = opensimModelSimulationJNI.PhysicalFrame_getWrapObject(swigCPtr, this, aName);
+    long cPtr = opensimSimulationJNI.PhysicalFrame_getWrapObject(swigCPtr, this, aName);
     return (cPtr == 0) ? null : new WrapObject(cPtr, false);
   }
 
   public WrapObjectSet getWrapObjectSet() {
-    return new WrapObjectSet(opensimModelSimulationJNI.PhysicalFrame_getWrapObjectSet(swigCPtr, this), false);
+    return new WrapObjectSet(opensimSimulationJNI.PhysicalFrame_getWrapObjectSet(swigCPtr, this), false);
   }
 
-  public void addWrapObject(WrapObject wrapObject) {
-    opensimModelSimulationJNI.PhysicalFrame_addWrapObject(swigCPtr, this, WrapObject.getCPtr(wrapObject), wrapObject);
+  private void private_addWrapObject(WrapObject wrapObject) {
+    opensimSimulationJNI.PhysicalFrame_private_addWrapObject(swigCPtr, this, WrapObject.getCPtr(wrapObject), wrapObject);
   }
 
 }

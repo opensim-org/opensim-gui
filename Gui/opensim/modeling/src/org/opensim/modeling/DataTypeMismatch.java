@@ -12,7 +12,7 @@ public class DataTypeMismatch extends OpenSimException {
   private transient long swigCPtr;
 
   public DataTypeMismatch(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.DataTypeMismatch_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.DataTypeMismatch_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class DataTypeMismatch extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_DataTypeMismatch(swigCPtr);
+        opensimCommonJNI.delete_DataTypeMismatch(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class DataTypeMismatch extends OpenSimException {
   }
 
   public DataTypeMismatch(String file, long line, String func, String expected, String received) {
-    this(opensimModelCommonJNI.new_DataTypeMismatch(file, line, func, expected, received), true);
+    this(opensimCommonJNI.new_DataTypeMismatch(file, line, func, expected, received), true);
   }
 
 }

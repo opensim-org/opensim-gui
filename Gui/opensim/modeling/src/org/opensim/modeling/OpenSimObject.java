@@ -29,7 +29,7 @@ public class OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_OpenSimObject(swigCPtr);
+        opensimCommonJNI.delete_OpenSimObject(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -68,216 +68,216 @@ public class OpenSimObject {
   }  
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelCommonJNI.OpenSimObject_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.OpenSimObject_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new OpenSimObject(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelCommonJNI.OpenSimObject_getConcreteClassName(swigCPtr, this);
+    return opensimCommonJNI.OpenSimObject_getConcreteClassName(swigCPtr, this);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelCommonJNI.OpenSimObject_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimCommonJNI.OpenSimObject_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public boolean isEqualTo(OpenSimObject aObject) {
-    return opensimModelCommonJNI.OpenSimObject_isEqualTo(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    return opensimCommonJNI.OpenSimObject_isEqualTo(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public void setName(String name) {
-    opensimModelCommonJNI.OpenSimObject_setName(swigCPtr, this, name);
+    opensimCommonJNI.OpenSimObject_setName(swigCPtr, this, name);
   }
 
   public String getName() {
-    return opensimModelCommonJNI.OpenSimObject_getName(swigCPtr, this);
+    return opensimCommonJNI.OpenSimObject_getName(swigCPtr, this);
   }
 
   public void setDescription(String description) {
-    opensimModelCommonJNI.OpenSimObject_setDescription(swigCPtr, this, description);
+    opensimCommonJNI.OpenSimObject_setDescription(swigCPtr, this, description);
   }
 
   public String getDescription() {
-    return opensimModelCommonJNI.OpenSimObject_getDescription(swigCPtr, this);
+    return opensimCommonJNI.OpenSimObject_getDescription(swigCPtr, this);
   }
 
   public String getAuthors() {
-    return opensimModelCommonJNI.OpenSimObject_getAuthors(swigCPtr, this);
+    return opensimCommonJNI.OpenSimObject_getAuthors(swigCPtr, this);
   }
 
   public void setAuthors(String authors) {
-    opensimModelCommonJNI.OpenSimObject_setAuthors(swigCPtr, this, authors);
+    opensimCommonJNI.OpenSimObject_setAuthors(swigCPtr, this, authors);
   }
 
   public String getReferences() {
-    return opensimModelCommonJNI.OpenSimObject_getReferences(swigCPtr, this);
+    return opensimCommonJNI.OpenSimObject_getReferences(swigCPtr, this);
   }
 
   public void setReferences(String references) {
-    opensimModelCommonJNI.OpenSimObject_setReferences(swigCPtr, this, references);
+    opensimCommonJNI.OpenSimObject_setReferences(swigCPtr, this, references);
   }
 
   public int getNumProperties() {
-    return opensimModelCommonJNI.OpenSimObject_getNumProperties(swigCPtr, this);
+    return opensimCommonJNI.OpenSimObject_getNumProperties(swigCPtr, this);
   }
 
   public AbstractProperty getPropertyByIndex(int propertyIndex) {
-    return new AbstractProperty(opensimModelCommonJNI.OpenSimObject_getPropertyByIndex(swigCPtr, this, propertyIndex), false);
+    return new AbstractProperty(opensimCommonJNI.OpenSimObject_getPropertyByIndex(swigCPtr, this, propertyIndex), false);
   }
 
   public AbstractProperty updPropertyByIndex(int propertyIndex) {
-    return new AbstractProperty(opensimModelCommonJNI.OpenSimObject_updPropertyByIndex(swigCPtr, this, propertyIndex), false);
+    return new AbstractProperty(opensimCommonJNI.OpenSimObject_updPropertyByIndex(swigCPtr, this, propertyIndex), false);
   }
 
   public boolean hasProperty(String name) {
-    return opensimModelCommonJNI.OpenSimObject_hasProperty(swigCPtr, this, name);
+    return opensimCommonJNI.OpenSimObject_hasProperty(swigCPtr, this, name);
   }
 
   public AbstractProperty getPropertyByName(String name) {
-    return new AbstractProperty(opensimModelCommonJNI.OpenSimObject_getPropertyByName(swigCPtr, this, name), false);
+    return new AbstractProperty(opensimCommonJNI.OpenSimObject_getPropertyByName(swigCPtr, this, name), false);
   }
 
   public AbstractProperty updPropertyByName(String name) {
-    return new AbstractProperty(opensimModelCommonJNI.OpenSimObject_updPropertyByName(swigCPtr, this, name), false);
+    return new AbstractProperty(opensimCommonJNI.OpenSimObject_updPropertyByName(swigCPtr, this, name), false);
   }
 
   public boolean isObjectUpToDateWithProperties() {
-    return opensimModelCommonJNI.OpenSimObject_isObjectUpToDateWithProperties(swigCPtr, this);
+    return opensimCommonJNI.OpenSimObject_isObjectUpToDateWithProperties(swigCPtr, this);
   }
 
   public static boolean PrintPropertyInfo(SWIGTYPE_p_std__ostream os, String classNameDotPropertyName, boolean printFlagInfo) {
-    return opensimModelCommonJNI.OpenSimObject_PrintPropertyInfo__SWIG_0(SWIGTYPE_p_std__ostream.getCPtr(os), classNameDotPropertyName, printFlagInfo);
+    return opensimCommonJNI.OpenSimObject_PrintPropertyInfo__SWIG_0(SWIGTYPE_p_std__ostream.getCPtr(os), classNameDotPropertyName, printFlagInfo);
   }
 
   public static boolean PrintPropertyInfo(SWIGTYPE_p_std__ostream os, String classNameDotPropertyName) {
-    return opensimModelCommonJNI.OpenSimObject_PrintPropertyInfo__SWIG_1(SWIGTYPE_p_std__ostream.getCPtr(os), classNameDotPropertyName);
+    return opensimCommonJNI.OpenSimObject_PrintPropertyInfo__SWIG_1(SWIGTYPE_p_std__ostream.getCPtr(os), classNameDotPropertyName);
   }
 
   public static boolean PrintPropertyInfo(SWIGTYPE_p_std__ostream os, String className, String propertyName, boolean printFlagInfo) {
-    return opensimModelCommonJNI.OpenSimObject_PrintPropertyInfo__SWIG_2(SWIGTYPE_p_std__ostream.getCPtr(os), className, propertyName, printFlagInfo);
+    return opensimCommonJNI.OpenSimObject_PrintPropertyInfo__SWIG_2(SWIGTYPE_p_std__ostream.getCPtr(os), className, propertyName, printFlagInfo);
   }
 
   public static boolean PrintPropertyInfo(SWIGTYPE_p_std__ostream os, String className, String propertyName) {
-    return opensimModelCommonJNI.OpenSimObject_PrintPropertyInfo__SWIG_3(SWIGTYPE_p_std__ostream.getCPtr(os), className, propertyName);
+    return opensimCommonJNI.OpenSimObject_PrintPropertyInfo__SWIG_3(SWIGTYPE_p_std__ostream.getCPtr(os), className, propertyName);
   }
 
   public static void registerType(OpenSimObject defaultObject) {
-    opensimModelCommonJNI.OpenSimObject_registerType(OpenSimObject.getCPtr(defaultObject), defaultObject);
+    opensimCommonJNI.OpenSimObject_registerType(OpenSimObject.getCPtr(defaultObject), defaultObject);
   }
 
   public static void renameType(String oldTypeName, String newTypeName) {
-    opensimModelCommonJNI.OpenSimObject_renameType(oldTypeName, newTypeName);
+    opensimCommonJNI.OpenSimObject_renameType(oldTypeName, newTypeName);
   }
 
   public static OpenSimObject getDefaultInstanceOfType(String concreteClassName) {
-    long cPtr = opensimModelCommonJNI.OpenSimObject_getDefaultInstanceOfType(concreteClassName);
+    long cPtr = opensimCommonJNI.OpenSimObject_getDefaultInstanceOfType(concreteClassName);
     return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public static OpenSimObject newInstanceOfType(String concreteClassName) {
-    long cPtr = opensimModelCommonJNI.OpenSimObject_newInstanceOfType(concreteClassName);
+    long cPtr = opensimCommonJNI.OpenSimObject_newInstanceOfType(concreteClassName);
     return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public static void getRegisteredTypenames(ArrayStr typeNames) {
-    opensimModelCommonJNI.OpenSimObject_getRegisteredTypenames(ArrayStr.getCPtr(typeNames), typeNames);
+    opensimCommonJNI.OpenSimObject_getRegisteredTypenames(ArrayStr.getCPtr(typeNames), typeNames);
   }
 
   public static OpenSimObject makeObjectFromFile(String fileName) {
-    long cPtr = opensimModelCommonJNI.OpenSimObject_makeObjectFromFile(fileName);
+    long cPtr = opensimCommonJNI.OpenSimObject_makeObjectFromFile(fileName);
     return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void readObjectFromXMLNodeOrFile(SWIGTYPE_p_SimTK__Xml__Element objectElement, int versionNumber) {
-    opensimModelCommonJNI.OpenSimObject_readObjectFromXMLNodeOrFile(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(objectElement), versionNumber);
+    opensimCommonJNI.OpenSimObject_readObjectFromXMLNodeOrFile(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(objectElement), versionNumber);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element objectElement, int versionNumber) {
-    opensimModelCommonJNI.OpenSimObject_updateFromXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(objectElement), versionNumber);
+    opensimCommonJNI.OpenSimObject_updateFromXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(objectElement), versionNumber);
   }
 
   public void updateXMLNode(SWIGTYPE_p_SimTK__Xml__Element parent) {
-    opensimModelCommonJNI.OpenSimObject_updateXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(parent));
+    opensimCommonJNI.OpenSimObject_updateXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(parent));
   }
 
   public boolean getInlined() {
-    return opensimModelCommonJNI.OpenSimObject_getInlined(swigCPtr, this);
+    return opensimCommonJNI.OpenSimObject_getInlined(swigCPtr, this);
   }
 
   public void setInlined(boolean aInlined, String aFileName) {
-    opensimModelCommonJNI.OpenSimObject_setInlined__SWIG_0(swigCPtr, this, aInlined, aFileName);
+    opensimCommonJNI.OpenSimObject_setInlined__SWIG_0(swigCPtr, this, aInlined, aFileName);
   }
 
   public void setInlined(boolean aInlined) {
-    opensimModelCommonJNI.OpenSimObject_setInlined__SWIG_1(swigCPtr, this, aInlined);
+    opensimCommonJNI.OpenSimObject_setInlined__SWIG_1(swigCPtr, this, aInlined);
   }
 
   public String getDocumentFileName() {
-    return opensimModelCommonJNI.OpenSimObject_getDocumentFileName(swigCPtr, this);
+    return opensimCommonJNI.OpenSimObject_getDocumentFileName(swigCPtr, this);
   }
 
   public void setAllPropertiesUseDefault(boolean aUseDefault) {
-    opensimModelCommonJNI.OpenSimObject_setAllPropertiesUseDefault(swigCPtr, this, aUseDefault);
+    opensimCommonJNI.OpenSimObject_setAllPropertiesUseDefault(swigCPtr, this, aUseDefault);
   }
 
   public boolean print(String fileName) {
-    return opensimModelCommonJNI.OpenSimObject_print(swigCPtr, this, fileName);
+    return opensimCommonJNI.OpenSimObject_print(swigCPtr, this, fileName);
   }
 
   public String dump(boolean dumpName) {
-    return opensimModelCommonJNI.OpenSimObject_dump__SWIG_0(swigCPtr, this, dumpName);
+    return opensimCommonJNI.OpenSimObject_dump__SWIG_0(swigCPtr, this, dumpName);
   }
 
   public String dump() {
-    return opensimModelCommonJNI.OpenSimObject_dump__SWIG_1(swigCPtr, this);
+    return opensimCommonJNI.OpenSimObject_dump__SWIG_1(swigCPtr, this);
   }
 
   public static String getClassName() {
-    return opensimModelCommonJNI.OpenSimObject_getClassName();
+    return opensimCommonJNI.OpenSimObject_getClassName();
   }
 
   public static void setSerializeAllDefaults(boolean shouldSerializeDefaults) {
-    opensimModelCommonJNI.OpenSimObject_setSerializeAllDefaults(shouldSerializeDefaults);
+    opensimCommonJNI.OpenSimObject_setSerializeAllDefaults(shouldSerializeDefaults);
   }
 
   public static boolean getSerializeAllDefaults() {
-    return opensimModelCommonJNI.OpenSimObject_getSerializeAllDefaults();
+    return opensimCommonJNI.OpenSimObject_getSerializeAllDefaults();
   }
 
   public static boolean isKindOf(String type) {
-    return opensimModelCommonJNI.OpenSimObject_isKindOf(type);
+    return opensimCommonJNI.OpenSimObject_isKindOf(type);
   }
 
   public boolean isA(String type) {
-    return opensimModelCommonJNI.OpenSimObject_isA(swigCPtr, this, type);
+    return opensimCommonJNI.OpenSimObject_isA(swigCPtr, this, type);
   }
 
   public static void setDebugLevel(int newLevel) {
-    opensimModelCommonJNI.OpenSimObject_setDebugLevel(newLevel);
+    opensimCommonJNI.OpenSimObject_setDebugLevel(newLevel);
   }
 
   public static int getDebugLevel() {
-    return opensimModelCommonJNI.OpenSimObject_getDebugLevel();
+    return opensimCommonJNI.OpenSimObject_getDebugLevel();
   }
 
   public String toString() {
-    return opensimModelCommonJNI.OpenSimObject_toString(swigCPtr, this);
+    return opensimCommonJNI.OpenSimObject_toString(swigCPtr, this);
   }
 
   public static OpenSimObject SafeCopy(OpenSimObject aObject) {
-    long cPtr = opensimModelCommonJNI.OpenSimObject_SafeCopy(OpenSimObject.getCPtr(aObject), aObject);
+    long cPtr = opensimCommonJNI.OpenSimObject_SafeCopy(OpenSimObject.getCPtr(aObject), aObject);
     return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public static void RegisterType(OpenSimObject defaultObject) {
-    opensimModelCommonJNI.OpenSimObject_RegisterType(OpenSimObject.getCPtr(defaultObject), defaultObject);
+    opensimCommonJNI.OpenSimObject_RegisterType(OpenSimObject.getCPtr(defaultObject), defaultObject);
   }
 
   public static void RenameType(String oldName, String newName) {
-    opensimModelCommonJNI.OpenSimObject_RenameType(oldName, newName);
+    opensimCommonJNI.OpenSimObject_RenameType(oldName, newName);
   }
 
   public static ArrayStr getFunctionClassNames() {
-    return new ArrayStr(opensimModelCommonJNI.OpenSimObject_getFunctionClassNames(), true);
+    return new ArrayStr(opensimCommonJNI.OpenSimObject_getFunctionClassNames(), true);
   }
 
 }

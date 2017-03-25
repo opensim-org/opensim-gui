@@ -29,77 +29,77 @@ public class StatesTrajectory {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_StatesTrajectory(swigCPtr);
+        opensimSimulationJNI.delete_StatesTrajectory(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public StatesTrajectory() {
-    this(opensimModelSimulationJNI.new_StatesTrajectory(), true);
+    this(opensimSimulationJNI.new_StatesTrajectory(), true);
   }
 
   public long getSize() {
-    return opensimModelSimulationJNI.StatesTrajectory_getSize(swigCPtr, this);
+    return opensimSimulationJNI.StatesTrajectory_getSize(swigCPtr, this);
   }
 
   public State get(long index) {
-    return new State(opensimModelSimulationJNI.StatesTrajectory_get(swigCPtr, this, index), false);
+    return new State(opensimSimulationJNI.StatesTrajectory_get(swigCPtr, this, index), false);
   }
 
   public State front() {
-    return new State(opensimModelSimulationJNI.StatesTrajectory_front(swigCPtr, this), false);
+    return new State(opensimSimulationJNI.StatesTrajectory_front(swigCPtr, this), false);
   }
 
   public State back() {
-    return new State(opensimModelSimulationJNI.StatesTrajectory_back(swigCPtr, this), false);
+    return new State(opensimSimulationJNI.StatesTrajectory_back(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_std__vectorT_SimTK__State_t__const_iterator begin() {
-    return new SWIGTYPE_p_std__vectorT_SimTK__State_t__const_iterator(opensimModelSimulationJNI.StatesTrajectory_begin(swigCPtr, this), true);
+    return new SWIGTYPE_p_std__vectorT_SimTK__State_t__const_iterator(opensimSimulationJNI.StatesTrajectory_begin(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_std__vectorT_SimTK__State_t__const_iterator end() {
-    return new SWIGTYPE_p_std__vectorT_SimTK__State_t__const_iterator(opensimModelSimulationJNI.StatesTrajectory_end(swigCPtr, this), true);
+    return new SWIGTYPE_p_std__vectorT_SimTK__State_t__const_iterator(opensimSimulationJNI.StatesTrajectory_end(swigCPtr, this), true);
   }
 
   public void clear() {
-    opensimModelSimulationJNI.StatesTrajectory_clear(swigCPtr, this);
+    opensimSimulationJNI.StatesTrajectory_clear(swigCPtr, this);
   }
 
   public void append(State state) {
-    opensimModelSimulationJNI.StatesTrajectory_append(swigCPtr, this, State.getCPtr(state), state);
+    opensimSimulationJNI.StatesTrajectory_append(swigCPtr, this, State.getCPtr(state), state);
   }
 
   public boolean hasIntegrity() {
-    return opensimModelSimulationJNI.StatesTrajectory_hasIntegrity(swigCPtr, this);
+    return opensimSimulationJNI.StatesTrajectory_hasIntegrity(swigCPtr, this);
   }
 
   public boolean isNondecreasingInTime() {
-    return opensimModelSimulationJNI.StatesTrajectory_isNondecreasingInTime(swigCPtr, this);
+    return opensimSimulationJNI.StatesTrajectory_isNondecreasingInTime(swigCPtr, this);
   }
 
   public boolean isConsistent() {
-    return opensimModelSimulationJNI.StatesTrajectory_isConsistent(swigCPtr, this);
+    return opensimSimulationJNI.StatesTrajectory_isConsistent(swigCPtr, this);
   }
 
   public boolean isCompatibleWith(Model model) {
-    return opensimModelSimulationJNI.StatesTrajectory_isCompatibleWith(swigCPtr, this, Model.getCPtr(model), model);
+    return opensimSimulationJNI.StatesTrajectory_isCompatibleWith(swigCPtr, this, Model.getCPtr(model), model);
   }
 
   public TimeSeriesTable exportToTable(Model model, StdVectorString stateVars) {
-    return new TimeSeriesTable(opensimModelSimulationJNI.StatesTrajectory_exportToTable__SWIG_0(swigCPtr, this, Model.getCPtr(model), model, StdVectorString.getCPtr(stateVars), stateVars), true);
+    return new TimeSeriesTable(opensimSimulationJNI.StatesTrajectory_exportToTable__SWIG_0(swigCPtr, this, Model.getCPtr(model), model, StdVectorString.getCPtr(stateVars), stateVars), true);
   }
 
   public TimeSeriesTable exportToTable(Model model) {
-    return new TimeSeriesTable(opensimModelSimulationJNI.StatesTrajectory_exportToTable__SWIG_1(swigCPtr, this, Model.getCPtr(model), model), true);
+    return new TimeSeriesTable(opensimSimulationJNI.StatesTrajectory_exportToTable__SWIG_1(swigCPtr, this, Model.getCPtr(model), model), true);
   }
 
   static public class InconsistentState extends OpenSimException {
     private transient long swigCPtr;
   
     public InconsistentState(long cPtr, boolean cMemoryOwn) {
-      super(opensimModelSimulationJNI.StatesTrajectory_InconsistentState_SWIGUpcast(cPtr), cMemoryOwn);
+      super(opensimSimulationJNI.StatesTrajectory_InconsistentState_SWIGUpcast(cPtr), cMemoryOwn);
       swigCPtr = cPtr;
     }
   
@@ -115,7 +115,7 @@ public class StatesTrajectory {
       if (swigCPtr != 0) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          opensimModelSimulationJNI.delete_StatesTrajectory_InconsistentState(swigCPtr);
+          opensimSimulationJNI.delete_StatesTrajectory_InconsistentState(swigCPtr);
         }
         swigCPtr = 0;
       }
@@ -123,7 +123,7 @@ public class StatesTrajectory {
     }
   
     public InconsistentState(String file, long line, String func, double stateTime) {
-      this(opensimModelSimulationJNI.new_StatesTrajectory_InconsistentState(file, line, func, stateTime), true);
+      this(opensimSimulationJNI.new_StatesTrajectory_InconsistentState(file, line, func, stateTime), true);
     }
   
   }
@@ -132,7 +132,7 @@ public class StatesTrajectory {
     private transient long swigCPtr;
   
     public MissingColumnsInStatesStorage(long cPtr, boolean cMemoryOwn) {
-      super(opensimModelSimulationJNI.StatesTrajectory_MissingColumnsInStatesStorage_SWIGUpcast(cPtr), cMemoryOwn);
+      super(opensimSimulationJNI.StatesTrajectory_MissingColumnsInStatesStorage_SWIGUpcast(cPtr), cMemoryOwn);
       swigCPtr = cPtr;
     }
   
@@ -148,7 +148,7 @@ public class StatesTrajectory {
       if (swigCPtr != 0) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          opensimModelSimulationJNI.delete_StatesTrajectory_MissingColumnsInStatesStorage(swigCPtr);
+          opensimSimulationJNI.delete_StatesTrajectory_MissingColumnsInStatesStorage(swigCPtr);
         }
         swigCPtr = 0;
       }
@@ -156,7 +156,7 @@ public class StatesTrajectory {
     }
   
     public MissingColumnsInStatesStorage(String file, long line, String func, String modelName, StdVectorString missingStates) {
-      this(opensimModelSimulationJNI.new_StatesTrajectory_MissingColumnsInStatesStorage(file, line, func, modelName, StdVectorString.getCPtr(missingStates), missingStates), true);
+      this(opensimSimulationJNI.new_StatesTrajectory_MissingColumnsInStatesStorage(file, line, func, modelName, StdVectorString.getCPtr(missingStates), missingStates), true);
     }
   
   }
@@ -165,7 +165,7 @@ public class StatesTrajectory {
     private transient long swigCPtr;
   
     public ExtraColumnsInStatesStorage(long cPtr, boolean cMemoryOwn) {
-      super(opensimModelSimulationJNI.StatesTrajectory_ExtraColumnsInStatesStorage_SWIGUpcast(cPtr), cMemoryOwn);
+      super(opensimSimulationJNI.StatesTrajectory_ExtraColumnsInStatesStorage_SWIGUpcast(cPtr), cMemoryOwn);
       swigCPtr = cPtr;
     }
   
@@ -181,7 +181,7 @@ public class StatesTrajectory {
       if (swigCPtr != 0) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          opensimModelSimulationJNI.delete_StatesTrajectory_ExtraColumnsInStatesStorage(swigCPtr);
+          opensimSimulationJNI.delete_StatesTrajectory_ExtraColumnsInStatesStorage(swigCPtr);
         }
         swigCPtr = 0;
       }
@@ -189,7 +189,7 @@ public class StatesTrajectory {
     }
   
     public ExtraColumnsInStatesStorage(String file, long line, String func, String modelName, StdVectorString extraStates) {
-      this(opensimModelSimulationJNI.new_StatesTrajectory_ExtraColumnsInStatesStorage(file, line, func, modelName, StdVectorString.getCPtr(extraStates), extraStates), true);
+      this(opensimSimulationJNI.new_StatesTrajectory_ExtraColumnsInStatesStorage(file, line, func, modelName, StdVectorString.getCPtr(extraStates), extraStates), true);
     }
   
   }
@@ -198,7 +198,7 @@ public class StatesTrajectory {
     private transient long swigCPtr;
   
     public NonUniqueColumnsInStatesStorage(long cPtr, boolean cMemoryOwn) {
-      super(opensimModelSimulationJNI.StatesTrajectory_NonUniqueColumnsInStatesStorage_SWIGUpcast(cPtr), cMemoryOwn);
+      super(opensimSimulationJNI.StatesTrajectory_NonUniqueColumnsInStatesStorage_SWIGUpcast(cPtr), cMemoryOwn);
       swigCPtr = cPtr;
     }
   
@@ -214,7 +214,7 @@ public class StatesTrajectory {
       if (swigCPtr != 0) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          opensimModelSimulationJNI.delete_StatesTrajectory_NonUniqueColumnsInStatesStorage(swigCPtr);
+          opensimSimulationJNI.delete_StatesTrajectory_NonUniqueColumnsInStatesStorage(swigCPtr);
         }
         swigCPtr = 0;
       }
@@ -222,7 +222,7 @@ public class StatesTrajectory {
     }
   
     public NonUniqueColumnsInStatesStorage(String file, long line, String func) {
-      this(opensimModelSimulationJNI.new_StatesTrajectory_NonUniqueColumnsInStatesStorage(file, line, func), true);
+      this(opensimSimulationJNI.new_StatesTrajectory_NonUniqueColumnsInStatesStorage(file, line, func), true);
     }
   
   }
@@ -231,7 +231,7 @@ public class StatesTrajectory {
     private transient long swigCPtr;
   
     public StatesStorageIsInDegrees(long cPtr, boolean cMemoryOwn) {
-      super(opensimModelSimulationJNI.StatesTrajectory_StatesStorageIsInDegrees_SWIGUpcast(cPtr), cMemoryOwn);
+      super(opensimSimulationJNI.StatesTrajectory_StatesStorageIsInDegrees_SWIGUpcast(cPtr), cMemoryOwn);
       swigCPtr = cPtr;
     }
   
@@ -247,7 +247,7 @@ public class StatesTrajectory {
       if (swigCPtr != 0) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          opensimModelSimulationJNI.delete_StatesTrajectory_StatesStorageIsInDegrees(swigCPtr);
+          opensimSimulationJNI.delete_StatesTrajectory_StatesStorageIsInDegrees(swigCPtr);
         }
         swigCPtr = 0;
       }
@@ -255,7 +255,7 @@ public class StatesTrajectory {
     }
   
     public StatesStorageIsInDegrees(String file, long line, String func) {
-      this(opensimModelSimulationJNI.new_StatesTrajectory_StatesStorageIsInDegrees(file, line, func), true);
+      this(opensimSimulationJNI.new_StatesTrajectory_StatesStorageIsInDegrees(file, line, func), true);
     }
   
   }
@@ -264,7 +264,7 @@ public class StatesTrajectory {
     private transient long swigCPtr;
   
     public VaryingNumberOfStatesPerRow(long cPtr, boolean cMemoryOwn) {
-      super(opensimModelSimulationJNI.StatesTrajectory_VaryingNumberOfStatesPerRow_SWIGUpcast(cPtr), cMemoryOwn);
+      super(opensimSimulationJNI.StatesTrajectory_VaryingNumberOfStatesPerRow_SWIGUpcast(cPtr), cMemoryOwn);
       swigCPtr = cPtr;
     }
   
@@ -280,7 +280,7 @@ public class StatesTrajectory {
       if (swigCPtr != 0) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          opensimModelSimulationJNI.delete_StatesTrajectory_VaryingNumberOfStatesPerRow(swigCPtr);
+          opensimSimulationJNI.delete_StatesTrajectory_VaryingNumberOfStatesPerRow(swigCPtr);
         }
         swigCPtr = 0;
       }
@@ -288,25 +288,25 @@ public class StatesTrajectory {
     }
   
     public VaryingNumberOfStatesPerRow(String file, long line, String func, int numDepColumns, int smallestNumStates) {
-      this(opensimModelSimulationJNI.new_StatesTrajectory_VaryingNumberOfStatesPerRow(file, line, func, numDepColumns, smallestNumStates), true);
+      this(opensimSimulationJNI.new_StatesTrajectory_VaryingNumberOfStatesPerRow(file, line, func, numDepColumns, smallestNumStates), true);
     }
   
   }
 
   public static StatesTrajectory createFromStatesStorage(Model model, Storage sto, boolean allowMissingColumns, boolean allowExtraColumns) {
-    return new StatesTrajectory(opensimModelSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_0(Model.getCPtr(model), model, Storage.getCPtr(sto), sto, allowMissingColumns, allowExtraColumns), true);
+    return new StatesTrajectory(opensimSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_0(Model.getCPtr(model), model, Storage.getCPtr(sto), sto, allowMissingColumns, allowExtraColumns), true);
   }
 
   public static StatesTrajectory createFromStatesStorage(Model model, Storage sto, boolean allowMissingColumns) {
-    return new StatesTrajectory(opensimModelSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_1(Model.getCPtr(model), model, Storage.getCPtr(sto), sto, allowMissingColumns), true);
+    return new StatesTrajectory(opensimSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_1(Model.getCPtr(model), model, Storage.getCPtr(sto), sto, allowMissingColumns), true);
   }
 
   public static StatesTrajectory createFromStatesStorage(Model model, Storage sto) {
-    return new StatesTrajectory(opensimModelSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_2(Model.getCPtr(model), model, Storage.getCPtr(sto), sto), true);
+    return new StatesTrajectory(opensimSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_2(Model.getCPtr(model), model, Storage.getCPtr(sto), sto), true);
   }
 
   public static StatesTrajectory createFromStatesStorage(Model model, String filepath) {
-    return new StatesTrajectory(opensimModelSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_3(Model.getCPtr(model), model, filepath), true);
+    return new StatesTrajectory(opensimSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_3(Model.getCPtr(model), model, filepath), true);
   }
 
 }

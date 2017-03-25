@@ -13,8 +13,8 @@ import org.openide.nodes.PropertySupport;
 import org.openide.nodes.Sheet;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
-import org.opensim.modeling.AbstractConnector;
 import org.opensim.modeling.AbstractOutput;
+import org.opensim.modeling.AbstractSocket;
 import org.opensim.modeling.Component;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.StdVectorString;
@@ -40,14 +40,14 @@ public class OneComponentNode extends OpenSimObjectNode {
     @Override
     public Sheet createSheet() {
         Sheet parentSheet =  super.createSheet(); 
-        if (comp.getNumConnectors() >0){
-            Sheet.Set connectorSheet = parentSheet.createExpertSet();
-            connectorSheet.setDisplayName("Connectors");
-            parentSheet.put(connectorSheet);
-            StdVectorString cNames = comp.getConnectorNames();
-            for (int i=0; i< comp.getNumConnectors();i++ ){
-                AbstractConnector ac = comp.getConnector(cNames.get(i));
-                createConnectorProperty(ac, connectorSheet);
+        if (comp.getNumSockets()>0){
+            Sheet.Set socketsSheet = parentSheet.createExpertSet();
+            socketsSheet.setDisplayName("Sockets");
+            parentSheet.put(socketsSheet);
+            StdVectorString cNames = comp.getSocketNames();
+            for (int i=0; i< comp.getNumSockets();i++ ){
+                AbstractSocket ac = comp.getSocket(cNames.get(i));
+                createSocketProperty(ac, socketsSheet);
             }
         }
         if (comp.getNumOutputs()>0){
@@ -67,12 +67,12 @@ public class OneComponentNode extends OpenSimObjectNode {
         return parentSheet;
     }
     
-    private void createConnectorProperty(AbstractConnector connector, Sheet.Set sheetSet) {
+    private void createSocketProperty(AbstractSocket socket, Sheet.Set sheetSet) {
         try {
-            String connecteeType = connector.getConnecteeTypeName();
-            String connectionName = connector.getName();
+            String connecteeType = socket.getConnecteeTypeName();
+            String connectionName = socket.getName();
             PropertySupport.Reflection nextNodeProp = 
-                    new PropertySupport.Reflection(new ConnectionEditor(connector, this),
+                    new PropertySupport.Reflection(new ConnectionEditor(socket, this),
                     String.class,
                     "getConnectedToName",
                     "setConnectedToName");

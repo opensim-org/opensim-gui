@@ -29,26 +29,26 @@ public class SimmFileWriter {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_SimmFileWriter(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_SimmFileWriter(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public SimmFileWriter() {
-    this(opensimModelJNI.new_SimmFileWriter__SWIG_0(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_SimmFileWriter__SWIG_0(), true);
   }
 
   public SimmFileWriter(Model aModel) {
-    this(opensimModelJNI.new_SimmFileWriter__SWIG_1(Model.getCPtr(aModel), aModel), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_SimmFileWriter__SWIG_1(Model.getCPtr(aModel), aModel), true);
   }
 
   public boolean writeMuscleFile(String aFileName) {
-    return opensimModelJNI.SimmFileWriter_writeMuscleFile(swigCPtr, this, aFileName);
+    return opensimActuatorsAnalysesToolsJNI.SimmFileWriter_writeMuscleFile(swigCPtr, this, aFileName);
   }
 
   public boolean writeJointFile(String aFileName) {
-    return opensimModelJNI.SimmFileWriter_writeJointFile(swigCPtr, this, aFileName);
+    return opensimActuatorsAnalysesToolsJNI.SimmFileWriter_writeJointFile(swigCPtr, this, aFileName);
   }
 
 }

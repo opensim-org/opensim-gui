@@ -63,4 +63,8 @@ public class VectorOfVec3 extends VectorBaseVec3 {
     this(opensimSimbodyJNI.new_VectorOfVec3__SWIG_3(StdVectorVec3.getCPtr(row), row), true);
   }
 
+  public RowVectorOfVec3 transpose() {
+    return new RowVectorOfVec3(opensimSimbodyJNI.VectorOfVec3_transpose(swigCPtr, this), true);
+  }
+
 }

@@ -12,7 +12,7 @@ public class CMC_Joint extends CMC_Task {
   private transient long swigCPtr;
 
   public CMC_Joint(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.CMC_Joint_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.CMC_Joint_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class CMC_Joint extends CMC_Task {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_CMC_Joint(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_CMC_Joint(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,77 +36,77 @@ public class CMC_Joint extends CMC_Task {
   }
 
   public static CMC_Joint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.CMC_Joint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.CMC_Joint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new CMC_Joint(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.CMC_Joint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.CMC_Joint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.CMC_Joint_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.CMC_Joint_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.CMC_Joint_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.CMC_Joint_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new CMC_Joint(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.CMC_Joint_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.CMC_Joint_getConcreteClassName(swigCPtr, this);
   }
 
   public CMC_Joint(String aCoordinateName) {
-    this(opensimModelJNI.new_CMC_Joint__SWIG_0(aCoordinateName), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_CMC_Joint__SWIG_0(aCoordinateName), true);
   }
 
   public CMC_Joint() {
-    this(opensimModelJNI.new_CMC_Joint__SWIG_1(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_CMC_Joint__SWIG_1(), true);
   }
 
   public CMC_Joint(CMC_Joint aTask) {
-    this(opensimModelJNI.new_CMC_Joint__SWIG_2(CMC_Joint.getCPtr(aTask), aTask), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_CMC_Joint__SWIG_2(CMC_Joint.getCPtr(aTask), aTask), true);
   }
 
   public void setModel(Model aModel) {
-    opensimModelJNI.CMC_Joint_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
+    opensimActuatorsAnalysesToolsJNI.CMC_Joint_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
   public void setCoordinateName(String aName) {
-    opensimModelJNI.CMC_Joint_setCoordinateName(swigCPtr, this, aName);
+    opensimActuatorsAnalysesToolsJNI.CMC_Joint_setCoordinateName(swigCPtr, this, aName);
   }
 
   public String getCoordinateName() {
-    return opensimModelJNI.CMC_Joint_getCoordinateName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.CMC_Joint_getCoordinateName(swigCPtr, this);
   }
 
   public double getLimit() {
-    return opensimModelJNI.CMC_Joint_getLimit(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.CMC_Joint_getLimit(swigCPtr, this);
   }
 
   public void computeErrors(State s, double aT) {
-    opensimModelJNI.CMC_Joint_computeErrors(swigCPtr, this, State.getCPtr(s), s, aT);
+    opensimActuatorsAnalysesToolsJNI.CMC_Joint_computeErrors(swigCPtr, this, State.getCPtr(s), s, aT);
   }
 
   public void computeDesiredAccelerations(State s, double aT) {
-    opensimModelJNI.CMC_Joint_computeDesiredAccelerations__SWIG_0(swigCPtr, this, State.getCPtr(s), s, aT);
+    opensimActuatorsAnalysesToolsJNI.CMC_Joint_computeDesiredAccelerations__SWIG_0(swigCPtr, this, State.getCPtr(s), s, aT);
   }
 
   public void computeDesiredAccelerations(State s, double aTI, double aTF) {
-    opensimModelJNI.CMC_Joint_computeDesiredAccelerations__SWIG_1(swigCPtr, this, State.getCPtr(s), s, aTI, aTF);
+    opensimActuatorsAnalysesToolsJNI.CMC_Joint_computeDesiredAccelerations__SWIG_1(swigCPtr, this, State.getCPtr(s), s, aTI, aTF);
   }
 
   public void computeAccelerations(State s) {
-    opensimModelJNI.CMC_Joint_computeAccelerations(swigCPtr, this, State.getCPtr(s), s);
+    opensimActuatorsAnalysesToolsJNI.CMC_Joint_computeAccelerations(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
-    opensimModelJNI.CMC_Joint_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+    opensimActuatorsAnalysesToolsJNI.CMC_Joint_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
-    opensimModelJNI.CMC_Joint_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
+    opensimActuatorsAnalysesToolsJNI.CMC_Joint_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
 }

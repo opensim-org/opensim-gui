@@ -12,7 +12,7 @@ public class MuscleFirstOrderActivationDynamicModel extends ModelComponent {
   private transient long swigCPtr;
 
   public MuscleFirstOrderActivationDynamicModel(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class MuscleFirstOrderActivationDynamicModel extends ModelComponent {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_MuscleFirstOrderActivationDynamicModel(swigCPtr);
+        opensimSimulationJNI.delete_MuscleFirstOrderActivationDynamicModel(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,149 +36,149 @@ public class MuscleFirstOrderActivationDynamicModel extends ModelComponent {
   }
 
   public static MuscleFirstOrderActivationDynamicModel safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new MuscleFirstOrderActivationDynamicModel(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_getClassName();
+    return opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new MuscleFirstOrderActivationDynamicModel(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_activation_time_constant(MuscleFirstOrderActivationDynamicModel source) {
-    opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_copyProperty_activation_time_constant(swigCPtr, this, MuscleFirstOrderActivationDynamicModel.getCPtr(source), source);
+    opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_copyProperty_activation_time_constant(swigCPtr, this, MuscleFirstOrderActivationDynamicModel.getCPtr(source), source);
   }
 
   public double get_activation_time_constant(int i) {
-    return opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_get_activation_time_constant__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_get_activation_time_constant__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_activation_time_constant(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_upd_activation_time_constant__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_upd_activation_time_constant__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_activation_time_constant(int i, double value) {
-    opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_set_activation_time_constant__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_set_activation_time_constant__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_activation_time_constant(double value) {
-    return opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_append_activation_time_constant(swigCPtr, this, value);
+    return opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_append_activation_time_constant(swigCPtr, this, value);
   }
 
   public void constructProperty_activation_time_constant(double initValue) {
-    opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_constructProperty_activation_time_constant(swigCPtr, this, initValue);
+    opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_constructProperty_activation_time_constant(swigCPtr, this, initValue);
   }
 
   public double get_activation_time_constant() {
-    return opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_get_activation_time_constant__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_get_activation_time_constant__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_activation_time_constant() {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_upd_activation_time_constant__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_upd_activation_time_constant__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_activation_time_constant(double value) {
-    opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_set_activation_time_constant__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_set_activation_time_constant__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_deactivation_time_constant(MuscleFirstOrderActivationDynamicModel source) {
-    opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_copyProperty_deactivation_time_constant(swigCPtr, this, MuscleFirstOrderActivationDynamicModel.getCPtr(source), source);
+    opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_copyProperty_deactivation_time_constant(swigCPtr, this, MuscleFirstOrderActivationDynamicModel.getCPtr(source), source);
   }
 
   public double get_deactivation_time_constant(int i) {
-    return opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_get_deactivation_time_constant__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_get_deactivation_time_constant__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_deactivation_time_constant(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_upd_deactivation_time_constant__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_upd_deactivation_time_constant__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_deactivation_time_constant(int i, double value) {
-    opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_set_deactivation_time_constant__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_set_deactivation_time_constant__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_deactivation_time_constant(double value) {
-    return opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_append_deactivation_time_constant(swigCPtr, this, value);
+    return opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_append_deactivation_time_constant(swigCPtr, this, value);
   }
 
   public void constructProperty_deactivation_time_constant(double initValue) {
-    opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_constructProperty_deactivation_time_constant(swigCPtr, this, initValue);
+    opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_constructProperty_deactivation_time_constant(swigCPtr, this, initValue);
   }
 
   public double get_deactivation_time_constant() {
-    return opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_get_deactivation_time_constant__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_get_deactivation_time_constant__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_deactivation_time_constant() {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_upd_deactivation_time_constant__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_upd_deactivation_time_constant__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_deactivation_time_constant(double value) {
-    opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_set_deactivation_time_constant__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_set_deactivation_time_constant__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_minimum_activation(MuscleFirstOrderActivationDynamicModel source) {
-    opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_copyProperty_minimum_activation(swigCPtr, this, MuscleFirstOrderActivationDynamicModel.getCPtr(source), source);
+    opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_copyProperty_minimum_activation(swigCPtr, this, MuscleFirstOrderActivationDynamicModel.getCPtr(source), source);
   }
 
   public double get_minimum_activation(int i) {
-    return opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_get_minimum_activation__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_get_minimum_activation__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_minimum_activation(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_upd_minimum_activation__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_upd_minimum_activation__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_minimum_activation(int i, double value) {
-    opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_set_minimum_activation__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_set_minimum_activation__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_minimum_activation(double value) {
-    return opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_append_minimum_activation(swigCPtr, this, value);
+    return opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_append_minimum_activation(swigCPtr, this, value);
   }
 
   public void constructProperty_minimum_activation(double initValue) {
-    opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_constructProperty_minimum_activation(swigCPtr, this, initValue);
+    opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_constructProperty_minimum_activation(swigCPtr, this, initValue);
   }
 
   public double get_minimum_activation() {
-    return opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_get_minimum_activation__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_get_minimum_activation__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_minimum_activation() {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_upd_minimum_activation__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_upd_minimum_activation__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_minimum_activation(double value) {
-    opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_set_minimum_activation__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_set_minimum_activation__SWIG_1(swigCPtr, this, value);
   }
 
   public MuscleFirstOrderActivationDynamicModel() {
-    this(opensimModelSimulationJNI.new_MuscleFirstOrderActivationDynamicModel__SWIG_0(), true);
+    this(opensimSimulationJNI.new_MuscleFirstOrderActivationDynamicModel__SWIG_0(), true);
   }
 
   public MuscleFirstOrderActivationDynamicModel(double tauActivation, double tauDeactivation, double minActivation, String muscleName) {
-    this(opensimModelSimulationJNI.new_MuscleFirstOrderActivationDynamicModel__SWIG_1(tauActivation, tauDeactivation, minActivation, muscleName), true);
+    this(opensimSimulationJNI.new_MuscleFirstOrderActivationDynamicModel__SWIG_1(tauActivation, tauDeactivation, minActivation, muscleName), true);
   }
 
   public double clampActivation(double activation) {
-    return opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_clampActivation(swigCPtr, this, activation);
+    return opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_clampActivation(swigCPtr, this, activation);
   }
 
   public double calcDerivative(double activation, double excitation) {
-    return opensimModelSimulationJNI.MuscleFirstOrderActivationDynamicModel_calcDerivative(swigCPtr, this, activation, excitation);
+    return opensimSimulationJNI.MuscleFirstOrderActivationDynamicModel_calcDerivative(swigCPtr, this, activation, excitation);
   }
 
 }

@@ -13,7 +13,7 @@ public class DataTableUnitVec3 extends AbstractDataTable {
   private boolean swigCMemOwnDerived;
 
   protected DataTableUnitVec3(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.DataTableUnitVec3_SWIGSmartPtrUpcast(cPtr), true);
+    super(opensimCommonJNI.DataTableUnitVec3_SWIGSmartPtrUpcast(cPtr), true);
     swigCMemOwnDerived = cMemoryOwn;
     swigCPtr = cPtr;
   }
@@ -30,7 +30,7 @@ public class DataTableUnitVec3 extends AbstractDataTable {
     if (swigCPtr != 0) {
       if (swigCMemOwnDerived) {
         swigCMemOwnDerived = false;
-        opensimModelCommonJNI.delete_DataTableUnitVec3(swigCPtr);
+        opensimCommonJNI.delete_DataTableUnitVec3(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -38,131 +38,159 @@ public class DataTableUnitVec3 extends AbstractDataTable {
   }
 
   public DataTableUnitVec3() {
-    this(opensimModelCommonJNI.new_DataTableUnitVec3__SWIG_0(), true);
+    this(opensimCommonJNI.new_DataTableUnitVec3__SWIG_0(), true);
   }
 
   public DataTableUnitVec3(DataTableUnitVec3 arg0) {
-    this(opensimModelCommonJNI.new_DataTableUnitVec3__SWIG_1(DataTableUnitVec3.getCPtr(arg0), arg0), true);
+    this(opensimCommonJNI.new_DataTableUnitVec3__SWIG_1(DataTableUnitVec3.getCPtr(arg0), arg0), true);
   }
 
   public DataTableUnitVec3(String filename, String tablename) {
-    this(opensimModelCommonJNI.new_DataTableUnitVec3__SWIG_2(filename, tablename), true);
+    this(opensimCommonJNI.new_DataTableUnitVec3__SWIG_2(filename, tablename), true);
   }
 
   public DataTable flatten() {
-    return new DataTable(opensimModelCommonJNI.DataTableUnitVec3_flatten__SWIG_0(swigCPtr, this), true);
+    return new DataTable(opensimCommonJNI.DataTableUnitVec3_flatten__SWIG_0(swigCPtr, this), true);
   }
 
   public DataTable flatten(StdVectorString suffixes) {
-    return new DataTable(opensimModelCommonJNI.DataTableUnitVec3_flatten__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
+    return new DataTable(opensimCommonJNI.DataTableUnitVec3_flatten__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
   }
 
   public long numComponentsPerElement() {
-    return opensimModelCommonJNI.DataTableUnitVec3_numComponentsPerElement(swigCPtr, this);
+    return opensimCommonJNI.DataTableUnitVec3_numComponentsPerElement(swigCPtr, this);
   }
 
   public void appendRow(double indRow, SWIGTYPE_p_std__initializer_listT_SimTK__UnitVecT_double_1_t_t container) {
-    opensimModelCommonJNI.DataTableUnitVec3_appendRow__SWIG_1(swigCPtr, this, indRow, SWIGTYPE_p_std__initializer_listT_SimTK__UnitVecT_double_1_t_t.getCPtr(container));
+    opensimCommonJNI.DataTableUnitVec3_appendRow__SWIG_1(swigCPtr, this, indRow, SWIGTYPE_p_std__initializer_listT_SimTK__UnitVecT_double_1_t_t.getCPtr(container));
   }
 
   public void appendRow(double indRow, SWIGTYPE_p_SimTK__RowVector_T_SimTK__UnitVecT_double_1_t_t depRow) {
-    opensimModelCommonJNI.DataTableUnitVec3_appendRow__SWIG_3(swigCPtr, this, indRow, SWIGTYPE_p_SimTK__RowVector_T_SimTK__UnitVecT_double_1_t_t.getCPtr(depRow));
+    opensimCommonJNI.DataTableUnitVec3_appendRow__SWIG_3(swigCPtr, this, indRow, SWIGTYPE_p_SimTK__RowVector_T_SimTK__UnitVecT_double_1_t_t.getCPtr(depRow));
   }
 
   public void appendRow(double indRow, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__UnitVecT_double_1_t_t depRow) {
-    opensimModelCommonJNI.DataTableUnitVec3_appendRow__SWIG_4(swigCPtr, this, indRow, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__UnitVecT_double_1_t_t.getCPtr(depRow));
+    opensimCommonJNI.DataTableUnitVec3_appendRow__SWIG_4(swigCPtr, this, indRow, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__UnitVecT_double_1_t_t.getCPtr(depRow));
   }
 
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__UnitVecT_double_1_t_t getRowAtIndex(long index) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__UnitVecT_double_1_t_t(opensimModelCommonJNI.DataTableUnitVec3_getRowAtIndex(swigCPtr, this, index), true);
+    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__UnitVecT_double_1_t_t(opensimCommonJNI.DataTableUnitVec3_getRowAtIndex(swigCPtr, this, index), true);
   }
 
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__UnitVecT_double_1_t_t getRow(double ind) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__UnitVecT_double_1_t_t(opensimModelCommonJNI.DataTableUnitVec3_getRow(swigCPtr, this, ind), true);
+    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__UnitVecT_double_1_t_t(opensimCommonJNI.DataTableUnitVec3_getRow(swigCPtr, this, ind), true);
   }
 
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__UnitVecT_double_1_t_t updRowAtIndex(long index) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__UnitVecT_double_1_t_t(opensimModelCommonJNI.DataTableUnitVec3_updRowAtIndex(swigCPtr, this, index), true);
+    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__UnitVecT_double_1_t_t(opensimCommonJNI.DataTableUnitVec3_updRowAtIndex(swigCPtr, this, index), true);
   }
 
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__UnitVecT_double_1_t_t updRow(double ind) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__UnitVecT_double_1_t_t(opensimModelCommonJNI.DataTableUnitVec3_updRow(swigCPtr, this, ind), true);
+    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__UnitVecT_double_1_t_t(opensimCommonJNI.DataTableUnitVec3_updRow(swigCPtr, this, ind), true);
+  }
+
+  public void setRowAtIndex(long index, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__UnitVecT_double_1_t_t depRow) {
+    opensimCommonJNI.DataTableUnitVec3_setRowAtIndex__SWIG_0(swigCPtr, this, index, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__UnitVecT_double_1_t_t.getCPtr(depRow));
+  }
+
+  public void setRowAtIndex(long index, SWIGTYPE_p_SimTK__RowVector_T_SimTK__UnitVecT_double_1_t_t depRow) {
+    opensimCommonJNI.DataTableUnitVec3_setRowAtIndex__SWIG_1(swigCPtr, this, index, SWIGTYPE_p_SimTK__RowVector_T_SimTK__UnitVecT_double_1_t_t.getCPtr(depRow));
+  }
+
+  public void setRow(double ind, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__UnitVecT_double_1_t_t depRow) {
+    opensimCommonJNI.DataTableUnitVec3_setRow__SWIG_0(swigCPtr, this, ind, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__UnitVecT_double_1_t_t.getCPtr(depRow));
+  }
+
+  public void setRow(double ind, SWIGTYPE_p_SimTK__RowVector_T_SimTK__UnitVecT_double_1_t_t depRow) {
+    opensimCommonJNI.DataTableUnitVec3_setRow__SWIG_1(swigCPtr, this, ind, SWIGTYPE_p_SimTK__RowVector_T_SimTK__UnitVecT_double_1_t_t.getCPtr(depRow));
   }
 
   public void removeRowAtIndex(long index) {
-    opensimModelCommonJNI.DataTableUnitVec3_removeRowAtIndex(swigCPtr, this, index);
+    opensimCommonJNI.DataTableUnitVec3_removeRowAtIndex(swigCPtr, this, index);
   }
 
   public void removeRow(double ind) {
-    opensimModelCommonJNI.DataTableUnitVec3_removeRow(swigCPtr, this, ind);
+    opensimCommonJNI.DataTableUnitVec3_removeRow(swigCPtr, this, ind);
   }
 
   public StdVectorDouble getIndependentColumn() {
-    return new StdVectorDouble(opensimModelCommonJNI.DataTableUnitVec3_getIndependentColumn(swigCPtr, this), false);
+    return new StdVectorDouble(opensimCommonJNI.DataTableUnitVec3_getIndependentColumn(swigCPtr, this), false);
+  }
+
+  public void appendColumn(String columnLabel, SWIGTYPE_p_std__initializer_listT_SimTK__UnitVecT_double_1_t_t container) {
+    opensimCommonJNI.DataTableUnitVec3_appendColumn__SWIG_1(swigCPtr, this, columnLabel, SWIGTYPE_p_std__initializer_listT_SimTK__UnitVecT_double_1_t_t.getCPtr(container));
+  }
+
+  public void appendColumn(String columnLabel, SWIGTYPE_p_SimTK__Vector_T_SimTK__UnitVecT_double_1_t_t depCol) {
+    opensimCommonJNI.DataTableUnitVec3_appendColumn__SWIG_3(swigCPtr, this, columnLabel, SWIGTYPE_p_SimTK__Vector_T_SimTK__UnitVecT_double_1_t_t.getCPtr(depCol));
+  }
+
+  public void appendColumn(String columnLabel, SWIGTYPE_p_SimTK__VectorView_T_SimTK__UnitVecT_double_1_t_t depCol) {
+    opensimCommonJNI.DataTableUnitVec3_appendColumn__SWIG_4(swigCPtr, this, columnLabel, SWIGTYPE_p_SimTK__VectorView_T_SimTK__UnitVecT_double_1_t_t.getCPtr(depCol));
   }
 
   public SWIGTYPE_p_SimTK__VectorView_T_SimTK__UnitVecT_double_1_t_t getDependentColumnAtIndex(long index) {
-    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__UnitVecT_double_1_t_t(opensimModelCommonJNI.DataTableUnitVec3_getDependentColumnAtIndex(swigCPtr, this, index), true);
+    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__UnitVecT_double_1_t_t(opensimCommonJNI.DataTableUnitVec3_getDependentColumnAtIndex(swigCPtr, this, index), true);
   }
 
   public SWIGTYPE_p_SimTK__VectorView_T_SimTK__UnitVecT_double_1_t_t getDependentColumn(String columnLabel) {
-    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__UnitVecT_double_1_t_t(opensimModelCommonJNI.DataTableUnitVec3_getDependentColumn(swigCPtr, this, columnLabel), true);
+    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__UnitVecT_double_1_t_t(opensimCommonJNI.DataTableUnitVec3_getDependentColumn(swigCPtr, this, columnLabel), true);
   }
 
   public SWIGTYPE_p_SimTK__VectorView_T_SimTK__UnitVecT_double_1_t_t updDependentColumnAtIndex(long index) {
-    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__UnitVecT_double_1_t_t(opensimModelCommonJNI.DataTableUnitVec3_updDependentColumnAtIndex(swigCPtr, this, index), true);
+    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__UnitVecT_double_1_t_t(opensimCommonJNI.DataTableUnitVec3_updDependentColumnAtIndex(swigCPtr, this, index), true);
   }
 
   public SWIGTYPE_p_SimTK__VectorView_T_SimTK__UnitVecT_double_1_t_t updDependentColumn(String columnLabel) {
-    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__UnitVecT_double_1_t_t(opensimModelCommonJNI.DataTableUnitVec3_updDependentColumn(swigCPtr, this, columnLabel), true);
+    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__UnitVecT_double_1_t_t(opensimCommonJNI.DataTableUnitVec3_updDependentColumn(swigCPtr, this, columnLabel), true);
   }
 
   public void setIndependentValueAtIndex(long rowIndex, double value) {
-    opensimModelCommonJNI.DataTableUnitVec3_setIndependentValueAtIndex(swigCPtr, this, rowIndex, value);
+    opensimCommonJNI.DataTableUnitVec3_setIndependentValueAtIndex(swigCPtr, this, rowIndex, value);
   }
 
   public SWIGTYPE_p_SimTK__MatrixView_T_SimTK__UnitVecT_double_1_t_t getMatrix() {
-    return new SWIGTYPE_p_SimTK__MatrixView_T_SimTK__UnitVecT_double_1_t_t(opensimModelCommonJNI.DataTableUnitVec3_getMatrix(swigCPtr, this), false);
+    return new SWIGTYPE_p_SimTK__MatrixView_T_SimTK__UnitVecT_double_1_t_t(opensimCommonJNI.DataTableUnitVec3_getMatrix(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_SimTK__MatrixView_T_SimTK__UnitVecT_double_1_t_t getMatrixBlock(long rowStart, long columnStart, long numRows, long numColumns) {
-    return new SWIGTYPE_p_SimTK__MatrixView_T_SimTK__UnitVecT_double_1_t_t(opensimModelCommonJNI.DataTableUnitVec3_getMatrixBlock(swigCPtr, this, rowStart, columnStart, numRows, numColumns), true);
+    return new SWIGTYPE_p_SimTK__MatrixView_T_SimTK__UnitVecT_double_1_t_t(opensimCommonJNI.DataTableUnitVec3_getMatrixBlock(swigCPtr, this, rowStart, columnStart, numRows, numColumns), true);
   }
 
   public SWIGTYPE_p_SimTK__MatrixView_T_SimTK__UnitVecT_double_1_t_t updMatrix() {
-    return new SWIGTYPE_p_SimTK__MatrixView_T_SimTK__UnitVecT_double_1_t_t(opensimModelCommonJNI.DataTableUnitVec3_updMatrix(swigCPtr, this), false);
+    return new SWIGTYPE_p_SimTK__MatrixView_T_SimTK__UnitVecT_double_1_t_t(opensimCommonJNI.DataTableUnitVec3_updMatrix(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_SimTK__MatrixView_T_SimTK__UnitVecT_double_1_t_t updMatrixBlock(long rowStart, long columnStart, long numRows, long numColumns) {
-    return new SWIGTYPE_p_SimTK__MatrixView_T_SimTK__UnitVecT_double_1_t_t(opensimModelCommonJNI.DataTableUnitVec3_updMatrixBlock(swigCPtr, this, rowStart, columnStart, numRows, numColumns), true);
+    return new SWIGTYPE_p_SimTK__MatrixView_T_SimTK__UnitVecT_double_1_t_t(opensimCommonJNI.DataTableUnitVec3_updMatrixBlock(swigCPtr, this, rowStart, columnStart, numRows, numColumns), true);
   }
 
   public String toString(StdVectorInt rows, StdVectorString columnLabels, boolean withMetaData, long splitSize, long maxWidth, long precision) {
-    return opensimModelCommonJNI.DataTableUnitVec3_toString__SWIG_0(swigCPtr, this, StdVectorInt.getCPtr(rows), rows, StdVectorString.getCPtr(columnLabels), columnLabels, withMetaData, splitSize, maxWidth, precision);
+    return opensimCommonJNI.DataTableUnitVec3_toString__SWIG_0(swigCPtr, this, StdVectorInt.getCPtr(rows), rows, StdVectorString.getCPtr(columnLabels), columnLabels, withMetaData, splitSize, maxWidth, precision);
   }
 
   public String toString(StdVectorInt rows, StdVectorString columnLabels, boolean withMetaData, long splitSize, long maxWidth) {
-    return opensimModelCommonJNI.DataTableUnitVec3_toString__SWIG_1(swigCPtr, this, StdVectorInt.getCPtr(rows), rows, StdVectorString.getCPtr(columnLabels), columnLabels, withMetaData, splitSize, maxWidth);
+    return opensimCommonJNI.DataTableUnitVec3_toString__SWIG_1(swigCPtr, this, StdVectorInt.getCPtr(rows), rows, StdVectorString.getCPtr(columnLabels), columnLabels, withMetaData, splitSize, maxWidth);
   }
 
   public String toString(StdVectorInt rows, StdVectorString columnLabels, boolean withMetaData, long splitSize) {
-    return opensimModelCommonJNI.DataTableUnitVec3_toString__SWIG_2(swigCPtr, this, StdVectorInt.getCPtr(rows), rows, StdVectorString.getCPtr(columnLabels), columnLabels, withMetaData, splitSize);
+    return opensimCommonJNI.DataTableUnitVec3_toString__SWIG_2(swigCPtr, this, StdVectorInt.getCPtr(rows), rows, StdVectorString.getCPtr(columnLabels), columnLabels, withMetaData, splitSize);
   }
 
   public String toString(StdVectorInt rows, StdVectorString columnLabels, boolean withMetaData) {
-    return opensimModelCommonJNI.DataTableUnitVec3_toString__SWIG_3(swigCPtr, this, StdVectorInt.getCPtr(rows), rows, StdVectorString.getCPtr(columnLabels), columnLabels, withMetaData);
+    return opensimCommonJNI.DataTableUnitVec3_toString__SWIG_3(swigCPtr, this, StdVectorInt.getCPtr(rows), rows, StdVectorString.getCPtr(columnLabels), columnLabels, withMetaData);
   }
 
   public String toString(StdVectorInt rows, StdVectorString columnLabels) {
-    return opensimModelCommonJNI.DataTableUnitVec3_toString__SWIG_4(swigCPtr, this, StdVectorInt.getCPtr(rows), rows, StdVectorString.getCPtr(columnLabels), columnLabels);
+    return opensimCommonJNI.DataTableUnitVec3_toString__SWIG_4(swigCPtr, this, StdVectorInt.getCPtr(rows), rows, StdVectorString.getCPtr(columnLabels), columnLabels);
   }
 
   public String toString(StdVectorInt rows) {
-    return opensimModelCommonJNI.DataTableUnitVec3_toString__SWIG_5(swigCPtr, this, StdVectorInt.getCPtr(rows), rows);
+    return opensimCommonJNI.DataTableUnitVec3_toString__SWIG_5(swigCPtr, this, StdVectorInt.getCPtr(rows), rows);
   }
 
   public String toString() {
-    return opensimModelCommonJNI.DataTableUnitVec3_toString__SWIG_6(swigCPtr, this);
+    return opensimCommonJNI.DataTableUnitVec3_toString__SWIG_6(swigCPtr, this);
   }
 
 }

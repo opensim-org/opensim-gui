@@ -29,31 +29,31 @@ public class STOFileAdapterSpatialVec {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_STOFileAdapterSpatialVec(swigCPtr);
+        opensimCommonJNI.delete_STOFileAdapterSpatialVec(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public STOFileAdapterSpatialVec() {
-    this(opensimModelCommonJNI.new_STOFileAdapterSpatialVec__SWIG_0(), true);
+    this(opensimCommonJNI.new_STOFileAdapterSpatialVec__SWIG_0(), true);
   }
 
   public STOFileAdapterSpatialVec(STOFileAdapterSpatialVec arg0) {
-    this(opensimModelCommonJNI.new_STOFileAdapterSpatialVec__SWIG_1(STOFileAdapterSpatialVec.getCPtr(arg0), arg0), true);
+    this(opensimCommonJNI.new_STOFileAdapterSpatialVec__SWIG_1(STOFileAdapterSpatialVec.getCPtr(arg0), arg0), true);
   }
 
   public STOFileAdapterSpatialVec clone() {
-    long cPtr = opensimModelCommonJNI.STOFileAdapterSpatialVec_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.STOFileAdapterSpatialVec_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new STOFileAdapterSpatialVec(cPtr, true);
   }
 
   public static TimeSeriesTableSpatialVec read(String fileName) {
-    return new TimeSeriesTableSpatialVec(opensimModelCommonJNI.STOFileAdapterSpatialVec_read(fileName), true);
+    return new TimeSeriesTableSpatialVec(opensimCommonJNI.STOFileAdapterSpatialVec_read(fileName), true);
   }
 
   public static void write(TimeSeriesTableSpatialVec table, String fileName) {
-    opensimModelCommonJNI.STOFileAdapterSpatialVec_write(TimeSeriesTableSpatialVec.getCPtr(table), table, fileName);
+    opensimCommonJNI.STOFileAdapterSpatialVec_write(TimeSeriesTableSpatialVec.getCPtr(table), table, fileName);
   }
 
 }

@@ -47,6 +47,7 @@ import org.openide.nodes.Node;
 import org.openide.util.NbBundle;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
+import org.opensim.modeling.AbstractPathPoint;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayPathPoint;
 import org.opensim.modeling.Body;
@@ -68,7 +69,9 @@ import org.opensim.modeling.PropertyHelper;
 import org.opensim.modeling.SetPathWrap;
 import org.opensim.modeling.SetWrapObject;
 import org.opensim.modeling.SimbodyEngine;
+import org.opensim.modeling.State;
 import org.opensim.modeling.Units;
+import org.opensim.modeling.Vec3;
 import org.opensim.modeling.WrapEllipsoid;
 import org.opensim.modeling.WrapObject;
 import org.opensim.view.ClearSelectedObjectsEvent;
@@ -497,7 +500,8 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
    public void AttachmentPointEntered(javax.swing.JTextField field, int attachmentNum, int coordNum) {
       PathActuator asm = PathActuator.safeDownCast(currentAct);
       PathPointSet pathPoints = asm.getGeometryPath().getPathPointSet();
-      double newValue, oldValue = pathPoints.get(attachmentNum).getLocationCoord(coordNum);
+      State s = openSimContext.getCurrentStateRef();
+      double newValue, oldValue = ((PathPoint)pathPoints.get(attachmentNum)).getLocation(s).get(coordNum);
       try {
          newValue = positionFormat.parse(field.getText()).doubleValue();
       } catch (ParseException ex) {
@@ -511,7 +515,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
       if (oldValue != newValue) {
          Model model = asm.getModel();
          OpenSimContext context = OpenSimDB.getInstance().getContext(model);
-         context.setLocation(pathPoints.get(attachmentNum), coordNum, newValue);
+         context.setLocation(PathPoint.safeDownCast(pathPoints.get(attachmentNum)), coordNum, newValue);
          //setPendingChanges(true, currentAct, true);
          // tell the ViewDB to redraw the model
          SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
@@ -546,7 +550,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
    public void AttachmentSelected(javax.swing.JCheckBox attachmentSelBox, int attachmentNum) {
       PathActuator asm = PathActuator.safeDownCast(currentAct);
       PathPointSet pathPoints = asm.getGeometryPath().getPathPointSet();
-      PathPoint point = pathPoints.get(attachmentNum);
+      AbstractPathPoint point = pathPoints.get(attachmentNum);
       ViewDB.getInstance().toggleAddSelectedObject(point);
    }
    
@@ -634,7 +638,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
 
    public void PathPointTypeChosen(javax.swing.JComboBox musclePointTypeComboBox, int attachmentNum) {
       PathActuator asm = PathActuator.safeDownCast(currentAct);
-      PathPoint mp = asm.getGeometryPath().getPathPointSet().get(attachmentNum);
+      AbstractPathPoint mp = asm.getGeometryPath().getPathPointSet().get(attachmentNum);
       ConditionalPathPoint via = ConditionalPathPoint.safeDownCast(mp);
       MovingPathPoint mmp = MovingPathPoint.safeDownCast(mp);
 
@@ -1000,7 +1004,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
       // and make sure the rest of the points maintain correct selection status
       ViewDB.getInstance().removeObjectsBelongingToMuscleFromSelection(PathActuator.safeDownCast(currentAct));
 
-      PathPoint closestPoint = pathPoints.get(index);
+      AbstractPathPoint closestPoint = pathPoints.get(index);
       OpenSimContext context =OpenSimDB.getInstance().getContext(asm.getModel());
       context.addPathPoint(asm.getGeometryPath(), menuChoice, closestPoint.getBody());
       //setPendingChanges(true, currentAct, false);
@@ -1015,7 +1019,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
       PathActuator asm = PathActuator.safeDownCast(currentAct);
       // The point may not be deleted, but save a reference to it so that if it is deleted
       // you can fire an ObjectsDeletedEvent later.
-      PathPoint mp = asm.getGeometryPath().getPathPointSet().get(menuChoice);
+      AbstractPathPoint mp = asm.getGeometryPath().getPathPointSet().get(menuChoice);
       ViewDB.getInstance().removeObjectsBelongingToMuscleFromSelection(PathActuator.safeDownCast(currentAct));
       OpenSimContext context =OpenSimDB.getInstance().getContext(asm.getModel());
       
@@ -1100,7 +1104,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
       CurrentPathPanel.add(currentPathZLabel);
       CurrentPathPanel.add(currentPathBodyLabel);
       CurrentPathPanel.add(currentPathSelLabel);
-      
+      State state = openSimContext.getCurrentStateRef();
       for (int i = 0; i < asmp.getSize(); i++) {
          javax.swing.JLabel indexLabel = new javax.swing.JLabel();
          javax.swing.JLabel xField = new javax.swing.JLabel();
@@ -1112,9 +1116,10 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
          javax.swing.JLabel bodyLabel = new javax.swing.JLabel();
          javax.swing.JLabel typeLabel = new javax.swing.JLabel();
          indexLabel.setText(intPropFormat.format(i+1) + ".");
-         xField.setText(positionFormat.format(asmp.getitem(i).getLocationCoord(0)));
-         yField.setText(positionFormat.format(asmp.getitem(i).getLocationCoord(1)));
-         zField.setText(positionFormat.format(asmp.getitem(i).getLocationCoord(2)));
+         Vec3 pathptLoc = PathPoint.safeDownCast(asmp.getitem(i)).getLocation(state);
+         xField.setText(positionFormat.format(pathptLoc.get(0)));
+         yField.setText(positionFormat.format(pathptLoc.get(1)));
+         zField.setText(positionFormat.format(pathptLoc.get(2)));
          bodyLabel.setText(asmp.getitem(i).getBodyName());
          if (asmp.getitem(i).getWrapObject() != null)
             typeLabel.setText("wrap" + " (" + asmp.getitem(i).getWrapObject().getName() + ")");
@@ -1904,9 +1909,11 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
             Model model=mp.getBody().getModel();
             OpenSimContext context=OpenSimDB.getInstance().getContext(model);
             context.transform(ground, ev.getDragVector(), body, dragVectorBody);
-            context.setLocation(mp, 0, mp.getLocationCoord(0) + dragVectorBody[0]);
-            context.setLocation(mp, 1, mp.getLocationCoord(1) + dragVectorBody[1]);
-            context.setLocation(mp, 2, mp.getLocationCoord(2) + dragVectorBody[2]);
+            State state = openSimContext.getCurrentStateRef();
+            Vec3 pptLoc = mp.getLocation(state);
+            context.setLocation(mp, 0, pptLoc.get(0) + dragVectorBody[0]);
+            context.setLocation(mp, 1, pptLoc.get(1) + dragVectorBody[1]);
+            context.setLocation(mp, 2, pptLoc.get(2) + dragVectorBody[2]);
             currentMuscleMoved = true;
             
             // Update the geometry of the muscle.

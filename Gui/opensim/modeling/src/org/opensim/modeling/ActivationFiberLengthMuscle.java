@@ -12,7 +12,7 @@ public class ActivationFiberLengthMuscle extends Muscle {
   private transient long swigCPtr;
 
   public ActivationFiberLengthMuscle(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.ActivationFiberLengthMuscle_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.ActivationFiberLengthMuscle_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ActivationFiberLengthMuscle extends Muscle {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_ActivationFiberLengthMuscle(swigCPtr);
+        opensimSimulationJNI.delete_ActivationFiberLengthMuscle(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,125 +36,125 @@ public class ActivationFiberLengthMuscle extends Muscle {
   }
 
   public static ActivationFiberLengthMuscle safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.ActivationFiberLengthMuscle_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.ActivationFiberLengthMuscle_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ActivationFiberLengthMuscle(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.ActivationFiberLengthMuscle_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.ActivationFiberLengthMuscle_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.ActivationFiberLengthMuscle_getClassName();
+    return opensimSimulationJNI.ActivationFiberLengthMuscle_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.ActivationFiberLengthMuscle_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.ActivationFiberLengthMuscle_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ActivationFiberLengthMuscle(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.ActivationFiberLengthMuscle_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.ActivationFiberLengthMuscle_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_default_activation(ActivationFiberLengthMuscle source) {
-    opensimModelSimulationJNI.ActivationFiberLengthMuscle_copyProperty_default_activation(swigCPtr, this, ActivationFiberLengthMuscle.getCPtr(source), source);
+    opensimSimulationJNI.ActivationFiberLengthMuscle_copyProperty_default_activation(swigCPtr, this, ActivationFiberLengthMuscle.getCPtr(source), source);
   }
 
   public double get_default_activation(int i) {
-    return opensimModelSimulationJNI.ActivationFiberLengthMuscle_get_default_activation__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.ActivationFiberLengthMuscle_get_default_activation__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_default_activation(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.ActivationFiberLengthMuscle_upd_default_activation__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.ActivationFiberLengthMuscle_upd_default_activation__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_default_activation(int i, double value) {
-    opensimModelSimulationJNI.ActivationFiberLengthMuscle_set_default_activation__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.ActivationFiberLengthMuscle_set_default_activation__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_default_activation(double value) {
-    return opensimModelSimulationJNI.ActivationFiberLengthMuscle_append_default_activation(swigCPtr, this, value);
+    return opensimSimulationJNI.ActivationFiberLengthMuscle_append_default_activation(swigCPtr, this, value);
   }
 
   public void constructProperty_default_activation(double initValue) {
-    opensimModelSimulationJNI.ActivationFiberLengthMuscle_constructProperty_default_activation(swigCPtr, this, initValue);
+    opensimSimulationJNI.ActivationFiberLengthMuscle_constructProperty_default_activation(swigCPtr, this, initValue);
   }
 
   public double get_default_activation() {
-    return opensimModelSimulationJNI.ActivationFiberLengthMuscle_get_default_activation__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.ActivationFiberLengthMuscle_get_default_activation__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_default_activation() {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.ActivationFiberLengthMuscle_upd_default_activation__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.ActivationFiberLengthMuscle_upd_default_activation__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_default_activation(double value) {
-    opensimModelSimulationJNI.ActivationFiberLengthMuscle_set_default_activation__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.ActivationFiberLengthMuscle_set_default_activation__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_default_fiber_length(ActivationFiberLengthMuscle source) {
-    opensimModelSimulationJNI.ActivationFiberLengthMuscle_copyProperty_default_fiber_length(swigCPtr, this, ActivationFiberLengthMuscle.getCPtr(source), source);
+    opensimSimulationJNI.ActivationFiberLengthMuscle_copyProperty_default_fiber_length(swigCPtr, this, ActivationFiberLengthMuscle.getCPtr(source), source);
   }
 
   public double get_default_fiber_length(int i) {
-    return opensimModelSimulationJNI.ActivationFiberLengthMuscle_get_default_fiber_length__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.ActivationFiberLengthMuscle_get_default_fiber_length__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_default_fiber_length(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.ActivationFiberLengthMuscle_upd_default_fiber_length__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.ActivationFiberLengthMuscle_upd_default_fiber_length__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_default_fiber_length(int i, double value) {
-    opensimModelSimulationJNI.ActivationFiberLengthMuscle_set_default_fiber_length__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.ActivationFiberLengthMuscle_set_default_fiber_length__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_default_fiber_length(double value) {
-    return opensimModelSimulationJNI.ActivationFiberLengthMuscle_append_default_fiber_length(swigCPtr, this, value);
+    return opensimSimulationJNI.ActivationFiberLengthMuscle_append_default_fiber_length(swigCPtr, this, value);
   }
 
   public void constructProperty_default_fiber_length(double initValue) {
-    opensimModelSimulationJNI.ActivationFiberLengthMuscle_constructProperty_default_fiber_length(swigCPtr, this, initValue);
+    opensimSimulationJNI.ActivationFiberLengthMuscle_constructProperty_default_fiber_length(swigCPtr, this, initValue);
   }
 
   public double get_default_fiber_length() {
-    return opensimModelSimulationJNI.ActivationFiberLengthMuscle_get_default_fiber_length__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.ActivationFiberLengthMuscle_get_default_fiber_length__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_default_fiber_length() {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.ActivationFiberLengthMuscle_upd_default_fiber_length__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.ActivationFiberLengthMuscle_upd_default_fiber_length__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_default_fiber_length(double value) {
-    opensimModelSimulationJNI.ActivationFiberLengthMuscle_set_default_fiber_length__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.ActivationFiberLengthMuscle_set_default_fiber_length__SWIG_1(swigCPtr, this, value);
   }
 
   public double getDefaultActivation() {
-    return opensimModelSimulationJNI.ActivationFiberLengthMuscle_getDefaultActivation(swigCPtr, this);
+    return opensimSimulationJNI.ActivationFiberLengthMuscle_getDefaultActivation(swigCPtr, this);
   }
 
   public void setDefaultActivation(double activation) {
-    opensimModelSimulationJNI.ActivationFiberLengthMuscle_setDefaultActivation(swigCPtr, this, activation);
+    opensimSimulationJNI.ActivationFiberLengthMuscle_setDefaultActivation(swigCPtr, this, activation);
   }
 
   public double getDefaultFiberLength() {
-    return opensimModelSimulationJNI.ActivationFiberLengthMuscle_getDefaultFiberLength(swigCPtr, this);
+    return opensimSimulationJNI.ActivationFiberLengthMuscle_getDefaultFiberLength(swigCPtr, this);
   }
 
   public void setDefaultFiberLength(double length) {
-    opensimModelSimulationJNI.ActivationFiberLengthMuscle_setDefaultFiberLength(swigCPtr, this, length);
+    opensimSimulationJNI.ActivationFiberLengthMuscle_setDefaultFiberLength(swigCPtr, this, length);
   }
 
   public void setActivation(State s, double activation) {
-    opensimModelSimulationJNI.ActivationFiberLengthMuscle_setActivation(swigCPtr, this, State.getCPtr(s), s, activation);
+    opensimSimulationJNI.ActivationFiberLengthMuscle_setActivation(swigCPtr, this, State.getCPtr(s), s, activation);
   }
 
   public void setFiberLength(State s, double fiberLength) {
-    opensimModelSimulationJNI.ActivationFiberLengthMuscle_setFiberLength(swigCPtr, this, State.getCPtr(s), s, fiberLength);
+    opensimSimulationJNI.ActivationFiberLengthMuscle_setFiberLength(swigCPtr, this, State.getCPtr(s), s, fiberLength);
   }
 
   public double getActivationRate(State s) {
-    return opensimModelSimulationJNI.ActivationFiberLengthMuscle_getActivationRate(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.ActivationFiberLengthMuscle_getActivationRate(swigCPtr, this, State.getCPtr(s), s);
   }
 
 }

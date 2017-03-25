@@ -12,7 +12,7 @@ public class MarkerPairSet extends SetMarkerPairs {
   private transient long swigCPtr;
 
   public MarkerPairSet(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.MarkerPairSet_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.MarkerPairSet_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class MarkerPairSet extends SetMarkerPairs {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_MarkerPairSet(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_MarkerPairSet(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,33 +36,33 @@ public class MarkerPairSet extends SetMarkerPairs {
   }
 
   public static MarkerPairSet safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.MarkerPairSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MarkerPairSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new MarkerPairSet(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.MarkerPairSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.MarkerPairSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.MarkerPairSet_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.MarkerPairSet_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.MarkerPairSet_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MarkerPairSet_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new MarkerPairSet(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.MarkerPairSet_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.MarkerPairSet_getConcreteClassName(swigCPtr, this);
   }
 
   public MarkerPairSet() {
-    this(opensimModelJNI.new_MarkerPairSet__SWIG_0(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_MarkerPairSet__SWIG_0(), true);
   }
 
   public MarkerPairSet(MarkerPairSet aSimmMarkerPairSet) {
-    this(opensimModelJNI.new_MarkerPairSet__SWIG_1(MarkerPairSet.getCPtr(aSimmMarkerPairSet), aSimmMarkerPairSet), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_MarkerPairSet__SWIG_1(MarkerPairSet.getCPtr(aSimmMarkerPairSet), aSimmMarkerPairSet), true);
   }
 
 }

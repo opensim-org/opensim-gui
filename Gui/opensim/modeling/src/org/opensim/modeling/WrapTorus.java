@@ -12,7 +12,7 @@ public class WrapTorus extends WrapObject {
   private transient long swigCPtr;
 
   public WrapTorus(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.WrapTorus_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.WrapTorus_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class WrapTorus extends WrapObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_WrapTorus(swigCPtr);
+        opensimSimulationJNI.delete_WrapTorus(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,57 +36,61 @@ public class WrapTorus extends WrapObject {
   }
 
   public static WrapTorus safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.WrapTorus_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.WrapTorus_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new WrapTorus(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.WrapTorus_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.WrapTorus_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.WrapTorus_getClassName();
+    return opensimSimulationJNI.WrapTorus_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.WrapTorus_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.WrapTorus_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new WrapTorus(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.WrapTorus_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.WrapTorus_getConcreteClassName(swigCPtr, this);
+  }
+
+  public WrapTorus() {
+    this(opensimSimulationJNI.new_WrapTorus__SWIG_0(), true);
+  }
+
+  public WrapTorus(WrapTorus aWrapTorus) {
+    this(opensimSimulationJNI.new_WrapTorus__SWIG_1(WrapTorus.getCPtr(aWrapTorus), aWrapTorus), true);
   }
 
   public void copyData(WrapTorus aWrapTorus) {
-    opensimModelSimulationJNI.WrapTorus_copyData(swigCPtr, this, WrapTorus.getCPtr(aWrapTorus), aWrapTorus);
+    opensimSimulationJNI.WrapTorus_copyData(swigCPtr, this, WrapTorus.getCPtr(aWrapTorus), aWrapTorus);
   }
 
   public String getWrapTypeName() {
-    return opensimModelSimulationJNI.WrapTorus_getWrapTypeName(swigCPtr, this);
+    return opensimSimulationJNI.WrapTorus_getWrapTypeName(swigCPtr, this);
   }
 
   public String getDimensionsString() {
-    return opensimModelSimulationJNI.WrapTorus_getDimensionsString(swigCPtr, this);
+    return opensimSimulationJNI.WrapTorus_getDimensionsString(swigCPtr, this);
   }
 
   public double getInnerRadius() {
-    return opensimModelSimulationJNI.WrapTorus_getInnerRadius(swigCPtr, this);
+    return opensimSimulationJNI.WrapTorus_getInnerRadius(swigCPtr, this);
   }
 
   public double getOuterRadius() {
-    return opensimModelSimulationJNI.WrapTorus_getOuterRadius(swigCPtr, this);
+    return opensimSimulationJNI.WrapTorus_getOuterRadius(swigCPtr, this);
   }
 
   public void scale(Vec3 aScaleFactors) {
-    opensimModelSimulationJNI.WrapTorus_scale(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
+    opensimSimulationJNI.WrapTorus_scale(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
   }
 
   public void connectToModelAndBody(Model aModel, PhysicalFrame aBody) {
-    opensimModelSimulationJNI.WrapTorus_connectToModelAndBody(swigCPtr, this, Model.getCPtr(aModel), aModel, PhysicalFrame.getCPtr(aBody), aBody);
-  }
-
-  public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
-    opensimModelSimulationJNI.WrapTorus_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
+    opensimSimulationJNI.WrapTorus_connectToModelAndBody(swigCPtr, this, Model.getCPtr(aModel), aModel, PhysicalFrame.getCPtr(aBody), aBody);
   }
 
 }

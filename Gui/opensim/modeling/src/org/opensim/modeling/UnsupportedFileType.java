@@ -12,7 +12,7 @@ public class UnsupportedFileType extends OpenSimException {
   private transient long swigCPtr;
 
   public UnsupportedFileType(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.UnsupportedFileType_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.UnsupportedFileType_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class UnsupportedFileType extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_UnsupportedFileType(swigCPtr);
+        opensimSimulationJNI.delete_UnsupportedFileType(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class UnsupportedFileType extends OpenSimException {
   }
 
   public UnsupportedFileType(String file, long line, String func, String filename, String msg) {
-    this(opensimModelSimulationJNI.new_UnsupportedFileType(file, line, func, filename, msg), true);
+    this(opensimSimulationJNI.new_UnsupportedFileType(file, line, func, filename, msg), true);
   }
 
 }

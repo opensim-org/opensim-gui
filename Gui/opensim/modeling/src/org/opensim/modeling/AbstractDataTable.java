@@ -29,90 +29,94 @@ public class AbstractDataTable {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_AbstractDataTable(swigCPtr);
+        opensimCommonJNI.delete_AbstractDataTable(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public long numComponentsPerElement() {
-    return opensimModelCommonJNI.AbstractDataTable_numComponentsPerElement(swigCPtr, this);
+    return opensimCommonJNI.AbstractDataTable_numComponentsPerElement(swigCPtr, this);
   }
 
   public long getNumRows() {
-    return opensimModelCommonJNI.AbstractDataTable_getNumRows(swigCPtr, this);
+    return opensimCommonJNI.AbstractDataTable_getNumRows(swigCPtr, this);
   }
 
   public long getNumColumns() {
-    return opensimModelCommonJNI.AbstractDataTable_getNumColumns(swigCPtr, this);
+    return opensimCommonJNI.AbstractDataTable_getNumColumns(swigCPtr, this);
   }
 
   public boolean hasTableMetaDataKey(String key) {
-    return opensimModelCommonJNI.AbstractDataTable_hasTableMetaDataKey(swigCPtr, this, key);
+    return opensimCommonJNI.AbstractDataTable_hasTableMetaDataKey(swigCPtr, this, key);
   }
 
   public String getTableMetaDataAsString(String key) {
-    return opensimModelCommonJNI.AbstractDataTable_getTableMetaDataAsString(swigCPtr, this, key);
+    return opensimCommonJNI.AbstractDataTable_getTableMetaDataAsString(swigCPtr, this, key);
   }
 
   public void removeTableMetaDataKey(String key) {
-    opensimModelCommonJNI.AbstractDataTable_removeTableMetaDataKey(swigCPtr, this, key);
+    opensimCommonJNI.AbstractDataTable_removeTableMetaDataKey(swigCPtr, this, key);
   }
 
   public StdVectorString getTableMetaDataKeys() {
-    return new StdVectorString(opensimModelCommonJNI.AbstractDataTable_getTableMetaDataKeys(swigCPtr, this), true);
+    return new StdVectorString(opensimCommonJNI.AbstractDataTable_getTableMetaDataKeys(swigCPtr, this), true);
+  }
+
+  public void removeDependentsMetaDataForKey(String key) {
+    opensimCommonJNI.AbstractDataTable_removeDependentsMetaDataForKey(swigCPtr, this, key);
   }
 
   public boolean hasColumnLabels() {
-    return opensimModelCommonJNI.AbstractDataTable_hasColumnLabels(swigCPtr, this);
+    return opensimCommonJNI.AbstractDataTable_hasColumnLabels(swigCPtr, this);
   }
 
   public StdVectorString getColumnLabels() {
-    return new StdVectorString(opensimModelCommonJNI.AbstractDataTable_getColumnLabels(swigCPtr, this), true);
+    return new StdVectorString(opensimCommonJNI.AbstractDataTable_getColumnLabels(swigCPtr, this), true);
   }
 
   public String getColumnLabel(long columnIndex) {
-    return opensimModelCommonJNI.AbstractDataTable_getColumnLabel(swigCPtr, this, columnIndex);
+    return opensimCommonJNI.AbstractDataTable_getColumnLabel(swigCPtr, this, columnIndex);
   }
 
   public void setColumnLabel(long columnIndex, String columnLabel) {
-    opensimModelCommonJNI.AbstractDataTable_setColumnLabel(swigCPtr, this, columnIndex, columnLabel);
+    opensimCommonJNI.AbstractDataTable_setColumnLabel(swigCPtr, this, columnIndex, columnLabel);
   }
 
   public long getColumnIndex(String columnLabel) {
-    return opensimModelCommonJNI.AbstractDataTable_getColumnIndex(swigCPtr, this, columnLabel);
+    return opensimCommonJNI.AbstractDataTable_getColumnIndex(swigCPtr, this, columnLabel);
   }
 
   public boolean hasColumn(String columnLabel) {
-    return opensimModelCommonJNI.AbstractDataTable_hasColumn__SWIG_0(swigCPtr, this, columnLabel);
+    return opensimCommonJNI.AbstractDataTable_hasColumn__SWIG_0(swigCPtr, this, columnLabel);
   }
 
   public boolean hasColumn(long columnIndex) {
-    return opensimModelCommonJNI.AbstractDataTable_hasColumn__SWIG_1(swigCPtr, this, columnIndex);
+    return opensimCommonJNI.AbstractDataTable_hasColumn__SWIG_1(swigCPtr, this, columnIndex);
   }
 
   public void setColumnLabels(StdVectorString columnLabels) {
-    opensimModelCommonJNI.AbstractDataTable_setColumnLabels(swigCPtr, this, StdVectorString.getCPtr(columnLabels), columnLabels);
+    opensimCommonJNI.AbstractDataTable_setColumnLabels(swigCPtr, this, StdVectorString.getCPtr(columnLabels), columnLabels);
   }
 
   public void addTableMetaDataString(String key, String value) {
-    opensimModelCommonJNI.AbstractDataTable_addTableMetaDataString(swigCPtr, this, key, value);
+    opensimCommonJNI.AbstractDataTable_addTableMetaDataString(swigCPtr, this, key, value);
   }
 
   public StdVectorMatrix getTableMetaDataVectorMatrix(String key) {
-    return new StdVectorMatrix(opensimModelCommonJNI.AbstractDataTable_getTableMetaDataVectorMatrix(swigCPtr, this, key), true);
+    return new StdVectorMatrix(opensimCommonJNI.AbstractDataTable_getTableMetaDataVectorMatrix(swigCPtr, this, key), true);
   }
 
   public StdVectorUnsigned getTableMetaDataVectorUnsigned(String key) {
-    return new StdVectorUnsigned(opensimModelCommonJNI.AbstractDataTable_getTableMetaDataVectorUnsigned(swigCPtr, this, key), true);
+    return new StdVectorUnsigned(opensimCommonJNI.AbstractDataTable_getTableMetaDataVectorUnsigned(swigCPtr, this, key), true);
   }
 
   public String getTableMetaDataString(String key) {
-    return opensimModelCommonJNI.AbstractDataTable_getTableMetaDataString(swigCPtr, this, key);
+    return opensimCommonJNI.AbstractDataTable_getTableMetaDataString(swigCPtr, this, key);
   }
 
   public StdVectorString getDependentsMetaDataString(String key) {
-    return new StdVectorString(opensimModelCommonJNI.AbstractDataTable_getDependentsMetaDataString(swigCPtr, this, key), true);
+    return new StdVectorString(opensimCommonJNI.AbstractDataTable_getDependentsMetaDataString(swigCPtr, this, key), true);
   }
 
 }

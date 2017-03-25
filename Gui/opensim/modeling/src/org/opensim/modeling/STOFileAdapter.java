@@ -29,31 +29,31 @@ public class STOFileAdapter {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_STOFileAdapter(swigCPtr);
+        opensimCommonJNI.delete_STOFileAdapter(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public STOFileAdapter() {
-    this(opensimModelCommonJNI.new_STOFileAdapter__SWIG_0(), true);
+    this(opensimCommonJNI.new_STOFileAdapter__SWIG_0(), true);
   }
 
   public STOFileAdapter(STOFileAdapter arg0) {
-    this(opensimModelCommonJNI.new_STOFileAdapter__SWIG_1(STOFileAdapter.getCPtr(arg0), arg0), true);
+    this(opensimCommonJNI.new_STOFileAdapter__SWIG_1(STOFileAdapter.getCPtr(arg0), arg0), true);
   }
 
   public STOFileAdapter clone() {
-    long cPtr = opensimModelCommonJNI.STOFileAdapter_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.STOFileAdapter_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new STOFileAdapter(cPtr, true);
   }
 
   public static TimeSeriesTable read(String fileName) {
-    return new TimeSeriesTable(opensimModelCommonJNI.STOFileAdapter_read(fileName), true);
+    return new TimeSeriesTable(opensimCommonJNI.STOFileAdapter_read(fileName), true);
   }
 
   public static void write(TimeSeriesTable table, String fileName) {
-    opensimModelCommonJNI.STOFileAdapter_write(TimeSeriesTable.getCPtr(table), table, fileName);
+    opensimCommonJNI.STOFileAdapter_write(TimeSeriesTable.getCPtr(table), table, fileName);
   }
 
 }

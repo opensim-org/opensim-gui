@@ -12,7 +12,7 @@ public class PropertyString extends AbstractProperty {
   private transient long swigCPtr;
 
   public PropertyString(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.PropertyString_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.PropertyString_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -20,15 +20,11 @@ public class PropertyString extends AbstractProperty {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
-  protected void finalize() {
-    delete();
-  }
-
   public synchronized void delete() {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_PropertyString(swigCPtr);
+        throw new UnsupportedOperationException("C++ destructor does not have public access");
       }
       swigCPtr = 0;
     }
@@ -36,68 +32,68 @@ public class PropertyString extends AbstractProperty {
   }
 
   public AbstractProperty clone() {
-    long cPtr = opensimModelCommonJNI.PropertyString_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.PropertyString_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new PropertyString(cPtr, true);
   }
 
   public String getTypeName() {
-    return opensimModelCommonJNI.PropertyString_getTypeName(swigCPtr, this);
+    return opensimCommonJNI.PropertyString_getTypeName(swigCPtr, this);
   }
 
   public void setValue(int i, String value) {
-    opensimModelCommonJNI.PropertyString_setValue__SWIG_0(swigCPtr, this, i, value);
+    opensimCommonJNI.PropertyString_setValue__SWIG_0(swigCPtr, this, i, value);
   }
 
   public void setValue(String value) {
-    opensimModelCommonJNI.PropertyString_setValue__SWIG_1(swigCPtr, this, value);
+    opensimCommonJNI.PropertyString_setValue__SWIG_1(swigCPtr, this, value);
   }
 
   public String getValue(int index) {
-    return opensimModelCommonJNI.PropertyString_getValue__SWIG_0(swigCPtr, this, index);
+    return opensimCommonJNI.PropertyString_getValue__SWIG_0(swigCPtr, this, index);
   }
 
   public String getValue() {
-    return opensimModelCommonJNI.PropertyString_getValue__SWIG_1(swigCPtr, this);
+    return opensimCommonJNI.PropertyString_getValue__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_std__string updValue(int index) {
-    return new SWIGTYPE_p_std__string(opensimModelCommonJNI.PropertyString_updValue__SWIG_0(swigCPtr, this, index), false);
+    return new SWIGTYPE_p_std__string(opensimCommonJNI.PropertyString_updValue__SWIG_0(swigCPtr, this, index), false);
   }
 
   public SWIGTYPE_p_std__string updValue() {
-    return new SWIGTYPE_p_std__string(opensimModelCommonJNI.PropertyString_updValue__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_std__string(opensimCommonJNI.PropertyString_updValue__SWIG_1(swigCPtr, this), false);
   }
 
   public int appendValue(String value) {
-    return opensimModelCommonJNI.PropertyString_appendValue__SWIG_0(swigCPtr, this, value);
+    return opensimCommonJNI.PropertyString_appendValue__SWIG_0(swigCPtr, this, value);
   }
 
   public int appendValue(SWIGTYPE_p_std__string value) {
-    return opensimModelCommonJNI.PropertyString_appendValue__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(value));
+    return opensimCommonJNI.PropertyString_appendValue__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(value));
   }
 
   public int adoptAndAppendValue(SWIGTYPE_p_std__string value) {
-    return opensimModelCommonJNI.PropertyString_adoptAndAppendValue(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(value));
+    return opensimCommonJNI.PropertyString_adoptAndAppendValue(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(value));
   }
 
   public int findIndex(String value) {
-    return opensimModelCommonJNI.PropertyString_findIndex(swigCPtr, this, value);
+    return opensimCommonJNI.PropertyString_findIndex(swigCPtr, this, value);
   }
 
   public int findIndexForName(SWIGTYPE_p_SimTK__String name) {
-    return opensimModelCommonJNI.PropertyString_findIndexForName(swigCPtr, this, SWIGTYPE_p_SimTK__String.getCPtr(name));
+    return opensimCommonJNI.PropertyString_findIndexForName(swigCPtr, this, SWIGTYPE_p_SimTK__String.getCPtr(name));
   }
 
   public static boolean isA(AbstractProperty prop) {
-    return opensimModelCommonJNI.PropertyString_isA(AbstractProperty.getCPtr(prop), prop);
+    return opensimCommonJNI.PropertyString_isA(AbstractProperty.getCPtr(prop), prop);
   }
 
   public static PropertyString getAs(AbstractProperty prop) {
-    return new PropertyString(opensimModelCommonJNI.PropertyString_getAs(AbstractProperty.getCPtr(prop), prop), false);
+    return new PropertyString(opensimCommonJNI.PropertyString_getAs(AbstractProperty.getCPtr(prop), prop), false);
   }
 
   public static PropertyString updAs(AbstractProperty prop) {
-    return new PropertyString(opensimModelCommonJNI.PropertyString_updAs(AbstractProperty.getCPtr(prop), prop), false);
+    return new PropertyString(opensimCommonJNI.PropertyString_updAs(AbstractProperty.getCPtr(prop), prop), false);
   }
 
 }

@@ -29,50 +29,50 @@ public class StdVectorMatrix {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_StdVectorMatrix(swigCPtr);
+        opensimCommonJNI.delete_StdVectorMatrix(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public StdVectorMatrix() {
-    this(opensimModelCommonJNI.new_StdVectorMatrix__SWIG_0(), true);
+    this(opensimCommonJNI.new_StdVectorMatrix__SWIG_0(), true);
   }
 
   public StdVectorMatrix(long n) {
-    this(opensimModelCommonJNI.new_StdVectorMatrix__SWIG_1(n), true);
+    this(opensimCommonJNI.new_StdVectorMatrix__SWIG_1(n), true);
   }
 
   public long size() {
-    return opensimModelCommonJNI.StdVectorMatrix_size(swigCPtr, this);
+    return opensimCommonJNI.StdVectorMatrix_size(swigCPtr, this);
   }
 
   public long capacity() {
-    return opensimModelCommonJNI.StdVectorMatrix_capacity(swigCPtr, this);
+    return opensimCommonJNI.StdVectorMatrix_capacity(swigCPtr, this);
   }
 
   public void reserve(long n) {
-    opensimModelCommonJNI.StdVectorMatrix_reserve(swigCPtr, this, n);
+    opensimCommonJNI.StdVectorMatrix_reserve(swigCPtr, this, n);
   }
 
   public boolean isEmpty() {
-    return opensimModelCommonJNI.StdVectorMatrix_isEmpty(swigCPtr, this);
+    return opensimCommonJNI.StdVectorMatrix_isEmpty(swigCPtr, this);
   }
 
   public void clear() {
-    opensimModelCommonJNI.StdVectorMatrix_clear(swigCPtr, this);
+    opensimCommonJNI.StdVectorMatrix_clear(swigCPtr, this);
   }
 
   public void add(Matrix x) {
-    opensimModelCommonJNI.StdVectorMatrix_add(swigCPtr, this, Matrix.getCPtr(x), x);
+    opensimCommonJNI.StdVectorMatrix_add(swigCPtr, this, Matrix.getCPtr(x), x);
   }
 
   public Matrix get(int i) {
-    return new Matrix(opensimModelCommonJNI.StdVectorMatrix_get(swigCPtr, this, i), false);
+    return new Matrix(opensimCommonJNI.StdVectorMatrix_get(swigCPtr, this, i), false);
   }
 
   public void set(int i, Matrix val) {
-    opensimModelCommonJNI.StdVectorMatrix_set(swigCPtr, this, i, Matrix.getCPtr(val), val);
+    opensimCommonJNI.StdVectorMatrix_set(swigCPtr, this, i, Matrix.getCPtr(val), val);
   }
 
 }

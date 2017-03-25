@@ -12,7 +12,7 @@ public class AbstractReporter extends Component {
   private transient long swigCPtr;
 
   public AbstractReporter(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.AbstractReporter_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.AbstractReporter_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -32,65 +32,65 @@ public class AbstractReporter extends Component {
   }
 
   public static AbstractReporter safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelCommonJNI.AbstractReporter_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimCommonJNI.AbstractReporter_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new AbstractReporter(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelCommonJNI.AbstractReporter_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimCommonJNI.AbstractReporter_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelCommonJNI.AbstractReporter_getClassName();
+    return opensimCommonJNI.AbstractReporter_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelCommonJNI.AbstractReporter_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.AbstractReporter_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new AbstractReporter(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelCommonJNI.AbstractReporter_getConcreteClassName(swigCPtr, this);
+    return opensimCommonJNI.AbstractReporter_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_report_time_interval(AbstractReporter source) {
-    opensimModelCommonJNI.AbstractReporter_copyProperty_report_time_interval(swigCPtr, this, AbstractReporter.getCPtr(source), source);
+    opensimCommonJNI.AbstractReporter_copyProperty_report_time_interval(swigCPtr, this, AbstractReporter.getCPtr(source), source);
   }
 
   public double get_report_time_interval(int i) {
-    return opensimModelCommonJNI.AbstractReporter_get_report_time_interval__SWIG_0(swigCPtr, this, i);
+    return opensimCommonJNI.AbstractReporter_get_report_time_interval__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_report_time_interval(int i) {
-    return new SWIGTYPE_p_double(opensimModelCommonJNI.AbstractReporter_upd_report_time_interval__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimCommonJNI.AbstractReporter_upd_report_time_interval__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_report_time_interval(int i, double value) {
-    opensimModelCommonJNI.AbstractReporter_set_report_time_interval__SWIG_0(swigCPtr, this, i, value);
+    opensimCommonJNI.AbstractReporter_set_report_time_interval__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_report_time_interval(double value) {
-    return opensimModelCommonJNI.AbstractReporter_append_report_time_interval(swigCPtr, this, value);
+    return opensimCommonJNI.AbstractReporter_append_report_time_interval(swigCPtr, this, value);
   }
 
   public void constructProperty_report_time_interval(double initValue) {
-    opensimModelCommonJNI.AbstractReporter_constructProperty_report_time_interval(swigCPtr, this, initValue);
+    opensimCommonJNI.AbstractReporter_constructProperty_report_time_interval(swigCPtr, this, initValue);
   }
 
   public double get_report_time_interval() {
-    return opensimModelCommonJNI.AbstractReporter_get_report_time_interval__SWIG_1(swigCPtr, this);
+    return opensimCommonJNI.AbstractReporter_get_report_time_interval__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_report_time_interval() {
-    return new SWIGTYPE_p_double(opensimModelCommonJNI.AbstractReporter_upd_report_time_interval__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimCommonJNI.AbstractReporter_upd_report_time_interval__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_report_time_interval(double value) {
-    opensimModelCommonJNI.AbstractReporter_set_report_time_interval__SWIG_1(swigCPtr, this, value);
+    opensimCommonJNI.AbstractReporter_set_report_time_interval__SWIG_1(swigCPtr, this, value);
   }
 
   public void report(State s) {
-    opensimModelCommonJNI.AbstractReporter_report(swigCPtr, this, State.getCPtr(s), s);
+    opensimCommonJNI.AbstractReporter_report(swigCPtr, this, State.getCPtr(s), s);
   }
 
 }

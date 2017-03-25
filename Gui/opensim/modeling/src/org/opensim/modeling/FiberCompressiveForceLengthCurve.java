@@ -12,7 +12,7 @@ public class FiberCompressiveForceLengthCurve extends Function {
   private transient long swigCPtr;
 
   public FiberCompressiveForceLengthCurve(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.FiberCompressiveForceLengthCurve_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.FiberCompressiveForceLengthCurve_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class FiberCompressiveForceLengthCurve extends Function {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_FiberCompressiveForceLengthCurve(swigCPtr);
+        opensimSimulationJNI.delete_FiberCompressiveForceLengthCurve(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,201 +36,201 @@ public class FiberCompressiveForceLengthCurve extends Function {
   }
 
   public static FiberCompressiveForceLengthCurve safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.FiberCompressiveForceLengthCurve_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.FiberCompressiveForceLengthCurve_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new FiberCompressiveForceLengthCurve(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.FiberCompressiveForceLengthCurve_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.FiberCompressiveForceLengthCurve_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.FiberCompressiveForceLengthCurve_getClassName();
+    return opensimSimulationJNI.FiberCompressiveForceLengthCurve_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.FiberCompressiveForceLengthCurve_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.FiberCompressiveForceLengthCurve_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new FiberCompressiveForceLengthCurve(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.FiberCompressiveForceLengthCurve_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.FiberCompressiveForceLengthCurve_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_norm_length_at_zero_force(FiberCompressiveForceLengthCurve source) {
-    opensimModelJNI.FiberCompressiveForceLengthCurve_copyProperty_norm_length_at_zero_force(swigCPtr, this, FiberCompressiveForceLengthCurve.getCPtr(source), source);
+    opensimSimulationJNI.FiberCompressiveForceLengthCurve_copyProperty_norm_length_at_zero_force(swigCPtr, this, FiberCompressiveForceLengthCurve.getCPtr(source), source);
   }
 
   public double get_norm_length_at_zero_force(int i) {
-    return opensimModelJNI.FiberCompressiveForceLengthCurve_get_norm_length_at_zero_force__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.FiberCompressiveForceLengthCurve_get_norm_length_at_zero_force__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_norm_length_at_zero_force(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.FiberCompressiveForceLengthCurve_upd_norm_length_at_zero_force__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.FiberCompressiveForceLengthCurve_upd_norm_length_at_zero_force__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_norm_length_at_zero_force(int i, double value) {
-    opensimModelJNI.FiberCompressiveForceLengthCurve_set_norm_length_at_zero_force__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.FiberCompressiveForceLengthCurve_set_norm_length_at_zero_force__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_norm_length_at_zero_force(double value) {
-    return opensimModelJNI.FiberCompressiveForceLengthCurve_append_norm_length_at_zero_force(swigCPtr, this, value);
+    return opensimSimulationJNI.FiberCompressiveForceLengthCurve_append_norm_length_at_zero_force(swigCPtr, this, value);
   }
 
   public void constructProperty_norm_length_at_zero_force(double initValue) {
-    opensimModelJNI.FiberCompressiveForceLengthCurve_constructProperty_norm_length_at_zero_force(swigCPtr, this, initValue);
+    opensimSimulationJNI.FiberCompressiveForceLengthCurve_constructProperty_norm_length_at_zero_force(swigCPtr, this, initValue);
   }
 
   public double get_norm_length_at_zero_force() {
-    return opensimModelJNI.FiberCompressiveForceLengthCurve_get_norm_length_at_zero_force__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.FiberCompressiveForceLengthCurve_get_norm_length_at_zero_force__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_norm_length_at_zero_force() {
-    return new SWIGTYPE_p_double(opensimModelJNI.FiberCompressiveForceLengthCurve_upd_norm_length_at_zero_force__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.FiberCompressiveForceLengthCurve_upd_norm_length_at_zero_force__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_norm_length_at_zero_force(double value) {
-    opensimModelJNI.FiberCompressiveForceLengthCurve_set_norm_length_at_zero_force__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.FiberCompressiveForceLengthCurve_set_norm_length_at_zero_force__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_stiffness_at_zero_length(FiberCompressiveForceLengthCurve source) {
-    opensimModelJNI.FiberCompressiveForceLengthCurve_copyProperty_stiffness_at_zero_length(swigCPtr, this, FiberCompressiveForceLengthCurve.getCPtr(source), source);
+    opensimSimulationJNI.FiberCompressiveForceLengthCurve_copyProperty_stiffness_at_zero_length(swigCPtr, this, FiberCompressiveForceLengthCurve.getCPtr(source), source);
   }
 
   public double get_stiffness_at_zero_length(int i) {
-    return opensimModelJNI.FiberCompressiveForceLengthCurve_get_stiffness_at_zero_length__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.FiberCompressiveForceLengthCurve_get_stiffness_at_zero_length__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_stiffness_at_zero_length(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.FiberCompressiveForceLengthCurve_upd_stiffness_at_zero_length__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.FiberCompressiveForceLengthCurve_upd_stiffness_at_zero_length__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_stiffness_at_zero_length(int i, double value) {
-    opensimModelJNI.FiberCompressiveForceLengthCurve_set_stiffness_at_zero_length__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.FiberCompressiveForceLengthCurve_set_stiffness_at_zero_length__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_stiffness_at_zero_length(double value) {
-    return opensimModelJNI.FiberCompressiveForceLengthCurve_append_stiffness_at_zero_length(swigCPtr, this, value);
+    return opensimSimulationJNI.FiberCompressiveForceLengthCurve_append_stiffness_at_zero_length(swigCPtr, this, value);
   }
 
   public void constructProperty_stiffness_at_zero_length() {
-    opensimModelJNI.FiberCompressiveForceLengthCurve_constructProperty_stiffness_at_zero_length__SWIG_0(swigCPtr, this);
+    opensimSimulationJNI.FiberCompressiveForceLengthCurve_constructProperty_stiffness_at_zero_length__SWIG_0(swigCPtr, this);
   }
 
   public void constructProperty_stiffness_at_zero_length(double initValue) {
-    opensimModelJNI.FiberCompressiveForceLengthCurve_constructProperty_stiffness_at_zero_length__SWIG_1(swigCPtr, this, initValue);
+    opensimSimulationJNI.FiberCompressiveForceLengthCurve_constructProperty_stiffness_at_zero_length__SWIG_1(swigCPtr, this, initValue);
   }
 
   public double get_stiffness_at_zero_length() {
-    return opensimModelJNI.FiberCompressiveForceLengthCurve_get_stiffness_at_zero_length__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.FiberCompressiveForceLengthCurve_get_stiffness_at_zero_length__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_stiffness_at_zero_length() {
-    return new SWIGTYPE_p_double(opensimModelJNI.FiberCompressiveForceLengthCurve_upd_stiffness_at_zero_length__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.FiberCompressiveForceLengthCurve_upd_stiffness_at_zero_length__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_stiffness_at_zero_length(double value) {
-    opensimModelJNI.FiberCompressiveForceLengthCurve_set_stiffness_at_zero_length__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.FiberCompressiveForceLengthCurve_set_stiffness_at_zero_length__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_curviness(FiberCompressiveForceLengthCurve source) {
-    opensimModelJNI.FiberCompressiveForceLengthCurve_copyProperty_curviness(swigCPtr, this, FiberCompressiveForceLengthCurve.getCPtr(source), source);
+    opensimSimulationJNI.FiberCompressiveForceLengthCurve_copyProperty_curviness(swigCPtr, this, FiberCompressiveForceLengthCurve.getCPtr(source), source);
   }
 
   public double get_curviness(int i) {
-    return opensimModelJNI.FiberCompressiveForceLengthCurve_get_curviness__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.FiberCompressiveForceLengthCurve_get_curviness__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_curviness(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.FiberCompressiveForceLengthCurve_upd_curviness__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.FiberCompressiveForceLengthCurve_upd_curviness__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_curviness(int i, double value) {
-    opensimModelJNI.FiberCompressiveForceLengthCurve_set_curviness__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.FiberCompressiveForceLengthCurve_set_curviness__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_curviness(double value) {
-    return opensimModelJNI.FiberCompressiveForceLengthCurve_append_curviness(swigCPtr, this, value);
+    return opensimSimulationJNI.FiberCompressiveForceLengthCurve_append_curviness(swigCPtr, this, value);
   }
 
   public void constructProperty_curviness() {
-    opensimModelJNI.FiberCompressiveForceLengthCurve_constructProperty_curviness__SWIG_0(swigCPtr, this);
+    opensimSimulationJNI.FiberCompressiveForceLengthCurve_constructProperty_curviness__SWIG_0(swigCPtr, this);
   }
 
   public void constructProperty_curviness(double initValue) {
-    opensimModelJNI.FiberCompressiveForceLengthCurve_constructProperty_curviness__SWIG_1(swigCPtr, this, initValue);
+    opensimSimulationJNI.FiberCompressiveForceLengthCurve_constructProperty_curviness__SWIG_1(swigCPtr, this, initValue);
   }
 
   public double get_curviness() {
-    return opensimModelJNI.FiberCompressiveForceLengthCurve_get_curviness__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.FiberCompressiveForceLengthCurve_get_curviness__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_curviness() {
-    return new SWIGTYPE_p_double(opensimModelJNI.FiberCompressiveForceLengthCurve_upd_curviness__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.FiberCompressiveForceLengthCurve_upd_curviness__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_curviness(double value) {
-    opensimModelJNI.FiberCompressiveForceLengthCurve_set_curviness__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.FiberCompressiveForceLengthCurve_set_curviness__SWIG_1(swigCPtr, this, value);
   }
 
   public FiberCompressiveForceLengthCurve() {
-    this(opensimModelJNI.new_FiberCompressiveForceLengthCurve__SWIG_0(), true);
+    this(opensimSimulationJNI.new_FiberCompressiveForceLengthCurve__SWIG_0(), true);
   }
 
   public FiberCompressiveForceLengthCurve(double normLengthAtZeroForce, double stiffnessAtZeroLength, double curviness, String muscleName) {
-    this(opensimModelJNI.new_FiberCompressiveForceLengthCurve__SWIG_1(normLengthAtZeroForce, stiffnessAtZeroLength, curviness, muscleName), true);
+    this(opensimSimulationJNI.new_FiberCompressiveForceLengthCurve__SWIG_1(normLengthAtZeroForce, stiffnessAtZeroLength, curviness, muscleName), true);
   }
 
   public double getNormLengthAtZeroForce() {
-    return opensimModelJNI.FiberCompressiveForceLengthCurve_getNormLengthAtZeroForce(swigCPtr, this);
+    return opensimSimulationJNI.FiberCompressiveForceLengthCurve_getNormLengthAtZeroForce(swigCPtr, this);
   }
 
   public double getStiffnessAtZeroLengthInUse() {
-    return opensimModelJNI.FiberCompressiveForceLengthCurve_getStiffnessAtZeroLengthInUse(swigCPtr, this);
+    return opensimSimulationJNI.FiberCompressiveForceLengthCurve_getStiffnessAtZeroLengthInUse(swigCPtr, this);
   }
 
   public double getCurvinessInUse() {
-    return opensimModelJNI.FiberCompressiveForceLengthCurve_getCurvinessInUse(swigCPtr, this);
+    return opensimSimulationJNI.FiberCompressiveForceLengthCurve_getCurvinessInUse(swigCPtr, this);
   }
 
   public void setNormLengthAtZeroForce(double aNormLengthAtZeroForce) {
-    opensimModelJNI.FiberCompressiveForceLengthCurve_setNormLengthAtZeroForce(swigCPtr, this, aNormLengthAtZeroForce);
+    opensimSimulationJNI.FiberCompressiveForceLengthCurve_setNormLengthAtZeroForce(swigCPtr, this, aNormLengthAtZeroForce);
   }
 
   public void setOptionalProperties(double aStiffnessAtZeroLength, double aCurviness) {
-    opensimModelJNI.FiberCompressiveForceLengthCurve_setOptionalProperties(swigCPtr, this, aStiffnessAtZeroLength, aCurviness);
+    opensimSimulationJNI.FiberCompressiveForceLengthCurve_setOptionalProperties(swigCPtr, this, aStiffnessAtZeroLength, aCurviness);
   }
 
   public boolean isFittedCurveBeingUsed() {
-    return opensimModelJNI.FiberCompressiveForceLengthCurve_isFittedCurveBeingUsed(swigCPtr, this);
+    return opensimSimulationJNI.FiberCompressiveForceLengthCurve_isFittedCurveBeingUsed(swigCPtr, this);
   }
 
   public double calcValue(double aNormLength) {
-    return opensimModelJNI.FiberCompressiveForceLengthCurve_calcValue__SWIG_0(swigCPtr, this, aNormLength);
+    return opensimSimulationJNI.FiberCompressiveForceLengthCurve_calcValue__SWIG_0(swigCPtr, this, aNormLength);
   }
 
   public double calcValue(Vector x) {
-    return opensimModelJNI.FiberCompressiveForceLengthCurve_calcValue__SWIG_1(swigCPtr, this, Vector.getCPtr(x), x);
+    return opensimSimulationJNI.FiberCompressiveForceLengthCurve_calcValue__SWIG_1(swigCPtr, this, Vector.getCPtr(x), x);
   }
 
   public double calcDerivative(double aNormLength, int order) {
-    return opensimModelJNI.FiberCompressiveForceLengthCurve_calcDerivative(swigCPtr, this, aNormLength, order);
+    return opensimSimulationJNI.FiberCompressiveForceLengthCurve_calcDerivative(swigCPtr, this, aNormLength, order);
   }
 
   public double calcIntegral(double aNormLength) {
-    return opensimModelJNI.FiberCompressiveForceLengthCurve_calcIntegral(swigCPtr, this, aNormLength);
+    return opensimSimulationJNI.FiberCompressiveForceLengthCurve_calcIntegral(swigCPtr, this, aNormLength);
   }
 
   public Vec2 getCurveDomain() {
-    return new Vec2(opensimModelJNI.FiberCompressiveForceLengthCurve_getCurveDomain(swigCPtr, this), true);
+    return new Vec2(opensimSimulationJNI.FiberCompressiveForceLengthCurve_getCurveDomain(swigCPtr, this), true);
   }
 
   public void printMuscleCurveToCSVFile(String path) {
-    opensimModelJNI.FiberCompressiveForceLengthCurve_printMuscleCurveToCSVFile(swigCPtr, this, path);
+    opensimSimulationJNI.FiberCompressiveForceLengthCurve_printMuscleCurveToCSVFile(swigCPtr, this, path);
   }
 
   public void ensureCurveUpToDate() {
-    opensimModelJNI.FiberCompressiveForceLengthCurve_ensureCurveUpToDate(swigCPtr, this);
+    opensimSimulationJNI.FiberCompressiveForceLengthCurve_ensureCurveUpToDate(swigCPtr, this);
   }
 
 }

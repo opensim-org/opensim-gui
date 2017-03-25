@@ -12,7 +12,7 @@ public class ExternalLoads extends ModelComponentSetExternalForces {
   private transient long swigCPtr;
 
   public ExternalLoads(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.ExternalLoads_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.ExternalLoads_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ExternalLoads extends ModelComponentSetExternalForces {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_ExternalLoads(swigCPtr);
+        opensimSimulationJNI.delete_ExternalLoads(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,101 +36,101 @@ public class ExternalLoads extends ModelComponentSetExternalForces {
   }
 
   public static ExternalLoads safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.ExternalLoads_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.ExternalLoads_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ExternalLoads(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.ExternalLoads_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.ExternalLoads_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.ExternalLoads_getClassName();
+    return opensimSimulationJNI.ExternalLoads_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.ExternalLoads_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.ExternalLoads_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ExternalLoads(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.ExternalLoads_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.ExternalLoads_getConcreteClassName(swigCPtr, this);
   }
 
   public ExternalLoads() {
-    this(opensimModelSimulationJNI.new_ExternalLoads__SWIG_0(), true);
+    this(opensimSimulationJNI.new_ExternalLoads__SWIG_0(), true);
   }
 
   public ExternalLoads(Model model) {
-    this(opensimModelSimulationJNI.new_ExternalLoads__SWIG_1(Model.getCPtr(model), model), true);
+    this(opensimSimulationJNI.new_ExternalLoads__SWIG_1(Model.getCPtr(model), model), true);
   }
 
   public ExternalLoads(Model model, String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
-    this(opensimModelSimulationJNI.new_ExternalLoads__SWIG_2(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
+    this(opensimSimulationJNI.new_ExternalLoads__SWIG_2(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
   }
 
   public ExternalLoads(Model model, String aFileName) throws java.io.IOException {
-    this(opensimModelSimulationJNI.new_ExternalLoads__SWIG_3(Model.getCPtr(model), model, aFileName), true);
+    this(opensimSimulationJNI.new_ExternalLoads__SWIG_3(Model.getCPtr(model), model, aFileName), true);
   }
 
   public ExternalLoads(ExternalLoads aExternalLoads) {
-    this(opensimModelSimulationJNI.new_ExternalLoads__SWIG_4(ExternalLoads.getCPtr(aExternalLoads), aExternalLoads), true);
+    this(opensimSimulationJNI.new_ExternalLoads__SWIG_4(ExternalLoads.getCPtr(aExternalLoads), aExternalLoads), true);
   }
 
   public void copyData(ExternalLoads otherExternalLoads) {
-    opensimModelSimulationJNI.ExternalLoads_copyData(swigCPtr, this, ExternalLoads.getCPtr(otherExternalLoads), otherExternalLoads);
+    opensimSimulationJNI.ExternalLoads_copyData(swigCPtr, this, ExternalLoads.getCPtr(otherExternalLoads), otherExternalLoads);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
-    opensimModelSimulationJNI.ExternalLoads_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+    opensimSimulationJNI.ExternalLoads_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
-    opensimModelSimulationJNI.ExternalLoads_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
+    opensimSimulationJNI.ExternalLoads_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
   public void invokeConnectToModel(Model aModel) {
-    opensimModelSimulationJNI.ExternalLoads_invokeConnectToModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
+    opensimSimulationJNI.ExternalLoads_invokeConnectToModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
   public String getDataFileName() {
-    return opensimModelSimulationJNI.ExternalLoads_getDataFileName(swigCPtr, this);
+    return opensimSimulationJNI.ExternalLoads_getDataFileName(swigCPtr, this);
   }
 
   public void setDataFileName(String aNewFile) {
-    opensimModelSimulationJNI.ExternalLoads_setDataFileName(swigCPtr, this, aNewFile);
+    opensimSimulationJNI.ExternalLoads_setDataFileName(swigCPtr, this, aNewFile);
   }
 
   public String getExternalLoadsModelKinematicsFileName() {
-    return opensimModelSimulationJNI.ExternalLoads_getExternalLoadsModelKinematicsFileName(swigCPtr, this);
+    return opensimSimulationJNI.ExternalLoads_getExternalLoadsModelKinematicsFileName(swigCPtr, this);
   }
 
   public void setExternalLoadsModelKinematicsFileName(String aFileName) {
-    opensimModelSimulationJNI.ExternalLoads_setExternalLoadsModelKinematicsFileName(swigCPtr, this, aFileName);
+    opensimSimulationJNI.ExternalLoads_setExternalLoadsModelKinematicsFileName(swigCPtr, this, aFileName);
   }
 
   public double getLowpassCutoffFrequencyForLoadKinematics() {
-    return opensimModelSimulationJNI.ExternalLoads_getLowpassCutoffFrequencyForLoadKinematics(swigCPtr, this);
+    return opensimSimulationJNI.ExternalLoads_getLowpassCutoffFrequencyForLoadKinematics(swigCPtr, this);
   }
 
   public void setLowpassCutoffFrequencyForLoadKinematics(double aLowpassCutoffFrequency) {
-    opensimModelSimulationJNI.ExternalLoads_setLowpassCutoffFrequencyForLoadKinematics(swigCPtr, this, aLowpassCutoffFrequency);
+    opensimSimulationJNI.ExternalLoads_setLowpassCutoffFrequencyForLoadKinematics(swigCPtr, this, aLowpassCutoffFrequency);
   }
 
   public void transformPointsExpressedInGroundToAppliedBodies(Storage kinematics, double startTime, double endTime) {
-    opensimModelSimulationJNI.ExternalLoads_transformPointsExpressedInGroundToAppliedBodies__SWIG_0(swigCPtr, this, Storage.getCPtr(kinematics), kinematics, startTime, endTime);
+    opensimSimulationJNI.ExternalLoads_transformPointsExpressedInGroundToAppliedBodies__SWIG_0(swigCPtr, this, Storage.getCPtr(kinematics), kinematics, startTime, endTime);
   }
 
   public void transformPointsExpressedInGroundToAppliedBodies(Storage kinematics, double startTime) {
-    opensimModelSimulationJNI.ExternalLoads_transformPointsExpressedInGroundToAppliedBodies__SWIG_1(swigCPtr, this, Storage.getCPtr(kinematics), kinematics, startTime);
+    opensimSimulationJNI.ExternalLoads_transformPointsExpressedInGroundToAppliedBodies__SWIG_1(swigCPtr, this, Storage.getCPtr(kinematics), kinematics, startTime);
   }
 
   public void transformPointsExpressedInGroundToAppliedBodies(Storage kinematics) {
-    opensimModelSimulationJNI.ExternalLoads_transformPointsExpressedInGroundToAppliedBodies__SWIG_2(swigCPtr, this, Storage.getCPtr(kinematics), kinematics);
+    opensimSimulationJNI.ExternalLoads_transformPointsExpressedInGroundToAppliedBodies__SWIG_2(swigCPtr, this, Storage.getCPtr(kinematics), kinematics);
   }
 
   public ExternalForce transformPointExpressedInGroundToAppliedBody(ExternalForce exForce, Storage kinematics, double startTime, double endTime) {
-    long cPtr = opensimModelSimulationJNI.ExternalLoads_transformPointExpressedInGroundToAppliedBody(swigCPtr, this, ExternalForce.getCPtr(exForce), exForce, Storage.getCPtr(kinematics), kinematics, startTime, endTime);
+    long cPtr = opensimSimulationJNI.ExternalLoads_transformPointExpressedInGroundToAppliedBody(swigCPtr, this, ExternalForce.getCPtr(exForce), exForce, Storage.getCPtr(kinematics), kinematics, startTime, endTime);
     return (cPtr == 0) ? null : new ExternalForce(cPtr, false);
   }
 

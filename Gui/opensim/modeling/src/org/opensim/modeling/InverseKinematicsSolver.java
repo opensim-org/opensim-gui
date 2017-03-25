@@ -12,7 +12,7 @@ public class InverseKinematicsSolver extends AssemblySolver {
   private transient long swigCPtr;
 
   public InverseKinematicsSolver(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.InverseKinematicsSolver_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.InverseKinematicsSolver_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class InverseKinematicsSolver extends AssemblySolver {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_InverseKinematicsSolver(swigCPtr);
+        opensimSimulationJNI.delete_InverseKinematicsSolver(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,63 +36,63 @@ public class InverseKinematicsSolver extends AssemblySolver {
   }
 
   public InverseKinematicsSolver(Model model, MarkersReference markersReference, ArrayCoordinateReference coordinateReferences, double constraintWeight) {
-    this(opensimModelSimulationJNI.new_InverseKinematicsSolver__SWIG_0(Model.getCPtr(model), model, MarkersReference.getCPtr(markersReference), markersReference, ArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences, constraintWeight), true);
+    this(opensimSimulationJNI.new_InverseKinematicsSolver__SWIG_0(Model.getCPtr(model), model, MarkersReference.getCPtr(markersReference), markersReference, ArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences, constraintWeight), true);
   }
 
   public InverseKinematicsSolver(Model model, MarkersReference markersReference, ArrayCoordinateReference coordinateReferences) {
-    this(opensimModelSimulationJNI.new_InverseKinematicsSolver__SWIG_1(Model.getCPtr(model), model, MarkersReference.getCPtr(markersReference), markersReference, ArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences), true);
+    this(opensimSimulationJNI.new_InverseKinematicsSolver__SWIG_1(Model.getCPtr(model), model, MarkersReference.getCPtr(markersReference), markersReference, ArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences), true);
   }
 
   public void updateMarkerWeight(String markerName, double value) {
-    opensimModelSimulationJNI.InverseKinematicsSolver_updateMarkerWeight__SWIG_0(swigCPtr, this, markerName, value);
+    opensimSimulationJNI.InverseKinematicsSolver_updateMarkerWeight__SWIG_0(swigCPtr, this, markerName, value);
   }
 
   public void updateMarkerWeight(int markerIndex, double value) {
-    opensimModelSimulationJNI.InverseKinematicsSolver_updateMarkerWeight__SWIG_1(swigCPtr, this, markerIndex, value);
+    opensimSimulationJNI.InverseKinematicsSolver_updateMarkerWeight__SWIG_1(swigCPtr, this, markerIndex, value);
   }
 
   public void updateMarkerWeights(SimTKArrayDouble weights) {
-    opensimModelSimulationJNI.InverseKinematicsSolver_updateMarkerWeights(swigCPtr, this, SimTKArrayDouble.getCPtr(weights), weights);
+    opensimSimulationJNI.InverseKinematicsSolver_updateMarkerWeights(swigCPtr, this, SimTKArrayDouble.getCPtr(weights), weights);
   }
 
   public Vec3 computeCurrentMarkerLocation(String markerName) {
-    return new Vec3(opensimModelSimulationJNI.InverseKinematicsSolver_computeCurrentMarkerLocation__SWIG_0(swigCPtr, this, markerName), true);
+    return new Vec3(opensimSimulationJNI.InverseKinematicsSolver_computeCurrentMarkerLocation__SWIG_0(swigCPtr, this, markerName), true);
   }
 
   public Vec3 computeCurrentMarkerLocation(int markerIndex) {
-    return new Vec3(opensimModelSimulationJNI.InverseKinematicsSolver_computeCurrentMarkerLocation__SWIG_1(swigCPtr, this, markerIndex), true);
+    return new Vec3(opensimSimulationJNI.InverseKinematicsSolver_computeCurrentMarkerLocation__SWIG_1(swigCPtr, this, markerIndex), true);
   }
 
   public void computeCurrentMarkerLocations(SimTKArrayVec3 markerLocations) {
-    opensimModelSimulationJNI.InverseKinematicsSolver_computeCurrentMarkerLocations(swigCPtr, this, SimTKArrayVec3.getCPtr(markerLocations), markerLocations);
+    opensimSimulationJNI.InverseKinematicsSolver_computeCurrentMarkerLocations(swigCPtr, this, SimTKArrayVec3.getCPtr(markerLocations), markerLocations);
   }
 
   public double computeCurrentMarkerError(String markerName) {
-    return opensimModelSimulationJNI.InverseKinematicsSolver_computeCurrentMarkerError__SWIG_0(swigCPtr, this, markerName);
+    return opensimSimulationJNI.InverseKinematicsSolver_computeCurrentMarkerError__SWIG_0(swigCPtr, this, markerName);
   }
 
   public double computeCurrentMarkerError(int markerIndex) {
-    return opensimModelSimulationJNI.InverseKinematicsSolver_computeCurrentMarkerError__SWIG_1(swigCPtr, this, markerIndex);
+    return opensimSimulationJNI.InverseKinematicsSolver_computeCurrentMarkerError__SWIG_1(swigCPtr, this, markerIndex);
   }
 
   public void computeCurrentMarkerErrors(SimTKArrayDouble markerErrors) {
-    opensimModelSimulationJNI.InverseKinematicsSolver_computeCurrentMarkerErrors(swigCPtr, this, SimTKArrayDouble.getCPtr(markerErrors), markerErrors);
+    opensimSimulationJNI.InverseKinematicsSolver_computeCurrentMarkerErrors(swigCPtr, this, SimTKArrayDouble.getCPtr(markerErrors), markerErrors);
   }
 
   public double computeCurrentSquaredMarkerError(String markerName) {
-    return opensimModelSimulationJNI.InverseKinematicsSolver_computeCurrentSquaredMarkerError__SWIG_0(swigCPtr, this, markerName);
+    return opensimSimulationJNI.InverseKinematicsSolver_computeCurrentSquaredMarkerError__SWIG_0(swigCPtr, this, markerName);
   }
 
   public double computeCurrentSquaredMarkerError(int markerIndex) {
-    return opensimModelSimulationJNI.InverseKinematicsSolver_computeCurrentSquaredMarkerError__SWIG_1(swigCPtr, this, markerIndex);
+    return opensimSimulationJNI.InverseKinematicsSolver_computeCurrentSquaredMarkerError__SWIG_1(swigCPtr, this, markerIndex);
   }
 
   public void computeCurrentSquaredMarkerErrors(SimTKArrayDouble markerErrors) {
-    opensimModelSimulationJNI.InverseKinematicsSolver_computeCurrentSquaredMarkerErrors(swigCPtr, this, SimTKArrayDouble.getCPtr(markerErrors), markerErrors);
+    opensimSimulationJNI.InverseKinematicsSolver_computeCurrentSquaredMarkerErrors(swigCPtr, this, SimTKArrayDouble.getCPtr(markerErrors), markerErrors);
   }
 
   public String getMarkerNameForIndex(int markerIndex) {
-    return opensimModelSimulationJNI.InverseKinematicsSolver_getMarkerNameForIndex(swigCPtr, this, markerIndex);
+    return opensimSimulationJNI.InverseKinematicsSolver_getMarkerNameForIndex(swigCPtr, this, markerIndex);
   }
 
 }

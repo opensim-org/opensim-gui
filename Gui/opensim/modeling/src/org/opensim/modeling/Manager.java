@@ -29,186 +29,182 @@ public class Manager {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_Manager(swigCPtr);
+        opensimSimulationJNI.delete_Manager(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public Manager(Model arg0, SWIGTYPE_p_SimTK__Integrator arg1) {
-    this(opensimModelSimulationJNI.new_Manager__SWIG_0(Model.getCPtr(arg0), arg0, SWIGTYPE_p_SimTK__Integrator.getCPtr(arg1)), true);
+    this(opensimSimulationJNI.new_Manager__SWIG_0(Model.getCPtr(arg0), arg0, SWIGTYPE_p_SimTK__Integrator.getCPtr(arg1)), true);
   }
 
   public Manager(Model aModel) {
-    this(opensimModelSimulationJNI.new_Manager__SWIG_1(Model.getCPtr(aModel), aModel), true);
+    this(opensimSimulationJNI.new_Manager__SWIG_1(Model.getCPtr(aModel), aModel), true);
   }
 
   public Manager() {
-    this(opensimModelSimulationJNI.new_Manager__SWIG_2(), true);
+    this(opensimSimulationJNI.new_Manager__SWIG_2(), true);
   }
 
   public void setSessionName(String name) {
-    opensimModelSimulationJNI.Manager_setSessionName(swigCPtr, this, name);
+    opensimSimulationJNI.Manager_setSessionName(swigCPtr, this, name);
   }
 
   public void setModel(Model aModel) {
-    opensimModelSimulationJNI.Manager_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
+    opensimSimulationJNI.Manager_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
   public String getSessionName() {
-    return opensimModelSimulationJNI.Manager_getSessionName(swigCPtr, this);
+    return opensimSimulationJNI.Manager_getSessionName(swigCPtr, this);
   }
 
   public String toString() {
-    return opensimModelSimulationJNI.Manager_toString(swigCPtr, this);
+    return opensimSimulationJNI.Manager_toString(swigCPtr, this);
   }
 
   public void setPerformAnalyses(boolean performAnalyses) {
-    opensimModelSimulationJNI.Manager_setPerformAnalyses(swigCPtr, this, performAnalyses);
+    opensimSimulationJNI.Manager_setPerformAnalyses(swigCPtr, this, performAnalyses);
   }
 
   public void setWriteToStorage(boolean writeToStorage) {
-    opensimModelSimulationJNI.Manager_setWriteToStorage(swigCPtr, this, writeToStorage);
+    opensimSimulationJNI.Manager_setWriteToStorage(swigCPtr, this, writeToStorage);
   }
 
   public SWIGTYPE_p_SimTK__Integrator getIntegrator() {
-    return new SWIGTYPE_p_SimTK__Integrator(opensimModelSimulationJNI.Manager_getIntegrator(swigCPtr, this), false);
+    return new SWIGTYPE_p_SimTK__Integrator(opensimSimulationJNI.Manager_getIntegrator(swigCPtr, this), false);
   }
 
   public void setIntegrator(SWIGTYPE_p_SimTK__Integrator arg0) {
-    opensimModelSimulationJNI.Manager_setIntegrator(swigCPtr, this, SWIGTYPE_p_SimTK__Integrator.getCPtr(arg0));
+    opensimSimulationJNI.Manager_setIntegrator(swigCPtr, this, SWIGTYPE_p_SimTK__Integrator.getCPtr(arg0));
   }
 
   public void setInitialTime(double aTI) {
-    opensimModelSimulationJNI.Manager_setInitialTime(swigCPtr, this, aTI);
+    opensimSimulationJNI.Manager_setInitialTime(swigCPtr, this, aTI);
   }
 
   public double getInitialTime() {
-    return opensimModelSimulationJNI.Manager_getInitialTime(swigCPtr, this);
+    return opensimSimulationJNI.Manager_getInitialTime(swigCPtr, this);
   }
 
   public void setFinalTime(double aTF) {
-    opensimModelSimulationJNI.Manager_setFinalTime(swigCPtr, this, aTF);
+    opensimSimulationJNI.Manager_setFinalTime(swigCPtr, this, aTF);
   }
 
   public double getFinalTime() {
-    return opensimModelSimulationJNI.Manager_getFinalTime(swigCPtr, this);
+    return opensimSimulationJNI.Manager_getFinalTime(swigCPtr, this);
   }
 
   public void setUseSpecifiedDT(boolean aTrueFalse) {
-    opensimModelSimulationJNI.Manager_setUseSpecifiedDT(swigCPtr, this, aTrueFalse);
+    opensimSimulationJNI.Manager_setUseSpecifiedDT(swigCPtr, this, aTrueFalse);
   }
 
   public boolean getUseSpecifiedDT() {
-    return opensimModelSimulationJNI.Manager_getUseSpecifiedDT(swigCPtr, this);
+    return opensimSimulationJNI.Manager_getUseSpecifiedDT(swigCPtr, this);
   }
 
   public void setUseConstantDT(boolean aTrueFalse) {
-    opensimModelSimulationJNI.Manager_setUseConstantDT(swigCPtr, this, aTrueFalse);
+    opensimSimulationJNI.Manager_setUseConstantDT(swigCPtr, this, aTrueFalse);
   }
 
   public boolean getUseConstantDT() {
-    return opensimModelSimulationJNI.Manager_getUseConstantDT(swigCPtr, this);
+    return opensimSimulationJNI.Manager_getUseConstantDT(swigCPtr, this);
   }
 
   public ArrayDouble getDTArray() {
-    return new ArrayDouble(opensimModelSimulationJNI.Manager_getDTArray(swigCPtr, this), false);
+    return new ArrayDouble(opensimSimulationJNI.Manager_getDTArray(swigCPtr, this), false);
   }
 
   public void setDTArray(Vector aDT, double aTI) {
-    opensimModelSimulationJNI.Manager_setDTArray__SWIG_0(swigCPtr, this, Vector.getCPtr(aDT), aDT, aTI);
+    opensimSimulationJNI.Manager_setDTArray__SWIG_0(swigCPtr, this, Vector.getCPtr(aDT), aDT, aTI);
   }
 
   public void setDTArray(Vector aDT) {
-    opensimModelSimulationJNI.Manager_setDTArray__SWIG_1(swigCPtr, this, Vector.getCPtr(aDT), aDT);
+    opensimSimulationJNI.Manager_setDTArray__SWIG_1(swigCPtr, this, Vector.getCPtr(aDT), aDT);
   }
 
   public double getDTArrayDT(int aStep) {
-    return opensimModelSimulationJNI.Manager_getDTArrayDT(swigCPtr, this, aStep);
+    return opensimSimulationJNI.Manager_getDTArrayDT(swigCPtr, this, aStep);
   }
 
   public void printDTArray(String aFileName) {
-    opensimModelSimulationJNI.Manager_printDTArray__SWIG_0(swigCPtr, this, aFileName);
+    opensimSimulationJNI.Manager_printDTArray__SWIG_0(swigCPtr, this, aFileName);
   }
 
   public void printDTArray() {
-    opensimModelSimulationJNI.Manager_printDTArray__SWIG_1(swigCPtr, this);
+    opensimSimulationJNI.Manager_printDTArray__SWIG_1(swigCPtr, this);
   }
 
   public ArrayDouble getTimeArray() {
-    return new ArrayDouble(opensimModelSimulationJNI.Manager_getTimeArray(swigCPtr, this), false);
+    return new ArrayDouble(opensimSimulationJNI.Manager_getTimeArray(swigCPtr, this), false);
   }
 
   public double getTimeArrayTime(int aStep) {
-    return opensimModelSimulationJNI.Manager_getTimeArrayTime(swigCPtr, this, aStep);
+    return opensimSimulationJNI.Manager_getTimeArrayTime(swigCPtr, this, aStep);
   }
 
   public int getTimeArrayStep(double aTime) {
-    return opensimModelSimulationJNI.Manager_getTimeArrayStep(swigCPtr, this, aTime);
+    return opensimSimulationJNI.Manager_getTimeArrayStep(swigCPtr, this, aTime);
   }
 
   public void printTimeArray(String aFileName) {
-    opensimModelSimulationJNI.Manager_printTimeArray__SWIG_0(swigCPtr, this, aFileName);
+    opensimSimulationJNI.Manager_printTimeArray__SWIG_0(swigCPtr, this, aFileName);
   }
 
   public void printTimeArray() {
-    opensimModelSimulationJNI.Manager_printTimeArray__SWIG_1(swigCPtr, this);
+    opensimSimulationJNI.Manager_printTimeArray__SWIG_1(swigCPtr, this);
   }
 
   public void resetTimeAndDTArrays(double aTime) {
-    opensimModelSimulationJNI.Manager_resetTimeAndDTArrays(swigCPtr, this, aTime);
+    opensimSimulationJNI.Manager_resetTimeAndDTArrays(swigCPtr, this, aTime);
   }
 
   public double getNextTimeArrayTime(double aTime) {
-    return opensimModelSimulationJNI.Manager_getNextTimeArrayTime(swigCPtr, this, aTime);
+    return opensimSimulationJNI.Manager_getNextTimeArrayTime(swigCPtr, this, aTime);
+  }
+
+  public boolean integrate(State s, double finalTime) {
+    return opensimSimulationJNI.Manager_integrate__SWIG_0(swigCPtr, this, State.getCPtr(s), s, finalTime);
   }
 
   public boolean integrate(State s) {
-    return opensimModelSimulationJNI.Manager_integrate(swigCPtr, this, State.getCPtr(s), s);
-  }
-
-  public boolean doIntegration(State s, int step) {
-    return opensimModelSimulationJNI.Manager_doIntegration(swigCPtr, this, State.getCPtr(s), s, step);
-  }
-
-  public void finalize(State s) {
-    opensimModelSimulationJNI.Manager_finalize(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Manager_integrate__SWIG_1(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFixedStepSize(int tArrayStep) {
-    return opensimModelSimulationJNI.Manager_getFixedStepSize(swigCPtr, this, tArrayStep);
+    return opensimSimulationJNI.Manager_getFixedStepSize(swigCPtr, this, tArrayStep);
   }
 
   public boolean hasStateStorage() {
-    return opensimModelSimulationJNI.Manager_hasStateStorage(swigCPtr, this);
+    return opensimSimulationJNI.Manager_hasStateStorage(swigCPtr, this);
   }
 
   public void setStateStorage(Storage aStorage) {
-    opensimModelSimulationJNI.Manager_setStateStorage(swigCPtr, this, Storage.getCPtr(aStorage), aStorage);
+    opensimSimulationJNI.Manager_setStateStorage(swigCPtr, this, Storage.getCPtr(aStorage), aStorage);
   }
 
   public Storage getStateStorage() {
-    return new Storage(opensimModelSimulationJNI.Manager_getStateStorage(swigCPtr, this), false);
+    return new Storage(opensimSimulationJNI.Manager_getStateStorage(swigCPtr, this), false);
   }
 
   public TimeSeriesTable getStatesTable() {
-    return new TimeSeriesTable(opensimModelSimulationJNI.Manager_getStatesTable(swigCPtr, this), true);
+    return new TimeSeriesTable(opensimSimulationJNI.Manager_getStatesTable(swigCPtr, this), true);
   }
 
   public void halt() {
-    opensimModelSimulationJNI.Manager_halt(swigCPtr, this);
+    opensimSimulationJNI.Manager_halt(swigCPtr, this);
   }
 
   public void clearHalt() {
-    opensimModelSimulationJNI.Manager_clearHalt(swigCPtr, this);
+    opensimSimulationJNI.Manager_clearHalt(swigCPtr, this);
   }
 
   public boolean checkHalt() {
-    return opensimModelSimulationJNI.Manager_checkHalt(swigCPtr, this);
+    return opensimSimulationJNI.Manager_checkHalt(swigCPtr, this);
   }
 
   public void setIntegratorAccuracy(double accuracy) {
-    opensimModelSimulationJNI.Manager_setIntegratorAccuracy(swigCPtr, this, accuracy);
+    opensimSimulationJNI.Manager_setIntegratorAccuracy(swigCPtr, this, accuracy);
   }
 
 }

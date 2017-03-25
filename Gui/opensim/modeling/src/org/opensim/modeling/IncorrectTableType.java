@@ -12,7 +12,7 @@ public class IncorrectTableType extends InvalidArgument {
   private transient long swigCPtr;
 
   public IncorrectTableType(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.IncorrectTableType_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.IncorrectTableType_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class IncorrectTableType extends InvalidArgument {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_IncorrectTableType(swigCPtr);
+        opensimCommonJNI.delete_IncorrectTableType(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,11 +36,11 @@ public class IncorrectTableType extends InvalidArgument {
   }
 
   public IncorrectTableType(String file, long line, String func, String message) {
-    this(opensimModelCommonJNI.new_IncorrectTableType__SWIG_0(file, line, func, message), true);
+    this(opensimCommonJNI.new_IncorrectTableType__SWIG_0(file, line, func, message), true);
   }
 
   public IncorrectTableType(String file, long line, String func) {
-    this(opensimModelCommonJNI.new_IncorrectTableType__SWIG_1(file, line, func), true);
+    this(opensimCommonJNI.new_IncorrectTableType__SWIG_1(file, line, func), true);
   }
 
 }

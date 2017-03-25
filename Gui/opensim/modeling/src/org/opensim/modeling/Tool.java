@@ -12,7 +12,7 @@ public class Tool extends OpenSimObject {
   private transient long swigCPtr;
 
   public Tool(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.Tool_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.Tool_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Tool extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_Tool(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_Tool(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,60 +36,60 @@ public class Tool extends OpenSimObject {
   }
 
   public static Tool safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Tool_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.Tool_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Tool(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.Tool_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.Tool_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.Tool_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.Tool_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.Tool_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.Tool_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Tool(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.Tool_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.Tool_getConcreteClassName(swigCPtr, this);
   }
 
   public boolean run() throws java.io.IOException {
-    return opensimModelJNI.Tool_run(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.Tool_run(swigCPtr, this);
   }
 
   public String getInputsDir() {
-    return opensimModelJNI.Tool_getInputsDir(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.Tool_getInputsDir(swigCPtr, this);
   }
 
   public void setInputsDir(String aString) {
-    opensimModelJNI.Tool_setInputsDir(swigCPtr, this, aString);
+    opensimActuatorsAnalysesToolsJNI.Tool_setInputsDir(swigCPtr, this, aString);
   }
 
   public String getResultsDir() {
-    return opensimModelJNI.Tool_getResultsDir(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.Tool_getResultsDir(swigCPtr, this);
   }
 
   public void setResultsDir(String aString) {
-    opensimModelJNI.Tool_setResultsDir(swigCPtr, this, aString);
+    opensimActuatorsAnalysesToolsJNI.Tool_setResultsDir(swigCPtr, this, aString);
   }
 
   public Tool.VerboseLevel getVerboseLevel() {
-    return Tool.VerboseLevel.swigToEnum(opensimModelJNI.Tool_getVerboseLevel(swigCPtr, this));
+    return Tool.VerboseLevel.swigToEnum(opensimActuatorsAnalysesToolsJNI.Tool_getVerboseLevel(swigCPtr, this));
   }
 
   public void setVerboseLevel(Tool.VerboseLevel aVerboseLevel) {
-    opensimModelJNI.Tool_setVerboseLevel(swigCPtr, this, aVerboseLevel.swigValue());
+    opensimActuatorsAnalysesToolsJNI.Tool_setVerboseLevel(swigCPtr, this, aVerboseLevel.swigValue());
   }
 
   public final static class VerboseLevel {
-    public final static Tool.VerboseLevel Quiet = new Tool.VerboseLevel("Quiet", opensimModelJNI.Tool_Quiet_get());
-    public final static Tool.VerboseLevel Progress = new Tool.VerboseLevel("Progress", opensimModelJNI.Tool_Progress_get());
-    public final static Tool.VerboseLevel DetailedProgress = new Tool.VerboseLevel("DetailedProgress", opensimModelJNI.Tool_DetailedProgress_get());
-    public final static Tool.VerboseLevel Debug = new Tool.VerboseLevel("Debug", opensimModelJNI.Tool_Debug_get());
+    public final static Tool.VerboseLevel Quiet = new Tool.VerboseLevel("Quiet", opensimActuatorsAnalysesToolsJNI.Tool_Quiet_get());
+    public final static Tool.VerboseLevel Progress = new Tool.VerboseLevel("Progress", opensimActuatorsAnalysesToolsJNI.Tool_Progress_get());
+    public final static Tool.VerboseLevel DetailedProgress = new Tool.VerboseLevel("DetailedProgress", opensimActuatorsAnalysesToolsJNI.Tool_DetailedProgress_get());
+    public final static Tool.VerboseLevel Debug = new Tool.VerboseLevel("Debug", opensimActuatorsAnalysesToolsJNI.Tool_Debug_get());
 
     public final int swigValue() {
       return swigValue;

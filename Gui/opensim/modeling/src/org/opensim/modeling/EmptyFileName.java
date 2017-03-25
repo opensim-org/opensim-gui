@@ -12,7 +12,7 @@ public class EmptyFileName extends InvalidArgument {
   private transient long swigCPtr;
 
   public EmptyFileName(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.EmptyFileName_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.EmptyFileName_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class EmptyFileName extends InvalidArgument {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_EmptyFileName(swigCPtr);
+        opensimCommonJNI.delete_EmptyFileName(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class EmptyFileName extends InvalidArgument {
   }
 
   public EmptyFileName(String file, long line, String func) {
-    this(opensimModelCommonJNI.new_EmptyFileName(file, line, func), true);
+    this(opensimCommonJNI.new_EmptyFileName(file, line, func), true);
   }
 
 }

@@ -12,7 +12,7 @@ public class FileExtensionNotFound extends InvalidArgument {
   private transient long swigCPtr;
 
   public FileExtensionNotFound(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.FileExtensionNotFound_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.FileExtensionNotFound_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class FileExtensionNotFound extends InvalidArgument {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_FileExtensionNotFound(swigCPtr);
+        opensimCommonJNI.delete_FileExtensionNotFound(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class FileExtensionNotFound extends InvalidArgument {
   }
 
   public FileExtensionNotFound(String file, long line, String func, String filename) {
-    this(opensimModelCommonJNI.new_FileExtensionNotFound(file, line, func, filename), true);
+    this(opensimCommonJNI.new_FileExtensionNotFound(file, line, func, filename), true);
   }
 
 }

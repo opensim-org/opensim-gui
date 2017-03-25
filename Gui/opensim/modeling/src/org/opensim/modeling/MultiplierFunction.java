@@ -12,7 +12,7 @@ public class MultiplierFunction extends Function {
   private transient long swigCPtr;
 
   public MultiplierFunction(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.MultiplierFunction_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.MultiplierFunction_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class MultiplierFunction extends Function {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_MultiplierFunction(swigCPtr);
+        opensimCommonJNI.delete_MultiplierFunction(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,82 +36,82 @@ public class MultiplierFunction extends Function {
   }
 
   public static MultiplierFunction safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelCommonJNI.MultiplierFunction_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimCommonJNI.MultiplierFunction_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new MultiplierFunction(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelCommonJNI.MultiplierFunction_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimCommonJNI.MultiplierFunction_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelCommonJNI.MultiplierFunction_getClassName();
+    return opensimCommonJNI.MultiplierFunction_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelCommonJNI.MultiplierFunction_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.MultiplierFunction_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new MultiplierFunction(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelCommonJNI.MultiplierFunction_getConcreteClassName(swigCPtr, this);
+    return opensimCommonJNI.MultiplierFunction_getConcreteClassName(swigCPtr, this);
   }
 
   public MultiplierFunction() {
-    this(opensimModelCommonJNI.new_MultiplierFunction__SWIG_0(), true);
+    this(opensimCommonJNI.new_MultiplierFunction__SWIG_0(), true);
   }
 
   public MultiplierFunction(Function aFunction) {
-    this(opensimModelCommonJNI.new_MultiplierFunction__SWIG_1(Function.getCPtr(aFunction), aFunction), true);
+    this(opensimCommonJNI.new_MultiplierFunction__SWIG_1(Function.getCPtr(aFunction), aFunction), true);
   }
 
   public MultiplierFunction(Function aFunction, double aScaleFactor) {
-    this(opensimModelCommonJNI.new_MultiplierFunction__SWIG_2(Function.getCPtr(aFunction), aFunction, aScaleFactor), true);
+    this(opensimCommonJNI.new_MultiplierFunction__SWIG_2(Function.getCPtr(aFunction), aFunction, aScaleFactor), true);
   }
 
   public MultiplierFunction(MultiplierFunction aFunction) {
-    this(opensimModelCommonJNI.new_MultiplierFunction__SWIG_3(MultiplierFunction.getCPtr(aFunction), aFunction), true);
+    this(opensimCommonJNI.new_MultiplierFunction__SWIG_3(MultiplierFunction.getCPtr(aFunction), aFunction), true);
   }
 
   public void init(Function aFunction) {
-    opensimModelCommonJNI.MultiplierFunction_init(swigCPtr, this, Function.getCPtr(aFunction), aFunction);
+    opensimCommonJNI.MultiplierFunction_init(swigCPtr, this, Function.getCPtr(aFunction), aFunction);
   }
 
   public void setFunction(Function aFunction) {
-    opensimModelCommonJNI.MultiplierFunction_setFunction(swigCPtr, this, Function.getCPtr(aFunction), aFunction);
+    opensimCommonJNI.MultiplierFunction_setFunction(swigCPtr, this, Function.getCPtr(aFunction), aFunction);
   }
 
   public void setScale(double aScaleFactor) {
-    opensimModelCommonJNI.MultiplierFunction_setScale(swigCPtr, this, aScaleFactor);
+    opensimCommonJNI.MultiplierFunction_setScale(swigCPtr, this, aScaleFactor);
   }
 
   public Function getFunction() {
-    long cPtr = opensimModelCommonJNI.MultiplierFunction_getFunction(swigCPtr, this);
+    long cPtr = opensimCommonJNI.MultiplierFunction_getFunction(swigCPtr, this);
     return (cPtr == 0) ? null : new Function(cPtr, false);
   }
 
   public double getScale() {
-    return opensimModelCommonJNI.MultiplierFunction_getScale(swigCPtr, this);
+    return opensimCommonJNI.MultiplierFunction_getScale(swigCPtr, this);
   }
 
   public double calcValue(Vector x) {
-    return opensimModelCommonJNI.MultiplierFunction_calcValue(swigCPtr, this, Vector.getCPtr(x), x);
+    return opensimCommonJNI.MultiplierFunction_calcValue(swigCPtr, this, Vector.getCPtr(x), x);
   }
 
   public double calcDerivative(StdVectorInt derivComponents, Vector x) {
-    return opensimModelCommonJNI.MultiplierFunction_calcDerivative(swigCPtr, this, StdVectorInt.getCPtr(derivComponents), derivComponents, Vector.getCPtr(x), x);
+    return opensimCommonJNI.MultiplierFunction_calcDerivative(swigCPtr, this, StdVectorInt.getCPtr(derivComponents), derivComponents, Vector.getCPtr(x), x);
   }
 
   public int getArgumentSize() {
-    return opensimModelCommonJNI.MultiplierFunction_getArgumentSize(swigCPtr, this);
+    return opensimCommonJNI.MultiplierFunction_getArgumentSize(swigCPtr, this);
   }
 
   public int getMaxDerivativeOrder() {
-    return opensimModelCommonJNI.MultiplierFunction_getMaxDerivativeOrder(swigCPtr, this);
+    return opensimCommonJNI.MultiplierFunction_getMaxDerivativeOrder(swigCPtr, this);
   }
 
   public SWIGTYPE_p_SimTK__Function createSimTKFunction() {
-    long cPtr = opensimModelCommonJNI.MultiplierFunction_createSimTKFunction(swigCPtr, this);
+    long cPtr = opensimCommonJNI.MultiplierFunction_createSimTKFunction(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_SimTK__Function(cPtr, false);
   }
 

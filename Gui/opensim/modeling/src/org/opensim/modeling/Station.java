@@ -12,7 +12,7 @@ public class Station extends Point {
   private transient long swigCPtr;
 
   public Station(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.Station_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.Station_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Station extends Point {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_Station(swigCPtr);
+        opensimSimulationJNI.delete_Station(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,93 +36,93 @@ public class Station extends Point {
   }
 
   public static Station safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.Station_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.Station_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Station(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.Station_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.Station_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.Station_getClassName();
+    return opensimSimulationJNI.Station_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.Station_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.Station_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Station(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.Station_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.Station_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_location(Station source) {
-    opensimModelSimulationJNI.Station_copyProperty_location(swigCPtr, this, Station.getCPtr(source), source);
+    opensimSimulationJNI.Station_copyProperty_location(swigCPtr, this, Station.getCPtr(source), source);
   }
 
   public Vec3 get_location(int i) {
-    return new Vec3(opensimModelSimulationJNI.Station_get_location__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimSimulationJNI.Station_get_location__SWIG_0(swigCPtr, this, i), false);
   }
 
   public Vec3 upd_location(int i) {
-    return new Vec3(opensimModelSimulationJNI.Station_upd_location__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimSimulationJNI.Station_upd_location__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_location(int i, Vec3 value) {
-    opensimModelSimulationJNI.Station_set_location__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+    opensimSimulationJNI.Station_set_location__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
   }
 
   public int append_location(Vec3 value) {
-    return opensimModelSimulationJNI.Station_append_location(swigCPtr, this, Vec3.getCPtr(value), value);
+    return opensimSimulationJNI.Station_append_location(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void constructProperty_location(Vec3 initValue) {
-    opensimModelSimulationJNI.Station_constructProperty_location(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+    opensimSimulationJNI.Station_constructProperty_location(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
   }
 
   public Vec3 get_location() {
-    return new Vec3(opensimModelSimulationJNI.Station_get_location__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.Station_get_location__SWIG_1(swigCPtr, this), false);
   }
 
   public Vec3 upd_location() {
-    return new Vec3(opensimModelSimulationJNI.Station_upd_location__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.Station_upd_location__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_location(Vec3 value) {
-    opensimModelSimulationJNI.Station_set_location__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+    opensimSimulationJNI.Station_set_location__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_connector_parent_frame_connectee_name(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelSimulationJNI.Station_PropertyIndex_connector_parent_frame_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_socket_parent_frame_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimSimulationJNI.Station_PropertyIndex_socket_parent_frame_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_parent_frame_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.Station_PropertyIndex_connector_parent_frame_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_parent_frame_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.Station_PropertyIndex_socket_parent_frame_connectee_name_get(swigCPtr, this), true);
   }
 
-  public void connectConnector_parent_frame(OpenSimObject object) {
-    opensimModelSimulationJNI.Station_connectConnector_parent_frame(swigCPtr, this, OpenSimObject.getCPtr(object), object);
+  public void connectSocket_parent_frame(OpenSimObject object) {
+    opensimSimulationJNI.Station_connectSocket_parent_frame(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
   public Station() {
-    this(opensimModelSimulationJNI.new_Station__SWIG_0(), true);
+    this(opensimSimulationJNI.new_Station__SWIG_0(), true);
   }
 
   public Station(PhysicalFrame frame, Vec3 location) {
-    this(opensimModelSimulationJNI.new_Station__SWIG_1(PhysicalFrame.getCPtr(frame), frame, Vec3.getCPtr(location), location), true);
+    this(opensimSimulationJNI.new_Station__SWIG_1(PhysicalFrame.getCPtr(frame), frame, Vec3.getCPtr(location), location), true);
   }
 
   public PhysicalFrame getParentFrame() {
-    return new PhysicalFrame(opensimModelSimulationJNI.Station_getParentFrame(swigCPtr, this), false);
+    return new PhysicalFrame(opensimSimulationJNI.Station_getParentFrame(swigCPtr, this), false);
   }
 
   public void setParentFrame(PhysicalFrame aFrame) {
-    opensimModelSimulationJNI.Station_setParentFrame(swigCPtr, this, PhysicalFrame.getCPtr(aFrame), aFrame);
+    opensimSimulationJNI.Station_setParentFrame(swigCPtr, this, PhysicalFrame.getCPtr(aFrame), aFrame);
   }
 
   public Vec3 findLocationInFrame(State s, Frame frame) {
-    return new Vec3(opensimModelSimulationJNI.Station_findLocationInFrame(swigCPtr, this, State.getCPtr(s), s, Frame.getCPtr(frame), frame), true);
+    return new Vec3(opensimSimulationJNI.Station_findLocationInFrame(swigCPtr, this, State.getCPtr(s), s, Frame.getCPtr(frame), frame), true);
   }
 
 }

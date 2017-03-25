@@ -12,7 +12,7 @@ public class SetBodies extends OpenSimObject {
   private transient long swigCPtr;
 
   public SetBodies(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.SetBodies_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.SetBodies_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class SetBodies extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_SetBodies(swigCPtr);
+        opensimSimulationJNI.delete_SetBodies(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,158 +36,158 @@ public class SetBodies extends OpenSimObject {
   }
 
   public static SetBodies safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.SetBodies_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.SetBodies_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new SetBodies(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.SetBodies_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.SetBodies_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.SetBodies_getClassName();
+    return opensimSimulationJNI.SetBodies_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.SetBodies_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.SetBodies_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new SetBodies(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.SetBodies_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.SetBodies_getConcreteClassName(swigCPtr, this);
   }
 
   public SetBodies() {
-    this(opensimModelSimulationJNI.new_SetBodies__SWIG_0(), true);
+    this(opensimSimulationJNI.new_SetBodies__SWIG_0(), true);
   }
 
   public SetBodies(String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelSimulationJNI.new_SetBodies__SWIG_1(aFileName, aUpdateFromXMLNode), true);
+    this(opensimSimulationJNI.new_SetBodies__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
   public SetBodies(String aFileName) {
-    this(opensimModelSimulationJNI.new_SetBodies__SWIG_2(aFileName), true);
+    this(opensimSimulationJNI.new_SetBodies__SWIG_2(aFileName), true);
   }
 
   public SetBodies(SetBodies aSet) {
-    this(opensimModelSimulationJNI.new_SetBodies__SWIG_3(SetBodies.getCPtr(aSet), aSet), true);
+    this(opensimSimulationJNI.new_SetBodies__SWIG_3(SetBodies.getCPtr(aSet), aSet), true);
   }
 
   public void setupGroups() {
-    opensimModelSimulationJNI.SetBodies_setupGroups(swigCPtr, this);
+    opensimSimulationJNI.SetBodies_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {
-    opensimModelSimulationJNI.SetBodies_setMemoryOwner(swigCPtr, this, aTrueFalse);
+    opensimSimulationJNI.SetBodies_setMemoryOwner(swigCPtr, this, aTrueFalse);
   }
 
   public boolean setSize(int aSize) {
-    return opensimModelSimulationJNI.SetBodies_setSize(swigCPtr, this, aSize);
+    return opensimSimulationJNI.SetBodies_setSize(swigCPtr, this, aSize);
   }
 
   public int getSize() {
-    return opensimModelSimulationJNI.SetBodies_getSize(swigCPtr, this);
+    return opensimSimulationJNI.SetBodies_getSize(swigCPtr, this);
   }
 
   public int getIndex(Body aObject, int aStartIndex) {
-    return opensimModelSimulationJNI.SetBodies_getIndex__SWIG_0(swigCPtr, this, Body.getCPtr(aObject), aObject, aStartIndex);
+    return opensimSimulationJNI.SetBodies_getIndex__SWIG_0(swigCPtr, this, Body.getCPtr(aObject), aObject, aStartIndex);
   }
 
   public int getIndex(Body aObject) {
-    return opensimModelSimulationJNI.SetBodies_getIndex__SWIG_1(swigCPtr, this, Body.getCPtr(aObject), aObject);
+    return opensimSimulationJNI.SetBodies_getIndex__SWIG_1(swigCPtr, this, Body.getCPtr(aObject), aObject);
   }
 
   public int getIndex(String aName, int aStartIndex) {
-    return opensimModelSimulationJNI.SetBodies_getIndex__SWIG_2(swigCPtr, this, aName, aStartIndex);
+    return opensimSimulationJNI.SetBodies_getIndex__SWIG_2(swigCPtr, this, aName, aStartIndex);
   }
 
   public int getIndex(String aName) {
-    return opensimModelSimulationJNI.SetBodies_getIndex__SWIG_3(swigCPtr, this, aName);
+    return opensimSimulationJNI.SetBodies_getIndex__SWIG_3(swigCPtr, this, aName);
   }
 
   public void getGroupNamesContaining(String aObjectName, ArrayStr rGroupNames) {
-    opensimModelSimulationJNI.SetBodies_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
+    opensimSimulationJNI.SetBodies_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
   public boolean adoptAndAppend(Body aObject) {
-    return opensimModelSimulationJNI.SetBodies_adoptAndAppend(swigCPtr, this, Body.getCPtr(aObject), aObject);
+    return opensimSimulationJNI.SetBodies_adoptAndAppend(swigCPtr, this, Body.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(Body aObject) {
-    return opensimModelSimulationJNI.SetBodies_cloneAndAppend(swigCPtr, this, Body.getCPtr(aObject), aObject);
+    return opensimSimulationJNI.SetBodies_cloneAndAppend(swigCPtr, this, Body.getCPtr(aObject), aObject);
   }
 
   public boolean insert(int aIndex, Body aObject) {
-    return opensimModelSimulationJNI.SetBodies_insert(swigCPtr, this, aIndex, Body.getCPtr(aObject), aObject);
+    return opensimSimulationJNI.SetBodies_insert(swigCPtr, this, aIndex, Body.getCPtr(aObject), aObject);
   }
 
   public boolean remove(int aIndex) {
-    return opensimModelSimulationJNI.SetBodies_remove__SWIG_0(swigCPtr, this, aIndex);
+    return opensimSimulationJNI.SetBodies_remove__SWIG_0(swigCPtr, this, aIndex);
   }
 
   public boolean remove(Body aObject) {
-    return opensimModelSimulationJNI.SetBodies_remove__SWIG_1(swigCPtr, this, Body.getCPtr(aObject), aObject);
+    return opensimSimulationJNI.SetBodies_remove__SWIG_1(swigCPtr, this, Body.getCPtr(aObject), aObject);
   }
 
   public void clearAndDestroy() {
-    opensimModelSimulationJNI.SetBodies_clearAndDestroy(swigCPtr, this);
+    opensimSimulationJNI.SetBodies_clearAndDestroy(swigCPtr, this);
   }
 
   public boolean set(int aIndex, Body aObject, boolean preserveGroups) {
-    return opensimModelSimulationJNI.SetBodies_set__SWIG_0(swigCPtr, this, aIndex, Body.getCPtr(aObject), aObject, preserveGroups);
+    return opensimSimulationJNI.SetBodies_set__SWIG_0(swigCPtr, this, aIndex, Body.getCPtr(aObject), aObject, preserveGroups);
   }
 
   public boolean set(int aIndex, Body aObject) {
-    return opensimModelSimulationJNI.SetBodies_set__SWIG_1(swigCPtr, this, aIndex, Body.getCPtr(aObject), aObject);
+    return opensimSimulationJNI.SetBodies_set__SWIG_1(swigCPtr, this, aIndex, Body.getCPtr(aObject), aObject);
   }
 
   public Body get(int aIndex) {
-    return new Body(opensimModelSimulationJNI.SetBodies_get__SWIG_0(swigCPtr, this, aIndex), false);
+    return new Body(opensimSimulationJNI.SetBodies_get__SWIG_0(swigCPtr, this, aIndex), false);
   }
 
   public Body get(String aName) {
-    return new Body(opensimModelSimulationJNI.SetBodies_get__SWIG_1(swigCPtr, this, aName), false);
+    return new Body(opensimSimulationJNI.SetBodies_get__SWIG_1(swigCPtr, this, aName), false);
   }
 
   public boolean contains(String aName) {
-    return opensimModelSimulationJNI.SetBodies_contains(swigCPtr, this, aName);
+    return opensimSimulationJNI.SetBodies_contains(swigCPtr, this, aName);
   }
 
   public void getNames(ArrayStr rNames) {
-    opensimModelSimulationJNI.SetBodies_getNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
+    opensimSimulationJNI.SetBodies_getNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
   }
 
   public int getNumGroups() {
-    return opensimModelSimulationJNI.SetBodies_getNumGroups(swigCPtr, this);
+    return opensimSimulationJNI.SetBodies_getNumGroups(swigCPtr, this);
   }
 
   public void addGroup(String aGroupName) {
-    opensimModelSimulationJNI.SetBodies_addGroup(swigCPtr, this, aGroupName);
+    opensimSimulationJNI.SetBodies_addGroup(swigCPtr, this, aGroupName);
   }
 
   public void removeGroup(String aGroupName) {
-    opensimModelSimulationJNI.SetBodies_removeGroup(swigCPtr, this, aGroupName);
+    opensimSimulationJNI.SetBodies_removeGroup(swigCPtr, this, aGroupName);
   }
 
   public void renameGroup(String oldGroupName, String newGroupName) {
-    opensimModelSimulationJNI.SetBodies_renameGroup(swigCPtr, this, oldGroupName, newGroupName);
+    opensimSimulationJNI.SetBodies_renameGroup(swigCPtr, this, oldGroupName, newGroupName);
   }
 
   public void addObjectToGroup(String aGroupName, String aObjectName) {
-    opensimModelSimulationJNI.SetBodies_addObjectToGroup(swigCPtr, this, aGroupName, aObjectName);
+    opensimSimulationJNI.SetBodies_addObjectToGroup(swigCPtr, this, aGroupName, aObjectName);
   }
 
   public void getGroupNames(ArrayStr rGroupNames) {
-    opensimModelSimulationJNI.SetBodies_getGroupNames(swigCPtr, this, ArrayStr.getCPtr(rGroupNames), rGroupNames);
+    opensimSimulationJNI.SetBodies_getGroupNames(swigCPtr, this, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
   public ObjectGroup getGroup(String aGroupName) {
-    long cPtr = opensimModelSimulationJNI.SetBodies_getGroup__SWIG_0(swigCPtr, this, aGroupName);
+    long cPtr = opensimSimulationJNI.SetBodies_getGroup__SWIG_0(swigCPtr, this, aGroupName);
     return (cPtr == 0) ? null : new ObjectGroup(cPtr, false);
   }
 
   public ObjectGroup getGroup(int aIndex) {
-    long cPtr = opensimModelSimulationJNI.SetBodies_getGroup__SWIG_1(swigCPtr, this, aIndex);
+    long cPtr = opensimSimulationJNI.SetBodies_getGroup__SWIG_1(swigCPtr, this, aIndex);
     return (cPtr == 0) ? null : new ObjectGroup(cPtr, false);
   }
 

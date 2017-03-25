@@ -29,26 +29,26 @@ public class IteratorRangeStatesTrajectoryIterator {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_IteratorRangeStatesTrajectoryIterator(swigCPtr);
+        opensimSimulationJNI.delete_IteratorRangeStatesTrajectoryIterator(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public IteratorRangeStatesTrajectoryIterator(SWIGTYPE_p_std__vectorT_SimTK__State_t__const_iterator first, SWIGTYPE_p_std__vectorT_SimTK__State_t__const_iterator last) {
-    this(opensimModelSimulationJNI.new_IteratorRangeStatesTrajectoryIterator__SWIG_0(SWIGTYPE_p_std__vectorT_SimTK__State_t__const_iterator.getCPtr(first), SWIGTYPE_p_std__vectorT_SimTK__State_t__const_iterator.getCPtr(last)), true);
+    this(opensimSimulationJNI.new_IteratorRangeStatesTrajectoryIterator__SWIG_0(SWIGTYPE_p_std__vectorT_SimTK__State_t__const_iterator.getCPtr(first), SWIGTYPE_p_std__vectorT_SimTK__State_t__const_iterator.getCPtr(last)), true);
   }
 
   public IteratorRangeStatesTrajectoryIterator(SWIGTYPE_p_std__pairT_std__vectorT_SimTK__State_t__const_iterator_std__vectorT_SimTK__State_t__const_iterator_t range) {
-    this(opensimModelSimulationJNI.new_IteratorRangeStatesTrajectoryIterator__SWIG_1(SWIGTYPE_p_std__pairT_std__vectorT_SimTK__State_t__const_iterator_std__vectorT_SimTK__State_t__const_iterator_t.getCPtr(range)), true);
+    this(opensimSimulationJNI.new_IteratorRangeStatesTrajectoryIterator__SWIG_1(SWIGTYPE_p_std__pairT_std__vectorT_SimTK__State_t__const_iterator_std__vectorT_SimTK__State_t__const_iterator_t.getCPtr(range)), true);
   }
 
   public SWIGTYPE_p_std__vectorT_SimTK__State_t__const_iterator begin() {
-    return new SWIGTYPE_p_std__vectorT_SimTK__State_t__const_iterator(opensimModelSimulationJNI.IteratorRangeStatesTrajectoryIterator_begin(swigCPtr, this), true);
+    return new SWIGTYPE_p_std__vectorT_SimTK__State_t__const_iterator(opensimSimulationJNI.IteratorRangeStatesTrajectoryIterator_begin(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_std__vectorT_SimTK__State_t__const_iterator end() {
-    return new SWIGTYPE_p_std__vectorT_SimTK__State_t__const_iterator(opensimModelSimulationJNI.IteratorRangeStatesTrajectoryIterator_end(swigCPtr, this), true);
+    return new SWIGTYPE_p_std__vectorT_SimTK__State_t__const_iterator(opensimSimulationJNI.IteratorRangeStatesTrajectoryIterator_end(swigCPtr, this), true);
   }
 
 }

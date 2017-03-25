@@ -12,7 +12,7 @@ public class ContactGeometry extends ModelComponent {
   private transient long swigCPtr;
 
   public ContactGeometry(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.ContactGeometry_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.ContactGeometry_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ContactGeometry extends ModelComponent {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_ContactGeometry(swigCPtr);
+        opensimSimulationJNI.delete_ContactGeometry(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,193 +36,193 @@ public class ContactGeometry extends ModelComponent {
   }
 
   public static ContactGeometry safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.ContactGeometry_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.ContactGeometry_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ContactGeometry(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.ContactGeometry_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.ContactGeometry_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.ContactGeometry_getClassName();
+    return opensimSimulationJNI.ContactGeometry_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.ContactGeometry_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.ContactGeometry_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ContactGeometry(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.ContactGeometry_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.ContactGeometry_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_location(ContactGeometry source) {
-    opensimModelSimulationJNI.ContactGeometry_copyProperty_location(swigCPtr, this, ContactGeometry.getCPtr(source), source);
+    opensimSimulationJNI.ContactGeometry_copyProperty_location(swigCPtr, this, ContactGeometry.getCPtr(source), source);
   }
 
   public Vec3 get_location(int i) {
-    return new Vec3(opensimModelSimulationJNI.ContactGeometry_get_location__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimSimulationJNI.ContactGeometry_get_location__SWIG_0(swigCPtr, this, i), false);
   }
 
   public Vec3 upd_location(int i) {
-    return new Vec3(opensimModelSimulationJNI.ContactGeometry_upd_location__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimSimulationJNI.ContactGeometry_upd_location__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_location(int i, Vec3 value) {
-    opensimModelSimulationJNI.ContactGeometry_set_location__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+    opensimSimulationJNI.ContactGeometry_set_location__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
   }
 
   public int append_location(Vec3 value) {
-    return opensimModelSimulationJNI.ContactGeometry_append_location(swigCPtr, this, Vec3.getCPtr(value), value);
+    return opensimSimulationJNI.ContactGeometry_append_location(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void constructProperty_location(Vec3 initValue) {
-    opensimModelSimulationJNI.ContactGeometry_constructProperty_location(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+    opensimSimulationJNI.ContactGeometry_constructProperty_location(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
   }
 
   public Vec3 get_location() {
-    return new Vec3(opensimModelSimulationJNI.ContactGeometry_get_location__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.ContactGeometry_get_location__SWIG_1(swigCPtr, this), false);
   }
 
   public Vec3 upd_location() {
-    return new Vec3(opensimModelSimulationJNI.ContactGeometry_upd_location__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.ContactGeometry_upd_location__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_location(Vec3 value) {
-    opensimModelSimulationJNI.ContactGeometry_set_location__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+    opensimSimulationJNI.ContactGeometry_set_location__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void copyProperty_orientation(ContactGeometry source) {
-    opensimModelSimulationJNI.ContactGeometry_copyProperty_orientation(swigCPtr, this, ContactGeometry.getCPtr(source), source);
+    opensimSimulationJNI.ContactGeometry_copyProperty_orientation(swigCPtr, this, ContactGeometry.getCPtr(source), source);
   }
 
   public Vec3 get_orientation(int i) {
-    return new Vec3(opensimModelSimulationJNI.ContactGeometry_get_orientation__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimSimulationJNI.ContactGeometry_get_orientation__SWIG_0(swigCPtr, this, i), false);
   }
 
   public Vec3 upd_orientation(int i) {
-    return new Vec3(opensimModelSimulationJNI.ContactGeometry_upd_orientation__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimSimulationJNI.ContactGeometry_upd_orientation__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_orientation(int i, Vec3 value) {
-    opensimModelSimulationJNI.ContactGeometry_set_orientation__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+    opensimSimulationJNI.ContactGeometry_set_orientation__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
   }
 
   public int append_orientation(Vec3 value) {
-    return opensimModelSimulationJNI.ContactGeometry_append_orientation(swigCPtr, this, Vec3.getCPtr(value), value);
+    return opensimSimulationJNI.ContactGeometry_append_orientation(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void constructProperty_orientation(Vec3 initValue) {
-    opensimModelSimulationJNI.ContactGeometry_constructProperty_orientation(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+    opensimSimulationJNI.ContactGeometry_constructProperty_orientation(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
   }
 
   public Vec3 get_orientation() {
-    return new Vec3(opensimModelSimulationJNI.ContactGeometry_get_orientation__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.ContactGeometry_get_orientation__SWIG_1(swigCPtr, this), false);
   }
 
   public Vec3 upd_orientation() {
-    return new Vec3(opensimModelSimulationJNI.ContactGeometry_upd_orientation__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.ContactGeometry_upd_orientation__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_orientation(Vec3 value) {
-    opensimModelSimulationJNI.ContactGeometry_set_orientation__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+    opensimSimulationJNI.ContactGeometry_set_orientation__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void copyProperty_Appearance(ContactGeometry source) {
-    opensimModelSimulationJNI.ContactGeometry_copyProperty_Appearance(swigCPtr, this, ContactGeometry.getCPtr(source), source);
+    opensimSimulationJNI.ContactGeometry_copyProperty_Appearance(swigCPtr, this, ContactGeometry.getCPtr(source), source);
   }
 
   public Appearance get_Appearance(int i) {
-    return new Appearance(opensimModelSimulationJNI.ContactGeometry_get_Appearance__SWIG_0(swigCPtr, this, i), false);
+    return new Appearance(opensimSimulationJNI.ContactGeometry_get_Appearance__SWIG_0(swigCPtr, this, i), false);
   }
 
   public Appearance upd_Appearance(int i) {
-    return new Appearance(opensimModelSimulationJNI.ContactGeometry_upd_Appearance__SWIG_0(swigCPtr, this, i), false);
+    return new Appearance(opensimSimulationJNI.ContactGeometry_upd_Appearance__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_Appearance(int i, Appearance value) {
-    opensimModelSimulationJNI.ContactGeometry_set_Appearance__SWIG_0(swigCPtr, this, i, Appearance.getCPtr(value), value);
+    opensimSimulationJNI.ContactGeometry_set_Appearance__SWIG_0(swigCPtr, this, i, Appearance.getCPtr(value), value);
   }
 
   public int append_Appearance(Appearance value) {
-    return opensimModelSimulationJNI.ContactGeometry_append_Appearance(swigCPtr, this, Appearance.getCPtr(value), value);
+    return opensimSimulationJNI.ContactGeometry_append_Appearance(swigCPtr, this, Appearance.getCPtr(value), value);
   }
 
   public void constructProperty_Appearance(Appearance initValue) {
-    opensimModelSimulationJNI.ContactGeometry_constructProperty_Appearance(swigCPtr, this, Appearance.getCPtr(initValue), initValue);
+    opensimSimulationJNI.ContactGeometry_constructProperty_Appearance(swigCPtr, this, Appearance.getCPtr(initValue), initValue);
   }
 
   public Appearance get_Appearance() {
-    return new Appearance(opensimModelSimulationJNI.ContactGeometry_get_Appearance__SWIG_1(swigCPtr, this), false);
+    return new Appearance(opensimSimulationJNI.ContactGeometry_get_Appearance__SWIG_1(swigCPtr, this), false);
   }
 
   public Appearance upd_Appearance() {
-    return new Appearance(opensimModelSimulationJNI.ContactGeometry_upd_Appearance__SWIG_1(swigCPtr, this), false);
+    return new Appearance(opensimSimulationJNI.ContactGeometry_upd_Appearance__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_Appearance(Appearance value) {
-    opensimModelSimulationJNI.ContactGeometry_set_Appearance__SWIG_1(swigCPtr, this, Appearance.getCPtr(value), value);
+    opensimSimulationJNI.ContactGeometry_set_Appearance__SWIG_1(swigCPtr, this, Appearance.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_connector_frame_connectee_name(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelSimulationJNI.ContactGeometry_PropertyIndex_connector_frame_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_socket_frame_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimSimulationJNI.ContactGeometry_PropertyIndex_socket_frame_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_frame_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.ContactGeometry_PropertyIndex_connector_frame_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_frame_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.ContactGeometry_PropertyIndex_socket_frame_connectee_name_get(swigCPtr, this), true);
   }
 
-  public void connectConnector_frame(OpenSimObject object) {
-    opensimModelSimulationJNI.ContactGeometry_connectConnector_frame(swigCPtr, this, OpenSimObject.getCPtr(object), object);
+  public void connectSocket_frame(OpenSimObject object) {
+    opensimSimulationJNI.ContactGeometry_connectSocket_frame(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
   public PhysicalFrame getFrame() {
-    return new PhysicalFrame(opensimModelSimulationJNI.ContactGeometry_getFrame(swigCPtr, this), false);
+    return new PhysicalFrame(opensimSimulationJNI.ContactGeometry_getFrame(swigCPtr, this), false);
   }
 
   public void setFrame(PhysicalFrame frame) {
-    opensimModelSimulationJNI.ContactGeometry_setFrame(swigCPtr, this, PhysicalFrame.getCPtr(frame), frame);
+    opensimSimulationJNI.ContactGeometry_setFrame(swigCPtr, this, PhysicalFrame.getCPtr(frame), frame);
   }
 
   public SWIGTYPE_p_SimTK__ContactGeometry createSimTKContactGeometry() {
-    return new SWIGTYPE_p_SimTK__ContactGeometry(opensimModelSimulationJNI.ContactGeometry_createSimTKContactGeometry(swigCPtr, this), true);
+    return new SWIGTYPE_p_SimTK__ContactGeometry(opensimSimulationJNI.ContactGeometry_createSimTKContactGeometry(swigCPtr, this), true);
   }
 
   public Transform getTransform() {
-    return new Transform(opensimModelSimulationJNI.ContactGeometry_getTransform(swigCPtr, this), true);
+    return new Transform(opensimSimulationJNI.ContactGeometry_getTransform(swigCPtr, this), true);
   }
 
   public void scale(ScaleSet aScaleSet) {
-    opensimModelSimulationJNI.ContactGeometry_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
+    opensimSimulationJNI.ContactGeometry_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
   }
 
   public void updateGeometry() {
-    opensimModelSimulationJNI.ContactGeometry_updateGeometry(swigCPtr, this);
+    opensimSimulationJNI.ContactGeometry_updateGeometry(swigCPtr, this);
   }
 
   public Vec3 getLocation() {
-    return new Vec3(opensimModelSimulationJNI.ContactGeometry_getLocation(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.ContactGeometry_getLocation(swigCPtr, this), false);
   }
 
   public void setLocation(Vec3 location) {
-    opensimModelSimulationJNI.ContactGeometry_setLocation(swigCPtr, this, Vec3.getCPtr(location), location);
+    opensimSimulationJNI.ContactGeometry_setLocation(swigCPtr, this, Vec3.getCPtr(location), location);
   }
 
   public Vec3 getOrientation() {
-    return new Vec3(opensimModelSimulationJNI.ContactGeometry_getOrientation(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.ContactGeometry_getOrientation(swigCPtr, this), false);
   }
 
   public void setOrientation(Vec3 orientation) {
-    opensimModelSimulationJNI.ContactGeometry_setOrientation(swigCPtr, this, Vec3.getCPtr(orientation), orientation);
+    opensimSimulationJNI.ContactGeometry_setOrientation(swigCPtr, this, Vec3.getCPtr(orientation), orientation);
   }
 
   public PhysicalFrame getBody() {
-    return new PhysicalFrame(opensimModelSimulationJNI.ContactGeometry_getBody(swigCPtr, this), false);
+    return new PhysicalFrame(opensimSimulationJNI.ContactGeometry_getBody(swigCPtr, this), false);
   }
 
   public void setBody(PhysicalFrame body) {
-    opensimModelSimulationJNI.ContactGeometry_setBody(swigCPtr, this, PhysicalFrame.getCPtr(body), body);
+    opensimSimulationJNI.ContactGeometry_setBody(swigCPtr, this, PhysicalFrame.getCPtr(body), body);
   }
 
 }
