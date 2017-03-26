@@ -31,6 +31,7 @@ package org.opensim.view.motions;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Set;
+import org.opensim.view.pub.ViewDB;
 import vtk.vtkArrowSource;
 import vtk.vtkCubeSource;
 import vtk.vtkPolyData;
@@ -55,18 +56,19 @@ public class MotionObjectsDB {
    private MotionObjectsDB() {
       // default motion objects
       // ball
-      motionObjectsMap.put("ball", createBall());
-      // marker
-      motionObjectsMap.put("marker", createMarker());
-      // musclePoint
-      motionObjectsMap.put("musclepoint", createMusclePoint());
-      // force
-      motionObjectsMap.put("arrow", createArrow());
-      // another marker
-      motionObjectsMap.put("box", creatCube());
-      // reverse arrow
-      motionObjectsMap.put("arrow_in", createArrowIn());
-      
+      if (ViewDB.isVtkGraphicsAvailable()){
+        motionObjectsMap.put("ball", createBall());
+        // marker
+        motionObjectsMap.put("marker", createMarker());
+        // musclePoint
+        motionObjectsMap.put("musclepoint", createMusclePoint());
+        // force
+        motionObjectsMap.put("arrow", createArrow());
+        // another marker
+        motionObjectsMap.put("box", creatCube());
+        // reverse arrow
+        motionObjectsMap.put("arrow_in", createArrowIn());
+      }
    }
    
    public static synchronized MotionObjectsDB getInstance() {

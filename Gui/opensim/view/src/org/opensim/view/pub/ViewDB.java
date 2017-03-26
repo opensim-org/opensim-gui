@@ -1136,7 +1136,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     */
    public double[] getSceneBounds() {
       double[] sceneBounds = new double[6];
-      sceneAssembly.GetBounds(sceneBounds);
+      if (isVtkGraphicsAvailable())
+        sceneAssembly.GetBounds(sceneBounds);
+      else {
+          for (int i=0; i<3; i++){
+            sceneBounds[i*2] = -2;
+            sceneBounds[i*2+1] = 2;
+          }
+      }
       return sceneBounds;
    }
 
