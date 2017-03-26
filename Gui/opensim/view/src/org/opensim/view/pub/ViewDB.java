@@ -178,6 +178,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         // Parse saved to an int, use 0 (no debug) on failure
         if (saved.equalsIgnoreCase("Off")) saved="0";
         debugLevel = Integer.parseInt(saved);
+        GeometryFileLocator.updateGeometrySearchPathsFromPreferences();
     }
    
    /**
