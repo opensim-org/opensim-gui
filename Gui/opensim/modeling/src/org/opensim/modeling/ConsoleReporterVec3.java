@@ -12,7 +12,7 @@ public class ConsoleReporterVec3 extends ReporterVec3 {
   private transient long swigCPtr;
 
   public ConsoleReporterVec3(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.ConsoleReporterVec3_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.ConsoleReporterVec3_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ConsoleReporterVec3 extends ReporterVec3 {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_ConsoleReporterVec3(swigCPtr);
+        opensimCommonJNI.delete_ConsoleReporterVec3(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,29 +36,29 @@ public class ConsoleReporterVec3 extends ReporterVec3 {
   }
 
   public static ConsoleReporterVec3 safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelCommonJNI.ConsoleReporterVec3_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimCommonJNI.ConsoleReporterVec3_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ConsoleReporterVec3(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelCommonJNI.ConsoleReporterVec3_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimCommonJNI.ConsoleReporterVec3_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelCommonJNI.ConsoleReporterVec3_getClassName();
+    return opensimCommonJNI.ConsoleReporterVec3_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelCommonJNI.ConsoleReporterVec3_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.ConsoleReporterVec3_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ConsoleReporterVec3(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelCommonJNI.ConsoleReporterVec3_getConcreteClassName(swigCPtr, this);
+    return opensimCommonJNI.ConsoleReporterVec3_getConcreteClassName(swigCPtr, this);
   }
 
   public ConsoleReporterVec3() {
-    this(opensimModelCommonJNI.new_ConsoleReporterVec3(), true);
+    this(opensimCommonJNI.new_ConsoleReporterVec3(), true);
   }
 
 }

@@ -12,7 +12,7 @@ public class Cone extends AnalyticGeometry {
   private transient long swigCPtr;
 
   public Cone(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.Cone_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.Cone_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Cone extends AnalyticGeometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_Cone(swigCPtr);
+        opensimSimulationJNI.delete_Cone(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,177 +36,177 @@ public class Cone extends AnalyticGeometry {
   }
 
   public static Cone safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.Cone_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.Cone_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Cone(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.Cone_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.Cone_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.Cone_getClassName();
+    return opensimSimulationJNI.Cone_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.Cone_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.Cone_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Cone(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.Cone_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.Cone_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_origin(Cone source) {
-    opensimModelSimulationJNI.Cone_copyProperty_origin(swigCPtr, this, Cone.getCPtr(source), source);
+    opensimSimulationJNI.Cone_copyProperty_origin(swigCPtr, this, Cone.getCPtr(source), source);
   }
 
   public Vec3 get_origin(int i) {
-    return new Vec3(opensimModelSimulationJNI.Cone_get_origin__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimSimulationJNI.Cone_get_origin__SWIG_0(swigCPtr, this, i), false);
   }
 
   public Vec3 upd_origin(int i) {
-    return new Vec3(opensimModelSimulationJNI.Cone_upd_origin__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimSimulationJNI.Cone_upd_origin__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_origin(int i, Vec3 value) {
-    opensimModelSimulationJNI.Cone_set_origin__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+    opensimSimulationJNI.Cone_set_origin__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
   }
 
   public int append_origin(Vec3 value) {
-    return opensimModelSimulationJNI.Cone_append_origin(swigCPtr, this, Vec3.getCPtr(value), value);
+    return opensimSimulationJNI.Cone_append_origin(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void constructProperty_origin(Vec3 initValue) {
-    opensimModelSimulationJNI.Cone_constructProperty_origin(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+    opensimSimulationJNI.Cone_constructProperty_origin(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
   }
 
   public Vec3 get_origin() {
-    return new Vec3(opensimModelSimulationJNI.Cone_get_origin__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.Cone_get_origin__SWIG_1(swigCPtr, this), false);
   }
 
   public Vec3 upd_origin() {
-    return new Vec3(opensimModelSimulationJNI.Cone_upd_origin__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.Cone_upd_origin__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_origin(Vec3 value) {
-    opensimModelSimulationJNI.Cone_set_origin__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+    opensimSimulationJNI.Cone_set_origin__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void copyProperty_direction(Cone source) {
-    opensimModelSimulationJNI.Cone_copyProperty_direction(swigCPtr, this, Cone.getCPtr(source), source);
+    opensimSimulationJNI.Cone_copyProperty_direction(swigCPtr, this, Cone.getCPtr(source), source);
   }
 
   public Vec3 get_direction(int i) {
-    return new Vec3(opensimModelSimulationJNI.Cone_get_direction__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimSimulationJNI.Cone_get_direction__SWIG_0(swigCPtr, this, i), false);
   }
 
   public Vec3 upd_direction(int i) {
-    return new Vec3(opensimModelSimulationJNI.Cone_upd_direction__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimSimulationJNI.Cone_upd_direction__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_direction(int i, Vec3 value) {
-    opensimModelSimulationJNI.Cone_set_direction__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+    opensimSimulationJNI.Cone_set_direction__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
   }
 
   public int append_direction(Vec3 value) {
-    return opensimModelSimulationJNI.Cone_append_direction(swigCPtr, this, Vec3.getCPtr(value), value);
+    return opensimSimulationJNI.Cone_append_direction(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void constructProperty_direction(Vec3 initValue) {
-    opensimModelSimulationJNI.Cone_constructProperty_direction(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+    opensimSimulationJNI.Cone_constructProperty_direction(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
   }
 
   public Vec3 get_direction() {
-    return new Vec3(opensimModelSimulationJNI.Cone_get_direction__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.Cone_get_direction__SWIG_1(swigCPtr, this), false);
   }
 
   public Vec3 upd_direction() {
-    return new Vec3(opensimModelSimulationJNI.Cone_upd_direction__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.Cone_upd_direction__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_direction(Vec3 value) {
-    opensimModelSimulationJNI.Cone_set_direction__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+    opensimSimulationJNI.Cone_set_direction__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void copyProperty_base_radius(Cone source) {
-    opensimModelSimulationJNI.Cone_copyProperty_base_radius(swigCPtr, this, Cone.getCPtr(source), source);
+    opensimSimulationJNI.Cone_copyProperty_base_radius(swigCPtr, this, Cone.getCPtr(source), source);
   }
 
   public double get_base_radius(int i) {
-    return opensimModelSimulationJNI.Cone_get_base_radius__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Cone_get_base_radius__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_base_radius(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Cone_upd_base_radius__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.Cone_upd_base_radius__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_base_radius(int i, double value) {
-    opensimModelSimulationJNI.Cone_set_base_radius__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.Cone_set_base_radius__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_base_radius(double value) {
-    return opensimModelSimulationJNI.Cone_append_base_radius(swigCPtr, this, value);
+    return opensimSimulationJNI.Cone_append_base_radius(swigCPtr, this, value);
   }
 
   public void constructProperty_base_radius(double initValue) {
-    opensimModelSimulationJNI.Cone_constructProperty_base_radius(swigCPtr, this, initValue);
+    opensimSimulationJNI.Cone_constructProperty_base_radius(swigCPtr, this, initValue);
   }
 
   public double get_base_radius() {
-    return opensimModelSimulationJNI.Cone_get_base_radius__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Cone_get_base_radius__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_base_radius() {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Cone_upd_base_radius__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.Cone_upd_base_radius__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_base_radius(double value) {
-    opensimModelSimulationJNI.Cone_set_base_radius__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.Cone_set_base_radius__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_height(Cone source) {
-    opensimModelSimulationJNI.Cone_copyProperty_height(swigCPtr, this, Cone.getCPtr(source), source);
+    opensimSimulationJNI.Cone_copyProperty_height(swigCPtr, this, Cone.getCPtr(source), source);
   }
 
   public double get_height(int i) {
-    return opensimModelSimulationJNI.Cone_get_height__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Cone_get_height__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_height(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Cone_upd_height__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.Cone_upd_height__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_height(int i, double value) {
-    opensimModelSimulationJNI.Cone_set_height__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.Cone_set_height__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_height(double value) {
-    return opensimModelSimulationJNI.Cone_append_height(swigCPtr, this, value);
+    return opensimSimulationJNI.Cone_append_height(swigCPtr, this, value);
   }
 
   public void constructProperty_height(double initValue) {
-    opensimModelSimulationJNI.Cone_constructProperty_height(swigCPtr, this, initValue);
+    opensimSimulationJNI.Cone_constructProperty_height(swigCPtr, this, initValue);
   }
 
   public double get_height() {
-    return opensimModelSimulationJNI.Cone_get_height__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Cone_get_height__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_height() {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Cone_upd_height__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.Cone_upd_height__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_height(double value) {
-    opensimModelSimulationJNI.Cone_set_height__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.Cone_set_height__SWIG_1(swigCPtr, this, value);
   }
 
   public Cone() {
-    this(opensimModelSimulationJNI.new_Cone__SWIG_0(), true);
+    this(opensimSimulationJNI.new_Cone__SWIG_0(), true);
   }
 
   public Cone(Vec3 o, UnitVec3 dir, double height, double base) {
-    this(opensimModelSimulationJNI.new_Cone__SWIG_1(Vec3.getCPtr(o), o, UnitVec3.getCPtr(dir), dir, height, base), true);
+    this(opensimSimulationJNI.new_Cone__SWIG_1(Vec3.getCPtr(o), o, UnitVec3.getCPtr(dir), dir, height, base), true);
   }
 
 }

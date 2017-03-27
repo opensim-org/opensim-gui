@@ -12,7 +12,7 @@ public class PointActuator extends ScalarActuator {
   private transient long swigCPtr;
 
   public PointActuator(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.PointActuator_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.PointActuator_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class PointActuator extends ScalarActuator {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_PointActuator(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_PointActuator(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,261 +36,261 @@ public class PointActuator extends ScalarActuator {
   }
 
   public static PointActuator safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.PointActuator_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.PointActuator_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new PointActuator(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.PointActuator_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.PointActuator_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.PointActuator_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.PointActuator_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.PointActuator_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new PointActuator(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.PointActuator_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.PointActuator_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_body(PointActuator source) {
-    opensimModelJNI.PointActuator_copyProperty_body(swigCPtr, this, PointActuator.getCPtr(source), source);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_copyProperty_body(swigCPtr, this, PointActuator.getCPtr(source), source);
   }
 
   public String get_body(int i) {
-    return opensimModelJNI.PointActuator_get_body__SWIG_0(swigCPtr, this, i);
+    return opensimActuatorsAnalysesToolsJNI.PointActuator_get_body__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_std__string upd_body(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.PointActuator_upd_body__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_std__string(opensimActuatorsAnalysesToolsJNI.PointActuator_upd_body__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_body(int i, String value) {
-    opensimModelJNI.PointActuator_set_body__SWIG_0(swigCPtr, this, i, value);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_set_body__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_body(String value) {
-    return opensimModelJNI.PointActuator_append_body(swigCPtr, this, value);
+    return opensimActuatorsAnalysesToolsJNI.PointActuator_append_body(swigCPtr, this, value);
   }
 
   public void constructProperty_body() {
-    opensimModelJNI.PointActuator_constructProperty_body__SWIG_0(swigCPtr, this);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_constructProperty_body__SWIG_0(swigCPtr, this);
   }
 
   public void constructProperty_body(String initValue) {
-    opensimModelJNI.PointActuator_constructProperty_body__SWIG_1(swigCPtr, this, initValue);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_constructProperty_body__SWIG_1(swigCPtr, this, initValue);
   }
 
   public String get_body() {
-    return opensimModelJNI.PointActuator_get_body__SWIG_1(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.PointActuator_get_body__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_std__string upd_body() {
-    return new SWIGTYPE_p_std__string(opensimModelJNI.PointActuator_upd_body__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_std__string(opensimActuatorsAnalysesToolsJNI.PointActuator_upd_body__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_body(String value) {
-    opensimModelJNI.PointActuator_set_body__SWIG_1(swigCPtr, this, value);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_set_body__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_point(PointActuator source) {
-    opensimModelJNI.PointActuator_copyProperty_point(swigCPtr, this, PointActuator.getCPtr(source), source);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_copyProperty_point(swigCPtr, this, PointActuator.getCPtr(source), source);
   }
 
   public Vec3 get_point(int i) {
-    return new Vec3(opensimModelJNI.PointActuator_get_point__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimActuatorsAnalysesToolsJNI.PointActuator_get_point__SWIG_0(swigCPtr, this, i), false);
   }
 
   public Vec3 upd_point(int i) {
-    return new Vec3(opensimModelJNI.PointActuator_upd_point__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimActuatorsAnalysesToolsJNI.PointActuator_upd_point__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_point(int i, Vec3 value) {
-    opensimModelJNI.PointActuator_set_point__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_set_point__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
   }
 
   public int append_point(Vec3 value) {
-    return opensimModelJNI.PointActuator_append_point(swigCPtr, this, Vec3.getCPtr(value), value);
+    return opensimActuatorsAnalysesToolsJNI.PointActuator_append_point(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void constructProperty_point(Vec3 initValue) {
-    opensimModelJNI.PointActuator_constructProperty_point(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_constructProperty_point(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
   }
 
   public Vec3 get_point() {
-    return new Vec3(opensimModelJNI.PointActuator_get_point__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimActuatorsAnalysesToolsJNI.PointActuator_get_point__SWIG_1(swigCPtr, this), false);
   }
 
   public Vec3 upd_point() {
-    return new Vec3(opensimModelJNI.PointActuator_upd_point__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimActuatorsAnalysesToolsJNI.PointActuator_upd_point__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_point(Vec3 value) {
-    opensimModelJNI.PointActuator_set_point__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_set_point__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void copyProperty_point_is_global(PointActuator source) {
-    opensimModelJNI.PointActuator_copyProperty_point_is_global(swigCPtr, this, PointActuator.getCPtr(source), source);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_copyProperty_point_is_global(swigCPtr, this, PointActuator.getCPtr(source), source);
   }
 
   public boolean get_point_is_global(int i) {
-    return opensimModelJNI.PointActuator_get_point_is_global__SWIG_0(swigCPtr, this, i);
+    return opensimActuatorsAnalysesToolsJNI.PointActuator_get_point_is_global__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_bool upd_point_is_global(int i) {
-    return new SWIGTYPE_p_bool(opensimModelJNI.PointActuator_upd_point_is_global__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_bool(opensimActuatorsAnalysesToolsJNI.PointActuator_upd_point_is_global__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_point_is_global(int i, boolean value) {
-    opensimModelJNI.PointActuator_set_point_is_global__SWIG_0(swigCPtr, this, i, value);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_set_point_is_global__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_point_is_global(boolean value) {
-    return opensimModelJNI.PointActuator_append_point_is_global(swigCPtr, this, value);
+    return opensimActuatorsAnalysesToolsJNI.PointActuator_append_point_is_global(swigCPtr, this, value);
   }
 
   public void constructProperty_point_is_global(boolean initValue) {
-    opensimModelJNI.PointActuator_constructProperty_point_is_global(swigCPtr, this, initValue);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_constructProperty_point_is_global(swigCPtr, this, initValue);
   }
 
   public boolean get_point_is_global() {
-    return opensimModelJNI.PointActuator_get_point_is_global__SWIG_1(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.PointActuator_get_point_is_global__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_bool upd_point_is_global() {
-    return new SWIGTYPE_p_bool(opensimModelJNI.PointActuator_upd_point_is_global__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_bool(opensimActuatorsAnalysesToolsJNI.PointActuator_upd_point_is_global__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_point_is_global(boolean value) {
-    opensimModelJNI.PointActuator_set_point_is_global__SWIG_1(swigCPtr, this, value);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_set_point_is_global__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_direction(PointActuator source) {
-    opensimModelJNI.PointActuator_copyProperty_direction(swigCPtr, this, PointActuator.getCPtr(source), source);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_copyProperty_direction(swigCPtr, this, PointActuator.getCPtr(source), source);
   }
 
   public Vec3 get_direction(int i) {
-    return new Vec3(opensimModelJNI.PointActuator_get_direction__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimActuatorsAnalysesToolsJNI.PointActuator_get_direction__SWIG_0(swigCPtr, this, i), false);
   }
 
   public Vec3 upd_direction(int i) {
-    return new Vec3(opensimModelJNI.PointActuator_upd_direction__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimActuatorsAnalysesToolsJNI.PointActuator_upd_direction__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_direction(int i, Vec3 value) {
-    opensimModelJNI.PointActuator_set_direction__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_set_direction__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
   }
 
   public int append_direction(Vec3 value) {
-    return opensimModelJNI.PointActuator_append_direction(swigCPtr, this, Vec3.getCPtr(value), value);
+    return opensimActuatorsAnalysesToolsJNI.PointActuator_append_direction(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void constructProperty_direction(Vec3 initValue) {
-    opensimModelJNI.PointActuator_constructProperty_direction(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_constructProperty_direction(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
   }
 
   public Vec3 get_direction() {
-    return new Vec3(opensimModelJNI.PointActuator_get_direction__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimActuatorsAnalysesToolsJNI.PointActuator_get_direction__SWIG_1(swigCPtr, this), false);
   }
 
   public Vec3 upd_direction() {
-    return new Vec3(opensimModelJNI.PointActuator_upd_direction__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimActuatorsAnalysesToolsJNI.PointActuator_upd_direction__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_direction(Vec3 value) {
-    opensimModelJNI.PointActuator_set_direction__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_set_direction__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void copyProperty_force_is_global(PointActuator source) {
-    opensimModelJNI.PointActuator_copyProperty_force_is_global(swigCPtr, this, PointActuator.getCPtr(source), source);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_copyProperty_force_is_global(swigCPtr, this, PointActuator.getCPtr(source), source);
   }
 
   public boolean get_force_is_global(int i) {
-    return opensimModelJNI.PointActuator_get_force_is_global__SWIG_0(swigCPtr, this, i);
+    return opensimActuatorsAnalysesToolsJNI.PointActuator_get_force_is_global__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_bool upd_force_is_global(int i) {
-    return new SWIGTYPE_p_bool(opensimModelJNI.PointActuator_upd_force_is_global__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_bool(opensimActuatorsAnalysesToolsJNI.PointActuator_upd_force_is_global__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_force_is_global(int i, boolean value) {
-    opensimModelJNI.PointActuator_set_force_is_global__SWIG_0(swigCPtr, this, i, value);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_set_force_is_global__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_force_is_global(boolean value) {
-    return opensimModelJNI.PointActuator_append_force_is_global(swigCPtr, this, value);
+    return opensimActuatorsAnalysesToolsJNI.PointActuator_append_force_is_global(swigCPtr, this, value);
   }
 
   public void constructProperty_force_is_global(boolean initValue) {
-    opensimModelJNI.PointActuator_constructProperty_force_is_global(swigCPtr, this, initValue);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_constructProperty_force_is_global(swigCPtr, this, initValue);
   }
 
   public boolean get_force_is_global() {
-    return opensimModelJNI.PointActuator_get_force_is_global__SWIG_1(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.PointActuator_get_force_is_global__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_bool upd_force_is_global() {
-    return new SWIGTYPE_p_bool(opensimModelJNI.PointActuator_upd_force_is_global__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_bool(opensimActuatorsAnalysesToolsJNI.PointActuator_upd_force_is_global__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_force_is_global(boolean value) {
-    opensimModelJNI.PointActuator_set_force_is_global__SWIG_1(swigCPtr, this, value);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_set_force_is_global__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_optimal_force(PointActuator source) {
-    opensimModelJNI.PointActuator_copyProperty_optimal_force(swigCPtr, this, PointActuator.getCPtr(source), source);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_copyProperty_optimal_force(swigCPtr, this, PointActuator.getCPtr(source), source);
   }
 
   public double get_optimal_force(int i) {
-    return opensimModelJNI.PointActuator_get_optimal_force__SWIG_0(swigCPtr, this, i);
+    return opensimActuatorsAnalysesToolsJNI.PointActuator_get_optimal_force__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_optimal_force(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.PointActuator_upd_optimal_force__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimActuatorsAnalysesToolsJNI.PointActuator_upd_optimal_force__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_optimal_force(int i, double value) {
-    opensimModelJNI.PointActuator_set_optimal_force__SWIG_0(swigCPtr, this, i, value);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_set_optimal_force__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_optimal_force(double value) {
-    return opensimModelJNI.PointActuator_append_optimal_force(swigCPtr, this, value);
+    return opensimActuatorsAnalysesToolsJNI.PointActuator_append_optimal_force(swigCPtr, this, value);
   }
 
   public void constructProperty_optimal_force(double initValue) {
-    opensimModelJNI.PointActuator_constructProperty_optimal_force(swigCPtr, this, initValue);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_constructProperty_optimal_force(swigCPtr, this, initValue);
   }
 
   public double get_optimal_force() {
-    return opensimModelJNI.PointActuator_get_optimal_force__SWIG_1(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.PointActuator_get_optimal_force__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_optimal_force() {
-    return new SWIGTYPE_p_double(opensimModelJNI.PointActuator_upd_optimal_force__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimActuatorsAnalysesToolsJNI.PointActuator_upd_optimal_force__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_optimal_force(double value) {
-    opensimModelJNI.PointActuator_set_optimal_force__SWIG_1(swigCPtr, this, value);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_set_optimal_force__SWIG_1(swigCPtr, this, value);
   }
 
   public PointActuator(String bodyName) {
-    this(opensimModelJNI.new_PointActuator__SWIG_0(bodyName), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_PointActuator__SWIG_0(bodyName), true);
   }
 
   public PointActuator() {
-    this(opensimModelJNI.new_PointActuator__SWIG_1(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_PointActuator__SWIG_1(), true);
   }
 
   public void setOptimalForce(double aOptimalForce) {
-    opensimModelJNI.PointActuator_setOptimalForce(swigCPtr, this, aOptimalForce);
+    opensimActuatorsAnalysesToolsJNI.PointActuator_setOptimalForce(swigCPtr, this, aOptimalForce);
   }
 
   public double getOptimalForce() {
-    return opensimModelJNI.PointActuator_getOptimalForce(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.PointActuator_getOptimalForce(swigCPtr, this);
   }
 
 }

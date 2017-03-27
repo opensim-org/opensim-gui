@@ -12,7 +12,7 @@ public class IndexOutOfRange extends OpenSimException {
   private transient long swigCPtr;
 
   public IndexOutOfRange(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.IndexOutOfRange_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.IndexOutOfRange_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class IndexOutOfRange extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_IndexOutOfRange(swigCPtr);
+        opensimCommonJNI.delete_IndexOutOfRange(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class IndexOutOfRange extends OpenSimException {
   }
 
   public IndexOutOfRange(String file, long line, String func, long index, long min, long max) {
-    this(opensimModelCommonJNI.new_IndexOutOfRange(file, line, func, index, min, max), true);
+    this(opensimCommonJNI.new_IndexOutOfRange(file, line, func, index, min, max), true);
   }
 
 }

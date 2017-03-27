@@ -12,7 +12,7 @@ public class TableReporterVec3 extends ReporterVec3 {
   private transient long swigCPtr;
 
   public TableReporterVec3(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.TableReporterVec3_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.TableReporterVec3_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class TableReporterVec3 extends ReporterVec3 {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_TableReporterVec3(swigCPtr);
+        opensimCommonJNI.delete_TableReporterVec3(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,37 +36,37 @@ public class TableReporterVec3 extends ReporterVec3 {
   }
 
   public static TableReporterVec3 safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelCommonJNI.TableReporterVec3_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimCommonJNI.TableReporterVec3_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new TableReporterVec3(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelCommonJNI.TableReporterVec3_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimCommonJNI.TableReporterVec3_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelCommonJNI.TableReporterVec3_getClassName();
+    return opensimCommonJNI.TableReporterVec3_getClassName();
   }
 
   public TableReporterVec3 clone() {
-    long cPtr = opensimModelCommonJNI.TableReporterVec3_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.TableReporterVec3_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new TableReporterVec3(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelCommonJNI.TableReporterVec3_getConcreteClassName(swigCPtr, this);
+    return opensimCommonJNI.TableReporterVec3_getConcreteClassName(swigCPtr, this);
   }
 
   public TableReporterVec3() {
-    this(opensimModelCommonJNI.new_TableReporterVec3(), true);
+    this(opensimCommonJNI.new_TableReporterVec3(), true);
   }
 
   public TimeSeriesTableVec3 getTable() {
-    return new TimeSeriesTableVec3(opensimModelCommonJNI.TableReporterVec3_getTable(swigCPtr, this), true);
+    return new TimeSeriesTableVec3(opensimCommonJNI.TableReporterVec3_getTable(swigCPtr, this), true);
   }
 
   public void clearTable() {
-    opensimModelCommonJNI.TableReporterVec3_clearTable(swigCPtr, this);
+    opensimCommonJNI.TableReporterVec3_clearTable(swigCPtr, this);
   }
 
 }

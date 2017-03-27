@@ -12,7 +12,7 @@ public class StatesTrajectoryReporter extends AbstractReporter {
   private transient long swigCPtr;
 
   public StatesTrajectoryReporter(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.StatesTrajectoryReporter_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.StatesTrajectoryReporter_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class StatesTrajectoryReporter extends AbstractReporter {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_StatesTrajectoryReporter(swigCPtr);
+        opensimSimulationJNI.delete_StatesTrajectoryReporter(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,37 +36,37 @@ public class StatesTrajectoryReporter extends AbstractReporter {
   }
 
   public static StatesTrajectoryReporter safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.StatesTrajectoryReporter_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.StatesTrajectoryReporter_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new StatesTrajectoryReporter(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.StatesTrajectoryReporter_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.StatesTrajectoryReporter_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.StatesTrajectoryReporter_getClassName();
+    return opensimSimulationJNI.StatesTrajectoryReporter_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.StatesTrajectoryReporter_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.StatesTrajectoryReporter_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new StatesTrajectoryReporter(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.StatesTrajectoryReporter_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.StatesTrajectoryReporter_getConcreteClassName(swigCPtr, this);
   }
 
   public StatesTrajectory getStates() {
-    return new StatesTrajectory(opensimModelSimulationJNI.StatesTrajectoryReporter_getStates(swigCPtr, this), false);
+    return new StatesTrajectory(opensimSimulationJNI.StatesTrajectoryReporter_getStates(swigCPtr, this), false);
   }
 
   public void clear() {
-    opensimModelSimulationJNI.StatesTrajectoryReporter_clear(swigCPtr, this);
+    opensimSimulationJNI.StatesTrajectoryReporter_clear(swigCPtr, this);
   }
 
   public StatesTrajectoryReporter() {
-    this(opensimModelSimulationJNI.new_StatesTrajectoryReporter(), true);
+    this(opensimSimulationJNI.new_StatesTrajectoryReporter(), true);
   }
 
 }

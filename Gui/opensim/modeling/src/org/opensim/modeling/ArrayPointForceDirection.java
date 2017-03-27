@@ -29,113 +29,113 @@ public class ArrayPointForceDirection {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_ArrayPointForceDirection(swigCPtr);
+        opensimSimulationJNI.delete_ArrayPointForceDirection(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public ArrayPointForceDirection(PointForceDirection aDefaultValue, int aSize, int aCapacity) {
-    this(opensimModelSimulationJNI.new_ArrayPointForceDirection__SWIG_0(PointForceDirection.getCPtr(aDefaultValue), aDefaultValue, aSize, aCapacity), true);
+    this(opensimSimulationJNI.new_ArrayPointForceDirection__SWIG_0(PointForceDirection.getCPtr(aDefaultValue), aDefaultValue, aSize, aCapacity), true);
   }
 
   public ArrayPointForceDirection(PointForceDirection aDefaultValue, int aSize) {
-    this(opensimModelSimulationJNI.new_ArrayPointForceDirection__SWIG_1(PointForceDirection.getCPtr(aDefaultValue), aDefaultValue, aSize), true);
+    this(opensimSimulationJNI.new_ArrayPointForceDirection__SWIG_1(PointForceDirection.getCPtr(aDefaultValue), aDefaultValue, aSize), true);
   }
 
   public ArrayPointForceDirection(PointForceDirection aDefaultValue) {
-    this(opensimModelSimulationJNI.new_ArrayPointForceDirection__SWIG_2(PointForceDirection.getCPtr(aDefaultValue), aDefaultValue), true);
+    this(opensimSimulationJNI.new_ArrayPointForceDirection__SWIG_2(PointForceDirection.getCPtr(aDefaultValue), aDefaultValue), true);
   }
 
   public ArrayPointForceDirection() {
-    this(opensimModelSimulationJNI.new_ArrayPointForceDirection__SWIG_3(), true);
+    this(opensimSimulationJNI.new_ArrayPointForceDirection__SWIG_3(), true);
   }
 
   public ArrayPointForceDirection(ArrayPointForceDirection aArray) {
-    this(opensimModelSimulationJNI.new_ArrayPointForceDirection__SWIG_4(ArrayPointForceDirection.getCPtr(aArray), aArray), true);
+    this(opensimSimulationJNI.new_ArrayPointForceDirection__SWIG_4(ArrayPointForceDirection.getCPtr(aArray), aArray), true);
   }
 
   public boolean arrayEquals(ArrayPointForceDirection aArray) {
-    return opensimModelSimulationJNI.ArrayPointForceDirection_arrayEquals(swigCPtr, this, ArrayPointForceDirection.getCPtr(aArray), aArray);
+    return opensimSimulationJNI.ArrayPointForceDirection_arrayEquals(swigCPtr, this, ArrayPointForceDirection.getCPtr(aArray), aArray);
   }
 
   public void trim() {
-    opensimModelSimulationJNI.ArrayPointForceDirection_trim(swigCPtr, this);
+    opensimSimulationJNI.ArrayPointForceDirection_trim(swigCPtr, this);
   }
 
   public boolean setSize(int aSize) {
-    return opensimModelSimulationJNI.ArrayPointForceDirection_setSize(swigCPtr, this, aSize);
+    return opensimSimulationJNI.ArrayPointForceDirection_setSize(swigCPtr, this, aSize);
   }
 
   public int getSize() {
-    return opensimModelSimulationJNI.ArrayPointForceDirection_getSize(swigCPtr, this);
+    return opensimSimulationJNI.ArrayPointForceDirection_getSize(swigCPtr, this);
   }
 
   public int size() {
-    return opensimModelSimulationJNI.ArrayPointForceDirection_size(swigCPtr, this);
+    return opensimSimulationJNI.ArrayPointForceDirection_size(swigCPtr, this);
   }
 
   public int append(PointForceDirection aValue) {
-    return opensimModelSimulationJNI.ArrayPointForceDirection_append__SWIG_0(swigCPtr, this, PointForceDirection.getCPtr(aValue), aValue);
+    return opensimSimulationJNI.ArrayPointForceDirection_append__SWIG_0(swigCPtr, this, PointForceDirection.getCPtr(aValue), aValue);
   }
 
   public int append(ArrayPointForceDirection aArray) {
-    return opensimModelSimulationJNI.ArrayPointForceDirection_append__SWIG_1(swigCPtr, this, ArrayPointForceDirection.getCPtr(aArray), aArray);
+    return opensimSimulationJNI.ArrayPointForceDirection_append__SWIG_1(swigCPtr, this, ArrayPointForceDirection.getCPtr(aArray), aArray);
   }
 
   public int insert(int aIndex, PointForceDirection aValue) {
-    return opensimModelSimulationJNI.ArrayPointForceDirection_insert(swigCPtr, this, aIndex, PointForceDirection.getCPtr(aValue), aValue);
+    return opensimSimulationJNI.ArrayPointForceDirection_insert(swigCPtr, this, aIndex, PointForceDirection.getCPtr(aValue), aValue);
   }
 
   public int remove(int aIndex) {
-    return opensimModelSimulationJNI.ArrayPointForceDirection_remove(swigCPtr, this, aIndex);
+    return opensimSimulationJNI.ArrayPointForceDirection_remove(swigCPtr, this, aIndex);
   }
 
   public void set(int aIndex, PointForceDirection aValue) {
-    opensimModelSimulationJNI.ArrayPointForceDirection_set(swigCPtr, this, aIndex, PointForceDirection.getCPtr(aValue), aValue);
+    opensimSimulationJNI.ArrayPointForceDirection_set(swigCPtr, this, aIndex, PointForceDirection.getCPtr(aValue), aValue);
   }
 
   public PointForceDirection get(int aIndex) {
-    long cPtr = opensimModelSimulationJNI.ArrayPointForceDirection_get(swigCPtr, this, aIndex);
+    long cPtr = opensimSimulationJNI.ArrayPointForceDirection_get(swigCPtr, this, aIndex);
     return (cPtr == 0) ? null : new PointForceDirection(cPtr, false);
   }
 
   public PointForceDirection getitem(int index) {
-    long cPtr = opensimModelSimulationJNI.ArrayPointForceDirection_getitem(swigCPtr, this, index);
+    long cPtr = opensimSimulationJNI.ArrayPointForceDirection_getitem(swigCPtr, this, index);
     return (cPtr == 0) ? null : new PointForceDirection(cPtr, false);
   }
 
   public void setitem(int index, PointForceDirection val) {
-    opensimModelSimulationJNI.ArrayPointForceDirection_setitem(swigCPtr, this, index, PointForceDirection.getCPtr(val), val);
+    opensimSimulationJNI.ArrayPointForceDirection_setitem(swigCPtr, this, index, PointForceDirection.getCPtr(val), val);
   }
 
   public PointForceDirection getLast() {
-    long cPtr = opensimModelSimulationJNI.ArrayPointForceDirection_getLast(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.ArrayPointForceDirection_getLast(swigCPtr, this);
     return (cPtr == 0) ? null : new PointForceDirection(cPtr, false);
   }
 
   public int findIndex(PointForceDirection aValue) {
-    return opensimModelSimulationJNI.ArrayPointForceDirection_findIndex(swigCPtr, this, PointForceDirection.getCPtr(aValue), aValue);
+    return opensimSimulationJNI.ArrayPointForceDirection_findIndex(swigCPtr, this, PointForceDirection.getCPtr(aValue), aValue);
   }
 
   public int rfindIndex(PointForceDirection aValue) {
-    return opensimModelSimulationJNI.ArrayPointForceDirection_rfindIndex(swigCPtr, this, PointForceDirection.getCPtr(aValue), aValue);
+    return opensimSimulationJNI.ArrayPointForceDirection_rfindIndex(swigCPtr, this, PointForceDirection.getCPtr(aValue), aValue);
   }
 
   public int searchBinary(PointForceDirection aValue, boolean aFindFirst, int aLo, int aHi) {
-    return opensimModelSimulationJNI.ArrayPointForceDirection_searchBinary__SWIG_0(swigCPtr, this, PointForceDirection.getCPtr(aValue), aValue, aFindFirst, aLo, aHi);
+    return opensimSimulationJNI.ArrayPointForceDirection_searchBinary__SWIG_0(swigCPtr, this, PointForceDirection.getCPtr(aValue), aValue, aFindFirst, aLo, aHi);
   }
 
   public int searchBinary(PointForceDirection aValue, boolean aFindFirst, int aLo) {
-    return opensimModelSimulationJNI.ArrayPointForceDirection_searchBinary__SWIG_1(swigCPtr, this, PointForceDirection.getCPtr(aValue), aValue, aFindFirst, aLo);
+    return opensimSimulationJNI.ArrayPointForceDirection_searchBinary__SWIG_1(swigCPtr, this, PointForceDirection.getCPtr(aValue), aValue, aFindFirst, aLo);
   }
 
   public int searchBinary(PointForceDirection aValue, boolean aFindFirst) {
-    return opensimModelSimulationJNI.ArrayPointForceDirection_searchBinary__SWIG_2(swigCPtr, this, PointForceDirection.getCPtr(aValue), aValue, aFindFirst);
+    return opensimSimulationJNI.ArrayPointForceDirection_searchBinary__SWIG_2(swigCPtr, this, PointForceDirection.getCPtr(aValue), aValue, aFindFirst);
   }
 
   public int searchBinary(PointForceDirection aValue) {
-    return opensimModelSimulationJNI.ArrayPointForceDirection_searchBinary__SWIG_3(swigCPtr, this, PointForceDirection.getCPtr(aValue), aValue);
+    return opensimSimulationJNI.ArrayPointForceDirection_searchBinary__SWIG_3(swigCPtr, this, PointForceDirection.getCPtr(aValue), aValue);
   }
 
 }

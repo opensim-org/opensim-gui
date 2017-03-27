@@ -12,7 +12,7 @@ public class ProbeReporter extends Analysis {
   private transient long swigCPtr;
 
   public ProbeReporter(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ProbeReporter_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.ProbeReporter_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ProbeReporter extends Analysis {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ProbeReporter(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_ProbeReporter(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,85 +36,85 @@ public class ProbeReporter extends Analysis {
   }
 
   public static ProbeReporter safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ProbeReporter_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.ProbeReporter_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ProbeReporter(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.ProbeReporter_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.ProbeReporter_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.ProbeReporter_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.ProbeReporter_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.ProbeReporter_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.ProbeReporter_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ProbeReporter(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.ProbeReporter_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.ProbeReporter_getConcreteClassName(swigCPtr, this);
   }
 
   public ProbeReporter(Model aModel) {
-    this(opensimModelJNI.new_ProbeReporter__SWIG_0(Model.getCPtr(aModel), aModel), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_ProbeReporter__SWIG_0(Model.getCPtr(aModel), aModel), true);
   }
 
   public ProbeReporter() {
-    this(opensimModelJNI.new_ProbeReporter__SWIG_1(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_ProbeReporter__SWIG_1(), true);
   }
 
   public ProbeReporter(String aFileName) {
-    this(opensimModelJNI.new_ProbeReporter__SWIG_2(aFileName), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_ProbeReporter__SWIG_2(aFileName), true);
   }
 
   public ProbeReporter(ProbeReporter aObject) {
-    this(opensimModelJNI.new_ProbeReporter__SWIG_3(ProbeReporter.getCPtr(aObject), aObject), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_ProbeReporter__SWIG_3(ProbeReporter.getCPtr(aObject), aObject), true);
   }
 
   public Storage getProbeStorage() {
-    return new Storage(opensimModelJNI.ProbeReporter_getProbeStorage(swigCPtr, this), false);
+    return new Storage(opensimActuatorsAnalysesToolsJNI.ProbeReporter_getProbeStorage(swigCPtr, this), false);
   }
 
   public Storage updProbeStorage() {
-    return new Storage(opensimModelJNI.ProbeReporter_updProbeStorage(swigCPtr, this), false);
+    return new Storage(opensimActuatorsAnalysesToolsJNI.ProbeReporter_updProbeStorage(swigCPtr, this), false);
   }
 
   public void setModel(Model aModel) {
-    opensimModelJNI.ProbeReporter_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
+    opensimActuatorsAnalysesToolsJNI.ProbeReporter_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
   public int begin(State s) {
-    return opensimModelJNI.ProbeReporter_begin(swigCPtr, this, State.getCPtr(s), s);
+    return opensimActuatorsAnalysesToolsJNI.ProbeReporter_begin(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public int step(State s, int setNumber) {
-    return opensimModelJNI.ProbeReporter_step(swigCPtr, this, State.getCPtr(s), s, setNumber);
+    return opensimActuatorsAnalysesToolsJNI.ProbeReporter_step(swigCPtr, this, State.getCPtr(s), s, setNumber);
   }
 
   public int end(State s) {
-    return opensimModelJNI.ProbeReporter_end(swigCPtr, this, State.getCPtr(s), s);
+    return opensimActuatorsAnalysesToolsJNI.ProbeReporter_end(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void disableIntegrationOnlyProbes() {
-    opensimModelJNI.ProbeReporter_disableIntegrationOnlyProbes(swigCPtr, this);
+    opensimActuatorsAnalysesToolsJNI.ProbeReporter_disableIntegrationOnlyProbes(swigCPtr, this);
   }
 
   public int printResults(String aBaseName, String aDir, double aDT, String aExtension) {
-    return opensimModelJNI.ProbeReporter_printResults__SWIG_0(swigCPtr, this, aBaseName, aDir, aDT, aExtension);
+    return opensimActuatorsAnalysesToolsJNI.ProbeReporter_printResults__SWIG_0(swigCPtr, this, aBaseName, aDir, aDT, aExtension);
   }
 
   public int printResults(String aBaseName, String aDir, double aDT) {
-    return opensimModelJNI.ProbeReporter_printResults__SWIG_1(swigCPtr, this, aBaseName, aDir, aDT);
+    return opensimActuatorsAnalysesToolsJNI.ProbeReporter_printResults__SWIG_1(swigCPtr, this, aBaseName, aDir, aDT);
   }
 
   public int printResults(String aBaseName, String aDir) {
-    return opensimModelJNI.ProbeReporter_printResults__SWIG_2(swigCPtr, this, aBaseName, aDir);
+    return opensimActuatorsAnalysesToolsJNI.ProbeReporter_printResults__SWIG_2(swigCPtr, this, aBaseName, aDir);
   }
 
   public int printResults(String aBaseName) {
-    return opensimModelJNI.ProbeReporter_printResults__SWIG_3(swigCPtr, this, aBaseName);
+    return opensimActuatorsAnalysesToolsJNI.ProbeReporter_printResults__SWIG_3(swigCPtr, this, aBaseName);
   }
 
 }

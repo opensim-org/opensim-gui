@@ -29,38 +29,38 @@ public class JointList {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_JointList(swigCPtr);
+        opensimSimulationJNI.delete_JointList(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public JointList(Component root, ComponentFilter f) {
-    this(opensimModelSimulationJNI.new_JointList__SWIG_0(Component.getCPtr(root), root, ComponentFilter.getCPtr(f), f), true);
+    this(opensimSimulationJNI.new_JointList__SWIG_0(Component.getCPtr(root), root, ComponentFilter.getCPtr(f), f), true);
   }
 
   public JointList(Component root) {
-    this(opensimModelSimulationJNI.new_JointList__SWIG_1(Component.getCPtr(root), root), true);
+    this(opensimSimulationJNI.new_JointList__SWIG_1(Component.getCPtr(root), root), true);
   }
 
   public JointIterator begin() {
-    return new JointIterator(opensimModelSimulationJNI.JointList_begin__SWIG_0(swigCPtr, this), true);
+    return new JointIterator(opensimSimulationJNI.JointList_begin__SWIG_0(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Joint_const_t__type_t cbegin() {
-    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Joint_const_t__type_t(opensimModelSimulationJNI.JointList_cbegin(swigCPtr, this), true);
+    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Joint_const_t__type_t(opensimSimulationJNI.JointList_cbegin(swigCPtr, this), true);
   }
 
   public JointIterator end() {
-    return new JointIterator(opensimModelSimulationJNI.JointList_end__SWIG_0(swigCPtr, this), true);
+    return new JointIterator(opensimSimulationJNI.JointList_end__SWIG_0(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Joint_const_t__type_t cend() {
-    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Joint_const_t__type_t(opensimModelSimulationJNI.JointList_cend(swigCPtr, this), true);
+    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Joint_const_t__type_t(opensimSimulationJNI.JointList_cend(swigCPtr, this), true);
   }
 
   public void setFilter(ComponentFilter filter) {
-    opensimModelSimulationJNI.JointList_setFilter(swigCPtr, this, ComponentFilter.getCPtr(filter), filter);
+    opensimSimulationJNI.JointList_setFilter(swigCPtr, this, ComponentFilter.getCPtr(filter), filter);
   }
 
 }

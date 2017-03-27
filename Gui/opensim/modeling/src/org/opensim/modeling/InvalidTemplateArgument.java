@@ -12,7 +12,7 @@ public class InvalidTemplateArgument extends OpenSimException {
   private transient long swigCPtr;
 
   public InvalidTemplateArgument(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.InvalidTemplateArgument_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.InvalidTemplateArgument_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class InvalidTemplateArgument extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_InvalidTemplateArgument(swigCPtr);
+        opensimCommonJNI.delete_InvalidTemplateArgument(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class InvalidTemplateArgument extends OpenSimException {
   }
 
   public InvalidTemplateArgument(String file, long line, String func, String msg) {
-    this(opensimModelCommonJNI.new_InvalidTemplateArgument(file, line, func, msg), true);
+    this(opensimCommonJNI.new_InvalidTemplateArgument(file, line, func, msg), true);
   }
 
 }

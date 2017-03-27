@@ -12,7 +12,7 @@ public class IKTask extends OpenSimObject {
   private transient long swigCPtr;
 
   public IKTask(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.IKTask_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.IKTask_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class IKTask extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_IKTask(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_IKTask(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,41 +36,41 @@ public class IKTask extends OpenSimObject {
   }
 
   public static IKTask safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.IKTask_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.IKTask_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new IKTask(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.IKTask_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.IKTask_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.IKTask_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.IKTask_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.IKTask_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.IKTask_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new IKTask(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.IKTask_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.IKTask_getConcreteClassName(swigCPtr, this);
   }
 
   public boolean getApply() {
-    return opensimModelJNI.IKTask_getApply(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.IKTask_getApply(swigCPtr, this);
   }
 
   public void setApply(boolean aApply) {
-    opensimModelJNI.IKTask_setApply(swigCPtr, this, aApply);
+    opensimActuatorsAnalysesToolsJNI.IKTask_setApply(swigCPtr, this, aApply);
   }
 
   public double getWeight() {
-    return opensimModelJNI.IKTask_getWeight(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.IKTask_getWeight(swigCPtr, this);
   }
 
   public void setWeight(double weight) {
-    opensimModelJNI.IKTask_setWeight(swigCPtr, this, weight);
+    opensimActuatorsAnalysesToolsJNI.IKTask_setWeight(swigCPtr, this, weight);
   }
 
 }

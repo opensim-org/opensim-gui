@@ -12,7 +12,7 @@ public class ModelComponentSetExternalForces extends SetExternalForces {
   private transient long swigCPtr;
 
   public ModelComponentSetExternalForces(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.ModelComponentSetExternalForces_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.ModelComponentSetExternalForces_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ModelComponentSetExternalForces extends SetExternalForces {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_ModelComponentSetExternalForces(swigCPtr);
+        opensimSimulationJNI.delete_ModelComponentSetExternalForces(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,89 +36,89 @@ public class ModelComponentSetExternalForces extends SetExternalForces {
   }
 
   public static ModelComponentSetExternalForces safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.ModelComponentSetExternalForces_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.ModelComponentSetExternalForces_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ModelComponentSetExternalForces(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.ModelComponentSetExternalForces_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.ModelComponentSetExternalForces_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.ModelComponentSetExternalForces_getClassName();
+    return opensimSimulationJNI.ModelComponentSetExternalForces_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.ModelComponentSetExternalForces_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.ModelComponentSetExternalForces_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ModelComponentSetExternalForces(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.ModelComponentSetExternalForces_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.ModelComponentSetExternalForces_getConcreteClassName(swigCPtr, this);
   }
 
   public ModelComponentSetExternalForces() {
-    this(opensimModelSimulationJNI.new_ModelComponentSetExternalForces__SWIG_0(), true);
+    this(opensimSimulationJNI.new_ModelComponentSetExternalForces__SWIG_0(), true);
   }
 
   public ModelComponentSetExternalForces(Model model) {
-    this(opensimModelSimulationJNI.new_ModelComponentSetExternalForces__SWIG_1(Model.getCPtr(model), model), true);
+    this(opensimSimulationJNI.new_ModelComponentSetExternalForces__SWIG_1(Model.getCPtr(model), model), true);
   }
 
   public ModelComponentSetExternalForces(Model model, String fileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelSimulationJNI.new_ModelComponentSetExternalForces__SWIG_2(Model.getCPtr(model), model, fileName, aUpdateFromXMLNode), true);
+    this(opensimSimulationJNI.new_ModelComponentSetExternalForces__SWIG_2(Model.getCPtr(model), model, fileName, aUpdateFromXMLNode), true);
   }
 
   public ModelComponentSetExternalForces(Model model, String fileName) {
-    this(opensimModelSimulationJNI.new_ModelComponentSetExternalForces__SWIG_3(Model.getCPtr(model), model, fileName), true);
+    this(opensimSimulationJNI.new_ModelComponentSetExternalForces__SWIG_3(Model.getCPtr(model), model, fileName), true);
   }
 
   public ModelComponentSetExternalForces(ModelComponentSetExternalForces source) {
-    this(opensimModelSimulationJNI.new_ModelComponentSetExternalForces__SWIG_4(ModelComponentSetExternalForces.getCPtr(source), source), true);
+    this(opensimSimulationJNI.new_ModelComponentSetExternalForces__SWIG_4(ModelComponentSetExternalForces.getCPtr(source), source), true);
   }
 
   public boolean hasModel() {
-    return opensimModelSimulationJNI.ModelComponentSetExternalForces_hasModel(swigCPtr, this);
+    return opensimSimulationJNI.ModelComponentSetExternalForces_hasModel(swigCPtr, this);
   }
 
   public Model getModel() {
-    return new Model(opensimModelSimulationJNI.ModelComponentSetExternalForces_getModel(swigCPtr, this), false);
+    return new Model(opensimSimulationJNI.ModelComponentSetExternalForces_getModel(swigCPtr, this), false);
   }
 
   public Model updModel() {
-    return new Model(opensimModelSimulationJNI.ModelComponentSetExternalForces_updModel(swigCPtr, this), false);
+    return new Model(opensimSimulationJNI.ModelComponentSetExternalForces_updModel(swigCPtr, this), false);
   }
 
   public void setModel(Model model) {
-    opensimModelSimulationJNI.ModelComponentSetExternalForces_setModel(swigCPtr, this, Model.getCPtr(model), model);
+    opensimSimulationJNI.ModelComponentSetExternalForces_setModel(swigCPtr, this, Model.getCPtr(model), model);
   }
 
   public boolean insert(int aIndex, ExternalForce aObject) {
-    return opensimModelSimulationJNI.ModelComponentSetExternalForces_insert(swigCPtr, this, aIndex, ExternalForce.getCPtr(aObject), aObject);
+    return opensimSimulationJNI.ModelComponentSetExternalForces_insert(swigCPtr, this, aIndex, ExternalForce.getCPtr(aObject), aObject);
   }
 
   public boolean set(int aIndex, ExternalForce aObject, boolean preserveGroups) {
-    return opensimModelSimulationJNI.ModelComponentSetExternalForces_set__SWIG_0(swigCPtr, this, aIndex, ExternalForce.getCPtr(aObject), aObject, preserveGroups);
+    return opensimSimulationJNI.ModelComponentSetExternalForces_set__SWIG_0(swigCPtr, this, aIndex, ExternalForce.getCPtr(aObject), aObject, preserveGroups);
   }
 
   public boolean set(int aIndex, ExternalForce aObject) {
-    return opensimModelSimulationJNI.ModelComponentSetExternalForces_set__SWIG_1(swigCPtr, this, aIndex, ExternalForce.getCPtr(aObject), aObject);
+    return opensimSimulationJNI.ModelComponentSetExternalForces_set__SWIG_1(swigCPtr, this, aIndex, ExternalForce.getCPtr(aObject), aObject);
   }
 
   public void invokeConnectToModel(Model model) {
-    opensimModelSimulationJNI.ModelComponentSetExternalForces_invokeConnectToModel(swigCPtr, this, Model.getCPtr(model), model);
+    opensimSimulationJNI.ModelComponentSetExternalForces_invokeConnectToModel(swigCPtr, this, Model.getCPtr(model), model);
   }
 
   public void invokeInitStateFromProperties(State state) {
-    opensimModelSimulationJNI.ModelComponentSetExternalForces_invokeInitStateFromProperties(swigCPtr, this, State.getCPtr(state), state);
+    opensimSimulationJNI.ModelComponentSetExternalForces_invokeInitStateFromProperties(swigCPtr, this, State.getCPtr(state), state);
   }
 
   public void invokeSetPropertiesFromState(State state) {
-    opensimModelSimulationJNI.ModelComponentSetExternalForces_invokeSetPropertiesFromState(swigCPtr, this, State.getCPtr(state), state);
+    opensimSimulationJNI.ModelComponentSetExternalForces_invokeSetPropertiesFromState(swigCPtr, this, State.getCPtr(state), state);
   }
 
   public void invokeGenerateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
-    opensimModelSimulationJNI.ModelComponentSetExternalForces_invokeGenerateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
+    opensimSimulationJNI.ModelComponentSetExternalForces_invokeGenerateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
   }
 
 }

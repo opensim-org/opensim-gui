@@ -12,7 +12,7 @@ public class ContactSphere extends ContactGeometry {
   private transient long swigCPtr;
 
   public ContactSphere(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.ContactSphere_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.ContactSphere_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ContactSphere extends ContactGeometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_ContactSphere(swigCPtr);
+        opensimSimulationJNI.delete_ContactSphere(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,53 +36,53 @@ public class ContactSphere extends ContactGeometry {
   }
 
   public static ContactSphere safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.ContactSphere_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.ContactSphere_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ContactSphere(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.ContactSphere_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.ContactSphere_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.ContactSphere_getClassName();
+    return opensimSimulationJNI.ContactSphere_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.ContactSphere_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.ContactSphere_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ContactSphere(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.ContactSphere_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.ContactSphere_getConcreteClassName(swigCPtr, this);
   }
 
   public ContactSphere() {
-    this(opensimModelSimulationJNI.new_ContactSphere__SWIG_0(), true);
+    this(opensimSimulationJNI.new_ContactSphere__SWIG_0(), true);
   }
 
   public ContactSphere(double radius, Vec3 location, PhysicalFrame frame) {
-    this(opensimModelSimulationJNI.new_ContactSphere__SWIG_1(radius, Vec3.getCPtr(location), location, PhysicalFrame.getCPtr(frame), frame), true);
+    this(opensimSimulationJNI.new_ContactSphere__SWIG_1(radius, Vec3.getCPtr(location), location, PhysicalFrame.getCPtr(frame), frame), true);
   }
 
   public ContactSphere(double radius, Vec3 location, PhysicalFrame frame, String name) {
-    this(opensimModelSimulationJNI.new_ContactSphere__SWIG_2(radius, Vec3.getCPtr(location), location, PhysicalFrame.getCPtr(frame), frame, name), true);
+    this(opensimSimulationJNI.new_ContactSphere__SWIG_2(radius, Vec3.getCPtr(location), location, PhysicalFrame.getCPtr(frame), frame, name), true);
   }
 
   public SWIGTYPE_p_SimTK__ContactGeometry createSimTKContactGeometry() {
-    return new SWIGTYPE_p_SimTK__ContactGeometry(opensimModelSimulationJNI.ContactSphere_createSimTKContactGeometry(swigCPtr, this), true);
+    return new SWIGTYPE_p_SimTK__ContactGeometry(opensimSimulationJNI.ContactSphere_createSimTKContactGeometry(swigCPtr, this), true);
   }
 
   public double getRadius() {
-    return opensimModelSimulationJNI.ContactSphere_getRadius(swigCPtr, this);
+    return opensimSimulationJNI.ContactSphere_getRadius(swigCPtr, this);
   }
 
   public void setRadius(double radius) {
-    opensimModelSimulationJNI.ContactSphere_setRadius(swigCPtr, this, radius);
+    opensimSimulationJNI.ContactSphere_setRadius(swigCPtr, this, radius);
   }
 
   public void generateDecorations(boolean fixed, ModelDisplayHints hints, State s, ArrayDecorativeGeometry geometry) {
-    opensimModelSimulationJNI.ContactSphere_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(s), s, ArrayDecorativeGeometry.getCPtr(geometry), geometry);
+    opensimSimulationJNI.ContactSphere_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(s), s, ArrayDecorativeGeometry.getCPtr(geometry), geometry);
   }
 
 }

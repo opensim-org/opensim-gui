@@ -12,7 +12,7 @@ public class MarkerPlacer extends OpenSimObject {
   private transient long swigCPtr;
 
   public MarkerPlacer(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.MarkerPlacer_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.MarkerPlacer_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class MarkerPlacer extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_MarkerPlacer(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_MarkerPlacer(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,129 +36,129 @@ public class MarkerPlacer extends OpenSimObject {
   }
 
   public static MarkerPlacer safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.MarkerPlacer_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MarkerPlacer_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new MarkerPlacer(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.MarkerPlacer_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.MarkerPlacer_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.MarkerPlacer_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.MarkerPlacer_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.MarkerPlacer_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MarkerPlacer_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new MarkerPlacer(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.MarkerPlacer_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.MarkerPlacer_getConcreteClassName(swigCPtr, this);
   }
 
   public MarkerPlacer() {
-    this(opensimModelJNI.new_MarkerPlacer__SWIG_0(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_MarkerPlacer__SWIG_0(), true);
   }
 
   public MarkerPlacer(MarkerPlacer aMarkerPlacementParams) {
-    this(opensimModelJNI.new_MarkerPlacer__SWIG_1(MarkerPlacer.getCPtr(aMarkerPlacementParams), aMarkerPlacementParams), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_MarkerPlacer__SWIG_1(MarkerPlacer.getCPtr(aMarkerPlacementParams), aMarkerPlacementParams), true);
   }
 
   public void copyData(MarkerPlacer aMarkerPlacementParams) {
-    opensimModelJNI.MarkerPlacer_copyData(swigCPtr, this, MarkerPlacer.getCPtr(aMarkerPlacementParams), aMarkerPlacementParams);
+    opensimActuatorsAnalysesToolsJNI.MarkerPlacer_copyData(swigCPtr, this, MarkerPlacer.getCPtr(aMarkerPlacementParams), aMarkerPlacementParams);
   }
 
   public boolean processModel(Model aModel, String aPathToSubject) {
-    return opensimModelJNI.MarkerPlacer_processModel__SWIG_0(swigCPtr, this, Model.getCPtr(aModel), aModel, aPathToSubject);
+    return opensimActuatorsAnalysesToolsJNI.MarkerPlacer_processModel__SWIG_0(swigCPtr, this, Model.getCPtr(aModel), aModel, aPathToSubject);
   }
 
   public boolean processModel(Model aModel) {
-    return opensimModelJNI.MarkerPlacer_processModel__SWIG_1(swigCPtr, this, Model.getCPtr(aModel), aModel);
+    return opensimActuatorsAnalysesToolsJNI.MarkerPlacer_processModel__SWIG_1(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
   public boolean getApply() {
-    return opensimModelJNI.MarkerPlacer_getApply(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.MarkerPlacer_getApply(swigCPtr, this);
   }
 
   public void setApply(boolean aApply) {
-    opensimModelJNI.MarkerPlacer_setApply(swigCPtr, this, aApply);
+    opensimActuatorsAnalysesToolsJNI.MarkerPlacer_setApply(swigCPtr, this, aApply);
   }
 
   public String getStaticPoseFileName() {
-    return opensimModelJNI.MarkerPlacer_getStaticPoseFileName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.MarkerPlacer_getStaticPoseFileName(swigCPtr, this);
   }
 
   public void setStaticPoseFileName(String aFileName) {
-    opensimModelJNI.MarkerPlacer_setStaticPoseFileName(swigCPtr, this, aFileName);
+    opensimActuatorsAnalysesToolsJNI.MarkerPlacer_setStaticPoseFileName(swigCPtr, this, aFileName);
   }
 
   public ArrayDouble getTimeRange() {
-    return new ArrayDouble(opensimModelJNI.MarkerPlacer_getTimeRange(swigCPtr, this), false);
+    return new ArrayDouble(opensimActuatorsAnalysesToolsJNI.MarkerPlacer_getTimeRange(swigCPtr, this), false);
   }
 
   public void setTimeRange(ArrayDouble timeRange) {
-    opensimModelJNI.MarkerPlacer_setTimeRange(swigCPtr, this, ArrayDouble.getCPtr(timeRange), timeRange);
+    opensimActuatorsAnalysesToolsJNI.MarkerPlacer_setTimeRange(swigCPtr, this, ArrayDouble.getCPtr(timeRange), timeRange);
   }
 
   public IKTaskSet getIKTaskSet() {
-    return new IKTaskSet(opensimModelJNI.MarkerPlacer_getIKTaskSet(swigCPtr, this), false);
+    return new IKTaskSet(opensimActuatorsAnalysesToolsJNI.MarkerPlacer_getIKTaskSet(swigCPtr, this), false);
   }
 
   public String getCoordinateFileName() {
-    return opensimModelJNI.MarkerPlacer_getCoordinateFileName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.MarkerPlacer_getCoordinateFileName(swigCPtr, this);
   }
 
   public void setCoordinateFileName(String aCoordinateFileName) {
-    opensimModelJNI.MarkerPlacer_setCoordinateFileName(swigCPtr, this, aCoordinateFileName);
+    opensimActuatorsAnalysesToolsJNI.MarkerPlacer_setCoordinateFileName(swigCPtr, this, aCoordinateFileName);
   }
 
   public double getMaxMarkerMovement() {
-    return opensimModelJNI.MarkerPlacer_getMaxMarkerMovement(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.MarkerPlacer_getMaxMarkerMovement(swigCPtr, this);
   }
 
   public void setMaxMarkerMovement(double aMaxMarkerMovement) {
-    opensimModelJNI.MarkerPlacer_setMaxMarkerMovement(swigCPtr, this, aMaxMarkerMovement);
+    opensimActuatorsAnalysesToolsJNI.MarkerPlacer_setMaxMarkerMovement(swigCPtr, this, aMaxMarkerMovement);
   }
 
   public String getOutputModelFileName() {
-    return opensimModelJNI.MarkerPlacer_getOutputModelFileName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.MarkerPlacer_getOutputModelFileName(swigCPtr, this);
   }
 
   public void setOutputModelFileName(String aOutputModelFileName) {
-    opensimModelJNI.MarkerPlacer_setOutputModelFileName(swigCPtr, this, aOutputModelFileName);
+    opensimActuatorsAnalysesToolsJNI.MarkerPlacer_setOutputModelFileName(swigCPtr, this, aOutputModelFileName);
   }
 
   public String getOutputMarkerFileName() {
-    return opensimModelJNI.MarkerPlacer_getOutputMarkerFileName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.MarkerPlacer_getOutputMarkerFileName(swigCPtr, this);
   }
 
   public void setOutputMarkerFileName(String outputMarkerFileName) {
-    opensimModelJNI.MarkerPlacer_setOutputMarkerFileName(swigCPtr, this, outputMarkerFileName);
+    opensimActuatorsAnalysesToolsJNI.MarkerPlacer_setOutputMarkerFileName(swigCPtr, this, outputMarkerFileName);
   }
 
   public String getOutputMotionFileName() {
-    return opensimModelJNI.MarkerPlacer_getOutputMotionFileName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.MarkerPlacer_getOutputMotionFileName(swigCPtr, this);
   }
 
   public void setOutputMotionFileName(String outputMotionFileName) {
-    opensimModelJNI.MarkerPlacer_setOutputMotionFileName(swigCPtr, this, outputMotionFileName);
+    opensimActuatorsAnalysesToolsJNI.MarkerPlacer_setOutputMotionFileName(swigCPtr, this, outputMotionFileName);
   }
 
   public void setPrintResultFiles(boolean aToWrite) {
-    opensimModelJNI.MarkerPlacer_setPrintResultFiles(swigCPtr, this, aToWrite);
+    opensimActuatorsAnalysesToolsJNI.MarkerPlacer_setPrintResultFiles(swigCPtr, this, aToWrite);
   }
 
   public boolean getMoveModelMarkers() {
-    return opensimModelJNI.MarkerPlacer_getMoveModelMarkers(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.MarkerPlacer_getMoveModelMarkers(swigCPtr, this);
   }
 
   public void setMoveModelMarkers(boolean aMove) {
-    opensimModelJNI.MarkerPlacer_setMoveModelMarkers(swigCPtr, this, aMove);
+    opensimActuatorsAnalysesToolsJNI.MarkerPlacer_setMoveModelMarkers(swigCPtr, this, aMove);
   }
 
   public Storage getOutputStorage() {
-    long cPtr = opensimModelJNI.MarkerPlacer_getOutputStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MarkerPlacer_getOutputStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 

@@ -29,126 +29,126 @@ public class IO {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_IO(swigCPtr);
+        opensimCommonJNI.delete_IO(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public static String ConstructDateAndTimeStamp() {
-    return opensimModelCommonJNI.IO_ConstructDateAndTimeStamp();
+    return opensimCommonJNI.IO_ConstructDateAndTimeStamp();
   }
 
   public static String FixSlashesInFilePath(String path) {
-    return opensimModelCommonJNI.IO_FixSlashesInFilePath(path);
+    return opensimCommonJNI.IO_FixSlashesInFilePath(path);
   }
 
   public static void SetScientific(boolean aTrueFalse) {
-    opensimModelCommonJNI.IO_SetScientific(aTrueFalse);
+    opensimCommonJNI.IO_SetScientific(aTrueFalse);
   }
 
   public static boolean GetScientific() {
-    return opensimModelCommonJNI.IO_GetScientific();
+    return opensimCommonJNI.IO_GetScientific();
   }
 
   public static void SetGFormatForDoubleOutput(boolean aTrueFalse) {
-    opensimModelCommonJNI.IO_SetGFormatForDoubleOutput(aTrueFalse);
+    opensimCommonJNI.IO_SetGFormatForDoubleOutput(aTrueFalse);
   }
 
   public static boolean GetGFormatForDoubleOutput() {
-    return opensimModelCommonJNI.IO_GetGFormatForDoubleOutput();
+    return opensimCommonJNI.IO_GetGFormatForDoubleOutput();
   }
 
   public static void SetDigitsPad(int aPad) {
-    opensimModelCommonJNI.IO_SetDigitsPad(aPad);
+    opensimCommonJNI.IO_SetDigitsPad(aPad);
   }
 
   public static int GetDigitsPad() {
-    return opensimModelCommonJNI.IO_GetDigitsPad();
+    return opensimCommonJNI.IO_GetDigitsPad();
   }
 
   public static void SetPrecision(int aPlaces) {
-    opensimModelCommonJNI.IO_SetPrecision(aPlaces);
+    opensimCommonJNI.IO_SetPrecision(aPlaces);
   }
 
   public static int GetPrecision() {
-    return opensimModelCommonJNI.IO_GetPrecision();
+    return opensimCommonJNI.IO_GetPrecision();
   }
 
   public static String GetDoubleOutputFormat() {
-    return opensimModelCommonJNI.IO_GetDoubleOutputFormat();
+    return opensimCommonJNI.IO_GetDoubleOutputFormat();
   }
 
   public static void SetPrintOfflineDocuments(boolean aTrueFalse) {
-    opensimModelCommonJNI.IO_SetPrintOfflineDocuments(aTrueFalse);
+    opensimCommonJNI.IO_SetPrintOfflineDocuments(aTrueFalse);
   }
 
   public static boolean GetPrintOfflineDocuments() {
-    return opensimModelCommonJNI.IO_GetPrintOfflineDocuments();
+    return opensimCommonJNI.IO_GetPrintOfflineDocuments();
   }
 
   public static int makeDir(String aDirName) {
-    return opensimModelCommonJNI.IO_makeDir(aDirName);
+    return opensimCommonJNI.IO_makeDir(aDirName);
   }
 
   public static int chDir(String aDirName) {
-    return opensimModelCommonJNI.IO_chDir(aDirName);
+    return opensimCommonJNI.IO_chDir(aDirName);
   }
 
   public static String getCwd() {
-    return opensimModelCommonJNI.IO_getCwd();
+    return opensimCommonJNI.IO_getCwd();
   }
 
   public static String getParentDirectory(String fileName) {
-    return opensimModelCommonJNI.IO_getParentDirectory(fileName);
+    return opensimCommonJNI.IO_getParentDirectory(fileName);
   }
 
   public static String GetFileNameFromURI(String aURI) {
-    return opensimModelCommonJNI.IO_GetFileNameFromURI(aURI);
+    return opensimCommonJNI.IO_GetFileNameFromURI(aURI);
   }
 
   public static String formatText(String aComment, String leadingWhitespace, int width, String endlineTokenToInsert) {
-    return opensimModelCommonJNI.IO_formatText__SWIG_0(aComment, leadingWhitespace, width, endlineTokenToInsert);
+    return opensimCommonJNI.IO_formatText__SWIG_0(aComment, leadingWhitespace, width, endlineTokenToInsert);
   }
 
   public static String formatText(String aComment, String leadingWhitespace, int width) {
-    return opensimModelCommonJNI.IO_formatText__SWIG_1(aComment, leadingWhitespace, width);
+    return opensimCommonJNI.IO_formatText__SWIG_1(aComment, leadingWhitespace, width);
   }
 
   public static String GetSuffix(String aStr, int aLen) {
-    return opensimModelCommonJNI.IO_GetSuffix(aStr, aLen);
+    return opensimCommonJNI.IO_GetSuffix(aStr, aLen);
   }
 
   public static void RemoveSuffix(SWIGTYPE_p_std__string rStr, int aLen) {
-    opensimModelCommonJNI.IO_RemoveSuffix(SWIGTYPE_p_std__string.getCPtr(rStr), aLen);
+    opensimCommonJNI.IO_RemoveSuffix(SWIGTYPE_p_std__string.getCPtr(rStr), aLen);
   }
 
   public static String replaceSubstring(String aStr, String aFrom, String aTo) {
-    return opensimModelCommonJNI.IO_replaceSubstring(aStr, aFrom, aTo);
+    return opensimCommonJNI.IO_replaceSubstring(aStr, aFrom, aTo);
   }
 
   public static void TrimLeadingWhitespace(SWIGTYPE_p_std__string rStr) {
-    opensimModelCommonJNI.IO_TrimLeadingWhitespace(SWIGTYPE_p_std__string.getCPtr(rStr));
+    opensimCommonJNI.IO_TrimLeadingWhitespace(SWIGTYPE_p_std__string.getCPtr(rStr));
   }
 
   public static void TrimTrailingWhitespace(SWIGTYPE_p_std__string rStr) {
-    opensimModelCommonJNI.IO_TrimTrailingWhitespace(SWIGTYPE_p_std__string.getCPtr(rStr));
+    opensimCommonJNI.IO_TrimTrailingWhitespace(SWIGTYPE_p_std__string.getCPtr(rStr));
   }
 
   public static void TrimWhitespace(SWIGTYPE_p_std__string rStr) {
-    opensimModelCommonJNI.IO_TrimWhitespace(SWIGTYPE_p_std__string.getCPtr(rStr));
+    opensimCommonJNI.IO_TrimWhitespace(SWIGTYPE_p_std__string.getCPtr(rStr));
   }
 
   public static String Lowercase(String aStr) {
-    return opensimModelCommonJNI.IO_Lowercase(aStr);
+    return opensimCommonJNI.IO_Lowercase(aStr);
   }
 
   public static String Uppercase(String aStr) {
-    return opensimModelCommonJNI.IO_Uppercase(aStr);
+    return opensimCommonJNI.IO_Uppercase(aStr);
   }
 
   public IO() {
-    this(opensimModelCommonJNI.new_IO(), true);
+    this(opensimCommonJNI.new_IO(), true);
   }
 
 }

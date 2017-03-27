@@ -12,7 +12,7 @@ public class PathWrap extends ModelComponent {
   private transient long swigCPtr;
 
   public PathWrap(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.PathWrap_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.PathWrap_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class PathWrap extends ModelComponent {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_PathWrap(swigCPtr);
+        opensimSimulationJNI.delete_PathWrap(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,182 +36,182 @@ public class PathWrap extends ModelComponent {
   }
 
   public static PathWrap safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.PathWrap_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.PathWrap_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new PathWrap(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.PathWrap_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.PathWrap_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.PathWrap_getClassName();
+    return opensimSimulationJNI.PathWrap_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.PathWrap_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.PathWrap_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new PathWrap(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.PathWrap_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.PathWrap_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_wrap_object(PathWrap source) {
-    opensimModelSimulationJNI.PathWrap_copyProperty_wrap_object(swigCPtr, this, PathWrap.getCPtr(source), source);
+    opensimSimulationJNI.PathWrap_copyProperty_wrap_object(swigCPtr, this, PathWrap.getCPtr(source), source);
   }
 
   public String get_wrap_object(int i) {
-    return opensimModelSimulationJNI.PathWrap_get_wrap_object__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.PathWrap_get_wrap_object__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_std__string upd_wrap_object(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelSimulationJNI.PathWrap_upd_wrap_object__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_std__string(opensimSimulationJNI.PathWrap_upd_wrap_object__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_wrap_object(int i, String value) {
-    opensimModelSimulationJNI.PathWrap_set_wrap_object__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.PathWrap_set_wrap_object__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_wrap_object(String value) {
-    return opensimModelSimulationJNI.PathWrap_append_wrap_object(swigCPtr, this, value);
+    return opensimSimulationJNI.PathWrap_append_wrap_object(swigCPtr, this, value);
   }
 
   public void constructProperty_wrap_object(String initValue) {
-    opensimModelSimulationJNI.PathWrap_constructProperty_wrap_object(swigCPtr, this, initValue);
+    opensimSimulationJNI.PathWrap_constructProperty_wrap_object(swigCPtr, this, initValue);
   }
 
   public String get_wrap_object() {
-    return opensimModelSimulationJNI.PathWrap_get_wrap_object__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.PathWrap_get_wrap_object__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_std__string upd_wrap_object() {
-    return new SWIGTYPE_p_std__string(opensimModelSimulationJNI.PathWrap_upd_wrap_object__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_std__string(opensimSimulationJNI.PathWrap_upd_wrap_object__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_wrap_object(String value) {
-    opensimModelSimulationJNI.PathWrap_set_wrap_object__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.PathWrap_set_wrap_object__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_method(PathWrap source) {
-    opensimModelSimulationJNI.PathWrap_copyProperty_method(swigCPtr, this, PathWrap.getCPtr(source), source);
+    opensimSimulationJNI.PathWrap_copyProperty_method(swigCPtr, this, PathWrap.getCPtr(source), source);
   }
 
   public String get_method(int i) {
-    return opensimModelSimulationJNI.PathWrap_get_method__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.PathWrap_get_method__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_std__string upd_method(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelSimulationJNI.PathWrap_upd_method__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_std__string(opensimSimulationJNI.PathWrap_upd_method__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_method(int i, String value) {
-    opensimModelSimulationJNI.PathWrap_set_method__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.PathWrap_set_method__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_method(String value) {
-    return opensimModelSimulationJNI.PathWrap_append_method(swigCPtr, this, value);
+    return opensimSimulationJNI.PathWrap_append_method(swigCPtr, this, value);
   }
 
   public void constructProperty_method(String initValue) {
-    opensimModelSimulationJNI.PathWrap_constructProperty_method(swigCPtr, this, initValue);
+    opensimSimulationJNI.PathWrap_constructProperty_method(swigCPtr, this, initValue);
   }
 
   public String get_method() {
-    return opensimModelSimulationJNI.PathWrap_get_method__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.PathWrap_get_method__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_std__string upd_method() {
-    return new SWIGTYPE_p_std__string(opensimModelSimulationJNI.PathWrap_upd_method__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_std__string(opensimSimulationJNI.PathWrap_upd_method__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_method(String value) {
-    opensimModelSimulationJNI.PathWrap_set_method__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.PathWrap_set_method__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_range(PathWrap source) {
-    opensimModelSimulationJNI.PathWrap_copyProperty_range(swigCPtr, this, PathWrap.getCPtr(source), source);
+    opensimSimulationJNI.PathWrap_copyProperty_range(swigCPtr, this, PathWrap.getCPtr(source), source);
   }
 
   public int get_range(int i) {
-    return opensimModelSimulationJNI.PathWrap_get_range(swigCPtr, this, i);
+    return opensimSimulationJNI.PathWrap_get_range(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_int upd_range(int i) {
-    return new SWIGTYPE_p_int(opensimModelSimulationJNI.PathWrap_upd_range(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_int(opensimSimulationJNI.PathWrap_upd_range(swigCPtr, this, i), false);
   }
 
   public void set_range(int i, int value) {
-    opensimModelSimulationJNI.PathWrap_set_range(swigCPtr, this, i, value);
+    opensimSimulationJNI.PathWrap_set_range(swigCPtr, this, i, value);
   }
 
   public int append_range(int value) {
-    return opensimModelSimulationJNI.PathWrap_append_range(swigCPtr, this, value);
+    return opensimSimulationJNI.PathWrap_append_range(swigCPtr, this, value);
   }
 
   public PathWrap() {
-    this(opensimModelSimulationJNI.new_PathWrap(), true);
+    this(opensimSimulationJNI.new_PathWrap(), true);
   }
 
   public int getStartPoint() {
-    return opensimModelSimulationJNI.PathWrap_getStartPoint(swigCPtr, this);
+    return opensimSimulationJNI.PathWrap_getStartPoint(swigCPtr, this);
   }
 
   public int getEndPoint() {
-    return opensimModelSimulationJNI.PathWrap_getEndPoint(swigCPtr, this);
+    return opensimSimulationJNI.PathWrap_getEndPoint(swigCPtr, this);
   }
 
   public String getWrapObjectName() {
-    return opensimModelSimulationJNI.PathWrap_getWrapObjectName(swigCPtr, this);
+    return opensimSimulationJNI.PathWrap_getWrapObjectName(swigCPtr, this);
   }
 
   public WrapObject getWrapObject() {
-    long cPtr = opensimModelSimulationJNI.PathWrap_getWrapObject(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.PathWrap_getWrapObject(swigCPtr, this);
     return (cPtr == 0) ? null : new WrapObject(cPtr, false);
   }
 
   public void setWrapObject(WrapObject aWrapObject) {
-    opensimModelSimulationJNI.PathWrap_setWrapObject(swigCPtr, this, WrapObject.getCPtr(aWrapObject), aWrapObject);
+    opensimSimulationJNI.PathWrap_setWrapObject(swigCPtr, this, WrapObject.getCPtr(aWrapObject), aWrapObject);
   }
 
   public SWIGTYPE_p_PathWrapPoint getWrapPoint1() {
-    return new SWIGTYPE_p_PathWrapPoint(opensimModelSimulationJNI.PathWrap_getWrapPoint1(swigCPtr, this), false);
+    return new SWIGTYPE_p_PathWrapPoint(opensimSimulationJNI.PathWrap_getWrapPoint1(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_PathWrapPoint getWrapPoint2() {
-    return new SWIGTYPE_p_PathWrapPoint(opensimModelSimulationJNI.PathWrap_getWrapPoint2(swigCPtr, this), false);
+    return new SWIGTYPE_p_PathWrapPoint(opensimSimulationJNI.PathWrap_getWrapPoint2(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_PathWrapPoint updWrapPoint1() {
-    return new SWIGTYPE_p_PathWrapPoint(opensimModelSimulationJNI.PathWrap_updWrapPoint1(swigCPtr, this), false);
+    return new SWIGTYPE_p_PathWrapPoint(opensimSimulationJNI.PathWrap_updWrapPoint1(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_PathWrapPoint updWrapPoint2() {
-    return new SWIGTYPE_p_PathWrapPoint(opensimModelSimulationJNI.PathWrap_updWrapPoint2(swigCPtr, this), false);
+    return new SWIGTYPE_p_PathWrapPoint(opensimSimulationJNI.PathWrap_updWrapPoint2(swigCPtr, this), false);
   }
 
   public PathWrap.WrapMethod getMethod() {
-    return PathWrap.WrapMethod.swigToEnum(opensimModelSimulationJNI.PathWrap_getMethod(swigCPtr, this));
+    return PathWrap.WrapMethod.swigToEnum(opensimSimulationJNI.PathWrap_getMethod(swigCPtr, this));
   }
 
   public void setMethod(PathWrap.WrapMethod aMethod) {
-    opensimModelSimulationJNI.PathWrap_setMethod(swigCPtr, this, aMethod.swigValue());
+    opensimSimulationJNI.PathWrap_setMethod(swigCPtr, this, aMethod.swigValue());
   }
 
   public String getMethodName() {
-    return opensimModelSimulationJNI.PathWrap_getMethodName(swigCPtr, this);
+    return opensimSimulationJNI.PathWrap_getMethodName(swigCPtr, this);
   }
 
   public SWIGTYPE_p_OpenSim__WrapResult getPreviousWrap() {
-    return new SWIGTYPE_p_OpenSim__WrapResult(opensimModelSimulationJNI.PathWrap_getPreviousWrap(swigCPtr, this), false);
+    return new SWIGTYPE_p_OpenSim__WrapResult(opensimSimulationJNI.PathWrap_getPreviousWrap(swigCPtr, this), false);
   }
 
   public void setPreviousWrap(SWIGTYPE_p_OpenSim__WrapResult aWrapResult) {
-    opensimModelSimulationJNI.PathWrap_setPreviousWrap(swigCPtr, this, SWIGTYPE_p_OpenSim__WrapResult.getCPtr(aWrapResult));
+    opensimSimulationJNI.PathWrap_setPreviousWrap(swigCPtr, this, SWIGTYPE_p_OpenSim__WrapResult.getCPtr(aWrapResult));
   }
 
   public void resetPreviousWrap() {
-    opensimModelSimulationJNI.PathWrap_resetPreviousWrap(swigCPtr, this);
+    opensimSimulationJNI.PathWrap_resetPreviousWrap(swigCPtr, this);
   }
 
   public final static class WrapMethod {

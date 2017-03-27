@@ -12,7 +12,7 @@ public class InverseDynamicsSolver extends Solver {
   private transient long swigCPtr;
 
   public InverseDynamicsSolver(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.InverseDynamicsSolver_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.InverseDynamicsSolver_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class InverseDynamicsSolver extends Solver {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_InverseDynamicsSolver(swigCPtr);
+        opensimSimulationJNI.delete_InverseDynamicsSolver(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,45 +36,45 @@ public class InverseDynamicsSolver extends Solver {
   }
 
   public static InverseDynamicsSolver safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.InverseDynamicsSolver_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.InverseDynamicsSolver_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new InverseDynamicsSolver(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.InverseDynamicsSolver_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.InverseDynamicsSolver_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.InverseDynamicsSolver_getClassName();
+    return opensimSimulationJNI.InverseDynamicsSolver_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.InverseDynamicsSolver_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.InverseDynamicsSolver_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new InverseDynamicsSolver(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.InverseDynamicsSolver_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.InverseDynamicsSolver_getConcreteClassName(swigCPtr, this);
   }
 
   public InverseDynamicsSolver(Model model) {
-    this(opensimModelSimulationJNI.new_InverseDynamicsSolver(Model.getCPtr(model), model), true);
+    this(opensimSimulationJNI.new_InverseDynamicsSolver(Model.getCPtr(model), model), true);
   }
 
   public Vector solve(State s, Vector udot) {
-    return new Vector(opensimModelSimulationJNI.InverseDynamicsSolver_solve__SWIG_0(swigCPtr, this, State.getCPtr(s), s, Vector.getCPtr(udot), udot), true);
+    return new Vector(opensimSimulationJNI.InverseDynamicsSolver_solve__SWIG_0(swigCPtr, this, State.getCPtr(s), s, Vector.getCPtr(udot), udot), true);
   }
 
   public Vector solve(State s) {
-    return new Vector(opensimModelSimulationJNI.InverseDynamicsSolver_solve__SWIG_1(swigCPtr, this, State.getCPtr(s), s), true);
+    return new Vector(opensimSimulationJNI.InverseDynamicsSolver_solve__SWIG_1(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
   public Vector solve(State s, Vector udot, Vector appliedMobilityForces, VectorOfSpatialVec appliedBodyForces) {
-    return new Vector(opensimModelSimulationJNI.InverseDynamicsSolver_solve__SWIG_2(swigCPtr, this, State.getCPtr(s), s, Vector.getCPtr(udot), udot, Vector.getCPtr(appliedMobilityForces), appliedMobilityForces, VectorOfSpatialVec.getCPtr(appliedBodyForces), appliedBodyForces), true);
+    return new Vector(opensimSimulationJNI.InverseDynamicsSolver_solve__SWIG_2(swigCPtr, this, State.getCPtr(s), s, Vector.getCPtr(udot), udot, Vector.getCPtr(appliedMobilityForces), appliedMobilityForces, VectorOfSpatialVec.getCPtr(appliedBodyForces), appliedBodyForces), true);
   }
 
   public Vector solve(State s, FunctionSet Qs, double time) {
-    return new Vector(opensimModelSimulationJNI.InverseDynamicsSolver_solve__SWIG_3(swigCPtr, this, State.getCPtr(s), s, FunctionSet.getCPtr(Qs), Qs, time), true);
+    return new Vector(opensimSimulationJNI.InverseDynamicsSolver_solve__SWIG_3(swigCPtr, this, State.getCPtr(s), s, FunctionSet.getCPtr(Qs), Qs, time), true);
   }
 
 }

@@ -12,7 +12,7 @@ public class IncorrectNumTokens extends OpenSimException {
   private transient long swigCPtr;
 
   public IncorrectNumTokens(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.IncorrectNumTokens_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.IncorrectNumTokens_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class IncorrectNumTokens extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_IncorrectNumTokens(swigCPtr);
+        opensimCommonJNI.delete_IncorrectNumTokens(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class IncorrectNumTokens extends OpenSimException {
   }
 
   public IncorrectNumTokens(String file, long line, String func, String msg) {
-    this(opensimModelCommonJNI.new_IncorrectNumTokens(file, line, func, msg), true);
+    this(opensimCommonJNI.new_IncorrectNumTokens(file, line, func, msg), true);
   }
 
 }

@@ -12,7 +12,7 @@ public class XYFunctionInterface extends OpenSimObject {
   private transient long swigCPtr;
 
   public XYFunctionInterface(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.XYFunctionInterface_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.XYFunctionInterface_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class XYFunctionInterface extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_XYFunctionInterface(swigCPtr);
+        opensimCommonJNI.delete_XYFunctionInterface(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -44,130 +44,130 @@ public class XYFunctionInterface extends OpenSimObject {
   }
 
   public static XYFunctionInterface safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelCommonJNI.XYFunctionInterface_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimCommonJNI.XYFunctionInterface_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new XYFunctionInterface(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelCommonJNI.XYFunctionInterface_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimCommonJNI.XYFunctionInterface_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelCommonJNI.XYFunctionInterface_getClassName();
+    return opensimCommonJNI.XYFunctionInterface_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelCommonJNI.XYFunctionInterface_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.XYFunctionInterface_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new XYFunctionInterface(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelCommonJNI.XYFunctionInterface_getConcreteClassName(swigCPtr, this);
+    return opensimCommonJNI.XYFunctionInterface_getConcreteClassName(swigCPtr, this);
   }
 
   public static boolean isXYFunction(Function f) {
-    return opensimModelCommonJNI.XYFunctionInterface_isXYFunction(Function.getCPtr(f), f);
+    return opensimCommonJNI.XYFunctionInterface_isXYFunction(Function.getCPtr(f), f);
   }
 
   public XYFunctionInterface(Function f) {
-    this(opensimModelCommonJNI.new_XYFunctionInterface(Function.getCPtr(f), f), true);
+    this(opensimCommonJNI.new_XYFunctionInterface(Function.getCPtr(f), f), true);
   }
 
   public boolean isSpecifiedByControlPoints() {
-    return opensimModelCommonJNI.XYFunctionInterface_isSpecifiedByControlPoints(swigCPtr, this);
+    return opensimCommonJNI.XYFunctionInterface_isSpecifiedByControlPoints(swigCPtr, this);
   }
 
   public int getNumberOfPoints() {
-    return opensimModelCommonJNI.XYFunctionInterface_getNumberOfPoints(swigCPtr, this);
+    return opensimCommonJNI.XYFunctionInterface_getNumberOfPoints(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double getXValues() {
-    long cPtr = opensimModelCommonJNI.XYFunctionInterface_getXValues(swigCPtr, this);
+    long cPtr = opensimCommonJNI.XYFunctionInterface_getXValues(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_double(cPtr, false);
   }
 
   public SWIGTYPE_p_double getYValues() {
-    long cPtr = opensimModelCommonJNI.XYFunctionInterface_getYValues(swigCPtr, this);
+    long cPtr = opensimCommonJNI.XYFunctionInterface_getYValues(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_double(cPtr, false);
   }
 
   public double getX(int aIndex) {
-    return opensimModelCommonJNI.XYFunctionInterface_getX(swigCPtr, this, aIndex);
+    return opensimCommonJNI.XYFunctionInterface_getX(swigCPtr, this, aIndex);
   }
 
   public double getY(int aIndex) {
-    return opensimModelCommonJNI.XYFunctionInterface_getY(swigCPtr, this, aIndex);
+    return opensimCommonJNI.XYFunctionInterface_getY(swigCPtr, this, aIndex);
   }
 
   public void setX(int aIndex, double aValue) {
-    opensimModelCommonJNI.XYFunctionInterface_setX(swigCPtr, this, aIndex, aValue);
+    opensimCommonJNI.XYFunctionInterface_setX(swigCPtr, this, aIndex, aValue);
   }
 
   public void setY(int aIndex, double aValue) {
-    opensimModelCommonJNI.XYFunctionInterface_setY(swigCPtr, this, aIndex, aValue);
+    opensimCommonJNI.XYFunctionInterface_setY(swigCPtr, this, aIndex, aValue);
   }
 
   public boolean deletePoint(int aIndex) {
-    return opensimModelCommonJNI.XYFunctionInterface_deletePoint(swigCPtr, this, aIndex);
+    return opensimCommonJNI.XYFunctionInterface_deletePoint(swigCPtr, this, aIndex);
   }
 
   public boolean deletePoints(ArrayInt indices) {
-    return opensimModelCommonJNI.XYFunctionInterface_deletePoints(swigCPtr, this, ArrayInt.getCPtr(indices), indices);
+    return opensimCommonJNI.XYFunctionInterface_deletePoints(swigCPtr, this, ArrayInt.getCPtr(indices), indices);
   }
 
   public int addPoint(double aX, double aY) {
-    return opensimModelCommonJNI.XYFunctionInterface_addPoint(swigCPtr, this, aX, aY);
+    return opensimCommonJNI.XYFunctionInterface_addPoint(swigCPtr, this, aX, aY);
   }
 
   public ArrayXYPoint renderAsLineSegments(int aIndex) {
-    long cPtr = opensimModelCommonJNI.XYFunctionInterface_renderAsLineSegments(swigCPtr, this, aIndex);
+    long cPtr = opensimCommonJNI.XYFunctionInterface_renderAsLineSegments(swigCPtr, this, aIndex);
     return (cPtr == 0) ? null : new ArrayXYPoint(cPtr, false);
   }
 
   public static void deleteXYPointArray(ArrayXYPoint aArray) {
-    opensimModelCommonJNI.XYFunctionInterface_deleteXYPointArray(ArrayXYPoint.getCPtr(aArray), aArray);
+    opensimCommonJNI.XYFunctionInterface_deleteXYPointArray(ArrayXYPoint.getCPtr(aArray), aArray);
   }
 
   public XYFunctionInterface.FunctionType getFunctionType() {
-    return XYFunctionInterface.FunctionType.swigToEnum(opensimModelCommonJNI.XYFunctionInterface_getFunctionType(swigCPtr, this));
+    return XYFunctionInterface.FunctionType.swigToEnum(opensimCommonJNI.XYFunctionInterface_getFunctionType(swigCPtr, this));
   }
 
   public double getScale() {
-    return opensimModelCommonJNI.XYFunctionInterface_getScale(swigCPtr, this);
+    return opensimCommonJNI.XYFunctionInterface_getScale(swigCPtr, this);
   }
 
   public Constant getConstant() {
-    long cPtr = opensimModelCommonJNI.XYFunctionInterface_getConstant(swigCPtr, this);
+    long cPtr = opensimCommonJNI.XYFunctionInterface_getConstant(swigCPtr, this);
     return (cPtr == 0) ? null : new Constant(cPtr, false);
   }
 
   public StepFunction getStepFunction() {
-    long cPtr = opensimModelCommonJNI.XYFunctionInterface_getStepFunction(swigCPtr, this);
+    long cPtr = opensimCommonJNI.XYFunctionInterface_getStepFunction(swigCPtr, this);
     return (cPtr == 0) ? null : new StepFunction(cPtr, false);
   }
 
   public PiecewiseConstantFunction getMultiStepFunction() {
-    long cPtr = opensimModelCommonJNI.XYFunctionInterface_getMultiStepFunction(swigCPtr, this);
+    long cPtr = opensimCommonJNI.XYFunctionInterface_getMultiStepFunction(swigCPtr, this);
     return (cPtr == 0) ? null : new PiecewiseConstantFunction(cPtr, false);
   }
 
   public PiecewiseLinearFunction getPiecewiseLinearFunction() {
-    long cPtr = opensimModelCommonJNI.XYFunctionInterface_getPiecewiseLinearFunction(swigCPtr, this);
+    long cPtr = opensimCommonJNI.XYFunctionInterface_getPiecewiseLinearFunction(swigCPtr, this);
     return (cPtr == 0) ? null : new PiecewiseLinearFunction(cPtr, false);
   }
 
   public LinearFunction getLinearFunction() {
-    long cPtr = opensimModelCommonJNI.XYFunctionInterface_getLinearFunction(swigCPtr, this);
+    long cPtr = opensimCommonJNI.XYFunctionInterface_getLinearFunction(swigCPtr, this);
     return (cPtr == 0) ? null : new LinearFunction(cPtr, false);
   }
 
   public SimmSpline getSimmSpline() {
-    long cPtr = opensimModelCommonJNI.XYFunctionInterface_getSimmSpline(swigCPtr, this);
+    long cPtr = opensimCommonJNI.XYFunctionInterface_getSimmSpline(swigCPtr, this);
     return (cPtr == 0) ? null : new SimmSpline(cPtr, false);
   }
 
   public GCVSpline getGCVSpline() {
-    long cPtr = opensimModelCommonJNI.XYFunctionInterface_getGCVSpline(swigCPtr, this);
+    long cPtr = opensimCommonJNI.XYFunctionInterface_getGCVSpline(swigCPtr, this);
     return (cPtr == 0) ? null : new GCVSpline(cPtr, false);
   }
 

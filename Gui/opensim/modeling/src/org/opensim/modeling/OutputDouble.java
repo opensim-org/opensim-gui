@@ -12,7 +12,7 @@ public class OutputDouble extends AbstractOutput {
   private transient long swigCPtr;
 
   public OutputDouble(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.OutputDouble_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.OutputDouble_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class OutputDouble extends AbstractOutput {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_OutputDouble(swigCPtr);
+        opensimCommonJNI.delete_OutputDouble(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,72 +36,72 @@ public class OutputDouble extends AbstractOutput {
   }
 
   public OutputDouble() {
-    this(opensimModelCommonJNI.new_OutputDouble__SWIG_0(), true);
+    this(opensimCommonJNI.new_OutputDouble__SWIG_0(), true);
   }
 
   public OutputDouble(String name, SWIGTYPE_p_std__functionT_void_fOpenSim__Component_const_p_SimTK__State_const_R_std__string_const_R_double_RF_t outputFunction, Stage dependsOnStage, boolean isList) {
-    this(opensimModelCommonJNI.new_OutputDouble__SWIG_1(name, SWIGTYPE_p_std__functionT_void_fOpenSim__Component_const_p_SimTK__State_const_R_std__string_const_R_double_RF_t.getCPtr(outputFunction), Stage.getCPtr(dependsOnStage), dependsOnStage, isList), true);
+    this(opensimCommonJNI.new_OutputDouble__SWIG_1(name, SWIGTYPE_p_std__functionT_void_fOpenSim__Component_const_p_SimTK__State_const_R_std__string_const_R_double_RF_t.getCPtr(outputFunction), Stage.getCPtr(dependsOnStage), dependsOnStage, isList), true);
   }
 
   public OutputDouble(OutputDouble source) {
-    this(opensimModelCommonJNI.new_OutputDouble__SWIG_2(OutputDouble.getCPtr(source), source), true);
+    this(opensimCommonJNI.new_OutputDouble__SWIG_2(OutputDouble.getCPtr(source), source), true);
   }
 
   public boolean isCompatible(AbstractOutput o) {
-    return opensimModelCommonJNI.OutputDouble_isCompatible(swigCPtr, this, AbstractOutput.getCPtr(o), o);
+    return opensimCommonJNI.OutputDouble_isCompatible(swigCPtr, this, AbstractOutput.getCPtr(o), o);
   }
 
   public void compatibleAssign(AbstractOutput o) {
-    opensimModelCommonJNI.OutputDouble_compatibleAssign(swigCPtr, this, AbstractOutput.getCPtr(o), o);
+    opensimCommonJNI.OutputDouble_compatibleAssign(swigCPtr, this, AbstractOutput.getCPtr(o), o);
   }
 
   public void clearChannels() {
-    opensimModelCommonJNI.OutputDouble_clearChannels(swigCPtr, this);
+    opensimCommonJNI.OutputDouble_clearChannels(swigCPtr, this);
   }
 
   public void addChannel(String channelName) {
-    opensimModelCommonJNI.OutputDouble_addChannel(swigCPtr, this, channelName);
+    opensimCommonJNI.OutputDouble_addChannel(swigCPtr, this, channelName);
   }
 
   public AbstractChannel getChannel(String name) {
-    return new AbstractChannel(opensimModelCommonJNI.OutputDouble_getChannel(swigCPtr, this, name), false);
+    return new AbstractChannel(opensimCommonJNI.OutputDouble_getChannel(swigCPtr, this, name), false);
   }
 
   public SWIGTYPE_p_std__mapT_std__string_OpenSim__OutputT_double_t__Channel_t getChannels() {
-    return new SWIGTYPE_p_std__mapT_std__string_OpenSim__OutputT_double_t__Channel_t(opensimModelCommonJNI.OutputDouble_getChannels(swigCPtr, this), false);
+    return new SWIGTYPE_p_std__mapT_std__string_OpenSim__OutputT_double_t__Channel_t(opensimCommonJNI.OutputDouble_getChannels(swigCPtr, this), false);
   }
 
   public double getValue(State state) {
-    return opensimModelCommonJNI.OutputDouble_getValue(swigCPtr, this, State.getCPtr(state), state);
+    return opensimCommonJNI.OutputDouble_getValue(swigCPtr, this, State.getCPtr(state), state);
   }
 
   public String getTypeName() {
-    return opensimModelCommonJNI.OutputDouble_getTypeName(swigCPtr, this);
+    return opensimCommonJNI.OutputDouble_getTypeName(swigCPtr, this);
   }
 
   public String getValueAsString(State state) {
-    return opensimModelCommonJNI.OutputDouble_getValueAsString(swigCPtr, this, State.getCPtr(state), state);
+    return opensimCommonJNI.OutputDouble_getValueAsString(swigCPtr, this, State.getCPtr(state), state);
   }
 
   public AbstractOutput clone() {
-    long cPtr = opensimModelCommonJNI.OutputDouble_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.OutputDouble_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new OutputDouble(cPtr, true);
   }
 
   public static boolean isA(AbstractOutput p) {
-    return opensimModelCommonJNI.OutputDouble_isA(AbstractOutput.getCPtr(p), p);
+    return opensimCommonJNI.OutputDouble_isA(AbstractOutput.getCPtr(p), p);
   }
 
   public static OutputDouble downcast(AbstractOutput p) {
-    return new OutputDouble(opensimModelCommonJNI.OutputDouble_downcast(AbstractOutput.getCPtr(p), p), false);
+    return new OutputDouble(opensimCommonJNI.OutputDouble_downcast(AbstractOutput.getCPtr(p), p), false);
   }
 
   public static OutputDouble updDowncast(AbstractOutput p) {
-    return new OutputDouble(opensimModelCommonJNI.OutputDouble_updDowncast(AbstractOutput.getCPtr(p), p), false);
+    return new OutputDouble(opensimCommonJNI.OutputDouble_updDowncast(AbstractOutput.getCPtr(p), p), false);
   }
 
   public static OutputDouble safeDownCast(AbstractOutput parent) {
-    long cPtr = opensimModelCommonJNI.OutputDouble_safeDownCast(AbstractOutput.getCPtr(parent), parent);
+    long cPtr = opensimCommonJNI.OutputDouble_safeDownCast(AbstractOutput.getCPtr(parent), parent);
     return (cPtr == 0) ? null : new OutputDouble(cPtr, false);
   }
 

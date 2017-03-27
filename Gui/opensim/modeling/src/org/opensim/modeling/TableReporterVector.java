@@ -12,7 +12,7 @@ public class TableReporterVector extends ReporterVector {
   private transient long swigCPtr;
 
   public TableReporterVector(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.TableReporterVector_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.TableReporterVector_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class TableReporterVector extends ReporterVector {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_TableReporterVector(swigCPtr);
+        opensimCommonJNI.delete_TableReporterVector(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,37 +36,37 @@ public class TableReporterVector extends ReporterVector {
   }
 
   public static TableReporterVector safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelCommonJNI.TableReporterVector_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimCommonJNI.TableReporterVector_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new TableReporterVector(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelCommonJNI.TableReporterVector_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimCommonJNI.TableReporterVector_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelCommonJNI.TableReporterVector_getClassName();
+    return opensimCommonJNI.TableReporterVector_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelCommonJNI.TableReporterVector_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.TableReporterVector_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new TableReporterVector(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelCommonJNI.TableReporterVector_getConcreteClassName(swigCPtr, this);
+    return opensimCommonJNI.TableReporterVector_getConcreteClassName(swigCPtr, this);
   }
 
   public TableReporterVector() {
-    this(opensimModelCommonJNI.new_TableReporterVector(), true);
+    this(opensimCommonJNI.new_TableReporterVector(), true);
   }
 
   public TimeSeriesTable getTable() {
-    return new TimeSeriesTable(opensimModelCommonJNI.TableReporterVector_getTable(swigCPtr, this), true);
+    return new TimeSeriesTable(opensimCommonJNI.TableReporterVector_getTable(swigCPtr, this), true);
   }
 
   public void clearTable() {
-    opensimModelCommonJNI.TableReporterVector_clearTable(swigCPtr, this);
+    opensimCommonJNI.TableReporterVector_clearTable(swigCPtr, this);
   }
 
 }

@@ -12,7 +12,7 @@ public class IKMarkerTask extends IKTask {
   private transient long swigCPtr;
 
   public IKMarkerTask(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.IKMarkerTask_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.IKMarkerTask_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class IKMarkerTask extends IKTask {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_IKMarkerTask(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_IKMarkerTask(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,33 +36,33 @@ public class IKMarkerTask extends IKTask {
   }
 
   public static IKMarkerTask safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.IKMarkerTask_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.IKMarkerTask_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new IKMarkerTask(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.IKMarkerTask_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.IKMarkerTask_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.IKMarkerTask_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.IKMarkerTask_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.IKMarkerTask_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.IKMarkerTask_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new IKMarkerTask(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.IKMarkerTask_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.IKMarkerTask_getConcreteClassName(swigCPtr, this);
   }
 
   public IKMarkerTask() {
-    this(opensimModelJNI.new_IKMarkerTask__SWIG_0(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_IKMarkerTask__SWIG_0(), true);
   }
 
   public IKMarkerTask(IKMarkerTask aIKMarkerTask) {
-    this(opensimModelJNI.new_IKMarkerTask__SWIG_1(IKMarkerTask.getCPtr(aIKMarkerTask), aIKMarkerTask), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_IKMarkerTask__SWIG_1(IKMarkerTask.getCPtr(aIKMarkerTask), aIKMarkerTask), true);
   }
 
 }

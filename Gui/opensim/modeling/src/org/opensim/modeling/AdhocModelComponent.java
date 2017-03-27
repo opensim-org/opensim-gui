@@ -12,7 +12,7 @@ public class AdhocModelComponent extends ModelComponent {
   private transient long swigCPtr;
 
   public AdhocModelComponent(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.AdhocModelComponent_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.AdhocModelComponent_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class AdhocModelComponent extends ModelComponent {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_AdhocModelComponent(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_AdhocModelComponent(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,29 +36,29 @@ public class AdhocModelComponent extends ModelComponent {
   }
 
   public static AdhocModelComponent safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.AdhocModelComponent_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.AdhocModelComponent_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new AdhocModelComponent(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.AdhocModelComponent_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.AdhocModelComponent_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.AdhocModelComponent_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.AdhocModelComponent_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.AdhocModelComponent_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.AdhocModelComponent_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new AdhocModelComponent(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.AdhocModelComponent_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.AdhocModelComponent_getConcreteClassName(swigCPtr, this);
   }
 
   public AdhocModelComponent() {
-    this(opensimModelJNI.new_AdhocModelComponent(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_AdhocModelComponent(), true);
   }
 
 }

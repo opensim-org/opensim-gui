@@ -8,21 +8,21 @@
 
 package org.opensim.modeling;
 
-public class opensimModel {
+public class opensimActuatorsAnalysesTools {
   public static int getPointKinematicsNAME_LENGTH() {
-    return opensimModelJNI.PointKinematicsNAME_LENGTH_get();
+    return opensimActuatorsAnalysesToolsJNI.PointKinematicsNAME_LENGTH_get();
   }
 
   public static int getPointKinematicsBUFFER_LENGTH() {
-    return opensimModelJNI.PointKinematicsBUFFER_LENGTH_get();
+    return opensimActuatorsAnalysesToolsJNI.PointKinematicsBUFFER_LENGTH_get();
   }
 
   public static void setMapCxxExceptionsToJava(boolean value) {
-    opensimModelJNI.mapCxxExceptionsToJava_set(value);
+    opensimActuatorsAnalysesToolsJNI.mapCxxExceptionsToJava_set(value);
   }
 
   public static boolean getMapCxxExceptionsToJava() {
-    return opensimModelJNI.mapCxxExceptionsToJava_get();
+    return opensimActuatorsAnalysesToolsJNI.mapCxxExceptionsToJava_get();
   }
 
 }

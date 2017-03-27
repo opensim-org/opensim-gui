@@ -12,7 +12,7 @@ public class InterruptCallback extends AnalysisWrapper {
   private transient long swigCPtr;
 
   public InterruptCallback(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.InterruptCallback_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.InterruptCallback_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class InterruptCallback extends AnalysisWrapper {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_InterruptCallback(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_InterruptCallback(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,19 +36,19 @@ public class InterruptCallback extends AnalysisWrapper {
   }
 
   public InterruptCallback(Model aModel) {
-    this(opensimModelJNI.new_InterruptCallback__SWIG_0(Model.getCPtr(aModel), aModel), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_InterruptCallback__SWIG_0(Model.getCPtr(aModel), aModel), true);
   }
 
   public InterruptCallback() {
-    this(opensimModelJNI.new_InterruptCallback__SWIG_1(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_InterruptCallback__SWIG_1(), true);
   }
 
   public void interrupt() {
-    opensimModelJNI.InterruptCallback_interrupt(swigCPtr, this);
+    opensimActuatorsAnalysesToolsJNI.InterruptCallback_interrupt(swigCPtr, this);
   }
 
   public int step(State s, int stepNumber) {
-    return opensimModelJNI.InterruptCallback_step(swigCPtr, this, State.getCPtr(s), s, stepNumber);
+    return opensimActuatorsAnalysesToolsJNI.InterruptCallback_step(swigCPtr, this, State.getCPtr(s), s, stepNumber);
   }
 
 }

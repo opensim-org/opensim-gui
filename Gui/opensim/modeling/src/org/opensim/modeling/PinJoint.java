@@ -12,7 +12,7 @@ public class PinJoint extends Joint {
   private transient long swigCPtr;
 
   public PinJoint(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.PinJoint_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.PinJoint_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class PinJoint extends Joint {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_PinJoint(swigCPtr);
+        opensimSimulationJNI.delete_PinJoint(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,57 +36,57 @@ public class PinJoint extends Joint {
   }
 
   public static PinJoint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.PinJoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.PinJoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new PinJoint(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.PinJoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.PinJoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.PinJoint_getClassName();
+    return opensimSimulationJNI.PinJoint_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.PinJoint_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.PinJoint_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new PinJoint(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.PinJoint_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.PinJoint_getConcreteClassName(swigCPtr, this);
   }
 
   public Coordinate getCoordinate() {
-    return new Coordinate(opensimModelSimulationJNI.PinJoint_getCoordinate__SWIG_0_0(swigCPtr, this), false);
+    return new Coordinate(opensimSimulationJNI.PinJoint_getCoordinate__SWIG_0_0(swigCPtr, this), false);
   }
 
   public Coordinate updCoordinate() {
-    return new Coordinate(opensimModelSimulationJNI.PinJoint_updCoordinate__SWIG_0_0(swigCPtr, this), false);
+    return new Coordinate(opensimSimulationJNI.PinJoint_updCoordinate__SWIG_0_0(swigCPtr, this), false);
   }
 
   public Coordinate getCoordinate(PinJoint.Coord idx) {
-    return new Coordinate(opensimModelSimulationJNI.PinJoint_getCoordinate__SWIG_1(swigCPtr, this, idx.swigValue()), false);
+    return new Coordinate(opensimSimulationJNI.PinJoint_getCoordinate__SWIG_1(swigCPtr, this, idx.swigValue()), false);
   }
 
   public Coordinate updCoordinate(PinJoint.Coord idx) {
-    return new Coordinate(opensimModelSimulationJNI.PinJoint_updCoordinate__SWIG_1(swigCPtr, this, idx.swigValue()), false);
+    return new Coordinate(opensimSimulationJNI.PinJoint_updCoordinate__SWIG_1(swigCPtr, this, idx.swigValue()), false);
   }
 
   public PinJoint() {
-    this(opensimModelSimulationJNI.new_PinJoint__SWIG_0(), true);
+    this(opensimSimulationJNI.new_PinJoint__SWIG_0(), true);
   }
 
   public PinJoint(String name, PhysicalFrame parent, PhysicalFrame child) {
-    this(opensimModelSimulationJNI.new_PinJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, PhysicalFrame.getCPtr(child), child), true);
+    this(opensimSimulationJNI.new_PinJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, PhysicalFrame.getCPtr(child), child), true);
   }
 
   public PinJoint(String name, PhysicalFrame parent, Vec3 locationInParent, Vec3 orientationInParent, PhysicalFrame child, Vec3 locationInChild, Vec3 orientationInChild) {
-    this(opensimModelSimulationJNI.new_PinJoint__SWIG_2(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
+    this(opensimSimulationJNI.new_PinJoint__SWIG_2(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
   }
 
   public final static class Coord {
-    public final static PinJoint.Coord RotationZ = new PinJoint.Coord("RotationZ");
+    public final static PinJoint.Coord RotationZ = new PinJoint.Coord("RotationZ", opensimSimulationJNI.PinJoint_Coord_RotationZ_get());
 
     public final int swigValue() {
       return swigValue;

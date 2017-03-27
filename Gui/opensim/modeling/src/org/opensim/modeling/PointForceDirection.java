@@ -29,38 +29,38 @@ public class PointForceDirection {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_PointForceDirection(swigCPtr);
+        opensimSimulationJNI.delete_PointForceDirection(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public PointForceDirection(Vec3 point, PhysicalFrame frame, Vec3 direction, double scale) {
-    this(opensimModelSimulationJNI.new_PointForceDirection__SWIG_0(Vec3.getCPtr(point), point, PhysicalFrame.getCPtr(frame), frame, Vec3.getCPtr(direction), direction, scale), true);
+    this(opensimSimulationJNI.new_PointForceDirection__SWIG_0(Vec3.getCPtr(point), point, PhysicalFrame.getCPtr(frame), frame, Vec3.getCPtr(direction), direction, scale), true);
   }
 
   public PointForceDirection(Vec3 point, PhysicalFrame frame, Vec3 direction) {
-    this(opensimModelSimulationJNI.new_PointForceDirection__SWIG_1(Vec3.getCPtr(point), point, PhysicalFrame.getCPtr(frame), frame, Vec3.getCPtr(direction), direction), true);
+    this(opensimSimulationJNI.new_PointForceDirection__SWIG_1(Vec3.getCPtr(point), point, PhysicalFrame.getCPtr(frame), frame, Vec3.getCPtr(direction), direction), true);
   }
 
   public Vec3 point() {
-    return new Vec3(opensimModelSimulationJNI.PointForceDirection_point(swigCPtr, this), true);
+    return new Vec3(opensimSimulationJNI.PointForceDirection_point(swigCPtr, this), true);
   }
 
   public PhysicalFrame frame() {
-    return new PhysicalFrame(opensimModelSimulationJNI.PointForceDirection_frame(swigCPtr, this), false);
+    return new PhysicalFrame(opensimSimulationJNI.PointForceDirection_frame(swigCPtr, this), false);
   }
 
   public Vec3 direction() {
-    return new Vec3(opensimModelSimulationJNI.PointForceDirection_direction(swigCPtr, this), true);
+    return new Vec3(opensimSimulationJNI.PointForceDirection_direction(swigCPtr, this), true);
   }
 
   public double scale() {
-    return opensimModelSimulationJNI.PointForceDirection_scale(swigCPtr, this);
+    return opensimSimulationJNI.PointForceDirection_scale(swigCPtr, this);
   }
 
   public void addToDirection(Vec3 newDirection) {
-    opensimModelSimulationJNI.PointForceDirection_addToDirection(swigCPtr, this, Vec3.getCPtr(newDirection), newDirection);
+    opensimSimulationJNI.PointForceDirection_addToDirection(swigCPtr, this, Vec3.getCPtr(newDirection), newDirection);
   }
 
 }

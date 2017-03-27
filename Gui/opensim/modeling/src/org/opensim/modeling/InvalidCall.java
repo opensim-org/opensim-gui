@@ -12,7 +12,7 @@ public class InvalidCall extends OpenSimException {
   private transient long swigCPtr;
 
   public InvalidCall(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.InvalidCall_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.InvalidCall_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class InvalidCall extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_InvalidCall(swigCPtr);
+        opensimCommonJNI.delete_InvalidCall(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,11 +36,11 @@ public class InvalidCall extends OpenSimException {
   }
 
   public InvalidCall(String file, long line, String func, String msg) {
-    this(opensimModelCommonJNI.new_InvalidCall__SWIG_0(file, line, func, msg), true);
+    this(opensimCommonJNI.new_InvalidCall__SWIG_0(file, line, func, msg), true);
   }
 
   public InvalidCall(String file, long line, String func) {
-    this(opensimModelCommonJNI.new_InvalidCall__SWIG_1(file, line, func), true);
+    this(opensimCommonJNI.new_InvalidCall__SWIG_1(file, line, func), true);
   }
 
 }

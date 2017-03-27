@@ -12,7 +12,7 @@ public class BodyKinematics extends Analysis {
   private transient long swigCPtr;
 
   public BodyKinematics(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.BodyKinematics_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.BodyKinematics_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class BodyKinematics extends Analysis {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_BodyKinematics(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_BodyKinematics(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,112 +36,112 @@ public class BodyKinematics extends Analysis {
   }
 
   public static BodyKinematics safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.BodyKinematics_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.BodyKinematics_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new BodyKinematics(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.BodyKinematics_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.BodyKinematics_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.BodyKinematics_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.BodyKinematics_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.BodyKinematics_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.BodyKinematics_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new BodyKinematics(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.BodyKinematics_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.BodyKinematics_getConcreteClassName(swigCPtr, this);
   }
 
   public BodyKinematics(Model aModel, boolean aInDegrees) {
-    this(opensimModelJNI.new_BodyKinematics__SWIG_0(Model.getCPtr(aModel), aModel, aInDegrees), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_BodyKinematics__SWIG_0(Model.getCPtr(aModel), aModel, aInDegrees), true);
   }
 
   public BodyKinematics(Model aModel) {
-    this(opensimModelJNI.new_BodyKinematics__SWIG_1(Model.getCPtr(aModel), aModel), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_BodyKinematics__SWIG_1(Model.getCPtr(aModel), aModel), true);
   }
 
   public BodyKinematics() {
-    this(opensimModelJNI.new_BodyKinematics__SWIG_2(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_BodyKinematics__SWIG_2(), true);
   }
 
   public BodyKinematics(String aFileName) {
-    this(opensimModelJNI.new_BodyKinematics__SWIG_3(aFileName), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_BodyKinematics__SWIG_3(aFileName), true);
   }
 
   public BodyKinematics(BodyKinematics aObject) {
-    this(opensimModelJNI.new_BodyKinematics__SWIG_4(BodyKinematics.getCPtr(aObject), aObject), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_BodyKinematics__SWIG_4(BodyKinematics.getCPtr(aObject), aObject), true);
   }
 
   public void setStorageCapacityIncrements(int aIncrement) {
-    opensimModelJNI.BodyKinematics_setStorageCapacityIncrements(swigCPtr, this, aIncrement);
+    opensimActuatorsAnalysesToolsJNI.BodyKinematics_setStorageCapacityIncrements(swigCPtr, this, aIncrement);
   }
 
   public Storage getAccelerationStorage() {
-    long cPtr = opensimModelJNI.BodyKinematics_getAccelerationStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.BodyKinematics_getAccelerationStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public Storage getVelocityStorage() {
-    long cPtr = opensimModelJNI.BodyKinematics_getVelocityStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.BodyKinematics_getVelocityStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public Storage getPositionStorage() {
-    long cPtr = opensimModelJNI.BodyKinematics_getPositionStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.BodyKinematics_getPositionStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public void setExpressResultsInLocalFrame(boolean aTrueFalse) {
-    opensimModelJNI.BodyKinematics_setExpressResultsInLocalFrame(swigCPtr, this, aTrueFalse);
+    opensimActuatorsAnalysesToolsJNI.BodyKinematics_setExpressResultsInLocalFrame(swigCPtr, this, aTrueFalse);
   }
 
   public boolean getExpressResultsInLocalFrame() {
-    return opensimModelJNI.BodyKinematics_getExpressResultsInLocalFrame(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.BodyKinematics_getExpressResultsInLocalFrame(swigCPtr, this);
   }
 
   public void setRecordCenterOfMass(boolean aTrueFalse) {
-    opensimModelJNI.BodyKinematics_setRecordCenterOfMass(swigCPtr, this, aTrueFalse);
+    opensimActuatorsAnalysesToolsJNI.BodyKinematics_setRecordCenterOfMass(swigCPtr, this, aTrueFalse);
   }
 
   public void setBodiesToRecord(ArrayStr listOfBodies) {
-    opensimModelJNI.BodyKinematics_setBodiesToRecord(swigCPtr, this, ArrayStr.getCPtr(listOfBodies), listOfBodies);
+    opensimActuatorsAnalysesToolsJNI.BodyKinematics_setBodiesToRecord(swigCPtr, this, ArrayStr.getCPtr(listOfBodies), listOfBodies);
   }
 
   public void setModel(Model aModel) {
-    opensimModelJNI.BodyKinematics_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
+    opensimActuatorsAnalysesToolsJNI.BodyKinematics_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
   public int begin(State s) {
-    return opensimModelJNI.BodyKinematics_begin(swigCPtr, this, State.getCPtr(s), s);
+    return opensimActuatorsAnalysesToolsJNI.BodyKinematics_begin(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public int step(State s, int setNumber) {
-    return opensimModelJNI.BodyKinematics_step(swigCPtr, this, State.getCPtr(s), s, setNumber);
+    return opensimActuatorsAnalysesToolsJNI.BodyKinematics_step(swigCPtr, this, State.getCPtr(s), s, setNumber);
   }
 
   public int end(State s) {
-    return opensimModelJNI.BodyKinematics_end(swigCPtr, this, State.getCPtr(s), s);
+    return opensimActuatorsAnalysesToolsJNI.BodyKinematics_end(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public int printResults(String aBaseName, String aDir, double aDT, String aExtension) {
-    return opensimModelJNI.BodyKinematics_printResults__SWIG_0(swigCPtr, this, aBaseName, aDir, aDT, aExtension);
+    return opensimActuatorsAnalysesToolsJNI.BodyKinematics_printResults__SWIG_0(swigCPtr, this, aBaseName, aDir, aDT, aExtension);
   }
 
   public int printResults(String aBaseName, String aDir, double aDT) {
-    return opensimModelJNI.BodyKinematics_printResults__SWIG_1(swigCPtr, this, aBaseName, aDir, aDT);
+    return opensimActuatorsAnalysesToolsJNI.BodyKinematics_printResults__SWIG_1(swigCPtr, this, aBaseName, aDir, aDT);
   }
 
   public int printResults(String aBaseName, String aDir) {
-    return opensimModelJNI.BodyKinematics_printResults__SWIG_2(swigCPtr, this, aBaseName, aDir);
+    return opensimActuatorsAnalysesToolsJNI.BodyKinematics_printResults__SWIG_2(swigCPtr, this, aBaseName, aDir);
   }
 
   public int printResults(String aBaseName) {
-    return opensimModelJNI.BodyKinematics_printResults__SWIG_3(swigCPtr, this, aBaseName);
+    return opensimActuatorsAnalysesToolsJNI.BodyKinematics_printResults__SWIG_3(swigCPtr, this, aBaseName);
   }
 
 }

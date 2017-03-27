@@ -12,7 +12,7 @@ public class STODataTypeNotFound extends OpenSimException {
   private transient long swigCPtr;
 
   public STODataTypeNotFound(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.STODataTypeNotFound_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.STODataTypeNotFound_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class STODataTypeNotFound extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_STODataTypeNotFound(swigCPtr);
+        opensimCommonJNI.delete_STODataTypeNotFound(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class STODataTypeNotFound extends OpenSimException {
   }
 
   public STODataTypeNotFound(String file, long line, String func) {
-    this(opensimModelCommonJNI.new_STODataTypeNotFound(file, line, func), true);
+    this(opensimCommonJNI.new_STODataTypeNotFound(file, line, func), true);
   }
 
 }

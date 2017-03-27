@@ -12,7 +12,7 @@ public class OutputNotFound extends OpenSimException {
   private transient long swigCPtr;
 
   public OutputNotFound(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.OutputNotFound_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.OutputNotFound_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class OutputNotFound extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_OutputNotFound(swigCPtr);
+        opensimCommonJNI.delete_OutputNotFound(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class OutputNotFound extends OpenSimException {
   }
 
   public OutputNotFound(String file, long line, String func, OpenSimObject obj, String outputName) {
-    this(opensimModelCommonJNI.new_OutputNotFound(file, line, func, OpenSimObject.getCPtr(obj), obj, outputName), true);
+    this(opensimCommonJNI.new_OutputNotFound(file, line, func, OpenSimObject.getCPtr(obj), obj, outputName), true);
   }
 
 }

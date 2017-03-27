@@ -12,7 +12,7 @@ public class TableReporter extends ReporterDouble {
   private transient long swigCPtr;
 
   public TableReporter(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.TableReporter_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.TableReporter_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class TableReporter extends ReporterDouble {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_TableReporter(swigCPtr);
+        opensimCommonJNI.delete_TableReporter(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,37 +36,37 @@ public class TableReporter extends ReporterDouble {
   }
 
   public static TableReporter safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelCommonJNI.TableReporter_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimCommonJNI.TableReporter_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new TableReporter(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelCommonJNI.TableReporter_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimCommonJNI.TableReporter_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelCommonJNI.TableReporter_getClassName();
+    return opensimCommonJNI.TableReporter_getClassName();
   }
 
   public TableReporter clone() {
-    long cPtr = opensimModelCommonJNI.TableReporter_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.TableReporter_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new TableReporter(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelCommonJNI.TableReporter_getConcreteClassName(swigCPtr, this);
+    return opensimCommonJNI.TableReporter_getConcreteClassName(swigCPtr, this);
   }
 
   public TableReporter() {
-    this(opensimModelCommonJNI.new_TableReporter(), true);
+    this(opensimCommonJNI.new_TableReporter(), true);
   }
 
   public TimeSeriesTable getTable() {
-    return new TimeSeriesTable(opensimModelCommonJNI.TableReporter_getTable(swigCPtr, this), true);
+    return new TimeSeriesTable(opensimCommonJNI.TableReporter_getTable(swigCPtr, this), true);
   }
 
   public void clearTable() {
-    opensimModelCommonJNI.TableReporter_clearTable(swigCPtr, this);
+    opensimCommonJNI.TableReporter_clearTable(swigCPtr, this);
   }
 
 }

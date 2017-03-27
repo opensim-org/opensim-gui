@@ -29,36 +29,36 @@ public class Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameterSet {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameterSet(swigCPtr);
+        opensimSimulationJNI.delete_Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameterSet(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public static Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameterSet safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameterSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameterSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameterSet(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameterSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameterSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameterSet_getClassName();
+    return opensimSimulationJNI.Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameterSet_getClassName();
   }
 
   public Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameterSet clone() {
-    long cPtr = opensimModelSimulationJNI.Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameterSet_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameterSet_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameterSet(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameterSet_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameterSet_getConcreteClassName(swigCPtr, this);
   }
 
   public Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameterSet() {
-    this(opensimModelSimulationJNI.new_Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameterSet(), true);
+    this(opensimSimulationJNI.new_Umberger2010MuscleMetabolicsProbe_MetabolicMuscleParameterSet(), true);
   }
 
 }

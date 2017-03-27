@@ -8,18 +8,18 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_ActiveForceLengthCurve {
+public class SWIGTYPE_p_SimTK__DecorationGenerator {
   private transient long swigCPtr;
 
-  protected SWIGTYPE_p_ActiveForceLengthCurve(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
+  protected SWIGTYPE_p_SimTK__DecorationGenerator(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_ActiveForceLengthCurve() {
+  protected SWIGTYPE_p_SimTK__DecorationGenerator() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_ActiveForceLengthCurve obj) {
+  protected static long getCPtr(SWIGTYPE_p_SimTK__DecorationGenerator obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }

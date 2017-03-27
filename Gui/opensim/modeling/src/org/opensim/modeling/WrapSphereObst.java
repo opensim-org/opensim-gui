@@ -12,7 +12,7 @@ public class WrapSphereObst extends WrapObject {
   private transient long swigCPtr;
 
   public WrapSphereObst(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.WrapSphereObst_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.WrapSphereObst_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class WrapSphereObst extends WrapObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_WrapSphereObst(swigCPtr);
+        opensimSimulationJNI.delete_WrapSphereObst(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,61 +36,69 @@ public class WrapSphereObst extends WrapObject {
   }
 
   public static WrapSphereObst safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.WrapSphereObst_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.WrapSphereObst_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new WrapSphereObst(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.WrapSphereObst_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.WrapSphereObst_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.WrapSphereObst_getClassName();
+    return opensimSimulationJNI.WrapSphereObst_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.WrapSphereObst_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.WrapSphereObst_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new WrapSphereObst(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.WrapSphereObst_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.WrapSphereObst_getConcreteClassName(swigCPtr, this);
+  }
+
+  public WrapSphereObst() {
+    this(opensimSimulationJNI.new_WrapSphereObst__SWIG_0(), true);
+  }
+
+  public WrapSphereObst(WrapSphereObst aWrapSphereObst) {
+    this(opensimSimulationJNI.new_WrapSphereObst__SWIG_1(WrapSphereObst.getCPtr(aWrapSphereObst), aWrapSphereObst), true);
   }
 
   public void copyData(WrapSphereObst aWrapSphereObst) {
-    opensimModelSimulationJNI.WrapSphereObst_copyData(swigCPtr, this, WrapSphereObst.getCPtr(aWrapSphereObst), aWrapSphereObst);
+    opensimSimulationJNI.WrapSphereObst_copyData(swigCPtr, this, WrapSphereObst.getCPtr(aWrapSphereObst), aWrapSphereObst);
   }
 
   public double getRadius() {
-    return opensimModelSimulationJNI.WrapSphereObst_getRadius(swigCPtr, this);
+    return opensimSimulationJNI.WrapSphereObst_getRadius(swigCPtr, this);
   }
 
   public void setRadius(double aRadius) {
-    opensimModelSimulationJNI.WrapSphereObst_setRadius(swigCPtr, this, aRadius);
+    opensimSimulationJNI.WrapSphereObst_setRadius(swigCPtr, this, aRadius);
   }
 
   public double getLength() {
-    return opensimModelSimulationJNI.WrapSphereObst_getLength(swigCPtr, this);
+    return opensimSimulationJNI.WrapSphereObst_getLength(swigCPtr, this);
   }
 
   public void setLength(double aLength) {
-    opensimModelSimulationJNI.WrapSphereObst_setLength(swigCPtr, this, aLength);
+    opensimSimulationJNI.WrapSphereObst_setLength(swigCPtr, this, aLength);
   }
 
   public String getWrapTypeName() {
-    return opensimModelSimulationJNI.WrapSphereObst_getWrapTypeName(swigCPtr, this);
+    return opensimSimulationJNI.WrapSphereObst_getWrapTypeName(swigCPtr, this);
   }
 
   public String getDimensionsString() {
-    return opensimModelSimulationJNI.WrapSphereObst_getDimensionsString(swigCPtr, this);
+    return opensimSimulationJNI.WrapSphereObst_getDimensionsString(swigCPtr, this);
   }
 
   public void scale(Vec3 aScaleFactors) {
-    opensimModelSimulationJNI.WrapSphereObst_scale(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
+    opensimSimulationJNI.WrapSphereObst_scale(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
   }
 
   public void connectToModelAndBody(Model aModel, PhysicalFrame aBody) {
-    opensimModelSimulationJNI.WrapSphereObst_connectToModelAndBody(swigCPtr, this, Model.getCPtr(aModel), aModel, PhysicalFrame.getCPtr(aBody), aBody);
+    opensimSimulationJNI.WrapSphereObst_connectToModelAndBody(swigCPtr, this, Model.getCPtr(aModel), aModel, PhysicalFrame.getCPtr(aBody), aBody);
   }
 
 }

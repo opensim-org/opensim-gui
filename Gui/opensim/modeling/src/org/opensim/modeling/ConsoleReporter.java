@@ -12,7 +12,7 @@ public class ConsoleReporter extends ReporterDouble {
   private transient long swigCPtr;
 
   public ConsoleReporter(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.ConsoleReporter_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.ConsoleReporter_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ConsoleReporter extends ReporterDouble {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_ConsoleReporter(swigCPtr);
+        opensimCommonJNI.delete_ConsoleReporter(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,29 +36,29 @@ public class ConsoleReporter extends ReporterDouble {
   }
 
   public static ConsoleReporter safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelCommonJNI.ConsoleReporter_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimCommonJNI.ConsoleReporter_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ConsoleReporter(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelCommonJNI.ConsoleReporter_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimCommonJNI.ConsoleReporter_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelCommonJNI.ConsoleReporter_getClassName();
+    return opensimCommonJNI.ConsoleReporter_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelCommonJNI.ConsoleReporter_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.ConsoleReporter_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ConsoleReporter(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelCommonJNI.ConsoleReporter_getConcreteClassName(swigCPtr, this);
+    return opensimCommonJNI.ConsoleReporter_getConcreteClassName(swigCPtr, this);
   }
 
   public ConsoleReporter() {
-    this(opensimModelCommonJNI.new_ConsoleReporter(), true);
+    this(opensimCommonJNI.new_ConsoleReporter(), true);
   }
 
 }

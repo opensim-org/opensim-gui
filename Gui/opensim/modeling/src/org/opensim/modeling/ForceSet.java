@@ -12,7 +12,7 @@ public class ForceSet extends ModelComponentSetForces {
   private transient long swigCPtr;
 
   public ForceSet(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.ForceSet_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.ForceSet_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ForceSet extends ModelComponentSetForces {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_ForceSet(swigCPtr);
+        opensimSimulationJNI.delete_ForceSet(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -41,97 +41,97 @@ public class ForceSet extends ModelComponentSetForces {
    }
 
   public static ForceSet safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.ForceSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.ForceSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ForceSet(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.ForceSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.ForceSet_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.ForceSet_getClassName();
+    return opensimSimulationJNI.ForceSet_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.ForceSet_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.ForceSet_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ForceSet(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.ForceSet_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.ForceSet_getConcreteClassName(swigCPtr, this);
   }
 
   public ForceSet() {
-    this(opensimModelSimulationJNI.new_ForceSet__SWIG_0(), true);
+    this(opensimSimulationJNI.new_ForceSet__SWIG_0(), true);
   }
 
   public ForceSet(Model model) {
-    this(opensimModelSimulationJNI.new_ForceSet__SWIG_1(Model.getCPtr(model), model), true);
+    this(opensimSimulationJNI.new_ForceSet__SWIG_1(Model.getCPtr(model), model), true);
   }
 
   public ForceSet(Model model, String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelSimulationJNI.new_ForceSet__SWIG_2(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
+    this(opensimSimulationJNI.new_ForceSet__SWIG_2(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
   }
 
   public ForceSet(Model model, String aFileName) {
-    this(opensimModelSimulationJNI.new_ForceSet__SWIG_3(Model.getCPtr(model), model, aFileName), true);
+    this(opensimSimulationJNI.new_ForceSet__SWIG_3(Model.getCPtr(model), model, aFileName), true);
   }
 
   public ForceSet(ForceSet aForceSet) {
-    this(opensimModelSimulationJNI.new_ForceSet__SWIG_4(ForceSet.getCPtr(aForceSet), aForceSet), true);
+    this(opensimSimulationJNI.new_ForceSet__SWIG_4(ForceSet.getCPtr(aForceSet), aForceSet), true);
   }
 
   public void invokeConnectToModel(Model aModel) {
-    opensimModelSimulationJNI.ForceSet_invokeConnectToModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
+    opensimSimulationJNI.ForceSet_invokeConnectToModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
   public boolean remove(int aIndex) {
-    return opensimModelSimulationJNI.ForceSet_remove(swigCPtr, this, aIndex);
+    return opensimSimulationJNI.ForceSet_remove(swigCPtr, this, aIndex);
   }
 
   private boolean private_append(Force aForce) {
-    return opensimModelSimulationJNI.ForceSet_private_append__SWIG_0(swigCPtr, this, Force.getCPtr(aForce), aForce);
+    return opensimSimulationJNI.ForceSet_private_append__SWIG_0(swigCPtr, this, Force.getCPtr(aForce), aForce);
   }
 
   private boolean private_append(ForceSet aForceSet, boolean aAllowDuplicateNames) {
-    return opensimModelSimulationJNI.ForceSet_private_append__SWIG_1(swigCPtr, this, ForceSet.getCPtr(aForceSet), aForceSet, aAllowDuplicateNames);
+    return opensimSimulationJNI.ForceSet_private_append__SWIG_1(swigCPtr, this, ForceSet.getCPtr(aForceSet), aForceSet, aAllowDuplicateNames);
   }
 
   private boolean private_append(ForceSet aForceSet) {
-    return opensimModelSimulationJNI.ForceSet_private_append__SWIG_2(swigCPtr, this, ForceSet.getCPtr(aForceSet), aForceSet);
+    return opensimSimulationJNI.ForceSet_private_append__SWIG_2(swigCPtr, this, ForceSet.getCPtr(aForceSet), aForceSet);
   }
 
   public boolean set(int aIndex, Force aForce) {
-    return opensimModelSimulationJNI.ForceSet_set(swigCPtr, this, aIndex, Force.getCPtr(aForce), aForce);
+    return opensimSimulationJNI.ForceSet_set(swigCPtr, this, aIndex, Force.getCPtr(aForce), aForce);
   }
 
   public boolean insert(int aIndex, Force aObject) {
-    return opensimModelSimulationJNI.ForceSet_insert(swigCPtr, this, aIndex, Force.getCPtr(aObject), aObject);
+    return opensimSimulationJNI.ForceSet_insert(swigCPtr, this, aIndex, Force.getCPtr(aObject), aObject);
   }
 
   public SetActuators getActuators() {
-    return new SetActuators(opensimModelSimulationJNI.ForceSet_getActuators(swigCPtr, this), false);
+    return new SetActuators(opensimSimulationJNI.ForceSet_getActuators(swigCPtr, this), false);
   }
 
   public SetActuators updActuators() {
-    return new SetActuators(opensimModelSimulationJNI.ForceSet_updActuators(swigCPtr, this), false);
+    return new SetActuators(opensimSimulationJNI.ForceSet_updActuators(swigCPtr, this), false);
   }
 
   public SetMuscles getMuscles() {
-    return new SetMuscles(opensimModelSimulationJNI.ForceSet_getMuscles(swigCPtr, this), false);
+    return new SetMuscles(opensimSimulationJNI.ForceSet_getMuscles(swigCPtr, this), false);
   }
 
   public SetMuscles updMuscles() {
-    return new SetMuscles(opensimModelSimulationJNI.ForceSet_updMuscles(swigCPtr, this), false);
+    return new SetMuscles(opensimSimulationJNI.ForceSet_updMuscles(swigCPtr, this), false);
   }
 
   public void getStateVariableNames(ArrayStr rNames) {
-    opensimModelSimulationJNI.ForceSet_getStateVariableNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
+    opensimSimulationJNI.ForceSet_getStateVariableNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
   }
 
   public boolean check() {
-    return opensimModelSimulationJNI.ForceSet_check(swigCPtr, this);
+    return opensimSimulationJNI.ForceSet_check(swigCPtr, this);
   }
 
 }

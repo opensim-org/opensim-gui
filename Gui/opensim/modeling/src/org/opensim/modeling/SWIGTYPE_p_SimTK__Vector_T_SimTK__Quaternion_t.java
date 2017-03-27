@@ -8,18 +8,18 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_SimTK__Visualizer__InputSilo {
+public class SWIGTYPE_p_SimTK__Vector_T_SimTK__Quaternion_t {
   private transient long swigCPtr;
 
-  protected SWIGTYPE_p_SimTK__Visualizer__InputSilo(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
+  protected SWIGTYPE_p_SimTK__Vector_T_SimTK__Quaternion_t(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_SimTK__Visualizer__InputSilo() {
+  protected SWIGTYPE_p_SimTK__Vector_T_SimTK__Quaternion_t() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_SimTK__Visualizer__InputSilo obj) {
+  protected static long getCPtr(SWIGTYPE_p_SimTK__Vector_T_SimTK__Quaternion_t obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }

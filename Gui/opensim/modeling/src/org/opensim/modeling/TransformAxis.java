@@ -12,7 +12,7 @@ public class TransformAxis extends OpenSimObject {
   private transient long swigCPtr;
 
   public TransformAxis(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.TransformAxis_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.TransformAxis_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class TransformAxis extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_TransformAxis(swigCPtr);
+        opensimSimulationJNI.delete_TransformAxis(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,189 +36,189 @@ public class TransformAxis extends OpenSimObject {
   }
 
   public static TransformAxis safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.TransformAxis_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.TransformAxis_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new TransformAxis(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.TransformAxis_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.TransformAxis_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.TransformAxis_getClassName();
+    return opensimSimulationJNI.TransformAxis_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.TransformAxis_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.TransformAxis_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new TransformAxis(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.TransformAxis_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.TransformAxis_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_coordinates(TransformAxis source) {
-    opensimModelSimulationJNI.TransformAxis_copyProperty_coordinates(swigCPtr, this, TransformAxis.getCPtr(source), source);
+    opensimSimulationJNI.TransformAxis_copyProperty_coordinates(swigCPtr, this, TransformAxis.getCPtr(source), source);
   }
 
   public String get_coordinates(int i) {
-    return opensimModelSimulationJNI.TransformAxis_get_coordinates(swigCPtr, this, i);
+    return opensimSimulationJNI.TransformAxis_get_coordinates(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_std__string upd_coordinates(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelSimulationJNI.TransformAxis_upd_coordinates(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_std__string(opensimSimulationJNI.TransformAxis_upd_coordinates(swigCPtr, this, i), false);
   }
 
   public void set_coordinates(int i, String value) {
-    opensimModelSimulationJNI.TransformAxis_set_coordinates(swigCPtr, this, i, value);
+    opensimSimulationJNI.TransformAxis_set_coordinates(swigCPtr, this, i, value);
   }
 
   public int append_coordinates(String value) {
-    return opensimModelSimulationJNI.TransformAxis_append_coordinates(swigCPtr, this, value);
+    return opensimSimulationJNI.TransformAxis_append_coordinates(swigCPtr, this, value);
   }
 
   public void constructProperty_coordinates() {
-    opensimModelSimulationJNI.TransformAxis_constructProperty_coordinates(swigCPtr, this);
+    opensimSimulationJNI.TransformAxis_constructProperty_coordinates(swigCPtr, this);
   }
 
   public void copyProperty_axis(TransformAxis source) {
-    opensimModelSimulationJNI.TransformAxis_copyProperty_axis(swigCPtr, this, TransformAxis.getCPtr(source), source);
+    opensimSimulationJNI.TransformAxis_copyProperty_axis(swigCPtr, this, TransformAxis.getCPtr(source), source);
   }
 
   public Vec3 get_axis(int i) {
-    return new Vec3(opensimModelSimulationJNI.TransformAxis_get_axis__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimSimulationJNI.TransformAxis_get_axis__SWIG_0(swigCPtr, this, i), false);
   }
 
   public Vec3 upd_axis(int i) {
-    return new Vec3(opensimModelSimulationJNI.TransformAxis_upd_axis__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimSimulationJNI.TransformAxis_upd_axis__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_axis(int i, Vec3 value) {
-    opensimModelSimulationJNI.TransformAxis_set_axis__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+    opensimSimulationJNI.TransformAxis_set_axis__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
   }
 
   public int append_axis(Vec3 value) {
-    return opensimModelSimulationJNI.TransformAxis_append_axis(swigCPtr, this, Vec3.getCPtr(value), value);
+    return opensimSimulationJNI.TransformAxis_append_axis(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void constructProperty_axis(Vec3 initValue) {
-    opensimModelSimulationJNI.TransformAxis_constructProperty_axis(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+    opensimSimulationJNI.TransformAxis_constructProperty_axis(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
   }
 
   public Vec3 get_axis() {
-    return new Vec3(opensimModelSimulationJNI.TransformAxis_get_axis__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.TransformAxis_get_axis__SWIG_1(swigCPtr, this), false);
   }
 
   public Vec3 upd_axis() {
-    return new Vec3(opensimModelSimulationJNI.TransformAxis_upd_axis__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.TransformAxis_upd_axis__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_axis(Vec3 value) {
-    opensimModelSimulationJNI.TransformAxis_set_axis__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+    opensimSimulationJNI.TransformAxis_set_axis__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void copyProperty_function(TransformAxis source) {
-    opensimModelSimulationJNI.TransformAxis_copyProperty_function(swigCPtr, this, TransformAxis.getCPtr(source), source);
+    opensimSimulationJNI.TransformAxis_copyProperty_function(swigCPtr, this, TransformAxis.getCPtr(source), source);
   }
 
   public Function get_function(int i) {
-    return new Function(opensimModelSimulationJNI.TransformAxis_get_function__SWIG_0(swigCPtr, this, i), false);
+    return new Function(opensimSimulationJNI.TransformAxis_get_function__SWIG_0(swigCPtr, this, i), false);
   }
 
   public Function upd_function(int i) {
-    return new Function(opensimModelSimulationJNI.TransformAxis_upd_function__SWIG_0(swigCPtr, this, i), false);
+    return new Function(opensimSimulationJNI.TransformAxis_upd_function__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_function(int i, Function value) {
-    opensimModelSimulationJNI.TransformAxis_set_function__SWIG_0(swigCPtr, this, i, Function.getCPtr(value), value);
+    opensimSimulationJNI.TransformAxis_set_function__SWIG_0(swigCPtr, this, i, Function.getCPtr(value), value);
   }
 
   public int append_function(Function value) {
-    return opensimModelSimulationJNI.TransformAxis_append_function(swigCPtr, this, Function.getCPtr(value), value);
+    return opensimSimulationJNI.TransformAxis_append_function(swigCPtr, this, Function.getCPtr(value), value);
   }
 
   public void constructProperty_function(Function initValue) {
-    opensimModelSimulationJNI.TransformAxis_constructProperty_function(swigCPtr, this, Function.getCPtr(initValue), initValue);
+    opensimSimulationJNI.TransformAxis_constructProperty_function(swigCPtr, this, Function.getCPtr(initValue), initValue);
   }
 
   public Function get_function() {
-    return new Function(opensimModelSimulationJNI.TransformAxis_get_function__SWIG_1(swigCPtr, this), false);
+    return new Function(opensimSimulationJNI.TransformAxis_get_function__SWIG_1(swigCPtr, this), false);
   }
 
   public Function upd_function() {
-    return new Function(opensimModelSimulationJNI.TransformAxis_upd_function__SWIG_1(swigCPtr, this), false);
+    return new Function(opensimSimulationJNI.TransformAxis_upd_function__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_function(Function value) {
-    opensimModelSimulationJNI.TransformAxis_set_function__SWIG_1(swigCPtr, this, Function.getCPtr(value), value);
+    opensimSimulationJNI.TransformAxis_set_function__SWIG_1(swigCPtr, this, Function.getCPtr(value), value);
   }
 
   public TransformAxis() {
-    this(opensimModelSimulationJNI.new_TransformAxis__SWIG_0(), true);
+    this(opensimSimulationJNI.new_TransformAxis__SWIG_0(), true);
   }
 
   public TransformAxis(ArrayStr coordNames, Vec3 axis) {
-    this(opensimModelSimulationJNI.new_TransformAxis__SWIG_1(ArrayStr.getCPtr(coordNames), coordNames, Vec3.getCPtr(axis), axis), true);
+    this(opensimSimulationJNI.new_TransformAxis__SWIG_1(ArrayStr.getCPtr(coordNames), coordNames, Vec3.getCPtr(axis), axis), true);
   }
 
   public TransformAxis(SWIGTYPE_p_SimTK__Xml__Element node) {
-    this(opensimModelSimulationJNI.new_TransformAxis__SWIG_2(SWIGTYPE_p_SimTK__Xml__Element.getCPtr(node)), true);
+    this(opensimSimulationJNI.new_TransformAxis__SWIG_2(SWIGTYPE_p_SimTK__Xml__Element.getCPtr(node)), true);
   }
 
   public void setCoordinateNames(ArrayStr coordNames) {
-    opensimModelSimulationJNI.TransformAxis_setCoordinateNames(swigCPtr, this, ArrayStr.getCPtr(coordNames), coordNames);
+    opensimSimulationJNI.TransformAxis_setCoordinateNames(swigCPtr, this, ArrayStr.getCPtr(coordNames), coordNames);
   }
 
   public PropertyString getCoordinateNames() {
-    return new PropertyString(opensimModelSimulationJNI.TransformAxis_getCoordinateNames(swigCPtr, this), false);
+    return new PropertyString(opensimSimulationJNI.TransformAxis_getCoordinateNames(swigCPtr, this), false);
   }
 
   public ArrayStr getCoordinateNamesInArray() {
-    return new ArrayStr(opensimModelSimulationJNI.TransformAxis_getCoordinateNamesInArray(swigCPtr, this), true);
+    return new ArrayStr(opensimSimulationJNI.TransformAxis_getCoordinateNamesInArray(swigCPtr, this), true);
   }
 
   public void setAxis(Vec3 axis) {
-    opensimModelSimulationJNI.TransformAxis_setAxis(swigCPtr, this, Vec3.getCPtr(axis), axis);
+    opensimSimulationJNI.TransformAxis_setAxis(swigCPtr, this, Vec3.getCPtr(axis), axis);
   }
 
   public Vec3 getAxis() {
-    return new Vec3(opensimModelSimulationJNI.TransformAxis_getAxis__SWIG_0(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.TransformAxis_getAxis__SWIG_0(swigCPtr, this), false);
   }
 
   public void getAxis(Vec3 axis) {
-    opensimModelSimulationJNI.TransformAxis_getAxis__SWIG_1(swigCPtr, this, Vec3.getCPtr(axis), axis);
+    opensimSimulationJNI.TransformAxis_getAxis__SWIG_1(swigCPtr, this, Vec3.getCPtr(axis), axis);
   }
 
   public double getAxis(int which) {
-    return opensimModelSimulationJNI.TransformAxis_getAxis__SWIG_2(swigCPtr, this, which);
+    return opensimSimulationJNI.TransformAxis_getAxis__SWIG_2(swigCPtr, this, which);
   }
 
   public boolean hasFunction() {
-    return opensimModelSimulationJNI.TransformAxis_hasFunction(swigCPtr, this);
+    return opensimSimulationJNI.TransformAxis_hasFunction(swigCPtr, this);
   }
 
   public Function getFunction() {
-    return new Function(opensimModelSimulationJNI.TransformAxis_getFunction(swigCPtr, this), false);
+    return new Function(opensimSimulationJNI.TransformAxis_getFunction(swigCPtr, this), false);
   }
 
   public Function updFunction() {
-    return new Function(opensimModelSimulationJNI.TransformAxis_updFunction(swigCPtr, this), false);
+    return new Function(opensimSimulationJNI.TransformAxis_updFunction(swigCPtr, this), false);
   }
 
   public void setFunction(Function function) {
-    opensimModelSimulationJNI.TransformAxis_setFunction__SWIG_0(swigCPtr, this, Function.getCPtr(function), function);
+    opensimSimulationJNI.TransformAxis_setFunction__SWIG_0(swigCPtr, this, Function.getCPtr(function), function);
   }
 
   public Joint getJoint() {
-    return new Joint(opensimModelSimulationJNI.TransformAxis_getJoint(swigCPtr, this), false);
+    return new Joint(opensimSimulationJNI.TransformAxis_getJoint(swigCPtr, this), false);
   }
 
   public double getValue(State s) {
-    return opensimModelSimulationJNI.TransformAxis_getValue(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.TransformAxis_getValue(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void connectToJoint(Joint owningJoint) {
-    opensimModelSimulationJNI.TransformAxis_connectToJoint(swigCPtr, this, Joint.getCPtr(owningJoint), owningJoint);
+    opensimSimulationJNI.TransformAxis_connectToJoint(swigCPtr, this, Joint.getCPtr(owningJoint), owningJoint);
   }
 
 }

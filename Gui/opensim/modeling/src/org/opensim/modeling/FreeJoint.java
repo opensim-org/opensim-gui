@@ -12,7 +12,7 @@ public class FreeJoint extends Joint {
   private transient long swigCPtr;
 
   public FreeJoint(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.FreeJoint_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.FreeJoint_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class FreeJoint extends Joint {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_FreeJoint(swigCPtr);
+        opensimSimulationJNI.delete_FreeJoint(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,62 +36,62 @@ public class FreeJoint extends Joint {
   }
 
   public static FreeJoint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.FreeJoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.FreeJoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new FreeJoint(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.FreeJoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.FreeJoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.FreeJoint_getClassName();
+    return opensimSimulationJNI.FreeJoint_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.FreeJoint_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.FreeJoint_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new FreeJoint(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.FreeJoint_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.FreeJoint_getConcreteClassName(swigCPtr, this);
   }
 
   public Coordinate getCoordinate() {
-    return new Coordinate(opensimModelSimulationJNI.FreeJoint_getCoordinate__SWIG_0_0(swigCPtr, this), false);
+    return new Coordinate(opensimSimulationJNI.FreeJoint_getCoordinate__SWIG_0_0(swigCPtr, this), false);
   }
 
   public Coordinate updCoordinate() {
-    return new Coordinate(opensimModelSimulationJNI.FreeJoint_updCoordinate__SWIG_0_0(swigCPtr, this), false);
+    return new Coordinate(opensimSimulationJNI.FreeJoint_updCoordinate__SWIG_0_0(swigCPtr, this), false);
   }
 
   public Coordinate getCoordinate(FreeJoint.Coord idx) {
-    return new Coordinate(opensimModelSimulationJNI.FreeJoint_getCoordinate__SWIG_1(swigCPtr, this, idx.swigValue()), false);
+    return new Coordinate(opensimSimulationJNI.FreeJoint_getCoordinate__SWIG_1(swigCPtr, this, idx.swigValue()), false);
   }
 
   public Coordinate updCoordinate(FreeJoint.Coord idx) {
-    return new Coordinate(opensimModelSimulationJNI.FreeJoint_updCoordinate__SWIG_1(swigCPtr, this, idx.swigValue()), false);
+    return new Coordinate(opensimSimulationJNI.FreeJoint_updCoordinate__SWIG_1(swigCPtr, this, idx.swigValue()), false);
   }
 
   public FreeJoint() {
-    this(opensimModelSimulationJNI.new_FreeJoint__SWIG_0(), true);
+    this(opensimSimulationJNI.new_FreeJoint__SWIG_0(), true);
   }
 
   public FreeJoint(String name, PhysicalFrame parent, PhysicalFrame child) {
-    this(opensimModelSimulationJNI.new_FreeJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, PhysicalFrame.getCPtr(child), child), true);
+    this(opensimSimulationJNI.new_FreeJoint__SWIG_1(name, PhysicalFrame.getCPtr(parent), parent, PhysicalFrame.getCPtr(child), child), true);
   }
 
   public FreeJoint(String name, PhysicalFrame parent, Vec3 locationInParent, Vec3 orientationInParent, PhysicalFrame child, Vec3 locationInChild, Vec3 orientationInChild) {
-    this(opensimModelSimulationJNI.new_FreeJoint__SWIG_2(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
+    this(opensimSimulationJNI.new_FreeJoint__SWIG_2(name, PhysicalFrame.getCPtr(parent), parent, Vec3.getCPtr(locationInParent), locationInParent, Vec3.getCPtr(orientationInParent), orientationInParent, PhysicalFrame.getCPtr(child), child, Vec3.getCPtr(locationInChild), locationInChild, Vec3.getCPtr(orientationInChild), orientationInChild), true);
   }
 
   public final static class Coord {
-    public final static FreeJoint.Coord Rotation1X = new FreeJoint.Coord("Rotation1X");
-    public final static FreeJoint.Coord Rotation2Y = new FreeJoint.Coord("Rotation2Y");
-    public final static FreeJoint.Coord Rotation3Z = new FreeJoint.Coord("Rotation3Z");
-    public final static FreeJoint.Coord TranslationX = new FreeJoint.Coord("TranslationX");
-    public final static FreeJoint.Coord TranslationY = new FreeJoint.Coord("TranslationY");
-    public final static FreeJoint.Coord TranslationZ = new FreeJoint.Coord("TranslationZ");
+    public final static FreeJoint.Coord Rotation1X = new FreeJoint.Coord("Rotation1X", opensimSimulationJNI.FreeJoint_Coord_Rotation1X_get());
+    public final static FreeJoint.Coord Rotation2Y = new FreeJoint.Coord("Rotation2Y", opensimSimulationJNI.FreeJoint_Coord_Rotation2Y_get());
+    public final static FreeJoint.Coord Rotation3Z = new FreeJoint.Coord("Rotation3Z", opensimSimulationJNI.FreeJoint_Coord_Rotation3Z_get());
+    public final static FreeJoint.Coord TranslationX = new FreeJoint.Coord("TranslationX", opensimSimulationJNI.FreeJoint_Coord_TranslationX_get());
+    public final static FreeJoint.Coord TranslationY = new FreeJoint.Coord("TranslationY", opensimSimulationJNI.FreeJoint_Coord_TranslationY_get());
+    public final static FreeJoint.Coord TranslationZ = new FreeJoint.Coord("TranslationZ", opensimSimulationJNI.FreeJoint_Coord_TranslationZ_get());
 
     public final int swigValue() {
       return swigValue;

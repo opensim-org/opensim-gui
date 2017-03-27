@@ -29,31 +29,31 @@ public class STOFileAdapterVec3 {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_STOFileAdapterVec3(swigCPtr);
+        opensimCommonJNI.delete_STOFileAdapterVec3(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public STOFileAdapterVec3() {
-    this(opensimModelCommonJNI.new_STOFileAdapterVec3__SWIG_0(), true);
+    this(opensimCommonJNI.new_STOFileAdapterVec3__SWIG_0(), true);
   }
 
   public STOFileAdapterVec3(STOFileAdapterVec3 arg0) {
-    this(opensimModelCommonJNI.new_STOFileAdapterVec3__SWIG_1(STOFileAdapterVec3.getCPtr(arg0), arg0), true);
+    this(opensimCommonJNI.new_STOFileAdapterVec3__SWIG_1(STOFileAdapterVec3.getCPtr(arg0), arg0), true);
   }
 
   public STOFileAdapterVec3 clone() {
-    long cPtr = opensimModelCommonJNI.STOFileAdapterVec3_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.STOFileAdapterVec3_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new STOFileAdapterVec3(cPtr, true);
   }
 
   public static TimeSeriesTableVec3 read(String fileName) {
-    return new TimeSeriesTableVec3(opensimModelCommonJNI.STOFileAdapterVec3_read(fileName), true);
+    return new TimeSeriesTableVec3(opensimCommonJNI.STOFileAdapterVec3_read(fileName), true);
   }
 
   public static void write(TimeSeriesTableVec3 table, String fileName) {
-    opensimModelCommonJNI.STOFileAdapterVec3_write(TimeSeriesTableVec3.getCPtr(table), table, fileName);
+    opensimCommonJNI.STOFileAdapterVec3_write(TimeSeriesTableVec3.getCPtr(table), table, fileName);
   }
 
 }

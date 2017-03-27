@@ -12,7 +12,7 @@ public class Scale extends OpenSimObject {
   private transient long swigCPtr;
 
   public Scale(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.Scale_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.Scale_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Scale extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_Scale(swigCPtr);
+        opensimCommonJNI.delete_Scale(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,65 +36,65 @@ public class Scale extends OpenSimObject {
   }
 
   public static Scale safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelCommonJNI.Scale_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimCommonJNI.Scale_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Scale(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelCommonJNI.Scale_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimCommonJNI.Scale_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelCommonJNI.Scale_getClassName();
+    return opensimCommonJNI.Scale_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelCommonJNI.Scale_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.Scale_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Scale(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelCommonJNI.Scale_getConcreteClassName(swigCPtr, this);
+    return opensimCommonJNI.Scale_getConcreteClassName(swigCPtr, this);
   }
 
   public Scale() {
-    this(opensimModelCommonJNI.new_Scale__SWIG_0(), true);
+    this(opensimCommonJNI.new_Scale__SWIG_0(), true);
   }
 
   public Scale(Scale aMarker) {
-    this(opensimModelCommonJNI.new_Scale__SWIG_1(Scale.getCPtr(aMarker), aMarker), true);
+    this(opensimCommonJNI.new_Scale__SWIG_1(Scale.getCPtr(aMarker), aMarker), true);
   }
 
   public Scale(String scaleFileName) {
-    this(opensimModelCommonJNI.new_Scale__SWIG_2(scaleFileName), true);
+    this(opensimCommonJNI.new_Scale__SWIG_2(scaleFileName), true);
   }
 
   public String getSegmentName() {
-    return opensimModelCommonJNI.Scale_getSegmentName(swigCPtr, this);
+    return opensimCommonJNI.Scale_getSegmentName(swigCPtr, this);
   }
 
   public void setSegmentName(String aSegmentName) {
-    opensimModelCommonJNI.Scale_setSegmentName(swigCPtr, this, aSegmentName);
+    opensimCommonJNI.Scale_setSegmentName(swigCPtr, this, aSegmentName);
   }
 
   public void getScaleFactors(Vec3 aScaleFactors) {
-    opensimModelCommonJNI.Scale_getScaleFactors__SWIG_0(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
+    opensimCommonJNI.Scale_getScaleFactors__SWIG_0(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
   }
 
   public Vec3 getScaleFactors() {
-    return new Vec3(opensimModelCommonJNI.Scale_getScaleFactors__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimCommonJNI.Scale_getScaleFactors__SWIG_1(swigCPtr, this), false);
   }
 
   public void setScaleFactors(Vec3 aScaleFactors) {
-    opensimModelCommonJNI.Scale_setScaleFactors(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
+    opensimCommonJNI.Scale_setScaleFactors(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
   }
 
   public boolean getApply() {
-    return opensimModelCommonJNI.Scale_getApply(swigCPtr, this);
+    return opensimCommonJNI.Scale_getApply(swigCPtr, this);
   }
 
   public void setApply(boolean state) {
-    opensimModelCommonJNI.Scale_setApply(swigCPtr, this, state);
+    opensimCommonJNI.Scale_setApply(swigCPtr, this, state);
   }
 
 }

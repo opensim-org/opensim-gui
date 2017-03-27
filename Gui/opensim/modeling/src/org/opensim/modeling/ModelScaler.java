@@ -12,7 +12,7 @@ public class ModelScaler extends OpenSimObject {
   private transient long swigCPtr;
 
   public ModelScaler(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ModelScaler_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.ModelScaler_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ModelScaler extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ModelScaler(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_ModelScaler(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,141 +36,141 @@ public class ModelScaler extends OpenSimObject {
   }
 
   public static ModelScaler safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ModelScaler_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.ModelScaler_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ModelScaler(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.ModelScaler_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.ModelScaler_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.ModelScaler_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.ModelScaler_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.ModelScaler_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.ModelScaler_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ModelScaler(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.ModelScaler_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.ModelScaler_getConcreteClassName(swigCPtr, this);
   }
 
   public ModelScaler() {
-    this(opensimModelJNI.new_ModelScaler__SWIG_0(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_ModelScaler__SWIG_0(), true);
   }
 
   public ModelScaler(ModelScaler aModelScaler) {
-    this(opensimModelJNI.new_ModelScaler__SWIG_1(ModelScaler.getCPtr(aModelScaler), aModelScaler), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_ModelScaler__SWIG_1(ModelScaler.getCPtr(aModelScaler), aModelScaler), true);
   }
 
   public void copyData(ModelScaler aModelScaler) {
-    opensimModelJNI.ModelScaler_copyData(swigCPtr, this, ModelScaler.getCPtr(aModelScaler), aModelScaler);
+    opensimActuatorsAnalysesToolsJNI.ModelScaler_copyData(swigCPtr, this, ModelScaler.getCPtr(aModelScaler), aModelScaler);
   }
 
   public boolean processModel(Model aModel, String aPathToSubject, double aFinalMass) {
-    return opensimModelJNI.ModelScaler_processModel__SWIG_0(swigCPtr, this, Model.getCPtr(aModel), aModel, aPathToSubject, aFinalMass);
+    return opensimActuatorsAnalysesToolsJNI.ModelScaler_processModel__SWIG_0(swigCPtr, this, Model.getCPtr(aModel), aModel, aPathToSubject, aFinalMass);
   }
 
   public boolean processModel(Model aModel, String aPathToSubject) {
-    return opensimModelJNI.ModelScaler_processModel__SWIG_1(swigCPtr, this, Model.getCPtr(aModel), aModel, aPathToSubject);
+    return opensimActuatorsAnalysesToolsJNI.ModelScaler_processModel__SWIG_1(swigCPtr, this, Model.getCPtr(aModel), aModel, aPathToSubject);
   }
 
   public boolean processModel(Model aModel) {
-    return opensimModelJNI.ModelScaler_processModel__SWIG_2(swigCPtr, this, Model.getCPtr(aModel), aModel);
+    return opensimActuatorsAnalysesToolsJNI.ModelScaler_processModel__SWIG_2(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
   public static void registerTypes() {
-    opensimModelJNI.ModelScaler_registerTypes();
+    opensimActuatorsAnalysesToolsJNI.ModelScaler_registerTypes();
   }
 
   public void addMeasurement(Measurement aMeasurement) {
-    opensimModelJNI.ModelScaler_addMeasurement(swigCPtr, this, Measurement.getCPtr(aMeasurement), aMeasurement);
+    opensimActuatorsAnalysesToolsJNI.ModelScaler_addMeasurement(swigCPtr, this, Measurement.getCPtr(aMeasurement), aMeasurement);
   }
 
   public void addScale(Scale aScale) {
-    opensimModelJNI.ModelScaler_addScale(swigCPtr, this, Scale.getCPtr(aScale), aScale);
+    opensimActuatorsAnalysesToolsJNI.ModelScaler_addScale(swigCPtr, this, Scale.getCPtr(aScale), aScale);
   }
 
   public boolean getApply() {
-    return opensimModelJNI.ModelScaler_getApply(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.ModelScaler_getApply(swigCPtr, this);
   }
 
   public void setApply(boolean aApply) {
-    opensimModelJNI.ModelScaler_setApply(swigCPtr, this, aApply);
+    opensimActuatorsAnalysesToolsJNI.ModelScaler_setApply(swigCPtr, this, aApply);
   }
 
   public MeasurementSet getMeasurementSet() {
-    return new MeasurementSet(opensimModelJNI.ModelScaler_getMeasurementSet(swigCPtr, this), false);
+    return new MeasurementSet(opensimActuatorsAnalysesToolsJNI.ModelScaler_getMeasurementSet(swigCPtr, this), false);
   }
 
   public void setMeasurementSet(MeasurementSet measurementSet) {
-    opensimModelJNI.ModelScaler_setMeasurementSet(swigCPtr, this, MeasurementSet.getCPtr(measurementSet), measurementSet);
+    opensimActuatorsAnalysesToolsJNI.ModelScaler_setMeasurementSet(swigCPtr, this, MeasurementSet.getCPtr(measurementSet), measurementSet);
   }
 
   public ScaleSet getScaleSet() {
-    return new ScaleSet(opensimModelJNI.ModelScaler_getScaleSet(swigCPtr, this), false);
+    return new ScaleSet(opensimActuatorsAnalysesToolsJNI.ModelScaler_getScaleSet(swigCPtr, this), false);
   }
 
   public void setScaleSetFile(String aScaleSetFilename) {
-    opensimModelJNI.ModelScaler_setScaleSetFile(swigCPtr, this, aScaleSetFilename);
+    opensimActuatorsAnalysesToolsJNI.ModelScaler_setScaleSetFile(swigCPtr, this, aScaleSetFilename);
   }
 
   public ArrayDouble getTimeRange() {
-    return new ArrayDouble(opensimModelJNI.ModelScaler_getTimeRange(swigCPtr, this), false);
+    return new ArrayDouble(opensimActuatorsAnalysesToolsJNI.ModelScaler_getTimeRange(swigCPtr, this), false);
   }
 
   public void setTimeRange(ArrayDouble timeRange) {
-    opensimModelJNI.ModelScaler_setTimeRange(swigCPtr, this, ArrayDouble.getCPtr(timeRange), timeRange);
+    opensimActuatorsAnalysesToolsJNI.ModelScaler_setTimeRange(swigCPtr, this, ArrayDouble.getCPtr(timeRange), timeRange);
   }
 
   public boolean getPreserveMassDist() {
-    return opensimModelJNI.ModelScaler_getPreserveMassDist(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.ModelScaler_getPreserveMassDist(swigCPtr, this);
   }
 
   public void setPreserveMassDist(boolean preserveMassDist) {
-    opensimModelJNI.ModelScaler_setPreserveMassDist(swigCPtr, this, preserveMassDist);
+    opensimActuatorsAnalysesToolsJNI.ModelScaler_setPreserveMassDist(swigCPtr, this, preserveMassDist);
   }
 
   public ArrayStr getScalingOrder() {
-    return new ArrayStr(opensimModelJNI.ModelScaler_getScalingOrder(swigCPtr, this), false);
+    return new ArrayStr(opensimActuatorsAnalysesToolsJNI.ModelScaler_getScalingOrder(swigCPtr, this), false);
   }
 
   public void setScalingOrder(ArrayStr scalingOrder) {
-    opensimModelJNI.ModelScaler_setScalingOrder(swigCPtr, this, ArrayStr.getCPtr(scalingOrder), scalingOrder);
+    opensimActuatorsAnalysesToolsJNI.ModelScaler_setScalingOrder(swigCPtr, this, ArrayStr.getCPtr(scalingOrder), scalingOrder);
   }
 
   public String getMarkerFileName() {
-    return opensimModelJNI.ModelScaler_getMarkerFileName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.ModelScaler_getMarkerFileName(swigCPtr, this);
   }
 
   public void setMarkerFileName(String aMarkerFileName) {
-    opensimModelJNI.ModelScaler_setMarkerFileName(swigCPtr, this, aMarkerFileName);
+    opensimActuatorsAnalysesToolsJNI.ModelScaler_setMarkerFileName(swigCPtr, this, aMarkerFileName);
   }
 
   public String getOutputModelFileName() {
-    return opensimModelJNI.ModelScaler_getOutputModelFileName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.ModelScaler_getOutputModelFileName(swigCPtr, this);
   }
 
   public void setOutputModelFileName(String aOutputModelFileName) {
-    opensimModelJNI.ModelScaler_setOutputModelFileName(swigCPtr, this, aOutputModelFileName);
+    opensimActuatorsAnalysesToolsJNI.ModelScaler_setOutputModelFileName(swigCPtr, this, aOutputModelFileName);
   }
 
   public String getOutputScaleFileName() {
-    return opensimModelJNI.ModelScaler_getOutputScaleFileName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.ModelScaler_getOutputScaleFileName(swigCPtr, this);
   }
 
   public void setOutputScaleFileName(String aOutputScaleFileName) {
-    opensimModelJNI.ModelScaler_setOutputScaleFileName(swigCPtr, this, aOutputScaleFileName);
+    opensimActuatorsAnalysesToolsJNI.ModelScaler_setOutputScaleFileName(swigCPtr, this, aOutputScaleFileName);
   }
 
   public void setPrintResultFiles(boolean aToWrite) {
-    opensimModelJNI.ModelScaler_setPrintResultFiles(swigCPtr, this, aToWrite);
+    opensimActuatorsAnalysesToolsJNI.ModelScaler_setPrintResultFiles(swigCPtr, this, aToWrite);
   }
 
   public double computeMeasurementScaleFactor(State s, Model aModel, MarkerData aMarkerData, Measurement aMeasurement) {
-    return opensimModelJNI.ModelScaler_computeMeasurementScaleFactor(swigCPtr, this, State.getCPtr(s), s, Model.getCPtr(aModel), aModel, MarkerData.getCPtr(aMarkerData), aMarkerData, Measurement.getCPtr(aMeasurement), aMeasurement);
+    return opensimActuatorsAnalysesToolsJNI.ModelScaler_computeMeasurementScaleFactor(swigCPtr, this, State.getCPtr(s), s, Model.getCPtr(aModel), aModel, MarkerData.getCPtr(aMarkerData), aMarkerData, Measurement.getCPtr(aMeasurement), aMeasurement);
   }
 
 }

@@ -12,7 +12,7 @@ public class CoordinateCouplerConstraint extends Constraint {
   private transient long swigCPtr;
 
   public CoordinateCouplerConstraint(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.CoordinateCouplerConstraint_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.CoordinateCouplerConstraint_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class CoordinateCouplerConstraint extends Constraint {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_CoordinateCouplerConstraint(swigCPtr);
+        opensimSimulationJNI.delete_CoordinateCouplerConstraint(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,57 +36,57 @@ public class CoordinateCouplerConstraint extends Constraint {
   }
 
   public static CoordinateCouplerConstraint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.CoordinateCouplerConstraint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.CoordinateCouplerConstraint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new CoordinateCouplerConstraint(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.CoordinateCouplerConstraint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.CoordinateCouplerConstraint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.CoordinateCouplerConstraint_getClassName();
+    return opensimSimulationJNI.CoordinateCouplerConstraint_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.CoordinateCouplerConstraint_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.CoordinateCouplerConstraint_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new CoordinateCouplerConstraint(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.CoordinateCouplerConstraint_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.CoordinateCouplerConstraint_getConcreteClassName(swigCPtr, this);
   }
 
   public CoordinateCouplerConstraint() {
-    this(opensimModelSimulationJNI.new_CoordinateCouplerConstraint(), true);
+    this(opensimSimulationJNI.new_CoordinateCouplerConstraint(), true);
   }
 
   public void setIndependentCoordinateNames(ArrayStr aCoordNames) {
-    opensimModelSimulationJNI.CoordinateCouplerConstraint_setIndependentCoordinateNames(swigCPtr, this, ArrayStr.getCPtr(aCoordNames), aCoordNames);
+    opensimSimulationJNI.CoordinateCouplerConstraint_setIndependentCoordinateNames(swigCPtr, this, ArrayStr.getCPtr(aCoordNames), aCoordNames);
   }
 
   public ArrayStr getIndependentCoordinateNames() {
-    return new ArrayStr(opensimModelSimulationJNI.CoordinateCouplerConstraint_getIndependentCoordinateNames(swigCPtr, this), true);
+    return new ArrayStr(opensimSimulationJNI.CoordinateCouplerConstraint_getIndependentCoordinateNames(swigCPtr, this), true);
   }
 
   public void setDependentCoordinateName(String aCoordName) {
-    opensimModelSimulationJNI.CoordinateCouplerConstraint_setDependentCoordinateName(swigCPtr, this, aCoordName);
+    opensimSimulationJNI.CoordinateCouplerConstraint_setDependentCoordinateName(swigCPtr, this, aCoordName);
   }
 
   public String getDependentCoordinateName() {
-    return opensimModelSimulationJNI.CoordinateCouplerConstraint_getDependentCoordinateName(swigCPtr, this);
+    return opensimSimulationJNI.CoordinateCouplerConstraint_getDependentCoordinateName(swigCPtr, this);
   }
 
   public Function getFunction() {
-    return new Function(opensimModelSimulationJNI.CoordinateCouplerConstraint_getFunction(swigCPtr, this), false);
+    return new Function(opensimSimulationJNI.CoordinateCouplerConstraint_getFunction(swigCPtr, this), false);
   }
 
   public void setFunction(Function aFunction) {
-    opensimModelSimulationJNI.CoordinateCouplerConstraint_setFunction__SWIG_0(swigCPtr, this, Function.getCPtr(aFunction), aFunction);
+    opensimSimulationJNI.CoordinateCouplerConstraint_setFunction__SWIG_0(swigCPtr, this, Function.getCPtr(aFunction), aFunction);
   }
 
   public void scale(ScaleSet aScaleSet) {
-    opensimModelSimulationJNI.CoordinateCouplerConstraint_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
+    opensimSimulationJNI.CoordinateCouplerConstraint_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
   }
 
 }

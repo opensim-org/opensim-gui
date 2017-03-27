@@ -29,213 +29,213 @@ public class ArrayCoordinateReference {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_ArrayCoordinateReference(swigCPtr);
+        opensimSimulationJNI.delete_ArrayCoordinateReference(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public ArrayCoordinateReference() {
-    this(opensimModelSimulationJNI.new_ArrayCoordinateReference__SWIG_0(), true);
+    this(opensimSimulationJNI.new_ArrayCoordinateReference__SWIG_0(), true);
   }
 
   public ArrayCoordinateReference(long n) {
-    this(opensimModelSimulationJNI.new_ArrayCoordinateReference__SWIG_1(n), true);
+    this(opensimSimulationJNI.new_ArrayCoordinateReference__SWIG_1(n), true);
   }
 
   public ArrayCoordinateReference(long n, CoordinateReference initVal) {
-    this(opensimModelSimulationJNI.new_ArrayCoordinateReference__SWIG_2(n, CoordinateReference.getCPtr(initVal), initVal), true);
+    this(opensimSimulationJNI.new_ArrayCoordinateReference__SWIG_2(n, CoordinateReference.getCPtr(initVal), initVal), true);
   }
 
   public ArrayCoordinateReference(ArrayCoordinateReference src) {
-    this(opensimModelSimulationJNI.new_ArrayCoordinateReference__SWIG_3(ArrayCoordinateReference.getCPtr(src), src), true);
+    this(opensimSimulationJNI.new_ArrayCoordinateReference__SWIG_3(ArrayCoordinateReference.getCPtr(src), src), true);
   }
 
   public ArrayCoordinateReference(CoordinateReference first, CoordinateReference last1, DontCopy arg2) {
-    this(opensimModelSimulationJNI.new_ArrayCoordinateReference__SWIG_4(CoordinateReference.getCPtr(first), first, CoordinateReference.getCPtr(last1), last1, DontCopy.getCPtr(arg2), arg2), true);
+    this(opensimSimulationJNI.new_ArrayCoordinateReference__SWIG_4(CoordinateReference.getCPtr(first), first, CoordinateReference.getCPtr(last1), last1, DontCopy.getCPtr(arg2), arg2), true);
   }
 
   public ArrayCoordinateReference deallocate() {
-    return new ArrayCoordinateReference(opensimModelSimulationJNI.ArrayCoordinateReference_deallocate(swigCPtr, this), false);
+    return new ArrayCoordinateReference(opensimSimulationJNI.ArrayCoordinateReference_deallocate(swigCPtr, this), false);
   }
 
   public void assign(long n, CoordinateReference fillValue) {
-    opensimModelSimulationJNI.ArrayCoordinateReference_assign(swigCPtr, this, n, CoordinateReference.getCPtr(fillValue), fillValue);
+    opensimSimulationJNI.ArrayCoordinateReference_assign(swigCPtr, this, n, CoordinateReference.getCPtr(fillValue), fillValue);
   }
 
   public void fill(CoordinateReference fillValue) {
-    opensimModelSimulationJNI.ArrayCoordinateReference_fill(swigCPtr, this, CoordinateReference.getCPtr(fillValue), fillValue);
+    opensimSimulationJNI.ArrayCoordinateReference_fill(swigCPtr, this, CoordinateReference.getCPtr(fillValue), fillValue);
   }
 
   public void swap(ArrayCoordinateReference other) {
-    opensimModelSimulationJNI.ArrayCoordinateReference_swap(swigCPtr, this, ArrayCoordinateReference.getCPtr(other), other);
+    opensimSimulationJNI.ArrayCoordinateReference_swap(swigCPtr, this, ArrayCoordinateReference.getCPtr(other), other);
   }
 
   public ArrayCoordinateReference adoptData(CoordinateReference newData, long dataSize, long dataCapacity) {
-    return new ArrayCoordinateReference(opensimModelSimulationJNI.ArrayCoordinateReference_adoptData__SWIG_0(swigCPtr, this, CoordinateReference.getCPtr(newData), newData, dataSize, dataCapacity), false);
+    return new ArrayCoordinateReference(opensimSimulationJNI.ArrayCoordinateReference_adoptData__SWIG_0(swigCPtr, this, CoordinateReference.getCPtr(newData), newData, dataSize, dataCapacity), false);
   }
 
   public ArrayCoordinateReference adoptData(CoordinateReference newData, long dataSize) {
-    return new ArrayCoordinateReference(opensimModelSimulationJNI.ArrayCoordinateReference_adoptData__SWIG_1(swigCPtr, this, CoordinateReference.getCPtr(newData), newData, dataSize), false);
+    return new ArrayCoordinateReference(opensimSimulationJNI.ArrayCoordinateReference_adoptData__SWIG_1(swigCPtr, this, CoordinateReference.getCPtr(newData), newData, dataSize), false);
   }
 
   public ArrayCoordinateReference shareData(CoordinateReference newData, long dataSize) {
-    return new ArrayCoordinateReference(opensimModelSimulationJNI.ArrayCoordinateReference_shareData__SWIG_0(swigCPtr, this, CoordinateReference.getCPtr(newData), newData, dataSize), false);
+    return new ArrayCoordinateReference(opensimSimulationJNI.ArrayCoordinateReference_shareData__SWIG_0(swigCPtr, this, CoordinateReference.getCPtr(newData), newData, dataSize), false);
   }
 
   public ArrayCoordinateReference shareData(CoordinateReference first, CoordinateReference last1) {
-    return new ArrayCoordinateReference(opensimModelSimulationJNI.ArrayCoordinateReference_shareData__SWIG_1(swigCPtr, this, CoordinateReference.getCPtr(first), first, CoordinateReference.getCPtr(last1), last1), false);
+    return new ArrayCoordinateReference(opensimSimulationJNI.ArrayCoordinateReference_shareData__SWIG_1(swigCPtr, this, CoordinateReference.getCPtr(first), first, CoordinateReference.getCPtr(last1), last1), false);
   }
 
   public long size() {
-    return opensimModelSimulationJNI.ArrayCoordinateReference_size(swigCPtr, this);
+    return opensimSimulationJNI.ArrayCoordinateReference_size(swigCPtr, this);
   }
 
   public long max_size() {
-    return opensimModelSimulationJNI.ArrayCoordinateReference_max_size(swigCPtr, this);
+    return opensimSimulationJNI.ArrayCoordinateReference_max_size(swigCPtr, this);
   }
 
   public boolean empty() {
-    return opensimModelSimulationJNI.ArrayCoordinateReference_empty(swigCPtr, this);
+    return opensimSimulationJNI.ArrayCoordinateReference_empty(swigCPtr, this);
   }
 
   public long capacity() {
-    return opensimModelSimulationJNI.ArrayCoordinateReference_capacity(swigCPtr, this);
+    return opensimSimulationJNI.ArrayCoordinateReference_capacity(swigCPtr, this);
   }
 
   public void resize(long n) {
-    opensimModelSimulationJNI.ArrayCoordinateReference_resize__SWIG_0(swigCPtr, this, n);
+    opensimSimulationJNI.ArrayCoordinateReference_resize__SWIG_0(swigCPtr, this, n);
   }
 
   public void resize(long n, CoordinateReference initVal) {
-    opensimModelSimulationJNI.ArrayCoordinateReference_resize__SWIG_1(swigCPtr, this, n, CoordinateReference.getCPtr(initVal), initVal);
+    opensimSimulationJNI.ArrayCoordinateReference_resize__SWIG_1(swigCPtr, this, n, CoordinateReference.getCPtr(initVal), initVal);
   }
 
   public void reserve(long n) {
-    opensimModelSimulationJNI.ArrayCoordinateReference_reserve(swigCPtr, this, n);
+    opensimSimulationJNI.ArrayCoordinateReference_reserve(swigCPtr, this, n);
   }
 
   public void shrink_to_fit() {
-    opensimModelSimulationJNI.ArrayCoordinateReference_shrink_to_fit(swigCPtr, this);
+    opensimSimulationJNI.ArrayCoordinateReference_shrink_to_fit(swigCPtr, this);
   }
 
   public long allocated() {
-    return opensimModelSimulationJNI.ArrayCoordinateReference_allocated(swigCPtr, this);
+    return opensimSimulationJNI.ArrayCoordinateReference_allocated(swigCPtr, this);
   }
 
   public boolean isOwner() {
-    return opensimModelSimulationJNI.ArrayCoordinateReference_isOwner(swigCPtr, this);
+    return opensimSimulationJNI.ArrayCoordinateReference_isOwner(swigCPtr, this);
   }
 
   public CoordinateReference cbegin() {
-    long cPtr = opensimModelSimulationJNI.ArrayCoordinateReference_cbegin(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.ArrayCoordinateReference_cbegin(swigCPtr, this);
     return (cPtr == 0) ? null : new CoordinateReference(cPtr, false);
   }
 
   public CoordinateReference begin() {
-    long cPtr = opensimModelSimulationJNI.ArrayCoordinateReference_begin__SWIG_0(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.ArrayCoordinateReference_begin__SWIG_0(swigCPtr, this);
     return (cPtr == 0) ? null : new CoordinateReference(cPtr, false);
   }
 
   public CoordinateReference cend() {
-    long cPtr = opensimModelSimulationJNI.ArrayCoordinateReference_cend(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.ArrayCoordinateReference_cend(swigCPtr, this);
     return (cPtr == 0) ? null : new CoordinateReference(cPtr, false);
   }
 
   public CoordinateReference end() {
-    long cPtr = opensimModelSimulationJNI.ArrayCoordinateReference_end__SWIG_0(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.ArrayCoordinateReference_end__SWIG_0(swigCPtr, this);
     return (cPtr == 0) ? null : new CoordinateReference(cPtr, false);
   }
 
   public SWIGTYPE_p_std__reverse_iteratorT_OpenSim__CoordinateReference_const_p_t crbegin() {
-    return new SWIGTYPE_p_std__reverse_iteratorT_OpenSim__CoordinateReference_const_p_t(opensimModelSimulationJNI.ArrayCoordinateReference_crbegin(swigCPtr, this), true);
+    return new SWIGTYPE_p_std__reverse_iteratorT_OpenSim__CoordinateReference_const_p_t(opensimSimulationJNI.ArrayCoordinateReference_crbegin(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_std__reverse_iteratorT_OpenSim__CoordinateReference_const_p_t rbegin() {
-    return new SWIGTYPE_p_std__reverse_iteratorT_OpenSim__CoordinateReference_const_p_t(opensimModelSimulationJNI.ArrayCoordinateReference_rbegin__SWIG_0(swigCPtr, this), true);
+    return new SWIGTYPE_p_std__reverse_iteratorT_OpenSim__CoordinateReference_const_p_t(opensimSimulationJNI.ArrayCoordinateReference_rbegin__SWIG_0(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_std__reverse_iteratorT_OpenSim__CoordinateReference_const_p_t crend() {
-    return new SWIGTYPE_p_std__reverse_iteratorT_OpenSim__CoordinateReference_const_p_t(opensimModelSimulationJNI.ArrayCoordinateReference_crend(swigCPtr, this), true);
+    return new SWIGTYPE_p_std__reverse_iteratorT_OpenSim__CoordinateReference_const_p_t(opensimSimulationJNI.ArrayCoordinateReference_crend(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_std__reverse_iteratorT_OpenSim__CoordinateReference_const_p_t rend() {
-    return new SWIGTYPE_p_std__reverse_iteratorT_OpenSim__CoordinateReference_const_p_t(opensimModelSimulationJNI.ArrayCoordinateReference_rend__SWIG_0(swigCPtr, this), true);
+    return new SWIGTYPE_p_std__reverse_iteratorT_OpenSim__CoordinateReference_const_p_t(opensimSimulationJNI.ArrayCoordinateReference_rend__SWIG_0(swigCPtr, this), true);
   }
 
   public CoordinateReference cdata() {
-    long cPtr = opensimModelSimulationJNI.ArrayCoordinateReference_cdata(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.ArrayCoordinateReference_cdata(swigCPtr, this);
     return (cPtr == 0) ? null : new CoordinateReference(cPtr, false);
   }
 
   public CoordinateReference data() {
-    long cPtr = opensimModelSimulationJNI.ArrayCoordinateReference_data__SWIG_0(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.ArrayCoordinateReference_data__SWIG_0(swigCPtr, this);
     return (cPtr == 0) ? null : new CoordinateReference(cPtr, false);
   }
 
   public CoordinateReference at(long i) {
-    return new CoordinateReference(opensimModelSimulationJNI.ArrayCoordinateReference_at__SWIG_0(swigCPtr, this, i), false);
+    return new CoordinateReference(opensimSimulationJNI.ArrayCoordinateReference_at__SWIG_0(swigCPtr, this, i), false);
   }
 
   public CoordinateReference getElt(long i) {
-    return new CoordinateReference(opensimModelSimulationJNI.ArrayCoordinateReference_getElt(swigCPtr, this, i), false);
+    return new CoordinateReference(opensimSimulationJNI.ArrayCoordinateReference_getElt(swigCPtr, this, i), false);
   }
 
   public CoordinateReference updElt(long i) {
-    return new CoordinateReference(opensimModelSimulationJNI.ArrayCoordinateReference_updElt(swigCPtr, this, i), false);
+    return new CoordinateReference(opensimSimulationJNI.ArrayCoordinateReference_updElt(swigCPtr, this, i), false);
   }
 
   public CoordinateReference front() {
-    return new CoordinateReference(opensimModelSimulationJNI.ArrayCoordinateReference_front__SWIG_0(swigCPtr, this), false);
+    return new CoordinateReference(opensimSimulationJNI.ArrayCoordinateReference_front__SWIG_0(swigCPtr, this), false);
   }
 
   public CoordinateReference back() {
-    return new CoordinateReference(opensimModelSimulationJNI.ArrayCoordinateReference_back__SWIG_0(swigCPtr, this), false);
+    return new CoordinateReference(opensimSimulationJNI.ArrayCoordinateReference_back__SWIG_0(swigCPtr, this), false);
   }
 
   public void push_back(CoordinateReference value) {
-    opensimModelSimulationJNI.ArrayCoordinateReference_push_back__SWIG_0(swigCPtr, this, CoordinateReference.getCPtr(value), value);
+    opensimSimulationJNI.ArrayCoordinateReference_push_back__SWIG_0(swigCPtr, this, CoordinateReference.getCPtr(value), value);
   }
 
   public void push_back() {
-    opensimModelSimulationJNI.ArrayCoordinateReference_push_back__SWIG_1(swigCPtr, this);
+    opensimSimulationJNI.ArrayCoordinateReference_push_back__SWIG_1(swigCPtr, this);
   }
 
   public CoordinateReference raw_push_back() {
-    long cPtr = opensimModelSimulationJNI.ArrayCoordinateReference_raw_push_back(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.ArrayCoordinateReference_raw_push_back(swigCPtr, this);
     return (cPtr == 0) ? null : new CoordinateReference(cPtr, false);
   }
 
   public void pop_back() {
-    opensimModelSimulationJNI.ArrayCoordinateReference_pop_back(swigCPtr, this);
+    opensimSimulationJNI.ArrayCoordinateReference_pop_back(swigCPtr, this);
   }
 
   public CoordinateReference erase(CoordinateReference first, CoordinateReference last1) {
-    long cPtr = opensimModelSimulationJNI.ArrayCoordinateReference_erase__SWIG_0(swigCPtr, this, CoordinateReference.getCPtr(first), first, CoordinateReference.getCPtr(last1), last1);
+    long cPtr = opensimSimulationJNI.ArrayCoordinateReference_erase__SWIG_0(swigCPtr, this, CoordinateReference.getCPtr(first), first, CoordinateReference.getCPtr(last1), last1);
     return (cPtr == 0) ? null : new CoordinateReference(cPtr, false);
   }
 
   public CoordinateReference erase(CoordinateReference p) {
-    long cPtr = opensimModelSimulationJNI.ArrayCoordinateReference_erase__SWIG_1(swigCPtr, this, CoordinateReference.getCPtr(p), p);
+    long cPtr = opensimSimulationJNI.ArrayCoordinateReference_erase__SWIG_1(swigCPtr, this, CoordinateReference.getCPtr(p), p);
     return (cPtr == 0) ? null : new CoordinateReference(cPtr, false);
   }
 
   public CoordinateReference eraseFast(CoordinateReference p) {
-    long cPtr = opensimModelSimulationJNI.ArrayCoordinateReference_eraseFast(swigCPtr, this, CoordinateReference.getCPtr(p), p);
+    long cPtr = opensimSimulationJNI.ArrayCoordinateReference_eraseFast(swigCPtr, this, CoordinateReference.getCPtr(p), p);
     return (cPtr == 0) ? null : new CoordinateReference(cPtr, false);
   }
 
   public void clear() {
-    opensimModelSimulationJNI.ArrayCoordinateReference_clear(swigCPtr, this);
+    opensimSimulationJNI.ArrayCoordinateReference_clear(swigCPtr, this);
   }
 
   public CoordinateReference insert(CoordinateReference p, long n, CoordinateReference value) {
-    long cPtr = opensimModelSimulationJNI.ArrayCoordinateReference_insert__SWIG_0(swigCPtr, this, CoordinateReference.getCPtr(p), p, n, CoordinateReference.getCPtr(value), value);
+    long cPtr = opensimSimulationJNI.ArrayCoordinateReference_insert__SWIG_0(swigCPtr, this, CoordinateReference.getCPtr(p), p, n, CoordinateReference.getCPtr(value), value);
     return (cPtr == 0) ? null : new CoordinateReference(cPtr, false);
   }
 
   public CoordinateReference insert(CoordinateReference p, CoordinateReference value) {
-    long cPtr = opensimModelSimulationJNI.ArrayCoordinateReference_insert__SWIG_1(swigCPtr, this, CoordinateReference.getCPtr(p), p, CoordinateReference.getCPtr(value), value);
+    long cPtr = opensimSimulationJNI.ArrayCoordinateReference_insert__SWIG_1(swigCPtr, this, CoordinateReference.getCPtr(p), p, CoordinateReference.getCPtr(value), value);
     return (cPtr == 0) ? null : new CoordinateReference(cPtr, false);
   }
 

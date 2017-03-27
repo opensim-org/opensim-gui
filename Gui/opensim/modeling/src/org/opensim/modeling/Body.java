@@ -12,7 +12,7 @@ public class Body extends PhysicalFrame {
   private transient long swigCPtr;
 
   public Body(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.Body_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.Body_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Body extends PhysicalFrame {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_Body(swigCPtr);
+        opensimSimulationJNI.delete_Body(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,197 +36,197 @@ public class Body extends PhysicalFrame {
   }
 
   public static Body safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.Body_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.Body_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Body(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.Body_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.Body_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.Body_getClassName();
+    return opensimSimulationJNI.Body_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.Body_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.Body_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Body(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.Body_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.Body_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_mass(Body source) {
-    opensimModelSimulationJNI.Body_copyProperty_mass(swigCPtr, this, Body.getCPtr(source), source);
+    opensimSimulationJNI.Body_copyProperty_mass(swigCPtr, this, Body.getCPtr(source), source);
   }
 
   public double get_mass(int i) {
-    return opensimModelSimulationJNI.Body_get_mass__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Body_get_mass__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_mass(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Body_upd_mass__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.Body_upd_mass__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_mass(int i, double value) {
-    opensimModelSimulationJNI.Body_set_mass__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.Body_set_mass__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_mass(double value) {
-    return opensimModelSimulationJNI.Body_append_mass(swigCPtr, this, value);
+    return opensimSimulationJNI.Body_append_mass(swigCPtr, this, value);
   }
 
   public void constructProperty_mass(double initValue) {
-    opensimModelSimulationJNI.Body_constructProperty_mass(swigCPtr, this, initValue);
+    opensimSimulationJNI.Body_constructProperty_mass(swigCPtr, this, initValue);
   }
 
   public double get_mass() {
-    return opensimModelSimulationJNI.Body_get_mass__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Body_get_mass__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_mass() {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Body_upd_mass__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.Body_upd_mass__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_mass(double value) {
-    opensimModelSimulationJNI.Body_set_mass__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.Body_set_mass__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_mass_center(Body source) {
-    opensimModelSimulationJNI.Body_copyProperty_mass_center(swigCPtr, this, Body.getCPtr(source), source);
+    opensimSimulationJNI.Body_copyProperty_mass_center(swigCPtr, this, Body.getCPtr(source), source);
   }
 
   public Vec3 get_mass_center(int i) {
-    return new Vec3(opensimModelSimulationJNI.Body_get_mass_center__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimSimulationJNI.Body_get_mass_center__SWIG_0(swigCPtr, this, i), false);
   }
 
   public Vec3 upd_mass_center(int i) {
-    return new Vec3(opensimModelSimulationJNI.Body_upd_mass_center__SWIG_0(swigCPtr, this, i), false);
+    return new Vec3(opensimSimulationJNI.Body_upd_mass_center__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_mass_center(int i, Vec3 value) {
-    opensimModelSimulationJNI.Body_set_mass_center__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+    opensimSimulationJNI.Body_set_mass_center__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
   }
 
   public int append_mass_center(Vec3 value) {
-    return opensimModelSimulationJNI.Body_append_mass_center(swigCPtr, this, Vec3.getCPtr(value), value);
+    return opensimSimulationJNI.Body_append_mass_center(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void constructProperty_mass_center(Vec3 initValue) {
-    opensimModelSimulationJNI.Body_constructProperty_mass_center(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+    opensimSimulationJNI.Body_constructProperty_mass_center(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
   }
 
   public Vec3 get_mass_center() {
-    return new Vec3(opensimModelSimulationJNI.Body_get_mass_center__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.Body_get_mass_center__SWIG_1(swigCPtr, this), false);
   }
 
   public Vec3 upd_mass_center() {
-    return new Vec3(opensimModelSimulationJNI.Body_upd_mass_center__SWIG_1(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.Body_upd_mass_center__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_mass_center(Vec3 value) {
-    opensimModelSimulationJNI.Body_set_mass_center__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+    opensimSimulationJNI.Body_set_mass_center__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void copyProperty_inertia(Body source) {
-    opensimModelSimulationJNI.Body_copyProperty_inertia(swigCPtr, this, Body.getCPtr(source), source);
+    opensimSimulationJNI.Body_copyProperty_inertia(swigCPtr, this, Body.getCPtr(source), source);
   }
 
   public Vec6 get_inertia(int i) {
-    return new Vec6(opensimModelSimulationJNI.Body_get_inertia__SWIG_0(swigCPtr, this, i), false);
+    return new Vec6(opensimSimulationJNI.Body_get_inertia__SWIG_0(swigCPtr, this, i), false);
   }
 
   public Vec6 upd_inertia(int i) {
-    return new Vec6(opensimModelSimulationJNI.Body_upd_inertia__SWIG_0(swigCPtr, this, i), false);
+    return new Vec6(opensimSimulationJNI.Body_upd_inertia__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_inertia(int i, Vec6 value) {
-    opensimModelSimulationJNI.Body_set_inertia__SWIG_0(swigCPtr, this, i, Vec6.getCPtr(value), value);
+    opensimSimulationJNI.Body_set_inertia__SWIG_0(swigCPtr, this, i, Vec6.getCPtr(value), value);
   }
 
   public int append_inertia(Vec6 value) {
-    return opensimModelSimulationJNI.Body_append_inertia(swigCPtr, this, Vec6.getCPtr(value), value);
+    return opensimSimulationJNI.Body_append_inertia(swigCPtr, this, Vec6.getCPtr(value), value);
   }
 
   public void constructProperty_inertia(Vec6 initValue) {
-    opensimModelSimulationJNI.Body_constructProperty_inertia(swigCPtr, this, Vec6.getCPtr(initValue), initValue);
+    opensimSimulationJNI.Body_constructProperty_inertia(swigCPtr, this, Vec6.getCPtr(initValue), initValue);
   }
 
   public Vec6 get_inertia() {
-    return new Vec6(opensimModelSimulationJNI.Body_get_inertia__SWIG_1(swigCPtr, this), false);
+    return new Vec6(opensimSimulationJNI.Body_get_inertia__SWIG_1(swigCPtr, this), false);
   }
 
   public Vec6 upd_inertia() {
-    return new Vec6(opensimModelSimulationJNI.Body_upd_inertia__SWIG_1(swigCPtr, this), false);
+    return new Vec6(opensimSimulationJNI.Body_upd_inertia__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_inertia(Vec6 value) {
-    opensimModelSimulationJNI.Body_set_inertia__SWIG_1(swigCPtr, this, Vec6.getCPtr(value), value);
+    opensimSimulationJNI.Body_set_inertia__SWIG_1(swigCPtr, this, Vec6.getCPtr(value), value);
   }
 
   public Body() {
-    this(opensimModelSimulationJNI.new_Body__SWIG_0(), true);
+    this(opensimSimulationJNI.new_Body__SWIG_0(), true);
   }
 
   public Body(String aName, double aMass, Vec3 aMassCenter, Inertia aInertia) {
-    this(opensimModelSimulationJNI.new_Body__SWIG_1(aName, aMass, Vec3.getCPtr(aMassCenter), aMassCenter, Inertia.getCPtr(aInertia), aInertia), true);
+    this(opensimSimulationJNI.new_Body__SWIG_1(aName, aMass, Vec3.getCPtr(aMassCenter), aMassCenter, Inertia.getCPtr(aInertia), aInertia), true);
   }
 
   public double getMass() {
-    return opensimModelSimulationJNI.Body_getMass(swigCPtr, this);
+    return opensimSimulationJNI.Body_getMass(swigCPtr, this);
   }
 
   public void setMass(double mass) {
-    opensimModelSimulationJNI.Body_setMass(swigCPtr, this, mass);
+    opensimSimulationJNI.Body_setMass(swigCPtr, this, mass);
   }
 
   public Vec3 getMassCenter() {
-    return new Vec3(opensimModelSimulationJNI.Body_getMassCenter(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.Body_getMassCenter(swigCPtr, this), false);
   }
 
   public void setMassCenter(Vec3 com) {
-    opensimModelSimulationJNI.Body_setMassCenter(swigCPtr, this, Vec3.getCPtr(com), com);
+    opensimSimulationJNI.Body_setMassCenter(swigCPtr, this, Vec3.getCPtr(com), com);
   }
 
   public Inertia getInertia() {
-    return new Inertia(opensimModelSimulationJNI.Body_getInertia__SWIG_0(swigCPtr, this), false);
+    return new Inertia(opensimSimulationJNI.Body_getInertia__SWIG_0(swigCPtr, this), false);
   }
 
   public void setInertia(Inertia aInertia) {
-    opensimModelSimulationJNI.Body_setInertia__SWIG_0(swigCPtr, this, Inertia.getCPtr(aInertia), aInertia);
+    opensimSimulationJNI.Body_setInertia__SWIG_0(swigCPtr, this, Inertia.getCPtr(aInertia), aInertia);
   }
 
   public MassProperties getMassProperties() {
-    return new MassProperties(opensimModelSimulationJNI.Body_getMassProperties(swigCPtr, this), true);
+    return new MassProperties(opensimSimulationJNI.Body_getMassProperties(swigCPtr, this), true);
   }
 
   public void scale(Vec3 aScaleFactors, boolean aScaleMass) {
-    opensimModelSimulationJNI.Body_scale__SWIG_0(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors, aScaleMass);
+    opensimSimulationJNI.Body_scale__SWIG_0(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors, aScaleMass);
   }
 
   public void scale(Vec3 aScaleFactors) {
-    opensimModelSimulationJNI.Body_scale__SWIG_1(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
+    opensimSimulationJNI.Body_scale__SWIG_1(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
   }
 
   public void scaleInertialProperties(Vec3 aScaleFactors, boolean aScaleMass) {
-    opensimModelSimulationJNI.Body_scaleInertialProperties__SWIG_0(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors, aScaleMass);
+    opensimSimulationJNI.Body_scaleInertialProperties__SWIG_0(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors, aScaleMass);
   }
 
   public void scaleInertialProperties(Vec3 aScaleFactors) {
-    opensimModelSimulationJNI.Body_scaleInertialProperties__SWIG_1(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
+    opensimSimulationJNI.Body_scaleInertialProperties__SWIG_1(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
   }
 
   public void scaleMass(double aScaleFactor) {
-    opensimModelSimulationJNI.Body_scaleMass(swigCPtr, this, aScaleFactor);
+    opensimSimulationJNI.Body_scaleMass(swigCPtr, this, aScaleFactor);
   }
 
   public void getInertia(ArrayDouble rInertia) {
-    opensimModelSimulationJNI.Body_getInertia__SWIG_1(swigCPtr, this, ArrayDouble.getCPtr(rInertia), rInertia);
+    opensimSimulationJNI.Body_getInertia__SWIG_1(swigCPtr, this, ArrayDouble.getCPtr(rInertia), rInertia);
   }
 
   public void setInertia(ArrayDouble aInertia) {
-    opensimModelSimulationJNI.Body_setInertia__SWIG_1(swigCPtr, this, ArrayDouble.getCPtr(aInertia), aInertia);
+    opensimSimulationJNI.Body_setInertia__SWIG_1(swigCPtr, this, ArrayDouble.getCPtr(aInertia), aInertia);
   }
 
 }

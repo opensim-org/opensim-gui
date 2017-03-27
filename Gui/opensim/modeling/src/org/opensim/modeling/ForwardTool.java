@@ -12,7 +12,7 @@ public class ForwardTool extends AbstractTool {
   private transient long swigCPtr;
 
   public ForwardTool(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ForwardTool_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.ForwardTool_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ForwardTool extends AbstractTool {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ForwardTool(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_ForwardTool(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,109 +36,109 @@ public class ForwardTool extends AbstractTool {
   }
 
   public static ForwardTool safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ForwardTool_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.ForwardTool_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ForwardTool(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.ForwardTool_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.ForwardTool_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.ForwardTool_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.ForwardTool_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.ForwardTool_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.ForwardTool_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ForwardTool(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.ForwardTool_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.ForwardTool_getConcreteClassName(swigCPtr, this);
   }
 
   public ForwardTool() {
-    this(opensimModelJNI.new_ForwardTool__SWIG_0(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_ForwardTool__SWIG_0(), true);
   }
 
   public ForwardTool(String aFileName, boolean aUpdateFromXMLNode, boolean aLoadModel) throws java.io.IOException {
-    this(opensimModelJNI.new_ForwardTool__SWIG_1(aFileName, aUpdateFromXMLNode, aLoadModel), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_ForwardTool__SWIG_1(aFileName, aUpdateFromXMLNode, aLoadModel), true);
   }
 
   public ForwardTool(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
-    this(opensimModelJNI.new_ForwardTool__SWIG_2(aFileName, aUpdateFromXMLNode), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_ForwardTool__SWIG_2(aFileName, aUpdateFromXMLNode), true);
   }
 
   public ForwardTool(String aFileName) throws java.io.IOException {
-    this(opensimModelJNI.new_ForwardTool__SWIG_3(aFileName), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_ForwardTool__SWIG_3(aFileName), true);
   }
 
   public ForwardTool(ForwardTool aObject) {
-    this(opensimModelJNI.new_ForwardTool__SWIG_4(ForwardTool.getCPtr(aObject), aObject), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_ForwardTool__SWIG_4(ForwardTool.getCPtr(aObject), aObject), true);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
-    opensimModelJNI.ForwardTool_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+    opensimActuatorsAnalysesToolsJNI.ForwardTool_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
-    opensimModelJNI.ForwardTool_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
+    opensimActuatorsAnalysesToolsJNI.ForwardTool_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
   public void setManager(Manager m) {
-    opensimModelJNI.ForwardTool_setManager(swigCPtr, this, Manager.getCPtr(m), m);
+    opensimActuatorsAnalysesToolsJNI.ForwardTool_setManager(swigCPtr, this, Manager.getCPtr(m), m);
   }
 
   public Manager getManager() {
-    return new Manager(opensimModelJNI.ForwardTool_getManager(swigCPtr, this), false);
+    return new Manager(opensimActuatorsAnalysesToolsJNI.ForwardTool_getManager(swigCPtr, this), false);
   }
 
   public String getStatesFileName() {
-    return opensimModelJNI.ForwardTool_getStatesFileName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.ForwardTool_getStatesFileName(swigCPtr, this);
   }
 
   public void setStatesFileName(String aFileName) {
-    opensimModelJNI.ForwardTool_setStatesFileName(swigCPtr, this, aFileName);
+    opensimActuatorsAnalysesToolsJNI.ForwardTool_setStatesFileName(swigCPtr, this, aFileName);
   }
 
   public boolean getUseSpecifiedDt() {
-    return opensimModelJNI.ForwardTool_getUseSpecifiedDt(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.ForwardTool_getUseSpecifiedDt(swigCPtr, this);
   }
 
   public void setUseSpecifiedDt(boolean aUseSpecifiedDt) {
-    opensimModelJNI.ForwardTool_setUseSpecifiedDt(swigCPtr, this, aUseSpecifiedDt);
+    opensimActuatorsAnalysesToolsJNI.ForwardTool_setUseSpecifiedDt(swigCPtr, this, aUseSpecifiedDt);
   }
 
   public void setPrintResultFiles(boolean aToWrite) {
-    opensimModelJNI.ForwardTool_setPrintResultFiles(swigCPtr, this, aToWrite);
+    opensimActuatorsAnalysesToolsJNI.ForwardTool_setPrintResultFiles(swigCPtr, this, aToWrite);
   }
 
   public boolean run() throws java.io.IOException {
-    return opensimModelJNI.ForwardTool_run(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.ForwardTool_run(swigCPtr, this);
   }
 
   public void printResults() {
-    opensimModelJNI.ForwardTool_printResults(swigCPtr, this);
+    opensimActuatorsAnalysesToolsJNI.ForwardTool_printResults(swigCPtr, this);
   }
 
   public static double Step(double t, double t0, double t1) {
-    return opensimModelJNI.ForwardTool_Step(t, t0, t1);
+    return opensimActuatorsAnalysesToolsJNI.ForwardTool_Step(t, t0, t1);
   }
 
   public static double SigmaUp(double tau, double to, double t) {
-    return opensimModelJNI.ForwardTool_SigmaUp(tau, to, t);
+    return opensimActuatorsAnalysesToolsJNI.ForwardTool_SigmaUp(tau, to, t);
   }
 
   public static double SigmaDn(double tau, double to, double t) {
-    return opensimModelJNI.ForwardTool_SigmaDn(tau, to, t);
+    return opensimActuatorsAnalysesToolsJNI.ForwardTool_SigmaDn(tau, to, t);
   }
 
   public void loadStatesStorage(SWIGTYPE_p_std__string statesFileName, SWIGTYPE_p_p_OpenSim__Storage rYStore) {
-    opensimModelJNI.ForwardTool_loadStatesStorage(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(statesFileName), SWIGTYPE_p_p_OpenSim__Storage.getCPtr(rYStore));
+    opensimActuatorsAnalysesToolsJNI.ForwardTool_loadStatesStorage(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(statesFileName), SWIGTYPE_p_p_OpenSim__Storage.getCPtr(rYStore));
   }
 
   public String getParsingLog() {
-    return opensimModelJNI.ForwardTool_getParsingLog(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.ForwardTool_getParsingLog(swigCPtr, this);
   }
 
 }

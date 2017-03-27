@@ -12,7 +12,7 @@ public class InvalidTimeRange extends OpenSimException {
   private transient long swigCPtr;
 
   public InvalidTimeRange(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.InvalidTimeRange_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.InvalidTimeRange_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class InvalidTimeRange extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_InvalidTimeRange(swigCPtr);
+        opensimCommonJNI.delete_InvalidTimeRange(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class InvalidTimeRange extends OpenSimException {
   }
 
   public InvalidTimeRange(String file, long line, String func, double begTime, double endTime) {
-    this(opensimModelCommonJNI.new_InvalidTimeRange(file, line, func, begTime, endTime), true);
+    this(opensimCommonJNI.new_InvalidTimeRange(file, line, func, begTime, endTime), true);
   }
 
 }

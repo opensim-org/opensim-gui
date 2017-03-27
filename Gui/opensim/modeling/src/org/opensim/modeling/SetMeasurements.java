@@ -12,7 +12,7 @@ public class SetMeasurements extends OpenSimObject {
   private transient long swigCPtr;
 
   public SetMeasurements(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.SetMeasurements_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.SetMeasurements_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class SetMeasurements extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_SetMeasurements(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_SetMeasurements(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,158 +36,158 @@ public class SetMeasurements extends OpenSimObject {
   }
 
   public static SetMeasurements safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.SetMeasurements_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.SetMeasurements_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new SetMeasurements(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.SetMeasurements_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.SetMeasurements_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.SetMeasurements_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.SetMeasurements_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.SetMeasurements_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.SetMeasurements_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new SetMeasurements(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.SetMeasurements_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.SetMeasurements_getConcreteClassName(swigCPtr, this);
   }
 
   public SetMeasurements() {
-    this(opensimModelJNI.new_SetMeasurements__SWIG_0(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_SetMeasurements__SWIG_0(), true);
   }
 
   public SetMeasurements(String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimModelJNI.new_SetMeasurements__SWIG_1(aFileName, aUpdateFromXMLNode), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_SetMeasurements__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
   public SetMeasurements(String aFileName) {
-    this(opensimModelJNI.new_SetMeasurements__SWIG_2(aFileName), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_SetMeasurements__SWIG_2(aFileName), true);
   }
 
   public SetMeasurements(SetMeasurements aSet) {
-    this(opensimModelJNI.new_SetMeasurements__SWIG_3(SetMeasurements.getCPtr(aSet), aSet), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_SetMeasurements__SWIG_3(SetMeasurements.getCPtr(aSet), aSet), true);
   }
 
   public void setupGroups() {
-    opensimModelJNI.SetMeasurements_setupGroups(swigCPtr, this);
+    opensimActuatorsAnalysesToolsJNI.SetMeasurements_setupGroups(swigCPtr, this);
   }
 
   public void setMemoryOwner(boolean aTrueFalse) {
-    opensimModelJNI.SetMeasurements_setMemoryOwner(swigCPtr, this, aTrueFalse);
+    opensimActuatorsAnalysesToolsJNI.SetMeasurements_setMemoryOwner(swigCPtr, this, aTrueFalse);
   }
 
   public boolean setSize(int aSize) {
-    return opensimModelJNI.SetMeasurements_setSize(swigCPtr, this, aSize);
+    return opensimActuatorsAnalysesToolsJNI.SetMeasurements_setSize(swigCPtr, this, aSize);
   }
 
   public int getSize() {
-    return opensimModelJNI.SetMeasurements_getSize(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.SetMeasurements_getSize(swigCPtr, this);
   }
 
   public int getIndex(Measurement aObject, int aStartIndex) {
-    return opensimModelJNI.SetMeasurements_getIndex__SWIG_0(swigCPtr, this, Measurement.getCPtr(aObject), aObject, aStartIndex);
+    return opensimActuatorsAnalysesToolsJNI.SetMeasurements_getIndex__SWIG_0(swigCPtr, this, Measurement.getCPtr(aObject), aObject, aStartIndex);
   }
 
   public int getIndex(Measurement aObject) {
-    return opensimModelJNI.SetMeasurements_getIndex__SWIG_1(swigCPtr, this, Measurement.getCPtr(aObject), aObject);
+    return opensimActuatorsAnalysesToolsJNI.SetMeasurements_getIndex__SWIG_1(swigCPtr, this, Measurement.getCPtr(aObject), aObject);
   }
 
   public int getIndex(String aName, int aStartIndex) {
-    return opensimModelJNI.SetMeasurements_getIndex__SWIG_2(swigCPtr, this, aName, aStartIndex);
+    return opensimActuatorsAnalysesToolsJNI.SetMeasurements_getIndex__SWIG_2(swigCPtr, this, aName, aStartIndex);
   }
 
   public int getIndex(String aName) {
-    return opensimModelJNI.SetMeasurements_getIndex__SWIG_3(swigCPtr, this, aName);
+    return opensimActuatorsAnalysesToolsJNI.SetMeasurements_getIndex__SWIG_3(swigCPtr, this, aName);
   }
 
   public void getGroupNamesContaining(String aObjectName, ArrayStr rGroupNames) {
-    opensimModelJNI.SetMeasurements_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
+    opensimActuatorsAnalysesToolsJNI.SetMeasurements_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
   public boolean adoptAndAppend(Measurement aObject) {
-    return opensimModelJNI.SetMeasurements_adoptAndAppend(swigCPtr, this, Measurement.getCPtr(aObject), aObject);
+    return opensimActuatorsAnalysesToolsJNI.SetMeasurements_adoptAndAppend(swigCPtr, this, Measurement.getCPtr(aObject), aObject);
   }
 
   public boolean cloneAndAppend(Measurement aObject) {
-    return opensimModelJNI.SetMeasurements_cloneAndAppend(swigCPtr, this, Measurement.getCPtr(aObject), aObject);
+    return opensimActuatorsAnalysesToolsJNI.SetMeasurements_cloneAndAppend(swigCPtr, this, Measurement.getCPtr(aObject), aObject);
   }
 
   public boolean insert(int aIndex, Measurement aObject) {
-    return opensimModelJNI.SetMeasurements_insert(swigCPtr, this, aIndex, Measurement.getCPtr(aObject), aObject);
+    return opensimActuatorsAnalysesToolsJNI.SetMeasurements_insert(swigCPtr, this, aIndex, Measurement.getCPtr(aObject), aObject);
   }
 
   public boolean remove(int aIndex) {
-    return opensimModelJNI.SetMeasurements_remove__SWIG_0(swigCPtr, this, aIndex);
+    return opensimActuatorsAnalysesToolsJNI.SetMeasurements_remove__SWIG_0(swigCPtr, this, aIndex);
   }
 
   public boolean remove(Measurement aObject) {
-    return opensimModelJNI.SetMeasurements_remove__SWIG_1(swigCPtr, this, Measurement.getCPtr(aObject), aObject);
+    return opensimActuatorsAnalysesToolsJNI.SetMeasurements_remove__SWIG_1(swigCPtr, this, Measurement.getCPtr(aObject), aObject);
   }
 
   public void clearAndDestroy() {
-    opensimModelJNI.SetMeasurements_clearAndDestroy(swigCPtr, this);
+    opensimActuatorsAnalysesToolsJNI.SetMeasurements_clearAndDestroy(swigCPtr, this);
   }
 
   public boolean set(int aIndex, Measurement aObject, boolean preserveGroups) {
-    return opensimModelJNI.SetMeasurements_set__SWIG_0(swigCPtr, this, aIndex, Measurement.getCPtr(aObject), aObject, preserveGroups);
+    return opensimActuatorsAnalysesToolsJNI.SetMeasurements_set__SWIG_0(swigCPtr, this, aIndex, Measurement.getCPtr(aObject), aObject, preserveGroups);
   }
 
   public boolean set(int aIndex, Measurement aObject) {
-    return opensimModelJNI.SetMeasurements_set__SWIG_1(swigCPtr, this, aIndex, Measurement.getCPtr(aObject), aObject);
+    return opensimActuatorsAnalysesToolsJNI.SetMeasurements_set__SWIG_1(swigCPtr, this, aIndex, Measurement.getCPtr(aObject), aObject);
   }
 
   public Measurement get(int aIndex) {
-    return new Measurement(opensimModelJNI.SetMeasurements_get__SWIG_0(swigCPtr, this, aIndex), false);
+    return new Measurement(opensimActuatorsAnalysesToolsJNI.SetMeasurements_get__SWIG_0(swigCPtr, this, aIndex), false);
   }
 
   public Measurement get(String aName) {
-    return new Measurement(opensimModelJNI.SetMeasurements_get__SWIG_1(swigCPtr, this, aName), false);
+    return new Measurement(opensimActuatorsAnalysesToolsJNI.SetMeasurements_get__SWIG_1(swigCPtr, this, aName), false);
   }
 
   public boolean contains(String aName) {
-    return opensimModelJNI.SetMeasurements_contains(swigCPtr, this, aName);
+    return opensimActuatorsAnalysesToolsJNI.SetMeasurements_contains(swigCPtr, this, aName);
   }
 
   public void getNames(ArrayStr rNames) {
-    opensimModelJNI.SetMeasurements_getNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
+    opensimActuatorsAnalysesToolsJNI.SetMeasurements_getNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
   }
 
   public int getNumGroups() {
-    return opensimModelJNI.SetMeasurements_getNumGroups(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.SetMeasurements_getNumGroups(swigCPtr, this);
   }
 
   public void addGroup(String aGroupName) {
-    opensimModelJNI.SetMeasurements_addGroup(swigCPtr, this, aGroupName);
+    opensimActuatorsAnalysesToolsJNI.SetMeasurements_addGroup(swigCPtr, this, aGroupName);
   }
 
   public void removeGroup(String aGroupName) {
-    opensimModelJNI.SetMeasurements_removeGroup(swigCPtr, this, aGroupName);
+    opensimActuatorsAnalysesToolsJNI.SetMeasurements_removeGroup(swigCPtr, this, aGroupName);
   }
 
   public void renameGroup(String oldGroupName, String newGroupName) {
-    opensimModelJNI.SetMeasurements_renameGroup(swigCPtr, this, oldGroupName, newGroupName);
+    opensimActuatorsAnalysesToolsJNI.SetMeasurements_renameGroup(swigCPtr, this, oldGroupName, newGroupName);
   }
 
   public void addObjectToGroup(String aGroupName, String aObjectName) {
-    opensimModelJNI.SetMeasurements_addObjectToGroup(swigCPtr, this, aGroupName, aObjectName);
+    opensimActuatorsAnalysesToolsJNI.SetMeasurements_addObjectToGroup(swigCPtr, this, aGroupName, aObjectName);
   }
 
   public void getGroupNames(ArrayStr rGroupNames) {
-    opensimModelJNI.SetMeasurements_getGroupNames(swigCPtr, this, ArrayStr.getCPtr(rGroupNames), rGroupNames);
+    opensimActuatorsAnalysesToolsJNI.SetMeasurements_getGroupNames(swigCPtr, this, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
   public ObjectGroup getGroup(String aGroupName) {
-    long cPtr = opensimModelJNI.SetMeasurements_getGroup__SWIG_0(swigCPtr, this, aGroupName);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.SetMeasurements_getGroup__SWIG_0(swigCPtr, this, aGroupName);
     return (cPtr == 0) ? null : new ObjectGroup(cPtr, false);
   }
 
   public ObjectGroup getGroup(int aIndex) {
-    long cPtr = opensimModelJNI.SetMeasurements_getGroup__SWIG_1(swigCPtr, this, aIndex);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.SetMeasurements_getGroup__SWIG_1(swigCPtr, this, aIndex);
     return (cPtr == 0) ? null : new ObjectGroup(cPtr, false);
   }
 

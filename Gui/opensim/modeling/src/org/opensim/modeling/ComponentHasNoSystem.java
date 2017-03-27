@@ -12,7 +12,7 @@ public class ComponentHasNoSystem extends OpenSimException {
   private transient long swigCPtr;
 
   public ComponentHasNoSystem(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.ComponentHasNoSystem_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.ComponentHasNoSystem_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ComponentHasNoSystem extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_ComponentHasNoSystem(swigCPtr);
+        opensimCommonJNI.delete_ComponentHasNoSystem(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class ComponentHasNoSystem extends OpenSimException {
   }
 
   public ComponentHasNoSystem(String file, long line, String func, OpenSimObject obj) {
-    this(opensimModelCommonJNI.new_ComponentHasNoSystem(file, line, func, OpenSimObject.getCPtr(obj), obj), true);
+    this(opensimCommonJNI.new_ComponentHasNoSystem(file, line, func, OpenSimObject.getCPtr(obj), obj), true);
   }
 
 }

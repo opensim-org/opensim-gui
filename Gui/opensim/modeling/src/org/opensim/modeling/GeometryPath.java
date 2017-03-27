@@ -12,7 +12,7 @@ public class GeometryPath extends ModelComponent {
   private transient long swigCPtr;
 
   public GeometryPath(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.GeometryPath_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.GeometryPath_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class GeometryPath extends ModelComponent {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_GeometryPath(swigCPtr);
+        opensimSimulationJNI.delete_GeometryPath(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,160 +36,151 @@ public class GeometryPath extends ModelComponent {
   }
 
   public static GeometryPath safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.GeometryPath_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.GeometryPath_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new GeometryPath(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.GeometryPath_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.GeometryPath_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.GeometryPath_getClassName();
+    return opensimSimulationJNI.GeometryPath_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.GeometryPath_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.GeometryPath_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new GeometryPath(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.GeometryPath_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.GeometryPath_getConcreteClassName(swigCPtr, this);
   }
 
   public GeometryPath() {
-    this(opensimModelSimulationJNI.new_GeometryPath(), true);
+    this(opensimSimulationJNI.new_GeometryPath(), true);
   }
 
   public PathPointSet getPathPointSet() {
-    return new PathPointSet(opensimModelSimulationJNI.GeometryPath_getPathPointSet(swigCPtr, this), false);
+    return new PathPointSet(opensimSimulationJNI.GeometryPath_getPathPointSet(swigCPtr, this), false);
   }
 
   public PathPointSet updPathPointSet() {
-    return new PathPointSet(opensimModelSimulationJNI.GeometryPath_updPathPointSet(swigCPtr, this), false);
+    return new PathPointSet(opensimSimulationJNI.GeometryPath_updPathPointSet(swigCPtr, this), false);
   }
 
   public PathWrapSet getWrapSet() {
-    return new PathWrapSet(opensimModelSimulationJNI.GeometryPath_getWrapSet(swigCPtr, this), false);
+    return new PathWrapSet(opensimSimulationJNI.GeometryPath_getWrapSet(swigCPtr, this), false);
   }
 
   public void addPathWrap(WrapObject aWrapObject) {
-    opensimModelSimulationJNI.GeometryPath_addPathWrap(swigCPtr, this, WrapObject.getCPtr(aWrapObject), aWrapObject);
+    opensimSimulationJNI.GeometryPath_addPathWrap(swigCPtr, this, WrapObject.getCPtr(aWrapObject), aWrapObject);
   }
 
-  public PathPoint addPathPoint(State s, int aIndex, PhysicalFrame aBody) {
-    long cPtr = opensimModelSimulationJNI.GeometryPath_addPathPoint(swigCPtr, this, State.getCPtr(s), s, aIndex, PhysicalFrame.getCPtr(aBody), aBody);
-    return (cPtr == 0) ? null : new PathPoint(cPtr, false);
+  public AbstractPathPoint addPathPoint(State s, int index, PhysicalFrame frame) {
+    long cPtr = opensimSimulationJNI.GeometryPath_addPathPoint(swigCPtr, this, State.getCPtr(s), s, index, PhysicalFrame.getCPtr(frame), frame);
+    return (cPtr == 0) ? null : new AbstractPathPoint(cPtr, false);
   }
 
-  public PathPoint appendNewPathPoint(String proposedName, PhysicalFrame aBody, Vec3 aPositionOnBody) {
-    long cPtr = opensimModelSimulationJNI.GeometryPath_appendNewPathPoint(swigCPtr, this, proposedName, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(aPositionOnBody), aPositionOnBody);
-    return (cPtr == 0) ? null : new PathPoint(cPtr, false);
+  public AbstractPathPoint appendNewPathPoint(String proposedName, PhysicalFrame frame, Vec3 locationOnFrame) {
+    long cPtr = opensimSimulationJNI.GeometryPath_appendNewPathPoint(swigCPtr, this, proposedName, PhysicalFrame.getCPtr(frame), frame, Vec3.getCPtr(locationOnFrame), locationOnFrame);
+    return (cPtr == 0) ? null : new AbstractPathPoint(cPtr, false);
   }
 
-  public boolean canDeletePathPoint(int aIndex) {
-    return opensimModelSimulationJNI.GeometryPath_canDeletePathPoint(swigCPtr, this, aIndex);
+  public boolean canDeletePathPoint(int index) {
+    return opensimSimulationJNI.GeometryPath_canDeletePathPoint(swigCPtr, this, index);
   }
 
-  public boolean deletePathPoint(State s, int aIndex) {
-    return opensimModelSimulationJNI.GeometryPath_deletePathPoint(swigCPtr, this, State.getCPtr(s), s, aIndex);
+  public boolean deletePathPoint(State s, int index) {
+    return opensimSimulationJNI.GeometryPath_deletePathPoint(swigCPtr, this, State.getCPtr(s), s, index);
   }
 
-  public void moveUpPathWrap(State s, int aIndex) {
-    opensimModelSimulationJNI.GeometryPath_moveUpPathWrap(swigCPtr, this, State.getCPtr(s), s, aIndex);
+  public void moveUpPathWrap(State s, int index) {
+    opensimSimulationJNI.GeometryPath_moveUpPathWrap(swigCPtr, this, State.getCPtr(s), s, index);
   }
 
-  public void moveDownPathWrap(State s, int aIndex) {
-    opensimModelSimulationJNI.GeometryPath_moveDownPathWrap(swigCPtr, this, State.getCPtr(s), s, aIndex);
+  public void moveDownPathWrap(State s, int index) {
+    opensimSimulationJNI.GeometryPath_moveDownPathWrap(swigCPtr, this, State.getCPtr(s), s, index);
   }
 
-  public void deletePathWrap(State s, int aIndex) {
-    opensimModelSimulationJNI.GeometryPath_deletePathWrap(swigCPtr, this, State.getCPtr(s), s, aIndex);
+  public void deletePathWrap(State s, int index) {
+    opensimSimulationJNI.GeometryPath_deletePathWrap(swigCPtr, this, State.getCPtr(s), s, index);
   }
 
-  public boolean replacePathPoint(State s, PathPoint aOldPathPoint, PathPoint aNewPathPoint) {
-    return opensimModelSimulationJNI.GeometryPath_replacePathPoint(swigCPtr, this, State.getCPtr(s), s, PathPoint.getCPtr(aOldPathPoint), aOldPathPoint, PathPoint.getCPtr(aNewPathPoint), aNewPathPoint);
-  }
-
-  public OpenSimObject getOwner() {
-    long cPtr = opensimModelSimulationJNI.GeometryPath_getOwner(swigCPtr, this);
-    return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
-  }
-
-  public void setOwner(OpenSimObject anObject) {
-    opensimModelSimulationJNI.GeometryPath_setOwner(swigCPtr, this, OpenSimObject.getCPtr(anObject), anObject);
+  public boolean replacePathPoint(State s, AbstractPathPoint oldPathPoint, AbstractPathPoint newPathPoint) {
+    return opensimSimulationJNI.GeometryPath_replacePathPoint(swigCPtr, this, State.getCPtr(s), s, AbstractPathPoint.getCPtr(oldPathPoint), oldPathPoint, AbstractPathPoint.getCPtr(newPathPoint), newPathPoint);
   }
 
   public void setDefaultColor(Vec3 color) {
-    opensimModelSimulationJNI.GeometryPath_setDefaultColor(swigCPtr, this, Vec3.getCPtr(color), color);
+    opensimSimulationJNI.GeometryPath_setDefaultColor(swigCPtr, this, Vec3.getCPtr(color), color);
   }
 
   public Vec3 getDefaultColor() {
-    return new Vec3(opensimModelSimulationJNI.GeometryPath_getDefaultColor(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.GeometryPath_getDefaultColor(swigCPtr, this), false);
   }
 
   public void setColor(State s, Vec3 color) {
-    opensimModelSimulationJNI.GeometryPath_setColor(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(color), color);
+    opensimSimulationJNI.GeometryPath_setColor(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(color), color);
   }
 
   public Vec3 getColor(State s) {
-    return new Vec3(opensimModelSimulationJNI.GeometryPath_getColor(swigCPtr, this, State.getCPtr(s), s), true);
+    return new Vec3(opensimSimulationJNI.GeometryPath_getColor(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
   public double getLength(State s) {
-    return opensimModelSimulationJNI.GeometryPath_getLength(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.GeometryPath_getLength(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setLength(State s, double length) {
-    opensimModelSimulationJNI.GeometryPath_setLength(swigCPtr, this, State.getCPtr(s), s, length);
+    opensimSimulationJNI.GeometryPath_setLength(swigCPtr, this, State.getCPtr(s), s, length);
   }
 
   public double getPreScaleLength(State s) {
-    return opensimModelSimulationJNI.GeometryPath_getPreScaleLength(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.GeometryPath_getPreScaleLength(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setPreScaleLength(State s, double preScaleLength) {
-    opensimModelSimulationJNI.GeometryPath_setPreScaleLength(swigCPtr, this, State.getCPtr(s), s, preScaleLength);
+    opensimSimulationJNI.GeometryPath_setPreScaleLength(swigCPtr, this, State.getCPtr(s), s, preScaleLength);
   }
 
   public ArrayPathPoint getCurrentPath(State s) {
-    return new ArrayPathPoint(opensimModelSimulationJNI.GeometryPath_getCurrentPath(swigCPtr, this, State.getCPtr(s), s), false);
+    return new ArrayPathPoint(opensimSimulationJNI.GeometryPath_getCurrentPath(swigCPtr, this, State.getCPtr(s), s), false);
   }
 
   public double getLengtheningSpeed(State s) {
-    return opensimModelSimulationJNI.GeometryPath_getLengtheningSpeed(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.GeometryPath_getLengtheningSpeed(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setLengtheningSpeed(State s, double speed) {
-    opensimModelSimulationJNI.GeometryPath_setLengtheningSpeed(swigCPtr, this, State.getCPtr(s), s, speed);
+    opensimSimulationJNI.GeometryPath_setLengtheningSpeed(swigCPtr, this, State.getCPtr(s), s, speed);
   }
 
   public void getPointForceDirections(State s, ArrayPointForceDirection rPFDs) {
-    opensimModelSimulationJNI.GeometryPath_getPointForceDirections(swigCPtr, this, State.getCPtr(s), s, ArrayPointForceDirection.getCPtr(rPFDs), rPFDs);
+    opensimSimulationJNI.GeometryPath_getPointForceDirections(swigCPtr, this, State.getCPtr(s), s, ArrayPointForceDirection.getCPtr(rPFDs), rPFDs);
   }
 
   public void addInEquivalentForces(State state, double tension, VectorOfSpatialVec bodyForces, Vector mobilityForces) {
-    opensimModelSimulationJNI.GeometryPath_addInEquivalentForces(swigCPtr, this, State.getCPtr(state), state, tension, VectorOfSpatialVec.getCPtr(bodyForces), bodyForces, Vector.getCPtr(mobilityForces), mobilityForces);
+    opensimSimulationJNI.GeometryPath_addInEquivalentForces(swigCPtr, this, State.getCPtr(state), state, tension, VectorOfSpatialVec.getCPtr(bodyForces), bodyForces, Vector.getCPtr(mobilityForces), mobilityForces);
   }
 
   public double computeMomentArm(State s, Coordinate aCoord) {
-    return opensimModelSimulationJNI.GeometryPath_computeMomentArm(swigCPtr, this, State.getCPtr(s), s, Coordinate.getCPtr(aCoord), aCoord);
+    return opensimSimulationJNI.GeometryPath_computeMomentArm(swigCPtr, this, State.getCPtr(s), s, Coordinate.getCPtr(aCoord), aCoord);
   }
 
   public void preScale(State s, ScaleSet aScaleSet) {
-    opensimModelSimulationJNI.GeometryPath_preScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(aScaleSet), aScaleSet);
+    opensimSimulationJNI.GeometryPath_preScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(aScaleSet), aScaleSet);
   }
 
   public void scale(State s, ScaleSet aScaleSet) {
-    opensimModelSimulationJNI.GeometryPath_scale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(aScaleSet), aScaleSet);
+    opensimSimulationJNI.GeometryPath_scale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(aScaleSet), aScaleSet);
   }
 
   public void postScale(State s, ScaleSet aScaleSet) {
-    opensimModelSimulationJNI.GeometryPath_postScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(aScaleSet), aScaleSet);
+    opensimSimulationJNI.GeometryPath_postScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(aScaleSet), aScaleSet);
   }
 
   public void updateGeometry(State s) {
-    opensimModelSimulationJNI.GeometryPath_updateGeometry(swigCPtr, this, State.getCPtr(s), s);
+    opensimSimulationJNI.GeometryPath_updateGeometry(swigCPtr, this, State.getCPtr(s), s);
   }
 
 }

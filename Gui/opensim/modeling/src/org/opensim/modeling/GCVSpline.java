@@ -12,7 +12,7 @@ public class GCVSpline extends Function {
   private transient long swigCPtr;
 
   public GCVSpline(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.GCVSpline_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.GCVSpline_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class GCVSpline extends Function {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_GCVSpline(swigCPtr);
+        opensimCommonJNI.delete_GCVSpline(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,139 +36,139 @@ public class GCVSpline extends Function {
   }
 
   public static GCVSpline safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelCommonJNI.GCVSpline_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimCommonJNI.GCVSpline_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new GCVSpline(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelCommonJNI.GCVSpline_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimCommonJNI.GCVSpline_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelCommonJNI.GCVSpline_getClassName();
+    return opensimCommonJNI.GCVSpline_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelCommonJNI.GCVSpline_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.GCVSpline_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new GCVSpline(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelCommonJNI.GCVSpline_getConcreteClassName(swigCPtr, this);
+    return opensimCommonJNI.GCVSpline_getConcreteClassName(swigCPtr, this);
   }
 
   public GCVSpline() {
-    this(opensimModelCommonJNI.new_GCVSpline__SWIG_0(), true);
+    this(opensimCommonJNI.new_GCVSpline__SWIG_0(), true);
   }
 
   public GCVSpline(int aDegree, int aN, SWIGTYPE_p_double aX, SWIGTYPE_p_double aF, String aName, double aErrorVariance) {
-    this(opensimModelCommonJNI.new_GCVSpline__SWIG_1(aDegree, aN, SWIGTYPE_p_double.getCPtr(aX), SWIGTYPE_p_double.getCPtr(aF), aName, aErrorVariance), true);
+    this(opensimCommonJNI.new_GCVSpline__SWIG_1(aDegree, aN, SWIGTYPE_p_double.getCPtr(aX), SWIGTYPE_p_double.getCPtr(aF), aName, aErrorVariance), true);
   }
 
   public GCVSpline(int aDegree, int aN, SWIGTYPE_p_double aX, SWIGTYPE_p_double aF, String aName) {
-    this(opensimModelCommonJNI.new_GCVSpline__SWIG_2(aDegree, aN, SWIGTYPE_p_double.getCPtr(aX), SWIGTYPE_p_double.getCPtr(aF), aName), true);
+    this(opensimCommonJNI.new_GCVSpline__SWIG_2(aDegree, aN, SWIGTYPE_p_double.getCPtr(aX), SWIGTYPE_p_double.getCPtr(aF), aName), true);
   }
 
   public GCVSpline(int aDegree, int aN, SWIGTYPE_p_double aX, SWIGTYPE_p_double aF) {
-    this(opensimModelCommonJNI.new_GCVSpline__SWIG_3(aDegree, aN, SWIGTYPE_p_double.getCPtr(aX), SWIGTYPE_p_double.getCPtr(aF)), true);
+    this(opensimCommonJNI.new_GCVSpline__SWIG_3(aDegree, aN, SWIGTYPE_p_double.getCPtr(aX), SWIGTYPE_p_double.getCPtr(aF)), true);
   }
 
   public GCVSpline(GCVSpline aSpline) {
-    this(opensimModelCommonJNI.new_GCVSpline__SWIG_4(GCVSpline.getCPtr(aSpline), aSpline), true);
+    this(opensimCommonJNI.new_GCVSpline__SWIG_4(GCVSpline.getCPtr(aSpline), aSpline), true);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
-    opensimModelCommonJNI.GCVSpline_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+    opensimCommonJNI.GCVSpline_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
-    opensimModelCommonJNI.GCVSpline_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
+    opensimCommonJNI.GCVSpline_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
   public void setDegree(int aDegree) {
-    opensimModelCommonJNI.GCVSpline_setDegree(swigCPtr, this, aDegree);
+    opensimCommonJNI.GCVSpline_setDegree(swigCPtr, this, aDegree);
   }
 
   public int getDegree() {
-    return opensimModelCommonJNI.GCVSpline_getDegree(swigCPtr, this);
+    return opensimCommonJNI.GCVSpline_getDegree(swigCPtr, this);
   }
 
   public int getOrder() {
-    return opensimModelCommonJNI.GCVSpline_getOrder(swigCPtr, this);
+    return opensimCommonJNI.GCVSpline_getOrder(swigCPtr, this);
   }
 
   public int getHalfOrder() {
-    return opensimModelCommonJNI.GCVSpline_getHalfOrder(swigCPtr, this);
+    return opensimCommonJNI.GCVSpline_getHalfOrder(swigCPtr, this);
   }
 
   public int getSize() {
-    return opensimModelCommonJNI.GCVSpline_getSize(swigCPtr, this);
+    return opensimCommonJNI.GCVSpline_getSize(swigCPtr, this);
   }
 
   public ArrayDouble getX() {
-    return new ArrayDouble(opensimModelCommonJNI.GCVSpline_getX__SWIG_0(swigCPtr, this), false);
+    return new ArrayDouble(opensimCommonJNI.GCVSpline_getX__SWIG_0(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_double getXValues() {
-    long cPtr = opensimModelCommonJNI.GCVSpline_getXValues(swigCPtr, this);
+    long cPtr = opensimCommonJNI.GCVSpline_getXValues(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_double(cPtr, false);
   }
 
   public SWIGTYPE_p_double getYValues() {
-    long cPtr = opensimModelCommonJNI.GCVSpline_getYValues(swigCPtr, this);
+    long cPtr = opensimCommonJNI.GCVSpline_getYValues(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_double(cPtr, false);
   }
 
   public ArrayDouble getCoefficients() {
-    return new ArrayDouble(opensimModelCommonJNI.GCVSpline_getCoefficients(swigCPtr, this), false);
+    return new ArrayDouble(opensimCommonJNI.GCVSpline_getCoefficients(swigCPtr, this), false);
   }
 
   public int getNumberOfPoints() {
-    return opensimModelCommonJNI.GCVSpline_getNumberOfPoints(swigCPtr, this);
+    return opensimCommonJNI.GCVSpline_getNumberOfPoints(swigCPtr, this);
   }
 
   public double getX(int aIndex) {
-    return opensimModelCommonJNI.GCVSpline_getX__SWIG_1(swigCPtr, this, aIndex);
+    return opensimCommonJNI.GCVSpline_getX__SWIG_1(swigCPtr, this, aIndex);
   }
 
   public double getY(int aIndex) {
-    return opensimModelCommonJNI.GCVSpline_getY(swigCPtr, this, aIndex);
+    return opensimCommonJNI.GCVSpline_getY(swigCPtr, this, aIndex);
   }
 
   public double getZ(int aIndex) {
-    return opensimModelCommonJNI.GCVSpline_getZ(swigCPtr, this, aIndex);
+    return opensimCommonJNI.GCVSpline_getZ(swigCPtr, this, aIndex);
   }
 
   public void setX(int aIndex, double aValue) {
-    opensimModelCommonJNI.GCVSpline_setX(swigCPtr, this, aIndex, aValue);
+    opensimCommonJNI.GCVSpline_setX(swigCPtr, this, aIndex, aValue);
   }
 
   public void setY(int aIndex, double aValue) {
-    opensimModelCommonJNI.GCVSpline_setY(swigCPtr, this, aIndex, aValue);
+    opensimCommonJNI.GCVSpline_setY(swigCPtr, this, aIndex, aValue);
   }
 
   public double getMinX() {
-    return opensimModelCommonJNI.GCVSpline_getMinX(swigCPtr, this);
+    return opensimCommonJNI.GCVSpline_getMinX(swigCPtr, this);
   }
 
   public double getMaxX() {
-    return opensimModelCommonJNI.GCVSpline_getMaxX(swigCPtr, this);
+    return opensimCommonJNI.GCVSpline_getMaxX(swigCPtr, this);
   }
 
   public boolean deletePoint(int aIndex) {
-    return opensimModelCommonJNI.GCVSpline_deletePoint(swigCPtr, this, aIndex);
+    return opensimCommonJNI.GCVSpline_deletePoint(swigCPtr, this, aIndex);
   }
 
   public boolean deletePoints(ArrayInt indices) {
-    return opensimModelCommonJNI.GCVSpline_deletePoints(swigCPtr, this, ArrayInt.getCPtr(indices), indices);
+    return opensimCommonJNI.GCVSpline_deletePoints(swigCPtr, this, ArrayInt.getCPtr(indices), indices);
   }
 
   public int addPoint(double aX, double aY) {
-    return opensimModelCommonJNI.GCVSpline_addPoint(swigCPtr, this, aX, aY);
+    return opensimCommonJNI.GCVSpline_addPoint(swigCPtr, this, aX, aY);
   }
 
   public SWIGTYPE_p_SimTK__Function createSimTKFunction() {
-    long cPtr = opensimModelCommonJNI.GCVSpline_createSimTKFunction(swigCPtr, this);
+    long cPtr = opensimCommonJNI.GCVSpline_createSimTKFunction(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_SimTK__Function(cPtr, false);
   }
 

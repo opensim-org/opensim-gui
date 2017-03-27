@@ -12,7 +12,7 @@ public class AnalysisWrapper extends Analysis {
   private transient long swigCPtr;
 
   public AnalysisWrapper(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.AnalysisWrapper_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.AnalysisWrapper_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class AnalysisWrapper extends Analysis {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_AnalysisWrapper(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_AnalysisWrapper(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -42,44 +42,44 @@ public class AnalysisWrapper extends Analysis {
 
   public void swigReleaseOwnership() {
     swigCMemOwn = false;
-    opensimModelJNI.AnalysisWrapper_change_ownership(this, swigCPtr, false);
+    opensimActuatorsAnalysesToolsJNI.AnalysisWrapper_change_ownership(this, swigCPtr, false);
   }
 
   public void swigTakeOwnership() {
     swigCMemOwn = true;
-    opensimModelJNI.AnalysisWrapper_change_ownership(this, swigCPtr, true);
+    opensimActuatorsAnalysesToolsJNI.AnalysisWrapper_change_ownership(this, swigCPtr, true);
   }
 
   public static AnalysisWrapper safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.AnalysisWrapper_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.AnalysisWrapper_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new AnalysisWrapper(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    if (getClass() == AnalysisWrapper.class) opensimModelJNI.AnalysisWrapper_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject); else opensimModelJNI.AnalysisWrapper_assignSwigExplicitAnalysisWrapper(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    if (getClass() == AnalysisWrapper.class) opensimActuatorsAnalysesToolsJNI.AnalysisWrapper_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject); else opensimActuatorsAnalysesToolsJNI.AnalysisWrapper_assignSwigExplicitAnalysisWrapper(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.AnalysisWrapper_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.AnalysisWrapper_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = (getClass() == AnalysisWrapper.class) ? opensimModelJNI.AnalysisWrapper_clone(swigCPtr, this) : opensimModelJNI.AnalysisWrapper_cloneSwigExplicitAnalysisWrapper(swigCPtr, this);
+    long cPtr = (getClass() == AnalysisWrapper.class) ? opensimActuatorsAnalysesToolsJNI.AnalysisWrapper_clone(swigCPtr, this) : opensimActuatorsAnalysesToolsJNI.AnalysisWrapper_cloneSwigExplicitAnalysisWrapper(swigCPtr, this);
     return (cPtr == 0) ? null : new AnalysisWrapper(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return (getClass() == AnalysisWrapper.class) ? opensimModelJNI.AnalysisWrapper_getConcreteClassName(swigCPtr, this) : opensimModelJNI.AnalysisWrapper_getConcreteClassNameSwigExplicitAnalysisWrapper(swigCPtr, this);
+    return (getClass() == AnalysisWrapper.class) ? opensimActuatorsAnalysesToolsJNI.AnalysisWrapper_getConcreteClassName(swigCPtr, this) : opensimActuatorsAnalysesToolsJNI.AnalysisWrapper_getConcreteClassNameSwigExplicitAnalysisWrapper(swigCPtr, this);
   }
 
   public AnalysisWrapper(Model aModel) {
-    this(opensimModelJNI.new_AnalysisWrapper__SWIG_0(Model.getCPtr(aModel), aModel), true);
-    opensimModelJNI.AnalysisWrapper_director_connect(this, swigCPtr, swigCMemOwn, true);
+    this(opensimActuatorsAnalysesToolsJNI.new_AnalysisWrapper__SWIG_0(Model.getCPtr(aModel), aModel), true);
+    opensimActuatorsAnalysesToolsJNI.AnalysisWrapper_director_connect(this, swigCPtr, swigCMemOwn, true);
   }
 
   public AnalysisWrapper() {
-    this(opensimModelJNI.new_AnalysisWrapper__SWIG_1(), true);
-    opensimModelJNI.AnalysisWrapper_director_connect(this, swigCPtr, swigCMemOwn, true);
+    this(opensimActuatorsAnalysesToolsJNI.new_AnalysisWrapper__SWIG_1(), true);
+    opensimActuatorsAnalysesToolsJNI.AnalysisWrapper_director_connect(this, swigCPtr, swigCMemOwn, true);
   }
 
 }

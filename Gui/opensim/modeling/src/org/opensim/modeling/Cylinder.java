@@ -12,7 +12,7 @@ public class Cylinder extends AnalyticGeometry {
   private transient long swigCPtr;
 
   public Cylinder(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.Cylinder_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.Cylinder_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Cylinder extends AnalyticGeometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_Cylinder(swigCPtr);
+        opensimSimulationJNI.delete_Cylinder(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,109 +36,109 @@ public class Cylinder extends AnalyticGeometry {
   }
 
   public static Cylinder safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.Cylinder_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.Cylinder_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Cylinder(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.Cylinder_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.Cylinder_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.Cylinder_getClassName();
+    return opensimSimulationJNI.Cylinder_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.Cylinder_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.Cylinder_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Cylinder(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.Cylinder_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.Cylinder_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_radius(Cylinder source) {
-    opensimModelSimulationJNI.Cylinder_copyProperty_radius(swigCPtr, this, Cylinder.getCPtr(source), source);
+    opensimSimulationJNI.Cylinder_copyProperty_radius(swigCPtr, this, Cylinder.getCPtr(source), source);
   }
 
   public double get_radius(int i) {
-    return opensimModelSimulationJNI.Cylinder_get_radius__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Cylinder_get_radius__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_radius(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Cylinder_upd_radius__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.Cylinder_upd_radius__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_radius(int i, double value) {
-    opensimModelSimulationJNI.Cylinder_set_radius__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.Cylinder_set_radius__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_radius(double value) {
-    return opensimModelSimulationJNI.Cylinder_append_radius(swigCPtr, this, value);
+    return opensimSimulationJNI.Cylinder_append_radius(swigCPtr, this, value);
   }
 
   public void constructProperty_radius(double initValue) {
-    opensimModelSimulationJNI.Cylinder_constructProperty_radius(swigCPtr, this, initValue);
+    opensimSimulationJNI.Cylinder_constructProperty_radius(swigCPtr, this, initValue);
   }
 
   public double get_radius() {
-    return opensimModelSimulationJNI.Cylinder_get_radius__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Cylinder_get_radius__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_radius() {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Cylinder_upd_radius__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.Cylinder_upd_radius__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_radius(double value) {
-    opensimModelSimulationJNI.Cylinder_set_radius__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.Cylinder_set_radius__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_half_height(Cylinder source) {
-    opensimModelSimulationJNI.Cylinder_copyProperty_half_height(swigCPtr, this, Cylinder.getCPtr(source), source);
+    opensimSimulationJNI.Cylinder_copyProperty_half_height(swigCPtr, this, Cylinder.getCPtr(source), source);
   }
 
   public double get_half_height(int i) {
-    return opensimModelSimulationJNI.Cylinder_get_half_height__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Cylinder_get_half_height__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_half_height(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Cylinder_upd_half_height__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.Cylinder_upd_half_height__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_half_height(int i, double value) {
-    opensimModelSimulationJNI.Cylinder_set_half_height__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.Cylinder_set_half_height__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_half_height(double value) {
-    return opensimModelSimulationJNI.Cylinder_append_half_height(swigCPtr, this, value);
+    return opensimSimulationJNI.Cylinder_append_half_height(swigCPtr, this, value);
   }
 
   public void constructProperty_half_height(double initValue) {
-    opensimModelSimulationJNI.Cylinder_constructProperty_half_height(swigCPtr, this, initValue);
+    opensimSimulationJNI.Cylinder_constructProperty_half_height(swigCPtr, this, initValue);
   }
 
   public double get_half_height() {
-    return opensimModelSimulationJNI.Cylinder_get_half_height__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Cylinder_get_half_height__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_half_height() {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.Cylinder_upd_half_height__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.Cylinder_upd_half_height__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_half_height(double value) {
-    opensimModelSimulationJNI.Cylinder_set_half_height__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.Cylinder_set_half_height__SWIG_1(swigCPtr, this, value);
   }
 
   public Cylinder() {
-    this(opensimModelSimulationJNI.new_Cylinder__SWIG_0(), true);
+    this(opensimSimulationJNI.new_Cylinder__SWIG_0(), true);
   }
 
   public Cylinder(double radius, double hheight) {
-    this(opensimModelSimulationJNI.new_Cylinder__SWIG_1(radius, hheight), true);
+    this(opensimSimulationJNI.new_Cylinder__SWIG_1(radius, hheight), true);
   }
 
   public void getCylinderParams(Vec2 params) {
-    opensimModelSimulationJNI.Cylinder_getCylinderParams(swigCPtr, this, Vec2.getCPtr(params), params);
+    opensimSimulationJNI.Cylinder_getCylinderParams(swigCPtr, this, Vec2.getCPtr(params), params);
   }
 
 }

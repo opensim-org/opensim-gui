@@ -12,7 +12,7 @@ public class PiecewiseConstantFunction extends Function {
   private transient long swigCPtr;
 
   public PiecewiseConstantFunction(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.PiecewiseConstantFunction_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.PiecewiseConstantFunction_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class PiecewiseConstantFunction extends Function {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_PiecewiseConstantFunction(swigCPtr);
+        opensimCommonJNI.delete_PiecewiseConstantFunction(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,131 +36,131 @@ public class PiecewiseConstantFunction extends Function {
   }
 
   public static PiecewiseConstantFunction safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelCommonJNI.PiecewiseConstantFunction_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimCommonJNI.PiecewiseConstantFunction_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new PiecewiseConstantFunction(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelCommonJNI.PiecewiseConstantFunction_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimCommonJNI.PiecewiseConstantFunction_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelCommonJNI.PiecewiseConstantFunction_getClassName();
+    return opensimCommonJNI.PiecewiseConstantFunction_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelCommonJNI.PiecewiseConstantFunction_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.PiecewiseConstantFunction_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new PiecewiseConstantFunction(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelCommonJNI.PiecewiseConstantFunction_getConcreteClassName(swigCPtr, this);
+    return opensimCommonJNI.PiecewiseConstantFunction_getConcreteClassName(swigCPtr, this);
   }
 
   public PiecewiseConstantFunction() {
-    this(opensimModelCommonJNI.new_PiecewiseConstantFunction__SWIG_0(), true);
+    this(opensimCommonJNI.new_PiecewiseConstantFunction__SWIG_0(), true);
   }
 
   public PiecewiseConstantFunction(int aN, SWIGTYPE_p_double aTimes, SWIGTYPE_p_double aValues, String aName) {
-    this(opensimModelCommonJNI.new_PiecewiseConstantFunction__SWIG_1(aN, SWIGTYPE_p_double.getCPtr(aTimes), SWIGTYPE_p_double.getCPtr(aValues), aName), true);
+    this(opensimCommonJNI.new_PiecewiseConstantFunction__SWIG_1(aN, SWIGTYPE_p_double.getCPtr(aTimes), SWIGTYPE_p_double.getCPtr(aValues), aName), true);
   }
 
   public PiecewiseConstantFunction(int aN, SWIGTYPE_p_double aTimes, SWIGTYPE_p_double aValues) {
-    this(opensimModelCommonJNI.new_PiecewiseConstantFunction__SWIG_2(aN, SWIGTYPE_p_double.getCPtr(aTimes), SWIGTYPE_p_double.getCPtr(aValues)), true);
+    this(opensimCommonJNI.new_PiecewiseConstantFunction__SWIG_2(aN, SWIGTYPE_p_double.getCPtr(aTimes), SWIGTYPE_p_double.getCPtr(aValues)), true);
   }
 
   public PiecewiseConstantFunction(PiecewiseConstantFunction aFunction) {
-    this(opensimModelCommonJNI.new_PiecewiseConstantFunction__SWIG_3(PiecewiseConstantFunction.getCPtr(aFunction), aFunction), true);
+    this(opensimCommonJNI.new_PiecewiseConstantFunction__SWIG_3(PiecewiseConstantFunction.getCPtr(aFunction), aFunction), true);
   }
 
   public void init(Function aFunction) {
-    opensimModelCommonJNI.PiecewiseConstantFunction_init(swigCPtr, this, Function.getCPtr(aFunction), aFunction);
+    opensimCommonJNI.PiecewiseConstantFunction_init(swigCPtr, this, Function.getCPtr(aFunction), aFunction);
   }
 
   public int getSize() {
-    return opensimModelCommonJNI.PiecewiseConstantFunction_getSize(swigCPtr, this);
+    return opensimCommonJNI.PiecewiseConstantFunction_getSize(swigCPtr, this);
   }
 
   public ArrayDouble getX() {
-    return new ArrayDouble(opensimModelCommonJNI.PiecewiseConstantFunction_getX__SWIG_0(swigCPtr, this), false);
+    return new ArrayDouble(opensimCommonJNI.PiecewiseConstantFunction_getX__SWIG_0(swigCPtr, this), false);
   }
 
   public ArrayDouble getY() {
-    return new ArrayDouble(opensimModelCommonJNI.PiecewiseConstantFunction_getY__SWIG_0(swigCPtr, this), false);
+    return new ArrayDouble(opensimCommonJNI.PiecewiseConstantFunction_getY__SWIG_0(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_double getXValues() {
-    long cPtr = opensimModelCommonJNI.PiecewiseConstantFunction_getXValues(swigCPtr, this);
+    long cPtr = opensimCommonJNI.PiecewiseConstantFunction_getXValues(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_double(cPtr, false);
   }
 
   public SWIGTYPE_p_double getYValues() {
-    long cPtr = opensimModelCommonJNI.PiecewiseConstantFunction_getYValues(swigCPtr, this);
+    long cPtr = opensimCommonJNI.PiecewiseConstantFunction_getYValues(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_double(cPtr, false);
   }
 
   public int getNumberOfPoints() {
-    return opensimModelCommonJNI.PiecewiseConstantFunction_getNumberOfPoints(swigCPtr, this);
+    return opensimCommonJNI.PiecewiseConstantFunction_getNumberOfPoints(swigCPtr, this);
   }
 
   public double getX(int aIndex) {
-    return opensimModelCommonJNI.PiecewiseConstantFunction_getX__SWIG_1(swigCPtr, this, aIndex);
+    return opensimCommonJNI.PiecewiseConstantFunction_getX__SWIG_1(swigCPtr, this, aIndex);
   }
 
   public double getY(int aIndex) {
-    return opensimModelCommonJNI.PiecewiseConstantFunction_getY__SWIG_1(swigCPtr, this, aIndex);
+    return opensimCommonJNI.PiecewiseConstantFunction_getY__SWIG_1(swigCPtr, this, aIndex);
   }
 
   public double getZ(int aIndex) {
-    return opensimModelCommonJNI.PiecewiseConstantFunction_getZ(swigCPtr, this, aIndex);
+    return opensimCommonJNI.PiecewiseConstantFunction_getZ(swigCPtr, this, aIndex);
   }
 
   public void setX(int aIndex, double aValue) {
-    opensimModelCommonJNI.PiecewiseConstantFunction_setX(swigCPtr, this, aIndex, aValue);
+    opensimCommonJNI.PiecewiseConstantFunction_setX(swigCPtr, this, aIndex, aValue);
   }
 
   public void setY(int aIndex, double aValue) {
-    opensimModelCommonJNI.PiecewiseConstantFunction_setY(swigCPtr, this, aIndex, aValue);
+    opensimCommonJNI.PiecewiseConstantFunction_setY(swigCPtr, this, aIndex, aValue);
   }
 
   public boolean deletePoint(int aIndex) {
-    return opensimModelCommonJNI.PiecewiseConstantFunction_deletePoint(swigCPtr, this, aIndex);
+    return opensimCommonJNI.PiecewiseConstantFunction_deletePoint(swigCPtr, this, aIndex);
   }
 
   public boolean deletePoints(ArrayInt indices) {
-    return opensimModelCommonJNI.PiecewiseConstantFunction_deletePoints(swigCPtr, this, ArrayInt.getCPtr(indices), indices);
+    return opensimCommonJNI.PiecewiseConstantFunction_deletePoints(swigCPtr, this, ArrayInt.getCPtr(indices), indices);
   }
 
   public int addPoint(double aX, double aY) {
-    return opensimModelCommonJNI.PiecewiseConstantFunction_addPoint(swigCPtr, this, aX, aY);
+    return opensimCommonJNI.PiecewiseConstantFunction_addPoint(swigCPtr, this, aX, aY);
   }
 
   public double evaluateTotalFirstDerivative(double aX, double aDxdt) {
-    return opensimModelCommonJNI.PiecewiseConstantFunction_evaluateTotalFirstDerivative(swigCPtr, this, aX, aDxdt);
+    return opensimCommonJNI.PiecewiseConstantFunction_evaluateTotalFirstDerivative(swigCPtr, this, aX, aDxdt);
   }
 
   public double evaluateTotalSecondDerivative(double aX, double aDxdt, double aD2xdt2) {
-    return opensimModelCommonJNI.PiecewiseConstantFunction_evaluateTotalSecondDerivative(swigCPtr, this, aX, aDxdt, aD2xdt2);
+    return opensimCommonJNI.PiecewiseConstantFunction_evaluateTotalSecondDerivative(swigCPtr, this, aX, aDxdt, aD2xdt2);
   }
 
   public double calcValue(Vector x) {
-    return opensimModelCommonJNI.PiecewiseConstantFunction_calcValue(swigCPtr, this, Vector.getCPtr(x), x);
+    return opensimCommonJNI.PiecewiseConstantFunction_calcValue(swigCPtr, this, Vector.getCPtr(x), x);
   }
 
   public double calcDerivative(StdVectorInt derivComponents, Vector x) {
-    return opensimModelCommonJNI.PiecewiseConstantFunction_calcDerivative(swigCPtr, this, StdVectorInt.getCPtr(derivComponents), derivComponents, Vector.getCPtr(x), x);
+    return opensimCommonJNI.PiecewiseConstantFunction_calcDerivative(swigCPtr, this, StdVectorInt.getCPtr(derivComponents), derivComponents, Vector.getCPtr(x), x);
   }
 
   public int getArgumentSize() {
-    return opensimModelCommonJNI.PiecewiseConstantFunction_getArgumentSize(swigCPtr, this);
+    return opensimCommonJNI.PiecewiseConstantFunction_getArgumentSize(swigCPtr, this);
   }
 
   public int getMaxDerivativeOrder() {
-    return opensimModelCommonJNI.PiecewiseConstantFunction_getMaxDerivativeOrder(swigCPtr, this);
+    return opensimCommonJNI.PiecewiseConstantFunction_getMaxDerivativeOrder(swigCPtr, this);
   }
 
   public SWIGTYPE_p_SimTK__Function createSimTKFunction() {
-    long cPtr = opensimModelCommonJNI.PiecewiseConstantFunction_createSimTKFunction(swigCPtr, this);
+    long cPtr = opensimCommonJNI.PiecewiseConstantFunction_createSimTKFunction(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_SimTK__Function(cPtr, false);
   }
 

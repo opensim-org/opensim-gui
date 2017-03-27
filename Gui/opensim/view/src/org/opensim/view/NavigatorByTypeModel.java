@@ -21,7 +21,6 @@ import org.opensim.modeling.Controller;
 import org.opensim.modeling.ControllerSet;
 import org.opensim.modeling.Force;
 import org.opensim.modeling.ForceSet;
-import org.opensim.modeling.FrameSet;
 import org.opensim.modeling.Ground;
 import org.opensim.modeling.Joint;
 import org.opensim.modeling.JointSet;
@@ -39,7 +38,6 @@ import org.opensim.modeling.OpenSimObject;
  * 
  */
 public class NavigatorByTypeModel {
-    public static final String PROP_SETOFFRAMES = "PROP_SETOFFRAMES";
     public static final String PROP_SETOFBODIES = "PROP_SETOFBODIES";
     public static final String PROP_SETOFJOINTS = "PROP_SETOFJOINTS";
     public static final String PROP_SETOFMARKERS = "PROP_SETOFMARKERS";
@@ -48,7 +46,6 @@ public class NavigatorByTypeModel {
     public static final String PROP_SETOFFORCES = "PROP_SETOFFORCES";
     public static final String PROP_SETOFCONTROLLERS = "PROP_SETOFCONTROLLERS";
     
-    private final FrameSet setOfFrames = new FrameSet();
     private final BodySet setOfBodies = new BodySet();
     private final JointSet setOfJoints = new JointSet();
     private final MarkerSet setOfMarkers = new MarkerSet();
@@ -61,7 +58,6 @@ public class NavigatorByTypeModel {
     private Ground ground;
     
     public NavigatorByTypeModel(Model model) {
-        setOfFrames.setMemoryOwner(false);
         setOfBodies.setMemoryOwner(false);
         setOfJoints.setMemoryOwner(false);
         setOfMarkers.setMemoryOwner(false);
@@ -81,7 +77,6 @@ public class NavigatorByTypeModel {
             Component comp = compIter.__deref__();
             Frame frm = Frame.safeDownCast(comp);
             if (frm != null){ // Either a generic Frame or a Body
-                setOfFrames.adoptAndAppend(frm);
                 Body body = Body.safeDownCast(frm);
                 if (body != null)
                     setOfBodies.adoptAndAppend(body);
@@ -139,13 +134,6 @@ public class NavigatorByTypeModel {
         if (tComp != null){
             setOfContactGeometry.adoptAndAppend(tComp);
         }
-    }
-
-    /**
-     * @return the setOfFrames
-     */
-    public FrameSet getSetOfFrames() {
-        return setOfFrames;
     }
 
     /**

@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.opensim.modeling.AbstractPathPoint;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayDecorativeGeometry;
 import org.opensim.modeling.BodyList;
@@ -329,7 +330,7 @@ public class ModelVisualizationJson extends JSONObject {
         JSONArray pathpoint_jsonArr = new JSONArray();
         PathPointSet ppts = path.getPathPointSet();
         for (int i=0; i< ppts.getSize(); i++){
-            PathPoint pathPoint = ppts.get(i);
+            AbstractPathPoint pathPoint = ppts.get(i);
             // Create a Sphere with internal opensimType PathPoint
             // attach it to the frame it lives on.
             UUID pathpoint_uuid = addPathPointGeometryToParent(pathPoint, json_geometries, mat_uuid.toString());
@@ -415,7 +416,7 @@ public class ModelVisualizationJson extends JSONObject {
         top_model_json.put("skeleton", skel_json);
     }
 
-    private UUID addPathPointGeometryToParent(PathPoint pathPoint, JSONArray json_geometries, String material ) {
+    private UUID addPathPointGeometryToParent(AbstractPathPoint pathPoint, JSONArray json_geometries, String material ) {
         JSONObject bpptJson = new JSONObject();
         UUID uuidForPathpointGeometry = UUID.randomUUID();
         bpptJson.put("uuid", uuidForPathpointGeometry.toString());
@@ -439,7 +440,7 @@ public class ModelVisualizationJson extends JSONObject {
         JSONObject bodyJson = mapBodyIndicesToJson.get(bodyFrame.getMobilizedBodyIndex());
         JSONArray children = (JSONArray)bodyJson.get("children");
         Transform localTransform = new Transform();
-        Vec3 location = pathPoint.getLocation();
+        Vec3 location = pathPoint.getLocation(state);
         localTransform.setP(location);
         bpptInBodyJson.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1.0), visScaleFactor));
         children.add(bpptInBodyJson);

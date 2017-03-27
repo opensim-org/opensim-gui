@@ -13,7 +13,7 @@ public class TimeSeriesTableQuaternion extends DataTableQuaternion {
   private boolean swigCMemOwnDerived;
 
   protected TimeSeriesTableQuaternion(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.TimeSeriesTableQuaternion_SWIGSmartPtrUpcast(cPtr), true);
+    super(opensimCommonJNI.TimeSeriesTableQuaternion_SWIGSmartPtrUpcast(cPtr), true);
     swigCMemOwnDerived = cMemoryOwn;
     swigCPtr = cPtr;
   }
@@ -30,7 +30,7 @@ public class TimeSeriesTableQuaternion extends DataTableQuaternion {
     if (swigCPtr != 0) {
       if (swigCMemOwnDerived) {
         swigCMemOwnDerived = false;
-        opensimModelCommonJNI.delete_TimeSeriesTableQuaternion(swigCPtr);
+        opensimCommonJNI.delete_TimeSeriesTableQuaternion(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -38,51 +38,51 @@ public class TimeSeriesTableQuaternion extends DataTableQuaternion {
   }
 
   public TimeSeriesTableQuaternion() {
-    this(opensimModelCommonJNI.new_TimeSeriesTableQuaternion__SWIG_0(), true);
+    this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_0(), true);
   }
 
   public TimeSeriesTableQuaternion(TimeSeriesTableQuaternion arg0) {
-    this(opensimModelCommonJNI.new_TimeSeriesTableQuaternion__SWIG_1(TimeSeriesTableQuaternion.getCPtr(arg0), arg0), true);
+    this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_1(TimeSeriesTableQuaternion.getCPtr(arg0), arg0), true);
   }
 
   public TimeSeriesTableQuaternion(DataTableQuaternion datatable) {
-    this(opensimModelCommonJNI.new_TimeSeriesTableQuaternion__SWIG_2(DataTableQuaternion.getCPtr(datatable), datatable), true);
+    this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_2(DataTableQuaternion.getCPtr(datatable), datatable), true);
   }
 
   public TimeSeriesTableQuaternion(String filename) {
-    this(opensimModelCommonJNI.new_TimeSeriesTableQuaternion__SWIG_3(filename), true);
+    this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_3(filename), true);
   }
 
   public TimeSeriesTableQuaternion(String filename, String tablename) {
-    this(opensimModelCommonJNI.new_TimeSeriesTableQuaternion__SWIG_4(filename, tablename), true);
+    this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_4(filename, tablename), true);
   }
 
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t getNearestRow(double time, boolean restrictToTimeRange) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t(opensimModelCommonJNI.TimeSeriesTableQuaternion_getNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
+    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t(opensimCommonJNI.TimeSeriesTableQuaternion_getNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
   }
 
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t getNearestRow(double time) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t(opensimModelCommonJNI.TimeSeriesTableQuaternion_getNearestRow__SWIG_1(swigCPtr, this, time), true);
+    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t(opensimCommonJNI.TimeSeriesTableQuaternion_getNearestRow__SWIG_1(swigCPtr, this, time), true);
   }
 
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t updNearestRow(double time, boolean restrictToTimeRange) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t(opensimModelCommonJNI.TimeSeriesTableQuaternion_updNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
+    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t(opensimCommonJNI.TimeSeriesTableQuaternion_updNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
   }
 
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t updNearestRow(double time) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t(opensimModelCommonJNI.TimeSeriesTableQuaternion_updNearestRow__SWIG_1(swigCPtr, this, time), true);
+    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t(opensimCommonJNI.TimeSeriesTableQuaternion_updNearestRow__SWIG_1(swigCPtr, this, time), true);
   }
 
   public SWIGTYPE_p_SimTK__RowVector_T_SimTK__Quaternion_t averageRow(double beginTime, double endTime) {
-    return new SWIGTYPE_p_SimTK__RowVector_T_SimTK__Quaternion_t(opensimModelCommonJNI.TimeSeriesTableQuaternion_averageRow(swigCPtr, this, beginTime, endTime), true);
+    return new SWIGTYPE_p_SimTK__RowVector_T_SimTK__Quaternion_t(opensimCommonJNI.TimeSeriesTableQuaternion_averageRow(swigCPtr, this, beginTime, endTime), true);
   }
 
   public TimeSeriesTable flatten() {
-    return new TimeSeriesTable(opensimModelCommonJNI.TimeSeriesTableQuaternion_flatten__SWIG_0(swigCPtr, this), true);
+    return new TimeSeriesTable(opensimCommonJNI.TimeSeriesTableQuaternion_flatten__SWIG_0(swigCPtr, this), true);
   }
 
   public TimeSeriesTable flatten(StdVectorString suffixes) {
-    return new TimeSeriesTable(opensimModelCommonJNI.TimeSeriesTableQuaternion_flatten__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
+    return new TimeSeriesTable(opensimCommonJNI.TimeSeriesTableQuaternion_flatten__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
   }
 
 }

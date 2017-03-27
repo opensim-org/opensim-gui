@@ -59,4 +59,8 @@ public class RowVector extends RowVectorBaseDouble {
     this(opensimSimbodyJNI.new_RowVector__SWIG_5(StdVectorDouble.getCPtr(row), row), true);
   }
 
+  public Vector transpose() {
+    return new Vector(opensimSimbodyJNI.RowVector_transpose(swigCPtr, this), true);
+  }
+
 }

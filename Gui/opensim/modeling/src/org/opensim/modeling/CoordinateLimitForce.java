@@ -12,7 +12,7 @@ public class CoordinateLimitForce extends Force {
   private transient long swigCPtr;
 
   public CoordinateLimitForce(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.CoordinateLimitForce_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.CoordinateLimitForce_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class CoordinateLimitForce extends Force {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_CoordinateLimitForce(swigCPtr);
+        opensimSimulationJNI.delete_CoordinateLimitForce(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,405 +36,405 @@ public class CoordinateLimitForce extends Force {
   }
 
   public static CoordinateLimitForce safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.CoordinateLimitForce_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.CoordinateLimitForce_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new CoordinateLimitForce(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.CoordinateLimitForce_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.CoordinateLimitForce_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.CoordinateLimitForce_getClassName();
+    return opensimSimulationJNI.CoordinateLimitForce_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.CoordinateLimitForce_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.CoordinateLimitForce_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new CoordinateLimitForce(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.CoordinateLimitForce_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.CoordinateLimitForce_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_coordinate(CoordinateLimitForce source) {
-    opensimModelSimulationJNI.CoordinateLimitForce_copyProperty_coordinate(swigCPtr, this, CoordinateLimitForce.getCPtr(source), source);
+    opensimSimulationJNI.CoordinateLimitForce_copyProperty_coordinate(swigCPtr, this, CoordinateLimitForce.getCPtr(source), source);
   }
 
   public String get_coordinate(int i) {
-    return opensimModelSimulationJNI.CoordinateLimitForce_get_coordinate__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.CoordinateLimitForce_get_coordinate__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_std__string upd_coordinate(int i) {
-    return new SWIGTYPE_p_std__string(opensimModelSimulationJNI.CoordinateLimitForce_upd_coordinate__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_std__string(opensimSimulationJNI.CoordinateLimitForce_upd_coordinate__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_coordinate(int i, String value) {
-    opensimModelSimulationJNI.CoordinateLimitForce_set_coordinate__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.CoordinateLimitForce_set_coordinate__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_coordinate(String value) {
-    return opensimModelSimulationJNI.CoordinateLimitForce_append_coordinate(swigCPtr, this, value);
+    return opensimSimulationJNI.CoordinateLimitForce_append_coordinate(swigCPtr, this, value);
   }
 
   public void constructProperty_coordinate(String initValue) {
-    opensimModelSimulationJNI.CoordinateLimitForce_constructProperty_coordinate(swigCPtr, this, initValue);
+    opensimSimulationJNI.CoordinateLimitForce_constructProperty_coordinate(swigCPtr, this, initValue);
   }
 
   public String get_coordinate() {
-    return opensimModelSimulationJNI.CoordinateLimitForce_get_coordinate__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.CoordinateLimitForce_get_coordinate__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_std__string upd_coordinate() {
-    return new SWIGTYPE_p_std__string(opensimModelSimulationJNI.CoordinateLimitForce_upd_coordinate__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_std__string(opensimSimulationJNI.CoordinateLimitForce_upd_coordinate__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_coordinate(String value) {
-    opensimModelSimulationJNI.CoordinateLimitForce_set_coordinate__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.CoordinateLimitForce_set_coordinate__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_upper_stiffness(CoordinateLimitForce source) {
-    opensimModelSimulationJNI.CoordinateLimitForce_copyProperty_upper_stiffness(swigCPtr, this, CoordinateLimitForce.getCPtr(source), source);
+    opensimSimulationJNI.CoordinateLimitForce_copyProperty_upper_stiffness(swigCPtr, this, CoordinateLimitForce.getCPtr(source), source);
   }
 
   public double get_upper_stiffness(int i) {
-    return opensimModelSimulationJNI.CoordinateLimitForce_get_upper_stiffness__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.CoordinateLimitForce_get_upper_stiffness__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_upper_stiffness(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.CoordinateLimitForce_upd_upper_stiffness__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.CoordinateLimitForce_upd_upper_stiffness__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_upper_stiffness(int i, double value) {
-    opensimModelSimulationJNI.CoordinateLimitForce_set_upper_stiffness__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.CoordinateLimitForce_set_upper_stiffness__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_upper_stiffness(double value) {
-    return opensimModelSimulationJNI.CoordinateLimitForce_append_upper_stiffness(swigCPtr, this, value);
+    return opensimSimulationJNI.CoordinateLimitForce_append_upper_stiffness(swigCPtr, this, value);
   }
 
   public void constructProperty_upper_stiffness(double initValue) {
-    opensimModelSimulationJNI.CoordinateLimitForce_constructProperty_upper_stiffness(swigCPtr, this, initValue);
+    opensimSimulationJNI.CoordinateLimitForce_constructProperty_upper_stiffness(swigCPtr, this, initValue);
   }
 
   public double get_upper_stiffness() {
-    return opensimModelSimulationJNI.CoordinateLimitForce_get_upper_stiffness__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.CoordinateLimitForce_get_upper_stiffness__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_upper_stiffness() {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.CoordinateLimitForce_upd_upper_stiffness__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.CoordinateLimitForce_upd_upper_stiffness__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_upper_stiffness(double value) {
-    opensimModelSimulationJNI.CoordinateLimitForce_set_upper_stiffness__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.CoordinateLimitForce_set_upper_stiffness__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_upper_limit(CoordinateLimitForce source) {
-    opensimModelSimulationJNI.CoordinateLimitForce_copyProperty_upper_limit(swigCPtr, this, CoordinateLimitForce.getCPtr(source), source);
+    opensimSimulationJNI.CoordinateLimitForce_copyProperty_upper_limit(swigCPtr, this, CoordinateLimitForce.getCPtr(source), source);
   }
 
   public double get_upper_limit(int i) {
-    return opensimModelSimulationJNI.CoordinateLimitForce_get_upper_limit__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.CoordinateLimitForce_get_upper_limit__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_upper_limit(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.CoordinateLimitForce_upd_upper_limit__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.CoordinateLimitForce_upd_upper_limit__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_upper_limit(int i, double value) {
-    opensimModelSimulationJNI.CoordinateLimitForce_set_upper_limit__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.CoordinateLimitForce_set_upper_limit__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_upper_limit(double value) {
-    return opensimModelSimulationJNI.CoordinateLimitForce_append_upper_limit(swigCPtr, this, value);
+    return opensimSimulationJNI.CoordinateLimitForce_append_upper_limit(swigCPtr, this, value);
   }
 
   public void constructProperty_upper_limit(double initValue) {
-    opensimModelSimulationJNI.CoordinateLimitForce_constructProperty_upper_limit(swigCPtr, this, initValue);
+    opensimSimulationJNI.CoordinateLimitForce_constructProperty_upper_limit(swigCPtr, this, initValue);
   }
 
   public double get_upper_limit() {
-    return opensimModelSimulationJNI.CoordinateLimitForce_get_upper_limit__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.CoordinateLimitForce_get_upper_limit__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_upper_limit() {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.CoordinateLimitForce_upd_upper_limit__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.CoordinateLimitForce_upd_upper_limit__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_upper_limit(double value) {
-    opensimModelSimulationJNI.CoordinateLimitForce_set_upper_limit__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.CoordinateLimitForce_set_upper_limit__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_lower_stiffness(CoordinateLimitForce source) {
-    opensimModelSimulationJNI.CoordinateLimitForce_copyProperty_lower_stiffness(swigCPtr, this, CoordinateLimitForce.getCPtr(source), source);
+    opensimSimulationJNI.CoordinateLimitForce_copyProperty_lower_stiffness(swigCPtr, this, CoordinateLimitForce.getCPtr(source), source);
   }
 
   public double get_lower_stiffness(int i) {
-    return opensimModelSimulationJNI.CoordinateLimitForce_get_lower_stiffness__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.CoordinateLimitForce_get_lower_stiffness__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_lower_stiffness(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.CoordinateLimitForce_upd_lower_stiffness__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.CoordinateLimitForce_upd_lower_stiffness__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_lower_stiffness(int i, double value) {
-    opensimModelSimulationJNI.CoordinateLimitForce_set_lower_stiffness__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.CoordinateLimitForce_set_lower_stiffness__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_lower_stiffness(double value) {
-    return opensimModelSimulationJNI.CoordinateLimitForce_append_lower_stiffness(swigCPtr, this, value);
+    return opensimSimulationJNI.CoordinateLimitForce_append_lower_stiffness(swigCPtr, this, value);
   }
 
   public void constructProperty_lower_stiffness(double initValue) {
-    opensimModelSimulationJNI.CoordinateLimitForce_constructProperty_lower_stiffness(swigCPtr, this, initValue);
+    opensimSimulationJNI.CoordinateLimitForce_constructProperty_lower_stiffness(swigCPtr, this, initValue);
   }
 
   public double get_lower_stiffness() {
-    return opensimModelSimulationJNI.CoordinateLimitForce_get_lower_stiffness__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.CoordinateLimitForce_get_lower_stiffness__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_lower_stiffness() {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.CoordinateLimitForce_upd_lower_stiffness__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.CoordinateLimitForce_upd_lower_stiffness__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_lower_stiffness(double value) {
-    opensimModelSimulationJNI.CoordinateLimitForce_set_lower_stiffness__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.CoordinateLimitForce_set_lower_stiffness__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_lower_limit(CoordinateLimitForce source) {
-    opensimModelSimulationJNI.CoordinateLimitForce_copyProperty_lower_limit(swigCPtr, this, CoordinateLimitForce.getCPtr(source), source);
+    opensimSimulationJNI.CoordinateLimitForce_copyProperty_lower_limit(swigCPtr, this, CoordinateLimitForce.getCPtr(source), source);
   }
 
   public double get_lower_limit(int i) {
-    return opensimModelSimulationJNI.CoordinateLimitForce_get_lower_limit__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.CoordinateLimitForce_get_lower_limit__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_lower_limit(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.CoordinateLimitForce_upd_lower_limit__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.CoordinateLimitForce_upd_lower_limit__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_lower_limit(int i, double value) {
-    opensimModelSimulationJNI.CoordinateLimitForce_set_lower_limit__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.CoordinateLimitForce_set_lower_limit__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_lower_limit(double value) {
-    return opensimModelSimulationJNI.CoordinateLimitForce_append_lower_limit(swigCPtr, this, value);
+    return opensimSimulationJNI.CoordinateLimitForce_append_lower_limit(swigCPtr, this, value);
   }
 
   public void constructProperty_lower_limit(double initValue) {
-    opensimModelSimulationJNI.CoordinateLimitForce_constructProperty_lower_limit(swigCPtr, this, initValue);
+    opensimSimulationJNI.CoordinateLimitForce_constructProperty_lower_limit(swigCPtr, this, initValue);
   }
 
   public double get_lower_limit() {
-    return opensimModelSimulationJNI.CoordinateLimitForce_get_lower_limit__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.CoordinateLimitForce_get_lower_limit__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_lower_limit() {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.CoordinateLimitForce_upd_lower_limit__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.CoordinateLimitForce_upd_lower_limit__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_lower_limit(double value) {
-    opensimModelSimulationJNI.CoordinateLimitForce_set_lower_limit__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.CoordinateLimitForce_set_lower_limit__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_damping(CoordinateLimitForce source) {
-    opensimModelSimulationJNI.CoordinateLimitForce_copyProperty_damping(swigCPtr, this, CoordinateLimitForce.getCPtr(source), source);
+    opensimSimulationJNI.CoordinateLimitForce_copyProperty_damping(swigCPtr, this, CoordinateLimitForce.getCPtr(source), source);
   }
 
   public double get_damping(int i) {
-    return opensimModelSimulationJNI.CoordinateLimitForce_get_damping__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.CoordinateLimitForce_get_damping__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_damping(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.CoordinateLimitForce_upd_damping__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.CoordinateLimitForce_upd_damping__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_damping(int i, double value) {
-    opensimModelSimulationJNI.CoordinateLimitForce_set_damping__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.CoordinateLimitForce_set_damping__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_damping(double value) {
-    return opensimModelSimulationJNI.CoordinateLimitForce_append_damping(swigCPtr, this, value);
+    return opensimSimulationJNI.CoordinateLimitForce_append_damping(swigCPtr, this, value);
   }
 
   public void constructProperty_damping(double initValue) {
-    opensimModelSimulationJNI.CoordinateLimitForce_constructProperty_damping(swigCPtr, this, initValue);
+    opensimSimulationJNI.CoordinateLimitForce_constructProperty_damping(swigCPtr, this, initValue);
   }
 
   public double get_damping() {
-    return opensimModelSimulationJNI.CoordinateLimitForce_get_damping__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.CoordinateLimitForce_get_damping__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_damping() {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.CoordinateLimitForce_upd_damping__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.CoordinateLimitForce_upd_damping__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_damping(double value) {
-    opensimModelSimulationJNI.CoordinateLimitForce_set_damping__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.CoordinateLimitForce_set_damping__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_transition(CoordinateLimitForce source) {
-    opensimModelSimulationJNI.CoordinateLimitForce_copyProperty_transition(swigCPtr, this, CoordinateLimitForce.getCPtr(source), source);
+    opensimSimulationJNI.CoordinateLimitForce_copyProperty_transition(swigCPtr, this, CoordinateLimitForce.getCPtr(source), source);
   }
 
   public double get_transition(int i) {
-    return opensimModelSimulationJNI.CoordinateLimitForce_get_transition__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.CoordinateLimitForce_get_transition__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_transition(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.CoordinateLimitForce_upd_transition__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.CoordinateLimitForce_upd_transition__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_transition(int i, double value) {
-    opensimModelSimulationJNI.CoordinateLimitForce_set_transition__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.CoordinateLimitForce_set_transition__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_transition(double value) {
-    return opensimModelSimulationJNI.CoordinateLimitForce_append_transition(swigCPtr, this, value);
+    return opensimSimulationJNI.CoordinateLimitForce_append_transition(swigCPtr, this, value);
   }
 
   public void constructProperty_transition(double initValue) {
-    opensimModelSimulationJNI.CoordinateLimitForce_constructProperty_transition(swigCPtr, this, initValue);
+    opensimSimulationJNI.CoordinateLimitForce_constructProperty_transition(swigCPtr, this, initValue);
   }
 
   public double get_transition() {
-    return opensimModelSimulationJNI.CoordinateLimitForce_get_transition__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.CoordinateLimitForce_get_transition__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_transition() {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.CoordinateLimitForce_upd_transition__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.CoordinateLimitForce_upd_transition__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_transition(double value) {
-    opensimModelSimulationJNI.CoordinateLimitForce_set_transition__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.CoordinateLimitForce_set_transition__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_compute_dissipation_energy(CoordinateLimitForce source) {
-    opensimModelSimulationJNI.CoordinateLimitForce_copyProperty_compute_dissipation_energy(swigCPtr, this, CoordinateLimitForce.getCPtr(source), source);
+    opensimSimulationJNI.CoordinateLimitForce_copyProperty_compute_dissipation_energy(swigCPtr, this, CoordinateLimitForce.getCPtr(source), source);
   }
 
   public boolean get_compute_dissipation_energy(int i) {
-    return opensimModelSimulationJNI.CoordinateLimitForce_get_compute_dissipation_energy__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.CoordinateLimitForce_get_compute_dissipation_energy__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_bool upd_compute_dissipation_energy(int i) {
-    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.CoordinateLimitForce_upd_compute_dissipation_energy__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_bool(opensimSimulationJNI.CoordinateLimitForce_upd_compute_dissipation_energy__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_compute_dissipation_energy(int i, boolean value) {
-    opensimModelSimulationJNI.CoordinateLimitForce_set_compute_dissipation_energy__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.CoordinateLimitForce_set_compute_dissipation_energy__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_compute_dissipation_energy(boolean value) {
-    return opensimModelSimulationJNI.CoordinateLimitForce_append_compute_dissipation_energy(swigCPtr, this, value);
+    return opensimSimulationJNI.CoordinateLimitForce_append_compute_dissipation_energy(swigCPtr, this, value);
   }
 
   public void constructProperty_compute_dissipation_energy(boolean initValue) {
-    opensimModelSimulationJNI.CoordinateLimitForce_constructProperty_compute_dissipation_energy(swigCPtr, this, initValue);
+    opensimSimulationJNI.CoordinateLimitForce_constructProperty_compute_dissipation_energy(swigCPtr, this, initValue);
   }
 
   public boolean get_compute_dissipation_energy() {
-    return opensimModelSimulationJNI.CoordinateLimitForce_get_compute_dissipation_energy__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.CoordinateLimitForce_get_compute_dissipation_energy__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_bool upd_compute_dissipation_energy() {
-    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.CoordinateLimitForce_upd_compute_dissipation_energy__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_bool(opensimSimulationJNI.CoordinateLimitForce_upd_compute_dissipation_energy__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_compute_dissipation_energy(boolean value) {
-    opensimModelSimulationJNI.CoordinateLimitForce_set_compute_dissipation_energy__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.CoordinateLimitForce_set_compute_dissipation_energy__SWIG_1(swigCPtr, this, value);
   }
 
   public CoordinateLimitForce() {
-    this(opensimModelSimulationJNI.new_CoordinateLimitForce__SWIG_0(), true);
+    this(opensimSimulationJNI.new_CoordinateLimitForce__SWIG_0(), true);
   }
 
   public CoordinateLimitForce(String coordName, double q_upper, double K_upper, double q_lower, double K_lower, double damping, double dq, boolean computeDissipationEnergy) {
-    this(opensimModelSimulationJNI.new_CoordinateLimitForce__SWIG_1(coordName, q_upper, K_upper, q_lower, K_lower, damping, dq, computeDissipationEnergy), true);
+    this(opensimSimulationJNI.new_CoordinateLimitForce__SWIG_1(coordName, q_upper, K_upper, q_lower, K_lower, damping, dq, computeDissipationEnergy), true);
   }
 
   public CoordinateLimitForce(String coordName, double q_upper, double K_upper, double q_lower, double K_lower, double damping, double dq) {
-    this(opensimModelSimulationJNI.new_CoordinateLimitForce__SWIG_2(coordName, q_upper, K_upper, q_lower, K_lower, damping, dq), true);
+    this(opensimSimulationJNI.new_CoordinateLimitForce__SWIG_2(coordName, q_upper, K_upper, q_lower, K_lower, damping, dq), true);
   }
 
   public void setUpperStiffness(double aUpperStiffness) {
-    opensimModelSimulationJNI.CoordinateLimitForce_setUpperStiffness(swigCPtr, this, aUpperStiffness);
+    opensimSimulationJNI.CoordinateLimitForce_setUpperStiffness(swigCPtr, this, aUpperStiffness);
   }
 
   public double getUpperStiffness() {
-    return opensimModelSimulationJNI.CoordinateLimitForce_getUpperStiffness(swigCPtr, this);
+    return opensimSimulationJNI.CoordinateLimitForce_getUpperStiffness(swigCPtr, this);
   }
 
   public void setUpperLimit(double aUpperLimit) {
-    opensimModelSimulationJNI.CoordinateLimitForce_setUpperLimit(swigCPtr, this, aUpperLimit);
+    opensimSimulationJNI.CoordinateLimitForce_setUpperLimit(swigCPtr, this, aUpperLimit);
   }
 
   public double getUpperLimit() {
-    return opensimModelSimulationJNI.CoordinateLimitForce_getUpperLimit(swigCPtr, this);
+    return opensimSimulationJNI.CoordinateLimitForce_getUpperLimit(swigCPtr, this);
   }
 
   public void setLowerStiffness(double aLowerStiffness) {
-    opensimModelSimulationJNI.CoordinateLimitForce_setLowerStiffness(swigCPtr, this, aLowerStiffness);
+    opensimSimulationJNI.CoordinateLimitForce_setLowerStiffness(swigCPtr, this, aLowerStiffness);
   }
 
   public double getLowerStiffness() {
-    return opensimModelSimulationJNI.CoordinateLimitForce_getLowerStiffness(swigCPtr, this);
+    return opensimSimulationJNI.CoordinateLimitForce_getLowerStiffness(swigCPtr, this);
   }
 
   public void setLowerLimit(double aLowerLimit) {
-    opensimModelSimulationJNI.CoordinateLimitForce_setLowerLimit(swigCPtr, this, aLowerLimit);
+    opensimSimulationJNI.CoordinateLimitForce_setLowerLimit(swigCPtr, this, aLowerLimit);
   }
 
   public double getLowerLimit() {
-    return opensimModelSimulationJNI.CoordinateLimitForce_getLowerLimit(swigCPtr, this);
+    return opensimSimulationJNI.CoordinateLimitForce_getLowerLimit(swigCPtr, this);
   }
 
   public void setDamping(double aDamping) {
-    opensimModelSimulationJNI.CoordinateLimitForce_setDamping(swigCPtr, this, aDamping);
+    opensimSimulationJNI.CoordinateLimitForce_setDamping(swigCPtr, this, aDamping);
   }
 
   public double getDamping() {
-    return opensimModelSimulationJNI.CoordinateLimitForce_getDamping(swigCPtr, this);
+    return opensimSimulationJNI.CoordinateLimitForce_getDamping(swigCPtr, this);
   }
 
   public void setTransition(double aTransition) {
-    opensimModelSimulationJNI.CoordinateLimitForce_setTransition(swigCPtr, this, aTransition);
+    opensimSimulationJNI.CoordinateLimitForce_setTransition(swigCPtr, this, aTransition);
   }
 
   public double getTransition() {
-    return opensimModelSimulationJNI.CoordinateLimitForce_getTransition(swigCPtr, this);
+    return opensimSimulationJNI.CoordinateLimitForce_getTransition(swigCPtr, this);
   }
 
   public void setComputeDissipationEnergy(boolean flag) {
-    opensimModelSimulationJNI.CoordinateLimitForce_setComputeDissipationEnergy(swigCPtr, this, flag);
+    opensimSimulationJNI.CoordinateLimitForce_setComputeDissipationEnergy(swigCPtr, this, flag);
   }
 
   public boolean isComputingDissipationEnergy() {
-    return opensimModelSimulationJNI.CoordinateLimitForce_isComputingDissipationEnergy(swigCPtr, this);
+    return opensimSimulationJNI.CoordinateLimitForce_isComputingDissipationEnergy(swigCPtr, this);
   }
 
   public double getPowerDissipation(State s) {
-    return opensimModelSimulationJNI.CoordinateLimitForce_getPowerDissipation(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.CoordinateLimitForce_getPowerDissipation(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getDissipatedEnergy(State s) {
-    return opensimModelSimulationJNI.CoordinateLimitForce_getDissipatedEnergy(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.CoordinateLimitForce_getDissipatedEnergy(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double calcLimitForce(State s) {
-    return opensimModelSimulationJNI.CoordinateLimitForce_calcLimitForce(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.CoordinateLimitForce_calcLimitForce(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double computePotentialEnergy(State s) {
-    return opensimModelSimulationJNI.CoordinateLimitForce_computePotentialEnergy(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.CoordinateLimitForce_computePotentialEnergy(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public ArrayStr getRecordLabels() {
-    return new ArrayStr(opensimModelSimulationJNI.CoordinateLimitForce_getRecordLabels(swigCPtr, this), true);
+    return new ArrayStr(opensimSimulationJNI.CoordinateLimitForce_getRecordLabels(swigCPtr, this), true);
   }
 
   public ArrayDouble getRecordValues(State state) {
-    return new ArrayDouble(opensimModelSimulationJNI.CoordinateLimitForce_getRecordValues(swigCPtr, this, State.getCPtr(state), state), true);
+    return new ArrayDouble(opensimSimulationJNI.CoordinateLimitForce_getRecordValues(swigCPtr, this, State.getCPtr(state), state), true);
   }
 
 }

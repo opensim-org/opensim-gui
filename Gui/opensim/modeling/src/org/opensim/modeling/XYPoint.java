@@ -29,34 +29,34 @@ public class XYPoint {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_XYPoint(swigCPtr);
+        opensimCommonJNI.delete_XYPoint(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public void set_x(double value) {
-    opensimModelCommonJNI.XYPoint__x_set(swigCPtr, this, value);
+    opensimCommonJNI.XYPoint__x_set(swigCPtr, this, value);
   }
 
   public double get_x() {
-    return opensimModelCommonJNI.XYPoint__x_get(swigCPtr, this);
+    return opensimCommonJNI.XYPoint__x_get(swigCPtr, this);
   }
 
   public void set_y(double value) {
-    opensimModelCommonJNI.XYPoint__y_set(swigCPtr, this, value);
+    opensimCommonJNI.XYPoint__y_set(swigCPtr, this, value);
   }
 
   public double get_y() {
-    return opensimModelCommonJNI.XYPoint__y_get(swigCPtr, this);
+    return opensimCommonJNI.XYPoint__y_get(swigCPtr, this);
   }
 
   public XYPoint() {
-    this(opensimModelCommonJNI.new_XYPoint__SWIG_0(), true);
+    this(opensimCommonJNI.new_XYPoint__SWIG_0(), true);
   }
 
   public XYPoint(double aX, double aY) {
-    this(opensimModelCommonJNI.new_XYPoint__SWIG_1(aX, aY), true);
+    this(opensimCommonJNI.new_XYPoint__SWIG_1(aX, aY), true);
   }
 
 }

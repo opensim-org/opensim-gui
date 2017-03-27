@@ -29,47 +29,51 @@ public class ModelVisualizer {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_ModelVisualizer(swigCPtr);
+        opensimSimulationJNI.delete_ModelVisualizer(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public void show(State state) {
-    opensimModelSimulationJNI.ModelVisualizer_show(swigCPtr, this, State.getCPtr(state), state);
+    opensimSimulationJNI.ModelVisualizer_show(swigCPtr, this, State.getCPtr(state), state);
   }
 
-  public SWIGTYPE_p_SimTK__Visualizer__InputSilo getInputSilo() {
-    return new SWIGTYPE_p_SimTK__Visualizer__InputSilo(opensimModelSimulationJNI.ModelVisualizer_getInputSilo(swigCPtr, this), false);
+  public SimTKVisualizerInputSilo getInputSilo() {
+    return new SimTKVisualizerInputSilo(opensimSimulationJNI.ModelVisualizer_getInputSilo(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_SimTK__Visualizer__InputSilo updInputSilo() {
-    return new SWIGTYPE_p_SimTK__Visualizer__InputSilo(opensimModelSimulationJNI.ModelVisualizer_updInputSilo(swigCPtr, this), false);
+  public SimTKVisualizerInputSilo updInputSilo() {
+    return new SimTKVisualizerInputSilo(opensimSimulationJNI.ModelVisualizer_updInputSilo(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_SimTK__Visualizer getSimbodyVisualizer() {
-    return new SWIGTYPE_p_SimTK__Visualizer(opensimModelSimulationJNI.ModelVisualizer_getSimbodyVisualizer(swigCPtr, this), false);
+  public SimTKVisualizer getSimbodyVisualizer() {
+    return new SimTKVisualizer(opensimSimulationJNI.ModelVisualizer_getSimbodyVisualizer(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_SimTK__Visualizer updSimbodyVisualizer() {
-    return new SWIGTYPE_p_SimTK__Visualizer(opensimModelSimulationJNI.ModelVisualizer_updSimbodyVisualizer(swigCPtr, this), false);
+  public SimTKVisualizer updSimbodyVisualizer() {
+    return new SimTKVisualizer(opensimSimulationJNI.ModelVisualizer_updSimbodyVisualizer(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_SimTK__DefaultGeometry getGeometryDecorationGenerator() {
-    long cPtr = opensimModelSimulationJNI.ModelVisualizer_getGeometryDecorationGenerator(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.ModelVisualizer_getGeometryDecorationGenerator(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_SimTK__DefaultGeometry(cPtr, false);
   }
 
   public Model getModel() {
-    return new Model(opensimModelSimulationJNI.ModelVisualizer_getModel(swigCPtr, this), false);
+    return new Model(opensimSimulationJNI.ModelVisualizer_getModel(swigCPtr, this), false);
   }
 
   public Model updModel() {
-    return new Model(opensimModelSimulationJNI.ModelVisualizer_updModel(swigCPtr, this), false);
+    return new Model(opensimSimulationJNI.ModelVisualizer_updModel(swigCPtr, this), false);
   }
 
   public static boolean findGeometryFile(Model model, String geoFile, SWIGTYPE_p_bool isAbsolute, SimTKArrayString attempts) {
-    return opensimModelSimulationJNI.ModelVisualizer_findGeometryFile(Model.getCPtr(model), model, geoFile, SWIGTYPE_p_bool.getCPtr(isAbsolute), SimTKArrayString.getCPtr(attempts), attempts);
+    return opensimSimulationJNI.ModelVisualizer_findGeometryFile(Model.getCPtr(model), model, geoFile, SWIGTYPE_p_bool.getCPtr(isAbsolute), SimTKArrayString.getCPtr(attempts), attempts);
+  }
+
+  public static void addDirToGeometrySearchPaths(String dir) {
+    opensimSimulationJNI.ModelVisualizer_addDirToGeometrySearchPaths(dir);
   }
 
 }

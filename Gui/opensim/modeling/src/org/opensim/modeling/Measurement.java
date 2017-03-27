@@ -12,7 +12,7 @@ public class Measurement extends OpenSimObject {
   private transient long swigCPtr;
 
   public Measurement(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.Measurement_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.Measurement_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Measurement extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_Measurement(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_Measurement(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,69 +36,69 @@ public class Measurement extends OpenSimObject {
   }
 
   public static Measurement safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.Measurement_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.Measurement_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Measurement(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.Measurement_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.Measurement_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.Measurement_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.Measurement_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.Measurement_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.Measurement_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Measurement(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.Measurement_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.Measurement_getConcreteClassName(swigCPtr, this);
   }
 
   public Measurement() {
-    this(opensimModelJNI.new_Measurement__SWIG_0(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_Measurement__SWIG_0(), true);
   }
 
   public Measurement(Measurement aMeasurement) {
-    this(opensimModelJNI.new_Measurement__SWIG_1(Measurement.getCPtr(aMeasurement), aMeasurement), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_Measurement__SWIG_1(Measurement.getCPtr(aMeasurement), aMeasurement), true);
   }
 
   public void copyData(Measurement aMeasurement) {
-    opensimModelJNI.Measurement_copyData(swigCPtr, this, Measurement.getCPtr(aMeasurement), aMeasurement);
+    opensimActuatorsAnalysesToolsJNI.Measurement_copyData(swigCPtr, this, Measurement.getCPtr(aMeasurement), aMeasurement);
   }
 
   public BodyScaleSet getBodyScaleSet() {
-    return new BodyScaleSet(opensimModelJNI.Measurement_getBodyScaleSet(swigCPtr, this), false);
+    return new BodyScaleSet(opensimActuatorsAnalysesToolsJNI.Measurement_getBodyScaleSet(swigCPtr, this), false);
   }
 
   public MarkerPairSet getMarkerPairSet() {
-    return new MarkerPairSet(opensimModelJNI.Measurement_getMarkerPairSet(swigCPtr, this), false);
+    return new MarkerPairSet(opensimActuatorsAnalysesToolsJNI.Measurement_getMarkerPairSet(swigCPtr, this), false);
   }
 
   public int getNumMarkerPairs() {
-    return opensimModelJNI.Measurement_getNumMarkerPairs(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.Measurement_getNumMarkerPairs(swigCPtr, this);
   }
 
   public MarkerPair getMarkerPair(int aIndex) {
-    return new MarkerPair(opensimModelJNI.Measurement_getMarkerPair(swigCPtr, this, aIndex), false);
+    return new MarkerPair(opensimActuatorsAnalysesToolsJNI.Measurement_getMarkerPair(swigCPtr, this, aIndex), false);
   }
 
   public boolean getApply() {
-    return opensimModelJNI.Measurement_getApply(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.Measurement_getApply(swigCPtr, this);
   }
 
   public void setApply(boolean aApply) {
-    opensimModelJNI.Measurement_setApply(swigCPtr, this, aApply);
+    opensimActuatorsAnalysesToolsJNI.Measurement_setApply(swigCPtr, this, aApply);
   }
 
   public void applyScaleFactor(double aFactor, ScaleSet aScaleSet) {
-    opensimModelJNI.Measurement_applyScaleFactor(swigCPtr, this, aFactor, ScaleSet.getCPtr(aScaleSet), aScaleSet);
+    opensimActuatorsAnalysesToolsJNI.Measurement_applyScaleFactor(swigCPtr, this, aFactor, ScaleSet.getCPtr(aScaleSet), aScaleSet);
   }
 
   public static void registerTypes() {
-    opensimModelJNI.Measurement_registerTypes();
+    opensimActuatorsAnalysesToolsJNI.Measurement_registerTypes();
   }
 
 }

@@ -12,7 +12,7 @@ public class ModelComponent extends Component {
   private transient long swigCPtr;
 
   public ModelComponent(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.ModelComponent_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.ModelComponent_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ModelComponent extends Component {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_ModelComponent(swigCPtr);
+        opensimSimulationJNI.delete_ModelComponent(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,37 +36,37 @@ public class ModelComponent extends Component {
   }
 
   public static ModelComponent safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.ModelComponent_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.ModelComponent_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ModelComponent(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.ModelComponent_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.ModelComponent_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.ModelComponent_getClassName();
+    return opensimSimulationJNI.ModelComponent_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.ModelComponent_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.ModelComponent_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ModelComponent(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.ModelComponent_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.ModelComponent_getConcreteClassName(swigCPtr, this);
   }
 
   public void connectToModel(Model model) {
-    opensimModelSimulationJNI.ModelComponent_connectToModel(swigCPtr, this, Model.getCPtr(model), model);
+    opensimSimulationJNI.ModelComponent_connectToModel(swigCPtr, this, Model.getCPtr(model), model);
   }
 
   public Model getModel() {
-    return new Model(opensimModelSimulationJNI.ModelComponent_getModel(swigCPtr, this), false);
+    return new Model(opensimSimulationJNI.ModelComponent_getModel(swigCPtr, this), false);
   }
 
   public Model updModel() {
-    return new Model(opensimModelSimulationJNI.ModelComponent_updModel(swigCPtr, this), false);
+    return new Model(opensimSimulationJNI.ModelComponent_updModel(swigCPtr, this), false);
   }
 
 }

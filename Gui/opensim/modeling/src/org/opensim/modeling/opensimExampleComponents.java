@@ -8,5 +8,5 @@
 
 package org.opensim.modeling;
 
-public class opensimModelSimulation {
+public class opensimExampleComponents {
 }

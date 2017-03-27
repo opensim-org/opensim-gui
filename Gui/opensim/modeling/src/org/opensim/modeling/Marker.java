@@ -12,7 +12,7 @@ public class Marker extends Station {
   private transient long swigCPtr;
 
   public Marker(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.Marker_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.Marker_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Marker extends Station {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_Marker(swigCPtr);
+        opensimSimulationJNI.delete_Marker(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,61 +36,97 @@ public class Marker extends Station {
   }
 
   public static Marker safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.Marker_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.Marker_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Marker(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.Marker_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.Marker_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.Marker_getClassName();
+    return opensimSimulationJNI.Marker_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.Marker_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.Marker_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Marker(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.Marker_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.Marker_getConcreteClassName(swigCPtr, this);
+  }
+
+  public void copyProperty_fixed(Marker source) {
+    opensimSimulationJNI.Marker_copyProperty_fixed(swigCPtr, this, Marker.getCPtr(source), source);
+  }
+
+  public boolean get_fixed(int i) {
+    return opensimSimulationJNI.Marker_get_fixed__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_bool upd_fixed(int i) {
+    return new SWIGTYPE_p_bool(opensimSimulationJNI.Marker_upd_fixed__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_fixed(int i, boolean value) {
+    opensimSimulationJNI.Marker_set_fixed__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_fixed(boolean value) {
+    return opensimSimulationJNI.Marker_append_fixed(swigCPtr, this, value);
+  }
+
+  public void constructProperty_fixed(boolean initValue) {
+    opensimSimulationJNI.Marker_constructProperty_fixed(swigCPtr, this, initValue);
+  }
+
+  public boolean get_fixed() {
+    return opensimSimulationJNI.Marker_get_fixed__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_bool upd_fixed() {
+    return new SWIGTYPE_p_bool(opensimSimulationJNI.Marker_upd_fixed__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_fixed(boolean value) {
+    opensimSimulationJNI.Marker_set_fixed__SWIG_1(swigCPtr, this, value);
   }
 
   public Marker() {
-    this(opensimModelSimulationJNI.new_Marker(), true);
+    this(opensimSimulationJNI.new_Marker(), true);
   }
 
   public String getFrameName() {
-    return opensimModelSimulationJNI.Marker_getFrameName(swigCPtr, this);
+    return opensimSimulationJNI.Marker_getFrameName(swigCPtr, this);
   }
 
   public void setFrameName(String aName) {
-    opensimModelSimulationJNI.Marker_setFrameName(swigCPtr, this, aName);
+    opensimSimulationJNI.Marker_setFrameName(swigCPtr, this, aName);
   }
 
   public void changeFrame(PhysicalFrame aPhysicalFrame) {
-    opensimModelSimulationJNI.Marker_changeFrame(swigCPtr, this, PhysicalFrame.getCPtr(aPhysicalFrame), aPhysicalFrame);
+    opensimSimulationJNI.Marker_changeFrame(swigCPtr, this, PhysicalFrame.getCPtr(aPhysicalFrame), aPhysicalFrame);
   }
 
   public void changeFramePreserveLocation(State s, PhysicalFrame aPhysicalFrame) {
-    opensimModelSimulationJNI.Marker_changeFramePreserveLocation(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aPhysicalFrame), aPhysicalFrame);
+    opensimSimulationJNI.Marker_changeFramePreserveLocation(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aPhysicalFrame), aPhysicalFrame);
   }
 
   public void scale(Vec3 aScaleFactors) {
-    opensimModelSimulationJNI.Marker_scale(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
+    opensimSimulationJNI.Marker_scale(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
-    opensimModelSimulationJNI.Marker_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+    opensimSimulationJNI.Marker_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
-    opensimModelSimulationJNI.Marker_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
+    opensimSimulationJNI.Marker_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
   public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
-    opensimModelSimulationJNI.Marker_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
+    opensimSimulationJNI.Marker_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
   }
 
 }

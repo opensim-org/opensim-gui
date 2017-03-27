@@ -12,7 +12,7 @@ public class Function extends OpenSimObject {
   private transient long swigCPtr;
 
   public Function(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.Function_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.Function_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Function extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_Function(swigCPtr);
+        opensimCommonJNI.delete_Function(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,54 +36,54 @@ public class Function extends OpenSimObject {
   }
 
   public static Function safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelCommonJNI.Function_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimCommonJNI.Function_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Function(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelCommonJNI.Function_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimCommonJNI.Function_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelCommonJNI.Function_getClassName();
+    return opensimCommonJNI.Function_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelCommonJNI.Function_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.Function_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Function(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelCommonJNI.Function_getConcreteClassName(swigCPtr, this);
+    return opensimCommonJNI.Function_getConcreteClassName(swigCPtr, this);
   }
 
   public void init(Function aFunction) {
-    opensimModelCommonJNI.Function_init(swigCPtr, this, Function.getCPtr(aFunction), aFunction);
+    opensimCommonJNI.Function_init(swigCPtr, this, Function.getCPtr(aFunction), aFunction);
   }
 
   public static Function makeFunctionOfType(Function aFunction, String aNewTypeName) {
-    long cPtr = opensimModelCommonJNI.Function_makeFunctionOfType(Function.getCPtr(aFunction), aFunction, aNewTypeName);
+    long cPtr = opensimCommonJNI.Function_makeFunctionOfType(Function.getCPtr(aFunction), aFunction, aNewTypeName);
     return (cPtr == 0) ? null : new Function(cPtr, false);
   }
 
   public double calcValue(Vector x) {
-    return opensimModelCommonJNI.Function_calcValue(swigCPtr, this, Vector.getCPtr(x), x);
+    return opensimCommonJNI.Function_calcValue(swigCPtr, this, Vector.getCPtr(x), x);
   }
 
   public double calcDerivative(StdVectorInt derivComponents, Vector x) {
-    return opensimModelCommonJNI.Function_calcDerivative(swigCPtr, this, StdVectorInt.getCPtr(derivComponents), derivComponents, Vector.getCPtr(x), x);
+    return opensimCommonJNI.Function_calcDerivative(swigCPtr, this, StdVectorInt.getCPtr(derivComponents), derivComponents, Vector.getCPtr(x), x);
   }
 
   public int getArgumentSize() {
-    return opensimModelCommonJNI.Function_getArgumentSize(swigCPtr, this);
+    return opensimCommonJNI.Function_getArgumentSize(swigCPtr, this);
   }
 
   public int getMaxDerivativeOrder() {
-    return opensimModelCommonJNI.Function_getMaxDerivativeOrder(swigCPtr, this);
+    return opensimCommonJNI.Function_getMaxDerivativeOrder(swigCPtr, this);
   }
 
   public SWIGTYPE_p_SimTK__Function createSimTKFunction() {
-    long cPtr = opensimModelCommonJNI.Function_createSimTKFunction(swigCPtr, this);
+    long cPtr = opensimCommonJNI.Function_createSimTKFunction(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_SimTK__Function(cPtr, false);
   }
 

@@ -12,7 +12,7 @@ public class RowLengthMismatch extends IOError {
   private transient long swigCPtr;
 
   public RowLengthMismatch(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.RowLengthMismatch_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.RowLengthMismatch_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class RowLengthMismatch extends IOError {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_RowLengthMismatch(swigCPtr);
+        opensimCommonJNI.delete_RowLengthMismatch(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class RowLengthMismatch extends IOError {
   }
 
   public RowLengthMismatch(String file, long line, String func, String filename, long line_num, long expected, long received) {
-    this(opensimModelCommonJNI.new_RowLengthMismatch(file, line, func, filename, line_num, expected, received), true);
+    this(opensimCommonJNI.new_RowLengthMismatch(file, line, func, filename, line_num, expected, received), true);
   }
 
 }

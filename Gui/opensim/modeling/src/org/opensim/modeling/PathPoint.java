@@ -8,11 +8,11 @@
 
 package org.opensim.modeling;
 
-public class PathPoint extends Station {
+public class PathPoint extends AbstractPathPoint {
   private transient long swigCPtr;
 
   public PathPoint(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.PathPoint_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.PathPoint_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class PathPoint extends Station {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_PathPoint(swigCPtr);
+        opensimSimulationJNI.delete_PathPoint(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,98 +36,89 @@ public class PathPoint extends Station {
   }
 
   public static PathPoint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.PathPoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.PathPoint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new PathPoint(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.PathPoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.PathPoint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.PathPoint_getClassName();
+    return opensimSimulationJNI.PathPoint_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.PathPoint_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.PathPoint_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new PathPoint(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.PathPoint_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.PathPoint_getConcreteClassName(swigCPtr, this);
+  }
+
+  public void copyProperty_location(PathPoint source) {
+    opensimSimulationJNI.PathPoint_copyProperty_location(swigCPtr, this, PathPoint.getCPtr(source), source);
+  }
+
+  public Vec3 get_location(int i) {
+    return new Vec3(opensimSimulationJNI.PathPoint_get_location__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public Vec3 upd_location(int i) {
+    return new Vec3(opensimSimulationJNI.PathPoint_upd_location__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_location(int i, Vec3 value) {
+    opensimSimulationJNI.PathPoint_set_location__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+  }
+
+  public int append_location(Vec3 value) {
+    return opensimSimulationJNI.PathPoint_append_location(swigCPtr, this, Vec3.getCPtr(value), value);
+  }
+
+  public void constructProperty_location(Vec3 initValue) {
+    opensimSimulationJNI.PathPoint_constructProperty_location(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+  }
+
+  public Vec3 get_location() {
+    return new Vec3(opensimSimulationJNI.PathPoint_get_location__SWIG_1(swigCPtr, this), false);
+  }
+
+  public Vec3 upd_location() {
+    return new Vec3(opensimSimulationJNI.PathPoint_upd_location__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_location(Vec3 value) {
+    opensimSimulationJNI.PathPoint_set_location__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public PathPoint() {
-    this(opensimModelSimulationJNI.new_PathPoint(), true);
+    this(opensimSimulationJNI.new_PathPoint(), true);
   }
 
-  public Vec3 getLocation() {
-    return new Vec3(opensimModelSimulationJNI.PathPoint_getLocation(swigCPtr, this), false);
+  public void setLocationCoord(State s, int aXYZ, double aValue) {
+    opensimSimulationJNI.PathPoint_setLocationCoord(swigCPtr, this, State.getCPtr(s), s, aXYZ, aValue);
   }
 
-  public double getLocationCoord(int aXYZ) {
-    return opensimModelSimulationJNI.PathPoint_getLocationCoord(swigCPtr, this, aXYZ);
+  public Vec3 getLocation(State s) {
+    return new Vec3(opensimSimulationJNI.PathPoint_getLocation(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
-  public void setLocationCoord(int aXYZ, double aValue) {
-    opensimModelSimulationJNI.PathPoint_setLocationCoord(swigCPtr, this, aXYZ, aValue);
-  }
-
-  public void setLocation(State s, Vec3 location) {
-    opensimModelSimulationJNI.PathPoint_setLocation__SWIG_0(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(location), location);
-  }
-
-  public void setLocation(State s, int aCoordIndex, double aLocation) {
-    opensimModelSimulationJNI.PathPoint_setLocation__SWIG_1(swigCPtr, this, State.getCPtr(s), s, aCoordIndex, aLocation);
-  }
-
-  public void setBody(PhysicalFrame body) {
-    opensimModelSimulationJNI.PathPoint_setBody(swigCPtr, this, PhysicalFrame.getCPtr(body), body);
+  public void setLocation(Vec3 location) {
+    opensimSimulationJNI.PathPoint_setLocation(swigCPtr, this, Vec3.getCPtr(location), location);
   }
 
   public void changeBodyPreserveLocation(State s, PhysicalFrame body) {
-    opensimModelSimulationJNI.PathPoint_changeBodyPreserveLocation(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(body), body);
-  }
-
-  public PhysicalFrame getBody() {
-    return new PhysicalFrame(opensimModelSimulationJNI.PathPoint_getBody(swigCPtr, this), false);
-  }
-
-  public String getBodyName() {
-    return opensimModelSimulationJNI.PathPoint_getBodyName(swigCPtr, this);
+    opensimSimulationJNI.PathPoint_changeBodyPreserveLocation(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(body), body);
   }
 
   public void scale(Vec3 scaleFactors) {
-    opensimModelSimulationJNI.PathPoint_scale(swigCPtr, this, Vec3.getCPtr(scaleFactors), scaleFactors);
-  }
-
-  public WrapObject getWrapObject() {
-    long cPtr = opensimModelSimulationJNI.PathPoint_getWrapObject(swigCPtr, this);
-    return (cPtr == 0) ? null : new WrapObject(cPtr, false);
-  }
-
-  public boolean isActive(State s) {
-    return opensimModelSimulationJNI.PathPoint_isActive(swigCPtr, this, State.getCPtr(s), s);
-  }
-
-  public void getVelocity(State s, Vec3 velocity) {
-    opensimModelSimulationJNI.PathPoint_getVelocity(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(velocity), velocity);
+    opensimSimulationJNI.PathPoint_scale(swigCPtr, this, Vec3.getCPtr(scaleFactors), scaleFactors);
   }
 
   public Vec3 getdPointdQ(State s) {
-    return new Vec3(opensimModelSimulationJNI.PathPoint_getdPointdQ(swigCPtr, this, State.getCPtr(s), s), true);
-  }
-
-  public void updateGeometry() {
-    opensimModelSimulationJNI.PathPoint_updateGeometry(swigCPtr, this);
-  }
-
-  public static void deletePathPoint(PathPoint aPoint) {
-    opensimModelSimulationJNI.PathPoint_deletePathPoint(PathPoint.getCPtr(aPoint), aPoint);
-  }
-
-  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
-    opensimModelSimulationJNI.PathPoint_updateFromXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
+    return new Vec3(opensimSimulationJNI.PathPoint_getdPointdQ(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
 }

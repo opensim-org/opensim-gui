@@ -12,7 +12,7 @@ public class WrapEllipsoid extends WrapObject {
   private transient long swigCPtr;
 
   public WrapEllipsoid(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.WrapEllipsoid_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.WrapEllipsoid_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class WrapEllipsoid extends WrapObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_WrapEllipsoid(swigCPtr);
+        opensimSimulationJNI.delete_WrapEllipsoid(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,53 +36,57 @@ public class WrapEllipsoid extends WrapObject {
   }
 
   public static WrapEllipsoid safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.WrapEllipsoid_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.WrapEllipsoid_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new WrapEllipsoid(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.WrapEllipsoid_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.WrapEllipsoid_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.WrapEllipsoid_getClassName();
+    return opensimSimulationJNI.WrapEllipsoid_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.WrapEllipsoid_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.WrapEllipsoid_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new WrapEllipsoid(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.WrapEllipsoid_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.WrapEllipsoid_getConcreteClassName(swigCPtr, this);
+  }
+
+  public WrapEllipsoid() {
+    this(opensimSimulationJNI.new_WrapEllipsoid__SWIG_0(), true);
+  }
+
+  public WrapEllipsoid(WrapEllipsoid aWrapEllipsoid) {
+    this(opensimSimulationJNI.new_WrapEllipsoid__SWIG_1(WrapEllipsoid.getCPtr(aWrapEllipsoid), aWrapEllipsoid), true);
   }
 
   public void copyData(WrapEllipsoid aWrapEllipsoid) {
-    opensimModelSimulationJNI.WrapEllipsoid_copyData(swigCPtr, this, WrapEllipsoid.getCPtr(aWrapEllipsoid), aWrapEllipsoid);
+    opensimSimulationJNI.WrapEllipsoid_copyData(swigCPtr, this, WrapEllipsoid.getCPtr(aWrapEllipsoid), aWrapEllipsoid);
   }
 
   public String getWrapTypeName() {
-    return opensimModelSimulationJNI.WrapEllipsoid_getWrapTypeName(swigCPtr, this);
+    return opensimSimulationJNI.WrapEllipsoid_getWrapTypeName(swigCPtr, this);
   }
 
   public String getDimensionsString() {
-    return opensimModelSimulationJNI.WrapEllipsoid_getDimensionsString(swigCPtr, this);
+    return opensimSimulationJNI.WrapEllipsoid_getDimensionsString(swigCPtr, this);
   }
 
   public Vec3 getRadii() {
-    return new Vec3(opensimModelSimulationJNI.WrapEllipsoid_getRadii(swigCPtr, this), true);
+    return new Vec3(opensimSimulationJNI.WrapEllipsoid_getRadii(swigCPtr, this), true);
   }
 
   public void scale(Vec3 aScaleFactors) {
-    opensimModelSimulationJNI.WrapEllipsoid_scale(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
+    opensimSimulationJNI.WrapEllipsoid_scale(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
   }
 
   public void connectToModelAndBody(Model aModel, PhysicalFrame aBody) {
-    opensimModelSimulationJNI.WrapEllipsoid_connectToModelAndBody(swigCPtr, this, Model.getCPtr(aModel), aModel, PhysicalFrame.getCPtr(aBody), aBody);
-  }
-
-  public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
-    opensimModelSimulationJNI.WrapEllipsoid_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
+    opensimSimulationJNI.WrapEllipsoid_connectToModelAndBody(swigCPtr, this, Model.getCPtr(aModel), aModel, PhysicalFrame.getCPtr(aBody), aBody);
   }
 
 }

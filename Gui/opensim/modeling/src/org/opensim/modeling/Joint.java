@@ -12,7 +12,7 @@ public class Joint extends ModelComponent {
   private transient long swigCPtr;
 
   public Joint(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.Joint_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.Joint_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class Joint extends ModelComponent {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_Joint(swigCPtr);
+        opensimSimulationJNI.delete_Joint(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,205 +36,165 @@ public class Joint extends ModelComponent {
   }
 
   public static Joint safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.Joint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.Joint_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new Joint(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.Joint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.Joint_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.Joint_getClassName();
+    return opensimSimulationJNI.Joint_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.Joint_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.Joint_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Joint(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.Joint_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.Joint_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_coordinates(Joint source) {
-    opensimModelSimulationJNI.Joint_copyProperty_coordinates(swigCPtr, this, Joint.getCPtr(source), source);
+    opensimSimulationJNI.Joint_copyProperty_coordinates(swigCPtr, this, Joint.getCPtr(source), source);
   }
 
   public Coordinate get_coordinates(int i) {
-    return new Coordinate(opensimModelSimulationJNI.Joint_get_coordinates(swigCPtr, this, i), false);
+    return new Coordinate(opensimSimulationJNI.Joint_get_coordinates(swigCPtr, this, i), false);
   }
 
   public Coordinate upd_coordinates(int i) {
-    return new Coordinate(opensimModelSimulationJNI.Joint_upd_coordinates(swigCPtr, this, i), false);
+    return new Coordinate(opensimSimulationJNI.Joint_upd_coordinates(swigCPtr, this, i), false);
   }
 
   public void set_coordinates(int i, Coordinate value) {
-    opensimModelSimulationJNI.Joint_set_coordinates(swigCPtr, this, i, Coordinate.getCPtr(value), value);
+    opensimSimulationJNI.Joint_set_coordinates(swigCPtr, this, i, Coordinate.getCPtr(value), value);
   }
 
   public int append_coordinates(Coordinate value) {
-    return opensimModelSimulationJNI.Joint_append_coordinates(swigCPtr, this, Coordinate.getCPtr(value), value);
+    return opensimSimulationJNI.Joint_append_coordinates(swigCPtr, this, Coordinate.getCPtr(value), value);
   }
 
   public void constructProperty_coordinates() {
-    opensimModelSimulationJNI.Joint_constructProperty_coordinates(swigCPtr, this);
-  }
-
-  public void copyProperty_reverse(Joint source) {
-    opensimModelSimulationJNI.Joint_copyProperty_reverse(swigCPtr, this, Joint.getCPtr(source), source);
-  }
-
-  public boolean get_reverse(int i) {
-    return opensimModelSimulationJNI.Joint_get_reverse__SWIG_0(swigCPtr, this, i);
-  }
-
-  public SWIGTYPE_p_bool upd_reverse(int i) {
-    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.Joint_upd_reverse__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_reverse(int i, boolean value) {
-    opensimModelSimulationJNI.Joint_set_reverse__SWIG_0(swigCPtr, this, i, value);
-  }
-
-  public int append_reverse(boolean value) {
-    return opensimModelSimulationJNI.Joint_append_reverse(swigCPtr, this, value);
-  }
-
-  public void constructProperty_reverse(boolean initValue) {
-    opensimModelSimulationJNI.Joint_constructProperty_reverse(swigCPtr, this, initValue);
-  }
-
-  public boolean get_reverse() {
-    return opensimModelSimulationJNI.Joint_get_reverse__SWIG_1(swigCPtr, this);
-  }
-
-  public SWIGTYPE_p_bool upd_reverse() {
-    return new SWIGTYPE_p_bool(opensimModelSimulationJNI.Joint_upd_reverse__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_reverse(boolean value) {
-    opensimModelSimulationJNI.Joint_set_reverse__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.Joint_constructProperty_coordinates(swigCPtr, this);
   }
 
   public void copyProperty_frames(Joint source) {
-    opensimModelSimulationJNI.Joint_copyProperty_frames(swigCPtr, this, Joint.getCPtr(source), source);
+    opensimSimulationJNI.Joint_copyProperty_frames(swigCPtr, this, Joint.getCPtr(source), source);
   }
 
   public PhysicalFrame get_frames(int i) {
-    return new PhysicalFrame(opensimModelSimulationJNI.Joint_get_frames(swigCPtr, this, i), false);
+    return new PhysicalFrame(opensimSimulationJNI.Joint_get_frames(swigCPtr, this, i), false);
   }
 
   public PhysicalFrame upd_frames(int i) {
-    return new PhysicalFrame(opensimModelSimulationJNI.Joint_upd_frames(swigCPtr, this, i), false);
+    return new PhysicalFrame(opensimSimulationJNI.Joint_upd_frames(swigCPtr, this, i), false);
   }
 
   public void set_frames(int i, PhysicalFrame value) {
-    opensimModelSimulationJNI.Joint_set_frames(swigCPtr, this, i, PhysicalFrame.getCPtr(value), value);
+    opensimSimulationJNI.Joint_set_frames(swigCPtr, this, i, PhysicalFrame.getCPtr(value), value);
   }
 
   public int append_frames(PhysicalFrame value) {
-    return opensimModelSimulationJNI.Joint_append_frames(swigCPtr, this, PhysicalFrame.getCPtr(value), value);
+    return opensimSimulationJNI.Joint_append_frames(swigCPtr, this, PhysicalFrame.getCPtr(value), value);
   }
 
   public void constructProperty_frames() {
-    opensimModelSimulationJNI.Joint_constructProperty_frames(swigCPtr, this);
+    opensimSimulationJNI.Joint_constructProperty_frames(swigCPtr, this);
   }
 
-  public void setPropertyIndex_connector_parent_frame_connectee_name(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelSimulationJNI.Joint_PropertyIndex_connector_parent_frame_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_socket_parent_frame_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimSimulationJNI.Joint_PropertyIndex_socket_parent_frame_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_parent_frame_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.Joint_PropertyIndex_connector_parent_frame_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_parent_frame_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.Joint_PropertyIndex_socket_parent_frame_connectee_name_get(swigCPtr, this), true);
   }
 
-  public void connectConnector_parent_frame(OpenSimObject object) {
-    opensimModelSimulationJNI.Joint_connectConnector_parent_frame(swigCPtr, this, OpenSimObject.getCPtr(object), object);
+  public void connectSocket_parent_frame(OpenSimObject object) {
+    opensimSimulationJNI.Joint_connectSocket_parent_frame(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
-  public void setPropertyIndex_connector_child_frame_connectee_name(SWIGTYPE_p_PropertyIndex value) {
-    opensimModelSimulationJNI.Joint_PropertyIndex_connector_child_frame_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_socket_child_frame_connectee_name(SWIGTYPE_p_PropertyIndex value) {
+    opensimSimulationJNI.Joint_PropertyIndex_socket_child_frame_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_connector_child_frame_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimModelSimulationJNI.Joint_PropertyIndex_connector_child_frame_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_child_frame_connectee_name() {
+    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.Joint_PropertyIndex_socket_child_frame_connectee_name_get(swigCPtr, this), true);
   }
 
-  public void connectConnector_child_frame(OpenSimObject object) {
-    opensimModelSimulationJNI.Joint_connectConnector_child_frame(swigCPtr, this, OpenSimObject.getCPtr(object), object);
+  public void connectSocket_child_frame(OpenSimObject object) {
+    opensimSimulationJNI.Joint_connectSocket_child_frame(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
   public void set_has_output_power(boolean value) {
-    opensimModelSimulationJNI.Joint__has_output_power_set(swigCPtr, this, value);
+    opensimSimulationJNI.Joint__has_output_power_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_power() {
-    return opensimModelSimulationJNI.Joint__has_output_power_get(swigCPtr, this);
+    return opensimSimulationJNI.Joint__has_output_power_get(swigCPtr, this);
   }
 
   public void set_has_output_reaction_on_parent(boolean value) {
-    opensimModelSimulationJNI.Joint__has_output_reaction_on_parent_set(swigCPtr, this, value);
+    opensimSimulationJNI.Joint__has_output_reaction_on_parent_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_reaction_on_parent() {
-    return opensimModelSimulationJNI.Joint__has_output_reaction_on_parent_get(swigCPtr, this);
+    return opensimSimulationJNI.Joint__has_output_reaction_on_parent_get(swigCPtr, this);
   }
 
   public void set_has_output_reaction_on_child(boolean value) {
-    opensimModelSimulationJNI.Joint__has_output_reaction_on_child_set(swigCPtr, this, value);
+    opensimSimulationJNI.Joint__has_output_reaction_on_child_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_reaction_on_child() {
-    return opensimModelSimulationJNI.Joint__has_output_reaction_on_child_get(swigCPtr, this);
+    return opensimSimulationJNI.Joint__has_output_reaction_on_child_get(swigCPtr, this);
   }
 
   public PhysicalFrame getChildFrame() {
-    return new PhysicalFrame(opensimModelSimulationJNI.Joint_getChildFrame(swigCPtr, this), false);
+    return new PhysicalFrame(opensimSimulationJNI.Joint_getChildFrame(swigCPtr, this), false);
   }
 
   public PhysicalFrame getParentFrame() {
-    return new PhysicalFrame(opensimModelSimulationJNI.Joint_getParentFrame(swigCPtr, this), false);
+    return new PhysicalFrame(opensimSimulationJNI.Joint_getParentFrame(swigCPtr, this), false);
   }
 
   public Coordinate getCoordinate() {
-    return new Coordinate(opensimModelSimulationJNI.Joint_getCoordinate(swigCPtr, this), false);
+    return new Coordinate(opensimSimulationJNI.Joint_getCoordinate(swigCPtr, this), false);
   }
 
   public Coordinate updCoordinate() {
-    return new Coordinate(opensimModelSimulationJNI.Joint_updCoordinate(swigCPtr, this), false);
-  }
-
-  public boolean getReverse() {
-    return opensimModelSimulationJNI.Joint_getReverse(swigCPtr, this);
+    return new Coordinate(opensimSimulationJNI.Joint_updCoordinate(swigCPtr, this), false);
   }
 
   public int numCoordinates() {
-    return opensimModelSimulationJNI.Joint_numCoordinates(swigCPtr, this);
+    return opensimSimulationJNI.Joint_numCoordinates(swigCPtr, this);
   }
 
   public boolean isCoordinateUsed(Coordinate aCoordinate) {
-    return opensimModelSimulationJNI.Joint_isCoordinateUsed(swigCPtr, this, Coordinate.getCPtr(aCoordinate), aCoordinate);
+    return opensimSimulationJNI.Joint_isCoordinateUsed(swigCPtr, this, Coordinate.getCPtr(aCoordinate), aCoordinate);
   }
 
   public SpatialVec calcEquivalentSpatialForce(State state, Vector mobilityForces) {
-    return new SpatialVec(opensimModelSimulationJNI.Joint_calcEquivalentSpatialForce(swigCPtr, this, State.getCPtr(state), state, Vector.getCPtr(mobilityForces), mobilityForces), true);
+    return new SpatialVec(opensimSimulationJNI.Joint_calcEquivalentSpatialForce(swigCPtr, this, State.getCPtr(state), state, Vector.getCPtr(mobilityForces), mobilityForces), true);
   }
 
   public SpatialVec calcReactionOnParentExpressedInGround(State state) {
-    return new SpatialVec(opensimModelSimulationJNI.Joint_calcReactionOnParentExpressedInGround(swigCPtr, this, State.getCPtr(state), state), true);
+    return new SpatialVec(opensimSimulationJNI.Joint_calcReactionOnParentExpressedInGround(swigCPtr, this, State.getCPtr(state), state), true);
   }
 
   public SpatialVec calcReactionOnChildExpressedInGround(State state) {
-    return new SpatialVec(opensimModelSimulationJNI.Joint_calcReactionOnChildExpressedInGround(swigCPtr, this, State.getCPtr(state), state), true);
+    return new SpatialVec(opensimSimulationJNI.Joint_calcReactionOnChildExpressedInGround(swigCPtr, this, State.getCPtr(state), state), true);
   }
 
   public double calcPower(State s) {
-    return opensimModelSimulationJNI.Joint_calcPower(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Joint_calcPower(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void scale(ScaleSet aScaleSet) {
-    opensimModelSimulationJNI.Joint_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
+    opensimSimulationJNI.Joint_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
   }
 
 }

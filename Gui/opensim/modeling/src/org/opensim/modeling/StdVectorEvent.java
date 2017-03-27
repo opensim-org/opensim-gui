@@ -29,50 +29,50 @@ public class StdVectorEvent {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_StdVectorEvent(swigCPtr);
+        opensimCommonJNI.delete_StdVectorEvent(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public StdVectorEvent() {
-    this(opensimModelCommonJNI.new_StdVectorEvent__SWIG_0(), true);
+    this(opensimCommonJNI.new_StdVectorEvent__SWIG_0(), true);
   }
 
   public StdVectorEvent(long n) {
-    this(opensimModelCommonJNI.new_StdVectorEvent__SWIG_1(n), true);
+    this(opensimCommonJNI.new_StdVectorEvent__SWIG_1(n), true);
   }
 
   public long size() {
-    return opensimModelCommonJNI.StdVectorEvent_size(swigCPtr, this);
+    return opensimCommonJNI.StdVectorEvent_size(swigCPtr, this);
   }
 
   public long capacity() {
-    return opensimModelCommonJNI.StdVectorEvent_capacity(swigCPtr, this);
+    return opensimCommonJNI.StdVectorEvent_capacity(swigCPtr, this);
   }
 
   public void reserve(long n) {
-    opensimModelCommonJNI.StdVectorEvent_reserve(swigCPtr, this, n);
+    opensimCommonJNI.StdVectorEvent_reserve(swigCPtr, this, n);
   }
 
   public boolean isEmpty() {
-    return opensimModelCommonJNI.StdVectorEvent_isEmpty(swigCPtr, this);
+    return opensimCommonJNI.StdVectorEvent_isEmpty(swigCPtr, this);
   }
 
   public void clear() {
-    opensimModelCommonJNI.StdVectorEvent_clear(swigCPtr, this);
+    opensimCommonJNI.StdVectorEvent_clear(swigCPtr, this);
   }
 
   public void add(Event x) {
-    opensimModelCommonJNI.StdVectorEvent_add(swigCPtr, this, Event.getCPtr(x), x);
+    opensimCommonJNI.StdVectorEvent_add(swigCPtr, this, Event.getCPtr(x), x);
   }
 
   public Event get(int i) {
-    return new Event(opensimModelCommonJNI.StdVectorEvent_get(swigCPtr, this, i), false);
+    return new Event(opensimCommonJNI.StdVectorEvent_get(swigCPtr, this, i), false);
   }
 
   public void set(int i, Event val) {
-    opensimModelCommonJNI.StdVectorEvent_set(swigCPtr, this, i, Event.getCPtr(val), val);
+    opensimCommonJNI.StdVectorEvent_set(swigCPtr, this, i, Event.getCPtr(val), val);
   }
 
 }

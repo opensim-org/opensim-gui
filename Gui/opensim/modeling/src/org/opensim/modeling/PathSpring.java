@@ -12,7 +12,7 @@ public class PathSpring extends Force {
   private transient long swigCPtr;
 
   public PathSpring(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.PathSpring_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.PathSpring_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class PathSpring extends Force {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_PathSpring(swigCPtr);
+        opensimSimulationJNI.delete_PathSpring(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,273 +36,273 @@ public class PathSpring extends Force {
   }
 
   public static PathSpring safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.PathSpring_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.PathSpring_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new PathSpring(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.PathSpring_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.PathSpring_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.PathSpring_getClassName();
+    return opensimSimulationJNI.PathSpring_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.PathSpring_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.PathSpring_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new PathSpring(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.PathSpring_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.PathSpring_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_resting_length(PathSpring source) {
-    opensimModelSimulationJNI.PathSpring_copyProperty_resting_length(swigCPtr, this, PathSpring.getCPtr(source), source);
+    opensimSimulationJNI.PathSpring_copyProperty_resting_length(swigCPtr, this, PathSpring.getCPtr(source), source);
   }
 
   public double get_resting_length(int i) {
-    return opensimModelSimulationJNI.PathSpring_get_resting_length__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.PathSpring_get_resting_length__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_resting_length(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.PathSpring_upd_resting_length__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.PathSpring_upd_resting_length__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_resting_length(int i, double value) {
-    opensimModelSimulationJNI.PathSpring_set_resting_length__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.PathSpring_set_resting_length__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_resting_length(double value) {
-    return opensimModelSimulationJNI.PathSpring_append_resting_length(swigCPtr, this, value);
+    return opensimSimulationJNI.PathSpring_append_resting_length(swigCPtr, this, value);
   }
 
   public void constructProperty_resting_length(double initValue) {
-    opensimModelSimulationJNI.PathSpring_constructProperty_resting_length(swigCPtr, this, initValue);
+    opensimSimulationJNI.PathSpring_constructProperty_resting_length(swigCPtr, this, initValue);
   }
 
   public double get_resting_length() {
-    return opensimModelSimulationJNI.PathSpring_get_resting_length__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.PathSpring_get_resting_length__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_resting_length() {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.PathSpring_upd_resting_length__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.PathSpring_upd_resting_length__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_resting_length(double value) {
-    opensimModelSimulationJNI.PathSpring_set_resting_length__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.PathSpring_set_resting_length__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_stiffness(PathSpring source) {
-    opensimModelSimulationJNI.PathSpring_copyProperty_stiffness(swigCPtr, this, PathSpring.getCPtr(source), source);
+    opensimSimulationJNI.PathSpring_copyProperty_stiffness(swigCPtr, this, PathSpring.getCPtr(source), source);
   }
 
   public double get_stiffness(int i) {
-    return opensimModelSimulationJNI.PathSpring_get_stiffness__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.PathSpring_get_stiffness__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_stiffness(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.PathSpring_upd_stiffness__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.PathSpring_upd_stiffness__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_stiffness(int i, double value) {
-    opensimModelSimulationJNI.PathSpring_set_stiffness__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.PathSpring_set_stiffness__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_stiffness(double value) {
-    return opensimModelSimulationJNI.PathSpring_append_stiffness(swigCPtr, this, value);
+    return opensimSimulationJNI.PathSpring_append_stiffness(swigCPtr, this, value);
   }
 
   public void constructProperty_stiffness(double initValue) {
-    opensimModelSimulationJNI.PathSpring_constructProperty_stiffness(swigCPtr, this, initValue);
+    opensimSimulationJNI.PathSpring_constructProperty_stiffness(swigCPtr, this, initValue);
   }
 
   public double get_stiffness() {
-    return opensimModelSimulationJNI.PathSpring_get_stiffness__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.PathSpring_get_stiffness__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_stiffness() {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.PathSpring_upd_stiffness__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.PathSpring_upd_stiffness__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_stiffness(double value) {
-    opensimModelSimulationJNI.PathSpring_set_stiffness__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.PathSpring_set_stiffness__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_dissipation(PathSpring source) {
-    opensimModelSimulationJNI.PathSpring_copyProperty_dissipation(swigCPtr, this, PathSpring.getCPtr(source), source);
+    opensimSimulationJNI.PathSpring_copyProperty_dissipation(swigCPtr, this, PathSpring.getCPtr(source), source);
   }
 
   public double get_dissipation(int i) {
-    return opensimModelSimulationJNI.PathSpring_get_dissipation__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.PathSpring_get_dissipation__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_dissipation(int i) {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.PathSpring_upd_dissipation__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.PathSpring_upd_dissipation__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_dissipation(int i, double value) {
-    opensimModelSimulationJNI.PathSpring_set_dissipation__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.PathSpring_set_dissipation__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_dissipation(double value) {
-    return opensimModelSimulationJNI.PathSpring_append_dissipation(swigCPtr, this, value);
+    return opensimSimulationJNI.PathSpring_append_dissipation(swigCPtr, this, value);
   }
 
   public void constructProperty_dissipation(double initValue) {
-    opensimModelSimulationJNI.PathSpring_constructProperty_dissipation(swigCPtr, this, initValue);
+    opensimSimulationJNI.PathSpring_constructProperty_dissipation(swigCPtr, this, initValue);
   }
 
   public double get_dissipation() {
-    return opensimModelSimulationJNI.PathSpring_get_dissipation__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.PathSpring_get_dissipation__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_dissipation() {
-    return new SWIGTYPE_p_double(opensimModelSimulationJNI.PathSpring_upd_dissipation__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.PathSpring_upd_dissipation__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_dissipation(double value) {
-    opensimModelSimulationJNI.PathSpring_set_dissipation__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.PathSpring_set_dissipation__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_GeometryPath(PathSpring source) {
-    opensimModelSimulationJNI.PathSpring_copyProperty_GeometryPath(swigCPtr, this, PathSpring.getCPtr(source), source);
+    opensimSimulationJNI.PathSpring_copyProperty_GeometryPath(swigCPtr, this, PathSpring.getCPtr(source), source);
   }
 
   public GeometryPath get_GeometryPath(int i) {
-    return new GeometryPath(opensimModelSimulationJNI.PathSpring_get_GeometryPath__SWIG_0(swigCPtr, this, i), false);
+    return new GeometryPath(opensimSimulationJNI.PathSpring_get_GeometryPath__SWIG_0(swigCPtr, this, i), false);
   }
 
   public GeometryPath upd_GeometryPath(int i) {
-    return new GeometryPath(opensimModelSimulationJNI.PathSpring_upd_GeometryPath__SWIG_0(swigCPtr, this, i), false);
+    return new GeometryPath(opensimSimulationJNI.PathSpring_upd_GeometryPath__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_GeometryPath(int i, GeometryPath value) {
-    opensimModelSimulationJNI.PathSpring_set_GeometryPath__SWIG_0(swigCPtr, this, i, GeometryPath.getCPtr(value), value);
+    opensimSimulationJNI.PathSpring_set_GeometryPath__SWIG_0(swigCPtr, this, i, GeometryPath.getCPtr(value), value);
   }
 
   public int append_GeometryPath(GeometryPath value) {
-    return opensimModelSimulationJNI.PathSpring_append_GeometryPath(swigCPtr, this, GeometryPath.getCPtr(value), value);
+    return opensimSimulationJNI.PathSpring_append_GeometryPath(swigCPtr, this, GeometryPath.getCPtr(value), value);
   }
 
   public void constructProperty_GeometryPath(GeometryPath initValue) {
-    opensimModelSimulationJNI.PathSpring_constructProperty_GeometryPath(swigCPtr, this, GeometryPath.getCPtr(initValue), initValue);
+    opensimSimulationJNI.PathSpring_constructProperty_GeometryPath(swigCPtr, this, GeometryPath.getCPtr(initValue), initValue);
   }
 
   public GeometryPath get_GeometryPath() {
-    return new GeometryPath(opensimModelSimulationJNI.PathSpring_get_GeometryPath__SWIG_1(swigCPtr, this), false);
+    return new GeometryPath(opensimSimulationJNI.PathSpring_get_GeometryPath__SWIG_1(swigCPtr, this), false);
   }
 
   public GeometryPath upd_GeometryPath() {
-    return new GeometryPath(opensimModelSimulationJNI.PathSpring_upd_GeometryPath__SWIG_1(swigCPtr, this), false);
+    return new GeometryPath(opensimSimulationJNI.PathSpring_upd_GeometryPath__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_GeometryPath(GeometryPath value) {
-    opensimModelSimulationJNI.PathSpring_set_GeometryPath__SWIG_1(swigCPtr, this, GeometryPath.getCPtr(value), value);
+    opensimSimulationJNI.PathSpring_set_GeometryPath__SWIG_1(swigCPtr, this, GeometryPath.getCPtr(value), value);
   }
 
   public void set_has_output_length(boolean value) {
-    opensimModelSimulationJNI.PathSpring__has_output_length_set(swigCPtr, this, value);
+    opensimSimulationJNI.PathSpring__has_output_length_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_length() {
-    return opensimModelSimulationJNI.PathSpring__has_output_length_get(swigCPtr, this);
+    return opensimSimulationJNI.PathSpring__has_output_length_get(swigCPtr, this);
   }
 
   public void set_has_output_stretch(boolean value) {
-    opensimModelSimulationJNI.PathSpring__has_output_stretch_set(swigCPtr, this, value);
+    opensimSimulationJNI.PathSpring__has_output_stretch_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_stretch() {
-    return opensimModelSimulationJNI.PathSpring__has_output_stretch_get(swigCPtr, this);
+    return opensimSimulationJNI.PathSpring__has_output_stretch_get(swigCPtr, this);
   }
 
   public void set_has_output_lengthening_speed(boolean value) {
-    opensimModelSimulationJNI.PathSpring__has_output_lengthening_speed_set(swigCPtr, this, value);
+    opensimSimulationJNI.PathSpring__has_output_lengthening_speed_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_lengthening_speed() {
-    return opensimModelSimulationJNI.PathSpring__has_output_lengthening_speed_get(swigCPtr, this);
+    return opensimSimulationJNI.PathSpring__has_output_lengthening_speed_get(swigCPtr, this);
   }
 
   public void set_has_output_tension(boolean value) {
-    opensimModelSimulationJNI.PathSpring__has_output_tension_set(swigCPtr, this, value);
+    opensimSimulationJNI.PathSpring__has_output_tension_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_tension() {
-    return opensimModelSimulationJNI.PathSpring__has_output_tension_get(swigCPtr, this);
+    return opensimSimulationJNI.PathSpring__has_output_tension_get(swigCPtr, this);
   }
 
   public PathSpring() {
-    this(opensimModelSimulationJNI.new_PathSpring__SWIG_0(), true);
+    this(opensimSimulationJNI.new_PathSpring__SWIG_0(), true);
   }
 
   public PathSpring(String name, double restLength, double stiffness, double dissipation) {
-    this(opensimModelSimulationJNI.new_PathSpring__SWIG_1(name, restLength, stiffness, dissipation), true);
+    this(opensimSimulationJNI.new_PathSpring__SWIG_1(name, restLength, stiffness, dissipation), true);
   }
 
   public double getRestingLength() {
-    return opensimModelSimulationJNI.PathSpring_getRestingLength(swigCPtr, this);
+    return opensimSimulationJNI.PathSpring_getRestingLength(swigCPtr, this);
   }
 
   public void setRestingLength(double restingLength) {
-    opensimModelSimulationJNI.PathSpring_setRestingLength(swigCPtr, this, restingLength);
+    opensimSimulationJNI.PathSpring_setRestingLength(swigCPtr, this, restingLength);
   }
 
   public double getStiffness() {
-    return opensimModelSimulationJNI.PathSpring_getStiffness(swigCPtr, this);
+    return opensimSimulationJNI.PathSpring_getStiffness(swigCPtr, this);
   }
 
   public void setStiffness(double stiffness) {
-    opensimModelSimulationJNI.PathSpring_setStiffness(swigCPtr, this, stiffness);
+    opensimSimulationJNI.PathSpring_setStiffness(swigCPtr, this, stiffness);
   }
 
   public double getDissipation() {
-    return opensimModelSimulationJNI.PathSpring_getDissipation(swigCPtr, this);
+    return opensimSimulationJNI.PathSpring_getDissipation(swigCPtr, this);
   }
 
   public void setDissipation(double dissipation) {
-    opensimModelSimulationJNI.PathSpring_setDissipation(swigCPtr, this, dissipation);
+    opensimSimulationJNI.PathSpring_setDissipation(swigCPtr, this, dissipation);
   }
 
   public GeometryPath getGeometryPath() {
-    return new GeometryPath(opensimModelSimulationJNI.PathSpring_getGeometryPath(swigCPtr, this), false);
+    return new GeometryPath(opensimSimulationJNI.PathSpring_getGeometryPath(swigCPtr, this), false);
   }
 
   public GeometryPath updGeometryPath() {
-    return new GeometryPath(opensimModelSimulationJNI.PathSpring_updGeometryPath(swigCPtr, this), false);
+    return new GeometryPath(opensimSimulationJNI.PathSpring_updGeometryPath(swigCPtr, this), false);
   }
 
   public double getLength(State s) {
-    return opensimModelSimulationJNI.PathSpring_getLength(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.PathSpring_getLength(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getStretch(State s) {
-    return opensimModelSimulationJNI.PathSpring_getStretch(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.PathSpring_getStretch(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getLengtheningSpeed(State s) {
-    return opensimModelSimulationJNI.PathSpring_getLengtheningSpeed(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.PathSpring_getLengtheningSpeed(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getTension(State s) {
-    return opensimModelSimulationJNI.PathSpring_getTension(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.PathSpring_getTension(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double computeMomentArm(State s, Coordinate aCoord) {
-    return opensimModelSimulationJNI.PathSpring_computeMomentArm(swigCPtr, this, State.getCPtr(s), s, Coordinate.getCPtr(aCoord), aCoord);
+    return opensimSimulationJNI.PathSpring_computeMomentArm(swigCPtr, this, State.getCPtr(s), s, Coordinate.getCPtr(aCoord), aCoord);
   }
 
   public void preScale(State s, ScaleSet scaleSet) {
-    opensimModelSimulationJNI.PathSpring_preScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
+    opensimSimulationJNI.PathSpring_preScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
   }
 
   public void scale(State s, ScaleSet scaleSet) {
-    opensimModelSimulationJNI.PathSpring_scale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
+    opensimSimulationJNI.PathSpring_scale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
   }
 
   public void postScale(State s, ScaleSet scaleSet) {
-    opensimModelSimulationJNI.PathSpring_postScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
+    opensimSimulationJNI.PathSpring_postScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
   }
 
 }

@@ -12,7 +12,7 @@ public class MuscleCannotEquilibrate extends OpenSimException {
   private transient long swigCPtr;
 
   public MuscleCannotEquilibrate(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.MuscleCannotEquilibrate_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.MuscleCannotEquilibrate_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class MuscleCannotEquilibrate extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_MuscleCannotEquilibrate(swigCPtr);
+        opensimSimulationJNI.delete_MuscleCannotEquilibrate(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class MuscleCannotEquilibrate extends OpenSimException {
   }
 
   public MuscleCannotEquilibrate(String file, long line, String func, OpenSimObject obj, String detail) {
-    this(opensimModelSimulationJNI.new_MuscleCannotEquilibrate(file, line, func, OpenSimObject.getCPtr(obj), obj, detail), true);
+    this(opensimSimulationJNI.new_MuscleCannotEquilibrate(file, line, func, OpenSimObject.getCPtr(obj), obj, detail), true);
   }
 
 }

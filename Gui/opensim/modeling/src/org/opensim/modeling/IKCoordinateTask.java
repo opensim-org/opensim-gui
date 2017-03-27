@@ -12,7 +12,7 @@ public class IKCoordinateTask extends IKTask {
   private transient long swigCPtr;
 
   public IKCoordinateTask(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.IKCoordinateTask_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.IKCoordinateTask_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class IKCoordinateTask extends IKTask {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_IKCoordinateTask(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_IKCoordinateTask(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,57 +36,57 @@ public class IKCoordinateTask extends IKTask {
   }
 
   public static IKCoordinateTask safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.IKCoordinateTask_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.IKCoordinateTask_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new IKCoordinateTask(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.IKCoordinateTask_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.IKCoordinateTask_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.IKCoordinateTask_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.IKCoordinateTask_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.IKCoordinateTask_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.IKCoordinateTask_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new IKCoordinateTask(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.IKCoordinateTask_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.IKCoordinateTask_getConcreteClassName(swigCPtr, this);
   }
 
   public IKCoordinateTask() {
-    this(opensimModelJNI.new_IKCoordinateTask__SWIG_0(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_IKCoordinateTask__SWIG_0(), true);
   }
 
   public IKCoordinateTask(IKCoordinateTask aIKCoordinateTask) {
-    this(opensimModelJNI.new_IKCoordinateTask__SWIG_1(IKCoordinateTask.getCPtr(aIKCoordinateTask), aIKCoordinateTask), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_IKCoordinateTask__SWIG_1(IKCoordinateTask.getCPtr(aIKCoordinateTask), aIKCoordinateTask), true);
   }
 
   public void setValueType(IKCoordinateTask.ValueType type) {
-    opensimModelJNI.IKCoordinateTask_setValueType(swigCPtr, this, type.swigValue());
+    opensimActuatorsAnalysesToolsJNI.IKCoordinateTask_setValueType(swigCPtr, this, type.swigValue());
   }
 
   public IKCoordinateTask.ValueType getValueType() {
-    return IKCoordinateTask.ValueType.swigToEnum(opensimModelJNI.IKCoordinateTask_getValueType(swigCPtr, this));
+    return IKCoordinateTask.ValueType.swigToEnum(opensimActuatorsAnalysesToolsJNI.IKCoordinateTask_getValueType(swigCPtr, this));
   }
 
   public double getValue() {
-    return opensimModelJNI.IKCoordinateTask_getValue(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.IKCoordinateTask_getValue(swigCPtr, this);
   }
 
   public void setValue(double value) {
-    opensimModelJNI.IKCoordinateTask_setValue(swigCPtr, this, value);
+    opensimActuatorsAnalysesToolsJNI.IKCoordinateTask_setValue(swigCPtr, this, value);
   }
 
   public static String ValueTypeToString(IKCoordinateTask.ValueType type) {
-    return opensimModelJNI.IKCoordinateTask_ValueTypeToString(type.swigValue());
+    return opensimActuatorsAnalysesToolsJNI.IKCoordinateTask_ValueTypeToString(type.swigValue());
   }
 
   public static IKCoordinateTask.ValueType StringToValueType(String str) {
-    return IKCoordinateTask.ValueType.swigToEnum(opensimModelJNI.IKCoordinateTask_StringToValueType(str));
+    return IKCoordinateTask.ValueType.swigToEnum(opensimActuatorsAnalysesToolsJNI.IKCoordinateTask_StringToValueType(str));
   }
 
   public final static class ValueType {

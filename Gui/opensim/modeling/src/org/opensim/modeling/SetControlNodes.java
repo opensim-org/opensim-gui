@@ -29,109 +29,109 @@ public class SetControlNodes {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_SetControlNodes(swigCPtr);
+        opensimSimulationJNI.delete_SetControlNodes(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public SetControlNodes(int aCapacity) {
-    this(opensimModelSimulationJNI.new_SetControlNodes__SWIG_0(aCapacity), true);
+    this(opensimSimulationJNI.new_SetControlNodes__SWIG_0(aCapacity), true);
   }
 
   public SetControlNodes() {
-    this(opensimModelSimulationJNI.new_SetControlNodes__SWIG_1(), true);
+    this(opensimSimulationJNI.new_SetControlNodes__SWIG_1(), true);
   }
 
   public SetControlNodes(SetControlNodes aArray) {
-    this(opensimModelSimulationJNI.new_SetControlNodes__SWIG_2(SetControlNodes.getCPtr(aArray), aArray), true);
+    this(opensimSimulationJNI.new_SetControlNodes__SWIG_2(SetControlNodes.getCPtr(aArray), aArray), true);
   }
 
   public void clearAndDestroy() {
-    opensimModelSimulationJNI.SetControlNodes_clearAndDestroy(swigCPtr, this);
+    opensimSimulationJNI.SetControlNodes_clearAndDestroy(swigCPtr, this);
   }
 
   public boolean setSize(int aSize) {
-    return opensimModelSimulationJNI.SetControlNodes_setSize(swigCPtr, this, aSize);
+    return opensimSimulationJNI.SetControlNodes_setSize(swigCPtr, this, aSize);
   }
 
   public int getSize() {
-    return opensimModelSimulationJNI.SetControlNodes_getSize(swigCPtr, this);
+    return opensimSimulationJNI.SetControlNodes_getSize(swigCPtr, this);
   }
 
   public int size() {
-    return opensimModelSimulationJNI.SetControlNodes_size(swigCPtr, this);
+    return opensimSimulationJNI.SetControlNodes_size(swigCPtr, this);
   }
 
   public int getIndex(SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type aObject, int aStartIndex) {
-    return opensimModelSimulationJNI.SetControlNodes_getIndex__SWIG_0(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type.getCPtr(aObject), aStartIndex);
+    return opensimSimulationJNI.SetControlNodes_getIndex__SWIG_0(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type.getCPtr(aObject), aStartIndex);
   }
 
   public int getIndex(SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type aObject) {
-    return opensimModelSimulationJNI.SetControlNodes_getIndex__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type.getCPtr(aObject));
+    return opensimSimulationJNI.SetControlNodes_getIndex__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type.getCPtr(aObject));
   }
 
   public int getIndex(String aName, int aStartIndex) {
-    return opensimModelSimulationJNI.SetControlNodes_getIndex__SWIG_2(swigCPtr, this, aName, aStartIndex);
+    return opensimSimulationJNI.SetControlNodes_getIndex__SWIG_2(swigCPtr, this, aName, aStartIndex);
   }
 
   public int getIndex(String aName) {
-    return opensimModelSimulationJNI.SetControlNodes_getIndex__SWIG_3(swigCPtr, this, aName);
+    return opensimSimulationJNI.SetControlNodes_getIndex__SWIG_3(swigCPtr, this, aName);
   }
 
   public boolean append(ControlLinearNode aObject) {
-    return opensimModelSimulationJNI.SetControlNodes_append__SWIG_0(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject);
+    return opensimSimulationJNI.SetControlNodes_append__SWIG_0(swigCPtr, this, ControlLinearNode.getCPtr(aObject), aObject);
   }
 
   public boolean append(SetControlNodes aArray) {
-    return opensimModelSimulationJNI.SetControlNodes_append__SWIG_1(swigCPtr, this, SetControlNodes.getCPtr(aArray), aArray);
+    return opensimSimulationJNI.SetControlNodes_append__SWIG_1(swigCPtr, this, SetControlNodes.getCPtr(aArray), aArray);
   }
 
   public boolean insert(int aIndex, ControlLinearNode aObject) {
-    return opensimModelSimulationJNI.SetControlNodes_insert(swigCPtr, this, aIndex, ControlLinearNode.getCPtr(aObject), aObject);
+    return opensimSimulationJNI.SetControlNodes_insert(swigCPtr, this, aIndex, ControlLinearNode.getCPtr(aObject), aObject);
   }
 
   public boolean remove(int aIndex) {
-    return opensimModelSimulationJNI.SetControlNodes_remove__SWIG_0(swigCPtr, this, aIndex);
+    return opensimSimulationJNI.SetControlNodes_remove__SWIG_0(swigCPtr, this, aIndex);
   }
 
   public boolean remove(SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type aObject) {
-    return opensimModelSimulationJNI.SetControlNodes_remove__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type.getCPtr(aObject));
+    return opensimSimulationJNI.SetControlNodes_remove__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type.getCPtr(aObject));
   }
 
   public boolean set(int aIndex, ControlLinearNode aObject) {
-    return opensimModelSimulationJNI.SetControlNodes_set(swigCPtr, this, aIndex, ControlLinearNode.getCPtr(aObject), aObject);
+    return opensimSimulationJNI.SetControlNodes_set(swigCPtr, this, aIndex, ControlLinearNode.getCPtr(aObject), aObject);
   }
 
   public ControlLinearNode get(int aIndex) {
-    long cPtr = opensimModelSimulationJNI.SetControlNodes_get__SWIG_0(swigCPtr, this, aIndex);
+    long cPtr = opensimSimulationJNI.SetControlNodes_get__SWIG_0(swigCPtr, this, aIndex);
     return (cPtr == 0) ? null : new ControlLinearNode(cPtr, false);
   }
 
   public ControlLinearNode get(String aName) {
-    long cPtr = opensimModelSimulationJNI.SetControlNodes_get__SWIG_1(swigCPtr, this, aName);
+    long cPtr = opensimSimulationJNI.SetControlNodes_get__SWIG_1(swigCPtr, this, aName);
     return (cPtr == 0) ? null : new ControlLinearNode(cPtr, false);
   }
 
   public ControlLinearNode getLast() {
-    long cPtr = opensimModelSimulationJNI.SetControlNodes_getLast(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.SetControlNodes_getLast(swigCPtr, this);
     return (cPtr == 0) ? null : new ControlLinearNode(cPtr, false);
   }
 
   public int searchBinary(SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type aObject, boolean aFindFirst, int aLo, int aHi) {
-    return opensimModelSimulationJNI.SetControlNodes_searchBinary__SWIG_0(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type.getCPtr(aObject), aFindFirst, aLo, aHi);
+    return opensimSimulationJNI.SetControlNodes_searchBinary__SWIG_0(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type.getCPtr(aObject), aFindFirst, aLo, aHi);
   }
 
   public int searchBinary(SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type aObject, boolean aFindFirst, int aLo) {
-    return opensimModelSimulationJNI.SetControlNodes_searchBinary__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type.getCPtr(aObject), aFindFirst, aLo);
+    return opensimSimulationJNI.SetControlNodes_searchBinary__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type.getCPtr(aObject), aFindFirst, aLo);
   }
 
   public int searchBinary(SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type aObject, boolean aFindFirst) {
-    return opensimModelSimulationJNI.SetControlNodes_searchBinary__SWIG_2(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type.getCPtr(aObject), aFindFirst);
+    return opensimSimulationJNI.SetControlNodes_searchBinary__SWIG_2(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type.getCPtr(aObject), aFindFirst);
   }
 
   public int searchBinary(SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type aObject) {
-    return opensimModelSimulationJNI.SetControlNodes_searchBinary__SWIG_3(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type.getCPtr(aObject));
+    return opensimSimulationJNI.SetControlNodes_searchBinary__SWIG_3(swigCPtr, this, SWIGTYPE_p_std__add_constT_OpenSim__ControlLinearNode_t__type.getCPtr(aObject));
   }
 
 }

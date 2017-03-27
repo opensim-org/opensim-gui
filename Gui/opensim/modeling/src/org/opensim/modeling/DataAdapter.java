@@ -29,19 +29,19 @@ public class DataAdapter {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_DataAdapter(swigCPtr);
+        opensimCommonJNI.delete_DataAdapter(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public DataAdapter clone() {
-    long cPtr = opensimModelCommonJNI.DataAdapter_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.DataAdapter_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new DataAdapter(cPtr, true);
   }
 
   public static boolean registerDataAdapter(String identifier, DataAdapter adapter) {
-    return opensimModelCommonJNI.DataAdapter_registerDataAdapter(identifier, DataAdapter.getCPtr(adapter), adapter);
+    return opensimCommonJNI.DataAdapter_registerDataAdapter(identifier, DataAdapter.getCPtr(adapter), adapter);
   }
 
 }

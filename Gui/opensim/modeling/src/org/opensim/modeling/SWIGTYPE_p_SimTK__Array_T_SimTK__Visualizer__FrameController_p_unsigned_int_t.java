@@ -8,18 +8,18 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_FiberForceLengthCurve {
+public class SWIGTYPE_p_SimTK__Array_T_SimTK__Visualizer__FrameController_p_unsigned_int_t {
   private transient long swigCPtr;
 
-  protected SWIGTYPE_p_FiberForceLengthCurve(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
+  protected SWIGTYPE_p_SimTK__Array_T_SimTK__Visualizer__FrameController_p_unsigned_int_t(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_FiberForceLengthCurve() {
+  protected SWIGTYPE_p_SimTK__Array_T_SimTK__Visualizer__FrameController_p_unsigned_int_t() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_FiberForceLengthCurve obj) {
+  protected static long getCPtr(SWIGTYPE_p_SimTK__Array_T_SimTK__Visualizer__FrameController_p_unsigned_int_t obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }

@@ -40,6 +40,7 @@ import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import org.opensim.modeling.AbstractPathPoint;
 import org.opensim.modeling.ArrayPathPoint;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.BodySet;
@@ -60,6 +61,7 @@ import org.opensim.modeling.PathWrap;
 import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.SetPathWrap;
 import org.opensim.modeling.SetWrapObject;
+import org.opensim.modeling.State;
 import org.opensim.modeling.Units;
 import org.opensim.modeling.WrapEllipsoid;
 import org.opensim.modeling.WrapObject;
@@ -241,7 +243,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          }
       }
       
-      //Dimension windowSize = MuscleEditorScrollPane.getParent().getSize();
+      //Dimension windowSize = MuscleEditorScrollPane.getOwner().getSize();
       Dimension d = new Dimension(565, 358);
       MuscleEditorPanel.setPreferredSize(d);
       
@@ -305,7 +307,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       // and make sure the rest of the points maintain correct selection status
       ViewDB.getInstance().removeObjectsBelongingToMuscleFromSelection(objectWithPath);
 
-      PathPoint closestPoint = pathPoints.get(index);
+      AbstractPathPoint closestPoint = pathPoints.get(index);
       OpenSimContext context =OpenSimDB.getInstance().getContext(currentPath.getModel());
       context.addPathPoint(currentPath, menuChoice, closestPoint.getBody());
       
@@ -317,7 +319,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       //Muscle asm = Muscle.safeDownCast(objectWithPath);
       // The point may not be deleted, but save a reference to it so that if it is deleted
       // you can fire an ObjectsDeletedEvent later.
-      PathPoint mp = currentPath.getPathPointSet().get(menuChoice);
+      AbstractPathPoint mp = currentPath.getPathPointSet().get(menuChoice);
       ViewDB.getInstance().removeObjectsBelongingToMuscleFromSelection(objectWithPath);
       OpenSimContext context =OpenSimDB.getInstance().getContext(currentPath.getModel());
       
@@ -471,12 +473,13 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          AttachmentsPanel.add(pointTypeComboBox);
          x += 70;
 
+         State state = openSimContext.getCurrentStateRef();
          // The X coordinate of the point
          if (mmp == null) {
             javax.swing.JTextField xField = new javax.swing.JTextField();
             xField.setHorizontalAlignment(SwingConstants.TRAILING);
             xField.setBounds(x, height, width - 5, 21);
-            xField.setText(positionFormat.format(pathPoints.get(i).getLocationCoord(0)));
+            xField.setText(positionFormat.format(pathPoints.get(i).getLocation(state).get(0)));
             xField.setToolTipText("X coordinate of the attachment point");
             xField.addActionListener(new java.awt.event.ActionListener() {
                public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -529,7 +532,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
             javax.swing.JTextField yField = new javax.swing.JTextField();
             yField.setHorizontalAlignment(SwingConstants.TRAILING);
             yField.setBounds(x, height, width - 5, 21);
-            yField.setText(positionFormat.format(pathPoints.get(i).getLocationCoord(1)));
+            yField.setText(positionFormat.format(pathPoints.get(i).getLocation(state).get(1)));
             yField.setToolTipText("Y coordinate of the attachment point");
             yField.addActionListener(new java.awt.event.ActionListener() {
                public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -581,7 +584,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
             javax.swing.JTextField zField = new javax.swing.JTextField();
             zField.setHorizontalAlignment(SwingConstants.TRAILING);
             zField.setBounds(x, height, width - 5, 21);
-            zField.setText(positionFormat.format(pathPoints.get(i).getLocationCoord(2)));
+            zField.setText(positionFormat.format(pathPoints.get(i).getLocation(state).get(2)));
             zField.setToolTipText("Z coordinate of the attachment point");
             zField.addActionListener(new java.awt.event.ActionListener() {
                public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1275,6 +1278,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       CurrentPathPanel.add(currentPathBodyLabel);
       CurrentPathPanel.add(currentPathSelLabel);
       
+      State state = openSimContext.getCurrentStateRef();
       for (int i = 0; i < asmp.getSize(); i++) {
          javax.swing.JLabel indexLabel = new javax.swing.JLabel();
          javax.swing.JLabel xField = new javax.swing.JLabel();
@@ -1286,9 +1290,9 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          javax.swing.JLabel bodyLabel = new javax.swing.JLabel();
          javax.swing.JLabel typeLabel = new javax.swing.JLabel();
          indexLabel.setText(intPropFormat.format(i+1) + ".");
-         xField.setText(positionFormat.format(asmp.getitem(i).getLocationCoord(0)));
-         yField.setText(positionFormat.format(asmp.getitem(i).getLocationCoord(1)));
-         zField.setText(positionFormat.format(asmp.getitem(i).getLocationCoord(2)));
+         xField.setText(positionFormat.format(asmp.getitem(i).getLocation(state).get(0)));
+         yField.setText(positionFormat.format(asmp.getitem(i).getLocation(state).get(1)));
+         zField.setText(positionFormat.format(asmp.getitem(i).getLocation(state).get(2)));
          bodyLabel.setText(asmp.getitem(i).getBodyName());
          if (asmp.getitem(i).getWrapObject() != null)
             typeLabel.setText("wrap" + " (" + asmp.getitem(i).getWrapObject().getName() + ")");
@@ -1321,7 +1325,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
    public void AttachmentSelected(javax.swing.JCheckBox attachmentSelBox, int attachmentNum) {
       //Muscle asm = Muscle.safeDownCast(objectWithPath);
       PathPointSet pathPoints = currentPath.getPathPointSet();
-      PathPoint point = pathPoints.get(attachmentNum);
+      AbstractPathPoint point = pathPoints.get(attachmentNum);
       ViewDB.getInstance().toggleAddSelectedObject(point);
    }
    
@@ -1409,7 +1413,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
 
    public void PathPointTypeChosen(javax.swing.JComboBox musclePointTypeComboBox, int attachmentNum) {
       //Muscle asm = Muscle.safeDownCast(objectWithPath);
-      PathPoint mp = currentPath.getPathPointSet().get(attachmentNum);
+      AbstractPathPoint mp = currentPath.getPathPointSet().get(attachmentNum);
       ConditionalPathPoint via = ConditionalPathPoint.safeDownCast(mp);
       MovingPathPoint mmp = MovingPathPoint.safeDownCast(mp);
 
@@ -1455,7 +1459,8 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
    public void AttachmentPointEntered(javax.swing.JTextField field, int attachmentNum, int coordNum) {
       //Muscle asm = Muscle.safeDownCast(objectWithPath);
       PathPointSet pathPoints = currentPath.getPathPointSet();
-      double newValue, oldValue = pathPoints.get(attachmentNum).getLocationCoord(coordNum);
+      State state = openSimContext.getCurrentStateRef();
+      double newValue, oldValue = pathPoints.get(attachmentNum).getLocation(state).get(coordNum);
       try {
          newValue = positionFormat.parse(field.getText()).doubleValue();
       } catch (ParseException ex) {
@@ -1469,7 +1474,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       if (oldValue != newValue) {
          Model model = currentPath.getModel();
          OpenSimContext context = OpenSimDB.getInstance().getContext(model);
-         context.setLocation(pathPoints.get(attachmentNum), coordNum, newValue);
+         context.setLocation(PathPoint.safeDownCast(pathPoints.get(attachmentNum)), coordNum, newValue);
          
          // tell the ViewDB to redraw the model
          SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);

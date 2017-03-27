@@ -8,19 +8,9 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_SimTK__Visualizer {
-  private transient long swigCPtr;
-
-  protected SWIGTYPE_p_SimTK__Visualizer(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
-    swigCPtr = cPtr;
-  }
-
-  protected SWIGTYPE_p_SimTK__Visualizer() {
-    swigCPtr = 0;
-  }
-
-  protected static long getCPtr(SWIGTYPE_p_SimTK__Visualizer obj) {
-    return (obj == null) ? 0 : obj.swigCPtr;
-  }
+public interface opensimCommonConstants {
+  public final static String GET_SYSTEM_INFO = opensimCommonJNI.GET_SYSTEM_INFO_get();
+  public final static String GET_COMPILER_INFO = opensimCommonJNI.GET_COMPILER_INFO_get();
+  public final static String GET_OS_NAME = opensimCommonJNI.GET_OS_NAME_get();
+  public final static String GET_OSIM_VERSION = opensimCommonJNI.GET_OSIM_VERSION_get();
 }
-

@@ -12,7 +12,7 @@ public class ActiveForceLengthCurve extends Function {
   private transient long swigCPtr;
 
   public ActiveForceLengthCurve(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.ActiveForceLengthCurve_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.ActiveForceLengthCurve_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ActiveForceLengthCurve extends Function {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_ActiveForceLengthCurve(swigCPtr);
+        opensimSimulationJNI.delete_ActiveForceLengthCurve(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,265 +36,265 @@ public class ActiveForceLengthCurve extends Function {
   }
 
   public static ActiveForceLengthCurve safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.ActiveForceLengthCurve_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.ActiveForceLengthCurve_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ActiveForceLengthCurve(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.ActiveForceLengthCurve_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.ActiveForceLengthCurve_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.ActiveForceLengthCurve_getClassName();
+    return opensimSimulationJNI.ActiveForceLengthCurve_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.ActiveForceLengthCurve_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.ActiveForceLengthCurve_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ActiveForceLengthCurve(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.ActiveForceLengthCurve_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.ActiveForceLengthCurve_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_min_norm_active_fiber_length(ActiveForceLengthCurve source) {
-    opensimModelJNI.ActiveForceLengthCurve_copyProperty_min_norm_active_fiber_length(swigCPtr, this, ActiveForceLengthCurve.getCPtr(source), source);
+    opensimSimulationJNI.ActiveForceLengthCurve_copyProperty_min_norm_active_fiber_length(swigCPtr, this, ActiveForceLengthCurve.getCPtr(source), source);
   }
 
   public double get_min_norm_active_fiber_length(int i) {
-    return opensimModelJNI.ActiveForceLengthCurve_get_min_norm_active_fiber_length__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.ActiveForceLengthCurve_get_min_norm_active_fiber_length__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_min_norm_active_fiber_length(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.ActiveForceLengthCurve_upd_min_norm_active_fiber_length__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.ActiveForceLengthCurve_upd_min_norm_active_fiber_length__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_min_norm_active_fiber_length(int i, double value) {
-    opensimModelJNI.ActiveForceLengthCurve_set_min_norm_active_fiber_length__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.ActiveForceLengthCurve_set_min_norm_active_fiber_length__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_min_norm_active_fiber_length(double value) {
-    return opensimModelJNI.ActiveForceLengthCurve_append_min_norm_active_fiber_length(swigCPtr, this, value);
+    return opensimSimulationJNI.ActiveForceLengthCurve_append_min_norm_active_fiber_length(swigCPtr, this, value);
   }
 
   public void constructProperty_min_norm_active_fiber_length(double initValue) {
-    opensimModelJNI.ActiveForceLengthCurve_constructProperty_min_norm_active_fiber_length(swigCPtr, this, initValue);
+    opensimSimulationJNI.ActiveForceLengthCurve_constructProperty_min_norm_active_fiber_length(swigCPtr, this, initValue);
   }
 
   public double get_min_norm_active_fiber_length() {
-    return opensimModelJNI.ActiveForceLengthCurve_get_min_norm_active_fiber_length__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.ActiveForceLengthCurve_get_min_norm_active_fiber_length__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_min_norm_active_fiber_length() {
-    return new SWIGTYPE_p_double(opensimModelJNI.ActiveForceLengthCurve_upd_min_norm_active_fiber_length__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.ActiveForceLengthCurve_upd_min_norm_active_fiber_length__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_min_norm_active_fiber_length(double value) {
-    opensimModelJNI.ActiveForceLengthCurve_set_min_norm_active_fiber_length__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.ActiveForceLengthCurve_set_min_norm_active_fiber_length__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_transition_norm_fiber_length(ActiveForceLengthCurve source) {
-    opensimModelJNI.ActiveForceLengthCurve_copyProperty_transition_norm_fiber_length(swigCPtr, this, ActiveForceLengthCurve.getCPtr(source), source);
+    opensimSimulationJNI.ActiveForceLengthCurve_copyProperty_transition_norm_fiber_length(swigCPtr, this, ActiveForceLengthCurve.getCPtr(source), source);
   }
 
   public double get_transition_norm_fiber_length(int i) {
-    return opensimModelJNI.ActiveForceLengthCurve_get_transition_norm_fiber_length__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.ActiveForceLengthCurve_get_transition_norm_fiber_length__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_transition_norm_fiber_length(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.ActiveForceLengthCurve_upd_transition_norm_fiber_length__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.ActiveForceLengthCurve_upd_transition_norm_fiber_length__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_transition_norm_fiber_length(int i, double value) {
-    opensimModelJNI.ActiveForceLengthCurve_set_transition_norm_fiber_length__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.ActiveForceLengthCurve_set_transition_norm_fiber_length__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_transition_norm_fiber_length(double value) {
-    return opensimModelJNI.ActiveForceLengthCurve_append_transition_norm_fiber_length(swigCPtr, this, value);
+    return opensimSimulationJNI.ActiveForceLengthCurve_append_transition_norm_fiber_length(swigCPtr, this, value);
   }
 
   public void constructProperty_transition_norm_fiber_length(double initValue) {
-    opensimModelJNI.ActiveForceLengthCurve_constructProperty_transition_norm_fiber_length(swigCPtr, this, initValue);
+    opensimSimulationJNI.ActiveForceLengthCurve_constructProperty_transition_norm_fiber_length(swigCPtr, this, initValue);
   }
 
   public double get_transition_norm_fiber_length() {
-    return opensimModelJNI.ActiveForceLengthCurve_get_transition_norm_fiber_length__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.ActiveForceLengthCurve_get_transition_norm_fiber_length__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_transition_norm_fiber_length() {
-    return new SWIGTYPE_p_double(opensimModelJNI.ActiveForceLengthCurve_upd_transition_norm_fiber_length__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.ActiveForceLengthCurve_upd_transition_norm_fiber_length__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_transition_norm_fiber_length(double value) {
-    opensimModelJNI.ActiveForceLengthCurve_set_transition_norm_fiber_length__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.ActiveForceLengthCurve_set_transition_norm_fiber_length__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_max_norm_active_fiber_length(ActiveForceLengthCurve source) {
-    opensimModelJNI.ActiveForceLengthCurve_copyProperty_max_norm_active_fiber_length(swigCPtr, this, ActiveForceLengthCurve.getCPtr(source), source);
+    opensimSimulationJNI.ActiveForceLengthCurve_copyProperty_max_norm_active_fiber_length(swigCPtr, this, ActiveForceLengthCurve.getCPtr(source), source);
   }
 
   public double get_max_norm_active_fiber_length(int i) {
-    return opensimModelJNI.ActiveForceLengthCurve_get_max_norm_active_fiber_length__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.ActiveForceLengthCurve_get_max_norm_active_fiber_length__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_max_norm_active_fiber_length(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.ActiveForceLengthCurve_upd_max_norm_active_fiber_length__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.ActiveForceLengthCurve_upd_max_norm_active_fiber_length__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_max_norm_active_fiber_length(int i, double value) {
-    opensimModelJNI.ActiveForceLengthCurve_set_max_norm_active_fiber_length__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.ActiveForceLengthCurve_set_max_norm_active_fiber_length__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_max_norm_active_fiber_length(double value) {
-    return opensimModelJNI.ActiveForceLengthCurve_append_max_norm_active_fiber_length(swigCPtr, this, value);
+    return opensimSimulationJNI.ActiveForceLengthCurve_append_max_norm_active_fiber_length(swigCPtr, this, value);
   }
 
   public void constructProperty_max_norm_active_fiber_length(double initValue) {
-    opensimModelJNI.ActiveForceLengthCurve_constructProperty_max_norm_active_fiber_length(swigCPtr, this, initValue);
+    opensimSimulationJNI.ActiveForceLengthCurve_constructProperty_max_norm_active_fiber_length(swigCPtr, this, initValue);
   }
 
   public double get_max_norm_active_fiber_length() {
-    return opensimModelJNI.ActiveForceLengthCurve_get_max_norm_active_fiber_length__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.ActiveForceLengthCurve_get_max_norm_active_fiber_length__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_max_norm_active_fiber_length() {
-    return new SWIGTYPE_p_double(opensimModelJNI.ActiveForceLengthCurve_upd_max_norm_active_fiber_length__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.ActiveForceLengthCurve_upd_max_norm_active_fiber_length__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_max_norm_active_fiber_length(double value) {
-    opensimModelJNI.ActiveForceLengthCurve_set_max_norm_active_fiber_length__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.ActiveForceLengthCurve_set_max_norm_active_fiber_length__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_shallow_ascending_slope(ActiveForceLengthCurve source) {
-    opensimModelJNI.ActiveForceLengthCurve_copyProperty_shallow_ascending_slope(swigCPtr, this, ActiveForceLengthCurve.getCPtr(source), source);
+    opensimSimulationJNI.ActiveForceLengthCurve_copyProperty_shallow_ascending_slope(swigCPtr, this, ActiveForceLengthCurve.getCPtr(source), source);
   }
 
   public double get_shallow_ascending_slope(int i) {
-    return opensimModelJNI.ActiveForceLengthCurve_get_shallow_ascending_slope__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.ActiveForceLengthCurve_get_shallow_ascending_slope__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_shallow_ascending_slope(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.ActiveForceLengthCurve_upd_shallow_ascending_slope__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.ActiveForceLengthCurve_upd_shallow_ascending_slope__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_shallow_ascending_slope(int i, double value) {
-    opensimModelJNI.ActiveForceLengthCurve_set_shallow_ascending_slope__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.ActiveForceLengthCurve_set_shallow_ascending_slope__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_shallow_ascending_slope(double value) {
-    return opensimModelJNI.ActiveForceLengthCurve_append_shallow_ascending_slope(swigCPtr, this, value);
+    return opensimSimulationJNI.ActiveForceLengthCurve_append_shallow_ascending_slope(swigCPtr, this, value);
   }
 
   public void constructProperty_shallow_ascending_slope(double initValue) {
-    opensimModelJNI.ActiveForceLengthCurve_constructProperty_shallow_ascending_slope(swigCPtr, this, initValue);
+    opensimSimulationJNI.ActiveForceLengthCurve_constructProperty_shallow_ascending_slope(swigCPtr, this, initValue);
   }
 
   public double get_shallow_ascending_slope() {
-    return opensimModelJNI.ActiveForceLengthCurve_get_shallow_ascending_slope__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.ActiveForceLengthCurve_get_shallow_ascending_slope__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_shallow_ascending_slope() {
-    return new SWIGTYPE_p_double(opensimModelJNI.ActiveForceLengthCurve_upd_shallow_ascending_slope__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.ActiveForceLengthCurve_upd_shallow_ascending_slope__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_shallow_ascending_slope(double value) {
-    opensimModelJNI.ActiveForceLengthCurve_set_shallow_ascending_slope__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.ActiveForceLengthCurve_set_shallow_ascending_slope__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_minimum_value(ActiveForceLengthCurve source) {
-    opensimModelJNI.ActiveForceLengthCurve_copyProperty_minimum_value(swigCPtr, this, ActiveForceLengthCurve.getCPtr(source), source);
+    opensimSimulationJNI.ActiveForceLengthCurve_copyProperty_minimum_value(swigCPtr, this, ActiveForceLengthCurve.getCPtr(source), source);
   }
 
   public double get_minimum_value(int i) {
-    return opensimModelJNI.ActiveForceLengthCurve_get_minimum_value__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.ActiveForceLengthCurve_get_minimum_value__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_double upd_minimum_value(int i) {
-    return new SWIGTYPE_p_double(opensimModelJNI.ActiveForceLengthCurve_upd_minimum_value__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.ActiveForceLengthCurve_upd_minimum_value__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_minimum_value(int i, double value) {
-    opensimModelJNI.ActiveForceLengthCurve_set_minimum_value__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.ActiveForceLengthCurve_set_minimum_value__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_minimum_value(double value) {
-    return opensimModelJNI.ActiveForceLengthCurve_append_minimum_value(swigCPtr, this, value);
+    return opensimSimulationJNI.ActiveForceLengthCurve_append_minimum_value(swigCPtr, this, value);
   }
 
   public void constructProperty_minimum_value(double initValue) {
-    opensimModelJNI.ActiveForceLengthCurve_constructProperty_minimum_value(swigCPtr, this, initValue);
+    opensimSimulationJNI.ActiveForceLengthCurve_constructProperty_minimum_value(swigCPtr, this, initValue);
   }
 
   public double get_minimum_value() {
-    return opensimModelJNI.ActiveForceLengthCurve_get_minimum_value__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.ActiveForceLengthCurve_get_minimum_value__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_double upd_minimum_value() {
-    return new SWIGTYPE_p_double(opensimModelJNI.ActiveForceLengthCurve_upd_minimum_value__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_double(opensimSimulationJNI.ActiveForceLengthCurve_upd_minimum_value__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_minimum_value(double value) {
-    opensimModelJNI.ActiveForceLengthCurve_set_minimum_value__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.ActiveForceLengthCurve_set_minimum_value__SWIG_1(swigCPtr, this, value);
   }
 
   public ActiveForceLengthCurve() {
-    this(opensimModelJNI.new_ActiveForceLengthCurve__SWIG_0(), true);
+    this(opensimSimulationJNI.new_ActiveForceLengthCurve__SWIG_0(), true);
   }
 
   public ActiveForceLengthCurve(double minActiveNormFiberLength, double transitionNormFiberLength, double maxActiveNormFiberLength, double shallowAscendingSlope, double minimumValue) {
-    this(opensimModelJNI.new_ActiveForceLengthCurve__SWIG_1(minActiveNormFiberLength, transitionNormFiberLength, maxActiveNormFiberLength, shallowAscendingSlope, minimumValue), true);
+    this(opensimSimulationJNI.new_ActiveForceLengthCurve__SWIG_1(minActiveNormFiberLength, transitionNormFiberLength, maxActiveNormFiberLength, shallowAscendingSlope, minimumValue), true);
   }
 
   public double getMinActiveFiberLength() {
-    return opensimModelJNI.ActiveForceLengthCurve_getMinActiveFiberLength(swigCPtr, this);
+    return opensimSimulationJNI.ActiveForceLengthCurve_getMinActiveFiberLength(swigCPtr, this);
   }
 
   public double getTransitionFiberLength() {
-    return opensimModelJNI.ActiveForceLengthCurve_getTransitionFiberLength(swigCPtr, this);
+    return opensimSimulationJNI.ActiveForceLengthCurve_getTransitionFiberLength(swigCPtr, this);
   }
 
   public double getMaxActiveFiberLength() {
-    return opensimModelJNI.ActiveForceLengthCurve_getMaxActiveFiberLength(swigCPtr, this);
+    return opensimSimulationJNI.ActiveForceLengthCurve_getMaxActiveFiberLength(swigCPtr, this);
   }
 
   public double getShallowAscendingSlope() {
-    return opensimModelJNI.ActiveForceLengthCurve_getShallowAscendingSlope(swigCPtr, this);
+    return opensimSimulationJNI.ActiveForceLengthCurve_getShallowAscendingSlope(swigCPtr, this);
   }
 
   public double getMinValue() {
-    return opensimModelJNI.ActiveForceLengthCurve_getMinValue(swigCPtr, this);
+    return opensimSimulationJNI.ActiveForceLengthCurve_getMinValue(swigCPtr, this);
   }
 
   public void setActiveFiberLengths(double minActiveNormFiberLength, double transitionNormFiberLength, double maxActiveNormFiberLength, double shallowAscendingSlope) {
-    opensimModelJNI.ActiveForceLengthCurve_setActiveFiberLengths(swigCPtr, this, minActiveNormFiberLength, transitionNormFiberLength, maxActiveNormFiberLength, shallowAscendingSlope);
+    opensimSimulationJNI.ActiveForceLengthCurve_setActiveFiberLengths(swigCPtr, this, minActiveNormFiberLength, transitionNormFiberLength, maxActiveNormFiberLength, shallowAscendingSlope);
   }
 
   public void setMinValue(double minimumValue) {
-    opensimModelJNI.ActiveForceLengthCurve_setMinValue(swigCPtr, this, minimumValue);
+    opensimSimulationJNI.ActiveForceLengthCurve_setMinValue(swigCPtr, this, minimumValue);
   }
 
   public double calcValue(Vector x) {
-    return opensimModelJNI.ActiveForceLengthCurve_calcValue__SWIG_0(swigCPtr, this, Vector.getCPtr(x), x);
+    return opensimSimulationJNI.ActiveForceLengthCurve_calcValue__SWIG_0(swigCPtr, this, Vector.getCPtr(x), x);
   }
 
   public double calcValue(double normFiberLength) {
-    return opensimModelJNI.ActiveForceLengthCurve_calcValue__SWIG_1(swigCPtr, this, normFiberLength);
+    return opensimSimulationJNI.ActiveForceLengthCurve_calcValue__SWIG_1(swigCPtr, this, normFiberLength);
   }
 
   public double calcDerivative(double normFiberLength, int order) {
-    return opensimModelJNI.ActiveForceLengthCurve_calcDerivative(swigCPtr, this, normFiberLength, order);
+    return opensimSimulationJNI.ActiveForceLengthCurve_calcDerivative(swigCPtr, this, normFiberLength, order);
   }
 
   public Vec2 getCurveDomain() {
-    return new Vec2(opensimModelJNI.ActiveForceLengthCurve_getCurveDomain(swigCPtr, this), true);
+    return new Vec2(opensimSimulationJNI.ActiveForceLengthCurve_getCurveDomain(swigCPtr, this), true);
   }
 
   public void printMuscleCurveToCSVFile(String path) {
-    opensimModelJNI.ActiveForceLengthCurve_printMuscleCurveToCSVFile(swigCPtr, this, path);
+    opensimSimulationJNI.ActiveForceLengthCurve_printMuscleCurveToCSVFile(swigCPtr, this, path);
   }
 
   public void ensureCurveUpToDate() {
-    opensimModelJNI.ActiveForceLengthCurve_ensureCurveUpToDate(swigCPtr, this);
+    opensimSimulationJNI.ActiveForceLengthCurve_ensureCurveUpToDate(swigCPtr, this);
   }
 
 }

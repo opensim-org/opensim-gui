@@ -12,7 +12,7 @@ public class InvalidTimestamp extends InvalidRow {
   private transient long swigCPtr;
 
   public InvalidTimestamp(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.InvalidTimestamp_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.InvalidTimestamp_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class InvalidTimestamp extends InvalidRow {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_InvalidTimestamp(swigCPtr);
+        opensimCommonJNI.delete_InvalidTimestamp(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class InvalidTimestamp extends InvalidRow {
   }
 
   public InvalidTimestamp() {
-    this(opensimModelCommonJNI.new_InvalidTimestamp(), true);
+    this(opensimCommonJNI.new_InvalidTimestamp(), true);
   }
 
 }

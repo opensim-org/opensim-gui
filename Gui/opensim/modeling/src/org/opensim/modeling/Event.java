@@ -29,46 +29,46 @@ public class Event {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_Event(swigCPtr);
+        opensimCommonJNI.delete_Event(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public void setLabel(String value) {
-    opensimModelCommonJNI.Event_label_set(swigCPtr, this, value);
+    opensimCommonJNI.Event_label_set(swigCPtr, this, value);
   }
 
   public String getLabel() {
-    return opensimModelCommonJNI.Event_label_get(swigCPtr, this);
+    return opensimCommonJNI.Event_label_get(swigCPtr, this);
   }
 
   public void setTime(double value) {
-    opensimModelCommonJNI.Event_time_set(swigCPtr, this, value);
+    opensimCommonJNI.Event_time_set(swigCPtr, this, value);
   }
 
   public double getTime() {
-    return opensimModelCommonJNI.Event_time_get(swigCPtr, this);
+    return opensimCommonJNI.Event_time_get(swigCPtr, this);
   }
 
   public void setFrame(int value) {
-    opensimModelCommonJNI.Event_frame_set(swigCPtr, this, value);
+    opensimCommonJNI.Event_frame_set(swigCPtr, this, value);
   }
 
   public int getFrame() {
-    return opensimModelCommonJNI.Event_frame_get(swigCPtr, this);
+    return opensimCommonJNI.Event_frame_get(swigCPtr, this);
   }
 
   public void setDescription(String value) {
-    opensimModelCommonJNI.Event_description_set(swigCPtr, this, value);
+    opensimCommonJNI.Event_description_set(swigCPtr, this, value);
   }
 
   public String getDescription() {
-    return opensimModelCommonJNI.Event_description_get(swigCPtr, this);
+    return opensimCommonJNI.Event_description_get(swigCPtr, this);
   }
 
   public Event() {
-    this(opensimModelCommonJNI.new_Event(), true);
+    this(opensimCommonJNI.new_Event(), true);
   }
 
 }

@@ -29,143 +29,147 @@ public class AbstractProperty {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_AbstractProperty(swigCPtr);
+        opensimCommonJNI.delete_AbstractProperty(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public void setAllowableListSize(int aMin, int aMax) {
-    opensimModelCommonJNI.AbstractProperty_setAllowableListSize__SWIG_0(swigCPtr, this, aMin, aMax);
+    opensimCommonJNI.AbstractProperty_setAllowableListSize__SWIG_0(swigCPtr, this, aMin, aMax);
   }
 
   public void setAllowableListSize(int aNum) {
-    opensimModelCommonJNI.AbstractProperty_setAllowableListSize__SWIG_1(swigCPtr, this, aNum);
+    opensimCommonJNI.AbstractProperty_setAllowableListSize__SWIG_1(swigCPtr, this, aNum);
   }
 
   public AbstractProperty clone() {
-    long cPtr = opensimModelCommonJNI.AbstractProperty_clone(swigCPtr, this);
+    long cPtr = opensimCommonJNI.AbstractProperty_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new AbstractProperty(cPtr, true);
   }
 
   public String toString() {
-    return opensimModelCommonJNI.AbstractProperty_toString(swigCPtr, this);
+    return opensimCommonJNI.AbstractProperty_toString(swigCPtr, this);
   }
 
   public String getTypeName() {
-    return opensimModelCommonJNI.AbstractProperty_getTypeName(swigCPtr, this);
+    return opensimCommonJNI.AbstractProperty_getTypeName(swigCPtr, this);
   }
 
   public boolean isObjectProperty() {
-    return opensimModelCommonJNI.AbstractProperty_isObjectProperty(swigCPtr, this);
+    return opensimCommonJNI.AbstractProperty_isObjectProperty(swigCPtr, this);
   }
 
   public boolean isUnnamedProperty() {
-    return opensimModelCommonJNI.AbstractProperty_isUnnamedProperty(swigCPtr, this);
+    return opensimCommonJNI.AbstractProperty_isUnnamedProperty(swigCPtr, this);
   }
 
   public boolean equals(AbstractProperty other) {
-    return opensimModelCommonJNI.AbstractProperty_equals(swigCPtr, this, AbstractProperty.getCPtr(other), other);
+    return opensimCommonJNI.AbstractProperty_equals(swigCPtr, this, AbstractProperty.getCPtr(other), other);
   }
 
   public boolean isSamePropertyClass(AbstractProperty other) {
-    return opensimModelCommonJNI.AbstractProperty_isSamePropertyClass(swigCPtr, this, AbstractProperty.getCPtr(other), other);
+    return opensimCommonJNI.AbstractProperty_isSamePropertyClass(swigCPtr, this, AbstractProperty.getCPtr(other), other);
   }
 
   public int size() {
-    return opensimModelCommonJNI.AbstractProperty_size(swigCPtr, this);
+    return opensimCommonJNI.AbstractProperty_size(swigCPtr, this);
   }
 
   public boolean empty() {
-    return opensimModelCommonJNI.AbstractProperty_empty(swigCPtr, this);
+    return opensimCommonJNI.AbstractProperty_empty(swigCPtr, this);
   }
 
   public void clear() {
-    opensimModelCommonJNI.AbstractProperty_clear(swigCPtr, this);
+    opensimCommonJNI.AbstractProperty_clear(swigCPtr, this);
   }
 
   public OpenSimObject getValueAsObject(int index) {
-    return new OpenSimObject(opensimModelCommonJNI.AbstractProperty_getValueAsObject__SWIG_0(swigCPtr, this, index), false);
+    return new OpenSimObject(opensimCommonJNI.AbstractProperty_getValueAsObject__SWIG_0(swigCPtr, this, index), false);
   }
 
   public OpenSimObject getValueAsObject() {
-    return new OpenSimObject(opensimModelCommonJNI.AbstractProperty_getValueAsObject__SWIG_1(swigCPtr, this), false);
+    return new OpenSimObject(opensimCommonJNI.AbstractProperty_getValueAsObject__SWIG_1(swigCPtr, this), false);
   }
 
   public OpenSimObject updValueAsObject(int index) {
-    return new OpenSimObject(opensimModelCommonJNI.AbstractProperty_updValueAsObject__SWIG_0(swigCPtr, this, index), false);
+    return new OpenSimObject(opensimCommonJNI.AbstractProperty_updValueAsObject__SWIG_0(swigCPtr, this, index), false);
   }
 
   public OpenSimObject updValueAsObject() {
-    return new OpenSimObject(opensimModelCommonJNI.AbstractProperty_updValueAsObject__SWIG_1(swigCPtr, this), false);
+    return new OpenSimObject(opensimCommonJNI.AbstractProperty_updValueAsObject__SWIG_1(swigCPtr, this), false);
   }
 
   public void setValueAsObject(OpenSimObject obj, int index) {
-    opensimModelCommonJNI.AbstractProperty_setValueAsObject__SWIG_0(swigCPtr, this, OpenSimObject.getCPtr(obj), obj, index);
+    opensimCommonJNI.AbstractProperty_setValueAsObject__SWIG_0(swigCPtr, this, OpenSimObject.getCPtr(obj), obj, index);
   }
 
   public void setValueAsObject(OpenSimObject obj) {
-    opensimModelCommonJNI.AbstractProperty_setValueAsObject__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(obj), obj);
+    opensimCommonJNI.AbstractProperty_setValueAsObject__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(obj), obj);
+  }
+
+  public void assign(AbstractProperty that) {
+    opensimCommonJNI.AbstractProperty_assign(swigCPtr, this, AbstractProperty.getCPtr(that), that);
   }
 
   public void setAllPropertiesUseDefault(boolean shouldUseDefault) {
-    opensimModelCommonJNI.AbstractProperty_setAllPropertiesUseDefault(swigCPtr, this, shouldUseDefault);
+    opensimCommonJNI.AbstractProperty_setAllPropertiesUseDefault(swigCPtr, this, shouldUseDefault);
   }
 
   public void readFromXMLParentElement(SWIGTYPE_p_SimTK__Xml__Element parent, int versionNumber) {
-    opensimModelCommonJNI.AbstractProperty_readFromXMLParentElement(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(parent), versionNumber);
+    opensimCommonJNI.AbstractProperty_readFromXMLParentElement(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(parent), versionNumber);
   }
 
   public void writeToXMLParentElement(SWIGTYPE_p_SimTK__Xml__Element parent) {
-    opensimModelCommonJNI.AbstractProperty_writeToXMLParentElement(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(parent));
+    opensimCommonJNI.AbstractProperty_writeToXMLParentElement(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(parent));
   }
 
   public void setName(String name) {
-    opensimModelCommonJNI.AbstractProperty_setName(swigCPtr, this, name);
+    opensimCommonJNI.AbstractProperty_setName(swigCPtr, this, name);
   }
 
   public void setComment(String aComment) {
-    opensimModelCommonJNI.AbstractProperty_setComment(swigCPtr, this, aComment);
+    opensimCommonJNI.AbstractProperty_setComment(swigCPtr, this, aComment);
   }
 
   public void setValueIsDefault(boolean isDefault) {
-    opensimModelCommonJNI.AbstractProperty_setValueIsDefault(swigCPtr, this, isDefault);
+    opensimCommonJNI.AbstractProperty_setValueIsDefault(swigCPtr, this, isDefault);
   }
 
   public String getName() {
-    return opensimModelCommonJNI.AbstractProperty_getName(swigCPtr, this);
+    return opensimCommonJNI.AbstractProperty_getName(swigCPtr, this);
   }
 
   public String getComment() {
-    return opensimModelCommonJNI.AbstractProperty_getComment(swigCPtr, this);
+    return opensimCommonJNI.AbstractProperty_getComment(swigCPtr, this);
   }
 
   public boolean getValueIsDefault() {
-    return opensimModelCommonJNI.AbstractProperty_getValueIsDefault(swigCPtr, this);
+    return opensimCommonJNI.AbstractProperty_getValueIsDefault(swigCPtr, this);
   }
 
   public int getMinListSize() {
-    return opensimModelCommonJNI.AbstractProperty_getMinListSize(swigCPtr, this);
+    return opensimCommonJNI.AbstractProperty_getMinListSize(swigCPtr, this);
   }
 
   public int getMaxListSize() {
-    return opensimModelCommonJNI.AbstractProperty_getMaxListSize(swigCPtr, this);
+    return opensimCommonJNI.AbstractProperty_getMaxListSize(swigCPtr, this);
   }
 
   public boolean isOptionalProperty() {
-    return opensimModelCommonJNI.AbstractProperty_isOptionalProperty(swigCPtr, this);
+    return opensimCommonJNI.AbstractProperty_isOptionalProperty(swigCPtr, this);
   }
 
   public boolean isListProperty() {
-    return opensimModelCommonJNI.AbstractProperty_isListProperty(swigCPtr, this);
+    return opensimCommonJNI.AbstractProperty_isListProperty(swigCPtr, this);
   }
 
   public boolean isOneValueProperty() {
-    return opensimModelCommonJNI.AbstractProperty_isOneValueProperty(swigCPtr, this);
+    return opensimCommonJNI.AbstractProperty_isOneValueProperty(swigCPtr, this);
   }
 
   public boolean isOneObjectProperty() {
-    return opensimModelCommonJNI.AbstractProperty_isOneObjectProperty(swigCPtr, this);
+    return opensimCommonJNI.AbstractProperty_isOneObjectProperty(swigCPtr, this);
   }
 
 }

@@ -29,110 +29,110 @@ public class ArrayBool {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_ArrayBool(swigCPtr);
+        opensimCommonJNI.delete_ArrayBool(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public ArrayBool(boolean aDefaultValue, int aSize, int aCapacity) {
-    this(opensimModelCommonJNI.new_ArrayBool__SWIG_0(aDefaultValue, aSize, aCapacity), true);
+    this(opensimCommonJNI.new_ArrayBool__SWIG_0(aDefaultValue, aSize, aCapacity), true);
   }
 
   public ArrayBool(boolean aDefaultValue, int aSize) {
-    this(opensimModelCommonJNI.new_ArrayBool__SWIG_1(aDefaultValue, aSize), true);
+    this(opensimCommonJNI.new_ArrayBool__SWIG_1(aDefaultValue, aSize), true);
   }
 
   public ArrayBool(boolean aDefaultValue) {
-    this(opensimModelCommonJNI.new_ArrayBool__SWIG_2(aDefaultValue), true);
+    this(opensimCommonJNI.new_ArrayBool__SWIG_2(aDefaultValue), true);
   }
 
   public ArrayBool() {
-    this(opensimModelCommonJNI.new_ArrayBool__SWIG_3(), true);
+    this(opensimCommonJNI.new_ArrayBool__SWIG_3(), true);
   }
 
   public ArrayBool(ArrayBool aArray) {
-    this(opensimModelCommonJNI.new_ArrayBool__SWIG_4(ArrayBool.getCPtr(aArray), aArray), true);
+    this(opensimCommonJNI.new_ArrayBool__SWIG_4(ArrayBool.getCPtr(aArray), aArray), true);
   }
 
   public boolean arrayEquals(ArrayBool aArray) {
-    return opensimModelCommonJNI.ArrayBool_arrayEquals(swigCPtr, this, ArrayBool.getCPtr(aArray), aArray);
+    return opensimCommonJNI.ArrayBool_arrayEquals(swigCPtr, this, ArrayBool.getCPtr(aArray), aArray);
   }
 
   public void trim() {
-    opensimModelCommonJNI.ArrayBool_trim(swigCPtr, this);
+    opensimCommonJNI.ArrayBool_trim(swigCPtr, this);
   }
 
   public boolean setSize(int aSize) {
-    return opensimModelCommonJNI.ArrayBool_setSize(swigCPtr, this, aSize);
+    return opensimCommonJNI.ArrayBool_setSize(swigCPtr, this, aSize);
   }
 
   public int getSize() {
-    return opensimModelCommonJNI.ArrayBool_getSize(swigCPtr, this);
+    return opensimCommonJNI.ArrayBool_getSize(swigCPtr, this);
   }
 
   public int size() {
-    return opensimModelCommonJNI.ArrayBool_size(swigCPtr, this);
+    return opensimCommonJNI.ArrayBool_size(swigCPtr, this);
   }
 
   public int append(boolean aValue) {
-    return opensimModelCommonJNI.ArrayBool_append__SWIG_0(swigCPtr, this, aValue);
+    return opensimCommonJNI.ArrayBool_append__SWIG_0(swigCPtr, this, aValue);
   }
 
   public int append(ArrayBool aArray) {
-    return opensimModelCommonJNI.ArrayBool_append__SWIG_1(swigCPtr, this, ArrayBool.getCPtr(aArray), aArray);
+    return opensimCommonJNI.ArrayBool_append__SWIG_1(swigCPtr, this, ArrayBool.getCPtr(aArray), aArray);
   }
 
   public int insert(int aIndex, boolean aValue) {
-    return opensimModelCommonJNI.ArrayBool_insert(swigCPtr, this, aIndex, aValue);
+    return opensimCommonJNI.ArrayBool_insert(swigCPtr, this, aIndex, aValue);
   }
 
   public int remove(int aIndex) {
-    return opensimModelCommonJNI.ArrayBool_remove(swigCPtr, this, aIndex);
+    return opensimCommonJNI.ArrayBool_remove(swigCPtr, this, aIndex);
   }
 
   public void set(int aIndex, boolean aValue) {
-    opensimModelCommonJNI.ArrayBool_set(swigCPtr, this, aIndex, aValue);
+    opensimCommonJNI.ArrayBool_set(swigCPtr, this, aIndex, aValue);
   }
 
   public boolean get(int aIndex) {
-    return opensimModelCommonJNI.ArrayBool_get(swigCPtr, this, aIndex);
+    return opensimCommonJNI.ArrayBool_get(swigCPtr, this, aIndex);
   }
 
   public boolean getitem(int index) {
-    return opensimModelCommonJNI.ArrayBool_getitem(swigCPtr, this, index);
+    return opensimCommonJNI.ArrayBool_getitem(swigCPtr, this, index);
   }
 
   public void setitem(int index, boolean val) {
-    opensimModelCommonJNI.ArrayBool_setitem(swigCPtr, this, index, val);
+    opensimCommonJNI.ArrayBool_setitem(swigCPtr, this, index, val);
   }
 
   public boolean getLast() {
-    return opensimModelCommonJNI.ArrayBool_getLast(swigCPtr, this);
+    return opensimCommonJNI.ArrayBool_getLast(swigCPtr, this);
   }
 
   public int findIndex(boolean aValue) {
-    return opensimModelCommonJNI.ArrayBool_findIndex(swigCPtr, this, aValue);
+    return opensimCommonJNI.ArrayBool_findIndex(swigCPtr, this, aValue);
   }
 
   public int rfindIndex(boolean aValue) {
-    return opensimModelCommonJNI.ArrayBool_rfindIndex(swigCPtr, this, aValue);
+    return opensimCommonJNI.ArrayBool_rfindIndex(swigCPtr, this, aValue);
   }
 
   public int searchBinary(boolean aValue, boolean aFindFirst, int aLo, int aHi) {
-    return opensimModelCommonJNI.ArrayBool_searchBinary__SWIG_0(swigCPtr, this, aValue, aFindFirst, aLo, aHi);
+    return opensimCommonJNI.ArrayBool_searchBinary__SWIG_0(swigCPtr, this, aValue, aFindFirst, aLo, aHi);
   }
 
   public int searchBinary(boolean aValue, boolean aFindFirst, int aLo) {
-    return opensimModelCommonJNI.ArrayBool_searchBinary__SWIG_1(swigCPtr, this, aValue, aFindFirst, aLo);
+    return opensimCommonJNI.ArrayBool_searchBinary__SWIG_1(swigCPtr, this, aValue, aFindFirst, aLo);
   }
 
   public int searchBinary(boolean aValue, boolean aFindFirst) {
-    return opensimModelCommonJNI.ArrayBool_searchBinary__SWIG_2(swigCPtr, this, aValue, aFindFirst);
+    return opensimCommonJNI.ArrayBool_searchBinary__SWIG_2(swigCPtr, this, aValue, aFindFirst);
   }
 
   public int searchBinary(boolean aValue) {
-    return opensimModelCommonJNI.ArrayBool_searchBinary__SWIG_3(swigCPtr, this, aValue);
+    return opensimCommonJNI.ArrayBool_searchBinary__SWIG_3(swigCPtr, this, aValue);
   }
 
 }

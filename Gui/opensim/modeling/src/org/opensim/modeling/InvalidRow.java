@@ -12,7 +12,7 @@ public class InvalidRow extends OpenSimException {
   private transient long swigCPtr;
 
   public InvalidRow(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.InvalidRow_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.InvalidRow_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class InvalidRow extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_InvalidRow(swigCPtr);
+        opensimCommonJNI.delete_InvalidRow(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class InvalidRow extends OpenSimException {
   }
 
   public InvalidRow() {
-    this(opensimModelCommonJNI.new_InvalidRow(), true);
+    this(opensimCommonJNI.new_InvalidRow(), true);
   }
 
 }

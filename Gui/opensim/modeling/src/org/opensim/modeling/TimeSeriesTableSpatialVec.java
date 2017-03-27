@@ -13,7 +13,7 @@ public class TimeSeriesTableSpatialVec extends DataTableSpatialVec {
   private boolean swigCMemOwnDerived;
 
   protected TimeSeriesTableSpatialVec(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.TimeSeriesTableSpatialVec_SWIGSmartPtrUpcast(cPtr), true);
+    super(opensimCommonJNI.TimeSeriesTableSpatialVec_SWIGSmartPtrUpcast(cPtr), true);
     swigCMemOwnDerived = cMemoryOwn;
     swigCPtr = cPtr;
   }
@@ -30,7 +30,7 @@ public class TimeSeriesTableSpatialVec extends DataTableSpatialVec {
     if (swigCPtr != 0) {
       if (swigCMemOwnDerived) {
         swigCMemOwnDerived = false;
-        opensimModelCommonJNI.delete_TimeSeriesTableSpatialVec(swigCPtr);
+        opensimCommonJNI.delete_TimeSeriesTableSpatialVec(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -38,51 +38,51 @@ public class TimeSeriesTableSpatialVec extends DataTableSpatialVec {
   }
 
   public TimeSeriesTableSpatialVec() {
-    this(opensimModelCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_0(), true);
+    this(opensimCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_0(), true);
   }
 
   public TimeSeriesTableSpatialVec(TimeSeriesTableSpatialVec arg0) {
-    this(opensimModelCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_1(TimeSeriesTableSpatialVec.getCPtr(arg0), arg0), true);
+    this(opensimCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_1(TimeSeriesTableSpatialVec.getCPtr(arg0), arg0), true);
   }
 
   public TimeSeriesTableSpatialVec(DataTableSpatialVec datatable) {
-    this(opensimModelCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_2(DataTableSpatialVec.getCPtr(datatable), datatable), true);
+    this(opensimCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_2(DataTableSpatialVec.getCPtr(datatable), datatable), true);
   }
 
   public TimeSeriesTableSpatialVec(String filename) {
-    this(opensimModelCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_3(filename), true);
+    this(opensimCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_3(filename), true);
   }
 
   public TimeSeriesTableSpatialVec(String filename, String tablename) {
-    this(opensimModelCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_4(filename, tablename), true);
+    this(opensimCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_4(filename, tablename), true);
   }
 
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t getNearestRow(double time, boolean restrictToTimeRange) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t(opensimModelCommonJNI.TimeSeriesTableSpatialVec_getNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
+    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t(opensimCommonJNI.TimeSeriesTableSpatialVec_getNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
   }
 
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t getNearestRow(double time) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t(opensimModelCommonJNI.TimeSeriesTableSpatialVec_getNearestRow__SWIG_1(swigCPtr, this, time), true);
+    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t(opensimCommonJNI.TimeSeriesTableSpatialVec_getNearestRow__SWIG_1(swigCPtr, this, time), true);
   }
 
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t updNearestRow(double time, boolean restrictToTimeRange) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t(opensimModelCommonJNI.TimeSeriesTableSpatialVec_updNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
+    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t(opensimCommonJNI.TimeSeriesTableSpatialVec_updNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
   }
 
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t updNearestRow(double time) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t(opensimModelCommonJNI.TimeSeriesTableSpatialVec_updNearestRow__SWIG_1(swigCPtr, this, time), true);
+    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t(opensimCommonJNI.TimeSeriesTableSpatialVec_updNearestRow__SWIG_1(swigCPtr, this, time), true);
   }
 
   public SWIGTYPE_p_SimTK__RowVector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t averageRow(double beginTime, double endTime) {
-    return new SWIGTYPE_p_SimTK__RowVector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t(opensimModelCommonJNI.TimeSeriesTableSpatialVec_averageRow(swigCPtr, this, beginTime, endTime), true);
+    return new SWIGTYPE_p_SimTK__RowVector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t(opensimCommonJNI.TimeSeriesTableSpatialVec_averageRow(swigCPtr, this, beginTime, endTime), true);
   }
 
   public TimeSeriesTable flatten() {
-    return new TimeSeriesTable(opensimModelCommonJNI.TimeSeriesTableSpatialVec_flatten__SWIG_0(swigCPtr, this), true);
+    return new TimeSeriesTable(opensimCommonJNI.TimeSeriesTableSpatialVec_flatten__SWIG_0(swigCPtr, this), true);
   }
 
   public TimeSeriesTable flatten(StdVectorString suffixes) {
-    return new TimeSeriesTable(opensimModelCommonJNI.TimeSeriesTableSpatialVec_flatten__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
+    return new TimeSeriesTable(opensimCommonJNI.TimeSeriesTableSpatialVec_flatten__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
   }
 
 }

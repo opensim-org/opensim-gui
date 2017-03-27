@@ -12,7 +12,7 @@ public class ReferenceDouble extends OpenSimObject {
   private transient long swigCPtr;
 
   public ReferenceDouble(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.ReferenceDouble_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.ReferenceDouble_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ReferenceDouble extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_ReferenceDouble(swigCPtr);
+        opensimSimulationJNI.delete_ReferenceDouble(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,53 +36,53 @@ public class ReferenceDouble extends OpenSimObject {
   }
 
   public static ReferenceDouble safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.ReferenceDouble_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.ReferenceDouble_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ReferenceDouble(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.ReferenceDouble_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.ReferenceDouble_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.ReferenceDouble_getClassName();
+    return opensimSimulationJNI.ReferenceDouble_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.ReferenceDouble_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.ReferenceDouble_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ReferenceDouble(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.ReferenceDouble_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.ReferenceDouble_getConcreteClassName(swigCPtr, this);
   }
 
   public int getNumRefs() {
-    return opensimModelSimulationJNI.ReferenceDouble_getNumRefs(swigCPtr, this);
+    return opensimSimulationJNI.ReferenceDouble_getNumRefs(swigCPtr, this);
   }
 
   public Vec2 getValidTimeRange() {
-    return new Vec2(opensimModelSimulationJNI.ReferenceDouble_getValidTimeRange(swigCPtr, this), true);
+    return new Vec2(opensimSimulationJNI.ReferenceDouble_getValidTimeRange(swigCPtr, this), true);
   }
 
   public SimTKArrayString getNames() {
-    return new SimTKArrayString(opensimModelSimulationJNI.ReferenceDouble_getNames(swigCPtr, this), false);
+    return new SimTKArrayString(opensimSimulationJNI.ReferenceDouble_getNames(swigCPtr, this), false);
   }
 
   public void getValues(State s, SimTKArrayDouble values) {
-    opensimModelSimulationJNI.ReferenceDouble_getValues__SWIG_0(swigCPtr, this, State.getCPtr(s), s, SimTKArrayDouble.getCPtr(values), values);
+    opensimSimulationJNI.ReferenceDouble_getValues__SWIG_0(swigCPtr, this, State.getCPtr(s), s, SimTKArrayDouble.getCPtr(values), values);
   }
 
   public void getWeights(State s, SimTKArrayDouble weights) {
-    opensimModelSimulationJNI.ReferenceDouble_getWeights__SWIG_0(swigCPtr, this, State.getCPtr(s), s, SimTKArrayDouble.getCPtr(weights), weights);
+    opensimSimulationJNI.ReferenceDouble_getWeights__SWIG_0(swigCPtr, this, State.getCPtr(s), s, SimTKArrayDouble.getCPtr(weights), weights);
   }
 
   public SimTKArrayDouble getValues(State s) {
-    return new SimTKArrayDouble(opensimModelSimulationJNI.ReferenceDouble_getValues__SWIG_1(swigCPtr, this, State.getCPtr(s), s), true);
+    return new SimTKArrayDouble(opensimSimulationJNI.ReferenceDouble_getValues__SWIG_1(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
   public SimTKArrayDouble getWeights(State s) {
-    return new SimTKArrayDouble(opensimModelSimulationJNI.ReferenceDouble_getWeights__SWIG_1(swigCPtr, this, State.getCPtr(s), s), true);
+    return new SimTKArrayDouble(opensimSimulationJNI.ReferenceDouble_getWeights__SWIG_1(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
 }

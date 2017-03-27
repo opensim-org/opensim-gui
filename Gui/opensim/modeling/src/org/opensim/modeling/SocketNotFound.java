@@ -8,15 +8,15 @@
 
 package org.opensim.modeling;
 
-public class ConnectorNotFound extends OpenSimException {
+public class SocketNotFound extends OpenSimException {
   private transient long swigCPtr;
 
-  public ConnectorNotFound(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.ConnectorNotFound_SWIGUpcast(cPtr), cMemoryOwn);
+  public SocketNotFound(long cPtr, boolean cMemoryOwn) {
+    super(opensimCommonJNI.SocketNotFound_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(ConnectorNotFound obj) {
+  public static long getCPtr(SocketNotFound obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,15 +28,15 @@ public class ConnectorNotFound extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_ConnectorNotFound(swigCPtr);
+        opensimCommonJNI.delete_SocketNotFound(swigCPtr);
       }
       swigCPtr = 0;
     }
     super.delete();
   }
 
-  public ConnectorNotFound(String file, long line, String func, OpenSimObject obj, String connectorName) {
-    this(opensimModelCommonJNI.new_ConnectorNotFound(file, line, func, OpenSimObject.getCPtr(obj), obj, connectorName), true);
+  public SocketNotFound(String file, long line, String func, OpenSimObject obj, String socketName) {
+    this(opensimCommonJNI.new_SocketNotFound(file, line, func, OpenSimObject.getCPtr(obj), obj, socketName), true);
   }
 
 }

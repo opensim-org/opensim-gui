@@ -12,7 +12,7 @@ public class AssemblySolver extends Solver {
   private transient long swigCPtr;
 
   public AssemblySolver(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.AssemblySolver_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.AssemblySolver_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class AssemblySolver extends Solver {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_AssemblySolver(swigCPtr);
+        opensimSimulationJNI.delete_AssemblySolver(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,65 +36,65 @@ public class AssemblySolver extends Solver {
   }
 
   public static AssemblySolver safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.AssemblySolver_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.AssemblySolver_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new AssemblySolver(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.AssemblySolver_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.AssemblySolver_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.AssemblySolver_getClassName();
+    return opensimSimulationJNI.AssemblySolver_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.AssemblySolver_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.AssemblySolver_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new AssemblySolver(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.AssemblySolver_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.AssemblySolver_getConcreteClassName(swigCPtr, this);
   }
 
   public AssemblySolver(Model model, ArrayCoordinateReference coordinateReferences, double constraintWeight) {
-    this(opensimModelSimulationJNI.new_AssemblySolver__SWIG_0(Model.getCPtr(model), model, ArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences, constraintWeight), true);
+    this(opensimSimulationJNI.new_AssemblySolver__SWIG_0(Model.getCPtr(model), model, ArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences, constraintWeight), true);
   }
 
   public AssemblySolver(Model model, ArrayCoordinateReference coordinateReferences) {
-    this(opensimModelSimulationJNI.new_AssemblySolver__SWIG_1(Model.getCPtr(model), model, ArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences), true);
+    this(opensimSimulationJNI.new_AssemblySolver__SWIG_1(Model.getCPtr(model), model, ArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences), true);
   }
 
   public void setAccuracy(double accuracy) {
-    opensimModelSimulationJNI.AssemblySolver_setAccuracy(swigCPtr, this, accuracy);
+    opensimSimulationJNI.AssemblySolver_setAccuracy(swigCPtr, this, accuracy);
   }
 
   public void setConstraintWeight(double weight) {
-    opensimModelSimulationJNI.AssemblySolver_setConstraintWeight(swigCPtr, this, weight);
+    opensimSimulationJNI.AssemblySolver_setConstraintWeight(swigCPtr, this, weight);
   }
 
   public ArrayCoordinateReference getCoordinateReferences() {
-    return new ArrayCoordinateReference(opensimModelSimulationJNI.AssemblySolver_getCoordinateReferences(swigCPtr, this), false);
+    return new ArrayCoordinateReference(opensimSimulationJNI.AssemblySolver_getCoordinateReferences(swigCPtr, this), false);
   }
 
   public void updateCoordinateReference(String coordName, double value, double weight) {
-    opensimModelSimulationJNI.AssemblySolver_updateCoordinateReference__SWIG_0(swigCPtr, this, coordName, value, weight);
+    opensimSimulationJNI.AssemblySolver_updateCoordinateReference__SWIG_0(swigCPtr, this, coordName, value, weight);
   }
 
   public void updateCoordinateReference(String coordName, double value) {
-    opensimModelSimulationJNI.AssemblySolver_updateCoordinateReference__SWIG_1(swigCPtr, this, coordName, value);
+    opensimSimulationJNI.AssemblySolver_updateCoordinateReference__SWIG_1(swigCPtr, this, coordName, value);
   }
 
   public void assemble(State s) {
-    opensimModelSimulationJNI.AssemblySolver_assemble(swigCPtr, this, State.getCPtr(s), s);
+    opensimSimulationJNI.AssemblySolver_assemble(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void track(State s) {
-    opensimModelSimulationJNI.AssemblySolver_track(swigCPtr, this, State.getCPtr(s), s);
+    opensimSimulationJNI.AssemblySolver_track(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public SWIGTYPE_p_SimTK__Assembler getAssembler() {
-    return new SWIGTYPE_p_SimTK__Assembler(opensimModelSimulationJNI.AssemblySolver_getAssembler(swigCPtr, this), false);
+    return new SWIGTYPE_p_SimTK__Assembler(opensimSimulationJNI.AssemblySolver_getAssembler(swigCPtr, this), false);
   }
 
 }

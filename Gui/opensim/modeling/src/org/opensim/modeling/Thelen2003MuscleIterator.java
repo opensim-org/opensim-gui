@@ -29,956 +29,968 @@ public class Thelen2003MuscleIterator {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_Thelen2003MuscleIterator(swigCPtr);
+        opensimSimulationJNI.delete_Thelen2003MuscleIterator(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public boolean equals(Thelen2003MuscleIterator other) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_equals(swigCPtr, this, Thelen2003MuscleIterator.getCPtr(other), other);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_equals(swigCPtr, this, Thelen2003MuscleIterator.getCPtr(other), other);
   }
 
   public Thelen2003Muscle __ref__() {
-    return new Thelen2003Muscle(opensimModelSimulationJNI.Thelen2003MuscleIterator___ref__(swigCPtr, this), false);
+    return new Thelen2003Muscle(opensimSimulationJNI.Thelen2003MuscleIterator___ref__(swigCPtr, this), false);
   }
 
   public Thelen2003Muscle __deref__() {
-    long cPtr = opensimModelSimulationJNI.Thelen2003MuscleIterator___deref__(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.Thelen2003MuscleIterator___deref__(swigCPtr, this);
     return (cPtr == 0) ? null : new Thelen2003Muscle(cPtr, false);
   }
 
   public Thelen2003MuscleIterator next() {
-    return new Thelen2003MuscleIterator(opensimModelSimulationJNI.Thelen2003MuscleIterator_next(swigCPtr, this), false);
+    return new Thelen2003MuscleIterator(opensimSimulationJNI.Thelen2003MuscleIterator_next(swigCPtr, this), false);
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.Thelen2003MuscleIterator_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.Thelen2003MuscleIterator_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new Thelen2003Muscle(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getConcreteClassName(swigCPtr, this);
   }
 
   public double get_FmaxTendonStrain(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_FmaxTendonStrain__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_FmaxTendonStrain__SWIG_0(swigCPtr, this, i);
   }
 
   public double get_FmaxTendonStrain() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_FmaxTendonStrain__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_FmaxTendonStrain__SWIG_1(swigCPtr, this);
   }
 
   public double get_FmaxMuscleStrain(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_FmaxMuscleStrain__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_FmaxMuscleStrain__SWIG_0(swigCPtr, this, i);
   }
 
   public double get_FmaxMuscleStrain() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_FmaxMuscleStrain__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_FmaxMuscleStrain__SWIG_1(swigCPtr, this);
   }
 
   public double get_KshapeActive(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_KshapeActive__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_KshapeActive__SWIG_0(swigCPtr, this, i);
   }
 
   public double get_KshapeActive() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_KshapeActive__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_KshapeActive__SWIG_1(swigCPtr, this);
   }
 
   public double get_KshapePassive(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_KshapePassive__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_KshapePassive__SWIG_0(swigCPtr, this, i);
   }
 
   public double get_KshapePassive() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_KshapePassive__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_KshapePassive__SWIG_1(swigCPtr, this);
   }
 
   public double get_Af(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_Af__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_Af__SWIG_0(swigCPtr, this, i);
   }
 
   public double get_Af() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_Af__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_Af__SWIG_1(swigCPtr, this);
   }
 
   public double get_Flen(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_Flen__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_Flen__SWIG_0(swigCPtr, this, i);
   }
 
   public double get_Flen() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_Flen__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_Flen__SWIG_1(swigCPtr, this);
   }
 
   public double get_fv_linear_extrap_threshold(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_fv_linear_extrap_threshold__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_fv_linear_extrap_threshold__SWIG_0(swigCPtr, this, i);
   }
 
   public double get_fv_linear_extrap_threshold() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_fv_linear_extrap_threshold__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_fv_linear_extrap_threshold__SWIG_1(swigCPtr, this);
   }
 
   public double get_maximum_pennation_angle(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_maximum_pennation_angle__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_maximum_pennation_angle__SWIG_0(swigCPtr, this, i);
   }
 
   public double get_maximum_pennation_angle() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_maximum_pennation_angle__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_maximum_pennation_angle__SWIG_1(swigCPtr, this);
   }
 
   public double get_activation_time_constant(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_activation_time_constant__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_activation_time_constant__SWIG_0(swigCPtr, this, i);
   }
 
   public double get_activation_time_constant() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_activation_time_constant__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_activation_time_constant__SWIG_1(swigCPtr, this);
   }
 
   public double get_deactivation_time_constant(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_deactivation_time_constant__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_deactivation_time_constant__SWIG_0(swigCPtr, this, i);
   }
 
   public double get_deactivation_time_constant() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_deactivation_time_constant__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_deactivation_time_constant__SWIG_1(swigCPtr, this);
   }
 
   public double get_minimum_activation(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_minimum_activation__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_minimum_activation__SWIG_0(swigCPtr, this, i);
   }
 
   public double get_minimum_activation() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_minimum_activation__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_minimum_activation__SWIG_1(swigCPtr, this);
   }
 
   public double getActivationTimeConstant() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getActivationTimeConstant(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getActivationTimeConstant(swigCPtr, this);
   }
 
   public double getDeactivationTimeConstant() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getDeactivationTimeConstant(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getDeactivationTimeConstant(swigCPtr, this);
   }
 
   public double getMinimumActivation() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getMinimumActivation(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getMinimumActivation(swigCPtr, this);
   }
 
   public double getMaximumPennationAngle() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getMaximumPennationAngle(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getMaximumPennationAngle(swigCPtr, this);
   }
 
   public double getMinimumFiberLength() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getMinimumFiberLength(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getMinimumFiberLength(swigCPtr, this);
   }
 
   public MuscleFirstOrderActivationDynamicModel getActivationModel() {
-    return new MuscleFirstOrderActivationDynamicModel(opensimModelSimulationJNI.Thelen2003MuscleIterator_getActivationModel(swigCPtr, this), false);
+    return new MuscleFirstOrderActivationDynamicModel(opensimSimulationJNI.Thelen2003MuscleIterator_getActivationModel(swigCPtr, this), false);
   }
 
   public MuscleFixedWidthPennationModel getPennationModel() {
-    return new MuscleFixedWidthPennationModel(opensimModelSimulationJNI.Thelen2003MuscleIterator_getPennationModel(swigCPtr, this), false);
+    return new MuscleFixedWidthPennationModel(opensimSimulationJNI.Thelen2003MuscleIterator_getPennationModel(swigCPtr, this), false);
   }
 
   public double computeActuation(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_computeActuation(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_computeActuation(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void computeInitialFiberEquilibrium(State s) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_computeInitialFiberEquilibrium(swigCPtr, this, State.getCPtr(s), s);
+    opensimSimulationJNI.Thelen2003MuscleIterator_computeInitialFiberEquilibrium(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double calcActiveFiberForceAlongTendon(double activation, double fiberLength, double fiberVelocity) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_calcActiveFiberForceAlongTendon(swigCPtr, this, activation, fiberLength, fiberVelocity);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_calcActiveFiberForceAlongTendon(swigCPtr, this, activation, fiberLength, fiberVelocity);
   }
 
   public double calcInextensibleTendonActiveFiberForce(State s, double aActivation) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_calcInextensibleTendonActiveFiberForce(swigCPtr, this, State.getCPtr(s), s, aActivation);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_calcInextensibleTendonActiveFiberForce(swigCPtr, this, State.getCPtr(s), s, aActivation);
   }
 
   public double get_default_activation(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_default_activation__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_default_activation__SWIG_0(swigCPtr, this, i);
   }
 
   public double get_default_activation() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_default_activation__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_default_activation__SWIG_1(swigCPtr, this);
   }
 
   public double get_default_fiber_length(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_default_fiber_length__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_default_fiber_length__SWIG_0(swigCPtr, this, i);
   }
 
   public double get_default_fiber_length() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_default_fiber_length__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_default_fiber_length__SWIG_1(swigCPtr, this);
   }
 
   public double getDefaultActivation() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getDefaultActivation(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getDefaultActivation(swigCPtr, this);
   }
 
   public double getDefaultFiberLength() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getDefaultFiberLength(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getDefaultFiberLength(swigCPtr, this);
   }
 
   public void setActivation(State s, double activation) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_setActivation(swigCPtr, this, State.getCPtr(s), s, activation);
+    opensimSimulationJNI.Thelen2003MuscleIterator_setActivation(swigCPtr, this, State.getCPtr(s), s, activation);
   }
 
   public void setFiberLength(State s, double fiberLength) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_setFiberLength(swigCPtr, this, State.getCPtr(s), s, fiberLength);
+    opensimSimulationJNI.Thelen2003MuscleIterator_setFiberLength(swigCPtr, this, State.getCPtr(s), s, fiberLength);
   }
 
   public double getActivationRate(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getActivationRate(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getActivationRate(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double get_max_isometric_force(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_max_isometric_force__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_max_isometric_force__SWIG_0(swigCPtr, this, i);
   }
 
   public double get_max_isometric_force() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_max_isometric_force__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_max_isometric_force__SWIG_1(swigCPtr, this);
   }
 
   public double get_optimal_fiber_length(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_optimal_fiber_length__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_optimal_fiber_length__SWIG_0(swigCPtr, this, i);
   }
 
   public double get_optimal_fiber_length() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_optimal_fiber_length__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_optimal_fiber_length__SWIG_1(swigCPtr, this);
   }
 
   public double get_tendon_slack_length(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_tendon_slack_length__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_tendon_slack_length__SWIG_0(swigCPtr, this, i);
   }
 
   public double get_tendon_slack_length() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_tendon_slack_length__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_tendon_slack_length__SWIG_1(swigCPtr, this);
   }
 
   public double get_pennation_angle_at_optimal(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_pennation_angle_at_optimal__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_pennation_angle_at_optimal__SWIG_0(swigCPtr, this, i);
   }
 
   public double get_pennation_angle_at_optimal() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_pennation_angle_at_optimal__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_pennation_angle_at_optimal__SWIG_1(swigCPtr, this);
   }
 
   public double get_max_contraction_velocity(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_max_contraction_velocity__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_max_contraction_velocity__SWIG_0(swigCPtr, this, i);
   }
 
   public double get_max_contraction_velocity() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_max_contraction_velocity__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_max_contraction_velocity__SWIG_1(swigCPtr, this);
   }
 
   public boolean get_ignore_tendon_compliance(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_ignore_tendon_compliance__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_ignore_tendon_compliance__SWIG_0(swigCPtr, this, i);
   }
 
   public boolean get_ignore_tendon_compliance() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_ignore_tendon_compliance__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_ignore_tendon_compliance__SWIG_1(swigCPtr, this);
   }
 
   public boolean get_ignore_activation_dynamics(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_ignore_activation_dynamics__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_ignore_activation_dynamics__SWIG_0(swigCPtr, this, i);
   }
 
   public boolean get_ignore_activation_dynamics() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_ignore_activation_dynamics__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_ignore_activation_dynamics__SWIG_1(swigCPtr, this);
   }
 
   public boolean get_has_output_excitation() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_excitation_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_excitation_get(swigCPtr, this);
   }
 
   public boolean get_has_output_activation() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_activation_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_activation_get(swigCPtr, this);
   }
 
   public boolean get_has_output_fiber_length() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_fiber_length_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_fiber_length_get(swigCPtr, this);
   }
 
   public boolean get_has_output_pennation_angle() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_pennation_angle_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_pennation_angle_get(swigCPtr, this);
   }
 
   public boolean get_has_output_cos_pennation_angle() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_cos_pennation_angle_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_cos_pennation_angle_get(swigCPtr, this);
   }
 
   public boolean get_has_output_tendon_length() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_tendon_length_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_tendon_length_get(swigCPtr, this);
   }
 
   public boolean get_has_output_normalized_fiber_length() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_normalized_fiber_length_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_normalized_fiber_length_get(swigCPtr, this);
   }
 
   public boolean get_has_output_fiber_length_along_tendon() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_fiber_length_along_tendon_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_fiber_length_along_tendon_get(swigCPtr, this);
   }
 
   public boolean get_has_output_tendon_strain() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_tendon_strain_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_tendon_strain_get(swigCPtr, this);
   }
 
   public boolean get_has_output_passive_force_multiplier() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_passive_force_multiplier_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_passive_force_multiplier_get(swigCPtr, this);
   }
 
   public boolean get_has_output_active_force_length_multiplier() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_active_force_length_multiplier_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_active_force_length_multiplier_get(swigCPtr, this);
   }
 
   public boolean get_has_output_fiber_velocity() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_fiber_velocity_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_fiber_velocity_get(swigCPtr, this);
   }
 
   public boolean get_has_output_normalized_fiber_velocity() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_normalized_fiber_velocity_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_normalized_fiber_velocity_get(swigCPtr, this);
   }
 
   public boolean get_has_output_fiber_velocity_along_tendon() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_fiber_velocity_along_tendon_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_fiber_velocity_along_tendon_get(swigCPtr, this);
   }
 
   public boolean get_has_output_tendon_velocity() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_tendon_velocity_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_tendon_velocity_get(swigCPtr, this);
   }
 
   public boolean get_has_output_force_velocity_multiplier() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_force_velocity_multiplier_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_force_velocity_multiplier_get(swigCPtr, this);
   }
 
   public boolean get_has_output_pennation_angular_velocity() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_pennation_angular_velocity_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_pennation_angular_velocity_get(swigCPtr, this);
   }
 
   public boolean get_has_output_fiber_force() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_fiber_force_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_fiber_force_get(swigCPtr, this);
   }
 
   public boolean get_has_output_fiber_force_along_tendon() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_fiber_force_along_tendon_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_fiber_force_along_tendon_get(swigCPtr, this);
   }
 
   public boolean get_has_output_active_fiber_force() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_active_fiber_force_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_active_fiber_force_get(swigCPtr, this);
   }
 
   public boolean get_has_output_passive_fiber_force() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_passive_fiber_force_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_passive_fiber_force_get(swigCPtr, this);
   }
 
   public boolean get_has_output_active_fiber_force_along_tendon() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_active_fiber_force_along_tendon_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_active_fiber_force_along_tendon_get(swigCPtr, this);
   }
 
   public boolean get_has_output_passive_fiber_force_along_tendon() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_passive_fiber_force_along_tendon_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_passive_fiber_force_along_tendon_get(swigCPtr, this);
   }
 
   public boolean get_has_output_tendon_force() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_tendon_force_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_tendon_force_get(swigCPtr, this);
   }
 
   public boolean get_has_output_fiber_stiffness() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_fiber_stiffness_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_fiber_stiffness_get(swigCPtr, this);
   }
 
   public boolean get_has_output_fiber_stiffness_along_tendon() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_fiber_stiffness_along_tendon_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_fiber_stiffness_along_tendon_get(swigCPtr, this);
   }
 
   public boolean get_has_output_tendon_stiffness() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_tendon_stiffness_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_tendon_stiffness_get(swigCPtr, this);
   }
 
   public boolean get_has_output_muscle_stiffness() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_muscle_stiffness_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_muscle_stiffness_get(swigCPtr, this);
   }
 
   public boolean get_has_output_fiber_active_power() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_fiber_active_power_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_fiber_active_power_get(swigCPtr, this);
   }
 
   public boolean get_has_output_fiber_passive_power() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_fiber_passive_power_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_fiber_passive_power_get(swigCPtr, this);
   }
 
   public boolean get_has_output_tendon_power() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_tendon_power_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_tendon_power_get(swigCPtr, this);
   }
 
   public boolean get_has_output_muscle_power() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_muscle_power_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_muscle_power_get(swigCPtr, this);
   }
 
   public double getMaxIsometricForce() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getMaxIsometricForce(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getMaxIsometricForce(swigCPtr, this);
   }
 
   public double getOptimalFiberLength() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getOptimalFiberLength(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getOptimalFiberLength(swigCPtr, this);
   }
 
   public double getTendonSlackLength() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getTendonSlackLength(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getTendonSlackLength(swigCPtr, this);
   }
 
   public double getPennationAngleAtOptimalFiberLength() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getPennationAngleAtOptimalFiberLength(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getPennationAngleAtOptimalFiberLength(swigCPtr, this);
   }
 
   public double getMaxContractionVelocity() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getMaxContractionVelocity(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getMaxContractionVelocity(swigCPtr, this);
   }
 
   public boolean getIgnoreTendonCompliance(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getIgnoreTendonCompliance(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getIgnoreTendonCompliance(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setIgnoreTendonCompliance(State s, boolean ignore) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_setIgnoreTendonCompliance(swigCPtr, this, State.getCPtr(s), s, ignore);
+    opensimSimulationJNI.Thelen2003MuscleIterator_setIgnoreTendonCompliance(swigCPtr, this, State.getCPtr(s), s, ignore);
   }
 
   public boolean getIgnoreActivationDynamics(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getIgnoreActivationDynamics(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getIgnoreActivationDynamics(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setIgnoreActivationDynamics(State s, boolean ignore) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_setIgnoreActivationDynamics(swigCPtr, this, State.getCPtr(s), s, ignore);
+    opensimSimulationJNI.Thelen2003MuscleIterator_setIgnoreActivationDynamics(swigCPtr, this, State.getCPtr(s), s, ignore);
   }
 
   public double getActivation(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getActivation(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getActivation(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFiberLength(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getFiberLength(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getFiberLength(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getPennationAngle(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getPennationAngle(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getPennationAngle(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getCosPennationAngle(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getCosPennationAngle(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getCosPennationAngle(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getTendonLength(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getTendonLength(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getTendonLength(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getNormalizedFiberLength(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getNormalizedFiberLength(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getNormalizedFiberLength(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFiberLengthAlongTendon(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getFiberLengthAlongTendon(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getFiberLengthAlongTendon(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getTendonStrain(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getTendonStrain(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getTendonStrain(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFiberPotentialEnergy(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getFiberPotentialEnergy(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getFiberPotentialEnergy(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getTendonPotentialEnergy(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getTendonPotentialEnergy(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getTendonPotentialEnergy(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getMusclePotentialEnergy(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getMusclePotentialEnergy(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getMusclePotentialEnergy(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getPassiveForceMultiplier(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getPassiveForceMultiplier(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getPassiveForceMultiplier(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getActiveForceLengthMultiplier(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getActiveForceLengthMultiplier(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getActiveForceLengthMultiplier(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFiberVelocity(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getFiberVelocity(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getFiberVelocity(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getNormalizedFiberVelocity(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getNormalizedFiberVelocity(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getNormalizedFiberVelocity(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFiberVelocityAlongTendon(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getFiberVelocityAlongTendon(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getFiberVelocityAlongTendon(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getPennationAngularVelocity(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getPennationAngularVelocity(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getPennationAngularVelocity(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getTendonVelocity(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getTendonVelocity(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getTendonVelocity(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getForceVelocityMultiplier(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getForceVelocityMultiplier(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getForceVelocityMultiplier(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFiberForce(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getFiberForce(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getFiberForce(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFiberForceAlongTendon(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getFiberForceAlongTendon(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getFiberForceAlongTendon(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getActiveFiberForce(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getActiveFiberForce(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getActiveFiberForce(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getPassiveFiberForce(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getPassiveFiberForce(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getPassiveFiberForce(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getActiveFiberForceAlongTendon(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getActiveFiberForceAlongTendon(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getActiveFiberForceAlongTendon(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getPassiveFiberForceAlongTendon(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getPassiveFiberForceAlongTendon(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getPassiveFiberForceAlongTendon(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getTendonForce(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getTendonForce(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getTendonForce(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFiberStiffness(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getFiberStiffness(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getFiberStiffness(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFiberStiffnessAlongTendon(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getFiberStiffnessAlongTendon(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getFiberStiffnessAlongTendon(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getTendonStiffness(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getTendonStiffness(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getTendonStiffness(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getMuscleStiffness(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getMuscleStiffness(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getMuscleStiffness(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFiberActivePower(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getFiberActivePower(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getFiberActivePower(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getFiberPassivePower(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getFiberPassivePower(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getFiberPassivePower(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getTendonPower(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getTendonPower(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getTendonPower(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getMusclePower(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getMusclePower(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getMusclePower(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getStress(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getStress(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getStress(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setExcitation(State s, double excitation) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_setExcitation(swigCPtr, this, State.getCPtr(s), s, excitation);
+    opensimSimulationJNI.Thelen2003MuscleIterator_setExcitation(swigCPtr, this, State.getCPtr(s), s, excitation);
   }
 
   public double getExcitation(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getExcitation(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getExcitation(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void equilibrate(State s) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_equilibrate(swigCPtr, this, State.getCPtr(s), s);
+    opensimSimulationJNI.Thelen2003MuscleIterator_equilibrate(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public GeometryPath get_GeometryPath(int i) {
-    return new GeometryPath(opensimModelSimulationJNI.Thelen2003MuscleIterator_get_GeometryPath__SWIG_0(swigCPtr, this, i), false);
+    return new GeometryPath(opensimSimulationJNI.Thelen2003MuscleIterator_get_GeometryPath__SWIG_0(swigCPtr, this, i), false);
   }
 
   public GeometryPath get_GeometryPath() {
-    return new GeometryPath(opensimModelSimulationJNI.Thelen2003MuscleIterator_get_GeometryPath__SWIG_1(swigCPtr, this), false);
+    return new GeometryPath(opensimSimulationJNI.Thelen2003MuscleIterator_get_GeometryPath__SWIG_1(swigCPtr, this), false);
   }
 
   public double get_optimal_force(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_optimal_force__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_optimal_force__SWIG_0(swigCPtr, this, i);
   }
 
   public double get_optimal_force() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_optimal_force__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_optimal_force__SWIG_1(swigCPtr, this);
   }
 
   public boolean get_has_output_tension() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_tension_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_tension_get(swigCPtr, this);
   }
 
   public GeometryPath getGeometryPath() {
-    return new GeometryPath(opensimModelSimulationJNI.Thelen2003MuscleIterator_getGeometryPath(swigCPtr, this), false);
+    return new GeometryPath(opensimSimulationJNI.Thelen2003MuscleIterator_getGeometryPath(swigCPtr, this), false);
   }
 
   public boolean hasGeometryPath() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_hasGeometryPath(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_hasGeometryPath(swigCPtr, this);
   }
 
   public double getOptimalForce() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getOptimalForce(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getOptimalForce(swigCPtr, this);
   }
 
   public double getLength(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getLength(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getLength(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getLengtheningSpeed(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getLengtheningSpeed(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getLengtheningSpeed(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getPower(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getPower(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getPower(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double computeMomentArm(State s, Coordinate aCoord) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_computeMomentArm(swigCPtr, this, State.getCPtr(s), s, Coordinate.getCPtr(aCoord), aCoord);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_computeMomentArm(swigCPtr, this, State.getCPtr(s), s, Coordinate.getCPtr(aCoord), aCoord);
   }
 
   public double get_min_control(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_min_control__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_min_control__SWIG_0(swigCPtr, this, i);
   }
 
   public double get_min_control() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_min_control__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_min_control__SWIG_1(swigCPtr, this);
   }
 
   public double get_max_control(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_max_control__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_max_control__SWIG_0(swigCPtr, this, i);
   }
 
   public double get_max_control() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_max_control__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_max_control__SWIG_1(swigCPtr, this);
   }
 
   public boolean get_has_output_actuation() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_actuation_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_actuation_get(swigCPtr, this);
   }
 
   public boolean get_has_output_speed() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_speed_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_speed_get(swigCPtr, this);
   }
 
   public double getControl(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getControl(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getControl(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public int numControls() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_numControls(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_numControls(swigCPtr, this);
   }
 
   public void setActuation(State s, double aActuation) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_setActuation(swigCPtr, this, State.getCPtr(s), s, aActuation);
+    opensimSimulationJNI.Thelen2003MuscleIterator_setActuation(swigCPtr, this, State.getCPtr(s), s, aActuation);
   }
 
   public double getActuation(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getActuation(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getActuation(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setSpeed(State s, double aspeed) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_setSpeed(swigCPtr, this, State.getCPtr(s), s, aspeed);
+    opensimSimulationJNI.Thelen2003MuscleIterator_setSpeed(swigCPtr, this, State.getCPtr(s), s, aspeed);
   }
 
   public double getSpeed(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getSpeed(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getSpeed(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getMinControl() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getMinControl(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getMinControl(swigCPtr, this);
   }
 
   public double getMaxControl() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getMaxControl(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getMaxControl(swigCPtr, this);
   }
 
   public void overrideActuation(State s, boolean flag) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_overrideActuation(swigCPtr, this, State.getCPtr(s), s, flag);
+    opensimSimulationJNI.Thelen2003MuscleIterator_overrideActuation(swigCPtr, this, State.getCPtr(s), s, flag);
   }
 
   public boolean isActuationOverridden(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_isActuationOverridden(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_isActuationOverridden(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setOverrideActuation(State s, double value) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_setOverrideActuation(swigCPtr, this, State.getCPtr(s), s, value);
+    opensimSimulationJNI.Thelen2003MuscleIterator_setOverrideActuation(swigCPtr, this, State.getCPtr(s), s, value);
   }
 
   public double getOverrideActuation(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getOverrideActuation(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getOverrideActuation(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void getControls(Vector modelControls, Vector actuatorControls) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_getControls(swigCPtr, this, Vector.getCPtr(modelControls), modelControls, Vector.getCPtr(actuatorControls), actuatorControls);
+    opensimSimulationJNI.Thelen2003MuscleIterator_getControls(swigCPtr, this, Vector.getCPtr(modelControls), modelControls, Vector.getCPtr(actuatorControls), actuatorControls);
   }
 
   public void setControls(Vector actuatorControls, Vector modelControls) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_setControls(swigCPtr, this, Vector.getCPtr(actuatorControls), actuatorControls, Vector.getCPtr(modelControls), modelControls);
+    opensimSimulationJNI.Thelen2003MuscleIterator_setControls(swigCPtr, this, Vector.getCPtr(actuatorControls), actuatorControls, Vector.getCPtr(modelControls), modelControls);
   }
 
   public void addInControls(Vector actuatorControls, Vector modelControls) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_addInControls(swigCPtr, this, Vector.getCPtr(actuatorControls), actuatorControls, Vector.getCPtr(modelControls), modelControls);
+    opensimSimulationJNI.Thelen2003MuscleIterator_addInControls(swigCPtr, this, Vector.getCPtr(actuatorControls), actuatorControls, Vector.getCPtr(modelControls), modelControls);
   }
 
   public void computeEquilibrium(State s) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_computeEquilibrium(swigCPtr, this, State.getCPtr(s), s);
+    opensimSimulationJNI.Thelen2003MuscleIterator_computeEquilibrium(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public boolean get_appliesForce(int i) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_appliesForce__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_appliesForce__SWIG_0(swigCPtr, this, i);
   }
 
   public boolean get_appliesForce() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_get_appliesForce__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_get_appliesForce__SWIG_1(swigCPtr, this);
   }
 
   public boolean get_has_output_potential_energy() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator__has_output_potential_energy_get(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_potential_energy_get(swigCPtr, this);
   }
 
   public boolean shouldBeParallelized() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_shouldBeParallelized(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_shouldBeParallelized(swigCPtr, this);
   }
 
   public boolean appliesForce(State s) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_appliesForce(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_appliesForce(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setAppliesForce(State s, boolean applyForce) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_setAppliesForce(swigCPtr, this, State.getCPtr(s), s, applyForce);
+    opensimSimulationJNI.Thelen2003MuscleIterator_setAppliesForce(swigCPtr, this, State.getCPtr(s), s, applyForce);
   }
 
   public Model getModel() {
-    return new Model(opensimModelSimulationJNI.Thelen2003MuscleIterator_getModel(swigCPtr, this), false);
+    return new Model(opensimSimulationJNI.Thelen2003MuscleIterator_getModel(swigCPtr, this), false);
   }
 
   public void addToSystem(SWIGTYPE_p_SimTK__MultibodySystem system) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_addToSystem(swigCPtr, this, SWIGTYPE_p_SimTK__MultibodySystem.getCPtr(system));
+    opensimSimulationJNI.Thelen2003MuscleIterator_addToSystem(swigCPtr, this, SWIGTYPE_p_SimTK__MultibodySystem.getCPtr(system));
   }
 
   public void initStateFromProperties(State state) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_initStateFromProperties(swigCPtr, this, State.getCPtr(state), state);
+    opensimSimulationJNI.Thelen2003MuscleIterator_initStateFromProperties(swigCPtr, this, State.getCPtr(state), state);
   }
 
   public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
+    opensimSimulationJNI.Thelen2003MuscleIterator_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
   }
 
   public SWIGTYPE_p_SimTK__MultibodySystem getSystem() {
-    return new SWIGTYPE_p_SimTK__MultibodySystem(opensimModelSimulationJNI.Thelen2003MuscleIterator_getSystem(swigCPtr, this), false);
+    return new SWIGTYPE_p_SimTK__MultibodySystem(opensimSimulationJNI.Thelen2003MuscleIterator_getSystem(swigCPtr, this), false);
   }
 
   public boolean hasSystem() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_hasSystem(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_hasSystem(swigCPtr, this);
   }
 
   public String getAbsolutePathName() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getAbsolutePathName(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getAbsolutePathName(swigCPtr, this);
   }
 
   public String getRelativePathName(Component wrt) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getRelativePathName(swigCPtr, this, Component.getCPtr(wrt), wrt);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getRelativePathName(swigCPtr, this, Component.getCPtr(wrt), wrt);
   }
 
   public boolean hasComponent(String pathname) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_hasComponent(swigCPtr, this, pathname);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_hasComponent(swigCPtr, this, pathname);
   }
 
   public Component getComponent(String pathname) {
-    return new Component(opensimModelSimulationJNI.Thelen2003MuscleIterator_getComponent(swigCPtr, this, pathname), false);
+    return new Component(opensimSimulationJNI.Thelen2003MuscleIterator_getComponent(swigCPtr, this, pathname), false);
   }
 
   public long printComponentsMatching(String substring) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_printComponentsMatching(swigCPtr, this, substring);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_printComponentsMatching(swigCPtr, this, substring);
   }
 
   public int getNumStateVariables() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getNumStateVariables(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getNumStateVariables(swigCPtr, this);
   }
 
   public ArrayStr getStateVariableNames() {
-    return new ArrayStr(opensimModelSimulationJNI.Thelen2003MuscleIterator_getStateVariableNames(swigCPtr, this), true);
+    return new ArrayStr(opensimSimulationJNI.Thelen2003MuscleIterator_getStateVariableNames(swigCPtr, this), true);
   }
 
-  public int getNumConnectors() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getNumConnectors(swigCPtr, this);
+  public int getNumSockets() {
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getNumSockets(swigCPtr, this);
   }
 
   public OpenSimObject getConnectee(String name) {
-    return new OpenSimObject(opensimModelSimulationJNI.Thelen2003MuscleIterator_getConnectee(swigCPtr, this, name), false);
+    return new OpenSimObject(opensimSimulationJNI.Thelen2003MuscleIterator_getConnectee(swigCPtr, this, name), false);
   }
 
-  public AbstractConnector getConnector(String name) {
-    return new AbstractConnector(opensimModelSimulationJNI.Thelen2003MuscleIterator_getConnector(swigCPtr, this, name), false);
+  public AbstractSocket getSocket(String name) {
+    return new AbstractSocket(opensimSimulationJNI.Thelen2003MuscleIterator_getSocket(swigCPtr, this, name), false);
   }
 
   public int getNumInputs() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getNumInputs(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getNumInputs(swigCPtr, this);
   }
 
   public int getNumOutputs() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getNumOutputs(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getNumOutputs(swigCPtr, this);
   }
 
   public StdVectorString getInputNames() {
-    return new StdVectorString(opensimModelSimulationJNI.Thelen2003MuscleIterator_getInputNames(swigCPtr, this), true);
+    return new StdVectorString(opensimSimulationJNI.Thelen2003MuscleIterator_getInputNames(swigCPtr, this), true);
   }
 
   public StdVectorString getOutputNames() {
-    return new StdVectorString(opensimModelSimulationJNI.Thelen2003MuscleIterator_getOutputNames(swigCPtr, this), true);
+    return new StdVectorString(opensimSimulationJNI.Thelen2003MuscleIterator_getOutputNames(swigCPtr, this), true);
   }
 
   public AbstractInput getInput(String name) {
-    return new AbstractInput(opensimModelSimulationJNI.Thelen2003MuscleIterator_getInput(swigCPtr, this, name), false);
+    return new AbstractInput(opensimSimulationJNI.Thelen2003MuscleIterator_getInput(swigCPtr, this, name), false);
   }
 
   public AbstractOutput getOutput(String name) {
-    return new AbstractOutput(opensimModelSimulationJNI.Thelen2003MuscleIterator_getOutput(swigCPtr, this, name), false);
+    return new AbstractOutput(opensimSimulationJNI.Thelen2003MuscleIterator_getOutput(swigCPtr, this, name), false);
   }
 
   public int getModelingOption(State state, String name) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getModelingOption(swigCPtr, this, State.getCPtr(state), state, name);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getModelingOption(swigCPtr, this, State.getCPtr(state), state, name);
   }
 
   public void setModelingOption(State state, String name, int flag) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_setModelingOption(swigCPtr, this, State.getCPtr(state), state, name, flag);
+    opensimSimulationJNI.Thelen2003MuscleIterator_setModelingOption(swigCPtr, this, State.getCPtr(state), state, name, flag);
   }
 
   public double getStateVariableValue(State state, String name) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getStateVariableValue(swigCPtr, this, State.getCPtr(state), state, name);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getStateVariableValue(swigCPtr, this, State.getCPtr(state), state, name);
   }
 
   public void setStateVariableValue(State state, String name, double value) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_setStateVariableValue(swigCPtr, this, State.getCPtr(state), state, name, value);
+    opensimSimulationJNI.Thelen2003MuscleIterator_setStateVariableValue(swigCPtr, this, State.getCPtr(state), state, name, value);
   }
 
   public Vector getStateVariableValues(State state) {
-    return new Vector(opensimModelSimulationJNI.Thelen2003MuscleIterator_getStateVariableValues(swigCPtr, this, State.getCPtr(state), state), true);
+    return new Vector(opensimSimulationJNI.Thelen2003MuscleIterator_getStateVariableValues(swigCPtr, this, State.getCPtr(state), state), true);
+  }
+
+  public void setStateVariableValues(State state, Vector values) {
+    opensimSimulationJNI.Thelen2003MuscleIterator_setStateVariableValues(swigCPtr, this, State.getCPtr(state), state, Vector.getCPtr(values), values);
   }
 
   public double getStateVariableDerivativeValue(State state, String name) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getStateVariableDerivativeValue(swigCPtr, this, State.getCPtr(state), state, name);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getStateVariableDerivativeValue(swigCPtr, this, State.getCPtr(state), state, name);
   }
 
   public double getDiscreteVariableValue(State state, String name) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getDiscreteVariableValue(swigCPtr, this, State.getCPtr(state), state, name);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getDiscreteVariableValue(swigCPtr, this, State.getCPtr(state), state, name);
   }
 
   public void setDiscreteVariableValue(State state, String name, double value) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_setDiscreteVariableValue(swigCPtr, this, State.getCPtr(state), state, name, value);
+    opensimSimulationJNI.Thelen2003MuscleIterator_setDiscreteVariableValue(swigCPtr, this, State.getCPtr(state), state, name, value);
   }
 
   public void markCacheVariableValid(State state, String name) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_markCacheVariableValid(swigCPtr, this, State.getCPtr(state), state, name);
+    opensimSimulationJNI.Thelen2003MuscleIterator_markCacheVariableValid(swigCPtr, this, State.getCPtr(state), state, name);
   }
 
   public void markCacheVariableInvalid(State state, String name) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_markCacheVariableInvalid(swigCPtr, this, State.getCPtr(state), state, name);
+    opensimSimulationJNI.Thelen2003MuscleIterator_markCacheVariableInvalid(swigCPtr, this, State.getCPtr(state), state, name);
   }
 
   public boolean isCacheVariableValid(State state, String name) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_isCacheVariableValid(swigCPtr, this, State.getCPtr(state), state, name);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_isCacheVariableValid(swigCPtr, this, State.getCPtr(state), state, name);
   }
 
-  public void dumpSubcomponents(int depth) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_dumpSubcomponents__SWIG_0(swigCPtr, this, depth);
+  public void printSubcomponentInfo() {
+    opensimSimulationJNI.Thelen2003MuscleIterator_printSubcomponentInfo(swigCPtr, this);
   }
 
-  public void dumpSubcomponents() {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_dumpSubcomponents__SWIG_1(swigCPtr, this);
+  public void printSocketInfo() {
+    opensimSimulationJNI.Thelen2003MuscleIterator_printSocketInfo(swigCPtr, this);
   }
 
-  public void dumpConnections() {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_dumpConnections(swigCPtr, this);
+  public void printInputInfo() {
+    opensimSimulationJNI.Thelen2003MuscleIterator_printInputInfo(swigCPtr, this);
   }
 
-  public Component getParent() {
-    return new Component(opensimModelSimulationJNI.Thelen2003MuscleIterator_getParent(swigCPtr, this), false);
+  public void printOutputInfo(boolean includeDescendants) {
+    opensimSimulationJNI.Thelen2003MuscleIterator_printOutputInfo__SWIG_0(swigCPtr, this, includeDescendants);
   }
 
-  public boolean hasParent() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_hasParent(swigCPtr, this);
+  public void printOutputInfo() {
+    opensimSimulationJNI.Thelen2003MuscleIterator_printOutputInfo__SWIG_1(swigCPtr, this);
+  }
+
+  public Component getOwner() {
+    return new Component(opensimSimulationJNI.Thelen2003MuscleIterator_getOwner(swigCPtr, this), false);
+  }
+
+  public boolean hasOwner() {
+    return opensimSimulationJNI.Thelen2003MuscleIterator_hasOwner(swigCPtr, this);
   }
 
   public ComponentsList getComponentsList() {
-    return new ComponentsList(opensimModelSimulationJNI.Thelen2003MuscleIterator_getComponentsList(swigCPtr, this), true);
+    return new ComponentsList(opensimSimulationJNI.Thelen2003MuscleIterator_getComponentsList(swigCPtr, this), true);
   }
 
   public boolean isEqualTo(OpenSimObject aObject) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_isEqualTo(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_isEqualTo(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public String getName() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getName(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getName(swigCPtr, this);
   }
 
   public String getDescription() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getDescription(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getDescription(swigCPtr, this);
   }
 
   public String getAuthors() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getAuthors(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getAuthors(swigCPtr, this);
   }
 
   public String getReferences() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getReferences(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getReferences(swigCPtr, this);
   }
 
   public int getNumProperties() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getNumProperties(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getNumProperties(swigCPtr, this);
   }
 
   public AbstractProperty getPropertyByIndex(int propertyIndex) {
-    return new AbstractProperty(opensimModelSimulationJNI.Thelen2003MuscleIterator_getPropertyByIndex(swigCPtr, this, propertyIndex), false);
+    return new AbstractProperty(opensimSimulationJNI.Thelen2003MuscleIterator_getPropertyByIndex(swigCPtr, this, propertyIndex), false);
   }
 
   public boolean hasProperty(String name) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_hasProperty(swigCPtr, this, name);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_hasProperty(swigCPtr, this, name);
   }
 
   public AbstractProperty getPropertyByName(String name) {
-    return new AbstractProperty(opensimModelSimulationJNI.Thelen2003MuscleIterator_getPropertyByName(swigCPtr, this, name), false);
+    return new AbstractProperty(opensimSimulationJNI.Thelen2003MuscleIterator_getPropertyByName(swigCPtr, this, name), false);
   }
 
   public boolean isObjectUpToDateWithProperties() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_isObjectUpToDateWithProperties(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_isObjectUpToDateWithProperties(swigCPtr, this);
   }
 
   public void updateXMLNode(SWIGTYPE_p_SimTK__Xml__Element parent) {
-    opensimModelSimulationJNI.Thelen2003MuscleIterator_updateXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(parent));
+    opensimSimulationJNI.Thelen2003MuscleIterator_updateXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(parent));
   }
 
   public boolean getInlined() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getInlined(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getInlined(swigCPtr, this);
   }
 
   public String getDocumentFileName() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_getDocumentFileName(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getDocumentFileName(swigCPtr, this);
   }
 
   public boolean print(String fileName) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_print(swigCPtr, this, fileName);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_print(swigCPtr, this, fileName);
   }
 
   public boolean isA(String type) {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_isA(swigCPtr, this, type);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_isA(swigCPtr, this, type);
   }
 
   public String toString() {
-    return opensimModelSimulationJNI.Thelen2003MuscleIterator_toString(swigCPtr, this);
+    return opensimSimulationJNI.Thelen2003MuscleIterator_toString(swigCPtr, this);
   }
 
 }

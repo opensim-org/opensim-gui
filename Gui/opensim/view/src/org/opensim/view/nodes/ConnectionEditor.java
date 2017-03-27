@@ -54,7 +54,7 @@ import org.opensim.view.pub.ViewDB;
 public class ConnectionEditor {
 
     OpenSimObject obj; // Object being edited or selected in navigator window
-    AbstractConnector connector; // Property being edited
+    AbstractSocket connector; // Property being edited
     OpenSimContext context = null; // Context object needed to recreate the system as needed, cached for speed
     Model model; // model to which obj belongs
     OpenSimObjectNode node;
@@ -62,7 +62,7 @@ public class ConnectionEditor {
     Model clonedModel;
     State clonedState;
     
-    public ConnectionEditor(AbstractConnector conn, OpenSimObjectNode ownerNode) {
+    public ConnectionEditor(AbstractSocket conn, OpenSimObjectNode ownerNode) {
         this.connector = conn;
         this.model = ownerNode.getModelForNode();
         this.context = OpenSimDB.getInstance().getContext(model);

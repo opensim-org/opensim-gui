@@ -29,113 +29,113 @@ public class ArrayConstObjPtr {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_ArrayConstObjPtr(swigCPtr);
+        opensimCommonJNI.delete_ArrayConstObjPtr(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public ArrayConstObjPtr(OpenSimObject aDefaultValue, int aSize, int aCapacity) {
-    this(opensimModelCommonJNI.new_ArrayConstObjPtr__SWIG_0(OpenSimObject.getCPtr(aDefaultValue), aDefaultValue, aSize, aCapacity), true);
+    this(opensimCommonJNI.new_ArrayConstObjPtr__SWIG_0(OpenSimObject.getCPtr(aDefaultValue), aDefaultValue, aSize, aCapacity), true);
   }
 
   public ArrayConstObjPtr(OpenSimObject aDefaultValue, int aSize) {
-    this(opensimModelCommonJNI.new_ArrayConstObjPtr__SWIG_1(OpenSimObject.getCPtr(aDefaultValue), aDefaultValue, aSize), true);
+    this(opensimCommonJNI.new_ArrayConstObjPtr__SWIG_1(OpenSimObject.getCPtr(aDefaultValue), aDefaultValue, aSize), true);
   }
 
   public ArrayConstObjPtr(OpenSimObject aDefaultValue) {
-    this(opensimModelCommonJNI.new_ArrayConstObjPtr__SWIG_2(OpenSimObject.getCPtr(aDefaultValue), aDefaultValue), true);
+    this(opensimCommonJNI.new_ArrayConstObjPtr__SWIG_2(OpenSimObject.getCPtr(aDefaultValue), aDefaultValue), true);
   }
 
   public ArrayConstObjPtr() {
-    this(opensimModelCommonJNI.new_ArrayConstObjPtr__SWIG_3(), true);
+    this(opensimCommonJNI.new_ArrayConstObjPtr__SWIG_3(), true);
   }
 
   public ArrayConstObjPtr(ArrayConstObjPtr aArray) {
-    this(opensimModelCommonJNI.new_ArrayConstObjPtr__SWIG_4(ArrayConstObjPtr.getCPtr(aArray), aArray), true);
+    this(opensimCommonJNI.new_ArrayConstObjPtr__SWIG_4(ArrayConstObjPtr.getCPtr(aArray), aArray), true);
   }
 
   public boolean arrayEquals(ArrayConstObjPtr aArray) {
-    return opensimModelCommonJNI.ArrayConstObjPtr_arrayEquals(swigCPtr, this, ArrayConstObjPtr.getCPtr(aArray), aArray);
+    return opensimCommonJNI.ArrayConstObjPtr_arrayEquals(swigCPtr, this, ArrayConstObjPtr.getCPtr(aArray), aArray);
   }
 
   public void trim() {
-    opensimModelCommonJNI.ArrayConstObjPtr_trim(swigCPtr, this);
+    opensimCommonJNI.ArrayConstObjPtr_trim(swigCPtr, this);
   }
 
   public boolean setSize(int aSize) {
-    return opensimModelCommonJNI.ArrayConstObjPtr_setSize(swigCPtr, this, aSize);
+    return opensimCommonJNI.ArrayConstObjPtr_setSize(swigCPtr, this, aSize);
   }
 
   public int getSize() {
-    return opensimModelCommonJNI.ArrayConstObjPtr_getSize(swigCPtr, this);
+    return opensimCommonJNI.ArrayConstObjPtr_getSize(swigCPtr, this);
   }
 
   public int size() {
-    return opensimModelCommonJNI.ArrayConstObjPtr_size(swigCPtr, this);
+    return opensimCommonJNI.ArrayConstObjPtr_size(swigCPtr, this);
   }
 
   public int append(OpenSimObject aValue) {
-    return opensimModelCommonJNI.ArrayConstObjPtr_append__SWIG_0(swigCPtr, this, OpenSimObject.getCPtr(aValue), aValue);
+    return opensimCommonJNI.ArrayConstObjPtr_append__SWIG_0(swigCPtr, this, OpenSimObject.getCPtr(aValue), aValue);
   }
 
   public int append(ArrayConstObjPtr aArray) {
-    return opensimModelCommonJNI.ArrayConstObjPtr_append__SWIG_1(swigCPtr, this, ArrayConstObjPtr.getCPtr(aArray), aArray);
+    return opensimCommonJNI.ArrayConstObjPtr_append__SWIG_1(swigCPtr, this, ArrayConstObjPtr.getCPtr(aArray), aArray);
   }
 
   public int insert(int aIndex, OpenSimObject aValue) {
-    return opensimModelCommonJNI.ArrayConstObjPtr_insert(swigCPtr, this, aIndex, OpenSimObject.getCPtr(aValue), aValue);
+    return opensimCommonJNI.ArrayConstObjPtr_insert(swigCPtr, this, aIndex, OpenSimObject.getCPtr(aValue), aValue);
   }
 
   public int remove(int aIndex) {
-    return opensimModelCommonJNI.ArrayConstObjPtr_remove(swigCPtr, this, aIndex);
+    return opensimCommonJNI.ArrayConstObjPtr_remove(swigCPtr, this, aIndex);
   }
 
   public void set(int aIndex, OpenSimObject aValue) {
-    opensimModelCommonJNI.ArrayConstObjPtr_set(swigCPtr, this, aIndex, OpenSimObject.getCPtr(aValue), aValue);
+    opensimCommonJNI.ArrayConstObjPtr_set(swigCPtr, this, aIndex, OpenSimObject.getCPtr(aValue), aValue);
   }
 
   public OpenSimObject get(int aIndex) {
-    long cPtr = opensimModelCommonJNI.ArrayConstObjPtr_get(swigCPtr, this, aIndex);
+    long cPtr = opensimCommonJNI.ArrayConstObjPtr_get(swigCPtr, this, aIndex);
     return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public OpenSimObject getitem(int index) {
-    long cPtr = opensimModelCommonJNI.ArrayConstObjPtr_getitem(swigCPtr, this, index);
+    long cPtr = opensimCommonJNI.ArrayConstObjPtr_getitem(swigCPtr, this, index);
     return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public void setitem(int index, OpenSimObject val) {
-    opensimModelCommonJNI.ArrayConstObjPtr_setitem(swigCPtr, this, index, OpenSimObject.getCPtr(val), val);
+    opensimCommonJNI.ArrayConstObjPtr_setitem(swigCPtr, this, index, OpenSimObject.getCPtr(val), val);
   }
 
   public OpenSimObject getLast() {
-    long cPtr = opensimModelCommonJNI.ArrayConstObjPtr_getLast(swigCPtr, this);
+    long cPtr = opensimCommonJNI.ArrayConstObjPtr_getLast(swigCPtr, this);
     return (cPtr == 0) ? null : new OpenSimObject(cPtr, false);
   }
 
   public int findIndex(OpenSimObject aValue) {
-    return opensimModelCommonJNI.ArrayConstObjPtr_findIndex(swigCPtr, this, OpenSimObject.getCPtr(aValue), aValue);
+    return opensimCommonJNI.ArrayConstObjPtr_findIndex(swigCPtr, this, OpenSimObject.getCPtr(aValue), aValue);
   }
 
   public int rfindIndex(OpenSimObject aValue) {
-    return opensimModelCommonJNI.ArrayConstObjPtr_rfindIndex(swigCPtr, this, OpenSimObject.getCPtr(aValue), aValue);
+    return opensimCommonJNI.ArrayConstObjPtr_rfindIndex(swigCPtr, this, OpenSimObject.getCPtr(aValue), aValue);
   }
 
   public int searchBinary(OpenSimObject aValue, boolean aFindFirst, int aLo, int aHi) {
-    return opensimModelCommonJNI.ArrayConstObjPtr_searchBinary__SWIG_0(swigCPtr, this, OpenSimObject.getCPtr(aValue), aValue, aFindFirst, aLo, aHi);
+    return opensimCommonJNI.ArrayConstObjPtr_searchBinary__SWIG_0(swigCPtr, this, OpenSimObject.getCPtr(aValue), aValue, aFindFirst, aLo, aHi);
   }
 
   public int searchBinary(OpenSimObject aValue, boolean aFindFirst, int aLo) {
-    return opensimModelCommonJNI.ArrayConstObjPtr_searchBinary__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aValue), aValue, aFindFirst, aLo);
+    return opensimCommonJNI.ArrayConstObjPtr_searchBinary__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aValue), aValue, aFindFirst, aLo);
   }
 
   public int searchBinary(OpenSimObject aValue, boolean aFindFirst) {
-    return opensimModelCommonJNI.ArrayConstObjPtr_searchBinary__SWIG_2(swigCPtr, this, OpenSimObject.getCPtr(aValue), aValue, aFindFirst);
+    return opensimCommonJNI.ArrayConstObjPtr_searchBinary__SWIG_2(swigCPtr, this, OpenSimObject.getCPtr(aValue), aValue, aFindFirst);
   }
 
   public int searchBinary(OpenSimObject aValue) {
-    return opensimModelCommonJNI.ArrayConstObjPtr_searchBinary__SWIG_3(swigCPtr, this, OpenSimObject.getCPtr(aValue), aValue);
+    return opensimCommonJNI.ArrayConstObjPtr_searchBinary__SWIG_3(swigCPtr, this, OpenSimObject.getCPtr(aValue), aValue);
   }
 
 }

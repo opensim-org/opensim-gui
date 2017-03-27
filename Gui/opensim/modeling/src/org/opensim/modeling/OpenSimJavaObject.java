@@ -12,7 +12,7 @@ public class OpenSimJavaObject extends OpenSimObject {
   private transient long swigCPtr;
 
   public OpenSimJavaObject(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.OpenSimJavaObject_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.OpenSimJavaObject_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class OpenSimJavaObject extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_OpenSimJavaObject(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_OpenSimJavaObject(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,29 +36,29 @@ public class OpenSimJavaObject extends OpenSimObject {
   }
 
   public static OpenSimJavaObject safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.OpenSimJavaObject_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.OpenSimJavaObject_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new OpenSimJavaObject(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.OpenSimJavaObject_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.OpenSimJavaObject_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.OpenSimJavaObject_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.OpenSimJavaObject_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.OpenSimJavaObject_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.OpenSimJavaObject_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new OpenSimJavaObject(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.OpenSimJavaObject_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.OpenSimJavaObject_getConcreteClassName(swigCPtr, this);
   }
 
   public OpenSimJavaObject() {
-    this(opensimModelJNI.new_OpenSimJavaObject(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_OpenSimJavaObject(), true);
   }
 
 }

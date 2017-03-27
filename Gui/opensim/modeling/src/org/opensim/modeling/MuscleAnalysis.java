@@ -12,7 +12,7 @@ public class MuscleAnalysis extends Analysis {
   private transient long swigCPtr;
 
   public MuscleAnalysis(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelJNI.MuscleAnalysis_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class MuscleAnalysis extends Analysis {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelJNI.delete_MuscleAnalysis(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_MuscleAnalysis(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,187 +36,187 @@ public class MuscleAnalysis extends Analysis {
   }
 
   public static MuscleAnalysis safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelJNI.MuscleAnalysis_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new MuscleAnalysis(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelJNI.MuscleAnalysis_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelJNI.MuscleAnalysis_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelJNI.MuscleAnalysis_clone(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new MuscleAnalysis(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelJNI.MuscleAnalysis_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_getConcreteClassName(swigCPtr, this);
   }
 
   public MuscleAnalysis(Model aModel) {
-    this(opensimModelJNI.new_MuscleAnalysis__SWIG_0(Model.getCPtr(aModel), aModel), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_MuscleAnalysis__SWIG_0(Model.getCPtr(aModel), aModel), true);
   }
 
   public MuscleAnalysis() {
-    this(opensimModelJNI.new_MuscleAnalysis__SWIG_1(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_MuscleAnalysis__SWIG_1(), true);
   }
 
   public MuscleAnalysis(String aFileName) {
-    this(opensimModelJNI.new_MuscleAnalysis__SWIG_2(aFileName), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_MuscleAnalysis__SWIG_2(aFileName), true);
   }
 
   public MuscleAnalysis(MuscleAnalysis aObject) {
-    this(opensimModelJNI.new_MuscleAnalysis__SWIG_3(MuscleAnalysis.getCPtr(aObject), aObject), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_MuscleAnalysis__SWIG_3(MuscleAnalysis.getCPtr(aObject), aObject), true);
   }
 
   public void setModel(Model aModel) {
-    opensimModelJNI.MuscleAnalysis_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
+    opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
   public void setStorageCapacityIncrements(int aIncrement) {
-    opensimModelJNI.MuscleAnalysis_setStorageCapacityIncrements(swigCPtr, this, aIncrement);
+    opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_setStorageCapacityIncrements(swigCPtr, this, aIncrement);
   }
 
   public Storage getPennationAngleStorage() {
-    long cPtr = opensimModelJNI.MuscleAnalysis_getPennationAngleStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_getPennationAngleStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public Storage getMuscleTendonLengthStorage() {
-    long cPtr = opensimModelJNI.MuscleAnalysis_getMuscleTendonLengthStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_getMuscleTendonLengthStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public Storage getFiberLengthStorage() {
-    long cPtr = opensimModelJNI.MuscleAnalysis_getFiberLengthStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_getFiberLengthStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public Storage getNormalizedFiberLengthStorage() {
-    long cPtr = opensimModelJNI.MuscleAnalysis_getNormalizedFiberLengthStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_getNormalizedFiberLengthStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public Storage getTendonLengthStorage() {
-    long cPtr = opensimModelJNI.MuscleAnalysis_getTendonLengthStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_getTendonLengthStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public Storage getFiberVelocityStorage() {
-    long cPtr = opensimModelJNI.MuscleAnalysis_getFiberVelocityStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_getFiberVelocityStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public Storage getNormalizedFiberVelocityStorage() {
-    long cPtr = opensimModelJNI.MuscleAnalysis_getNormalizedFiberVelocityStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_getNormalizedFiberVelocityStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public Storage getPennationAngularVelocityStorage() {
-    long cPtr = opensimModelJNI.MuscleAnalysis_getPennationAngularVelocityStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_getPennationAngularVelocityStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public Storage getForceStorage() {
-    long cPtr = opensimModelJNI.MuscleAnalysis_getForceStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_getForceStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public Storage getFiberForceStorage() {
-    long cPtr = opensimModelJNI.MuscleAnalysis_getFiberForceStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_getFiberForceStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public Storage getActiveFiberForceStorage() {
-    long cPtr = opensimModelJNI.MuscleAnalysis_getActiveFiberForceStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_getActiveFiberForceStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public Storage getPassiveFiberForceStorage() {
-    long cPtr = opensimModelJNI.MuscleAnalysis_getPassiveFiberForceStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_getPassiveFiberForceStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public Storage getActiveFiberForceAlongTendonStorage() {
-    long cPtr = opensimModelJNI.MuscleAnalysis_getActiveFiberForceAlongTendonStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_getActiveFiberForceAlongTendonStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public Storage getPassiveFiberForceAlongTendonStorage() {
-    long cPtr = opensimModelJNI.MuscleAnalysis_getPassiveFiberForceAlongTendonStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_getPassiveFiberForceAlongTendonStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public Storage getFiberActivePowerStorage() {
-    long cPtr = opensimModelJNI.MuscleAnalysis_getFiberActivePowerStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_getFiberActivePowerStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public Storage getFiberPassivePowerStorage() {
-    long cPtr = opensimModelJNI.MuscleAnalysis_getFiberPassivePowerStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_getFiberPassivePowerStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public Storage getTendonPowerStorage() {
-    long cPtr = opensimModelJNI.MuscleAnalysis_getTendonPowerStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_getTendonPowerStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public Storage getMusclePowerStorage() {
-    long cPtr = opensimModelJNI.MuscleAnalysis_getMusclePowerStorage(swigCPtr, this);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_getMusclePowerStorage(swigCPtr, this);
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
   public void setMuscles(ArrayStr aMuscles) {
-    opensimModelJNI.MuscleAnalysis_setMuscles(swigCPtr, this, ArrayStr.getCPtr(aMuscles), aMuscles);
+    opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_setMuscles(swigCPtr, this, ArrayStr.getCPtr(aMuscles), aMuscles);
   }
 
   public void setCoordinates(ArrayStr aCoordinates) {
-    opensimModelJNI.MuscleAnalysis_setCoordinates(swigCPtr, this, ArrayStr.getCPtr(aCoordinates), aCoordinates);
+    opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_setCoordinates(swigCPtr, this, ArrayStr.getCPtr(aCoordinates), aCoordinates);
   }
 
   public void setComputeMoments(boolean aTrueFalse) {
-    opensimModelJNI.MuscleAnalysis_setComputeMoments(swigCPtr, this, aTrueFalse);
+    opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_setComputeMoments(swigCPtr, this, aTrueFalse);
   }
 
   public boolean getComputeMoments() {
-    return opensimModelJNI.MuscleAnalysis_getComputeMoments(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_getComputeMoments(swigCPtr, this);
   }
 
   public int begin(State s) {
-    return opensimModelJNI.MuscleAnalysis_begin(swigCPtr, this, State.getCPtr(s), s);
+    return opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_begin(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public int step(State s, int setNumber) {
-    return opensimModelJNI.MuscleAnalysis_step(swigCPtr, this, State.getCPtr(s), s, setNumber);
+    return opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_step(swigCPtr, this, State.getCPtr(s), s, setNumber);
   }
 
   public int end(State s) {
-    return opensimModelJNI.MuscleAnalysis_end(swigCPtr, this, State.getCPtr(s), s);
+    return opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_end(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public int printResults(String aBaseName, String aDir, double aDT, String aExtension) {
-    return opensimModelJNI.MuscleAnalysis_printResults__SWIG_0(swigCPtr, this, aBaseName, aDir, aDT, aExtension);
+    return opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_printResults__SWIG_0(swigCPtr, this, aBaseName, aDir, aDT, aExtension);
   }
 
   public int printResults(String aBaseName, String aDir, double aDT) {
-    return opensimModelJNI.MuscleAnalysis_printResults__SWIG_1(swigCPtr, this, aBaseName, aDir, aDT);
+    return opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_printResults__SWIG_1(swigCPtr, this, aBaseName, aDir, aDT);
   }
 
   public int printResults(String aBaseName, String aDir) {
-    return opensimModelJNI.MuscleAnalysis_printResults__SWIG_2(swigCPtr, this, aBaseName, aDir);
+    return opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_printResults__SWIG_2(swigCPtr, this, aBaseName, aDir);
   }
 
   public int printResults(String aBaseName) {
-    return opensimModelJNI.MuscleAnalysis_printResults__SWIG_3(swigCPtr, this, aBaseName);
+    return opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_printResults__SWIG_3(swigCPtr, this, aBaseName);
   }
 
   public void allocateStorageObjects() {
-    opensimModelJNI.MuscleAnalysis_allocateStorageObjects(swigCPtr, this);
+    opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_allocateStorageObjects(swigCPtr, this);
   }
 
 }

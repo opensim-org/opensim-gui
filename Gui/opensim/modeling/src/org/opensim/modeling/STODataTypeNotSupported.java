@@ -12,7 +12,7 @@ public class STODataTypeNotSupported extends OpenSimException {
   private transient long swigCPtr;
 
   public STODataTypeNotSupported(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelCommonJNI.STODataTypeNotSupported_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimCommonJNI.STODataTypeNotSupported_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class STODataTypeNotSupported extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelCommonJNI.delete_STODataTypeNotSupported(swigCPtr);
+        opensimCommonJNI.delete_STODataTypeNotSupported(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,7 +36,7 @@ public class STODataTypeNotSupported extends OpenSimException {
   }
 
   public STODataTypeNotSupported(String file, long line, String func, String datatype) {
-    this(opensimModelCommonJNI.new_STODataTypeNotSupported(file, line, func, datatype), true);
+    this(opensimCommonJNI.new_STODataTypeNotSupported(file, line, func, datatype), true);
   }
 
 }

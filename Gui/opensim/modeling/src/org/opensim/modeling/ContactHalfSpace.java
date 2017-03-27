@@ -12,7 +12,7 @@ public class ContactHalfSpace extends ContactGeometry {
   private transient long swigCPtr;
 
   public ContactHalfSpace(long cPtr, boolean cMemoryOwn) {
-    super(opensimModelSimulationJNI.ContactHalfSpace_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.ContactHalfSpace_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -28,7 +28,7 @@ public class ContactHalfSpace extends ContactGeometry {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimModelSimulationJNI.delete_ContactHalfSpace(swigCPtr);
+        opensimSimulationJNI.delete_ContactHalfSpace(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -36,45 +36,45 @@ public class ContactHalfSpace extends ContactGeometry {
   }
 
   public static ContactHalfSpace safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimModelSimulationJNI.ContactHalfSpace_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.ContactHalfSpace_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ContactHalfSpace(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimModelSimulationJNI.ContactHalfSpace_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.ContactHalfSpace_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimModelSimulationJNI.ContactHalfSpace_getClassName();
+    return opensimSimulationJNI.ContactHalfSpace_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimModelSimulationJNI.ContactHalfSpace_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.ContactHalfSpace_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new ContactHalfSpace(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimModelSimulationJNI.ContactHalfSpace_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.ContactHalfSpace_getConcreteClassName(swigCPtr, this);
   }
 
   public ContactHalfSpace() {
-    this(opensimModelSimulationJNI.new_ContactHalfSpace__SWIG_0(), true);
+    this(opensimSimulationJNI.new_ContactHalfSpace__SWIG_0(), true);
   }
 
   public ContactHalfSpace(Vec3 location, Vec3 orientation, PhysicalFrame frame) {
-    this(opensimModelSimulationJNI.new_ContactHalfSpace__SWIG_1(Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation, PhysicalFrame.getCPtr(frame), frame), true);
+    this(opensimSimulationJNI.new_ContactHalfSpace__SWIG_1(Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation, PhysicalFrame.getCPtr(frame), frame), true);
   }
 
   public ContactHalfSpace(Vec3 location, Vec3 orientation, PhysicalFrame frame, String name) {
-    this(opensimModelSimulationJNI.new_ContactHalfSpace__SWIG_2(Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation, PhysicalFrame.getCPtr(frame), frame, name), true);
+    this(opensimSimulationJNI.new_ContactHalfSpace__SWIG_2(Vec3.getCPtr(location), location, Vec3.getCPtr(orientation), orientation, PhysicalFrame.getCPtr(frame), frame, name), true);
   }
 
   public SWIGTYPE_p_SimTK__ContactGeometry createSimTKContactGeometry() {
-    return new SWIGTYPE_p_SimTK__ContactGeometry(opensimModelSimulationJNI.ContactHalfSpace_createSimTKContactGeometry(swigCPtr, this), true);
+    return new SWIGTYPE_p_SimTK__ContactGeometry(opensimSimulationJNI.ContactHalfSpace_createSimTKContactGeometry(swigCPtr, this), true);
   }
 
   public void generateDecorations(boolean fixed, ModelDisplayHints hints, State s, ArrayDecorativeGeometry geometry) {
-    opensimModelSimulationJNI.ContactHalfSpace_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(s), s, ArrayDecorativeGeometry.getCPtr(geometry), geometry);
+    opensimSimulationJNI.ContactHalfSpace_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(s), s, ArrayDecorativeGeometry.getCPtr(geometry), geometry);
   }
 
 }
