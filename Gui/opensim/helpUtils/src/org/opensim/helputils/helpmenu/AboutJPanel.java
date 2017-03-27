@@ -40,8 +40,8 @@ import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.util.MissingResourceException;
-import static org.opensim.modeling.opensimModelCommonJNI.GetCompilerVersion;
-import org.opensim.modeling.opensimModelJNI;
+import static org.opensim.modeling.opensimCommonJNI.GetCompilerVersion;
+import org.opensim.modeling.opensimCommonJNI;
 import org.opensim.utils.TheApp;
 
 /**
