@@ -33,6 +33,7 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.prefs.Preferences;
 import org.opensim.logger.OpenSimLogger;
+import org.opensim.modeling.ModelVisualizer;
 import org.opensim.utils.*;
 
 /**
@@ -52,11 +53,21 @@ public class GeometryFileLocator {
    }
    
    public static GeometryFileLocator getInstance(){
-      if (locator==null)
+      if (locator==null){
          locator = new GeometryFileLocator();
-      
+         // Parse GeometryPath preference and send to API
+         ModelVisualizer.addDirToGeometrySearchPaths(geometryInstallationDirectory);
+         updateGeometrySearchPathsFromPreferences();
+      }
       return locator;
    }
+
+    public static void updateGeometrySearchPathsFromPreferences() {
+        String userGeometryPath=Preferences.userNodeForPackage(TheApp.class).get("Geometry Path", ".");
+        String dirs[] = userGeometryPath.split(File.pathSeparator);
+        for (int i=0; i< dirs.length; i++)
+            ModelVisualizer.addDirToGeometrySearchPaths(dirs[i]);
+    }
 
    public String getFullname(String modelFilePath, String bareFileName, boolean debug) {
       String candidate=bareFileName;
