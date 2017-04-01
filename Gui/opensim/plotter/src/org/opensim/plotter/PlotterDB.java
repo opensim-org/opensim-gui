@@ -86,6 +86,7 @@ public class PlotterDB {
         
         JFrame f= DialogUtils.createFrameForPanel(plotterPanel, "Plotter");
         plotterPanel.setFrame(f);
+        f.pack();
         f.setVisible(true);
         //registerPlotterPanel(plotterPanel);
         
