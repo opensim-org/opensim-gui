@@ -29,6 +29,7 @@
 package org.opensim.view.pub;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -225,7 +226,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     * update Method is called whenever a model is added, removed and/or moved in the GUI
     * Observable should be of type OpenSimDB.
     */
-   public void update(Observable o, Object arg) {
+   public synchronized void update(Observable o, Object arg) {
       //if (!isVtkGraphicsAvailable()) return;
       if (arg instanceof JSONObject){
           handleJson((JSONObject) arg);
@@ -335,14 +336,21 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                }
                if (websocketdb!=null){
                    // create Json for model
-                   ModelVisualizationJson vizJson = new ModelVisualizationJson(jsondb, evModel);
-                   getInstance().addModelVisuals(evModel, vizJson);
-                   exportModelJsonToVisualizer(vizJson, null);
-                   mapModelsToJsons.put(evModel, vizJson);
+                   // Guard against json created thru sync.
+                   if (!mapModelsToJsons.containsKey(evModel)){
+                        ModelVisualizationJson vizJson = new ModelVisualizationJson(jsondb, evModel);
+                        getInstance().addModelVisuals(evModel, vizJson);
+                        exportModelJsonToVisualizer(vizJson, null);
+                        mapModelsToJsons.put(evModel, vizJson);
+                   }
                }
                else {
-                   // Same as open visualizer window 
-                   VisualizerWindowAction.openVisualizerWindow();
+                // Same as open visualizer window
+                SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        VisualizerWindowAction.openVisualizerWindow();
+                        
+                    }});
                }
               // Check if this refits scene into window
                // int rc = newModelVisual.getModelDisplayAssembly().GetReferenceCount();
@@ -1809,8 +1817,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
 
     public void addModelVisuals(Model model, ModelVisualizationJson modelJson) {
-        if (!mapModelsToJsons.containsKey(model))
+        if (!mapModelsToJsons.containsKey(model)){
             mapModelsToJsons.put(model, modelJson);
+            setCurrentJson();
+        }
     }
     
     public void displayText(String text, int forntSize){
