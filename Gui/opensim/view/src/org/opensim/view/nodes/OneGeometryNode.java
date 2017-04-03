@@ -160,12 +160,14 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
         }
     }
     
+    @Override
     public Color getColor() {
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
         Vec3 c3 = obj.getColor();
         return new Color((float)c3.get(0), (float)c3.get(1), (float)c3.get(2));
     }
 
+    @Override
     public void setColor(Color newColor) {
         float[] colorComp = new float[3];
         newColor.getColorComponents(colorComp);
@@ -209,11 +211,13 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
         ExplorerTopComponent.addUndoableEdit(auEdit);
     }
     
+    @Override
     public double getOpacity() {
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
         return obj.get_Appearance().get_opacity();
     }
 
+    @Override
     public void setOpacity(double opacity) {
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
         final AbstractProperty ap = obj.get_Appearance().getPropertyByName("opacity");
@@ -255,11 +259,13 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
         ExplorerTopComponent.addUndoableEdit(auEdit);
         
     }
+    @Override
     public Boolean getVisible() {
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
         return obj.get_Appearance().get_visible();
     }
 
+    @Override
     public void setVisible(Boolean newValue) {
         Geometry obj = Geometry.safeDownCast(getOpenSimObject());
         final AbstractProperty ap = obj.get_Appearance().getPropertyByName("visible");
@@ -305,7 +311,9 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
     private void updateObjectDisplay(Geometry obj) {
         // Tell the world that the owner modelComponent need to regenerate
         Model mdl = getModelForNode();
-        ViewDB.getInstance().getModelVisuals(mdl).upateDisplay(obj);
+        if (ViewDB.isVtkGraphicsAvailable()){
+            ViewDB.getInstance().getModelVisuals(mdl).upateDisplay(obj);
+        }
         //ViewDB.getInstance().repaintAll();
     }
 
@@ -315,6 +323,7 @@ public class OneGeometryNode extends OneComponentNode implements ColorableInterf
         return obj.getRepresentation().swigValue();
    }
 
+    @Override
     public void setDisplayPreference(int pref) {
         final Geometry obj = Geometry.safeDownCast(getOpenSimObject());
         final AbstractProperty ap = obj.get_Appearance().get_SurfaceProperties().getPropertyByName("representation");

@@ -17,12 +17,16 @@ import org.opensim.modeling.DecorativeGeometry;
  * @author ayman
  */
 public interface ColorableInterface {
+    
+    public Boolean getVisible();
+    public void setVisible(Boolean newValue);
+    
     Color getColor();
-
     void setColor(Color newColor);
 
     int getDisplayPreference();
-
     void setDisplayPreference(int newPref);
     
+    public double getOpacity();
+    public void setOpacity(double opacity);
 }
