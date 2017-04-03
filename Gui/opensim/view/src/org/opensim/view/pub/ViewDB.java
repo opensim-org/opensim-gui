@@ -1620,7 +1620,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
 
     public void updateDisplay(Model model, Component ownerModelComponent) {
-        getModelVisuals(model).upateDisplay(ownerModelComponent);
+        if (isVtkGraphicsAvailable()){
+            getModelVisuals(model).upateDisplay(ownerModelComponent);
+        }
     }
 
     /**
