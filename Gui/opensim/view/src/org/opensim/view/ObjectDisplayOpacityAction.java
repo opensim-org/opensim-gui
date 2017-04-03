@@ -32,14 +32,14 @@ import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.view.nodes.OneBodyNode;
+import org.opensim.view.nodes.OneGeometryNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 
 public final class ObjectDisplayOpacityAction extends CallableSystemAction {
    
    public void performAction() {
-      Vector<OpenSimObject> objects = new Vector<OpenSimObject>();
+      Vector<OneGeometryNode> objects = new Vector<OneGeometryNode>();
       Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
       for(int i=0; i<selected.length; i++) {
          if(selected[i] instanceof OpenSimObjectNode)
@@ -48,15 +48,20 @@ public final class ObjectDisplayOpacityAction extends CallableSystemAction {
       ObjectDisplayOpacityPanel.showDialog(objects);
    }
 
-   public void addLeafObjects(OpenSimObjectNode node, Vector<OpenSimObject> objects) {
-      Children ch = node.getChildren();
-      if(ch.getNodesCount()>0 && !(node instanceof OneBodyNode)) {
-         for(Node childNode : ch.getNodes()) {
-            if(childNode instanceof OpenSimObjectNode)
-               addLeafObjects((OpenSimObjectNode)childNode, objects);
-         }
-      } else objects.add(node.getOpenSimObject());
-   }
+    public void addLeafObjects(OpenSimObjectNode node, Vector<OneGeometryNode> objects) {
+        if (node instanceof OneGeometryNode) {
+            objects.add((OneGeometryNode)node);
+            return;
+        }
+        Children ch = node.getChildren();
+        // process children
+        for (Node childNode : ch.getNodes()) {
+            if (childNode instanceof OpenSimObjectNode) {
+                addLeafObjects((OpenSimObjectNode) childNode, objects);
+            }
+        }
+
+    }
    
    public String getName() {
       return NbBundle.getMessage(ObjectDisplayOpacityAction.class, "CTL_ObjectDisplayOpacityAction");
