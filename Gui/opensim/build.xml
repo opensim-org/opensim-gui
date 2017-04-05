@@ -9,6 +9,10 @@
     <property name="models.dir" value="C:/Dev/gui/opensim-models"/>
     <property name="visualizer.dir" value="C:/Dev/opensim-threejs"/>
     <property name="jre.dir" value="${java.home}"/>
+    <property name="app.version" value="4.0.Alpha" />
+    <tstamp>
+        <format property="TODAY_US" pattern="dd-MMMM-yyyy" locale="en,US"/>
+    </tstamp>
     <condition property="installer-files.dir" value="installer_files/Windows">
         <os family="windows"/>
     </condition>
@@ -27,6 +31,27 @@
     </condition>
     <property name="app.conf" value="${installer-files.dir}/opensim.conf"/>
     <import file="nbproject/build-impl.xml"/>
+    <target name="build-brand" depends="-init">
+    <propertyfile
+        file="${basedir}/branding/core/core.jar/org/netbeans/core/startup/Bundle.properties" 
+        comment="Updated by build script">
+        <entry key="currentVersion" value="${app.title} ${app.version} ${DSTAMP}-${TSTAMP}" />
+    </propertyfile>
+ 
+    <propertyfile
+        file="${basedir}/branding/modules/org-netbeans-core-windows.jar/org/netbeans/core/windows/view/ui/Bundle.properties"
+        comment="Updated by build script">
+        <entry key="CTL_MainWindow_Title" value="${app.title} ${app.version} ${DSTAMP}-${TSTAMP}" />
+        <entry key="CTL_MainWindow_Title_No_Project" value="${app.title} ${app.version} ${DSTAMP}-${TSTAMP}" />
+    </propertyfile>
+ 
+    <propertyfile
+        file="${basedir}/branding/modules/org-netbeans-core.jar/org/netbeans/core/ui/Bundle.properties" 
+        comment="Updated by build script">
+        <entry key="LBL_ProductInformation" value="${app.title} ${DSTAMP}-${TSTAMP}" />
+    </propertyfile>
+ 
+    </target>
     <target name="debug-properties">
         <echoproperties/>
     </target>
