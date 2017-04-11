@@ -53,7 +53,7 @@ public abstract class OneComponentWithGeometryNode extends OneComponentNode impl
 
     protected void addAppearanceProperties(Sheet sheet) {
         try {
-            sheet.remove("Appearance");
+            sheet.get(Sheet.PROPERTIES).remove("Appearance");
             Sheet.Set appearanceSheet = createExpertSet();
             appearanceSheet.setDisplayName("Appearance");
             sheet.put(appearanceSheet);
