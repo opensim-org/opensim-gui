@@ -42,7 +42,7 @@ import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
  *
  * @author Ayman Habib
  */
-public class OneContactGeometryNode extends OneComponentNode{
+public class OneContactGeometryNode extends OneComponentWithGeometryNode{
     
     private static ResourceBundle bundle = NbBundle.getBundle(OneContactGeometryNode.class);
     /**
