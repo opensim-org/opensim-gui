@@ -57,9 +57,13 @@ public class ObjectDisplayOpacityPanel extends javax.swing.JPanel {
 
       savedOpacities = new Vector<Double>(objects.size());
       for(int i=0; i<objects.size(); i++) {
-         vtkProperty prop = new vtkProperty();
-         ViewDB.getInstance().getObjectProperties(objects.get(i), prop);
-         savedOpacities.add((Double)prop.GetOpacity());
+         if (ViewDB.isVtkGraphicsAvailable()){
+            vtkProperty prop = new vtkProperty();
+            ViewDB.getInstance().getObjectProperties(objects.get(i), prop);
+            savedOpacities.add((Double)prop.GetOpacity());
+         }
+         else
+            savedOpacities.add(1.0);
       }
 
       if(objects.size()>0) {
