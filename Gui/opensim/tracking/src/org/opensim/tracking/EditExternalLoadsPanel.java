@@ -101,7 +101,7 @@ public class EditExternalLoadsPanel extends javax.swing.JPanel
 
         filterModelKinematics.setSelected(dLoads.getLowpassCutoffFrequencyForLoadKinematics()>0);
         externalLoadsDataFileName.setExtensionsAndDescription(".sto,.mot", "Data file for external forces");
-        externalLoadsModelKinematicsFileName.setExtensionsAndDescription(".sto,.mot", "Kinematics for external loads if transforming froce application");
+        externalLoadsModelKinematicsFileName.setExtensionsAndDescription(".sto,.mot", "Kinematics for external loads if transforming force application");
         String externalLoadsKinFile = dLoads.getExternalLoadsModelKinematicsFileName(); // Optional
         externalLoadsModelKinematicsFileName.setFileName(externalLoadsKinFile);
         cutoffFrequency.setText(String.valueOf(dLoads.getLowpassCutoffFrequencyForLoadKinematics()));

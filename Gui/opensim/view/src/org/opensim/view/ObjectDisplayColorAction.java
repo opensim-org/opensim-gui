@@ -107,7 +107,8 @@ public final class ObjectDisplayColorAction extends CallableSystemAction {
                 ViewDB.getInstance().setObjectColor(obj, newColorComponents);
             }
             objectNode.refreshNode();
-            ViewDB.getInstance().updateDisplay(objectNode.getModelForNode(), 
+            if (ViewDB.isVtkGraphicsAvailable())
+                ViewDB.getInstance().updateDisplay(objectNode.getModelForNode(), 
                     ((OpenSimObjectNode)objectNode).getOwnerComponent());
 
         }

@@ -13,7 +13,7 @@ import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.WrapObjectSet;
 
 /** Node class to wrap WrapObject objects */
-public class OneWrapObjectNode extends OpenSimObjectNode{
+public class OneWrapObjectNode extends OneComponentWithGeometryNode{
    private static ResourceBundle bundle = NbBundle.getBundle(OneBodyNode.class);
    public OneWrapObjectNode(OpenSimObject b) {
       super(b);
