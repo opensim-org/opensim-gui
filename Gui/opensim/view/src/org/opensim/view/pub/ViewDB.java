@@ -914,12 +914,13 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     *
     */
    public void markSelected(Selectable selectedObject, boolean highlight, boolean sendEvent, boolean updateStatusDisplayAndRepaint) {
-      selectedObject.markSelected(highlight);
       if (highlight)
           lookupContents.add(selectedObject.getOpenSimObject());
       else
           lookupContents.remove(selectedObject.getOpenSimObject());
-      
+      // Remaining code is vtk depenedent
+      if (!isVtkGraphicsAvailable()) return;
+      selectedObject.markSelected(highlight);
       if (ViewDB.getInstance().isQuery()){
           if (highlight){
            // Add caption
@@ -1622,7 +1623,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
 
     public void updateDisplay(Model model, Component ownerModelComponent) {
-        getModelVisuals(model).upateDisplay(ownerModelComponent);
+        if (isVtkGraphicsAvailable()){
+            getModelVisuals(model).upateDisplay(ownerModelComponent);
+        }
     }
 
     /**

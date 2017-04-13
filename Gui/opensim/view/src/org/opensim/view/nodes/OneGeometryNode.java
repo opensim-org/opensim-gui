@@ -105,5 +105,4 @@ public class OneGeometryNode extends OneComponentWithGeometryNode {
         }
         return retValue;
     }
-    
 }
