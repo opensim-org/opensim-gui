@@ -36,6 +36,7 @@ import java.util.Vector;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.view.nodes.OneComponentWithGeometryNode;
 import org.opensim.view.nodes.OneGeometryNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.pub.ViewDB;
@@ -47,26 +48,25 @@ import vtk.vtkProperty;
  */
 public class ObjectDisplayOpacityPanel extends javax.swing.JPanel {
   
-   Vector<OneGeometryNode> objects;
+   Vector<OneComponentWithGeometryNode> objects;
    Vector<Double> savedOpacities;
    boolean internalTrigger = false;
 
    /** Creates new form ObjectDisplayOpacityPanel */
-   public ObjectDisplayOpacityPanel(Vector<OneGeometryNode> objects) {
+   public ObjectDisplayOpacityPanel(Vector<OneComponentWithGeometryNode> objects) {
       this.objects = objects;
 
       initComponents();
 
       savedOpacities = new Vector<Double>(objects.size());
       for(int i=0; i<objects.size(); i++) {
-          if (ViewDB.isVtkGraphicsAvailable()){
+         if (ViewDB.isVtkGraphicsAvailable()){
             vtkProperty prop = new vtkProperty();
             ViewDB.getInstance().getObjectProperties(objects.get(i).getOpenSimObject(), prop);
             savedOpacities.add((Double)prop.GetOpacity());
-          }
-          else {
-              savedOpacities.add(objects.get(i).getOpacity());
-          }
+         }
+         else
+            savedOpacities.add(1.0);
       }
 
       if(objects.size()>0) {
@@ -86,7 +86,7 @@ public class ObjectDisplayOpacityPanel extends javax.swing.JPanel {
        }
    }
 
-   static void showDialog(Vector<OneGeometryNode> objects) {
+   static void showDialog(Vector<OneComponentWithGeometryNode> objects) {
       ObjectDisplayOpacityPanel panel = new ObjectDisplayOpacityPanel(objects);
       DialogDescriptor dlg = new DialogDescriptor(panel, "Select Opacity");
       //dlg.setOptions(new Object[]{DialogDescriptor.OK_OPTION});

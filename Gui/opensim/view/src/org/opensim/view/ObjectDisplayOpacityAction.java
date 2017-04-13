@@ -32,6 +32,7 @@ import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.view.nodes.OneComponentWithGeometryNode;
 import org.opensim.view.nodes.OneGeometryNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
@@ -39,18 +40,18 @@ import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 public final class ObjectDisplayOpacityAction extends CallableSystemAction {
    
    public void performAction() {
-      Vector<OneGeometryNode> objects = new Vector<OneGeometryNode>();
+      Vector<OneComponentWithGeometryNode> objects = new Vector<OneComponentWithGeometryNode>();
       Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
       for(int i=0; i<selected.length; i++) {
-         if(selected[i] instanceof OpenSimObjectNode)
-            addLeafObjects((OpenSimObjectNode)selected[i], objects);
+         if(selected[i] instanceof OneComponentWithGeometryNode)
+            addLeafObjects((OneComponentWithGeometryNode)selected[i], objects);
       }
       ObjectDisplayOpacityPanel.showDialog(objects);
    }
 
-    public void addLeafObjects(OpenSimObjectNode node, Vector<OneGeometryNode> objects) {
-        if (node instanceof OneGeometryNode) {
-            objects.add((OneGeometryNode)node);
+    public void addLeafObjects(OpenSimObjectNode node, Vector<OneComponentWithGeometryNode> objects) {
+        if (node instanceof OneComponentWithGeometryNode) {
+            objects.add((OneComponentWithGeometryNode)node);
             return;
         }
         Children ch = node.getChildren();
