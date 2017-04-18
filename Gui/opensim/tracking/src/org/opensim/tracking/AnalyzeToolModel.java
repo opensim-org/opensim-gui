@@ -118,7 +118,8 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
          animationCallback.setStepInterval(1);
          animationCallback.setMinRenderTimeInterval(0.1); // to avoid rendering really frequently which can slow down our execution
          animationCallback.startProgressUsingTime(ti,tf);
-
+         animationCallback.setDisplayTimeProgress(true);
+         
          // Do this manouver (there's gotta be a nicer way) to create the object so that C++ owns it and not Java (since 
          // removeIntegCallback in finished() will cause the C++-side callback to be deleted, and if Java owned this object
          // it would then later try to delete it yet again)
