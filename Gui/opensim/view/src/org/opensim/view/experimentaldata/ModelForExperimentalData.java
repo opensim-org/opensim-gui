@@ -57,7 +57,7 @@ public class ModelForExperimentalData extends Model{
      * Creates a new instance of ModelForExperimentalData
      */
     public ModelForExperimentalData(int i, AnnotatedMotion motionData) throws IOException {
-        super(TheApp.getInstallDir()+File.separatorChar+"Models"+File.separatorChar+"Internal"+File.separatorChar+"_openSimlab.osim");
+        super();
         setName("ExperimentalData_"+i);
         this.motionData=motionData;
         //setup();
