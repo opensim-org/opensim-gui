@@ -49,6 +49,8 @@ import org.opensim.modeling.ConditionalPathPoint;
 import org.opensim.modeling.Constant;
 import org.opensim.modeling.Coordinate;
 import org.opensim.modeling.CoordinateSet;
+import org.opensim.modeling.Frame;
+import org.opensim.modeling.FrameList;
 import org.opensim.modeling.Function;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Model;
@@ -74,6 +76,7 @@ import org.opensim.view.functionEditor.FunctionEditorTopComponent;
 import org.opensim.view.functionEditor.FunctionEditorTopComponent.FunctionEditorOptions;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
+import static org.opensim.view.pub.ViewDB.isVtkGraphicsAvailable;
 
 /**
  *
@@ -306,9 +309,10 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       // TODO: send some event that the muscle displayer can listen for and know to deselect the point
       // and make sure the rest of the points maintain correct selection status
       ViewDB.getInstance().removeObjectsBelongingToMuscleFromSelection(objectWithPath);
-
+      
       AbstractPathPoint closestPoint = pathPoints.get(index);
       OpenSimContext context =OpenSimDB.getInstance().getContext(currentPath.getModel());
+      // FIX40 fails because needs full initSystem rather than invalidating stage
       context.addPathPoint(currentPath, menuChoice, closestPoint.getBody());
       
       setupComponent(objectWithPath);
@@ -351,10 +355,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          ObjectsDeletedEvent evnt = new ObjectsDeletedEvent(this, model, objs);
          OpenSimDB.getInstance().setChanged();
          OpenSimDB.getInstance().notifyObservers(evnt);
-         // Update the display.
-         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-         vis.upateDisplay(Component.safeDownCast(objectWithPath));
-         ViewDB.getInstance().repaintAll();
+         updatePathDisplay(model);
       }
    }
    
@@ -398,7 +399,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       attachmentZLabel.setText("Z");
       attachmentZLabel.setBounds(X + 240, Y - 30, 10, 16);
       javax.swing.JLabel attachmentBodyLabel = new javax.swing.JLabel();
-      attachmentBodyLabel.setText("Body");
+      attachmentBodyLabel.setText("Frame");
       attachmentBodyLabel.setBounds(X + 300, Y - 30, 30, 16);
       javax.swing.JLabel coordLabel = new javax.swing.JLabel();
       coordLabel.setText("Coordinate");
@@ -417,7 +418,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       AttachmentsPanel.add(attachmentBodyLabel);
 
       SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(currentPath.getModel());
-      String[] bodyNames = guiElem.getBodyNames();
+      String[] physicalFrameNames = guiElem.getPhysicalFrameNames();
       String[] coordinateNames = guiElem.getCoordinateNames();
       int numGuiLines = 0; // after for loop, will = numPoints + numMovingPathPoints
 
@@ -633,8 +634,8 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
 
          // The combo box containing the body the point is attached to
          javax.swing.JComboBox comboBox = new javax.swing.JComboBox();
-         comboBox.setModel(new javax.swing.DefaultComboBoxModel(bodyNames));
-         comboBox.setSelectedIndex(findElement(bodyNames, pathPoints.get(i).getBodyName()));
+         comboBox.setModel(new javax.swing.DefaultComboBoxModel(physicalFrameNames));
+         comboBox.setSelectedIndex(findElement(physicalFrameNames, pathPoints.get(i).getBodyName()));
          comboBox.setBounds(x, height, 90, 21);
          comboBox.setToolTipText("Body the attachment point is fixed to");
          comboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -1165,9 +1166,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
 
    private void updateDisplay() {
         Model model = currentPath.getModel();
-        SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-        vis.upateDisplay(Component.safeDownCast(objectWithPath));
-        ViewDB.getInstance().repaintAll();
+        updatePathDisplay(model);
    }
    
    public void deletePathWrap(int num) {
@@ -1213,10 +1212,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          openSimContext.setStartPoint(mw, newStartPt);
          
          Model model = currentPath.getModel();
-         // tell the ViewDB to redraw the model
-         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-         vis.upateDisplay(Component.safeDownCast(objectWithPath));
-         ViewDB.getInstance().repaintAll();
+            updatePathDisplay(model);
          // update the current path panel
          updateCurrentPathPanel();
       }
@@ -1236,10 +1232,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          OpenSimContext context = OpenSimDB.getInstance().getContext(model);
          context.setEndPoint(mw, newEndPt);
          
-         // tell the ViewDB to redraw the model
-         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-         vis.upateDisplay(Component.safeDownCast(objectWithPath));
-         ViewDB.getInstance().repaintAll();
+         updatePathDisplay(model);
          // update the current path panel
          updateCurrentPathPanel();
       }
@@ -1368,7 +1361,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          }
          ParametersTabbedPanel.setSelectedComponent(AttachmentsTab);
          // tell the ViewDB to redraw the model
-         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
+         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model); //vtk
          //FIXME vis.updateMuscleOrForceAlongPathGeometry(asm, true);
          ViewDB.getInstance().repaintAll();
          // update the current path panel
@@ -1403,7 +1396,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          
          ParametersTabbedPanel.setSelectedComponent(AttachmentsTab);
          // tell the ViewDB to redraw the model
-         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
+         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model); //vtk
          // FIXME vis.updateMuscleOrForceAlongPathGeometry(asm, true);
          ViewDB.getInstance().repaintAll();
          // update the current path panel
@@ -1476,10 +1469,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          OpenSimContext context = OpenSimDB.getInstance().getContext(model);
          context.setLocation(PathPoint.safeDownCast(pathPoints.get(attachmentNum)), coordNum, newValue);
          
-         // tell the ViewDB to redraw the model
-         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-         vis.upateDisplay(Component.safeDownCast(objectWithPath));
-         ViewDB.getInstance().repaintAll();
+         updatePathDisplay(model);
          // update the current path panel
          updateCurrentPathPanel();
       }
@@ -1489,18 +1479,15 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       //Muscle asm = Muscle.safeDownCast(objectWithPath);
       
       PathPointSet pathPoints = currentPath.getPathPointSet();
-      PhysicalFrame oldBody = pathPoints.get(attachmentNum).getBody();
+      PhysicalFrame oldFrame = pathPoints.get(attachmentNum).getBody();
       Model model = currentPath.getModel();
-      BodySet bodies = model.getBodySet();
-      Body newBody = bodies.get(bodyComboBox.getSelectedIndex());
-      if (Body.getCPtr(newBody) != Body.getCPtr(oldBody)) {
+      Component frameAsComponent = model.getComponent((String) bodyComboBox.getSelectedItem());
+      PhysicalFrame newFrame = PhysicalFrame.safeDownCast(frameAsComponent);
+      if (PhysicalFrame.getCPtr(newFrame) != PhysicalFrame.getCPtr(oldFrame)) {
          OpenSimContext context=OpenSimDB.getInstance().getContext(model);
-         context.setBody(pathPoints.get(attachmentNum), newBody);
-         
-         // tell the ViewDB to redraw the model
-         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-         vis.upateDisplay(Component.safeDownCast(objectWithPath));
-         ViewDB.getInstance().repaintAll();
+         context.setBody(pathPoints.get(attachmentNum), newFrame);
+
+         updatePathDisplay(model);
          // update the panels
          updateAttachmentPanel();
          updateCurrentPathPanel();
@@ -1542,10 +1529,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
             OpenSimContext context = OpenSimDB.getInstance().getContext(model);
             context.setRangeMin(via, newValue/conversion);
             
-            // tell the ViewDB to redraw the model
-            SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-         vis.upateDisplay(Component.safeDownCast(objectWithPath));
-            ViewDB.getInstance().repaintAll();
+            updatePathDisplay(model);
             // update the current path panel
             updateCurrentPathPanel();
          }
@@ -1587,14 +1571,20 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
             
             // tell the ViewDB to redraw the model
             Model model = currentPath.getModel();
-            SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-            vis.upateDisplay(Component.safeDownCast(objectWithPath));
-            ViewDB.getInstance().repaintAll();
+            updatePathDisplay(model);
             // update the current path panel
             updateCurrentPathPanel();
          }
       }
    }
+
+    private void updatePathDisplay(Model model) {
+        if (isVtkGraphicsAvailable()){
+            SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
+            vis.upateDisplay(Component.safeDownCast(objectWithPath));
+            ViewDB.getInstance().repaintAll();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MuscleEditorPanel;
@@ -1610,9 +1600,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
         gp.assign(savePath);
         openSimContext.recreateSystemKeepStage();
         setupComponent(objectWithPath);
-        SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(currentModel);
         //Muscle asm = Muscle.safeDownCast(objectWithPath);
-        vis.upateDisplay(Component.safeDownCast(objectWithPath));
-        ViewDB.getInstance().repaintAll();
+        updatePathDisplay(currentModel);
    }
 }
