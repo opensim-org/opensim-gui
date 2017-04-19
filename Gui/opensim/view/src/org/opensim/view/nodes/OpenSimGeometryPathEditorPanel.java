@@ -42,14 +42,12 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import org.opensim.modeling.AbstractPathPoint;
 import org.opensim.modeling.ArrayPathPoint;
-import org.opensim.modeling.Body;
-import org.opensim.modeling.BodySet;
 import org.opensim.modeling.Component;
 import org.opensim.modeling.ConditionalPathPoint;
 import org.opensim.modeling.Constant;
 import org.opensim.modeling.Coordinate;
 import org.opensim.modeling.CoordinateSet;
-import org.opensim.modeling.Frame;
+import org.opensim.modeling.FrameIterator;
 import org.opensim.modeling.FrameList;
 import org.opensim.modeling.Function;
 import org.opensim.modeling.GeometryPath;
@@ -398,9 +396,9 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       javax.swing.JLabel attachmentZLabel = new javax.swing.JLabel();
       attachmentZLabel.setText("Z");
       attachmentZLabel.setBounds(X + 240, Y - 30, 10, 16);
-      javax.swing.JLabel attachmentBodyLabel = new javax.swing.JLabel();
-      attachmentBodyLabel.setText("Frame");
-      attachmentBodyLabel.setBounds(X + 300, Y - 30, 30, 16);
+      javax.swing.JLabel attachmentFrameLabel = new javax.swing.JLabel();
+      attachmentFrameLabel.setText("Frame");
+      attachmentFrameLabel.setBounds(X + 300, Y - 30, 30, 16);
       javax.swing.JLabel coordLabel = new javax.swing.JLabel();
       coordLabel.setText("Coordinate");
       coordLabel.setBounds(X + 400, Y - 30, 90, 16);
@@ -415,7 +413,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       AttachmentsPanel.add(attachmentXLabel);
       AttachmentsPanel.add(attachmentYLabel);
       AttachmentsPanel.add(attachmentZLabel);
-      AttachmentsPanel.add(attachmentBodyLabel);
+      AttachmentsPanel.add(attachmentFrameLabel);
 
       SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(currentPath.getModel());
       String[] physicalFrameNames = guiElem.getPhysicalFrameNames();
@@ -637,10 +635,10 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          comboBox.setModel(new javax.swing.DefaultComboBoxModel(physicalFrameNames));
          comboBox.setSelectedIndex(findElement(physicalFrameNames, pathPoints.get(i).getBodyName()));
          comboBox.setBounds(x, height, 90, 21);
-         comboBox.setToolTipText("Body the attachment point is fixed to");
+         comboBox.setToolTipText("Frame the attachment point is fixed to");
          comboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-               AttachmentBodyChosen(((javax.swing.JComboBox)evt.getSource()), num);
+               AttachmentFrameChosen(((javax.swing.JComboBox)evt.getSource()), num);
             }
          });
          AttachmentsPanel.add(comboBox);
@@ -869,7 +867,6 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       int numAttachments = currentPath.getPathPointSet().getSize();
       int X = 80;
       int Y = 40;
-      BodySet bodies = currentPath.getModel().getBodySet();
       
       SetPathWrap smw = currentPath.getWrapSet();
       String[] startPointNames = new String[numAttachments + 1];
@@ -882,9 +879,14 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       }
       
       // Count the number of wrap objects not currently assigned to this muscle.
+      FrameList frames = currentModel.getFrameList();
+      FrameIterator fIter = frames.begin();
       int numWrapObjects = 0;
-      for (i = 0; i < bodies.getSize(); i++) {
-         numWrapObjects += bodies.get(i).getWrapObjectSet().getSize();
+      while (!fIter.equals(frames.end())) {
+          PhysicalFrame phFrame = PhysicalFrame.safeDownCast(fIter.__deref__());
+          if (phFrame !=null)
+            numWrapObjects += phFrame.getWrapObjectSet().getSize();
+         fIter.next();
       }
       numWrapObjects -= smw.getSize();
       
@@ -893,16 +895,23 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       // used to make a comboBox that appears when the user clicks the
       // "add" button.
       wrapObjectNames = new String[numWrapObjects];
-      for (i = 0; i < bodies.getSize(); i++) {
-         SetWrapObject wrapObjects = bodies.get(i).getWrapObjectSet();
-         for (j = 0; j < wrapObjects.getSize(); j++) {
-            for (k = 0; k < smw.getSize(); k++) {
-               if (WrapObject.getCPtr(wrapObjects.get(j)) == WrapObject.getCPtr(smw.get(k).getWrapObject()))
-                  break;
-            }
-            if (k == smw.getSize())
-               wrapObjectNames[wCount++] = new String(wrapObjects.get(j).getName());
+      fIter = frames.begin();
+      while (!fIter.equals(frames.end())) {
+         PhysicalFrame phFrame = PhysicalFrame.safeDownCast(fIter.__deref__());
+         if (phFrame != null) {
+             SetWrapObject wrapObjects = phFrame.getWrapObjectSet();
+             for (j = 0; j < wrapObjects.getSize(); j++) {
+                 for (k = 0; k < smw.getSize(); k++) {
+                     if (WrapObject.getCPtr(wrapObjects.get(j)) == WrapObject.getCPtr(smw.get(k).getWrapObject())) {
+                         break;
+                     }
+                 }
+                 if (k == smw.getSize()) {
+                     wrapObjectNames[wCount++] = new String(wrapObjects.get(j).getName());
+                 }
+             }
          }
+         fIter.next();
       }
       
       // Set up the muscle-independent labels
@@ -1259,16 +1268,16 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       javax.swing.JLabel currentPathZLabel = new javax.swing.JLabel();
       currentPathZLabel.setText("Z");
       currentPathZLabel.setBounds(X + 155, Y - 30, 6, 16);
-      javax.swing.JLabel currentPathBodyLabel = new javax.swing.JLabel();
-      currentPathBodyLabel.setText("Body");
-      currentPathBodyLabel.setBounds(X + 210, Y - 30, 30, 16);
+      javax.swing.JLabel currentPathFrameLabel = new javax.swing.JLabel();
+      currentPathFrameLabel.setText("Frame");
+      currentPathFrameLabel.setBounds(X + 210, Y - 30, 30, 16);
       javax.swing.JLabel currentPathSelLabel = new javax.swing.JLabel();
       currentPathSelLabel.setText("Type");
       currentPathSelLabel.setBounds(X + 290, Y - 30, 30, 16);
       CurrentPathPanel.add(currentPathXLabel);
       CurrentPathPanel.add(currentPathYLabel);
       CurrentPathPanel.add(currentPathZLabel);
-      CurrentPathPanel.add(currentPathBodyLabel);
+      CurrentPathPanel.add(currentPathFrameLabel);
       CurrentPathPanel.add(currentPathSelLabel);
       
       State state = openSimContext.getCurrentStateRef();
@@ -1280,13 +1289,13 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          yField.setHorizontalAlignment(SwingConstants.TRAILING);
          javax.swing.JLabel zField = new javax.swing.JLabel();
          zField.setHorizontalAlignment(SwingConstants.TRAILING);
-         javax.swing.JLabel bodyLabel = new javax.swing.JLabel();
+         javax.swing.JLabel frameLabel = new javax.swing.JLabel();
          javax.swing.JLabel typeLabel = new javax.swing.JLabel();
          indexLabel.setText(intPropFormat.format(i+1) + ".");
          xField.setText(positionFormat.format(asmp.getitem(i).getLocation(state).get(0)));
          yField.setText(positionFormat.format(asmp.getitem(i).getLocation(state).get(1)));
          zField.setText(positionFormat.format(asmp.getitem(i).getLocation(state).get(2)));
-         bodyLabel.setText(asmp.getitem(i).getBodyName());
+         frameLabel.setText(asmp.getitem(i).getBodyName());
          if (asmp.getitem(i).getWrapObject() != null)
             typeLabel.setText("wrap" + " (" + asmp.getitem(i).getWrapObject().getName() + ")");
          else if (ConditionalPathPoint.safeDownCast(asmp.getitem(i)) != null)
@@ -1302,13 +1311,13 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          xField.setBounds(X, height, width, 21);
          yField.setBounds(X + width + 1, height, width, 21);
          zField.setBounds(X + 2*width + 2, height, width, 21);
-         bodyLabel.setBounds(X + 3*width + 10, height, 90, 21);
+         frameLabel.setBounds(X + 3*width + 10, height, 90, 21);
          typeLabel.setBounds(X + 3*width + 110, height, 120, 21);
          CurrentPathPanel.add(indexLabel);
          CurrentPathPanel.add(xField);
          CurrentPathPanel.add(yField);
          CurrentPathPanel.add(zField);
-         CurrentPathPanel.add(bodyLabel);
+         CurrentPathPanel.add(frameLabel);
          CurrentPathPanel.add(typeLabel);
       }
       Dimension d = new Dimension(400, Y + asmp.getSize() * 22);
@@ -1475,13 +1484,13 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       }
    }
    
-   public void AttachmentBodyChosen(javax.swing.JComboBox bodyComboBox, int attachmentNum) {
+   public void AttachmentFrameChosen(javax.swing.JComboBox frameComboBox, int attachmentNum) {
       //Muscle asm = Muscle.safeDownCast(objectWithPath);
       
       PathPointSet pathPoints = currentPath.getPathPointSet();
       PhysicalFrame oldFrame = pathPoints.get(attachmentNum).getBody();
       Model model = currentPath.getModel();
-      Component frameAsComponent = model.getComponent((String) bodyComboBox.getSelectedItem());
+      Component frameAsComponent = model.getComponent((String) frameComboBox.getSelectedItem());
       PhysicalFrame newFrame = PhysicalFrame.safeDownCast(frameAsComponent);
       if (PhysicalFrame.getCPtr(newFrame) != PhysicalFrame.getCPtr(oldFrame)) {
          OpenSimContext context=OpenSimDB.getInstance().getContext(model);
