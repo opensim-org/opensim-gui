@@ -1425,9 +1425,9 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       else if (mmp != null)
          oldType = 2;
       int newType = musclePointTypeComboBox.getSelectedIndex();
-      /* FIXME DEVWEEK
+      
       if (newType != oldType) {
-         PathPoint newPoint = PathPoint.makePathPointOfType(mp, musclePointClassNames[newType]);
+         AbstractPathPoint newPoint = AbstractPathPoint.safeDownCast(OpenSimObject.newInstanceOfType(musclePointClassNames[newType]));
          OpenSimContext context=OpenSimDB.getInstance().getContext(currentPath.getModel());
          context.realizeVelocity();
          boolean result = context.replacePathPoint(currentPath, mp, newPoint);
@@ -1456,7 +1456,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          // update the panels
          updateAttachmentPanel();
          updateCurrentPathPanel();
-      } */
+      }
    }
    public void AttachmentPointEntered(javax.swing.JTextField field, int attachmentNum, int coordNum) {
       //Muscle asm = Muscle.safeDownCast(objectWithPath);
