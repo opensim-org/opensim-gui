@@ -51,6 +51,7 @@ import org.opensim.modeling.FrameList;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.ObjectGroup;
 import org.opensim.modeling.OpenSimContext;
+import org.opensim.modeling.PhysicalFrame;
 import org.opensim.view.pub.OpenSimDB;
 
 /**
@@ -62,7 +63,8 @@ public class SingleModelGuiElements {
     Model model;   // model that Gui elements are created for
     
     private String[] bodyNames=null;
-    private String[] frameNames=null;
+    private String[] frameNames=null;    
+    private String[] physicalFrameNames=null;
     private String[] coordinateNames=null;
     private String[] unconstrainedCoordinateNames=null;
     private String[] actuatorClassNames=null;
@@ -157,19 +159,24 @@ public class SingleModelGuiElements {
         }
         return bodyNames;
    }
-    
+    // This method populates frameNames and physicalFrameNames for later use
     public String[] getFrameNames()
     {
         if (frameNames == null) {
             FrameList frames = model.getFrameList();
             FrameIterator bi = frames.begin();
             ArrayList<String> bNames = new ArrayList<String>();
+            ArrayList<String> phFrameNames = new ArrayList<String>();
             while (!bi.equals(frames.end())) {
                 bNames.add(bi.getName());
+                if (PhysicalFrame.safeDownCast(bi.__deref__())!= null)
+                    phFrameNames.add(bi.getName());
                 bi.next();
             }
             frameNames = new String[bNames.size()];
             bNames.toArray(frameNames);
+            physicalFrameNames = new String[phFrameNames.size()];
+            phFrameNames.toArray(getPhysicalFrameNames());
         }
         return frameNames;
    }
@@ -306,4 +313,14 @@ public class SingleModelGuiElements {
       System.arraycopy(namesList.toArray(), 0, actuatorNames, 0, namesList.size());
       java.util.Arrays.sort(actuatorNames);
    }
+   
+    /**
+     * @return the physicalFrameNames
+     */
+    public String[] getPhysicalFrameNames() {
+        if (frameNames == null) {
+            getFrameNames(); // For the side effect of populating both frameNames and physicalFrameNames
+        }
+        return physicalFrameNames;
+    }
 }
