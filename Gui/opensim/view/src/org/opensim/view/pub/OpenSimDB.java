@@ -222,11 +222,12 @@ public class OpenSimDB extends Observable implements Externalizable{
                 ex.printStackTrace();
             }
          //mapModelsToContexts.put(newModel, newContext);
+         /*
          SingleModelVisuals rep = ViewDB.getInstance().getModelVisuals(newModel);
          if(offset!=null) {
             ViewDB.getInstance().setModelVisualsTransform(rep, offset);
             ViewDB.getInstance().setObjectOpacity(newModel, opacity);
-         }
+         }*/
       }
    }
    

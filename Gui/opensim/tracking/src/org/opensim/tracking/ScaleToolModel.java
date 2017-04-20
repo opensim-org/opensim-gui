@@ -582,16 +582,15 @@ public class ScaleToolModel extends Observable implements Observer {
    private boolean loadExtraMarkerSet(boolean recompute) {
       boolean success = true;
       extraMarkerSet = null;
-      /* FIX40
       if(extraMarkerSetFile.isValid()) {
          try {
-            extraMarkerSet = new MarkerSet(extraMarkerSetFile.fileName);
+            extraMarkerSet = new MarkerSet(unscaledModel, extraMarkerSetFile.fileName);
          } catch (IOException ex) {
             extraMarkerSet = null;
             success = false;
          }
       }
-      */
+      
       resetMarkers(); // reset markers in our unscaled model
       if(recompute) recomputeMeasurements();
       ikCommonModel.getIKMarkerTasksModel().markerSetChanged();

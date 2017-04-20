@@ -166,8 +166,10 @@ public class MotionDisplayer implements SelectionListener {
     public void setMuscleColoringFunction(MuscleColoringFunction mcbya) {
         mcf = mcbya;
         // Push it down to muscle displayers
-        SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-        vis.setMuscleColoringFunction(mcf);
+        if (ViewDB.isVtkGraphicsAvailable()){
+            SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
+            vis.setMuscleColoringFunction(mcf);
+        }
         
     }
     
@@ -776,6 +778,7 @@ public class MotionDisplayer implements SelectionListener {
           after=System.nanoTime();
           OpenSimLogger.logMessage("applyFrameToModel time: "+1e-6*(after-before)+" ms.\n", OpenSimLogger.INFO);
       }
+      context.realizeVelocity();
     }
 
     /*
