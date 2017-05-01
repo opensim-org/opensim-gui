@@ -77,6 +77,11 @@ public class TimeSeriesTableQuaternion extends DataTableQuaternion {
     return new SWIGTYPE_p_SimTK__RowVector_T_SimTK__Quaternion_t(opensimCommonJNI.TimeSeriesTableQuaternion_averageRow(swigCPtr, this, beginTime, endTime), true);
   }
 
+  public TimeSeriesTableQuaternion clone() {
+    long cPtr = opensimCommonJNI.TimeSeriesTableQuaternion_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new TimeSeriesTableQuaternion(cPtr, true);
+  }
+
   public TimeSeriesTable flatten() {
     return new TimeSeriesTable(opensimCommonJNI.TimeSeriesTableQuaternion_flatten__SWIG_0(swigCPtr, this), true);
   }

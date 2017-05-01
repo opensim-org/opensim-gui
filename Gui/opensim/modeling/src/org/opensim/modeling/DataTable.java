@@ -185,6 +185,11 @@ public class DataTable extends AbstractDataTable {
     return opensimCommonJNI.DataTable_toString__SWIG_6(swigCPtr, this);
   }
 
+  public DataTable clone() {
+    long cPtr = opensimCommonJNI.DataTable_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new DataTable(cPtr, true);
+  }
+
   public DataTableVec3 packVec3() {
     return new DataTableVec3(opensimCommonJNI.DataTable_packVec3__SWIG_0(swigCPtr, this), true);
   }

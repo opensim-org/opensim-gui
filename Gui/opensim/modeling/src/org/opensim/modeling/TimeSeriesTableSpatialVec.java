@@ -77,6 +77,11 @@ public class TimeSeriesTableSpatialVec extends DataTableSpatialVec {
     return new SWIGTYPE_p_SimTK__RowVector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t(opensimCommonJNI.TimeSeriesTableSpatialVec_averageRow(swigCPtr, this, beginTime, endTime), true);
   }
 
+  public TimeSeriesTableSpatialVec clone() {
+    long cPtr = opensimCommonJNI.TimeSeriesTableSpatialVec_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new TimeSeriesTableSpatialVec(cPtr, true);
+  }
+
   public TimeSeriesTable flatten() {
     return new TimeSeriesTable(opensimCommonJNI.TimeSeriesTableSpatialVec_flatten__SWIG_0(swigCPtr, this), true);
   }
