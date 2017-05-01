@@ -27,6 +27,7 @@ import org.opensim.modeling.FrameGeometry;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
+import org.opensim.modeling.Muscle;
 import org.opensim.modeling.MuscleList;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PathPoint;
@@ -112,6 +113,7 @@ public class ModelVisualizationJson extends JSONObject {
         dgimp = new DecorativeGeometryImplementationJS(json_geometries, json_materials, visScaleFactor);
         while (!mcIter.equals(mcList.end())) {
             Component comp = mcIter.__deref__();
+            System.out.println("Processing:"+comp.getAbsolutePathName()+" Type:"+comp.getConcreteClassName());
             ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
             comp.generateDecorations(true, mdh, model.getWorkingState(), adg);
             if (adg.size() > 0) {
@@ -120,7 +122,7 @@ public class ModelVisualizationJson extends JSONObject {
             GeometryPath gPath = GeometryPath.safeDownCast(comp);
             boolean isGeometryPath = (gPath!=null);
             if (isGeometryPath)
-                ;//NOMUSCLES createJsonForGeometryPath(gPath, mdh, model.getWorkingState(), json_geometries, json_materials);
+                createJsonForGeometryPath(gPath, mdh, model.getWorkingState(), json_geometries, json_materials);
             else{
                 adg.clear();
                 comp.generateDecorations(false, mdh, model.getWorkingState(), adg);
@@ -252,6 +254,7 @@ public class ModelVisualizationJson extends JSONObject {
         /*
         JSONArray geompaths_json = new JSONArray();
         msg.put("paths", geompaths_json);
+        
         MuscleIterator muscleIter = muscleList.begin();
         while(!muscleIter.equals(muscleList.end())){
             // get path and call generateDecorations on it
@@ -321,13 +324,23 @@ public class ModelVisualizationJson extends JSONObject {
         mat_json.put("uuid", mat_uuid.toString());
         mat_json.put("name", path.getAbsolutePathName()+"Mat");
         mat_json.put("type", "MeshBasicMaterial");
-        String colorString = JSONUtilities.mapColorToRGBA(new Vec3(0.62, 0.31, 0.31));
+        Vec3 pathColor = path.getColor(state);
+        String colorString = JSONUtilities.mapColorToRGBA(pathColor);
         mat_json.put("color", colorString);
         mat_json.put("side", 2);
         mat_json.put("skinning", true);
         json_materials.add(mat_json);
 
         JSONArray pathpoint_jsonArr = new JSONArray();
+        // Create plain Geometry with vertices at PathPoints it will have 0 vertices
+        // but will be populated libe in the visualizer from the Pathppoints
+        JSONObject pathGeomJson = new JSONObject();
+        UUID uuidForPathGeomGeometry = UUID.randomUUID();
+        pathGeomJson.put("uuid", uuidForPathGeomGeometry.toString());
+        pathGeomJson.put("type", "Geometry");
+        pathGeomJson.put("name", path.getAbsolutePathName()+"Control");
+        json_geometries.add(pathGeomJson);
+        
         PathPointSet ppts = path.getPathPointSet();
         for (int i=0; i< ppts.getSize(); i++){
             AbstractPathPoint pathPoint = ppts.get(i);
@@ -347,6 +360,7 @@ public class ModelVisualizationJson extends JSONObject {
         obj_json.put("type", "GeometryPath");
         obj_json.put("name", path.getAbsolutePathName());
         obj_json.put("points", pathpoint_jsonArr);
+        obj_json.put("geomtery", uuidForPathGeomGeometry.toString());
         obj_json.put("opensimType", "Path");
         gndChildren.add(obj_json);
         // Create json entry for material (path_material) and set skinning to true
