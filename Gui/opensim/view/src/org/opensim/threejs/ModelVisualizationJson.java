@@ -337,7 +337,7 @@ public class ModelVisualizationJson extends JSONObject {
         JSONObject pathGeomJson = new JSONObject();
         UUID uuidForPathGeomGeometry = UUID.randomUUID();
         pathGeomJson.put("uuid", uuidForPathGeomGeometry.toString());
-        pathGeomJson.put("type", "Geometry");
+        pathGeomJson.put("type", "PathGeometry");
         pathGeomJson.put("name", path.getAbsolutePathName()+"Control");
         json_geometries.add(pathGeomJson);
         
@@ -360,7 +360,7 @@ public class ModelVisualizationJson extends JSONObject {
         obj_json.put("type", "GeometryPath");
         obj_json.put("name", path.getAbsolutePathName());
         obj_json.put("points", pathpoint_jsonArr);
-        obj_json.put("geomtery", uuidForPathGeomGeometry.toString());
+        obj_json.put("geometry", uuidForPathGeomGeometry.toString());
         obj_json.put("opensimType", "Path");
         gndChildren.add(obj_json);
         // Create json entry for material (path_material) and set skinning to true
