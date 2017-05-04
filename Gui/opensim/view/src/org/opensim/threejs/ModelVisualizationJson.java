@@ -115,19 +115,19 @@ public class ModelVisualizationJson extends JSONObject {
             Component comp = mcIter.__deref__();
             System.out.println("Processing:"+comp.getAbsolutePathName()+" Type:"+comp.getConcreteClassName());
             ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
-            comp.generateDecorations(true, mdh, model.getWorkingState(), adg);
+            comp.generateDecorations(true, mdh, state, adg);
             if (adg.size() > 0) {
                 processDecorativeGeometry(adg, comp, dgimp, json_materials);
             }
             GeometryPath gPath = GeometryPath.safeDownCast(comp);
             boolean isGeometryPath = (gPath!=null);
             if (isGeometryPath){
-                UUID pathUUID = createJsonForGeometryPath(gPath, mdh, model.getWorkingState(), json_geometries, json_materials);
+                UUID pathUUID = createJsonForGeometryPath(gPath, mdh, state, json_geometries, json_materials);
                 pathList.put(gPath, pathUUID);
             }
             else{
                 adg.clear();
-                comp.generateDecorations(false, mdh, model.getWorkingState(), adg);
+                comp.generateDecorations(false, mdh, state, adg);
                  if (adg.size() > 0) {
                      processDecorativeGeometry(adg, comp, dgimp, json_materials);
                 }
