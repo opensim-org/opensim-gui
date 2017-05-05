@@ -1427,6 +1427,10 @@ public class Model extends ModelComponent {
     return new JointList(opensimSimulationJNI.Model_getJointList(swigCPtr, this), true);
   }
 
+  public ActuatorList getActuatorList() {
+    return new ActuatorList(opensimSimulationJNI.Model_getActuatorList(swigCPtr, this), true);
+  }
+
   public Thelen2003MuscleList getThelen2003MuscleList() {
     return new Thelen2003MuscleList(opensimSimulationJNI.Model_getThelen2003MuscleList(swigCPtr, this), true);
   }

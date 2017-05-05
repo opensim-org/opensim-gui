@@ -77,6 +77,11 @@ public class TimeSeriesTableVec6 extends DataTableVec6 {
     return new SWIGTYPE_p_SimTK__RowVector_T_SimTK__VecT_6_double_1_t_t(opensimCommonJNI.TimeSeriesTableVec6_averageRow(swigCPtr, this, beginTime, endTime), true);
   }
 
+  public TimeSeriesTableVec6 clone() {
+    long cPtr = opensimCommonJNI.TimeSeriesTableVec6_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new TimeSeriesTableVec6(cPtr, true);
+  }
+
   public TimeSeriesTable flatten() {
     return new TimeSeriesTable(opensimCommonJNI.TimeSeriesTableVec6_flatten__SWIG_0(swigCPtr, this), true);
   }

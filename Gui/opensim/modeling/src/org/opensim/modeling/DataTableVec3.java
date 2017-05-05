@@ -193,4 +193,9 @@ public class DataTableVec3 extends AbstractDataTable {
     return opensimCommonJNI.DataTableVec3_toString__SWIG_6(swigCPtr, this);
   }
 
+  public DataTableVec3 clone() {
+    long cPtr = opensimCommonJNI.DataTableVec3_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new DataTableVec3(cPtr, true);
+  }
+
 }

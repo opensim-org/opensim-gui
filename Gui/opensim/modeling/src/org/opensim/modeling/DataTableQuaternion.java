@@ -193,4 +193,9 @@ public class DataTableQuaternion extends AbstractDataTable {
     return opensimCommonJNI.DataTableQuaternion_toString__SWIG_6(swigCPtr, this);
   }
 
+  public DataTableQuaternion clone() {
+    long cPtr = opensimCommonJNI.DataTableQuaternion_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new DataTableQuaternion(cPtr, true);
+  }
+
 }

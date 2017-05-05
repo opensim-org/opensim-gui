@@ -77,6 +77,11 @@ public class TimeSeriesTable extends DataTable {
     return new RowVector(opensimCommonJNI.TimeSeriesTable_averageRow(swigCPtr, this, beginTime, endTime), true);
   }
 
+  public TimeSeriesTable clone() {
+    long cPtr = opensimCommonJNI.TimeSeriesTable_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new TimeSeriesTable(cPtr, true);
+  }
+
   public TimeSeriesTableVec3 packVec3() {
     return new TimeSeriesTableVec3(opensimCommonJNI.TimeSeriesTable_packVec3__SWIG_0(swigCPtr, this), true);
   }
