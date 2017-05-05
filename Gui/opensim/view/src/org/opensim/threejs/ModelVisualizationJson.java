@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -27,6 +28,7 @@ import org.opensim.modeling.FrameGeometry;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
+import org.opensim.modeling.Muscle;
 import org.opensim.modeling.MuscleList;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PathPoint;
@@ -53,7 +55,7 @@ public class ModelVisualizationJson extends JSONObject {
     private final HashMap<String, UUID> mapPathMaterialToUUID = new HashMap<String, UUID>();
     private static final String GEOMETRY_SEP = ".";
     private final Vec3 vec3Unit = new Vec3(1.0, 1.0, 1.0);
-    private MuscleList muscleList = null;
+    private final HashMap<GeometryPath, UUID> pathList = new HashMap<GeometryPath, UUID>();
     private ModelDisplayHints mdh;
     private DecorativeGeometryImplementationJS dgimp = null;
     private static String boneSuffix = "_Bone";
@@ -72,7 +74,6 @@ public class ModelVisualizationJson extends JSONObject {
         state = model.getWorkingState();
         mdh = model.getDisplayHints();
         ComponentsList mcList = model.getComponentsList();
-        muscleList = model.getMuscleList();
         ComponentIterator mcIter = mcList.begin();
         
         BodyList bodies = model.getBodyList();
@@ -112,18 +113,21 @@ public class ModelVisualizationJson extends JSONObject {
         dgimp = new DecorativeGeometryImplementationJS(json_geometries, json_materials, visScaleFactor);
         while (!mcIter.equals(mcList.end())) {
             Component comp = mcIter.__deref__();
+            System.out.println("Processing:"+comp.getAbsolutePathName()+" Type:"+comp.getConcreteClassName());
             ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
-            comp.generateDecorations(true, mdh, model.getWorkingState(), adg);
+            comp.generateDecorations(true, mdh, state, adg);
             if (adg.size() > 0) {
                 processDecorativeGeometry(adg, comp, dgimp, json_materials);
             }
             GeometryPath gPath = GeometryPath.safeDownCast(comp);
             boolean isGeometryPath = (gPath!=null);
-            if (isGeometryPath)
-                ;//NOMUSCLES createJsonForGeometryPath(gPath, mdh, model.getWorkingState(), json_geometries, json_materials);
+            if (isGeometryPath){
+                UUID pathUUID = createJsonForGeometryPath(gPath, mdh, state, json_geometries, json_materials);
+                pathList.put(gPath, pathUUID);
+            }
             else{
                 adg.clear();
-                comp.generateDecorations(false, mdh, model.getWorkingState(), adg);
+                comp.generateDecorations(false, mdh, state, adg);
                  if (adg.size() > 0) {
                      processDecorativeGeometry(adg, comp, dgimp, json_materials);
                 }
@@ -249,15 +253,23 @@ public class ModelVisualizationJson extends JSONObject {
             oneBodyXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1., 1., 1.), visScaleFactor));
             bodyTransforms_json.add(oneBodyXform_json);
         }
-        /*
         JSONArray geompaths_json = new JSONArray();
         msg.put("paths", geompaths_json);
-        MuscleIterator muscleIter = muscleList.begin();
-        while(!muscleIter.equals(muscleList.end())){
+        
+        Set<GeometryPath> paths = pathList.keySet();
+        Iterator<GeometryPath> pathIter = paths.iterator();
+        while(pathIter.hasNext()){
             // get path and call generateDecorations on it
-            GeometryPath geomPathObject = muscleIter.getGeometryPath();
-            ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
+            GeometryPath geomPathObject = pathIter.next();
+            UUID pathUUID = pathList.get(geomPathObject);
             JSONObject pathUpdate_json = new JSONObject();
+            pathUpdate_json.put("uuid", pathUUID.toString());
+            Vec3 pathColor = geomPathObject.getColor(state);
+            String colorString = JSONUtilities.mapColorToRGBA(pathColor);
+            pathUpdate_json.put("color", colorString);
+            geompaths_json.add(pathUpdate_json);
+            /*
+            ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
             geomPathObject.generateDecorations(false, mdh, state, adg);
             ArrayList<UUID> existing_uuids = mapComponentToUUID.get(geomPathObject);
             // segments are at index 2, 4, 6, ... in uuid_list
@@ -271,11 +283,8 @@ public class ModelVisualizationJson extends JSONObject {
                 pathUpdate_json.put("positions", positionsJson.get("array"));
                 geompaths_json.add(pathUpdate_json);
        
-            }
-            // Find uuid for muscle based on Path and send new coordinates
-            muscleIter.next();
+            }*/
         }
-        */
         //System.out.println("Sending:"+msg.toJSONString());
         return msg;
     }
@@ -313,21 +322,31 @@ public class ModelVisualizationJson extends JSONObject {
         return guiJson;
     }
 
-    private void createJsonForGeometryPath(GeometryPath path, ModelDisplayHints mdh, State workingState, JSONArray json_geometries, JSONArray json_materials) {
+    private UUID createJsonForGeometryPath(GeometryPath path, ModelDisplayHints mdh, State workingState, JSONArray json_geometries, JSONArray json_materials) {
         // Create material for path
         Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
         UUID mat_uuid = UUID.randomUUID();
         mapPathMaterialToUUID.put(path.getAbsolutePathName(), mat_uuid);
         mat_json.put("uuid", mat_uuid.toString());
         mat_json.put("name", path.getAbsolutePathName()+"Mat");
-        mat_json.put("type", "MeshBasicMaterial");
-        String colorString = JSONUtilities.mapColorToRGBA(new Vec3(0.62, 0.31, 0.31));
+        mat_json.put("type", "LineBasicMaterial");
+        Vec3 pathColor = path.getColor(state);
+        String colorString = JSONUtilities.mapColorToRGBA(pathColor);
         mat_json.put("color", colorString);
         mat_json.put("side", 2);
         mat_json.put("skinning", true);
         json_materials.add(mat_json);
 
         JSONArray pathpoint_jsonArr = new JSONArray();
+        // Create plain Geometry with vertices at PathPoints it will have 0 vertices
+        // but will be populated libe in the visualizer from the Pathppoints
+        JSONObject pathGeomJson = new JSONObject();
+        UUID uuidForPathGeomGeometry = UUID.randomUUID();
+        pathGeomJson.put("uuid", uuidForPathGeomGeometry.toString());
+        pathGeomJson.put("type", "PathGeometry");
+        pathGeomJson.put("name", path.getAbsolutePathName()+"Control");
+        json_geometries.add(pathGeomJson);
+        
         PathPointSet ppts = path.getPathPointSet();
         for (int i=0; i< ppts.getSize(); i++){
             AbstractPathPoint pathPoint = ppts.get(i);
@@ -347,11 +366,12 @@ public class ModelVisualizationJson extends JSONObject {
         obj_json.put("type", "GeometryPath");
         obj_json.put("name", path.getAbsolutePathName());
         obj_json.put("points", pathpoint_jsonArr);
+        obj_json.put("geometry", uuidForPathGeomGeometry.toString());
         obj_json.put("opensimType", "Path");
         gndChildren.add(obj_json);
         // Create json entry for material (path_material) and set skinning to true
         obj_json.put("material", mat_uuid.toString());
-        return;       
+        return mesh_uuid;       
     }
 
     private UUID createJsonForPathPoint(PathPoint ppt) {
