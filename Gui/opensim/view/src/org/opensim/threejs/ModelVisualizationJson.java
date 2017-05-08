@@ -252,8 +252,11 @@ public class ModelVisualizationJson extends JSONObject {
         if (ready) { // Avoid trying to send a frame before Json is completely populated
             while (bodyIdIter.hasNext()) {
                 int bodyId = bodyIdIter.next();
+                if (bodyId ==0) continue; // Skip over "Ground, as unnecessary
                 JSONObject oneBodyXform_json = new JSONObject();
                 PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(bodyId);
+                if (verbose)
+                    System.out.println("Getting transform of "+bodyFrame.getName());
                 Transform xform = bodyFrame.getTransformInGround(state);
                 // Get uuid for first Mesh in body
                 oneBodyXform_json.put("uuid", mapBodyIndicesToJson.get(bodyId).get("uuid"));

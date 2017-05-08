@@ -391,8 +391,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                     websocketdb.broadcastMessageJson(msg, null);
                     if (debugLevel > 1)
                         System.out.println(msg.toJSONString());
-                    UUID modelUUID = dJson.getModelUUID();
                     mapModelsToJsons.remove(dModel);
+                    if (currentJson == dJson) // Cleanup stale Json, will be set fresh by next current model
+                        currentJson = null;
                 }
                
             } else if (ev.getOperation()==ModelEvent.Operation.SetCurrent) {
