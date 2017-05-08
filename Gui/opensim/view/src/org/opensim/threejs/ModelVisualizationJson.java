@@ -68,11 +68,13 @@ public class ModelVisualizationJson extends JSONObject {
     
     public ModelVisualizationJson(JSONObject jsonTopIn, Model model) {
         // implicit super()
-        System.out.println("start building json for "+model.getName());
+        if (verbose)
+            System.out.println("start building json for "+model.getName());
         createModelJsonNode(); // Model node
         createJsonForModel(model);
         ready = true;
-        System.out.println("finished building json for "+model.getName());
+        if (verbose)
+            System.out.println("finished building json for "+model.getName());
     }
     private void createJsonForModel(Model model) {
         state = model.getWorkingState();
