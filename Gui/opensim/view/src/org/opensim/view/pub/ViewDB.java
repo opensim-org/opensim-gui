@@ -337,11 +337,12 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                }
                if (websocketdb!=null){
                    // create Json for model
-                   ModelVisualizationJson vizJson = new ModelVisualizationJson(jsondb, evModel);
-                   getInstance().addModelVisuals(evModel, vizJson);
+                   //This will be invoked only when visualizer windows are already open
+                   if (debugLevel > 1)
+                        System.out.println("ModelVisualizationJson constructed in ViewDB.Update");
+                   ModelVisualizationJson vizJson = createJsonFroModel(jsondb, evModel);
                    exportModelJsonToVisualizer(vizJson, null);
-                   mapModelsToJsons.put(evModel, vizJson);
-               }
+                }
                else {
                    // Same as open visualizer window 
                    VisualizerWindowAction.openVisualizerWindow();
@@ -388,7 +389,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                     ModelVisualizationJson dJson = mapModelsToJsons.get(dModel);
                     JSONObject msg = dJson.createCloseModelJson();
                     websocketdb.broadcastMessageJson(msg, null);
-                    System.out.println(msg.toJSONString());
+                    if (debugLevel > 1)
+                        System.out.println(msg.toJSONString());
                     UUID modelUUID = dJson.getModelUUID();
                     mapModelsToJsons.remove(dModel);
                 }
@@ -415,7 +417,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                     currentJson = mapModelsToJsons.get(cModel);
                     JSONObject msg = currentJson.createSetCurrentModelJson();
                     websocketdb.broadcastMessageJson(msg, null);
-                    System.out.println(msg.toJSONString());
+                    if (debugLevel > 1)
+                        System.out.println(msg.toJSONString());
                 }
 
             } else if (ev.getOperation()==ModelEvent.Operation.Save) {
@@ -1641,12 +1644,13 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         for (int i=0; i< models.length; i++){
             Model model = (Model) models[i];
             ModelVisualizationJson vizJson = null;
+            if (debugLevel >1)
+                System.out.println("ModelVisualizationJson constructed in exportAllModelsToJson");
             if (getInstance().mapModelsToJsons.containsKey(model)){
                 vizJson = getInstance().mapModelsToJsons.get(model);
             }
-            else{
-                vizJson = new ModelVisualizationJson(jsondb, model);
-                getInstance().addModelVisuals(model, vizJson);
+            else{ // new ModelVisualizationJson(jsondb, model);
+                vizJson = createJsonFroModel(jsondb, model);
             }
             exportModelJsonToVisualizer(vizJson, socket);
         }
@@ -1654,6 +1658,13 @@ public final class ViewDB extends Observable implements Observer, LookupListener
 
     private void sync(VisWebSocket visWebSocket) {
         ViewDB.getInstance().exportAllModelsToJson(visWebSocket);
+    }
+    // Method is synchronized to avoid concurrent creation of Json from ViewDB.update and socket
+    private synchronized ModelVisualizationJson createJsonFroModel(JSONObject jsondb, Model model) {
+        ModelVisualizationJson vizJson = new ModelVisualizationJson(jsondb, model);
+        getInstance().addModelVisuals(model, vizJson);
+        mapModelsToJsons.put(model, vizJson);
+        return vizJson;
     }
 
    /**
@@ -2064,7 +2075,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             currentJson = mapModelsToJsons.get(cModel);
             JSONObject msg = currentJson.createSetCurrentModelJson();
             websocketdb.broadcastMessageJson(msg, null);
-            System.out.println(msg.toJSONString());
+            if (debugLevel > 1)
+                System.out.println(msg.toJSONString());
         }
     }
     // Callback, invoked when a command is received from visualizer
