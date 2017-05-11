@@ -355,6 +355,7 @@ public class ModelVisualizationJson extends JSONObject {
         pathGeomJson.put("uuid", uuidForPathGeomGeometry.toString());
         pathGeomJson.put("type", "PathGeometry");
         pathGeomJson.put("name", path.getAbsolutePathName()+"Control");
+        pathGeomJson.put("segments", path.getPathPointSet().getSize()-1);
         json_geometries.add(pathGeomJson);
         
         PathPointSet ppts = path.getPathPointSet();
