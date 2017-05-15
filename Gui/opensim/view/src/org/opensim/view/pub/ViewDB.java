@@ -340,7 +340,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                    //This will be invoked only when visualizer windows are already open
                    if (debugLevel > 1)
                         System.out.println("ModelVisualizationJson constructed in ViewDB.Update");
-                   ModelVisualizationJson vizJson = createJsonFroModel(jsondb, evModel);
+                   ModelVisualizationJson vizJson = getJsonForModel(jsondb, evModel);
                    exportModelJsonToVisualizer(vizJson, null);
                 }
                else {
@@ -1647,12 +1647,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             ModelVisualizationJson vizJson = null;
             if (debugLevel >1)
                 System.out.println("ModelVisualizationJson constructed in exportAllModelsToJson");
-            if (getInstance().mapModelsToJsons.containsKey(model)){
-                vizJson = getInstance().mapModelsToJsons.get(model);
-            }
-            else{ // new ModelVisualizationJson(jsondb, model);
-                vizJson = createJsonFroModel(jsondb, model);
-            }
+            
+            vizJson = getJsonForModel(jsondb, model);
+            
             exportModelJsonToVisualizer(vizJson, socket);
         }
     }
@@ -1661,8 +1658,13 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         ViewDB.getInstance().exportAllModelsToJson(visWebSocket);
     }
     // Method is synchronized to avoid concurrent creation of Json from ViewDB.update and socket
-    private synchronized ModelVisualizationJson createJsonFroModel(JSONObject jsondb, Model model) {
-        ModelVisualizationJson vizJson = new ModelVisualizationJson(jsondb, model);
+    private synchronized ModelVisualizationJson getJsonForModel(JSONObject jsondb, Model model) {
+        ModelVisualizationJson vizJson;
+        if (getInstance().mapModelsToJsons.containsKey(model)){
+                vizJson = getInstance().mapModelsToJsons.get(model);
+                return vizJson;
+        }
+        vizJson = new ModelVisualizationJson(jsondb, model);
         getInstance().addModelVisuals(model, vizJson);
         mapModelsToJsons.put(model, vizJson);
         return vizJson;
