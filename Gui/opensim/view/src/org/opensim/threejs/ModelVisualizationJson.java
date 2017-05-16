@@ -130,6 +130,9 @@ public class ModelVisualizationJson extends JSONObject {
             if (isGeometryPath){
                 UUID pathUUID = createJsonForGeometryPath(gPath, mdh, state, json_geometries, json_materials);
                 pathList.put(gPath, pathUUID);
+                // Add to the ID map so that PathOwner translates to GeometryPath
+                Component parentComp = gPath.getOwner();
+                addComponentToUUIDMap(parentComp, pathUUID);
             }
             else{
                 adg.clear();
@@ -339,7 +342,7 @@ public class ModelVisualizationJson extends JSONObject {
         mapPathMaterialToUUID.put(path.getAbsolutePathName(), mat_uuid);
         mat_json.put("uuid", mat_uuid.toString());
         mat_json.put("name", path.getAbsolutePathName()+"Mat");
-        mat_json.put("type", "LineBasicMaterial");
+        mat_json.put("type", "MeshBasicMaterial");
         Vec3 pathColor = path.getColor(state);
         String colorString = JSONUtilities.mapColorToRGBA(pathColor);
         mat_json.put("color", colorString);
