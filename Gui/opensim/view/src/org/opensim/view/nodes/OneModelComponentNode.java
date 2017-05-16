@@ -35,7 +35,7 @@ public class OneModelComponentNode extends OneComponentNode {
     public Action[] getActions(boolean b) {
         Action[] superActions = (Action[]) super.getActions(b);
         
-        // Arrays are fixed size, onvert to a List
+        // Arrays are fixed size, convert to a List
         /*
         List<Action> actions = Arrays.asList(superActions);
         // Create new Array of proper size
