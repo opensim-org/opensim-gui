@@ -34,13 +34,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
-import org.openide.nodes.Children;
-import org.openide.nodes.Node;
 import org.openide.util.NbBundle;
-import org.opensim.modeling.Force;
-import org.opensim.modeling.Geometry;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.view.ObjectDisplayMenuAction;
 
 /**
  *
@@ -95,6 +90,7 @@ public class OneForceNode extends DisablablModelComponentNode {
         // Create new Array of proper size
         Action[] retActions = new Action[actions.size()+1];
         actions.toArray(retActions);
+        /* No need to take out Display Options
         if (enabled){  // take out display menu ObjectDisplayMenuAction
             for (int i=0; i< retActions.length; i++){
                 if (retActions[i] instanceof ObjectDisplayMenuAction){
@@ -102,7 +98,7 @@ public class OneForceNode extends DisablablModelComponentNode {
                     break;
                 }
             }
-        }
+        } */
         try {
             ToggleEnabledStateAction act =(ToggleEnabledStateAction) ToggleEnabledStateAction.findObject(
                     (Class)Class.forName("org.opensim.view.nodes.ToggleEnabledStateAction"), true);
