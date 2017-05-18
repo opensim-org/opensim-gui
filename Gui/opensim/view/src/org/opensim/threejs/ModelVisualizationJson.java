@@ -63,6 +63,7 @@ public class ModelVisualizationJson extends JSONObject {
     private JSONArray json_materials;
     private JSONObject model_object;
     private UUID modelUUID;
+    private UUID pathpointMatUUID;
     public static boolean verbose=false;
     private boolean ready = false;
     
@@ -116,6 +117,8 @@ public class ModelVisualizationJson extends JSONObject {
             body.next();
         }
         //createSkeleton(model, jsonTop);
+        // Create material for PathPoints, Markers
+        pathpointMatUUID= createPathPointMaterial();
         dgimp = new DecorativeGeometryImplementationJS(json_geometries, json_materials, visScaleFactor);
         while (!mcIter.equals(mcList.end())) {
             Component comp = mcIter.__deref__();
@@ -277,7 +280,7 @@ public class ModelVisualizationJson extends JSONObject {
                 UUID pathUUID = pathList.get(geomPathObject);
                 JSONObject pathUpdate_json = new JSONObject();
                 pathUpdate_json.put("uuid", pathUUID.toString());
-                Vec3 pathColor = geomPathObject.getColor(state);
+                Vec3 pathColor = geomPathObject.getDefaultColor();
                 String colorString = JSONUtilities.mapColorToRGBA(pathColor);
                 pathUpdate_json.put("color", colorString);
                 geompaths_json.add(pathUpdate_json);
@@ -342,12 +345,13 @@ public class ModelVisualizationJson extends JSONObject {
         mapPathMaterialToUUID.put(path.getAbsolutePathName(), mat_uuid);
         mat_json.put("uuid", mat_uuid.toString());
         mat_json.put("name", path.getAbsolutePathName()+"Mat");
-        mat_json.put("type", "MeshPhongMaterial");
-        Vec3 pathColor = path.getColor(state);
+        mat_json.put("type", "MeshBasicMaterial");
+        Vec3 pathColor = path.getDefaultColor();
         String colorString = JSONUtilities.mapColorToRGBA(pathColor);
         mat_json.put("color", colorString);
         mat_json.put("side", 2);
         mat_json.put("skinning", true);
+        mat_json.put("transparent", true);
         json_materials.add(mat_json);
 
         JSONArray pathpoint_jsonArr = new JSONArray();
@@ -366,7 +370,7 @@ public class ModelVisualizationJson extends JSONObject {
             AbstractPathPoint pathPoint = ppts.get(i);
             // Create a Sphere with internal opensimType PathPoint
             // attach it to the frame it lives on.
-            UUID pathpoint_uuid = addPathPointGeometryToParent(pathPoint, json_geometries, mat_uuid.toString());
+            UUID pathpoint_uuid = addPathPointGeometryToParent(pathPoint, json_geometries, pathpointMatUUID.toString());
             //UUID ppt_json = createJsonForPathPoint(pathPoint);
             pathpoint_jsonArr.add(pathpoint_uuid.toString());
         }
@@ -533,6 +537,19 @@ public class ModelVisualizationJson extends JSONObject {
             guiJson.put("command", commandJson);
         }
         return guiJson;
+    }
+
+    private UUID createPathPointMaterial() {
+        Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
+        UUID mat_uuid = UUID.randomUUID();
+        mat_json.put("uuid", mat_uuid.toString());
+        mat_json.put("name", "PathPointMat");
+        mat_json.put("type", "MeshBasicMaterial");
+        String colorString = JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 1.));
+        mat_json.put("color", colorString);
+        mat_json.put("side", 2);
+        json_materials.add(mat_json);
+        return mat_uuid;
     }
 
 }
