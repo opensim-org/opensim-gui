@@ -342,7 +342,7 @@ public class ModelVisualizationJson extends JSONObject {
         mapPathMaterialToUUID.put(path.getAbsolutePathName(), mat_uuid);
         mat_json.put("uuid", mat_uuid.toString());
         mat_json.put("name", path.getAbsolutePathName()+"Mat");
-        mat_json.put("type", "MeshBasicMaterial");
+        mat_json.put("type", "MeshPhongMaterial");
         Vec3 pathColor = path.getColor(state);
         String colorString = JSONUtilities.mapColorToRGBA(pathColor);
         mat_json.put("color", colorString);
