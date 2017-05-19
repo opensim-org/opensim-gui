@@ -56,8 +56,9 @@ public class OneForceNode extends DisablablModelComponentNode implements Colorab
     public OneForceNode(OpenSimObject force) {
         super(force);
         hasPath = force.hasProperty("GeometryPath");
-        if (hasPath)
+        if (hasPath){
             pathObject =  GeometryPath.safeDownCast(force.getPropertyByName("GeometryPath").getValueAsObject());
+         }
 
 
 //        if (f.getDisplayer()!=null){
@@ -132,8 +133,11 @@ public class OneForceNode extends DisablablModelComponentNode implements Colorab
 
     @Override
     public void setVisible(Boolean newValue) {
-        if (hasPath)
-            pathObject.get_Appearance().set_visible(newValue);
+        if (hasPath){
+            AppearanceHelper helper = new AppearanceHelper(getModelForNode(), this, pathObject.get_Appearance());
+            helper.setAppearanceVisilibityProperty(newValue);
+            pathObject.getPropertyByName("Appearance").setValueIsDefault(false);
+        }
     }
 
     @Override
@@ -151,6 +155,7 @@ public class OneForceNode extends DisablablModelComponentNode implements Colorab
         if (hasPath){
             AppearanceHelper helper = new AppearanceHelper(getModelForNode(), this, pathObject.get_Appearance());
             helper.setAppearanceColorProperty(newColor);
+            pathObject.getPropertyByName("Appearance").setValueIsDefault(false);
         }
 
     }
@@ -165,6 +170,7 @@ public class OneForceNode extends DisablablModelComponentNode implements Colorab
          if (hasPath){
             AppearanceHelper helper = new AppearanceHelper(getModelForNode(), this, pathObject.get_Appearance());
             helper.setAppearanceDisplayPrefProperty(newPref);
+            pathObject.getPropertyByName("Appearance").setValueIsDefault(false);
         }
     }
 
@@ -178,6 +184,7 @@ public class OneForceNode extends DisablablModelComponentNode implements Colorab
           if (hasPath){
             AppearanceHelper helper = new AppearanceHelper(getModelForNode(), this, pathObject.get_Appearance());
             helper.setAppearanceOpacityProperty(opacity);
+            pathObject.getPropertyByName("Appearance").setValueIsDefault(false);
         }
    }
 }

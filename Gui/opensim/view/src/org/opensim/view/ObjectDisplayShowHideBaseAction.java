@@ -115,6 +115,10 @@ public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemActi
         }
         //else
         OpenSimObject obj = objectNode.getOpenSimObject();
+        if (objectNode instanceof ColorableInterface){
+            ((ColorableInterface)objectNode).setVisible(show);
+            return;
+        }
         boolean hasAppearanceProperty = obj.hasProperty("Appearance");
         
         if (hasAppearanceProperty){
