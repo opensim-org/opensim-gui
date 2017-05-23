@@ -477,10 +477,15 @@ public class ModelVisualizationJson extends JSONObject {
         PhysicalFrame bodyFrame = pathPoint.getBody();
         JSONObject bodyJson = mapBodyIndicesToJson.get(bodyFrame.getMobilizedBodyIndex());
         JSONArray children = (JSONArray)bodyJson.get("children");
+        if (children==null){
+                bodyJson.put("children", new JSONArray());
+                children = (JSONArray)bodyJson.get("children");
+        }
         Transform localTransform = new Transform();
         Vec3 location = pathPoint.getLocation(state);
         localTransform.setP(location);
         bpptInBodyJson.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1.0), visScaleFactor));
+        bpptInBodyJson.put("visible", false);
         children.add(bpptInBodyJson);
         return ppoint_uuid;
     }
