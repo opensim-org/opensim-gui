@@ -49,10 +49,7 @@ public class OneActuatorNode extends OneForceNode{
     public OneActuatorNode(OpenSimObject actuator) {
         super(actuator);
         setShortDescription(bundle.getString("HINT_ActuatorNode"));
-        setChildren(Children.LEAF);
-        addDisplayOption(displayOption.Showable);
-        addDisplayOption(displayOption.Isolatable);
-        addDisplayOption(displayOption.Colorable);
+
     }
     public Image getIcon(int i) {
         URL imageURL;
