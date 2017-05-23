@@ -373,6 +373,9 @@ public class ModelVisualizationJson extends JSONObject {
             UUID pathpoint_uuid = addPathPointGeometryToParent(pathPoint, json_geometries, pathpointMatUUID.toString());
             //UUID ppt_json = createJsonForPathPoint(pathPoint);
             pathpoint_jsonArr.add(pathpoint_uuid.toString());
+            ArrayList<UUID> comp_uuids = new ArrayList<UUID>();
+            comp_uuids.add(pathpoint_uuid);
+            mapComponentToUUID.put(pathPoint, comp_uuids);
         }
         JSONObject gndJson = mapBodyIndicesToJson.get(0);
         if (gndJson.get("children")==null)
