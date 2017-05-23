@@ -925,7 +925,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       // Remaining code is vtk depenedent
       if (!isVtkGraphicsAvailable()) return;
       selectedObject.markSelected(highlight);
-      if (ViewDB.getInstance().isQuery()){
+      if (websocketdb != null){
+          Model model = selectedObject.getOwnerModel();
+          websocketdb.broadcastMessageJson(currentJson.createSelectionJson(selectedObject.getOpenSimObject()), null);
+      }
+      if (ViewDB.getInstance().isQuery() && isVtkGraphicsAvailable()){
           if (highlight){
            // Add caption
              vtkCaptionActor2D theCaption = new vtkCaptionActor2D();
@@ -993,9 +997,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    }
 
    public void setSelectedObject(OpenSimObject obj) {
-      if (findObjectInSelectedList(obj)!=-1)
-          return;
-      clearSelectedObjects();
+      //FIX40 if (findObjectInSelectedList(obj)!=-1)
+      //    return;
+      //clearSelectedObjects();
 
       if (obj != null) {
          SelectedObject selectedObject = new SelectedObject(obj);
