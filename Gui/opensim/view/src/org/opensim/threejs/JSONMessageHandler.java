@@ -59,13 +59,13 @@ public class JSONMessageHandler {
           String returnString = "";
           double x, y, z;
           double relativeScale = ModelVisualizationJson.getVisScaleFactor();
-          x = (Double) positionObj.get("x")/relativeScale;
+          x = (Double) ((Long)positionObj.get("x")/relativeScale);
           returnString = returnString.concat(String.valueOf(x));
           returnString = returnString.concat(" ");
-          y = (Double) positionObj.get("y")/relativeScale;
+          y = (Double) ((Long)positionObj.get("y")/relativeScale);
           returnString = returnString.concat(String.valueOf(y));
           returnString = returnString.concat(" ");
-          z = (Double) positionObj.get("z")/relativeScale;
+          z = (Double) ((Long)positionObj.get("z")/relativeScale);
           returnString = returnString.concat(String.valueOf(z));
           return returnString;
     }

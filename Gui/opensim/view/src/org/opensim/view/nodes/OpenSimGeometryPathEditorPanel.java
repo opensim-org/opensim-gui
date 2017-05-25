@@ -1599,6 +1599,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
             vis.upateDisplay(Component.safeDownCast(objectWithPath));
             ViewDB.getInstance().repaintAll();
         }
+        ViewDB.getInstance().updatePathDisplay(model, currentPath);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

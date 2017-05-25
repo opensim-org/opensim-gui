@@ -547,7 +547,36 @@ public class ModelVisualizationJson extends JSONObject {
         }
         return guiJson;
     }
-
+	// Export Path in Json format to visualizer, as of now 
+	// only supports Stationary PathPoints
+    public JSONObject createPathUpdateJson(GeometryPath path) {
+        JSONObject topJson = new JSONObject();
+        // Create command to move Stationary PathPoints to new locations
+        topJson.put("Op", "execute");
+        JSONObject topCommandJson = new JSONObject();
+        topCommandJson.put("type", "MultiCmdsCommand");
+        JSONArray commands = new JSONArray();
+        topCommandJson.put("cmds", commands);
+        PathPointSet ppts = path.getPathPointSet();
+        for (int i=0; i< ppts.getSize(); i++){
+            AbstractPathPoint pathPoint = ppts.get(i);
+            JSONObject nextpptPositionCommand = new JSONObject();
+            nextpptPositionCommand.put("type", "SetPositionCommand");
+            nextpptPositionCommand.put("objectUuid", mapComponentToUUID.get(pathPoint).get(0).toString());
+            Vec3 location = pathPoint.getLocation(state);
+            JSONArray locationArray = new JSONArray();
+            JSONArray oldLocationArray = new JSONArray();
+            for (int p =0; p <3; p++){
+                locationArray.add(location.get(p)*visScaleFactor);
+                oldLocationArray.add(0);
+            }
+            nextpptPositionCommand.put("newPosition", locationArray);
+            nextpptPositionCommand.put("oldPosition", oldLocationArray);
+            commands.add(nextpptPositionCommand);
+        }
+        topJson.put("command", topCommandJson);
+        return topJson;
+    }
     private UUID createPathPointMaterial() {
         Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
         UUID mat_uuid = UUID.randomUUID();
@@ -560,5 +589,5 @@ public class ModelVisualizationJson extends JSONObject {
         json_materials.add(mat_json);
         return mat_uuid;
     }
-
+    
 }

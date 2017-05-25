@@ -1673,6 +1673,13 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         mapModelsToJsons.put(model, vizJson);
         return vizJson;
     }
+    // method to export GeometryPath to JSON format upon edit
+    public void updatePathDisplay(Model model, GeometryPath currentPath) {
+        if (websocketdb!=null){
+            ModelVisualizationJson vizJson = getInstance().mapModelsToJsons.get(model);
+            websocketdb.broadcastMessageJson(vizJson.createPathUpdateJson(currentPath), null);
+        }
+    }
 
    /**
     * Utility: apply a function to given actor, or to all actors in assembly.
