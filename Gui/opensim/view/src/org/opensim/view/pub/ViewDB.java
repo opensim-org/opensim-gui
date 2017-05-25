@@ -1278,11 +1278,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       }
       if (websocketdb != null && currentJson != null){
         // Make xforms JSON
-        websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(), null);
+        websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(false), null);
       }
    }
    
-   public void updateModelDisplayNoRepaint(Model aModel) {
+   public void updateModelDisplayNoRepaint(Model aModel, boolean colorByState) {
       if (isVtkGraphicsAvailable()){
         lockDrawingSurfaces(true);
         mapModelsToVisuals.get(aModel).updateModelDisplay(aModel);
@@ -1290,7 +1290,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       }
       if (websocketdb != null){
         ModelVisualizationJson cJson = mapModelsToJsons.get(aModel);
-        websocketdb.broadcastMessageJson(cJson.createFrameMessageJson(), null);
+        websocketdb.broadcastMessageJson(cJson.createFrameMessageJson(colorByState), null);
       }
    }
 

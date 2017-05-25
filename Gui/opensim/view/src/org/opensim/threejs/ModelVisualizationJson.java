@@ -249,7 +249,7 @@ public class ModelVisualizationJson extends JSONObject {
         return mapComponentToUUID.get(obj);
     }
 
-    public JSONObject createFrameMessageJson() {
+    public JSONObject createFrameMessageJson(boolean colorByState) {
         JSONObject msg = new JSONObject();
         Iterator<Integer> bodyIdIter = mapBodyIndicesToFrames.keySet().iterator();
         msg.put("Op", "Frame");
@@ -280,7 +280,7 @@ public class ModelVisualizationJson extends JSONObject {
                 UUID pathUUID = pathList.get(geomPathObject);
                 JSONObject pathUpdate_json = new JSONObject();
                 pathUpdate_json.put("uuid", pathUUID.toString());
-                Vec3 pathColor = geomPathObject.getDefaultColor();
+                Vec3 pathColor = colorByState?geomPathObject.getColor(state):geomPathObject.getDefaultColor();
                 String colorString = JSONUtilities.mapColorToRGBA(pathColor);
                 pathUpdate_json.put("color", colorString);
                 geompaths_json.add(pathUpdate_json);

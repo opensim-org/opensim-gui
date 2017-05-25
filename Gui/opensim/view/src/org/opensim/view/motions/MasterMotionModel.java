@@ -80,7 +80,7 @@ public class MasterMotionModel {
       for(int i=0; i<displayers.size(); i++) {
          MotionDisplayer disp = displayers.get(i);
          Model dModel = disp.getModel();
-         ViewDB.getInstance().updateModelDisplayNoRepaint(dModel);
+         ViewDB.getInstance().updateModelDisplayNoRepaint(dModel, true);
       }
       //ViewDB.getInstance().repaintAll();
       ViewDB.getInstance().renderAll();
