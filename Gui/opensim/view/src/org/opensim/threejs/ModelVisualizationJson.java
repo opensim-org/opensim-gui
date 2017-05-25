@@ -94,7 +94,7 @@ public class ModelVisualizationJson extends JSONObject {
         UUID groundUuid = UUID.randomUUID();
         model_ground_json.put("uuid", groundUuid.toString());
         model_ground_json.put("type", "Group");
-        model_ground_json.put("opensimtype", "Frame");
+        model_ground_json.put("opensimType", "Frame");
         model_ground_json.put("name", model.getGround().getAbsolutePathName());
         model_ground_json.put("userData", "NonEditable");
         model_ground_json.put("model_ground", true);
@@ -183,7 +183,7 @@ public class ModelVisualizationJson extends JSONObject {
             JSONObject bodyJson = mapBodyIndicesToJson.get(dg.getBodyId());
             if (bodyJson.get("children")==null)
                 bodyJson.put("children", new JSONArray());
-            UUID uuid_mesh = addtoFrameJsonObject(dg, geomId, uuid, dgimp.getMat_uuid(), (JSONArray)bodyJson.get("children"));
+            UUID uuid_mesh = addtoFrameJsonObject(dg, geomId, uuid, dgimp.getMat_uuid(), (JSONArray)bodyJson.get("children"), comp);
             vis_uuidList.add(uuid_mesh);
             
             mapUUIDToComponent.put(uuid_mesh, comp);
@@ -201,7 +201,7 @@ public class ModelVisualizationJson extends JSONObject {
         model_object = new JSONObject();
         model_object.put("uuid", modelUUID.toString());
         model_object.put("type", "Group");
-        model_object.put("opensimtype", "Model");
+        model_object.put("opensimType", "Model");
         model_object.put("name", "OpenSimModel");
         model_object.put("children", new JSONArray());
         model_object.put("matrix", JSONUtilities.createMatrixFromTransform(new Transform(), new Vec3(1.), 1.0));
@@ -213,12 +213,13 @@ public class ModelVisualizationJson extends JSONObject {
 
     }
 
-    private UUID addtoFrameJsonObject(DecorativeGeometry dg, String geomName, UUID uuid, UUID uuid_mat, JSONArray mobody_objects) {
+    private UUID addtoFrameJsonObject(DecorativeGeometry dg, String geomName, UUID uuid, UUID uuid_mat, JSONArray mobody_objects, Component opensimComponent) {
         Map<String, Object> obj_json = new LinkedHashMap<String, Object>();
         UUID mesh_uuid = UUID.randomUUID();
         obj_json.put("uuid", mesh_uuid.toString());
         obj_json.put("type", "Mesh");
         obj_json.put("name", geomName);
+        obj_json.put("opensimType", opensimComponent.getConcreteClassName());
         obj_json.put("geometry", uuid.toString());
         obj_json.put("material", uuid_mat.toString());
         obj_json.put("matrix", JSONUtilities.createMatrixFromTransform(dg.getTransform(), dg.getScaleFactors(), visScaleFactor));
@@ -232,7 +233,7 @@ public class ModelVisualizationJson extends JSONObject {
         JSONObject bdyJson = new JSONObject();
         bdyJson.put("uuid", uuid.toString());
         bdyJson.put("type", "Group");
-        bdyJson.put("opensimtype", "Frame");
+        bdyJson.put("opensimType", "Frame");
         bdyJson.put("userData", "NonEditable");
         bdyJson.put("name", body.getAbsolutePathName());
         PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(body.getMobilizedBodyIndex());
@@ -376,6 +377,7 @@ public class ModelVisualizationJson extends JSONObject {
             ArrayList<UUID> comp_uuids = new ArrayList<UUID>();
             comp_uuids.add(pathpoint_uuid);
             mapComponentToUUID.put(pathPoint, comp_uuids);
+            mapUUIDToComponent.put(pathpoint_uuid, pathPoint);
         }
         JSONObject gndJson = mapBodyIndicesToJson.get(0);
         if (gndJson.get("children")==null)
@@ -401,7 +403,6 @@ public class ModelVisualizationJson extends JSONObject {
         UUID uuid_ppt = UUID.randomUUID();
         ppt_json.put("uuid", uuid_ppt.toString());
         ppt_json.put("name", ppt.getName());
-        ppt_json.put("opensimtype", "PathPoint");
         // insert inappropriate body/frame
         PhysicalFrame bdy = ppt.getBody();
         JSONObject bodyJson = mapBodyIndicesToJson.get(bdy.getMobilizedBodyIndex());
@@ -463,7 +464,6 @@ public class ModelVisualizationJson extends JSONObject {
         bpptJson.put("uuid", uuidForPathpointGeometry.toString());
         bpptJson.put("type", "SphereGeometry");
         bpptJson.put("radius", 5);
-        bpptJson.put("opensimtype", "PathPoint");
         bpptJson.put("name", pathPoint.getName());
  	bpptJson.put("widthSegments", 32);
 	bpptJson.put("heightSegments", 16);
@@ -473,6 +473,7 @@ public class ModelVisualizationJson extends JSONObject {
         UUID ppoint_uuid = UUID.randomUUID();
         bpptInBodyJson.put("uuid", ppoint_uuid.toString());
         bpptInBodyJson.put("type", "Mesh");
+        bpptInBodyJson.put("opensimType", pathPoint.getConcreteClassName());
         bpptInBodyJson.put("name", pathPoint.getName());
         bpptInBodyJson.put("geometry", uuidForPathpointGeometry.toString());
         bpptInBodyJson.put("material", material);
