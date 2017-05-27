@@ -24,12 +24,9 @@ import org.opensim.modeling.Component;
 import org.opensim.modeling.ComponentIterator;
 import org.opensim.modeling.ComponentsList;
 import org.opensim.modeling.DecorativeGeometry;
-import org.opensim.modeling.FrameGeometry;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
-import org.opensim.modeling.Muscle;
-import org.opensim.modeling.MuscleList;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.PathPointSet;
@@ -66,7 +63,12 @@ public class ModelVisualizationJson extends JSONObject {
     private UUID pathpointMatUUID;
     public static boolean verbose=false;
     private boolean ready = false;
+    private static HashMap<String, Boolean> movableOpensimTypes = new HashMap<String, Boolean>();
     
+    static {
+        movableOpensimTypes.put("Marker", true);
+        movableOpensimTypes.put("PathPoint", true);
+    }
     public ModelVisualizationJson(JSONObject jsonTopIn, Model model) {
         // implicit super()
         if (verbose)
@@ -224,7 +226,9 @@ public class ModelVisualizationJson extends JSONObject {
         obj_json.put("material", uuid_mat.toString());
         obj_json.put("matrix", JSONUtilities.createMatrixFromTransform(dg.getTransform(), dg.getScaleFactors(), visScaleFactor));
         obj_json.put("castShadow", false);
-        obj_json.put("userData", "NonEditable");
+        String concreteType = opensimComponent.getConcreteClassName();
+        if (!movableOpensimTypes.keySet().contains(concreteType))
+            obj_json.put("userData", "NonEditable");
         mobody_objects.add(obj_json);
         return mesh_uuid;
     }   
