@@ -59,14 +59,27 @@ public class JSONMessageHandler {
           String returnString = "";
           double x, y, z;
           double relativeScale = ModelVisualizationJson.getVisScaleFactor();
-          x = (Double) ((Long)positionObj.get("x")/relativeScale);
-          returnString = returnString.concat(String.valueOf(x));
+          Object xObj = positionObj.get("x");
+          double xDouble, yDouble, zDouble;
+          if (xObj instanceof Long){
+              xDouble = (Double)(((Long)xObj)/relativeScale);
+              Object yObj = positionObj.get("y");
+              yDouble = (Double)(((Long)yObj)/relativeScale);
+              Object zObj = positionObj.get("z");
+              zDouble = (Double)(((Long)zObj)/relativeScale);
+          }
+          else {
+              xDouble = (Double)xObj/relativeScale;
+              Object yObj = positionObj.get("y");
+              yDouble = (Double)yObj/relativeScale;
+              Object zObj = positionObj.get("z");
+              zDouble = (Double)zObj/relativeScale;
+        }
+          returnString = returnString.concat(String.valueOf(xDouble));
           returnString = returnString.concat(" ");
-          y = (Double) ((Long)positionObj.get("y")/relativeScale);
-          returnString = returnString.concat(String.valueOf(y));
+          returnString = returnString.concat(String.valueOf(yDouble));
           returnString = returnString.concat(" ");
-          z = (Double) ((Long)positionObj.get("z")/relativeScale);
-          returnString = returnString.concat(String.valueOf(z));
+          returnString = returnString.concat(String.valueOf(zDouble));
           return returnString;
     }
  
