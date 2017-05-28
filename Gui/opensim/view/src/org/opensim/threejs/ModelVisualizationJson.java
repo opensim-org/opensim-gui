@@ -466,11 +466,13 @@ public class ModelVisualizationJson extends JSONObject {
         JSONObject bpptJson = new JSONObject();
         UUID uuidForPathpointGeometry = UUID.randomUUID();
         bpptJson.put("uuid", uuidForPathpointGeometry.toString());
-        bpptJson.put("type", "SphereGeometry");
-        bpptJson.put("radius", 5);
+        bpptJson.put("type", "BoxGeometry");
+        bpptJson.put("width", 5);
+        bpptJson.put("height", 5);
+        bpptJson.put("depth", 5);
         bpptJson.put("name", pathPoint.getName());
- 	bpptJson.put("widthSegments", 32);
-	bpptJson.put("heightSegments", 16);
+ 	//bpptJson.put("widthSegments", 32);
+	//bpptJson.put("heightSegments", 16);
         json_geometries.add(bpptJson);
         // Now add to scene graph
         JSONObject bpptInBodyJson = new JSONObject();
@@ -493,7 +495,7 @@ public class ModelVisualizationJson extends JSONObject {
         Vec3 location = pathPoint.getLocation(state);
         localTransform.setP(location);
         bpptInBodyJson.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1.0), visScaleFactor));
-        bpptInBodyJson.put("visible", false);
+        bpptInBodyJson.put("visible", true);
         children.add(bpptInBodyJson);
         return ppoint_uuid;
     }
@@ -587,7 +589,7 @@ public class ModelVisualizationJson extends JSONObject {
         mat_json.put("uuid", mat_uuid.toString());
         mat_json.put("name", "PathPointMat");
         mat_json.put("type", "MeshBasicMaterial");
-        String colorString = JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 1.));
+        String colorString = JSONUtilities.mapColorToRGBA(new Vec3(.8, .1, .1));
         mat_json.put("color", colorString);
         mat_json.put("side", 2);
         json_materials.add(mat_json);
