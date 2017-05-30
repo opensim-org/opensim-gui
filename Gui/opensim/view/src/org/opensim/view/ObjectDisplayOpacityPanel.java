@@ -140,6 +140,7 @@ public class ObjectDisplayOpacityPanel extends javax.swing.JPanel {
 
    private void opacitySliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_opacitySliderStateChanged
       if(internalTrigger) return;
+      if (opacitySlider.getValueIsAdjusting()) return;
       double newOpacity = (double)opacitySlider.getValue()/100.0;
       for(int i=0; i<objects.size(); i++){
          if (ViewDB.isVtkGraphicsAvailable())
