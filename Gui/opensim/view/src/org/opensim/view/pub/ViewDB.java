@@ -1681,6 +1681,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         }
     }
 
+    public void objectMoved(Model model, OpenSimObject opensimObj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
    /**
     * Utility: apply a function to given actor, or to all actors in assembly.
     */
