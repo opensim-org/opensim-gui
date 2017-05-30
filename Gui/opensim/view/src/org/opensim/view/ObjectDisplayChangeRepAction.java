@@ -38,12 +38,13 @@ public class ObjectDisplayChangeRepAction extends CallableSystemAction {
     public boolean isEnabled() {
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         // If any selected object is hidden (or any selected group is mixed), return false.
+        /* Always enable the option since everything can be wireframe in new visualizer of 4.0
         for(int i=0; i < selected.length; i++){
             OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[i];
             int displayStatus = ViewDB.getInstance().getDisplayStatus(objectNode.getOpenSimObject());
             if (displayStatus == 0 || displayStatus == 2)
                return false;
-        }
+        }*/
         return true;
     }
 
@@ -58,11 +59,8 @@ public class ObjectDisplayChangeRepAction extends CallableSystemAction {
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         for(int i=0; i < selected.length; i++){
             OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[i];
-            boolean hasPreferenceProperty = objectNode.getOpenSimObject().hasProperty("display_preference");
-            if (hasPreferenceProperty){
-                PropertyEditorAdaptor pea = new PropertyEditorAdaptor("display_preference", objectNode);
-                int newValue  = mapRepAndShadingToPref(newRep, newShading);
-                pea.setValueInt(newValue);
+            if (objectNode instanceof ColorableInterface) {
+                ((ColorableInterface)objectNode).setDisplayPreference(newRep);
             }
             else {
                 ViewDB.getInstance().setObjectRepresentation(objectNode.getOpenSimObject(), newRep, newShading);

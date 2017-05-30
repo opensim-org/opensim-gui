@@ -34,7 +34,7 @@ import org.opensim.view.nodes.OpenSimObjectNode;
 public final class ObjectDisplayWireframeAction extends ObjectDisplayChangeRepAction {
     
     public void performAction() {
-       super.performAction(1, 0);
+       super.performAction(2, 0);
     }
     
     public String getName() {
