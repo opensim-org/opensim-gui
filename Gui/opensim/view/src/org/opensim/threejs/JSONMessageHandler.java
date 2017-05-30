@@ -35,6 +35,8 @@ public class JSONMessageHandler {
                         final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(model, opensimObj, ap, null);
                         String locationString = (String) jsonObject.get("location");
                         pea.setValueVec3FromString(convertLocationStringToPropertyFormat(jsonObject));
+                        // Tell the world that objects have moved
+                        ViewDB.getInstance().objectMoved(model, opensimObj);
                     }
                 }
                 else if (eventType.equals("geometry-changed")){
