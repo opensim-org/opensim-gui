@@ -44,21 +44,20 @@ public final class ObjectDisplayOpacityAction extends CallableSystemAction {
       Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
       for(int i=0; i<selected.length; i++) {
          if(selected[i] instanceof OneComponentNode)
-            collectAffectedNodes((OneComponentNode)selected[i], objects);
+            collectDescendentNodes((OneComponentNode)selected[i], objects);
       }
       ObjectDisplayOpacityPanel.showDialog(objects);
    }
    // node could be a Group or a list of objects not backed by OpenSim objects 
-    public void collectAffectedNodes(OpenSimObjectNode node, Vector<OneComponentNode> objects) {
+    public void collectDescendentNodes(OpenSimObjectNode node, Vector<OneComponentNode> descendents) {
         if (node instanceof OneComponentNode) {
-            objects.add((OneComponentNode)node);
-            return;
+            descendents.add((OneComponentNode)node);
         }
         Children ch = node.getChildren();
         // process children
         for (Node childNode : ch.getNodes()) {
             if (childNode instanceof OpenSimObjectNode) {
-                collectAffectedNodes((OpenSimObjectNode) childNode, objects);
+                collectDescendentNodes((OpenSimObjectNode) childNode, descendents);
             }
         }
 
