@@ -1682,7 +1682,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
 
     public void objectMoved(Model model, OpenSimObject opensimObj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         Vector<OpenSimObject> objs = new Vector<OpenSimObject>(1);
+         objs.add(opensimObj);
+         ObjectsChangedEvent evnt = new ObjectsChangedEvent(this, model, objs);
+         getInstance().setChanged();
+         getInstance().notifyObservers(evnt);
     }
 
    /**
