@@ -391,6 +391,7 @@ public class OpenSimBaseCanvas extends vtkPanel
         vtkPNGReader imageReader=new vtkPNGReader();
         String fullFileName= TheApp.getApplicationLogoFileName();
         if (fullFileName==null) return;
+        if (!(new File(fullFileName).exists())) return;
         imageReader.SetFileName(fullFileName);
         imageReader.UpdateWholeExtent();
         imageReader.Update();

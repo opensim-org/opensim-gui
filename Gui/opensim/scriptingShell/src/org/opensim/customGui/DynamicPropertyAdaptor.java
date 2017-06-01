@@ -63,7 +63,7 @@ public class DynamicPropertyAdaptor extends DblBoundedRangeModel {
         context.realizePosition();
          // Use renderAll rather than repaintAll for greater responsiveness in 3d viewer
          Model mdl=OpenSimDB.getInstance().getCurrentModel();
-         ViewDB.getInstance().updateModelDisplayNoRepaint(mdl);
+         ViewDB.getInstance().updateModelDisplayNoRepaint(mdl, false);
          ViewDB.getInstance().renderAll();
          Vector<OpenSimObject> objs = new Vector<OpenSimObject>(1);
          objs.add(dObject);

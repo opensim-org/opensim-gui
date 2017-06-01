@@ -60,9 +60,12 @@ public class WebSocketDB {
             specificSocket.sendVisualizerMessage(msg);
             return;
         }
+        int i=0;
         for (VisWebSocket sock : sockets){
             if (debug) System.out.println("Broadcast:"+msg.toJSONString()+"\n");
+            if (i==1) continue;
             sock.sendVisualizerMessage(msg);
+            i++;
         }
     }
 }

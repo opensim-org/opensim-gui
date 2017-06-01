@@ -115,9 +115,13 @@ public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemActi
         }
         //else
         OpenSimObject obj = objectNode.getOpenSimObject();
-        boolean hasPreferenceProperty = obj.hasProperty("Appearance");
+        if (objectNode instanceof ColorableInterface){
+            ((ColorableInterface)objectNode).setVisible(show);
+            return;
+        }
+        boolean hasAppearanceProperty = obj.hasProperty("Appearance");
         
-        if (hasPreferenceProperty){
+        if (hasAppearanceProperty){
             AbstractProperty apbn = obj.getPropertyByName("Appearance");
             boolean iso = apbn.isObjectProperty();
             //Model aModel, OpenSimObject obj, AbstractProperty prop, OpenSimObjectNode node
@@ -129,7 +133,7 @@ public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemActi
                     surfApp.getPropertyByName("representation"), objectNode);
             pea.setValueInt(show?3:0);
         }
-        else {
+        else { // This is not persistent, will only affect visuals
             ViewDB.getInstance().toggleObjectsDisplay(obj, show);
             objectNode.refreshNode();
         }

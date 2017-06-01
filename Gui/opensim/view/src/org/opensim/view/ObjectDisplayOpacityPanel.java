@@ -36,7 +36,7 @@ import java.util.Vector;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.view.nodes.OneComponentWithGeometryNode;
+import org.opensim.view.nodes.OneComponentNode;
 import org.opensim.view.nodes.OneGeometryNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.pub.ViewDB;
@@ -48,12 +48,12 @@ import vtk.vtkProperty;
  */
 public class ObjectDisplayOpacityPanel extends javax.swing.JPanel {
   
-   Vector<OneComponentWithGeometryNode> objects;
+   Vector<OneComponentNode> objects;
    Vector<Double> savedOpacities;
    boolean internalTrigger = false;
 
    /** Creates new form ObjectDisplayOpacityPanel */
-   public ObjectDisplayOpacityPanel(Vector<OneComponentWithGeometryNode> objects) {
+   public ObjectDisplayOpacityPanel(Vector<OneComponentNode> objects) {
       this.objects = objects;
 
       initComponents();
@@ -82,11 +82,12 @@ public class ObjectDisplayOpacityPanel extends javax.swing.JPanel {
                ViewDB.getInstance().setObjectOpacity(objects.get(i).getOpenSimObject(), savedOpacities.get(i));
        }
        for(int i=0; i<objects.size(); i++) {
-           objects.get(i).setOpacity(savedOpacities.get(i));
+           if (objects.get(i) instanceof ColorableInterface)
+            ((ColorableInterface) objects.get(i)).setOpacity(savedOpacities.get(i));
        }
    }
 
-   static void showDialog(Vector<OneComponentWithGeometryNode> objects) {
+   static void showDialog(Vector<OneComponentNode> objects) {
       ObjectDisplayOpacityPanel panel = new ObjectDisplayOpacityPanel(objects);
       DialogDescriptor dlg = new DialogDescriptor(panel, "Select Opacity");
       //dlg.setOptions(new Object[]{DialogDescriptor.OK_OPTION});
@@ -139,11 +140,13 @@ public class ObjectDisplayOpacityPanel extends javax.swing.JPanel {
 
    private void opacitySliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_opacitySliderStateChanged
       if(internalTrigger) return;
+      if (opacitySlider.getValueIsAdjusting()) return;
       double newOpacity = (double)opacitySlider.getValue()/100.0;
       for(int i=0; i<objects.size(); i++){
          if (ViewDB.isVtkGraphicsAvailable())
             ViewDB.getInstance().setObjectOpacity(objects.get(i).getOpenSimObject(), newOpacity);
-         objects.get(i).setOpacity(newOpacity);
+         if (objects.get(i) instanceof ColorableInterface)
+             ((ColorableInterface) objects.get(i)).setOpacity(newOpacity);
       }
    }//GEN-LAST:event_opacitySliderStateChanged
    

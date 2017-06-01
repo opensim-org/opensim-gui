@@ -5149,6 +5149,15 @@ public class opensimSimulationJNI {
   public final static native String GeometryPath_getClassName();
   public final static native long GeometryPath_clone(long jarg1, GeometryPath jarg1_);
   public final static native String GeometryPath_getConcreteClassName(long jarg1, GeometryPath jarg1_);
+  public final static native void GeometryPath_copyProperty_Appearance(long jarg1, GeometryPath jarg1_, long jarg2, GeometryPath jarg2_);
+  public final static native long GeometryPath_get_Appearance__SWIG_0(long jarg1, GeometryPath jarg1_, int jarg2);
+  public final static native long GeometryPath_upd_Appearance__SWIG_0(long jarg1, GeometryPath jarg1_, int jarg2);
+  public final static native void GeometryPath_set_Appearance__SWIG_0(long jarg1, GeometryPath jarg1_, int jarg2, long jarg3, Appearance jarg3_);
+  public final static native int GeometryPath_append_Appearance(long jarg1, GeometryPath jarg1_, long jarg2, Appearance jarg2_);
+  public final static native void GeometryPath_constructProperty_Appearance(long jarg1, GeometryPath jarg1_, long jarg2, Appearance jarg2_);
+  public final static native long GeometryPath_get_Appearance__SWIG_1(long jarg1, GeometryPath jarg1_);
+  public final static native long GeometryPath_upd_Appearance__SWIG_1(long jarg1, GeometryPath jarg1_);
+  public final static native void GeometryPath_set_Appearance__SWIG_1(long jarg1, GeometryPath jarg1_, long jarg2, Appearance jarg2_);
   public final static native long new_GeometryPath();
   public final static native void delete_GeometryPath(long jarg1);
   public final static native long GeometryPath_getPathPointSet(long jarg1, GeometryPath jarg1_);

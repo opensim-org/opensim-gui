@@ -87,127 +87,50 @@ public abstract class OneComponentWithGeometryNode extends OneComponentNode impl
         }
     }
 
+    @Override
     public Color getColor() {
         Vec3 c3 = appearance.get_color();
         return new Color((float) c3.get(0), (float) c3.get(1), (float) c3.get(2));
     }
 
+    @Override
     public void setColor(Color newColor) {
-        float[] colorComp = new float[3];
-        newColor.getColorComponents(colorComp);
-        final AbstractProperty ap = appearance.getPropertyByName("color");
-        final Model model = getModelForNode();
-        final Vec3 oldValue = new Vec3(appearance.get_color());
-        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), appearance, ap, this);
-        final Vec3 newColorVec3 = new Vec3(colorComp[0], colorComp[1], colorComp[2]);
-        pea.setValueVec3(newColorVec3, false);
-        ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
-        AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
-            @Override
-            public void undo() throws CannotUndoException {
-                super.undo();
-                pea.setValueVec3(oldValue, false);
-                ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
-            }
-
-            @Override
-            public String getUndoPresentationName() {
-                return "Undo color change";
-            }
-
-            @Override
-            public void redo() throws CannotRedoException {
-                super.redo();
-                pea.setValueVec3(newColorVec3, false);
-                ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
-            }
-
-            @Override
-            public String getRedoPresentationName() {
-                return "Redo color change";
-            }
-        };
-        ExplorerTopComponent.addUndoableEdit(auEdit);
+        setAppearanceColorProperty(newColor);
     }
 
+    private void setAppearanceColorProperty(Color newColor) {
+        AppearanceHelper helper = new AppearanceHelper(getModelForNode(), this, appearance);
+        helper.setAppearanceColorProperty(newColor);
+    }
+
+    @Override
     public double getOpacity() {
         return appearance.get_opacity();
     }
 
+    @Override
     public void setOpacity(double opacity) {
-        final AbstractProperty ap = appearance.getPropertyByName("opacity");
-        final double oldOpacity = appearance.get_opacity();
-        final double newOpacity = opacity;
-        final Model model = getModelForNode();
-        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), appearance, ap, this);
-        pea.setValueDouble(newOpacity, false);
-        ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
-        AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
-            @Override
-            public void undo() throws CannotUndoException {
-                super.undo();
-                pea.setValueDouble(oldOpacity, false);
-                ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
-            }
-
-            @Override
-            public String getUndoPresentationName() {
-                return "Undo opacity change";
-            }
-
-            @Override
-            public void redo() throws CannotRedoException {
-                super.redo();
-                pea.setValueDouble(newOpacity, false);
-                ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
-            }
-
-            @Override
-            public String getRedoPresentationName() {
-                return "Redo opacity change";
-            }
-        };
-        ExplorerTopComponent.addUndoableEdit(auEdit);
+        setAppearanceOpacityProperty(opacity);
     }
 
+    private void setAppearanceOpacityProperty(double opacity) {
+        AppearanceHelper helper = new AppearanceHelper(getModelForNode(), this, appearance);
+        helper.setAppearanceOpacityProperty(opacity);
+    }
+
+    @Override
     public Boolean getVisible() {
         return appearance.get_visible();
     }
 
+    @Override
     public void setVisible(Boolean newValue) {
-        final AbstractProperty ap = appearance.getPropertyByName("visible");
-        final boolean oldVis = appearance.get_visible();
-        final boolean newVis = newValue;
-        final Model model = getModelForNode();
-        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(model, appearance, ap, this);
-        pea.setValueBool(newVis, false);
-        ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
-        AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
-            @Override
-            public void undo() throws CannotUndoException {
-                super.undo();
-                pea.setValueBool(oldVis, false);
-                ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
-            }
+        setAppearanceVisilibityProperty(newValue);
+    }
 
-            @Override
-            public String getUndoPresentationName() {
-                return "Undo visibility change";
-            }
-
-            @Override
-            public void redo() throws CannotRedoException {
-                super.redo();
-                pea.setValueBool(newVis, false);
-                ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
-            }
-
-            @Override
-            public String getRedoPresentationName() {
-                return "Redo visibility change";
-            }
-        };
-        ExplorerTopComponent.addUndoableEdit(auEdit);
+    private void setAppearanceVisilibityProperty(Boolean newValue) {
+        AppearanceHelper helper = new AppearanceHelper(getModelForNode(), this, appearance);
+        helper.setAppearanceVisilibityProperty(newValue);
     }
 
     @Override
@@ -215,43 +138,14 @@ public abstract class OneComponentWithGeometryNode extends OneComponentNode impl
         return appearance.get_representation().swigValue();
     }
 
+    @Override
     public void setDisplayPreference(int pref) {
-        final AbstractProperty ap = appearance.get_SurfaceProperties().getPropertyByName("representation");
-        final Model model = getModelForNode();
-        final DecorativeGeometry.Representation oldRep = appearance.get_representation();
-        final int newRep = pref;
-        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(getModelForNode(), appearance.get_SurfaceProperties(), ap, this);
-        pea.setValueInt(newRep, false);
-        ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
-        updateObjectDisplay(comp);
-        AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
-            @Override
-            public void undo() throws CannotUndoException {
-                super.undo();
-                pea.setValueInt(oldRep.swigValue(), false);
-                updateObjectDisplay(comp);
-                ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
-            }
+        setAppearanceDisplayPrefProperty(pref);
+    }
 
-            @Override
-            public String getUndoPresentationName() {
-                return "Undo representation change";
-            }
-
-            @Override
-            public void redo() throws CannotRedoException {
-                super.redo();
-                pea.setValueInt(newRep, false);
-                ViewDB.getInstance().updateComponentDisplay(model, comp, ap);
-                updateObjectDisplay(comp);
-            }
-
-            @Override
-            public String getRedoPresentationName() {
-                return "Redo representation change";
-            }
-        };
-        ExplorerTopComponent.addUndoableEdit(auEdit);
+    private void setAppearanceDisplayPrefProperty(int pref) {
+        AppearanceHelper helper = new AppearanceHelper(getModelForNode(), this, appearance);
+        helper.setAppearanceDisplayPrefProperty(pref);
     }
 
     protected void updateObjectDisplay(Component obj) {

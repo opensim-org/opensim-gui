@@ -27,7 +27,7 @@ import org.json.simple.parser.ParseException;
  *
  * @author Ayman
  */
-@WebSocket(maxTextMessageSize = 64 * 1024, maxIdleTime=10000000)
+@WebSocket(maxTextMessageSize = 64 * 4096, maxIdleTime=10000000)
 public class VisWebSocket extends Observable { // Socket to handle incoming traffic from Browser
     private static final Set<Session> peers = Collections.synchronizedSet(new HashSet<Session>());
     
