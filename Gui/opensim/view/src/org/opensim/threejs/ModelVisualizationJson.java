@@ -72,6 +72,7 @@ public class ModelVisualizationJson extends JSONObject {
     private JSONObject experimenalForceGeometryJson=null;
     private JSONObject experimenalForceMaterialJson=null;
     private Vec3 defaultMarkerColor = new Vec3(0., 0., 1.);
+    
     static {
         movableOpensimTypes.put("Marker", true);
         movableOpensimTypes.put("PathPoint", true);
@@ -269,29 +270,33 @@ public class ModelVisualizationJson extends JSONObject {
         msg.put("Transforms", bodyTransforms_json);
         if (ready) { // Avoid trying to send a frame before Json is completely populated
             while (bodyIdIter.hasNext()) {
-            int bodyId = bodyIdIter.next();
-                if (bodyId ==0) continue; // Skip over "Ground, as unnecessary
+                int bodyId = bodyIdIter.next();
+                if (bodyId == 0) {
+                    continue; // Skip over "Ground, as unnecessary
+                }
                 JSONObject oneBodyXform_json = new JSONObject();
-                if (verbose)
-                    System.out.println("Getting transform of "+bodyFrame.getName());
+                PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(bodyId);
+                if (verbose) {
+                    System.out.println("Getting transform of " + bodyFrame.getName());
+                }
                 Transform xform = bodyFrame.getTransformInGround(state);
                 // Get uuid for first Mesh in body
                 oneBodyXform_json.put("uuid", mapBodyIndicesToJson.get(bodyId).get("uuid"));
                 oneBodyXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1., 1., 1.), visScaleFactor));
                 bodyTransforms_json.add(oneBodyXform_json);
             }
-        JSONArray geompaths_json = new JSONArray();
-        msg.put("paths", geompaths_json);
+            JSONArray geompaths_json = new JSONArray();
+            msg.put("paths", geompaths_json);
 
             Set<GeometryPath> paths = pathList.keySet();
             Iterator<GeometryPath> pathIter = paths.iterator();
             while (pathIter.hasNext()) {
-            // get path and call generateDecorations on it
+                // get path and call generateDecorations on it
                 GeometryPath geomPathObject = pathIter.next();
                 UUID pathUUID = pathList.get(geomPathObject);
                 JSONObject pathUpdate_json = new JSONObject();
                 pathUpdate_json.put("uuid", pathUUID.toString());
-                Vec3 pathColor = colorByState?geomPathObject.getColor(state):geomPathObject.getDefaultColor();
+                Vec3 pathColor = colorByState ? geomPathObject.getColor(state) : geomPathObject.getDefaultColor();
                 String colorString = JSONUtilities.mapColorToRGBA(pathColor);
                 pathUpdate_json.put("color", colorString);
                 geompaths_json.add(pathUpdate_json);
