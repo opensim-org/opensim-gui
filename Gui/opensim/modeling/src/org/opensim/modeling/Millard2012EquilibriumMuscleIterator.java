@@ -653,6 +653,10 @@ public class Millard2012EquilibriumMuscleIterator {
     opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_equilibrate(swigCPtr, this, State.getCPtr(s), s);
   }
 
+  public void computeEquilibrium(State s) {
+    opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_computeEquilibrium(swigCPtr, this, State.getCPtr(s), s);
+  }
+
   public GeometryPath get_GeometryPath(int i) {
     return new GeometryPath(opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_get_GeometryPath__SWIG_0(swigCPtr, this, i), false);
   }
@@ -783,10 +787,6 @@ public class Millard2012EquilibriumMuscleIterator {
 
   public void addInControls(Vector actuatorControls, Vector modelControls) {
     opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_addInControls(swigCPtr, this, Vector.getCPtr(actuatorControls), actuatorControls, Vector.getCPtr(modelControls), modelControls);
-  }
-
-  public void computeEquilibrium(State s) {
-    opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_computeEquilibrium(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public boolean get_appliesForce(int i) {

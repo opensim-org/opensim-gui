@@ -441,6 +441,10 @@ public class MuscleIterator {
     opensimSimulationJNI.MuscleIterator_equilibrate(swigCPtr, this, State.getCPtr(s), s);
   }
 
+  public void computeEquilibrium(State s) {
+    opensimSimulationJNI.MuscleIterator_computeEquilibrium(swigCPtr, this, State.getCPtr(s), s);
+  }
+
   public double calcInextensibleTendonActiveFiberForce(State s, double aActivation) {
     return opensimSimulationJNI.MuscleIterator_calcInextensibleTendonActiveFiberForce(swigCPtr, this, State.getCPtr(s), s, aActivation);
   }
@@ -575,10 +579,6 @@ public class MuscleIterator {
 
   public void addInControls(Vector actuatorControls, Vector modelControls) {
     opensimSimulationJNI.MuscleIterator_addInControls(swigCPtr, this, Vector.getCPtr(actuatorControls), actuatorControls, Vector.getCPtr(modelControls), modelControls);
-  }
-
-  public void computeEquilibrium(State s) {
-    opensimSimulationJNI.MuscleIterator_computeEquilibrium(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public boolean get_appliesForce(int i) {
