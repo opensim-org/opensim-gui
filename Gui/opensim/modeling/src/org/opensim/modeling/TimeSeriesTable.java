@@ -45,16 +45,20 @@ public class TimeSeriesTable extends DataTable {
     this(opensimCommonJNI.new_TimeSeriesTable__SWIG_1(TimeSeriesTable.getCPtr(arg0), arg0), true);
   }
 
+  public TimeSeriesTable(StdVectorDouble indVec, Matrix depData, StdVectorString labels) {
+    this(opensimCommonJNI.new_TimeSeriesTable__SWIG_2(StdVectorDouble.getCPtr(indVec), indVec, Matrix.getCPtr(depData), depData, StdVectorString.getCPtr(labels), labels), true);
+  }
+
   public TimeSeriesTable(DataTable datatable) {
-    this(opensimCommonJNI.new_TimeSeriesTable__SWIG_2(DataTable.getCPtr(datatable), datatable), true);
+    this(opensimCommonJNI.new_TimeSeriesTable__SWIG_3(DataTable.getCPtr(datatable), datatable), true);
   }
 
   public TimeSeriesTable(String filename) {
-    this(opensimCommonJNI.new_TimeSeriesTable__SWIG_3(filename), true);
+    this(opensimCommonJNI.new_TimeSeriesTable__SWIG_4(filename), true);
   }
 
   public TimeSeriesTable(String filename, String tablename) {
-    this(opensimCommonJNI.new_TimeSeriesTable__SWIG_4(filename, tablename), true);
+    this(opensimCommonJNI.new_TimeSeriesTable__SWIG_5(filename, tablename), true);
   }
 
   public RowVectorView getNearestRow(double time, boolean restrictToTimeRange) {
@@ -75,6 +79,11 @@ public class TimeSeriesTable extends DataTable {
 
   public RowVector averageRow(double beginTime, double endTime) {
     return new RowVector(opensimCommonJNI.TimeSeriesTable_averageRow(swigCPtr, this, beginTime, endTime), true);
+  }
+
+  public TimeSeriesTable clone() {
+    long cPtr = opensimCommonJNI.TimeSeriesTable_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new TimeSeriesTable(cPtr, true);
   }
 
   public TimeSeriesTableVec3 packVec3() {

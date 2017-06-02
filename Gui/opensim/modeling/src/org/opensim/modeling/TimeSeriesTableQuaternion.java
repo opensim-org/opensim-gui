@@ -45,16 +45,20 @@ public class TimeSeriesTableQuaternion extends DataTableQuaternion {
     this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_1(TimeSeriesTableQuaternion.getCPtr(arg0), arg0), true);
   }
 
+  public TimeSeriesTableQuaternion(StdVectorDouble indVec, SWIGTYPE_p_SimTK__Matrix_T_SimTK__Quaternion_t depData, StdVectorString labels) {
+    this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_2(StdVectorDouble.getCPtr(indVec), indVec, SWIGTYPE_p_SimTK__Matrix_T_SimTK__Quaternion_t.getCPtr(depData), StdVectorString.getCPtr(labels), labels), true);
+  }
+
   public TimeSeriesTableQuaternion(DataTableQuaternion datatable) {
-    this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_2(DataTableQuaternion.getCPtr(datatable), datatable), true);
+    this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_3(DataTableQuaternion.getCPtr(datatable), datatable), true);
   }
 
   public TimeSeriesTableQuaternion(String filename) {
-    this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_3(filename), true);
+    this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_4(filename), true);
   }
 
   public TimeSeriesTableQuaternion(String filename, String tablename) {
-    this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_4(filename, tablename), true);
+    this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_5(filename, tablename), true);
   }
 
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t getNearestRow(double time, boolean restrictToTimeRange) {
@@ -75,6 +79,11 @@ public class TimeSeriesTableQuaternion extends DataTableQuaternion {
 
   public SWIGTYPE_p_SimTK__RowVector_T_SimTK__Quaternion_t averageRow(double beginTime, double endTime) {
     return new SWIGTYPE_p_SimTK__RowVector_T_SimTK__Quaternion_t(opensimCommonJNI.TimeSeriesTableQuaternion_averageRow(swigCPtr, this, beginTime, endTime), true);
+  }
+
+  public TimeSeriesTableQuaternion clone() {
+    long cPtr = opensimCommonJNI.TimeSeriesTableQuaternion_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new TimeSeriesTableQuaternion(cPtr, true);
   }
 
   public TimeSeriesTable flatten() {

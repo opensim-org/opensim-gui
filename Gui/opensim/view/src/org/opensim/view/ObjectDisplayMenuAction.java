@@ -86,9 +86,6 @@ public final class ObjectDisplayMenuAction extends CallableSystemAction implemen
          if (showShadingOptions){
             displayMenu.addSeparator();
             displayMenu.add(new JMenuItem(
-                    (ObjectDisplaySurfaceFlatAction) ObjectDisplaySurfaceFlatAction.findObject(
-                    (Class)Class.forName("org.opensim.view.ObjectDisplaySurfaceFlatAction"), true)));
-            displayMenu.add(new JMenuItem(
                     (ObjectDisplaySurfaceGouraudAction) ObjectDisplaySurfaceGouraudAction.findObject(
                     (Class)Class.forName("org.opensim.view.ObjectDisplaySurfaceGouraudAction"), true)));
             displayMenu.add(new JMenuItem(

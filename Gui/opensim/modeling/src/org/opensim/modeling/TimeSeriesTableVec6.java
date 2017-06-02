@@ -45,16 +45,20 @@ public class TimeSeriesTableVec6 extends DataTableVec6 {
     this(opensimCommonJNI.new_TimeSeriesTableVec6__SWIG_1(TimeSeriesTableVec6.getCPtr(arg0), arg0), true);
   }
 
+  public TimeSeriesTableVec6(StdVectorDouble indVec, SWIGTYPE_p_SimTK__Matrix_T_SimTK__VecT_6_double_1_t_t depData, StdVectorString labels) {
+    this(opensimCommonJNI.new_TimeSeriesTableVec6__SWIG_2(StdVectorDouble.getCPtr(indVec), indVec, SWIGTYPE_p_SimTK__Matrix_T_SimTK__VecT_6_double_1_t_t.getCPtr(depData), StdVectorString.getCPtr(labels), labels), true);
+  }
+
   public TimeSeriesTableVec6(DataTableVec6 datatable) {
-    this(opensimCommonJNI.new_TimeSeriesTableVec6__SWIG_2(DataTableVec6.getCPtr(datatable), datatable), true);
+    this(opensimCommonJNI.new_TimeSeriesTableVec6__SWIG_3(DataTableVec6.getCPtr(datatable), datatable), true);
   }
 
   public TimeSeriesTableVec6(String filename) {
-    this(opensimCommonJNI.new_TimeSeriesTableVec6__SWIG_3(filename), true);
+    this(opensimCommonJNI.new_TimeSeriesTableVec6__SWIG_4(filename), true);
   }
 
   public TimeSeriesTableVec6(String filename, String tablename) {
-    this(opensimCommonJNI.new_TimeSeriesTableVec6__SWIG_4(filename, tablename), true);
+    this(opensimCommonJNI.new_TimeSeriesTableVec6__SWIG_5(filename, tablename), true);
   }
 
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t getNearestRow(double time, boolean restrictToTimeRange) {
@@ -75,6 +79,11 @@ public class TimeSeriesTableVec6 extends DataTableVec6 {
 
   public SWIGTYPE_p_SimTK__RowVector_T_SimTK__VecT_6_double_1_t_t averageRow(double beginTime, double endTime) {
     return new SWIGTYPE_p_SimTK__RowVector_T_SimTK__VecT_6_double_1_t_t(opensimCommonJNI.TimeSeriesTableVec6_averageRow(swigCPtr, this, beginTime, endTime), true);
+  }
+
+  public TimeSeriesTableVec6 clone() {
+    long cPtr = opensimCommonJNI.TimeSeriesTableVec6_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new TimeSeriesTableVec6(cPtr, true);
   }
 
   public TimeSeriesTable flatten() {

@@ -226,6 +226,9 @@ public class OpenSimObjectNode extends OpenSimNode {
     public void updateSelfFromObject() {
         setDisplayName(openSimObject.getName());
     };
+    // Showable: Show/Hide
+    // Isolatable: ShowOnly
+    // Colorable: Color, Opacity, Representation
     public enum displayOption{Showable, Isolatable, Colorable};
     private ArrayList<displayOption> validDisplayOptions = new ArrayList<displayOption>();
     

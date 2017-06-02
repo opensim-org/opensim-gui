@@ -601,6 +601,10 @@ public class Thelen2003MuscleIterator {
     opensimSimulationJNI.Thelen2003MuscleIterator_equilibrate(swigCPtr, this, State.getCPtr(s), s);
   }
 
+  public void computeEquilibrium(State s) {
+    opensimSimulationJNI.Thelen2003MuscleIterator_computeEquilibrium(swigCPtr, this, State.getCPtr(s), s);
+  }
+
   public GeometryPath get_GeometryPath(int i) {
     return new GeometryPath(opensimSimulationJNI.Thelen2003MuscleIterator_get_GeometryPath__SWIG_0(swigCPtr, this, i), false);
   }
@@ -731,10 +735,6 @@ public class Thelen2003MuscleIterator {
 
   public void addInControls(Vector actuatorControls, Vector modelControls) {
     opensimSimulationJNI.Thelen2003MuscleIterator_addInControls(swigCPtr, this, Vector.getCPtr(actuatorControls), actuatorControls, Vector.getCPtr(modelControls), modelControls);
-  }
-
-  public void computeEquilibrium(State s) {
-    opensimSimulationJNI.Thelen2003MuscleIterator_computeEquilibrium(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public boolean get_appliesForce(int i) {

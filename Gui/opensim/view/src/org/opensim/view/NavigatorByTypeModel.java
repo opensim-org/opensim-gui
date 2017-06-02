@@ -7,6 +7,8 @@ package org.opensim.view;
 
 import java.beans.PropertyChangeSupport;
 import java.beans.VetoableChangeSupport;
+import org.opensim.modeling.ArrayConstObjPtr;
+import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.BodySet;
 import org.opensim.modeling.Component;
@@ -27,6 +29,7 @@ import org.opensim.modeling.JointSet;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.ObjectGroup;
 import org.opensim.modeling.OpenSimObject;
 
 /**
@@ -66,6 +69,7 @@ public class NavigatorByTypeModel {
         setOfForces.setMemoryOwner(false);
         setOfControllers.setMemoryOwner(false);
         buildCollections(model);
+        createMuscleGroups(model);
     }
 
     // This could be made more efficient if we process all "Components" in one go, and place in correct bins
@@ -187,6 +191,20 @@ public class NavigatorByTypeModel {
 
     public Ground getGround() {
         return ground;
+    }
+
+    private void createMuscleGroups(Model model) {
+        ForceSet mForceSet= model.get_ForceSet();
+        ArrayStr muscleGroups = new ArrayStr();
+        mForceSet.getGroupNames(muscleGroups);
+        for (int i=0; i< muscleGroups.getSize(); i++){
+            setOfForces.addGroup(muscleGroups.get(i));
+            ObjectGroup group = mForceSet.getGroup(i);
+            ArrayConstObjPtr groupMembers = group.getMembers();
+            for (int idx =0; idx < groupMembers.getSize(); idx++){
+                setOfForces.addObjectToGroup(group.getName(), groupMembers.get(idx).getName());
+            }
+        }
     }
 
 }

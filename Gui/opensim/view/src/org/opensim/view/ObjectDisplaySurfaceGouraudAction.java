@@ -34,7 +34,7 @@ import org.opensim.view.nodes.OpenSimObjectNode;
 public final class ObjectDisplaySurfaceGouraudAction extends ObjectDisplayChangeRepAction {
     
     public void performAction() {
-       super.performAction(2, 1);
+       super.performAction(3, 1);
     }
     
     public String getName() {

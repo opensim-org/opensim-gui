@@ -45,16 +45,20 @@ public class TimeSeriesTableUnitVec3 extends DataTableUnitVec3 {
     this(opensimCommonJNI.new_TimeSeriesTableUnitVec3__SWIG_1(TimeSeriesTableUnitVec3.getCPtr(arg0), arg0), true);
   }
 
+  public TimeSeriesTableUnitVec3(StdVectorDouble indVec, SWIGTYPE_p_SimTK__Matrix_T_SimTK__UnitVecT_double_1_t_t depData, StdVectorString labels) {
+    this(opensimCommonJNI.new_TimeSeriesTableUnitVec3__SWIG_2(StdVectorDouble.getCPtr(indVec), indVec, SWIGTYPE_p_SimTK__Matrix_T_SimTK__UnitVecT_double_1_t_t.getCPtr(depData), StdVectorString.getCPtr(labels), labels), true);
+  }
+
   public TimeSeriesTableUnitVec3(DataTableUnitVec3 datatable) {
-    this(opensimCommonJNI.new_TimeSeriesTableUnitVec3__SWIG_2(DataTableUnitVec3.getCPtr(datatable), datatable), true);
+    this(opensimCommonJNI.new_TimeSeriesTableUnitVec3__SWIG_3(DataTableUnitVec3.getCPtr(datatable), datatable), true);
   }
 
   public TimeSeriesTableUnitVec3(String filename) {
-    this(opensimCommonJNI.new_TimeSeriesTableUnitVec3__SWIG_3(filename), true);
+    this(opensimCommonJNI.new_TimeSeriesTableUnitVec3__SWIG_4(filename), true);
   }
 
   public TimeSeriesTableUnitVec3(String filename, String tablename) {
-    this(opensimCommonJNI.new_TimeSeriesTableUnitVec3__SWIG_4(filename, tablename), true);
+    this(opensimCommonJNI.new_TimeSeriesTableUnitVec3__SWIG_5(filename, tablename), true);
   }
 
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__UnitVecT_double_1_t_t getNearestRow(double time, boolean restrictToTimeRange) {
@@ -75,6 +79,11 @@ public class TimeSeriesTableUnitVec3 extends DataTableUnitVec3 {
 
   public SWIGTYPE_p_SimTK__RowVector_T_SimTK__UnitVecT_double_1_t_t averageRow(double beginTime, double endTime) {
     return new SWIGTYPE_p_SimTK__RowVector_T_SimTK__UnitVecT_double_1_t_t(opensimCommonJNI.TimeSeriesTableUnitVec3_averageRow(swigCPtr, this, beginTime, endTime), true);
+  }
+
+  public TimeSeriesTableUnitVec3 clone() {
+    long cPtr = opensimCommonJNI.TimeSeriesTableUnitVec3_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new TimeSeriesTableUnitVec3(cPtr, true);
   }
 
   public TimeSeriesTable flatten() {

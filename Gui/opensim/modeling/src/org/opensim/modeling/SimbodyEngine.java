@@ -110,8 +110,12 @@ public class SimbodyEngine extends OpenSimObject {
     opensimSimulationJNI.SimbodyEngine_convertDegreesToRadians__SWIG_0(swigCPtr, this, Storage.getCPtr(rStorage), rStorage);
   }
 
+  public void convertDegreesToRadians(TimeSeriesTable table) {
+    opensimSimulationJNI.SimbodyEngine_convertDegreesToRadians__SWIG_1(swigCPtr, this, TimeSeriesTable.getCPtr(table), table);
+  }
+
   public void convertDegreesToRadians(SWIGTYPE_p_double aQDeg, SWIGTYPE_p_double rQRad) {
-    opensimSimulationJNI.SimbodyEngine_convertDegreesToRadians__SWIG_1(swigCPtr, this, SWIGTYPE_p_double.getCPtr(aQDeg), SWIGTYPE_p_double.getCPtr(rQRad));
+    opensimSimulationJNI.SimbodyEngine_convertDegreesToRadians__SWIG_2(swigCPtr, this, SWIGTYPE_p_double.getCPtr(aQDeg), SWIGTYPE_p_double.getCPtr(rQRad));
   }
 
   public void convertRadiansToDegrees(SWIGTYPE_p_double aQRad, SWIGTYPE_p_double rQDeg) {

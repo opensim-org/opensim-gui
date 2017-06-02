@@ -72,6 +72,7 @@ public class ActuatorGroupNode extends OpenSimObjectNode {
       if (getChildren().getNodesCount()==0) setChildren(Children.LEAF);
       addDisplayOption(displayOption.Showable);
       addDisplayOption(displayOption.Isolatable);
+      addDisplayOption(displayOption.Colorable);
    }
    
       public Image getIcon(int i) {

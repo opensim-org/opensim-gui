@@ -45,16 +45,20 @@ public class TimeSeriesTableVec3 extends DataTableVec3 {
     this(opensimCommonJNI.new_TimeSeriesTableVec3__SWIG_1(TimeSeriesTableVec3.getCPtr(arg0), arg0), true);
   }
 
+  public TimeSeriesTableVec3(StdVectorDouble indVec, MatrixVec3 depData, StdVectorString labels) {
+    this(opensimCommonJNI.new_TimeSeriesTableVec3__SWIG_2(StdVectorDouble.getCPtr(indVec), indVec, MatrixVec3.getCPtr(depData), depData, StdVectorString.getCPtr(labels), labels), true);
+  }
+
   public TimeSeriesTableVec3(DataTableVec3 datatable) {
-    this(opensimCommonJNI.new_TimeSeriesTableVec3__SWIG_2(DataTableVec3.getCPtr(datatable), datatable), true);
+    this(opensimCommonJNI.new_TimeSeriesTableVec3__SWIG_3(DataTableVec3.getCPtr(datatable), datatable), true);
   }
 
   public TimeSeriesTableVec3(String filename) {
-    this(opensimCommonJNI.new_TimeSeriesTableVec3__SWIG_3(filename), true);
+    this(opensimCommonJNI.new_TimeSeriesTableVec3__SWIG_4(filename), true);
   }
 
   public TimeSeriesTableVec3(String filename, String tablename) {
-    this(opensimCommonJNI.new_TimeSeriesTableVec3__SWIG_4(filename, tablename), true);
+    this(opensimCommonJNI.new_TimeSeriesTableVec3__SWIG_5(filename, tablename), true);
   }
 
   public RowVectorViewVec3 getNearestRow(double time, boolean restrictToTimeRange) {
@@ -75,6 +79,11 @@ public class TimeSeriesTableVec3 extends DataTableVec3 {
 
   public RowVectorOfVec3 averageRow(double beginTime, double endTime) {
     return new RowVectorOfVec3(opensimCommonJNI.TimeSeriesTableVec3_averageRow(swigCPtr, this, beginTime, endTime), true);
+  }
+
+  public TimeSeriesTableVec3 clone() {
+    long cPtr = opensimCommonJNI.TimeSeriesTableVec3_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new TimeSeriesTableVec3(cPtr, true);
   }
 
   public TimeSeriesTable flatten() {

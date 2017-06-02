@@ -438,7 +438,7 @@ private double getSpeedFromTextboxInternalUnits() {
           if (updateDisplay) {
              // Use renderAll rather than repaintAll for greater responsiveness in 3d viewer
              //ViewDB.getInstance().updateModelDisplay(OpenSimDB.getInstance().getCurrentModel());
-             ViewDB.getInstance().updateModelDisplayNoRepaint(OpenSimDB.getInstance().getCurrentModel());
+             ViewDB.getInstance().updateModelDisplayNoRepaint(OpenSimDB.getInstance().getCurrentModel(), false);
              ViewDB.getInstance().renderAll();
              Vector<OpenSimObject> objs = new Vector<OpenSimObject>(1);
              objs.add(coord);
