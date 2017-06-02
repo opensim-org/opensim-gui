@@ -25,6 +25,7 @@ import org.opensim.modeling.ComponentsList;
 import org.opensim.modeling.DecorativeGeometry;
 import org.opensim.modeling.FrameGeometry;
 import org.opensim.modeling.GeometryPath;
+import org.opensim.modeling.Ground;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
 import org.opensim.modeling.MuscleList;
@@ -62,7 +63,12 @@ public class ModelVisualizationJson extends JSONObject {
     private JSONObject model_object;
     private UUID modelUUID;
     public static boolean verbose=false;
-    
+    // Create JSONs for geometry and material and use them for all objects of this type so that they all change together
+    private JSONObject experimenalMarkerGeometryJson=null;
+    private JSONObject experimenalMarkerMaterialJson=null;
+    private JSONObject experimenalForceGeometryJson=null;
+    private JSONObject experimenalForceMaterialJson=null;
+    private Vec3 defaultMarkerColor = new Vec3(0., 0., 1.);
     public ModelVisualizationJson(JSONObject jsonTopIn, Model model) {
         // implicit super()
         createModelJsonNode(); // Model node
@@ -241,13 +247,15 @@ public class ModelVisualizationJson extends JSONObject {
         msg.put("Transforms", bodyTransforms_json);
         while (bodyIdIter.hasNext()){
             int bodyId = bodyIdIter.next();
-            JSONObject oneBodyXform_json = new JSONObject();
             PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(bodyId);
-            Transform xform = bodyFrame.getTransformInGround(state);
-            // Get uuid for first Mesh in body
-            oneBodyXform_json.put("uuid", mapBodyIndicesToJson.get(bodyId).get("uuid"));
-            oneBodyXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1., 1., 1.), visScaleFactor));
-            bodyTransforms_json.add(oneBodyXform_json);
+            if (Ground.safeDownCast(bodyFrame)==null){
+                JSONObject oneBodyXform_json = new JSONObject();
+                Transform xform = bodyFrame.getTransformInGround(state);
+                // Get uuid for first Mesh in body
+                oneBodyXform_json.put("uuid", mapBodyIndicesToJson.get(bodyId).get("uuid"));
+                oneBodyXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1., 1., 1.), visScaleFactor));
+                bodyTransforms_json.add(oneBodyXform_json);
+            }
         }
         /*
         JSONArray geompaths_json = new JSONArray();
@@ -501,4 +509,57 @@ public class ModelVisualizationJson extends JSONObject {
         return guiJson;
     }
 
+    private void createDefaultMotionObjects() {
+        experimenalMarkerGeometryJson = new JSONObject();
+        UUID uuidForMarkerGeometry = UUID.randomUUID();
+        experimenalMarkerGeometryJson.put("uuid", uuidForMarkerGeometry.toString());
+        experimenalMarkerGeometryJson.put("type", "SphereGeometry");
+        experimenalMarkerGeometryJson.put("radius", 5);
+        experimenalMarkerGeometryJson.put("name", "DefaultExperimentalMarker");
+ 	experimenalMarkerGeometryJson.put("widthSegments", 32);
+	experimenalMarkerGeometryJson.put("heightSegments", 16);
+        json_geometries.add(experimenalMarkerGeometryJson);
+        
+        experimenalMarkerMaterialJson = new JSONObject();
+        UUID uuidForMarkerMaterial = UUID.randomUUID();
+        experimenalMarkerMaterialJson.put("uuid", uuidForMarkerMaterial.toString());
+        String colorString = JSONUtilities.mapColorToRGBA(defaultMarkerColor);
+        experimenalMarkerMaterialJson.put("type", "MeshPhongMaterial");
+        experimenalMarkerMaterialJson.put("shininess", 30);
+        experimenalMarkerMaterialJson.put("transparent", true);
+        experimenalMarkerMaterialJson.put("emissive", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
+        experimenalMarkerMaterialJson.put("specular", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
+        experimenalMarkerMaterialJson.put("side", 2);
+        experimenalMarkerMaterialJson.put("wireframe", false);     
+        experimenalMarkerMaterialJson.put("color", colorString);
+        json_materials.add(experimenalMarkerMaterialJson);
+    }
+    
+    // This assumes default shape/color and Ground Frame
+    public UUID addExperimentalMarker(Vec3 location, String name){
+        // If first oibject, will create the defaults lazily
+        if (experimenalMarkerGeometryJson == null)
+            createDefaultMotionObjects();
+        Map<String, Object> expMarker_json = new LinkedHashMap<String, Object>();
+        UUID mesh_uuid = UUID.randomUUID();
+        expMarker_json.put("uuid", mesh_uuid.toString());
+        expMarker_json.put("type", "Mesh");
+        expMarker_json.put("opensimtype", "ExperimentalMarker");
+        expMarker_json.put("name", name);
+        expMarker_json.put("geometry", experimenalMarkerGeometryJson.get("uuid"));
+        expMarker_json.put("material", experimenalMarkerMaterialJson.get("uuid"));
+        JSONArray pos = new JSONArray();
+        for (int i=0; i<3; i++)
+            pos.add(location.get(i)*visScaleFactor);
+        expMarker_json.put("position", pos);
+        expMarker_json.put("castShadow", false);
+        expMarker_json.put("userData", "NonEditable");
+        JSONObject gndJson = mapBodyIndicesToJson.get(0);
+        if (gndJson.get("children")==null)
+                gndJson.put("children", new JSONArray());
+        JSONArray gndChildren = (JSONArray) gndJson.get("children");
+        gndChildren.add(expMarker_json);
+        return mesh_uuid;
+        
+    }
 }
