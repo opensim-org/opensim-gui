@@ -62,6 +62,7 @@ import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Storage;
 import org.opensim.modeling.TransformAxis;
 import org.opensim.modeling.Vec3;
+import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.MuscleColoringFunction;
 import org.opensim.view.OpenSimvtkGlyphCloud;
 import org.opensim.view.SelectedGlyphUserObject;
@@ -248,8 +249,8 @@ public class MotionDisplayer implements SelectionListener {
         setupMotionDisplay();
         // create a buffer to be used for comuptation of constrained states
         statesBuffer = new double[model.getNumStateVariables()];
-        SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
         if (model instanceof ModelForExperimentalData) return;
+        SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
         if(vis!=null) vis.setApplyMuscleColors(isRenderMuscleActivations());
     }
 
@@ -272,17 +273,15 @@ public class MotionDisplayer implements SelectionListener {
             mot.setMotionDisplayer(this);
             for(ExperimentalDataObject nextObject:objects){
                 if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
-                    int glyphIndex=markersRep.addLocation(nextObject);
-                    nextObject.setGlyphInfo(glyphIndex, markersRep);
+                    createMarkerVisualizerObjectKeepHandle(nextObject);
                 } else if (nextObject.getObjectType()==ExperimentalDataItemType.PointForceData){
-                    int glyphIndex=groundForcesRep.addLocation(nextObject);
-                    nextObject.setGlyphInfo(glyphIndex, groundForcesRep);
+                    createForceVisualizerObjectKeepHandle(nextObject);
                 } else if (nextObject.getObjectType()==ExperimentalDataItemType.BodyForceData){
-                    int glyphIndex=groundForcesRep.addLocation(nextObject);
-                    nextObject.setGlyphInfo(glyphIndex, groundForcesRep);
+                    createForceVisualizerObjectKeepHandle(nextObject);
                 }
                 
             }
+            // create objects and cache their uuids
             //createTrails(model);
             return;
         }
@@ -340,6 +339,23 @@ public class MotionDisplayer implements SelectionListener {
         }
     }
 
+    private void createForceVisualizerObjectKeepHandle(ExperimentalDataObject nextObject) {
+        if (ViewDB.isVtkGraphicsAvailable()){
+            int glyphIndex=groundForcesRep.addLocation(nextObject);
+            nextObject.setGlyphInfo(glyphIndex, groundForcesRep);
+        }
+        
+    }
+
+    private void createMarkerVisualizerObjectKeepHandle(ExperimentalDataObject nextObject) {
+        if (ViewDB.isVtkGraphicsAvailable()){
+            int glyphIndex=markersRep.addLocation(nextObject);
+            nextObject.setGlyphInfo(glyphIndex, markersRep);
+        }
+        ModelVisualizationJson modelJson = ViewDB.getInstance().getModelVisualizationJson(model);
+        nextObject.setDataObjectUUID(modelJson.addExperimentalMarker(new Vec3(0), nextObject.getName()));
+    }
+
     private void AddMotionObjectsRep(final Model model) {
         if (ViewDB.isVtkGraphicsAvailable()){
             if (groundForcesRep != null)
@@ -386,6 +402,7 @@ public class MotionDisplayer implements SelectionListener {
             ViewDB.getInstance().addUserObjectToModel(model, generalizedForcesRep.getVtkActor());
             ViewDB.getInstance().addUserObjectToModel(model, markersRep.getVtkActor());
         }
+         
         ViewDB.getInstance().addSelectionListener(this);
     }
 
@@ -591,83 +608,88 @@ public class MotionDisplayer implements SelectionListener {
           Vector<ExperimentalDataObject> objects=mot.getClassified();
           boolean markersModified=false;
           boolean forcesModified=false;
-          SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-           for(ExperimentalDataObject nextObject:objects){
-                if (!nextObject.isDisplayed()) continue;
-                vis.upateDisplay(nextObject);
-                
-                if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
-                    
-                    int startIndex = nextObject.getStartIndexInFileNotIncludingTime();
-                    /*
-                    markersRep.setLocation(nextObject.getGlyphIndex(), 
-                            states.getitem(startIndex)/mot.getUnitConversion(), 
-                            states.getitem(startIndex+1)/mot.getUnitConversion(), 
-                            states.getitem(startIndex+2)/mot.getUnitConversion());
-                    markersModified = true;*/
+          if (ViewDB.isVtkGraphicsAvailable()){
+            SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
+             for(ExperimentalDataObject nextObject:objects){
+                  if (!nextObject.isDisplayed()) continue;
+                  vis.upateDisplay(nextObject);
 
+                  if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
+
+                      int startIndex = nextObject.getStartIndexInFileNotIncludingTime();
+                      /*
+                      markersRep.setLocation(nextObject.getGlyphIndex(), 
+                              states.getitem(startIndex)/mot.getUnitConversion(), 
+                              states.getitem(startIndex+1)/mot.getUnitConversion(), 
+                              states.getitem(startIndex+2)/mot.getUnitConversion());
+                      markersModified = true;*/
+
+                  }
+                  else if (nextObject.getObjectType()==ExperimentalDataItemType.PointForceData){
+                      String pointId = ((MotionObjectPointForce)nextObject).getPointIdentifier();
+                      String forceId = ((MotionObjectPointForce)nextObject).getForceIdentifier();
+                      String bodyId = ((MotionObjectPointForce)nextObject).getPointExpressedInBody();  
+                      Body b = model.getBodySet().get(bodyId);
+                      int startPointIndex = simmMotionData.getColumnIndicesForIdentifier(pointId).getitem(0)-1;
+                      double[] locationLocal = new double[]{states.getitem(startPointIndex), 
+                              states.getitem(startPointIndex+1), 
+                              states.getitem(startPointIndex+2)};
+                      double[] locationGlobal = new double[3]; 
+                      // Transform to ground from body frame
+                      dContext.transformPosition(b, locationLocal, locationGlobal);
+                      groundForcesRep.setLocation(nextObject.getGlyphIndex(), 
+                              locationGlobal[0], locationGlobal[1], locationGlobal[2]);
+                      int startForceIndex = simmMotionData.getColumnIndicesForIdentifier(forceId).getitem(0)-1;
+                      double[] forceLocal = new double[]{states.getitem(startForceIndex), 
+                              states.getitem(startForceIndex+1), 
+                              states.getitem(startForceIndex+2)};
+                      maskForceComponent(forceLocal, ((MotionObjectPointForce)nextObject).getForceComponent());
+                      double[] forceGlobal = new double[3]; 
+                      dContext.transform(b, forceLocal, model.get_ground(), forceGlobal);
+                      groundForcesRep.setNormalAtLocation(nextObject.getGlyphIndex(), 
+                              forceGlobal[0], 
+                              forceGlobal[1], 
+                              forceGlobal[2]);
+                      forcesModified=true;
+                } else if (nextObject.getObjectType()==ExperimentalDataItemType.BodyForceData){
+                      int startIndex = nextObject.getStartIndexInFileNotIncludingTime();
+                      MotionObjectBodyPoint bodyPointObject = (MotionObjectBodyPoint)nextObject;
+                      double[] bodyPoint =bodyPointObject.getPoint();
+                      PhysicalFrame b = model.getBodySet().get(bodyPointObject.getPointExpressedInBody());
+                      double[] bodyPointGlobal = new double[3]; 
+                      // Transform to ground from body frame
+                      dContext.transformPosition(b, bodyPoint, bodyPointGlobal);
+                      groundForcesRep.setLocation(nextObject.getGlyphIndex(), 
+                              bodyPointGlobal[0], bodyPointGlobal[1], bodyPointGlobal[2]);
+                      double[] vectorGlobal = new double[]{states.getitem(startIndex), 
+                              states.getitem(startIndex+1), 
+                              states.getitem(startIndex+2)}; 
+
+                      if (b==model.get_ground())
+                           maskForceComponent(vectorGlobal, ((MotionObjectPointForce)nextObject).getForceComponent());
+                      else{
+                          double[] vectorLocal = new double[]{
+                                  states.getitem(startIndex), 
+                                  states.getitem(startIndex+1), 
+                                  states.getitem(startIndex+2)
+                          };
+                          maskForceComponent(vectorLocal, ((MotionObjectPointForce)nextObject).getForceComponent());
+                          // Transform to ground from body frame
+                          dContext.transform(b, vectorLocal, model.get_ground(), vectorGlobal);
+                      }
+
+                      groundForcesRep.setNormalAtLocation(nextObject.getGlyphIndex(), 
+                              vectorGlobal[0], vectorGlobal[1], vectorGlobal[2]);
+                      forcesModified=true;
                 }
-                else if (nextObject.getObjectType()==ExperimentalDataItemType.PointForceData){
-                    String pointId = ((MotionObjectPointForce)nextObject).getPointIdentifier();
-                    String forceId = ((MotionObjectPointForce)nextObject).getForceIdentifier();
-                    String bodyId = ((MotionObjectPointForce)nextObject).getPointExpressedInBody();  
-                    Body b = model.getBodySet().get(bodyId);
-                    int startPointIndex = simmMotionData.getColumnIndicesForIdentifier(pointId).getitem(0)-1;
-                    double[] locationLocal = new double[]{states.getitem(startPointIndex), 
-                            states.getitem(startPointIndex+1), 
-                            states.getitem(startPointIndex+2)};
-                    double[] locationGlobal = new double[3]; 
-                    // Transform to ground from body frame
-                    dContext.transformPosition(b, locationLocal, locationGlobal);
-                    groundForcesRep.setLocation(nextObject.getGlyphIndex(), 
-                            locationGlobal[0], locationGlobal[1], locationGlobal[2]);
-                    int startForceIndex = simmMotionData.getColumnIndicesForIdentifier(forceId).getitem(0)-1;
-                    double[] forceLocal = new double[]{states.getitem(startForceIndex), 
-                            states.getitem(startForceIndex+1), 
-                            states.getitem(startForceIndex+2)};
-                    maskForceComponent(forceLocal, ((MotionObjectPointForce)nextObject).getForceComponent());
-                    double[] forceGlobal = new double[3]; 
-                    dContext.transform(b, forceLocal, model.get_ground(), forceGlobal);
-                    groundForcesRep.setNormalAtLocation(nextObject.getGlyphIndex(), 
-                            forceGlobal[0], 
-                            forceGlobal[1], 
-                            forceGlobal[2]);
-                    forcesModified=true;
-              } else if (nextObject.getObjectType()==ExperimentalDataItemType.BodyForceData){
-                    int startIndex = nextObject.getStartIndexInFileNotIncludingTime();
-                    MotionObjectBodyPoint bodyPointObject = (MotionObjectBodyPoint)nextObject;
-                    double[] bodyPoint =bodyPointObject.getPoint();
-                    PhysicalFrame b = model.getBodySet().get(bodyPointObject.getPointExpressedInBody());
-                    double[] bodyPointGlobal = new double[3]; 
-                    // Transform to ground from body frame
-                    dContext.transformPosition(b, bodyPoint, bodyPointGlobal);
-                    groundForcesRep.setLocation(nextObject.getGlyphIndex(), 
-                            bodyPointGlobal[0], bodyPointGlobal[1], bodyPointGlobal[2]);
-                    double[] vectorGlobal = new double[]{states.getitem(startIndex), 
-                            states.getitem(startIndex+1), 
-                            states.getitem(startIndex+2)}; 
-                   
-                    if (b==model.get_ground())
-                         maskForceComponent(vectorGlobal, ((MotionObjectPointForce)nextObject).getForceComponent());
-                    else{
-                        double[] vectorLocal = new double[]{
-                                states.getitem(startIndex), 
-                                states.getitem(startIndex+1), 
-                                states.getitem(startIndex+2)
-                        };
-                        maskForceComponent(vectorLocal, ((MotionObjectPointForce)nextObject).getForceComponent());
-                        // Transform to ground from body frame
-                        dContext.transform(b, vectorLocal, model.get_ground(), vectorGlobal);
-                    }
-                    
-                    groundForcesRep.setNormalAtLocation(nextObject.getGlyphIndex(), 
-                            vectorGlobal[0], vectorGlobal[1], vectorGlobal[2]);
-                    forcesModified=true;
-              }
-              
-              if (forcesModified) groundForcesRep.setModified();
-              if (markersModified) markersRep.setModified();
+
+                if (forcesModified) groundForcesRep.setModified();
+                if (markersModified) markersRep.setModified();
+            }
           }
+          // Create one frame and send to Visualizer this would have:
+          // updated positions for markers, 
+          // updated transforms for forces
            //groundForcesRep.hide(0);
           return;
       }
@@ -956,14 +978,11 @@ public class MotionDisplayer implements SelectionListener {
             mot.setMotionDisplayer(this);
             for(ExperimentalDataObject nextObject:objects){
                 if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
-                    int glyphIndex=markersRep.addLocation(nextObject);
-                    nextObject.setGlyphInfo(glyphIndex, markersRep);
+                    createMarkerVisualizerObjectKeepHandle(nextObject);
                 } else if (nextObject.getObjectType()==ExperimentalDataItemType.PointForceData){
-                    int glyphIndex=groundForcesRep.addLocation(nextObject);
-                    nextObject.setGlyphInfo(glyphIndex, groundForcesRep);
+                    createForceVisualizerObjectKeepHandle(nextObject);
                 } else if (nextObject.getObjectType()==ExperimentalDataItemType.BodyForceData){
-                    int glyphIndex=groundForcesRep.addLocation(nextObject);
-                    nextObject.setGlyphInfo(glyphIndex, groundForcesRep);
+                    createForceVisualizerObjectKeepHandle(nextObject);
                 }
                 
             }
