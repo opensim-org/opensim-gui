@@ -36,6 +36,7 @@ import org.opensim.modeling.State;
 import org.opensim.modeling.Transform;
 import org.opensim.modeling.Vec3;
 import org.opensim.modeling.WrapObject;
+import org.opensim.view.motions.MotionDisplayer;
 
 /**
  *
@@ -64,7 +65,8 @@ public class ModelVisualizationJson extends JSONObject {
     private UUID pathpointMatUUID;
     public static boolean verbose=false;
     private boolean ready = false;
-    private static HashMap<String, Boolean> movableOpensimTypes = new HashMap<String, Boolean>();
+    private static final HashMap<String, Boolean> movableOpensimTypes = new HashMap<String, Boolean>();
+    private final ArrayList<MotionDisplayer> motionDisplayers = new ArrayList<MotionDisplayer>();
     
     // Create JSONs for geometry and material and use them for all objects of this type so that they all change together
     private JSONObject experimenalMarkerGeometryJson=null;
@@ -316,6 +318,10 @@ public class ModelVisualizationJson extends JSONObject {
                 geompaths_json.add(pathUpdate_json);
        
             }*/
+            }
+            // Process motion displayers
+            for (MotionDisplayer nextMotionDisplayer: motionDisplayers){
+                nextMotionDisplayer.addMotionObjectsToFrame(bodyTransforms_json, this);
             }
         }
         return msg;
@@ -659,5 +665,9 @@ public class ModelVisualizationJson extends JSONObject {
         gndChildren.add(expMarker_json);
         return mesh_uuid;
         
+    }
+
+    public void addMotionDisplayer(MotionDisplayer aThis) {
+        motionDisplayers.add(aThis);
     }
 }

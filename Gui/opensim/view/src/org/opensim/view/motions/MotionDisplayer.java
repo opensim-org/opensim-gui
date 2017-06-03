@@ -40,6 +40,8 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.opensim.logger.OpenSimLogger;
 import org.opensim.modeling.ArrayDecorativeGeometry;
 import org.opensim.modeling.ArrayDouble;
@@ -60,8 +62,10 @@ import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.SimbodyEngine;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Storage;
+import org.opensim.modeling.Transform;
 import org.opensim.modeling.TransformAxis;
 import org.opensim.modeling.Vec3;
+import org.opensim.threejs.JSONUtilities;
 import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.MuscleColoringFunction;
 import org.opensim.view.OpenSimvtkGlyphCloud;
@@ -71,6 +75,7 @@ import org.opensim.view.SingleModelVisuals;
 import org.opensim.view.experimentaldata.AnnotatedMotion;
 import org.opensim.view.experimentaldata.ExperimentalDataItemType;
 import org.opensim.view.experimentaldata.ExperimentalDataObject;
+import org.opensim.view.experimentaldata.ExperimentalMarker;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.view.experimentaldata.MotionObjectBodyPoint;
 import org.opensim.view.experimentaldata.MotionObjectPointForce;
@@ -173,6 +178,26 @@ public class MotionDisplayer implements SelectionListener {
         }
         
     }
+
+    public void addMotionObjectsToFrame(JSONArray transforms_json, ModelVisualizationJson modelJson) {
+        AnnotatedMotion mot = (AnnotatedMotion)simmMotionData;
+        Vector<ExperimentalDataObject> objects=mot.getClassified();        
+        Vec3 unitScale = new Vec3(1., 1., 1.);
+        for (ExperimentalDataObject nextObject : objects) {
+             if (!nextObject.isDisplayed()) 
+                 continue;
+             JSONObject motionObjectTransform = new JSONObject();
+             Transform xform = new Transform();
+             if (nextObject instanceof ExperimentalMarker){
+                 double[] point = ((ExperimentalMarker) nextObject).getPoint();
+                xform.setP(new Vec3(point[0], point[1], point[2]));
+             }
+             motionObjectTransform.put("uuid", nextObject.getDataObjectUUID().toString());
+             motionObjectTransform.put("matrix", 
+                     JSONUtilities.createMatrixFromTransform(xform, unitScale, modelJson.getVisScaleFactor()));
+             transforms_json.add(motionObjectTransform);
+         }
+    }
     
     public enum ObjectTypesInMotionFiles{GenCoord, 
                                          GenCoord_Velocity, 
@@ -251,6 +276,7 @@ public class MotionDisplayer implements SelectionListener {
         setupMotionDisplay();
         // create a buffer to be used for comuptation of constrained states
         statesBuffer = new double[model.getNumStateVariables()];
+        ViewDB.getInstance().getModelVisualizationJson(model).addMotionDisplayer(this);
         if (model instanceof ModelForExperimentalData) return;
         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
         if(vis!=null) vis.setApplyMuscleColors(isRenderMuscleActivations());
@@ -691,8 +717,8 @@ public class MotionDisplayer implements SelectionListener {
           }
           // Create one frame and send to Visualizer this would have:
           // updated positions for markers, 
-          // updated transforms for forces
-           //groundForcesRep.hide(0);
+         // updated transforms for forces         
+          //groundForcesRep.hide(0);
           return;
       }
       OpenSimContext context = OpenSimDB.getInstance().getContext(model);
