@@ -61,6 +61,8 @@ public final class FileLoadDataAction extends CallableSystemAction {
                     amot.setCameraRate(markerData.getCameraRate());
                     // Add the visuals to support it
                     ModelForExperimentalData modelForDataImport = new ModelForExperimentalData(nextNumber++, amot);
+                    modelForDataImport.initSystem();
+                    modelForDataImport.addMarkers(amot.getMarkerNames());
                     OpenSimDB.getInstance().addModel(modelForDataImport);
                     MotionsDB.getInstance().addMotion(modelForDataImport, amot, null);
                     MotionsDB.getInstance().saveStorageFileName(amot, fileName);

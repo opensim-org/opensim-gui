@@ -43,11 +43,11 @@ import java.util.Vector;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.opensim.logger.OpenSimLogger;
-import org.opensim.modeling.ArrayDecorativeGeometry;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.BodySet;
+import org.opensim.modeling.Component;
 import org.opensim.modeling.Coordinate;
 import org.opensim.modeling.CoordinateSet;
 import org.opensim.modeling.ForceSet;
@@ -381,7 +381,8 @@ public class MotionDisplayer implements SelectionListener {
             nextObject.setGlyphInfo(glyphIndex, markersRep);
         }
         ModelVisualizationJson modelJson = ViewDB.getInstance().getModelVisualizationJson(model);
-        nextObject.setDataObjectUUID(modelJson.addExperimentalMarker(new Vec3(0), nextObject.getName()));
+        Component marker = model.getComponent(nextObject.getName());
+        nextObject.setDataObjectUUID(modelJson.findUUIDForObject(marker).get(0));
     }
 
     private void AddMotionObjectsRep(final Model model) {
