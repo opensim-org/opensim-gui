@@ -742,6 +742,7 @@
         <file name="File_hidden"/>
         <file name="Memory_hidden"/>
         <file name="Standard.xml_hidden"/>
+        <file name="QuickSearch_hidden" />
     </folder>
     <folder name="Windows2">
         <folder name="Components">
