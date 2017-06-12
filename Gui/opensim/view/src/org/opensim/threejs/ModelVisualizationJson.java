@@ -495,7 +495,7 @@ public class ModelVisualizationJson extends JSONObject {
         Vec3 location = pathPoint.getLocation(state);
         localTransform.setP(location);
         bpptInBodyJson.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1.0), visScaleFactor));
-        bpptInBodyJson.put("visible", true);
+        bpptInBodyJson.put("visible", false);
         children.add(bpptInBodyJson);
         return ppoint_uuid;
     }
