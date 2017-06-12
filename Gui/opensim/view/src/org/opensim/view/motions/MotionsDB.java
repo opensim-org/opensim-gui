@@ -161,7 +161,7 @@ public class MotionsDB extends Observable // Observed by other entities in motio
                 associated = true;
              } else { // Show error that motion couldn't be associated and repeat'
                 DialogDisplayer.getDefault().notify( 
-                        new NotifyDescriptor.Message("Could not associate motion to current model."));
+                        new NotifyDescriptor.Message("Could not associate motion to current model.", NotifyDescriptor.WARNING_MESSAGE));
                 break;
              }
           }
