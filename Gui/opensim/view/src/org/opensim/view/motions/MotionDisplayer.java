@@ -104,7 +104,7 @@ public class MotionDisplayer implements SelectionListener {
     double[] defaultExperimentalMarkerColor = new double[]{0.0, 0.35, 0.65};
     private double[] defaultForceColor = new double[]{0., 1.0, 0.};
     private MuscleColoringFunction mcf=null;
-    ModelDisplayHints mdh = new ModelDisplayHints();
+
 
      /**
      * @return the associatedMotions
@@ -180,6 +180,8 @@ public class MotionDisplayer implements SelectionListener {
     }
 
     public void addMotionObjectsToFrame(JSONArray transforms_json, ModelVisualizationJson modelJson) {
+        if (!(simmMotionData instanceof AnnotatedMotion)) 
+            return;
         AnnotatedMotion mot = (AnnotatedMotion)simmMotionData;
         Vector<ExperimentalDataObject> objects=mot.getClassified();        
         Vec3 unitScale = new Vec3(1., 1., 1.);
