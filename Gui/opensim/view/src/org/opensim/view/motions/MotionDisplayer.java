@@ -381,8 +381,7 @@ public class MotionDisplayer implements SelectionListener {
             nextObject.setGlyphInfo(glyphIndex, markersRep);
         }
         ModelVisualizationJson modelJson = ViewDB.getInstance().getModelVisualizationJson(model);
-        Component marker = model.getComponent(nextObject.getName());
-        nextObject.setDataObjectUUID(modelJson.findUUIDForObject(marker).get(0));
+        nextObject.setDataObjectUUID(modelJson.findUUIDForObject(nextObject).get(0));
     }
 
     private void AddMotionObjectsRep(final Model model) {

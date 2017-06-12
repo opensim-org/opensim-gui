@@ -36,6 +36,8 @@ import org.opensim.modeling.State;
 import org.opensim.modeling.Transform;
 import org.opensim.modeling.Vec3;
 import org.opensim.modeling.WrapObject;
+import org.opensim.view.experimentaldata.ExperimentalMarker;
+import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.view.motions.MotionDisplayer;
 
 /**
@@ -90,6 +92,13 @@ public class ModelVisualizationJson extends JSONObject {
             System.out.println("finished building json for "+model.getName());
     }
     private void createJsonForModel(Model model) {
+       JSONObject model_ground_json = processGroundFrame(model);
+       if (model instanceof ModelForExperimentalData){
+            createDefaultMotionObjects();
+            createExperimentalMarkersVisuals(model);
+            //createExperimentalForcesVisuals();
+            return;
+        }
         state = model.getWorkingState();
         mdh = model.getDisplayHints();
         ComponentsList mcList = model.getComponentsList();
@@ -97,25 +106,9 @@ public class ModelVisualizationJson extends JSONObject {
         
         BodyList bodies = model.getBodyList();
         BodyIterator body = bodies.begin();
-        mapBodyIndicesToFrames.put(0, model.getGround());
-        
-        JSONArray json_model_children = (JSONArray) ((JSONObject) get("object")).get("children");
-        
-        JSONObject model_ground_json = new JSONObject();
-        // create model node
-        UUID groundUuid = UUID.randomUUID();
-        model_ground_json.put("uuid", groundUuid.toString());
-        model_ground_json.put("type", "Group");
-        model_ground_json.put("opensimType", "Frame");
-        model_ground_json.put("name", model.getGround().getAbsolutePathName());
-        model_ground_json.put("userData", "NonEditable");
-        model_ground_json.put("model_ground", true);
-        json_model_children.add(model_ground_json);
-        addComponentToUUIDMap(model.getGround(), groundUuid);
         //System.out.println(model_json.toJSONString());
         JSONArray bodies_json = new JSONArray();
         model_ground_json.put("children", bodies_json);
-        mapBodyIndicesToJson.put(0, model_ground_json);
         while (!body.equals(bodies.end())) {
             int id = body.getMobilizedBodyIndex();
             mapBodyIndicesToFrames.put(id, body.__deref__());
@@ -158,6 +151,24 @@ public class ModelVisualizationJson extends JSONObject {
             }
             mcIter.next();
         }
+    }
+
+    private JSONObject processGroundFrame(Model model) {
+        mapBodyIndicesToFrames.put(0, model.getGround());
+        JSONArray json_model_children = (JSONArray) ((JSONObject) get("object")).get("children");
+        JSONObject model_ground_json = new JSONObject();
+        // create model node
+        UUID groundUuid = UUID.randomUUID();
+        model_ground_json.put("uuid", groundUuid.toString());
+        model_ground_json.put("type", "Group");
+        model_ground_json.put("opensimType", "Frame");
+        model_ground_json.put("name", model.getGround().getAbsolutePathName());
+        model_ground_json.put("userData", "NonEditable");
+        model_ground_json.put("model_ground", true);
+        json_model_children.add(model_ground_json);
+        addComponentToUUIDMap(model.getGround(), groundUuid);
+        mapBodyIndicesToJson.put(0, model_ground_json);
+        return model_ground_json;
     }
 
     private void addComponentToUUIDMap(Component comp, UUID groupUuid) {
@@ -638,36 +649,39 @@ public class ModelVisualizationJson extends JSONObject {
         experimenalMarkerMaterialJson.put("color", colorString);
         json_materials.add(experimenalMarkerMaterialJson);
     }
-    
-    // This assumes default shape/color and Ground Frame
-    public UUID addExperimentalMarker(Vec3 location, String name){
-        // If first oibject, will create the defaults lazily
-        if (experimenalMarkerGeometryJson == null)
-            createDefaultMotionObjects();
-        Map<String, Object> expMarker_json = new LinkedHashMap<String, Object>();
-        UUID mesh_uuid = UUID.randomUUID();
-        expMarker_json.put("uuid", mesh_uuid.toString());
-        expMarker_json.put("type", "Mesh");
-        expMarker_json.put("opensimtype", "ExperimentalMarker");
-        expMarker_json.put("name", name);
-        expMarker_json.put("geometry", experimenalMarkerGeometryJson.get("uuid"));
-        expMarker_json.put("material", experimenalMarkerMaterialJson.get("uuid"));
-        JSONArray pos = new JSONArray();
-        for (int i=0; i<3; i++)
-            pos.add(location.get(i)*visScaleFactor);
-        expMarker_json.put("position", pos);
-        expMarker_json.put("castShadow", false);
-        expMarker_json.put("userData", "NonEditable");
-        JSONObject gndJson = mapBodyIndicesToJson.get(0);
-        if (gndJson.get("children")==null)
-                gndJson.put("children", new JSONArray());
-        JSONArray gndChildren = (JSONArray) gndJson.get("children");
-        gndChildren.add(expMarker_json);
-        return mesh_uuid;
-        
-    }
 
     public void addMotionDisplayer(MotionDisplayer aThis) {
         motionDisplayers.add(aThis);
+    }
+
+    private void createExperimentalMarkersVisuals(Model model) {
+        ModelForExperimentalData model4Data = (ModelForExperimentalData) model;
+        for (ExperimentalMarker nextExMarker : model4Data.getExperimentalMarkers()) {
+            // Create Object with proper name, add it to ground, update Map of Object to UUID
+            Map<String, Object> expMarker_json = new LinkedHashMap<String, Object>();
+            UUID mesh_uuid = UUID.randomUUID();
+            expMarker_json.put("uuid", mesh_uuid.toString());
+            expMarker_json.put("type", "Mesh");
+            expMarker_json.put("opensimtype", "ExperimentalMarker");
+            expMarker_json.put("name", nextExMarker.getName());
+            expMarker_json.put("geometry", experimenalMarkerGeometryJson.get("uuid"));
+            expMarker_json.put("material", experimenalMarkerMaterialJson.get("uuid"));
+            JSONArray pos = new JSONArray();
+            for (int i = 0; i < 3; i++) {
+                pos.add(0.0);
+            }
+            expMarker_json.put("position", pos);
+            expMarker_json.put("castShadow", false);
+            expMarker_json.put("userData", "NonEditable");
+            JSONObject gndJson = mapBodyIndicesToJson.get(0);
+            if (gndJson.get("children") == null) {
+                gndJson.put("children", new JSONArray());
+            }
+            JSONArray gndChildren = (JSONArray) gndJson.get("children");
+            gndChildren.add(expMarker_json);
+            ArrayList<UUID> comp_uuids = new ArrayList<UUID>();
+            comp_uuids.add(mesh_uuid);
+            mapComponentToUUID.put(nextExMarker, comp_uuids);
+        }
     }
 }

@@ -33,6 +33,7 @@ package org.opensim.view.experimentaldata;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Vector;
 import org.opensim.modeling.*;
 import org.opensim.utils.TheApp;
@@ -48,7 +49,7 @@ import org.opensim.utils.TheApp;
  */
 public class ModelForExperimentalData extends Model{
     
-    MarkerSet markers;
+    private ArrayList<ExperimentalMarker> experimentalMarkers = new ArrayList<ExperimentalMarker>();
     private Ground    ground;
     SimbodyEngine dEngine;
     private AnnotatedMotion motionData;
@@ -62,7 +63,6 @@ public class ModelForExperimentalData extends Model{
         this.motionData=motionData;
         //setup();
         dEngine = this.getSimbodyEngine();
-        markers = this.getMarkerSet();
         ground = this.get_ground();
         forces = this.getForceSet();
         // blank filename to make sure it doesn't get overwritten
@@ -70,15 +70,11 @@ public class ModelForExperimentalData extends Model{
        
    }
     
-    public void addMarkers(Vector<String> experimentalMarkers)
+    public void addMarkers(Vector<ExperimentalDataObject> experimentalMarkers)
     {
         for (int i=0; i<experimentalMarkers.size(); i++){
-            Marker newMarker = new Marker();
-            newMarker.connectToModel(this);
-            newMarker.setFrameName("ground");
-            newMarker.set_location(new Vec3(0));
-            newMarker.setName(experimentalMarkers.get(i));
-            addMarker(newMarker);
+            if (experimentalMarkers.get(i) instanceof ExperimentalMarker)
+                this.experimentalMarkers.add((ExperimentalMarker)experimentalMarkers.get(i));
         }
     }
     
@@ -113,5 +109,12 @@ public class ModelForExperimentalData extends Model{
 
     public SimbodyEngine getSimbodyEngine() {
         return dEngine;
+    }
+
+    /**
+     * @return the experimentalMarkers
+     */
+    public ArrayList<ExperimentalMarker> getExperimentalMarkers() {
+        return experimentalMarkers;
     }
 }
