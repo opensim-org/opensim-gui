@@ -50,10 +50,10 @@ import org.opensim.utils.TheApp;
 public class ModelForExperimentalData extends Model{
     
     private ArrayList<ExperimentalMarker> experimentalMarkers = new ArrayList<ExperimentalMarker>();
+    private ArrayList<MotionObjectPointForce> experimentalForces = new ArrayList<MotionObjectPointForce>();
     private Ground    ground;
     SimbodyEngine dEngine;
     private AnnotatedMotion motionData;
-    private ForceSet forces;
     /**
      * Creates a new instance of ModelForExperimentalData
      */
@@ -64,27 +64,20 @@ public class ModelForExperimentalData extends Model{
         //setup();
         dEngine = this.getSimbodyEngine();
         ground = this.get_ground();
-        forces = this.getForceSet();
         // blank filename to make sure it doesn't get overwritten
         this.setInputFileName("");
        
    }
     
-    public void addMarkers(Vector<ExperimentalDataObject> experimentalMarkers)
+    public void addMotionObjects(Vector<ExperimentalDataObject> motionObjects)
     {
-        for (int i=0; i<experimentalMarkers.size(); i++){
-            if (experimentalMarkers.get(i) instanceof ExperimentalMarker)
-                this.experimentalMarkers.add((ExperimentalMarker)experimentalMarkers.get(i));
+        for (int i=0; i<motionObjects.size(); i++){
+            ExperimentalDataObject nextMotionObject = motionObjects.get(i);
+            if (nextMotionObject instanceof ExperimentalMarker)
+                this.experimentalMarkers.add((ExperimentalMarker)nextMotionObject);
+            else if (nextMotionObject instanceof MotionObjectPointForce)
+                this.experimentalForces.add((MotionObjectPointForce)nextMotionObject);
         }
-    }
-    
-    public void addForces(Vector<String> recordedForces)
-    { /*OpenSim20
-        for (int i=0; i<recordedForces.size(); i++){
-            Force newForce = new Force(getGround().getName());
-            newForce.setName(recordedForces.get(i));
-            getForces().append(newForce);
-        }*/
     }
 
     public AnnotatedMotion getMotionData() {
@@ -99,14 +92,6 @@ public class ModelForExperimentalData extends Model{
         return ground;
     }
 
-    public ForceSet getForces() {
-        return forces;
-    }
-
-    public void setForces(ForceSet forces) {
-        this.forces = forces;
-    }
-
     public SimbodyEngine getSimbodyEngine() {
         return dEngine;
     }
@@ -116,5 +101,12 @@ public class ModelForExperimentalData extends Model{
      */
     public ArrayList<ExperimentalMarker> getExperimentalMarkers() {
         return experimentalMarkers;
+    }
+
+    /**
+     * @return the experimentalForces
+     */
+    public ArrayList<MotionObjectPointForce> getExperimentalForces() {
+        return experimentalForces;
     }
 }
