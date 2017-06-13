@@ -286,6 +286,8 @@ public class ModelVisualizationJson extends JSONObject {
                 JSONObject pathUpdate_json = new JSONObject();
                 pathUpdate_json.put("uuid", pathUUID.toString());
                 Vec3 pathColor = colorByState?geomPathObject.getColor(state):geomPathObject.getDefaultColor();
+                if (verbose)
+                    System.out.println("Color:"+geomPathObject.getOwner().getName()+"="+pathColor.toString());
                 String colorString = JSONUtilities.mapColorToRGBA(pathColor);
                 pathUpdate_json.put("color", colorString);
                 geompaths_json.add(pathUpdate_json);

@@ -38,6 +38,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Vector;
 import org.opensim.logger.OpenSimLogger;
@@ -232,7 +233,7 @@ public class MotionDisplayer implements SelectionListener {
     ArrayList<ObjectIndexPair> segmentMarkerColumns=null; // state vector index of the first of three (x y z) coordinates for a marker
     ArrayList<ObjectIndexPair> segmentForceColumns=null; // state vector index of the first of six (px py pz vx vy vz) coordinates for a force vector
     ArrayList<ObjectIndexPair> anyStateColumns=null; // state vector index of muscle excitations and other generic states
-
+    ArrayList<String> canonicalStateNames = new ArrayList<String>();
     ArrayDouble interpolatedStates = null;
 
     boolean statesFile = false; // special type of file that contains full state vectors
@@ -249,7 +250,7 @@ public class MotionDisplayer implements SelectionListener {
         currentForceShape = DEFAULT_FORCE_SHAPE;
         setupMotionDisplay();
         // create a buffer to be used for comuptation of constrained states
-        statesBuffer = new double[model.getNumStateVariables()];
+        //statesBuffer = new double[model.getNumStateVariables()];
         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
         if (model instanceof ModelForExperimentalData) return;
         if(vis!=null) vis.setApplyMuscleColors(isRenderMuscleActivations());
@@ -306,6 +307,7 @@ public class MotionDisplayer implements SelectionListener {
               String columnName = colNames.getitem(i);   // Time is included in labels
               int numClassified = classifyColumn(model, i, columnName); // find out if column is gencord/muscle/segment/...etc.
               ObjectTypesInMotionFiles cType = mapIndicesToObjectTypes.get(i);
+              //System.out.println("Classified "+columnName+" as "+cType);
               if (numClassified>1)  // If we did a group then skip the group
                  i += (numClassified-1);
            }
@@ -409,6 +411,10 @@ public class MotionDisplayer implements SelectionListener {
       if (model instanceof ModelForExperimentalData) {
           return 0;
       }
+      int newIndex = simmMotionData.getStateIndex(columnName);
+      if (newIndex ==-1)
+          return 0;
+      String canonicalCcolumnName = columnName.replace('.', '/');
       CoordinateSet coords = model.getCoordinateSet();
       for (int i = 0; i<coords.getSize(); i++){
          Coordinate co = coords.get(i);
@@ -420,8 +426,8 @@ public class MotionDisplayer implements SelectionListener {
             return 1;
          }
          // GenCoord_Velocity
-         if (columnName.endsWith("_vel")){ //_u
-            if (columnName.equals(cName+"_vel")) //_u
+         if (columnName.endsWith("_vel")|| columnName.endsWith("_u")){ //_u
+            if (columnName.equals(cName+"_vel")|| columnName.equals(cName+"_u")) //_u
                mapIndicesToObjectTypes.put(columnIndex, ObjectTypesInMotionFiles.GenCoord_Velocity);
                mapIndicesToObjects.put(columnIndex, co); 
                return 1;
@@ -442,18 +448,21 @@ public class MotionDisplayer implements SelectionListener {
             }
          }         
       }
-      if (columnName.contains(".excitation") || columnName.contains("activation")){
+      // Allow "/" instead of in addition to "."
+      // Add method to convert column labels to state names so it's centralized
+      if (columnName.contains("excitation") || columnName.contains("activation")){
           setRenderMuscleActivations(true);
       }
       ForceSet acts = model.getForceSet();
       for (int i=0; i< acts.getSize(); i++)
           if (columnName.startsWith(acts.get(i).getName())){    // Make sure it's a muscle state'
           // Any other state
-          int stateIndex=stateNames.findIndex(columnName);  // includes time so 0 is time
+          int stateIndex=stateNames.findIndex(canonicalCcolumnName);  // includes time so 0 is time
           if (stateIndex>0){
               int stateIndexMinusTime = stateIndex-1;
               mapIndicesToObjectTypes.put(columnIndex, ObjectTypesInMotionFiles.State);
               mapIndicesToObjects.put(columnIndex, new Integer(stateIndexMinusTime));  
+              canonicalStateNames.add(canonicalCcolumnName);
               return 1;
           }
      }
@@ -709,11 +718,11 @@ public class MotionDisplayer implements SelectionListener {
               int index = anyStateColumns.get(i).stateVectorIndex;
               double newValue=states.getitem(index);
               // Set value in statesBuffer
-              Object o=mapIndicesToObjects.get(index+1);
-              int bufferIndex = ((Integer)o).intValue();
-              statesBuffer[bufferIndex]=newValue;
+              //Object o=mapIndicesToObjects.get(index+1);
+              //int bufferIndex = ((Integer)o).intValue();
+              model.setStateVariableValue(context.getCurrentStateRef(), canonicalStateNames.get(i), newValue);
+              //statesBuffer[bufferIndex]=newValue;
          }
-         //context.setStates(statesBuffer);
          
          for(int i=0; i<segmentMarkerColumns.size(); i++) {
             int markerIndex = ((Integer)(segmentMarkerColumns.get(i).object)).intValue();
