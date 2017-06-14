@@ -58,7 +58,7 @@ public class JSONUtilities {
         return rawPrintString.substring(1);
     }
 
-    static JSONArray createMatrixFromTransform(Transform xform, Vec3 scaleFactors, double scale) {
+    static public JSONArray createMatrixFromTransform(Transform xform, Vec3 scaleFactors, double scale) {
         double retTransform[] = new double[]{1, 0, 0, 0, 0, 1, 0 , 0, 0, 0, 1, 0, 0 , 0, 0, 1};
         Rotation r = xform.R();
         Vec3 p = xform.p();
