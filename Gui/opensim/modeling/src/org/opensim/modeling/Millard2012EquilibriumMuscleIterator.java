@@ -273,8 +273,12 @@ public class Millard2012EquilibriumMuscleIterator {
     opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_computeInitialFiberEquilibrium(swigCPtr, this, State.getCPtr(s), s);
   }
 
-  public void computeFiberEquilibriumAtZeroVelocity(State s) {
-    opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_computeFiberEquilibriumAtZeroVelocity(swigCPtr, this, State.getCPtr(s), s);
+  public void computeFiberEquilibrium(State s, boolean solveForVelocity) {
+    opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_computeFiberEquilibrium__SWIG_0(swigCPtr, this, State.getCPtr(s), s, solveForVelocity);
+  }
+
+  public void computeFiberEquilibrium(State s) {
+    opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_computeFiberEquilibrium__SWIG_1(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double calcActiveFiberForceAlongTendon(double activation, double fiberLength, double fiberVelocity) {
@@ -647,10 +651,6 @@ public class Millard2012EquilibriumMuscleIterator {
 
   public double getExcitation(State s) {
     return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getExcitation(swigCPtr, this, State.getCPtr(s), s);
-  }
-
-  public void equilibrate(State s) {
-    opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_equilibrate(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void computeEquilibrium(State s) {
