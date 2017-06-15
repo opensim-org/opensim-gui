@@ -60,7 +60,8 @@ public class opensimCommonJNI {
   public final static native long new_IOError();
   public final static native void delete_IOError(long jarg1);
   public final static native int Array_CAPMIN_get();
-  public final static native long new_InvalidPropertyValue(String jarg1, long jarg2, String jarg3, long jarg4, OpenSimObject jarg4_, String jarg5);
+  public final static native long new_InvalidPropertyValue__SWIG_0(String jarg1, long jarg2, String jarg3, long jarg4, OpenSimObject jarg4_, String jarg5, String jarg6);
+  public final static native long new_InvalidPropertyValue__SWIG_1(String jarg1, long jarg2, String jarg3, long jarg4, OpenSimObject jarg4_, String jarg5);
   public final static native void delete_InvalidPropertyValue(long jarg1);
   public final static native void AbstractProperty_setAllowableListSize__SWIG_0(long jarg1, AbstractProperty jarg1_, int jarg2, int jarg3);
   public final static native void AbstractProperty_setAllowableListSize__SWIG_1(long jarg1, AbstractProperty jarg1_, int jarg2);

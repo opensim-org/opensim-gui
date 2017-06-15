@@ -35,8 +35,12 @@ public class InvalidPropertyValue extends OpenSimException {
     super.delete();
   }
 
-  public InvalidPropertyValue(String file, long line, String func, OpenSimObject obj, String propertName) {
-    this(opensimCommonJNI.new_InvalidPropertyValue(file, line, func, OpenSimObject.getCPtr(obj), obj, propertName), true);
+  public InvalidPropertyValue(String file, long line, String func, OpenSimObject obj, String propertyName, String errorMsg) {
+    this(opensimCommonJNI.new_InvalidPropertyValue__SWIG_0(file, line, func, OpenSimObject.getCPtr(obj), obj, propertyName, errorMsg), true);
+  }
+
+  public InvalidPropertyValue(String file, long line, String func, OpenSimObject obj, String propertyName) {
+    this(opensimCommonJNI.new_InvalidPropertyValue__SWIG_1(file, line, func, OpenSimObject.getCPtr(obj), obj, propertyName), true);
   }
 
 }

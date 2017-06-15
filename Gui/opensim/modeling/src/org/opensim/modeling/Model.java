@@ -118,15 +118,6 @@ public class Model extends ModelComponent {
     return opensimSimulationJNI.Model_getClassName();
   }
 
-  public OpenSimObject clone() {
-    long cPtr = opensimSimulationJNI.Model_clone(swigCPtr, this);
-    return (cPtr == 0) ? null : new Model(cPtr, true);
-  }
-
-  public String getConcreteClassName() {
-    return opensimSimulationJNI.Model_getConcreteClassName(swigCPtr, this);
-  }
-
   public void copyProperty_assembly_accuracy(Model source) {
     opensimSimulationJNI.Model_copyProperty_assembly_accuracy(swigCPtr, this, Model.getCPtr(source), source);
   }
@@ -793,6 +784,15 @@ public class Model extends ModelComponent {
 
   public void cleanup() {
     opensimSimulationJNI.Model_cleanup(swigCPtr, this);
+  }
+
+  public OpenSimObject clone() {
+    long cPtr = opensimSimulationJNI.Model_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Model(cPtr, true);
+  }
+
+  public String getConcreteClassName() {
+    return opensimSimulationJNI.Model_getConcreteClassName(swigCPtr, this);
   }
 
   public ModelDisplayHints getDisplayHints() {
