@@ -249,7 +249,7 @@ public class ModelVisualizationJson extends JSONObject {
         obj_json.put("castShadow", false);
         String concreteType = opensimComponent.getConcreteClassName();
         if (!movableOpensimTypes.keySet().contains(concreteType))
-        obj_json.put("userData", "NonEditable");
+            obj_json.put("userData", "NonEditable");
         mobody_objects.add(obj_json);
         return mesh_uuid;
     }   
@@ -310,6 +310,8 @@ public class ModelVisualizationJson extends JSONObject {
                 JSONObject pathUpdate_json = new JSONObject();
                 pathUpdate_json.put("uuid", pathUUID.toString());
                 Vec3 pathColor = colorByState ? geomPathObject.getColor(state) : geomPathObject.getDefaultColor();
+                if (verbose)
+                    System.out.println("Color:"+geomPathObject.getOwner().getName()+"="+pathColor.toString());
                 String colorString = JSONUtilities.mapColorToRGBA(pathColor);
                 pathUpdate_json.put("color", colorString);
                 geompaths_json.add(pathUpdate_json);
@@ -333,7 +335,7 @@ public class ModelVisualizationJson extends JSONObject {
             // Process motion displayers
             for (MotionDisplayer nextMotionDisplayer: motionDisplayers){
                 nextMotionDisplayer.addMotionObjectsToFrame(bodyTransforms_json, this);
-            }
+        }
         }
         return msg;
     }
