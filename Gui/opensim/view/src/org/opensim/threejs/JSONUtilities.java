@@ -40,7 +40,7 @@ public class JSONUtilities {
         return topLevelJson;
     }
     
-    static String mapColorToRGBA(Vec3 color) {
+    public static String mapColorToRGBA(Vec3 color) {
         int r = (int) (color.get(0) * 255);
         int g = (int) (color.get(1) * 255);
         int b = (int) (color.get(2) * 255);
