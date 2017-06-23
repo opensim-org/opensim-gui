@@ -2101,6 +2101,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                 System.out.println(msg.toJSONString());
         }
     }
+    public void addVisualizerObject(JSONObject jsonObject) {
+        if (websocketdb!=null){
+            websocketdb.broadcastMessageJson(currentJson.createAddObjectCommand(jsonObject), null);
+        }
+    }
     // Callback, invoked when a command is received from visualizer
     // this operates only on currentJson
     private void handleJson(JSONObject jsonObject) {

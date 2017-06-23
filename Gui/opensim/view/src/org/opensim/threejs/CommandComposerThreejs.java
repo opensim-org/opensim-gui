@@ -96,5 +96,13 @@ public class CommandComposerThreejs {
          JSONObject commandJson = new JSONObject();
          return commandJson;
     }
+
+    static JSONObject createAddObjectCommandJson(JSONObject newObject) {
+        JSONObject commandJson = new JSONObject();
+        commandJson.put("type", "AddObjectCommand");
+        commandJson.put("objectUuid", newObject.get("uuid"));
+        commandJson.put("object", newObject);
+        return commandJson;
+    }
     
 }
