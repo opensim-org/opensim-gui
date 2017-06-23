@@ -25,6 +25,12 @@
             </not>
         </and>
     </condition>
+    <condition property="opensim.dist.dir" value="dist/installer/opensim">
+        <os family="windows"/>
+    </condition>
+    <condition property="opensim.dist.dir" value="dist/OpenSim.app/Contents/Resources/opensim">
+        <os family="mac"/>
+    </condition>
     <property name="app.conf" value="${installer-files.dir}/opensim.conf"/>
     <import file="nbproject/build-impl.xml"/>
     <target name="debug-properties">
@@ -41,54 +47,71 @@
     </target>
     <target name="copy-installer-files" depends="unzip-distro" 
             description="Copy prebuilt opensim-core installayion into installer folder">
-        <copy todir="dist/installer/opensim/bin">
+        <copy todir="${opensim.dist.dir}/bin">
             <fileset dir="${api.dir}/bin"/>
         </copy>
-        <copy todir="dist/installer/opensim/cmake">
+        <copy todir="${opensim.dist.dir}/cmake">
             <fileset dir="${api.dir}/cmake"/>
         </copy>
-        <copy todir="dist/installer/opensim/sdk">
+        <copy todir="${opensim.dist.dir}/sdk">
             <fileset dir="${api.dir}/sdk"/>
         </copy>
     </target>
     <target name="copy-jre" description="Copy JRE to installer">
-        <copy todir="dist/installer/opensim/jdk/jre">
+        <copy todir="${opensim.dist.dir}/jdk/jre">
             <fileset dir="${jre.dir}"/>
         </copy>
     </target>
     <target name="copy-models" description="Copy Models and Geometry to installer">
-        <copy todir="dist/installer/opensim/Geometry">
+        <copy todir="${opensim.dist.dir}/Geometry">
             <fileset dir="${models.dir}/Geometry"/>
         </copy>
-        <copy todir="dist/installer/opensim/models">
-            <fileset dir="${models.dir}/models"/>
+        <copy todir="${opensim.dist.dir}/Models">
+            <fileset dir="${models.dir}/Models"/>
         </copy>
     </target>
     <target name="copy-visualizer" description="Copy Visualizer to installer">
-        <copy todir="dist/installer/opensim/threejs">
-            <fileset dir="${visualizer.dir}/three.js"/>
+        <copy todir="${opensim.dist.dir}/threejs">
+            <fileset dir="${visualizer.dir}/three.js">
+                <exclude name="**/docs/**"/>
+                <exclude name="**/test/**"/>
+                <exclude name="**/examples/**"/>
+            </fileset>
+        </copy>
+        <copy todir="${opensim.dist.dir}/threejs/examples/js">
+            <fileset dir="${visualizer.dir}/three.js/examples/js" />
         </copy>
     </target>
-    <target name="build-mac-installer" depends="build-mac">
+    <target name="build-mac-installer" depends="build-mac,copy-visualizer,copy-models">
         <property name="lib.dir" value="/Users/aymanhabib/dev/install/opensim-core-install/lib"/>
         <echoproperties/>
-        <copy todir="dist/opensim.app/Contents/Resources/opensim/lib">
+
+        <!-- Must use the OS's cp because Ant's copy doesn't preserve file
+             permissions (e.g., the executable bit). TODO exclude unnecessary
+             files
+             (http://www.oracle.com/technetwork/java/javase/jre-8-readme-2095710.html);
+             doing so could save about 50 MB from the size of the installation.
+             -->
+        <exec executable="cp">
+            <arg line="-R ${jre.dir}/ ${opensim.dist.dir}/jre"/>
+        </exec>
+
+        <copy todir="${opensim.dist.dir}/lib">
             <fileset dir="${lib.dir}"/>
         </copy>        
-        <copy todir="dist/opensim.app/Contents/Resources/opensim/threejs">
-            <fileset dir="${visualizer.dir}/three.js"/>
-        </copy>
-        <copy todir="dist/opensim.app/Contents/Resources/opensim/Geometry">
-            <fileset dir="${models.dir}/Geometry"/>
-        </copy>
-        <copy todir="dist/opensim.app/Contents/Resources/opensim/models">
-            <fileset dir="${models.dir}/models"/>
-        </copy>
+
         <!-- Create top level folder -->
-        <move todir="dist/OpenSim4.0">
-            <fileset dir="dist/opensim.app"/>
-        </move>
-        <symlink action="single" link="dist/Geometry" resource="dist/OpenSim.app/Contents/Resources/OpenSim/Geometry/"/>
-        <symlink action="single" link="dist/models" resource="dist/OpenSim.app/Contents/Resources/OpenSim/models/"/>
+        <property name="mac.dist.outer.dir" value="dist/OpenSim 4.0-beta" />
+        <!-- Must delete OpenSim.app to avoid two copies of OpenSim.app; seems
+             to be an issue with moving the OpenSim symlink on top of an
+             existing symlink.-->
+        <delete file="${mac.dist.outer.dir}/OpenSim.app" />
+        <move todir="${mac.dist.outer.dir}/" file="dist/OpenSim.app"/>
+        <symlink action="single" link="${mac.dist.outer.dir}/Geometry"
+            resource="OpenSim.app/Contents/Resources/opensim/Geometry/"
+            overwrite="true"/>
+        <symlink action="single" link="${mac.dist.outer.dir}/Models"
+            resource="OpenSim.app/Contents/Resources/opensim/Models/"
+            overwrite="true"/>
     </target>
 </project>
