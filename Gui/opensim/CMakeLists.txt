@@ -38,16 +38,6 @@ endif()
 set(VIS_REPO "" CACHE
     PATH "The location of the opensim-threejs repository to copy into installation.")
 
-if (APPLE)
-    add_custom_target(PrepareInstaller ALL
-                  COMMAND ${Ant_EXECUTABLE} build-mac-installer -Dlib.dir="${OpenSim_LIB_DIR}" -Dvisualizer.dir="${VIS_REPO}"
-                    -Dmodels.dir="${MODELS_REPO}"
-                  DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
-                  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-                  COMMENT "Build opensim.app.")
-endif()
-
-
 if (VIS_REPO AND NOT APPLE)
 add_custom_target(CopyVisualizer ALL
                   COMMAND ${Ant_EXECUTABLE} copy-visualizer -Dvisualizer.dir="${VIS_REPO}"
@@ -65,4 +55,14 @@ add_custom_target(CopyModels ALL
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Copy models and examples-to installer folder.")
+endif()
+
+if (APPLE)
+    add_custom_target(PrepareInstaller ALL
+                  COMMAND ${Ant_EXECUTABLE} build-mac-installer
+                  -Dlib.dir="${OpenSim_LIB_DIR}" -Dvisualizer.dir="${VIS_REPO}"
+                  -Dmodels.dir="${MODELS_REPO}"
+                  DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
+                  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                  COMMENT "Build OpenSim.app.")
 endif()
