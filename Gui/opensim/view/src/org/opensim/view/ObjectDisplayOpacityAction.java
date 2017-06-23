@@ -32,7 +32,7 @@ import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.view.nodes.OneComponentWithGeometryNode;
+import org.opensim.view.nodes.OneComponentNode;
 import org.opensim.view.nodes.OneGeometryNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
@@ -40,25 +40,24 @@ import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 public final class ObjectDisplayOpacityAction extends CallableSystemAction {
    
    public void performAction() {
-      Vector<OneComponentWithGeometryNode> objects = new Vector<OneComponentWithGeometryNode>();
+      Vector<OneComponentNode> objects = new Vector<OneComponentNode>();
       Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
       for(int i=0; i<selected.length; i++) {
-         if(selected[i] instanceof OneComponentWithGeometryNode)
-            addLeafObjects((OneComponentWithGeometryNode)selected[i], objects);
+         if(selected[i] instanceof OneComponentNode)
+            collectDescendentNodes((OneComponentNode)selected[i], objects);
       }
       ObjectDisplayOpacityPanel.showDialog(objects);
    }
-
-    public void addLeafObjects(OpenSimObjectNode node, Vector<OneComponentWithGeometryNode> objects) {
-        if (node instanceof OneComponentWithGeometryNode) {
-            objects.add((OneComponentWithGeometryNode)node);
-            return;
+   // node could be a Group or a list of objects not backed by OpenSim objects 
+    public void collectDescendentNodes(OpenSimObjectNode node, Vector<OneComponentNode> descendents) {
+        if (node instanceof OneComponentNode) {
+            descendents.add((OneComponentNode)node);
         }
         Children ch = node.getChildren();
         // process children
         for (Node childNode : ch.getNodes()) {
             if (childNode instanceof OpenSimObjectNode) {
-                addLeafObjects((OpenSimObjectNode) childNode, objects);
+                collectDescendentNodes((OpenSimObjectNode) childNode, descendents);
             }
         }
 

@@ -57,6 +57,42 @@ public class GeometryPath extends ModelComponent {
     return opensimSimulationJNI.GeometryPath_getConcreteClassName(swigCPtr, this);
   }
 
+  public void copyProperty_Appearance(GeometryPath source) {
+    opensimSimulationJNI.GeometryPath_copyProperty_Appearance(swigCPtr, this, GeometryPath.getCPtr(source), source);
+  }
+
+  public Appearance get_Appearance(int i) {
+    return new Appearance(opensimSimulationJNI.GeometryPath_get_Appearance__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public Appearance upd_Appearance(int i) {
+    return new Appearance(opensimSimulationJNI.GeometryPath_upd_Appearance__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_Appearance(int i, Appearance value) {
+    opensimSimulationJNI.GeometryPath_set_Appearance__SWIG_0(swigCPtr, this, i, Appearance.getCPtr(value), value);
+  }
+
+  public int append_Appearance(Appearance value) {
+    return opensimSimulationJNI.GeometryPath_append_Appearance(swigCPtr, this, Appearance.getCPtr(value), value);
+  }
+
+  public void constructProperty_Appearance(Appearance initValue) {
+    opensimSimulationJNI.GeometryPath_constructProperty_Appearance(swigCPtr, this, Appearance.getCPtr(initValue), initValue);
+  }
+
+  public Appearance get_Appearance() {
+    return new Appearance(opensimSimulationJNI.GeometryPath_get_Appearance__SWIG_1(swigCPtr, this), false);
+  }
+
+  public Appearance upd_Appearance() {
+    return new Appearance(opensimSimulationJNI.GeometryPath_upd_Appearance__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_Appearance(Appearance value) {
+    opensimSimulationJNI.GeometryPath_set_Appearance__SWIG_1(swigCPtr, this, Appearance.getCPtr(value), value);
+  }
+
   public GeometryPath() {
     this(opensimSimulationJNI.new_GeometryPath(), true);
   }

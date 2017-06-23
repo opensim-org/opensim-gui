@@ -28,6 +28,7 @@
  */
 package org.opensim.view.nodes;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.net.URL;
 import java.util.List;
@@ -35,27 +36,35 @@ import java.util.ResourceBundle;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
 import org.openide.nodes.Children;
-import org.openide.nodes.Node;
 import org.openide.util.NbBundle;
-import org.opensim.modeling.Force;
-import org.opensim.modeling.Geometry;
+import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.view.ObjectDisplayMenuAction;
+import org.opensim.modeling.Vec3;
+import org.opensim.view.ColorableInterface;
 
 /**
  *
  * @author Ayman Habib
  */
-public class OneForceNode extends DisablablModelComponentNode {
+public class OneForceNode extends DisablablModelComponentNode implements ColorableInterface {
 
     private static ResourceBundle bundle = NbBundle.getBundle(OneForceNode.class);
+    private boolean hasPath = false;
+    private GeometryPath pathObject = null;
     /**
      * Creates a new instance of OneForceNode
      */
     public OneForceNode(OpenSimObject force) {
         super(force);
+        hasPath = force.hasProperty("GeometryPath");
+        if (hasPath){
+            pathObject =  GeometryPath.safeDownCast(force.getPropertyByName("GeometryPath").getValueAsObject());
+         }
 
-
+        setChildren(Children.LEAF);
+        addDisplayOption(displayOption.Showable);
+        addDisplayOption(displayOption.Isolatable);
+        addDisplayOption(displayOption.Colorable);
 //        if (f.getDisplayer()!=null){
 //            addDisplayOption(displayOption.Showable);
 //            if (!f.hasGeometryPath())
@@ -95,6 +104,7 @@ public class OneForceNode extends DisablablModelComponentNode {
         // Create new Array of proper size
         Action[] retActions = new Action[actions.size()+1];
         actions.toArray(retActions);
+        /* No need to take out Display Options
         if (enabled){  // take out display menu ObjectDisplayMenuAction
             for (int i=0; i< retActions.length; i++){
                 if (retActions[i] instanceof ObjectDisplayMenuAction){
@@ -102,7 +112,7 @@ public class OneForceNode extends DisablablModelComponentNode {
                     break;
                 }
             }
-        }
+        } */
         try {
             ToggleEnabledStateAction act =(ToggleEnabledStateAction) ToggleEnabledStateAction.findObject(
                     (Class)Class.forName("org.opensim.view.nodes.ToggleEnabledStateAction"), true);
@@ -116,6 +126,69 @@ public class OneForceNode extends DisablablModelComponentNode {
     @Override
     public String getDisablePropertyName() {
         return ("appliesForce");
+    }   
+
+    @Override
+    public Boolean getVisible() {
+        if (hasPath)
+            return pathObject.get_Appearance().get_visible();
+        return false; // Need example Force e.g. Bushing that has Geometry other than GeometryPath
     }
-   
+
+    @Override
+    public void setVisible(Boolean newValue) {
+        if (hasPath){
+            AppearanceHelper helper = new AppearanceHelper(getModelForNode(), this, pathObject.get_Appearance());
+            helper.setAppearanceVisilibityProperty(newValue);
+            pathObject.getPropertyByName("Appearance").setValueIsDefault(false);
+        }
+    }
+
+    @Override
+    public Color getColor() {
+        if (hasPath){
+            Vec3 c3 = pathObject.get_Appearance().get_color();
+            return new Color((float) c3.get(0), (float) c3.get(1), (float) c3.get(2));
+        }
+        else
+            return new Color(1, 1, 1);
+    }
+
+    @Override
+    public void setColor(Color newColor) {
+        if (hasPath){
+            AppearanceHelper helper = new AppearanceHelper(getModelForNode(), this, pathObject.get_Appearance());
+            helper.setAppearanceColorProperty(newColor);
+            pathObject.getPropertyByName("Appearance").setValueIsDefault(false);
+        }
+
+    }
+
+    @Override
+    public int getDisplayPreference() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setDisplayPreference(int newPref) {
+         if (hasPath){
+            AppearanceHelper helper = new AppearanceHelper(getModelForNode(), this, pathObject.get_Appearance());
+            helper.setAppearanceDisplayPrefProperty(newPref);
+            pathObject.getPropertyByName("Appearance").setValueIsDefault(false);
+        }
+    }
+
+    @Override
+    public double getOpacity() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setOpacity(double opacity) {
+          if (hasPath){
+            AppearanceHelper helper = new AppearanceHelper(getModelForNode(), this, pathObject.get_Appearance());
+            helper.setAppearanceOpacityProperty(opacity);
+            pathObject.getPropertyByName("Appearance").setValueIsDefault(false);
+        }
+   }
 }

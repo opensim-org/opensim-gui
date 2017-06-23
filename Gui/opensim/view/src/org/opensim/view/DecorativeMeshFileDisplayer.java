@@ -54,7 +54,7 @@ public class DecorativeMeshFileDisplayer extends DecorativeGeometryDisplayer {
     private vtkPolyData getPolyData(DecorativeMeshFile ag) {
         String boneFile = GeometryFileLocator.getInstance().getFullname(modelFilePath,ag.getMeshFile(), false);
         if (boneFile==null) return null;
-        return GeometryFactory.populatePolyDatarFromFile(boneFile, this);
+        return GeometryFactory.populatePolyDataFromFile(boneFile, this);
     }
 
     @Override

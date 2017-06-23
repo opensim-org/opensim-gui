@@ -61,8 +61,8 @@ public class PathWrapPoint extends PathPoint {
     this(opensimSimulationJNI.new_PathWrapPoint(), true);
   }
 
-  public SWIGTYPE_p_OpenSim__ArrayT_SimTK__VecT_3_double_1_t_t getWrapPath() {
-    return new SWIGTYPE_p_OpenSim__ArrayT_SimTK__VecT_3_double_1_t_t(opensimSimulationJNI.PathWrapPoint_getWrapPath(swigCPtr, this), false);
+  public ArrayVec3 getWrapPath() {
+    return new ArrayVec3(opensimSimulationJNI.PathWrapPoint_getWrapPath(swigCPtr, this), false);
   }
 
   public double getWrapLength() {

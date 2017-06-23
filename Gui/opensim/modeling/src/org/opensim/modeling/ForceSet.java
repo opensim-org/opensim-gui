@@ -35,9 +35,9 @@ public class ForceSet extends ModelComponentSetForces {
     super.delete();
   }
 
-   public boolean append(Force aFroce) {
-       aFroce.markAdopted();
-       return private_append(aFroce);
+   public boolean append(Force aForce) {
+       aForce.markAdopted();
+       return private_append(aForce);
    }
 
   public static ForceSet safeDownCast(OpenSimObject obj) {

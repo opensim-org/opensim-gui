@@ -201,11 +201,11 @@ public class AbstractTool extends OpenSimObject {
     opensimSimulationJNI.AbstractTool_setSolveForEquilibrium(swigCPtr, this, aSolve);
   }
 
-  public void loadModel(String aToolSetupFileName, ForceSet rOriginalForceSet) {
+  public void loadModel(String aToolSetupFileName, ForceSet rOriginalForceSet) throws java.io.IOException {
     opensimSimulationJNI.AbstractTool_loadModel__SWIG_0(swigCPtr, this, aToolSetupFileName, ForceSet.getCPtr(rOriginalForceSet), rOriginalForceSet);
   }
 
-  public void loadModel(String aToolSetupFileName) {
+  public void loadModel(String aToolSetupFileName) throws java.io.IOException {
     opensimSimulationJNI.AbstractTool_loadModel__SWIG_1(swigCPtr, this, aToolSetupFileName);
   }
 

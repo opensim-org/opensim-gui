@@ -118,15 +118,6 @@ public class Model extends ModelComponent {
     return opensimSimulationJNI.Model_getClassName();
   }
 
-  public OpenSimObject clone() {
-    long cPtr = opensimSimulationJNI.Model_clone(swigCPtr, this);
-    return (cPtr == 0) ? null : new Model(cPtr, true);
-  }
-
-  public String getConcreteClassName() {
-    return opensimSimulationJNI.Model_getConcreteClassName(swigCPtr, this);
-  }
-
   public void copyProperty_assembly_accuracy(Model source) {
     opensimSimulationJNI.Model_copyProperty_assembly_accuracy(swigCPtr, this, Model.getCPtr(source), source);
   }
@@ -795,6 +786,15 @@ public class Model extends ModelComponent {
     opensimSimulationJNI.Model_cleanup(swigCPtr, this);
   }
 
+  public OpenSimObject clone() {
+    long cPtr = opensimSimulationJNI.Model_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new Model(cPtr, true);
+  }
+
+  public String getConcreteClassName() {
+    return opensimSimulationJNI.Model_getConcreteClassName(swigCPtr, this);
+  }
+
   public ModelDisplayHints getDisplayHints() {
     return new ModelDisplayHints(opensimSimulationJNI.Model_getDisplayHints(swigCPtr, this), false);
   }
@@ -1425,6 +1425,10 @@ public class Model extends ModelComponent {
 
   public JointList getJointList() {
     return new JointList(opensimSimulationJNI.Model_getJointList(swigCPtr, this), true);
+  }
+
+  public ActuatorList getActuatorList() {
+    return new ActuatorList(opensimSimulationJNI.Model_getActuatorList(swigCPtr, this), true);
   }
 
   public Thelen2003MuscleList getThelen2003MuscleList() {

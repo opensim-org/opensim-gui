@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -23,11 +24,10 @@ import org.opensim.modeling.Component;
 import org.opensim.modeling.ComponentIterator;
 import org.opensim.modeling.ComponentsList;
 import org.opensim.modeling.DecorativeGeometry;
-import org.opensim.modeling.FrameGeometry;
 import org.opensim.modeling.GeometryPath;
+import org.opensim.modeling.Ground;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
-import org.opensim.modeling.MuscleList;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.PathPointSet;
@@ -36,6 +36,9 @@ import org.opensim.modeling.State;
 import org.opensim.modeling.Transform;
 import org.opensim.modeling.Vec3;
 import org.opensim.modeling.WrapObject;
+import org.opensim.view.experimentaldata.ExperimentalMarker;
+import org.opensim.view.experimentaldata.ModelForExperimentalData;
+import org.opensim.view.motions.MotionDisplayer;
 
 /**
  *
@@ -53,7 +56,7 @@ public class ModelVisualizationJson extends JSONObject {
     private final HashMap<String, UUID> mapPathMaterialToUUID = new HashMap<String, UUID>();
     private static final String GEOMETRY_SEP = ".";
     private final Vec3 vec3Unit = new Vec3(1.0, 1.0, 1.0);
-    private MuscleList muscleList = null;
+    private final HashMap<GeometryPath, UUID> pathList = new HashMap<GeometryPath, UUID>();
     private ModelDisplayHints mdh;
     private DecorativeGeometryImplementationJS dgimp = null;
     private static String boneSuffix = "_Bone";
@@ -61,41 +64,51 @@ public class ModelVisualizationJson extends JSONObject {
     private JSONArray json_materials;
     private JSONObject model_object;
     private UUID modelUUID;
+    private UUID pathpointMatUUID;
     public static boolean verbose=false;
+    private boolean ready = false;
+    private static final HashMap<String, Boolean> movableOpensimTypes = new HashMap<String, Boolean>();
+    private final ArrayList<MotionDisplayer> motionDisplayers = new ArrayList<MotionDisplayer>();
     
+    // Create JSONs for geometry and material and use them for all objects of this type so that they all change together
+    private JSONObject experimenalMarkerGeometryJson=null;
+    private JSONObject experimenalMarkerMaterialJson=null;
+    private JSONObject experimenalForceGeometryJson=null;
+    private JSONObject experimenalForceMaterialJson=null;
+    private Vec3 defaultMarkerColor = new Vec3(0., 0., 1.);
+    
+    static {
+        movableOpensimTypes.put("Marker", true);
+        movableOpensimTypes.put("PathPoint", true);
+    }
     public ModelVisualizationJson(JSONObject jsonTopIn, Model model) {
         // implicit super()
+        if (verbose)
+            System.out.println("start building json for "+model.getName());
         createModelJsonNode(); // Model node
         createJsonForModel(model);
+        ready = true;
+        if (verbose)
+            System.out.println("finished building json for "+model.getName());
     }
     private void createJsonForModel(Model model) {
+       JSONObject model_ground_json = processGroundFrame(model);
+       if (model instanceof ModelForExperimentalData){
+            createDefaultMotionObjects();
+            createExperimentalMarkersVisuals(model);
+            //createExperimentalForcesVisuals();
+            return;
+        }
         state = model.getWorkingState();
         mdh = model.getDisplayHints();
         ComponentsList mcList = model.getComponentsList();
-        muscleList = model.getMuscleList();
         ComponentIterator mcIter = mcList.begin();
         
         BodyList bodies = model.getBodyList();
         BodyIterator body = bodies.begin();
-        mapBodyIndicesToFrames.put(0, model.getGround());
-        
-        JSONArray json_model_children = (JSONArray) ((JSONObject) get("object")).get("children");
-        
-        JSONObject model_ground_json = new JSONObject();
-        // create model node
-        UUID groundUuid = UUID.randomUUID();
-        model_ground_json.put("uuid", groundUuid.toString());
-        model_ground_json.put("type", "Group");
-        model_ground_json.put("opensimtype", "Frame");
-        model_ground_json.put("name", model.getGround().getAbsolutePathName());
-        model_ground_json.put("userData", "NonEditable");
-        model_ground_json.put("model_ground", true);
-        json_model_children.add(model_ground_json);
-        addComponentToUUIDMap(model.getGround(), groundUuid);
         //System.out.println(model_json.toJSONString());
         JSONArray bodies_json = new JSONArray();
         model_ground_json.put("children", bodies_json);
-        mapBodyIndicesToJson.put(0, model_ground_json);
         while (!body.equals(bodies.end())) {
             int id = body.getMobilizedBodyIndex();
             mapBodyIndicesToFrames.put(id, body.__deref__());
@@ -109,27 +122,53 @@ public class ModelVisualizationJson extends JSONObject {
             body.next();
         }
         //createSkeleton(model, jsonTop);
+        // Create material for PathPoints, Markers
+        pathpointMatUUID= createPathPointMaterial();
         dgimp = new DecorativeGeometryImplementationJS(json_geometries, json_materials, visScaleFactor);
         while (!mcIter.equals(mcList.end())) {
             Component comp = mcIter.__deref__();
+            //System.out.println("Processing:"+comp.getAbsolutePathName()+" Type:"+comp.getConcreteClassName());
             ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
-            comp.generateDecorations(true, mdh, model.getWorkingState(), adg);
+            comp.generateDecorations(true, mdh, state, adg);
             if (adg.size() > 0) {
                 processDecorativeGeometry(adg, comp, dgimp, json_materials);
             }
             GeometryPath gPath = GeometryPath.safeDownCast(comp);
             boolean isGeometryPath = (gPath!=null);
-            if (isGeometryPath)
-                ;//NOMUSCLES createJsonForGeometryPath(gPath, mdh, model.getWorkingState(), json_geometries, json_materials);
+            if (isGeometryPath){
+                UUID pathUUID = createJsonForGeometryPath(gPath, mdh, state, json_geometries, json_materials);
+                pathList.put(gPath, pathUUID);
+                // Add to the ID map so that PathOwner translates to GeometryPath
+                Component parentComp = gPath.getOwner();
+                addComponentToUUIDMap(parentComp, pathUUID);
+            }
             else{
                 adg.clear();
-                comp.generateDecorations(false, mdh, model.getWorkingState(), adg);
+                comp.generateDecorations(false, mdh, state, adg);
                  if (adg.size() > 0) {
                      processDecorativeGeometry(adg, comp, dgimp, json_materials);
                 }
             }
             mcIter.next();
         }
+    }
+
+    private JSONObject processGroundFrame(Model model) {
+        mapBodyIndicesToFrames.put(0, model.getGround());
+        JSONArray json_model_children = (JSONArray) ((JSONObject) get("object")).get("children");
+        JSONObject model_ground_json = new JSONObject();
+        // create model node
+        UUID groundUuid = UUID.randomUUID();
+        model_ground_json.put("uuid", groundUuid.toString());
+        model_ground_json.put("type", "Group");
+        model_ground_json.put("opensimType", "Frame");
+        model_ground_json.put("name", model.getGround().getAbsolutePathName());
+        model_ground_json.put("userData", "NonEditable");
+        model_ground_json.put("model_ground", true);
+        json_model_children.add(model_ground_json);
+        addComponentToUUIDMap(model.getGround(), groundUuid);
+        mapBodyIndicesToJson.put(0, model_ground_json);
+        return model_ground_json;
     }
 
     private void addComponentToUUIDMap(Component comp, UUID groupUuid) {
@@ -167,7 +206,7 @@ public class ModelVisualizationJson extends JSONObject {
             JSONObject bodyJson = mapBodyIndicesToJson.get(dg.getBodyId());
             if (bodyJson.get("children")==null)
                 bodyJson.put("children", new JSONArray());
-            UUID uuid_mesh = addtoFrameJsonObject(dg, geomId, uuid, dgimp.getMat_uuid(), (JSONArray)bodyJson.get("children"));
+            UUID uuid_mesh = addtoFrameJsonObject(dg, geomId, uuid, dgimp.getMat_uuid(), (JSONArray)bodyJson.get("children"), comp);
             vis_uuidList.add(uuid_mesh);
             
             mapUUIDToComponent.put(uuid_mesh, comp);
@@ -185,7 +224,7 @@ public class ModelVisualizationJson extends JSONObject {
         model_object = new JSONObject();
         model_object.put("uuid", modelUUID.toString());
         model_object.put("type", "Group");
-        model_object.put("opensimtype", "Model");
+        model_object.put("opensimType", "Model");
         model_object.put("name", "OpenSimModel");
         model_object.put("children", new JSONArray());
         model_object.put("matrix", JSONUtilities.createMatrixFromTransform(new Transform(), new Vec3(1.), 1.0));
@@ -197,17 +236,20 @@ public class ModelVisualizationJson extends JSONObject {
 
     }
 
-    private UUID addtoFrameJsonObject(DecorativeGeometry dg, String geomName, UUID uuid, UUID uuid_mat, JSONArray mobody_objects) {
+    private UUID addtoFrameJsonObject(DecorativeGeometry dg, String geomName, UUID uuid, UUID uuid_mat, JSONArray mobody_objects, Component opensimComponent) {
         Map<String, Object> obj_json = new LinkedHashMap<String, Object>();
         UUID mesh_uuid = UUID.randomUUID();
         obj_json.put("uuid", mesh_uuid.toString());
         obj_json.put("type", "Mesh");
         obj_json.put("name", geomName);
+        obj_json.put("opensimType", opensimComponent.getConcreteClassName());
         obj_json.put("geometry", uuid.toString());
         obj_json.put("material", uuid_mat.toString());
         obj_json.put("matrix", JSONUtilities.createMatrixFromTransform(dg.getTransform(), dg.getScaleFactors(), visScaleFactor));
         obj_json.put("castShadow", false);
-        obj_json.put("userData", "NonEditable");
+        String concreteType = opensimComponent.getConcreteClassName();
+        if (!movableOpensimTypes.keySet().contains(concreteType))
+            obj_json.put("userData", "NonEditable");
         mobody_objects.add(obj_json);
         return mesh_uuid;
     }   
@@ -216,7 +258,7 @@ public class ModelVisualizationJson extends JSONObject {
         JSONObject bdyJson = new JSONObject();
         bdyJson.put("uuid", uuid.toString());
         bdyJson.put("type", "Group");
-        bdyJson.put("opensimtype", "Frame");
+        bdyJson.put("opensimType", "Frame");
         bdyJson.put("userData", "NonEditable");
         bdyJson.put("name", body.getAbsolutePathName());
         PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(body.getMobilizedBodyIndex());
@@ -233,31 +275,48 @@ public class ModelVisualizationJson extends JSONObject {
         return mapComponentToUUID.get(obj);
     }
 
-    public JSONObject createFrameMessageJson() {
+    public JSONObject createFrameMessageJson(boolean colorByState) {
         JSONObject msg = new JSONObject();
         Iterator<Integer> bodyIdIter = mapBodyIndicesToFrames.keySet().iterator();
         msg.put("Op", "Frame");
         JSONArray bodyTransforms_json = new JSONArray();
         msg.put("Transforms", bodyTransforms_json);
-        while (bodyIdIter.hasNext()){
-            int bodyId = bodyIdIter.next();
-            JSONObject oneBodyXform_json = new JSONObject();
-            PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(bodyId);
-            Transform xform = bodyFrame.getTransformInGround(state);
-            // Get uuid for first Mesh in body
-            oneBodyXform_json.put("uuid", mapBodyIndicesToJson.get(bodyId).get("uuid"));
-            oneBodyXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1., 1., 1.), visScaleFactor));
-            bodyTransforms_json.add(oneBodyXform_json);
-        }
-        /*
-        JSONArray geompaths_json = new JSONArray();
-        msg.put("paths", geompaths_json);
-        MuscleIterator muscleIter = muscleList.begin();
-        while(!muscleIter.equals(muscleList.end())){
-            // get path and call generateDecorations on it
-            GeometryPath geomPathObject = muscleIter.getGeometryPath();
+        if (ready) { // Avoid trying to send a frame before Json is completely populated
+            while (bodyIdIter.hasNext()) {
+                int bodyId = bodyIdIter.next();
+                if (bodyId == 0) {
+                    continue; // Skip over "Ground, as unnecessary
+                }
+                JSONObject oneBodyXform_json = new JSONObject();
+                PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(bodyId);
+                if (verbose) {
+                    System.out.println("Getting transform of " + bodyFrame.getName());
+                }
+                Transform xform = bodyFrame.getTransformInGround(state);
+                // Get uuid for first Mesh in body
+                oneBodyXform_json.put("uuid", mapBodyIndicesToJson.get(bodyId).get("uuid"));
+                oneBodyXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1., 1., 1.), visScaleFactor));
+                bodyTransforms_json.add(oneBodyXform_json);
+            }
+            JSONArray geompaths_json = new JSONArray();
+            msg.put("paths", geompaths_json);
+
+            Set<GeometryPath> paths = pathList.keySet();
+            Iterator<GeometryPath> pathIter = paths.iterator();
+            while (pathIter.hasNext()) {
+                // get path and call generateDecorations on it
+                GeometryPath geomPathObject = pathIter.next();
+                UUID pathUUID = pathList.get(geomPathObject);
+                JSONObject pathUpdate_json = new JSONObject();
+                pathUpdate_json.put("uuid", pathUUID.toString());
+                Vec3 pathColor = colorByState ? geomPathObject.getColor(state) : geomPathObject.getDefaultColor();
+                if (verbose)
+                    System.out.println("Color:"+geomPathObject.getOwner().getName()+"="+pathColor.toString());
+                String colorString = JSONUtilities.mapColorToRGBA(pathColor);
+                pathUpdate_json.put("color", colorString);
+                geompaths_json.add(pathUpdate_json);
+                /*
             ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
-            JSONObject pathUpdate_json = new JSONObject();
             geomPathObject.generateDecorations(false, mdh, state, adg);
             ArrayList<UUID> existing_uuids = mapComponentToUUID.get(geomPathObject);
             // segments are at index 2, 4, 6, ... in uuid_list
@@ -271,12 +330,13 @@ public class ModelVisualizationJson extends JSONObject {
                 pathUpdate_json.put("positions", positionsJson.get("array"));
                 geompaths_json.add(pathUpdate_json);
        
+            }*/
             }
-            // Find uuid for muscle based on Path and send new coordinates
-            muscleIter.next();
+            // Process motion displayers
+            for (MotionDisplayer nextMotionDisplayer: motionDisplayers){
+                nextMotionDisplayer.addMotionObjectsToFrame(bodyTransforms_json, this);
         }
-        */
-        //System.out.println("Sending:"+msg.toJSONString());
+        }
         return msg;
     }
 
@@ -313,29 +373,45 @@ public class ModelVisualizationJson extends JSONObject {
         return guiJson;
     }
 
-    private void createJsonForGeometryPath(GeometryPath path, ModelDisplayHints mdh, State workingState, JSONArray json_geometries, JSONArray json_materials) {
+    private UUID createJsonForGeometryPath(GeometryPath path, ModelDisplayHints mdh, State workingState, JSONArray json_geometries, JSONArray json_materials) {
         // Create material for path
         Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
         UUID mat_uuid = UUID.randomUUID();
         mapPathMaterialToUUID.put(path.getAbsolutePathName(), mat_uuid);
         mat_json.put("uuid", mat_uuid.toString());
         mat_json.put("name", path.getAbsolutePathName()+"Mat");
-        mat_json.put("type", "MeshBasicMaterial");
-        String colorString = JSONUtilities.mapColorToRGBA(new Vec3(0.62, 0.31, 0.31));
+        mat_json.put("type", "MeshPhongMaterial");
+        Vec3 pathColor = path.getDefaultColor();
+        String colorString = JSONUtilities.mapColorToRGBA(pathColor);
         mat_json.put("color", colorString);
         mat_json.put("side", 2);
         mat_json.put("skinning", true);
+        mat_json.put("transparent", true);
         json_materials.add(mat_json);
 
         JSONArray pathpoint_jsonArr = new JSONArray();
+        // Create plain Geometry with vertices at PathPoints it will have 0 vertices
+        // but will be populated libe in the visualizer from the Pathppoints
+        JSONObject pathGeomJson = new JSONObject();
+        UUID uuidForPathGeomGeometry = UUID.randomUUID();
+        pathGeomJson.put("uuid", uuidForPathGeomGeometry.toString());
+        pathGeomJson.put("type", "PathGeometry");
+        pathGeomJson.put("name", path.getAbsolutePathName()+"Control");
+        pathGeomJson.put("segments", path.getPathPointSet().getSize()-1);
+        json_geometries.add(pathGeomJson);
+        
         PathPointSet ppts = path.getPathPointSet();
         for (int i=0; i< ppts.getSize(); i++){
             AbstractPathPoint pathPoint = ppts.get(i);
             // Create a Sphere with internal opensimType PathPoint
             // attach it to the frame it lives on.
-            UUID pathpoint_uuid = addPathPointGeometryToParent(pathPoint, json_geometries, mat_uuid.toString());
+            UUID pathpoint_uuid = addPathPointGeometryToParent(pathPoint, json_geometries, pathpointMatUUID.toString());
             //UUID ppt_json = createJsonForPathPoint(pathPoint);
             pathpoint_jsonArr.add(pathpoint_uuid.toString());
+            ArrayList<UUID> comp_uuids = new ArrayList<UUID>();
+            comp_uuids.add(pathpoint_uuid);
+            mapComponentToUUID.put(pathPoint, comp_uuids);
+            mapUUIDToComponent.put(pathpoint_uuid, pathPoint);
         }
         JSONObject gndJson = mapBodyIndicesToJson.get(0);
         if (gndJson.get("children")==null)
@@ -347,11 +423,12 @@ public class ModelVisualizationJson extends JSONObject {
         obj_json.put("type", "GeometryPath");
         obj_json.put("name", path.getAbsolutePathName());
         obj_json.put("points", pathpoint_jsonArr);
+        obj_json.put("geometry", uuidForPathGeomGeometry.toString());
         obj_json.put("opensimType", "Path");
         gndChildren.add(obj_json);
         // Create json entry for material (path_material) and set skinning to true
         obj_json.put("material", mat_uuid.toString());
-        return;       
+        return mesh_uuid;       
     }
 
     private UUID createJsonForPathPoint(PathPoint ppt) {
@@ -360,7 +437,6 @@ public class ModelVisualizationJson extends JSONObject {
         UUID uuid_ppt = UUID.randomUUID();
         ppt_json.put("uuid", uuid_ppt.toString());
         ppt_json.put("name", ppt.getName());
-        ppt_json.put("opensimtype", "PathPoint");
         // insert inappropriate body/frame
         PhysicalFrame bdy = ppt.getBody();
         JSONObject bodyJson = mapBodyIndicesToJson.get(bdy.getMobilizedBodyIndex());
@@ -420,18 +496,20 @@ public class ModelVisualizationJson extends JSONObject {
         JSONObject bpptJson = new JSONObject();
         UUID uuidForPathpointGeometry = UUID.randomUUID();
         bpptJson.put("uuid", uuidForPathpointGeometry.toString());
-        bpptJson.put("type", "SphereGeometry");
-        bpptJson.put("radius", 5);
-        bpptJson.put("opensimtype", "PathPoint");
+        bpptJson.put("type", "BoxGeometry");
+        bpptJson.put("width", 5);
+        bpptJson.put("height", 5);
+        bpptJson.put("depth", 5);
         bpptJson.put("name", pathPoint.getName());
- 	bpptJson.put("widthSegments", 32);
-	bpptJson.put("heightSegments", 16);
+ 	//bpptJson.put("widthSegments", 32);
+	//bpptJson.put("heightSegments", 16);
         json_geometries.add(bpptJson);
         // Now add to scene graph
         JSONObject bpptInBodyJson = new JSONObject();
         UUID ppoint_uuid = UUID.randomUUID();
         bpptInBodyJson.put("uuid", ppoint_uuid.toString());
         bpptInBodyJson.put("type", "Mesh");
+        bpptInBodyJson.put("opensimType", pathPoint.getConcreteClassName());
         bpptInBodyJson.put("name", pathPoint.getName());
         bpptInBodyJson.put("geometry", uuidForPathpointGeometry.toString());
         bpptInBodyJson.put("material", material);
@@ -439,10 +517,15 @@ public class ModelVisualizationJson extends JSONObject {
         PhysicalFrame bodyFrame = pathPoint.getBody();
         JSONObject bodyJson = mapBodyIndicesToJson.get(bodyFrame.getMobilizedBodyIndex());
         JSONArray children = (JSONArray)bodyJson.get("children");
+        if (children==null){
+                bodyJson.put("children", new JSONArray());
+                children = (JSONArray)bodyJson.get("children");
+        }
         Transform localTransform = new Transform();
         Vec3 location = pathPoint.getLocation(state);
         localTransform.setP(location);
         bpptInBodyJson.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1.0), visScaleFactor));
+        bpptInBodyJson.put("visible", false);
         children.add(bpptInBodyJson);
         return ppoint_uuid;
     }
@@ -500,5 +583,107 @@ public class ModelVisualizationJson extends JSONObject {
         }
         return guiJson;
     }
+	// Export Path in Json format to visualizer, as of now 
+	// only supports Stationary PathPoints
+    public JSONObject createPathUpdateJson(GeometryPath path) {
+        JSONObject topJson = new JSONObject();
+        // Create command to move Stationary PathPoints to new locations
+        topJson.put("Op", "execute");
+        JSONObject topCommandJson = new JSONObject();
+        topCommandJson.put("type", "MultiCmdsCommand");
+        JSONArray commands = new JSONArray();
+        topCommandJson.put("cmds", commands);
+        PathPointSet ppts = path.getPathPointSet();
+        for (int i=0; i< ppts.getSize(); i++){
+            AbstractPathPoint pathPoint = ppts.get(i);
+            JSONObject nextpptPositionCommand = new JSONObject();
+            nextpptPositionCommand.put("type", "SetPositionCommand");
+            nextpptPositionCommand.put("objectUuid", mapComponentToUUID.get(pathPoint).get(0).toString());
+            Vec3 location = pathPoint.getLocation(state);
+            JSONArray locationArray = new JSONArray();
+            JSONArray oldLocationArray = new JSONArray();
+            for (int p =0; p <3; p++){
+                locationArray.add(location.get(p)*visScaleFactor);
+                oldLocationArray.add(0);
+            }
+            nextpptPositionCommand.put("newPosition", locationArray);
+            nextpptPositionCommand.put("oldPosition", oldLocationArray);
+            commands.add(nextpptPositionCommand);
+        }
+        topJson.put("command", topCommandJson);
+        return topJson;
+    }
+    private UUID createPathPointMaterial() {
+        Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
+        UUID mat_uuid = UUID.randomUUID();
+        mat_json.put("uuid", mat_uuid.toString());
+        mat_json.put("name", "PathPointMat");
+        mat_json.put("type", "MeshBasicMaterial");
+        String colorString = JSONUtilities.mapColorToRGBA(new Vec3(.8, .1, .1));
+        mat_json.put("color", colorString);
+        mat_json.put("side", 2);
+        json_materials.add(mat_json);
+        return mat_uuid;
+    }
+    
+    private void createDefaultMotionObjects() {
+        experimenalMarkerGeometryJson = new JSONObject();
+        UUID uuidForMarkerGeometry = UUID.randomUUID();
+        experimenalMarkerGeometryJson.put("uuid", uuidForMarkerGeometry.toString());
+        experimenalMarkerGeometryJson.put("type", "SphereGeometry");
+        experimenalMarkerGeometryJson.put("radius", 5);
+        experimenalMarkerGeometryJson.put("name", "DefaultExperimentalMarker");
+ 	experimenalMarkerGeometryJson.put("widthSegments", 32);
+	experimenalMarkerGeometryJson.put("heightSegments", 16);
+        json_geometries.add(experimenalMarkerGeometryJson);
+        
+        experimenalMarkerMaterialJson = new JSONObject();
+        UUID uuidForMarkerMaterial = UUID.randomUUID();
+        experimenalMarkerMaterialJson.put("uuid", uuidForMarkerMaterial.toString());
+        String colorString = JSONUtilities.mapColorToRGBA(defaultMarkerColor);
+        experimenalMarkerMaterialJson.put("type", "MeshPhongMaterial");
+        experimenalMarkerMaterialJson.put("shininess", 30);
+        experimenalMarkerMaterialJson.put("transparent", true);
+        experimenalMarkerMaterialJson.put("emissive", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
+        experimenalMarkerMaterialJson.put("specular", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
+        experimenalMarkerMaterialJson.put("side", 2);
+        experimenalMarkerMaterialJson.put("wireframe", false);     
+        experimenalMarkerMaterialJson.put("color", colorString);
+        json_materials.add(experimenalMarkerMaterialJson);
+    }
 
+    public void addMotionDisplayer(MotionDisplayer aThis) {
+        motionDisplayers.add(aThis);
+    }
+
+    private void createExperimentalMarkersVisuals(Model model) {
+        ModelForExperimentalData model4Data = (ModelForExperimentalData) model;
+        for (ExperimentalMarker nextExMarker : model4Data.getExperimentalMarkers()) {
+            // Create Object with proper name, add it to ground, update Map of Object to UUID
+            Map<String, Object> expMarker_json = new LinkedHashMap<String, Object>();
+            UUID mesh_uuid = UUID.randomUUID();
+            expMarker_json.put("uuid", mesh_uuid.toString());
+            expMarker_json.put("type", "Mesh");
+            expMarker_json.put("opensimtype", "ExperimentalMarker");
+            expMarker_json.put("name", nextExMarker.getName());
+            expMarker_json.put("geometry", experimenalMarkerGeometryJson.get("uuid"));
+            expMarker_json.put("material", experimenalMarkerMaterialJson.get("uuid"));
+            JSONArray pos = new JSONArray();
+            for (int i = 0; i < 3; i++) {
+                pos.add(0.0);
+            }
+            expMarker_json.put("position", pos);
+            expMarker_json.put("castShadow", false);
+            expMarker_json.put("userData", "NonEditable");
+            JSONObject gndJson = mapBodyIndicesToJson.get(0);
+            if (gndJson.get("children") == null) {
+                gndJson.put("children", new JSONArray());
+            }
+            JSONArray gndChildren = (JSONArray) gndJson.get("children");
+            gndChildren.add(expMarker_json);
+            ArrayList<UUID> comp_uuids = new ArrayList<UUID>();
+            comp_uuids.add(mesh_uuid);
+            mapComponentToUUID.put(nextExMarker, comp_uuids);
+        }
+    }
 }

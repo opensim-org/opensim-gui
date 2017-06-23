@@ -237,7 +237,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
 
       toolModel.addObserver(this);
    }
-
+   // This method is used to bind comments on properties to tooltips in GUI
    private void bindPropertiesToComponents() {
       if(mode==Mode.Analyze) {
          //opensim20 ToolCommon.bindProperty(toolModel.getTool(), "controls_file", analyzeControlsFileName);
@@ -528,7 +528,6 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
 
       useSpecifiedDt.setSelected(toolModel.getUseSpecifiedDt());
       solveForEquilibriumCheckBox.setSelected(toolModel.getSolveForEquilibrium());
-
       updateIntegratorSettings(toolModel);
    }
 
@@ -602,6 +601,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       maxDT.setText(numFormat.format(toolModel.getMaxDT()));
       minDT.setText(numFormat.format(toolModel.getMinDT()));
       errorTolerance.setText(numFormat.format(toolModel.getErrorTolerance()));
+      useSpecifiedDtActionPerformed(null);
    }
 
    //------------------------------------------------------------------------

@@ -296,6 +296,7 @@
             </file>
             <file name="org-netbeans-modules-project-ui-groups-GroupsMenu.shadow_hidden">
                 </file>
+            <file name="org-opensim-threejs-ExportSceneToThreeJsAction.shadow_hidden"/>
             <file name="org-opensim-view-FileSaveAsModelAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-view-FileSaveAsModelAction.instance"/>
                 <attr name="position" intvalue="1700"/>
@@ -508,6 +509,7 @@
                 <attr name="position" intvalue="1100"/>
             </file>
             <file name="org-netbeans-modules-options-OptionsWindowAction.shadow_hidden"/>
+            <file name="org-netbeans-modules-templates-actions-TemplatesAction.shadow_hidden"/>
             <file name="org-netbeans-modules-xml-catalog-CatalogAction.shadow_hidden"/>
             <file name="org-openide-actions-ToolsAction.instance_hidden">
                 <attr name="position" intvalue="1300"/>
@@ -742,6 +744,7 @@
         <file name="File_hidden"/>
         <file name="Memory_hidden"/>
         <file name="Standard.xml_hidden"/>
+        <file name="QuickSearch_hidden"/>
     </folder>
     <folder name="Windows2">
         <folder name="Components">

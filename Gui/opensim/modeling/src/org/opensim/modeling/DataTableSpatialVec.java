@@ -193,4 +193,9 @@ public class DataTableSpatialVec extends AbstractDataTable {
     return opensimCommonJNI.DataTableSpatialVec_toString__SWIG_6(swigCPtr, this);
   }
 
+  public DataTableSpatialVec clone() {
+    long cPtr = opensimCommonJNI.DataTableSpatialVec_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new DataTableSpatialVec(cPtr, true);
+  }
+
 }

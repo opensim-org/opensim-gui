@@ -44,7 +44,7 @@ import vtk.vtkXMLPolyDataReader;
  */
 public class GeometryFactory {
 
-    static vtkPolyData populatePolyDatarFromFile(String boneFile, vtkActor boneActor) {
+    static vtkPolyData populatePolyDataFromFile(String boneFile, vtkActor boneActor) {
         vtkPolyData poly=null;
           if (boneFile.toLowerCase().endsWith(".vtp")){
               vtkXMLPolyDataReader polyReader = new vtkXMLPolyDataReader();

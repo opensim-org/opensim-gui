@@ -35,6 +35,8 @@ public class JSONMessageHandler {
                         final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(model, opensimObj, ap, null);
                         String locationString = (String) jsonObject.get("location");
                         pea.setValueVec3FromString(convertLocationStringToPropertyFormat(jsonObject));
+                        // Tell the world that objects have moved
+                        ViewDB.getInstance().objectMoved(model, opensimObj);
                     }
                 }
                 else if (eventType.equals("geometry-changed")){
@@ -59,14 +61,27 @@ public class JSONMessageHandler {
           String returnString = "";
           double x, y, z;
           double relativeScale = ModelVisualizationJson.getVisScaleFactor();
-          x = (Double) positionObj.get("x")/relativeScale;
-          returnString = returnString.concat(String.valueOf(x));
+          Object xObj = positionObj.get("x");
+          double xDouble, yDouble, zDouble;
+          if (xObj instanceof Long){
+              xDouble = (Double)(((Long)xObj)/relativeScale);
+              Object yObj = positionObj.get("y");
+              yDouble = (Double)(((Long)yObj)/relativeScale);
+              Object zObj = positionObj.get("z");
+              zDouble = (Double)(((Long)zObj)/relativeScale);
+          }
+          else {
+              xDouble = (Double)xObj/relativeScale;
+              Object yObj = positionObj.get("y");
+              yDouble = (Double)yObj/relativeScale;
+              Object zObj = positionObj.get("z");
+              zDouble = (Double)zObj/relativeScale;
+        }
+          returnString = returnString.concat(String.valueOf(xDouble));
           returnString = returnString.concat(" ");
-          y = (Double) positionObj.get("y")/relativeScale;
-          returnString = returnString.concat(String.valueOf(y));
+          returnString = returnString.concat(String.valueOf(yDouble));
           returnString = returnString.concat(" ");
-          z = (Double) positionObj.get("z")/relativeScale;
-          returnString = returnString.concat(String.valueOf(z));
+          returnString = returnString.concat(String.valueOf(zDouble));
           return returnString;
     }
  

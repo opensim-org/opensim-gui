@@ -45,16 +45,20 @@ public class TimeSeriesTableSpatialVec extends DataTableSpatialVec {
     this(opensimCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_1(TimeSeriesTableSpatialVec.getCPtr(arg0), arg0), true);
   }
 
+  public TimeSeriesTableSpatialVec(StdVectorDouble indVec, MatrixOfSpatialVec depData, StdVectorString labels) {
+    this(opensimCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_2(StdVectorDouble.getCPtr(indVec), indVec, MatrixOfSpatialVec.getCPtr(depData), depData, StdVectorString.getCPtr(labels), labels), true);
+  }
+
   public TimeSeriesTableSpatialVec(DataTableSpatialVec datatable) {
-    this(opensimCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_2(DataTableSpatialVec.getCPtr(datatable), datatable), true);
+    this(opensimCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_3(DataTableSpatialVec.getCPtr(datatable), datatable), true);
   }
 
   public TimeSeriesTableSpatialVec(String filename) {
-    this(opensimCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_3(filename), true);
+    this(opensimCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_4(filename), true);
   }
 
   public TimeSeriesTableSpatialVec(String filename, String tablename) {
-    this(opensimCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_4(filename, tablename), true);
+    this(opensimCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_5(filename, tablename), true);
   }
 
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t getNearestRow(double time, boolean restrictToTimeRange) {
@@ -75,6 +79,11 @@ public class TimeSeriesTableSpatialVec extends DataTableSpatialVec {
 
   public SWIGTYPE_p_SimTK__RowVector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t averageRow(double beginTime, double endTime) {
     return new SWIGTYPE_p_SimTK__RowVector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t(opensimCommonJNI.TimeSeriesTableSpatialVec_averageRow(swigCPtr, this, beginTime, endTime), true);
+  }
+
+  public TimeSeriesTableSpatialVec clone() {
+    long cPtr = opensimCommonJNI.TimeSeriesTableSpatialVec_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new TimeSeriesTableSpatialVec(cPtr, true);
   }
 
   public TimeSeriesTable flatten() {

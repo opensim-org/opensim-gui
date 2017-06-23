@@ -32,6 +32,7 @@
 
 package org.opensim.view.experimentaldata;
 
+import java.util.UUID;
 import org.opensim.modeling.AdhocModelComponent;
 import org.opensim.modeling.ArrayDecorativeGeometry;
 import org.opensim.modeling.ArrayDouble;
@@ -51,6 +52,7 @@ public class ExperimentalDataObject extends AdhocModelComponent {
     private boolean displayed=true;
     private boolean trailDisplayed=false;
     private int glyphIndex=-1;
+    private UUID dataObjectUUID;
     private OpenSimvtkGlyphCloud myGlyph;
     /** Creates a new instance of ExperimentalDataObject */
     public ExperimentalDataObject(ExperimentalDataItemType objectType, String baseName, int index) {
@@ -118,6 +120,20 @@ public class ExperimentalDataObject extends AdhocModelComponent {
     @Override
     public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
         super.generateDecorations(fixed, hints, state, appendToThis); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * @return the dataObjectUUID
+     */
+    public UUID getDataObjectUUID() {
+        return dataObjectUUID;
+    }
+
+    /**
+     * @param dataObjectUUID the dataObjectUUID to set
+     */
+    public void setDataObjectUUID(UUID dataObjectUUID) {
+        this.dataObjectUUID = dataObjectUUID;
     }
 
 }

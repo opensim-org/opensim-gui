@@ -777,8 +777,8 @@ public class Muscle extends PathActuator {
     return opensimSimulationJNI.Muscle_computeActuation(swigCPtr, this, State.getCPtr(s), s);
   }
 
-  public void equilibrate(State s) {
-    opensimSimulationJNI.Muscle_equilibrate(swigCPtr, this, State.getCPtr(s), s);
+  public void computeEquilibrium(State s) {
+    opensimSimulationJNI.Muscle_computeEquilibrium(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double calcInextensibleTendonActiveFiberForce(State s, double aActivation) {

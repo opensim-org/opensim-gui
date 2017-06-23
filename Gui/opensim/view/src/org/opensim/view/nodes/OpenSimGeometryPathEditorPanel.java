@@ -1429,6 +1429,12 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       if (newType != oldType) {
          AbstractPathPoint newPoint = AbstractPathPoint.safeDownCast(OpenSimObject.newInstanceOfType(musclePointClassNames[newType]));
          OpenSimContext context=OpenSimDB.getInstance().getContext(currentPath.getModel());
+         if (via!=null){
+             // Need to pick some coordinate otherwise initSystem will fail
+             via.setCoordinate(currentPath.getModel().getCoordinateSet().get(0));
+             via.setParentFrame(mp.getParentFrame());
+             via.setLocation(mp.getLocation(context.getCurrentStateRef()));
+         }
          context.realizeVelocity();
          boolean result = context.replacePathPoint(currentPath, mp, newPoint);
          if (result == false) {
@@ -1593,6 +1599,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
             vis.upateDisplay(Component.safeDownCast(objectWithPath));
             ViewDB.getInstance().repaintAll();
         }
+        ViewDB.getInstance().updatePathDisplay(model, currentPath);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

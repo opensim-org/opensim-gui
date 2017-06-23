@@ -39,6 +39,7 @@ import org.openide.nodes.Sheet;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.Marker;
+import org.opensim.modeling.Muscle;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.editors.BodyNameEditor;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
@@ -47,15 +48,13 @@ import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
  *
  * @author Ayman Habib
  */
-public class OneMuscleNode extends OneForceNode {
+public class OneMuscleNode extends OneActuatorNode {
     
     private static ResourceBundle bundle = NbBundle.getBundle(OneMuscleNode.class);
     /** Creates a new instance of OneMuscleNode */
-    public OneMuscleNode(OpenSimObject actuator) {
+    public OneMuscleNode(Muscle actuator) {
         super(actuator);
-        setChildren(Children.LEAF);
-        addDisplayOption(displayOption.Showable);
-        addDisplayOption(displayOption.Isolatable);
+        setShortDescription(bundle.getString("HINT_MuscleNode"));
     }
     public Image getIcon(int i) {
         URL imageURL;
