@@ -84,7 +84,7 @@
     </target>
     <target name="build-mac-installer" depends="build-mac,copy-visualizer,copy-models">
         <property name="lib.dir" value="/Users/aymanhabib/dev/install/opensim-core-install/lib"/>
-        <echoproperties/>
+        <!--<echoproperties/>-->
 
         <!-- Must use the OS's cp because Ant's copy doesn't preserve file
              permissions (e.g., the executable bit). TODO exclude unnecessary
@@ -100,21 +100,36 @@
             <fileset dir="${lib.dir}"/>
         </copy>        
 
+        <copy todir="dist/OpenSim.app/Contents/"
+            file="installer_files/OSX/Info.plist" overwrite="true"/>
+        <!-- Fix version number -->
+        <replace file="dist/OpenSim.app/Contents/Info.plist"
+            value="${app.version}">
+            <replacefilter token="@VERSION@" />
+        </replace>
+
+        <copy todir="dist/OpenSim.app/Contents/Resources/"
+            file="installer_files/OSX/OpenSimDocument.icns" />
+
         <!-- Create top level folder -->
-        <property name="mac.dist.outer.dir" value="dist/OpenSim 4.0-beta" />
+        <property name="mac.dist.outer.dir" value="dist/OpenSim ${app.version}" />
+        <property name="mac.final.app.name" value="OpenSim ${app.version}.app" />
         <!-- Must delete OpenSim.app to avoid two copies of OpenSim.app; seems
              to be an issue with moving the OpenSim symlink on top of an
              existing symlink.-->
         <!-- Avoiding Ant copy b/c it doesn't preserve symlinks.-->
+        <delete dir="${mac.dist.outer.dir}" />
         <mkdir dir="${mac.dist.outer.dir}" />
         <exec executable="mv">
-            <arg line="dist/OpenSim.app '${mac.dist.outer.dir}/'" />
+            <!-- '-f': overwrite if files already exist. -->
+            <arg line="-f dist/OpenSim.app '${mac.dist.outer.dir}/${mac.final.app.name}'" />
         </exec>
+
         <symlink action="single" link="${mac.dist.outer.dir}/Geometry"
-            resource="OpenSim.app/Contents/Resources/opensim/Geometry/"
+            resource="${mac.final.app.name}/Contents/Resources/opensim/Geometry/"
             overwrite="true"/>
         <symlink action="single" link="${mac.dist.outer.dir}/Models"
-            resource="OpenSim.app/Contents/Resources/opensim/Models/"
+            resource="${mac.final.app.name}/Contents/Resources/opensim/Models/"
             overwrite="true"/>
     </target>
 </project>
