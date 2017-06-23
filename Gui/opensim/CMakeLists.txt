@@ -40,6 +40,7 @@ if (APPLE)
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Build opensim.app.")
+    # On macOS, copying the JRE is handled by build-mac-installer.
 endif()
 
 set(VIS_REPO "" CACHE

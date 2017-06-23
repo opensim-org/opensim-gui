@@ -25,6 +25,12 @@
             </not>
         </and>
     </condition>
+    <condition property="opensimdist.dir" value="dist/installer/opensim">
+        <os family="windows"/>
+    </condition>
+    <condition property="opensimdist.dir" value="dist/OpenSim.app/Contents/Resources/opensim">
+        <os family="mac"/>
+    </condition>
     <property name="app.conf" value="${installer-files.dir}/opensim.conf"/>
     <import file="nbproject/build-impl.xml"/>
     <target name="debug-properties">
@@ -52,32 +58,49 @@
         </copy>
     </target>
     <target name="copy-jre" description="Copy JRE to installer">
-        <copy todir="dist/installer/opensim/jdk/jre">
+        <!-- Only used on Windows. -->
+        <copy todir="${opensimdist.dir}/jdk/jre">
             <fileset dir="${jre.dir}"/>
         </copy>
     </target>
     <target name="copy-models" description="Copy Models and Geometry to installer">
-        <copy todir="dist/installer/opensim/Geometry">
+        <copy todir="${opensimdist.dir}/Geometry">
             <fileset dir="${models.dir}/Geometry"/>
         </copy>
-        <copy todir="dist/installer/opensim/models">
+        <copy todir="${opensimdist.dir}/Models">
             <fileset dir="${models.dir}/models"/>
         </copy>
     </target>
     <target name="copy-visualizer" description="Copy Visualizer to installer">
-        <copy todir="dist/installer/opensim/threejs">
-            <fileset dir="${visualizer.dir}/three.js"/>
+        <copy todir="${opensimdist.dir}/threejs">
+            <fileset dir="${visualizer.dir}/three.js">
+                <exclude name="**/docs/**"/>
+                <exclude name="**/test/**"/>
+                <exclude name="**/examples/**"/>
+            </fileset>
         </copy>
-        <copy todir="dist/installer/OpenSim/threejs/build">
+        <copy todir="${opensimdist.dir}/threejs/examples/js">
+            <fileset dir="${visualizer.dir}/three.js/examples/js" />
+        </copy>
+        <!--<copy todir="${opensimdist.dir}/threejs/build">
             <fileset dir="${visualizer.dir}/build"/>
-        </copy>
+        </copy>-->
     </target>
     <target name="build-mac-installer" depends="build-mac">
         <property name="lib.dir" value="/Users/aymanhabib/dev/install/opensim-core-install/lib"/>
         <echoproperties/>
-        <copy todir="dist/opensim.app/Contents/Resources/opensim/lib">
+        <copy todir="${opensimdist.dir}/lib">
             <fileset dir="${lib.dir}"/>
         </copy>
+        <!-- Must use the OS's cp because Ant's copy doesn't preserve file
+             permissions (e.g., the executable bit). TODO exclude unnecessary
+             files
+             (http://www.oracle.com/technetwork/java/javase/jre-8-readme-2095710.html);
+             doing so could save about 50 MB from the size of the installation.
+             -->
+        <exec executable="cp">
+            <arg line="-R ${jre.dir}/ ${opensimdist.dir}/jre"/>
+        </exec>
         <!--<copy tofile="dist/opensim.app/Contents/Info.plist" file="installer_files/OSX/Info.plist"/>-->
     </target>
 </project>
