@@ -105,8 +105,11 @@
         <!-- Must delete OpenSim.app to avoid two copies of OpenSim.app; seems
              to be an issue with moving the OpenSim symlink on top of an
              existing symlink.-->
-        <delete file="${mac.dist.outer.dir}/OpenSim.app" />
-        <move todir="${mac.dist.outer.dir}/" file="dist/OpenSim.app"/>
+        <!-- Avoiding Ant copy b/c it doesn't preserve symlinks.-->
+        <mkdir dir="${mac.dist.outer.dir}" />
+        <exec executable="mv">
+            <arg line="dist/OpenSim.app '${mac.dist.outer.dir}/'" />
+        </exec>
         <symlink action="single" link="${mac.dist.outer.dir}/Geometry"
             resource="OpenSim.app/Contents/Resources/opensim/Geometry/"
             overwrite="true"/>
