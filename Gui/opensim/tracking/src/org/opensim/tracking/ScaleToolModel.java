@@ -599,7 +599,7 @@ public class ScaleToolModel extends Observable implements Observer {
 
    private void resetMarkers() {
       OpenSimContext context = OpenSimDB.getInstance().createContext(unscaledModel); //Call(1) 
-      context.replaceMarkerSet(unscaledModel, originalMarkerSet);
+      //context.updateMarkerSet(originalMarkerSet);
       if(extraMarkerSet!=null)
          unscaledModel.updateMarkerSet(extraMarkerSet);
 
