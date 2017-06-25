@@ -12,7 +12,7 @@ pkgbuild \
     --identifier org.opensim.app.pkg \
     --version 4.0 \
     --root '../../Gui/opensim/dist/OpenSim 4.0' \
-    --install-location '/Applications/OpenSim 4.0-beta' \
+    --install-location '/Applications/OpenSim 4.0-beta-sdk' \
     'OpenSim-4.0-beta-App.pkg'
     # --component-plist OpenSimAppComponents.plist \
 # productbuild --synthesize --package 'OpenSim-4.0-App.pkg' ./Distribution.xml
