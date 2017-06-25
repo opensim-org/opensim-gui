@@ -60,7 +60,6 @@ import org.opensim.modeling.Ground;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
-import org.opensim.modeling.ModelDisplayHints;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PhysicalFrame;
@@ -329,10 +328,11 @@ public class MotionDisplayer implements SelectionListener {
         
         modelVisJson.addMotionDisplayer(this);
         if (model instanceof ModelForExperimentalData) return;
-        SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-        if(vis!=null) vis.setApplyMuscleColors(isRenderMuscleActivations());
+        if (ViewDB.isVtkGraphicsAvailable()){
+            SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
+            if(vis!=null) vis.setApplyMuscleColors(isRenderMuscleActivations());
+        }
     }
-
     public void setupMotionDisplay() { 
         if (simmMotionData == null)
            return;
@@ -376,8 +376,10 @@ public class MotionDisplayer implements SelectionListener {
         if(colNames.arrayEquals(stateNames)) {
            // This is a states file
            statesFile = true;
-           SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-           if(vis!=null) vis.setApplyMuscleColors(true);
+           if (ViewDB.isVtkGraphicsAvailable()){
+            SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
+            if(vis!=null) vis.setApplyMuscleColors(true);
+           }
            setRenderMuscleActivations(true);
         } else  {
            // We should build sorted lists of object names so that we can find them easily
@@ -1087,11 +1089,11 @@ public class MotionDisplayer implements SelectionListener {
             experimenalMarkerGeometryJson = new JSONObject();
             UUID uuidForMarkerGeometry = UUID.randomUUID();
             experimenalMarkerGeometryJson.put("uuid", uuidForMarkerGeometry.toString());
-            experimenalMarkerGeometryJson.put("type", "SphereGeometry");
-            experimenalMarkerGeometryJson.put("radius", 5);
+            experimenalMarkerGeometryJson.put("type", "BoxGeometry");
+            experimenalMarkerGeometryJson.put("width", 8);
+            experimenalMarkerGeometryJson.put("height", 8);
+            experimenalMarkerGeometryJson.put("depth", 8);
             experimenalMarkerGeometryJson.put("name", "DefaultExperimentalMarker");
-            experimenalMarkerGeometryJson.put("widthSegments", 32);
-            experimenalMarkerGeometryJson.put("heightSegments", 16);
             JSONArray json_geometries = (JSONArray) modelVisJson.get("geometries");
             json_geometries.add(experimenalMarkerGeometryJson);
 
