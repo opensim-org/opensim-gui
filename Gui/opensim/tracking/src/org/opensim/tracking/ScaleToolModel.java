@@ -307,8 +307,8 @@ public class ScaleToolModel extends Observable implements Observer {
                                  }
                               });
          progressHandle.start();
-
-         processedModel = Model.safeDownCast(unscaledModel.clone());;
+         // Crash here
+         processedModel = Model.safeDownCast(unscaledModel.clone());
          processedModel.setName(scaleTool.getName());
          processedModel.setInputFileName("");
          processedModel.setOriginalModelPathFromModel(unscaledModel); // important to keep track of the original path so bone loading works
@@ -599,7 +599,7 @@ public class ScaleToolModel extends Observable implements Observer {
 
    private void resetMarkers() {
       OpenSimContext context = OpenSimDB.getInstance().createContext(unscaledModel); //Call(1) 
-      context.replaceMarkerSet(unscaledModel, originalMarkerSet);
+      //context.updateMarkerSet(originalMarkerSet);
       if(extraMarkerSet!=null)
          unscaledModel.updateMarkerSet(extraMarkerSet);
 
