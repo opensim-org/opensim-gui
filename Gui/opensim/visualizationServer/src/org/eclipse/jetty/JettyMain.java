@@ -30,44 +30,7 @@ public class JettyMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try {
-            if (!serverup){
-                // TODO code application logic here
-                Server server = new Server(serverPort);
-
-                String appDir = serverRootDir;
-                File fp = new File(appDir);
-                if (!fp.exists()){
-                    // Try adding leading "/"
-                    fp = new File("/"+appDir);
-                    if (fp.exists())
-                        appDir = "/"+appDir;
-                    // else should abort
-                }
-                serverWorkingDir = appDir+"/threejs/editor/";
-                URI webRootUri = new File(appDir).toURI();
-                System.out.println("Web Root URI: %s%n"+webRootUri);
-
-                ServletContextHandler context = new ServletContextHandler();
-                context.setContextPath("/");
-                context.setBaseResource(Resource.newResource(webRootUri));
-                context.setWelcomeFiles(new String[] { pathToStartPage+"index.html" });
-
-                context.getMimeTypes().addMimeMapping("txt","text/plain;charset=utf-8");
-                context.addServlet(DefaultServlet.class,"/");
-                context.addServlet(OpenSimSocketServlet.class, "/visEndpoint");
-                server.setHandler(context);
-
-                server.start();
-                serverup = true;
-                server.join();
-
-            }
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(JettyMain.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(JettyMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        startServer();
     }
 
     /**
@@ -103,6 +66,47 @@ public class JettyMain {
      */
     public static String getServerWorkingDir() {
         return serverWorkingDir;
+    }
+
+    public static void startServer() {
+        if (!serverup) {
+            try {
+                // TODO code application logic here
+                Server server = new Server(serverPort);
+
+                String appDir = serverRootDir;
+                File fp = new File(appDir);
+                if (!fp.exists()) {
+                    // Try adding leading "/"
+                    fp = new File("/" + appDir);
+                    if (fp.exists()) {
+                        appDir = "/" + appDir;
+                    }
+                    // else should abort
+                }
+                serverWorkingDir = appDir + "/threejs/editor/";
+                URI webRootUri = new File(appDir).toURI();
+                System.out.println("Web Root URI: %s%n" + webRootUri);
+
+                ServletContextHandler context = new ServletContextHandler();
+                context.setContextPath("/");
+                context.setBaseResource(Resource.newResource(webRootUri));
+                context.setWelcomeFiles(new String[]{pathToStartPage + "index.html"});
+
+                context.getMimeTypes().addMimeMapping("txt", "text/plain;charset=utf-8");
+                context.addServlet(DefaultServlet.class, "/");
+                context.addServlet(OpenSimSocketServlet.class, "/visEndpoint");
+                server.setHandler(context);
+
+                server.start();
+                serverup = true;
+                server.join();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(JettyMain.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(JettyMain.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
 }
