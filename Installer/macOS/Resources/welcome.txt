@@ -1,0 +1,5 @@
+You will be guided through the steps necessary to install this software.
+
+**IMPORTANT** This is a beta release, and you may encounter bugs.
+
+**IMPORTANT** This beta release will not work if installed system-wide. After agreeing to the license, click "Change Install Location..." and select "Install for me only." 
