@@ -2064,7 +2064,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
 
     public static boolean isVtkGraphicsAvailable() {
-        return graphicsAvailable;
+        return false;
     }
 
     public static void setGraphicsAvailable(boolean aGraphicsAvailable) {
