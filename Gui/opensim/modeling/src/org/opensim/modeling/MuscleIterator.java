@@ -437,10 +437,6 @@ public class MuscleIterator {
     return opensimSimulationJNI.MuscleIterator_computeActuation(swigCPtr, this, State.getCPtr(s), s);
   }
 
-  public void equilibrate(State s) {
-    opensimSimulationJNI.MuscleIterator_equilibrate(swigCPtr, this, State.getCPtr(s), s);
-  }
-
   public void computeEquilibrium(State s) {
     opensimSimulationJNI.MuscleIterator_computeEquilibrium(swigCPtr, this, State.getCPtr(s), s);
   }

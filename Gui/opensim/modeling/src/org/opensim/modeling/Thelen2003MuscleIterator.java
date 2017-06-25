@@ -177,6 +177,10 @@ public class Thelen2003MuscleIterator {
     return new MuscleFixedWidthPennationModel(opensimSimulationJNI.Thelen2003MuscleIterator_getPennationModel(swigCPtr, this), false);
   }
 
+  public void printCurveToCSVFile(Thelen2003Muscle.CurveType ctype, String path) {
+    opensimSimulationJNI.Thelen2003MuscleIterator_printCurveToCSVFile(swigCPtr, this, ctype.swigValue(), path);
+  }
+
   public double computeActuation(State s) {
     return opensimSimulationJNI.Thelen2003MuscleIterator_computeActuation(swigCPtr, this, State.getCPtr(s), s);
   }
@@ -595,10 +599,6 @@ public class Thelen2003MuscleIterator {
 
   public double getExcitation(State s) {
     return opensimSimulationJNI.Thelen2003MuscleIterator_getExcitation(swigCPtr, this, State.getCPtr(s), s);
-  }
-
-  public void equilibrate(State s) {
-    opensimSimulationJNI.Thelen2003MuscleIterator_equilibrate(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void computeEquilibrium(State s) {

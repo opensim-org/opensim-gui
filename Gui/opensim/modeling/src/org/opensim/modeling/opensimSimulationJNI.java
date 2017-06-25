@@ -3372,8 +3372,8 @@ public class opensimSimulationJNI {
   public final static native void AbstractTool_setModelFilename(long jarg1, AbstractTool jarg1_, String jarg2);
   public final static native boolean AbstractTool_getSolveForEquilibrium(long jarg1, AbstractTool jarg1_);
   public final static native void AbstractTool_setSolveForEquilibrium(long jarg1, AbstractTool jarg1_, boolean jarg2);
-  public final static native void AbstractTool_loadModel__SWIG_0(long jarg1, AbstractTool jarg1_, String jarg2, long jarg3, ForceSet jarg3_);
-  public final static native void AbstractTool_loadModel__SWIG_1(long jarg1, AbstractTool jarg1_, String jarg2);
+  public final static native void AbstractTool_loadModel__SWIG_0(long jarg1, AbstractTool jarg1_, String jarg2, long jarg3, ForceSet jarg3_) throws java.io.IOException;
+  public final static native void AbstractTool_loadModel__SWIG_1(long jarg1, AbstractTool jarg1_, String jarg2) throws java.io.IOException;
   public final static native void AbstractTool_updateModelForces__SWIG_0(long jarg1, AbstractTool jarg1_, long jarg2, Model jarg2_, String jarg3, long jarg4, ForceSet jarg4_) throws java.io.IOException;
   public final static native void AbstractTool_updateModelForces__SWIG_1(long jarg1, AbstractTool jarg1_, long jarg2, Model jarg2_, String jarg3) throws java.io.IOException;
   public final static native void AbstractTool_addAnalysisSetToModel(long jarg1, AbstractTool jarg1_);
@@ -4570,8 +4570,6 @@ public class opensimSimulationJNI {
   public final static native long Model_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void Model_assign(long jarg1, Model jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String Model_getClassName();
-  public final static native long Model_clone(long jarg1, Model jarg1_);
-  public final static native String Model_getConcreteClassName(long jarg1, Model jarg1_);
   public final static native void Model_copyProperty_assembly_accuracy(long jarg1, Model jarg1_, long jarg2, Model jarg2_);
   public final static native double Model_get_assembly_accuracy__SWIG_0(long jarg1, Model jarg1_, int jarg2);
   public final static native long Model_upd_assembly_accuracy__SWIG_0(long jarg1, Model jarg1_, int jarg2);
@@ -4739,6 +4737,8 @@ public class opensimSimulationJNI {
   public final static native long new_Model__SWIG_1(String jarg1) throws java.io.IOException;
   public final static native void Model_setup(long jarg1, Model jarg1_) throws java.io.IOException;
   public final static native void Model_cleanup(long jarg1, Model jarg1_);
+  public final static native long Model_clone(long jarg1, Model jarg1_);
+  public final static native String Model_getConcreteClassName(long jarg1, Model jarg1_);
   public final static native long Model_getDisplayHints(long jarg1, Model jarg1_);
   public final static native long Model_updDisplayHints(long jarg1, Model jarg1_);
   public final static native void Model_setUseVisualizer(long jarg1, Model jarg1_, boolean jarg2);
@@ -5480,7 +5480,6 @@ public class opensimSimulationJNI {
   public final static native double Muscle_getExcitation(long jarg1, Muscle jarg1_, long jarg2, State jarg2_);
   public final static native void Muscle_setActivation(long jarg1, Muscle jarg1_, long jarg2, State jarg2_, double jarg3);
   public final static native double Muscle_computeActuation(long jarg1, Muscle jarg1_, long jarg2, State jarg2_);
-  public final static native void Muscle_equilibrate(long jarg1, Muscle jarg1_, long jarg2, State jarg2_);
   public final static native void Muscle_computeEquilibrium(long jarg1, Muscle jarg1_, long jarg2, State jarg2_);
   public final static native double Muscle_calcInextensibleTendonActiveFiberForce(long jarg1, Muscle jarg1_, long jarg2, State jarg2_, double jarg3);
   public final static native void delete_Muscle(long jarg1);
@@ -6601,7 +6600,6 @@ public class opensimSimulationJNI {
   public final static native double MuscleIterator_getExcitation(long jarg1, MuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native void MuscleIterator_setActivation(long jarg1, MuscleIterator jarg1_, long jarg2, State jarg2_, double jarg3);
   public final static native double MuscleIterator_computeActuation(long jarg1, MuscleIterator jarg1_, long jarg2, State jarg2_);
-  public final static native void MuscleIterator_equilibrate(long jarg1, MuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native void MuscleIterator_computeEquilibrium(long jarg1, MuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native double MuscleIterator_calcInextensibleTendonActiveFiberForce(long jarg1, MuscleIterator jarg1_, long jarg2, State jarg2_, double jarg3);
   public final static native long MuscleIterator_get_GeometryPath__SWIG_0(long jarg1, MuscleIterator jarg1_, int jarg2);
@@ -7810,7 +7808,8 @@ public class opensimSimulationJNI {
   public final static native void Millard2012EquilibriumMuscle_setFiberLength(long jarg1, Millard2012EquilibriumMuscle jarg1_, long jarg2, State jarg2_, double jarg3);
   public final static native double Millard2012EquilibriumMuscle_computeActuation(long jarg1, Millard2012EquilibriumMuscle jarg1_, long jarg2, State jarg2_);
   public final static native void Millard2012EquilibriumMuscle_computeInitialFiberEquilibrium(long jarg1, Millard2012EquilibriumMuscle jarg1_, long jarg2, State jarg2_);
-  public final static native void Millard2012EquilibriumMuscle_computeFiberEquilibriumAtZeroVelocity(long jarg1, Millard2012EquilibriumMuscle jarg1_, long jarg2, State jarg2_);
+  public final static native void Millard2012EquilibriumMuscle_computeFiberEquilibrium__SWIG_0(long jarg1, Millard2012EquilibriumMuscle jarg1_, long jarg2, State jarg2_, boolean jarg3);
+  public final static native void Millard2012EquilibriumMuscle_computeFiberEquilibrium__SWIG_1(long jarg1, Millard2012EquilibriumMuscle jarg1_, long jarg2, State jarg2_);
   public final static native double Millard2012EquilibriumMuscle_calcActiveFiberForceAlongTendon(long jarg1, Millard2012EquilibriumMuscle jarg1_, double jarg2, double jarg3, double jarg4);
   public final static native long Millard2012EquilibriumMuscle_calcFiberStateGivenBoundaryCond(long jarg1, Millard2012EquilibriumMuscle jarg1_, double jarg2, double jarg3, double jarg4, double jarg5);
   public final static native double Millard2012EquilibriumMuscle_calcInextensibleTendonActiveFiberForce(long jarg1, Millard2012EquilibriumMuscle jarg1_, long jarg2, State jarg2_, double jarg3);
@@ -7859,6 +7858,7 @@ public class opensimSimulationJNI {
   public final static native double Thelen2003MuscleIterator_getMinimumFiberLength(long jarg1, Thelen2003MuscleIterator jarg1_);
   public final static native long Thelen2003MuscleIterator_getActivationModel(long jarg1, Thelen2003MuscleIterator jarg1_);
   public final static native long Thelen2003MuscleIterator_getPennationModel(long jarg1, Thelen2003MuscleIterator jarg1_);
+  public final static native void Thelen2003MuscleIterator_printCurveToCSVFile(long jarg1, Thelen2003MuscleIterator jarg1_, int jarg2, String jarg3);
   public final static native double Thelen2003MuscleIterator_computeActuation(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native void Thelen2003MuscleIterator_computeInitialFiberEquilibrium(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native double Thelen2003MuscleIterator_calcActiveFiberForceAlongTendon(long jarg1, Thelen2003MuscleIterator jarg1_, double jarg2, double jarg3, double jarg4);
@@ -7964,7 +7964,6 @@ public class opensimSimulationJNI {
   public final static native double Thelen2003MuscleIterator_getStress(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native void Thelen2003MuscleIterator_setExcitation(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, State jarg2_, double jarg3);
   public final static native double Thelen2003MuscleIterator_getExcitation(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, State jarg2_);
-  public final static native void Thelen2003MuscleIterator_equilibrate(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native void Thelen2003MuscleIterator_computeEquilibrium(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native long Thelen2003MuscleIterator_get_GeometryPath__SWIG_0(long jarg1, Thelen2003MuscleIterator jarg1_, int jarg2);
   public final static native long Thelen2003MuscleIterator_get_GeometryPath__SWIG_1(long jarg1, Thelen2003MuscleIterator jarg1_);
@@ -8131,7 +8130,8 @@ public class opensimSimulationJNI {
   public final static native void Millard2012EquilibriumMuscleIterator_setFiberLength(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_, double jarg3);
   public final static native double Millard2012EquilibriumMuscleIterator_computeActuation(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native void Millard2012EquilibriumMuscleIterator_computeInitialFiberEquilibrium(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_);
-  public final static native void Millard2012EquilibriumMuscleIterator_computeFiberEquilibriumAtZeroVelocity(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_);
+  public final static native void Millard2012EquilibriumMuscleIterator_computeFiberEquilibrium__SWIG_0(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_, boolean jarg3);
+  public final static native void Millard2012EquilibriumMuscleIterator_computeFiberEquilibrium__SWIG_1(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native double Millard2012EquilibriumMuscleIterator_calcActiveFiberForceAlongTendon(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, double jarg2, double jarg3, double jarg4);
   public final static native long Millard2012EquilibriumMuscleIterator_calcFiberStateGivenBoundaryCond(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, double jarg2, double jarg3, double jarg4, double jarg5);
   public final static native double Millard2012EquilibriumMuscleIterator_calcInextensibleTendonActiveFiberForce(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_, double jarg3);
@@ -8225,7 +8225,6 @@ public class opensimSimulationJNI {
   public final static native double Millard2012EquilibriumMuscleIterator_getStress(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native void Millard2012EquilibriumMuscleIterator_setExcitation(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_, double jarg3);
   public final static native double Millard2012EquilibriumMuscleIterator_getExcitation(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_);
-  public final static native void Millard2012EquilibriumMuscleIterator_equilibrate(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native void Millard2012EquilibriumMuscleIterator_computeEquilibrium(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native long Millard2012EquilibriumMuscleIterator_get_GeometryPath__SWIG_0(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, int jarg2);
   public final static native long Millard2012EquilibriumMuscleIterator_get_GeometryPath__SWIG_1(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
