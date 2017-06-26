@@ -563,7 +563,7 @@ public class MotionDisplayer implements SelectionListener {
               return 1;
           }
      }
-
+      /* FIX40
        MarkerSet markers = model.getMarkerSet();
        for (int i = 0; i<markers.getSize(); i++){
          Marker marker = markers.get(i);
@@ -642,7 +642,7 @@ public class MotionDisplayer implements SelectionListener {
             mapIndicesToObjects.put(columnIndex, bdy);
             return 1;
          }
-      }
+      }*/
       mapIndicesToObjectTypes.put(columnIndex, ObjectTypesInMotionFiles.UNKNOWN);
       return 0;
    }
