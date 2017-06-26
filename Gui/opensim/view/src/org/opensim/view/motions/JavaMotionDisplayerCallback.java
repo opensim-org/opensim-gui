@@ -125,7 +125,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
       context = OpenSimDB.getInstance().getContext(aModelForDisplay);
       this.staticOptimization = staticOptimization;
       if (!staticOptimization)
-          this.setCoordinatesOnly(true);
+      this.setCoordinatesOnly(true);
       if(aStorage!=null) {
          this.storage = aStorage;
       }
@@ -219,10 +219,6 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
       }
       else if (statesReporter!=null){
           statesReporter.step(s, stepNumber);
-      }
-      if (stepNumber==5){
-        if (statesReporter!=null)
-            statesReporter.getStatesStorage().print("GUIstates.sto");          
       }
       if (!isInitialized()){
          initializeTimer();
