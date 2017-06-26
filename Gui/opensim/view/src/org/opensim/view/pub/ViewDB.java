@@ -2064,7 +2064,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
 
     public static boolean isVtkGraphicsAvailable() {
-        return graphicsAvailable;
+        return false;
     }
 
     public static void setGraphicsAvailable(boolean aGraphicsAvailable) {
@@ -2099,6 +2099,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             websocketdb.broadcastMessageJson(msg, null);
             if (debugLevel > 1)
                 System.out.println(msg.toJSONString());
+        }
+    }
+    public void addVisualizerObject(JSONObject jsonObject) {
+        if (websocketdb!=null){
+            websocketdb.broadcastMessageJson(currentJson.createAddObjectCommand(jsonObject), null);
         }
     }
     // Callback, invoked when a command is received from visualizer
