@@ -46,7 +46,7 @@
         <unzip src="dist/opensim.zip" dest="dist/installer" />
     </target>
     <target name="copy-installer-files" depends="unzip-distro" 
-            description="Copy prebuilt opensim-core installayion into installer folder">
+            description="Copy prebuilt opensim-core installation into installer folder">
         <copy todir="${opensim.dist.dir}/bin">
             <fileset dir="${api.dir}/bin"/>
         </copy>
@@ -96,9 +96,25 @@
             <arg line="-R ${jre.dir}/ ${opensim.dist.dir}/jre"/>
         </exec>
 
-        <copy todir="${opensim.dist.dir}/lib">
-            <fileset dir="${lib.dir}"/>
+        <!-- Copy the OpenSim API. -->
+        <copy todir="${opensim.dist.dir}">
+            <fileset dir="${api.dir}">
+                <!-- Don't need the java source code. -->
+                <exclude name="**/share/OpenSim/**" />
+                <!-- Must install the binaries separately to preserve the
+                     executable bit. -->
+                <exclude name="**/bin/**" />
+                <exclude name="**/libexec/**" />
+                <!-- Developers can build developer doxygen on their own. -->
+                <exclude name="**/html_developer/**" />
+            </fileset>
         </copy>        
+        <exec executable="cp">
+            <arg line="-R ${api.dir}/bin/ ${opensim.dist.dir}/bin/" />
+        </exec>
+        <exec executable="cp">
+            <arg line="-R ${api.dir}/libexec/ ${opensim.dist.dir}/libexec/" />
+        </exec>
 
         <copy todir="dist/OpenSim.app/Contents/"
             file="installer_files/OSX/Info.plist" overwrite="true"/>
@@ -125,11 +141,36 @@
             <arg line="-f dist/OpenSim.app '${mac.dist.outer.dir}/${mac.final.app.name}'" />
         </exec>
 
+        <!-- Symlinks in the outer OpenSim 4.0 folder.-->
         <symlink action="single" link="${mac.dist.outer.dir}/Geometry"
-            resource="${mac.final.app.name}/Contents/Resources/opensim/Geometry/"
+            resource="${mac.final.app.name}/Contents/Resources/OpenSim/Geometry/"
             overwrite="true"/>
         <symlink action="single" link="${mac.dist.outer.dir}/Models"
-            resource="${mac.final.app.name}/Contents/Resources/opensim/Models/"
+            resource="${mac.final.app.name}/Contents/Resources/OpenSim/Models/"
+            overwrite="true"/>
+        <mkdir dir="${mac.dist.outer.dir}/bin" />
+        <symlink action="single" link="${mac.dist.outer.dir}/bin/opensim-cmd"
+            resource="../${mac.final.app.name}/Contents/Resources/OpenSim/bin/opensim-cmd"
+            overwrite="true"/>
+        <mkdir dir="${mac.dist.outer.dir}/sdk" />
+        <symlink action="single" link="${mac.dist.outer.dir}/sdk/include"
+            resource="../${mac.final.app.name}/Contents/Resources/OpenSim/include"
+            overwrite="true"/>
+        <symlink action="single" link="${mac.dist.outer.dir}/sdk/lib"
+            resource="../${mac.final.app.name}/Contents/Resources/OpenSim/lib"
+            overwrite="true"/>
+        <symlink action="single" link="${mac.dist.outer.dir}/sdk/APIExamples"
+            resource="../${mac.final.app.name}/Contents/Resources/OpenSim/share/doc/OpenSim/APIExamples"
+            overwrite="true"/>
+        <symlink action="single" link="${mac.dist.outer.dir}/sdk/Scripts"
+            resource="../${mac.final.app.name}/Contents/Resources/OpenSim/share/doc/OpenSim/Scripts"
+            overwrite="true"/>
+        <mkdir dir="${mac.dist.outer.dir}/sdk/doc" />
+        <symlink action="single" link="${mac.dist.outer.dir}/sdk/doc/OpenSimAPI.html"
+            resource="../../${mac.final.app.name}/Contents/Resources/OpenSim/share/doc/OpenSim/OpenSimAPI.html"
+            overwrite="true"/>
+        <symlink action="single" link="${mac.dist.outer.dir}/sdk/doc/html_user"
+            resource="../../${mac.final.app.name}/Contents/Resources/OpenSim/share/doc/OpenSim/html_user"
             overwrite="true"/>
     </target>
 </project>

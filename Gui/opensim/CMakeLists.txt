@@ -60,7 +60,8 @@ endif()
 if (APPLE)
     add_custom_target(PrepareInstaller ALL
                   COMMAND ${Ant_EXECUTABLE} build-mac-installer
-                  -Dlib.dir="${OpenSim_LIB_DIR}" -Dvisualizer.dir="${VIS_REPO}"
+                  -Dapi.dir="${OpenSim_ROOT_DIR}"
+                  -Dvisualizer.dir="${VIS_REPO}"
                   -Dmodels.dir="${MODELS_REPO}"
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
