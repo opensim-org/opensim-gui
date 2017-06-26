@@ -387,7 +387,7 @@ public class MotionDisplayer implements SelectionListener {
               String columnName = colNames.getitem(i);   // Time is included in labels
               int numClassified = classifyColumn(model, i, columnName); // find out if column is gencord/muscle/segment/...etc.
               ObjectTypesInMotionFiles cType = mapIndicesToObjectTypes.get(i);
-              //System.out.println("Classified "+columnName+" as "+cType);
+              System.out.println("Classified "+columnName+" as "+cType);
               if (numClassified>1)  // If we did a group then skip the group
                  i += (numClassified-1);
            }
@@ -513,11 +513,14 @@ public class MotionDisplayer implements SelectionListener {
           return 0;
       String canonicalCcolumnName = columnName.replace('.', '/');
       CoordinateSet coords = model.getCoordinateSet();
+      System.out.println("coords-size="+coords.getSize());
       for (int i = 0; i<coords.getSize(); i++){
          Coordinate co = coords.get(i);
+         System.out.println("coord="+co.getAbsolutePathName());
          // GenCoord
          String cName = co.getName();
-         if (cName.equals(columnName)||cName.equals(co.getRelativePathName(model))){
+         if (cName.equals(columnName)||columnName.equals(co.getRelativePathName(model)) ||
+                 columnName.equals(co.getRelativePathName(model)+"/value")){
             mapIndicesToObjectTypes.put(columnIndex, ObjectTypesInMotionFiles.GenCoord);
             mapIndicesToObjects.put(columnIndex, co); //co.setValue();
             return 1;
@@ -573,10 +576,7 @@ public class MotionDisplayer implements SelectionListener {
             mapIndicesToObjectTypes.put(columnIndex, ObjectTypesInMotionFiles.Segment_marker_p1);
             mapIndicesToObjectTypes.put(columnIndex+1, ObjectTypesInMotionFiles.Segment_marker_p2);
             mapIndicesToObjectTypes.put(columnIndex+2, ObjectTypesInMotionFiles.Segment_marker_p3);
-            int index= markersRep.addLocation(0., 0., 0.);
-            mapIndicesToObjects.put(columnIndex, new Integer(index));
-            mapIndicesToObjects.put(columnIndex+1, new Integer(index));
-            mapIndicesToObjects.put(columnIndex+2, new Integer(index));
+            createAndBindExperimentalMarker(columnIndex);
             return 3;
          }
       }
@@ -593,10 +593,7 @@ public class MotionDisplayer implements SelectionListener {
                   mapIndicesToObjectTypes.put(columnIndex,   ObjectTypesInMotionFiles.Segment_marker_p1);
                   mapIndicesToObjectTypes.put(columnIndex+1, ObjectTypesInMotionFiles.Segment_marker_p2);
                   mapIndicesToObjectTypes.put(columnIndex+2, ObjectTypesInMotionFiles.Segment_marker_p3);
-                  int index= markersRep.addLocation(0., 0., 0.);
-                  mapIndicesToObjects.put(columnIndex, new Integer(index));
-                  mapIndicesToObjects.put(columnIndex+1, new Integer(index));
-                  mapIndicesToObjects.put(columnIndex+2, new Integer(index));
+                  createAndBindExperimentalMarker(columnIndex);
                   return 3;
                }
                else {
@@ -646,6 +643,16 @@ public class MotionDisplayer implements SelectionListener {
       mapIndicesToObjectTypes.put(columnIndex, ObjectTypesInMotionFiles.UNKNOWN);
       return 0;
    }
+
+    private void createAndBindExperimentalMarker(int columnIndex) {
+        if (ViewDB.isVtkGraphicsAvailable()){
+            int index= markersRep.addLocation(0., 0., 0.);
+            mapIndicesToObjects.put(columnIndex, new Integer(index));
+            mapIndicesToObjects.put(columnIndex+1, new Integer(index));
+            mapIndicesToObjects.put(columnIndex+2, new Integer(index));
+        }
+        // Create ExperimentalMarkerObject and tie it to index, and uuid
+    }
 
    void applyFrameToModel(int currentFrame) 
    {
