@@ -254,7 +254,13 @@ public class ModelVisualizationJson extends JSONObject {
     }
     
     public OpenSimObject findObjectForUUID(String uuidString) {
-        return mapUUIDToComponent.get(UUID.fromString(uuidString));
+        OpenSimObject obj = mapUUIDToComponent.get(UUID.fromString(uuidString));
+        if (obj != null) return obj;
+        for (MotionDisplayer motDisplayer:motionDisplayers){
+            obj = motDisplayer.findObjectForUUID(uuidString);
+            if (obj != null) return obj;
+        }
+        return obj;
     }
 
     public ArrayList<UUID> findUUIDForObject(OpenSimObject obj) {
@@ -617,5 +623,13 @@ public class ModelVisualizationJson extends JSONObject {
      */
     public JSONObject getModelGroundJson() {
         return modelGroundJson;
+    }
+
+    public JSONObject createRemoveObjectCommand(JSONObject object2Remove, String parent) {
+        JSONObject guiJson = new JSONObject();
+        guiJson.put("Op", "execute");
+        JSONObject commandJson = CommandComposerThreejs.createRemoveObjectCommandJson(object2Remove, parent);
+        guiJson.put("command", commandJson);
+        return guiJson;
     }
 }
