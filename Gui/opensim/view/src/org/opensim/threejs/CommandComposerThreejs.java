@@ -104,5 +104,15 @@ public class CommandComposerThreejs {
         commandJson.put("object", newObject);
         return commandJson;
     }
+
+    static JSONObject createRemoveObjectCommandJson(JSONObject object2Remove, String parent) {
+        JSONObject commandJson = new JSONObject();
+        commandJson.put("type", "RemoveObjectCommand");
+        commandJson.put("parentUuid", parent);
+        JSONObject dObject = new JSONObject();
+        dObject.put("object", object2Remove);
+        commandJson.put("object", dObject);
+        return commandJson;
+    }
     
 }

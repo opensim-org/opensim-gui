@@ -932,6 +932,10 @@ public class MotionDisplayer implements SelectionListener {
             }
             setMuscleColoringFunction(null);
         }
+        if (motionObjectsRoot!=null) {
+            ViewDB.getInstance().RemoveVisualizerObject(motionObjectsRoot, 
+                    (String) modelVisJson.getModelGroundJson().get("uuid"));
+        }
     }
 
    public Storage getSimmMotionData() {
