@@ -562,7 +562,7 @@ public class ModelVisualizationJson extends JSONObject {
     
     public JSONObject createAddObjectCommand(JSONObject newObject) {
         JSONObject guiJson = new JSONObject();
-        guiJson.put("Op", "execute");
+        guiJson.put("Op", "addModelObject");
         JSONObject commandJson = CommandComposerThreejs.createAddObjectCommandJson(newObject);
         guiJson.put("command", commandJson);
         return guiJson;

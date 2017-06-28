@@ -218,16 +218,16 @@ public class MotionDisplayer implements SelectionListener {
     }
 
     public void createMotionObjectsVisuals() {
-        JSONObject gnd = modelVisJson.getModelGroundJson();
         // Create aan objects under gnd/children to serve as top node for motion objects
         // all will be in ground frame.
         if (motionObjectsRoot==null) {
             motionObjectsRoot = new JSONObject();
-            motionObjectsRoot.put("parent", gnd.get("uuid"));
+            motionObjectsRoot.put("parent", modelVisJson.getModelUUID().toString());
             motionObjectsRoot.put("uuid", UUID.randomUUID().toString());
             motionObjectsRoot.put("type", "Group");
             motionObjectsRoot.put("opensimType", "MotionObjects");
             motionObjectsRoot.put("name", simmMotionData.getName().concat("_Objects"));
+            motionObjectsRoot.put("userData", "NonEditable");
             motionObjectsRoot.put("children", new JSONArray());
             motionObjectsRoot.put("matrix", JSONUtilities.createMatrixFromTransform(new Transform(), new Vec3(1.), 1.0));
 
@@ -934,7 +934,12 @@ public class MotionDisplayer implements SelectionListener {
         }
         if (motionObjectsRoot!=null) {
             ViewDB.getInstance().RemoveVisualizerObject(motionObjectsRoot, 
-                    (String) modelVisJson.getModelGroundJson().get("uuid"));
+                    modelVisJson.getModelUUID().toString());
+        }
+        // Recursively cleanup
+        ArrayList<MotionDisplayer> associatedDisplayers = getAssociatedMotions();
+        for (MotionDisplayer assoc:associatedDisplayers){
+            assoc.cleanupDisplay();
         }
     }
 
