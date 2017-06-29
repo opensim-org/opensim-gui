@@ -627,7 +627,7 @@ public class ModelVisualizationJson extends JSONObject {
     public void addMotionDisplayer(MotionDisplayer aMotionDisplayer) {
         motionDisplayers.add(aMotionDisplayer);
         if (aMotionDisplayer.hasMotionObjects()){
-            aMotionDisplayer.createMotionObjectsVisuals();
+            aMotionDisplayer.createMotionObjectsGroupJson();
         }
     }
 

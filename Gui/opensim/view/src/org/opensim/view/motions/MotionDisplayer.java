@@ -217,7 +217,7 @@ public class MotionDisplayer implements SelectionListener {
         return (simmMotionData instanceof AnnotatedMotion);
     }
 
-    public void createMotionObjectsVisuals() {
+    public void createMotionObjectsGroupJson() {
         // Create aan objects under gnd/children to serve as top node for motion objects
         // all will be in ground frame.
         if (motionObjectsRoot==null) {
@@ -350,15 +350,15 @@ public class MotionDisplayer implements SelectionListener {
             AnnotatedMotion mot= (AnnotatedMotion) simmMotionData;
             Vector<ExperimentalDataObject> objects=mot.getClassified();
             mot.setMotionDisplayer(this);
-            createMotionObjectsVisuals();
+            createMotionObjectsGroupJson();
             addExperimentalDataObjectsToJson(objects);
             for(ExperimentalDataObject nextObject:objects){
                 if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
                     bindMarkerToVisualizerObjectKeepHandle(nextObject);
                 } else if (nextObject.getObjectType()==ExperimentalDataItemType.PointForceData){
-                    createForceVisualizerObjectKeepHandle(nextObject);
+                    bindForceVisualizerObjectKeepHandle(nextObject);
                 } else if (nextObject.getObjectType()==ExperimentalDataItemType.BodyForceData){
-                    createForceVisualizerObjectKeepHandle(nextObject);
+                    bindForceVisualizerObjectKeepHandle(nextObject);
                 }
                 
             }
@@ -424,12 +424,12 @@ public class MotionDisplayer implements SelectionListener {
         }
     }
 
-    private void createForceVisualizerObjectKeepHandle(ExperimentalDataObject nextObject) {
+    private void bindForceVisualizerObjectKeepHandle(ExperimentalDataObject nextObject) {
         if (ViewDB.isVtkGraphicsAvailable()){
             int glyphIndex=groundForcesRep.addLocation(nextObject);
             nextObject.setGlyphInfo(glyphIndex, groundForcesRep);
         }
-        
+        nextObject.setDataObjectUUID(findUUIDForObject(nextObject).get(0));
     }
 
     private void bindMarkerToVisualizerObjectKeepHandle(ExperimentalDataObject nextObject) {
@@ -1081,9 +1081,9 @@ public class MotionDisplayer implements SelectionListener {
                 if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
                     bindMarkerToVisualizerObjectKeepHandle(nextObject);
                 } else if (nextObject.getObjectType()==ExperimentalDataItemType.PointForceData){
-                    createForceVisualizerObjectKeepHandle(nextObject);
+                    bindForceVisualizerObjectKeepHandle(nextObject);
                 } else if (nextObject.getObjectType()==ExperimentalDataItemType.BodyForceData){
-                    createForceVisualizerObjectKeepHandle(nextObject);
+                    bindForceVisualizerObjectKeepHandle(nextObject);
                 }
                 
             }
@@ -1124,38 +1124,63 @@ public class MotionDisplayer implements SelectionListener {
         
     }
 
-    public void addExperimentalDataObjectsToJson(AbstractList<ExperimentalDataObject> expMarkers) {
+    public void addExperimentalDataObjectsToJson(AbstractList<ExperimentalDataObject> expObjects) {
         createDefaultMotionObjects();
         // create default top Group for motion
-        
-        for (ExperimentalDataObject nextExMarker : expMarkers) {
-            if (mapComponentToUUID.get(nextExMarker)!= null)
+        JSONObject topJson = motionObjectsRoot;
+        if (topJson.get("children") == null) {
+            topJson.put("children", new JSONArray());
+        }
+        JSONArray motObjectsChildren = (JSONArray) topJson.get("children");
+        for (ExperimentalDataObject nextExpObect : expObjects) {
+            if (mapComponentToUUID.get(nextExpObect) != null) {
                 continue;
-            // Create Object with proper name, add it to ground, update Map of Object to UUID
-            Map<String, Object> expMarker_json = new LinkedHashMap<String, Object>();
-            UUID mesh_uuid = UUID.randomUUID();
-            expMarker_json.put("uuid", mesh_uuid.toString());
-            expMarker_json.put("type", "Mesh");
-            expMarker_json.put("opensimtype", "ExperimentalMarker");
-            expMarker_json.put("name", nextExMarker.getName());
-            expMarker_json.put("geometry", experimenalMarkerGeometryJson.get("uuid"));
-            expMarker_json.put("material", experimenalMarkerMaterialJson.get("uuid"));
-            JSONArray pos = new JSONArray();
-            for (int i = 0; i < 3; i++) {
-                pos.add(0.0);
             }
-            expMarker_json.put("position", pos);
-            expMarker_json.put("castShadow", false);
-            expMarker_json.put("userData", "NonEditable");
-            JSONObject topJson = motionObjectsRoot;
-            if (topJson.get("children") == null) {
-                topJson.put("children", new JSONArray());
-            }
-            JSONArray motObjectsChildren = (JSONArray) topJson.get("children");
-            motObjectsChildren.add(expMarker_json);
             ArrayList<UUID> comp_uuids = new ArrayList<UUID>();
-            comp_uuids.add(mesh_uuid);
-            mapComponentToUUID.put(nextExMarker, comp_uuids);
+            if (nextExpObect instanceof ExperimentalMarker) {
+                // Create Object with proper name, add it to ground, update Map of Object to UUID
+                Map<String, Object> expMarker_json = new LinkedHashMap<String, Object>();
+                UUID mesh_uuid = UUID.randomUUID();
+                expMarker_json.put("uuid", mesh_uuid.toString());
+                expMarker_json.put("type", "Mesh");
+                expMarker_json.put("opensimtype", "ExperimentalMarker");
+                expMarker_json.put("name", nextExpObect.getName());
+                expMarker_json.put("geometry", experimenalMarkerGeometryJson.get("uuid"));
+                expMarker_json.put("material", experimenalMarkerMaterialJson.get("uuid"));
+                JSONArray pos = new JSONArray();
+                for (int i = 0; i < 3; i++) {
+                    pos.add(0.0);
+                }
+                expMarker_json.put("position", pos);
+                expMarker_json.put("castShadow", false);
+                expMarker_json.put("userData", "NonEditable");
+                motObjectsChildren.add(expMarker_json);
+                comp_uuids.add(mesh_uuid);
+            }
+            else if (nextExpObect instanceof MotionObjectPointForce) {
+                Map<String, Object> expForce_json = new LinkedHashMap<String, Object>();
+                UUID forcrep_uuid = UUID.randomUUID();
+                expForce_json.put("uuid", forcrep_uuid.toString());
+                expForce_json.put("type", "ArrowHelper");
+                expForce_json.put("opensimtype", "ExperimentalForce");
+                expForce_json.put("name", nextExpObect.getName());
+                //dir -- direction from origin. Must be a unit vector. 
+                //origin -- Point at which the arrow starts.
+                //length -- length of the arrow. Default is 1.
+                //hex -- hexadecimal value to define color. Default is 0xffff00.
+                //headLength -- The length of the head of the arrow. Default is 0.2 * length.
+                //headWidth -- The length of the width of the arrow. Default is 0.2 * headLength.
+                JSONArray origin = new JSONArray();
+                for (int i = 0; i < 3; i++) {
+                    origin.add(0.0);
+                }
+                expForce_json.put("origin", origin);
+                expForce_json.put("castShadow", false);
+                expForce_json.put("userData", "NonEditable");
+                motObjectsChildren.add(expForce_json);
+                comp_uuids.add(forcrep_uuid);
+            }
+            mapComponentToUUID.put(nextExpObect, comp_uuids);
         }
     }
     
