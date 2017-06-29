@@ -1129,6 +1129,8 @@ public class MotionDisplayer implements SelectionListener {
         // create default top Group for motion
         
         for (ExperimentalDataObject nextExMarker : expMarkers) {
+            if (mapComponentToUUID.get(nextExMarker)!= null)
+                continue;
             // Create Object with proper name, add it to ground, update Map of Object to UUID
             Map<String, Object> expMarker_json = new LinkedHashMap<String, Object>();
             UUID mesh_uuid = UUID.randomUUID();
