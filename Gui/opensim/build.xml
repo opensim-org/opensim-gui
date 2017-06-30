@@ -72,14 +72,14 @@
     </target>
     <target name="copy-visualizer" description="Copy Visualizer to installer">
         <copy todir="${opensim.dist.dir}/threejs">
-            <fileset dir="${visualizer.dir}/three.js">
+            <fileset dir="threejs">
                 <exclude name="**/docs/**"/>
                 <exclude name="**/test/**"/>
                 <exclude name="**/examples/**"/>
             </fileset>
         </copy>
         <copy todir="${opensim.dist.dir}/threejs/examples/js">
-            <fileset dir="${visualizer.dir}/three.js/examples/js" />
+            <fileset dir="threejs/examples/js" />
         </copy>
     </target>
     <target name="build-mac-installer" depends="build-mac,copy-visualizer,copy-models">
