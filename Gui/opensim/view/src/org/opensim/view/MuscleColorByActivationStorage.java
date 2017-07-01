@@ -27,7 +27,7 @@ public class MuscleColorByActivationStorage extends MuscleColoringFunction {
     }
     
     @Override
-    double getColor(Muscle msl){
+    public double getColor(Muscle msl){
         double displayTime = dContext.getTime();
         int aTimeIndex = activationStorage.findIndex(0, displayTime);
         StateVector actData = activationStorage.getStateVector(aTimeIndex);

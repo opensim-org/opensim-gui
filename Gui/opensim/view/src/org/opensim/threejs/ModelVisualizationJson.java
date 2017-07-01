@@ -28,6 +28,7 @@ import org.opensim.modeling.FrameGeometry;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
+import org.opensim.modeling.Muscle;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.PathPointSet;
@@ -36,6 +37,7 @@ import org.opensim.modeling.State;
 import org.opensim.modeling.Transform;
 import org.opensim.modeling.Vec3;
 import org.opensim.modeling.WrapObject;
+import org.opensim.view.MuscleColoringFunction;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.view.motions.MotionDisplayer;
 
@@ -69,6 +71,7 @@ public class ModelVisualizationJson extends JSONObject {
     private static final HashMap<String, Boolean> movableOpensimTypes = new HashMap<String, Boolean>();
     private final ArrayList<MotionDisplayer> motionDisplayers = new ArrayList<MotionDisplayer>();
     private JSONObject modelGroundJson=null;
+    private MuscleColoringFunction mcf = null;
     
     static {
         movableOpensimTypes.put("Marker", true);
@@ -315,6 +318,15 @@ public class ModelVisualizationJson extends JSONObject {
                 JSONObject pathUpdate_json = new JSONObject();
                 pathUpdate_json.put("uuid", pathUUID.toString());
                 Vec3 pathColor = colorByState ? geomPathObject.getColor(state) : geomPathObject.getDefaultColor();
+                if (mcf != null){
+                    Muscle ownerMuscle = Muscle.safeDownCast(geomPathObject.getOwner());
+                    if (ownerMuscle!=null){
+                        double colorZeroToOne = mcf.getColor(ownerMuscle);
+                        pathColor.set(0, colorZeroToOne);
+                        pathColor.set(1, 0.0);
+                        pathColor.set(2, 1.0-colorZeroToOne);
+                    }
+                }
                 if (verbose)
                     System.out.println("Color:"+geomPathObject.getOwner().getName()+"="+pathColor.toString());
                 String colorString = JSONUtilities.mapColorToRGBA(pathColor);
@@ -659,5 +671,9 @@ public class ModelVisualizationJson extends JSONObject {
         JSONObject commandJson = CommandComposerThreejs.createRemoveObjectCommandJson(object2Remove, parent);
         guiJson.put("command", commandJson);
         return guiJson;
+    }
+
+    public void setMuscleColoringFunction(MuscleColoringFunction mcf) {
+        this.mcf = mcf;
     }
 }

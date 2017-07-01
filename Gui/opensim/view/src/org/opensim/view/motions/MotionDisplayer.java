@@ -188,7 +188,7 @@ public class MotionDisplayer implements SelectionListener {
             SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
             vis.setMuscleColoringFunction(mcf);
         }
-        
+        ViewDB.getInstance().getModelVisualizationJson(model).setMuscleColoringFunction(mcf);
     }
 
     public void addMotionObjectsToFrame(JSONArray transforms_json) {
