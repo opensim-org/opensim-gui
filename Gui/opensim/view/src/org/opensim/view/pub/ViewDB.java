@@ -346,7 +346,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                 }
                else {
                    // Same as open visualizer window 
-                   VisualizerWindowAction.openVisualizerWindow();
+                   startVisualizationServer();
                }
               // Check if this refits scene into window
                // int rc = newModelVisual.getModelDisplayAssembly().GetReferenceCount();
