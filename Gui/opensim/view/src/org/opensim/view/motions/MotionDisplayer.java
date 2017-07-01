@@ -68,6 +68,7 @@ import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Storage;
 import org.opensim.modeling.Transform;
 import org.opensim.modeling.TransformAxis;
+import org.opensim.modeling.UnitVec3;
 import org.opensim.modeling.Vec3;
 import org.opensim.threejs.JSONUtilities;
 import org.opensim.threejs.ModelVisualizationJson;
@@ -107,6 +108,7 @@ public class MotionDisplayer implements SelectionListener {
 
     double[] defaultExperimentalMarkerColor = new double[]{0.0, 0.35, 0.65};
     private double[] defaultForceColor = new double[]{0., 1.0, 0.};
+    private Vec3 defaultForceColorVec3 = new Vec3(0., 1.0, 0.);
     private MuscleColoringFunction mcf=null;
     // Create JSONs for geometry and material and use them for all objects of this type so that they all change together
     private JSONObject experimenalMarkerGeometryJson=null;
@@ -192,25 +194,37 @@ public class MotionDisplayer implements SelectionListener {
     }
 
     public void addMotionObjectsToFrame(JSONArray transforms_json) {
-        if (!(simmMotionData instanceof AnnotatedMotion)) 
+         if (!(simmMotionData instanceof AnnotatedMotion)) 
             return;
         AnnotatedMotion mot = (AnnotatedMotion)simmMotionData;
         Vector<ExperimentalDataObject> objects=mot.getClassified();        
         Vec3 unitScale = new Vec3(1., 1., 1.);
         for (ExperimentalDataObject nextObject : objects) {
-             //if (!nextObject.isDisplayed()) 
-             //    continue;
-             JSONObject motionObjectTransform = new JSONObject();
-             Transform xform = new Transform();
-             if (nextObject instanceof ExperimentalMarker){
-                 double[] point = ((ExperimentalMarker) nextObject).getPoint();
+            //if (!nextObject.isDisplayed()) 
+            //    continue;
+            JSONObject motionObjectTransform = new JSONObject();
+            Transform xform = new Transform();
+            if (nextObject instanceof ExperimentalMarker) {
+                double[] point = ((ExperimentalMarker) nextObject).getPoint();
                 xform.setP(new Vec3(point[0], point[1], point[2]));
-             }
-             motionObjectTransform.put("uuid", nextObject.getDataObjectUUID().toString());
-             motionObjectTransform.put("matrix", 
-                     JSONUtilities.createMatrixFromTransform(xform, unitScale, modelVisJson.getVisScaleFactor()));
-             transforms_json.add(motionObjectTransform);
-         }
+                motionObjectTransform.put("uuid", nextObject.getDataObjectUUID().toString());
+                motionObjectTransform.put("matrix",
+                        JSONUtilities.createMatrixFromTransform(xform, unitScale, modelVisJson.getVisScaleFactor()));
+                transforms_json.add(motionObjectTransform);
+            } else if (nextObject instanceof MotionObjectPointForce) {
+                double[] point = ((MotionObjectPointForce) nextObject).getPoint();
+                Vec3 dir =  ((MotionObjectPointForce) nextObject).getDirection();
+                //double lengthSqr = Math.pow(dir.get(0),2)+Math.pow(dir.get(1),2)+Math.pow(dir.get(0),2);
+                UnitVec3 dirNorm = new UnitVec3(dir);
+                xform.setP(new Vec3(point[0], point[1], point[2]));
+                for (int i=0; i<3; i++)
+                    xform.R().set(i, 1, dirNorm.get(i));
+                motionObjectTransform.put("uuid", nextObject.getDataObjectUUID().toString());
+                motionObjectTransform.put("matrix",
+                        JSONUtilities.createMatrixFromTransform(xform, unitScale, modelVisJson.getVisScaleFactor()));
+                transforms_json.add(motionObjectTransform);
+            }
+        }
     }
 
     public boolean hasMotionObjects() {
@@ -238,13 +252,34 @@ public class MotionDisplayer implements SelectionListener {
     private JSONObject createJsonForMotionObjects() {
         JSONObject topJson = new JSONObject();
         JSONArray jsonGeomArray = new JSONArray();
-        jsonGeomArray.add(experimenalMarkerGeometryJson);
+        jsonGeomArray.add(getExperimenalMarkerGeometryJson());
         JSONArray jsonMatArray = new JSONArray();
-        jsonMatArray.add(experimenalMarkerMaterialJson);
+        jsonMatArray.add(getExperimenalMarkerMaterialJson());
         topJson.put("geometries", jsonGeomArray);
         topJson.put("materials", jsonMatArray);
         topJson.put("object", motionObjectsRoot);
         return topJson;
+    }
+
+    /**
+     * @return the experimenalMarkerGeometryJson
+     */
+    public JSONObject getExperimenalMarkerGeometryJson() {
+        return experimenalMarkerGeometryJson;
+    }
+
+    /**
+     * @return the experimenalMarkerMaterialJson
+     */
+    public JSONObject getExperimenalMarkerMaterialJson() {
+        return experimenalMarkerMaterialJson;
+    }
+
+    /**
+     * @return the defaultForceColorVec3
+     */
+    public Vec3 getDefaultForceColorVec3() {
+        return defaultForceColorVec3;
     }
     
     public enum ObjectTypesInMotionFiles{GenCoord, 
@@ -357,9 +392,7 @@ public class MotionDisplayer implements SelectionListener {
                     bindMarkerToVisualizerObjectKeepHandle(nextObject);
                 } else if (nextObject.getObjectType()==ExperimentalDataItemType.PointForceData){
                     bindForceVisualizerObjectKeepHandle(nextObject);
-                } else if (nextObject.getObjectType()==ExperimentalDataItemType.BodyForceData){
-                    bindForceVisualizerObjectKeepHandle(nextObject);
-                }
+                } 
                 
             }
             // create objects and cache their uuids
@@ -672,14 +705,7 @@ public class MotionDisplayer implements SelectionListener {
                            (currentTime > simmMotionData.getLastTime()) ? simmMotionData.getLastTime() : currentTime;
       //OpenSimDB.getInstance().getContext(model).getCurrentStateRef().setTime(clampedTime);
       simmMotionData.getDataAtTime(clampedTime, interpolatedStates.getSize(), interpolatedStates);
-      // update positions in ModelComponents so that generateDecorations works then call generateDecorations
-      if (simmMotionData instanceof AnnotatedMotion){
-         AnnotatedMotion amot = (AnnotatedMotion) simmMotionData;
-         /*
-         for (int i=0; i< interpolatedStates.size(); i++) 
-             interpolatedStates.set(i, interpolatedStates.get(i)/amot.getUnitConversion());*/
-         amot.updateComponentGeometry(interpolatedStates);
-      }
+
       applyStatesToModel(interpolatedStates);
       // Repeat for associated motions
       for (MotionDisplayer assocMotion:associatedMotions){
@@ -699,12 +725,13 @@ public class MotionDisplayer implements SelectionListener {
           Vector<ExperimentalDataObject> objects=mot.getClassified();
           boolean markersModified=false;
           boolean forcesModified=false;
+          mot.updateDecorations(interpolatedStates);
           if (ViewDB.isVtkGraphicsAvailable()){
             SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
              for(ExperimentalDataObject nextObject:objects){
                   if (!nextObject.isDisplayed()) continue;
                   vis.upateDisplay(nextObject);
-
+                  // The following blocks need to be moved inside updateDecorations
                   if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
 
                       int startIndex = nextObject.getStartIndexInFileNotIncludingTime();
@@ -1094,37 +1121,38 @@ public class MotionDisplayer implements SelectionListener {
 
 
     private void createDefaultMotionObjects() {
-        if (experimenalMarkerGeometryJson == null) {
+        if (getExperimenalMarkerGeometryJson() == null) {
             experimenalMarkerGeometryJson = new JSONObject();
             UUID uuidForMarkerGeometry = UUID.randomUUID();
-            experimenalMarkerGeometryJson.put("uuid", uuidForMarkerGeometry.toString());
-            experimenalMarkerGeometryJson.put("type", "BoxGeometry");
-            experimenalMarkerGeometryJson.put("width", 8);
-            experimenalMarkerGeometryJson.put("height", 8);
-            experimenalMarkerGeometryJson.put("depth", 8);
-            experimenalMarkerGeometryJson.put("name", "DefaultExperimentalMarker");
+            getExperimenalMarkerGeometryJson().put("uuid", uuidForMarkerGeometry.toString());
+            getExperimenalMarkerGeometryJson().put("type", "BoxGeometry");
+            getExperimenalMarkerGeometryJson().put("width", 8);
+            getExperimenalMarkerGeometryJson().put("height", 8);
+            getExperimenalMarkerGeometryJson().put("depth", 8);
+            getExperimenalMarkerGeometryJson().put("name", "DefaultExperimentalMarker");
             JSONArray json_geometries = (JSONArray) modelVisJson.get("geometries");
-            json_geometries.add(experimenalMarkerGeometryJson);
+            json_geometries.add(getExperimenalMarkerGeometryJson());
 
             experimenalMarkerMaterialJson = new JSONObject();
             UUID uuidForMarkerMaterial = UUID.randomUUID();
-            experimenalMarkerMaterialJson.put("uuid", uuidForMarkerMaterial.toString());
+            getExperimenalMarkerMaterialJson().put("uuid", uuidForMarkerMaterial.toString());
             String colorString = JSONUtilities.mapColorToRGBA(defaultMarkerColor);
-            experimenalMarkerMaterialJson.put("type", "MeshPhongMaterial");
-            experimenalMarkerMaterialJson.put("shininess", 30);
-            experimenalMarkerMaterialJson.put("transparent", true);
-            experimenalMarkerMaterialJson.put("emissive", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
-            experimenalMarkerMaterialJson.put("specular", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
-            experimenalMarkerMaterialJson.put("side", 2);
-            experimenalMarkerMaterialJson.put("wireframe", false);
-            experimenalMarkerMaterialJson.put("color", colorString);
+            getExperimenalMarkerMaterialJson().put("type", "MeshPhongMaterial");
+            getExperimenalMarkerMaterialJson().put("shininess", 30);
+            getExperimenalMarkerMaterialJson().put("transparent", true);
+            getExperimenalMarkerMaterialJson().put("emissive", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
+            getExperimenalMarkerMaterialJson().put("specular", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
+            getExperimenalMarkerMaterialJson().put("side", 2);
+            getExperimenalMarkerMaterialJson().put("wireframe", false);
+            getExperimenalMarkerMaterialJson().put("color", colorString);
             JSONArray json_materials = (JSONArray) modelVisJson.get("materials");
-            json_materials.add(experimenalMarkerMaterialJson);
+            json_materials.add(getExperimenalMarkerMaterialJson());
         }
         
     }
 
     public void addExperimentalDataObjectsToJson(AbstractList<ExperimentalDataObject> expObjects) {
+        // Make sure this
         createDefaultMotionObjects();
         // create default top Group for motion
         JSONObject topJson = motionObjectsRoot;
@@ -1132,55 +1160,17 @@ public class MotionDisplayer implements SelectionListener {
             topJson.put("children", new JSONArray());
         }
         JSONArray motObjectsChildren = (JSONArray) topJson.get("children");
-        for (ExperimentalDataObject nextExpObect : expObjects) {
-            if (mapComponentToUUID.get(nextExpObect) != null) {
+        for (ExperimentalDataObject nextExpObject : expObjects) {
+            if (mapComponentToUUID.get(nextExpObject)!= null)
                 continue;
-            }
             ArrayList<UUID> comp_uuids = new ArrayList<UUID>();
-            if (nextExpObect instanceof ExperimentalMarker) {
-                // Create Object with proper name, add it to ground, update Map of Object to UUID
-                Map<String, Object> expMarker_json = new LinkedHashMap<String, Object>();
-                UUID mesh_uuid = UUID.randomUUID();
-                expMarker_json.put("uuid", mesh_uuid.toString());
-                expMarker_json.put("type", "Mesh");
-                expMarker_json.put("opensimtype", "ExperimentalMarker");
-                expMarker_json.put("name", nextExpObect.getName());
-                expMarker_json.put("geometry", experimenalMarkerGeometryJson.get("uuid"));
-                expMarker_json.put("material", experimenalMarkerMaterialJson.get("uuid"));
-                JSONArray pos = new JSONArray();
-                for (int i = 0; i < 3; i++) {
-                    pos.add(0.0);
-                }
-                expMarker_json.put("position", pos);
-                expMarker_json.put("castShadow", false);
-                expMarker_json.put("userData", "NonEditable");
-                motObjectsChildren.add(expMarker_json);
-                comp_uuids.add(mesh_uuid);
+            if (nextExpObject instanceof ExperimentalMarker) {
+                motObjectsChildren.add(nextExpObject.createDecorationJson(comp_uuids, this));
             }
-            else if (nextExpObect instanceof MotionObjectPointForce) {
-                Map<String, Object> expForce_json = new LinkedHashMap<String, Object>();
-                UUID forcrep_uuid = UUID.randomUUID();
-                expForce_json.put("uuid", forcrep_uuid.toString());
-                expForce_json.put("type", "ArrowHelper");
-                expForce_json.put("opensimtype", "ExperimentalForce");
-                expForce_json.put("name", nextExpObect.getName());
-                //dir -- direction from origin. Must be a unit vector. 
-                //origin -- Point at which the arrow starts.
-                //length -- length of the arrow. Default is 1.
-                //hex -- hexadecimal value to define color. Default is 0xffff00.
-                //headLength -- The length of the head of the arrow. Default is 0.2 * length.
-                //headWidth -- The length of the width of the arrow. Default is 0.2 * headLength.
-                JSONArray origin = new JSONArray();
-                for (int i = 0; i < 3; i++) {
-                    origin.add(0.0);
-                }
-                expForce_json.put("origin", origin);
-                expForce_json.put("castShadow", false);
-                expForce_json.put("userData", "NonEditable");
-                motObjectsChildren.add(expForce_json);
-                comp_uuids.add(forcrep_uuid);
+            else if (nextExpObject instanceof MotionObjectPointForce) {
+                motObjectsChildren.add(nextExpObject.createDecorationJson(comp_uuids, this));
             }
-            mapComponentToUUID.put(nextExpObect, comp_uuids);
+            mapComponentToUUID.put(nextExpObject, comp_uuids);
         }
     }
     

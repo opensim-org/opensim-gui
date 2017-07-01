@@ -4,6 +4,23 @@
  */
 package org.opensim.view.experimentaldata;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.UUID;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.opensim.modeling.ArrayDecorativeGeometry;
+import org.opensim.modeling.ArrayDouble;
+import org.opensim.modeling.DecorativeArrow;
+import org.opensim.modeling.DecorativeSphere;
+import org.opensim.modeling.ModelDisplayHints;
+import org.opensim.modeling.State;
+import org.opensim.modeling.Transform;
+import org.opensim.modeling.Vec3;
+import org.opensim.threejs.JSONUtilities;
+import org.opensim.view.motions.MotionDisplayer;
+
 /**
  *
  * @author ayman
@@ -42,7 +59,10 @@ public class MotionObjectPointForce extends MotionObjectBodyPoint {
     private String forceComponent = "All";
     private String torqueIdentifier="";
     private boolean specifyTorque=false;
-
+    private Vec3 direction = new Vec3();
+    private Vec3 color = new Vec3();
+    private double length= 1.0;
+    
     public MotionObjectPointForce(ExperimentalDataItemType objectType, String baseName, int forceIndex) {
         super(objectType, baseName, forceIndex);
         setForceIdentifier(baseName);
@@ -149,5 +169,77 @@ public class MotionObjectPointForce extends MotionObjectBodyPoint {
     public void setTorqueIdentifier(String torqueIdentifier) {
         this.torqueIdentifier = torqueIdentifier;
     }
- 
+    
+    public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
+        if (!fixed){
+            Transform xform = new Transform();
+            
+            xform.setP(new Vec3(point[0], point[1], point[2]));
+            appendToThis.push_back(new DecorativeArrow(new Vec3(0, 0, 0)).setBodyId(0).setColor(new Vec3(0., 1., .0)).setOpacity(0.5).setIndexOnBody(getStartIndexInFileNotIncludingTime()).setTransform(xform));            
+        }
+    }
+
+    @Override
+    void updateDecorations(ArrayDouble interpolatedStates) {
+        int idx = getStartIndexInFileNotIncludingTime();
+        setPoint(new double[]{interpolatedStates.get(idx+3), interpolatedStates.get(idx+4), interpolatedStates.get(idx+5)});
+        for (int i=0; i<3; i++) 
+            getDirection().set(i, interpolatedStates.get(idx+i));
+    }
+    // Create JSON object to represent ExperimentalForce
+    @Override
+    public JSONObject createDecorationJson(ArrayList<UUID> comp_uuids, MotionDisplayer motionDisplayer) {
+        // Create Object with proper name, add it to ground, update Map of Object to UUID
+        JSONObject expForce_json = new JSONObject();
+        UUID forcrep_uuid = UUID.randomUUID(); //3f63, acf9
+        expForce_json.put("uuid", forcrep_uuid.toString());
+        expForce_json.put("type", "Arrow");
+        expForce_json.put("opensimtype", "ExperimentalForce");
+        expForce_json.put("name", getName());
+        //dir -- direction from origin. Must be a unit vector. 
+        //origin -- Point at which the arrow starts.
+        //length -- length of the arrow. Default is 1.
+        //hex -- hexadecimal value to define color. Default is 0xffff00.
+        //headLength -- The length of the head of the arrow. Default is 0.2 * length.
+        //headWidth -- The length of the width of the arrow. Default is 0.2 * headLength.
+        JSONArray origin = new JSONArray();
+        for (int i = 0; i < 3; i++) {
+            origin.add(0.0);
+        }
+        expForce_json.put("origin", origin);
+        expForce_json.put("length", 1.0);
+        JSONArray dir = new JSONArray();
+        for (int i = 0; i < 3; i++) {
+            dir.add((i == 1) ? 1.0 : 0.0);
+        }
+        expForce_json.put("dir", dir);
+        expForce_json.put("castShadow", false);
+        expForce_json.put("userData", "NonEditable");
+        expForce_json.put("hex", JSONUtilities.mapColorToRGBA(motionDisplayer.getDefaultForceColorVec3()));
+        expForce_json.put("matrix", JSONUtilities.createMatrixFromTransform(new Transform(), new Vec3(1.), 1.0));
+        comp_uuids.add(forcrep_uuid);
+        return expForce_json;
+    }
+
+    /**
+     * @return the direction
+     */
+    public Vec3 getDirection() {
+        return direction;
+    }
+
+    /**
+     * @return the color
+     */
+    public Vec3 getColor() {
+        return color;
+    }
+
+    /**
+     * @return the length
+     */
+    public double getLength() {
+        return length;
+    }
+
 }
