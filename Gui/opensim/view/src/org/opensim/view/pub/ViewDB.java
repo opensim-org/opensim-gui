@@ -394,7 +394,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                         System.out.println(msg.toJSONString());
                     mapModelsToJsons.remove(dModel);
                     try {
-                       Files.deleteIfExists(modelVisToJsonFilesMap.get(dJson));
+                       if (modelVisToJsonFilesMap.get(dJson)!=null)
+                            Files.deleteIfExists(modelVisToJsonFilesMap.get(dJson));
                     } catch (IOException ex) {
                        Exceptions.printStackTrace(ex);
                     }
