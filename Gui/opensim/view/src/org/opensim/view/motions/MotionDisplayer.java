@@ -1164,12 +1164,7 @@ public class MotionDisplayer implements SelectionListener {
             if (mapComponentToUUID.get(nextExpObject)!= null)
                 continue;
             ArrayList<UUID> comp_uuids = new ArrayList<UUID>();
-            if (nextExpObject instanceof ExperimentalMarker) {
-                motObjectsChildren.add(nextExpObject.createDecorationJson(comp_uuids, this));
-            }
-            else if (nextExpObject instanceof MotionObjectPointForce) {
-                motObjectsChildren.add(nextExpObject.createDecorationJson(comp_uuids, this));
-            }
+            motObjectsChildren.add(nextExpObject.createDecorationJson(comp_uuids, this));
             mapComponentToUUID.put(nextExpObject, comp_uuids);
         }
     }
