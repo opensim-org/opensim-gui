@@ -601,7 +601,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       maxDT.setText(numFormat.format(toolModel.getMaxDT()));
       minDT.setText(numFormat.format(toolModel.getMinDT()));
       errorTolerance.setText(numFormat.format(toolModel.getErrorTolerance()));
-      useSpecifiedDtActionPerformed(null);
+      //useSpecifiedDtActionPerformed(null);
    }
 
    //------------------------------------------------------------------------
