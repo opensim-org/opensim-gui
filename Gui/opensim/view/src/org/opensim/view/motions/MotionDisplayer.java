@@ -214,7 +214,7 @@ public class MotionDisplayer implements SelectionListener {
             } else if (nextObject instanceof MotionObjectPointForce) {
                 double[] point = ((MotionObjectPointForce) nextObject).getPoint();
                 Vec3 dir =  ((MotionObjectPointForce) nextObject).getDirection();
-                //double lengthSqr = Math.pow(dir.get(0),2)+Math.pow(dir.get(1),2)+Math.pow(dir.get(0),2);
+                double lengthSqr = Math.pow(dir.get(0),2)+Math.pow(dir.get(1),2)+Math.pow(dir.get(2),2);
                 UnitVec3 dirNorm = new UnitVec3(dir);
                 xform.setP(new Vec3(point[0], point[1], point[2]));
                 for (int i=0; i<3; i++)
