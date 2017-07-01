@@ -69,7 +69,7 @@ public class ModelVisualizationJson extends JSONObject {
     private static final HashMap<String, Boolean> movableOpensimTypes = new HashMap<String, Boolean>();
     private final ArrayList<MotionDisplayer> motionDisplayers = new ArrayList<MotionDisplayer>();
     private JSONObject modelGroundJson=null;
-    
+    private boolean movable=true;
     static {
         movableOpensimTypes.put("Marker", true);
         movableOpensimTypes.put("PathPoint", true);
@@ -78,6 +78,7 @@ public class ModelVisualizationJson extends JSONObject {
         // implicit super()
         if (verbose)
             System.out.println("start building json for "+model.getName());
+        movable = (model instanceof ModelForExperimentalData);
         createModelJsonNode(); // Model node
         createJsonForModel(model);
         ready = true;
@@ -359,6 +360,7 @@ public class ModelVisualizationJson extends JSONObject {
        JSONObject guiJson = new JSONObject();
         guiJson.put("UUID", modelUUID.toString());  
         guiJson.put("Op", "OpenModel");
+        guiJson.put("use_offset", movable);
         return guiJson;
     }
 
@@ -659,5 +661,12 @@ public class ModelVisualizationJson extends JSONObject {
         JSONObject commandJson = CommandComposerThreejs.createRemoveObjectCommandJson(object2Remove, parent);
         guiJson.put("command", commandJson);
         return guiJson;
+    }
+
+    /**
+     * @return the movable
+     */
+    public boolean isMovable() {
+        return movable;
     }
 }
