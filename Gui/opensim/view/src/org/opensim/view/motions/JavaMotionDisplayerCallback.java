@@ -212,8 +212,8 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
       }
       }
      currentSimTime = getSimulationTime();   
-      /*
-      super.step(s, stepNumber);
+      
+      //super.step(s, stepNumber);
        //context.getCurrentStateRef().setTime(currentSimTime);
       if (kinReporter != null) {    // Callback is the one accumulating results 
           kinReporter.step(s, stepNumber);
@@ -224,10 +224,11 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
       if (!isInitialized()){
          initializeTimer();
       }
+      
       if(isUpdateDisplay()) {
           stopIKTime = getCurrentRealTime(); // Stop timing of ik computations
           startDisplayTime = getCurrentRealTime(); // Start timing of display update
-          updateDisplaySynchronously();
+          //updateDisplaySynchronously();
           
           stopDisplayTime = getCurrentRealTime();  // Stop timing of display update
           minSimTime = currentSimTime+(stopDisplayTime-startDisplayTime)+(stopIKTime-startIKTime);  // Set minimum simulation time for next display update 
@@ -237,7 +238,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
           startIKTime = getCurrentRealTime(); // Start timing of ik computations
           setUpdateDisplay(false);
       }
-      stepNumber++; */
+      stepNumber++;
    }
    
    public void cleanupMotionDisplayer() {
