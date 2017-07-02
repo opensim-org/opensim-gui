@@ -196,7 +196,6 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    public void processStep(State s, int stepNumber) {
       if(!getOn()) return;
       if (!proceed(stepNumber)) return;
-      super.step(s, stepNumber);
       if(progressHandle!=null) {
           if (!progressUsingTime) progressHandle.progress(stepNumber-startStep);
           else {
@@ -212,8 +211,10 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
          }
       }
       }
-      currentSimTime = getSimulationTime();   
-      //context.getCurrentStateRef().setTime(currentSimTime);
+     currentSimTime = getSimulationTime();   
+      /*
+      super.step(s, stepNumber);
+       //context.getCurrentStateRef().setTime(currentSimTime);
       if (kinReporter != null) {    // Callback is the one accumulating results 
           kinReporter.step(s, stepNumber);
       }
@@ -236,7 +237,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
           startIKTime = getCurrentRealTime(); // Start timing of ik computations
           setUpdateDisplay(false);
       }
-      stepNumber++;
+      stepNumber++; */
    }
    
    public void cleanupMotionDisplayer() {

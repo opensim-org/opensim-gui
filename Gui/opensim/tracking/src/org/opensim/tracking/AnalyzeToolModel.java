@@ -115,11 +115,11 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
 
          // Animation callback will update the display during forward
          animationCallback = new JavaMotionDisplayerCallback(getModel(), getOriginalModel(), null, progressHandle, staticOptimizationMode);
-         //getModel().addAnalysis(animationCallback);
-         //animationCallback.setStepInterval(1);
-         //animationCallback.setMinRenderTimeInterval(0.1); // to avoid rendering really frequently which can slow down our execution
-         //animationCallback.startProgressUsingTime(ti,tf);
-         //animationCallback.setDisplayTimeProgress(true);
+         getModel().addAnalysis(animationCallback);
+         animationCallback.setStepInterval(1);
+         animationCallback.setMinRenderTimeInterval(0.1); // to avoid rendering really frequently which can slow down our execution
+         animationCallback.startProgressUsingTime(ti,tf);
+         animationCallback.setDisplayTimeProgress(true);
          
          // Do this manouver (there's gotta be a nicer way) to create the object so that C++ owns it and not Java (since 
          // removeIntegCallback in finished() will cause the C++-side callback to be deleted, and if Java owned this object
@@ -159,7 +159,7 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
          progressHandle.finish();
 
          // Clean up motion displayer (this is necessary!)
-         //animationCallback.cleanupMotionDisplayer();
+         animationCallback.cleanupMotionDisplayer();
 
          Storage motion = null;
          if(analyzeTool().getStatesStorage()!=null) {
@@ -176,7 +176,7 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
             OpenSimDB.getInstance().getContext(getOriginalModel()), storage);
             motionDisplayer.setMuscleColoringFunction(mcbya);
          } 
-         //getModel().removeAnalysis(animationCallback, false);
+         getModel().removeAnalysis(animationCallback, false);
          getModel().removeAnalysis(interruptingCallback, false);
          interruptingCallback = null;
 
