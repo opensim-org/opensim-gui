@@ -114,7 +114,7 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
                               });
 
          // Animation callback will update the display during forward
-         //animationCallback = new JavaMotionDisplayerCallback(getModel(), getOriginalModel(), null, progressHandle, staticOptimizationMode);
+         animationCallback = new JavaMotionDisplayerCallback(getModel(), getOriginalModel(), null, progressHandle, staticOptimizationMode);
          //getModel().addAnalysis(animationCallback);
          //animationCallback.setStepInterval(1);
          //animationCallback.setMinRenderTimeInterval(0.1); // to avoid rendering really frequently which can slow down our execution
