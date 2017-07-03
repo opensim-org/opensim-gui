@@ -24,9 +24,11 @@ import org.opensim.modeling.Component;
 import org.opensim.modeling.ComponentIterator;
 import org.opensim.modeling.ComponentsList;
 import org.opensim.modeling.DecorativeGeometry;
+import org.opensim.modeling.FrameGeometry;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
+import org.opensim.modeling.Muscle;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.PathPointSet;
@@ -35,6 +37,7 @@ import org.opensim.modeling.State;
 import org.opensim.modeling.Transform;
 import org.opensim.modeling.Vec3;
 import org.opensim.modeling.WrapObject;
+import org.opensim.view.MuscleColoringFunction;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.view.motions.MotionDisplayer;
 
@@ -68,6 +71,7 @@ public class ModelVisualizationJson extends JSONObject {
     private static final HashMap<String, Boolean> movableOpensimTypes = new HashMap<String, Boolean>();
     private final ArrayList<MotionDisplayer> motionDisplayers = new ArrayList<MotionDisplayer>();
     private JSONObject modelGroundJson=null;
+    private MuscleColoringFunction mcf = null;
     
     static {
         movableOpensimTypes.put("Marker", true);
@@ -185,17 +189,29 @@ public class ModelVisualizationJson extends JSONObject {
                 geomId = geomId.concat(GEOMETRY_SEP+String.valueOf(dg.getIndexOnBody()));
             UUID uuid = UUID.randomUUID();
             mapDecorativeGeometryToUUID.put(geomId, uuid);
-            dgimp.setGeomID(uuid);
-            // If partialWrapObject set value in dgimp 
+            // FrameGeometry is not a "Mesh" but rather an Object that has both
+            // Geometry and Material embedded, will treat as special here and add
+            // directly to scene graph.
+            if (FrameGeometry.safeDownCast(comp)!=null){
+                JSONObject bodyJson = mapBodyIndicesToJson.get(dg.getBodyId());
+                if (bodyJson.get("children")==null)
+                    bodyJson.put("children", new JSONArray());
+                 UUID uuid_frame = createFrameObjectJSON(dg, FrameGeometry.safeDownCast(comp));
+                 vis_uuidList.add(uuid_frame);
+                 mapUUIDToComponent.put(uuid_frame, comp);              
+            }
+            else {
+                // If partialWrapObject set value in dgimp 
+                dgimp.setGeomID(uuid);
+                dg.implementGeometry(dgimp);
+                JSONObject bodyJson = mapBodyIndicesToJson.get(dg.getBodyId());
+                if (bodyJson.get("children")==null)
+                    bodyJson.put("children", new JSONArray());
+                UUID uuid_mesh = addtoFrameJsonObject(dg, geomId, uuid, dgimp.getMat_uuid(), (JSONArray)bodyJson.get("children"), comp);
+                vis_uuidList.add(uuid_mesh);
 
-            dg.implementGeometry(dgimp);
-            JSONObject bodyJson = mapBodyIndicesToJson.get(dg.getBodyId());
-            if (bodyJson.get("children")==null)
-                bodyJson.put("children", new JSONArray());
-            UUID uuid_mesh = addtoFrameJsonObject(dg, geomId, uuid, dgimp.getMat_uuid(), (JSONArray)bodyJson.get("children"), comp);
-            vis_uuidList.add(uuid_mesh);
-            
-            mapUUIDToComponent.put(uuid_mesh, comp);
+                mapUUIDToComponent.put(uuid_mesh, comp);
+            }
         }
         if (partialWrapObject)
             dgimp.setQuadrants("");
@@ -254,7 +270,13 @@ public class ModelVisualizationJson extends JSONObject {
     }
     
     public OpenSimObject findObjectForUUID(String uuidString) {
-        return mapUUIDToComponent.get(UUID.fromString(uuidString));
+        OpenSimObject obj = mapUUIDToComponent.get(UUID.fromString(uuidString));
+        if (obj != null) return obj;
+        for (MotionDisplayer motDisplayer:motionDisplayers){
+            obj = motDisplayer.findObjectForUUID(uuidString);
+            if (obj != null) return obj;
+        }
+        return obj;
     }
 
     public ArrayList<UUID> findUUIDForObject(OpenSimObject obj) {
@@ -296,6 +318,15 @@ public class ModelVisualizationJson extends JSONObject {
                 JSONObject pathUpdate_json = new JSONObject();
                 pathUpdate_json.put("uuid", pathUUID.toString());
                 Vec3 pathColor = colorByState ? geomPathObject.getColor(state) : geomPathObject.getDefaultColor();
+                if (mcf != null){
+                    Muscle ownerMuscle = Muscle.safeDownCast(geomPathObject.getOwner());
+                    if (ownerMuscle!=null){
+                        double colorZeroToOne = mcf.getColor(ownerMuscle);
+                        pathColor.set(0, colorZeroToOne);
+                        pathColor.set(1, 0.0);
+                        pathColor.set(2, 1.0-colorZeroToOne);
+                    }
+                }
                 if (verbose)
                     System.out.println("Color:"+geomPathObject.getOwner().getName()+"="+pathColor.toString());
                 String colorString = JSONUtilities.mapColorToRGBA(pathColor);
@@ -556,7 +587,7 @@ public class ModelVisualizationJson extends JSONObject {
     
     public JSONObject createAddObjectCommand(JSONObject newObject) {
         JSONObject guiJson = new JSONObject();
-        guiJson.put("Op", "execute");
+        guiJson.put("Op", "addModelObject");
         JSONObject commandJson = CommandComposerThreejs.createAddObjectCommandJson(newObject);
         guiJson.put("command", commandJson);
         return guiJson;
@@ -612,10 +643,37 @@ public class ModelVisualizationJson extends JSONObject {
         }
     }
 
+    private UUID createFrameObjectJSON(DecorativeGeometry dg, FrameGeometry frameObject) {
+        Map<String, Object> frame_json = new LinkedHashMap<String, Object>();
+        UUID uuidForFrameGeometry = UUID.randomUUID();
+        frame_json.put("uuid", uuidForFrameGeometry.toString());
+        frame_json.put("type", "Frame");
+        frame_json.put("size", visScaleFactor);
+        frame_json.put("name", frameObject.getAbsolutePathName());
+        frame_json.put("matrix", JSONUtilities.createMatrixFromTransform(new Transform(), frameObject.get_scale_factors(), visScaleFactor));
+        // insert frame_json as child of BodyObject based on dg.getBodyId
+        JSONObject bodyJson = mapBodyIndicesToJson.get(dg.getBodyId());
+        if (bodyJson.get("children")==null)
+            bodyJson.put("children", new JSONArray());
+        ((JSONArray)bodyJson.get("children")).add(frame_json);
+        return uuidForFrameGeometry;
+    }
     /**
      * @return the modelGroundJson
      */
     public JSONObject getModelGroundJson() {
         return modelGroundJson;
+    }
+
+    public JSONObject createRemoveObjectCommand(JSONObject object2Remove, String parent) {
+        JSONObject guiJson = new JSONObject();
+        guiJson.put("Op", "execute");
+        JSONObject commandJson = CommandComposerThreejs.createRemoveObjectCommandJson(object2Remove, parent);
+        guiJson.put("command", commandJson);
+        return guiJson;
+    }
+
+    public void setMuscleColoringFunction(MuscleColoringFunction mcf) {
+        this.mcf = mcf;
     }
 }

@@ -188,7 +188,7 @@ public class MotionDisplayer implements SelectionListener {
             SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
             vis.setMuscleColoringFunction(mcf);
         }
-        
+        ViewDB.getInstance().getModelVisualizationJson(model).setMuscleColoringFunction(mcf);
     }
 
     public void addMotionObjectsToFrame(JSONArray transforms_json) {
@@ -218,16 +218,16 @@ public class MotionDisplayer implements SelectionListener {
     }
 
     public void createMotionObjectsVisuals() {
-        JSONObject gnd = modelVisJson.getModelGroundJson();
         // Create aan objects under gnd/children to serve as top node for motion objects
         // all will be in ground frame.
         if (motionObjectsRoot==null) {
             motionObjectsRoot = new JSONObject();
-            motionObjectsRoot.put("parent", gnd.get("uuid"));
+            motionObjectsRoot.put("parent", modelVisJson.getModelUUID().toString());
             motionObjectsRoot.put("uuid", UUID.randomUUID().toString());
             motionObjectsRoot.put("type", "Group");
             motionObjectsRoot.put("opensimType", "MotionObjects");
             motionObjectsRoot.put("name", simmMotionData.getName().concat("_Objects"));
+            motionObjectsRoot.put("userData", "NonEditable");
             motionObjectsRoot.put("children", new JSONArray());
             motionObjectsRoot.put("matrix", JSONUtilities.createMatrixFromTransform(new Transform(), new Vec3(1.), 1.0));
 
@@ -932,6 +932,15 @@ public class MotionDisplayer implements SelectionListener {
             }
             setMuscleColoringFunction(null);
         }
+        if (motionObjectsRoot!=null) {
+            ViewDB.getInstance().RemoveVisualizerObject(motionObjectsRoot, 
+                    modelVisJson.getModelUUID().toString());
+        }
+        // Recursively cleanup
+        ArrayList<MotionDisplayer> associatedDisplayers = getAssociatedMotions();
+        for (MotionDisplayer assoc:associatedDisplayers){
+            assoc.cleanupDisplay();
+        }
     }
 
    public Storage getSimmMotionData() {
@@ -1120,6 +1129,8 @@ public class MotionDisplayer implements SelectionListener {
         // create default top Group for motion
         
         for (ExperimentalDataObject nextExMarker : expMarkers) {
+            if (mapComponentToUUID.get(nextExMarker)!= null)
+                continue;
             // Create Object with proper name, add it to ground, update Map of Object to UUID
             Map<String, Object> expMarker_json = new LinkedHashMap<String, Object>();
             UUID mesh_uuid = UUID.randomUUID();
