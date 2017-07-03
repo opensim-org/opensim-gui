@@ -214,14 +214,14 @@ public class MotionDisplayer implements SelectionListener {
             } else if (nextObject instanceof MotionObjectPointForce) {
                 double[] point = ((MotionObjectPointForce) nextObject).getPoint();
                 Vec3 dir =  ((MotionObjectPointForce) nextObject).getDirection();
-                double lengthSqr = Math.pow(dir.get(0),2)+Math.pow(dir.get(1),2)+Math.pow(dir.get(2),2);
+                double length = Math.sqrt(Math.pow(dir.get(0),2)+Math.pow(dir.get(1),2)+Math.pow(dir.get(2),2))/1000;
                 UnitVec3 dirNorm = new UnitVec3(dir);
                 xform.setP(new Vec3(point[0], point[1], point[2]));
                 for (int i=0; i<3; i++)
                     xform.R().set(i, 1, dirNorm.get(i));
                 motionObjectTransform.put("uuid", nextObject.getDataObjectUUID().toString());
                 motionObjectTransform.put("matrix",
-                        JSONUtilities.createMatrixFromTransform(xform, unitScale, modelVisJson.getVisScaleFactor()));
+                        JSONUtilities.createMatrixFromTransform(xform, new Vec3(1, length ,1), modelVisJson.getVisScaleFactor()));
                 transforms_json.add(motionObjectTransform);
             }
         }
