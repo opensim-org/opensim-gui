@@ -60,6 +60,9 @@ import org.opensim.modeling.Ground;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.Muscle;
+import org.opensim.modeling.MuscleIterator;
+import org.opensim.modeling.MuscleList;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PhysicalFrame;
@@ -193,8 +196,28 @@ public class MotionDisplayer implements SelectionListener {
         
     }
 
-    public void addMotionObjectsToFrame(JSONArray transforms_json) {
-         if (!(simmMotionData instanceof AnnotatedMotion)) 
+    public void addMotionObjectsToFrame(JSONArray transforms_json, JSONArray paths_json) {
+       if (mcf!=null){
+            // Cycle through the muscles in the model, get their color and either add
+            // to json, or replace if already in paths_json
+            MuscleList mList = model.getMuscleList();
+            MuscleIterator mIter = mList.begin();
+            while (!mIter.equals(mList.end())) {
+                Muscle msl = mIter.__deref__();
+                double newColorInBlueToRed = mcf.getColor(msl);
+                Vec3 pathColor = new Vec3(newColorInBlueToRed, 0, 1-newColorInBlueToRed);
+                ArrayList<UUID>  uuids = modelVisJson.findUUIDForObject(msl);
+                if (uuids != null && uuids.size()==1){
+                    UUID pathUUID = uuids.get(0);
+                    JSONObject pathUpdate_json = new JSONObject();
+                    pathUpdate_json.put("uuid", pathUUID.toString());
+                    pathUpdate_json.put("color", JSONUtilities.mapColorToRGBA(pathColor));
+                    paths_json.add(pathUpdate_json);   
+                }
+                mIter.next();
+            }
+        }
+        if (!(simmMotionData instanceof AnnotatedMotion)) 
             return;
         AnnotatedMotion mot = (AnnotatedMotion)simmMotionData;
         Vector<ExperimentalDataObject> objects=mot.getClassified();        
@@ -225,7 +248,7 @@ public class MotionDisplayer implements SelectionListener {
                 transforms_json.add(motionObjectTransform);
             }
         }
-    }
+     }
 
     public boolean hasMotionObjects() {
         return (simmMotionData instanceof AnnotatedMotion);
@@ -963,6 +986,7 @@ public class MotionDisplayer implements SelectionListener {
             ViewDB.getInstance().RemoveVisualizerObject(motionObjectsRoot, 
                     modelVisJson.getModelUUID().toString());
         }
+        mcf = null;
         // Recursively cleanup
         ArrayList<MotionDisplayer> associatedDisplayers = getAssociatedMotions();
         for (MotionDisplayer assoc:associatedDisplayers){

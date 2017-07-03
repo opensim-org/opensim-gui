@@ -324,7 +324,7 @@ public class ModelVisualizationJson extends JSONObject {
             }
             // Process motion displayers
             for (MotionDisplayer nextMotionDisplayer: motionDisplayers){
-                nextMotionDisplayer.addMotionObjectsToFrame(bodyTransforms_json);
+                nextMotionDisplayer.addMotionObjectsToFrame(bodyTransforms_json, geompaths_json);
             }
         }
         return msg;
