@@ -115,7 +115,7 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
 
          // Animation callback will update the display during forward
          animationCallback = new JavaMotionDisplayerCallback(getModel(), getOriginalModel(), null, progressHandle, staticOptimizationMode);
-         getModel().addAnalysis(animationCallback);
+         //getModel().addAnalysis(animationCallback);
          animationCallback.setStepInterval(1);
          animationCallback.setMinRenderTimeInterval(0.1); // to avoid rendering really frequently which can slow down our execution
          animationCallback.startProgressUsingTime(ti,tf);
@@ -159,7 +159,7 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
          progressHandle.finish();
 
          // Clean up motion displayer (this is necessary!)
-         animationCallback.cleanupMotionDisplayer();
+         //animationCallback.cleanupMotionDisplayer();
 
          Storage motion = null;
          if(analyzeTool().getStatesStorage()!=null) {
@@ -176,7 +176,7 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
             OpenSimDB.getInstance().getContext(getOriginalModel()), storage);
             motionDisplayer.setMuscleColoringFunction(mcbya);
          } 
-         getModel().removeAnalysis(animationCallback, false);
+         //getModel().removeAnalysis(animationCallback, false);
          getModel().removeAnalysis(interruptingCallback, false);
          interruptingCallback = null;
 

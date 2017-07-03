@@ -125,7 +125,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
       context = OpenSimDB.getInstance().getContext(aModelForDisplay);
       this.staticOptimization = staticOptimization;
       if (!staticOptimization)
-      this.setCoordinatesOnly(true);
+        this.setCoordinatesOnly(true);
       if(aStorage!=null) {
          this.storage = aStorage;
       }
@@ -213,7 +213,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
       }
      currentSimTime = getSimulationTime();   
       
-      //super.step(s, stepNumber);
+      super.step(s, stepNumber);
        //context.getCurrentStateRef().setTime(currentSimTime);
       if (kinReporter != null) {    // Callback is the one accumulating results 
           kinReporter.step(s, stepNumber);
@@ -228,7 +228,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
       if(isUpdateDisplay()) {
           stopIKTime = getCurrentRealTime(); // Stop timing of ik computations
           startDisplayTime = getCurrentRealTime(); // Start timing of display update
-          //updateDisplaySynchronously();
+          updateDisplaySynchronously();
           
           stopDisplayTime = getCurrentRealTime();  // Stop timing of display update
           minSimTime = currentSimTime+(stopDisplayTime-startDisplayTime)+(stopIKTime-startIKTime);  // Set minimum simulation time for next display update 
