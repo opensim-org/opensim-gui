@@ -60,7 +60,7 @@ public final class MotionCustomColorByAction extends CallableSystemAction {
                return;
             }
             Model mdl = node.getModelForNode();
-            MotionDisplayer motionDisplayer = new MotionDisplayer(storage, mdl);
+            MotionDisplayer motionDisplayer = MotionsDB.getInstance().getDisplayerForMotion(motion);
             MuscleColoringFunction mcbya = new MuscleColorByActivationStorage(
                     OpenSimDB.getInstance().getContext(mdl), storage);
             motionDisplayer.setMuscleColoringFunction(mcbya);
