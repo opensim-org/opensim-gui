@@ -2,3 +2,14 @@
 	path = OpenSimAPI
 	url = https://github.com/opensim-org/opensim-core.git
 	branch = master
+[submodule "opensim-models"]
+	path = opensim-models
+	url = https://github.com/opensim-org/opensim-models
+[submodule "opensim-visualizer"]
+	path = opensim-visualizer
+	url = https://github.com/opensim-org/opensim-visualizer
+	branch = opensim-gui
+[submodule "Gui/opensim/threejs"]
+	path = Gui/opensim/threejs
+	url = https://github.com/opensim-org/three.js
+	branch = tweak_default_scene
