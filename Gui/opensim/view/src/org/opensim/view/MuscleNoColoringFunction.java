@@ -19,7 +19,7 @@ public class MuscleNoColoringFunction extends MuscleColoringFunction{
         dContext = context;
     }
     @Override
-    double getColor(Muscle msl){
+    public double getColor(Muscle msl){
         double color = 1.0;
         return color;
     }
