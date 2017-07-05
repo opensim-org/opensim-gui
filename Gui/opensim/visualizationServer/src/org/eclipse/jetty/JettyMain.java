@@ -30,6 +30,10 @@ public class JettyMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        startServer();
+    }
+
+    public static void startServer() {
         try {
             if (!serverup){
                 // TODO code application logic here
