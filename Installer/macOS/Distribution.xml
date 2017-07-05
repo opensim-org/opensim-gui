@@ -10,6 +10,7 @@
     <domains enable_anywhere="true" enable_currentUserHome="true" enable_localSystem="true" />
     <welcome file="welcome.txt" mime-type="text/plain" />
     <license file="license.txt" mime-type="text/plain" />
+    <conclusion file="conclusion.txt" mime-type="text/plain" />
     <options customize="never" require-scripts="false"/>
     <choices-outline>
         <line choice="default">
