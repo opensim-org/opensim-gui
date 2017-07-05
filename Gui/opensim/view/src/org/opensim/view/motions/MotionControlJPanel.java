@@ -369,7 +369,6 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         jWrapToggleButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jWrapToggleButton.setMaximumSize(new java.awt.Dimension(24, 42));
         jWrapToggleButton.setMinimumSize(new java.awt.Dimension(24, 42));
-        jWrapToggleButton.setOpaque(true);
         jWrapToggleButton.setPreferredSize(new java.awt.Dimension(24, 42));
         jWrapToggleButton.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/org/opensim/view/motions/images/wrap_beveled_selected.png"))); // NOI18N
         jWrapToggleButton.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/org/opensim/view/motions/images/wrap_beveled_rollover.png"))); // NOI18N
@@ -391,7 +390,6 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         jStartTimeTextField.setFocusable(false);
         jStartTimeTextField.setMaximumSize(new java.awt.Dimension(50, 16));
         jStartTimeTextField.setMinimumSize(new java.awt.Dimension(50, 16));
-        jStartTimeTextField.setOpaque(false);
         jStartTimeTextField.setPreferredSize(new java.awt.Dimension(50, 16));
 
         jEndTimeTextField.setBackground(new java.awt.Color(224, 223, 227));
@@ -404,7 +402,6 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         jEndTimeTextField.setFocusable(false);
         jEndTimeTextField.setMaximumSize(new java.awt.Dimension(50, 16));
         jEndTimeTextField.setMinimumSize(new java.awt.Dimension(50, 16));
-        jEndTimeTextField.setOpaque(false);
         jEndTimeTextField.setPreferredSize(new java.awt.Dimension(50, 16));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -455,7 +452,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
                             .add(org.jdesktop.layout.GroupLayout.LEADING, layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                 .add(jTimeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .add(jLabelForTimeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, jMotionSlider, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, jMotionSlider, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .add(0, 0, 0)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
