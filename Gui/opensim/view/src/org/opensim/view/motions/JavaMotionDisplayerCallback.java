@@ -52,7 +52,8 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    private Storage storage = null;
    MotionDisplayer motionDisplayer = null;
    ProgressHandle progressHandle = null;
-
+   Kinematics kinReporter = null;
+   StatesReporter statesReporter = null;
    boolean progressUsingTime = true;
    double startTime = 0.;
    double endTime = 1.;
@@ -74,7 +75,6 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    boolean ownsStorage=false;
    int numStates=0;
    ArrayStr stateLabels=null;
-   private Vector statesBuffer;
    private boolean displayTimeProgress=false;
    private boolean coordinatesOnly=false;
    private boolean staticOptimization = false;
@@ -92,7 +92,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
          this.storage = aStorage;
       }
       else 
-            createResultStorage();
+         createResultStorage();
       
       motionDisplayer = new MotionDisplayer(getStorage(), getModelForDisplay());
       this.progressHandle = progressHandle;
@@ -100,22 +100,22 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    }
 
     private void createResultStorage() {
-        storage = new Storage();
-        getStorage().setName("Results");
-        stateLabels = new ArrayStr();
-        if (isCoordinatesOnly()){
-            get_model().getCoordinateSet().getNames(stateLabels);
+        
+        
+         if (isCoordinatesOnly()){
+            kinReporter = new Kinematics(get_model());
+            kinReporter.setInDegrees(false);
+            kinReporter.begin(context.getCurrentStateRef());
+            storage = kinReporter.getPositionStorage();
         }
         else {
-        stateLabels = getModelForDisplay().getStateVariableNames();
-            
+            statesReporter = new StatesReporter(get_model());
+            statesReporter.setInDegrees(false);
+            statesReporter.begin(context.getCurrentStateRef());
+            storage = statesReporter.getStatesStorage();
         }
-        stateLabels.insert(0, "time");
-        getStorage().setColumnLabels(stateLabels);
-        numStates = isCoordinatesOnly()?getModelForDisplay().getNumCoordinates(): getModelForDisplay().getNumStateVariables();
-        statesBuffer = new Vector();
-        statesBuffer.resize(numStates);
-        // Create map int->int from Y vector to statesBuffer
+        getStorage().setName("Results");
+       // Create map int->int from Y vector to statesBuffer
         ownsStorage=true;
     }
    
@@ -124,6 +124,8 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
       modelForDisplay=aModelForDisplay;
       context = OpenSimDB.getInstance().getContext(aModelForDisplay);
       this.staticOptimization = staticOptimization;
+      if (!staticOptimization)
+        this.setCoordinatesOnly(true);
       if(aStorage!=null) {
          this.storage = aStorage;
       }
@@ -138,11 +140,15 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    public void setMinRenderTimeInterval(double interval) { minRenderTimeInterval = interval; }
 
    public void setRenderMuscleActivations(boolean render) {
-      if(getModelForDisplayCompatibleStates()) {
-        SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(getModelForDisplay());
-        if(vis!=null) vis.setApplyMuscleColors(render);
-   }
-   }
+        if (getModelForDisplayCompatibleStates()) {
+            if (ViewDB.isVtkGraphicsAvailable()) {
+                SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(getModelForDisplay());
+                if (vis != null) {
+                    vis.setApplyMuscleColors(render);
+                }
+            }
+        }
+    }
 
    public void startProgressUsingTime(double startTime, double endTime) {
       progressUsingTime = true;
@@ -190,7 +196,6 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    public void processStep(State s, int stepNumber) {
       if(!getOn()) return;
       if (!proceed(stepNumber)) return;
-      super.step(s, stepNumber);
       if(progressHandle!=null) {
           if (!progressUsingTime) progressHandle.progress(stepNumber-startStep);
           else {
@@ -206,40 +211,20 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
          }
       }
       }
-      currentSimTime = getSimulationTime();   
-      context.getCurrentStateRef().setTime(currentSimTime);
-      if (ownsStorage) {    // Callback is the one accumulating results //ASSERTS downlstream 0327
-          // Need to make sure nextResult is not Freed by gc
-          StateVector nextResult = new StateVector();
-          if (isCoordinatesOnly()){
-              CoordinateSet cs = get_model().getCoordinateSet();
-              nextResult.setTime(currentSimTime);
-              for(int i=0; i< cs.getSize(); i++){
-                  nextResult.getData().append(cs.get(i).getValue(s));
-              }
-              getStorage().append(nextResult);
-          }
-          else {
-              for(int i=0; i< numStates; i++)
-                 statesBuffer.set(i, modelForDisplay.getStateVariableValue(s, stateLabels.get(i+1)));
-          
-              /* FIX40
-              if (staticOptimization){
-                  StateVector sv = activationStorage.getLastStateVector();
-                  ArrayDouble actData = sv.getData();
-                  for (Integer actKey:mapActivationIndex2State.keySet()){
-                      int stateIdx = mapActivationIndex2State.get(actKey);
-                      statesBuffer[stateIdx] = actData.get(actKey.intValue());
-                  }
-              }*/
-          //System.out.println("Simulation time="+currentSimTime+" state[0]="+statesBuffer[0]);
-          nextResult.setStates(currentSimTime, statesBuffer);
-          }
-          getStorage().append(nextResult);
+     currentSimTime = getSimulationTime();   
+      
+      super.step(s, stepNumber);
+       //context.getCurrentStateRef().setTime(currentSimTime);
+      if (kinReporter != null) {    // Callback is the one accumulating results 
+          kinReporter.step(s, stepNumber);
+      }
+      else if (statesReporter!=null){
+          statesReporter.step(s, stepNumber);
       }
       if (!isInitialized()){
          initializeTimer();
       }
+      
       if(isUpdateDisplay()) {
           stopIKTime = getCurrentRealTime(); // Stop timing of ik computations
           startDisplayTime = getCurrentRealTime(); // Start timing of display update
@@ -307,10 +292,6 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
         return retValue;
     }
 
-    private double getCurrentTime() {
-        return context.getTime();
-    }
-
     public Storage getStateStorage() {
         return getStorage();
     }
@@ -359,5 +340,9 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
      */
     public void setActivationStorage(Storage activationStorage) {
         this.activationStorage = activationStorage;
+    }
+   @Override
+    public int end(State s) {
+        return  super.end(s);
     }
 }

@@ -3,12 +3,13 @@ SET(OPENSIM_INSTALL_PACKAGE_BUILD OFF CACHE BOOL "Build an installer (to post on
 # build zip distribution
 # extract all from zip under Gui/opensim/dist
 # icons modified and etc files changed
-if(${PLATFORM_ABI} MATCHES "x64")
-	INSTALL_FILES(/bin/ FILES opensim/dist/opensim/opensim/bin/opensim64.exe)
-ELSE()
-	INSTALL_FILES(/bin/ FILES opensim/dist/opensim/opensim/bin/opensim.exe)
-ENDIF()
-
+if (WIN32)
+    if(${PLATFORM_ABI} MATCHES "x64")
+            INSTALL_FILES(/bin/ FILES opensim/dist/opensim/opensim/bin/opensim64.exe)
+    ELSE()
+            INSTALL_FILES(/bin/ FILES opensim/dist/opensim/opensim/bin/opensim.exe)
+    ENDIF()
+endif()
 # etc
 INSTALL(DIRECTORY opensim/dist/opensim/opensim/etc/ DESTINATION etc)
 # Scripts

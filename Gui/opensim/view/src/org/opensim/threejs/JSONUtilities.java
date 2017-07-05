@@ -40,14 +40,21 @@ public class JSONUtilities {
         return topLevelJson;
     }
     
-    static String mapColorToRGBA(Vec3 color) {
+    public static String mapColorToRGBA(Vec3 color) {
         int r = (int) (color.get(0) * 255);
         int g = (int) (color.get(1) * 255);
         int b = (int) (color.get(2) * 255);
         long colorAsInt = r << 16 | g << 8 | b;
         return String.valueOf(colorAsInt);
     }
-    
+     public static String mapColorToHex(Vec3 color) {
+        int r = (int) (color.get(0) * 255);
+        int g = (int) (color.get(1) * 255);
+        int b = (int) (color.get(2) * 255);
+        long colorAsInt = r << 16 | g << 8 | b;
+        return String.format("#%06X", (0xFFFFFF & colorAsInt));
+    }
+   
     static String stringifyVec3(Vec3 vec3) {
         String rawPrintString = vec3.toString();
         return rawPrintString.substring(1);

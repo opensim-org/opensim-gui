@@ -35,11 +35,15 @@
 package org.opensim.view.motions;
 
 import java.awt.Color;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.UUID;
 import java.util.Vector;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -56,7 +60,9 @@ import org.opensim.modeling.Ground;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
-import org.opensim.modeling.ModelDisplayHints;
+import org.opensim.modeling.Muscle;
+import org.opensim.modeling.MuscleIterator;
+import org.opensim.modeling.MuscleList;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PhysicalFrame;
@@ -65,6 +71,7 @@ import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Storage;
 import org.opensim.modeling.Transform;
 import org.opensim.modeling.TransformAxis;
+import org.opensim.modeling.UnitVec3;
 import org.opensim.modeling.Vec3;
 import org.opensim.threejs.JSONUtilities;
 import org.opensim.threejs.ModelVisualizationJson;
@@ -104,8 +111,17 @@ public class MotionDisplayer implements SelectionListener {
 
     double[] defaultExperimentalMarkerColor = new double[]{0.0, 0.35, 0.65};
     private double[] defaultForceColor = new double[]{0., 1.0, 0.};
+    private Vec3 defaultForceColorVec3 = new Vec3(0., 1.0, 0.);
     private MuscleColoringFunction mcf=null;
-
+    // Create JSONs for geometry and material and use them for all objects of this type so that they all change together
+    private JSONObject experimenalMarkerGeometryJson=null;
+    private JSONObject experimenalMarkerMaterialJson=null;
+    private Vec3 defaultMarkerColor = new Vec3(0., 0., 1.);
+    private ModelVisualizationJson modelVisJson=null;
+    JSONObject motionObjectsRoot=null;
+    private final HashMap<UUID, Component> mapUUIDToComponent = new HashMap<UUID, Component>();
+    private final HashMap<OpenSimObject, ArrayList<UUID>> mapComponentToUUID = 
+            new HashMap<OpenSimObject, ArrayList<UUID>>();
 
      /**
      * @return the associatedMotions
@@ -180,26 +196,113 @@ public class MotionDisplayer implements SelectionListener {
         
     }
 
-    public void addMotionObjectsToFrame(JSONArray transforms_json, ModelVisualizationJson modelJson) {
+    public void addMotionObjectsToFrame(JSONArray transforms_json, JSONArray paths_json) {
+       if (mcf!=null){
+            // Cycle through the muscles in the model, get their color and either add
+            // to json, or replace if already in paths_json
+            MuscleList mList = model.getMuscleList();
+            MuscleIterator mIter = mList.begin();
+            while (!mIter.equals(mList.end())) {
+                Muscle msl = mIter.__deref__();
+                double newColorInBlueToRed = mcf.getColor(msl);
+                Vec3 pathColor = new Vec3(newColorInBlueToRed, 0, 1-newColorInBlueToRed);
+                ArrayList<UUID>  uuids = modelVisJson.findUUIDForObject(msl);
+                if (uuids != null && uuids.size()==1){
+                    UUID pathUUID = uuids.get(0);
+                    JSONObject pathUpdate_json = new JSONObject();
+                    pathUpdate_json.put("uuid", pathUUID.toString());
+                    pathUpdate_json.put("color", JSONUtilities.mapColorToRGBA(pathColor));
+                    paths_json.add(pathUpdate_json);   
+                }
+                mIter.next();
+            }
+        }
         if (!(simmMotionData instanceof AnnotatedMotion)) 
             return;
         AnnotatedMotion mot = (AnnotatedMotion)simmMotionData;
         Vector<ExperimentalDataObject> objects=mot.getClassified();        
         Vec3 unitScale = new Vec3(1., 1., 1.);
         for (ExperimentalDataObject nextObject : objects) {
-             if (!nextObject.isDisplayed()) 
-                 continue;
-             JSONObject motionObjectTransform = new JSONObject();
-             Transform xform = new Transform();
-             if (nextObject instanceof ExperimentalMarker){
-                 double[] point = ((ExperimentalMarker) nextObject).getPoint();
+            //if (!nextObject.isDisplayed()) 
+            //    continue;
+            JSONObject motionObjectTransform = new JSONObject();
+            Transform xform = new Transform();
+            if (nextObject instanceof ExperimentalMarker) {
+                double[] point = ((ExperimentalMarker) nextObject).getPoint();
                 xform.setP(new Vec3(point[0], point[1], point[2]));
-             }
-             motionObjectTransform.put("uuid", nextObject.getDataObjectUUID().toString());
-             motionObjectTransform.put("matrix", 
-                     JSONUtilities.createMatrixFromTransform(xform, unitScale, modelJson.getVisScaleFactor()));
-             transforms_json.add(motionObjectTransform);
-         }
+                motionObjectTransform.put("uuid", nextObject.getDataObjectUUID().toString());
+                motionObjectTransform.put("matrix",
+                        JSONUtilities.createMatrixFromTransform(xform, unitScale, modelVisJson.getVisScaleFactor()));
+                transforms_json.add(motionObjectTransform);
+            } else if (nextObject instanceof MotionObjectPointForce) {
+                double[] point = ((MotionObjectPointForce) nextObject).getPoint();
+                Vec3 dir =  ((MotionObjectPointForce) nextObject).getDirection();
+                double length = Math.sqrt(Math.pow(dir.get(0),2)+Math.pow(dir.get(1),2)+Math.pow(dir.get(2),2))/1000;
+                UnitVec3 dirNorm = new UnitVec3(dir);
+                xform.setP(new Vec3(point[0], point[1], point[2]));
+                for (int i=0; i<3; i++)
+                    xform.R().set(i, 1, dirNorm.get(i));
+                motionObjectTransform.put("uuid", nextObject.getDataObjectUUID().toString());
+                motionObjectTransform.put("matrix",
+                        JSONUtilities.createMatrixFromTransform(xform, new Vec3(1, length ,1), modelVisJson.getVisScaleFactor()));
+                transforms_json.add(motionObjectTransform);
+            }
+        }
+     }
+
+    public boolean hasMotionObjects() {
+        return (simmMotionData instanceof AnnotatedMotion);
+    }
+
+    public void createMotionObjectsGroupJson() {
+        // Create aan objects under gnd/children to serve as top node for motion objects
+        // all will be in ground frame.
+        if (motionObjectsRoot==null) {
+            motionObjectsRoot = new JSONObject();
+            motionObjectsRoot.put("parent", modelVisJson.getModelUUID().toString());
+            motionObjectsRoot.put("uuid", UUID.randomUUID().toString());
+            motionObjectsRoot.put("type", "Group");
+            motionObjectsRoot.put("opensimType", "MotionObjects");
+            motionObjectsRoot.put("name", simmMotionData.getName().concat("_Objects"));
+            motionObjectsRoot.put("userData", "NonEditable");
+            motionObjectsRoot.put("children", new JSONArray());
+            motionObjectsRoot.put("matrix", JSONUtilities.createMatrixFromTransform(new Transform(), new Vec3(1.), 1.0));
+
+        }
+        
+    }
+
+    private JSONObject createJsonForMotionObjects() {
+        JSONObject topJson = new JSONObject();
+        JSONArray jsonGeomArray = new JSONArray();
+        jsonGeomArray.add(getExperimenalMarkerGeometryJson());
+        JSONArray jsonMatArray = new JSONArray();
+        jsonMatArray.add(getExperimenalMarkerMaterialJson());
+        topJson.put("geometries", jsonGeomArray);
+        topJson.put("materials", jsonMatArray);
+        topJson.put("object", motionObjectsRoot);
+        return topJson;
+    }
+
+    /**
+     * @return the experimenalMarkerGeometryJson
+     */
+    public JSONObject getExperimenalMarkerGeometryJson() {
+        return experimenalMarkerGeometryJson;
+    }
+
+    /**
+     * @return the experimenalMarkerMaterialJson
+     */
+    public JSONObject getExperimenalMarkerMaterialJson() {
+        return experimenalMarkerMaterialJson;
+    }
+
+    /**
+     * @return the defaultForceColorVec3
+     */
+    public Vec3 getDefaultForceColorVec3() {
+        return defaultForceColorVec3;
     }
     
     public enum ObjectTypesInMotionFiles{GenCoord, 
@@ -276,15 +379,18 @@ public class MotionDisplayer implements SelectionListener {
         simmMotionData = motionData;
         currentScaleFactor = DEFAULT_FACTOR_SCALE_FACTOR;
         currentForceShape = DEFAULT_FORCE_SHAPE;
+        modelVisJson = ViewDB.getInstance().getModelVisualizationJson(model);
         setupMotionDisplay();
         // create a buffer to be used for comuptation of constrained states
         //statesBuffer = new double[model.getNumStateVariables()];
-        ViewDB.getInstance().getModelVisualizationJson(model).addMotionDisplayer(this);
+        
+        modelVisJson.addMotionDisplayer(this);
         if (model instanceof ModelForExperimentalData) return;
-        SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-        if(vis!=null) vis.setApplyMuscleColors(isRenderMuscleActivations());
+        if (ViewDB.isVtkGraphicsAvailable()){
+            SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
+            if(vis!=null) vis.setApplyMuscleColors(isRenderMuscleActivations());
+        }
     }
-
     public void setupMotionDisplay() { 
         if (simmMotionData == null)
            return;
@@ -302,18 +408,19 @@ public class MotionDisplayer implements SelectionListener {
             AnnotatedMotion mot= (AnnotatedMotion) simmMotionData;
             Vector<ExperimentalDataObject> objects=mot.getClassified();
             mot.setMotionDisplayer(this);
+            createMotionObjectsGroupJson();
+            addExperimentalDataObjectsToJson(objects);
             for(ExperimentalDataObject nextObject:objects){
                 if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
-                    createMarkerVisualizerObjectKeepHandle(nextObject);
+                    bindMarkerToVisualizerObjectKeepHandle(nextObject);
                 } else if (nextObject.getObjectType()==ExperimentalDataItemType.PointForceData){
-                    createForceVisualizerObjectKeepHandle(nextObject);
-                } else if (nextObject.getObjectType()==ExperimentalDataItemType.BodyForceData){
-                    createForceVisualizerObjectKeepHandle(nextObject);
-                }
+                    bindForceVisualizerObjectKeepHandle(nextObject);
+                } 
                 
             }
             // create objects and cache their uuids
             //createTrails(model);
+            ViewDB.getInstance().addVisualizerObject(createJsonForMotionObjects());
             return;
         }
         mapIndicesToBodies.clear();
@@ -325,8 +432,10 @@ public class MotionDisplayer implements SelectionListener {
         if(colNames.arrayEquals(stateNames)) {
            // This is a states file
            statesFile = true;
-           SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-           if(vis!=null) vis.setApplyMuscleColors(true);
+           if (ViewDB.isVtkGraphicsAvailable()){
+            SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
+            if(vis!=null) vis.setApplyMuscleColors(true);
+           }
            setRenderMuscleActivations(true);
         } else  {
            // We should build sorted lists of object names so that we can find them easily
@@ -371,21 +480,20 @@ public class MotionDisplayer implements SelectionListener {
         }
     }
 
-    private void createForceVisualizerObjectKeepHandle(ExperimentalDataObject nextObject) {
+    private void bindForceVisualizerObjectKeepHandle(ExperimentalDataObject nextObject) {
         if (ViewDB.isVtkGraphicsAvailable()){
             int glyphIndex=groundForcesRep.addLocation(nextObject);
             nextObject.setGlyphInfo(glyphIndex, groundForcesRep);
         }
-        
+        nextObject.setDataObjectUUID(findUUIDForObject(nextObject).get(0));
     }
 
-    private void createMarkerVisualizerObjectKeepHandle(ExperimentalDataObject nextObject) {
+    private void bindMarkerToVisualizerObjectKeepHandle(ExperimentalDataObject nextObject) {
         if (ViewDB.isVtkGraphicsAvailable()){
             int glyphIndex=markersRep.addLocation(nextObject);
             nextObject.setGlyphInfo(glyphIndex, markersRep);
         }
-        ModelVisualizationJson modelJson = ViewDB.getInstance().getModelVisualizationJson(model);
-        nextObject.setDataObjectUUID(modelJson.findUUIDForObject(nextObject).get(0));
+        nextObject.setDataObjectUUID(findUUIDForObject(nextObject).get(0));
     }
 
     private void AddMotionObjectsRep(final Model model) {
@@ -434,7 +542,7 @@ public class MotionDisplayer implements SelectionListener {
             ViewDB.getInstance().addUserObjectToModel(model, generalizedForcesRep.getVtkActor());
             ViewDB.getInstance().addUserObjectToModel(model, markersRep.getVtkActor());
         }
-         
+        // should send new objects to visualizer 
         ViewDB.getInstance().addSelectionListener(this);
     }
 
@@ -465,7 +573,7 @@ public class MotionDisplayer implements SelectionListener {
          Coordinate co = coords.get(i);
          // GenCoord
          String cName = co.getName();
-         if (cName.equals(columnName)||cName.equals(co.getAbsolutePathName())){
+         if (cName.equals(columnName)||cName.equals(co.getRelativePathName(model))){
             mapIndicesToObjectTypes.put(columnIndex, ObjectTypesInMotionFiles.GenCoord);
             mapIndicesToObjects.put(columnIndex, co); //co.setValue();
             return 1;
@@ -618,16 +726,9 @@ public class MotionDisplayer implements SelectionListener {
       // if we're playing this motion synced with another motion)
       double clampedTime = (currentTime < simmMotionData.getFirstTime()) ? simmMotionData.getFirstTime() : 
                            (currentTime > simmMotionData.getLastTime()) ? simmMotionData.getLastTime() : currentTime;
-      OpenSimDB.getInstance().getContext(model).getCurrentStateRef().setTime(clampedTime);
+      //OpenSimDB.getInstance().getContext(model).getCurrentStateRef().setTime(clampedTime);
       simmMotionData.getDataAtTime(clampedTime, interpolatedStates.getSize(), interpolatedStates);
-      // update positions in ModelComponents so that generateDecorations works then call generateDecorations
-      if (simmMotionData instanceof AnnotatedMotion){
-         AnnotatedMotion amot = (AnnotatedMotion) simmMotionData;
-         /*
-         for (int i=0; i< interpolatedStates.size(); i++) 
-             interpolatedStates.set(i, interpolatedStates.get(i)/amot.getUnitConversion());*/
-         amot.updateComponentGeometry(interpolatedStates);
-      }
+
       applyStatesToModel(interpolatedStates);
       // Repeat for associated motions
       for (MotionDisplayer assocMotion:associatedMotions){
@@ -647,89 +748,90 @@ public class MotionDisplayer implements SelectionListener {
           Vector<ExperimentalDataObject> objects=mot.getClassified();
           boolean markersModified=false;
           boolean forcesModified=false;
+          mot.updateDecorations(interpolatedStates);
           if (ViewDB.isVtkGraphicsAvailable()){
-          SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-           for(ExperimentalDataObject nextObject:objects){
-                if (!nextObject.isDisplayed()) continue;
-                vis.upateDisplay(nextObject);
+            SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
+             for(ExperimentalDataObject nextObject:objects){
+                  if (!nextObject.isDisplayed()) continue;
+                  vis.upateDisplay(nextObject);
+                  // The following blocks need to be moved inside updateDecorations
+                  if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
 
-                if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
+                      int startIndex = nextObject.getStartIndexInFileNotIncludingTime();
+                      /*
+                      markersRep.setLocation(nextObject.getGlyphIndex(), 
+                              states.getitem(startIndex)/mot.getUnitConversion(), 
+                              states.getitem(startIndex+1)/mot.getUnitConversion(), 
+                              states.getitem(startIndex+2)/mot.getUnitConversion());
+                      markersModified = true;*/
 
-                    int startIndex = nextObject.getStartIndexInFileNotIncludingTime();
-                    /*
-                    markersRep.setLocation(nextObject.getGlyphIndex(), 
-                            states.getitem(startIndex)/mot.getUnitConversion(), 
-                            states.getitem(startIndex+1)/mot.getUnitConversion(), 
-                            states.getitem(startIndex+2)/mot.getUnitConversion());
-                    markersModified = true;*/
+                  }
+                  else if (nextObject.getObjectType()==ExperimentalDataItemType.PointForceData){
+                      String pointId = ((MotionObjectPointForce)nextObject).getPointIdentifier();
+                      String forceId = ((MotionObjectPointForce)nextObject).getForceIdentifier();
+                      String bodyId = ((MotionObjectPointForce)nextObject).getPointExpressedInBody();  
+                      Body b = model.getBodySet().get(bodyId);
+                      int startPointIndex = simmMotionData.getColumnIndicesForIdentifier(pointId).getitem(0)-1;
+                      double[] locationLocal = new double[]{states.getitem(startPointIndex), 
+                              states.getitem(startPointIndex+1), 
+                              states.getitem(startPointIndex+2)};
+                      double[] locationGlobal = new double[3]; 
+                      // Transform to ground from body frame
+                      dContext.transformPosition(b, locationLocal, locationGlobal);
+                      groundForcesRep.setLocation(nextObject.getGlyphIndex(), 
+                              locationGlobal[0], locationGlobal[1], locationGlobal[2]);
+                      int startForceIndex = simmMotionData.getColumnIndicesForIdentifier(forceId).getitem(0)-1;
+                      double[] forceLocal = new double[]{states.getitem(startForceIndex), 
+                              states.getitem(startForceIndex+1), 
+                              states.getitem(startForceIndex+2)};
+                      maskForceComponent(forceLocal, ((MotionObjectPointForce)nextObject).getForceComponent());
+                      double[] forceGlobal = new double[3]; 
+                      dContext.transform(b, forceLocal, model.get_ground(), forceGlobal);
+                      groundForcesRep.setNormalAtLocation(nextObject.getGlyphIndex(), 
+                              forceGlobal[0], 
+                              forceGlobal[1], 
+                              forceGlobal[2]);
+                      forcesModified=true;
+                } else if (nextObject.getObjectType()==ExperimentalDataItemType.BodyForceData){
+                      int startIndex = nextObject.getStartIndexInFileNotIncludingTime();
+                      MotionObjectBodyPoint bodyPointObject = (MotionObjectBodyPoint)nextObject;
+                      double[] bodyPoint =bodyPointObject.getPoint();
+                      PhysicalFrame b = model.getBodySet().get(bodyPointObject.getPointExpressedInBody());
+                      double[] bodyPointGlobal = new double[3]; 
+                      // Transform to ground from body frame
+                      dContext.transformPosition(b, bodyPoint, bodyPointGlobal);
+                      groundForcesRep.setLocation(nextObject.getGlyphIndex(), 
+                              bodyPointGlobal[0], bodyPointGlobal[1], bodyPointGlobal[2]);
+                      double[] vectorGlobal = new double[]{states.getitem(startIndex), 
+                              states.getitem(startIndex+1), 
+                              states.getitem(startIndex+2)}; 
 
+                      if (b==model.get_ground())
+                           maskForceComponent(vectorGlobal, ((MotionObjectPointForce)nextObject).getForceComponent());
+                      else{
+                          double[] vectorLocal = new double[]{
+                                  states.getitem(startIndex), 
+                                  states.getitem(startIndex+1), 
+                                  states.getitem(startIndex+2)
+                          };
+                          maskForceComponent(vectorLocal, ((MotionObjectPointForce)nextObject).getForceComponent());
+                          // Transform to ground from body frame
+                          dContext.transform(b, vectorLocal, model.get_ground(), vectorGlobal);
+                      }
+
+                      groundForcesRep.setNormalAtLocation(nextObject.getGlyphIndex(), 
+                              vectorGlobal[0], vectorGlobal[1], vectorGlobal[2]);
+                      forcesModified=true;
                 }
-                else if (nextObject.getObjectType()==ExperimentalDataItemType.PointForceData){
-                    String pointId = ((MotionObjectPointForce)nextObject).getPointIdentifier();
-                    String forceId = ((MotionObjectPointForce)nextObject).getForceIdentifier();
-                    String bodyId = ((MotionObjectPointForce)nextObject).getPointExpressedInBody();  
-                    Body b = model.getBodySet().get(bodyId);
-                    int startPointIndex = simmMotionData.getColumnIndicesForIdentifier(pointId).getitem(0)-1;
-                    double[] locationLocal = new double[]{states.getitem(startPointIndex), 
-                            states.getitem(startPointIndex+1), 
-                            states.getitem(startPointIndex+2)};
-                    double[] locationGlobal = new double[3]; 
-                    // Transform to ground from body frame
-                    dContext.transformPosition(b, locationLocal, locationGlobal);
-                    groundForcesRep.setLocation(nextObject.getGlyphIndex(), 
-                            locationGlobal[0], locationGlobal[1], locationGlobal[2]);
-                    int startForceIndex = simmMotionData.getColumnIndicesForIdentifier(forceId).getitem(0)-1;
-                    double[] forceLocal = new double[]{states.getitem(startForceIndex), 
-                            states.getitem(startForceIndex+1), 
-                            states.getitem(startForceIndex+2)};
-                    maskForceComponent(forceLocal, ((MotionObjectPointForce)nextObject).getForceComponent());
-                    double[] forceGlobal = new double[3]; 
-                    dContext.transform(b, forceLocal, model.get_ground(), forceGlobal);
-                    groundForcesRep.setNormalAtLocation(nextObject.getGlyphIndex(), 
-                            forceGlobal[0], 
-                            forceGlobal[1], 
-                            forceGlobal[2]);
-                    forcesModified=true;
-              } else if (nextObject.getObjectType()==ExperimentalDataItemType.BodyForceData){
-                    int startIndex = nextObject.getStartIndexInFileNotIncludingTime();
-                    MotionObjectBodyPoint bodyPointObject = (MotionObjectBodyPoint)nextObject;
-                    double[] bodyPoint =bodyPointObject.getPoint();
-                    PhysicalFrame b = model.getBodySet().get(bodyPointObject.getPointExpressedInBody());
-                    double[] bodyPointGlobal = new double[3]; 
-                    // Transform to ground from body frame
-                    dContext.transformPosition(b, bodyPoint, bodyPointGlobal);
-                    groundForcesRep.setLocation(nextObject.getGlyphIndex(), 
-                            bodyPointGlobal[0], bodyPointGlobal[1], bodyPointGlobal[2]);
-                    double[] vectorGlobal = new double[]{states.getitem(startIndex), 
-                            states.getitem(startIndex+1), 
-                            states.getitem(startIndex+2)}; 
 
-                    if (b==model.get_ground())
-                         maskForceComponent(vectorGlobal, ((MotionObjectPointForce)nextObject).getForceComponent());
-                    else{
-                        double[] vectorLocal = new double[]{
-                                states.getitem(startIndex), 
-                                states.getitem(startIndex+1), 
-                                states.getitem(startIndex+2)
-                        };
-                        maskForceComponent(vectorLocal, ((MotionObjectPointForce)nextObject).getForceComponent());
-                        // Transform to ground from body frame
-                        dContext.transform(b, vectorLocal, model.get_ground(), vectorGlobal);
-                    }
-
-                    groundForcesRep.setNormalAtLocation(nextObject.getGlyphIndex(), 
-                            vectorGlobal[0], vectorGlobal[1], vectorGlobal[2]);
-                    forcesModified=true;
-              }
-
-              if (forcesModified) groundForcesRep.setModified();
-              if (markersModified) markersRep.setModified();
-          }
+                if (forcesModified) groundForcesRep.setModified();
+                if (markersModified) markersRep.setModified();
+            }
           }
           // Create one frame and send to Visualizer this would have:
           // updated positions for markers, 
          // updated transforms for forces         
-           //groundForcesRep.hide(0);
+          //groundForcesRep.hide(0);
           return;
       }
       OpenSimContext context = OpenSimDB.getInstance().getContext(model);
@@ -880,6 +982,16 @@ public class MotionDisplayer implements SelectionListener {
             }
             setMuscleColoringFunction(null);
         }
+        if (motionObjectsRoot!=null) {
+            ViewDB.getInstance().RemoveVisualizerObject(motionObjectsRoot, 
+                    modelVisJson.getModelUUID().toString());
+        }
+        mcf = null;
+        // Recursively cleanup
+        ArrayList<MotionDisplayer> associatedDisplayers = getAssociatedMotions();
+        for (MotionDisplayer assoc:associatedDisplayers){
+            assoc.cleanupDisplay();
+        }
     }
 
    public Storage getSimmMotionData() {
@@ -1018,11 +1130,11 @@ public class MotionDisplayer implements SelectionListener {
             mot.setMotionDisplayer(this);
             for(ExperimentalDataObject nextObject:objects){
                 if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
-                    createMarkerVisualizerObjectKeepHandle(nextObject);
+                    bindMarkerToVisualizerObjectKeepHandle(nextObject);
                 } else if (nextObject.getObjectType()==ExperimentalDataItemType.PointForceData){
-                    createForceVisualizerObjectKeepHandle(nextObject);
+                    bindForceVisualizerObjectKeepHandle(nextObject);
                 } else if (nextObject.getObjectType()==ExperimentalDataItemType.BodyForceData){
-                    createForceVisualizerObjectKeepHandle(nextObject);
+                    bindForceVisualizerObjectKeepHandle(nextObject);
                 }
                 
             }
@@ -1030,4 +1142,63 @@ public class MotionDisplayer implements SelectionListener {
             return;
         }      
     }
+
+
+    private void createDefaultMotionObjects() {
+        if (getExperimenalMarkerGeometryJson() == null) {
+            experimenalMarkerGeometryJson = new JSONObject();
+            UUID uuidForMarkerGeometry = UUID.randomUUID();
+            getExperimenalMarkerGeometryJson().put("uuid", uuidForMarkerGeometry.toString());
+            getExperimenalMarkerGeometryJson().put("type", "BoxGeometry");
+            getExperimenalMarkerGeometryJson().put("width", 8);
+            getExperimenalMarkerGeometryJson().put("height", 8);
+            getExperimenalMarkerGeometryJson().put("depth", 8);
+            getExperimenalMarkerGeometryJson().put("name", "DefaultExperimentalMarker");
+            JSONArray json_geometries = (JSONArray) modelVisJson.get("geometries");
+            json_geometries.add(getExperimenalMarkerGeometryJson());
+
+            experimenalMarkerMaterialJson = new JSONObject();
+            UUID uuidForMarkerMaterial = UUID.randomUUID();
+            getExperimenalMarkerMaterialJson().put("uuid", uuidForMarkerMaterial.toString());
+            String colorString = JSONUtilities.mapColorToRGBA(defaultMarkerColor);
+            getExperimenalMarkerMaterialJson().put("type", "MeshPhongMaterial");
+            getExperimenalMarkerMaterialJson().put("shininess", 30);
+            getExperimenalMarkerMaterialJson().put("transparent", true);
+            getExperimenalMarkerMaterialJson().put("emissive", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
+            getExperimenalMarkerMaterialJson().put("specular", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
+            getExperimenalMarkerMaterialJson().put("side", 2);
+            getExperimenalMarkerMaterialJson().put("wireframe", false);
+            getExperimenalMarkerMaterialJson().put("color", colorString);
+            JSONArray json_materials = (JSONArray) modelVisJson.get("materials");
+            json_materials.add(getExperimenalMarkerMaterialJson());
+        }
+        
+    }
+
+    public void addExperimentalDataObjectsToJson(AbstractList<ExperimentalDataObject> expObjects) {
+        // Make sure this
+        createDefaultMotionObjects();
+        // create default top Group for motion
+        JSONObject topJson = motionObjectsRoot;
+        if (topJson.get("children") == null) {
+            topJson.put("children", new JSONArray());
+        }
+        JSONArray motObjectsChildren = (JSONArray) topJson.get("children");
+        for (ExperimentalDataObject nextExpObject : expObjects) {
+            if (mapComponentToUUID.get(nextExpObject)!= null)
+                continue;
+            ArrayList<UUID> comp_uuids = new ArrayList<UUID>();
+            motObjectsChildren.add(nextExpObject.createDecorationJson(comp_uuids, this));
+            mapComponentToUUID.put(nextExpObject, comp_uuids);
+        }
+    }
+    
+    public OpenSimObject findObjectForUUID(String uuidString) {
+        return mapUUIDToComponent.get(UUID.fromString(uuidString));
+    }
+
+    public ArrayList<UUID> findUUIDForObject(OpenSimObject obj) {
+        return mapComponentToUUID.get(obj);
+    }
+
 }

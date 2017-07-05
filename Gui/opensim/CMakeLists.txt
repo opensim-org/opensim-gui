@@ -34,18 +34,11 @@ if (WIN32)
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Copy default JRE to installer folder.")
 endif()
-if (APPLE)
-    add_custom_target(PrepareInstaller ALL
-                  COMMAND ${Ant_EXECUTABLE} build-mac-installer -Dlib.dir="${OpenSim_LIB_DIR}"
-                  DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
-                  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-                  COMMENT "Build opensim.app.")
-endif()
 
 set(VIS_REPO "" CACHE
     PATH "The location of the opensim-threejs repository to copy into installation.")
 
-if (VIS_REPO)
+if (VIS_REPO AND NOT APPLE)
 add_custom_target(CopyVisualizer ALL
                   COMMAND ${Ant_EXECUTABLE} copy-visualizer -Dvisualizer.dir="${VIS_REPO}"
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
@@ -56,10 +49,21 @@ endif()
 set(MODELS_REPO "" CACHE
     PATH "The location of the Models repository to copy into installation.")
 
-if (MODELS_REPO)
+if (MODELS_REPO AND NOT APPLE)
 add_custom_target(CopyModels ALL
                   COMMAND ${Ant_EXECUTABLE} copy-models -Dmodels.dir="${MODELS_REPO}"
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Copy models and examples-to installer folder.")
+endif()
+
+if (APPLE)
+    add_custom_target(PrepareInstaller ALL
+                  COMMAND ${Ant_EXECUTABLE} build-mac-installer
+                  -Dapi.dir="${OpenSim_ROOT_DIR}"
+                  -Dvisualizer.dir="${VIS_REPO}"
+                  -Dmodels.dir="${MODELS_REPO}"
+                  DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
+                  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                  COMMENT "Build OpenSim.app.")
 endif()
