@@ -390,6 +390,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         jStartTimeTextField.setFocusable(false);
         jStartTimeTextField.setMaximumSize(new java.awt.Dimension(50, 16));
         jStartTimeTextField.setMinimumSize(new java.awt.Dimension(50, 16));
+        jStartTimeTextField.setOpaque(false);
         jStartTimeTextField.setPreferredSize(new java.awt.Dimension(50, 16));
 
         jEndTimeTextField.setBackground(new java.awt.Color(224, 223, 227));
@@ -402,6 +403,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         jEndTimeTextField.setFocusable(false);
         jEndTimeTextField.setMaximumSize(new java.awt.Dimension(50, 16));
         jEndTimeTextField.setMinimumSize(new java.awt.Dimension(50, 16));
+        jEndTimeTextField.setOpaque(false);
         jEndTimeTextField.setPreferredSize(new java.awt.Dimension(50, 16));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
