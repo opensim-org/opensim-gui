@@ -176,7 +176,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         setForeground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(32767, 50));
         setMinimumSize(new java.awt.Dimension(0, 50));
-        setPreferredSize(new java.awt.Dimension(630, 50));
+        setPreferredSize(new java.awt.Dimension(645, 50));
 
         jPlaybackButtonsPanel.setToolTipText("Motion Controls");
         jPlaybackButtonsPanel.setMaximumSize(new java.awt.Dimension(32767, 16));
@@ -439,7 +439,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
                         .add(jPlaybackButtonsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jEndTimeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(jMotionSlider, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
+                    .add(jMotionSlider, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jWrapToggleButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
