@@ -518,7 +518,6 @@ public class JPlotterPanel extends javax.swing.JPanel
                 .addContainerGap())
         );
 
-        jSplitPane1.setDividerLocation(300);
         jSplitPane1.setDividerSize(7);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane1.setResizeWeight(1.0);
@@ -534,7 +533,7 @@ public class JPlotterPanel extends javax.swing.JPanel
         );
         jTopChartingPanelLayout.setVerticalGroup(
             jTopChartingPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 299, Short.MAX_VALUE)
+            .add(0, 260, Short.MAX_VALUE)
         );
 
         jSplitPane1.setLeftComponent(jTopChartingPanel);
@@ -643,9 +642,9 @@ public class JPlotterPanel extends javax.swing.JPanel
             .add(jPlotSpecPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(jPlotSpecPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(jMuscleSelectButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(jAdvancedOptionsButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                    .add(jAdvancedOptionsButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(xQuantityButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(yQuantityButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -745,6 +744,9 @@ public class JPlotterPanel extends javax.swing.JPanel
         else if (evt.getSource() == jXQtyTextField) {
             JPlotterPanel.this.jXQtyTextFieldActionPerformed(evt);
         }
+        else if (evt.getSource() == jButton1) {
+            JPlotterPanel.this.jButton1ActionPerformed(evt);
+        }
         else if (evt.getSource() == jLoadFileToPlotterMenuItem) {
             JPlotterPanel.this.jLoadFileToPlotterMenuItemActionPerformed(evt);
         }
@@ -765,9 +767,6 @@ public class JPlotterPanel extends javax.swing.JPanel
         }
         else if (evt.getSource() == jActivationOverrideCheckBox) {
             JPlotterPanel.this.jActivationOverrideCheckBoxActionPerformed(evt);
-        }
-        else if (evt.getSource() == jButton1) {
-            JPlotterPanel.this.jButton1ActionPerformed(evt);
         }
     }
 
