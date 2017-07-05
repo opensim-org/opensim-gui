@@ -81,7 +81,10 @@ public class Installer extends ModuleInstall {
         try {
              // Put your startup code here.
             UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
-            UIManager.put("SliderUI", "org.opensim.view.OpenSimSliderUI");
+            if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
+                // The native slider on macOS looks somewhat nice.
+                UIManager.put("SliderUI", "org.opensim.view.OpenSimSliderUI");
+            }
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         } catch (IllegalAccessException ex) {
