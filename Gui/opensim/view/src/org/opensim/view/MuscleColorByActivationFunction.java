@@ -19,7 +19,7 @@ public class MuscleColorByActivationFunction extends MuscleColoringFunction {
         dContext = context;
     }
     @Override
-    double getColor(Muscle msl){
+    public double getColor(Muscle msl){
         double color = dContext.getActivation(msl);
         // Apply this transfer function to get better results from the color map
         color = activationColorFactor * (1-Math.exp(-activationColorTau*color));

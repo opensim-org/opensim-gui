@@ -56,7 +56,7 @@ public class OneAssociatedMotionNode extends OneMotionNode {
     /** Creates a new instance of OneMotionNode */
    public OneAssociatedMotionNode(AnnotatedMotion motion) {
       super(motion);
-       //createChildren(motion);
+       createChildren(motion);
    }
    
    public Image getIcon(int i) {

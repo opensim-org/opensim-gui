@@ -1,6 +1,10 @@
 package org.opensim.view.experimentaldata;
 
+import java.util.ArrayList;
+import java.util.UUID;
+import org.json.simple.JSONObject;
 import org.opensim.modeling.Sphere;
+import org.opensim.view.motions.MotionDisplayer;
 
 /**
  *
@@ -89,5 +93,4 @@ public class MotionObjectBodyPoint extends ExperimentalDataObject {
     boolean appliesForce() {
         return false;
     }
-    
 }

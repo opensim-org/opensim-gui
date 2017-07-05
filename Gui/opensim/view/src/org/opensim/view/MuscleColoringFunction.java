@@ -15,6 +15,6 @@ public abstract class MuscleColoringFunction {
     public MuscleColoringFunction() {
     }
 
-    abstract double getColor(Muscle msl);
+    public abstract double getColor(Muscle msl);
     
 }

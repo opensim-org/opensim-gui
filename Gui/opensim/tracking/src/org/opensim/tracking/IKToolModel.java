@@ -160,7 +160,7 @@ public class IKToolModel extends Observable implements Observer {
 
          if(true) {
             //Storage motion = new Storage(); // Java-side copy
-            updateMotion(animationCallback.getStorage());
+            updateMotion(new Storage(animationCallback.getStorage()));
          }
 
          setExecuting(false);
