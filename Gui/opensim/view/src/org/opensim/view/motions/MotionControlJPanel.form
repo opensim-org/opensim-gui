@@ -1,4 +1,4 @@
-<?xml version="1.1" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.3">
   <Properties>
@@ -18,7 +18,7 @@
       <Dimension value="[0, 50]"/>
     </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[630, 50]"/>
+      <Dimension value="[645, 50]"/>
     </Property>
   </Properties>
   <AuxValues>
@@ -59,7 +59,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jEndTimeTextField" min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jMotionSlider" alignment="0" pref="280" max="32767" attributes="3"/>
+                  <Component id="jMotionSlider" alignment="0" pref="297" max="32767" attributes="3"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jWrapToggleButton" min="-2" max="-2" attributes="0"/>
@@ -78,7 +78,7 @@
                               <Component id="jTimeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabelForTimeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jMotionSlider" alignment="0" pref="22" max="32767" attributes="1"/>
+                          <Component id="jMotionSlider" alignment="0" max="32767" attributes="1"/>
                       </Group>
                       <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -462,7 +462,6 @@
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[24, 42]"/>
         </Property>
-        <Property name="opaque" type="boolean" value="true"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[24, 42]"/>
         </Property>
