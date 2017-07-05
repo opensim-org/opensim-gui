@@ -525,6 +525,8 @@ public class JPlotterPanel extends javax.swing.JPanel
         jSplitPane1.setDoubleBuffered(true);
         jSplitPane1.setOneTouchExpandable(true);
 
+        jTopChartingPanel.setPreferredSize(new java.awt.Dimension(610, 300));
+
         org.jdesktop.layout.GroupLayout jTopChartingPanelLayout = new org.jdesktop.layout.GroupLayout(jTopChartingPanel);
         jTopChartingPanel.setLayout(jTopChartingPanelLayout);
         jTopChartingPanelLayout.setHorizontalGroup(
