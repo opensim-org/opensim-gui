@@ -14,6 +14,7 @@ pkgbuild \
     --identifier org.opensim.app.pkg \
     --version 4.0 \
     --root '../../Gui/opensim/dist/' \
+    --scripts './scripts' \
     --install-location '/Applications/' \
     'OpenSim-4.0.Beta-App.pkg'
     # --component-plist OpenSimAppComponents.plist \

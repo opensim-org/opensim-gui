@@ -1,0 +1,21 @@
+#!/bin/sh
+
+mkdir -p "$HOME/Library/Application Support/OpenSim/4.0.Beta/config/Windows2Local/Modes/"
+
+# This script is a temporary hack to deal with
+# https://github.com/opensim-org/opensim-gui/issues/251
+cat > "$HOME/Library/Application Support/OpenSim/4.0.Beta/config/Windows2Local/Modes/editor.wsmode" <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mode version="2.4">
+    <name unique="editor"  />
+  <kind type="editor" />
+  <state type="joined"  />
+  <bounds x="0" y="0" width="0" height="0" />
+  <frame state="0"/>
+    <active-tc  id="jxBrowserTopComponent" />
+    <empty-behavior permanent="true"/>
+</mode>
+
+EOF
+
