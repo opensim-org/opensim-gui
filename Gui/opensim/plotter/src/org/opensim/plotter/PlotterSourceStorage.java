@@ -174,7 +174,7 @@ public class PlotterSourceStorage implements PlotterSourceInterface {
         if (isStatesStorage) 
             OpenSimLogger.logMessage("Using states from input/states file\n", OpenSimLogger.INFO);
         else
-            OpenSimLogger.logMessage("Computing equilibrium for musle states\n", OpenSimLogger.INFO);            
+            OpenSimLogger.logMessage("Computing equilibrium for muscle states\n", OpenSimLogger.INFO);            
         return isStatesStorage;
     }
 
