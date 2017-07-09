@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Ensure the user chose to install into their user dir, not system-wide.
+# Argument $2 is the target location the user chose.
+# http://s.sudre.free.fr/Stuff/PackageMaker_Howto.html
+# Does the target location start with "/Applications"?
+if [[ "$2" = /Applications* ]]
+then
+    osascript -e 'tell app "Installer" to display dialog "This beta release cannot be installed into the chosen destination. Read the instructions on the Introduction pane." buttons {"OK"} default button "OK" with icon stop with title "Invalid destination"'
+    exit -1
+fi
+
+exit 0

@@ -1,2 +1,0 @@
-OpenSim is now installed in either /Applications/ (if you installed
-system-wide) or ~/Applications/ (if you selected "Install for me only").
