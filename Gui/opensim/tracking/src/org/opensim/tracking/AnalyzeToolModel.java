@@ -73,7 +73,9 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
          MotionsDB.getInstance().clearCurrent();
 
          // Re-initialize our copy of the model
-         Model workersModel = Model.safeDownCast(getOriginalModel().clone());
+         //Model workersModel = Model.safeDownCast(getOriginalModel().clone());
+         // TODO attempting to avoid double delete.
+         Model workersModel = new Model(getOriginalModel());
          workersModel.setName("workerModel");
          String tempFileName=getOriginalModel().getInputFileName();
          //int loc = tempFileName.lastIndexOf(".");
@@ -115,7 +117,7 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
 
          // Animation callback will update the display during forward
          animationCallback = new JavaMotionDisplayerCallback(getModel(), getOriginalModel(), null, progressHandle, staticOptimizationMode);
-         //getModel().addAnalysis(animationCallback);
+         getModel().addAnalysis(animationCallback);
          animationCallback.setStepInterval(1);
          animationCallback.setMinRenderTimeInterval(0.1); // to avoid rendering really frequently which can slow down our execution
          animationCallback.startProgressUsingTime(ti,tf);
