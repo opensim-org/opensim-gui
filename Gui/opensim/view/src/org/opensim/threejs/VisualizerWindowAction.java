@@ -25,7 +25,7 @@ import org.opensim.view.pub.ViewDB;
         displayName = "#CTL_VisualizerWindow"
 )
 @ActionReference(path = "Menu/Window", position = 3333)
-@Messages("CTL_VisualizerWindow=Visualizer")
+@Messages("CTL_VisualizerWindow=Vis Browser")
 public final class VisualizerWindowAction implements ActionListener {
 
     @Override
