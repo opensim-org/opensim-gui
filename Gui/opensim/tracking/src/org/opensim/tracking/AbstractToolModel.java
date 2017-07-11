@@ -47,7 +47,7 @@ public abstract class AbstractToolModel extends Observable {
    private boolean modifiedSinceLastExecute = true;
    private boolean executing = false;
 
-   protected Model originalModel = originalModel = null;
+   protected Model originalModel = null;
    protected Model model = null;
    protected AbstractTool tool = null;
    protected Vector<ResultDisplayerInterface> resultDisplayers=new Vector<ResultDisplayerInterface>();

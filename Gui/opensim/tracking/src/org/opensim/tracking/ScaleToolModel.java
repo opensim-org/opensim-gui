@@ -308,7 +308,7 @@ public class ScaleToolModel extends Observable implements Observer {
                               });
          progressHandle.start();
          // Crash here
-         processedModel = Model.safeDownCast(unscaledModel.clone());
+         processedModel = new Model(unscaledModel);
          processedModel.setName(scaleTool.getName());
          processedModel.setInputFileName("");
          processedModel.setOriginalModelPathFromModel(unscaledModel); // important to keep track of the original path so bone loading works
@@ -411,7 +411,7 @@ public class ScaleToolModel extends Observable implements Observer {
    public ScaleToolModel(Model originalModel) throws IOException {
       // Store original model; create copy of the original model as our unscaled model (i.e. the model we'll scale)
       this.originalModel = originalModel;
-      unscaledModel = Model.safeDownCast(originalModel.clone());;
+      unscaledModel = new Model(originalModel);
       unscaledModel.setInputFileName("");
       unscaledModel.setOriginalModelPathFromModel(originalModel); // important to keep track of the original path so bone loading works
       //unscaledModel.setup();
