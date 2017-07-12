@@ -659,10 +659,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                            }});
              } 
          }
-         if (websocketdb == null){
-             // Try to open a visualizer window
-             VisualizerWindowAction.openVisualizerWindow();
-         }
+
       }
    }
    /**

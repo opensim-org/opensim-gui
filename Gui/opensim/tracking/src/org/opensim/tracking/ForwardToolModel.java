@@ -62,7 +62,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
          MotionsDB.getInstance().clearCurrent();
 
          // Re-initialize our copy of the model
-         Model model = Model.safeDownCast(getOriginalModel().clone());
+         Model model = new Model(getOriginalModel());
          model.initSystem();
          OpenSimContext context = OpenSimDB.getInstance().getContext(getOriginalModel());
          // This line has the effect of copying the current state of the gui model
