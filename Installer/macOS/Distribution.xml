@@ -8,6 +8,9 @@
          https://stackoverflow.com/questions/12863944/how-do-you-specify-a-default-install-location-to-home-with-pkgbuild
          -->
     <domains enable_anywhere="true" enable_currentUserHome="true" enable_localSystem="true" />
+    <!--Only allow on 64-bit systems.-->
+    <options hostArchitectures="x86_64"/>
+    <!--<options hostArchitectures="x86_64" customize="always"/>-->
     <welcome file="welcome.html" mime-type="text/html" />
     <license file="license.txt" mime-type="text/plain" />
     <conclusion file="conclusion.html" mime-type="text/html" />
