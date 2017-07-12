@@ -173,7 +173,6 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
              // Color by Activation from SO output
             StaticOptimization soA = StaticOptimization.safeDownCast(getModel().getAnalysisSet().get("StaticOptimization"));
             Storage storage = soA.getActivationStorage();
-            storage.print("soout.sto");
             MotionDisplayer motionDisplayer = new MotionDisplayer(storage, getOriginalModel());
             MuscleColoringFunction mcbya = new MuscleColorByActivationStorage(
             OpenSimDB.getInstance().getContext(getOriginalModel()), storage);
