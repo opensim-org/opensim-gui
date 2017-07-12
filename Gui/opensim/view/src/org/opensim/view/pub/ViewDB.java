@@ -53,6 +53,7 @@ import org.eclipse.jetty.VisWebSocket;
 import org.eclipse.jetty.WebSocketDB;
 import org.json.simple.JSONObject;
 import org.openide.awt.StatusDisplayer;
+import org.openide.modules.Places;
 import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
@@ -439,7 +440,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    }
 
     public void exportModelJsonToVisualizer(ModelVisualizationJson vizJson, VisWebSocket socket) {
-        String fileName = JettyMain.getServerWorkingDir()+vizJson.getModelUUID().toString().substring(0, 8)+".json";
+        // TODO make name more informative.
+        //String fileName = Places.getUserDirectory()+"/model_json/"+/* JettyMain.getServerWorkingDir()*/vizJson.getModelUUID().toString().substring(0, 8)+".json";
+        //String fileName = JettyMain.getServerWorkingDir()+vizJson.getModelUUID().toString().substring(0, 8)+".json";
+        String fileName = JettyMain.getServerWorkingDir()+"model_json/"+vizJson.getModelUUID().toString().substring(0, 8)+".json";
+        
         //System.out.println("Json file path ="+fileName);
        try {
            // Write vizJson to file and send message to visualizer to open it
