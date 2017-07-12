@@ -860,8 +860,12 @@ public class Model extends ModelComponent {
     return opensimSimulationJNI.Model_isValidSystem(swigCPtr, this);
   }
 
+  public void formStateStorage(Storage originalStorage, Storage statesStorage, boolean warnUnspecifiedStates) {
+    opensimSimulationJNI.Model_formStateStorage__SWIG_0(swigCPtr, this, Storage.getCPtr(originalStorage), originalStorage, Storage.getCPtr(statesStorage), statesStorage, warnUnspecifiedStates);
+  }
+
   public void formStateStorage(Storage originalStorage, Storage statesStorage) {
-    opensimSimulationJNI.Model_formStateStorage(swigCPtr, this, Storage.getCPtr(originalStorage), originalStorage, Storage.getCPtr(statesStorage), statesStorage);
+    opensimSimulationJNI.Model_formStateStorage__SWIG_1(swigCPtr, this, Storage.getCPtr(originalStorage), originalStorage, Storage.getCPtr(statesStorage), statesStorage);
   }
 
   public void formQStorage(Storage originalStorage, Storage qStorage) {
@@ -1442,6 +1446,10 @@ public class Model extends ModelComponent {
 
   public Millard2012EquilibriumMuscleList getMillard2012EquilibriumMuscleList() {
     return new Millard2012EquilibriumMuscleList(opensimSimulationJNI.Model_getMillard2012EquilibriumMuscleList(swigCPtr, this), true);
+  }
+
+  public Model(Model other) {
+    this(opensimSimulationJNI.new_Model__SWIG_2(Model.getCPtr(other), other), true);
   }
 
 }

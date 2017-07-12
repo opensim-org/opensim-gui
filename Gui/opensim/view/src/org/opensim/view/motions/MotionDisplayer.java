@@ -710,7 +710,7 @@ public class MotionDisplayer implements SelectionListener {
       if (profile)
           before =System.nanoTime();
       StateVector states=simmMotionData.getStateVector(currentFrame);
-      applyStatesToModel(states.getData());
+      applyStatesToModel(states.getData(), states.getTime());
       ViewDB.getInstance().updateAnnotationAnchors();
       if (profile) {
           after=System.nanoTime();
@@ -729,14 +729,14 @@ public class MotionDisplayer implements SelectionListener {
       //OpenSimDB.getInstance().getContext(model).getCurrentStateRef().setTime(clampedTime);
       simmMotionData.getDataAtTime(clampedTime, interpolatedStates.getSize(), interpolatedStates);
 
-      applyStatesToModel(interpolatedStates);
+      applyStatesToModel(interpolatedStates, clampedTime);
       // Repeat for associated motions
       for (MotionDisplayer assocMotion:associatedMotions){
           assocMotion.applyTimeToModel(currentTime);
       }
    }
 
-   private void applyStatesToModel(ArrayDouble states) 
+   private void applyStatesToModel(ArrayDouble states, double assocTime) 
    {
      boolean profile=false;//(OpenSimObject.getDebugLevel()>=2);
      long before = 0, after=0;
@@ -838,12 +838,14 @@ public class MotionDisplayer implements SelectionListener {
 
       if(statesFile) {
           // FIX40 speed this up by using map or YIndex
+          context.getCurrentStateRef().setTime(assocTime);
           for (int i=0; i<states.getSize();i++){
               String nmForIndex = colNames.get(i+1);
               double val = states.get(i);
               //System.out.print(nmForIndex+"="+val+",");
               model.setStateVariableValue(context.getCurrentStateRef(), nmForIndex, val);
           }
+          context.realizeVelocity();
       } else {
          boolean realize=false;
          int which=-1;

@@ -515,16 +515,16 @@ public class Storage extends StorageInterface {
     opensimCommonJNI.Storage_pad(swigCPtr, this, aPadSize);
   }
 
-  public void smoothSpline(int aOrder, double aCutoffFrequency) {
-    opensimCommonJNI.Storage_smoothSpline(swigCPtr, this, aOrder, aCutoffFrequency);
+  public void smoothSpline(int order, double cutoffFrequency) {
+    opensimCommonJNI.Storage_smoothSpline(swigCPtr, this, order, cutoffFrequency);
   }
 
-  public void lowpassIIR(double aCutoffFequency) {
-    opensimCommonJNI.Storage_lowpassIIR(swigCPtr, this, aCutoffFequency);
+  public void lowpassIIR(double cutoffFrequency) {
+    opensimCommonJNI.Storage_lowpassIIR(swigCPtr, this, cutoffFrequency);
   }
 
-  public void lowpassFIR(int aOrder, double aCutoffFequency) {
-    opensimCommonJNI.Storage_lowpassFIR(swigCPtr, this, aOrder, aCutoffFequency);
+  public void lowpassFIR(int order, double cutoffFrequency) {
+    opensimCommonJNI.Storage_lowpassFIR(swigCPtr, this, order, cutoffFrequency);
   }
 
   public void addToRdStorage(Storage rStorage, double aStartTime, double aEndTime) {
