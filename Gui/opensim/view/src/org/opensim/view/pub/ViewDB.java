@@ -443,8 +443,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         // TODO make name more informative.
         //String fileName = Places.getUserDirectory()+"/model_json/"+/* JettyMain.getServerWorkingDir()*/vizJson.getModelUUID().toString().substring(0, 8)+".json";
         //String fileName = JettyMain.getServerWorkingDir()+vizJson.getModelUUID().toString().substring(0, 8)+".json";
-        String fileName = JettyMain.getServerWorkingDir()+"model_json/"+vizJson.getModelUUID().toString().substring(0, 8)+".json";
-        
+        //String fileName = JettyMain.getServerWorkingDir()+"model_json/"+vizJson.getModelUUID().toString().substring(0, 8)+".json";
+        String fileName = Places.getUserDirectory()+"/model_json/"+vizJson.getModelUUID().toString().substring(0, 8)+".json";
         //System.out.println("Json file path ="+fileName);
        try {
            // Write vizJson to file and send message to visualizer to open it

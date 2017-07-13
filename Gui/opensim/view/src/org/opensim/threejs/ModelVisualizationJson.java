@@ -14,6 +14,7 @@ import java.util.Set;
 import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.openide.modules.Places;
 import org.opensim.modeling.AbstractPathPoint;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayDecorativeGeometry;
@@ -350,15 +351,16 @@ public class ModelVisualizationJson extends JSONObject {
 
     public JSONObject createCloseModelJson() {
         JSONObject guiJson = new JSONObject();
-        guiJson.put("UUID", modelUUID.toString());  
+        guiJson.put("UUID", modelUUID.toString());
         guiJson.put("Op", "CloseModel");
         return guiJson;
     }
 
     
     public JSONObject createOpenModelJson() {
-       JSONObject guiJson = new JSONObject();
+        JSONObject guiJson = new JSONObject();
         guiJson.put("UUID", modelUUID.toString());  
+        guiJson.put("filePath", Places.getUserDirectory()+"/model_json/"+modelUUID.toString().substring(0, 8) + ".json");
         guiJson.put("Op", "OpenModel");
         guiJson.put("use_offset", movable);
         return guiJson;

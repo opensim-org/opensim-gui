@@ -23,9 +23,9 @@ import org.opensim.utils.TheApp;
 public class JettyMain {
     private static boolean serverup = false;
     private static final String serverRootDir = TheApp.getInstallDir();
-    private static final String pathToStartPage = "/threejs/editor/";
+    private static final String pathToStartPage = "/opensim/threejs/editor/";
     private static final int serverPort = 8002;
-    private static String serverWorkingDir = serverRootDir+"/threejs/editor/";
+    private static String serverWorkingDir = serverRootDir+"/opensim/threejs/editor/";
     /**
      * @param args the command line arguments
      */
@@ -39,7 +39,8 @@ public class JettyMain {
                 // TODO code application logic here
                 Server server = new Server(serverPort);
 
-                String appDir = serverRootDir;
+                //String appDir = serverRootDir;
+                String appDir = "/Users/chris/repos/opensim-gui/6/opensim-gui/Gui/";
                 File fp = new File(appDir);
                 if (!fp.exists()){
                     // Try adding leading "/"
@@ -48,7 +49,7 @@ public class JettyMain {
                         appDir = "/"+appDir;
                     // else should abort
                 }
-                serverWorkingDir = appDir+"/threejs/editor/";
+                serverWorkingDir = appDir+"/opensim/threejs/editor/";
                 URI webRootUri = new File(appDir).toURI();
                 System.out.println("Web Root URI: %s%n"+webRootUri);
 
