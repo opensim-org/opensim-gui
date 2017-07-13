@@ -360,7 +360,8 @@ public class ModelVisualizationJson extends JSONObject {
     public JSONObject createOpenModelJson() {
         JSONObject guiJson = new JSONObject();
         guiJson.put("UUID", modelUUID.toString());  
-        guiJson.put("filePath", Places.getUserDirectory()+"/model_json/"+modelUUID.toString().substring(0, 8) + ".json");
+        //guiJson.put("filePath", Places.getUserDirectory()+"/model_json/"+modelUUID.toString().substring(0, 8) + ".json");
+        guiJson.put("modelJsonPort", "8003");
         guiJson.put("Op", "OpenModel");
         guiJson.put("use_offset", movable);
         return guiJson;
