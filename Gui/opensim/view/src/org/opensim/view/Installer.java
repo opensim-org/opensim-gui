@@ -90,7 +90,7 @@ public class Installer extends ModuleInstall {
                 // text boxes.
                 // doesn't work; UIManager.getLookAndFeelDefaults().put("defaultFont", new Font("Helvetica", Font.BOLD, 8));
                 //UIManager.getLookAndFeelDefaults().put("defaultFont", new FontUIResource("sans-serif", Font.PLAIN, 8));
-                UIManager.put("TextField.font", new FontUIResource("sans-serif", Font.PLAIN, 12));
+                //UIManager.put("TextField.font", new FontUIResource("sans-serif", Font.PLAIN, 16));
             }
             if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
                 // The native slider on macOS looks somewhat nice.
