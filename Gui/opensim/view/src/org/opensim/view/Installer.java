@@ -25,6 +25,7 @@
  */
 package org.opensim.view;
 
+import java.awt.Font;
 import java.beans.PropertyEditor;
 import java.beans.PropertyEditorManager;
 import java.beans.XMLDecoder;
@@ -37,6 +38,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.FontUIResource;
 import org.openide.modules.ModuleInstall;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.Body;
@@ -81,6 +83,15 @@ public class Installer extends ModuleInstall {
         try {
              // Put your startup code here.
             UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
+            if (System.getProperty("os.name").toLowerCase().indexOf("mac") >= 0) {
+                // Reduce font size so that underscores are visible in text fields in the Tool dialogs.
+                // https://github.com/opensim-org/opensim-gui/issues/250
+                // A better solution would be to unconstrain the height of
+                // text boxes.
+                // doesn't work; UIManager.getLookAndFeelDefaults().put("defaultFont", new Font("Helvetica", Font.BOLD, 8));
+                //UIManager.getLookAndFeelDefaults().put("defaultFont", new FontUIResource("sans-serif", Font.PLAIN, 8));
+                UIManager.put("TextField.font", new FontUIResource("sans-serif", Font.PLAIN, 12));
+            }
             if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
                 // The native slider on macOS looks somewhat nice.
                 UIManager.put("SliderUI", "org.opensim.view.OpenSimSliderUI");
