@@ -83,15 +83,6 @@ public class Installer extends ModuleInstall {
         try {
              // Put your startup code here.
             UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
-            if (System.getProperty("os.name").toLowerCase().indexOf("mac") >= 0) {
-                // Reduce font size so that underscores are visible in text fields in the Tool dialogs.
-                // https://github.com/opensim-org/opensim-gui/issues/250
-                // A better solution would be to unconstrain the height of
-                // text boxes.
-                // doesn't work; UIManager.getLookAndFeelDefaults().put("defaultFont", new Font("Helvetica", Font.BOLD, 8));
-                //UIManager.getLookAndFeelDefaults().put("defaultFont", new FontUIResource("sans-serif", Font.PLAIN, 8));
-                //UIManager.put("TextField.font", new FontUIResource("sans-serif", Font.PLAIN, 16));
-            }
             if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
                 // The native slider on macOS looks somewhat nice.
                 UIManager.put("SliderUI", "org.opensim.view.OpenSimSliderUI");
