@@ -99,7 +99,7 @@ public abstract class AbstractToolModel extends Observable {
    public void addCopyOfAnalysis(Analysis analysis) {
       Analysis analysisCopy = Analysis.safeDownCast(analysis.clone()); // C++-side copy
       analysisCopy.setName(analysis.getConcreteClassName()); // Change name...  otherwise name will be "default" since currently the analyses we're making copies of come from the registered object table
-      getAnalysisSet().adoptAndAppend(analysisCopy);
+      getAnalysisSet().cloneAndAppend(analysisCopy);
       setModified(Operation.AnalysisAddedOrRemoved);
    }
    public void replaceAnalysis(int i, Analysis analysis) {
