@@ -25,7 +25,6 @@
  */
 package org.opensim.view;
 
-import java.awt.Font;
 import java.beans.PropertyEditor;
 import java.beans.PropertyEditorManager;
 import java.beans.XMLDecoder;
@@ -38,7 +37,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.plaf.FontUIResource;
 import org.openide.modules.ModuleInstall;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.Body;
