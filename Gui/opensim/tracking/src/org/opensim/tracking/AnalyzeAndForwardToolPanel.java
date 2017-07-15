@@ -1279,7 +1279,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                         .add(timePanelLayout.createSequentialGroup()
                             .add(timePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
                                 .add(org.jdesktop.layout.GroupLayout.LEADING, cmcTimeWindow)
-                                .add(org.jdesktop.layout.GroupLayout.LEADING, initialTime))
+                                .add(org.jdesktop.layout.GroupLayout.LEADING, initialTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 64, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                             .add(jLabel5)
                             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
