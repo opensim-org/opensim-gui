@@ -74,7 +74,7 @@ public class MotionsDB extends Observable // Observed by other entities in motio
     void addMotionDisplayer(Storage simmMotionData, MotionDisplayer displayer) {
         mapMotions2Displayers.put(simmMotionData, displayer);
     }
-    MotionDisplayer getDisplayerForMotion(Storage mot){
+    public MotionDisplayer getDisplayerForMotion(Storage mot){
         return mapMotions2Displayers.get(mot);
     }
     void removeMotionDisplayer(Storage mot) {

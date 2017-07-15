@@ -17,17 +17,20 @@ import org.json.simple.JSONObject;
 import org.opensim.modeling.AbstractPathPoint;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayDecorativeGeometry;
+import org.opensim.modeling.ArrayPathPoint;
 import org.opensim.modeling.BodyList;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.BodyIterator;
 import org.opensim.modeling.Component;
 import org.opensim.modeling.ComponentIterator;
 import org.opensim.modeling.ComponentsList;
+import org.opensim.modeling.ConditionalPathPoint;
 import org.opensim.modeling.DecorativeGeometry;
 import org.opensim.modeling.FrameGeometry;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
+import org.opensim.modeling.MovingPathPoint;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.PathPointSet;
@@ -70,6 +73,7 @@ public class ModelVisualizationJson extends JSONObject {
     private final ArrayList<MotionDisplayer> motionDisplayers = new ArrayList<MotionDisplayer>();
     private JSONObject modelGroundJson=null;
     private boolean movable=true;
+    private final HashMap<Component, UUID> specialComponents = new HashMap<Component, UUID>();
     static {
         movableOpensimTypes.put("Marker", true);
         movableOpensimTypes.put("PathPoint", true);
@@ -124,7 +128,7 @@ public class ModelVisualizationJson extends JSONObject {
             GeometryPath gPath = GeometryPath.safeDownCast(comp);
             boolean isGeometryPath = (gPath!=null);
             if (isGeometryPath){
-                UUID pathUUID = createJsonForGeometryPath(gPath, mdh, state, json_geometries, json_materials);
+                UUID pathUUID = createJsonForGeometryPath(gPath, mdh, json_geometries, json_materials);
                 pathList.put(gPath, pathUUID);
                 // Add to the ID map so that PathOwner translates to GeometryPath
                 Component parentComp = gPath.getOwner();
@@ -304,6 +308,38 @@ public class ModelVisualizationJson extends JSONObject {
                 oneBodyXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1., 1., 1.), visScaleFactor));
                 bodyTransforms_json.add(oneBodyXform_json);
             }
+            // If we have special components
+            // eg. ConditionalPathPoints, MovingPathPoints or WrapPoints, will handle here
+            for (Component comp: specialComponents.keySet()){
+                ConditionalPathPoint cPathPoint = ConditionalPathPoint.safeDownCast(comp);
+                if (cPathPoint!=null){
+                    if (!cPathPoint.isActive(state)){
+                        // get previous or next PathPoint and make coincident
+                    }
+                    else {
+                        Transform localTransform = new Transform();
+                        Vec3 location = cPathPoint.getLocation(state);
+                        localTransform.setP(location);
+                        JSONObject pathpointXform_json = new JSONObject();
+                        pathpointXform_json.put("uuid", specialComponents.get(comp).toString());
+                        pathpointXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1., 1., 1.), visScaleFactor));
+                        bodyTransforms_json.add(pathpointXform_json);
+                    }
+                    continue;
+                }
+                // Update position of MovingPathpoints on each frame
+                MovingPathPoint mPathPoint = MovingPathPoint.safeDownCast(comp);
+                if (mPathPoint!=null){
+                    Transform localTransform = new Transform();
+                    Vec3 location = mPathPoint.getLocation(state);
+                    localTransform.setP(location);
+                    JSONObject pathpointXform_json = new JSONObject();
+                    pathpointXform_json.put("uuid", specialComponents.get(comp).toString());
+                    pathpointXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1., 1., 1.), visScaleFactor));
+                    bodyTransforms_json.add(pathpointXform_json);
+                    continue;
+                }
+            };
             JSONArray geompaths_json = new JSONArray();
             msg.put("paths", geompaths_json);
 
@@ -364,7 +400,7 @@ public class ModelVisualizationJson extends JSONObject {
         return guiJson;
     }
 
-    private UUID createJsonForGeometryPath(GeometryPath path, ModelDisplayHints mdh, State workingState, JSONArray json_geometries, JSONArray json_materials) {
+    private UUID createJsonForGeometryPath(GeometryPath path, ModelDisplayHints mdh, JSONArray json_geometries, JSONArray json_materials) {
         // Create material for path
         Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
         UUID mat_uuid = UUID.randomUUID();
@@ -388,15 +424,20 @@ public class ModelVisualizationJson extends JSONObject {
         pathGeomJson.put("uuid", uuidForPathGeomGeometry.toString());
         pathGeomJson.put("type", "PathGeometry");
         pathGeomJson.put("name", path.getAbsolutePathName()+"Control");
-        pathGeomJson.put("segments", path.getPathPointSet().getSize()-1);
+        ArrayPathPoint arrayPathPts = path.getCurrentPath(state);
+        pathGeomJson.put("segments", arrayPathPts.getSize()-1);
         json_geometries.add(pathGeomJson);
         
-        PathPointSet ppts = path.getPathPointSet();
-        for (int i=0; i< ppts.getSize(); i++){
-            AbstractPathPoint pathPoint = ppts.get(i);
+        for (int i=0; i< arrayPathPts.getSize(); i++){
+            AbstractPathPoint pathPoint = arrayPathPts.get(i);
             // Create a Sphere with internal opensimType PathPoint
             // attach it to the frame it lives on.
+            String pptType = pathPoint.getConcreteClassName();
+
             UUID pathpoint_uuid = addPathPointGeometryToParent(pathPoint, json_geometries, pathpointMatUUID.toString());
+            if (pptType.compareTo("PathPoint")!=0){
+                specialComponents.put(pathPoint, pathpoint_uuid);
+            }
             //UUID ppt_json = createJsonForPathPoint(pathPoint);
             pathpoint_jsonArr.add(pathpoint_uuid.toString());
             ArrayList<UUID> comp_uuids = new ArrayList<UUID>();
