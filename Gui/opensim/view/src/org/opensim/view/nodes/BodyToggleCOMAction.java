@@ -87,6 +87,7 @@ public final class BodyToggleCOMAction extends BooleanStateAction {
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         //if(selected.length!=1) return false; // only if a single item is selected
         // Action shouldn't be available otherwise
+        /* FIX40
         if( selected[0] instanceof OneBodyNode ){
             OneBodyNode dNode = (OneBodyNode)selected[0];
             BodyDisplayer rep = null;//BodyToggleFrameAction.GetBodyDisplayerForBody( dNode.getOpenSimObject() );
@@ -97,7 +98,7 @@ public final class BodyToggleCOMAction extends BooleanStateAction {
                 Model model=((BodiesNode)selected[0]).getModelForNode();
                 super.setBooleanState( ViewDB.getInstance().getModelVisuals(model).isShowCOM() );
                 return true;
-        }
+        } */
         return false;
     }
     
