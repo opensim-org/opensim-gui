@@ -1151,10 +1151,8 @@ public class MotionDisplayer implements SelectionListener {
             experimenalMarkerGeometryJson = new JSONObject();
             UUID uuidForMarkerGeometry = UUID.randomUUID();
             getExperimenalMarkerGeometryJson().put("uuid", uuidForMarkerGeometry.toString());
-            getExperimenalMarkerGeometryJson().put("type", "BoxGeometry");
-            getExperimenalMarkerGeometryJson().put("width", 8);
-            getExperimenalMarkerGeometryJson().put("height", 8);
-            getExperimenalMarkerGeometryJson().put("depth", 8);
+            getExperimenalMarkerGeometryJson().put("type", "SphereGeometry");
+            getExperimenalMarkerGeometryJson().put("radius", 15);
             getExperimenalMarkerGeometryJson().put("name", "DefaultExperimentalMarker");
             JSONArray json_geometries = (JSONArray) modelVisJson.get("geometries");
             json_geometries.add(getExperimenalMarkerGeometryJson());
