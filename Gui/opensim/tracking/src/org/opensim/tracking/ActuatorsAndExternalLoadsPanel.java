@@ -265,7 +265,7 @@ public class ActuatorsAndExternalLoadsPanel extends javax.swing.JPanel {
                 .add(17, 17, 17)
                 .add(jLabel3)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(externalLoadsFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                .add(externalLoadsFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jEditExternalForceSetButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 28, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -279,9 +279,9 @@ public class ActuatorsAndExternalLoadsPanel extends javax.swing.JPanel {
                         .add(jLabel3))
                     .add(org.jdesktop.layout.GroupLayout.LEADING, externalLoadsPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .add(externalLoadsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(externalLoadsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.CENTER)
                             .add(jEditExternalForceSetButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(externalLoadsFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))))
+                            .add(externalLoadsFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
 
