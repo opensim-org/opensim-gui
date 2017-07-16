@@ -1533,24 +1533,21 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
             cmcInputPanelLayout.setVerticalGroup(
                 cmcInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                 .add(cmcInputPanelLayout.createSequentialGroup()
-                    .add(cmcInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(cmcInputPanelLayout.createSequentialGroup()
-                            .add(cmcInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                .add(cmcDesiredKinematicsFileName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(jLabel19))
-                            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                            .add(cmcInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                .add(jLabel22)
-                                .add(cmcFilterKinematicsCheckBox)
-                                .add(cmcCutoffFrequency, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                            .add(cmcTaskSetFileName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .add(cmcInputPanelLayout.createSequentialGroup()
-                            .add(79, 79, 79)
-                            .add(cmcConstraintsCheckBox)))
-                    .add(7, 7, 7)
+                    .add(cmcInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                        .add(cmcDesiredKinematicsFileName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(jLabel19))
+                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                    .add(cmcInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(jLabel22)
+                        .add(cmcFilterKinematicsCheckBox)
+                        .add(cmcCutoffFrequency, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                     .add(cmcInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.CENTER)
                         .add(jLabel20)
+                        .add(cmcTaskSetFileName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                    .add(cmcInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.CENTER)
+                        .add(cmcConstraintsCheckBox)
                         .add(cmcConstraintsFileName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
@@ -1901,7 +1898,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                     .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                     .add(inverseInputPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                    .add(cmcInputPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 161, Short.MAX_VALUE)
+                    .add(cmcInputPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                     .add(staticOptimizationPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -2077,42 +2074,6 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       }
       else analyzeToolModel().setInputSource(AnalyzeToolModel.InputSource.Unspecified);
     }//GEN-LAST:event_inputSourceRadioButtonActionPerformed1
-
-   //------------------------------------------------------------------------
-   // CMC Input Panel
-   //------------------------------------------------------------------------
-
-   private void cmcConstraintsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmcConstraintsCheckBoxActionPerformed
-      ((TrackingToolModel)toolModel).setConstraintsEnabled(cmcConstraintsCheckBox.isSelected());
-   }//GEN-LAST:event_cmcConstraintsCheckBoxActionPerformed
-
-   private void cmcConstraintsFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_cmcConstraintsFileNameStateChanged
-      ((TrackingToolModel)toolModel).setConstraintsFileName(cmcConstraintsFileName.getFileName());
-   }//GEN-LAST:event_cmcConstraintsFileNameStateChanged
-
-   private void cmcTaskSetFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_cmcTaskSetFileNameStateChanged
-      ((TrackingToolModel)toolModel).setTaskSetFileName(cmcTaskSetFileName.getFileName());
-   }//GEN-LAST:event_cmcTaskSetFileNameStateChanged
-
-   private void cmcFilterKinematicsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmcFilterKinematicsCheckBoxActionPerformed
-      ((TrackingToolModel)toolModel).setFilterKinematics(cmcFilterKinematicsCheckBox.isSelected());
-   }//GEN-LAST:event_cmcFilterKinematicsCheckBoxActionPerformed
-
-   private void cmcCutoffFrequencyFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmcCutoffFrequencyFocusLost
-      if(!evt.isTemporary()) cmcCutoffFrequencyActionPerformed(null);
-   }//GEN-LAST:event_cmcCutoffFrequencyFocusLost
-
-   private void cmcCutoffFrequencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmcCutoffFrequencyActionPerformed
-      try {
-          ((TrackingToolModel)toolModel).setLowpassCutoffFrequency(numFormat.parse(cmcCutoffFrequency.getText()).doubleValue());
-      } catch (ParseException ex) {
-         cmcCutoffFrequency.setText(numFormat.format( ((TrackingToolModel)toolModel).getLowpassCutoffFrequency()));
-      }
-   }//GEN-LAST:event_cmcCutoffFrequencyActionPerformed
-
-   private void cmcDesiredKinematicsFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_cmcDesiredKinematicsFileNameStateChanged
-       ((TrackingToolModel)toolModel).setDesiredKinematicsFileName(cmcDesiredKinematicsFileName.getFileName());
-   }//GEN-LAST:event_cmcDesiredKinematicsFileNameStateChanged
 
    //------------------------------------------------------------------------
    // RRA Settings Panel
@@ -2340,6 +2301,42 @@ private void StepIntervalSpinnerFocusLost(java.awt.event.FocusEvent evt) {//GEN-
 // TODO add your handling code here:
     StepIntervalSpinnerStateChanged(null);
 }//GEN-LAST:event_StepIntervalSpinnerFocusLost
+
+   //------------------------------------------------------------------------
+   // CMC Input Panel
+   //------------------------------------------------------------------------
+
+    private void cmcConstraintsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmcConstraintsCheckBoxActionPerformed
+        ((TrackingToolModel)toolModel).setConstraintsEnabled(cmcConstraintsCheckBox.isSelected());
+    }//GEN-LAST:event_cmcConstraintsCheckBoxActionPerformed
+
+    private void cmcConstraintsFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_cmcConstraintsFileNameStateChanged
+        ((TrackingToolModel)toolModel).setConstraintsFileName(cmcConstraintsFileName.getFileName());
+    }//GEN-LAST:event_cmcConstraintsFileNameStateChanged
+
+    private void cmcTaskSetFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_cmcTaskSetFileNameStateChanged
+        ((TrackingToolModel)toolModel).setTaskSetFileName(cmcTaskSetFileName.getFileName());
+    }//GEN-LAST:event_cmcTaskSetFileNameStateChanged
+
+    private void cmcCutoffFrequencyFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmcCutoffFrequencyFocusLost
+        if(!evt.isTemporary()) cmcCutoffFrequencyActionPerformed(null);
+    }//GEN-LAST:event_cmcCutoffFrequencyFocusLost
+
+    private void cmcCutoffFrequencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmcCutoffFrequencyActionPerformed
+        try {
+            ((TrackingToolModel)toolModel).setLowpassCutoffFrequency(numFormat.parse(cmcCutoffFrequency.getText()).doubleValue());
+        } catch (ParseException ex) {
+            cmcCutoffFrequency.setText(numFormat.format( ((TrackingToolModel)toolModel).getLowpassCutoffFrequency()));
+        }
+    }//GEN-LAST:event_cmcCutoffFrequencyActionPerformed
+
+    private void cmcFilterKinematicsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmcFilterKinematicsCheckBoxActionPerformed
+        ((TrackingToolModel)toolModel).setFilterKinematics(cmcFilterKinematicsCheckBox.isSelected());
+    }//GEN-LAST:event_cmcFilterKinematicsCheckBoxActionPerformed
+
+    private void cmcDesiredKinematicsFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_cmcDesiredKinematicsFileNameStateChanged
+        ((TrackingToolModel)toolModel).setDesiredKinematicsFileName(cmcDesiredKinematicsFileName.getFileName());
+    }//GEN-LAST:event_cmcDesiredKinematicsFileNameStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel HzJLabel;
