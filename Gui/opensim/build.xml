@@ -73,7 +73,16 @@
             <fileset dir="${models.dir}/Geometry"/>
         </copy>
         <copy todir="${opensim.dist.dir}/Models">
-            <fileset dir="${models.dir}/Models"/>
+            <fileset dir="${models.dir}/Models">
+                <!-- TODO For ISB 2017 workshop, temporarily excluding muscles
+                     that do not load or visualize properly (e.g., subterranean models);
+                     https://github.com/opensim-org/opensim-gui/issues/269 -->
+                <exclude name="**/Pendulum/**"/>
+                <exclude name="**/BouncingBlock/**"/>
+                <exclude name="**/ToyLanding/**"/>
+                <exclude name="**/*with_pat_lig*"/>
+                <exclude name="**/SoccerKick/**"/>
+            </fileset>
         </copy>
     </target>
     <target name="copy-visualizer" description="Copy Visualizer to installer">
