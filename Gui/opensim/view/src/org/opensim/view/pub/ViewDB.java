@@ -388,6 +388,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                if (visModel != null) visModel.cleanup();
                if (websocketdb != null){
                     ModelVisualizationJson dJson = mapModelsToJsons.get(dModel);
+                    if (dJson==null)
+                        return;
                     JSONObject msg = dJson.createCloseModelJson();
                     websocketdb.broadcastMessageJson(msg, null);
                     if (debugLevel > 1)
