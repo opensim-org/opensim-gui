@@ -35,8 +35,8 @@ public class MetaDataLengthZero extends OpenSimException {
     super.delete();
   }
 
-  public MetaDataLengthZero(String file, long line, String func, String key) {
-    this(opensimCommonJNI.new_MetaDataLengthZero(file, line, func, key), true);
+  public MetaDataLengthZero(String file, long line, String func, String msg) {
+    this(opensimCommonJNI.new_MetaDataLengthZero(file, line, func, msg), true);
   }
 
 }
