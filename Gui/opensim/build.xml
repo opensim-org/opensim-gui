@@ -31,6 +31,12 @@
     <condition property="opensim.dist.dir" value="dist/OpenSim.app/Contents/Resources/OpenSim">
         <os family="mac"/>
     </condition>
+    <condition property="opensim.threejs.dir" value="${opensim.dist.dir}/threejs">
+        <os family="mac"/>
+    </condition>
+    <condition property="opensim.threejs.dir" value="${opensim.dist.dir}/OpenSim/threejs">
+        <os family="windows"/>
+    </condition>
     <property name="app.conf" value="${installer-files.dir}/opensim.conf"/>
     <import file="nbproject/build-impl.xml"/>
     <target name="debug-properties">
@@ -71,14 +77,14 @@
         </copy>
     </target>
     <target name="copy-visualizer" description="Copy Visualizer to installer">
-        <copy todir="${opensim.dist.dir}/threejs">
+        <copy todir="${opensim.threejs.dir}">
             <fileset dir="threejs">
                 <exclude name="**/docs/**"/>
                 <exclude name="**/test/**"/>
                 <exclude name="**/examples/**"/>
             </fileset>
         </copy>
-        <copy todir="${opensim.dist.dir}/threejs/examples/js">
+        <copy todir="${opensim.threejs.dir}/examples/js">
             <fileset dir="threejs/examples/js" />
         </copy>
     </target>
