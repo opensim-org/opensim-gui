@@ -4754,7 +4754,8 @@ public class opensimSimulationJNI {
   public final static native void Model_initStateWithoutRecreatingSystem(long jarg1, Model jarg1_, long jarg2, State jarg2_);
   public final static native void Model_invalidateSystem(long jarg1, Model jarg1_);
   public final static native boolean Model_isValidSystem(long jarg1, Model jarg1_);
-  public final static native void Model_formStateStorage(long jarg1, Model jarg1_, long jarg2, Storage jarg2_, long jarg3, Storage jarg3_);
+  public final static native void Model_formStateStorage__SWIG_0(long jarg1, Model jarg1_, long jarg2, Storage jarg2_, long jarg3, Storage jarg3_, boolean jarg4);
+  public final static native void Model_formStateStorage__SWIG_1(long jarg1, Model jarg1_, long jarg2, Storage jarg2_, long jarg3, Storage jarg3_);
   public final static native void Model_formQStorage(long jarg1, Model jarg1_, long jarg2, Storage jarg2_, long jarg3, Storage jarg3_);
   public final static native void Model_updateAssemblyConditions(long jarg1, Model jarg1_, long jarg2, State jarg2_);
   public final static native void Model_assemble__SWIG_0(long jarg1, Model jarg1_, long jarg2, State jarg2_, long jarg3, Coordinate jarg3_, double jarg4);
@@ -4901,6 +4902,7 @@ public class opensimSimulationJNI {
   public final static native long Model_getActuatorList(long jarg1, Model jarg1_);
   public final static native long Model_getThelen2003MuscleList(long jarg1, Model jarg1_);
   public final static native long Model_getMillard2012EquilibriumMuscleList(long jarg1, Model jarg1_);
+  public final static native long new_Model__SWIG_2(long jarg1, Model jarg1_);
   public final static native long AbstractPathPoint_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void AbstractPathPoint_assign(long jarg1, AbstractPathPoint jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String AbstractPathPoint_getClassName();

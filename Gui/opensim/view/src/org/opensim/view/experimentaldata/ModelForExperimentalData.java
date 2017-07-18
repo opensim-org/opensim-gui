@@ -64,6 +64,8 @@ public class ModelForExperimentalData extends Model{
         //setup();
         dEngine = this.getSimbodyEngine();
         ground = this.get_ground();
+        this.get_ModelVisualPreferences().get_ModelDisplayHints().set_show_frames(true);
+        ground.get_frame_geometry().get_Appearance().set_visible(true);
         // blank filename to make sure it doesn't get overwritten
         this.setInputFileName("");
        

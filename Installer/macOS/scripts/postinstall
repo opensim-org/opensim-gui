@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# Who's the current user running the installer?
+# https://apple.stackexchange.com/questions/144159/how-can-i-determine-the-invoking-user-in-an-apple-installer-postinstall-script
+INSTALLER_USER=$(stat -f '%Su' $HOME)
+
+# TODO remove when we fix https://github.com/opensim-org/opensim-gui/issues/194
+# In case the user chose to install in the system-wide /Applications directory,
+# change the permissions of the threejs/editor so that the GUI can write *.json
+# files to this dir.
+# The argument $2 is the target install location for the app.
+# http://s.sudre.free.fr/Stuff/PackageMaker_Howto.html
+# If installed system-wide, the permissions group will be wheel; we need it to
+# be staff.
+THREEJS_EDITOR_DIR="$2/OpenSim 4.0.Beta/OpenSim 4.0.Beta.app/Contents/Resources/OpenSim/threejs/editor"
+chown $INSTALLER_USER:staff "$THREEJS_EDITOR_DIR"
+# Allow other users to also use OpenSim.
+chmod g+w "$THREEJS_EDITOR_DIR"
+
+# TODO The next two commands are a temporary hack to deal with
+# https://github.com/opensim-org/opensim-gui/issues/251.
+
+# The current user should be able to edit the app support dir; so use `-u`.
+sudo -u $INSTALLER_USER mkdir -p "$HOME/Library/Application Support/OpenSim/4.0.Beta/config/Windows2Local/Modes/"
+sudo -u $INSTALLER_USER cat > "$HOME/Library/Application Support/OpenSim/4.0.Beta/config/Windows2Local/Modes/editor.wsmode" <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mode version="2.4">
+    <name unique="editor"  />
+  <kind type="editor" />
+  <state type="joined"  />
+  <bounds x="0" y="0" width="0" height="0" />
+  <frame state="0"/>
+    <active-tc  id="jxBrowserTopComponent" />
+    <empty-behavior permanent="true"/>
+</mode>
+
+EOF
+

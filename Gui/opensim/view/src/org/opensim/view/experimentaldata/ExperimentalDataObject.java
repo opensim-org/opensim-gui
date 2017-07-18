@@ -32,13 +32,16 @@
 
 package org.opensim.view.experimentaldata;
 
+import java.util.ArrayList;
 import java.util.UUID;
+import org.json.simple.JSONObject;
 import org.opensim.modeling.AdhocModelComponent;
 import org.opensim.modeling.ArrayDecorativeGeometry;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.ModelDisplayHints;
 import org.opensim.modeling.State;
 import org.opensim.view.OpenSimvtkGlyphCloud;
+import org.opensim.view.motions.MotionDisplayer;
 
 /**
  * An Object representing data to be visualized from a data/motion file e.g. Marker, GRF, etc.
@@ -113,13 +116,8 @@ public class ExperimentalDataObject extends AdhocModelComponent {
         this.startIndexInFileNotIncludingTime = startIndexInFileNotIncludingTime;
     }
 
-    void updateGeometry(ArrayDouble interpolatedStates) {
+    void updateDecorations(ArrayDouble interpolatedStates) {
         throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    @Override
-    public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
-        super.generateDecorations(fixed, hints, state, appendToThis); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -135,5 +133,8 @@ public class ExperimentalDataObject extends AdhocModelComponent {
     public void setDataObjectUUID(UUID dataObjectUUID) {
         this.dataObjectUUID = dataObjectUUID;
     }
-
+    
+    public JSONObject createDecorationJson(ArrayList<UUID> comp_uuids, MotionDisplayer motionDisplayer){
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }

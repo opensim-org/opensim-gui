@@ -4,6 +4,12 @@
  */
 package org.opensim.view.experimentaldata;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.UUID;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.opensim.modeling.ArrayDecorativeGeometry;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.DecorativeSphere;
@@ -11,6 +17,7 @@ import org.opensim.modeling.ModelDisplayHints;
 import org.opensim.modeling.State;
 import org.opensim.modeling.Transform;
 import org.opensim.modeling.Vec3;
+import org.opensim.view.motions.MotionDisplayer;
 
 /**
  *
@@ -77,9 +84,33 @@ public class ExperimentalMarker extends MotionObjectBodyPoint {
     }
 
     @Override
-    void updateGeometry(ArrayDouble interpolatedStates) {
+    void updateDecorations(ArrayDouble interpolatedStates) {
         int idx = getStartIndexInFileNotIncludingTime();
         setPoint(new double[]{interpolatedStates.get(idx)/1000., interpolatedStates.get(idx+1)/1000., interpolatedStates.get(idx+2)/1000.});
+    }
+    
+    // Create JSON object to represent ExperimentalMarker
+    @Override
+    public JSONObject createDecorationJson(ArrayList<UUID> comp_uuids, MotionDisplayer motionDisplayer) {
+        // Create Object with proper name, add it to ground, update Map of Object to UUID
+        JSONObject expMarker_json = new JSONObject();
+        UUID mesh_uuid = UUID.randomUUID();
+        expMarker_json.put("uuid", mesh_uuid.toString());
+        expMarker_json.put("type", "Mesh");
+        expMarker_json.put("opensimtype", "ExperimentalMarker");
+        expMarker_json.put("name", getName());
+        expMarker_json.put("geometry", motionDisplayer.getExperimenalMarkerGeometryJson().get("uuid"));
+        expMarker_json.put("material", motionDisplayer.getExperimenalMarkerMaterialJson().get("uuid"));
+        JSONArray pos = new JSONArray();
+        for (int i = 0; i < 3; i++) {
+            pos.add(0.0);
+        }
+        expMarker_json.put("position", pos);
+        expMarker_json.put("castShadow", false);
+        expMarker_json.put("userData", "NonEditable");
+        
+        comp_uuids.add(mesh_uuid);
+        return expMarker_json;
     }
 
     

@@ -150,15 +150,15 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
         patterns.add(2,  new String[]{"_tx", "_ty", "_tz"});
         patterns.add(3,  new String[]{"_px", "_py", "_pz"});
         patterns.add(4,  new String[]{"_1", "_2", "_3"});
-        patterns.add(5,  new String[]{"_x", "_y", "_z"});
-        patterns.add(6,  new String[]{"_fx", "_fy", "_fz"});
+        //patterns.add(5,  new String[]{"_x", "_y", "_z"}); removed so that Torques dont classify as points
+        patterns.add(5,  new String[]{"_fx", "_fy", "_fz"});
          classifications.add(0, ExperimentalDataItemType.PointForceData);
         classifications.add(1, ExperimentalDataItemType.PointData);
         classifications.add(2, ExperimentalDataItemType.PointData);
         classifications.add(3, ExperimentalDataItemType.PointData);
         classifications.add(4, ExperimentalDataItemType.PointData);
-        classifications.add(5, ExperimentalDataItemType.PointData);
-        classifications.add(6, ExperimentalDataItemType.BodyForceData);
+        //classifications.add(5, ExperimentalDataItemType.PointData);
+        classifications.add(5, ExperimentalDataItemType.BodyForceData);
          
     }
     public Vector<ExperimentalDataObject> classifyColumns() {
@@ -221,8 +221,8 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
                     break;
                 }
             }
-            if (!found){
-                classified.add(new ExperimentalDataObject(columnType, label, i-1));
+            if (!found){ // Not adding here so we don't need to check for UNKNOWN downstream
+                //classified.add(new ExperimentalDataObject(columnType, label, i-1));
                 //System.out.println("Column "+columnType.toString()+ " unclassified");
             }
         }
@@ -496,11 +496,11 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
     public MotionDisplayer getMotionDisplayer() {
         return motionDisplayer;
     }
-
-    public void updateComponentGeometry(ArrayDouble interpolatedStates) {
+	// delegate to ExperimentalDataObjects the task of updating their own data
+    public void updateDecorations(ArrayDouble interpolatedStates) {
         if (classified !=null && classified.size()!=0){
             for(ExperimentalDataObject dataObject:classified){
-                dataObject.updateGeometry(interpolatedStates);
+                dataObject.updateDecorations(interpolatedStates);
             }
         }
     }

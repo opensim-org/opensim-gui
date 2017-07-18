@@ -176,7 +176,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         setForeground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(32767, 50));
         setMinimumSize(new java.awt.Dimension(0, 50));
-        setPreferredSize(new java.awt.Dimension(630, 50));
+        setPreferredSize(new java.awt.Dimension(645, 50));
 
         jPlaybackButtonsPanel.setToolTipText("Motion Controls");
         jPlaybackButtonsPanel.setMaximumSize(new java.awt.Dimension(32767, 16));
@@ -369,7 +369,6 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         jWrapToggleButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jWrapToggleButton.setMaximumSize(new java.awt.Dimension(24, 42));
         jWrapToggleButton.setMinimumSize(new java.awt.Dimension(24, 42));
-        jWrapToggleButton.setOpaque(true);
         jWrapToggleButton.setPreferredSize(new java.awt.Dimension(24, 42));
         jWrapToggleButton.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/org/opensim/view/motions/images/wrap_beveled_selected.png"))); // NOI18N
         jWrapToggleButton.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/org/opensim/view/motions/images/wrap_beveled_rollover.png"))); // NOI18N
@@ -440,7 +439,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
                         .add(jPlaybackButtonsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jEndTimeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(jMotionSlider, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
+                    .add(jMotionSlider, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jWrapToggleButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -455,7 +454,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
                             .add(org.jdesktop.layout.GroupLayout.LEADING, layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                 .add(jTimeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .add(jLabelForTimeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, jMotionSlider, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, jMotionSlider, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .add(0, 0, 0)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
@@ -683,11 +682,11 @@ public class MotionControlJPanel extends javax.swing.JToolBar
                getMasterMotion().add(mdb.getCurrentMotion(i));
                ModelMotionPair currentModelMotionPair = mdb.getCurrentMotion(i);
                Storage mot = currentModelMotionPair.motion;
-               MotionsDB.getInstance().getDisplayerForMotion(mot).setupMotionDisplay();
+               /* MotionsDB.getInstance().getDisplayerForMotion(mot).setupMotionDisplay();
                ArrayList<MotionDisplayer> associatedDisplayers = getMasterMotion().getDisplayer(0).getAssociatedMotions();
                // Find associated motions as well and re-associate them
                for (int j=0; j<associatedDisplayers.size(); j++)
-                   associatedDisplayers.get(j).setupMotionDisplay();
+                   associatedDisplayers.get(j).setupMotionDisplay(); */
             }
             getMasterMotion().setTime(currentTime);
             

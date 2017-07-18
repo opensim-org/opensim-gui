@@ -35,8 +35,8 @@ public class EmptyTable extends OpenSimException {
     super.delete();
   }
 
-  public EmptyTable() {
-    this(opensimCommonJNI.new_EmptyTable(), true);
+  public EmptyTable(String file, long line, String func) {
+    this(opensimCommonJNI.new_EmptyTable(file, line, func), true);
   }
 
 }

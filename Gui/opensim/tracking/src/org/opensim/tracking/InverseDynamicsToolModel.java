@@ -72,7 +72,7 @@ public class InverseDynamicsToolModel extends AbstractToolModelWithExternalLoads
          MotionsDB.getInstance().clearCurrent();
 
          // Re-initialize our copy of the model
-         Model workersModel = Model.safeDownCast(getOriginalModel().clone());
+         Model workersModel = new Model(getOriginalModel());
          workersModel.setName("workerModel");
          String tempFileName=getOriginalModel().getInputFileName();
          //int loc = tempFileName.lastIndexOf(".");

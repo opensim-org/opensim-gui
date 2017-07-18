@@ -29,6 +29,9 @@
 package org.opensim.view.pub;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -39,7 +42,6 @@ import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
-import java.util.UUID;
 import java.util.Vector;
 import java.util.prefs.Preferences;
 import javax.swing.SwingUtilities;
@@ -61,7 +63,6 @@ import org.openide.util.lookup.InstanceContent;
 import org.opensim.modeling.*;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.swingui.SwingWorker;
-import org.opensim.threejs.ExportSceneToThreeJsAction;
 import org.opensim.threejs.JSONMessageHandler;
 import org.opensim.threejs.JSONUtilities;
 import org.opensim.threejs.ModelVisualizationJson;
@@ -145,7 +146,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    private ArrayList<Selectable> selectedObjects = new ArrayList<Selectable>(0);
    private Hashtable<Selectable, vtkCaptionActor2D> selectedObjectsAnnotations = new Hashtable<Selectable, vtkCaptionActor2D>(0);
    private ArrayList<SelectionListener> selectionListeners = new ArrayList<SelectionListener>(0);
-   
+   private Hashtable<ModelVisualizationJson, Path> modelVisToJsonFilesMap = new Hashtable<ModelVisualizationJson, Path>();
    private AxesActor     axesAssembly=null;
    private boolean axesDisplayed=false;
    private vtkTextActor textActor=null; 
@@ -345,7 +346,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                 }
                else {
                    // Same as open visualizer window 
-                   VisualizerWindowAction.openVisualizerWindow();
+                   startVisualizationServer();
                }
               // Check if this refits scene into window
                // int rc = newModelVisual.getModelDisplayAssembly().GetReferenceCount();
@@ -387,11 +388,20 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                if (visModel != null) visModel.cleanup();
                if (websocketdb != null){
                     ModelVisualizationJson dJson = mapModelsToJsons.get(dModel);
+                    if (dJson==null)
+                        return;
                     JSONObject msg = dJson.createCloseModelJson();
                     websocketdb.broadcastMessageJson(msg, null);
                     if (debugLevel > 1)
                         System.out.println(msg.toJSONString());
                     mapModelsToJsons.remove(dModel);
+                    try {
+                       if (modelVisToJsonFilesMap.get(dJson)!=null)
+                            Files.deleteIfExists(modelVisToJsonFilesMap.get(dJson));
+                    } catch (IOException ex) {
+                       Exceptions.printStackTrace(ex);
+                    }
+                    modelVisToJsonFilesMap.remove(dJson);
                     if (currentJson == dJson) // Cleanup stale Json, will be set fresh by next current model
                         currentJson = null;
                 }
@@ -436,6 +446,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
        try {
            // Write vizJson to file and send message to visualizer to open it
            JSONUtilities.writeJsonFile(vizJson, fileName);
+           modelVisToJsonFilesMap.put(vizJson, Paths.get(fileName));
        } catch (IOException ex) {
            Exceptions.printStackTrace(ex);
        }
@@ -650,10 +661,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                            }});
              } 
          }
-         if (websocketdb == null){
-             // Try to open a visualizer window
-             VisualizerWindowAction.openVisualizerWindow();
-         }
+
       }
    }
    /**
@@ -1687,6 +1695,12 @@ public final class ViewDB extends Observable implements Observer, LookupListener
          ObjectsChangedEvent evnt = new ObjectsChangedEvent(this, model, objs);
          getInstance().setChanged();
          getInstance().notifyObservers(evnt);
+    }
+
+    public void RemoveVisualizerObject(JSONObject object2Remove, String parentUuid) {
+        if (websocketdb!=null){
+            websocketdb.broadcastMessageJson(currentJson.createRemoveObjectCommand(object2Remove, parentUuid), null);
+        }
     }
 
    /**
