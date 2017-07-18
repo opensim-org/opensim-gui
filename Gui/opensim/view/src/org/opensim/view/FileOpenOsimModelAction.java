@@ -46,26 +46,31 @@ import org.opensim.view.pub.OpenSimDB;
 
 public class FileOpenOsimModelAction extends CallableSystemAction {
     
-    //protected String fileName;
     
     public void performAction() {
         // TODO implement action body
         // Browse for model file
-        String fileName = FileUtils.getInstance().browseForFilename(FileUtils.OpenSimModelFileFilter);
-        if (fileName != null){
-            ProgressHandle progressHandle = ProgressHandleFactory.createHandle("Loading model file "+fileName+"...");
-            try {
-                progressHandle.start();
-                loadModel(fileName);
-                progressHandle.finish();
-                StatusDisplayer.getDefault().setStatusText("");
-            } catch (IOException ex) {
-                progressHandle.finish();
-                ErrorDialog.displayIOExceptionDialog("OpenSim Model Loading Error",
-                      "Could not construct a model from "+fileName+". Possible reasons: syntax error or unsupported format.", ex);
-                
-            }    
-        }
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                String fileName = FileUtils.getInstance().browseForFilename(FileUtils.OpenSimModelFileFilter);
+                if (fileName != null) {
+                    ProgressHandle progressHandle = ProgressHandleFactory.createHandle("Loading model file " + fileName + "...");
+                    try {
+                        progressHandle.start();
+                        loadModel(fileName);
+                        progressHandle.finish();
+                        StatusDisplayer.getDefault().setStatusText("");
+                    } catch (IOException ex) {
+                        progressHandle.finish();
+                        ErrorDialog.displayIOExceptionDialog("OpenSim Model Loading Error",
+                                "Could not construct a model from " + fileName + ". Possible reasons: syntax error or unsupported format.", ex);
+
+                    }
+
+                }
+            }
+        });
     }
 
      /**
