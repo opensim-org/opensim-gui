@@ -82,6 +82,7 @@
                 <exclude name="**/ToyLanding/**"/>
                 <exclude name="**/*with_pat_lig*"/>
                 <exclude name="**/SoccerKick/**"/>
+                <exclude name="**/*Patellae/**"/>
             </fileset>
         </copy>
     </target>
