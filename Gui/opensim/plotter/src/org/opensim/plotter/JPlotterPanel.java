@@ -1653,7 +1653,7 @@ public class JPlotterPanel extends javax.swing.JPanel
          reporter.begin(openSimContext.getCurrentStateRef());
          reporter.step(saveState, key);
          statesStorage=(Storage) reporter.getStatesStorage().clone();
-         statesStorage.print("StatesFromReporter.sto");
+         //statesStorage.print("StatesFromReporter.sto");
           // make states for analysis by setting fiberlength and activation and form complete storage
          StateVector statevec = statesStorage.getStateVector(0);
          ArrayDouble statesForAnalysis = new ArrayDouble(statevec.getData());
