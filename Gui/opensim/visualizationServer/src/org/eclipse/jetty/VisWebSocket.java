@@ -40,8 +40,12 @@ public class VisWebSocket extends Observable { // Socket to handle incoming traf
     public void onOpen (Session peer) {
         if (!peers.contains(peer)){
             peers.add(peer);
-            System.out.println("Connected...");
+            System.out.println("Connected... adding peer");
+            this.setChanged();
+            this.notifyObservers();
         }
+        
+        
     }
     
     @OnWebSocketClose
@@ -53,7 +57,7 @@ public class VisWebSocket extends Observable { // Socket to handle incoming traf
     
     @OnWebSocketError
      public void onError (Session peer, Throwable er) {
-        System.out.println("onError");
+        //System.out.println("onError");
     }        
     // Receive message from Visualizer
     @OnWebSocketMessage
