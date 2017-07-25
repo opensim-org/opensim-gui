@@ -31,25 +31,37 @@ import org.openide.nodes.Node;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
-import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.nodes.OneComponentNode;
-import org.opensim.view.nodes.OneGeometryNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
+import org.opensim.view.nodes.OpenSimObjectSetNode;
 
 public final class ObjectDisplayOpacityAction extends CallableSystemAction {
    
    public void performAction() {
-      Vector<OneComponentNode> objects = new Vector<OneComponentNode>();
-      Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
-      for(int i=0; i<selected.length; i++) {
-         if(selected[i] instanceof OneComponentNode)
-            collectDescendentNodes((OneComponentNode)selected[i], objects);
-      }
+      Vector<OneComponentNode> objects = CollectAffectedComponentNodes();
       ObjectDisplayOpacityPanel.showDialog(objects);
    }
+
+    protected Vector<OneComponentNode> CollectAffectedComponentNodes() {
+        Vector<OneComponentNode> objects = new Vector<OneComponentNode>();
+        Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
+        for(int i=0; i<selected.length; i++) {
+            if(selected[i] instanceof OneComponentNode)
+                collectDescendentNodes((OneComponentNode)selected[i], objects);
+            else if (selected[i] instanceof OpenSimObjectSetNode){
+                // Get children nd descend if instanceof OneComponentNode
+                Children ch = ((OpenSimObjectSetNode) selected[i]).getChildren();
+                for (int chNum=0; chNum < ch.getNodesCount(); chNum++){
+                    if (ch.getNodeAt(chNum) instanceof OneComponentNode)
+                        collectDescendentNodes((OneComponentNode)ch.getNodeAt(chNum), objects);
+                }
+            }
+        } 
+        return objects;
+    }
    // node could be a Group or a list of objects not backed by OpenSim objects 
-    public void collectDescendentNodes(OpenSimObjectNode node, Vector<OneComponentNode> descendents) {
+    protected void collectDescendentNodes(OpenSimObjectNode node, Vector<OneComponentNode> descendents) {
         if (node instanceof OneComponentNode) {
             descendents.add((OneComponentNode)node);
         }
