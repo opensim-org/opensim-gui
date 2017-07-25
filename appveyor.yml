@@ -36,6 +36,8 @@ install:
   - nuget install opensim-core -Version 0.0.0 -ExcludeVersion -OutputDirectory C:\
 
 build_script:
+  - git submodule init
+  - git submodule update
   - cd Gui/opensim
   - ant build -Dnbplatform.default.netbeans.dest.dir="C:/Program Files/NetBeans 8.0.2" -Dnbplatform.default.harness.dir="C:/Program Files/NetBeans 8.0.2/harness"
   
