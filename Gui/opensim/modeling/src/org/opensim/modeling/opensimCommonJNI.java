@@ -1708,7 +1708,7 @@ public class opensimCommonJNI {
   public final static native void delete_IncorrectMetaDataLength(long jarg1);
   public final static native long new_MetaDataLengthZero(String jarg1, long jarg2, String jarg3, String jarg4);
   public final static native void delete_MetaDataLengthZero(long jarg1);
-  public final static native long new_EmptyTable();
+  public final static native long new_EmptyTable(String jarg1, long jarg2, String jarg3);
   public final static native void delete_EmptyTable(long jarg1);
   public final static native long new_KeyExists(String jarg1, long jarg2, String jarg3, String jarg4);
   public final static native void delete_KeyExists(long jarg1);

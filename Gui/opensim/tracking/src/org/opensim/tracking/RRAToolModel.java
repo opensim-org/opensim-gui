@@ -72,7 +72,7 @@ public class RRAToolModel extends TrackingToolModel {
          rraTool().setOriginalForceSet(getOriginalModel().getForceSet());
 
          // Re-initialize our copy of the workersModel
-         Model workersModel = Model.safeDownCast(getOriginalModel().clone());
+         Model workersModel = new Model(getOriginalModel());
          workersModel.updAnalysisSet().setSize(0);
          String tempFileName=getOriginalModel().getInputFileName();
          //int loc = tempFileName.lastIndexOf(".");

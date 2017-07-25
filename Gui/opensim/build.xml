@@ -28,8 +28,14 @@
     <condition property="opensim.dist.dir" value="dist/installer/opensim">
         <os family="windows"/>
     </condition>
-    <condition property="opensim.dist.dir" value="dist/OpenSim.app/Contents/Resources/opensim">
+    <condition property="opensim.dist.dir" value="dist/OpenSim.app/Contents/Resources/OpenSim">
         <os family="mac"/>
+    </condition>
+    <condition property="opensim.threejs.dir" value="${opensim.dist.dir}/threejs">
+        <os family="mac"/>
+    </condition>
+    <condition property="opensim.threejs.dir" value="${opensim.dist.dir}/OpenSim/threejs">
+        <os family="windows"/>
     </condition>
     <property name="app.conf" value="${installer-files.dir}/opensim.conf"/>
     <import file="nbproject/build-impl.xml"/>
@@ -67,19 +73,29 @@
             <fileset dir="${models.dir}/Geometry"/>
         </copy>
         <copy todir="${opensim.dist.dir}/Models">
-            <fileset dir="${models.dir}/Models"/>
+            <fileset dir="${models.dir}/Models">
+                <!-- TODO For ISB 2017 workshop, temporarily excluding muscles
+                     that do not load or visualize properly (e.g., subterranean models);
+                     https://github.com/opensim-org/opensim-gui/issues/269 -->
+                <exclude name="**/Pendulum/**"/>
+                <exclude name="**/BouncingBlock/**"/>
+                <exclude name="**/ToyLanding/**"/>
+                <exclude name="**/*with_pat_lig*"/>
+                <exclude name="**/SoccerKick/**"/>
+                <exclude name="**/*Patellae/**"/>
+            </fileset>
         </copy>
     </target>
     <target name="copy-visualizer" description="Copy Visualizer to installer">
-        <copy todir="${opensim.dist.dir}/threejs">
-            <fileset dir="${visualizer.dir}/three.js">
+        <copy todir="${opensim.threejs.dir}">
+            <fileset dir="threejs">
                 <exclude name="**/docs/**"/>
                 <exclude name="**/test/**"/>
                 <exclude name="**/examples/**"/>
             </fileset>
         </copy>
-        <copy todir="${opensim.dist.dir}/threejs/examples/js">
-            <fileset dir="${visualizer.dir}/three.js/examples/js" />
+        <copy todir="${opensim.threejs.dir}/examples/js">
+            <fileset dir="threejs/examples/js" />
         </copy>
     </target>
     <target name="build-mac-installer" depends="build-mac,copy-visualizer,copy-models">
@@ -95,6 +111,17 @@
         <exec executable="cp">
             <arg line="-R ${jre.dir}/ ${opensim.dist.dir}/jre"/>
         </exec>
+
+        <copy todir="${opensim.dist.dir}/Scripts/GUI_Scripting">
+            <fileset dir="Scripts" />
+        </copy>
+
+        <delete>
+            <fileset dir="${opensim.dist.dir}/OpenSim/modules/ext"
+                includes="**/jxbrowser-*win*.jar"/>
+            <fileset dir="${opensim.dist.dir}/OpenSim/modules/ext"
+                includes="**/jxbrowser-*linux*.jar"/>
+        </delete>
 
         <!-- Copy the OpenSim API. -->
         <copy todir="${opensim.dist.dir}">
@@ -120,6 +147,10 @@
             file="installer_files/OSX/Info.plist" overwrite="true"/>
         <!-- Fix version number -->
         <replace file="dist/OpenSim.app/Contents/Info.plist"
+            value="${app.version}">
+            <replacefilter token="@VERSION@" />
+        </replace>
+        <replace file="dist/OpenSim.app/Contents/Resources/OpenSim/etc/OpenSim.conf"
             value="${app.version}">
             <replacefilter token="@VERSION@" />
         </replace>
@@ -152,6 +183,16 @@
         <symlink action="single" link="${mac.dist.outer.dir}/bin/opensim-cmd"
             resource="../${mac.final.app.name}/Contents/Resources/OpenSim/bin/opensim-cmd"
             overwrite="true"/>
+        <mkdir dir="${mac.dist.outer.dir}/Scripts" />
+        <symlink action="single" link="${mac.dist.outer.dir}/Scripts/GUI_Scripting"
+            resource="../${mac.final.app.name}/Contents/Resources/OpenSim/Scripts/GUI_Scripting"
+            overwrite="true"/>
+        <symlink action="single" link="${mac.dist.outer.dir}/Scripts/Matlab"
+            resource="../${mac.final.app.name}/Contents/Resources/OpenSim/share/doc/OpenSim/Scripts/Matlab"
+            overwrite="true"/>
+        <symlink action="single" link="${mac.dist.outer.dir}/Scripts/Python"
+            resource="../${mac.final.app.name}/Contents/Resources/OpenSim/share/doc/OpenSim/Scripts/Python"
+            overwrite="true"/>
         <mkdir dir="${mac.dist.outer.dir}/sdk" />
         <symlink action="single" link="${mac.dist.outer.dir}/sdk/include"
             resource="../${mac.final.app.name}/Contents/Resources/OpenSim/include"
@@ -161,9 +202,6 @@
             overwrite="true"/>
         <symlink action="single" link="${mac.dist.outer.dir}/sdk/APIExamples"
             resource="../${mac.final.app.name}/Contents/Resources/OpenSim/share/doc/OpenSim/APIExamples"
-            overwrite="true"/>
-        <symlink action="single" link="${mac.dist.outer.dir}/sdk/Scripts"
-            resource="../${mac.final.app.name}/Contents/Resources/OpenSim/share/doc/OpenSim/Scripts"
             overwrite="true"/>
         <mkdir dir="${mac.dist.outer.dir}/sdk/doc" />
         <symlink action="single" link="${mac.dist.outer.dir}/sdk/doc/OpenSimAPI.html"

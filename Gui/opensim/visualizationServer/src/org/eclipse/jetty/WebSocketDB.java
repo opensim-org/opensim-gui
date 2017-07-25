@@ -51,7 +51,7 @@ public class WebSocketDB {
      * @param observer the observer to set
      */
     public void setObserver(Observer observer) {
-        this.observer = observer; // ViewDB
+        this.observer = observer; // ViewDB observer so it can sync new connections
     }
     
     public void broadcastMessageJson(JSONObject msg, VisWebSocket specificSocket)

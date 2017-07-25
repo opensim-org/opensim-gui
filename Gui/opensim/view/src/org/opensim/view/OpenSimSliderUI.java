@@ -34,7 +34,7 @@
 
 package org.opensim.view;
 
-import com.sun.java.swing.plaf.windows.WindowsSliderUI;
+import javax.swing.plaf.basic.BasicSliderUI;
 import java.awt.*;
 
 import javax.swing.plaf.*;
@@ -45,7 +45,7 @@ import org.openide.util.Utilities;
  *
  * @author Jeff Reinbolt
  */
-public class OpenSimSliderUI extends WindowsSliderUI 
+public class OpenSimSliderUI extends BasicSliderUI 
 {
     // use static class members to avoid reloading/creation of image for every slider in the system. -Ayman
     //
@@ -56,6 +56,10 @@ public class OpenSimSliderUI extends WindowsSliderUI
 
     public OpenSimSliderUI(JSlider b){
 	super(b);
+        // For macOS: the background changes color based on focus, and if
+        // the slider is opaque, then the slider's color doesn't match the
+        // background.
+        b.setOpaque(false);
     }
 
     public static ComponentUI createUI(JComponent b) {

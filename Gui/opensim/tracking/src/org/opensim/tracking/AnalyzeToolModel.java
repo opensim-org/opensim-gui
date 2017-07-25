@@ -48,7 +48,6 @@ import org.opensim.utils.FileUtils;
 import org.opensim.view.MuscleColorByActivationStorage;
 import org.opensim.view.MuscleColoringFunction;
 import org.opensim.view.motions.JavaMotionDisplayerCallback;
-import org.opensim.view.motions.MotionDisplayer;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.view.pub.OpenSimDB;
 
@@ -72,8 +71,7 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
          // another motion show up on it)
          MotionsDB.getInstance().clearCurrent();
 
-         // Re-initialize our copy of the model
-         Model workersModel = Model.safeDownCast(getOriginalModel().clone());
+         Model workersModel = new Model(getOriginalModel());
          workersModel.setName("workerModel");
          String tempFileName=getOriginalModel().getInputFileName();
          //int loc = tempFileName.lastIndexOf(".");
@@ -83,6 +81,7 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
          // Update actuator set and contact force set based on settings in the tool, then call setup() and setModel()
          // setModel() will call addAnalysisSetToModel
          tool.updateModelForces(workersModel, "");
+         workersModel.initSystem();
          tool.setModel(workersModel);
          tool.setToolOwnsModel(false);
          context = new OpenSimContext(workersModel.initSystem(), workersModel); // Has side effect of calling setup
@@ -160,7 +159,6 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
          // Clean up motion displayer (this is necessary!)
          animationCallback.cleanupMotionDisplayer();
 
-         Storage motion = null;
          if(analyzeTool().getStatesStorage()!=null) {
                motion = new Storage(analyzeTool().getStatesStorage());
                //motion.resampleLinear(0.001);
@@ -169,22 +167,26 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
          if (staticOptimizationMode){ // Color by activations from SO
              // Color by Activation from SO output
             StaticOptimization soA = StaticOptimization.safeDownCast(getModel().getAnalysisSet().get("StaticOptimization"));
-            Storage storage = soA.getActivationStorage();
-            MotionDisplayer motionDisplayer = new MotionDisplayer(storage, getOriginalModel());
+            // Since the analysis will go out of scope and potentially get deleted
+            // make a fresh copy of the activation Storage
+            // it will be free'd when not in use anymore (gc)
+            Storage storageCopy = new Storage(soA.getActivationStorage(), true);
             MuscleColoringFunction mcbya = new MuscleColorByActivationStorage(
-            OpenSimDB.getInstance().getContext(getOriginalModel()), storage);
-            motionDisplayer.setMuscleColoringFunction(mcbya);
+                OpenSimDB.getInstance().getContext(getOriginalModel()), storageCopy);
+            MotionsDB.getInstance().getDisplayerForMotion(motion).setMuscleColoringFunction(mcbya);
          } 
          getModel().removeAnalysis(animationCallback, false);
          getModel().removeAnalysis(interruptingCallback, false);
          interruptingCallback = null;
-
+         model = null;
+         tool = null;
          if(result) resetModified();
 
          setExecuting(false);
          SimulationDB.getInstance().fireToolFinish();
 
          worker = null;
+         System.gc();
       }
 
       private void updateMotion(Storage newMotion) {
@@ -322,7 +324,9 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
           if(staticOptimizationAnalysis==null) {
               staticOptimizationAnalysis = new StaticOptimization(); 
               analyzeTool().getAnalysisSet().setMemoryOwner(false);
-              analyzeTool().getAnalysisSet().adoptAndAppend(staticOptimizationAnalysis);
+              analyzeTool().getAnalysisSet().cloneAndAppend(staticOptimizationAnalysis);
+              staticOptimizationAnalysis = StaticOptimization.safeDownCast(
+                      analyzeTool().getAnalysisSet().get("StaticOptimization"));
           }
           staticOptimizationAnalysis.setOn(true);
           staticOptimizationAnalysis.setUseModelForceSet(true);
