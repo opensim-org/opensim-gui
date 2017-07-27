@@ -13,7 +13,7 @@ import org.opensim.view.pub.ViewDB;
 /**
  * Node class to wrap Model objects
  */
-public class OneModelNode extends OpenSimObjectNode {
+public class OneModelNode extends OneComponentNode {
 	boolean isDataHolderOnly = false;
         NavigatorByTypeModel byTypeModel;
     public OneModelNode(Model model) {

@@ -36,15 +36,6 @@ import org.opensim.view.pub.ViewDB;
 public class ObjectDisplayChangeRepAction extends CallableSystemAction {
     
     public boolean isEnabled() {
-        Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
-        // If any selected object is hidden (or any selected group is mixed), return false.
-        /* Always enable the option since everything can be wireframe in new visualizer of 4.0
-        for(int i=0; i < selected.length; i++){
-            OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[i];
-            int displayStatus = ViewDB.getInstance().getDisplayStatus(objectNode.getOpenSimObject());
-            if (displayStatus == 0 || displayStatus == 2)
-               return false;
-        }*/
         return true;
     }
 

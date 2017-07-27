@@ -26,98 +26,56 @@
 package org.opensim.view;
 
 import java.awt.Color;
+import java.util.Vector;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
-import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
-import org.openide.util.actions.CallableSystemAction;
 import org.openide.windows.WindowManager;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.nodes.OneBodyNode;
+import org.opensim.view.nodes.OneComponentNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 import org.opensim.view.nodes.PropertyEditorAdaptor;
 import org.opensim.view.pub.ViewDB;
 
-public final class ObjectDisplayColorAction extends CallableSystemAction {
+public final class ObjectDisplayColorAction extends ObjectAppearanceChangeAction {
    
    //--------------------------------------------------------------------------
     public void performAction() 
     { 
       JColorChooser objectColorChooser = new JColorChooser();
       Color newColor = objectColorChooser.showDialog( (JFrame)WindowManager.getDefault().getMainWindow(), "Select new color", Color.WHITE );  
-      ObjectDisplayColorAction.ChangeUserSelectedNodesColor( newColor ); 
+      Vector<OneComponentNode> nodes = collectAffectedComponentNodes();
+      ObjectDisplayColorAction.ChangeUserSelectedNodesColor(nodes, newColor ); 
     }
    
     //--------------------------------------------------------------------------
-    public static void ChangeUserSelectedNodesColor(Color newColor) {
-        Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
-        for (int i = 0; i < selected.length; i++) {
-            if (!(selected[i] instanceof OpenSimObjectNode)) {
-                continue;
-            }
-            OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[i];
-            ObjectDisplayColorAction.ChangeUserSelectedNodeColor(objectNode, newColor, false);
+    public static void ChangeUserSelectedNodesColor(Vector<OneComponentNode> nodes, 
+            Color newColor) {
+        // Cycle through ComponentNode(s) and apply color
+        float[] newColorComponentsAsFloatArray = newColor.getRGBComponents(null);
+        double[] newColorComponentsAsDoubleArray = {newColorComponentsAsFloatArray[0], newColorComponentsAsFloatArray[1], newColorComponentsAsFloatArray[2]};
+        for (OneComponentNode nextNode:nodes){
+            ObjectDisplayColorAction.applyOperationToNode(nextNode, newColorComponentsAsDoubleArray);
         }
         ViewDB.getInstance().repaintAll();
     }
 
-    //--------------------------------------------------------------------------
-    public static void ChangeUserSelectedNodeColor(OpenSimObjectNode objectNode, Color newColor, boolean repaintViewDB) {
-        if (objectNode == null || newColor == null) {
-            return;
-        }
-        float[] newColorComponentsAsFloatArray = newColor.getRGBComponents(null);
-        double[] newColorComponentsAsDoubleArray = {newColorComponentsAsFloatArray[0], newColorComponentsAsFloatArray[1], newColorComponentsAsFloatArray[2]};
-        ObjectDisplayColorAction.applyOperationToNode(objectNode, newColorComponentsAsDoubleArray);
-        if (repaintViewDB) {
-            ViewDB.getInstance().repaintAll();
-        }
-    }
 
     //--------------------------------------------------------------------------
-    private static void applyOperationToNode(final OpenSimObjectNode objectNode, double[] newColorComponents) {
-        OpenSimObject obj = objectNode.getOpenSimObject();
-        Children ch = objectNode.getChildren();
-        if (ch.getNodesCount() > 0 ) {
-            // apply action recursively
-            Node[] childNodes = ch.getNodes();
-            for (int child = 0; child < childNodes.length; child++) {
-                if (!(childNodes[child] instanceof OpenSimObjectNode)) {
-                    continue;
-                }
-                OpenSimObjectNode childNode = (OpenSimObjectNode) childNodes[child];
-                ObjectDisplayColorAction.applyOperationToNode(childNode, newColorComponents);
-            }
-        } else {
-            /*
-             * The following is cleaner and more maintainable but fails for
-             * objects that don't have "color" as property
-             */
-            boolean hasColor = (objectNode instanceof ColorableInterface);
-            if (hasColor) {
-                //PropertyEditorAdaptor pea = new PropertyEditorAdaptor("color", objectNode);
-                Color newColor = new Color((float) newColorComponents[0],
-                        (float) newColorComponents[1], (float) newColorComponents[2]);
-                ((ColorableInterface)objectNode).setColor(newColor);
-            } else {
-
-                ViewDB.getInstance().setObjectColor(obj, newColorComponents);
-            }
-            objectNode.refreshNode();
-            if (ViewDB.isVtkGraphicsAvailable())
-                ViewDB.getInstance().updateDisplay(objectNode.getModelForNode(), 
-                    ((OpenSimObjectNode)objectNode).getOwnerComponent());
-
+    private static void applyOperationToNode(final OneComponentNode objectNode, double[] newColorComponents) {
+        boolean hasColor = (objectNode instanceof ColorableInterface);
+        if (hasColor) {
+            //PropertyEditorAdaptor pea = new PropertyEditorAdaptor("color", objectNode);
+            Color newColor = new Color((float) newColorComponents[0],
+                    (float) newColorComponents[1], (float) newColorComponents[2]);
+            ((ColorableInterface) objectNode).setColor(newColor);
         }
-        // If objectNode is OneBodyNode, do not change color of center of mass.
-        /*
-        if (objectNode instanceof OneBodyNode) {
-            BodyDisplayer rep = BodyToggleFrameAction.GetBodyDisplayerForBody(obj);
-            rep.SetCMSphereColorToGreen();
-        }*/
+        objectNode.refreshNode();
+
     }
 
     // Make it available only if selected objects have representation and belong to same model
@@ -137,20 +95,6 @@ public final class ObjectDisplayColorAction extends CallableSystemAction {
    
    public String getName() {
       return NbBundle.getMessage(ObjectDisplayColorAction.class, "CTL_ObjectDisplayColorAction");
-   }
-   
-   protected void initialize() {
-      super.initialize();
-      // see org.openide.util.actions.SystemAction.iconResource() javadoc for more details
-      putValue("noIconInMenu", Boolean.TRUE);
-   }
-   
-   public HelpCtx getHelpCtx() {
-      return HelpCtx.DEFAULT_HELP;
-   }
-   
-   protected boolean asynchronous() {
-      return false;
    }
    
 }
