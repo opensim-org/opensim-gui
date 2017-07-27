@@ -61,15 +61,13 @@ public final class ObjectDisplayOpacityAction extends CallableSystemAction {
         return objects;
     }
    // node could be a Group or a list of objects not backed by OpenSim objects 
-    protected void collectDescendentNodes(OpenSimObjectNode node, Vector<OneComponentNode> descendents) {
-        if (node instanceof OneComponentNode) {
-            descendents.add((OneComponentNode)node);
-        }
+    protected void collectDescendentNodes(OneComponentNode node, Vector<OneComponentNode> descendents) {
+        descendents.add(node);
         Children ch = node.getChildren();
         // process children
         for (Node childNode : ch.getNodes()) {
-            if (childNode instanceof OpenSimObjectNode) {
-                collectDescendentNodes((OpenSimObjectNode) childNode, descendents);
+            if (childNode instanceof OneComponentNode) {
+                collectDescendentNodes((OneComponentNode) childNode, descendents);
             }
         }
 
