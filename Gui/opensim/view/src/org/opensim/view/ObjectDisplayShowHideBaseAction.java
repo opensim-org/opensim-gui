@@ -87,10 +87,12 @@ public abstract class ObjectDisplayShowHideBaseAction extends ObjectAppearanceCh
    }
 
    public void performAction() {
+      ViewDB.getInstance().setApplyAppearanceChange(false);
       Vector<OneComponentNode> nodes = collectAffectedComponentNodes();
       for (OneComponentNode nextNode:nodes){
             this.applyOperationToNode( nextNode );
       }
+      ViewDB.getInstance().setApplyAppearanceChange(true);
       ViewDB.getInstance().repaintAll();
    }
 
