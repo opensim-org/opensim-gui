@@ -9,10 +9,8 @@ import java.awt.Color;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
-import org.openide.nodes.Node;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Appearance;
-import org.opensim.modeling.Component;
 import org.opensim.modeling.DecorativeGeometry;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.Vec3;
@@ -42,14 +40,13 @@ public class AppearanceHelper {
         final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(model, appearance.get_SurfaceProperties(), ap, compNode);
         ap.setValueIsDefault(false);
         pea.setValueInt(newRep, false);
+        // Delay update display till end
         ViewDB.getInstance().updateComponentDisplay(model, compNode.comp, ap);
-        updateObjectDisplay(compNode.comp);
         AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
             @Override
             public void undo() throws CannotUndoException {
                 super.undo();
                 pea.setValueInt(oldRep.swigValue(), false);
-                updateObjectDisplay(compNode.comp);
                 ViewDB.getInstance().updateComponentDisplay(model, compNode.comp, ap);
             }
 
@@ -63,7 +60,6 @@ public class AppearanceHelper {
                 super.redo();
                 pea.setValueInt(newRep, false);
                 ViewDB.getInstance().updateComponentDisplay(model, compNode.comp, ap);
-                updateObjectDisplay(compNode.comp);
             }
 
             @Override
@@ -82,6 +78,7 @@ public class AppearanceHelper {
         final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(model, appearance, ap, compNode);
         ap.setValueIsDefault(false);
         pea.setValueBool(newVis, false);
+        // Delay update display till end
         ViewDB.getInstance().updateComponentDisplay(model, compNode.comp, ap);
         AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
             @Override
@@ -121,6 +118,7 @@ public class AppearanceHelper {
         ap.setValueIsDefault(false);
         final Vec3 newColorVec3 = new Vec3(colorComp[0], colorComp[1], colorComp[2]);
         pea.setValueVec3(newColorVec3, false);
+        // Delay update display till end
         ViewDB.getInstance().updateComponentDisplay(model, compNode.comp, ap);
         //System.out.println("p, c"+ap.toString()+compNode.comp.dump());
         AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
@@ -151,12 +149,6 @@ public class AppearanceHelper {
         ExplorerTopComponent.addUndoableEdit(auEdit);
     }
 
-    protected void updateObjectDisplay(Component obj) {
-        // Tell the world that the owner modelComponent need to regenerate
-        ViewDB.getInstance().getModelVisuals(model).upateDisplay(obj);
-        //ViewDB.getInstance().repaintAll();
-    }
-
     void setAppearanceOpacityProperty(double opacity) {
         final AbstractProperty ap = appearance.getPropertyByName("opacity");
         final double oldOpacity = appearance.get_opacity();
@@ -165,6 +157,7 @@ public class AppearanceHelper {
         final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(model, appearance, ap, compNode);
         ap.setValueIsDefault(false);
         pea.setValueDouble(newOpacity, false);
+        // Delay update display till end
         ViewDB.getInstance().updateComponentDisplay(model, compNode.comp, ap);
         AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
             @Override

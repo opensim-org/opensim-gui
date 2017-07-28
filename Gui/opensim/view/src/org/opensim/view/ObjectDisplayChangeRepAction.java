@@ -47,6 +47,7 @@ public class ObjectDisplayChangeRepAction extends CallableSystemAction {
      * A variation of performAction that takes the desired representation and applies it to the model
      */
      public void performAction(int newRep, int newShading) {
+        ViewDB.getInstance().setApplyAppearanceChange(false);
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         for(int i=0; i < selected.length; i++){
             OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[i];
@@ -58,6 +59,7 @@ public class ObjectDisplayChangeRepAction extends CallableSystemAction {
                 objectNode.refreshNode();
             }
         }
+        ViewDB.getInstance().setApplyAppearanceChange(true);
    }
   
     public String getName() {

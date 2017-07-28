@@ -35,12 +35,15 @@ import org.opensim.view.nodes.OneComponentNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 import org.opensim.view.nodes.OpenSimObjectSetNode;
+import org.opensim.view.pub.ViewDB;
 
 public final class ObjectDisplayOpacityAction extends ObjectAppearanceChangeAction {
    
    public void performAction() {
       Vector<OneComponentNode> objects = collectAffectedComponentNodes();
+      ViewDB.getInstance().setApplyAppearanceChange(false);
       ObjectDisplayOpacityPanel.showDialog(objects);
+      ViewDB.getInstance().setApplyAppearanceChange(true);
    }
 
    
