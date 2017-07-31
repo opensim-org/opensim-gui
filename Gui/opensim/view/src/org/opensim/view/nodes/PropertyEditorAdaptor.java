@@ -161,12 +161,12 @@ public class PropertyEditorAdaptor {
     }
 
     public void setValueBool(boolean v) {
-        setValueBool(v, true);
+        setValueBool(v, true, true);
     }
 
-    public void setValueBool(boolean v, boolean supportUndo) {
+    public void setValueBool(boolean v, boolean supportUndo, boolean recreateSystem) {
         boolean oldValue = getValueBool();
-        handlePropertyChange(oldValue, v, supportUndo);
+        handlePropertyChange(oldValue, v, supportUndo, recreateSystem);
     }
 
     public void setValueBool(Boolean v) {
@@ -441,21 +441,24 @@ public class PropertyEditorAdaptor {
         }
     }
 
-    private void handlePropertyChange(final boolean oldValue, final boolean v, boolean supportUndo) {
-        context.cacheModelAndState();
-        PropertyHelper.setValueBool(v, prop);        
-        try {
-            context.restoreStateFromCachedModel();
-        } catch (IOException iae) {
+    private void handlePropertyChange(final boolean oldValue, final boolean v, boolean supportUndo, boolean recreateSystem) {
+        if (recreateSystem)
+            context.cacheModelAndState();
+        PropertyHelper.setValueBool(v, prop); 
+        if (recreateSystem) {
             try {
-                new JOptionPane(iae.getMessage(), 
-				JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
-                
-            PropertyHelper.setValueBool(oldValue, prop);
-                context.restoreStateFromCachedModel();  
-            } catch (IOException ex) {
-                Exceptions.printStackTrace(ex);
-        }
+                context.restoreStateFromCachedModel();
+            } catch (IOException iae) {
+                try {
+                    new JOptionPane(iae.getMessage(),
+                            JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+
+                    PropertyHelper.setValueBool(oldValue, prop);
+                    context.restoreStateFromCachedModel();
+                } catch (IOException ex) {
+                    Exceptions.printStackTrace(ex);
+                }
+            }
         }
         handlePropertyChangeCommon();
 
@@ -465,7 +468,7 @@ public class PropertyEditorAdaptor {
                 @Override
                 public void undo() throws CannotUndoException {
                     super.undo();
-                    setValueBool(oldValue, false);
+                    setValueBool(oldValue, false, true);
                 }
 
                 @Override
@@ -476,7 +479,7 @@ public class PropertyEditorAdaptor {
                 @Override
                 public void redo() throws CannotRedoException {
                     super.redo();
-                    setValueBool(v, true);
+                    setValueBool(v, true, true);
                 }
                 @Override
                 public String getRedoPresentationName() {

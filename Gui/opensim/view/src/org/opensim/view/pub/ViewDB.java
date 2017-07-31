@@ -101,15 +101,6 @@ import vtk.vtkVectorText;
  */
 public final class ViewDB extends Observable implements Observer, LookupListener {
 
-    /**
-     * @param aApplyAppearance the applyAppearance to set
-     */
-    public static void setApplyAppearanceChange(boolean aApplyAppearance) {
-        applyAppearanceChange = aApplyAppearance;
-        if (applyAppearanceChange){
-            applyPendingAppearanceChanges();
-        }
-    }
    // List of view windows currently displayed
    static ArrayList<ModelWindowVTKTopComponent> openWindows = new ArrayList<ModelWindowVTKTopComponent>(4);
    // List of models currently available in all views
@@ -120,6 +111,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    private static WebSocketDB websocketdb;
    private static JSONObject jsondb;
    
+   /* Following block handles buffering Appearance changes so they're sent once
+    * as a message to visualizer.
+   */
    private static boolean applyAppearanceChange = false;
    
    class AppearanceChange {
@@ -132,6 +126,15 @@ public final class ViewDB extends Observable implements Observer, LookupListener
        }
    }
    private static ArrayList<AppearanceChange> pendingAppearanceChanges = new ArrayList<AppearanceChange>();
+    /**
+     * @param aApplyAppearance the applyAppearance to set
+     */
+    public static void setApplyAppearanceChange(boolean aApplyAppearance) {
+        applyAppearanceChange = aApplyAppearance;
+        if (applyAppearanceChange){
+            applyPendingAppearanceChanges();
+        }
+    }
  
     private static void applyPendingAppearanceChanges() {
         if (websocketdb!=null){
@@ -143,6 +146,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         }
         pendingAppearanceChanges.clear();
     }
+    // End AppearanceChange buffer handling
+    
    /**
      * @return the myLookup
      */
@@ -1284,7 +1289,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                 websocketdb.broadcastMessageJson(msg, null);
            }
            else {
-               // Add entry to 
+               // Add entry to pendingAppearanceChanges
                pendingAppearanceChanges.add(new AppearanceChange(model, mc, prop));
            }
                

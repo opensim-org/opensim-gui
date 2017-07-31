@@ -89,6 +89,7 @@ public abstract class ObjectDisplayShowHideBaseAction extends ObjectAppearanceCh
    public void performAction() {
       ViewDB.getInstance().setApplyAppearanceChange(false);
       Vector<OneComponentNode> nodes = collectAffectedComponentNodes();
+      System.out.println("Num nodes="+nodes.size());
       for (OneComponentNode nextNode:nodes){
             this.applyOperationToNode( nextNode );
       }
@@ -117,10 +118,6 @@ public abstract class ObjectDisplayShowHideBaseAction extends ObjectAppearanceCh
                     surfApp,
                     surfApp.getPropertyByName("representation"), objectNode);
             pea.setValueInt(show?3:0);
-        }
-        else { // This is not persistent, will only affect visuals
-            ViewDB.getInstance().toggleObjectsDisplay(obj, show);
-            objectNode.refreshNode();
         }
     }
     

@@ -77,14 +77,14 @@ public class AppearanceHelper {
         final Model model = this.model;
         final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(model, appearance, ap, compNode);
         ap.setValueIsDefault(false);
-        pea.setValueBool(newVis, false);
+        pea.setValueBool(newVis, false, false);
         // Delay update display till end
         ViewDB.getInstance().updateComponentDisplay(model, compNode.comp, ap);
         AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
             @Override
             public void undo() throws CannotUndoException {
                 super.undo();
-                pea.setValueBool(oldVis, false);
+                pea.setValueBool(oldVis, false, false);
                 ViewDB.getInstance().updateComponentDisplay(model, compNode.comp, ap);
             }
 
@@ -96,7 +96,7 @@ public class AppearanceHelper {
             @Override
             public void redo() throws CannotRedoException {
                 super.redo();
-                pea.setValueBool(newVis, false);
+                pea.setValueBool(newVis, false, false);
                 ViewDB.getInstance().updateComponentDisplay(model, compNode.comp, ap);
             }
 
