@@ -25,15 +25,13 @@
  */
 package org.opensim.view;
 
-import org.openide.nodes.Node;
+import java.util.Vector;
 import org.openide.util.HelpCtx;
-import org.openide.util.NbBundle;
-import org.openide.util.actions.CallableSystemAction;
+import org.opensim.view.nodes.OneComponentNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
-import org.opensim.view.nodes.PropertyEditorAdaptor;
 import org.opensim.view.pub.ViewDB;
 
-public class ObjectDisplayChangeRepAction extends CallableSystemAction {
+public class ObjectDisplayChangeRepAction extends ObjectAppearanceChangeAction {
     
     public boolean isEnabled() {
         return true;
@@ -48,15 +46,11 @@ public class ObjectDisplayChangeRepAction extends CallableSystemAction {
      */
      public void performAction(int newRep, int newShading) {
         ViewDB.getInstance().setApplyAppearanceChange(false);
-        Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
-        for(int i=0; i < selected.length; i++){
-            OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[i];
+        Vector<OneComponentNode> nodes = collectAffectedComponentNodes();
+        for(int i=0; i < nodes.size(); i++){
+            OpenSimObjectNode objectNode = (OpenSimObjectNode) nodes.get(i);
             if (objectNode instanceof ColorableInterface) {
                 ((ColorableInterface)objectNode).setDisplayPreference(newRep);
-            }
-            else {
-                ViewDB.getInstance().setObjectRepresentation(objectNode.getOpenSimObject(), newRep, newShading);
-                objectNode.refreshNode();
             }
         }
         ViewDB.getInstance().setApplyAppearanceChange(true);
@@ -66,27 +60,12 @@ public class ObjectDisplayChangeRepAction extends CallableSystemAction {
         return "unused";
     }
     
-    protected void initialize() {
-        super.initialize();
-        // see org.openide.util.actions.SystemAction.iconResource() javadoc for more details
-        putValue("noIconInMenu", Boolean.TRUE);
-    }
-    
     public HelpCtx getHelpCtx() {
         return HelpCtx.DEFAULT_HELP;
     }
     
     protected boolean asynchronous() {
         return false;
-    }
-
-    private int mapRepAndShadingToPref(int newRep, int newShading) {
-        if (newRep==1) return 1;    // Wireframe
-        if (newRep==2){
-           if (newShading==0) return 3;    // flat
-           if (newShading==1 || newShading==2) return 4;    // flat
-         }
-        return 4;
     }
     
 }

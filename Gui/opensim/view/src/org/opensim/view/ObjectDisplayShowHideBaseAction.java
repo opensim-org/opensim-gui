@@ -89,7 +89,6 @@ public abstract class ObjectDisplayShowHideBaseAction extends ObjectAppearanceCh
    public void performAction() {
       ViewDB.getInstance().setApplyAppearanceChange(false);
       Vector<OneComponentNode> nodes = collectAffectedComponentNodes();
-      System.out.println("Num nodes="+nodes.size());
       for (OneComponentNode nextNode:nodes){
             this.applyOperationToNode( nextNode );
       }
