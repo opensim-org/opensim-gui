@@ -368,7 +368,11 @@ public class OpenSimObjectNode extends OpenSimNode {
         // Skip connections and add them in another group or Sheet
         for (int p = 0; p < obj.getNumProperties(); ++p) {
             try {
-                AbstractProperty ap = obj.getPropertyByIndex(p);              
+                AbstractProperty ap = obj.getPropertyByIndex(p);  
+                String propname = ap.getName();
+                // Skip over sockets per github issue
+                if (propname.startsWith("socket_"))
+                    continue;
                 if (!ap.isListProperty()) {
                     if (ap.isObjectProperty() && ap.size() == 1) {
                         
