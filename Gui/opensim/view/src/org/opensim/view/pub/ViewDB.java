@@ -1742,7 +1742,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
          getInstance().notifyObservers(evnt);
     }
 
-    public void RemoveVisualizerObject(JSONObject object2Remove, String parentUuid) {
+    public void removeVisualizerObject(JSONObject object2Remove, String parentUuid) {
         if (websocketdb!=null){
             websocketdb.broadcastMessageJson(currentJson.createRemoveObjectCommand(object2Remove, parentUuid), null);
         }
