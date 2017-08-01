@@ -514,9 +514,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
               getModelVisuals(ev.getModel()).removeGeometry((Actuator)obj);
               repaint = true;
            } else if (obj instanceof Marker) {
-              SingleModelVisuals vis = mapModelsToVisuals.get(ev.getModel());
-              vis.removeGeometry((Marker)obj);
-              repaint = true;
+              ModelVisualizationJson vis = mapModelsToJsons.get(ev.getModel());
+              String test = obj.getConcreteClassName();
+              Marker marker = Marker.safeDownCast(obj);
+              this.removeVisualizerObject(marker, marker.getParentFrame());
            }
         }
         if (selectedDeleted)
@@ -1745,6 +1746,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     public void removeVisualizerObject(JSONObject object2Remove, String parentUuid) {
         if (websocketdb!=null){
             websocketdb.broadcastMessageJson(currentJson.createRemoveObjectCommand(object2Remove, parentUuid), null);
+        }
+    }
+    public void removeVisualizerObject(OpenSimObject object2Remove, OpenSimObject parentObject) {
+        if (websocketdb!=null){
+            websocketdb.broadcastMessageJson(currentJson.createRemoveObjectCommand(object2Remove, parentObject), null);
         }
     }
 

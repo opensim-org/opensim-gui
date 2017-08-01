@@ -754,6 +754,16 @@ public class ModelVisualizationJson extends JSONObject {
         return guiJson;
     }
 
+    public JSONObject createRemoveObjectCommand(OpenSimObject object2Remove, OpenSimObject parent) {
+        JSONObject guiJson = new JSONObject();
+        guiJson.put("Op", "execute");
+        UUID objectUUID = mapComponentToUUID.get(object2Remove).get(0);
+        UUID parentUUID = mapComponentToUUID.get(parent).get(0);
+        JSONObject commandJson = CommandComposerThreejs.createRemoveObjectByUUIDCommandJson(objectUUID, parentUUID);
+        guiJson.put("command", commandJson);
+        return guiJson;
+    }
+
     public JSONObject createTranslateObjectCommand(OpenSimObject marker, Vec3 newLocation) {
         JSONObject guiJson = new JSONObject();
         guiJson.put("Op", "execute");
