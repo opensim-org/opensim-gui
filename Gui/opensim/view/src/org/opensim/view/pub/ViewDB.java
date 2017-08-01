@@ -2164,6 +2164,13 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             websocketdb.broadcastMessageJson(currentJson.createAddObjectCommand(jsonObject), null);
         }
     }
+
+    public void translateObject(Model model, Marker marker, Vec3 location) {
+        if (websocketdb!=null){
+            ModelVisualizationJson vis = ViewDB.getInstance().getModelVisualizationJson(model);
+            websocketdb.broadcastMessageJson(vis.createTranslateObjectCommand(marker, marker.get_location()), null);
+        }
+    }
     // Callback, invoked when a command is received from visualizer
     // this operates only on currentJson
     private void handleJson(JSONObject jsonObject) {

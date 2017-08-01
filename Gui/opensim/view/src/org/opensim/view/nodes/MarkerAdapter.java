@@ -15,6 +15,7 @@ import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.Vec3;
+import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.ObjectsRenamedEvent;
 import org.opensim.view.SingleModelVisuals;
@@ -97,10 +98,7 @@ public class MarkerAdapter  {
 
     private void updateDisplay() {
         // tell the ViewDB to redraw the model
-        SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-        vis.getMarkersRep().updateMarkerGeometry(marker);
-        ViewDB.getInstance().repaintAll();
-        ExplorerTopComponent.getDefault().requestActive();
+        ViewDB.getInstance().translateObject(model, marker, marker.get_location());
     }
 
     /**
