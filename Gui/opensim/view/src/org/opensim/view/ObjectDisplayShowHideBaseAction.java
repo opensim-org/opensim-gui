@@ -25,6 +25,7 @@
  */
 package org.opensim.view;
 
+import java.util.Vector;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.util.HelpCtx;
@@ -37,6 +38,7 @@ import org.opensim.modeling.Joint;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.SurfaceProperties;
+import org.opensim.view.nodes.OneComponentNode;
 import org.opensim.view.nodes.OneGeometryNode;
 import org.opensim.view.nodes.OneModelNode;
 import org.opensim.view.nodes.OneWrapObjectNode;
@@ -44,7 +46,7 @@ import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.nodes.PropertyEditorAdaptor;
 import org.opensim.view.pub.ViewDB;
 
-public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemAction {
+public abstract class ObjectDisplayShowHideBaseAction extends ObjectAppearanceChangeAction {
   
    private boolean show;
 
@@ -85,35 +87,18 @@ public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemActi
    }
 
    public void performAction() {
-      Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
-      for(int i=0; i < selected.length; i++){
-         if(selected[i] instanceof OneModelNode) {
-            ViewDB.getInstance().toggleModelDisplay(((OneModelNode)selected[i]).getModel(), show);
-         } else if (selected[i] instanceof OneGeometryNode){
-             ((OneGeometryNode)selected[i]).setVisible(show);
-         }
-         else if(selected[i] instanceof OpenSimObjectNode) {
-            this.applyOperationToNode( (OpenSimObjectNode)selected[i] );
-         }
+      ViewDB.getInstance().setApplyAppearanceChange(false);
+      Vector<OneComponentNode> nodes = collectAffectedComponentNodes();
+      for (OneComponentNode nextNode:nodes){
+            this.applyOperationToNode( nextNode );
       }
+      ViewDB.getInstance().setApplyAppearanceChange(true);
       ViewDB.getInstance().repaintAll();
    }
 
     //-------------------------------------------------------------------------
-    private void applyOperationToNode( final OpenSimObjectNode objectNode ) 
+    private void applyOperationToNode( final OneComponentNode objectNode ) 
     {
-        // Apply action recursively to children. 
-        Children ch = objectNode.getChildren();
-        if (ch.getNodesCount()>0){
-            Node[] childNodes=ch.getNodes();
-            for(int child=0; child < childNodes.length ; child++){
-                if (!(childNodes[child] instanceof OpenSimObjectNode))
-                    continue;
-               OpenSimObjectNode childNode = (OpenSimObjectNode) childNodes[child];
-               this.applyOperationToNode( childNode );
-            }
-        }
-        //else
         OpenSimObject obj = objectNode.getOpenSimObject();
         if (objectNode instanceof ColorableInterface){
             ((ColorableInterface)objectNode).setVisible(show);
@@ -133,43 +118,7 @@ public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemActi
                     surfApp.getPropertyByName("representation"), objectNode);
             pea.setValueInt(show?3:0);
         }
-        else { // This is not persistent, will only affect visuals
-            ViewDB.getInstance().toggleObjectsDisplay(obj, show);
-            objectNode.refreshNode();
-        }
     }
-    
-    //-------------------------------------------------------------------------
-    public static void ApplyOperationToNodeWithShowHide( final OpenSimObjectNode objectNode, boolean showOrHide, boolean repaintAll, boolean skipWrappingSurfaces, boolean justWrappingSurfaces ) 
-    {
-        // Apply action recursively to children.
-        Children children = objectNode.getChildren();
-        if( children.getNodesCount() > 0 )
-        {
-            Node[] childrenNodes = children.getNodes();
-            for( int i=0;  i < childrenNodes.length;  i++ )
-            {
-               Node childNodei = childrenNodes[i]; 
-               if( !(childNodei instanceof OpenSimObjectNode) ) continue;
-               if( skipWrappingSurfaces && childNodei instanceof OneWrapObjectNode ) continue;
-               if( justWrappingSurfaces && childNodei instanceof OneWrapObjectNode ) continue;
-               OpenSimObjectNode childNode = (OpenSimObjectNode)childNodei;
-               ObjectDisplayShowHideBaseAction.ApplyOperationToNodeWithShowHide( childNode, showOrHide, false, skipWrappingSurfaces, justWrappingSurfaces );
-            }
-        }
-        
-        // After applying recursively, apply to openSimObjectNode and possibly repaint all.
-        ObjectDisplayShowHideBaseAction.ShowOrHideOpenSimObject( objectNode.getOpenSimObject(), showOrHide, repaintAll );
-    }
-    
-    
-    //-------------------------------------------------------------------------
-    private static void  ShowOrHideOpenSimObject( OpenSimObject openSimObject, boolean showIsTrueHideIsFalse, boolean repaintAll )
-    {
-       ViewDB.getInstance().toggleObjectsDisplay( openSimObject, showIsTrueHideIsFalse );
-       if( repaintAll ) ViewDB.getInstance().repaintAll();    
-    }
-  
     
     protected void initialize() {
         super.initialize();
@@ -177,11 +126,5 @@ public abstract class ObjectDisplayShowHideBaseAction extends CallableSystemActi
         putValue("noIconInMenu", Boolean.TRUE);
     }
     
-    public HelpCtx getHelpCtx() {
-        return HelpCtx.DEFAULT_HELP;
-    }
-    
-    protected boolean asynchronous() {
-        return false;
-    }
+
 }

@@ -100,6 +100,7 @@ import vtk.vtkVectorText;
  * Also keeps track of currently activated model window ModelWindowVTKTopComponent
  */
 public final class ViewDB extends Observable implements Observer, LookupListener {
+
    // List of view windows currently displayed
    static ArrayList<ModelWindowVTKTopComponent> openWindows = new ArrayList<ModelWindowVTKTopComponent>(4);
    // List of models currently available in all views
@@ -109,7 +110,45 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    private static vtkAssembly sceneAssembly;
    private static WebSocketDB websocketdb;
    private static JSONObject jsondb;
+   
+   /* Following block handles buffering Appearance changes so they're sent once
+    * as a message to visualizer.
+   */
+   private static boolean applyAppearanceChange = false;
+   
+   class AppearanceChange {
+       Model model;
+       Component mc;
+       AbstractProperty prop;
+       
+       AppearanceChange(Model model, Component mc, AbstractProperty prop){
+           this.model = model; this.mc = mc; this.prop = prop;
+       }
+   }
+   private static ArrayList<AppearanceChange> pendingAppearanceChanges = new ArrayList<AppearanceChange>();
     /**
+     * @param aApplyAppearance the applyAppearance to set
+     */
+    public static void setApplyAppearanceChange(boolean aApplyAppearance) {
+        applyAppearanceChange = aApplyAppearance;
+        if (applyAppearanceChange){
+            applyPendingAppearanceChanges();
+        }
+    }
+ 
+    private static void applyPendingAppearanceChanges() {
+        if (websocketdb!=null){
+            for (AppearanceChange appChange:pendingAppearanceChanges){
+                ModelVisualizationJson modelJson = getInstance().getModelVisualizationJson(appChange.model);
+                JSONObject msg = modelJson.createAppearanceMessage(appChange.mc, appChange.prop);
+                websocketdb.broadcastMessageJson(msg, null);
+            }
+        }
+        pendingAppearanceChanges.clear();
+    }
+    // End AppearanceChange buffer handling
+    
+   /**
      * @return the myLookup
      */
     public static Lookup getLookup() {
@@ -1243,14 +1282,17 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    }
    
    public void updateComponentDisplay(Model model, Component mc, AbstractProperty prop) {
-       if (isVtkGraphicsAvailable()){
-          getInstance().getModelVisuals(model).upateDisplay(mc);  
-          repaintAll();
-       }
        if (websocketdb != null){
-           ModelVisualizationJson modelJson = getInstance().getModelVisualizationJson(model);
-           JSONObject msg = modelJson.createAppearanceMessage(mc, prop);
-           websocketdb.broadcastMessageJson(msg, null);
+           if (applyAppearanceChange){
+                ModelVisualizationJson modelJson = getInstance().getModelVisualizationJson(model);
+                JSONObject msg = modelJson.createAppearanceMessage(mc, prop);
+                websocketdb.broadcastMessageJson(msg, null);
+           }
+           else {
+               // Add entry to pendingAppearanceChanges
+               pendingAppearanceChanges.add(new AppearanceChange(model, mc, prop));
+           }
+               
        }
    }
 

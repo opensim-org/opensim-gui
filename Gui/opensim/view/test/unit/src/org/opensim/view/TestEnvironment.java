@@ -23,7 +23,7 @@ public class TestEnvironment {
         URL url = cs.getLocation();
         File f = new File(url.getFile());
         File targetFile = f.getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile();
-        String ap = targetFile.getAbsolutePath() + "\\Models\\Arm26\\arm26.osim";
+        String ap = targetFile.getAbsolutePath() + "\\opensim-models\\Models\\Arm26\\arm26.osim";
         modelPath = ap;
 
     }

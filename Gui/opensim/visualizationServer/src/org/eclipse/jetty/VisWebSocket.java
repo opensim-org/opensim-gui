@@ -75,12 +75,7 @@ public class VisWebSocket extends Observable { // Socket to handle incoming traf
 
     void sendVisualizerMessage(JSONObject selected) {
         for (Session peer:peers){          
-            try {
-                peer.getRemote().sendString(selected.toJSONString());
-                
-            } catch (IOException ex) {
-                Logger.getLogger(VisWebSocket.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           peer.getRemote().sendStringByFuture(selected.toJSONString());
         }
      }
     

@@ -31,37 +31,21 @@ import org.openide.nodes.Node;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
-import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.nodes.OneComponentNode;
-import org.opensim.view.nodes.OneGeometryNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
+import org.opensim.view.nodes.OpenSimObjectSetNode;
+import org.opensim.view.pub.ViewDB;
 
-public final class ObjectDisplayOpacityAction extends CallableSystemAction {
+public final class ObjectDisplayOpacityAction extends ObjectAppearanceChangeAction {
    
    public void performAction() {
-      Vector<OneComponentNode> objects = new Vector<OneComponentNode>();
-      Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
-      for(int i=0; i<selected.length; i++) {
-         if(selected[i] instanceof OneComponentNode)
-            collectDescendentNodes((OneComponentNode)selected[i], objects);
-      }
+      Vector<OneComponentNode> objects = collectAffectedComponentNodes();
+      ViewDB.getInstance().setApplyAppearanceChange(false);
       ObjectDisplayOpacityPanel.showDialog(objects);
+      ViewDB.getInstance().setApplyAppearanceChange(true);
    }
-   // node could be a Group or a list of objects not backed by OpenSim objects 
-    public void collectDescendentNodes(OpenSimObjectNode node, Vector<OneComponentNode> descendents) {
-        if (node instanceof OneComponentNode) {
-            descendents.add((OneComponentNode)node);
-        }
-        Children ch = node.getChildren();
-        // process children
-        for (Node childNode : ch.getNodes()) {
-            if (childNode instanceof OpenSimObjectNode) {
-                collectDescendentNodes((OpenSimObjectNode) childNode, descendents);
-            }
-        }
 
-    }
    
    public String getName() {
       return NbBundle.getMessage(ObjectDisplayOpacityAction.class, "CTL_ObjectDisplayOpacityAction");
@@ -72,27 +56,20 @@ public final class ObjectDisplayOpacityAction extends CallableSystemAction {
       // see org.openide.util.actions.SystemAction.iconResource() javadoc for more details
       putValue("noIconInMenu", Boolean.TRUE);
    }
-   
-   public HelpCtx getHelpCtx() {
-      return HelpCtx.DEFAULT_HELP;
-   }
-   
-   protected boolean asynchronous() {
-      return false;
-   }
-
-   // Make it available only if selected objects have representation and belong to same model
+ 
+    // Make it available only if selected objects have representation and belong to same model
     public boolean isEnabled() {
-       // The "hide" option is enabled unless every selected node is hidden.
+        // The "hide" option is enabled unless every selected node is hidden.
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
-        boolean isColorable=true;
-        for(int i=0; i<selected.length && isColorable; i++){
+        boolean isColorable = true;
+        for (int i = 0; i < selected.length && isColorable; i++) {
             isColorable = (selected[i] instanceof OpenSimObjectNode);
-            if (isColorable){
+            if (isColorable) {
                 OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[i];
-                isColorable=objectNode.getValidDisplayOptions().contains(displayOption.Colorable);
+                isColorable = objectNode.getValidDisplayOptions().contains(OpenSimObjectNode.displayOption.Colorable);
             }
         }
         return isColorable;
     }
+  
 }
