@@ -114,6 +114,14 @@ public class OpenSimObjectNode extends OpenSimNode {
             nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
             nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
        }
+       else if (apType.equalsIgnoreCase("Vec6")){
+            nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, this),
+                String.class,
+                "getPropertyAsString",//mapPropertyEnumToGetters.get(currentPropType),
+                "setValueVec6FromString");//mapPropertyEnumToSetters.get(currentPropType));
+            nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
+            nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
+       }
        else { // fall through, unsupported for now
            nextNodeProp = new PropertySupport.Reflection(new PropertyEditorAdaptor(ap, this),
                 String.class,
