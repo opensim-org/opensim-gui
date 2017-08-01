@@ -8,6 +8,7 @@ import java.util.Vector;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
+import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
@@ -106,7 +107,7 @@ public class MarkerAdapter  {
      * @return the offset
      */
     public String getOffsetString() {
-        Vec3 offset= marker.get_location();
+        AbstractProperty offset= marker.getPropertyByName("location");
         return offset.toString();
     }
 
