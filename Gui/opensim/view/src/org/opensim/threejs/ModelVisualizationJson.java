@@ -681,22 +681,28 @@ public class ModelVisualizationJson extends JSONObject {
         PathPointSet ppts = path.getPathPointSet();
         for (int i=0; i< ppts.getSize(); i++){
             AbstractPathPoint pathPoint = ppts.get(i);
-            JSONObject nextpptPositionCommand = new JSONObject();
-            nextpptPositionCommand.put("type", "SetPositionCommand");
-            nextpptPositionCommand.put("objectUuid", mapComponentToUUID.get(pathPoint).get(0).toString());
             Vec3 location = pathPoint.getLocation(state);
-            JSONArray locationArray = new JSONArray();
-            JSONArray oldLocationArray = new JSONArray();
-            for (int p =0; p <3; p++){
-                locationArray.add(location.get(p)*visScaleFactor);
-                oldLocationArray.add(0);
-            }
-            nextpptPositionCommand.put("newPosition", locationArray);
-            nextpptPositionCommand.put("oldPosition", oldLocationArray);
+            UUID pathpointUuid = mapComponentToUUID.get(pathPoint).get(0);
+            JSONObject nextpptPositionCommand = createSetPositionCommand(pathpointUuid, location);
             commands.add(nextpptPositionCommand);
         }
         topJson.put("command", topCommandJson);
         return topJson;
+    }
+
+    protected JSONObject createSetPositionCommand(UUID pathpointUuid, Vec3 location) {
+        JSONObject nextpptPositionCommand = new JSONObject();
+        nextpptPositionCommand.put("type", "SetPositionCommand");
+        nextpptPositionCommand.put("objectUuid", pathpointUuid.toString());
+        JSONArray locationArray = new JSONArray();
+        JSONArray oldLocationArray = new JSONArray();
+        for (int p =0; p <3; p++){
+            locationArray.add(location.get(p)*visScaleFactor);
+            oldLocationArray.add(0);
+        }
+        nextpptPositionCommand.put("newPosition", locationArray);
+        nextpptPositionCommand.put("oldPosition", oldLocationArray);
+        return nextpptPositionCommand;
     }
     private UUID createPathPointMaterial() {
         Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
@@ -748,6 +754,14 @@ public class ModelVisualizationJson extends JSONObject {
         return guiJson;
     }
 
+    public JSONObject createTranslateObjectCommand(OpenSimObject marker, Vec3 newLocation) {
+        JSONObject guiJson = new JSONObject();
+        guiJson.put("Op", "execute");
+        UUID markerUuid = mapComponentToUUID.get(marker).get(0);
+        JSONObject commandJson = createSetPositionCommand(markerUuid, newLocation);
+        guiJson.put("command", commandJson);
+        return guiJson;
+    }
     /**
      * @return the movable
      */
