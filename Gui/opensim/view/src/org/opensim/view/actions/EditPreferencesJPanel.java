@@ -71,7 +71,6 @@ public class EditPreferencesJPanel extends javax.swing.JPanel {
        "Markers Color",
        "AntiAliasingFrames",
        "Marker Display Radius",
-       "Muscle Display Radius",
        "NonCurrentModelOpacity",
        "Refresh Rate (ms.)"
        
