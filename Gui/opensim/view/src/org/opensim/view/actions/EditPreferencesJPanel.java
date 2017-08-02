@@ -66,7 +66,14 @@ public class EditPreferencesJPanel extends javax.swing.JPanel {
        "WrapObject Color",
        "ShowWrapObjects",
        "DefaultCloseAction",
-       "Display Contact Geometry"
+       "Display Contact Geometry",
+       "BackgroundColor",
+       "Markers Color",
+       "AntiAliasingFrames",
+       "Marker Display Radius",
+       "NonCurrentModelOpacity",
+       "Refresh Rate (ms.)"
+       
    };
    /** Creates new form EditPreferencesJPanel */
    public EditPreferencesJPanel() throws BackingStoreException {
