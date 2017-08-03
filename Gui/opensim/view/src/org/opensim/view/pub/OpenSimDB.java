@@ -217,7 +217,7 @@ public class OpenSimDB extends Observable implements Externalizable{
       }
       if(newModel!=null) {
             try {
-                addModel(newModel, newContext);
+                addModel(newModel, null);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
