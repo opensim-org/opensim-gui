@@ -9,17 +9,20 @@
 package org.opensim.view.markerEditor;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.Vector;
 import javax.swing.AbstractAction;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import org.openide.nodes.Node;
+import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.Vec3;
 import org.opensim.view.ExplorerTopComponent;
@@ -54,8 +57,19 @@ public class NewMarkerAction extends AbstractAction {
             return;
         }
         String newMarkerName = makeUniqueMarkerName(markerset);
-        final Marker marker = markerset.addMarker(newMarkerName, offset, body);
-        addMarker(marker, true);
+        Marker newMarker = new Marker();
+        newMarker.setName(newMarkerName);
+        newMarker.set_location(offset);
+        newMarker.setParentFrame(body);
+        OpenSimContext context = OpenSimDB.getInstance().getContext(model);
+        context.cacheModelAndState();
+        markerset.adoptAndAppend(newMarker);
+        try {
+           context.restoreStateFromCachedModel();
+       } catch (IOException ex) {
+           Exceptions.printStackTrace(ex);
+       }
+        addMarker(newMarker, true);
     }
 
     public void addMarker(final Marker marker, boolean supportUndo) {
