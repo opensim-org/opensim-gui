@@ -263,6 +263,8 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
 
     public int step(State s, int stepNumber) {
         int retValue=0;
+        if (ownsStorage && stepNumber==0)
+            storage.purge();
         //retValue = super.step(s, stepNumber);
         processStep(s, stepNumber);
         /*
