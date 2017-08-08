@@ -213,6 +213,33 @@ public class PropertyEditorAdaptor {
                 PropertyHelper.getValueVec3(prop, 2));
         handlePropertyChange(oldVec3, v, supportUndo);
     }
+    // Vec6
+    public Vec6 getValueVec6() {
+        Vec6 dVec6 = new Vec6();
+        for (int i=0; i< 6; i++)
+            dVec6.set(i, PropertyHelper.getValueVec6(prop, i));
+        return dVec6;
+    }
+
+    public void setValueVec6FromString(String vString) {
+        ArrayDouble d = new ArrayDouble();
+        d.fromString(vString);
+        if (d.getSize() == 6) {
+            setValueVec6(new Vec6(d.getitem(0), d.getitem(1), d.getitem(2),
+            d.getitem(3), d.getitem(4), d.getitem(5)));
+        }
+    }
+
+    public void setValueVec6(Vec6 v) {
+        setValueVec6(v, true);
+    }
+
+    public void setValueVec6(Vec6 v, boolean supportUndo) {
+        Vec6 oldVec6 = new Vec6();
+        for (int i=0; i< 6; i++)
+            oldVec6.set(i, PropertyHelper.getValueVec6(prop, i));
+        handlePropertyChange(oldVec6, v, supportUndo);
+    }
 
     public OpenSimObject getValueObj() {
         if (prop.isOneObjectProperty()) {
@@ -629,6 +656,60 @@ public class PropertyEditorAdaptor {
                 public void redo() throws CannotRedoException {
                     super.redo();
                     setValueVec3(v, true);
+                }
+
+                @Override
+                public String getRedoPresentationName() {
+                    return "Redo "+prop.getName()+" change";
+                }
+                
+            };
+            ExplorerTopComponent.addUndoableEdit(auEdit);
+        }
+    }
+
+        private void handlePropertyChange(final Vec6 oldValue, final Vec6 v, boolean supportUndo) {
+        if (supportUndo) context.cacheModelAndState();
+        for (int i = 0; i < 6; i++) {
+            PropertyHelper.setValueVec6(v.get(i), prop , i);
+        }
+
+        try {
+            if (supportUndo) context.restoreStateFromCachedModel();
+        } catch (IOException iae) {
+            try {
+                new JOptionPane(iae.getMessage(),
+                        JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+
+            for (int i = 0; i < 6; i++) {
+                    PropertyHelper.setValueVec6(oldValue.get(i), prop, i);
+            }
+                if (supportUndo) context.restoreStateFromCachedModel();
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+        }
+        }
+        
+        handlePropertyChangeCommon();
+  
+        if (supportUndo) {
+            AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
+
+                @Override
+                public void undo() throws CannotUndoException {
+                    super.undo();
+                    setValueVec6(oldValue, false);
+                }
+
+                @Override
+                public String getUndoPresentationName() {
+                    return "Undo "+prop.getName()+" change";
+                }
+
+                @Override
+                public void redo() throws CannotRedoException {
+                    super.redo();
+                    setValueVec6(v, true);
                 }
 
                 @Override
