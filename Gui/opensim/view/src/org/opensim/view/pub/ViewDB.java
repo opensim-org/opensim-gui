@@ -414,7 +414,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                mapModelsToSettings.remove(dModel);
 
                // Remove model-associated objects from selection list!
-               removeObjectsBelongingToModelFromSelection(dModel);
+               //removeObjectsBelongingToModelFromSelection(dModel);
                SingleModelVisuals visModel = mapModelsToVisuals.get(dModel);
                // Remove from display
                //int rc = visModel.getModelDisplayAssembly().GetReferenceCount();
