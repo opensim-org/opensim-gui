@@ -1670,7 +1670,7 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native String InverseKinematicsTool_getOutputMotionFileName(long jarg1, InverseKinematicsTool jarg1_);
   public final static native long InverseKinematicsTool_getIKTaskSet(long jarg1, InverseKinematicsTool jarg1_);
   public final static native boolean InverseKinematicsTool_run(long jarg1, InverseKinematicsTool jarg1_) throws java.io.IOException;
-  public final static native void InverseKinematicsTool_populateReferences(long jarg1, InverseKinematicsTool jarg1_, long jarg2, MarkersReference jarg2_, long jarg3, ArrayCoordinateReference jarg3_);
+  public final static native void InverseKinematicsTool_populateReferences(long jarg1, InverseKinematicsTool jarg1_, long jarg2, MarkersReference jarg2_, long jarg3, SimTKArrayCoordinateReference jarg3_);
   public final static native long new_SimmFileWriter__SWIG_0();
   public final static native long new_SimmFileWriter__SWIG_1(long jarg1, Model jarg1_);
   public final static native void delete_SimmFileWriter(long jarg1);
@@ -1813,6 +1813,8 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native void PropertyHelper_setValueTransform(double jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
   public final static native double PropertyHelper_getValueVec3(long jarg1, AbstractProperty jarg1_, int jarg2);
   public final static native void PropertyHelper_setValueVec3(double jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
+  public final static native double PropertyHelper_getValueVec6(long jarg1, AbstractProperty jarg1_, int jarg2);
+  public final static native void PropertyHelper_setValueVec6(double jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
   public final static native long PropertyHelper_getValueStringArray(long jarg1, AbstractProperty jarg1_);
   public final static native void PropertyHelper_setValueStringArray(long jarg1, AbstractProperty jarg1_, long jarg2, ArrayStr jarg2_);
   public final static native void PropertyHelper_removeItem(long jarg1, AbstractProperty jarg1_, int jarg2);

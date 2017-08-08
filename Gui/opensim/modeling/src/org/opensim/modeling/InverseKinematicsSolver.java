@@ -35,12 +35,12 @@ public class InverseKinematicsSolver extends AssemblySolver {
     super.delete();
   }
 
-  public InverseKinematicsSolver(Model model, MarkersReference markersReference, ArrayCoordinateReference coordinateReferences, double constraintWeight) {
-    this(opensimSimulationJNI.new_InverseKinematicsSolver__SWIG_0(Model.getCPtr(model), model, MarkersReference.getCPtr(markersReference), markersReference, ArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences, constraintWeight), true);
+  public InverseKinematicsSolver(Model model, MarkersReference markersReference, SimTKArrayCoordinateReference coordinateReferences, double constraintWeight) {
+    this(opensimSimulationJNI.new_InverseKinematicsSolver__SWIG_0(Model.getCPtr(model), model, MarkersReference.getCPtr(markersReference), markersReference, SimTKArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences, constraintWeight), true);
   }
 
-  public InverseKinematicsSolver(Model model, MarkersReference markersReference, ArrayCoordinateReference coordinateReferences) {
-    this(opensimSimulationJNI.new_InverseKinematicsSolver__SWIG_1(Model.getCPtr(model), model, MarkersReference.getCPtr(markersReference), markersReference, ArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences), true);
+  public InverseKinematicsSolver(Model model, MarkersReference markersReference, SimTKArrayCoordinateReference coordinateReferences) {
+    this(opensimSimulationJNI.new_InverseKinematicsSolver__SWIG_1(Model.getCPtr(model), model, MarkersReference.getCPtr(markersReference), markersReference, SimTKArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences), true);
   }
 
   public void updateMarkerWeight(String markerName, double value) {
