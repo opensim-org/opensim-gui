@@ -288,9 +288,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                     assert(false);
                      }
                if (objs.get(i) instanceof Marker) {
-                  SingleModelVisuals vis = mapModelsToVisuals.get(ev.getModel());
-                  //vis.addGeometry((Marker)objs.get(i));
-                  repaintAll();
+                  ModelVisualizationJson modelJson = getInstance().getModelVisualizationJson(ev.getModel());
+                  JSONObject markerJson = modelJson.createMarkerJson(Marker.safeDownCast(objs.get(i)));
+                  // Send message to add markerJson to live visualizer instances
+                  addVisualizerObject(markerJson);
+                  //repaintAll();
                } 
             }
          } else if (arg instanceof ObjectSetCurrentEvent) {

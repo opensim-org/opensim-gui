@@ -6,11 +6,9 @@
 
 package org.opensim.threejs;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.UUID;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.opensim.modeling.DecorativeArrow;
 import org.opensim.modeling.DecorativeBrick;
 import org.opensim.modeling.DecorativeCircle;
@@ -43,7 +41,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
     private UUID mat_uuid;
     private double visualizerScaleFactor = 100;
     boolean updateMode = false;
-    private Map<String, Object> last_json = null;
+    private JSONObject last_json = null;
     private String quadrants = "";
     boolean debug = false;
     
@@ -57,7 +55,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
     
     @Override
     public void implementConeGeometry(DecorativeCone arg0) {
-        Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
+        JSONObject dg_json = new JSONObject();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "CylinderGeometry");
 	dg_json.put("radiusTop", 0.);
@@ -82,7 +80,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
             "radialSegments": 8,
             "tubularSegments": 6,
             "arc": 6.283185307179586 */
-        Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
+        JSONObject dg_json = new JSONObject();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "TorusGeometry");
 	dg_json.put("radius", arg0.getTorusRadius()*visualizerScaleFactor);
@@ -112,14 +110,14 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
     }
 
     private void createJsonForMesh(PolygonalMesh mesh, DecorativeGeometry arg0) {
-        Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
+        JSONObject dg_json = new JSONObject();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "BufferGeometry");
-        Map<String, Object> attributes_json = new LinkedHashMap<String, Object>();
-        Map<String, Object> pos_json = new LinkedHashMap<String, Object>();
+        JSONObject attributes_json = new JSONObject();
+        JSONObject pos_json = new JSONObject();
         pos_json.put("itemSize", 3);
         pos_json.put("type", "Float32Array");
-        Map<String, Object> normals_json = new LinkedHashMap<String, Object>();
+        JSONObject normals_json = new JSONObject();
         normals_json.put("itemSize", 3);
         normals_json.put("type", "Float32Array");
         
@@ -158,7 +156,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         // Build JSONArrays for attributes, normal
         JSONArray pos_array = new JSONArray();
         JSONArray normals_array = new JSONArray();
-        Map<String, Object> data_json = new LinkedHashMap<String, Object>();
+        JSONObject data_json = new JSONObject();
         for (int v=0; v < nv; v++){
             Vec3 vec3 = mesh.getVertexPosition(v);
             for (int coord=0; coord <3; coord++){
@@ -188,7 +186,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         "array": [3,0,1,3,2,0]
         }
         */
-        Map<String, Object> index_json = new LinkedHashMap<String, Object>();
+        JSONObject index_json = new JSONObject();
         JSONArray index_array = new JSONArray();
         for (int f=0; f < nf; f++){
             int numVerts = mesh.getNumVerticesForFace(f);
@@ -223,7 +221,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 
     @Override
     public void implementFrameGeometry(DecorativeFrame arg0) {
-        Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
+        JSONObject dg_json = new JSONObject();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "Frame");
         //dg_json.put("radius", .00005*visualizerScaleFactor);
@@ -234,7 +232,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 
     @Override
     public void implementEllipsoidGeometry(DecorativeEllipsoid arg0) {
-        Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
+        JSONObject dg_json = new JSONObject();
         Vec3 radii = arg0.getRadii();
         // This is a hack since threejs doesn't have a builtin Ellipsoid
         // Should be transparent to users unless they use non unit scalefactors 
@@ -282,7 +280,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 
     @Override
     public void implementSphereGeometry(DecorativeSphere arg0) {
-        Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
+        JSONObject dg_json = new JSONObject();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "SphereGeometry");
 	dg_json.put("radius", arg0.getRadius()*visualizerScaleFactor);
@@ -324,7 +322,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
             "type": "CircleGeometry",
             "radius": 20,
             "segments": 32 */
-        Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
+        JSONObject dg_json = new JSONObject();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "CircleGeometry");
 	dg_json.put("radius", arg0.getRadius()*visualizerScaleFactor);
@@ -335,7 +333,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 
     @Override
     public void implementCylinderGeometry(DecorativeCylinder arg0) {
-        Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
+        JSONObject dg_json = new JSONObject();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "CylinderGeometry");
 	dg_json.put("radiusTop", arg0.getRadius()*visualizerScaleFactor);
@@ -356,7 +354,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 
     @Override
     public void implementBrickGeometry(DecorativeBrick arg0) {
-        Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
+        JSONObject dg_json = new JSONObject();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "BoxGeometry");
 	dg_json.put("width", arg0.getHalfLengths().get(0)*visualizerScaleFactor);
@@ -370,7 +368,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 
     @Override
     public void implementLineGeometry(DecorativeLine arg0) {
-        Map<String, Object> dg_json = new LinkedHashMap<String, Object>();
+        JSONObject dg_json = new JSONObject();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "OpenSim.PathGeometry");
         String colorString = JSONUtilities.mapColorToRGBA(arg0.getColor());
@@ -382,7 +380,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         "normals": [1,0,0,...],
         "uvs": [0,1,...]
         */
-        Map<String, Object> data_json = new LinkedHashMap<String, Object>();
+        JSONObject data_json = new JSONObject();
         JSONArray verts_array = createVertexArray(arg0);
         //data_json.put("vertices", verts_array);
         data_json.put("itemSize", 3);
@@ -443,7 +441,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
     }
 
     private void addMaterialJsonForGeometry(UUID uuid_mat, DecorativeGeometry dg, boolean isSurface) {
-        Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
+        JSONObject mat_json = new JSONObject();
         mat_json.put("uuid", uuid_mat.toString());
         String colorString = JSONUtilities.mapColorToRGBA(dg.getColor());
         if (isSurface){
@@ -485,7 +483,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
     /**
      * @return the last_json
      */
-    public Map<String, Object> getLast_json() {
+    public JSONObject getLast_json() {
         return last_json;
     }
 
