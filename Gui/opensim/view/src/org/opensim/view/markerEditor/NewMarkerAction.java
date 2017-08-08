@@ -19,11 +19,13 @@ import org.openide.nodes.Node;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.Body;
+import org.opensim.modeling.Component;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.Vec3;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.ObjectsAddedEvent;
@@ -97,7 +99,11 @@ public class NewMarkerAction extends AbstractAction {
 
                 public void redo() throws CannotRedoException {
                     super.redo();
-                    Marker newMarker = model.getMarkerSet().addMarker(saveMarkerName, saveMarkerOffset, model.getBodySet().get(saveBodyName));
+                    Marker newMarker = new Marker();
+                    newMarker.setName(saveMarkerName);
+                    newMarker.set_location(saveMarkerOffset);
+                    Component physFrame = model.getComponent(saveBodyName);
+                    newMarker.setParentFrame(PhysicalFrame.safeDownCast(physFrame));
                     addMarker(newMarker, true);
                 }
                 @Override
@@ -116,7 +122,6 @@ public class NewMarkerAction extends AbstractAction {
     private String makeUniqueMarkerName(MarkerSet markerset) {
         String baseName = "NewMarker";
         String newMarkerName = baseName;
-        Marker existingMarker = null;
 
         for (int i = 0; i < markerset.getSize(); i++) {
             newMarkerName = baseName + "_" + i;

@@ -35,11 +35,13 @@ import org.openide.util.Exceptions;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
+import org.opensim.modeling.Component;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.Vec3;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.ObjectsDeletedEvent;
@@ -84,7 +86,7 @@ public final class OneMarkerDeleteAction extends CallableSystemAction {
         // Delete the marker's visuals.
         final String saveMarkerName = marker.getName();
         final String saveBodyName = marker.getFrameName();
-        final Vec3 saveMarkerOffset = marker.get_location();
+        final Vec3 saveMarkerOffset = new Vec3(marker.get_location());
         //marker.removeSelfFromDisplay();
 
         // Remove the marker from the model's marker set.
@@ -103,7 +105,19 @@ public final class OneMarkerDeleteAction extends CallableSystemAction {
 
                 public void undo() throws CannotUndoException {
                     super.undo();
-                    Marker newMarker = model.getMarkerSet().addMarker(saveMarkerName, saveMarkerOffset, model.getBodySet().get(saveBodyName));
+                    Marker newMarker = new Marker();
+                    newMarker.setName(saveMarkerName);
+                    newMarker.set_location(saveMarkerOffset);
+                    Component physFrame = model.getComponent(saveBodyName);
+                    newMarker.setParentFrame(PhysicalFrame.safeDownCast(physFrame));
+                    OpenSimContext context = OpenSimDB.getInstance().getContext(model);
+                    context.cacheModelAndState();
+                    model.getMarkerSet().adoptAndAppend(newMarker);
+                    try {
+                        context.restoreStateFromCachedModel();
+                    } catch (IOException ex) {
+                        Exceptions.printStackTrace(ex);
+                    }
                     new NewMarkerAction().addMarker(newMarker, false);
                 }
 
