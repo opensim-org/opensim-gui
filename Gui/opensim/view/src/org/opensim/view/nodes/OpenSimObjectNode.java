@@ -378,8 +378,9 @@ public class OpenSimObjectNode extends OpenSimNode {
             try {
                 AbstractProperty ap = obj.getPropertyByIndex(p);  
                 String propname = ap.getName();
-                // Skip over sockets per github issue
-                if (propname.startsWith("socket_"))
+                // Skip over sockets and inputs per github issue
+                if (propname.matches("socket_(.*)_connectee_name") || 
+                        propname.matches("input_(.*)_connectee_name"))
                     continue;
                 if (!ap.isListProperty()) {
                     if (ap.isObjectProperty() && ap.size() == 1) {
