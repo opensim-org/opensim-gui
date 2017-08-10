@@ -137,8 +137,8 @@ public class InverseKinematicsTool extends Tool {
     return opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_run(swigCPtr, this);
   }
 
-  public void populateReferences(MarkersReference markersReference, ArrayCoordinateReference coordinateReferences) {
-    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_populateReferences(swigCPtr, this, MarkersReference.getCPtr(markersReference), markersReference, ArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences);
+  public void populateReferences(MarkersReference markersReference, SimTKArrayCoordinateReference coordinateReferences) {
+    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_populateReferences(swigCPtr, this, MarkersReference.getCPtr(markersReference), markersReference, SimTKArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences);
   }
 
 }

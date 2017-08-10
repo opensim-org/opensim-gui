@@ -131,6 +131,14 @@ public class PropertyHelper {
     opensimActuatorsAnalysesToolsJNI.PropertyHelper_setValueVec3(v, AbstractProperty.getCPtr(p), p, index);
   }
 
+  public static double getValueVec6(AbstractProperty p, int index) {
+    return opensimActuatorsAnalysesToolsJNI.PropertyHelper_getValueVec6(AbstractProperty.getCPtr(p), p, index);
+  }
+
+  public static void setValueVec6(double v, AbstractProperty p, int index) {
+    opensimActuatorsAnalysesToolsJNI.PropertyHelper_setValueVec6(v, AbstractProperty.getCPtr(p), p, index);
+  }
+
   public static ArrayStr getValueStringArray(AbstractProperty p) {
     return new ArrayStr(opensimActuatorsAnalysesToolsJNI.PropertyHelper_getValueStringArray(AbstractProperty.getCPtr(p), p), true);
   }

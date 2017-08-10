@@ -150,8 +150,24 @@ public class BodyIterator {
     return opensimSimulationJNI.BodyIterator__has_output_velocity_get(swigCPtr, this);
   }
 
+  public boolean get_has_output_angular_velocity() {
+    return opensimSimulationJNI.BodyIterator__has_output_angular_velocity_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_linear_velocity() {
+    return opensimSimulationJNI.BodyIterator__has_output_linear_velocity_get(swigCPtr, this);
+  }
+
   public boolean get_has_output_acceleration() {
     return opensimSimulationJNI.BodyIterator__has_output_acceleration_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_angular_acceleration() {
+    return opensimSimulationJNI.BodyIterator__has_output_angular_acceleration_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_linear_acceleration() {
+    return opensimSimulationJNI.BodyIterator__has_output_linear_acceleration_get(swigCPtr, this);
   }
 
   public Transform getTransformInGround(State state) {
@@ -162,8 +178,24 @@ public class BodyIterator {
     return new SpatialVec(opensimSimulationJNI.BodyIterator_getVelocityInGround(swigCPtr, this, State.getCPtr(state), state), false);
   }
 
+  public Vec3 getAngularVelocityInGround(State state) {
+    return new Vec3(opensimSimulationJNI.BodyIterator_getAngularVelocityInGround(swigCPtr, this, State.getCPtr(state), state), false);
+  }
+
+  public Vec3 getLinearVelocityInGround(State state) {
+    return new Vec3(opensimSimulationJNI.BodyIterator_getLinearVelocityInGround(swigCPtr, this, State.getCPtr(state), state), false);
+  }
+
   public SpatialVec getAccelerationInGround(State state) {
     return new SpatialVec(opensimSimulationJNI.BodyIterator_getAccelerationInGround(swigCPtr, this, State.getCPtr(state), state), false);
+  }
+
+  public Vec3 getAngularAccelerationInGround(State state) {
+    return new Vec3(opensimSimulationJNI.BodyIterator_getAngularAccelerationInGround(swigCPtr, this, State.getCPtr(state), state), false);
+  }
+
+  public Vec3 getLinearAccelerationInGround(State state) {
+    return new Vec3(opensimSimulationJNI.BodyIterator_getLinearAccelerationInGround(swigCPtr, this, State.getCPtr(state), state), false);
   }
 
   public Transform findTransformBetween(State state, Frame otherFrame) {

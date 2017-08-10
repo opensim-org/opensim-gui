@@ -57,12 +57,12 @@ public class AssemblySolver extends Solver {
     return opensimSimulationJNI.AssemblySolver_getConcreteClassName(swigCPtr, this);
   }
 
-  public AssemblySolver(Model model, ArrayCoordinateReference coordinateReferences, double constraintWeight) {
-    this(opensimSimulationJNI.new_AssemblySolver__SWIG_0(Model.getCPtr(model), model, ArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences, constraintWeight), true);
+  public AssemblySolver(Model model, SimTKArrayCoordinateReference coordinateReferences, double constraintWeight) {
+    this(opensimSimulationJNI.new_AssemblySolver__SWIG_0(Model.getCPtr(model), model, SimTKArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences, constraintWeight), true);
   }
 
-  public AssemblySolver(Model model, ArrayCoordinateReference coordinateReferences) {
-    this(opensimSimulationJNI.new_AssemblySolver__SWIG_1(Model.getCPtr(model), model, ArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences), true);
+  public AssemblySolver(Model model, SimTKArrayCoordinateReference coordinateReferences) {
+    this(opensimSimulationJNI.new_AssemblySolver__SWIG_1(Model.getCPtr(model), model, SimTKArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences), true);
   }
 
   public void setAccuracy(double accuracy) {
@@ -73,8 +73,8 @@ public class AssemblySolver extends Solver {
     opensimSimulationJNI.AssemblySolver_setConstraintWeight(swigCPtr, this, weight);
   }
 
-  public ArrayCoordinateReference getCoordinateReferences() {
-    return new ArrayCoordinateReference(opensimSimulationJNI.AssemblySolver_getCoordinateReferences(swigCPtr, this), false);
+  public SimTKArrayCoordinateReference getCoordinateReferences() {
+    return new SimTKArrayCoordinateReference(opensimSimulationJNI.AssemblySolver_getCoordinateReferences(swigCPtr, this), false);
   }
 
   public void updateCoordinateReference(String coordName, double value, double weight) {

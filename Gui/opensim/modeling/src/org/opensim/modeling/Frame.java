@@ -146,12 +146,44 @@ public class Frame extends ModelComponent {
     return opensimSimulationJNI.Frame__has_output_velocity_get(swigCPtr, this);
   }
 
+  public void set_has_output_angular_velocity(boolean value) {
+    opensimSimulationJNI.Frame__has_output_angular_velocity_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_angular_velocity() {
+    return opensimSimulationJNI.Frame__has_output_angular_velocity_get(swigCPtr, this);
+  }
+
+  public void set_has_output_linear_velocity(boolean value) {
+    opensimSimulationJNI.Frame__has_output_linear_velocity_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_linear_velocity() {
+    return opensimSimulationJNI.Frame__has_output_linear_velocity_get(swigCPtr, this);
+  }
+
   public void set_has_output_acceleration(boolean value) {
     opensimSimulationJNI.Frame__has_output_acceleration_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_acceleration() {
     return opensimSimulationJNI.Frame__has_output_acceleration_get(swigCPtr, this);
+  }
+
+  public void set_has_output_angular_acceleration(boolean value) {
+    opensimSimulationJNI.Frame__has_output_angular_acceleration_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_angular_acceleration() {
+    return opensimSimulationJNI.Frame__has_output_angular_acceleration_get(swigCPtr, this);
+  }
+
+  public void set_has_output_linear_acceleration(boolean value) {
+    opensimSimulationJNI.Frame__has_output_linear_acceleration_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_linear_acceleration() {
+    return opensimSimulationJNI.Frame__has_output_linear_acceleration_get(swigCPtr, this);
   }
 
   public Transform getTransformInGround(State state) {
@@ -162,8 +194,24 @@ public class Frame extends ModelComponent {
     return new SpatialVec(opensimSimulationJNI.Frame_getVelocityInGround(swigCPtr, this, State.getCPtr(state), state), false);
   }
 
+  public Vec3 getAngularVelocityInGround(State state) {
+    return new Vec3(opensimSimulationJNI.Frame_getAngularVelocityInGround(swigCPtr, this, State.getCPtr(state), state), false);
+  }
+
+  public Vec3 getLinearVelocityInGround(State state) {
+    return new Vec3(opensimSimulationJNI.Frame_getLinearVelocityInGround(swigCPtr, this, State.getCPtr(state), state), false);
+  }
+
   public SpatialVec getAccelerationInGround(State state) {
     return new SpatialVec(opensimSimulationJNI.Frame_getAccelerationInGround(swigCPtr, this, State.getCPtr(state), state), false);
+  }
+
+  public Vec3 getAngularAccelerationInGround(State state) {
+    return new Vec3(opensimSimulationJNI.Frame_getAngularAccelerationInGround(swigCPtr, this, State.getCPtr(state), state), false);
+  }
+
+  public Vec3 getLinearAccelerationInGround(State state) {
+    return new Vec3(opensimSimulationJNI.Frame_getLinearAccelerationInGround(swigCPtr, this, State.getCPtr(state), state), false);
   }
 
   public Transform findTransformBetween(State state, Frame otherFrame) {
