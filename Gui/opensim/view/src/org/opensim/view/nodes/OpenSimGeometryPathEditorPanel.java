@@ -314,7 +314,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       context.addPathPoint(currentPath, menuChoice, closestPoint.getBody());
       
       setupComponent(objectWithPath);
-        updateDisplay();
+        //updateDisplay();
    }
 
    public void deleteAttachmentPerformed(int menuChoice) {
@@ -1426,15 +1426,26 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          oldType = 2;
       int newType = musclePointTypeComboBox.getSelectedIndex();
       
+      OpenSimContext context=OpenSimDB.getInstance().getContext(currentPath.getModel());
       if (newType != oldType) {
-         AbstractPathPoint newPoint = AbstractPathPoint.safeDownCast(OpenSimObject.newInstanceOfType(musclePointClassNames[newType]));
-         OpenSimContext context=OpenSimDB.getInstance().getContext(currentPath.getModel());
-         if (via!=null){
-             // Need to pick some coordinate otherwise initSystem will fail
-             via.setCoordinate(currentPath.getModel().getCoordinateSet().get(0));
-             via.setParentFrame(mp.getParentFrame());
-             via.setLocation(mp.getLocation(context.getCurrentStateRef()));
+         AbstractPathPoint newPoint = null;
+         switch(newType){
+             case 1:
+                ConditionalPathPoint typedPoint = ConditionalPathPoint.safeDownCast(
+                        OpenSimObject.newInstanceOfType(musclePointClassNames[newType]));
+                typedPoint.setCoordinate(currentModel.getCoordinateSet().get(0));
+                typedPoint.setLocation(mp.getLocation(context.getCurrentStateRef()));
+                newPoint = typedPoint;
+                break;
+             case 2:
+                MovingPathPoint mTtypedPoint = MovingPathPoint.safeDownCast(OpenSimObject.newInstanceOfType(musclePointClassNames[newType]));
+                newPoint = mTtypedPoint;
+                break;
+             default:
+                 newPoint = PathPoint.safeDownCast(OpenSimObject.newInstanceOfType(musclePointClassNames[newType]));
+                 break;
          }
+         newPoint.setParentFrame(mp.getParentFrame());
          context.realizeVelocity();
          boolean result = context.replacePathPoint(currentPath, mp, newPoint);
          if (result == false) {
@@ -1599,7 +1610,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
             vis.upateDisplay(Component.safeDownCast(objectWithPath));
             ViewDB.getInstance().repaintAll();
         }
-        ViewDB.getInstance().updatePathDisplay(model, currentPath);
+        //ViewDB.getInstance().updatePathDisplay(model, currentPath);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
