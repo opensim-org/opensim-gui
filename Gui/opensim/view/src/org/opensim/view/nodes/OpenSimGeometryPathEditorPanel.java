@@ -1439,6 +1439,9 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
                 break;
              case 2:
                 MovingPathPoint mTtypedPoint = MovingPathPoint.safeDownCast(OpenSimObject.newInstanceOfType(musclePointClassNames[newType]));
+                mTtypedPoint.setXCoordinate(currentModel.getCoordinateSet().get(0));
+                mTtypedPoint.setYCoordinate(currentModel.getCoordinateSet().get(0));
+                mTtypedPoint.setZCoordinate(currentModel.getCoordinateSet().get(0));
                 newPoint = mTtypedPoint;
                 break;
              default:
@@ -1628,6 +1631,6 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
         openSimContext.recreateSystemKeepStage();
         setupComponent(objectWithPath);
         //Muscle asm = Muscle.safeDownCast(objectWithPath);
-        updatePathDisplay(currentModel);
+        //updatePathDisplay(currentModel);
    }
 }
