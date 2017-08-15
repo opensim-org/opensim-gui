@@ -15,11 +15,15 @@ import javax.swing.AbstractAction;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
+import org.openide.DialogDisplayer;
+import org.openide.NotifyDescriptor;
 import org.openide.nodes.Node;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.opensim.logger.OpenSimLogger;
+import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.Body;
+import org.opensim.modeling.Component;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
@@ -66,9 +70,19 @@ public class MarkersLoadFromFileAction extends AbstractAction {
         }
         MarkerSet modelMarkerSet = model.getMarkerSet();
         OpenSimContext context = OpenSimDB.getInstance().getContext(model);
+        ArrayStr existingNames = new ArrayStr();
+        modelMarkerSet.getMarkerNames(existingNames);
+        String errorMessages = "";
+        boolean errorsToReport = false;
         for (int i=0; i<newMarkerSet.getSize(); i++){
             context.cacheModelAndState();
              Marker newMarker = newMarkerSet.get(i);
+             // Check name duplication
+             if (existingNames.findIndex(newMarker.getName())!= -1){
+                 errorMessages = errorMessages.concat("Marker name "+newMarker.getName()+ " already in use. Ignoring..\n");
+                 errorsToReport = true;
+                 continue;
+             }
              // Ideally we use cloneAndAppend but the clone loses track of frame!
              modelMarkerSet.adoptAndAppend(newMarker);
             try {
@@ -78,9 +92,14 @@ public class MarkersLoadFromFileAction extends AbstractAction {
             }
              // Notify the world so that navigator and visualization update
              new NewMarkerAction().addMarker(newMarker, true);
+             modelMarkerSet.getMarkerNames(existingNames);
         }
         // This hack is so that the adopted Marker isn't gc'ed
         newMarkerSet.setMemoryOwner(false);
+        if (errorsToReport){
+            DialogDisplayer.getDefault().notify(
+                    new NotifyDescriptor.Message("Following errors were encountered " + errorMessages));
+        }
     }
 
 }
