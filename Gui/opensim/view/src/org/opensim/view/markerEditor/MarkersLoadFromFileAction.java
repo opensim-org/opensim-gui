@@ -24,6 +24,7 @@ import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.Vec3;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.ExplorerTopComponent;
@@ -65,17 +66,17 @@ public class MarkersLoadFromFileAction extends AbstractAction {
         for (int i=0; i<newMarkerSet.getSize(); i++){
             Marker m = newMarkerSet.get(i);
             Vec3 offset = m.get_location();
-            String newMarkerBodyName = m.getFrameName();
-            if (model.getBodySet().contains(newMarkerBodyName)){
-                Body body  = model.getBodySet().get(newMarkerBodyName);
-                Marker newMarker = markerset.addMarker(m.getName(), offset, body);
+            String newMarkerFrameName = m.getFrameName();
+            PhysicalFrame physFrame = PhysicalFrame.safeDownCast(model.getComponent(newMarkerFrameName));
+            if (physFrame != null){
+                Marker newMarker = markerset.addMarker(m.getName(), offset, physFrame);
                 if (newMarker!=null)
                     addMarker(newMarker, true);
                 else
                     OpenSimLogger.logMessage("Marker: "+m.getName()+" already exists in model and will be ignored\n", OpenSimLogger.INFO);
            }
             else
-               OpenSimLogger.logMessage("Marker: "+m.getName()+" refers to unknown Body "+newMarkerBodyName
+               OpenSimLogger.logMessage("Marker: "+m.getName()+" refers to unknown Body "+newMarkerFrameName
                        +" and will be ignored\n", OpenSimLogger.INFO);
 
         }

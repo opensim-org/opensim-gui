@@ -985,7 +985,7 @@ public class MotionDisplayer implements SelectionListener {
             setMuscleColoringFunction(null);
         }
         if (motionObjectsRoot!=null) {
-            ViewDB.getInstance().RemoveVisualizerObject(motionObjectsRoot, 
+            ViewDB.getInstance().removeVisualizerObject(motionObjectsRoot, 
                     modelVisJson.getModelUUID().toString());
         }
         mcf = null;

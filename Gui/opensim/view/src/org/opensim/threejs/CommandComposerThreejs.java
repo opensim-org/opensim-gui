@@ -9,6 +9,7 @@ import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.opensim.modeling.AbstractProperty;
+import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PropertyHelper;
 import org.opensim.modeling.Vec3;
 
@@ -114,5 +115,17 @@ public class CommandComposerThreejs {
         commandJson.put("object", dObject);
         return commandJson;
     }
+
+    static JSONObject createRemoveObjectByUUIDCommandJson(UUID object2Remove, UUID parent) {
+        JSONObject commandJson = new JSONObject();
+        commandJson.put("type", "RemoveObjectCommand");
+        commandJson.put("parentUuid", parent.toString());
+        JSONObject dObject = new JSONObject();
+        JSONObject dObjectObject = new JSONObject();
+        dObject.put("object", dObjectObject);
+        dObjectObject.put("uuid", object2Remove.toString());
+        commandJson.put("object", dObject);
+        return commandJson;
+    } 
     
 }
