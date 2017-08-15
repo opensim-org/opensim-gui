@@ -49,7 +49,7 @@ public class NewMarkerAction extends AbstractAction {
         // One MarkersNode must have been selected otherwise bail
         if (selected.length != 1 || !(selected[0] instanceof MarkersNode)) {
             return;
-   }
+        }
         MarkersNode markersNode = (MarkersNode) selected[0];
         Model model = markersNode.getModelForNode();
         Vec3 offset = new Vec3(0.11, 0.22, 0.33);
