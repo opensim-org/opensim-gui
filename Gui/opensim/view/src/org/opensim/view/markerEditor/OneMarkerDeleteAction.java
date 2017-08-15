@@ -25,18 +25,23 @@
  */
 package org.opensim.view.markerEditor;
 
+import java.io.IOException;
 import java.util.Vector;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import org.openide.nodes.Node;
+import org.openide.util.Exceptions;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
+import org.opensim.modeling.Component;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.Vec3;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.ObjectsDeletedEvent;
@@ -68,7 +73,6 @@ public final class OneMarkerDeleteAction extends CallableSystemAction {
        return OpenSimDB.getInstance().getCurrentModel()!=null;
    }
 
-    @Override
     public void performAction() {
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         // If any selected object is hidden (or any selected group is mixed), return false.
@@ -82,17 +86,13 @@ public final class OneMarkerDeleteAction extends CallableSystemAction {
         // Delete the marker's visuals.
         final String saveMarkerName = marker.getName();
         final String saveBodyName = marker.getFrameName();
-        final Vec3 saveMarkerOffset = marker.get_location();
+        final Vec3 saveMarkerOffset = new Vec3(marker.get_location());
         //marker.removeSelfFromDisplay();
 
         // Remove the marker from the model's marker set.
         final Model model = marker.getModel();
         MarkerSet markerset = model.getMarkerSet();
-        markerset.remove(marker);
-
-        // Update the marker name list in the ViewDB.
-        OpenSimDB.getInstance().getModelGuiElements(model).updateMarkerNames();
-
+        // Will fire event to handle deletion before actual deletion so that object can be queried
         // Generate an event so everyone can update, including the marker editor.
         Vector<OpenSimObject> objs = new Vector<OpenSimObject>(1);
         objs.add(marker);
@@ -105,7 +105,19 @@ public final class OneMarkerDeleteAction extends CallableSystemAction {
 
                 public void undo() throws CannotUndoException {
                     super.undo();
-                    Marker newMarker = model.getMarkerSet().addMarker(saveMarkerName, saveMarkerOffset, model.getBodySet().get(saveBodyName));
+                    Marker newMarker = new Marker();
+                    newMarker.setName(saveMarkerName);
+                    newMarker.set_location(saveMarkerOffset);
+                    Component physFrame = model.getComponent(saveBodyName);
+                    newMarker.setParentFrame(PhysicalFrame.safeDownCast(physFrame));
+                    OpenSimContext context = OpenSimDB.getInstance().getContext(model);
+                    context.cacheModelAndState();
+                    model.getMarkerSet().adoptAndAppend(newMarker);
+                    try {
+                        context.restoreStateFromCachedModel();
+                    } catch (IOException ex) {
+                        Exceptions.printStackTrace(ex);
+                    }
                     new NewMarkerAction().addMarker(newMarker, false);
                 }
 
@@ -117,6 +129,18 @@ public final class OneMarkerDeleteAction extends CallableSystemAction {
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }
+        // Use Editing call sequence since removing a marker requires 
+        // recreation of tree traversal/initialization
+        OpenSimContext context = OpenSimDB.getInstance().getContext(model);
+        context.cacheModelAndState();
+        markerset.remove(marker);
+        try {
+            context.restoreStateFromCachedModel();
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        // Update the marker name list in the ViewDB.
+        OpenSimDB.getInstance().getModelGuiElements(model).updateMarkerNames();
     }
   
 }

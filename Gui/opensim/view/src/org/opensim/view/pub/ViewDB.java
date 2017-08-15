@@ -288,9 +288,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                     assert(false);
                      }
                if (objs.get(i) instanceof Marker) {
-                  SingleModelVisuals vis = mapModelsToVisuals.get(ev.getModel());
-                  //vis.addGeometry((Marker)objs.get(i));
-                  repaintAll();
+                  ModelVisualizationJson modelJson = getInstance().getModelVisualizationJson(ev.getModel());
+                  JSONObject markerJson = modelJson.createMarkerJson(Marker.safeDownCast(objs.get(i)));
+                  // Send message to add markerJson to live visualizer instances
+                  addVisualizerObject(markerJson);
+                  //repaintAll();
                } 
             }
          } else if (arg instanceof ObjectSetCurrentEvent) {
@@ -412,7 +414,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                mapModelsToSettings.remove(dModel);
 
                // Remove model-associated objects from selection list!
-               removeObjectsBelongingToModelFromSelection(dModel);
+               //removeObjectsBelongingToModelFromSelection(dModel);
                SingleModelVisuals visModel = mapModelsToVisuals.get(dModel);
                // Remove from display
                //int rc = visModel.getModelDisplayAssembly().GetReferenceCount();
@@ -514,9 +516,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
               getModelVisuals(ev.getModel()).removeGeometry((Actuator)obj);
               repaint = true;
            } else if (obj instanceof Marker) {
-              SingleModelVisuals vis = mapModelsToVisuals.get(ev.getModel());
-              vis.removeGeometry((Marker)obj);
-              repaint = true;
+              ModelVisualizationJson vis = mapModelsToJsons.get(ev.getModel());
+              String test = obj.getConcreteClassName();
+              Marker marker = Marker.safeDownCast(obj);
+              this.removeVisualizerObject(marker, marker.getParentFrame());
            }
         }
         if (selectedDeleted)
@@ -1742,9 +1745,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
          getInstance().notifyObservers(evnt);
     }
 
-    public void RemoveVisualizerObject(JSONObject object2Remove, String parentUuid) {
+    public void removeVisualizerObject(JSONObject object2Remove, String parentUuid) {
         if (websocketdb!=null){
             websocketdb.broadcastMessageJson(currentJson.createRemoveObjectCommand(object2Remove, parentUuid), null);
+        }
+    }
+    public void removeVisualizerObject(OpenSimObject object2Remove, OpenSimObject parentObject) {
+        if (websocketdb!=null){
+            websocketdb.broadcastMessageJson(currentJson.createRemoveObjectCommand(object2Remove, parentObject), null);
         }
     }
 
@@ -2162,6 +2170,13 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     public void addVisualizerObject(JSONObject jsonObject) {
         if (websocketdb!=null){
             websocketdb.broadcastMessageJson(currentJson.createAddObjectCommand(jsonObject), null);
+        }
+    }
+
+    public void translateObject(Model model, Marker marker, Vec3 location) {
+        if (websocketdb!=null){
+            ModelVisualizationJson vis = ViewDB.getInstance().getModelVisualizationJson(model);
+            websocketdb.broadcastMessageJson(vis.createTranslateObjectCommand(marker, marker.get_location()), null);
         }
     }
     // Callback, invoked when a command is received from visualizer
