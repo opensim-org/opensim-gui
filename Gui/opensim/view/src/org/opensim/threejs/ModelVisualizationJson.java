@@ -456,7 +456,6 @@ public class ModelVisualizationJson extends JSONObject {
         mat_json.put("transparent", true);
         json_materials.add(mat_json);
 
-        JSONArray pathpoint_jsonArr = new JSONArray();
         // Create plain Geometry with vertices at PathPoints it will have 0 vertices
         // but will be populated libe in the visualizer from the Pathppoints
         JSONObject pathGeomJson = new JSONObject();
@@ -464,10 +463,10 @@ public class ModelVisualizationJson extends JSONObject {
         pathGeomJson.put("uuid", uuidForPathGeomGeometry.toString());
         pathGeomJson.put("type", "PathGeometry");
         pathGeomJson.put("name", path.getAbsolutePathName()+"Control");
-        ArrayPathPoint arrayPathPts = path.getCurrentPath(state);
         pathGeomJson.put("segments", path.getPathPointSet().getSize()-1);
         json_geometries.add(pathGeomJson);
         
+        JSONArray pathpoint_jsonArr = new JSONArray();
         for (int i=0; i< path.getPathPointSet().getSize(); i++){
             AbstractPathPoint pathPoint = path.getPathPointSet().get(i);
             // Create a Sphere with internal opensimType PathPoint
@@ -683,12 +682,23 @@ public class ModelVisualizationJson extends JSONObject {
 
     // Export Path in Json format to visualizer, as of now 
     // only supports Stationary PathPoints
+    // @typeOfEdit = 2 -> delete
     public JSONObject createPathUpdateJson(GeometryPath path, int typeOfEdit) {
         JSONObject topJson = new JSONObject();
-        // Create command to move Stationary PathPoints to new locations
+        UUID pathUuid = pathList.get(path);
         topJson.put("Op", "PathOperation");
-        JSONObject topCommandJson = new JSONObject();
-        
+        topJson.put("uuid", pathUuid.toString());
+        if (typeOfEdit == 2){
+            topJson.put("SubOperation", "delete");
+            // send only pathpoint uuids
+            JSONArray pathpoint_jsonArr = new JSONArray();
+            for (int i=0; i< path.getPathPointSet().getSize(); i++){
+                AbstractPathPoint pathPoint = path.getPathPointSet().get(i);
+                UUID pathpoint_uuid = mapComponentToUUID.get(pathPoint).get(0);
+                pathpoint_jsonArr.add(pathpoint_uuid.toString());
+            }
+            topJson.put("points", pathpoint_jsonArr);
+        }
         return topJson;
     }
 
