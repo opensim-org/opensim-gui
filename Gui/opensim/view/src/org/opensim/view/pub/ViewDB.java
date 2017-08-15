@@ -1730,10 +1730,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         return vizJson;
     }
     // method to export GeometryPath to JSON format upon edit
-    public void updatePathDisplay(Model model, GeometryPath currentPath) {
+    // operation is one of 0:refresh, 1:add, 2:remove
+    public void updatePathDisplay(Model model, GeometryPath currentPath, int operation) {
         if (websocketdb!=null){
             ModelVisualizationJson vizJson = getInstance().mapModelsToJsons.get(model);
-            websocketdb.broadcastMessageJson(vizJson.createPathUpdateJson(currentPath), null);
+            websocketdb.broadcastMessageJson(vizJson.createPathUpdateJson(currentPath, 0), null);
         }
     }
 

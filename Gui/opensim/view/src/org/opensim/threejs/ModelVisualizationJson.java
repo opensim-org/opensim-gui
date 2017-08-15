@@ -614,7 +614,7 @@ public class ModelVisualizationJson extends JSONObject {
         }
         localTransform.setP(location);
         bpptInBodyJson.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1.0), visScaleFactor));
-        bpptInBodyJson.put("visible", false);
+        bpptInBodyJson.put("visible", true);
         children.add(bpptInBodyJson);
         return ppoint_uuid;
     }
@@ -683,23 +683,12 @@ public class ModelVisualizationJson extends JSONObject {
 
     // Export Path in Json format to visualizer, as of now 
     // only supports Stationary PathPoints
-    public JSONObject createPathUpdateJson(GeometryPath path) {
+    public JSONObject createPathUpdateJson(GeometryPath path, int typeOfEdit) {
         JSONObject topJson = new JSONObject();
         // Create command to move Stationary PathPoints to new locations
-        topJson.put("Op", "execute");
+        topJson.put("Op", "PathOperation");
         JSONObject topCommandJson = new JSONObject();
-        topCommandJson.put("type", "MultiCmdsCommand");
-        JSONArray commands = new JSONArray();
-        topCommandJson.put("cmds", commands);
-        PathPointSet ppts = path.getPathPointSet();
-        for (int i=0; i< ppts.getSize(); i++){
-            AbstractPathPoint pathPoint = ppts.get(i);
-            Vec3 location = pathPoint.getLocation(state);
-            UUID pathpointUuid = mapComponentToUUID.get(pathPoint).get(0);
-            JSONObject nextpptPositionCommand = createSetPositionCommand(pathpointUuid, location);
-            commands.add(nextpptPositionCommand);
-        }
-        topJson.put("command", topCommandJson);
+        
         return topJson;
     }
 
