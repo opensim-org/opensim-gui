@@ -23,6 +23,7 @@ import org.opensim.modeling.Body;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.Vec3;
@@ -63,74 +64,23 @@ public class MarkersLoadFromFileAction extends AbstractAction {
             Exceptions.printStackTrace(ex);
             return;
         }
+        MarkerSet modelMarkerSet = model.getMarkerSet();
+        OpenSimContext context = OpenSimDB.getInstance().getContext(model);
         for (int i=0; i<newMarkerSet.getSize(); i++){
-            Marker m = newMarkerSet.get(i);
-            Vec3 offset = m.get_location();
-            String newMarkerFrameName = m.getFrameName();
-            PhysicalFrame physFrame = PhysicalFrame.safeDownCast(model.getComponent(newMarkerFrameName));
-            if (physFrame != null){
-                Marker newMarker = markerset.addMarker(m.getName(), offset, physFrame);
-                if (newMarker!=null)
-                    addMarker(newMarker, true);
-                else
-                    OpenSimLogger.logMessage("Marker: "+m.getName()+" already exists in model and will be ignored\n", OpenSimLogger.INFO);
-           }
-            else
-               OpenSimLogger.logMessage("Marker: "+m.getName()+" refers to unknown Body "+newMarkerFrameName
-                       +" and will be ignored\n", OpenSimLogger.INFO);
-
-        }
-         
-    }
-
-    public void addMarker(final Marker marker, boolean supportUndo) {
-        // Update the marker name list in the ViewDB.
-        final String saveMarkerName = marker.getName();
-        final String saveBodyName = marker.getFrameName();
-        final Vec3 saveMarkerOffset = marker.get_location();
-        final Model model = marker.getModel();
-        OpenSimDB.getInstance().getModelGuiElements(model).updateMarkerNames();
-
-        Vector<OpenSimObject> objs = new Vector<OpenSimObject>(1);
-        objs.add(marker);
-        ObjectsAddedEvent evnt = new ObjectsAddedEvent(this, model, objs);
-        OpenSimDB.getInstance().setChanged();
-        OpenSimDB.getInstance().notifyObservers(evnt);
-        // undo support
-        if (supportUndo) {
-            AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
-
-                public void undo() throws CannotUndoException {
-                    super.undo();
-                    Marker toDelete = model.getMarkerSet().get(saveMarkerName);
-                    OneMarkerDeleteAction.deleteMarker(toDelete, false);
-                }
-
-                public void redo() throws CannotRedoException {
-                    super.redo();
-                    Marker newMarker = model.getMarkerSet().addMarker(saveMarkerName, saveMarkerOffset, model.getBodySet().get(saveBodyName));
-                    addMarker(newMarker, true);
-                }
-            };
-            ExplorerTopComponent.addUndoableEdit(auEdit);
-        }
-    }
-
-    private String makeUniqueMarkerName(MarkerSet markerset) {
-        String baseName = "NewMarker";
-        String newMarkerName = baseName;
-        Marker existingMarker = null;
-
-        for (int i = 0; i < markerset.getSize(); i++) {
-            newMarkerName = baseName + "_" + i;
-            if (markerset.contains(newMarkerName) == true) // name is being used by a current marker
-            {
-                continue;
+            context.cacheModelAndState();
+             Marker newMarker = newMarkerSet.get(i);
+             // Ideally we use cloneAndAppend but the clone loses track of frame!
+             modelMarkerSet.adoptAndAppend(newMarker);
+            try {
+                context.restoreStateFromCachedModel();
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
             }
-            else
-                break;
+             // Notify the world so that navigator and visualization update
+             new NewMarkerAction().addMarker(newMarker, true);
         }
-
-        return newMarkerName;
+        // This hack is so that the adopted Marker isn't gc'ed
+        newMarkerSet.setMemoryOwner(false);
     }
+
 }
