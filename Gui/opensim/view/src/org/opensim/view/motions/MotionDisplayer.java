@@ -1038,38 +1038,6 @@ public class MotionDisplayer {
             dActors.add(nextActor);
         return dActors;
     }
-
-    public void pickUserObject(vtkAssemblyPath asmPath, int cellId) {
-        if (asmPath != null) {
-         vtkAssemblyNode pickedAsm = asmPath.GetLastNode();
-         vtkProp dProp = pickedAsm.GetViewProp();
-         int index=getActors().indexOf(dProp);
-         if (index >=0){
-             vtkActor dActor=getActors().get(index);
-             if (dProp==groundForcesRep.getVtkActor())
-                 handleSelection(groundForcesRep, cellId);
-             else if(dProp==bodyForcesRep.getVtkActor())
-                 handleSelection(bodyForcesRep, cellId);
-             else if (dProp==generalizedForcesRep.getVtkActor())
-                 handleSelection(generalizedForcesRep, cellId);
-             else if (dProp==markersRep.getVtkActor()){
-                 handleSelection(markersRep, cellId);
-             }
-             else  
-                 System.out.println("Unknown user object ");
-             
-         }
-         return;
-        }  
-        
-    }
-
-    private void handleSelection(final OpenSimvtkGlyphCloud glyphRep, final int cellId) {
-            final OpenSimObject obj = glyphRep.getPickedObject(cellId);
-            if (obj!=null)
-            // SelectedGlyphUserObject provies the bbox, name, other attributes needed for selection mgmt
-                ViewDB.getInstance().markSelected(new SelectedGlyphUserObject(obj, model, glyphRep), true, false, true);
-    }
     
     public void updateMotionObjects(){
         if (simmMotionData instanceof AnnotatedMotion){
