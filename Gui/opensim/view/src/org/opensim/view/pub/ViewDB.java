@@ -1734,7 +1734,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     public void updatePathDisplay(Model model, GeometryPath currentPath, int operation) {
         if (websocketdb!=null){
             ModelVisualizationJson vizJson = getInstance().mapModelsToJsons.get(model);
-            websocketdb.broadcastMessageJson(vizJson.createPathUpdateJson(currentPath, 0), null);
+            websocketdb.broadcastMessageJson(vizJson.createPathUpdateJson(currentPath, operation), null);
         }
     }
 
