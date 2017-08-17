@@ -188,10 +188,6 @@ public class MotionDisplayer {
     public void setMuscleColoringFunction(MuscleColoringFunction mcbya) {
         mcf = mcbya;
         // Push it down to muscle displayers
-        if (ViewDB.isVtkGraphicsAvailable()){
-            SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-            vis.setMuscleColoringFunction(mcf);
-        }
         
     }
 
@@ -385,10 +381,7 @@ public class MotionDisplayer {
         
         modelVisJson.addMotionDisplayer(this);
         if (model instanceof ModelForExperimentalData) return;
-        if (ViewDB.isVtkGraphicsAvailable()){
-            SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-            if(vis!=null) vis.setApplyMuscleColors(isRenderMuscleActivations());
-        }
+
     }
     public void setupMotionDisplay() { 
         if (simmMotionData == null)
@@ -431,10 +424,6 @@ public class MotionDisplayer {
         if(colNames.arrayEquals(stateNames)) {
            // This is a states file
            statesFile = true;
-           if (ViewDB.isVtkGraphicsAvailable()){
-            SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-            if(vis!=null) vis.setApplyMuscleColors(true);
-           }
            setRenderMuscleActivations(true);
         } else  {
            // We should build sorted lists of object names so that we can find them easily
@@ -945,42 +934,6 @@ public class MotionDisplayer {
      * cleanupDisplay is called when the motion is mode non-current either explicitly by the user or by selecting
      * another motion for the same model and making it current */
     void cleanupDisplay() {
-        if (ViewDB.isVtkGraphicsAvailable()){
-            if (groundForcesRep != null) {
-                ViewDB.getInstance().removeUserObjectFromModel(model, groundForcesRep.getVtkActor());
-            }
-            if (bodyForcesRep != null) {
-                ViewDB.getInstance().removeUserObjectFromModel(model, bodyForcesRep.getVtkActor());
-            }
-            if (generalizedForcesRep != null) {
-                ViewDB.getInstance().removeUserObjectFromModel(model, generalizedForcesRep.getVtkActor());
-            }
-            if (markersRep != null) {
-                ViewDB.getInstance().removeUserObjectFromModel(model, markersRep.getVtkActor());
-            }
-
-            // Don't attempt to change muscle activation color if we're here because
-            // the model is closing... check this by checking model is still in models list
-            // This may help fix a crash that Sam got when he closed a model that had a MotionDisplayer
-            // associated with it.  It may be because setRenderMuscleActivations ends up updating the actuator
-            // geometry, and if the model is closing it may be that it was in the process of being deleted when
-            // those actuators were referred to...  So we avoid all that with this if statement.
-            if (OpenSimDB.getInstance().hasModel(model) && renderMuscleActivations) {
-                SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-                if (vis != null) {
-                    vis.setApplyMuscleColors(false);
-                }
-            }
-            // If trails are shown, hide them too
-            Enumeration<vtkActor> trailActors = objectTrails.elements();
-            while (trailActors.hasMoreElements()) {
-                ViewDB.getInstance().removeUserObjectFromModel(model, trailActors.nextElement());
-            }
-            for (MotionDisplayer assocMotion : associatedMotions) {
-                assocMotion.cleanupDisplay();
-            }
-            setMuscleColoringFunction(null);
-        }
         if (motionObjectsRoot!=null) {
             ViewDB.getInstance().removeVisualizerObject(motionObjectsRoot, 
                     modelVisJson.getModelUUID().toString());
