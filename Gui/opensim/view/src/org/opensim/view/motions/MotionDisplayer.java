@@ -78,7 +78,6 @@ import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.MuscleColoringFunction;
 import org.opensim.view.OpenSimvtkGlyphCloud;
 import org.opensim.view.SelectedGlyphUserObject;
-import org.opensim.view.SelectionListener;
 import org.opensim.view.SingleModelVisuals;
 import org.opensim.view.experimentaldata.AnnotatedMotion;
 import org.opensim.view.experimentaldata.ExperimentalDataItemType;
@@ -107,7 +106,7 @@ import vtk.vtkProp;
  * 3. This isolates the display code from the specifics of Storage so that OpenSim proper creatures can be used.
  */
 
-public class MotionDisplayer implements SelectionListener {
+public class MotionDisplayer {
 
     double[] defaultExperimentalMarkerColor = new double[]{0.0, 0.35, 0.65};
     private double[] defaultForceColor = new double[]{0., 1.0, 0.};
@@ -542,8 +541,6 @@ public class MotionDisplayer implements SelectionListener {
             ViewDB.getInstance().addUserObjectToModel(model, generalizedForcesRep.getVtkActor());
             ViewDB.getInstance().addUserObjectToModel(model, markersRep.getVtkActor());
         }
-        // should send new objects to visualizer 
-        ViewDB.getInstance().addSelectionListener(this);
     }
 
     //interface applyValue
