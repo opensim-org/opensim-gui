@@ -329,7 +329,7 @@ public class ScaleToolModel extends Observable implements Observer {
          // TODO: use the Storage's we've already read in rather than reading them againag
          if(getModelScalerEnabled()) {
             System.out.println("ModelScaler...");
-            processedModelContext = OpenSimDB.getInstance().createContext(processedModel);
+            processedModelContext = OpenSimDB.getInstance().createContext(processedModel, false);
             // Pass empty path as path to subject, since we already have the measurement trial as an absolute path
             //String t=unscaledModel.getFilePath();
             scaleTool.getMarkerPlacer().setOutputModelFileName(scaleTool.getMarkerPlacer().getOutputModelFileName());
@@ -598,11 +598,11 @@ public class ScaleToolModel extends Observable implements Observer {
    }
 
    private void resetMarkers() {
-      OpenSimContext context = OpenSimDB.getInstance().createContext(unscaledModel); //Call(1) 
+      OpenSimContext context = OpenSimDB.getInstance().createContext(unscaledModel, false); //Call(1) 
       //context.updateMarkerSet(originalMarkerSet);
       if(extraMarkerSet!=null)
          unscaledModel.updateMarkerSet(extraMarkerSet);
-
+      context = OpenSimDB.getInstance().createContext(unscaledModel, true);
       // Update hash table
       markerExistsInModel.clear();
       for(int i=0; i<getMarkerSet().getSize(); i++) markerExistsInModel.put(getMarkerSet().get(i).getName(),(Boolean)true);
