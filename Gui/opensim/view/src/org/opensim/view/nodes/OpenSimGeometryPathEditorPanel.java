@@ -314,7 +314,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       openSimContext.addPathPoint(currentPath, menuChoice, closestPoint.getBody());
       
       setupComponent(objectWithPath);
-      updatePathDisplay(EditOperation.AddPoint);
+      updatePathDisplay(EditOperation.AddPoint, menuChoice);
    }
 
    public void deleteAttachmentPerformed(int menuChoice) {
@@ -352,7 +352,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          ObjectsDeletedEvent evnt = new ObjectsDeletedEvent(this, model, objs);
          OpenSimDB.getInstance().setChanged();
          OpenSimDB.getInstance().notifyObservers(evnt);
-         updatePathDisplay(EditOperation.RemovePoint);
+         updatePathDisplay(EditOperation.RemovePoint, -1);
       }
    }
    
@@ -1151,7 +1151,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       
       setupComponent(objectWithPath);
                */
-      updatePathDisplay(EditOperation.Refresh);
+      updatePathDisplay(EditOperation.Refresh, -1);
    }
    
    public void moveUpPathWrap(int num) {
@@ -1159,7 +1159,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       openSimContext.moveUpPathWrap(currentPath, num);
       
       setupComponent(objectWithPath);
-      updatePathDisplay(EditOperation.Refresh);
+      updatePathDisplay(EditOperation.Refresh, -1);
    }
    
    public void moveDownPathWrap(int num) {
@@ -1167,7 +1167,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       openSimContext.moveDownPathWrap(currentPath, num);
       
       setupComponent(objectWithPath);
-      updatePathDisplay(EditOperation.Refresh);
+      updatePathDisplay(EditOperation.Refresh, -1);
    }
    
    public void deletePathWrap(int num) {
@@ -1175,7 +1175,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       openSimContext.deletePathWrap(currentPath, num);
       
       setupComponent(objectWithPath);
-      updatePathDisplay(EditOperation.Refresh);
+      updatePathDisplay(EditOperation.Refresh, -1);
    }
   
    public void setWrapMethod(javax.swing.JComboBox wrapMethodComboBox, int num) {
@@ -1191,7 +1191,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          mw.setMethod(PathWrap.WrapMethod.axial);
       
       setupComponent(objectWithPath);
-      updatePathDisplay(EditOperation.Refresh);
+      updatePathDisplay(EditOperation.Refresh, -1);
 
    }
    private int findElement(String[] nameList, String name) {
@@ -1210,7 +1210,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          newStartPt = -1;
       if (newStartPt != oldStartPt) {
          openSimContext.setStartPoint(mw, newStartPt);
-         updatePathDisplay(EditOperation.Refresh);
+         updatePathDisplay(EditOperation.Refresh, -1);
          // update the current path panel
          updateCurrentPathPanel();
       }
@@ -1230,7 +1230,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          OpenSimContext context = OpenSimDB.getInstance().getContext(model);
          context.setEndPoint(mw, newEndPt);
          
-         updatePathDisplay(EditOperation.Refresh);
+         updatePathDisplay(EditOperation.Refresh, -1);
          // update the current path panel
          updateCurrentPathPanel();
       }
@@ -1486,7 +1486,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          OpenSimContext context = OpenSimDB.getInstance().getContext(model);
          context.setLocation(PathPoint.safeDownCast(pathPoints.get(attachmentNum)), coordNum, newValue);
          
-         updatePathDisplay(EditOperation.Refresh);
+         updatePathDisplay(EditOperation.Refresh, -1);
          // update the current path panel
          updateCurrentPathPanel();
       }
@@ -1504,7 +1504,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          OpenSimContext context=OpenSimDB.getInstance().getContext(model);
          context.setBody(pathPoints.get(attachmentNum), newFrame);
 
-         updatePathDisplay(EditOperation.Refresh);
+         updatePathDisplay(EditOperation.Refresh, -1);
          // update the panels
          updateAttachmentPanel();
          updateCurrentPathPanel();
@@ -1546,7 +1546,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
             OpenSimContext context = OpenSimDB.getInstance().getContext(model);
             context.setRangeMin(via, newValue/conversion);
             
-            updatePathDisplay(EditOperation.Refresh);
+            updatePathDisplay(EditOperation.Refresh, -1);
             // update the current path panel
             updateCurrentPathPanel();
          }
@@ -1585,15 +1585,15 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          // update the model if the number has changed
          if (newValue != oldValue) {
             openSimContext.setRangeMax(via, newValue/conversion);
-            updatePathDisplay(EditOperation.Refresh);
+            updatePathDisplay(EditOperation.Refresh, -1);
             // update the current path panel
             updateCurrentPathPanel();
          }
       }
    }
 
-    private void updatePathDisplay(org.opensim.view.nodes.OpenSimGeometryPathEditorPanel.EditOperation par0) {
-        ViewDB.getInstance().updatePathDisplay(currentModel, currentPath, par0.ordinal());
+    private void updatePathDisplay(org.opensim.view.nodes.OpenSimGeometryPathEditorPanel.EditOperation par0, int atIndex) {
+        ViewDB.getInstance().updatePathDisplay(currentModel, currentPath, par0.ordinal(), atIndex);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1611,6 +1611,6 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
         openSimContext.recreateSystemKeepStage();
         setupComponent(objectWithPath);
         //Muscle asm = Muscle.safeDownCast(objectWithPath);
-        updatePathDisplay(EditOperation.Refresh);
+        updatePathDisplay(EditOperation.Refresh, -1);
    }
 }
