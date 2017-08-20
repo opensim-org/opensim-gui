@@ -730,6 +730,29 @@ public class ModelVisualizationJson extends JSONObject {
             }
             topJson.put("points", pathpoint_jsonArr);
         }
+        else { // Refresh create multicommand to setpositions
+            topJson.put("SubOperation", "refresh");
+            // For each pathpoint compute transform
+            JSONArray pathpoint_jsonArr = new JSONArray();
+            for (int i = 0; i < path.getPathPointSet().getSize(); i++) {
+                AbstractPathPoint pathPoint = path.getPathPointSet().get(i);
+                JSONObject pathpointupdateJson = new JSONObject();
+                UUID pathpoint_uuid = mapComponentToUUID.get(pathPoint).get(0);
+                pathpointupdateJson.put("uuid", pathpoint_uuid.toString());
+                Transform localTransform = new Transform();
+                Vec3 location = null;
+                if (true)
+                    location = pathPoint.getLocation(state);
+                else { // location is computed by getting the location of proxyPoint in bodyFrame
+                    //Vec3 proxyLocationInParent = proxyPathPoint.getLocation(state);
+                    //location = proxyPathPoint.getBody().findStationLocationInAnotherFrame(state, proxyLocationInParent, bodyFrame);
+                }
+                localTransform.setP(location);
+                pathpointupdateJson.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1.0), visScaleFactor));
+                pathpoint_jsonArr.add(pathpointupdateJson);
+            }
+            topJson.put("points", pathpoint_jsonArr);
+        }
        return topJson;
     }
 
