@@ -243,7 +243,7 @@ class BodySetScaleFactors extends Vector<BodyScaleFactors> {
                 scales.set(j, get(i).manualScales[j]);
             }
             scale.setScaleFactors(scales);
-            modelScaler.getScaleSet().adoptAndAppend(Scale.safeDownCast(scale.clone()));
+            modelScaler.getScaleSet().cloneAndAppend(scale);
          }
       }
       if(modelScaler.getScaleSet().getSize()>0) array.append("manualScale");
@@ -265,13 +265,17 @@ class BodySetScaleFactors extends Vector<BodyScaleFactors> {
       int bodyScaleIndex = bodyScaleSet.getIndex(bodyName);
       BodyScale bodyScale = null;
       if(bodyScaleIndex < 0) {
-         bodyScale = BodyScale.safeDownCast((new BodyScale()).clone()); // Create it on C++ side
+         bodyScale = new BodyScale(); // Create it on C++ side
          bodyScale.setName(bodyName);
-         modelScaler.getMeasurementSet().get(index).getBodyScaleSet().adoptAndAppend(bodyScale);
-      } else bodyScale = bodyScaleSet.get(bodyScaleIndex);
+         modelScaler.getMeasurementSet().get(index).getBodyScaleSet().cloneAndAppend(bodyScale);
+         // get refrence to clone to proceed
+         bodyScale =  modelScaler.getMeasurementSet().get(index).getBodyScaleSet().get(bodyName);
+      } else 
+          bodyScale = bodyScaleSet.get(bodyScaleIndex);
       if(axis==0 || axis==-1) bodyScale.getAxisNames().append("X");
       if(axis==1 || axis==-1) bodyScale.getAxisNames().append("Y");
       if(axis==2 || axis==-1) bodyScale.getAxisNames().append("Z");
+      
    }
 }
 
@@ -999,9 +1003,9 @@ public class ScaleToolModel extends Observable implements Observer {
       }
       else{
          ikCommonModel.deleteObservers();
-         measurementTrial=null;
-         extraMarkerSet = null;
          scaleTool = null;
+         measurementTrial = null;
+         extraMarkerSet = null;
          System.gc();
       }
    }
