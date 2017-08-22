@@ -615,10 +615,11 @@ public class MotionDisplayer {
             mapIndicesToObjectTypes.put(columnIndex, ObjectTypesInMotionFiles.Segment_marker_p1);
             mapIndicesToObjectTypes.put(columnIndex+1, ObjectTypesInMotionFiles.Segment_marker_p2);
             mapIndicesToObjectTypes.put(columnIndex+2, ObjectTypesInMotionFiles.Segment_marker_p3);
+            /* we don't handle mix of markers and coordinates in one file
             int index= markersRep.addLocation(0., 0., 0.);
             mapIndicesToObjects.put(columnIndex, new Integer(index));
             mapIndicesToObjects.put(columnIndex+1, new Integer(index));
-            mapIndicesToObjects.put(columnIndex+2, new Integer(index));
+            mapIndicesToObjects.put(columnIndex+2, new Integer(index)); */
             return 3;
          }
       }
@@ -728,7 +729,7 @@ public class MotionDisplayer {
      long before = 0, after=0;
      if (profile)
           before =System.nanoTime();
-     if (simmMotionData instanceof AnnotatedMotion){
+     if (simmMotionData instanceof AnnotatedMotion){ // Experimental Data
           int dataSize = states.getSize();
           AnnotatedMotion mot = (AnnotatedMotion)simmMotionData;
           Vector<ExperimentalDataObject> objects=mot.getClassified();
@@ -820,8 +821,9 @@ public class MotionDisplayer {
           //groundForcesRep.hide(0);
           return;
       }
+     // Here handling a motion file with potentially extra columns for Forces, Markers
       OpenSimContext context = OpenSimDB.getInstance().getContext(model);
-
+      
       if(statesFile) {
           // FIX40 speed this up by using map or YIndex
           context.getCurrentStateRef().setTime(assocTime);
@@ -863,13 +865,14 @@ public class MotionDisplayer {
               model.setStateVariableValue(context.getCurrentStateRef(), canonicalStateNames.get(i), newValue);
               //statesBuffer[bufferIndex]=newValue;
          }
-         
+         /*
          for(int i=0; i<segmentMarkerColumns.size(); i++) {
             int markerIndex = ((Integer)(segmentMarkerColumns.get(i).object)).intValue();
             int index = segmentMarkerColumns.get(i).stateVectorIndex;
             markersRep.setLocation(markerIndex, states.getitem(index), states.getitem(index+1), states.getitem(index+2));
          }
          if(segmentMarkerColumns.size()>0) markersRep.setModified();
+         */
          Ground gnd = model.getGround();
  
          for(int i=0; i<genCoordForceColumns.size(); i++) {
