@@ -256,8 +256,8 @@ class IKCoordinateTasksModel extends IKTasksModel {
       for(int i=0; i<tasks.size(); i++) {
          if(tasks.get(i).getApply() || tasks.get(i).getWeight()!=0) {
             IKCoordinateTask task = (IKCoordinateTask)tasks.get(i);
-            IKCoordinateTask taskCopy = IKCoordinateTask.safeDownCast(task.clone()); // C++-side copy
-            fullTaskSet.adoptAndAppend(taskCopy);
+            //IKCoordinateTask taskCopy = IKCoordinateTask.safeDownCast(task.clone()); // C++-side copy
+            fullTaskSet.cloneAndAppend(task);
          }
       }
    }

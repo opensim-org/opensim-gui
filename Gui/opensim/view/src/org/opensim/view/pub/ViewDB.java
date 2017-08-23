@@ -184,7 +184,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    static boolean useImmediateModeRendering = false; // Use Render instead of paint
    private ArrayList<Selectable> selectedObjects = new ArrayList<Selectable>(0);
    private Hashtable<Selectable, vtkCaptionActor2D> selectedObjectsAnnotations = new Hashtable<Selectable, vtkCaptionActor2D>(0);
-   private ArrayList<SelectionListener> selectionListeners = new ArrayList<SelectionListener>(0);
    private Hashtable<ModelVisualizationJson, Path> modelVisToJsonFilesMap = new Hashtable<ModelVisualizationJson, Path>();
    private AxesActor     axesAssembly=null;
    private boolean axesDisplayed=false;
@@ -1998,26 +1997,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
 
     public boolean isQuery() {
         return query;
-    }
-    /*
-     * Delegate the call to pick to whoever registered as a SelectionListener
-     */
-    public void pickUserObject(vtkAssemblyPath asmPath, int cellId) {
-        if (asmPath != null) {  // User objects are on their own, use their selectionListeners. 
-         // Registered with the View User objects know how to select/deselect/anotate themselves
-            vtkAssemblyNode pickedAsm = asmPath.GetLastNode();
-            for(SelectionListener nextListener:selectionListeners)
-                nextListener.pickUserObject(asmPath, cellId);
-         }  
-        return;
-    }
-
-    public void addSelectionListener(SelectionListener selectionListener) {
-        if (!selectionListeners.contains(selectionListener))
-            selectionListeners.add(selectionListener);
-    }
-    public void removeSelectionListener(SelectionListener selectionListener) {
-        selectionListeners.remove(selectionListener);
     }
 
     public void updateAnnotationAnchors() {

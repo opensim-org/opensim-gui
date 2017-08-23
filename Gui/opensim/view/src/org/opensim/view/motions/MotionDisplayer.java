@@ -78,7 +78,6 @@ import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.MuscleColoringFunction;
 import org.opensim.view.OpenSimvtkGlyphCloud;
 import org.opensim.view.SelectedGlyphUserObject;
-import org.opensim.view.SelectionListener;
 import org.opensim.view.SingleModelVisuals;
 import org.opensim.view.experimentaldata.AnnotatedMotion;
 import org.opensim.view.experimentaldata.ExperimentalDataItemType;
@@ -107,7 +106,7 @@ import vtk.vtkProp;
  * 3. This isolates the display code from the specifics of Storage so that OpenSim proper creatures can be used.
  */
 
-public class MotionDisplayer implements SelectionListener {
+public class MotionDisplayer {
 
     double[] defaultExperimentalMarkerColor = new double[]{0.0, 0.35, 0.65};
     private double[] defaultForceColor = new double[]{0., 1.0, 0.};
@@ -189,10 +188,6 @@ public class MotionDisplayer implements SelectionListener {
     public void setMuscleColoringFunction(MuscleColoringFunction mcbya) {
         mcf = mcbya;
         // Push it down to muscle displayers
-        if (ViewDB.isVtkGraphicsAvailable()){
-            SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-            vis.setMuscleColoringFunction(mcf);
-        }
         
     }
 
@@ -386,10 +381,7 @@ public class MotionDisplayer implements SelectionListener {
         
         modelVisJson.addMotionDisplayer(this);
         if (model instanceof ModelForExperimentalData) return;
-        if (ViewDB.isVtkGraphicsAvailable()){
-            SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-            if(vis!=null) vis.setApplyMuscleColors(isRenderMuscleActivations());
-        }
+
     }
     public void setupMotionDisplay() { 
         if (simmMotionData == null)
@@ -432,10 +424,6 @@ public class MotionDisplayer implements SelectionListener {
         if(colNames.arrayEquals(stateNames)) {
            // This is a states file
            statesFile = true;
-           if (ViewDB.isVtkGraphicsAvailable()){
-            SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-            if(vis!=null) vis.setApplyMuscleColors(true);
-           }
            setRenderMuscleActivations(true);
         } else  {
            // We should build sorted lists of object names so that we can find them easily
@@ -542,8 +530,6 @@ public class MotionDisplayer implements SelectionListener {
             ViewDB.getInstance().addUserObjectToModel(model, generalizedForcesRep.getVtkActor());
             ViewDB.getInstance().addUserObjectToModel(model, markersRep.getVtkActor());
         }
-        // should send new objects to visualizer 
-        ViewDB.getInstance().addSelectionListener(this);
     }
 
     //interface applyValue
@@ -629,10 +615,11 @@ public class MotionDisplayer implements SelectionListener {
             mapIndicesToObjectTypes.put(columnIndex, ObjectTypesInMotionFiles.Segment_marker_p1);
             mapIndicesToObjectTypes.put(columnIndex+1, ObjectTypesInMotionFiles.Segment_marker_p2);
             mapIndicesToObjectTypes.put(columnIndex+2, ObjectTypesInMotionFiles.Segment_marker_p3);
+            /* we don't handle mix of markers and coordinates in one file
             int index= markersRep.addLocation(0., 0., 0.);
             mapIndicesToObjects.put(columnIndex, new Integer(index));
             mapIndicesToObjects.put(columnIndex+1, new Integer(index));
-            mapIndicesToObjects.put(columnIndex+2, new Integer(index));
+            mapIndicesToObjects.put(columnIndex+2, new Integer(index)); */
             return 3;
          }
       }
@@ -742,7 +729,7 @@ public class MotionDisplayer implements SelectionListener {
      long before = 0, after=0;
      if (profile)
           before =System.nanoTime();
-     if (simmMotionData instanceof AnnotatedMotion){
+     if (simmMotionData instanceof AnnotatedMotion){ // Experimental Data
           int dataSize = states.getSize();
           AnnotatedMotion mot = (AnnotatedMotion)simmMotionData;
           Vector<ExperimentalDataObject> objects=mot.getClassified();
@@ -834,8 +821,9 @@ public class MotionDisplayer implements SelectionListener {
           //groundForcesRep.hide(0);
           return;
       }
+     // Here handling a motion file with potentially extra columns for Forces, Markers
       OpenSimContext context = OpenSimDB.getInstance().getContext(model);
-
+      
       if(statesFile) {
           // FIX40 speed this up by using map or YIndex
           context.getCurrentStateRef().setTime(assocTime);
@@ -877,13 +865,14 @@ public class MotionDisplayer implements SelectionListener {
               model.setStateVariableValue(context.getCurrentStateRef(), canonicalStateNames.get(i), newValue);
               //statesBuffer[bufferIndex]=newValue;
          }
-         
+         /*
          for(int i=0; i<segmentMarkerColumns.size(); i++) {
             int markerIndex = ((Integer)(segmentMarkerColumns.get(i).object)).intValue();
             int index = segmentMarkerColumns.get(i).stateVectorIndex;
             markersRep.setLocation(markerIndex, states.getitem(index), states.getitem(index+1), states.getitem(index+2));
          }
          if(segmentMarkerColumns.size()>0) markersRep.setModified();
+         */
          Ground gnd = model.getGround();
  
          for(int i=0; i<genCoordForceColumns.size(); i++) {
@@ -948,42 +937,6 @@ public class MotionDisplayer implements SelectionListener {
      * cleanupDisplay is called when the motion is mode non-current either explicitly by the user or by selecting
      * another motion for the same model and making it current */
     void cleanupDisplay() {
-        if (ViewDB.isVtkGraphicsAvailable()){
-            if (groundForcesRep != null) {
-                ViewDB.getInstance().removeUserObjectFromModel(model, groundForcesRep.getVtkActor());
-            }
-            if (bodyForcesRep != null) {
-                ViewDB.getInstance().removeUserObjectFromModel(model, bodyForcesRep.getVtkActor());
-            }
-            if (generalizedForcesRep != null) {
-                ViewDB.getInstance().removeUserObjectFromModel(model, generalizedForcesRep.getVtkActor());
-            }
-            if (markersRep != null) {
-                ViewDB.getInstance().removeUserObjectFromModel(model, markersRep.getVtkActor());
-            }
-
-            // Don't attempt to change muscle activation color if we're here because
-            // the model is closing... check this by checking model is still in models list
-            // This may help fix a crash that Sam got when he closed a model that had a MotionDisplayer
-            // associated with it.  It may be because setRenderMuscleActivations ends up updating the actuator
-            // geometry, and if the model is closing it may be that it was in the process of being deleted when
-            // those actuators were referred to...  So we avoid all that with this if statement.
-            if (OpenSimDB.getInstance().hasModel(model) && renderMuscleActivations) {
-                SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
-                if (vis != null) {
-                    vis.setApplyMuscleColors(false);
-                }
-            }
-            // If trails are shown, hide them too
-            Enumeration<vtkActor> trailActors = objectTrails.elements();
-            while (trailActors.hasMoreElements()) {
-                ViewDB.getInstance().removeUserObjectFromModel(model, trailActors.nextElement());
-            }
-            for (MotionDisplayer assocMotion : associatedMotions) {
-                assocMotion.cleanupDisplay();
-            }
-            setMuscleColoringFunction(null);
-        }
         if (motionObjectsRoot!=null) {
             ViewDB.getInstance().removeVisualizerObject(motionObjectsRoot, 
                     modelVisJson.getModelUUID().toString());
@@ -1087,38 +1040,6 @@ public class MotionDisplayer implements SelectionListener {
         for(vtkActor nextActor:trails)
             dActors.add(nextActor);
         return dActors;
-    }
-
-    public void pickUserObject(vtkAssemblyPath asmPath, int cellId) {
-        if (asmPath != null) {
-         vtkAssemblyNode pickedAsm = asmPath.GetLastNode();
-         vtkProp dProp = pickedAsm.GetViewProp();
-         int index=getActors().indexOf(dProp);
-         if (index >=0){
-             vtkActor dActor=getActors().get(index);
-             if (dProp==groundForcesRep.getVtkActor())
-                 handleSelection(groundForcesRep, cellId);
-             else if(dProp==bodyForcesRep.getVtkActor())
-                 handleSelection(bodyForcesRep, cellId);
-             else if (dProp==generalizedForcesRep.getVtkActor())
-                 handleSelection(generalizedForcesRep, cellId);
-             else if (dProp==markersRep.getVtkActor()){
-                 handleSelection(markersRep, cellId);
-             }
-             else  
-                 System.out.println("Unknown user object ");
-             
-         }
-         return;
-        }  
-        
-    }
-
-    private void handleSelection(final OpenSimvtkGlyphCloud glyphRep, final int cellId) {
-            final OpenSimObject obj = glyphRep.getPickedObject(cellId);
-            if (obj!=null)
-            // SelectedGlyphUserObject provies the bbox, name, other attributes needed for selection mgmt
-                ViewDB.getInstance().markSelected(new SelectedGlyphUserObject(obj, model, glyphRep), true, false, true);
     }
     
     public void updateMotionObjects(){
