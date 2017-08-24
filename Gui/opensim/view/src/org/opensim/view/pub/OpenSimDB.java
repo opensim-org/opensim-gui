@@ -106,6 +106,10 @@ public class OpenSimDB extends Observable implements Externalizable{
     public Model getModelByIndex(int i) {
         return models.get(i);
     }
+
+    public boolean hasModels() {
+        return getInstance().getCurrentModel()!= null;
+    }
     public enum CloseModelDefaultAction {
         SAVE,
         DISCARD,
