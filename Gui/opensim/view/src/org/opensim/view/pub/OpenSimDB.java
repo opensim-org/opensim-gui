@@ -106,6 +106,10 @@ public class OpenSimDB extends Observable implements Externalizable{
     public Model getModelByIndex(int i) {
         return models.get(i);
     }
+
+    public boolean hasModels() {
+        return getInstance().getCurrentModel()!= null;
+    }
     public enum CloseModelDefaultAction {
         SAVE,
         DISCARD,
@@ -401,16 +405,16 @@ public class OpenSimDB extends Observable implements Externalizable{
     public OpenSimContext getContext(Model model) {
         OpenSimContext dContext = mapModelsToContexts.get(model);
         if(dContext==null)
-            return createContext(model);
+            return createContext(model, false);
         return (dContext);
     }
     
     /**
      * Create a context to associate with the passed in model and add it to the global map.
      */
-    public OpenSimContext createContext(Model aModel) {
+    public OpenSimContext createContext(Model aModel, boolean force) {
         OpenSimContext context = mapModelsToContexts.get(aModel);
-        if (context ==null){
+        if (context ==null || force){
             OpenSimContext newContext;
             try {
                 newContext = new OpenSimContext(aModel.initSystem(), aModel);
