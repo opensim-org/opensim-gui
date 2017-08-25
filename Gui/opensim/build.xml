@@ -62,6 +62,13 @@
         <copy todir="${opensim.dist.dir}/sdk">
             <fileset dir="${api.dir}/sdk"/>
         </copy>
+       <delete>
+            <fileset dir="${opensim.dist.dir}/OpenSim/modules/ext"
+                includes="**/jxbrowser-*mac*.jar"/>
+            <fileset dir="${opensim.dist.dir}/OpenSim/modules/ext"
+                includes="**/jxbrowser-*linux*.jar"/>
+        </delete>
+
     </target>
     <target name="copy-jre" description="Copy JRE to installer">
         <copy todir="${opensim.dist.dir}/jdk/jre">
