@@ -49,6 +49,7 @@ import org.opensim.view.motions.MotionsDB;
 import org.opensim.view.motions.MotionsDBDescriptor;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.modeling.Model;
+import org.opensim.utils.TheApp;
 import org.opensim.view.pub.OpenSimDBDescriptor;
 import org.opensim.view.pub.PluginsDB;
 import org.opensim.view.pub.ViewDB;
@@ -95,7 +96,7 @@ public class ApplicationExit extends WindowAdapter
           state.addObject("PluginsDB", PluginsDB.getInstance());
           state.addObject("MotionsDB", new MotionsDBDescriptor(MotionsDB.getInstance()));
           XMLEncoder e = new XMLEncoder(new BufferedOutputStream(
-					new FileOutputStream("AppState.xml")));
+					new FileOutputStream(TheApp.getUserDir()+"AppState.xml")));
           
           e.writeObject(state); // This method serializes an object graph 
           e.close();

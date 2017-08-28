@@ -51,6 +51,7 @@ public final class TheApp {
     private static Image appImage;
     private static String installDir=null;
     private static String OS = System.getProperty("os.name").toLowerCase();
+    private static String userDir = System.getProperty("user.dir")+File.separatorChar;
     /** Creates a new instance of TheApp 
     protected TheApp() {
     }
@@ -173,5 +174,12 @@ public final class TheApp {
      */
     public static String getDefaultGeometrySearchPath() {
         return getInstallDir()+File.separatorChar+"Geometry"+File.separatorChar;
+    }
+    /**
+     * Get User Directory, this is usually with writable permissions and is
+     * Platform dependent.
+     */
+    public static String getUserDir() {
+        return userDir;
     }
 }
