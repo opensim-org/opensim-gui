@@ -108,7 +108,7 @@ public class Installer extends ModuleInstall {
             /** Restore from file */            
             try {
                 XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(
-                        new FileInputStream("AppState.xml")));
+                        new FileInputStream(TheApp.getUserDir()+"AppState.xml")));
                 ApplicationState readState= (ApplicationState)decoder.readObject();
                 PluginsDB.getInstance().loadPlugins();
                 OpenSimDB.getInstance().rebuild((OpenSimDBDescriptor) readState.getObject("OpenSimDB"));
