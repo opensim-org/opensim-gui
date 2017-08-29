@@ -894,4 +894,12 @@ public class ModelVisualizationJson extends JSONObject {
         
         return topObject;
     }
+	// Utility command to set the Color of an object given its UUID
+    public JSONObject createSetMaterialColorCommand(UUID objectUUID, Vec3 newColor) {
+        JSONObject guiJson = new JSONObject();
+        guiJson.put("Op", "execute");
+        JSONObject commandJson = CommandComposerThreejs.createSetMaterialColorCommand(newColor, objectUUID);
+        guiJson.put("command", commandJson);
+        return guiJson;
+    }
 }
