@@ -42,6 +42,7 @@ import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
+import java.util.UUID;
 import java.util.Vector;
 import java.util.prefs.Preferences;
 import javax.swing.SwingUtilities;
@@ -2158,6 +2159,13 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             ModelVisualizationJson vis = ViewDB.getInstance().getModelVisualizationJson(model);
             websocketdb.broadcastMessageJson(vis.createTranslateObjectCommand(marker, marker.get_location()), null);
         }
+    }
+    
+    public void applyColorToObjectByUUID(Model model, UUID objectUUID, Vec3 newColor) {
+        if (websocketdb!=null){
+            ModelVisualizationJson vis = ViewDB.getInstance().getModelVisualizationJson(model);
+            websocketdb.broadcastMessageJson(vis.createSetMaterialColorCommand(objectUUID, newColor), null);
+        }        
     }
     // Callback, invoked when a command is received from visualizer
     // this operates only on currentJson

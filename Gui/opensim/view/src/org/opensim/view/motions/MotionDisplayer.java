@@ -43,6 +43,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.Vector;
 import org.json.simple.JSONArray;
@@ -108,14 +109,13 @@ import vtk.vtkProp;
 
 public class MotionDisplayer {
 
-    double[] defaultExperimentalMarkerColor = new double[]{0.0, 0.35, 0.65};
     private double[] defaultForceColor = new double[]{0., 1.0, 0.};
     private Vec3 defaultForceColorVec3 = new Vec3(0., 1.0, 0.);
     private MuscleColoringFunction mcf=null;
     // Create JSONs for geometry and material and use them for all objects of this type so that they all change together
     private JSONObject experimenalMarkerGeometryJson=null;
     private JSONObject experimenalMarkerMaterialJson=null;
-    private Vec3 defaultMarkerColor = new Vec3(0., 0., 1.);
+    private Vec3 defaultExperimentalMarkerColor = new Vec3(0., 0., 1.);
     private ModelVisualizationJson modelVisJson=null;
     JSONObject motionObjectsRoot=null;
     private final HashMap<UUID, Component> mapUUIDToComponent = new HashMap<UUID, Component>();
@@ -394,7 +394,7 @@ public class MotionDisplayer {
         //    System.out.print(" "+colNames.get(i));
         //System.out.println("");
         interpolatedStates = new ArrayDouble(0.0, numColumnsIncludingTime-1);
-        AddMotionObjectsRep(model);
+        //AddMotionObjectsRep(model);
         if (simmMotionData instanceof AnnotatedMotion){
             // Add place hoders for markers
             AnnotatedMotion mot= (AnnotatedMotion) simmMotionData;
@@ -482,54 +482,6 @@ public class MotionDisplayer {
             nextObject.setGlyphInfo(glyphIndex, markersRep);
         }
         nextObject.setDataObjectUUID(findUUIDForObject(nextObject).get(0));
-    }
-
-    private void AddMotionObjectsRep(final Model model) {
-        if (ViewDB.isVtkGraphicsAvailable()){
-            if (groundForcesRep != null)
-               ViewDB.getInstance().removeUserObjectFromModel(model, groundForcesRep.getVtkActor());
-            if (bodyForcesRep != null)
-               ViewDB.getInstance().removeUserObjectFromModel(model, bodyForcesRep.getVtkActor());
-            if (generalizedForcesRep != null)
-               ViewDB.getInstance().removeUserObjectFromModel(model, generalizedForcesRep.getVtkActor());
-            if (markersRep != null)
-               ViewDB.getInstance().removeUserObjectFromModel(model, markersRep.getVtkActor());
-
-            groundForcesRep = new OpenSimvtkGlyphCloud(true);   groundForcesRep.setName("GRF");
-            bodyForcesRep = new OpenSimvtkGlyphCloud(true);     bodyForcesRep.setName("BodyForce");
-            generalizedForcesRep = new OpenSimvtkGlyphCloud(true); bodyForcesRep.setName("JointForce");
-            markersRep = new OpenSimvtkGlyphCloud(false);   bodyForcesRep.setName("Exp. Markers");
-
-            groundForcesRep.setShapeName(currentForceShape);
-            groundForcesRep.setColor(defaultForceColor);
-            groundForcesRep.setColorRange(defaultForceColor, defaultForceColor);
-            groundForcesRep.setOpacity(0.7);
-            groundForcesRep.setScaleFactor(currentScaleFactor);
-            groundForcesRep.orientByNormalAndScaleByVector();
-
-            bodyForcesRep.setShapeName("arrow");
-            bodyForcesRep.setColor(new double[]{0., 0., 1.0});
-            bodyForcesRep.setOpacity(0.7);
-            bodyForcesRep.setScaleFactor(currentScaleFactor);
-            bodyForcesRep.orientByNormalAndScaleByVector();
-
-            generalizedForcesRep.setShapeName("arrow");
-            generalizedForcesRep.setColor(new double[]{0., 1.0, 1.0});
-            generalizedForcesRep.setOpacity(0.7);
-            generalizedForcesRep.setScaleFactor(currentScaleFactor);
-            generalizedForcesRep.orientByNormalAndScaleByVector();
-
-            markersRep.setShapeName("marker");
-            markersRep.setColor(defaultExperimentalMarkerColor); //Scale , scaleBy
-            markersRep.setColorRange(defaultExperimentalMarkerColor, defaultExperimentalMarkerColor);
-            markersRep.scaleByVectorComponents();
-            markersRep.setScaleFactor(ViewDB.getInstance().getExperimentalMarkerDisplayScale());
-
-            ViewDB.getInstance().addUserObjectToModel(model, groundForcesRep.getVtkActor());
-            ViewDB.getInstance().addUserObjectToModel(model, bodyForcesRep.getVtkActor());
-            ViewDB.getInstance().addUserObjectToModel(model, generalizedForcesRep.getVtkActor());
-            ViewDB.getInstance().addUserObjectToModel(model, markersRep.getVtkActor());
-        }
     }
 
     //interface applyValue
@@ -1048,7 +1000,7 @@ public class MotionDisplayer {
             AnnotatedMotion mot= (AnnotatedMotion) simmMotionData;
             currentScaleFactor = mot.getDisplayForceScale();
             currentForceShape = mot.getDisplayForceShape();
-            AddMotionObjectsRep(model);
+            //AddMotionObjectsRep(model);
             Vector<ExperimentalDataObject> objects=mot.getClassified();
             mot.setMotionDisplayer(this);
             for(ExperimentalDataObject nextObject:objects){
@@ -1081,7 +1033,7 @@ public class MotionDisplayer {
             experimenalMarkerMaterialJson = new JSONObject();
             UUID uuidForMarkerMaterial = UUID.randomUUID();
             getExperimenalMarkerMaterialJson().put("uuid", uuidForMarkerMaterial.toString());
-            String colorString = JSONUtilities.mapColorToRGBA(defaultMarkerColor);
+            String colorString = JSONUtilities.mapColorToRGBA(getDefaultExperimentalMarkerColor());
             getExperimenalMarkerMaterialJson().put("type", "MeshPhongMaterial");
             getExperimenalMarkerMaterialJson().put("shininess", 30);
             getExperimenalMarkerMaterialJson().put("transparent", true);
@@ -1120,6 +1072,35 @@ public class MotionDisplayer {
 
     public ArrayList<UUID> findUUIDForObject(OpenSimObject obj) {
         return mapComponentToUUID.get(obj);
+    }
+   /**
+     * @return the defaultExperimentalMarkerColor
+     */
+    public Vec3 getDefaultExperimentalMarkerColor() {
+        return defaultExperimentalMarkerColor;
+    }
+
+    /**
+     * @param defaultExperimentalMarkerColor the defaultExperimentalMarkerColor to set
+     */
+    public void setDefaultExperimentalMarkerColor(Color defaultExperimentalMarkerColor) {
+        Vec3 colorAsVec3 = new Vec3();
+        float[] colorComp = defaultExperimentalMarkerColor.getRGBColorComponents(null);
+        for (int i =0; i <3; i++) 
+            colorAsVec3.set(i, colorComp[i]);
+        this.defaultExperimentalMarkerColor = colorAsVec3;
+        Set<OpenSimObject> expermintalDataObjects = mapComponentToUUID.keySet();
+        for (OpenSimObject expObj : expermintalDataObjects){
+            // Find first ExperimentalMarker and change its Material, this will affect all of them
+            if (expObj instanceof ExperimentalMarker){
+                UUID expMarkerUUID = mapComponentToUUID.get(expObj).get(0); 
+                String colorString = JSONUtilities.mapColorToRGBA(getDefaultExperimentalMarkerColor());
+                experimenalMarkerMaterialJson.put("color", colorString);
+                ViewDB.getInstance().applyColorToObjectByUUID(model, expMarkerUUID, colorAsVec3);  
+                break;
+            }
+        }
+        
     }
 
 }
