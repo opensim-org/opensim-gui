@@ -19,7 +19,7 @@ public class WebSocketDB {
     static WebSocketDB instance;
     private Set<VisWebSocket> sockets = Collections.synchronizedSet(new HashSet<VisWebSocket>());
     private Observer observer;
-    public static boolean debug = false;
+    public static boolean debug = true;
     /** Creates a new instance of WebSocketDB */
     private WebSocketDB() {
         instance = this;
@@ -56,6 +56,7 @@ public class WebSocketDB {
     
     public void broadcastMessageJson(JSONObject msg, VisWebSocket specificSocket)
     {
+        if (debug) System.out.println("In broadcastMessageJson "+specificSocket);
         if (specificSocket != null){
             specificSocket.sendVisualizerMessage(msg);
             return;
