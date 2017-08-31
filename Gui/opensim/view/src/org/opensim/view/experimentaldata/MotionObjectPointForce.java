@@ -215,7 +215,7 @@ public class MotionObjectPointForce extends MotionObjectBodyPoint {
         expForce_json.put("dir", dir);
         expForce_json.put("castShadow", false);
         expForce_json.put("userData", "NonEditable");
-        expForce_json.put("color", JSONUtilities.mapColorToHex(motionDisplayer.getDefaultForceColorVec3()));
+        expForce_json.put("color", JSONUtilities.mapColorToHex(motionDisplayer.getDefaultExperimentalForceColor()));
         expForce_json.put("matrix", JSONUtilities.createMatrixFromTransform(new Transform(), new Vec3(1.), 1.0));
         comp_uuids.add(forcrep_uuid);
         return expForce_json;

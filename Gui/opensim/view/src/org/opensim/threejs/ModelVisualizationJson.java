@@ -40,6 +40,7 @@ import org.opensim.modeling.State;
 import org.opensim.modeling.Transform;
 import org.opensim.modeling.Vec3;
 import org.opensim.modeling.WrapObject;
+import static org.opensim.threejs.CommandComposerThreejs.createScaleObjectCommand;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.view.motions.MotionDisplayer;
 
@@ -899,6 +900,18 @@ public class ModelVisualizationJson extends JSONObject {
         JSONObject guiJson = new JSONObject();
         guiJson.put("Op", "execute");
         JSONObject commandJson = CommandComposerThreejs.createSetMaterialColorCommand(newColor, objectUUID);
+        guiJson.put("command", commandJson);
+        return guiJson;
+    }
+
+    public JSONObject createScaleObjectCommand(UUID objectUuid, double experimentalMarkerScaleFactor) {
+        JSONObject guiJson = new JSONObject();
+        guiJson.put("Op", "execute");
+        JSONArray scales = new JSONArray();
+        for (int i = 0; i < 3; i++) {
+                scales.add(experimentalMarkerScaleFactor);
+        }
+        JSONObject commandJson = CommandComposerThreejs.createScaleObjectCommand(objectUuid, scales);
         guiJson.put("command", commandJson);
         return guiJson;
     }

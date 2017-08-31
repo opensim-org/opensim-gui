@@ -109,13 +109,15 @@ import vtk.vtkProp;
 
 public class MotionDisplayer {
 
-    private double[] defaultForceColor = new double[]{0., 1.0, 0.};
-    private Vec3 defaultForceColorVec3 = new Vec3(0., 1.0, 0.);
+
     private MuscleColoringFunction mcf=null;
     // Create JSONs for geometry and material and use them for all objects of this type so that they all change together
     private JSONObject experimenalMarkerGeometryJson=null;
     private JSONObject experimenalMarkerMaterialJson=null;
+    private Vec3 defaultExperimentalForceColor = new Vec3(0., 1.0, 0.);
     private Vec3 defaultExperimentalMarkerColor = new Vec3(0., 0., 1.);
+    private double experimentalMarkerScaleFactor;
+    private double experimentalForceScaleFactor;
     private ModelVisualizationJson modelVisJson=null;
     JSONObject motionObjectsRoot=null;
     private final HashMap<UUID, Component> mapUUIDToComponent = new HashMap<UUID, Component>();
@@ -137,19 +139,6 @@ public class MotionDisplayer {
         
     }
 
-    /**
-     * @return the groundForcesRep
-     */
-    public OpenSimvtkGlyphCloud getGroundForcesRep() {
-        return groundForcesRep;
-    }
-
-    /**
-     * @return the markersRep
-     */
-    public OpenSimvtkGlyphCloud getMarkersRep() {
-        return markersRep;
-    }
 
     /**
      * @return the currentForceShape
@@ -165,25 +154,6 @@ public class MotionDisplayer {
         this.currentForceShape = currentForceShape;
     }
 
-    /**
-     * @return the defaultForceColor
-     */
-    public Color getDefaultForceColor() {
-        return new Color((float)defaultForceColor[0], (float)defaultForceColor[1], (float)defaultForceColor[2]);
-    }
-
-
-    
-    /**
-     * @param defaultForceColor the defaultForceColor to set
-     */
-    public void setDefaultForceColor(Color defaultForceColor) {
-        float[] colorFloat = new float[3];
-        defaultForceColor.getColorComponents(colorFloat);
-        for (int i=0;i<3;i++) this.defaultForceColor[i] = (double) colorFloat[i];
-        getGroundForcesRep().setColor(defaultForceColor);
-        
-    }
 
     public void setMuscleColoringFunction(MuscleColoringFunction mcbya) {
         mcf = mcbya;
@@ -218,8 +188,6 @@ public class MotionDisplayer {
         Vector<ExperimentalDataObject> objects=mot.getClassified();        
         Vec3 unitScale = new Vec3(1., 1., 1.);
         for (ExperimentalDataObject nextObject : objects) {
-            //if (!nextObject.isDisplayed()) 
-            //    continue;
             JSONObject motionObjectTransform = new JSONObject();
             Transform xform = new Transform();
             if (nextObject instanceof ExperimentalMarker) {
@@ -294,11 +262,32 @@ public class MotionDisplayer {
     }
 
     /**
-     * @return the defaultForceColorVec3
+     * @return the defaultExperimentalForceColor
      */
-    public Vec3 getDefaultForceColorVec3() {
-        return defaultForceColorVec3;
+    public Vec3 getDefaultExperimentalForceColor() {
+        return defaultExperimentalForceColor;
     }
+
+    public double getExperimentalMarkerScaleFactor() {
+        return experimentalMarkerScaleFactor;
+    }
+
+    public void setExperimentalForceColor(Color color) {
+         Vec3 colorAsVec3 = convertColorToVec3(color);
+         defaultExperimentalForceColor = colorAsVec3;
+         Set<OpenSimObject> expermintalDataObjects = mapComponentToUUID.keySet();
+         for (OpenSimObject expObj : expermintalDataObjects){
+            // Find first ExperimentalMarker and change its Material, this will affect all of them
+            if (expObj instanceof MotionObjectPointForce){
+                UUID expForceUUID = mapComponentToUUID.get(expObj).get(0); 
+                String colorString = JSONUtilities.mapColorToRGBA(getDefaultExperimentalForceColor());
+                experimenalMarkerMaterialJson.put("color", colorString);
+                ViewDB.getInstance().applyColorToObjectByUUID(model, expForceUUID, colorAsVec3);  
+                break;
+            }
+        }
+    }
+
     
     public enum ObjectTypesInMotionFiles{GenCoord, 
                                          GenCoord_Velocity, 
@@ -369,6 +358,8 @@ public class MotionDisplayer {
     
     /** Creates a new instance of MotionDisplayer */
     public MotionDisplayer(Storage motionData, Model model) {
+        this.experimentalMarkerScaleFactor = 1.0;
+        this.experimentalForceScaleFactor = 1.0;
         this.model = model;
         dContext= OpenSimDB.getInstance().getContext(model);
         simmMotionData = motionData;
@@ -469,18 +460,10 @@ public class MotionDisplayer {
     }
 
     private void bindForceVisualizerObjectKeepHandle(ExperimentalDataObject nextObject) {
-        if (ViewDB.isVtkGraphicsAvailable()){
-            int glyphIndex=groundForcesRep.addLocation(nextObject);
-            nextObject.setGlyphInfo(glyphIndex, groundForcesRep);
-        }
         nextObject.setDataObjectUUID(findUUIDForObject(nextObject).get(0));
     }
 
     private void bindMarkerToVisualizerObjectKeepHandle(ExperimentalDataObject nextObject) {
-        if (ViewDB.isVtkGraphicsAvailable()){
-            int glyphIndex=markersRep.addLocation(nextObject);
-            nextObject.setGlyphInfo(glyphIndex, markersRep);
-        }
         nextObject.setDataObjectUUID(findUUIDForObject(nextObject).get(0));
     }
 
@@ -1027,6 +1010,11 @@ public class MotionDisplayer {
             getExperimenalMarkerGeometryJson().put("type", "SphereGeometry");
             getExperimenalMarkerGeometryJson().put("radius", 15);
             getExperimenalMarkerGeometryJson().put("name", "DefaultExperimentalMarker");
+            JSONArray scales = new JSONArray();
+                for (int i = 0; i < 3; i++) {
+                    scales.add(experimentalMarkerScaleFactor);
+            }
+            getExperimenalMarkerGeometryJson().put("scale", scales);
             JSONArray json_geometries = (JSONArray) modelVisJson.get("geometries");
             json_geometries.add(getExperimenalMarkerGeometryJson());
 
@@ -1084,11 +1072,7 @@ public class MotionDisplayer {
      * @param defaultExperimentalMarkerColor the defaultExperimentalMarkerColor to set
      */
     public void setDefaultExperimentalMarkerColor(Color defaultExperimentalMarkerColor) {
-        Vec3 colorAsVec3 = new Vec3();
-        float[] colorComp = defaultExperimentalMarkerColor.getRGBColorComponents(null);
-        for (int i =0; i <3; i++) 
-            colorAsVec3.set(i, colorComp[i]);
-        this.defaultExperimentalMarkerColor = colorAsVec3;
+        Vec3 colorAsVec3 = convertColorToVec3(defaultExperimentalMarkerColor);
         Set<OpenSimObject> expermintalDataObjects = mapComponentToUUID.keySet();
         for (OpenSimObject expObj : expermintalDataObjects){
             // Find first ExperimentalMarker and change its Material, this will affect all of them
@@ -1102,5 +1086,36 @@ public class MotionDisplayer {
         }
         
     }
+
+    protected Vec3 convertColorToVec3(Color defaultExperimentalMarkerColor1) {
+        Vec3 colorAsVec3 = new Vec3();
+        float[] colorComp = defaultExperimentalMarkerColor1.getRGBColorComponents(null);
+        for (int i =0; i <3; i++)
+            colorAsVec3.set(i, colorComp[i]);
+        this.defaultExperimentalMarkerColor = colorAsVec3;
+        return colorAsVec3;
+    }
+    /**
+     * @param experimentalMarkerScaleFactor the experimentalMarkerScaleFactor to
+     * set
+     */
+    public void setExperimentalMarkerScaleFactor(double experimentalMarkerScaleFactor) {
+        this.experimentalMarkerScaleFactor = experimentalMarkerScaleFactor;
+        // Update default marker geometry to new scale
+        JSONArray scales = new JSONArray();
+        for (int i = 0; i < 3; i++) {
+                scales.add(experimentalMarkerScaleFactor);
+        }
+        getExperimenalMarkerGeometryJson().put("scale", scales);
+        Set<OpenSimObject> expermintalDataObjects = mapComponentToUUID.keySet();
+        for (OpenSimObject expObj : expermintalDataObjects){
+            // Find first ExperimentalMarker and change its Material, this will affect all of them
+            if (expObj instanceof ExperimentalMarker){
+                UUID expMarkerUUID = mapComponentToUUID.get(expObj).get(0);
+                ViewDB.getInstance().applyScaleToObjectByUUID(model, expMarkerUUID, experimentalMarkerScaleFactor);
+            }
+        }
+    }
+
 
 }

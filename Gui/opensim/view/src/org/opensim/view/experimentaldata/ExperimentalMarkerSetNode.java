@@ -61,7 +61,6 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
     private static String nodeName;
     AnnotatedMotion dMotion;
     private MotionDisplayer motionDisplayer;
-    private OpenSimvtkGlyphCloud markersDisplayer;
 
     /** Creates a new instance of ExperimentalMarkerNode */
     public ExperimentalMarkerSetNode(AnnotatedMotion dMotion) {
@@ -196,8 +195,7 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }       
-        markersDisplayer.setScaleFactor(newFactor);
-        ViewDB.repaintAll();
+        motionDisplayer.setExperimentalMarkerScaleFactor(newFactor);
         refreshNode();
     }
 
@@ -205,10 +203,7 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
     {
        if (motionDisplayer==null){
             motionDisplayer = dMotion.getMotionDisplayer();
-            markersDisplayer = motionDisplayer.getMarkersRep();
        }
-        if (markersDisplayer==null)
-            markersDisplayer = motionDisplayer.getMarkersRep();
-        return markersDisplayer.getScaleFactor();
+        return motionDisplayer.getExperimentalMarkerScaleFactor();
     }
 }

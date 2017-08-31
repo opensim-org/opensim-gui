@@ -54,15 +54,10 @@ public class CommandComposerThreejs {
          }
          boolean scaleChange = prop.getName().equalsIgnoreCase("scale_factors");
          if (scaleChange){
-             JSONObject commandJson = new JSONObject();
-             commandJson.put("type", "SetScaleCommand");
-             commandJson.put("objectUuid", objectUuid.toString());
              JSONArray jsonVec3 = new JSONArray();
              for (int i=0; i<3; i++)
                  jsonVec3.add(PropertyHelper.getValueVec3(prop, i));
-             commandJson.put("oldScale", jsonVec3);
-             commandJson.put("newScale", jsonVec3);
-             return commandJson;
+             return createScaleObjectCommand(objectUuid, jsonVec3);
          }
          boolean opacityChange = prop.getName().equalsIgnoreCase("opacity");
          boolean representationChange = prop.getName().equalsIgnoreCase("representation");
@@ -90,6 +85,15 @@ public class CommandComposerThreejs {
          }
          JSONObject commandJson = new JSONObject();
          return commandJson;
+    }
+
+    protected static JSONObject createScaleObjectCommand(UUID objectUuid, JSONArray jsonVec3) {
+        JSONObject commandJson = new JSONObject();
+        commandJson.put("type", "SetScaleCommand");
+        commandJson.put("objectUuid", objectUuid.toString());
+        commandJson.put("oldScale", jsonVec3);
+        commandJson.put("newScale", jsonVec3);
+        return commandJson;
     }
 
     public static JSONObject createSetMaterialColorCommand(Vec3 newColor, UUID objectUuid) {
@@ -131,5 +135,14 @@ public class CommandComposerThreejs {
         commandJson.put("object", dObject);
         return commandJson;
     } 
+
+    static JSONObject createGeometryValueCommand(UUID geometryUuid, String attribute, JSONArray value) {
+        JSONObject commandJson = new JSONObject();
+        commandJson.put("type", "SetGeometryValueCommand");
+        commandJson.put("name", "SetScale");
+        commandJson.put("attributeName", attribute);
+        commandJson.put("newValue", value);
+        commandJson.put("objectUuid", geometryUuid.toString());
+        return commandJson;    }
     
 }

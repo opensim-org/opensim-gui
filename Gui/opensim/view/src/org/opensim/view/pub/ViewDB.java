@@ -116,7 +116,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     * as a message to visualizer.
    */
    private static boolean applyAppearanceChange = false;
-   
+
    class AppearanceChange {
        Model model;
        Component mc;
@@ -2167,6 +2167,15 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             websocketdb.broadcastMessageJson(vis.createSetMaterialColorCommand(objectUUID, newColor), null);
         }        
     }
+    
+    public void applyScaleToObjectByUUID(Model model, UUID geometryUuid, double experimentalMarkerScaleFactor) {
+        if (websocketdb!=null){
+            ModelVisualizationJson vis = ViewDB.getInstance().getModelVisualizationJson(model);
+            websocketdb.broadcastMessageJson(vis.createScaleObjectCommand(geometryUuid, experimentalMarkerScaleFactor), null);
+        }        
+    }
+   
+
     // Callback, invoked when a command is received from visualizer
     // this operates only on currentJson
     private void handleJson(JSONObject jsonObject) {

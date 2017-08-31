@@ -45,8 +45,10 @@ import org.openide.nodes.PropertySupport;
 import org.openide.nodes.Sheet;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
+import org.opensim.modeling.Vec3;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.OpenSimvtkGlyphCloud;
+import org.opensim.view.motions.MotionDisplayer;
 import org.opensim.view.nodes.*;
 import org.opensim.view.pub.ViewDB;
 
@@ -58,7 +60,7 @@ public class ExperimentalForceSetNode extends OpenSimNode {
     private static ResourceBundle bundle = NbBundle.getBundle(ExperimentalForceSetNode.class);
     private static String nodeName;
     AnnotatedMotion dMotion;
-    private OpenSimvtkGlyphCloud forcesDisplayer;
+    private MotionDisplayer motionDisplayer;
     /** Creates a new instance of ExperimentalForceNode */
     public ExperimentalForceSetNode(AnnotatedMotion dMotion) {
         nodeName=bundle.getString("ForceSet_NODE_NAME");
@@ -66,17 +68,12 @@ public class ExperimentalForceSetNode extends OpenSimNode {
         setDisplayName(nodeName);
         setShortDescription(bundle.getString("HINT_ExperimentalForceSetNode"));
         this.dMotion=dMotion;
-        //forcesDisplayer = dMotion.getMotionDisplayer().getGroundForcesRep();
+        if (motionDisplayer==null){
+            motionDisplayer = dMotion.getMotionDisplayer();
+       }        
         createChildren();
     }
 
-    private void connectForceDisplayer(AnnotatedMotion dMotion) {
-        if (forcesDisplayer==null){
-            if (dMotion.getMotionDisplayer()!= null)
-                forcesDisplayer = dMotion.getMotionDisplayer().getGroundForcesRep();
-        }
-    }
-    
     public String getHtmlDisplayName() {
         
         return nodeName;
@@ -160,7 +157,7 @@ public class ExperimentalForceSetNode extends OpenSimNode {
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }
-        forcesDisplayer.setColor(color);
+        motionDisplayer.setExperimentalForceColor(color);
         ViewDB.repaintAll();
         refreshNode();
     }
@@ -170,9 +167,8 @@ public class ExperimentalForceSetNode extends OpenSimNode {
     
     public Color getColor()
     {
-        if (forcesDisplayer==null)
-            connectForceDisplayer(dMotion);
-        return forcesDisplayer.getColor();
+        Vec3 colorAsVec3 =  motionDisplayer.getDefaultExperimentalForceColor();
+        return new Color((float)colorAsVec3.get(0), (float)colorAsVec3.get(1), (float)colorAsVec3.get(2));
     }
    
     public void setForceScaleFactorUI(double newFactor) {
@@ -197,16 +193,14 @@ public class ExperimentalForceSetNode extends OpenSimNode {
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }       
-        forcesDisplayer.setScaleFactor(newFactor);
+        //motionDisplayer.setExperimentalForceScaleFactor(newFactor);
         ViewDB.repaintAll();
         refreshNode();
     }
 
     public double getForceScaleFactor()
     {
-        if (forcesDisplayer==null)
-            connectForceDisplayer(dMotion);
-        return forcesDisplayer.getScaleFactor();
+        return 1.0;//motionDisplayer.getExperimentalForceScaleFactor();
     }
 
 }
