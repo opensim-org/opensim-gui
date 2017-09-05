@@ -218,7 +218,11 @@ public class FiberCompressiveForceCosPennationCurve extends Function {
   }
 
   public double calcDerivative(double cosPennationAngle, int order) {
-    return opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_calcDerivative(swigCPtr, this, cosPennationAngle, order);
+    return opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_calcDerivative__SWIG_0(swigCPtr, this, cosPennationAngle, order);
+  }
+
+  public double calcDerivative(StdVectorInt derivComponents, Vector x) {
+    return opensimSimulationJNI.FiberCompressiveForceCosPennationCurve_calcDerivative__SWIG_1(swigCPtr, this, StdVectorInt.getCPtr(derivComponents), derivComponents, Vector.getCPtr(x), x);
   }
 
   public double calcIntegral(double cosPennationAngle) {

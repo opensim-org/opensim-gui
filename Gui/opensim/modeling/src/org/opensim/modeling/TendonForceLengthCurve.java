@@ -262,7 +262,11 @@ public class TendonForceLengthCurve extends Function {
   }
 
   public double calcDerivative(double aNormLength, int order) {
-    return opensimSimulationJNI.TendonForceLengthCurve_calcDerivative(swigCPtr, this, aNormLength, order);
+    return opensimSimulationJNI.TendonForceLengthCurve_calcDerivative__SWIG_0(swigCPtr, this, aNormLength, order);
+  }
+
+  public double calcDerivative(StdVectorInt derivComponents, Vector x) {
+    return opensimSimulationJNI.TendonForceLengthCurve_calcDerivative__SWIG_1(swigCPtr, this, StdVectorInt.getCPtr(derivComponents), derivComponents, Vector.getCPtr(x), x);
   }
 
   public double calcIntegral(double aNormLength) {

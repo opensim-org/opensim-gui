@@ -102,8 +102,12 @@ public class ForceSet extends ModelComponentSetForces {
     return opensimSimulationJNI.ForceSet_private_append__SWIG_2(swigCPtr, this, ForceSet.getCPtr(aForceSet), aForceSet);
   }
 
+  public boolean set(int aIndex, Force aForce, boolean preserveGroups) {
+    return opensimSimulationJNI.ForceSet_set__SWIG_0(swigCPtr, this, aIndex, Force.getCPtr(aForce), aForce, preserveGroups);
+  }
+
   public boolean set(int aIndex, Force aForce) {
-    return opensimSimulationJNI.ForceSet_set(swigCPtr, this, aIndex, Force.getCPtr(aForce), aForce);
+    return opensimSimulationJNI.ForceSet_set__SWIG_1(swigCPtr, this, aIndex, Force.getCPtr(aForce), aForce);
   }
 
   public boolean insert(int aIndex, Force aObject) {

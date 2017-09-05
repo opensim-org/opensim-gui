@@ -8,15 +8,15 @@
 
 package org.opensim.modeling;
 
-public class STODataTypeNotFound extends OpenSimException {
+public class SubcomponentsWithDuplicateName extends OpenSimException {
   private transient long swigCPtr;
 
-  public STODataTypeNotFound(long cPtr, boolean cMemoryOwn) {
-    super(opensimCommonJNI.STODataTypeNotFound_SWIGUpcast(cPtr), cMemoryOwn);
+  public SubcomponentsWithDuplicateName(long cPtr, boolean cMemoryOwn) {
+    super(opensimCommonJNI.SubcomponentsWithDuplicateName_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(STODataTypeNotFound obj) {
+  public static long getCPtr(SubcomponentsWithDuplicateName obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -28,15 +28,15 @@ public class STODataTypeNotFound extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimCommonJNI.delete_STODataTypeNotFound(swigCPtr);
+        opensimCommonJNI.delete_SubcomponentsWithDuplicateName(swigCPtr);
       }
       swigCPtr = 0;
     }
     super.delete();
   }
 
-  public STODataTypeNotFound(String file, long line, String func) {
-    this(opensimCommonJNI.new_STODataTypeNotFound(file, line, func), true);
+  public SubcomponentsWithDuplicateName(String file, long line, String func, String thisName, String duplicateName) {
+    this(opensimCommonJNI.new_SubcomponentsWithDuplicateName(file, line, func, thisName, duplicateName), true);
   }
 
 }

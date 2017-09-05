@@ -406,7 +406,11 @@ public class ForceVelocityInverseCurve extends Function {
   }
 
   public double calcDerivative(double aForceVelocityMultiplier, int order) {
-    return opensimSimulationJNI.ForceVelocityInverseCurve_calcDerivative(swigCPtr, this, aForceVelocityMultiplier, order);
+    return opensimSimulationJNI.ForceVelocityInverseCurve_calcDerivative__SWIG_0(swigCPtr, this, aForceVelocityMultiplier, order);
+  }
+
+  public double calcDerivative(StdVectorInt derivComponents, Vector x) {
+    return opensimSimulationJNI.ForceVelocityInverseCurve_calcDerivative__SWIG_1(swigCPtr, this, StdVectorInt.getCPtr(derivComponents), derivComponents, Vector.getCPtr(x), x);
   }
 
   public Vec2 getCurveDomain() {

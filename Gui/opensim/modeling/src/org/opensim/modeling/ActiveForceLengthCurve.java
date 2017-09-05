@@ -282,7 +282,11 @@ public class ActiveForceLengthCurve extends Function {
   }
 
   public double calcDerivative(double normFiberLength, int order) {
-    return opensimSimulationJNI.ActiveForceLengthCurve_calcDerivative(swigCPtr, this, normFiberLength, order);
+    return opensimSimulationJNI.ActiveForceLengthCurve_calcDerivative__SWIG_0(swigCPtr, this, normFiberLength, order);
+  }
+
+  public double calcDerivative(StdVectorInt derivComponents, Vector x) {
+    return opensimSimulationJNI.ActiveForceLengthCurve_calcDerivative__SWIG_1(swigCPtr, this, StdVectorInt.getCPtr(derivComponents), derivComponents, Vector.getCPtr(x), x);
   }
 
   public Vec2 getCurveDomain() {
