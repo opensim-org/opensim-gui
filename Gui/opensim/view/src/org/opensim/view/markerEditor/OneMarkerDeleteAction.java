@@ -85,7 +85,7 @@ public final class OneMarkerDeleteAction extends CallableSystemAction {
     static public void deleteMarker(final Marker marker, boolean supportUndo) {
         // Delete the marker's visuals.
         final String saveMarkerName = marker.getName();
-        final String saveBodyName = marker.getFrameName();
+        final String saveBodyName = marker.getParentFrameName();
         final Vec3 saveMarkerOffset = new Vec3(marker.get_location());
         //marker.removeSelfFromDisplay();
 

@@ -77,7 +77,7 @@ public class NewMarkerAction extends AbstractAction {
     public void addMarker(final Marker marker, boolean supportUndo) {
         // Update the marker name list in the ViewDB.
         final String saveMarkerName = marker.getName();
-        final String saveBodyName = marker.getFrameName();
+        final String saveBodyName = marker.getParentFrameName();
         final Vec3 saveMarkerOffset = marker.get_location();
         final Model model = marker.getModel();
         OpenSimDB.getInstance().getModelGuiElements(model).updateMarkerNames();

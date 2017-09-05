@@ -65,7 +65,7 @@ public class MarkerAdapter  {
      * @return the bodyName
      */
     public String getBodyName() {
-        return marker.getFrameName();
+        return marker.getParentFrameName();
     }
 
     /**
@@ -78,7 +78,8 @@ public class MarkerAdapter  {
     private void setBodyName(final String bodyName, boolean enableUndo) {
         final String oldName = getBodyName();
         if (bodyName.equals(oldName)) return; // Nothing to do
-        marker.setFrameName(bodyName);
+        //marker.setParentFrameName(bodyName); 
+        // The following line calls setParentFrame
         context.setBody(marker, model.getBodySet().get(bodyName), true);
         updateDisplay();
         if (enableUndo){
