@@ -197,10 +197,6 @@ public class ContactGeometry extends ModelComponent {
     opensimSimulationJNI.ContactGeometry_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
   }
 
-  public void updateGeometry() {
-    opensimSimulationJNI.ContactGeometry_updateGeometry(swigCPtr, this);
-  }
-
   public Vec3 getLocation() {
     return new Vec3(opensimSimulationJNI.ContactGeometry_getLocation(swigCPtr, this), false);
   }

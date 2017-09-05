@@ -821,7 +821,7 @@ public class opensimCommonJNI {
   public final static native void delete_SmoothSegmentedFunctionFactory(long jarg1);
   public final static native long new_SmoothSegmentedFunction();
   public final static native double SmoothSegmentedFunction_calcValue(long jarg1, SmoothSegmentedFunction jarg1_, double jarg2);
-  public final static native double SmoothSegmentedFunction_calcDerivative(long jarg1, SmoothSegmentedFunction jarg1_, double jarg2, int jarg3);
+  public final static native double SmoothSegmentedFunction_calcDerivative__SWIG_0(long jarg1, SmoothSegmentedFunction jarg1_, double jarg2, int jarg3);
   public final static native double SmoothSegmentedFunction_calcIntegral(long jarg1, SmoothSegmentedFunction jarg1_, double jarg2);
   public final static native boolean SmoothSegmentedFunction_isIntegralAvailable(long jarg1, SmoothSegmentedFunction jarg1_);
   public final static native boolean SmoothSegmentedFunction_isIntegralComputedLeftToRight(long jarg1, SmoothSegmentedFunction jarg1_);
@@ -1432,6 +1432,8 @@ public class opensimCommonJNI {
   public final static native void delete_ComponentNotFoundOnSpecifiedPath(long jarg1);
   public final static native long new_ComponentIsAnOrphan(String jarg1, long jarg2, String jarg3, String jarg4, String jarg5);
   public final static native void delete_ComponentIsAnOrphan(long jarg1);
+  public final static native long new_SubcomponentsWithDuplicateName(String jarg1, long jarg2, String jarg3, String jarg4, String jarg5);
+  public final static native void delete_SubcomponentsWithDuplicateName(long jarg1);
   public final static native long new_ComponentIsRootWithNoSubcomponents(String jarg1, long jarg2, String jarg3, String jarg4, String jarg5);
   public final static native void delete_ComponentIsRootWithNoSubcomponents(long jarg1);
   public final static native long new_ComponentAlreadyPartOfOwnershipTree(String jarg1, long jarg2, String jarg3, String jarg4, String jarg5);
@@ -2202,8 +2204,6 @@ public class opensimCommonJNI {
   public final static native void delete_DataTypeMismatch(long jarg1);
   public final static native long new_STODataTypeNotSupported(String jarg1, long jarg2, String jarg3, String jarg4);
   public final static native void delete_STODataTypeNotSupported(long jarg1);
-  public final static native long new_STODataTypeNotFound(String jarg1, long jarg2, String jarg3);
-  public final static native void delete_STODataTypeNotFound(long jarg1);
   public final static native long new_STOFileAdapter__SWIG_0();
   public final static native long new_STOFileAdapter__SWIG_1(long jarg1, STOFileAdapter jarg1_);
   public final static native void delete_STOFileAdapter(long jarg1);
@@ -2487,6 +2487,7 @@ public class opensimCommonJNI {
   public final static native long ComponentHasNoName_SWIGUpcast(long jarg1);
   public final static native long ComponentNotFoundOnSpecifiedPath_SWIGUpcast(long jarg1);
   public final static native long ComponentIsAnOrphan_SWIGUpcast(long jarg1);
+  public final static native long SubcomponentsWithDuplicateName_SWIGUpcast(long jarg1);
   public final static native long ComponentIsRootWithNoSubcomponents_SWIGUpcast(long jarg1);
   public final static native long ComponentAlreadyPartOfOwnershipTree_SWIGUpcast(long jarg1);
   public final static native long ComponentHasNoSystem_SWIGUpcast(long jarg1);
@@ -2552,7 +2553,6 @@ public class opensimCommonJNI {
   public final static native long IncorrectNumTokens_SWIGUpcast(long jarg1);
   public final static native long DataTypeMismatch_SWIGUpcast(long jarg1);
   public final static native long STODataTypeNotSupported_SWIGUpcast(long jarg1);
-  public final static native long STODataTypeNotFound_SWIGUpcast(long jarg1);
   public final static native long C3DFileAdapter_SWIGSmartPtrUpcast(long jarg1);
   public final static native long TableSource_SWIGUpcast(long jarg1);
   public final static native long TableSourceVec3_SWIGUpcast(long jarg1);

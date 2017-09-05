@@ -406,7 +406,11 @@ public class ForceVelocityCurve extends Function {
   }
 
   public double calcDerivative(double normFiberVelocity, int order) {
-    return opensimSimulationJNI.ForceVelocityCurve_calcDerivative(swigCPtr, this, normFiberVelocity, order);
+    return opensimSimulationJNI.ForceVelocityCurve_calcDerivative__SWIG_0(swigCPtr, this, normFiberVelocity, order);
+  }
+
+  public double calcDerivative(StdVectorInt derivComponents, Vector x) {
+    return opensimSimulationJNI.ForceVelocityCurve_calcDerivative__SWIG_1(swigCPtr, this, StdVectorInt.getCPtr(derivComponents), derivComponents, Vector.getCPtr(x), x);
   }
 
   public Vec2 getCurveDomain() {
