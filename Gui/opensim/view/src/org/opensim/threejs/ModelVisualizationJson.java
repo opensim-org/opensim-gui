@@ -902,4 +902,13 @@ public class ModelVisualizationJson extends JSONObject {
         guiJson.put("command", commandJson);
         return guiJson;
     }
+    
+    public JSONObject createScaleObjectCommand(UUID objectUUID, double newScale) {
+        JSONObject guiJson = new JSONObject();
+        guiJson.put("Op", "execute");
+        JSONObject commandJson = CommandComposerThreejs.createScaleObjectCommand(newScale, objectUUID);
+        guiJson.put("command", commandJson);
+        return guiJson;
+    }
+    
 }

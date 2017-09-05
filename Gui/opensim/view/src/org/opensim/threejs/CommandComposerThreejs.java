@@ -131,5 +131,16 @@ public class CommandComposerThreejs {
         commandJson.put("object", dObject);
         return commandJson;
     } 
+
+    static JSONObject createScaleObjectCommand(double newScale, UUID objectUUID) {
+        JSONObject commandJson = new JSONObject();
+        commandJson.put("type", "SetScaleCommand");
+        commandJson.put("objectUuid", objectUUID.toString());
+        JSONArray jsonVec3 = new JSONArray();
+             for (int i=0; i<3; i++)
+                 jsonVec3.add(newScale);        
+        commandJson.put("newScale", jsonVec3);
+        return commandJson;
+    }
     
 }

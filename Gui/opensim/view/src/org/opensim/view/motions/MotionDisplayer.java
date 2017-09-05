@@ -38,11 +38,8 @@ import java.awt.Color;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.Vector;
@@ -78,7 +75,6 @@ import org.opensim.threejs.JSONUtilities;
 import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.MuscleColoringFunction;
 import org.opensim.view.OpenSimvtkGlyphCloud;
-import org.opensim.view.SelectedGlyphUserObject;
 import org.opensim.view.SingleModelVisuals;
 import org.opensim.view.experimentaldata.AnnotatedMotion;
 import org.opensim.view.experimentaldata.ExperimentalDataItemType;
@@ -91,11 +87,8 @@ import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 import vtk.vtkActor;
 import vtk.vtkAppendPolyData;
-import vtk.vtkAssemblyNode;
-import vtk.vtkAssemblyPath;
 import vtk.vtkLineSource;
 import vtk.vtkPolyDataMapper;
-import vtk.vtkProp;
 
 /**
  * 
@@ -122,6 +115,69 @@ public class MotionDisplayer {
     private final HashMap<OpenSimObject, ArrayList<UUID>> mapComponentToUUID = 
             new HashMap<OpenSimObject, ArrayList<UUID>>();
 
+    public enum ObjectTypesInMotionFiles{GenCoord, 
+                                         GenCoord_Velocity, 
+                                         GenCoord_Force, 
+                                         State,
+                                         Marker, 
+                                         Segment, 
+                                         Segment_marker_p1, 
+                                         Segment_marker_p2, 
+                                         Segment_marker_p3, 
+                                         Segment_force_p1, 
+                                         Segment_force_p2, 
+                                         Segment_force_p3, 
+                                         Segment_force_p4, 
+                                         Segment_force_p5, 
+                                         Segment_force_p6, 
+                                         Segment_torque_p1, 
+                                         Segment_torque_p2, 
+                                         Segment_torque_p3, 
+                                         UNKNOWN};
+
+    Hashtable<Integer, ObjectTypesInMotionFiles> mapIndicesToObjectTypes=new Hashtable<Integer, ObjectTypesInMotionFiles>(40);
+    Hashtable<Integer, Object> mapIndicesToObjects=new Hashtable<Integer, Object>(40);
+    private OpenSimvtkGlyphCloud  groundForcesRep = null;
+    OpenSimvtkGlyphCloud  bodyForcesRep = null;
+    OpenSimvtkGlyphCloud  generalizedForcesRep = null;
+    private OpenSimvtkGlyphCloud  markersRep = null;
+    private Storage simmMotionData;
+    private Model model;
+    OpenSimContext dContext; 
+    ArrayStr stateNames;
+    private double[] statesBuffer;
+    private boolean renderMuscleActivations=false;
+    private double experimentalMarkerScaleFactor;
+    private double experimentalForceScaleFactor;
+    String DEFAULT_FORCE_SHAPE="arrow";
+    private String currentForceShape;
+    
+    // For columns that start with a body name, this is the map from column index to body reference.
+    // The map is currently used only for body forces and generalized forces.
+    private Hashtable<Integer, Body> mapIndicesToBodies = new Hashtable<Integer, Body>(10);
+    // For generalized forces, this is the map from column index to DOF reference.
+    private Hashtable<Integer, TransformAxis> mapIndicesToDofs = new Hashtable<Integer, TransformAxis>(10);
+    
+    protected Hashtable<ExperimentalDataObject, vtkActor> objectTrails = new Hashtable<ExperimentalDataObject, vtkActor>();
+
+    private ArrayList<MotionDisplayer> associatedMotions = new  ArrayList<MotionDisplayer>();
+    private ArrayStr colNames; // Will cache in labels and construct map to states for quick setting
+    
+    public class ObjectIndexPair {
+       public Object object;
+       public int stateVectorIndex; // Actual (0-based) index into state vector
+       public ObjectIndexPair(Object obj, int idx) { this.object = obj; this.stateVectorIndex = idx; }
+    }
+    // For faster access to gencoords/markers/forces to update in applyFrameToModel
+    ArrayList<ObjectIndexPair> genCoordColumns=null;
+    ArrayList<ObjectIndexPair> genCoordForceColumns=null;
+    ArrayList<ObjectIndexPair> segmentMarkerColumns=null; // state vector index of the first of three (x y z) coordinates for a marker
+    ArrayList<ObjectIndexPair> segmentForceColumns=null; // state vector index of the first of six (px py pz vx vy vz) coordinates for a force vector
+    ArrayList<ObjectIndexPair> anyStateColumns=null; // state vector index of muscle excitations and other generic states
+    ArrayList<String> canonicalStateNames = new ArrayList<String>();
+    ArrayDouble interpolatedStates = null;
+
+    boolean statesFile = false; // special type of file that contains full state vectors
      /**
      * @return the associatedMotions
      */
@@ -300,79 +356,17 @@ public class MotionDisplayer {
         return defaultForceColorVec3;
     }
     
-    public enum ObjectTypesInMotionFiles{GenCoord, 
-                                         GenCoord_Velocity, 
-                                         GenCoord_Force, 
-                                         State,
-                                         Marker, 
-                                         Segment, 
-                                         Segment_marker_p1, 
-                                         Segment_marker_p2, 
-                                         Segment_marker_p3, 
-                                         Segment_force_p1, 
-                                         Segment_force_p2, 
-                                         Segment_force_p3, 
-                                         Segment_force_p4, 
-                                         Segment_force_p5, 
-                                         Segment_force_p6, 
-                                         Segment_torque_p1, 
-                                         Segment_torque_p2, 
-                                         Segment_torque_p3, 
-                                         UNKNOWN};
-
-    Hashtable<Integer, ObjectTypesInMotionFiles> mapIndicesToObjectTypes=new Hashtable<Integer, ObjectTypesInMotionFiles>(40);
-    Hashtable<Integer, Object> mapIndicesToObjects=new Hashtable<Integer, Object>(40);
-    private OpenSimvtkGlyphCloud  groundForcesRep = null;
-    OpenSimvtkGlyphCloud  bodyForcesRep = null;
-    OpenSimvtkGlyphCloud  generalizedForcesRep = null;
-    private OpenSimvtkGlyphCloud  markersRep = null;
-    private Storage simmMotionData;
-    private Model model;
-    OpenSimContext dContext; 
-    ArrayStr stateNames;
-    private double[] statesBuffer;
-    private boolean renderMuscleActivations=false;
-    double DEFAULT_FACTOR_SCALE_FACTOR=.001;
-    double currentScaleFactor;
-    String DEFAULT_FORCE_SHAPE="arrow";
-    private String currentForceShape;
-    
-    // For columns that start with a body name, this is the map from column index to body reference.
-    // The map is currently used only for body forces and generalized forces.
-    private Hashtable<Integer, Body> mapIndicesToBodies = new Hashtable<Integer, Body>(10);
-    // For generalized forces, this is the map from column index to DOF reference.
-    private Hashtable<Integer, TransformAxis> mapIndicesToDofs = new Hashtable<Integer, TransformAxis>(10);
-    
-    protected Hashtable<ExperimentalDataObject, vtkActor> objectTrails = new Hashtable<ExperimentalDataObject, vtkActor>();
-
-    private ArrayList<MotionDisplayer> associatedMotions = new  ArrayList<MotionDisplayer>();
-    private ArrayStr colNames; // Will cache in labels and construct map to states for quick setting
-    
-    public class ObjectIndexPair {
-       public Object object;
-       public int stateVectorIndex; // Actual (0-based) index into state vector
-       public ObjectIndexPair(Object obj, int idx) { this.object = obj; this.stateVectorIndex = idx; }
-    }
-    // For faster access to gencoords/markers/forces to update in applyFrameToModel
-    ArrayList<ObjectIndexPair> genCoordColumns=null;
-    ArrayList<ObjectIndexPair> genCoordForceColumns=null;
-    ArrayList<ObjectIndexPair> segmentMarkerColumns=null; // state vector index of the first of three (x y z) coordinates for a marker
-    ArrayList<ObjectIndexPair> segmentForceColumns=null; // state vector index of the first of six (px py pz vx vy vz) coordinates for a force vector
-    ArrayList<ObjectIndexPair> anyStateColumns=null; // state vector index of muscle excitations and other generic states
-    ArrayList<String> canonicalStateNames = new ArrayList<String>();
-    ArrayDouble interpolatedStates = null;
-
-    boolean statesFile = false; // special type of file that contains full state vectors
     
     // A local copy of motionObjects so that different motions have different motion objects
     //Hashtable<String, vtkActor> motionObjectInstances =new Hashtable<String, vtkActor>(10);
     
     /** Creates a new instance of MotionDisplayer */
     public MotionDisplayer(Storage motionData, Model model) {
+        this.experimentalForceScaleFactor = .001;
+        this.experimentalMarkerScaleFactor = 1.0;
         this.model = model;
         dContext= OpenSimDB.getInstance().getContext(model);
         simmMotionData = motionData;
-        currentScaleFactor = DEFAULT_FACTOR_SCALE_FACTOR;
         currentForceShape = DEFAULT_FORCE_SHAPE;
         modelVisJson = ViewDB.getInstance().getModelVisualizationJson(model);
         setupMotionDisplay();
@@ -998,7 +992,7 @@ public class MotionDisplayer {
         if (simmMotionData instanceof AnnotatedMotion){
             // Add place hoders for markers
             AnnotatedMotion mot= (AnnotatedMotion) simmMotionData;
-            currentScaleFactor = mot.getDisplayForceScale();
+            setExperimentalMarkerScaleFactor(mot.getDisplayForceScale());
             currentForceShape = mot.getDisplayForceShape();
             //AddMotionObjectsRep(model);
             Vector<ExperimentalDataObject> objects=mot.getClassified();
@@ -1101,6 +1095,28 @@ public class MotionDisplayer {
             }
         }
         
+    }
+
+    /**
+     * @return the experimentalMarkerScaleFactor
+     */
+    public double getExperimentalMarkerScaleFactor() {
+        return experimentalMarkerScaleFactor;
+    }
+
+    /**
+     * @param experimentalMarkerScaleFactor the experimentalMarkerScaleFactor to set
+     */
+    public void setExperimentalMarkerScaleFactor(double experimentalMarkerScaleFactor) {
+        this.experimentalMarkerScaleFactor = experimentalMarkerScaleFactor;
+        Set<OpenSimObject> expermintalDataObjects = mapComponentToUUID.keySet();
+        for (OpenSimObject expObj : expermintalDataObjects){
+            // Find first ExperimentalMarker and change its Material, this will affect all of them
+            if (expObj instanceof ExperimentalMarker){
+                UUID expMarkerUUID = mapComponentToUUID.get(expObj).get(0); 
+                ViewDB.getInstance().applyScaleToObjectByUUID(model, expMarkerUUID, experimentalMarkerScaleFactor);  
+            }
+        }
     }
 
 }

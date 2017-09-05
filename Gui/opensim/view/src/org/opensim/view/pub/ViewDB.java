@@ -2167,6 +2167,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             websocketdb.broadcastMessageJson(vis.createSetMaterialColorCommand(objectUUID, newColor), null);
         }        
     }
+    
+    public void applyScaleToObjectByUUID(Model model, UUID objectUUID, double newScale) {
+        if (websocketdb!=null){
+            ModelVisualizationJson vis = ViewDB.getInstance().getModelVisualizationJson(model);
+            websocketdb.broadcastMessageJson(vis.createScaleObjectCommand(objectUUID, newScale), null);
+        }        
+        
+    }
     // Callback, invoked when a command is received from visualizer
     // this operates only on currentJson
     private void handleJson(JSONObject jsonObject) {
