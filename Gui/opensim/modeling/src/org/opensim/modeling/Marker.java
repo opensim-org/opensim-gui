@@ -97,20 +97,20 @@ public class Marker extends Station {
     this(opensimSimulationJNI.new_Marker(), true);
   }
 
-  public String getFrameName() {
-    return opensimSimulationJNI.Marker_getFrameName(swigCPtr, this);
+  public String getParentFrameName() {
+    return opensimSimulationJNI.Marker_getParentFrameName(swigCPtr, this);
   }
 
-  public void setFrameName(String aName) {
-    opensimSimulationJNI.Marker_setFrameName(swigCPtr, this, aName);
+  public void setParentFrameName(String parentFrameName) {
+    opensimSimulationJNI.Marker_setParentFrameName(swigCPtr, this, parentFrameName);
   }
 
-  public void changeFrame(PhysicalFrame aPhysicalFrame) {
-    opensimSimulationJNI.Marker_changeFrame(swigCPtr, this, PhysicalFrame.getCPtr(aPhysicalFrame), aPhysicalFrame);
+  public void changeFrame(PhysicalFrame parentFrame) {
+    opensimSimulationJNI.Marker_changeFrame(swigCPtr, this, PhysicalFrame.getCPtr(parentFrame), parentFrame);
   }
 
-  public void changeFramePreserveLocation(State s, PhysicalFrame aPhysicalFrame) {
-    opensimSimulationJNI.Marker_changeFramePreserveLocation(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(aPhysicalFrame), aPhysicalFrame);
+  public void changeFramePreserveLocation(State s, PhysicalFrame newParentFrame) {
+    opensimSimulationJNI.Marker_changeFramePreserveLocation(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(newParentFrame), newParentFrame);
   }
 
   public void scale(Vec3 aScaleFactors) {
