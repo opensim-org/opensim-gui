@@ -41,6 +41,8 @@ public class MarkersSaveToFileAction extends AbstractAction {
         // Browse for file for MarkerSet
         String fileName = FileUtils.getInstance().browseForFilenameToSave(".xml", "XML file containing markers", true, "markers.xml");
         if (fileName==null) return;
+         // This block of code should stay in sync with 
+        // TestEditMarkers.java in opensim-core
         markerset.print(fileName);
     }
 }

@@ -10,33 +10,21 @@ package org.opensim.view.markerEditor;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
-import java.util.Vector;
 import javax.swing.AbstractAction;
-import javax.swing.undo.AbstractUndoableEdit;
-import javax.swing.undo.CannotRedoException;
-import javax.swing.undo.CannotUndoException;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.openide.nodes.Node;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
-import org.opensim.logger.OpenSimLogger;
 import org.opensim.modeling.ArrayStr;
-import org.opensim.modeling.Body;
-import org.opensim.modeling.Component;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
-import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.PhysicalFrame;
-import org.opensim.modeling.Vec3;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.ExplorerTopComponent;
-import org.opensim.view.ObjectsAddedEvent;
 import org.opensim.view.nodes.MarkersNode;
 import org.opensim.view.pub.OpenSimDB;
-import org.opensim.view.pub.ViewDB;
 
 /**
  *
@@ -61,6 +49,8 @@ public class MarkersLoadFromFileAction extends AbstractAction {
         // Browse for file for MarkerSet
         String fileName = FileUtils.getInstance().browseForFilename(".xml", "XML file containing markers");
         if (fileName==null) return;
+        // This block of code should stay in sync with 
+        // TestEditMarkers.java in opensim-core
         MarkerSet newMarkerSet;
         try {
             newMarkerSet = new MarkerSet(model, fileName);

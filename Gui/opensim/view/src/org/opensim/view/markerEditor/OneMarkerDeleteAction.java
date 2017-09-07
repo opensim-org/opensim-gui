@@ -83,11 +83,11 @@ public final class OneMarkerDeleteAction extends CallableSystemAction {
         }
     }
     static public void deleteMarker(final Marker marker, boolean supportUndo) {
-        // Delete the marker's visuals.
+        // This block of code should stay in sync with 
+        // TestEditMarkers.java in opensim-core
         final String saveMarkerName = marker.getName();
         final String saveBodyName = marker.getParentFrameName();
         final Vec3 saveMarkerOffset = new Vec3(marker.get_location());
-        //marker.removeSelfFromDisplay();
 
         // Remove the marker from the model's marker set.
         final Model model = marker.getModel();
