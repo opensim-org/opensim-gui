@@ -75,12 +75,15 @@ public class NewMarkerAction extends AbstractAction {
     }
 
     public void addMarker(final Marker marker, boolean supportUndo) {
-        // Update the marker name list in the ViewDB.
+
+        // This block of code should stay in sync with 
+        // TestEditMarkers.java in opensim-core
         final String saveMarkerName = marker.getName();
         final String saveBodyName = marker.getParentFrameName();
         final Vec3 saveMarkerOffset = marker.get_location();
         final Model model = marker.getModel();
-        OpenSimDB.getInstance().getModelGuiElements(model).updateMarkerNames();
+         // Update the marker name list in the ViewDB.
+         OpenSimDB.getInstance().getModelGuiElements(model).updateMarkerNames();
 
         Vector<OpenSimObject> objs = new Vector<OpenSimObject>(1);
         objs.add(marker);
