@@ -34,7 +34,8 @@ install:
   ## OpenSim (and Simbody).
   # OpenSim's installation is pushed to our Appveyor NuGet account feed.
   - nuget install opensim-core -Version 0.0.0 -ExcludeVersion -OutputDirectory C:\
-  - git submodule update --init --recursive
+  # Only get certain submodules (TODO when opensim-models is public, get that one too).
+  - git submodule update --init --recursive -- opensim-visualizer Gui/opensim/threejs
   
 build_script:
   - cd Gui/opensim
