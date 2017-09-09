@@ -465,23 +465,28 @@ public class ModelVisualizationJson extends JSONObject {
         pathGeomJson.put("uuid", uuidForPathGeomGeometry.toString());
         pathGeomJson.put("type", "PathGeometry");
         pathGeomJson.put("name", path.getAbsolutePathName()+"Control");
-        pathGeomJson.put("segments", path.getPathPointSet().getSize()-1);
+        // This includes inactive ConditionalPoints but no Wrapping
+        pathGeomJson.put("segments", path.getPathPointSet().getSize()-1); 
         json_geometries.add(pathGeomJson);
         
         JSONArray pathpoint_jsonArr = new JSONArray();
+        JSONArray pathpointActive_jsonArr = new JSONArray();
         for (int i=0; i< path.getPathPointSet().getSize(); i++){
             AbstractPathPoint pathPoint = path.getPathPointSet().get(i);
             // Create a Sphere with internal opensimType PathPoint
             // attach it to the frame it lives on.
             UUID pathpoint_uuid = null;
-            if (pathPoint.isActive(state))
-                pathpoint_uuid = addPathPointObjectToParent(pathPoint, null);
+            if (pathPoint.isActive(state)){
+                pathpoint_uuid = addPathPointObjectToParent(pathPoint);
+                pathpointActive_jsonArr.add("true");
+            }
             else { // ConditionalPathPoint inactive addProxy
                 ConditionalPathPoint cppt=ConditionalPathPoint.safeDownCast(pathPoint);
                 if (cppt != null){
                         proxyPathPoints.put(pathPoint, path.getPathPointSet().get(i-1));
                         // Create proxyJson
-                        pathpoint_uuid = addPathPointObjectToParent(pathPoint, proxyPathPoints.get(pathPoint));
+                        pathpoint_uuid = addComputedPathPointObjectToParent(i, path.getPathPointSet());
+                        pathpointActive_jsonArr.add("false");
                 }
             }
             if (MovingPathPoint.safeDownCast(pathPoint)!=null){
@@ -506,6 +511,7 @@ public class ModelVisualizationJson extends JSONObject {
         obj_json.put("type", "GeometryPath");
         obj_json.put("name", path.getAbsolutePathName());
         obj_json.put("points", pathpoint_jsonArr);
+        obj_json.put("active", pathpointActive_jsonArr);
         obj_json.put("geometry", uuidForPathGeomGeometry.toString());
         obj_json.put("opensimType", "Path");
         gndChildren.add(obj_json);
@@ -575,7 +581,7 @@ public class ModelVisualizationJson extends JSONObject {
         top_model_json.put("skeleton", skel_json);
     }
 
-    private UUID addPathPointObjectToParent(AbstractPathPoint pathPoint, AbstractPathPoint proxyPathPoint) {
+    private UUID addPathPointObjectToParent(AbstractPathPoint pathPoint) {
         
         // Parent
         PhysicalFrame bodyFrame = pathPoint.getBody();
@@ -585,12 +591,28 @@ public class ModelVisualizationJson extends JSONObject {
                 bodyJson.put("children", new JSONArray());
                 children = (JSONArray)bodyJson.get("children");
         }
-        JSONObject bpptInBodyJson = createPathPointObjectJson(pathPoint, proxyPathPoint);
+        JSONObject bpptInBodyJson = createPathPointObjectJson(pathPoint, true);
+        children.add(bpptInBodyJson);
+        return UUID.fromString((String)bpptInBodyJson.get("uuid"));
+    }
+    
+    private UUID addComputedPathPointObjectToParent(int index, PathPointSet pathpointsArray) {
+        
+        // Parent
+        AbstractPathPoint pathPoint = pathpointsArray.get(index);
+        PhysicalFrame bodyFrame = pathPoint.getBody();
+        JSONObject bodyJson = mapBodyIndicesToJson.get(bodyFrame.getMobilizedBodyIndex());
+        JSONArray children = (JSONArray)bodyJson.get("children");
+        if (children==null){
+                bodyJson.put("children", new JSONArray());
+                children = (JSONArray)bodyJson.get("children");
+        }
+        JSONObject bpptInBodyJson = createPathPointObjectJson(pathPoint, false);
         children.add(bpptInBodyJson);
         return UUID.fromString((String)bpptInBodyJson.get("uuid"));
     }
 
-    public JSONObject createPathPointObjectJson(AbstractPathPoint pathPoint, AbstractPathPoint proxyPathPoint) {
+    public JSONObject createPathPointObjectJson(AbstractPathPoint pathPoint, boolean active) {
         // Now add to scene graph
         String material = pathpointMatUUID.toString();
         JSONObject bpptGeometryJson = pathPointGeometryJSON;
@@ -603,14 +625,9 @@ public class ModelVisualizationJson extends JSONObject {
         bpptInBodyJson.put("name", pathPoint.getName());
         bpptInBodyJson.put("geometry", bpptGeometryJson.get("uuid"));
         bpptInBodyJson.put("material", material);
+        bpptInBodyJson.put("status", active?"active":"inactive");
         Transform localTransform = new Transform();
-        Vec3 location = null;
-        if (proxyPathPoint==null)
-            location = pathPoint.getLocation(state);
-        else { // location is computed by getting the location of proxyPoint in bodyFrame
-            Vec3 proxyLocationInParent = proxyPathPoint.getLocation(state);
-            location = proxyPathPoint.getBody().findStationLocationInAnotherFrame(state, proxyLocationInParent, bodyFrame);
-        }
+        Vec3 location = pathPoint.getLocation(state);
         localTransform.setP(location);
         bpptInBodyJson.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1.0), visScaleFactor));
         bpptInBodyJson.put("visible", true);
@@ -713,7 +730,7 @@ public class ModelVisualizationJson extends JSONObject {
         else if (typeOfEdit == 1){
             topJson.put("SubOperation", "insert");
             AbstractPathPoint newPoint = path.getPathPointSet().get(atIndex);
-            JSONObject newPointJson = createPathPointObjectJson(newPoint, null);
+            JSONObject newPointJson = createPathPointObjectJson(newPoint, true);
             newPointJson.put("parent_uuid", mapComponentToUUID.get(newPoint.getBody()).get(0).toString());
             topJson.put("NewPoint", newPointJson);
             // Add new point to maps
