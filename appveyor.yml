@@ -26,7 +26,7 @@ nuget:
 install:
   - ps: choco install jdk8
   ## The GUI is built with the Netbeans platform.
-  - ps: choco install netbeans-jee --version 8.0.2 --yes --limit-output --allow-empty-checksums| Out-Null
+  - ps: choco install netbeans-jee --version 8.2 --yes --limit-output --allow-empty-checksums| Out-Null
 
   ## Apache Ant for building Java projects.
   - choco install ant --yes --limit-output
@@ -39,7 +39,7 @@ install:
   
 build_script:
   - cd Gui/opensim
-  - ant build -Dnbplatform.default.netbeans.dest.dir="C:/Program Files/NetBeans 8.0.2" -Dnbplatform.default.harness.dir="C:/Program Files/NetBeans 8.0.2/harness"
+  - ant build -Dnbplatform.default.netbeans.dest.dir="C:/Program Files/NetBeans 8.2" -Dnbplatform.default.harness.dir="C:/Program Files/NetBeans 8.2/harness"
   
 test_script:
   ## Run tests.
