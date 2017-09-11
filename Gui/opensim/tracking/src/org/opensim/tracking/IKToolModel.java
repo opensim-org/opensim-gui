@@ -131,44 +131,50 @@ public class IKToolModel extends Observable implements Observer {
          return this;
       }
 
-      public void finished() {
-         progressHandle.finish();
-         SimulationDB.getInstance().fireToolFinish();
-         if (!cleanup) {         
-             setExecuting(false);
-            return;
-         }
-         // Clean up motion displayer (this is necessary!)
-         animationCallback.cleanupMotionDisplayer();
-
-         getOriginalModel().removeAnalysis(animationCallback, false);
-         getOriginalModel().removeAnalysis(interruptingCallback, false);
-         interruptingCallback = null;
-
-         if(result) resetModified();
-
-         boolean addMotion = true;
-         if(!result) {
-            boolean havePartialResult = false;//OpenSim23 ikTool.getOutputStorage()!=null && ikTool.getOutputStorage().getSize()>0;
-            if(havePartialResult && promptToKeepPartialResult) {
-               Object answer = DialogDisplayer.getDefault().notify(new NotifyDescriptor.Confirmation("Inverse kinematics did not complete.  Keep partial result?",NotifyDescriptor.YES_NO_OPTION));
-               if(answer==NotifyDescriptor.NO_OPTION) addMotion = false;
-            } else {
-               addMotion = false;
+        public void finished() {
+            progressHandle.finish();
+            SimulationDB.getInstance().fireToolFinish();
+            if (!cleanup) {
+                setExecuting(false);
+                return;
             }
-         }
+            // Clean up motion displayer (this is necessary!)
+            animationCallback.cleanupMotionDisplayer();
 
-         if(true) {
-            //Storage motion = new Storage(); // Java-side copy
-            updateMotion(new Storage(animationCallback.getStorage()));
-         }
+            getOriginalModel().removeAnalysis(animationCallback, false);
+            getOriginalModel().removeAnalysis(interruptingCallback, false);
+            interruptingCallback = null;
 
-         setExecuting(false);
+            if (result) {
+                resetModified();
+            }
 
-         //modelCopy = null;
-         worker = null;
-      }
-   }
+            boolean addMotion = true;
+            if (!result) {
+                boolean havePartialResult = false;//OpenSim23 ikTool.getOutputStorage()!=null && ikTool.getOutputStorage().getSize()>0;
+                if (havePartialResult && promptToKeepPartialResult) {
+                    Object answer = DialogDisplayer.getDefault().notify(new NotifyDescriptor.Confirmation("Inverse kinematics did not complete.  Keep partial result?", NotifyDescriptor.YES_NO_OPTION));
+                    if (answer == NotifyDescriptor.NO_OPTION) {
+                        addMotion = false;
+                    }
+                } else {
+                    addMotion = false;
+                }
+            }
+            // Create a new States storage and load it in GUI 
+            // this should make playback faster since no need to assemble
+            Storage ikmotion = new Storage(512, "IKResults"); // Java-side copy
+            getOriginalModel().formStateStorage(
+                    animationCallback.getStorage(),
+                    ikmotion, false);
+            updateMotion(ikmotion);
+
+            setExecuting(false);
+
+            //modelCopy = null;
+            worker = null;
+        }
+    }
    private IKToolWorker worker = null;
    //========================================================================
    // END IKToolWorker

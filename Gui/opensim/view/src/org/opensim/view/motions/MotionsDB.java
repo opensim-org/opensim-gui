@@ -45,6 +45,7 @@ import org.openide.awt.StatusDisplayer;
 import org.openide.nodes.Node;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ArrayStr;
+import org.opensim.modeling.CoordinateSet;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.Storage;
@@ -188,13 +189,15 @@ public class MotionsDB extends Observable // Observed by other entities in motio
      */
    boolean motionAssociationPossible(Model modelForMotion, Storage newMotion) {
       
-      ArrayStr coordinateNames = new ArrayStr();
-      modelForMotion.getCoordinateSet().getNames(coordinateNames);
-      int numCoordinates = coordinateNames.getSize();
+      CoordinateSet cs = modelForMotion.getCoordinateSet();
+      int numCoordinates = cs.getSize();
       int numUsedColumns = 0;    // Keep track of how many columns correspond to Coords or Markers
       for(int i=0; i<numCoordinates; i++){
-         if (newMotion.getStateIndex(coordinateNames.getitem(i))!=-1)
+         if (newMotion.getStateIndex(cs.get(i).getName())!=-1 ||
+                 newMotion.getStateIndex(cs.get(i).getRelativePathName(modelForMotion)+"/value")!= -1){
             numUsedColumns++;
+            return true;
+         }
       }
       ArrayStr markerNames = new ArrayStr();
       modelForMotion.getMarkerSet().getNames(markerNames);
