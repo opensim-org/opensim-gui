@@ -478,7 +478,7 @@ public class ModelVisualizationJson extends JSONObject {
             UUID pathpoint_uuid = null;
             if (pathPoint.isActive(state)){
                 pathpoint_uuid = addPathPointObjectToParent(pathPoint);
-                pathpointActive_jsonArr.add("true");
+                pathpointActive_jsonArr.add(true);
             }
             else { // ConditionalPathPoint inactive addProxy
                 ConditionalPathPoint cppt=ConditionalPathPoint.safeDownCast(pathPoint);
@@ -486,7 +486,7 @@ public class ModelVisualizationJson extends JSONObject {
                         proxyPathPoints.put(pathPoint, path.getPathPointSet().get(i-1));
                         // Create proxyJson
                         pathpoint_uuid = addComputedPathPointObjectToParent(i, path.getPathPointSet());
-                        pathpointActive_jsonArr.add("false");
+                        pathpointActive_jsonArr.add(false);
                 }
             }
             if (MovingPathPoint.safeDownCast(pathPoint)!=null){
@@ -591,7 +591,7 @@ public class ModelVisualizationJson extends JSONObject {
                 bodyJson.put("children", new JSONArray());
                 children = (JSONArray)bodyJson.get("children");
         }
-        JSONObject bpptInBodyJson = createPathPointObjectJson(pathPoint, true);
+        JSONObject bpptInBodyJson = createPathPointObjectJson(pathPoint, true, null);
         children.add(bpptInBodyJson);
         return UUID.fromString((String)bpptInBodyJson.get("uuid"));
     }
@@ -607,12 +607,13 @@ public class ModelVisualizationJson extends JSONObject {
                 bodyJson.put("children", new JSONArray());
                 children = (JSONArray)bodyJson.get("children");
         }
-        JSONObject bpptInBodyJson = createPathPointObjectJson(pathPoint, false);
+        Vec3 computedLocation = computePathPointLocation(index, pathpointsArray);
+        JSONObject bpptInBodyJson = createPathPointObjectJson(pathPoint, false, computedLocation);
         children.add(bpptInBodyJson);
         return UUID.fromString((String)bpptInBodyJson.get("uuid"));
     }
 
-    public JSONObject createPathPointObjectJson(AbstractPathPoint pathPoint, boolean active) {
+    public JSONObject createPathPointObjectJson(AbstractPathPoint pathPoint, boolean active, Vec3 computedLocation) {
         // Now add to scene graph
         String material = pathpointMatUUID.toString();
         JSONObject bpptGeometryJson = pathPointGeometryJSON;
@@ -627,8 +628,12 @@ public class ModelVisualizationJson extends JSONObject {
         bpptInBodyJson.put("material", material);
         bpptInBodyJson.put("status", active?"active":"inactive");
         Transform localTransform = new Transform();
-        Vec3 location = pathPoint.getLocation(state);
-        localTransform.setP(location);
+        if (active){
+            Vec3 location = pathPoint.getLocation(state);
+            localTransform.setP(location);
+        }
+        else
+            localTransform.setP(computedLocation);
         bpptInBodyJson.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1.0), visScaleFactor));
         bpptInBodyJson.put("visible", true);
         return bpptInBodyJson;
@@ -730,7 +735,7 @@ public class ModelVisualizationJson extends JSONObject {
         else if (typeOfEdit == 1){
             topJson.put("SubOperation", "insert");
             AbstractPathPoint newPoint = path.getPathPointSet().get(atIndex);
-            JSONObject newPointJson = createPathPointObjectJson(newPoint, true);
+            JSONObject newPointJson = createPathPointObjectJson(newPoint, true, null);
             newPointJson.put("parent_uuid", mapComponentToUUID.get(newPoint.getBody()).get(0).toString());
             topJson.put("NewPoint", newPointJson);
             // Add new point to maps
@@ -910,5 +915,30 @@ public class ModelVisualizationJson extends JSONObject {
         geoms.add(geomObject);
         
         return topObject;
+    }
+
+    private Vec3 computePathPointLocation(int index, PathPointSet pathpointsArray) {
+        // find closest Active points before and after
+        int numPre = 1;
+        int numPost = 1;
+        while (!pathpointsArray.get(index - numPre).isActive(state)) {
+            numPre++;
+        }
+        while (!pathpointsArray.get(index + numPost).isActive(state)) {
+            numPost++;
+        }
+        double ratio = ((double) numPre) / (numPre + numPost);
+        AbstractPathPoint curPoint = pathpointsArray.get(index);
+        AbstractPathPoint prePoint = pathpointsArray.get(index - numPre);
+        Vec3 localLocation = prePoint.getLocation(state);
+        Vec3 preLocation = prePoint.getBody().findStationLocationInAnotherFrame(state, localLocation, curPoint.getParentFrame());
+        AbstractPathPoint postPoint = pathpointsArray.get(index + numPost);
+        localLocation = postPoint.getLocation(state);
+        Vec3 postLocation = postPoint.getBody().findStationLocationInAnotherFrame(state, localLocation, curPoint.getParentFrame());
+        Vec3 retVec3 = new Vec3();
+        for (int i =0; i < 3; i++){
+            retVec3.set(i, (preLocation.get(i)*ratio+postLocation.get(i)*(1 - ratio)));
+        }
+        return retVec3;
     }
 }
