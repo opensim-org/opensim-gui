@@ -80,8 +80,20 @@ public class ModelVisualizationJson extends JSONObject {
     // List of all Components that need special treatment as in not statically attached:
     // MovingPathPoint for now
     private final HashMap<Component, UUID> specialComponents = new HashMap<Component, UUID>();
-    // For ConditionalPathPoint we use a non ConditionalPathPoint as proxy when inactive.
-    private final HashMap<AbstractPathPoint, AbstractPathPoint> proxyPathPoints = new HashMap<AbstractPathPoint, AbstractPathPoint>();
+    // For ConditionalPathPoint we use Active PathPoints as proxy when inactive.
+    private final HashMap<AbstractPathPoint, ComputedPathPointInfo> proxyPathPoints = new HashMap<AbstractPathPoint, ComputedPathPointInfo>();
+     // The following inner class and Map are used to cache "computed" pathpoints to speed up 
+    // recomputation on the fly
+    class ComputedPathPointInfo {
+        AbstractPathPoint pt1;
+        AbstractPathPoint pt2;
+        double ratio;
+        ComputedPathPointInfo(AbstractPathPoint p1, AbstractPathPoint p2, double ratio){
+            this.pt1 = p1; this.pt2 = p2; this.ratio = ratio;
+        }
+    }
+    private HashMap<AbstractPathPoint, ComputedPathPointInfo> computedPathPointMap = new HashMap<AbstractPathPoint, ComputedPathPointInfo>();
+    
     static {
         movableOpensimTypes.put("Marker", true);
         movableOpensimTypes.put("PathPoint", true);
@@ -303,7 +315,9 @@ public class ModelVisualizationJson extends JSONObject {
     public ArrayList<UUID> findUUIDForObject(OpenSimObject obj) {
         return mapComponentToUUID.get(obj);
     }
+    //============
     // PER FRAME
+    //============
     public JSONObject createFrameMessageJson(boolean colorByState) {
         JSONObject msg = new JSONObject();
         Iterator<Integer> bodyIdIter = mapBodyIndicesToFrames.keySet().iterator();
@@ -346,30 +360,15 @@ public class ModelVisualizationJson extends JSONObject {
             for (AbstractPathPoint app: proxyPathPoints.keySet()){
                 //System.out.println("Process Conditional Path point "+app.getName());
                   if (!app.isActive(state)){
-                    AbstractPathPoint proxyPoint = proxyPathPoints.get(app);
+                    ComputedPathPointInfo proxyPointInfo = proxyPathPoints.get(app);
                     //System.out.println("Use proxy "+proxyPoint.getName());
-                    Vec3 posInParentProxy = proxyPoint.getLocation(state);
-                    PhysicalFrame parentFrameProxy = proxyPoint.getParentFrame();
-                    PhysicalFrame parentFrame = app.getParentFrame();
-                    if (parentFrameProxy.equals(parentFrame)){
-                        Transform localTransform = new Transform();
-                       Vec3 location = posInParentProxy;
-                       localTransform.setP(location);
+                    Vec3 loc = computePointLocationFromNeighbors(proxyPointInfo.pt1, app.getBody(), proxyPointInfo.pt2, proxyPointInfo.ratio);
+                    Transform localTransform = new Transform();
+                       localTransform.setP(loc);
                        JSONObject pathpointXform_json = new JSONObject();
                        pathpointXform_json.put("uuid", mapComponentToUUID.get(app).get(0).toString());
                        pathpointXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1., 1., 1.), visScaleFactor));
                        bodyTransforms_json.add(pathpointXform_json);
-                    }
-                    else {
-                        Transform localTransform = new Transform();
-                        Vec3 proxyLocationInParent = proxyPoint.getLocation(state);
-                        Vec3 location =proxyPoint.getBody().findStationLocationInAnotherFrame(state, proxyLocationInParent, app.getBody());
-                        localTransform.setP(location);
-                        JSONObject pathpointXform_json = new JSONObject();
-                        pathpointXform_json.put("uuid", mapComponentToUUID.get(app).get(0).toString());
-                        pathpointXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1., 1., 1.), visScaleFactor));
-                        bodyTransforms_json.add(pathpointXform_json);
-                   }
                 }
                 else {
                     //System.out.println("Pathpoint " + app.getName() + " active");
@@ -483,7 +482,6 @@ public class ModelVisualizationJson extends JSONObject {
             else { // ConditionalPathPoint inactive addProxy
                 ConditionalPathPoint cppt=ConditionalPathPoint.safeDownCast(pathPoint);
                 if (cppt != null){
-                        proxyPathPoints.put(pathPoint, path.getPathPointSet().get(i-1));
                         // Create proxyJson
                         pathpoint_uuid = addComputedPathPointObjectToParent(i, path.getPathPointSet());
                         pathpointActive_jsonArr.add(false);
@@ -927,14 +925,21 @@ public class ModelVisualizationJson extends JSONObject {
         while (!pathpointsArray.get(index + numPost).isActive(state)) {
             numPost++;
         }
-        double ratio = ((double) numPre) / (numPre + numPost);
+        double ratio = 0.99;//((double) numPre) / (numPre + numPost);
         AbstractPathPoint curPoint = pathpointsArray.get(index);
         AbstractPathPoint prePoint = pathpointsArray.get(index - numPre);
-        Vec3 localLocation = prePoint.getLocation(state);
-        Vec3 preLocation = prePoint.getBody().findStationLocationInAnotherFrame(state, localLocation, curPoint.getParentFrame());
         AbstractPathPoint postPoint = pathpointsArray.get(index + numPost);
+        final PhysicalFrame parentFrame = curPoint.getParentFrame();
+        proxyPathPoints.put(curPoint, new ComputedPathPointInfo(prePoint, postPoint, ratio));
+        Vec3 retVec3 = computePointLocationFromNeighbors(prePoint, parentFrame, postPoint, ratio);
+        return retVec3;
+    }
+
+    private Vec3 computePointLocationFromNeighbors(AbstractPathPoint prePoint, final PhysicalFrame parentFrame, AbstractPathPoint postPoint, double ratio) {
+        Vec3 localLocation = prePoint.getLocation(state);
+        Vec3 preLocation = prePoint.getBody().findStationLocationInAnotherFrame(state, localLocation, parentFrame);
         localLocation = postPoint.getLocation(state);
-        Vec3 postLocation = postPoint.getBody().findStationLocationInAnotherFrame(state, localLocation, curPoint.getParentFrame());
+        Vec3 postLocation = postPoint.getBody().findStationLocationInAnotherFrame(state, localLocation, parentFrame);
         Vec3 retVec3 = new Vec3();
         for (int i =0; i < 3; i++){
             retVec3.set(i, (preLocation.get(i)*ratio+postLocation.get(i)*(1 - ratio)));
