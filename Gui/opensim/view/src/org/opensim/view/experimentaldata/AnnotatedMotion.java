@@ -45,10 +45,10 @@ import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Storage;
+import org.opensim.modeling.Transform;
+import org.opensim.modeling.Vec3;
 import org.opensim.view.motions.MotionControlJPanel;
 import org.opensim.view.motions.MotionDisplayer;
-import org.opensim.view.motions.MotionsDB;
-import vtk.vtkTransform;
 
 /**
  *
@@ -285,7 +285,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
         this.boundingBoxComputed = boundingBoxComputed;
     }
  
-    public Storage applyTransform(vtkTransform vtktransform) {
+    public Storage applyTransform(Transform vtktransform) {
         // Should know what data to apply xform to and how
         // for example mrkers are xformed as is but force vectors would not apply translations etc.
         // utilize the "clasified" table
@@ -312,7 +312,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
         return motionCopy;
     }
 
-    private void transformPointData(final Storage motionCopy, final vtkTransform vtktransform, final int startIndex) {
+    private void transformPointData(final Storage motionCopy, final Transform transform, final int startIndex) {
         double[] point3 = new double[]{0., 0., 0. };
         for (int rowNumber=0; rowNumber<getSize(); rowNumber++){
             StateVector row = motionCopy.getStateVector(rowNumber);
@@ -320,7 +320,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
             for(int coord=0; coord <3; coord++) {
                 point3[coord] = row.getData().getitem(startIndex+coord);
             }
-            double[] xformed = vtktransform.TransformDoublePoint(point3); //inplace
+            double[] xformed = transformDoublePoint(transform, point3); //inplace
             for(int coord=0; coord <3; coord++) {
                 row.getData().setitem(startIndex+coord, xformed[coord]);
             }
@@ -366,7 +366,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
       }
   }
 
-  public void saveAs(String newFile, vtkTransform transform) throws FileNotFoundException, IOException {
+  public void saveAs(String newFile, Transform transform) throws FileNotFoundException, IOException {
           if (newFile.endsWith(".trc"))
              saveAsTRC(newFile, transform);
           else if (newFile.endsWith(".mot"))
@@ -376,13 +376,13 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
                       new NotifyDescriptor.Message("Please specify either .trc or .mot file extension"));
   }
 
-    private void saveAsMot(String newFile, vtkTransform transform) {
+    private void saveAsMot(String newFile, Transform transform) {
         // Make a full copy of the motion then xform in place.
         Storage xformed = applyTransform(transform);
         xformed.print(newFile);
     }
     
-   private void saveAsTRC(String newFile, vtkTransform transform) throws FileNotFoundException, IOException {
+   private void saveAsTRC(String newFile, Transform transform) throws FileNotFoundException, IOException {
         OutputStream ostream = new FileOutputStream(newFile);
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ostream));
         writer.write("PathFileType        4      (X/Y/Z)      " + newFile + "         ");
@@ -503,6 +503,14 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
                 dataObject.updateDecorations(interpolatedStates);
             }
         }
+    }
+
+    private double[] transformDoublePoint(Transform transform, double[] point3) {
+        Vec3 vecin = new Vec3();
+        for (int i=0; i<3; i++) 
+            vecin.set(i, point3[i]);
+        Vec3 vecout = transform.shiftBaseStationToFrame(vecin);
+        return new double[]{vecout.get(0), vecout.get(1), vecout.get(2)};
     }
     
 }

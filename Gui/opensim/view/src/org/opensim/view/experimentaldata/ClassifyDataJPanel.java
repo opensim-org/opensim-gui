@@ -13,11 +13,12 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import org.opensim.modeling.ArrayStr;
+import org.opensim.modeling.Transform;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.motions.MotionControlJPanel;
 import org.opensim.view.motions.MotionDisplayer;
 import org.opensim.view.pub.ViewDB;
-import vtk.vtkTransform;
+
 
 /**
  *
@@ -54,7 +55,7 @@ public class ClassifyDataJPanel extends javax.swing.JPanel {
     RotationSpinnerListModel ySpinnerModel=new RotationSpinnerListModel(0., -270., 360., 90.);
     RotationSpinnerListModel zSpinnerModel=new RotationSpinnerListModel(0., -270., 360., 90.);
     MotionDisplayer displayer;
-    private vtkTransform lastTranform = new vtkTransform();
+    private Transform lastTranform = new Transform();
     private double[] rotations = new double[]{0., 0., 0.};
    /** Creates new form ClassifyDataJPanel */
     public ClassifyDataJPanel() {
@@ -265,10 +266,10 @@ public class ClassifyDataJPanel extends javax.swing.JPanel {
              fileName.concat(currentExtension);
             try {
                 // getCurrentRotations into lastTransform
-                vtkTransform dTransform = new vtkTransform();
-                dTransform.RotateX(dMotion.getCurrentRotations()[0]);
-                dTransform.RotateY(dMotion.getCurrentRotations()[1]);
-                dTransform.RotateZ(dMotion.getCurrentRotations()[2]);
+                Transform dTransform = new Transform();
+                dTransform.R().setRotationFromAngleAboutX(dMotion.getCurrentRotations()[0]);
+                dTransform.R().setRotationFromAngleAboutY(dMotion.getCurrentRotations()[1]);
+                dTransform.R().setRotationFromAngleAboutZ(dMotion.getCurrentRotations()[2]);
                 dMotion.saveAs(fileName, dTransform);
                 success = true;
             } catch (FileNotFoundException ex) {
@@ -320,10 +321,10 @@ public class ClassifyDataJPanel extends javax.swing.JPanel {
         for(vtkActor actor:dActors){
             actor.SetOrientation(xRot, yRot, zRot);
         }*/
-        lastTranform = new vtkTransform();
-        getLastTranform().RotateX(xRot);
-        getLastTranform().RotateY(yRot);
-        getLastTranform().RotateZ(zRot);
+        lastTranform = new Transform();
+        getLastTranform().R().setRotationFromAngleAboutX(xRot);
+        getLastTranform().R().setRotationFromAngleAboutY(yRot);
+        getLastTranform().R().setRotationFromAngleAboutZ(zRot);
         // Remember reptations in case we need to xform again
         getRotations()[0]=xRot;
         getRotations()[1]=yRot;
@@ -375,7 +376,7 @@ public class ClassifyDataJPanel extends javax.swing.JPanel {
 
     } //RotationSpinnerListModel
 
-    public vtkTransform getLastTranform() {
+    public Transform getLastTranform() {
         return lastTranform;
     }
 
