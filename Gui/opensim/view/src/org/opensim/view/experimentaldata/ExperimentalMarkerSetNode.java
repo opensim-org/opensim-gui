@@ -45,6 +45,7 @@ import org.openide.nodes.PropertySupport;
 import org.openide.nodes.Sheet;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
+import org.opensim.modeling.Vec3;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.OpenSimvtkGlyphCloud;
 import org.opensim.view.motions.MotionDisplayer;
@@ -156,7 +157,7 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }
-        markersDisplayer.setColor(color);
+        motionDisplayer.setDefaultExperimentalMarkerColor(color);
         ViewDB.repaintAll();
         refreshNode();
     }
@@ -168,11 +169,9 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
     {
         if (motionDisplayer==null){
             motionDisplayer = dMotion.getMotionDisplayer();
-            markersDisplayer = motionDisplayer.getMarkersRep();
         }
-        if (markersDisplayer==null)
-            markersDisplayer = motionDisplayer.getMarkersRep();
-        return markersDisplayer.getColor();
+        Vec3 colorAsVec3 =  motionDisplayer.getDefaultExperimentalMarkerColor();
+        return new Color((float)colorAsVec3.get(0), (float)colorAsVec3.get(1), (float)colorAsVec3.get(2));
     }
    
     public void setMarkerScaleFactorUI(double newFactor) {
@@ -197,7 +196,7 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }       
-        markersDisplayer.setScaleFactor(newFactor);
+        motionDisplayer.setExperimentalMarkerScaleFactor(newFactor);
         ViewDB.repaintAll();
         refreshNode();
     }
@@ -206,10 +205,7 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
     {
        if (motionDisplayer==null){
             motionDisplayer = dMotion.getMotionDisplayer();
-            markersDisplayer = motionDisplayer.getMarkersRep();
        }
-        if (markersDisplayer==null)
-            markersDisplayer = motionDisplayer.getMarkersRep();
-        return markersDisplayer.getScaleFactor();
+        return motionDisplayer.getExperimentalMarkerScaleFactor();
     }
 }
