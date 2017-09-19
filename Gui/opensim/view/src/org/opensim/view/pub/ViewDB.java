@@ -208,6 +208,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    private ViewDB() {
         applyPreferences();
         r = myLookup.lookupResult(OpenSimObject.class);
+        websocketdb = WebSocketDB.getInstance();
         jsondb = JSONUtilities.createTopLevelJson();
      }
 
@@ -224,9 +225,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     * Enforce a singleton pattern
     */
    public static ViewDB getInstance() {
-      if( instance==null ) instance = new ViewDB();
-      websocketdb = WebSocketDB.getInstance();
-      websocketdb.setObserver(instance);
+      if( instance==null ) {
+          instance = new ViewDB();
+          websocketdb.setObserver(instance);
+      }
       return instance;
    }
    
