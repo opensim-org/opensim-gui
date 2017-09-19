@@ -687,11 +687,11 @@ public class MotionControlJPanel extends javax.swing.JToolBar
                getMasterMotion().add(mdb.getCurrentMotion(i));
                ModelMotionPair currentModelMotionPair = mdb.getCurrentMotion(i);
                Storage mot = currentModelMotionPair.motion;
-               /* MotionsDB.getInstance().getDisplayerForMotion(mot).setupMotionDisplay();
+               MotionsDB.getInstance().getDisplayerForMotion(mot).setupMotionDisplay();
                ArrayList<MotionDisplayer> associatedDisplayers = getMasterMotion().getDisplayer(0).getAssociatedMotions();
                // Find associated motions as well and re-associate them
                for (int j=0; j<associatedDisplayers.size(); j++)
-                   associatedDisplayers.get(j).setupMotionDisplay(); */
+                   associatedDisplayers.get(j).setupMotionDisplay();
             }
             getMasterMotion().setTime(currentTime);
             
