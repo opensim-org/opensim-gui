@@ -61,7 +61,6 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
     private static String nodeName;
     AnnotatedMotion dMotion;
     private MotionDisplayer motionDisplayer;
-    private OpenSimvtkGlyphCloud markersDisplayer;
 
     /** Creates a new instance of ExperimentalMarkerNode */
     public ExperimentalMarkerSetNode(AnnotatedMotion dMotion) {
