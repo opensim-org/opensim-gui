@@ -145,7 +145,6 @@ public class MotionDisplayer {
     private Model model;
     OpenSimContext dContext; 
     ArrayStr stateNames;
-    private double[] statesBuffer;
     private boolean renderMuscleActivations=false;
     private double experimentalMarkerScaleFactor;
     private double experimentalForceScaleFactor;
@@ -237,7 +236,21 @@ public class MotionDisplayer {
         float[] colorFloat = new float[3];
         defaultForceColor.getColorComponents(colorFloat);
         for (int i=0;i<3;i++) this.defaultForceColor[i] = (double) colorFloat[i];
-        getGroundForcesRep().setColor(defaultForceColor);
+        
+        Vec3 colorAsVec3 = new Vec3();
+        for (int i =0; i <3; i++) 
+            colorAsVec3.set(i, this.defaultForceColor[i]);
+        this.defaultExperimentalMarkerColor = colorAsVec3;
+        Set<OpenSimObject> expermintalDataObjects = mapComponentToUUID.keySet();
+        for (OpenSimObject expObj : expermintalDataObjects){
+            // Find first ExperimentalMarker and change its Material, this will affect all of them
+            if (expObj instanceof MotionObjectPointForce){
+                UUID expObjectUUID = mapComponentToUUID.get(expObj).get(0); 
+                String colorString = JSONUtilities.mapColorToRGBA(getDefaultExperimentalMarkerColor());
+                ViewDB.getInstance().applyColorToObjectByUUID(model, expObjectUUID, colorAsVec3);  
+            }
+        }
+
         
     }
 
