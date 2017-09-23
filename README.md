@@ -1,15 +1,66 @@
 OpenSim GUI [![Appveyor build status][buildstatus_image_appveyor]][appveyorci]
 ===========
+OpenSim is software that lets users develop models of musculoskeletal
+structures and create dynamic simulations of movement. 
 
-**NOTE: This repository contains OpenSim 4.0 development User Interface and
+This repository contains the source code for OpenSim's Java GUI, and does *not*
+include source code for the
+[OpenSim core API](https://github.com/opensim-org/opensim-core).
+
+**NOTE: This repository contains version 4.0 GUI development and
 cannot be used to build OpenSim 3.x or earlier.**
 
-This repository contains the source code for OpenSim's Java GUI.
-This repository does *not* include source code for the OpenSim core API,
-for that go to [OpenSim-Core](https://github.com/opensim-org/opensim-core).
+**NOTE: Due to the small development team working on the GUI, we do not provide
+support for building or altering the OpenSim GUI source code.**
 
-Due to the small development team working on the GUI, we provide very limited
-support for building or altering the OpenSim GUI source code.
+More information can be found at our websites
+ - [OpenSim website](http://opensim.stanford.edu)
+ - [SimTK project website](https://simtk.org/home/opensim)
+
+
+Licensing
+---------
+The OpenSim GUI uses the open source Apache License 2.0 (see LICENSE.txt in
+this directory), making it suitable for commercial, government,
+academic, and personal use.
+
+Software dependencies have the following licenses:
+
+ - TODO
+
+Models and examples distributed with our source code often have their own
+custom licenses. 
+
+Funding
+-------
+The OpenSim project has received funding from the following grants and
+contracts:
+
+ - United States National Institutes of Health (NIH)
+    - Simulation of Biological Structures (Simbios; U54 GM072970)
+    - Simulation in Rehabilitation Research (NCSRR; R24 HD065690, P2C HD065690)
+    - Mobilize Center (U54 EB020405)
+ - United States Defense Advanced Research Projects Agency (DARPA)
+    - Warrior Web (W911QX-12-C-0018)
+
+How to acknowledge us
+---------------------
+Acknowledging the OpenSim project helps us and helps you. It allows us to track
+our impact, which is essential for securing funding to improve the software and
+provide support to our users (you).
+
+If you use the OpenSim GUI, you must acknowledge the OpenSim project where
+appropriate, by citing the following paper. If you only use the OpenSim API, you
+are not required to acknowledge us, but we would be extremely grateful if you
+did so anyway.
+
+Delp SL, Anderson FC, Arnold AS, Loan P, Habib A, John CT, Guendelman E, Thelen
+DG. OpenSim: Open-source Software to Create and Analyze Dynamic Simulations of
+Movement. IEEE Transactions on Biomedical Engineering. (2007)
+
+If you use plugins, models, or other components contributed by your fellow
+researchers, you must acknowledge their work as described in the license that
+accompanies each of these files. 
 
 
 Building from the source code
@@ -19,6 +70,9 @@ Currently, we only provide instructions for **Windows**. It *is* possible to
 build and run the GUI on **OSX** and **Linux**; though it is not thoroughly
 tested on these platforms. We will write instructions for OSX and Linux in the
 future; for now, you can follow the Windows instructions as a rough guide.
+
+See the [OpenSim Confluence Wiki](http://simtk-confluence.stanford.edu:8080/display/OpenSim/Building+OpenSim+from+Source)
+for additional information.
 
 #### Get the dependencies
 
