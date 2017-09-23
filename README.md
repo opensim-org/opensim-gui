@@ -20,13 +20,25 @@ More information can be found at our websites
 
 Licensing
 ---------
-The OpenSim GUI uses the open source Apache License 2.0 (see LICENSE.txt in
+The OpenSim GUI uses the open source **Apache License 2.0** (see LICENSE.txt in
 this directory), making it suitable for commercial, government,
 academic, and personal use.
 
-Software dependencies have the following licenses:
+Software dependencies that are copied into this repository have the following
+licenses:
 
- - TODO
+ - [Jython](http://www.jython.org/) Python Software Foundation License Version 2
+ - [JFreeChart](http://www.jfree.org/jfreechart/) LGPL
+ - TODO VTK
+
+The following dependencies are not copied into the repository (some are
+incorporated using git submodules):
+
+ - [NetBeans Platform](https://netbeans.org) CDDL
+ - [JxBrowser](https://www.teamdev.com/jxbrowser) TODO
+ - [three.js](https://threejs.org) MIT
+ - TODO opensim-visualizer is using template license.
+ - TODO OpenSim API
 
 Models and examples distributed with our source code often have their own
 custom licenses. 
