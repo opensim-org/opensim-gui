@@ -113,6 +113,8 @@ public class MotionControlJPanel extends javax.swing.JToolBar
             //animationTimer.stop();
             //animationTimer=null;
             jStopButtonActionPerformed(evt);
+            ViewDB.getInstance().endAnimation();
+            
          } else {
             /*
             double ms=1e-6*(System.nanoTime()-currentTimeNano);
@@ -571,6 +573,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
               // reset motion if at end already
               getMasterMotion().setTime(getMasterMotion().getStartTime());
           }
+          ViewDB.getInstance().startAnimation();
           animationTimer = new Timer(timerRate, new RealTimePlayActionListener(1));
           animationTimer.start();
           // correct selected modes
