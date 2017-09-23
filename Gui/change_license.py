@@ -71,8 +71,6 @@ apache_boilerplate_py = """\
 
 # opensim-visualizer repo license files??
 
-# TODO edit license for non-java files (gui scripts).
-
 # TODO make sure that the old license no longer appears in the repository.
 # Search for LGPL anywhere in the repo
 
@@ -127,7 +125,6 @@ def create_new_license_blurb(fname, authors):
     blurb += opensim_description
     blurb += pad("")
     blurb += pad("Copyright (c) 2005-2017 Stanford University and the Authors")
-    # TODO detect other authors, like Kevin Xu.
     if len(authors) == 0:
         authors = ['Ayman Habib']
     blurb += pad("Author(s): " + ", ".join(authors))
@@ -157,7 +154,6 @@ def create_new_license_blurb_py(fname, authors):
     blurb += opensim_description_py
     blurb += pad_py("")
     blurb += pad_py("Copyright (c) 2005-2017 Stanford University and the Authors")
-    # TODO detect other authors, like Kevin Xu.
     if len(authors) == 0:
         authors = ['Ayman Habib']
     blurb += pad_py("Author(s): " + ", ".join(authors))
