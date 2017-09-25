@@ -1716,7 +1716,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
 
     private void sync(VisWebSocket visWebSocket) {
-        //System.out.println("invoke ViewDB.sync");
+        if (debugLevel >1)
+            System.out.println("invoke ViewDB.sync");
         ViewDB.getInstance().exportAllModelsToJson(visWebSocket);
     }
     // Method is synchronized to avoid concurrent creation of Json from ViewDB.update and socket
