@@ -117,7 +117,9 @@ public final class OneMarkerDeleteAction extends CallableSystemAction {
                     } catch (IOException ex) {
                         Exceptions.printStackTrace(ex);
                     }
-                    new NewMarkerAction().addMarker(newMarker, false);
+                    Vector<OpenSimObject> markers = new  Vector<OpenSimObject>();
+                    markers.add(newMarker);
+                    new NewMarkerAction().addMarkers(markers, false);
                 }
 
                 public void redo() throws CannotRedoException {
