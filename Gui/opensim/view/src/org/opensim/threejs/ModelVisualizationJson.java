@@ -85,7 +85,10 @@ public class ModelVisualizationJson extends JSONObject {
     // For ConditionalPathPoint we use Active PathPoints as proxy when inactive.
     private final HashMap<AbstractPathPoint, ComputedPathPointInfo> proxyPathPoints = new HashMap<AbstractPathPoint, ComputedPathPointInfo>();
     private final HashMap<UUID, ComputedPathPointInfo> computedPathPoints = new HashMap<UUID, ComputedPathPointInfo>();
-
+    private final HashMap<PathWrapPoint, ArrayList<UUID>> wrapPathPoints = new HashMap<PathWrapPoint, ArrayList<UUID>>();
+    // Keep track of which paths have wrapping since they need special handling
+    // When wrapping comes in/out
+    private final HashMap<GeometryPath, Boolean> pathsWithWrapping = new HashMap<GeometryPath, Boolean>();
      // The following inner class and Map are used to cache "computed" pathpoints to speed up 
     // recomputation on the fly
     class ComputedPathPointInfo {
@@ -328,6 +331,10 @@ public class ModelVisualizationJson extends JSONObject {
         msg.put("Op", "Frame");
         JSONArray bodyTransforms_json = new JSONArray();
         msg.put("Transforms", bodyTransforms_json);
+        if (!pathsWithWrapping.isEmpty()){
+            // Update status of Wrappoints accordingly
+            System.out.println("Update wrap points");
+        }
         if (ready) { // Avoid trying to send a frame before Json is completely populated
             while (bodyIdIter.hasNext()) {
                 int bodyId = bodyIdIter.next();
@@ -490,6 +497,8 @@ public class ModelVisualizationJson extends JSONObject {
         JSONArray pathpoint_jsonArr = new JSONArray();
         JSONArray pathpointActive_jsonArr = new JSONArray();
         boolean hasWrapping = (numWrapObjects > 0);
+        if (hasWrapping)
+            pathsWithWrapping.put(path, Boolean.TRUE);
         ArrayPathPoint actualPath = path.getCurrentPath(state);
         int pathPointSetIndex=0;
         for (int i = 0; i < actualPath.getSize(); i++) {
@@ -544,13 +553,16 @@ public class ModelVisualizationJson extends JSONObject {
                         int[] indicesToUse = new int[]{0, size-1};
                         JSONObject bodyJson = mapBodyIndicesToJson.get(0); // These points live in Ground
                         JSONArray children = (JSONArray) bodyJson.get("children");
+                        ArrayList<UUID> wrapPointUUIDs = new ArrayList<UUID>();
                         for (int j =0; j < indicesToUse.length; j++){
                             Vec3 globalLocation = wrapPtsFrame.findStationLocationInAnotherFrame(state, pathwrap.get(indicesToUse[j]), mapBodyIndicesToFrames.get(0));
                             JSONObject bpptInBodyJson =createPathPointObjectJson(null, "", false, globalLocation);
                             UUID ppt_uuid = UUID.fromString((String) bpptInBodyJson.get("uuid"));
                             children.add(bpptInBodyJson);
                             pathpoint_jsonArr.add(ppt_uuid.toString());
+                            wrapPointUUIDs.add(ppt_uuid);
                         }
+                        wrapPathPoints.put(pathWrapPoint, wrapPointUUIDs);
                     }
                     
                 }
