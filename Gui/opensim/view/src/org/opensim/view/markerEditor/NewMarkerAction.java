@@ -97,7 +97,9 @@ public class NewMarkerAction extends AbstractAction {
                 public void undo() throws CannotUndoException {
                     super.undo();
                     Marker toDelete = model.getMarkerSet().get(saveMarkerName);
-                    OneMarkerDeleteAction.deleteMarker(toDelete, false);
+                    Vector<OpenSimObject> markers = new Vector<OpenSimObject>();
+                    markers.add(toDelete);
+                    OneMarkerDeleteAction.deleteMarkers(markers, false);
                 }
 
                 public void redo() throws CannotRedoException {
