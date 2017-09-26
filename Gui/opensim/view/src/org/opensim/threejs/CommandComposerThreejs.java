@@ -83,19 +83,23 @@ public class CommandComposerThreejs {
              return commandJson;
          }
          if (prop.getName().equalsIgnoreCase("color")){
-             JSONObject commandJson = new JSONObject();
-             commandJson.put("type", "SetMaterialColorCommand");
-             commandJson.put("name", "SetMaterialColor");
-             commandJson.put("attributeName", "color");
              Vec3 newColor = new Vec3();
              for (int i=0; i<3; i++)
                 newColor.set(i, PropertyHelper.getValueVec3(prop, i));
-             commandJson.put("newValue", JSONUtilities.mapColorToRGBA(newColor));
-             commandJson.put("objectUuid", objectUuid.toString());
-             return commandJson;            
+             return createSetMaterialColorCommand(newColor, objectUuid);            
          }
          JSONObject commandJson = new JSONObject();
          return commandJson;
+    }
+
+    public static JSONObject createSetMaterialColorCommand(Vec3 newColor, UUID objectUuid) {
+        JSONObject commandJson = new JSONObject();
+        commandJson.put("type", "SetMaterialColorCommand");
+        commandJson.put("name", "SetMaterialColor");
+        commandJson.put("attributeName", "color");
+        commandJson.put("newValue", JSONUtilities.mapColorToRGBA(newColor));
+        commandJson.put("objectUuid", objectUuid.toString());
+        return commandJson;
     }
 
     static JSONObject createAddObjectCommandJson(JSONObject newObject) {
@@ -127,5 +131,16 @@ public class CommandComposerThreejs {
         commandJson.put("object", dObject);
         return commandJson;
     } 
+
+    static JSONObject createScaleObjectCommand(double newScale, UUID objectUUID) {
+        JSONObject commandJson = new JSONObject();
+        commandJson.put("type", "SetScaleCommand");
+        commandJson.put("objectUuid", objectUUID.toString());
+        JSONArray jsonVec3 = new JSONArray();
+             for (int i=0; i<3; i++)
+                 jsonVec3.add(newScale);        
+        commandJson.put("newScale", jsonVec3);
+        return commandJson;
+    }
     
 }

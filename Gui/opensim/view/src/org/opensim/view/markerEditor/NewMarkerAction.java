@@ -71,23 +71,24 @@ public class NewMarkerAction extends AbstractAction {
        } catch (IOException ex) {
            Exceptions.printStackTrace(ex);
        }
-        addMarker(newMarker, true);
+        Vector<OpenSimObject> markers = new  Vector<OpenSimObject>();
+        markers.add(newMarker);
+        addMarkers(markers, true);
     }
 
-    public void addMarker(final Marker marker, boolean supportUndo) {
+    public void addMarkers(final Vector<OpenSimObject> markers, boolean supportUndo) {
 
         // This block of code should stay in sync with 
         // TestEditMarkers.java in opensim-core
+        final Marker marker = Marker.safeDownCast(markers.get(0));
         final String saveMarkerName = marker.getName();
         final String saveBodyName = marker.getParentFrameName();
         final Vec3 saveMarkerOffset = marker.get_location();
         final Model model = marker.getModel();
          // Update the marker name list in the ViewDB.
-         OpenSimDB.getInstance().getModelGuiElements(model).updateMarkerNames();
+        OpenSimDB.getInstance().getModelGuiElements(model).updateMarkerNames();
 
-        Vector<OpenSimObject> objs = new Vector<OpenSimObject>(1);
-        objs.add(marker);
-        ObjectsAddedEvent evnt = new ObjectsAddedEvent(this, model, objs);
+        ObjectsAddedEvent evnt = new ObjectsAddedEvent(this, model, markers);
         OpenSimDB.getInstance().setChanged();
         OpenSimDB.getInstance().notifyObservers(evnt);
         // undo support
@@ -97,7 +98,9 @@ public class NewMarkerAction extends AbstractAction {
                 public void undo() throws CannotUndoException {
                     super.undo();
                     Marker toDelete = model.getMarkerSet().get(saveMarkerName);
-                    OneMarkerDeleteAction.deleteMarker(toDelete, false);
+                    Vector<OpenSimObject> markers = new Vector<OpenSimObject>();
+                    markers.add(toDelete);
+                    OneMarkerDeleteAction.deleteMarkers(markers, false);
                 }
 
                 public void redo() throws CannotRedoException {
@@ -107,7 +110,9 @@ public class NewMarkerAction extends AbstractAction {
                     newMarker.set_location(saveMarkerOffset);
                     Component physFrame = model.getComponent(saveBodyName);
                     newMarker.setParentFrame(PhysicalFrame.safeDownCast(physFrame));
-                    addMarker(newMarker, true);
+                    Vector<OpenSimObject> markers = new  Vector<OpenSimObject>();
+                    markers.add(newMarker);
+                    addMarkers(markers, true);
                 }
                 @Override
                 public String getRedoPresentationName() {

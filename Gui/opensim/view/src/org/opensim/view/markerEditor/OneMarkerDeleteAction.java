@@ -76,27 +76,27 @@ public final class OneMarkerDeleteAction extends CallableSystemAction {
     public void performAction() {
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         // If any selected object is hidden (or any selected group is mixed), return false.
+        Vector<OpenSimObject> markers = new Vector<OpenSimObject>();
         for (int i = 0; i < selected.length; i++) {
             OneMarkerNode objectNode = (OneMarkerNode) selected[i];
             Marker marker = Marker.safeDownCast(objectNode.getOpenSimObject());
-            deleteMarker(marker, true);
+            markers.add(marker);
         }
+        deleteMarkers(markers, markers.size()==1);
+
     }
-    static public void deleteMarker(final Marker marker, boolean supportUndo) {
+    static public void deleteMarkers(final Vector<OpenSimObject> markers, boolean supportUndo) {
         // This block of code should stay in sync with 
         // TestEditMarkers.java in opensim-core
-        final String saveMarkerName = marker.getName();
-        final String saveBodyName = marker.getParentFrameName();
-        final Vec3 saveMarkerOffset = new Vec3(marker.get_location());
-
         // Remove the marker from the model's marker set.
+        Marker marker = Marker.safeDownCast(markers.get(0));
         final Model model = marker.getModel();
         MarkerSet markerset = model.getMarkerSet();
-        // Will fire event to handle deletion before actual deletion so that object can be queried
-        // Generate an event so everyone can update, including the marker editor.
-        Vector<OpenSimObject> objs = new Vector<OpenSimObject>(1);
-        objs.add(marker);
-        ObjectsDeletedEvent evnt = new ObjectsDeletedEvent(model, model, objs);
+        final String saveMarkerName = marker.getName();
+        final PhysicalFrame saveBody = marker.getParentFrame();
+        final Vec3 saveMarkerOffset = new Vec3(marker.get_location());
+
+        ObjectsDeletedEvent evnt = new ObjectsDeletedEvent(model, model, markers);
         OpenSimDB.getInstance().setChanged();
         OpenSimDB.getInstance().notifyObservers(evnt);
         if (supportUndo) {
@@ -108,8 +108,7 @@ public final class OneMarkerDeleteAction extends CallableSystemAction {
                     Marker newMarker = new Marker();
                     newMarker.setName(saveMarkerName);
                     newMarker.set_location(saveMarkerOffset);
-                    Component physFrame = model.getComponent(saveBodyName);
-                    newMarker.setParentFrame(PhysicalFrame.safeDownCast(physFrame));
+                    newMarker.setParentFrame(saveBody);
                     OpenSimContext context = OpenSimDB.getInstance().getContext(model);
                     context.cacheModelAndState();
                     model.getMarkerSet().adoptAndAppend(newMarker);
@@ -118,13 +117,17 @@ public final class OneMarkerDeleteAction extends CallableSystemAction {
                     } catch (IOException ex) {
                         Exceptions.printStackTrace(ex);
                     }
-                    new NewMarkerAction().addMarker(newMarker, false);
+                    Vector<OpenSimObject> markers = new  Vector<OpenSimObject>();
+                    markers.add(newMarker);
+                    new NewMarkerAction().addMarkers(markers, false);
                 }
 
                 public void redo() throws CannotRedoException {
                     super.redo();
                     Marker toDelete = model.getMarkerSet().get(saveMarkerName);
-                    deleteMarker(toDelete, true);
+                    Vector<OpenSimObject> markers = new Vector<OpenSimObject>();
+                    markers.add(toDelete);
+                    deleteMarkers(markers, true);
                 }
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
@@ -133,7 +136,8 @@ public final class OneMarkerDeleteAction extends CallableSystemAction {
         // recreation of tree traversal/initialization
         OpenSimContext context = OpenSimDB.getInstance().getContext(model);
         context.cacheModelAndState();
-        markerset.remove(marker);
+        for (int i=0; i<markers.size(); i++)
+            markerset.remove(Marker.safeDownCast(markers.get(i)));
         try {
             context.restoreStateFromCachedModel();
         } catch (IOException ex) {

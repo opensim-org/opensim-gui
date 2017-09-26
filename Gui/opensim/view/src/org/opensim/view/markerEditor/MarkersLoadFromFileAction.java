@@ -10,6 +10,7 @@ package org.opensim.view.markerEditor;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.util.Vector;
 import javax.swing.AbstractAction;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
@@ -21,6 +22,7 @@ import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
+import org.opensim.modeling.OpenSimObject;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.nodes.MarkersNode;
@@ -64,8 +66,9 @@ public class MarkersLoadFromFileAction extends AbstractAction {
         modelMarkerSet.getMarkerNames(existingNames);
         String errorMessages = "";
         boolean errorsToReport = false;
+        context.cacheModelAndState();
+        Vector<OpenSimObject> markersAdded = new Vector<OpenSimObject>();
         for (int i=0; i<newMarkerSet.getSize(); i++){
-            context.cacheModelAndState();
              Marker newMarker = newMarkerSet.get(i);
              // Check name duplication
              if (existingNames.findIndex(newMarker.getName())!= -1){
@@ -75,17 +78,19 @@ public class MarkersLoadFromFileAction extends AbstractAction {
              }
              // Ideally we use cloneAndAppend but the clone loses track of frame!
              modelMarkerSet.adoptAndAppend(newMarker);
-            try {
-                context.restoreStateFromCachedModel();
-            } catch (IOException ex) {
-                Exceptions.printStackTrace(ex);
-            }
-             // Notify the world so that navigator and visualization update
-             new NewMarkerAction().addMarker(newMarker, true);
+             // Notify the world so that navigator and visualization update once at end
+             //new NewMarkerAction().addMarkers(newMarker, true);
+             markersAdded.add(newMarker);
              modelMarkerSet.getMarkerNames(existingNames);
         }
+        try {
+           context.restoreStateFromCachedModel();
+        } catch (IOException ex) {
+           Exceptions.printStackTrace(ex);
+        }       
         // This hack is so that the adopted Marker isn't gc'ed
-        newMarkerSet.setMemoryOwner(false);
+         newMarkerSet.setMemoryOwner(false);
+         new NewMarkerAction().addMarkers(markersAdded, false);
         if (errorsToReport){
             DialogDisplayer.getDefault().notify(
                     new NotifyDescriptor.Message("Following errors were encountered " + errorMessages));

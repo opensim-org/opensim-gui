@@ -42,6 +42,7 @@ import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
+import java.util.UUID;
 import java.util.Vector;
 import java.util.prefs.Preferences;
 import javax.swing.SwingUtilities;
@@ -208,6 +209,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    private ViewDB() {
         applyPreferences();
         r = myLookup.lookupResult(OpenSimObject.class);
+        websocketdb = WebSocketDB.getInstance();
         jsondb = JSONUtilities.createTopLevelJson();
      }
 
@@ -224,9 +226,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     * Enforce a singleton pattern
     */
    public static ViewDB getInstance() {
-      if( instance==null ) instance = new ViewDB();
-      websocketdb = WebSocketDB.getInstance();
-      websocketdb.setObserver(instance);
+      if( instance==null ) {
+          instance = new ViewDB();
+          websocketdb.setObserver(instance);
+      }
       return instance;
    }
    
@@ -1713,7 +1716,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
 
     private void sync(VisWebSocket visWebSocket) {
-        //System.out.println("invoke ViewDB.sync");
+        if (debugLevel >1)
+            System.out.println("invoke ViewDB.sync");
         ViewDB.getInstance().exportAllModelsToJson(visWebSocket);
     }
     // Method is synchronized to avoid concurrent creation of Json from ViewDB.update and socket
@@ -2158,6 +2162,21 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             ModelVisualizationJson vis = ViewDB.getInstance().getModelVisualizationJson(model);
             websocketdb.broadcastMessageJson(vis.createTranslateObjectCommand(marker, marker.get_location()), null);
         }
+    }
+    
+    public void applyColorToObjectByUUID(Model model, UUID objectUUID, Vec3 newColor) {
+        if (websocketdb!=null){
+            ModelVisualizationJson vis = ViewDB.getInstance().getModelVisualizationJson(model);
+            websocketdb.broadcastMessageJson(vis.createSetMaterialColorCommand(objectUUID, newColor), null);
+        }        
+    }
+    
+    public void applyScaleToObjectByUUID(Model model, UUID objectUUID, double newScale) {
+        if (websocketdb!=null){
+            ModelVisualizationJson vis = ViewDB.getInstance().getModelVisualizationJson(model);
+            websocketdb.broadcastMessageJson(vis.createScaleObjectCommand(objectUUID, newScale), null);
+        }        
+        
     }
     // Callback, invoked when a command is received from visualizer
     // this operates only on currentJson
