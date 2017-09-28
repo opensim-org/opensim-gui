@@ -103,11 +103,14 @@ public class ModelVisualizationJson extends JSONObject {
     private boolean movable=true;
     // List of all Components that need special treatment as in not statically attached:
     // MovingPathPoint for now
-    private final HashMap<Component, UUID> specialComponents = new HashMap<Component, UUID>();
+    private final HashMap<Component, UUID> movingComponents = new HashMap<Component, UUID>();
     // For ConditionalPathPoint we use Active PathPoints as proxy when inactive.
     private final HashMap<AbstractPathPoint, ComputedPathPointInfo> proxyPathPoints = new HashMap<AbstractPathPoint, ComputedPathPointInfo>();
     private final HashMap<UUID, ComputedPathPointInfo> computedPathPoints = new HashMap<UUID, ComputedPathPointInfo>();
-
+    private final HashMap<PathWrapPoint, ArrayList<UUID>> wrapPathPoints = new HashMap<PathWrapPoint, ArrayList<UUID>>();
+    // Keep track of which paths have wrapping since they need special handling
+    // When wrapping comes in/out
+    private final HashMap<GeometryPath, Boolean> pathsWithWrapping = new HashMap<GeometryPath, Boolean>();
      // The following inner class and Map are used to cache "computed" pathpoints to speed up 
     // recomputation on the fly
     class ComputedPathPointInfo {
@@ -350,6 +353,10 @@ public class ModelVisualizationJson extends JSONObject {
         msg.put("Op", "Frame");
         JSONArray bodyTransforms_json = new JSONArray();
         msg.put("Transforms", bodyTransforms_json);
+        if (!pathsWithWrapping.isEmpty()){
+            // Update status of Wrappoints accordingly
+            System.out.println("Update wrap points");
+        }
         if (ready) { // Avoid trying to send a frame before Json is completely populated
             while (bodyIdIter.hasNext()) {
                 int bodyId = bodyIdIter.next();
@@ -369,7 +376,7 @@ public class ModelVisualizationJson extends JSONObject {
             }
             // If we have special components
             // eg. ConditionalPathPoints, MovingPathPoints or WrapPoints, will handle here
-            for (Component comp: specialComponents.keySet()){
+            for (Component comp: movingComponents.keySet()){
                 // Update position of MovingPathpoints on each frame
                 MovingPathPoint mPathPoint = MovingPathPoint.safeDownCast(comp);
                 if (mPathPoint!=null){
@@ -377,7 +384,7 @@ public class ModelVisualizationJson extends JSONObject {
                     Vec3 location = mPathPoint.getLocation(state);
                     localTransform.setP(location);
                     JSONObject pathpointXform_json = new JSONObject();
-                    pathpointXform_json.put("uuid", specialComponents.get(comp).toString());
+                    pathpointXform_json.put("uuid", movingComponents.get(comp).toString());
                     pathpointXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1., 1., 1.), visScaleFactor));
                     bodyTransforms_json.add(pathpointXform_json);
                     continue;
@@ -512,6 +519,8 @@ public class ModelVisualizationJson extends JSONObject {
         JSONArray pathpoint_jsonArr = new JSONArray();
         JSONArray pathpointActive_jsonArr = new JSONArray();
         boolean hasWrapping = (numWrapObjects > 0);
+        if (hasWrapping)
+            pathsWithWrapping.put(path, Boolean.TRUE);
         ArrayPathPoint actualPath = path.getCurrentPath(state);
         int pathPointSetIndex=0;
         for (int i = 0; i < actualPath.getSize(); i++) {
@@ -539,11 +548,16 @@ public class ModelVisualizationJson extends JSONObject {
                 if (PathWrapPoint.safeDownCast(pathPoint)==null){
                     pathPointSetIndex++;
                 }
+                if (ConditionalPathPoint.safeDownCast(pathPoint)!=null){
+                    proxyPathPoints.put(pathPoint, 
+                            new ComputedPathPointInfo(pathPointSetNoWrap.get(pathPointSetIndex-2), 
+                                    pathPointSetNoWrap.get(pathPointSetIndex), .99));
+                }
             } 
            
 
             if (MovingPathPoint.safeDownCast(pathPoint) != null) {
-                specialComponents.put(pathPoint, pathpoint_uuid);
+                movingComponents.put(pathPoint, pathpoint_uuid);
                 //System.out.println("Process Moving Path point "+pathPoint.getName());
             }
             pathpoint_jsonArr.add(pathpoint_uuid.toString());
@@ -561,13 +575,16 @@ public class ModelVisualizationJson extends JSONObject {
                         int[] indicesToUse = new int[]{0, size-1};
                         JSONObject bodyJson = mapBodyIndicesToJson.get(0); // These points live in Ground
                         JSONArray children = (JSONArray) bodyJson.get("children");
+                        ArrayList<UUID> wrapPointUUIDs = new ArrayList<UUID>();
                         for (int j =0; j < indicesToUse.length; j++){
                             Vec3 globalLocation = wrapPtsFrame.findStationLocationInAnotherFrame(state, pathwrap.get(indicesToUse[j]), mapBodyIndicesToFrames.get(0));
                             JSONObject bpptInBodyJson =createPathPointObjectJson(null, "", false, globalLocation);
                             UUID ppt_uuid = UUID.fromString((String) bpptInBodyJson.get("uuid"));
                             children.add(bpptInBodyJson);
                             pathpoint_jsonArr.add(ppt_uuid.toString());
+                            wrapPointUUIDs.add(ppt_uuid);
                         }
+                        wrapPathPoints.put(pathWrapPoint, wrapPointUUIDs);
                     }
                     
                 }
