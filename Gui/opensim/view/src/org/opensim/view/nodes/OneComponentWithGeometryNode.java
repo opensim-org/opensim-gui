@@ -162,7 +162,8 @@ public abstract class OneComponentWithGeometryNode extends OneComponentNode impl
 
     @Override
     public void setDisplayPreference(int pref) {
-        setAppearanceDisplayPrefProperty(pref);
+        if (pref ==2 || pref ==3)
+            setAppearanceDisplayPrefProperty(pref);
     }
 
     private void setAppearanceDisplayPrefProperty(int pref) {
