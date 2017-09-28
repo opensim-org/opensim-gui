@@ -1296,10 +1296,6 @@ public class Model extends ModelComponent {
     return new MarkerSet(opensimSimulationJNI.Model_getMarkerSet(swigCPtr, this), false);
   }
 
-  public int replaceMarkerSet(State s, MarkerSet aMarkerSet) {
-    return opensimSimulationJNI.Model_replaceMarkerSet(swigCPtr, this, State.getCPtr(s), s, MarkerSet.getCPtr(aMarkerSet), aMarkerSet);
-  }
-
   public void writeMarkerFile(String aFileName) {
     opensimSimulationJNI.Model_writeMarkerFile(swigCPtr, this, aFileName);
   }

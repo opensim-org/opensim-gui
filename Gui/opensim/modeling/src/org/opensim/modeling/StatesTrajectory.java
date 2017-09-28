@@ -293,20 +293,24 @@ public class StatesTrajectory {
   
   }
 
+  public static StatesTrajectory createFromStatesStorage(Model model, Storage sto, boolean allowMissingColumns, boolean allowExtraColumns, boolean enforceConstraints) {
+    return new StatesTrajectory(opensimSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_0(Model.getCPtr(model), model, Storage.getCPtr(sto), sto, allowMissingColumns, allowExtraColumns, enforceConstraints), true);
+  }
+
   public static StatesTrajectory createFromStatesStorage(Model model, Storage sto, boolean allowMissingColumns, boolean allowExtraColumns) {
-    return new StatesTrajectory(opensimSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_0(Model.getCPtr(model), model, Storage.getCPtr(sto), sto, allowMissingColumns, allowExtraColumns), true);
+    return new StatesTrajectory(opensimSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_1(Model.getCPtr(model), model, Storage.getCPtr(sto), sto, allowMissingColumns, allowExtraColumns), true);
   }
 
   public static StatesTrajectory createFromStatesStorage(Model model, Storage sto, boolean allowMissingColumns) {
-    return new StatesTrajectory(opensimSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_1(Model.getCPtr(model), model, Storage.getCPtr(sto), sto, allowMissingColumns), true);
+    return new StatesTrajectory(opensimSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_2(Model.getCPtr(model), model, Storage.getCPtr(sto), sto, allowMissingColumns), true);
   }
 
   public static StatesTrajectory createFromStatesStorage(Model model, Storage sto) {
-    return new StatesTrajectory(opensimSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_2(Model.getCPtr(model), model, Storage.getCPtr(sto), sto), true);
+    return new StatesTrajectory(opensimSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_3(Model.getCPtr(model), model, Storage.getCPtr(sto), sto), true);
   }
 
   public static StatesTrajectory createFromStatesStorage(Model model, String filepath) {
-    return new StatesTrajectory(opensimSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_3(Model.getCPtr(model), model, filepath), true);
+    return new StatesTrajectory(opensimSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_4(Model.getCPtr(model), model, filepath), true);
   }
 
 }
