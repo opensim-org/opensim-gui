@@ -369,8 +369,8 @@ public class Coordinate extends ModelComponent {
     return opensimSimulationJNI.Coordinate_getValue(swigCPtr, this, State.getCPtr(s), s);
   }
 
-  public void setValue(State s, double aValue, boolean aEnforceContraints) {
-    opensimSimulationJNI.Coordinate_setValue__SWIG_0(swigCPtr, this, State.getCPtr(s), s, aValue, aEnforceContraints);
+  public void setValue(State s, double aValue, boolean enforceContraints) {
+    opensimSimulationJNI.Coordinate_setValue__SWIG_0(swigCPtr, this, State.getCPtr(s), s, aValue, enforceContraints);
   }
 
   public void setValue(State s, double aValue) {
