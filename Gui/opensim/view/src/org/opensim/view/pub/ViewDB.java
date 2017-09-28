@@ -60,6 +60,7 @@ import org.openide.util.LookupListener;
 import org.openide.util.NbBundle;
 import org.openide.util.lookup.AbstractLookup;
 import org.openide.util.lookup.InstanceContent;
+import org.opensim.logger.OpenSimLogger;
 import org.opensim.modeling.*;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.swingui.SwingWorker;
@@ -115,6 +116,19 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     * as a message to visualizer.
    */
    private static boolean applyAppearanceChange = false;
+
+    public void endAnimation() {
+        JSONObject msg = new JSONObject();
+        msg.put("Op", "endAnimation");
+        websocketdb.broadcastMessageJson(msg, null);
+        
+    }
+
+    public void startAnimation() {
+        JSONObject msg = new JSONObject();
+        msg.put("Op", "startAnimation");
+        websocketdb.broadcastMessageJson(msg, null);
+    }
    
    class AppearanceChange {
        Model model;
@@ -2180,6 +2194,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     // Callback, invoked when a command is received from visualizer
     // this operates only on currentJson
     private void handleJson(JSONObject jsonObject) {
+       if (jsonObject.get("type") != null){
+           if (((String)jsonObject.get("type")).equalsIgnoreCase("info")){
+               String msg = "Rendered "+jsonObject.get("numFrames")+" frames in "+jsonObject.get("totalTime")+" ms.";
+               double rendertimeAverage = ((Double) jsonObject.get("totalTime"))/((Long)jsonObject.get("numFrames"));
+               OpenSimLogger.logMessage(msg + "FPS: "+(int)1000/rendertimeAverage+"\n", OpenSimLogger.INFO);
+               return;
+           }
+       }
        Object uuid = jsonObject.get("uuid");
        String uuidString = (String) uuid;
        if (uuidString.length()==0) return;
