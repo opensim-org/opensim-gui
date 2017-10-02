@@ -51,6 +51,7 @@ import javax.swing.undo.CannotUndoException;
 import org.eclipse.jetty.JettyMain;
 import org.eclipse.jetty.VisWebSocket;
 import org.eclipse.jetty.WebSocketDB;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.openide.awt.StatusDisplayer;
 import org.openide.util.Exceptions;
@@ -152,11 +153,20 @@ public final class ViewDB extends Observable implements Observer, LookupListener
  
     private static void applyPendingAppearanceChanges() {
         if (websocketdb!=null){
+            // Create MuliCmd
+            JSONObject topMsg = new JSONObject();
+            JSONObject msgMulti = new JSONObject();
+            msgMulti.put("type", "MultiCmdsCommand");
+            topMsg.put("Op", "execute");
+            topMsg.put("command", msgMulti);
+            JSONArray commands = new JSONArray();
             for (AppearanceChange appChange:pendingAppearanceChanges){
                 ModelVisualizationJson modelJson = getInstance().getModelVisualizationJson(appChange.model);
                 JSONObject msg = modelJson.createAppearanceMessage(appChange.mc, appChange.prop);
-                websocketdb.broadcastMessageJson(msg, null);
+                commands.add(msg.get("command"));
             }
+            msgMulti.put("cmds", commands);
+            websocketdb.broadcastMessageJson(topMsg, null);
         }
         pendingAppearanceChanges.clear();
     }
