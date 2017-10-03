@@ -1356,7 +1356,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         lockDrawingSurfaces(false);
         repaintAll();
       }
-      if (websocketdb != null && currentJson != null){
+      if (websocketdb != null && currentJson != null && applyAppearanceChange){
         // Make xforms JSON
         websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(false), null);
       }
