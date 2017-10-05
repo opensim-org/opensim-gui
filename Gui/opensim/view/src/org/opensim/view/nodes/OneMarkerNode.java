@@ -104,18 +104,12 @@ public class OneMarkerNode extends OneComponentNode{
             
             set.remove("name");
             Reflection nextNodeProp = createNodePropForObjectName(obj, theModel, true);
-                if (nextNodeProp != null) {
-                    nextNodeProp.setName("name");
-                    nextNodeProp.setShortDescription("Name of the Object");
-                    nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
-                    set.put(nextNodeProp);
-                }
-            set.remove("body");
-            PropertySupport.Reflection nextNodeProp2;
-            nextNodeProp2 = new PropertySupport.Reflection(gMarker, String.class, "getBodyName", "setBodyName");
-            nextNodeProp2.setPropertyEditorClass(BodyNameEditor.class);
-            nextNodeProp2.setName("body");
-            set.put(nextNodeProp2);
+            if (nextNodeProp != null) {
+                nextNodeProp.setName("name");
+                nextNodeProp.setShortDescription("Name of the Object");
+                nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
+                set.put(nextNodeProp);
+            }
 
             // customize offset
             set.remove("location");
