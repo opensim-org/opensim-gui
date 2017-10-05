@@ -53,7 +53,8 @@ install:
   - git submodule update --init --recursive -- opensim-visualizer Gui/opensim/threejs
   
 build_script:
-  - mkdir ../build && cd ../build
+  - mkdir ../build
+  - cd ../build
   - cmake ../opensim-gui -DCMAKE_PREFIX_PATH=C:\opensim-core -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=C:/Program Files/NetBeans 8.2;-Dnbplatform.default.harness.dir=C:/Program Files/NetBeans 8.2/harness"
   - cmake --build . --target PrepareInstaller --config Release
   #- cd Gui/opensim
