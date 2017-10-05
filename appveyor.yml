@@ -12,6 +12,12 @@ os: Visual Studio 2015
 
 platform: x64
 
+# No need to run CI on the branch if we're also running CI for a PR.
+skip_branch_with_pr: true
+
+nuget:
+  disable_publish_on_pr: true
+
 init:
   # Note: python 2.7 32bit is already on the path. We want v2.7 64bit,
   # so we must add v2.7 64bit earlier on the PATH.
@@ -20,19 +26,29 @@ init:
   - SET JAVA_HOME=C:\\Program Files\\Java\\jdk1.8.0_121
   - SET PATH=%JAVA_HOME%/bin;%OPENSIM_HOME%/bin;%PATH%
   #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
 nuget:
   account_feed: true
 
 install:
   - ps: choco install jdk8
   ## The GUI is built with the Netbeans platform.
-  - ps: choco install netbeans-jee --version 8.1 --yes --limit-output --allow-empty-checksums| Out-Null
+  # We need 8.2 and this isn't available on Chocolatey.
+  #- ps: choco install netbeans-jee --version 8.1 --yes --limit-output --allow-empty-checksums| Out-Null
+  # https://netbeans.org/downloads/start.html?platform=windows&lang=en&option=javase
+  - appveyor DownloadFile http://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-windows.exe
+  # Make sure the NetBeans installer is not corrupted.
+  - ps: $expectedHash = "7b0646306a7488e617837da1517a86c08b7cf6fbe4dd9d74e8a4564b5ffde004".ToUpper()
+  - ps: $hashFromFile = Get-FileHash -Algorithm SHA256 -Path .\netbeans-8.2-javase-windows.exe
+  - ps: if (($hashFromFile.Hash) -ne ($expectedHash)) { Write-Error "Hash doesn't match." }
 
   ## Apache Ant for building Java projects.
   - choco install ant --yes --limit-output
   
   ## OpenSim (and Simbody).
   # OpenSim's installation is pushed to our Appveyor NuGet account feed.
+  # http://help.appveyor.com/discussions/problems/6024-build-stalled-prompting-for-nuget-permissions#comment_41867748
+  - nuget sources add -name opensim-core -source https://ci.appveyor.com/nuget/opensim-core-kd63opes1em0
   - nuget install opensim-core -Version 0.0.0 -ExcludeVersion -OutputDirectory C:\
   # Only get certain submodules (TODO when opensim-models is public, get that one too).
   - git submodule update --init --recursive -- opensim-visualizer Gui/opensim/threejs
