@@ -48,7 +48,8 @@ install:
   # OpenSim's installation is pushed to our Appveyor NuGet account feed.
   # http://help.appveyor.com/discussions/problems/6024-build-stalled-prompting-for-nuget-permissions#comment_41867748
   - nuget sources add -name opensim-core -source https://ci.appveyor.com/nuget/opensim-core-kd63opes1em0
-  - nuget install opensim-core -Version 0.0.0 -ExcludeVersion -OutputDirectory C:\
+  - nuget install opensim-core-x64 -Version 0.0.0 -ExcludeVersion -OutputDirectory C:\
+  - dir C:\
   # Only get certain submodules (TODO when opensim-models is public, get that one too).
   - git submodule update --init --recursive -- opensim-visualizer Gui/opensim/threejs
   
