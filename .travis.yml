@@ -1,0 +1,31 @@
+language: java
+
+# Use container-based infrastructure to allow caching (for ccache).
+sudo: false
+
+# TODO this build of opensim-core does *not* contain bindings
+matrix:
+  include:
+    - os: osx
+      env: DEPLOY=yes
+      
+before_install:
+  - /usr/libexec/java_home -V
+  ## Install NetBeans.
+  #brew tap caskroom/versions
+  #brew cask search java
+  #brew cask install java8
+  - brew cask install netbeans
+  
+  ## Install opensim-core.
+  # The opensim-core travis script uploads the opensim-core binaries to sourceforge.
+  - OSIMCOREZIP=opensim-core-latest_${TRAVIS_OS_NAME}_RelWithDebInfo.zip
+  - wget https://prdownloads.sourceforge.net/myosin/opensim-core/$OSIMCOREZIP
+  # Put opensim-core in ~/opensim-core (-q: quiet).
+  - unzip -q $OSIMCOREZIP -d ~
+  
+build_script:
+  - mkdir ../build && cd ../build
+  - cmake ../opensim-gui -DCMAKE_PREFIX_PATH=~/opensim-core
+  - make PrepareInstaller
+  
