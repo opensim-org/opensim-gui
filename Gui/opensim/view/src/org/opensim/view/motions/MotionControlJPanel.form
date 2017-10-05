@@ -82,13 +82,8 @@
                       </Group>
                       <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="jLabelForSpeedSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jSpeedSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jStartTimeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jStartTimeTextField" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jEndTimeTextField" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jPlaybackButtonsPanel" alignment="0" min="-2" pref="16" max="-2" attributes="1"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -97,6 +92,18 @@
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jMotionNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
+                      <Component id="jSpeedSpinner" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="23" pref="23" max="-2" attributes="0"/>
+                      <Component id="jLabelForSpeedSpinner" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
+                      <Component id="jPlaybackButtonsPanel" min="-2" pref="16" max="-2" attributes="1"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -485,10 +492,10 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jStartTimeTextField">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="e3" green="df" red="e0" type="rgb"/>
         </Property>
-        <Property name="editable" type="boolean" value="false"/>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="toolTipText" type="java.lang.String" value="Initial time"/>
         <Property name="autoscrolls" type="boolean" value="false"/>
@@ -510,10 +517,10 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jEndTimeTextField">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="e3" green="df" red="e0" type="rgb"/>
         </Property>
-        <Property name="editable" type="boolean" value="false"/>
         <Property name="horizontalAlignment" type="int" value="11"/>
         <Property name="text" type="java.lang.String" value="100"/>
         <Property name="toolTipText" type="java.lang.String" value="Final time"/>

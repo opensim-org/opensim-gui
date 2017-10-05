@@ -1,28 +1,26 @@
-/*
- * Copyright (c)  2005-2008, Stanford University
- * Use of the OpenSim software in source form is permitted provided that the following
- * conditions are met:
- * 	1. The software is used only for non-commercial research and education. It may not
- *     be used in relation to any commercial activity.
- * 	2. The software is not distributed or redistributed.  Software distribution is allowed 
- *     only through https://simtk.org/home/opensim.
- * 	3. Use of the OpenSim software or derivatives must be acknowledged in all publications,
- *      presentations, or documents describing work in which OpenSim or derivatives are used.
- * 	4. Credits to developers may not be removed from executables
- *     created from modifications of the source.
- * 	5. Modifications of source code must retain the above copyright notice, this list of
- *     conditions and the following disclaimer. 
- * 
- *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- *  EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- *  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- *  SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
- *  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
- *  TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
- *  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- *  OR BUSINESS INTERRUPTION) OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
- *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+/* -------------------------------------------------------------------------- *
+ * OpenSim: MotionDisplayer.java                                              *
+ * -------------------------------------------------------------------------- *
+ * OpenSim is a toolkit for musculoskeletal modeling and simulation,          *
+ * developed as an open source project by a worldwide community. Development  *
+ * and support is coordinated from Stanford University, with funding from the *
+ * U.S. NIH and DARPA. See http://opensim.stanford.edu and the README file    *
+ * for more information including specific grant numbers.                     *
+ *                                                                            *
+ * Copyright (c) 2005-2017 Stanford University and the Authors                *
+ * Author(s): Ayman Habib                                                     *
+ *                                                                            *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may    *
+ * not use this file except in compliance with the License. You may obtain a  *
+ * copy of the License at http://www.apache.org/licenses/LICENSE-2.0          *
+ *                                                                            *
+ * Unless required by applicable law or agreed to in writing, software        *
+ * distributed under the License is distributed on an "AS IS" BASIS,          *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.   *
+ * See the License for the specific language governing permissions and        *
+ * limitations under the License.                                             *
+ * -------------------------------------------------------------------------- */
+
 /*
  * MotionDisplayer.java
  *
@@ -38,11 +36,9 @@ import java.awt.Color;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.Vector;
 import org.json.simple.JSONArray;
@@ -77,7 +73,6 @@ import org.opensim.threejs.JSONUtilities;
 import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.MuscleColoringFunction;
 import org.opensim.view.OpenSimvtkGlyphCloud;
-import org.opensim.view.SelectedGlyphUserObject;
 import org.opensim.view.SingleModelVisuals;
 import org.opensim.view.experimentaldata.AnnotatedMotion;
 import org.opensim.view.experimentaldata.ExperimentalDataItemType;
@@ -90,11 +85,8 @@ import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 import vtk.vtkActor;
 import vtk.vtkAppendPolyData;
-import vtk.vtkAssemblyNode;
-import vtk.vtkAssemblyPath;
 import vtk.vtkLineSource;
 import vtk.vtkPolyDataMapper;
-import vtk.vtkProp;
 
 /**
  * 
@@ -108,20 +100,81 @@ import vtk.vtkProp;
 
 public class MotionDisplayer {
 
-    double[] defaultExperimentalMarkerColor = new double[]{0.0, 0.35, 0.65};
     private double[] defaultForceColor = new double[]{0., 1.0, 0.};
     private Vec3 defaultForceColorVec3 = new Vec3(0., 1.0, 0.);
     private MuscleColoringFunction mcf=null;
     // Create JSONs for geometry and material and use them for all objects of this type so that they all change together
     private JSONObject experimenalMarkerGeometryJson=null;
     private JSONObject experimenalMarkerMaterialJson=null;
-    private Vec3 defaultMarkerColor = new Vec3(0., 0., 1.);
+    private Vec3 defaultExperimentalMarkerColor = new Vec3(0., 0., 1.);
     private ModelVisualizationJson modelVisJson=null;
     JSONObject motionObjectsRoot=null;
     private final HashMap<UUID, Component> mapUUIDToComponent = new HashMap<UUID, Component>();
     private final HashMap<OpenSimObject, ArrayList<UUID>> mapComponentToUUID = 
             new HashMap<OpenSimObject, ArrayList<UUID>>();
 
+    public enum ObjectTypesInMotionFiles{GenCoord, 
+                                         GenCoord_Velocity, 
+                                         GenCoord_Force, 
+                                         State,
+                                         Marker, 
+                                         Segment, 
+                                         Segment_marker_p1, 
+                                         Segment_marker_p2, 
+                                         Segment_marker_p3, 
+                                         Segment_force_p1, 
+                                         Segment_force_p2, 
+                                         Segment_force_p3, 
+                                         Segment_force_p4, 
+                                         Segment_force_p5, 
+                                         Segment_force_p6, 
+                                         Segment_torque_p1, 
+                                         Segment_torque_p2, 
+                                         Segment_torque_p3, 
+                                         UNKNOWN};
+
+    Hashtable<Integer, ObjectTypesInMotionFiles> mapIndicesToObjectTypes=new Hashtable<Integer, ObjectTypesInMotionFiles>(40);
+    Hashtable<Integer, Object> mapIndicesToObjects=new Hashtable<Integer, Object>(40);
+    private OpenSimvtkGlyphCloud  groundForcesRep = null;
+    OpenSimvtkGlyphCloud  bodyForcesRep = null;
+    OpenSimvtkGlyphCloud  generalizedForcesRep = null;
+    private OpenSimvtkGlyphCloud  markersRep = null;
+    private Storage simmMotionData;
+    private Model model;
+    OpenSimContext dContext; 
+    ArrayStr stateNames;
+    private boolean renderMuscleActivations=false;
+    private double experimentalMarkerScaleFactor;
+    private double experimentalForceScaleFactor;
+    String DEFAULT_FORCE_SHAPE="arrow";
+    private String currentForceShape;
+    
+    // For columns that start with a body name, this is the map from column index to body reference.
+    // The map is currently used only for body forces and generalized forces.
+    private Hashtable<Integer, Body> mapIndicesToBodies = new Hashtable<Integer, Body>(10);
+    // For generalized forces, this is the map from column index to DOF reference.
+    private Hashtable<Integer, TransformAxis> mapIndicesToDofs = new Hashtable<Integer, TransformAxis>(10);
+    
+    protected Hashtable<ExperimentalDataObject, vtkActor> objectTrails = new Hashtable<ExperimentalDataObject, vtkActor>();
+
+    private ArrayList<MotionDisplayer> associatedMotions = new  ArrayList<MotionDisplayer>();
+    private ArrayStr colNames; // Will cache in labels and construct map to states for quick setting
+    
+    public class ObjectIndexPair {
+       public Object object;
+       public int stateVectorIndex; // Actual (0-based) index into state vector
+       public ObjectIndexPair(Object obj, int idx) { this.object = obj; this.stateVectorIndex = idx; }
+    }
+    // For faster access to gencoords/markers/forces to update in applyFrameToModel
+    ArrayList<ObjectIndexPair> genCoordColumns=null;
+    ArrayList<ObjectIndexPair> genCoordForceColumns=null;
+    ArrayList<ObjectIndexPair> segmentMarkerColumns=null; // state vector index of the first of three (x y z) coordinates for a marker
+    ArrayList<ObjectIndexPair> segmentForceColumns=null; // state vector index of the first of six (px py pz vx vy vz) coordinates for a force vector
+    ArrayList<ObjectIndexPair> anyStateColumns=null; // state vector index of muscle excitations and other generic states
+    ArrayList<String> canonicalStateNames = new ArrayList<String>();
+    ArrayDouble interpolatedStates = null;
+
+    boolean statesFile = false; // special type of file that contains full state vectors
      /**
      * @return the associatedMotions
      */
@@ -181,7 +234,21 @@ public class MotionDisplayer {
         float[] colorFloat = new float[3];
         defaultForceColor.getColorComponents(colorFloat);
         for (int i=0;i<3;i++) this.defaultForceColor[i] = (double) colorFloat[i];
-        getGroundForcesRep().setColor(defaultForceColor);
+        
+        Vec3 colorAsVec3 = new Vec3();
+        for (int i =0; i <3; i++) 
+            colorAsVec3.set(i, this.defaultForceColor[i]);
+        this.defaultExperimentalMarkerColor = colorAsVec3;
+        Set<OpenSimObject> expermintalDataObjects = mapComponentToUUID.keySet();
+        for (OpenSimObject expObj : expermintalDataObjects){
+            // Find first ExperimentalMarker and change its Material, this will affect all of them
+            if (expObj instanceof MotionObjectPointForce){
+                UUID expObjectUUID = mapComponentToUUID.get(expObj).get(0); 
+                String colorString = JSONUtilities.mapColorToRGBA(getDefaultExperimentalMarkerColor());
+                ViewDB.getInstance().applyColorToObjectByUUID(model, expObjectUUID, colorAsVec3);  
+            }
+        }
+
         
     }
 
@@ -300,79 +367,17 @@ public class MotionDisplayer {
         return defaultForceColorVec3;
     }
     
-    public enum ObjectTypesInMotionFiles{GenCoord, 
-                                         GenCoord_Velocity, 
-                                         GenCoord_Force, 
-                                         State,
-                                         Marker, 
-                                         Segment, 
-                                         Segment_marker_p1, 
-                                         Segment_marker_p2, 
-                                         Segment_marker_p3, 
-                                         Segment_force_p1, 
-                                         Segment_force_p2, 
-                                         Segment_force_p3, 
-                                         Segment_force_p4, 
-                                         Segment_force_p5, 
-                                         Segment_force_p6, 
-                                         Segment_torque_p1, 
-                                         Segment_torque_p2, 
-                                         Segment_torque_p3, 
-                                         UNKNOWN};
-
-    Hashtable<Integer, ObjectTypesInMotionFiles> mapIndicesToObjectTypes=new Hashtable<Integer, ObjectTypesInMotionFiles>(40);
-    Hashtable<Integer, Object> mapIndicesToObjects=new Hashtable<Integer, Object>(40);
-    private OpenSimvtkGlyphCloud  groundForcesRep = null;
-    OpenSimvtkGlyphCloud  bodyForcesRep = null;
-    OpenSimvtkGlyphCloud  generalizedForcesRep = null;
-    private OpenSimvtkGlyphCloud  markersRep = null;
-    private Storage simmMotionData;
-    private Model model;
-    OpenSimContext dContext; 
-    ArrayStr stateNames;
-    private double[] statesBuffer;
-    private boolean renderMuscleActivations=false;
-    double DEFAULT_FACTOR_SCALE_FACTOR=.001;
-    double currentScaleFactor;
-    String DEFAULT_FORCE_SHAPE="arrow";
-    private String currentForceShape;
-    
-    // For columns that start with a body name, this is the map from column index to body reference.
-    // The map is currently used only for body forces and generalized forces.
-    private Hashtable<Integer, Body> mapIndicesToBodies = new Hashtable<Integer, Body>(10);
-    // For generalized forces, this is the map from column index to DOF reference.
-    private Hashtable<Integer, TransformAxis> mapIndicesToDofs = new Hashtable<Integer, TransformAxis>(10);
-    
-    protected Hashtable<ExperimentalDataObject, vtkActor> objectTrails = new Hashtable<ExperimentalDataObject, vtkActor>();
-
-    private ArrayList<MotionDisplayer> associatedMotions = new  ArrayList<MotionDisplayer>();
-    private ArrayStr colNames; // Will cache in labels and construct map to states for quick setting
-    
-    public class ObjectIndexPair {
-       public Object object;
-       public int stateVectorIndex; // Actual (0-based) index into state vector
-       public ObjectIndexPair(Object obj, int idx) { this.object = obj; this.stateVectorIndex = idx; }
-    }
-    // For faster access to gencoords/markers/forces to update in applyFrameToModel
-    ArrayList<ObjectIndexPair> genCoordColumns=null;
-    ArrayList<ObjectIndexPair> genCoordForceColumns=null;
-    ArrayList<ObjectIndexPair> segmentMarkerColumns=null; // state vector index of the first of three (x y z) coordinates for a marker
-    ArrayList<ObjectIndexPair> segmentForceColumns=null; // state vector index of the first of six (px py pz vx vy vz) coordinates for a force vector
-    ArrayList<ObjectIndexPair> anyStateColumns=null; // state vector index of muscle excitations and other generic states
-    ArrayList<String> canonicalStateNames = new ArrayList<String>();
-    ArrayDouble interpolatedStates = null;
-
-    boolean statesFile = false; // special type of file that contains full state vectors
     
     // A local copy of motionObjects so that different motions have different motion objects
     //Hashtable<String, vtkActor> motionObjectInstances =new Hashtable<String, vtkActor>(10);
     
     /** Creates a new instance of MotionDisplayer */
     public MotionDisplayer(Storage motionData, Model model) {
+        this.experimentalForceScaleFactor = .001;
+        this.experimentalMarkerScaleFactor = 1.0;
         this.model = model;
         dContext= OpenSimDB.getInstance().getContext(model);
         simmMotionData = motionData;
-        currentScaleFactor = DEFAULT_FACTOR_SCALE_FACTOR;
         currentForceShape = DEFAULT_FORCE_SHAPE;
         modelVisJson = ViewDB.getInstance().getModelVisualizationJson(model);
         setupMotionDisplay();
@@ -394,7 +399,7 @@ public class MotionDisplayer {
         //    System.out.print(" "+colNames.get(i));
         //System.out.println("");
         interpolatedStates = new ArrayDouble(0.0, numColumnsIncludingTime-1);
-        AddMotionObjectsRep(model);
+        //AddMotionObjectsRep(model);
         if (simmMotionData instanceof AnnotatedMotion){
             // Add place hoders for markers
             AnnotatedMotion mot= (AnnotatedMotion) simmMotionData;
@@ -413,6 +418,11 @@ public class MotionDisplayer {
             // create objects and cache their uuids
             //createTrails(model);
             ViewDB.getInstance().addVisualizerObject(createJsonForMotionObjects());
+            JSONObject modelObjectJson = (JSONObject) modelVisJson.get("object");
+            if (modelObjectJson.get("children") == null) {
+                modelObjectJson.put("children", new JSONArray());
+            }
+            ((JSONArray)modelObjectJson.get("children")).add(motionObjectsRoot);
             return;
         }
         mapIndicesToBodies.clear();
@@ -482,54 +492,6 @@ public class MotionDisplayer {
             nextObject.setGlyphInfo(glyphIndex, markersRep);
         }
         nextObject.setDataObjectUUID(findUUIDForObject(nextObject).get(0));
-    }
-
-    private void AddMotionObjectsRep(final Model model) {
-        if (ViewDB.isVtkGraphicsAvailable()){
-            if (groundForcesRep != null)
-               ViewDB.getInstance().removeUserObjectFromModel(model, groundForcesRep.getVtkActor());
-            if (bodyForcesRep != null)
-               ViewDB.getInstance().removeUserObjectFromModel(model, bodyForcesRep.getVtkActor());
-            if (generalizedForcesRep != null)
-               ViewDB.getInstance().removeUserObjectFromModel(model, generalizedForcesRep.getVtkActor());
-            if (markersRep != null)
-               ViewDB.getInstance().removeUserObjectFromModel(model, markersRep.getVtkActor());
-
-            groundForcesRep = new OpenSimvtkGlyphCloud(true);   groundForcesRep.setName("GRF");
-            bodyForcesRep = new OpenSimvtkGlyphCloud(true);     bodyForcesRep.setName("BodyForce");
-            generalizedForcesRep = new OpenSimvtkGlyphCloud(true); bodyForcesRep.setName("JointForce");
-            markersRep = new OpenSimvtkGlyphCloud(false);   bodyForcesRep.setName("Exp. Markers");
-
-            groundForcesRep.setShapeName(currentForceShape);
-            groundForcesRep.setColor(defaultForceColor);
-            groundForcesRep.setColorRange(defaultForceColor, defaultForceColor);
-            groundForcesRep.setOpacity(0.7);
-            groundForcesRep.setScaleFactor(currentScaleFactor);
-            groundForcesRep.orientByNormalAndScaleByVector();
-
-            bodyForcesRep.setShapeName("arrow");
-            bodyForcesRep.setColor(new double[]{0., 0., 1.0});
-            bodyForcesRep.setOpacity(0.7);
-            bodyForcesRep.setScaleFactor(currentScaleFactor);
-            bodyForcesRep.orientByNormalAndScaleByVector();
-
-            generalizedForcesRep.setShapeName("arrow");
-            generalizedForcesRep.setColor(new double[]{0., 1.0, 1.0});
-            generalizedForcesRep.setOpacity(0.7);
-            generalizedForcesRep.setScaleFactor(currentScaleFactor);
-            generalizedForcesRep.orientByNormalAndScaleByVector();
-
-            markersRep.setShapeName("marker");
-            markersRep.setColor(defaultExperimentalMarkerColor); //Scale , scaleBy
-            markersRep.setColorRange(defaultExperimentalMarkerColor, defaultExperimentalMarkerColor);
-            markersRep.scaleByVectorComponents();
-            markersRep.setScaleFactor(ViewDB.getInstance().getExperimentalMarkerDisplayScale());
-
-            ViewDB.getInstance().addUserObjectToModel(model, groundForcesRep.getVtkActor());
-            ViewDB.getInstance().addUserObjectToModel(model, bodyForcesRep.getVtkActor());
-            ViewDB.getInstance().addUserObjectToModel(model, generalizedForcesRep.getVtkActor());
-            ViewDB.getInstance().addUserObjectToModel(model, markersRep.getVtkActor());
-        }
     }
 
     //interface applyValue
@@ -1046,9 +1008,9 @@ public class MotionDisplayer {
         if (simmMotionData instanceof AnnotatedMotion){
             // Add place hoders for markers
             AnnotatedMotion mot= (AnnotatedMotion) simmMotionData;
-            currentScaleFactor = mot.getDisplayForceScale();
+            setExperimentalMarkerScaleFactor(mot.getDisplayForceScale());
             currentForceShape = mot.getDisplayForceShape();
-            AddMotionObjectsRep(model);
+            //AddMotionObjectsRep(model);
             Vector<ExperimentalDataObject> objects=mot.getClassified();
             mot.setMotionDisplayer(this);
             for(ExperimentalDataObject nextObject:objects){
@@ -1081,7 +1043,7 @@ public class MotionDisplayer {
             experimenalMarkerMaterialJson = new JSONObject();
             UUID uuidForMarkerMaterial = UUID.randomUUID();
             getExperimenalMarkerMaterialJson().put("uuid", uuidForMarkerMaterial.toString());
-            String colorString = JSONUtilities.mapColorToRGBA(defaultMarkerColor);
+            String colorString = JSONUtilities.mapColorToRGBA(getDefaultExperimentalMarkerColor());
             getExperimenalMarkerMaterialJson().put("type", "MeshPhongMaterial");
             getExperimenalMarkerMaterialJson().put("shininess", 30);
             getExperimenalMarkerMaterialJson().put("transparent", true);
@@ -1120,6 +1082,57 @@ public class MotionDisplayer {
 
     public ArrayList<UUID> findUUIDForObject(OpenSimObject obj) {
         return mapComponentToUUID.get(obj);
+    }
+   /**
+     * @return the defaultExperimentalMarkerColor
+     */
+    public Vec3 getDefaultExperimentalMarkerColor() {
+        return defaultExperimentalMarkerColor;
+    }
+
+    /**
+     * @param defaultExperimentalMarkerColor the defaultExperimentalMarkerColor to set
+     */
+    public void setDefaultExperimentalMarkerColor(Color defaultExperimentalMarkerColor) {
+        Vec3 colorAsVec3 = new Vec3();
+        float[] colorComp = defaultExperimentalMarkerColor.getRGBColorComponents(null);
+        for (int i =0; i <3; i++) 
+            colorAsVec3.set(i, colorComp[i]);
+        this.defaultExperimentalMarkerColor = colorAsVec3;
+        Set<OpenSimObject> expermintalDataObjects = mapComponentToUUID.keySet();
+        for (OpenSimObject expObj : expermintalDataObjects){
+            // Find first ExperimentalMarker and change its Material, this will affect all of them
+            if (expObj instanceof ExperimentalMarker){
+                UUID expMarkerUUID = mapComponentToUUID.get(expObj).get(0); 
+                String colorString = JSONUtilities.mapColorToRGBA(getDefaultExperimentalMarkerColor());
+                experimenalMarkerMaterialJson.put("color", colorString);
+                ViewDB.getInstance().applyColorToObjectByUUID(model, expMarkerUUID, colorAsVec3);  
+                break;
+            }
+        }
+        
+    }
+
+    /**
+     * @return the experimentalMarkerScaleFactor
+     */
+    public double getExperimentalMarkerScaleFactor() {
+        return experimentalMarkerScaleFactor;
+    }
+
+    /**
+     * @param experimentalMarkerScaleFactor the experimentalMarkerScaleFactor to set
+     */
+    public void setExperimentalMarkerScaleFactor(double experimentalMarkerScaleFactor) {
+        this.experimentalMarkerScaleFactor = experimentalMarkerScaleFactor;
+        Set<OpenSimObject> expermintalDataObjects = mapComponentToUUID.keySet();
+        for (OpenSimObject expObj : expermintalDataObjects){
+            // Find first ExperimentalMarker and change its Material, this will affect all of them
+            if (expObj instanceof ExperimentalMarker){
+                UUID expMarkerUUID = mapComponentToUUID.get(expObj).get(0); 
+                ViewDB.getInstance().applyScaleToObjectByUUID(model, expMarkerUUID, experimentalMarkerScaleFactor);  
+            }
+        }
     }
 
 }

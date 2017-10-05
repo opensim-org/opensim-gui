@@ -1,28 +1,26 @@
-/*
- * Copyright (c)  2005-2008, Stanford University
- * Use of the OpenSim software in source form is permitted provided that the following
- * conditions are met:
- * 	1. The software is used only for non-commercial research and education. It may not
- *     be used in relation to any commercial activity.
- * 	2. The software is not distributed or redistributed.  Software distribution is allowed 
- *     only through https://simtk.org/home/opensim.
- * 	3. Use of the OpenSim software or derivatives must be acknowledged in all publications,
- *      presentations, or documents describing work in which OpenSim or derivatives are used.
- * 	4. Credits to developers may not be removed from executables
- *     created from modifications of the source.
- * 	5. Modifications of source code must retain the above copyright notice, this list of
- *     conditions and the following disclaimer. 
- * 
- *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- *  EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- *  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- *  SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
- *  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
- *  TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
- *  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- *  OR BUSINESS INTERRUPTION) OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
- *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+/* -------------------------------------------------------------------------- *
+ * OpenSim: MotionControlJPanel.java                                          *
+ * -------------------------------------------------------------------------- *
+ * OpenSim is a toolkit for musculoskeletal modeling and simulation,          *
+ * developed as an open source project by a worldwide community. Development  *
+ * and support is coordinated from Stanford University, with funding from the *
+ * U.S. NIH and DARPA. See http://opensim.stanford.edu and the README file    *
+ * for more information including specific grant numbers.                     *
+ *                                                                            *
+ * Copyright (c) 2005-2017 Stanford University and the Authors                *
+ * Author(s): Ayman Habib, Christopher Dembia                                 *
+ *                                                                            *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may    *
+ * not use this file except in compliance with the License. You may obtain a  *
+ * copy of the License at http://www.apache.org/licenses/LICENSE-2.0          *
+ *                                                                            *
+ * Unless required by applicable law or agreed to in writing, software        *
+ * distributed under the License is distributed on an "AS IS" BASIS,          *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.   *
+ * See the License for the specific language governing permissions and        *
+ * limitations under the License.                                             *
+ * -------------------------------------------------------------------------- */
+
 /*
  * MotionControlJPanel.java
  *
@@ -113,6 +111,8 @@ public class MotionControlJPanel extends javax.swing.JToolBar
             //animationTimer.stop();
             //animationTimer=null;
             jStopButtonActionPerformed(evt);
+            ViewDB.getInstance().endAnimation();
+            
          } else {
             /*
             double ms=1e-6*(System.nanoTime()-currentTimeNano);
@@ -381,8 +381,8 @@ public class MotionControlJPanel extends javax.swing.JToolBar
             }
         });
 
-        jStartTimeTextField.setBackground(new java.awt.Color(224, 223, 227));
         jStartTimeTextField.setEditable(false);
+        jStartTimeTextField.setBackground(new java.awt.Color(224, 223, 227));
         jStartTimeTextField.setText("0");
         jStartTimeTextField.setToolTipText("Initial time");
         jStartTimeTextField.setAutoscrolls(false);
@@ -393,8 +393,8 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         jStartTimeTextField.setOpaque(false);
         jStartTimeTextField.setPreferredSize(new java.awt.Dimension(50, 16));
 
-        jEndTimeTextField.setBackground(new java.awt.Color(224, 223, 227));
         jEndTimeTextField.setEditable(false);
+        jEndTimeTextField.setBackground(new java.awt.Color(224, 223, 227));
         jEndTimeTextField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         jEndTimeTextField.setText("100");
         jEndTimeTextField.setToolTipText("Final time");
@@ -457,17 +457,22 @@ public class MotionControlJPanel extends javax.swing.JToolBar
                             .add(org.jdesktop.layout.GroupLayout.LEADING, jMotionSlider, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .add(0, 0, 0)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                .add(jLabelForSpeedSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(jSpeedSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(jStartTimeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                            .add(jEndTimeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jPlaybackButtonsPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 16, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                            .add(jStartTimeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jEndTimeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                     .add(layout.createSequentialGroup()
                         .addContainerGap()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(jLabel1)
-                            .add(jMotionNameLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                            .add(jMotionNameLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                    .add(layout.createSequentialGroup()
+                        .add(22, 22, 22)
+                        .add(jSpeedSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(layout.createSequentialGroup()
+                        .add(23, 23, 23)
+                        .add(jLabelForSpeedSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(layout.createSequentialGroup()
+                        .add(22, 22, 22)
+                        .add(jPlaybackButtonsPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 16, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -571,6 +576,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
               // reset motion if at end already
               getMasterMotion().setTime(getMasterMotion().getStartTime());
           }
+          ViewDB.getInstance().startAnimation();
           animationTimer = new Timer(timerRate, new RealTimePlayActionListener(1));
           animationTimer.start();
           // correct selected modes
@@ -682,11 +688,11 @@ public class MotionControlJPanel extends javax.swing.JToolBar
                getMasterMotion().add(mdb.getCurrentMotion(i));
                ModelMotionPair currentModelMotionPair = mdb.getCurrentMotion(i);
                Storage mot = currentModelMotionPair.motion;
-               /* MotionsDB.getInstance().getDisplayerForMotion(mot).setupMotionDisplay();
+               MotionsDB.getInstance().getDisplayerForMotion(mot).setupMotionDisplay();
                ArrayList<MotionDisplayer> associatedDisplayers = getMasterMotion().getDisplayer(0).getAssociatedMotions();
                // Find associated motions as well and re-associate them
                for (int j=0; j<associatedDisplayers.size(); j++)
-                   associatedDisplayers.get(j).setupMotionDisplay(); */
+                   associatedDisplayers.get(j).setupMotionDisplay();
             }
             getMasterMotion().setTime(currentTime);
             

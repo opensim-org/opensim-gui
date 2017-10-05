@@ -1,3 +1,25 @@
+/* -------------------------------------------------------------------------- *
+ * OpenSim: NewMarkerAction.java                                              *
+ * -------------------------------------------------------------------------- *
+ * OpenSim is a toolkit for musculoskeletal modeling and simulation,          *
+ * developed as an open source project by a worldwide community. Development  *
+ * and support is coordinated from Stanford University, with funding from the *
+ * U.S. NIH and DARPA. See http://opensim.stanford.edu and the README file    *
+ * for more information including specific grant numbers.                     *
+ *                                                                            *
+ * Copyright (c) 2005-2017 Stanford University and the Authors                *
+ * Author(s): Ayman Habib                                                     *
+ *                                                                            *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may    *
+ * not use this file except in compliance with the License. You may obtain a  *
+ * copy of the License at http://www.apache.org/licenses/LICENSE-2.0          *
+ *                                                                            *
+ * Unless required by applicable law or agreed to in writing, software        *
+ * distributed under the License is distributed on an "AS IS" BASIS,          *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.   *
+ * See the License for the specific language governing permissions and        *
+ * limitations under the License.                                             *
+ * -------------------------------------------------------------------------- */
 /*
  * NewMarkerAction.java
  *
@@ -71,23 +93,24 @@ public class NewMarkerAction extends AbstractAction {
        } catch (IOException ex) {
            Exceptions.printStackTrace(ex);
        }
-        addMarker(newMarker, true);
+        Vector<OpenSimObject> markers = new  Vector<OpenSimObject>();
+        markers.add(newMarker);
+        addMarkers(markers, true);
     }
 
-    public void addMarker(final Marker marker, boolean supportUndo) {
+    public void addMarkers(final Vector<OpenSimObject> markers, boolean supportUndo) {
 
         // This block of code should stay in sync with 
         // TestEditMarkers.java in opensim-core
+        final Marker marker = Marker.safeDownCast(markers.get(0));
         final String saveMarkerName = marker.getName();
         final String saveBodyName = marker.getParentFrameName();
         final Vec3 saveMarkerOffset = marker.get_location();
         final Model model = marker.getModel();
          // Update the marker name list in the ViewDB.
-         OpenSimDB.getInstance().getModelGuiElements(model).updateMarkerNames();
+        OpenSimDB.getInstance().getModelGuiElements(model).updateMarkerNames();
 
-        Vector<OpenSimObject> objs = new Vector<OpenSimObject>(1);
-        objs.add(marker);
-        ObjectsAddedEvent evnt = new ObjectsAddedEvent(this, model, objs);
+        ObjectsAddedEvent evnt = new ObjectsAddedEvent(this, model, markers);
         OpenSimDB.getInstance().setChanged();
         OpenSimDB.getInstance().notifyObservers(evnt);
         // undo support
@@ -97,7 +120,9 @@ public class NewMarkerAction extends AbstractAction {
                 public void undo() throws CannotUndoException {
                     super.undo();
                     Marker toDelete = model.getMarkerSet().get(saveMarkerName);
-                    OneMarkerDeleteAction.deleteMarker(toDelete, false);
+                    Vector<OpenSimObject> markers = new Vector<OpenSimObject>();
+                    markers.add(toDelete);
+                    OneMarkerDeleteAction.deleteMarkers(markers, false);
                 }
 
                 public void redo() throws CannotRedoException {
@@ -107,7 +132,9 @@ public class NewMarkerAction extends AbstractAction {
                     newMarker.set_location(saveMarkerOffset);
                     Component physFrame = model.getComponent(saveBodyName);
                     newMarker.setParentFrame(PhysicalFrame.safeDownCast(physFrame));
-                    addMarker(newMarker, true);
+                    Vector<OpenSimObject> markers = new  Vector<OpenSimObject>();
+                    markers.add(newMarker);
+                    addMarkers(markers, true);
                 }
                 @Override
                 public String getRedoPresentationName() {

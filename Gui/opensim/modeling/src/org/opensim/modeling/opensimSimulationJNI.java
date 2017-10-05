@@ -4874,7 +4874,6 @@ public class opensimSimulationJNI {
   public final static native long Model_getConstraintSet(long jarg1, Model jarg1_);
   public final static native long Model_updMarkerSet(long jarg1, Model jarg1_);
   public final static native long Model_getMarkerSet(long jarg1, Model jarg1_);
-  public final static native int Model_replaceMarkerSet(long jarg1, Model jarg1_, long jarg2, State jarg2_, long jarg3, MarkerSet jarg3_);
   public final static native void Model_writeMarkerFile(long jarg1, Model jarg1_, String jarg2);
   public final static native void Model_updateMarkerSet(long jarg1, Model jarg1_, long jarg2, MarkerSet jarg2_);
   public final static native int Model_deleteUnusedMarkers(long jarg1, Model jarg1_, long jarg2, ArrayStr jarg2_);
@@ -6322,10 +6321,11 @@ public class opensimSimulationJNI {
   public final static native void delete_StatesTrajectory_StatesStorageIsInDegrees(long jarg1);
   public final static native long new_StatesTrajectory_VaryingNumberOfStatesPerRow(String jarg1, long jarg2, String jarg3, int jarg4, int jarg5);
   public final static native void delete_StatesTrajectory_VaryingNumberOfStatesPerRow(long jarg1);
-  public final static native long StatesTrajectory_createFromStatesStorage__SWIG_0(long jarg1, Model jarg1_, long jarg2, Storage jarg2_, boolean jarg3, boolean jarg4);
-  public final static native long StatesTrajectory_createFromStatesStorage__SWIG_1(long jarg1, Model jarg1_, long jarg2, Storage jarg2_, boolean jarg3);
-  public final static native long StatesTrajectory_createFromStatesStorage__SWIG_2(long jarg1, Model jarg1_, long jarg2, Storage jarg2_);
-  public final static native long StatesTrajectory_createFromStatesStorage__SWIG_3(long jarg1, Model jarg1_, String jarg2);
+  public final static native long StatesTrajectory_createFromStatesStorage__SWIG_0(long jarg1, Model jarg1_, long jarg2, Storage jarg2_, boolean jarg3, boolean jarg4, boolean jarg5);
+  public final static native long StatesTrajectory_createFromStatesStorage__SWIG_1(long jarg1, Model jarg1_, long jarg2, Storage jarg2_, boolean jarg3, boolean jarg4);
+  public final static native long StatesTrajectory_createFromStatesStorage__SWIG_2(long jarg1, Model jarg1_, long jarg2, Storage jarg2_, boolean jarg3);
+  public final static native long StatesTrajectory_createFromStatesStorage__SWIG_3(long jarg1, Model jarg1_, long jarg2, Storage jarg2_);
+  public final static native long StatesTrajectory_createFromStatesStorage__SWIG_4(long jarg1, Model jarg1_, String jarg2);
   public final static native void delete_StatesTrajectory(long jarg1);
   public final static native long new_IteratorRangeStatesTrajectoryIterator__SWIG_0(long jarg1, long jarg2);
   public final static native long new_IteratorRangeStatesTrajectoryIterator__SWIG_1(long jarg1);

@@ -1,6 +1,6 @@
 The OpenSim GUI is an application for musculoskeletal modeling and simulation. It is supported by Simbios, the NIH National Center for Physics-Based Simulation of Biological Structures at Stanford, funded under the NIH Roadmap for Medical Research, grant U54 GM072970. It is additionally supported by the National Center for Simulation in Rehabilitation Research (NCSRR), a National Center for Medical Rehabilitation Research supported by research infrastructure grant R24 HD065690 from the National Institute of Child Health & Human Development and the National Institute of Biomedical Imaging and Bioengineering, and DARPA through the Warrior Web Program.
 
-Portions copyright (c) 2005-2016 Stanford University and the Authors
+Portions copyright (c) 2005-2017 Stanford University and the Authors
 
 Use of the OpenSim GUI software in binary form is permitted provided that the following conditions are met. (1) The software is not distributed or redistributed. Software distribution is allowed only through https://simtk.org/home/opensim. (2) Use of the OpenSim GUI software must be acknowledged in all publications, presentations, or documents describing work in which the OpenSim GUI software is used by citing the following work:
 

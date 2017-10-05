@@ -1,30 +1,29 @@
+/* -------------------------------------------------------------------------- *
+ * OpenSim: ViewDB.java                                                       *
+ * -------------------------------------------------------------------------- *
+ * OpenSim is a toolkit for musculoskeletal modeling and simulation,          *
+ * developed as an open source project by a worldwide community. Development  *
+ * and support is coordinated from Stanford University, with funding from the *
+ * U.S. NIH and DARPA. See http://opensim.stanford.edu and the README file    *
+ * for more information including specific grant numbers.                     *
+ *                                                                            *
+ * Copyright (c) 2005-2017 Stanford University and the Authors                *
+ * Author(s): Ayman Habib, Paul Mitiguy                                       *
+ *                                                                            *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may    *
+ * not use this file except in compliance with the License. You may obtain a  *
+ * copy of the License at http://www.apache.org/licenses/LICENSE-2.0          *
+ *                                                                            *
+ * Unless required by applicable law or agreed to in writing, software        *
+ * distributed under the License is distributed on an "AS IS" BASIS,          *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.   *
+ * See the License for the specific language governing permissions and        *
+ * limitations under the License.                                             *
+ * -------------------------------------------------------------------------- */
 /*
  *
  * ViewDB
  * Author(s): Ayman Habib
- * Copyright (c)  2005-2006, Stanford University, Ayman Habib
-* Use of the OpenSim software in source form is permitted provided that the following
-* conditions are met:
-* 	1. The software is used only for non-commercial research and education. It may not
-*     be used in relation to any commercial activity.
-* 	2. The software is not distributed or redistributed.  Software distribution is allowed 
-*     only through https://simtk.org/home/opensim.
-* 	3. Use of the OpenSim software or derivatives must be acknowledged in all publications,
-*      presentations, or documents describing work in which OpenSim or derivatives are used.
-* 	4. Credits to developers may not be removed from executables
-*     created from modifications of the source.
-* 	5. Modifications of source code must retain the above copyright notice, this list of
-*     conditions and the following disclaimer. 
-* 
-*  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
-*  EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-*  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
-*  SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-*  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
-*  TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
-*  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-*  OR BUSINESS INTERRUPTION) OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
-*  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package org.opensim.view.pub;
 
@@ -42,6 +41,7 @@ import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
+import java.util.UUID;
 import java.util.Vector;
 import java.util.prefs.Preferences;
 import javax.swing.SwingUtilities;
@@ -60,6 +60,7 @@ import org.openide.util.LookupListener;
 import org.openide.util.NbBundle;
 import org.openide.util.lookup.AbstractLookup;
 import org.openide.util.lookup.InstanceContent;
+import org.opensim.logger.OpenSimLogger;
 import org.opensim.modeling.*;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.swingui.SwingWorker;
@@ -115,6 +116,19 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     * as a message to visualizer.
    */
    private static boolean applyAppearanceChange = false;
+
+    public void endAnimation() {
+        JSONObject msg = new JSONObject();
+        msg.put("Op", "endAnimation");
+        websocketdb.broadcastMessageJson(msg, null);
+        
+    }
+
+    public void startAnimation() {
+        JSONObject msg = new JSONObject();
+        msg.put("Op", "startAnimation");
+        websocketdb.broadcastMessageJson(msg, null);
+    }
    
    class AppearanceChange {
        Model model;
@@ -208,6 +222,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    private ViewDB() {
         applyPreferences();
         r = myLookup.lookupResult(OpenSimObject.class);
+        websocketdb = WebSocketDB.getInstance();
         jsondb = JSONUtilities.createTopLevelJson();
      }
 
@@ -224,9 +239,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     * Enforce a singleton pattern
     */
    public static ViewDB getInstance() {
-      if( instance==null ) instance = new ViewDB();
-      websocketdb = WebSocketDB.getInstance();
-      websocketdb.setObserver(instance);
+      if( instance==null ) {
+          instance = new ViewDB();
+          websocketdb.setObserver(instance);
+      }
       return instance;
    }
    
@@ -1713,7 +1729,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
 
     private void sync(VisWebSocket visWebSocket) {
-        //System.out.println("invoke ViewDB.sync");
+        if (debugLevel >1)
+            System.out.println("invoke ViewDB.sync");
         ViewDB.getInstance().exportAllModelsToJson(visWebSocket);
     }
     // Method is synchronized to avoid concurrent creation of Json from ViewDB.update and socket
@@ -2159,9 +2176,32 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             websocketdb.broadcastMessageJson(vis.createTranslateObjectCommand(marker, marker.get_location()), null);
         }
     }
+    
+    public void applyColorToObjectByUUID(Model model, UUID objectUUID, Vec3 newColor) {
+        if (websocketdb!=null){
+            ModelVisualizationJson vis = ViewDB.getInstance().getModelVisualizationJson(model);
+            websocketdb.broadcastMessageJson(vis.createSetMaterialColorCommand(objectUUID, newColor), null);
+        }        
+    }
+    
+    public void applyScaleToObjectByUUID(Model model, UUID objectUUID, double newScale) {
+        if (websocketdb!=null){
+            ModelVisualizationJson vis = ViewDB.getInstance().getModelVisualizationJson(model);
+            websocketdb.broadcastMessageJson(vis.createScaleObjectCommand(objectUUID, newScale), null);
+        }        
+        
+    }
     // Callback, invoked when a command is received from visualizer
     // this operates only on currentJson
     private void handleJson(JSONObject jsonObject) {
+       if (jsonObject.get("type") != null){
+           if (((String)jsonObject.get("type")).equalsIgnoreCase("info")){
+               String msg = "Rendered "+jsonObject.get("numFrames")+" frames in "+jsonObject.get("totalTime")+" ms.";
+               double rendertimeAverage = ((Double) jsonObject.get("totalTime"))/((Long)jsonObject.get("numFrames"));
+               OpenSimLogger.logMessage(msg + "FPS: "+(int)1000/rendertimeAverage+"\n", OpenSimLogger.INFO);
+               return;
+           }
+       }
        Object uuid = jsonObject.get("uuid");
        String uuidString = (String) uuid;
        if (uuidString.length()==0) return;

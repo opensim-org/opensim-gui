@@ -1,28 +1,26 @@
-/*
- * Copyright (c)  2005-2008, Stanford University
- * Use of the OpenSim software in source form is permitted provided that the following
- * conditions are met:
- * 	1. The software is used only for non-commercial research and education. It may not
- *     be used in relation to any commercial activity.
- * 	2. The software is not distributed or redistributed.  Software distribution is allowed 
- *     only through https://simtk.org/home/opensim.
- * 	3. Use of the OpenSim software or derivatives must be acknowledged in all publications,
- *      presentations, or documents describing work in which OpenSim or derivatives are used.
- * 	4. Credits to developers may not be removed from executables
- *     created from modifications of the source.
- * 	5. Modifications of source code must retain the above copyright notice, this list of
- *     conditions and the following disclaimer. 
- * 
- *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- *  EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- *  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- *  SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
- *  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
- *  TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
- *  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- *  OR BUSINESS INTERRUPTION) OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
- *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+/* -------------------------------------------------------------------------- *
+ * OpenSim: OneMarkerDeleteAction.java                                        *
+ * -------------------------------------------------------------------------- *
+ * OpenSim is a toolkit for musculoskeletal modeling and simulation,          *
+ * developed as an open source project by a worldwide community. Development  *
+ * and support is coordinated from Stanford University, with funding from the *
+ * U.S. NIH and DARPA. See http://opensim.stanford.edu and the README file    *
+ * for more information including specific grant numbers.                     *
+ *                                                                            *
+ * Copyright (c) 2005-2017 Stanford University and the Authors                *
+ * Author(s): Ayman Habib                                                     *
+ *                                                                            *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may    *
+ * not use this file except in compliance with the License. You may obtain a  *
+ * copy of the License at http://www.apache.org/licenses/LICENSE-2.0          *
+ *                                                                            *
+ * Unless required by applicable law or agreed to in writing, software        *
+ * distributed under the License is distributed on an "AS IS" BASIS,          *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.   *
+ * See the License for the specific language governing permissions and        *
+ * limitations under the License.                                             *
+ * -------------------------------------------------------------------------- */
+
 package org.opensim.view.markerEditor;
 
 import java.io.IOException;
@@ -76,27 +74,27 @@ public final class OneMarkerDeleteAction extends CallableSystemAction {
     public void performAction() {
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         // If any selected object is hidden (or any selected group is mixed), return false.
+        Vector<OpenSimObject> markers = new Vector<OpenSimObject>();
         for (int i = 0; i < selected.length; i++) {
             OneMarkerNode objectNode = (OneMarkerNode) selected[i];
             Marker marker = Marker.safeDownCast(objectNode.getOpenSimObject());
-            deleteMarker(marker, true);
+            markers.add(marker);
         }
+        deleteMarkers(markers, markers.size()==1);
+
     }
-    static public void deleteMarker(final Marker marker, boolean supportUndo) {
+    static public void deleteMarkers(final Vector<OpenSimObject> markers, boolean supportUndo) {
         // This block of code should stay in sync with 
         // TestEditMarkers.java in opensim-core
-        final String saveMarkerName = marker.getName();
-        final String saveBodyName = marker.getParentFrameName();
-        final Vec3 saveMarkerOffset = new Vec3(marker.get_location());
-
         // Remove the marker from the model's marker set.
+        Marker marker = Marker.safeDownCast(markers.get(0));
         final Model model = marker.getModel();
         MarkerSet markerset = model.getMarkerSet();
-        // Will fire event to handle deletion before actual deletion so that object can be queried
-        // Generate an event so everyone can update, including the marker editor.
-        Vector<OpenSimObject> objs = new Vector<OpenSimObject>(1);
-        objs.add(marker);
-        ObjectsDeletedEvent evnt = new ObjectsDeletedEvent(model, model, objs);
+        final String saveMarkerName = marker.getName();
+        final PhysicalFrame saveBody = marker.getParentFrame();
+        final Vec3 saveMarkerOffset = new Vec3(marker.get_location());
+
+        ObjectsDeletedEvent evnt = new ObjectsDeletedEvent(model, model, markers);
         OpenSimDB.getInstance().setChanged();
         OpenSimDB.getInstance().notifyObservers(evnt);
         if (supportUndo) {
@@ -108,8 +106,7 @@ public final class OneMarkerDeleteAction extends CallableSystemAction {
                     Marker newMarker = new Marker();
                     newMarker.setName(saveMarkerName);
                     newMarker.set_location(saveMarkerOffset);
-                    Component physFrame = model.getComponent(saveBodyName);
-                    newMarker.setParentFrame(PhysicalFrame.safeDownCast(physFrame));
+                    newMarker.setParentFrame(saveBody);
                     OpenSimContext context = OpenSimDB.getInstance().getContext(model);
                     context.cacheModelAndState();
                     model.getMarkerSet().adoptAndAppend(newMarker);
@@ -118,13 +115,17 @@ public final class OneMarkerDeleteAction extends CallableSystemAction {
                     } catch (IOException ex) {
                         Exceptions.printStackTrace(ex);
                     }
-                    new NewMarkerAction().addMarker(newMarker, false);
+                    Vector<OpenSimObject> markers = new  Vector<OpenSimObject>();
+                    markers.add(newMarker);
+                    new NewMarkerAction().addMarkers(markers, false);
                 }
 
                 public void redo() throws CannotRedoException {
                     super.redo();
                     Marker toDelete = model.getMarkerSet().get(saveMarkerName);
-                    deleteMarker(toDelete, true);
+                    Vector<OpenSimObject> markers = new Vector<OpenSimObject>();
+                    markers.add(toDelete);
+                    deleteMarkers(markers, true);
                 }
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
@@ -133,7 +134,8 @@ public final class OneMarkerDeleteAction extends CallableSystemAction {
         // recreation of tree traversal/initialization
         OpenSimContext context = OpenSimDB.getInstance().getContext(model);
         context.cacheModelAndState();
-        markerset.remove(marker);
+        for (int i=0; i<markers.size(); i++)
+            markerset.remove(Marker.safeDownCast(markers.get(i)));
         try {
             context.restoreStateFromCachedModel();
         } catch (IOException ex) {

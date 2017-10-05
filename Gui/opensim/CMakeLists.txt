@@ -48,15 +48,25 @@ add_custom_target(CopyVisualizer ALL
 endif()
 
 set(MODELS_REPO "${CMAKE_SOURCE_DIR}/opensim-models" CACHE
-    PATH "The location of the Models repository to copy into installation.")
+    PATH "The location of the Models repository to use for placing models into installation.")
+
+set(MODELS_INSTALL_DIR "${CMAKE_BINARY_DIR}/models_install")
+include(ExternalProject)
+ExternalProject_Add(opensim-models
+    DOWNLOAD_COMMAND ""
+    SOURCE_DIR "${MODELS_REPO}"
+    INSTALL_DIR "${MODELS_INSTALL_DIR}"
+    CONFIGURE_COMMAND ${CMAKE_COMMAND} <SOURCE_DIR> -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>)
+
 
 if (MODELS_REPO AND NOT APPLE)
 add_custom_target(CopyModels ALL
-                  COMMAND ${Ant_EXECUTABLE} copy-models -Dmodels.dir="${MODELS_REPO}"
+                  COMMAND ${Ant_EXECUTABLE} copy-models -Dmodels.dir="${MODELS_INSTALL_DIR}"
                   ${ANT_ARGS}
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Copy models and examples-to installer folder.")
+add_dependencies(CopyModels opensim-models)
 endif()
 
 if (APPLE)
@@ -71,9 +81,10 @@ if (APPLE)
     add_custom_target(PrepareInstaller ALL
                   COMMAND ${Ant_EXECUTABLE} build-mac-installer
                   -Dapi.dir="${OpenSim_ROOT_DIR}"
-                  -Dmodels.dir="${MODELS_REPO}"
+                  -Dmodels.dir="${MODELS_INSTALL_DIR}"
                   ${ANT_ARGS}
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Build OpenSim.app.")
+    add_dependencies(PrepareInstaller opensim-models)
 endif()

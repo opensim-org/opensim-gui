@@ -1,3 +1,25 @@
+/* -------------------------------------------------------------------------- *
+ * OpenSim: ExperimentalForceSetNode.java                                     *
+ * -------------------------------------------------------------------------- *
+ * OpenSim is a toolkit for musculoskeletal modeling and simulation,          *
+ * developed as an open source project by a worldwide community. Development  *
+ * and support is coordinated from Stanford University, with funding from the *
+ * U.S. NIH and DARPA. See http://opensim.stanford.edu and the README file    *
+ * for more information including specific grant numbers.                     *
+ *                                                                            *
+ * Copyright (c) 2005-2017 Stanford University and the Authors                *
+ * Author(s): Ayman Habib                                                     *
+ *                                                                            *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may    *
+ * not use this file except in compliance with the License. You may obtain a  *
+ * copy of the License at http://www.apache.org/licenses/LICENSE-2.0          *
+ *                                                                            *
+ * Unless required by applicable law or agreed to in writing, software        *
+ * distributed under the License is distributed on an "AS IS" BASIS,          *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.   *
+ * See the License for the specific language governing permissions and        *
+ * limitations under the License.                                             *
+ * -------------------------------------------------------------------------- */
 /*
  * ExperimentalForceSetNode.java
  *
@@ -5,29 +27,6 @@
  *
  *
  *
- * Copyright (c)  2009, Stanford University and Ayman Habib. All rights reserved.
- * Use of the OpenSim software in source form is permitted provided that the following
- * conditions are met:
- * 	1. The software is used only for non-commercial research and education. It may not
- *     be used in relation to any commercial activity.
- * 	2. The software is not distributed or redistributed.  Software distribution is allowed
- *     only through https://simtk.org/home/opensim.
- * 	3. Use of the OpenSim software or derivatives must be acknowledged in all publications,
- *      presentations, or documents describing work in which OpenSim or derivatives are used.
- * 	4. Credits to developers may not be removed from executables
- *     created from modifications of the source.
- * 	5. Modifications of source code must retain the above copyright notice, this list of
- *     conditions and the following disclaimer.
- *
- *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- *  EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- *  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- *  SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
- *  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
- *  TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- *  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- *  OR BUSINESS INTERRUPTION) OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
- *  WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package org.opensim.view.experimentaldata;
 
@@ -47,6 +46,7 @@ import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.OpenSimvtkGlyphCloud;
+import org.opensim.view.motions.MotionDisplayer;
 import org.opensim.view.nodes.*;
 import org.opensim.view.pub.ViewDB;
 
@@ -58,7 +58,8 @@ public class ExperimentalForceSetNode extends OpenSimNode {
     private static ResourceBundle bundle = NbBundle.getBundle(ExperimentalForceSetNode.class);
     private static String nodeName;
     AnnotatedMotion dMotion;
-    private OpenSimvtkGlyphCloud forcesDisplayer;
+    private MotionDisplayer motionDisplayer;
+    
     /** Creates a new instance of ExperimentalForceNode */
     public ExperimentalForceSetNode(AnnotatedMotion dMotion) {
         nodeName=bundle.getString("ForceSet_NODE_NAME");
@@ -68,12 +69,8 @@ public class ExperimentalForceSetNode extends OpenSimNode {
         this.dMotion=dMotion;
         //forcesDisplayer = dMotion.getMotionDisplayer().getGroundForcesRep();
         createChildren();
-    }
-
-    private void connectForceDisplayer(AnnotatedMotion dMotion) {
-        if (forcesDisplayer==null){
-            if (dMotion.getMotionDisplayer()!= null)
-                forcesDisplayer = dMotion.getMotionDisplayer().getGroundForcesRep();
+         if (motionDisplayer==null){
+            motionDisplayer = dMotion.getMotionDisplayer();
         }
     }
     
@@ -160,7 +157,7 @@ public class ExperimentalForceSetNode extends OpenSimNode {
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }
-        forcesDisplayer.setColor(color);
+        motionDisplayer.setDefaultForceColor(color);
         ViewDB.repaintAll();
         refreshNode();
     }
@@ -170,9 +167,10 @@ public class ExperimentalForceSetNode extends OpenSimNode {
     
     public Color getColor()
     {
-        if (forcesDisplayer==null)
-            connectForceDisplayer(dMotion);
-        return forcesDisplayer.getColor();
+        if (motionDisplayer==null){
+            motionDisplayer = dMotion.getMotionDisplayer();
+        }
+         return motionDisplayer.getDefaultForceColor();
     }
    
     public void setForceScaleFactorUI(double newFactor) {
@@ -197,16 +195,14 @@ public class ExperimentalForceSetNode extends OpenSimNode {
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }       
-        forcesDisplayer.setScaleFactor(newFactor);
+        ///motionDisplayer.setScaleFactor(newFactor);
         ViewDB.repaintAll();
         refreshNode();
     }
 
     public double getForceScaleFactor()
     {
-        if (forcesDisplayer==null)
-            connectForceDisplayer(dMotion);
-        return forcesDisplayer.getScaleFactor();
+        return 1.0;//forcesDisplayer.getScaleFactor();
     }
 
 }
