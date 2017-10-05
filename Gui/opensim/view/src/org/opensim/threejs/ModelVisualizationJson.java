@@ -1091,5 +1091,22 @@ public class ModelVisualizationJson extends JSONObject {
         guiJson.put("command", commandJson);
         return guiJson;
     }
-    
+    public JSONObject createMoveComponentGeometryToFrame(Component mc, PhysicalFrame newParent) {
+        // make sure attached to right Frame in SceneGraph
+        JSONObject topMsg = new JSONObject();
+        topMsg.put("Op", "execute");
+        JSONObject msgMulti = new JSONObject();
+        topMsg.put("command",msgMulti);
+        msgMulti.put("type", "MultiCmdsCommand");
+        JSONArray commands = new JSONArray();
+        UUID newFrameUUID = mapComponentToUUID.get(newParent).get(0);
+        ArrayList<UUID> uuidList = mapComponentToUUID.get(mc);
+        for (UUID uuid: uuidList){
+            JSONObject commandJson = CommandComposerThreejs.createMoveObjectByUUIDCommandJson(uuid, newFrameUUID);
+            commands.add(commandJson);
+        }
+        msgMulti.put("cmds", commands);
+        return topMsg;
+    }
+   
 }
