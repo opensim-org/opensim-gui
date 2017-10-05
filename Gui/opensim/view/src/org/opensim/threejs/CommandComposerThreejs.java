@@ -153,6 +153,18 @@ public class CommandComposerThreejs {
         commandJson.put("object", dObject);
         return commandJson;
     } 
+    
+    static JSONObject createMoveObjectByUUIDCommandJson(UUID object2Move, UUID parent) {
+        JSONObject commandJson = new JSONObject();
+        commandJson.put("type", "MoveObjectCommand");
+        commandJson.put("parentUuid", parent.toString());
+        JSONObject dObject = new JSONObject();
+        JSONObject dObjectObject = new JSONObject();
+        dObject.put("object", dObjectObject);
+        dObjectObject.put("uuid", object2Move.toString());
+        commandJson.put("object", dObject);
+        return commandJson;
+    } 
 
     static JSONObject createScaleObjectCommand(double newScale, UUID objectUUID) {
         JSONObject commandJson = new JSONObject();
