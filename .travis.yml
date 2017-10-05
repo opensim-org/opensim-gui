@@ -3,6 +3,8 @@ language: java
 # Use container-based infrastructure to allow caching (for ccache).
 sudo: false
 
+# TODO submodules.
+
 # TODO this build of opensim-core does *not* contain bindings
 matrix:
   include:
@@ -25,7 +27,11 @@ before_install:
   - unzip -q $OSIMCOREZIP -d ~
   
 build_script:
+  # Only get certain submodules (TODO when opensim-models is public, get that one too).
+  - git submodule update --init --recursive -- opensim-visualizer Gui/opensim/threejs
+  
   - mkdir ../build && cd ../build
   - cmake ../opensim-gui -DCMAKE_PREFIX_PATH=~/opensim-core
+  # - ant build -Dnbplatform.default.netbeans.dest.dir="/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans" -Dnbplatform.default.harness.dir="/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/harness"
   - make PrepareInstaller
   
