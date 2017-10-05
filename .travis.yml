@@ -1,9 +1,12 @@
 language: java
 
 # Use container-based infrastructure to allow caching (for ccache).
-sudo: false
+sudo: false 
 
-# TODO submodules.
+git:
+  # Travis CI tries to clone submodules for us, but we don't want all
+  # the submodules.
+  submodules: false
 
 # TODO this build of opensim-core does *not* contain bindings
 matrix:
