@@ -18,18 +18,21 @@ find_package(Ant REQUIRED)
 
 add_custom_target(CopyOpenSimCore ALL
                   COMMAND ${Ant_EXECUTABLE} copy-java-bindings -DapiJava.dir="${OpenSim_JAVA_FILES_DIR}"
+                  ${ANT_ARGS}
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Copy opensim-core Java Bindings to GUI.")
 if (WIN32)
     add_custom_target(PrepareInstaller ALL
                   COMMAND ${Ant_EXECUTABLE} copy-installer-files -Dapi.dir="${OpenSim_ROOT_DIR}"
+                  ${ANT_ARGS}
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Merge GUI build and opensim-core install into one folder.")
 
     add_custom_target(CopyJRE ALL
                   COMMAND ${Ant_EXECUTABLE} copy-jre
+                  ${ANT_ARGS}
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Copy default JRE to installer folder.")
@@ -38,6 +41,7 @@ endif()
 if (NOT APPLE)
 add_custom_target(CopyVisualizer ALL
                   COMMAND ${Ant_EXECUTABLE} copy-visualizer
+                  ${ANT_ARGS}
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Copy Visualizer to installer folder.")
@@ -49,6 +53,7 @@ set(MODELS_REPO "${CMAKE_SOURCE_DIR}/opensim-models" CACHE
 if (MODELS_REPO AND NOT APPLE)
 add_custom_target(CopyModels ALL
                   COMMAND ${Ant_EXECUTABLE} copy-models -Dmodels.dir="${MODELS_REPO}"
+                  ${ANT_ARGS}
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Copy models and examples-to installer folder.")
@@ -67,6 +72,7 @@ if (APPLE)
                   COMMAND ${Ant_EXECUTABLE} build-mac-installer
                   -Dapi.dir="${OpenSim_ROOT_DIR}"
                   -Dmodels.dir="${MODELS_REPO}"
+                  ${ANT_ARGS}
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Build OpenSim.app.")
