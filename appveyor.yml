@@ -39,7 +39,7 @@ install:
   - ps: $hashFromFile = Get-FileHash -Algorithm SHA256 -Path .\netbeans-8.2-javase-windows.exe
   - ps: if (($hashFromFile.Hash) -ne ($expectedHash)) { Write-Error "Hash doesn't match." }
   # Install NetBeans
-  - .\netbeans-8.2-javase-windows.exe --silent | Out-Null # This installer is gregaroius.
+  - ps: .\netbeans-8.2-javase-windows.exe --silent | Out-Null # This installer is gregaroius.
 
   ## Apache Ant for building Java projects.
   - choco install ant --yes --limit-output
