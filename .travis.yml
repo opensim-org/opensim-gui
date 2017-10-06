@@ -20,7 +20,7 @@ before_install:
   #brew tap caskroom/versions
   #brew cask search java
   #brew cask install java8
-  - brew cask install netbeans
+  - brew cask install netbeans ant
   
   ## Install opensim-core.
   # The opensim-core travis script uploads the opensim-core binaries to sourceforge.
@@ -29,7 +29,7 @@ before_install:
   # Put opensim-core in ~/opensim-core (-q: quiet).
   - unzip -q $OSIMCOREZIP -d ~
   
-build_script:
+install:
   # Only get certain submodules (TODO when opensim-models is public, get that one too).
   - git submodule update --init --recursive -- opensim-visualizer Gui/opensim/threejs
   
@@ -38,3 +38,5 @@ build_script:
   # - ant build -Dnbplatform.default.netbeans.dest.dir="/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans" -Dnbplatform.default.harness.dir="/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/harness"
   - make PrepareInstaller
   
+script: 
+  - echo "No tests."
