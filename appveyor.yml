@@ -62,6 +62,8 @@ build_script:
   - cmake --build . --target CopyJRE --config Release
   - cmake --build . --target CopyVisualizer --config Release
   # TODO - cmake --build . --target CopyModels --config Release
+  #
+  # TODO edit the .opensim folder name (in opensim.conf)
   
 test_script:
   ## Run tests.
@@ -77,7 +79,9 @@ after_test:
   # Create and upload package.
   - cd %APPVEYOR_BUILD_FOLDER%
   # TODO add version to zip file name.
-  - ps: $version = git describe --always # short commit hash or annotated tag, if one exists.
-  - ps: $version # TODO remove this line.
-  - IF DEFINED DISTR 7z a C:\OpenSim.zip %APPVEYOR_BUILD_FOLDER%\Gui\opensim\dist\installer\opensim\
-  - IF DEFINED DISTR appveyor PushArtifact C:\OpenSim.zip
+  - ps: $env:commitHash = git describe --always # short commit hash or annotated tag, if one exists.
+  - ps: $env:commitHash # TODO remove this line.
+  - ps: $env:commitDate = git show -s --format=%cd --date=short HEAD
+  - ps: $env:VERSION = "$env:commitHash-$env:commitVersion"
+  - IF DEFINED DISTR 7z a C:\OpenSim-%VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Gui\opensim\dist\installer\opensim\
+  - IF DEFINED DISTR appveyor PushArtifact C:\OpenSim-%VERSION%.zip
