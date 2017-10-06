@@ -82,6 +82,7 @@ after_test:
   - ps: $env:commitHash = git describe --always # short commit hash or annotated tag, if one exists.
   - ps: $env:commitHash # TODO remove this line.
   - ps: $env:commitDate = git show -s --format=%cd --date=short HEAD
-  - ps: $env:VERSION = "$env:commitHash-$env:commitVersion"
+  - ps: $env:VERSION = "$env:commitHash"
+  - ps: if (!($env.APPVEYOR_REPO_TAG)) { $env:VERSION = "$env:VERSION-$env:commitDate" }
   - IF DEFINED DISTR 7z a C:\OpenSim-%VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Gui\opensim\dist\installer\opensim\
   - IF DEFINED DISTR appveyor PushArtifact C:\OpenSim-%VERSION%.zip
