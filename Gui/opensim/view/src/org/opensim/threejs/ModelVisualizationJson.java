@@ -110,7 +110,8 @@ public class ModelVisualizationJson extends JSONObject {
     private final HashMap<PathWrapPoint, ArrayList<UUID>> wrapPathPoints = new HashMap<PathWrapPoint, ArrayList<UUID>>();
     // Keep track of which paths have wrapping since they need special handling
     // When wrapping comes in/out
-    private final HashMap<GeometryPath, Boolean> pathsWithWrapping = new HashMap<GeometryPath, Boolean>();
+    private final HashMap<GeometryPath, JSONArray> pathsWithWrapping = new HashMap<GeometryPath, JSONArray>();
+
      // The following inner class and Map are used to cache "computed" pathpoints to speed up 
     // recomputation on the fly
     class ComputedPathPointInfo {
@@ -353,10 +354,7 @@ public class ModelVisualizationJson extends JSONObject {
         msg.put("Op", "Frame");
         JSONArray bodyTransforms_json = new JSONArray();
         msg.put("Transforms", bodyTransforms_json);
-        if (!pathsWithWrapping.isEmpty()){
-            // Update status of Wrappoints accordingly
-            System.out.println("Update wrap points");
-        }
+
         if (ready) { // Avoid trying to send a frame before Json is completely populated
             while (bodyIdIter.hasNext()) {
                 int bodyId = bodyIdIter.next();
@@ -414,7 +412,12 @@ public class ModelVisualizationJson extends JSONObject {
                     bodyTransforms_json.add(pathpointXform_json);
                  } 
             }
-            // Computed points need recomputation
+            if (!pathsWithWrapping.isEmpty()){
+                // Update status of Wrappoints accordingly
+                for (GeometryPath path:pathsWithWrapping.keySet()){
+                    updatePathWithWrapping(path, bodyTransforms_json);
+                }
+            }            // Computed points need recomputation
             PhysicalFrame ground = mapBodyIndicesToFrames.get(0);
             for (UUID computedPointUUID: computedPathPoints.keySet()){
                 ComputedPathPointInfo computedPointInfo = computedPathPoints.get(computedPointUUID);
@@ -451,6 +454,43 @@ public class ModelVisualizationJson extends JSONObject {
             }
         }
         return msg;
+    }
+        
+     private void updatePathWithWrapping(GeometryPath path, JSONArray bodyTransforms) {
+        ArrayPathPoint actualPath =path.getCurrentPath(state);
+        JSONArray pathpointJsonArray = pathsWithWrapping.get(path);
+        int nobjects = path.getWrapSet().getSize();
+        for ( int i=0; i < actualPath.getSize()-1; i++){
+            AbstractPathPoint currentPathPoint = actualPath.get(i);
+            AbstractPathPoint nextPathPoint = actualPath.get(i+1);
+            PathWrapPoint pwp = PathWrapPoint.safeDownCast(nextPathPoint);
+            if (pwp==null){
+                // Make sure the intermediate points between currentPathPoint and next
+                // are updated for nowrap i.e. computed
+            }
+            else { // Update points based on pwp
+                ArrayList<UUID> wrapuuids = wrapPathPoints.get(pwp);
+                // update the pathpoints from pwp
+                 ArrayVec3 pathwrap = pwp.getWrapPath();
+                 int size = pathwrap.getSize();
+                 PhysicalFrame wrapPtsFrame = pwp.getParentFrame();
+                 if  ( size >=2){
+                        int x=0;
+                        int[] indicesToUse = new int[]{0, size-1};
+                        for (int j =0; j < indicesToUse.length; j++){
+                            Vec3 globalLocation = wrapPtsFrame.findStationLocationInAnotherFrame(state, pathwrap.get(indicesToUse[j]), mapBodyIndicesToFrames.get(0));
+                            JSONObject oneBodyXform_json = new JSONObject();
+                            oneBodyXform_json.put("uuid", wrapuuids.get(j).toString());
+                            Transform xform = new Transform();
+                            xform.setP(globalLocation);
+                            oneBodyXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1., 1., 1.), visScaleFactor));
+                            bodyTransforms.add(oneBodyXform_json);
+                        }
+                         // Update computed points before and after
+                    }
+                
+            }
+        }
     }
 
     public JSONObject createSelectionJson(OpenSimObject obj) {
@@ -519,8 +559,6 @@ public class ModelVisualizationJson extends JSONObject {
         JSONArray pathpoint_jsonArr = new JSONArray();
         JSONArray pathpointActive_jsonArr = new JSONArray();
         boolean hasWrapping = (numWrapObjects > 0);
-        if (hasWrapping)
-            pathsWithWrapping.put(path, Boolean.TRUE);
         ArrayPathPoint actualPath = path.getCurrentPath(state);
         int pathPointSetIndex=0;
         for (int i = 0; i < actualPath.getSize(); i++) {
@@ -598,6 +636,8 @@ public class ModelVisualizationJson extends JSONObject {
             mapComponentToUUID.put(pathPoint, comp_uuids);
             mapUUIDToComponent.put(pathpoint_uuid, pathPoint);
         }
+        if (hasWrapping)
+            pathsWithWrapping.put(path, pathpoint_jsonArr);
 
         pathGeomJson.put("segments", pathpoint_jsonArr.size()-1); 
         JSONObject gndJson = mapBodyIndicesToJson.get(0);
@@ -616,7 +656,7 @@ public class ModelVisualizationJson extends JSONObject {
         gndChildren.add(obj_json);
         // Create json entry for material (path_material) and set skinning to true
         obj_json.put("material", mat_uuid.toString());
-        return mesh_uuid;       
+        return mesh_uuid;
     }
 
     private UUID createJsonForPathPoint(PathPoint ppt) {
