@@ -25,7 +25,7 @@ before_install:
   ## Install opensim-core.
   # The opensim-core travis script uploads the opensim-core binaries to sourceforge.
   # TODO RelWithDebInfo -> Release.
-  - OSIMCOREZIP=opensim-core-latest_${TRAVIS_OS_NAME}_RelWithDebInfo.zip
+  - OSIMCOREZIP=opensim-core-latest_${TRAVIS_OS_NAME}_RelWithDebInfo_bindings.zip # TODO
   - wget https://prdownloads.sourceforge.net/myosin/opensim-core/$OSIMCOREZIP
   # Put opensim-core in ~/opensim-core (-q: quiet).
   - unzip -q $OSIMCOREZIP -d ~
