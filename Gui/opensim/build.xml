@@ -95,7 +95,7 @@
             <fileset dir="threejs/examples/js" />
         </copy>
     </target>
-    <target name="build-mac-installer" depends="build-mac,copy-visualizer,copy-models">
+    <target name="build-mac-installer" depends="build-mac,copy-visualizer">
         <property name="lib.dir" value="/Users/aymanhabib/dev/install/opensim-core-install/lib"/>
         <!--<echoproperties/>-->
 
@@ -170,12 +170,12 @@
         </exec>
 
         <!-- Symlinks in the outer OpenSim 4.0 folder.-->
-        <symlink action="single" link="${mac.dist.outer.dir}/Geometry"
+        <!--TODO <symlink action="single" link="${mac.dist.outer.dir}/Geometry"
             resource="${mac.final.app.name}/Contents/Resources/OpenSim/Geometry/"
             overwrite="true"/>
         <symlink action="single" link="${mac.dist.outer.dir}/Models"
             resource="${mac.final.app.name}/Contents/Resources/OpenSim/Models/"
-            overwrite="true"/>
+            overwrite="true"/>-->
         <mkdir dir="${mac.dist.outer.dir}/bin" />
         <symlink action="single" link="${mac.dist.outer.dir}/bin/opensim-cmd"
             resource="../${mac.final.app.name}/Contents/Resources/OpenSim/bin/opensim-cmd"
