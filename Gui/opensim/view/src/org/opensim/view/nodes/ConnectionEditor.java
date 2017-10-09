@@ -72,8 +72,8 @@ public class ConnectionEditor {
     public void handleConnectionChangeCommon() {
         if (Component.safeDownCast(obj)!= null){
             Component mc = Component.safeDownCast(obj);
-            PhysicalFrame physFrame = PhysicalFrame.safeDownCast(model.getComponent(getConnectedToName()));
-            ViewDB.getInstance().getModelVisualizationJson(model).createMoveComponentGeometryToFrame(mc,physFrame);  
+            Boolean isFrame = connector.getConnecteeTypeName().equalsIgnoreCase("PhysicalFrame");
+            ViewDB.getInstance().getModelVisualizationJson(model).updateComponentVisuals(mc, isFrame);  
             ViewDB.repaintAll();
         }
         else 

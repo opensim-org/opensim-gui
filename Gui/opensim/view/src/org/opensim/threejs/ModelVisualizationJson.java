@@ -170,29 +170,33 @@ public class ModelVisualizationJson extends JSONObject {
         dgimp = new DecorativeGeometryImplementationJS(json_geometries, json_materials, visScaleFactor);
         while (!mcIter.equals(mcList.end())) {
             Component comp = mcIter.__deref__();
-            //System.out.println("Processing:"+comp.getAbsolutePathName()+" Type:"+comp.getConcreteClassName());
-            ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
-            comp.generateDecorations(true, mdh, state, adg);
+            processDecorationsForComponent(comp);
+            mcIter.next();
+        }
+    }
+
+    private void processDecorationsForComponent(Component comp) {
+        //System.out.println("Processing:"+comp.getAbsolutePathName()+" Type:"+comp.getConcreteClassName());
+        ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
+        comp.generateDecorations(true, mdh, state, adg);
+        if (adg.size() > 0) {
+            processDecorativeGeometry(adg, comp, dgimp, json_materials);
+        }
+        GeometryPath gPath = GeometryPath.safeDownCast(comp);
+        boolean isGeometryPath = (gPath!=null);
+        if (isGeometryPath){
+            UUID pathUUID = createJsonForGeometryPath(gPath, mdh, json_geometries, json_materials);
+            pathList.put(gPath, pathUUID);
+            // Add to the ID map so that PathOwner translates to GeometryPath
+            Component parentComp = gPath.getOwner();
+            addComponentToUUIDMap(parentComp, pathUUID);
+        }
+        else{
+            adg.clear();
+            comp.generateDecorations(false, mdh, state, adg);
             if (adg.size() > 0) {
                 processDecorativeGeometry(adg, comp, dgimp, json_materials);
             }
-            GeometryPath gPath = GeometryPath.safeDownCast(comp);
-            boolean isGeometryPath = (gPath!=null);
-            if (isGeometryPath){
-                UUID pathUUID = createJsonForGeometryPath(gPath, mdh, json_geometries, json_materials);
-                pathList.put(gPath, pathUUID);
-                // Add to the ID map so that PathOwner translates to GeometryPath
-                Component parentComp = gPath.getOwner();
-                addComponentToUUIDMap(parentComp, pathUUID);
-            }
-            else{
-                adg.clear();
-                comp.generateDecorations(false, mdh, state, adg);
-                 if (adg.size() > 0) {
-                     processDecorativeGeometry(adg, comp, dgimp, json_materials);
-                }
-            }
-            mcIter.next();
         }
     }
 
@@ -1091,22 +1095,21 @@ public class ModelVisualizationJson extends JSONObject {
         guiJson.put("command", commandJson);
         return guiJson;
     }
-    public JSONObject createMoveComponentGeometryToFrame(Component mc, PhysicalFrame newParent) {
+    public void updateComponentVisuals(Component comp, Boolean isFrame) {
         // make sure attached to right Frame in SceneGraph
-        JSONObject topMsg = new JSONObject();
-        topMsg.put("Op", "execute");
-        JSONObject msgMulti = new JSONObject();
-        topMsg.put("command",msgMulti);
-        msgMulti.put("type", "MultiCmdsCommand");
-        JSONArray commands = new JSONArray();
-        UUID newFrameUUID = mapComponentToUUID.get(newParent).get(0);
-        ArrayList<UUID> uuidList = mapComponentToUUID.get(mc);
-        for (UUID uuid: uuidList){
-            JSONObject commandJson = CommandComposerThreejs.createMoveObjectByUUIDCommandJson(uuid, newFrameUUID);
-            commands.add(commandJson);
+        ArrayList<UUID> uuids = mapComponentToUUID.get(comp);
+        // Component has no visible representation, pass
+        if (uuids.size() == 0) {
+            return;
         }
-        msgMulti.put("cmds", commands);
-        return topMsg;
+        // Here we know comp has some visuals, if we have a change in Frame and
+        // we can detect it, then we can move the Geometry to proper Frame
+        // otherwise will have to do the more expensive remove and add to be safe
+        ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
+        comp.generateDecorations(true, mdh, state, adg);
+        if (isFrame && adg.size() > 0) {
+            
+        }
     }
    
 }
