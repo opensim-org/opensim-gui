@@ -87,5 +87,5 @@ if (APPLE)
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Build OpenSim.app.")
-    add_dependencies(PrepareInstaller opensim-models)
+    # TODO add_dependencies(PrepareInstaller opensim-models)
 endif()
