@@ -13,6 +13,10 @@ matrix:
   include:
     - os: osx
       env: DEPLOY=yes
+
+addons:
+  # To avoid an interactive prompt when uploading binaries to sourceforge.
+  ssh_known_hosts: frs.sourceforge.net
       
 before_install:
   - /usr/libexec/java_home -V
