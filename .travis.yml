@@ -42,3 +42,58 @@ install:
   
 script: 
   - echo "No tests."
+
+before_deploy:
+  - cd $TRAVIS_BUILD_DIR/Installer/macOS
+  - sh make_macOS_pkg.sh
+  - export PKGNAME=OpenSim-latest.pkg
+  - mkdir ~/to_deploy
+  - mv OpenSim-4.0.Beta.pkg ~/to_deploy/$PKGNAME
+
+  ## Set up ssh for sourceforge.
+  # Decrypt the private key stored in the repository to the tmp dir.
+  - openssl aes-256-cbc -K $encrypted_383dee84ea16_key -iv $encrypted_383dee84ea16_iv -in $TRAVIS_BUILD_DIR/Installer/.deploy_myosin_sourceforge_rsa.enc -out /tmp/.deploy_myosin_sourceforge_rsa -d
+  # Start the ssh agent.
+  - eval "$(ssh-agent -s)"
+  # Register this private key with this client (the travis machine).
+  - chmod 600 /tmp/deploy_myosin_sourceforge_rsa
+  - ssh-add /tmp/deploy_myosin_sourceforge_rsa
+
+deploy:
+  # Uploads to sourceforge.net/projects/myosin
+  # See https://docs.travis-ci.com/user/deployment/custom/
+  # '--archive' preserves symlinks.
+  provider: script
+  skip_cleanup: true
+  script: rsync --archive --compress --verbose ~/to_deploy/$PKGNAME opensim-bot@frs.sourceforge.net:/home/frs/project/myosin/opensim-gui
+  on:
+    branch: add_travis_script # TODO
+    condition: "$DEPLOY = yes"
+ 
+# Process for securely uploading files to Sourceforge, taken from
+# https://oncletom.io/2016/travis-ssh-deploy/:
+#
+# Contact chrisdembia if you need the login information for opensim-bot at
+# sourceforge, to manage myosin.sourceforge.net.
+#
+# You must install the travis command-line tool: `gem install travis`
+# Locally, from the root of the simbody repository:
+# Create a 4096-bit RSA key with comment, private key 
+# $ ssh-keygen -t rsa -b 4096 -C 'opensim-bot@sourceforge.net opensim-gui' -f Installer/.deploy_myosin_sourceforge_rsa
+# When prompted for a passphrase, just hit enter (twice).
+# Encrypt the private key, add decryption code to .travis.yml. First make a
+# backup copy of .travis.yml.
+# $ travis encrypt-file Installer/.deploy_myosin_sourceforge_rsa --add
+# Manually edit the .travis.yml file to clean up the added lines and restore
+# comments to the file; put the decryption in the before_deploy step.
+# Remove the unencrypted private key. DO NOT commmit the unencrypted private
+# key.
+# $ rm -f Installer/.deploy_myosin_sourceforge_rsa
+# Move the encrypted key to the Installer folder.
+# $ mv .deploy_myosin_sourceforge_rsa.enc Installer/
+# Manually, log into the sourceforge website (user opensim-bot) and add the
+# public key (contents of Installer/.deploy_myosin_sourceforge_rsa.pub) in
+# Account Settings > SSH Settings.
+# Now you can delete the public key file from your local machine.
+# Commit the encrypted private key and the changes to .travis.yml.
+# $ git add .travis.yml Installer/.deploy_myosin_sourceforge_rsa.enc
