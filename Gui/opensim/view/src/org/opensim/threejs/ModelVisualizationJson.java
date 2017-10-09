@@ -1096,20 +1096,45 @@ public class ModelVisualizationJson extends JSONObject {
         return guiJson;
     }
     public void updateComponentVisuals(Component comp, Boolean isFrame) {
-        // make sure attached to right Frame in SceneGraph
-        ArrayList<UUID> uuids = mapComponentToUUID.get(comp);
         // Component has no visible representation, pass
-        if (uuids.size() == 0) {
-            return;
-        }
+        if (!componentHasVisuals(comp)) return;
+        // make sure attached to right Frame in SceneGraph            
         // Here we know comp has some visuals, if we have a change in Frame and
         // we can detect it, then we can move the Geometry to proper Frame
         // otherwise will have to do the more expensive remove and add to be safe
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
         comp.generateDecorations(true, mdh, state, adg);
         if (isFrame && adg.size() > 0) {
-            
+            JSONObject topMsg = new JSONObject();
+            topMsg.put("Op", "execute");
+            JSONObject msgMulti = new JSONObject();
+            topMsg.put("command",msgMulti);
+            msgMulti.put("type", "MultiCmdsCommand");
+            JSONArray commands = new JSONArray();
+            String geomId = comp.getAbsolutePathName();
+            for (int i=0; i < adg.size(); i++){
+                DecorativeGeometry dg = adg.getElt(i);
+                if (adg.size()>1)
+                    geomId = geomId.concat(GEOMETRY_SEP+String.valueOf(dg.getIndexOnBody()));
+                JSONObject bodyJson = mapBodyIndicesToJson.get(dg.getBodyId());
+                String newParentUUIDString = (String) bodyJson.get("uuid");
+                UUID parentUUID = UUID.fromString(newParentUUIDString);
+                UUID geometryUUID = mapDecorativeGeometryToUUID.get(geomId);
+                JSONObject moveOneObject = CommandComposerThreejs.createMoveObjectByUUIDCommandJson(geometryUUID, parentUUID);
+                commands.add(moveOneObject);
+                // May need to update location as well
+                JSONObject translateOneObject = CommandComposerThreejs.createTranslateObjectCommandJson(dg.getTransform().T(), parentUUID);
+                commands.add(translateOneObject);
+            }
+            msgMulti.put("cmds", commands);
+            System.out.println(msgMulti.toJSONString());
         }
     }
    
+    public Boolean componentHasVisuals(Component comp){
+        ArrayList<UUID> uuids = mapComponentToUUID.get(comp);
+        // Component has no visible representation, pass
+        return (uuids.size() > 0);
+
+    }
 }

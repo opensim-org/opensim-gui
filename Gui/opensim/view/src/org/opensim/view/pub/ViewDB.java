@@ -130,6 +130,15 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         msg.put("Op", "startAnimation");
         websocketdb.broadcastMessageJson(msg, null);
     }
+
+    public void updateComponentVisuals(Model model, Component mc, Boolean frame) {
+        if (websocketdb!=null){
+            ModelVisualizationJson modelJson = getModelVisualizationJson(model);
+            if (modelJson.componentHasVisuals(mc)){
+                websocketdb.broadcastMessageJson(modelJson.updateComponentVisuals(mc, frame), null);
+            }
+        }
+    }
    
    class AppearanceChange {
        Model model;
