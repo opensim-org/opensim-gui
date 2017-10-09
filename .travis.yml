@@ -83,7 +83,7 @@ deploy:
 # You must install the travis command-line tool: `gem install travis`
 # Locally, from the root of the simbody repository:
 # Create a 4096-bit RSA key with comment, private key 
-# $ ssh-keygen -t rsa -b 4096 -C 'opensim-bot@sourceforge.net opensim-gui' -f Installer/.deploy_myosin_sourceforge_rsa
+# $ ssh-keygen -t rsa -b 4096 -C 'opensim-bot@sourceforge.net' -f Installer/.deploy_myosin_sourceforge_rsa
 # When prompted for a passphrase, just hit enter (twice).
 # Encrypt the private key, add decryption code to .travis.yml. First make a
 # backup copy of .travis.yml.
