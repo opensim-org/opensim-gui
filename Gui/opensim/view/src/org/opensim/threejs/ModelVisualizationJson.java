@@ -1095,17 +1095,17 @@ public class ModelVisualizationJson extends JSONObject {
         guiJson.put("command", commandJson);
         return guiJson;
     }
-    public void updateComponentVisuals(Component comp, Boolean isFrame) {
-        // Component has no visible representation, pass
-        if (!componentHasVisuals(comp)) return;
+    public JSONObject updateComponentVisuals(Component comp, Boolean isFrame) {
+        // Component has no visible representation, pass, shouldn't be here
+        if (!componentHasVisuals(comp)) return null;
         // make sure attached to right Frame in SceneGraph            
         // Here we know comp has some visuals, if we have a change in Frame and
         // we can detect it, then we can move the Geometry to proper Frame
         // otherwise will have to do the more expensive remove and add to be safe
+        JSONObject topMsg = new JSONObject();
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
         comp.generateDecorations(true, mdh, state, adg);
         if (isFrame && adg.size() > 0) {
-            JSONObject topMsg = new JSONObject();
             topMsg.put("Op", "execute");
             JSONObject msgMulti = new JSONObject();
             topMsg.put("command",msgMulti);
@@ -1127,8 +1127,9 @@ public class ModelVisualizationJson extends JSONObject {
                 commands.add(translateOneObject);
             }
             msgMulti.put("cmds", commands);
-            System.out.println(msgMulti.toJSONString());
+            //System.out.println(msgMulti.toJSONString());
         }
+        return topMsg;
     }
    
     public Boolean componentHasVisuals(Component comp){
