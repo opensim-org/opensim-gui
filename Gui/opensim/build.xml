@@ -69,6 +69,18 @@
                 includes="**/jxbrowser-*linux*.jar"/>
         </delete>
 
+        <copy tofile="${opensim.dist.dir}/LICENSE.txt"
+            file="installer_files/licenses_for_binary_distribution.txt"/>
+        <copy tofile="${opensim.dist.dir}/NOTICE.txt"
+            file="installer_files/notice_for_binary_distribution.txt"/>
+        <mkdir dir="${opensim.dist.dir}/third_party_license_texts"/>
+        <copy todir="${opensim.dist.dir}/third_party_license_texts/"
+            file="jfreechart/lgpl-3.0.txt"/>
+        <copy todir="${opensim.dist.dir}/third_party_license_texts/"
+            file="jfreechart/gpl-3.0.txt"/>
+        <copy todir="${opensim.dist.dir}/third_party_license_texts/"
+            file="visualViewer/src/org/opensim/topologyEditor/cddl.txt"/>
+
     </target>
     <target name="copy-jre" description="Copy JRE to installer">
         <copy todir="${opensim.dist.dir}/jdk/jre">
@@ -147,13 +159,27 @@
             value="${app.version}">
             <replacefilter token="@VERSION@" />
         </replace>
-        <replace file="dist/OpenSim.app/Contents/Resources/OpenSim/etc/OpenSim.conf"
+        <property name="mac.dist.inner.dir"
+            value="dist/OpenSim.app/Contents/Resources/OpenSim" />
+        <replace file="${mac.dist.inner.dir}/etc/OpenSim.conf"
             value="${app.version}">
             <replacefilter token="@VERSION@" />
         </replace>
 
         <copy todir="dist/OpenSim.app/Contents/Resources/"
             file="installer_files/OSX/OpenSimDocument.icns" />
+
+        <copy tofile="${mac.dist.inner.dir}/LICENSE.txt"
+            file="installer_files/licenses_for_binary_distribution.txt"/>
+        <copy tofile="${mac.dist.inner.dir}/NOTICE.txt"
+            file="installer_files/notice_for_binary_distribution.txt"/>
+        <mkdir dir="${mac.dist.inner.dir}/third_party_license_texts"/>
+        <copy todir="${mac.dist.inner.dir}/third_party_license_texts/"
+            file="jfreechart/lgpl-3.0.txt"/>
+        <copy todir="${mac.dist.inner.dir}/third_party_license_texts/"
+            file="jfreechart/gpl-3.0.txt"/>
+        <copy todir="${mac.dist.inner.dir}/third_party_license_texts/"
+            file="visualViewer/src/org/opensim/topologyEditor/cddl.txt"/>
 
         <!-- Create top level folder -->
         <property name="mac.dist.outer.dir" value="dist/OpenSim ${app.version}" />

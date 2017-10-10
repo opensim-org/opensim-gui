@@ -1,0 +1,28 @@
+OpenSim
+Copyright (c) 2005-2017 Stanford University and the Authors
+
+This product bundles JFreeChart and JCommon, which are available under the
+LGPL. The source code for these libraries is available from http://jfree.org.
+The LGPL and GPL license texts are located in the folder
+third_party_license_texts.
+
+This product bundles StringGraphScene.java and OpenSimObjectWidget.java, which
+are available under the CDDL. The source code for these components is available
+from https://github.com/opensim-org/opensim-gui.
+
+This product bundles parts of the NetBeans Platform, which is available under
+the CDDL. The source code for these components is available from
+https://netbeans.org/projects/ide/sources.
+
+This product bundles JxBrowser, which is proprietary
+software. The use of JxBrowser is governed by the JxBrowser Product Licence
+Agreement (http://www.teamdev.com/jxbrowser-licence-agreement). If you would
+like to use JxBrowser in your development, please contact TeamDev.
+
+================================================================================
+Contents of NOTICE from the OpenSim API
+--------------------------------------------------------------------------------
+
+TODO 
+
+================================================================================

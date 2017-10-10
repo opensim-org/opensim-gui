@@ -1,0 +1,9 @@
+OpenSim
+Copyright (c) 2005-2017 Stanford University and the Authors
+
+This product bundles JFreeChart and JCommon, which are available under the
+LGPL. The source code for JFreeChart is in Gui/opensim/jfreechart/src, and the
+source code for JCommon is available from http://www.jfree.org/jcommon/.
+The LGPL and GPL license texts are located in Gui/opensim/jfreechart/.
+
+

@@ -24,24 +24,16 @@ The OpenSim GUI uses the open source **Apache License 2.0** (see LICENSE.txt in
 this directory), making it suitable for commercial, government,
 academic, and personal use.
 
-Software dependencies that are copied into this repository have the following
-licenses:
+Third-party components have their own licenses; see LICENSE.txt, NOTICE.txt, and our
+[Acknowledgements webpage](https://simtk-confluence.stanford.edu/display/OpenSim/Acknowledgements)
+for more information.
 
- - [Jython](http://www.jython.org/) Python Software Foundation License Version 2
- - [JFreeChart](http://www.jfree.org/jfreechart/) LGPL
- - TODO VTK
+The OpenSim GUI's visualizer uses
+[JxBrowser](https://www.teamdev.com/jxbrowser), which is a proprietary
+software. The use of JxBrowser is governed by [JxBrowser Product Licence
+Agreement](http://www.teamdev.com/jxbrowser-licence-agreement). If you would
+like to use JxBrowser in your development, please contact TeamDev.
 
-The following dependencies are not copied into the repository (some are
-incorporated using git submodules):
-
- - [NetBeans Platform](https://netbeans.org) CDDL
- - [JxBrowser](https://www.teamdev.com/jxbrowser) TODO
- - [three.js](https://threejs.org) MIT
- - TODO opensim-visualizer is using template license.
- - TODO OpenSim API
-
-Models and examples distributed with our source code often have their own
-custom licenses. 
 
 Funding
 -------
@@ -55,16 +47,13 @@ contracts:
  - United States Defense Advanced Research Projects Agency (DARPA)
     - Warrior Web (W911QX-12-C-0018)
 
+
 How to acknowledge us
 ---------------------
 Acknowledging the OpenSim project helps us and helps you. It allows us to track
 our impact, which is essential for securing funding to improve the software and
-provide support to our users (you).
-
-If you use the OpenSim GUI, you must acknowledge the OpenSim project where
-appropriate, by citing the following paper. If you only use the OpenSim API, you
-are not required to acknowledge us, but we would be extremely grateful if you
-did so anyway.
+provide support to our users (you). If you use OpenSim, we would be extremely
+grateful if you acknowledge us by citing the following paper.
 
 Delp SL, Anderson FC, Arnold AS, Loan P, Habib A, John CT, Guendelman E, Thelen
 DG. OpenSim: Open-source Software to Create and Analyze Dynamic Simulations of

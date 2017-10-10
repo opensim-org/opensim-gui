@@ -203,18 +203,17 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
                             .add(jLabel9))
                         .add(120, 120, 120)))
                 .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(VMvendorString)
-                        .add(operatingSystemString, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                        .add(versionString, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                        .add(jreString, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                        .add(jHomeDirString))
+                    .add(operatingSystemString, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                    .add(versionString, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                    .add(jreString, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
                     .add(jPanel5Layout.createSequentialGroup()
                         .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(VMvendorString)
+                            .add(jHomeDirString)
                             .add(jLabelOpenSimHomeString)
                             .add(compilerVersionLabel)
                             .add(libraryPathString))
-                        .add(0, 0, Short.MAX_VALUE)))
+                        .add(0, 71, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -303,13 +302,13 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         jScrollPane4.setBorder(null);
         jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
+        jTextArea4.setEditable(false);
         jTextArea4.setBackground(new java.awt.Color(236, 233, 216));
         jTextArea4.setColumns(20);
-        jTextArea4.setEditable(false);
         jTextArea4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jTextArea4.setLineWrap(true);
         jTextArea4.setRows(5);
-        jTextArea4.setText("OpenSim application uses computational components from Simbody (https://simtk.org/home/simbody).\n\nThe application uses VTK (http://www.vtk.org), JFreeChart (http://www.jfree.org)\nand is built on top of NetBeans platform (http://www.netbeans.org).\n");
+        jTextArea4.setText("OpenSim application uses computational components from Simbody (https://simtk.org/home/simbody).\n\nThe application uses VTK (http://www.vtk.org), JFreeChart/JCommon (LGPL; http://www.jfree.org),\nand is built on top of NetBeans platform (CDDL; http://www.netbeans.org).\n\nSee LICENSE.txt and NOTICE.txt for more information:\n  - on Windows: root of installation\n  - on Mac: <.app>/Contents/Resources/OpenSim\n");
         jTextArea4.setWrapStyleWord(true);
         jTextArea4.setMargin(new java.awt.Insets(0, 5, 0, 0));
         jScrollPane4.setViewportView(jTextArea4);
@@ -327,7 +326,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
             jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -348,9 +347,9 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         jScrollPane1.setBorder(null);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
+        jTextArea2.setEditable(false);
         jTextArea2.setBackground(new java.awt.Color(236, 233, 216));
         jTextArea2.setColumns(20);
-        jTextArea2.setEditable(false);
         jTextArea2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jTextArea2.setLineWrap(true);
         jTextArea2.setRows(5);

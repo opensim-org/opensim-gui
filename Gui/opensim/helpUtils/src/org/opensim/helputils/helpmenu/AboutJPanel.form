@@ -140,20 +140,18 @@
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                  <Component id="VMvendorString" min="-2" max="-2" attributes="0"/>
-                                  <Component id="operatingSystemString" pref="190" max="32767" attributes="1"/>
-                                  <Component id="versionString" alignment="0" pref="190" max="32767" attributes="1"/>
-                                  <Component id="jreString" alignment="0" pref="190" max="32767" attributes="1"/>
-                                  <Component id="jHomeDirString" alignment="0" min="-2" max="-2" attributes="1"/>
-                              </Group>
+                              <Component id="operatingSystemString" pref="190" max="32767" attributes="1"/>
+                              <Component id="versionString" alignment="0" pref="190" max="32767" attributes="1"/>
+                              <Component id="jreString" alignment="0" pref="190" max="32767" attributes="1"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="VMvendorString" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jHomeDirString" alignment="0" min="-2" max="-2" attributes="1"/>
                                       <Component id="jLabelOpenSimHomeString" min="-2" max="-2" attributes="0"/>
                                       <Component id="compilerVersionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="libraryPathString" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="71" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -430,7 +428,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane4" pref="113" max="32767" attributes="1"/>
+                          <Component id="jScrollPane4" pref="128" max="32767" attributes="1"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -452,17 +450,17 @@
                   <SubComponents>
                     <Component class="javax.swing.JTextArea" name="jTextArea4">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="d8" green="e9" red="ec" type="rgb"/>
                         </Property>
                         <Property name="columns" type="int" value="20"/>
-                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="11" style="0"/>
                         </Property>
                         <Property name="lineWrap" type="boolean" value="true"/>
                         <Property name="rows" type="int" value="5"/>
-                        <Property name="text" type="java.lang.String" value="OpenSim application uses computational components from Simbody (https://simtk.org/home/simbody).&#xa;&#xa;The application uses VTK (http://www.vtk.org), JFreeChart (http://www.jfree.org)&#xa;and is built on top of NetBeans platform (http://www.netbeans.org).&#xa;"/>
+                        <Property name="text" type="java.lang.String" value="OpenSim application uses computational components from Simbody (https://simtk.org/home/simbody).&#xa;&#xa;The application uses VTK (http://www.vtk.org), JFreeChart/JCommon (LGPL; http://www.jfree.org),&#xa;and is built on top of NetBeans platform (CDDL; http://www.netbeans.org).&#xa;&#xa;See LICENSE.txt and NOTICE.txt for more information:&#xa;  - on Windows: root of installation&#xa;  - on Mac: &lt;.app&gt;/Contents/Resources/OpenSim&#xa;"/>
                         <Property name="wrapStyleWord" type="boolean" value="true"/>
                         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                           <Insets value="[0, 5, 0, 0]"/>
@@ -522,11 +520,11 @@
               <SubComponents>
                 <Component class="javax.swing.JTextArea" name="jTextArea2">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="d8" green="e9" red="ec" type="rgb"/>
                     </Property>
                     <Property name="columns" type="int" value="20"/>
-                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="11" style="0"/>
                     </Property>
