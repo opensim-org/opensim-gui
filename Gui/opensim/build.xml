@@ -70,7 +70,7 @@
         </delete>
 
         <copy tofile="${opensim.dist.dir}/LICENSE.txt"
-            file="installer_files/licenses_for_binary_distribution.txt"/>
+            file="installer_files/license_for_binary_distribution.txt"/>
         <copy tofile="${opensim.dist.dir}/NOTICE.txt"
             file="installer_files/notice_for_binary_distribution.txt"/>
         <mkdir dir="${opensim.dist.dir}/third_party_license_texts"/>
@@ -170,7 +170,7 @@
             file="installer_files/OSX/OpenSimDocument.icns" />
 
         <copy tofile="${mac.dist.inner.dir}/LICENSE.txt"
-            file="installer_files/licenses_for_binary_distribution.txt"/>
+            file="installer_files/license_for_binary_distribution.txt"/>
         <copy tofile="${mac.dist.inner.dir}/NOTICE.txt"
             file="installer_files/notice_for_binary_distribution.txt"/>
         <mkdir dir="${mac.dist.inner.dir}/third_party_license_texts"/>
