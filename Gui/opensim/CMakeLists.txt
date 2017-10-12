@@ -52,12 +52,11 @@ set(MODELS_REPO "${CMAKE_SOURCE_DIR}/opensim-models" CACHE
 
 set(MODELS_INSTALL_DIR "${CMAKE_BINARY_DIR}/models_install")
 include(ExternalProject)
-# TODO waiting for opensim-models to be public.
-#ExternalProject_Add(opensim-models
-#    DOWNLOAD_COMMAND ""
-#    SOURCE_DIR "${MODELS_REPO}"
-#    INSTALL_DIR "${MODELS_INSTALL_DIR}"
-#    CONFIGURE_COMMAND ${CMAKE_COMMAND} <SOURCE_DIR> -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>)
+ExternalProject_Add(opensim-models
+    DOWNLOAD_COMMAND ""
+    SOURCE_DIR "${MODELS_REPO}"
+    INSTALL_DIR "${MODELS_INSTALL_DIR}"
+    CONFIGURE_COMMAND ${CMAKE_COMMAND} <SOURCE_DIR> -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>)
 
 
 if (MODELS_REPO AND NOT APPLE)
@@ -87,5 +86,5 @@ if (APPLE)
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Build OpenSim.app.")
-    # TODO add_dependencies(PrepareInstaller opensim-models)
+    add_dependencies(PrepareInstaller opensim-models)
 endif()
