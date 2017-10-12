@@ -768,7 +768,7 @@ public class ScaleToolModel extends Observable implements Observer {
          scale.setSegmentName(bodySet.get(i).getName());
          scale.setScaleFactors(identityScale);
          scale.setApply(true);
-         scaleSet.adoptAndAppend(Scale.safeDownCast(scale.clone()));
+         scaleSet.cloneAndAppend(scale);
       }
       return scaleSet;
    }
@@ -835,7 +835,7 @@ public class ScaleToolModel extends Observable implements Observer {
    void addMarkerPair(int i) {
       MeasurementSet measurementSet = getMeasurementSet();
       MarkerPair pair = new MarkerPair("Unassigned", "Unassigned");
-      measurementSet.get(i).getMarkerPairSet().insert(0,MarkerPair.safeDownCast(pair.clone()));
+      measurementSet.get(i).getMarkerPairSet().cloneAndAppend(pair); // Make clone, avoid early GC
       // Recompute
       recomputeMeasurement(i);
       // Fire event
@@ -855,7 +855,7 @@ public class ScaleToolModel extends Observable implements Observer {
       MeasurementSet measurementSet = getMeasurementSet();
       Measurement measurement = new Measurement();
       measurement.setName(name);
-      measurementSet.adoptAndAppend(Measurement.safeDownCast(measurement.clone()));
+      scaleTool.getModelScaler().addMeasurement(measurement); // Takes over ownership
       // Update parallel measurementValues array
       measurementValues.add(null);
       // Fire event
