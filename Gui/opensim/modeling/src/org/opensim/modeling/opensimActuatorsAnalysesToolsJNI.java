@@ -856,8 +856,8 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native long new_PointKinematics__SWIG_3(long jarg1, PointKinematics jarg1_);
   public final static native void delete_PointKinematics(long jarg1);
   public final static native void PointKinematics_setBodyPoint(long jarg1, PointKinematics jarg1_, String jarg2, long jarg3, Vec3 jarg3_);
-  public final static native void PointKinematics_setBody(long jarg1, PointKinematics jarg1_, long jarg2, Body jarg2_);
-  public final static native void PointKinematics_setRelativeToBody(long jarg1, PointKinematics jarg1_, long jarg2, Body jarg2_);
+  public final static native void PointKinematics_setBody(long jarg1, PointKinematics jarg1_, long jarg2, PhysicalFrame jarg2_);
+  public final static native void PointKinematics_setRelativeToBody(long jarg1, PointKinematics jarg1_, long jarg2, PhysicalFrame jarg2_);
   public final static native long PointKinematics_getBody(long jarg1, PointKinematics jarg1_);
   public final static native long PointKinematics_getRelativeToBody(long jarg1, PointKinematics jarg1_);
   public final static native void PointKinematics_setPoint(long jarg1, PointKinematics jarg1_, long jarg2, Vec3 jarg2_);

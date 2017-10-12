@@ -127,6 +127,22 @@ public class Rotation extends Mat33 {
     return new Rotation(opensimSimbodyJNI.Rotation_setRotationFromApproximateMat33(swigCPtr, this, Mat33.getCPtr(m), m), false);
   }
 
+  public Rotation(UnitVec3 uvec, CoordinateAxis axis) {
+    this(opensimSimbodyJNI.new_Rotation__SWIG_8(UnitVec3.getCPtr(uvec), uvec, CoordinateAxis.getCPtr(axis), axis), true);
+  }
+
+  public Rotation setRotationFromOneAxis(UnitVec3 uvec, CoordinateAxis axis) {
+    return new Rotation(opensimSimbodyJNI.Rotation_setRotationFromOneAxis(swigCPtr, this, UnitVec3.getCPtr(uvec), uvec, CoordinateAxis.getCPtr(axis), axis), false);
+  }
+
+  public Rotation(UnitVec3 uveci, CoordinateAxis axisi, Vec3 vecjApprox, CoordinateAxis axisjApprox) {
+    this(opensimSimbodyJNI.new_Rotation__SWIG_9(UnitVec3.getCPtr(uveci), uveci, CoordinateAxis.getCPtr(axisi), axisi, Vec3.getCPtr(vecjApprox), vecjApprox, CoordinateAxis.getCPtr(axisjApprox), axisjApprox), true);
+  }
+
+  public Rotation setRotationFromTwoAxes(UnitVec3 uveci, CoordinateAxis axisi, Vec3 vecjApprox, CoordinateAxis axisjApprox) {
+    return new Rotation(opensimSimbodyJNI.Rotation_setRotationFromTwoAxes(swigCPtr, this, UnitVec3.getCPtr(uveci), uveci, CoordinateAxis.getCPtr(axisi), axisi, Vec3.getCPtr(vecjApprox), vecjApprox, CoordinateAxis.getCPtr(axisjApprox), axisjApprox), false);
+  }
+
   public double convertOneAxisRotationToOneAngle(CoordinateAxis axis1) {
     return opensimSimbodyJNI.Rotation_convertOneAxisRotationToOneAngle(swigCPtr, this, CoordinateAxis.getCPtr(axis1), axis1);
   }
@@ -172,7 +188,7 @@ public class Rotation extends Mat33 {
   }
 
   public Rotation(InverseRotation arg0) {
-    this(opensimSimbodyJNI.new_Rotation__SWIG_8(InverseRotation.getCPtr(arg0), arg0), true);
+    this(opensimSimbodyJNI.new_Rotation__SWIG_10(InverseRotation.getCPtr(arg0), arg0), true);
   }
 
   public InverseRotation invert() {

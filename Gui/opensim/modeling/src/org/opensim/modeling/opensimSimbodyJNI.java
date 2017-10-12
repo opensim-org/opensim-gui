@@ -557,6 +557,10 @@ public class opensimSimbodyJNI {
   public final static native long new_Rotation__SWIG_6(long jarg1, Mat33 jarg1_, boolean jarg2);
   public final static native long new_Rotation__SWIG_7(long jarg1, Mat33 jarg1_);
   public final static native long Rotation_setRotationFromApproximateMat33(long jarg1, Rotation jarg1_, long jarg2, Mat33 jarg2_);
+  public final static native long new_Rotation__SWIG_8(long jarg1, UnitVec3 jarg1_, long jarg2, CoordinateAxis jarg2_);
+  public final static native long Rotation_setRotationFromOneAxis(long jarg1, Rotation jarg1_, long jarg2, UnitVec3 jarg2_, long jarg3, CoordinateAxis jarg3_);
+  public final static native long new_Rotation__SWIG_9(long jarg1, UnitVec3 jarg1_, long jarg2, CoordinateAxis jarg2_, long jarg3, Vec3 jarg3_, long jarg4, CoordinateAxis jarg4_);
+  public final static native long Rotation_setRotationFromTwoAxes(long jarg1, Rotation jarg1_, long jarg2, UnitVec3 jarg2_, long jarg3, CoordinateAxis jarg3_, long jarg4, Vec3 jarg4_, long jarg5, CoordinateAxis jarg5_);
   public final static native double Rotation_convertOneAxisRotationToOneAngle(long jarg1, Rotation jarg1_, long jarg2, CoordinateAxis jarg2_);
   public final static native long Rotation_convertTwoAxesRotationToTwoAngles(long jarg1, Rotation jarg1_, int jarg2, long jarg3, CoordinateAxis jarg3_, long jarg4, CoordinateAxis jarg4_);
   public final static native long Rotation_convertThreeAxesRotationToThreeAngles(long jarg1, Rotation jarg1_, int jarg2, long jarg3, CoordinateAxis jarg3_, long jarg4, CoordinateAxis jarg4_, long jarg5, CoordinateAxis jarg5_);
@@ -568,7 +572,7 @@ public class opensimSimbodyJNI {
   public final static native double Rotation_getMaxAbsDifferenceInRotationElements(long jarg1, Rotation jarg1_, long jarg2, Rotation jarg2_);
   public final static native boolean Rotation_areAllRotationElementsSameToEpsilon(long jarg1, Rotation jarg1_, long jarg2, Rotation jarg2_, double jarg3);
   public final static native boolean Rotation_areAllRotationElementsSameToMachinePrecision(long jarg1, Rotation jarg1_, long jarg2, Rotation jarg2_);
-  public final static native long new_Rotation__SWIG_8(long jarg1, InverseRotation jarg1_);
+  public final static native long new_Rotation__SWIG_10(long jarg1, InverseRotation jarg1_);
   public final static native long Rotation_invert(long jarg1, Rotation jarg1_);
   public final static native long Rotation_transpose(long jarg1, Rotation jarg1_);
   public final static native long Rotation_asMat33(long jarg1, Rotation jarg1_);

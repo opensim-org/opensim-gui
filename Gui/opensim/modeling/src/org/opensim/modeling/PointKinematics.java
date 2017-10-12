@@ -85,22 +85,22 @@ public class PointKinematics extends Analysis {
     opensimActuatorsAnalysesToolsJNI.PointKinematics_setBodyPoint(swigCPtr, this, aBody, Vec3.getCPtr(aPoint), aPoint);
   }
 
-  public void setBody(Body aBody) {
-    opensimActuatorsAnalysesToolsJNI.PointKinematics_setBody(swigCPtr, this, Body.getCPtr(aBody), aBody);
+  public void setBody(PhysicalFrame aBody) {
+    opensimActuatorsAnalysesToolsJNI.PointKinematics_setBody(swigCPtr, this, PhysicalFrame.getCPtr(aBody), aBody);
   }
 
-  public void setRelativeToBody(Body aBody) {
-    opensimActuatorsAnalysesToolsJNI.PointKinematics_setRelativeToBody(swigCPtr, this, Body.getCPtr(aBody), aBody);
+  public void setRelativeToBody(PhysicalFrame aBody) {
+    opensimActuatorsAnalysesToolsJNI.PointKinematics_setRelativeToBody(swigCPtr, this, PhysicalFrame.getCPtr(aBody), aBody);
   }
 
-  public Body getBody() {
+  public PhysicalFrame getBody() {
     long cPtr = opensimActuatorsAnalysesToolsJNI.PointKinematics_getBody(swigCPtr, this);
-    return (cPtr == 0) ? null : new Body(cPtr, false);
+    return (cPtr == 0) ? null : new PhysicalFrame(cPtr, false);
   }
 
-  public Body getRelativeToBody() {
+  public PhysicalFrame getRelativeToBody() {
     long cPtr = opensimActuatorsAnalysesToolsJNI.PointKinematics_getRelativeToBody(swigCPtr, this);
-    return (cPtr == 0) ? null : new Body(cPtr, false);
+    return (cPtr == 0) ? null : new PhysicalFrame(cPtr, false);
   }
 
   public void setPoint(Vec3 aPoint) {
