@@ -1111,19 +1111,20 @@ public class ModelVisualizationJson extends JSONObject {
             topMsg.put("command",msgMulti);
             msgMulti.put("type", "MultiCmdsCommand");
             JSONArray commands = new JSONArray();
+            ArrayList<UUID> uuids = mapComponentToUUID.get(comp);
             String geomId = comp.getAbsolutePathName();
-            for (int i=0; i < adg.size(); i++){
+            for (int i=0; i < uuids.size(); i++){
                 DecorativeGeometry dg = adg.getElt(i);
                 if (adg.size()>1)
                     geomId = geomId.concat(GEOMETRY_SEP+String.valueOf(dg.getIndexOnBody()));
                 JSONObject bodyJson = mapBodyIndicesToJson.get(dg.getBodyId());
                 String newParentUUIDString = (String) bodyJson.get("uuid");
                 UUID parentUUID = UUID.fromString(newParentUUIDString);
-                UUID geometryUUID = mapDecorativeGeometryToUUID.get(geomId);
-                JSONObject moveOneObject = CommandComposerThreejs.createMoveObjectByUUIDCommandJson(geometryUUID, parentUUID);
+                //UUID geometryUUID = mapDecorativeGeometryToUUID.get(geomId);
+                JSONObject moveOneObject = CommandComposerThreejs.createMoveObjectByUUIDCommandJson(uuids.get(i), parentUUID);
                 commands.add(moveOneObject);
                 // May need to update location as well
-                JSONObject translateOneObject = CommandComposerThreejs.createTranslateObjectCommandJson(dg.getTransform().T(), parentUUID);
+                JSONObject translateOneObject = CommandComposerThreejs.createTranslateObjectCommandJson(dg.getTransform().T(), uuids.get(i));
                 commands.add(translateOneObject);
             }
             msgMulti.put("cmds", commands);
