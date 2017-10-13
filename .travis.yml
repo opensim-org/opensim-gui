@@ -35,12 +35,11 @@ before_install:
   - unzip -q $OSIMCOREZIP -d ~
   
 install:
-  # Only get certain submodules (TODO when opensim-models is public, get that one too).
-  - git submodule update --init --recursive -- opensim-visualizer Gui/opensim/threejs
+  # Only get certain submodules (not OpenSimAPI).
+  - git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
   
   - mkdir ../build && cd ../build
   - cmake ../opensim-gui -DCMAKE_PREFIX_PATH=~/opensim-core -DAnt_EXECUTABLE="/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/extide/ant/bin/ant" -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans;-Dnbplatform.default.harness.dir=/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/harness"
-  # - ant build -Dnbplatform.default.netbeans.dest.dir="/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans" -Dnbplatform.default.harness.dir="/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/harness"
   - make CopyOpenSimCore
   - make PrepareInstaller
   
