@@ -8,7 +8,6 @@ git:
   # the submodules.
   submodules: false
 
-# TODO this build of opensim-core does *not* contain bindings
 matrix:
   include:
     - os: osx
@@ -28,8 +27,7 @@ before_install:
   
   ## Install opensim-core.
   # The opensim-core travis script uploads the opensim-core binaries to sourceforge.
-  # TODO RelWithDebInfo -> Release.
-  - OSIMCOREZIP=opensim-core-latest_${TRAVIS_OS_NAME}_RelWithDebInfo_bindings.zip # TODO
+  - OSIMCOREZIP=opensim-core-latest_${TRAVIS_OS_NAME}_Release.zip 
   - wget https://prdownloads.sourceforge.net/myosin/opensim-core/$OSIMCOREZIP
   # Put opensim-core in ~/opensim-core (-q: quiet).
   - unzip -q $OSIMCOREZIP -d ~
