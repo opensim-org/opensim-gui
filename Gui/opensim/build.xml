@@ -95,7 +95,7 @@
             <fileset dir="threejs/examples/js" />
         </copy>
     </target>
-    <target name="build-mac-installer" depends="build-mac,copy-visualizer">
+    <target name="build-mac-installer" depends="build-mac,copy-visualizer,copy-models">
         <property name="lib.dir" value="/Users/aymanhabib/dev/install/opensim-core-install/lib"/>
         <!--<echoproperties/>-->
 
