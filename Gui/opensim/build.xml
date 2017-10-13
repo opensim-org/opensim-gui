@@ -170,12 +170,12 @@
         </exec>
 
         <!-- Symlinks in the outer OpenSim 4.0 folder.-->
-        <!--TODO <symlink action="single" link="${mac.dist.outer.dir}/Geometry"
+        <symlink action="single" link="${mac.dist.outer.dir}/Geometry"
             resource="${mac.final.app.name}/Contents/Resources/OpenSim/Geometry/"
             overwrite="true"/>
         <symlink action="single" link="${mac.dist.outer.dir}/Models"
             resource="${mac.final.app.name}/Contents/Resources/OpenSim/Models/"
-            overwrite="true"/>-->
+            overwrite="true"/>
         <mkdir dir="${mac.dist.outer.dir}/bin" />
         <symlink action="single" link="${mac.dist.outer.dir}/bin/opensim-cmd"
             resource="../${mac.final.app.name}/Contents/Resources/OpenSim/bin/opensim-cmd"
