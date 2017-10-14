@@ -218,6 +218,10 @@
         <replace file="dist/scripts/postinstall" value="${app.version}">
             <replacefilter token="@VERSION@" />
         </replace>
+        <!-- Must set the executable bit on postinstall. -->
+        <exec executable="chmod">
+            <arg line="+x dist/scripts/postinstall"/>
+        </exec>
         <exec executable="/usr/bin/python" dir="dist/">
             <arg line="set_folder_icon.py OpenSimFolder.icns 'pkgroot/OpenSim ${app.version}'"/>
         </exec>
