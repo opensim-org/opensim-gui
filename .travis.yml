@@ -80,7 +80,7 @@ deploy:
   skip_cleanup: true
   script: rsync --archive --compress --verbose ~/to_deploy/$PKGNAME opensim-bot@frs.sourceforge.net:/home/frs/project/myosin/opensim-gui
   on:
-    branch: add_travis_script # TODO
+    branch: master
     condition: "$DEPLOY = yes"
  
 # Process for securely uploading files to Sourceforge, taken from
