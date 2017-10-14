@@ -46,7 +46,6 @@ install:
   # If this is not a tag, append commit date.
   - if [ "$TRAVIS_TAG" != "$COMMIT_HASH" ]; then VERSION=$VERSION-$COMMIT_DATE; fi
   # TODO sed has a different interface on Mac than on Linux.
-  - sed -i '' -e "s/4.0.Beta/$VERSION/g" Installer/macOS/scripts/postinstall Installer/macOS/make_macOS_pkg.sh Installer/macOS/Distribution.xml
   - sed -i '' -e "s/app.version=4.0.Beta/app.version=$VERSION/g" Gui/opensim/nbproject/project.properties
 
   # Build.
@@ -59,12 +58,10 @@ script:
   - echo "No tests."
 
 before_deploy:
-  - cd $TRAVIS_BUILD_DIR/Installer/macOS
-  - sh make_macOS_pkg.sh
-  - ls
+  - ls $TRAVIS_BUILD_DIR/Gui/opensim/dist
   - export PKGNAME=OpenSim-latest.pkg
   - mkdir ~/to_deploy
-  - mv OpenSim-$VERSION.pkg ~/to_deploy/$PKGNAME
+  - mv $TRAVIS_BUILD_DIR/Gui/opensim/dist/OpenSim-$VERSION.pkg ~/to_deploy/$PKGNAME
 
   ## Set up ssh for sourceforge.
   # Decrypt the private key stored in the repository to the tmp dir.
