@@ -12,8 +12,8 @@ INSTALLER_USER=$(stat -f '%Su' $HOME)
 # http://s.sudre.free.fr/Stuff/PackageMaker_Howto.html
 # If installed system-wide, the permissions group will be wheel; we need it to
 # be staff.
-USERDIR_SUFFIX=dev4.0.Beta0722D
-THREEJS_EDITOR_DIR="$2/OpenSim 4.0.Beta/OpenSim 4.0.Beta.app/Contents/Resources/OpenSim/threejs/editor"
+USERDIR_SUFFIX=@VERSION@
+THREEJS_EDITOR_DIR="$2/OpenSim @VERSION@/OpenSim @VERSION@.app/Contents/Resources/OpenSim/threejs/editor"
 chown $INSTALLER_USER:staff "$THREEJS_EDITOR_DIR"
 # Allow other users to also use OpenSim.
 chmod g+w "$THREEJS_EDITOR_DIR"

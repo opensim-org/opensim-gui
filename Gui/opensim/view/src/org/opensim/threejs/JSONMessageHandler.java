@@ -40,7 +40,10 @@ import org.opensim.view.pub.ViewDB;
  * @author Ayman
  */
 public class JSONMessageHandler {
+    static Boolean debug = false;
     public static void handleJSON(final Model model, final OpenSimObject opensimObj, final JSONObject jsonObject){
+        if (debug)
+            System.out.println("Received Message "+jsonObject.toString());
         final String eventType = (String) jsonObject.get("event");
         SwingUtilities.invokeLater(new Runnable(){
             @Override
