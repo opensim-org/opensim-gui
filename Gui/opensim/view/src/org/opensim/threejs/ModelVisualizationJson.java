@@ -170,29 +170,33 @@ public class ModelVisualizationJson extends JSONObject {
         dgimp = new DecorativeGeometryImplementationJS(json_geometries, json_materials, visScaleFactor);
         while (!mcIter.equals(mcList.end())) {
             Component comp = mcIter.__deref__();
-            //System.out.println("Processing:"+comp.getAbsolutePathName()+" Type:"+comp.getConcreteClassName());
-            ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
-            comp.generateDecorations(true, mdh, state, adg);
+            processDecorationsForComponent(comp);
+            mcIter.next();
+        }
+    }
+
+    private void processDecorationsForComponent(Component comp) {
+        //System.out.println("Processing:"+comp.getAbsolutePathName()+" Type:"+comp.getConcreteClassName());
+        ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
+        comp.generateDecorations(true, mdh, state, adg);
+        if (adg.size() > 0) {
+            processDecorativeGeometry(adg, comp, dgimp, json_materials);
+        }
+        GeometryPath gPath = GeometryPath.safeDownCast(comp);
+        boolean isGeometryPath = (gPath!=null);
+        if (isGeometryPath){
+            UUID pathUUID = createJsonForGeometryPath(gPath, mdh, json_geometries, json_materials);
+            pathList.put(gPath, pathUUID);
+            // Add to the ID map so that PathOwner translates to GeometryPath
+            Component parentComp = gPath.getOwner();
+            addComponentToUUIDMap(parentComp, pathUUID);
+        }
+        else{
+            adg.clear();
+            comp.generateDecorations(false, mdh, state, adg);
             if (adg.size() > 0) {
                 processDecorativeGeometry(adg, comp, dgimp, json_materials);
             }
-            GeometryPath gPath = GeometryPath.safeDownCast(comp);
-            boolean isGeometryPath = (gPath!=null);
-            if (isGeometryPath){
-                UUID pathUUID = createJsonForGeometryPath(gPath, mdh, json_geometries, json_materials);
-                pathList.put(gPath, pathUUID);
-                // Add to the ID map so that PathOwner translates to GeometryPath
-                Component parentComp = gPath.getOwner();
-                addComponentToUUIDMap(parentComp, pathUUID);
-            }
-            else{
-                adg.clear();
-                comp.generateDecorations(false, mdh, state, adg);
-                 if (adg.size() > 0) {
-                     processDecorativeGeometry(adg, comp, dgimp, json_materials);
-                }
-            }
-            mcIter.next();
         }
     }
 
@@ -1091,5 +1095,48 @@ public class ModelVisualizationJson extends JSONObject {
         guiJson.put("command", commandJson);
         return guiJson;
     }
-    
+    public JSONObject updateComponentVisuals(Component comp, Boolean isFrame) {
+        // Component has no visible representation, pass, shouldn't be here
+        if (!componentHasVisuals(comp)) return null;
+        // make sure attached to right Frame in SceneGraph            
+        // Here we know comp has some visuals, if we have a change in Frame and
+        // we can detect it, then we can move the Geometry to proper Frame
+        // otherwise will have to do the more expensive remove and add to be safe
+        JSONObject topMsg = new JSONObject();
+        ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
+        comp.generateDecorations(true, mdh, state, adg);
+        if (isFrame && adg.size() > 0) {
+            topMsg.put("Op", "execute");
+            JSONObject msgMulti = new JSONObject();
+            topMsg.put("command",msgMulti);
+            msgMulti.put("type", "MultiCmdsCommand");
+            JSONArray commands = new JSONArray();
+            ArrayList<UUID> uuids = mapComponentToUUID.get(comp);
+            String geomId = comp.getAbsolutePathName();
+            for (int i=0; i < uuids.size(); i++){
+                DecorativeGeometry dg = adg.getElt(i);
+                if (adg.size()>1)
+                    geomId = geomId.concat(GEOMETRY_SEP+String.valueOf(dg.getIndexOnBody()));
+                JSONObject bodyJson = mapBodyIndicesToJson.get(dg.getBodyId());
+                String newParentUUIDString = (String) bodyJson.get("uuid");
+                UUID parentUUID = UUID.fromString(newParentUUIDString);
+                //UUID geometryUUID = mapDecorativeGeometryToUUID.get(geomId);
+                JSONObject moveOneObject = CommandComposerThreejs.createMoveObjectByUUIDCommandJson(uuids.get(i), parentUUID);
+                commands.add(moveOneObject);
+                // May need to update location as well
+                JSONObject translateOneObject = CommandComposerThreejs.createTranslateObjectCommandJson(dg.getTransform().T(), uuids.get(i));
+                commands.add(translateOneObject);
+            }
+            msgMulti.put("cmds", commands);
+            //System.out.println(msgMulti.toJSONString());
+        }
+        return topMsg;
+    }
+   
+    public Boolean componentHasVisuals(Component comp){
+        ArrayList<UUID> uuids = mapComponentToUUID.get(comp);
+        // Component has no visible representation, pass
+        return (uuids.size() > 0);
+
+    }
 }
