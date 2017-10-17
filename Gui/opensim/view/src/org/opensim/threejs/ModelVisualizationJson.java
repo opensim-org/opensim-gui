@@ -1112,7 +1112,7 @@ public class ModelVisualizationJson extends JSONObject {
             msgMulti.put("type", "MultiCmdsCommand");
             JSONArray commands = new JSONArray();
             ArrayList<UUID> uuids = mapComponentToUUID.get(comp);
-            String geomId = comp.getAbsolutePathName();
+            String geomId = comp.getAbsolutePathString();
             for (int i=0; i < uuids.size(); i++){
                 DecorativeGeometry dg = adg.getElt(i);
                 if (adg.size()>1)
