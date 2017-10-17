@@ -35,6 +35,16 @@ public class ModelScaler extends OpenSimObject {
     super.delete();
   }
 
+    public void addScale(Scale scale){
+        scale.markAdopted();
+        private_addScale(scale);
+    }
+
+    public void addMeasurement(Measurement meas){
+        meas.markAdopted();
+        private_addMeasurement(meas);
+    }
+
   public static ModelScaler safeDownCast(OpenSimObject obj) {
     long cPtr = opensimActuatorsAnalysesToolsJNI.ModelScaler_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new ModelScaler(cPtr, false);
@@ -85,12 +95,12 @@ public class ModelScaler extends OpenSimObject {
     opensimActuatorsAnalysesToolsJNI.ModelScaler_registerTypes();
   }
 
-  public void addMeasurement(Measurement aMeasurement) {
-    opensimActuatorsAnalysesToolsJNI.ModelScaler_addMeasurement(swigCPtr, this, Measurement.getCPtr(aMeasurement), aMeasurement);
+  private void private_addMeasurement(Measurement aMeasurement) {
+    opensimActuatorsAnalysesToolsJNI.ModelScaler_private_addMeasurement(swigCPtr, this, Measurement.getCPtr(aMeasurement), aMeasurement);
   }
 
-  public void addScale(Scale aScale) {
-    opensimActuatorsAnalysesToolsJNI.ModelScaler_addScale(swigCPtr, this, Scale.getCPtr(aScale), aScale);
+  private void private_addScale(Scale aScale) {
+    opensimActuatorsAnalysesToolsJNI.ModelScaler_private_addScale(swigCPtr, this, Scale.getCPtr(aScale), aScale);
   }
 
   public boolean getApply() {

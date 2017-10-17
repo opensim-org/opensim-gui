@@ -262,8 +262,12 @@ public class BodyIterator {
     return opensimSimulationJNI.BodyIterator_hasSystem(swigCPtr, this);
   }
 
-  public String getAbsolutePathName() {
-    return opensimSimulationJNI.BodyIterator_getAbsolutePathName(swigCPtr, this);
+  public String getAbsolutePathString() {
+    return opensimSimulationJNI.BodyIterator_getAbsolutePathString(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_ComponentPath getAbsolutePath() {
+    return new SWIGTYPE_p_ComponentPath(opensimSimulationJNI.BodyIterator_getAbsolutePath(swigCPtr, this), true);
   }
 
   public String getRelativePathName(Component wrt) {

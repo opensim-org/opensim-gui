@@ -1224,8 +1224,8 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native boolean ModelScaler_processModel__SWIG_1(long jarg1, ModelScaler jarg1_, long jarg2, Model jarg2_, String jarg3);
   public final static native boolean ModelScaler_processModel__SWIG_2(long jarg1, ModelScaler jarg1_, long jarg2, Model jarg2_);
   public final static native void ModelScaler_registerTypes();
-  public final static native void ModelScaler_addMeasurement(long jarg1, ModelScaler jarg1_, long jarg2, Measurement jarg2_);
-  public final static native void ModelScaler_addScale(long jarg1, ModelScaler jarg1_, long jarg2, Scale jarg2_);
+  public final static native void ModelScaler_private_addMeasurement(long jarg1, ModelScaler jarg1_, long jarg2, Measurement jarg2_);
+  public final static native void ModelScaler_private_addScale(long jarg1, ModelScaler jarg1_, long jarg2, Scale jarg2_);
   public final static native boolean ModelScaler_getApply(long jarg1, ModelScaler jarg1_);
   public final static native void ModelScaler_setApply(long jarg1, ModelScaler jarg1_, boolean jarg2);
   public final static native long ModelScaler_getMeasurementSet(long jarg1, ModelScaler jarg1_);

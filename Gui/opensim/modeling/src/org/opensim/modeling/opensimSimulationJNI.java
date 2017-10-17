@@ -6390,7 +6390,8 @@ public class opensimSimulationJNI {
   public final static native void FrameIterator_generateDecorations(long jarg1, FrameIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native long FrameIterator_getSystem(long jarg1, FrameIterator jarg1_);
   public final static native boolean FrameIterator_hasSystem(long jarg1, FrameIterator jarg1_);
-  public final static native String FrameIterator_getAbsolutePathName(long jarg1, FrameIterator jarg1_);
+  public final static native String FrameIterator_getAbsolutePathString(long jarg1, FrameIterator jarg1_);
+  public final static native long FrameIterator_getAbsolutePath(long jarg1, FrameIterator jarg1_);
   public final static native String FrameIterator_getRelativePathName(long jarg1, FrameIterator jarg1_, long jarg2, Component jarg2_);
   public final static native boolean FrameIterator_hasComponent(long jarg1, FrameIterator jarg1_, String jarg2);
   public final static native long FrameIterator_getComponent(long jarg1, FrameIterator jarg1_, String jarg2);
@@ -6507,7 +6508,8 @@ public class opensimSimulationJNI {
   public final static native void BodyIterator_generateDecorations(long jarg1, BodyIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native long BodyIterator_getSystem(long jarg1, BodyIterator jarg1_);
   public final static native boolean BodyIterator_hasSystem(long jarg1, BodyIterator jarg1_);
-  public final static native String BodyIterator_getAbsolutePathName(long jarg1, BodyIterator jarg1_);
+  public final static native String BodyIterator_getAbsolutePathString(long jarg1, BodyIterator jarg1_);
+  public final static native long BodyIterator_getAbsolutePath(long jarg1, BodyIterator jarg1_);
   public final static native String BodyIterator_getRelativePathName(long jarg1, BodyIterator jarg1_, long jarg2, Component jarg2_);
   public final static native boolean BodyIterator_hasComponent(long jarg1, BodyIterator jarg1_, String jarg2);
   public final static native long BodyIterator_getComponent(long jarg1, BodyIterator jarg1_, String jarg2);
@@ -6715,7 +6717,8 @@ public class opensimSimulationJNI {
   public final static native void MuscleIterator_generateDecorations(long jarg1, MuscleIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native long MuscleIterator_getSystem(long jarg1, MuscleIterator jarg1_);
   public final static native boolean MuscleIterator_hasSystem(long jarg1, MuscleIterator jarg1_);
-  public final static native String MuscleIterator_getAbsolutePathName(long jarg1, MuscleIterator jarg1_);
+  public final static native String MuscleIterator_getAbsolutePathString(long jarg1, MuscleIterator jarg1_);
+  public final static native long MuscleIterator_getAbsolutePath(long jarg1, MuscleIterator jarg1_);
   public final static native String MuscleIterator_getRelativePathName(long jarg1, MuscleIterator jarg1_, long jarg2, Component jarg2_);
   public final static native boolean MuscleIterator_hasComponent(long jarg1, MuscleIterator jarg1_, String jarg2);
   public final static native long MuscleIterator_getComponent(long jarg1, MuscleIterator jarg1_, String jarg2);
@@ -6788,7 +6791,8 @@ public class opensimSimulationJNI {
   public final static native void ModelComponentIterator_generateDecorations(long jarg1, ModelComponentIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native long ModelComponentIterator_getSystem(long jarg1, ModelComponentIterator jarg1_);
   public final static native boolean ModelComponentIterator_hasSystem(long jarg1, ModelComponentIterator jarg1_);
-  public final static native String ModelComponentIterator_getAbsolutePathName(long jarg1, ModelComponentIterator jarg1_);
+  public final static native String ModelComponentIterator_getAbsolutePathString(long jarg1, ModelComponentIterator jarg1_);
+  public final static native long ModelComponentIterator_getAbsolutePath(long jarg1, ModelComponentIterator jarg1_);
   public final static native String ModelComponentIterator_getRelativePathName(long jarg1, ModelComponentIterator jarg1_, long jarg2, Component jarg2_);
   public final static native boolean ModelComponentIterator_hasComponent(long jarg1, ModelComponentIterator jarg1_, String jarg2);
   public final static native long ModelComponentIterator_getComponent(long jarg1, ModelComponentIterator jarg1_, String jarg2);
@@ -6877,7 +6881,8 @@ public class opensimSimulationJNI {
   public final static native void JointIterator_generateDecorations(long jarg1, JointIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native long JointIterator_getSystem(long jarg1, JointIterator jarg1_);
   public final static native boolean JointIterator_hasSystem(long jarg1, JointIterator jarg1_);
-  public final static native String JointIterator_getAbsolutePathName(long jarg1, JointIterator jarg1_);
+  public final static native String JointIterator_getAbsolutePathString(long jarg1, JointIterator jarg1_);
+  public final static native long JointIterator_getAbsolutePath(long jarg1, JointIterator jarg1_);
   public final static native String JointIterator_getRelativePathName(long jarg1, JointIterator jarg1_, long jarg2, Component jarg2_);
   public final static native boolean JointIterator_hasComponent(long jarg1, JointIterator jarg1_, String jarg2);
   public final static native long JointIterator_getComponent(long jarg1, JointIterator jarg1_, String jarg2);
@@ -6965,7 +6970,8 @@ public class opensimSimulationJNI {
   public final static native void ActuatorIterator_generateDecorations(long jarg1, ActuatorIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native long ActuatorIterator_getSystem(long jarg1, ActuatorIterator jarg1_);
   public final static native boolean ActuatorIterator_hasSystem(long jarg1, ActuatorIterator jarg1_);
-  public final static native String ActuatorIterator_getAbsolutePathName(long jarg1, ActuatorIterator jarg1_);
+  public final static native String ActuatorIterator_getAbsolutePathString(long jarg1, ActuatorIterator jarg1_);
+  public final static native long ActuatorIterator_getAbsolutePath(long jarg1, ActuatorIterator jarg1_);
   public final static native String ActuatorIterator_getRelativePathName(long jarg1, ActuatorIterator jarg1_, long jarg2, Component jarg2_);
   public final static native boolean ActuatorIterator_hasComponent(long jarg1, ActuatorIterator jarg1_, String jarg2);
   public final static native long ActuatorIterator_getComponent(long jarg1, ActuatorIterator jarg1_, String jarg2);
@@ -8085,7 +8091,8 @@ public class opensimSimulationJNI {
   public final static native void Thelen2003MuscleIterator_generateDecorations(long jarg1, Thelen2003MuscleIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native long Thelen2003MuscleIterator_getSystem(long jarg1, Thelen2003MuscleIterator jarg1_);
   public final static native boolean Thelen2003MuscleIterator_hasSystem(long jarg1, Thelen2003MuscleIterator jarg1_);
-  public final static native String Thelen2003MuscleIterator_getAbsolutePathName(long jarg1, Thelen2003MuscleIterator jarg1_);
+  public final static native String Thelen2003MuscleIterator_getAbsolutePathString(long jarg1, Thelen2003MuscleIterator jarg1_);
+  public final static native long Thelen2003MuscleIterator_getAbsolutePath(long jarg1, Thelen2003MuscleIterator jarg1_);
   public final static native String Thelen2003MuscleIterator_getRelativePathName(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, Component jarg2_);
   public final static native boolean Thelen2003MuscleIterator_hasComponent(long jarg1, Thelen2003MuscleIterator jarg1_, String jarg2);
   public final static native long Thelen2003MuscleIterator_getComponent(long jarg1, Thelen2003MuscleIterator jarg1_, String jarg2);
@@ -8346,7 +8353,8 @@ public class opensimSimulationJNI {
   public final static native void Millard2012EquilibriumMuscleIterator_generateDecorations(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native long Millard2012EquilibriumMuscleIterator_getSystem(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
   public final static native boolean Millard2012EquilibriumMuscleIterator_hasSystem(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
-  public final static native String Millard2012EquilibriumMuscleIterator_getAbsolutePathName(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
+  public final static native String Millard2012EquilibriumMuscleIterator_getAbsolutePathString(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
+  public final static native long Millard2012EquilibriumMuscleIterator_getAbsolutePath(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
   public final static native String Millard2012EquilibriumMuscleIterator_getRelativePathName(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, Component jarg2_);
   public final static native boolean Millard2012EquilibriumMuscleIterator_hasComponent(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, String jarg2);
   public final static native long Millard2012EquilibriumMuscleIterator_getComponent(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, String jarg2);
