@@ -209,7 +209,7 @@ public class ModelVisualizationJson extends JSONObject {
         model_ground_json.put("uuid", groundUuid.toString());
         model_ground_json.put("type", "Group");
         model_ground_json.put("opensimType", "Frame");
-        model_ground_json.put("name", model.getGround().getAbsolutePathName());
+        model_ground_json.put("name", model.getGround().getAbsolutePathString());
         model_ground_json.put("userData", "NonEditable");
         model_ground_json.put("model_ground", true);
         json_model_children.add(model_ground_json);
@@ -223,7 +223,7 @@ public class ModelVisualizationJson extends JSONObject {
         comp_uuids.add(groupUuid);
         mapComponentToUUID.put(comp, comp_uuids);
         if (verbose)
-            System.out.println("Map component="+comp.getAbsolutePathName()+" to "+comp_uuids.size());   
+            System.out.println("Map component="+comp.getAbsolutePathString()+" to "+comp_uuids.size());   
         
     }
     // This method handles the DecorativeGeometry array produced by the component. It does special
@@ -244,7 +244,7 @@ public class ModelVisualizationJson extends JSONObject {
             dgimp.setQuadrants(wo.get_quadrant());
         for (int idx = 0; idx < adg.size(); idx++) {
             dg = adg.getElt(idx);
-            String geomId = comp.getAbsolutePathName();
+            String geomId = comp.getAbsolutePathString();
             if (adg.size()>1)
                 geomId = geomId.concat(GEOMETRY_SEP+String.valueOf(dg.getIndexOnBody()));
             UUID uuid = UUID.randomUUID();
@@ -277,7 +277,7 @@ public class ModelVisualizationJson extends JSONObject {
             dgimp.setQuadrants("");
          mapComponentToUUID.put(comp, vis_uuidList);
         if (verbose)
-            System.out.println("Map component="+comp.getAbsolutePathName()+" to "+vis_uuidList.size());   
+            System.out.println("Map component="+comp.getAbsolutePathString()+" to "+vis_uuidList.size());   
  
     }
 
@@ -328,7 +328,7 @@ public class ModelVisualizationJson extends JSONObject {
         bdyJson.put("type", "Group");
         bdyJson.put("opensimType", "Frame");
         bdyJson.put("userData", "NonEditable");
-        bdyJson.put("name", body.getAbsolutePathName());
+        bdyJson.put("name", body.getAbsolutePathString());
         PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(body.getMobilizedBodyIndex());
         Transform bodyXform = bodyFrame.getTransformInGround(state);
         bdyJson.put("matrix", JSONUtilities.createMatrixFromTransform(bodyXform, vec3Unit, visScaleFactor));
@@ -495,9 +495,9 @@ public class ModelVisualizationJson extends JSONObject {
         // Create material for path
         Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
         UUID mat_uuid = UUID.randomUUID();
-        mapPathMaterialToUUID.put(path.getAbsolutePathName(), mat_uuid);
+        mapPathMaterialToUUID.put(path.getAbsolutePathString(), mat_uuid);
         mat_json.put("uuid", mat_uuid.toString());
-        mat_json.put("name", path.getAbsolutePathName()+"Mat");
+        mat_json.put("name", path.getAbsolutePathString()+"Mat");
         mat_json.put("type", "MeshPhongMaterial");
         Vec3 pathColor = path.getDefaultColor();
         String colorString = JSONUtilities.mapColorToRGBA(pathColor);
@@ -513,7 +513,7 @@ public class ModelVisualizationJson extends JSONObject {
         UUID uuidForPathGeomGeometry = UUID.randomUUID();
         pathGeomJson.put("uuid", uuidForPathGeomGeometry.toString());
         pathGeomJson.put("type", "PathGeometry");
-        pathGeomJson.put("name", path.getAbsolutePathName()+"Control");
+        pathGeomJson.put("name", path.getAbsolutePathString()+"Control");
         // This includes inactive ConditionalPoints but no Wrapping
         int numWrapObjects = path.getWrapSet().getSize();
         final PathPointSet pathPointSetNoWrap = path.getPathPointSet();
@@ -612,7 +612,7 @@ public class ModelVisualizationJson extends JSONObject {
         UUID mesh_uuid = UUID.randomUUID();
         obj_json.put("uuid", mesh_uuid.toString());
         obj_json.put("type", "GeometryPath");
-        obj_json.put("name", path.getAbsolutePathName());
+        obj_json.put("name", path.getAbsolutePathString());
         obj_json.put("points", pathpoint_jsonArr);
         obj_json.put("active", pathpointActive_jsonArr);
         obj_json.put("geometry", uuidForPathGeomGeometry.toString());
@@ -659,14 +659,14 @@ public class ModelVisualizationJson extends JSONObject {
          unitQuaternion.add(1.0);
          Map<String, Object> groundBone_json = new LinkedHashMap<String, Object>();
          groundBone_json.put("parent", -1);
-         groundBone_json.put("name", model.getGround().getAbsolutePathName()+boneSuffix);
+         groundBone_json.put("name", model.getGround().getAbsolutePathString()+boneSuffix);
          groundBone_json.put("pos", posVec3);
          groundBone_json.put("rotq", unitQuaternion);
          UUID bone_uuid = UUID.randomUUID();
          bones_json.add(groundBone_json);
          while (!body.equals(bodies.end())) {
             Map<String, Object> obj_json = new LinkedHashMap<String, Object>();
-            obj_json.put("name", body.getAbsolutePathName()+boneSuffix);
+            obj_json.put("name", body.getAbsolutePathString()+boneSuffix);
             obj_json.put("parent", 0);
             Transform xform = body.findTransformBetween(state, model.get_ground());
             Vec3 pos = xform.p();
@@ -940,7 +940,7 @@ public class ModelVisualizationJson extends JSONObject {
         frame_json.put("uuid", uuidForFrameGeometry.toString());
         frame_json.put("type", "Frame");
         frame_json.put("size", visScaleFactor);
-        frame_json.put("name", frameObject.getAbsolutePathName());
+        frame_json.put("name", frameObject.getAbsolutePathString());
         frame_json.put("matrix", JSONUtilities.createMatrixFromTransform(new Transform(), frameObject.get_scale_factors(), visScaleFactor));
         // insert frame_json as child of BodyObject based on dg.getBodyId
         JSONObject bodyJson = mapBodyIndicesToJson.get(dg.getBodyId());
@@ -992,7 +992,7 @@ public class ModelVisualizationJson extends JSONObject {
     public JSONObject createMarkerJson(Marker marker) {
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
         marker.generateDecorations(true, mdh, state, adg);
-        String geomName = marker.getAbsolutePathName();
+        String geomName = marker.getAbsolutePathString();
         DecorativeGeometry dg = adg.getElt(0);
         UUID markerGeomUUID=UUID.randomUUID();
         dgimp.setGeomID(markerGeomUUID);
@@ -1112,7 +1112,7 @@ public class ModelVisualizationJson extends JSONObject {
             msgMulti.put("type", "MultiCmdsCommand");
             JSONArray commands = new JSONArray();
             ArrayList<UUID> uuids = mapComponentToUUID.get(comp);
-            String geomId = comp.getAbsolutePathName();
+            String geomId = comp.getAbsolutePathString();
             for (int i=0; i < uuids.size(); i++){
                 DecorativeGeometry dg = adg.getElt(i);
                 if (adg.size()>1)

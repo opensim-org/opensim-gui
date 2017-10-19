@@ -122,7 +122,7 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
       setTextfieldBounds(true);
       initComponents();
       
-      jCoordinateNameLabel.setToolTipText(coord.getAbsolutePathName());
+      jCoordinateNameLabel.setToolTipText(coord.getAbsolutePathString());
       jFormattedTextField.getInputMap().put(KeyStroke.getKeyStroke(
               KeyEvent.VK_ENTER, 0),
               "check");

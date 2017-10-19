@@ -69,7 +69,7 @@ public class OneGeometryNode extends OneComponentWithGeometryNode {
         String gName=cg.getName();
         if (cg.getName().equalsIgnoreCase("")){
             gName=cg.getName();
-            setDisplayName(cg.getAbsolutePathName());
+            setDisplayName(cg.getAbsolutePathString());
             setName(cg.getName());
         }
         setChildren(Children.LEAF);

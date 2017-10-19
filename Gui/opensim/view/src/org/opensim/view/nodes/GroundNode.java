@@ -47,7 +47,7 @@ public class GroundNode extends OneFrameNode{
    public GroundNode(Ground b) {
       super(Frame.safeDownCast(b));
       // Create children for wrap objects associated with body
-      setShortDescription(b.getAbsolutePathName());
+      setShortDescription(b.getAbsolutePathString());
       Children children = getChildren();
       // Create nodes for wrap objects      
       WrapObjectSet wrapObjects = b.getWrapObjectSet();
