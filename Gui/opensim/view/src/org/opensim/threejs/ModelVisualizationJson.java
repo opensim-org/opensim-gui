@@ -485,7 +485,6 @@ public class ModelVisualizationJson extends JSONObject {
                     AbstractPathPoint nextPathPoint = actualPath.get(wrappointIndex);
                     PathWrapPoint pathWrapPoint = PathWrapPoint.safeDownCast(nextPathPoint);
                     if (pathWrapPoint != null) {
-                        wrapPathPoints.get(pathWrapPoint);
                         // Count how many wrap points in sequence and distribute 2 * numWrapObjects among them 
                         // for now we'll assume only one
                         ArrayVec3 pathwrap = pathWrapPoint.getWrapPath();
@@ -498,6 +497,15 @@ public class ModelVisualizationJson extends JSONObject {
                             ArrayList<UUID> wrapPointUUIDs = wrapPathPoints.get(pathWrapPoint);
                             if (wrapPointUUIDs==null){
                                 // Wrapping was never encountered, treat as new
+                                if (verbose) System.out.println("New Contact Encountered muscle pt "+firstPoint.getName());
+                                wrapPointUUIDs = new ArrayList<UUID>();
+                                // Find IDs and insert in wrapPathPoints map
+                                for (int intermediatePpt=(1+numIntermediatePoints)*firstIndex+1; 
+                                        intermediatePpt < (1+numIntermediatePoints)*firstIndex+3; 
+                                        intermediatePpt++){
+                                    wrapPointUUIDs.add(UUID.fromString((String) pathpointJsonArray.get(intermediatePpt)));
+                                }
+                                wrapPathPoints.put(pathWrapPoint, wrapPointUUIDs);
                             }
                             for (int j = 0; j < indicesToUse.length; j++) {
                                 Vec3 globalLocation = wrapPtsFrame.findStationLocationInAnotherFrame(state, pathwrap.get(indicesToUse[j]), mapBodyIndicesToFrames.get(0));
@@ -621,11 +629,6 @@ public class ModelVisualizationJson extends JSONObject {
                 firstPoint = secondPoint;            
             }
             else {
-                System.out.println("Extra path points, assume wrapping");
-                for (int p = 0; p < actualPath.getSize(); p++) {
-                    System.out.print(actualPath.getitem(p).getName() + " ");
-                }
-                System.out.println("");
                 for (int wrappointIndex = firstIndex + 1; wrappointIndex < secondIndex; wrappointIndex++) {
                     AbstractPathPoint nextPathPoint = actualPath.get(wrappointIndex);
                     PathWrapPoint pathWrapPoint = PathWrapPoint.safeDownCast(nextPathPoint);
