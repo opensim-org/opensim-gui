@@ -49,6 +49,7 @@ import org.opensim.modeling.ComponentIterator;
 import org.opensim.modeling.ComponentsList;
 import org.opensim.modeling.ConditionalPathPoint;
 import org.opensim.modeling.DecorativeGeometry;
+import org.opensim.modeling.Frame;
 import org.opensim.modeling.FrameGeometry;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Marker;
@@ -112,6 +113,10 @@ public class ModelVisualizationJson extends JSONObject {
     // When wrapping comes in/out
     private final HashMap<GeometryPath, JSONArray> pathsWithWrapping = new HashMap<GeometryPath, JSONArray>();
 
+    public Boolean getFrameVisibility(Frame b) {
+        return false;
+    }
+
      // The following inner class and Map are used to cache "computed" pathpoints to speed up 
     // recomputation on the fly
     class ComputedPathPointInfo {
@@ -143,6 +148,7 @@ public class ModelVisualizationJson extends JSONObject {
         modelGroundJson = processGroundFrame(model);
         state = model.getWorkingState();
         mdh = model.getDisplayHints();
+        mdh.set_show_frames(true);
         ComponentsList mcList = model.getComponentsList();
         ComponentIterator mcIter = mcList.begin();
         
@@ -177,7 +183,15 @@ public class ModelVisualizationJson extends JSONObject {
     }
 
     private void processDecorationsForComponent(Component comp) {
-        //System.out.println("Processing:"+comp.getAbsolutePathName()+" Type:"+comp.getConcreteClassName());
+        if (verbose){
+            System.out.println("Processing:"+comp.getAbsolutePathString()+" Type:"+comp.getConcreteClassName());
+            if (FrameGeometry.safeDownCast(comp)!= null){
+                if (comp.hasOwner() && Frame.safeDownCast(comp.getOwner())!=null){
+                    System.out.println("Using FrameGeometry to visualize Frame"+
+                            comp.getAbsolutePathString()+":"+comp.getOwner().getAbsolutePathString());
+                }
+            }
+        }
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
         comp.generateDecorations(true, mdh, state, adg);
         if (adg.size() > 0) {
@@ -223,8 +237,6 @@ public class ModelVisualizationJson extends JSONObject {
         ArrayList<UUID> comp_uuids = new ArrayList<UUID>();
         comp_uuids.add(groupUuid);
         mapComponentToUUID.put(comp, comp_uuids);
-        if (verbose)
-            System.out.println("Map component="+comp.getAbsolutePathString()+" to "+comp_uuids.size());   
         
     }
     // This method handles the DecorativeGeometry array produced by the component. It does special

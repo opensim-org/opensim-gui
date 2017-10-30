@@ -72,7 +72,8 @@ public final class FrameToggleVisibilityAction extends BooleanStateAction {
         if( selected[0] instanceof OneFrameNode ){
             OneFrameNode dNode = (OneFrameNode)selected[0];
             Frame b = Frame.safeDownCast( dNode.getOpenSimObject() );
-//            super.setBooleanState( b.getDisplayer().getShowAxes() );
+            Boolean curStatus = ViewDB.getInstance().getModelVisualizationJson(dNode.getModelForNode()).getFrameVisibility(b);
+            super.setBooleanState(curStatus );
             return true;
         }
         return false;
