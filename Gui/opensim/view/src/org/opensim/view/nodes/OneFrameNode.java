@@ -30,19 +30,22 @@ package org.opensim.view.nodes;
 
 import java.awt.Image;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.swing.ImageIcon;
+import javax.swing.Action;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.Frame;
 import org.opensim.modeling.Geometry;
+import org.opensim.view.FrameToggleVisibilityAction;
 
 /**
  *
  * @author Ayman
  */
-class OneFrameNode extends OneModelComponentNode {
+public class OneFrameNode extends OneModelComponentNode {
    private static ResourceBundle bundle = NbBundle.getBundle(OneFrameNode.class);
    Frame frame;
     public OneFrameNode(Frame comp) {
@@ -88,4 +91,21 @@ class OneFrameNode extends OneModelComponentNode {
         return getIcon(i);
     }
     
+   @Override
+    public Action[] getActions(boolean b) {
+        Action[] superActions = (Action[]) super.getActions(b);
+        // Arrays are fixed size, onvert to a List
+        List<Action> actions = java.util.Arrays.asList(superActions);
+        // Create new Array of proper size
+        Action[] retActions = new Action[actions.size() + 1];
+        actions.toArray(retActions);
+        try {
+            // append new command to the end of the list of actions
+            retActions[actions.size()] = (FrameToggleVisibilityAction) FrameToggleVisibilityAction.findObject(
+                    (Class) Class.forName("org.opensim.view.FrameToggleVisibilityAction"), true);
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return retActions;
+    }  
 }

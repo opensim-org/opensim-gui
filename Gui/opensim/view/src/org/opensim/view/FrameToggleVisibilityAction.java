@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------------------- *
- * OpenSim: BodyToggleFrameAction.java                                        *
+ * OpenSim: FrameToggleVisibilityAction.java                                        *
  * -------------------------------------------------------------------------- *
  * OpenSim is a toolkit for musculoskeletal modeling and simulation,          *
  * developed as an open source project by a worldwide community. Development  *
@@ -28,27 +28,27 @@ import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.BooleanStateAction;
 import org.opensim.modeling.Body;
+import org.opensim.modeling.Frame;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.view.nodes.OneBodyNode;
+import org.opensim.view.nodes.OneFrameNode;
 import org.opensim.view.pub.ViewDB;
-import vtk.vtkProp3D;
 
-public final class BodyToggleFrameAction extends BooleanStateAction {
+public final class FrameToggleVisibilityAction extends BooleanStateAction {
     
-    public BodyToggleFrameAction(){
+    public FrameToggleVisibilityAction(){
     }
     
     public void performAction() {
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         // TODO implement action body
-        OneBodyNode dNode = (OneBodyNode)selected[0];
+        OneFrameNode dNode = (OneFrameNode)selected[0];
         boolean newState = super.getBooleanState();
-        BodyToggleFrameAction.ShowAxesForBody( dNode.getOpenSimObject(), newState, false );
+        FrameToggleVisibilityAction.ShowAxesForBody( dNode.getOpenSimObject(), newState, false );
     }
     
     
     public String getName() {
-        return NbBundle.getMessage(BodyToggleFrameAction.class, "CTL_BodyToggleFrameAction");
+        return NbBundle.getMessage(FrameToggleVisibilityAction.class, "CTL_BodyToggleFrameAction");
     }
     
     protected void initialize() {
@@ -69,9 +69,9 @@ public final class BodyToggleFrameAction extends BooleanStateAction {
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         //if(selected.length!=1) return false; // only if a single item is selected
         // Action shouldn't be available otherwise
-        if( selected[0] instanceof OneBodyNode ){
-            OneBodyNode dNode = (OneBodyNode)selected[0];
-            Body b = Body.safeDownCast( dNode.getOpenSimObject() );
+        if( selected[0] instanceof OneFrameNode ){
+            OneFrameNode dNode = (OneFrameNode)selected[0];
+            Frame b = Frame.safeDownCast( dNode.getOpenSimObject() );
 //            super.setBooleanState( b.getDisplayer().getShowAxes() );
             return true;
         }
@@ -85,8 +85,8 @@ public final class BodyToggleFrameAction extends BooleanStateAction {
         boolean newState = !super.getBooleanState();
         for( int i=0;  i<selected.length;  i++ ){
             Node selectedNode = selected[i];
-            if( selectedNode instanceof OneBodyNode )
-                 BodyToggleFrameAction.ShowAxesForOneBodyNode( (OneBodyNode)selectedNode, newState, false );
+            if( selectedNode instanceof OneFrameNode )
+                 FrameToggleVisibilityAction.ShowAxesForOneBodyNode( (OneFrameNode)selectedNode, newState, false );
         }
         super.setBooleanState( newState );
         ViewDB.ViewDBGetInstanceRenderAll();
@@ -98,23 +98,23 @@ public final class BodyToggleFrameAction extends BooleanStateAction {
     {
         return false;
         /*
-       BodyDisplayer rep = BodyToggleFrameAction.GetBodyDisplayerForBody( openSimObjectAssociatedWithBody );  
+       BodyDisplayer rep = FrameToggleVisibilityAction.GetBodyDisplayerForBody( openSimObjectAssociatedWithBody );  
        return rep==null ? false : rep.isShowAxes();*/
     }
     
     
     //----------------------------------------------------------------------------- 
-    static public void  ShowAxesForOneBodyNode( OneBodyNode oneBodyNode, boolean showAxesTrueHideIsFalse, boolean renderAll )
+    static public void  ShowAxesForOneBodyNode( OneFrameNode oneBodyNode, boolean showAxesTrueHideIsFalse, boolean renderAll )
     {
        if( oneBodyNode == null ) return; 
-       BodyToggleFrameAction.ShowAxesForBody( oneBodyNode.getOpenSimObject(), showAxesTrueHideIsFalse, renderAll );
+       FrameToggleVisibilityAction.ShowAxesForBody( oneBodyNode.getOpenSimObject(), showAxesTrueHideIsFalse, renderAll );
     }
     
     //-------------------------------------------------------------------------
     public static void  ShowAxesForBody( OpenSimObject openSimObjectAssociatedWithBody, boolean showAxesTrueHideIsFalse, boolean renderAll )
     {
         /*
-       BodyDisplayer rep = BodyToggleFrameAction.GetBodyDisplayerForBody( openSimObjectAssociatedWithBody );
+       BodyDisplayer rep = FrameToggleVisibilityAction.GetBodyDisplayerForBody( openSimObjectAssociatedWithBody );
        if( rep != null )
        {
            rep.setShowAxes( showAxesTrueHideIsFalse );

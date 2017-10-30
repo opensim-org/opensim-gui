@@ -30,7 +30,7 @@ import org.openide.util.actions.BooleanStateAction;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.BodyDisplayer;
-import org.opensim.view.BodyToggleFrameAction;
+//import org.opensim.view.FrameToggleVisibilityAction;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.pub.ViewDB;
 
