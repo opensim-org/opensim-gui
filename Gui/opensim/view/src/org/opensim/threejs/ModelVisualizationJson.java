@@ -125,6 +125,10 @@ public class ModelVisualizationJson extends JSONObject {
         }
     }
 
+    public FrameGeometry getGeometryForFrame(Frame frame) {
+        return visualizerFrames.get(frame).fg;
+    }
+
      // The following inner class and Map are used to cache "computed" pathpoints to speed up 
     // recomputation on the fly
     class ComputedPathPointInfo {

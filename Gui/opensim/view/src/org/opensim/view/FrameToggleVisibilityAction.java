@@ -29,6 +29,7 @@ import org.openide.util.NbBundle;
 import org.openide.util.actions.BooleanStateAction;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.Frame;
+import org.opensim.modeling.FrameGeometry;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.threejs.ModelVisualizationJson;
@@ -115,7 +116,8 @@ public final class FrameToggleVisibilityAction extends BooleanStateAction {
     {
         ModelVisualizationJson viz = ViewDB.getInstance().getModelVisualizationJson(model);
         viz.setFrameVisibility(frame, showAxesTrueHideIsFalse);
-        ViewDB.getInstance().toggleObjectDisplay(frame, showAxesTrueHideIsFalse);
+        FrameGeometry fg = viz.getGeometryForFrame(frame);
+        ViewDB.getInstance().toggleObjectDisplay(fg, showAxesTrueHideIsFalse);
     }
     
     //-------------------------------------------------------------------------
