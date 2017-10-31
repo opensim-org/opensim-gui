@@ -84,10 +84,6 @@ public class WebSocketDB {
         }
         int i=0;
         for (VisWebSocket sock : sockets){
-            if (i==1){
-                i++;
-                continue;
-            }
             if (debug) System.out.println("Broadcast:"+msg.toJSONString()+"\n");
             sock.sendVisualizerMessage(msg);
             i++;
