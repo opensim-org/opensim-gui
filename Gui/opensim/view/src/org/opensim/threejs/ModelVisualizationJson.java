@@ -112,9 +112,17 @@ public class ModelVisualizationJson extends JSONObject {
     // Keep track of which paths have wrapping since they need special handling
     // When wrapping comes in/out
     private final HashMap<GeometryPath, JSONArray> pathsWithWrapping = new HashMap<GeometryPath, JSONArray>();
+    private final HashMap<Frame, VisualizerFrame> visualizerFrames = new HashMap<Frame, VisualizerFrame>();
 
     public Boolean getFrameVisibility(Frame b) {
-        return false;
+        return visualizerFrames.get(b).visible;
+    }
+    public void setFrameVisibility(Frame b, Boolean newValue) {
+        Boolean oldValue = visualizerFrames.get(b).visible;
+        if (oldValue != newValue){
+            visualizerFrames.get(b).visible = newValue;
+            // send Visibility change command to visualizer
+        }
     }
 
      // The following inner class and Map are used to cache "computed" pathpoints to speed up 
@@ -126,6 +134,11 @@ public class ModelVisualizationJson extends JSONObject {
         ComputedPathPointInfo(AbstractPathPoint p1, AbstractPathPoint p2, double ratio){
             this.pt1 = p1; this.pt2 = p2; this.ratio = ratio;
         }
+    }
+    
+    class VisualizerFrame {
+        FrameGeometry fg;
+        boolean visible;
     }
     private HashMap<AbstractPathPoint, ComputedPathPointInfo> computedPathPointMap = new HashMap<AbstractPathPoint, ComputedPathPointInfo>();
     
@@ -180,22 +193,28 @@ public class ModelVisualizationJson extends JSONObject {
             processDecorationsForComponent(comp);
             mcIter.next();
         }
+        mdh.set_show_frames(false);
     }
 
     private void processDecorationsForComponent(Component comp) {
         if (verbose){
             System.out.println("Processing:"+comp.getAbsolutePathString()+" Type:"+comp.getConcreteClassName());
-            if (FrameGeometry.safeDownCast(comp)!= null){
-                if (comp.hasOwner() && Frame.safeDownCast(comp.getOwner())!=null){
-                    System.out.println("Using FrameGeometry to visualize Frame"+
-                            comp.getAbsolutePathString()+":"+comp.getOwner().getAbsolutePathString());
-                }
-            }
         }
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
         comp.generateDecorations(true, mdh, state, adg);
         if (adg.size() > 0) {
             processDecorativeGeometry(adg, comp, dgimp, json_materials);
+        }
+        FrameGeometry frameGeometry = FrameGeometry.safeDownCast(comp);
+        if (frameGeometry!= null){
+            Frame ownerFrame = Frame.safeDownCast(comp.getOwner());
+            if (ownerFrame !=null){
+                // Frame visualization 
+                VisualizerFrame vf = new VisualizerFrame();
+                vf.fg = frameGeometry;
+                vf.visible = false;
+                visualizerFrames.put(ownerFrame, vf);
+            }
         }
         GeometryPath gPath = GeometryPath.safeDownCast(comp);
         boolean isGeometryPath = (gPath!=null);
@@ -288,7 +307,7 @@ public class ModelVisualizationJson extends JSONObject {
         }
         if (partialWrapObject)
             dgimp.setQuadrants("");
-         mapComponentToUUID.put(comp, vis_uuidList);
+        mapComponentToUUID.put(comp, vis_uuidList);
         if (verbose)
             System.out.println("Map component="+comp.getAbsolutePathString()+" to "+vis_uuidList.size());   
  
@@ -1030,6 +1049,7 @@ public class ModelVisualizationJson extends JSONObject {
         frame_json.put("uuid", uuidForFrameGeometry.toString());
         frame_json.put("type", "Frame");
         frame_json.put("size", visScaleFactor);
+        frame_json.put("visible", false);
         frame_json.put("name", frameObject.getAbsolutePathString());
         frame_json.put("matrix", JSONUtilities.createMatrixFromTransform(new Transform(), frameObject.get_scale_factors(), visScaleFactor));
         // insert frame_json as child of BodyObject based on dg.getBodyId

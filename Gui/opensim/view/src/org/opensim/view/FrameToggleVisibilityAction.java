@@ -29,6 +29,7 @@ import org.openide.util.NbBundle;
 import org.openide.util.actions.BooleanStateAction;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.Frame;
+import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.nodes.OneFrameNode;
 import org.opensim.view.pub.ViewDB;
@@ -83,11 +84,13 @@ public final class FrameToggleVisibilityAction extends BooleanStateAction {
         //super.actionPerformed(actionEvent);
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         // TODO implement action body
-        boolean newState = !super.getBooleanState();
+        boolean newState = !(super.getBooleanState());
         for( int i=0;  i<selected.length;  i++ ){
             Node selectedNode = selected[i];
-            if( selectedNode instanceof OneFrameNode )
-                 FrameToggleVisibilityAction.ShowAxesForOneBodyNode( (OneFrameNode)selectedNode, newState, false );
+            if( selectedNode instanceof OneFrameNode ){
+                Model frameModel = ((OneFrameNode) selectedNode).getModelForNode();
+                FrameToggleVisibilityAction.ShowAxesForOneBodyNode( (OneFrameNode)selectedNode, newState, false );
+            }
         }
         super.setBooleanState( newState );
         ViewDB.ViewDBGetInstanceRenderAll();
@@ -105,22 +108,16 @@ public final class FrameToggleVisibilityAction extends BooleanStateAction {
     
     
     //----------------------------------------------------------------------------- 
-    static public void  ShowAxesForOneBodyNode( OneFrameNode oneBodyNode, boolean showAxesTrueHideIsFalse, boolean renderAll )
+    static public void  ShowAxesForOneBodyNode( OneFrameNode frameNode, boolean showAxesTrueHideIsFalse, boolean renderAll )
     {
-       if( oneBodyNode == null ) return; 
-       FrameToggleVisibilityAction.ShowAxesForBody( oneBodyNode.getOpenSimObject(), showAxesTrueHideIsFalse, renderAll );
+       if( frameNode == null ) return; 
+       FrameToggleVisibilityAction.ShowAxesForBody(frameNode.getOpenSimObject(), showAxesTrueHideIsFalse, renderAll );
     }
     
     //-------------------------------------------------------------------------
     public static void  ShowAxesForBody( OpenSimObject openSimObjectAssociatedWithBody, boolean showAxesTrueHideIsFalse, boolean renderAll )
     {
-        /*
-       BodyDisplayer rep = FrameToggleVisibilityAction.GetBodyDisplayerForBody( openSimObjectAssociatedWithBody );
-       if( rep != null )
-       {
-           rep.setShowAxes( showAxesTrueHideIsFalse );
-           if( renderAll ) ViewDB.ViewDBGetInstanceRenderAll();
-       }    */ 
+ 
     }
     
     
