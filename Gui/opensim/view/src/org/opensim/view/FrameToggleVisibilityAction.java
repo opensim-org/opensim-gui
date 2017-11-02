@@ -119,16 +119,5 @@ public final class FrameToggleVisibilityAction extends BooleanStateAction {
         FrameGeometry fg = viz.getGeometryForFrame(frame);
         ViewDB.getInstance().toggleObjectDisplay(fg, showAxesTrueHideIsFalse);
     }
-    
-    //-------------------------------------------------------------------------
-    /*
-    public static BodyDisplayer  GetBodyDisplayerForBody( OpenSimObject openSimObjectAssociatedWithBody )
-    {
-       Body b = Body.safeDownCast( openSimObjectAssociatedWithBody );
-       SingleModelVisuals viz = ViewDB.getInstance().getModelVisuals( b.getModel() );
-       if (viz == null) return null;
-       vtkProp3D visuals = viz.getVtkRepForObject(b);
-       return ( visuals instanceof BodyDisplayer ) ? (BodyDisplayer)visuals : null;
-    }
-    */
+
 }

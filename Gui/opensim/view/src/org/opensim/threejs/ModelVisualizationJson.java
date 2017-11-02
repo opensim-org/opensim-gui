@@ -1055,7 +1055,7 @@ public class ModelVisualizationJson extends JSONObject {
         frame_json.put("size", visScaleFactor);
         frame_json.put("visible", false);
         frame_json.put("name", frameObject.getAbsolutePathString());
-        frame_json.put("matrix", JSONUtilities.createMatrixFromTransform(new Transform(), frameObject.get_scale_factors(), visScaleFactor));
+        frame_json.put("matrix", JSONUtilities.createMatrixFromTransform(dg.getTransform(), frameObject.get_scale_factors(), visScaleFactor));
         // insert frame_json as child of BodyObject based on dg.getBodyId
         JSONObject bodyJson = mapBodyIndicesToJson.get(dg.getBodyId());
         if (bodyJson.get("children")==null)
@@ -1250,7 +1250,7 @@ public class ModelVisualizationJson extends JSONObject {
     public Boolean componentHasVisuals(Component comp){
         ArrayList<UUID> uuids = mapComponentToUUID.get(comp);
         // Component has no visible representation, pass
-        return (uuids.size() > 0);
+        return (uuids != null && uuids.size() > 0);
 
     }
 }
