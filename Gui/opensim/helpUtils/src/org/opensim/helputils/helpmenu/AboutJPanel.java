@@ -308,7 +308,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         jTextArea4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jTextArea4.setLineWrap(true);
         jTextArea4.setRows(5);
-        jTextArea4.setText("OpenSim application uses computational components from Simbody (https://simtk.org/home/simbody).\nThe application uses VTK (http://www.vtk.org), JFreeChart/JCommon (LGPL; http://www.jfree.org),\nand is built on top of NetBeans platform (CDDL; http://www.netbeans.org). See LICENSE.txt and NOTICE.txt for more information:\n  - on Windows: root of installation\n  - on Mac: <.app>/Contents/Resources/OpenSim\n");
+        jTextArea4.setText("OpenSim uses:\n- Simbody (https://simtk.org/home/simbody),\n- three.js (MIT; https://threejs.org),\n- JxBrowser (proprietary; https://teamdev.com),\n- JFreeChart (LGPL; http://www.jfree.org),\n- NetBeans platform (CDDL; http://netbeans.org).\nSee LICENSE.txt and NOTICE.txt for more information:\n  - on Windows: root of installation\n  - on Mac: <.app>/Contents/Resources/OpenSim\n");
         jTextArea4.setWrapStyleWord(true);
         jTextArea4.setMargin(new java.awt.Insets(0, 5, 0, 0));
         jScrollPane4.setViewportView(jTextArea4);

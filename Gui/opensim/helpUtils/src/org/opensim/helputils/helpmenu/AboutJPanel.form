@@ -456,7 +456,7 @@
                         </Property>
                         <Property name="lineWrap" type="boolean" value="true"/>
                         <Property name="rows" type="int" value="5"/>
-                        <Property name="text" type="java.lang.String" value="OpenSim application uses computational components from Simbody (https://simtk.org/home/simbody).&#xa;The application uses VTK (http://www.vtk.org), JFreeChart/JCommon (LGPL; http://www.jfree.org),&#xa;and is built on top of NetBeans platform (CDDL; http://www.netbeans.org). See LICENSE.txt and NOTICE.txt for more information:&#xa;  - on Windows: root of installation&#xa;  - on Mac: &lt;.app&gt;/Contents/Resources/OpenSim&#xa;"/>
+                        <Property name="text" type="java.lang.String" value="OpenSim uses:&#xa;- Simbody (https://simtk.org/home/simbody),&#xa;- three.js (MIT; https://threejs.org),&#xa;- JxBrowser (proprietary; https://teamdev.com),&#xa;- JFreeChart (LGPL; http://www.jfree.org),&#xa;- NetBeans platform (CDDL; http://netbeans.org).&#xa;See LICENSE.txt and NOTICE.txt for more information:&#xa;  - on Windows: root of installation&#xa;  - on Mac: &lt;.app&gt;/Contents/Resources/OpenSim&#xa;"/>
                         <Property name="wrapStyleWord" type="boolean" value="true"/>
                         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                           <Insets value="[0, 5, 0, 0]"/>
