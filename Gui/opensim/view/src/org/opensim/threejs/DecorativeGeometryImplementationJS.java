@@ -247,7 +247,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "Frame");
         //dg_json.put("radius", .00005*visualizerScaleFactor);
-        //dg_json.put("size", arg0.getAxisLength()*visualizerScaleFactor);
+        dg_json.put("size", arg0.getAxisLength()*visualizerScaleFactor);
         jsonArr.add(dg_json);    
         //createMaterialJson(arg0, false);
     }

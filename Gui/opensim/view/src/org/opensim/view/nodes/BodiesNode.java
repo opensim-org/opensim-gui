@@ -33,7 +33,7 @@ import org.openide.nodes.Node;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.BodySet;
-import org.opensim.view.BodyToggleFrameAction;
+import org.opensim.view.FrameToggleVisibilityAction;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 
 /**

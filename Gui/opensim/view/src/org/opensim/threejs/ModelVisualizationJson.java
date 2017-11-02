@@ -49,6 +49,7 @@ import org.opensim.modeling.ComponentIterator;
 import org.opensim.modeling.ComponentsList;
 import org.opensim.modeling.ConditionalPathPoint;
 import org.opensim.modeling.DecorativeGeometry;
+import org.opensim.modeling.Frame;
 import org.opensim.modeling.FrameGeometry;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Marker;
@@ -111,6 +112,22 @@ public class ModelVisualizationJson extends JSONObject {
     // Keep track of which paths have wrapping since they need special handling
     // When wrapping comes in/out
     private final HashMap<GeometryPath, JSONArray> pathsWithWrapping = new HashMap<GeometryPath, JSONArray>();
+    private final HashMap<Frame, VisualizerFrame> visualizerFrames = new HashMap<Frame, VisualizerFrame>();
+
+    public Boolean getFrameVisibility(Frame b) {
+        return visualizerFrames.get(b).visible;
+    }
+    public void setFrameVisibility(Frame b, Boolean newValue) {
+        Boolean oldValue = visualizerFrames.get(b).visible;
+        if (oldValue != newValue){
+            visualizerFrames.get(b).visible = newValue;
+            // send Visibility change command to visualizer
+        }
+    }
+
+    public FrameGeometry getGeometryForFrame(Frame frame) {
+        return visualizerFrames.get(frame).fg;
+    }
 
      // The following inner class and Map are used to cache "computed" pathpoints to speed up 
     // recomputation on the fly
@@ -121,6 +138,11 @@ public class ModelVisualizationJson extends JSONObject {
         ComputedPathPointInfo(AbstractPathPoint p1, AbstractPathPoint p2, double ratio){
             this.pt1 = p1; this.pt2 = p2; this.ratio = ratio;
         }
+    }
+    
+    class VisualizerFrame {
+        FrameGeometry fg;
+        boolean visible;
     }
     private HashMap<AbstractPathPoint, ComputedPathPointInfo> computedPathPointMap = new HashMap<AbstractPathPoint, ComputedPathPointInfo>();
     
@@ -143,6 +165,7 @@ public class ModelVisualizationJson extends JSONObject {
         modelGroundJson = processGroundFrame(model);
         state = model.getWorkingState();
         mdh = model.getDisplayHints();
+        mdh.set_show_frames(true);
         ComponentsList mcList = model.getComponentsList();
         ComponentIterator mcIter = mcList.begin();
         
@@ -174,14 +197,28 @@ public class ModelVisualizationJson extends JSONObject {
             processDecorationsForComponent(comp);
             mcIter.next();
         }
+        mdh.set_show_frames(false);
     }
 
     private void processDecorationsForComponent(Component comp) {
-        //System.out.println("Processing:"+comp.getAbsolutePathName()+" Type:"+comp.getConcreteClassName());
+        if (verbose){
+            System.out.println("Processing:"+comp.getAbsolutePathString()+" Type:"+comp.getConcreteClassName());
+        }
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
         comp.generateDecorations(true, mdh, state, adg);
         if (adg.size() > 0) {
             processDecorativeGeometry(adg, comp, dgimp, json_materials);
+        }
+        FrameGeometry frameGeometry = FrameGeometry.safeDownCast(comp);
+        if (frameGeometry!= null){
+            Frame ownerFrame = Frame.safeDownCast(comp.getOwner());
+            if (ownerFrame !=null){
+                // Frame visualization 
+                VisualizerFrame vf = new VisualizerFrame();
+                vf.fg = frameGeometry;
+                vf.visible = false;
+                visualizerFrames.put(ownerFrame, vf);
+            }
         }
         GeometryPath gPath = GeometryPath.safeDownCast(comp);
         boolean isGeometryPath = (gPath!=null);
@@ -223,8 +260,6 @@ public class ModelVisualizationJson extends JSONObject {
         ArrayList<UUID> comp_uuids = new ArrayList<UUID>();
         comp_uuids.add(groupUuid);
         mapComponentToUUID.put(comp, comp_uuids);
-        if (verbose)
-            System.out.println("Map component="+comp.getAbsolutePathString()+" to "+comp_uuids.size());   
         
     }
     // This method handles the DecorativeGeometry array produced by the component. It does special
@@ -276,7 +311,7 @@ public class ModelVisualizationJson extends JSONObject {
         }
         if (partialWrapObject)
             dgimp.setQuadrants("");
-         mapComponentToUUID.put(comp, vis_uuidList);
+        mapComponentToUUID.put(comp, vis_uuidList);
         if (verbose)
             System.out.println("Map component="+comp.getAbsolutePathString()+" to "+vis_uuidList.size());   
  
@@ -1018,8 +1053,9 @@ public class ModelVisualizationJson extends JSONObject {
         frame_json.put("uuid", uuidForFrameGeometry.toString());
         frame_json.put("type", "Frame");
         frame_json.put("size", visScaleFactor);
+        frame_json.put("visible", false);
         frame_json.put("name", frameObject.getAbsolutePathString());
-        frame_json.put("matrix", JSONUtilities.createMatrixFromTransform(new Transform(), frameObject.get_scale_factors(), visScaleFactor));
+        frame_json.put("matrix", JSONUtilities.createMatrixFromTransform(dg.getTransform(), frameObject.get_scale_factors(), visScaleFactor));
         // insert frame_json as child of BodyObject based on dg.getBodyId
         JSONObject bodyJson = mapBodyIndicesToJson.get(dg.getBodyId());
         if (bodyJson.get("children")==null)
@@ -1214,7 +1250,7 @@ public class ModelVisualizationJson extends JSONObject {
     public Boolean componentHasVisuals(Component comp){
         ArrayList<UUID> uuids = mapComponentToUUID.get(comp);
         // Component has no visible representation, pass
-        return (uuids.size() > 0);
+        return (uuids != null && uuids.size() > 0);
 
     }
 }

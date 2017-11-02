@@ -3,7 +3,7 @@
 <filesystem>
     <folder name="Actions">
         <folder name="Edit">
-            <file name="org-opensim-view-BodyToggleFrameAction.instance"/>
+            <file name="org-opensim-view-FrameToggleVisibilityAction.instance"/>
             <file name="org-opensim-view-FileOpenOsimModelAction.instance"/>
             <file name="org-opensim-view-experimentaldata-AnnotateMotionObjectsAction.instance"/>
             <file name="org-opensim-view-experimentaldata-MotionReclassifyAction.instance"/>

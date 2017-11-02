@@ -37,7 +37,7 @@ import org.opensim.modeling.Geometry;
 import org.opensim.modeling.WrapObject;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.WrapObjectSet;
-import org.opensim.view.BodyToggleFrameAction;
+
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 
 /** Node class to wrap Body objects */

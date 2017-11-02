@@ -137,6 +137,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             if (modelJson.componentHasVisuals(mc)){
                 websocketdb.broadcastMessageJson(modelJson.updateComponentVisuals(mc, frame), null);
             }
+            else // just send frame in case xforms change
+                websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(false), null);
         }
     }
    

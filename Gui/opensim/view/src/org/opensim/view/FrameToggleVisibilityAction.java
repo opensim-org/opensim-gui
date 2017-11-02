@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------------------- *
- * OpenSim: BodyToggleFrameAction.java                                        *
+ * OpenSim: FrameToggleVisibilityAction.java                                        *
  * -------------------------------------------------------------------------- *
  * OpenSim is a toolkit for musculoskeletal modeling and simulation,          *
  * developed as an open source project by a worldwide community. Development  *
@@ -28,27 +28,31 @@ import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.BooleanStateAction;
 import org.opensim.modeling.Body;
+import org.opensim.modeling.Frame;
+import org.opensim.modeling.FrameGeometry;
+import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.view.nodes.OneBodyNode;
+import org.opensim.threejs.ModelVisualizationJson;
+import org.opensim.view.nodes.OneFrameNode;
 import org.opensim.view.pub.ViewDB;
-import vtk.vtkProp3D;
 
-public final class BodyToggleFrameAction extends BooleanStateAction {
+public final class FrameToggleVisibilityAction extends BooleanStateAction {
     
-    public BodyToggleFrameAction(){
+    public FrameToggleVisibilityAction(){
     }
     
     public void performAction() {
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         // TODO implement action body
-        OneBodyNode dNode = (OneBodyNode)selected[0];
-        boolean newState = super.getBooleanState();
-        BodyToggleFrameAction.ShowAxesForBody( dNode.getOpenSimObject(), newState, false );
+        OneFrameNode dNode = (OneFrameNode)selected[0];
+        boolean newState = getBooleanState();
+        FrameToggleVisibilityAction.ShowFrame( Frame.safeDownCast(dNode.getOpenSimObject()),
+                dNode.getModelForNode(), newState);
     }
     
     
     public String getName() {
-        return NbBundle.getMessage(BodyToggleFrameAction.class, "CTL_BodyToggleFrameAction");
+        return NbBundle.getMessage(FrameToggleVisibilityAction.class, "CTL_BodyToggleFrameAction");
     }
     
     protected void initialize() {
@@ -69,10 +73,11 @@ public final class BodyToggleFrameAction extends BooleanStateAction {
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         //if(selected.length!=1) return false; // only if a single item is selected
         // Action shouldn't be available otherwise
-        if( selected[0] instanceof OneBodyNode ){
-            OneBodyNode dNode = (OneBodyNode)selected[0];
-            Body b = Body.safeDownCast( dNode.getOpenSimObject() );
-//            super.setBooleanState( b.getDisplayer().getShowAxes() );
+        if( selected[0] instanceof OneFrameNode ){
+            OneFrameNode dNode = (OneFrameNode)selected[0];
+            Frame b = Frame.safeDownCast( dNode.getOpenSimObject() );
+            Boolean curStatus = ViewDB.getInstance().getModelVisualizationJson(dNode.getModelForNode()).getFrameVisibility(b);
+            super.setBooleanState(curStatus );
             return true;
         }
         return false;
@@ -82,56 +87,37 @@ public final class BodyToggleFrameAction extends BooleanStateAction {
         //super.actionPerformed(actionEvent);
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         // TODO implement action body
-        boolean newState = !super.getBooleanState();
+        boolean newState = !(super.getBooleanState());
         for( int i=0;  i<selected.length;  i++ ){
             Node selectedNode = selected[i];
-            if( selectedNode instanceof OneBodyNode )
-                 BodyToggleFrameAction.ShowAxesForOneBodyNode( (OneBodyNode)selectedNode, newState, false );
+            if( selectedNode instanceof OneFrameNode ){
+                OneFrameNode frameNode = (OneFrameNode)selectedNode;
+                Model frameModel = frameNode.getModelForNode();
+                FrameToggleVisibilityAction.setFrameVisibility(frameNode, newState);
+            }
         }
         super.setBooleanState( newState );
         ViewDB.ViewDBGetInstanceRenderAll();
     }
-  
-     
-    //-------------------------------------------------------------------------
-    public static boolean  IsShowAxesForBody( OpenSimObject openSimObjectAssociatedWithBody )
-    {
-        return false;
-        /*
-       BodyDisplayer rep = BodyToggleFrameAction.GetBodyDisplayerForBody( openSimObjectAssociatedWithBody );  
-       return rep==null ? false : rep.isShowAxes();*/
-    }
-    
     
     //----------------------------------------------------------------------------- 
-    static public void  ShowAxesForOneBodyNode( OneBodyNode oneBodyNode, boolean showAxesTrueHideIsFalse, boolean renderAll )
+    static public void  setFrameVisibility( OneFrameNode frameNode, boolean showAxesTrueHideIsFalse)
     {
-       if( oneBodyNode == null ) return; 
-       BodyToggleFrameAction.ShowAxesForBody( oneBodyNode.getOpenSimObject(), showAxesTrueHideIsFalse, renderAll );
+       if( frameNode == null ) return; 
+       FrameToggleVisibilityAction.ShowFrame(Frame.safeDownCast(frameNode.getOpenSimObject()), 
+               frameNode.getModelForNode(),
+               showAxesTrueHideIsFalse);
     }
     
     //-------------------------------------------------------------------------
-    public static void  ShowAxesForBody( OpenSimObject openSimObjectAssociatedWithBody, boolean showAxesTrueHideIsFalse, boolean renderAll )
+    public static void  ShowFrame( Frame frame, 
+            Model model, 
+            boolean showAxesTrueHideIsFalse)
     {
-        /*
-       BodyDisplayer rep = BodyToggleFrameAction.GetBodyDisplayerForBody( openSimObjectAssociatedWithBody );
-       if( rep != null )
-       {
-           rep.setShowAxes( showAxesTrueHideIsFalse );
-           if( renderAll ) ViewDB.ViewDBGetInstanceRenderAll();
-       }    */ 
+        ModelVisualizationJson viz = ViewDB.getInstance().getModelVisualizationJson(model);
+        viz.setFrameVisibility(frame, showAxesTrueHideIsFalse);
+        FrameGeometry fg = viz.getGeometryForFrame(frame);
+        ViewDB.getInstance().toggleObjectDisplay(fg, showAxesTrueHideIsFalse);
     }
-    
-    
-    //-------------------------------------------------------------------------
-    /*
-    public static BodyDisplayer  GetBodyDisplayerForBody( OpenSimObject openSimObjectAssociatedWithBody )
-    {
-       Body b = Body.safeDownCast( openSimObjectAssociatedWithBody );
-       SingleModelVisuals viz = ViewDB.getInstance().getModelVisuals( b.getModel() );
-       if (viz == null) return null;
-       vtkProp3D visuals = viz.getVtkRepForObject(b);
-       return ( visuals instanceof BodyDisplayer ) ? (BodyDisplayer)visuals : null;
-    }
-    */
+
 }
