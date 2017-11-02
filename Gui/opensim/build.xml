@@ -43,7 +43,7 @@
         <echoproperties/>
     </target>
     <target name="copy-java-bindings" description="Copy results of builing opensim-core with Java Bindings to gui">
-         <copy todir="modeling/src/org/opensim/modeling">
+        <copy todir="modeling/src/org/opensim/modeling"> <!--overwrite="true"-->
             <fileset dir="${apiJava.dir}/opensim/modeling" />
         </copy>
     </target>
@@ -182,7 +182,7 @@
             file="visualViewer/src/org/opensim/topologyEditor/cddl.txt"/>
 
         <!-- Create top level folder -->
-        <property name="mac.dist.outer.dir" value="dist/OpenSim ${app.version}" />
+        <property name="mac.dist.outer.dir" value="dist/pkgroot/OpenSim ${app.version}" />
         <property name="mac.final.app.name" value="OpenSim ${app.version}.app" />
         <!-- Must delete OpenSim.app to avoid two copies of OpenSim.app; seems
              to be an issue with moving the OpenSim symlink on top of an
@@ -233,5 +233,39 @@
         <symlink action="single" link="${mac.dist.outer.dir}/sdk/doc/html_user"
             resource="../../${mac.final.app.name}/Contents/Resources/OpenSim/share/doc/OpenSim/html_user"
             overwrite="true"/>
+
+        <!-- Create the PKG installer. -->
+        <copy todir="dist/">
+            <fileset dir="../../Installer/macOS/"/>
+        </copy>
+        <replace file="dist/Distribution.xml" value="${app.version}">
+            <replacefilter token="@VERSION@" />
+        </replace>
+        <replace file="dist/scripts/postinstall" value="${app.version}">
+            <replacefilter token="@VERSION@" />
+        </replace>
+        <!-- Must set the executable bit on postinstall. -->
+        <exec executable="chmod">
+            <arg line="+x dist/scripts/postinstall"/>
+        </exec>
+        <exec executable="/usr/bin/python" dir="dist/">
+            <arg line="set_folder_icon.py OpenSimFolder.icns 'pkgroot/OpenSim ${app.version}'"/>
+        </exec>
+        <exec executable="pkgbuild" dir="dist/">
+            <arg value="--identifier"/> <arg value="org.opensim.app.pkg"/>
+            <arg value="--version"/> <arg value="${app.version}"/>
+            <arg value="--root"/> <arg value="./pkgroot/"/>
+            <arg value="--scripts"/> <arg value="./scripts"/>
+            <arg value="--install-location"/> <arg value="/Applications/"/>
+            <arg value="OpenSim-${app.version}-App.pkg"/>
+        </exec>
+        <exec executable="productbuild" dir="dist/">
+            <arg value="--distribution"/> <arg value="./Distribution.xml"/>
+            <arg value="--version"/> <arg value="${app.version}"/>
+            <arg value="--package-path"/> <arg value="."/>
+            <arg value="--resources"/> <arg value="./Resources"/>
+            <arg value="./OpenSim-${app.version}.pkg"/>
+        </exec>
+
     </target>
 </project>

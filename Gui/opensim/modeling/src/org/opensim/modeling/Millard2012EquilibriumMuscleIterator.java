@@ -837,8 +837,12 @@ public class Millard2012EquilibriumMuscleIterator {
     return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_hasSystem(swigCPtr, this);
   }
 
-  public String getAbsolutePathName() {
-    return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getAbsolutePathName(swigCPtr, this);
+  public String getAbsolutePathString() {
+    return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getAbsolutePathString(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_ComponentPath getAbsolutePath() {
+    return new SWIGTYPE_p_ComponentPath(opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getAbsolutePath(swigCPtr, this), true);
   }
 
   public String getRelativePathName(Component wrt) {

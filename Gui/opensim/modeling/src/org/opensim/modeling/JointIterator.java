@@ -149,8 +149,12 @@ public class JointIterator {
     return opensimSimulationJNI.JointIterator_hasSystem(swigCPtr, this);
   }
 
-  public String getAbsolutePathName() {
-    return opensimSimulationJNI.JointIterator_getAbsolutePathName(swigCPtr, this);
+  public String getAbsolutePathString() {
+    return opensimSimulationJNI.JointIterator_getAbsolutePathString(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_ComponentPath getAbsolutePath() {
+    return new SWIGTYPE_p_ComponentPath(opensimSimulationJNI.JointIterator_getAbsolutePath(swigCPtr, this), true);
   }
 
   public String getRelativePathName(Component wrt) {

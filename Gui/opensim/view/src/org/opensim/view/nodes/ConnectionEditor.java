@@ -70,9 +70,10 @@ public class ConnectionEditor {
     }
     
     public void handleConnectionChangeCommon() {
-        if (Geometry.safeDownCast(obj)!= null){
+        if (Component.safeDownCast(obj)!= null){
             Component mc = Component.safeDownCast(obj);
-            ViewDB.getInstance().getModelVisuals(model).upateDisplay(mc);  
+            Boolean isFrame = connector.getConnecteeTypeName().equalsIgnoreCase("PhysicalFrame");
+            ViewDB.getInstance().updateComponentVisuals(model, mc, isFrame);  
             ViewDB.repaintAll();
         }
         else 

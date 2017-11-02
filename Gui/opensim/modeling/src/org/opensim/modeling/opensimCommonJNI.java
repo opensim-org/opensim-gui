@@ -1462,7 +1462,8 @@ public class opensimCommonJNI {
   public final static native long Component_getSystem(long jarg1, Component jarg1_);
   public final static native boolean Component_hasSystem(long jarg1, Component jarg1_);
   public final static native void Component_private_addComponent(long jarg1, Component jarg1_, long jarg2, Component jarg2_);
-  public final static native String Component_getAbsolutePathName(long jarg1, Component jarg1_);
+  public final static native String Component_getAbsolutePathString(long jarg1, Component jarg1_);
+  public final static native long Component_getAbsolutePath(long jarg1, Component jarg1_);
   public final static native String Component_getRelativePathName(long jarg1, Component jarg1_, long jarg2, Component jarg2_);
   public final static native boolean Component_hasComponent(long jarg1, Component jarg1_, String jarg2);
   public final static native long Component_getComponent(long jarg1, Component jarg1_, String jarg2);
@@ -1523,7 +1524,8 @@ public class opensimCommonJNI {
   public final static native void ComponentIterator_generateDecorations(long jarg1, ComponentIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native long ComponentIterator_getSystem(long jarg1, ComponentIterator jarg1_);
   public final static native boolean ComponentIterator_hasSystem(long jarg1, ComponentIterator jarg1_);
-  public final static native String ComponentIterator_getAbsolutePathName(long jarg1, ComponentIterator jarg1_);
+  public final static native String ComponentIterator_getAbsolutePathString(long jarg1, ComponentIterator jarg1_);
+  public final static native long ComponentIterator_getAbsolutePath(long jarg1, ComponentIterator jarg1_);
   public final static native String ComponentIterator_getRelativePathName(long jarg1, ComponentIterator jarg1_, long jarg2, Component jarg2_);
   public final static native boolean ComponentIterator_hasComponent(long jarg1, ComponentIterator jarg1_, String jarg2);
   public final static native long ComponentIterator_getComponent(long jarg1, ComponentIterator jarg1_, String jarg2);
