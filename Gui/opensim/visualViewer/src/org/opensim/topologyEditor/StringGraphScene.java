@@ -15,6 +15,8 @@
  * The Original Software is NetBeans. The Initial Developer of the Original
  * Software is Sun Microsystems, Inc. Portions Copyright 1997-2007 Sun
  * Microsystems, Inc. All Rights Reserved.
+ *
+ * Portions Copyrighted 2013 Ayman Habib
  */
 package org.opensim.topologyEditor;
 

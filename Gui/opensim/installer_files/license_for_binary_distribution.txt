@@ -210,7 +210,7 @@ conditions of the following licenses.
 
 
 ================================================================================
-For Gui/opensim/scriptingShell/release/modules/ext/*
+For OpenSim/modules/ext/jython*
 --------------------------------------------------------------------------------
 
 PYTHON SOFTWARE FOUNDATION LICENSE VERSION 2
@@ -258,31 +258,51 @@ bound by the terms and conditions of this License Agreement.
 
 
 ================================================================================
-For Gui/opensim/visualViewer/src/opensim/topologyEditor/...
-        (StringGraphScene|OpenSimObjectWidget).java
+For jre/* or jdk/* in the binary distribution
 
-These files are licensed under the CDDL. For details, see 
-Gui/opensim/visualViewer/src/opensim/topologyEditor/cddl.txt
-
-TODO the license files will be located in different places in source vs binary
-distributions.
-TODO for the source code, CDDL license text can be next to the CDDL-licensed
-source code. In the binary distribution, it can be alongside LGPL, GPL, CDDL
-text somewhere near the root of the repository.
+See the LICENSE and COPYRIGHT files in the jre/ or jdk/ folder.
 
 
 ================================================================================
-For Gui/opensim/jcommon/* and Gui/opensim/jfreechart/*
+For:
+  - platform/*, ide/*
+  - StringGraphScene.java and OpenSimObjectWidget.java, compiled into
+    org-opensim-graphlEditor.jar
+  - bin/OpenSim on Mac
+
+These files are licensed under the CDDL. For details, see
+third_party_license_texts/cddl.txt.
+
+
+================================================================================
+For OpenSim/modules/ext/jcommon* and OpenSim/modules/ext/jfreechart*
 
 These files are licensed under the LGPL. For details, see
-Gui/opensim/jfreechart/lgpl-3.0.txt and Gui/opensim/jfreechart/gpl-3.0.txt.
+third_party_license_texts/lgpl-3.0.txt and
+third_party_license_texts/gpl-3.0.txt.
 
 Note: we only carry along the GPL text because we are required to by
 the LGPL. OpenSim does not contain software under the GPL.
 
 
 ================================================================================
-For Gui/opensim/vtk50/release/modules/ext/vtk50.jar
+For threejs/*
+
+These files are licensed under the MIT License. For details, see
+threejs/LICENSE.
+
+
+================================================================================
+For OpenSim/modules/ext/jxbrowser*
+
+This product bundles JxBrowser, which is proprietary
+software. The use of JxBrowser is governed by the JxBrowser Product Licence
+Agreement (http://www.teamdev.com/jxbrowser-licence-agreement). If you would
+like to use JxBrowser in your development, please contact TeamDev.
+
+
+================================================================================
+For OpenSim/modules/ext/vtk50.jar
 
 This file is licensed under BSD-3-Clause.
 --------------------------------------------------------------------------------
@@ -314,5 +334,6 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
 
 ================================================================================

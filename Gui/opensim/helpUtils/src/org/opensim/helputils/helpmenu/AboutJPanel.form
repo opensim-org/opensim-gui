@@ -140,20 +140,18 @@
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                  <Component id="VMvendorString" min="-2" max="-2" attributes="0"/>
-                                  <Component id="operatingSystemString" pref="190" max="32767" attributes="1"/>
-                                  <Component id="versionString" alignment="0" pref="190" max="32767" attributes="1"/>
-                                  <Component id="jreString" alignment="0" pref="190" max="32767" attributes="1"/>
-                                  <Component id="jHomeDirString" alignment="0" min="-2" max="-2" attributes="1"/>
-                              </Group>
+                              <Component id="operatingSystemString" pref="190" max="32767" attributes="1"/>
+                              <Component id="versionString" alignment="0" pref="190" max="32767" attributes="1"/>
+                              <Component id="jreString" alignment="0" pref="190" max="32767" attributes="1"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="VMvendorString" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jHomeDirString" alignment="0" min="-2" max="-2" attributes="1"/>
                                       <Component id="jLabelOpenSimHomeString" min="-2" max="-2" attributes="0"/>
                                       <Component id="compilerVersionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="libraryPathString" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="71" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -345,11 +343,11 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jScrollPane5" min="-2" pref="299" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="299" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jScrollPane5" pref="271" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="345" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="373" max="-2" attributes="0"/>
                       <Component id="jPanel3" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -358,17 +356,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jScrollPane1" min="-2" pref="181" max="-2" attributes="1"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jScrollPane5" min="-2" pref="135" max="-2" attributes="1"/>
-                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                              <Component id="jScrollPane1" min="-2" pref="138" max="-2" attributes="1"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane5" min="-2" pref="156" max="-2" attributes="1"/>
                           </Group>
                       </Group>
+                      <EmptySpace type="unrelated" max="32767" attributes="0"/>
                       <Component id="jPanel8" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -421,17 +416,16 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
-                          <Component id="jScrollPane4" min="-2" pref="299" max="-2" attributes="0"/>
+                          <Component id="jScrollPane4" min="-2" pref="271" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane4" pref="113" max="32767" attributes="1"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jScrollPane4" min="-2" pref="148" max="-2" attributes="1"/>
+                          <EmptySpace min="0" pref="21" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -452,17 +446,17 @@
                   <SubComponents>
                     <Component class="javax.swing.JTextArea" name="jTextArea4">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="d8" green="e9" red="ec" type="rgb"/>
                         </Property>
                         <Property name="columns" type="int" value="20"/>
-                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="11" style="0"/>
                         </Property>
                         <Property name="lineWrap" type="boolean" value="true"/>
                         <Property name="rows" type="int" value="5"/>
-                        <Property name="text" type="java.lang.String" value="OpenSim application uses computational components from Simbody (https://simtk.org/home/simbody).&#xa;&#xa;The application uses VTK (http://www.vtk.org), JFreeChart (http://www.jfree.org)&#xa;and is built on top of NetBeans platform (http://www.netbeans.org).&#xa;"/>
+                        <Property name="text" type="java.lang.String" value="OpenSim uses:&#xa;- Simbody (https://simtk.org/home/simbody),&#xa;- three.js (MIT; https://threejs.org),&#xa;- JxBrowser (proprietary; https://teamdev.com),&#xa;- JFreeChart (LGPL; http://www.jfree.org),&#xa;- NetBeans platform (CDDL; http://netbeans.org).&#xa;See LICENSE.txt and NOTICE.txt for more information:&#xa;  - on Windows: root of installation&#xa;  - on Mac: &lt;.app&gt;/Contents/Resources/OpenSim&#xa;"/>
                         <Property name="wrapStyleWord" type="boolean" value="true"/>
                         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                           <Insets value="[0, 5, 0, 0]"/>
@@ -488,17 +482,17 @@
               <SubComponents>
                 <Component class="javax.swing.JTextArea" name="jTextArea5">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="d8" green="e9" red="ec" type="rgb"/>
                     </Property>
                     <Property name="columns" type="int" value="20"/>
-                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="11" style="0"/>
                     </Property>
                     <Property name="lineWrap" type="boolean" value="true"/>
                     <Property name="rows" type="int" value="5"/>
-                    <Property name="text" type="java.lang.String" value="For more details see http://opensim.stanford.edu and the paper below:&#xa;Delp, S.L., Anderson, F.C., Arnold, A. S., Loan, P., Habib, A., John, C., Guendelman, E., Thelen, D.G.   OpenSim: Open-source software to create and analyze dynamic simulations of movement.  IEEE Transactions on Biomedical Engineering, Nov. 2007.  &#xa;Other citations and contributions are noted within the application."/>
+                    <Property name="text" type="java.lang.String" value="To sustain the OpenSim project, please acknowledge us by citing the following paper: &#xa;Delp, S.L., Anderson, F.C., Arnold, A. S., Loan, P., Habib, A., John, C., Guendelman, E., Thelen, D.G.   OpenSim: Open-source software to create and analyze dynamic simulations of movement.  IEEE Transactions on Biomedical Engineering, Nov. 2007.  &#xa;&#xa;For more details see http://opensim.stanford.edu. Other citations and contributions are noted within the application."/>
                     <Property name="wrapStyleWord" type="boolean" value="true"/>
                     <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                       <Insets value="[0, 5, 0, 0]"/>
@@ -522,17 +516,17 @@
               <SubComponents>
                 <Component class="javax.swing.JTextArea" name="jTextArea2">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="d8" green="e9" red="ec" type="rgb"/>
                     </Property>
                     <Property name="columns" type="int" value="20"/>
-                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="11" style="0"/>
                     </Property>
                     <Property name="lineWrap" type="boolean" value="true"/>
                     <Property name="rows" type="int" value="5"/>
-                    <Property name="text" type="java.lang.String" value="The OpenSim GUI is an application for musculoskeletal modeling and simulation. It is supported by Simbios, the NIH National Center for Physics-Based Simulation of Biological Structures at Stanford, funded under the NIH Roadmap for Medical Research, grant U54 GM072970. It is additionally supported by the National Center for Simulation in Rehabilitation Research (NCSRR), an NIH National Center for Medical Rehabilitation Research, grant R24 HD065690. OpenSim receives additional support from DARPA through the Warrior Web Program. &#xa;"/>
+                    <Property name="text" type="java.lang.String" value="The OpenSim GUI is an application for musculoskeletal modeling and simulation. It is supported by US NIH National Center for Physics-Based Simulation of Biological Structures (Simbios; U54 GM072970), US NIH National Center for Simulation in Rehabilitation Research (NCSRR; R24 HD065690, P2C HD065690), US NIH Mobilize Center (U54 EB020405), and US DARPA Warrior Web (W911QX-12-C-0018)."/>
                     <Property name="wrapStyleWord" type="boolean" value="true"/>
                     <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                       <Insets value="[5, 5, 0, 0]"/>
