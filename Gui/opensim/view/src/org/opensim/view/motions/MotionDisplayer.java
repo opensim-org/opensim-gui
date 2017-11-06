@@ -140,6 +140,7 @@ public class MotionDisplayer {
     OpenSimvtkGlyphCloud  generalizedForcesRep = null;
     private OpenSimvtkGlyphCloud  markersRep = null;
     private Storage simmMotionData;
+    private Storage motionAsStates;
     private Model model;
     OpenSimContext dContext; 
     ArrayStr stateNames;
@@ -429,13 +430,26 @@ public class MotionDisplayer {
         mapIndicesToDofs.clear();
 
         stateNames = model.getStateVariableNames();
+        
         stateNames.insert(0, "time");
-
+        /* for (int st=0; st < stateNames.size(); st++)
+            System.out.println("State name="+stateNames.get(st));
+        System.out.println("===");
+        for (int col=0; col < colNames.size(); col++)
+            System.out.println("Column name="+colNames.get(col));
+        System.out.println("===");
+        System.out.println("Sizes: States vs. Columns "+stateNames.size()+" "+colNames.size()); */
         if(colNames.arrayEquals(stateNames)) {
            // This is a states file
            statesFile = true;
            setRenderMuscleActivations(true);
-        } else  {
+        } else  if (colNames.size() == stateNames.size()){
+            motionAsStates = new Storage(simmMotionData.getSize(), "States");
+            model.formStateStorage(simmMotionData, motionAsStates, true);
+            simmMotionData = motionAsStates;
+            statesFile = true;
+            setRenderMuscleActivations(true);
+        } else {
            // We should build sorted lists of object names so that we can find them easily
            for(int i=0; i < numColumnsIncludingTime; i++){
               String columnName = colNames.getitem(i);   // Time is included in labels
