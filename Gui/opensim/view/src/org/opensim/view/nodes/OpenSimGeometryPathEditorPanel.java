@@ -64,6 +64,7 @@ import org.opensim.modeling.State;
 import org.opensim.modeling.Units;
 import org.opensim.modeling.WrapEllipsoid;
 import org.opensim.modeling.WrapObject;
+import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.ObjectsDeletedEvent;
 import org.opensim.view.Selectable;
 import org.opensim.view.SingleModelGuiElements;
@@ -322,9 +323,9 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       // you can fire an ObjectsDeletedEvent later.
       AbstractPathPoint mp = currentPath.getPathPointSet().get(menuChoice);
       ViewDB.getInstance().removeObjectsBelongingToMuscleFromSelection(objectWithPath);
-      
-      boolean result = openSimContext.deletePathPoint(currentPath, menuChoice);
-      if (result == false) {
+      boolean canDelete = currentPath.canDeletePathPoint(menuChoice);
+    
+      if (!canDelete) {
          Object[] options = {"OK"};
          int answer = JOptionPane.showOptionDialog(this,
                  "A muscle must contain at least 2 attachment points that are not via points.",
@@ -337,6 +338,12 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
           ViewDB.getInstance().setSelectedObject(mp);
 
       } else {
+         ModelVisualizationJson modelViz = ViewDB.getInstance().getModelVisualizationJson(currentModel);
+         // We remove the visuals before actual deletion so we have the PathPoint in hand
+         // and it doesn't refer to stale/released memory.
+         modelViz.deletePathPointVisuals(currentPath, menuChoice);
+         updatePathDisplay(EditOperation.RemovePoint, menuChoice);
+         openSimContext.deletePathPoint(currentPath, menuChoice);
          // ideally we'd like to just deselect the point we're deleting but the muscle displayer doesn't
          // deal well with maintaining the right glyph colors when the attachment set changes.
          // TODO: send some event that the muscle displayer can listen for and know to deselect the point
@@ -351,7 +358,6 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          ObjectsDeletedEvent evnt = new ObjectsDeletedEvent(this, model, objs);
          OpenSimDB.getInstance().setChanged();
          OpenSimDB.getInstance().notifyObservers(evnt);
-         updatePathDisplay(EditOperation.RemovePoint, -1);
       }
    }
    

@@ -633,6 +633,7 @@ public class ModelVisualizationJson extends JSONObject {
         // Create viz for firstPoint
         UUID pathpoint_uuid = addPathPointObjectToParent(firstPoint);
         pathpoint_jsonArr.add(pathpoint_uuid.toString());
+        addComponentToUUIDMap(firstPoint, pathpoint_uuid);
         int firstIndex = 0; // by construction
         int numIntermediatePoints = 2 * numWrapObjects;
         for (int ppointSetIndex=1; ppointSetIndex < pathPointSetNoWrap.getSize(); ppointSetIndex++) {
@@ -700,10 +701,7 @@ public class ModelVisualizationJson extends JSONObject {
             if (!pointAdded){
                 pathpoint_uuid = addPathPointObjectToParent(secondPoint);
                 pathpoint_jsonArr.add(pathpoint_uuid.toString());
-                ArrayList<UUID> comp_uuids = new ArrayList<UUID>();
-                comp_uuids.add(pathpoint_uuid);
-                mapComponentToUUID.put(secondPoint, comp_uuids);
-                mapUUIDToComponent.put(pathpoint_uuid, secondPoint);
+                addComponentToUUIDMap(secondPoint, pathpoint_uuid);
             }
             if (MovingPathPoint.safeDownCast(secondPoint) != null) {
                 movingComponents.put(secondPoint, pathpoint_uuid);
@@ -944,8 +942,11 @@ public class ModelVisualizationJson extends JSONObject {
             JSONArray pathpoint_jsonArr = new JSONArray();
             for (int i = 0; i < path.getPathPointSet().getSize(); i++) {
                 AbstractPathPoint pathPoint = path.getPathPointSet().get(i);
-                UUID pathpoint_uuid = mapComponentToUUID.get(pathPoint).get(0);
-                pathpoint_jsonArr.add(pathpoint_uuid.toString());
+                ArrayList<UUID> vis_uuidList = mapComponentToUUID.get(pathPoint);
+                if (vis_uuidList != null){ // If point is being deleted, it's removed from map first
+                    UUID pathpoint_uuid = mapComponentToUUID.get(pathPoint).get(0);
+                    pathpoint_jsonArr.add(pathpoint_uuid.toString());
+                }
             }
             topJson.put("points", pathpoint_jsonArr);
             topJson.put("SubOperation", "delete");
@@ -1252,5 +1253,21 @@ public class ModelVisualizationJson extends JSONObject {
         // Component has no visible representation, pass
         return (uuids != null && uuids.size() > 0);
 
+    }
+    // Delete the selected Pathpoint from Maps used to back Visualization
+    public void deletePathPointVisuals(GeometryPath currentPath, int index) {
+        AbstractPathPoint appoint = currentPath.getPathPointSet().get(index);
+        ArrayList<UUID> uuids = mapComponentToUUID.get(appoint);
+        // Remove uuids[0] from visualizer
+        // cleanup maps
+        mapComponentToUUID.remove(appoint);
+        mapUUIDToComponent.remove(uuids.get(0));
+        // If Conditional remove it from 
+        if (ConditionalPathPoint.safeDownCast(appoint)!= null)
+            proxyPathPoints.remove(appoint);
+        else if (MovingPathPoint.safeDownCast(appoint)!=null){
+            movingComponents.remove(appoint);
+        }
+        // Need to update the GometryPath control polygon to remove the ppt and communicate the new one to visulizer
     }
 }
