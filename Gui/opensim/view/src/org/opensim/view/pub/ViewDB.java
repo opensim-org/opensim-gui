@@ -116,7 +116,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    /* Following block handles buffering Appearance changes so they're sent once
     * as a message to visualizer.
    */
-   private static boolean applyAppearanceChange = false;
+   private static boolean applyAppearanceChange = true;
 
     public void endAnimation() {
         JSONObject msg = new JSONObject();

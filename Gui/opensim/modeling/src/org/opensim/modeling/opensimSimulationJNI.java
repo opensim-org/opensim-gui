@@ -3300,7 +3300,9 @@ public class opensimSimulationJNI {
   public final static native void PrescribedController_prescribeControlForActuator_private__SWIG_1(long jarg1, PrescribedController jarg1_, String jarg2, long jarg3, Function jarg3_);
   public final static native long new_Manager__SWIG_0(long jarg1, Model jarg1_, long jarg2);
   public final static native long new_Manager__SWIG_1(long jarg1, Model jarg1_);
-  public final static native long new_Manager__SWIG_2();
+  public final static native long new_Manager__SWIG_2(long jarg1, Model jarg1_, long jarg2, State jarg2_);
+  public final static native long new_Manager__SWIG_3(long jarg1, Model jarg1_, long jarg2, State jarg2_, long jarg3);
+  public final static native long new_Manager__SWIG_4();
   public final static native void Manager_setSessionName(long jarg1, Manager jarg1_, String jarg2);
   public final static native void Manager_setModel(long jarg1, Manager jarg1_, long jarg2, Model jarg2_);
   public final static native String Manager_getSessionName(long jarg1, Manager jarg1_);
@@ -3309,10 +3311,6 @@ public class opensimSimulationJNI {
   public final static native void Manager_setWriteToStorage(long jarg1, Manager jarg1_, boolean jarg2);
   public final static native long Manager_getIntegrator(long jarg1, Manager jarg1_);
   public final static native void Manager_setIntegrator(long jarg1, Manager jarg1_, long jarg2);
-  public final static native void Manager_setInitialTime(long jarg1, Manager jarg1_, double jarg2);
-  public final static native double Manager_getInitialTime(long jarg1, Manager jarg1_);
-  public final static native void Manager_setFinalTime(long jarg1, Manager jarg1_, double jarg2);
-  public final static native double Manager_getFinalTime(long jarg1, Manager jarg1_);
   public final static native void Manager_setUseSpecifiedDT(long jarg1, Manager jarg1_, boolean jarg2);
   public final static native boolean Manager_getUseSpecifiedDT(long jarg1, Manager jarg1_);
   public final static native void Manager_setUseConstantDT(long jarg1, Manager jarg1_, boolean jarg2);
@@ -3330,8 +3328,9 @@ public class opensimSimulationJNI {
   public final static native void Manager_printTimeArray__SWIG_1(long jarg1, Manager jarg1_);
   public final static native void Manager_resetTimeAndDTArrays(long jarg1, Manager jarg1_, double jarg2);
   public final static native double Manager_getNextTimeArrayTime(long jarg1, Manager jarg1_, double jarg2);
-  public final static native boolean Manager_integrate__SWIG_0(long jarg1, Manager jarg1_, long jarg2, State jarg2_, double jarg3);
-  public final static native boolean Manager_integrate__SWIG_1(long jarg1, Manager jarg1_, long jarg2, State jarg2_);
+  public final static native void Manager_initialize(long jarg1, Manager jarg1_, long jarg2, State jarg2_);
+  public final static native long Manager_integrate(long jarg1, Manager jarg1_, double jarg2);
+  public final static native long Manager_getState(long jarg1, Manager jarg1_);
   public final static native double Manager_getFixedStepSize(long jarg1, Manager jarg1_, int jarg2);
   public final static native boolean Manager_hasStateStorage(long jarg1, Manager jarg1_);
   public final static native void Manager_setStateStorage(long jarg1, Manager jarg1_, long jarg2, Storage jarg2_);
