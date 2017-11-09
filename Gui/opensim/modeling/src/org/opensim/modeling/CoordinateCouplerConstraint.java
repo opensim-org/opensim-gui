@@ -85,8 +85,8 @@ public class CoordinateCouplerConstraint extends Constraint {
     opensimSimulationJNI.CoordinateCouplerConstraint_setFunction__SWIG_0(swigCPtr, this, Function.getCPtr(aFunction), aFunction);
   }
 
-  public void scale(ScaleSet aScaleSet) {
-    opensimSimulationJNI.CoordinateCouplerConstraint_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
+  public void extendScale(State s, ScaleSet scaleSet) {
+    opensimSimulationJNI.CoordinateCouplerConstraint_extendScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
   }
 
 }

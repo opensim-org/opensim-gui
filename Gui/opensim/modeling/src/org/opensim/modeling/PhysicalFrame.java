@@ -110,10 +110,6 @@ public class PhysicalFrame extends Frame {
     return new SWIGTYPE_p_SimTK__MobilizedBody(opensimSimulationJNI.PhysicalFrame_updMobilizedBody(swigCPtr, this), false);
   }
 
-  public void scale(Vec3 scaleFactors) {
-    opensimSimulationJNI.PhysicalFrame_scale(swigCPtr, this, Vec3.getCPtr(scaleFactors), scaleFactors);
-  }
-
   public WrapObject getWrapObject(String aName) {
     long cPtr = opensimSimulationJNI.PhysicalFrame_getWrapObject(swigCPtr, this, aName);
     return (cPtr == 0) ? null : new WrapObject(cPtr, false);

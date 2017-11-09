@@ -642,6 +642,7 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native void Millard2012AccelerationMuscle_computeInitialFiberEquilibrium(long jarg1, Millard2012AccelerationMuscle jarg1_, long jarg2, State jarg2_);
   public final static native double Millard2012AccelerationMuscle_calcInextensibleTendonActiveFiberForce(long jarg1, Millard2012AccelerationMuscle jarg1_, long jarg2, State jarg2_, double jarg3);
   public final static native double Millard2012AccelerationMuscle_calcActiveFiberForceAlongTendon(long jarg1, Millard2012AccelerationMuscle jarg1_, double jarg2, double jarg3, double jarg4);
+  public final static native void Millard2012AccelerationMuscle_extendPostScale(long jarg1, Millard2012AccelerationMuscle jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native void delete_Millard2012AccelerationMuscle(long jarg1);
   public final static native long McKibbenActuator_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void McKibbenActuator_assign(long jarg1, McKibbenActuator jarg1_, long jarg2, OpenSimObject jarg2_);

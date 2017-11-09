@@ -665,4 +665,8 @@ public class Millard2012EquilibriumMuscle extends Muscle {
     return opensimSimulationJNI.Millard2012EquilibriumMuscle_calcInextensibleTendonActiveFiberForce(swigCPtr, this, State.getCPtr(s), s, aActivation);
   }
 
+  public void extendPostScale(State s, ScaleSet scaleSet) {
+    opensimSimulationJNI.Millard2012EquilibriumMuscle_extendPostScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
+  }
+
 }

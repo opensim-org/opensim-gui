@@ -193,16 +193,4 @@ public class PathActuator extends ScalarActuator {
     return opensimSimulationJNI.PathActuator_computeMomentArm(swigCPtr, this, State.getCPtr(s), s, Coordinate.getCPtr(aCoord), aCoord);
   }
 
-  public void preScale(State s, ScaleSet aScaleSet) {
-    opensimSimulationJNI.PathActuator_preScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(aScaleSet), aScaleSet);
-  }
-
-  public void scale(State s, ScaleSet aScaleSet) {
-    opensimSimulationJNI.PathActuator_scale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(aScaleSet), aScaleSet);
-  }
-
-  public void postScale(State s, ScaleSet aScaleSet) {
-    opensimSimulationJNI.PathActuator_postScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(aScaleSet), aScaleSet);
-  }
-
 }

@@ -113,8 +113,8 @@ public class PathPoint extends AbstractPathPoint {
     opensimSimulationJNI.PathPoint_changeBodyPreserveLocation(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(body), body);
   }
 
-  public void scale(Vec3 scaleFactors) {
-    opensimSimulationJNI.PathPoint_scale(swigCPtr, this, Vec3.getCPtr(scaleFactors), scaleFactors);
+  public void extendScale(State s, ScaleSet scaleSet) {
+    opensimSimulationJNI.PathPoint_extendScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
   }
 
   public Vec3 getdPointdQ(State s) {

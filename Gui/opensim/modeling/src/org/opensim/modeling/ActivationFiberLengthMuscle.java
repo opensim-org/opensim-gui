@@ -157,4 +157,8 @@ public class ActivationFiberLengthMuscle extends Muscle {
     return opensimSimulationJNI.ActivationFiberLengthMuscle_getActivationRate(swigCPtr, this, State.getCPtr(s), s);
   }
 
+  public void extendPostScale(State s, ScaleSet scaleSet) {
+    opensimSimulationJNI.ActivationFiberLengthMuscle_extendPostScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
+  }
+
 }

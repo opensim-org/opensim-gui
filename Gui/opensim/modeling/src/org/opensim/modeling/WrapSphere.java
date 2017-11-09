@@ -81,8 +81,8 @@ public class WrapSphere extends WrapObject {
     return opensimSimulationJNI.WrapSphere_getRadius(swigCPtr, this);
   }
 
-  public void scale(Vec3 aScaleFactors) {
-    opensimSimulationJNI.WrapSphere_scale(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
+  public void extendScale(State s, ScaleSet scaleSet) {
+    opensimSimulationJNI.WrapSphere_extendScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
   }
 
   public void connectToModelAndBody(Model aModel, PhysicalFrame aBody) {

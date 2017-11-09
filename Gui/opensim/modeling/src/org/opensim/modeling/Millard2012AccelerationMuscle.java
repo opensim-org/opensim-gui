@@ -789,4 +789,8 @@ public class Millard2012AccelerationMuscle extends Muscle {
     return opensimActuatorsAnalysesToolsJNI.Millard2012AccelerationMuscle_calcActiveFiberForceAlongTendon(swigCPtr, this, activation, fiberLength, fiberVelocity);
   }
 
+  public void extendPostScale(State s, ScaleSet scaleSet) {
+    opensimActuatorsAnalysesToolsJNI.Millard2012AccelerationMuscle_extendPostScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
+  }
+
 }

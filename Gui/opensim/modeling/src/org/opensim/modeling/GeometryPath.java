@@ -203,16 +203,12 @@ public class GeometryPath extends ModelComponent {
     return opensimSimulationJNI.GeometryPath_computeMomentArm(swigCPtr, this, State.getCPtr(s), s, Coordinate.getCPtr(aCoord), aCoord);
   }
 
-  public void preScale(State s, ScaleSet aScaleSet) {
-    opensimSimulationJNI.GeometryPath_preScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(aScaleSet), aScaleSet);
+  public void extendPreScale(State s, ScaleSet scaleSet) {
+    opensimSimulationJNI.GeometryPath_extendPreScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
   }
 
-  public void scale(State s, ScaleSet aScaleSet) {
-    opensimSimulationJNI.GeometryPath_scale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(aScaleSet), aScaleSet);
-  }
-
-  public void postScale(State s, ScaleSet aScaleSet) {
-    opensimSimulationJNI.GeometryPath_postScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(aScaleSet), aScaleSet);
+  public void extendPostScale(State s, ScaleSet scaleSet) {
+    opensimSimulationJNI.GeometryPath_extendPostScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
   }
 
   public void updateGeometry(State s) {

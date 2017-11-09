@@ -77,8 +77,4 @@ public class ConstraintSet extends ModelComponentSetConstraints {
     this(opensimSimulationJNI.new_ConstraintSet__SWIG_4(ConstraintSet.getCPtr(aAbsConstraintSet), aAbsConstraintSet), true);
   }
 
-  public void scale(ScaleSet aScaleSet) {
-    opensimSimulationJNI.ConstraintSet_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
-  }
-
 }
