@@ -81,8 +81,8 @@ public class WrapEllipsoid extends WrapObject {
     return new Vec3(opensimSimulationJNI.WrapEllipsoid_getRadii(swigCPtr, this), true);
   }
 
-  public void scale(Vec3 aScaleFactors) {
-    opensimSimulationJNI.WrapEllipsoid_scale(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
+  public void extendScale(State s, ScaleSet scaleSet) {
+    opensimSimulationJNI.WrapEllipsoid_extendScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
   }
 
   public void connectToModelAndBody(Model aModel, PhysicalFrame aBody) {

@@ -257,16 +257,8 @@ public class Ligament extends Force {
     opensimSimulationJNI.Ligament_computeForce(swigCPtr, this, State.getCPtr(s), s, VectorOfSpatialVec.getCPtr(bodyForces), bodyForces, Vector.getCPtr(generalizedForces), generalizedForces);
   }
 
-  public void preScale(State s, ScaleSet aScaleSet) {
-    opensimSimulationJNI.Ligament_preScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(aScaleSet), aScaleSet);
-  }
-
-  public void scale(State s, ScaleSet aScaleSet) {
-    opensimSimulationJNI.Ligament_scale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(aScaleSet), aScaleSet);
-  }
-
-  public void postScale(State s, ScaleSet aScaleSet) {
-    opensimSimulationJNI.Ligament_postScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(aScaleSet), aScaleSet);
+  public void extendPostScale(State s, ScaleSet scaleSet) {
+    opensimSimulationJNI.Ligament_extendPostScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
   }
 
 }

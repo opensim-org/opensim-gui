@@ -177,6 +177,10 @@ public class FrameIterator {
     return new Model(opensimSimulationJNI.FrameIterator_getModel(swigCPtr, this), false);
   }
 
+  public Vec3 getScaleFactors(ScaleSet scaleSet, Frame frame) {
+    return new Vec3(opensimSimulationJNI.FrameIterator_getScaleFactors(swigCPtr, this, ScaleSet.getCPtr(scaleSet), scaleSet, Frame.getCPtr(frame), frame), true);
+  }
+
   public void addToSystem(SWIGTYPE_p_SimTK__MultibodySystem system) {
     opensimSimulationJNI.FrameIterator_addToSystem(swigCPtr, this, SWIGTYPE_p_SimTK__MultibodySystem.getCPtr(system));
   }

@@ -77,12 +77,4 @@ public class BodySet extends ModelComponentSetBodies {
     this(opensimSimulationJNI.new_BodySet__SWIG_4(Model.getCPtr(model), model, aFileName), true);
   }
 
-  public void scale(ScaleSet aScaleSet, boolean aScaleMass) {
-    opensimSimulationJNI.BodySet_scale__SWIG_0(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet, aScaleMass);
-  }
-
-  public void scale(ScaleSet aScaleSet) {
-    opensimSimulationJNI.BodySet_scale__SWIG_1(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
-  }
-
 }

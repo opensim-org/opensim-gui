@@ -65,8 +65,8 @@ public class JointIterator {
     return new Coordinate(opensimSimulationJNI.JointIterator_get_coordinates(swigCPtr, this, i), false);
   }
 
-  public PhysicalFrame get_frames(int i) {
-    return new PhysicalFrame(opensimSimulationJNI.JointIterator_get_frames(swigCPtr, this, i), false);
+  public PhysicalOffsetFrame get_frames(int i) {
+    return new PhysicalOffsetFrame(opensimSimulationJNI.JointIterator_get_frames(swigCPtr, this, i), false);
   }
 
   public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_parent_frame_connectee_name() {
@@ -127,6 +127,10 @@ public class JointIterator {
 
   public Model getModel() {
     return new Model(opensimSimulationJNI.JointIterator_getModel(swigCPtr, this), false);
+  }
+
+  public Vec3 getScaleFactors(ScaleSet scaleSet, Frame frame) {
+    return new Vec3(opensimSimulationJNI.JointIterator_getScaleFactors(swigCPtr, this, ScaleSet.getCPtr(scaleSet), scaleSet, Frame.getCPtr(frame), frame), true);
   }
 
   public void addToSystem(SWIGTYPE_p_SimTK__MultibodySystem system) {

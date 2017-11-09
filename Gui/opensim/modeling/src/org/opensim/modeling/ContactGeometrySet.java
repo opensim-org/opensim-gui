@@ -73,8 +73,4 @@ public class ContactGeometrySet extends ModelComponentSetContactGeometry {
     this(opensimSimulationJNI.new_ContactGeometrySet__SWIG_3(ContactGeometrySet.getCPtr(aContactGeometrySet), aContactGeometrySet), true);
   }
 
-  public void scale(ScaleSet aScaleSet) {
-    opensimSimulationJNI.ContactGeometrySet_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
-  }
-
 }

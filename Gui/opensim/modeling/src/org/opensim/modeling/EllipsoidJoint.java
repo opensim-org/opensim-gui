@@ -125,8 +125,8 @@ public class EllipsoidJoint extends Joint {
     return new Coordinate(opensimSimulationJNI.EllipsoidJoint_updCoordinate__SWIG_1(swigCPtr, this, idx.swigValue()), false);
   }
 
-  public void scale(ScaleSet aScaleSet) {
-    opensimSimulationJNI.EllipsoidJoint_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
+  public void extendScale(State s, ScaleSet scaleSet) {
+    opensimSimulationJNI.EllipsoidJoint_extendScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
   }
 
   public final static class Coord {

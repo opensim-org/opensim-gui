@@ -403,6 +403,10 @@ public class opensimSimulationJNI {
   public final static native void ModelComponent_connectToModel(long jarg1, ModelComponent jarg1_, long jarg2, Model jarg2_);
   public final static native long ModelComponent_getModel(long jarg1, ModelComponent jarg1_);
   public final static native long ModelComponent_updModel(long jarg1, ModelComponent jarg1_);
+  public final static native void ModelComponent_preScale(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
+  public final static native void ModelComponent_scale(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
+  public final static native void ModelComponent_postScale(long jarg1, ModelComponent jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
+  public final static native long ModelComponent_getScaleFactors(long jarg1, ModelComponent jarg1_, long jarg2, ScaleSet jarg2_, long jarg3, Frame jarg3_);
   public final static native long SetModelComponents_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void SetModelComponents_assign(long jarg1, SetModelComponents jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String SetModelComponents_getClassName();
@@ -595,6 +599,8 @@ public class opensimSimulationJNI {
   public final static native long Frame_findTransformInBaseFrame(long jarg1, Frame jarg1_);
   public final static native long Frame_getPositionInGround(long jarg1, Frame jarg1_, long jarg2, State jarg2_);
   public final static native void Frame_private_attachGeometry(long jarg1, Frame jarg1_, long jarg2, Geometry jarg2_);
+  public final static native void Frame_scaleAttachedGeometry(long jarg1, Frame jarg1_, long jarg2, Vec3 jarg2_);
+  public final static native void Frame_extendScale(long jarg1, Frame jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native long WrapObject_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void WrapObject_assign(long jarg1, WrapObject jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String WrapObject_getClassName();
@@ -646,7 +652,7 @@ public class opensimSimulationJNI {
   public final static native long WrapObject_upd_quadrant__SWIG_1(long jarg1, WrapObject jarg1_);
   public final static native void WrapObject_set_quadrant__SWIG_1(long jarg1, WrapObject jarg1_, String jarg2);
   public final static native void delete_WrapObject(long jarg1);
-  public final static native void WrapObject_scale(long jarg1, WrapObject jarg1_, long jarg2, Vec3 jarg2_);
+  public final static native void WrapObject_extendScale(long jarg1, WrapObject jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native void WrapObject_connectToModelAndBody(long jarg1, WrapObject jarg1_, long jarg2, Model jarg2_, long jarg3, PhysicalFrame jarg3_);
   public final static native long WrapObject_getFrame(long jarg1, WrapObject jarg1_);
   public final static native void WrapObject_setFrame(long jarg1, WrapObject jarg1_, long jarg2, PhysicalFrame jarg2_);
@@ -721,7 +727,6 @@ public class opensimSimulationJNI {
   public final static native int PhysicalFrame_getMobilizedBodyIndex(long jarg1, PhysicalFrame jarg1_);
   public final static native long PhysicalFrame_getMobilizedBody(long jarg1, PhysicalFrame jarg1_);
   public final static native long PhysicalFrame_updMobilizedBody(long jarg1, PhysicalFrame jarg1_);
-  public final static native void PhysicalFrame_scale(long jarg1, PhysicalFrame jarg1_, long jarg2, Vec3 jarg2_);
   public final static native long PhysicalFrame_getWrapObject(long jarg1, PhysicalFrame jarg1_, String jarg2);
   public final static native long PhysicalFrame_getWrapObjectSet(long jarg1, PhysicalFrame jarg1_);
   public final static native void PhysicalFrame_private_addWrapObject(long jarg1, PhysicalFrame jarg1_, long jarg2, WrapObject jarg2_);
@@ -762,7 +767,7 @@ public class opensimSimulationJNI {
   public final static native long PhysicalFrameWithOffset_getParentFrame(long jarg1, PhysicalFrameWithOffset jarg1_);
   public final static native long PhysicalFrameWithOffset_getOffsetTransform(long jarg1, PhysicalFrameWithOffset jarg1_);
   public final static native void PhysicalFrameWithOffset_setOffsetTransform(long jarg1, PhysicalFrameWithOffset jarg1_, long jarg2, Transform jarg2_);
-  public final static native void PhysicalFrameWithOffset_scale(long jarg1, PhysicalFrameWithOffset jarg1_, long jarg2, Vec3 jarg2_);
+  public final static native void PhysicalFrameWithOffset_extendScale(long jarg1, PhysicalFrameWithOffset jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native void delete_PhysicalFrameWithOffset(long jarg1);
   public final static native long PhysicalOffsetFrame_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void PhysicalOffsetFrame_assign(long jarg1, PhysicalOffsetFrame jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -878,8 +883,11 @@ public class opensimSimulationJNI {
   public final static native long Body_getMassProperties(long jarg1, Body jarg1_);
   public final static native void Body_scale__SWIG_0(long jarg1, Body jarg1_, long jarg2, Vec3 jarg2_, boolean jarg3);
   public final static native void Body_scale__SWIG_1(long jarg1, Body jarg1_, long jarg2, Vec3 jarg2_);
-  public final static native void Body_scaleInertialProperties__SWIG_0(long jarg1, Body jarg1_, long jarg2, Vec3 jarg2_, boolean jarg3);
-  public final static native void Body_scaleInertialProperties__SWIG_1(long jarg1, Body jarg1_, long jarg2, Vec3 jarg2_);
+  public final static native void Body_extendScale(long jarg1, Body jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
+  public final static native void Body_scaleInertialProperties__SWIG_0(long jarg1, Body jarg1_, long jarg2, ScaleSet jarg2_, boolean jarg3);
+  public final static native void Body_scaleInertialProperties__SWIG_1(long jarg1, Body jarg1_, long jarg2, ScaleSet jarg2_);
+  public final static native void Body_scaleInertialProperties__SWIG_2(long jarg1, Body jarg1_, long jarg2, Vec3 jarg2_, boolean jarg3);
+  public final static native void Body_scaleInertialProperties__SWIG_3(long jarg1, Body jarg1_, long jarg2, Vec3 jarg2_);
   public final static native void Body_scaleMass(long jarg1, Body jarg1_, double jarg2);
   public final static native void Body_getInertia__SWIG_1(long jarg1, Body jarg1_, long jarg2, ArrayDouble jarg2_);
   public final static native void Body_setInertia__SWIG_1(long jarg1, Body jarg1_, long jarg2, ArrayDouble jarg2_);
@@ -956,8 +964,6 @@ public class opensimSimulationJNI {
   public final static native void delete_BodySet(long jarg1);
   public final static native long new_BodySet__SWIG_3(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_BodySet__SWIG_4(long jarg1, Model jarg1_, String jarg2);
-  public final static native void BodySet_scale__SWIG_0(long jarg1, BodySet jarg1_, long jarg2, ScaleSet jarg2_, boolean jarg3);
-  public final static native void BodySet_scale__SWIG_1(long jarg1, BodySet jarg1_, long jarg2, ScaleSet jarg2_);
   public final static native long BodyScale_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void BodyScale_assign(long jarg1, BodyScale jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String BodyScale_getClassName();
@@ -1387,8 +1393,8 @@ public class opensimSimulationJNI {
   public final static native void Joint_copyProperty_frames(long jarg1, Joint jarg1_, long jarg2, Joint jarg2_);
   public final static native long Joint_get_frames(long jarg1, Joint jarg1_, int jarg2);
   public final static native long Joint_upd_frames(long jarg1, Joint jarg1_, int jarg2);
-  public final static native void Joint_set_frames(long jarg1, Joint jarg1_, int jarg2, long jarg3, PhysicalFrame jarg3_);
-  public final static native int Joint_append_frames(long jarg1, Joint jarg1_, long jarg2, PhysicalFrame jarg2_);
+  public final static native void Joint_set_frames(long jarg1, Joint jarg1_, int jarg2, long jarg3, PhysicalOffsetFrame jarg3_);
+  public final static native int Joint_append_frames(long jarg1, Joint jarg1_, long jarg2, PhysicalOffsetFrame jarg2_);
   public final static native void Joint_constructProperty_frames(long jarg1, Joint jarg1_);
   public final static native void Joint_PropertyIndex_socket_parent_frame_connectee_name_set(long jarg1, Joint jarg1_, long jarg2);
   public final static native long Joint_PropertyIndex_socket_parent_frame_connectee_name_get(long jarg1, Joint jarg1_);
@@ -1413,7 +1419,6 @@ public class opensimSimulationJNI {
   public final static native long Joint_calcReactionOnParentExpressedInGround(long jarg1, Joint jarg1_, long jarg2, State jarg2_);
   public final static native long Joint_calcReactionOnChildExpressedInGround(long jarg1, Joint jarg1_, long jarg2, State jarg2_);
   public final static native double Joint_calcPower(long jarg1, Joint jarg1_, long jarg2, State jarg2_);
-  public final static native void Joint_scale(long jarg1, Joint jarg1_, long jarg2, ScaleSet jarg2_);
   public final static native long new_JointHasNoCoordinates(String jarg1, long jarg2, String jarg3);
   public final static native void delete_JointHasNoCoordinates(long jarg1);
   public final static native long SetJoints_safeDownCast(long jarg1, OpenSimObject jarg1_);
@@ -1488,7 +1493,6 @@ public class opensimSimulationJNI {
   public final static native void delete_JointSet(long jarg1);
   public final static native long new_JointSet__SWIG_3(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_JointSet__SWIG_4(long jarg1, Model jarg1_, String jarg2);
-  public final static native void JointSet_scale(long jarg1, JointSet jarg1_, long jarg2, ScaleSet jarg2_);
   public final static native long Constraint_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void Constraint_assign(long jarg1, Constraint jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String Constraint_getClassName();
@@ -1510,7 +1514,6 @@ public class opensimSimulationJNI {
   public final static native void Constraint_calcConstraintForces(long jarg1, Constraint jarg1_, long jarg2, State jarg2_, long jarg3, VectorOfSpatialVec jarg3_, long jarg4, Vector jarg4_);
   public final static native long Constraint_getRecordLabels(long jarg1, Constraint jarg1_);
   public final static native long Constraint_getRecordValues(long jarg1, Constraint jarg1_, long jarg2, State jarg2_);
-  public final static native void Constraint_scale(long jarg1, Constraint jarg1_, long jarg2, ScaleSet jarg2_);
   public final static native void Constraint_setContactPointForInducedAccelerations(long jarg1, Constraint jarg1_, long jarg2, State jarg2_, long jarg3, Vec3 jarg3_);
   public final static native long SetConstraints_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void SetConstraints_assign(long jarg1, SetConstraints jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -1584,7 +1587,6 @@ public class opensimSimulationJNI {
   public final static native long new_ConstraintSet__SWIG_3(long jarg1, Model jarg1_, String jarg2);
   public final static native long new_ConstraintSet__SWIG_4(long jarg1, ConstraintSet jarg1_);
   public final static native void delete_ConstraintSet(long jarg1);
-  public final static native void ConstraintSet_scale(long jarg1, ConstraintSet jarg1_, long jarg2, ScaleSet jarg2_);
   public final static native long Force_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void Force_assign(long jarg1, Force jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String Force_getClassName();
@@ -1930,7 +1932,7 @@ public class opensimSimulationJNI {
   public final static native long CustomJoint_updCoordinate__SWIG_0_0(long jarg1, CustomJoint jarg1_);
   public final static native long CustomJoint_getCoordinate__SWIG_1(long jarg1, CustomJoint jarg1_, long jarg2);
   public final static native long CustomJoint_updCoordinate__SWIG_1(long jarg1, CustomJoint jarg1_, long jarg2);
-  public final static native void CustomJoint_scale(long jarg1, CustomJoint jarg1_, long jarg2, ScaleSet jarg2_);
+  public final static native void CustomJoint_extendScale(long jarg1, CustomJoint jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native void CustomJoint_updateFromXMLNode__SWIG_0(long jarg1, CustomJoint jarg1_, long jarg2, int jarg3);
   public final static native void CustomJoint_updateFromXMLNode__SWIG_1(long jarg1, CustomJoint jarg1_, long jarg2);
   public final static native void delete_CustomJoint(long jarg1);
@@ -1959,7 +1961,7 @@ public class opensimSimulationJNI {
   public final static native long EllipsoidJoint_updCoordinate__SWIG_0_0(long jarg1, EllipsoidJoint jarg1_);
   public final static native long EllipsoidJoint_getCoordinate__SWIG_1(long jarg1, EllipsoidJoint jarg1_, int jarg2);
   public final static native long EllipsoidJoint_updCoordinate__SWIG_1(long jarg1, EllipsoidJoint jarg1_, int jarg2);
-  public final static native void EllipsoidJoint_scale(long jarg1, EllipsoidJoint jarg1_, long jarg2, ScaleSet jarg2_);
+  public final static native void EllipsoidJoint_extendScale(long jarg1, EllipsoidJoint jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native void delete_EllipsoidJoint(long jarg1);
   public final static native long BallJoint_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void BallJoint_assign(long jarg1, BallJoint jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -2072,7 +2074,6 @@ public class opensimSimulationJNI {
   public final static native long new_WeldConstraint__SWIG_3(String jarg1, long jarg2, PhysicalFrame jarg2_, long jarg3, Transform jarg3_, long jarg4, PhysicalFrame jarg4_, long jarg5, Transform jarg5_);
   public final static native void delete_WeldConstraint(long jarg1);
   public final static native void WeldConstraint_setContactPointForInducedAccelerations(long jarg1, WeldConstraint jarg1_, long jarg2, State jarg2_, long jarg3, Vec3 jarg3_);
-  public final static native void WeldConstraint_scale(long jarg1, WeldConstraint jarg1_, long jarg2, ScaleSet jarg2_);
   public final static native long PointConstraint_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void PointConstraint_assign(long jarg1, PointConstraint jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String PointConstraint_getClassName();
@@ -2171,7 +2172,7 @@ public class opensimSimulationJNI {
   public final static native String CoordinateCouplerConstraint_getDependentCoordinateName(long jarg1, CoordinateCouplerConstraint jarg1_);
   public final static native long CoordinateCouplerConstraint_getFunction(long jarg1, CoordinateCouplerConstraint jarg1_);
   public final static native void CoordinateCouplerConstraint_setFunction__SWIG_0(long jarg1, CoordinateCouplerConstraint jarg1_, long jarg2, Function jarg2_);
-  public final static native void CoordinateCouplerConstraint_scale(long jarg1, CoordinateCouplerConstraint jarg1_, long jarg2, ScaleSet jarg2_);
+  public final static native void CoordinateCouplerConstraint_extendScale(long jarg1, CoordinateCouplerConstraint jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native long PointOnLineConstraint_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void PointOnLineConstraint_assign(long jarg1, PointOnLineConstraint jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String PointOnLineConstraint_getClassName();
@@ -2694,7 +2695,6 @@ public class opensimSimulationJNI {
   public final static native long new_ContactGeometrySet__SWIG_2(long jarg1, Model jarg1_, String jarg2, boolean jarg3);
   public final static native long new_ContactGeometrySet__SWIG_3(long jarg1, ContactGeometrySet jarg1_);
   public final static native void delete_ContactGeometrySet(long jarg1);
-  public final static native void ContactGeometrySet_scale(long jarg1, ContactGeometrySet jarg1_, long jarg2, ScaleSet jarg2_);
   public final static native long ContactHalfSpace_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void ContactHalfSpace_assign(long jarg1, ContactHalfSpace jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String ContactHalfSpace_getClassName();
@@ -3445,6 +3445,7 @@ public class opensimSimulationJNI {
   public final static native long Station_getParentFrame(long jarg1, Station jarg1_);
   public final static native void Station_setParentFrame(long jarg1, Station jarg1_, long jarg2, PhysicalFrame jarg2_);
   public final static native long Station_findLocationInFrame(long jarg1, Station jarg1_, long jarg2, State jarg2_, long jarg3, Frame jarg3_);
+  public final static native void Station_extendScale(long jarg1, Station jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native long Marker_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void Marker_assign(long jarg1, Marker jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String Marker_getClassName();
@@ -3459,13 +3460,13 @@ public class opensimSimulationJNI {
   public final static native boolean Marker_get_fixed__SWIG_1(long jarg1, Marker jarg1_);
   public final static native long Marker_upd_fixed__SWIG_1(long jarg1, Marker jarg1_);
   public final static native void Marker_set_fixed__SWIG_1(long jarg1, Marker jarg1_, boolean jarg2);
-  public final static native long new_Marker();
+  public final static native long new_Marker__SWIG_0();
+  public final static native long new_Marker__SWIG_1(String jarg1, long jarg2, PhysicalFrame jarg2_, long jarg3, Vec3 jarg3_);
   public final static native void delete_Marker(long jarg1);
   public final static native String Marker_getParentFrameName(long jarg1, Marker jarg1_);
   public final static native void Marker_setParentFrameName(long jarg1, Marker jarg1_, String jarg2);
   public final static native void Marker_changeFrame(long jarg1, Marker jarg1_, long jarg2, PhysicalFrame jarg2_);
   public final static native void Marker_changeFramePreserveLocation(long jarg1, Marker jarg1_, long jarg2, State jarg2_, long jarg3, PhysicalFrame jarg3_);
-  public final static native void Marker_scale(long jarg1, Marker jarg1_, long jarg2, Vec3 jarg2_);
   public final static native void Marker_updateFromXMLNode__SWIG_0(long jarg1, Marker jarg1_, long jarg2, int jarg3);
   public final static native void Marker_updateFromXMLNode__SWIG_1(long jarg1, Marker jarg1_, long jarg2);
   public final static native void Marker_generateDecorations(long jarg1, Marker jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
@@ -3540,7 +3541,6 @@ public class opensimSimulationJNI {
   public final static native long new_MarkerSet__SWIG_2(long jarg1, MarkerSet jarg1_);
   public final static native void delete_MarkerSet(long jarg1);
   public final static native void MarkerSet_getMarkerNames(long jarg1, MarkerSet jarg1_, long jarg2, ArrayStr jarg2_);
-  public final static native void MarkerSet_scale(long jarg1, MarkerSet jarg1_, long jarg2, ScaleSet jarg2_);
   public final static native void MarkerSet_addNamePrefix(long jarg1, MarkerSet jarg1_, String jarg2);
   public final static native long WrapSphere_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void WrapSphere_assign(long jarg1, WrapSphere jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -3554,7 +3554,7 @@ public class opensimSimulationJNI {
   public final static native String WrapSphere_getWrapTypeName(long jarg1, WrapSphere jarg1_);
   public final static native String WrapSphere_getDimensionsString(long jarg1, WrapSphere jarg1_);
   public final static native double WrapSphere_getRadius(long jarg1, WrapSphere jarg1_);
-  public final static native void WrapSphere_scale(long jarg1, WrapSphere jarg1_, long jarg2, Vec3 jarg2_);
+  public final static native void WrapSphere_extendScale(long jarg1, WrapSphere jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native void WrapSphere_connectToModelAndBody(long jarg1, WrapSphere jarg1_, long jarg2, Model jarg2_, long jarg3, PhysicalFrame jarg3_);
   public final static native long WrapCylinder_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void WrapCylinder_assign(long jarg1, WrapCylinder jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -3583,7 +3583,7 @@ public class opensimSimulationJNI {
   public final static native void delete_WrapCylinder(long jarg1);
   public final static native String WrapCylinder_getWrapTypeName(long jarg1, WrapCylinder jarg1_);
   public final static native String WrapCylinder_getDimensionsString(long jarg1, WrapCylinder jarg1_);
-  public final static native void WrapCylinder_scale(long jarg1, WrapCylinder jarg1_, long jarg2, Vec3 jarg2_);
+  public final static native void WrapCylinder_extendScale(long jarg1, WrapCylinder jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native long WrapTorus_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void WrapTorus_assign(long jarg1, WrapTorus jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String WrapTorus_getClassName();
@@ -3597,7 +3597,7 @@ public class opensimSimulationJNI {
   public final static native String WrapTorus_getDimensionsString(long jarg1, WrapTorus jarg1_);
   public final static native double WrapTorus_getInnerRadius(long jarg1, WrapTorus jarg1_);
   public final static native double WrapTorus_getOuterRadius(long jarg1, WrapTorus jarg1_);
-  public final static native void WrapTorus_scale(long jarg1, WrapTorus jarg1_, long jarg2, Vec3 jarg2_);
+  public final static native void WrapTorus_extendScale(long jarg1, WrapTorus jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native void WrapTorus_connectToModelAndBody(long jarg1, WrapTorus jarg1_, long jarg2, Model jarg2_, long jarg3, PhysicalFrame jarg3_);
   public final static native long WrapEllipsoid_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void WrapEllipsoid_assign(long jarg1, WrapEllipsoid jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -3611,7 +3611,7 @@ public class opensimSimulationJNI {
   public final static native String WrapEllipsoid_getWrapTypeName(long jarg1, WrapEllipsoid jarg1_);
   public final static native String WrapEllipsoid_getDimensionsString(long jarg1, WrapEllipsoid jarg1_);
   public final static native long WrapEllipsoid_getRadii(long jarg1, WrapEllipsoid jarg1_);
-  public final static native void WrapEllipsoid_scale(long jarg1, WrapEllipsoid jarg1_, long jarg2, Vec3 jarg2_);
+  public final static native void WrapEllipsoid_extendScale(long jarg1, WrapEllipsoid jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native void WrapEllipsoid_connectToModelAndBody(long jarg1, WrapEllipsoid jarg1_, long jarg2, Model jarg2_, long jarg3, PhysicalFrame jarg3_);
   public final static native long PathWrap_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void PathWrap_assign(long jarg1, PathWrap jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -3721,7 +3721,6 @@ public class opensimSimulationJNI {
   public final static native int WrapCylinderObst_getWrapDirection(long jarg1, WrapCylinderObst jarg1_);
   public final static native String WrapCylinderObst_getWrapTypeName(long jarg1, WrapCylinderObst jarg1_);
   public final static native String WrapCylinderObst_getDimensionsString(long jarg1, WrapCylinderObst jarg1_);
-  public final static native void WrapCylinderObst_scale(long jarg1, WrapCylinderObst jarg1_, long jarg2, Vec3 jarg2_);
   public final static native void WrapCylinderObst_connectToModelAndBody(long jarg1, WrapCylinderObst jarg1_, long jarg2, Model jarg2_, long jarg3, PhysicalFrame jarg3_);
   public final static native long WrapSphereObst_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void WrapSphereObst_assign(long jarg1, WrapSphereObst jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -3738,7 +3737,6 @@ public class opensimSimulationJNI {
   public final static native void WrapSphereObst_setLength(long jarg1, WrapSphereObst jarg1_, double jarg2);
   public final static native String WrapSphereObst_getWrapTypeName(long jarg1, WrapSphereObst jarg1_);
   public final static native String WrapSphereObst_getDimensionsString(long jarg1, WrapSphereObst jarg1_);
-  public final static native void WrapSphereObst_scale(long jarg1, WrapSphereObst jarg1_, long jarg2, Vec3 jarg2_);
   public final static native void WrapSphereObst_connectToModelAndBody(long jarg1, WrapSphereObst jarg1_, long jarg2, Model jarg2_, long jarg3, PhysicalFrame jarg3_);
   public final static native long WrapDoubleCylinderObst_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void WrapDoubleCylinderObst_assign(long jarg1, WrapDoubleCylinderObst jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -3756,7 +3754,6 @@ public class opensimSimulationJNI {
   public final static native int WrapDoubleCylinderObst_getWrapDirection(long jarg1, WrapDoubleCylinderObst jarg1_);
   public final static native String WrapDoubleCylinderObst_getWrapTypeName(long jarg1, WrapDoubleCylinderObst jarg1_);
   public final static native String WrapDoubleCylinderObst_getDimensionsString(long jarg1, WrapDoubleCylinderObst jarg1_);
-  public final static native void WrapDoubleCylinderObst_scale(long jarg1, WrapDoubleCylinderObst jarg1_, long jarg2, Vec3 jarg2_);
   public final static native void WrapDoubleCylinderObst_connectToModelAndBody(long jarg1, WrapDoubleCylinderObst jarg1_, long jarg2, Model jarg2_, long jarg3, PhysicalFrame jarg3_);
   public final static native long Probe_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void Probe_assign(long jarg1, Probe jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -4881,9 +4878,8 @@ public class opensimSimulationJNI {
   public final static native void Model_removeAnalysis__SWIG_0(long jarg1, Model jarg1_, long jarg2, Analysis jarg2_, boolean jarg3);
   public final static native void Model_removeAnalysis__SWIG_1(long jarg1, Model jarg1_, long jarg2, Analysis jarg2_);
   public final static native void Model_removeController(long jarg1, Model jarg1_, long jarg2, Controller jarg2_);
-  public final static native boolean Model_scale__SWIG_0(long jarg1, Model jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_, double jarg4, boolean jarg5);
-  public final static native boolean Model_scale__SWIG_1(long jarg1, Model jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_, double jarg4);
-  public final static native boolean Model_scale__SWIG_2(long jarg1, Model jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
+  public final static native boolean Model_scale__SWIG_0(long jarg1, Model jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_, boolean jarg4, double jarg5);
+  public final static native boolean Model_scale__SWIG_1(long jarg1, Model jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_, boolean jarg4);
   public final static native void Model_printBasicInfo__SWIG_0(long jarg1, Model jarg1_, long jarg2);
   public final static native void Model_printBasicInfo__SWIG_1(long jarg1, Model jarg1_);
   public final static native void Model_printDetailedInfo__SWIG_0(long jarg1, Model jarg1_, long jarg2, State jarg2_, long jarg3);
@@ -4927,7 +4923,6 @@ public class opensimSimulationJNI {
   public final static native long AbstractPathPoint_getBody(long jarg1, AbstractPathPoint jarg1_);
   public final static native void AbstractPathPoint_setBody(long jarg1, AbstractPathPoint jarg1_, long jarg2, PhysicalFrame jarg2_);
   public final static native String AbstractPathPoint_getBodyName(long jarg1, AbstractPathPoint jarg1_);
-  public final static native void AbstractPathPoint_scale(long jarg1, AbstractPathPoint jarg1_, long jarg2, Vec3 jarg2_);
   public final static native long AbstractPathPoint_getWrapObject(long jarg1, AbstractPathPoint jarg1_);
   public final static native boolean AbstractPathPoint_isActive(long jarg1, AbstractPathPoint jarg1_, long jarg2, State jarg2_);
   public final static native long AbstractPathPoint_getdPointdQ(long jarg1, AbstractPathPoint jarg1_, long jarg2, State jarg2_);
@@ -4952,7 +4947,7 @@ public class opensimSimulationJNI {
   public final static native long PathPoint_getLocation(long jarg1, PathPoint jarg1_, long jarg2, State jarg2_);
   public final static native void PathPoint_setLocation(long jarg1, PathPoint jarg1_, long jarg2, Vec3 jarg2_);
   public final static native void PathPoint_changeBodyPreserveLocation(long jarg1, PathPoint jarg1_, long jarg2, State jarg2_, long jarg3, PhysicalFrame jarg3_);
-  public final static native void PathPoint_scale(long jarg1, PathPoint jarg1_, long jarg2, Vec3 jarg2_);
+  public final static native void PathPoint_extendScale(long jarg1, PathPoint jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native long PathPoint_getdPointdQ(long jarg1, PathPoint jarg1_, long jarg2, State jarg2_);
   public final static native void delete_PathPoint(long jarg1);
   public final static native long PathWrapPoint_safeDownCast(long jarg1, OpenSimObject jarg1_);
@@ -5048,7 +5043,7 @@ public class opensimSimulationJNI {
   public final static native long MovingPathPoint_getLocation(long jarg1, MovingPathPoint jarg1_, long jarg2, State jarg2_);
   public final static native long MovingPathPoint_getVelocity(long jarg1, MovingPathPoint jarg1_, long jarg2, State jarg2_);
   public final static native long MovingPathPoint_getdPointdQ(long jarg1, MovingPathPoint jarg1_, long jarg2, State jarg2_);
-  public final static native void MovingPathPoint_scale(long jarg1, MovingPathPoint jarg1_, long jarg2, Vec3 jarg2_);
+  public final static native void MovingPathPoint_extendScale(long jarg1, MovingPathPoint jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native long SetPathPoint_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void SetPathPoint_assign(long jarg1, SetPathPoint jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String SetPathPoint_getClassName();
@@ -5198,9 +5193,8 @@ public class opensimSimulationJNI {
   public final static native void GeometryPath_getPointForceDirections(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, long jarg3, ArrayPointForceDirection jarg3_);
   public final static native void GeometryPath_addInEquivalentForces(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, double jarg3, long jarg4, VectorOfSpatialVec jarg4_, long jarg5, Vector jarg5_);
   public final static native double GeometryPath_computeMomentArm(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, long jarg3, Coordinate jarg3_);
-  public final static native void GeometryPath_preScale(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
-  public final static native void GeometryPath_scale(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
-  public final static native void GeometryPath_postScale(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
+  public final static native void GeometryPath_extendPreScale(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
+  public final static native void GeometryPath_extendPostScale(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native void GeometryPath_updateGeometry(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_);
   public final static native long Ligament_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void Ligament_assign(long jarg1, Ligament jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -5257,9 +5251,7 @@ public class opensimSimulationJNI {
   public final static native double Ligament_getTension(long jarg1, Ligament jarg1_, long jarg2, State jarg2_);
   public final static native double Ligament_computeMomentArm(long jarg1, Ligament jarg1_, long jarg2, State jarg2_, long jarg3, Coordinate jarg3_);
   public final static native void Ligament_computeForce(long jarg1, Ligament jarg1_, long jarg2, State jarg2_, long jarg3, VectorOfSpatialVec jarg3_, long jarg4, Vector jarg4_);
-  public final static native void Ligament_preScale(long jarg1, Ligament jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
-  public final static native void Ligament_scale(long jarg1, Ligament jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
-  public final static native void Ligament_postScale(long jarg1, Ligament jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
+  public final static native void Ligament_extendPostScale(long jarg1, Ligament jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native void delete_Ligament(long jarg1);
   public final static native long PathActuator_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void PathActuator_assign(long jarg1, PathActuator jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -5300,9 +5292,6 @@ public class opensimSimulationJNI {
   public final static native void PathActuator_computeForce(long jarg1, PathActuator jarg1_, long jarg2, State jarg2_, long jarg3, VectorOfSpatialVec jarg3_, long jarg4, Vector jarg4_);
   public final static native double PathActuator_computeActuation(long jarg1, PathActuator jarg1_, long jarg2, State jarg2_);
   public final static native double PathActuator_computeMomentArm(long jarg1, PathActuator jarg1_, long jarg2, State jarg2_, long jarg3, Coordinate jarg3_);
-  public final static native void PathActuator_preScale(long jarg1, PathActuator jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
-  public final static native void PathActuator_scale(long jarg1, PathActuator jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
-  public final static native void PathActuator_postScale(long jarg1, PathActuator jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native void delete_PathActuator(long jarg1);
   public final static native long new_MuscleCannotEquilibrate(String jarg1, long jarg2, String jarg3, long jarg4, OpenSimObject jarg4_, String jarg5);
   public final static native void delete_MuscleCannotEquilibrate(long jarg1);
@@ -5524,6 +5513,7 @@ public class opensimSimulationJNI {
   public final static native void ActivationFiberLengthMuscle_setActivation(long jarg1, ActivationFiberLengthMuscle jarg1_, long jarg2, State jarg2_, double jarg3);
   public final static native void ActivationFiberLengthMuscle_setFiberLength(long jarg1, ActivationFiberLengthMuscle jarg1_, long jarg2, State jarg2_, double jarg3);
   public final static native double ActivationFiberLengthMuscle_getActivationRate(long jarg1, ActivationFiberLengthMuscle jarg1_, long jarg2, State jarg2_);
+  public final static native void ActivationFiberLengthMuscle_extendPostScale(long jarg1, ActivationFiberLengthMuscle jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native void delete_ActivationFiberLengthMuscle(long jarg1);
   public final static native long PointToPointSpring_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void PointToPointSpring_assign(long jarg1, PointToPointSpring jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -5755,9 +5745,7 @@ public class opensimSimulationJNI {
   public final static native double PathSpring_getLengtheningSpeed(long jarg1, PathSpring jarg1_, long jarg2, State jarg2_);
   public final static native double PathSpring_getTension(long jarg1, PathSpring jarg1_, long jarg2, State jarg2_);
   public final static native double PathSpring_computeMomentArm(long jarg1, PathSpring jarg1_, long jarg2, State jarg2_, long jarg3, Coordinate jarg3_);
-  public final static native void PathSpring_preScale(long jarg1, PathSpring jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
-  public final static native void PathSpring_scale(long jarg1, PathSpring jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
-  public final static native void PathSpring_postScale(long jarg1, PathSpring jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
+  public final static native void PathSpring_extendPostScale(long jarg1, PathSpring jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native void delete_PathSpring(long jarg1);
   public final static native long BushingForce_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void BushingForce_assign(long jarg1, BushingForce jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -6384,6 +6372,7 @@ public class opensimSimulationJNI {
   public final static native long FrameIterator_findTransformInBaseFrame(long jarg1, FrameIterator jarg1_);
   public final static native long FrameIterator_getPositionInGround(long jarg1, FrameIterator jarg1_, long jarg2, State jarg2_);
   public final static native long FrameIterator_getModel(long jarg1, FrameIterator jarg1_);
+  public final static native long FrameIterator_getScaleFactors(long jarg1, FrameIterator jarg1_, long jarg2, ScaleSet jarg2_, long jarg3, Frame jarg3_);
   public final static native void FrameIterator_addToSystem(long jarg1, FrameIterator jarg1_, long jarg2);
   public final static native void FrameIterator_initStateFromProperties(long jarg1, FrameIterator jarg1_, long jarg2, State jarg2_);
   public final static native void FrameIterator_generateDecorations(long jarg1, FrameIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
@@ -6502,6 +6491,7 @@ public class opensimSimulationJNI {
   public final static native long BodyIterator_findTransformInBaseFrame(long jarg1, BodyIterator jarg1_);
   public final static native long BodyIterator_getPositionInGround(long jarg1, BodyIterator jarg1_, long jarg2, State jarg2_);
   public final static native long BodyIterator_getModel(long jarg1, BodyIterator jarg1_);
+  public final static native long BodyIterator_getScaleFactors(long jarg1, BodyIterator jarg1_, long jarg2, ScaleSet jarg2_, long jarg3, Frame jarg3_);
   public final static native void BodyIterator_addToSystem(long jarg1, BodyIterator jarg1_, long jarg2);
   public final static native void BodyIterator_initStateFromProperties(long jarg1, BodyIterator jarg1_, long jarg2, State jarg2_);
   public final static native void BodyIterator_generateDecorations(long jarg1, BodyIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
@@ -6711,6 +6701,7 @@ public class opensimSimulationJNI {
   public final static native boolean MuscleIterator_appliesForce(long jarg1, MuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native void MuscleIterator_setAppliesForce(long jarg1, MuscleIterator jarg1_, long jarg2, State jarg2_, boolean jarg3);
   public final static native long MuscleIterator_getModel(long jarg1, MuscleIterator jarg1_);
+  public final static native long MuscleIterator_getScaleFactors(long jarg1, MuscleIterator jarg1_, long jarg2, ScaleSet jarg2_, long jarg3, Frame jarg3_);
   public final static native void MuscleIterator_addToSystem(long jarg1, MuscleIterator jarg1_, long jarg2);
   public final static native void MuscleIterator_initStateFromProperties(long jarg1, MuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native void MuscleIterator_generateDecorations(long jarg1, MuscleIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
@@ -6785,6 +6776,7 @@ public class opensimSimulationJNI {
   public final static native long ModelComponentIterator_clone(long jarg1, ModelComponentIterator jarg1_);
   public final static native String ModelComponentIterator_getConcreteClassName(long jarg1, ModelComponentIterator jarg1_);
   public final static native long ModelComponentIterator_getModel(long jarg1, ModelComponentIterator jarg1_);
+  public final static native long ModelComponentIterator_getScaleFactors(long jarg1, ModelComponentIterator jarg1_, long jarg2, ScaleSet jarg2_, long jarg3, Frame jarg3_);
   public final static native void ModelComponentIterator_addToSystem(long jarg1, ModelComponentIterator jarg1_, long jarg2);
   public final static native void ModelComponentIterator_initStateFromProperties(long jarg1, ModelComponentIterator jarg1_, long jarg2, State jarg2_);
   public final static native void ModelComponentIterator_generateDecorations(long jarg1, ModelComponentIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
@@ -6875,6 +6867,7 @@ public class opensimSimulationJNI {
   public final static native long JointIterator_calcReactionOnChildExpressedInGround(long jarg1, JointIterator jarg1_, long jarg2, State jarg2_);
   public final static native double JointIterator_calcPower(long jarg1, JointIterator jarg1_, long jarg2, State jarg2_);
   public final static native long JointIterator_getModel(long jarg1, JointIterator jarg1_);
+  public final static native long JointIterator_getScaleFactors(long jarg1, JointIterator jarg1_, long jarg2, ScaleSet jarg2_, long jarg3, Frame jarg3_);
   public final static native void JointIterator_addToSystem(long jarg1, JointIterator jarg1_, long jarg2);
   public final static native void JointIterator_initStateFromProperties(long jarg1, JointIterator jarg1_, long jarg2, State jarg2_);
   public final static native void JointIterator_generateDecorations(long jarg1, JointIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
@@ -6964,6 +6957,7 @@ public class opensimSimulationJNI {
   public final static native long ActuatorIterator_getRecordValues(long jarg1, ActuatorIterator jarg1_, long jarg2, State jarg2_);
   public final static native boolean ActuatorIterator_hasGeometryPath(long jarg1, ActuatorIterator jarg1_);
   public final static native long ActuatorIterator_getModel(long jarg1, ActuatorIterator jarg1_);
+  public final static native long ActuatorIterator_getScaleFactors(long jarg1, ActuatorIterator jarg1_, long jarg2, ScaleSet jarg2_, long jarg3, Frame jarg3_);
   public final static native void ActuatorIterator_addToSystem(long jarg1, ActuatorIterator jarg1_, long jarg2);
   public final static native void ActuatorIterator_initStateFromProperties(long jarg1, ActuatorIterator jarg1_, long jarg2, State jarg2_);
   public final static native void ActuatorIterator_generateDecorations(long jarg1, ActuatorIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
@@ -7893,6 +7887,7 @@ public class opensimSimulationJNI {
   public final static native double Millard2012EquilibriumMuscle_calcActiveFiberForceAlongTendon(long jarg1, Millard2012EquilibriumMuscle jarg1_, double jarg2, double jarg3, double jarg4);
   public final static native long Millard2012EquilibriumMuscle_calcFiberStateGivenBoundaryCond(long jarg1, Millard2012EquilibriumMuscle jarg1_, double jarg2, double jarg3, double jarg4, double jarg5);
   public final static native double Millard2012EquilibriumMuscle_calcInextensibleTendonActiveFiberForce(long jarg1, Millard2012EquilibriumMuscle jarg1_, long jarg2, State jarg2_, double jarg3);
+  public final static native void Millard2012EquilibriumMuscle_extendPostScale(long jarg1, Millard2012EquilibriumMuscle jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native void delete_Millard2012EquilibriumMuscle(long jarg1);
   public final static native long new_Thelen2003MuscleList__SWIG_0(long jarg1, Component jarg1_, long jarg2, ComponentFilter jarg2_);
   public final static native long new_Thelen2003MuscleList__SWIG_1(long jarg1, Component jarg1_);
@@ -8085,6 +8080,7 @@ public class opensimSimulationJNI {
   public final static native boolean Thelen2003MuscleIterator_appliesForce(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native void Thelen2003MuscleIterator_setAppliesForce(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, State jarg2_, boolean jarg3);
   public final static native long Thelen2003MuscleIterator_getModel(long jarg1, Thelen2003MuscleIterator jarg1_);
+  public final static native long Thelen2003MuscleIterator_getScaleFactors(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, ScaleSet jarg2_, long jarg3, Frame jarg3_);
   public final static native void Thelen2003MuscleIterator_addToSystem(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2);
   public final static native void Thelen2003MuscleIterator_initStateFromProperties(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native void Thelen2003MuscleIterator_generateDecorations(long jarg1, Thelen2003MuscleIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
@@ -8347,6 +8343,7 @@ public class opensimSimulationJNI {
   public final static native boolean Millard2012EquilibriumMuscleIterator_appliesForce(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native void Millard2012EquilibriumMuscleIterator_setAppliesForce(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_, boolean jarg3);
   public final static native long Millard2012EquilibriumMuscleIterator_getModel(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
+  public final static native long Millard2012EquilibriumMuscleIterator_getScaleFactors(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, ScaleSet jarg2_, long jarg3, Frame jarg3_);
   public final static native void Millard2012EquilibriumMuscleIterator_addToSystem(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2);
   public final static native void Millard2012EquilibriumMuscleIterator_initStateFromProperties(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native void Millard2012EquilibriumMuscleIterator_generateDecorations(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);

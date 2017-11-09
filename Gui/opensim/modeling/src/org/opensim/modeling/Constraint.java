@@ -117,10 +117,6 @@ public class Constraint extends ModelComponent {
     return new ArrayDouble(opensimSimulationJNI.Constraint_getRecordValues(swigCPtr, this, State.getCPtr(state), state), true);
   }
 
-  public void scale(ScaleSet aScaleSet) {
-    opensimSimulationJNI.Constraint_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
-  }
-
   public void setContactPointForInducedAccelerations(State s, Vec3 point) {
     opensimSimulationJNI.Constraint_setContactPointForInducedAccelerations(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(point), point);
   }

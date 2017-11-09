@@ -94,7 +94,11 @@ public class Marker extends Station {
   }
 
   public Marker() {
-    this(opensimSimulationJNI.new_Marker(), true);
+    this(opensimSimulationJNI.new_Marker__SWIG_0(), true);
+  }
+
+  public Marker(String name, PhysicalFrame frame, Vec3 location) {
+    this(opensimSimulationJNI.new_Marker__SWIG_1(name, PhysicalFrame.getCPtr(frame), frame, Vec3.getCPtr(location), location), true);
   }
 
   public String getParentFrameName() {
@@ -111,10 +115,6 @@ public class Marker extends Station {
 
   public void changeFramePreserveLocation(State s, PhysicalFrame newParentFrame) {
     opensimSimulationJNI.Marker_changeFramePreserveLocation(swigCPtr, this, State.getCPtr(s), s, PhysicalFrame.getCPtr(newParentFrame), newParentFrame);
-  }
-
-  public void scale(Vec3 aScaleFactors) {
-    opensimSimulationJNI.Marker_scale(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {

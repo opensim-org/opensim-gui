@@ -85,20 +85,20 @@ public class Joint extends ModelComponent {
     opensimSimulationJNI.Joint_copyProperty_frames(swigCPtr, this, Joint.getCPtr(source), source);
   }
 
-  public PhysicalFrame get_frames(int i) {
-    return new PhysicalFrame(opensimSimulationJNI.Joint_get_frames(swigCPtr, this, i), false);
+  public PhysicalOffsetFrame get_frames(int i) {
+    return new PhysicalOffsetFrame(opensimSimulationJNI.Joint_get_frames(swigCPtr, this, i), false);
   }
 
-  public PhysicalFrame upd_frames(int i) {
-    return new PhysicalFrame(opensimSimulationJNI.Joint_upd_frames(swigCPtr, this, i), false);
+  public PhysicalOffsetFrame upd_frames(int i) {
+    return new PhysicalOffsetFrame(opensimSimulationJNI.Joint_upd_frames(swigCPtr, this, i), false);
   }
 
-  public void set_frames(int i, PhysicalFrame value) {
-    opensimSimulationJNI.Joint_set_frames(swigCPtr, this, i, PhysicalFrame.getCPtr(value), value);
+  public void set_frames(int i, PhysicalOffsetFrame value) {
+    opensimSimulationJNI.Joint_set_frames(swigCPtr, this, i, PhysicalOffsetFrame.getCPtr(value), value);
   }
 
-  public int append_frames(PhysicalFrame value) {
-    return opensimSimulationJNI.Joint_append_frames(swigCPtr, this, PhysicalFrame.getCPtr(value), value);
+  public int append_frames(PhysicalOffsetFrame value) {
+    return opensimSimulationJNI.Joint_append_frames(swigCPtr, this, PhysicalOffsetFrame.getCPtr(value), value);
   }
 
   public void constructProperty_frames() {
@@ -191,10 +191,6 @@ public class Joint extends ModelComponent {
 
   public double calcPower(State s) {
     return opensimSimulationJNI.Joint_calcPower(swigCPtr, this, State.getCPtr(s), s);
-  }
-
-  public void scale(ScaleSet aScaleSet) {
-    opensimSimulationJNI.Joint_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
   }
 
 }

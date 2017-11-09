@@ -97,10 +97,6 @@ public class WrapCylinderObst extends WrapObject {
     return opensimSimulationJNI.WrapCylinderObst_getDimensionsString(swigCPtr, this);
   }
 
-  public void scale(Vec3 aScaleFactors) {
-    opensimSimulationJNI.WrapCylinderObst_scale(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
-  }
-
   public void connectToModelAndBody(Model aModel, PhysicalFrame aBody) {
     opensimSimulationJNI.WrapCylinderObst_connectToModelAndBody(swigCPtr, this, Model.getCPtr(aModel), aModel, PhysicalFrame.getCPtr(aBody), aBody);
   }

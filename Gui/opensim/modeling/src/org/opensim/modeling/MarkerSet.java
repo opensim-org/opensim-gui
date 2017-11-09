@@ -73,10 +73,6 @@ public class MarkerSet extends ModelComponentSetMarkers {
     opensimSimulationJNI.MarkerSet_getMarkerNames(swigCPtr, this, ArrayStr.getCPtr(aMarkerNamesArray), aMarkerNamesArray);
   }
 
-  public void scale(ScaleSet aScaleSet) {
-    opensimSimulationJNI.MarkerSet_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
-  }
-
   public void addNamePrefix(String prefix) {
     opensimSimulationJNI.MarkerSet_addNamePrefix(swigCPtr, this, prefix);
   }

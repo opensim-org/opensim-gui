@@ -157,8 +157,8 @@ public class PhysicalFrameWithOffset extends PhysicalFrame {
     opensimSimulationJNI.PhysicalFrameWithOffset_setOffsetTransform(swigCPtr, this, Transform.getCPtr(offset), offset);
   }
 
-  public void scale(Vec3 scaleFactors) {
-    opensimSimulationJNI.PhysicalFrameWithOffset_scale(swigCPtr, this, Vec3.getCPtr(scaleFactors), scaleFactors);
+  public void extendScale(State s, ScaleSet scaleSet) {
+    opensimSimulationJNI.PhysicalFrameWithOffset_extendScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
   }
 
 }
