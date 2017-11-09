@@ -1428,6 +1428,8 @@ public class opensimCommonJNI {
   public final static native void delete_ComponentFilterAbsolutePathNameContainsString(long jarg1);
   public final static native long new_ComponentHasNoName(String jarg1, long jarg2, String jarg3, String jarg4);
   public final static native void delete_ComponentHasNoName(long jarg1);
+  public final static native long new_InvalidComponentName(String jarg1, long jarg2, String jarg3, String jarg4, String jarg5, String jarg6);
+  public final static native void delete_InvalidComponentName(long jarg1);
   public final static native long new_ComponentNotFoundOnSpecifiedPath(String jarg1, long jarg2, String jarg3, String jarg4, String jarg5, String jarg6);
   public final static native void delete_ComponentNotFoundOnSpecifiedPath(long jarg1);
   public final static native long new_ComponentIsAnOrphan(String jarg1, long jarg2, String jarg3, String jarg4, String jarg5);
@@ -2487,6 +2489,7 @@ public class opensimCommonJNI {
   public final static native long ComponentFilterMatchAll_SWIGUpcast(long jarg1);
   public final static native long ComponentFilterAbsolutePathNameContainsString_SWIGUpcast(long jarg1);
   public final static native long ComponentHasNoName_SWIGUpcast(long jarg1);
+  public final static native long InvalidComponentName_SWIGUpcast(long jarg1);
   public final static native long ComponentNotFoundOnSpecifiedPath_SWIGUpcast(long jarg1);
   public final static native long ComponentIsAnOrphan_SWIGUpcast(long jarg1);
   public final static native long SubcomponentsWithDuplicateName_SWIGUpcast(long jarg1);

@@ -77,8 +77,4 @@ public class JointSet extends ModelComponentSetJoints {
     this(opensimSimulationJNI.new_JointSet__SWIG_4(Model.getCPtr(model), model, aFileName), true);
   }
 
-  public void scale(ScaleSet aScaleSet) {
-    opensimSimulationJNI.JointSet_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
-  }
-
 }

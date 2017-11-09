@@ -1328,16 +1328,12 @@ public class Model extends ModelComponent {
     opensimSimulationJNI.Model_removeController(swigCPtr, this, Controller.getCPtr(aController), aController);
   }
 
-  public boolean scale(State state, ScaleSet scaleSet, double finalMass, boolean preserveMassDist) {
-    return opensimSimulationJNI.Model_scale__SWIG_0(swigCPtr, this, State.getCPtr(state), state, ScaleSet.getCPtr(scaleSet), scaleSet, finalMass, preserveMassDist);
+  public boolean scale(State state, ScaleSet scaleSet, boolean preserveMassDist, double finalMass) {
+    return opensimSimulationJNI.Model_scale__SWIG_0(swigCPtr, this, State.getCPtr(state), state, ScaleSet.getCPtr(scaleSet), scaleSet, preserveMassDist, finalMass);
   }
 
-  public boolean scale(State state, ScaleSet scaleSet, double finalMass) {
-    return opensimSimulationJNI.Model_scale__SWIG_1(swigCPtr, this, State.getCPtr(state), state, ScaleSet.getCPtr(scaleSet), scaleSet, finalMass);
-  }
-
-  public boolean scale(State state, ScaleSet scaleSet) {
-    return opensimSimulationJNI.Model_scale__SWIG_2(swigCPtr, this, State.getCPtr(state), state, ScaleSet.getCPtr(scaleSet), scaleSet);
+  public boolean scale(State state, ScaleSet scaleSet, boolean preserveMassDist) {
+    return opensimSimulationJNI.Model_scale__SWIG_1(swigCPtr, this, State.getCPtr(state), state, ScaleSet.getCPtr(scaleSet), scaleSet, preserveMassDist);
   }
 
   public void printBasicInfo(SWIGTYPE_p_std__ostream aOStream) {

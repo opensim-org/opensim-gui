@@ -77,8 +77,4 @@ public class WeldConstraint extends TwoFrameLinkerConstraint {
     opensimSimulationJNI.WeldConstraint_setContactPointForInducedAccelerations(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(point), point);
   }
 
-  public void scale(ScaleSet scaleSet) {
-    opensimSimulationJNI.WeldConstraint_scale(swigCPtr, this, ScaleSet.getCPtr(scaleSet), scaleSet);
-  }
-
 }

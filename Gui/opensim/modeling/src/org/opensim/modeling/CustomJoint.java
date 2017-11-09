@@ -129,8 +129,8 @@ public class CustomJoint extends Joint {
     return new Coordinate(opensimSimulationJNI.CustomJoint_updCoordinate__SWIG_1(swigCPtr, this, idx), false);
   }
 
-  public void scale(ScaleSet aScaleSet) {
-    opensimSimulationJNI.CustomJoint_scale(swigCPtr, this, ScaleSet.getCPtr(aScaleSet), aScaleSet);
+  public void extendScale(State s, ScaleSet scaleSet) {
+    opensimSimulationJNI.CustomJoint_extendScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {

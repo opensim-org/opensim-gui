@@ -125,4 +125,8 @@ public class Station extends Point {
     return new Vec3(opensimSimulationJNI.Station_findLocationInFrame(swigCPtr, this, State.getCPtr(s), s, Frame.getCPtr(frame), frame), true);
   }
 
+  public void extendScale(State s, ScaleSet scaleSet) {
+    opensimSimulationJNI.Station_extendScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
+  }
+
 }

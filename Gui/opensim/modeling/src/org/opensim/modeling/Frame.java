@@ -258,4 +258,12 @@ public class Frame extends ModelComponent {
     opensimSimulationJNI.Frame_private_attachGeometry(swigCPtr, this, Geometry.getCPtr(geom), geom);
   }
 
+  public void scaleAttachedGeometry(Vec3 scaleFactors) {
+    opensimSimulationJNI.Frame_scaleAttachedGeometry(swigCPtr, this, Vec3.getCPtr(scaleFactors), scaleFactors);
+  }
+
+  public void extendScale(State s, ScaleSet scaleSet) {
+    opensimSimulationJNI.Frame_extendScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
+  }
+
 }

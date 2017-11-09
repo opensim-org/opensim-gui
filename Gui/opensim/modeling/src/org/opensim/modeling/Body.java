@@ -201,20 +201,32 @@ public class Body extends PhysicalFrame {
     return new MassProperties(opensimSimulationJNI.Body_getMassProperties(swigCPtr, this), true);
   }
 
-  public void scale(Vec3 aScaleFactors, boolean aScaleMass) {
-    opensimSimulationJNI.Body_scale__SWIG_0(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors, aScaleMass);
+  public void scale(Vec3 scaleFactors, boolean scaleMass) {
+    opensimSimulationJNI.Body_scale__SWIG_0(swigCPtr, this, Vec3.getCPtr(scaleFactors), scaleFactors, scaleMass);
   }
 
-  public void scale(Vec3 aScaleFactors) {
-    opensimSimulationJNI.Body_scale__SWIG_1(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
+  public void scale(Vec3 scaleFactors) {
+    opensimSimulationJNI.Body_scale__SWIG_1(swigCPtr, this, Vec3.getCPtr(scaleFactors), scaleFactors);
   }
 
-  public void scaleInertialProperties(Vec3 aScaleFactors, boolean aScaleMass) {
-    opensimSimulationJNI.Body_scaleInertialProperties__SWIG_0(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors, aScaleMass);
+  public void extendScale(State s, ScaleSet scaleSet) {
+    opensimSimulationJNI.Body_extendScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
   }
 
-  public void scaleInertialProperties(Vec3 aScaleFactors) {
-    opensimSimulationJNI.Body_scaleInertialProperties__SWIG_1(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
+  public void scaleInertialProperties(ScaleSet scaleSet, boolean scaleMass) {
+    opensimSimulationJNI.Body_scaleInertialProperties__SWIG_0(swigCPtr, this, ScaleSet.getCPtr(scaleSet), scaleSet, scaleMass);
+  }
+
+  public void scaleInertialProperties(ScaleSet scaleSet) {
+    opensimSimulationJNI.Body_scaleInertialProperties__SWIG_1(swigCPtr, this, ScaleSet.getCPtr(scaleSet), scaleSet);
+  }
+
+  public void scaleInertialProperties(Vec3 scaleFactors, boolean scaleMass) {
+    opensimSimulationJNI.Body_scaleInertialProperties__SWIG_2(swigCPtr, this, Vec3.getCPtr(scaleFactors), scaleFactors, scaleMass);
+  }
+
+  public void scaleInertialProperties(Vec3 scaleFactors) {
+    opensimSimulationJNI.Body_scaleInertialProperties__SWIG_3(swigCPtr, this, Vec3.getCPtr(scaleFactors), scaleFactors);
   }
 
   public void scaleMass(double aScaleFactor) {

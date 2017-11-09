@@ -293,16 +293,8 @@ public class PathSpring extends Force {
     return opensimSimulationJNI.PathSpring_computeMomentArm(swigCPtr, this, State.getCPtr(s), s, Coordinate.getCPtr(aCoord), aCoord);
   }
 
-  public void preScale(State s, ScaleSet scaleSet) {
-    opensimSimulationJNI.PathSpring_preScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
-  }
-
-  public void scale(State s, ScaleSet scaleSet) {
-    opensimSimulationJNI.PathSpring_scale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
-  }
-
-  public void postScale(State s, ScaleSet scaleSet) {
-    opensimSimulationJNI.PathSpring_postScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
+  public void extendPostScale(State s, ScaleSet scaleSet) {
+    opensimSimulationJNI.PathSpring_extendPostScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
   }
 
 }

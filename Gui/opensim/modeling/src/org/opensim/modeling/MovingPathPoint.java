@@ -273,8 +273,8 @@ public class MovingPathPoint extends AbstractPathPoint {
     return new Vec3(opensimSimulationJNI.MovingPathPoint_getdPointdQ(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
-  public void scale(Vec3 aScaleFactors) {
-    opensimSimulationJNI.MovingPathPoint_scale(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
+  public void extendScale(State s, ScaleSet scaleSet) {
+    opensimSimulationJNI.MovingPathPoint_extendScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
   }
 
 }

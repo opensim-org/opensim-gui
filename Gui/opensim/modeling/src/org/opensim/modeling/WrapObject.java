@@ -237,8 +237,8 @@ public class WrapObject extends ModelComponent {
     opensimSimulationJNI.WrapObject_set_quadrant__SWIG_1(swigCPtr, this, value);
   }
 
-  public void scale(Vec3 aScaleFactors) {
-    opensimSimulationJNI.WrapObject_scale(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
+  public void extendScale(State s, ScaleSet scaleSet) {
+    opensimSimulationJNI.WrapObject_extendScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
   }
 
   public void connectToModelAndBody(Model aModel, PhysicalFrame aBody) {

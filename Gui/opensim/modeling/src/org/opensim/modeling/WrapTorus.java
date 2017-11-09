@@ -85,8 +85,8 @@ public class WrapTorus extends WrapObject {
     return opensimSimulationJNI.WrapTorus_getOuterRadius(swigCPtr, this);
   }
 
-  public void scale(Vec3 aScaleFactors) {
-    opensimSimulationJNI.WrapTorus_scale(swigCPtr, this, Vec3.getCPtr(aScaleFactors), aScaleFactors);
+  public void extendScale(State s, ScaleSet scaleSet) {
+    opensimSimulationJNI.WrapTorus_extendScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
   }
 
   public void connectToModelAndBody(Model aModel, PhysicalFrame aBody) {

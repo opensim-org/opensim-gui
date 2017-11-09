@@ -93,10 +93,6 @@ public class AbstractPathPoint extends Point {
     return opensimSimulationJNI.AbstractPathPoint_getBodyName(swigCPtr, this);
   }
 
-  public void scale(Vec3 scaleFactors) {
-    opensimSimulationJNI.AbstractPathPoint_scale(swigCPtr, this, Vec3.getCPtr(scaleFactors), scaleFactors);
-  }
-
   public WrapObject getWrapObject() {
     long cPtr = opensimSimulationJNI.AbstractPathPoint_getWrapObject(swigCPtr, this);
     return (cPtr == 0) ? null : new WrapObject(cPtr, false);
