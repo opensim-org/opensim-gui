@@ -140,6 +140,7 @@ public class MotionDisplayer {
     OpenSimvtkGlyphCloud  generalizedForcesRep = null;
     private OpenSimvtkGlyphCloud  markersRep = null;
     private Storage simmMotionData;
+    private Storage motionAsStates;
     private Model model;
     OpenSimContext dContext; 
     ArrayStr stateNames;
@@ -429,13 +430,14 @@ public class MotionDisplayer {
         mapIndicesToDofs.clear();
 
         stateNames = model.getStateVariableNames();
+        
         stateNames.insert(0, "time");
-
         if(colNames.arrayEquals(stateNames)) {
            // This is a states file
            statesFile = true;
            setRenderMuscleActivations(true);
-        } else  {
+        } 
+        else {
            // We should build sorted lists of object names so that we can find them easily
            for(int i=0; i < numColumnsIncludingTime; i++){
               String columnName = colNames.getitem(i);   // Time is included in labels
@@ -892,7 +894,7 @@ public class MotionDisplayer {
           after=System.nanoTime();
           OpenSimLogger.logMessage("applyFrameToModel time: "+1e-6*(after-before)+" ms.\n", OpenSimLogger.INFO);
       }
-      context.realizeVelocity();
+      model.realizeDynamics(context.getCurrentStateRef());
     }
 
     /*

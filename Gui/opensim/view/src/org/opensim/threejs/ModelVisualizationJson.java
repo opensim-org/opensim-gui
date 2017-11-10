@@ -67,6 +67,7 @@ import org.opensim.modeling.Vec3;
 import org.opensim.modeling.WrapObject;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.view.motions.MotionDisplayer;
+import org.opensim.view.pub.OpenSimDB;
 
 /**
  *
@@ -163,7 +164,7 @@ public class ModelVisualizationJson extends JSONObject {
     }
     private void createJsonForModel(Model model) {
         modelGroundJson = processGroundFrame(model);
-        state = model.getWorkingState();
+        state = OpenSimDB.getInstance().getContext(model).getCurrentStateRef();
         mdh = model.getDisplayHints();
         mdh.set_show_frames(true);
         ComponentsList mcList = model.getComponentsList();
