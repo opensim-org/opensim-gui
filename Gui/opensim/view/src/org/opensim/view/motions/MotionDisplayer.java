@@ -432,24 +432,12 @@ public class MotionDisplayer {
         stateNames = model.getStateVariableNames();
         
         stateNames.insert(0, "time");
-        /* for (int st=0; st < stateNames.size(); st++)
-            System.out.println("State name="+stateNames.get(st));
-        System.out.println("===");
-        for (int col=0; col < colNames.size(); col++)
-            System.out.println("Column name="+colNames.get(col));
-        System.out.println("===");
-        System.out.println("Sizes: States vs. Columns "+stateNames.size()+" "+colNames.size()); */
         if(colNames.arrayEquals(stateNames)) {
            // This is a states file
            statesFile = true;
            setRenderMuscleActivations(true);
-        } else  if (colNames.size() == stateNames.size()){
-            motionAsStates = new Storage(simmMotionData.getSize(), "States");
-            model.formStateStorage(simmMotionData, motionAsStates, true);
-            simmMotionData = motionAsStates;
-            statesFile = true;
-            setRenderMuscleActivations(true);
-        } else {
+        } 
+        else {
            // We should build sorted lists of object names so that we can find them easily
            for(int i=0; i < numColumnsIncludingTime; i++){
               String columnName = colNames.getitem(i);   // Time is included in labels
@@ -906,7 +894,7 @@ public class MotionDisplayer {
           after=System.nanoTime();
           OpenSimLogger.logMessage("applyFrameToModel time: "+1e-6*(after-before)+" ms.\n", OpenSimLogger.INFO);
       }
-      context.realizeVelocity();
+      model.realizeDynamics(context.getCurrentStateRef());
     }
 
     /*
