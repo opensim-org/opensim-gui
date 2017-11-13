@@ -367,7 +367,7 @@ public class opensimCommonJNI {
   public final static native int Storage_getDataColumn__SWIG_2(long jarg1, Storage jarg1_, String jarg2, long jarg3);
   public final static native void Storage_getDataColumn__SWIG_3(long jarg1, Storage jarg1_, String jarg2, long jarg3, ArrayDouble jarg3_, double jarg4);
   public final static native void Storage_getDataColumn__SWIG_4(long jarg1, Storage jarg1_, String jarg2, long jarg3, ArrayDouble jarg3_);
-  public final static native long Storage_getAsTimeSeriesTable(long jarg1, Storage jarg1_);
+  public final static native long Storage_exportToTable(long jarg1, Storage jarg1_);
   public final static native long Storage_getColumnIndicesForIdentifier(long jarg1, Storage jarg1_, String jarg2);
   public final static native void Storage_setStepInterval(long jarg1, Storage jarg1_, int jarg2);
   public final static native int Storage_getStepInterval(long jarg1, Storage jarg1_);
