@@ -169,10 +169,11 @@ public final class TheApp {
     /**
      * Get default location to search for geometry in a new installation. This is shown in GUI under 
      * Preferences -> Geometry Path and can be edited later
-     * @return $installDir/Geometry
+     * @return $installDir/Geometry, this is platform dependent due to different layout
      */
     public static String getDefaultGeometrySearchPath() {
-        return getInstallDir()+File.separatorChar+"Geometry"+File.separatorChar;
+        return getInstallDir()+File.separatorChar+"Geometry"+File.separatorChar+
+                File.pathSeparator+getInstallDir()+File.separatorChar+".."+File.separatorChar+"Geometry"+File.separatorChar;
     }
     /**
      * Get User Directory, this is usually with writable permissions and is
