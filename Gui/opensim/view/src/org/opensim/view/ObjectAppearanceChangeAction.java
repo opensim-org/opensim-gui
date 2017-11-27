@@ -42,9 +42,13 @@ import org.opensim.view.nodes.OpenSimNode;
 public abstract class ObjectAppearanceChangeAction extends CallableSystemAction {
     
     protected Vector<OneComponentNode> collectAffectedComponentNodes() {
+        Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
+        return collectAffectedComponentNodesFromSelection(selected);
+    }
+
+    static public Vector<OneComponentNode> collectAffectedComponentNodesFromSelection(Node[] selected) {
         Vector<OneComponentNode> objects = new Vector<OneComponentNode>();
         Vector<OpenSimObject> opensimObjects = new Vector<OpenSimObject>();
-        Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         for (int i = 0; i < selected.length; i++) {
             if (!selected[i].isLeaf()){
                 Children ch = selected[i].getChildren();
@@ -63,7 +67,7 @@ public abstract class ObjectAppearanceChangeAction extends CallableSystemAction 
     }
 
     // node could be a Group or a list of objects not backed by OpenSim objects
-    protected void collectDescendentNodes(OpenSimNode node, Vector<OneComponentNode> descendents, Vector<OpenSimObject> osimObjects) {
+    static protected void collectDescendentNodes(OpenSimNode node, Vector<OneComponentNode> descendents, Vector<OpenSimObject> osimObjects) {
         
         if (node.isLeaf() && node instanceof OneComponentNode){
             if(!(osimObjects.contains(((OneComponentNode)node).getOpenSimObject()))){

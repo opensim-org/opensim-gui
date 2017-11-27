@@ -24,19 +24,14 @@
 package org.opensim.view;
 
 import java.util.Vector;
-import org.openide.nodes.Children;
 import org.openide.nodes.Node;
-import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
-import org.openide.util.actions.CallableSystemAction;
 import org.opensim.view.nodes.OneComponentNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
-import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
-import org.opensim.view.nodes.OpenSimObjectSetNode;
 import org.opensim.view.pub.ViewDB;
 
 public final class ObjectDisplayOpacityAction extends ObjectAppearanceChangeAction {
-   
+
    public void performAction() {
       Vector<OneComponentNode> objects = collectAffectedComponentNodes();
       ViewDB.getInstance().setApplyAppearanceChange(false);
@@ -69,5 +64,28 @@ public final class ObjectDisplayOpacityAction extends ObjectAppearanceChangeActi
         }
         return isColorable;
     }
+    
+    public static void ChangeUserSelectedNodesOpacity(Vector<OneComponentNode> nodes, double newOpacity) {
+        for (OneComponentNode nextNode:nodes){
+            if (nextNode.isLeaf())
+                ObjectDisplayOpacityAction.applyOperationToNode(nextNode, newOpacity);
+            else {
+                Vector<OneComponentNode> descendents = ObjectDisplayColorAction.collectAffectedComponentNodesFromSelection(new Node[]{nextNode});
+                for (OneComponentNode desc:descendents)
+                    ObjectDisplayOpacityAction.applyOperationToNode(desc, newOpacity);
+            }
+        }
+        ViewDB.getInstance().repaintAll();
+     }
+    private static void applyOperationToNode(final OneComponentNode objectNode, double newOpacity) {
+        boolean hasColor = (objectNode instanceof ColorableInterface);
+        if (hasColor) {
+            ((ColorableInterface) objectNode).setOpacity(newOpacity);
+        }
+        objectNode.refreshNode();
+    }
+    
+    
+   
   
 }

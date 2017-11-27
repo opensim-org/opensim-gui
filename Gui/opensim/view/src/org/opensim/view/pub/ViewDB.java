@@ -27,6 +27,7 @@
  */
 package org.opensim.view.pub;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -54,6 +55,7 @@ import org.eclipse.jetty.WebSocketDB;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.openide.awt.StatusDisplayer;
+import org.openide.nodes.Node;
 import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
@@ -73,6 +75,9 @@ import org.opensim.utils.Prefs;
 import org.opensim.utils.TheApp;
 import org.opensim.view.*;
 import org.opensim.view.experimentaldata.ExperimentalDataVisuals;
+import org.opensim.view.nodes.OneComponentNode;
+import org.opensim.view.nodes.OpenSimNode;
+import org.opensim.view.nodes.OpenSimObjectNode;
 import static org.opensim.view.pub.ViewDB.isVtkGraphicsAvailable;
 import vtk.AxesActor;
 import vtk.FrameActor;
@@ -795,9 +800,17 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     */
    public void setObjectColor(OpenSimObject object, double[] colorComponents) {
 
-          Component mc = Component.safeDownCast(object);
+          ModelComponent mc = ModelComponent.safeDownCast(object);
           if (mc!=null){
-              // FOX40 getModelVisuals(mc.getModel()).setObjectColor(object, colorComponents);
+              Node root = ExplorerTopComponent.getDefault().getExplorerManager().getRootContext();
+              if (root instanceof OpenSimNode){
+                  OpenSimObjectNode objNode = ((OpenSimNode) root).findChild(object);
+                  Color newColor = new Color((float)colorComponents[0], (float) colorComponents[1], (float) colorComponents[2]);
+                  Vector<OneComponentNode> nodes = new Vector<OneComponentNode>();
+                  if (objNode instanceof OneComponentNode)
+                      nodes.add((OneComponentNode) objNode);
+                  ObjectDisplayColorAction.ChangeUserSelectedNodesColor(nodes, newColor ); 
+              }
           }
       
       renderAll();
@@ -899,15 +912,19 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     */
    //-----------------------------------------------------------------------------
    public static void setObjectOpacity( OpenSimObject object, double newOpacity ) {
-    if (object instanceof Geometry)
-          ((Geometry)object).setOpacity(newOpacity);
-    if (isVtkGraphicsAvailable()){
-      vtkProp3D asm = ViewDB.getInstance().getVtkRepForObject(object);
-      ViewDB.applyOpacity( newOpacity, asm );
-      if( asm instanceof BodyDisplayer )
-          ((BodyDisplayer) asm).setOpacity(newOpacity);
-     }
-    
+          ModelComponent mc = ModelComponent.safeDownCast(object);
+          if (mc!=null){
+              Node root = ExplorerTopComponent.getDefault().getExplorerManager().getRootContext();
+              if (root instanceof OpenSimNode){
+                  OpenSimObjectNode objNode = ((OpenSimNode) root).findChild(object);
+                  Vector<OneComponentNode> nodes = new Vector<OneComponentNode>();
+                  if (objNode instanceof OneComponentNode)
+                      nodes.add((OneComponentNode) objNode);
+                  ObjectDisplayOpacityAction.ChangeUserSelectedNodesOpacity(nodes, newOpacity ); 
+              }
+          }
+      
+      renderAll();
    }
    
    //-----------------------------------------------------------------------------

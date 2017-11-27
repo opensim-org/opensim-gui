@@ -59,7 +59,13 @@ public final class ObjectDisplayColorAction extends ObjectAppearanceChangeAction
         float[] newColorComponentsAsFloatArray = newColor.getRGBComponents(null);
         double[] newColorComponentsAsDoubleArray = {newColorComponentsAsFloatArray[0], newColorComponentsAsFloatArray[1], newColorComponentsAsFloatArray[2]};
         for (OneComponentNode nextNode:nodes){
-            ObjectDisplayColorAction.applyOperationToNode(nextNode, newColorComponentsAsDoubleArray);
+            if (nextNode.isLeaf())
+                ObjectDisplayColorAction.applyOperationToNode(nextNode, newColorComponentsAsDoubleArray);
+            else {
+                Vector<OneComponentNode> descendents = ObjectDisplayColorAction.collectAffectedComponentNodesFromSelection(new Node[]{nextNode});
+                for (OneComponentNode desc:descendents)
+                    ObjectDisplayColorAction.applyOperationToNode(desc, newColorComponentsAsDoubleArray);
+            }
         }
         ViewDB.getInstance().repaintAll();
     }
