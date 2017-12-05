@@ -112,9 +112,6 @@ public final class TheApp {
      * @return installDir
      */
     public static String getInstallDir() {
-        Map<String, String> env = System.getenv();
-        //if (installDir == null) 
-        //    installDir = env.get("OPENSIM_HOME");
         if (installDir == null){ try {
             // Test cross platform and cross platform with Spaces in path names etc.
             URI jarfile = TheApp.class.getProtectionDomain().getCodeSource().getLocation().toURI();
@@ -181,5 +178,22 @@ public final class TheApp {
      */
     public static String getUserDir() {
         return userDir;
+    }
+
+    public static String installResources() {
+        // Popup a directory browser dialog prompting for install location of Models, Scripts
+        String userHome = System.getProperty("user.home")+File.separator+"Documents"+File.separator+"OpenSim40";
+        FileUtils.getInstance().setWorkingDirectoryPreference(userHome);
+        String userSelection = FileUtils.getInstance().browseForFolder("Folder to install Resources (Models, Scripts):");
+        if (userSelection != null){
+            String src = getInstallDir();
+            String dest = userSelection;
+            if (!new File(dest).exists())
+                new File(dest).mkdirs();
+            System.out.println("copy resources from "+src+" to "+dest);
+            return userSelection;
+        }
+        else
+            return getUserDir();
     }
 }
