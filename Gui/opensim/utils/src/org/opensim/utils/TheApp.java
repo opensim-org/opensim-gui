@@ -29,8 +29,11 @@ package org.opensim.utils;
 
 import java.awt.Image;
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
@@ -38,6 +41,7 @@ import javax.swing.JFrame;
 import org.openide.LifecycleManager;
 import org.openide.util.Exceptions;
 import org.openide.util.ImageUtilities;
+import java.nio.file.StandardCopyOption;
 /**
  *
  * @author Ayman, a convenience class used for now as a place holder for common utilities/helper functions used
@@ -112,9 +116,6 @@ public final class TheApp {
      * @return installDir
      */
     public static String getInstallDir() {
-        Map<String, String> env = System.getenv();
-        //if (installDir == null) 
-        //    installDir = env.get("OPENSIM_HOME");
         if (installDir == null){ try {
             // Test cross platform and cross platform with Spaces in path names etc.
             URI jarfile = TheApp.class.getProtectionDomain().getCodeSource().getLocation().toURI();
@@ -181,5 +182,39 @@ public final class TheApp {
      */
     public static String getUserDir() {
         return userDir;
+    }
+
+    public static String installResources() {
+        // Popup a directory browser dialog prompting for install location of Models, Scripts
+        String userHome = System.getProperty("user.home")+File.separator+"Documents"+File.separator+"OpenSim40";
+        FileUtils.getInstance().setWorkingDirectoryPreference(userHome);
+        String userSelection = FileUtils.getInstance().browseForFolder("Folder to install Resources (Models, Scripts):");
+        String[] subdirs = new String[]{"Models"}; // Add more folders here as needed
+        if (userSelection != null){
+            String src = getInstallDir()+File.separatorChar+".."+File.separatorChar;
+            String dest = userSelection;
+            System.out.println("copy resources from "+src+" to "+dest);
+            CopyOption[] options = 
+            new CopyOption[] { StandardCopyOption.COPY_ATTRIBUTES, 
+                StandardCopyOption.REPLACE_EXISTING };
+            for (String dir:subdirs){
+                Path srcPath = Paths.get(src+File.separator+dir);
+                Path destPath = Paths.get(dest+File.separator+dir);
+                boolean success=true;
+                if (!destPath.toFile().exists())
+                    success = destPath.toFile().mkdirs();
+                if (success){
+                    try {
+                        FileUtils.copyFiles(srcPath, destPath);
+                    } catch (IOException ex) {
+                        Exceptions.printStackTrace(ex);
+                        System.out.println("Folder "+srcPath.toAbsolutePath()+" couldn't be copied..Skipping");
+                    }
+                }
+            }
+            return userSelection;
+        }
+        else
+            return getUserDir();
     }
 }

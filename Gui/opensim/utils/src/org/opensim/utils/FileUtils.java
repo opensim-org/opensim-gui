@@ -31,6 +31,11 @@ import java.awt.Frame;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.prefs.Preferences;
@@ -559,5 +564,22 @@ public final class FileUtils {
 	//windows
 	return (os.indexOf( "win" ) >= 0); 
  
+    }
+    public static void copyFiles(final Path sourcePath, final Path targetPath) throws IOException{
+        Files.walkFileTree(sourcePath, new SimpleFileVisitor<Path>() {
+        public FileVisitResult preVisitDirectory(final Path dir,
+                final BasicFileAttributes attrs) throws IOException {
+            Files.createDirectories(targetPath.resolve(sourcePath
+                    .relativize(dir)));
+            return FileVisitResult.CONTINUE;
+        }
+
+        public FileVisitResult visitFile(final Path file,
+                final BasicFileAttributes attrs) throws IOException {
+            Files.copy(file,
+                    targetPath.resolve(sourcePath.relativize(file)));
+            return FileVisitResult.CONTINUE;
+        }
+    });
     }
 }

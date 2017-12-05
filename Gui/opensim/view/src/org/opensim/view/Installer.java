@@ -23,8 +23,6 @@
 
 package org.opensim.view;
 
-import java.beans.PropertyEditor;
-import java.beans.PropertyEditorManager;
 import java.beans.XMLDecoder;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -32,12 +30,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.prefs.Preferences;
 import javax.swing.JPopupMenu;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.openide.modules.ModuleInstall;
 import org.openide.util.NbBundle;
-import org.opensim.modeling.Body;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.utils.ApplicationState;
 import org.opensim.utils.TheApp;
@@ -45,7 +41,6 @@ import org.opensim.view.actions.ApplicationExit;
 import org.opensim.view.base.OpenSimBaseCanvas;
 import org.opensim.view.editors.BodyNameEditor;
 import org.opensim.view.editors.FrameNameEditor;
-import org.opensim.view.editors.MuscleEditorTopComponent;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.view.motions.MotionsDBDescriptor;
 import org.opensim.view.nodes.EditorRegistry;
@@ -134,6 +129,15 @@ public class Installer extends ModuleInstall {
      * built nito the application */
     private void restorePrefs()
     {
+         String currentVersionStr = NbBundle.getMessage(TheApp.class, "CTL_BuildDate");
+         String savedVersionStr = Preferences.userNodeForPackage(TheApp.class).get("BuildDate", null);
+         if (!currentVersionStr.equalsIgnoreCase(savedVersionStr)){
+             // First launch, copy resources to User selected folder and save that as OpenSimUserDir
+             String userDir = TheApp.installResources();
+             Preferences.userNodeForPackage(TheApp.class).put("OpenSimResourcesDir", userDir);
+         }
+         Preferences.userNodeForPackage(TheApp.class).put("BuildDate", currentVersionStr);
+         
          String AAFRamesDefaultStr = NbBundle.getMessage(OpenSimBaseCanvas.class, "CTL_AAFrames");        
          String saved=Preferences.userNodeForPackage(TheApp.class).get("AntiAliasingFrames", AAFRamesDefaultStr);
          Preferences.userNodeForPackage(TheApp.class).put("AntiAliasingFrames", saved);
