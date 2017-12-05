@@ -191,7 +191,7 @@ public final class TheApp {
         String userSelection = FileUtils.getInstance().browseForFolder("Folder to install Resources (Models, Scripts):");
         String[] subdirs = new String[]{"Models"}; // Add more folders here as needed
         if (userSelection != null){
-            String src = getInstallDir();
+            String src = getInstallDir()+File.separatorChar+".."+File.separatorChar;
             String dest = userSelection;
             System.out.println("copy resources from "+src+" to "+dest);
             CopyOption[] options = 
