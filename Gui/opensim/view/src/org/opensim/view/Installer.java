@@ -136,7 +136,7 @@ public class Installer extends ModuleInstall {
              String userDir = TheApp.installResources();
              Preferences.userNodeForPackage(TheApp.class).put("OpenSimResourcesDir", userDir);
          }
-         //Preferences.userNodeForPackage(TheApp.class).put("BuildDate", currentVersionStr);
+         Preferences.userNodeForPackage(TheApp.class).put("BuildDate", currentVersionStr);
          
          String AAFRamesDefaultStr = NbBundle.getMessage(OpenSimBaseCanvas.class, "CTL_AAFrames");        
          String saved=Preferences.userNodeForPackage(TheApp.class).get("AntiAliasingFrames", AAFRamesDefaultStr);
