@@ -852,7 +852,7 @@ public class ModelVisualizationJson extends JSONObject {
         else
             localTransform.setP(computedLocation);
         bpptInBodyJson.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1.0), visScaleFactor));
-        bpptInBodyJson.put("visible", true);
+        bpptInBodyJson.put("visible", false);
         return bpptInBodyJson;
     }
 

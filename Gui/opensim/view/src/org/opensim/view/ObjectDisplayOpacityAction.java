@@ -39,9 +39,7 @@ public final class ObjectDisplayOpacityAction extends ObjectAppearanceChangeActi
    
    public void performAction() {
       Vector<OneComponentNode> objects = collectAffectedComponentNodes();
-      ViewDB.getInstance().setApplyAppearanceChange(false);
-      ObjectDisplayOpacityPanel.showDialog(objects);
-      ViewDB.getInstance().setApplyAppearanceChange(true);
+      new ObjectDisplayOpacityPanel(objects).showDialog();
    }
 
    
