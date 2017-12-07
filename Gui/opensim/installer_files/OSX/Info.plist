@@ -17,6 +17,9 @@
     
     <key>CFBundleShortVersionString</key>
     <string>@VERSION@</string>
+
+    <key>CFBundleIdentifier</key>
+    <string>org.opensim.app.@VERSION@</string>
     
     <key>CFBundleSignature</key>
     <string>????</string>
