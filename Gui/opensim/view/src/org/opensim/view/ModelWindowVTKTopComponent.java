@@ -567,7 +567,7 @@ public class ModelWindowVTKTopComponent extends TopComponent
         if (btn.getModel().isSelected()) {
             String fileName = null;
             if (saveFramesOnly) {
-                fileName = FileUtils.getInstance().browseForFolder("Folder to save movie frames");
+                fileName = FileUtils.getInstance().browseForFolder("Folder to save movie frames", false);
                 if (fileName != null && !(new File(fileName).exists())) {
                     boolean exists = false;
                     if (!exists) {

@@ -188,7 +188,7 @@ public final class TheApp {
         // Popup a directory browser dialog prompting for install location of Models, Scripts
         String userHome = System.getProperty("user.home")+File.separator+"Documents"+File.separator+"OpenSim40";
         FileUtils.getInstance().setWorkingDirectoryPreference(userHome);
-        String userSelection = FileUtils.getInstance().browseForFolder("Folder to install Resources (Models, Scripts):");
+        String userSelection = FileUtils.getInstance().browseForFolder("Choose a folder to install models and scripts:", false);
         String[] subdirs = new String[]{"Models"}; // Add more folders here as needed
         if (userSelection != null){
             String src = getInstallDir()+File.separatorChar+".."+File.separatorChar;
