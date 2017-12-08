@@ -188,10 +188,10 @@ public final class TheApp {
         // Popup a directory browser dialog prompting for install location of Models, Scripts
         String userHome = System.getProperty("user.home")+File.separator+"Documents"+File.separator+"OpenSim40";
         FileUtils.getInstance().setWorkingDirectoryPreference(userHome);
-        String userSelection = FileUtils.getInstance().browseForFolder("Choose a folder to install models and scripts:", false);
+        String userSelection = FileUtils.getInstance().browseForFolder("Choose a folder to install models and scripts:", true);
         String[] subdirs = new String[]{"Models"}; // Add more folders here as needed
         if (userSelection != null){
-            String src = getInstallDir()+File.separatorChar+".."+File.separatorChar;
+            String src = getPlatformSpecificInstalledResourcesDir();
             String dest = userSelection;
             System.out.println("copy resources from "+src+" to "+dest);
             CopyOption[] options = 
@@ -216,5 +216,15 @@ public final class TheApp {
         }
         else
             return getUserDir();
+    }
+
+    private static String getPlatformSpecificInstalledResourcesDir() {
+        if (OS.indexOf("win") >= 0){
+         return (getInstallDir()+File.separatorChar+".."+File.separatorChar);
+        }
+        else { //OSX
+          return "/Users/aymanhabib/Applications/OpenSim 6cbf458-2017-12-05/OpenSim 6cbf458-2017-12-05.app/Contents/Resources/OpenSim";
+          //getInstallDir();     
+        }
     }
 }
