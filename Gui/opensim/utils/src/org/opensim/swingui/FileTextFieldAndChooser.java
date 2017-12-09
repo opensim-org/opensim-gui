@@ -219,12 +219,12 @@ public class FileTextFieldAndChooser extends javax.swing.JPanel implements Actio
       String result =null;
      if (isSaveMode()){
          result = directoriesOnly ?
-                      FileUtils.getInstance().browseForFolder(ownerFrame, "") :
+                      FileUtils.getInstance().browseForFolder(ownerFrame, "", true) :
                       FileUtils.getInstance().browseForFilenameToSave(filter, true, "", ownerFrame);
      }
      else
          result = directoriesOnly ?
-                      FileUtils.getInstance().browseForFolder(ownerFrame, "") :
+                      FileUtils.getInstance().browseForFolder(ownerFrame, "", false) :
                       FileUtils.getInstance().browseForFilename(filter, ownerFrame);
       if(result != null) setFileName(result);
    }//GEN-LAST:event_browseButtonActionPerformed

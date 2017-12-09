@@ -240,15 +240,15 @@ public final class FileUtils {
 
     public String browseForFolder()
     {
-       return browseForFolder(null, "");
+       return browseForFolder(null, "", false);
     }
     
-    public String browseForFolder(String description)
+    public String browseForFolder(String description, boolean allowCreate)
     {
-       return browseForFolder(null, description);
+       return browseForFolder(null, description, allowCreate);
     }
     
-    public String browseForFolder(Frame parent, String description)
+    public String browseForFolder(Frame parent, String description, boolean allowCreate)
     {
         // Init dialog to use "WorkDirectory" as thought of by user
         String defaultDir = Preferences.userNodeForPackage(TheApp.class).get("WorkDirectory", "");
@@ -264,7 +264,11 @@ public final class FileUtils {
         Frame topFrame = (parent==null)?TheApp.getAppFrame():parent;
         for (;;) {
            dlog.setSelectedFile(new File(""));
-           int result = dlog.showOpenDialog(topFrame);
+           int result;
+           if (allowCreate)
+               result= dlog.showSaveDialog(topFrame);
+           else
+               result= dlog.showOpenDialog(topFrame);
            outFilename = null;
            if (result == JFileChooser.APPROVE_OPTION && dlog.getSelectedFile() != null)
                 outFilename = dlog.getSelectedFile().getAbsolutePath();

@@ -42,6 +42,10 @@ import org.openide.LifecycleManager;
 import org.openide.util.Exceptions;
 import org.openide.util.ImageUtilities;
 import java.nio.file.StandardCopyOption;
+import javax.swing.JButton;
+import org.openide.DialogDescriptor;
+import org.openide.DialogDisplayer;
+import org.openide.NotifyDescriptor;
 /**
  *
  * @author Ayman, a convenience class used for now as a place holder for common utilities/helper functions used
@@ -173,8 +177,7 @@ public final class TheApp {
      * @return $installDir/Geometry, this is platform dependent due to different layout
      */
     public static String getDefaultGeometrySearchPath() {
-        return getInstallDir()+File.separatorChar+"Geometry"+File.separatorChar+
-                File.pathSeparator+getInstallDir()+File.separatorChar+".."+File.separatorChar+"Geometry"+File.separatorChar;
+        return getPlatformSpecificInstallDir()+File.separatorChar+"Geometry"+File.separatorChar;
     }
     /**
      * Get User Directory, this is usually with writable permissions and is
@@ -188,10 +191,24 @@ public final class TheApp {
         // Popup a directory browser dialog prompting for install location of Models, Scripts
         String userHome = System.getProperty("user.home")+File.separator+"Documents"+File.separator+"OpenSim40";
         FileUtils.getInstance().setWorkingDirectoryPreference(userHome);
-        String userSelection = FileUtils.getInstance().browseForFolder("Folder to install Resources (Models, Scripts):");
+        String userSelection = "";
+        NotifyDescriptor.InputLine dlg = new NotifyDescriptor.InputLine("Enter folder to install models and scripts:", "Select Folder for User Resources");
+        dlg.setInputText(userHome);
+        dlg.setOptions(new Object[]{DialogDescriptor.OK_OPTION, DialogDescriptor.CANCEL_OPTION, new JButton("Customize")});
+        Object userChoice = DialogDisplayer.getDefault().notify(dlg);
+        if(userChoice==NotifyDescriptor.OK_OPTION){
+            userSelection = userHome;
+        }
+        else if (userChoice==NotifyDescriptor.CANCEL_OPTION){
+            userSelection = null;
+            return userSelection;
+        }
+        else {
+            userSelection = FileUtils.getInstance().browseForFolder("Choose a folder to install models and scripts:", true);
+        }
         String[] subdirs = new String[]{"Models"}; // Add more folders here as needed
         if (userSelection != null){
-            String src = getInstallDir()+File.separatorChar+".."+File.separatorChar;
+            String src = getPlatformSpecificInstallDir();
             String dest = userSelection;
             System.out.println("copy resources from "+src+" to "+dest);
             CopyOption[] options = 
@@ -215,6 +232,15 @@ public final class TheApp {
             return userSelection;
         }
         else
-            return getUserDir();
+            return null;
+    }
+
+    private static String getPlatformSpecificInstallDir() {
+        if (OS.indexOf("win") >= 0){
+         return (getInstallDir()+File.separatorChar+".."+File.separatorChar);
+        }
+        else { //OSX
+          return getInstallDir();     
+        }
     }
 }
