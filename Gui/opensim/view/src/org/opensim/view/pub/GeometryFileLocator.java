@@ -45,7 +45,7 @@ import org.opensim.utils.*;
  */
 public class GeometryFileLocator {
    
-   static GeometryFileLocator locator;
+   static GeometryFileLocator locator=null;
    public static String geometryInstallationDirectory=TheApp.getDefaultGeometrySearchPath();
    /** Creates a new instance of GeometryFileLocator */
    public GeometryFileLocator() {

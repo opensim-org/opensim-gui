@@ -177,8 +177,7 @@ public final class TheApp {
      * @return $installDir/Geometry, this is platform dependent due to different layout
      */
     public static String getDefaultGeometrySearchPath() {
-        return getInstallDir()+File.separatorChar+"Geometry"+File.separatorChar+
-                File.pathSeparator+getInstallDir()+File.separatorChar+".."+File.separatorChar+"Geometry"+File.separatorChar;
+        return getPlatformSpecificInstallDir()+File.separatorChar+"Geometry"+File.separatorChar;
     }
     /**
      * Get User Directory, this is usually with writable permissions and is
@@ -196,10 +195,11 @@ public final class TheApp {
         NotifyDescriptor.InputLine dlg = new NotifyDescriptor.InputLine("Enter folder to install models and scripts:", "Select Folder for User Resources");
         dlg.setInputText(userHome);
         dlg.setOptions(new Object[]{DialogDescriptor.OK_OPTION, DialogDescriptor.CANCEL_OPTION, new JButton("Customize")});
-        if(DialogDisplayer.getDefault().notify(dlg)==NotifyDescriptor.OK_OPTION){
+        Object userChoice = DialogDisplayer.getDefault().notify(dlg);
+        if(userChoice==NotifyDescriptor.OK_OPTION){
             userSelection = userHome;
         }
-        else if (DialogDisplayer.getDefault().notify(dlg)==NotifyDescriptor.CANCEL_OPTION){
+        else if (userChoice==NotifyDescriptor.CANCEL_OPTION){
             userSelection = null;
             return userSelection;
         }
@@ -208,7 +208,7 @@ public final class TheApp {
         }
         String[] subdirs = new String[]{"Models"}; // Add more folders here as needed
         if (userSelection != null){
-            String src = getPlatformSpecificInstalledResourcesDir();
+            String src = getPlatformSpecificInstallDir();
             String dest = userSelection;
             System.out.println("copy resources from "+src+" to "+dest);
             CopyOption[] options = 
@@ -235,7 +235,7 @@ public final class TheApp {
             return null;
     }
 
-    private static String getPlatformSpecificInstalledResourcesDir() {
+    private static String getPlatformSpecificInstallDir() {
         if (OS.indexOf("win") >= 0){
          return (getInstallDir()+File.separatorChar+".."+File.separatorChar);
         }
