@@ -42,6 +42,10 @@ import org.openide.LifecycleManager;
 import org.openide.util.Exceptions;
 import org.openide.util.ImageUtilities;
 import java.nio.file.StandardCopyOption;
+import javax.swing.JButton;
+import org.openide.DialogDescriptor;
+import org.openide.DialogDisplayer;
+import org.openide.NotifyDescriptor;
 /**
  *
  * @author Ayman, a convenience class used for now as a place holder for common utilities/helper functions used
@@ -188,7 +192,20 @@ public final class TheApp {
         // Popup a directory browser dialog prompting for install location of Models, Scripts
         String userHome = System.getProperty("user.home")+File.separator+"Documents"+File.separator+"OpenSim40";
         FileUtils.getInstance().setWorkingDirectoryPreference(userHome);
-        String userSelection = FileUtils.getInstance().browseForFolder("Choose a folder to install models and scripts:", true);
+        String userSelection = "";
+        NotifyDescriptor.InputLine dlg = new NotifyDescriptor.InputLine("Enter folder to install models and scripts:", "Select Folder for User Resources");
+        dlg.setInputText(userHome);
+        dlg.setOptions(new Object[]{DialogDescriptor.OK_OPTION, DialogDescriptor.CANCEL_OPTION, new JButton("Customize")});
+        if(DialogDisplayer.getDefault().notify(dlg)==NotifyDescriptor.OK_OPTION){
+            userSelection = userHome;
+        }
+        else if (DialogDisplayer.getDefault().notify(dlg)==NotifyDescriptor.CANCEL_OPTION){
+            userSelection = null;
+            return userSelection;
+        }
+        else {
+            userSelection = FileUtils.getInstance().browseForFolder("Choose a folder to install models and scripts:", true);
+        }
         String[] subdirs = new String[]{"Models"}; // Add more folders here as needed
         if (userSelection != null){
             String src = getPlatformSpecificInstalledResourcesDir();
@@ -215,7 +232,7 @@ public final class TheApp {
             return userSelection;
         }
         else
-            return getUserDir();
+            return null;
     }
 
     private static String getPlatformSpecificInstalledResourcesDir() {
@@ -223,8 +240,7 @@ public final class TheApp {
          return (getInstallDir()+File.separatorChar+".."+File.separatorChar);
         }
         else { //OSX
-          return "/Users/aymanhabib/Applications/OpenSim 6cbf458-2017-12-05/OpenSim 6cbf458-2017-12-05.app/Contents/Resources/OpenSim";
-          //getInstallDir();     
+          return getInstallDir();     
         }
     }
 }
