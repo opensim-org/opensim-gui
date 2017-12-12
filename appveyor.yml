@@ -19,16 +19,18 @@ nuget:
   disable_publish_on_pr: true
 
 init:
-  # Note: python 2.7 32bit is already on the path. We want v2.7 64bit,
-  # so we must add v2.7 64bit earlier on the PATH.
-  # http://www.appveyor.com/docs/installed-software
-  - SET OPENSIM_HOME=C:/OpenSim
-  - SET JAVA_HOME=C:\\Program Files\\Java\\jdk1.8.0_121
-  - SET PATH=%JAVA_HOME%/bin;%OPENSIM_HOME%/bin;%PATH%
   #- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 install:
   - ps: choco install jdk8
+  # Put java on the PATH.
+  - ps: refreshenv
+  
+  ## Set environment variables.
+  - echo %JAVA_HOME%
+  - SET OPENSIM_HOME=C:/OpenSim
+  - SET PATH=%JAVA_HOME%/bin;%OPENSIM_HOME%/bin;%PATH%
+  
   ## The GUI is built with the Netbeans platform.
   # We need 8.2 and this isn't available on Chocolatey.
   #- ps: choco install netbeans-jee --version 8.1 --yes --limit-output --allow-empty-checksums| Out-Null
