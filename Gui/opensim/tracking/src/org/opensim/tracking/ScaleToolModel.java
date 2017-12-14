@@ -916,6 +916,9 @@ public class ScaleToolModel extends Observable implements Observer {
       scaleTool.getModelScaler().setMarkerFileName(FileUtils.makePathAbsolute(scaleTool.getModelScaler().getMarkerFileName(),parentDir));
       scaleTool.getMarkerPlacer().setStaticPoseFileName(FileUtils.makePathAbsolute(scaleTool.getMarkerPlacer().getStaticPoseFileName(),parentDir));
       scaleTool.getMarkerPlacer().setCoordinateFileName(FileUtils.makePathAbsolute(scaleTool.getMarkerPlacer().getCoordinateFileName(),parentDir));
+      scaleTool.getMarkerPlacer().setOutputModelFileName(FileUtils.makePathAbsolute(scaleTool.getMarkerPlacer().getOutputModelFileName(),parentDir));
+      scaleTool.getMarkerPlacer().setOutputMotionFileName(FileUtils.makePathAbsolute(scaleTool.getMarkerPlacer().getOutputMotionFileName(),parentDir));
+      scaleTool.getMarkerPlacer().setOutputMarkerFileName(FileUtils.makePathAbsolute(scaleTool.getMarkerPlacer().getOutputMarkerFileName(),parentDir));
    }
 
    private void AbsoluteToRelativePaths(String parentFileName) {
@@ -924,6 +927,9 @@ public class ScaleToolModel extends Observable implements Observer {
       scaleTool.getModelScaler().setMarkerFileName(FileUtils.makePathRelative(scaleTool.getModelScaler().getMarkerFileName(),parentDir));
       scaleTool.getMarkerPlacer().setStaticPoseFileName(FileUtils.makePathRelative(scaleTool.getMarkerPlacer().getStaticPoseFileName(),parentDir));
       scaleTool.getMarkerPlacer().setCoordinateFileName(FileUtils.makePathRelative(scaleTool.getMarkerPlacer().getCoordinateFileName(),parentDir));
+      scaleTool.getMarkerPlacer().setOutputModelFileName(FileUtils.makePathRelative(scaleTool.getMarkerPlacer().getOutputModelFileName(),parentDir));
+      scaleTool.getMarkerPlacer().setOutputMotionFileName(FileUtils.makePathRelative(scaleTool.getMarkerPlacer().getOutputMotionFileName(),parentDir));
+      scaleTool.getMarkerPlacer().setOutputMarkerFileName(FileUtils.makePathRelative(scaleTool.getMarkerPlacer().getOutputMarkerFileName(),parentDir));
    }
 
    public boolean loadSettings(String fileName) {
