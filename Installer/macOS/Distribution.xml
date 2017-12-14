@@ -2,7 +2,7 @@
 <installer-gui-script minSpecVersion="1">
     <title>OpenSim</title>
     <background file="OpenSimLogoWhiteNoText.png" scaling="none" alignment="bottomleft"/>
-    <pkg-ref id="org.opensim.app.pkg"/>
+    <pkg-ref id="org.opensim.app.pkg.@VERSION@"/>
     <!--Users will need to choose the Home directory until we stop writing JSON
          files within the app. 
          https://stackoverflow.com/questions/12863944/how-do-you-specify-a-default-install-location-to-home-with-pkgbuild
@@ -14,12 +14,12 @@
     <options customize="never" require-scripts="false"/>
     <choices-outline>
         <line choice="default">
-            <line choice="org.opensim.app.pkg"/>
+            <line choice="org.opensim.app.pkg.@VERSION@"/>
         </line>
     </choices-outline>
     <choice id="default"/>
-    <choice id="org.opensim.app.pkg" visible="false">
-        <pkg-ref id="org.opensim.app.pkg"/>
+    <choice id="org.opensim.app.pkg.@VERSION@" visible="false">
+        <pkg-ref id="org.opensim.app.pkg.@VERSION@"/>
     </choice>
-    <pkg-ref id="org.opensim.app.pkg" version="@VERSION@" onConclusion="none">OpenSim-@VERSION@-App.pkg</pkg-ref>
+    <pkg-ref id="org.opensim.app.pkg.@VERSION@" version="@VERSION@" onConclusion="none">OpenSim-@VERSION@-App.pkg</pkg-ref>
 </installer-gui-script>

@@ -13,7 +13,7 @@
 ## window to not function properly. 
 ## https://stackoverflow.com/questions/43031272/macos-installer-show-files-only-the-file-listing-isnt-available
 pkgbuild \
-    --identifier org.opensim.app.pkg \
+    --identifier org.opensim.app.pkg.@VERSION@ \
     --version @VERSION@ \
     --root '../../Gui/opensim/dist/pkgroot/' \
     --scripts './scripts' \
