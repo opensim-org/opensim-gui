@@ -914,6 +914,8 @@ public class ScaleToolModel extends Observable implements Observer {
       String parentDir = (new File(parentFileName)).getParent();
       scaleTool.getGenericModelMaker().setMarkerSetFileName(FileUtils.makePathAbsolute(scaleTool.getGenericModelMaker().getMarkerSetFileName(),parentDir));
       scaleTool.getModelScaler().setMarkerFileName(FileUtils.makePathAbsolute(scaleTool.getModelScaler().getMarkerFileName(),parentDir));
+      scaleTool.getModelScaler().setOutputModelFileName(FileUtils.makePathAbsolute(scaleTool.getModelScaler().getOutputModelFileName(),parentDir));
+      scaleTool.getModelScaler().setOutputScaleFileName(FileUtils.makePathAbsolute(scaleTool.getModelScaler().getOutputScaleFileName(),parentDir));
       scaleTool.getMarkerPlacer().setStaticPoseFileName(FileUtils.makePathAbsolute(scaleTool.getMarkerPlacer().getStaticPoseFileName(),parentDir));
       scaleTool.getMarkerPlacer().setCoordinateFileName(FileUtils.makePathAbsolute(scaleTool.getMarkerPlacer().getCoordinateFileName(),parentDir));
       scaleTool.getMarkerPlacer().setOutputModelFileName(FileUtils.makePathAbsolute(scaleTool.getMarkerPlacer().getOutputModelFileName(),parentDir));
@@ -925,6 +927,8 @@ public class ScaleToolModel extends Observable implements Observer {
       String parentDir = (new File(parentFileName)).getParent();
       scaleTool.getGenericModelMaker().setMarkerSetFileName(FileUtils.makePathRelative(scaleTool.getGenericModelMaker().getMarkerSetFileName(),parentDir));
       scaleTool.getModelScaler().setMarkerFileName(FileUtils.makePathRelative(scaleTool.getModelScaler().getMarkerFileName(),parentDir));
+      scaleTool.getModelScaler().setOutputModelFileName(FileUtils.makePathRelative(scaleTool.getModelScaler().getOutputModelFileName(),parentDir));
+      scaleTool.getModelScaler().setOutputScaleFileName(FileUtils.makePathRelative(scaleTool.getModelScaler().getOutputScaleFileName(),parentDir));
       scaleTool.getMarkerPlacer().setStaticPoseFileName(FileUtils.makePathRelative(scaleTool.getMarkerPlacer().getStaticPoseFileName(),parentDir));
       scaleTool.getMarkerPlacer().setCoordinateFileName(FileUtils.makePathRelative(scaleTool.getMarkerPlacer().getCoordinateFileName(),parentDir));
       scaleTool.getMarkerPlacer().setOutputModelFileName(FileUtils.makePathRelative(scaleTool.getMarkerPlacer().getOutputModelFileName(),parentDir));
