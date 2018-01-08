@@ -127,10 +127,18 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
             // Create json for vtp
             PolygonalMesh mesh = new PolygonalMesh();
             mesh.loadFile(fullFileName);
-            createJsonForMesh(mesh, arg0);
+            createJsonForMeshFile(meshFile, arg0);
         }
     }
 
+    private void createJsonForMeshFile(String meshFile, DecorativeMeshFile arg0) {
+        JSONObject dg_json = new JSONObject();
+        dg_json.put("uuid", geomID.toString());
+        dg_json.put("type", "MeshFile");
+        dg_json.put("filepath", meshFile);
+        jsonArr.add(dg_json);
+        createMaterialJson(arg0, true);
+    }
     private void createJsonForMesh(PolygonalMesh mesh, DecorativeGeometry arg0) {
         JSONObject dg_json = new JSONObject();
         dg_json.put("uuid", geomID.toString());
@@ -512,4 +520,5 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
     void setQuadrants(String _quadrant) {
         quadrants = _quadrant;
     }
+
 }
