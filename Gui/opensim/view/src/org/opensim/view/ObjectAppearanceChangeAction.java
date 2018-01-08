@@ -42,27 +42,27 @@ import org.opensim.view.nodes.OpenSimNode;
 public abstract class ObjectAppearanceChangeAction extends CallableSystemAction {
     
     protected Vector<OneComponentNode> collectAffectedComponentNodes() {
-        Vector<OneComponentNode> objects = new Vector<OneComponentNode>();
+        Vector<OneComponentNode> objectNodes = new Vector<OneComponentNode>();
         Vector<OpenSimObject> opensimObjects = new Vector<OpenSimObject>();
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         for (int i = 0; i < selected.length; i++) {
             if (!selected[i].isLeaf()){
                 Children ch = selected[i].getChildren();
                 for (int chNum = 0; chNum < ch.getNodesCount(); chNum++) {
-                    collectDescendentNodes((OpenSimNode) ch.getNodeAt(chNum), objects, opensimObjects);
+                    collectDescendentNodes((OpenSimNode) ch.getNodeAt(chNum), objectNodes, opensimObjects);
                 }
             }
             if (selected[i] instanceof OneComponentNode) {
                 if (!(opensimObjects.contains(((OneComponentNode)selected[i]).getOpenSimObject()))){
-                    objects.add((OneComponentNode)selected[i]);
+                    objectNodes.add((OneComponentNode)selected[i]);
                     opensimObjects.add(((OneComponentNode)selected[i]).getOpenSimObject());
                 }
             } 
         }
-        return objects;
+        return objectNodes;
     }
 
-    // node could be a Group or a list of objects not backed by OpenSim objects
+    // node could be a Group or a list of objectNodes not backed by OpenSim objectNodes
     protected void collectDescendentNodes(OpenSimNode node, Vector<OneComponentNode> descendents, Vector<OpenSimObject> osimObjects) {
         
         if (node.isLeaf() && node instanceof OneComponentNode){
