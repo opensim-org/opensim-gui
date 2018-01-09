@@ -121,14 +121,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         if (debug)
             System.out.println("Processing file"+fullFileName);
         if (fullFileName==null) return;
-        //System.out.println("...Found");
-        String filenameLower = fullFileName.toLowerCase();
-        if (filenameLower.endsWith(".vtp") || filenameLower.endsWith(".stl") || filenameLower.endsWith(".obj")){
-            // Create json for vtp
-            PolygonalMesh mesh = new PolygonalMesh();
-            mesh.loadFile(fullFileName);
-            createJsonForMeshFile(meshFile, arg0);
-        }
+        createJsonForMeshFile(meshFile, arg0);
     }
 
     private void createJsonForMeshFile(String meshFile, DecorativeMeshFile arg0) {
