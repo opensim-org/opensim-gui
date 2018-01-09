@@ -23,17 +23,21 @@
 
 package org.opensim.view;
 
+import java.util.Vector;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
+import org.opensim.modeling.OpenSimObject;
+import org.opensim.view.nodes.OneComponentNode;
 import org.opensim.view.nodes.OneModelNode;
+import org.opensim.view.nodes.OpenSimNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.nodes.OpenSimObjectSetNode;
 import org.opensim.view.pub.ViewDB;
 
-public final class ObjectDisplayShowOnlyAction extends CallableSystemAction {
+public final class ObjectDisplayShowOnlyAction extends ObjectAppearanceChangeAction {
    
    public boolean isEnabled() {
       Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
@@ -53,6 +57,8 @@ public final class ObjectDisplayShowOnlyAction extends CallableSystemAction {
       // one exception is if the parent node is a model since hiding it in this case
       // makes it impossible to show selected node. This sitution is handled by overriding the behavior
       // in appropriate nodes.
+      Vector<OneComponentNode> descendents = new Vector<OneComponentNode>();
+      Vector<OpenSimObject> osimObjects = new Vector<OpenSimObject>();
       for (int i = 0; i < selected.length; i++) {
            if (!(selected[i] instanceof OpenSimObjectNode)) {
                continue;
@@ -75,19 +81,40 @@ public final class ObjectDisplayShowOnlyAction extends CallableSystemAction {
                if (nextSibiling == objectNode) {
                    continue;
                }
+               boolean inSelection = false;
+               for (int s = 0; s < selected.length; s++){
+                   if (selected[s] == nextSibiling){
+                       inSelection = true;
+                       break;
+                   }
+               }
+               if (inSelection) 
+                   continue;
                OpenSimObjectNode n = (OpenSimObjectNode) siblingNodes[j];
-               ViewDB.getInstance().toggleObjectsDisplay(n.getOpenSimObject(), false);
+               collectDescendentNodes(n, descendents, osimObjects);
+               //ViewDB.getInstance().toggleObjectsDisplay(n.getOpenSimObject(), false);
            }
        }
-       for (int i = 0; i < selected.length; i++) {
-           if (!(selected[i] instanceof OpenSimObjectNode)) {
-               continue;
-           }
-           OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[i];
-           ViewDB.getInstance().toggleObjectDisplay(objectNode.getOpenSimObject(), true);
-       }
-       ViewDB.getInstance().repaintAll();
-   }
+      for (OneComponentNode leafNode:descendents){
+          if (leafNode instanceof ColorableInterface) {
+              ((ColorableInterface) leafNode).setVisible(Boolean.FALSE);
+          }
+      }
+        descendents.clear();
+        for (int i = 0; i < selected.length; i++) {
+            if (!(selected[i] instanceof OpenSimObjectNode)) {
+                continue;
+            }
+            OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[i];
+            collectDescendentNodes(objectNode, descendents, osimObjects);
+        }
+        for (OneComponentNode leafNode : descendents) {
+            if (leafNode instanceof ColorableInterface) {
+                ((ColorableInterface) leafNode).setVisible(Boolean.TRUE);
+            }
+        }
+        ViewDB.getInstance().repaintAll();
+    }
    
    public String getName() {
       return NbBundle.getMessage(ObjectDisplayShowOnlyAction.class, "CTL_ObjectDisplayShowOnlyAction");
