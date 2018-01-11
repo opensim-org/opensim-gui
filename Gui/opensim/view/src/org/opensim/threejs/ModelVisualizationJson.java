@@ -61,6 +61,7 @@ import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.PathPointSet;
 import org.opensim.modeling.PathWrapPoint;
 import org.opensim.modeling.PhysicalFrame;
+import org.opensim.modeling.PropertyHelper;
 import org.opensim.modeling.State;
 import org.opensim.modeling.Transform;
 import org.opensim.modeling.Vec3;
@@ -206,9 +207,20 @@ public class ModelVisualizationJson extends JSONObject {
             System.out.println("Processing:"+comp.getAbsolutePathString()+" Type:"+comp.getConcreteClassName());
         }
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
+        // generateDecoration skips over when "visible" is false
+        // we temporarily turn on and use the setVisible attribute so that
+        // geometry can be shown later. 
+        boolean visibleStatus = true;
+        AbstractProperty visibleProp = null;
+        if (comp.hasProperty("Appearance")){
+            visibleProp = comp.getPropertyByName("Appearance").getValueAsObject().getPropertyByName("visible");
+            visibleStatus = PropertyHelper.getValueBool(visibleProp);
+            if (!visibleStatus)
+                PropertyHelper.setValueBool(true, visibleProp);
+        }
         comp.generateDecorations(true, mdh, state, adg);
         if (adg.size() > 0) {
-            processDecorativeGeometry(adg, comp, dgimp, json_materials);
+            processDecorativeGeometry(adg, comp, dgimp, json_materials, visibleStatus);
         }
         FrameGeometry frameGeometry = FrameGeometry.safeDownCast(comp);
         if (frameGeometry!= null){
@@ -234,9 +246,14 @@ public class ModelVisualizationJson extends JSONObject {
             adg.clear();
             comp.generateDecorations(false, mdh, state, adg);
             if (adg.size() > 0) {
-                processDecorativeGeometry(adg, comp, dgimp, json_materials);
+                processDecorativeGeometry(adg, comp, dgimp, json_materials, visibleStatus);
             }
         }
+        // restore visibleStatus that may have been switched earlier, 
+        if (!visibleStatus){
+             PropertyHelper.setValueBool(false, visibleProp);
+        }
+
     }
 
     private JSONObject processGroundFrame(Model model) {
@@ -268,7 +285,7 @@ public class ModelVisualizationJson extends JSONObject {
     // primitives at API level, also frames since theydon't use the Geometry/Material arrangement
     // but rather plug directly into the scene graph
     private void processDecorativeGeometry(ArrayDecorativeGeometry adg, Component comp, 
-            DecorativeGeometryImplementationJS dgimp, JSONArray json_materials) {
+            DecorativeGeometryImplementationJS dgimp, JSONArray json_materials, boolean visible) {
         DecorativeGeometry dg;
         
         ArrayList<UUID> vis_uuidList = mapComponentToUUID.get(comp);
@@ -304,7 +321,8 @@ public class ModelVisualizationJson extends JSONObject {
                 JSONObject bodyJson = mapBodyIndicesToJson.get(dg.getBodyId());
                 if (bodyJson.get("children")==null)
                     bodyJson.put("children", new JSONArray());
-                UUID uuid_mesh = addtoFrameJsonObject(dg, geomId, uuid, dgimp.getMat_uuid(), (JSONArray)bodyJson.get("children"), comp);
+                UUID uuid_mesh = addtoFrameJsonObject(dg, geomId, uuid, dgimp.getMat_uuid(), (JSONArray)bodyJson.get("children"), 
+                        comp, visible);
                 vis_uuidList.add(uuid_mesh);
 
                 mapUUIDToComponent.put(uuid_mesh, comp);
@@ -335,13 +353,14 @@ public class ModelVisualizationJson extends JSONObject {
 
     }
 
-    private UUID addtoFrameJsonObject(DecorativeGeometry dg, String geomName, UUID uuid, UUID uuid_mat, JSONArray mobody_objects, Component opensimComponent) {
-        Map<String, Object> obj_json = createJSONObjectFormDisplayGeometry(geomName, opensimComponent, uuid, uuid_mat, dg, mobody_objects);
+    private UUID addtoFrameJsonObject(DecorativeGeometry dg, String geomName, UUID uuid, UUID uuid_mat, JSONArray mobody_objects, Component opensimComponent, boolean visible) {
+        Map<String, Object> obj_json = createJSONObjectFormDisplayGeometry(geomName, opensimComponent, uuid, uuid_mat, dg, mobody_objects, visible);
         UUID mesh_uuid = UUID.fromString((String) obj_json.get("uuid"));
         return mesh_uuid;
     }   
 
-    protected JSONObject createJSONObjectFormDisplayGeometry(String geomName, Component opensimComponent, UUID uuid_geom, UUID uuid_mat, DecorativeGeometry dg, JSONArray mobody_objects) {
+    protected JSONObject createJSONObjectFormDisplayGeometry(String geomName, Component opensimComponent, UUID uuid_geom, UUID uuid_mat, 
+            DecorativeGeometry dg, JSONArray mobody_objects, boolean visible) {
         UUID mesh_uuid = UUID.randomUUID();
         JSONObject obj_json = new JSONObject();
         obj_json.put("uuid", mesh_uuid.toString());
@@ -352,6 +371,9 @@ public class ModelVisualizationJson extends JSONObject {
         obj_json.put("material", uuid_mat.toString());
         obj_json.put("matrix", JSONUtilities.createMatrixFromTransform(dg.getTransform(), dg.getScaleFactors(), visScaleFactor));
         obj_json.put("castShadow", false);
+        if (!visible){
+            obj_json.put("visible", false);
+        }
         String concreteType = opensimComponent.getConcreteClassName();
         if (!movableOpensimTypes.keySet().contains(concreteType))
             obj_json.put("userData", "NonEditable");
@@ -1119,7 +1141,7 @@ public class ModelVisualizationJson extends JSONObject {
         if (bodyJson.get("children")==null)
            bodyJson.put("children", new JSONArray());
         //String geomName, Component opensimComponent, UUID uuid, UUID uuid_mat, DecorativeGeometry dg, JSONArray mobody_objects
-        JSONObject retObject =  createJSONObjectFormDisplayGeometry(geomName, marker, markerGeomUUID, markerMatUUID, dg, (JSONArray) bodyJson.get("children"));
+        JSONObject retObject =  createJSONObjectFormDisplayGeometry(geomName, marker, markerGeomUUID, markerMatUUID, dg, (JSONArray) bodyJson.get("children"), true);
         // Establish mapping between Marker and uuid for selection/display purposes
         UUID objectUuid = UUID.fromString((String) retObject.get("uuid"));
         retObject.put("parent", bodyJson.get("uuid"));
