@@ -68,6 +68,7 @@ build_script:
   - ps: mkdir ../build
   - cd ../build
   - cmake ../opensim-gui -G"Visual Studio 14 2015 Win64" -DCMAKE_PREFIX_PATH=C:\opensim-core-x64 -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=C:/Program Files/NetBeans 8.2;-Dnbplatform.default.harness.dir=C:/Program Files/NetBeans 8.2/harness"
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   - cmake --build . --target CopyOpenSimCore --config Release
   - cmake --build . --target PrepareInstaller --config Release
   - cmake --build . --target CopyJRE --config Release
