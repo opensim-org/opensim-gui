@@ -55,7 +55,7 @@ install:
   - dir C:\
   # Only get certain submodules (not OpenSimAPI).
   - git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
-  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
  
   
 build_script:
