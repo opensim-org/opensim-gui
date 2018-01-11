@@ -55,8 +55,6 @@ install:
   - dir C:\
   # Only get certain submodules (not OpenSimAPI).
   - git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
- 
   
 build_script:
   # Tweak installer files for the AppVeyor deployment.
@@ -65,7 +63,7 @@ build_script:
   - ps: $env:VERSION = "$env:commitHash"
   - ps: if (!($env.APPVEYOR_REPO_TAG)) { $env:VERSION = "$env:VERSION-$env:commitDate" }
   - ps: $env:VERSION
-  - ps: (Get-Content $env:APPVEYOR_BUILD_FOLDER/Gui/opensim/installer_files/Windows/opensim.conf).replace('/dev', '/' + $env:VERSION) | Set-Content $env:APPVEYOR_BUILD_FOLDER/Gui/opensim/installer_files/Windows/opensim.conf
+  - ps: $blockRdp = $true; (Get-Content $env:APPVEYOR_BUILD_FOLDER/Gui/opensim/installer_files/Windows/opensim.conf).replace('/dev', '/' + $env:VERSION) | Set-Content $env:APPVEYOR_BUILD_FOLDER/Gui/opensim/installer_files/Windows/opensim.conf
 
   - ps: mkdir ../build
   - cd ../build
