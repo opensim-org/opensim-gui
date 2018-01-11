@@ -236,7 +236,7 @@ public class ModelVisualizationJson extends JSONObject {
         GeometryPath gPath = GeometryPath.safeDownCast(comp);
         boolean isGeometryPath = (gPath!=null);
         if (isGeometryPath){
-            UUID pathUUID = createJsonForGeometryPath(gPath, mdh, json_geometries, json_materials);
+            UUID pathUUID = createJsonForGeometryPath(gPath, mdh, json_geometries, json_materials, visibleStatus);
             pathList.put(gPath, pathUUID);
             // Add to the ID map so that PathOwner translates to GeometryPath
             Component parentComp = gPath.getOwner();
@@ -619,7 +619,8 @@ public class ModelVisualizationJson extends JSONObject {
         return guiJson;
     }
 
-    private UUID createJsonForGeometryPath(GeometryPath path, ModelDisplayHints mdh, JSONArray json_geometries, JSONArray json_materials) {
+    private UUID createJsonForGeometryPath(GeometryPath path, ModelDisplayHints mdh, JSONArray json_geometries, 
+                                            JSONArray json_materials, boolean visible) {
         // Create material for path
         Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
         UUID mat_uuid = UUID.randomUUID();
@@ -754,6 +755,9 @@ public class ModelVisualizationJson extends JSONObject {
         gndChildren.add(obj_json);
         // Create json entry for material (path_material) and set skinning to true
         obj_json.put("material", mat_uuid.toString());
+        if (!visible){
+            obj_json.put("visible", false);
+        }
         return mesh_uuid;
     }
 
