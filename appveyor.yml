@@ -19,19 +19,20 @@ nuget:
   disable_publish_on_pr: true
 
 init:
-  #- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
-
-install:
-  - ps: choco install jdk8
-  
   ## Set environment variables.
-  - ps: $env:JAVA_HOME = "C:\Program Files\Java\jdk1.8.0_152"
+  - ps: $env:JAVA_HOME = "C:\Program Files\Java\jdk1.8.0"
   - ps: $env:JAVA_HOME
+  # Used by FindAnt.cmake:
+  - ps: $env:ANT_HOME = "C:\Program Files\NetBeans 8.2\extide\ant\bin"
   - ps: $env:OPENSIM_HOME = "C:/OpenSim"
   # Java must be on the PATH for Ant to find (Ant is run through CMake).
   - ps: $env:PATH = "$env:JAVA_HOME/bin;$env:OPENSIM_HOME/bin;$env:PATH"
   - ps: $env:PATH
-  
+  #- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
+install:
+  #- ps: choco install jdk8 # We no longer get NetBeans through choco; this means we can use AppVeyor's provided JDK.
+
   ## The GUI is built with the Netbeans platform.
   # We need 8.2 and this isn't available on Chocolatey.
   #- ps: choco install netbeans-jee --version 8.1 --yes --limit-output --allow-empty-checksums| Out-Null
@@ -43,9 +44,9 @@ install:
   - ps: if (($hashFromFile.Hash) -ne ($expectedHash)) { Write-Error "Hash doesn't match." }
   # Install NetBeans
   - ps: .\netbeans-8.2-javase-windows.exe --silent | Out-Null # This installer is gregaroius.
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  
   ## Apache Ant for building Java projects.
-  - choco install ant --yes --limit-output
+  #- choco install ant --yes --limit-output # Provided by NetBeans.
   
   ## OpenSim (and Simbody).
   # OpenSim's installation is pushed to our Appveyor NuGet account feed.
