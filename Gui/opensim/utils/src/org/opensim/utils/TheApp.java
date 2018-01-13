@@ -43,9 +43,12 @@ import org.openide.util.Exceptions;
 import org.openide.util.ImageUtilities;
 import java.nio.file.StandardCopyOption;
 import javax.swing.JButton;
+import javax.swing.SwingUtilities;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
+import org.openide.windows.WindowManager;
+import org.opensim.swingui.FileTextFieldAndChooser;
 /**
  *
  * @author Ayman, a convenience class used for now as a place holder for common utilities/helper functions used
@@ -192,22 +195,18 @@ public final class TheApp {
         String userHome = System.getProperty("user.home")+File.separator+"Documents"+File.separator+"OpenSim40";
         FileUtils.getInstance().setWorkingDirectoryPreference(userHome);
         String userSelection = "";
-        NotifyDescriptor.InputLine dlg = new NotifyDescriptor.InputLine("Enter folder to install models and scripts:", "Select Folder for User Resources");
-        dlg.setInputText(userHome);
-        dlg.setOptions(new Object[]{DialogDescriptor.OK_OPTION, DialogDescriptor.CANCEL_OPTION, new JButton("Customize")});
-        Object userChoice = DialogDisplayer.getDefault().notify(dlg);
-        if(userChoice==NotifyDescriptor.OK_OPTION){
-            userSelection = userHome;
-        }
-        else if (userChoice==NotifyDescriptor.CANCEL_OPTION){
-            userSelection = null;
-            return userSelection;
-        }
-        else {
-            userSelection = FileUtils.getInstance().browseForFolder("Choose a folder to install models and scripts:", true);
-        }
+        FileTextFieldAndChooser destDirectoryPanel = new org.opensim.swingui.FileTextFieldAndChooser();
+        destDirectoryPanel.setDirectoriesOnly(true);
+        destDirectoryPanel.setFileName(userHome, false);
+        destDirectoryPanel.isSaveMode();
+        destDirectoryPanel.setCheckIfFileExists(false);
+        DialogDescriptor dd = new DialogDescriptor(destDirectoryPanel, "Folder to install models and scripts:");
+        // Create a Dialog to contain the chooser
+        DialogDisplayer.getDefault().createDialog(dd).setVisible(true);
+        userSelection = destDirectoryPanel.getFileName();
         String[] subdirs = new String[]{"Models"}; // Add more folders here as needed
         if (userSelection != null){
+            FileUtils.getInstance().setWorkingDirectoryPreference(userSelection);
             String src = getPlatformSpecificInstallDir();
             String dest = userSelection;
             System.out.println("copy resources from "+src+" to "+dest);
