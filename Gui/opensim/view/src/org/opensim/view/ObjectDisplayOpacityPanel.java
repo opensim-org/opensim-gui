@@ -86,6 +86,7 @@ public class ObjectDisplayOpacityPanel extends javax.swing.JPanel {
       DialogDescriptor dlg = new DialogDescriptor(this, "Select Opacity");
       dlg.setOptions(new Object[]{});
       Dialog dialog = DialogDisplayer.getDefault().createDialog(dlg);
+      dialog.pack();
       dialog.setVisible(true);
    }
    
@@ -121,10 +122,10 @@ public class ObjectDisplayOpacityPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .add(jLabel1)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(opacitySlider, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(opacitySlider, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jApplyButton))
         );
