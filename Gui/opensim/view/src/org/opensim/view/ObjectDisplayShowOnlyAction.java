@@ -101,6 +101,7 @@ public final class ObjectDisplayShowOnlyAction extends ObjectAppearanceChangeAct
           }
       }
         descendents.clear();
+        osimObjects.clear();
         for (int i = 0; i < selected.length; i++) {
             if (!(selected[i] instanceof OpenSimObjectNode)) {
                 continue;
