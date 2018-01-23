@@ -77,11 +77,11 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
          tool.updateModelForces(model, "");
          //ModelPose currentPose = new ModelPose("current", getOriginalModel());
          //currentPose.useAsDefaultForModel(model);
-         model.initSystem();
+         
          model.setInputFileName("");    // Will do this after initSystem so that contact geometry can be loaded properly
          
          tool.setModel(model);
-
+         model.initSystem(); // call initSystem after tool.setModel since the call invalidates the system to add Analyses in 4.0
          // don't add the model... we'll run forward on the new model but will actually apply the resulting motions to the current model
          setModel(model);
 
