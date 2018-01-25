@@ -99,6 +99,9 @@ public final class ObjectDisplayShowOnlyAction extends ObjectAppearanceChangeAct
           if (leafNode instanceof ColorableInterface) {
               ((ColorableInterface) leafNode).setVisible(Boolean.FALSE);
           }
+          else {
+              ViewDB.getInstance().toggleObjectDisplay(leafNode.getOpenSimObject(), false);
+          }
       }
         descendents.clear();
         osimObjects.clear();
@@ -112,6 +115,9 @@ public final class ObjectDisplayShowOnlyAction extends ObjectAppearanceChangeAct
         for (OneComponentNode leafNode : descendents) {
             if (leafNode instanceof ColorableInterface) {
                 ((ColorableInterface) leafNode).setVisible(Boolean.TRUE);
+            }
+            else {
+              ViewDB.getInstance().toggleObjectDisplay(leafNode.getOpenSimObject(), true);
             }
         }
         ViewDB.getInstance().repaintAll();
