@@ -296,6 +296,11 @@ public class ModelVisualizationJson extends JSONObject {
         boolean partialWrapObject = (wo != null) && !wo.get_quadrant().toLowerCase().equals("all");
         if (partialWrapObject)
             dgimp.setQuadrants(wo.get_quadrant());
+        // If Marker, don't create a new metrial, instead reuse MarkerMat
+        boolean isMarker = Marker.safeDownCast(comp)!=null;
+        if (isMarker)
+            dgimp.useMaterial(markerMatUUID);
+        
         for (int idx = 0; idx < adg.size(); idx++) {
             dg = adg.getElt(idx);
             String geomId = comp.getAbsolutePathString();
@@ -330,6 +335,9 @@ public class ModelVisualizationJson extends JSONObject {
         }
         if (partialWrapObject)
             dgimp.setQuadrants("");
+        if (isMarker)
+            dgimp.useMaterial(null);
+        
         mapComponentToUUID.put(comp, vis_uuidList);
         if (verbose)
             System.out.println("Map component="+comp.getAbsolutePathString()+" to "+vis_uuidList.size());   
@@ -1056,13 +1064,10 @@ public class ModelVisualizationJson extends JSONObject {
         UUID mat_uuid = UUID.randomUUID();
         mat_json.put("uuid", mat_uuid.toString());
         mat_json.put("name", "MarkerMat");
-        mat_json.put("type", "MeshPhongMaterial");
-        mat_json.put("transparent", true);
-        mat_json.put("emissive", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
-        mat_json.put("specular", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
+        mat_json.put("type", "MeshBasicMaterial");
+        //mat_json.put("transparent", true);
         String colorString = JSONUtilities.mapColorToRGBA(hints.get_marker_color());
         mat_json.put("color", colorString);
-        mat_json.put("side", 2);
         json_materials.add(mat_json);
         marker_mat_json = mat_json;
         return mat_uuid;

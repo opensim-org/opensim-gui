@@ -61,6 +61,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
     private JSONArray json_materials;
     private UUID geomID;
     private UUID mat_uuid;
+    private boolean reuse_material = false;
     private double visualizerScaleFactor = 100;
     boolean updateMode = false;
     private JSONObject last_json = null;
@@ -457,8 +458,10 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
     }
 
     private void createMaterialJson(DecorativeGeometry dg, boolean isSurface) {
-        mat_uuid = UUID.randomUUID();
-        addMaterialJsonForGeometry(mat_uuid, dg, isSurface);
+        if (!reuse_material){
+            mat_uuid = UUID.randomUUID();
+            addMaterialJsonForGeometry(mat_uuid, dg, isSurface);
+        }
 
     }
 
@@ -511,5 +514,15 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 
     void setQuadrants(String _quadrant) {
         quadrants = _quadrant;
+    }
+
+    void useMaterial(UUID matuuid) {
+        if (matuuid == null){
+            reuse_material = false;
+        }
+        else {
+            reuse_material = true;
+            mat_uuid = matuuid;
+        }
     }
 }
