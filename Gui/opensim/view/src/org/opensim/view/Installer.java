@@ -45,6 +45,7 @@ import org.opensim.view.editors.FrameNameEditor;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.view.motions.MotionsDBDescriptor;
 import org.opensim.view.nodes.EditorRegistry;
+import org.opensim.view.pub.GeometryFileLocator;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.OpenSimDBDescriptor;
 import org.opensim.view.pub.PluginsDB;
@@ -159,7 +160,8 @@ public class Installer extends ModuleInstall {
          else if (!saved.contains(defaultGeometryPath))
              saved.concat(File.pathSeparator+defaultGeometryPath);
          Preferences.userNodeForPackage(TheApp.class).put("Geometry Path", saved);
-
+         // Push changes to API side
+         GeometryFileLocator.updateGeometrySearchPathsFromPreferences();
          String defaultBgColor = NbBundle.getMessage(OpenSimBaseCanvas.class, "CTL_BackgroundColorRGB");        
          saved = Preferences.userNodeForPackage(TheApp.class).get("BackgroundColor", defaultBgColor);
          Preferences.userNodeForPackage(TheApp.class).put("BackgroundColor", saved);
