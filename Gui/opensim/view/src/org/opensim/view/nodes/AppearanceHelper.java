@@ -56,10 +56,10 @@ public class AppearanceHelper {
     }
     
     void setAppearanceDisplayPrefProperty(int pref) {
-        final AbstractProperty ap = appearance.get_SurfaceProperties().getPropertyByName("representation");
+        final AbstractProperty ap = appearance.upd_SurfaceProperties().updPropertyByName("representation");
         final DecorativeGeometry.Representation oldRep = appearance.get_representation();
         final int newRep = pref;
-        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(model, appearance.get_SurfaceProperties(), ap, compNode);
+        final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(model, appearance.upd_SurfaceProperties(), ap, compNode);
         ap.setValueIsDefault(false);
         pea.setValueInt(newRep, false);
         // Delay update display till end
@@ -133,7 +133,7 @@ public class AppearanceHelper {
     void setAppearanceColorProperty(Color newColor) {
         float[] colorComp = new float[3];
         newColor.getColorComponents(colorComp);
-        final AbstractProperty ap = appearance.getPropertyByName("color");
+        final AbstractProperty ap = appearance.updPropertyByName("color");
         final Model model = this.model;
         final Vec3 oldValue = new Vec3(appearance.get_color());
         final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(model, appearance, ap, compNode);
@@ -172,7 +172,7 @@ public class AppearanceHelper {
     }
 
     void setAppearanceOpacityProperty(double opacity) {
-        final AbstractProperty ap = appearance.getPropertyByName("opacity");
+        final AbstractProperty ap = appearance.updPropertyByName("opacity");
         final double oldOpacity = appearance.get_opacity();
         final double newOpacity = opacity;
         final Model model = this.model;
