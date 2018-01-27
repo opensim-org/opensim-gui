@@ -55,7 +55,7 @@ public abstract class OneComponentWithGeometryNode extends OneComponentNode impl
     Appearance appearance=null;
     public OneComponentWithGeometryNode(OpenSimObject obj) {
         super(obj);
-        OpenSimObject appearanceObj = obj.getPropertyByName("Appearance").getValueAsObject();
+        OpenSimObject appearanceObj = obj.updPropertyByName("Appearance").updValueAsObject();
         appearance = Appearance.safeDownCast(appearanceObj);
         
     }
@@ -117,6 +117,7 @@ public abstract class OneComponentWithGeometryNode extends OneComponentNode impl
 
     @Override
     public void setColor(Color newColor) {
+        comp.updPropertyByName("Appearance").setValueIsDefault(false);
         setAppearanceColorProperty(newColor);
     }
 
@@ -132,6 +133,7 @@ public abstract class OneComponentWithGeometryNode extends OneComponentNode impl
 
     @Override
     public void setOpacity(double opacity) {
+        comp.updPropertyByName("Appearance").setValueIsDefault(false);
         setAppearanceOpacityProperty(opacity);
     }
 
@@ -147,6 +149,7 @@ public abstract class OneComponentWithGeometryNode extends OneComponentNode impl
 
     @Override
     public void setVisible(Boolean newValue) {
+        comp.updPropertyByName("Appearance").setValueIsDefault(false);
         setAppearanceVisilibityProperty(newValue);
     }
 
@@ -162,6 +165,7 @@ public abstract class OneComponentWithGeometryNode extends OneComponentNode impl
 
     @Override
     public void setDisplayPreference(int pref) {
+        comp.updPropertyByName("Appearance").setValueIsDefault(false);
         if (pref ==2 || pref ==3)
             setAppearanceDisplayPrefProperty(pref);
     }
