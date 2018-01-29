@@ -116,6 +116,9 @@ public abstract class ObjectDisplayShowHideBaseAction extends ObjectAppearanceCh
                     surfApp.getPropertyByName("representation"), objectNode);
             pea.setValueInt(show?3:0);
         }
+        else { // Non-persistent, just change visuals
+            ViewDB.getInstance().toggleObjectDisplay(obj, show);
+        }
     }
     
     protected void initialize() {
