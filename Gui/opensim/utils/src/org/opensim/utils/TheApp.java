@@ -27,25 +27,25 @@
  */
 package org.opensim.utils;
 
+import java.awt.Dialog;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.CopyOption;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Map;
 import javax.swing.JFrame;
 import org.openide.LifecycleManager;
 import org.openide.util.Exceptions;
 import org.openide.util.ImageUtilities;
 import java.nio.file.StandardCopyOption;
-import javax.swing.JButton;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
+import org.opensim.swingui.FileTextFieldAndChooser;
+import org.opensim.logger.OpenSimLogger;
 /**
  *
  * @author Ayman, a convenience class used for now as a place holder for common utilities/helper functions used
@@ -189,28 +189,50 @@ public final class TheApp {
 
     public static String installResources() {
         // Popup a directory browser dialog prompting for install location of Models, Scripts
-        String userHome = System.getProperty("user.home")+File.separator+"Documents"+File.separator+"OpenSim40";
+        String userHome = System.getProperty("user.home")+File.separator+"Documents"+File.separator+"OpenSim"+
+                        File.separator+System.getProperty ("netbeans.buildnumber");
         FileUtils.getInstance().setWorkingDirectoryPreference(userHome);
-        String userSelection = "";
-        NotifyDescriptor.InputLine dlg = new NotifyDescriptor.InputLine("Enter folder to install models and scripts:", "Select Folder for User Resources");
-        dlg.setInputText(userHome);
-        dlg.setOptions(new Object[]{DialogDescriptor.OK_OPTION, DialogDescriptor.CANCEL_OPTION, new JButton("Customize")});
-        Object userChoice = DialogDisplayer.getDefault().notify(dlg);
-        if(userChoice==NotifyDescriptor.OK_OPTION){
-            userSelection = userHome;
-        }
-        else if (userChoice==NotifyDescriptor.CANCEL_OPTION){
-            userSelection = null;
-            return userSelection;
-        }
-        else {
-            userSelection = FileUtils.getInstance().browseForFolder("Choose a folder to install models and scripts:", true);
-        }
-        String[] subdirs = new String[]{"Models"}; // Add more folders here as needed
+        String userSelection = null;
+        boolean exists = false;
+        do {
+            FileTextFieldAndChooser destDirectoryPanel = new org.opensim.swingui.FileTextFieldAndChooser();
+            destDirectoryPanel.setDirectoriesOnly(true);
+            destDirectoryPanel.setCheckIfFileExists(false);
+            destDirectoryPanel.setFileName(userHome, false);
+            destDirectoryPanel.isSaveMode();
+            destDirectoryPanel.setTreatEmptyStringAsValid(false);
+            DialogDescriptor dd = new DialogDescriptor(destDirectoryPanel, "Folder to install models and scripts:");
+            // Create a Dialog to contain the chooser
+            Dialog dlg = DialogDisplayer.getDefault().createDialog(dd);
+            dlg.setModal(true);
+            dlg.setVisible(true);
+            userSelection = destDirectoryPanel.getFileName();
+            exists = new File(userSelection).exists();
+            if (exists){
+                // Show info warning to redo
+                NotifyDescriptor.Message errorDlg =
+                          new NotifyDescriptor.Message("Specified directory already exists, please remove or rename before proceeding..");
+                  DialogDisplayer.getDefault().notify(errorDlg);
+            }
+            else if (userSelection==null){
+                 NotifyDescriptor.Message errorDlg =
+                          new NotifyDescriptor.Message("No directory was specified, please fix before proceeding..");
+                  DialogDisplayer.getDefault().notify(errorDlg);
+               exists = true;
+                // show error message and redo
+            }
+        } while (exists);
+        
+        String[] subdirs = new String[]{
+            "Models", 
+            "sdk"+File.separator+"Scripts",
+            "sdk"+File.separator+"APIExamples"
+        }; // Add more folders here as needed
         if (userSelection != null){
+            FileUtils.getInstance().setWorkingDirectoryPreference(userSelection);
             String src = getPlatformSpecificInstallDir();
             String dest = userSelection;
-            System.out.println("copy resources from "+src+" to "+dest);
+            OpenSimLogger.logMessage("\nCopying resources to "+dest, OpenSimLogger.INFO);
             CopyOption[] options = 
             new CopyOption[] { StandardCopyOption.COPY_ATTRIBUTES, 
                 StandardCopyOption.REPLACE_EXISTING };

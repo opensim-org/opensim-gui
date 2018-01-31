@@ -31,6 +31,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.prefs.Preferences;
 import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.openide.modules.ModuleInstall;
@@ -135,23 +136,19 @@ public class Installer extends ModuleInstall {
          String savedVersionStr = Preferences.userNodeForPackage(TheApp.class).get("BuildDate", null);
          if (!currentVersionStr.equalsIgnoreCase(savedVersionStr)){
              // First launch, copy resources to User selected folder and save that as OpenSimUserDir
-             String userDir = TheApp.installResources();
-             Preferences.userNodeForPackage(TheApp.class).put("OpenSimResourcesDir", userDir);
+            SwingUtilities.invokeLater( new Runnable(){
+                public void run() {
+                 String userDir = TheApp.installResources();
+                 Preferences.userNodeForPackage(TheApp.class).put("OpenSimResourcesDir", userDir);
+               }
+            });
+            Preferences.userNodeForPackage(TheApp.class).put("BuildDate", currentVersionStr);
          }
-         Preferences.userNodeForPackage(TheApp.class).put("BuildDate", currentVersionStr);
-         
-         String AAFRamesDefaultStr = NbBundle.getMessage(OpenSimBaseCanvas.class, "CTL_AAFrames");        
-         String saved=Preferences.userNodeForPackage(TheApp.class).get("AntiAliasingFrames", AAFRamesDefaultStr);
-         Preferences.userNodeForPackage(TheApp.class).put("AntiAliasingFrames", saved);
          
          String defaultOffsetDirection = NbBundle.getMessage(ViewDB.class,"CTL_DisplayOffsetDir");
-         saved=Preferences.userNodeForPackage(TheApp.class).get("DisplayOffsetDir", defaultOffsetDirection);
+         String saved=Preferences.userNodeForPackage(TheApp.class).get("DisplayOffsetDir", defaultOffsetDirection);
          Preferences.userNodeForPackage(TheApp.class).put("DisplayOffsetDir", saved);
          
-         String nonCurrentModelOpacityStr = NbBundle.getMessage(ViewDB.class,"CTL_NonCurrentModelOpacity");
-         saved = Preferences.userNodeForPackage(TheApp.class).get("NonCurrentModelOpacity", nonCurrentModelOpacityStr);
-         Preferences.userNodeForPackage(TheApp.class).put("NonCurrentModelOpacity", saved);
-
          String defaultGeometryPath = TheApp.getDefaultGeometrySearchPath();
          saved=Preferences.userNodeForPackage(TheApp.class).get("Geometry Path", defaultGeometryPath);
          if (saved.isEmpty()||saved.equalsIgnoreCase("")){
