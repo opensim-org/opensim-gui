@@ -217,6 +217,10 @@ public class MarkersReference extends ReferenceVec3 {
     opensimSimulationJNI.MarkersReference_getWeights(swigCPtr, this, State.getCPtr(s), s, SimTKArrayDouble.getCPtr(weights), weights);
   }
 
+  public TimeSeriesTableVec3 getMarkerTable() {
+    return new TimeSeriesTableVec3(opensimSimulationJNI.MarkersReference_getMarkerTable(swigCPtr, this), true);
+  }
+
   public double getSamplingFrequency() {
     return opensimSimulationJNI.MarkersReference_getSamplingFrequency(swigCPtr, this);
   }
