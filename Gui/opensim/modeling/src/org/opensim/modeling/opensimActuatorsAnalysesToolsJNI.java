@@ -1282,6 +1282,8 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native long MarkerPlacer_getIKTaskSet(long jarg1, MarkerPlacer jarg1_);
   public final static native String MarkerPlacer_getCoordinateFileName(long jarg1, MarkerPlacer jarg1_);
   public final static native void MarkerPlacer_setCoordinateFileName(long jarg1, MarkerPlacer jarg1_, String jarg2);
+  public final static native String MarkerPlacer_getMarkerFileName(long jarg1, MarkerPlacer jarg1_);
+  public final static native void MarkerPlacer_setMarkerFileName(long jarg1, MarkerPlacer jarg1_, String jarg2);
   public final static native double MarkerPlacer_getMaxMarkerMovement(long jarg1, MarkerPlacer jarg1_);
   public final static native void MarkerPlacer_setMaxMarkerMovement(long jarg1, MarkerPlacer jarg1_, double jarg2);
   public final static native String MarkerPlacer_getOutputModelFileName(long jarg1, MarkerPlacer jarg1_);

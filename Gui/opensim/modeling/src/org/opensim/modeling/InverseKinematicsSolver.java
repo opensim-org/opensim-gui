@@ -43,6 +43,10 @@ public class InverseKinematicsSolver extends AssemblySolver {
     this(opensimSimulationJNI.new_InverseKinematicsSolver__SWIG_1(Model.getCPtr(model), model, MarkersReference.getCPtr(markersReference), markersReference, SimTKArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences), true);
   }
 
+  public int getNumMarkersInUse() {
+    return opensimSimulationJNI.InverseKinematicsSolver_getNumMarkersInUse(swigCPtr, this);
+  }
+
   public void updateMarkerWeight(String markerName, double value) {
     opensimSimulationJNI.InverseKinematicsSolver_updateMarkerWeight__SWIG_0(swigCPtr, this, markerName, value);
   }

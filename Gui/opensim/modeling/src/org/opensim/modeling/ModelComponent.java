@@ -82,7 +82,12 @@ public class ModelComponent extends Component {
   }
 
   public Vec3 getScaleFactors(ScaleSet scaleSet, Frame frame) {
-    return new Vec3(opensimSimulationJNI.ModelComponent_getScaleFactors(swigCPtr, this, ScaleSet.getCPtr(scaleSet), scaleSet, Frame.getCPtr(frame), frame), true);
+    return new Vec3(opensimSimulationJNI.ModelComponent_getScaleFactors(swigCPtr, this, ScaleSet.getCPtr(scaleSet), scaleSet, Frame.getCPtr(frame), frame), false);
+  }
+
+  public static Vec3 getInvalidScaleFactors() {
+    long cPtr = opensimSimulationJNI.ModelComponent_InvalidScaleFactors_get();
+    return (cPtr == 0) ? null : new Vec3(cPtr, false);
   }
 
 }
