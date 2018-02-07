@@ -224,9 +224,7 @@ public final class TheApp {
         } while (exists);
         
         String[] subdirs = new String[]{
-            "Models", 
-            "sdk"+File.separator+"Scripts",
-            "sdk"+File.separator+"APIExamples"
+            "Resources/",
         }; // Add more folders here as needed
         if (userSelection != null){
             FileUtils.getInstance().setWorkingDirectoryPreference(userSelection);
