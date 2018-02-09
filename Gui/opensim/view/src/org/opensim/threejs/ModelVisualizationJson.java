@@ -956,10 +956,17 @@ public class ModelVisualizationJson extends JSONObject {
         return guiJson;
     }
     
-    public JSONObject createAddObjectCommand(JSONObject newObject) {
+    public JSONObject createAddObjectCommand(JSONObject newObject, double[] bounds) {
         JSONObject guiJson = new JSONObject();
         guiJson.put("Op", "addModelObject");
         JSONObject commandJson = CommandComposerThreejs.createAddObjectCommandJson(newObject);
+        if (bounds != null){
+            JSONArray bbox = new JSONArray();
+            for (int i=0; i<6; i++)
+                bbox.add(bounds[i]);
+            commandJson.put("bbox", bbox);
+        }
+        
         guiJson.put("command", commandJson);
         return guiJson;
     }
@@ -1238,6 +1245,13 @@ public class ModelVisualizationJson extends JSONObject {
     public JSONObject createScaleObjectCommand(UUID objectUUID, double newScale) {
         JSONObject guiJson = new JSONObject();
         guiJson.put("Op", "execute");
+        JSONObject commandJson = CommandComposerThreejs.createScaleObjectCommand(newScale, objectUUID);
+        guiJson.put("command", commandJson);
+        return guiJson;
+    }
+    public JSONObject createScaleGeometryCommand(UUID objectUUID, double newScale) {
+        JSONObject guiJson = new JSONObject();
+        guiJson.put("Op", "scaleGeometry");
         JSONObject commandJson = CommandComposerThreejs.createScaleObjectCommand(newScale, objectUUID);
         guiJson.put("command", commandJson);
         return guiJson;
