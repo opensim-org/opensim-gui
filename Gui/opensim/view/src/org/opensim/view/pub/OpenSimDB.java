@@ -66,7 +66,8 @@ import vtk.vtkMatrix4x4;
 public class OpenSimDB extends Observable implements Externalizable{
     
     static OpenSimDB instance;
-    
+    public enum Mode {Modeling, Simulation}; // Will keep track if we're modeling or simulating, notify listener when changing
+    static Mode mode = OpenSimDB.Mode.Modeling;
     static ArrayList<Model>  models = new ArrayList<Model>();
     static private Hashtable<Model, OpenSimContext> mapModelsToContexts =
            new Hashtable<Model, OpenSimContext>();

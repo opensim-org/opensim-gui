@@ -30,12 +30,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.prefs.Preferences;
+import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.openide.modules.ModuleInstall;
 import org.openide.util.NbBundle;
+import org.openide.windows.WindowManager;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.utils.ApplicationState;
 import org.opensim.utils.TheApp;
@@ -49,6 +51,7 @@ import org.opensim.view.nodes.EditorRegistry;
 import org.opensim.view.pub.GeometryFileLocator;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.OpenSimDBDescriptor;
+import org.opensim.view.pub.OpenSimDragNDropHandler;
 import org.opensim.view.pub.PluginsDB;
 import org.opensim.view.pub.ViewDB;
 import org.opensim.view.pub.ViewDBDescriptor;
@@ -121,6 +124,16 @@ public class Installer extends ModuleInstall {
                 ex.printStackTrace();
             }
         }
+        
+        SwingUtilities.invokeLater(new Runnable(){
+            @Override
+            public void run() {
+                        JFrame mainFrame = (JFrame) WindowManager.getDefault().getMainWindow();
+                        mainFrame.setTransferHandler(new OpenSimDragNDropHandler());
+                        mainFrame.getDropTarget().setActive(true);
+             }
+        });
+       
         //
         //PropertyEditorManager.registerEditor(OpenSimObject.class, OpenSimObjectEditor.class);
         EditorRegistry.addEditor("Body", new BodyNameEditor());
