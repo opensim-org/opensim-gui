@@ -18,7 +18,11 @@ import org.opensim.view.motions.FileLoadMotionAction;
 
 /**
  *
- * @author Ayman-NMBL
+ * @author Ayman, 
+ * Class to handle Drag and Drop handling into the application window
+ * For now handles 
+ * - .osim files by delegating to File->OpenModel
+ * - .mot,.sto files by delegating to File -> loadMotion
  */
 public class OpenSimDragNDropHandler extends TransferHandler {
 
