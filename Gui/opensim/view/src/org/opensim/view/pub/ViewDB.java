@@ -1083,6 +1083,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       }
       StatusDisplayer.getDefault().setStatusText(status, 1000);
    }
+   public void statusDisplayApplicationMode() {
+      String status="";
+      StatusDisplayer.getDefault().setStatusText(status, 1000);
+   }
 
    public void setSelectedObject(OpenSimObject obj) {
       //FIX40 if (findObjectInSelectedList(obj)!=-1)
