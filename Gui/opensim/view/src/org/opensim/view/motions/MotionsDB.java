@@ -263,6 +263,7 @@ public class MotionsDB extends Observable // Observed by other entities in motio
       evt.setModel(model);
       setChanged();
       notifyObservers(evt);
+      OpenSimDB.getInstance().switchToAnalysisMode();
    }
 
    public void setCurrent(Vector<ModelMotionPair> motions) {
@@ -342,6 +343,11 @@ public class MotionsDB extends Observable // Observed by other entities in motio
    }
 
    public void update(Observable o, Object arg) {
+      if (o instanceof OpenSimDB && arg instanceof ModeChangeEvent){
+          if (((ModeChangeEvent)arg).getNewMode() == OpenSimDB.Mode.Modeling)
+              this.clearCurrent();
+          return;
+      }
       if (o instanceof OpenSimDB && arg instanceof ModelEvent){
          ModelEvent evnt = (ModelEvent) arg;
          if (evnt.getOperation()==ModelEvent.Operation.Close){

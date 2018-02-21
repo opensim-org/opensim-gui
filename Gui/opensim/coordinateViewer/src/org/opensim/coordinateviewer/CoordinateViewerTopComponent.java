@@ -583,6 +583,7 @@ final class CoordinateViewerTopComponent extends TopComponent implements Observe
          }
       }
       openSimContext.realizeVelocity();
+      OpenSimDB.getInstance().switchToModelingMode();
    }
 
    private void updatePosesPopup() {
