@@ -2,6 +2,8 @@
 
 ### Expected result
 
-### Actual result (include screen grab where appropriate)
+### Actual result
+
+(include screen grabs where appropriate)
 
 ### Environment and GUI version
