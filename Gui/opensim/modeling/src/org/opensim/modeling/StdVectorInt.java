@@ -12,12 +12,12 @@ public class StdVectorInt {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected StdVectorInt(long cPtr, boolean cMemoryOwn) {
+  public StdVectorInt(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(StdVectorInt obj) {
+  public static long getCPtr(StdVectorInt obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

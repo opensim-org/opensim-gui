@@ -12,12 +12,12 @@ public class SimTKVisualizer {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected SimTKVisualizer(long cPtr, boolean cMemoryOwn) {
+  public SimTKVisualizer(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(SimTKVisualizer obj) {
+  public static long getCPtr(SimTKVisualizer obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -299,12 +299,12 @@ public class SimTKVisualizer {
     private transient long swigCPtr;
     protected transient boolean swigCMemOwn;
   
-    protected FrameController(long cPtr, boolean cMemoryOwn) {
+    public FrameController(long cPtr, boolean cMemoryOwn) {
       swigCMemOwn = cMemoryOwn;
       swigCPtr = cPtr;
     }
   
-    protected static long getCPtr(FrameController obj) {
+    public static long getCPtr(FrameController obj) {
       return (obj == null) ? 0 : obj.swigCPtr;
     }
   
@@ -331,12 +331,12 @@ public class SimTKVisualizer {
   static public class BodyFollower extends SimTKVisualizer.FrameController {
     private transient long swigCPtr;
   
-    protected BodyFollower(long cPtr, boolean cMemoryOwn) {
+    public BodyFollower(long cPtr, boolean cMemoryOwn) {
       super(opensimSimbodyJNI.SimTKVisualizer_BodyFollower_SWIGUpcast(cPtr), cMemoryOwn);
       swigCPtr = cPtr;
     }
   
-    protected static long getCPtr(BodyFollower obj) {
+    public static long getCPtr(BodyFollower obj) {
       return (obj == null) ? 0 : obj.swigCPtr;
     }
   

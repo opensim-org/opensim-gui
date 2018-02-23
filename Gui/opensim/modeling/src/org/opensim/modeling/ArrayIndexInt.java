@@ -12,12 +12,12 @@ public class ArrayIndexInt {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected ArrayIndexInt(long cPtr, boolean cMemoryOwn) {
+  public ArrayIndexInt(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(ArrayIndexInt obj) {
+  public static long getCPtr(ArrayIndexInt obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

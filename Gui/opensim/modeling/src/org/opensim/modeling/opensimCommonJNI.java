@@ -7,7 +7,7 @@
  * ----------------------------------------------------------------------------- */
 
 package org.opensim.modeling;
-import javax.swing.JOptionPane;
+import javax.swing.JOptionPane;import java.awt.GraphicsEnvironment;
 public class opensimCommonJNI {
 
   static {
@@ -16,9 +16,33 @@ public class opensimCommonJNI {
           System.loadLibrary("osimJavaJNI");
       }
       catch(UnsatisfiedLinkError e){
-          new JOptionPane("Required library failed to load. Check that the " +
-                          "dynamic library osimJavaJNI is in your PATH\n" + e, 
-        JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+          String OS = System.getProperty("os.name").toLowerCase();
+          String tip = "";
+          if (OS.indexOf("win") >= 0) {
+              tip = "\nMake sure OpenSim's bin directory is on your PATH.";
+          } else if (OS.indexOf("mac") >= 0) {
+              // Nothing for now; our use of RPATH means we were probably able
+              // to locate the OpenSim dynamic libraries.
+          } else /* linux */ {
+              // Nothing for now; our use of RPATH means we were probably able
+              // to locate the OpenSim dynamic libraries.
+          }
+          String msg = new String(
+                  "Failed to load one or more dynamic libraries for OpenSim.\n"
+                  + e + tip);
+
+          String javaHome = System.getProperties().getProperty("java.home");
+          boolean inMatlab = javaHome.toLowerCase().indexOf("matlab") >= 0;
+          if (inMatlab) {
+              msg +=  "\nSee https://simtk-confluence.stanford.edu/display/OpenSim/Scripting+with+Matlab";
+          }
+          
+          System.out.println(msg);
+          String title = "Error: Failed to load OpenSim libraries";
+          if (!GraphicsEnvironment.isHeadless()) {
+              new JOptionPane(msg, JOptionPane.ERROR_MESSAGE)
+                    .createDialog(null, title).setVisible(true);
+          }
       }
   }
 
@@ -2031,6 +2055,8 @@ public class opensimCommonJNI {
   public final static native long new_TimeSeriesTable__SWIG_3(long jarg1, DataTable jarg1_);
   public final static native long new_TimeSeriesTable__SWIG_4(String jarg1);
   public final static native long new_TimeSeriesTable__SWIG_5(String jarg1, String jarg2);
+  public final static native long TimeSeriesTable_getNearestRowIndexForTime__SWIG_0(long jarg1, TimeSeriesTable jarg1_, double jarg2, boolean jarg3);
+  public final static native long TimeSeriesTable_getNearestRowIndexForTime__SWIG_1(long jarg1, TimeSeriesTable jarg1_, double jarg2);
   public final static native long TimeSeriesTable_getNearestRow__SWIG_0(long jarg1, TimeSeriesTable jarg1_, double jarg2, boolean jarg3);
   public final static native long TimeSeriesTable_getNearestRow__SWIG_1(long jarg1, TimeSeriesTable jarg1_, double jarg2);
   public final static native long TimeSeriesTable_updNearestRow__SWIG_0(long jarg1, TimeSeriesTable jarg1_, double jarg2, boolean jarg3);
@@ -2052,6 +2078,8 @@ public class opensimCommonJNI {
   public final static native long new_TimeSeriesTableVec3__SWIG_3(long jarg1, DataTableVec3 jarg1_);
   public final static native long new_TimeSeriesTableVec3__SWIG_4(String jarg1);
   public final static native long new_TimeSeriesTableVec3__SWIG_5(String jarg1, String jarg2);
+  public final static native long TimeSeriesTableVec3_getNearestRowIndexForTime__SWIG_0(long jarg1, TimeSeriesTableVec3 jarg1_, double jarg2, boolean jarg3);
+  public final static native long TimeSeriesTableVec3_getNearestRowIndexForTime__SWIG_1(long jarg1, TimeSeriesTableVec3 jarg1_, double jarg2);
   public final static native long TimeSeriesTableVec3_getNearestRow__SWIG_0(long jarg1, TimeSeriesTableVec3 jarg1_, double jarg2, boolean jarg3);
   public final static native long TimeSeriesTableVec3_getNearestRow__SWIG_1(long jarg1, TimeSeriesTableVec3 jarg1_, double jarg2);
   public final static native long TimeSeriesTableVec3_updNearestRow__SWIG_0(long jarg1, TimeSeriesTableVec3 jarg1_, double jarg2, boolean jarg3);
@@ -2067,6 +2095,8 @@ public class opensimCommonJNI {
   public final static native long new_TimeSeriesTableUnitVec3__SWIG_3(long jarg1, DataTableUnitVec3 jarg1_);
   public final static native long new_TimeSeriesTableUnitVec3__SWIG_4(String jarg1);
   public final static native long new_TimeSeriesTableUnitVec3__SWIG_5(String jarg1, String jarg2);
+  public final static native long TimeSeriesTableUnitVec3_getNearestRowIndexForTime__SWIG_0(long jarg1, TimeSeriesTableUnitVec3 jarg1_, double jarg2, boolean jarg3);
+  public final static native long TimeSeriesTableUnitVec3_getNearestRowIndexForTime__SWIG_1(long jarg1, TimeSeriesTableUnitVec3 jarg1_, double jarg2);
   public final static native long TimeSeriesTableUnitVec3_getNearestRow__SWIG_0(long jarg1, TimeSeriesTableUnitVec3 jarg1_, double jarg2, boolean jarg3);
   public final static native long TimeSeriesTableUnitVec3_getNearestRow__SWIG_1(long jarg1, TimeSeriesTableUnitVec3 jarg1_, double jarg2);
   public final static native long TimeSeriesTableUnitVec3_updNearestRow__SWIG_0(long jarg1, TimeSeriesTableUnitVec3 jarg1_, double jarg2, boolean jarg3);
@@ -2082,6 +2112,8 @@ public class opensimCommonJNI {
   public final static native long new_TimeSeriesTableQuaternion__SWIG_3(long jarg1, DataTableQuaternion jarg1_);
   public final static native long new_TimeSeriesTableQuaternion__SWIG_4(String jarg1);
   public final static native long new_TimeSeriesTableQuaternion__SWIG_5(String jarg1, String jarg2);
+  public final static native long TimeSeriesTableQuaternion_getNearestRowIndexForTime__SWIG_0(long jarg1, TimeSeriesTableQuaternion jarg1_, double jarg2, boolean jarg3);
+  public final static native long TimeSeriesTableQuaternion_getNearestRowIndexForTime__SWIG_1(long jarg1, TimeSeriesTableQuaternion jarg1_, double jarg2);
   public final static native long TimeSeriesTableQuaternion_getNearestRow__SWIG_0(long jarg1, TimeSeriesTableQuaternion jarg1_, double jarg2, boolean jarg3);
   public final static native long TimeSeriesTableQuaternion_getNearestRow__SWIG_1(long jarg1, TimeSeriesTableQuaternion jarg1_, double jarg2);
   public final static native long TimeSeriesTableQuaternion_updNearestRow__SWIG_0(long jarg1, TimeSeriesTableQuaternion jarg1_, double jarg2, boolean jarg3);
@@ -2097,6 +2129,8 @@ public class opensimCommonJNI {
   public final static native long new_TimeSeriesTableVec6__SWIG_3(long jarg1, DataTableVec6 jarg1_);
   public final static native long new_TimeSeriesTableVec6__SWIG_4(String jarg1);
   public final static native long new_TimeSeriesTableVec6__SWIG_5(String jarg1, String jarg2);
+  public final static native long TimeSeriesTableVec6_getNearestRowIndexForTime__SWIG_0(long jarg1, TimeSeriesTableVec6 jarg1_, double jarg2, boolean jarg3);
+  public final static native long TimeSeriesTableVec6_getNearestRowIndexForTime__SWIG_1(long jarg1, TimeSeriesTableVec6 jarg1_, double jarg2);
   public final static native long TimeSeriesTableVec6_getNearestRow__SWIG_0(long jarg1, TimeSeriesTableVec6 jarg1_, double jarg2, boolean jarg3);
   public final static native long TimeSeriesTableVec6_getNearestRow__SWIG_1(long jarg1, TimeSeriesTableVec6 jarg1_, double jarg2);
   public final static native long TimeSeriesTableVec6_updNearestRow__SWIG_0(long jarg1, TimeSeriesTableVec6 jarg1_, double jarg2, boolean jarg3);
@@ -2112,6 +2146,8 @@ public class opensimCommonJNI {
   public final static native long new_TimeSeriesTableSpatialVec__SWIG_3(long jarg1, DataTableSpatialVec jarg1_);
   public final static native long new_TimeSeriesTableSpatialVec__SWIG_4(String jarg1);
   public final static native long new_TimeSeriesTableSpatialVec__SWIG_5(String jarg1, String jarg2);
+  public final static native long TimeSeriesTableSpatialVec_getNearestRowIndexForTime__SWIG_0(long jarg1, TimeSeriesTableSpatialVec jarg1_, double jarg2, boolean jarg3);
+  public final static native long TimeSeriesTableSpatialVec_getNearestRowIndexForTime__SWIG_1(long jarg1, TimeSeriesTableSpatialVec jarg1_, double jarg2);
   public final static native long TimeSeriesTableSpatialVec_getNearestRow__SWIG_0(long jarg1, TimeSeriesTableSpatialVec jarg1_, double jarg2, boolean jarg3);
   public final static native long TimeSeriesTableSpatialVec_getNearestRow__SWIG_1(long jarg1, TimeSeriesTableSpatialVec jarg1_, double jarg2);
   public final static native long TimeSeriesTableSpatialVec_updNearestRow__SWIG_0(long jarg1, TimeSeriesTableSpatialVec jarg1_, double jarg2, boolean jarg3);

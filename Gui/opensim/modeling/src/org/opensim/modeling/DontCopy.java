@@ -12,12 +12,12 @@ public class DontCopy {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected DontCopy(long cPtr, boolean cMemoryOwn) {
+  public DontCopy(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(DontCopy obj) {
+  public static long getCPtr(DontCopy obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

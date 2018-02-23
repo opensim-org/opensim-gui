@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class DecorativeLine extends DecorativeGeometry {
   private transient long swigCPtr;
 
-  protected DecorativeLine(long cPtr, boolean cMemoryOwn) {
+  public DecorativeLine(long cPtr, boolean cMemoryOwn) {
     super(opensimSimbodyJNI.DecorativeLine_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(DecorativeLine obj) {
+  public static long getCPtr(DecorativeLine obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

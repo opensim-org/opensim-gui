@@ -61,6 +61,14 @@ public class TimeSeriesTableQuaternion extends DataTableQuaternion {
     this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_5(filename, tablename), true);
   }
 
+  public long getNearestRowIndexForTime(double time, boolean restrictToTimeRange) {
+    return opensimCommonJNI.TimeSeriesTableQuaternion_getNearestRowIndexForTime__SWIG_0(swigCPtr, this, time, restrictToTimeRange);
+  }
+
+  public long getNearestRowIndexForTime(double time) {
+    return opensimCommonJNI.TimeSeriesTableQuaternion_getNearestRowIndexForTime__SWIG_1(swigCPtr, this, time);
+  }
+
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t getNearestRow(double time, boolean restrictToTimeRange) {
     return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t(opensimCommonJNI.TimeSeriesTableQuaternion_getNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
   }

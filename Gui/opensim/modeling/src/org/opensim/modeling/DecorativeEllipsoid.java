@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class DecorativeEllipsoid extends DecorativeGeometry {
   private transient long swigCPtr;
 
-  protected DecorativeEllipsoid(long cPtr, boolean cMemoryOwn) {
+  public DecorativeEllipsoid(long cPtr, boolean cMemoryOwn) {
     super(opensimSimbodyJNI.DecorativeEllipsoid_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(DecorativeEllipsoid obj) {
+  public static long getCPtr(DecorativeEllipsoid obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

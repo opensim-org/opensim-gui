@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class Rotation extends Mat33 {
   private transient long swigCPtr;
 
-  protected Rotation(long cPtr, boolean cMemoryOwn) {
+  public Rotation(long cPtr, boolean cMemoryOwn) {
     super(opensimSimbodyJNI.Rotation_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(Rotation obj) {
+  public static long getCPtr(Rotation obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

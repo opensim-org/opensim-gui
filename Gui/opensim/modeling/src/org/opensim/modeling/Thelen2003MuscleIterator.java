@@ -765,15 +765,6 @@ public class Thelen2003MuscleIterator {
     return new Model(opensimSimulationJNI.Thelen2003MuscleIterator_getModel(swigCPtr, this), false);
   }
 
-  public Vec3 getScaleFactors(ScaleSet scaleSet, Frame frame) {
-    return new Vec3(opensimSimulationJNI.Thelen2003MuscleIterator_getScaleFactors(swigCPtr, this, ScaleSet.getCPtr(scaleSet), scaleSet, Frame.getCPtr(frame), frame), false);
-  }
-
-  public Vec3 getInvalidScaleFactors() {
-    long cPtr = opensimSimulationJNI.Thelen2003MuscleIterator_InvalidScaleFactors_get(swigCPtr, this);
-    return (cPtr == 0) ? null : new Vec3(cPtr, false);
-  }
-
   public void addToSystem(SWIGTYPE_p_SimTK__MultibodySystem system) {
     opensimSimulationJNI.Thelen2003MuscleIterator_addToSystem(swigCPtr, this, SWIGTYPE_p_SimTK__MultibodySystem.getCPtr(system));
   }

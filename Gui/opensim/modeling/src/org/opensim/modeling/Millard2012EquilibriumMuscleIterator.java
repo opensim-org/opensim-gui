@@ -817,15 +817,6 @@ public class Millard2012EquilibriumMuscleIterator {
     return new Model(opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getModel(swigCPtr, this), false);
   }
 
-  public Vec3 getScaleFactors(ScaleSet scaleSet, Frame frame) {
-    return new Vec3(opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getScaleFactors(swigCPtr, this, ScaleSet.getCPtr(scaleSet), scaleSet, Frame.getCPtr(frame), frame), false);
-  }
-
-  public Vec3 getInvalidScaleFactors() {
-    long cPtr = opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_InvalidScaleFactors_get(swigCPtr, this);
-    return (cPtr == 0) ? null : new Vec3(cPtr, false);
-  }
-
   public void addToSystem(SWIGTYPE_p_SimTK__MultibodySystem system) {
     opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_addToSystem(swigCPtr, this, SWIGTYPE_p_SimTK__MultibodySystem.getCPtr(system));
   }

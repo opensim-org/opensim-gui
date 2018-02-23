@@ -12,12 +12,12 @@ public class SimTKArrayMobilizedBodyIndex {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected SimTKArrayMobilizedBodyIndex(long cPtr, boolean cMemoryOwn) {
+  public SimTKArrayMobilizedBodyIndex(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(SimTKArrayMobilizedBodyIndex obj) {
+  public static long getCPtr(SimTKArrayMobilizedBodyIndex obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
