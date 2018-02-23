@@ -176,8 +176,6 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
          getModel().removeAnalysis(animationCallback, false);
          getModel().removeAnalysis(interruptingCallback, false);
          interruptingCallback = null;
-         model = null;
-         tool = null;
          if(result) resetModified();
 
          setExecuting(false);
