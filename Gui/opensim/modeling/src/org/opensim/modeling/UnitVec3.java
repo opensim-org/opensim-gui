@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class UnitVec3 extends Vec3 {
   private transient long swigCPtr;
 
-  protected UnitVec3(long cPtr, boolean cMemoryOwn) {
+  public UnitVec3(long cPtr, boolean cMemoryOwn) {
     super(opensimSimbodyJNI.UnitVec3_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(UnitVec3 obj) {
+  public static long getCPtr(UnitVec3 obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

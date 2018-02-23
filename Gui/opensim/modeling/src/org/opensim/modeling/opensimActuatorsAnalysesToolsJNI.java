@@ -7,7 +7,7 @@
  * ----------------------------------------------------------------------------- */
 
 package org.opensim.modeling;
-import javax.swing.JOptionPane;
+import javax.swing.JOptionPane;import java.awt.GraphicsEnvironment;
 public class opensimActuatorsAnalysesToolsJNI {
 
   static {
@@ -16,9 +16,33 @@ public class opensimActuatorsAnalysesToolsJNI {
           System.loadLibrary("osimJavaJNI");
       }
       catch(UnsatisfiedLinkError e){
-          new JOptionPane("Required library failed to load. Check that the " +
-                          "dynamic library osimJavaJNI is in your PATH\n" + e, 
-        JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+          String OS = System.getProperty("os.name").toLowerCase();
+          String tip = "";
+          if (OS.indexOf("win") >= 0) {
+              tip = "\nMake sure OpenSim's bin directory is on your PATH.";
+          } else if (OS.indexOf("mac") >= 0) {
+              // Nothing for now; our use of RPATH means we were probably able
+              // to locate the OpenSim dynamic libraries.
+          } else /* linux */ {
+              // Nothing for now; our use of RPATH means we were probably able
+              // to locate the OpenSim dynamic libraries.
+          }
+          String msg = new String(
+                  "Failed to load one or more dynamic libraries for OpenSim.\n"
+                  + e + tip);
+
+          String javaHome = System.getProperties().getProperty("java.home");
+          boolean inMatlab = javaHome.toLowerCase().indexOf("matlab") >= 0;
+          if (inMatlab) {
+              msg +=  "\nSee https://simtk-confluence.stanford.edu/display/OpenSim/Scripting+with+Matlab";
+          }
+          
+          System.out.println(msg);
+          String title = "Error: Failed to load OpenSim libraries";
+          if (!GraphicsEnvironment.isHeadless()) {
+              new JOptionPane(msg, JOptionPane.ERROR_MESSAGE)
+                    .createDialog(null, title).setVisible(true);
+          }
       }
   }
 

@@ -61,6 +61,14 @@ public class TimeSeriesTableUnitVec3 extends DataTableUnitVec3 {
     this(opensimCommonJNI.new_TimeSeriesTableUnitVec3__SWIG_5(filename, tablename), true);
   }
 
+  public long getNearestRowIndexForTime(double time, boolean restrictToTimeRange) {
+    return opensimCommonJNI.TimeSeriesTableUnitVec3_getNearestRowIndexForTime__SWIG_0(swigCPtr, this, time, restrictToTimeRange);
+  }
+
+  public long getNearestRowIndexForTime(double time) {
+    return opensimCommonJNI.TimeSeriesTableUnitVec3_getNearestRowIndexForTime__SWIG_1(swigCPtr, this, time);
+  }
+
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__UnitVecT_double_1_t_t getNearestRow(double time, boolean restrictToTimeRange) {
     return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__UnitVecT_double_1_t_t(opensimCommonJNI.TimeSeriesTableUnitVec3_getNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
   }

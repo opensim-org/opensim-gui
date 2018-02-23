@@ -12,12 +12,12 @@ public class CoordinateDirection {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected CoordinateDirection(long cPtr, boolean cMemoryOwn) {
+  public CoordinateDirection(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(CoordinateDirection obj) {
+  public static long getCPtr(CoordinateDirection obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -39,12 +39,12 @@ public class CoordinateDirection {
     private transient long swigCPtr;
     protected transient boolean swigCMemOwn;
   
-    protected Negative(long cPtr, boolean cMemoryOwn) {
+    public Negative(long cPtr, boolean cMemoryOwn) {
       swigCMemOwn = cMemoryOwn;
       swigCPtr = cPtr;
     }
   
-    protected static long getCPtr(Negative obj) {
+    public static long getCPtr(Negative obj) {
       return (obj == null) ? 0 : obj.swigCPtr;
     }
   

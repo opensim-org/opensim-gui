@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class DecorativeCone extends DecorativeGeometry {
   private transient long swigCPtr;
 
-  protected DecorativeCone(long cPtr, boolean cMemoryOwn) {
+  public DecorativeCone(long cPtr, boolean cMemoryOwn) {
     super(opensimSimbodyJNI.DecorativeCone_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(DecorativeCone obj) {
+  public static long getCPtr(DecorativeCone obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

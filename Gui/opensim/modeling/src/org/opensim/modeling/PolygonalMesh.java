@@ -12,12 +12,12 @@ public class PolygonalMesh {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected PolygonalMesh(long cPtr, boolean cMemoryOwn) {
+  public PolygonalMesh(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(PolygonalMesh obj) {
+  public static long getCPtr(PolygonalMesh obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

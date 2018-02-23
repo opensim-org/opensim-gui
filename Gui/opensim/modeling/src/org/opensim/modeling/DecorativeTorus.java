@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class DecorativeTorus extends DecorativeGeometry {
   private transient long swigCPtr;
 
-  protected DecorativeTorus(long cPtr, boolean cMemoryOwn) {
+  public DecorativeTorus(long cPtr, boolean cMemoryOwn) {
     super(opensimSimbodyJNI.DecorativeTorus_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(DecorativeTorus obj) {
+  public static long getCPtr(DecorativeTorus obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

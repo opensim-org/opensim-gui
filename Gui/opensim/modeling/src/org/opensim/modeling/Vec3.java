@@ -12,12 +12,12 @@ public class Vec3 {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected Vec3(long cPtr, boolean cMemoryOwn) {
+  public Vec3(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(Vec3 obj) {
+  public static long getCPtr(Vec3 obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class SimTKVisualizerInputSilo extends SimTKVisualizerInputListener {
   private transient long swigCPtr;
 
-  protected SimTKVisualizerInputSilo(long cPtr, boolean cMemoryOwn) {
+  public SimTKVisualizerInputSilo(long cPtr, boolean cMemoryOwn) {
     super(opensimSimbodyJNI.SimTKVisualizerInputSilo_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(SimTKVisualizerInputSilo obj) {
+  public static long getCPtr(SimTKVisualizerInputSilo obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

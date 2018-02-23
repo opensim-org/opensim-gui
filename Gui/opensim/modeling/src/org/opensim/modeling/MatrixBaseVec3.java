@@ -12,12 +12,12 @@ public class MatrixBaseVec3 {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected MatrixBaseVec3(long cPtr, boolean cMemoryOwn) {
+  public MatrixBaseVec3(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(MatrixBaseVec3 obj) {
+  public static long getCPtr(MatrixBaseVec3 obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

@@ -12,12 +12,12 @@ public class SimTKArrayDouble {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected SimTKArrayDouble(long cPtr, boolean cMemoryOwn) {
+  public SimTKArrayDouble(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(SimTKArrayDouble obj) {
+  public static long getCPtr(SimTKArrayDouble obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

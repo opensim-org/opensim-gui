@@ -12,12 +12,12 @@ public class FalseType {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected FalseType(long cPtr, boolean cMemoryOwn) {
+  public FalseType(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(FalseType obj) {
+  public static long getCPtr(FalseType obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

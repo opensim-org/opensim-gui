@@ -71,7 +71,7 @@ public class InverseDynamicsToolModel extends AbstractToolModelWithExternalLoads
 
          // Re-initialize our copy of the model
          Model workersModel = new Model(getOriginalModel());
-         workersModel.setName("workerModel");
+         //workersModel.setName("workerModel");
          String tempFileName=getOriginalModel().getInputFileName();
          //int loc = tempFileName.lastIndexOf(".");
          workersModel.setInputFileName(tempFileName);
