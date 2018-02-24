@@ -363,6 +363,13 @@ public final class gui {
     }
     
     /**
+     * GInvoke method to install resources to user directory
+     */
+    static public String installResources()
+    {
+        return TheApp.installResources();
+    }
+    /**
      * getClassName() returns the full qualified name of the Class that obj is an instance of
      * @param obj
      * @return class name as a string, fully qualified.
