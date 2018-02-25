@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class RowVectorBaseDouble extends MatrixBaseDouble {
   private transient long swigCPtr;
 
-  protected RowVectorBaseDouble(long cPtr, boolean cMemoryOwn) {
+  public RowVectorBaseDouble(long cPtr, boolean cMemoryOwn) {
     super(opensimSimbodyJNI.RowVectorBaseDouble_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(RowVectorBaseDouble obj) {
+  public static long getCPtr(RowVectorBaseDouble obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -103,19 +103,19 @@ public class RowVectorBaseDouble extends MatrixBaseDouble {
     return new SWIGTYPE_p_VectorIteratorT_double_SimTK__RowVectorBaseT_double_t_t(opensimSimbodyJNI.RowVectorBaseDouble_end(swigCPtr, this), true);
   }
 
-  public double get(long i) {
+  public double get(int i) {
     return opensimSimbodyJNI.RowVectorBaseDouble_get(swigCPtr, this, i);
   }
 
-  public double set(long i, double value) {
-    return opensimSimbodyJNI.RowVectorBaseDouble_set(swigCPtr, this, i, value);
+  public void set(int i, double value) {
+    opensimSimbodyJNI.RowVectorBaseDouble_set(swigCPtr, this, i, value);
   }
 
-  public double __getitem__(long i) {
+  public double __getitem__(int i) {
     return opensimSimbodyJNI.RowVectorBaseDouble___getitem__(swigCPtr, this, i);
   }
 
-  public void __setitem__(long i, double value) {
+  public void __setitem__(int i, double value) {
     opensimSimbodyJNI.RowVectorBaseDouble___setitem__(swigCPtr, this, i, value);
   }
 

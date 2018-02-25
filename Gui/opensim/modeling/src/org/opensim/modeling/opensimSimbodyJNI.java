@@ -7,8 +7,45 @@
  * ----------------------------------------------------------------------------- */
 
 package org.opensim.modeling;
-
+import javax.swing.JOptionPane;import java.awt.GraphicsEnvironment;
 public class opensimSimbodyJNI {
+
+  static {
+      try{
+          // All OpenSim classes required for GUI operation.
+          System.loadLibrary("osimJavaJNI");
+      }
+      catch(UnsatisfiedLinkError e){
+          String OS = System.getProperty("os.name").toLowerCase();
+          String tip = "";
+          if (OS.indexOf("win") >= 0) {
+              tip = "\nMake sure OpenSim's bin directory is on your PATH.";
+          } else if (OS.indexOf("mac") >= 0) {
+              // Nothing for now; our use of RPATH means we were probably able
+              // to locate the OpenSim dynamic libraries.
+          } else /* linux */ {
+              // Nothing for now; our use of RPATH means we were probably able
+              // to locate the OpenSim dynamic libraries.
+          }
+          String msg = new String(
+                  "Failed to load one or more dynamic libraries for OpenSim.\n"
+                  + e + tip);
+
+          String javaHome = System.getProperties().getProperty("java.home");
+          boolean inMatlab = javaHome.toLowerCase().indexOf("matlab") >= 0;
+          if (inMatlab) {
+              msg +=  "\nSee https://simtk-confluence.stanford.edu/display/OpenSim/Scripting+with+Matlab";
+          }
+          
+          System.out.println(msg);
+          String title = "Error: Failed to load OpenSim libraries";
+          if (!GraphicsEnvironment.isHeadless()) {
+              new JOptionPane(msg, JOptionPane.ERROR_MESSAGE)
+                    .createDialog(null, title).setVisible(true);
+          }
+      }
+  }
+
   public final static native long new_StdVectorUnsigned__SWIG_0();
   public final static native long new_StdVectorUnsigned__SWIG_1(long jarg1);
   public final static native long StdVectorUnsigned_size(long jarg1, StdVectorUnsigned jarg1_);
@@ -345,10 +382,10 @@ public class opensimSimbodyJNI {
   public final static native long VectorBaseDouble_resizeKeep(long jarg1, VectorBaseDouble jarg1_, int jarg2);
   public final static native void VectorBaseDouble_clear(long jarg1, VectorBaseDouble jarg1_);
   public final static native double VectorBaseDouble_sum(long jarg1, VectorBaseDouble jarg1_);
-  public final static native double VectorBaseDouble_get(long jarg1, VectorBaseDouble jarg1_, long jarg2);
-  public final static native double VectorBaseDouble_set(long jarg1, VectorBaseDouble jarg1_, long jarg2, double jarg3);
-  public final static native double VectorBaseDouble___getitem__(long jarg1, VectorBaseDouble jarg1_, long jarg2);
-  public final static native void VectorBaseDouble___setitem__(long jarg1, VectorBaseDouble jarg1_, long jarg2, double jarg3);
+  public final static native double VectorBaseDouble_get(long jarg1, VectorBaseDouble jarg1_, int jarg2);
+  public final static native void VectorBaseDouble_set(long jarg1, VectorBaseDouble jarg1_, int jarg2, double jarg3);
+  public final static native double VectorBaseDouble___getitem__(long jarg1, VectorBaseDouble jarg1_, int jarg2);
+  public final static native void VectorBaseDouble___setitem__(long jarg1, VectorBaseDouble jarg1_, int jarg2, double jarg3);
   public final static native void delete_VectorBaseDouble(long jarg1);
   public final static native long new_VectorView(long jarg1, VectorView jarg1_);
   public final static native void delete_VectorView(long jarg1);
@@ -378,10 +415,10 @@ public class opensimSimbodyJNI {
   public final static native double RowVectorBaseDouble_sum(long jarg1, RowVectorBaseDouble jarg1_);
   public final static native long RowVectorBaseDouble_begin(long jarg1, RowVectorBaseDouble jarg1_);
   public final static native long RowVectorBaseDouble_end(long jarg1, RowVectorBaseDouble jarg1_);
-  public final static native double RowVectorBaseDouble_get(long jarg1, RowVectorBaseDouble jarg1_, long jarg2);
-  public final static native double RowVectorBaseDouble_set(long jarg1, RowVectorBaseDouble jarg1_, long jarg2, double jarg3);
-  public final static native double RowVectorBaseDouble___getitem__(long jarg1, RowVectorBaseDouble jarg1_, long jarg2);
-  public final static native void RowVectorBaseDouble___setitem__(long jarg1, RowVectorBaseDouble jarg1_, long jarg2, double jarg3);
+  public final static native double RowVectorBaseDouble_get(long jarg1, RowVectorBaseDouble jarg1_, int jarg2);
+  public final static native void RowVectorBaseDouble_set(long jarg1, RowVectorBaseDouble jarg1_, int jarg2, double jarg3);
+  public final static native double RowVectorBaseDouble___getitem__(long jarg1, RowVectorBaseDouble jarg1_, int jarg2);
+  public final static native void RowVectorBaseDouble___setitem__(long jarg1, RowVectorBaseDouble jarg1_, int jarg2, double jarg3);
   public final static native void delete_RowVectorBaseDouble(long jarg1);
   public final static native long new_RowVectorView(long jarg1, RowVectorView jarg1_);
   public final static native void delete_RowVectorView(long jarg1);
@@ -432,10 +469,10 @@ public class opensimSimbodyJNI {
   public final static native long VectorBaseVec3_resizeKeep(long jarg1, VectorBaseVec3 jarg1_, int jarg2);
   public final static native void VectorBaseVec3_clear(long jarg1, VectorBaseVec3 jarg1_);
   public final static native long VectorBaseVec3_sum(long jarg1, VectorBaseVec3 jarg1_);
-  public final static native long VectorBaseVec3_get(long jarg1, VectorBaseVec3 jarg1_, long jarg2);
-  public final static native long VectorBaseVec3_set(long jarg1, VectorBaseVec3 jarg1_, long jarg2, long jarg3, Vec3 jarg3_);
-  public final static native long VectorBaseVec3___getitem__(long jarg1, VectorBaseVec3 jarg1_, long jarg2);
-  public final static native void VectorBaseVec3___setitem__(long jarg1, VectorBaseVec3 jarg1_, long jarg2, long jarg3, Vec3 jarg3_);
+  public final static native long VectorBaseVec3_get(long jarg1, VectorBaseVec3 jarg1_, int jarg2);
+  public final static native void VectorBaseVec3_set(long jarg1, VectorBaseVec3 jarg1_, int jarg2, long jarg3, Vec3 jarg3_);
+  public final static native long VectorBaseVec3___getitem__(long jarg1, VectorBaseVec3 jarg1_, int jarg2);
+  public final static native void VectorBaseVec3___setitem__(long jarg1, VectorBaseVec3 jarg1_, int jarg2, long jarg3, Vec3 jarg3_);
   public final static native void delete_VectorBaseVec3(long jarg1);
   public final static native long new_VectorViewVec3(long jarg1, VectorViewVec3 jarg1_);
   public final static native void delete_VectorViewVec3(long jarg1);
@@ -455,10 +492,10 @@ public class opensimSimbodyJNI {
   public final static native long RowVectorBaseVec3_sum(long jarg1, RowVectorBaseVec3 jarg1_);
   public final static native long RowVectorBaseVec3_begin(long jarg1, RowVectorBaseVec3 jarg1_);
   public final static native long RowVectorBaseVec3_end(long jarg1, RowVectorBaseVec3 jarg1_);
-  public final static native long RowVectorBaseVec3_get(long jarg1, RowVectorBaseVec3 jarg1_, long jarg2);
-  public final static native long RowVectorBaseVec3_set(long jarg1, RowVectorBaseVec3 jarg1_, long jarg2, long jarg3, Vec3 jarg3_);
-  public final static native long RowVectorBaseVec3___getitem__(long jarg1, RowVectorBaseVec3 jarg1_, long jarg2);
-  public final static native void RowVectorBaseVec3___setitem__(long jarg1, RowVectorBaseVec3 jarg1_, long jarg2, long jarg3, Vec3 jarg3_);
+  public final static native long RowVectorBaseVec3_get(long jarg1, RowVectorBaseVec3 jarg1_, int jarg2);
+  public final static native void RowVectorBaseVec3_set(long jarg1, RowVectorBaseVec3 jarg1_, int jarg2, long jarg3, Vec3 jarg3_);
+  public final static native long RowVectorBaseVec3___getitem__(long jarg1, RowVectorBaseVec3 jarg1_, int jarg2);
+  public final static native void RowVectorBaseVec3___setitem__(long jarg1, RowVectorBaseVec3 jarg1_, int jarg2, long jarg3, Vec3 jarg3_);
   public final static native void delete_RowVectorBaseVec3(long jarg1);
   public final static native long new_RowVectorViewVec3(long jarg1, RowVectorViewVec3 jarg1_);
   public final static native void delete_RowVectorViewVec3(long jarg1);

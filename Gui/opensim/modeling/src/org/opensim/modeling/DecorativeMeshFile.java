@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class DecorativeMeshFile extends DecorativeGeometry {
   private transient long swigCPtr;
 
-  protected DecorativeMeshFile(long cPtr, boolean cMemoryOwn) {
+  public DecorativeMeshFile(long cPtr, boolean cMemoryOwn) {
     super(opensimSimbodyJNI.DecorativeMeshFile_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(DecorativeMeshFile obj) {
+  public static long getCPtr(DecorativeMeshFile obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

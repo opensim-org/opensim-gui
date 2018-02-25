@@ -12,12 +12,12 @@ public class VectorOfSpatialVec {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected VectorOfSpatialVec(long cPtr, boolean cMemoryOwn) {
+  public VectorOfSpatialVec(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(VectorOfSpatialVec obj) {
+  public static long getCPtr(VectorOfSpatialVec obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

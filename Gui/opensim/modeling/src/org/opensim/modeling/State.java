@@ -12,12 +12,12 @@ public class State {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected State(long cPtr, boolean cMemoryOwn) {
+  public State(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(State obj) {
+  public static long getCPtr(State obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

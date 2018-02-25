@@ -12,12 +12,12 @@ public class MatrixBaseDouble {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected MatrixBaseDouble(long cPtr, boolean cMemoryOwn) {
+  public MatrixBaseDouble(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(MatrixBaseDouble obj) {
+  public static long getCPtr(MatrixBaseDouble obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

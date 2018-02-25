@@ -12,12 +12,12 @@ public class TrueType {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected TrueType(long cPtr, boolean cMemoryOwn) {
+  public TrueType(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(TrueType obj) {
+  public static long getCPtr(TrueType obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

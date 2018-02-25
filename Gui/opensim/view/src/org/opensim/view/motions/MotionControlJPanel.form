@@ -59,7 +59,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jEndTimeTextField" min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jMotionSlider" alignment="0" pref="297" max="32767" attributes="3"/>
+                  <Component id="jMotionSlider" alignment="0" max="32767" attributes="3"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jWrapToggleButton" min="-2" max="-2" attributes="0"/>

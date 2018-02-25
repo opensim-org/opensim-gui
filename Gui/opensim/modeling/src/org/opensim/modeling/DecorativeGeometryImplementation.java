@@ -12,12 +12,12 @@ public class DecorativeGeometryImplementation {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected DecorativeGeometryImplementation(long cPtr, boolean cMemoryOwn) {
+  public DecorativeGeometryImplementation(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(DecorativeGeometryImplementation obj) {
+  public static long getCPtr(DecorativeGeometryImplementation obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

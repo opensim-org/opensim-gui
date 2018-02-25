@@ -12,12 +12,12 @@ public class SimTKArrayVec3 {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected SimTKArrayVec3(long cPtr, boolean cMemoryOwn) {
+  public SimTKArrayVec3(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(SimTKArrayVec3 obj) {
+  public static long getCPtr(SimTKArrayVec3 obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

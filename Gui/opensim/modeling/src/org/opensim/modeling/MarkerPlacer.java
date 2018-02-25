@@ -113,6 +113,14 @@ public class MarkerPlacer extends OpenSimObject {
     opensimActuatorsAnalysesToolsJNI.MarkerPlacer_setCoordinateFileName(swigCPtr, this, aCoordinateFileName);
   }
 
+  public String getMarkerFileName() {
+    return opensimActuatorsAnalysesToolsJNI.MarkerPlacer_getMarkerFileName(swigCPtr, this);
+  }
+
+  public void setMarkerFileName(String aMarkerFileName) {
+    opensimActuatorsAnalysesToolsJNI.MarkerPlacer_setMarkerFileName(swigCPtr, this, aMarkerFileName);
+  }
+
   public double getMaxMarkerMovement() {
     return opensimActuatorsAnalysesToolsJNI.MarkerPlacer_getMaxMarkerMovement(swigCPtr, this);
   }

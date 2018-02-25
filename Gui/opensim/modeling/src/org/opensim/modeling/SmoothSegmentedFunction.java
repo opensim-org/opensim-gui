@@ -44,7 +44,7 @@ public class SmoothSegmentedFunction {
   }
 
   public double calcDerivative(double x, int order) {
-    return opensimCommonJNI.SmoothSegmentedFunction_calcDerivative__SWIG_0(swigCPtr, this, x, order);
+    return opensimCommonJNI.SmoothSegmentedFunction_calcDerivative(swigCPtr, this, x, order);
   }
 
   public double calcIntegral(double x) {

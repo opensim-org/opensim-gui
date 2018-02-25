@@ -12,12 +12,12 @@ public class Mat33 {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected Mat33(long cPtr, boolean cMemoryOwn) {
+  public Mat33(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(Mat33 obj) {
+  public static long getCPtr(Mat33 obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

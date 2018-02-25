@@ -12,12 +12,12 @@ public class InverseRotation {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected InverseRotation(long cPtr, boolean cMemoryOwn) {
+  public InverseRotation(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(InverseRotation obj) {
+  public static long getCPtr(InverseRotation obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

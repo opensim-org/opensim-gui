@@ -66,11 +66,12 @@ import vtk.vtkMatrix4x4;
 public class OpenSimDB extends Observable implements Externalizable{
     
     static OpenSimDB instance;
-    
+    public enum Mode {Modeling, Analysis}; // Will keep track if we're modeling or simulating, notify listener when changing
+    static Mode mode = OpenSimDB.Mode.Modeling;
     static ArrayList<Model>  models = new ArrayList<Model>();
     static private Hashtable<Model, OpenSimContext> mapModelsToContexts =
            new Hashtable<Model, OpenSimContext>();
-   private Hashtable<Model, SingleModelGuiElements> mapModelsToGuiElements =
+    private Hashtable<Model, SingleModelGuiElements> mapModelsToGuiElements =
            new Hashtable<Model, SingleModelGuiElements>();
     static Model currentModel=null;
 
@@ -467,5 +468,22 @@ public class OpenSimDB extends Observable implements Externalizable{
    public SingleModelGuiElements getModelGuiElements(Model aModel) {
       return mapModelsToGuiElements.get(aModel);
    }
-
+   /** Handle mode changes
+    * 
+    */
+   public static void setMode(OpenSimDB.Mode newMode){
+       if (newMode!= mode){
+           mode = newMode;
+           instance.setChanged();
+            ModeChangeEvent evnt = new ModeChangeEvent(newMode);
+            instance.notifyObservers(evnt);
+       }
+   }
+   public void switchToModelingMode() {
+       setMode(OpenSimDB.Mode.Modeling);
+   }
+   public void switchToAnalysisMode() {
+       setMode(OpenSimDB.Mode.Analysis);
+   }
+   
  }

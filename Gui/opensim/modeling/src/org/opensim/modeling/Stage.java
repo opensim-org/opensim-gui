@@ -12,12 +12,12 @@ public class Stage {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected Stage(long cPtr, boolean cMemoryOwn) {
+  public Stage(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(Stage obj) {
+  public static long getCPtr(Stage obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

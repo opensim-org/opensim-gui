@@ -81,8 +81,4 @@ public class ModelComponent extends Component {
     opensimSimulationJNI.ModelComponent_postScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
   }
 
-  public Vec3 getScaleFactors(ScaleSet scaleSet, Frame frame) {
-    return new Vec3(opensimSimulationJNI.ModelComponent_getScaleFactors(swigCPtr, this, ScaleSet.getCPtr(scaleSet), scaleSet, Frame.getCPtr(frame), frame), true);
-  }
-
 }

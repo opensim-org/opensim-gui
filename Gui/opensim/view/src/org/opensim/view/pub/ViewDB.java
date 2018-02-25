@@ -327,7 +327,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                   ModelVisualizationJson modelJson = getInstance().getModelVisualizationJson(ev.getModel());
                   JSONObject markerJson = modelJson.createMarkerJson(Marker.safeDownCast(objs.get(i)));
                   // Send message to add markerJson to live visualizer instances
-                  addVisualizerObject(markerJson);
+                  addVisualizerObject(markerJson, null);
                   //repaintAll();
                } 
             }
@@ -1081,6 +1081,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
          if(i>0) status += ", ";
          status += selectedObjects.get(i).getStatusText();
       }
+      StatusDisplayer.getDefault().setStatusText(status, 1000);
+   }
+   public void statusDisplayApplicationMode() {
+      String status="";
       StatusDisplayer.getDefault().setStatusText(status, 1000);
    }
 
@@ -2185,9 +2189,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                 System.out.println(msg.toJSONString());
         }
     }
-    public void addVisualizerObject(JSONObject jsonObject) {
+    public void addVisualizerObject(JSONObject jsonObject, double[] bounds) {
         if (websocketdb!=null){
-            websocketdb.broadcastMessageJson(currentJson.createAddObjectCommand(jsonObject), null);
+            websocketdb.broadcastMessageJson(currentJson.createAddObjectCommand(jsonObject, bounds), null);
         }
     }
 
@@ -2208,7 +2212,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     public void applyScaleToObjectByUUID(Model model, UUID objectUUID, double newScale) {
         if (websocketdb!=null){
             ModelVisualizationJson vis = ViewDB.getInstance().getModelVisualizationJson(model);
-            websocketdb.broadcastMessageJson(vis.createScaleObjectCommand(objectUUID, newScale), null);
+            websocketdb.broadcastMessageJson(vis.createScaleGeometryCommand(objectUUID, newScale), null);
         }        
         
     }

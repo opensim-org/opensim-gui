@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class VectorBaseVec3 extends MatrixBaseVec3 {
   private transient long swigCPtr;
 
-  protected VectorBaseVec3(long cPtr, boolean cMemoryOwn) {
+  public VectorBaseVec3(long cPtr, boolean cMemoryOwn) {
     super(opensimSimbodyJNI.VectorBaseVec3_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(VectorBaseVec3 obj) {
+  public static long getCPtr(VectorBaseVec3 obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -75,19 +75,19 @@ public class VectorBaseVec3 extends MatrixBaseVec3 {
     return new Vec3(opensimSimbodyJNI.VectorBaseVec3_sum(swigCPtr, this), true);
   }
 
-  public Vec3 get(long i) {
+  public Vec3 get(int i) {
     return new Vec3(opensimSimbodyJNI.VectorBaseVec3_get(swigCPtr, this, i), true);
   }
 
-  public Vec3 set(long i, Vec3 value) {
-    return new Vec3(opensimSimbodyJNI.VectorBaseVec3_set(swigCPtr, this, i, Vec3.getCPtr(value), value), true);
+  public void set(int i, Vec3 value) {
+    opensimSimbodyJNI.VectorBaseVec3_set(swigCPtr, this, i, Vec3.getCPtr(value), value);
   }
 
-  public Vec3 __getitem__(long i) {
+  public Vec3 __getitem__(int i) {
     return new Vec3(opensimSimbodyJNI.VectorBaseVec3___getitem__(swigCPtr, this, i), true);
   }
 
-  public void __setitem__(long i, Vec3 value) {
+  public void __setitem__(int i, Vec3 value) {
     opensimSimbodyJNI.VectorBaseVec3___setitem__(swigCPtr, this, i, Vec3.getCPtr(value), value);
   }
 

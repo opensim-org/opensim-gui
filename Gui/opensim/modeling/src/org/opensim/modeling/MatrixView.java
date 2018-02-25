@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class MatrixView extends MatrixBaseDouble {
   private transient long swigCPtr;
 
-  protected MatrixView(long cPtr, boolean cMemoryOwn) {
+  public MatrixView(long cPtr, boolean cMemoryOwn) {
     super(opensimSimbodyJNI.MatrixView_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(MatrixView obj) {
+  public static long getCPtr(MatrixView obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

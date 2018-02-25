@@ -70,7 +70,7 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
          MotionsDB.getInstance().clearCurrent();
 
          Model workersModel = new Model(getOriginalModel());
-         workersModel.setName("workerModel");
+         //workersModel.setName("workerModel");
          String tempFileName=getOriginalModel().getInputFileName();
          //int loc = tempFileName.lastIndexOf(".");
          workersModel.setInputFileName(tempFileName);
@@ -176,8 +176,6 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
          getModel().removeAnalysis(animationCallback, false);
          getModel().removeAnalysis(interruptingCallback, false);
          interruptingCallback = null;
-         model = null;
-         tool = null;
          if(result) resetModified();
 
          setExecuting(false);

@@ -28,6 +28,7 @@ public class Model extends ModelComponent {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
+        String nm = this.getName();
         opensimSimulationJNI.delete_Model(swigCPtr);
       }
       swigCPtr = 0;
@@ -121,114 +122,6 @@ public class Model extends ModelComponent {
 
   public static String getClassName() {
     return opensimSimulationJNI.Model_getClassName();
-  }
-
-  public void copyProperty_assembly_accuracy(Model source) {
-    opensimSimulationJNI.Model_copyProperty_assembly_accuracy(swigCPtr, this, Model.getCPtr(source), source);
-  }
-
-  public double get_assembly_accuracy(int i) {
-    return opensimSimulationJNI.Model_get_assembly_accuracy__SWIG_0(swigCPtr, this, i);
-  }
-
-  public SWIGTYPE_p_double upd_assembly_accuracy(int i) {
-    return new SWIGTYPE_p_double(opensimSimulationJNI.Model_upd_assembly_accuracy__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_assembly_accuracy(int i, double value) {
-    opensimSimulationJNI.Model_set_assembly_accuracy__SWIG_0(swigCPtr, this, i, value);
-  }
-
-  public int append_assembly_accuracy(double value) {
-    return opensimSimulationJNI.Model_append_assembly_accuracy(swigCPtr, this, value);
-  }
-
-  public void constructProperty_assembly_accuracy(double initValue) {
-    opensimSimulationJNI.Model_constructProperty_assembly_accuracy(swigCPtr, this, initValue);
-  }
-
-  public double get_assembly_accuracy() {
-    return opensimSimulationJNI.Model_get_assembly_accuracy__SWIG_1(swigCPtr, this);
-  }
-
-  public SWIGTYPE_p_double upd_assembly_accuracy() {
-    return new SWIGTYPE_p_double(opensimSimulationJNI.Model_upd_assembly_accuracy__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_assembly_accuracy(double value) {
-    opensimSimulationJNI.Model_set_assembly_accuracy__SWIG_1(swigCPtr, this, value);
-  }
-
-  public void copyProperty_ground(Model source) {
-    opensimSimulationJNI.Model_copyProperty_ground(swigCPtr, this, Model.getCPtr(source), source);
-  }
-
-  public Ground get_ground(int i) {
-    return new Ground(opensimSimulationJNI.Model_get_ground__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public Ground upd_ground(int i) {
-    return new Ground(opensimSimulationJNI.Model_upd_ground__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_ground(int i, Ground value) {
-    opensimSimulationJNI.Model_set_ground__SWIG_0(swigCPtr, this, i, Ground.getCPtr(value), value);
-  }
-
-  public int append_ground(Ground value) {
-    return opensimSimulationJNI.Model_append_ground(swigCPtr, this, Ground.getCPtr(value), value);
-  }
-
-  public void constructProperty_ground(Ground initValue) {
-    opensimSimulationJNI.Model_constructProperty_ground(swigCPtr, this, Ground.getCPtr(initValue), initValue);
-  }
-
-  public Ground get_ground() {
-    return new Ground(opensimSimulationJNI.Model_get_ground__SWIG_1(swigCPtr, this), false);
-  }
-
-  public Ground upd_ground() {
-    return new Ground(opensimSimulationJNI.Model_upd_ground__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_ground(Ground value) {
-    opensimSimulationJNI.Model_set_ground__SWIG_1(swigCPtr, this, Ground.getCPtr(value), value);
-  }
-
-  public void copyProperty_gravity(Model source) {
-    opensimSimulationJNI.Model_copyProperty_gravity(swigCPtr, this, Model.getCPtr(source), source);
-  }
-
-  public Vec3 get_gravity(int i) {
-    return new Vec3(opensimSimulationJNI.Model_get_gravity__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public Vec3 upd_gravity(int i) {
-    return new Vec3(opensimSimulationJNI.Model_upd_gravity__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_gravity(int i, Vec3 value) {
-    opensimSimulationJNI.Model_set_gravity__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
-  }
-
-  public int append_gravity(Vec3 value) {
-    return opensimSimulationJNI.Model_append_gravity(swigCPtr, this, Vec3.getCPtr(value), value);
-  }
-
-  public void constructProperty_gravity(Vec3 initValue) {
-    opensimSimulationJNI.Model_constructProperty_gravity(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
-  }
-
-  public Vec3 get_gravity() {
-    return new Vec3(opensimSimulationJNI.Model_get_gravity__SWIG_1(swigCPtr, this), false);
-  }
-
-  public Vec3 upd_gravity() {
-    return new Vec3(opensimSimulationJNI.Model_upd_gravity__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_gravity(Vec3 value) {
-    opensimSimulationJNI.Model_set_gravity__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
   public void copyProperty_credits(Model source) {
@@ -375,256 +268,112 @@ public class Model extends ModelComponent {
     opensimSimulationJNI.Model_set_force_units__SWIG_1(swigCPtr, this, value);
   }
 
-  public void copyProperty_ControllerSet(Model source) {
-    opensimSimulationJNI.Model_copyProperty_ControllerSet(swigCPtr, this, Model.getCPtr(source), source);
+  public void copyProperty_assembly_accuracy(Model source) {
+    opensimSimulationJNI.Model_copyProperty_assembly_accuracy(swigCPtr, this, Model.getCPtr(source), source);
   }
 
-  public ControllerSet get_ControllerSet(int i) {
-    return new ControllerSet(opensimSimulationJNI.Model_get_ControllerSet__SWIG_0(swigCPtr, this, i), false);
+  public double get_assembly_accuracy(int i) {
+    return opensimSimulationJNI.Model_get_assembly_accuracy__SWIG_0(swigCPtr, this, i);
   }
 
-  public ControllerSet upd_ControllerSet(int i) {
-    return new ControllerSet(opensimSimulationJNI.Model_upd_ControllerSet__SWIG_0(swigCPtr, this, i), false);
+  public SWIGTYPE_p_double upd_assembly_accuracy(int i) {
+    return new SWIGTYPE_p_double(opensimSimulationJNI.Model_upd_assembly_accuracy__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_ControllerSet(int i, ControllerSet value) {
-    opensimSimulationJNI.Model_set_ControllerSet__SWIG_0(swigCPtr, this, i, ControllerSet.getCPtr(value), value);
+  public void set_assembly_accuracy(int i, double value) {
+    opensimSimulationJNI.Model_set_assembly_accuracy__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int append_ControllerSet(ControllerSet value) {
-    return opensimSimulationJNI.Model_append_ControllerSet(swigCPtr, this, ControllerSet.getCPtr(value), value);
+  public int append_assembly_accuracy(double value) {
+    return opensimSimulationJNI.Model_append_assembly_accuracy(swigCPtr, this, value);
   }
 
-  public void constructProperty_ControllerSet(ControllerSet initValue) {
-    opensimSimulationJNI.Model_constructProperty_ControllerSet(swigCPtr, this, ControllerSet.getCPtr(initValue), initValue);
+  public void constructProperty_assembly_accuracy(double initValue) {
+    opensimSimulationJNI.Model_constructProperty_assembly_accuracy(swigCPtr, this, initValue);
   }
 
-  public ControllerSet get_ControllerSet() {
-    return new ControllerSet(opensimSimulationJNI.Model_get_ControllerSet__SWIG_1(swigCPtr, this), false);
+  public double get_assembly_accuracy() {
+    return opensimSimulationJNI.Model_get_assembly_accuracy__SWIG_1(swigCPtr, this);
   }
 
-  public ControllerSet upd_ControllerSet() {
-    return new ControllerSet(opensimSimulationJNI.Model_upd_ControllerSet__SWIG_1(swigCPtr, this), false);
+  public SWIGTYPE_p_double upd_assembly_accuracy() {
+    return new SWIGTYPE_p_double(opensimSimulationJNI.Model_upd_assembly_accuracy__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_ControllerSet(ControllerSet value) {
-    opensimSimulationJNI.Model_set_ControllerSet__SWIG_1(swigCPtr, this, ControllerSet.getCPtr(value), value);
+  public void set_assembly_accuracy(double value) {
+    opensimSimulationJNI.Model_set_assembly_accuracy__SWIG_1(swigCPtr, this, value);
   }
 
-  public void copyProperty_ConstraintSet(Model source) {
-    opensimSimulationJNI.Model_copyProperty_ConstraintSet(swigCPtr, this, Model.getCPtr(source), source);
+  public void copyProperty_gravity(Model source) {
+    opensimSimulationJNI.Model_copyProperty_gravity(swigCPtr, this, Model.getCPtr(source), source);
   }
 
-  public ConstraintSet get_ConstraintSet(int i) {
-    return new ConstraintSet(opensimSimulationJNI.Model_get_ConstraintSet__SWIG_0(swigCPtr, this, i), false);
+  public Vec3 get_gravity(int i) {
+    return new Vec3(opensimSimulationJNI.Model_get_gravity__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public ConstraintSet upd_ConstraintSet(int i) {
-    return new ConstraintSet(opensimSimulationJNI.Model_upd_ConstraintSet__SWIG_0(swigCPtr, this, i), false);
+  public Vec3 upd_gravity(int i) {
+    return new Vec3(opensimSimulationJNI.Model_upd_gravity__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_ConstraintSet(int i, ConstraintSet value) {
-    opensimSimulationJNI.Model_set_ConstraintSet__SWIG_0(swigCPtr, this, i, ConstraintSet.getCPtr(value), value);
+  public void set_gravity(int i, Vec3 value) {
+    opensimSimulationJNI.Model_set_gravity__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
   }
 
-  public int append_ConstraintSet(ConstraintSet value) {
-    return opensimSimulationJNI.Model_append_ConstraintSet(swigCPtr, this, ConstraintSet.getCPtr(value), value);
+  public int append_gravity(Vec3 value) {
+    return opensimSimulationJNI.Model_append_gravity(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void constructProperty_ConstraintSet(ConstraintSet initValue) {
-    opensimSimulationJNI.Model_constructProperty_ConstraintSet(swigCPtr, this, ConstraintSet.getCPtr(initValue), initValue);
+  public void constructProperty_gravity(Vec3 initValue) {
+    opensimSimulationJNI.Model_constructProperty_gravity(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
   }
 
-  public ConstraintSet get_ConstraintSet() {
-    return new ConstraintSet(opensimSimulationJNI.Model_get_ConstraintSet__SWIG_1(swigCPtr, this), false);
+  public Vec3 get_gravity() {
+    return new Vec3(opensimSimulationJNI.Model_get_gravity__SWIG_1(swigCPtr, this), false);
   }
 
-  public ConstraintSet upd_ConstraintSet() {
-    return new ConstraintSet(opensimSimulationJNI.Model_upd_ConstraintSet__SWIG_1(swigCPtr, this), false);
+  public Vec3 upd_gravity() {
+    return new Vec3(opensimSimulationJNI.Model_upd_gravity__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_ConstraintSet(ConstraintSet value) {
-    opensimSimulationJNI.Model_set_ConstraintSet__SWIG_1(swigCPtr, this, ConstraintSet.getCPtr(value), value);
+  public void set_gravity(Vec3 value) {
+    opensimSimulationJNI.Model_set_gravity__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void copyProperty_ForceSet(Model source) {
-    opensimSimulationJNI.Model_copyProperty_ForceSet(swigCPtr, this, Model.getCPtr(source), source);
+  public void copyProperty_ground(Model source) {
+    opensimSimulationJNI.Model_copyProperty_ground(swigCPtr, this, Model.getCPtr(source), source);
   }
 
-  public ForceSet get_ForceSet(int i) {
-    return new ForceSet(opensimSimulationJNI.Model_get_ForceSet__SWIG_0(swigCPtr, this, i), false);
+  public Ground get_ground(int i) {
+    return new Ground(opensimSimulationJNI.Model_get_ground__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public ForceSet upd_ForceSet(int i) {
-    return new ForceSet(opensimSimulationJNI.Model_upd_ForceSet__SWIG_0(swigCPtr, this, i), false);
+  public Ground upd_ground(int i) {
+    return new Ground(opensimSimulationJNI.Model_upd_ground__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_ForceSet(int i, ForceSet value) {
-    opensimSimulationJNI.Model_set_ForceSet__SWIG_0(swigCPtr, this, i, ForceSet.getCPtr(value), value);
+  public void set_ground(int i, Ground value) {
+    opensimSimulationJNI.Model_set_ground__SWIG_0(swigCPtr, this, i, Ground.getCPtr(value), value);
   }
 
-  public int append_ForceSet(ForceSet value) {
-    return opensimSimulationJNI.Model_append_ForceSet(swigCPtr, this, ForceSet.getCPtr(value), value);
+  public int append_ground(Ground value) {
+    return opensimSimulationJNI.Model_append_ground(swigCPtr, this, Ground.getCPtr(value), value);
   }
 
-  public void constructProperty_ForceSet(ForceSet initValue) {
-    opensimSimulationJNI.Model_constructProperty_ForceSet(swigCPtr, this, ForceSet.getCPtr(initValue), initValue);
+  public void constructProperty_ground(Ground initValue) {
+    opensimSimulationJNI.Model_constructProperty_ground(swigCPtr, this, Ground.getCPtr(initValue), initValue);
   }
 
-  public ForceSet get_ForceSet() {
-    return new ForceSet(opensimSimulationJNI.Model_get_ForceSet__SWIG_1(swigCPtr, this), false);
+  public Ground get_ground() {
+    return new Ground(opensimSimulationJNI.Model_get_ground__SWIG_1(swigCPtr, this), false);
   }
 
-  public ForceSet upd_ForceSet() {
-    return new ForceSet(opensimSimulationJNI.Model_upd_ForceSet__SWIG_1(swigCPtr, this), false);
+  public Ground upd_ground() {
+    return new Ground(opensimSimulationJNI.Model_upd_ground__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_ForceSet(ForceSet value) {
-    opensimSimulationJNI.Model_set_ForceSet__SWIG_1(swigCPtr, this, ForceSet.getCPtr(value), value);
-  }
-
-  public void copyProperty_MarkerSet(Model source) {
-    opensimSimulationJNI.Model_copyProperty_MarkerSet(swigCPtr, this, Model.getCPtr(source), source);
-  }
-
-  public MarkerSet get_MarkerSet(int i) {
-    return new MarkerSet(opensimSimulationJNI.Model_get_MarkerSet__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public MarkerSet upd_MarkerSet(int i) {
-    return new MarkerSet(opensimSimulationJNI.Model_upd_MarkerSet__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_MarkerSet(int i, MarkerSet value) {
-    opensimSimulationJNI.Model_set_MarkerSet__SWIG_0(swigCPtr, this, i, MarkerSet.getCPtr(value), value);
-  }
-
-  public int append_MarkerSet(MarkerSet value) {
-    return opensimSimulationJNI.Model_append_MarkerSet(swigCPtr, this, MarkerSet.getCPtr(value), value);
-  }
-
-  public void constructProperty_MarkerSet(MarkerSet initValue) {
-    opensimSimulationJNI.Model_constructProperty_MarkerSet(swigCPtr, this, MarkerSet.getCPtr(initValue), initValue);
-  }
-
-  public MarkerSet get_MarkerSet() {
-    return new MarkerSet(opensimSimulationJNI.Model_get_MarkerSet__SWIG_1(swigCPtr, this), false);
-  }
-
-  public MarkerSet upd_MarkerSet() {
-    return new MarkerSet(opensimSimulationJNI.Model_upd_MarkerSet__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_MarkerSet(MarkerSet value) {
-    opensimSimulationJNI.Model_set_MarkerSet__SWIG_1(swigCPtr, this, MarkerSet.getCPtr(value), value);
-  }
-
-  public void copyProperty_ContactGeometrySet(Model source) {
-    opensimSimulationJNI.Model_copyProperty_ContactGeometrySet(swigCPtr, this, Model.getCPtr(source), source);
-  }
-
-  public ContactGeometrySet get_ContactGeometrySet(int i) {
-    return new ContactGeometrySet(opensimSimulationJNI.Model_get_ContactGeometrySet__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public ContactGeometrySet upd_ContactGeometrySet(int i) {
-    return new ContactGeometrySet(opensimSimulationJNI.Model_upd_ContactGeometrySet__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_ContactGeometrySet(int i, ContactGeometrySet value) {
-    opensimSimulationJNI.Model_set_ContactGeometrySet__SWIG_0(swigCPtr, this, i, ContactGeometrySet.getCPtr(value), value);
-  }
-
-  public int append_ContactGeometrySet(ContactGeometrySet value) {
-    return opensimSimulationJNI.Model_append_ContactGeometrySet(swigCPtr, this, ContactGeometrySet.getCPtr(value), value);
-  }
-
-  public void constructProperty_ContactGeometrySet(ContactGeometrySet initValue) {
-    opensimSimulationJNI.Model_constructProperty_ContactGeometrySet(swigCPtr, this, ContactGeometrySet.getCPtr(initValue), initValue);
-  }
-
-  public ContactGeometrySet get_ContactGeometrySet() {
-    return new ContactGeometrySet(opensimSimulationJNI.Model_get_ContactGeometrySet__SWIG_1(swigCPtr, this), false);
-  }
-
-  public ContactGeometrySet upd_ContactGeometrySet() {
-    return new ContactGeometrySet(opensimSimulationJNI.Model_upd_ContactGeometrySet__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_ContactGeometrySet(ContactGeometrySet value) {
-    opensimSimulationJNI.Model_set_ContactGeometrySet__SWIG_1(swigCPtr, this, ContactGeometrySet.getCPtr(value), value);
-  }
-
-  public void copyProperty_ComponentSet(Model source) {
-    opensimSimulationJNI.Model_copyProperty_ComponentSet(swigCPtr, this, Model.getCPtr(source), source);
-  }
-
-  public ComponentSet get_ComponentSet(int i) {
-    return new ComponentSet(opensimSimulationJNI.Model_get_ComponentSet__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public ComponentSet upd_ComponentSet(int i) {
-    return new ComponentSet(opensimSimulationJNI.Model_upd_ComponentSet__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_ComponentSet(int i, ComponentSet value) {
-    opensimSimulationJNI.Model_set_ComponentSet__SWIG_0(swigCPtr, this, i, ComponentSet.getCPtr(value), value);
-  }
-
-  public int append_ComponentSet(ComponentSet value) {
-    return opensimSimulationJNI.Model_append_ComponentSet(swigCPtr, this, ComponentSet.getCPtr(value), value);
-  }
-
-  public void constructProperty_ComponentSet(ComponentSet initValue) {
-    opensimSimulationJNI.Model_constructProperty_ComponentSet(swigCPtr, this, ComponentSet.getCPtr(initValue), initValue);
-  }
-
-  public ComponentSet get_ComponentSet() {
-    return new ComponentSet(opensimSimulationJNI.Model_get_ComponentSet__SWIG_1(swigCPtr, this), false);
-  }
-
-  public ComponentSet upd_ComponentSet() {
-    return new ComponentSet(opensimSimulationJNI.Model_upd_ComponentSet__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_ComponentSet(ComponentSet value) {
-    opensimSimulationJNI.Model_set_ComponentSet__SWIG_1(swigCPtr, this, ComponentSet.getCPtr(value), value);
-  }
-
-  public void copyProperty_ProbeSet(Model source) {
-    opensimSimulationJNI.Model_copyProperty_ProbeSet(swigCPtr, this, Model.getCPtr(source), source);
-  }
-
-  public ProbeSet get_ProbeSet(int i) {
-    return new ProbeSet(opensimSimulationJNI.Model_get_ProbeSet__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public ProbeSet upd_ProbeSet(int i) {
-    return new ProbeSet(opensimSimulationJNI.Model_upd_ProbeSet__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_ProbeSet(int i, ProbeSet value) {
-    opensimSimulationJNI.Model_set_ProbeSet__SWIG_0(swigCPtr, this, i, ProbeSet.getCPtr(value), value);
-  }
-
-  public int append_ProbeSet(ProbeSet value) {
-    return opensimSimulationJNI.Model_append_ProbeSet(swigCPtr, this, ProbeSet.getCPtr(value), value);
-  }
-
-  public void constructProperty_ProbeSet(ProbeSet initValue) {
-    opensimSimulationJNI.Model_constructProperty_ProbeSet(swigCPtr, this, ProbeSet.getCPtr(initValue), initValue);
-  }
-
-  public ProbeSet get_ProbeSet() {
-    return new ProbeSet(opensimSimulationJNI.Model_get_ProbeSet__SWIG_1(swigCPtr, this), false);
-  }
-
-  public ProbeSet upd_ProbeSet() {
-    return new ProbeSet(opensimSimulationJNI.Model_upd_ProbeSet__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_ProbeSet(ProbeSet value) {
-    opensimSimulationJNI.Model_set_ProbeSet__SWIG_1(swigCPtr, this, ProbeSet.getCPtr(value), value);
+  public void set_ground(Ground value) {
+    opensimSimulationJNI.Model_set_ground__SWIG_1(swigCPtr, this, Ground.getCPtr(value), value);
   }
 
   public void copyProperty_BodySet(Model source) {
@@ -697,6 +446,258 @@ public class Model extends ModelComponent {
 
   public void set_JointSet(JointSet value) {
     opensimSimulationJNI.Model_set_JointSet__SWIG_1(swigCPtr, this, JointSet.getCPtr(value), value);
+  }
+
+  public void copyProperty_ConstraintSet(Model source) {
+    opensimSimulationJNI.Model_copyProperty_ConstraintSet(swigCPtr, this, Model.getCPtr(source), source);
+  }
+
+  public ConstraintSet get_ConstraintSet(int i) {
+    return new ConstraintSet(opensimSimulationJNI.Model_get_ConstraintSet__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public ConstraintSet upd_ConstraintSet(int i) {
+    return new ConstraintSet(opensimSimulationJNI.Model_upd_ConstraintSet__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_ConstraintSet(int i, ConstraintSet value) {
+    opensimSimulationJNI.Model_set_ConstraintSet__SWIG_0(swigCPtr, this, i, ConstraintSet.getCPtr(value), value);
+  }
+
+  public int append_ConstraintSet(ConstraintSet value) {
+    return opensimSimulationJNI.Model_append_ConstraintSet(swigCPtr, this, ConstraintSet.getCPtr(value), value);
+  }
+
+  public void constructProperty_ConstraintSet(ConstraintSet initValue) {
+    opensimSimulationJNI.Model_constructProperty_ConstraintSet(swigCPtr, this, ConstraintSet.getCPtr(initValue), initValue);
+  }
+
+  public ConstraintSet get_ConstraintSet() {
+    return new ConstraintSet(opensimSimulationJNI.Model_get_ConstraintSet__SWIG_1(swigCPtr, this), false);
+  }
+
+  public ConstraintSet upd_ConstraintSet() {
+    return new ConstraintSet(opensimSimulationJNI.Model_upd_ConstraintSet__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_ConstraintSet(ConstraintSet value) {
+    opensimSimulationJNI.Model_set_ConstraintSet__SWIG_1(swigCPtr, this, ConstraintSet.getCPtr(value), value);
+  }
+
+  public void copyProperty_MarkerSet(Model source) {
+    opensimSimulationJNI.Model_copyProperty_MarkerSet(swigCPtr, this, Model.getCPtr(source), source);
+  }
+
+  public MarkerSet get_MarkerSet(int i) {
+    return new MarkerSet(opensimSimulationJNI.Model_get_MarkerSet__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public MarkerSet upd_MarkerSet(int i) {
+    return new MarkerSet(opensimSimulationJNI.Model_upd_MarkerSet__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_MarkerSet(int i, MarkerSet value) {
+    opensimSimulationJNI.Model_set_MarkerSet__SWIG_0(swigCPtr, this, i, MarkerSet.getCPtr(value), value);
+  }
+
+  public int append_MarkerSet(MarkerSet value) {
+    return opensimSimulationJNI.Model_append_MarkerSet(swigCPtr, this, MarkerSet.getCPtr(value), value);
+  }
+
+  public void constructProperty_MarkerSet(MarkerSet initValue) {
+    opensimSimulationJNI.Model_constructProperty_MarkerSet(swigCPtr, this, MarkerSet.getCPtr(initValue), initValue);
+  }
+
+  public MarkerSet get_MarkerSet() {
+    return new MarkerSet(opensimSimulationJNI.Model_get_MarkerSet__SWIG_1(swigCPtr, this), false);
+  }
+
+  public MarkerSet upd_MarkerSet() {
+    return new MarkerSet(opensimSimulationJNI.Model_upd_MarkerSet__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_MarkerSet(MarkerSet value) {
+    opensimSimulationJNI.Model_set_MarkerSet__SWIG_1(swigCPtr, this, MarkerSet.getCPtr(value), value);
+  }
+
+  public void copyProperty_ForceSet(Model source) {
+    opensimSimulationJNI.Model_copyProperty_ForceSet(swigCPtr, this, Model.getCPtr(source), source);
+  }
+
+  public ForceSet get_ForceSet(int i) {
+    return new ForceSet(opensimSimulationJNI.Model_get_ForceSet__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public ForceSet upd_ForceSet(int i) {
+    return new ForceSet(opensimSimulationJNI.Model_upd_ForceSet__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_ForceSet(int i, ForceSet value) {
+    opensimSimulationJNI.Model_set_ForceSet__SWIG_0(swigCPtr, this, i, ForceSet.getCPtr(value), value);
+  }
+
+  public int append_ForceSet(ForceSet value) {
+    return opensimSimulationJNI.Model_append_ForceSet(swigCPtr, this, ForceSet.getCPtr(value), value);
+  }
+
+  public void constructProperty_ForceSet(ForceSet initValue) {
+    opensimSimulationJNI.Model_constructProperty_ForceSet(swigCPtr, this, ForceSet.getCPtr(initValue), initValue);
+  }
+
+  public ForceSet get_ForceSet() {
+    return new ForceSet(opensimSimulationJNI.Model_get_ForceSet__SWIG_1(swigCPtr, this), false);
+  }
+
+  public ForceSet upd_ForceSet() {
+    return new ForceSet(opensimSimulationJNI.Model_upd_ForceSet__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_ForceSet(ForceSet value) {
+    opensimSimulationJNI.Model_set_ForceSet__SWIG_1(swigCPtr, this, ForceSet.getCPtr(value), value);
+  }
+
+  public void copyProperty_ControllerSet(Model source) {
+    opensimSimulationJNI.Model_copyProperty_ControllerSet(swigCPtr, this, Model.getCPtr(source), source);
+  }
+
+  public ControllerSet get_ControllerSet(int i) {
+    return new ControllerSet(opensimSimulationJNI.Model_get_ControllerSet__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public ControllerSet upd_ControllerSet(int i) {
+    return new ControllerSet(opensimSimulationJNI.Model_upd_ControllerSet__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_ControllerSet(int i, ControllerSet value) {
+    opensimSimulationJNI.Model_set_ControllerSet__SWIG_0(swigCPtr, this, i, ControllerSet.getCPtr(value), value);
+  }
+
+  public int append_ControllerSet(ControllerSet value) {
+    return opensimSimulationJNI.Model_append_ControllerSet(swigCPtr, this, ControllerSet.getCPtr(value), value);
+  }
+
+  public void constructProperty_ControllerSet(ControllerSet initValue) {
+    opensimSimulationJNI.Model_constructProperty_ControllerSet(swigCPtr, this, ControllerSet.getCPtr(initValue), initValue);
+  }
+
+  public ControllerSet get_ControllerSet() {
+    return new ControllerSet(opensimSimulationJNI.Model_get_ControllerSet__SWIG_1(swigCPtr, this), false);
+  }
+
+  public ControllerSet upd_ControllerSet() {
+    return new ControllerSet(opensimSimulationJNI.Model_upd_ControllerSet__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_ControllerSet(ControllerSet value) {
+    opensimSimulationJNI.Model_set_ControllerSet__SWIG_1(swigCPtr, this, ControllerSet.getCPtr(value), value);
+  }
+
+  public void copyProperty_ContactGeometrySet(Model source) {
+    opensimSimulationJNI.Model_copyProperty_ContactGeometrySet(swigCPtr, this, Model.getCPtr(source), source);
+  }
+
+  public ContactGeometrySet get_ContactGeometrySet(int i) {
+    return new ContactGeometrySet(opensimSimulationJNI.Model_get_ContactGeometrySet__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public ContactGeometrySet upd_ContactGeometrySet(int i) {
+    return new ContactGeometrySet(opensimSimulationJNI.Model_upd_ContactGeometrySet__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_ContactGeometrySet(int i, ContactGeometrySet value) {
+    opensimSimulationJNI.Model_set_ContactGeometrySet__SWIG_0(swigCPtr, this, i, ContactGeometrySet.getCPtr(value), value);
+  }
+
+  public int append_ContactGeometrySet(ContactGeometrySet value) {
+    return opensimSimulationJNI.Model_append_ContactGeometrySet(swigCPtr, this, ContactGeometrySet.getCPtr(value), value);
+  }
+
+  public void constructProperty_ContactGeometrySet(ContactGeometrySet initValue) {
+    opensimSimulationJNI.Model_constructProperty_ContactGeometrySet(swigCPtr, this, ContactGeometrySet.getCPtr(initValue), initValue);
+  }
+
+  public ContactGeometrySet get_ContactGeometrySet() {
+    return new ContactGeometrySet(opensimSimulationJNI.Model_get_ContactGeometrySet__SWIG_1(swigCPtr, this), false);
+  }
+
+  public ContactGeometrySet upd_ContactGeometrySet() {
+    return new ContactGeometrySet(opensimSimulationJNI.Model_upd_ContactGeometrySet__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_ContactGeometrySet(ContactGeometrySet value) {
+    opensimSimulationJNI.Model_set_ContactGeometrySet__SWIG_1(swigCPtr, this, ContactGeometrySet.getCPtr(value), value);
+  }
+
+  public void copyProperty_ProbeSet(Model source) {
+    opensimSimulationJNI.Model_copyProperty_ProbeSet(swigCPtr, this, Model.getCPtr(source), source);
+  }
+
+  public ProbeSet get_ProbeSet(int i) {
+    return new ProbeSet(opensimSimulationJNI.Model_get_ProbeSet__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public ProbeSet upd_ProbeSet(int i) {
+    return new ProbeSet(opensimSimulationJNI.Model_upd_ProbeSet__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_ProbeSet(int i, ProbeSet value) {
+    opensimSimulationJNI.Model_set_ProbeSet__SWIG_0(swigCPtr, this, i, ProbeSet.getCPtr(value), value);
+  }
+
+  public int append_ProbeSet(ProbeSet value) {
+    return opensimSimulationJNI.Model_append_ProbeSet(swigCPtr, this, ProbeSet.getCPtr(value), value);
+  }
+
+  public void constructProperty_ProbeSet(ProbeSet initValue) {
+    opensimSimulationJNI.Model_constructProperty_ProbeSet(swigCPtr, this, ProbeSet.getCPtr(initValue), initValue);
+  }
+
+  public ProbeSet get_ProbeSet() {
+    return new ProbeSet(opensimSimulationJNI.Model_get_ProbeSet__SWIG_1(swigCPtr, this), false);
+  }
+
+  public ProbeSet upd_ProbeSet() {
+    return new ProbeSet(opensimSimulationJNI.Model_upd_ProbeSet__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_ProbeSet(ProbeSet value) {
+    opensimSimulationJNI.Model_set_ProbeSet__SWIG_1(swigCPtr, this, ProbeSet.getCPtr(value), value);
+  }
+
+  public void copyProperty_ComponentSet(Model source) {
+    opensimSimulationJNI.Model_copyProperty_ComponentSet(swigCPtr, this, Model.getCPtr(source), source);
+  }
+
+  public ComponentSet get_ComponentSet(int i) {
+    return new ComponentSet(opensimSimulationJNI.Model_get_ComponentSet__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public ComponentSet upd_ComponentSet(int i) {
+    return new ComponentSet(opensimSimulationJNI.Model_upd_ComponentSet__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_ComponentSet(int i, ComponentSet value) {
+    opensimSimulationJNI.Model_set_ComponentSet__SWIG_0(swigCPtr, this, i, ComponentSet.getCPtr(value), value);
+  }
+
+  public int append_ComponentSet(ComponentSet value) {
+    return opensimSimulationJNI.Model_append_ComponentSet(swigCPtr, this, ComponentSet.getCPtr(value), value);
+  }
+
+  public void constructProperty_ComponentSet(ComponentSet initValue) {
+    opensimSimulationJNI.Model_constructProperty_ComponentSet(swigCPtr, this, ComponentSet.getCPtr(initValue), initValue);
+  }
+
+  public ComponentSet get_ComponentSet() {
+    return new ComponentSet(opensimSimulationJNI.Model_get_ComponentSet__SWIG_1(swigCPtr, this), false);
+  }
+
+  public ComponentSet upd_ComponentSet() {
+    return new ComponentSet(opensimSimulationJNI.Model_upd_ComponentSet__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_ComponentSet(ComponentSet value) {
+    opensimSimulationJNI.Model_set_ComponentSet__SWIG_1(swigCPtr, this, ComponentSet.getCPtr(value), value);
   }
 
   public void copyProperty_ModelVisualPreferences(Model source) {
