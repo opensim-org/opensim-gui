@@ -215,12 +215,12 @@ public final class TheApp {
             if (exists){
                 // Show info warning to redo
                 NotifyDescriptor.Message errorDlg =
-                          new NotifyDescriptor.Message("Specified directory already exists, please remove or rename before proceeding..");
+                          new NotifyDescriptor.Message("Specified directory already exists, please remove or rename before proceeding.");
                   DialogDisplayer.getDefault().notify(errorDlg);
             }
             else if (userSelection==null){
                  NotifyDescriptor.Message errorDlg =
-                          new NotifyDescriptor.Message("No directory was specified, please fix before proceeding..");
+                          new NotifyDescriptor.Message("No directory was specified, please fix before proceeding.");
                   DialogDisplayer.getDefault().notify(errorDlg);
                exists = true;
                 // show error message and redo
