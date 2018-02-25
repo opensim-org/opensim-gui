@@ -604,6 +604,12 @@ public class ModelVisualizationJson extends JSONObject {
          return formJSON;
     }
 
+    public JSONObject createDeselectionJson() {
+         JSONObject formJSON = new JSONObject();
+         formJSON.put("Op", "Deselect");  
+         return formJSON;
+    }
+
     /**
      * @return the visScaleFactor
      */
