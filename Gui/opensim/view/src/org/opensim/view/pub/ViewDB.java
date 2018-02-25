@@ -1011,11 +1011,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       else
           lookupContents.remove(selectedObject.getOpenSimObject());
       // Remaining code is vtk depenedent
-      if (!isVtkGraphicsAvailable()) return;
-      selectedObject.markSelected(highlight);
+      //if (!isVtkGraphicsAvailable()) return;
+      //selectedObject.markSelected(highlight);
       if (websocketdb != null){
           Model model = selectedObject.getOwnerModel();
-          websocketdb.broadcastMessageJson(currentJson.createSelectionJson(selectedObject.getOpenSimObject()), null);
+          if (highlight)
+            websocketdb.broadcastMessageJson(currentJson.createSelectionJson(selectedObject.getOpenSimObject()), null);
+          else
+            websocketdb.broadcastMessageJson(currentJson.createDeselectionJson(), null);
       }
       if (ViewDB.getInstance().isQuery() && isVtkGraphicsAvailable()){
           if (highlight){
