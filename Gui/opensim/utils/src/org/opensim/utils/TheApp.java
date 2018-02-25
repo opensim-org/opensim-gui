@@ -206,6 +206,10 @@ public final class TheApp {
             Dialog dlg = DialogDisplayer.getDefault().createDialog(dd);
             dlg.setModal(true);
             dlg.setVisible(true);
+            Object userInput = dd.getValue();
+            if (((Integer)userInput).compareTo((Integer)DialogDescriptor.CANCEL_OPTION)==0){
+                return "";
+            }
             userSelection = destDirectoryPanel.getFileName();
             exists = new File(userSelection).exists();
             if (exists){
