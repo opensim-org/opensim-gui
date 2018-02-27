@@ -104,6 +104,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
          if (isCoordinatesOnly()){
             kinReporter = new Kinematics(get_model());
             kinReporter.setInDegrees(false);
+            kinReporter.setRecordAccelerations(false);
             kinReporter.begin(context.getCurrentStateRef());
             storage = kinReporter.getPositionStorage();
         }
