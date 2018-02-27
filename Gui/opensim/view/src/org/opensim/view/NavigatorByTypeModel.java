@@ -52,7 +52,8 @@ import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ObjectGroup;
-import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.Probe;
+import org.opensim.modeling.ProbeSet;
 
 /**
  *
@@ -78,6 +79,7 @@ public class NavigatorByTypeModel {
     private final ContactGeometrySet setOfContactGeometry = new ContactGeometrySet();
     private final ForceSet setOfForces = new ForceSet();
     private final ControllerSet setOfControllers = new ControllerSet();
+    private final ProbeSet setOfProbes = new ProbeSet();
     private final transient PropertyChangeSupport propertyChangeSupport = new java.beans.PropertyChangeSupport(this);
     private final transient VetoableChangeSupport vetoableChangeSupport = new java.beans.VetoableChangeSupport(this);
     private Ground ground;
@@ -90,6 +92,7 @@ public class NavigatorByTypeModel {
         setOfContactGeometry.setMemoryOwner(false);
         setOfForces.setMemoryOwner(false);
         setOfControllers.setMemoryOwner(false);
+        setOfProbes.setMemoryOwner(false);
         buildCollections(model);
         createMuscleGroups(model);
     }
@@ -114,6 +117,7 @@ public class NavigatorByTypeModel {
                classifyContactGeometry(comp);
                classifyForce(comp);
                classifyController(comp);
+               classifyProbe(comp);
             }
             compIter.next();
         }
@@ -159,6 +163,13 @@ public class NavigatorByTypeModel {
         ContactGeometry tComp = ContactGeometry.safeDownCast(comp);
         if (tComp != null){
             setOfContactGeometry.adoptAndAppend(tComp);
+        }
+    }
+    
+    private void classifyProbe(Component comp) {
+        Probe probe = Probe.safeDownCast(comp);
+        if (probe != null){
+            setOfProbes.adoptAndAppend(probe);
         }
     }
 
@@ -209,6 +220,13 @@ public class NavigatorByTypeModel {
      */
     public ControllerSet getSetOfControllers() {
         return setOfControllers;
+    }
+
+    /**
+     * @return the setOfProbes
+     */
+    public ProbeSet getSetOfProbes() {
+        return setOfProbes;
     }
 
     public Ground getGround() {
