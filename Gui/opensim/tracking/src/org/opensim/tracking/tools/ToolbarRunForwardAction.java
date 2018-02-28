@@ -34,6 +34,7 @@ import org.openide.util.actions.CallableSystemAction;
 import org.opensim.modeling.ForwardTool;
 import org.opensim.modeling.Model;
 import org.opensim.tracking.ForwardToolModel;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.view.pub.OpenSimDB;
 
@@ -61,7 +62,7 @@ public final class ToolbarRunForwardAction extends CallableSystemAction implemen
                 
                 // Change 
             } catch (IOException ex) {
-                Exceptions.printStackTrace(ex);
+                ErrorDialog.displayExceptionDialog(ex);
             }   
    }
    

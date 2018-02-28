@@ -40,6 +40,7 @@ import org.openide.util.NbBundle;
 import org.openide.windows.WindowManager;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.utils.ApplicationState;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.TheApp;
 import org.opensim.view.actions.ApplicationExit;
 import org.opensim.view.base.OpenSimBaseCanvas;
@@ -121,7 +122,7 @@ public class Installer extends ModuleInstall {
                 as.addObject("PluginsDB", PluginsDB.getInstance());
                 as.addObject("MotionsDB", new MotionsDBDescriptor(MotionsDB.getInstance()));
             } catch (IOException ex) {
-                ex.printStackTrace();
+                ErrorDialog.displayExceptionDialog(ex);
             }
         }
         

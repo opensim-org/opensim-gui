@@ -69,6 +69,7 @@ import org.opensim.threejs.JSONMessageHandler;
 import org.opensim.threejs.JSONUtilities;
 import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.threejs.VisualizerWindowAction;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.Prefs;
 import org.opensim.utils.TheApp;
 import org.opensim.view.*;
@@ -478,7 +479,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                        if (modelVisToJsonFilesMap.get(dJson)!=null)
                             Files.deleteIfExists(modelVisToJsonFilesMap.get(dJson));
                     } catch (IOException ex) {
-                       Exceptions.printStackTrace(ex);
+                       ErrorDialog.displayExceptionDialog(ex);
                     }
                     modelVisToJsonFilesMap.remove(dJson);
                     if (currentJson == dJson) // Cleanup stale Json, will be set fresh by next current model
@@ -527,7 +528,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
            JSONUtilities.writeJsonFile(vizJson, fileName);
            modelVisToJsonFilesMap.put(vizJson, Paths.get(fileName));
        } catch (IOException ex) {
-           Exceptions.printStackTrace(ex);
+           ErrorDialog.displayExceptionDialog(ex);
        }
         // send message to visualizer to load model from file
         websocketdb.broadcastMessageJson(vizJson.createOpenModelJson(), socket);
@@ -1092,8 +1093,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    }
 
    public void setSelectedObject(OpenSimObject obj) {
-      //FIX40 if (findObjectInSelectedList(obj)!=-1)
-      //    return;
+      if (findObjectInSelectedList(obj)!=-1)
+          return;
       //clearSelectedObjects();
 
       if (obj != null) {

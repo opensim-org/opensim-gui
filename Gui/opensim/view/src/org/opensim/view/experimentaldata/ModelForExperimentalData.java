@@ -56,7 +56,7 @@ public class ModelForExperimentalData extends Model{
     /**
      * Creates a new instance of ModelForExperimentalData
      */
-    public ModelForExperimentalData(int i, AnnotatedMotion motionData) throws IOException {
+    public ModelForExperimentalData(int i, AnnotatedMotion motionData) {
         super();
         setName("ExperimentalData_"+i);
         this.motionData=motionData;

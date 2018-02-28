@@ -76,6 +76,7 @@ import org.opensim.modeling.SetControlNodes;
 import org.opensim.modeling.PiecewiseConstantFunction;
 import org.opensim.modeling.XYFunctionInterface;
 import org.opensim.utils.DialogUtils;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.utils.OpenSimDialog;
 import org.opensim.view.excitationEditor.ExcitationRenderer.ExcitationFillMode;
@@ -1383,7 +1384,7 @@ public class ExcitationEditorJPanel extends javax.swing.JPanel implements TreeSe
              getExcitationGridPanel().getColumn(i).setColumnNameLabelText(columnName);
          }
       } catch (IOException ex) {
-          ex.printStackTrace();
+          ErrorDialog.displayExceptionDialog(ex);
       }
     }
 

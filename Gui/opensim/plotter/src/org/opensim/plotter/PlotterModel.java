@@ -34,7 +34,6 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Vector;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeNode;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
@@ -46,6 +45,7 @@ import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.MuscleAnalysis;
 import org.opensim.modeling.Storage;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 
 /**
@@ -125,7 +125,7 @@ public class PlotterModel {
          sources.add(newSource);
          return newSource;
       } catch (IOException ex) {
-         ex.printStackTrace();
+         ErrorDialog.displayExceptionDialog(ex);
          return null;
       }
    }

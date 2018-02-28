@@ -97,7 +97,7 @@ public class FileOpenOsimModelAction extends CallableSystemAction {
                     try {
                         OpenSimDB.getInstance().addModel(aModel);
                     } catch (IOException ex) {
-                        DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message(ex.getMessage()));
+                        ErrorDialog.displayExceptionDialog(ex);
                     }
             }});
         retValue = true;

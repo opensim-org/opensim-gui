@@ -46,6 +46,7 @@ import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.SetActuators;
 import org.opensim.utils.BrowserLauncher;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.utils.TheApp;
 import org.opensim.view.pub.OpenSimDB;
@@ -325,7 +326,7 @@ public class ExcitationEditorJFrame extends javax.swing.JFrame {
                 writer.flush();
                 writer.close();
             } catch (IOException ex) {
-                ex.printStackTrace();
+                ErrorDialog.displayExceptionDialog(ex);
             }
         }
 

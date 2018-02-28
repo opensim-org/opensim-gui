@@ -250,7 +250,7 @@ public final class TheApp {
                     try {
                         FileUtils.copyFiles(srcPath, destPath);
                     } catch (IOException ex) {
-                        Exceptions.printStackTrace(ex);
+                        ErrorDialog.displayExceptionDialog(ex);
                         System.out.println("Folder "+srcPath.toAbsolutePath()+" couldn't be copied..Skipping");
                     }
                 }

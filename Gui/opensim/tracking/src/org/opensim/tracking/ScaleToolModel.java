@@ -590,6 +590,7 @@ public class ScaleToolModel extends Observable implements Observer {
          } catch (IOException ex) {
             extraMarkerSet = null;
             success = false;
+            ErrorDialog.displayExceptionDialog(ex);
          }
       }
       
@@ -681,6 +682,7 @@ public class ScaleToolModel extends Observable implements Observer {
          } catch (IOException ex) {
             measurementTrial = null;
             success = false;
+            ErrorDialog.displayExceptionDialog(ex);
          }
       }
       if(resetTimeRange && measurementTrial!=null) setMeasurementTrialTimeRange(measurementTrial.getTimeRange());

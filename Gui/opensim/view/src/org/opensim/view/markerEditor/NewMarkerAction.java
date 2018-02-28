@@ -49,6 +49,7 @@ import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.Vec3;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.ObjectsAddedEvent;
 import org.opensim.view.nodes.MarkersNode;
@@ -91,7 +92,7 @@ public class NewMarkerAction extends AbstractAction {
         try {
            context.restoreStateFromCachedModel();
        } catch (IOException ex) {
-           Exceptions.printStackTrace(ex);
+           ErrorDialog.displayExceptionDialog(ex);
        }
         Vector<OpenSimObject> markers = new  Vector<OpenSimObject>();
         markers.add(newMarker);

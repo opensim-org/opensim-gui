@@ -33,6 +33,7 @@ import org.openide.filesystems.FileObject;
 import org.openide.loaders.OpenSupport;
 import org.openide.util.Exceptions;
 import org.openide.windows.CloneableTopComponent;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.FileOpenOsimModelAction;
 
@@ -60,7 +61,7 @@ class OsimOpenSupport extends OpenSupport implements OpenCookie, CloseCookie {
         } catch (ClassNotFoundException ex) {
             Exceptions.printStackTrace(ex);
         } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
+           ErrorDialog.displayExceptionDialog(ex);
         }
     }
 

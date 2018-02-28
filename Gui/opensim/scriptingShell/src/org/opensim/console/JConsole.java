@@ -33,13 +33,12 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
+import org.opensim.utils.ErrorDialog;
 
 import org.python.core.Py;
 import org.python.core.PyException;
 import org.python.util.InteractiveConsole;
-import org.python.util.InteractiveInterpreter;
 import org.python.util.JLineConsole;
-import org.python.util.PythonInterpreter;
 
 /**
  *
@@ -224,7 +223,7 @@ public class JConsole extends JTextArea implements KeyListener {
                 input.close();
             }
         } catch (IOException ex) {
-            ex.printStackTrace();
+            ErrorDialog.displayExceptionDialog(ex);
         }
 
         return contents.toString();

@@ -41,6 +41,7 @@ import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.StaticOptimization;
 import org.opensim.swingui.SwingWorker;
 import org.opensim.tracking.tools.SimulationDB;
+import org.opensim.utils.DialogUtils;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.MuscleColorByActivationStorage;
@@ -436,7 +437,7 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
             Storage coords = new Storage(coordinatesFileName);
             updateToolTimeRange(coords);
          } catch (IOException ex) {
-            ex.printStackTrace();
+            ErrorDialog.displayExceptionDialog(ex);
       }
    }
    }

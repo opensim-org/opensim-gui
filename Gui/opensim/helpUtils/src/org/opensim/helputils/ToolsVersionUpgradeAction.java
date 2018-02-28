@@ -32,6 +32,7 @@ import org.openide.util.actions.CallableSystemAction;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.Storage;
+import org.opensim.utils.ErrorDialog;
 
 public final class ToolsVersionUpgradeAction extends CallableSystemAction {
     
@@ -55,7 +56,7 @@ public final class ToolsVersionUpgradeAction extends CallableSystemAction {
                         mdl.clone().print(output);
                         OpenSimObject.setSerializeAllDefaults(saveDefaults);
                     } catch (IOException ex) {
-                        ex.printStackTrace();
+                        ErrorDialog.displayExceptionDialog(ex);
                     }
                 }
                else if (upgradePanel.getExtension().equalsIgnoreCase(".xml")){
@@ -80,7 +81,7 @@ public final class ToolsVersionUpgradeAction extends CallableSystemAction {
                         sto.setInDegrees(upgradePanel.isMarkInDegrees());
                         sto.print(output);
                     } catch (IOException ex) {
-                        ex.printStackTrace();
+                        ErrorDialog.displayExceptionDialog(ex);
                     }
                 }
             }

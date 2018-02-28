@@ -155,7 +155,7 @@ public class InverseDynamicsToolModel extends AbstractToolModelWithExternalLoads
             try {
                 motion = new Storage(InverseDynamicsTool().getCoordinatesFileName());
             } catch (IOException ex) {
-                ex.printStackTrace();
+                ErrorDialog.displayExceptionDialog(ex);
             }
          }
          if (motion!=null){

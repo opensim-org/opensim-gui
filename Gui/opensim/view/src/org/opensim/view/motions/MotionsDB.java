@@ -48,6 +48,7 @@ import org.opensim.modeling.CoordinateSet;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.Storage;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.ModelEvent;
@@ -410,7 +411,7 @@ public class MotionsDB extends Observable // Observed by other entities in motio
                         if(parentOrTopMotionsNode!=null && parentOrTopMotionsNode.getChildren().getNodesCount()==0 && parentOrTopMotionsNode.getName().equals("Motions"))
                            parentOrTopMotionsNode.destroy();
                      } catch (IOException ex) {
-                        ex.printStackTrace();
+                        ErrorDialog.displayExceptionDialog(ex);
                      }
                      break;
                   }

@@ -40,6 +40,7 @@ import org.opensim.modeling.ArrayInt;
 import org.opensim.modeling.ExternalForce;
 import org.opensim.modeling.ExternalLoads;
 import org.opensim.modeling.Model;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.motions.MotionsDB;
 
@@ -456,7 +457,7 @@ private void jButtonLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     aMotion.getClassified().add(motionForce);
                }
             } catch (IOException ex) {
-                Exceptions.printStackTrace(ex);
+                ErrorDialog.displayExceptionDialog(ex);
             }
     }
 

@@ -25,12 +25,14 @@ package org.opensim.view.nodes;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.text.ParseException;
 import javax.swing.JOptionPane;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import org.openide.util.Exceptions;
 import org.opensim.modeling.*;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.SingleModelGuiElements;
 import org.opensim.view.pub.OpenSimDB;
@@ -200,6 +202,7 @@ public class PropertyEditorAdaptor {
         if (d.getSize() == 3) {
             setValueVec3(new Vec3(d.getitem(0), d.getitem(1), d.getitem(2)));
         }
+            
     }
 
     public void setValueVec3(Vec3 v) {
@@ -316,7 +319,7 @@ public class PropertyEditorAdaptor {
             workString = workString.substring(liveStart+1, liveEnd);
         }
         else if (liveStart!=liveEnd){
-          //throw new ParseException("Illegal format: Expect space separated values, optionally between matched parentheses", liveEnd);
+          ErrorDialog.showMessageDialog(aString);
           return;
         }
         String[] splits = workString.split(" ");
@@ -388,7 +391,7 @@ public class PropertyEditorAdaptor {
             PropertyHelper.setValueDouble(oldValue, prop);
                 context.restoreStateFromCachedModel();  
             } catch (IOException ex) {
-                Exceptions.printStackTrace(ex);
+                ErrorDialog.displayExceptionDialog(ex);
         }
         }
         handlePropertyChangeCommon();
@@ -434,7 +437,7 @@ public class PropertyEditorAdaptor {
             PropertyHelper.setValueString(oldValue, prop);
                 context.restoreStateFromCachedModel();  
             } catch (IOException ex) {
-                Exceptions.printStackTrace(ex);
+                ErrorDialog.displayExceptionDialog(ex);
         }
         }
         handlePropertyChangeCommon();
@@ -482,7 +485,7 @@ public class PropertyEditorAdaptor {
                     PropertyHelper.setValueBool(oldValue, prop);
                     context.restoreStateFromCachedModel();
                 } catch (IOException ex) {
-                    Exceptions.printStackTrace(ex);
+                    ErrorDialog.displayExceptionDialog(ex);
                 }
             }
         }
@@ -529,7 +532,7 @@ public class PropertyEditorAdaptor {
             PropertyHelper.setValueInt(oldValue, prop);
                 context.restoreStateFromCachedModel();  
             } catch (IOException ex) {
-                Exceptions.printStackTrace(ex);
+                ErrorDialog.displayExceptionDialog(ex);
         }
         }
         handlePropertyChangeCommon();
@@ -580,7 +583,7 @@ public class PropertyEditorAdaptor {
             }
                 context.restoreStateFromCachedModel();
             } catch (IOException ex) {
-                Exceptions.printStackTrace(ex);
+                ErrorDialog.displayExceptionDialog(ex);
         }
         }
         handlePropertyChangeCommon();
@@ -631,7 +634,7 @@ public class PropertyEditorAdaptor {
             }
                 if (supportUndo) context.restoreStateFromCachedModel();
             } catch (IOException ex) {
-                Exceptions.printStackTrace(ex);
+                ErrorDialog.displayExceptionDialog(ex);
         }
         }
         
@@ -685,7 +688,7 @@ public class PropertyEditorAdaptor {
             }
                 if (supportUndo) context.restoreStateFromCachedModel();
             } catch (IOException ex) {
-                Exceptions.printStackTrace(ex);
+                ErrorDialog.displayExceptionDialog(ex);
         }
         }
         
@@ -741,7 +744,7 @@ public class PropertyEditorAdaptor {
             }
                 context.restoreStateFromCachedModel();
             } catch (IOException ex) {
-                Exceptions.printStackTrace(ex);
+                ErrorDialog.displayExceptionDialog(ex);
             }
         }
         handlePropertyChangeCommon();
@@ -788,7 +791,7 @@ public class PropertyEditorAdaptor {
                  prop.setValueAsObject(oldObject);
                 context.restoreStateFromCachedModel();  
             } catch (IOException ex) {
-                Exceptions.printStackTrace(ex);
+                ErrorDialog.displayExceptionDialog(ex);
             }
         }
         handlePropertyChangeCommon();
@@ -900,7 +903,7 @@ public class PropertyEditorAdaptor {
             ViewDB.getInstance().updateModelDisplay(model);
             ViewDB.renderAll();
         } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
+            ErrorDialog.displayExceptionDialog(ex);
     }
     }
             
