@@ -32,6 +32,7 @@ import org.opensim.modeling.MarkerData;
 import org.opensim.modeling.MarkerPlacer;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.Storage;
+import org.opensim.utils.ErrorDialog;
 
 //===========================================================================
 // IKCommonModel
@@ -106,6 +107,7 @@ public class IKCommonModel extends Observable implements Observer {
          } catch (IOException ex) {
             markerData = null;
             success = false;
+            ErrorDialog.displayExceptionDialog(ex);
          }
       }
       ikMarkerTasksModel.markerDataChanged(markerData);
@@ -141,6 +143,7 @@ public class IKCommonModel extends Observable implements Observer {
          } catch (IOException ex) {
             coordinateData = null;
             success = false;
+            ErrorDialog.displayExceptionDialog(ex);
          }
       }
       ikCoordinateTasksModel.coordinateDataChanged(coordinateData);

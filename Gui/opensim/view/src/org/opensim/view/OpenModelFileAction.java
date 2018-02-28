@@ -27,6 +27,7 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.AbstractAction;
+import org.opensim.utils.ErrorDialog;
 
 /**
  * A Class that displays a passed in url
@@ -47,7 +48,7 @@ class OpenModelFileAction extends AbstractAction
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            ErrorDialog.displayExceptionDialog(ex);
         }
             
     }

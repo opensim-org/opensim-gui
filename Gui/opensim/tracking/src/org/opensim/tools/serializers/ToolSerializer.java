@@ -43,6 +43,7 @@ import org.opensim.tracking.AnalyzeAndForwardToolPanel;
 import org.opensim.tracking.AnalyzeToolModel;
 import org.opensim.tracking.ForwardToolModel;
 import org.opensim.tracking.IKToolModel;
+import org.opensim.utils.ErrorDialog;
 
 /**
  *
@@ -92,7 +93,7 @@ public class ToolSerializer extends Observable implements Serializable{
                 toolModel.execute();                
             }
         } catch (IOException ex) {
-            ex.printStackTrace();
+            ErrorDialog.displayExceptionDialog(ex);
         }
     }
 

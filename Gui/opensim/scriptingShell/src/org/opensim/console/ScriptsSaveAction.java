@@ -35,8 +35,8 @@ import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
 import org.openide.cookies.SaveCookie;
 import org.openide.loaders.DataObject;
-import org.openide.util.Exceptions;
 import org.openide.util.NbBundle.Messages;
+import org.opensim.utils.ErrorDialog;
 
 
 
@@ -64,7 +64,7 @@ public final class ScriptsSaveAction implements ActionListener {
             try {
                 sc.save();
             } catch (IOException ex) {
-                Exceptions.printStackTrace(ex);
+                ErrorDialog.displayExceptionDialog(ex);
             }
         }
         

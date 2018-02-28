@@ -1179,7 +1179,7 @@ public class JPlotterPanel extends javax.swing.JPanel
             PlotterSourceFile src = new PlotterSourceFile(dataFilename);
             getPlotterModel().addSource(src);
          } catch (IOException ex) {
-            ex.printStackTrace();
+            ErrorDialog.displayExceptionDialog(ex);
          }
       }
    }//GEN-LAST:event_jLoadFileToPlotterMenuItemActionPerformed
@@ -1195,7 +1195,7 @@ public class JPlotterPanel extends javax.swing.JPanel
             getPlotterModel().addSource(src);
             return src;
         } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
+            ErrorDialog.displayExceptionDialog(ex);
         }
         return null;
    }
@@ -1701,7 +1701,7 @@ public class JPlotterPanel extends javax.swing.JPanel
       try {
          tool.run(true);
       } catch (IOException ex) {
-         ex.printStackTrace();
+         ErrorDialog.displayExceptionDialog(ex);
       }
       /*
         try {

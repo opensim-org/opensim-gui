@@ -40,6 +40,7 @@ import org.openide.awt.ActionRegistration;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle.Messages;
 import org.opensim.modeling.Model;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.pub.ViewDB;
@@ -80,7 +81,7 @@ public final class ExportSceneToThreeJsAction implements ActionListener {
             }
             JSONUtilities.writeJsonFile(jsonTop, fileName);
         } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
+            ErrorDialog.displayExceptionDialog(ex);
         } finally {
         }
         return vizJson;

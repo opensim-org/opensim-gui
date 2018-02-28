@@ -48,6 +48,7 @@ import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.ExternalForce;
 import org.opensim.modeling.Storage;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.utils.TheApp;
 
@@ -128,7 +129,7 @@ public class EditExternalLoadsPanel extends javax.swing.JPanel
             try {
                 externalLoadsStorage = new Storage(dataFileName, true);
             } catch (IOException ex) {
-                ex.printStackTrace();
+                ErrorDialog.displayExceptionDialog(ex);
             }
         }
         updateButtonAvailability();
@@ -584,7 +585,7 @@ public class EditExternalLoadsPanel extends javax.swing.JPanel
                      externalLoadsDataFileName.setFileName(newFilename);
                 }
              } catch (IOException ex) {
-                 ex.printStackTrace();
+                 ErrorDialog.displayExceptionDialog(ex);
              }
          }
          dLoads.setDataFileName(externalLoadsDataFileName.getFileName());

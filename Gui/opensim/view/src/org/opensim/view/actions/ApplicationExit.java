@@ -47,6 +47,7 @@ import org.opensim.view.motions.MotionsDB;
 import org.opensim.view.motions.MotionsDBDescriptor;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.modeling.Model;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.TheApp;
 import org.opensim.view.pub.OpenSimDBDescriptor;
 import org.opensim.view.pub.PluginsDB;
@@ -102,7 +103,7 @@ public class ApplicationExit extends WindowAdapter
       } catch (FileNotFoundException ex) {
           ex.printStackTrace();
       } catch (IOException ex) {
-          ex.printStackTrace();
+          ErrorDialog.displayExceptionDialog(ex);
       }
       //System.out.println("Finish saving application state.");
 

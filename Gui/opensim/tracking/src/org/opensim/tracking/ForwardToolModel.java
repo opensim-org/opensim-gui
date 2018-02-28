@@ -317,7 +317,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
                 startTime = s.getFirstTime();
                 endTime = s.getLastTime();
             } catch (IOException ex) {
-                ex.printStackTrace();
+                ErrorDialog.displayExceptionDialog(ex);
             }
          }
          updateControlTimeRange(startTime, endTime);
@@ -337,7 +337,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
             Storage s = new Storage(fileName);
             updateStatesTimeRange(s.getFirstTime(), s.getLastTime());
          } catch (IOException ex) {
-             ex.printStackTrace();
+             ErrorDialog.displayExceptionDialog(ex);
          }
       }
    }
@@ -379,6 +379,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
             worker = new ForwardToolWorker();
             SimulationDB.getInstance().startSimulation(this);
          } catch (IOException ex) {
+            DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message(ex.getMessage()));
             setExecuting(false);
             return;
          }

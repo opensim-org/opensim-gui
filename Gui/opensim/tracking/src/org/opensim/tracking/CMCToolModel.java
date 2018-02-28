@@ -272,7 +272,7 @@ public class CMCToolModel extends TrackingToolModel {
             Storage coords = new Storage(fileName);
             updateToolTimeRange(coords);
          } catch (IOException ex) {
-            ex.printStackTrace();
+            ErrorDialog.displayExceptionDialog(ex);
       }
 
    }

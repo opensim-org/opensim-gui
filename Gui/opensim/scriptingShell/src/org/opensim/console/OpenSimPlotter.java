@@ -40,6 +40,7 @@ import org.opensim.plotter.PlotCurve;
 import org.opensim.plotter.PlotterDB;
 import org.opensim.plotter.PlotterSourceFile;
 import org.opensim.plotter.PlotterSourceMotion;
+import org.opensim.utils.DialogUtils;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.view.motions.FileLoadMotionAction;
 import org.opensim.view.motions.MotionsDB;
@@ -78,7 +79,7 @@ public final class OpenSimPlotter {
             plotter.getPlotterModel().addSource(src);
             return src;
         } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
+            ErrorDialog.displayExceptionDialog(ex);
         }
         return null;
     }

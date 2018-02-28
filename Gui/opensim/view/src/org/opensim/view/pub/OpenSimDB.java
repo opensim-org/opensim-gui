@@ -55,6 +55,7 @@ import org.opensim.modeling.Force;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.TheApp;
 import org.opensim.view.*;
 import vtk.vtkMatrix4x4;
@@ -222,7 +223,7 @@ public class OpenSimDB extends Observable implements Externalizable{
             try {
                 addModel(newModel, newContext);
             } catch (IOException ex) {
-                ex.printStackTrace();
+                ErrorDialog.displayExceptionDialog(ex);
             }
          //mapModelsToContexts.put(newModel, newContext);
          /*
@@ -418,7 +419,7 @@ public class OpenSimDB extends Observable implements Externalizable{
             try {
                 newContext = new OpenSimContext(aModel.initSystem(), aModel);
             } catch (IOException ex) {
-                ex.printStackTrace();
+                ErrorDialog.displayExceptionDialog(ex);
                 return null;
             }
          mapModelsToContexts.put(aModel, newContext);

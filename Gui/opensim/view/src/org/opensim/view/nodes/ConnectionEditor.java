@@ -30,6 +30,7 @@ import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import org.openide.util.Exceptions;
 import org.opensim.modeling.*;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.SingleModelGuiElements;
 import org.opensim.view.pub.OpenSimDB;
@@ -110,7 +111,7 @@ public class ConnectionEditor {
                 connector.setConnecteeName(oldValue);
                 context.restoreStateFromCachedModel();  
             } catch (IOException ex) {
-                Exceptions.printStackTrace(ex);
+                ErrorDialog.displayExceptionDialog(ex);
         }
         }
         handleConnectionChangeCommon();

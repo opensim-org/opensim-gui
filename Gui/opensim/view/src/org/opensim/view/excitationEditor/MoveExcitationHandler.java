@@ -40,6 +40,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreePath;
+import org.opensim.utils.ErrorDialog;
 
 /**
  *
@@ -142,7 +143,7 @@ public class MoveExcitationHandler extends NodeMoveTransferHandler{
             }
             topPanel.validate();
        } catch (IOException ex) {
-            ex.printStackTrace();
+            ErrorDialog.displayExceptionDialog(ex);
         } catch (UnsupportedFlavorException ex) {
             ex.printStackTrace();
         }
@@ -172,7 +173,7 @@ public class MoveExcitationHandler extends NodeMoveTransferHandler{
             }
             topPanel.validate();
        } catch (IOException ex) {
-            ex.printStackTrace();
+            ErrorDialog.displayExceptionDialog(ex);
         } catch (UnsupportedFlavorException ex) {
             ex.printStackTrace();
         }

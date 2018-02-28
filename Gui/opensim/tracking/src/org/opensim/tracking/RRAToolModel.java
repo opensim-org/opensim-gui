@@ -179,6 +179,7 @@ public class RRAToolModel extends TrackingToolModel {
                   //newReducedResidualsModel.setup();
                } catch (IOException ex) {
                   newReducedResidualsModel = null;
+                  ErrorDialog.displayExceptionDialog(ex);
                }
                //OpenSim20 added argument
                OpenSimDB.getInstance().replaceModel(reducedResidualsModel, newReducedResidualsModel, null);
@@ -255,7 +256,7 @@ public class RRAToolModel extends TrackingToolModel {
             Storage coords = new Storage(fileName);
             updateToolTimeRange(coords);
          } catch (IOException ex) {
-            ex.printStackTrace();
+            ErrorDialog.displayExceptionDialog(ex);
       }
    }
    }
