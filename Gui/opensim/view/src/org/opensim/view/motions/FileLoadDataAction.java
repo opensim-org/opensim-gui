@@ -37,6 +37,7 @@ import org.opensim.modeling.MarkerData;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.modeling.Storage;
 import org.opensim.modeling.Units;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.experimentaldata.AnnotatedMotion;
 import org.opensim.view.pub.OpenSimDB;
@@ -90,8 +91,7 @@ public final class FileLoadDataAction extends CallableSystemAction {
                         modelForDataImport = new ModelForExperimentalData(nextNumber++, amot);
                         OpenSimDB.getInstance().addModel(modelForDataImport);
                     } catch (IOException ex) {
-                        ex.printStackTrace();
-                        System.out.println("Missing resource file Models/Internal/_openSimlab.osim. Previewing is aborted.");
+                        ErrorDialog.displayExceptionDialog(ex);
                         return;
                     }
                     MotionsDB.getInstance().addMotion(modelForDataImport, amot, null);

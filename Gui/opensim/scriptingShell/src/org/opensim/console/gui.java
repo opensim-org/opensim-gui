@@ -52,10 +52,9 @@ import org.opensim.modeling.Probe;
 import org.opensim.modeling.State;
 import org.opensim.modeling.Storage;
 import org.opensim.tracking.tools.ToolbarSimulationAction;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.TheApp;
-import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.motions.MotionsDB;
-import org.opensim.view.nodes.OneModelNode;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 
@@ -178,7 +177,7 @@ public final class gui {
             Model aModel = new Model(fileName);
             OpenSimDB.getInstance().addModel(aModel);
         } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
+            ErrorDialog.displayExceptionDialog(ex);
         }
     }
     /**
@@ -241,7 +240,7 @@ public final class gui {
     /**
      * findObject locates an Object in the model and returns a reference to it.
      * Beware, since this gives unguarded access to the objects in the model, changes made the object
-     * maynot propagate throughout the model and or application. USe at your own risk.
+     * may not propagate throughout the model and or application. USe at your own risk.
      * 
      * @param aModel
      * @param type : one of Body, Joint, Force (or any force producing object e.g. muscle), Controller
@@ -362,6 +361,13 @@ public final class gui {
         return TheApp.getInstallDir();
     }
     
+    /**
+     * GInvoke method to install resources to user directory
+     */
+    static public String installResources()
+    {
+        return TheApp.installResources();
+    }
     /**
      * getClassName() returns the full qualified name of the Class that obj is an instance of
      * @param obj

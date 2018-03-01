@@ -37,8 +37,8 @@ import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionID;
 import org.openide.cookies.SaveCookie;
-import org.openide.util.Exceptions;
 import org.openide.util.NbBundle.Messages;
+import org.opensim.utils.ErrorDialog;
 
 
 @ActionID(category = "Edit",
@@ -76,7 +76,7 @@ public final class ToolsRunCurrentScriptAction implements ActionListener {
                     sc.save();
                 }
             } catch (IOException ex) {
-                Exceptions.printStackTrace(ex);
+                ErrorDialog.displayExceptionDialog(ex);
             }
         }
         ScriptingShellTopComponent.getDefault().getConsole().executeFile(path);

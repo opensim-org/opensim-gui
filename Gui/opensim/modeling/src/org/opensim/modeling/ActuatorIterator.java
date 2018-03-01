@@ -125,15 +125,6 @@ public class ActuatorIterator {
     return new Model(opensimSimulationJNI.ActuatorIterator_getModel(swigCPtr, this), false);
   }
 
-  public Vec3 getScaleFactors(ScaleSet scaleSet, Frame frame) {
-    return new Vec3(opensimSimulationJNI.ActuatorIterator_getScaleFactors(swigCPtr, this, ScaleSet.getCPtr(scaleSet), scaleSet, Frame.getCPtr(frame), frame), false);
-  }
-
-  public Vec3 getInvalidScaleFactors() {
-    long cPtr = opensimSimulationJNI.ActuatorIterator_InvalidScaleFactors_get(swigCPtr, this);
-    return (cPtr == 0) ? null : new Vec3(cPtr, false);
-  }
-
   public void addToSystem(SWIGTYPE_p_SimTK__MultibodySystem system) {
     opensimSimulationJNI.ActuatorIterator_addToSystem(swigCPtr, this, SWIGTYPE_p_SimTK__MultibodySystem.getCPtr(system));
   }

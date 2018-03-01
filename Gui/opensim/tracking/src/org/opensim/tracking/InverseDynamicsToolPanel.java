@@ -52,6 +52,7 @@ import org.opensim.view.motions.MotionsDB;
 import org.opensim.swingui.FileTextFieldAndChooser;
 import org.opensim.tracking.InverseDynamicsToolModel.InputSource;
 import org.opensim.utils.BrowserLauncher;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.TheApp;
 import org.opensim.view.ModelEvent;
 import org.opensim.view.excitationEditor.ExcitationEditorJFrame;
@@ -639,7 +640,7 @@ private void reuseSelectedQuantitiesCheckBoxActionPerformed(java.awt.event.Actio
                 try {
                     cs = new ControlSet(new Storage(controlsFile));
                 } catch (IOException ex) {
-                    ex.printStackTrace();
+                    ErrorDialog.displayExceptionDialog(ex);
                 }
             }
             else {
@@ -702,7 +703,7 @@ private void reuseSelectedQuantitiesCheckBoxActionPerformed(java.awt.event.Actio
                     toolModel.setInitialTime(st.getFirstTime());
                     toolModel.setFinalTime(st.getLastTime());
                 } catch (IOException ex) {
-                    ex.printStackTrace();
+                    ErrorDialog.displayExceptionDialog(ex);
                 }
              }
       }

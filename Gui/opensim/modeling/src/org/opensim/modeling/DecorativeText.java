@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class DecorativeText extends DecorativeGeometry {
   private transient long swigCPtr;
 
-  protected DecorativeText(long cPtr, boolean cMemoryOwn) {
+  public DecorativeText(long cPtr, boolean cMemoryOwn) {
     super(opensimSimbodyJNI.DecorativeText_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(DecorativeText obj) {
+  public static long getCPtr(DecorativeText obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

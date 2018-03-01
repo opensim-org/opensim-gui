@@ -57,6 +57,7 @@ import org.openide.NotifyDescriptor;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Storage;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 
 /**
@@ -279,7 +280,7 @@ public class Plot {
       }
         // out.close();
       } catch (IOException ex) {
-         ex.printStackTrace();   // Show error dialog that file could not be written
+         ErrorDialog.displayExceptionDialog(ex);
       }
    }
    

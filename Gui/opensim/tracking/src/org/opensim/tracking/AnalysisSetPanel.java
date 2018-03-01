@@ -71,7 +71,11 @@ class AnalysisSetTableModel extends AbstractTableModel implements Observer {
    }
 
    public int getColumnCount() { return columnNames.length; }
-   public int getRowCount() { return toolModel.getAnalysisSet().getSize(); }
+   public int getRowCount() { 
+       assert(toolModel!=null);
+       assert(toolModel.getAnalysisSet()!=null);
+       return toolModel.getAnalysisSet().getSize(); 
+   }
    public String getColumnName(int col) { return columnNames[col]; }
 
    public Object getValueAt(int row, int col) {
@@ -250,12 +254,13 @@ public class AnalysisSetPanel extends javax.swing.JPanel implements Observer {
    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
       if(currentSelectedRow>=0) {
          Analysis analysis = toolModel.getAnalysisSet().get(currentSelectedRow);
-         Analysis analysisCopy = Analysis.safeDownCast(analysis.clone()); // C++-side copy
-         ObjectEditDialogMaker editorDialog = new ObjectEditDialogMaker(analysisCopy, true, "OK");
-         if(editorDialog.process()) {
-            toolModel.replaceAnalysis(currentSelectedRow, analysisCopy);
+         Analysis analysisCopy = Analysis.safeDownCast(analysis.clone());
+         ObjectEditDialogMaker editorDialog = new ObjectEditDialogMaker(analysis, true, "OK");
+         if(!editorDialog.process()) {
+            analysis.assign(analysisCopy);
          } else {
-            // Do nothing if edit was canceled
+            // If edit was successful, notify observers to enable "Run"
+            toolModel.analysisModified(currentSelectedRow);
          }
       }
    }//GEN-LAST:event_editButtonActionPerformed

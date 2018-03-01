@@ -48,6 +48,7 @@ import org.opensim.modeling.CoordinateSet;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.Storage;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.ModelEvent;
@@ -263,6 +264,7 @@ public class MotionsDB extends Observable // Observed by other entities in motio
       evt.setModel(model);
       setChanged();
       notifyObservers(evt);
+      OpenSimDB.getInstance().switchToAnalysisMode();
    }
 
    public void setCurrent(Vector<ModelMotionPair> motions) {
@@ -342,6 +344,11 @@ public class MotionsDB extends Observable // Observed by other entities in motio
    }
 
    public void update(Observable o, Object arg) {
+      if (o instanceof OpenSimDB && arg instanceof ModeChangeEvent){
+          if (((ModeChangeEvent)arg).getNewMode() == OpenSimDB.Mode.Modeling)
+              this.clearCurrent();
+          return;
+      }
       if (o instanceof OpenSimDB && arg instanceof ModelEvent){
          ModelEvent evnt = (ModelEvent) arg;
          if (evnt.getOperation()==ModelEvent.Operation.Close){
@@ -404,7 +411,7 @@ public class MotionsDB extends Observable // Observed by other entities in motio
                         if(parentOrTopMotionsNode!=null && parentOrTopMotionsNode.getChildren().getNodesCount()==0 && parentOrTopMotionsNode.getName().equals("Motions"))
                            parentOrTopMotionsNode.destroy();
                      } catch (IOException ex) {
-                        ex.printStackTrace();
+                        ErrorDialog.displayExceptionDialog(ex);
                      }
                      break;
                   }

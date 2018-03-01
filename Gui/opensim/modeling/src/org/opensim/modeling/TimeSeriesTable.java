@@ -61,6 +61,14 @@ public class TimeSeriesTable extends DataTable {
     this(opensimCommonJNI.new_TimeSeriesTable__SWIG_5(filename, tablename), true);
   }
 
+  public long getNearestRowIndexForTime(double time, boolean restrictToTimeRange) {
+    return opensimCommonJNI.TimeSeriesTable_getNearestRowIndexForTime__SWIG_0(swigCPtr, this, time, restrictToTimeRange);
+  }
+
+  public long getNearestRowIndexForTime(double time) {
+    return opensimCommonJNI.TimeSeriesTable_getNearestRowIndexForTime__SWIG_1(swigCPtr, this, time);
+  }
+
   public RowVectorView getNearestRow(double time, boolean restrictToTimeRange) {
     return new RowVectorView(opensimCommonJNI.TimeSeriesTable_getNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
   }

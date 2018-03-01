@@ -69,6 +69,7 @@ import org.opensim.threejs.JSONMessageHandler;
 import org.opensim.threejs.JSONUtilities;
 import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.threejs.VisualizerWindowAction;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.Prefs;
 import org.opensim.utils.TheApp;
 import org.opensim.view.*;
@@ -327,7 +328,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                   ModelVisualizationJson modelJson = getInstance().getModelVisualizationJson(ev.getModel());
                   JSONObject markerJson = modelJson.createMarkerJson(Marker.safeDownCast(objs.get(i)));
                   // Send message to add markerJson to live visualizer instances
-                  addVisualizerObject(markerJson);
+                  addVisualizerObject(markerJson, null);
                   //repaintAll();
                } 
             }
@@ -478,7 +479,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                        if (modelVisToJsonFilesMap.get(dJson)!=null)
                             Files.deleteIfExists(modelVisToJsonFilesMap.get(dJson));
                     } catch (IOException ex) {
-                       Exceptions.printStackTrace(ex);
+                       ErrorDialog.displayExceptionDialog(ex);
                     }
                     modelVisToJsonFilesMap.remove(dJson);
                     if (currentJson == dJson) // Cleanup stale Json, will be set fresh by next current model
@@ -527,7 +528,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
            JSONUtilities.writeJsonFile(vizJson, fileName);
            modelVisToJsonFilesMap.put(vizJson, Paths.get(fileName));
        } catch (IOException ex) {
-           Exceptions.printStackTrace(ex);
+           ErrorDialog.displayExceptionDialog(ex);
        }
         // send message to visualizer to load model from file
         websocketdb.broadcastMessageJson(vizJson.createOpenModelJson(), socket);
@@ -1011,11 +1012,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       else
           lookupContents.remove(selectedObject.getOpenSimObject());
       // Remaining code is vtk depenedent
-      if (!isVtkGraphicsAvailable()) return;
-      selectedObject.markSelected(highlight);
+      //if (!isVtkGraphicsAvailable()) return;
+      //selectedObject.markSelected(highlight);
       if (websocketdb != null){
           Model model = selectedObject.getOwnerModel();
-          websocketdb.broadcastMessageJson(currentJson.createSelectionJson(selectedObject.getOpenSimObject()), null);
+          if (highlight)
+            websocketdb.broadcastMessageJson(currentJson.createSelectionJson(selectedObject.getOpenSimObject()), null);
+          else
+            websocketdb.broadcastMessageJson(currentJson.createDeselectionJson(), null);
       }
       if (ViewDB.getInstance().isQuery() && isVtkGraphicsAvailable()){
           if (highlight){
@@ -1083,10 +1087,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       }
       StatusDisplayer.getDefault().setStatusText(status, 1000);
    }
+   public void statusDisplayApplicationMode() {
+      String status="";
+      StatusDisplayer.getDefault().setStatusText(status, 1000);
+   }
 
    public void setSelectedObject(OpenSimObject obj) {
-      //FIX40 if (findObjectInSelectedList(obj)!=-1)
-      //    return;
+      if (findObjectInSelectedList(obj)!=-1)
+          return;
       //clearSelectedObjects();
 
       if (obj != null) {
@@ -2185,9 +2193,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                 System.out.println(msg.toJSONString());
         }
     }
-    public void addVisualizerObject(JSONObject jsonObject) {
+    public void addVisualizerObject(JSONObject jsonObject, double[] bounds) {
         if (websocketdb!=null){
-            websocketdb.broadcastMessageJson(currentJson.createAddObjectCommand(jsonObject), null);
+            websocketdb.broadcastMessageJson(currentJson.createAddObjectCommand(jsonObject, bounds), null);
         }
     }
 
@@ -2208,7 +2216,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     public void applyScaleToObjectByUUID(Model model, UUID objectUUID, double newScale) {
         if (websocketdb!=null){
             ModelVisualizationJson vis = ViewDB.getInstance().getModelVisualizationJson(model);
-            websocketdb.broadcastMessageJson(vis.createScaleObjectCommand(objectUUID, newScale), null);
+            websocketdb.broadcastMessageJson(vis.createScaleGeometryCommand(objectUUID, newScale), null);
         }        
         
     }

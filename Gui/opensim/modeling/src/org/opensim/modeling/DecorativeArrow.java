@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class DecorativeArrow extends DecorativeGeometry {
   private transient long swigCPtr;
 
-  protected DecorativeArrow(long cPtr, boolean cMemoryOwn) {
+  public DecorativeArrow(long cPtr, boolean cMemoryOwn) {
     super(opensimSimbodyJNI.DecorativeArrow_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(DecorativeArrow obj) {
+  public static long getCPtr(DecorativeArrow obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

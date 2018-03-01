@@ -104,6 +104,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
          if (isCoordinatesOnly()){
             kinReporter = new Kinematics(get_model());
             kinReporter.setInDegrees(false);
+            kinReporter.setRecordAccelerations(false);
             kinReporter.begin(context.getCurrentStateRef());
             storage = kinReporter.getPositionStorage();
         }
@@ -124,7 +125,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
       context = OpenSimDB.getInstance().getContext(aModelForDisplay);
       this.staticOptimization = staticOptimization;
       if (!staticOptimization)
-        this.setCoordinatesOnly(true);
+        this.coordinatesOnly = true;
       if(aStorage!=null) {
          this.storage = aStorage;
       }
@@ -176,8 +177,8 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
                   if(motionDisplayer!=null && getStorage().getSize()>0) 
                       motionDisplayer.applyFrameToModel(getStorage().getSize()-1); 
                   
-                  ViewDB.getInstance().updateModelDisplay(getModelForDisplay());  // Faster? than the next few indented lines
-                    //ViewDB.getInstance().updateModelDisplayNoRepaint(getModelForDisplay());
+                  //ViewDB.getInstance().updateModelDisplay(getModelForDisplay());  // Faster? than the next few indented lines
+                    ViewDB.getInstance().updateModelDisplayNoRepaint(getModelForDisplay(), true);
                     ////ViewDB.getInstance().renderAll(); // Render now (if want to do it later, use repaintAll()) -- may slow things down too much
                     //ViewDB.getInstance().repaintAll();
                   lastRenderTime = currentRealTime; 

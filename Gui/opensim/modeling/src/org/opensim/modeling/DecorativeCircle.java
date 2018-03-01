@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class DecorativeCircle extends DecorativeGeometry {
   private transient long swigCPtr;
 
-  protected DecorativeCircle(long cPtr, boolean cMemoryOwn) {
+  public DecorativeCircle(long cPtr, boolean cMemoryOwn) {
     super(opensimSimbodyJNI.DecorativeCircle_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(DecorativeCircle obj) {
+  public static long getCPtr(DecorativeCircle obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

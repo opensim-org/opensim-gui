@@ -52,7 +52,7 @@ public class OneModelNode extends OneComponentNode {
             getChildren().add(new Node[] {new AllForcesNode(byTypeModel.getSetOfForces())});
             getChildren().add(new Node[] {new MarkersNode(byTypeModel.getSetOfMarkers(), model)});
             getChildren().add(new Node[] {new ControllersNode(byTypeModel.getSetOfControllers())});
-            //getChildren().add(new Node[] {new ProbesNode(model.getProbeSet())});
+            getChildren().add(new Node[] {new ProbesNode(model.getProbeSet())});
             //getChildren().add(new Node[] {new OtherComponentsNode(model.getMiscModelComponentSet())});
             
         }

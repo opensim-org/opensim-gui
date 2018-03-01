@@ -647,6 +647,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
          jMotionSlider.setLabelTable(labels);
          // disable components
          disableComponents();
+         jMotionNameLabel.setText("No Motions             ");
       }
       else {
          if (getMasterMotion().getNumMotions()>=1){

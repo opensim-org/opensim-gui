@@ -206,17 +206,21 @@ public final class TheApp {
             Dialog dlg = DialogDisplayer.getDefault().createDialog(dd);
             dlg.setModal(true);
             dlg.setVisible(true);
+            Object userInput = dd.getValue();
+            if (((Integer)userInput).compareTo((Integer)DialogDescriptor.CANCEL_OPTION)==0){
+                return "";
+            }
             userSelection = destDirectoryPanel.getFileName();
             exists = new File(userSelection).exists();
             if (exists){
                 // Show info warning to redo
                 NotifyDescriptor.Message errorDlg =
-                          new NotifyDescriptor.Message("Specified directory already exists, please remove or rename before proceeding..");
+                          new NotifyDescriptor.Message("Specified directory already exists, please remove or rename before proceeding.");
                   DialogDisplayer.getDefault().notify(errorDlg);
             }
             else if (userSelection==null){
                  NotifyDescriptor.Message errorDlg =
-                          new NotifyDescriptor.Message("No directory was specified, please fix before proceeding..");
+                          new NotifyDescriptor.Message("No directory was specified, please fix before proceeding.");
                   DialogDisplayer.getDefault().notify(errorDlg);
                exists = true;
                 // show error message and redo
@@ -244,7 +248,7 @@ public final class TheApp {
                     try {
                         FileUtils.copyFiles(srcPath, destPath);
                     } catch (IOException ex) {
-                        Exceptions.printStackTrace(ex);
+                        ErrorDialog.displayExceptionDialog(ex);
                         System.out.println("Folder "+srcPath.toAbsolutePath()+" couldn't be copied..Skipping");
                     }
                 }

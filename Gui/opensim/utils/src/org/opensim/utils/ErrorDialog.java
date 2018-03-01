@@ -54,4 +54,12 @@ public class ErrorDialog {
         DialogDisplayer.getDefault().notify(
                 new NotifyDescriptor.Message(message));
     }
+    
+    /*
+    * Display Exceptionerror message ina friendly dialog
+    */
+    public static void displayExceptionDialog(IOException ex){
+        DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message(ex.getMessage()));
+        ex.printStackTrace();
+    }
 }

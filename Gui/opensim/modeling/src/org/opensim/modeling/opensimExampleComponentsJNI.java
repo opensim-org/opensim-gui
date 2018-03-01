@@ -7,8 +7,45 @@
  * ----------------------------------------------------------------------------- */
 
 package org.opensim.modeling;
-
+import javax.swing.JOptionPane;import java.awt.GraphicsEnvironment;
 public class opensimExampleComponentsJNI {
+
+  static {
+      try{
+          // All OpenSim classes required for GUI operation.
+          System.loadLibrary("osimJavaJNI");
+      }
+      catch(UnsatisfiedLinkError e){
+          String OS = System.getProperty("os.name").toLowerCase();
+          String tip = "";
+          if (OS.indexOf("win") >= 0) {
+              tip = "\nMake sure OpenSim's bin directory is on your PATH.";
+          } else if (OS.indexOf("mac") >= 0) {
+              // Nothing for now; our use of RPATH means we were probably able
+              // to locate the OpenSim dynamic libraries.
+          } else /* linux */ {
+              // Nothing for now; our use of RPATH means we were probably able
+              // to locate the OpenSim dynamic libraries.
+          }
+          String msg = new String(
+                  "Failed to load one or more dynamic libraries for OpenSim.\n"
+                  + e + tip);
+
+          String javaHome = System.getProperties().getProperty("java.home");
+          boolean inMatlab = javaHome.toLowerCase().indexOf("matlab") >= 0;
+          if (inMatlab) {
+              msg +=  "\nSee https://simtk-confluence.stanford.edu/display/OpenSim/Scripting+with+Matlab";
+          }
+          
+          System.out.println(msg);
+          String title = "Error: Failed to load OpenSim libraries";
+          if (!GraphicsEnvironment.isHeadless()) {
+              new JOptionPane(msg, JOptionPane.ERROR_MESSAGE)
+                    .createDialog(null, title).setVisible(true);
+          }
+      }
+  }
+
   public final static native long ToyReflexController_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void ToyReflexController_assign(long jarg1, ToyReflexController jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String ToyReflexController_getClassName();

@@ -12,12 +12,12 @@ public class MassProperties {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected MassProperties(long cPtr, boolean cMemoryOwn) {
+  public MassProperties(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(MassProperties obj) {
+  public static long getCPtr(MassProperties obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

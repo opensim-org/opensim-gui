@@ -55,6 +55,7 @@ import org.opensim.modeling.Storage;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.swingui.FileTextFieldAndChooser;
 import org.opensim.utils.BrowserLauncher;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.utils.TheApp;
 import org.opensim.view.FileTextFieldAndChooserWithEdit;
@@ -2010,7 +2011,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                 try {
                     cs = new ControlSet(new Storage(controlsFile));
                 } catch (IOException ex) {
-                    ex.printStackTrace();
+                    ErrorDialog.displayExceptionDialog(ex);
                 }
             }
             else {

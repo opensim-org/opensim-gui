@@ -35,6 +35,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import org.opensim.modeling.ArrayStr;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.motions.MotionControlJPanel;
 import org.opensim.view.motions.MotionDisplayer;
@@ -273,7 +274,7 @@ public class ClassifyDataJPanel extends javax.swing.JPanel {
             } catch (FileNotFoundException ex) {
                 ex.printStackTrace();
             } catch (IOException ex) {
-                ex.printStackTrace();
+                ErrorDialog.displayExceptionDialog(ex);
             }
       }  
       return success;

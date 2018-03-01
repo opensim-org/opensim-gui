@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class MatrixViewVec3 extends MatrixBaseVec3 {
   private transient long swigCPtr;
 
-  protected MatrixViewVec3(long cPtr, boolean cMemoryOwn) {
+  public MatrixViewVec3(long cPtr, boolean cMemoryOwn) {
     super(opensimSimbodyJNI.MatrixViewVec3_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(MatrixViewVec3 obj) {
+  public static long getCPtr(MatrixViewVec3 obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

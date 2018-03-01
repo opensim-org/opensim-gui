@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class VectorView extends VectorBaseDouble {
   private transient long swigCPtr;
 
-  protected VectorView(long cPtr, boolean cMemoryOwn) {
+  public VectorView(long cPtr, boolean cMemoryOwn) {
     super(opensimSimbodyJNI.VectorView_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(VectorView obj) {
+  public static long getCPtr(VectorView obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

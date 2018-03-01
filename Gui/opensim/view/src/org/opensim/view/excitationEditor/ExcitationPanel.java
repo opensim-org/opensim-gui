@@ -56,6 +56,7 @@ import org.opensim.modeling.SetControlNodes;
 import org.opensim.modeling.Storage;
 import org.opensim.modeling.XYFunctionInterface;
 import org.opensim.utils.DialogUtils;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.utils.OpenSimDialog;
 import org.opensim.view.functionEditor.FunctionPanel;
@@ -305,7 +306,7 @@ public class ExcitationPanel extends FunctionPanel{
                 try {
                     s = new Storage(fileName);
                 } catch (IOException ex) {
-                    ex.printStackTrace();
+                    ErrorDialog.displayExceptionDialog(ex);
                 }
                 if (s == null) return;  // Bad file
                 // Open file and show filter to select columns. Return names

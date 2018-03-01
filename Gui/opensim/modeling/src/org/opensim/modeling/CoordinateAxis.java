@@ -12,12 +12,12 @@ public class CoordinateAxis {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected CoordinateAxis(long cPtr, boolean cMemoryOwn) {
+  public CoordinateAxis(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(CoordinateAxis obj) {
+  public static long getCPtr(CoordinateAxis obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

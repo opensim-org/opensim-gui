@@ -418,7 +418,7 @@ public class MotionDisplayer {
             }
             // create objects and cache their uuids
             //createTrails(model);
-            ViewDB.getInstance().addVisualizerObject(createJsonForMotionObjects());
+            ViewDB.getInstance().addVisualizerObject(createJsonForMotionObjects(), mot.getBoundingBox());
             JSONObject modelObjectJson = (JSONObject) modelVisJson.get("object");
             if (modelObjectJson.get("children") == null) {
                 modelObjectJson.put("children", new JSONArray());

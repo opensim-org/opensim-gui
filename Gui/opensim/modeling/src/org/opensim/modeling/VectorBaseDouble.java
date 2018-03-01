@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class VectorBaseDouble extends MatrixBaseDouble {
   private transient long swigCPtr;
 
-  protected VectorBaseDouble(long cPtr, boolean cMemoryOwn) {
+  public VectorBaseDouble(long cPtr, boolean cMemoryOwn) {
     super(opensimSimbodyJNI.VectorBaseDouble_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(VectorBaseDouble obj) {
+  public static long getCPtr(VectorBaseDouble obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

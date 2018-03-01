@@ -12,12 +12,12 @@ public class MatrixOfSpatialVec {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected MatrixOfSpatialVec(long cPtr, boolean cMemoryOwn) {
+  public MatrixOfSpatialVec(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(MatrixOfSpatialVec obj) {
+  public static long getCPtr(MatrixOfSpatialVec obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

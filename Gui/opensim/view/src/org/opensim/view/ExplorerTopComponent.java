@@ -58,6 +58,7 @@ import org.opensim.modeling.Muscle;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PathPoint;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.view.nodes.OneModelNode;
 import org.opensim.view.experimentaldata.ExperimentalDataTopNode;
 import org.opensim.view.nodes.MarkersNode;
@@ -264,7 +265,7 @@ final public class ExplorerTopComponent extends TopComponent
                                       if (nodes[k] != null)
                                          nodes[k].destroy();
                                    } catch (IOException ex) {
-                                      ex.printStackTrace();
+                                      ErrorDialog.displayExceptionDialog(ex);
                                    }
                                 }
                              }
@@ -317,7 +318,7 @@ final public class ExplorerTopComponent extends TopComponent
                              if(modelNode != null) modelNode.destroy();
                              updateCurrentModelNode(null);
                           } catch (IOException ex) {
-                             ex.printStackTrace();
+                             ErrorDialog.displayExceptionDialog(ex);
                           }
                           break;
                        }

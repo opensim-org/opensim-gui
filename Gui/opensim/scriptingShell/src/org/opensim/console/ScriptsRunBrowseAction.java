@@ -26,25 +26,16 @@
  */
 package org.opensim.console;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileFilter;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.prefs.Preferences;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 import org.openide.cookies.OpenCookie;
 import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;
 import org.openide.loaders.DataObject;
-import org.openide.util.Exceptions;
 import org.openide.util.HelpCtx;
 import org.openide.util.actions.CallableSystemAction;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
-import org.opensim.utils.TheApp;
 
 public final class ScriptsRunBrowseAction extends CallableSystemAction {
 
@@ -131,7 +122,7 @@ public final class ScriptsRunBrowseAction extends CallableSystemAction {
             open.open();
             MRUScriptsOptions.getInstance().addFile(scriptFilename);
         } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
+            ErrorDialog.displayExceptionDialog(ex);
         }
         
     }

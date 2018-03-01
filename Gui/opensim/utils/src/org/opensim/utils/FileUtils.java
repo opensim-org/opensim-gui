@@ -519,7 +519,7 @@ public final class FileUtils {
                     try {
                         badFiles += outFiles[i].getCanonicalFile().getName()+" ";
                     } catch (IOException ex) {
-                        ex.printStackTrace();
+                        ErrorDialog.displayExceptionDialog(ex);
                     }
                    allExist = false;
                }

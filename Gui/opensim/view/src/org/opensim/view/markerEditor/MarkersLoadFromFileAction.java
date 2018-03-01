@@ -45,6 +45,7 @@ import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.nodes.MarkersNode;
@@ -79,7 +80,7 @@ public class MarkersLoadFromFileAction extends AbstractAction {
         try {
             newMarkerSet = new MarkerSet(model, fileName);
         } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
+            ErrorDialog.displayExceptionDialog(ex);
             return;
         }
         MarkerSet modelMarkerSet = model.getMarkerSet();
@@ -108,7 +109,7 @@ public class MarkersLoadFromFileAction extends AbstractAction {
         try {
            context.restoreStateFromCachedModel();
         } catch (IOException ex) {
-           Exceptions.printStackTrace(ex);
+           ErrorDialog.displayExceptionDialog(ex);
         }       
         // This hack is so that the adopted Marker isn't gc'ed
          newMarkerSet.setMemoryOwner(false);

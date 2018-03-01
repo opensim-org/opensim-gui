@@ -41,6 +41,7 @@ import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.StaticOptimization;
 import org.opensim.swingui.SwingWorker;
 import org.opensim.tracking.tools.SimulationDB;
+import org.opensim.utils.DialogUtils;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.MuscleColorByActivationStorage;
@@ -70,7 +71,7 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
          MotionsDB.getInstance().clearCurrent();
 
          Model workersModel = new Model(getOriginalModel());
-         workersModel.setName("workerModel");
+         //workersModel.setName("workerModel");
          String tempFileName=getOriginalModel().getInputFileName();
          //int loc = tempFileName.lastIndexOf(".");
          workersModel.setInputFileName(tempFileName);
@@ -176,8 +177,6 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
          getModel().removeAnalysis(animationCallback, false);
          getModel().removeAnalysis(interruptingCallback, false);
          interruptingCallback = null;
-         model = null;
-         tool = null;
          if(result) resetModified();
 
          setExecuting(false);
@@ -438,7 +437,7 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
             Storage coords = new Storage(coordinatesFileName);
             updateToolTimeRange(coords);
          } catch (IOException ex) {
-            ex.printStackTrace();
+            ErrorDialog.displayExceptionDialog(ex);
       }
    }
    }

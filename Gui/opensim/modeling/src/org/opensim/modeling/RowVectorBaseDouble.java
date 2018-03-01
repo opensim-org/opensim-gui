@@ -11,12 +11,12 @@ package org.opensim.modeling;
 public class RowVectorBaseDouble extends MatrixBaseDouble {
   private transient long swigCPtr;
 
-  protected RowVectorBaseDouble(long cPtr, boolean cMemoryOwn) {
+  public RowVectorBaseDouble(long cPtr, boolean cMemoryOwn) {
     super(opensimSimbodyJNI.RowVectorBaseDouble_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(RowVectorBaseDouble obj) {
+  public static long getCPtr(RowVectorBaseDouble obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

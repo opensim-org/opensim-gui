@@ -12,12 +12,12 @@ public class SimTKVisualizerInputListener {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected SimTKVisualizerInputListener(long cPtr, boolean cMemoryOwn) {
+  public SimTKVisualizerInputListener(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(SimTKVisualizerInputListener obj) {
+  public static long getCPtr(SimTKVisualizerInputListener obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 

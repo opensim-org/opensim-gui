@@ -12,12 +12,12 @@ public class Segment {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected Segment(long cPtr, boolean cMemoryOwn) {
+  public Segment(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(Segment obj) {
+  public static long getCPtr(Segment obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
