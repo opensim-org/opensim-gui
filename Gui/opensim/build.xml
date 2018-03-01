@@ -65,6 +65,17 @@
         <copy todir="${opensim.dist.dir}/sdk">
             <fileset dir="${api.dir}/sdk"/>
         </copy>
+
+        <!-- TODO untested -->
+        <copy todir="${opensim.dist.dir}/Resources/CodeExamples/GUI">
+            <fileset dir="Scripts" />
+        </copy>
+
+        <!-- Zip up Resources and delete the original Resources folder. -->
+        <!-- TODO untested -->
+        <zip basedir="${opensim.dist.dir}/Resources/" destfile="${opensim.dist.dir}/Resources.zip" />
+        <delete dir="${opensim.dist.dir}/Resources"/>
+
         <delete>
             <fileset dir="${opensim.dist.dir}/OpenSim/modules/ext"
                 includes="**/jxbrowser-*mac*.jar"/>
@@ -124,7 +135,6 @@
             <arg line="-R ${jre.dir}/ ${opensim.dist.dir}/jre"/>
         </exec>
 
-        <!-- TODO: are the GUI scripts installed properly on Windows? -->
         <copy todir="${opensim.dist.dir}/Resources/CodeExamples/GUI">
             <fileset dir="Scripts" />
         </copy>
@@ -156,6 +166,11 @@
             <arg line="-R ${api.dir}/sdk/Simbody/libexec/ ${opensim.dist.dir}/sdk/Simbody/libexec/" />
         </exec>
 
+        <!-- Zip up Resources and delete the original Resources folder. -->
+        <zip basedir="${opensim.dist.dir}/Resources/" destfile="${opensim.dist.dir}/Resources.zip" />
+        <delete dir="${opensim.dist.dir}/Resources"/>
+
+        <!-- Configuration files -->
         <copy todir="dist/OpenSim.app/Contents/"
             file="installer_files/OSX/Info.plist" overwrite="true"/>
         <!-- Fix version number -->
