@@ -124,8 +124,8 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
       modelForDisplay=aModelForDisplay;
       context = OpenSimDB.getInstance().getContext(aModelForDisplay);
       this.staticOptimization = staticOptimization;
-      if (!staticOptimization)
-        this.coordinatesOnly = true;
+      //if (!staticOptimization)
+      //  this.coordinatesOnly = true;
       if(aStorage!=null) {
          this.storage = aStorage;
       }
