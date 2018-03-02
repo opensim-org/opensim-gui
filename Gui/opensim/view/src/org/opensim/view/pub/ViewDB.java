@@ -1093,8 +1093,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    }
 
    public void setSelectedObject(OpenSimObject obj) {
-      if (findObjectInSelectedList(obj)!=-1)
-          return;
+      //FIX40 if (findObjectInSelectedList(obj)!=-1)
+      //    return;
       //clearSelectedObjects();
 
       if (obj != null) {
