@@ -347,7 +347,10 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
     }
    @Override
     public int end(State s) {
-        processStep(s, storage.getSize());
+        if (kinReporter != null)
+            kinReporter.end(s);
+        if (statesReporter!=null)
+            statesReporter.end(s);
         return  super.end(s);
     }
 }
