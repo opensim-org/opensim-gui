@@ -100,7 +100,7 @@ public class OneProbeNode  extends DisablablModelComponentNode {
 
     @Override
     public String getDisablePropertyName() {
-        return("isDisabled"); //To change body of generated methods, choose Tools | Templates.
+        return("enabled"); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
