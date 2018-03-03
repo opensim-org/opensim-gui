@@ -37,6 +37,9 @@ import javax.swing.Action;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.util.NbBundle;
+import org.opensim.modeling.Component;
+import org.opensim.modeling.ComponentIterator;
+import org.opensim.modeling.ComponentsList;
 import org.opensim.modeling.Frame;
 import org.opensim.modeling.Geometry;
 import org.opensim.view.FrameToggleVisibilityAction;
@@ -56,7 +59,25 @@ public class OneFrameNode extends OneModelComponentNode {
     }
    
     protected final void createGeometryNodes() {
-        
+        // attached_geometry doesn't reach geometry mounted on 
+		// offset frames, use iterator instead
+		// Caveat if nested bodies or components have geometry 
+		// it may appear multiple times
+        ComponentsList compList = frame.getComponentsList();
+        ComponentIterator compIter = compList.begin();
+        Children children = getChildren();
+        while (!compIter.equals(compList.end())) {
+            Component comp = compIter.__deref__();
+            Geometry oneG = Geometry.safeDownCast(comp);
+            if (oneG!=null){
+                OneGeometryNode node = new OneGeometryNode(oneG);
+                Node[] arrNodes = new Node[1];
+                arrNodes[0] = node;
+                children.add(arrNodes);
+            }
+            compIter.next();
+        }
+        /*
         int geomSize = frame.getPropertyByName("attached_geometry").size();
         // Create node for geometry
         Children children = getChildren();
@@ -66,7 +87,7 @@ public class OneFrameNode extends OneModelComponentNode {
             Node[] arrNodes = new Node[1];
             arrNodes[0] = node;
             children.add(arrNodes);
-        }
+        }*/
     }
     
    @Override
