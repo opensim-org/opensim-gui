@@ -111,7 +111,7 @@ public class OneGeometryNode extends OneComponentWithGeometryNode {
 
     private void addFrameProperties(Sheet sheet) {
         Sheet.Set frameSheet = createExpertSet();
-        frameSheet.setDisplayName("Frame");
+        frameSheet.setDisplayName("Attachment Frame");
         sheet.put(frameSheet);
         Geometry g = Geometry.safeDownCast(comp);
         Frame frame = g.getFrame();
@@ -126,7 +126,7 @@ public class OneGeometryNode extends OneComponentWithGeometryNode {
                     "setFrameName");
             nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
             nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
-            nextNodeProp.setName("FrameSelection");
+            nextNodeProp.setName("Frame");
             PropertyEditorSupport editor = EditorRegistry.getEditor("Frame");
             if (editor != null)
                 nextNodeProp.setPropertyEditorClass(editor.getClass());
@@ -141,13 +141,15 @@ public class OneGeometryNode extends OneComponentWithGeometryNode {
                         String.class, "getTranslationString", "setTranslationString");
                 translationProp.setValue("canEditAsText", Boolean.TRUE);
                 translationProp.setDisplayName("Translation");
+                translationProp.setValue("suppressCustomEditor", Boolean.TRUE);
                 frameSheet.put(translationProp);
-                /*
+               
                 PropertySupport.Reflection rotationProp = new PropertySupport.Reflection(this,
                         String.class, "getRotationString", "setRotationString");
                 rotationProp.setValue("canEditAsText", Boolean.TRUE);
                 rotationProp.setDisplayName("Rotation");
-                frameSheet.put(rotationProp);*/
+                rotationProp.setValue("suppressCustomEditor", Boolean.TRUE);
+                frameSheet.put(rotationProp);
             } catch (NoSuchMethodException ex) {
                 Exceptions.printStackTrace(ex);
             }
@@ -163,6 +165,7 @@ public class OneGeometryNode extends OneComponentWithGeometryNode {
         Geometry g = Geometry.safeDownCast(comp);
         //g.setFrameName(frame);
     }
+    
     public String getTranslationString() {
         Geometry g = Geometry.safeDownCast(comp);
         PhysicalOffsetFrame offsetFrame = PhysicalOffsetFrame.safeDownCast(g.getFrame());
@@ -179,14 +182,37 @@ public class OneGeometryNode extends OneComponentWithGeometryNode {
         //offsetFrame.upd_orientation(0);
         for (int i=0; i<3; i++)
             offsetFrame.upd_translation().set(i, Double.valueOf(vals[i]));
+        refreshDisplay();
+        return;
+    }
+    
+    public String getRotationString() {
+        Geometry g = Geometry.safeDownCast(comp);
+        PhysicalOffsetFrame offsetFrame = PhysicalOffsetFrame.safeDownCast(g.getFrame());
+        Transform transform = offsetFrame.getOffsetTransform();
+        String rotationVec3AsString = transform.R().convertRotationToBodyFixedXYZ().toString();
+        return rotationVec3AsString.substring(2, rotationVec3AsString.length()-1).replace(',', ' ');
+    }
+    public void setRotationString(String string) {
+        Geometry g = Geometry.safeDownCast(comp);
+        PhysicalOffsetFrame offsetFrame = PhysicalOffsetFrame.safeDownCast(g.getFrame());
+        String vals[] = string.split(" ");
+        context = OpenSimDB.getInstance().getContext(getModelForNode());
+        context.cacheModelAndState();
+        //offsetFrame.upd_orientation(0);
+        for (int i=0; i<3; i++)
+            offsetFrame.upd_orientation().set(i, Double.valueOf(vals[i]));
+        refreshDisplay();
+        return;
+    }
+
+    private void refreshDisplay() {
         try {
             context.restoreStateFromCachedModel();
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }
         ViewDB.getInstance().updateModelDisplay(getModelForNode());
-        //ViewDB.getInstance().updateComponentVisuals(getModelForNode(), g, false);  
         ViewDB.repaintAll();
-        return;
     }
 }
