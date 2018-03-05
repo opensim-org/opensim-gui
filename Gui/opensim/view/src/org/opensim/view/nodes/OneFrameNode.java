@@ -71,10 +71,13 @@ public class OneFrameNode extends OneModelComponentNode {
             Component comp = compIter.__deref__();
             Geometry oneG = Geometry.safeDownCast(comp);
             if (oneG!=null && FrameGeometry.safeDownCast(oneG)==null){
-                OneGeometryNode node = new OneGeometryNode(oneG);
-                Node[] arrNodes = new Node[1];
-                arrNodes[0] = node;
-                children.add(arrNodes);
+                Frame base = oneG.getFrame().findBaseFrame();
+                if (base.getAbsolutePathString().equals(frame.getAbsolutePathString())){
+                    OneGeometryNode node = new OneGeometryNode(oneG);
+                    Node[] arrNodes = new Node[1];
+                    arrNodes[0] = node;
+                    children.add(arrNodes);
+                }
             }
             compIter.next();
         }
