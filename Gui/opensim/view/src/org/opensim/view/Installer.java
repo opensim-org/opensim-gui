@@ -139,6 +139,7 @@ public class Installer extends ModuleInstall {
         //PropertyEditorManager.registerEditor(OpenSimObject.class, OpenSimObjectEditor.class);
         EditorRegistry.addEditor("Body", new BodyNameEditor());
         EditorRegistry.addEditor("PhysicalFrame", new FrameNameEditor());
+        EditorRegistry.addEditor("Frame", new FrameNameEditor());
     }
     /**
      * restorePrefs is primarily used for the first time around where there are no pref values

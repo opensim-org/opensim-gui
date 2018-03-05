@@ -41,6 +41,7 @@ import org.opensim.modeling.Component;
 import org.opensim.modeling.ComponentIterator;
 import org.opensim.modeling.ComponentsList;
 import org.opensim.modeling.Frame;
+import org.opensim.modeling.FrameGeometry;
 import org.opensim.modeling.Geometry;
 import org.opensim.view.FrameToggleVisibilityAction;
 
@@ -69,7 +70,7 @@ public class OneFrameNode extends OneModelComponentNode {
         while (!compIter.equals(compList.end())) {
             Component comp = compIter.__deref__();
             Geometry oneG = Geometry.safeDownCast(comp);
-            if (oneG!=null){
+            if (oneG!=null && FrameGeometry.safeDownCast(oneG)==null){
                 OneGeometryNode node = new OneGeometryNode(oneG);
                 Node[] arrNodes = new Node[1];
                 arrNodes[0] = node;

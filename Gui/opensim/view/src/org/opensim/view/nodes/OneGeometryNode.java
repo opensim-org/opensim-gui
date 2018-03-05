@@ -27,31 +27,27 @@
  */
 package org.opensim.view.nodes;
 
-import java.awt.Color;
 import java.awt.Image;
+import java.beans.PropertyEditorSupport;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
-import javax.swing.undo.AbstractUndoableEdit;
-import javax.swing.undo.CannotRedoException;
-import javax.swing.undo.CannotUndoException;
 import org.openide.nodes.Children;
 import org.openide.nodes.PropertySupport;
 import org.openide.nodes.Sheet;
 import static org.openide.nodes.Sheet.createExpertSet;
+import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
-import org.opensim.modeling.AbstractProperty;
-import org.opensim.modeling.Appearance;
-import org.opensim.modeling.DecorativeGeometry;
+import org.opensim.modeling.Frame;
 import org.opensim.modeling.Geometry;
-import org.opensim.modeling.Model;
-import org.opensim.modeling.SurfaceProperties;
-import org.opensim.modeling.Vec3;
-import org.opensim.view.ColorableInterface;
-import org.opensim.view.ExplorerTopComponent;
-import org.opensim.view.editors.DisplayPreferenceEditor;
+import org.opensim.modeling.OpenSimContext;
+import org.opensim.modeling.PhysicalOffsetFrame;
+import org.opensim.modeling.State;
+import org.opensim.modeling.Transform;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
+import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 
 /**
@@ -61,6 +57,8 @@ import org.opensim.view.pub.ViewDB;
 public class OneGeometryNode extends OneComponentWithGeometryNode {
     
     private static ResourceBundle bundle = NbBundle.getBundle(OneGeometryNode.class);
+    State state;
+    OpenSimContext context;
     /**
     * Creates a new instance of OneContactForceNode
     */
@@ -103,5 +101,92 @@ public class OneGeometryNode extends OneComponentWithGeometryNode {
             retValue = ((Geometry)getOpenSimObject()).getName();
         }
         return retValue;
+    }
+    public Sheet createSheet() {
+        Sheet sheet;
+        sheet = super.createSheet();
+        addFrameProperties(sheet);
+        return sheet;
+    }
+
+    private void addFrameProperties(Sheet sheet) {
+        Sheet.Set frameSheet = createExpertSet();
+        frameSheet.setDisplayName("Frame");
+        sheet.put(frameSheet);
+        Geometry g = Geometry.safeDownCast(comp);
+        Frame frame = g.getFrame();
+        PhysicalOffsetFrame offsetFrame = PhysicalOffsetFrame.safeDownCast(frame);
+        // Add dropdown of existing Frames
+
+        PropertySupport.Reflection nextNodeProp;
+        try {
+            nextNodeProp = new PropertySupport.Reflection(this,
+                    String.class,
+                    "getFrameName",
+                    "setFrameName");
+            nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
+            nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
+            nextNodeProp.setName("FrameSelection");
+            PropertyEditorSupport editor = EditorRegistry.getEditor("Frame");
+            if (editor != null)
+                nextNodeProp.setPropertyEditorClass(editor.getClass());
+            frameSheet.put(nextNodeProp);
+        } catch (NoSuchMethodException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        if (offsetFrame!=null){ 
+            try {
+                // Expose traslations and rotatiosn
+                PropertySupport.Reflection translationProp = new PropertySupport.Reflection(this,
+                        String.class, "getTranslationString", "setTranslationString");
+                translationProp.setValue("canEditAsText", Boolean.TRUE);
+                translationProp.setDisplayName("Translation");
+                frameSheet.put(translationProp);
+                /*
+                PropertySupport.Reflection rotationProp = new PropertySupport.Reflection(this,
+                        String.class, "getRotationString", "setRotationString");
+                rotationProp.setValue("canEditAsText", Boolean.TRUE);
+                rotationProp.setDisplayName("Rotation");
+                frameSheet.put(rotationProp);*/
+            } catch (NoSuchMethodException ex) {
+                Exceptions.printStackTrace(ex);
+            }
+        }
+        sheet.put(frameSheet);
+    }
+    
+    public String getFrameName() {
+        Geometry g = Geometry.safeDownCast(comp);
+        return g.getFrame().getName();
+    }
+    public void setFrameName(String frame) {
+        Geometry g = Geometry.safeDownCast(comp);
+        //g.setFrameName(frame);
+    }
+    public String getTranslationString() {
+        Geometry g = Geometry.safeDownCast(comp);
+        PhysicalOffsetFrame offsetFrame = PhysicalOffsetFrame.safeDownCast(g.getFrame());
+        Transform transform = offsetFrame.getOffsetTransform();
+        String translationVec3AsString = transform.p().toString();
+        return translationVec3AsString.substring(2, translationVec3AsString.length()-1).replace(',', ' ');
+    }
+    public void setTranslationString(String string) {
+        Geometry g = Geometry.safeDownCast(comp);
+        PhysicalOffsetFrame offsetFrame = PhysicalOffsetFrame.safeDownCast(g.getFrame());
+        String vals[] = string.split(" ");
+        context = OpenSimDB.getInstance().getContext(getModelForNode());
+        context.cacheModelAndState();
+        //offsetFrame.upd_orientation(0);
+        for (int i=0; i<3; i++)
+            offsetFrame.upd_translation().set(i, Double.valueOf(vals[i]));
+        try {
+            context.restoreStateFromCachedModel();
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        ViewDB.getInstance().updateModelDisplay(getModelForNode());
+        //ViewDB.getInstance().updateComponentVisuals(getModelForNode(), g, false);  
+        ViewDB.repaintAll();
+        return;
     }
 }
