@@ -130,6 +130,53 @@ public class ModelVisualizationJson extends JSONObject {
     public FrameGeometry getGeometryForFrame(Frame frame) {
         return visualizerFrames.get(frame).fg;
     }
+    /**
+     * Update transforms cached on the visualizer side when frame definition changes
+     * @param subtreeRoot
+     * @return 
+     */
+    public JSONObject createUpdateDecorationsMessageJson(Component subtreeRoot) {
+        JSONObject msg = new JSONObject();
+        msg.put("Op", "Frame");
+        JSONArray geomTransforms_json = new JSONArray();
+        msg.put("Transforms", geomTransforms_json);
+        ComponentsList mcList = subtreeRoot.getComponentsList();
+        ComponentIterator mcIter = mcList.begin();
+        mcIter = mcList.begin();
+        while (!mcIter.equals(mcList.end())) {
+            Component comp = mcIter.__deref__();
+            boolean visibleStatus = true;
+            AbstractProperty visibleProp = null;
+            if (comp.hasProperty("Appearance")){
+                visibleProp = comp.getPropertyByName("Appearance").getValueAsObject().getPropertyByName("visible");
+                visibleStatus = PropertyHelper.getValueBool(visibleProp);
+                if (!visibleStatus)
+                    PropertyHelper.setValueBool(true, visibleProp);
+            }
+            ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
+            comp.generateDecorations(true, mdh, state, adg);
+            ArrayList<UUID> vis_uuidList = mapComponentToUUID.get(comp);
+            if (vis_uuidList !=null){
+                int idx = 0;
+                if (vis_uuidList.size()==adg.size()){
+                    for (UUID uuid:vis_uuidList){
+                        JSONObject oneGeomXform_json = new JSONObject();
+                        oneGeomXform_json.put("uuid", uuid.toString());
+                        oneGeomXform_json.put("matrix", 
+                                JSONUtilities.createMatrixFromTransform(adg.at(idx).getTransform(), adg.at(idx).getScaleFactors(), 
+                                        visScaleFactor));
+                        geomTransforms_json.add(oneGeomXform_json);
+                        idx++;
+                    }
+                }
+            }
+            if (!visibleStatus){
+                PropertyHelper.setValueBool(false, visibleProp);
+            }
+            mcIter.next();
+        }
+        return msg;
+    }
 
      // The following inner class and Map are used to cache "computed" pathpoints to speed up 
     // recomputation on the fly

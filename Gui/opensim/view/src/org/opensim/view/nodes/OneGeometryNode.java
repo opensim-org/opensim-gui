@@ -42,6 +42,7 @@ import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.Frame;
 import org.opensim.modeling.Geometry;
+import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.PhysicalOffsetFrame;
 import org.opensim.modeling.State;
@@ -212,7 +213,11 @@ public class OneGeometryNode extends OneComponentWithGeometryNode {
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }
-        ViewDB.getInstance().updateModelDisplay(getModelForNode());
+        Model model = getModelForNode();
+        Geometry g = Geometry.safeDownCast(comp);
+        PhysicalOffsetFrame offsetFrame = PhysicalOffsetFrame.safeDownCast(g.getFrame());
+        ViewDB.getInstance().updateDecorations(model, offsetFrame);
+        //ViewDB.getInstance().updateModelDisplay(model);
         ViewDB.repaintAll();
     }
 }
