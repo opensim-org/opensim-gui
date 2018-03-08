@@ -42,6 +42,7 @@ import org.openide.nodes.PropertySupport;
 import org.openide.nodes.Sheet;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
+import org.opensim.modeling.Body;
 import org.opensim.modeling.Component;
 import org.opensim.modeling.ComponentIterator;
 import org.opensim.modeling.ComponentsList;
@@ -142,11 +143,13 @@ public class OneFrameNode extends OneModelComponentNode {
     */
     protected void createFrameNodes(Children children) {
         // Find Frames and make nodes for them (PhysicalOffsetFrames)
-        ComponentsList descendents = comp.getComponentsList();
+        ComponentsList descendents = frame.getModel().getComponentsList();
         ComponentIterator compIter = descendents.begin();
         while (!compIter.equals(descendents.end())) {
             Frame frame = Frame.safeDownCast(compIter.__deref__());
-            if (frame != null) {
+            if (Body.safeDownCast(frame)==null &&
+                    frame != null && !frame.equals(comp)
+                    && frame.findBaseFrame().equals(comp)) {
                 OneFrameNode node = new OneFrameNode(frame);
                 Node[] arrNodes = new Node[1];
                 arrNodes[0] = node;
@@ -204,7 +207,7 @@ public class OneFrameNode extends OneModelComponentNode {
         Model model = getModelForNode();
         Frame frame = Frame.safeDownCast(comp);
         ViewDB.getInstance().updateDecorations(model, frame);
-        //ViewDB.getInstance().updateModelDisplay(model);
+        ViewDB.getInstance().updateModelDisplay(model);
         ViewDB.repaintAll();
     }
     
