@@ -46,10 +46,12 @@ public final class ObjectDisplayColorAction extends ObjectAppearanceChangeAction
     { 
       JColorChooser objectColorChooser = new JColorChooser();
       Color newColor = objectColorChooser.showDialog( (JFrame)WindowManager.getDefault().getMainWindow(), "Select new color", Color.WHITE );  
-      Vector<OneComponentNode> nodes = collectAffectedComponentNodes();
-      ViewDB.getInstance().setApplyAppearanceChange(false);
-      ObjectDisplayColorAction.ChangeUserSelectedNodesColor(nodes, newColor ); 
-      ViewDB.getInstance().setApplyAppearanceChange(true);
+      if (newColor != null) {
+        Vector<OneComponentNode> nodes = collectAffectedComponentNodes();
+        ViewDB.getInstance().setApplyAppearanceChange(false);
+        ObjectDisplayColorAction.ChangeUserSelectedNodesColor(nodes, newColor ); 
+        ViewDB.getInstance().setApplyAppearanceChange(true);
+      }
     }
    
     //--------------------------------------------------------------------------
