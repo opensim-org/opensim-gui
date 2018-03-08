@@ -56,6 +56,7 @@ import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.State;
+import org.opensim.utils.ErrorDialog;
 import org.opensim.view.ObjectsChangedEvent;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
@@ -540,7 +541,8 @@ private double getSpeedFromTextboxInternalUnits() {
                       jFormattedTextField.commitEdit();
                    }
                 } else
-                   throw new UnsupportedOperationException();
+                   ErrorDialog.showMessageDialog("Value enetered is outside range of clamped coordinate. Ignoring");
+                jFormattedTextField.setText(numberFormat.format(oldValue));
              } catch (ParseException ex){
                 jFormattedTextField.setText(numberFormat.format(oldValue));
              }
@@ -572,7 +574,8 @@ private double getSpeedFromTextboxInternalUnits() {
                       jFormattedTextField.commitEdit();
                    }
                 } else
-                   throw new UnsupportedOperationException();
+                    ErrorDialog.showMessageDialog("Value enetered is outside range of clamped coordinate. Ignoring");
+                    jFormattedTextField.setText(numberFormat.format(oldValue));
              } catch (ParseException ex){
                 jFormattedTextField.setText(numberFormat.format(oldValue));
              }
