@@ -40,6 +40,7 @@ import org.openide.nodes.Sheet;
 import static org.openide.nodes.Sheet.createExpertSet;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
+import org.opensim.modeling.Component;
 import org.opensim.modeling.Frame;
 import org.opensim.modeling.Geometry;
 import org.opensim.modeling.Model;
@@ -58,8 +59,6 @@ import org.opensim.view.pub.ViewDB;
 public class OneGeometryNode extends OneComponentWithGeometryNode {
     
     private static ResourceBundle bundle = NbBundle.getBundle(OneGeometryNode.class);
-    State state;
-    OpenSimContext context;
     /**
     * Creates a new instance of OneContactForceNode
     */
@@ -106,56 +105,7 @@ public class OneGeometryNode extends OneComponentWithGeometryNode {
     public Sheet createSheet() {
         Sheet sheet;
         sheet = super.createSheet();
-        addFrameProperties(sheet);
         return sheet;
-    }
-
-    private void addFrameProperties(Sheet sheet) {
-        Sheet.Set frameSheet = createExpertSet();
-        frameSheet.setDisplayName("Attachment Frame");
-        sheet.put(frameSheet);
-        Geometry g = Geometry.safeDownCast(comp);
-        Frame frame = g.getFrame();
-        PhysicalOffsetFrame offsetFrame = PhysicalOffsetFrame.safeDownCast(frame);
-        // Add dropdown of existing Frames
-
-        PropertySupport.Reflection nextNodeProp;
-        try {
-            nextNodeProp = new PropertySupport.Reflection(this,
-                    String.class,
-                    "getFrameName",
-                    "setFrameName");
-            nextNodeProp.setValue("canEditAsText", Boolean.TRUE);
-            nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
-            nextNodeProp.setName("Frame");
-            PropertyEditorSupport editor = EditorRegistry.getEditor("Frame");
-            if (editor != null)
-                nextNodeProp.setPropertyEditorClass(editor.getClass());
-            frameSheet.put(nextNodeProp);
-        } catch (NoSuchMethodException ex) {
-            Exceptions.printStackTrace(ex);
-        }
-        if (offsetFrame!=null){ 
-            try {
-                // Expose traslations and rotatiosn
-                PropertySupport.Reflection translationProp = new PropertySupport.Reflection(this,
-                        String.class, "getTranslationString", "setTranslationString");
-                translationProp.setValue("canEditAsText", Boolean.TRUE);
-                translationProp.setDisplayName("Translation");
-                translationProp.setValue("suppressCustomEditor", Boolean.TRUE);
-                frameSheet.put(translationProp);
-               
-                PropertySupport.Reflection rotationProp = new PropertySupport.Reflection(this,
-                        String.class, "getRotationString", "setRotationString");
-                rotationProp.setValue("canEditAsText", Boolean.TRUE);
-                rotationProp.setDisplayName("Rotation");
-                rotationProp.setValue("suppressCustomEditor", Boolean.TRUE);
-                frameSheet.put(rotationProp);
-            } catch (NoSuchMethodException ex) {
-                Exceptions.printStackTrace(ex);
-            }
-        }
-        sheet.put(frameSheet);
     }
     
     public String getFrameName() {
@@ -164,60 +114,7 @@ public class OneGeometryNode extends OneComponentWithGeometryNode {
     }
     public void setFrameName(String frame) {
         Geometry g = Geometry.safeDownCast(comp);
-        //g.setFrameName(frame);
-    }
-    
-    public String getTranslationString() {
-        Geometry g = Geometry.safeDownCast(comp);
-        PhysicalOffsetFrame offsetFrame = PhysicalOffsetFrame.safeDownCast(g.getFrame());
-        Transform transform = offsetFrame.getOffsetTransform();
-        String translationVec3AsString = transform.p().toString();
-        return translationVec3AsString.substring(2, translationVec3AsString.length()-1).replace(',', ' ');
-    }
-    public void setTranslationString(String string) {
-        Geometry g = Geometry.safeDownCast(comp);
-        PhysicalOffsetFrame offsetFrame = PhysicalOffsetFrame.safeDownCast(g.getFrame());
-        String vals[] = string.split(" ");
-        context = OpenSimDB.getInstance().getContext(getModelForNode());
-        context.cacheModelAndState();
-        //offsetFrame.upd_orientation(0);
-        for (int i=0; i<3; i++)
-            offsetFrame.upd_translation().set(i, Double.valueOf(vals[i]));
-        refreshDisplay();
-        return;
-    }
-    
-    public String getRotationString() {
-        Geometry g = Geometry.safeDownCast(comp);
-        PhysicalOffsetFrame offsetFrame = PhysicalOffsetFrame.safeDownCast(g.getFrame());
-        Transform transform = offsetFrame.getOffsetTransform();
-        String rotationVec3AsString = transform.R().convertRotationToBodyFixedXYZ().toString();
-        return rotationVec3AsString.substring(2, rotationVec3AsString.length()-1).replace(',', ' ');
-    }
-    public void setRotationString(String string) {
-        Geometry g = Geometry.safeDownCast(comp);
-        PhysicalOffsetFrame offsetFrame = PhysicalOffsetFrame.safeDownCast(g.getFrame());
-        String vals[] = string.split(" ");
-        context = OpenSimDB.getInstance().getContext(getModelForNode());
-        context.cacheModelAndState();
-        //offsetFrame.upd_orientation(0);
-        for (int i=0; i<3; i++)
-            offsetFrame.upd_orientation().set(i, Double.valueOf(vals[i]));
-        refreshDisplay();
-        return;
-    }
-
-    private void refreshDisplay() {
-        try {
-            context.restoreStateFromCachedModel();
-        } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
-        }
-        Model model = getModelForNode();
-        Geometry g = Geometry.safeDownCast(comp);
-        PhysicalOffsetFrame offsetFrame = PhysicalOffsetFrame.safeDownCast(g.getFrame());
-        ViewDB.getInstance().updateDecorations(model, offsetFrame);
-        //ViewDB.getInstance().updateModelDisplay(model);
-        ViewDB.repaintAll();
+        //Component frameComponent = m.getComponent(frame);
+        //g.connectSocket_frame(frameComponent);
     }
 }
