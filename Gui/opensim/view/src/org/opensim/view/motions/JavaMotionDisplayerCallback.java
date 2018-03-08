@@ -75,7 +75,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    int numStates=0;
    ArrayStr stateLabels=null;
    private boolean displayTimeProgress=false;
-   private boolean coordinatesOnly=false;
+   private boolean coordinatesOnly=false; // For IK this is set to true by caller, else false
    private boolean staticOptimization = false;
    private Storage activationStorage=null;
    HashMap<Integer, Integer> mapActivationIndex2State = new HashMap<Integer, Integer>(10);
@@ -124,8 +124,8 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
       modelForDisplay=aModelForDisplay;
       context = OpenSimDB.getInstance().getContext(aModelForDisplay);
       this.staticOptimization = staticOptimization;
-      if (!staticOptimization)
-        this.coordinatesOnly = true;
+      //if (!staticOptimization)
+      //  this.coordinatesOnly = true;
       if(aStorage!=null) {
          this.storage = aStorage;
       }
@@ -323,13 +323,6 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
      */
     public boolean isCoordinatesOnly() {
         return coordinatesOnly;
-    }
-
-    /**
-     * @param coordinatesOnly the coordinatesOnly to set
-     */
-    public void setCoordinatesOnly(boolean coordinatesOnly) {
-        this.coordinatesOnly = coordinatesOnly;
     }
 
     /**
