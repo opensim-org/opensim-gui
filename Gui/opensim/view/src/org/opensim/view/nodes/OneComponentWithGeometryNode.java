@@ -76,7 +76,7 @@ public abstract class OneComponentWithGeometryNode extends OneComponentNode impl
     protected void addAppearanceProperties(Sheet sheet) {
         try {
             sheet.get(Sheet.PROPERTIES).remove("Appearance");
-            Sheet.Set appearanceSheet = createExpertSet();
+            Sheet.Set appearanceSheet = new Sheet.Set();
             appearanceSheet.setDisplayName("Appearance");
             sheet.put(appearanceSheet);
             // Visible boolean property

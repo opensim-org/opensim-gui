@@ -29,6 +29,8 @@
 package org.opensim.view.nodes;
 
 import java.awt.Image;
+import java.beans.PropertyEditorSupport;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -36,36 +38,65 @@ import javax.swing.ImageIcon;
 import javax.swing.Action;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
+import org.openide.nodes.PropertySupport;
+import org.openide.nodes.Sheet;
+import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
+import org.opensim.modeling.Body;
+import org.opensim.modeling.Component;
+import org.opensim.modeling.ComponentIterator;
+import org.opensim.modeling.ComponentsList;
 import org.opensim.modeling.Frame;
+import org.opensim.modeling.FrameGeometry;
 import org.opensim.modeling.Geometry;
+import org.opensim.modeling.Model;
+import org.opensim.modeling.OpenSimContext;
+import org.opensim.modeling.PhysicalOffsetFrame;
+import org.opensim.modeling.State;
+import org.opensim.modeling.Transform;
 import org.opensim.view.FrameToggleVisibilityAction;
+import org.opensim.view.pub.OpenSimDB;
+import org.opensim.view.pub.ViewDB;
 
 /**
  *
  * @author Ayman
  */
 public class OneFrameNode extends OneModelComponentNode {
-   private static ResourceBundle bundle = NbBundle.getBundle(OneFrameNode.class);
-   Frame frame;
+    private static ResourceBundle bundle = NbBundle.getBundle(OneFrameNode.class);
+    Frame frame;
+    State state;
+    OpenSimContext context;
+    
     public OneFrameNode(Frame comp) {
         super(comp);
         frame = comp;
         setShortDescription(bundle.getString("HINT_FrameNode"));
-        createGeometryNodes();
+        createGeometryNodes();        
+        
     }
    
     protected final void createGeometryNodes() {
-        
-        int geomSize = frame.getPropertyByName("attached_geometry").size();
-        // Create node for geometry
+        // attached_geometry doesn't reach geometry mounted on 
+        // offset frames, use iterator instead
+        // Caveat if nested bodies or components have geometry 
+        // it may appear multiple times
+        ComponentsList compList = frame.getComponentsList();
+        ComponentIterator compIter = compList.begin();
         Children children = getChildren();
-        for (int g = 0; g < geomSize; g++) {
-            Geometry oneG = frame.get_attached_geometry(g);
-            OneGeometryNode node = new OneGeometryNode(oneG);
-            Node[] arrNodes = new Node[1];
-            arrNodes[0] = node;
-            children.add(arrNodes);
+        while (!compIter.equals(compList.end())) {
+            Component comp = compIter.__deref__();
+            Geometry oneG = Geometry.safeDownCast(comp);
+            if (oneG != null && FrameGeometry.safeDownCast(oneG) == null) {
+                Frame gFrame = oneG.getFrame();
+                if (gFrame.equals(frame)){
+                    OneGeometryNode node = new OneGeometryNode(oneG);
+                    Node[] arrNodes = new Node[1];
+                    arrNodes[0] = node;
+                    children.add(arrNodes);
+                }
+            }
+            compIter.next();
         }
     }
     
@@ -107,5 +138,114 @@ public class OneFrameNode extends OneModelComponentNode {
             ex.printStackTrace();
         }
         return retActions;
-    }  
+    }
+    /* Utility function to create child nodes for descendent frames
+    */
+    protected void createFrameNodes(Children children) {
+        // Find Frames and make nodes for them (PhysicalOffsetFrames)
+        ComponentsList descendents = frame.getModel().getComponentsList();
+        ComponentIterator compIter = descendents.begin();
+        while (!compIter.equals(descendents.end())) {
+            Frame frame = Frame.safeDownCast(compIter.__deref__());
+            if (Body.safeDownCast(frame)==null &&
+                    frame != null && !frame.equals(comp)
+                    && frame.findBaseFrame().equals(comp)) {
+                OneFrameNode node = new OneFrameNode(frame);
+                Node[] arrNodes = new Node[1];
+                arrNodes[0] = node;
+                children.add(arrNodes);
+            }
+            compIter.next();
+        }
+    }
+    public String getTranslationString() {
+        Frame frame = Frame.safeDownCast(comp);
+        PhysicalOffsetFrame offsetFrame = PhysicalOffsetFrame.safeDownCast(frame);
+        Transform transform = offsetFrame.getOffsetTransform();
+        String translationVec3AsString = transform.p().toString();
+        return translationVec3AsString.substring(2, translationVec3AsString.length()-1).replace(',', ' ');
+    }
+    public void setTranslationString(String string) {
+        Frame frame = Frame.safeDownCast(comp);
+        PhysicalOffsetFrame offsetFrame = PhysicalOffsetFrame.safeDownCast(frame);
+        String vals[] = string.split(" ");
+        context = OpenSimDB.getInstance().getContext(getModelForNode());
+        context.cacheModelAndState();
+        //offsetFrame.upd_orientation(0);
+        for (int i=0; i<3; i++)
+            offsetFrame.upd_translation().set(i, Double.valueOf(vals[i]));
+        refreshDisplay();
+        return;
+    }
+    
+    public String getRotationString() {
+        Frame frame = Frame.safeDownCast(comp);
+        PhysicalOffsetFrame offsetFrame = PhysicalOffsetFrame.safeDownCast(frame);
+        Transform transform = offsetFrame.getOffsetTransform();
+        String rotationVec3AsString = transform.R().convertRotationToBodyFixedXYZ().toString();
+        return rotationVec3AsString.substring(2, rotationVec3AsString.length()-1).replace(',', ' ');
+    }
+    public void setRotationString(String string) {
+        Frame frame = Frame.safeDownCast(comp);
+        PhysicalOffsetFrame offsetFrame = PhysicalOffsetFrame.safeDownCast(frame);
+        String vals[] = string.split(" ");
+        context = OpenSimDB.getInstance().getContext(getModelForNode());
+        context.cacheModelAndState();
+        //offsetFrame.upd_orientation(0);
+        for (int i=0; i<3; i++)
+            offsetFrame.upd_orientation().set(i, Double.valueOf(vals[i]));
+        refreshDisplay();
+        return;
+    }
+
+    private void refreshDisplay() {
+        try {
+            context.restoreStateFromCachedModel();
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        Model model = getModelForNode();
+        Frame frame = Frame.safeDownCast(comp);
+        ViewDB.getInstance().updateDecorations(model, frame);
+        ViewDB.getInstance().updateModelDisplay(model);
+        ViewDB.repaintAll();
+    }
+    
+   @Override
+    public Sheet createSheet() {
+        Sheet sheet;
+        sheet = super.createSheet();
+        addFrameProperties(sheet);
+        return sheet;
+    }
+    /*
+     Custom handlers of Edits to translation and orientation to force updates to scenegraph
+    */
+    private void addFrameProperties(Sheet sheet) {
+        Frame frame = Frame.safeDownCast(comp);
+        PhysicalOffsetFrame offsetFrame = PhysicalOffsetFrame.safeDownCast(frame);
+        Sheet.Set sheetSet = sheet.get(Sheet.PROPERTIES);
+        if (offsetFrame!=null){ 
+            sheetSet.remove("translation");
+            sheetSet.remove("orientation");
+            try {
+                // Expose traslations and rotatiosn
+                PropertySupport.Reflection translationProp = new PropertySupport.Reflection(this,
+                        String.class, "getTranslationString", "setTranslationString");
+                translationProp.setValue("canEditAsText", Boolean.TRUE);
+                translationProp.setDisplayName("Translation");
+                translationProp.setValue("suppressCustomEditor", Boolean.TRUE);
+                sheetSet.put(translationProp);
+               
+                PropertySupport.Reflection rotationProp = new PropertySupport.Reflection(this,
+                        String.class, "getRotationString", "setRotationString");
+                rotationProp.setValue("canEditAsText", Boolean.TRUE);
+                rotationProp.setDisplayName("Rotation");
+                rotationProp.setValue("suppressCustomEditor", Boolean.TRUE);
+                sheetSet.put(rotationProp);
+            } catch (NoSuchMethodException ex) {
+                Exceptions.printStackTrace(ex);
+            }
+        }
+    }
 }
