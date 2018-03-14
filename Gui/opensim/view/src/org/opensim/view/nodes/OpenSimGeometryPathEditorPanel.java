@@ -66,7 +66,7 @@ import org.opensim.modeling.WrapEllipsoid;
 import org.opensim.modeling.WrapObject;
 import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.ObjectsDeletedEvent;
-import org.opensim.view.Selectable;
+import org.opensim.view.SelectedObject;
 import org.opensim.view.SingleModelGuiElements;
 import org.opensim.view.SingleModelVisuals;
 import org.opensim.view.editors.MusclePointFunctionEventListener;
@@ -833,12 +833,12 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       AttachmentsPanel.setPreferredSize(d);
       
       // Update the checked/unchecked state of the selected checkboxes
-      ArrayList<Selectable> selectedObjects = ViewDB.getInstance().getSelectedObjects();
+      ArrayList<SelectedObject> selectedObjects = ViewDB.getInstance().getSelectedObjects();
       for (int i = 0; i < selectedObjects.size(); i++)
          updateAttachmentSelections(selectedObjects.get(i), true);
    }
 
-   private void updateAttachmentSelections(Selectable selectedObject, boolean state) {
+   private void updateAttachmentSelections(SelectedObject selectedObject, boolean state) {
       if (objectWithPath != null) {
          OpenSimObject obj = selectedObject.getOpenSimObject();
          //Muscle asm = Muscle.safeDownCast(objectWithPath);

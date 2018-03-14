@@ -113,6 +113,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    private static vtkAssembly sceneAssembly;
    private static WebSocketDB websocketdb;
    private static JSONObject jsondb;
+   private SelectedObject selectInVisualizer = null;
    
    /* Following block handles buffering Appearance changes so they're sent once
     * as a message to visualizer.
@@ -218,7 +219,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    static boolean openModelInNewWindow=true;
    
    static boolean useImmediateModeRendering = false; // Use Render instead of paint
-   private ArrayList<Selectable> selectedObjects = new ArrayList<Selectable>(0);
+   private ArrayList<SelectedObject> selectedObjects = new ArrayList<SelectedObject>(0);
    private Hashtable<Selectable, vtkCaptionActor2D> selectedObjectsAnnotations = new Hashtable<Selectable, vtkCaptionActor2D>(0);
    private Hashtable<ModelVisualizationJson, Path> modelVisToJsonFilesMap = new Hashtable<ModelVisualizationJson, Path>();
    private AxesActor     axesAssembly=null;
@@ -451,7 +452,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                mapModelsToSettings.remove(dModel);
 
                // Remove model-associated objects from selection list!
-               //removeObjectsBelongingToModelFromSelection(dModel);
+               removeObjectsBelongingToModelFromSelection(dModel);
                SingleModelVisuals visModel = mapModelsToVisuals.get(dModel);
                // Remove from display
                //int rc = visModel.getModelDisplayAssembly().GetReferenceCount();
@@ -1006,20 +1007,30 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     * Mark an object as selected (on/off).
     *
     */
-   public void markSelected(Selectable selectedObject, boolean highlight, boolean sendEvent, boolean updateStatusDisplayAndRepaint) {
+   public void markSelected(SelectedObject selectedObject, boolean highlight, boolean sendEvent, boolean updateStatusDisplayAndRepaint) {
       if (highlight)
           lookupContents.add(selectedObject.getOpenSimObject());
       else
           lookupContents.remove(selectedObject.getOpenSimObject());
+      
       // Remaining code is vtk depenedent
       //if (!isVtkGraphicsAvailable()) return;
       //selectedObject.markSelected(highlight);
       if (websocketdb != null){
           Model model = selectedObject.getOwnerModel();
-          if (highlight)
-            websocketdb.broadcastMessageJson(currentJson.createSelectionJson(selectedObject.getOpenSimObject()), null);
-          else
-            websocketdb.broadcastMessageJson(currentJson.createDeselectionJson(), null);
+          if (highlight){
+              if (selectInVisualizer != null && 
+                      !selectInVisualizer.equals(selectedObject.getOpenSimObject())){
+                    websocketdb.broadcastMessageJson(currentJson.createSelectionJson(selectedObject.getOpenSimObject()), null);
+              }
+              selectInVisualizer = selectedObject;
+          }
+          else {
+              if (selectInVisualizer!=null){
+                websocketdb.broadcastMessageJson(currentJson.createDeselectionJson(), null);
+                selectInVisualizer = null;
+              }
+          }
       }
       if (ViewDB.getInstance().isQuery() && isVtkGraphicsAvailable()){
           if (highlight){
@@ -1075,7 +1086,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         }
     }
    
-   public ArrayList<Selectable> getSelectedObjects() {
+   public ArrayList<SelectedObject> getSelectedObjects() {
       return selectedObjects;
    }
 
@@ -1095,7 +1106,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    public void setSelectedObject(OpenSimObject obj) {
       if (findObjectInSelectedList(obj)!=-1)
           return;
-      //clearSelectedObjects();
+      clearSelectedObjects();
 
       if (obj != null) {
          SelectedObject selectedObject = new SelectedObject(obj);
