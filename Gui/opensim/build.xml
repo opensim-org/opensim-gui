@@ -59,10 +59,24 @@
         <copy todir="${opensim.dist.dir}/cmake">
             <fileset dir="${api.dir}/cmake"/>
         </copy>
+        <copy todir="${opensim.dist.dir}/Resources">
+            <fileset dir="${api.dir}/Resources"/>
+        </copy>
         <copy todir="${opensim.dist.dir}/sdk">
             <fileset dir="${api.dir}/sdk"/>
         </copy>
-       <delete>
+
+        <!-- TODO untested -->
+        <copy todir="${opensim.dist.dir}/Resources/CodeExamples/GUI">
+            <fileset dir="Scripts" />
+        </copy>
+
+        <!-- Zip up Resources and delete the original Resources folder. -->
+        <!-- TODO untested -->
+        <zip basedir="${opensim.dist.dir}/Resources/" destfile="${opensim.dist.dir}/Resources.zip" />
+        <delete dir="${opensim.dist.dir}/Resources"/>
+
+        <delete>
             <fileset dir="${opensim.dist.dir}/OpenSim/modules/ext"
                 includes="**/jxbrowser-*mac*.jar"/>
             <fileset dir="${opensim.dist.dir}/OpenSim/modules/ext"
@@ -91,7 +105,7 @@
         <copy todir="${opensim.dist.dir}/Geometry">
             <fileset dir="${models.dir}/Geometry"/>
         </copy>
-        <copy todir="${opensim.dist.dir}/Models">
+        <copy todir="${opensim.dist.dir}/Resources/Models">
             <fileset dir="${models.dir}/Models"/>
         </copy>
     </target>
@@ -121,7 +135,7 @@
             <arg line="-R ${jre.dir}/ ${opensim.dist.dir}/jre"/>
         </exec>
 
-        <copy todir="${opensim.dist.dir}/Scripts/GUI_Scripting">
+        <copy todir="${opensim.dist.dir}/Resources/CodeExamples/GUI">
             <fileset dir="Scripts" />
         </copy>
 
@@ -136,7 +150,7 @@
         <copy todir="${opensim.dist.dir}">
             <fileset dir="${api.dir}">
                 <!-- Don't need the java source code. -->
-                <exclude name="**/share/OpenSim/**" />
+                <exclude name="**/sdk/Java/org/**" />
                 <!-- Must install the binaries separately to preserve the
                      executable bit. -->
                 <exclude name="**/bin/**" />
@@ -149,9 +163,14 @@
             <arg line="-R ${api.dir}/bin/ ${opensim.dist.dir}/bin/" />
         </exec>
         <exec executable="cp">
-            <arg line="-R ${api.dir}/libexec/ ${opensim.dist.dir}/libexec/" />
+            <arg line="-R ${api.dir}/sdk/Simbody/libexec/ ${opensim.dist.dir}/sdk/Simbody/libexec/" />
         </exec>
 
+        <!-- Zip up Resources and delete the original Resources folder. -->
+        <zip basedir="${opensim.dist.dir}/Resources/" destfile="${opensim.dist.dir}/Resources.zip" />
+        <delete dir="${opensim.dist.dir}/Resources"/>
+
+        <!-- Configuration files -->
         <copy todir="dist/OpenSim.app/Contents/"
             file="installer_files/OSX/Info.plist" overwrite="true"/>
         <!-- Fix version number -->
@@ -199,39 +218,15 @@
         <symlink action="single" link="${mac.dist.outer.dir}/Geometry"
             resource="${mac.final.app.name}/Contents/Resources/OpenSim/Geometry/"
             overwrite="true"/>
-        <symlink action="single" link="${mac.dist.outer.dir}/Models"
-            resource="${mac.final.app.name}/Contents/Resources/OpenSim/Models/"
-            overwrite="true"/>
         <mkdir dir="${mac.dist.outer.dir}/bin" />
         <symlink action="single" link="${mac.dist.outer.dir}/bin/opensim-cmd"
             resource="../${mac.final.app.name}/Contents/Resources/OpenSim/bin/opensim-cmd"
             overwrite="true"/>
-        <mkdir dir="${mac.dist.outer.dir}/Scripts" />
-        <symlink action="single" link="${mac.dist.outer.dir}/Scripts/GUI_Scripting"
-            resource="../${mac.final.app.name}/Contents/Resources/OpenSim/Scripts/GUI_Scripting"
+        <symlink action="single" link="${mac.dist.outer.dir}/cmake"
+            resource="${mac.final.app.name}/Contents/Resources/OpenSim/cmake/"
             overwrite="true"/>
-        <symlink action="single" link="${mac.dist.outer.dir}/Scripts/Matlab"
-            resource="../${mac.final.app.name}/Contents/Resources/OpenSim/share/doc/OpenSim/Scripts/Matlab"
-            overwrite="true"/>
-        <symlink action="single" link="${mac.dist.outer.dir}/Scripts/Python"
-            resource="../${mac.final.app.name}/Contents/Resources/OpenSim/share/doc/OpenSim/Scripts/Python"
-            overwrite="true"/>
-        <mkdir dir="${mac.dist.outer.dir}/sdk" />
-        <symlink action="single" link="${mac.dist.outer.dir}/sdk/include"
-            resource="../${mac.final.app.name}/Contents/Resources/OpenSim/include"
-            overwrite="true"/>
-        <symlink action="single" link="${mac.dist.outer.dir}/sdk/lib"
-            resource="../${mac.final.app.name}/Contents/Resources/OpenSim/lib"
-            overwrite="true"/>
-        <symlink action="single" link="${mac.dist.outer.dir}/sdk/APIExamples"
-            resource="../${mac.final.app.name}/Contents/Resources/OpenSim/share/doc/OpenSim/APIExamples"
-            overwrite="true"/>
-        <mkdir dir="${mac.dist.outer.dir}/sdk/doc" />
-        <symlink action="single" link="${mac.dist.outer.dir}/sdk/doc/OpenSimAPI.html"
-            resource="../../${mac.final.app.name}/Contents/Resources/OpenSim/share/doc/OpenSim/OpenSimAPI.html"
-            overwrite="true"/>
-        <symlink action="single" link="${mac.dist.outer.dir}/sdk/doc/html_user"
-            resource="../../${mac.final.app.name}/Contents/Resources/OpenSim/share/doc/OpenSim/html_user"
+        <symlink action="single" link="${mac.dist.outer.dir}/sdk"
+            resource="${mac.final.app.name}/Contents/Resources/OpenSim/sdk/"
             overwrite="true"/>
 
         <!-- Create the PKG installer. -->

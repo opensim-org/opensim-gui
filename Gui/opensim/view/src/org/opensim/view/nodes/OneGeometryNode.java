@@ -27,31 +27,29 @@
  */
 package org.opensim.view.nodes;
 
-import java.awt.Color;
 import java.awt.Image;
+import java.beans.PropertyEditorSupport;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
-import javax.swing.undo.AbstractUndoableEdit;
-import javax.swing.undo.CannotRedoException;
-import javax.swing.undo.CannotUndoException;
 import org.openide.nodes.Children;
 import org.openide.nodes.PropertySupport;
 import org.openide.nodes.Sheet;
 import static org.openide.nodes.Sheet.createExpertSet;
+import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
-import org.opensim.modeling.AbstractProperty;
-import org.opensim.modeling.Appearance;
-import org.opensim.modeling.DecorativeGeometry;
+import org.opensim.modeling.Component;
+import org.opensim.modeling.Frame;
 import org.opensim.modeling.Geometry;
 import org.opensim.modeling.Model;
-import org.opensim.modeling.SurfaceProperties;
-import org.opensim.modeling.Vec3;
-import org.opensim.view.ColorableInterface;
-import org.opensim.view.ExplorerTopComponent;
-import org.opensim.view.editors.DisplayPreferenceEditor;
+import org.opensim.modeling.OpenSimContext;
+import org.opensim.modeling.PhysicalOffsetFrame;
+import org.opensim.modeling.State;
+import org.opensim.modeling.Transform;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
+import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 
 /**
@@ -103,5 +101,20 @@ public class OneGeometryNode extends OneComponentWithGeometryNode {
             retValue = ((Geometry)getOpenSimObject()).getName();
         }
         return retValue;
+    }
+    public Sheet createSheet() {
+        Sheet sheet;
+        sheet = super.createSheet();
+        return sheet;
+    }
+    
+    public String getFrameName() {
+        Geometry g = Geometry.safeDownCast(comp);
+        return g.getFrame().getName();
+    }
+    public void setFrameName(String frame) {
+        Geometry g = Geometry.safeDownCast(comp);
+        //Component frameComponent = m.getComponent(frame);
+        //g.connectSocket_frame(frameComponent);
     }
 }

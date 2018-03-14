@@ -227,34 +227,25 @@ public final class TheApp {
             }
         } while (exists);
         
-        String[] subdirs = new String[]{
-            "Models", 
-            "sdk"+File.separator+"Scripts",
-            "sdk"+File.separator+"APIExamples"
-        }; // Add more folders here as needed
         if (userSelection != null){
             FileUtils.getInstance().setWorkingDirectoryPreference(userSelection);
-            String src = getPlatformSpecificInstallDir();
+            String src = getPlatformSpecificInstallDir() + File.separator + "Resources.zip";
             String dest = userSelection;
-            OpenSimLogger.logMessage("\nCopying resources to "+dest, OpenSimLogger.INFO);
-            CopyOption[] options = 
-            new CopyOption[] { StandardCopyOption.COPY_ATTRIBUTES, 
-                StandardCopyOption.REPLACE_EXISTING };
-            for (String dir:subdirs){
-                Path srcPath = Paths.get(src+File.separator+dir);
-                Path destPath = Paths.get(dest+File.separator+dir);
-                boolean success=true;
-                if (!destPath.toFile().exists())
-                    success = destPath.toFile().mkdirs();
-                if (success){
-                    try {
-                        FileUtils.copyFiles(srcPath, destPath);
-                    } catch (IOException ex) {
-                        ErrorDialog.displayExceptionDialog(ex);
-                        System.out.println("Folder "+srcPath.toAbsolutePath()+" couldn't be copied..Skipping");
-                    }
+            OpenSimLogger.logMessage("\nCopying resources to "+dest+"... ", OpenSimLogger.INFO);
+            Path srcPath = Paths.get(src);
+            Path destPath = Paths.get(dest);
+            boolean success=true;
+            if (!destPath.toFile().exists())
+                success = destPath.toFile().mkdirs();
+            if (success){
+                try {
+                    FileUtils.unzip(srcPath, destPath);
+                } catch (IOException ex) {
+                    ErrorDialog.displayExceptionDialog(ex);
+                    System.out.println(srcPath.toAbsolutePath()+" couldn't be copied..Skipping");
                 }
             }
+            OpenSimLogger.logMessage("Done.", OpenSimLogger.INFO);
             return userSelection;
         }
         else
