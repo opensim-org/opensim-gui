@@ -32,6 +32,7 @@ import org.opensim.modeling.Component;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.ModelComponent;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PathActuator;
@@ -68,25 +69,19 @@ public class SelectedObject implements Selectable {
       return object.getConcreteClassName() + ":" + object.getName();
    }
 
-   private Model getModel(PathPoint mp) { return mp.getBody().getModel(); }
-   private Model getModel(Body body) { return body.getModel(); }
-   private Model getModel(PhysicalFrame phys) { return phys.getModel(); }
-   private Model getModel(WrapObject wrapObj) { return getModel(wrapObj.getFrame()); }
-   private Model getModel(Marker marker) { return marker.getModel(); }
-
+   private Model getModel(ModelComponent mc) { return mc.getModel(); }
+ 
    public Model getOwnerModel()
    {
-      PathPoint mp = PathPoint.safeDownCast(object);
-      if(mp != null) return getModel(mp);
-      Body body = Body.safeDownCast(object);
-      if(body != null) return getModel(body);
-      Marker marker = Marker.safeDownCast(object);
-      if(marker != null) return getModel(marker);
-      WrapObject wrapObj = WrapObject.safeDownCast(object);
-      if(wrapObj != null) return getModel(wrapObj.getFrame());
-      Component mc = Component.safeDownCast(object);
-      // FIX40 if (mc != null) return mc.getModel();
-      return null;
+      ModelComponent mc = ModelComponent.safeDownCast(object);
+      if (mc != null) return mc.getModel();
+      Component comp = Component.safeDownCast(object);
+      ModelComponent parent = ModelComponent.safeDownCast(comp.getOwner());
+      while (parent == null){
+          comp = comp.getOwner();
+          parent = ModelComponent.safeDownCast(comp);
+      }
+      return parent.getModel();
    }
 
    public void markSelected(boolean highlight)

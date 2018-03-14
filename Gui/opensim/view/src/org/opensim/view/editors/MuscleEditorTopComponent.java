@@ -84,6 +84,7 @@ import org.opensim.view.ObjectsDeletedEvent;
 import org.opensim.view.ObjectsRenamedEvent;
 import org.opensim.view.OpenSimEvent;
 import org.opensim.view.Selectable;
+import org.opensim.view.SelectedObject;
 import org.opensim.view.SingleModelGuiElements;
 import org.opensim.view.SingleModelVisuals;
 import org.opensim.view.functionEditor.FunctionEditorTopComponent;
@@ -1892,7 +1893,7 @@ final public class MuscleEditorTopComponent extends TopComponent implements Obse
    }
    
    private void dragPathPoints(DragObjectsEvent ev) {
-      ArrayList<Selectable> selectedObjects = ViewDB.getInstance().getSelectedObjects();
+      ArrayList<SelectedObject> selectedObjects = ViewDB.getInstance().getSelectedObjects();
       PathActuator m = null;
       //PathActuator currentMuscle = PathActuator.safeDownCast(currentAct);
       boolean currentMuscleMoved = false;
