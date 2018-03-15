@@ -12,7 +12,8 @@ include source code for the
 cannot be used to build OpenSim 3.x or earlier.**
 
 **NOTE: Due to the small development team working on the GUI, we do not provide
-support for building or altering the OpenSim GUI source code.**
+support for building or altering the OpenSim GUI source code. Advanced users
+can refer to the appveyor.yml or .travis.yml scripts in this folder.**
 
 More information can be found at our websites
  - [OpenSim website](http://opensim.stanford.edu)
