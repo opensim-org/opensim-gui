@@ -2245,9 +2245,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     private void handleJson(JSONObject jsonObject) {
        if (jsonObject.get("type") != null){
            if (((String)jsonObject.get("type")).equalsIgnoreCase("info")){
-               String msg = "Rendered "+jsonObject.get("numFrames")+" frames in "+jsonObject.get("totalTime")+" ms.";
-               double rendertimeAverage = ((Double) jsonObject.get("totalTime"))/((Long)jsonObject.get("numFrames"));
-               OpenSimLogger.logMessage(msg + "FPS: "+(int)1000/rendertimeAverage+"\n", OpenSimLogger.INFO);
+               if (debugLevel > 1){
+                    String msg = "Rendered "+jsonObject.get("numFrames")+" frames in "+jsonObject.get("totalTime")+" ms.";
+                    double rendertimeAverage = ((Double) jsonObject.get("totalTime"))/((Long)jsonObject.get("numFrames"));
+                    OpenSimLogger.logMessage(msg + "FPS: "+(int)1000/rendertimeAverage+"\n", OpenSimLogger.INFO);
+               }
                return;
            }
        }
