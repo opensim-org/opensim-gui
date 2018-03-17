@@ -791,12 +791,7 @@ public class MotionDisplayer {
       if(statesFile) {
           // FIX40 speed this up by using map or YIndex
           context.getCurrentStateRef().setTime(assocTime);
-          for (int i=0; i<states.getSize();i++){
-              String nmForIndex = colNames.get(i+1);
-              double val = states.get(i);
-              //System.out.print(nmForIndex+"="+val+",");
-              model.setStateVariableValue(context.getCurrentStateRef(), nmForIndex, val);
-          }
+          model.setStateVariableValues(context.getCurrentStateRef(), states.getAsVector());
           context.realizeVelocity();
       } else {
          boolean realize=false;
