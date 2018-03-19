@@ -146,7 +146,7 @@ public class MotionDisplayer {
     ArrayStr stateNames;
     private boolean renderMuscleActivations=false;
     private double experimentalMarkerScaleFactor;
-    private double experimentalForceScaleFactor;
+    private double experimentalForceScaleFactor=1;
     String DEFAULT_FORCE_SHAPE="arrow";
     private String currentForceShape;
     
@@ -1131,5 +1131,20 @@ public class MotionDisplayer {
             }
         }
     }
+    
+    public double getExperimentalForceScaleFactor() {
+        return experimentalForceScaleFactor;
+    }
 
+    public void setExperimentalForceScaleFactor(double newFactor) {
+        this.experimentalForceScaleFactor = newFactor;
+         Set<OpenSimObject> expermintalDataObjects = mapComponentToUUID.keySet();
+         for (OpenSimObject expObj : expermintalDataObjects){
+            // Find first ExperimentalMarker and change its Material, this will affect all of them
+            if (expObj instanceof MotionObjectPointForce){
+                UUID expForceUUID = mapComponentToUUID.get(expObj).get(0); 
+                ViewDB.getInstance().applyScaleToObjectByUUID(model, expForceUUID, experimentalForceScaleFactor);  
+            }
+        }
+   }
 }
