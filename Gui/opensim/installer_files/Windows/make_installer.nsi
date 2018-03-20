@@ -1,28 +1,87 @@
-!define ZIP2EXE_COMPRESSOR_ZLIB
-!define ZIP2EXE_INSTALLDIR "c:\opensim 4.0"
-!define ZIP2EXE_NAME "OpenSim 4.0 Beta"
-!define ZIP2EXE_OUTFILE "opensim-4.0-win64.exe"
+;NSIS Modern User Interface
+;Basic Example Script
 
-!include "${NSISDIR}\Contrib\zip2exe\Base.nsh"
-!include "${NSISDIR}\Contrib\zip2exe\Classic.nsh"
+;--------------------------------
+;Include Modern UI
 
-!insertmacro SECTION_BEGIN
+  !include "MUI2.nsh"
+
+;--------------------------------
+;General
+
+  ;Name and file
+  Name "OpenSim 4.0 Beta"
+  OutFile "opensim-4.0-win64.exe"
+
+  ;Default installation folder
+  InstallDir "c:\opensim 4.0Beta"
+  
+  ;Get installation folder from registry if available
+  InstallDirRegKey HKCU "Software\OpenSim 4.0Beta" ""
+
+  ;Request application privileges for Windows Vista
+  RequestExecutionLevel user
+
+;--------------------------------
+;Interface Settings
+  !define MUI_ABORTWARNING
+
+;--------------------------------
+;Pages
+
+  !insertmacro MUI_PAGE_LICENSE "opensim\LICENSE.txt"
+  !insertmacro MUI_PAGE_COMPONENTS
+  !insertmacro MUI_PAGE_DIRECTORY
+  !insertmacro MUI_PAGE_INSTFILES
+  
+  !insertmacro MUI_UNPAGE_CONFIRM
+  !insertmacro MUI_UNPAGE_INSTFILES
+  
+;--------------------------------
+;Languages
+ 
+  !insertmacro MUI_LANGUAGE "English"
+
+;--------------------------------
+;Installer Sections
+
+Section "OpenSim Application" SecMain
+  SetOutPath "$INSTDIR"
   File /r opensim\*.*
+  
+  ;Store installation folder
+  WriteRegStr HKCU "Software\OpenSim4.0Beta" "" $INSTDIR
+ 
+;Create shortcuts
+  CreateShortCut "$DESKTOP\opensim 4.0.Beta.lnk" "$INSTDIR\bin\opensim64.exe" ""
+
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
-!insertmacro SECTION_END
 
-Section "Installer Section"
-;Create shortcuts
-  CreateDirectory "$SMPROGRAMS\$STARTMENU_FOLDER"
-  CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\OpenSim.lnk" "$INSTDIR\bin\opensim64.exe"
-  CreateShortCut "$DESKTOP\opensim 4.0.Beta.lnk" "$INSTDIR\bin\opensim64.exe" ""
-  CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
-; Run redistributable, test silent mode
-;ExecWait '"$INSTDIR\bin\vcredist_x64.exe"'
 SectionEnd
 
-Section "un.Uninstaller Section"
-  Delete "$INSTDIR\*"
-  Delete "$DESKTOP\opensim 4.0.Beta.lnk"
+;--------------------------------
+;Descriptions
+
+  ;Language strings
+  LangString DESC_SecMain ${LANG_ENGLISH} "Install OpenSim Application."
+
+  ;Assign language strings to sections
+  !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+    !insertmacro MUI_DESCRIPTION_TEXT ${SecMain} $(DESC_SecMain)
+  !insertmacro MUI_FUNCTION_DESCRIPTION_END
+
+;--------------------------------
+;Uninstaller Section
+
+Section "Uninstall"
+
+  ;ADD YOUR OWN FILES HERE...
+
+  Delete "$INSTDIR\Uninstall.exe"
+
+  RMDir "$INSTDIR"
+
+  DeleteRegKey /ifempty HKCU "Software\OpenSim4.0Beta"
+
 SectionEnd
