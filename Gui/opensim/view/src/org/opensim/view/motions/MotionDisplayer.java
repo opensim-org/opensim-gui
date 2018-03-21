@@ -393,6 +393,10 @@ public class MotionDisplayer {
         if (simmMotionData == null)
            return;
 
+        // We create a temporary array to hold interpolated values, in case Slider doesn't coincide with data
+        colNames = simmMotionData.getColumnLabels();
+        int numColumnsIncludingTime = colNames.getSize();
+        interpolatedStates = new ArrayDouble(0.0, numColumnsIncludingTime-1);
         // If provided simmMotionData is empty or have one frame, then we're building it live and can't
         // convert to full State form, will keep using old mapping until Tool run is finished
         // Performance will be limited by the running computation anyway.
@@ -425,10 +429,7 @@ public class MotionDisplayer {
         }
         mapIndicesToBodies.clear();
         mapIndicesToDofs.clear();
-        // We create a temporary array to hold interpolated values, in case Slider doesn't coincide with data
-        colNames = simmMotionData.getColumnLabels();
-        int numColumnsIncludingTime = colNames.getSize();
-        interpolatedStates = new ArrayDouble(0.0, numColumnsIncludingTime-1);
+
         stateNames = model.getStateVariableNames();
         
         stateNames.insert(0, "time");
@@ -693,7 +694,7 @@ public class MotionDisplayer {
       // if we're playing this motion synced with another motion)
       double clampedTime = (currentTime < simmMotionData.getFirstTime()) ? simmMotionData.getFirstTime() : 
                            (currentTime > simmMotionData.getLastTime()) ? simmMotionData.getLastTime() : currentTime;
-      if (motionAsStates ==null)
+      if (motionAsStates ==null || simmMotionData instanceof AnnotatedMotion)
             simmMotionData.getDataAtTime(clampedTime, interpolatedStates.getSize(), interpolatedStates);
       else
             motionAsStates.getDataAtTime(clampedTime, interpolatedStates.getSize(), interpolatedStates);
