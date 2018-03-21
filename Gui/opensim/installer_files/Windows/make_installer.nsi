@@ -74,7 +74,7 @@ Section "OpenSim Application" SecMain
   File /r opensim\*.*
   
   ;Store installation folder
-  WriteRegStr HKCU "Software\OpenSim4.0Beta" "" $INSTDIR
+  WriteRegStr HKCU "Software\OpenSim@VERSION@" "" $INSTDIR
  
 ;Create shortcuts
   CreateShortCut "$DESKTOP\opensim @VERSION@.lnk" "$INSTDIR\bin\opensim64.exe" ""
