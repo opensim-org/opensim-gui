@@ -2,12 +2,6 @@
 ;Build Windows Installer Script
 
 ;--------------------------------
-  Var STARTMENU_FOLDER
-  Var START_MENU
-  Var DO_NOT_ADD_TO_PATH
-  Var ADD_TO_PATH_ALL_USERS
-  Var ADD_TO_PATH_CURRENT_USER
-  Var INSTALL_DESKTOP
 ;Include Modern UI
 
   !include "MUI2.nsh"
@@ -60,14 +54,6 @@
   !insertmacro MUI_PAGE_COMPONENTS
   !insertmacro MUI_PAGE_DIRECTORY
   !insertmacro MUI_PAGE_INSTFILES
-  
-  ;Start Menu Folder Page Configuration
-  !define MUI_STARTMENUPAGE_REGISTRY_ROOT "SHCTX" 
-  !define MUI_STARTMENUPAGE_REGISTRY_KEY "Software\Stanford University, National Center of Biomedical Computation\OpenSim 4.0.Beta" 
-  !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "Start Menu Folder"
-  !insertmacro MUI_PAGE_STARTMENU Application $STARTMENU_FOLDER
-
-  
 
   !insertmacro MUI_PAGE_INSTFILES
   !insertmacro MUI_PAGE_FINISH
