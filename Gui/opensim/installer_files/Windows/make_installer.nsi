@@ -10,17 +10,17 @@
 ;General
 
   ;Name and file
-  Name "OpenSim 4.0 Beta"
-  OutFile "opensim-4.0Beta-win64.exe"
+  Name "OpenSim @VERSION@"
+  OutFile "opensim-@VERSION@-win64.exe"
 
   ;Set compression
   SetCompressor lzma
 
   ;Default installation folder
-  InstallDir "c:\opensim 4.0Beta"
+  InstallDir "c:\opensim @VERSION@"
   
   ;Get installation folder from registry if available
-  InstallDirRegKey HKCU "Software\OpenSim 4.0Beta" ""
+  InstallDirRegKey HKCU "Software\OpenSim @VERSION@" ""
 
   ;Request application privileges for Windows Vista
   RequestExecutionLevel user
@@ -77,7 +77,7 @@ Section "OpenSim Application" SecMain
   WriteRegStr HKCU "Software\OpenSim4.0Beta" "" $INSTDIR
  
 ;Create shortcuts
-  CreateShortCut "$DESKTOP\opensim 4.0.Beta.lnk" "$INSTDIR\bin\opensim64.exe" ""
+  CreateShortCut "$DESKTOP\opensim @VERSION@.lnk" "$INSTDIR\bin\opensim64.exe" ""
 
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
@@ -106,6 +106,6 @@ Section "Uninstall"
 
   RMDir "$INSTDIR"
 
-  DeleteRegKey /ifempty HKCU "Software\OpenSim4.0Beta"
+  DeleteRegKey /ifempty HKCU "Software\OpenSim@VERSION@"
 
 SectionEnd

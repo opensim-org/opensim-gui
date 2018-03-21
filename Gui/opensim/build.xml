@@ -103,7 +103,9 @@
                 file="${installer-files.dir}/OpenSimInstallerIcon.bmp" />
          <copy todir="${opensim.dist.dir}/../"
                 file="${installer-files.dir}/make_installer.nsi" />
-        
+        <replace file="${opensim.dist.dir}/../make_installer.nsi" value="${app.version}">
+            <replacefilter token="@VERSION@" />
+        </replace>        
     </target>
     <target name="copy-jre" description="Copy JRE to installer">
         <copy todir="${opensim.dist.dir}/jdk/jre">
