@@ -82,7 +82,11 @@
             <fileset dir="${opensim.dist.dir}/OpenSim/modules/ext"
                 includes="**/jxbrowser-*linux*.jar"/>
         </delete>
-
+        <!-- we use opensim64 in other scripts, avoid confusion by removing unused launcher -->
+        <delete>
+            <fileset file="${opensim.dist.dir}/bin/OpenSim.exe"/>
+        </delete>
+        
         <copy tofile="${opensim.dist.dir}/LICENSE.txt"
             file="installer_files/license_for_binary_distribution.txt"/>
         <copy tofile="${opensim.dist.dir}/NOTICE.txt"
@@ -94,7 +98,14 @@
             file="jfreechart/gpl-3.0.txt"/>
         <copy todir="${opensim.dist.dir}/third_party_license_texts/"
             file="visualViewer/src/org/opensim/topologyEditor/cddl.txt"/>
-
+         <!-- Copy files needed to build the installer here -->
+         <copy todir="${opensim.dist.dir}/../"
+                file="${installer-files.dir}/OpenSimInstallerIcon.bmp" />
+         <copy todir="${opensim.dist.dir}/../"
+                file="${installer-files.dir}/make_installer.nsi" />
+        <replace file="${opensim.dist.dir}/../make_installer.nsi" value="${app.version}">
+            <replacefilter token="@VERSION@" />
+        </replace>        
     </target>
     <target name="copy-jre" description="Copy JRE to installer">
         <copy todir="${opensim.dist.dir}/jdk/jre">

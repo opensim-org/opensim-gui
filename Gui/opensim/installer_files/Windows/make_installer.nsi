@@ -1,5 +1,5 @@
 ;NSIS Modern User Interface
-;Basic Example Script
+;Build Windows Installer Script
 
 ;--------------------------------
 ;Include Modern UI
@@ -10,30 +10,54 @@
 ;General
 
   ;Name and file
-  Name "OpenSim 4.0 Beta"
-  OutFile "opensim-4.0-win64.exe"
+  Name "OpenSim @VERSION@"
+  OutFile "opensim-@VERSION@-win64.exe"
+
+  ;Set compression
+  SetCompressor lzma
 
   ;Default installation folder
-  InstallDir "c:\opensim 4.0Beta"
+  InstallDir "c:\opensim @VERSION@"
   
   ;Get installation folder from registry if available
-  InstallDirRegKey HKCU "Software\OpenSim 4.0Beta" ""
+  InstallDirRegKey HKCU "Software\OpenSim @VERSION@" ""
 
   ;Request application privileges for Windows Vista
   RequestExecutionLevel user
 
 ;--------------------------------
 ;Interface Settings
+
+  !define MUI_HEADERIMAGE
   !define MUI_ABORTWARNING
 
 ;--------------------------------
+; Installation types
+
+
+;--------------------------------
+; Component sections
+
+
+;--------------------------------
+; Define some macro setting for the gui
+
+!define MUI_HEADERIMAGE_BITMAP "OpenSimInstallerIcon.bmp"
+
+
+
+;--------------------------------
 ;Pages
+  !insertmacro MUI_PAGE_WELCOME
 
   !insertmacro MUI_PAGE_LICENSE "opensim\LICENSE.txt"
   !insertmacro MUI_PAGE_COMPONENTS
   !insertmacro MUI_PAGE_DIRECTORY
   !insertmacro MUI_PAGE_INSTFILES
-  
+
+  !insertmacro MUI_PAGE_INSTFILES
+  !insertmacro MUI_PAGE_FINISH
+
   !insertmacro MUI_UNPAGE_CONFIRM
   !insertmacro MUI_UNPAGE_INSTFILES
   
@@ -50,10 +74,10 @@ Section "OpenSim Application" SecMain
   File /r opensim\*.*
   
   ;Store installation folder
-  WriteRegStr HKCU "Software\OpenSim4.0Beta" "" $INSTDIR
+  WriteRegStr HKCU "Software\OpenSim@VERSION@" "" $INSTDIR
  
 ;Create shortcuts
-  CreateShortCut "$DESKTOP\opensim 4.0.Beta.lnk" "$INSTDIR\bin\opensim64.exe" ""
+  CreateShortCut "$DESKTOP\opensim @VERSION@.lnk" "$INSTDIR\bin\opensim64.exe" ""
 
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
@@ -82,6 +106,6 @@ Section "Uninstall"
 
   RMDir "$INSTDIR"
 
-  DeleteRegKey /ifempty HKCU "Software\OpenSim4.0Beta"
+  DeleteRegKey /ifempty HKCU "Software\OpenSim@VERSION@"
 
 SectionEnd
