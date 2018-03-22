@@ -52,7 +52,8 @@ install:
   - mkdir ../build && cd ../build
   - cmake ../opensim-gui -DCMAKE_PREFIX_PATH=~/opensim-core -DAnt_EXECUTABLE="/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/extide/ant/bin/ant" -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans;-Dnbplatform.default.harness.dir=/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/harness"
   - make CopyOpenSimCore
-  - make PrepareInstaller
+  # Sometimes, pkgbuild takes longer than 10 minutes.
+  - travis_wait make PrepareInstaller
   
 script: 
   - echo "No tests."
