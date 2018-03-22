@@ -17,7 +17,7 @@
   SetCompressor lzma
 
   ;Default installation folder
-  InstallDir "c:\opensim @VERSION@"
+  InstallDir "C:\OpenSim @VERSION@"
   
   ;Get installation folder from registry if available
   InstallDirRegKey HKCU "Software\OpenSim @VERSION@" ""
