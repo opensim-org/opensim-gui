@@ -159,8 +159,8 @@ public class IKToolModel extends Observable implements Observer {
                     addMotion = false;
                 }
             }
-            // Create a new States storage and load it in GUI 
             // We don't create full state to avoid polluting results
+            // This will be done internally in MotionDisplayer
             Storage ikmotion = new Storage(animationCallback.getStorage()); // Java-side copy
             ikmotion.setName("IKResults");
             updateMotion(ikmotion);
