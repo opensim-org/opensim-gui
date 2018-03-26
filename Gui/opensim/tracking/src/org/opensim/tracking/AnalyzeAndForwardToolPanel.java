@@ -1092,7 +1092,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                         .add(analyzeInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.CENTER)
                             .add(editAnalyzeExcitationsButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(analyzeControlsFileName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                    .add(22, 22, 22)
+                    .add(0, 0, 0)
                     .add(analyzeInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                         .add(statesRadioButton)
                         .add(statesFileName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
@@ -1112,7 +1112,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                         .add(analyzeInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(cutoffFrequency, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(jLabel1)))
-                    .add(18, 18, 18)
+                    .add(0, 0, 0)
                     .add(analyzeSolveForEquilibriumCheckBox, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
 
@@ -1327,7 +1327,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
             modelInfoPanelLayout.setVerticalGroup(
                 modelInfoPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                 .add(modelInfoPanelLayout.createSequentialGroup()
-                    .add(6, 6, 6)
+                    .add(0, 0, 0)
                     .add(modelInfoPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                         .add(modelName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(jLabel2))
@@ -1703,7 +1703,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                     .addContainerGap()
                     .add(inverseInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                         .add(statesRadioButton1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(motionRadioButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 62, Short.MAX_VALUE))
+                        .add(motionRadioButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                     .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                     .add(inverseInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                         .add(inverseInputPanelLayout.createSequentialGroup()
@@ -1787,7 +1787,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                         .add(jLabel14)
                         .add(StepIntervalSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(jLabel18))
-                    .addContainerGap(34, Short.MAX_VALUE))
+                    .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
 
             jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Objective Function"));
@@ -1845,7 +1845,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                         .add(staticOptActivationExponentTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(useForceLengthStaticOptCheckBox)
-                    .add(36, 36, 36))
+                    .add(5, 5, 5))
             );
 
             org.jdesktop.layout.GroupLayout staticOptimizationPanelLayout = new org.jdesktop.layout.GroupLayout(staticOptimizationPanel);
@@ -1863,7 +1863,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                 .add(staticOptimizationPanelLayout.createSequentialGroup()
                     .add(staticOptimizationPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2, 0, 92, Short.MAX_VALUE))
+                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addContainerGap())
             );
 
@@ -1991,11 +1991,6 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
 // TODO add your handling code here:
         cmcToolModel().setUseFastTarget(!SelectCmcTargetCheckBox.isSelected());
     }//GEN-LAST:event_SelectCmcTargetCheckBoxActionPerformed
-
-    private void editAnalyzeExcitationsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAnalyzeExcitationsButtonActionPerformed
-// TODO add your handling code here:
-        editExcitationsFile(analyzeControlsFileName);
-    }//GEN-LAST:event_editAnalyzeExcitationsButtonActionPerformed
 
     private void editForwardExcitationsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editForwardExcitationsButtonActionPerformed
 // TODO add your handling code here:
@@ -2162,64 +2157,6 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
    }//GEN-LAST:event_useSpecifiedDtActionPerformed
 
    //------------------------------------------------------------------------
-   // Analyze tool input settings
-   //------------------------------------------------------------------------
-
-   private void analyzeControlsFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_analyzeControlsFileNameStateChanged
-      analyzeToolModel().setControlsFileName(analyzeControlsFileName.getFileName());
-   }//GEN-LAST:event_analyzeControlsFileNameStateChanged
-
-   private void analyzeControlsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analyzeControlsCheckBoxActionPerformed
-      analyzeToolModel().setControlsEnabled(analyzeControlsCheckBox.isSelected());
-   }//GEN-LAST:event_analyzeControlsCheckBoxActionPerformed
-
-   private void inputSourceRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSourceRadioButtonActionPerformed
-      if(statesRadioButton.isSelected()) analyzeToolModel().setInputSource(AnalyzeToolModel.InputSource.States);
-      else if(motionRadioButton.isSelected()) {
-         if(fromFileMotionRadioButton.isSelected()) analyzeToolModel().setInputSource(AnalyzeToolModel.InputSource.Coordinates);
-         else if(loadedMotionRadioButton.isSelected()) analyzeToolModel().setInputSource(AnalyzeToolModel.InputSource.Motion);
-         else analyzeToolModel().setInputSource(AnalyzeToolModel.InputSource.Unspecified);
-      }
-      else analyzeToolModel().setInputSource(AnalyzeToolModel.InputSource.Unspecified);
-   }//GEN-LAST:event_inputSourceRadioButtonActionPerformed
-
-   private void motionsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motionsComboBoxActionPerformed
-      if(internalTrigger) return;
-      int index = motionsComboBox.getSelectedIndex();
-      ArrayList<Storage> motions = MotionsDB.getInstance().getModelMotions(toolModel.getOriginalModel());
-      if(motions!=null && 0<=index && index<motions.size()) analyzeToolModel().setInputMotion(motions.get(index));
-      else analyzeToolModel().setInputMotion(null);
-   }//GEN-LAST:event_motionsComboBoxActionPerformed
-
-   private void coordinatesFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_coordinatesFileNameStateChanged
-      analyzeToolModel().setCoordinatesFileName(coordinatesFileName.getFileName());
-   }//GEN-LAST:event_coordinatesFileNameStateChanged
-
-   private void statesFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_statesFileNameStateChanged
-      analyzeToolModel().setStatesFileName(statesFileName.getFileName());
-   }//GEN-LAST:event_statesFileNameStateChanged
-
-   private void filterCoordinatesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterCoordinatesCheckBoxActionPerformed
-      analyzeToolModel().setFilterCoordinates(filterCoordinatesCheckBox.isSelected());
-   }//GEN-LAST:event_filterCoordinatesCheckBoxActionPerformed
-
-   private void cutoffFrequencyFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cutoffFrequencyFocusLost
-      if(!evt.isTemporary()) cutoffFrequencyActionPerformed(null);
-   }//GEN-LAST:event_cutoffFrequencyFocusLost
-
-   private void cutoffFrequencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutoffFrequencyActionPerformed
-      try {
-         analyzeToolModel().setLowpassCutoffFrequency(numFormat.parse(cutoffFrequency.getText()).doubleValue());
-      } catch (ParseException ex) {
-         cutoffFrequency.setText(numFormat.format(analyzeToolModel().getLowpassCutoffFrequency()));
-      }
-   }//GEN-LAST:event_cutoffFrequencyActionPerformed
-
-   private void analyzeSolveForEquilibriumCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analyzeSolveForEquilibriumCheckBoxActionPerformed
-      analyzeToolModel().setSolveForEquilibrium(analyzeSolveForEquilibriumCheckBox.isSelected());
-   }//GEN-LAST:event_analyzeSolveForEquilibriumCheckBoxActionPerformed
-
-   //------------------------------------------------------------------------
    // Analyze section
    //------------------------------------------------------------------------
 
@@ -2336,6 +2273,69 @@ private void StepIntervalSpinnerFocusLost(java.awt.event.FocusEvent evt) {//GEN-
     private void cmcDesiredKinematicsFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_cmcDesiredKinematicsFileNameStateChanged
         ((TrackingToolModel)toolModel).setDesiredKinematicsFileName(cmcDesiredKinematicsFileName.getFileName());
     }//GEN-LAST:event_cmcDesiredKinematicsFileNameStateChanged
+
+    private void editAnalyzeExcitationsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAnalyzeExcitationsButtonActionPerformed
+        // TODO add your handling code here:
+        editExcitationsFile(analyzeControlsFileName);
+    }//GEN-LAST:event_editAnalyzeExcitationsButtonActionPerformed
+
+    private void analyzeSolveForEquilibriumCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analyzeSolveForEquilibriumCheckBoxActionPerformed
+        analyzeToolModel().setSolveForEquilibrium(analyzeSolveForEquilibriumCheckBox.isSelected());
+    }//GEN-LAST:event_analyzeSolveForEquilibriumCheckBoxActionPerformed
+
+    private void inputSourceRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSourceRadioButtonActionPerformed
+        if(statesRadioButton.isSelected()) analyzeToolModel().setInputSource(AnalyzeToolModel.InputSource.States);
+        else if(motionRadioButton.isSelected()) {
+            if(fromFileMotionRadioButton.isSelected()) analyzeToolModel().setInputSource(AnalyzeToolModel.InputSource.Coordinates);
+            else if(loadedMotionRadioButton.isSelected()) analyzeToolModel().setInputSource(AnalyzeToolModel.InputSource.Motion);
+            else analyzeToolModel().setInputSource(AnalyzeToolModel.InputSource.Unspecified);
+        }
+        else analyzeToolModel().setInputSource(AnalyzeToolModel.InputSource.Unspecified);
+    }//GEN-LAST:event_inputSourceRadioButtonActionPerformed
+
+   //------------------------------------------------------------------------
+   // Analyze tool input settings
+   //------------------------------------------------------------------------
+
+    private void analyzeControlsFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_analyzeControlsFileNameStateChanged
+        analyzeToolModel().setControlsFileName(analyzeControlsFileName.getFileName());
+    }//GEN-LAST:event_analyzeControlsFileNameStateChanged
+
+    private void analyzeControlsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analyzeControlsCheckBoxActionPerformed
+        analyzeToolModel().setControlsEnabled(analyzeControlsCheckBox.isSelected());
+    }//GEN-LAST:event_analyzeControlsCheckBoxActionPerformed
+
+    private void cutoffFrequencyFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cutoffFrequencyFocusLost
+        if(!evt.isTemporary()) cutoffFrequencyActionPerformed(null);
+    }//GEN-LAST:event_cutoffFrequencyFocusLost
+
+    private void cutoffFrequencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutoffFrequencyActionPerformed
+        try {
+            analyzeToolModel().setLowpassCutoffFrequency(numFormat.parse(cutoffFrequency.getText()).doubleValue());
+        } catch (ParseException ex) {
+            cutoffFrequency.setText(numFormat.format(analyzeToolModel().getLowpassCutoffFrequency()));
+        }
+    }//GEN-LAST:event_cutoffFrequencyActionPerformed
+
+    private void filterCoordinatesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterCoordinatesCheckBoxActionPerformed
+        analyzeToolModel().setFilterCoordinates(filterCoordinatesCheckBox.isSelected());
+    }//GEN-LAST:event_filterCoordinatesCheckBoxActionPerformed
+
+    private void coordinatesFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_coordinatesFileNameStateChanged
+        analyzeToolModel().setCoordinatesFileName(coordinatesFileName.getFileName());
+    }//GEN-LAST:event_coordinatesFileNameStateChanged
+
+    private void statesFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_statesFileNameStateChanged
+        analyzeToolModel().setStatesFileName(statesFileName.getFileName());
+    }//GEN-LAST:event_statesFileNameStateChanged
+
+    private void motionsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motionsComboBoxActionPerformed
+        if(internalTrigger) return;
+        int index = motionsComboBox.getSelectedIndex();
+        ArrayList<Storage> motions = MotionsDB.getInstance().getModelMotions(toolModel.getOriginalModel());
+        if(motions!=null && 0<=index && index<motions.size()) analyzeToolModel().setInputMotion(motions.get(index));
+        else analyzeToolModel().setInputMotion(null);
+    }//GEN-LAST:event_motionsComboBoxActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel HzJLabel;
