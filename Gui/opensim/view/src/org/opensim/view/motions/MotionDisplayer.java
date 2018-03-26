@@ -441,7 +441,7 @@ public class MotionDisplayer {
         else if (!liveMotion){ // This is the most common handling of old Result files
             // create a local Storage and use that to drive animation
             motionAsStates = new Storage();
-            model.formStateStorage(simmMotionData, motionAsStates);
+            model.formStateStorage(simmMotionData, motionAsStates, false);
             statesFile = true;
             // Fix size of temporary array to hold interpolated values
             numColumnsIncludingTime = motionAsStates.getColumnLabels().getSize();
