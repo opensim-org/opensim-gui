@@ -161,14 +161,12 @@ public class InverseDynamicsToolModel extends AbstractToolModelWithExternalLoads
          if (motion!=null){
             // Create a new States storage and load it in GUI 
             // this should make playback faster since no need to assemble
-            Storage idmotion = new Storage(512, "IDResults"); // Java-side copy
             if (motion.isInDegrees()){
                 getOriginalModel().getSimbodyEngine().convertDegreesToRadians(motion);
             }
-            getOriginalModel().formStateStorage(
-                    motion,
-                    idmotion, false);
-            updateMotion(idmotion); // replaces current motion
+            Storage idmotion = new Storage(motion, true); // Java-side copy
+            idmotion.setName("IDResults");
+            updateMotion(idmotion); // replaces current motion, internally will be made into states
 
          }
          getModel().removeAnalysis(animationCallback, false);
