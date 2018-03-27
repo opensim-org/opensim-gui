@@ -28,7 +28,6 @@ public class Model extends ModelComponent {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        String nm = this.getName();
         opensimSimulationJNI.delete_Model(swigCPtr);
       }
       swigCPtr = 0;
