@@ -263,7 +263,10 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
     }
 
     public final double[] getBoundingBox() {
-        return boundingBox;
+        if (isBoundingBoxComputed())
+            return boundingBox;
+        else
+            return new double[]{0., 0., 0., 1., 1., 1.};
     }
 
     public double getUnitConversion() {
