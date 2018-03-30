@@ -75,6 +75,20 @@ import org.opensim.view.pub.OpenSimDB;
  * @author Ayman
  */
 public class ModelVisualizationJson extends JSONObject {
+
+    /**
+     * @return the showCom
+     */
+    public boolean isShowCom() {
+        return showCom;
+    }
+
+    /**
+     * @param showCom the showCom to set
+     */
+    public void setShowCom(boolean showCom) {
+        this.showCom = showCom;
+    }
     private final Model model;
     private State state;
     private final HashMap<Integer, PhysicalFrame> mapBodyIndicesToFrames = new HashMap<Integer, PhysicalFrame>();
@@ -117,6 +131,7 @@ public class ModelVisualizationJson extends JSONObject {
     private final HashMap<GeometryPath, JSONArray> pathsWithWrapping = new HashMap<GeometryPath, JSONArray>();
     private final HashMap<Frame, VisualizerFrame> visualizerFrames = new HashMap<Frame, VisualizerFrame>();
     private ArrayList<VisualizerAddOn> visualizerAddOns = new ArrayList<VisualizerAddOn>();
+    private boolean showCom = true;
     
     public Boolean getFrameVisibility(Frame b) {
         return visualizerFrames.get(b).visible;
@@ -181,7 +196,7 @@ public class ModelVisualizationJson extends JSONObject {
     }
 
     private void addCusomAddons() {
-        ComVisualizerAddOn comVizAddOn = new ComVisualizerAddOn();
+        VisualizerAddOnCom comVizAddOn = new VisualizerAddOnCom();
         comVizAddOn.init(this);
         visualizerAddOns.add(comVizAddOn);
     }
@@ -583,6 +598,10 @@ public class ModelVisualizationJson extends JSONObject {
                 String colorString = JSONUtilities.mapColorToRGBA(pathColor);
                 pathUpdate_json.put("color", colorString);
                 geompaths_json.add(pathUpdate_json);
+            }
+            // Have AddOns update their tranasforms
+            for (VisualizerAddOn nextAddOn:visualizerAddOns){
+                nextAddOn.updateVisuals(bodyTransforms_json);
             }
             // Process motion displayers
             for (MotionDisplayer nextMotionDisplayer: motionDisplayers){
@@ -1392,12 +1411,14 @@ public class ModelVisualizationJson extends JSONObject {
             JSONObject geometryJson, 
             JSONObject materialJson,
             JSONObject sceneGraphObjectJson){
-        
+        UUID obj_uuid = UUID.randomUUID();
+        json_geometries.add(geometryJson);
+        json_materials.add(materialJson);
         JSONObject bodyJson = mapBodyIndicesToJson.get(bdy.getMobilizedBodyIndex());
         if (bodyJson.get("children")==null)
             bodyJson.put("children", new JSONArray());
         ((JSONArray)bodyJson.get("children")).add(sceneGraphObjectJson);
-        return UUID;
+        return obj_uuid;
     }
 
 }

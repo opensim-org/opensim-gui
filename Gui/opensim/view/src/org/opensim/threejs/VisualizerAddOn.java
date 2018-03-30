@@ -5,6 +5,8 @@
  */
 package org.opensim.threejs;
 
+import org.json.simple.JSONArray;
+
 /**
  *
  * @author Ayman-NMBL
@@ -43,7 +45,7 @@ package org.opensim.threejs;
     // Method invoked whenever we're generating a Frame to send oto the Visualizer
     // Used as a hook for the VisualizerAddOn to update its owned visuals
     // The state maintained by modelJson
-    public void updateVisuals();
+    public void updateVisuals(JSONArray frame_jsonArray);
     // Give AddOn a chance to cleanup and remove added visuals
     public void cleanup();
 }
