@@ -85,7 +85,6 @@ public class ModelVisualizationJson extends JSONObject {
             new HashMap<OpenSimObject, ArrayList<UUID>>();
     private final HashMap<String, UUID> mapPathMaterialToUUID = new HashMap<String, UUID>();
     private static final String GEOMETRY_SEP = ".";
-    private final Vec3 vec3Unit = new Vec3(1.0, 1.0, 1.0);
     private final HashMap<GeometryPath, UUID> pathList = new HashMap<GeometryPath, UUID>();
     private ModelDisplayHints mdh;
     private DecorativeGeometryImplementationJS dgimp = null;
@@ -228,10 +227,11 @@ public class ModelVisualizationJson extends JSONObject {
             mapBodyIndicesToFrames.put(id, body.__deref__());
             //System.out.println("id=" + id + " body =" + body.getName());
             UUID body_uuid = UUID.randomUUID();
-            JSONObject bodyJson = createBodyJson(body.__deref__(), body_uuid);
+            BodyVisualizationJson bodyJson = createBodyJson(body.__deref__(), body_uuid);
             mapBodyIndicesToJson.put(id, bodyJson);
             addComponentToUUIDMap(body.__deref__(), body_uuid);
             bodies_json.add(bodyJson);
+            bodyJson.addBodyCom(this);
             //System.out.println(bodyJson.toJSONString());
             body.next();
         }
@@ -436,17 +436,8 @@ public class ModelVisualizationJson extends JSONObject {
         return obj_json;
     }   
 
-    private JSONObject createBodyJson(Body body, UUID uuid){
-        JSONObject bdyJson = new JSONObject();
-        bdyJson.put("uuid", uuid.toString());
-        bdyJson.put("type", "Group");
-        bdyJson.put("opensimType", "Frame");
-        bdyJson.put("userData", "NonEditable");
-        bdyJson.put("name", body.getAbsolutePathString());
-        PhysicalFrame bodyFrame = mapBodyIndicesToFrames.get(body.getMobilizedBodyIndex());
-        Transform bodyXform = bodyFrame.getTransformInGround(state);
-        bdyJson.put("matrix", JSONUtilities.createMatrixFromTransform(bodyXform, vec3Unit, visScaleFactor));
-        return bdyJson;
+    private BodyVisualizationJson createBodyJson(Body body, UUID uuid){
+        return new BodyVisualizationJson(body, uuid, this);
     }
     
     public OpenSimObject findObjectForUUID(String uuidString) {
@@ -1369,4 +1360,28 @@ public class ModelVisualizationJson extends JSONObject {
         }
         // Need to update the GometryPath control polygon to remove the ppt and communicate the new one to visulizer
     }
+
+    /**
+     * @return the state
+     */
+    public State getState() {
+        return state;
+    }
+    /* Utility to allow utility visualization classes to provide their corresponding
+     * Geometry, Material and Obbjects to the Model Json structure.
+    */
+    public UUID addFrameJsonObject(PhysicalFrame bdy, 
+            JSONObject geometryJson,
+            JSONObject materialJson,
+            JSONObject sceneGraphObjectJson){
+        UUID obj_uuid = UUID.randomUUID();
+        JSONObject bodyJson = mapBodyIndicesToJson.get(bdy.getMobilizedBodyIndex());
+        json_geometries.add(geometryJson);
+        json_materials.add(materialJson);
+        if (bodyJson.get("children")==null)
+            bodyJson.put("children", new JSONArray());
+        ((JSONArray)bodyJson.get("children")).add(sceneGraphObjectJson);
+        return obj_uuid;
+    }
+
 }
