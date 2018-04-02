@@ -130,7 +130,8 @@ public class ModelVisualizationJson extends JSONObject {
     private final HashMap<GeometryPath, JSONArray> pathsWithWrapping = new HashMap<GeometryPath, JSONArray>();
     private final HashMap<Frame, VisualizerFrame> visualizerFrames = new HashMap<Frame, VisualizerFrame>();
     private ArrayList<VisualizerAddOn> visualizerAddOns = new ArrayList<VisualizerAddOn>();
-    private boolean showCom = true;
+    private VisualizerAddOnCom comVizAddOn = new VisualizerAddOnCom();
+    private boolean showCom = false;
     
     public Boolean getFrameVisibility(Frame b) {
         return visualizerFrames.get(b).visible;
@@ -195,11 +196,18 @@ public class ModelVisualizationJson extends JSONObject {
     }
 
     private void addCusomAddons() {
-        VisualizerAddOnCom comVizAddOn = new VisualizerAddOnCom();
         comVizAddOn.init(this);
         visualizerAddOns.add(comVizAddOn);
     }
 
+    public BodyVisualizationJson getBodyRep(Component comp) {
+       Body bdy = Body.safeDownCast(comp);
+       return (BodyVisualizationJson) mapBodyIndicesToJson.get(bdy.getMobilizedBodyIndex());
+    }
+
+    public UUID getComObjectUUID() {
+        return comVizAddOn.getObjectUUID();
+    }
      // The following inner class and Map are used to cache "computed" pathpoints to speed up 
     // recomputation on the fly
     class ComputedPathPointInfo {
@@ -998,10 +1006,7 @@ public class ModelVisualizationJson extends JSONObject {
     }
 
     public JSONObject createToggleModelVisibilityCommand(boolean newValue) {
-        JSONObject guiJson = new JSONObject();
-        guiJson.put("Op", "execute");
-        JSONObject commandJson = CommandComposerThreejs.createSetVisibleCommandJson(newValue, modelUUID);
-        guiJson.put("command", commandJson);
+        JSONObject guiJson = createSetVisibilityCommandForUUID(newValue, modelUUID);
         return guiJson;
     }
     
@@ -1014,14 +1019,20 @@ public class ModelVisualizationJson extends JSONObject {
     }
     
     public JSONObject createToggleObjectVisibilityCommand(OpenSimObject obj, boolean newValue) {
+        ArrayList<UUID> uuids = findUUIDForObject(obj);
+        JSONObject guiJson = new JSONObject();
+        if (uuids != null && uuids.size()==1){
+            UUID objectUuid = uuids.get(0);
+            guiJson = createSetVisibilityCommandForUUID(newValue, objectUuid);
+        }
+        return guiJson;
+    }
+
+    public JSONObject createSetVisibilityCommandForUUID(boolean newValue, UUID objectUuid) {
         JSONObject guiJson = new JSONObject();
         guiJson.put("Op", "execute");
-        ArrayList<UUID> uuids = findUUIDForObject(obj);
-        if (uuids != null && uuids.size()==1){
-        UUID objectUuid = uuids.get(0);
-            JSONObject commandJson = CommandComposerThreejs.createSetVisibleCommandJson(newValue, objectUuid);
-            guiJson.put("command", commandJson);
-        }
+        JSONObject commandJson = CommandComposerThreejs.createSetVisibleCommandJson(newValue, objectUuid);
+        guiJson.put("command", commandJson);
         return guiJson;
     }
 

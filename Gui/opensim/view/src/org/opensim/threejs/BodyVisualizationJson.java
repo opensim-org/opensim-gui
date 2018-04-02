@@ -15,10 +15,33 @@ import org.opensim.modeling.Vec3;
 /**
  *
  * @author Ayman-NMBL
+ * This class creates the JSON representing passed in Body and also
+ * maintains the wiring for the COM since COM is not a standalone Component
  */
 public class BodyVisualizationJson extends JSONObject{
+
+    /**
+     * @return the comObjectUUID
+     */
+    public UUID getComObjectUUID() {
+        return comObjectUUID;
+    }
+
+    /**
+     * @return the showCom
+     */
+    public boolean isShowCom() {
+        return showCom;
+    }
+
+    /**
+     * @param showCom the showCom to set
+     */
+    public void setShowCom(boolean showCom) {
+        this.showCom = showCom;
+    }
     private final Vec3 vec3Unit = new Vec3(1.0, 1.0, 1.0);
-    private boolean showCom = true;
+    private boolean showCom = false;
     private Body body;
     private UUID comMaterialUUID, comObjectUUID, comGeometryUUID;
     
@@ -42,10 +65,8 @@ public class BodyVisualizationJson extends JSONObject{
         JSONObject geomJson = new JSONObject();
         UUID uuidForComGeometry = UUID.randomUUID();
         geomJson.put("uuid", uuidForComGeometry.toString());
-        geomJson.put("type", "BoxGeometry");
-        geomJson.put("width", 100);
-        geomJson.put("height", 100);
-        geomJson.put("depth", 100);
+        geomJson.put("type", "SphereGeometry");
+        geomJson.put("radius", 25);
         comGeometryUUID = uuidForComGeometry;
         return geomJson;
     }     
@@ -54,7 +75,9 @@ public class BodyVisualizationJson extends JSONObject{
         UUID mat_uuid = UUID.randomUUID();
         mat_json.put("uuid", mat_uuid.toString());
         mat_json.put("name", "ComMat");
-        mat_json.put("type", "MeshBasicMaterial");
+        mat_json.put("type", "MeshPhongMaterial");
+        mat_json.put("shininess", 30);
+        mat_json.put("transparent", true);
         String colorString = JSONUtilities.mapColorToRGBA(new Vec3(.0, 1.0, 0));
         mat_json.put("color", colorString);
         mat_json.put("side", 2);

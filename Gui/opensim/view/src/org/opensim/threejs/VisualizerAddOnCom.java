@@ -20,14 +20,17 @@ import org.opensim.modeling.Vec3;
 /**
  *
  * @author Ayman-NMBL
+ * Visualizer System COM, wiring it to an output and updating
+ * based on state. System COM is not a Component
  */
 public class VisualizerAddOnCom implements VisualizerAddOn {
-    ModelVisualizationJson modelJson;
-    UUID geometryUUID;
-    UUID materialUUID;
-    UUID objectUUID;
-    Transform transform;
-    OutputVec3 outputVec3;
+
+    private ModelVisualizationJson modelJson;
+    private UUID geometryUUID;
+    private UUID materialUUID;
+    private UUID objectUUID;
+    private Transform transform;
+    private OutputVec3 outputVec3;
     
     @Override
     public void init(ModelVisualizationJson modelJson) {
@@ -62,10 +65,8 @@ public class VisualizerAddOnCom implements VisualizerAddOn {
         JSONObject geomJson = new JSONObject();
         UUID uuidForComGeometry = UUID.randomUUID();
         geomJson.put("uuid", uuidForComGeometry.toString());
-        geomJson.put("type", "BoxGeometry");
-        geomJson.put("width", 100);
-        geomJson.put("height", 100);
-        geomJson.put("depth", 100);
+        geomJson.put("type", "SphereGeometry");
+        geomJson.put("radius", 50);
         geometryUUID = uuidForComGeometry;
         return geomJson;
     }
@@ -75,7 +76,9 @@ public class VisualizerAddOnCom implements VisualizerAddOn {
         UUID mat_uuid = UUID.randomUUID();
         mat_json.put("uuid", mat_uuid.toString());
         mat_json.put("name", "ComMat");
-        mat_json.put("type", "MeshBasicMaterial");
+        mat_json.put("type", "MeshPhongMaterial");
+        mat_json.put("shininess", 30);
+        mat_json.put("transparent", true);
         String colorString = JSONUtilities.mapColorToRGBA(new Vec3(.0, 1.0, 0));
         mat_json.put("color", colorString);
         mat_json.put("side", 2);
@@ -98,5 +101,11 @@ public class VisualizerAddOnCom implements VisualizerAddOn {
         obj_json.put("castShadow", true);
         obj_json.put("visible", modelJson.isShowCom());
         return obj_json;
+    }
+    /**
+     * @return the objectUUID
+     */
+    public UUID getObjectUUID() {
+        return objectUUID;
     }
 }

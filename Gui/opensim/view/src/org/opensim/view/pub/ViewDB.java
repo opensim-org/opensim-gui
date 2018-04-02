@@ -1348,6 +1348,12 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       return mapModelsToJsons.get(aModel);
    }
    
+   public void sendVisualizerCommand(JSONObject jsonMessage){
+       if (websocketdb != null){
+           websocketdb.broadcastMessageJson(jsonMessage, null);
+       }
+   }
+   
    public void updateComponentDisplay(Model model, Component mc, AbstractProperty prop) {
        if (websocketdb != null){
            if (applyAppearanceChange){
