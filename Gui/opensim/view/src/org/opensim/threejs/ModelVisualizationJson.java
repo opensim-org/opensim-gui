@@ -75,6 +75,21 @@ import org.opensim.view.pub.OpenSimDB;
  * @author Ayman
  */
 public class ModelVisualizationJson extends JSONObject {
+
+    /**
+     * @return the showCom
+     */
+    public boolean isShowCom() {
+        return showCom;
+    }
+
+    /**
+     * @param showCom the showCom to set
+     */
+    public void setShowCom(boolean showCom) {
+        this.showCom = showCom;
+    }
+    private final Model model;
     private State state;
     private final HashMap<Integer, PhysicalFrame> mapBodyIndicesToFrames = new HashMap<Integer, PhysicalFrame>();
     private final HashMap<Integer, JSONObject> mapBodyIndicesToJson = new HashMap<Integer, JSONObject>();
@@ -114,7 +129,9 @@ public class ModelVisualizationJson extends JSONObject {
     // When wrapping comes in/out
     private final HashMap<GeometryPath, JSONArray> pathsWithWrapping = new HashMap<GeometryPath, JSONArray>();
     private final HashMap<Frame, VisualizerFrame> visualizerFrames = new HashMap<Frame, VisualizerFrame>();
-
+    private ArrayList<VisualizerAddOn> visualizerAddOns = new ArrayList<VisualizerAddOn>();
+    private boolean showCom = true;
+    
     public Boolean getFrameVisibility(Frame b) {
         return visualizerFrames.get(b).visible;
     }
@@ -177,6 +194,12 @@ public class ModelVisualizationJson extends JSONObject {
         return msg;
     }
 
+    private void addCusomAddons() {
+        VisualizerAddOnCom comVizAddOn = new VisualizerAddOnCom();
+        comVizAddOn.init(this);
+        visualizerAddOns.add(comVizAddOn);
+    }
+
      // The following inner class and Map are used to cache "computed" pathpoints to speed up 
     // recomputation on the fly
     class ComputedPathPointInfo {
@@ -202,12 +225,14 @@ public class ModelVisualizationJson extends JSONObject {
         // implicit super()
         if (verbose)
             System.out.println("start building json for "+model.getName());
+        this.model = model;
         movable = (model instanceof ModelForExperimentalData);
         createModelJsonNode(); // Model node
         createJsonForModel(model);
         ready = true;
         if (verbose)
             System.out.println("finished building json for "+model.getName());
+        addCusomAddons();
     }
     private void createJsonForModel(Model model) {
         modelGroundJson = processGroundFrame(model);
@@ -408,13 +433,21 @@ public class ModelVisualizationJson extends JSONObject {
 
     }
 
+    public Model getModel() {
+        return this.model;
+    }
+    
+    public State getState() {
+        return state;
+    }
+    
     private UUID addtoFrameJsonObject(DecorativeGeometry dg, String geomName, UUID uuid, UUID uuid_mat, JSONArray mobody_objects, Component opensimComponent, boolean visible) {
-        Map<String, Object> obj_json = createJSONObjectFormDisplayGeometry(geomName, opensimComponent, uuid, uuid_mat, dg, mobody_objects, visible);
+        Map<String, Object> obj_json = createJSONObjectFromDisplayGeometry(geomName, opensimComponent, uuid, uuid_mat, dg, mobody_objects, visible);
         UUID mesh_uuid = UUID.fromString((String) obj_json.get("uuid"));
         return mesh_uuid;
     }   
 
-    protected JSONObject createJSONObjectFormDisplayGeometry(String geomName, Component opensimComponent, UUID uuid_geom, UUID uuid_mat, 
+    protected JSONObject createJSONObjectFromDisplayGeometry(String geomName, Component opensimComponent, UUID uuid_geom, UUID uuid_mat, 
             DecorativeGeometry dg, JSONArray mobody_objects, boolean visible) {
         UUID mesh_uuid = UUID.randomUUID();
         JSONObject obj_json = new JSONObject();
@@ -556,6 +589,10 @@ public class ModelVisualizationJson extends JSONObject {
                 String colorString = JSONUtilities.mapColorToRGBA(pathColor);
                 pathUpdate_json.put("color", colorString);
                 geompaths_json.add(pathUpdate_json);
+            }
+            // Have AddOns update their tranasforms
+            for (VisualizerAddOn nextAddOn:visualizerAddOns){
+                nextAddOn.updateVisuals(bodyTransforms_json);
             }
             // Process motion displayers
             for (MotionDisplayer nextMotionDisplayer: motionDisplayers){
@@ -1201,7 +1238,7 @@ public class ModelVisualizationJson extends JSONObject {
         if (bodyJson.get("children")==null)
            bodyJson.put("children", new JSONArray());
         //String geomName, Component opensimComponent, UUID uuid, UUID uuid_mat, DecorativeGeometry dg, JSONArray mobody_objects
-        JSONObject retObject =  createJSONObjectFormDisplayGeometry(geomName, marker, markerGeomUUID, markerMatUUID, dg, (JSONArray) bodyJson.get("children"), true);
+        JSONObject retObject =  createJSONObjectFromDisplayGeometry(geomName, marker, markerGeomUUID, markerMatUUID, dg, (JSONArray) bodyJson.get("children"), true);
         // Establish mapping between Marker and uuid for selection/display purposes
         UUID objectUuid = UUID.fromString((String) retObject.get("uuid"));
         retObject.put("parent", bodyJson.get("uuid"));
@@ -1361,12 +1398,6 @@ public class ModelVisualizationJson extends JSONObject {
         // Need to update the GometryPath control polygon to remove the ppt and communicate the new one to visulizer
     }
 
-    /**
-     * @return the state
-     */
-    public State getState() {
-        return state;
-    }
     /* Utility to allow utility visualization classes to provide their corresponding
      * Geometry, Material and Obbjects to the Model Json structure.
     */
@@ -1375,9 +1406,9 @@ public class ModelVisualizationJson extends JSONObject {
             JSONObject materialJson,
             JSONObject sceneGraphObjectJson){
         UUID obj_uuid = UUID.randomUUID();
-        JSONObject bodyJson = mapBodyIndicesToJson.get(bdy.getMobilizedBodyIndex());
         json_geometries.add(geometryJson);
         json_materials.add(materialJson);
+        JSONObject bodyJson = mapBodyIndicesToJson.get(bdy.getMobilizedBodyIndex());
         if (bodyJson.get("children")==null)
             bodyJson.put("children", new JSONArray());
         ((JSONArray)bodyJson.get("children")).add(sceneGraphObjectJson);
