@@ -690,7 +690,8 @@ public class MotionControlJPanel extends javax.swing.JToolBar
                ModelMotionPair currentModelMotionPair = mdb.getCurrentMotion(i);
                Storage mot = currentModelMotionPair.motion;
                MotionsDB.getInstance().getDisplayerForMotion(mot).setupMotionDisplay();
-               ArrayList<MotionDisplayer> associatedDisplayers = getMasterMotion().getDisplayer(0).getAssociatedMotions();
+               //
+               ArrayList<MotionDisplayer> associatedDisplayers = MotionsDB.getInstance().getDisplayerForMotion(mot).getAssociatedMotions();
                // Find associated motions as well and re-associate them
                for (int j=0; j<associatedDisplayers.size(); j++)
                    associatedDisplayers.get(j).setupMotionDisplay();
