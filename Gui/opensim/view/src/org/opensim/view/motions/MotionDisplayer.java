@@ -973,7 +973,7 @@ public class MotionDisplayer {
             UUID uuidForMarkerGeometry = UUID.randomUUID();
             getExperimenalMarkerGeometryJson().put("uuid", uuidForMarkerGeometry.toString());
             getExperimenalMarkerGeometryJson().put("type", "SphereGeometry");
-            getExperimenalMarkerGeometryJson().put("radius", 15);
+            getExperimenalMarkerGeometryJson().put("radius", 5);
             getExperimenalMarkerGeometryJson().put("name", "DefaultExperimentalMarker");
             JSONArray json_geometries = (JSONArray) modelVisJson.get("geometries");
             json_geometries.add(getExperimenalMarkerGeometryJson());
