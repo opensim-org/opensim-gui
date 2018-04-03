@@ -23,12 +23,16 @@
 package org.opensim.view.nodes;
 
 import java.awt.event.ActionEvent;
+import org.json.simple.JSONObject;
 import org.openide.nodes.Node;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.BooleanStateAction;
+import org.opensim.modeling.Body;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.threejs.BodyVisualizationJson;
+import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.BodyDisplayer;
 //import org.opensim.view.FrameToggleVisibilityAction;
 import org.opensim.view.ExplorerTopComponent;
@@ -50,7 +54,10 @@ public final class BodyToggleCOMAction extends BooleanStateAction {
                 this.ShowCMForOneBodyNode( (OneBodyNode)selectedNode, newState, false );
             else if( selectedNode instanceof BodiesNode ){
                 Model model=((BodiesNode)selectedNode).getModelForNode();
-                ViewDB.getInstance().getModelVisuals(model).setShowCOM(newState);
+                ModelVisualizationJson modelVis = ViewDB.getInstance().getModelVisualizationJson(model);
+                modelVis.setShowCom(newState);
+                JSONObject command = modelVis.createSetVisibilityCommandForUUID(newState, modelVis.getComObjectUUID());
+                ViewDB.getInstance().sendVisualizerCommand(command);
             }
         }
         super.setBooleanState( newState );
@@ -76,14 +83,16 @@ public final class BodyToggleCOMAction extends BooleanStateAction {
    //-------------------------------------------------------------------------
    public static void  ShowCMForBody( OpenSimObject openSimObjectAssociatedWithBody, boolean showCMIsTrueHideIsFalse, boolean renderAll )
    {
-     /*
-      BodyDisplayer rep = BodyToggleFrameAction.GetBodyDisplayerForBody( openSimObjectAssociatedWithBody );
-      if( rep != null )
-      {
-          rep.setShowCOM( showCMIsTrueHideIsFalse ); 
+      Body bdy = Body.safeDownCast(openSimObjectAssociatedWithBody);
+      ModelVisualizationJson modelVis = ViewDB.getInstance().getModelVisualizationJson(bdy.getModel());
+      BodyVisualizationJson rep = modelVis.getBodyRep(bdy);
+      if( rep != null ){
+          rep.setShowCom(showCMIsTrueHideIsFalse ); 
+          JSONObject command = modelVis.createSetVisibilityCommandForUUID(showCMIsTrueHideIsFalse, rep.getComObjectUUID());
+          ViewDB.getInstance().sendVisualizerCommand(command);
           if( renderAll ) ViewDB.renderAll();
       }    
-      */
+      
    }
     
     
@@ -107,21 +116,18 @@ public final class BodyToggleCOMAction extends BooleanStateAction {
     
     public boolean isEnabled() {
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
-        //if(selected.length!=1) return false; // only if a single item is selected
+        if(selected.length!=1) return false; // only if a single item is selected
         // Action shouldn't be available otherwise
-        /* FIX40
+        Model model=((OpenSimNode)selected[0]).getModelForNode();
         if( selected[0] instanceof OneBodyNode ){
             OneBodyNode dNode = (OneBodyNode)selected[0];
-            BodyDisplayer rep = null;//BodyToggleFrameAction.GetBodyDisplayerForBody( dNode.getOpenSimObject() );
-            if( rep != null ) super.setBooleanState( rep.isShowCOM() );
-            return true;
+            BodyVisualizationJson rep = ViewDB.getInstance().getModelVisualizationJson(model).getBodyRep(dNode.comp);
+            if( rep != null ) super.setBooleanState( rep.isShowCom());
         }
         else if (selected[0] instanceof BodiesNode){
-                Model model=((BodiesNode)selected[0]).getModelForNode();
-                super.setBooleanState( ViewDB.getInstance().getModelVisuals(model).isShowCOM() );
-                return true;
-        } */
-        return false;
+                super.setBooleanState( ViewDB.getInstance().getModelVisualizationJson(model).isShowCom());
+        }
+        return true;
     }
     
 

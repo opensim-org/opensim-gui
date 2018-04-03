@@ -106,6 +106,24 @@ public class OneBodyNode extends OneFrameNode{
     public Image getOpenedIcon(int i) {
         return getIcon(i);
     }
+    
+    public Action[] getActions(boolean b) {
+        Action[] superActions = (Action[]) super.getActions(b);        
+        // Arrays are fixed size, onvert to a List
+        
+        List<Action> actions = java.util.Arrays.asList(superActions);
+        // Create new Array of proper size
+        Action[] retActions = new Action[actions.size()+1];
+        actions.toArray(retActions);
+        try {
+            // append new command to the end of the list of actions
+            retActions[actions.size()] = (BodyToggleCOMAction) BodyToggleCOMAction.findObject(
+                     (Class)Class.forName("org.opensim.view.nodes.BodyToggleCOMAction"), true);
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return retActions;
+    }
 
 
 }
