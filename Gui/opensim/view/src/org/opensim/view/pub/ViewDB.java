@@ -1866,10 +1866,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     * Show only the passed in model and hide all others.
     */
    public void isolateModel(Model openSimModel) {
-      Enumeration<Model> models=mapModelsToVisuals.keys();
+      Enumeration<Model> models=mapModelsToJsons.keys();
       while(models.hasMoreElements()){
          Model next = models.nextElement();
-         SingleModelVisuals vis = mapModelsToVisuals.get(next);
          toggleModelDisplay(next, (openSimModel==next));
       }
       repaintAll();
