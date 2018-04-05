@@ -43,6 +43,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import org.opensim.modeling.Analysis;
 import org.opensim.modeling.AnalysisSet;
+import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.editors.ObjectEditDialogMaker;
 
 //===========================================================================
@@ -254,9 +255,11 @@ public class AnalysisSetPanel extends javax.swing.JPanel implements Observer {
    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
       if(currentSelectedRow>=0) {
          Analysis analysis = toolModel.getAnalysisSet().get(currentSelectedRow);
-         Analysis analysisCopy = Analysis.safeDownCast(analysis.clone());
+         OpenSimObject analysisCopy = analysis.clone();
          ObjectEditDialogMaker editorDialog = new ObjectEditDialogMaker(analysis, true, "OK");
          if(!editorDialog.process()) {
+            //System.out.println("analysis concrete type"+analysis.getConcreteClassName());
+            //System.out.println("analysisCopy concrete type"+analysisCopy.getConcreteClassName());
             analysis.assign(analysisCopy);
          } else {
             // If edit was successful, notify observers to enable "Run"

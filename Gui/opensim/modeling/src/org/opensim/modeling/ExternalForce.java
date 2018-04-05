@@ -149,12 +149,8 @@ public class ExternalForce extends Force {
     return opensimSimulationJNI.ExternalForce_append_point_expressed_in_body(swigCPtr, this, value);
   }
 
-  public void constructProperty_point_expressed_in_body() {
-    opensimSimulationJNI.ExternalForce_constructProperty_point_expressed_in_body__SWIG_0(swigCPtr, this);
-  }
-
   public void constructProperty_point_expressed_in_body(String initValue) {
-    opensimSimulationJNI.ExternalForce_constructProperty_point_expressed_in_body__SWIG_1(swigCPtr, this, initValue);
+    opensimSimulationJNI.ExternalForce_constructProperty_point_expressed_in_body(swigCPtr, this, initValue);
   }
 
   public String get_point_expressed_in_body() {
@@ -363,14 +359,6 @@ public class ExternalForce extends Force {
 
   public ExternalForce(SWIGTYPE_p_SimTK__Xml__Element aNode) {
     this(opensimSimulationJNI.new_ExternalForce__SWIG_8(SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode)), true);
-  }
-
-  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
-    opensimSimulationJNI.ExternalForce_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
-  }
-
-  public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
-    opensimSimulationJNI.ExternalForce_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
   }
 
   public void setDataSource(Storage dataSource) {

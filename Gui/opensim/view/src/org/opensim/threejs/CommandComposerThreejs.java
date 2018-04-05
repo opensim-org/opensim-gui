@@ -53,8 +53,8 @@ public class CommandComposerThreejs {
 
     static public JSONObject createTranslateObjectCommandJson(Vec3 newValue, UUID objectuuid) {
         JSONObject commandJson = new JSONObject();
-        commandJson.put("type", "SetPositionCommand");
-        commandJson.put("name", "Set Position");        
+        commandJson.put("type", "TranslatePositionCommand");
+        commandJson.put("name", "Translate Position");        
         JSONArray jsonVec3 = new JSONArray();
         jsonVec3.add(newValue.get(0));
         jsonVec3.add(newValue.get(1));

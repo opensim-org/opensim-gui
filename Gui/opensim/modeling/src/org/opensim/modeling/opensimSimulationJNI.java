@@ -1747,8 +1747,7 @@ public class opensimSimulationJNI {
   public final static native long ExternalForce_upd_point_expressed_in_body__SWIG_0(long jarg1, ExternalForce jarg1_, int jarg2);
   public final static native void ExternalForce_set_point_expressed_in_body__SWIG_0(long jarg1, ExternalForce jarg1_, int jarg2, String jarg3);
   public final static native int ExternalForce_append_point_expressed_in_body(long jarg1, ExternalForce jarg1_, String jarg2);
-  public final static native void ExternalForce_constructProperty_point_expressed_in_body__SWIG_0(long jarg1, ExternalForce jarg1_);
-  public final static native void ExternalForce_constructProperty_point_expressed_in_body__SWIG_1(long jarg1, ExternalForce jarg1_, String jarg2);
+  public final static native void ExternalForce_constructProperty_point_expressed_in_body(long jarg1, ExternalForce jarg1_, String jarg2);
   public final static native String ExternalForce_get_point_expressed_in_body__SWIG_1(long jarg1, ExternalForce jarg1_);
   public final static native long ExternalForce_upd_point_expressed_in_body__SWIG_1(long jarg1, ExternalForce jarg1_);
   public final static native void ExternalForce_set_point_expressed_in_body__SWIG_1(long jarg1, ExternalForce jarg1_, String jarg2);
@@ -1801,8 +1800,6 @@ public class opensimSimulationJNI {
   public final static native long new_ExternalForce__SWIG_6(long jarg1, Storage jarg1_, String jarg2);
   public final static native long new_ExternalForce__SWIG_7(long jarg1, Storage jarg1_);
   public final static native long new_ExternalForce__SWIG_8(long jarg1);
-  public final static native void ExternalForce_updateFromXMLNode__SWIG_0(long jarg1, ExternalForce jarg1_, long jarg2, int jarg3);
-  public final static native void ExternalForce_updateFromXMLNode__SWIG_1(long jarg1, ExternalForce jarg1_, long jarg2);
   public final static native void ExternalForce_setDataSource(long jarg1, ExternalForce jarg1_, long jarg2, Storage jarg2_);
   public final static native String ExternalForce_getDataSourceName(long jarg1, ExternalForce jarg1_);
   public final static native void ExternalForce_setAppliedToBodyName(long jarg1, ExternalForce jarg1_, String jarg2);

@@ -159,12 +159,10 @@ public class IKToolModel extends Observable implements Observer {
                     addMotion = false;
                 }
             }
-            // Create a new States storage and load it in GUI 
-            // this should make playback faster since no need to assemble
-            Storage ikmotion = new Storage(512, "IKResults"); // Java-side copy
-            getOriginalModel().formStateStorage(
-                    animationCallback.getStorage(),
-                    ikmotion, false);
+            // We don't create full state to avoid polluting results
+            // This will be done internally in MotionDisplayer
+            Storage ikmotion = new Storage(animationCallback.getStorage()); // Java-side copy
+            ikmotion.setName("IKResults");
             updateMotion(ikmotion);
 
             setExecuting(false);

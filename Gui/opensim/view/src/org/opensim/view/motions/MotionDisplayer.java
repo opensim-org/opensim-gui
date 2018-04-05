@@ -139,8 +139,8 @@ public class MotionDisplayer {
     OpenSimvtkGlyphCloud  bodyForcesRep = null;
     OpenSimvtkGlyphCloud  generalizedForcesRep = null;
     private OpenSimvtkGlyphCloud  markersRep = null;
-    private Storage simmMotionData;
-    private Storage motionAsStates;
+    private final Storage simmMotionData; // Storage used to provide data
+    private Storage motionAsStates=null; // In case we're playing back states this is complete State on std. layout for internal use only
     private Model model;
     OpenSimContext dContext; 
     ArrayStr stateNames;
@@ -393,13 +393,14 @@ public class MotionDisplayer {
         if (simmMotionData == null)
            return;
 
-
+        // We create a temporary array to hold interpolated values, in case Slider doesn't coincide with data
         colNames = simmMotionData.getColumnLabels();
         int numColumnsIncludingTime = colNames.getSize();
-        //for(int i=0; i< numColumnsIncludingTime; i++ )
-        //    System.out.print(" "+colNames.get(i));
-        //System.out.println("");
         interpolatedStates = new ArrayDouble(0.0, numColumnsIncludingTime-1);
+        // If provided simmMotionData is empty or have one frame, then we're building it live and can't
+        // convert to full State form, will keep using old mapping until Tool run is finished
+        // Performance will be limited by the running computation anyway.
+        boolean liveMotion = simmMotionData.getSize()<=1;
         //AddMotionObjectsRep(model);
         if (simmMotionData instanceof AnnotatedMotion){
             // Add place hoders for markers
@@ -437,6 +438,16 @@ public class MotionDisplayer {
            statesFile = true;
            setRenderMuscleActivations(true);
         } 
+        else if (!liveMotion){ // This is the most common handling of old Result files
+            // create a local Storage and use that to drive animation
+            motionAsStates = new Storage();
+            model.formStateStorage(simmMotionData, motionAsStates, false);
+            statesFile = true;
+            // Fix size of temporary array to hold interpolated values
+            numColumnsIncludingTime = motionAsStates.getColumnLabels().getSize();
+            interpolatedStates = new ArrayDouble(0.0, numColumnsIncludingTime-1);
+            setRenderMuscleActivations(true);
+        }
         else {
            // We should build sorted lists of object names so that we can find them easily
            for(int i=0; i < numColumnsIncludingTime; i++){
@@ -660,7 +671,13 @@ public class MotionDisplayer {
       long before = 0, after=0;
       if (profile)
           before =System.nanoTime();
-      StateVector states=simmMotionData.getStateVector(currentFrame);
+      StateVector states;
+      if (motionAsStates!=null){
+          states = motionAsStates.getStateVector(currentFrame);
+      }
+      else
+          states=simmMotionData.getStateVector(currentFrame);
+      
       applyStatesToModel(states.getData(), states.getTime());
       ViewDB.getInstance().updateAnnotationAnchors();
       if (profile) {
@@ -677,9 +694,11 @@ public class MotionDisplayer {
       // if we're playing this motion synced with another motion)
       double clampedTime = (currentTime < simmMotionData.getFirstTime()) ? simmMotionData.getFirstTime() : 
                            (currentTime > simmMotionData.getLastTime()) ? simmMotionData.getLastTime() : currentTime;
-      //OpenSimDB.getInstance().getContext(model).getCurrentStateRef().setTime(clampedTime);
-      simmMotionData.getDataAtTime(clampedTime, interpolatedStates.getSize(), interpolatedStates);
-
+      if (motionAsStates ==null || simmMotionData instanceof AnnotatedMotion)
+            simmMotionData.getDataAtTime(clampedTime, interpolatedStates.getSize(), interpolatedStates);
+      else
+            motionAsStates.getDataAtTime(clampedTime, interpolatedStates.getSize(), interpolatedStates);
+         
       applyStatesToModel(interpolatedStates, clampedTime);
       // Repeat for associated motions
       for (MotionDisplayer assocMotion:associatedMotions){
@@ -788,32 +807,14 @@ public class MotionDisplayer {
      // Here handling a motion file with potentially extra columns for Forces, Markers
       OpenSimContext context = OpenSimDB.getInstance().getContext(model);
       
-      if(statesFile) {
+      if(statesFile || motionAsStates!=null) {
           // FIX40 speed this up by using map or YIndex
           context.getCurrentStateRef().setTime(assocTime);
           model.setStateVariableValues(context.getCurrentStateRef(), states.getAsVector());
+          // Assemble to satify constraints. Fixes issue #617
+          model.assemble(context.getCurrentStateRef());
           context.realizeVelocity();
       } else {
-         boolean realize=false;
-         int which=-1;
-         for(int i=0; i<genCoordColumns.size(); i++) {
-            Coordinate coord=(Coordinate)(genCoordColumns.get(i).object);
-            if(!context.getLocked(coord)) {
-               int index = genCoordColumns.get(i).stateVectorIndex;
-               context.setValue(coord, states.getitem(index), false);
-               realize=true;
-               which=i;
-            }
-            // Make sure we realize once IF a coordinate has bben set
-            if (i==genCoordColumns.size()-1 && realize){
-                coord=(Coordinate)(genCoordColumns.get(which).object);
-                int index = genCoordColumns.get(which).stateVectorIndex;
-                context.setValue(coord, states.getitem(index), true);
-            }
-         }
-         // update states to make sure constraints are valid
-         //context.getStates(statesBuffer);
-         //OpenSim20 model.getDynamicsEngine().computeConstrainedCoordinates(statesBuffer);
          // Any other states including muscles
          for(int i=0; i<anyStateColumns.size(); i++) {
               int index = anyStateColumns.get(i).stateVectorIndex;
@@ -823,66 +824,6 @@ public class MotionDisplayer {
               //int bufferIndex = ((Integer)o).intValue();
               model.setStateVariableValue(context.getCurrentStateRef(), canonicalStateNames.get(i), newValue);
               //statesBuffer[bufferIndex]=newValue;
-         }
-         /*
-         for(int i=0; i<segmentMarkerColumns.size(); i++) {
-            int markerIndex = ((Integer)(segmentMarkerColumns.get(i).object)).intValue();
-            int index = segmentMarkerColumns.get(i).stateVectorIndex;
-            markersRep.setLocation(markerIndex, states.getitem(index), states.getitem(index+1), states.getitem(index+2));
-         }
-         if(segmentMarkerColumns.size()>0) markersRep.setModified();
-         */
-         Ground gnd = model.getGround();
- 
-         for(int i=0; i<genCoordForceColumns.size(); i++) {
-            int forceIndex = ((Integer)(genCoordForceColumns.get(i).object)).intValue();
-            int index = genCoordForceColumns.get(i).stateVectorIndex;
-            SimbodyEngine de = model.getSimbodyEngine();
-            Body body = mapIndicesToBodies.get(index+1);
-            TransformAxis dof = mapIndicesToDofs.get(index+1);
-            Vec3 vOffset = new Vec3();
-            double[] offset = new double[3];
-            double[] gOffset = new double[3];
-            dof.getAxis(vOffset); // in parent frame, right?
-            double magnitude = states.getitem(index);
-            for (int j=0; j<3; j++)
-               offset[j] = vOffset.get(j) * magnitude * 10.0; // * 10.0 because test data is small
-            context.transform(body, offset, gnd, gOffset);
-            generalizedForcesRep.setNormalAtLocation(forceIndex, gOffset[0], gOffset[1], gOffset[2]);
-            ///vOffset = dof.getJoint().getLocationInChild();
-            for (int ix=0; ix<3; ix++) offset[ix]=vOffset.get(ix);
-            context.transformPosition(body, offset, gOffset);
-            generalizedForcesRep.setLocation(forceIndex, gOffset[0], gOffset[1], gOffset[2]);
-         }
-         if(genCoordForceColumns.size()>0) {
-            generalizedForcesRep.setModified();
-         }
-         for(int i=0; i<segmentForceColumns.size(); i++) {
-            int forceIndex = ((Integer)(segmentForceColumns.get(i).object)).intValue();
-            int index = segmentForceColumns.get(i).stateVectorIndex;
-            Body body = mapIndicesToBodies.get(index+1);
-            double[] offset = new double[3];
-            double[] gOffset = new double[3];
-            for (int j=0; j<3; j++)
-               offset[j] = states.getitem(index+j);
-            if (body.equals(gnd)) {
-               groundForcesRep.setNormalAtLocation(forceIndex, offset[0], offset[1], offset[2]);
-            } else {
-               context.transform(body, offset, gnd, gOffset);
-               bodyForcesRep.setNormalAtLocation(forceIndex, gOffset[0], gOffset[1], gOffset[2]);
-            }
-            for (int j=0; j<3; j++)
-               offset[j] = states.getitem(index+j+3);
-            if (body.equals(gnd)) {
-               groundForcesRep.setLocation(forceIndex, offset[0], offset[1], offset[2]);
-            } else {
-               context.transformPosition(body, offset, gOffset);
-               bodyForcesRep.setLocation(forceIndex, gOffset[0], gOffset[1], gOffset[2]);
-            }
-         }
-         if(segmentForceColumns.size()>0) {
-            groundForcesRep.setModified();
-            bodyForcesRep.setModified();
          }
       }
       if (profile) {

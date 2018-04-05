@@ -65,6 +65,9 @@ public class FileOpenOsimModelAction extends CallableSystemAction {
                                 "Could not construct a model from " + fileName + ". Possible reasons: syntax error or unsupported format.", ex);
 
                     }
+                    finally{
+                        progressHandle.finish();
+                    }
 
                 }
             }

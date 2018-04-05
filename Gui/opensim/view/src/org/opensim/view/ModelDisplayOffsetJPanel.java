@@ -50,21 +50,13 @@ public class ModelDisplayOffsetJPanel extends javax.swing.JPanel
     
     private Model dModel;
     private String modelName;
-    private vtkMatrix4x4 offset;
-    private vtkMatrix4x4 saveOffset;
     private double saveOpacity;
     private Vec3 initialOffset = new Vec3(0.);
+    private double lastX, lastY, lastZ = 0.0;
     /** Creates new form ModelDisplayOffsetJPanel */
     public ModelDisplayOffsetJPanel(Model abstractModel) {
         rep = ViewDB.getInstance().getModelVisuals(abstractModel);
         modelJson = ViewDB.getInstance().getModelVisualizationJson(abstractModel);
-        if (ViewDB.isVtkGraphicsAvailable()){
-            offset= ViewDB.getInstance().getModelVisualsTransform(rep);
-            // Save offsets and opacity incase we need to restore them
-            saveOffset=new vtkMatrix4x4();
-            saveOffset.DeepCopy(offset);
-            saveOpacity = ViewDB.getInstance().getNominalModelOpacity(abstractModel);
-        }
         this.dModel = abstractModel;
         modelName = abstractModel.getName();
 
@@ -165,16 +157,24 @@ public class ModelDisplayOffsetJPanel extends javax.swing.JPanel
      * Callback when slide is moved 
      **/
     public void stateChanged(ChangeEvent e) {
+        // Since offset value is now off "current" value, we only apply the difference
+        // between currentValue and last saved one.
         Vec3 offsetVec3 = new Vec3(0.);
         if (e.getSource().equals(textSliderJPanel1.getJXSlider())){
             //offset.SetElement(0, 3, textSliderJPanel1.getTheValue());
-            offsetVec3.set(0, textSliderJPanel1.getTheValue()*ModelVisualizationJson.getVisScaleFactor());
+            double newValue = textSliderJPanel1.getTheValue();
+            offsetVec3.set(0, (newValue - lastX)*ModelVisualizationJson.getVisScaleFactor());
+            lastX = newValue;
         } else if (e.getSource().equals(textSliderJPanel2.getJXSlider())){
             //offset.SetElement(1, 3, textSliderJPanel2.getTheValue());
-            offsetVec3.set(1, textSliderJPanel2.getTheValue()*ModelVisualizationJson.getVisScaleFactor());
+            double newValue = textSliderJPanel2.getTheValue();
+            offsetVec3.set(1, (newValue - lastY)*ModelVisualizationJson.getVisScaleFactor());
+            lastY = newValue;
         } else if (e.getSource().equals(textSliderJPanel3.getJXSlider())){
+            double newValue = textSliderJPanel3.getTheValue();
             //offset.SetElement(2, 3, textSliderJPanel3.getTheValue());
-             offsetVec3.set(2, textSliderJPanel3.getTheValue()*ModelVisualizationJson.getVisScaleFactor());
+             offsetVec3.set(2, (newValue - lastZ)*ModelVisualizationJson.getVisScaleFactor());
+             lastZ = newValue;
        }
         // Apply transform on screen
         // pass offsetVec3 to ViewDB to apply it
@@ -189,10 +189,6 @@ public class ModelDisplayOffsetJPanel extends javax.swing.JPanel
     private void computeDisplacementBounds() {
           double[] bounds = ViewDB.getInstance().getSceneBounds();
           
-          if (ViewDB.isVtkGraphicsAvailable()){
-              for (int i=0; i<3; i++)
-                  initialOffset.set(i, offset.GetElement(i, 3));
-          };
           // Modify bounds to make the sliders ceneter around 0
           for(int i=0; i<3; i++){
               double max=Math.max(Math.abs(bounds[2*i]), Math.abs(bounds[2*i+1]));
@@ -213,10 +209,6 @@ public class ModelDisplayOffsetJPanel extends javax.swing.JPanel
      }
 
     public void restore() {
-        ViewDB.getInstance().setNominalModelOpacity(dModel, saveOpacity);
-        if (ViewDB.isVtkGraphicsAvailable()){
-            ViewDB.getInstance().setModelVisualsTransform(rep, saveOffset);
-        }
         ViewDB.getInstance().repaintAll();
     }
     
