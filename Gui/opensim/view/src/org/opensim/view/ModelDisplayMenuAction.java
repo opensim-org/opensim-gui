@@ -32,7 +32,6 @@ import org.openide.util.actions.Presenter;
 import org.opensim.view.nodes.IsolateCurrentModelAction;
 
 public final class ModelDisplayMenuAction extends CallableSystemAction implements Presenter.Popup {
-    static boolean noGFX=false;
     
     public boolean isEnabled() {
         return true;
@@ -58,19 +57,17 @@ public final class ModelDisplayMenuAction extends CallableSystemAction implement
 
    public JMenuItem getPopupPresenter() {
       JMenu displayMenu = new JMenu("Display");
-      if (noGFX)
-         return displayMenu;
       try {
       
          displayMenu.add(new JMenuItem(
-                 (ObjectDisplayShowAction) ObjectDisplayShowAction.findObject(
-                 (Class)Class.forName("org.opensim.view.ObjectDisplayShowAction"), true)));
+                 (ModelDisplayShowAction) ModelDisplayShowAction.findObject(
+                 (Class)Class.forName("org.opensim.view.ModelDisplayShowAction"), true)));
          displayMenu.add(new JMenuItem(
                 (IsolateCurrentModelAction) IsolateCurrentModelAction.findObject(
                         (Class)Class.forName("org.opensim.view.nodes.IsolateCurrentModelAction"), true)));
          displayMenu.add(new JMenuItem(
-                 (ObjectDisplayHideAction) ObjectDisplayHideAction.findObject(
-                 (Class)Class.forName("org.opensim.view.ObjectDisplayHideAction"), true)));
+                 (ModelDisplayHideAction) ModelDisplayHideAction.findObject(
+                 (Class)Class.forName("org.opensim.view.ModelDisplayHideAction"), true)));
          displayMenu.add(new JMenuItem(
                 (ModelDisplayEditAction) ModelDisplayEditAction.findObject(
                         (Class)Class.forName("org.opensim.view.ModelDisplayEditAction"), true)));       
