@@ -1068,7 +1068,7 @@ public class MotionDisplayer {
             // Find first ExperimentalMarker and change its Material, this will affect all of them
             if (expObj instanceof ExperimentalMarker){
                 UUID expMarkerUUID = mapComponentToUUID.get(expObj).get(0); 
-                ViewDB.getInstance().applyScaleToObjectByUUID(model, expMarkerUUID, experimentalMarkerScaleFactor);  
+                ViewDB.getInstance().scaleGeometryOfObjectByUUID(model, expMarkerUUID, experimentalMarkerScaleFactor);  
             }
         }
     }
@@ -1078,13 +1078,14 @@ public class MotionDisplayer {
     }
 
     public void setExperimentalForceScaleFactor(double newFactor) {
+        double scaleRatio = newFactor /this.experimentalForceScaleFactor;
         this.experimentalForceScaleFactor = newFactor;
          Set<OpenSimObject> expermintalDataObjects = mapComponentToUUID.keySet();
          for (OpenSimObject expObj : expermintalDataObjects){
             // Find first ExperimentalMarker and change its Material, this will affect all of them
             if (expObj instanceof MotionObjectPointForce){
                 UUID expForceUUID = mapComponentToUUID.get(expObj).get(0); 
-                ViewDB.getInstance().applyScaleToObjectByUUID(model, expForceUUID, experimentalForceScaleFactor);  
+                ViewDB.getInstance().scaleGeometryOfObjectByUUID(model, expForceUUID, experimentalForceScaleFactor);  
             }
         }
    }
