@@ -51,6 +51,7 @@ import org.opensim.modeling.ConditionalPathPoint;
 import org.opensim.modeling.DecorativeGeometry;
 import org.opensim.modeling.Frame;
 import org.opensim.modeling.FrameGeometry;
+import org.opensim.modeling.Geometry;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
