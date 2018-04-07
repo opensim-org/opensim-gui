@@ -78,15 +78,20 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
     
     @Override
     public void implementConeGeometry(DecorativeCone arg0) {
+        JSONObject dg_json = createJsonForDecorativeCone(arg0);
+        jsonArr.add(dg_json);     
+        createMaterialJson(arg0, true);
+    }
+
+    public JSONObject createJsonForDecorativeCone(DecorativeCone arg0) {
         JSONObject dg_json = new JSONObject();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "CylinderGeometry");
-	dg_json.put("radiusTop", 0.);
-	dg_json.put("radiusBottom", arg0.getBaseRadius()*visualizerScaleFactor);
-	dg_json.put("widthSegments", 32);
-	dg_json.put("heightSegments", 1);
-        jsonArr.add(dg_json);     
-        createMaterialJson(arg0, true);
+        dg_json.put("radiusTop", 0.);
+        dg_json.put("radiusBottom", arg0.getBaseRadius()*visualizerScaleFactor);
+        dg_json.put("widthSegments", 32);
+        dg_json.put("heightSegments", 1);
+        return dg_json;
     }
 
     @Override
@@ -303,17 +308,23 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 
     @Override
     public void implementSphereGeometry(DecorativeSphere arg0) {
+        JSONObject dg_json = createJsonForDecorativeSphere(arg0);
+        jsonArr.add(dg_json);        
+        createMaterialJson(arg0, true);
+    }
+
+    public JSONObject createJsonForDecorativeSphere(DecorativeSphere arg0) {
         JSONObject dg_json = new JSONObject();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "SphereGeometry");
-	dg_json.put("radius", arg0.getRadius()*visualizerScaleFactor);
-	dg_json.put("widthSegments", 32);
-	dg_json.put("heightSegments", 16);
+        dg_json.put("radius", arg0.getRadius()*visualizerScaleFactor);
+        dg_json.put("widthSegments", 32);
+        dg_json.put("heightSegments", 16);
         if (quadrants.equals("")){
-           dg_json.put("phiStart", 0);
-           dg_json.put("phiLength", 6.28);
-           dg_json.put("thetaStart", 0);
-           dg_json.put("thetaLength", 3.14159);
+            dg_json.put("phiStart", 0);
+            dg_json.put("phiLength", 6.28);
+            dg_json.put("thetaStart", 0);
+            dg_json.put("thetaLength", 3.14159);
         }
         else{
             if (quadrants.contains("x")){
@@ -333,10 +344,9 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
                     dg_json.put("phiStart", 1.5709);
                 else
                     dg_json.put("phiStart", -1.5709);
-                }
+            }
         }
-        jsonArr.add(dg_json);        
-        createMaterialJson(arg0, true);
+        return dg_json;
     }
 
     @Override
@@ -356,14 +366,20 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 
     @Override
     public void implementCylinderGeometry(DecorativeCylinder arg0) {
+        JSONObject dg_json = createJsonForDecorativeCylinder(arg0);
+        jsonArr.add(dg_json);        
+        createMaterialJson(arg0, true);
+    }
+
+    public JSONObject createJsonForDecorativeCylinder(DecorativeCylinder arg0) {
         JSONObject dg_json = new JSONObject();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "CylinderGeometry");
-	dg_json.put("radiusTop", arg0.getRadius()*visualizerScaleFactor);
-	dg_json.put("radiusBottom", arg0.getRadius()*visualizerScaleFactor);
-	dg_json.put("height", arg0.getHalfHeight()*2*visualizerScaleFactor);
-	dg_json.put("radialSegments", 32);
-	dg_json.put("heightSegments", 1);
+        dg_json.put("radiusTop", arg0.getRadius()*visualizerScaleFactor);
+        dg_json.put("radiusBottom", arg0.getRadius()*visualizerScaleFactor);
+        dg_json.put("height", arg0.getHalfHeight()*2*visualizerScaleFactor);
+        dg_json.put("radialSegments", 32);
+        dg_json.put("heightSegments", 1);
         if (!quadrants.equals("")){
             dg_json.put("thetaLength", 3.14159);
             if (quadrants.equalsIgnoreCase("-y"))
@@ -371,22 +387,26 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
             else
                 dg_json.put("thetaStart", 1.5709);
         }
-        jsonArr.add(dg_json);        
-        createMaterialJson(arg0, true);
+        return dg_json;
     }
 
     @Override
     public void implementBrickGeometry(DecorativeBrick arg0) {
+        JSONObject dg_json = createJsonForDecorativeBrick(arg0);
+        jsonArr.add(dg_json);        
+        createMaterialJson(arg0, true);
+    }
+
+    public JSONObject createJsonForDecorativeBrick(DecorativeBrick arg0) {
         JSONObject dg_json = new JSONObject();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "BoxGeometry");
-	dg_json.put("width", arg0.getHalfLengths().get(0)*visualizerScaleFactor);
-	dg_json.put("height", arg0.getHalfLengths().get(1)*visualizerScaleFactor);
-	dg_json.put("depth", arg0.getHalfLengths().get(2)*visualizerScaleFactor);
-	dg_json.put("radialSegments", 1);
-	dg_json.put("heightSegments", 1);
-        jsonArr.add(dg_json);        
-        createMaterialJson(arg0, true);
+        dg_json.put("width", arg0.getHalfLengths().get(0)*visualizerScaleFactor);
+        dg_json.put("height", arg0.getHalfLengths().get(1)*visualizerScaleFactor);
+        dg_json.put("depth", arg0.getHalfLengths().get(2)*visualizerScaleFactor);
+        dg_json.put("radialSegments", 1);
+        dg_json.put("heightSegments", 1);
+        return dg_json;
     }
 
     @Override
@@ -524,5 +544,9 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
             reuse_material = true;
             mat_uuid = matuuid;
         }
+    }
+
+    JSONObject getGeometryJson() {
+       return (JSONObject) jsonArr.get(jsonArr.size()-1);
     }
 }
