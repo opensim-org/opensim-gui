@@ -1,6 +1,16 @@
-/* -------------------------------------------------------------------------- *
- * OpenSim: ObjectDisplayShowAction.java                                      *
- * -------------------------------------------------------------------------- *
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package org.opensim.threejs;
+
+import org.json.simple.JSONArray;
+
+/**
+ *
+ * @author Ayman-NMBL
+ * 
  * OpenSim is a toolkit for musculoskeletal modeling and simulation,          *
  * developed as an open source project by a worldwide community. Development  *
  * and support is coordinated from Stanford University, with funding from the *
@@ -20,19 +30,22 @@
  * See the License for the specific language governing permissions and        *
  * limitations under the License.                                             *
  * -------------------------------------------------------------------------- */
-
-package org.opensim.view;
-
-import org.openide.util.NbBundle;
-
-public class ObjectDisplayShowAction extends ObjectDisplayShowHideBaseAction {
-
-   public ObjectDisplayShowAction() {
-      super(true);
-   }
-
-   public String getName() {
-      return NbBundle.getMessage(ObjectDisplayHideAction.class, "CTL_ModelDisplayShowAction");
-   }
-
+/**
+ * This interface will be used to create plugins for custom visualizations and
+ * should be used for ad-hoc visualizations that do not rely on the 
+ * Component::generateDecorations scheme which fails for non-components or is 
+ * not flexible to handle variety of visualization options.
+ * 
+ * @author Ayman-NMBL
+ */
+    public interface VisualizerAddOn {
+    // Method to be invoked once on construction of Visualization
+    // Clients would likely cache modelJson for future use
+    public void init(ModelVisualizationJson modelJson);
+    // Method invoked whenever we're generating a Frame to send oto the Visualizer
+    // Used as a hook for the VisualizerAddOn to update its owned visuals
+    // The state maintained by modelJson
+    public void updateVisuals(JSONArray frame_jsonArray);
+    // Give AddOn a chance to cleanup and remove added visuals
+    public void cleanup();
 }

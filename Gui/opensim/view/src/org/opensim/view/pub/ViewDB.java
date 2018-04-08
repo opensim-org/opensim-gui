@@ -1348,6 +1348,12 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       return mapModelsToJsons.get(aModel);
    }
    
+   public void sendVisualizerCommand(JSONObject jsonMessage){
+       if (websocketdb != null){
+           websocketdb.broadcastMessageJson(jsonMessage, null);
+       }
+   }
+   
    public void updateComponentDisplay(Model model, Component mc, AbstractProperty prop) {
        if (websocketdb != null){
            if (applyAppearanceChange){
@@ -1860,10 +1866,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     * Show only the passed in model and hide all others.
     */
    public void isolateModel(Model openSimModel) {
-      Enumeration<Model> models=mapModelsToVisuals.keys();
+      Enumeration<Model> models=mapModelsToJsons.keys();
       while(models.hasMoreElements()){
          Model next = models.nextElement();
-         SingleModelVisuals vis = mapModelsToVisuals.get(next);
          toggleModelDisplay(next, (openSimModel==next));
       }
       repaintAll();

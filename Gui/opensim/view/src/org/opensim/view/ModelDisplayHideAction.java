@@ -23,16 +23,28 @@
 
 package org.opensim.view;
 
+import org.openide.nodes.Node;
 import org.openide.util.NbBundle;
+import org.opensim.view.nodes.OneModelNode;
+import org.opensim.view.pub.ViewDB;
 
-public class ObjectDisplayShowAction extends ObjectDisplayShowHideBaseAction {
+public class ModelDisplayHideAction extends ObjectDisplayShowHideBaseAction {
 
-   public ObjectDisplayShowAction() {
-      super(true);
+   public ModelDisplayHideAction() {
+      super(false);
    }
 
    public String getName() {
-      return NbBundle.getMessage(ObjectDisplayHideAction.class, "CTL_ModelDisplayShowAction");
+      return NbBundle.getMessage(ObjectDisplayShowAction.class, "CTL_ModelDisplayHideAction");
    }
 
+   public void performAction() {
+         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
+         for (Node node:selected){
+             if (node instanceof OneModelNode){
+                 OneModelNode omnode = (OneModelNode) node;
+                 ViewDB.getInstance().toggleModelDisplay(omnode.getModel(), false);
+             }
+         }
+   }
 }
