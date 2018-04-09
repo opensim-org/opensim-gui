@@ -374,7 +374,7 @@ public class MotionDisplayer {
     
     /** Creates a new instance of MotionDisplayer */
     public MotionDisplayer(Storage motionData, Model model) {
-        this.experimentalForceScaleFactor = .001;
+        this.experimentalForceScaleFactor = 1.0;
         this.experimentalMarkerScaleFactor = 1.0;
         this.model = model;
         dContext= OpenSimDB.getInstance().getContext(model);
@@ -1078,7 +1078,6 @@ public class MotionDisplayer {
     }
 
     public void setExperimentalForceScaleFactor(double newFactor) {
-        double scaleRatio = newFactor /this.experimentalForceScaleFactor;
         this.experimentalForceScaleFactor = newFactor;
          Set<OpenSimObject> expermintalDataObjects = mapComponentToUUID.keySet();
          for (OpenSimObject expObj : expermintalDataObjects){
