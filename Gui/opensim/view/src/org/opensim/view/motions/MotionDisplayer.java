@@ -146,7 +146,7 @@ public class MotionDisplayer {
     ArrayStr stateNames;
     private boolean renderMuscleActivations=false;
     private double experimentalMarkerScaleFactor;
-    private double experimentalForceScaleFactor;
+    private double experimentalForceScaleFactor=1;
     String DEFAULT_FORCE_SHAPE="arrow";
     private String currentForceShape;
     
@@ -374,7 +374,7 @@ public class MotionDisplayer {
     
     /** Creates a new instance of MotionDisplayer */
     public MotionDisplayer(Storage motionData, Model model) {
-        this.experimentalForceScaleFactor = .001;
+        this.experimentalForceScaleFactor = 1.0;
         this.experimentalMarkerScaleFactor = 1.0;
         this.model = model;
         dContext= OpenSimDB.getInstance().getContext(model);
@@ -1068,9 +1068,24 @@ public class MotionDisplayer {
             // Find first ExperimentalMarker and change its Material, this will affect all of them
             if (expObj instanceof ExperimentalMarker){
                 UUID expMarkerUUID = mapComponentToUUID.get(expObj).get(0); 
-                ViewDB.getInstance().applyScaleToObjectByUUID(model, expMarkerUUID, experimentalMarkerScaleFactor);  
+                ViewDB.getInstance().scaleGeometryOfObjectByUUID(model, expMarkerUUID, experimentalMarkerScaleFactor);  
             }
         }
     }
+    
+    public double getExperimentalForceScaleFactor() {
+        return experimentalForceScaleFactor;
+    }
 
+    public void setExperimentalForceScaleFactor(double newFactor) {
+        this.experimentalForceScaleFactor = newFactor;
+         Set<OpenSimObject> expermintalDataObjects = mapComponentToUUID.keySet();
+         for (OpenSimObject expObj : expermintalDataObjects){
+            // Find first ExperimentalMarker and change its Material, this will affect all of them
+            if (expObj instanceof MotionObjectPointForce){
+                UUID expForceUUID = mapComponentToUUID.get(expObj).get(0); 
+                ViewDB.getInstance().scaleGeometryOfObjectByUUID(model, expForceUUID, experimentalForceScaleFactor);  
+            }
+        }
+   }
 }
