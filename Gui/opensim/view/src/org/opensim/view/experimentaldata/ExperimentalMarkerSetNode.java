@@ -129,7 +129,8 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
             set.put(nextNodeProp);
 
             PropertySupport.Reflection nextNodeProp2= new PropertySupport.Reflection(this, double.class, "getMarkerScaleFactor", "setMarkerScaleFactorUI");
-            nextNodeProp2.setName("marker size");
+            nextNodeProp2.setName("marker size scale");
+            nextNodeProp2.setShortDescription("Number to scale current visualization with");
             set.put(nextNodeProp2);
 
             return defaultSheet;
