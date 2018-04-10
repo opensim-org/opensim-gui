@@ -22,10 +22,12 @@
  * -------------------------------------------------------------------------- */
 package org.opensim.view.experimentaldata;
 
+import org.json.simple.JSONObject;
 import org.openide.nodes.Node;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
+import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.motions.MotionControlJPanel;
 import org.opensim.view.pub.ViewDB;
@@ -41,16 +43,10 @@ public final class ExperimentalObjectDisplayShowAction extends CallableSystemAct
              ExperimentalDataNode node= (ExperimentalDataNode) selected[i];
              ExperimentalDataObject obj=node.getDataObject();
              // Tell MotionDisplayer to hide it
-             obj.getMyGlyph().show(obj.getGlyphIndex());
-             /*
-             double[] location = new double[3];
-             obj.getMyGlyph().getLocation(obj.getGlyphIndex(), location);
-             vtkCaptionActor2D theCaption = new vtkCaptionActor2D();
-             theCaption.SetAttachmentPoint(location);
-             theCaption.SetCaption(obj.getBaseName());
-             ViewDB.getInstance().getCurrentModelWindow().getCanvas().GetRenderer().AddActor2D(theCaption);*/
+             ModelVisualizationJson modelVis = ViewDB.getInstance().getModelVisualizationJson(node.getModelForNode());
+             JSONObject command = modelVis.createSetVisibilityCommandForUUID(true, obj.getDataObjectUUID());
+             ViewDB.getInstance().sendVisualizerCommand(command);
              obj.setDisplayed(true);
-             obj.getMyGlyph().setModified();
          }
       }
       MotionControlJPanel.getInstance().getMasterMotion().applyTime();

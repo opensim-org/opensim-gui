@@ -22,12 +22,15 @@
  * -------------------------------------------------------------------------- */
 package org.opensim.view.experimentaldata;
 
+import org.json.simple.JSONObject;
 import org.openide.nodes.Node;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
+import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.motions.MotionControlJPanel;
+import org.opensim.view.pub.ViewDB;
 
 public final class ExperimentalObjectDisplayHideAction extends CallableSystemAction {
     
@@ -39,10 +42,13 @@ public final class ExperimentalObjectDisplayHideAction extends CallableSystemAct
              ExperimentalDataNode node= (ExperimentalDataNode) selected[i];
              ExperimentalDataObject obj=node.getDataObject();
              // Tell MotionDisplayer to hide it
-             obj.getMyGlyph().hide(obj.getGlyphIndex());
+             //obj.getMyGlyph().hide(obj.getGlyphIndex());
+             ModelVisualizationJson modelVis = ViewDB.getInstance().getModelVisualizationJson(node.getModelForNode());
+             JSONObject command = modelVis.createSetVisibilityCommandForUUID(false, obj.getDataObjectUUID());
+             ViewDB.getInstance().sendVisualizerCommand(command);
              //System.out.println("Hiding index "+obj.getGlyphIndex()+" of object "+obj.toString());
              obj.setDisplayed(false);
-             obj.getMyGlyph().setModified();
+             //obj.getMyGlyph().setModified();
          }
       }
       MotionControlJPanel.getInstance().getMasterMotion().applyTime();
