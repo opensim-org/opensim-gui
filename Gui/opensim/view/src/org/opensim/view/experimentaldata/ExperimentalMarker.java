@@ -37,6 +37,7 @@ import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.DecorativeSphere;
 import org.opensim.modeling.ModelDisplayHints;
 import org.opensim.modeling.State;
+import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Transform;
 import org.opensim.modeling.Vec3;
 import org.opensim.view.motions.MotionDisplayer;
@@ -100,9 +101,12 @@ public class ExperimentalMarker extends MotionObjectBodyPoint {
         expMarker_json.put("name", getName());
         expMarker_json.put("geometry", motionDisplayer.getExperimenalMarkerGeometryJson().get("uuid"));
         expMarker_json.put("material", motionDisplayer.getExperimenalMarkerMaterialJson().get("uuid"));
+        StateVector dataAtStartTime = motionDisplayer.getSimmMotionData().getStateVector(0);
+        ArrayDouble interpolatedStates = dataAtStartTime.getData();
+        int idx = getStartIndexInFileNotIncludingTime();
         JSONArray pos = new JSONArray();
         for (int i = 0; i < 3; i++) {
-            pos.add(0.0);
+            pos.add(interpolatedStates.get(idx+i));
         }
         expMarker_json.put("position", pos);
         expMarker_json.put("castShadow", false);
