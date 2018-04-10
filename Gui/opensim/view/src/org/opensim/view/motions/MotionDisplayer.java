@@ -1011,6 +1011,7 @@ public class MotionDisplayer {
             ArrayList<UUID> comp_uuids = new ArrayList<UUID>();
             motObjectsChildren.add(nextExpObject.createDecorationJson(comp_uuids, this));
             mapComponentToUUID.put(nextExpObject, comp_uuids);
+            mapUUIDToComponent.put(comp_uuids.get(0), nextExpObject);
         }
     }
     
