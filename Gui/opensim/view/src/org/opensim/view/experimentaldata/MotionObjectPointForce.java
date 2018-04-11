@@ -38,9 +38,12 @@ import org.opensim.modeling.DecorativeArrow;
 import org.opensim.modeling.DecorativeSphere;
 import org.opensim.modeling.ModelDisplayHints;
 import org.opensim.modeling.State;
+import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Transform;
+import org.opensim.modeling.UnitVec3;
 import org.opensim.modeling.Vec3;
 import org.opensim.threejs.JSONUtilities;
+import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.motions.MotionDisplayer;
 
 /**
@@ -201,21 +204,34 @@ public class MotionObjectPointForce extends MotionObjectBodyPoint {
         //hex -- hexadecimal value to define color. Default is 0xffff00.
         //headLength -- The length of the head of the arrow. Default is 0.2 * length.
         //headWidth -- The length of the width of the arrow. Default is 0.2 * headLength.
+        StateVector dataAtStartTime = motionDisplayer.getSimmMotionData().getStateVector(0);
+        ArrayDouble interpolatedStates = dataAtStartTime.getData();
+        int idx = getStartIndexInFileNotIncludingTime();
         JSONArray origin = new JSONArray();
         for (int i = 0; i < 3; i++) {
-            origin.add(0.0);
+            origin.add(interpolatedStates.get(idx+3+i));
+            point[i]=interpolatedStates.get(idx+3+i);
         }
         expForce_json.put("origin", origin);
         expForce_json.put("length", 1.0);
         JSONArray dir = new JSONArray();
         for (int i = 0; i < 3; i++) {
-            dir.add((i == 1) ? 1.0 : 0.0);
+            dir.add(interpolatedStates.get(idx+i));
+            direction.set(i, interpolatedStates.get(idx+i));
         }
         expForce_json.put("dir", dir);
         expForce_json.put("castShadow", false);
         expForce_json.put("userData", "NonEditable");
         expForce_json.put("color", JSONUtilities.mapColorToHex(motionDisplayer.getDefaultForceColorVec3()));
-        expForce_json.put("matrix", JSONUtilities.createMatrixFromTransform(new Transform(), new Vec3(1.), 1.0));
+        Transform xform = new Transform();
+        double length = Math.sqrt(Math.pow(direction.get(0),2)+
+                Math.pow(direction.get(1),2)+Math.pow(direction.get(2),2))/1000;
+        UnitVec3 dirNorm = new UnitVec3(direction);
+        xform.setP(new Vec3(point[0], point[1], point[2]));
+        for (int i=0; i<3; i++)
+              xform.R().set(i, 1, dirNorm.get(i));
+        expForce_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1, length ,1), 
+                ModelVisualizationJson.getVisScaleFactor()));
         comp_uuids.add(forcrep_uuid);
         return expForce_json;
     }

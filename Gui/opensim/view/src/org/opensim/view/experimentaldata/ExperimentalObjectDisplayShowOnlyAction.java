@@ -22,10 +22,12 @@
  * -------------------------------------------------------------------------- */
 package org.opensim.view.experimentaldata;
 
+import org.json.simple.JSONObject;
 import org.openide.nodes.Node;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
+import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.motions.MotionControlJPanel;
 import org.opensim.view.nodes.OneModelNode;
@@ -46,9 +48,12 @@ public final class ExperimentalObjectDisplayShowOnlyAction extends CallableSyste
              ExperimentalDataNode node= (ExperimentalDataNode) siblings[i];
              ExperimentalDataObject obj=node.getDataObject();
              // Tell MotionDisplayer to hide it
-             obj.getMyGlyph().hide(obj.getGlyphIndex());
+             ModelVisualizationJson modelVis = ViewDB.getInstance().getModelVisualizationJson(node.getModelForNode());
+             JSONObject command = modelVis.createSetVisibilityCommandForUUID(false, obj.getDataObjectUUID());
+             ViewDB.getInstance().sendVisualizerCommand(command);
+             //System.out.println("Hiding index "+obj.getGlyphIndex()+" of object "+obj.toString());
              obj.setDisplayed(false);
-             obj.getMyGlyph().setModified();
+
          }
       }
       // No show selected ones
@@ -57,9 +62,10 @@ public final class ExperimentalObjectDisplayShowOnlyAction extends CallableSyste
              ExperimentalDataNode node= (ExperimentalDataNode) selected[i];
              ExperimentalDataObject obj=node.getDataObject();
              // Tell MotionDisplayer to hide it
-             obj.getMyGlyph().show(obj.getGlyphIndex());
+             ModelVisualizationJson modelVis = ViewDB.getInstance().getModelVisualizationJson(node.getModelForNode());
+             JSONObject command = modelVis.createSetVisibilityCommandForUUID(true, obj.getDataObjectUUID());
+             ViewDB.getInstance().sendVisualizerCommand(command);
              obj.setDisplayed(true);
-             obj.getMyGlyph().setModified();
          }
       }
       MotionControlJPanel.getInstance().getMasterMotion().applyTime();

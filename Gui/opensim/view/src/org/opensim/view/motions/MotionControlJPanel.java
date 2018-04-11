@@ -715,7 +715,9 @@ public class MotionControlJPanel extends javax.swing.JToolBar
              MotionDisplayer newMotionDisplayer = new MotionDisplayer(evt.getMotion(), evt.getModel());
              MotionsDB.getInstance().addMotionDisplayer(evt.getMotion(), newMotionDisplayer);
              getMasterMotion().getDisplayer(0).getAssociatedMotions().add(newMotionDisplayer);
+             newMotionDisplayer.setupMotionDisplay();
              getMasterMotion().setTime(getMasterMotion().getCurrentTime());
+
          }
          motionLoaded = (getMasterMotion().getNumMotions() > 0);
          updatePanelDisplay();
