@@ -1358,6 +1358,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
        if (websocketdb != null){
            if (applyAppearanceChange){
                 ModelVisualizationJson modelJson = getInstance().getModelVisualizationJson(model);
+                if (Geometry.safeDownCast(mc)!=null && Mesh.safeDownCast(mc)==null){
+                    JSONObject msg = new JSONObject();
+                    if (modelJson.createReplaceGeometryMessage(Geometry.safeDownCast(mc), msg))
+                        websocketdb.broadcastMessageJson(msg, null);
+                }
                 JSONObject msg = modelJson.createAppearanceMessage(mc, prop);
                 websocketdb.broadcastMessageJson(msg, null);
            }

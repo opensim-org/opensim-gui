@@ -51,6 +51,7 @@ import org.opensim.modeling.ConditionalPathPoint;
 import org.opensim.modeling.DecorativeGeometry;
 import org.opensim.modeling.Frame;
 import org.opensim.modeling.FrameGeometry;
+import org.opensim.modeling.Geometry;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
@@ -1047,7 +1048,32 @@ public class ModelVisualizationJson extends JSONObject {
         }
         return guiJson;
     }
-    
+    // This function checks that Geometry in the visualizar need change (other than appearance and scale)
+    // and if so create a "ReplaceGeometry" message for the specific UUIDs
+    public boolean createReplaceGeometryMessage(Geometry mc, JSONObject msg) {
+        // Call geberate decorations on 
+        ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
+        boolean saveVisible = mc.get_Appearance().get_visible();
+        mc.get_Appearance().set_visible(true);
+        mc.generateDecorations(true, mdh, state, adg);
+        mc.get_Appearance().set_visible(saveVisible);
+        ArrayList<UUID> uuids = findUUIDForObject(mc);
+        if (adg.size() == uuids.size()){
+            JSONArray geoms = new JSONArray();
+            for (int i=0; i<adg.size(); i++){
+                UUID uuid = uuids.get(i);
+                dgimp.setGeomID(uuid);
+                adg.getElt(i).implementGeometry(dgimp);
+                JSONObject jsonObject = dgimp.getGeometryJson();
+                msg.put("Op", "ReplaceGeometry");
+                msg.put("uuid", uuid.toString());
+                geoms.add(jsonObject);
+                msg.put("geometries", geoms);
+            }
+        }
+        return true;
+    }
+ 
     public JSONObject createAddObjectCommand(JSONObject newObject, double[] bounds) {
         JSONObject guiJson = new JSONObject();
         guiJson.put("Op", "addModelObject");
