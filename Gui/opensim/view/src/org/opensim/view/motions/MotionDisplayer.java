@@ -381,9 +381,10 @@ public class MotionDisplayer {
         simmMotionData = motionData;
         currentForceShape = DEFAULT_FORCE_SHAPE;
         modelVisJson = ViewDB.getInstance().getModelVisualizationJson(model);
-        setupMotionDisplay();
-        // create a buffer to be used for comuptation of constrained states
-        //statesBuffer = new double[model.getNumStateVariables()];
+        // We create a temporary array to hold interpolated values, in case Slider doesn't coincide with data
+        colNames = simmMotionData.getColumnLabels();
+        int numColumnsIncludingTime = colNames.getSize();
+        interpolatedStates = new ArrayDouble(0.0, numColumnsIncludingTime-1);
         
         modelVisJson.addMotionDisplayer(this);
         if (model instanceof ModelForExperimentalData) return;
@@ -393,8 +394,6 @@ public class MotionDisplayer {
         if (simmMotionData == null)
            return;
 
-        // We create a temporary array to hold interpolated values, in case Slider doesn't coincide with data
-        colNames = simmMotionData.getColumnLabels();
         int numColumnsIncludingTime = colNames.getSize();
         interpolatedStates = new ArrayDouble(0.0, numColumnsIncludingTime-1);
         // If provided simmMotionData is empty or have one frame, then we're building it live and can't
