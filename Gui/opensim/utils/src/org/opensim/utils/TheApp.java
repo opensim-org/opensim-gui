@@ -14,7 +14,7 @@
  * not use this file except in compliance with the License. You may obtain a  *
  * copy of the License at http://www.apache.org/licenses/LICENSE-2.0          *
  *                                                                            *
- * Unless required by applicable law or agreed to in writing, software        *
+ * Unless required by applicable law or agreed to in writing, software       insta *
  * distributed under the License is distributed on an "AS IS" BASIS,          *
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.   *
  * See the License for the specific language governing permissions and        *
@@ -200,13 +200,13 @@ public final class TheApp {
 
         jTextArea1.setColumns(20);
         jTextArea1.setFont(jTextArea1.getFont());
-        jTextArea1.setRows(5);
+        jTextArea1.setRows(3);
         jTextArea1.setWrapStyleWord(true);
         jTextArea1.setEnabled(false);
         JPanel containerPanel = new JPanel();
         containerPanel.setLayout(new javax.swing.BoxLayout(containerPanel, javax.swing.BoxLayout.Y_AXIS));
          do {
-            jTextArea1.setText("Please choose a location for the OpenSim resources (models and examples). \nApproximately 60 MB will be copied. \nYou should have permissions to read/write from this folder. \nTo reinstall the resources at any time, type \n\"installResources()\" in the ScriptingShell Window");
+            jTextArea1.setText("Please choose a location for the OpenSim resources (models and examples). \nApproximately 60 MB will be copied. You should have permissions to write to this folder.\nTo reinstall the resources at any time, type \"installResources()\" in the ScriptingShell Window.");
             FileTextFieldAndChooser destDirectoryPanel = new org.opensim.swingui.FileTextFieldAndChooser();
             destDirectoryPanel.setDirectoriesOnly(true);
             destDirectoryPanel.setCheckIfFileExists(false);
