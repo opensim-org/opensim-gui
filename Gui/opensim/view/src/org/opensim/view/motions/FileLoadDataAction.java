@@ -62,6 +62,7 @@ public final class FileLoadDataAction extends CallableSystemAction {
                     // Add the visuals to support it
                     ModelForExperimentalData modelForDataImport = new ModelForExperimentalData(nextNumber++, amot);
                     modelForDataImport.initSystem();
+                    amot.setModel(modelForDataImport);
                     modelForDataImport.addMotionObjects(amot.getClassified());
                     OpenSimDB.getInstance().addModel(modelForDataImport);
                     MotionsDB.getInstance().addMotion(modelForDataImport, amot, null);
@@ -94,6 +95,7 @@ public final class FileLoadDataAction extends CallableSystemAction {
                         ErrorDialog.displayExceptionDialog(ex);
                         return;
                     }
+                    amot.setModel(modelForDataImport);
                     MotionsDB.getInstance().addMotion(modelForDataImport, amot, null);
                     MotionsDB.getInstance().saveStorageFileName(amot, fileName);
             }

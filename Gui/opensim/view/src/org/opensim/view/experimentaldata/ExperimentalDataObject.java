@@ -37,6 +37,7 @@ import org.json.simple.JSONObject;
 import org.opensim.modeling.AdhocModelComponent;
 import org.opensim.modeling.ArrayDecorativeGeometry;
 import org.opensim.modeling.ArrayDouble;
+import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
 import org.opensim.modeling.State;
 import org.opensim.view.OpenSimvtkGlyphCloud;
@@ -56,6 +57,7 @@ public class ExperimentalDataObject extends AdhocModelComponent {
     private int glyphIndex=-1;
     private UUID dataObjectUUID;
     private OpenSimvtkGlyphCloud myGlyph;
+    private Model model=null;
     /** Creates a new instance of ExperimentalDataObject */
     public ExperimentalDataObject(ExperimentalDataItemType objectType, String baseName, int index) {
         super();
@@ -135,5 +137,13 @@ public class ExperimentalDataObject extends AdhocModelComponent {
     
     public JSONObject createDecorationJson(ArrayList<UUID> comp_uuids, MotionDisplayer motionDisplayer){
         throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    void setModel(Model model) {
+        this.model = model;
+    }
+    @Override
+    public Model getModel() {
+        return model;
     }
 }

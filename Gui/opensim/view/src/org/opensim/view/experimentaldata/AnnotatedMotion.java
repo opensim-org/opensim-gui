@@ -41,6 +41,7 @@ import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.ArrayStr;
+import org.opensim.modeling.Model;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Storage;
 import org.opensim.view.motions.MotionControlJPanel;
@@ -52,7 +53,9 @@ import vtk.vtkTransform;
  *
  * @author ayman
  */
-public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know when the attributes have changed
+public class AnnotatedMotion extends Storage { 
+
+// MotionDisplayer needs to know when the attributes have changed
     
     private Vector<String> markerNames=null;
     private Vector<String> forceNames=null;
@@ -69,6 +72,7 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
     private MotionDisplayer motionDisplayer;
     private double displayForceScale = .001;
     private String displayForceShape = "arrow";
+    private Model model;
     /** Creates a new instance of AnnotatedMotion 
      * This constructor is called when a trc file is read (so we know it is 
      * Marker only data already.
@@ -505,5 +509,16 @@ public class AnnotatedMotion extends Storage { // MotionDisplayer needs to know 
             }
         }
     }
-    
+    /**
+     * @param model the model to set
+     */
+    public void setModel(Model model) {
+        this.model = model;
+        // Cycle through classified objected and set their model for downstream selection
+        if (classified !=null && classified.size()!=0){
+            for(ExperimentalDataObject dataObject:classified){
+                dataObject.setModel(model);
+            }
+        }
+    }    
 }

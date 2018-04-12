@@ -59,6 +59,7 @@ import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PathPoint;
 import org.opensim.utils.ErrorDialog;
+import org.opensim.view.experimentaldata.ExperimentalDataNode;
 import org.opensim.view.nodes.OneModelNode;
 import org.opensim.view.experimentaldata.ExperimentalDataTopNode;
 import org.opensim.view.nodes.MarkersNode;
@@ -378,7 +379,7 @@ final public class ExplorerTopComponent extends TopComponent
 //                        newSelectedNodes[previouslySelectedNodes.length] = objectNode;
                         findInstance().getExplorerManager().setSelectedNodes(new Node[]{objectNode});
                         this.setActivatedNodes(new Node[]{objectNode});
-                        ((OpenSimObjectNode)objectNode).refreshNode();
+                        ((OpenSimNode)objectNode).refreshNode();
                         requestActive();
                     } catch (PropertyVetoException ex) {
                         Exceptions.printStackTrace(ex);
@@ -393,6 +394,11 @@ final public class ExplorerTopComponent extends TopComponent
     private Node findObjectNode(Node topNode, OpenSimObject openSimObject) {
         if (topNode instanceof OpenSimObjectNode){
             if (((OpenSimObjectNode)topNode).getOpenSimObject().equals(openSimObject))
+                return topNode;
+        }
+        if (topNode instanceof ExperimentalDataNode){
+            ExperimentalDataNode edn = (ExperimentalDataNode) topNode;
+            if (openSimObject.equals(edn.getDataObject()))
                 return topNode;
         }
         if (topNode.isLeaf()) return null;

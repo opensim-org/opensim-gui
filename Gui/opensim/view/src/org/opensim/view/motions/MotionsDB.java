@@ -176,6 +176,7 @@ public class MotionsDB extends Observable // Observed by other entities in motio
                 addMotion(modelForMotion, newMotion, parentMotionNode.getMotion());
               else {
                 AnnotatedMotion aMot = new AnnotatedMotion(newMotion);
+                aMot.setModel(parentMotionNode.getModelForNode());
                 addMotion(modelForMotion, aMot, parentMotionNode.getMotion());
                 MotionsDB.getInstance().saveStorageFileName(aMot, filePath);
               }
