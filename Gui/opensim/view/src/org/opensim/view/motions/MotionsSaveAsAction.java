@@ -71,12 +71,12 @@ public final class MotionsSaveAsAction extends CallableSystemAction {
              AnnotatedMotion dMotion = (AnnotatedMotion)node.getMotion();
              String currentExtension = dMotion.getName().substring(dMotion.getName().lastIndexOf("."));
              if (currentExtension.endsWith("trc"))
-                fileName=FileUtils.getInstance().browseForFilenameToSave(FileUtils.TrcFileFilter, true, "");
+                fileName=FileUtils.getInstance().browseForFilenameToSave(FileUtils.TrcFileFilter, true, "experimental_data");
              else
-                fileName=FileUtils.getInstance().browseForFilenameToSave(FileUtils.MotionFileFilter, true, "");                 
+                fileName=FileUtils.getInstance().browseForFilenameToSave(FileUtils.MotionFileFilter, true, "experimental_data");                 
          }
          else
-            fileName=FileUtils.getInstance().browseForFilenameToSave(FileUtils.MotionFileFilter, true, "");
+            fileName=FileUtils.getInstance().browseForFilenameToSave(FileUtils.MotionFileFilter, true, "motion");
          if(fileName!=null) saveMotion(node.getModel(), node.getMotion(), fileName);
       }
    }
