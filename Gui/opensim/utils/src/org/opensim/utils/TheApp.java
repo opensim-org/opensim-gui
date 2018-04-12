@@ -195,7 +195,6 @@ public final class TheApp {
         FileUtils.getInstance().setWorkingDirectoryPreference(userHome);
         String userSelection = null;
         boolean exists = false;
-        javax.swing.JScrollPane jScrollPane1;
         javax.swing.JTextArea jTextArea1 = new javax.swing.JTextArea();
 
         jTextArea1.setColumns(20);
