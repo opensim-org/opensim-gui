@@ -36,7 +36,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
+import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
+import org.opensim.view.actions.ObjectDisplaySelectAction;
 import org.opensim.view.nodes.OpenSimNode;
 
 /**
@@ -116,5 +118,14 @@ public class ExperimentalDataNode extends OpenSimNode{
 
     public AnnotatedMotion getDMotion() {
         return dMotion;
+    }
+    @Override
+    public Action getPreferredAction() {
+        try {
+            return ((ObjectDisplaySelectAction) ObjectDisplaySelectAction.findObject( (Class)Class.forName("org.opensim.view.actions.ObjectDisplaySelectAction"), true));
+        } catch (ClassNotFoundException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        return null;
     }
 }
