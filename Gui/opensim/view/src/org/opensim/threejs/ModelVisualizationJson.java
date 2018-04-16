@@ -685,6 +685,18 @@ public class ModelVisualizationJson extends JSONObject {
             formJSON.put("UUID", obj_uuid.toString());  
             formJSON.put("Op", "Select");  
          }
+         else { // Check motionDisplayers
+            for (MotionDisplayer motDisplayer:motionDisplayers){
+                uuids = motDisplayer.findUUIDForObject(obj);
+                if (uuids != null && uuids.size()==1){
+                    UUID obj_uuid = uuids.get(0);
+                    formJSON.put("UUID", obj_uuid.toString());  
+                    formJSON.put("Op", "Select");  
+                    break;
+                }
+            }
+            
+         }
          return formJSON;
     }
 

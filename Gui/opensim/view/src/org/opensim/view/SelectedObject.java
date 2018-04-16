@@ -39,6 +39,7 @@ import org.opensim.modeling.PathActuator;
 import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.WrapObject;
+import org.opensim.view.experimentaldata.ExperimentalDataObject;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 import vtk.vtkActor;
@@ -73,6 +74,10 @@ public class SelectedObject implements Selectable {
  
    public Model getOwnerModel()
    {
+      // Handle ExperimentalDataObjects first as they handle their getModel thier own way
+      if (object instanceof ExperimentalDataObject)
+          return (((ExperimentalDataObject)object).getModel());
+      
       ModelComponent mc = ModelComponent.safeDownCast(object);
       if (mc != null) return mc.getModel();
       Component comp = Component.safeDownCast(object);

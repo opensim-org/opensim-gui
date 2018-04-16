@@ -24,14 +24,13 @@
 package org.opensim.view.actions;
 
 import javax.swing.SwingUtilities;
-import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.view.ExplorerTopComponent;
+import org.opensim.view.experimentaldata.ExperimentalDataNode;
 import org.opensim.view.nodes.OpenSimObjectNode;
-import org.opensim.view.nodes.OpenSimObjectSetNode;
 import org.opensim.view.pub.ViewDB;
 
 public final class ObjectDisplaySelectAction extends CallableSystemAction  {
@@ -58,6 +57,10 @@ public final class ObjectDisplaySelectAction extends CallableSystemAction  {
                     if (selected[i] instanceof OpenSimObjectNode){ 
                         OpenSimObjectNode osNode = (OpenSimObjectNode) selected[i];
                         ViewDB.getInstance().setSelectedObject(osNode.getOpenSimObject());
+                    }
+                    else if (selected[i] instanceof ExperimentalDataNode){
+                        ExperimentalDataNode expNode = (ExperimentalDataNode) selected[i];
+                        ViewDB.getInstance().setSelectedObject(expNode.getDataObject());
                     }
                  }
             }

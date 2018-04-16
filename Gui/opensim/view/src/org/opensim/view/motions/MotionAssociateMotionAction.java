@@ -65,6 +65,7 @@ public final class MotionAssociateMotionAction extends CallableSystemAction {
                     amot.setDataRate(markerData.getDataRate());
                     amot.setCameraRate(markerData.getCameraRate());
                     storage = amot;
+                    amot.setModel(node.getModelForNode());
                }
             } catch (IOException ex) {
                ex.printStackTrace();
