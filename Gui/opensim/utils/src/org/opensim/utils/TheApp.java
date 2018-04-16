@@ -216,7 +216,7 @@ public final class TheApp {
             containerPanel.add(destDirectoryPanel);
             containerPanel.validate();
             containerPanel.setPreferredSize(containerPanel.getPreferredSize());
-            DialogDescriptor dd = new DialogDescriptor(containerPanel, "Folder to install models and scripts:");
+            DialogDescriptor dd = new DialogDescriptor(containerPanel, "Select folder to install OpenSim Resources:");
             // Create a Dialog to contain the chooser
             Dialog dlg = DialogDisplayer.getDefault().createDialog(dd);
             dlg.setModal(true);
