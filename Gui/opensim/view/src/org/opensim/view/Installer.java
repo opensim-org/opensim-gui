@@ -170,7 +170,7 @@ public class Installer extends ModuleInstall {
              saved = TheApp.getDefaultGeometrySearchPath();
          }
          else if (!saved.contains(defaultGeometryPath))
-             saved.concat(File.pathSeparator+defaultGeometryPath);
+             saved = saved.concat(File.pathSeparator+defaultGeometryPath);
          Preferences.userNodeForPackage(TheApp.class).put("Geometry Path", saved);
          // Push changes to API side
          GeometryFileLocator.updateGeometrySearchPathsFromPreferences();
