@@ -117,7 +117,7 @@ public class ModelVisualizationJson extends JSONObject {
     private UUID markerMatUUID;
     private UUID bonePhongUUID;
     private UUID boneStandardUUID;
-    private boolean useStandardBoneMaterial =true;
+    private boolean useSameMeshMaterial =true;
     private JSONObject pathPointGeometryJSON = null;
     private JSONObject marker_mat_json;
     public static boolean verbose=false;
@@ -245,10 +245,10 @@ public class ModelVisualizationJson extends JSONObject {
         movable = (model instanceof ModelForExperimentalData);
         createModelJsonNode(); // Model node
         // Decide if using same material for all Meshes or not
-        String useStandardMaterial = "OFF";
-        String saved=Preferences.userNodeForPackage(TheApp.class).get("Use Bone Material", useStandardMaterial);
-        Preferences.userNodeForPackage(TheApp.class).put("Use Bone Material", saved);
-        useStandardBoneMaterial = saved.equalsIgnoreCase("on");
+        String oneMaterialAllMeshes = "Off";
+        String saved=Preferences.userNodeForPackage(TheApp.class).get("One Material Meshes", oneMaterialAllMeshes);
+        Preferences.userNodeForPackage(TheApp.class).put("One Material Meshes", saved);
+        useSameMeshMaterial = saved.equalsIgnoreCase("on");
 
         createJsonForModel(model);
         ready = true;
@@ -287,7 +287,7 @@ public class ModelVisualizationJson extends JSONObject {
         pathpointMatUUID= createPathPointMaterial();
         markerMatUUID= createMarkerMaterial(mdh);
         bonePhongUUID = createBonePhongMaterial();
-        boneStandardUUID = createBoneStandardMaterial();
+        boneStandardUUID = createBoneStandardMaterialAndColor();
         pathPointGeometryJSON = createPathPointGeometryJSON();
         dgimp = new DecorativeGeometryImplementationJS(json_geometries, json_materials, visScaleFactor);
         while (!mcIter.equals(mcList.end())) {
@@ -397,7 +397,7 @@ public class ModelVisualizationJson extends JSONObject {
         if (isMarker)
             dgimp.useMaterial(markerMatUUID);
         // If using MeshStandardMaterial for Mesh objects
-        if (Mesh.safeDownCast(comp)!=null && useStandardBoneMaterial)
+        if (Mesh.safeDownCast(comp)!=null && useSameMeshMaterial)
             dgimp.useMaterial(boneStandardUUID);
         for (int idx = 0; idx < adg.size(); idx++) {
             dg = adg.getElt(idx);
@@ -437,7 +437,7 @@ public class ModelVisualizationJson extends JSONObject {
         if (isMarker)
             dgimp.useMaterial(null);
         
-        if (Mesh.safeDownCast(comp)!=null && useStandardBoneMaterial)
+        if (Mesh.safeDownCast(comp)!=null && useSameMeshMaterial)
             dgimp.useMaterial(null);
 
         mapComponentToUUID.put(comp, vis_uuidList);
@@ -1229,7 +1229,7 @@ public class ModelVisualizationJson extends JSONObject {
         json_materials.add(mat_json);
         return mat_uuid;
     }
-    private UUID createBoneStandardMaterial() {
+    private UUID createBoneStandardMaterialAndColor() {
         Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
         UUID mat_uuid = UUID.randomUUID();
         mat_json.put("uuid", mat_uuid.toString());
