@@ -988,7 +988,7 @@ public class ModelVisualizationJson extends JSONObject {
         else
             localTransform.setP(computedLocation);
         bpptInBodyJson.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1.0), visScaleFactor));
-        bpptInBodyJson.put("visible", false);
+        bpptInBodyJson.put("visible", true);
         return bpptInBodyJson;
     }
 
@@ -996,10 +996,10 @@ public class ModelVisualizationJson extends JSONObject {
         JSONObject bpptJson = new JSONObject();
         UUID uuidForPathpointGeometry = UUID.randomUUID();
         bpptJson.put("uuid", uuidForPathpointGeometry.toString());
-        bpptJson.put("type", "BoxGeometry");
-        bpptJson.put("width", 5);
-        bpptJson.put("height", 5);
-        bpptJson.put("depth", 5);
+        bpptJson.put("type", "SphereGeometry");
+	bpptJson.put("radius", 8);
+	bpptJson.put("widthSegments", 32);
+	bpptJson.put("heightSegments", 32);
         json_geometries.add(bpptJson);
         return bpptJson;
     }
