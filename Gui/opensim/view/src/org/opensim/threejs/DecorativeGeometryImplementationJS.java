@@ -490,11 +490,10 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         mat_json.put("uuid", uuid_mat.toString());
         String colorString = JSONUtilities.mapColorToRGBA(dg.getColor());
         if (isSurface){
-            mat_json.put("type", "MeshPhongMaterial");
-            mat_json.put("shininess", 30);
+            mat_json.put("type", "MeshStandardMaterial");
             mat_json.put("transparent", true);
-            mat_json.put("emissive", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
-            mat_json.put("specular", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
+            mat_json.put("metalness", 0);
+            mat_json.put("roughness", 1.0);
             mat_json.put("side", 2);
             mat_json.put("wireframe", dg.getRepresentation() == DecorativeGeometry.Representation.DrawWireframe);     
         }
