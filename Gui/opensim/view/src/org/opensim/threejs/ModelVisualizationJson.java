@@ -82,6 +82,24 @@ import org.opensim.view.pub.OpenSimDB;
 public class ModelVisualizationJson extends JSONObject {
 
     /**
+     * @return the currentPathColorMap
+     */
+    public PathColorMap getCurrentPathColorMap() {
+        return currentPathColorMap;
+    }
+
+    static {
+        PathColorMapFactory.registerPathColorMap("Classic", new LegacyPathColorMap());
+        PathColorMapFactory.registerPathColorMap("Modern", new ModernPathColorMap());
+    }
+    /**
+     * @param currentPathColorMap the currentPathColorMap to set
+     */
+    public void setCurrentPathColorMap(PathColorMap currentPathColorMap) {
+        this.currentPathColorMap = currentPathColorMap;
+    }
+
+    /**
      * @return the showCom
      */
     public boolean isShowCom() {
@@ -140,6 +158,7 @@ public class ModelVisualizationJson extends JSONObject {
     private ArrayList<VisualizerAddOn> visualizerAddOns = new ArrayList<VisualizerAddOn>();
     private VisualizerAddOnCom comVizAddOn = new VisualizerAddOnCom();
     private boolean showCom = false;
+    private PathColorMap currentPathColorMap;
     
     public Boolean getFrameVisibility(Frame b) {
         return visualizerFrames.get(b).visible;
@@ -249,7 +268,11 @@ public class ModelVisualizationJson extends JSONObject {
         String saved=Preferences.userNodeForPackage(TheApp.class).get("One Material Meshes", oneMaterialAllMeshes);
         Preferences.userNodeForPackage(TheApp.class).put("One Material Meshes", saved);
         useSameMeshMaterial = saved.equalsIgnoreCase("on");
-
+        // Decide color Scheme for muscles
+        saved = "Classic";
+        String currentTemplate =Preferences.userNodeForPackage(TheApp.class).get("Muscle Color Scheme", saved);
+        Preferences.userNodeForPackage(TheApp.class).put("Muscle Color Scheme", currentTemplate);
+        currentPathColorMap = PathColorMapFactory.getColorMap(currentTemplate);
         createJsonForModel(model);
         ready = true;
         if (verbose)
@@ -613,7 +636,8 @@ public class ModelVisualizationJson extends JSONObject {
                 UUID pathUUID = pathList.get(geomPathObject);
                 JSONObject pathUpdate_json = new JSONObject();
                 pathUpdate_json.put("uuid", pathUUID.toString());
-                Vec3 pathColor = colorByState ? geomPathObject.getColor(state) : geomPathObject.getDefaultColor();
+                Vec3 pathColor = colorByState ? currentPathColorMap.getColor(geomPathObject, state) : geomPathObject.getDefaultColor();
+                
                 if (verbose)
                     System.out.println("Color:"+geomPathObject.getOwner().getName()+"="+pathColor.toString());
                 String colorString = JSONUtilities.mapColorToRGBA(pathColor);
