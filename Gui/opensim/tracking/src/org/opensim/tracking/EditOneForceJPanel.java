@@ -28,6 +28,7 @@
 
 package org.opensim.tracking;
 
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JComboBox;
 import org.openide.DialogDescriptor;
@@ -37,6 +38,9 @@ import org.opensim.modeling.BodySet;
 import org.opensim.modeling.ExternalLoads;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ExternalForce;
+import org.opensim.modeling.FrameIterator;
+import org.opensim.modeling.FrameList;
+import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.Storage;
 
 /**
@@ -527,8 +531,8 @@ public class EditOneForceJPanel extends javax.swing.JPanel {
         // Body name combobox
         
         Model model=loads.getModel(); 
-        BodySet bodySet = model.getBodySet();
-        populateBodyList(bodySet, BodiesComboBox);
+        FrameList frameList = model.getFrameList();
+        populateBodyList(frameList, BodiesComboBox);
          BodiesComboBox.setSelectedItem(externalForce.getAppliedToBodyName());
         // All other drop downs, populate with column names except time.
         Vector<String> colmnLabels = lbls.toVector();
@@ -574,8 +578,8 @@ public class EditOneForceJPanel extends javax.swing.JPanel {
             setComboBoxSelection(jComboBoxTZ, torqueId, 2);
             jCheckBoxTorque.setSelected(true);
         }
-        populateBodyList(bodySet, ForceExpressedBodiesComboBox);
-        populateBodyList(bodySet, PointExpressedBodiesComboBox);
+        populateBodyList(frameList, ForceExpressedBodiesComboBox);
+        populateBodyList(frameList, PointExpressedBodiesComboBox);
         String dbg1 = externalForce.getForceExpressedInBodyName();
         ForceExpressedBodiesComboBox.setSelectedItem(externalForce.getForceExpressedInBodyName());
         String dbg2 = externalForce.getPointExpressedInBodyName();
@@ -583,13 +587,20 @@ public class EditOneForceJPanel extends javax.swing.JPanel {
 
     }
 
-    private void populateBodyList(final BodySet bodySet, JComboBox comboBox) {
+    private void populateBodyList(final FrameList frameList, JComboBox comboBox) {
         comboBox.removeAllItems();
-        String[] bNames = new String[bodySet.getSize()];
-
-        for(int i=0; i<bodySet.getSize(); i++){
-            comboBox.addItem(bodySet.get(i).getName());
-            bNames[i]=bodySet.get(i).getName();
+        FrameIterator bi = frameList.begin();
+        ArrayList<String> frameNames = new ArrayList<String>();
+        while(!bi.equals(frameList.end())){
+              if (PhysicalFrame.safeDownCast(bi.__deref__())!= null){
+                  frameNames.add(bi.getName());
+              }
+             bi.next();
+        }
+        String[] bNames = new String[frameNames.size()];
+        for(int i=0; i<frameNames.size(); i++){
+            bNames[i] = frameNames.get(i);
+            comboBox.addItem(bNames[i]);
         }
         comboBox.setModel(new javax.swing.DefaultComboBoxModel(bNames));
     }
