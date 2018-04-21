@@ -19,7 +19,10 @@ import org.opensim.modeling.Vec3;
 public class LegacyPathColorMap implements PathColorMap {
 
     @Override
-    public Vec3 getColor(GeometryPath path, State state) {
+    public Vec3 getColor(GeometryPath path, State state, double activation) {
+        if (activation > 0.){
+            
+        }
         return path.getColor(state);
     }
     
