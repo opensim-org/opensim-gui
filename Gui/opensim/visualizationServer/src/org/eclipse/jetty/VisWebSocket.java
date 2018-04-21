@@ -73,13 +73,13 @@ public class VisWebSocket extends Observable { // Socket to handle incoming traf
     @OnWebSocketClose
     public void onClose (Session peer, int in, String cause) {
         peers.remove(peer);
-        System.out.println("onClose");
+        System.out.println("onClose: cause="+cause);
         WebSocketDB.getInstance().unRegisterSocket(this);
     }
     
     @OnWebSocketError
      public void onError (Session peer, Throwable er) {
-        //System.out.println("onError");
+        System.out.println("onError:"+er.getMessage());
     }        
     // Receive message from Visualizer
     @OnWebSocketMessage
