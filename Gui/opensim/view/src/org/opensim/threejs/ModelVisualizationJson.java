@@ -60,6 +60,7 @@ import org.opensim.modeling.Mesh;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
 import org.opensim.modeling.MovingPathPoint;
+import org.opensim.modeling.Muscle;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.PathPointSet;
@@ -636,13 +637,15 @@ public class ModelVisualizationJson extends JSONObject {
                 UUID pathUUID = pathList.get(geomPathObject);
                 JSONObject pathUpdate_json = new JSONObject();
                 pathUpdate_json.put("uuid", pathUUID.toString());
-                Vec3 pathColor = colorByState ? currentPathColorMap.getColor(geomPathObject, state) : geomPathObject.getDefaultColor();
+                if (Muscle.safeDownCast(geomPathObject.getOwner())!= null){
+                    Vec3 pathColor = colorByState ? currentPathColorMap.getColor(geomPathObject, state) : geomPathObject.getDefaultColor();
                 
-                if (verbose)
-                    System.out.println("Color:"+geomPathObject.getOwner().getName()+"="+pathColor.toString());
-                String colorString = JSONUtilities.mapColorToRGBA(pathColor);
-                pathUpdate_json.put("color", colorString);
-                geompaths_json.add(pathUpdate_json);
+                    if (verbose)
+                        System.out.println("Color:"+geomPathObject.getOwner().getName()+"="+pathColor.toString());
+                    String colorString = JSONUtilities.mapColorToRGBA(pathColor);
+                    pathUpdate_json.put("color", colorString);
+                    geompaths_json.add(pathUpdate_json);
+                }
             }
             // Have AddOns update their tranasforms
             for (VisualizerAddOn nextAddOn:visualizerAddOns){
