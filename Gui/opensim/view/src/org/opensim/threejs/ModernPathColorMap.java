@@ -19,7 +19,7 @@ import org.opensim.utils.TheApp;
  *  RGB components scales linearly
  */
 public class ModernPathColorMap implements PathColorMap {
-    double weight = 0.0;
+    double weight = 0.25;
     
     void updateWeight (){
         String weightString="0.";
@@ -29,9 +29,13 @@ public class ModernPathColorMap implements PathColorMap {
     }
 
     @Override
-    public Vec3 getColor(GeometryPath path, State state) {
-        updateWeight ();
+    public Vec3 getColor(GeometryPath path, State state, double activation) {
+        //updateWeight ();
+
         Vec3 activationBasedColor = path.getColor(state);
+        if (activation > 0){
+            activationBasedColor = new Vec3(activation, 0, 1-activation);
+        }
         double redness = activationBasedColor.get(0);
         Vec3 mappedColor = new Vec3(0.6435 + 0.07588*redness,
             0.7009 - 0.6396*redness,

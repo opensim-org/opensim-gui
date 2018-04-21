@@ -638,7 +638,7 @@ public class ModelVisualizationJson extends JSONObject {
                 JSONObject pathUpdate_json = new JSONObject();
                 pathUpdate_json.put("uuid", pathUUID.toString());
                 if (Muscle.safeDownCast(geomPathObject.getOwner())!= null){
-                    Vec3 pathColor = colorByState ? currentPathColorMap.getColor(geomPathObject, state) : geomPathObject.getDefaultColor();
+                    Vec3 pathColor = colorByState ? currentPathColorMap.getColor(geomPathObject, state, -1) : geomPathObject.getDefaultColor();
                 
                     if (verbose)
                         System.out.println("Color:"+geomPathObject.getOwner().getName()+"="+pathColor.toString());
