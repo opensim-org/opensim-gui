@@ -268,7 +268,7 @@ public class MotionDisplayer {
             while (!mIter.equals(mList.end())) {
                 Muscle msl = mIter.__deref__();
                 double newColorInBlueToRed = mcf.getColor(msl);
-                Vec3 pathColor = new Vec3(newColorInBlueToRed, 0, 1-newColorInBlueToRed);
+                Vec3 pathColor = modelVisJson.getCurrentPathColorMap().getColor(msl.getGeometryPath(), modelVisJson.getState(), newColorInBlueToRed);
                 ArrayList<UUID>  uuids = modelVisJson.findUUIDForObject(msl);
                 if (uuids != null && uuids.size()==1){
                     UUID pathUUID = uuids.get(0);

@@ -89,7 +89,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         dg_json.put("type", "CylinderGeometry");
         dg_json.put("radiusTop", 0.);
         dg_json.put("radiusBottom", arg0.getBaseRadius()*visualizerScaleFactor);
-        dg_json.put("widthSegments", 64);
+        dg_json.put("widthSegments", 32);
         dg_json.put("heightSegments", 1);
         return dg_json;
     }
@@ -113,7 +113,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         dg_json.put("type", "TorusGeometry");
 	dg_json.put("radius", arg0.getTorusRadius()*visualizerScaleFactor);
 	dg_json.put("tube", arg0.getTubeRadius()*visualizerScaleFactor);
-	dg_json.put("radialSegments", 64);
+	dg_json.put("radialSegments", 32);
 	dg_json.put("tubularSegments", 24);
         jsonArr.add(dg_json);  
         createMaterialJson(arg0, true);
@@ -270,8 +270,8 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "SphereGeometry");
 	dg_json.put("radius", visualizerScaleFactor);
-	dg_json.put("widthSegments", 64);
-	dg_json.put("heightSegments", 64);
+	dg_json.put("widthSegments", 32);
+	dg_json.put("heightSegments", 16);
         if (quadrants.equals("")){
            dg_json.put("phiStart", 0);
            dg_json.put("phiLength", 6.28);
@@ -318,8 +318,8 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "SphereGeometry");
         dg_json.put("radius", arg0.getRadius()*visualizerScaleFactor);
-        dg_json.put("widthSegments", 64);
-        dg_json.put("heightSegments", 64);
+        dg_json.put("widthSegments", 32);
+        dg_json.put("heightSegments", 16);
         if (quadrants.equals("")){
             dg_json.put("phiStart", 0);
             dg_json.put("phiLength", 6.28);
@@ -359,7 +359,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "CircleGeometry");
 	dg_json.put("radius", arg0.getRadius()*visualizerScaleFactor);
-	dg_json.put("segments", 64);
+	dg_json.put("segments", 32);
         jsonArr.add(dg_json); 
         createMaterialJson(arg0, false);
     }
@@ -378,7 +378,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         dg_json.put("radiusTop", arg0.getRadius()*visualizerScaleFactor);
         dg_json.put("radiusBottom", arg0.getRadius()*visualizerScaleFactor);
         dg_json.put("height", arg0.getHalfHeight()*2*visualizerScaleFactor);
-        dg_json.put("radialSegments", 64);
+        dg_json.put("radialSegments", 32);
         dg_json.put("heightSegments", 1);
         if (!quadrants.equals("")){
             dg_json.put("thetaLength", 3.14159);
@@ -490,11 +490,10 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         mat_json.put("uuid", uuid_mat.toString());
         String colorString = JSONUtilities.mapColorToRGBA(dg.getColor());
         if (isSurface){
-            mat_json.put("type", "MeshPhongMaterial");
-            mat_json.put("shininess", 30);
+            mat_json.put("type", "MeshStandardMaterial");
             mat_json.put("transparent", true);
-            mat_json.put("emissive", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
-            mat_json.put("specular", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
+            mat_json.put("metalness", 0);
+            mat_json.put("roughness", 1.0);
             mat_json.put("side", 2);
             mat_json.put("wireframe", dg.getRepresentation() == DecorativeGeometry.Representation.DrawWireframe);     
         }

@@ -34,8 +34,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.prefs.Preferences;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.openide.util.NbBundle;
 import org.opensim.modeling.AbstractPathPoint;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayDecorativeGeometry;
@@ -54,9 +56,11 @@ import org.opensim.modeling.FrameGeometry;
 import org.opensim.modeling.Geometry;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Marker;
+import org.opensim.modeling.Mesh;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
 import org.opensim.modeling.MovingPathPoint;
+import org.opensim.modeling.Muscle;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.PathPointSet;
@@ -67,6 +71,7 @@ import org.opensim.modeling.State;
 import org.opensim.modeling.Transform;
 import org.opensim.modeling.Vec3;
 import org.opensim.modeling.WrapObject;
+import org.opensim.utils.TheApp;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.view.motions.MotionDisplayer;
 import org.opensim.view.pub.OpenSimDB;
@@ -76,6 +81,24 @@ import org.opensim.view.pub.OpenSimDB;
  * @author Ayman
  */
 public class ModelVisualizationJson extends JSONObject {
+
+    /**
+     * @return the currentPathColorMap
+     */
+    public PathColorMap getCurrentPathColorMap() {
+        return currentPathColorMap;
+    }
+
+    static {
+        PathColorMapFactory.registerPathColorMap("Classic", new LegacyPathColorMap());
+        PathColorMapFactory.registerPathColorMap("Modern", new ModernPathColorMap());
+    }
+    /**
+     * @param currentPathColorMap the currentPathColorMap to set
+     */
+    public void setCurrentPathColorMap(PathColorMap currentPathColorMap) {
+        this.currentPathColorMap = currentPathColorMap;
+    }
 
     /**
      * @return the showCom
@@ -111,6 +134,9 @@ public class ModelVisualizationJson extends JSONObject {
     private UUID modelUUID;
     private UUID pathpointMatUUID;
     private UUID markerMatUUID;
+    private UUID bonePhongUUID;
+    private UUID boneStandardUUID;
+    private boolean useSameMeshMaterial =true;
     private JSONObject pathPointGeometryJSON = null;
     private JSONObject marker_mat_json;
     public static boolean verbose=false;
@@ -133,6 +159,7 @@ public class ModelVisualizationJson extends JSONObject {
     private ArrayList<VisualizerAddOn> visualizerAddOns = new ArrayList<VisualizerAddOn>();
     private VisualizerAddOnCom comVizAddOn = new VisualizerAddOnCom();
     private boolean showCom = false;
+    private PathColorMap currentPathColorMap;
     
     public Boolean getFrameVisibility(Frame b) {
         return visualizerFrames.get(b).visible;
@@ -237,6 +264,16 @@ public class ModelVisualizationJson extends JSONObject {
         this.model = model;
         movable = (model instanceof ModelForExperimentalData);
         createModelJsonNode(); // Model node
+        // Decide if using same material for all Meshes or not
+        String oneMaterialAllMeshes = "Off";
+        String saved=Preferences.userNodeForPackage(TheApp.class).get("One Material Meshes", oneMaterialAllMeshes);
+        Preferences.userNodeForPackage(TheApp.class).put("One Material Meshes", saved);
+        useSameMeshMaterial = saved.equalsIgnoreCase("on");
+        // Decide color Scheme for muscles
+        saved = "Classic";
+        String currentTemplate =Preferences.userNodeForPackage(TheApp.class).get("Muscle Color Scheme", saved);
+        Preferences.userNodeForPackage(TheApp.class).put("Muscle Color Scheme", currentTemplate);
+        currentPathColorMap = PathColorMapFactory.getColorMap(currentTemplate);
         createJsonForModel(model);
         ready = true;
         if (verbose)
@@ -273,6 +310,8 @@ public class ModelVisualizationJson extends JSONObject {
         // Create material for PathPoints, Markers
         pathpointMatUUID= createPathPointMaterial();
         markerMatUUID= createMarkerMaterial(mdh);
+        bonePhongUUID = createBonePhongMaterial();
+        boneStandardUUID = createBoneStandardMaterialAndColor();
         pathPointGeometryJSON = createPathPointGeometryJSON();
         dgimp = new DecorativeGeometryImplementationJS(json_geometries, json_materials, visScaleFactor);
         while (!mcIter.equals(mcList.end())) {
@@ -381,7 +420,9 @@ public class ModelVisualizationJson extends JSONObject {
         boolean isMarker = Marker.safeDownCast(comp)!=null;
         if (isMarker)
             dgimp.useMaterial(markerMatUUID);
-        
+        // If using MeshStandardMaterial for Mesh objects
+        if (Mesh.safeDownCast(comp)!=null && useSameMeshMaterial)
+            dgimp.useMaterial(boneStandardUUID);
         for (int idx = 0; idx < adg.size(); idx++) {
             dg = adg.getElt(idx);
             String geomId = comp.getAbsolutePathString();
@@ -404,6 +445,7 @@ public class ModelVisualizationJson extends JSONObject {
                 // If partialWrapObject set value in dgimp 
                 dgimp.setGeomID(uuid);
                 dg.implementGeometry(dgimp);
+                
                 JSONObject bodyJson = mapBodyIndicesToJson.get(dg.getBodyId());
                 if (bodyJson.get("children")==null)
                     bodyJson.put("children", new JSONArray());
@@ -419,6 +461,9 @@ public class ModelVisualizationJson extends JSONObject {
         if (isMarker)
             dgimp.useMaterial(null);
         
+        if (Mesh.safeDownCast(comp)!=null && useSameMeshMaterial)
+            dgimp.useMaterial(null);
+
         mapComponentToUUID.put(comp, vis_uuidList);
         if (verbose)
             System.out.println("Map component="+comp.getAbsolutePathString()+" to "+vis_uuidList.size());   
@@ -592,12 +637,15 @@ public class ModelVisualizationJson extends JSONObject {
                 UUID pathUUID = pathList.get(geomPathObject);
                 JSONObject pathUpdate_json = new JSONObject();
                 pathUpdate_json.put("uuid", pathUUID.toString());
-                Vec3 pathColor = colorByState ? geomPathObject.getColor(state) : geomPathObject.getDefaultColor();
-                if (verbose)
-                    System.out.println("Color:"+geomPathObject.getOwner().getName()+"="+pathColor.toString());
-                String colorString = JSONUtilities.mapColorToRGBA(pathColor);
-                pathUpdate_json.put("color", colorString);
-                geompaths_json.add(pathUpdate_json);
+                if (Muscle.safeDownCast(geomPathObject.getOwner())!= null){
+                    Vec3 pathColor = colorByState ? currentPathColorMap.getColor(geomPathObject, state, -1) : geomPathObject.getDefaultColor();
+                
+                    if (verbose)
+                        System.out.println("Color:"+geomPathObject.getOwner().getName()+"="+pathColor.toString());
+                    String colorString = JSONUtilities.mapColorToRGBA(pathColor);
+                    pathUpdate_json.put("color", colorString);
+                    geompaths_json.add(pathUpdate_json);
+                }
             }
             // Have AddOns update their tranasforms
             for (VisualizerAddOn nextAddOn:visualizerAddOns){
@@ -1191,6 +1239,32 @@ public class ModelVisualizationJson extends JSONObject {
         mat_json.put("name", "PathPointMat");
         mat_json.put("type", "MeshBasicMaterial");
         String colorString = JSONUtilities.mapColorToRGBA(new Vec3(.8, .1, .1));
+        mat_json.put("color", colorString);
+        mat_json.put("side", 2);
+        json_materials.add(mat_json);
+        return mat_uuid;
+    }
+    private UUID createBonePhongMaterial() {
+        Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
+        UUID mat_uuid = UUID.randomUUID();
+        mat_json.put("uuid", mat_uuid.toString());
+        mat_json.put("name", "BonePhongMat");
+        mat_json.put("type", "MeshPhongMaterial");
+        String colorString = JSONUtilities.mapColorToRGBA(new Vec3(0.949,0.863,0.757));
+        mat_json.put("color", colorString);
+        mat_json.put("side", 2);
+        json_materials.add(mat_json);
+        return mat_uuid;
+    }
+    private UUID createBoneStandardMaterialAndColor() {
+        Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
+        UUID mat_uuid = UUID.randomUUID();
+        mat_json.put("uuid", mat_uuid.toString());
+        mat_json.put("name", "BoneStandardMat");
+        mat_json.put("type", "MeshStandardMaterial");
+        mat_json.put("metalness", 0);
+        mat_json.put("roughness", 1.0);
+        String colorString = JSONUtilities.mapColorToRGBA(new Vec3(0.949,0.863,0.757));
         mat_json.put("color", colorString);
         mat_json.put("side", 2);
         json_materials.add(mat_json);
