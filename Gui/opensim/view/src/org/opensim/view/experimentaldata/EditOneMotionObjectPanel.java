@@ -28,6 +28,7 @@
 
 package org.opensim.view.experimentaldata;
 
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JComboBox;
 import org.openide.DialogDescriptor;
@@ -35,7 +36,10 @@ import org.opensim.modeling.ArrayInt;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.BodySet;
+import org.opensim.modeling.FrameIterator;
+import org.opensim.modeling.FrameList;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.Storage;
 import org.opensim.modeling.Vec3;
 
@@ -554,9 +558,9 @@ private void jComboBoxTZupdateForceFromPanel(java.awt.event.ActionEvent evt) {//
     // Initialize GUI Panel from a externalForce
     private void initComboBoxes() {
         // Body name combobox
-        
+        FrameList frameList = aModel.getFrameList();
         BodySet bodySet = aModel.getBodySet();
-        populateBodyList(bodySet, BodiesComboBox);
+        populateBodyList(frameList, BodiesComboBox);
          BodiesComboBox.setSelectedItem(motionForce.getForceAppliedToBody());
          PointExpressedBodiesComboBox.setSelectedItem(motionForce.getPointExpressedInBody());
          ForceExpressedBodiesComboBox.setSelectedItem(motionForce.getForceExpressedInBodyName());
@@ -592,8 +596,8 @@ private void jComboBoxTZupdateForceFromPanel(java.awt.event.ActionEvent evt) {//
         } else
             jRadioButtonApplyBodyForce.setSelected(true);
        //externalForce.getTorqueFunctionNames(torqueFunctionNames);
-        populateBodyList(bodySet, ForceExpressedBodiesComboBox);
-        populateBodyList(bodySet, PointExpressedBodiesComboBox);
+        populateBodyList(frameList, ForceExpressedBodiesComboBox);
+        populateBodyList(frameList, PointExpressedBodiesComboBox);
         
         String dbg1 = motionForce.getForceExpressedInBodyName();
         ForceExpressedBodiesComboBox.setSelectedItem(motionForce.getForceExpressedInBodyName());
@@ -615,13 +619,21 @@ private void jComboBoxTZupdateForceFromPanel(java.awt.event.ActionEvent evt) {//
         }
     }
 
-    private void populateBodyList(final BodySet bodySet, JComboBox comboBox) {
+    private void populateBodyList(final FrameList frameList, JComboBox comboBox) {
         comboBox.removeAllItems();
-        String[] bNames = new String[bodySet.getSize()];
+        FrameIterator bi = frameList.begin();
+        ArrayList<String> frameNames = new ArrayList<String>();
+        while(!bi.equals(frameList.end())){
+              if (PhysicalFrame.safeDownCast(bi.__deref__())!= null){
+                  frameNames.add(bi.getName());
+              }
+             bi.next();
+        }
+        String[] bNames = new String[frameNames.size()];
 
-        for(int i=0; i<bodySet.getSize(); i++){
-            comboBox.addItem(bodySet.get(i).getName());
-            bNames[i]=bodySet.get(i).getName();
+        for(int i=0; i<frameNames.size(); i++){
+            bNames[i]=frameNames.get(i);
+            comboBox.addItem(frameNames.get(i));
         }
         comboBox.setModel(new javax.swing.DefaultComboBoxModel(bNames));
     }

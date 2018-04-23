@@ -34,7 +34,6 @@ import javax.swing.JComboBox;
 import org.openide.DialogDescriptor;
 import org.opensim.modeling.ArrayInt;
 import org.opensim.modeling.ArrayStr;
-import org.opensim.modeling.BodySet;
 import org.opensim.modeling.ExternalLoads;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ExternalForce;

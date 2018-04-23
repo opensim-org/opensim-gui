@@ -76,8 +76,8 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jComboBoxFX" pref="152" max="32767" attributes="3"/>
-                                              <Component id="jComboBoxPX" alignment="0" pref="152" max="32767" attributes="1"/>
+                                              <Component id="jComboBoxFX" max="32767" attributes="3"/>
+                                              <Component id="jComboBoxPX" alignment="0" max="32767" attributes="1"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -94,8 +94,8 @@
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jComboBoxPY" pref="138" max="32767" attributes="1"/>
-                                      <Component id="jComboBoxFY" alignment="1" pref="138" max="32767" attributes="2"/>
+                                      <Component id="jComboBoxPY" max="32767" attributes="1"/>
+                                      <Component id="jComboBoxFY" alignment="1" pref="0" max="32767" attributes="2"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -115,8 +115,8 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="ForceExpressedBodiesComboBox" alignment="1" pref="152" max="32767" attributes="0"/>
-                                      <Component id="jComboBoxTX" alignment="0" pref="152" max="32767" attributes="1"/>
+                                      <Component id="ForceExpressedBodiesComboBox" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="jComboBoxTX" alignment="0" max="32767" attributes="1"/>
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
@@ -140,8 +140,8 @@
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="PointExpressedBodiesComboBox" pref="156" max="32767" attributes="0"/>
-                              <Component id="jComboBoxTZ" alignment="0" pref="156" max="32767" attributes="2"/>
+                              <Component id="PointExpressedBodiesComboBox" max="32767" attributes="0"/>
+                              <Component id="jComboBoxTZ" alignment="0" max="32767" attributes="2"/>
                           </Group>
                       </Group>
                   </Group>
