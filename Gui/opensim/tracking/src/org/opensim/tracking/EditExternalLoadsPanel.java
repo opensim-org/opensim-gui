@@ -67,6 +67,7 @@ public class EditExternalLoadsPanel extends javax.swing.JPanel
     private NumberFormat numFormat = NumberFormat.getInstance();
     String fullExternalLoadsFilename;
     File dataFile=null;
+    Model modelLocalCopy;
     /**
      * Creates new form EditPrescribedForceSetPanel
      */
@@ -76,6 +77,7 @@ public class EditExternalLoadsPanel extends javax.swing.JPanel
             // Query user to create new file
             createNewFile = true;
         }
+        modelLocalCopy = new Model(model);
         if (externalLoadsFilename.equalsIgnoreCase("")|| externalLoadsFilename.equalsIgnoreCase("Unassigned") || createNewFile){
             // Create a new empty ExternalLoads file and use it for now
             String f = Preferences.userNodeForPackage(TheApp.class).get("WorkDirectory", "");
@@ -89,8 +91,9 @@ public class EditExternalLoadsPanel extends javax.swing.JPanel
             el.delete();
             el=null;
         }
-            dLoads = new ExternalLoads(model, externalLoadsFilename);
+        dLoads = new ExternalLoads(modelLocalCopy, externalLoadsFilename);
         dLoads.setName("Ex2");
+        modelLocalCopy.initSystem();
         fullExternalLoadsFilename = externalLoadsFilename;
         forceListModel = new ForceListModel(dLoads);
         initComponents();

@@ -55,6 +55,7 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
     private MotionObjectsListModel objectListModel;
     AnnotatedMotion aMotion;
     Model aModel;
+    Model modelLocalCopy;
     //private NumberFormat numFormat = NumberFormat.getInstance();
     /**
      * Creates new form EditPrescribedForceSetPanel
@@ -62,6 +63,7 @@ public class EditMotionObjectsPanel extends javax.swing.JPanel
     public EditMotionObjectsPanel(AnnotatedMotion dMotion, Model model){
         aMotion = dMotion;
         aModel = model;
+        modelLocalCopy = new Model(model);
         objectListModel = new MotionObjectsListModel(aMotion);
         initComponents();
         updateButtonAvailability();
@@ -426,7 +428,8 @@ private void jButtonLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     String fileName = FileUtils.getInstance().browseForFilename(ff, true, null);
     if (fileName!=null){
             try {
-                ExternalLoads exLoads = new ExternalLoads(aModel, fileName);
+                ExternalLoads exLoads = new ExternalLoads(modelLocalCopy, fileName);
+                modelLocalCopy.initSystem();
                 for(int i=0; i<exLoads.getSize(); i++){
                     ExternalForce ef = exLoads.get(i);
                     String bodyApplied = ef.getAppliedToBodyName();
