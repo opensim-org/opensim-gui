@@ -149,7 +149,9 @@ public class Installer extends ModuleInstall {
     {
          String currentVersionStr = NbBundle.getMessage(TheApp.class, "CTL_BuildDate");
          String savedVersionStr = Preferences.userNodeForPackage(TheApp.class).get("BuildDate", null);
+         boolean updateResources = false;
          if (!currentVersionStr.equalsIgnoreCase(savedVersionStr)){
+             updateResources = true;
              // First launch, copy resources to User selected folder and save that as OpenSimUserDir
             SwingUtilities.invokeLater( new Runnable(){
                 public void run() {
@@ -167,10 +169,10 @@ public class Installer extends ModuleInstall {
          String defaultGeometryPath = TheApp.getDefaultGeometrySearchPath();
          saved=Preferences.userNodeForPackage(TheApp.class).get("Geometry Path", defaultGeometryPath);
          if (saved.isEmpty()||saved.equalsIgnoreCase("")){
-             saved = TheApp.getDefaultGeometrySearchPath();
+             saved = defaultGeometryPath;
          }
-         else if (!saved.contains(defaultGeometryPath))
-             saved.concat(File.pathSeparator+defaultGeometryPath);
+         else if (!saved.contains(defaultGeometryPath) && updateResources)
+             saved = saved.concat(File.pathSeparator+defaultGeometryPath);
          Preferences.userNodeForPackage(TheApp.class).put("Geometry Path", saved);
          // Push changes to API side
          GeometryFileLocator.updateGeometrySearchPathsFromPreferences();
@@ -181,14 +183,6 @@ public class Installer extends ModuleInstall {
          String muscleRadius = NbBundle.getMessage(ViewDB.class, "CTL_MuscleRadius");        
          saved = Preferences.userNodeForPackage(TheApp.class).get("Muscle Display Radius", muscleRadius);
          Preferences.userNodeForPackage(TheApp.class).put("Muscle Display Radius", saved);
-
-         String markerRadius = NbBundle.getMessage(ViewDB.class, "CTL_MarkerRadius");        
-         saved = Preferences.userNodeForPackage(TheApp.class).get("Marker Display Radius", markerRadius);
-         Preferences.userNodeForPackage(TheApp.class).put("Marker Display Radius", saved);
-
-         String markerColor = NbBundle.getMessage(ViewDB.class, "CTL_MarkersColorRGB");        
-         saved = Preferences.userNodeForPackage(TheApp.class).get("Markers Color", markerColor);
-         Preferences.userNodeForPackage(TheApp.class).put("Markers Color", saved);
 
          String experimentalMarkerDisplayScaleStr="1.0";
          saved=Preferences.userNodeForPackage(TheApp.class).get("Experimental Marker Size", experimentalMarkerDisplayScaleStr);
