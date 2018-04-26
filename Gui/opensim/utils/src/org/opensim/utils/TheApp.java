@@ -205,24 +205,24 @@ public final class TheApp {
         jTextArea1.setEnabled(false);
         JPanel containerPanel = new JPanel();
         containerPanel.setLayout(new javax.swing.BoxLayout(containerPanel, javax.swing.BoxLayout.Y_AXIS));
-         do {
-            jTextArea1.setText("Please choose a location for the OpenSim resources (models and examples). \nApproximately 60 MB will be copied. You should have permissions to write to this folder.\nTo reinstall the resources at any time, type \"installResources()\" in the ScriptingShell Window.");
-            FileTextFieldAndChooser destDirectoryPanel = new org.opensim.swingui.FileTextFieldAndChooser();
-            destDirectoryPanel.setDirectoriesOnly(true);
-            destDirectoryPanel.setCheckIfFileExists(false);
-            destDirectoryPanel.setFileName(userHome, false);
-            destDirectoryPanel.isSaveMode();
-            destDirectoryPanel.setTreatEmptyStringAsValid(false);
-            containerPanel.add(jTextArea1);
-            containerPanel.add(destDirectoryPanel);
-            containerPanel.validate();
-            containerPanel.setPreferredSize(containerPanel.getPreferredSize());
-            DialogDescriptor dd = new DialogDescriptor(containerPanel, "Folder to install models and scripts:");
-            // Create a Dialog to contain the chooser
-            Dialog dlg = DialogDisplayer.getDefault().createDialog(dd);
-            dlg.setModal(true);
+        jTextArea1.setText("Please choose a location for the OpenSim resources (models and examples). \nApproximately 60 MB will be copied. You should have permissions to write to this folder.\nTo reinstall the resources at any time, type \"installResources()\" in the ScriptingShell Window.");
+        FileTextFieldAndChooser destDirectoryPanel = new org.opensim.swingui.FileTextFieldAndChooser();
+        destDirectoryPanel.setDirectoriesOnly(true);
+        destDirectoryPanel.setCheckIfFileExists(false);
+        destDirectoryPanel.setFileName(userHome, false);
+        destDirectoryPanel.isSaveMode();
+        destDirectoryPanel.setTreatEmptyStringAsValid(false);
+        containerPanel.add(jTextArea1);
+        containerPanel.add(destDirectoryPanel);
+        containerPanel.validate();
+        containerPanel.setPreferredSize(containerPanel.getPreferredSize());
+        DialogDescriptor dd = new DialogDescriptor(containerPanel, "Folder to install models and scripts:");
+        // Create a Dialog to contain the chooser
+        Dialog dlg = DialogDisplayer.getDefault().createDialog(dd);
+        dlg.setModal(true);
+        dlg.setResizable(false);
+        do {
             dlg.setVisible(true);
-            dlg.setResizable(false);
             Object userInput = dd.getValue();
             if (((Integer)userInput).compareTo((Integer)DialogDescriptor.CANCEL_OPTION)==0){
                 return "";
