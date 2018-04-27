@@ -134,9 +134,7 @@ public class ModelVisualizationJson extends JSONObject {
     private UUID modelUUID;
     private UUID pathpointMatUUID;
     private UUID markerMatUUID;
-    private UUID bonePhongUUID;
     private UUID boneStandardUUID;
-    private boolean useSameMeshMaterial =true;
     private JSONObject pathPointGeometryJSON = null;
     private JSONObject marker_mat_json;
     public static boolean verbose=false;
@@ -160,6 +158,8 @@ public class ModelVisualizationJson extends JSONObject {
     private VisualizerAddOnCom comVizAddOn = new VisualizerAddOnCom();
     private boolean showCom = false;
     private PathColorMap currentPathColorMap;
+    // Preferences
+    private double prefMuscleDisplayRadius=0.005;
     
     public Boolean getFrameVisibility(Frame b) {
         return visualizerFrames.get(b).visible;
@@ -264,16 +264,18 @@ public class ModelVisualizationJson extends JSONObject {
         this.model = model;
         movable = (model instanceof ModelForExperimentalData);
         createModelJsonNode(); // Model node
-        // Decide if using same material for all Meshes or not
-        String oneMaterialAllMeshes = "Off";
-        String saved=Preferences.userNodeForPackage(TheApp.class).get("One Material Meshes", oneMaterialAllMeshes);
-        Preferences.userNodeForPackage(TheApp.class).put("One Material Meshes", saved);
-        useSameMeshMaterial = saved.equalsIgnoreCase("on");
         // Decide color Scheme for muscles
-        saved = "Classic";
+        String saved = "Classic";
         String currentTemplate =Preferences.userNodeForPackage(TheApp.class).get("Muscle Color Scheme", saved);
         Preferences.userNodeForPackage(TheApp.class).put("Muscle Color Scheme", currentTemplate);
         currentPathColorMap = PathColorMapFactory.getColorMap(currentTemplate);
+        
+        // Decide on bone shape/width
+        saved = ".005";
+        String currentSize= Preferences.userNodeForPackage(TheApp.class).get("Muscle Dsiplay Radius", saved);
+        Preferences.userNodeForPackage(TheApp.class).put("Muscle Dsiplay Radius", currentSize);
+        prefMuscleDisplayRadius = Double.parseDouble(currentSize);
+        
         createJsonForModel(model);
         ready = true;
         if (verbose)
@@ -310,7 +312,6 @@ public class ModelVisualizationJson extends JSONObject {
         // Create material for PathPoints, Markers
         pathpointMatUUID= createPathPointMaterial();
         markerMatUUID= createMarkerMaterial(mdh);
-        bonePhongUUID = createBonePhongMaterial();
         boneStandardUUID = createBoneStandardMaterialAndColor();
         pathPointGeometryJSON = createPathPointGeometryJSON();
         dgimp = new DecorativeGeometryImplementationJS(json_geometries, json_materials, visScaleFactor);
@@ -420,9 +421,7 @@ public class ModelVisualizationJson extends JSONObject {
         boolean isMarker = Marker.safeDownCast(comp)!=null;
         if (isMarker)
             dgimp.useMaterial(markerMatUUID);
-        // If using MeshStandardMaterial for Mesh objects
-        if (Mesh.safeDownCast(comp)!=null && useSameMeshMaterial)
-            dgimp.useMaterial(boneStandardUUID);
+
         for (int idx = 0; idx < adg.size(); idx++) {
             dg = adg.getElt(idx);
             String geomId = comp.getAbsolutePathString();
@@ -459,9 +458,6 @@ public class ModelVisualizationJson extends JSONObject {
         if (partialWrapObject)
             dgimp.setQuadrants("");
         if (isMarker)
-            dgimp.useMaterial(null);
-        
-        if (Mesh.safeDownCast(comp)!=null && useSameMeshMaterial)
             dgimp.useMaterial(null);
 
         mapComponentToUUID.put(comp, vis_uuidList);
@@ -800,6 +796,7 @@ public class ModelVisualizationJson extends JSONObject {
         UUID uuidForPathGeomGeometry = UUID.randomUUID();
         pathGeomJson.put("uuid", uuidForPathGeomGeometry.toString());
         pathGeomJson.put("type", "PathGeometry");
+        pathGeomJson.put("radius", 8*200*prefMuscleDisplayRadius);
         pathGeomJson.put("name", path.getAbsolutePathString()+"Control");
         // This includes inactive ConditionalPoints but no Wrapping
         int numWrapObjects = path.getWrapSet().getSize();
@@ -1244,19 +1241,7 @@ public class ModelVisualizationJson extends JSONObject {
         json_materials.add(mat_json);
         return mat_uuid;
     }
-    private UUID createBonePhongMaterial() {
-        Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
-        UUID mat_uuid = UUID.randomUUID();
-        mat_json.put("uuid", mat_uuid.toString());
-        mat_json.put("name", "BonePhongMat");
-        mat_json.put("type", "MeshPhongMaterial");
-        String colorString = JSONUtilities.mapColorToRGBA(new Vec3(0.949,0.863,0.757));
-        mat_json.put("color", colorString);
-        mat_json.put("side", 2);
-        json_materials.add(mat_json);
-        return mat_uuid;
-    }
-    private UUID createBoneStandardMaterialAndColor() {
+     private UUID createBoneStandardMaterialAndColor() {
         Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
         UUID mat_uuid = UUID.randomUUID();
         mat_json.put("uuid", mat_uuid.toString());
