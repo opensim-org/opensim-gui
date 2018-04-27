@@ -97,12 +97,12 @@ public class AnnotatedMotion extends Storage {
             classified.add(markerObject);
             for(int coord=0; coord<3; coord++){
                 //System.out.println("checking index "+(i*3+coord)+"& "+(i*3+coord+3));
-                if (getBoundingBox()[coord] > mins[i*3+coord]){
-                    getBoundingBox()[coord] = mins[i*3+coord];
+                if (boundingBox[coord] > mins[i*3+coord]){
+                    boundingBox[coord] = mins[i*3+coord];
                     if (coord==1) minXIndex=i;
                 }
-                if (getBoundingBox()[coord+3] < maxs[i*3+coord]){
-                    getBoundingBox()[coord+3] = maxs[i*3+coord];
+                if (boundingBox[coord+3] < maxs[i*3+coord]){
+                    boundingBox[coord+3] = maxs[i*3+coord];
                     if (coord==1) maxXIndex=i;
                 }
             }
@@ -111,14 +111,14 @@ public class AnnotatedMotion extends Storage {
         }
         System.out.println("minY, maxY are at markers "+minXIndex+", "+maxXIndex);
         System.out.println("Bounding box="+
-                getBoundingBox()[0]+", "+
-                getBoundingBox()[1]+", "+
-                getBoundingBox()[2]+", "+
-                getBoundingBox()[3]+", "+
-                getBoundingBox()[4]+", "+
-                getBoundingBox()[5]
+                boundingBox[0]+", "+
+                boundingBox[1]+", "+
+                boundingBox[2]+", "+
+                boundingBox[3]+", "+
+                boundingBox[4]+", "+
+                boundingBox[5]
                 );
-        for (int i=0; i<6; i++) getBoundingBox()[i]/= getUnitConversion();
+        for (int i=0; i<6; i++) boundingBox[i]/= getUnitConversion();
         setBoundingBoxComputed(true);
     }
 
@@ -266,7 +266,7 @@ public class AnnotatedMotion extends Storage {
         obj.setTrailDisplayed(!obj.isTrailDisplayed());
     }
 
-    public final double[] getBoundingBox() {
+    public double[] getBoundingBox() {
         if (isBoundingBoxComputed())
             return boundingBox;
         else
@@ -279,7 +279,7 @@ public class AnnotatedMotion extends Storage {
 
     public void setUnitConversion(double unitConversion) {
         this.unitConversion = unitConversion;
-        for (int i=0; i<6; i++) getBoundingBox()[i]/= unitConversion;
+        for (int i=0; i<6; i++) boundingBox[i]/= unitConversion;
     }
 
     public boolean isBoundingBoxComputed() {
