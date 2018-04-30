@@ -55,7 +55,8 @@ install:
   - nuget install opensim-core-VC141 -Version 0.0.0 -ExcludeVersion -OutputDirectory C:\
   - dir C:\
   # Only get certain submodules (not OpenSimAPI).
-  - git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
+  - git submodule update --init --recursive -- opensim-models opensim-visualizer # Gui/opensim/threejs
+  - git clone -b update_threejs_r91 https://github.com/opensim-org/three.js Gui/opensim/threejs
   
 build_script:
   # Tweak installer files for the AppVeyor deployment.
@@ -84,8 +85,9 @@ test_script:
 after_test:
   ## On master branch, create package for OpenSim.
   # Detect if we are on the master branch.
-  - IF %APPVEYOR_REPO_BRANCH% EQU master IF NOT DEFINED APPVEYOR_PULL_REQUEST_NUMBER SET DISTR=TRUE
+  # - IF %APPVEYOR_REPO_BRANCH% EQU master IF NOT DEFINED APPVEYOR_PULL_REQUEST_NUMBER SET DISTR=TRUE
+  - SET DISTR=TRUE
   # Create and upload package.
   - cd %APPVEYOR_BUILD_FOLDER%
-  - IF DEFINED DISTR 7z a C:\OpenSim-%VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Gui\opensim\dist\installer\opensim\
-  - IF DEFINED DISTR appveyor PushArtifact C:\OpenSim-%VERSION%.zip
+  - IF DEFINED DISTR 7z a C:\OpenSim-%VERSION%_threejs_r91.zip %APPVEYOR_BUILD_FOLDER%\Gui\opensim\dist\installer\opensim\
+  - IF DEFINED DISTR appveyor PushArtifact C:\OpenSim-%VERSION%_threejs_r91.zip
