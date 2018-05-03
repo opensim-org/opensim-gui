@@ -225,7 +225,6 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       // Integrator settings for forward dynamics
       if(mode==Mode.ForwardDynamics || mode==Mode.CMC || mode==Mode.RRA) {
          jTabbedPane1.addTab("Integrator Settings", advancedSettingsPanel);
-         if(mode==Mode.CMC|| mode==Mode.RRA) useSpecifiedDt.setVisible(false);
       }
 
       // Re-layout panels after we've removed various parts...
@@ -251,7 +250,6 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       } else if(mode==Mode.ForwardDynamics) {
          //opensim20 ToolCommon.bindProperty(toolModel.getTool(), "controls_file", controlsFileName);
          ToolCommon.bindProperty(toolModel.getTool(), "states_file", initialStatesFileName);
-         ToolCommon.bindProperty(toolModel.getTool(), "use_specified_dt", useSpecifiedDt);
       } else if (mode==Mode.CMC){ //CMC
          ToolCommon.bindProperty(toolModel.getTool(), "desired_kinematics_file", cmcDesiredKinematicsFileName);
          ToolCommon.bindProperty(toolModel.getTool(), "lowpass_cutoff_frequency", cmcCutoffFrequency);
@@ -525,7 +523,6 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       controlsFileName.setFileName(toolModel.getControlsFileName(),false);
       initialStatesFileName.setFileName(toolModel.getInitialStatesFileName(),false);
 
-      useSpecifiedDt.setSelected(toolModel.getUseSpecifiedDt());
       solveForEquilibriumCheckBox.setSelected(toolModel.getSolveForEquilibrium());
       updateIntegratorSettings(toolModel);
    }
@@ -634,7 +631,6 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
         advancedSettingsPanel = new javax.swing.JPanel();
         integratorSettingsPanel = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
-        useSpecifiedDt = new javax.swing.JCheckBox();
         jLabel16 = new javax.swing.JLabel();
         maximumNumberOfSteps = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
@@ -751,15 +747,6 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
 
             jLabel15.setText("Integrator error tolerance");
 
-            useSpecifiedDt.setText("Use time steps from states file");
-            useSpecifiedDt.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-            useSpecifiedDt.setMargin(new java.awt.Insets(0, 0, 0, 0));
-            useSpecifiedDt.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    useSpecifiedDtActionPerformed(evt);
-                }
-            });
-
             jLabel16.setText("Maximum number of steps");
 
             maximumNumberOfSteps.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
@@ -822,30 +809,25 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
             integratorSettingsPanel.setLayout(integratorSettingsPanelLayout);
             integratorSettingsPanelLayout.setHorizontalGroup(
                 integratorSettingsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(integratorSettingsPanelLayout.createSequentialGroup()
-                    .add(10, 10, 10)
-                    .add(useSpecifiedDt)
-                    .addContainerGap(397, Short.MAX_VALUE))
                 .add(org.jdesktop.layout.GroupLayout.TRAILING, integratorSettingsPanelLayout.createSequentialGroup()
                     .addContainerGap()
                     .add(integratorSettingsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(jLabel16)
                         .add(jLabel17)
-                        .add(jLabel15, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 146, Short.MAX_VALUE)
+                        .add(jLabel15, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .add(jLabel13))
                     .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                     .add(integratorSettingsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(org.jdesktop.layout.GroupLayout.TRAILING, minDT, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                        .add(org.jdesktop.layout.GroupLayout.TRAILING, errorTolerance, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                        .add(org.jdesktop.layout.GroupLayout.TRAILING, maxDT, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                        .add(org.jdesktop.layout.GroupLayout.TRAILING, maximumNumberOfSteps, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
+                        .add(org.jdesktop.layout.GroupLayout.TRAILING, minDT, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 6, Short.MAX_VALUE)
+                        .add(org.jdesktop.layout.GroupLayout.TRAILING, errorTolerance, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                        .add(org.jdesktop.layout.GroupLayout.TRAILING, maxDT, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                        .add(org.jdesktop.layout.GroupLayout.TRAILING, maximumNumberOfSteps, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                     .add(216, 216, 216))
             );
             integratorSettingsPanelLayout.setVerticalGroup(
                 integratorSettingsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                 .add(integratorSettingsPanelLayout.createSequentialGroup()
-                    .add(useSpecifiedDt)
-                    .add(5, 5, 5)
+                    .add(0, 0, 0)
                     .add(integratorSettingsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                         .add(jLabel16)
                         .add(maximumNumberOfSteps, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
@@ -877,8 +859,8 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                 advancedSettingsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                 .add(advancedSettingsPanelLayout.createSequentialGroup()
                     .addContainerGap()
-                    .add(integratorSettingsPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(integratorSettingsPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 208, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(0, 0, 0))
             );
 
             buttonGroup1.add(unspecifiedRadioButton);
@@ -1703,7 +1685,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                     .addContainerGap()
                     .add(inverseInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                         .add(statesRadioButton1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(motionRadioButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 62, Short.MAX_VALUE))
+                        .add(motionRadioButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                     .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                     .add(inverseInputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                         .add(inverseInputPanelLayout.createSequentialGroup()
@@ -1863,7 +1845,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                 .add(staticOptimizationPanelLayout.createSequentialGroup()
                     .add(staticOptimizationPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2, 0, 92, Short.MAX_VALUE))
+                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2, 0, 122, Short.MAX_VALUE))
                     .addContainerGap())
             );
 
@@ -1949,20 +1931,6 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       }
 // TODO add your handling code here:
     }//GEN-LAST:event_staticOptActivationExponentTextFieldActionPerformed
-
-    private void minDTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_minDTFocusLost
-      if(!evt.isTemporary()) minDTActionPerformed(null);
-// TODO add your handling code here:
-    }//GEN-LAST:event_minDTFocusLost
-
-    private void minDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minDTActionPerformed
-      try {
-         toolModel.setMinDT(numFormat.parse(minDT.getText()).doubleValue());
-      } catch (ParseException ex) {
-         minDT.setText(numFormat.format(toolModel.getMinDT()));
-      }
-// TODO add your handling code here:
-    }//GEN-LAST:event_minDTActionPerformed
 
     private void plotMetricsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plotMetricsCheckBoxActionPerformed
 // TODO add your handling code here:
@@ -2109,57 +2077,6 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
    private void solveForEquilibriumCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveForEquilibriumCheckBoxActionPerformed
       forwardToolModel().setSolveForEquilibrium(solveForEquilibriumCheckBox.isSelected());
    }//GEN-LAST:event_solveForEquilibriumCheckBoxActionPerformed
-
-   //------------------------------------------------------------------------
-   // Integrator settings (forward tool)
-   //------------------------------------------------------------------------
-
-   private void maxDTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_maxDTFocusLost
-      if(!evt.isTemporary()) maxDTActionPerformed(null);
-   }//GEN-LAST:event_maxDTFocusLost
-
-   private void maxDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxDTActionPerformed
-      try {
-         toolModel.setMaxDT(numFormat.parse(maxDT.getText()).doubleValue());
-      } catch (ParseException ex) {
-         maxDT.setText(numFormat.format(toolModel.getMaxDT()));
-      }
-   }//GEN-LAST:event_maxDTActionPerformed
-
-   private void errorToleranceFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_errorToleranceFocusLost
-      if(!evt.isTemporary()) errorToleranceActionPerformed(null);
-   }//GEN-LAST:event_errorToleranceFocusLost
-
-   private void errorToleranceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_errorToleranceActionPerformed
-      try {
-         toolModel.setErrorTolerance(numFormat.parse(errorTolerance.getText()).doubleValue());
-      } catch (ParseException ex) {
-         errorTolerance.setText(numFormat.format(toolModel.getErrorTolerance()));
-      }
-   }//GEN-LAST:event_errorToleranceActionPerformed
-
-   private void maximumNumberOfStepsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_maximumNumberOfStepsFocusLost
-      if(!evt.isTemporary()) maximumNumberOfStepsActionPerformed(null);
-   }//GEN-LAST:event_maximumNumberOfStepsFocusLost
-
-   private void maximumNumberOfStepsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maximumNumberOfStepsActionPerformed
-      try {
-         toolModel.setMaximumNumberOfSteps(numFormat.parse(maximumNumberOfSteps.getText()).intValue());
-      } catch (ParseException ex) {
-         maximumNumberOfSteps.setText(numFormat.format(toolModel.getMaximumNumberOfSteps()));
-      }
-   }//GEN-LAST:event_maximumNumberOfStepsActionPerformed
-
-   // NOTE: forward tool specific!
-   private void useSpecifiedDtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_useSpecifiedDtActionPerformed
-      boolean selected=useSpecifiedDt.isSelected();
-      forwardToolModel().setUseSpecifiedDt(selected);
-      // toggle available options
-      maximumNumberOfSteps.setEnabled(!selected);
-      maxDT.setEnabled(!selected);
-      minDT.setEnabled(!selected);
-      errorTolerance.setEnabled(!selected);
-   }//GEN-LAST:event_useSpecifiedDtActionPerformed
 
    //------------------------------------------------------------------------
    // Analyze tool input settings
@@ -2337,6 +2254,60 @@ private void StepIntervalSpinnerFocusLost(java.awt.event.FocusEvent evt) {//GEN-
         ((TrackingToolModel)toolModel).setDesiredKinematicsFileName(cmcDesiredKinematicsFileName.getFileName());
     }//GEN-LAST:event_cmcDesiredKinematicsFileNameStateChanged
 
+    private void minDTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_minDTFocusLost
+        if(!evt.isTemporary()) minDTActionPerformed(null);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_minDTFocusLost
+
+    private void minDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minDTActionPerformed
+        try {
+            toolModel.setMinDT(numFormat.parse(minDT.getText()).doubleValue());
+        } catch (ParseException ex) {
+            minDT.setText(numFormat.format(toolModel.getMinDT()));
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_minDTActionPerformed
+
+    private void errorToleranceFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_errorToleranceFocusLost
+        if(!evt.isTemporary()) errorToleranceActionPerformed(null);
+    }//GEN-LAST:event_errorToleranceFocusLost
+
+    private void errorToleranceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_errorToleranceActionPerformed
+        try {
+            toolModel.setErrorTolerance(numFormat.parse(errorTolerance.getText()).doubleValue());
+        } catch (ParseException ex) {
+            errorTolerance.setText(numFormat.format(toolModel.getErrorTolerance()));
+        }
+    }//GEN-LAST:event_errorToleranceActionPerformed
+
+   //------------------------------------------------------------------------
+   // Integrator settings (forward tool)
+   //------------------------------------------------------------------------
+
+    private void maxDTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_maxDTFocusLost
+        if(!evt.isTemporary()) maxDTActionPerformed(null);
+    }//GEN-LAST:event_maxDTFocusLost
+
+    private void maxDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxDTActionPerformed
+        try {
+            toolModel.setMaxDT(numFormat.parse(maxDT.getText()).doubleValue());
+        } catch (ParseException ex) {
+            maxDT.setText(numFormat.format(toolModel.getMaxDT()));
+        }
+    }//GEN-LAST:event_maxDTActionPerformed
+
+    private void maximumNumberOfStepsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_maximumNumberOfStepsFocusLost
+        if(!evt.isTemporary()) maximumNumberOfStepsActionPerformed(null);
+    }//GEN-LAST:event_maximumNumberOfStepsFocusLost
+
+    private void maximumNumberOfStepsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maximumNumberOfStepsActionPerformed
+        try {
+            toolModel.setMaximumNumberOfSteps(numFormat.parse(maximumNumberOfSteps.getText()).intValue());
+        } catch (ParseException ex) {
+            maximumNumberOfSteps.setText(numFormat.format(toolModel.getMaximumNumberOfSteps()));
+        }
+    }//GEN-LAST:event_maximumNumberOfStepsActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel HzJLabel;
     private javax.swing.JCheckBox SelectCmcTargetCheckBox;
@@ -2441,7 +2412,6 @@ private void StepIntervalSpinnerFocusLost(java.awt.event.FocusEvent evt) {//GEN-
     private javax.swing.JPanel timePanel;
     private javax.swing.JRadioButton unspecifiedRadioButton;
     private javax.swing.JCheckBox useForceLengthStaticOptCheckBox;
-    private javax.swing.JCheckBox useSpecifiedDt;
     // End of variables declaration//GEN-END:variables
    // Relinquish C++ resources by setting references to them to null
    public void cleanup()
