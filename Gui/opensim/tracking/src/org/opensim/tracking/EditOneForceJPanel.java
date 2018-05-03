@@ -786,7 +786,7 @@ public class EditOneForceJPanel extends javax.swing.JPanel {
      * We should expect these strings to have common prefix except for last letter
      * we should handle error conditions gracefully
      */
-    private String makeIdentifier(String stringX, String stringY, String stringZ) {
+    public static String makeIdentifier(String stringX, String stringY, String stringZ) {
         if (stringX.length()<2) return "";
         String candidate= stringX.substring(0, stringX.length()-1);
         if (stringY.startsWith(candidate) && stringZ.startsWith(candidate))
