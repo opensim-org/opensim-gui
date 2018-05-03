@@ -84,7 +84,7 @@ public class ApplicationExit extends WindowAdapter
       if (answer == JOptionPane.NO_OPTION || answer == JOptionPane.CLOSED_OPTION)
          return false;
 
-      System.out.println("Start saving application state.");
+      System.out.println("Start saving application state to file:"+TheApp.getUserDir()+"AppState.xml");
       try {
           ApplicationState state = ApplicationState.getInstance();
           OpenSimDBDescriptor dbDesc = new OpenSimDBDescriptor(OpenSimDB.getInstance());
@@ -95,7 +95,7 @@ public class ApplicationExit extends WindowAdapter
           state.addObject("PluginsDB", PluginsDB.getInstance());
           state.addObject("MotionsDB", new MotionsDBDescriptor(MotionsDB.getInstance()));
           XMLEncoder e = new XMLEncoder(new BufferedOutputStream(
-					new FileOutputStream(TheApp.getUserDir()+"AppState.xml")));
+                new FileOutputStream(TheApp.getUserDir()+"AppState.xml")));
           
           e.writeObject(state); // This method serializes an object graph 
           e.close();
