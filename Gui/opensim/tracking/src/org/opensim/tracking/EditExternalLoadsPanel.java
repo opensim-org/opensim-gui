@@ -41,6 +41,7 @@ import javax.swing.event.ListSelectionListener;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
+import org.openide.util.Exceptions;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.ExternalLoads;
 import org.opensim.modeling.ForceSet;
@@ -546,9 +547,17 @@ public class EditExternalLoadsPanel extends javax.swing.JPanel
     }//GEN-LAST:event_jButtonEditActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
-         ExternalForce pf = new ExternalForce();
+        String initialIdentifier = findViableIdentifier();
+        ExternalForce pf = new ExternalForce(externalLoadsStorage, 
+                 initialIdentifier, initialIdentifier, "", "", "ground", "ground");
+         modelLocalCopy.addForce(pf);
          //pf.setName(dTool.getNextAvailableForceName("ExternalForce"));
          pf.setAppliedToBodyName("ground");
+        try {
+            modelLocalCopy.initSystem();
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
          EditOneForceJPanel eofPanel = new EditOneForceJPanel(pf, externalLoadsStorage,dLoads);
          DialogDescriptor dlg = new DialogDescriptor(eofPanel, "Create/Edit ExternalForce");
          eofPanel.setDDialog(dlg);
@@ -572,7 +581,7 @@ public class EditExternalLoadsPanel extends javax.swing.JPanel
                  new File(dataFile).isFile()){
              try {
                  
-                 externalLoadsStorage = new Storage(dataFile, true);   
+                 externalLoadsStorage = new Storage(dataFile);   
                   boolean isUnique = verifyUniqueLabels(externalLoadsStorage);
                   externalLoadsStorage.makeStorageLabelsUnique();
                  if (!isUnique){
@@ -674,5 +683,14 @@ public class EditExternalLoadsPanel extends javax.swing.JPanel
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
-    
+    String findViableIdentifier(){
+        ArrayStr lbls = externalLoadsStorage.getColumnLabels();
+        String candidate = "";
+        boolean found = false;
+        for(int i=0; i< lbls.getSize()-2 && !found; i++){
+            candidate = EditOneForceJPanel.makeIdentifier(lbls.get(i), lbls.get(i+1), lbls.get(i+2));
+            found = (candidate.length()!=0);
+        }
+        return candidate;
+    }
 }
