@@ -70,8 +70,11 @@ public class EditPreferencesJPanel extends javax.swing.JPanel {
        "AntiAliasingFrames",
        "Marker Display Radius",
        "NonCurrentModelOpacity",
-       "Refresh Rate (ms.)"
-       
+       "Refresh Rate (ms.)",
+       "Muscle Dsiplay Radius",
+       "BuildDate",
+       "One Material Meshes",
+       "Save Movie Frames"
    };
    /** Creates new form EditPreferencesJPanel */
    public EditPreferencesJPanel() throws BackingStoreException {
