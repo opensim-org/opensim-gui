@@ -132,7 +132,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
          try {
             result = tool.run();
          } catch (IOException ex) {
-            DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message("Tool execution failed. Check Messages window for details."));
+            DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message("Tool execution failed. Check Messages window for details.\n"+ex.getMessage()));
             ex.printStackTrace();
          }
 
