@@ -59,7 +59,7 @@ public final class TheApp {
     private static Image appImage;
     private static String installDir=null;
     private static String OS = System.getProperty("os.name").toLowerCase();
-    private static String userDir = System.getProperty("user.dir")+File.separatorChar;
+    private static String userDir = System.getProperty("netbeans.user")+File.separatorChar;
     /** Creates a new instance of TheApp 
     protected TheApp() {
     }

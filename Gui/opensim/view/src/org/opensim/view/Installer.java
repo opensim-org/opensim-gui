@@ -104,7 +104,7 @@ public class Installer extends ModuleInstall {
         restorePrefs();
         
         String saved = Preferences.userNodeForPackage(TheApp.class).get("Persist Models", "On");
-        if (false){ // FIX40 Disable for ISB for startup issue 305
+        if (saved.equalsIgnoreCase("on")){ 
             /** Restore from file */            
             try {
                 XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(
