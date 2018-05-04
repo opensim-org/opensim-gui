@@ -272,8 +272,8 @@ public class ModelVisualizationJson extends JSONObject {
         
         // Decide on bone shape/width
         saved = ".005";
-        String currentSize= Preferences.userNodeForPackage(TheApp.class).get("Muscle Dsiplay Radius", saved);
-        Preferences.userNodeForPackage(TheApp.class).put("Muscle Dsiplay Radius", currentSize);
+        String currentSize= Preferences.userNodeForPackage(TheApp.class).get("Muscle Display Radius", saved);
+        Preferences.userNodeForPackage(TheApp.class).put("Muscle Display Radius", currentSize);
         prefMuscleDisplayRadius = Double.parseDouble(currentSize);
         
         createJsonForModel(model);
