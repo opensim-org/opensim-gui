@@ -48,7 +48,6 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
       private ProgressHandle progressHandle = null;
       private JavaMotionDisplayerCallback animationCallback = null;
       private InterruptCallback interruptingCallback = null;
-      private Kinematics kinematicsAnalysis = null; // For creating a storage we'll use as a motion
       boolean result = false;
       boolean promptToKeepPartialResult = true;
      
@@ -61,7 +60,6 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
 
          // Re-initialize our copy of the model
          Model model = new Model(getOriginalModel());
-         model.initSystem();
          OpenSimContext context = OpenSimDB.getInstance().getContext(getOriginalModel());
          // This line has the effect of copying the current state of the gui model
          // to the copy of the model used for forward simulation so that a 
@@ -75,20 +73,18 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
          // Update actuator set and contact force set based on settings in the tool, then call setup() and setModel()
          // setModel() will call addAnalysisSetToModel
          tool.updateModelForces(model, "");
-         //ModelPose currentPose = new ModelPose("current", getOriginalModel());
-         //currentPose.useAsDefaultForModel(model);
-         
-         model.setInputFileName("");    // Will do this after initSystem so that contact geometry can be loaded properly
+
          
          tool.setModel(model);
          model.initSystem(); // call initSystem after tool.setModel since the call invalidates the system to add Analyses in 4.0
+         
+         model.setInputFileName("");    // Will do this after last initSystem so that contact geometry can be loaded properly
          // don't add the model... we'll run forward on the new model but will actually apply the resulting motions to the current model
          setModel(model);
 
          // set model in our tool
          // add analysis set to model
-         // TODO: eventually we'll want to have the kinematics analysis store the motion for us...
-
+ 
          // Initialize progress bar, given we know the number of frames to process
          double ti = getInitialTime();
          double tf = getFinalTime();
@@ -100,8 +96,7 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
                                     return true;
                                  }
                               });
-         //getOriginalModel().setName("Originial");
-         //model.setName("daCopy");
+
          // Animation callback will update the display *of the original model* during forward
          animationCallback = new JavaMotionDisplayerCallback(model, getOriginalModel(), null, progressHandle, false);
          getModel().addAnalysis(animationCallback);
