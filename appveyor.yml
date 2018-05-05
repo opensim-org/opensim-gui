@@ -88,8 +88,8 @@ after_test:
   - SET DISTR=TRUE # TODO temporary while testing the installer.
   # Create and upload package.
   - cd %APPVEYOR_BUILD_FOLDER%\Gui\opensim\dist\installer\
-  - "C:\Program Files (x86)\NSIS\makensis.exe" make_installer.nsi
-  - - IF DEFINED DISTR appveyor PushArtifact opensim-%VERSION%-win64.exe
+  - IF DEFINED DISTR "C:/Program Files (x86)/NSIS/makensis.exe" make_installer.nsi
+  - IF DEFINED DISTR appveyor PushArtifact opensim-%VERSION%-win64.exe
   # - cd %APPVEYOR_BUILD_FOLDER%
   # - IF DEFINED DISTR 7z a C:\OpenSim-%VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Gui\opensim\dist\installer\opensim\
   # - IF DEFINED DISTR appveyor PushArtifact C:\OpenSim-%VERSION%.zip
