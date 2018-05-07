@@ -52,6 +52,10 @@ public class AbstractProperty {
     return opensimCommonJNI.AbstractProperty_toString(swigCPtr, this);
   }
 
+  public String toStringForDisplay(int precision) {
+    return opensimCommonJNI.AbstractProperty_toStringForDisplay(swigCPtr, this, precision);
+  }
+
   public String getTypeName() {
     return opensimCommonJNI.AbstractProperty_getTypeName(swigCPtr, this);
   }

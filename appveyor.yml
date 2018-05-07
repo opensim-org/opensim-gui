@@ -65,6 +65,7 @@ build_script:
   - ps: if (!($env.APPVEYOR_REPO_TAG)) { $env:VERSION = "$env:VERSION-$env:commitDate" }
   - ps: $env:VERSION
   - ps: (Get-Content $env:APPVEYOR_BUILD_FOLDER/Gui/opensim/installer_files/Windows/opensim.conf).replace('/dev', '/' + $env:VERSION) | Set-Content $env:APPVEYOR_BUILD_FOLDER/Gui/opensim/installer_files/Windows/opensim.conf
+  - ps: (Get-Content $env:APPVEYOR_BUILD_FOLDER/Gui/opensim/nbproject/project.properties).replace('app.version=4.0.Beta', 'app.version=' + $env:VERSION) | Set-Content $env:APPVEYOR_BUILD_FOLDER/Gui/opensim/nbproject/project.properties
   - ps: mkdir ../build
   - cd ../build
   - cmake ../opensim-gui -G"Visual Studio 15 2017 Win64" -DCMAKE_PREFIX_PATH=C:\opensim-core-VC141 -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=C:/Program Files/NetBeans 8.2;-Dnbplatform.default.harness.dir=C:/Program Files/NetBeans 8.2/harness"
@@ -86,6 +87,9 @@ after_test:
   # Detect if we are on the master branch.
   - IF %APPVEYOR_REPO_BRANCH% EQU master IF NOT DEFINED APPVEYOR_PULL_REQUEST_NUMBER SET DISTR=TRUE
   # Create and upload package.
-  - cd %APPVEYOR_BUILD_FOLDER%
-  - IF DEFINED DISTR 7z a C:\OpenSim-%VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Gui\opensim\dist\installer\opensim\
-  - IF DEFINED DISTR appveyor PushArtifact C:\OpenSim-%VERSION%.zip
+  - cd %APPVEYOR_BUILD_FOLDER%\Gui\opensim\dist\installer\
+  - IF DEFINED DISTR "C:/Program Files (x86)/NSIS/makensis.exe" make_installer.nsi
+  - IF DEFINED DISTR appveyor PushArtifact OpenSim-%VERSION%-win64.exe
+  # - cd %APPVEYOR_BUILD_FOLDER%
+  # - IF DEFINED DISTR 7z a C:\OpenSim-%VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Gui\opensim\dist\installer\opensim\
+  # - IF DEFINED DISTR appveyor PushArtifact C:\OpenSim-%VERSION%.zip

@@ -1402,6 +1402,8 @@ public class opensimSimulationJNI {
   public final static native void delete_CoordinateSet(long jarg1);
   public final static native void CoordinateSet_populate(long jarg1, CoordinateSet jarg1_, long jarg2, Model jarg2_);
   public final static native void CoordinateSet_getSpeedNames(long jarg1, CoordinateSet jarg1_, long jarg2, ArrayStr jarg2_);
+  public final static native long new_JointFramesAreTheSame(String jarg1, long jarg2, String jarg3, String jarg4, String jarg5);
+  public final static native void delete_JointFramesAreTheSame(long jarg1);
   public final static native long Joint_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void Joint_assign(long jarg1, Joint jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String Joint_getClassName();
@@ -4594,6 +4596,8 @@ public class opensimSimulationJNI {
   public final static native void delete_ModelHasNoSystem(long jarg1);
   public final static native long new_PhysicalOffsetFramesFormLoop(String jarg1, long jarg2, String jarg3, long jarg4, OpenSimObject jarg4_, String jarg5);
   public final static native void delete_PhysicalOffsetFramesFormLoop(long jarg1);
+  public final static native long new_JointFramesHaveSameBaseFrame(String jarg1, long jarg2, String jarg3, String jarg4, String jarg5, String jarg6, String jarg7);
+  public final static native void delete_JointFramesHaveSameBaseFrame(long jarg1);
   public final static native long Model_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void Model_assign(long jarg1, Model jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String Model_getClassName();
@@ -8462,6 +8466,7 @@ public class opensimSimulationJNI {
   public final static native long SetCoordinates_SWIGUpcast(long jarg1);
   public final static native long ModelComponentSetCoordinates_SWIGUpcast(long jarg1);
   public final static native long CoordinateSet_SWIGUpcast(long jarg1);
+  public final static native long JointFramesAreTheSame_SWIGUpcast(long jarg1);
   public final static native long Joint_SWIGUpcast(long jarg1);
   public final static native long JointHasNoCoordinates_SWIGUpcast(long jarg1);
   public final static native long SetJoints_SWIGUpcast(long jarg1);
@@ -8557,6 +8562,7 @@ public class opensimSimulationJNI {
   public final static native long ModelVisualPreferences_SWIGUpcast(long jarg1);
   public final static native long ModelHasNoSystem_SWIGUpcast(long jarg1);
   public final static native long PhysicalOffsetFramesFormLoop_SWIGUpcast(long jarg1);
+  public final static native long JointFramesHaveSameBaseFrame_SWIGUpcast(long jarg1);
   public final static native long Model_SWIGUpcast(long jarg1);
   public final static native long AbstractPathPoint_SWIGUpcast(long jarg1);
   public final static native long PathPoint_SWIGUpcast(long jarg1);

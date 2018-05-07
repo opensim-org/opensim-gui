@@ -11,7 +11,7 @@
 
   ;Name and file
   Name "OpenSim @VERSION@"
-  OutFile "opensim-@VERSION@-win64.exe"
+  OutFile "OpenSim-@VERSION@-win64.exe"
 
   ;Set compression
   SetCompressor lzma
@@ -77,7 +77,7 @@ Section "OpenSim Application" SecMain
   WriteRegStr HKCU "Software\OpenSim@VERSION@" "" $INSTDIR
  
 ;Create shortcuts
-  CreateShortCut "$DESKTOP\opensim @VERSION@.lnk" "$INSTDIR\bin\opensim64.exe" ""
+  CreateShortCut "$DESKTOP\OpenSim @VERSION@.lnk" "$INSTDIR\bin\opensim64.exe" ""
 
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
