@@ -92,6 +92,7 @@ public class opensimCommonJNI {
   public final static native void delete_AbstractProperty(long jarg1);
   public final static native long AbstractProperty_clone(long jarg1, AbstractProperty jarg1_);
   public final static native String AbstractProperty_toString(long jarg1, AbstractProperty jarg1_);
+  public final static native String AbstractProperty_toStringForDisplay(long jarg1, AbstractProperty jarg1_, int jarg2);
   public final static native String AbstractProperty_getTypeName(long jarg1, AbstractProperty jarg1_);
   public final static native boolean AbstractProperty_isObjectProperty(long jarg1, AbstractProperty jarg1_);
   public final static native boolean AbstractProperty_isUnnamedProperty(long jarg1, AbstractProperty jarg1_);
