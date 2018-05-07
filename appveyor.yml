@@ -86,10 +86,8 @@ after_test:
   ## On master branch, create package for OpenSim.
   # Detect if we are on the master branch.
   - IF %APPVEYOR_REPO_BRANCH% EQU master IF NOT DEFINED APPVEYOR_PULL_REQUEST_NUMBER SET DISTR=TRUE
-  - SET DISTR=TRUE # TODO temporary while testing the installer.
   # Create and upload package.
   - cd %APPVEYOR_BUILD_FOLDER%\Gui\opensim\dist\installer\
-  - type make_installer.nsi # Show contents of make_installer.nsi TODO remove.
   - IF DEFINED DISTR "C:/Program Files (x86)/NSIS/makensis.exe" make_installer.nsi
   - IF DEFINED DISTR appveyor PushArtifact OpenSim-%VERSION%-win64.exe
   # - cd %APPVEYOR_BUILD_FOLDER%
