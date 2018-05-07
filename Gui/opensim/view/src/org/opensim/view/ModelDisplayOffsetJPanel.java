@@ -41,6 +41,7 @@ import vtk.vtkMatrix4x4;
  *
  * @author  Ayman, A class that backs the model/display-edit functionality where
  * users can change display properties of a model and change its offset.
+ *  Note: Sliders are kept in model units while the transforms are in visualizer units
  */
 public class ModelDisplayOffsetJPanel extends javax.swing.JPanel 
                                       implements ChangeListener{
@@ -49,17 +50,18 @@ public class ModelDisplayOffsetJPanel extends javax.swing.JPanel
     private ModelVisualizationJson modelJson;
     
     private Model dModel;
-    private String modelName;
-    private double saveOpacity;
-    private Vec3 initialOffset = new Vec3(0.);
-    private double lastX, lastY, lastZ = 0.0;
+    private Vec3 initialOffset;
     /** Creates new form ModelDisplayOffsetJPanel */
     public ModelDisplayOffsetJPanel(Model abstractModel) {
+        // send message to visulaizer to get offset
         rep = ViewDB.getInstance().getModelVisuals(abstractModel);
         modelJson = ViewDB.getInstance().getModelVisualizationJson(abstractModel);
         this.dModel = abstractModel;
-        modelName = abstractModel.getName();
 
+        initialOffset = modelJson.getTransformWRTScene().p();
+        // Convert to model units rather than scene units
+        for (int i=0; i<3; i++)
+            initialOffset.set(i, initialOffset.get(i)/ModelVisualizationJson.getVisScaleFactor());
         initComponents();
         
         // Compute bounds and initialize text fields for offsets
@@ -159,22 +161,20 @@ public class ModelDisplayOffsetJPanel extends javax.swing.JPanel
     public void stateChanged(ChangeEvent e) {
         // Since offset value is now off "current" value, we only apply the difference
         // between currentValue and last saved one.
-        Vec3 offsetVec3 = new Vec3(0.);
+        
+        Vec3 offsetVec3 = modelJson.getTransformWRTScene().p();
         if (e.getSource().equals(textSliderJPanel1.getJXSlider())){
             //offset.SetElement(0, 3, textSliderJPanel1.getTheValue());
             double newValue = textSliderJPanel1.getTheValue();
-            offsetVec3.set(0, (newValue - lastX)*ModelVisualizationJson.getVisScaleFactor());
-            lastX = newValue;
+            offsetVec3.set(0, newValue*ModelVisualizationJson.getVisScaleFactor());
         } else if (e.getSource().equals(textSliderJPanel2.getJXSlider())){
             //offset.SetElement(1, 3, textSliderJPanel2.getTheValue());
             double newValue = textSliderJPanel2.getTheValue();
-            offsetVec3.set(1, (newValue - lastY)*ModelVisualizationJson.getVisScaleFactor());
-            lastY = newValue;
+            offsetVec3.set(1, newValue*ModelVisualizationJson.getVisScaleFactor());
         } else if (e.getSource().equals(textSliderJPanel3.getJXSlider())){
             double newValue = textSliderJPanel3.getTheValue();
             //offset.SetElement(2, 3, textSliderJPanel3.getTheValue());
-             offsetVec3.set(2, (newValue - lastZ)*ModelVisualizationJson.getVisScaleFactor());
-             lastZ = newValue;
+             offsetVec3.set(2, newValue*ModelVisualizationJson.getVisScaleFactor());
        }
         // Apply transform on screen
         // pass offsetVec3 to ViewDB to apply it

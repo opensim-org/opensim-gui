@@ -1256,9 +1256,21 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         JSONObject msg =  modelJson.createTranslateObjectCommand(offsetVec3);
         if (websocketdb!=null){
              websocketdb.broadcastMessageJson(msg, null);
+             Transform xform = modelJson.getTransformWRTScene();
+             for (int i=0; i<3; i++)
+                xform.p().set(i, offsetVec3.get(i));
+             modelJson.setTransformWRTScene(xform);
         }
     }
-
+    public Vec3 getModelOffset(ModelVisualizationJson modelJson) {
+        if (websocketdb!=null){
+             JSONObject msg = new JSONObject();
+             msg.put("Op", "GetOffsets");
+             websocketdb.broadcastMessageJson(msg, null);
+        }
+        Vec3 offset = modelJson.getTransformWRTScene().p();
+        return offset;
+    }
    /**
     * Get a box around the whole scene. Used to fill an intial guess of the bounds for the model display
     */
