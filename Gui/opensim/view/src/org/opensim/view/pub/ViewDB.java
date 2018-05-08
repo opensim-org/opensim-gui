@@ -152,6 +152,17 @@ public final class ViewDB extends Observable implements Observer, LookupListener
              websocketdb.broadcastMessageJson(currentJson.createUpdateDecorationsMessageJson(comp), null);
         }
     }
+
+    public void updateModelOffsets() {
+        // This will send message to visualizer asking for offsets,
+        // JSONMessageHandler will set this on ModelVisualizationJson(s) accordingly
+        if (websocketdb!=null){
+             JSONObject msg = new JSONObject();
+             msg.put("Op", "getOffsets");
+             websocketdb.broadcastMessageJson(msg, null);
+        }
+
+    }
    
    class AppearanceChange {
        Model model;
@@ -1262,11 +1273,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         }
     }
     public Vec3 getModelOffset(ModelVisualizationJson modelJson) {
-        if (websocketdb!=null){
-             JSONObject msg = new JSONObject();
-             msg.put("Op", "GetOffsets");
-             websocketdb.broadcastMessageJson(msg, null);
-        }
         Vec3 offset = modelJson.getTransformWRTScene().p();
         return offset;
     }
