@@ -1214,7 +1214,7 @@ public class ModelVisualizationJson extends JSONObject {
        return topJson;
     }
 
-    protected JSONObject createSetPositionCommand(UUID pathpointUuid, Vec3 location) {
+    public JSONObject createSetPositionCommand(UUID pathpointUuid, Vec3 location) {
         JSONObject nextpptPositionCommand = new JSONObject();
         nextpptPositionCommand.put("type", "SetPositionCommand");
         nextpptPositionCommand.put("objectUuid", pathpointUuid.toString());
@@ -1323,7 +1323,10 @@ public class ModelVisualizationJson extends JSONObject {
         JSONObject guiJson = new JSONObject();
         guiJson.put("Op", "execute");
         UUID markerUuid = mapComponentToUUID.get(marker).get(0);
-        JSONObject commandJson = createSetPositionCommand(markerUuid, newLocation);
+        Vec3 newLocationVizUnits = new Vec3();
+        for (int i=0;i<3;i++)
+            newLocationVizUnits.set(i, newLocation.get(i)*visScaleFactor);
+        JSONObject commandJson = createSetPositionCommand(markerUuid, newLocationVizUnits);
         guiJson.put("command", commandJson);
         return guiJson;
     }
