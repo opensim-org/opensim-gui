@@ -2270,15 +2270,42 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     // Callback, invoked when a command is received from visualizer
     // this operates only on currentJson
     private void handleJson(JSONObject jsonObject) {
-       if (jsonObject.get("type") != null){
-           if (((String)jsonObject.get("type")).equalsIgnoreCase("info")){
-               if (debugLevel > 1){
-                    String msg = "Rendered "+jsonObject.get("numFrames")+" frames in "+jsonObject.get("totalTime")+" ms.";
-                    double rendertimeAverage = ((Double) jsonObject.get("totalTime"))/((Long)jsonObject.get("numFrames"));
-                    OpenSimLogger.logMessage(msg + "FPS: "+(int)1000/rendertimeAverage+"\n", OpenSimLogger.INFO);
-               }
-               return;
+        String msgType = (String)jsonObject.get("type");
+        if (msgType.equalsIgnoreCase("info")){
+            if (debugLevel > 1){
+                 String msg = "Rendered "+jsonObject.get("numFrames")+" frames in "+jsonObject.get("totalTime")+" ms.";
+                 double rendertimeAverage = ((Double) jsonObject.get("totalTime"))/((Long)jsonObject.get("numFrames"));
+                 OpenSimLogger.logMessage(msg + "FPS: "+(int)1000/rendertimeAverage+"\n", OpenSimLogger.INFO);
+            }
+            return;
+        }
+        if (msgType.equalsIgnoreCase("transforms")){
+           String objType = (String)jsonObject.get("ObjectType");
+           if (objType.equalsIgnoreCase("Model")){
+            JSONArray uuids = (JSONArray)jsonObject.get("uuids");
+            JSONArray positions = (JSONArray)jsonObject.get("positions");
+            Enumeration<ModelVisualizationJson> modelJsons=mapModelsToJsons.elements();
+            while (modelJsons.hasMoreElements()){
+                // Find model corresponding to uuid
+                ModelVisualizationJson nextModelJson = modelJsons.nextElement();
+                String uuidDtring = nextModelJson.getModelUUID().toString();
+                int index = uuids.indexOf(uuidDtring);
+                JSONObject offsetObj = (JSONObject) positions.get(index);
+                Object xString = offsetObj.get("x");
+                double xValue = JSONMessageHandler.convertObjectFromJsonRoDouble(xString);
+                Object yString = offsetObj.get("y");
+                double yValue = JSONMessageHandler.convertObjectFromJsonRoDouble(yString);
+                Object zString = offsetObj.get("z");
+                double zValue = JSONMessageHandler.convertObjectFromJsonRoDouble(zString);
+                Vec3 offsetAsVec3 = new Vec3(xValue, yValue, zValue);
+                for (index = 0; index <3; index++)
+                    nextModelJson.getTransformWRTScene().p().set(index, 
+                            offsetAsVec3.get(index)/nextModelJson.getVisScaleFactor());
+            }
+            
            }
+           
+           return;
        }
        Object uuid = jsonObject.get("uuid");
        String uuidString = (String) uuid;

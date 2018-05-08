@@ -110,5 +110,16 @@ public class JSONMessageHandler {
           returnString = returnString.concat(String.valueOf(zDouble));
           return returnString;
     }
+    static public double convertObjectFromJsonRoDouble(Object obj) {
+        double value = 0.0;
+        if (obj instanceof Long){
+            Long l = (Long) obj;
+            value = l;
+        }
+        if (obj instanceof Double){
+            value = (Double) obj;
+        }
+        return value;
+    }
  
 }
