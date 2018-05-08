@@ -41,7 +41,8 @@ import vtk.vtkMatrix4x4;
  *
  * @author  Ayman, A class that backs the model/display-edit functionality where
  * users can change display properties of a model and change its offset.
- *  Note: Sliders are kept in model units while the transforms are in visualizer units
+ *  Note: Sliders are kept in model units and the transforms are in model units
+ * When sending to/from visualizer apply scaleFactor
  */
 public class ModelDisplayOffsetJPanel extends javax.swing.JPanel 
                                       implements ChangeListener{
@@ -51,6 +52,7 @@ public class ModelDisplayOffsetJPanel extends javax.swing.JPanel
     
     private Model dModel;
     private Vec3 initialOffset;
+    private Vec3 backupOffset;
     /** Creates new form ModelDisplayOffsetJPanel */
     public ModelDisplayOffsetJPanel(Model abstractModel) {
         // send message to visulaizer to get offset
@@ -59,9 +61,8 @@ public class ModelDisplayOffsetJPanel extends javax.swing.JPanel
         this.dModel = abstractModel;
 
         initialOffset = modelJson.getTransformWRTScene().p();
-        // Convert to model units rather than scene units
-        for (int i=0; i<3; i++)
-            initialOffset.set(i, initialOffset.get(i)/ModelVisualizationJson.getVisScaleFactor());
+        backupOffset = new Vec3(initialOffset);
+        //
         initComponents();
         
         // Compute bounds and initialize text fields for offsets
@@ -166,15 +167,15 @@ public class ModelDisplayOffsetJPanel extends javax.swing.JPanel
         if (e.getSource().equals(textSliderJPanel1.getJXSlider())){
             //offset.SetElement(0, 3, textSliderJPanel1.getTheValue());
             double newValue = textSliderJPanel1.getTheValue();
-            offsetVec3.set(0, newValue*ModelVisualizationJson.getVisScaleFactor());
+            offsetVec3.set(0, newValue);
         } else if (e.getSource().equals(textSliderJPanel2.getJXSlider())){
             //offset.SetElement(1, 3, textSliderJPanel2.getTheValue());
             double newValue = textSliderJPanel2.getTheValue();
-            offsetVec3.set(1, newValue*ModelVisualizationJson.getVisScaleFactor());
+            offsetVec3.set(1, newValue);
         } else if (e.getSource().equals(textSliderJPanel3.getJXSlider())){
             double newValue = textSliderJPanel3.getTheValue();
             //offset.SetElement(2, 3, textSliderJPanel3.getTheValue());
-             offsetVec3.set(2, newValue*ModelVisualizationJson.getVisScaleFactor());
+             offsetVec3.set(2, newValue);
        }
         // Apply transform on screen
         // pass offsetVec3 to ViewDB to apply it
@@ -209,6 +210,9 @@ public class ModelDisplayOffsetJPanel extends javax.swing.JPanel
      }
 
     public void restore() {
+        for (int i=0; i<3;i++)
+            modelJson.getTransformWRTScene().p().set(i, backupOffset.get(i));
+        ViewDB.getInstance().setModelOffset(modelJson, backupOffset);
         ViewDB.getInstance().repaintAll();
     }
     

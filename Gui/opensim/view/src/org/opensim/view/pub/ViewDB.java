@@ -1252,14 +1252,13 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       updateAnnotationAnchors();
    }
    
-    public void setModelOffset(ModelVisualizationJson modelJson, Vec3 offsetVec3) {
-        JSONObject msg =  modelJson.createTranslateObjectCommand(offsetVec3);
+    public void setModelOffset(ModelVisualizationJson modelJson, Vec3 offsetVec3) {        
         if (websocketdb!=null){
-             websocketdb.broadcastMessageJson(msg, null);
-             Transform xform = modelJson.getTransformWRTScene();
-             for (int i=0; i<3; i++)
-                xform.p().set(i, offsetVec3.get(i));
-             modelJson.setTransformWRTScene(xform);
+            JSONObject guiJson = new JSONObject();
+            guiJson.put("Op", "execute");
+            JSONObject commandJson =  modelJson.createSetPositionCommand(modelJson.getModelUUID(), offsetVec3);
+            guiJson.put("command", commandJson);
+            websocketdb.broadcastMessageJson(guiJson, null);
         }
     }
     public Vec3 getModelOffset(ModelVisualizationJson modelJson) {
