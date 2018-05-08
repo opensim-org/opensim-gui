@@ -107,7 +107,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
             "tube": 40,
             "radialSegments": 8,
             "tubularSegments": 6,
-            "arc": 6.283185307179586 */
+            "arc": 2*Math.PI07179586 */
         JSONObject dg_json = new JSONObject();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "TorusGeometry");
@@ -274,26 +274,26 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 	dg_json.put("heightSegments", 16);
         if (quadrants.equals("")){
            dg_json.put("phiStart", 0);
-           dg_json.put("phiLength", 6.2831853);
+           dg_json.put("phiLength", 2*Math.PI);
            dg_json.put("thetaStart", 0);
-           dg_json.put("thetaLength", 3.14159);
+           dg_json.put("thetaLength", Math.PI);
         }
         else{
             if (quadrants.contains("y")){ // untested
                 dg_json.put("phiStart", 0);
-                dg_json.put("phiLength", 6.2831853);
-                dg_json.put("thetaLength", 1.5709);
+                dg_json.put("phiLength", 2*Math.PI);
+                dg_json.put("thetaLength", 0.5*Math.PI);
                 if (quadrants.equalsIgnoreCase("-y"))
-                    dg_json.put("thetaStart", 1.5709);
+                    dg_json.put("thetaStart", 0.5*Math.PI);
                 else
                     dg_json.put("thetaStart", 0);
             }
             else if (quadrants.contains("z")){ 
-                dg_json.put("thetaLength", 3.14159);
+                dg_json.put("thetaLength", Math.PI);
                 dg_json.put("thetaStart", 0);
-                dg_json.put("phiLength", 3.14159);
+                dg_json.put("phiLength", Math.PI);
                 if (quadrants.equalsIgnoreCase("-z"))
-                    dg_json.put("phiStart", 1.5709);
+                    dg_json.put("phiStart", 0.5*Math.PI);
                 else
                     dg_json.put("phiStart", 0);
             }
@@ -322,28 +322,28 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         dg_json.put("heightSegments", 16);
         if (quadrants.equals("")){
             dg_json.put("phiStart", 0);
-            dg_json.put("phiLength", 6.2831853);
+            dg_json.put("phiLength", 2*Math.PI);
             dg_json.put("thetaStart", 0);
-            dg_json.put("thetaLength", 3.14159);
+            dg_json.put("thetaLength", Math.PI);
         }
         else{
             if (quadrants.contains("x")){
                 dg_json.put("thetaStart", 0);
-                dg_json.put("thetaLength", 3.14159);
-                dg_json.put("phiLength", 3.14159);
+                dg_json.put("thetaLength", Math.PI);
+                dg_json.put("phiLength", Math.PI);
                 if (quadrants.equalsIgnoreCase("-x"))
-                    dg_json.put("phiStart", -1.5709);
+                    dg_json.put("phiStart", -0.5*Math.PI);
                 else
-                    dg_json.put("phiStart", 1.5709);
+                    dg_json.put("phiStart", 0.5*Math.PI);
             }
             else if (quadrants.contains("y")){ 
-                dg_json.put("thetaStart", -1.5709);
-                dg_json.put("thetaLength", 3.14159);
-                dg_json.put("phiLength", 3.14159);
+                dg_json.put("thetaStart", -0.5*Math.PI);
+                dg_json.put("thetaLength", Math.PI);
+                dg_json.put("phiLength", Math.PI);
                 if (quadrants.equalsIgnoreCase("-y"))
-                    dg_json.put("phiStart", 1.5709);
+                    dg_json.put("phiStart", 0.5*Math.PI);
                 else
-                    dg_json.put("phiStart", -1.5709);
+                    dg_json.put("phiStart", -0.5*Math.PI);
             }
         }
         return dg_json;
@@ -381,11 +381,11 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         dg_json.put("radialSegments", 32);
         dg_json.put("heightSegments", 1);
         if (!quadrants.equals("")){
-            dg_json.put("thetaLength", 3.14159);
+            dg_json.put("thetaLength", Math.PI);
             if (quadrants.equalsIgnoreCase("-y"))
-                dg_json.put("thetaStart", -1.5709);
+                dg_json.put("thetaStart", -0.5*Math.PI);
             else
-                dg_json.put("thetaStart", 1.5709);
+                dg_json.put("thetaStart", 0.5*Math.PI);
         }
         return dg_json;
     }
