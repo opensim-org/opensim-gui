@@ -34,6 +34,7 @@ import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.modeling.Model;
 import org.opensim.view.nodes.OneModelNode;
+import org.opensim.view.pub.ViewDB;
 
 public final class ModelDisplayEditAction extends CallableSystemAction {
     
@@ -48,6 +49,7 @@ public final class ModelDisplayEditAction extends CallableSystemAction {
     */
    public void adjustModelDisplayOffset(Model abstractModel) {
       // Show dialog for model display ajdustment
+      ViewDB.getInstance().updateModelOffsets();
       final ModelDisplayOffsetJPanel p = new ModelDisplayOffsetJPanel(abstractModel);
       DialogDescriptor desc = new DialogDescriptor(p, "Model Offset", false, new ActionListener() {
 

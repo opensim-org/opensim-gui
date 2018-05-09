@@ -131,10 +131,10 @@ public class ModelVisualizationJson extends JSONObject {
     private JSONArray json_geometries;
     private JSONArray json_materials;
     private JSONObject model_object;
+    private Transform transformWRTScene = new Transform();
     private UUID modelUUID;
     private UUID pathpointMatUUID;
     private UUID markerMatUUID;
-    private UUID boneStandardUUID;
     private JSONObject pathPointGeometryJSON = null;
     private JSONObject marker_mat_json;
     public static boolean verbose=false;
@@ -312,7 +312,6 @@ public class ModelVisualizationJson extends JSONObject {
         // Create material for PathPoints, Markers
         pathpointMatUUID= createPathPointMaterial();
         markerMatUUID= createMarkerMaterial(mdh);
-        boneStandardUUID = createBoneStandardMaterialAndColor();
         pathPointGeometryJSON = createPathPointGeometryJSON();
         dgimp = new DecorativeGeometryImplementationJS(json_geometries, json_materials, visScaleFactor);
         while (!mcIter.equals(mcList.end())) {
@@ -474,7 +473,7 @@ public class ModelVisualizationJson extends JSONObject {
         model_object.put("opensimType", "Model");
         model_object.put("name", "OpenSimModel");
         model_object.put("children", new JSONArray());
-        model_object.put("matrix", JSONUtilities.createMatrixFromTransform(new Transform(), new Vec3(1.), 1.0));
+        model_object.put("matrix", JSONUtilities.createMatrixFromTransform(getTransformWRTScene(), new Vec3(1.), 1.0));
         put("object", model_object);
         json_geometries = new JSONArray();
         put("geometries", json_geometries);
@@ -1215,7 +1214,7 @@ public class ModelVisualizationJson extends JSONObject {
        return topJson;
     }
 
-    protected JSONObject createSetPositionCommand(UUID pathpointUuid, Vec3 location) {
+    public JSONObject createSetPositionCommand(UUID pathpointUuid, Vec3 location) {
         JSONObject nextpptPositionCommand = new JSONObject();
         nextpptPositionCommand.put("type", "SetPositionCommand");
         nextpptPositionCommand.put("objectUuid", pathpointUuid.toString());
@@ -1324,7 +1323,10 @@ public class ModelVisualizationJson extends JSONObject {
         JSONObject guiJson = new JSONObject();
         guiJson.put("Op", "execute");
         UUID markerUuid = mapComponentToUUID.get(marker).get(0);
-        JSONObject commandJson = createSetPositionCommand(markerUuid, newLocation);
+        Vec3 newLocationVizUnits = new Vec3();
+        for (int i=0;i<3;i++)
+            newLocationVizUnits.set(i, newLocation.get(i)*visScaleFactor);
+        JSONObject commandJson = createSetPositionCommand(markerUuid, newLocationVizUnits);
         guiJson.put("command", commandJson);
         return guiJson;
     }
@@ -1524,6 +1526,20 @@ public class ModelVisualizationJson extends JSONObject {
             bodyJson.put("children", new JSONArray());
         ((JSONArray)bodyJson.get("children")).add(sceneGraphObjectJson);
         return obj_uuid;
+    }
+
+    /**
+     * @return the transformWRTScene
+     */
+    public Transform getTransformWRTScene() {
+        return transformWRTScene;
+    }
+
+    /**
+     * @param transformWRTScene the transformWRTScene to set
+     */
+    public void setTransformWRTScene(Transform transformWRTScene) {
+        this.transformWRTScene = transformWRTScene;
     }
 
 }
