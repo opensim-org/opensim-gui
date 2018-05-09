@@ -414,7 +414,7 @@ public class ScaleToolModel extends Observable implements Observer {
       // Store original model; create copy of the original model as our unscaled model (i.e. the model we'll scale)
       this.originalModel = originalModel;
       unscaledModel = new Model(originalModel);
-      unscaledModel.setInputFileName("");
+      //unscaledModel.setInputFileName("");
       unscaledModel.setOriginalModelPathFromModel(originalModel); // important to keep track of the original path so bone loading works
       //unscaledModel.setup();
       originalMarkerSet = new MarkerSet(unscaledModel.getMarkerSet());
