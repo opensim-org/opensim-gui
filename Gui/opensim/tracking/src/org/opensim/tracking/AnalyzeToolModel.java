@@ -85,7 +85,7 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
          tool.setToolOwnsModel(false);
          context = new OpenSimContext(workersModel.initSystem(), workersModel); // Has side effect of calling setup
         
-         workersModel.setInputFileName("");
+         //workersModel.setInputFileName("");
          
          if(getInputSource()==InputSource.Motion && getInputMotion()!=null)
             context.setStatesFromMotion(analyzeTool(), getInputMotion(),false); // false == motion is in radians

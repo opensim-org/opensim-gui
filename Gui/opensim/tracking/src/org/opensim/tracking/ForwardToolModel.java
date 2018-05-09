@@ -70,15 +70,13 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
          model.setPropertiesFromState(context.getCurrentStateRef());
          String tempFileName=getOriginalModel().getInputFileName();
          //int loc = tempFileName.lastIndexOf(".");
+         // This line fakes the model copy to use same filename as orginal model
+         // for the purposes of loading Contact Meshes.
          model.setInputFileName(tempFileName);
 
          // Update actuator set and contact force set based on settings in the tool, then call setup() and setModel()
          // setModel() will call addAnalysisSetToModel
          tool.updateModelForces(model, "");
-         //ModelPose currentPose = new ModelPose("current", getOriginalModel());
-         //currentPose.useAsDefaultForModel(model);
-         
-         model.setInputFileName("");    // Will do this after initSystem so that contact geometry can be loaded properly
          
          tool.setModel(model);
          model.initSystem(); // call initSystem after tool.setModel since the call invalidates the system to add Analyses in 4.0

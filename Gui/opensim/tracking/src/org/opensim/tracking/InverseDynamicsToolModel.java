@@ -85,13 +85,12 @@ public class InverseDynamicsToolModel extends AbstractToolModelWithExternalLoads
          idTool.setModel(workersModel);
          context = new OpenSimContext(workersModel.initSystem(), workersModel); // Has side effect of calling setup
         
-         workersModel.setInputFileName("");
+         //workersModel.setInputFileName("");
          
          if(getInputSource()==InputSource.Motion && getInputMotion()!=null)
             idTool.setCoordinateValues(getInputMotion());
          // We don't need to add model to the 3D view... just using it to dump analyses result files
          setModel(workersModel);
-          //OpenSim23 workersModel.initSystem();
        
          // Initialize progress bar, given we know the number of frames to process
          double ti = getInitialTime();

@@ -80,7 +80,7 @@ public class RRAToolModel extends TrackingToolModel {
          // setModel() will call addAnalysisSetToModel
          tool.updateModelForces(workersModel, "");
          workersModel.initSystem();
-         workersModel.setInputFileName("");    // Will do this after initSystem so that contact geometry can be loaded properly
+         //workersModel.setInputFileName("");    // Will do this after initSystem so that contact geometry can be loaded properly
          tool.setModel(workersModel);
 
          setModel(workersModel);
