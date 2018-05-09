@@ -63,11 +63,15 @@
             <fileset dir="${api.dir}/Resources"/>
         </copy>
         <copy todir="${opensim.dist.dir}/sdk">
-            <fileset dir="${api.dir}/sdk"/>
+            <fileset dir="${api.dir}/sdk">
+                <!-- Don't need the java source code. -->
+                <exclude name="**/Java/org/**" />
+                <!-- Developers can build developer doxygen on their own. -->
+                <exclude name="**/html_developer/**" />
+            </fileset>
         </copy>
 
-        <!-- TODO untested -->
-        <copy todir="${opensim.dist.dir}/Resources/CodeExamples/GUI">
+        <copy todir="${opensim.dist.dir}/Resources/Code/GUI">
             <fileset dir="Scripts" />
         </copy>
 
@@ -146,7 +150,7 @@
             <arg line="-R ${jre.dir}/ ${opensim.dist.dir}/jre"/>
         </exec>
 
-        <copy todir="${opensim.dist.dir}/Resources/CodeExamples/GUI">
+        <copy todir="${opensim.dist.dir}/Resources/Code/GUI">
             <fileset dir="Scripts" />
         </copy>
 
