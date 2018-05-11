@@ -362,11 +362,18 @@ public final class gui {
     }
     
     /**
-     * GInvoke method to install resources to user directory
+     * Invoke method to install resources to user directory
      */
     static public String installResources()
     {
         return TheApp.installResources();
+    }
+    /**
+     * @return the full path to the directory used to install Resources (Models, CodeExamples)
+     */
+    static public String getResourcesDir()
+    {
+        return TheApp.getResourcesDir();
     }
     /**
      * getClassName() returns the full qualified name of the Class that obj is an instance of
