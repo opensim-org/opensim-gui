@@ -52,7 +52,7 @@ public abstract class ObjectAppearanceChangeAction extends CallableSystemAction 
                     collectDescendentNodes((OpenSimNode) ch.getNodeAt(chNum), objectNodes, opensimObjects);
                 }
             }
-            if (selected[i] instanceof OneComponentNode) {
+            if (selected[i] instanceof OneComponentNode && selected[i].isLeaf()) {
                 if (!(opensimObjects.contains(((OneComponentNode)selected[i]).getOpenSimObject()))){
                     objectNodes.add((OneComponentNode)selected[i]);
                     opensimObjects.add(((OneComponentNode)selected[i]).getOpenSimObject());
