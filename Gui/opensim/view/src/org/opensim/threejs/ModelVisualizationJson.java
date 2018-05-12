@@ -862,7 +862,7 @@ public class ModelVisualizationJson extends JSONObject {
                             ArrayList<UUID> wrapPointUUIDs = new ArrayList<UUID>();
                             for (int j = 0; j < indicesToUse.length; j++) {
                                 Vec3 globalLocation = wrapPtsFrame.findStationLocationInAnotherFrame(state, pathwrap.get(indicesToUse[j]), mapBodyIndicesToFrames.get(0));
-                                JSONObject bpptInBodyJson = createPathPointObjectJson(null, "", false, globalLocation);
+                                JSONObject bpptInBodyJson = createPathPointObjectJson(null, "", false, globalLocation, pathpointMatUUID.toString());
                                 UUID ppt_uuid = UUID.fromString((String) bpptInBodyJson.get("uuid"));
                                 children.add(bpptInBodyJson);
                                 pathpoint_jsonArr.add(ppt_uuid.toString());
@@ -988,7 +988,7 @@ public class ModelVisualizationJson extends JSONObject {
                 bodyJson.put("children", new JSONArray());
                 children = (JSONArray)bodyJson.get("children");
         }
-        JSONObject bpptInBodyJson = createPathPointObjectJson(pathPoint, pathPoint.getName(), true, null);
+        JSONObject bpptInBodyJson = createPathPointObjectJson(pathPoint, pathPoint.getName(), true, null, pathpointMatUUID.toString());
         children.add(bpptInBodyJson);
         return UUID.fromString((String)bpptInBodyJson.get("uuid"));
     }
@@ -1005,14 +1005,16 @@ public class ModelVisualizationJson extends JSONObject {
                 children = (JSONArray)bodyJson.get("children");
         }
         Vec3 computedLocation = computePathPointLocation(index, pathpointSet);
-        JSONObject bpptInBodyJson = createPathPointObjectJson(pathPoint, "", false, computedLocation);
+        JSONObject bpptInBodyJson = createPathPointObjectJson(pathPoint, "", false, computedLocation, pathpointMatUUID.toString());
         children.add(bpptInBodyJson);
         return UUID.fromString((String)bpptInBodyJson.get("uuid"));
     }
-
-    public JSONObject createPathPointObjectJson(AbstractPathPoint pathPoint, String name, boolean active, Vec3 computedLocation) {
+    /*
+     * Create Pathpoint artifact in scene graph
+    */
+    public JSONObject createPathPointObjectJson(AbstractPathPoint pathPoint, String name, boolean active, 
+            Vec3 computedLocation, String materialUuidString) {
         // Now add to scene graph
-        String material = pathpointMatUUID.toString();
         JSONObject bpptGeometryJson = pathPointGeometryJSON;
         JSONObject bpptInBodyJson = new JSONObject();
         UUID ppoint_uuid = UUID.randomUUID();
@@ -1024,7 +1026,7 @@ public class ModelVisualizationJson extends JSONObject {
             bpptInBodyJson.put("opensimType", "ComputedPathPoint");
         bpptInBodyJson.put("name", name);
         bpptInBodyJson.put("geometry", bpptGeometryJson.get("uuid"));
-        bpptInBodyJson.put("material", material);
+        bpptInBodyJson.put("material", materialUuidString);
         bpptInBodyJson.put("status", active?"active":"inactive");
         Transform localTransform = new Transform();
         if (active){
@@ -1171,7 +1173,7 @@ public class ModelVisualizationJson extends JSONObject {
         else if (typeOfEdit == 1){
             topJson.put("SubOperation", "insert");
             AbstractPathPoint newPoint = path.getPathPointSet().get(atIndex);
-            JSONObject newPointJson = createPathPointObjectJson(newPoint, newPoint.getName(), true, null);
+            JSONObject newPointJson = createPathPointObjectJson(newPoint, newPoint.getName(), true, null, pathpointMatUUID.toString());
             newPointJson.put("parent_uuid", mapComponentToUUID.get(newPoint.getBody()).get(0).toString());
             topJson.put("NewPoint", newPointJson);
             // Add new point to maps
@@ -1419,7 +1421,7 @@ public class ModelVisualizationJson extends JSONObject {
         for (int i = 0; i < count; i++) {
             double ratio = (1.0 + i) / (count + 1.0);
             Vec3 location = computePointLocationFromNeighbors(lastPathPoint, mapBodyIndicesToFrames.get(0), currentPathPoint, ratio);
-            JSONObject bpptInBodyJson =createPathPointObjectJson(null, "", false, location);
+            JSONObject bpptInBodyJson =createPathPointObjectJson(null, "", false, location, pathpointMatUUID.toString());
             UUID ppt_uuid = UUID.fromString((String) bpptInBodyJson.get("uuid"));
             computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(lastPathPoint, currentPathPoint, ratio));
             children.add(bpptInBodyJson);
