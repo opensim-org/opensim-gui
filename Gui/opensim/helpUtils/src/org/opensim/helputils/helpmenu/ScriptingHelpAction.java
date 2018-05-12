@@ -37,16 +37,16 @@ import org.opensim.utils.BrowserLauncher;
 import org.opensim.utils.TheApp;
 
 public final class ScriptingHelpAction extends CallableSystemAction {
-    
+
     public void performAction() {
-        String usersGuidePath = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu:8080/display/OpenSim/Scripting" : TheApp.getUsersGuideDir() + "Scripting.html"; 
+        String usersGuidePath = BrowserLauncher.isConnected() ? "https://simtk-confluence.stanford.edu/display/OpenSim40/Scripting" : TheApp.getUsersGuideDir() + "Scripting.html"; 
         BrowserLauncher.openURL(usersGuidePath);
     }
-    
+
     public String getName() {
         return NbBundle.getMessage(UsersGuideAction.class, "CTL_ScriptingHelp");
     }
-    
+
     @Override
     protected void initialize() {
         super.initialize();
