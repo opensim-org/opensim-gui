@@ -275,6 +275,7 @@ public class ModelVisualizationJson extends JSONObject {
         String currentSize= Preferences.userNodeForPackage(TheApp.class).get("Muscle Display Radius", saved);
         Preferences.userNodeForPackage(TheApp.class).put("Muscle Display Radius", currentSize);
         prefMuscleDisplayRadius = Double.parseDouble(currentSize);
+        actualMuscleDisplayRadius = 8*200*prefMuscleDisplayRadius;
         
         createJsonForModel(model);
         ready = true;
@@ -795,7 +796,7 @@ public class ModelVisualizationJson extends JSONObject {
         UUID uuidForPathGeomGeometry = UUID.randomUUID();
         pathGeomJson.put("uuid", uuidForPathGeomGeometry.toString());
         pathGeomJson.put("type", "PathGeometry");
-        pathGeomJson.put("radius", 8*200*prefMuscleDisplayRadius);
+        pathGeomJson.put("radius", actualMuscleDisplayRadius);
         pathGeomJson.put("name", path.getAbsolutePathString()+"Control");
         // This includes inactive ConditionalPoints but no Wrapping
         int numWrapObjects = path.getWrapSet().getSize();
@@ -914,6 +915,7 @@ public class ModelVisualizationJson extends JSONObject {
         }
         return mesh_uuid;
     }
+    private double actualMuscleDisplayRadius;
 
     private UUID createJsonForPathPoint(PathPoint ppt) {
         Map<String, Object> ppt_json = new LinkedHashMap<String, Object>();
@@ -1032,7 +1034,7 @@ public class ModelVisualizationJson extends JSONObject {
         else
             localTransform.setP(computedLocation);
         bpptInBodyJson.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1.0), visScaleFactor));
-        bpptInBodyJson.put("visible", false);
+        bpptInBodyJson.put("visible", true);
         return bpptInBodyJson;
     }
 
@@ -1040,10 +1042,8 @@ public class ModelVisualizationJson extends JSONObject {
         JSONObject bpptJson = new JSONObject();
         UUID uuidForPathpointGeometry = UUID.randomUUID();
         bpptJson.put("uuid", uuidForPathpointGeometry.toString());
-        bpptJson.put("type", "BoxGeometry");
-        bpptJson.put("width", 5);
-        bpptJson.put("height", 5);
-        bpptJson.put("depth", 5);
+        bpptJson.put("type", "SphereGeometry");
+        bpptJson.put("radius", actualMuscleDisplayRadius);
         json_geometries.add(bpptJson);
         return bpptJson;
     }
