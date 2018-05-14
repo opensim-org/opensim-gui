@@ -122,7 +122,6 @@ public class ModelVisualizationJson extends JSONObject {
     private final HashMap<UUID, Component> mapUUIDToComponent = new HashMap<UUID, Component>();
     private final HashMap<OpenSimObject, ArrayList<UUID>> mapComponentToUUID = 
             new HashMap<OpenSimObject, ArrayList<UUID>>();
-    private final HashMap<String, UUID> mapPathMaterialToUUID = new HashMap<String, UUID>();
     private static final String GEOMETRY_SEP = ".";
     private final HashMap<GeometryPath, UUID> pathList = new HashMap<GeometryPath, UUID>();
     private ModelDisplayHints mdh;
@@ -782,7 +781,6 @@ public class ModelVisualizationJson extends JSONObject {
         populatePathMterialDefaults(mat_json, path);
         mat_json.put("name", path.getAbsolutePathString()+"Mat");
         mat_json.put("skinning", true);
-        mapPathMaterialToUUID.put(path.getAbsolutePathString(), mat_uuid);
         json_materials.add(mat_json);
         // Repeat for pathpointMaterial
         Map<String, Object> pathpt_mat_json = new LinkedHashMap<String, Object>();
