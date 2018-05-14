@@ -152,6 +152,8 @@ public class ModelVisualizationJson extends JSONObject {
     // Keep track of which paths have wrapping since they need special handling
     // When wrapping comes in/out
     private final HashMap<GeometryPath, JSONArray> pathsWithWrapping = new HashMap<GeometryPath, JSONArray>();
+    private final HashMap<OpenSimObject, AbstractPathPoint> mapGeometryPathToPathPoint = 
+                        new HashMap<OpenSimObject, AbstractPathPoint>();
     private final HashMap<Frame, VisualizerFrame> visualizerFrames = new HashMap<Frame, VisualizerFrame>();
     private ArrayList<VisualizerAddOn> visualizerAddOns = new ArrayList<VisualizerAddOn>();
     private VisualizerAddOnCom comVizAddOn = new VisualizerAddOnCom();
@@ -808,6 +810,9 @@ public class ModelVisualizationJson extends JSONObject {
         boolean hasWrapping = (numWrapObjects > 0);
         ArrayPathPoint actualPath = path.getCurrentPath(state);
         AbstractPathPoint firstPoint = pathPointSetNoWrap.get(0);
+        // Keep track of First path point so that when changing color we can propagate to all path points, since they share material
+        // Also so that when adding pathpoints due to wrapping, we can get proper/shared material
+        mapGeometryPathToPathPoint.put(path, firstPoint);
         // Create viz for firstPoint
         UUID pathpoint_uuid = addPathPointObjectToParent(firstPoint, pathpt_mat_uuid.toString());
         pathpoint_jsonArr.add(pathpoint_uuid.toString());
@@ -1426,6 +1431,8 @@ public class ModelVisualizationJson extends JSONObject {
             bodyJson.put("children", new JSONArray());
             children = (JSONArray) bodyJson.get("children");
         }
+        // get material used for PathPoints on this GeometryPath
+        
         for (int i = 0; i < count; i++) {
             double ratio = (1.0 + i) / (count + 1.0);
             Vec3 location = computePointLocationFromNeighbors(lastPathPoint, mapBodyIndicesToFrames.get(0), currentPathPoint, ratio);
@@ -1520,7 +1527,30 @@ public class ModelVisualizationJson extends JSONObject {
         }
         // Need to update the GometryPath control polygon to remove the ppt and communicate the new one to visulizer
     }
-
+    
+    // Get UUID corresponding to first PathPoint used by the passed in GeometryPath
+    public UUID getFirstPathPointUUID4GeometryPath(GeometryPath geometryPath) {
+        AbstractPathPoint ppt = mapGeometryPathToPathPoint.get(geometryPath);
+        return mapComponentToUUID.get(ppt).get(0);
+    }
+    /**
+     * Whatever GUI operation resulting in Commands for visualizer, these need to be
+     * propagated to the corresponding Path points that live in a separate part(s)
+     * in the scene graph (e.g. on different bodies)
+     * 
+     * @param muscle
+     * @param prop
+     * @param commands 
+     */
+    public void propagateGeometryPathCommandsToPathPoints(Muscle muscle, AbstractProperty prop, JSONArray commands) {
+        // if anything but show/hide, apply same to first pathpoint
+        int lastIndex = commands.size()-1;
+        JSONObject lastCommand = (JSONObject) commands.get(lastIndex);
+        JSONObject pathpointCommand = (JSONObject) lastCommand.clone();
+        GeometryPath gPath = muscle.getGeometryPath();
+        pathpointCommand.put("objectUuid", getFirstPathPointUUID4GeometryPath(gPath).toString());
+        commands.add(pathpointCommand);
+    }
     /* Utility to allow utility visualization classes to provide their corresponding
      * Geometry, Material and Obbjects to the Model Json structure.
     */
