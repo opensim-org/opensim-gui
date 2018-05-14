@@ -1546,10 +1546,16 @@ public class ModelVisualizationJson extends JSONObject {
         // if anything but show/hide, apply same to first pathpoint
         int lastIndex = commands.size()-1;
         JSONObject lastCommand = (JSONObject) commands.get(lastIndex);
-        JSONObject pathpointCommand = (JSONObject) lastCommand.clone();
-        GeometryPath gPath = muscle.getGeometryPath();
-        pathpointCommand.put("objectUuid", getFirstPathPointUUID4GeometryPath(gPath).toString());
-        commands.add(pathpointCommand);
+        String commandName = (String) lastCommand.get("name");
+        if (commandName.equalsIgnoreCase("SetVisible")){
+            lastCommand.put("type", "SetValueCommandMuscle");
+        }
+        else {
+            JSONObject pathpointCommand = (JSONObject) lastCommand.clone();
+            GeometryPath gPath = muscle.getGeometryPath();
+            pathpointCommand.put("objectUuid", getFirstPathPointUUID4GeometryPath(gPath).toString());
+            commands.add(pathpointCommand);
+        }
     }
     /* Utility to allow utility visualization classes to provide their corresponding
      * Geometry, Material and Obbjects to the Model Json structure.
