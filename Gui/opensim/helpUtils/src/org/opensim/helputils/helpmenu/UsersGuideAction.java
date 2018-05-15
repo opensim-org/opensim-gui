@@ -40,17 +40,17 @@ import org.opensim.utils.TheApp;
 public final class UsersGuideAction extends CallableSystemAction {
 
     public void performAction() {
-        String usersGuidePath = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu:8080/display/OpenSim30/User%27s+Guide" : 
-                TheApp.getUsersGuideDir() + "User%27s+Guide.html";            
+        String usersGuidePath = BrowserLauncher.isConnected() ? "https://simtk-confluence.stanford.edu/display/OpenSim40/User%s+Guide" : 
+                TheApp.getUsersGuideDir() + "User%27s+Guide.html";
 
         System.out.println("USERS GUIDE PATH: " + usersGuidePath);
         BrowserLauncher.openURL(usersGuidePath);
     }
-    
+
     public String getName() {
         return NbBundle.getMessage(UsersGuideAction.class, "CTL_UsersGuide");
     }
-    
+
     @Override
     protected void initialize() {
         super.initialize();
