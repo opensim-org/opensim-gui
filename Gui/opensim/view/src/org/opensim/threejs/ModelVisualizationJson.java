@@ -930,21 +930,6 @@ public class ModelVisualizationJson extends JSONObject {
     }
     private double actualMuscleDisplayRadius;
 
-    private UUID createJsonForPathPoint(PathPoint ppt) {
-        Map<String, Object> ppt_json = new LinkedHashMap<String, Object>();
-        JSONArray locationArray = new JSONArray();
-        UUID uuid_ppt = UUID.randomUUID();
-        ppt_json.put("uuid", uuid_ppt.toString());
-        ppt_json.put("name", ppt.getName());
-        // insert inappropriate body/frame
-        PhysicalFrame bdy = ppt.getBody();
-        JSONObject bodyJson = mapBodyIndicesToJson.get(bdy.getMobilizedBodyIndex());
-        if (bodyJson.get("children")==null)
-            bodyJson.put("children", new JSONArray());
-        ((JSONArray)bodyJson.get("children")).add(ppt_json);
-        return uuid_ppt;
-    }
-
     private void createSkeleton(Model model, JSONObject top_model_json) {
         Map<String, Object> skel_json = new LinkedHashMap<String, Object>();
         UUID skel_uuid = UUID.randomUUID();
@@ -1049,7 +1034,8 @@ public class ModelVisualizationJson extends JSONObject {
         else
             localTransform.setP(computedLocation);
         bpptInBodyJson.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1.0), visScaleFactor));
-        bpptInBodyJson.put("visible", true);
+        GeometryPath ppath = GeometryPath.safeDownCast(pathPoint.getOwner());
+        bpptInBodyJson.put("visible", ppath.get_Appearance().get_visible());
         return bpptInBodyJson;
     }
 
