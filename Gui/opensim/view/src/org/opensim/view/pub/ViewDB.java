@@ -2293,13 +2293,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                         int index = uuids.indexOf(uuidDtring);
                         if (index !=-1){
                             JSONObject offsetObj = (JSONObject) positions.get(index);
-                            Object xString = offsetObj.get("x");
-                            double xValue = JSONMessageHandler.convertObjectFromJsonRoDouble(xString);
-                            Object yString = offsetObj.get("y");
-                            double yValue = JSONMessageHandler.convertObjectFromJsonRoDouble(yString);
-                            Object zString = offsetObj.get("z");
-                            double zValue = JSONMessageHandler.convertObjectFromJsonRoDouble(zString);
-                            Vec3 offsetAsVec3 = new Vec3(xValue, yValue, zValue);
+                            Vec3 offsetAsVec3 = extractVec3FromJsonXYZ(offsetObj);
                             for (index = 0; index < 3; index++) {
                                 nextModelJson.getTransformWRTScene().p().set(index,
                                         offsetAsVec3.get(index) / nextModelJson.getVisScaleFactor());
@@ -2318,5 +2312,16 @@ public final class ViewDB extends Observable implements Observer, LookupListener
        final OpenSimObject selectedObject = currentJson.findObjectForUUID(uuidString);
        if (selectedObject == null) return; // Not OpenSim Object, not interested
        JSONMessageHandler.handleJSON(getCurrentModel(), selectedObject, jsonObject);
+    }
+
+    private Vec3 extractVec3FromJsonXYZ(JSONObject offsetObj) {
+        Object xString = offsetObj.get("x");
+        double xValue = JSONMessageHandler.convertObjectFromJsonRoDouble(xString);
+        Object yString = offsetObj.get("y");
+        double yValue = JSONMessageHandler.convertObjectFromJsonRoDouble(yString);
+        Object zString = offsetObj.get("z");
+        double zValue = JSONMessageHandler.convertObjectFromJsonRoDouble(zString);
+        Vec3 offsetAsVec3 = new Vec3(xValue, yValue, zValue);
+        return offsetAsVec3;
     }
 }
