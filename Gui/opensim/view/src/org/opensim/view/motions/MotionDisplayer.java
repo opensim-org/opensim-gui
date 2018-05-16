@@ -104,8 +104,8 @@ public class MotionDisplayer {
     private Vec3 defaultForceColorVec3 = new Vec3(0., 1.0, 0.);
     private MuscleColoringFunction mcf=null;
     // Create JSONs for geometry and material and use them for all objects of this type so that they all change together
-    private JSONObject experimenalMarkerGeometryJson=null;
-    private JSONObject experimenalMarkerMaterialJson=null;
+    private JSONObject experimentalMarkerGeometryJson=null;
+    private JSONObject experimentalMarkerMaterialJson=null;
     private Vec3 defaultExperimentalMarkerColor = new Vec3(0., 0., 1.);
     private ModelVisualizationJson modelVisJson=null;
     JSONObject motionObjectsRoot=null;
@@ -338,9 +338,9 @@ public class MotionDisplayer {
     private JSONObject createJsonForMotionObjects() {
         JSONObject topJson = new JSONObject();
         JSONArray jsonGeomArray = new JSONArray();
-        jsonGeomArray.add(getExperimenalMarkerGeometryJson());
+        jsonGeomArray.add(getExperimentalMarkerGeometryJson());
         JSONArray jsonMatArray = new JSONArray();
-        jsonMatArray.add(getExperimenalMarkerMaterialJson());
+        jsonMatArray.add(getExperimentalMarkerMaterialJson());
         topJson.put("geometries", jsonGeomArray);
         topJson.put("materials", jsonMatArray);
         topJson.put("object", motionObjectsRoot);
@@ -348,17 +348,17 @@ public class MotionDisplayer {
     }
 
     /**
-     * @return the experimenalMarkerGeometryJson
+     * @return the experimentalMarkerGeometryJson
      */
-    public JSONObject getExperimenalMarkerGeometryJson() {
-        return experimenalMarkerGeometryJson;
+    public JSONObject getExperimentalMarkerGeometryJson() {
+        return experimentalMarkerGeometryJson;
     }
 
     /**
-     * @return the experimenalMarkerMaterialJson
+     * @return the experimentalMarkerMaterialJson
      */
-    public JSONObject getExperimenalMarkerMaterialJson() {
-        return experimenalMarkerMaterialJson;
+    public JSONObject getExperimentalMarkerMaterialJson() {
+        return experimentalMarkerMaterialJson;
     }
 
     /**
@@ -967,30 +967,32 @@ public class MotionDisplayer {
 
 
     private void createDefaultMotionObjects() {
-        if (getExperimenalMarkerGeometryJson() == null) {
-            experimenalMarkerGeometryJson = new JSONObject();
+        if (getExperimentalMarkerGeometryJson() == null) {
+            experimentalMarkerGeometryJson = new JSONObject();
             UUID uuidForMarkerGeometry = UUID.randomUUID();
-            getExperimenalMarkerGeometryJson().put("uuid", uuidForMarkerGeometry.toString());
-            getExperimenalMarkerGeometryJson().put("type", "SphereGeometry");
-            getExperimenalMarkerGeometryJson().put("radius", 5);
-            getExperimenalMarkerGeometryJson().put("name", "DefaultExperimentalMarker");
+            experimentalMarkerGeometryJson.put("uuid", uuidForMarkerGeometry.toString());
+            experimentalMarkerGeometryJson.put("type", "SphereGeometry");
+            experimentalMarkerGeometryJson.put("radius", 5);
+            experimentalMarkerGeometryJson.put("widthSegments", 32);
+            experimentalMarkerGeometryJson.put("heightSegments", 16);            
+            getExperimentalMarkerGeometryJson().put("name", "DefaultExperimentalMarker");
             JSONArray json_geometries = (JSONArray) modelVisJson.get("geometries");
-            json_geometries.add(getExperimenalMarkerGeometryJson());
+            json_geometries.add(getExperimentalMarkerGeometryJson());
 
-            experimenalMarkerMaterialJson = new JSONObject();
+            experimentalMarkerMaterialJson = new JSONObject();
             UUID uuidForMarkerMaterial = UUID.randomUUID();
-            getExperimenalMarkerMaterialJson().put("uuid", uuidForMarkerMaterial.toString());
+            experimentalMarkerMaterialJson.put("uuid", uuidForMarkerMaterial.toString());
             String colorString = JSONUtilities.mapColorToRGBA(getDefaultExperimentalMarkerColor());
-            getExperimenalMarkerMaterialJson().put("type", "MeshPhongMaterial");
-            getExperimenalMarkerMaterialJson().put("shininess", 30);
-            getExperimenalMarkerMaterialJson().put("transparent", true);
-            getExperimenalMarkerMaterialJson().put("emissive", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
-            getExperimenalMarkerMaterialJson().put("specular", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
-            getExperimenalMarkerMaterialJson().put("side", 2);
-            getExperimenalMarkerMaterialJson().put("wireframe", false);
-            getExperimenalMarkerMaterialJson().put("color", colorString);
+            experimentalMarkerMaterialJson.put("type", "MeshPhongMaterial");
+            experimentalMarkerMaterialJson.put("shininess", 30);
+            experimentalMarkerMaterialJson.put("transparent", true);
+            experimentalMarkerMaterialJson.put("emissive", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
+            experimentalMarkerMaterialJson.put("specular", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
+            experimentalMarkerMaterialJson.put("side", 2);
+            experimentalMarkerMaterialJson.put("wireframe", false);
+            experimentalMarkerMaterialJson.put("color", colorString);
             JSONArray json_materials = (JSONArray) modelVisJson.get("materials");
-            json_materials.add(getExperimenalMarkerMaterialJson());
+            json_materials.add(getExperimentalMarkerMaterialJson());
         }
         
     }
@@ -1043,7 +1045,7 @@ public class MotionDisplayer {
             if (expObj instanceof ExperimentalMarker){
                 UUID expMarkerUUID = mapComponentToUUID.get(expObj).get(0); 
                 String colorString = JSONUtilities.mapColorToRGBA(getDefaultExperimentalMarkerColor());
-                experimenalMarkerMaterialJson.put("color", colorString);
+                experimentalMarkerMaterialJson.put("color", colorString);
                 ViewDB.getInstance().applyColorToObjectByUUID(model, expMarkerUUID, colorAsVec3);  
                 break;
             }

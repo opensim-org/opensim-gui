@@ -99,8 +99,8 @@ public class ExperimentalMarker extends MotionObjectBodyPoint {
         expMarker_json.put("type", "Mesh");
         expMarker_json.put("opensimtype", "ExperimentalMarker");
         expMarker_json.put("name", getName());
-        expMarker_json.put("geometry", motionDisplayer.getExperimenalMarkerGeometryJson().get("uuid"));
-        expMarker_json.put("material", motionDisplayer.getExperimenalMarkerMaterialJson().get("uuid"));
+        expMarker_json.put("geometry", motionDisplayer.getExperimentalMarkerGeometryJson().get("uuid"));
+        expMarker_json.put("material", motionDisplayer.getExperimentalMarkerMaterialJson().get("uuid"));
         StateVector dataAtStartTime = motionDisplayer.getSimmMotionData().getStateVector(0);
         ArrayDouble interpolatedStates = dataAtStartTime.getData();
         int idx = getStartIndexInFileNotIncludingTime();
