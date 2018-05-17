@@ -1323,10 +1323,7 @@ public class ModelVisualizationJson extends JSONObject {
         JSONObject guiJson = new JSONObject();
         guiJson.put("Op", "execute");
         UUID markerUuid = mapComponentToUUID.get(marker).get(0);
-        Vec3 newLocationVizUnits = new Vec3();
-        for (int i=0;i<3;i++)
-            newLocationVizUnits.set(i, newLocation.get(i)*visScaleFactor);
-        JSONObject commandJson = createSetPositionCommand(markerUuid, newLocationVizUnits);
+        JSONObject commandJson = createSetPositionCommand(markerUuid, newLocation);
         guiJson.put("command", commandJson);
         return guiJson;
     }

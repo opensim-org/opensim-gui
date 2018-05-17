@@ -27,11 +27,13 @@
  */
 package org.opensim.threejs;
 
+import java.util.UUID;
 import javax.swing.SwingUtilities;
 import org.json.simple.JSONObject;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.Vec3;
 import org.opensim.view.nodes.PropertyEditorAdaptor;
 import org.opensim.view.pub.ViewDB;
 
@@ -51,22 +53,22 @@ public class JSONMessageHandler {
                 if (eventType.equals("select")){
                     ViewDB.getInstance().setSelectedObject(opensimObj);
                 }
-                else if (eventType.equals("transform-changed")){
+                else if (eventType.equals("translate")){
                     // Find property and modify
+                    UUID objUuid = UUID.fromString((String) jsonObject.get("uuid"));
+                    OpenSimObject opensimObj = ViewDB.getInstance().getObjectFromUUID(objUuid);
                     // From Visualizer side, we always get "position", "rotation", "scale"
                     // The corresponding Properties are adhoc and vary as follows:
-                    /*
                     if (opensimObj != null && opensimObj.hasProperty("location")){
                         final AbstractProperty ap = opensimObj.getPropertyByName("location");
                         final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(model, opensimObj, ap, null);
-                        String locationString = (String) jsonObject.get("location");
-                        pea.setValueVec3FromString(convertLocationStringToPropertyFormat(jsonObject));
+                        JSONObject locationJson = (JSONObject) jsonObject.get("location");
+                        Vec3 locationVec3 = convertJsonXYZToVec3(locationJson);
+                        // Convert from ground frame to object's frame
+                        pea.setValueVec3(locationVec3);
                         // Tell the world that objects have moved
                         ViewDB.getInstance().objectMoved(model, opensimObj);
-                    }*/
-                }
-                else if (eventType.equals("geometry-changed")){
-                    // update Preoperties from Json
+                    }
                 }
             }
        
@@ -110,7 +112,7 @@ public class JSONMessageHandler {
           returnString = returnString.concat(String.valueOf(zDouble));
           return returnString;
     }
-    static public double convertObjectFromJsonRoDouble(Object obj) {
+    static public double convertObjectFromJsonToDouble(Object obj) {
         double value = 0.0;
         if (obj instanceof Long){
             Long l = (Long) obj;
@@ -121,5 +123,16 @@ public class JSONMessageHandler {
         }
         return value;
     }
- 
+    static public Vec3 convertJsonXYZToVec3(JSONObject offsetObj) {
+        double relativeScale = ModelVisualizationJson.getVisScaleFactor();
+        Object xString = offsetObj.get("x");
+        double xValue = JSONMessageHandler.convertObjectFromJsonToDouble(xString)/relativeScale;
+        Object yString = offsetObj.get("y");
+        double yValue = JSONMessageHandler.convertObjectFromJsonToDouble(yString)/relativeScale;
+        Object zString = offsetObj.get("z");
+        double zValue = JSONMessageHandler.convertObjectFromJsonToDouble(zString)/relativeScale;
+        Vec3 offsetAsVec3 = new Vec3(xValue, yValue, zValue);
+        return offsetAsVec3;
+    }
+
 }
