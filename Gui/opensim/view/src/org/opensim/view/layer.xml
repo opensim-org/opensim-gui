@@ -32,7 +32,6 @@
             <file name="org-opensim-view-editors-ObjectPropertiesEditor.instance"/>
             <file name="org-opensim-view-excitationEditor-ExcitationEditorAction.instance"/>
             <file name="org-opensim-view-experimentaldata-ExperimentalObjectDisplayHideAction.instance"/>
-            <file name="org-opensim-view-markerEditor-EditMarkersAction.instance"/>
             <file name="org-opensim-view-nodes-DisplayPointTraceAction.instance"/>
             <file name="org-opensim-view-nodes-IsolateCurrentModelAction.instance"/>
             <file name="org-opensim-view-nodes-JointToggleChildFrameAction.instance"/>

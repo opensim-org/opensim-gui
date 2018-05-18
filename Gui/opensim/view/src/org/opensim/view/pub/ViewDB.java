@@ -2250,7 +2250,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         }
     }
 
-    public void translateObject(Model model, Marker marker, Vec3 location) {
+    public void setObjectTranslationInParent(Model model, Marker marker, Vec3 location) {
         if (websocketdb!=null){
             ModelVisualizationJson vis = ViewDB.getInstance().getModelVisualizationJson(model);
             websocketdb.broadcastMessageJson(vis.createTranslateObjectCommand(marker, marker.get_location()), null);
@@ -2271,7 +2271,17 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         }        
         
     }
-    // Callback, invoked when a command is received from visualizer
+    // find OpenSimObject corresponding to passed in UUID or null if not found
+    public OpenSimObject getObjectFromUUID(UUID objUuid) {
+        Collection<ModelVisualizationJson> values = getInstance().mapModelsToJsons.values();
+       Iterator<ModelVisualizationJson> iterator = values.iterator();
+        while(iterator.hasNext()){
+            OpenSimObject obj = iterator.next().findObjectForUUID(objUuid.toString());
+            if (obj !=null) return obj;
+        }
+        return null;
+    }
+       // Callback, invoked when a command is received from visualizer
     // this operates only on currentJson
     private void handleJson(JSONObject jsonObject) {
         String msgType = (String)jsonObject.get("type");
