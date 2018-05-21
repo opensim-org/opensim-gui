@@ -398,7 +398,7 @@ public class ModelVisualizationJson extends JSONObject {
         ArrayList<UUID> comp_uuids = new ArrayList<UUID>();
         comp_uuids.add(groupUuid);
         mapComponentToUUID.put(comp, comp_uuids);
-        
+        mapUUIDToComponent.put(groupUuid, comp);
     }
     // This method handles the DecorativeGeometry array produced by the component. It does special
     // handling to deal with WrapObjects whose generateDecorations doesn't handle partial
