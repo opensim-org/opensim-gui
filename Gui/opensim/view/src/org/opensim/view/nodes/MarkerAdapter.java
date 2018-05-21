@@ -98,7 +98,7 @@ public class MarkerAdapter  {
 
     private void updateDisplay() {
         // tell the ViewDB to redraw the model
-        ViewDB.getInstance().translateObject(model, marker, marker.get_location());
+        ViewDB.getInstance().setObjectTranslationInParent(model, marker, marker.get_location());
     }
 
     /**

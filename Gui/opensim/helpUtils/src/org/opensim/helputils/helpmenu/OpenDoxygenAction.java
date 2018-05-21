@@ -41,20 +41,20 @@ import org.opensim.utils.BrowserLauncher;
 import org.opensim.utils.TheApp;
 
 public final class OpenDoxygenAction extends CallableSystemAction {
-    
+
     public void performAction() {
         String basePath = TheApp.getInstallDir();
-        String doxygenPath = BrowserLauncher.isConnected() ? "https://simtk.org/api_docs/opensim/api_docs32/" :
-                basePath + File.separator + "sdk" + File.separator + "doc" + File.separator + "OpenSimAPI.html";     
+        String doxygenPath = BrowserLauncher.isConnected() ? "https://simtk.org/api_docs/opensim/api_docs/" :
+                basePath + File.separator + "sdk" + File.separator + "doc" + File.separator + "OpenSimAPI.html";
 
         BrowserLauncher.openURL(doxygenPath);
-        
+
     }
-    
+
     public String getName() {
         return NbBundle.getMessage(OpenDoxygenAction.class, "CTL_OpenDoxygen");
     }
-    
+
     @Override
     protected void initialize() {
         super.initialize();

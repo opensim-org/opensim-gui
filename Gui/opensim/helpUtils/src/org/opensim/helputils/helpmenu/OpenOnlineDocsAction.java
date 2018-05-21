@@ -30,28 +30,28 @@ import org.openide.util.actions.CallableSystemAction;
 import org.opensim.utils.BrowserLauncher;
 
 public final class OpenOnlineDocsAction extends CallableSystemAction {
-    
+
     public void performAction() {
-       BrowserLauncher.openURL("http://www.stanford.edu/group/opensim/support/index.html");
+       BrowserLauncher.openURL("http://opensim.stanford.edu/support/index.html");
     }
-    
+
     public String getName() {
         return NbBundle.getMessage(OpenOnlineDocsAction.class, "CTL_OnlineDocs");
     }
-    
+
     @Override
     protected void initialize() {
         super.initialize();
         putValue("noIconInMenu", Boolean.TRUE);
     }
-    
+
     public HelpCtx getHelpCtx() {
         return HelpCtx.DEFAULT_HELP;
     }
-    
+
     @Override
     protected boolean asynchronous() {
         return false;
     }
-    
+
 }

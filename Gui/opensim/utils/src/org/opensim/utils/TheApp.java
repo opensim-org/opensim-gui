@@ -41,6 +41,7 @@ import org.openide.LifecycleManager;
 import org.openide.util.Exceptions;
 import org.openide.util.ImageUtilities;
 import java.nio.file.StandardCopyOption;
+import java.util.prefs.Preferences;
 import javax.swing.JPanel;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
@@ -187,7 +188,14 @@ public final class TheApp {
     public static String getUserDir() {
         return userDir;
     }
-
+    /**
+     * Get Resources Directory where Models, Code has been installed. It will be updated by the installer 
+     * when new Resources are installed.
+     * @return 
+     */
+    public static String getResourcesDir() {
+        return Preferences.userNodeForPackage(TheApp.class).get("OpenSimResourcesDir", null);
+    }
     public static String installResources() {
         // Popup a directory browser dialog prompting for install location of Models, Scripts
         String userHome = System.getProperty("user.home")+File.separator+"Documents"+File.separator+"OpenSim"+
