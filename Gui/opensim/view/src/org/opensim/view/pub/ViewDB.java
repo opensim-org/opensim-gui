@@ -2329,11 +2329,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
     private Vec3 extractVec3FromJsonXYZ(JSONObject offsetObj) {
         Object xString = offsetObj.get("x");
-        double xValue = JSONMessageHandler.convertObjectFromJsonRoDouble(xString);
+        double xValue = JSONMessageHandler.convertObjectFromJsonToDouble(xString);
         Object yString = offsetObj.get("y");
-        double yValue = JSONMessageHandler.convertObjectFromJsonRoDouble(yString);
+        double yValue = JSONMessageHandler.convertObjectFromJsonToDouble(yString);
         Object zString = offsetObj.get("z");
-        double zValue = JSONMessageHandler.convertObjectFromJsonRoDouble(zString);
+        double zValue = JSONMessageHandler.convertObjectFromJsonToDouble(zString);
         Vec3 offsetAsVec3 = new Vec3(xValue, yValue, zValue);
         return offsetAsVec3;
     }
