@@ -44,19 +44,11 @@ public class ActuatorList {
   }
 
   public ActuatorIterator begin() {
-    return new ActuatorIterator(opensimSimulationJNI.ActuatorList_begin__SWIG_0(swigCPtr, this), true);
-  }
-
-  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Actuator_const_t__type_t cbegin() {
-    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Actuator_const_t__type_t(opensimSimulationJNI.ActuatorList_cbegin(swigCPtr, this), true);
+    return new ActuatorIterator(opensimSimulationJNI.ActuatorList_begin(swigCPtr, this), true);
   }
 
   public ActuatorIterator end() {
-    return new ActuatorIterator(opensimSimulationJNI.ActuatorList_end__SWIG_0(swigCPtr, this), true);
-  }
-
-  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Actuator_const_t__type_t cend() {
-    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Actuator_const_t__type_t(opensimSimulationJNI.ActuatorList_cend(swigCPtr, this), true);
+    return new ActuatorIterator(opensimSimulationJNI.ActuatorList_end(swigCPtr, this), true);
   }
 
   public void setFilter(ComponentFilter filter) {

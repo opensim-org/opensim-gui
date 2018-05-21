@@ -91,14 +91,6 @@ public class RowVectorBaseVec3 extends MatrixBaseVec3 {
     return new Vec3(opensimSimbodyJNI.RowVectorBaseVec3_sum(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_VectorIteratorT_SimTK__VecT_3_double_1_t_SimTK__RowVectorBaseT_SimTK__VecT_3_double_1_t_t_t begin() {
-    return new SWIGTYPE_p_VectorIteratorT_SimTK__VecT_3_double_1_t_SimTK__RowVectorBaseT_SimTK__VecT_3_double_1_t_t_t(opensimSimbodyJNI.RowVectorBaseVec3_begin(swigCPtr, this), true);
-  }
-
-  public SWIGTYPE_p_VectorIteratorT_SimTK__VecT_3_double_1_t_SimTK__RowVectorBaseT_SimTK__VecT_3_double_1_t_t_t end() {
-    return new SWIGTYPE_p_VectorIteratorT_SimTK__VecT_3_double_1_t_SimTK__RowVectorBaseT_SimTK__VecT_3_double_1_t_t_t(opensimSimbodyJNI.RowVectorBaseVec3_end(swigCPtr, this), true);
-  }
-
   public Vec3 get(int i) {
     return new Vec3(opensimSimbodyJNI.RowVectorBaseVec3_get(swigCPtr, this, i), true);
   }

@@ -39,12 +39,8 @@ public class OutputSpatialVec extends AbstractOutput {
     this(opensimCommonJNI.new_OutputSpatialVec__SWIG_0(), true);
   }
 
-  public OutputSpatialVec(String name, SWIGTYPE_p_std__functionT_void_fOpenSim__Component_const_p_SimTK__State_const_R_std__string_const_R_SimTK__VecT_2_SimTK__VecT_3_double_1_t_1_t_RF_t outputFunction, Stage dependsOnStage, boolean isList) {
-    this(opensimCommonJNI.new_OutputSpatialVec__SWIG_1(name, SWIGTYPE_p_std__functionT_void_fOpenSim__Component_const_p_SimTK__State_const_R_std__string_const_R_SimTK__VecT_2_SimTK__VecT_3_double_1_t_1_t_RF_t.getCPtr(outputFunction), Stage.getCPtr(dependsOnStage), dependsOnStage, isList), true);
-  }
-
   public OutputSpatialVec(OutputSpatialVec source) {
-    this(opensimCommonJNI.new_OutputSpatialVec__SWIG_2(OutputSpatialVec.getCPtr(source), source), true);
+    this(opensimCommonJNI.new_OutputSpatialVec__SWIG_1(OutputSpatialVec.getCPtr(source), source), true);
   }
 
   public boolean isCompatible(AbstractOutput o) {
@@ -65,10 +61,6 @@ public class OutputSpatialVec extends AbstractOutput {
 
   public AbstractChannel getChannel(String name) {
     return new AbstractChannel(opensimCommonJNI.OutputSpatialVec_getChannel(swigCPtr, this, name), false);
-  }
-
-  public SWIGTYPE_p_std__mapT_std__string_OpenSim__OutputT_SimTK__VecT_2_SimTK__Vec3_1_t_t__Channel_t getChannels() {
-    return new SWIGTYPE_p_std__mapT_std__string_OpenSim__OutputT_SimTK__VecT_2_SimTK__Vec3_1_t_t__Channel_t(opensimCommonJNI.OutputSpatialVec_getChannels(swigCPtr, this), false);
   }
 
   public SpatialVec getValue(State state) {
