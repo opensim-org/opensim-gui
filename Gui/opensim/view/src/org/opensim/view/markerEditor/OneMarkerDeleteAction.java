@@ -44,6 +44,7 @@ import org.opensim.modeling.Vec3;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.ObjectsDeletedEvent;
+import org.opensim.view.SingleModelGuiElements;
 import org.opensim.view.nodes.OneMarkerNode;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
@@ -144,6 +145,8 @@ public final class OneMarkerDeleteAction extends CallableSystemAction {
         }
         // Update the marker name list in the ViewDB.
         OpenSimDB.getInstance().getModelGuiElements(model).updateMarkerNames();
+        SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(model);
+        guiElem.setUnsavedChangesFlag(true);
     }
   
 }
