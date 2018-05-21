@@ -44,19 +44,11 @@ public class Thelen2003MuscleList {
   }
 
   public Thelen2003MuscleIterator begin() {
-    return new Thelen2003MuscleIterator(opensimSimulationJNI.Thelen2003MuscleList_begin__SWIG_0(swigCPtr, this), true);
-  }
-
-  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Thelen2003Muscle_const_t__type_t cbegin() {
-    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Thelen2003Muscle_const_t__type_t(opensimSimulationJNI.Thelen2003MuscleList_cbegin(swigCPtr, this), true);
+    return new Thelen2003MuscleIterator(opensimSimulationJNI.Thelen2003MuscleList_begin(swigCPtr, this), true);
   }
 
   public Thelen2003MuscleIterator end() {
-    return new Thelen2003MuscleIterator(opensimSimulationJNI.Thelen2003MuscleList_end__SWIG_0(swigCPtr, this), true);
-  }
-
-  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Thelen2003Muscle_const_t__type_t cend() {
-    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Thelen2003Muscle_const_t__type_t(opensimSimulationJNI.Thelen2003MuscleList_cend(swigCPtr, this), true);
+    return new Thelen2003MuscleIterator(opensimSimulationJNI.Thelen2003MuscleList_end(swigCPtr, this), true);
   }
 
   public void setFilter(ComponentFilter filter) {

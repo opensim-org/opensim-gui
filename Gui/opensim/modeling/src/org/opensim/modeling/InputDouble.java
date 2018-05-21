@@ -112,10 +112,6 @@ public class InputDouble extends AbstractInput {
     return new Vector(opensimCommonJNI.InputDouble_getVector(swigCPtr, this, State.getCPtr(state), state), true);
   }
 
-  public SWIGTYPE_p_std__vectorT_SimTK__ReferencePtrT_OpenSim__OutputT_double_t__Channel_const_t_t getChannels() {
-    return new SWIGTYPE_p_std__vectorT_SimTK__ReferencePtrT_OpenSim__OutputT_double_t__Channel_const_t_t(opensimCommonJNI.InputDouble_getChannels(swigCPtr, this), false);
-  }
-
   public String getConnecteeTypeName() {
     return opensimCommonJNI.InputDouble_getConnecteeTypeName(swigCPtr, this);
   }

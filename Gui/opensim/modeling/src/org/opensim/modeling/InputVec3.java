@@ -112,10 +112,6 @@ public class InputVec3 extends AbstractInput {
     return new VectorOfVec3(opensimCommonJNI.InputVec3_getVector(swigCPtr, this, State.getCPtr(state), state), true);
   }
 
-  public SWIGTYPE_p_std__vectorT_SimTK__ReferencePtrT_OpenSim__OutputT_SimTK__VecT_3_t_t__Channel_const_t_t getChannels() {
-    return new SWIGTYPE_p_std__vectorT_SimTK__ReferencePtrT_OpenSim__OutputT_SimTK__VecT_3_t_t__Channel_const_t_t(opensimCommonJNI.InputVec3_getChannels(swigCPtr, this), false);
-  }
-
   public String getConnecteeTypeName() {
     return opensimCommonJNI.InputVec3_getConnecteeTypeName(swigCPtr, this);
   }
