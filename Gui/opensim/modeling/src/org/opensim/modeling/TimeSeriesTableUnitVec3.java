@@ -49,16 +49,20 @@ public class TimeSeriesTableUnitVec3 extends DataTableUnitVec3 {
     this(opensimCommonJNI.new_TimeSeriesTableUnitVec3__SWIG_2(StdVectorDouble.getCPtr(indVec), indVec, SWIGTYPE_p_SimTK__Matrix_T_SimTK__UnitVecT_double_1_t_t.getCPtr(depData), StdVectorString.getCPtr(labels), labels), true);
   }
 
+  public TimeSeriesTableUnitVec3(StdVectorDouble indVec) {
+    this(opensimCommonJNI.new_TimeSeriesTableUnitVec3__SWIG_3(StdVectorDouble.getCPtr(indVec), indVec), true);
+  }
+
   public TimeSeriesTableUnitVec3(DataTableUnitVec3 datatable) {
-    this(opensimCommonJNI.new_TimeSeriesTableUnitVec3__SWIG_3(DataTableUnitVec3.getCPtr(datatable), datatable), true);
+    this(opensimCommonJNI.new_TimeSeriesTableUnitVec3__SWIG_4(DataTableUnitVec3.getCPtr(datatable), datatable), true);
   }
 
   public TimeSeriesTableUnitVec3(String filename) {
-    this(opensimCommonJNI.new_TimeSeriesTableUnitVec3__SWIG_4(filename), true);
+    this(opensimCommonJNI.new_TimeSeriesTableUnitVec3__SWIG_5(filename), true);
   }
 
   public TimeSeriesTableUnitVec3(String filename, String tablename) {
-    this(opensimCommonJNI.new_TimeSeriesTableUnitVec3__SWIG_5(filename, tablename), true);
+    this(opensimCommonJNI.new_TimeSeriesTableUnitVec3__SWIG_6(filename, tablename), true);
   }
 
   public long getNearestRowIndexForTime(double time, boolean restrictToTimeRange) {
