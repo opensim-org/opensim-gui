@@ -44,11 +44,19 @@ public class JointList {
   }
 
   public JointIterator begin() {
-    return new JointIterator(opensimSimulationJNI.JointList_begin(swigCPtr, this), true);
+    return new JointIterator(opensimSimulationJNI.JointList_begin__SWIG_0(swigCPtr, this), true);
+  }
+
+  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Joint_const_t__type_t cbegin() {
+    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Joint_const_t__type_t(opensimSimulationJNI.JointList_cbegin(swigCPtr, this), true);
   }
 
   public JointIterator end() {
-    return new JointIterator(opensimSimulationJNI.JointList_end(swigCPtr, this), true);
+    return new JointIterator(opensimSimulationJNI.JointList_end__SWIG_0(swigCPtr, this), true);
+  }
+
+  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Joint_const_t__type_t cend() {
+    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Joint_const_t__type_t(opensimSimulationJNI.JointList_cend(swigCPtr, this), true);
   }
 
   public void setFilter(ComponentFilter filter) {

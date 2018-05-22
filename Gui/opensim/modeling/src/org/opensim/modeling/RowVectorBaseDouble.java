@@ -95,6 +95,14 @@ public class RowVectorBaseDouble extends MatrixBaseDouble {
     return opensimSimbodyJNI.RowVectorBaseDouble_sum(swigCPtr, this);
   }
 
+  public SWIGTYPE_p_VectorIteratorT_double_SimTK__RowVectorBaseT_double_t_t begin() {
+    return new SWIGTYPE_p_VectorIteratorT_double_SimTK__RowVectorBaseT_double_t_t(opensimSimbodyJNI.RowVectorBaseDouble_begin(swigCPtr, this), true);
+  }
+
+  public SWIGTYPE_p_VectorIteratorT_double_SimTK__RowVectorBaseT_double_t_t end() {
+    return new SWIGTYPE_p_VectorIteratorT_double_SimTK__RowVectorBaseT_double_t_t(opensimSimbodyJNI.RowVectorBaseDouble_end(swigCPtr, this), true);
+  }
+
   public double get(int i) {
     return opensimSimbodyJNI.RowVectorBaseDouble_get(swigCPtr, this, i);
   }
