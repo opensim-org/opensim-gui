@@ -49,16 +49,20 @@ public class TimeSeriesTableSpatialVec extends DataTableSpatialVec {
     this(opensimCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_2(StdVectorDouble.getCPtr(indVec), indVec, MatrixOfSpatialVec.getCPtr(depData), depData, StdVectorString.getCPtr(labels), labels), true);
   }
 
+  public TimeSeriesTableSpatialVec(StdVectorDouble indVec) {
+    this(opensimCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_3(StdVectorDouble.getCPtr(indVec), indVec), true);
+  }
+
   public TimeSeriesTableSpatialVec(DataTableSpatialVec datatable) {
-    this(opensimCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_3(DataTableSpatialVec.getCPtr(datatable), datatable), true);
+    this(opensimCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_4(DataTableSpatialVec.getCPtr(datatable), datatable), true);
   }
 
   public TimeSeriesTableSpatialVec(String filename) {
-    this(opensimCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_4(filename), true);
+    this(opensimCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_5(filename), true);
   }
 
   public TimeSeriesTableSpatialVec(String filename, String tablename) {
-    this(opensimCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_5(filename, tablename), true);
+    this(opensimCommonJNI.new_TimeSeriesTableSpatialVec__SWIG_6(filename, tablename), true);
   }
 
   public long getNearestRowIndexForTime(double time, boolean restrictToTimeRange) {

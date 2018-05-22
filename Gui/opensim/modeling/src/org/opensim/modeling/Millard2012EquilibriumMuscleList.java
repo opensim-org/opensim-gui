@@ -44,19 +44,11 @@ public class Millard2012EquilibriumMuscleList {
   }
 
   public Millard2012EquilibriumMuscleIterator begin() {
-    return new Millard2012EquilibriumMuscleIterator(opensimSimulationJNI.Millard2012EquilibriumMuscleList_begin__SWIG_0(swigCPtr, this), true);
-  }
-
-  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Millard2012EquilibriumMuscle_const_t__type_t cbegin() {
-    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Millard2012EquilibriumMuscle_const_t__type_t(opensimSimulationJNI.Millard2012EquilibriumMuscleList_cbegin(swigCPtr, this), true);
+    return new Millard2012EquilibriumMuscleIterator(opensimSimulationJNI.Millard2012EquilibriumMuscleList_begin(swigCPtr, this), true);
   }
 
   public Millard2012EquilibriumMuscleIterator end() {
-    return new Millard2012EquilibriumMuscleIterator(opensimSimulationJNI.Millard2012EquilibriumMuscleList_end__SWIG_0(swigCPtr, this), true);
-  }
-
-  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Millard2012EquilibriumMuscle_const_t__type_t cend() {
-    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Millard2012EquilibriumMuscle_const_t__type_t(opensimSimulationJNI.Millard2012EquilibriumMuscleList_cend(swigCPtr, this), true);
+    return new Millard2012EquilibriumMuscleIterator(opensimSimulationJNI.Millard2012EquilibriumMuscleList_end(swigCPtr, this), true);
   }
 
   public void setFilter(ComponentFilter filter) {

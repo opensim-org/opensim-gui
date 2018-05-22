@@ -279,14 +279,6 @@ public class SimTKVisualizer {
     opensimSimbodyJNI.SimTKVisualizer_clearStats(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_SimTK__Array_T_SimTK__Visualizer__InputListener_p_unsigned_int_t getInputListeners() {
-    return new SWIGTYPE_p_SimTK__Array_T_SimTK__Visualizer__InputListener_p_unsigned_int_t(opensimSimbodyJNI.SimTKVisualizer_getInputListeners(swigCPtr, this), false);
-  }
-
-  public SWIGTYPE_p_SimTK__Array_T_SimTK__Visualizer__FrameController_p_unsigned_int_t getFrameControllers() {
-    return new SWIGTYPE_p_SimTK__Array_T_SimTK__Visualizer__FrameController_p_unsigned_int_t(opensimSimbodyJNI.SimTKVisualizer_getFrameControllers(swigCPtr, this), false);
-  }
-
   public SWIGTYPE_p_SimTK__MultibodySystem getSystem() {
     return new SWIGTYPE_p_SimTK__MultibodySystem(opensimSimbodyJNI.SimTKVisualizer_getSystem(swigCPtr, this), false);
   }

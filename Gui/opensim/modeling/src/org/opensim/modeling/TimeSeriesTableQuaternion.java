@@ -49,16 +49,20 @@ public class TimeSeriesTableQuaternion extends DataTableQuaternion {
     this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_2(StdVectorDouble.getCPtr(indVec), indVec, SWIGTYPE_p_SimTK__Matrix_T_SimTK__Quaternion_t.getCPtr(depData), StdVectorString.getCPtr(labels), labels), true);
   }
 
+  public TimeSeriesTableQuaternion(StdVectorDouble indVec) {
+    this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_3(StdVectorDouble.getCPtr(indVec), indVec), true);
+  }
+
   public TimeSeriesTableQuaternion(DataTableQuaternion datatable) {
-    this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_3(DataTableQuaternion.getCPtr(datatable), datatable), true);
+    this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_4(DataTableQuaternion.getCPtr(datatable), datatable), true);
   }
 
   public TimeSeriesTableQuaternion(String filename) {
-    this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_4(filename), true);
+    this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_5(filename), true);
   }
 
   public TimeSeriesTableQuaternion(String filename, String tablename) {
-    this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_5(filename, tablename), true);
+    this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_6(filename, tablename), true);
   }
 
   public long getNearestRowIndexForTime(double time, boolean restrictToTimeRange) {

@@ -44,19 +44,11 @@ public class FrameList {
   }
 
   public FrameIterator begin() {
-    return new FrameIterator(opensimSimulationJNI.FrameList_begin__SWIG_0(swigCPtr, this), true);
-  }
-
-  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Frame_const_t__type_t cbegin() {
-    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Frame_const_t__type_t(opensimSimulationJNI.FrameList_cbegin(swigCPtr, this), true);
+    return new FrameIterator(opensimSimulationJNI.FrameList_begin(swigCPtr, this), true);
   }
 
   public FrameIterator end() {
-    return new FrameIterator(opensimSimulationJNI.FrameList_end__SWIG_0(swigCPtr, this), true);
-  }
-
-  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Frame_const_t__type_t cend() {
-    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Frame_const_t__type_t(opensimSimulationJNI.FrameList_cend(swigCPtr, this), true);
+    return new FrameIterator(opensimSimulationJNI.FrameList_end(swigCPtr, this), true);
   }
 
   public void setFilter(ComponentFilter filter) {
