@@ -1262,8 +1262,11 @@ public class ModelVisualizationJson extends JSONObject {
         UUID mat_uuid = UUID.randomUUID();
         mat_json.put("uuid", mat_uuid.toString());
         mat_json.put("name", "MarkerMat");
-        mat_json.put("type", "MeshPhongMaterial");
-        mat_json.put("shininess", 30);
+        mat_json.put("type", "MeshStandardMaterial");
+        mat_json.put("transparent", true);
+        mat_json.put("metalness", 0);
+        mat_json.put("roughness", 1.0);
+        mat_json.put("side", 2);
         //mat_json.put("transparent", true);
         String colorString = JSONUtilities.mapColorToRGBA(hints.get_marker_color());
         mat_json.put("color", colorString);
