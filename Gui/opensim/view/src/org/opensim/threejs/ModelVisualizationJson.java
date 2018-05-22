@@ -1026,7 +1026,7 @@ public class ModelVisualizationJson extends JSONObject {
         bpptInBodyJson.put("material", materialUuidString);
         bpptInBodyJson.put("status", active?"active":"inactive");
         Transform localTransform = new Transform();
-        if (active){
+        if (active && pathPoint!= null){
             Vec3 location = pathPoint.getLocation(state);
             localTransform.setP(location);
         }
@@ -1034,8 +1034,7 @@ public class ModelVisualizationJson extends JSONObject {
             localTransform.setP(computedLocation);
         bpptInBodyJson.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1.0), visScaleFactor));
         //bpptInBodyJson.put("visible", visible);
-        GeometryPath ppath = GeometryPath.safeDownCast(pathPoint.getOwner());
-        bpptInBodyJson.put("visible", ppath.get_Appearance().get_visible());
+        bpptInBodyJson.put("visible", visible);
         return bpptInBodyJson;
     }
 
