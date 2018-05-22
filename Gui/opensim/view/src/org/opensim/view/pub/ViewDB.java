@@ -1284,9 +1284,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       if (isVtkGraphicsAvailable())
         sceneAssembly.GetBounds(sceneBounds);
       else {
+          int numModels = mapModelsToJsons.size();
           for (int i=0; i<3; i++){
-            sceneBounds[i*2] = -2;
-            sceneBounds[i*2+1] = 2;
+            sceneBounds[i*2] = -2*numModels;
+            sceneBounds[i*2+1] = 2*numModels;
           }
       }
       return sceneBounds;
@@ -2301,11 +2302,15 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                         ModelVisualizationJson nextModelJson = modelJsons.nextElement();
                         String uuidDtring = nextModelJson.getModelUUID().toString();
                         int index = uuids.indexOf(uuidDtring);
-                        JSONObject offsetObj = (JSONObject) positions.get(index);
-                        Vec3 offsetAsVec3 = JSONMessageHandler.convertJsonXYZToVec3(offsetObj);
-                        for (index = 0; index < 3; index++) {
-                            nextModelJson.getTransformWRTScene().p().set(index,
-                                    offsetAsVec3.get(index) / nextModelJson.getVisScaleFactor());
+                        // Be defensive in case model hasn't been found
+                        if (index >=0){
+                            JSONObject offsetObj = (JSONObject) positions.get(index);
+                            // The following call returns Vec3 in model units, no need to convert
+                            Vec3 offsetAsVec3 = JSONMessageHandler.convertJsonXYZToVec3(offsetObj);
+                            for (int vindex = 0; vindex < 3; vindex++) {
+                                nextModelJson.getTransformWRTScene().p().set(vindex,
+                                        offsetAsVec3.get(vindex));
+                            }
                         }
                     }
 
