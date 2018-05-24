@@ -1177,11 +1177,8 @@ public class ModelVisualizationJson extends JSONObject {
             newPointJson.put("parent_uuid", mapComponentToUUID.get(newPoint.getBody()).get(0).toString());
             topJson.put("NewPoint", newPointJson);
             // Add new point to maps
-            ArrayList<UUID> vis_uuidList = new ArrayList<UUID>(1);
             UUID newPointMeshUUID = UUID.fromString((String) newPointJson.get("uuid"));
-            vis_uuidList.add(newPointMeshUUID);
-            mapComponentToUUID.put(newPoint, vis_uuidList);
-            mapUUIDToComponent.put(newPointMeshUUID, newPoint);
+            addComponentToUUIDMap(newPoint, newPointMeshUUID);
             JSONArray pathpoint_jsonArr = new JSONArray();
             for (int i = 0; i < path.getPathPointSet().getSize(); i++) {
                 AbstractPathPoint pathPoint = path.getPathPointSet().get(i);
