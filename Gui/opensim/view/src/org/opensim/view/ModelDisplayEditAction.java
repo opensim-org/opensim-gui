@@ -49,7 +49,7 @@ public final class ModelDisplayEditAction extends CallableSystemAction {
     */
    public void adjustModelDisplayOffset(Model abstractModel) {
       // Show dialog for model display ajdustment
-      ViewDB.getInstance().updateModelOffsets();
+      // offset is always updated offline after each model loading ito visualizer
       final ModelDisplayOffsetJPanel p = new ModelDisplayOffsetJPanel(abstractModel);
       DialogDescriptor desc = new DialogDescriptor(p, "Model Offset", false, new ActionListener() {
 
