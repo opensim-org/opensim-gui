@@ -401,9 +401,9 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         JSONObject dg_json = new JSONObject();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "BoxGeometry");
-        dg_json.put("width", arg0.getHalfLengths().get(0)*visualizerScaleFactor);
-        dg_json.put("height", arg0.getHalfLengths().get(1)*visualizerScaleFactor);
-        dg_json.put("depth", arg0.getHalfLengths().get(2)*visualizerScaleFactor);
+        dg_json.put("width", arg0.getHalfLengths().get(0)*2*visualizerScaleFactor);
+        dg_json.put("height", arg0.getHalfLengths().get(1)*2*visualizerScaleFactor);
+        dg_json.put("depth", arg0.getHalfLengths().get(2)*2*visualizerScaleFactor);
         dg_json.put("radialSegments", 1);
         dg_json.put("heightSegments", 1);
         return dg_json;
