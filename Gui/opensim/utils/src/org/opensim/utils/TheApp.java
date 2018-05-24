@@ -208,12 +208,12 @@ public final class TheApp {
 
         jTextArea1.setColumns(20);
         jTextArea1.setFont(jTextArea1.getFont());
-        jTextArea1.setRows(3);
+        jTextArea1.setRows(4);
         jTextArea1.setWrapStyleWord(true);
         jTextArea1.setEnabled(false);
         JPanel containerPanel = new JPanel();
         containerPanel.setLayout(new javax.swing.BoxLayout(containerPanel, javax.swing.BoxLayout.Y_AXIS));
-        jTextArea1.setText("Please choose a location for the OpenSim resources (models and examples). \nApproximately 60 MB will be copied. You should have permissions to write to this folder.\nTo reinstall the resources at any time, type \"installResources()\" in the ScriptingShell Window.");
+        jTextArea1.setText("Please choose a location for the OpenSim resources (models and examples). \nApproximately 60 MB will be copied. You should have permissions to write to this folder.\nTo reinstall resources at any time, type \"installResources()\" in the ScriptingShell Window.\nResources can be uninstalled by manually deleting the resources folder.");
         FileTextFieldAndChooser destDirectoryPanel = new org.opensim.swingui.FileTextFieldAndChooser();
         destDirectoryPanel.setDirectoriesOnly(true);
         destDirectoryPanel.setCheckIfFileExists(false);
