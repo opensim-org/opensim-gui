@@ -413,6 +413,8 @@ public class opensimSimbodyJNI {
   public final static native long RowVectorBaseDouble_resizeKeep(long jarg1, RowVectorBaseDouble jarg1_, int jarg2);
   public final static native void RowVectorBaseDouble_clear(long jarg1, RowVectorBaseDouble jarg1_);
   public final static native double RowVectorBaseDouble_sum(long jarg1, RowVectorBaseDouble jarg1_);
+  public final static native long RowVectorBaseDouble_begin(long jarg1, RowVectorBaseDouble jarg1_);
+  public final static native long RowVectorBaseDouble_end(long jarg1, RowVectorBaseDouble jarg1_);
   public final static native double RowVectorBaseDouble_get(long jarg1, RowVectorBaseDouble jarg1_, int jarg2);
   public final static native void RowVectorBaseDouble_set(long jarg1, RowVectorBaseDouble jarg1_, int jarg2, double jarg3);
   public final static native double RowVectorBaseDouble___getitem__(long jarg1, RowVectorBaseDouble jarg1_, int jarg2);
@@ -488,6 +490,8 @@ public class opensimSimbodyJNI {
   public final static native long RowVectorBaseVec3_resizeKeep(long jarg1, RowVectorBaseVec3 jarg1_, int jarg2);
   public final static native void RowVectorBaseVec3_clear(long jarg1, RowVectorBaseVec3 jarg1_);
   public final static native long RowVectorBaseVec3_sum(long jarg1, RowVectorBaseVec3 jarg1_);
+  public final static native long RowVectorBaseVec3_begin(long jarg1, RowVectorBaseVec3 jarg1_);
+  public final static native long RowVectorBaseVec3_end(long jarg1, RowVectorBaseVec3 jarg1_);
   public final static native long RowVectorBaseVec3_get(long jarg1, RowVectorBaseVec3 jarg1_, int jarg2);
   public final static native void RowVectorBaseVec3_set(long jarg1, RowVectorBaseVec3 jarg1_, int jarg2, long jarg3, Vec3 jarg3_);
   public final static native long RowVectorBaseVec3___getitem__(long jarg1, RowVectorBaseVec3 jarg1_, int jarg2);
@@ -1706,6 +1710,8 @@ public class opensimSimbodyJNI {
   public final static native long SimTKVisualizer_setSliderRange(long jarg1, SimTKVisualizer jarg1_, int jarg2, double jarg3, double jarg4);
   public final static native void SimTKVisualizer_dumpStats(long jarg1, SimTKVisualizer jarg1_, long jarg2);
   public final static native void SimTKVisualizer_clearStats(long jarg1, SimTKVisualizer jarg1_);
+  public final static native long SimTKVisualizer_getInputListeners(long jarg1, SimTKVisualizer jarg1_);
+  public final static native long SimTKVisualizer_getFrameControllers(long jarg1, SimTKVisualizer jarg1_);
   public final static native long SimTKVisualizer_getSystem(long jarg1, SimTKVisualizer jarg1_);
   public final static native int SimTKVisualizer_getRefCount(long jarg1, SimTKVisualizer jarg1_);
   public final static native void SimTKVisualizer_FrameController_generateControls(long jarg1, SimTKVisualizer.FrameController jarg1_, long jarg2, SimTKVisualizer jarg2_, long jarg3, State jarg3_, long jarg4, ArrayDecorativeGeometry jarg4_);
