@@ -44,11 +44,19 @@ public class MuscleList {
   }
 
   public MuscleIterator begin() {
-    return new MuscleIterator(opensimSimulationJNI.MuscleList_begin(swigCPtr, this), true);
+    return new MuscleIterator(opensimSimulationJNI.MuscleList_begin__SWIG_0(swigCPtr, this), true);
+  }
+
+  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Muscle_const_t__type_t cbegin() {
+    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Muscle_const_t__type_t(opensimSimulationJNI.MuscleList_cbegin(swigCPtr, this), true);
   }
 
   public MuscleIterator end() {
-    return new MuscleIterator(opensimSimulationJNI.MuscleList_end(swigCPtr, this), true);
+    return new MuscleIterator(opensimSimulationJNI.MuscleList_end__SWIG_0(swigCPtr, this), true);
+  }
+
+  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Muscle_const_t__type_t cend() {
+    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Muscle_const_t__type_t(opensimSimulationJNI.MuscleList_cend(swigCPtr, this), true);
   }
 
   public void setFilter(ComponentFilter filter) {
