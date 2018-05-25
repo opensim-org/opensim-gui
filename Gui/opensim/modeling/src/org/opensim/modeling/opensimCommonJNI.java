@@ -542,6 +542,7 @@ public class opensimCommonJNI {
   public final static native void IO_TrimWhitespace(long jarg1);
   public final static native String IO_Lowercase(String jarg1);
   public final static native String IO_Uppercase(String jarg1);
+  public final static native void IO_eraseEmptyElements(long jarg1, StdVectorString jarg1_);
   public final static native long new_IO();
   public final static native void delete_IO(long jarg1);
   public final static native long Function_safeDownCast(long jarg1, OpenSimObject jarg1_);
@@ -1742,6 +1743,8 @@ public class opensimCommonJNI {
   public final static native void delete_InvalidRow(long jarg1);
   public final static native long new_InvalidColumn();
   public final static native void delete_InvalidColumn(long jarg1);
+  public final static native long new_InvalidColumnLabel();
+  public final static native void delete_InvalidColumnLabel(long jarg1);
   public final static native long new_IncorrectNumColumns(String jarg1, long jarg2, String jarg3, long jarg4, long jarg5);
   public final static native void delete_IncorrectNumColumns(long jarg1);
   public final static native long new_IncorrectNumRows(String jarg1, long jarg2, String jarg3, long jarg4, long jarg5);
@@ -2243,6 +2246,7 @@ public class opensimCommonJNI {
   public final static native long FileAdapter_readFile(String jarg1);
   public final static native void FileAdapter_writeFile(long jarg1, String jarg2);
   public final static native String FileAdapter_findExtension(String jarg1);
+  public final static native long FileAdapter_getNextLine(long jarg1, String jarg2);
   public final static native long new_MissingHeader();
   public final static native void delete_MissingHeader(long jarg1);
   public final static native long new_IncorrectNumMetaDataKeys(String jarg1, long jarg2, String jarg3, String jarg4, long jarg5, long jarg6);
@@ -2575,6 +2579,7 @@ public class opensimCommonJNI {
   public final static native long MarkerData_SWIGUpcast(long jarg1);
   public final static native long InvalidRow_SWIGUpcast(long jarg1);
   public final static native long InvalidColumn_SWIGUpcast(long jarg1);
+  public final static native long InvalidColumnLabel_SWIGUpcast(long jarg1);
   public final static native long IncorrectNumColumns_SWIGUpcast(long jarg1);
   public final static native long IncorrectNumRows_SWIGUpcast(long jarg1);
   public final static native long RowIndexOutOfRange_SWIGUpcast(long jarg1);
