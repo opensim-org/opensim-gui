@@ -147,6 +147,10 @@ public class IO {
     return opensimCommonJNI.IO_Uppercase(aStr);
   }
 
+  public static void eraseEmptyElements(StdVectorString list) {
+    opensimCommonJNI.IO_eraseEmptyElements(StdVectorString.getCPtr(list), list);
+  }
+
   public IO() {
     this(opensimCommonJNI.new_IO(), true);
   }
