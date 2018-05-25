@@ -1101,6 +1101,9 @@ public class ModelVisualizationJson extends JSONObject {
             UUID objectUuid = uuids.get(0);
             JSONObject commandJson = CommandComposerThreejs.createAppearanceChangeJson(prop, objectUuid);
             guiJson.put("command", commandJson);
+            String commandName = (String) commandJson.get("name");
+            if (Muscle.safeDownCast(mc)!=null && commandName.equalsIgnoreCase("SetVisible"))
+               commandJson.put("type", "SetValueCommandMuscle");
         }
         return guiJson;
     }
