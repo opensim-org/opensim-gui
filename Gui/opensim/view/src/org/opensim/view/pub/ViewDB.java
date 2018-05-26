@@ -2261,10 +2261,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         }        
     }
     
-    public void scaleGeometryOfObjectByUUID(Model model, UUID objectUUID, double newScale) {
+    public void resizeGeometryOfObjectByUUID(Model model, UUID objectUUID, double newSize) {
         if (websocketdb!=null){
             ModelVisualizationJson vis = ViewDB.getInstance().getModelVisualizationJson(model);
-            websocketdb.broadcastMessageJson(vis.createScaleGeometryCommand(objectUUID, newScale), null);
+            websocketdb.broadcastMessageJson(vis.createResizeGeometryCommand(objectUUID, newSize), null);
         }        
         
     }
