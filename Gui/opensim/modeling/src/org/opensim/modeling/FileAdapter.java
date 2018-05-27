@@ -49,4 +49,8 @@ public class FileAdapter extends DataAdapter {
     return opensimCommonJNI.FileAdapter_findExtension(filename);
   }
 
+  public static StdVectorString getNextLine(SWIGTYPE_p_std__istream stream, String delims) {
+    return new StdVectorString(opensimCommonJNI.FileAdapter_getNextLine(SWIGTYPE_p_std__istream.getCPtr(stream), delims), true);
+  }
+
 }

@@ -44,11 +44,19 @@ public class ComponentsList {
   }
 
   public ComponentIterator begin() {
-    return new ComponentIterator(opensimCommonJNI.ComponentsList_begin(swigCPtr, this), true);
+    return new ComponentIterator(opensimCommonJNI.ComponentsList_begin__SWIG_0(swigCPtr, this), true);
+  }
+
+  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Component_const_t__type_t cbegin() {
+    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Component_const_t__type_t(opensimCommonJNI.ComponentsList_cbegin(swigCPtr, this), true);
   }
 
   public ComponentIterator end() {
-    return new ComponentIterator(opensimCommonJNI.ComponentsList_end(swigCPtr, this), true);
+    return new ComponentIterator(opensimCommonJNI.ComponentsList_end__SWIG_0(swigCPtr, this), true);
+  }
+
+  public SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Component_const_t__type_t cend() {
+    return new SWIGTYPE_p_OpenSim__ComponentListIteratorT_std__add_constT_OpenSim__Component_const_t__type_t(opensimCommonJNI.ComponentsList_cend(swigCPtr, this), true);
   }
 
   public void setFilter(ComponentFilter filter) {

@@ -197,6 +197,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                 ModelVisualizationJson modelJson = getInstance().getModelVisualizationJson(appChange.model);
                 JSONObject msg = modelJson.createAppearanceMessage(appChange.mc, appChange.prop);
                 commands.add(msg.get("command"));
+                if (Muscle.safeDownCast(appChange.mc)!= null){
+                    // create commands to handle PathPoints and add here as well
+                    modelJson.propagateGeometryPathCommandsToPathPoints(Muscle.safeDownCast(appChange.mc), appChange.prop, commands);
+                }
             }
             msgMulti.put("cmds", commands);
             websocketdb.broadcastMessageJson(topMsg, null);
@@ -2293,7 +2297,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             }
             if (msgType.equalsIgnoreCase("transforms")) {
                 String objType = (String) jsonObject.get("ObjectType");
-                if (objType.equalsIgnoreCase("Model")) {
+                if (objType!= null && objType.equalsIgnoreCase("Model")) {
                     JSONArray uuids = (JSONArray) jsonObject.get("uuids");
                     JSONArray positions = (JSONArray) jsonObject.get("positions");
                     Enumeration<ModelVisualizationJson> modelJsons = mapModelsToJsons.elements();
@@ -2325,5 +2329,15 @@ public final class ViewDB extends Observable implements Observer, LookupListener
        final OpenSimObject selectedObject = currentJson.findObjectForUUID(uuidString);
        if (selectedObject == null) return; // Not OpenSim Object, not interested
        JSONMessageHandler.handleJSON(getCurrentModel(), selectedObject, jsonObject);
+    }
+    private Vec3 extractVec3FromJsonXYZ(JSONObject offsetObj) {
+        Object xString = offsetObj.get("x");
+        double xValue = JSONMessageHandler.convertObjectFromJsonToDouble(xString);
+        Object yString = offsetObj.get("y");
+        double yValue = JSONMessageHandler.convertObjectFromJsonToDouble(yString);
+        Object zString = offsetObj.get("z");
+        double zValue = JSONMessageHandler.convertObjectFromJsonToDouble(zString);
+        Vec3 offsetAsVec3 = new Vec3(xValue, yValue, zValue);
+        return offsetAsVec3;
     }
 }
