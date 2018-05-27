@@ -972,7 +972,7 @@ public class MotionDisplayer {
             UUID uuidForMarkerGeometry = UUID.randomUUID();
             experimentalMarkerGeometryJson.put("uuid", uuidForMarkerGeometry.toString());
             experimentalMarkerGeometryJson.put("type", "SphereGeometry");
-            experimentalMarkerGeometryJson.put("radius", 5);
+            experimentalMarkerGeometryJson.put("radius", DEFAULT_MARKER_SIZE);
             experimentalMarkerGeometryJson.put("widthSegments", 32);
             experimentalMarkerGeometryJson.put("heightSegments", 16);            
             getExperimentalMarkerGeometryJson().put("name", "DefaultExperimentalMarker");
@@ -996,6 +996,7 @@ public class MotionDisplayer {
         }
         
     }
+    public static final double DEFAULT_MARKER_SIZE = 5;
 
     public void addExperimentalDataObjectsToJson(AbstractList<ExperimentalDataObject> expObjects) {
         // Make sure this
@@ -1070,7 +1071,8 @@ public class MotionDisplayer {
             // Find first ExperimentalMarker and change its Material, this will affect all of them
             if (expObj instanceof ExperimentalMarker){
                 UUID expMarkerUUID = mapComponentToUUID.get(expObj).get(0); 
-                ViewDB.getInstance().scaleGeometryOfObjectByUUID(model, expMarkerUUID, experimentalMarkerScaleFactor);  
+                ViewDB.getInstance().resizeGeometryOfObjectByUUID(model, expMarkerUUID, 
+                        experimentalMarkerScaleFactor*DEFAULT_MARKER_SIZE);  
             }
         }
     }
@@ -1086,7 +1088,7 @@ public class MotionDisplayer {
             // Find first ExperimentalMarker and change its Material, this will affect all of them
             if (expObj instanceof MotionObjectPointForce){
                 UUID expForceUUID = mapComponentToUUID.get(expObj).get(0); 
-                ViewDB.getInstance().scaleGeometryOfObjectByUUID(model, expForceUUID, experimentalForceScaleFactor);  
+                ViewDB.getInstance().resizeGeometryOfObjectByUUID(model, expForceUUID, experimentalForceScaleFactor);  
             }
         }
    }
