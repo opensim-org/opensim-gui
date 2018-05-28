@@ -28,6 +28,7 @@
 package org.opensim.threejs;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -1216,7 +1217,7 @@ public class ModelVisualizationJson extends JSONObject {
        return topJson;
     }
 
-    public JSONObject createSetPositionCommand(UUID pathpointUuid, Vec3 location) {
+    static public JSONObject createSetPositionCommand(UUID pathpointUuid, Vec3 location) {
         JSONObject nextpptPositionCommand = new JSONObject();
         nextpptPositionCommand.put("type", "SetPositionCommand");
         nextpptPositionCommand.put("objectUuid", pathpointUuid.toString());
@@ -1329,6 +1330,16 @@ public class ModelVisualizationJson extends JSONObject {
         guiJson.put("Op", "execute");
         UUID markerUuid = mapComponentToUUID.get(marker).get(0);
         JSONObject commandJson = createSetPositionCommand(markerUuid, newLocation);
+        guiJson.put("command", commandJson);
+        return guiJson;
+    }
+    /*
+     * Same as translate object but using Uuid, useful for non objects (e.g. Lights, Cameras, COM etc.)
+    */
+    static public JSONObject createTranslateObjectByUuidCommand(UUID objUuid, Vec3 newLocation) {
+        JSONObject guiJson = new JSONObject();
+        guiJson.put("Op", "execute");
+        JSONObject commandJson = createSetPositionCommand(objUuid, newLocation);
         guiJson.put("command", commandJson);
         return guiJson;
     }
@@ -1502,19 +1513,40 @@ public class ModelVisualizationJson extends JSONObject {
     }
     // Delete the selected Pathpoint from Maps used to back Visualization
     public void deletePathPointVisuals(GeometryPath currentPath, int index) {
-        AbstractPathPoint appoint = currentPath.getPathPointSet().get(index);
-        ArrayList<UUID> uuids = mapComponentToUUID.get(appoint);
-        // Remove uuids[0] from visualizer
-        // cleanup maps
-        mapComponentToUUID.remove(appoint);
-        mapUUIDToComponent.remove(uuids.get(0));
-        // If Conditional remove it from 
-        if (ConditionalPathPoint.safeDownCast(appoint)!= null)
-            proxyPathPoints.remove(appoint);
-        else if (MovingPathPoint.safeDownCast(appoint)!=null){
-            movingComponents.remove(appoint);
+        boolean hasWrapping = currentPath.getWrapSet().getSize()>0;
+        if (!hasWrapping){
+            AbstractPathPoint appoint = currentPath.getPathPointSet().get(index);
+            ArrayList<UUID> uuids = mapComponentToUUID.get(appoint);
+            // Remove uuids[0] from visualizer
+            // cleanup maps
+            mapComponentToUUID.remove(appoint);
+            mapUUIDToComponent.remove(uuids.get(0));
+            // If Conditional remove it from proxyPathPoints
+            if (ConditionalPathPoint.safeDownCast(appoint)!= null)
+                proxyPathPoints.remove(appoint);
+            else if (MovingPathPoint.safeDownCast(appoint)!=null){
+                movingComponents.remove(appoint);
+            }
         }
-        // Need to update the GometryPath control polygon to remove the ppt and communicate the new one to visulizer
+        else
+            throw new UnsupportedOperationException("Not yet implemented");
+        /*
+        // If deleted point was used in wrapping, update accordingly
+        if (index==0 || index ==currentPath.getPathPointSet().getSize()-1){
+            // remove computed points that depends on appoint
+            Set<UUID> computedPointsInfo = computedPathPoints.keySet();
+            ArrayList<UUID> toDelete = new ArrayList<UUID>();
+            for (UUID pathpointUuid:computedPointsInfo){
+                ComputedPathPointInfo pathpointInfo = computedPathPoints.get(pathpointUuid);
+                if (pathpointInfo.pt1.equals(appoint) || pathpointInfo.pt2.equals(appoint)){
+                    toDelete.add(pathpointUuid);
+                }
+            }
+            for (UUID delPpoint:toDelete){
+                computedPathPoints.remove(delPpoint);
+            }
+        }
+        */
     }
     
     // Get UUID corresponding to first PathPoint used by the passed in GeometryPath

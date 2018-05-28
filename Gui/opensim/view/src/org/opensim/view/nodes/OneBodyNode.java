@@ -26,19 +26,34 @@ import java.awt.Image;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.UUID;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
+import javax.swing.undo.AbstractUndoableEdit;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
+import org.openide.nodes.PropertySupport;
+import org.openide.nodes.Sheet;
+import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
+import org.opensim.modeling.AbstractProperty;
+import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.Frame;
 import org.opensim.modeling.Geometry;
+import org.opensim.modeling.Marker;
+import org.opensim.modeling.Model;
 import org.opensim.modeling.WrapObject;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.Vec3;
 import org.opensim.modeling.WrapObjectSet;
+import org.opensim.threejs.BodyVisualizationJson;
+import org.opensim.view.ExplorerTopComponent;
 
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
+import org.opensim.view.pub.ViewDB;
 
 /** Node class to wrap Body objects */
 public class OneBodyNode extends OneFrameNode{
@@ -125,5 +140,72 @@ public class OneBodyNode extends OneFrameNode{
         return retActions;
     }
 
+    @Override
+    public Sheet createSheet() {
+        Sheet sheet;
+
+        sheet = super.createSheet();
+        Sheet.Set set = sheet.get(Sheet.PROPERTIES);
+        // Add property for Location
+        Body obj = Body.safeDownCast(getOpenSimObject());
+        Model theModel = getModelForNode();
+        try {
+            
+            // customize com
+            set.remove("mass_center");
+            PropertySupport.Reflection massCenterNodeProp;
+            massCenterNodeProp = new PropertySupport.Reflection(this, String.class, "getCOMString", "setCOMString");
+            ((Node.Property) massCenterNodeProp).setValue("oneline", Boolean.TRUE);
+            ((Node.Property) massCenterNodeProp).setValue("suppressCustomEditor", Boolean.TRUE);
+            massCenterNodeProp.setName("mass_center");
+            massCenterNodeProp.setShortDescription(getPropertyComment("mass_center"));
+            set.put(massCenterNodeProp);
+   
+        } catch (NoSuchMethodException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+
+        return sheet;
+    }
+    public String getCOMString() {
+        Body body = Body.safeDownCast(comp);
+        AbstractProperty com= body.getPropertyByName("mass_center");
+        return com.toString();
+    }
+
+    /**
+     * @param offset the com to set
+     */
+    public void setCOMString(String offsetString) {
+       ArrayDouble d = new ArrayDouble();
+       d.fromString(offsetString);
+       setCOMfromArray(d, true);
+    }
+    private void setCOMfromArray(final ArrayDouble newOffset, boolean enableUndo) {
+        Body body = Body.safeDownCast(getOpenSimObject());
+        Vec3 rOffest = body.get_mass_center();
+        final ArrayDouble oldOffset = new ArrayDouble(3);
+        for(int i=0; i<3; i++) oldOffset.set(i, rOffest.get(i));
+        body.setMassCenter(newOffset.getAsVec3());
+        Model model = body.getModel();
+        UUID comUuid = ViewDB.getInstance().getModelVisualizationJson(model).getBodyRep(comp).getComObjectUUID();
+        ViewDB.getInstance().setObjectTranslationInParentByUuid(comUuid, body.getMassCenter());
+        refreshNode();
+        if (enableUndo){
+             AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
+               public void undo() throws CannotUndoException {
+                   super.undo();
+                   setCOMfromArray(oldOffset, false);
+               }
+               public void redo() throws CannotRedoException {
+                   super.redo();
+                   setCOMfromArray(newOffset, true);
+               }
+            };
+            ExplorerTopComponent.addUndoableEdit(auEdit);            
+        }
+    }
+    
+ 
 
 }

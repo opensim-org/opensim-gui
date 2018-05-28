@@ -2257,6 +2257,12 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             websocketdb.broadcastMessageJson(vis.createTranslateObjectCommand(marker, marker.get_location()), null);
         }
     }
+    public void setObjectTranslationInParentByUuid(UUID objectUuid, Vec3 newlocation) {
+        if (websocketdb!=null){
+            websocketdb.broadcastMessageJson(
+                    ModelVisualizationJson.createTranslateObjectByUuidCommand(objectUuid, newlocation), null);
+        }
+    }
     
     public void applyColorToObjectByUUID(Model model, UUID objectUUID, Vec3 newColor) {
         if (websocketdb!=null){
