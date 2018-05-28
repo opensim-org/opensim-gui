@@ -109,6 +109,8 @@ public class FrameNameEditor extends PropertyEditorSupport
     }
 
     public void propertyChange(PropertyChangeEvent evt) {
+        // ignoe trivial events
+        if (evt.getNewValue()==null && evt.getOldValue()==null) return;
         Model mdl = ViewDB.getCurrentModel();
         PropertyEditorAdaptor pea = new PropertyEditorAdaptor(mdl); // Need Model, Object, Property, Node
         pea.handleModelChange();
