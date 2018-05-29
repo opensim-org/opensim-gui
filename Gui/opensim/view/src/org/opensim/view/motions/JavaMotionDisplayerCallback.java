@@ -94,6 +94,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
          createResultStorage();
       
       motionDisplayer = new MotionDisplayer(getStorage(), getModelForDisplay());
+      motionDisplayer.setupMotionDisplay();
       this.progressHandle = progressHandle;
       setRefreshRateInMillis(getRefreshRatePreference());
    }
@@ -132,6 +133,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
       else
           createResultStorage();
       motionDisplayer = new MotionDisplayer(getStorage(), getModelForDisplay());
+      motionDisplayer.setupMotionDisplay();
       this.progressHandle = progressHandle;
       setRefreshRateInMillis(getRefreshRatePreference());
    }
