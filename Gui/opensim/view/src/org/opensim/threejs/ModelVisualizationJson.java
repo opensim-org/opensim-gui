@@ -161,7 +161,7 @@ public class ModelVisualizationJson extends JSONObject {
     private PathColorMap currentPathColorMap;
     // Preferences
     private double prefMuscleDisplayRadius=0.005;
-    private int NUM_PATHPOINTS_PER_WRAP_OBJECT=3;
+    private int NUM_PATHPOINTS_PER_WRAP_OBJECT=8;
     
     public Boolean getFrameVisibility(Frame b) {
         return visualizerFrames.get(b).visible;
@@ -686,14 +686,13 @@ public class ModelVisualizationJson extends JSONObject {
                         ArrayVec3 pathwrap = pathWrapPoint.getWrapPath();
                         PhysicalFrame wrapPtsFrame = pathWrapPoint.getParentFrame();
                         int size = pathwrap.size();
-                        if (size >= 3) { // 1 is degenerate will ignore
+                        if (size >= NUM_PATHPOINTS_PER_WRAP_OBJECT) { // 1 is degenerate will ignore
                             int x = 0;
                             // Off the actual points computed by API, will compute indices
                             // of points to be used as "intermediate on-the-fly wrap points
                             int[] indicesToUse = new int[NUM_PATHPOINTS_PER_WRAP_OBJECT];
-                            indicesToUse[0] =0;
-                            for (int ndx = 1; ndx < NUM_PATHPOINTS_PER_WRAP_OBJECT; ndx++)
-                                indicesToUse[ndx] = (size-1)/(NUM_PATHPOINTS_PER_WRAP_OBJECT-ndx);
+                            for (int ndx = 0; ndx < NUM_PATHPOINTS_PER_WRAP_OBJECT; ndx++)
+                                indicesToUse[ndx] = ndx*(size-1)/(NUM_PATHPOINTS_PER_WRAP_OBJECT);
                             JSONObject bodyJson = mapBodyIndicesToJson.get(0); // These points live in Ground
                             ArrayList<UUID> wrapPointUUIDs = wrapPathPoints.get(pathWrapPoint);
                             if (wrapPointUUIDs==null){
@@ -864,9 +863,11 @@ public class ModelVisualizationJson extends JSONObject {
                         ArrayVec3 pathwrap = pathWrapPoint.getWrapPath();
                         PhysicalFrame wrapPtsFrame = pathWrapPoint.getParentFrame();
                         int size = pathwrap.size();
-                        if (size >= 2) {
-                            int x = 0;
-                            int[] indicesToUse = new int[]{0, size - 1};
+                        if (size >= NUM_PATHPOINTS_PER_WRAP_OBJECT) {
+                            int[] indicesToUse = new int[NUM_PATHPOINTS_PER_WRAP_OBJECT];
+                            indicesToUse[0] =0;
+                            for (int ndx = 1; ndx < NUM_PATHPOINTS_PER_WRAP_OBJECT; ndx++)
+                                indicesToUse[ndx] = (size-1)/(NUM_PATHPOINTS_PER_WRAP_OBJECT-ndx);
                             double step = 1.0/(indicesToUse.length+1.0);
                             JSONObject bodyJson = mapBodyIndicesToJson.get(0); // These points live in Ground
                             JSONArray children = (JSONArray) bodyJson.get("children");
