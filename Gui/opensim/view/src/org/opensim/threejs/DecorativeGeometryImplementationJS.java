@@ -384,8 +384,12 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
             dg_json.put("thetaLength", Math.PI);
             if (quadrants.equalsIgnoreCase("-y"))
                 dg_json.put("thetaStart", -0.5*Math.PI);
-            else
+            else if (quadrants.equalsIgnoreCase("y"))
                 dg_json.put("thetaStart", 0.5*Math.PI);
+            else if (quadrants.equalsIgnoreCase("x"))
+                dg_json.put("thetaStart", 0);
+            else
+                dg_json.put("thetaStart", Math.PI);
         }
         return dg_json;
     }
