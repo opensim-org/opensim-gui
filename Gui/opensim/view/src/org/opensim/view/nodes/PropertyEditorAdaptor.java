@@ -55,14 +55,19 @@ import org.opensim.view.pub.ViewDB;
  */
 public class PropertyEditorAdaptor {
 
+    /**
+     * @param affectsState the affectsState to set
+     */
+    public void setAffectsState(boolean affectsState) {
+        this.affectsState = affectsState;
+    }
+
     OpenSimObject obj; // Object being edited or selected in navigator window
     AbstractProperty prop; // Property being edited
     OpenSimContext context = null; // Context object needed to recreate the system as needed, cached for speed
     Model model; // model to which obj belongs
     OpenSimObjectNode node;
-
-    Model clonedModel;
-    State clonedState;
+    private boolean affectsState = true;
     
     public PropertyEditorAdaptor(String propertyName, OpenSimObjectNode ownerNode) {
         this.model = ownerNode.getModelForNode();
@@ -378,21 +383,24 @@ public class PropertyEditorAdaptor {
     }
         
     private void handlePropertyChange(final double oldValue, final double v, boolean supportUndo) {
-        
-        context.cacheModelAndState();
-        PropertyHelper.setValueDouble(v, prop);        
-        try {
-            context.restoreStateFromCachedModel();
-        } catch (IOException iae) {
+        if (!affectsState)
+            PropertyHelper.setValueDouble(v, prop);
+        else {
+            context.cacheModelAndState();
+            PropertyHelper.setValueDouble(v, prop);
+
             try {
-                 new JOptionPane(iae.getMessage(), 
-				JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
-                
-            PropertyHelper.setValueDouble(oldValue, prop);
-                context.restoreStateFromCachedModel();  
-            } catch (IOException ex) {
-                ErrorDialog.displayExceptionDialog(ex);
-        }
+                context.restoreStateFromCachedModel();
+            } catch (IOException iae) {
+                try {
+                    new JOptionPane(iae.getMessage(),
+                            JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+                    PropertyHelper.setValueDouble(oldValue, prop);
+                    context.restoreStateFromCachedModel();
+                } catch (IOException ex) {
+                    ErrorDialog.displayExceptionDialog(ex);
+                }
+            }
         }
         handlePropertyChangeCommon();
         
@@ -617,27 +625,37 @@ public class PropertyEditorAdaptor {
     }
 
     private void handlePropertyChange(final Vec3 oldValue, final Vec3 v, boolean supportUndo) {
-        if (supportUndo) context.cacheModelAndState();
-        for (int i = 0; i < 3; i++) {
-            PropertyHelper.setValueVec3(v.get(i), prop , i);
-        }
-
-        try {
-            if (supportUndo) context.restoreStateFromCachedModel();
-        } catch (IOException iae) {
-            try {
-                new JOptionPane(iae.getMessage(),
-                        JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
-
+        if (!affectsState) {
             for (int i = 0; i < 3; i++) {
-                    PropertyHelper.setValueVec3(oldValue.get(i), prop, i);
+                PropertyHelper.setValueVec3(v.get(i), prop, i);
             }
-                if (supportUndo) context.restoreStateFromCachedModel();
-            } catch (IOException ex) {
-                ErrorDialog.displayExceptionDialog(ex);
+        } else {
+            if (supportUndo) {
+                context.cacheModelAndState();
+            }
+            for (int i = 0; i < 3; i++) {
+                PropertyHelper.setValueVec3(v.get(i), prop, i);
+            }
+
+            try {
+                if (supportUndo) {
+                    context.restoreStateFromCachedModel();
+                }
+            } catch (IOException iae) {
+                try {
+                    new JOptionPane(iae.getMessage(),
+                            JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+                    for (int i = 0; i < 3; i++) {
+                        PropertyHelper.setValueVec3(oldValue.get(i), prop, i);
+                    }
+                    if (supportUndo) {
+                        context.restoreStateFromCachedModel();
+                    }
+                } catch (IOException ex) {
+                    ErrorDialog.displayExceptionDialog(ex);
+                }
+            }
         }
-        }
-        
         handlePropertyChangeCommon();
   
         if (supportUndo) {

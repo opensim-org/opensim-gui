@@ -60,6 +60,7 @@ public class AppearanceHelper {
         final DecorativeGeometry.Representation oldRep = appearance.get_representation();
         final int newRep = pref;
         final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(model, appearance.upd_SurfaceProperties(), ap, compNode);
+        pea.setAffectsState(false);
         ap.setValueIsDefault(false);
         pea.setValueInt(newRep, false);
         // Delay update display till end
@@ -98,6 +99,7 @@ public class AppearanceHelper {
         final boolean newVis = newValue;
         final Model model = this.model;
         final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(model, appearance, ap, compNode);
+        pea.setAffectsState(false);
         ap.setValueIsDefault(false);
         pea.setValueBool(newVis, false, false);
         // Delay update display till end
@@ -137,6 +139,7 @@ public class AppearanceHelper {
         final Model model = this.model;
         final Vec3 oldValue = new Vec3(appearance.get_color());
         final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(model, appearance, ap, compNode);
+        pea.setAffectsState(false);
         ap.setValueIsDefault(false);
         final Vec3 newColorVec3 = new Vec3(colorComp[0], colorComp[1], colorComp[2]);
         pea.setValueVec3(newColorVec3, false);
@@ -177,6 +180,7 @@ public class AppearanceHelper {
         final double newOpacity = opacity;
         final Model model = this.model;
         final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(model, appearance, ap, compNode);
+        pea.setAffectsState(false);
         ap.setValueIsDefault(false);
         pea.setValueDouble(newOpacity, false);
         // Delay update display till end
