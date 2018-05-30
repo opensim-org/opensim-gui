@@ -81,6 +81,10 @@ Section "OpenSim Application" SecMain
 
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
+  
+  ;Run the Visual C++ redistributable installer.
+  ;https://docs.microsoft.com/en-us/cpp/ide/deployment-in-visual-cpp
+  ExecWait '"$INSTDIR\bin\vcredist_x64.exe"'
 
 SectionEnd
 
