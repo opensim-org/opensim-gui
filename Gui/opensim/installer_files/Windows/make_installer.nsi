@@ -51,10 +51,9 @@
   !insertmacro MUI_PAGE_WELCOME
 
   !insertmacro MUI_PAGE_LICENSE "opensim\LICENSE.txt"
-  !insertmacro MUI_PAGE_COMPONENTS
+  ;We have only 1 component; no need to prompt.
+  ;!insertmacro MUI_PAGE_COMPONENTS
   !insertmacro MUI_PAGE_DIRECTORY
-  !insertmacro MUI_PAGE_INSTFILES
-
   !insertmacro MUI_PAGE_INSTFILES
   !insertmacro MUI_PAGE_FINISH
 
@@ -81,20 +80,25 @@ Section "OpenSim Application" SecMain
 
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
+  
+  ;Run the Visual C++ redistributable installer.
+  ;https://docs.microsoft.com/en-us/cpp/ide/deployment-in-visual-cpp
+  ExecWait '"$INSTDIR\bin\vcredist_x64.exe" /quiet /norestart'
 
 SectionEnd
 
 ;--------------------------------
 ;Descriptions
+  ;Commented out this section because MUI_PAGE_COMPONENTS
+  ;above is commented out.
+  
+  ;;Language strings
+  ;LangString DESC_SecMain ${LANG_ENGLISH} "Install OpenSim Application."
 
-  ;Language strings
-  LangString DESC_SecMain ${LANG_ENGLISH} "Install OpenSim Application."
-
-  ;Assign language strings to sections
-  !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
-    !insertmacro MUI_DESCRIPTION_TEXT ${SecMain} $(DESC_SecMain)
-  !insertmacro MUI_FUNCTION_DESCRIPTION_END
-
+  ;;Assign language strings to sections
+  ;!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+  ;  !insertmacro MUI_DESCRIPTION_TEXT ${SecMain} $(DESC_SecMain)
+  ;!insertmacro MUI_FUNCTION_DESCRIPTION_END
 ;--------------------------------
 ;Uninstaller Section
 

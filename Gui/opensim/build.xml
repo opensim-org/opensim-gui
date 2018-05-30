@@ -109,7 +109,14 @@
                 file="${installer-files.dir}/make_installer.nsi" />
         <replace file="${opensim.dist.dir}/../make_installer.nsi" value="${app.version}">
             <replacefilter token="@VERSION@" />
-        </replace>        
+        </replace>
+        
+        <!-- Copy the Visual C++ redistributable installer, 
+             which the NSIS installer will run during installation.
+             https://docs.microsoft.com/en-us/cpp/ide/deployment-in-visual-cpp -->
+        <copy todir="${opensim.dist.dir}/bin/"
+            file="${msvc.redist.exe}" />
+
     </target>
     <target name="copy-jre" description="Copy JRE to installer">
         <copy todir="${opensim.dist.dir}/jdk/jre">
