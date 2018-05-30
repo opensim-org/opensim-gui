@@ -1444,7 +1444,7 @@ public class ModelVisualizationJson extends JSONObject {
         for (int i = 0; i < count; i++) {
             double ratio = (1.0 + i) / (count + 1.0);
             Vec3 location = computePointLocationFromNeighbors(lastPathPoint, mapBodyIndicesToFrames.get(0), currentPathPoint, ratio);
-            JSONObject bpptInBodyJson =createPathPointObjectJson(null, "", false, location, matuuid.toString(), true);
+            JSONObject bpptInBodyJson =createPathPointObjectJson(null, "", false, location, matuuid.toString(), false);
             UUID ppt_uuid = UUID.fromString((String) bpptInBodyJson.get("uuid"));
             computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(lastPathPoint, currentPathPoint, ratio));
             children.add(bpptInBodyJson);
