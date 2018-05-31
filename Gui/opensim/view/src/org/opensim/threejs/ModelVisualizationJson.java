@@ -865,16 +865,15 @@ public class ModelVisualizationJson extends JSONObject {
                         int size = pathwrap.size();
                         if (size >= NUM_PATHPOINTS_PER_WRAP_OBJECT) {
                             int[] indicesToUse = new int[NUM_PATHPOINTS_PER_WRAP_OBJECT];
-                            indicesToUse[0] =0;
-                            for (int ndx = 1; ndx < NUM_PATHPOINTS_PER_WRAP_OBJECT; ndx++)
-                                indicesToUse[ndx] = (size-1)/(NUM_PATHPOINTS_PER_WRAP_OBJECT-ndx);
+                            for (int ndx = 0; ndx < NUM_PATHPOINTS_PER_WRAP_OBJECT; ndx++)
+                                indicesToUse[ndx] = ndx*(size-1)/(NUM_PATHPOINTS_PER_WRAP_OBJECT);
                             double step = 1.0/(indicesToUse.length+1.0);
                             JSONObject bodyJson = mapBodyIndicesToJson.get(0); // These points live in Ground
                             JSONArray children = (JSONArray) bodyJson.get("children");
                             ArrayList<UUID> wrapPointUUIDs = new ArrayList<UUID>();
                             for (int j = 0; j < indicesToUse.length; j++) {
                                 Vec3 globalLocation = wrapPtsFrame.findStationLocationInAnotherFrame(state, pathwrap.get(indicesToUse[j]), mapBodyIndicesToFrames.get(0));
-                                JSONObject bpptInBodyJson = createPathPointObjectJson(null, "", false, globalLocation, pathpt_mat_uuid.toString(), visible);
+                                JSONObject bpptInBodyJson = createPathPointObjectJson(null, "", false, globalLocation, pathpt_mat_uuid.toString(), false);
                                 UUID ppt_uuid = UUID.fromString((String) bpptInBodyJson.get("uuid"));
                                 children.add(bpptInBodyJson);
                                 pathpoint_jsonArr.add(ppt_uuid.toString());
