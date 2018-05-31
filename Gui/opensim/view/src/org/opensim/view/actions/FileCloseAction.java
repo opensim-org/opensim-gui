@@ -102,7 +102,10 @@ public static boolean closeModel(Model model) {
                     else if (cmd.equalsIgnoreCase("Discard")){
                         OpenSimDB.setCurrentCloseModelDefaultAction(CloseModelDefaultAction.DISCARD);                       
                     }
-                 }               
+                 } // Even if user doesn't want to remember decision, save Model
+                else if (cmd.equalsIgnoreCase("Save")){
+                    FileSaveModelAction.saveOrSaveAsModel(model, false);
+                }
             }
         });
        confirmDialog.setClosingOptions(null);
