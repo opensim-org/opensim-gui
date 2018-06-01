@@ -822,6 +822,7 @@ public class ModelVisualizationJson extends JSONObject {
         // Create viz for firstPoint
         UUID pathpoint_uuid = addPathPointObjectToParent(firstPoint, pathpt_mat_uuid.toString(), visible);
         pathpoint_jsonArr.add(pathpoint_uuid.toString());
+        pathpointActive_jsonArr.add(true);
         addComponentToUUIDMap(firstPoint, pathpoint_uuid);
         int firstIndex = 0; // by construction
         int numIntermediatePoints = NUM_PATHPOINTS_PER_WRAP_OBJECT * numWrapObjects;
@@ -833,11 +834,10 @@ public class ModelVisualizationJson extends JSONObject {
              boolean pointAdded = false;
             //different scenarios depending on whether and where we find 
             if (secondIndex == firstIndex+1 || (firstIndex ==-1 && secondIndex!=-1)){
-                pathpointActive_jsonArr.add(true);
                 // Normal segment 
                 // create numIntermediatePoints between firstPoint and secondPoint
                 if (numWrapObjects > 0)
-                    createComputedPathPoints(numIntermediatePoints, firstPoint, secondPoint, pathpoint_jsonArr);
+                    createComputedPathPoints(numIntermediatePoints, firstPoint, secondPoint, pathpoint_jsonArr, pathpointActive_jsonArr);
             }
             else if (secondIndex == -1){ // Conditional Path point that's inactive
                 ConditionalPathPoint cpp = ConditionalPathPoint.safeDownCast(secondPoint);
@@ -877,6 +877,7 @@ public class ModelVisualizationJson extends JSONObject {
                                 UUID ppt_uuid = UUID.fromString((String) bpptInBodyJson.get("uuid"));
                                 children.add(bpptInBodyJson);
                                 pathpoint_jsonArr.add(ppt_uuid.toString());
+                                pathpointActive_jsonArr.add(false);
                                 wrapPointUUIDs.add(ppt_uuid);
                                 computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(firstPoint, secondPoint, step*(j+1)));
                                 // Also create a computed ppt for use when wrapping is inactive
@@ -891,6 +892,7 @@ public class ModelVisualizationJson extends JSONObject {
             if (!pointAdded){
                 pathpoint_uuid = addPathPointObjectToParent(secondPoint, pathpt_mat_uuid.toString(), visible);
                 pathpoint_jsonArr.add(pathpoint_uuid.toString());
+                pathpointActive_jsonArr.add(true);
                 addComponentToUUIDMap(secondPoint, pathpoint_uuid);
             }
             if (MovingPathPoint.safeDownCast(secondPoint) != null) {
@@ -1428,8 +1430,8 @@ public class ModelVisualizationJson extends JSONObject {
      * The function creates the points, add them to Ground frame and insert their uuids in the
      * points array following the uuid cooresponding to currentPathPoint
      */
-    private void createComputedPathPoints(int count, AbstractPathPoint lastPathPoint, 
-        AbstractPathPoint currentPathPoint, JSONArray points) {
+    private void createComputedPathPoints(int count, AbstractPathPoint lastPathPoint, AbstractPathPoint currentPathPoint, 
+            JSONArray points, JSONArray activeState) {
         GeometryPath gp = GeometryPath.safeDownCast(lastPathPoint.getOwner());
         UUID matuuid = mapGeometryPathToPathPointMaterialUUID.get(gp);
         JSONObject bodyJson = mapBodyIndicesToJson.get(0); // These points live in Ground
@@ -1448,6 +1450,7 @@ public class ModelVisualizationJson extends JSONObject {
             computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(lastPathPoint, currentPathPoint, ratio));
             children.add(bpptInBodyJson);
             points.add(ppt_uuid.toString());
+            activeState.add(false);
         }
     }
 
