@@ -890,7 +890,8 @@ public class ModelVisualizationJson extends JSONObject {
             }
             // Create viz for secondPoint
             if (!pointAdded){
-                pathpoint_uuid = addPathPointObjectToParent(secondPoint, pathpt_mat_uuid.toString(), visible);
+                pathpoint_uuid = addPathPointObjectToParent(secondPoint, pathpt_mat_uuid.toString(), 
+                        visible && ppointSetIndex == pathPointSetNoWrap.getSize()-1);
                 pathpoint_jsonArr.add(pathpoint_uuid.toString());
                 pathpointActive_jsonArr.add(true);
                 addComponentToUUIDMap(secondPoint, pathpoint_uuid);
