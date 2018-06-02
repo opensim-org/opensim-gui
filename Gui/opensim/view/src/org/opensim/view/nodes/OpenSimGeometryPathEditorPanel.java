@@ -97,7 +97,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
    private final OpenSimContext openSimContext;
    private final Model currentModel;
    private OpenSimObject objectWithPath = null; // the actuator that is currently shown in the Muscle Editor window
-   private final GeometryPath savePath;
+   private final OpenSimObject savePath;
    private final GeometryPath currentPath;
    private JButton RestoreButton;
    public enum EditOperation { 
@@ -106,7 +106,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
    /** Creates new form OpenSimGeometryPathEditorPanel */
     public OpenSimGeometryPathEditorPanel(GeometryPath pathToEdit) {
         currentModel = pathToEdit.getModel();
-        savePath = GeometryPath.safeDownCast(pathToEdit.clone());
+        savePath = pathToEdit.clone();
         currentPath = pathToEdit;
         openSimContext = OpenSimDB.getInstance().getContext(currentModel);
         initComponents();
