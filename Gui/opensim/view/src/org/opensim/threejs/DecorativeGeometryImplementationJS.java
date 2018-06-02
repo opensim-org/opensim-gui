@@ -417,9 +417,12 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
     public void implementLineGeometry(DecorativeLine arg0) {
         JSONObject dg_json = new JSONObject();
         dg_json.put("uuid", geomID.toString());
-        dg_json.put("type", "OpenSim.PathGeometry");
-        String colorString = JSONUtilities.mapColorToRGBA(arg0.getColor());
-        dg_json.put("color", colorString);
+        dg_json.put("type", "BufferGeometry");
+        /*
+        dg_json.put("type", "CylinderGeometry");
+        dg_json.put("radiusTop", .01*visualizerScaleFactor);
+        dg_json.put("radiusBottom", 0.01*visualizerScaleFactor);
+        */
         /*
 	"data": {
         "indices": [0,1,2,...],
@@ -427,18 +430,20 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         "normals": [1,0,0,...],
         "uvs": [0,1,...]
         */
+        JSONObject index_json = new JSONObject();
+        index_json.put("itemSize", 3);
+        index_json.put("type", "Uint16Array");
         JSONObject data_json = new JSONObject();
         JSONArray verts_array = createVertexArray(arg0);
-        //data_json.put("vertices", verts_array);
+        data_json.put("vertices", verts_array);
         data_json.put("itemSize", 3);
         data_json.put("type", "Float32Array");
         data_json.put("array", verts_array);
-        dg_json.put("positions", data_json);
-        last_json = dg_json;
-        if (!updateMode) {
-            jsonArr.add(dg_json);        
-            createMaterialJson(arg0, false);
-        }
+        data_json.put("index", index_json);
+        
+        dg_json.put("data", data_json);
+        jsonArr.add(dg_json);      
+        createMaterialJson(arg0, false);
     }
 
     private JSONArray createVertexArray(DecorativeLine arg0) {
