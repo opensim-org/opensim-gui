@@ -165,8 +165,9 @@ public class OneMarkerNode extends OneComponentNode{
         Model model = getModelForNode();
         OpenSimContext context = OpenSimDB.getInstance().getContext(model);
         Component comp=model.getComponent(newParentFrame);
-        // 
+        //System.out.println(obj.dump());
         obj.changeFramePreserveLocation(context.getCurrentStateRef(), PhysicalFrame.safeDownCast(comp));
+        //System.out.println(obj.dump());
         ViewDB.getInstance().updateComponentVisuals(model, obj, true);
         // Mark model dirty
         SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(model);
