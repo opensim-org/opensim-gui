@@ -454,7 +454,7 @@ public class ModelVisualizationJson extends JSONObject {
                 // to the condition where DecorativeGeometry subtype is not supported
                 // This allows for more graceful handling of these DecorativeGeometry types
                 if (!dgimp.isSupported())
-                    System.out.println("Unsupported DecorativeGeometry encountered while processing "+comp.getType()+":"+comp.getName()+ " it will be ignored.");
+                    System.out.println("Unsupported DecorativeGeometry encountered while processing "+comp.getConcreteClassName()+":"+comp.getName()+ " it will be ignored.");
                 else{
                     UUID uuid_mesh = addtoFrameJsonObject(dg, geomId, uuid, dgimp.getMat_uuid(), (JSONArray)bodyJson.get("children"), 
                                 comp, visible);
