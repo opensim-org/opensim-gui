@@ -23,6 +23,7 @@
 package org.opensim.view.nodes;
 
 import java.awt.Image;
+import java.beans.PropertyEditorSupport;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -35,12 +36,20 @@ import org.openide.nodes.PropertySupport.Reflection;
 import org.openide.nodes.Sheet;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
+import org.opensim.modeling.AbstractSocket;
+import org.opensim.modeling.Component;
+import org.opensim.modeling.Frame;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PhysicalFrame;
+import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.editors.BodyNameEditor;
 import org.opensim.view.markerEditor.OneMarkerDeleteAction;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
+import org.opensim.view.pub.OpenSimDB;
+import org.opensim.view.pub.ViewDB;
 
 /** Node class to wrap AbstractMarker objects */
 public class OneMarkerNode extends OneComponentNode{
@@ -120,11 +129,42 @@ public class OneMarkerNode extends OneComponentNode{
             locationNodeProp.setName("location");
             locationNodeProp.setShortDescription(getPropertyComment("location"));
             set.put(locationNodeProp);
-   
+            // Also replace seocket so we can fix frame/location
+            Sheet.Set setSockets = sheet.get(Sheet.EXPERT);
+            setSockets.remove("PhysicalFrame:parent_frame");
+            AbstractSocket sock = obj.getSocket("parent_frame");
+            String connecteeType = sock.getConnecteeTypeName();
+            String connectionName = sock.getName();
+            
+            PropertySupport.Reflection nextNodePropFrame = 
+                    new PropertySupport.Reflection(this,
+                    String.class,
+                    "getConnectedToFrame",
+                    "setConnectedToFrame");
+            nextNodePropFrame.setValue("canEditAsText", Boolean.TRUE);
+            nextNodePropFrame.setValue("suppressCustomEditor", Boolean.TRUE);
+            nextNodePropFrame.setName(connecteeType + ":" + connectionName);
+            PropertyEditorSupport editor = EditorRegistry.getEditor(connecteeType);
+            if (editor != null)
+                nextNodePropFrame.setPropertyEditorClass(editor.getClass());
+            setSockets.put(nextNodePropFrame);
+           
         } catch (NoSuchMethodException ex) {
             Exceptions.printStackTrace(ex);
         }
 
         return sheet;
+    }
+    public String getConnectedToFrame() {
+        Marker obj = Marker.safeDownCast(getOpenSimObject());
+        return obj.getParentFrame().getName();
+    }
+    public void setConnectedToFrame(String newParentFrame) {
+        Marker obj = Marker.safeDownCast(getOpenSimObject());
+        Model model = getModelForNode();
+        OpenSimContext context = OpenSimDB.getInstance().getContext(model);
+        Component comp=model.getComponent(newParentFrame);
+        obj.changeFramePreserveLocation(context.getCurrentStateRef(), PhysicalFrame.safeDownCast(comp));
+        ViewDB.getInstance().updateComponentVisuals(model, obj, true);
     }
 }

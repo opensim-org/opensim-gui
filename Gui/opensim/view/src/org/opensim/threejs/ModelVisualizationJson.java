@@ -1224,10 +1224,10 @@ public class ModelVisualizationJson extends JSONObject {
        return topJson;
     }
 
-    static public JSONObject createSetPositionCommand(UUID pathpointUuid, Vec3 location) {
+    static public JSONObject createSetPositionCommand(UUID objectUuid, Vec3 location) {
         JSONObject nextpptPositionCommand = new JSONObject();
         nextpptPositionCommand.put("type", "SetPositionCommand");
-        nextpptPositionCommand.put("objectUuid", pathpointUuid.toString());
+        nextpptPositionCommand.put("objectUuid", objectUuid.toString());
         JSONArray locationArray = new JSONArray();
         JSONArray oldLocationArray = new JSONArray();
         for (int p =0; p <3; p++){
@@ -1503,7 +1503,7 @@ public class ModelVisualizationJson extends JSONObject {
                 JSONObject moveOneObject = CommandComposerThreejs.createMoveObjectByUUIDCommandJson(uuids.get(i), parentUUID);
                 commands.add(moveOneObject);
                 // May need to update location as well
-                JSONObject translateOneObject = CommandComposerThreejs.createTranslateObjectCommandJson(dg.getTransform().T(), uuids.get(i));
+                JSONObject translateOneObject = createSetPositionCommand(uuids.get(i), dg.getTransform().T());
                 commands.add(translateOneObject);
             }
             msgMulti.put("cmds", commands);
