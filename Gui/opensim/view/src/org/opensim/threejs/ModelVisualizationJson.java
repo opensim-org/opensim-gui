@@ -450,11 +450,18 @@ public class ModelVisualizationJson extends JSONObject {
                 JSONObject bodyJson = mapBodyIndicesToJson.get(dg.getBodyId());
                 if (bodyJson.get("children")==null)
                     bodyJson.put("children", new JSONArray());
-                UUID uuid_mesh = addtoFrameJsonObject(dg, geomId, uuid, dgimp.getMat_uuid(), (JSONArray)bodyJson.get("children"), 
-                        comp, visible);
-                vis_uuidList.add(uuid_mesh);
-
-                mapUUIDToComponent.put(uuid_mesh, comp);
+                // Will use the explicit test for isSupported
+                // to the condition where DecorativeGeometry subtype is not supported
+                // This allows for more graceful handling of these DecorativeGeometry types
+                if (!dgimp.isSupported())
+                    System.out.println("Unsupported DecorativeGeometry encountered while processing "+comp.getType()+":"+comp.getName()+ " it will be ignored.");
+                else{
+                    UUID uuid_mesh = addtoFrameJsonObject(dg, geomId, uuid, dgimp.getMat_uuid(), (JSONArray)bodyJson.get("children"), 
+                                comp, visible);
+                    vis_uuidList.add(uuid_mesh);
+                    mapUUIDToComponent.put(uuid_mesh, comp);
+                }
+                
             }
         }
         if (partialWrapObject)
@@ -462,7 +469,8 @@ public class ModelVisualizationJson extends JSONObject {
         if (isMarker)
             dgimp.useMaterial(null);
 
-        mapComponentToUUID.put(comp, vis_uuidList);
+        if (!vis_uuidList.isEmpty())
+            mapComponentToUUID.put(comp, vis_uuidList);
         if (verbose)
             System.out.println("Map component="+comp.getAbsolutePathString()+" to "+vis_uuidList.size());   
  
