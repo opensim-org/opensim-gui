@@ -45,6 +45,7 @@ import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PhysicalFrame;
 import org.opensim.threejs.ModelVisualizationJson;
+import org.opensim.view.SingleModelGuiElements;
 import org.opensim.view.editors.BodyNameEditor;
 import org.opensim.view.markerEditor.OneMarkerDeleteAction;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
@@ -164,7 +165,12 @@ public class OneMarkerNode extends OneComponentNode{
         Model model = getModelForNode();
         OpenSimContext context = OpenSimDB.getInstance().getContext(model);
         Component comp=model.getComponent(newParentFrame);
+        // 
         obj.changeFramePreserveLocation(context.getCurrentStateRef(), PhysicalFrame.safeDownCast(comp));
         ViewDB.getInstance().updateComponentVisuals(model, obj, true);
+        // Mark model dirty
+        SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(model);
+        guiElem.setUnsavedChangesFlag(true);
+
     }
 }
