@@ -29,6 +29,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
+import javax.swing.undo.AbstractUndoableEdit;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.nodes.PropertySupport;
@@ -38,15 +41,13 @@ import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.AbstractSocket;
 import org.opensim.modeling.Component;
-import org.opensim.modeling.Frame;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PhysicalFrame;
-import org.opensim.threejs.ModelVisualizationJson;
+import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.SingleModelGuiElements;
-import org.opensim.view.editors.BodyNameEditor;
 import org.opensim.view.markerEditor.OneMarkerDeleteAction;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 import org.opensim.view.pub.OpenSimDB;
@@ -165,13 +166,44 @@ public class OneMarkerNode extends OneComponentNode{
         Model model = getModelForNode();
         OpenSimContext context = OpenSimDB.getInstance().getContext(model);
         Component comp=model.getComponent(newParentFrame);
-        //System.out.println(obj.dump());
+        final String saveFrame= getConnectedToFrame();
+        final String newFrame = newParentFrame;
+        //        
+        AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
+           public boolean canUndo() {
+               return true;
+           }
+           public boolean canRedo() {
+               return true;
+           }
+           public void undo() throws CannotUndoException {
+               super.undo();
+               setConnectedToFrame(saveFrame);
+           }
+           public void redo() throws CannotRedoException {
+               super.redo();
+               setConnectedToFrame(newFrame);
+           }
+
+           @Override
+           public String getRedoPresentationName() {
+               return "Redo frame change";
+            }
+
+           @Override
+           public String getUndoPresentationName() {
+               return "Undo frame change";
+           }
+           
+       };
+       ExplorerTopComponent.addUndoableEdit(auEdit);
+
         obj.changeFramePreserveLocation(context.getCurrentStateRef(), PhysicalFrame.safeDownCast(comp));
         //System.out.println(obj.dump());
         ViewDB.getInstance().updateComponentVisuals(model, obj, true);
         // Mark model dirty
         SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(model);
         guiElem.setUnsavedChangesFlag(true);
-
+        refreshNode();
     }
 }
