@@ -120,7 +120,7 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
       sNumberFormat = NumberFormat.getNumberInstance();
       sNumberFormat.setMinimumFractionDigits(3);
       speedFormatter = new NumberFormatter(sNumberFormat); // this maybe unnecessary if using same format as Coordinates but more flexible
-      setTextfieldBounds(true);
+      setTextfieldBounds(coord.get_clamped());
       initComponents();
       
       jCoordinateNameLabel.setToolTipText(coord.getAbsolutePathString());
@@ -536,13 +536,14 @@ private double getSpeedFromTextboxInternalUnits() {
                    if (valueFromTextField >max){
                       jFormattedTextField.setText(numberFormat.format(max));
                       jFormattedTextField.commitEdit();
-                   } else {
+                   } else { // < min
                       jFormattedTextField.setText(numberFormat.format(min));
                       jFormattedTextField.commitEdit();
                    }
-                } else
-                   ErrorDialog.showMessageDialog("Value enetered is outside range of clamped coordinate. Ignoring");
-                jFormattedTextField.setText(numberFormat.format(oldValue));
+                   ErrorDialog.showMessageDialog("Value entered is outside range of clamped coordinate. Clamping to valid range.");
+                } 
+                else
+                    jFormattedTextField.setText(numberFormat.format(oldValue));
              } catch (ParseException ex){
                 jFormattedTextField.setText(numberFormat.format(oldValue));
              }
@@ -554,32 +555,7 @@ private double getSpeedFromTextboxInternalUnits() {
        }
 
        public void focusLost(java.awt.event.FocusEvent evt) {
-          // The formatted text field already takes care of handling the
-          // new value when focus is lost, as long as the new value is valid.
-          // So here all we need to do is handle the case of an invalid
-          // value so that the behavior is the same as in actionPerformed().
-          Number oldValue = (Number)jFormattedTextField.getValue();
-          if (!jFormattedTextField.isEditValid()) { //The text is invalid.
-             Toolkit.getDefaultToolkit().beep();
-             String text = jFormattedTextField.getText();
-             // Try to parse the text into a double as it could be out of range, in this case truncate
-             try {
-                double valueFromTextField = numberFormat.parse(text).doubleValue();
-                if (openSimContext.getClamped(coord)){
-                   if (valueFromTextField >max){
-                      jFormattedTextField.setText(numberFormat.format(max));
-                      jFormattedTextField.commitEdit();
-                   } else {
-                      jFormattedTextField.setText(numberFormat.format(min));
-                      jFormattedTextField.commitEdit();
-                   }
-                } else
-                    ErrorDialog.showMessageDialog("Value enetered is outside range of clamped coordinate. Ignoring");
-                    jFormattedTextField.setText(numberFormat.format(oldValue));
-             } catch (ParseException ex){
-                jFormattedTextField.setText(numberFormat.format(oldValue));
-             }
-          }
+           new handleReturnAction().actionPerformed(null);
        }
 
        public void focusGained(java.awt.event.FocusEvent evt) {
