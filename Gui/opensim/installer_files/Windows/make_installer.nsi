@@ -42,6 +42,10 @@
 ;--------------------------------
 ; Define some macro setting for the gui
 
+;TODO update this icon to not just be the OpenSim logo
+; (to include a cardboard box; something to indicate this
+; is the installer, not the application itself).
+;!define MUI_ICON "OpenSimLogoWindows.ico"
 !define MUI_HEADERIMAGE_BITMAP "OpenSimInstallerIcon.bmp"
 
 
@@ -75,15 +79,24 @@ Section "OpenSim Application" SecMain
   ;Store installation folder
   WriteRegStr HKCU "Software\OpenSim@VERSION@" "" $INSTDIR
  
-;Create shortcuts
+  ;Create shortcuts
+  ;TODO the uninstaller does not remove this shortcut.
   CreateShortCut "$DESKTOP\OpenSim @VERSION@.lnk" "$INSTDIR\bin\opensim64.exe" ""
+  ;Commented out for now because the Uninstaller does not yet remove these shortcuts.
+  CreateDirectory "$SMPROGRAMS\OpenSim"
+  CreateShortCut "$SMPROGRAMS\OpenSim\OpenSim @VERSION@.lnk" "$INSTDIR\bin\opensim64.exe"
+  CreateShortCut "$SMPROGRAMS\OpenSim\Uninstall OpenSim @VERSION@.lnk" "$INSTDIR\Uninstall.exe"
 
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
   
   ;Run the Visual C++ redistributable installer.
   ;https://docs.microsoft.com/en-us/cpp/ide/deployment-in-visual-cpp
-  ExecWait '"$INSTDIR\bin\vcredist_x64.exe" /quiet /norestart'
+  ; install: install the redist (as opposed to uninstall or repair)
+  ; passive: show a UI but do not require user input (as opposed to 'quiet'
+  ;          which causes no UI to be shown).
+  ; norestart: do not prompt to restart the computer.
+  ExecWait '"$INSTDIR\bin\vcredist_x64.exe" /install /passive /norestart'
 
 SectionEnd
 
