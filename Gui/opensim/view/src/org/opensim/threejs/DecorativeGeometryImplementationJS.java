@@ -57,6 +57,13 @@ import org.opensim.view.pub.GeometryFileLocator;
  * @author Ayman
  */ 
 public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplementation {
+
+    /**
+     * @return the supported
+     */
+    public boolean isSupported() {
+        return supported;
+    }
     private JSONArray jsonArr;
     private JSONArray json_materials;
     private UUID geomID;
@@ -67,6 +74,9 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
     private JSONObject last_json = null;
     private String quadrants = "";
     boolean debug = false;
+    // Flag indicating whether specific DecorativeGeometry subtypes is directly supported
+    // Point, Line, Circle and Frame are not suuported at this level
+    private boolean supported = true; 
     
     public DecorativeGeometryImplementationJS(JSONArray jsonArr, JSONArray jsonArrMaterials, double scale) {
         this.jsonArr = jsonArr;
@@ -244,6 +254,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 
     @Override
     public void implementTextGeometry(DecorativeText arg0) {
+        supported = false; // Not supporting text
         //super.implementTextGeometry(arg0); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -255,7 +266,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         //dg_json.put("radius", .00005*visualizerScaleFactor);
         dg_json.put("size", arg0.getAxisLength()*visualizerScaleFactor);
         jsonArr.add(dg_json);    
-        //createMaterialJson(arg0, false);
+        supported = false; // Frames ar enot meshes with material, instead they are sceneGraph objects with builtin colors
     }
 
     @Override
@@ -355,13 +366,16 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
             "type": "CircleGeometry",
             "radius": 20,
             "segments": 32 */
+        supported = false; // unused so impossible to test, may need draw a torus instead
+        return;
+        /*
         JSONObject dg_json = new JSONObject();
         dg_json.put("uuid", geomID.toString());
         dg_json.put("type", "CircleGeometry");
 	dg_json.put("radius", arg0.getRadius()*visualizerScaleFactor);
 	dg_json.put("segments", 32);
         jsonArr.add(dg_json); 
-        createMaterialJson(arg0, false);
+        createMaterialJson(arg0, false); */
     }
 
     @Override
@@ -415,30 +429,27 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 
     @Override
     public void implementLineGeometry(DecorativeLine arg0) {
+        //Not supported for now to prevent models with custom DecorativeFrames from failing to visualize
+        supported = false; // May need to draw as cylinder 3D
+        /*
         JSONObject dg_json = new JSONObject();
         dg_json.put("uuid", geomID.toString());
-        dg_json.put("type", "OpenSim.PathGeometry");
-        String colorString = JSONUtilities.mapColorToRGBA(arg0.getColor());
-        dg_json.put("color", colorString);
-        /*
-	"data": {
-        "indices": [0,1,2,...],
-        "vertices": [50,50,50,...],
-        "normals": [1,0,0,...],
-        "uvs": [0,1,...]
-        */
+        dg_json.put("type", "BufferGeometry");
+
+        JSONObject index_json = new JSONObject();
+        index_json.put("itemSize", 3);
+        index_json.put("type", "Uint16Array");
         JSONObject data_json = new JSONObject();
         JSONArray verts_array = createVertexArray(arg0);
-        //data_json.put("vertices", verts_array);
+        data_json.put("vertices", verts_array);
         data_json.put("itemSize", 3);
         data_json.put("type", "Float32Array");
         data_json.put("array", verts_array);
-        dg_json.put("positions", data_json);
-        last_json = dg_json;
-        if (!updateMode) {
-            jsonArr.add(dg_json);        
-            createMaterialJson(arg0, false);
-        }
+        data_json.put("index", index_json);
+        
+        dg_json.put("data", data_json);
+        jsonArr.add(dg_json);      
+        createMaterialJson(arg0, false);*/
     }
 
     private JSONArray createVertexArray(DecorativeLine arg0) {
@@ -455,6 +466,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
     @Override
     public void implementPointGeometry(DecorativePoint arg0) {
         //super.implementPointGeometry(arg0); //To change body of generated methods, choose Tools | Templates.
+        supported = false; // May need to draw as a Sphere to be visible
     }
     /**
      * @return the jsonArr
@@ -465,6 +477,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
 
     void setGeomID(UUID hexGeom) {
         geomID = hexGeom;
+        supported = true;
     }
 
     /**
