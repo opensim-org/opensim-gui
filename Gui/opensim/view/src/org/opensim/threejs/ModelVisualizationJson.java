@@ -686,7 +686,7 @@ public class ModelVisualizationJson extends JSONObject {
                         ArrayVec3 pathwrap = pathWrapPoint.getWrapPath();
                         PhysicalFrame wrapPtsFrame = pathWrapPoint.getParentFrame();
                         int size = pathwrap.size();
-                        if (size >= 2) { // 1 is degenerate will ignore
+                        if (size >= 1) { 
 
                             // Off the actual points computed by API, will compute indices
                             // of points to be used as "intermediate on-the-fly wrap points
@@ -865,7 +865,7 @@ public class ModelVisualizationJson extends JSONObject {
                         ArrayVec3 pathwrap = pathWrapPoint.getWrapPath();
                         PhysicalFrame wrapPtsFrame = pathWrapPoint.getParentFrame();
                         int size = pathwrap.size();
-                        if (size >= 2) {
+                        if (size >= 1) {
                             int[] indicesToUse = new int[NUM_PATHPOINTS_PER_WRAP_OBJECT];
                             for (int ndx = 0; ndx < NUM_PATHPOINTS_PER_WRAP_OBJECT-1; ndx++)
                                 indicesToUse[ndx] = ndx*(size-1)/(NUM_PATHPOINTS_PER_WRAP_OBJECT);
