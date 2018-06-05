@@ -78,6 +78,7 @@ public class WebSocketDB {
     
     public void broadcastMessageJson(JSONObject msg, VisWebSocket specificSocket)
     {
+         System.out.println("Broadcast:"+msg.get("Op"));
         if (specificSocket != null){
             specificSocket.sendVisualizerMessage(msg);
             return;

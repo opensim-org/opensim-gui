@@ -114,7 +114,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    private static WebSocketDB websocketdb;
    private static JSONObject jsondb;
    private SelectedObject selectInVisualizer = null;
-   
+   private static int frameRate = 30;
    /* Following block handles buffering Appearance changes so they're sent once
     * as a message to visualizer.
    */
@@ -162,6 +162,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
              websocketdb.broadcastMessageJson(msg, null);
         }
 
+    }
+
+    public int getFrameTime() {
+        String saved = Preferences.userNodeForPackage(TheApp.class).get("FrameRate", String.valueOf(frameRate));
+        if (saved!= null)
+            frameRate = Integer.parseInt(saved);
+        Preferences.userNodeForPackage(TheApp.class).put("FrameRate", String.valueOf(frameRate));
+        return frameRate; // 30 FPS default
     }
    
    class AppearanceChange {
