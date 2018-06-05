@@ -80,8 +80,6 @@ public class MasterMotionModel {
          Model dModel = disp.getModel();
          ViewDB.getInstance().updateModelDisplayNoRepaint(dModel, true);
       }
-      //ViewDB.getInstance().repaintAll();
-      ViewDB.getInstance().renderAll();
       MotionsDB motionsDB = MotionsDB.getInstance();
       motionsDB.reportTimeChange(getCurrentTime());
    }

@@ -1443,11 +1443,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    }
    
    public void updateModelDisplayNoRepaint(Model aModel, boolean colorByState) {
-      if (isVtkGraphicsAvailable()){
-        lockDrawingSurfaces(true);
-        mapModelsToVisuals.get(aModel).updateModelDisplay(aModel);
-        lockDrawingSurfaces(false);
-      }
       if (websocketdb != null){
         ModelVisualizationJson cJson = mapModelsToJsons.get(aModel);
         websocketdb.broadcastMessageJson(cJson.createFrameMessageJson(colorByState), null);
