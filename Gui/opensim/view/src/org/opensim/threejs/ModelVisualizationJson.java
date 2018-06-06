@@ -549,14 +549,16 @@ public class ModelVisualizationJson extends JSONObject {
     //============
     // PER FRAME
     //============
-    public JSONObject createFrameMessageJson(boolean colorByState) {
+    public JSONObject createFrameMessageJson(boolean colorByState, boolean forceRender) {
         JSONObject msg = new JSONObject();
         msg.put("Op", "Frame");
         JSONArray bodyTransforms_json = new JSONArray();
         msg.put("Transforms", bodyTransforms_json);
         JSONArray geompaths_json = new JSONArray();
         msg.put("paths", geompaths_json);
-        
+        msg.put("time", state.getTime());
+        msg.put("model", modelUUID.toString());
+        msg.put("render", forceRender);
         appendToFrame(bodyTransforms_json, colorByState, geompaths_json);
         return msg;
     }

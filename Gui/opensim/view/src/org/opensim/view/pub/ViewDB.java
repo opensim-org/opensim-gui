@@ -140,7 +140,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                 websocketdb.broadcastMessageJson(modelJson.updateComponentVisuals(mc, frame), null);
             }
             else // just send frame in case xforms change
-                websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(false), null);
+                websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(false, true), null);
         }
     }
     /*
@@ -1438,14 +1438,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       }
       if (websocketdb != null && currentJson != null && applyAppearanceChange){
         // Make xforms JSON
-        websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(false), null);
+        websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(false, true), null);
       }
    }
    
-   public void updateModelDisplayNoRepaint(Model aModel, boolean colorByState) {
+   public void updateModelDisplayNoRepaint(Model aModel, boolean colorByState, boolean refresh) {
       if (websocketdb != null){
         ModelVisualizationJson cJson = mapModelsToJsons.get(aModel);
-        websocketdb.broadcastMessageJson(cJson.createFrameMessageJson(colorByState), null);
+        websocketdb.broadcastMessageJson(cJson.createFrameMessageJson(colorByState, refresh), null);
       }
    }
 
@@ -2297,6 +2297,12 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         String msgType = (String)jsonObject.get("type");
         if (msgType != null) {
             if (msgType.equalsIgnoreCase("info")) {
+                if (jsonObject.get("renderTime")!=null){
+                    double frameRenderTimeInMillis = JSONMessageHandler.convertObjectFromJsonToDouble(jsonObject.get("renderTime"));
+                    int frameRate = ((int) (frameRenderTimeInMillis/30.0))+30;
+                    Preferences.userNodeForPackage(TheApp.class).put("FrameRate", String.valueOf(frameRate));
+                    return;
+                }
                 if (debugLevel > 1) {
                     String msg = "Rendered " + jsonObject.get("numFrames") + " frames in " + jsonObject.get("totalTime") + " ms.";
                     double rendertimeAverage = ((Double) jsonObject.get("totalTime")) / ((Long) jsonObject.get("numFrames"));
