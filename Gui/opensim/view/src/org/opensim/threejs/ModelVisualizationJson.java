@@ -1328,7 +1328,9 @@ public class ModelVisualizationJson extends JSONObject {
         json_geometries.add(bpptJson);
         return bpptJson;
     }
-    
+    /* Create visuals for GeometryPath, including pathpoints, caps, visible represents user intention for
+    * the muscle body and endcaps only, everything else is controlled separately
+    */
     private UUID createJsonForGeometryPath(GeometryPath path, ModelDisplayHints mdh, JSONArray json_geometries, 
                                             JSONArray json_materials, boolean visible) {
         // Create material for path
@@ -1391,7 +1393,8 @@ public class ModelVisualizationJson extends JSONObject {
             else if (secondIndex == -1){ // Conditional Path point that's inactive
                 ConditionalPathPoint cpp = ConditionalPathPoint.safeDownCast(secondPoint);
                 //System.out.println("Not found in path, ppt:"+secondPoint.getName());
-                pathpoint_uuid = addComputedPathPointObjectToParent(ppointSetIndex, pathPointSetNoWrap, pathpt_mat_uuid.toString(), visible);
+                pathpoint_uuid = addComputedPathPointObjectToParent(ppointSetIndex, pathPointSetNoWrap, pathpt_mat_uuid.toString(), 
+                        visible && ppointSetIndex==pathPointSetNoWrap.getSize()-1);
                 pointAdded = true;
                 ArrayList<UUID> comp_uuids = new ArrayList<UUID>();
                 comp_uuids.add(pathpoint_uuid);
@@ -1474,7 +1477,7 @@ public class ModelVisualizationJson extends JSONObject {
         gndChildren.add(obj_json);
         // Create json entry for material (path_material) and set skinning to true
         obj_json.put("material", mat_uuid.toString());
-        if (!visible){
+        if (!visible){ // path-belly = cylinder
             obj_json.put("visible", false);
         }
         return mesh_uuid;
