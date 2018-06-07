@@ -828,32 +828,6 @@ public class ModelVisualizationJson extends JSONObject {
         nextpptPositionCommand.put("oldPosition", oldLocationArray);
         return nextpptPositionCommand;
     }
-    private UUID createPathPointMaterial() {
-        Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
-        UUID mat_uuid = UUID.randomUUID();
-        mat_json.put("uuid", mat_uuid.toString());
-        mat_json.put("name", "PathPointMat");
-        mat_json.put("type", "MeshBasicMaterial");
-        String colorString = JSONUtilities.mapColorToRGBA(new Vec3(.8, .1, .1));
-        mat_json.put("color", colorString);
-        mat_json.put("side", 2);
-        json_materials.add(mat_json);
-        return mat_uuid;
-    }
-     private UUID createBoneStandardMaterialAndColor() {
-        Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
-        UUID mat_uuid = UUID.randomUUID();
-        mat_json.put("uuid", mat_uuid.toString());
-        mat_json.put("name", "BoneStandardMat");
-        mat_json.put("type", "MeshStandardMaterial");
-        mat_json.put("metalness", 0);
-        mat_json.put("roughness", 1.0);
-        String colorString = JSONUtilities.mapColorToRGBA(new Vec3(0.949,0.863,0.757));
-        mat_json.put("color", colorString);
-        mat_json.put("side", 2);
-        json_materials.add(mat_json);
-        return mat_uuid;
-    }
 
     private UUID createMarkerMaterial(ModelDisplayHints hints) {
         JSONObject mat_json = new JSONObject();
