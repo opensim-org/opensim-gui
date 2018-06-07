@@ -163,6 +163,22 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         }
 
     }
+    /**
+     * Toggle display of user editable pathpoints to enable visual editing/dragging
+     * @param msl 
+     */
+    public void togglePathPointDisplay(Muscle msl, boolean newState) {
+        if (websocketdb!=null){
+            JSONObject msg = new JSONObject();
+             msg.put("Op", "TogglePathPoints");
+             ModelVisualizationJson modelVis = getInstance().getModelVisualizationJson(msl.getModel());
+             ArrayList<UUID> uuidList = modelVis.findUUIDForObject(msl);
+             msg.put("uuid", uuidList.get(0).toString());
+             msg.put("newState", newState);
+             websocketdb.broadcastMessageJson(msg, null);
+             modelVis.setPathPointDisplayStatus(msl.getGeometryPath(), newState);
+        }
+    }
    
    class AppearanceChange {
        Model model;

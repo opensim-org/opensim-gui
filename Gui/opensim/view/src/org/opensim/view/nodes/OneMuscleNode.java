@@ -29,7 +29,9 @@ package org.opensim.view.nodes;
 
 import java.awt.Image;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
@@ -83,5 +85,27 @@ public class OneMuscleNode extends OneActuatorNode {
         set.remove("optimal_force");
         return sheet;
     }
-
+    public Action[] getActions(boolean b) {
+        Action[] superActions = (Action[]) super.getActions(b);        
+        // Arrays are fixed size, onvert to a List
+        
+        List<Action> actions = java.util.Arrays.asList(superActions);
+        // Create new Array of proper size
+        Action[] retActions = new Action[actions.size()+1];
+        actions.toArray(retActions);
+        try {
+            // append new command to the end of the list of actions
+            retActions[actions.size()] = (GeometryPathTogglePointsAction) GeometryPathTogglePointsAction.findObject(
+                     (Class)Class.forName("org.opensim.view.nodes.GeometryPathTogglePointsAction"), true);
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return retActions;
+    }
+    // Default action by double click now toggles pathpoints
+    @Override
+    public Action getPreferredAction() {
+         Action[] actions = getActions(false);
+        return actions[actions.length-1];
+    }
 }

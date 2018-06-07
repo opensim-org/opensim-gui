@@ -123,6 +123,7 @@ public class ModelVisualizationJson extends JSONObject {
     private final HashMap<UUID, Component> mapUUIDToComponent = new HashMap<UUID, Component>();
     private final HashMap<OpenSimObject, ArrayList<UUID>> mapComponentToUUID = 
             new HashMap<OpenSimObject, ArrayList<UUID>>();
+    private final HashMap<GeometryPath, Boolean> pathDisplayStatus = new HashMap<GeometryPath, Boolean>();
     private static final String GEOMETRY_SEP = ".";
     private final HashMap<GeometryPath, UUID> pathList = new HashMap<GeometryPath, UUID>();
     private ModelDisplayHints mdh;
@@ -135,6 +136,7 @@ public class ModelVisualizationJson extends JSONObject {
     private UUID modelUUID;
     private UUID markerMatUUID;
     private JSONObject pathPointGeometryJSON = null;
+    private JSONObject editablePathPointGeometryJSON = null;
     private JSONObject marker_mat_json;
     public static boolean verbose=false;
     private boolean ready = false;
@@ -314,7 +316,8 @@ public class ModelVisualizationJson extends JSONObject {
         //createSkeleton(model, jsonTop);
         // Create material for PathPoints, Markers
         markerMatUUID= createMarkerMaterial(mdh);
-        pathPointGeometryJSON = createPathPointGeometryJSON();
+        pathPointGeometryJSON = createPathPointGeometryJSON(1.0);
+        editablePathPointGeometryJSON = createPathPointGeometryJSON(2.0);
         dgimp = new DecorativeGeometryImplementationJS(json_geometries, json_materials, visScaleFactor);
         while (!mcIter.equals(mcList.end())) {
             Component comp = mcIter.__deref__();
@@ -1293,7 +1296,9 @@ public class ModelVisualizationJson extends JSONObject {
     */
     public JSONObject createPathPointObjectJson(AbstractPathPoint pathPoint, String name, boolean active, Vec3 computedLocation, String materialUuidString, boolean visible) {
         // Now add to scene graph
-        JSONObject bpptGeometryJson = pathPointGeometryJSON;
+        boolean editable = PathPoint.safeDownCast(pathPoint)!= null ||
+                ConditionalPathPoint.safeDownCast(pathPoint)!= null;
+        JSONObject bpptGeometryJson = editable? editablePathPointGeometryJSON:pathPointGeometryJSON;
         JSONObject bpptInBodyJson = new JSONObject();
         UUID ppoint_uuid = UUID.randomUUID();
         bpptInBodyJson.put("uuid", ppoint_uuid.toString());
@@ -1319,12 +1324,12 @@ public class ModelVisualizationJson extends JSONObject {
         return bpptInBodyJson;
     }
 
-    protected JSONObject createPathPointGeometryJSON() {
+    protected JSONObject createPathPointGeometryJSON(double scaleUpFactor) {
         JSONObject bpptJson = new JSONObject();
         UUID uuidForPathpointGeometry = UUID.randomUUID();
         bpptJson.put("uuid", uuidForPathpointGeometry.toString());
         bpptJson.put("type", "SphereGeometry");
-        bpptJson.put("radius", actualMuscleDisplayRadius);
+        bpptJson.put("radius", actualMuscleDisplayRadius*scaleUpFactor);
         json_geometries.add(bpptJson);
         return bpptJson;
     }
@@ -1371,7 +1376,7 @@ public class ModelVisualizationJson extends JSONObject {
         // Also so that when adding pathpoints due to wrapping, we can get proper/shared material
         mapGeometryPathToPathPointMaterialUUID.put(path, pathpt_mat_uuid);
         // Create viz for firstPoint
-        UUID pathpoint_uuid = addPathPointObjectToParent(firstPoint, pathpt_mat_uuid.toString(), visible);
+        UUID pathpoint_uuid = addPathPointObjectToParent(firstPoint, pathpt_mat_uuid.toString(), false);
         pathpoint_jsonArr.add(pathpoint_uuid.toString());
         pathpointActive_jsonArr.add(true);
         addComponentToUUIDMap(firstPoint, pathpoint_uuid);
@@ -1394,7 +1399,7 @@ public class ModelVisualizationJson extends JSONObject {
                 ConditionalPathPoint cpp = ConditionalPathPoint.safeDownCast(secondPoint);
                 //System.out.println("Not found in path, ppt:"+secondPoint.getName());
                 pathpoint_uuid = addComputedPathPointObjectToParent(ppointSetIndex, pathPointSetNoWrap, pathpt_mat_uuid.toString(), 
-                        visible && ppointSetIndex==pathPointSetNoWrap.getSize()-1);
+                        false);
                 pointAdded = true;
                 ArrayList<UUID> comp_uuids = new ArrayList<UUID>();
                 comp_uuids.add(pathpoint_uuid);
@@ -1443,8 +1448,7 @@ public class ModelVisualizationJson extends JSONObject {
             }
             // Create viz for secondPoint
             if (!pointAdded){
-                pathpoint_uuid = addPathPointObjectToParent(secondPoint, pathpt_mat_uuid.toString(), 
-                        visible && ppointSetIndex == pathPointSetNoWrap.getSize()-1);
+                pathpoint_uuid = addPathPointObjectToParent(secondPoint, pathpt_mat_uuid.toString(), false);
                 pathpoint_jsonArr.add(pathpoint_uuid.toString());
                 pathpointActive_jsonArr.add(true);
                 addComponentToUUIDMap(secondPoint, pathpoint_uuid);
@@ -1480,6 +1484,7 @@ public class ModelVisualizationJson extends JSONObject {
         if (!visible){ // path-belly = cylinder
             obj_json.put("visible", false);
         }
+        pathDisplayStatus.put(path, false);
         return mesh_uuid;
     }
 
@@ -1556,6 +1561,12 @@ public class ModelVisualizationJson extends JSONObject {
             topJson.put("points", pathpoint_jsonArr);
         }
        return topJson;
+    }
+    public boolean getPathPointDisplayStatus(GeometryPath musclePath){
+        return pathDisplayStatus.get(musclePath);
+    }
+    public void setPathPointDisplayStatus(GeometryPath musclePath, boolean newState){
+        pathDisplayStatus.put(musclePath, newState);
     }
     
 }
