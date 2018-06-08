@@ -179,6 +179,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
              modelVis.setPathPointDisplayStatus(msl.getGeometryPath(), newState);
         }
     }
+
+    public void removePathDisplay(Model currentModel, GeometryPath currentPath, GeometryPath pathToRestore) {
+        ModelVisualizationJson modelVis = getInstance().getModelVisualizationJson(currentPath.getModel());
+        modelVis.removePathVisualization(currentPath, pathToRestore);
+    }
    
    class AppearanceChange {
        Model model;
@@ -1192,6 +1197,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       if (removeObjectFromSelectedList(obj) == false) {
          // If the object is not already in the list, add it
          SelectedObject selectedObject = new SelectedObject(obj);
+         selectedObjects.clear();
          selectedObjects.add(selectedObject);
          // mark it as selected
          markSelected(selectedObject, true, true, true);
