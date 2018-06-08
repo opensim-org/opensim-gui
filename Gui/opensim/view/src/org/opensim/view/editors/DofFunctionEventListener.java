@@ -73,7 +73,7 @@ public class DofFunctionEventListener implements FunctionEventListener {
             Function newFunction = fre.getReplacementFunction();
             if (Function.getCPtr(oldFunction) != Function.getCPtr(newFunction)) {
                openSimContext.replaceTransformAxisFunction(dof, newFunction);
-               ViewDB.getInstance().updateModelDisplayNoRepaint(model, false);
+               ViewDB.getInstance().updateModelDisplayNoRepaint(model, false, true);
                ViewDB.getInstance().renderAll();
                guiElem.setUnsavedChangesFlag(true);
             }
@@ -85,7 +85,7 @@ public class DofFunctionEventListener implements FunctionEventListener {
                String coordName = dof.getCoordinateNamesInArray().getitem(0);
                Coordinate coord = dof.getJoint().get_coordinates(0);
                openSimContext.setValue(coord, openSimContext.getValue(coord));
-               ViewDB.getInstance().updateModelDisplayNoRepaint(model, false);
+               ViewDB.getInstance().updateModelDisplayNoRepaint(model, false, true);
                ViewDB.getInstance().renderAll();
                guiElem.setUnsavedChangesFlag(true);
             }

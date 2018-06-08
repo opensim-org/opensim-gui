@@ -180,7 +180,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
                       motionDisplayer.applyFrameToModel(getStorage().getSize()-1); 
                   
                   //ViewDB.getInstance().updateModelDisplay(getModelForDisplay());  // Faster? than the next few indented lines
-                    ViewDB.getInstance().updateModelDisplayNoRepaint(getModelForDisplay(), true);
+                    ViewDB.getInstance().updateModelDisplayNoRepaint(getModelForDisplay(), true, true);
                     ////ViewDB.getInstance().renderAll(); // Render now (if want to do it later, use repaintAll()) -- may slow things down too much
                     //ViewDB.getInstance().repaintAll();
                   lastRenderTime = currentRealTime; 
