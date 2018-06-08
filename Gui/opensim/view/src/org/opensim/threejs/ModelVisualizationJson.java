@@ -123,9 +123,7 @@ public class ModelVisualizationJson extends JSONObject {
     private final HashMap<UUID, Component> mapUUIDToComponent = new HashMap<UUID, Component>();
     private final HashMap<OpenSimObject, ArrayList<UUID>> mapComponentToUUID = 
             new HashMap<OpenSimObject, ArrayList<UUID>>();
-    private final HashMap<GeometryPath, Boolean> pathDisplayStatus = new HashMap<GeometryPath, Boolean>();
     private static final String GEOMETRY_SEP = ".";
-    private final HashMap<GeometryPath, UUID> pathList = new HashMap<GeometryPath, UUID>();
     private ModelDisplayHints mdh;
     private DecorativeGeometryImplementationJS dgimp = null;
     private static String boneSuffix = "_Bone";
@@ -144,18 +142,6 @@ public class ModelVisualizationJson extends JSONObject {
     private final ArrayList<MotionDisplayer> motionDisplayers = new ArrayList<MotionDisplayer>();
     private JSONObject modelGroundJson=null;
     private boolean movable=true;
-    // List of all Components that need special treatment as in not statically attached:
-    // MovingPathPoint for now
-    private final HashMap<Component, UUID> movingComponents = new HashMap<Component, UUID>();
-    // For ConditionalPathPoint we use Active PathPoints as proxy when inactive.
-    private final HashMap<AbstractPathPoint, ComputedPathPointInfo> proxyPathPoints = new HashMap<AbstractPathPoint, ComputedPathPointInfo>();
-    private final HashMap<UUID, ComputedPathPointInfo> computedPathPoints = new HashMap<UUID, ComputedPathPointInfo>();
-    private final HashMap<PathWrapPoint, ArrayList<UUID>> wrapPathPoints = new HashMap<PathWrapPoint, ArrayList<UUID>>();
-    // Keep track of which paths have wrapping since they need special handling
-    // When wrapping comes in/out
-    private final HashMap<GeometryPath, JSONArray> pathsWithWrapping = new HashMap<GeometryPath, JSONArray>();
-    private final HashMap<OpenSimObject, UUID> mapGeometryPathToPathPointMaterialUUID = 
-                        new HashMap<OpenSimObject, UUID>();
     private final HashMap<Frame, VisualizerFrame> visualizerFrames = new HashMap<Frame, VisualizerFrame>();
     private ArrayList<VisualizerAddOn> visualizerAddOns = new ArrayList<VisualizerAddOn>();
     private VisualizerAddOnCom comVizAddOn = new VisualizerAddOnCom();
@@ -1185,8 +1171,30 @@ public class ModelVisualizationJson extends JSONObject {
     public void setTransformWRTScene(Transform transformWRTScene) {
         this.transformWRTScene = transformWRTScene;
     }
-    ///// PATH MANAGEMENT HERE DOWN
-     private void updatePathWithWrapping(GeometryPath path, JSONArray bodyTransforms) {
+    ///////////////////////////////////////////////////////////////////////////
+    ///// PATH MANAGEMENT HERE DOWN, pending move to a different class
+    ///////////////////////////////////////////////////////////////////////////
+    // List of paths used for generating visualizer frames
+    private final HashMap<GeometryPath, UUID> pathList = new HashMap<GeometryPath, UUID>();
+    // List of all Components that need special treatment as in not statically attached:
+    // MovingPathPoint for now
+    private final HashMap<Component, UUID> movingComponents = new HashMap<Component, UUID>();
+    // For ConditionalPathPoint we use Active PathPoints as proxy when inactive.
+    private final HashMap<AbstractPathPoint, ComputedPathPointInfo> proxyPathPoints = new HashMap<AbstractPathPoint, ComputedPathPointInfo>();
+    // Points that are generated but stay dormant pending Condition (ConditionalPathPoint) or Wrapping
+    private final HashMap<UUID, ComputedPathPointInfo> computedPathPoints = new HashMap<UUID, ComputedPathPointInfo>();
+    private final HashMap<PathWrapPoint, ArrayList<UUID>> wrapPathPoints = new HashMap<PathWrapPoint, ArrayList<UUID>>();
+    // Keep track of which paths have wrapping since they need special handling
+    // When wrapping comes in/out
+    private final HashMap<GeometryPath, JSONArray> pathsWithWrapping = new HashMap<GeometryPath, JSONArray>();
+    // Keep track if PathPoints are displayed/enlarged to sync. UI and to keep across edits
+    private final HashMap<GeometryPath, Boolean> pathDisplayStatus = new HashMap<GeometryPath, Boolean>();
+    // GeometryPath has material (with Skinning) and another material without Skinning for PathPoints
+    // this Map maintains the mapping so the colors can stay in sync.
+    private final HashMap<OpenSimObject, UUID> mapGeometryPathToPathPointMaterialUUID = 
+                        new HashMap<OpenSimObject, UUID>();
+    
+    private void updatePathWithWrapping(GeometryPath path, JSONArray bodyTransforms) {
         ArrayPathPoint actualPath =path.getCurrentPath(state);
         JSONArray pathpointJsonArray = pathsWithWrapping.get(path);
         int numWrapObjects = path.getWrapSet().getSize();
@@ -1561,6 +1569,30 @@ public class ModelVisualizationJson extends JSONObject {
             topJson.put("points", pathpoint_jsonArr);
         }
        return topJson;
+    }
+    public void removePathVisualization(GeometryPath currentPath, GeometryPath pathToRestore){
+        // Remove pathpoints in currentPath that are not in pathToRestore
+        ArrayList<UUID> uuidList = new  ArrayList<UUID>();
+        PathPointSet currentPathPoints = currentPath.getPathPointSet();
+        PathPointSet restorePathPoints = pathToRestore.getPathPointSet();
+        for (int i=0; i< currentPathPoints.getSize(); i++){
+            AbstractPathPoint appt = currentPathPoints.get(i);
+            if (restorePathPoints.getIndex(appt)==-1){
+                UUID pathpointUuid = mapComponentToUUID.get(appt).get(0);
+                uuidList.add(pathpointUuid);
+                // Also remove appt from various maps
+                mapComponentToUUID.remove(appt);
+                mapUUIDToComponent.remove(pathpointUuid);
+                // remove computed points that depend on appt
+                if (MovingPathPoint.safeDownCast(appt) != null) {
+                    movingComponents.remove(appt);
+                }
+                // Find computed path points that depend on appt and remove them
+                
+            }
+        }
+        // get uuid from pathList
+        UUID pathUuid = pathList.get(currentPath);
     }
     public boolean getPathPointDisplayStatus(GeometryPath musclePath){
         return pathDisplayStatus.get(musclePath);
