@@ -65,7 +65,7 @@ public class JSONMessageHandler {
                         JSONObject locationJson = (JSONObject) jsonObject.get("location");
                         Vec3 locationVec3 = convertJsonXYZToVec3(locationJson);
                         // Convert from ground frame to object's frame
-                        pea.setValueVec3(locationVec3);
+                        pea.setValueVec3(locationVec3, true);
                         // Tell the world that objects have moved
                         ViewDB.getInstance().objectMoved(model, opensimObj);
                     }
