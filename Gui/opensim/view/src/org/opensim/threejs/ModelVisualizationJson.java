@@ -1232,7 +1232,6 @@ public class ModelVisualizationJson extends JSONObject {
         JSONArray pathpoint_jsonArr = new JSONArray();
         JSONArray pathpointActive_jsonArr = new JSONArray();
         
-        ArrayPathPoint actualPath = path.getCurrentPath(state);
        // Also so that when adding pathpoints due to wrapping, we can get proper/shared material
         mapGeometryPathToPathPointMaterialUUID.put(path, pathpt_mat_uuid);
 
@@ -1245,7 +1244,7 @@ public class ModelVisualizationJson extends JSONObject {
         JSONArray gndChildren = (JSONArray) gndJson.get("children");
         Map<String, Object> obj_json = new LinkedHashMap<String, Object>();
         UUID mesh_uuid = UUID.randomUUID();
-        pathVis.setPathUuid(uuidForPathGeomGeometry);
+        pathVis.setPathUuid(mesh_uuid);
         obj_json.put("uuid", mesh_uuid.toString());
         obj_json.put("type", "GeometryPath");
         obj_json.put("name", path.getAbsolutePathString());
