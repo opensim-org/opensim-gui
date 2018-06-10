@@ -337,7 +337,7 @@ public class ModelVisualizationJson extends JSONObject {
         boolean isGeometryPath = (gPath!=null);
         if (isGeometryPath){
             UUID pathUUID = createJsonForGeometryPath(gPath, mdh, json_geometries, json_materials, visibleStatus);
-            pathList.put(gPath, pathUUID);
+            //pathList.put(gPath, pathUUID);
             // Add to the ID map so that PathOwner translates to GeometryPath
             Component parentComp = gPath.getOwner();
             addComponentToUUIDMap(parentComp, pathUUID);
@@ -624,7 +624,7 @@ public class ModelVisualizationJson extends JSONObject {
             while (pathIter.hasNext()) {
                 // get path and call generateDecorations on it
                 GeometryPath geomPathObject = pathIter.next();
-                UUID pathUUID = pathList.get(geomPathObject);
+                UUID pathUUID = pathList.get(geomPathObject).getPathUuid();
                 JSONObject pathUpdate_json = new JSONObject();
                 pathUpdate_json.put("uuid", pathUUID.toString());
                 if (Muscle.safeDownCast(geomPathObject.getOwner())!= null){
@@ -1181,7 +1181,7 @@ public class ModelVisualizationJson extends JSONObject {
 
     
     // List of paths used for generating visualizer frames
-    private final HashMap<GeometryPath, UUID> pathList = new HashMap<GeometryPath, UUID>();
+    private final HashMap<GeometryPath, PathVisualization> pathList = new HashMap<GeometryPath, PathVisualization>();
     // List of all Components that need special treatment as in not statically attached:
     // MovingPathPoint for now
     private final HashMap<Component, UUID> movingComponents = new HashMap<Component, UUID>();
@@ -1217,10 +1217,12 @@ public class ModelVisualizationJson extends JSONObject {
         // Create plain Geometry with vertices at PathPoints it will have 0 vertices
         // but will be populated live in the visualizer from the Pathppoints
         PathVisualization pathVis = new PathVisualization(this, path);
+        pathList.put(path, pathVis);
         pathVis.setPathPointMaterial(pathpt_mat_uuid.toString());
         
         JSONObject pathGeomJson = new JSONObject();
         UUID uuidForPathGeomGeometry = UUID.randomUUID();
+        
         pathGeomJson.put("uuid", uuidForPathGeomGeometry.toString());
         pathGeomJson.put("type", "PathGeometry");
         pathGeomJson.put("radius", actualMuscleDisplayRadius);
@@ -1243,6 +1245,7 @@ public class ModelVisualizationJson extends JSONObject {
         JSONArray gndChildren = (JSONArray) gndJson.get("children");
         Map<String, Object> obj_json = new LinkedHashMap<String, Object>();
         UUID mesh_uuid = UUID.randomUUID();
+        pathVis.setPathUuid(uuidForPathGeomGeometry);
         obj_json.put("uuid", mesh_uuid.toString());
         obj_json.put("type", "GeometryPath");
         obj_json.put("name", path.getAbsolutePathString());
@@ -1422,7 +1425,7 @@ public class ModelVisualizationJson extends JSONObject {
     // @typeOfEdit = 2 -> delete
     public JSONObject createPathUpdateJson(GeometryPath path, int typeOfEdit, int atIndex) {
         JSONObject topJson = new JSONObject();
-        UUID pathUuid = pathList.get(path);
+        UUID pathUuid = pathList.get(path).getPathUuid();
         topJson.put("Op", "PathOperation");
         topJson.put("uuid", pathUuid.toString());
         UUID pathpointMatUUID = mapGeometryPathToPathPointMaterialUUID.get(path);
@@ -1504,8 +1507,6 @@ public class ModelVisualizationJson extends JSONObject {
                 
             }
         }
-        // get uuid from pathList
-        UUID pathUuid = pathList.get(currentPath);
     }
     public boolean getPathPointDisplayStatus(GeometryPath musclePath){
         return pathDisplayStatus.get(musclePath);
