@@ -957,7 +957,7 @@ public class ModelVisualizationJson extends JSONObject {
         return retVec3;
     }
 
-    private Vec3 computePointLocationFromNeighbors(AbstractPathPoint prePoint, final PhysicalFrame parentFrame, AbstractPathPoint postPoint, double ratio) {
+    public Vec3 computePointLocationFromNeighbors(AbstractPathPoint prePoint, final PhysicalFrame parentFrame, AbstractPathPoint postPoint, double ratio) {
         Vec3 localLocation = prePoint.getLocation(state);
         Vec3 preLocation = prePoint.getBody().findStationLocationInAnotherFrame(state, localLocation, parentFrame);
         localLocation = postPoint.getLocation(state);
@@ -1188,7 +1188,7 @@ public class ModelVisualizationJson extends JSONObject {
     // For ConditionalPathPoint we use Active PathPoints as proxy when inactive.
     private final HashMap<AbstractPathPoint, ComputedPathPointInfo> proxyPathPoints = new HashMap<AbstractPathPoint, ComputedPathPointInfo>();
     // Points that are generated but stay dormant pending Condition (ConditionalPathPoint) or Wrapping
-    private final HashMap<UUID, ComputedPathPointInfo> computedPathPoints = new HashMap<UUID, ComputedPathPointInfo>();
+    public final HashMap<UUID, ComputedPathPointInfo> computedPathPoints = new HashMap<UUID, ComputedPathPointInfo>();
     private final HashMap<PathWrapPoint, ArrayList<UUID>> wrapPathPoints = new HashMap<PathWrapPoint, ArrayList<UUID>>();
     // Keep track of which paths have wrapping since they need special handling
     // When wrapping comes in/out
@@ -1251,6 +1251,7 @@ public class ModelVisualizationJson extends JSONObject {
         obj_json.put("geometry", uuidForPathGeomGeometry.toString());
         obj_json.put("opensimType", "Path");
         gndChildren.add(obj_json);
+        pathsWithWrapping.put(path, pathpoint_jsonArr);
         // Create json entry for material (path_material) and set skinning to true
         obj_json.put("material", mat_uuid.toString());
         if (!visible){ // path-belly = cylinder
