@@ -121,7 +121,7 @@ public class PathVisualization {
             // Always create a Proxy. On the fly we'll either use the cpt location or Proxy to find xform
             ConditionalPathPoint cppt = ConditionalPathPoint.safeDownCast(currentPoint);
             PathPointSet pptSet = path.getPathPointSet();
-            ComputedPathPointInfo cppInfo= new ComputedPathPointInfo(pptSet.get(segNumber-1), pptSet.get(segNumber+1), 0.5);
+            ComputedPathPointInfo cppInfo= new ComputedPathPointInfo(pptSet.get(segNumber-1), pptSet.get(segNumber+1), 0.995);
             modelVis.getProxyPathPoints().put(currentPoint, cppInfo);
         }
     }
