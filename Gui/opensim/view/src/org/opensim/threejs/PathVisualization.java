@@ -34,6 +34,7 @@ public class PathVisualization {
     String pathPointMaterial;
     GeometryPath path;
     private UUID pathUuid;
+    private boolean pathPointsDisplayed = false; // Whether editing mode (large nodes) on display or not.
     
     public PathVisualization(ModelVisualizationJson modelVis, GeometryPath path) {
         this.modelVis = modelVis;
@@ -136,6 +137,20 @@ public class PathVisualization {
     public UUID getPathUuid() {
         return pathUuid;
     }
+    /**
+     * @return the pathPointsDisplayed
+     */
+    public boolean isPathPointsDisplayed() {
+        return pathPointsDisplayed;
+    }
+
+    /**
+     * @param pathPointsDisplayed the pathPointsDisplayed to set
+     */
+    public void setPathPointsDisplayed(boolean pathPointsDisplayed) {
+        this.pathPointsDisplayed = pathPointsDisplayed;
+    }
+
 }
 
 class PathSegment {

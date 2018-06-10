@@ -1168,20 +1168,12 @@ public class ModelVisualizationJson extends JSONObject {
     ///////////////////////////////////////////////////////////////////////////
     ///// PATH MANAGEMENT HERE DOWN, pending move to a different class(es)
     ///////////////////////////////////////////////////////////////////////////     
-    // Keep track if PathPoints are displayed/enlarged to sync. UI and to keep across edits
-    private final HashMap<GeometryPath, Boolean> pathDisplayStatus = new HashMap<GeometryPath, Boolean>();
+    // List of paths used for generating visualizer frames
+    private final HashMap<GeometryPath, PathVisualization> pathList = new HashMap<GeometryPath, PathVisualization>();
     // GeometryPath has material (with Skinning) and another material without Skinning for PathPoints
     // this Map maintains the mapping so the colors can stay in sync.
     private final HashMap<OpenSimObject, UUID> mapGeometryPathToPathPointMaterialUUID = 
                         new HashMap<OpenSimObject, UUID>();
-    
-    // The following Map is used to cache "computed" pathpoints to speed up 
-    // recomputation on the fly
-    private HashMap<AbstractPathPoint, ComputedPathPointInfo> computedPathPointMap = new HashMap<AbstractPathPoint, ComputedPathPointInfo>();
-
-    
-    // List of paths used for generating visualizer frames
-    private final HashMap<GeometryPath, PathVisualization> pathList = new HashMap<GeometryPath, PathVisualization>();
     // List of all Components that need special treatment as in not statically attached:
     // MovingPathPoint for now
     private final HashMap<Component, UUID> movingComponents = new HashMap<Component, UUID>();
@@ -1259,7 +1251,7 @@ public class ModelVisualizationJson extends JSONObject {
         if (!visible){ // path-belly = cylinder
             obj_json.put("visible", false);
         }
-        pathDisplayStatus.put(path, false);
+        pathVis.setPathPointsDisplayed(false);
         return mesh_uuid;
     }
    
@@ -1508,10 +1500,10 @@ public class ModelVisualizationJson extends JSONObject {
         }
     }
     public boolean getPathPointDisplayStatus(GeometryPath musclePath){
-        return pathDisplayStatus.get(musclePath);
+        return pathList.get(musclePath).isPathPointsDisplayed();
     }
     public void setPathPointDisplayStatus(GeometryPath musclePath, boolean newState){
-        pathDisplayStatus.put(musclePath, newState);
+        pathList.get(musclePath).setPathPointsDisplayed(newState);
     }
 
     /**
