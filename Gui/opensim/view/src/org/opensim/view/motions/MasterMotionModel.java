@@ -78,10 +78,9 @@ public class MasterMotionModel {
       for(int i=0; i<displayers.size(); i++) {
          MotionDisplayer disp = displayers.get(i);
          Model dModel = disp.getModel();
-         ViewDB.getInstance().updateModelDisplayNoRepaint(dModel, true);
+         // Force rendering only for the last displayer to avoid multiple render calls per frame
+         ViewDB.getInstance().updateModelDisplayNoRepaint(dModel, true, i==(displayers.size()-1));
       }
-      //ViewDB.getInstance().repaintAll();
-      ViewDB.getInstance().renderAll();
       MotionsDB motionsDB = MotionsDB.getInstance();
       motionsDB.reportTimeChange(getCurrentTime());
    }

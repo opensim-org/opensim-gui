@@ -538,13 +538,22 @@ public class ModelVisualizationJson extends JSONObject {
     //============
     // PER FRAME
     //============
-    public JSONObject createFrameMessageJson(boolean colorByState) {
+    public JSONObject createFrameMessageJson(boolean colorByState, boolean forceRender) {
         JSONObject msg = new JSONObject();
-        Iterator<Integer> bodyIdIter = mapBodyIndicesToFrames.keySet().iterator();
         msg.put("Op", "Frame");
         JSONArray bodyTransforms_json = new JSONArray();
         msg.put("Transforms", bodyTransforms_json);
+        JSONArray geompaths_json = new JSONArray();
+        msg.put("paths", geompaths_json);
+        msg.put("time", state.getTime());
+        msg.put("model", modelUUID.toString());
+        msg.put("render", forceRender);
+        appendToFrame(bodyTransforms_json, colorByState, geompaths_json);
+        return msg;
+    }
 
+    public void appendToFrame(JSONArray bodyTransforms_json, boolean colorByState, JSONArray geompaths_json) {
+        Iterator<Integer> bodyIdIter = mapBodyIndicesToFrames.keySet().iterator();
         if (ready) { // Avoid trying to send a frame before Json is completely populated
             while (bodyIdIter.hasNext()) {
                 int bodyId = bodyIdIter.next();
@@ -580,16 +589,16 @@ public class ModelVisualizationJson extends JSONObject {
             };
             for (AbstractPathPoint app: proxyPathPoints.keySet()){
                 //System.out.println("Process Conditional Path point "+app.getName());
-                  if (!app.isActive(state)){
+                if (!app.isActive(state)){
                     ComputedPathPointInfo proxyPointInfo = proxyPathPoints.get(app);
                     //System.out.println("Use proxy "+proxyPoint.getName());
                     Vec3 loc = computePointLocationFromNeighbors(proxyPointInfo.pt1, app.getBody(), proxyPointInfo.pt2, proxyPointInfo.ratio);
                     Transform localTransform = new Transform();
-                       localTransform.setP(loc);
-                       JSONObject pathpointXform_json = new JSONObject();
-                       pathpointXform_json.put("uuid", mapComponentToUUID.get(app).get(0).toString());
-                       pathpointXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1., 1., 1.), visScaleFactor));
-                       bodyTransforms_json.add(pathpointXform_json);
+                    localTransform.setP(loc);
+                    JSONObject pathpointXform_json = new JSONObject();
+                    pathpointXform_json.put("uuid", mapComponentToUUID.get(app).get(0).toString());
+                    pathpointXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1., 1., 1.), visScaleFactor));
+                    bodyTransforms_json.add(pathpointXform_json);
                 }
                 else {
                     //System.out.println("Pathpoint " + app.getName() + " active");
@@ -600,7 +609,7 @@ public class ModelVisualizationJson extends JSONObject {
                     pathpointXform_json.put("uuid", mapComponentToUUID.get(app).get(0).toString());
                     pathpointXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1., 1., 1.), visScaleFactor));
                     bodyTransforms_json.add(pathpointXform_json);
-                 } 
+                } 
             }
             PhysicalFrame ground = mapBodyIndicesToFrames.get(0);
             for (UUID computedPointUUID: computedPathPoints.keySet()){
@@ -620,9 +629,6 @@ public class ModelVisualizationJson extends JSONObject {
                     updatePathWithWrapping(path, bodyTransforms_json);
                 }
             }            // Computed points need recomputation
-            
-            JSONArray geompaths_json = new JSONArray();
-            msg.put("paths", geompaths_json);
 
             Set<GeometryPath> paths = pathList.keySet();
             Iterator<GeometryPath> pathIter = paths.iterator();
@@ -651,7 +657,6 @@ public class ModelVisualizationJson extends JSONObject {
                 nextMotionDisplayer.addMotionObjectsToFrame(bodyTransforms_json, geompaths_json);
             }
         }
-        return msg;
     }
         
 

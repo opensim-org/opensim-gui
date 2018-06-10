@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.prefs.Preferences;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
@@ -46,6 +47,7 @@ import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.Storage;
+import org.opensim.utils.TheApp;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.motions.MotionEvent.Operation;
 import org.opensim.view.ObjectsRenamedEvent;
@@ -535,6 +537,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
               // reset motion if at end already
               getMasterMotion().setTime(getMasterMotion().getEndTime());
           }
+          int timerRate = ViewDB.getInstance().getFrameTime();
           animationTimer = new Timer(timerRate, new RealTimePlayActionListener(-1));
           animationTimer.start();
           // correct selected modes
@@ -577,6 +580,8 @@ public class MotionControlJPanel extends javax.swing.JToolBar
               getMasterMotion().setTime(getMasterMotion().getStartTime());
           }
           ViewDB.getInstance().startAnimation();
+          int timerRate = ViewDB.getInstance().getFrameTime();
+
           animationTimer = new Timer(timerRate, new RealTimePlayActionListener(1));
           animationTimer.start();
           // correct selected modes

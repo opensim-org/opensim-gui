@@ -114,7 +114,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    private static WebSocketDB websocketdb;
    private static JSONObject jsondb;
    private SelectedObject selectInVisualizer = null;
-   
+   private static int frameRate = 30;
    /* Following block handles buffering Appearance changes so they're sent once
     * as a message to visualizer.
    */
@@ -140,7 +140,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                 websocketdb.broadcastMessageJson(modelJson.updateComponentVisuals(mc, frame), null);
             }
             else // just send frame in case xforms change
-                websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(false), null);
+                websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(false, true), null);
         }
     }
     /*
@@ -162,6 +162,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
              websocketdb.broadcastMessageJson(msg, null);
         }
 
+    }
+
+    public int getFrameTime() {
+        String saved = Preferences.userNodeForPackage(TheApp.class).get("FrameRate", String.valueOf(frameRate));
+        if (saved!= null)
+            frameRate = Integer.parseInt(saved);
+        Preferences.userNodeForPackage(TheApp.class).put("FrameRate", String.valueOf(frameRate));
+        return frameRate; // 30 FPS default
     }
     /**
      * Toggle display of user editable pathpoints to enable visual editing/dragging
@@ -1452,19 +1460,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       }
       if (websocketdb != null && currentJson != null && applyAppearanceChange){
         // Make xforms JSON
-        websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(false), null);
+        websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(false, true), null);
       }
    }
    
-   public void updateModelDisplayNoRepaint(Model aModel, boolean colorByState) {
-      if (isVtkGraphicsAvailable()){
-        lockDrawingSurfaces(true);
-        mapModelsToVisuals.get(aModel).updateModelDisplay(aModel);
-        lockDrawingSurfaces(false);
-      }
+   public void updateModelDisplayNoRepaint(Model aModel, boolean colorByState, boolean refresh) {
       if (websocketdb != null){
         ModelVisualizationJson cJson = mapModelsToJsons.get(aModel);
-        websocketdb.broadcastMessageJson(cJson.createFrameMessageJson(colorByState), null);
+        websocketdb.broadcastMessageJson(cJson.createFrameMessageJson(colorByState, refresh), null);
       }
    }
 
@@ -2316,6 +2319,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         String msgType = (String)jsonObject.get("type");
         if (msgType != null) {
             if (msgType.equalsIgnoreCase("info")) {
+                if (jsonObject.get("renderTime")!=null){
+                    double frameRenderTimeInMillis = JSONMessageHandler.convertObjectFromJsonToDouble(jsonObject.get("renderTime"));
+                    //System.out.println("renderTime"+frameRenderTimeInMillis);
+                    int frameRate = (int) (frameRenderTimeInMillis*1.5);
+                    if (frameRate > 30)
+                        Preferences.userNodeForPackage(TheApp.class).put("FrameRate", String.valueOf(frameRate));
+                    return;
+                }
                 if (debugLevel > 1) {
                     String msg = "Rendered " + jsonObject.get("numFrames") + " frames in " + jsonObject.get("totalTime") + " ms.";
                     double rendertimeAverage = ((Double) jsonObject.get("totalTime")) / ((Long) jsonObject.get("numFrames"));
