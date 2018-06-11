@@ -95,6 +95,7 @@ public final class ObjectDisplayShowOnlyAction extends ObjectAppearanceChangeAct
                //ViewDB.getInstance().toggleObjectsDisplay(n.getOpenSimObject(), false);
            }
        }
+      ViewDB.setApplyAppearanceChange(false);
       for (OneComponentNode leafNode:descendents){
           if (leafNode instanceof ColorableInterface) {
               ((ColorableInterface) leafNode).setVisible(Boolean.FALSE);
@@ -120,7 +121,7 @@ public final class ObjectDisplayShowOnlyAction extends ObjectAppearanceChangeAct
               ViewDB.getInstance().toggleObjectDisplay(leafNode.getOpenSimObject(), true);
             }
         }
-        ViewDB.getInstance().repaintAll();
+        ViewDB.setApplyAppearanceChange(true);
     }
    
    public String getName() {
