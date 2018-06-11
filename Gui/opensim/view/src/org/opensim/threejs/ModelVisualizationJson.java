@@ -611,19 +611,16 @@ public class ModelVisualizationJson extends JSONObject {
                 pathpointXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1., 1., 1.), visScaleFactor));
                 bodyTransforms_json.add(pathpointXform_json);
             }
-            if (!pathsWithWrapping.isEmpty()){
-                
-                // Update status of Wrappoints accordingly
-                for (GeometryPath path:pathsWithWrapping.keySet()){
-                    updatePathWithWrapping(path, bodyTransforms_json);
-                }
-            }            // Computed points need recomputation
+            // Computed points need recomputation
 
             Set<GeometryPath> paths = pathList.keySet();
             Iterator<GeometryPath> pathIter = paths.iterator();
             while (pathIter.hasNext()) {
                 // get path and call generateDecorations on it
                 GeometryPath geomPathObject = pathIter.next();
+                if (pathList.get(geomPathObject).hasWrapping){
+                    updatePathWithWrapping(geomPathObject, bodyTransforms_json);
+                }
                 UUID pathUUID = pathList.get(geomPathObject).getPathUuid();
                 JSONObject pathUpdate_json = new JSONObject();
                 pathUpdate_json.put("uuid", pathUUID.toString());
@@ -1182,10 +1179,7 @@ public class ModelVisualizationJson extends JSONObject {
     // Points that are generated but stay dormant pending Condition (ConditionalPathPoint) or Wrapping
     public final HashMap<UUID, ComputedPathPointInfo> computedPathPoints = new HashMap<UUID, ComputedPathPointInfo>();
     private final HashMap<PathWrapPoint, ArrayList<UUID>> wrapPathPoints = new HashMap<PathWrapPoint, ArrayList<UUID>>();
-    // Keep track of which paths have wrapping since they need special handling
-    // When wrapping comes in/out
-    private final HashMap<GeometryPath, JSONArray> pathsWithWrapping = new HashMap<GeometryPath, JSONArray>();
-    
+   
      /* Create visuals for GeometryPath, including pathpoints, caps, visible represents user intention for
     * the muscle body and endcaps only, everything else is controlled separately
     */
@@ -1245,7 +1239,7 @@ public class ModelVisualizationJson extends JSONObject {
         obj_json.put("geometry", uuidForPathGeomGeometry.toString());
         obj_json.put("opensimType", "Path");
         gndChildren.add(obj_json);
-        pathsWithWrapping.put(path, pathpoint_jsonArr);
+        //pathsWithWrapping.put(path, pathpoint_jsonArr);
         // Create json entry for material (path_material) and set skinning to true
         obj_json.put("material", mat_uuid.toString());
         if (!visible){ // path-belly = cylinder
@@ -1257,7 +1251,9 @@ public class ModelVisualizationJson extends JSONObject {
    
     private void updatePathWithWrapping(GeometryPath path, JSONArray bodyTransforms) {
         ArrayPathPoint actualPath =path.getCurrentPath(state);
-        JSONArray pathpointJsonArray = pathsWithWrapping.get(path);
+        JSONArray pathpointJsonArray = new JSONArray();
+        JSONArray pathpointActiveJsonArray = new JSONArray();
+        pathList.get(path).collectPathPointArrays(pathpointJsonArray, pathpointActiveJsonArray);
         int numWrapObjects = path.getWrapSet().getSize();
         PathPointSet pathPointSetNoWrap = path.getPathPointSet();
         int firstIndex = 0; // by construction
