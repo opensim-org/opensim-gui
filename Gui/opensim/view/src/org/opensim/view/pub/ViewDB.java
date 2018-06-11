@@ -1068,6 +1068,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                       !selectInVisualizer.equals(selectedObject.getOpenSimObject())){
                     websocketdb.broadcastMessageJson(currentJson.createSelectionJson(selectedObject.getOpenSimObject()), null);
               }
+              else if (selectInVisualizer == null){
+                    websocketdb.broadcastMessageJson(currentJson.createSelectionJson(selectedObject.getOpenSimObject()), null);                  
+              }
               selectInVisualizer = selectedObject;
           }
           else {
@@ -1077,33 +1080,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
               }
           }
       }
-      if (ViewDB.getInstance().isQuery() && isVtkGraphicsAvailable()){
-          if (highlight){
-           // Add caption
-             vtkCaptionActor2D theCaption = new vtkCaptionActor2D();
-             double[] bounds=selectedObject.getBounds();
-             theCaption.SetAttachmentPoint(new double[]{
-                 (bounds[0]+bounds[1])/2.0,
-                 (bounds[2]+bounds[3])/2.0,
-                 (bounds[4]+bounds[5])/2.0,
-             });
-             theCaption.GetTextActor().ScaledTextOn();
-             theCaption.SetHeight(.02);
-             theCaption.BorderOff();
-             if (selectedObject.getOpenSimObject()!=null){
-                 theCaption.SetCaption(selectedObject.getOpenSimObject().getName());
-                addAnnotationToViews(theCaption);
-                 selectedObjectsAnnotations.put(selectedObject,theCaption);
-             }
-          }
-          else {    // if annotationis on remove 
-              vtkCaptionActor2D annotation = getAnnotation(selectedObject);
-              if (annotation!=null){
-                  removeAnnotationFromViews(annotation);
-              }
-          }
-      }
-
       if(updateStatusDisplayAndRepaint) {
          statusDisplaySelectedObjects();
          repaintAll();
@@ -1198,7 +1174,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
          // If the object is not already in the list, add it
          SelectedObject selectedObject = new SelectedObject(obj);
          selectedObjects.clear();
-         selectedObjects.add(selectedObject);
+         selectInVisualizer = null;
+         //selectedObjects.add(selectedObject);
          // mark it as selected
          markSelected(selectedObject, true, true, true);
       }
