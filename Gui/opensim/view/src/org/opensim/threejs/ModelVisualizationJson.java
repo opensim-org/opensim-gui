@@ -303,7 +303,7 @@ public class ModelVisualizationJson extends JSONObject {
         // Create material for PathPoints, Markers
         markerMatUUID= createMarkerMaterial(mdh);
         pathPointGeometryJSON = createPathPointGeometryJSON(1.0);
-        editablePathPointGeometryJSON = createPathPointGeometryJSON(2.0);
+        editablePathPointGeometryJSON = createPathPointGeometryJSON(1.5);
         dgimp = new DecorativeGeometryImplementationJS(json_geometries, json_materials, visScaleFactor);
         while (!mcIter.equals(mcList.end())) {
             Component comp = mcIter.__deref__();
@@ -1080,22 +1080,60 @@ public class ModelVisualizationJson extends JSONObject {
     // Delete the selected Pathpoint from Maps used to back Visualization
     public void deletePathPointVisuals(GeometryPath currentPath, int index) {
         boolean hasWrapping = currentPath.getWrapSet().getSize()>0;
-        if (!hasWrapping){
-            AbstractPathPoint appoint = currentPath.getPathPointSet().get(index);
-            ArrayList<UUID> uuids = mapComponentToUUID.get(appoint);
-            // Remove uuids[0] from visualizer
-            // cleanup maps
-            mapComponentToUUID.remove(appoint);
-            mapUUIDToComponent.remove(uuids.get(0));
-            // If Conditional remove it from proxyPathPoints
-            if (ConditionalPathPoint.safeDownCast(appoint)!= null)
-                proxyPathPoints.remove(appoint);
-            else if (MovingPathPoint.safeDownCast(appoint)!=null){
-                movingComponents.remove(appoint);
-            }
+        AbstractPathPoint appoint = currentPath.getPathPointSet().get(index);
+        ArrayList<UUID> uuids = mapComponentToUUID.get(appoint);
+        // Remove uuids[0] from visualizer
+        UUID appoint_uuid = uuids.get(0);
+        // cleanup maps
+        mapComponentToUUID.remove(appoint);
+        mapUUIDToComponent.remove(appoint_uuid);
+        // If Conditional remove it from proxyPathPoints
+        if (ConditionalPathPoint.safeDownCast(appoint)!= null)
+            proxyPathPoints.remove(appoint);
+        else if (MovingPathPoint.safeDownCast(appoint)!=null){
+            movingComponents.remove(appoint);
         }
-        else
-            throw new UnsupportedOperationException("Not yet implemented");
+        if (hasWrapping){
+            int pathLength = currentPath.getPathPointSet().getSize()-1;
+            // If end point, then we just remove the potential Wrappoints between 
+            //appoint and the next user defined point
+            JSONArray allPoints = pathsWithWrapping.get(currentPath);
+            ArrayList<UUID> uuidsToRemove = new ArrayList<UUID>();
+            if (index==0){
+                AbstractPathPoint nextNonWrapPoint = currentPath.getPathPointSet().get(1);
+                String toUuidString = mapComponentToUUID.get(nextNonWrapPoint).get(0).toString();
+                // Remove all in between uui from visualizer, and  other maps
+                boolean found = false;
+                for (int i=0; i< allPoints.size() && !found; i++){
+                    String nextUuid = (String) allPoints.get(i);
+                    if (nextUuid != toUuidString)
+                        uuidsToRemove.add(UUID.fromString(nextUuid));
+                    else
+                        found = true;
+                }
+            }
+            else { // Remove points from previous point to curret
+                AbstractPathPoint prevNonWrapPoint = currentPath.getPathPointSet().get(index-1);
+                String fromUuid = mapComponentToUUID.get(prevNonWrapPoint).get(0).toString();
+                String toUuid = mapComponentToUUID.get(appoint).get(0).toString();
+                boolean toDelete = false;
+                for (int i=0; i< allPoints.size(); i++){
+                    String nextUuid = (String) allPoints.get(i);
+                    if (nextUuid == fromUuid){
+                        toDelete = true;
+                    }
+                    if (nextUuid == toUuid && toDelete){
+                        break;
+                    }
+                    if (toDelete)
+                        uuidsToRemove.add(UUID.fromString(nextUuid));
+                }
+           }
+           System.out.println("UUIDS to delete = "+uuidsToRemove.size());
+           // Computed? Other caches/maps
+        
+        }
+            
         /*
         // If deleted point was used in wrapping, update accordingly
         if (index==0 || index ==currentPath.getPathPointSet().getSize()-1){
