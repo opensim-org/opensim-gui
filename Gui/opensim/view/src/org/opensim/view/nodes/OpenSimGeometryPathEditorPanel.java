@@ -1322,6 +1322,11 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       //Muscle asm = Muscle.safeDownCast(objectWithPath);
       PathPointSet pathPoints = currentPath.getPathPointSet();
       AbstractPathPoint point = pathPoints.get(attachmentNum);
+      // deselect all other boxes
+      for (int i=0; i < pathPoints.getSize(); i++){
+          if (i!= attachmentNum)
+              attachmentSelectBox[i].setSelected(false);
+      }
       ViewDB.getInstance().toggleAddSelectedObject(point);
    }
    
