@@ -292,7 +292,7 @@ public class ModelVisualizationJson extends JSONObject {
         // Create material for PathPoints, Markers
         markerMatUUID= createMarkerMaterial(mdh);
         pathPointGeometryJSON = createPathPointGeometryJSON(1.0);
-        editablePathPointGeometryJSON = createPathPointGeometryJSON(2.0);
+        editablePathPointGeometryJSON = createPathPointGeometryJSON(1.5);
         dgimp = new DecorativeGeometryImplementationJS(json_geometries, json_materials, visScaleFactor);
         while (!mcIter.equals(mcList.end())) {
             Component comp = mcIter.__deref__();
