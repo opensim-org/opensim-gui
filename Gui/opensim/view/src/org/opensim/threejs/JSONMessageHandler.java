@@ -33,7 +33,9 @@ import org.json.simple.JSONObject;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.Vec3;
+import org.opensim.view.nodes.PathPointAdapter;
 import org.opensim.view.nodes.PropertyEditorAdaptor;
 import org.opensim.view.pub.ViewDB;
 
@@ -59,6 +61,14 @@ public class JSONMessageHandler {
                     OpenSimObject opensimObj = ViewDB.getInstance().getObjectFromUUID(objUuid);
                     // From Visualizer side, we always get "position", "rotation", "scale"
                     // The corresponding Properties are adhoc and vary as follows:
+                    if (PathPoint.safeDownCast(opensimObj)!=null){
+                        PathPoint ppt = PathPoint.safeDownCast(opensimObj);
+                        PathPointAdapter pptAdapter = new PathPointAdapter(ppt);
+                        JSONObject locationJson = (JSONObject) jsonObject.get("location");
+                        Vec3 locationVec3 = convertJsonXYZToVec3(locationJson);
+                        pptAdapter.setLocation(locationVec3, true);
+                        return;
+                    }
                     if (opensimObj != null && opensimObj.hasProperty("location")){
                         final AbstractProperty ap = opensimObj.getPropertyByName("location");
                         final PropertyEditorAdaptor pea = new PropertyEditorAdaptor(model, opensimObj, ap, null);
