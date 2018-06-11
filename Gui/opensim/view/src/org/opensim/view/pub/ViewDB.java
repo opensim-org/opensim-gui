@@ -477,29 +477,12 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                         System.out.println("ModelVisualizationJson constructed in ViewDB.Update");
                    ModelVisualizationJson vizJson = getJsonForModel(jsondb, evModel);
                    exportModelJsonToVisualizer(vizJson, null);
+                   
                 }
                else {
                    // Same as open visualizer window 
                    startVisualizationServer();
                }
-              // Check if this refits scene into window
-               // int rc = newModelVisual.getModelDisplayAssembly().GetReferenceCount();
-               if(OpenSimDB.getInstance().getNumModels()==1) { 
-                  Iterator<ModelWindowVTKTopComponent> windowIter = openWindows.iterator();
-                  double[] bnds = new double[6];
-                  while(windowIter.hasNext()){
-                     bnds = computeSceneBounds();
-                     //createBBox();
-                     ModelWindowVTKTopComponent nextWindow = windowIter.next();
-                     // This line may need to be enclosed in a Lock /UnLock pair per vtkPanel
-                     lockDrawingSurfaces(true);
-                     nextWindow.getCanvas().GetRenderer().ResetCamera(bnds);
-                     lockDrawingSurfaces(false);
-                  }
-               }
-               //rc = newModelVisual.getModelDisplayAssembly().GetReferenceCount();
-               repaintAll();
-               //rc = newModelVisual.getModelDisplayAssembly().GetReferenceCount();
             } else if (ev.getOperation()==ModelEvent.Operation.Close){
                Model dModel = ev.getModel();
                mapModelsToSettings.remove(dModel);
@@ -829,20 +812,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     * Cycle through displayed windows and repaint them
     */
    public static void repaintAll() {
-      Iterator<ModelWindowVTKTopComponent> windowIter = openWindows.iterator();
-      while( windowIter.hasNext() ){
-         if( useImmediateModeRendering )
-            windowIter.next().getCanvas().Render();
-         else
-            windowIter.next().getCanvas().repaint();
-      }
    }
 
    public static void renderAll() {
-      Iterator<ModelWindowVTKTopComponent> windowIter = openWindows.iterator();
-      while(windowIter.hasNext()){
-         windowIter.next().getCanvas().Render();
-      }
+
    }
    
    /**
@@ -1450,14 +1423,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
      *  This excludes transforms since these are obtained from the system on the fly.
      */
    public void updateModelDisplay(Model aModel, OpenSimObject specificObject) {
-      if (isVtkGraphicsAvailable()){
-        lockDrawingSurfaces(true);
-        if (specificObject!=null)
-              mapModelsToVisuals.get(aModel).updateObjectDisplay(specificObject);
-        mapModelsToVisuals.get(aModel).updateModelDisplay(aModel);
-        lockDrawingSurfaces(false);
-        repaintAll();
-      }
       if (websocketdb != null && currentJson != null && applyAppearanceChange){
         // Make xforms JSON
         websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(false, true), null);

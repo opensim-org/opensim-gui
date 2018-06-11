@@ -336,6 +336,7 @@ public class ModelVisualizationJson extends JSONObject {
         GeometryPath gPath = GeometryPath.safeDownCast(comp);
         boolean isGeometryPath = (gPath!=null);
         if (isGeometryPath){
+            // This assumes ConditionalPathpoints are active, fix later in first frame
             UUID pathUUID = createJsonForGeometryPath(gPath, mdh, json_geometries, json_materials, visibleStatus);
             //pathList.put(gPath, pathUUID);
             // Add to the ID map so that PathOwner translates to GeometryPath
@@ -573,7 +574,6 @@ public class ModelVisualizationJson extends JSONObject {
                     pathpointXform_json.put("uuid", movingComponents.get(comp).toString());
                     pathpointXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1., 1., 1.), visScaleFactor));
                     bodyTransforms_json.add(pathpointXform_json);
-                    continue;
                 }
             };
             for (AbstractPathPoint app: proxyPathPoints.keySet()){
