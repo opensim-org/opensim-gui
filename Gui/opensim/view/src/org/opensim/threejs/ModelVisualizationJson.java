@@ -1106,7 +1106,7 @@ public class ModelVisualizationJson extends JSONObject {
                 boolean found = false;
                 for (int i=0; i< allPoints.size() && !found; i++){
                     String nextUuid = (String) allPoints.get(i);
-                    if (nextUuid != toUuidString)
+                    if (!nextUuid.equalsIgnoreCase(toUuidString))
                         uuidsToRemove.add(UUID.fromString(nextUuid));
                     else
                         found = true;
@@ -1115,21 +1115,23 @@ public class ModelVisualizationJson extends JSONObject {
             else { // Remove points from previous point to curret
                 AbstractPathPoint prevNonWrapPoint = currentPath.getPathPointSet().get(index-1);
                 String fromUuid = mapComponentToUUID.get(prevNonWrapPoint).get(0).toString();
-                String toUuid = mapComponentToUUID.get(appoint).get(0).toString();
+                String toUuid =appoint_uuid.toString();
                 boolean toDelete = false;
                 for (int i=0; i< allPoints.size(); i++){
                     String nextUuid = (String) allPoints.get(i);
-                    if (nextUuid == fromUuid){
+                    if (nextUuid.equalsIgnoreCase(fromUuid)){
                         toDelete = true;
                     }
-                    if (nextUuid == toUuid && toDelete){
+                    if (nextUuid.equalsIgnoreCase(toUuid) && toDelete){
                         break;
                     }
                     if (toDelete)
                         uuidsToRemove.add(UUID.fromString(nextUuid));
                 }
            }
-           System.out.println("UUIDS to delete = "+uuidsToRemove.size());
+           for (UUID computedPointUuid:uuidsToRemove){
+               computedPathPoints.remove(computedPointUuid);
+           }
            // Computed? Other caches/maps
         
         }
