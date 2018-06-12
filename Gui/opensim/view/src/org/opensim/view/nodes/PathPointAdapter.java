@@ -26,11 +26,13 @@
  */
 package org.opensim.view.nodes;
 
+import java.io.IOException;
 import java.util.UUID;
 import java.util.Vector;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
+import org.openide.util.Exceptions;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.GeometryPath;
@@ -72,12 +74,19 @@ public class PathPointAdapter  {
         boolean hasWrapping = currentPath.getWrapSet().getSize()>0;
         final Vec3 oldLocation = new Vec3(pathpoint.get_location());
         //System.out.println("oldLocation:"+oldLocation.get(1));
+        context.cacheModelAndState();
         pathpoint.set_location(newLocation);
+        try {
+            context.restoreStateFromCachedModel();
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
         //System.out.println("newLocation:"+newLocation.get(1));
         if (!hasWrapping)
             updateDisplay(); 
-        else
-            ;//ViewDB.getInstance().getModelVisualizationJson(model).
+        else{
+            ViewDB.getInstance().updateModelDisplay(model);
+        }
         if (enableUndo){
              AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
                public void undo() throws CannotUndoException {
