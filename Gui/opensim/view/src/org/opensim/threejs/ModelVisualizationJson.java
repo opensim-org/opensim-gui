@@ -1105,28 +1105,23 @@ public class ModelVisualizationJson extends JSONObject {
         else if (MovingPathPoint.safeDownCast(appoint)!=null){
             movingComponents.remove(appoint);
         }
-        if (hasWrapping){
-            ViewDB.getInstance().removePathDisplay(currentPath);  
-            // recreate PathVisuals     
-        }
-            
-        /*
+        if (hasWrapping) {
         // If deleted point was used in wrapping, update accordingly
-        if (index==0 || index ==currentPath.getPathPointSet().getSize()-1){
             // remove computed points that depends on appoint
             Set<UUID> computedPointsInfo = computedPathPoints.keySet();
             ArrayList<UUID> toDelete = new ArrayList<UUID>();
-            for (UUID pathpointUuid:computedPointsInfo){
+            for (UUID pathpointUuid : computedPointsInfo) {
                 ComputedPathPointInfo pathpointInfo = computedPathPoints.get(pathpointUuid);
-                if (pathpointInfo.pt1.equals(appoint) || pathpointInfo.pt2.equals(appoint)){
+                if (pathpointInfo.pt1.equals(appoint) || pathpointInfo.pt2.equals(appoint)) {
                     toDelete.add(pathpointUuid);
                 }
             }
-            for (UUID delPpoint:toDelete){
+            for (UUID delPpoint : toDelete) {
                 computedPathPoints.remove(delPpoint);
             }
+            // Need to create new computedPathpoints across removed point
         }
-        */
+        
     }
     
     // Get UUID corresponding to first PathPoint used by the passed in GeometryPath
