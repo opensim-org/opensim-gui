@@ -1247,10 +1247,15 @@ public class ModelVisualizationJson extends JSONObject {
                         }
                     }
                 }
-                int step = numIntermediatePoints/totalNumWrapPoints;
+                double step = numIntermediatePoints/totalNumWrapPoints;
                 ArrayList<Integer> numIndicesToUse = new ArrayList<Integer>();
-                for (int n=0; n < counts.size(); n++){
-                    numIndicesToUse.add(counts.get(n)*step);
+                if (counts.size()==1) 
+                    numIndicesToUse.add(numIntermediatePoints);
+                else {
+                    for (int n=0; n < counts.size(); n++){
+                        Integer num = (int) (counts.get(n)*step);
+                        numIndicesToUse.add(num);
+                    }
                 }
                 for (int wpptindex = 0; wpptindex < counts.size(); wpptindex++) {
                     // Count how many wrap points in sequence and distribute 2 * numWrapObjects among them 
