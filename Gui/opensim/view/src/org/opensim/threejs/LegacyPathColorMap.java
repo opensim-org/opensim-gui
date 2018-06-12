@@ -21,7 +21,7 @@ public class LegacyPathColorMap implements PathColorMap {
     @Override
     public Vec3 getColor(GeometryPath path, State state, double activation) {
         if (activation > 0.){
-            
+            return new Vec3(activation, 0, 1-activation);
         }
         return path.getColor(state);
     }

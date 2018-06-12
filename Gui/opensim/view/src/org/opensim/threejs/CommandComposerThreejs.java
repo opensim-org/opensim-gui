@@ -145,7 +145,8 @@ public class CommandComposerThreejs {
     static JSONObject createRemoveObjectByUUIDCommandJson(UUID object2Remove, UUID parent) {
         JSONObject commandJson = new JSONObject();
         commandJson.put("type", "RemoveObjectCommand");
-        commandJson.put("parentUuid", parent.toString());
+        if (parent != null)
+            commandJson.put("parentUuid", parent.toString());
         JSONObject dObject = new JSONObject();
         JSONObject dObjectObject = new JSONObject();
         dObject.put("object", dObjectObject);

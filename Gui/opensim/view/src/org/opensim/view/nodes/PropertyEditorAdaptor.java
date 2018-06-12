@@ -172,6 +172,7 @@ public class PropertyEditorAdaptor {
 
     public void setValueBool(boolean v, boolean supportUndo, boolean recreateSystem) {
         boolean oldValue = getValueBool();
+        if (v==oldValue) return;
         handlePropertyChange(oldValue, v, supportUndo, recreateSystem);
     }
 
