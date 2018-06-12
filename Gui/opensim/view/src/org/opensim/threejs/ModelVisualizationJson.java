@@ -76,6 +76,7 @@ import org.opensim.utils.TheApp;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.view.motions.MotionDisplayer;
 import org.opensim.view.pub.OpenSimDB;
+import org.opensim.view.pub.ViewDB;
 
 /**
  *
@@ -889,6 +890,13 @@ public class ModelVisualizationJson extends JSONObject {
         guiJson.put("command", commandJson);
         return guiJson;
     }
+    public JSONObject createRemoveObjectByUuidCommand(UUID objectUUID, UUID parentUUID) {
+        JSONObject guiJson = new JSONObject();
+        guiJson.put("Op", "execute");
+      JSONObject commandJson = CommandComposerThreejs.createRemoveObjectByUUIDCommandJson(objectUUID, parentUUID);
+        guiJson.put("command", commandJson);
+        return guiJson;
+    }
 
     public JSONObject createTranslateObjectCommand(OpenSimObject marker, Vec3 newLocation) {
         JSONObject guiJson = new JSONObject();
@@ -1094,46 +1102,8 @@ public class ModelVisualizationJson extends JSONObject {
             movingComponents.remove(appoint);
         }
         if (hasWrapping){
-            int pathLength = currentPath.getPathPointSet().getSize()-1;
-            // If end point, then we just remove the potential Wrappoints between 
-            //appoint and the next user defined point
-            JSONArray allPoints = pathsWithWrapping.get(currentPath);
-            ArrayList<UUID> uuidsToRemove = new ArrayList<UUID>();
-            if (index==0){
-                AbstractPathPoint nextNonWrapPoint = currentPath.getPathPointSet().get(1);
-                String toUuidString = mapComponentToUUID.get(nextNonWrapPoint).get(0).toString();
-                // Remove all in between uui from visualizer, and  other maps
-                boolean found = false;
-                for (int i=0; i< allPoints.size() && !found; i++){
-                    String nextUuid = (String) allPoints.get(i);
-                    if (!nextUuid.equalsIgnoreCase(toUuidString))
-                        uuidsToRemove.add(UUID.fromString(nextUuid));
-                    else
-                        found = true;
-                }
-            }
-            else { // Remove points from previous point to curret
-                AbstractPathPoint prevNonWrapPoint = currentPath.getPathPointSet().get(index-1);
-                String fromUuid = mapComponentToUUID.get(prevNonWrapPoint).get(0).toString();
-                String toUuid =appoint_uuid.toString();
-                boolean toDelete = false;
-                for (int i=0; i< allPoints.size(); i++){
-                    String nextUuid = (String) allPoints.get(i);
-                    if (nextUuid.equalsIgnoreCase(fromUuid)){
-                        toDelete = true;
-                    }
-                    if (nextUuid.equalsIgnoreCase(toUuid) && toDelete){
-                        break;
-                    }
-                    if (toDelete)
-                        uuidsToRemove.add(UUID.fromString(nextUuid));
-                }
-           }
-           for (UUID computedPointUuid:uuidsToRemove){
-               computedPathPoints.remove(computedPointUuid);
-           }
-           // Computed? Other caches/maps
-        
+            ViewDB.getInstance().removePathDisplay(currentPath);  
+            // recreate PathVisuals     
         }
             
         /*
@@ -1615,29 +1585,44 @@ public class ModelVisualizationJson extends JSONObject {
         }
        return topJson;
     }
-    public void removePathVisualization(GeometryPath currentPath, GeometryPath pathToRestore){
+    public ArrayList<UUID> removePathVisualization(GeometryPath currentPath){
         // Remove pathpoints in currentPath that are not in pathToRestore
         ArrayList<UUID> uuidList = new  ArrayList<UUID>();
         PathPointSet currentPathPoints = currentPath.getPathPointSet();
-        PathPointSet restorePathPoints = pathToRestore.getPathPointSet();
         for (int i=0; i< currentPathPoints.getSize(); i++){
             AbstractPathPoint appt = currentPathPoints.get(i);
-            if (restorePathPoints.getIndex(appt)==-1){
-                UUID pathpointUuid = mapComponentToUUID.get(appt).get(0);
-                uuidList.add(pathpointUuid);
-                // Also remove appt from various maps
-                mapComponentToUUID.remove(appt);
-                mapUUIDToComponent.remove(pathpointUuid);
-                // remove computed points that depend on appt
-                if (MovingPathPoint.safeDownCast(appt) != null) {
-                    movingComponents.remove(appt);
-                }
-                // Find computed path points that depend on appt and remove them
-                
+            UUID pathpointUuid = mapComponentToUUID.get(appt).get(0);
+            uuidList.add(pathpointUuid);
+            // Also remove appt from various maps
+            mapComponentToUUID.remove(appt);
+            mapUUIDToComponent.remove(pathpointUuid);
+            // remove computed points that depend on appt
+            if (MovingPathPoint.safeDownCast(appt) != null) {
+               movingComponents.remove(appt);
             }
+            if (ConditionalPathPoint.safeDownCast(appt)!= null){
+                proxyPathPoints.remove(appt);
+            } 
+        }
+        if (pathsWithWrapping.get(currentPath)!=null){
+            String currentPathPathString= currentPath.getAbsolutePathString();
+            Set<UUID> compuedPptUUIDs = computedPathPoints.keySet();
+            ArrayList<UUID> toDelete = new ArrayList<UUID>();
+            for (UUID nextUuid:compuedPptUUIDs){
+                ComputedPathPointInfo cppi = computedPathPoints.get(nextUuid);
+                if (cppi.pt1.getOwner().getAbsolutePathString().equals(currentPathPathString) ||
+                        cppi.pt2.getOwner().getAbsolutePathString().equals(currentPathPathString))
+                    toDelete.add(nextUuid);
+            }
+            for (UUID toDeleteUuid:toDelete)
+                computedPathPoints.remove(toDeleteUuid);
+            
+            pathsWithWrapping.remove(currentPath);
         }
         // get uuid from pathList
         UUID pathUuid = pathList.get(currentPath);
+        uuidList.add(pathUuid);
+        return uuidList;
     }
     public boolean getPathPointDisplayStatus(GeometryPath musclePath){
         return pathDisplayStatus.get(musclePath);
@@ -1645,5 +1630,16 @@ public class ModelVisualizationJson extends JSONObject {
     public void setPathPointDisplayStatus(GeometryPath musclePath, boolean newState){
         pathDisplayStatus.put(musclePath, newState);
     }
-    
+    // Remove all visuals that maybe affected.
+    // Note that PathPoint to be deleted is still instact
+    private void removeGeometryPathVisuals(GeometryPath pathToRemove){
+        // Remove all PathPoints from Maps of Components->UUID
+        // Remove UUIDs in proxyPathPoints
+        // remove UUIDs in movingPathPoints
+        // remove UUIDs in computedPathPoints
+        // remove from PAthsWithWrapping
+        // remove from PathList
+        
+        
+    }
 }

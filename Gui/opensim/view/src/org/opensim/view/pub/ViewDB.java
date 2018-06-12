@@ -188,11 +188,26 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         }
     }
 
-    public void removePathDisplay(Model currentModel, GeometryPath currentPath, GeometryPath pathToRestore) {
-        ModelVisualizationJson modelVis = getInstance().getModelVisualizationJson(currentPath.getModel());
-        modelVis.removePathVisualization(currentPath, pathToRestore);
+    public void removePathDisplay(GeometryPath currentPath) {
+        if (websocketdb != null) {
+            ModelVisualizationJson modelVis = getInstance().getModelVisualizationJson(currentPath.getModel());
+            ArrayList<UUID> uuids2Remove = modelVis.removePathVisualization(currentPath);
+            // Create MuliCmd
+            JSONObject topMsg = new JSONObject();
+            JSONObject msgMulti = new JSONObject();
+            msgMulti.put("type", "MultiCmdsCommand");
+            topMsg.put("Op", "execute");
+            topMsg.put("command", msgMulti);
+            JSONArray commands = new JSONArray();
+            for (UUID uuid:uuids2Remove){
+                commands.add(modelVis.createRemoveObjectByUuidCommand(uuid, 
+                        UUID.fromString((String) modelVis.getModelGroundJson().get("uuid"))).get("command"));
+            }
+            msgMulti.put("cmds", commands);
+            websocketdb.broadcastMessageJson(topMsg, null);
+        }
     }
-   
+  
    class AppearanceChange {
        Model model;
        Component mc;

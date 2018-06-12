@@ -1618,11 +1618,12 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
         OpenSimObject pathObject =  objectWithPath.getPropertyByName("GeometryPath").getValueAsObject();
         GeometryPath gp = GeometryPath.safeDownCast(pathObject);
         // remove visualization before restore then recreate after to avoid complicated book-keeping
-        ViewDB.getInstance().removePathDisplay(currentModel, gp, GeometryPath.safeDownCast(savePath));
+        ViewDB.getInstance().removePathDisplay(gp);
         gp.assign(savePath);
         openSimContext.recreateSystemKeepStage();
         setupComponent(objectWithPath);
         //Muscle asm = Muscle.safeDownCast(objectWithPath);
+        //ModelVisualizationJson modelViz = ViewDB.getInstance().getModelVisualizationJson(currentModel);
         //updatePathDisplay(EditOperation.Refresh, -1);
    }
 }

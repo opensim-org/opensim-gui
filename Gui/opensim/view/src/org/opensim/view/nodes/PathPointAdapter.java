@@ -33,6 +33,7 @@ import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayDouble;
+import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
@@ -67,11 +68,16 @@ public class PathPointAdapter  {
     }
 
     public void setLocation(final Vec3 newLocation, boolean enableUndo) {
+        GeometryPath currentPath = GeometryPath.safeDownCast(pathpoint.getOwner());
+        boolean hasWrapping = currentPath.getWrapSet().getSize()>0;
         final Vec3 oldLocation = new Vec3(pathpoint.get_location());
         //System.out.println("oldLocation:"+oldLocation.get(1));
         pathpoint.set_location(newLocation);
         //System.out.println("newLocation:"+newLocation.get(1));
-        updateDisplay(); 
+        if (!hasWrapping)
+            updateDisplay(); 
+        else
+            ;//ViewDB.getInstance().getModelVisualizationJson(model).
         if (enableUndo){
              AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
                public void undo() throws CannotUndoException {
