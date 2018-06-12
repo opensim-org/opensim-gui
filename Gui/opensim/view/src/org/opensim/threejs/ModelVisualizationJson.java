@@ -151,6 +151,7 @@ public class ModelVisualizationJson extends JSONObject {
     // Preferences
     private double prefMuscleDisplayRadius=0.005;
     private int NUM_PATHPOINTS_PER_WRAP_OBJECT=8;
+    private double PATHPOINT_SCALEUP=1.5;
     
     public Boolean getFrameVisibility(Frame b) {
         return visualizerFrames.get(b).visible;
@@ -267,7 +268,10 @@ public class ModelVisualizationJson extends JSONObject {
         Preferences.userNodeForPackage(TheApp.class).put("Muscle Display Radius", currentSize);
         prefMuscleDisplayRadius = Double.parseDouble(currentSize);
         actualMuscleDisplayRadius = 8*200*prefMuscleDisplayRadius;
-        
+        saved = "1.5";
+        currentSize= Preferences.userNodeForPackage(TheApp.class).get("PathPoint Scaleup", saved);
+        Preferences.userNodeForPackage(TheApp.class).put("PathPoint Scaleup", currentSize);
+        PATHPOINT_SCALEUP = Double.parseDouble(currentSize);
         createJsonForModel(model);
         ready = true;
         if (verbose)
@@ -304,7 +308,7 @@ public class ModelVisualizationJson extends JSONObject {
         // Create material for PathPoints, Markers
         markerMatUUID= createMarkerMaterial(mdh);
         pathPointGeometryJSON = createPathPointGeometryJSON(1.0);
-        editablePathPointGeometryJSON = createPathPointGeometryJSON(1.5);
+        editablePathPointGeometryJSON = createPathPointGeometryJSON(PATHPOINT_SCALEUP);
         dgimp = new DecorativeGeometryImplementationJS(json_geometries, json_materials, visScaleFactor);
         while (!mcIter.equals(mcList.end())) {
             Component comp = mcIter.__deref__();
