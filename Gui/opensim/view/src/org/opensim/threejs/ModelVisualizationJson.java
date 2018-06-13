@@ -1015,7 +1015,7 @@ public class ModelVisualizationJson extends JSONObject {
             Vec3 location = computePointLocationFromNeighbors(lastPathPoint, mapBodyIndicesToFrames.get(0), currentPathPoint, ratio);
             JSONObject bpptInBodyJson =createPathPointObjectJson(null, "", false, location, matuuid.toString(), false);
             UUID ppt_uuid = UUID.fromString((String) bpptInBodyJson.get("uuid"));
-            computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(lastPathPoint, currentPathPoint, ratio));
+            computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(lastPathPoint, currentPathPoint, .99));
             children.add(bpptInBodyJson);
             points.add(ppt_uuid.toString());
             activeState.add(false);
@@ -1459,8 +1459,8 @@ public class ModelVisualizationJson extends JSONObject {
                                 pathpoint_jsonArr.add(ppt_uuid.toString());
                                 pathpointActive_jsonArr.add(false);
                                 wrapPointUUIDs.add(ppt_uuid);
-                                computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(firstPoint, secondPoint, step*(j+1)));
                                 // Also create a computed ppt for use when wrapping is inactive
+                                computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(firstPoint, secondPoint, 0.99));
                                 
                             }
                             wrapPathPoints.put(pathWrapPoint, wrapPointUUIDs);
