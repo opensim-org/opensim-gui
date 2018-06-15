@@ -35,8 +35,12 @@ import javax.swing.Action;
 import javax.swing.ImageIcon;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
+import org.opensim.modeling.Body;
 import org.opensim.modeling.Component;
+import org.opensim.modeling.ComponentIterator;
+import org.opensim.modeling.ComponentsList;
 import org.opensim.modeling.CustomJoint;
+import org.opensim.modeling.Frame;
 import org.opensim.modeling.Joint;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.SpatialTransform;
@@ -55,6 +59,7 @@ public class OneJointNode extends OneModelComponentNode {
         super(jnt);
         comp = Component.safeDownCast(jnt);
         Joint joint = Joint.safeDownCast(jnt);
+        
         CustomJoint cj = CustomJoint.safeDownCast(joint);
         if (cj != null) {
             SpatialTransform spt = cj.getSpatialTransform();
@@ -64,6 +69,24 @@ public class OneJointNode extends OneModelComponentNode {
             }
         } else {
             setChildren(Children.LEAF);
+        }
+        createFrameNodes(getChildren());
+    }
+    /* Utility function to create child nodes for descendent frames
+    */
+    protected void createFrameNodes(Children children) {
+        // Find Frames and make nodes for them (PhysicalOffsetFrames)
+        ComponentsList descendents = comp.getComponentsList();
+        ComponentIterator compIter = descendents.begin();
+        while (!compIter.equals(descendents.end())) {
+            Frame frame = Frame.safeDownCast(compIter.__deref__());
+            if (frame != null && Body.safeDownCast(frame)==null) {
+                OneFrameNode node = new OneFrameNode(frame);
+                Node[] arrNodes = new Node[1];
+                arrNodes[0] = node;
+                children.add(arrNodes);
+            }
+            compIter.next();
         }
     }
 

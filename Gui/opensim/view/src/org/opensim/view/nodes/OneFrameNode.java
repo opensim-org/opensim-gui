@@ -143,13 +143,11 @@ public class OneFrameNode extends OneModelComponentNode {
     */
     protected void createFrameNodes(Children children) {
         // Find Frames and make nodes for them (PhysicalOffsetFrames)
-        ComponentsList descendents = frame.getModel().getComponentsList();
+        ComponentsList descendents = frame.getComponentsList();
         ComponentIterator compIter = descendents.begin();
         while (!compIter.equals(descendents.end())) {
             Frame frame = Frame.safeDownCast(compIter.__deref__());
-            if (Body.safeDownCast(frame)==null &&
-                    frame != null && !frame.equals(comp)
-                    && frame.findBaseFrame().equals(comp)) {
+            if (Body.safeDownCast(frame)==null && frame !=null) {
                 OneFrameNode node = new OneFrameNode(frame);
                 Node[] arrNodes = new Node[1];
                 arrNodes[0] = node;
@@ -179,7 +177,6 @@ public class OneFrameNode extends OneModelComponentNode {
     }
     
     public String getRotationString() {
-        Frame frame = Frame.safeDownCast(comp);
         PhysicalOffsetFrame offsetFrame = PhysicalOffsetFrame.safeDownCast(frame);
         Transform transform = offsetFrame.getOffsetTransform();
         String rotationVec3AsString = transform.R().convertRotationToBodyFixedXYZ().toString();
