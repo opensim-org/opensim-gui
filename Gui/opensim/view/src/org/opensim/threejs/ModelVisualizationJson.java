@@ -1121,8 +1121,10 @@ public class ModelVisualizationJson extends JSONObject {
                     pathpointInfo.pt2 = currentPath.getPathPointSet().get(index+1);
                 }
             }
+            JSONArray pathpoint_jsonArr = pathsWithWrapping.get(currentPath);
             for (UUID delPpoint : toDelete) {
                 computedPathPoints.remove(delPpoint);
+                pathpoint_jsonArr.remove(delPpoint.toString());
             }
             // Need to create new computedPathpoints across removed point
         }
