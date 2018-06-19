@@ -1126,7 +1126,9 @@ public class ModelVisualizationJson extends JSONObject {
                 computedPathPoints.remove(delPpoint);
                 pathpoint_jsonArr.remove(delPpoint.toString());
             }
-            // Need to create new computedPathpoints across removed point
+            // Remove pathpoint being deleted from cached uuids
+            pathpoint_jsonArr.remove(appoint_uuid.toString());
+            
         }
         
     }
@@ -1553,26 +1555,8 @@ public class ModelVisualizationJson extends JSONObject {
                 }
             }
             else {
-                // Get cached Array of pathpoints, and remove points
+                // Get cached Array of pathpoints and send it over
                 pathpoint_jsonArr = pathsWithWrapping.get(path);
-                int deleteFrom=0;
-                int deleteTo = pathpoint_jsonArr.size()-1;
-                if (atIndex==0){
-                    UUID deleteToUUID = mapComponentToUUID.get(path.getPathPointSet().get(1)).get(0);
-                    deleteTo = pathpoint_jsonArr.indexOf(deleteToUUID.toString())-1;
-                }
-                else if (atIndex == path.getPathPointSet().getSize()-1){
-                    UUID deleteFromUUID = mapComponentToUUID.get(path.getPathPointSet().get(path.getPathPointSet().getSize()-2)).get(0);
-                    deleteFrom = pathpoint_jsonArr.indexOf(deleteFromUUID.toString())+1;
-                }
-                else { // remove something from middle
-                    UUID deleteFromUUID = mapComponentToUUID.get(path.getPathPointSet().get(atIndex-1)).get(0);
-                    deleteFrom = pathpoint_jsonArr.indexOf(deleteFromUUID.toString())+1;
-                    deleteTo = deleteFrom+NUM_PATHPOINTS_PER_WRAP_OBJECT*path.getWrapSet().getSize();
-                }
-                for (int i = deleteTo; i >= deleteFrom; i--) {
-                   pathpoint_jsonArr.remove(i);
-                }
             }
             topJson.put("points", pathpoint_jsonArr);
             topJson.put("SubOperation", "delete");
