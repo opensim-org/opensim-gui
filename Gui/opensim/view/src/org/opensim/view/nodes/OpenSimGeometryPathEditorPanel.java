@@ -1604,6 +1604,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
 
     private void updatePathDisplay(org.opensim.view.nodes.OpenSimGeometryPathEditorPanel.EditOperation par0, int atIndex) {
         ViewDB.getInstance().updatePathDisplay(currentModel, currentPath, par0.ordinal(), atIndex);
+        ViewDB.getInstance().updateModelDisplay(currentModel);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
