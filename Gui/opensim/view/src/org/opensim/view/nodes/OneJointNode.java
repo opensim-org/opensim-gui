@@ -67,10 +67,11 @@ public class OneJointNode extends OneModelComponentNode {
                 TransformAxis ta = spt.getTransformAxis(i);
                 getChildren().add(new Node[]{new OneDofNode(ta)});
             }
-        } else {
+        } 
+        OpenSimNodeHelper.createFrameNodes(getChildren(), comp);
+        if (getChildren().getNodesCount()==0) {
             setChildren(Children.LEAF);
         }
-        OpenSimNodeHelper.createFrameNodes(getChildren(), comp);
     }
 
     public Image getIcon(int i) {
