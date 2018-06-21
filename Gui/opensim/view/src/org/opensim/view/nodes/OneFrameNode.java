@@ -139,23 +139,7 @@ public class OneFrameNode extends OneModelComponentNode {
         }
         return retActions;
     }
-    /* Utility function to create child nodes for descendent frames
-    */
-    protected void createFrameNodes(Children children) {
-        // Find Frames and make nodes for them (PhysicalOffsetFrames)
-        ComponentsList descendents = frame.getComponentsList();
-        ComponentIterator compIter = descendents.begin();
-        while (!compIter.equals(descendents.end())) {
-            Frame frame = Frame.safeDownCast(compIter.__deref__());
-            if (Body.safeDownCast(frame)==null && frame !=null) {
-                OneFrameNode node = new OneFrameNode(frame);
-                Node[] arrNodes = new Node[1];
-                arrNodes[0] = node;
-                children.add(arrNodes);
-            }
-            compIter.next();
-        }
-    }
+
     public String getTranslationString() {
         Frame frame = Frame.safeDownCast(comp);
         PhysicalOffsetFrame offsetFrame = PhysicalOffsetFrame.safeDownCast(frame);

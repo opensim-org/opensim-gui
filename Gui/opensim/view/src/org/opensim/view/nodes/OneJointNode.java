@@ -70,24 +70,7 @@ public class OneJointNode extends OneModelComponentNode {
         } else {
             setChildren(Children.LEAF);
         }
-        createFrameNodes(getChildren());
-    }
-    /* Utility function to create child nodes for descendent frames
-    */
-    protected void createFrameNodes(Children children) {
-        // Find Frames and make nodes for them (PhysicalOffsetFrames)
-        ComponentsList descendents = comp.getComponentsList();
-        ComponentIterator compIter = descendents.begin();
-        while (!compIter.equals(descendents.end())) {
-            Frame frame = Frame.safeDownCast(compIter.__deref__());
-            if (frame != null && Body.safeDownCast(frame)==null) {
-                OneFrameNode node = new OneFrameNode(frame);
-                Node[] arrNodes = new Node[1];
-                arrNodes[0] = node;
-                children.add(arrNodes);
-            }
-            compIter.next();
-        }
+        OpenSimNodeHelper.createFrameNodes(getChildren(), comp);
     }
 
     public Image getIcon(int i) {
