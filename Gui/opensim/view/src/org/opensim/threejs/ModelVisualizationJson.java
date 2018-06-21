@@ -1015,7 +1015,7 @@ public class ModelVisualizationJson extends JSONObject {
             Vec3 location = computePointLocationFromNeighbors(lastPathPoint, mapBodyIndicesToFrames.get(0), currentPathPoint, ratio);
             JSONObject bpptInBodyJson =createPathPointObjectJson(null, "", false, location, matuuid.toString(), false);
             UUID ppt_uuid = UUID.fromString((String) bpptInBodyJson.get("uuid"));
-            computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(lastPathPoint, currentPathPoint, ratio));
+            computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(lastPathPoint, currentPathPoint, .99));
             children.add(bpptInBodyJson);
             points.add(ppt_uuid.toString());
             activeState.add(false);
@@ -1105,28 +1105,32 @@ public class ModelVisualizationJson extends JSONObject {
         else if (MovingPathPoint.safeDownCast(appoint)!=null){
             movingComponents.remove(appoint);
         }
-        if (hasWrapping){
-            ViewDB.getInstance().removePathDisplay(currentPath);  
-            // recreate PathVisuals     
-        }
-            
-        /*
+        if (hasWrapping) {
         // If deleted point was used in wrapping, update accordingly
-        if (index==0 || index ==currentPath.getPathPointSet().getSize()-1){
+            int pathNoWrapLength = currentPath.getPathPointSet().getSize();
             // remove computed points that depends on appoint
             Set<UUID> computedPointsInfo = computedPathPoints.keySet();
             ArrayList<UUID> toDelete = new ArrayList<UUID>();
-            for (UUID pathpointUuid:computedPointsInfo){
+            for (UUID pathpointUuid : computedPointsInfo) {
                 ComputedPathPointInfo pathpointInfo = computedPathPoints.get(pathpointUuid);
-                if (pathpointInfo.pt1.equals(appoint) || pathpointInfo.pt2.equals(appoint)){
+                if (pathpointInfo.pt1.equals(appoint) || (pathpointInfo.pt2.equals(appoint) && index==pathNoWrapLength-1)) {
                     toDelete.add(pathpointUuid);
                 }
+                else if (pathpointInfo.pt2.equals(appoint)){
+                    // replace pathpointInfo.pt2 by next point in path
+                    pathpointInfo.pt2 = currentPath.getPathPointSet().get(index+1);
+                }
             }
-            for (UUID delPpoint:toDelete){
+            JSONArray pathpoint_jsonArr = pathsWithWrapping.get(currentPath);
+            for (UUID delPpoint : toDelete) {
                 computedPathPoints.remove(delPpoint);
+                pathpoint_jsonArr.remove(delPpoint.toString());
             }
+            // Remove pathpoint being deleted from cached uuids
+            pathpoint_jsonArr.remove(appoint_uuid.toString());
+            
         }
-        */
+        
     }
     
     // Get UUID corresponding to first PathPoint used by the passed in GeometryPath
@@ -1391,23 +1395,25 @@ public class ModelVisualizationJson extends JSONObject {
         // This includes inactive ConditionalPoints but no Wrapping
         int numWrapObjects = path.getWrapSet().getSize();
         final PathPointSet pathPointSetNoWrap = path.getPathPointSet();
-        // Every segment will now contain 2 wrappoints per WrapObject that will stay inActive until needed
-        //int numSegments = (pathPointSetNoWrap.getSize()-1)*(1+2*numWrapObjects); 
+        
         json_geometries.add(pathGeomJson);
         JSONArray pathpoint_jsonArr = new JSONArray();
         JSONArray pathpointActive_jsonArr = new JSONArray();
-        boolean hasWrapping = (numWrapObjects > 0);
-        ArrayPathPoint actualPath = path.getCurrentPath(state);
-        AbstractPathPoint firstPoint = pathPointSetNoWrap.get(0);
         // Keep track of First path point so that when changing color we can propagate to all path points, since they share material
         // Also so that when adding pathpoints due to wrapping, we can get proper/shared material
         mapGeometryPathToPathPointMaterialUUID.put(path, pathpt_mat_uuid);
-        // Create viz for firstPoint
+        // Create viz for currentPoint
+        int i=0;
+        AbstractPathPoint firstPoint = pathPointSetNoWrap.get(i);
         UUID pathpoint_uuid = addPathPointObjectToParent(firstPoint, pathpt_mat_uuid.toString(), false);
-        pathpoint_jsonArr.add(pathpoint_uuid.toString());
         pathpointActive_jsonArr.add(true);
         addComponentToUUIDMap(firstPoint, pathpoint_uuid);
-        int firstIndex = 0; // by construction
+        pathpoint_jsonArr.add(pathpoint_uuid.toString());
+        // create visuals for pathPointSetNoWrap
+         int firstIndex = 0; // by construction
+       
+        boolean hasWrapping = (numWrapObjects > 0);
+        ArrayPathPoint actualPath = path.getCurrentPath(state);
         int numIntermediatePoints = NUM_PATHPOINTS_PER_WRAP_OBJECT * numWrapObjects;
         for (int ppointSetIndex=1; ppointSetIndex < pathPointSetNoWrap.getSize(); ppointSetIndex++) {
             // Consider the segment between pathPointSetNoWrap[ppointSetIndex], ppointSetIndex+1
@@ -1418,7 +1424,7 @@ public class ModelVisualizationJson extends JSONObject {
             //different scenarios depending on whether and where we find 
             if (secondIndex == firstIndex+1 || (firstIndex ==-1 && secondIndex!=-1)){
                 // Normal segment 
-                // create numIntermediatePoints between firstPoint and secondPoint
+                // create numIntermediatePoints between currentPoint and secondPoint
                 if (numWrapObjects > 0)
                     createComputedPathPoints(numIntermediatePoints, firstPoint, secondPoint, pathpoint_jsonArr, pathpointActive_jsonArr);
             }
@@ -1464,8 +1470,8 @@ public class ModelVisualizationJson extends JSONObject {
                                 pathpoint_jsonArr.add(ppt_uuid.toString());
                                 pathpointActive_jsonArr.add(false);
                                 wrapPointUUIDs.add(ppt_uuid);
-                                computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(firstPoint, secondPoint, step*(j+1)));
                                 // Also create a computed ppt for use when wrapping is inactive
+                                computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(firstPoint, secondPoint, 0.99));
                                 
                             }
                             wrapPathPoints.put(pathWrapPoint, wrapPointUUIDs);
@@ -1529,20 +1535,28 @@ public class ModelVisualizationJson extends JSONObject {
     public JSONObject createPathUpdateJson(GeometryPath path, int typeOfEdit, int atIndex) {
         JSONObject topJson = new JSONObject();
         UUID pathUuid = pathList.get(path);
+        topJson.put("message_uuid", UUID.randomUUID().toString());
         topJson.put("Op", "PathOperation");
         topJson.put("uuid", pathUuid.toString());
         UUID pathpointMatUUID = mapGeometryPathToPathPointMaterialUUID.get(path);
         //
         // send only pathpoint uuids
         if (typeOfEdit == 2) {
-            JSONArray pathpoint_jsonArr = new JSONArray();
-            for (int i = 0; i < path.getPathPointSet().getSize(); i++) {
-                AbstractPathPoint pathPoint = path.getPathPointSet().get(i);
-                ArrayList<UUID> vis_uuidList = mapComponentToUUID.get(pathPoint);
-                if (vis_uuidList != null){ // If point is being deleted, it's removed from map first
-                    UUID pathpoint_uuid = mapComponentToUUID.get(pathPoint).get(0);
-                    pathpoint_jsonArr.add(pathpoint_uuid.toString());
+            JSONArray pathpoint_jsonArr;
+            if (path.getWrapSet().getSize()==0){
+                pathpoint_jsonArr = new JSONArray();
+                for (int i = 0; i < path.getPathPointSet().getSize(); i++) {
+                    AbstractPathPoint pathPoint = path.getPathPointSet().get(i);
+                    ArrayList<UUID> vis_uuidList = mapComponentToUUID.get(pathPoint);
+                    if (vis_uuidList != null) { // If point is being deleted, it's removed from map first
+                        UUID pathpoint_uuid = mapComponentToUUID.get(pathPoint).get(0);
+                        pathpoint_jsonArr.add(pathpoint_uuid.toString());
+                    }
                 }
+            }
+            else {
+                // Get cached Array of pathpoints and send it over
+                pathpoint_jsonArr = pathsWithWrapping.get(path);
             }
             topJson.put("points", pathpoint_jsonArr);
             topJson.put("SubOperation", "delete");
@@ -1634,16 +1648,5 @@ public class ModelVisualizationJson extends JSONObject {
     public void setPathPointDisplayStatus(GeometryPath musclePath, boolean newState){
         pathDisplayStatus.put(musclePath, newState);
     }
-    // Remove all visuals that maybe affected.
-    // Note that PathPoint to be deleted is still instact
-    private void removeGeometryPathVisuals(GeometryPath pathToRemove){
-        // Remove all PathPoints from Maps of Components->UUID
-        // Remove UUIDs in proxyPathPoints
-        // remove UUIDs in movingPathPoints
-        // remove UUIDs in computedPathPoints
-        // remove from PAthsWithWrapping
-        // remove from PathList
-        
-        
-    }
+
 }
