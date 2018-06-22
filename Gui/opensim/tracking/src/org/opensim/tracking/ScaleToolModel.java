@@ -343,6 +343,8 @@ public class ScaleToolModel extends Observable implements Observer {
          }
          
          if(getMarkerPlacerEnabled()) {
+             if (processedModelContext==null)
+                 processedModelContext = OpenSimDB.getInstance().createContext(unscaledModel, false);
             // Pass empty path as path to subject, since we already have the static trial as an absolute path
             if(!processedModelContext.processModelMarkerPlacer(scaleTool.getMarkerPlacer(), processedModel, "")) {
                result = false;
