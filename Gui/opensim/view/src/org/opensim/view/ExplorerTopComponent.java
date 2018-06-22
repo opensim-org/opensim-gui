@@ -31,6 +31,7 @@ import java.io.Serializable;
 import java.lang.Object;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
 import java.util.Vector;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
@@ -86,6 +87,7 @@ final public class ExplorerTopComponent extends TopComponent
    private final ExplorerManager manager = new ExplorerManager();
    private final BeanTreeView modelTree = new BeanTreeView();
    
+   private static TopComponent visualizerTC = null;
    private UndoRedo.Manager undoRedoManager = new UndoRedoManager();
 
    private ExplorerTopComponent() {
@@ -533,7 +535,7 @@ final public class ExplorerTopComponent extends TopComponent
         public static void addUndoableEdit(AbstractUndoableEdit aUndoableEdit)
         {
             getDefault().getUndoRedoManager().addEdit(aUndoableEdit);
-            TopComponent tc = ViewDB.getCurrentModelWindow();
+            TopComponent tc = getVisualizerTopComponent();
             if (tc==null){ // No gfx window
                 tc = getDefault();
             } 
@@ -555,5 +557,16 @@ final public class ExplorerTopComponent extends TopComponent
         public static void addFinalEdit()
         {
             getDefault().getUndoRedoManager().discardAllEdits();
+        }
+        private static TopComponent getVisualizerTopComponent() {
+            if (visualizerTC == null){
+                Set<TopComponent> stc = TopComponent.getRegistry().getOpened();
+                for (TopComponent tc:stc){
+                    if (tc.getName()!= null && tc.getName().startsWith("Visualizer")) {
+                        visualizerTC = tc;
+                    }
+                }
+            }
+            return visualizerTC;
         }
 }
