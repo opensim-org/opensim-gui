@@ -31,6 +31,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Observer;
 import java.util.Set;
+import java.util.UUID;
 import org.json.simple.JSONObject;
 
 /**
@@ -78,6 +79,8 @@ public class WebSocketDB {
     
     public void broadcastMessageJson(JSONObject msg, VisWebSocket specificSocket)
     {
+        // Every time we broadcast a message will give it uuid so clients can check for duplicates
+        msg.put("message_uuid", UUID.randomUUID().toString());
         //System.out.println("Broadcast:"+msg.get("Op"));
         if (specificSocket != null){
             specificSocket.sendVisualizerMessage(msg);
