@@ -237,7 +237,7 @@ public class ModelVisualizationJson extends JSONObject {
         
         UUID pathpointmat_uuid =mapGeometryPathToPathPointMaterialUUID.get(path);
         UUID pathmat_uuid = pathMaterials.get(path);
-        
+        boolean pointsVisible = pathDisplayStatus.get(path);
         // Create plain Geometry with vertices at PathPoints it will have 0 vertices
         // but will be populated live in the visualizer from the Pathppoints
         JSONObject pathGeomJson = new JSONObject();
@@ -252,7 +252,7 @@ public class ModelVisualizationJson extends JSONObject {
         // Create viz for currentPoint
         int i=0;
         AbstractPathPoint firstPoint = pathPointSetNoWrap.get(i);
-        JSONObject pointJson = createPathPointObjectJson(firstPoint, firstPoint.getName(), true, null, pathpointmat_uuid.toString(), true);
+        JSONObject pointJson = createPathPointObjectJson(firstPoint, firstPoint.getName(), true, null, pathpointmat_uuid.toString(), pointsVisible);
         addParentUuid(firstPoint, pointJson);
         pathpoint_jsonArr.add(pointJson);
         // create visuals for pathPointSetNoWrap
@@ -279,7 +279,7 @@ public class ModelVisualizationJson extends JSONObject {
                 //System.out.println("Not found in path, ppt:"+secondPoint.getName());
                 Vec3 computedLocation = computePathPointLocation(secondIndex, pathPointSetNoWrap);
                 JSONObject bpptInBodyJson = createPathPointObjectJson(cpp, "", false, computedLocation, 
-                        pathpointmat_uuid.toString(), true);
+                        pathpointmat_uuid.toString(), pointsVisible);
                 addParentUuid(cpp, bpptInBodyJson);
                 pointAdded = true;
                 pathpoint_jsonArr.add(bpptInBodyJson);
@@ -329,7 +329,7 @@ public class ModelVisualizationJson extends JSONObject {
             // Create viz for secondPoint
             if (!pointAdded){
                 JSONObject bpptInBodyJson = createPathPointObjectJson(secondPoint, secondPoint.getName(), true, null, 
-                        pathpointmat_uuid.toString(), true);
+                        pathpointmat_uuid.toString(), pointsVisible);
                 addParentUuid(secondPoint, bpptInBodyJson);
                 UUID pathpoint_uuid = retrieveUuidFromJson(bpptInBodyJson);
                 pathpoint_jsonArr.add(bpptInBodyJson);
