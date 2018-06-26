@@ -1629,6 +1629,6 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
         setupComponent(objectWithPath);
         //Muscle asm = Muscle.safeDownCast(objectWithPath);
         ModelVisualizationJson modelViz = ViewDB.getInstance().getModelVisualizationJson(currentModel);
-        updatePathDisplay(EditOperation.Recreate, -1);
+        ViewDB.getInstance().updatePathDisplay(currentModel, gp, EditOperation.Recreate.ordinal(), -1);
    }
 }

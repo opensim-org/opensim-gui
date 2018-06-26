@@ -332,7 +332,7 @@ public class ModelVisualizationJson extends JSONObject {
                         pathpointmat_uuid.toString(), true);
                 addParentUuid(secondPoint, bpptInBodyJson);
                 UUID pathpoint_uuid = retrieveUuidFromJson(bpptInBodyJson);
-                pathpoint_jsonArr.add(pathpoint_uuid.toString());
+                pathpoint_jsonArr.add(bpptInBodyJson);
                 addComponentToUUIDMap(secondPoint, pathpoint_uuid);
             }
             if (MovingPathPoint.safeDownCast(secondPoint) != null) {
@@ -356,13 +356,15 @@ public class ModelVisualizationJson extends JSONObject {
         obj_json.put("opensimType", "Path");
         // Create json entry for material (path_material) and set skinning to true
         obj_json.put("material", pathmat_uuid.toString());
+        obj_json.put("PathGeometry",pathGeomJson);
+        obj_json.put("ground", retrieveUuidFromJson(modelGroundJson).toString());
         return obj_json;
     }
 
     private void addParentUuid(AbstractPathPoint firstPoint, JSONObject pointJson) {
         PhysicalFrame bodyFrame = firstPoint.getBody();
         JSONObject bodyJson = mapBodyIndicesToJson.get(bodyFrame.getMobilizedBodyIndex());
-        pointJson.put("parent", retrieveUuidFromJson(bodyJson));
+        pointJson.put("parent", bodyJson.get("uuid"));
         addComponentToUUIDMap(firstPoint, retrieveUuidFromJson(pointJson));
     }
 
@@ -1680,7 +1682,6 @@ public class ModelVisualizationJson extends JSONObject {
     public JSONObject createPathUpdateJson(GeometryPath path, int typeOfEdit, int atIndex) {
         JSONObject topJson = new JSONObject();
         UUID pathUuid = pathList.get(path);
-        topJson.put("message_uuid", UUID.randomUUID().toString());
         topJson.put("Op", "PathOperation");
         topJson.put("uuid", pathUuid.toString());
         UUID pathpointMatUUID = mapGeometryPathToPathPointMaterialUUID.get(path);
@@ -1752,8 +1753,8 @@ public class ModelVisualizationJson extends JSONObject {
             // rathen than built into the scenegraph as done on construction
             topJson.put("SubOperation", "recreate");
             JSONArray pathpoint_jsonArr = new JSONArray();
-            createPathVisualization(path, pathUuid, pathpoint_jsonArr);
-            topJson.put("points", pathpoint_jsonArr);
+            JSONObject pathVis = createPathVisualization(path, pathUuid, pathpoint_jsonArr);
+            topJson.put("pathSpec", pathVis);
             
         }
        return topJson;
