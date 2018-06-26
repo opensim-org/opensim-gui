@@ -190,6 +190,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
 
     public void removePathDisplay(GeometryPath currentPath) {
         if (websocketdb != null) {
+            togglePathPointDisplay(Muscle.safeDownCast(currentPath.getOwner()), false);
             ModelVisualizationJson modelVis = getInstance().getModelVisualizationJson(currentPath.getModel());
             ArrayList<UUID> uuids2Remove = modelVis.removePathVisualization(currentPath);
             // Create MuliCmd
