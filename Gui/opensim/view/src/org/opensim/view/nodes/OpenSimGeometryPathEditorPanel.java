@@ -99,7 +99,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
    private final Model currentModel;
    private OpenSimObject objectWithPath = null; // the actuator that is currently shown in the Muscle Editor window
    private final OpenSimObject savePath;
-   private final GeometryPath currentPath;
+   private GeometryPath currentPath;
    private HashMap<String, WrapObject> mapNameToWrapObject = new HashMap<String, WrapObject>();
    
    private JButton RestoreButton;
@@ -1625,6 +1625,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
         // remove visualization before restore then recreate after to avoid complicated book-keeping
         ViewDB.getInstance().removePathDisplay(gp);
         gp.assign(savePath);
+        currentPath = gp;
         openSimContext.recreateSystemKeepStage();
         setupComponent(objectWithPath);
         //Muscle asm = Muscle.safeDownCast(objectWithPath);
