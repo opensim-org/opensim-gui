@@ -190,6 +190,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
 
     public void removePathDisplay(GeometryPath currentPath) {
         if (websocketdb != null) {
+            togglePathPointDisplay(Muscle.safeDownCast(currentPath.getOwner()), false);
             ModelVisualizationJson modelVis = getInstance().getModelVisualizationJson(currentPath.getModel());
             ArrayList<UUID> uuids2Remove = modelVis.removePathVisualization(currentPath);
             // Create MuliCmd
@@ -1025,6 +1026,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       boolean modified = false;
       for(int i=selectedObjects.size()-1; i>=0; i--) {
          Model ownerModel = selectedObjects.get(i).getOwnerModel();
+         if (ownerModel==null){ // Ophan'd component, just remove and continue
+             selectedObjects.remove(i);
+             continue;
+         }
          if(Model.getCPtr(model) == Model.getCPtr(ownerModel)) {
             markSelected(selectedObjects.get(i), false, false, false);
             selectedObjects.remove(i);
