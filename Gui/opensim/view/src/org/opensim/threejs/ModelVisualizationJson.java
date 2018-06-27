@@ -285,7 +285,7 @@ public class ModelVisualizationJson extends JSONObject {
                 pathpoint_jsonArr.add(bpptInBodyJson);
                 UUID cppUuid = retrieveUuidFromJson(bpptInBodyJson);
                 addComponentToUUIDMap(cpp, cppUuid);
-                pathpoint_jsonArr.add(cppUuid.toString());
+                //pathpoint_jsonArr.add(cppUuid.toString());
                 firstIndex = secondIndex;
                 firstPoint = secondPoint;            
             }
@@ -336,11 +336,11 @@ public class ModelVisualizationJson extends JSONObject {
                 UUID pathpoint_uuid = retrieveUuidFromJson(bpptInBodyJson);
                 pathpoint_jsonArr.add(bpptInBodyJson);
                 addComponentToUUIDMap(secondPoint, pathpoint_uuid);
-            }
-            if (MovingPathPoint.safeDownCast(secondPoint) != null) {
-                //movingComponents.put(secondPoint, pathpoint_uuid);
-                //System.out.println("Process Moving Path point "+pathPoint.getName());
-            }
+                if (MovingPathPoint.safeDownCast(secondPoint) != null) {
+                    movingComponents.put(secondPoint, pathpoint_uuid);
+                    //System.out.println("Process Moving Path point "+pathPoint.getName());
+                }
+           }
 
             firstIndex = secondIndex;
             firstPoint = secondPoint;
