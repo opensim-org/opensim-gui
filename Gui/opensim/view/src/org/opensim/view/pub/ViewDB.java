@@ -378,9 +378,12 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       //if (!isVtkGraphicsAvailable()) return;
       if (arg instanceof JSONObject){
           handleJson((JSONObject) arg);
+          return;
       }
       if (o instanceof VisWebSocket){
           // Sync. socket with current ViweDB
+          if (arg != null && arg instanceof JSONObject)
+              return; // info message. no need to sync again
           getInstance().sync((VisWebSocket) o);
           if (currentJson==null)
               setCurrentJson();
