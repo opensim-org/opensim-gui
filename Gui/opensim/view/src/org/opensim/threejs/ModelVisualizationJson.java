@@ -272,7 +272,7 @@ public class ModelVisualizationJson extends JSONObject {
                 // Normal segment 
                 // create numIntermediatePoints between currentPoint and secondPoint
                 if (numWrapObjects > 0)
-                    ;//createComputedPathPoints(numIntermediatePoints, firstPoint, secondPoint, pathpoint_jsonArr, pathpointActive_jsonArr);
+                    createComputedPathPoints(numIntermediatePoints, firstPoint, secondPoint, pathpoint_jsonArr, null);
             }
             else if (secondIndex == -1){ // Conditional Path point that's inactive
                 ConditionalPathPoint cpp = ConditionalPathPoint.safeDownCast(secondPoint);
@@ -290,7 +290,7 @@ public class ModelVisualizationJson extends JSONObject {
                 firstPoint = secondPoint;            
             }
             else { // Wrapping encountered
-                /*
+                
                 for (int wrappointIndex = firstIndex + 1; wrappointIndex < secondIndex; wrappointIndex++) {
                     AbstractPathPoint nextPathPoint = actualPath.get(wrappointIndex);
                     PathWrapPoint pathWrapPoint = PathWrapPoint.safeDownCast(nextPathPoint);
@@ -307,16 +307,18 @@ public class ModelVisualizationJson extends JSONObject {
                             indicesToUse[NUM_PATHPOINTS_PER_WRAP_OBJECT-1]=size-1;
                             double step = 1.0/(indicesToUse.length+1.0);
                             JSONObject bodyJson = mapBodyIndicesToJson.get(0); // These points live in Ground
-                            JSONArray children = (JSONArray) bodyJson.get("children");
+                            //JSONArray children = (JSONArray) bodyJson.get("children");
                             ArrayList<UUID> wrapPointUUIDs = new ArrayList<UUID>();
                             for (int j = 0; j < indicesToUse.length; j++) {
                                 Vec3 globalLocation = wrapPtsFrame.findStationLocationInAnotherFrame(state, pathwrap.get(indicesToUse[j]), mapBodyIndicesToFrames.get(0));
-                                JSONObject bpptInBodyJson = createPathPointObjectJson(null, "", false, globalLocation, pathpt_mat_uuid.toString(), false);
+                                JSONObject bpptInBodyJson = createPathPointObjectJson(null, "", false, globalLocation, pathpointmat_uuid.toString(), false);
                                 UUID ppt_uuid = UUID.fromString((String) bpptInBodyJson.get("uuid"));
-                                children.add(bpptInBodyJson);
-                                pathpoint_jsonArr.add(ppt_uuid.toString());
-                                pathpointActive_jsonArr.add(false);
+                                bpptInBodyJson.put("parent", retrieveUuidFromJson(modelGroundJson).toString());
+                                //children.add(bpptInBodyJson);
+                                //pathpoint_jsonArr.add(ppt_uuid.toString());
+                                pathpoint_jsonArr.add(bpptInBodyJson);
                                 wrapPointUUIDs.add(ppt_uuid);
+                                
                                 // Also create a computed ppt for use when wrapping is inactive
                                 computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(firstPoint, secondPoint, 0.99));
                                 
@@ -324,7 +326,7 @@ public class ModelVisualizationJson extends JSONObject {
                             wrapPathPoints.put(pathWrapPoint, wrapPointUUIDs);
                         }
                     }
-                }*/
+                }
             }
             // Create viz for secondPoint
             if (!pointAdded){
@@ -343,9 +345,13 @@ public class ModelVisualizationJson extends JSONObject {
             firstIndex = secondIndex;
             firstPoint = secondPoint;
         }
-        if (hasWrapping)
-            pathsWithWrapping.put(path, pathpoint_jsonArr);
-
+        if (hasWrapping){
+            JSONArray pathpoint_uuid_jsonArr = new JSONArray();
+            for (int ppindex=0; ppindex < pathpoint_jsonArr.size(); ppindex++){
+                pathpoint_uuid_jsonArr.add(retrieveUuidFromJson((JSONObject) pathpoint_jsonArr.get(ppindex)).toString());
+            }
+            pathsWithWrapping.put(path, pathpoint_uuid_jsonArr);
+        }
         pathGeomJson.put("segments", pathpoint_jsonArr.size()-1); 
         JSONObject obj_json = new JSONObject();
         obj_json.put("uuid", uuidToReuse.toString());
@@ -1159,9 +1165,15 @@ public class ModelVisualizationJson extends JSONObject {
             JSONObject bpptInBodyJson =createPathPointObjectJson(null, "", false, location, matuuid.toString(), false);
             UUID ppt_uuid = retrieveUuidFromJson(bpptInBodyJson);
             computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(lastPathPoint, currentPathPoint, .99));
-            children.add(bpptInBodyJson);
-            points.add(ppt_uuid.toString());
-            activeState.add(false);
+            if (activeState==null){ // recreate mode need to add bpptInBodyJson to points rather than uuid only
+                bpptInBodyJson.put("parent", retrieveUuidFromJson(modelGroundJson).toString());
+                points.add(bpptInBodyJson);
+            }
+            else {
+                children.add(bpptInBodyJson);
+                points.add(ppt_uuid.toString());
+                activeState.add(false);
+            }
         }
     }
 
@@ -1391,7 +1403,6 @@ public class ModelVisualizationJson extends JSONObject {
                         PhysicalFrame wrapPtsFrame = pathWrapPoint.getParentFrame();
                         int size = pathwrap.size();
                         if (size >= 1) { 
-
                             // Off the actual points computed by API, will compute indices
                             // of points to be used as "intermediate on-the-fly wrap points
                             int[] indicesToUse = new int[NUM_PATHPOINTS_PER_WRAP_OBJECT];
