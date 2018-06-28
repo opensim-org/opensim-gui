@@ -42,6 +42,7 @@ import org.openide.util.NbBundle;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.Muscle;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.view.ObjectDisplayShowOnlyAction;
 import org.opensim.view.editors.BodyNameEditor;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 
@@ -85,27 +86,16 @@ public class OneMuscleNode extends OneActuatorNode {
         set.remove("optimal_force");
         return sheet;
     }
-    public Action[] getActions(boolean b) {
-        Action[] superActions = (Action[]) super.getActions(b);        
-        // Arrays are fixed size, onvert to a List
-        
-        List<Action> actions = java.util.Arrays.asList(superActions);
-        // Create new Array of proper size
-        Action[] retActions = new Action[actions.size()+1];
-        actions.toArray(retActions);
-        try {
-            // append new command to the end of the list of actions
-            retActions[actions.size()] = (GeometryPathTogglePointsAction) GeometryPathTogglePointsAction.findObject(
-                     (Class)Class.forName("org.opensim.view.nodes.GeometryPathTogglePointsAction"), true);
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        return retActions;
-    }
+
     // Default action by double click now toggles pathpoints
     @Override
     public Action getPreferredAction() {
-         Action[] actions = getActions(false);
-        return actions[actions.length-1];
+        try {
+            return (ObjectDisplayShowOnlyAction) ObjectDisplayShowOnlyAction.findObject(
+                    (Class)Class.forName("org.opensim.view.ObjectDisplayShowOnlyAction"), true);
+        } catch (ClassNotFoundException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        return null;
     }
 }
