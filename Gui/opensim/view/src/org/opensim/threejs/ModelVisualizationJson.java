@@ -237,7 +237,7 @@ public class ModelVisualizationJson extends JSONObject {
         
         UUID pathpointmat_uuid =mapGeometryPathToPathPointMaterialUUID.get(path);
         UUID pathmat_uuid = pathMaterials.get(path);
-        boolean pointsVisible = pathDisplayStatus.get(path);
+        boolean pointsVisible = true;//pathDisplayStatus.get(path);
         // Create plain Geometry with vertices at PathPoints it will have 0 vertices
         // but will be populated live in the visualizer from the Pathppoints
         JSONObject pathGeomJson = new JSONObject();
@@ -1561,7 +1561,7 @@ public class ModelVisualizationJson extends JSONObject {
         // Create viz for currentPoint
         int i=0;
         AbstractPathPoint firstPoint = pathPointSetNoWrap.get(i);
-        UUID pathpoint_uuid = addPathPointObjectToParent(firstPoint, pathpt_mat_uuid.toString(), false);
+        UUID pathpoint_uuid = addPathPointObjectToParent(firstPoint, pathpt_mat_uuid.toString(), visible);
         pathpointActive_jsonArr.add(true);
         addComponentToUUIDMap(firstPoint, pathpoint_uuid);
         pathpoint_jsonArr.add(pathpoint_uuid.toString());
@@ -1588,7 +1588,7 @@ public class ModelVisualizationJson extends JSONObject {
                 ConditionalPathPoint cpp = ConditionalPathPoint.safeDownCast(secondPoint);
                 //System.out.println("Not found in path, ppt:"+secondPoint.getName());
                 pathpoint_uuid = addComputedPathPointObjectToParent(ppointSetIndex, pathPointSetNoWrap, pathpt_mat_uuid.toString(), 
-                        false);
+                        visible);
                 pointAdded = true;
                 ArrayList<UUID> comp_uuids = new ArrayList<UUID>();
                 comp_uuids.add(pathpoint_uuid);
@@ -1637,7 +1637,7 @@ public class ModelVisualizationJson extends JSONObject {
             }
             // Create viz for secondPoint
             if (!pointAdded){
-                pathpoint_uuid = addPathPointObjectToParent(secondPoint, pathpt_mat_uuid.toString(), false);
+                pathpoint_uuid = addPathPointObjectToParent(secondPoint, pathpt_mat_uuid.toString(), visible);
                 pathpoint_jsonArr.add(pathpoint_uuid.toString());
                 pathpointActive_jsonArr.add(true);
                 addComponentToUUIDMap(secondPoint, pathpoint_uuid);
@@ -1673,7 +1673,7 @@ public class ModelVisualizationJson extends JSONObject {
         if (!visible){ // path-belly = cylinder
             obj_json.put("visible", false);
         }
-        pathDisplayStatus.put(path, false);
+        pathDisplayStatus.put(path, true);
         return mesh_uuid;
     }
 
