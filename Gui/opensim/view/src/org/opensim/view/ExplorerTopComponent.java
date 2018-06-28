@@ -52,6 +52,7 @@ import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.util.Mutex;
 import org.openide.util.MutexException;
+import org.opensim.modeling.AbstractPathPoint;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
@@ -366,8 +367,8 @@ final public class ExplorerTopComponent extends TopComponent
                 OneModelNode modelNode = ((OneModelNode) (nodes[i]));
                 Node objectNode = findObjectNode(modelNode, oObject);
                 // Hack to select Muscle based on selected PathPoint
-                if (oObject instanceof PathPoint){
-                    PathPoint ppt = (PathPoint)oObject;
+                if (oObject instanceof AbstractPathPoint){
+                    AbstractPathPoint ppt = (AbstractPathPoint)oObject;
                     GeometryPath ppath = GeometryPath.safeDownCast(ppt.getOwner());
                     OpenSimObject pathOwner = ppath.getOwner();
                     objectNode = findObjectNode(modelNode,pathOwner);
