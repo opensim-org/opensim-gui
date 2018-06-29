@@ -61,7 +61,7 @@ public class OpenSimDragNDropHandler extends TransferHandler {
         try {
             // Display original model
             ((FileOpenOsimModelAction) FileOpenOsimModelAction.findObject(
-                    (Class) Class.forName("org.opensim.view.FileOpenOsimModelAction"), true)).loadModel(absolutePath, true);
+                    (Class) Class.forName("org.opensim.view.FileOpenOsimModelAction"), true)).loadModel(absolutePath);
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         } catch (IOException ex) {
