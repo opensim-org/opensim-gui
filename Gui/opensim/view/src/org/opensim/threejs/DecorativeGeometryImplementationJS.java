@@ -99,6 +99,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         dg_json.put("type", "CylinderGeometry");
         dg_json.put("radiusTop", 0.);
         dg_json.put("radiusBottom", arg0.getBaseRadius()*visualizerScaleFactor);
+        dg_json.put("height", arg0.getHeight()*visualizerScaleFactor);
         dg_json.put("widthSegments", 32);
         dg_json.put("heightSegments", 1);
         return dg_json;
