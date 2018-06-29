@@ -70,7 +70,9 @@ public class AppearanceHelper {
             public void undo() throws CannotUndoException {
                 super.undo();
                 pea.setValueInt(oldRep.swigValue(), false);
+                ViewDB.getInstance().setApplyAppearanceChange(false);
                 ViewDB.getInstance().updateComponentDisplay(model, compNode.comp, ap);
+                ViewDB.getInstance().setApplyAppearanceChange(true);
             }
 
             @Override
@@ -82,7 +84,9 @@ public class AppearanceHelper {
             public void redo() throws CannotRedoException {
                 super.redo();
                 pea.setValueInt(newRep, false);
+                ViewDB.getInstance().setApplyAppearanceChange(false);
                 ViewDB.getInstance().updateComponentDisplay(model, compNode.comp, ap);
+                ViewDB.getInstance().setApplyAppearanceChange(true);
             }
 
             @Override
@@ -109,7 +113,9 @@ public class AppearanceHelper {
             public void undo() throws CannotUndoException {
                 super.undo();
                 pea.setValueBool(oldVis, false, false);
+                ViewDB.getInstance().setApplyAppearanceChange(false);
                 ViewDB.getInstance().updateComponentDisplay(model, compNode.comp, ap);
+                ViewDB.getInstance().setApplyAppearanceChange(true);
             }
 
             @Override
@@ -121,7 +127,9 @@ public class AppearanceHelper {
             public void redo() throws CannotRedoException {
                 super.redo();
                 pea.setValueBool(newVis, false, false);
+                ViewDB.getInstance().setApplyAppearanceChange(false);
                 ViewDB.getInstance().updateComponentDisplay(model, compNode.comp, ap);
+                ViewDB.getInstance().setApplyAppearanceChange(true);
             }
 
             @Override
@@ -190,7 +198,9 @@ public class AppearanceHelper {
             public void undo() throws CannotUndoException {
                 super.undo();
                 pea.setValueDouble(oldOpacity, false);
+                ViewDB.getInstance().setApplyAppearanceChange(false);
                 ViewDB.getInstance().updateComponentDisplay(model, compNode.comp, ap);
+                ViewDB.getInstance().setApplyAppearanceChange(true);
             }
 
             @Override
@@ -202,7 +212,9 @@ public class AppearanceHelper {
             public void redo() throws CannotRedoException {
                 super.redo();
                 pea.setValueDouble(newOpacity, false);
+                ViewDB.getInstance().setApplyAppearanceChange(false);
                 ViewDB.getInstance().updateComponentDisplay(model, compNode.comp, ap);
+                ViewDB.getInstance().setApplyAppearanceChange(true);
             }
 
             @Override
