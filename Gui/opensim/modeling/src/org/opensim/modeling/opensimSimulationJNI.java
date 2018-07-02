@@ -6453,6 +6453,7 @@ public class opensimSimulationJNI {
   public final static native void FrameIterator_updateXMLNode(long jarg1, FrameIterator jarg1_, long jarg2);
   public final static native boolean FrameIterator_getInlined(long jarg1, FrameIterator jarg1_);
   public final static native String FrameIterator_getDocumentFileName(long jarg1, FrameIterator jarg1_);
+  public final static native int FrameIterator_getDocumentFileVersion(long jarg1, FrameIterator jarg1_);
   public final static native boolean FrameIterator_print(long jarg1, FrameIterator jarg1_, String jarg2);
   public final static native boolean FrameIterator_isA(long jarg1, FrameIterator jarg1_, String jarg2);
   public final static native String FrameIterator_toString(long jarg1, FrameIterator jarg1_);
@@ -6571,6 +6572,7 @@ public class opensimSimulationJNI {
   public final static native void BodyIterator_updateXMLNode(long jarg1, BodyIterator jarg1_, long jarg2);
   public final static native boolean BodyIterator_getInlined(long jarg1, BodyIterator jarg1_);
   public final static native String BodyIterator_getDocumentFileName(long jarg1, BodyIterator jarg1_);
+  public final static native int BodyIterator_getDocumentFileVersion(long jarg1, BodyIterator jarg1_);
   public final static native boolean BodyIterator_print(long jarg1, BodyIterator jarg1_, String jarg2);
   public final static native boolean BodyIterator_isA(long jarg1, BodyIterator jarg1_, String jarg2);
   public final static native String BodyIterator_toString(long jarg1, BodyIterator jarg1_);
@@ -6780,6 +6782,7 @@ public class opensimSimulationJNI {
   public final static native void MuscleIterator_updateXMLNode(long jarg1, MuscleIterator jarg1_, long jarg2);
   public final static native boolean MuscleIterator_getInlined(long jarg1, MuscleIterator jarg1_);
   public final static native String MuscleIterator_getDocumentFileName(long jarg1, MuscleIterator jarg1_);
+  public final static native int MuscleIterator_getDocumentFileVersion(long jarg1, MuscleIterator jarg1_);
   public final static native boolean MuscleIterator_print(long jarg1, MuscleIterator jarg1_, String jarg2);
   public final static native boolean MuscleIterator_isA(long jarg1, MuscleIterator jarg1_, String jarg2);
   public final static native String MuscleIterator_toString(long jarg1, MuscleIterator jarg1_);
@@ -6854,6 +6857,7 @@ public class opensimSimulationJNI {
   public final static native void ModelComponentIterator_updateXMLNode(long jarg1, ModelComponentIterator jarg1_, long jarg2);
   public final static native boolean ModelComponentIterator_getInlined(long jarg1, ModelComponentIterator jarg1_);
   public final static native String ModelComponentIterator_getDocumentFileName(long jarg1, ModelComponentIterator jarg1_);
+  public final static native int ModelComponentIterator_getDocumentFileVersion(long jarg1, ModelComponentIterator jarg1_);
   public final static native boolean ModelComponentIterator_print(long jarg1, ModelComponentIterator jarg1_, String jarg2);
   public final static native boolean ModelComponentIterator_isA(long jarg1, ModelComponentIterator jarg1_, String jarg2);
   public final static native String ModelComponentIterator_toString(long jarg1, ModelComponentIterator jarg1_);
@@ -6944,6 +6948,7 @@ public class opensimSimulationJNI {
   public final static native void JointIterator_updateXMLNode(long jarg1, JointIterator jarg1_, long jarg2);
   public final static native boolean JointIterator_getInlined(long jarg1, JointIterator jarg1_);
   public final static native String JointIterator_getDocumentFileName(long jarg1, JointIterator jarg1_);
+  public final static native int JointIterator_getDocumentFileVersion(long jarg1, JointIterator jarg1_);
   public final static native boolean JointIterator_print(long jarg1, JointIterator jarg1_, String jarg2);
   public final static native boolean JointIterator_isA(long jarg1, JointIterator jarg1_, String jarg2);
   public final static native String JointIterator_toString(long jarg1, JointIterator jarg1_);
@@ -7033,6 +7038,7 @@ public class opensimSimulationJNI {
   public final static native void ActuatorIterator_updateXMLNode(long jarg1, ActuatorIterator jarg1_, long jarg2);
   public final static native boolean ActuatorIterator_getInlined(long jarg1, ActuatorIterator jarg1_);
   public final static native String ActuatorIterator_getDocumentFileName(long jarg1, ActuatorIterator jarg1_);
+  public final static native int ActuatorIterator_getDocumentFileVersion(long jarg1, ActuatorIterator jarg1_);
   public final static native boolean ActuatorIterator_print(long jarg1, ActuatorIterator jarg1_, String jarg2);
   public final static native boolean ActuatorIterator_isA(long jarg1, ActuatorIterator jarg1_, String jarg2);
   public final static native String ActuatorIterator_toString(long jarg1, ActuatorIterator jarg1_);
@@ -8155,6 +8161,7 @@ public class opensimSimulationJNI {
   public final static native void Thelen2003MuscleIterator_updateXMLNode(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2);
   public final static native boolean Thelen2003MuscleIterator_getInlined(long jarg1, Thelen2003MuscleIterator jarg1_);
   public final static native String Thelen2003MuscleIterator_getDocumentFileName(long jarg1, Thelen2003MuscleIterator jarg1_);
+  public final static native int Thelen2003MuscleIterator_getDocumentFileVersion(long jarg1, Thelen2003MuscleIterator jarg1_);
   public final static native boolean Thelen2003MuscleIterator_print(long jarg1, Thelen2003MuscleIterator jarg1_, String jarg2);
   public final static native boolean Thelen2003MuscleIterator_isA(long jarg1, Thelen2003MuscleIterator jarg1_, String jarg2);
   public final static native String Thelen2003MuscleIterator_toString(long jarg1, Thelen2003MuscleIterator jarg1_);
@@ -8417,6 +8424,7 @@ public class opensimSimulationJNI {
   public final static native void Millard2012EquilibriumMuscleIterator_updateXMLNode(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2);
   public final static native boolean Millard2012EquilibriumMuscleIterator_getInlined(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
   public final static native String Millard2012EquilibriumMuscleIterator_getDocumentFileName(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
+  public final static native int Millard2012EquilibriumMuscleIterator_getDocumentFileVersion(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
   public final static native boolean Millard2012EquilibriumMuscleIterator_print(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, String jarg2);
   public final static native boolean Millard2012EquilibriumMuscleIterator_isA(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, String jarg2);
   public final static native String Millard2012EquilibriumMuscleIterator_toString(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);

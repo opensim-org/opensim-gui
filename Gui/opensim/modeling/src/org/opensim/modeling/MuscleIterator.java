@@ -825,6 +825,10 @@ public class MuscleIterator {
     return opensimSimulationJNI.MuscleIterator_getDocumentFileName(swigCPtr, this);
   }
 
+  public int getDocumentFileVersion() {
+    return opensimSimulationJNI.MuscleIterator_getDocumentFileVersion(swigCPtr, this);
+  }
+
   public boolean print(String fileName) {
     return opensimSimulationJNI.MuscleIterator_print(swigCPtr, this, fileName);
   }

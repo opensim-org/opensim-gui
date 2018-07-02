@@ -50,8 +50,20 @@ public class C3DFileAdapter extends FileAdapter {
     return (cPtr == 0) ? null : new C3DFileAdapter(cPtr, true);
   }
 
+  public void setLocationForForceExpression(C3DFileAdapter.ForceLocation location) {
+    opensimCommonJNI.C3DFileAdapter_setLocationForForceExpression(swigCPtr, this, location.swigValue());
+  }
+
+  public C3DFileAdapter.ForceLocation getLocationForForceExpression() {
+    return C3DFileAdapter.ForceLocation.swigToEnum(opensimCommonJNI.C3DFileAdapter_getLocationForForceExpression(swigCPtr, this));
+  }
+
+  public static StdMapStringTimeSeriesTableVec3 read(String fileName, C3DFileAdapter.ForceLocation wrt) {
+    return new StdMapStringTimeSeriesTableVec3(opensimCommonJNI.C3DFileAdapter_read__SWIG_0(fileName, wrt.swigValue()), true);
+  }
+
   public static StdMapStringTimeSeriesTableVec3 read(String fileName) {
-    return new StdMapStringTimeSeriesTableVec3(opensimCommonJNI.C3DFileAdapter_read(fileName), true);
+    return new StdMapStringTimeSeriesTableVec3(opensimCommonJNI.C3DFileAdapter_read__SWIG_1(fileName), true);
   }
 
   public static void write(StdMapStringTimeSeriesTableVec3 markerTable, String fileName) {
@@ -64,6 +76,55 @@ public class C3DFileAdapter extends FileAdapter {
 
   public static String get_forces() {
     return opensimCommonJNI.C3DFileAdapter__forces_get();
+  }
+
+  public StdMapStringTimeSeriesTableVec3 read(String fileName, long wrt) {
+    return new StdMapStringTimeSeriesTableVec3(opensimCommonJNI.C3DFileAdapter_read__SWIG_2(swigCPtr, this, fileName, wrt), true);
+  }
+
+  public final static class ForceLocation {
+    public final static C3DFileAdapter.ForceLocation OriginOfForcePlate = new C3DFileAdapter.ForceLocation("OriginOfForcePlate", opensimCommonJNI.C3DFileAdapter_ForceLocation_OriginOfForcePlate_get());
+    public final static C3DFileAdapter.ForceLocation CenterOfPressure = new C3DFileAdapter.ForceLocation("CenterOfPressure", opensimCommonJNI.C3DFileAdapter_ForceLocation_CenterOfPressure_get());
+    public final static C3DFileAdapter.ForceLocation PointOfWrenchApplication = new C3DFileAdapter.ForceLocation("PointOfWrenchApplication", opensimCommonJNI.C3DFileAdapter_ForceLocation_PointOfWrenchApplication_get());
+
+    public final int swigValue() {
+      return swigValue;
+    }
+
+    public String toString() {
+      return swigName;
+    }
+
+    public static ForceLocation swigToEnum(int swigValue) {
+      if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
+        return swigValues[swigValue];
+      for (int i = 0; i < swigValues.length; i++)
+        if (swigValues[i].swigValue == swigValue)
+          return swigValues[i];
+      throw new IllegalArgumentException("No enum " + ForceLocation.class + " with value " + swigValue);
+    }
+
+    private ForceLocation(String swigName) {
+      this.swigName = swigName;
+      this.swigValue = swigNext++;
+    }
+
+    private ForceLocation(String swigName, int swigValue) {
+      this.swigName = swigName;
+      this.swigValue = swigValue;
+      swigNext = swigValue+1;
+    }
+
+    private ForceLocation(String swigName, ForceLocation swigEnum) {
+      this.swigName = swigName;
+      this.swigValue = swigEnum.swigValue;
+      swigNext = this.swigValue+1;
+    }
+
+    private static ForceLocation[] swigValues = { OriginOfForcePlate, CenterOfPressure, PointOfWrenchApplication };
+    private static int swigNext = 0;
+    private final int swigValue;
+    private final String swigName;
   }
 
 }

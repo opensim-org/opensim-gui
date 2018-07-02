@@ -281,6 +281,10 @@ public class ComponentIterator {
     return opensimCommonJNI.ComponentIterator_getDocumentFileName(swigCPtr, this);
   }
 
+  public int getDocumentFileVersion() {
+    return opensimCommonJNI.ComponentIterator_getDocumentFileVersion(swigCPtr, this);
+  }
+
   public boolean print(String fileName) {
     return opensimCommonJNI.ComponentIterator_print(swigCPtr, this, fileName);
   }

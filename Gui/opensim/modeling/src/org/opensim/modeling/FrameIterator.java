@@ -397,6 +397,10 @@ public class FrameIterator {
     return opensimSimulationJNI.FrameIterator_getDocumentFileName(swigCPtr, this);
   }
 
+  public int getDocumentFileVersion() {
+    return opensimSimulationJNI.FrameIterator_getDocumentFileVersion(swigCPtr, this);
+  }
+
   public boolean print(String fileName) {
     return opensimSimulationJNI.FrameIterator_print(swigCPtr, this, fileName);
   }

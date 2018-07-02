@@ -285,6 +285,10 @@ public class ModelComponentIterator {
     return opensimSimulationJNI.ModelComponentIterator_getDocumentFileName(swigCPtr, this);
   }
 
+  public int getDocumentFileVersion() {
+    return opensimSimulationJNI.ModelComponentIterator_getDocumentFileVersion(swigCPtr, this);
+  }
+
   public boolean print(String fileName) {
     return opensimSimulationJNI.ModelComponentIterator_print(swigCPtr, this, fileName);
   }
