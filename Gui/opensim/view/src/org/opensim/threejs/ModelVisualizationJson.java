@@ -151,7 +151,7 @@ public class ModelVisualizationJson extends JSONObject {
     // Preferences
     private double prefMuscleDisplayRadius=0.005;
     private int NUM_PATHPOINTS_PER_WRAP_OBJECT=8;
-    private double PATHPOINT_SCALEUP=1.5;
+    private double PATHPOINT_SCALEUP=1.0;
     
     public Boolean getFrameVisibility(Frame b) {
         return visualizerFrames.get(b).visible;
@@ -406,7 +406,7 @@ public class ModelVisualizationJson extends JSONObject {
         movable = (model instanceof ModelForExperimentalData);
         createModelJsonNode(); // Model node
         // Decide color Scheme for muscles
-        String saved = "Classic";
+        String saved = "Modern";
         String currentTemplate =Preferences.userNodeForPackage(TheApp.class).get("Muscle Color Scheme", saved);
         Preferences.userNodeForPackage(TheApp.class).put("Muscle Color Scheme", currentTemplate);
         currentPathColorMap = PathColorMapFactory.getColorMap(currentTemplate);
@@ -417,7 +417,7 @@ public class ModelVisualizationJson extends JSONObject {
         Preferences.userNodeForPackage(TheApp.class).put("Muscle Display Radius", currentSize);
         prefMuscleDisplayRadius = Double.parseDouble(currentSize);
         actualMuscleDisplayRadius = 8*200*prefMuscleDisplayRadius;
-        saved = "1.5";
+        saved = "1.0";
         currentSize= Preferences.userNodeForPackage(TheApp.class).get("PathPoint Scaleup", saved);
         Preferences.userNodeForPackage(TheApp.class).put("PathPoint Scaleup", currentSize);
         PATHPOINT_SCALEUP = Double.parseDouble(currentSize);
