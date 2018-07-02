@@ -462,6 +462,10 @@ public class BodyIterator {
     return opensimSimulationJNI.BodyIterator_getDocumentFileName(swigCPtr, this);
   }
 
+  public int getDocumentFileVersion() {
+    return opensimSimulationJNI.BodyIterator_getDocumentFileVersion(swigCPtr, this);
+  }
+
   public boolean print(String fileName) {
     return opensimSimulationJNI.BodyIterator_print(swigCPtr, this, fileName);
   }

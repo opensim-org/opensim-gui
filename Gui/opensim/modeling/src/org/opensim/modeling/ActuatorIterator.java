@@ -345,6 +345,10 @@ public class ActuatorIterator {
     return opensimSimulationJNI.ActuatorIterator_getDocumentFileName(swigCPtr, this);
   }
 
+  public int getDocumentFileVersion() {
+    return opensimSimulationJNI.ActuatorIterator_getDocumentFileVersion(swigCPtr, this);
+  }
+
   public boolean print(String fileName) {
     return opensimSimulationJNI.ActuatorIterator_print(swigCPtr, this, fileName);
   }

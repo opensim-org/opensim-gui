@@ -50,22 +50,11 @@ public class OpenSimObject {
      
     return( cacheId );
   }
-  // Flag to indicate if an object is pickable in the GUI
-  // Example of a non-pickable object would be a PathWrapPoint
-  private boolean pickable=true;
-  
-  public boolean isPickable() {
-	 return pickable;
-  }
-  
-  public void setPickable(boolean onOff) {
-	 pickable=onOff;
-  }
   public void markAdopted() {
     if (swigCPtr != 0) {
       if (swigCMemOwn) swigCMemOwn = false;
     }
-  }  
+  }
 
   public OpenSimObject clone() {
     long cPtr = opensimCommonJNI.OpenSimObject_clone(swigCPtr, this);
@@ -213,6 +202,10 @@ public class OpenSimObject {
 
   public String getDocumentFileName() {
     return opensimCommonJNI.OpenSimObject_getDocumentFileName(swigCPtr, this);
+  }
+
+  public int getDocumentFileVersion() {
+    return opensimCommonJNI.OpenSimObject_getDocumentFileVersion(swigCPtr, this);
   }
 
   public void setAllPropertiesUseDefault(boolean aUseDefault) {

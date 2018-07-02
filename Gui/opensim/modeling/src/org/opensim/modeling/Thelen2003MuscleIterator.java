@@ -985,6 +985,10 @@ public class Thelen2003MuscleIterator {
     return opensimSimulationJNI.Thelen2003MuscleIterator_getDocumentFileName(swigCPtr, this);
   }
 
+  public int getDocumentFileVersion() {
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getDocumentFileVersion(swigCPtr, this);
+  }
+
   public boolean print(String fileName) {
     return opensimSimulationJNI.Thelen2003MuscleIterator_print(swigCPtr, this, fileName);
   }

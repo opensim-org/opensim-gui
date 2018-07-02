@@ -349,6 +349,10 @@ public class JointIterator {
     return opensimSimulationJNI.JointIterator_getDocumentFileName(swigCPtr, this);
   }
 
+  public int getDocumentFileVersion() {
+    return opensimSimulationJNI.JointIterator_getDocumentFileVersion(swigCPtr, this);
+  }
+
   public boolean print(String fileName) {
     return opensimSimulationJNI.JointIterator_print(swigCPtr, this, fileName);
   }
