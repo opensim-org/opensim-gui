@@ -37,7 +37,7 @@ public final class FileSaveModelAction extends CallableSystemAction {
    
     public static boolean saveOrSaveAsModel(Model model, boolean forceSaveAs) {
       if(model==null) return false;
-      if (model.getDocumentFileVersion()!= -1 &&  model.getDocumentFileVersion() <=30500){
+      if (model.getDocumentFileVersion()!= -1 &&  model.getDocumentFileVersion() <30500){
           // Show dialog warn new format and give optopn to saveAs
         javax.swing.JTextArea jTextArea1 = new javax.swing.JTextArea();
         //jTextArea1.setColumns(20);
