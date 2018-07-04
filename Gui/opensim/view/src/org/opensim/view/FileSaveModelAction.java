@@ -23,6 +23,9 @@
 
 package org.opensim.view;
 
+import javax.swing.JPanel;
+import org.openide.DialogDescriptor;
+import org.openide.DialogDisplayer;
 import org.openide.awt.StatusDisplayer;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
@@ -34,6 +37,29 @@ public final class FileSaveModelAction extends CallableSystemAction {
    
     public static boolean saveOrSaveAsModel(Model model, boolean forceSaveAs) {
       if(model==null) return false;
+      if (model.getDocumentFileVersion()!= -1 &&  model.getDocumentFileVersion() <30500){
+          // Show dialog warn new format and give optopn to saveAs
+        javax.swing.JTextArea jTextArea1 = new javax.swing.JTextArea();
+        //jTextArea1.setColumns(20);
+        jTextArea1.setFont(jTextArea1.getFont());
+        String message = "Model originated from an earlier version of OpenSim. If you save, \n" +
+                         "OpenSim will overwrite the model file, and you will not be able to use\n" +
+                         "the model with earlier versions of OpenSim.\n\n" +
+                         "Choose 'OK' to overwrite or 'Cancel' to abort ( use Save-As instead).";
+        jTextArea1.setText(message);
+        //jTextArea1.setRows(4);
+        jTextArea1.setWrapStyleWord(true);
+        jTextArea1.setEnabled(true);
+        JPanel containerPanel = new JPanel();
+        containerPanel.setLayout(new javax.swing.BoxLayout(containerPanel, javax.swing.BoxLayout.Y_AXIS));
+        containerPanel.add(jTextArea1);
+        DialogDescriptor dd = new DialogDescriptor(containerPanel, "Overwrite old model file?");
+        DialogDisplayer.getDefault().createDialog(dd).setVisible(true);
+        Object userInput = dd.getValue();
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.CANCEL_OPTION)==0){
+                return false;
+        }
+      }
       if(!model.getInputFileName().equals("") && !forceSaveAs) {
          FileSaveAsModelAction.saveModel(model, model.getInputFileName());
          return true;
