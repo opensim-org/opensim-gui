@@ -141,6 +141,9 @@
         <copy todir="${opensim.dist.dir}/Resources/Models">
             <fileset dir="${models.dir}/Models"/>
         </copy>
+        <copy todir="${opensim.dist.dir}/doc">
+            <fileset dir="${models.dir}/doc"/>
+        </copy>
     </target>
     <target name="copy-visualizer" description="Copy Visualizer to installer">
         <copy todir="${opensim.threejs.dir}">
