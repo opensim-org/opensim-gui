@@ -53,7 +53,7 @@ public final class FileSaveModelAction extends CallableSystemAction {
         JPanel containerPanel = new JPanel();
         containerPanel.setLayout(new javax.swing.BoxLayout(containerPanel, javax.swing.BoxLayout.Y_AXIS));
         containerPanel.add(jTextArea1);
-        DialogDescriptor dd = new DialogDescriptor(containerPanel, "Overwrite old model file");
+        DialogDescriptor dd = new DialogDescriptor(containerPanel, "Overwrite old model file?");
         DialogDisplayer.getDefault().createDialog(dd).setVisible(true);
         Object userInput = dd.getValue();
         if (((Integer)userInput).compareTo((Integer)DialogDescriptor.CANCEL_OPTION)==0){
