@@ -64,10 +64,10 @@ class BrowserPageDisplayerAction extends AbstractAction
             Exceptions.printStackTrace(ex);
         }
         // If issues with online tutorials then open local file
-        String path = BrowserLauncher.isConnected() ? url : TheApp.getCrossPlatformInstallDir() +  "/doc/" + file+".pdf";
+        String path = BrowserLauncher.isConnected() ? url : TheApp.getCrossPlatformInstallDir() +  "/doc/" + file+".html";
         
         System.out.println("Path: " + path + "or "+
-                TheApp.getInstallDir() + File.separator + "../doc" + File.separator + file+".pdf");
+                TheApp.getCrossPlatformInstallDir() + File.separator + "/doc/" + file+".html");
         BrowserLauncher.openURL(path);            
     }
     
