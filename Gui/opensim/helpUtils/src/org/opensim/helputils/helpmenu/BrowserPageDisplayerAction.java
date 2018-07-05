@@ -64,7 +64,7 @@ class BrowserPageDisplayerAction extends AbstractAction
             Exceptions.printStackTrace(ex);
         }
         // If issues with online tutorials then open local file
-        String path = BrowserLauncher.isConnected() ? url : TheApp.getCrossPlatformInstallDir() +  "/doc/" + file+".html";
+        String path = BrowserLauncher.isConnected() ? url : "file://"+TheApp.getCrossPlatformInstallDir() +  "/doc/" + file+".html";
         
         System.out.println("Path: " + path + "or "+
                 TheApp.getCrossPlatformInstallDir() + File.separator + "/doc/" + file+".html");
