@@ -31,6 +31,7 @@ import java.io.Serializable;
 import java.lang.Object;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
 import java.util.Vector;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
@@ -51,6 +52,7 @@ import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.util.Mutex;
 import org.openide.util.MutexException;
+import org.opensim.modeling.AbstractPathPoint;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
@@ -86,6 +88,7 @@ final public class ExplorerTopComponent extends TopComponent
    private final ExplorerManager manager = new ExplorerManager();
    private final BeanTreeView modelTree = new BeanTreeView();
    
+   private static TopComponent visualizerTC = null;
    private UndoRedo.Manager undoRedoManager = new UndoRedoManager();
 
    private ExplorerTopComponent() {
@@ -364,8 +367,8 @@ final public class ExplorerTopComponent extends TopComponent
                 OneModelNode modelNode = ((OneModelNode) (nodes[i]));
                 Node objectNode = findObjectNode(modelNode, oObject);
                 // Hack to select Muscle based on selected PathPoint
-                if (oObject instanceof PathPoint){
-                    PathPoint ppt = (PathPoint)oObject;
+                if (oObject instanceof AbstractPathPoint){
+                    AbstractPathPoint ppt = (AbstractPathPoint)oObject;
                     GeometryPath ppath = GeometryPath.safeDownCast(ppt.getOwner());
                     OpenSimObject pathOwner = ppath.getOwner();
                     objectNode = findObjectNode(modelNode,pathOwner);
@@ -533,7 +536,7 @@ final public class ExplorerTopComponent extends TopComponent
         public static void addUndoableEdit(AbstractUndoableEdit aUndoableEdit)
         {
             getDefault().getUndoRedoManager().addEdit(aUndoableEdit);
-            TopComponent tc = ViewDB.getCurrentModelWindow();
+            TopComponent tc = getVisualizerTopComponent();
             if (tc==null){ // No gfx window
                 tc = getDefault();
             } 
@@ -555,5 +558,16 @@ final public class ExplorerTopComponent extends TopComponent
         public static void addFinalEdit()
         {
             getDefault().getUndoRedoManager().discardAllEdits();
+        }
+        private static TopComponent getVisualizerTopComponent() {
+            if (visualizerTC == null){
+                Set<TopComponent> stc = TopComponent.getRegistry().getOpened();
+                for (TopComponent tc:stc){
+                    if (tc.getName()!= null && tc.getName().startsWith("Visualizer")) {
+                        visualizerTC = tc;
+                    }
+                }
+            }
+            return visualizerTC;
         }
 }

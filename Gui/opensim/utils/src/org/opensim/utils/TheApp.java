@@ -179,7 +179,7 @@ public final class TheApp {
      * @return $installDir/Geometry, this is platform dependent due to different layout
      */
     public static String getDefaultGeometrySearchPath() {
-        return getPlatformSpecificInstallDir()+File.separatorChar+"Geometry"+File.separatorChar;
+        return getCrossPlatformInstallDir()+File.separatorChar+"Geometry"+File.separatorChar;
     }
     /**
      * Get User Directory, this is usually with writable permissions and is
@@ -254,7 +254,7 @@ public final class TheApp {
         
         if (userSelection != null){
             FileUtils.getInstance().setWorkingDirectoryPreference(userSelection);
-            String src = getPlatformSpecificInstallDir() + File.separator + "Resources.zip";
+            String src = getCrossPlatformInstallDir() + File.separator + "Resources.zip";
             String dest = userSelection;
             OpenSimLogger.logMessage("\nCopying resources to "+dest+"... ", OpenSimLogger.INFO);
             Path srcPath = Paths.get(src);
@@ -276,8 +276,9 @@ public final class TheApp {
         else
             return null;
     }
-
-    private static String getPlatformSpecificInstallDir() {
+	// Due to platform differences, this call returns top level install folder
+	// cross platform.
+    public static String getCrossPlatformInstallDir() {
         if (OS.indexOf("win") >= 0){
          return (getInstallDir()+File.separatorChar+".."+File.separatorChar);
         }

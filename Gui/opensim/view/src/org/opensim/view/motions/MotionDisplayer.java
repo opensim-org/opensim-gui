@@ -528,6 +528,15 @@ public class MotionDisplayer {
       int newIndex = simmMotionData.getStateIndex(columnName);
       if (newIndex ==-1)
           return 0;
+       // in live RRA and other situations where we get 4.0 style state-pathnames as columns, use them
+       if (stateNames != null && stateNames.findIndex(columnName) != -1) {
+           int stateIndex = stateNames.findIndex(columnName);  // includes time so 0 is time
+           int stateIndexMinusTime = stateIndex - 1;
+           mapIndicesToObjectTypes.put(columnIndex, ObjectTypesInMotionFiles.State);
+           mapIndicesToObjects.put(columnIndex, new Integer(stateIndexMinusTime));
+           canonicalStateNames.add(columnName);
+           return 1;
+       }
       String canonicalCcolumnName = columnName.replace('.', '/');
       CoordinateSet coords = model.getCoordinateSet();
       for (int i = 0; i<coords.getSize(); i++){

@@ -105,11 +105,29 @@
          <!-- Copy files needed to build the installer here -->
          <copy todir="${opensim.dist.dir}/../"
                 file="${installer-files.dir}/OpenSimInstallerIcon.bmp" />
+        <!-- To embed in the installer itself: -->
+        <copy todir="${opensim.dist.dir}/../"
+                file="${installer-files.dir}/OpenSimLogoWindows.ico" />
+        <!-- To use for OpenSim shortcuts on the user's computer: -->
+        <copy todir="${opensim.dist.dir}/bin/"
+                file="${installer-files.dir}/OpenSimLogoWindows.ico" />
          <copy todir="${opensim.dist.dir}/../"
                 file="${installer-files.dir}/make_installer.nsi" />
         <replace file="${opensim.dist.dir}/../make_installer.nsi" value="${app.version}">
             <replacefilter token="@VERSION@" />
-        </replace>        
+        </replace>
+
+        <!-- http://wiki.netbeans.org/DevFaqExecutableIcon -->
+        <exec executable="installer_files/Windows/ReplaceVistaIcon.exe" resolveexecutable="true">
+            <arg line="${opensim.dist.dir}/bin/OpenSim64.exe installer_files/Windows/OpenSimLogoWindows.ico"/>
+        </exec>
+
+        <!-- Copy the Visual C++ redistributable installer, 
+             which the NSIS installer will run during installation.
+             https://docs.microsoft.com/en-us/cpp/ide/deployment-in-visual-cpp -->
+        <copy todir="${opensim.dist.dir}/bin/"
+            file="${msvc.redist.exe}" />
+
     </target>
     <target name="copy-jre" description="Copy JRE to installer">
         <copy todir="${opensim.dist.dir}/jdk/jre">
@@ -122,6 +140,9 @@
         </copy>
         <copy todir="${opensim.dist.dir}/Resources/Models">
             <fileset dir="${models.dir}/Models"/>
+        </copy>
+        <copy todir="${opensim.dist.dir}/doc">
+            <fileset dir="${models.dir}/doc"/>
         </copy>
     </target>
     <target name="copy-visualizer" description="Copy Visualizer to installer">

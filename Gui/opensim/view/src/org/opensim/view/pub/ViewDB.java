@@ -114,7 +114,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    private static WebSocketDB websocketdb;
    private static JSONObject jsondb;
    private SelectedObject selectInVisualizer = null;
-   
+   private static int frameRate = 30;
    /* Following block handles buffering Appearance changes so they're sent once
     * as a message to visualizer.
    */
@@ -140,7 +140,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                 websocketdb.broadcastMessageJson(modelJson.updateComponentVisuals(mc, frame), null);
             }
             else // just send frame in case xforms change
-                websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(false), null);
+                websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(false, true), null);
         }
     }
     /*
@@ -163,7 +163,52 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         }
 
     }
-   
+
+    public int getFrameTime() {
+        String saved = Preferences.userNodeForPackage(TheApp.class).get("FrameRate", String.valueOf(frameRate));
+        if (saved!= null)
+            frameRate = Integer.parseInt(saved);
+        Preferences.userNodeForPackage(TheApp.class).put("FrameRate", String.valueOf(frameRate));
+        return frameRate; // 30 FPS default
+    }
+    /**
+     * Toggle display of user editable pathpoints to enable visual editing/dragging
+     * @param msl 
+     */
+    public void togglePathPointDisplay(Muscle msl, boolean newState) {
+        if (websocketdb!=null){
+            JSONObject msg = new JSONObject();
+             msg.put("Op", "TogglePathPoints");
+             ModelVisualizationJson modelVis = getInstance().getModelVisualizationJson(msl.getModel());
+             ArrayList<UUID> uuidList = modelVis.findUUIDForObject(msl);
+             msg.put("uuid", uuidList.get(0).toString());
+             msg.put("newState", newState);
+             websocketdb.broadcastMessageJson(msg, null);
+             modelVis.setPathPointDisplayStatus(msl.getGeometryPath(), newState);
+        }
+    }
+
+    public void removePathDisplay(GeometryPath currentPath) {
+        if (websocketdb != null) {
+            togglePathPointDisplay(Muscle.safeDownCast(currentPath.getOwner()), false);
+            ModelVisualizationJson modelVis = getInstance().getModelVisualizationJson(currentPath.getModel());
+            ArrayList<UUID> uuids2Remove = modelVis.removePathVisualization(currentPath);
+            // Create MuliCmd
+            JSONObject topMsg = new JSONObject();
+            JSONObject msgMulti = new JSONObject();
+            msgMulti.put("type", "MultiCmdsCommand");
+            topMsg.put("Op", "execute");
+            topMsg.put("command", msgMulti);
+            JSONArray commands = new JSONArray();
+            for (UUID uuid:uuids2Remove){
+                commands.add(modelVis.createRemoveObjectByUuidCommand(uuid, 
+                        UUID.fromString((String) modelVis.getModelGroundJson().get("uuid"))).get("command"));
+            }
+            msgMulti.put("cmds", commands);
+            websocketdb.broadcastMessageJson(topMsg, null);
+        }
+    }
+  
    class AppearanceChange {
        Model model;
        Component mc;
@@ -333,9 +378,12 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       //if (!isVtkGraphicsAvailable()) return;
       if (arg instanceof JSONObject){
           handleJson((JSONObject) arg);
+          return;
       }
       if (o instanceof VisWebSocket){
           // Sync. socket with current ViweDB
+          if (arg != null && arg instanceof JSONObject)
+              return; // info message. no need to sync again
           getInstance().sync((VisWebSocket) o);
           if (currentJson==null)
               setCurrentJson();
@@ -981,6 +1029,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       boolean modified = false;
       for(int i=selectedObjects.size()-1; i>=0; i--) {
          Model ownerModel = selectedObjects.get(i).getOwnerModel();
+         if (ownerModel==null){ // Ophan'd component, just remove and continue
+             selectedObjects.remove(i);
+             continue;
+         }
          if(Model.getCPtr(model) == Model.getCPtr(ownerModel)) {
             markSelected(selectedObjects.get(i), false, false, false);
             selectedObjects.remove(i);
@@ -1047,6 +1099,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                       !selectInVisualizer.equals(selectedObject.getOpenSimObject())){
                     websocketdb.broadcastMessageJson(currentJson.createSelectionJson(selectedObject.getOpenSimObject()), null);
               }
+              else if (selectInVisualizer == null){
+                    websocketdb.broadcastMessageJson(currentJson.createSelectionJson(selectedObject.getOpenSimObject()), null);                  
+              }
               selectInVisualizer = selectedObject;
           }
           else {
@@ -1056,33 +1111,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
               }
           }
       }
-      if (ViewDB.getInstance().isQuery() && isVtkGraphicsAvailable()){
-          if (highlight){
-           // Add caption
-             vtkCaptionActor2D theCaption = new vtkCaptionActor2D();
-             double[] bounds=selectedObject.getBounds();
-             theCaption.SetAttachmentPoint(new double[]{
-                 (bounds[0]+bounds[1])/2.0,
-                 (bounds[2]+bounds[3])/2.0,
-                 (bounds[4]+bounds[5])/2.0,
-             });
-             theCaption.GetTextActor().ScaledTextOn();
-             theCaption.SetHeight(.02);
-             theCaption.BorderOff();
-             if (selectedObject.getOpenSimObject()!=null){
-                 theCaption.SetCaption(selectedObject.getOpenSimObject().getName());
-                addAnnotationToViews(theCaption);
-                 selectedObjectsAnnotations.put(selectedObject,theCaption);
-             }
-          }
-          else {    // if annotationis on remove 
-              vtkCaptionActor2D annotation = getAnnotation(selectedObject);
-              if (annotation!=null){
-                  removeAnnotationFromViews(annotation);
-              }
-          }
-      }
-
       if(updateStatusDisplayAndRepaint) {
          statusDisplaySelectedObjects();
          repaintAll();
@@ -1176,7 +1204,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       if (removeObjectFromSelectedList(obj) == false) {
          // If the object is not already in the list, add it
          SelectedObject selectedObject = new SelectedObject(obj);
-         selectedObjects.add(selectedObject);
+         selectedObjects.clear();
+         selectInVisualizer = null;
+         //selectedObjects.add(selectedObject);
          // mark it as selected
          markSelected(selectedObject, true, true, true);
       }
@@ -1430,19 +1460,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       }
       if (websocketdb != null && currentJson != null && applyAppearanceChange){
         // Make xforms JSON
-        websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(false), null);
+        websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(false, true), null);
       }
    }
    
-   public void updateModelDisplayNoRepaint(Model aModel, boolean colorByState) {
-      if (isVtkGraphicsAvailable()){
-        lockDrawingSurfaces(true);
-        mapModelsToVisuals.get(aModel).updateModelDisplay(aModel);
-        lockDrawingSurfaces(false);
-      }
+   public void updateModelDisplayNoRepaint(Model aModel, boolean colorByState, boolean refresh) {
       if (websocketdb != null){
         ModelVisualizationJson cJson = mapModelsToJsons.get(aModel);
-        websocketdb.broadcastMessageJson(cJson.createFrameMessageJson(colorByState), null);
+        websocketdb.broadcastMessageJson(cJson.createFrameMessageJson(colorByState, refresh), null);
       }
    }
 
@@ -2294,6 +2319,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         String msgType = (String)jsonObject.get("type");
         if (msgType != null) {
             if (msgType.equalsIgnoreCase("info")) {
+                if (jsonObject.get("renderTime")!=null){
+                    double frameRenderTimeInMillis = JSONMessageHandler.convertObjectFromJsonToDouble(jsonObject.get("renderTime"));
+                    //System.out.println("renderTime"+frameRenderTimeInMillis);
+                    int frameRate = (int) (frameRenderTimeInMillis*1.5);
+                    if (frameRate > 30)
+                        Preferences.userNodeForPackage(TheApp.class).put("FrameRate", String.valueOf(frameRate));
+                    return;
+                }
                 if (debugLevel > 1) {
                     String msg = "Rendered " + jsonObject.get("numFrames") + " frames in " + jsonObject.get("totalTime") + " ms.";
                     double rendertimeAverage = ((Double) jsonObject.get("totalTime")) / ((Long) jsonObject.get("numFrames"));

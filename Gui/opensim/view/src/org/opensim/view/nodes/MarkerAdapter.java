@@ -40,6 +40,7 @@ import org.opensim.modeling.Vec3;
 import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.ObjectsRenamedEvent;
+import org.opensim.view.SingleModelGuiElements;
 import org.opensim.view.SingleModelVisuals;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
@@ -94,6 +95,9 @@ public class MarkerAdapter  {
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }
+        SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(model);
+        guiElem.setUnsavedChangesFlag(true);
+
     }
 
     private void updateDisplay() {
@@ -141,6 +145,8 @@ public class MarkerAdapter  {
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);            
         }
+        SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(model);
+        guiElem.setUnsavedChangesFlag(true);
     }
     
     public void setName(String newName){
@@ -176,6 +182,8 @@ public class MarkerAdapter  {
         ObjectsRenamedEvent evnt = new ObjectsRenamedEvent(this, model, objs);
         OpenSimDB.getInstance().setChanged();
         OpenSimDB.getInstance().notifyObservers(evnt);
+        SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(model);
+        guiElem.setUnsavedChangesFlag(true);
     }
 
 }

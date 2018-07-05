@@ -23,8 +23,19 @@ add_custom_target(CopyOpenSimCore ALL
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   COMMENT "Copy opensim-core Java Bindings to GUI.")
 if (WIN32)
+    # InstallRequiredSystemLibraries defines MSVC_REDIST_DIR,
+    # which is not really intended for use outside of 
+    # InstallRequiredSystemLibraries, but it's the best mechanism
+    # we have for now.
+    # https://docs.microsoft.com/en-us/cpp/ide/deployment-in-visual-cpp
+    # https://gitlab.kitware.com/cmake/cmake/issues/17725
+    include(InstallRequiredSystemLibraries)
+    # TODO: We only support 64-bit now. If building for 32-bit, must
+    # use vcredist_x86.exe (could use CMAKE_MSVC_ARCH).
+    set(MSVC_REDIST_EXE "${MSVC_REDIST_DIR}/vcredist_x64.exe")
+
     add_custom_target(PrepareInstaller ALL
-                  COMMAND ${Ant_EXECUTABLE} copy-installer-files -Dapi.dir="${OpenSim_ROOT_DIR}"
+                  COMMAND ${Ant_EXECUTABLE} copy-installer-files -Dapi.dir="${OpenSim_ROOT_DIR}" -Dmsvc.redist.exe="${MSVC_REDIST_EXE}"
                   ${ANT_ARGS}
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
@@ -68,6 +79,7 @@ add_custom_target(CopyModels ALL
                   COMMENT "Copy models and examples-to installer folder.")
 add_dependencies(CopyModels opensim-models)
 endif()
+
 
 if (APPLE)
     if (OpenSim_FOUND)

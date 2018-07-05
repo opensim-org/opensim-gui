@@ -58,7 +58,7 @@ public class GroundNode extends OneFrameNode{
          children.add(arrNodes);
          
       }
-      createFrameNodes(children);
+      OpenSimNodeHelper.createFrameNodes(children, comp);
       if(children.getNodesCount()==0) setChildren(Children.LEAF);      
       addDisplayOption(displayOption.Colorable);
       addDisplayOption(displayOption.Isolatable);

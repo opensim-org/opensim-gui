@@ -81,6 +81,8 @@ public class SelectedObject implements Selectable {
       ModelComponent mc = ModelComponent.safeDownCast(object);
       if (mc != null) return mc.getModel();
       Component comp = Component.safeDownCast(object);
+      if (comp == null)
+          return null;
       ModelComponent parent = ModelComponent.safeDownCast(comp.getOwner());
       while (parent == null){
           comp = comp.getOwner();

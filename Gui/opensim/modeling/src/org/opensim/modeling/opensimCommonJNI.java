@@ -215,6 +215,7 @@ public class opensimCommonJNI {
   public final static native void OpenSimObject_setInlined__SWIG_0(long jarg1, OpenSimObject jarg1_, boolean jarg2, String jarg3);
   public final static native void OpenSimObject_setInlined__SWIG_1(long jarg1, OpenSimObject jarg1_, boolean jarg2);
   public final static native String OpenSimObject_getDocumentFileName(long jarg1, OpenSimObject jarg1_);
+  public final static native int OpenSimObject_getDocumentFileVersion(long jarg1, OpenSimObject jarg1_);
   public final static native void OpenSimObject_setAllPropertiesUseDefault(long jarg1, OpenSimObject jarg1_, boolean jarg2);
   public final static native boolean OpenSimObject_print(long jarg1, OpenSimObject jarg1_, String jarg2);
   public final static native String OpenSimObject_dump__SWIG_0(long jarg1, OpenSimObject jarg1_, boolean jarg2);
@@ -1619,6 +1620,7 @@ public class opensimCommonJNI {
   public final static native void ComponentIterator_updateXMLNode(long jarg1, ComponentIterator jarg1_, long jarg2);
   public final static native boolean ComponentIterator_getInlined(long jarg1, ComponentIterator jarg1_);
   public final static native String ComponentIterator_getDocumentFileName(long jarg1, ComponentIterator jarg1_);
+  public final static native int ComponentIterator_getDocumentFileVersion(long jarg1, ComponentIterator jarg1_);
   public final static native boolean ComponentIterator_print(long jarg1, ComponentIterator jarg1_, String jarg2);
   public final static native boolean ComponentIterator_isA(long jarg1, ComponentIterator jarg1_, String jarg2);
   public final static native String ComponentIterator_toString(long jarg1, ComponentIterator jarg1_);
@@ -2312,14 +2314,21 @@ public class opensimCommonJNI {
   public final static native long CSVFileAdapter_clone(long jarg1, CSVFileAdapter jarg1_);
   public final static native long CSVFileAdapter_read(String jarg1);
   public final static native void CSVFileAdapter_write(long jarg1, TimeSeriesTable jarg1_, String jarg2);
+  public final static native int C3DFileAdapter_ForceLocation_OriginOfForcePlate_get();
+  public final static native int C3DFileAdapter_ForceLocation_CenterOfPressure_get();
+  public final static native int C3DFileAdapter_ForceLocation_PointOfWrenchApplication_get();
   public final static native long new_C3DFileAdapter__SWIG_0();
   public final static native long new_C3DFileAdapter__SWIG_1(long jarg1, C3DFileAdapter jarg1_);
   public final static native void delete_C3DFileAdapter(long jarg1);
   public final static native long C3DFileAdapter_clone(long jarg1, C3DFileAdapter jarg1_);
-  public final static native long C3DFileAdapter_read(String jarg1);
+  public final static native void C3DFileAdapter_setLocationForForceExpression(long jarg1, C3DFileAdapter jarg1_, int jarg2);
+  public final static native int C3DFileAdapter_getLocationForForceExpression(long jarg1, C3DFileAdapter jarg1_);
+  public final static native long C3DFileAdapter_read__SWIG_0(String jarg1, int jarg2);
+  public final static native long C3DFileAdapter_read__SWIG_1(String jarg1);
   public final static native void C3DFileAdapter_write(long jarg1, StdMapStringTimeSeriesTableVec3 jarg1_, String jarg2);
   public final static native String C3DFileAdapter__markers_get();
   public final static native String C3DFileAdapter__forces_get();
+  public final static native long C3DFileAdapter_read__SWIG_2(long jarg1, C3DFileAdapter jarg1_, String jarg2, long jarg3);
   public final static native long TableSource_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void TableSource_assign(long jarg1, TableSource jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String TableSource_getClassName();

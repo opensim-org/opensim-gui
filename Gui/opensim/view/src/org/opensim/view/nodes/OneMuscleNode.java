@@ -29,7 +29,9 @@ package org.opensim.view.nodes;
 
 import java.awt.Image;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
@@ -40,6 +42,7 @@ import org.openide.util.NbBundle;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.Muscle;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.view.ObjectDisplayShowOnlyAction;
 import org.opensim.view.editors.BodyNameEditor;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 
@@ -84,4 +87,15 @@ public class OneMuscleNode extends OneActuatorNode {
         return sheet;
     }
 
+    // Default action by double click now toggles pathpoints
+    @Override
+    public Action getPreferredAction() {
+        try {
+            return (ObjectDisplayShowOnlyAction) ObjectDisplayShowOnlyAction.findObject(
+                    (Class)Class.forName("org.opensim.view.ObjectDisplayShowOnlyAction"), true);
+        } catch (ClassNotFoundException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        return null;
+    }
 }
