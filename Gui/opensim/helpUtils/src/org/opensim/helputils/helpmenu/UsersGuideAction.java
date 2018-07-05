@@ -40,7 +40,7 @@ import org.opensim.utils.TheApp;
 public final class UsersGuideAction extends CallableSystemAction {
 
     public void performAction() {
-        String usersGuidePath = "https://simtk-confluence.stanford.edu/display/OpenSim40/User%s+Guide";
+        String usersGuidePath = "https://simtk-confluence.stanford.edu/display/OpenSim40/User's+Guide";
 
         System.out.println("USERS GUIDE PATH: " + usersGuidePath);
         BrowserLauncher.openURL(usersGuidePath);
