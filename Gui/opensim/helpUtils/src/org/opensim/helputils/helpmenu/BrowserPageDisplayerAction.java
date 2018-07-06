@@ -54,21 +54,26 @@ class BrowserPageDisplayerAction extends AbstractAction
         
     @Override
     public void actionPerformed(ActionEvent e) {
-        String file="";
         try {
-            URL onlineURL = new URL(url);
-            file = onlineURL.getFile();
-            int lastSeparatorIndex = file.lastIndexOf('/');
-            file = file.substring(lastSeparatorIndex);
+            String file="";
+            URL onlineURL = null;
+            try {
+                onlineURL = new URL(url);
+                file = onlineURL.getFile();
+                int lastSeparatorIndex = file.lastIndexOf('/');
+                file = file.substring(lastSeparatorIndex);
+            } catch (MalformedURLException ex) {
+                Exceptions.printStackTrace(ex);
+            }
+            // If issues with online tutorials then open local file
+            URL path = BrowserLauncher.isConnected() ? onlineURL : new File(TheApp.getCrossPlatformInstallDir() +  "/doc/" + file+".html").toURI().toURL();
+            
+            System.out.println("Path: " + path + "or "+
+                    TheApp.getCrossPlatformInstallDir() + File.separator + "/doc/" + file+".html");
+            BrowserLauncher.openURL(path.toString());
         } catch (MalformedURLException ex) {
             Exceptions.printStackTrace(ex);
         }
-        // If issues with online tutorials then open local file
-        String path = BrowserLauncher.isConnected() ? url : "file://"+TheApp.getCrossPlatformInstallDir() +  "/doc/" + file+".html";
-        
-        System.out.println("Path: " + path + "or "+
-                TheApp.getCrossPlatformInstallDir() + File.separator + "/doc/" + file+".html");
-        BrowserLauncher.openURL(path);            
     }
     
 }

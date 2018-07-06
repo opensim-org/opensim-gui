@@ -32,7 +32,9 @@ package org.opensim.helputils.helpmenu;
  */
 import java.io.File;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import org.openide.util.Exceptions;
 
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
@@ -43,11 +45,15 @@ import org.opensim.utils.TheApp;
 public final class OpenDoxygenAction extends CallableSystemAction {
 
     public void performAction() {
-        String basePath = TheApp.getCrossPlatformInstallDir();
-        String doxygenPath = BrowserLauncher.isConnected() ? "https://simtk.org/api_docs/opensim/api_docs40/" :
-                "file://"+basePath + "/sdk/doc/OpenSimAPI.html";
-
-        BrowserLauncher.openURL(doxygenPath);
+        try {
+            String basePath = TheApp.getCrossPlatformInstallDir();
+            String doxygenPath = BrowserLauncher.isConnected() ? "https://simtk.org/api_docs/opensim/api_docs40/" :
+                    new File(basePath + "/sdk/doc/OpenSimAPI.html").toURI().toURL().toString();
+            
+            BrowserLauncher.openURL(doxygenPath);
+        } catch (MalformedURLException ex) {
+            Exceptions.printStackTrace(ex);
+        }
 
     }
 
