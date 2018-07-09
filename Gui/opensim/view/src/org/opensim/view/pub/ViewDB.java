@@ -73,7 +73,6 @@ import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.Prefs;
 import org.opensim.utils.TheApp;
 import org.opensim.view.*;
-import org.opensim.view.experimentaldata.ExperimentalDataVisuals;
 import static org.opensim.view.pub.ViewDB.isVtkGraphicsAvailable;
 import vtk.AxesActor;
 import vtk.FrameActor;
@@ -463,26 +462,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                }
                catch(UnsatisfiedLinkError e){
                    setGraphicsAvailable(false);
-               }
-               if (isVtkGraphicsAvailable()){
-                    // Create visuals for the evModel
-                    SingleModelVisuals newModelVisual = (evModel instanceof ModelForExperimentalData)?
-                        new ExperimentalDataVisuals(evModel):
-                        new SingleModelVisuals(evModel);
-                    // add to map from models to modelVisuals so that it's accesisble
-                    // thru tree picks
-                    mapModelsToVisuals.put(evModel, newModelVisual);
-                    // add to list of models
-                    getModelVisuals().add(newModelVisual); //Too late??
-                    modelOpacities.put(evModel, 1.0);
-                    addVisObjectToAllViews();
-                    // Compute placement so that evModel does not intersect others
-                    vtkMatrix4x4 m= (evModel instanceof ModelForExperimentalData)?
-                           new vtkMatrix4x4():
-                           getInitialTransform(newModelVisual);
-                    newModelVisual.getModelDisplayAssembly().SetUserMatrix(m);
-
-                    sceneAssembly.AddPart(newModelVisual.getModelDisplayAssembly());
                }
                if (websocketdb!=null){
                    // create Json for model
