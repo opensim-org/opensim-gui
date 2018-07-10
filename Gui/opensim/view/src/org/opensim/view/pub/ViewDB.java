@@ -40,7 +40,6 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Set;
 import java.util.UUID;
 import java.util.Vector;
 import java.util.prefs.Preferences;
@@ -78,16 +77,10 @@ import vtk.vtkActor2D;
 import vtk.vtkAssembly;
 import vtk.vtkCamera;
 import vtk.vtkCaptionActor2D;
-import vtk.vtkFollower;
-import vtk.vtkMatrix4x4;
-import vtk.vtkPolyDataMapper;
 import vtk.vtkProp3D;
 import vtk.vtkProp3DCollection;
-import vtk.vtkProperty;
 import vtk.vtkTextActor;
 import vtk.vtkTextProperty;
-import vtk.vtkTransform;
-import vtk.vtkVectorText;
 
 /**
  *
@@ -1660,23 +1653,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         }
     }
     
-    public vtkVectorText createText3D(String text, double[] position, double[] color){
-        vtkVectorText XText=new vtkVectorText();
-        XText.SetText(text);
-        vtkPolyDataMapper XTextMapper=new vtkPolyDataMapper();
-        XTextMapper.SetInputConnection(XText.GetOutputPort());
-        vtkFollower XActor=new vtkFollower();
-        XActor.SetMapper(XTextMapper);
-        XActor.SetScale(.05, .05, .05);
-        XActor.SetPosition(position);
-        XActor.GetProperty().SetColor(color);
-        vtkCamera lastCamera=new vtkCamera();
-        if (getCurrentModelWindow()!=null)    // need a camera for the follower! 
-          lastCamera=getCurrentModelWindow().getCanvas().GetRenderer().GetActiveCamera();
-        XActor.SetCamera(lastCamera);
-        sceneAssembly.AddPart(XActor);
-        return XText;
-    }
 
     /*
     // Test function to show text billboarding
