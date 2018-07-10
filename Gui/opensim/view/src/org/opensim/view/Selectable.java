@@ -33,14 +33,12 @@ package org.opensim.view;
 
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
-import vtk.vtkCaptionActor2D;
 
 /**
  *
  * @author ayman
  */
 public interface Selectable {
-    double[] getBounds();
 
     OpenSimObject getOpenSimObject();
 
@@ -48,8 +46,4 @@ public interface Selectable {
 
     String getStatusText();
 
-    void markSelected(boolean highlight);
-
-    void updateAnchor(vtkCaptionActor2D caption);
-    
 }

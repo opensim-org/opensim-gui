@@ -69,7 +69,6 @@ import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.ObjectsDeletedEvent;
 import org.opensim.view.SelectedObject;
 import org.opensim.view.SingleModelGuiElements;
-import org.opensim.view.SingleModelVisuals;
 import org.opensim.view.editors.MusclePointFunctionEventListener;
 import org.opensim.view.functionEditor.FunctionEditorTopComponent;
 import org.opensim.view.functionEditor.FunctionEditorTopComponent.FunctionEditorOptions;
@@ -1373,7 +1372,6 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          }
          ParametersTabbedPanel.setSelectedComponent(AttachmentsTab);
          // tell the ViewDB to redraw the model
-         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model); //vtk
          //FIXME vis.updateMuscleOrForceAlongPathGeometry(asm, true);
          ViewDB.getInstance().repaintAll();
          // update the current path panel
@@ -1408,7 +1406,6 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          
          ParametersTabbedPanel.setSelectedComponent(AttachmentsTab);
          // tell the ViewDB to redraw the model
-         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model); //vtk
          // FIXME vis.updateMuscleOrForceAlongPathGeometry(asm, true);
          ViewDB.getInstance().repaintAll();
          // update the current path panel
@@ -1472,9 +1469,6 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          }
          
          ParametersTabbedPanel.setSelectedComponent(AttachmentsTab);
-         // tell the ViewDB to redraw the model
-         SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(currentModel);
-         //FIXME ewDB.getInstance().repaintAll();
          // update the panels
          updateAttachmentPanel();
          updateCurrentPathPanel();

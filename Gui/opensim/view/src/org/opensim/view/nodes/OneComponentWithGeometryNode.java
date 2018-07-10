@@ -174,12 +174,4 @@ public abstract class OneComponentWithGeometryNode extends OneComponentNode impl
         AppearanceHelper helper = new AppearanceHelper(getModelForNode(), this, appearance);
         helper.setAppearanceDisplayPrefProperty(pref);
     }
-
-    protected void updateObjectDisplay(Component obj) {
-        // Tell the world that the owner modelComponent need to regenerate
-        Model mdl = getModelForNode();
-        ViewDB.getInstance().getModelVisuals(mdl).upateDisplay(obj);
-        //ViewDB.getInstance().repaintAll();
-    }
-    
 }

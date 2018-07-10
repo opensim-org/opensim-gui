@@ -81,7 +81,6 @@ public class DisplayGeometryDisplayer extends vtkActor
     }
     
     public void setShading(int shading) {
-        ViewDB.getInstance().setObjectRepresentation(displayGeometry, shading, shading);
         Modified();
         ViewDB.getInstance().renderAll();
     }

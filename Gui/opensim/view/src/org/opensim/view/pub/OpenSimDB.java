@@ -212,11 +212,6 @@ public class OpenSimDB extends Observable implements Externalizable{
       double opacity=1;
       OpenSimContext swap=null;
       if(oldModel!=null) {
-         SingleModelVisuals rep = ViewDB.getInstance().getModelVisuals(oldModel);
-         if(rep!=null) {
-            offset = ViewDB.getInstance().getModelVisualsTransform(rep); // TODO: do we need to make a copy??
-            opacity = rep.getOpacity();
-         }
          removeModel(oldModel);
       }
       if(newModel!=null) {

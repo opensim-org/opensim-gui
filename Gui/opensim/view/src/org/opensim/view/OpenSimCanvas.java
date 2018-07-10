@@ -294,61 +294,7 @@ public class OpenSimCanvas extends OpenSimBaseCanvas implements MouseWheelListen
         picker.Pick(x, rw.GetSize()[1] - y, 0, ren);
         UnLock();
 
-        vtkAssemblyPath asmPath = picker.GetPath();
-        if (asmPath==null)
-            return null;
-         
-        OpenSimObject obj= ViewDB.getInstance().pickObject(asmPath);
-        /*
-        if (obj == null) {
-           // Could be an object that's part of a glyph
-           // Try point Picker void GetCellPoints(vtkIdType cellId, vtkIdList *ptIds);
-           vtkCellPicker pPicker=new vtkCellPicker();
-           // Important to set tolerance to something small, else it may pick glyphs not directly under cursor
-           pPicker.SetTolerance(0.0001);
-           Lock();
-           pPicker.Pick(x, rw.GetSize()[1] - y, 0, ren);
-           UnLock();
-           vtkAssemblyNode asmNode = (pPicker.GetPath()!=null) ? pPicker.GetPath().GetLastNode() : null;
-           if (asmNode==null)
-              return null;
-           vtkActor candidateActor=(vtkActor) asmNode.GetViewProp();
-           int cellId = pPicker.GetCellId();
-           obj = ViewDB.getInstance().getSelectedGlyphObject(cellId, candidateActor);
-        }
-        */
-        if (obj != null) {
-           // Get x,y,z, world for debugging
-           vtkWorldPointPicker wpPicker=new vtkWorldPointPicker();
-           Lock();
-           wpPicker.Pick(x, rw.GetSize()[1] - y, 0, ren);
-           UnLock();
-           double[] foo = wpPicker.GetPickPosition(); //TODO is there an easier way to assign the double[]?
-           worldPosition[0] = foo[0];
-           worldPosition[1] = foo[1];
-           worldPosition[2] = foo[2];
-           //System.out.println("World Pos="+worldPosition[0]+", "+worldPosition[1]+", "+worldPosition[2]);
-        }
-        // Kluge around Moving Muscle Points!
-        if (obj != null && MovingPathPoint.safeDownCast(obj)!=null)
-              return null;
-        /*
-        if (obj==null){  // Could be user object
-           vtkCellPicker pPicker=new vtkCellPicker();
-           // Important to set tolerance to something small, else it may pick glyphs not directly under cursor
-           pPicker.SetTolerance(0.0001);
-           Lock();
-           pPicker.Pick(x, rw.GetSize()[1] - y, 0, ren);
-           UnLock();
-           vtkAssemblyNode asmNode = (pPicker.GetPath()!=null) ? pPicker.GetPath().GetLastNode() : null;
-           if (asmNode==null)
-              return null;
-           vtkActor candidateActor=(vtkActor) asmNode.GetViewProp();
-           int cellId = pPicker.GetCellId();
-           obj = ViewDB.getInstance().getSelectedGlyphObject(cellId, candidateActor);
-            ViewDB.getInstance().pickUserObject(asmPath, cellId);
-        }*/
-        return obj;
+        return null;
     }
  
     /*
@@ -360,14 +306,6 @@ public class OpenSimCanvas extends OpenSimBaseCanvas implements MouseWheelListen
     /**
      * Temporarily hide a model from the current view
      */
-    void setModelVisibility(SingleModelVisuals nextModelVis, boolean onOff) {
-         vtkAssembly assembly = nextModelVis.getModelDisplayAssembly();
-        if (onOff)
-            assembly.VisibilityOn();
-        else
-            assembly.VisibilityOff();
-        repaint();
-    }
 
    public void lockDrawingSurface(boolean toLock) {
       if (toLock)

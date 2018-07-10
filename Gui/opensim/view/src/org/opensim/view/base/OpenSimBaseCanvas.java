@@ -207,13 +207,6 @@ public class OpenSimBaseCanvas extends vtkPanel
    // Overrides vtkPanel.resetCamera() to reset camera on selected objects (if any)
    public void resetCamera() {
       Lock();
-      double[] bounds = ViewDB.getInstance().getSelectedObjectBounds();
-      if(bounds!=null) GetRenderer().ResetCamera(bounds);
-      else {
-         bounds = ViewDB.getInstance().getSceneBoundsBodiesOnly();
-         if(bounds!=null) GetRenderer().ResetCamera(bounds);
-         else GetRenderer().ResetCamera();
-      }
       UnLock();
    } 
       

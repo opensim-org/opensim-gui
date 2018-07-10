@@ -743,8 +743,7 @@
     <folder name="Windows2">
         <folder name="Components">
             <file name="ExplorerTopComponent.settings" url="ExplorerTopComponentSettings.xml"/>
-            <file name="MuscleEditorTopComponent.settings" url="editors/MuscleEditorTopComponentSettings.xml"/>
-        </folder>
+       </folder>
         <folder name="Modes">
             <file name="osimExplorerMode.wsmode" url="osimExplorerMode.wsmode"/>
             <file name="osimMessagesMode.wsmode" url="osimMessagesMode.wsmode"/>
@@ -754,7 +753,6 @@
                 <file name="ExplorerTopComponent.wstcref" url="ExplorerTopComponentWstcref.xml"/>
             </folder>
             <folder name="osimEditorsMode">
-                <file name="MuscleEditorTopComponent.wstcref" url="editors/MuscleEditorTopComponentWstcref.xml"/>
                 <file name="properties.wstcref" url="propertiesWstcref_1.xml"/>
             </folder>
             <folder name="properties">
