@@ -176,17 +176,6 @@ public class OpenSimCanvas extends OpenSimBaseCanvas implements MouseWheelListen
    //--------------------------------------------------------------------------
    void handleDoubleClick( OpenSimObject osimObject ) {
        
-       ModelWindowVTKTopComponent ownerWindow = ViewDB.getInstance().getCurrentModelWindow();
-                
-       // If this is a rigid body, open the easy-to-use rigid body property editor (also provides the older table version).
-       /* Body bodyThatTalksToCpp = (osimObject == null) ? null : Body.safeDownCast(osimObject);
-       if( bodyThatTalksToCpp != null ) 
-           LSJava.LSPropertyEditors.LSPropertyEditorRigidBody.NewLSPropertyEditorRigidBody( osimObject, null, ownerWindow );     
-       else{ */
-          ObjectEditDialogMaker editorDialog = new ObjectEditDialogMaker( osimObject, ownerWindow );
-          editorDialog.process();
-          ViewDB.getInstance().statusDisplaySelectedObjects();
-       //}
    }
 
    private void setPicking(boolean enabled) {
