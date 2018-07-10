@@ -39,7 +39,6 @@ import org.opensim.modeling.*;
 import org.opensim.utils.TheApp;
 import org.opensim.view.MuscleColorByActivationStorage;
 import org.opensim.view.MuscleColoringFunction;
-import org.opensim.view.SingleModelVisuals;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 
@@ -141,17 +140,6 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    // In seconds
    public void setMinRenderTimeInterval(double interval) { minRenderTimeInterval = interval; }
 
-   public void setRenderMuscleActivations(boolean render) {
-        if (getModelForDisplayCompatibleStates()) {
-            if (ViewDB.isVtkGraphicsAvailable()) {
-                SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(getModelForDisplay());
-                if (vis != null) {
-                    vis.setApplyMuscleColors(render);
-                }
-            }
-        }
-    }
-
    public void startProgressUsingTime(double startTime, double endTime) {
       progressUsingTime = true;
       this.startTime = startTime;
@@ -244,7 +232,6 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    }
    
    public void cleanupMotionDisplayer() {
-      setRenderMuscleActivations(false);
       if(motionDisplayer!=null) motionDisplayer.cleanupDisplay();
       //ViewDB.getInstance().repaintAll();
       if (getTimer()!=null)

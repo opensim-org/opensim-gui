@@ -35,7 +35,6 @@ import org.opensim.modeling.Model;
 import org.opensim.modeling.Vec3;
 import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.pub.ViewDB;
-import vtk.vtkMatrix4x4;
 
 /**
  *
@@ -47,7 +46,6 @@ import vtk.vtkMatrix4x4;
 public class ModelDisplayOffsetJPanel extends javax.swing.JPanel 
                                       implements ChangeListener{
     
-    private SingleModelVisuals rep;
     private ModelVisualizationJson modelJson;
     
     private Model dModel;
@@ -56,7 +54,6 @@ public class ModelDisplayOffsetJPanel extends javax.swing.JPanel
     /** Creates new form ModelDisplayOffsetJPanel */
     public ModelDisplayOffsetJPanel(Model abstractModel) {
         // send message to visulaizer to get offset
-        rep = ViewDB.getInstance().getModelVisuals(abstractModel);
         modelJson = ViewDB.getInstance().getModelVisualizationJson(abstractModel);
         this.dModel = abstractModel;
 

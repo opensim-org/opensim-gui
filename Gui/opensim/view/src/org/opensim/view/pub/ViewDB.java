@@ -54,7 +54,6 @@ import org.eclipse.jetty.WebSocketDB;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.openide.awt.StatusDisplayer;
-import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
@@ -63,12 +62,10 @@ import org.openide.util.lookup.AbstractLookup;
 import org.openide.util.lookup.InstanceContent;
 import org.opensim.logger.OpenSimLogger;
 import org.opensim.modeling.*;
-import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.swingui.SwingWorker;
 import org.opensim.threejs.JSONMessageHandler;
 import org.opensim.threejs.JSONUtilities;
 import org.opensim.threejs.ModelVisualizationJson;
-import org.opensim.threejs.VisualizerWindowAction;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.Prefs;
 import org.opensim.utils.TheApp;
@@ -79,8 +76,6 @@ import vtk.FrameActor;
 import vtk.vtkActor;
 import vtk.vtkActor2D;
 import vtk.vtkAssembly;
-import vtk.vtkAssemblyNode;
-import vtk.vtkAssemblyPath;
 import vtk.vtkCamera;
 import vtk.vtkCaptionActor2D;
 import vtk.vtkFollower;
@@ -106,7 +101,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    // List of view windows currently displayed
    static ArrayList<ModelWindowVTKTopComponent> openWindows = new ArrayList<ModelWindowVTKTopComponent>(4);
    // List of models currently available in all views
-   private static ArrayList<SingleModelVisuals> modelVisuals = new ArrayList<SingleModelVisuals>(4);
    private static ArrayList<Boolean> saveStatus = new ArrayList<Boolean>(4);
    // One single vtAssemby for the whole Scene
    private static vtkAssembly sceneAssembly;
@@ -267,10 +261,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         return jsondb;
     }
 
-   // Map models to visuals
-   private Hashtable<Model, SingleModelVisuals> mapModelsToVisuals =
-           new Hashtable<Model, SingleModelVisuals>();
-   
+   // Map models to visuals   
    private Hashtable<Model, ModelVisualizationJson> mapModelsToJsons =
            new Hashtable<Model, ModelVisualizationJson>();
 
@@ -415,21 +406,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             for (int i=0; i<objs.size(); i++) {
                if (objs.get(i) instanceof Model) {
                   Model currentModel = (Model)objs.get(i);
-                  // Apply opacity to other models
-                  Enumeration<Model> models=mapModelsToVisuals.keys();
-                  while(models.hasMoreElements()){
-                     Model next = models.nextElement();
-                     double nominalOpacity=modelOpacities.get(next);
-                     SingleModelVisuals vis = mapModelsToVisuals.get(next);
-                     if (next == currentModel){
-                        setObjectOpacity(next, nominalOpacity);
-                        vis.setPickable(true);
-                        //displayText("Model Name:"+next.getName(),16);
-                     } else {
-                        setObjectOpacity(next, getNonCurrentModelOpacity()*nominalOpacity);
-                        vis.setPickable(false);
-                     }
-                  }
                   setCurrentJson();
                   break;
                }
@@ -481,21 +457,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                    startVisualizationServer();
                }
               // Check if this refits scene into window
-               // int rc = newModelVisual.getModelDisplayAssembly().GetReferenceCount();
-               if(OpenSimDB.getInstance().getNumModels()==1) { 
-                  Iterator<ModelWindowVTKTopComponent> windowIter = openWindows.iterator();
-                  double[] bnds = new double[6];
-                  while(windowIter.hasNext()){
-                     bnds = computeSceneBounds();
-                     //createBBox();
-                     ModelWindowVTKTopComponent nextWindow = windowIter.next();
-                     // This line may need to be enclosed in a Lock /UnLock pair per vtkPanel
-                     lockDrawingSurfaces(true);
-                     nextWindow.getCanvas().GetRenderer().ResetCamera(bnds);
-                     lockDrawingSurfaces(false);
-                  }
-               }
-               //rc = newModelVisual.getModelDisplayAssembly().GetReferenceCount();
                repaintAll();
                //rc = newModelVisual.getModelDisplayAssembly().GetReferenceCount();
             } else if (ev.getOperation()==ModelEvent.Operation.Close){
@@ -504,20 +465,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
 
                // Remove model-associated objects from selection list!
                removeObjectsBelongingToModelFromSelection(dModel);
-               SingleModelVisuals visModel = mapModelsToVisuals.get(dModel);
-               // Remove from display
-               //int rc = visModel.getModelDisplayAssembly().GetReferenceCount();
-               if (visModel != null){
-                    removeObjectFromScene(visModel.getModelDisplayAssembly());
-                    //rc = visModel.getModelDisplayAssembly().GetReferenceCount();
-                    // Remove from lists
-                    modelVisuals.remove(visModel);
-               }
-               removeAnnotationObjects(dModel);
-               mapModelsToVisuals.remove(dModel);
-               modelOpacities.remove(dModel);
                //rc = visModel.getModelDisplayAssembly().GetReferenceCount();
-               if (visModel != null) visModel.cleanup();
                if (websocketdb != null){
                     ModelVisualizationJson dJson = mapModelsToJsons.get(dModel);
                     if (dJson==null)
@@ -541,20 +489,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             } else if (ev.getOperation()==ModelEvent.Operation.SetCurrent) {
                // Current model has changed. For view purposes this affects available commands
                // Changes in the Tree view are handled by the Explorer View
-
-               // Apply opacity to other models
-               Enumeration<Model> models=mapModelsToVisuals.keys();
-               while(models.hasMoreElements()){
-                  Model next = models.nextElement();
-                  double nominalOpacity=modelOpacities.get(next);
-                  SingleModelVisuals vis = mapModelsToVisuals.get(next);
-                  if (next==ev.getModel()){
-                       setObjectOpacity(next, nominalOpacity);
-                  }
-                  else{
-                       setObjectOpacity(next, getNonCurrentModelOpacity()*nominalOpacity);
-                  }
-               }
                if (websocketdb != null){
                     Model cModel = ev.getModel();
                     currentJson = mapModelsToJsons.get(cModel);
@@ -602,7 +536,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
               // TODO: do same stuff as ModelEvent.Operation.Close event
            } else if (obj instanceof PathActuator) {
               removeObjectsBelongingToMuscleFromSelection(obj);
-              getModelVisuals(ev.getModel()).removeGeometry((Actuator)obj);
               repaint = true;
            } else if (obj instanceof Marker) {
               ModelVisualizationJson vis = mapModelsToJsons.get(ev.getModel());
@@ -632,51 +565,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         }
     }
    
-   public static ArrayList<SingleModelVisuals> getModelVisuals() {
-      return modelVisuals;
-   }
-
-   public OpenSimObject pickObject(vtkAssemblyPath asmPath) {
-      Iterator<SingleModelVisuals> iter = modelVisuals.iterator();
-      while(iter.hasNext()){
-         SingleModelVisuals nextModel = iter.next();
-         OpenSimObject obj = nextModel.pickObject(asmPath);
-         if (obj != null){
-            // Find corresponding tree node
-            return obj;
-         }
-      }
-      return null;
-   }
-   
-   /**
-    * Get the object corresponding to selected vtkAssemblyPath
-    **/
-   OpenSimObject getObjectForVtkRep(vtkAssembly prop) {
-      Iterator<SingleModelVisuals> iter = modelVisuals.iterator();
-      while(iter.hasNext()){
-         SingleModelVisuals nextModel = iter.next();
-         OpenSimObject obj = nextModel.getObjectForVtkRep(prop);
-         if (obj != null)
-            return obj;
-      }
-      return null;
-   }
-   
-   /**
-    * Get the vtk object corresponding to passed in opensim object
-    **/
-   public vtkProp3D getVtkRepForObject(OpenSimObject obj) {
-      if (!isVtkGraphicsAvailable()) return null;
-      Iterator<SingleModelVisuals> iter = modelVisuals.iterator();
-      while(iter.hasNext()){
-         SingleModelVisuals nextModel = iter.next();
-         vtkProp3D objAssembly = nextModel.getVtkRepForObject(obj);
-         if (objAssembly != null)
-            return objAssembly;
-      }
-      return null;
-   }
    /**
     * removeWindow removes the passed in window form the list of windows maintaiined
     * by ViewDB
@@ -749,18 +637,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     *
     */
    public void toggleModelDisplay(Model model, boolean onOff) {
-    if (isVtkGraphicsAvailable()){  
-      SingleModelVisuals modelVis = mapModelsToVisuals.get(model);
-      if (!modelVis.isVisible() && onOff){
-         sceneAssembly.AddPart(modelVis.getModelDisplayAssembly());
-         modelVis.setVisible(true);
-      }
-      else if (modelVis.isVisible() && !onOff) {
-         sceneAssembly.RemovePart(modelVis.getModelDisplayAssembly());
-         modelVis.setVisible(false);
-      }
-      repaintAll();
-    }
     if (websocketdb != null){
        ModelVisualizationJson vizJson = getInstance().mapModelsToJsons.get(model);
        websocketdb.broadcastMessageJson(vizJson.createToggleModelVisibilityCommand(onOff), null);
@@ -856,36 +732,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       renderAll();
    }
    
-   //----------------------------------------------------------------
-   public static double[]  getObjectRGBColorIn3DoublesWithRangeFrom0To1( OpenSimObject object ) 
-   {
-      if( PathPoint.safeDownCast(object) != null ) return null;
-      vtkProp3D asm = ViewDB.getInstance().getVtkRepForObject( object );
-      if( asm == null ) return null; 
-
-      if( object instanceof Body )
-         return ((BodyDisplayer)asm).GetColorOrReturnNull();
-      else if( object instanceof Geometry )
-      {
-         double[] colorToReturn = {-1, -1, -1};
-         Vec3 vecColorToReturn =((Geometry)object).getColor();
-         for (int i=0; i<3; i++) colorToReturn[i]=vecColorToReturn.get(i);
-         return colorToReturn;
-      }
-      return null;
-   }   
-   
-   //-----------------------------------------------------------------------------
-   public static double[] getObjectRGBColorIn3DoublesWithRangeFrom0To1Deprecated( OpenSimObject object )
-   {
-      double objectColor[] = { 1.0, 1.0, 1.0 }; 
-      if( object == null ) return objectColor; 
-      vtkProperty propertyToFillInformation = new vtkProperty(); 
-      ViewDB.getObjectProperties( object, propertyToFillInformation );
-      return propertyToFillInformation.GetColor();  // This seems to always return 1,1,1.
-      // Currently this just returns White.  May be due to VTK being bunches of pieces - and no real color available.
-   }
-
    public void applyColor(final double[] colorComponents, final vtkProp3D asm, boolean allowUndo) {
        AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
            public boolean canUndo() {
@@ -953,14 +799,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    //-----------------------------------------------------------------------------
    public static void setObjectOpacity( OpenSimObject object, double newOpacity ) {
     if (object instanceof Geometry)
-          ((Geometry)object).setOpacity(newOpacity);
-    if (isVtkGraphicsAvailable()){
-      vtkProp3D asm = ViewDB.getInstance().getVtkRepForObject(object);
-      ViewDB.applyOpacity( newOpacity, asm );
-      if( asm instanceof BodyDisplayer )
-          ((BodyDisplayer) asm).setOpacity(newOpacity);
-     }
-    
+          ((Geometry)object).setOpacity(newOpacity);    
    }
    
    //-----------------------------------------------------------------------------
@@ -969,37 +808,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
          public void apply(vtkActor actor) { actor.GetProperty().SetOpacity(newOpacity); }});
       ViewDB.repaintAll();
    }
-   /**
-    * Retrieve the display properties for the passed in object.
-    */
-   public static void getObjectProperties(OpenSimObject object, final vtkProperty saveProperty) {
-      vtkProp3D asm = ViewDB.getInstance().getVtkRepForObject(object);
-      ApplyFunctionToActors(asm, new ActorFunctionApplier() {
-         public void apply(vtkActor actor) { 
-            saveProperty.SetColor(actor.GetProperty().GetColor());
-            saveProperty.SetOpacity(actor.GetProperty().GetOpacity()); }});
-   }
-   
-   
-   //-----------------------------------------------------------------------------
-   public static double getObjectOpacityInRangeFrom0To1( OpenSimObject object )
-   {
-      if( object == null ) return 1; 
-      vtkProperty propertyToFillInformation = new vtkProperty(); 
-      ViewDB.getObjectProperties( object, propertyToFillInformation );
-      return propertyToFillInformation.GetOpacity();
-   }
-   
-   
-   public void setObjectProperties(OpenSimObject object, vtkProperty saveProperty) {
-      setObjectColor(object, saveProperty.GetColor());
-      setObjectOpacity(object, saveProperty.GetOpacity());
-      repaintAll();
-   }
-   /**
-    * Selection related functions
-    */
-
    /**
     * Remove items from selection list which belong to the given model
     */
@@ -1104,8 +912,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    
     public void addObjectAnnotationToViews(final vtkCaptionActor2D theCaption, OpenSimObject dObject) {
         addAnnotationToViews(theCaption);
-        vtkProp3D prop=ViewDB.getInstance().getVtkRepForObject(dObject);
-        theCaption.SetAttachmentPoint(prop.GetCenter());
         selectedObjectsAnnotations.put(new SelectedObject(dObject),theCaption);
     }
     public void addAnnotationToViews(final vtkActor2D theCaption) {
@@ -1229,52 +1035,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       }
       return valid;
    }
-   /**
-    * Compute initial offset for a model when displayed.
-    * To account for user prefs a property is made
-    * just put the model somewhere so that it does not intersect other models.
-    *
-    * @todo should we allow for rotations as well?
-    *
-    */
-   private vtkMatrix4x4 getInitialTransform(SingleModelVisuals newModelVisual) {
-      vtkMatrix4x4 m = new vtkMatrix4x4();
-      Iterator<SingleModelVisuals> iter = modelVisuals.iterator();
-      // modelBounds are -1 to 1 and updated only after drawing
-      double modelBounds[] = newModelVisual.getBounds();
-      // If at least one model exists compute bounding box for the scene
-      // and place the new model outside the box along z-axis.
-      // This could be made into an option where models are placed along X, Y or Z
-      // Also possible to define a default offset in any direction and reuse it.
-      if (iter.hasNext()){
-         double bounds[]= computeSceneBounds();
-         String defaultOffsetDirection = NbBundle.getMessage(ViewDB.class,"CTL_DisplayOffsetDir");
-         defaultOffsetDirection=Preferences.userNodeForPackage(TheApp.class).get("DisplayOffsetDir", defaultOffsetDirection);
-         if (defaultOffsetDirection == null)
-            defaultOffsetDirection="Z";
-         if (defaultOffsetDirection.equalsIgnoreCase("X"))
-            m.SetElement(0, 3, bounds[1]-modelBounds[0]);
-         else if (defaultOffsetDirection.equalsIgnoreCase("Y"))
-            m.SetElement(1, 3, bounds[3]-modelBounds[2]);
-         else
-            m.SetElement(2, 3, bounds[5]-modelBounds[4]);
-      }
-      return m;
-   }
-
-   /**
-    * get method for the visualization transform (to place a model in a scene).
-    */
-   public vtkMatrix4x4 getModelVisualsTransform(SingleModelVisuals aModelVisual) {
-      return aModelVisual.getModelDisplayAssembly().GetUserMatrix();
-   }
-   /**
-    * set method for the visualization transform (to place a model in a scene).
-    */
-   public void setModelVisualsTransform(SingleModelVisuals aModelVisual, vtkMatrix4x4 newTransform) {
-      aModelVisual.getModelDisplayAssembly().SetUserMatrix(newTransform);
-      updateAnnotationAnchors();
-   }
    
     public void setModelOffset(ModelVisualizationJson modelJson, Vec3 offsetVec3) {        
         if (websocketdb!=null){
@@ -1321,21 +1081,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       }
    }
 
-   public double[] getSelectedObjectBounds() {
-      double[] bounds = null;
-      for(int i=0; i<selectedObjects.size(); i++) bounds = boundsUnion(bounds, selectedObjects.get(i).getBounds());
-      return bounds;
-   }
-
-   // Don't include glyphs since they often also have glyphs at the origin which screws up the bounding box
-   // Also don't include axes
-   public double[] getSceneBoundsBodiesOnly() {
-      double[] bounds = null;
-      Iterator<SingleModelVisuals> iter = modelVisuals.iterator();
-      while(iter.hasNext()) bounds = boundsUnion(bounds, iter.next().getBoundsBodiesOnly());
-      return bounds;
-   }
-
    /**
     * createScene is invoked once to create the assembly representing the scene
     * that models attach to. If all windows are closed then this function will not be called again.
@@ -1372,9 +1117,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     * Search the list of displayed models for the passed in model and if found return
     * its visuals, otherwise return null
     */
-   public SingleModelVisuals getModelVisuals(Model aModel) {
-      return mapModelsToVisuals.get(aModel);
-   }
    public ModelVisualizationJson getModelVisualizationJson(Model aModel) {
       return mapModelsToJsons.get(aModel);
    }
@@ -1429,14 +1171,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
      *  This excludes transforms since these are obtained from the system on the fly.
      */
    public void updateModelDisplay(Model aModel, OpenSimObject specificObject) {
-      if (isVtkGraphicsAvailable()){
-        lockDrawingSurfaces(true);
-        if (specificObject!=null)
-              mapModelsToVisuals.get(aModel).updateObjectDisplay(specificObject);
-        mapModelsToVisuals.get(aModel).updateModelDisplay(aModel);
-        lockDrawingSurfaces(false);
-        repaintAll();
-      }
       if (websocketdb != null && currentJson != null && applyAppearanceChange){
         // Make xforms JSON
         websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(false, true), null);
@@ -1581,43 +1315,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       */
       return visible;
    }
-   /**
-    * Change representation of a visible object to the one passed in.
-    * The encoding is from VTK and is defined as follows:
-    * 0. Points
-    * 1. Wireframe
-    * 2. Surface
-    *
-    * Shading is defined similarly but only if representation is Surface(2)
-    * 0. Flat
-    * 1. Gouraud
-    * 2. Phong
-    * defined in vtkProperty.h
-    */
-   public static void setObjectRepresentation(final OpenSimObject object, final int rep, final int newShading) {
-      // Set new rep in model so that it's persistent.'
-      DecorativeGeometry.Representation newPref = DecorativeGeometry.Representation.DrawSurface;
-      if (rep==1)  newPref = DecorativeGeometry.Representation.DrawWireframe;
-      /*
-      if (object.getDisplayer()!=null){
-        final DecorativeGeometry.Representation oldPref = object.getDisplayer().getDisplayPreference();
-        final DecorativeGeometry.Representation finalNewPref = newPref;
-        object.getDisplayer().setDisplayPreference(newPref);
-      }
-      else if (object instanceof Geometry)
-          ((Geometry)object).setDisplayPreference(newPref);
-            */
-      vtkProp3D asm = ViewDB.getInstance().getVtkRepForObject(object);
-      ApplyFunctionToActors(asm, new ActorFunctionApplier() {
-         public void apply(vtkActor actor) {
-            actor.GetProperty().SetRepresentation(rep);
-            if (rep==2){   // Surface shading
-               actor.GetProperty().SetInterpolation(newShading);
-            }
-         }});
-      repaintAll();
-   }
-
+   
    public boolean isPicking() {
       return picking;
    }
@@ -1690,39 +1388,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       }
    }
 
-    public OpenSimObject getSelectedGlyphObject(int cellId, vtkActor glyphActor) {
-        Iterator<SingleModelVisuals> iter = modelVisuals.iterator();
-        while(iter.hasNext()){
-            SingleModelVisuals nextModel = iter.next();
-            OpenSimvtkGlyphCloud glyph = nextModel.getGlyphObjectForActor(glyphActor);
-            if (glyph!=null)
-                return glyph.getPickedObject(cellId);
-        }
-        return null;
-    }
-    
-    /**
-     * User Objects manipulation. Delegate to proper model.
-     * 
-     * Use carfully as you're responsible for any cleanup. Selection management is not supported.
-     */
-    public void addUserObjectToModel(Model model, vtkActor vtkActor) {
-        SingleModelVisuals visModel = mapModelsToVisuals.get(model);
-        visModel.addUserObject(vtkActor);
-    }
-
-    public void removeUserObjectFromModel(Model model, vtkActor vtkActor) {
-       SingleModelVisuals visModel = mapModelsToVisuals.get(model);
-       if (visModel != null){
-            visModel.removeUserObject(vtkActor);
-            //removeAnnotationObjects(model);
-        }
-    }
-    
-    public void addUserObjectToCurrentView(vtkActor vtkActor) {
-         getCurrentModelWindow().getCanvas().GetRenderer().AddActor(vtkActor);
-    }
-
 /*
  * Functions to deal with saved "Settings"
  * processSavedSettings parses the [modelFileWithoutExtension]_settings.xml file
@@ -1759,16 +1424,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       return null;
    }
 
-    private double[] computeSceneBounds() {
-     Iterator<SingleModelVisuals> iter = modelVisuals.iterator();
-     double[] bounds = new double[]{-.1, .1, -.1, .1, -.1, .1};
-     while(iter.hasNext()){
-         SingleModelVisuals nextModel = iter.next();
-         bounds = boundsUnion(bounds, nextModel.getBoundsBodiesOnly());
-      }
-      return bounds;
-    }
-
     @Override
     public void resultChanged(LookupEvent ev) {
         Lookup.Result r = (Lookup.Result) ev.getSource();
@@ -1778,18 +1433,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             int x=0;
         }
 
-    }
-
-    public void setSelectedObject(OpenSimObject openSimObject, Model modelForNode) {
-        clearSelectedObjects();
-        getModelVisuals(modelForNode).selectObject(openSimObject);
-        repaintAll();
-    }
-
-    public void updateDisplay(Model model, Component ownerModelComponent) {
-        if (isVtkGraphicsAvailable()){
-            getModelVisuals(model).upateDisplay(ownerModelComponent);
-        }
     }
 
     /**
@@ -1993,26 +1636,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                 }});
             }           
         }
-        // If no windows were opened just quit this part since loading of VTK symbols
-        // happens only when openning a window
-        if (getInstance().getCurrentModelWindow()==null)
-            return;
-        for(int i=0; i<desc.getOffsetsList().size();i++){
-            vtkMatrix4x4 m = new vtkMatrix4x4();
-            double[] savedOffset = desc.getOffsetsList().get(i);
-            for(int j=0; j<3; j++)  m.SetElement(j, 3, savedOffset[j]);
-            if (i > modelVisuals.size()-1) break;   // CNo need to throw exception for that. Would happen if a model didn't have a file'
-            ViewDB.getInstance().setModelVisualsTransform(modelVisuals.get(i), m);
-        }
         repaintAll();
-    }
-
-    // Assume no display transform here
-    public void addModelVisuals(Model model, SingleModelVisuals dataVisuals) {
-        if (!modelVisuals.contains(dataVisuals))
-            modelVisuals.add(dataVisuals);
-        mapModelsToVisuals.put(model, dataVisuals);
-        sceneAssembly.AddPart(dataVisuals.getModelDisplayAssembly());
     }
 
     public void addModelVisuals(Model model, ModelVisualizationJson modelJson) {
@@ -2104,26 +1728,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
 
     public void updateAnnotationAnchors() {
         // For each Anotated object, update anchor point as needed
-        Set<Selectable> annotated = selectedObjectsAnnotations.keySet();
-        for(Selectable nextSelected:annotated){
-            OpenSimObject dObject = nextSelected.getOpenSimObject();
-            nextSelected.updateAnchor(selectedObjectsAnnotations.get(nextSelected));
-        }
     }
     // Change orientation based on passed in 3 Rotations, used to visualize mocap data
     public void setOrientation(Model model, double[] d) {
-        SingleModelVisuals visuals = getModelVisuals(model);
-        vtkMatrix4x4 currenTransform=getModelVisualsTransform(visuals);
-        // keep only translation
-        for(int i=0; i<3; i++)
-            for(int j=0; j<3; j++)
-                currenTransform.SetElement(i, j, (i==j)?1.0:0.);
-        vtkTransform newDisplayTransfrom = new vtkTransform(); //Identity
-        newDisplayTransfrom.RotateX(d[0]);
-        newDisplayTransfrom.RotateY(d[1]);
-        newDisplayTransfrom.RotateZ(d[2]);
-        newDisplayTransfrom.Concatenate(currenTransform);
-        getInstance().setModelVisualsTransform(visuals, newDisplayTransfrom.GetMatrix());
   
     }
 
@@ -2181,18 +1788,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                        toggleObjectsDisplay(m, true);
                    } else{  // turning off
                        removeObjectsBelongingToMuscleFromSelection(obj);
-                       getModelVisuals(ev.getModel()).removeGeometry(obj);
+                       //getModelVisuals(ev.getModel()).removeGeometry(obj);
                    }
                    repaint = true;
                }
                else {   // Other forces
-                    if (!newState){ // turn on
-                        //f.getDisplayer().setDisplayPreference(DisplayPreference.GouraudShaded);
-                        getModelVisuals(ev.getModel()).upateDisplay(f);
-                    }
-                    else {  // turning off
-                        getModelVisuals(ev.getModel()).removeGeometry(obj);
-                    }
                     repaint = true;
               }
            }

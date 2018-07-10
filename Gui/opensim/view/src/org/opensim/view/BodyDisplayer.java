@@ -229,7 +229,6 @@ public class BodyDisplayer extends vtkAssembly
     }
 
     public void setShading(int shading) {
-        ViewDB.getInstance().setObjectRepresentation(frame, shading, shading);
         Modified();
         ViewDB.getInstance().repaintAll();
     }

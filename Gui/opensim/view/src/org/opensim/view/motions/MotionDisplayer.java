@@ -52,7 +52,6 @@ import org.opensim.modeling.Component;
 import org.opensim.modeling.Coordinate;
 import org.opensim.modeling.CoordinateSet;
 import org.opensim.modeling.ForceSet;
-import org.opensim.modeling.Ground;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
@@ -62,7 +61,6 @@ import org.opensim.modeling.MuscleList;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PhysicalFrame;
-import org.opensim.modeling.SimbodyEngine;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Storage;
 import org.opensim.modeling.Transform;
@@ -73,7 +71,6 @@ import org.opensim.threejs.JSONUtilities;
 import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.MuscleColoringFunction;
 import org.opensim.view.OpenSimvtkGlyphCloud;
-import org.opensim.view.SingleModelVisuals;
 import org.opensim.view.experimentaldata.AnnotatedMotion;
 import org.opensim.view.experimentaldata.ExperimentalDataItemType;
 import org.opensim.view.experimentaldata.ExperimentalDataObject;
@@ -729,10 +726,8 @@ public class MotionDisplayer {
           boolean forcesModified=false;
           mot.updateDecorations(interpolatedStates);
           if (ViewDB.isVtkGraphicsAvailable()){
-            SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(model);
              for(ExperimentalDataObject nextObject:objects){
                   if (!nextObject.isDisplayed()) continue;
-                  vis.upateDisplay(nextObject);
                   // The following blocks need to be moved inside updateDecorations
                   if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
 
@@ -876,16 +871,7 @@ public class MotionDisplayer {
     
     public void toggleTrail(ExperimentalDataObject aExperimentalDataObject)
     {
-        vtkActor prop=objectTrails.get(aExperimentalDataObject);
-        if (prop!=null){    // Created visuals already at some point
-            prop.Modified();
-            prop.SetVisibility(1-prop.GetVisibility());
-             return;
-        }
-        // Else recreate
-        prop = createTrail(aExperimentalDataObject);
-        ViewDB.getInstance().addUserObjectToModel(model, prop);
-        prop.Modified();
+
     }
 
     // This method precreates the Trails for motion objects regardless.
