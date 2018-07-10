@@ -687,13 +687,9 @@ public class ModelWindowVTKTopComponent extends TopComponent
     }
     
     public Action[] getActions(){
-        // Note: seem to need to do it this way rather than just new ViewReplicateAction(), etc. because java complains otherwise
-        // about creating multiple instances of a shared object.
-        ViewReplicateAction act1 = (ViewReplicateAction) SharedClassObject.findObject(ViewReplicateAction.class, true);   // New...
-        ViewEditAction act2 = (ViewEditAction) SharedClassObject.findObject(ViewEditAction.class, true); //Edit...
         Action[] superActs = super.getActions();
                          
-        return (new Action[]{superActs[8],act1,act2});
+        return (new Action[]{});
     };
 
     protected void componentActivated() {
