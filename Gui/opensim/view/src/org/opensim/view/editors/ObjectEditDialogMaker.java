@@ -50,7 +50,7 @@ public class ObjectEditDialogMaker {
     /**
      * Creates a new instance of ObjectEditDialogMaker
      */
-    public ObjectEditDialogMaker(OpenSimObject object, ModelWindowVTKTopComponent owner, boolean allowEdit, String confirmButtonText) {
+    public ObjectEditDialogMaker(OpenSimObject object, boolean allowEdit, String confirmButtonText) {
         // If allowEdit is true,aAssume we're editing properties from a file, so we'll call it "Save" instead of "OK"
         confirmButton.setText(confirmButtonText);
 
@@ -75,19 +75,12 @@ public class ObjectEditDialogMaker {
      *
      * @todo handle the case of null owner (if no ModelWindowVTKTopComponent is open)
      */
-    public ObjectEditDialogMaker(OpenSimObject object, ModelWindowVTKTopComponent owner) {
-        this(object, owner, false, "OK");
+    public ObjectEditDialogMaker(OpenSimObject object) {
+        this(object, false, "OK");
     }
     
-    /**
-     * Non visible objects
-     */
-     public ObjectEditDialogMaker(OpenSimObject object, boolean allowEdit, String confirmButtonText) {
-        this(object, null, allowEdit, confirmButtonText);
-     }
-
      public ObjectEditDialogMaker(OpenSimObject object, boolean allowEdit) {
-        this(object, null, allowEdit, "OK");
+        this(object, allowEdit, "OK");
      }
 
      public static boolean editFile(String fileName) {
