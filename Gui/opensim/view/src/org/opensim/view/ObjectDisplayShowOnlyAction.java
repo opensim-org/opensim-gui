@@ -30,6 +30,7 @@ import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.view.nodes.ActuatorGroupNode;
 import org.opensim.view.nodes.OneComponentNode;
 import org.opensim.view.nodes.OneModelNode;
 import org.opensim.view.nodes.OpenSimNode;
@@ -66,14 +67,13 @@ public final class ObjectDisplayShowOnlyAction extends ObjectAppearanceChangeAct
 
            OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[i];
            Node parentNode = objectNode.getParentNode();
-           /*
+           
             // For Actuators we want to go up to the ActuatorSet node rather than the group node
             // A cleaner solution would be to make nodes hold pointer to which node would
             // show only be relative to.
-            while (!(parentNode instanceof OpenSimObjectSetNode) && 
-            !(parentNode instanceof OneModelNode))
-            parentNode = (OpenSimObjectNode) (parentNode.getParentNode());
-            */
+            if (parentNode instanceof ActuatorGroupNode)
+                parentNode = (OpenSimObjectNode) (parentNode.getParentNode());
+            
            Children siblings = parentNode.getChildren();
            Node[] siblingNodes = siblings.getNodes();
            for (int j = 0; j < siblingNodes.length; j++) {
