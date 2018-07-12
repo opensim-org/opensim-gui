@@ -29,6 +29,7 @@ package org.eclipse.jetty;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Observer;
 import java.util.Set;
 import java.util.UUID;
@@ -43,6 +44,8 @@ public class WebSocketDB {
     private Set<VisWebSocket> sockets = Collections.synchronizedSet(new HashSet<VisWebSocket>());
     private Observer observer;
     public static boolean debug = false;
+    // Keep list of OpenModel messages that are still pending (not acknowledged yet)
+    private static LinkedList<String> pendingModels = new LinkedList<String>();
     /** Creates a new instance of WebSocketDB */
     private WebSocketDB() {
         instance = this;
@@ -81,6 +84,13 @@ public class WebSocketDB {
     {
         // Every time we broadcast a message will give it uuid so clients can check for duplicates
         msg.put("message_uuid", UUID.randomUUID().toString());
+        if (msg.get("Op").equals("OpenModel")){
+            String modelUUIDString = (String) msg.get("UUID");
+            if (!pendingModels.contains(modelUUIDString)){
+                pendingModels.add(modelUUIDString);
+                //System.out.println("Model:"+modelUUIDString+" is pending");
+            }
+        }
         //System.out.println("Broadcast:"+msg.get("Op"));
         if (specificSocket != null){
             specificSocket.sendVisualizerMessage(msg);
@@ -92,5 +102,17 @@ public class WebSocketDB {
             sock.sendVisualizerMessage(msg);
             i++;
         }
+    }
+    
+    public void finishPendingMessage(String uuidString){
+        if (pendingModels.contains(uuidString)){
+            pendingModels.remove(uuidString);
+            //System.out.println("Model:"+uuidString+" is ready");
+        }
+    }
+
+    public boolean isPending(UUID modelUUID) {
+        String uuidString = modelUUID.toString();
+        return pendingModels.contains(uuidString);
     }
 }
