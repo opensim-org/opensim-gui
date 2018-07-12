@@ -377,7 +377,7 @@ public class MotionDisplayer {
     /** Creates a new instance of MotionDisplayer */
     public MotionDisplayer(Storage motionData, Model model) {
         String saved = "5";
-        String currentSize =Preferences.userNodeForPackage(TheApp.class).get("Experimental Marker Size(mm)", saved);
+        String currentSize =Preferences.userNodeForPackage(TheApp.class).get("Experimental Marker Size (mm)", saved);
         Preferences.userNodeForPackage(TheApp.class).put("Experimental Marker Size (mm)", currentSize);
         DEFAULT_MARKER_SIZE = Double.parseDouble(currentSize);
         this.experimentalForceScaleFactor = 1.0;
