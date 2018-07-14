@@ -81,7 +81,8 @@ public class WebSocketDB {
     {
         // Every time we broadcast a message will give it uuid so clients can check for duplicates
         msg.put("message_uuid", UUID.randomUUID().toString());
-        //System.out.println("Broadcast:"+msg.get("Op"));
+        if (!msg.get("Op").equals("Frame") && debug)
+            System.out.println("Broadcast:"+msg.toJSONString());
         if (specificSocket != null){
             specificSocket.sendVisualizerMessage(msg);
             return;

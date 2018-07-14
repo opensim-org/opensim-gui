@@ -123,11 +123,16 @@ public class CommandComposerThreejs {
         commandJson.put("objectUuid", objectUuid.toString());
         return commandJson;
     }
-
+    // newObject may have no uuid!!!
     static JSONObject createAddObjectCommandJson(JSONObject newObject) {
         JSONObject commandJson = new JSONObject();
         commandJson.put("type", "AddObjectCommand");
-        commandJson.put("objectUuid", newObject.get("uuid"));
+        if (newObject.get("uuid")!=null)
+            commandJson.put("objectUuid", newObject.get("uuid"));
+        else {
+            JSONObject jObj = (JSONObject) newObject.get("object");
+            commandJson.put("objectUuid", jObj.get("uuid"));
+        }
         commandJson.put("object", newObject);
         return commandJson;
     }
