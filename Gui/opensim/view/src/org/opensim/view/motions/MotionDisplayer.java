@@ -41,6 +41,7 @@ import java.util.Hashtable;
 import java.util.Set;
 import java.util.UUID;
 import java.util.Vector;
+import java.util.prefs.Preferences;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.opensim.logger.OpenSimLogger;
@@ -71,6 +72,7 @@ import org.opensim.modeling.UnitVec3;
 import org.opensim.modeling.Vec3;
 import org.opensim.threejs.JSONUtilities;
 import org.opensim.threejs.ModelVisualizationJson;
+import org.opensim.utils.TheApp;
 import org.opensim.view.MuscleColoringFunction;
 import org.opensim.view.OpenSimvtkGlyphCloud;
 import org.opensim.view.SingleModelVisuals;
@@ -374,6 +376,10 @@ public class MotionDisplayer {
     
     /** Creates a new instance of MotionDisplayer */
     public MotionDisplayer(Storage motionData, Model model) {
+        String saved = "5";
+        String currentSize =Preferences.userNodeForPackage(TheApp.class).get("Experimental Marker Size (mm)", saved);
+        Preferences.userNodeForPackage(TheApp.class).put("Experimental Marker Size (mm)", currentSize);
+        DEFAULT_MARKER_SIZE = Double.parseDouble(currentSize);
         this.experimentalForceScaleFactor = 1.0;
         this.experimentalMarkerScaleFactor = 1.0;
         this.model = model;
@@ -1006,7 +1012,7 @@ public class MotionDisplayer {
         }
         
     }
-    public static final double DEFAULT_MARKER_SIZE = 5;
+    public static double DEFAULT_MARKER_SIZE = 5;
 
     public void addExperimentalDataObjectsToJson(AbstractList<ExperimentalDataObject> expObjects) {
         // Make sure this
