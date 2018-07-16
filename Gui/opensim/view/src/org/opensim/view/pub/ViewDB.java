@@ -2272,6 +2272,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
     public void addVisualizerObject(JSONObject jsonObject, double[] bounds) {
         if (websocketdb!=null){
+            // wait for model to be ready 
+            while (websocketdb.isPending(currentJson.getModelUUID())){
+                //System.out.println("Waiting for model to be ready");
+            }
             websocketdb.broadcastMessageJson(currentJson.createAddObjectCommand(jsonObject, bounds), null);
         }
     }
@@ -2359,6 +2363,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
 
                 }
 
+                return;
+            }
+            if (msgType.equalsIgnoreCase("acknowledge")){
+                WebSocketDB.getInstance().finishPendingMessage((String) jsonObject.get("uuid"));
                 return;
             }
         }
