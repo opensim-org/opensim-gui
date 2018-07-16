@@ -185,8 +185,17 @@ public class MotionObjectPointForce extends MotionObjectBodyPoint {
     void updateDecorations(ArrayDouble interpolatedStates) {
         int idx = getStartIndexInFileNotIncludingTime();
         setPoint(new double[]{interpolatedStates.get(idx+3), interpolatedStates.get(idx+4), interpolatedStates.get(idx+5)});
-        for (int i=0; i<3; i++) 
-            getDirection().set(i, interpolatedStates.get(idx+i));
+        if (forceComponent.equalsIgnoreCase("all")){
+            for (int i=0; i<3; i++) 
+                getDirection().set(i, interpolatedStates.get(idx+i));
+        }
+        else {
+            String componentNames = "xyz";
+            int componentIndex = componentNames.indexOf(forceComponent);
+            for (int i=0; i<3; i++) 
+                getDirection().set(i, 0);
+            getDirection().set(componentIndex, interpolatedStates.get(idx+componentIndex));
+        }
     }
     // Create JSON object to represent ExperimentalForce
     @Override
