@@ -323,7 +323,8 @@ public class ClassifyDataJPanel extends javax.swing.JPanel {
         rotations[0]=xRot-rotations[0];
         rotations[1]=yRot-rotations[1];
         rotations[2]=zRot-rotations[2];
-        Vec3 rotationAsVec3 = new Vec3(rotations[0], rotations[1],rotations[2]);
+        double degToRadians = Math.toRadians(1.0);
+        Vec3 rotationAsVec3 = new Vec3(degToRadians*xRot, degToRadians*yRot, degToRadians*zRot);
         ViewDB.getInstance().setOrientation(displayer.getModel(), rotationAsVec3);
  
     }
