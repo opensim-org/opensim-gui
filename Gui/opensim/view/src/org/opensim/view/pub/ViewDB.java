@@ -2135,20 +2135,16 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         }
     }
     // Change orientation based on passed in 3 Rotations, used to visualize mocap data
-    public void setOrientation(Model model, double[] d) {
-        SingleModelVisuals visuals = getModelVisuals(model);
-        vtkMatrix4x4 currenTransform=getModelVisualsTransform(visuals);
-        // keep only translation
-        for(int i=0; i<3; i++)
-            for(int j=0; j<3; j++)
-                currenTransform.SetElement(i, j, (i==j)?1.0:0.);
-        vtkTransform newDisplayTransfrom = new vtkTransform(); //Identity
-        newDisplayTransfrom.RotateX(d[0]);
-        newDisplayTransfrom.RotateY(d[1]);
-        newDisplayTransfrom.RotateZ(d[2]);
-        newDisplayTransfrom.Concatenate(currenTransform);
-        getInstance().setModelVisualsTransform(visuals, newDisplayTransfrom.GetMatrix());
-  
+    public void setOrientation(Model model, Vec3 rotVec3) {
+        if (websocketdb!=null){
+            ModelVisualizationJson modelJson = getModelVisualizationJson(model);
+            JSONObject guiJson = new JSONObject();
+            guiJson.put("Op", "execute");
+            JSONObject commandJson =  modelJson.createSetRotationCommand(modelJson.getModelUUID(), rotVec3);
+            guiJson.put("command", commandJson);
+            System.out.println("Command:"+guiJson);
+            websocketdb.broadcastMessageJson(guiJson, null);
+        }          
     }
 
     private void removeAnnotationObjects(Model dModel) {
