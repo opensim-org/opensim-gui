@@ -27,16 +27,17 @@
 package org.opensim.view.experimentaldata;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.opensim.modeling.ArrayDecorativeGeometry;
 import org.opensim.modeling.ArrayDouble;
+import org.opensim.modeling.Component;
 import org.opensim.modeling.DecorativeArrow;
-import org.opensim.modeling.DecorativeSphere;
+import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
+import org.opensim.modeling.OpenSimContext;
+import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.State;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Transform;
@@ -45,6 +46,7 @@ import org.opensim.modeling.Vec3;
 import org.opensim.threejs.JSONUtilities;
 import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.motions.MotionDisplayer;
+import org.opensim.view.pub.OpenSimDB;
 
 /**
  *
@@ -172,6 +174,7 @@ public class MotionObjectPointForce extends MotionObjectBodyPoint {
         this.torqueIdentifier = torqueIdentifier;
     }
     
+    @Override
     public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
         if (!fixed){
             Transform xform = new Transform();
@@ -180,21 +183,48 @@ public class MotionObjectPointForce extends MotionObjectBodyPoint {
             appendToThis.push_back(new DecorativeArrow(new Vec3(0, 0, 0)).setBodyId(0).setColor(new Vec3(0., 1., .0)).setOpacity(0.5).setIndexOnBody(getStartIndexInFileNotIncludingTime()).setTransform(xform));            
         }
     }
-
-    @Override
+   @Override
     void updateDecorations(ArrayDouble interpolatedStates) {
         int idx = getStartIndexInFileNotIncludingTime();
-        setPoint(new double[]{interpolatedStates.get(idx+3), interpolatedStates.get(idx+4), interpolatedStates.get(idx+5)});
-        if (forceComponent.equalsIgnoreCase("all")){
+        // if Point not in ground, transform into Ground since Arrow is in Ground by default
+        // and we don't want to change scene graph layout for easy book-keeping
+        super.setPoint(new double[]{interpolatedStates.get(idx + 3), interpolatedStates.get(idx + 4), interpolatedStates.get(idx + 5)});
+        double[] forceLocal = new double[]{interpolatedStates.get(idx), 
+                              interpolatedStates.get(idx+1), 
+                              interpolatedStates.get(idx+2)};
+        if (!forceExpressedInBodyName.equalsIgnoreCase("ground")){
+            Vec3 localDirection = new Vec3();
             for (int i=0; i<3; i++) 
-                getDirection().set(i, interpolatedStates.get(idx+i));
+                localDirection.set(i, forceLocal[i]);
+            applyForceComponent(localDirection, interpolatedStates, idx);
+            for (int i=0; i<3; i++) 
+                forceLocal[i] = localDirection.get(i);
+            // Convertback to double[]
+            double[] forceGlobal = new double[3]; 
+            Model model = getModel();
+            OpenSimContext dContext= OpenSimDB.getInstance().getContext(model);
+            Component c = model.getComponent(getForceExpressedInBodyName());
+            PhysicalFrame f = PhysicalFrame.safeDownCast(c);
+            dContext.transform(f, forceLocal, model.get_ground(), forceGlobal);
+            for (int i=0; i<3; i++) 
+                getDirection().set(i, forceGlobal[i]);
         }
-        else {
+        else
+            applyForceComponent(getDirection(), interpolatedStates, idx);
+    }
+
+    private void applyForceComponent(Vec3 direction1, ArrayDouble interpolatedStates, int idx) {
+        if (forceComponent.equalsIgnoreCase("all")) {
+            for (int i = 0; i < 3; i++) {
+                direction1.set(i, interpolatedStates.get(idx + i));
+            }
+        } else {
             String componentNames = "xyz";
             int componentIndex = componentNames.indexOf(forceComponent);
-            for (int i=0; i<3; i++) 
-                getDirection().set(i, 0);
-            getDirection().set(componentIndex, interpolatedStates.get(idx+componentIndex));
+            for (int i = 0; i < 3; i++) {
+                direction1.set(i, 0);
+            }
+            direction1.set(componentIndex, interpolatedStates.get(idx + componentIndex));
         }
     }
     // Create JSON object to represent ExperimentalForce
