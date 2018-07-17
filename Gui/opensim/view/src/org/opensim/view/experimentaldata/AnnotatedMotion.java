@@ -44,6 +44,7 @@ import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Storage;
+import org.opensim.modeling.Transform;
 import org.opensim.view.motions.MotionControlJPanel;
 import org.opensim.view.motions.MotionDisplayer;
 import org.opensim.view.motions.MotionsDB;
@@ -371,11 +372,11 @@ public class AnnotatedMotion extends Storage {
       }
   }
 
-  public void saveAs(String newFile, vtkTransform transform) throws FileNotFoundException, IOException {
+  public void saveAs(String newFile, Transform transform) throws FileNotFoundException, IOException {
           if (newFile.toLowerCase().endsWith(".trc"))
-             saveAsTRC(newFile, transform);
+             ;//saveAsTRC(newFile, transform);
           else if (newFile.toLowerCase().endsWith(".mot"))
-              saveAsMot(newFile, transform);
+              ;//saveAsMot(newFile, transform);
           else 
               DialogDisplayer.getDefault().notify(
                       new NotifyDescriptor.Message("Please specify either .trc or .mot file extension"));
