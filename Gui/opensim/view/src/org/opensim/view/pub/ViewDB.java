@@ -2142,7 +2142,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             guiJson.put("Op", "execute");
             JSONObject commandJson =  modelJson.createSetRotationCommand(modelJson.getModelUUID(), rotVec3);
             guiJson.put("command", commandJson);
-            System.out.println("Command:"+guiJson);
             websocketdb.broadcastMessageJson(guiJson, null);
         }          
     }
