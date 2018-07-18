@@ -266,12 +266,11 @@ public class ClassifyDataJPanel extends javax.swing.JPanel {
              fileName.concat(currentExtension);
             try {
                 // getCurrentRotations into lastTransform
-                Transform dTransform = new Transform();
                 Vec3 rots = new Vec3();
+                double degToRadians = Math.toRadians(1.0);
                 for (int i=0; i<3; i++)
-                    rots.set(i, dMotion.getCurrentRotations()[i]);
-                dTransform.R().setRotationToBodyFixedXYZ(rots);
-                dMotion.saveAs(fileName, dTransform);
+                    rots.set(i, dMotion.getCurrentRotations()[i]*degToRadians);
+                dMotion.saveAs(fileName, rots);
                 success = true;
             } catch (FileNotFoundException ex) {
                 ex.printStackTrace();

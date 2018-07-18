@@ -41,6 +41,7 @@ import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.ArrayStr;
+import org.opensim.modeling.Mat33;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Storage;
@@ -291,23 +292,28 @@ public class AnnotatedMotion extends Storage {
         this.boundingBoxComputed = boundingBoxComputed;
     }
  
-    public Storage applyTransform(Transform simtktransform) {
+    public Storage applyRotations(Vec3 rotationAnglesInRadians) {
         // Should know what data to apply xform to and how
         // for example mrkers are xformed as is but force vectors would not apply translations etc.
         // utilize the "clasified" table
         Storage motionCopy = new Storage(this);
+        Transform simtkTransform = new Transform();
+        simtkTransform.R().setRotationToBodyFixedXYZ(rotationAnglesInRadians);
+        Mat33 mat33 = simtkTransform.R().asMat33();
+        System.out.println("Rotation:"+mat33.toString());
+
         if (classified !=null && classified.size()!=0){
             for(ExperimentalDataObject dataObject:classified){
                 if (dataObject.getObjectType()==ExperimentalDataItemType.PointData ||
                         dataObject.getObjectType()==ExperimentalDataItemType.MarkerData){
                     int startIndex = dataObject.getStartIndexInFileNotIncludingTime();
-                    transformPointData(motionCopy, simtktransform, startIndex);
+                    transformPointData(motionCopy, simtkTransform, startIndex);
                 } else if (dataObject.getObjectType()==ExperimentalDataItemType.PointForceData){
                     int startIndex = dataObject.getStartIndexInFileNotIncludingTime();
                     // First vector, then position
                     // If we allow for translations the first line may need to change
-                    transformPointData(motionCopy, simtktransform, startIndex);
-                    transformPointData(motionCopy, simtktransform, startIndex+3);
+                    transformPointData(motionCopy, simtkTransform, startIndex);
+                    transformPointData(motionCopy, simtkTransform, startIndex+3);
                 }
                 else {
                     System.out.println("bad type="+dataObject.getObjectType());
@@ -318,7 +324,7 @@ public class AnnotatedMotion extends Storage {
         return motionCopy;
     }
 
-    private void transformPointData(final Storage motionCopy, final Transform simtktransform, final int startIndex) {
+    private void transformPointData(final Storage motionCopy, final Transform rotationTransform, final int startIndex) {
         Vec3 point3 = new Vec3(0., 0., 0. );
         for (int rowNumber=0; rowNumber<getSize(); rowNumber++){
             StateVector row = motionCopy.getStateVector(rowNumber);
@@ -326,7 +332,7 @@ public class AnnotatedMotion extends Storage {
             for(int coord=0; coord <3; coord++) {
                 point3.set(coord, row.getData().getitem(startIndex+coord));
             }
-            Vec3 xformed = simtktransform.xformFrameVecToBase(point3) 
+            Vec3 xformed = rotationTransform.xformBaseVecToFrame(point3); 
             for(int coord=0; coord <3; coord++) {
                 row.getData().setitem(startIndex+coord, xformed.get(coord));
             }
@@ -372,23 +378,23 @@ public class AnnotatedMotion extends Storage {
       }
   }
 
-  public void saveAs(String newFile, Transform transform) throws FileNotFoundException, IOException {
+  public void saveAs(String newFile, Vec3 eulerAngles) throws FileNotFoundException, IOException {
           if (newFile.toLowerCase().endsWith(".trc"))
-             saveAsTRC(newFile, transform);
+             saveAsTRC(newFile, eulerAngles);
           else if (newFile.toLowerCase().endsWith(".mot"))
-              saveAsMot(newFile, transform);
+              saveAsMot(newFile, eulerAngles);
           else 
               DialogDisplayer.getDefault().notify(
                       new NotifyDescriptor.Message("Please specify either .trc or .mot file extension"));
   }
 
-    private void saveAsMot(String newFile, Transform transform) {
+    private void saveAsMot(String newFile, Vec3 eulerAngles) {
         // Make a full copy of the motion then xform in place.
-        Storage xformed = applyTransform(transform);
+        Storage xformed = applyRotations(eulerAngles);
         xformed.print(newFile);
     }
     
-   private void saveAsTRC(String newFile, Transform transform) throws FileNotFoundException, IOException {
+   private void saveAsTRC(String newFile, Vec3 eulerAngles) throws FileNotFoundException, IOException {
         OutputStream ostream = new FileOutputStream(newFile);
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ostream));
         writer.write("PathFileType        4      (X/Y/Z)      " + newFile + "         ");
@@ -417,7 +423,7 @@ public class AnnotatedMotion extends Storage {
         writer.newLine();
         writer.write(headerLine);
         writer.newLine();
-        Storage xformed = applyTransform(transform);
+        Storage xformed = applyRotations(eulerAngles);
         for (int row=0; row < xformed.getSize(); row++){
             StateVector rowData = xformed.getStateVector(row);
             writer.write((row+1)+"\t"+rowData.getTime()+"\t");
