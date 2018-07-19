@@ -319,9 +319,9 @@ public class ClassifyDataJPanel extends javax.swing.JPanel {
     private void updateTransform(double xRot, double yRot, double zRot) {
         amotion.setCurrentRotations(new double[]{xRot, yRot, zRot});
         // record the deltas since rotations are relative to last transform
-        rotations[0]=xRot-rotations[0];
-        rotations[1]=yRot-rotations[1];
-        rotations[2]=zRot-rotations[2];
+        rotations[0]=xRot;
+        rotations[1]=yRot;
+        rotations[2]=zRot;
         double degToRadians = Math.toRadians(1.0);
         Vec3 rotationAsVec3 = new Vec3(degToRadians*xRot, degToRadians*yRot, degToRadians*zRot);
         ViewDB.getInstance().setOrientation(displayer.getModel(), rotationAsVec3);
@@ -370,9 +370,5 @@ public class ClassifyDataJPanel extends javax.swing.JPanel {
 
     public double[] getRotations() {
         return rotations;
-    }
-
-    public void setRotations(double[] rotations) {
-        this.rotations = rotations;
     }
 }

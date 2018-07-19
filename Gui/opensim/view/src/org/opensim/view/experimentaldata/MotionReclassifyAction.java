@@ -36,6 +36,7 @@ import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.view.ExplorerTopComponent;
+import org.opensim.view.motions.MotionsDB;
 import org.opensim.view.motions.OneMotionNode;
 
 public final class MotionReclassifyAction extends CallableSystemAction {
@@ -94,4 +95,17 @@ public final class MotionReclassifyAction extends CallableSystemAction {
         return false;
     }
     
+    public boolean isEnabled() {
+        Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
+        if (selected.length!=1 || (! (selected[0] instanceof OneMotionNode))) return false;
+        AnnotatedMotion amot = (AnnotatedMotion) ((OneMotionNode)(selected[0])).getMotion();
+        int numCurrent = MotionsDB.getInstance().getNumCurrentMotions();
+        boolean enabled=false;
+        for (int i=0; i<numCurrent; i++)
+            if (MotionsDB.getInstance().getCurrentMotion(i).motion == amot){
+                enabled=true;
+                break;
+            }
+        return enabled;
+    }
 }
