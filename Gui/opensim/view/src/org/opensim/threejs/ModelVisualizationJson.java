@@ -976,6 +976,21 @@ public class ModelVisualizationJson extends JSONObject {
         nextpptPositionCommand.put("oldPosition", oldLocationArray);
         return nextpptPositionCommand;
     }
+    
+    static public JSONObject createSetRotationCommand(UUID objectUuid, Vec3 euler) {
+        JSONObject rotationCommandJson = new JSONObject();
+        rotationCommandJson.put("type", "SetRotationCommand");
+        rotationCommandJson.put("objectUuid", objectUuid.toString());
+        JSONArray rotationArray = new JSONArray();
+        JSONArray oldRotationArray = new JSONArray();
+        for (int p =0; p <3; p++){
+            rotationArray.add(euler.get(p));
+            oldRotationArray.add(0);
+        }
+        rotationCommandJson.put("newRotation", rotationArray);
+        rotationCommandJson.put("oldRotation", oldRotationArray);
+        return rotationCommandJson;
+    }
 
     private UUID createMarkerMaterial(ModelDisplayHints hints) {
         JSONObject mat_json = new JSONObject();

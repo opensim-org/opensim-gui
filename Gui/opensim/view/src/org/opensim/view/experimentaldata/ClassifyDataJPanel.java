@@ -35,6 +35,8 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import org.opensim.modeling.ArrayStr;
+import org.opensim.modeling.Transform;
+import org.opensim.modeling.Vec3;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.motions.MotionControlJPanel;
@@ -54,7 +56,6 @@ public class ClassifyDataJPanel extends javax.swing.JPanel {
     RotationSpinnerListModel ySpinnerModel=new RotationSpinnerListModel(0., -270., 360., 90.);
     RotationSpinnerListModel zSpinnerModel=new RotationSpinnerListModel(0., -270., 360., 90.);
     MotionDisplayer displayer;
-    private vtkTransform lastTranform = new vtkTransform();
     private double[] rotations = new double[]{0., 0., 0.};
    /** Creates new form ClassifyDataJPanel */
     public ClassifyDataJPanel() {
@@ -265,11 +266,11 @@ public class ClassifyDataJPanel extends javax.swing.JPanel {
              fileName.concat(currentExtension);
             try {
                 // getCurrentRotations into lastTransform
-                vtkTransform dTransform = new vtkTransform();
-                dTransform.RotateX(dMotion.getCurrentRotations()[0]);
-                dTransform.RotateY(dMotion.getCurrentRotations()[1]);
-                dTransform.RotateZ(dMotion.getCurrentRotations()[2]);
-                dMotion.saveAs(fileName, dTransform);
+                Vec3 rots = new Vec3();
+                double degToRadians = Math.toRadians(1.0);
+                for (int i=0; i<3; i++)
+                    rots.set(i, dMotion.getCurrentRotations()[i]*degToRadians);
+                dMotion.saveAs(fileName, rots);
                 success = true;
             } catch (FileNotFoundException ex) {
                 ex.printStackTrace();
@@ -316,23 +317,15 @@ public class ClassifyDataJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_XSpinnerStateChanged
 
     private void updateTransform(double xRot, double yRot, double zRot) {
-        /*Vector<vtkActor> dActors = displayer.getActors();
-        for(vtkActor actor:dActors){
-            actor.SetOrientation(xRot, yRot, zRot);
-        }*/
-        lastTranform = new vtkTransform();
-        getLastTranform().RotateX(xRot);
-        getLastTranform().RotateY(yRot);
-        getLastTranform().RotateZ(zRot);
-        // Remember reptations in case we need to xform again
-        getRotations()[0]=xRot;
-        getRotations()[1]=yRot;
-        getRotations()[2]=zRot;
-        
-        ViewDB.getInstance().setOrientation(displayer.getModel(), getRotations());
-        ViewDB.getInstance().updateAnnotationAnchors();
-        ViewDB.getInstance().repaintAll();
-        amotion.setCurrentRotations(getRotations());
+        amotion.setCurrentRotations(new double[]{xRot, yRot, zRot});
+        // record the deltas since rotations are relative to last transform
+        rotations[0]=xRot;
+        rotations[1]=yRot;
+        rotations[2]=zRot;
+        double degToRadians = Math.toRadians(1.0);
+        Vec3 rotationAsVec3 = new Vec3(degToRadians*xRot, degToRadians*yRot, degToRadians*zRot);
+        ViewDB.getInstance().setOrientation(displayer.getModel(), rotationAsVec3);
+ 
     }
 
     void resetTransforms() {
@@ -375,15 +368,7 @@ public class ClassifyDataJPanel extends javax.swing.JPanel {
 
     } //RotationSpinnerListModel
 
-    public vtkTransform getLastTranform() {
-        return lastTranform;
-    }
-
     public double[] getRotations() {
         return rotations;
-    }
-
-    public void setRotations(double[] rotations) {
-        this.rotations = rotations;
     }
 }
