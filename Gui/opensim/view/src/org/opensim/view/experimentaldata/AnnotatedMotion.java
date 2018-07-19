@@ -300,7 +300,7 @@ public class AnnotatedMotion extends Storage {
         Transform simtkTransform = new Transform();
         simtkTransform.R().setRotationToBodyFixedXYZ(rotationAnglesInRadians);
         Mat33 mat33 = simtkTransform.R().asMat33();
-        System.out.println("Rotation:"+mat33.toString());
+        //System.out.println("Rotation:"+mat33.toString());
 
         if (classified !=null && classified.size()!=0){
             for(ExperimentalDataObject dataObject:classified){
