@@ -929,26 +929,43 @@ public class ModelVisualizationJson extends JSONObject {
     }
     // This function checks that Geometry in the visualizar need change (other than appearance and scale)
     // and if so create a "ReplaceGeometry" message for the specific UUIDs
-    public boolean createReplaceGeometryMessage(Geometry mc, JSONObject msg) {
+    public boolean createReplaceGeometryMessage(Component mc, JSONObject msg) {
         // Call geberate decorations on 
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
-        boolean saveVisible = mc.get_Appearance().get_visible();
-        mc.get_Appearance().set_visible(true);
+        // use generic Property interface to save/restore Appearance
+        boolean hasAppearance =false;
+        boolean visibleStatus=true;
+        AbstractProperty visibleProp=null;
+        if (mc.hasProperty("Appearance")){
+            visibleProp = mc.getPropertyByName("Appearance").getValueAsObject().getPropertyByName("visible");
+            visibleStatus = PropertyHelper.getValueBool(visibleProp);
+            if (!visibleStatus)
+                PropertyHelper.setValueBool(true, visibleProp);
+            hasAppearance = true;
+        }
         mc.generateDecorations(true, mdh, state, adg);
-        mc.get_Appearance().set_visible(saveVisible);
+        if (hasAppearance && !visibleStatus)
+            PropertyHelper.setValueBool(visibleStatus, visibleProp);
+        WrapObject wo = WrapObject.safeDownCast(mc);
+        boolean partialWrapObject = (wo != null) && !wo.get_quadrant().toLowerCase().equals("all");
+        if (partialWrapObject)
+            dgimp.setQuadrants(wo.get_quadrant());
         ArrayList<UUID> uuids = findUUIDForObject(mc);
         if (adg.size() == uuids.size()){
             JSONArray geoms = new JSONArray();
             for (int i=0; i<adg.size(); i++){
                 UUID uuid = uuids.get(i);
                 dgimp.setGeomID(uuid);
-                adg.getElt(i).implementGeometry(dgimp);
+                DecorativeGeometry dg = adg.getElt(i);
+                dg.implementGeometry(dgimp);
                 JSONObject jsonObject = dgimp.getGeometryJson();
                 msg.put("Op", "ReplaceGeometry");
                 msg.put("uuid", uuid.toString());
                 geoms.add(jsonObject);
-                msg.put("geometries", geoms);
+                jsonObject.put("matrix", JSONUtilities.createMatrixFromTransform(dg.getTransform(), 
+                        dg.getScaleFactors(), visScaleFactor));
             }
+            msg.put("geometries", geoms);
         }
         return true;
     }
