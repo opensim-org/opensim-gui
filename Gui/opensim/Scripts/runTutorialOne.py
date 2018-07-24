@@ -26,7 +26,6 @@
 ## This example performs the steps of Tutorial One in scripting form
 import os.path
 
-
 # Define the files and folders we will be using
 resourceDir	= getResourcesDir()
 modelFolder	= os.path.join(resourceDir, "Models", 'Gait2392_Simbody')

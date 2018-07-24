@@ -24,14 +24,14 @@
 # Written by James Dunne, Stanford University
 
 ## This example performs the steps of Tutorial Two in scripting form
+import os.path
 
 # Define the files and folders we will be using
-installDir 		= 	getInstallDir()
-modelFolder		=	installDir+"\Models\WristModel" # Change to your locale path
-modelName		=	modelFolder+"\wrist.osim"
+resourceDir	= getResourcesDir()
+modelFolder	= os.path.join(resourceDir, "Models", "WristModel")
+modelName	= os.path.join(modelFolder, "wrist.osim")
 
-
-# Load the model 
+# Load the model
 loadModel(modelName)
 
 # Get a handle to the current model
@@ -45,29 +45,18 @@ myModel = modeling.Model(oldModel)
 myState = myModel.initSystem()
 
 # Change the name of the model
-myModel.setName("Wrist - Tendon Surgery.")
+##myModel.setName("Wrist Tendon Surgery.")
 
 
-## Change the path points of the ECU_pre-surgery to match the existing ECU_post-surgery muscle 
+## Change the path points of the ECU_pre-surgery to match the existing ECU_post-surgery muscle
+for i in range(myModel.getMuscles().get("ECU_pre-surgery").getGeometryPath().getPathPointSet().getSize()):
+	# Get the Path Points from each muscle
+	ECUPrepathPoint			=	myModel.getMuscles().get("ECU_pre-surgery").getGeometryPath().getPathPointSet().get(i)
+	ECUPostpathPoint		=	myModel.getMuscles().get("ECU_post-surgery").getGeometryPath().getPathPointSet().get(i)
+	# Replace path point from ECU_pre-surgery to ECU_post-surgery
+	myModel.getMuscles().get("ECU_pre-surgery").getGeometryPath().replacePathPoint(myState,ECUPrepathPoint,ECUPostpathPoint)
 
-# Need to find the path points of the ECU muscle post surgery
-
-for i in range(myModel.getMuscles().get("ECU_post-surgery").getGeometryPath().getPathPointSet().getSize()):
-	# find the path point information for ECU_post-surgery (Body and location (in body) of PathPoint
-	ECUPostpathPoint			=	myModel.getMuscles().get("ECU_post-surgery").getGeometryPath().getPathPointSet().get(i)
-	ECUPostpathPoint_body		=	ECUPostpathPoint.getBody()
-	ECUPostpathPoint_location	=	ECUPostpathPoint.getLocation()
-	
-	# Delete existing path point from ECU_pre-surgery
-	if myModel.getMuscles().get("ECU_pre-surgery").getGeometryPath().canDeletePathPoint(i):
-		myModel.getMuscles().get("ECU_pre-surgery").getGeometryPath().deletePathPoint(myState,i)
-	
-	# Create new path points for ECU_pre-surgery based on ECU_post-surgery data
-	myModel.getMuscles().get("ECU_pre-surgery").getGeometryPath().addPathPoint(myState,i,ECUPostpathPoint_body)
-	ECUpathPoint	=	myModel.getMuscles().get("ECU_pre-surgery").getGeometryPath().getPathPointSet().get(i)
-	ECUpathPoint.setLocation(myState,ECUPostpathPoint_location)
-
-# re-initialize the model now that you changed the path points	
+# re-initialize the model now that you changed the path points
 myState = myModel.initSystem()
 # Get full path name of myModel
 fullPathName = myModel.getInputFileName()
@@ -76,10 +65,8 @@ newName = fullPathName.replace('.osim', '_edited.osim')
 myModel.print(newName)
 # Load the model in the GUI
 loadModel(newName)
-	
-	
 
-## IV. Biomechanical Effects of Tendon Transfer 
+## IV. Biomechanical Effects of Tendon Transfer
 
 loadModel(fullPathName)
 currentModel = getCurrentModel()
@@ -117,7 +104,7 @@ crv2 = addAnalysisCurve(plotterPane3, "momentArm.flexion", "ECU_post-surgery","f
 setCurveLegend(crv2, "post-surgery")
 
 
-# Create muscle objects for both a ECU pre- & post- surgery 
+# Create muscle objects for both a ECU pre- & post- surgery
 ECUpresurgery 	=	 myModel.getMuscles().get("ECU_pre-surgery")
 ECUpostsurgery 	=	 myModel.getMuscles().get("ECU_post-surgery")
 
@@ -125,8 +112,8 @@ ECUpostsurgery 	=	 myModel.getMuscles().get("ECU_post-surgery")
 optLengthECUpre 	=	ECUpresurgery.getOptimalFiberLength()
 optLengthECUpost 	=	ECUpostsurgery.getOptimalFiberLength()
 
- 
-##  The Effect of Tendon Slack Length 
+
+##  The Effect of Tendon Slack Length
 myModel		= 	getCurrentModel()
 
 # Plot the muscle properties with existing Tendon-slack Length
@@ -164,17 +151,3 @@ setCurveLegend(crv5, "ECRB_0.210")
 # Fibre length VS Flexion
 crv6 = addAnalysisCurve(plotterPane3, "fiber-length", "ECRB","flexion")
 setCurveLegend(crv6, "ECRB_0.210")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
