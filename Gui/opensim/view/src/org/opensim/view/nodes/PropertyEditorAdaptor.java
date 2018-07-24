@@ -122,6 +122,8 @@ public class PropertyEditorAdaptor {
                 ContactGeometry.safeDownCast(obj)!=null){
             Component mc = Component.safeDownCast(obj);
             ViewDB.getInstance().updateComponentDisplay(model, mc, prop);
+            // WrapObject change may make it necessary to redraw muscles
+            ViewDB.getInstance().updateModelDisplay(model);
         }
         else 
             ViewDB.getInstance().updateModelDisplay(model);
