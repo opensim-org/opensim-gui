@@ -1185,7 +1185,7 @@ public class JPlotterPanel extends javax.swing.JPanel
    }//GEN-LAST:event_jLoadFileToPlotterMenuItemActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String path = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu:8080/display/OpenSim30/Plotting" : TheApp.getUsersGuideDir() + "Plotting.html"; 
+        String path = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu/display/OpenSim40/Plotting" : TheApp.getUsersGuideDir() + "Plotting.html"; 
         BrowserLauncher.openURL(path);
     }//GEN-LAST:event_jButton1ActionPerformed
    

@@ -133,7 +133,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                          
       helpButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent ae) {
-          String path = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu:8080/display/OpenSim30/" + helpUrl : TheApp.getUsersGuideDir() + helpUrl + ".html";
+          String path = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu/display/OpenSim40/" + helpUrl : TheApp.getUsersGuideDir() + helpUrl + ".html";
           BrowserLauncher.openURL(path);
       }
       });

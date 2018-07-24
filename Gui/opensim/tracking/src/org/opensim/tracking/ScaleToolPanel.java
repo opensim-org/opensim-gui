@@ -92,7 +92,7 @@ public class ScaleToolPanel extends BaseToolPanel implements Observer {
       helpButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent ae) {
-                String path = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu:8080/display/OpenSim30/Scaling" : TheApp.getUsersGuideDir() +  "Scaling.html";
+                String path = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu/display/OpenSim40/Scaling" : TheApp.getUsersGuideDir() +  "Scaling.html";
                 BrowserLauncher.openURL(path);
             }
       });
