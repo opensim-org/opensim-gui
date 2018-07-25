@@ -79,7 +79,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
    private Mode mode;
    String modeName;
    String helpUrl;
-  
+
    AbstractToolModelWithExternalLoads toolModel = null;
    ActuatorsAndExternalLoadsPanel actuatorsAndExternalLoadsPanel = null;
    AnalysisSetPanel analysisSetPanel = null;
@@ -87,57 +87,57 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
    private boolean internalTrigger = false;
    private NumberFormat numFormat = NumberFormat.getInstance();
 
-   
+
    /** Creates new form AnalyzeAndForwardToolPanel */
    public AnalyzeAndForwardToolPanel(Model model, Mode mode) throws IOException {
       this.mode = mode;
 
       switch(mode) {
-         case ForwardDynamics: 
-             modeName = "forward dynamics tool"; 
-             toolModel = new ForwardToolModel(model);  
+         case ForwardDynamics:
+             modeName = "forward dynamics tool";
+             toolModel = new ForwardToolModel(model);
 
              helpUrl = "Forward+Dynamics";
              break;
-         case InverseDynamics: 
-             modeName = "inverse dynamics tool"; 
-             toolModel = new AnalyzeToolModel(model, mode); 
-            
+         case InverseDynamics:
+             modeName = "inverse dynamics tool";
+             toolModel = new AnalyzeToolModel(model, mode);
+
              helpUrl = "Inverse+Dynamics";
              break;
-         case CMC: 
-             modeName = "CMC tool"; 
-             toolModel = new CMCToolModel(model); 
-            
+         case CMC:
+             modeName = "CMC tool";
+             toolModel = new CMCToolModel(model);
+
              helpUrl = "Computed+Muscle+Control";
             break;
-         case RRA: 
-             modeName = "RRA tool"; 
-             toolModel = new RRAToolModel(model); 
-             
+         case RRA:
+             modeName = "RRA tool";
+             toolModel = new RRAToolModel(model);
+
              helpUrl = "Residual+Reduction+Algorithm";
              break;
-         case Analyze: 
-             modeName = "analyze tool"; 
-             toolModel = new AnalyzeToolModel(model, mode); 
-             
+         case Analyze:
+             modeName = "analyze tool";
+             toolModel = new AnalyzeToolModel(model, mode);
+
              helpUrl = "Analyses";
              break;
-         case StaticOptimization:  
-             modeName = "static optimization tool"; 
-             toolModel = new AnalyzeToolModel(model, mode); 
-            
+         case StaticOptimization:
+             modeName = "static optimization tool";
+             toolModel = new AnalyzeToolModel(model, mode);
+
              helpUrl = "Static+Optimization";
              break;
       }
-                         
+
       helpButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent ae) {
-          String path = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu/display/OpenSim40/" + helpUrl : TheApp.getUsersGuideDir() + helpUrl + ".html";
+          String path = "http://simtk-confluence.stanford.edu/display/OpenSim40/" + helpUrl;
           BrowserLauncher.openURL(path);
       }
       });
-             
+
       if (numFormat instanceof DecimalFormat) {
         ((DecimalFormat) numFormat).applyPattern("#,##0.############");
       }
@@ -161,7 +161,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       forwardInputPanel.setVisible(mode==Mode.ForwardDynamics);
       cmcInputPanel.setVisible(mode==Mode.CMC||mode==Mode.RRA);
       staticOptimizationPanel.setVisible(mode==Mode.StaticOptimization);
-      
+
       rraPanel.setVisible(mode==Mode.RRA);
       activeAnalysesPanel.setVisible(mode==Mode.Analyze);
 
@@ -170,7 +170,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       // disable for now
       jLabel7.setVisible(false);
       jLabel8.setVisible(false);
-      
+
       availableInitialTime.setVisible(false);
       availableFinalTime.setVisible(false);
       if (mode != Mode.CMC){
@@ -211,7 +211,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       }
 
       // Actuators & External Loads tab
-      actuatorsAndExternalLoadsPanel = new ActuatorsAndExternalLoadsPanel(toolModel, toolModel.getOriginalModel(), 
+      actuatorsAndExternalLoadsPanel = new ActuatorsAndExternalLoadsPanel(toolModel, toolModel.getOriginalModel(),
               mode!=Mode.InverseDynamics);
       if (mode==Mode.RRA) actuatorsAndExternalLoadsPanel.setReplaceOnlyMode();
       jTabbedPane1.addTab((mode==Mode.InverseDynamics) ? "External Loads" : "Actuators and External Loads", actuatorsAndExternalLoadsPanel);
@@ -280,7 +280,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       ToolCommon.bindProperty(toolModel.getTool(), "maximum_integrator_step_size", maxDT);
       ToolCommon.bindProperty(toolModel.getTool(), "minimum_integrator_step_size", minDT);
       ToolCommon.bindProperty(toolModel.getTool(), "integrator_error_tolerance", errorTolerance);
- 
+
       ToolCommon.bindProperty(toolModel.getTool(), "initial_time", initialTime);
       ToolCommon.bindProperty(toolModel.getTool(), "final_time", finalTime);
       ToolCommon.bindProperty(toolModel.getTool(), "results_directory", outputDirectory);
@@ -288,10 +288,10 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
    }
 
    private AnalyzeToolModel analyzeToolModel() { return (AnalyzeToolModel)toolModel; }
-   private ForwardToolModel forwardToolModel() { return (ForwardToolModel)toolModel; } 
-   private CMCToolModel cmcToolModel() { return (CMCToolModel)toolModel; } 
-   private RRAToolModel rraToolModel() { return (RRAToolModel)toolModel; } 
-   
+   private ForwardToolModel forwardToolModel() { return (ForwardToolModel)toolModel; }
+   private CMCToolModel cmcToolModel() { return (CMCToolModel)toolModel; }
+   private RRAToolModel rraToolModel() { return (RRAToolModel)toolModel; }
+
    public void update(Observable observable, Object obj) {
         if (observable instanceof OpenSimDB){
            if (obj instanceof ModelEvent) {
@@ -305,7 +305,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
                     DialogDisplayer.getDefault().notify(dlg);
                     this.close();
                     return;
-                }        
+                }
            }
            return;
        }
@@ -315,7 +315,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       //        obj == AbstractToolModel.Operation.InputDataChanged))
          updateDialogButtons();
       else
-         updateFromModel(); 
+         updateFromModel();
    }
 
    private void setEnabled(JPanel panel, boolean enabled) {
@@ -336,9 +336,9 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       setEnabled(mainSettingsPanel, true);
       setEnabled(advancedSettingsPanel, true);
 
-      if(mode==Mode.Analyze) 
+      if(mode==Mode.Analyze)
          updateAnalyzeToolSpecificFields(analyzeToolModel());
-      else if(mode==Mode.InverseDynamics || mode==Mode.StaticOptimization) 
+      else if(mode==Mode.InverseDynamics || mode==Mode.StaticOptimization)
          updateInverseToolSpecificFields(analyzeToolModel());
       else if(mode==Mode.ForwardDynamics)
          updateForwardToolSpecificFields(forwardToolModel());
@@ -360,7 +360,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       initialTime.setText(numFormat.format(initTime));
       double finTime = toolModel.getFinalTime();
       finalTime.setText(numFormat.format(finTime));
-      
+
       // Analysis set summary
       String str = "";
       for(int i=0; i<toolModel.getAnalysisSet().getSize(); i++){
@@ -447,7 +447,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
 
       analyzeSolveForEquilibriumCheckBox.setSelected(toolModel.getSolveForEquilibrium());
    }
-   
+
    //---------------------------------------------------------------------
    // Fields for inverse dynamics tool
    //---------------------------------------------------------------------
@@ -457,7 +457,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       else if(toolModel.getInputSource()==AnalyzeToolModel.InputSource.Coordinates) {
          buttonGroup3.setSelected(motionRadioButton1.getModel(),true);
          buttonGroup4.setSelected(fromFileMotionRadioButton1.getModel(),true);
-         
+
       } else if(toolModel.getInputSource()==AnalyzeToolModel.InputSource.Motion) {
          buttonGroup3.setSelected(motionRadioButton1.getModel(),true);
          buttonGroup4.setSelected(loadedMotionRadioButton1.getModel(),true);
@@ -494,14 +494,14 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
          coordinatesFileName1.setEnabled(false);
       if(!buttonGroup3.isSelected(motionRadioButton1.getModel()) || !buttonGroup4.isSelected(loadedMotionRadioButton1.getModel()))
          motionsComboBox1.setEnabled(false);
-      
+
       if(!buttonGroup3.isSelected(motionRadioButton1.getModel()) && !buttonGroup3.isSelected(statesRadioButton1.getModel())) {
           motionRadioButton1.setSelected(true);
           fromFileMotionRadioButton1.setEnabled(true);
           coordinatesFileName1.setEnabled(true);
           filterCoordinatesCheckBox1.setEnabled(true);
       }
-      
+
       statesFileName1.setFileName(toolModel.getStatesFileName(),false);
       coordinatesFileName1.setFileName(toolModel.getCoordinatesFileName(),false);
 
@@ -551,7 +551,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       //----------------------------------------------------------------------
       rraOutputModelFileName.setEnabled(adjustModelCheckBox.isSelected());
       rraAdjustedBodyComboBox.setEnabled(adjustModelCheckBox.isSelected());
-      
+
       updateIntegratorSettings(toolModel);
       cmcTimeWindow.setText(numFormat.format(toolModel.getCmcTimeWindow()));
    }
@@ -559,7 +559,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
    // Fields for RRA tool
    //---------------------------------------------------------------------
     private void updateRRAToolSpecificFields(RRAToolModel toolModel) {
-      adjustModelCheckBox.setSelected(toolModel.getAdjustModelToReduceResidualsEnabled());      
+      adjustModelCheckBox.setSelected(toolModel.getAdjustModelToReduceResidualsEnabled());
       rraOutputModelFileName.setFileName(toolModel.getOutputModelFileName(),false);
       rraAdjustedBodyComboBox.removeAllItems();
       if(toolModel.getOriginalModel()!=null) {
@@ -618,7 +618,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       toolModel.execute();
       updateDialogButtons();
    }
-   
+
    /** This method is called from within the constructor to
     * initialize the form.
     * WARNING: Do NOT modify this code. The content of this method is
@@ -1952,7 +1952,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
          cmcToolModel().setCmcTimeWindow(numFormat.parse(cmcTimeWindow.getText()).doubleValue());
       } catch (ParseException ex) {
          cmcTimeWindow.setText(numFormat.format(cmcToolModel().getCmcTimeWindow()));
-      }  
+      }
     }//GEN-LAST:event_cmcTimeWindowActionPerformed
 
     private void SelectCmcTargetCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectCmcTargetCheckBoxActionPerformed
@@ -1969,7 +1969,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
 // TODO add your handling code here:
         editExcitationsFile(controlsFileName);
     }//GEN-LAST:event_editForwardExcitationsButtonActionPerformed
-    
+
     private void editExcitationsFile(FileTextFieldAndChooser aControlsFileName){
         if (!aControlsFileName.getFileIsValid()) return;
         String controlsFile=aControlsFileName.getFileName();
@@ -1999,7 +1999,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
    //------------------------------------------------------------------------
    // Inverse tool input settings
    //------------------------------------------------------------------------
-    
+
     private void motionsComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motionsComboBox1ActionPerformed
       if(internalTrigger) return;
       int index = motionsComboBox1.getSelectedIndex();
@@ -2057,7 +2057,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
        String fullFilename = FileUtils.addExtensionIfNeeded(rraOutputModelFileName.getFileName(), ".osim");
        rraToolModel().setOutputModelFileName(fullFilename);
    }//GEN-LAST:event_rraOutputModelFileNameStateChanged
-    
+
    private void adjustModelCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adjustModelCheckBoxActionPerformed
 // TODO add your handling code here:
     }//GEN-LAST:event_adjustModelCheckBoxActionPerformed
@@ -2168,13 +2168,13 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       }
    }//GEN-LAST:event_finalTimeActionPerformed
 
-   private void setCmcTimeWindow(java.awt.event.ActionEvent evt) {                                            
+   private void setCmcTimeWindow(java.awt.event.ActionEvent evt) {
       try {
          ((CMCToolModel)toolModel).setCmcTimeWindow(numFormat.parse(cmcTimeWindow.getText()).doubleValue());
       } catch (ParseException ex) {
          cmcTimeWindow.setText(numFormat.format(((CMCToolModel)toolModel).getCmcTimeWindow()));
       }
-   }                                           
+   }
 
    //------------------------------------------------------------------------
    // Output settings
@@ -2210,7 +2210,7 @@ private void StepIntervalSpinnerStateChanged(javax.swing.event.ChangeEvent evt) 
           int newStepInterval = (Integer) stepModel.getValue();
           //System.out.println("New step = "+newStepInterval);
          ((AnalyzeToolModel)toolModel).setAnalysisStepInterval(newStepInterval);
-    
+
 }//GEN-LAST:event_StepIntervalSpinnerStateChanged
 
 private void StepIntervalSpinnerFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_StepIntervalSpinnerFocusLost
@@ -2416,6 +2416,6 @@ private void StepIntervalSpinnerFocusLost(java.awt.event.FocusEvent evt) {//GEN-
    // Relinquish C++ resources by setting references to them to null
    public void cleanup()
    {
-      
+
    }
 }
