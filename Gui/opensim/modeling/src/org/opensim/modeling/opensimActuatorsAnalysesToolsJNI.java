@@ -34,9 +34,9 @@ public class opensimActuatorsAnalysesToolsJNI {
           String javaHome = System.getProperties().getProperty("java.home");
           boolean inMatlab = javaHome.toLowerCase().indexOf("matlab") >= 0;
           if (inMatlab) {
-              msg +=  "\nSee https://simtk-confluence.stanford.edu/display/OpenSim/Scripting+with+Matlab";
+              msg +=  "\nSee https://simtk-confluence.stanford.edu/display/OpenSim40/Scripting+with+Matlab";
           }
-          
+
           System.out.println(msg);
           String title = "Error: Failed to load OpenSim libraries";
           if (!GraphicsEnvironment.isHeadless()) {
