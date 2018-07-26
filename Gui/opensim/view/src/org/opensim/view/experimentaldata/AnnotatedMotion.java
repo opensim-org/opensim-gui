@@ -299,7 +299,7 @@ public class AnnotatedMotion extends Storage {
         Storage motionCopy = new Storage(this);
         Transform simtkTransform = new Transform();
         simtkTransform.R().setRotationToBodyFixedXYZ(rotationAnglesInRadians);
-        Mat33 mat33 = simtkTransform.R().asMat33();
+        //Mat33 mat33 = simtkTransform.R().asMat33();
         //System.out.println("Rotation:"+mat33.toString());
 
         if (classified !=null && classified.size()!=0){
@@ -332,7 +332,7 @@ public class AnnotatedMotion extends Storage {
             for(int coord=0; coord <3; coord++) {
                 point3.set(coord, row.getData().getitem(startIndex+coord));
             }
-            Vec3 xformed = rotationTransform.xformBaseVecToFrame(point3); 
+            Vec3 xformed = rotationTransform.xformFrameVecToBase(point3); 
             for(int coord=0; coord <3; coord++) {
                 row.getData().setitem(startIndex+coord, xformed.get(coord));
             }
