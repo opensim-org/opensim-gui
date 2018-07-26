@@ -90,6 +90,8 @@ myState = myModel.initSystem()
 idTool = modeling.InverseDynamicsTool(idSetupFile)
 # Set the model to scaled model from above
 idTool.setModel(myModel)
+# Set the full path to the External Loads File
+idTool.setExternalLoadsFileName(extLoadsFile)
 # Run the tool
 idTool.run()
 
