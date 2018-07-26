@@ -27,7 +27,7 @@ this directory), making it suitable for commercial, government,
 academic, and personal use.
 
 Third-party components have their own licenses; see LICENSE.txt, NOTICE.txt, and our
-[Acknowledgements webpage](https://simtk-confluence.stanford.edu/display/OpenSim/Acknowledgements)
+[Acknowledgements webpage](https://simtk-confluence.stanford.edu/display/OpenSim40/Acknowledgements)
 for more information.
 
 The OpenSim GUI's visualizer uses
@@ -74,7 +74,7 @@ build and run the GUI on **OSX** and **Linux**; though it is not thoroughly
 tested on these platforms. We will write instructions for OSX and Linux in the
 future; for now, you can follow the Windows instructions as a rough guide.
 
-See the [OpenSim Confluence Wiki](http://simtk-confluence.stanford.edu:8080/display/OpenSim/Building+OpenSim+from+Source)
+See the [OpenSim Confluence Wiki](http://simtk-confluence.stanford.edu/display/OpenSim40/Building+OpenSim+from+Source)
 for additional information.
 
 #### Get the dependencies

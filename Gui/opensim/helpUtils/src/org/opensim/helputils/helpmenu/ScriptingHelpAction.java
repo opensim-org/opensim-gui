@@ -39,8 +39,7 @@ import org.opensim.utils.TheApp;
 public final class ScriptingHelpAction extends CallableSystemAction {
 
     public void performAction() {
-        String usersGuidePath = BrowserLauncher.isConnected() ? "https://simtk-confluence.stanford.edu/display/OpenSim40/Scripting" : TheApp.getUsersGuideDir() + "Scripting.html"; 
-        BrowserLauncher.openURL(usersGuidePath);
+        BrowserLauncher.openURL("https://simtk-confluence.stanford.edu/display/OpenSim40/Scripting");
     }
 
     public String getName() {
