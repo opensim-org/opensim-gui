@@ -538,14 +538,14 @@ final public class ExplorerTopComponent extends TopComponent
         {
             instance.getUndoRedoManager().addEdit(aUndoableEdit);
             if (java.awt.EventQueue.isDispatchThread()) {
-                instance.requestActive();
+                getVisualizerTopComponent().requestActive();
             }
             else {
                 SwingUtilities.invokeLater(new Runnable(){
 
                 @Override
                 public void run() {
-                    instance.requestActive();
+                    getVisualizerTopComponent().requestActive();
                 }
             });
             }
