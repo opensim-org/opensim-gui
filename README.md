@@ -74,7 +74,7 @@ build and run the GUI on **OSX** and **Linux**; though it is not thoroughly
 tested on these platforms. We will write instructions for OSX and Linux in the
 future; for now, you can follow the Windows instructions as a rough guide.
 
-See the [OpenSim Confluence Wiki](http://simtk-confluence.stanford.edu/display/OpenSim40Building+OpenSim+from+Source)
+See the [OpenSim Confluence Wiki](http://simtk-confluence.stanford.edu/display/OpenSim40/Building+OpenSim+from+Source)
 for additional information.
 
 #### Get the dependencies
