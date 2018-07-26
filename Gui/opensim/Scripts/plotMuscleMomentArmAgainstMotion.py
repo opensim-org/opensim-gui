@@ -29,15 +29,16 @@
 # BothLegs OpenSim model adds curves of fiber length for the model. Then, it loads and plots 
 # data from a storage file, which contains fiber lengths for the model Subject01_simbody
 # that is included with the OpenSim distribution
+import os.path
 
 # Load the model BothLegs.osim
-filepath = getInstallDir() + "/Models/Gait2392_Simbody/gait2392_simbody.osim";
+filepath = os.path.join(getResourcesDir(), "Models", "Gait2392_simbody", "gait2392_simbody.osim");
 loadModel(filepath);
 
 # Create a plotter panel and set the title
 plotterPanel = createPlotterPanel("Plot Example")
 
-motionfilePath = getInstallDir() + "/Models/Gait2392_Simbody/subject01_walk1.mot"
+motionfilePath = os.path.join(getResourcesDir(), "Models", "Gait2392_simbody", "subject01_walk1_ik.mot");
 motSrc = addMotionSource(plotterPanel, motionfilePath)
 
 # Plot MomentArm of rect_fem_r, vas_int_r about r_knee_angle through the motion
