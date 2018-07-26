@@ -61,11 +61,12 @@ public class IKToolPanel extends BaseToolPanel implements Observer {
       if (numFormat instanceof DecimalFormat) {
         ((DecimalFormat) numFormat).applyPattern("#,##0.#########");
       }
-
+      
       helpButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent ae) {
-                BrowserLauncher.openURL("http://simtk-confluence.stanford.edu/display/OpenSim40/Inverse+Kinematics");
+                String path = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu/display/OpenSim40/Inverse+Kinematics" : TheApp.getUsersGuideDir() + "Inverse+Kinematics.html";
+                BrowserLauncher.openURL(path);
             }
       });
 
@@ -95,7 +96,7 @@ public class IKToolPanel extends BaseToolPanel implements Observer {
       ToolCommon.bindProperty(ikTool, "time_range", startTime);
       ToolCommon.bindProperty(ikTool, "time_range", endTime);
       ToolCommon.bindProperty(ikTool, "output_motion_file", outputMotionFilePath);
-
+      
    }
 
    public void update(Observable observable, Object obj) {
@@ -110,7 +111,7 @@ public class IKToolPanel extends BaseToolPanel implements Observer {
                     DialogDisplayer.getDefault().notify(dlg);
                     this.close();
                     return;
-                }
+                }        
            }
            return;
        }
@@ -145,7 +146,7 @@ public class IKToolPanel extends BaseToolPanel implements Observer {
       coordinateFileName.setFileName(ikToolModel.getIKCommonModel().getCoordinateDataFileName(),false);
       coordinateFileName.setFileIsValid(ikToolModel.getIKCommonModel().getCoordinateDataValid());
 
-
+      
       // Time range
       double[] timeRange = ikToolModel.getIKCommonModel().getTimeRange();
       startTime.setText(numFormat.format(timeRange[0]));
@@ -464,7 +465,7 @@ public class IKToolPanel extends BaseToolPanel implements Observer {
 private void outputMotionFilePathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_outputMotionFilePathStateChanged
       ikToolModel.getIKTool().setOutputMotionFileName(outputMotionFilePath.getFileName());
 }//GEN-LAST:event_outputMotionFilePathStateChanged
-
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox coordinateCheckBox;
     private org.opensim.swingui.FileTextFieldAndChooser coordinateFileName;
@@ -486,5 +487,5 @@ private void outputMotionFilePathStateChanged(javax.swing.event.ChangeEvent evt)
     private javax.swing.JPanel outputPanel;
     private javax.swing.JTextField startTime;
     // End of variables declaration//GEN-END:variables
-
+   
 }

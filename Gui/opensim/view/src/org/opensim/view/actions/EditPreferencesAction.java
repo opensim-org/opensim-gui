@@ -46,7 +46,7 @@ public final class EditPreferencesAction extends CallableSystemAction {
 
     public EditPreferencesAction () {
     }
-
+   
    public void performAction() {
       EditPreferencesJPanel prefsPanel;
       Object [] options =  {  NotifyDescriptor.OK_OPTION,
@@ -67,7 +67,8 @@ public final class EditPreferencesAction extends CallableSystemAction {
                                                 @Override
                                                 public void actionPerformed(ActionEvent ae) {
                                                     if(ae.getSource().equals(helpBtn)) {
-                                                        BrowserLauncher.openURL("http://simtk-confluence.stanford.edu/display/OpenSim40/User+Preferences");
+                                                        String path = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu/display/OpenSim40/User+Preferences" : TheApp.getUsersGuideDir() + "User+Preferences.html";
+                                                        BrowserLauncher.openURL(path);
                                                     }
                                                 }
                                             });
@@ -84,21 +85,21 @@ public final class EditPreferencesAction extends CallableSystemAction {
          ex.printStackTrace();
       }
    }
-
+   
    public String getName() {
       return NbBundle.getMessage(EditPreferencesAction.class, "CTL_EditPreferencesAction");
    }
-
+   
    protected void initialize() {
       super.initialize();
       // see org.openide.util.actions.SystemAction.iconResource() javadoc for more details
       putValue("noIconInMenu", Boolean.TRUE);
    }
-
+   
    public HelpCtx getHelpCtx() {
       return HelpCtx.DEFAULT_HELP;
    }
-
+   
    protected boolean asynchronous() {
       return false;
    }

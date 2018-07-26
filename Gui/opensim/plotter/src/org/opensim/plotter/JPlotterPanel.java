@@ -82,7 +82,7 @@ import org.opensim.view.pub.ViewDB;
  */
 public class JPlotterPanel extends javax.swing.JPanel
         implements java.awt.event.ActionListener, javax.swing.event.TreeSelectionListener, java.awt.event.FocusListener, java.util.Observer, java.beans.PropertyChangeListener, java.awt.event.InputMethodListener, java.awt.event.MouseListener {
-
+   
     private Frame frame;   // We keep track of frame so that child windows can use it as parent.
    // PlotterModel kkeps track of two things
    // 1. For motions and free files, a PlotterSourceInterface is created and maintained so that
@@ -91,7 +91,7 @@ public class JPlotterPanel extends javax.swing.JPanel
    private PlotterModel plotterModel = new PlotterModel();
 
    private HashSet<String> qNameSet = new HashSet<String>();
-
+   
     public void setTitle(String title) {
         getChartPanel().getChart().setTitle(title);
     }
@@ -106,12 +106,12 @@ public class JPlotterPanel extends javax.swing.JPanel
            if (!currentModel.getCoordinateSet().contains(coordName)){
                ErrorDialog.showMessageDialog("Invalid coordinate specification: "+coordName+", please check and retry.");
                return null;
-           }
+           }               
            if (qName.toLowerCase().startsWith("momentarm")){
                sourceY=(new PlotterSourceAnalysis(currentModel, plotterModel.getStorage("MomentArm_"+coordName, currentModel), "moment arm"));
            }
            else {   // Just Moment
-               sourceY=(new PlotterSourceAnalysis(currentModel, plotterModel.getStorage("Moment_"+coordName, currentModel), "moment"));
+               sourceY=(new PlotterSourceAnalysis(currentModel, plotterModel.getStorage("Moment_"+coordName, currentModel), "moment"));               
            }
            if (!currentModel.getMuscles().contains(muscleName)){
                ErrorDialog.showMessageDialog("Invalid specification of muscle: "+muscleName+" please check and retry.");
@@ -170,21 +170,21 @@ public class JPlotterPanel extends javax.swing.JPanel
         plotterModel.getPlotTreeModel().addPlotCurveToTree(cv);
         return cv;
     }
-
-
+    
+    
     public void setXAxisLabel(String label) {
         plotterModel.getCurrentPlot().getChartPanel().getChart().getXYPlot().getDomainAxis().setLabel(label);
     }
-
+    
     public void setYAxisLabel(String label) {
         plotterModel.getCurrentPlot().getChartPanel().getChart().getXYPlot().getRangeAxis().setLabel(label);
     }
-
+    
     public void setAxesLabels(String xAxis, String yAxis) {
         setXAxisLabel(xAxis);
         setYAxisLabel(yAxis);
     }
-
+    
     // cleanup method intended to release resource and cleanup plotterModel
     //  supporting the panel. Possibly removing circular references if any
     void cleanup() {
@@ -234,7 +234,7 @@ public class JPlotterPanel extends javax.swing.JPanel
    NumberFormat    rangeFormat=NumberFormat.getNumberInstance();
    NumberFormatter rangeFormatter= new NumberFormatter(rangeFormat);
 
-
+   
    // Plotting from a motion or storage has obvious domain, sourceX values
    //       range names are for multiple curves or one sum curve. Single sourceY
    // MotionCurve: domainName: motion-time
@@ -243,7 +243,7 @@ public class JPlotterPanel extends javax.swing.JPanel
    //              sourceY: motion.
    //              in case of sum, rangeNames[] are summed.
    // Plotting builtin muscle curves requires running an analysis that can produce one
-   // or many storages->sources.
+   // or many storages->sources. 
    // If not plotting against a motion
    // The options should be as follows (FiberLength and MomentArm used as example):
    // FiberLength: domainName: Gencoord
@@ -255,10 +255,10 @@ public class JPlotterPanel extends javax.swing.JPanel
    // MomentArm: domainName: GencoordToVary
    //              rangeNames: selectedMuscles
    //              sourceX: statesStorage (built on the fly or from a motion file)
-   //              sourceY: single analysis result storage.(name=MomentArm_GencoordAbout).
+   //              sourceY: single analysis result storage.(name=MomentArm_GencoordAbout).   
    //              in case of sum, rangeNames[] are summed.
-   //
-   //
+   // 
+   // 
    Model currentModel = OpenSimDB.getInstance().getCurrentModel();
    OpenSimContext openSimContext;
    private Storage statesStorage;
@@ -273,7 +273,7 @@ public class JPlotterPanel extends javax.swing.JPanel
     */
    public JPlotterPanel() {
       initComponents();
-
+ 
       domainFormatter.setValueClass(java.lang.Double.class);
       rangeFormatter.setValueClass(java.lang.Double.class);
       jDomainStartTextField.setValue(0.0);   jDomainStartTextField.addActionListener(new handleReturnAction(jDomainStartTextField));
@@ -301,10 +301,10 @@ public class JPlotterPanel extends javax.swing.JPanel
       jPlotsTree.setRootVisible(false);
       //printPlotDescriptor();
       PlotterDB.getInstance().registerPlotterPanel(this);
-
+      
       populateQNameSet();
     }
-
+   
    /** This method is called from within the constructor to
     * initialize the form.
     * WARNING: Do NOT modify this code. The content of this method is
@@ -871,7 +871,7 @@ public class JPlotterPanel extends javax.swing.JPanel
 
    private void jRectifyCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRectifyCheckBoxActionPerformed
    }//GEN-LAST:event_jRectifyCheckBoxActionPerformed
-
+   
     private void jAdvancedOptionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAdvancedOptionsButtonActionPerformed
        OpenSimDialog  advDlg=DialogUtils.createDialogForPanelWithParent(getFrame(), jAdvancedPanel, "Advanced Options");
        DialogUtils.addStandardButtons(advDlg);
@@ -900,7 +900,7 @@ public class JPlotterPanel extends javax.swing.JPanel
          summary=summary+" A=" + numFormat.format(jActivationValueFormattedTextField.getValue());
       jSummaryAdvancedTextField.setText(summary);
    }
-
+    
     private void jClampCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jClampCheckBoxActionPerformed
        JCheckBox clamped = (JCheckBox)evt.getSource();
        jFormattedTextFieldYmin.setEnabled(clamped.isSelected());
@@ -908,11 +908,11 @@ public class JPlotterPanel extends javax.swing.JPanel
        jFormattedTextFieldYmax.setEditable(clamped.isSelected());
        jFormattedTextFieldYmax.setEnabled(clamped.isSelected());
     }//GEN-LAST:event_jClampCheckBoxActionPerformed
-
+    
     private void jMuscleSelectButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMuscleSelectButtonMouseReleased
        //jMuscleSelectButtonMousePressed(evt);
     }//GEN-LAST:event_jMuscleSelectButtonMouseReleased
-
+    
     private void jMuscleSelectButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMuscleSelectButtonMousePressed
         String preSelected=jSelectedMusclesTextField.getText();
         // Show muscle selection, multiple
@@ -932,7 +932,7 @@ public class JPlotterPanel extends javax.swing.JPanel
                 if (dFilterDlg!=null)
                     dFilterDlg.dispose();
                 dFilterDlg = null;
-                muscleDialogUp=false;
+                muscleDialogUp=false;                
             }}
         );
         dFilterDlg.addWindowListener(new WindowAdapter(){
@@ -946,7 +946,7 @@ public class JPlotterPanel extends javax.swing.JPanel
                 super.windowClosing(e);
                 close();
             }
-
+            
             public void windowClosed(WindowEvent e) {
                 super.windowClosed(e);
                 close();
@@ -967,13 +967,13 @@ public class JPlotterPanel extends javax.swing.JPanel
 
         dFilterDlg.setVisible(true);
         muscleDialogUp=true;
-
+                
     }//GEN-LAST:event_jMuscleSelectButtonMousePressed
-
+    
     private void xQuantityButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xQuantityButtonMouseReleased
        //xQuantityButtonMousePressed(evt);
     }//GEN-LAST:event_xQuantityButtonMouseReleased
-
+    
     private void xQuantityButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xQuantityButtonMousePressed
        //XX3
        if (isBuiltinMuscleCurve()){
@@ -1033,26 +1033,26 @@ public class JPlotterPanel extends javax.swing.JPanel
       //printPlotDescriptor();
        }
        parseDomainOrRangeText(jXQtyTextField, true);
-
+       
     }//GEN-LAST:event_xQuantityButtonMousePressed
-
+    
     private void yQuantityButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_yQuantityButtonMouseReleased
        //yQuantityButtonMousePressed(evt);
     }//GEN-LAST:event_yQuantityButtonMouseReleased
-
+    
     private void yQuantityButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_yQuantityButtonMousePressed
        jSourcePopupMenu.show(evt.getComponent(), evt.getX(), evt.getY());
     }//GEN-LAST:event_yQuantityButtonMousePressed
-
+        
    private void jXQtyTextFieldPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jXQtyTextFieldPropertyChange
    }//GEN-LAST:event_jXQtyTextFieldPropertyChange
-
+   
    private void jXQtyTextFieldCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jXQtyTextFieldCaretPositionChanged
    }//GEN-LAST:event_jXQtyTextFieldCaretPositionChanged
-
+   
     private void jDomainEndTextFieldPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDomainEndTextFieldPropertyChange
     }//GEN-LAST:event_jDomainEndTextFieldPropertyChange
-
+    
     private void jDomainStartTextFieldPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDomainStartTextFieldPropertyChange
     }//GEN-LAST:event_jDomainStartTextFieldPropertyChange
     // AnalysisPick
@@ -1066,29 +1066,29 @@ public class JPlotterPanel extends javax.swing.JPanel
           availableAnalyses[i] = srcs.get(i);
        return availableAnalyses;
     }
-
+    
    private void jXQtyTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jXQtyTextFieldFocusLost
       jPlotterAddPlotButton.setEnabled(validateXY());
-
+      
    }//GEN-LAST:event_jXQtyTextFieldFocusLost
-
+   
    private void jXQtyTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXQtyTextFieldActionPerformed
       jPlotterAddPlotButton.setEnabled(validateXY());
-
+      
    }//GEN-LAST:event_jXQtyTextFieldActionPerformed
-
+   
    private void jYQtyTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jYQtyTextFieldFocusLost
       jPlotterAddPlotButton.setEnabled(validateXY());
-
+      
    }//GEN-LAST:event_jYQtyTextFieldFocusLost
-
+   
    private void jYQtyTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jYQtyTextFieldActionPerformed
       jPlotterAddPlotButton.setEnabled(validateXY());
-
+      
    }//GEN-LAST:event_jYQtyTextFieldActionPerformed
-
+   
    private void jPlotterDeletePlotButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPlotterDeletePlotButtonActionPerformed
-
+      
       // Make a cache so that object deletion does not mess up the selections array
       // we're working on.
       Object[] cache = new Object[selectedPathsVector.size()];
@@ -1106,12 +1106,12 @@ public class JPlotterPanel extends javax.swing.JPanel
             plotterModel.deleteCurve(cvToDelete);
          } else
             JOptionPane.showMessageDialog(this, "Don't know what to delete!");
-
+         
       }
    }//GEN-LAST:event_jPlotterDeletePlotButtonActionPerformed
-
+         
    private void jCurveLegendTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCurveLegendTextFieldActionPerformed
-
+      
       autoGeneratedCurveTitle=false;   // user modified the text field don't intervene!'
    }//GEN-LAST:event_jCurveLegendTextFieldActionPerformed
    /**
@@ -1144,23 +1144,23 @@ public class JPlotterPanel extends javax.swing.JPanel
                    else
                         settings.setName(nameFromSettings+" "+String.valueOf(curveIndex));
                }
-               // Make one string representing "+" separated
+               // Make one string representing "+" separated 
            }
            // Add name for y-axis here
            if (sumCurve)
                 plotCurve = plotterModel.addCurveMultipleRangeNames(title, settings,
                    sourceX, getDomainName(), sourceY, rangeNames);
-           else
+           else 
                 plotCurve = plotterModel.addCurveSingleRangeName(title, settings,
                    sourceX, getDomainName(), sourceY, rangeNames[curveIndex]);
-
+           
             makeCurveCurrent(plotCurve);
        }
-
+       
        this.doLayout();
        repaint();
    }//GEN-LAST:event_jPlotterAddCurveButtonActionPerformed
-
+   
    private void makeCurveCurrent(final PlotCurve plotCurve) {
       // Find node and make it selected
       PlotCurveNode cvnode=((PlotTreeModel)plotterModel.getPlotTreeModel()).findCurveNode(plotCurve);
@@ -1169,9 +1169,9 @@ public class JPlotterPanel extends javax.swing.JPanel
       jPlotsTree.addSelectionPath(path);
       currentCurve = plotCurve;
    }
-
+   
    private void jLoadFileToPlotterMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLoadFileToPlotterMenuItemActionPerformed
-
+      
       // Browse for Storage or Motion file (for now) and preprocess the file if needed for plotting
       String dataFilename = FileUtils.getInstance().browseForFilename(".sto, .mot", "Files containing data to plot", true, this);
       if (dataFilename != null){
@@ -1185,9 +1185,10 @@ public class JPlotterPanel extends javax.swing.JPanel
    }//GEN-LAST:event_jLoadFileToPlotterMenuItemActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        BrowserLauncher.openURL("http://simtk-confluence.stanford.edu/display/OpenSim40/Plotting");
+        String path = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu/display/OpenSim40/Plotting" : TheApp.getUsersGuideDir() + "Plotting.html"; 
+        BrowserLauncher.openURL(path);
     }//GEN-LAST:event_jButton1ActionPerformed
-
+   
    public PlotterSourceFile loadFile(String dataFilename) {
         try {
             PlotterSourceFile src = new PlotterSourceFile(dataFilename);
@@ -1198,15 +1199,15 @@ public class JPlotterPanel extends javax.swing.JPanel
         }
         return null;
    }
-
+   
    public PlotterModel getPlotterModel() {
       return plotterModel;
    }
-
+   
    private PlotCurveSettings getSettings() {
       return new PlotCurveSettings(this);
    }
-
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jActivationLabel;
     private javax.swing.JCheckBox jActivationOverrideCheckBox;
@@ -1255,7 +1256,7 @@ public class JPlotterPanel extends javax.swing.JPanel
     private javax.swing.JButton xQuantityButton;
     private javax.swing.JButton yQuantityButton;
     // End of variables declaration//GEN-END:variables
-
+   
    public String getPlotName() {
       return jPlotNameTextField.getText();
    }
@@ -1264,15 +1265,15 @@ public class JPlotterPanel extends javax.swing.JPanel
       currentCurveTitle=getRangeNamesAsString();
       jCurveLegendTextField.setText(currentCurveTitle);
    }
-
+   
    public boolean isAutoGeneratedCurveTitle() {
       return autoGeneratedCurveTitle;
    }
-
+   
    public void setAutoGeneratedCurveTitle(boolean autoGeneratedCurveTitle) {
       this.autoGeneratedCurveTitle = autoGeneratedCurveTitle;
    }
-
+   
    public String getCurveName() {
       return jCurveLegendTextField.getText();
    }
@@ -1287,19 +1288,19 @@ public class JPlotterPanel extends javax.swing.JPanel
     *
    public void updatePlotterWithSelection() {
       jPlotterAddPlotButton.setEnabled(validateXY());
-
+      
    }*/
    /**
     * TreeSelectionListener implementation
     */
    public void valueChanged(TreeSelectionEvent e) {
       getCurrentTreeSelection(e);
-
+      
       jPlotterDeletePlotButton.setEnabled(false);
       //jPlotterUpdatePlotButton.setEnabled(false);
       if (selectedPathsVector.size()==0)
          return;
-
+      
       // Make sure we have a curve before enabling update
       if (selectedPathsVector.size()==1){
          TreeNode lastNode=(TreeNode)selectedPathsVector.get(0).getLastPathComponent();
@@ -1319,7 +1320,7 @@ public class JPlotterPanel extends javax.swing.JPanel
          jPlotterDeletePlotButton.setEnabled(allCurves);
       }
    }
-
+   
    private void getCurrentTreeSelection(TreeSelectionEvent e) {
       TreePath[] selectedPaths = e.getPaths();
       for(int i=0;i<selectedPaths.length;i++){
@@ -1332,15 +1333,15 @@ public class JPlotterPanel extends javax.swing.JPanel
    }
    /**
     * Specify domain min bound
-    *
-    * @param minX
-    */
+    * 
+    * @param minX 
+    */   
    public void setMinX(double minX) {
       jDomainStartTextField.setValue(minX);
    }
    /**
     * Retrieve domain min bound
-    *
+    * 
     * @return domain min bound
     */
    public double getMinX() {
@@ -1348,21 +1349,21 @@ public class JPlotterPanel extends javax.swing.JPanel
    }
    /**
     * Specify domain max bound
-    *
-    * @param maxX
+    * 
+    * @param maxX 
     */
    public void setMaxX(double maxX) {
       jDomainEndTextField.setValue(maxX);
    }
    /**
     * Retrieve domain max bound
-    *
+    * 
     * @return domain max bound
     */
    public double getMaxX() {
       return ((Double)jDomainEndTextField.getValue()).doubleValue();
    }
-
+   
    boolean getRectify() {
       return jRectifyCheckBox.isSelected();
    }
@@ -1412,13 +1413,13 @@ public class JPlotterPanel extends javax.swing.JPanel
       for(int i=0; i<filters.size(); i++){
          if (filters.get(i) instanceof PlotRectifyFilter)
             jRectifyCheckBox.setSelected(true);
-
+         
       }*/
    }
-
+   
    public void showTimeCurves(String title, String plot, Storage residualsStore, String[] names) {
    }
-
+   
    /**
     * Popups have a single purpose, to populate the Text fields with valid values, but users can
     * type those in manually. The following parse functions try to recover the source storage, columns
@@ -1426,12 +1427,12 @@ public class JPlotterPanel extends javax.swing.JPanel
     * The syntax for File sources is File:<xxxx>:<yyyyy>
     **/
    private boolean parseDomainOrRangeText(JTextField jQtyTextField, boolean isDomain) {
-
+      
       String text = jQtyTextField.getText();
       // Check for Empty
       if (text.length()==0)
          return false;
-
+      
       // Check for qualifiers
       // We need to be forgiving in case the user types in the quantity manually
       String trimmed = text.trim();
@@ -1457,7 +1458,7 @@ public class JPlotterPanel extends javax.swing.JPanel
          // set sourceY here after all error detection is done.
          return true;
       }
-
+      
    }
    private String getRangeNamesAsString() {
        return getRangeNamesAsString(",");
@@ -1468,7 +1469,7 @@ public class JPlotterPanel extends javax.swing.JPanel
   private String getRangeNamesAsString(String separator) {
       return getRangeNamesAsString(separator, rangeNames);
    }
-
+   
    private String getRangeNamesAsString(String separator, String[] names) {
       String rep="";
        if (rangeNames!=null){
@@ -1478,7 +1479,7 @@ public class JPlotterPanel extends javax.swing.JPanel
                rep = rep + separator;
          }
       }
-      return rep;
+      return rep;      
    }
    public PlotCurve plotDataFromSource(PlotterSourceInterface source, String domain, String range) {
         sourceX = source;
@@ -1494,12 +1495,12 @@ public class JPlotterPanel extends javax.swing.JPanel
         makeCurveCurrent(plotCurve);
         return plotCurve;
    }
-
+   
    public PlotCurve showAnalysisCurveAgainstTime(Model aModel, Storage s,
            String title,
            String curveLegend, String columnName,
            String xLabel, String yLabel) {
-
+        
         sourceX = new PlotterSourceAnalysis(aModel, s, columnName);
         sourceY = sourceX;
         setDomainName("time");
@@ -1514,7 +1515,7 @@ public class JPlotterPanel extends javax.swing.JPanel
                 sourceX, getDomainName(),                 sourceY, rangeNames[0]);
         makeCurveCurrent(plotCurve);
         plotterModel.fireChangeEvent(getNodeForCurve(plotCurve));
-        // Observe motionsDB
+        // Observe motionsDB 
         //MotionsDB.getInstance().addObserver(this);
       return plotCurve;
    }
@@ -1546,7 +1547,7 @@ public class JPlotterPanel extends javax.swing.JPanel
             else if (mev.getOperation()==mev.getOperation().Close){  // Some motion is closed
                plotterModel.removeMotion(mev.getMotion());
                if (MotionsDB.getInstance().getNumCurrentMotions()==0)
-
+                   
                populateYPopup();
             } else if (mev.getOperation() == mev.getOperation().Modified) {
                populateYPopup();
@@ -1563,7 +1564,7 @@ public class JPlotterPanel extends javax.swing.JPanel
                }
                }
          }
-
+         
       }
       else if (o instanceof OpenSimDB){
          if (arg instanceof ObjectSetCurrentEvent) {
@@ -1576,7 +1577,7 @@ public class JPlotterPanel extends javax.swing.JPanel
                   currentModel = (Model)objs.get(i);
                   openSimContext = OpenSimDB.getInstance().getContext(currentModel);
                   processCurrentModel();
-                  populateYPopup();
+                  populateYPopup();           
                   if (dFilterDlg != null){
                      dFilterDlg.dispose();
                      dFilterDlg=null;
@@ -1601,7 +1602,7 @@ public class JPlotterPanel extends javax.swing.JPanel
             else if (evt.getOperation()==ModelEvent.Operation.SetCurrent){
                currentModel=evt.getModel();
                openSimContext = OpenSimDB.getInstance().getContext(currentModel);
-               populateYPopup();
+               populateYPopup();           
                if (dFilterDlg != null){
                   dFilterDlg.dispose();
                   dFilterDlg=null;
@@ -1623,11 +1624,11 @@ public class JPlotterPanel extends javax.swing.JPanel
       AnalyzeTool tool = plotterModel.getAnalyzeTool(currentModel);
       if (motion instanceof PlotterSourceMotion || motion instanceof PlotterSourceStorage)
           tool.setSolveForEquilibrium(!motion.hasFullState(currentModel));
-      else
+      else 
             tool.setSolveForEquilibrium(true);
       PlotterSourceAnalysis analysisSource = (PlotterSourceAnalysis)source;
       plotterModel.configureAnalyses(tool, analysisSource, domainName, ranges);
-
+      
       // Save the state before running the analysis so that we can restore the model afterwards
       int numStates = currentModel.getNumStateVariables();
       ArrayStr stateNames = currentModel.getStateVariableNames();
@@ -1660,7 +1661,7 @@ public class JPlotterPanel extends javax.swing.JPanel
          // Replace short coordinate name with fullpathname
          Coordinate coord = currentModel.getCoordinateSet().get(domainName);
          int xIndex = statesStorage.getStateIndex(getDomainName());
-
+         
          double domStart=(Double)jDomainStartTextField.getValue();
          double domEnd=(Double)jDomainEndTextField.getValue();
          if (coord.getMotionType() == Coordinate.MotionType.Rotational){
@@ -1673,7 +1674,7 @@ public class JPlotterPanel extends javax.swing.JPanel
          }
          // Make 100 steps along the way, varying the quantity on sourceX by 1/100 of the distance between domStart & domEnd
          statesStorage.purge();
-
+         
           for(int i=0; i<NUM_STEPS; i++){
             double time = (double)i;
             double increment = 1./(NUM_STEPS-1)*(domEnd-domStart);
@@ -1683,7 +1684,7 @@ public class JPlotterPanel extends javax.swing.JPanel
             statesForAnalysis.set(xIndex, val);
             StateVector newVector = new StateVector();
             // FIX40 openSimContext.computeConstrainedCoordinates(statesForAnalysis);
-            newVector.setStates(time, statesForAnalysis.getAsVector());
+            newVector.setStates(time, statesForAnalysis.getAsVector());            
             statesStorage.append(newVector);
          }
          tool.setStatesStorage(statesStorage);
@@ -1715,8 +1716,8 @@ public class JPlotterPanel extends javax.swing.JPanel
       currentModel.getSimbodyEngine().convertRadiansToDegrees(analysisSource.getStorage());
       currentModel.getSimbodyEngine().convertRadiansToDegrees(statesStorage);
        ArrayStr coordsArray = new ArrayStr();
-       coordsArray.append("all");
-       analysis.setCoordinates(coordsArray);
+       coordsArray.append("all"); 
+       analysis.setCoordinates(coordsArray);   
    }
 
     private void setNonzeroDefaultValues(final ArrayStr stateNames, final ArrayDouble statesForAnalysis, boolean activationOverride, double activationValue) {
@@ -1731,7 +1732,7 @@ public class JPlotterPanel extends javax.swing.JPanel
         }
     }
     }
-
+   
    private Storage createStateStorageWithHeader(final Model mdl) {
       // set tool attributes
       Storage statesStorage = new Storage();
@@ -1741,7 +1742,7 @@ public class JPlotterPanel extends javax.swing.JPanel
       statesStorage.setColumnLabels(stateNames);
       return statesStorage;
    }
-
+   
    private void resetXY() {
       jXQtyTextField.setText("");
       jYQtyTextField.setText("");
@@ -1754,7 +1755,7 @@ public class JPlotterPanel extends javax.swing.JPanel
       sourceX=null;
       jPlotterAddPlotButton.setEnabled(validateXY());
    }
-
+   
    private void processCurrentModel() {
       if (currentModel!=null && !(currentModel instanceof ModelForExperimentalData) ){
          initAnalyses();
@@ -1813,7 +1814,7 @@ public class JPlotterPanel extends javax.swing.JPanel
                         public void actionPerformed(ActionEvent e) {
                             populateYQty(qName);
                         }
-
+                        
             });
          }
          }
@@ -1874,7 +1875,7 @@ public class JPlotterPanel extends javax.swing.JPanel
          }});
          jSourcePopupMenu.add(newfileMenuItem);
    }
-
+   
    private void useMuscles(boolean onOff) {
       boolean oldState=isBuiltinMuscleCurve();
       setBuiltinMuscleCurve(onOff);
@@ -1882,7 +1883,7 @@ public class JPlotterPanel extends javax.swing.JPanel
       if (onOff==false)
          jSelectedMusclesTextField.setText("");
    }
-
+   
    public String getDomainName() {
       if (domainName==null){
          return "select X";
@@ -1894,19 +1895,19 @@ public class JPlotterPanel extends javax.swing.JPanel
       }
       return domainName;
    }
-
+   
    public void setDomainName(String domainName) {
       this.domainName = domainName;
    }
-
+   
    public boolean isBuiltinMuscleCurve() {
       return builtinMuscleCurve;
    }
-
+   
    public void setBuiltinMuscleCurve(boolean muscleSpecific) {
       this.builtinMuscleCurve = muscleSpecific;
    }
-
+   
    private boolean validateXY() {
        boolean validXY=false;
        if (sourceY==null)
@@ -2008,7 +2009,7 @@ public class JPlotterPanel extends javax.swing.JPanel
    public void setModelChanged(boolean modelChanged) {
       this.modelChanged = modelChanged;
    }
-
+   
    /*
     * Locate the node corresponding to the passed in PlotCurve
     */
@@ -2022,7 +2023,7 @@ public class JPlotterPanel extends javax.swing.JPanel
     */
    private void invokeTreePopupIfNeeded(int evtX, int evtY) {
       final TreePath clickedElement = jPlotsTree.getPathForLocation(evtX, evtY);
-
+       
       //  Display the name of the selected tree element in the selection field
       String clickedElementName;
       if (clickedElement != null){
@@ -2037,7 +2038,7 @@ public class JPlotterPanel extends javax.swing.JPanel
             cv = ((PlotCurve)node.getUserObject());
          }
          final PlotCurve cv2=cv; // keep a final reference to object so action listeners are happy
-
+         
          JPopupMenu curvePopup = new JPopupMenu();
          if (cv ==null){ // A whole plot is picked
             JMenuItem propMenuItem = new JMenuItem("Properties...");
@@ -2051,7 +2052,7 @@ public class JPlotterPanel extends javax.swing.JPanel
                 public void actionPerformed(ActionEvent e) {
                        plotterModel.getCurrentPlot().exportDataToFile(frame);
                 }});
-            curvePopup.add(exportMenuItem);
+            curvePopup.add(exportMenuItem);            
             curvePopup.show(jPlotsTree, evtX, evtY);
             return;
          }
@@ -2098,10 +2099,10 @@ public class JPlotterPanel extends javax.swing.JPanel
          }
          curvePopup.show(jPlotsTree, evtX, evtY);
       }
-
+      
    }
 
-   /**
+   /** 
     * Handle file selection pick in Quantity Y popup
     */
    private class FileSelectionListener implements ActionListener {
@@ -2122,13 +2123,13 @@ public class JPlotterPanel extends javax.swing.JPanel
             dialogTitle="Select motion quantity";
          else
             dialogTitle="Select data column(s) to plot";
-
+         
          OpenSimDialog selectionDlg=DialogUtils.createDialogForPanelWithParent(getFrame(), filterpanel, dialogTitle);
          DialogUtils.addStandardButtons(selectionDlg);
          selectionDlg.setModal(true);
          selectionDlg.setVisible(true);
          // Replace with std Dlg ok
-
+         
          if (selectionDlg.getDialogReturnValue()==selectionDlg.OK_OPTION) {
             jYQtyTextField.setText(filterpanel.getSelectedAsString());
             rangeNames = new String[filterpanel.getNumSelected()];
@@ -2137,11 +2138,11 @@ public class JPlotterPanel extends javax.swing.JPanel
             updateContextGuiElements();
             jPlotterAddPlotButton.setEnabled(validateXY());
          }
-
+         
       }
    }
 
-   /**
+   /** 
     * Handle motion pick in Quantity Y popup
     */
    private class MotionSelectionListener implements ActionListener {
@@ -2157,7 +2158,7 @@ public class JPlotterPanel extends javax.swing.JPanel
          sourceY=(nextMotion);
          sourceX = sourceY;
          PlotterQuantityNameFilterJPanel filterpanel = new PlotterQuantityNameFilterJPanel(sourceY);
-
+         
          OpenSimDialog selectionDlg=DialogUtils.createDialogForPanelWithParent(getFrame(), filterpanel, "Select Motion Quantity");
          DialogUtils.addStandardButtons(selectionDlg);
          selectionDlg.setModal(true);
@@ -2177,7 +2178,7 @@ public class JPlotterPanel extends javax.swing.JPanel
             updateContextGuiElements();
             jPlotterAddPlotButton.setEnabled(validateXY());
           }
-
+          
       }
    }
 
@@ -2203,7 +2204,7 @@ public class JPlotterPanel extends javax.swing.JPanel
            System.out.println("sourceY =["+sourceY.getClass().getName()+":"+sourceY.getDisplayName()+"]");
        }
         System.out.println("================================");
-
+          
    }
    // overrideActivation is now unused in the latest refactoring
    // newActivation is obtained from dialog so defaults to 1.0
@@ -2234,7 +2235,7 @@ public class JPlotterPanel extends javax.swing.JPanel
       org.opensim.modeling.Vector buffer = new org.opensim.modeling.Vector();
       buffer.resize(numStates);
       org.opensim.modeling.Vector currentStateAsVector = openSimContext.getCurrentStateRef().getY();
-
+      
       for(int i=0; i<numRows; i++){
          boolean debug = false;//(i==0);
          StateVector statesFromMotion = motionsStorage.getStateVector(i);
@@ -2264,7 +2265,7 @@ public class JPlotterPanel extends javax.swing.JPanel
       boolean validMuscles = false;
       if (rangeNames == null || currentModel==null)   // Have to have a model
          return false;
-
+      
       SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(currentModel);
       Vector<String> muscleNames = guiElem.getMuscleNames();
       validMuscles = true;
@@ -2286,17 +2287,17 @@ public class JPlotterPanel extends javax.swing.JPanel
         this.frame = frame;
         plotterModel.getCurrentPlot().setOwnerFrame(frame);
     }
-
+    
     public void collapseControlPanel() {
         jSplitPane1.setDividerLocation(1000);
     }
-
+    
     public ChartPanel getChartPanel()
     {
         return plotterModel.getCurrentPlot().getChartPanel();
-
+    
     }
-
+    
     public PlotCurve showAnalysisCurve(String qName, String muscleName, String genCoordName) {
        PlotCurve plotCurve=null;
        openSimContext = OpenSimDB.getInstance().getContext(currentModel);
@@ -2312,7 +2313,7 @@ public class JPlotterPanel extends javax.swing.JPanel
                sourceY=(new PlotterSourceAnalysis(currentModel, plotterModel.getStorage("MomentArm_"+coordName, currentModel), "moment arm"));
            }
            else {   // Just Moment
-               sourceY=(new PlotterSourceAnalysis(currentModel, plotterModel.getStorage("Moment_"+coordName, currentModel), "moment"));
+               sourceY=(new PlotterSourceAnalysis(currentModel, plotterModel.getStorage("Moment_"+coordName, currentModel), "moment"));               
            }
        }
        else
@@ -2359,7 +2360,7 @@ public class JPlotterPanel extends javax.swing.JPanel
         }
 
     }
-
+    
     public void addDomainTickmark(double domValue) {
         plotterModel.getCurrentPlot().setDomainCrosshair(domValue);
     }
