@@ -66,7 +66,7 @@ myState = myModel.initSystem()
 scaleTool = modeling.ScaleTool(scaleSetup)
 scaleTool.run();
 
-## load and Scaled Model
+## load Scaled Model
 # Load model 
 loadModel(scaleModelName)
 # Get a handle to the current model
