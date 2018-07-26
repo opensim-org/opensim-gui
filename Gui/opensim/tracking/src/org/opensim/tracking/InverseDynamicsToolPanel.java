@@ -83,7 +83,8 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
       helpButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent ae) {
-                BrowserLauncher.openURL("http://simtk-confluence.stanford.edu/display/OpenSim40/Inverse+Dynamics");
+                String path = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu/display/OpenSim40/Inverse+Dynamics" : TheApp.getUsersGuideDir() + "Inverse+Dynamics.html"; 
+                BrowserLauncher.openURL(path);
             }
       });
       bindPropertiesToComponents();
