@@ -2,7 +2,7 @@ OpenSim GUI [![Travis-CI build status][buildstatus_image_travisci]][travisci] [!
 ===========
 
 OpenSim is software that lets users develop models of musculoskeletal
-structures and create dynamic simulations of movement.
+structures and create dynamic simulations of movement. 
 
 This repository contains the source code for OpenSim's Java GUI, and does *not*
 include source code for the
@@ -63,7 +63,7 @@ Movement. IEEE Transactions on Biomedical Engineering. (2007)
 
 If you use plugins, models, or other components contributed by your fellow
 researchers, you must acknowledge their work as described in the license that
-accompanies each of these files.
+accompanies each of these files. 
 
 
 Building from the source code
@@ -74,7 +74,7 @@ build and run the GUI on **OSX** and **Linux**; though it is not thoroughly
 tested on these platforms. We will write instructions for OSX and Linux in the
 future; for now, you can follow the Windows instructions as a rough guide.
 
-See the [OpenSim Confluence Wiki](http://simtk-confluence.stanford.edu/display/OpenSim40/Building+OpenSim+from+Source)
+See the [OpenSim Confluence Wiki](http://simtk-confluence.stanford.edu/display/OpenSim40Building+OpenSim+from+Source)
 for additional information.
 
 #### Get the dependencies
@@ -126,7 +126,7 @@ this step is necessary to generate configuration files. The alternative is
 to run Ant with the following additional command-line flags:
 
 ```
--Dnbplatform.default.netbeans.dest.dir="C:/Program Files/NetBeans 8.0.2"
+-Dnbplatform.default.netbeans.dest.dir="C:/Program Files/NetBeans 8.0.2" 
 -Dnbplatform.default.harness.dir="C:/Program Files/NetBeans 8.0.2/harness"
 ```
 

@@ -63,11 +63,11 @@ import org.opensim.view.pub.OpenSimDB;
  * @author  erang
  */
 public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer {
-
+    
    InverseDynamicsToolModel toolModel = null;
    ActuatorsAndExternalLoadsPanel actuatorsAndExternalLoadsPanel = null;
    String modeName = "Inverse Dynamics";
-
+   
    private boolean internalTrigger = false;
    private NumberFormat numFormat = NumberFormat.getInstance();
 
@@ -77,14 +77,13 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
       if (numFormat instanceof DecimalFormat) {
         ((DecimalFormat) numFormat).applyPattern("#,##0.############");
       }
-
+      
       initComponents();
 
       helpButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent ae) {
-                String path = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu/display/OpenSim40/Inverse+Dynamics" : TheApp.getUsersGuideDir() + "Inverse+Dynamics.html"; 
-                BrowserLauncher.openURL(path);
+                BrowserLauncher.openURL("http://simtk-confluence.stanford.edu/display/OpenSim40/Inverse+Dynamics");
             }
       });
       bindPropertiesToComponents();
@@ -109,7 +108,7 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
       coordinatesFileName1.setExtensionsAndDescription(".mot,.sto", "Motion data for "+modeName);
 
       // Actuators & External Loads tab
-      actuatorsAndExternalLoadsPanel = new ActuatorsAndExternalLoadsPanel(toolModel, toolModel.getOriginalModel(),
+      actuatorsAndExternalLoadsPanel = new ActuatorsAndExternalLoadsPanel(toolModel, toolModel.getOriginalModel(), 
               false);
       jTabbedPane1.addTab( "External Loads", actuatorsAndExternalLoadsPanel);
       // Re-layout panels after we've removed various parts...
@@ -124,7 +123,7 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
    private void bindPropertiesToComponents() {
 //          ToolCommon.bindProperty(toolModel.getTool(), "states_file", statesFileName);
       InverseDynamicsToolModel idModel = (InverseDynamicsToolModel)toolModel;
-
+ 
       ToolCommon.bindProperty(idModel.InverseDynamicsTool(), "coordinates_file", motionsComboBox1);
       ToolCommon.bindProperty(idModel.InverseDynamicsTool(), "coordinates_file", coordinatesFileName1);
       ToolCommon.bindProperty(idModel.InverseDynamicsTool(), "lowpass_cutoff_frequency_for_coordinates", cutoffFrequency1);
@@ -132,7 +131,7 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
       ToolCommon.bindProperty(idModel.InverseDynamicsTool(), "time_range", finalTime);
       ToolCommon.bindProperty(idModel.InverseDynamicsTool(), "results_directory", outputDirectory);
     }
-
+   
    public void update(Observable observable, Object obj) {
       if (observable instanceof OpenSimDB){
            if (obj instanceof ModelEvent) {
@@ -145,7 +144,7 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
                     DialogDisplayer.getDefault().notify(dlg);
                     this.close();
                     return;
-                }
+                }        
            }
            return;
        }
@@ -155,7 +154,7 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
       //        obj == AbstractToolModel.Operation.InputDataChanged))
          updateDialogButtons();
       else
-         updateFromModel();
+         updateFromModel(); 
    }
 
    private void setEnabled(JPanel panel, boolean enabled) {
@@ -180,7 +179,7 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
       initialTime.setText(numFormat.format(initTime));
       double finTime = toolModel.getFinalTime();
       finalTime.setText(numFormat.format(finTime));
-
+      
       // Output
       outputName.setText(toolModel.getOutputPrefix());
       outputDirectory.setFileName(toolModel.getResultsDirectory(),false);
@@ -207,24 +206,24 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
       else */if(toolModel.getInputSource()==InverseDynamicsToolModel.InputSource.Coordinates) {
          buttonGroup3.setSelected(motionRadioButton1.getModel(),true);
          buttonGroup4.setSelected(fromFileMotionRadioButton1.getModel(),true);
-
+         
       } else if(toolModel.getInputSource()==InverseDynamicsToolModel.InputSource.Motion) {
          buttonGroup3.setSelected(motionRadioButton1.getModel(),true);
          buttonGroup4.setSelected(loadedMotionRadioButton1.getModel(),true);
       } else {
          buttonGroup3.setSelected(unspecifiedRadioButton.getModel(),true);
       }
-
+ 
      // Motion selections
       ArrayList<Storage> motions = MotionsDB.getInstance().getModelMotions(toolModel.getOriginalModel());
       motionsComboBox1.removeAllItems();
       if(motions!=null) for(int i=0; i<motions.size(); i++) motionsComboBox1.addItem(motions.get(i).getName());
 
       if(motions==null || motions.size()==0) loadedMotionRadioButton1.setEnabled(false);
-
+      
       else if(toolModel.getInputMotion()==null) motionsComboBox1.setSelectedIndex(-1);
       else motionsComboBox1.setSelectedIndex(motions.indexOf(toolModel.getInputMotion()));
-
+      
       //if(!buttonGroup3.isSelected(statesRadioButton1.getModel())) statesFileName1.setEnabled(false);
       if(!buttonGroup3.isSelected(motionRadioButton1.getModel())) {
          fromFileMotionRadioButton1.setEnabled(false);
@@ -237,14 +236,14 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
          coordinatesFileName1.setEnabled(false);
       if(!buttonGroup3.isSelected(motionRadioButton1.getModel()) || !buttonGroup4.isSelected(loadedMotionRadioButton1.getModel()))
          motionsComboBox1.setEnabled(false);
-
+      
       if(!buttonGroup3.isSelected(motionRadioButton1.getModel()) ) {
           motionRadioButton1.setSelected(true);
           fromFileMotionRadioButton1.setEnabled(true);
           coordinatesFileName1.setEnabled(true);
           filterCoordinatesCheckBox1.setEnabled(true);
       }
-
+      
       //statesFileName1.setFileName(toolModel.getStatesFileName(),false);
       coordinatesFileName1.setFileName(toolModel.getCoordinatesFileName(),false);
 
@@ -277,7 +276,7 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
       toolModel.execute();
       updateDialogButtons();
    }
-
+   
    /** This method is called from within the constructor to
     * initialize the form.
     * WARNING: Do NOT modify this code. The content of this method is
@@ -630,7 +629,7 @@ private void reuseSelectedQuantitiesCheckBoxActionPerformed(java.awt.event.Actio
 // TODO add your handling code here:
     //cmcToolModel().setReuseSelectedMetrics(reuseSelectedQuantitiesCheckBox.isSelected());
 }//GEN-LAST:event_reuseSelectedQuantitiesCheckBoxActionPerformed
-
+    
     private void editExcitationsFile(FileTextFieldAndChooser aControlsFileName){
         if (!aControlsFileName.getFileIsValid()) return;
         String controlsFile=aControlsFileName.getFileName();
@@ -660,7 +659,7 @@ private void reuseSelectedQuantitiesCheckBoxActionPerformed(java.awt.event.Actio
    //------------------------------------------------------------------------
    // Inverse tool input settings
    //------------------------------------------------------------------------
-
+    
     private void motionsComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motionsComboBox1ActionPerformed
       if(internalTrigger) return;
       int index = motionsComboBox1.getSelectedIndex();
@@ -685,8 +684,8 @@ private void reuseSelectedQuantitiesCheckBoxActionPerformed(java.awt.event.Actio
       boolean selected=filterCoordinatesCheckBox1.isSelected();
        toolModel.setFilterCoordinates(selected);
        cutoffFrequency1.setEnabled(selected);
-       if (selected)
-           cutoffFrequency1.setText("6");
+       if (selected) 
+           cutoffFrequency1.setText("6"); 
        else
            cutoffFrequency1.setText("-1.");
     }//GEN-LAST:event_filterCoordinatesCheckBox1ActionPerformed
@@ -799,6 +798,6 @@ private void reuseSelectedQuantitiesCheckBoxActionPerformed(java.awt.event.Actio
    // Relinquish C++ resources by setting references to them to null
    public void cleanup()
    {
-
+      
    }
 }

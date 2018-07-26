@@ -65,8 +65,7 @@ public class IKToolPanel extends BaseToolPanel implements Observer {
       helpButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent ae) {
-                String path = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu/display/OpenSim40/Inverse+Kinematics" : TheApp.getUsersGuideDir() + "Inverse+Kinematics.html";
-                BrowserLauncher.openURL(path);
+                BrowserLauncher.openURL("http://simtk-confluence.stanford.edu/display/OpenSim40/Inverse+Kinematics");
             }
       });
 

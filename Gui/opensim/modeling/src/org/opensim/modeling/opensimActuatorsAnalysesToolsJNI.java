@@ -36,7 +36,7 @@ public class opensimActuatorsAnalysesToolsJNI {
           if (inMatlab) {
               msg +=  "\nSee https://simtk-confluence.stanford.edu/display/OpenSim40/Scripting+with+Matlab";
           }
-
+          
           System.out.println(msg);
           String title = "Error: Failed to load OpenSim libraries";
           if (!GraphicsEnvironment.isHeadless()) {
