@@ -24,46 +24,36 @@
 # Written by James Dunne, Stanford University
 
 # This example performs the steps of Tutorial Three in scripting form
+import os.path
 
 # Folder paths
-installDir 		= 	getInstallDiR()
-modelFolder		=	installDir+"\Models\Gait2354_Simbody" 
+modelFolder		=	os.path.join(getResourcesDir(),"Models", "Gait2354_Simbody");
+scaleSetupPath	=	os.path.join(modelFolder, "subject01_Setup_Scale.xml");
 
-# Input Model 
-modelName		=	modelFolder+"\gait2354_simbody.osim"
-genericModelName=	"gait2354_simbody.osim"	
-#Output models
-scaledModelName	=	"scaled_gait2354.osim"
-scaleModelPath	=	modelFolder+"\scaled_gait2354.osim"
-movedModelName	=	"subject01_simbody.osim"
-movedModelPath	=	modelFolder+"\subject01_simbody.osim"
+# Models
+modelName	    =	os.path.join(modelFolder,"gait2354_simbody.osim");
+scaleModelName	=	os.path.join(modelFolder, "subject01_simbody.osim");
 
 # input xml files
-scaleSetup		=	modelFolder+"\subject01_Setup_Scale.xml"
-markerSetFile	=	modelFolder+"\gait2354_Scale_MarkerSet.xml"
-ikSetupFile		=	modelFolder+"\subject01_Setup_IK.xml"
-idSetupFile		=	modelFolder+"\subject01_Setup_InverseDynamics.xml"
-extLoadsFile	=	"subject01_walk1_grf.xml"
-# output xml files
-appliedscaleSet	=	modelFolder+"\subject01_scaleSet_applied.xml"
-movedMarkers	=	"subject01_Markers_moved.xml"
+scaleSetup		=	os.path.join(modelFolder,"subject01_Setup_Scale.xml");
+markerSetFile	=	os.path.join(modelFolder,"gait2354_Scale_MarkerSet.xml");
+ikSetupFile		=	os.path.join(modelFolder,"subject01_Setup_IK.xml");
+idSetupFile		=	os.path.join(modelFolder,"subject01_Setup_InverseDynamics.xml");
+extLoadsFile	=	os.path.join(modelFolder,"subject01_walk1_grf.xml");
 
 # Input data files 
-staticMarkerName	=	"subject01_static.trc"
-staticMarkers		=	modelFolder+"\subject01_static.trc"
-walk1MarkersName	=	"subject01_walk1.trc"
-walk1MarkersPath	=	modelFolder+"\subject01_walk1.trc"
+staticMarkers	=	os.path.join(modelFolder,"subject01_static.trc");
+walkingMarkers	=	os.path.join(modelFolder,"subject01_walk1.trc");
+
 # Output data files
-staticCoordinates	=	"staticCoordinates.mot"
-ikMotionFile		=	"subject01_walk1_ik.mot"
-ikMotionFilePath	=	modelFolder+"\subject01_walk1_ik.mot"
-idResultsFile		=	"inverse_dynamics.sto"
+ikMotionFilePath=	os.path.join(modelFolder,"subject01_walk1_ik.mot");
+idResultsFile	=	os.path.join(modelFolder,"inverse_dynamics.sto");
 
 # Define some of the subject measurements
 subjectMass		=	72.6
 
 ## load and define model
-# Load a model 
+# Load model 
 loadModel(modelName)
 # Get a handle to the current model
 myModel = getCurrentModel()
@@ -71,47 +61,18 @@ myModel = getCurrentModel()
 myModel.initSystem()
 myState = myModel.initSystem()
 
-## Add a MarkerSet to the model
-#	Create a MarkerSet object
-newMarkers = modeling.MarkerSet(markerSetFile)
-# 	Replace the markerSet to the model
-myModel.replaceMarkerSet(myState,newMarkers)
-#	Re-initialize State
-myState = myModel.initSystem()
-
 ## Scaling Tool
 # Create the scale tool object from existing xml
 scaleTool = modeling.ScaleTool(scaleSetup)
-## ModelScaler-
-#Name of OpenSim model file (.osim) to write when done scaling.
-scaleTool.getModelScaler().setOutputModelFileName(scaledModelName)
-# Filename to write scale factors that were applied to the unscaled model (optional)
-scaleTool.getModelScaler().setOutputScaleFileName(appliedscaleSet)
-# Get the path to the subject
-path2subject = scaleTool.getPathToSubject()
-# Run model scaler Tool
-scaleTool.getModelScaler().processModel(myState,myModel,path2subject,subjectMass);
+scaleTool.run();
 
-## Load Scaled model and Initialize states-
-# Load a model 
-loadModel(scaleModelPath)
+## load and Scaled Model
+# Load model 
+loadModel(scaleModelName)
 # Get a handle to the current model
 myModel = getCurrentModel()
 #initialize
-myState = myModel.initSystem()
-
-## ModelPlacer-
-# Get the path to the subject
-path2subject = scaleTool.getPathToSubject()
-# Run Marker Placer
-scaleTool.getMarkerPlacer().processModel(myState,myModel,path2subject)
-
-## Load Scaled model and Initialize states-
-# Load a model 
-loadModel(movedModelPath)
-# Get a handle to the current model
-myModel = getCurrentModel()
-#initialize
+myModel.initSystem()
 myState = myModel.initSystem()
 
 ## Inverse Kinematics tool
