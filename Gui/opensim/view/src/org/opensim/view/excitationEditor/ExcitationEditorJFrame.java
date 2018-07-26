@@ -321,7 +321,7 @@ public class ExcitationEditorJFrame extends javax.swing.JFrame {
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ostream));
                 ExcitationsGridJPanel gridPanel = dPanel.getExcitationGridPanel();
                 writer.write(gridPanel.getNumColumns()+"\n");
-                for(int i=0; i<gridPanel.getNumColumns(); i++) 
+                for(int i=0; i<gridPanel.getNumColumns(); i++)
                     gridPanel.getColumn(i).write(writer);
                 writer.flush();
                 writer.close();
@@ -330,7 +330,7 @@ public class ExcitationEditorJFrame extends javax.swing.JFrame {
             }
         }
 
- 
+
 // TODO add your handling code here:
     }//GEN-LAST:event_jSaveTemplateMenuItemActionPerformed
 
@@ -356,7 +356,7 @@ public class ExcitationEditorJFrame extends javax.swing.JFrame {
         }
         // Create a blank control set
         ControlSet controlSet = new ControlSet();
-        
+
         // Cycle thru Actuators and create a Control for it with default min=0, max=1, val=0
         SetActuators acts = currentModel.getForceSet().getActuators();
 	controlSet.setName(currentModel.getName()+"_Default");
@@ -379,12 +379,12 @@ public class ExcitationEditorJFrame extends javax.swing.JFrame {
                     controlSet.cloneAndAppend(control);
                 }
 	}
-        
-        String fileName = FileUtils.getInstance().browseForFilenameToSave( 
-                FileUtils.getFileFilter(".xml", "Save excitations to file"), true, "controls.xml", this); 
-         if(fileName!=null) { 
+
+        String fileName = FileUtils.getInstance().browseForFilenameToSave(
+                FileUtils.getFileFilter(".xml", "Save excitations to file"), true, "controls.xml", this);
+         if(fileName!=null) {
             String fileNameWithExtention = FileUtils.addExtensionIfNeeded(fileName, ".xml");
-            controlSet.print(fileNameWithExtention); 
+            controlSet.print(fileNameWithExtention);
             dPanel.populate(controlSet, true);
          }
     }//GEN-LAST:event_jCreateDefaultMenuItemActionPerformed
@@ -410,7 +410,7 @@ public class ExcitationEditorJFrame extends javax.swing.JFrame {
          OpenSimObject objGeneric = OpenSimObject.makeObjectFromFile(fileName);
          if (objGeneric==null || !objGeneric.getConcreteClassName().equalsIgnoreCase("ControlSet")){
             DialogDisplayer.getDefault().notify(
-               new NotifyDescriptor.Message("Could not construct excitations from the specified file.")); 
+               new NotifyDescriptor.Message("Could not construct excitations from the specified file."));
             return;
          }
          ControlSet obj = new ControlSet(fileName);
@@ -422,14 +422,13 @@ public class ExcitationEditorJFrame extends javax.swing.JFrame {
                new NotifyDescriptor.Message("Could not construct excitations from the specified file."));
          }
       }
-   
+
     }//GEN-LAST:event_jLoadMenuItemActionPerformed
 
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
-        String path = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu/display/OpenSim40/Excitation+Editor" : TheApp.getUsersGuideDir() + "Excitation+Editor.html";
-        BrowserLauncher.openURL(path);
+        BrowserLauncher.openURL("http://simtk-confluence.stanford.edu/display/OpenSim40/Excitation+Editor");
     }//GEN-LAST:event_helpButtonActionPerformed
-    
+
     /**
      * @param args the command line arguments
      */
@@ -440,7 +439,7 @@ public class ExcitationEditorJFrame extends javax.swing.JFrame {
             }
         });
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CreateNewButton;
     private javax.swing.JButton LoadButton;
@@ -461,5 +460,5 @@ public class ExcitationEditorJFrame extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JMenu jToolsMenu;
     // End of variables declaration//GEN-END:variables
-    
+
 }

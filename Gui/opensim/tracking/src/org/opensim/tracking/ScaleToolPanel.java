@@ -56,7 +56,7 @@ import org.opensim.view.ModelEvent;
 import org.opensim.view.pub.OpenSimDB;
 
 public class ScaleToolPanel extends BaseToolPanel implements Observer {
-  
+
    private ScaleToolModel scaleToolModel = null;
 
    private JCheckBox modelScalerPanelCheckBox = new JCheckBox(new EnableModelScalerAction());
@@ -72,8 +72,8 @@ public class ScaleToolPanel extends BaseToolPanel implements Observer {
 
    class EnableMarkerPlacerAction extends AbstractAction {
       public EnableMarkerPlacerAction() { super("Adjust Model Markers"); }
-      public void actionPerformed(ActionEvent evt) { 
-         scaleToolModel.setMarkerPlacerEnabled(((JCheckBox)evt.getSource()).isSelected()); 
+      public void actionPerformed(ActionEvent evt) {
+         scaleToolModel.setMarkerPlacerEnabled(((JCheckBox)evt.getSource()).isSelected());
       }
    }
 
@@ -88,15 +88,14 @@ public class ScaleToolPanel extends BaseToolPanel implements Observer {
         ((DecimalFormat) numFormat).applyPattern("#,##0.#########");
       }
 
-      
+
       helpButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent ae) {
-                String path = BrowserLauncher.isConnected() ? "http://simtk-confluence.stanford.edu/display/OpenSim40/Scaling" : TheApp.getUsersGuideDir() +  "Scaling.html";
-                BrowserLauncher.openURL(path);
+                BrowserLauncher.openURL("http://simtk-confluence.stanford.edu/display/OpenSim40/Scaling");
             }
       });
-      
+
       initComponents();
       bindPropertiesToComponents();
 
@@ -112,8 +111,8 @@ public class ScaleToolPanel extends BaseToolPanel implements Observer {
       measurementSetDialog = DialogDisplayer.getDefault().createDialog(dlg);
 
       jTabbedPane.addTab("Scale Factors", new ScaleFactorsPanel(scaleToolModel, measurementSetDialog));
-      jTabbedPane.addTab("Static Pose Weights", new IKTaskSetPanel(scaleToolModel.getIKCommonModel()));      
-      
+      jTabbedPane.addTab("Static Pose Weights", new IKTaskSetPanel(scaleToolModel.getIKCommonModel()));
+
       markerSetFileName.setExtensionsAndDescription(".xml", "MarkerSet XML file");
       measurementTrialFileName.setExtensionsAndDescription(".trc", "Measurement trial marker data");
       staticTrialFileName.setExtensionsAndDescription(".trc", "Static trial marker data");
@@ -161,7 +160,7 @@ public class ScaleToolPanel extends BaseToolPanel implements Observer {
                     DialogDisplayer.getDefault().notify(dlg);
                     this.close();
                     return;
-                }        
+                }
            }
            return;
       }
@@ -296,7 +295,7 @@ public class ScaleToolPanel extends BaseToolPanel implements Observer {
       scaleToolModel.execute();
       updateDialogButtons();
    }
-   
+
    /** This method is called from within the constructor to
     * initialize the form.
     * WARNING: Do NOT modify this code. The content of this method is
@@ -800,7 +799,7 @@ public class ScaleToolPanel extends BaseToolPanel implements Observer {
    private void modelNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modelNameTextFieldActionPerformed
       scaleToolModel.setName(modelNameTextField.getText());
    }//GEN-LAST:event_modelNameTextFieldActionPerformed
-   
+
    private void modelMassTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_modelMassTextFieldFocusLost
       if(!evt.isTemporary()) modelMassTextFieldActionPerformed(null);
    }//GEN-LAST:event_modelMassTextFieldFocusLost
@@ -855,7 +854,7 @@ public class ScaleToolPanel extends BaseToolPanel implements Observer {
          measurementTrialEndTime.setText(numFormat.format(timeRange[1]));
       }
    }//GEN-LAST:event_measurementSetTimeRangeActionPerformed
-   
+
    //------------------------------------------------------------------------
    // MarkerPlacer data
    //------------------------------------------------------------------------
@@ -871,7 +870,7 @@ public class ScaleToolPanel extends BaseToolPanel implements Observer {
    private void coordinateFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_coordinateFileNameStateChanged
       scaleToolModel.getIKCommonModel().setCoordinateDataFileName(coordinateFileName.getFileName());
    }//GEN-LAST:event_coordinateFileNameStateChanged
-   
+
    private void staticTrialTimeRangeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_staticTrialTimeRangeFocusLost
       if(!evt.isTemporary()) staticTrialTimeRangeActionPerformed(null);
    }//GEN-LAST:event_staticTrialTimeRangeFocusLost
@@ -951,5 +950,5 @@ public class ScaleToolPanel extends BaseToolPanel implements Observer {
    {
       scaleToolModel.cleanup();
    }
-   
+
 }
