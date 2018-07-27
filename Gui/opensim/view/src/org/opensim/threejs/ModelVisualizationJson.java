@@ -944,6 +944,7 @@ public class ModelVisualizationJson extends JSONObject {
             hasAppearance = true;
         }
         mc.generateDecorations(true, mdh, state, adg);
+        mc.generateDecorations(false, mdh, state, adg);
         if (hasAppearance && !visibleStatus)
             PropertyHelper.setValueBool(visibleStatus, visibleProp);
         WrapObject wo = WrapObject.safeDownCast(mc);
