@@ -85,7 +85,8 @@ test_script:
 after_test:
   ## On master branch, create package for OpenSim.
   # Detect if we are on the master branch.
-  - IF %APPVEYOR_REPO_BRANCH% EQU master IF NOT DEFINED APPVEYOR_PULL_REQUEST_NUMBER SET DISTR=TRUE
+  #- IF %APPVEYOR_REPO_BRANCH% EQU master IF NOT DEFINED APPVEYOR_PULL_REQUEST_NUMBER SET DISTR=TRUE
+  - IF %APPVEYOR_REPO_BRANCH% EQU master SET DISTR=TRUE
   # Create and upload package.
   - cd %APPVEYOR_BUILD_FOLDER%\Gui\opensim\dist\installer\
   - IF DEFINED DISTR "C:/Program Files (x86)/NSIS/makensis.exe" make_installer.nsi
