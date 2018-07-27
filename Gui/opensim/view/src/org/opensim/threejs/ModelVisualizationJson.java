@@ -947,8 +947,8 @@ public class ModelVisualizationJson extends JSONObject {
         if (hasAppearance && !visibleStatus)
             PropertyHelper.setValueBool(visibleStatus, visibleProp);
         WrapObject wo = WrapObject.safeDownCast(mc);
-        boolean partialWrapObject = (wo != null) && !wo.get_quadrant().toLowerCase().equals("all");
-        if (partialWrapObject)
+        boolean isWrapObject = (wo != null);
+        if (isWrapObject)
             dgimp.setQuadrants(wo.get_quadrant());
         ArrayList<UUID> uuids = findUUIDForObject(mc);
         if (adg.size() == uuids.size()){

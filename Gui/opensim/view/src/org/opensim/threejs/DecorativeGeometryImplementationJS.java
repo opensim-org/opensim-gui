@@ -395,7 +395,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         dg_json.put("height", arg0.getHalfHeight()*2*visualizerScaleFactor);
         dg_json.put("radialSegments", 32);
         dg_json.put("heightSegments", 1);
-        if (!quadrants.equals("")){
+        if (!quadrants.equals("") && !quadrants.equals("all")){
             dg_json.put("thetaLength", Math.PI);
             if (quadrants.equalsIgnoreCase("-y"))
                 dg_json.put("thetaStart", -0.5*Math.PI);
