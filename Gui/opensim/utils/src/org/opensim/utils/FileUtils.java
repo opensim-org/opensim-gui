@@ -283,8 +283,7 @@ public final class FileUtils {
        }
        
        if(outFilename != null){
-           File selectedFileOrFolder = dlog.getSelectedFile();
-           String workDirectoryString = selectedFileOrFolder.getParentFile().toString();
+           String workDirectoryString = dlog.getSelectedFile().getParent();
            setWorkingDirectoryPreference( workDirectoryString);
        }
        // Change settings to default (FILES_ONLY) so dialog isn't stuck in browse for folders mode
