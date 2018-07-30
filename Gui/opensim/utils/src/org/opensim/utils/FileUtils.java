@@ -281,9 +281,11 @@ public final class FileUtils {
            // TODO: prompt to create directory if it doesn't exist?
            break;
        }
+       File selectedFileOrFolder = dlog.getSelectedFile();
        dlog.setFileSelectionMode(JFileChooser.FILES_ONLY);
+       
        if(outFilename != null){
-           String workDirectoryString = dlog.getSelectedFile().getParent();
+           String workDirectoryString = selectedFileOrFolder.getParentFile().toString();
            setWorkingDirectoryPreference( workDirectoryString);
        }
        return outFilename;
