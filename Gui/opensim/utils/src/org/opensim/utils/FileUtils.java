@@ -287,7 +287,7 @@ public final class FileUtils {
            setWorkingDirectoryPreference( workDirectoryString);
        }
        // Change settings to default (FILES_ONLY) so dialog isn't stuck in browse for folders mode
-       // This has to be done as last step since it wipes selectedFile value
+       // This has to be done as last step since it wipes selectedFile value (on OSX, issue 869)
        dlog.setFileSelectionMode(JFileChooser.FILES_ONLY);
        return outFilename;
     }
