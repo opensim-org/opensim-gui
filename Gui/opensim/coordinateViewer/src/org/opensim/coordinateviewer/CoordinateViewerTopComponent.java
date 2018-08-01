@@ -48,9 +48,11 @@ import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.openide.ErrorManager;
 import org.openide.NotifyDescriptor;
+import org.openide.awt.UndoRedo;
 import org.openide.util.NbBundle;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
+import static org.opensim.coordinateviewer.CoordinateViewerTopComponent.findInstance;
 import org.opensim.modeling.Coordinate;
 import org.opensim.modeling.CoordinateSet;
 import org.opensim.view.ModelSettings;
@@ -61,6 +63,7 @@ import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.modeling.ObjectGroup;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.motions.MotionTimeChangeEvent;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.view.ModelEvent;
@@ -680,5 +683,9 @@ final class CoordinateViewerTopComponent extends TopComponent implements Observe
                 openSimContext.setValue(coord, storedValue);
             }
         }
+    }
+        @Override
+    public UndoRedo getUndoRedo() {
+        return ExplorerTopComponent.getDefault().getUndoRedo();
     }
 }
