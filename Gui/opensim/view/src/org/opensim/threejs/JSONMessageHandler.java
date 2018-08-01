@@ -31,10 +31,12 @@ import java.util.UUID;
 import javax.swing.SwingUtilities;
 import org.json.simple.JSONObject;
 import org.opensim.modeling.AbstractProperty;
+import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.Vec3;
+import org.opensim.view.nodes.MarkerAdapter;
 import org.opensim.view.nodes.PathPointAdapter;
 import org.opensim.view.nodes.PropertyEditorAdaptor;
 import org.opensim.view.pub.ViewDB;
@@ -67,6 +69,14 @@ public class JSONMessageHandler {
                         JSONObject locationJson = (JSONObject) jsonObject.get("location");
                         Vec3 locationVec3 = convertJsonXYZToVec3(locationJson);
                         pptAdapter.setLocation(locationVec3, true);
+                        return;
+                    }
+                    if (Marker.safeDownCast(opensimObj)!=null){
+                        Marker mkr = Marker.safeDownCast(opensimObj);
+                        MarkerAdapter markerAdapter = new MarkerAdapter(mkr);
+                        JSONObject locationJson = (JSONObject) jsonObject.get("location");
+                        Vec3 locationVec3 = convertJsonXYZToVec3(locationJson);
+                        markerAdapter.setLocation(locationVec3, true);
                         return;
                     }
                     if (opensimObj != null && opensimObj.hasProperty("location")){

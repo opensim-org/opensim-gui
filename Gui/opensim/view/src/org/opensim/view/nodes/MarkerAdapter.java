@@ -37,11 +37,9 @@ import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.Vec3;
-import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.ObjectsRenamedEvent;
 import org.opensim.view.SingleModelGuiElements;
-import org.opensim.view.SingleModelVisuals;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 
@@ -124,23 +122,22 @@ public class MarkerAdapter  {
         //    Exceptions.printStackTrace(ex);
         //    return;
         //}
-       setOffset(d, true);
+       setLocation(d.getAsVec3(), true);
     }
-    private void setOffset(final ArrayDouble newOffset, boolean enableUndo) {
+    public void setLocation(final Vec3 newOffset, boolean enableUndo) {
         Vec3 rOffest = marker.get_location();
-        final ArrayDouble oldOffset = new ArrayDouble(3);
-        for(int i=0; i<3; i++) oldOffset.set(i, rOffest.get(i));
-         marker.set_location(newOffset.getAsVec3());
+        final Vec3 oldOffset = new Vec3(rOffest);
+        marker.set_location(newOffset);
         updateDisplay(); 
         if (enableUndo){
              AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
                public void undo() throws CannotUndoException {
                    super.undo();
-                   setOffset(oldOffset, false);
+                   setLocation(oldOffset, false);
                }
                public void redo() throws CannotRedoException {
                    super.redo();
-                   setOffset(newOffset, true);
+                   setLocation(newOffset, true);
                }
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);            
@@ -185,5 +182,4 @@ public class MarkerAdapter  {
         SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(model);
         guiElem.setUnsavedChangesFlag(true);
     }
-
 }
