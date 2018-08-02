@@ -89,7 +89,7 @@ final public class ExplorerTopComponent extends TopComponent
    private final BeanTreeView modelTree = new BeanTreeView();
    
    private static TopComponent visualizerTC = null;
-   private UndoRedo.Manager undoRedoManager = new UndoRedoManager();
+   private UndoRedo.Manager undoRedoManager = null;
 
    private ExplorerTopComponent() {
       initComponents();
@@ -471,6 +471,7 @@ final public class ExplorerTopComponent extends TopComponent
         }*/
         
         // Undo Support
+   @Override
         public UndoRedo getUndoRedo(){
             return getUndoRedoManager();
 }
@@ -535,22 +536,16 @@ final public class ExplorerTopComponent extends TopComponent
         
         public static void addUndoableEdit(AbstractUndoableEdit aUndoableEdit)
         {
-            getDefault().getUndoRedoManager().addEdit(aUndoableEdit);
-            TopComponent tc = getVisualizerTopComponent();
-            if (tc==null){ // No gfx window
-                tc = getDefault();
-            } 
-            if (tc==null) return;   // No tc to piggyback on
-            final TopComponent tcf = tc;
+            instance.getUndoRedoManager().addEdit(aUndoableEdit);
             if (java.awt.EventQueue.isDispatchThread()) {
-                tcf.requestActive();
+                getVisualizerTopComponent().requestActive();
             }
             else {
                 SwingUtilities.invokeLater(new Runnable(){
 
                 @Override
                 public void run() {
-                    tcf.requestActive();
+                    getVisualizerTopComponent().requestActive();
                 }
             });
             }
