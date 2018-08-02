@@ -63,7 +63,7 @@ script:
 
 before_deploy:
   - ls $TRAVIS_BUILD_DIR/Gui/opensim/dist
-  - export PKGNAME=OpenSim-latest.pkg
+  - export PKGNAME=OpenSim-$TRAVIS_BRANCH.pkg
   - mkdir ~/to_deploy
   - mv $TRAVIS_BUILD_DIR/Gui/opensim/dist/OpenSim-$VERSION.pkg ~/to_deploy/$PKGNAME
 
@@ -84,7 +84,7 @@ deploy:
   skip_cleanup: true
   script: rsync --archive --compress --verbose ~/to_deploy/$PKGNAME opensim-bot@frs.sourceforge.net:/home/frs/project/myosin/opensim-gui
   on:
-    branch: master
+    # TODO branch: master
     condition: "$DEPLOY = yes"
  
 # Process for securely uploading files to Sourceforge, taken from
