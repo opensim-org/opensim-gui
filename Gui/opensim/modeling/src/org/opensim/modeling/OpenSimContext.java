@@ -218,7 +218,11 @@ public class OpenSimContext extends OpenSimObject {
   }
 
   public void setLocation(PathPoint mp, int i, double d) {
-    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setLocation(swigCPtr, this, PathPoint.getCPtr(mp), mp, i, d);
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setLocation__SWIG_0(swigCPtr, this, PathPoint.getCPtr(mp), mp, i, d);
+  }
+
+  public void setLocation(PathPoint mp, Vec3 newLocation) {
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setLocation__SWIG_1(swigCPtr, this, PathPoint.getCPtr(mp), mp, Vec3.getCPtr(newLocation), newLocation);
   }
 
   public void setEndPoint(PathWrap mw, int newEndPt) {
