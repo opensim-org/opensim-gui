@@ -1807,7 +1807,8 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native void OpenSimContext_setRangeMin(long jarg1, OpenSimContext jarg1_, long jarg2, ConditionalPathPoint jarg2_, double jarg3);
   public final static native void OpenSimContext_setRangeMax(long jarg1, OpenSimContext jarg1_, long jarg2, ConditionalPathPoint jarg2_, double jarg3);
   public final static native boolean OpenSimContext_replacePathPoint(long jarg1, OpenSimContext jarg1_, long jarg2, GeometryPath jarg2_, long jarg3, AbstractPathPoint jarg3_, long jarg4, AbstractPathPoint jarg4_);
-  public final static native void OpenSimContext_setLocation(long jarg1, OpenSimContext jarg1_, long jarg2, PathPoint jarg2_, int jarg3, double jarg4);
+  public final static native void OpenSimContext_setLocation__SWIG_0(long jarg1, OpenSimContext jarg1_, long jarg2, PathPoint jarg2_, int jarg3, double jarg4);
+  public final static native void OpenSimContext_setLocation__SWIG_1(long jarg1, OpenSimContext jarg1_, long jarg2, PathPoint jarg2_, long jarg3, Vec3 jarg3_);
   public final static native void OpenSimContext_setEndPoint(long jarg1, OpenSimContext jarg1_, long jarg2, PathWrap jarg2_, int jarg3);
   public final static native void OpenSimContext_addPathPoint(long jarg1, OpenSimContext jarg1_, long jarg2, GeometryPath jarg2_, int jarg3, long jarg4, PhysicalFrame jarg4_);
   public final static native boolean OpenSimContext_deletePathPoint(long jarg1, OpenSimContext jarg1_, long jarg2, GeometryPath jarg2_, int jarg3);
