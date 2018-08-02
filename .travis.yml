@@ -85,6 +85,7 @@ deploy:
   script: rsync --archive --compress --verbose ~/to_deploy/$PKGNAME opensim-bot@frs.sourceforge.net:/home/frs/project/myosin/opensim-gui
   on:
     # TODO branch: master
+    all_branches: true
     condition: "$DEPLOY = yes"
  
 # Process for securely uploading files to Sourceforge, taken from
