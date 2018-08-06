@@ -147,7 +147,7 @@ public class MotionDisplayer {
     OpenSimContext dContext; 
     ArrayStr stateNames;
     private boolean renderMuscleActivations=false;
-    private double experimentalMarkerScaleFactor;
+    private double experimentalMarkerScaleFactor=1;
     private double experimentalForceScaleFactor=1;
     String DEFAULT_FORCE_SHAPE="arrow";
     private String currentForceShape;
@@ -988,7 +988,7 @@ public class MotionDisplayer {
             UUID uuidForMarkerGeometry = UUID.randomUUID();
             experimentalMarkerGeometryJson.put("uuid", uuidForMarkerGeometry.toString());
             experimentalMarkerGeometryJson.put("type", "SphereGeometry");
-            experimentalMarkerGeometryJson.put("radius", DEFAULT_MARKER_SIZE);
+            experimentalMarkerGeometryJson.put("radius", DEFAULT_MARKER_SIZE*experimentalMarkerScaleFactor);
             experimentalMarkerGeometryJson.put("widthSegments", 32);
             experimentalMarkerGeometryJson.put("heightSegments", 16);            
             getExperimentalMarkerGeometryJson().put("name", "DefaultExperimentalMarker");
@@ -1091,6 +1091,8 @@ public class MotionDisplayer {
                         experimentalMarkerScaleFactor*DEFAULT_MARKER_SIZE);  
             }
         }
+        // update cached experimentalMarkerGeometryJson
+         experimentalMarkerGeometryJson.put("radius", DEFAULT_MARKER_SIZE*experimentalMarkerScaleFactor);
     }
     
     public double getExperimentalForceScaleFactor() {
