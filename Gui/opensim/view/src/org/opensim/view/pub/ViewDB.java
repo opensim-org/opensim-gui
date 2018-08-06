@@ -1413,11 +1413,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
        if (websocketdb != null){
            if (applyAppearanceChange){
                 ModelVisualizationJson modelJson = getInstance().getModelVisualizationJson(model);
-                if (Geometry.safeDownCast(mc)!=null && Mesh.safeDownCast(mc)==null){
-                    JSONObject msg = new JSONObject();
-                    if (modelJson.createReplaceGeometryMessage(Geometry.safeDownCast(mc), msg))
-                        websocketdb.broadcastMessageJson(msg, null);
-                }
+                sendGeometryUpdateMessageIfNeeded(mc, modelJson);
                 JSONObject msg = modelJson.createAppearanceMessage(mc, prop);
                 websocketdb.broadcastMessageJson(msg, null);
            }
@@ -1428,6 +1424,20 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                
        }
    }
+
+    private void sendGeometryUpdateMessageIfNeeded(Component mc, ModelVisualizationJson modelJson) {
+        if (componentHasAnalyticGeometry(mc)){
+            JSONObject msg = new JSONObject();
+            if (modelJson.createReplaceGeometryMessage(mc, msg))
+                websocketdb.broadcastMessageJson(msg, null);
+        }
+    }
+
+    private static boolean componentHasAnalyticGeometry(Component mc) {
+        return (Geometry.safeDownCast(mc)!=null && Mesh.safeDownCast(mc)==null)||
+                ContactGeometry.safeDownCast(mc)!=null ||
+                WrapObject.safeDownCast(mc)!=null;
+    }
 
    public void applyTimeToViews(double time) {
       Iterator<ModelWindowVTKTopComponent> windowIter = openWindows.iterator();
