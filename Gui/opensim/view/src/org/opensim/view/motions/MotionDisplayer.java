@@ -247,7 +247,6 @@ public class MotionDisplayer {
             // Find first ExperimentalMarker and change its Material, this will affect all of them
             if (expObj instanceof MotionObjectPointForce){
                 UUID expObjectUUID = mapComponentToUUID.get(expObj).get(0); 
-                String colorString = JSONUtilities.mapColorToRGBA(getDefaultExperimentalMarkerColor());
                 ViewDB.getInstance().applyColorToObjectByUUID(model, expObjectUUID, colorAsVec3);  
             }
         }
@@ -1015,7 +1014,7 @@ public class MotionDisplayer {
     public static double DEFAULT_MARKER_SIZE = 5;
 
     public void addExperimentalDataObjectsToJson(AbstractList<ExperimentalDataObject> expObjects) {
-        // Make sure this
+        
         createDefaultMotionObjects();
         // create default top Group for motion
         JSONObject topJson = motionObjectsRoot;

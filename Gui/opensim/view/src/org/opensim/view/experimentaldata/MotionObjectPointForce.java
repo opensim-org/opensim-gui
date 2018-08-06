@@ -180,7 +180,7 @@ public class MotionObjectPointForce extends MotionObjectBodyPoint {
             Transform xform = new Transform();
             
             xform.setP(new Vec3(point[0], point[1], point[2]));
-            appendToThis.push_back(new DecorativeArrow(new Vec3(0, 0, 0)).setBodyId(0).setColor(new Vec3(0., 1., .0)).setOpacity(0.5).setIndexOnBody(getStartIndexInFileNotIncludingTime()).setTransform(xform));            
+            appendToThis.push_back(new DecorativeArrow(new Vec3(0, 0, 0)).setBodyId(0).setColor(color).setOpacity(0.5).setIndexOnBody(getStartIndexInFileNotIncludingTime()).setTransform(xform));            
         }
     }
    @Override
@@ -230,6 +230,7 @@ public class MotionObjectPointForce extends MotionObjectBodyPoint {
     // Create JSON object to represent ExperimentalForce
     @Override
     public JSONObject createDecorationJson(ArrayList<UUID> comp_uuids, MotionDisplayer motionDisplayer) {
+        
         // Create Object with proper name, add it to ground, update Map of Object to UUID
         JSONObject expForce_json = new JSONObject();
         UUID forcrep_uuid = UUID.randomUUID(); //3f63, acf9
