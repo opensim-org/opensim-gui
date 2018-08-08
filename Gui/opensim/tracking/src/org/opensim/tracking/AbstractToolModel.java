@@ -165,7 +165,7 @@ public abstract class AbstractToolModel extends Observable {
           else
             tool.setResultsDir(".");
       }
-      else tool.setResultsDir(Preferences.userNodeForPackage(TheApp.class).get("WorkDirectory", ""));
+      else tool.setResultsDir(TheApp.getCurrentVersionPreferences().get("WorkDirectory", ""));
    }
    
    //------------------------------------------------------------------------

@@ -103,7 +103,7 @@ public class Installer extends ModuleInstall {
          */
         restorePrefs();
         
-        String saved = Preferences.userNodeForPackage(TheApp.class).get("Persist Models", "On");
+        String saved = TheApp.getCurrentVersionPreferences().get("Persist Models", "On");
         if (saved.equalsIgnoreCase("on")){ 
             /** Restore from file */            
             try {
@@ -148,7 +148,7 @@ public class Installer extends ModuleInstall {
     private void restorePrefs()
     {
          String currentVersionStr = NbBundle.getMessage(TheApp.class, "CTL_BuildDate");
-         String savedVersionStr = Preferences.userNodeForPackage(TheApp.class).get("BuildDate", null);
+         String savedVersionStr = TheApp.getCurrentVersionPreferences().get("BuildDate", null);
          boolean updateResources = false;
          if (!currentVersionStr.equalsIgnoreCase(savedVersionStr)){
              updateResources = true;
@@ -156,63 +156,45 @@ public class Installer extends ModuleInstall {
             SwingUtilities.invokeLater( new Runnable(){
                 public void run() {
                  String userDir = TheApp.installResources();
-                 Preferences.userNodeForPackage(TheApp.class).put("OpenSimResourcesDir", userDir);
+                 TheApp.getCurrentVersionPreferences().put("OpenSimResourcesDir", userDir);
                }
             });
-            Preferences.userNodeForPackage(TheApp.class).put("BuildDate", currentVersionStr);
+            TheApp.getCurrentVersionPreferences().put("BuildDate", currentVersionStr);
          }
          
          String defaultOffsetDirection = NbBundle.getMessage(ViewDB.class,"CTL_DisplayOffsetDir");
-         String saved=Preferences.userNodeForPackage(TheApp.class).get("DisplayOffsetDir", defaultOffsetDirection);
-         Preferences.userNodeForPackage(TheApp.class).put("DisplayOffsetDir", saved);
+         String saved=TheApp.getCurrentVersionPreferences().get("DisplayOffsetDir", defaultOffsetDirection);
+         TheApp.getCurrentVersionPreferences().put("DisplayOffsetDir", saved);
          
          String defaultGeometryPath = TheApp.getDefaultGeometrySearchPath();
-         saved=Preferences.userNodeForPackage(TheApp.class).get("Geometry Path", defaultGeometryPath);
+         saved=TheApp.getCurrentVersionPreferences().get("Geometry Search Path", defaultGeometryPath);
          if (saved.isEmpty()||saved.equalsIgnoreCase("")){
              saved = defaultGeometryPath;
          }
          else if (!saved.contains(defaultGeometryPath) && updateResources)
              saved = saved.concat(File.pathSeparator+defaultGeometryPath);
-         Preferences.userNodeForPackage(TheApp.class).put("Geometry Path", saved);
+         TheApp.getCurrentVersionPreferences().put("Geometry Search Path", saved);
          // Push changes to API side
          GeometryFileLocator.updateGeometrySearchPathsFromPreferences();
-         String defaultBgColor = NbBundle.getMessage(OpenSimBaseCanvas.class, "CTL_BackgroundColorRGB");        
-         saved = Preferences.userNodeForPackage(TheApp.class).get("BackgroundColor", defaultBgColor);
-         Preferences.userNodeForPackage(TheApp.class).put("BackgroundColor", saved);
 
-         String muscleRadius = NbBundle.getMessage(ViewDB.class, "CTL_MuscleRadius");        
-         saved = Preferences.userNodeForPackage(TheApp.class).get("Muscle Display Radius", muscleRadius);
-         Preferences.userNodeForPackage(TheApp.class).put("Muscle Display Radius", saved);
+         String muscleRadius = "8";
+         saved = TheApp.getCurrentVersionPreferences().get("Muscle Display Radius (mm)", muscleRadius);
+         TheApp.getCurrentVersionPreferences().put("Muscle Display Radius (mm)", saved);
 
-         String experimentalMarkerDisplayScaleStr="1.0";
-         saved=Preferences.userNodeForPackage(TheApp.class).get("Experimental Marker Size", experimentalMarkerDisplayScaleStr);
-         Preferences.userNodeForPackage(TheApp.class).put("Experimental Marker Size", saved);
+         String experimentalMarkerDisplayScaleStr="5.0";
+         saved=TheApp.getCurrentVersionPreferences().get("Experimental Marker Size (mm)", experimentalMarkerDisplayScaleStr);
+         TheApp.getCurrentVersionPreferences().put("Experimental Marker Size (mm)", saved);
          
          String persistModels = "On";        
-         saved = Preferences.userNodeForPackage(TheApp.class).get("Persist Models", persistModels);
-         Preferences.userNodeForPackage(TheApp.class).put("Persist Models", saved);
+         saved = TheApp.getCurrentVersionPreferences().get("Persist Models", persistModels);
+         TheApp.getCurrentVersionPreferences().put("Persist Models", saved);
 
          String refreshRateInMS = "100";        
-         saved = Preferences.userNodeForPackage(TheApp.class).get("Refresh Rate (ms.)", refreshRateInMS);
-         Preferences.userNodeForPackage(TheApp.class).put("Refresh Rate (ms.)", saved);
-
-         String debugLevel = "0";        
-         saved = Preferences.userNodeForPackage(TheApp.class).get("Debug", debugLevel);
-         if (saved.equalsIgnoreCase("Off")) saved="0";
-         Preferences.userNodeForPackage(TheApp.class).put("Debug", saved);
-         int debugLevelInt = Integer.parseInt(saved);
-         OpenSimObject.setDebugLevel(debugLevelInt);
-         
-         String defaultJointFrameSize = "1.0";
-         saved = Preferences.userNodeForPackage(TheApp.class).get("Joint Frame Scale", defaultJointFrameSize);
-         Preferences.userNodeForPackage(TheApp.class).put("Joint Frame Scale", saved);
+         saved = TheApp.getCurrentVersionPreferences().get("Refresh Rate (ms.)", refreshRateInMS);
+         TheApp.getCurrentVersionPreferences().put("Refresh Rate (ms.)", saved);
 
          String displayContactGeometry = "On";
-         saved = Preferences.userNodeForPackage(TheApp.class).get("Display Contact Geometry", displayContactGeometry);
-         Preferences.userNodeForPackage(TheApp.class).put("Display Contact Geometry", saved);
-         
-         String saveMovieAsFrames = "Off";
-         saved = Preferences.userNodeForPackage(TheApp.class).get("Save Movie Frames", saveMovieAsFrames);
-         Preferences.userNodeForPackage(TheApp.class).put("Save Movie Frames", saved);
-    }
+         saved = TheApp.getCurrentVersionPreferences().get("Display Contact Geometry", displayContactGeometry);
+         TheApp.getCurrentVersionPreferences().put("Display Contact Geometry", saved);
+   }
 }

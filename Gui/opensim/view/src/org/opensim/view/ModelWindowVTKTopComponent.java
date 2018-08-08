@@ -111,7 +111,7 @@ public class ModelWindowVTKTopComponent extends TopComponent
             }});
         
         // Set preferred directory for the TopComponent (to be used for all saving, loading, ...
-        prefs = Preferences.userNodeForPackage(TheApp.class);
+        prefs = TheApp.getCurrentVersionPreferences();
         
         synchronizeBackgroundColor();
                 
@@ -510,7 +510,7 @@ public class ModelWindowVTKTopComponent extends TopComponent
              String defaultBackgroundColor=String.valueOf(colorComponents[0])+", "+
                      String.valueOf(colorComponents[1])+", "+
                      String.valueOf(colorComponents[2]);
-             Preferences.userNodeForPackage(TheApp.class).put("BackgroundColor", defaultBackgroundColor);
+             //TheApp.getCurrentVersionPreferences().put("BackgroundColor", defaultBackgroundColor);
              synchronizeBackgroundColor();
              dCanvas.updateLogoForBackgoundColor();
              dCanvas.repaint();
@@ -562,7 +562,7 @@ public class ModelWindowVTKTopComponent extends TopComponent
     private void jStartStopMovieToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStartStopMovieToggleButtonActionPerformed
 // TODO add your handling code here:
         javax.swing.JToggleButton btn = (javax.swing.JToggleButton) (evt.getSource());
-        String saved = Preferences.userNodeForPackage(TheApp.class).get("Save Movie Frames", "Off");
+        String saved = "";//TheApp.getCurrentVersionPreferences().get("Save Movie Frames", "Off");
         boolean saveFramesOnly = saved.equalsIgnoreCase("On");
         if (btn.getModel().isSelected()) {
             String fileName = null;
@@ -628,7 +628,7 @@ public class ModelWindowVTKTopComponent extends TopComponent
     private void jTakeSnapshotButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTakeSnapshotButtonActionPerformed
 // TODO add your handling code here:
        String defaultDir="";
-       defaultDir = Preferences.userNodeForPackage(TheApp.class).get("WorkDirectory", defaultDir);
+       defaultDir = TheApp.getCurrentVersionPreferences().get("WorkDirectory", defaultDir);
         final JFileChooser dlog = new JFileChooser(defaultDir);
         
         if (dlog.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {

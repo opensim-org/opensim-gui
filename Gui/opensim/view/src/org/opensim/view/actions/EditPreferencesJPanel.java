@@ -150,8 +150,8 @@ public class EditPreferencesJPanel extends javax.swing.JPanel {
    }
    private void initContent() throws BackingStoreException {
       // Get preferences from TheApp instance and display them
-      //String[] options = Preferences.userNodeForPackage(TheApp.class).keys();
-      Vector<String> options = new Vector<String>(Arrays.asList(Preferences.userNodeForPackage(TheApp.class).keys()));
+      //String[] options = TheApp.getCurrentVersionPreferences().keys();
+      Vector<String> options = new Vector<String>(Arrays.asList(TheApp.getCurrentVersionPreferences().keys()));
       // Some basic sorting
       Vector<String> sortedOptions = new Vector<String>();
       sortedOptions.addAll(filterAndSort(options, ".*Color"));
@@ -169,7 +169,7 @@ public class EditPreferencesJPanel extends javax.swing.JPanel {
          ((DefaultTableModel)jTable1.getModel()).addRow(
                  new Object[]{
                         sortedOptions.get(i),
-                        Preferences.userNodeForPackage(TheApp.class).get(sortedOptions.get(i), "")});         
+                        TheApp.getCurrentVersionPreferences().get(sortedOptions.get(i), "")});         
       }
       
    }
@@ -188,12 +188,12 @@ public class EditPreferencesJPanel extends javax.swing.JPanel {
       for(int i=0; i< data.getRowCount(); i++){
          String key = (String)data.getValueAt(i, 0);
          String value = (String)data.getValueAt(i, 1);
-         Preferences.userNodeForPackage(TheApp.class).put(key, value);         
+         TheApp.getCurrentVersionPreferences().put(key, value);         
          }   
       ViewDB.getInstance().applyPreferences();
-      String saved = Preferences.userNodeForPackage(TheApp.class).get("Debug", "0");
-      int debugLevel = Integer.parseInt(saved);
-      OpenSimObject.setDebugLevel(debugLevel);
+      //String saved = TheApp.getCurrentVersionPreferences().get("Debug", "0");
+      //int debugLevel = Integer.parseInt(saved);
+      //OpenSimObject.setDebugLevel(debugLevel);
      
    }
    

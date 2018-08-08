@@ -21,13 +21,6 @@ import org.opensim.utils.TheApp;
 public class ModernPathColorMap implements PathColorMap {
     double weight = 0.25;
     
-    void updateWeight (){
-        String weightString="0.";
-        String saved=Preferences.userNodeForPackage(TheApp.class).get("ColorMap Weight", weightString);
-        Preferences.userNodeForPackage(TheApp.class).put("ColorMap Weight", saved);
-        weight = Double.parseDouble(saved);
-    }
-
     @Override
     public Vec3 getColor(GeometryPath path, State state, double activation) {
         //updateWeight ();

@@ -304,7 +304,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
 
     static public long getRefreshRatePreference() {
          String refreshRateInMS = "100";        
-         String saved = Preferences.userNodeForPackage(TheApp.class).get("Refresh Rate (ms.)", refreshRateInMS);
+         String saved = TheApp.getCurrentVersionPreferences().get("Refresh Rate (ms.)", refreshRateInMS);
          Long savedLong = Long.parseLong(saved);
          return savedLong;
     }    

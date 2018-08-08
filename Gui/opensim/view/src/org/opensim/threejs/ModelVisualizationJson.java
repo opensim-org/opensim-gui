@@ -407,16 +407,16 @@ public class ModelVisualizationJson extends JSONObject {
         createModelJsonNode(); // Model node
         // Decide color Scheme for muscles
         String saved = "Modern";
-        String currentTemplate =Preferences.userNodeForPackage(TheApp.class).get("Muscle Color Scheme", saved);
-        Preferences.userNodeForPackage(TheApp.class).put("Muscle Color Scheme", currentTemplate);
+        String currentTemplate =TheApp.getCurrentVersionPreferences().get("Muscle Color Scheme", saved);
+        TheApp.getCurrentVersionPreferences().put("Muscle Color Scheme", currentTemplate);
         currentPathColorMap = PathColorMapFactory.getColorMap(currentTemplate);
         
         // Decide on bone shape/width
-        saved = ".005";
-        String currentSize= Preferences.userNodeForPackage(TheApp.class).get("Muscle Display Radius", saved);
-        Preferences.userNodeForPackage(TheApp.class).put("Muscle Display Radius", currentSize);
+        saved = "8";
+        String currentSize= TheApp.getCurrentVersionPreferences().get("Muscle Display Radius (mm)", saved);
+        TheApp.getCurrentVersionPreferences().put("Muscle Display Radius (mm)", currentSize);
         prefMuscleDisplayRadius = Double.parseDouble(currentSize);
-        actualMuscleDisplayRadius = 8*200*prefMuscleDisplayRadius;
+        actualMuscleDisplayRadius = prefMuscleDisplayRadius;
         createJsonForModel(model);
         ready = true;
         if (verbose)

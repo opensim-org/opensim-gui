@@ -478,7 +478,7 @@ public class InverseDynamicsToolModel extends AbstractToolModelWithExternalLoads
    protected void setDefaultResultsDirectory(Model model) {
       // Try to come up with a reasonable output directory
       if(!model.getInputFileName().equals("")) idTool.setResultsDir((new File(model.getInputFileName())).getParent());
-      else idTool.setResultsDir(Preferences.userNodeForPackage(TheApp.class).get("WorkDirectory", ""));
+      else idTool.setResultsDir(TheApp.getCurrentVersionPreferences().get("WorkDirectory", ""));
    }
 
     public InverseDynamicsTool getIdTool() {

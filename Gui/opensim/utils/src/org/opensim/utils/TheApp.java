@@ -27,6 +27,7 @@
  */
 package org.opensim.utils;
 
+import org.opensim.version40.TheApp40;
 import java.awt.Dialog;
 import java.awt.Image;
 import java.io.File;
@@ -194,8 +195,9 @@ public final class TheApp {
      * @return 
      */
     public static String getResourcesDir() {
-        return Preferences.userNodeForPackage(TheApp.class).get("OpenSimResourcesDir", null);
+        return getCurrentVersionPreferences().get("OpenSimResourcesDir", null);
     }
+
     public static String installResources() {
         // Popup a directory browser dialog prompting for install location of Models, Scripts
         String userHome = System.getProperty("user.home")+File.separator+"Documents"+File.separator+"OpenSim"+
@@ -286,4 +288,11 @@ public final class TheApp {
           return getInstallDir();     
         }
     }
+    /*
+    ** One entry point to get a handle on PReferences to the current version of the Application
+    */
+    public static Preferences getCurrentVersionPreferences() {
+        return Preferences.userNodeForPackage(TheApp40.class);
+    }
+
 }

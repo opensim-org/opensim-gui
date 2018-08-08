@@ -81,7 +81,7 @@ public class OpenSimDB extends Observable implements Externalizable{
      */
     static public CloseModelDefaultAction getCurrentCloseModelDefaultAction() {
         String defaultCloseActionString="Prompt";
-        String saved = Preferences.userNodeForPackage(TheApp.class).get("DefaultCloseAction", defaultCloseActionString);
+        String saved = TheApp.getCurrentVersionPreferences().get("DefaultCloseAction", defaultCloseActionString);
         // Parse saved to an int, use 0 (no debug) on failure
         if (saved.equalsIgnoreCase("discard")) currentCloseModelDefaultAction=CloseModelDefaultAction.DISCARD;
         else if (saved.equalsIgnoreCase("save")) currentCloseModelDefaultAction=CloseModelDefaultAction.SAVE;
@@ -100,7 +100,7 @@ public class OpenSimDB extends Observable implements Externalizable{
             closeAction="discard";
         else if (currentCloseModelDefaultAction ==CloseModelDefaultAction.SAVE)
             closeAction="save";
-        Preferences.userNodeForPackage(TheApp.class).put("DefaultCloseAction", closeAction);
+        TheApp.getCurrentVersionPreferences().put("DefaultCloseAction", closeAction);
     }
 
     public Model getModelByIndex(int i) {

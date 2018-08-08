@@ -348,7 +348,7 @@ public final class gui {
      */
     static public String getScriptsDir()
     {
-        String relativePath= Preferences.userNodeForPackage(TheApp.class).get("Scripts Path", "Scripts");
+        String relativePath= TheApp.getCurrentVersionPreferences().get("Scripts Path", "Scripts");
         if (relativePath.equals(null)) return null;
         return new File(relativePath).getAbsolutePath();
     }
