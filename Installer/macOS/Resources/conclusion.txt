@@ -6,4 +6,4 @@ OpenSim is now installed in either:
 If you have installed OpenSim previously, you can run the following in a
 Terminal to clear previous OpenSim preferences:
 
-    defaults delete org.opensim.utils
+    defaults delete org.opensim.version40

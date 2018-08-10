@@ -10,5 +10,5 @@ package org.opensim.version40;
  * @author Ayman-NMBL
  */
 public class TheApp40 {
-    // This is an empty class used as a tag to 
+    // This is an empty class used as a tag to Preferences registry because we need a class to locate package
 }
