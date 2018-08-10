@@ -195,7 +195,7 @@ public final class TheApp {
      * @return 
      */
     public static String getResourcesDir() {
-        return getCurrentVersionPreferences().get("OpenSimResourcesDir", null);
+        return getCurrentVersionPreferences().get("Internal.OpenSimResourcesDir", null);
     }
 
     public static String installResources() {

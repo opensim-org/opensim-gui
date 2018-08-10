@@ -1267,8 +1267,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       // Also possible to define a default offset in any direction and reuse it.
       if (iter.hasNext()){
          double bounds[]= computeSceneBounds();
-         String defaultOffsetDirection = NbBundle.getMessage(ViewDB.class,"CTL_DisplayOffsetDir");
-         defaultOffsetDirection=TheApp.getCurrentVersionPreferences().get("DisplayOffsetDir", defaultOffsetDirection);
+         String defaultOffsetDirection = null;
          if (defaultOffsetDirection == null)
             defaultOffsetDirection="Z";
          if (defaultOffsetDirection.equalsIgnoreCase("X"))

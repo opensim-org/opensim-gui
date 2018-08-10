@@ -205,8 +205,8 @@ public final class FileUtils {
     
     public String browseForFilenameToSave(FileFilter filter, boolean promptIfReplacing, String currentFilename, Component parent)
     {
-        // Init dialog to use "WorkDirectory" as thought of by user
-        String defaultDir = TheApp.getCurrentVersionPreferences().get("WorkDirectory", "");
+        // Init dialog to use "Internal.WorkDirectory" as thought of by user
+        String defaultDir = TheApp.getCurrentVersionPreferences().get("Internal.WorkDirectory", "");
         //final JFileChooser dlog = new JFileChooser(defaultDir);
         dlog.setCurrentDirectory(new File(defaultDir));
         dlog.setName("");
@@ -255,8 +255,8 @@ public final class FileUtils {
     
     public String browseForFolder(Frame parent, String description, boolean allowCreate)
     {
-        // Init dialog to use "WorkDirectory" as thought of by user
-        String defaultDir = TheApp.getCurrentVersionPreferences().get("WorkDirectory", "");
+        // Init dialog to use "Internal.WorkDirectory" as thought of by user
+        String defaultDir = TheApp.getCurrentVersionPreferences().get("Internal.WorkDirectory", "");
         //final JFileChooser dlog = new JFileChooser(defaultDir);
         dlog.setCurrentDirectory(new File(defaultDir));
         dlog.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -296,7 +296,7 @@ public final class FileUtils {
      * @param workDirectoryString 
      */
     public void setWorkingDirectoryPreference(String workDirectoryString) {
-        TheApp.getCurrentVersionPreferences().put("WorkDirectory", workDirectoryString);
+        TheApp.getCurrentVersionPreferences().put("Internal.WorkDirectory", workDirectoryString);
     }
 
     /**
@@ -312,8 +312,8 @@ public final class FileUtils {
      */
     public String browseForFilename(FileFilter filter, boolean isRequired2Exist, Component parent)
     {
-        // Init dialog to use "WorkDirectory" as thought of by user
-        String defaultDir = TheApp.getCurrentVersionPreferences().get("WorkDirectory", "");
+        // Init dialog to use "Internal.WorkDirectory" as thought of by user
+        String defaultDir = TheApp.getCurrentVersionPreferences().get("Internal.WorkDirectory", "");
         //JFileChooser dlog = new JFileChooser(defaultDir);
         dlog.setCurrentDirectory(new File(defaultDir));
         dlog.setDialogTitle(filter.getDescription());
@@ -345,8 +345,8 @@ public final class FileUtils {
     
         public String browseForFilename(FileFilter filter, String dialog, boolean isRequired2Exist, Component parent)
     {
-        // Init dialog to use "WorkDirectory" as thought of by user
-        String defaultDir = TheApp.getCurrentVersionPreferences().get("WorkDirectory", "");
+        // Init dialog to use "Internal.WorkDirectory" as thought of by user
+        String defaultDir = TheApp.getCurrentVersionPreferences().get("Internal.WorkDirectory", "");
         //JFileChooser dlog = new JFileChooser(defaultDir);
         dlog.setCurrentDirectory(new File(defaultDir));
         dlog.setDialogTitle(dialog);
@@ -499,8 +499,8 @@ public final class FileUtils {
     public String[] browseForSIMMModelFiles() {
         String extensions="*.jnt,*.msl";
         String desc="SIMM model files, one .jnt file and optional one .msl file";
-        // Init dialog to use "WorkDirectory" as thought of by user
-        String defaultDir = TheApp.getCurrentVersionPreferences().get("WorkDirectory", "");
+        // Init dialog to use "Internal.WorkDirectory" as thought of by user
+        String defaultDir = TheApp.getCurrentVersionPreferences().get("Internal.WorkDirectory", "");
         // final JFileChooser dlog = new JFileChooser(defaultDir);
         dlog.setCurrentDirectory(new File(defaultDir));
         dlog.setMultiSelectionEnabled(true);

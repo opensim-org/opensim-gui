@@ -81,7 +81,7 @@ public class EditExternalLoadsPanel extends javax.swing.JPanel
         modelLocalCopy = new Model(model);
         if (externalLoadsFilename.equalsIgnoreCase("")|| externalLoadsFilename.equalsIgnoreCase("Unassigned") || createNewFile){
             // Create a new empty ExternalLoads file and use it for now
-            String f = TheApp.getCurrentVersionPreferences().get("WorkDirectory", "");
+            String f = TheApp.getCurrentVersionPreferences().get("Internal.WorkDirectory", "");
             //String t1 = model.getInputFileName();  
             if (model.getInputFileName()!=null && new File(model.getInputFileName()).getParentFile()!=null)
                 f = new File(model.getInputFileName()).getParentFile().getAbsolutePath();

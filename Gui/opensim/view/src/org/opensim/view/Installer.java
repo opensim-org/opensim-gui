@@ -103,7 +103,7 @@ public class Installer extends ModuleInstall {
          */
         restorePrefs();
         
-        String saved = TheApp.getCurrentVersionPreferences().get("Persist Models", "On");
+        String saved = TheApp.getCurrentVersionPreferences().get("Application.Persist Models", "On");
         if (saved.equalsIgnoreCase("on")){ 
             /** Restore from file */            
             try {
@@ -156,38 +156,34 @@ public class Installer extends ModuleInstall {
             SwingUtilities.invokeLater( new Runnable(){
                 public void run() {
                  String userDir = TheApp.installResources();
-                 TheApp.getCurrentVersionPreferences().put("OpenSimResourcesDir", userDir);
+                 TheApp.getCurrentVersionPreferences().put("Internal.OpenSimResourcesDir", userDir);
                }
             });
             TheApp.getCurrentVersionPreferences().put("BuildDate", currentVersionStr);
          }
          
-         String defaultOffsetDirection = NbBundle.getMessage(ViewDB.class,"CTL_DisplayOffsetDir");
-         String saved=TheApp.getCurrentVersionPreferences().get("DisplayOffsetDir", defaultOffsetDirection);
-         TheApp.getCurrentVersionPreferences().put("DisplayOffsetDir", saved);
-         
          String defaultGeometryPath = TheApp.getDefaultGeometrySearchPath();
-         saved=TheApp.getCurrentVersionPreferences().get("Geometry Search Path", defaultGeometryPath);
+         String saved=TheApp.getCurrentVersionPreferences().get("Paths.Geometry Search Path", defaultGeometryPath);
          if (saved.isEmpty()||saved.equalsIgnoreCase("")){
              saved = defaultGeometryPath;
          }
          else if (!saved.contains(defaultGeometryPath) && updateResources)
              saved = saved.concat(File.pathSeparator+defaultGeometryPath);
-         TheApp.getCurrentVersionPreferences().put("Geometry Search Path", saved);
+         TheApp.getCurrentVersionPreferences().put("Paths.Geometry Search Path", saved);
          // Push changes to API side
          GeometryFileLocator.updateGeometrySearchPathsFromPreferences();
 
          String muscleRadius = "8";
-         saved = TheApp.getCurrentVersionPreferences().get("Muscle Display Radius (mm)", muscleRadius);
-         TheApp.getCurrentVersionPreferences().put("Muscle Display Radius (mm)", saved);
+         saved = TheApp.getCurrentVersionPreferences().get("Visualizer.Muscle Display Radius (mm)", muscleRadius);
+         TheApp.getCurrentVersionPreferences().put("Visualizer.Muscle Display Radius (mm)", saved);
 
          String experimentalMarkerDisplayScaleStr="5.0";
-         saved=TheApp.getCurrentVersionPreferences().get("Experimental Marker Size (mm)", experimentalMarkerDisplayScaleStr);
-         TheApp.getCurrentVersionPreferences().put("Experimental Marker Size (mm)", saved);
+         saved=TheApp.getCurrentVersionPreferences().get("Visualizer.Experimental Marker Radius (mm)", experimentalMarkerDisplayScaleStr);
+         TheApp.getCurrentVersionPreferences().put("Visualizer.Experimental Marker Radius (mm)", saved);
          
          String persistModels = "On";        
-         saved = TheApp.getCurrentVersionPreferences().get("Persist Models", persistModels);
-         TheApp.getCurrentVersionPreferences().put("Persist Models", saved);
+         saved = TheApp.getCurrentVersionPreferences().get("Application.Persist Models", persistModels);
+         TheApp.getCurrentVersionPreferences().put("Application.Persist Models", saved);
 
          String refreshRateInMS = "100";        
          saved = TheApp.getCurrentVersionPreferences().get("Refresh Rate (ms.)", refreshRateInMS);

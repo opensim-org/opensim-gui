@@ -628,7 +628,7 @@ public class ModelWindowVTKTopComponent extends TopComponent
     private void jTakeSnapshotButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTakeSnapshotButtonActionPerformed
 // TODO add your handling code here:
        String defaultDir="";
-       defaultDir = TheApp.getCurrentVersionPreferences().get("WorkDirectory", defaultDir);
+       defaultDir = TheApp.getCurrentVersionPreferences().get("Internal.WorkDirectory", defaultDir);
         final JFileChooser dlog = new JFileChooser(defaultDir);
         
         if (dlog.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {

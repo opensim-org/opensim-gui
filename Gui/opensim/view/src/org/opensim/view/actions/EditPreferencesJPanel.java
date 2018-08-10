@@ -53,29 +53,7 @@ public class EditPreferencesJPanel extends javax.swing.JPanel {
    
    DefaultTableModel preferencesTableModelInstance;
    String[] deprecatedList = new String[] {
-       "Screen Background Color",
-       "GeometryPath",
-       "Muscle Color",
-       "MuscleColor",
-       "MarkerColor",
-       "MusclePointColor",
-       "MusclePoint Color",
-       "WrapObjectColor",
-       "WrapObject Color",
-       "ShowWrapObjects",
-       "DefaultCloseAction",
-       "Display Contact Geometry",
-       "BackgroundColor",
-       "Markers Color",
-       "AntiAliasingFrames",
-       "Marker Display Radius",
-       "NonCurrentModelOpacity",
-       "Refresh Rate (ms.)",
-       "Muscle Dsiplay Radius",
-       "BuildDate",
-       "One Material Meshes",
-       "Save Movie Frames",
-       "Experimental Marker Size"
+
    };
    /** Creates new form EditPreferencesJPanel */
    public EditPreferencesJPanel() throws BackingStoreException {
@@ -154,10 +132,9 @@ public class EditPreferencesJPanel extends javax.swing.JPanel {
       Vector<String> options = new Vector<String>(Arrays.asList(TheApp.getCurrentVersionPreferences().keys()));
       // Some basic sorting
       Vector<String> sortedOptions = new Vector<String>();
-      sortedOptions.addAll(filterAndSort(options, ".*Color"));
-      sortedOptions.addAll(filterAndSort(options, ".*Path"));
-      sortedOptions.addAll(filterAndSort(options, ".*Dir.*"));
-      sortedOptions.addAll(filterAndSort(options, ".*")); // whatever's left 
+      sortedOptions.addAll(filterAndSort(options, "Application.*"));
+      sortedOptions.addAll(filterAndSort(options, "Paths.*"));
+      sortedOptions.addAll(filterAndSort(options, "Visualizer.*"));
       for(int i=0; i< sortedOptions.size(); i++){
           boolean deprecated = false;
           for(int j=0; j< deprecatedList.length && !deprecated; j++){
