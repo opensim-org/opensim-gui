@@ -132,9 +132,9 @@ public class EditPreferencesJPanel extends javax.swing.JPanel {
       Vector<String> options = new Vector<String>(Arrays.asList(TheApp.getCurrentVersionPreferences().keys()));
       // Some basic sorting
       Vector<String> sortedOptions = new Vector<String>();
-      sortedOptions.addAll(filterAndSort(options, "Application.*"));
-      sortedOptions.addAll(filterAndSort(options, "Paths.*"));
-      sortedOptions.addAll(filterAndSort(options, "Visualizer.*"));
+      sortedOptions.addAll(filterAndSort(options,"Application:.*"));
+      sortedOptions.addAll(filterAndSort(options, "Paths:.*"));
+      sortedOptions.addAll(filterAndSort(options, "Visualizer:.*"));
       for(int i=0; i< sortedOptions.size(); i++){
           boolean deprecated = false;
           for(int j=0; j< deprecatedList.length && !deprecated; j++){

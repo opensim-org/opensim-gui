@@ -62,7 +62,7 @@ public class GeometryFileLocator {
    }
 
     public static void updateGeometrySearchPathsFromPreferences() {
-        String userGeometryPath=TheApp.getCurrentVersionPreferences().get("Paths.Geometry Search Path", ".");
+        String userGeometryPath=TheApp.getCurrentVersionPreferences().get("Paths: Geometry Search Path", ".");
         String dirs[] = userGeometryPath.split(File.pathSeparator);
         for (int i=0; i< dirs.length; i++)
             ModelVisualizer.addDirToGeometrySearchPaths(dirs[i]);
@@ -77,7 +77,7 @@ public class GeometryFileLocator {
       if (debug) OpenSimLogger.logMessage("Debug: Trying "+candidate+"\n", OpenSimLogger.INFO);
       if (isValidFile(candidate))
          return candidate;
-      String GeometryPath=TheApp.getCurrentVersionPreferences().get("Paths.Geometry Search Path", ".");
+      String GeometryPath=TheApp.getCurrentVersionPreferences().get("Paths: Geometry Search Path", ".");
       if (GeometryPath!=null){
          // Split at ";" to get directoryList
          StringTokenizer tokenizer = new StringTokenizer(GeometryPath, File.pathSeparator);
