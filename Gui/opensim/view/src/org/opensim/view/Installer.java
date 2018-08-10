@@ -103,7 +103,7 @@ public class Installer extends ModuleInstall {
          */
         restorePrefs();
         
-        String saved = TheApp.getCurrentVersionPreferences().get("Application.Persist Models", "On");
+        String saved = TheApp.getCurrentVersionPreferences().get("Application.Persist Models", "Off");
         if (saved.equalsIgnoreCase("on")){ 
             /** Restore from file */            
             try {
@@ -181,7 +181,7 @@ public class Installer extends ModuleInstall {
          saved=TheApp.getCurrentVersionPreferences().get("Visualizer.Experimental Marker Radius (mm)", experimentalMarkerDisplayScaleStr);
          TheApp.getCurrentVersionPreferences().put("Visualizer.Experimental Marker Radius (mm)", saved);
          
-         String persistModels = "On";        
+         String persistModels = "Off";        
          saved = TheApp.getCurrentVersionPreferences().get("Application.Persist Models", persistModels);
          TheApp.getCurrentVersionPreferences().put("Application.Persist Models", saved);
 

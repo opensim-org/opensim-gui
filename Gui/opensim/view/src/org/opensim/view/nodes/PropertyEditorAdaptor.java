@@ -117,9 +117,13 @@ public class PropertyEditorAdaptor {
     }
     
     public void handlePropertyChangeCommon() {
-        if (Geometry.safeDownCast(obj)!= null){
+        if (Geometry.safeDownCast(obj)!= null ||
+                WrapObject.safeDownCast(obj) != null ||
+                ContactGeometry.safeDownCast(obj)!=null){
             Component mc = Component.safeDownCast(obj);
             ViewDB.getInstance().updateComponentDisplay(model, mc, prop);
+            // WrapObject change may make it necessary to redraw muscles
+            ViewDB.getInstance().updateModelDisplay(model);
         }
         else 
             ViewDB.getInstance().updateModelDisplay(model);

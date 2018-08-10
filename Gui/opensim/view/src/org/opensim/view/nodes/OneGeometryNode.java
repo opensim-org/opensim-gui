@@ -40,6 +40,7 @@ import org.openide.nodes.Sheet;
 import static org.openide.nodes.Sheet.createExpertSet;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
+import org.opensim.modeling.AnalyticGeometry;
 import org.opensim.modeling.Component;
 import org.opensim.modeling.Cone;
 import org.opensim.modeling.Frame;
@@ -106,13 +107,16 @@ public class OneGeometryNode extends OneComponentWithGeometryNode {
     public Sheet createSheet() {
         Sheet sheet;
         sheet = super.createSheet();
+        Sheet.Set set = sheet.get(Sheet.PROPERTIES);
         // Remove Properties for origin, direction as not supported 
         if (Cone.safeDownCast(comp)!=null){
-            Sheet.Set set = sheet.get(Sheet.PROPERTIES);
             set.remove("origin");
             set.remove("direction");
+        }
+        if (AnalyticGeometry.safeDownCast(comp)!=null){
             set.remove("quadrants");
         }
+        set.remove("scale_factors");
         return sheet;
     }
     
