@@ -103,7 +103,7 @@ public class Installer extends ModuleInstall {
          */
         restorePrefs();
         
-        String saved = TheApp.getCurrentVersionPreferences().get("Application: Persist Models", "Off");
+        String saved = TheApp.getCurrentVersionPreferences().get("Application: Restore Models on Startup", "Off");
         if (saved.equalsIgnoreCase("on")){ 
             /** Restore from file */            
             try {
@@ -148,7 +148,7 @@ public class Installer extends ModuleInstall {
     private void restorePrefs()
     {
          String currentVersionStr = NbBundle.getMessage(TheApp.class, "CTL_BuildDate");
-         String savedVersionStr = TheApp.getCurrentVersionPreferences().get("Internal: BuildDate", null);
+         String savedVersionStr = TheApp.getCurrentVersionPreferences().get("Internal.BuildDate", null);
          boolean updateResources = false;
          if (!currentVersionStr.equalsIgnoreCase(savedVersionStr)){
              updateResources = true;
@@ -159,7 +159,7 @@ public class Installer extends ModuleInstall {
                  TheApp.getCurrentVersionPreferences().put("Internal.OpenSimResourcesDir", userDir);
                }
             });
-            TheApp.getCurrentVersionPreferences().put("Internal: BuildDate", currentVersionStr);
+            TheApp.getCurrentVersionPreferences().put("Internal.BuildDate", currentVersionStr);
          }
          
          String defaultGeometryPath = TheApp.getDefaultGeometrySearchPath();
@@ -182,15 +182,11 @@ public class Installer extends ModuleInstall {
          TheApp.getCurrentVersionPreferences().put("Visualizer: Experimental Marker Radius (mm)", saved);
          
          String persistModels = "Off";        
-         saved = TheApp.getCurrentVersionPreferences().get("Application: Persist Models", persistModels);
-         TheApp.getCurrentVersionPreferences().put("Application: Persist Models", saved);
+         saved = TheApp.getCurrentVersionPreferences().get("Application: Restore Models on Startup", persistModels);
+         TheApp.getCurrentVersionPreferences().put("Application: Restore Models on Startup", saved);
 
          String refreshRateInMS = "100";        
-         saved = TheApp.getCurrentVersionPreferences().get("Refresh Rate (ms.)", refreshRateInMS);
-         TheApp.getCurrentVersionPreferences().put("Refresh Rate (ms.)", saved);
-
-         String displayContactGeometry = "On";
-         saved = TheApp.getCurrentVersionPreferences().get("Display Contact Geometry", displayContactGeometry);
-         TheApp.getCurrentVersionPreferences().put("Display Contact Geometry", saved);
+         saved = TheApp.getCurrentVersionPreferences().get("Internal.Refresh Rate (ms)", refreshRateInMS);
+         TheApp.getCurrentVersionPreferences().put("Internal.Refresh Rate (ms)", saved);
    }
 }

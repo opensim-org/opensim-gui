@@ -165,10 +165,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
 
     public int getFrameTime() {
-        String saved = TheApp.getCurrentVersionPreferences().get("FrameRate", String.valueOf(frameRate));
+        String saved = TheApp.getCurrentVersionPreferences().get("Internal.FrameRate", String.valueOf(frameRate));
         if (saved!= null)
             frameRate = Integer.parseInt(saved);
-        TheApp.getCurrentVersionPreferences().put("FrameRate", String.valueOf(frameRate));
+        TheApp.getCurrentVersionPreferences().put("Internal.FrameRate", String.valueOf(frameRate));
         return frameRate; // 30 FPS default
     }
     /**
@@ -1915,7 +1915,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
 
    public void setNonCurrentModelOpacity(double nonCurrentModelOpacity) {
       this.nonCurrentModelOpacity = nonCurrentModelOpacity;
-      TheApp.getCurrentVersionPreferences().get("NonCurrentModelOpacity", String.valueOf(nonCurrentModelOpacity));
+      TheApp.getCurrentVersionPreferences().get("Internal.NonCurrentModelOpacity", String.valueOf(nonCurrentModelOpacity));
    }
    /**
     * Show only the passed in model and hide all others.
@@ -2314,7 +2314,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                     //System.out.println("renderTime"+frameRenderTimeInMillis);
                     int frameRate = (int) (frameRenderTimeInMillis*1.5);
                     if (frameRate > 30)
-                        TheApp.getCurrentVersionPreferences().put("FrameRate", String.valueOf(frameRate));
+                        TheApp.getCurrentVersionPreferences().put("Internal.FrameRate", String.valueOf(frameRate));
                     return;
                 }
                 if (debugLevel > 1) {
