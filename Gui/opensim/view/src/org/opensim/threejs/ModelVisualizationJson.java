@@ -151,7 +151,7 @@ public class ModelVisualizationJson extends JSONObject {
     // Preferences
     private double prefMuscleDisplayRadius=0.005;
     private int NUM_PATHPOINTS_PER_WRAP_OBJECT=8;
-    private double PATHPOINT_SCALEUP=1.0;
+    private double PATHPOINT_SCALEUP=1.05;
     
     public Boolean getFrameVisibility(Frame b) {
         return visualizerFrames.get(b).visible;
@@ -417,10 +417,6 @@ public class ModelVisualizationJson extends JSONObject {
         Preferences.userNodeForPackage(TheApp.class).put("Muscle Display Radius", currentSize);
         prefMuscleDisplayRadius = Double.parseDouble(currentSize);
         actualMuscleDisplayRadius = 8*200*prefMuscleDisplayRadius;
-        saved = "1.0";
-        currentSize= Preferences.userNodeForPackage(TheApp.class).get("PathPoint Scaleup", saved);
-        Preferences.userNodeForPackage(TheApp.class).put("PathPoint Scaleup", currentSize);
-        PATHPOINT_SCALEUP = Double.parseDouble(currentSize);
         createJsonForModel(model);
         ready = true;
         if (verbose)
@@ -929,26 +925,44 @@ public class ModelVisualizationJson extends JSONObject {
     }
     // This function checks that Geometry in the visualizar need change (other than appearance and scale)
     // and if so create a "ReplaceGeometry" message for the specific UUIDs
-    public boolean createReplaceGeometryMessage(Geometry mc, JSONObject msg) {
+    public boolean createReplaceGeometryMessage(Component mc, JSONObject msg) {
         // Call geberate decorations on 
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
-        boolean saveVisible = mc.get_Appearance().get_visible();
-        mc.get_Appearance().set_visible(true);
+        // use generic Property interface to save/restore Appearance
+        boolean hasAppearance =false;
+        boolean visibleStatus=true;
+        AbstractProperty visibleProp=null;
+        if (mc.hasProperty("Appearance")){
+            visibleProp = mc.getPropertyByName("Appearance").getValueAsObject().getPropertyByName("visible");
+            visibleStatus = PropertyHelper.getValueBool(visibleProp);
+            if (!visibleStatus)
+                PropertyHelper.setValueBool(true, visibleProp);
+            hasAppearance = true;
+        }
         mc.generateDecorations(true, mdh, state, adg);
-        mc.get_Appearance().set_visible(saveVisible);
+        mc.generateDecorations(false, mdh, state, adg);
+        if (hasAppearance && !visibleStatus)
+            PropertyHelper.setValueBool(visibleStatus, visibleProp);
+        WrapObject wo = WrapObject.safeDownCast(mc);
+        boolean isWrapObject = (wo != null);
+        if (isWrapObject)
+            dgimp.setQuadrants(wo.get_quadrant());
         ArrayList<UUID> uuids = findUUIDForObject(mc);
         if (adg.size() == uuids.size()){
             JSONArray geoms = new JSONArray();
             for (int i=0; i<adg.size(); i++){
                 UUID uuid = uuids.get(i);
                 dgimp.setGeomID(uuid);
-                adg.getElt(i).implementGeometry(dgimp);
+                DecorativeGeometry dg = adg.getElt(i);
+                dg.implementGeometry(dgimp);
                 JSONObject jsonObject = dgimp.getGeometryJson();
                 msg.put("Op", "ReplaceGeometry");
                 msg.put("uuid", uuid.toString());
                 geoms.add(jsonObject);
-                msg.put("geometries", geoms);
+                jsonObject.put("matrix", JSONUtilities.createMatrixFromTransform(dg.getTransform(), 
+                        dg.getScaleFactors(), visScaleFactor));
             }
+            msg.put("geometries", geoms);
         }
         return true;
     }
@@ -975,6 +989,21 @@ public class ModelVisualizationJson extends JSONObject {
         nextpptPositionCommand.put("newPosition", locationArray);
         nextpptPositionCommand.put("oldPosition", oldLocationArray);
         return nextpptPositionCommand;
+    }
+    
+    static public JSONObject createSetRotationCommand(UUID objectUuid, Vec3 euler) {
+        JSONObject rotationCommandJson = new JSONObject();
+        rotationCommandJson.put("type", "SetRotationCommand");
+        rotationCommandJson.put("objectUuid", objectUuid.toString());
+        JSONArray rotationArray = new JSONArray();
+        JSONArray oldRotationArray = new JSONArray();
+        for (int p =0; p <3; p++){
+            rotationArray.add(euler.get(p));
+            oldRotationArray.add(0);
+        }
+        rotationCommandJson.put("newRotation", rotationArray);
+        rotationCommandJson.put("oldRotation", oldRotationArray);
+        return rotationCommandJson;
     }
 
     private UUID createMarkerMaterial(ModelDisplayHints hints) {

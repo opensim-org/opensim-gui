@@ -75,7 +75,7 @@ public class PathPointAdapter  {
         final Vec3 oldLocation = new Vec3(pathpoint.get_location());
         //System.out.println("oldLocation:"+oldLocation.get(1));
         context.cacheModelAndState();
-        pathpoint.set_location(newLocation);
+        context.setLocation(pathpoint, newLocation);
         try {
             context.restoreStateFromCachedModel();
         } catch (IOException ex) {
@@ -85,7 +85,8 @@ public class PathPointAdapter  {
         if (!hasWrapping)
             updateDisplay(); 
         else{
-            ViewDB.getInstance().updateModelDisplay(model);
+           ViewDB.getInstance().updatePathDisplay(pathpoint.getModel(), currentPath, 0, -1);
+           ViewDB.getInstance().updateModelDisplay(model);
         }
         if (enableUndo){
              AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){

@@ -53,6 +53,7 @@ import org.eclipse.jetty.WebSocketDB;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.openide.awt.StatusDisplayer;
+import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
@@ -874,19 +875,22 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       //selectedObject.markSelected(highlight);
       if (websocketdb != null){
           Model model = selectedObject.getOwnerModel();
+          ModelVisualizationJson modelJson = getModelVisualizationJson(model);
+          ArrayList<UUID> uuidList = modelJson.findUUIDForObject(selectedObject.getOpenSimObject());
+          if (uuidList==null) return;
           if (highlight){
               if (selectInVisualizer != null && 
                       !selectInVisualizer.equals(selectedObject.getOpenSimObject())){
-                    websocketdb.broadcastMessageJson(currentJson.createSelectionJson(selectedObject.getOpenSimObject()), null);
+                    websocketdb.broadcastMessageJson(modelJson.createSelectionJson(selectedObject.getOpenSimObject()), null);
               }
               else if (selectInVisualizer == null){
-                    websocketdb.broadcastMessageJson(currentJson.createSelectionJson(selectedObject.getOpenSimObject()), null);                  
+                    websocketdb.broadcastMessageJson(modelJson.createSelectionJson(selectedObject.getOpenSimObject()), null);                  
               }
               selectInVisualizer = selectedObject;
           }
           else {
               if (selectInVisualizer!=null){
-                websocketdb.broadcastMessageJson(currentJson.createDeselectionJson(), null);
+                websocketdb.broadcastMessageJson(modelJson.createDeselectionJson(), null);
                 selectInVisualizer = null;
               }
           }
@@ -1124,11 +1128,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
        if (websocketdb != null){
            if (applyAppearanceChange){
                 ModelVisualizationJson modelJson = getInstance().getModelVisualizationJson(model);
-                if (Geometry.safeDownCast(mc)!=null && Mesh.safeDownCast(mc)==null){
-                    JSONObject msg = new JSONObject();
-                    if (modelJson.createReplaceGeometryMessage(Geometry.safeDownCast(mc), msg))
-                        websocketdb.broadcastMessageJson(msg, null);
-                }
+                sendGeometryUpdateMessageIfNeeded(mc, modelJson);
                 JSONObject msg = modelJson.createAppearanceMessage(mc, prop);
                 websocketdb.broadcastMessageJson(msg, null);
            }
@@ -1139,6 +1139,20 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                
        }
    }
+
+    private void sendGeometryUpdateMessageIfNeeded(Component mc, ModelVisualizationJson modelJson) {
+        if (componentHasAnalyticGeometry(mc)){
+            JSONObject msg = new JSONObject();
+            if (modelJson.createReplaceGeometryMessage(mc, msg))
+                websocketdb.broadcastMessageJson(msg, null);
+        }
+    }
+
+    private static boolean componentHasAnalyticGeometry(Component mc) {
+        return (Geometry.safeDownCast(mc)!=null && Mesh.safeDownCast(mc)==null)||
+                ContactGeometry.safeDownCast(mc)!=null ||
+                WrapObject.safeDownCast(mc)!=null;
+    }
 
    public void applyTimeToViews(double time) {
       Iterator<ModelWindowVTKTopComponent> windowIter = openWindows.iterator();
@@ -1706,8 +1720,15 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         // For each Anotated object, update anchor point as needed
     }
     // Change orientation based on passed in 3 Rotations, used to visualize mocap data
-    public void setOrientation(Model model, double[] d) {
-  
+    public void setOrientation(Model model, Vec3 rotVec3) {
+        if (websocketdb!=null){
+            ModelVisualizationJson modelJson = getModelVisualizationJson(model);
+            JSONObject guiJson = new JSONObject();
+            guiJson.put("Op", "execute");
+            JSONObject commandJson =  modelJson.createSetRotationCommand(modelJson.getModelUUID(), rotVec3);
+            guiJson.put("command", commandJson);
+            websocketdb.broadcastMessageJson(guiJson, null);
+        }          
     }
 
     private void removeAnnotationObjects(Model dModel) {
@@ -1827,6 +1848,22 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
     public void addVisualizerObject(JSONObject jsonObject, double[] bounds) {
         if (websocketdb!=null){
+            // wait for model to be ready 
+            boolean wait = true;
+            while (websocketdb.isPending(currentJson.getModelUUID()) && wait){
+                try {
+                    // Because of delays in communication, the visualizer may take a bit of time to initialize, acknowledge model open
+                    // but we can't wait indefinitely as something fatal may happen.
+                    // Adding objects to Model that hasn't been initialized causes problems downstream
+                    // This scenario happens exclusively when previewing data so the time spent reading /parsing dominates anyway
+                    // TODO: explore more robust mechanism to regulate communication with low overhead, -Ayman 07/18
+                    Thread.sleep(500); 
+                    wait = false;
+                } catch (InterruptedException ex) {
+                    Exceptions.printStackTrace(ex);
+                    wait = false;
+                }
+            }
             websocketdb.broadcastMessageJson(currentJson.createAddObjectCommand(jsonObject, bounds), null);
         }
     }
@@ -1914,6 +1951,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
 
                 }
 
+                return;
+            }
+            if (msgType.equalsIgnoreCase("acknowledge")){
+                WebSocketDB.getInstance().finishPendingMessage((String) jsonObject.get("uuid"));
                 return;
             }
         }

@@ -103,7 +103,8 @@ public class Installer extends ModuleInstall {
          */
         restorePrefs();
         
-        String saved = Preferences.userNodeForPackage(TheApp.class).get("Persist Models", "On");
+        String saved = Preferences.userNodeForPackage(TheApp.class).get("Persist Models", "Off");
+        Preferences.userNodeForPackage(TheApp.class).put("Persist Models", saved);
         if (saved.equalsIgnoreCase("on")){ 
             /** Restore from file */            
             try {
@@ -188,7 +189,7 @@ public class Installer extends ModuleInstall {
          saved=Preferences.userNodeForPackage(TheApp.class).get("Experimental Marker Size", experimentalMarkerDisplayScaleStr);
          Preferences.userNodeForPackage(TheApp.class).put("Experimental Marker Size", saved);
          
-         String persistModels = "On";        
+         String persistModels = "Off";        
          saved = Preferences.userNodeForPackage(TheApp.class).get("Persist Models", persistModels);
          Preferences.userNodeForPackage(TheApp.class).put("Persist Models", saved);
 

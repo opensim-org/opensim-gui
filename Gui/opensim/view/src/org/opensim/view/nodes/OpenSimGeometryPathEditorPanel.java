@@ -752,6 +752,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       RestoreButton = new javax.swing.JButton();
       RestoreButton.setText("Restore");
       RestoreButton.setBounds(X + 300, Y + 20 + numGuiLines * 25, 70, 21);
+      RestoreButton.setToolTipText("Undo all changes since opening the Geometry Path dialog");
       RestoreButton.addActionListener(new ActionListener(){
 
             @Override

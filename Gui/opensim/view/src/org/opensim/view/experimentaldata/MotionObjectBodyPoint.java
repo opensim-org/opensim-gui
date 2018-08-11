@@ -25,8 +25,15 @@ package org.opensim.view.experimentaldata;
 import java.util.ArrayList;
 import java.util.UUID;
 import org.json.simple.JSONObject;
+import org.opensim.modeling.ArrayDouble;
+import org.opensim.modeling.Body;
+import org.opensim.modeling.Component;
+import org.opensim.modeling.Model;
+import org.opensim.modeling.OpenSimContext;
+import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.Sphere;
 import org.opensim.view.motions.MotionDisplayer;
+import org.opensim.view.pub.OpenSimDB;
 
 /**
  *
@@ -86,10 +93,22 @@ public class MotionObjectBodyPoint extends ExperimentalDataObject {
      * @param point the point to set
      */
     public void setPoint(double[] point) {
-        this.point = point;
+        if (pointExpressedInBody.equalsIgnoreCase("ground"))
+           this.point = point;
+        else {
+            // Transform point to ground 
+            Model model = getModel();
+            OpenSimContext dContext= OpenSimDB.getInstance().getContext(model);
+            Component c = model.getComponent(pointExpressedInBody);
+            PhysicalFrame f = PhysicalFrame.safeDownCast(c);
+            double[] pointGlobal = new double[3]; 
+            dContext.transformPosition(f, point, pointGlobal);
+            this.point = pointGlobal;
+        }
     }
 
     boolean appliesForce() {
         return false;
     }
-}
+
+ }

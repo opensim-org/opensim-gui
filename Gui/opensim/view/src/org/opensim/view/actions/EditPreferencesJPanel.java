@@ -74,7 +74,8 @@ public class EditPreferencesJPanel extends javax.swing.JPanel {
        "Muscle Dsiplay Radius",
        "BuildDate",
        "One Material Meshes",
-       "Save Movie Frames"
+       "Save Movie Frames",
+       "Experimental Marker Size"
    };
    /** Creates new form EditPreferencesJPanel */
    public EditPreferencesJPanel() throws BackingStoreException {

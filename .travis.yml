@@ -8,6 +8,10 @@ git:
   # the submodules.
   submodules: false
 
+# Fixing https://github.com/opensim-org/opensim-gui/issues/931
+# https://docs.travis-ci.com/user/reference/osx/#OS-X-Version
+osx_image: xcode8.3
+
 matrix:
   include:
     - os: osx
@@ -59,7 +63,7 @@ script:
 
 before_deploy:
   - ls $TRAVIS_BUILD_DIR/Gui/opensim/dist
-  - export PKGNAME=OpenSim-latest.pkg
+  - export PKGNAME=OpenSim-$TRAVIS_BRANCH.pkg
   - mkdir ~/to_deploy
   - mv $TRAVIS_BUILD_DIR/Gui/opensim/dist/OpenSim-$VERSION.pkg ~/to_deploy/$PKGNAME
 
@@ -80,7 +84,8 @@ deploy:
   skip_cleanup: true
   script: rsync --archive --compress --verbose ~/to_deploy/$PKGNAME opensim-bot@frs.sourceforge.net:/home/frs/project/myosin/opensim-gui
   on:
-    branch: master
+    # TODO branch: master
+    all_branches: true
     condition: "$DEPLOY = yes"
  
 # Process for securely uploading files to Sourceforge, taken from
