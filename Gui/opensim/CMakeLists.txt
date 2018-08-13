@@ -24,10 +24,9 @@ execute_process(
   OUTPUT_VARIABLE GIT_COMMIT_HASH
   OUTPUT_STRIP_TRAILING_WHITESPACE
 )
-message("~${s}~")
-string(TIMESTAMP timestamp "%a;%b")
+string(TIMESTAMP timestamp UTC)
 set (BUILD_ID ${timestamp}${GIT_COMMIT_HASH})
-message("~${BUILD_ID}~")
+
 
 add_custom_target(CopyOpenSimCore ALL
                   COMMAND ${Ant_EXECUTABLE} copy-java-bindings -DapiJava.dir="${OpenSim_JAVA_FILES_DIR}"
