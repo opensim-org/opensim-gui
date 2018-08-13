@@ -24,9 +24,11 @@ execute_process(
   OUTPUT_VARIABLE GIT_COMMIT_HASH
   OUTPUT_STRIP_TRAILING_WHITESPACE
 )
-string(TIMESTAMP timestamp UTC)
-set (BUILD_ID ${timestamp}${GIT_COMMIT_HASH})
-
+string(TIMESTAMP timestamp)
+set (BUILD_ID_RAW ${timestamp}.${GIT_COMMIT_HASH})
+# Replace illegal char in Path ":" with "."
+string(REPLACE ":" "." BUILD_ID ${BUILD_ID_RAW})
+message(${BUILD_ID})
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/build_id.properties.in
     "${CMAKE_CURRENT_SOURCE_DIR}/build_id.properties")
 
