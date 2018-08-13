@@ -426,7 +426,7 @@ public class PropertyEditorAdaptor {
                 @Override
                 public void redo() throws CannotRedoException {
                     super.redo();
-                    setValueDouble(v, true);
+                    setValueDouble(v, false);
                 }
                 @Override
                 public String getRedoPresentationName() {
@@ -472,7 +472,7 @@ public class PropertyEditorAdaptor {
                 @Override
                 public void redo() throws CannotRedoException {
                     super.redo();
-                    setValueString(v, true);
+                    setValueString(v, false);
                 }
                  @Override
                 public String getRedoPresentationName() {
