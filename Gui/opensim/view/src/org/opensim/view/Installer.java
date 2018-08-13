@@ -161,10 +161,10 @@ public class Installer extends ModuleInstall {
      * built nito the application */
     private void restorePrefs()
     {
-         String currentVersionStr = NbBundle.getMessage(TheApp.class, "CTL_BuildDate");
-         String savedVersionStr = TheApp.getCurrentVersionPreferences().get("Internal.BuildDate", null);
+         String savedVersionStr = TheApp.getCurrentVersionPreferences().get("Internal.BuildId", null);
          boolean updateResources = false;
-         if (!currentVersionStr.equalsIgnoreCase(savedVersionStr)){
+         String currentBuildId = System.getProperty("netbeans.buildnumber");
+         if (savedVersionStr == null || !savedVersionStr.equalsIgnoreCase(currentBuildId)){
              updateResources = true;
              // First launch, copy resources to User selected folder and save that as OpenSimUserDir
             SwingUtilities.invokeLater( new Runnable(){
@@ -173,7 +173,7 @@ public class Installer extends ModuleInstall {
                  TheApp.getCurrentVersionPreferences().put("Internal.OpenSimResourcesDir", userDir);
                }
             });
-            TheApp.getCurrentVersionPreferences().put("Internal.BuildDate", currentVersionStr);
+            TheApp.getCurrentVersionPreferences().put("Internal.BuildId", currentBuildId);
          }
          
          String defaultGeometryPath = TheApp.getDefaultGeometrySearchPath();
