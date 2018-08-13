@@ -37,6 +37,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.openide.modules.ModuleInstall;
 import org.openide.util.NbBundle;
+import org.openide.windows.OnShowing;
 import org.openide.windows.WindowManager;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.utils.ApplicationState;
@@ -75,6 +76,7 @@ public class Installer extends ModuleInstall {
       return ApplicationExit.confirmExit();
    }
 
+   @Override
     public void restored() {
         super.restored();
         System.setProperty ("netbeans.buildnumber", "4.0.Beta"); // Should get that from JNI but sometimes doesn't work'
@@ -103,29 +105,6 @@ public class Installer extends ModuleInstall {
          */
         restorePrefs();
         
-        String saved = Preferences.userNodeForPackage(TheApp.class).get("Persist Models", "On");
-        if (saved.equalsIgnoreCase("on")){ 
-            /** Restore from file */            
-            try {
-                XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(
-                        new FileInputStream(TheApp.getUserDir()+"AppState.xml")));
-                ApplicationState readState= (ApplicationState)decoder.readObject();
-                PluginsDB.getInstance().loadPlugins();
-                OpenSimDB.getInstance().rebuild((OpenSimDBDescriptor) readState.getObject("OpenSimDB"));
-                ViewDB.getInstance().rebuild((ViewDBDescriptor) readState.getObject("ViewDB"));
-                decoder.close();
-            } catch (FileNotFoundException ex) {
-                // First time, no file yet
-                ApplicationState as = ApplicationState.getInstance();
-                as.addObject("OpenSimDB", new OpenSimDBDescriptor(OpenSimDB.getInstance()));
-                as.addObject("ViewDB", new ViewDBDescriptor(ViewDB.getInstance()));
-                as.addObject("PluginsDB", PluginsDB.getInstance());
-                as.addObject("MotionsDB", new MotionsDBDescriptor(MotionsDB.getInstance()));
-            } catch (IOException ex) {
-                ErrorDialog.displayExceptionDialog(ex);
-            }
-        }
-        
         SwingUtilities.invokeLater(new Runnable(){
             @Override
             public void run() {
@@ -141,6 +120,7 @@ public class Installer extends ModuleInstall {
         EditorRegistry.addEditor("PhysicalFrame", new FrameNameEditor());
         EditorRegistry.addEditor("Frame", new FrameNameEditor());
     }
+    
     /**
      * restorePrefs is primarily used for the first time around where there are no pref values
      * stored in the backing file/registry. It sets values in the backing store based on the resource/Bundle files
