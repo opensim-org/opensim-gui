@@ -29,6 +29,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 import java.util.prefs.Preferences;
 import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
@@ -36,6 +38,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.openide.modules.ModuleInstall;
+import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.openide.windows.WindowManager;
 import org.opensim.modeling.OpenSimObject;
@@ -77,7 +80,18 @@ public class Installer extends ModuleInstall {
 
     public void restored() {
         super.restored();
-        System.setProperty ("netbeans.buildnumber", "4.0.Beta"); // Should get that from JNI but sometimes doesn't work'
+        Properties prop = new Properties();
+        InputStream input = null;
+        try {
+            input = new FileInputStream("build_id.properties");
+            // load a properties file
+            prop.load(input);
+            System.setProperty ("netbeans.buildnumber", prop.getProperty("netbeans.buildnumber")); // Should get that from JNI but sometimes doesn't work'
+        } catch (FileNotFoundException ex) {
+            Exceptions.printStackTrace(ex);
+        } catch (IOException ex) {
+           Exceptions.printStackTrace(ex);
+       }
         try {
              // Put your startup code here.
             UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );

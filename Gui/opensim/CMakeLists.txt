@@ -27,6 +27,8 @@ execute_process(
 string(TIMESTAMP timestamp UTC)
 set (BUILD_ID ${timestamp}${GIT_COMMIT_HASH})
 
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/build_id.properties.in
+    "${CMAKE_CURRENT_SOURCE_DIR}/build_id.properties")
 
 add_custom_target(CopyOpenSimCore ALL
                   COMMAND ${Ant_EXECUTABLE} copy-java-bindings -DapiJava.dir="${OpenSim_JAVA_FILES_DIR}"
