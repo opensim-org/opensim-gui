@@ -116,7 +116,9 @@
         <replace file="${opensim.dist.dir}/../make_installer.nsi" value="${app.version}">
             <replacefilter token="@VERSION@" />
         </replace>
-
+        <!-- Copy build_id.properties file to install folder to be used at runtime-->
+      <copy tofile="${opensim.dist.dir}/build_id.properties"
+            file="build_id.properties"/>
         <!-- http://wiki.netbeans.org/DevFaqExecutableIcon -->
         <exec executable="installer_files/Windows/ReplaceVistaIcon.exe" resolveexecutable="true">
             <arg line="${opensim.dist.dir}/bin/OpenSim64.exe installer_files/Windows/OpenSimLogoWindows.ico"/>
