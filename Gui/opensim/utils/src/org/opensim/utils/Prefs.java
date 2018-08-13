@@ -51,22 +51,7 @@ public final class Prefs {
        return instance;
        
     }
-    public void putPref(String key, String value)
-    {
-        Preferences.userNodeForPackage(this.getClass()).put(key, value);
-    }
 
-    public String getPref(String key, String defaultValue)
-    {
-        return Preferences.userNodeForPackage(this.getClass()).get(key, defaultValue);
-    }
-    public String getPreferredDirectory()
-    {
-        String defaultDir="";
-        defaultDir = Preferences.userNodeForPackage(this.getClass()).get("WorkDirectory", defaultDir);
- 
-        return defaultDir;
-    }
     /**
      * Parse a string of color attributes and return it in an array of doubles
      */

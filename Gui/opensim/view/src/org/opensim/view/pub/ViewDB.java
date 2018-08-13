@@ -165,10 +165,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
 
     public int getFrameTime() {
-        String saved = Preferences.userNodeForPackage(TheApp.class).get("FrameRate", String.valueOf(frameRate));
+        String saved = TheApp.getCurrentVersionPreferences().get("Internal.FrameRate", String.valueOf(frameRate));
         if (saved!= null)
             frameRate = Integer.parseInt(saved);
-        Preferences.userNodeForPackage(TheApp.class).put("FrameRate", String.valueOf(frameRate));
+        TheApp.getCurrentVersionPreferences().put("Internal.FrameRate", String.valueOf(frameRate));
         return frameRate; // 30 FPS default
     }
     /**
@@ -319,11 +319,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
      }
 
     public void applyPreferences() {
-        String debugLevelString="0";
-        String saved = Preferences.userNodeForPackage(TheApp.class).get("Debug", debugLevelString);
-        // Parse saved to an int, use 0 (no debug) on failure
-        if (saved.equalsIgnoreCase("Off")) saved="0";
-        debugLevel = Integer.parseInt(saved);
         GeometryFileLocator.updateGeometrySearchPathsFromPreferences();
     }
    
@@ -1272,8 +1267,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       // Also possible to define a default offset in any direction and reuse it.
       if (iter.hasNext()){
          double bounds[]= computeSceneBounds();
-         String defaultOffsetDirection = NbBundle.getMessage(ViewDB.class,"CTL_DisplayOffsetDir");
-         defaultOffsetDirection=Preferences.userNodeForPackage(TheApp.class).get("DisplayOffsetDir", defaultOffsetDirection);
+         String defaultOffsetDirection = null;
          if (defaultOffsetDirection == null)
             defaultOffsetDirection="Z";
          if (defaultOffsetDirection.equalsIgnoreCase("X"))
@@ -1916,16 +1910,12 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    }
 
    public double getNonCurrentModelOpacity() {
-         String nonCurrentModelOpacityStr = NbBundle.getMessage(ViewDB.class,"CTL_NonCurrentModelOpacity");
-         nonCurrentModelOpacityStr=Preferences.userNodeForPackage(TheApp.class).get("NonCurrentModelOpacity", nonCurrentModelOpacityStr);
-         if (nonCurrentModelOpacityStr != null)
-            setNonCurrentModelOpacity(Double.valueOf(nonCurrentModelOpacityStr));
          return nonCurrentModelOpacity;
    }
 
    public void setNonCurrentModelOpacity(double nonCurrentModelOpacity) {
       this.nonCurrentModelOpacity = nonCurrentModelOpacity;
-      Preferences.userNodeForPackage(TheApp.class).get("NonCurrentModelOpacity", String.valueOf(nonCurrentModelOpacity));
+      TheApp.getCurrentVersionPreferences().get("Internal.NonCurrentModelOpacity", String.valueOf(nonCurrentModelOpacity));
    }
    /**
     * Show only the passed in model and hide all others.
@@ -1942,31 +1932,16 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    public double[] getDefaultMarkersColor() {
          String markersColorStr = NbBundle.getMessage(ViewDB.class,"CTL_MarkersColorRGB");
          double[] color = new double[]{1.0, 0.6, 0.8};
-         markersColorStr =Preferences.userNodeForPackage(TheApp.class).get("Markers Color", markersColorStr);
-         if (markersColorStr != null)
-            color = Prefs.parseColor(markersColorStr);
          return color;
    }
    
    public double[] getDefaultTextColor() {
          String textColorStr = NbBundle.getMessage(ViewDB.class,"CTL_TextColorRGB");
          double[] color = new double[]{1.0, 1.0, 1.0};
-         textColorStr =Preferences.userNodeForPackage(TheApp.class).get("Text Color", textColorStr);
-         if (textColorStr != null)
-            color = Prefs.parseColor(textColorStr);
          return color;
    }
    
     public double getMuscleDisplayRadius() {
-         String muscleDisplayRadiusStr = NbBundle.getMessage(ViewDB.class,"CTL_MuscleRadius");
-         muscleDisplayRadiusStr =Preferences.userNodeForPackage(TheApp.class).get("Muscle Display Radius", muscleDisplayRadiusStr);
-         if (muscleDisplayRadiusStr != null) {
-            try {
-               muscleDisplayRadius = numFormat.parse(muscleDisplayRadiusStr).doubleValue();
-            } catch (ParseException ex) {
-               muscleDisplayRadius = 0.01;
-            }
-         }
         return muscleDisplayRadius;
     }
 
@@ -1975,15 +1950,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
 
     public double getMarkerDisplayRadius() {
-         String markerDisplayRadiusStr = NbBundle.getMessage(ViewDB.class,"CTL_MarkerRadius");
-         markerDisplayRadiusStr =Preferences.userNodeForPackage(TheApp.class).get("Marker Display Radius", markerDisplayRadiusStr);
-         if (markerDisplayRadiusStr != null) {
-            try {
-               markerDisplayRadius = numFormat.parse(markerDisplayRadiusStr).doubleValue();
-            } catch (ParseException ex) {
-               markerDisplayRadius = 0.01;
-            }
-         }
         return markerDisplayRadius;
     }
 
@@ -1993,7 +1959,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     
     public double getExperimentalMarkerDisplayScale() {
          String experimentalMarkerDisplayScaleStr="1.0";
-         String saved=Preferences.userNodeForPackage(TheApp.class).get("Experimental Marker Size", experimentalMarkerDisplayScaleStr);
+         String saved=TheApp.getCurrentVersionPreferences().get("Experimental Marker Radius (mm)", experimentalMarkerDisplayScaleStr);
          if (saved != null) 
              return (Double.parseDouble(saved));
          else 
@@ -2348,7 +2314,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                     //System.out.println("renderTime"+frameRenderTimeInMillis);
                     int frameRate = (int) (frameRenderTimeInMillis*1.5);
                     if (frameRate > 30)
-                        Preferences.userNodeForPackage(TheApp.class).put("FrameRate", String.valueOf(frameRate));
+                        TheApp.getCurrentVersionPreferences().put("Internal.FrameRate", String.valueOf(frameRate));
                     return;
                 }
                 if (debugLevel > 1) {
