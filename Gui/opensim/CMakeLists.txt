@@ -16,6 +16,19 @@ endif()
 
 find_package(Ant REQUIRED)
 
+# http://xit0.org/2013/04/cmake-use-git-branch-and-commit-details-in-project/
+# Get the latest abbreviated commit hash of the working branch
+execute_process(
+  COMMAND git log -1 --format=%h
+  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+  OUTPUT_VARIABLE GIT_COMMIT_HASH
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+message("~${s}~")
+string(TIMESTAMP timestamp "%a;%b")
+set (BUILD_ID ${timestamp}${GIT_COMMIT_HASH})
+message("~${BUILD_ID}~")
+
 add_custom_target(CopyOpenSimCore ALL
                   COMMAND ${Ant_EXECUTABLE} copy-java-bindings -DapiJava.dir="${OpenSim_JAVA_FILES_DIR}"
                   ${ANT_ARGS}
