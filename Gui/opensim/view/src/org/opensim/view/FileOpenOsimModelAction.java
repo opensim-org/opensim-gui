@@ -126,7 +126,7 @@ public class FileOpenOsimModelAction extends CallableSystemAction {
         }
         if (aModel.getValidationLog().length()>0){
             NotifyDescriptor.Message dlg =
-                          new NotifyDescriptor.Message("The following Warnings/Errors were encountered while loading the model:\n"+aModel.getValidationLog());
+                          new NotifyDescriptor.Message("The following Warnings/Errors were encountered while loading the model:\n"+aModel.getValidationLog(), NotifyDescriptor.WARNING_MESSAGE);
                   DialogDisplayer.getDefault().notify(dlg);
         }
         return loadModel(aModel, loadInForground);
