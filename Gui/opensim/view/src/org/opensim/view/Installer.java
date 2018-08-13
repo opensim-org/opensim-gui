@@ -80,13 +80,16 @@ public class Installer extends ModuleInstall {
 
     public void restored() {
         super.restored();
+        // The following block reads the file build_id.properties created during build/install
+        // and recovers netbeans.buildnumber to use it as a System property.
+        // Fomrat is YYYY-MM-DD timeInUTC abbreviated-commit-hash, will hsow on AboutJPanel 
         Properties prop = new Properties();
         InputStream input = null;
         try {
             input = new FileInputStream("build_id.properties");
             // load a properties file
             prop.load(input);
-            System.setProperty ("netbeans.buildnumber", prop.getProperty("netbeans.buildnumber")); // Should get that from JNI but sometimes doesn't work'
+            System.setProperty ("netbeans.buildnumber", prop.getProperty("netbeans.buildnumber")); 
         } catch (FileNotFoundException ex) {
             Exceptions.printStackTrace(ex);
         } catch (IOException ex) {
