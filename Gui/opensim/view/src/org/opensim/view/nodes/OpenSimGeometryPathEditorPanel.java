@@ -312,12 +312,11 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       // TODO: send some event that the muscle displayer can listen for and know to deselect the point
       // and make sure the rest of the points maintain correct selection status
       ViewDB.getInstance().removeObjectsBelongingToMuscleFromSelection(objectWithPath);
-      
+      ViewDB.getInstance().removePathDisplay(currentPath);
       AbstractPathPoint closestPoint = pathPoints.get(index);
       openSimContext.addPathPoint(currentPath, menuChoice, closestPoint.getBody());
-      
       setupComponent(objectWithPath);
-      updatePathDisplay(EditOperation.AddPoint, menuChoice);
+      ViewDB.getInstance().updatePathDisplay(currentModel, currentPath, EditOperation.Recreate.ordinal(), -1);
    }
 
    public void deleteAttachmentPerformed(int menuChoice) {
