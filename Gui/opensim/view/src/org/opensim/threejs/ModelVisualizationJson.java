@@ -151,7 +151,7 @@ public class ModelVisualizationJson extends JSONObject {
     // Preferences
     private double prefMuscleDisplayRadius=0.005;
     private int NUM_PATHPOINTS_PER_WRAP_OBJECT=8;
-    private double PATHPOINT_SCALEUP=1.0;
+    private double PATHPOINT_SCALEUP=1.05;
     
     public Boolean getFrameVisibility(Frame b) {
         return visualizerFrames.get(b).visible;
@@ -407,20 +407,16 @@ public class ModelVisualizationJson extends JSONObject {
         createModelJsonNode(); // Model node
         // Decide color Scheme for muscles
         String saved = "Modern";
-        String currentTemplate =Preferences.userNodeForPackage(TheApp.class).get("Muscle Color Scheme", saved);
-        Preferences.userNodeForPackage(TheApp.class).put("Muscle Color Scheme", currentTemplate);
+        String currentTemplate =TheApp.getCurrentVersionPreferences().get("Visualizer: Muscle Color Scheme (Modern/Classic)", saved);
+        TheApp.getCurrentVersionPreferences().put("Visualizer: Muscle Color Scheme (Modern/Classic)", currentTemplate);
         currentPathColorMap = PathColorMapFactory.getColorMap(currentTemplate);
         
         // Decide on bone shape/width
-        saved = ".005";
-        String currentSize= Preferences.userNodeForPackage(TheApp.class).get("Muscle Display Radius", saved);
-        Preferences.userNodeForPackage(TheApp.class).put("Muscle Display Radius", currentSize);
+        saved = "8";
+        String currentSize= TheApp.getCurrentVersionPreferences().get("Visualizer: Muscle Display Radius (mm)", saved);
+        TheApp.getCurrentVersionPreferences().put("Visualizer: Muscle Display Radius (mm)", currentSize);
         prefMuscleDisplayRadius = Double.parseDouble(currentSize);
-        actualMuscleDisplayRadius = 8*200*prefMuscleDisplayRadius;
-        saved = "1.0";
-        currentSize= Preferences.userNodeForPackage(TheApp.class).get("PathPoint Scaleup", saved);
-        Preferences.userNodeForPackage(TheApp.class).put("PathPoint Scaleup", currentSize);
-        PATHPOINT_SCALEUP = Double.parseDouble(currentSize);
+        actualMuscleDisplayRadius = prefMuscleDisplayRadius;
         createJsonForModel(model);
         ready = true;
         if (verbose)
@@ -929,26 +925,44 @@ public class ModelVisualizationJson extends JSONObject {
     }
     // This function checks that Geometry in the visualizar need change (other than appearance and scale)
     // and if so create a "ReplaceGeometry" message for the specific UUIDs
-    public boolean createReplaceGeometryMessage(Geometry mc, JSONObject msg) {
+    public boolean createReplaceGeometryMessage(Component mc, JSONObject msg) {
         // Call geberate decorations on 
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
-        boolean saveVisible = mc.get_Appearance().get_visible();
-        mc.get_Appearance().set_visible(true);
+        // use generic Property interface to save/restore Appearance
+        boolean hasAppearance =false;
+        boolean visibleStatus=true;
+        AbstractProperty visibleProp=null;
+        if (mc.hasProperty("Appearance")){
+            visibleProp = mc.getPropertyByName("Appearance").getValueAsObject().getPropertyByName("visible");
+            visibleStatus = PropertyHelper.getValueBool(visibleProp);
+            if (!visibleStatus)
+                PropertyHelper.setValueBool(true, visibleProp);
+            hasAppearance = true;
+        }
         mc.generateDecorations(true, mdh, state, adg);
-        mc.get_Appearance().set_visible(saveVisible);
+        mc.generateDecorations(false, mdh, state, adg);
+        if (hasAppearance && !visibleStatus)
+            PropertyHelper.setValueBool(visibleStatus, visibleProp);
+        WrapObject wo = WrapObject.safeDownCast(mc);
+        boolean isWrapObject = (wo != null);
+        if (isWrapObject)
+            dgimp.setQuadrants(wo.get_quadrant());
         ArrayList<UUID> uuids = findUUIDForObject(mc);
         if (adg.size() == uuids.size()){
             JSONArray geoms = new JSONArray();
             for (int i=0; i<adg.size(); i++){
                 UUID uuid = uuids.get(i);
                 dgimp.setGeomID(uuid);
-                adg.getElt(i).implementGeometry(dgimp);
+                DecorativeGeometry dg = adg.getElt(i);
+                dg.implementGeometry(dgimp);
                 JSONObject jsonObject = dgimp.getGeometryJson();
                 msg.put("Op", "ReplaceGeometry");
                 msg.put("uuid", uuid.toString());
                 geoms.add(jsonObject);
-                msg.put("geometries", geoms);
+                jsonObject.put("matrix", JSONUtilities.createMatrixFromTransform(dg.getTransform(), 
+                        dg.getScaleFactors(), visScaleFactor));
             }
+            msg.put("geometries", geoms);
         }
         return true;
     }

@@ -57,7 +57,7 @@ public class MarkersDisplayer extends OpenSimvtkGlyphCloud {
     public MarkersDisplayer() {
         super(false);
        // Markers
-       defaultMarkerColor = ViewDB.getInstance().getDefaultMarkersColor();
+       //defaultMarkerColor = ViewDB.getInstance().getDefaultMarkersColor();
        setColorRange(defaultMarkerColor, defaultMarkerColor);
        setSelectedColor(SelectedObject.defaultSelectedColor);
        setShapeName("marker");

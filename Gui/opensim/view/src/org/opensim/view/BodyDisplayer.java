@@ -101,7 +101,6 @@ public class BodyDisplayer extends vtkAssembly
    {
       String modelFilePath=frame.getModel().getFilePath();
       String defaultSize = "1.0";
-      defaultSize = Preferences.userNodeForPackage(TheApp.class).get("Joint Frame Scale", defaultSize);
       double userScale = Double.parseDouble(defaultSize);
       this.frame = frame;
       this.modelFilePath = modelFilePath;

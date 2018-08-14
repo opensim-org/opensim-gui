@@ -79,7 +79,7 @@ public class OpenSimBaseCanvas extends vtkPanel
    }
    /** Creates a new instance of OpenSimBaseCanvas */
    public OpenSimBaseCanvas() {
-      defaultBackgroundColor = Preferences.userNodeForPackage(TheApp.class).get("BackgroundColor", defaultBackgroundColor);
+      //defaultBackgroundColor = TheApp.getCurrentVersionPreferences().get("BackgroundColor", defaultBackgroundColor);
       double[] background = Prefs.parseColor(defaultBackgroundColor);
       GetRenderer().SetBackground(background);
       //GetRenderer().EraseOff();
@@ -89,7 +89,7 @@ public class OpenSimBaseCanvas extends vtkPanel
       addMouseWheelListener(this);
       addLogo();
       // AntiAliasing
-      int desiredAAFrames = Preferences.userNodeForPackage(TheApp.class).getInt("AntiAliasingFrames", numAAFrames);
+      int desiredAAFrames = 0;//TheApp.getCurrentVersionPreferences().getInt("AntiAliasingFrames", numAAFrames);
       if (desiredAAFrames >=0 && desiredAAFrames<=10){
          numAAFrames=desiredAAFrames;
       }

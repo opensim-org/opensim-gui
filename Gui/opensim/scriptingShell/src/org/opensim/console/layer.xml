@@ -77,7 +77,7 @@
         <file name="F5.shadow">  
         <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-console-ToolsRunCurrentScriptAction.instance"/> 
         </file>
-        <file name="C-s.shadow">  
+        <file name="C-W.shadow">  
         <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-console-ScriptsSaveAction.instance"/> 
         </file>
     </folder>
