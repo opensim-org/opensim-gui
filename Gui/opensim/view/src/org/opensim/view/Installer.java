@@ -89,7 +89,7 @@ public class Installer extends ModuleInstall {
             input = new FileInputStream("build_id.properties");
             // load a properties file
             prop.load(input);
-            System.setProperty ("netbeans.buildnumber", prop.getProperty("netbeans.buildnumber")); 
+            System.setProperty ("netbeans.buildnumber", prop.getProperty("build_id")); 
         } catch (FileNotFoundException ex) {
             Exceptions.printStackTrace(ex);
         } catch (IOException ex) {
