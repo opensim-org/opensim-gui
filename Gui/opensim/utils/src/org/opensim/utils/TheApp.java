@@ -273,6 +273,8 @@ public final class TheApp {
                 }
             }
             OpenSimLogger.logMessage("Done.", OpenSimLogger.INFO);
+            // Set preference to use the latest ResourcesDir from now on
+            TheApp.getCurrentVersionPreferences().put("Internal.OpenSimResourcesDir", userSelection);
             return userSelection;
         }
         else
