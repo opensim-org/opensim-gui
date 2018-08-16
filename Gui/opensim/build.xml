@@ -237,7 +237,9 @@
             file="jfreechart/gpl-3.0.txt"/>
         <copy todir="${mac.dist.inner.dir}/third_party_license_texts/"
             file="visualViewer/src/org/opensim/topologyEditor/cddl.txt"/>
-
+        <!-- Copy build_id.properties file to install folder to be used at runtime-->
+        <copy tofile="${mac.dist.inner.dir}/build_id.properties"
+            file="build_id.properties"/>
         <!-- Create top level folder -->
         <property name="mac.dist.outer.dir" value="dist/pkgroot/OpenSim ${app.version}" />
         <property name="mac.final.app.name" value="OpenSim ${app.version}.app" />

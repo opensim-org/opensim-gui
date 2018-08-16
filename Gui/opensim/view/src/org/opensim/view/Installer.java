@@ -89,7 +89,7 @@ public class Installer extends ModuleInstall {
             input = new FileInputStream("build_id.properties");
             // load a properties file
             prop.load(input);
-            System.setProperty ("netbeans.buildnumber", prop.getProperty("netbeans.buildnumber")); 
+            System.setProperty ("netbeans.buildnumber", prop.getProperty("build_id")); 
         } catch (FileNotFoundException ex) {
             Exceptions.printStackTrace(ex);
         } catch (IOException ex) {
@@ -164,19 +164,24 @@ public class Installer extends ModuleInstall {
      * built nito the application */
     private void restorePrefs()
     {
-         String savedVersionStr = TheApp.getCurrentVersionPreferences().get("Internal.BuildId", null);
          boolean updateResources = false;
-         String currentBuildId = System.getProperty("netbeans.buildnumber");
-         if (savedVersionStr == null || !savedVersionStr.equalsIgnoreCase(currentBuildId)){
-             updateResources = true;
-             // First launch, copy resources to User selected folder and save that as OpenSimUserDir
+         String relaunch_check_filepath = TheApp.getUserDir()+"first_launch.text";
+         boolean firstLaunch = !new File(relaunch_check_filepath).exists();
+         if (firstLaunch){
+            updateResources = true;
             SwingUtilities.invokeLater( new Runnable(){
                 public void run() {
                  String userDir = TheApp.installResources();
                  TheApp.getCurrentVersionPreferences().put("Internal.OpenSimResourcesDir", userDir);
                }
             });
-            TheApp.getCurrentVersionPreferences().put("Internal.BuildId", currentBuildId);
+            try {
+                 // First launch, copy resources to User selected folder and save that as OpenSimUserDir
+                 new File(relaunch_check_filepath).createNewFile();
+             } catch (IOException ex) {
+                 // need to report 
+                 Exceptions.printStackTrace(ex);
+             }        
          }
          
          String defaultGeometryPath = TheApp.getDefaultGeometrySearchPath();
@@ -184,7 +189,7 @@ public class Installer extends ModuleInstall {
          if (saved.isEmpty()||saved.equalsIgnoreCase("")){
              saved = defaultGeometryPath;
          }
-         else if (!saved.contains(defaultGeometryPath) && updateResources)
+         else if (!saved.contains(defaultGeometryPath))
              saved = saved.concat(File.pathSeparator+defaultGeometryPath);
          TheApp.getCurrentVersionPreferences().put("Paths: Geometry Search Path", saved);
          // Push changes to API side

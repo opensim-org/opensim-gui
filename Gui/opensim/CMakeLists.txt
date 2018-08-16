@@ -18,17 +18,30 @@ find_package(Ant REQUIRED)
 
 # http://xit0.org/2013/04/cmake-use-git-branch-and-commit-details-in-project/
 # Get the latest abbreviated commit hash of the working branch
-execute_process(
-  COMMAND git log -1 --format=%h
-  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-  OUTPUT_VARIABLE GIT_COMMIT_HASH
-  OUTPUT_STRIP_TRAILING_WHITESPACE
-)
-string(TIMESTAMP timestamp)
-set (BUILD_ID_RAW ${timestamp}.${GIT_COMMIT_HASH})
-# Replace illegal char in Path ":" with "."
-string(REPLACE ":" "." BUILD_ID ${BUILD_ID_RAW})
-message(${BUILD_ID})
+find_package(Git)
+if(NOT Git_FOUND)
+  set(GIT_COMMIT_HASH "nocommit")
+  set (BUILD_ID "000")
+else()
+    execute_process(
+      COMMAND git log -1 --format=%h
+      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+      OUTPUT_VARIABLE GIT_COMMIT_HASH
+      OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+	# prepend date so that build ids can meaningfully be sorted
+    execute_process(
+      COMMAND git show -s --format=%cd --date=short HEAD
+      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+      OUTPUT_VARIABLE GIT_COMMIT_DATE
+      OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+    set (BUILD_ID "${GIT_COMMIT_DATE}.${GIT_COMMIT_HASH}")
+endif()
+# inform user of created build id
+message(STATUS "Build ID: ${BUILD_ID}")
+
+# copy build_id to .properties file to accompany build/package
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/build_id.properties.in
     "${CMAKE_CURRENT_SOURCE_DIR}/build_id.properties")
 
