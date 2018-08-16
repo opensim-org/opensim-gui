@@ -375,7 +375,7 @@ public class MotionDisplayer {
     
     /** Creates a new instance of MotionDisplayer */
     public MotionDisplayer(Storage motionData, Model model) {
-        String saved = "10";
+        String saved = "10"; // new default per issue #643
         String currentSize =TheApp.getCurrentVersionPreferences().get("Visualizer: Experimental Marker Radius (mm)", saved);
         TheApp.getCurrentVersionPreferences().put("Visualizer: Experimental Marker Radius (mm)", currentSize);
         DEFAULT_MARKER_SIZE = Double.parseDouble(currentSize);
