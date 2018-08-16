@@ -24,7 +24,7 @@ if(NOT Git_FOUND)
   set (BUILD_ID "000")
 else()
     execute_process(
-      COMMAND git log -1 --format=%h
+      COMMAND git describe --always
       WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
       OUTPUT_VARIABLE GIT_COMMIT_HASH
       OUTPUT_STRIP_TRAILING_WHITESPACE
