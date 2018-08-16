@@ -29,7 +29,7 @@ else()
       OUTPUT_VARIABLE GIT_COMMIT_HASH
       OUTPUT_STRIP_TRAILING_WHITESPACE
     )
-
+	# prepend date so that build ids can meaningfully be sorted
     execute_process(
       COMMAND git show -s --format=%cd --date=short HEAD
       WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
@@ -38,8 +38,10 @@ else()
     )
     set (BUILD_ID "${GIT_COMMIT_DATE}.${GIT_COMMIT_HASH}")
 endif()
+# inform user of created build id
 message("build id: ${BUILD_ID}")
 
+# copy build_id to .properties file to accompany build/package
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/build_id.properties.in
     "${CMAKE_CURRENT_SOURCE_DIR}/build_id.properties")
 
