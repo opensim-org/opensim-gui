@@ -39,7 +39,7 @@ else()
     set (BUILD_ID "${GIT_COMMIT_DATE}.${GIT_COMMIT_HASH}")
 endif()
 # inform user of created build id
-message("build id: ${BUILD_ID}")
+message(STATUS "Build ID: ${BUILD_ID}")
 
 # copy build_id to .properties file to accompany build/package
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/build_id.properties.in
