@@ -128,8 +128,8 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
             nextNodeProp.setName("marker color");
             set.put(nextNodeProp);
 
-            PropertySupport.Reflection nextNodeProp2= new PropertySupport.Reflection(this, double.class, "getMarkerScaleFactor", "setMarkerScaleFactorUI");
-            nextNodeProp2.setName("marker size scale");
+            PropertySupport.Reflection nextNodeProp2= new PropertySupport.Reflection(this, double.class, "getMarkerSize", "setMarkerSizeUI");
+            nextNodeProp2.setName("marker size (mm)");
             nextNodeProp2.setShortDescription("Number to scale current visualization with");
             set.put(nextNodeProp2);
 
@@ -173,38 +173,38 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
         return new Color((float)colorAsVec3.get(0), (float)colorAsVec3.get(1), (float)colorAsVec3.get(2));
     }
    
-    public void setMarkerScaleFactorUI(double newFactor) {
-        setMarkerScaleFactorUI(newFactor, true);
+    public void setMarkerSizeUI(double newFactor) {
+        setMarkerSizeUI(newFactor, true);
     }
     
-    void setMarkerScaleFactorUI(final double newFactor, boolean allowUndo)
+    void setMarkerSizeUI(final double newSize, boolean allowUndo)
     {
-        final double oldMarkerScaleFactor = getMarkerScaleFactor();
+        final double oldMarkerSize = getMarkerSize();
         if (allowUndo){
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
                @Override
                public void undo() throws CannotUndoException {
                    super.undo();
-                   setMarkerScaleFactorUI(oldMarkerScaleFactor, false);
+                   setMarkerSizeUI(oldMarkerSize, false);
                }
                @Override
                public void redo() throws CannotRedoException {
                    super.redo();
-                   setMarkerScaleFactorUI(newFactor, true);
+                   setMarkerSizeUI(newSize, false);
                }
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }       
-        motionDisplayer.setExperimentalMarkerScaleFactor(newFactor);
+        motionDisplayer.setExperimentalMarkerSize(newSize);
         ViewDB.repaintAll();
         refreshNode();
     }
 
-    public double getMarkerScaleFactor()
+    public double getMarkerSize()
     {
        if (motionDisplayer==null){
             motionDisplayer = dMotion.getMotionDisplayer();
        }
-        return motionDisplayer.getExperimentalMarkerScaleFactor();
+        return motionDisplayer.getExperimentalMarkerSize();
     }
 }
