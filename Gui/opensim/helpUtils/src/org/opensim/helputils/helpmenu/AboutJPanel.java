@@ -537,7 +537,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
     }
 
     private void populateDetailsPanel() {
-        versionString.setText(System.getProperty ("netbeans.buildnumber"));
+        versionString.setText(System.getProperty ("opensim.buildnumber"));
         operatingSystemString.setText(System.getProperty("os.name")+" version "+System.getProperty("os.version"));
         jreString.setText(System.getProperty("java.home"));
         jreString.setToolTipText("<html>"+System.getProperty("java.home")+"</html");
