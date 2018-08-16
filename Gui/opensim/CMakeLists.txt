@@ -36,7 +36,7 @@ else()
       OUTPUT_VARIABLE GIT_COMMIT_DATE
       OUTPUT_STRIP_TRAILING_WHITESPACE
     )
-    set (BUILD_ID "${GIT_COMMIT_DATE}.${GIT_COMMIT_HASH}")
+    set (BUILD_ID "${GIT_COMMIT_DATE}-${GIT_COMMIT_HASH}")
 endif()
 # inform user of created build id
 message(STATUS "Build ID: ${BUILD_ID}")
