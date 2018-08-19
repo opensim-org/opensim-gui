@@ -289,8 +289,11 @@ public class Plot {
       if (count!=xYSeries.getItemCount())
          return false;
       // same count, check first and last entry
-      if (!(series.getX(0).equals(xYSeries.getX(0)))) return false;
-      if (!(series.getX(count-1).equals(xYSeries.getX(count-1)))) return false;
+      if (Math.abs(series.getX(0).doubleValue() - xYSeries.getX(0).doubleValue())>1E-5) {
+          return false;
+       }
+      if (Math.abs(series.getX(count-1).doubleValue()- xYSeries.getX(count-1).doubleValue())>1E-5)
+          return false;
       // We need more checking to probe intermediate X values.
       return true;
    }
