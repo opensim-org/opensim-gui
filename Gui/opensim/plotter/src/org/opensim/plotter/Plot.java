@@ -228,13 +228,14 @@ public class Plot {
       }
       //DecimalFormat numberFormat = new DecimalFormat("0.000E0");
       String origFilename = filename;
+      int locationOfDot = filename.lastIndexOf('.');
       // Assumption is that series indices are packed always 0, 1, ...
       for (int si=0; si< distinctX.size(); si++){
+         String nextfileName=origFilename;
          if (si>0){
-            int locationOfDot = filename.lastIndexOf('.');
-            filename = origFilename.substring(0, locationOfDot);   // Prepend index (should append to fielename -extension""
-            filename += "_"+String.valueOf(si);
-            filename += origFilename.substring(locationOfDot);
+            nextfileName = origFilename.substring(0, locationOfDot);   // Prepend index (should append to fielename -extension""
+            nextfileName += "_"+String.valueOf(si);
+            nextfileName += origFilename.substring(locationOfDot);
          }
          Storage newStorage = new Storage();
          
@@ -276,7 +277,7 @@ public class Plot {
             newStorage.append(nextRow);
          }
          //out.write("\n\n");
-         newStorage.print(filename);
+         newStorage.print(nextfileName);
       }
         // out.close();
       } catch (IOException ex) {
