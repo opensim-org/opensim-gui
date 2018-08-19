@@ -289,14 +289,15 @@ public class Plot {
       if (count!=xYSeries.getItemCount())
          return false;
       // same count, check first and last entry
-      if (Math.abs(series.getX(0).doubleValue() - xYSeries.getX(0).doubleValue())>1E-5) {
+      if (Math.abs(series.getX(0).doubleValue() - xYSeries.getX(0).doubleValue())>CURVE_MATCH_TOL) {
           return false;
        }
-      if (Math.abs(series.getX(count-1).doubleValue()- xYSeries.getX(count-1).doubleValue())>1E-5)
+      if (Math.abs(series.getX(count-1).doubleValue()- xYSeries.getX(count-1).doubleValue())>CURVE_MATCH_TOL)
           return false;
       // We need more checking to probe intermediate X values.
       return true;
    }
+    private static final double CURVE_MATCH_TOL = 1E-5; // number large enough to account for roundoff
 
     public void setOwnerFrame(Frame ownerFrame) {
         this.ownerFrame = ownerFrame;
