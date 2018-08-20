@@ -113,9 +113,6 @@ public class OneGeometryNode extends OneComponentWithGeometryNode {
             set.remove("origin");
             set.remove("direction");
         }
-        if (AnalyticGeometry.safeDownCast(comp)!=null){
-            set.remove("quadrants");
-        }
         set.remove("scale_factors");
         return sheet;
     }
