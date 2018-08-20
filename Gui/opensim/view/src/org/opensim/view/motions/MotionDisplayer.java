@@ -826,8 +826,6 @@ public class MotionDisplayer {
           // FIX40 speed this up by using map or YIndex
           context.getCurrentStateRef().setTime(assocTime);
           model.setStateVariableValues(context.getCurrentStateRef(), states.getAsVector());
-          // Assemble to satify constraints. Fixes issue #617
-          model.assemble(context.getCurrentStateRef());
           context.realizeVelocity();
       } else {
          // Any other states including muscles
