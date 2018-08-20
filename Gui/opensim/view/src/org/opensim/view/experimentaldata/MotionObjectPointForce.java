@@ -178,7 +178,8 @@ public class MotionObjectPointForce extends MotionObjectBodyPoint {
     public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
         if (!fixed){
             Transform xform = new Transform();
-            
+            // Transform position copied from base class point (responsible for setting self from data/Storage)
+            // indexOnBody is set to index in file so generated names for visualizer are unique (helpful for debugging)
             xform.setP(new Vec3(point[0], point[1], point[2]));
             appendToThis.push_back(new DecorativeArrow(new Vec3(0, 0, 0)).setBodyId(0).setColor(color).setOpacity(0.5).setIndexOnBody(getStartIndexInFileNotIncludingTime()).setTransform(xform));            
         }
