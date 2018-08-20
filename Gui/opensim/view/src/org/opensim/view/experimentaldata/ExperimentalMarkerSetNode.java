@@ -128,8 +128,8 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
             nextNodeProp.setName("marker color");
             set.put(nextNodeProp);
 
-            PropertySupport.Reflection nextNodeProp2= new PropertySupport.Reflection(this, double.class, "getMarkerSize", "setMarkerSizeUI");
-            nextNodeProp2.setName("marker size (mm)");
+            PropertySupport.Reflection nextNodeProp2= new PropertySupport.Reflection(this, double.class, "getMarkerRadius", "setMarkerRadiusUI");
+            nextNodeProp2.setName("marker radius (mm)");
             nextNodeProp2.setShortDescription("Number to scale current visualization with");
             set.put(nextNodeProp2);
 
@@ -173,34 +173,34 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
         return new Color((float)colorAsVec3.get(0), (float)colorAsVec3.get(1), (float)colorAsVec3.get(2));
     }
    
-    public void setMarkerSizeUI(double newFactor) {
-        setMarkerSizeUI(newFactor, true);
+    public void setMarkerRadiusUI(double newRadius) {
+        setMarkerRadiusUI(newRadius, true);
     }
     
-    void setMarkerSizeUI(final double newSize, boolean allowUndo)
+    void setMarkerRadiusUI(final double newRadius, boolean allowUndo)
     {
-        final double oldMarkerSize = getMarkerSize();
+        final double oldMarkerSize = getMarkerRadius();
         if (allowUndo){
             AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
                @Override
                public void undo() throws CannotUndoException {
                    super.undo();
-                   setMarkerSizeUI(oldMarkerSize, false);
+                   setMarkerRadiusUI(oldMarkerSize, false);
                }
                @Override
                public void redo() throws CannotRedoException {
                    super.redo();
-                   setMarkerSizeUI(newSize, false);
+                   setMarkerRadiusUI(newRadius, false);
                }
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }       
-        motionDisplayer.setExperimentalMarkerSize(newSize);
+        motionDisplayer.setExperimentalMarkerSize(newRadius);
         ViewDB.repaintAll();
         refreshNode();
     }
 
-    public double getMarkerSize()
+    public double getMarkerRadius()
     {
        if (motionDisplayer==null){
             motionDisplayer = dMotion.getMotionDisplayer();
