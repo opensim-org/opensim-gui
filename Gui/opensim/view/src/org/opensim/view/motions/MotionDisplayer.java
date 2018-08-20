@@ -375,8 +375,9 @@ public class MotionDisplayer {
     
     /** Creates a new instance of MotionDisplayer */
     public MotionDisplayer(Storage motionData, Model model) {
-        String saved = "10"; // new default per issue #643
-        String currentSize =TheApp.getCurrentVersionPreferences().get("Visualizer: Experimental Marker Radius (mm)", saved);
+        String defaultMarkerRadiusString = "10"; // new default per issue #643
+        String currentSize =TheApp.getCurrentVersionPreferences().get("Visualizer: Experimental Marker Radius (mm)", 
+                defaultMarkerRadiusString);
         TheApp.getCurrentVersionPreferences().put("Visualizer: Experimental Marker Radius (mm)", currentSize);
         DEFAULT_MARKER_SIZE = Double.parseDouble(currentSize);
         this.experimentalForceScaleFactor = 1.0;
@@ -1011,7 +1012,7 @@ public class MotionDisplayer {
         }
         
     }
-    public static double DEFAULT_MARKER_SIZE = 5;
+    double DEFAULT_MARKER_SIZE = 10;
 
     public void addExperimentalDataObjectsToJson(AbstractList<ExperimentalDataObject> expObjects) {
         
