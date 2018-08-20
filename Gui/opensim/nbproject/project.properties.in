@@ -1,0 +1,48 @@
+app.icon=branding/core/core.jar/org/netbeans/core/startup/frame48.gif
+app.icon.icns=installer_files/OSX/opensim.icns
+app.name=OpenSim
+app.title=OpenSim
+app.version=@VERSION@
+auxiliary.org-netbeans-modules-apisupport-installer.license-type=no
+auxiliary.org-netbeans-modules-apisupport-installer.os-linux=false
+auxiliary.org-netbeans-modules-apisupport-installer.os-macosx=false
+auxiliary.org-netbeans-modules-apisupport-installer.os-solaris=false
+auxiliary.org-netbeans-modules-apisupport-installer.os-windows=true
+auxiliary.org-netbeans-modules-apisupport-installer.pack200-enabled=false
+auxiliary.org-netbeans-spi-editor-hints-projects.perProjectHintSettingsEnabled=true
+auxiliary.org-netbeans-spi-editor-hints-projects.perProjectHintSettingsFile=nbproject/cfg_hints.xml
+modules=\
+    ${project.org.opensim.view}:\
+    ${project.org.opensim.logger}:\
+    ${project.org.opensim.utils}:\
+    ${project.org.opensim.modeling}:\
+    ${project.vtk}:\
+    ${project.org.jfree}:\
+    ${project.org.jfree.data}:\
+    ${project.org.opensim.plotter}:\
+    ${project.org.apache.xmlgraphics.ps}:\
+    ${project.org.opensim.coordinateviewer}:\
+    ${project.org.opensim.helputils}:\
+    ${project.org.opensim.tracking}:\
+    ${project.org.opensim.graphlEditor}:\
+    ${project.org.opensim.updater}:\
+    ${project.org.eclipse.jetty}:\
+    ${project.org.opensim.console}:\
+    ${project.org.opensim.javabrowser}
+project.org.apache.xmlgraphics.ps=xmlgraphics-commons-1.2svn
+project.org.eclipse.jetty=visualizationServer
+project.org.jfree=jcommon
+project.org.jfree.data=jfreechart
+project.org.opensim.console=scriptingShell
+project.org.opensim.coordinateviewer=coordinateViewer
+project.org.opensim.graphlEditor=visualViewer
+project.org.opensim.helputils=helpUtils
+project.org.opensim.javabrowser=../../opensim-visualizer/jxbrowser
+project.org.opensim.logger=logger
+project.org.opensim.modeling=modeling
+project.org.opensim.plotter=plotter
+project.org.opensim.tracking=tracking
+project.org.opensim.updater=updater
+project.org.opensim.utils=utils
+project.org.opensim.view=view
+project.vtk=vtk50
