@@ -224,10 +224,6 @@
             value="${app.version}">
             <replacefilter token="@VERSION@" />
         </replace>
-        <replace file="${mac.dist.inner.dir}/etc/OpenSim.conf"
-          value="${build_id}">
-          <replacefilter token="@BUILD_ID@" />
-        </replace>
 
       <copy todir="dist/OpenSim.app/Contents/Resources/"
             file="installer_files/OSX/OpenSimDocument.icns" />
