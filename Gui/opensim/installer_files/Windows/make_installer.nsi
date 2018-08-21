@@ -10,17 +10,17 @@
 ;General
 
   ;Name and file
-  Name "@VERSION@"
-  OutFile "@VERSION@-win64.exe"
+  Name "OpenSim @VERSION@"
+  OutFile "OpenSim-@VERSION@-win64.exe"
 
   ;Set compression
   SetCompressor lzma
 
   ;Default installation folder
-  InstallDir "C:\@VERSION@"
+  InstallDir "C:\OpenSim @VERSION@"
   
   ;Get installation folder from registry if available
-  InstallDirRegKey HKCU "Software\@VERSION@" ""
+  InstallDirRegKey HKCU "Software\OpenSim @VERSION@" ""
 
   ;Request application privileges for Windows Vista
   RequestExecutionLevel user
@@ -77,15 +77,15 @@ Section "OpenSim Application" SecMain
   File /r opensim\*.*
   
   ;Store installation folder
-  WriteRegStr HKCU "Software\@VERSION@" "" $INSTDIR
+  WriteRegStr HKCU "Software\OpenSim@VERSION@" "" $INSTDIR
  
   ;Create shortcuts
   ;TODO the uninstaller does not remove this shortcut.
-  CreateShortCut "$DESKTOP\@VERSION@.lnk" "$INSTDIR\bin\opensim64.exe" ""
+  CreateShortCut "$DESKTOP\OpenSim @VERSION@.lnk" "$INSTDIR\bin\opensim64.exe" ""
   ;Commented out for now because the Uninstaller does not yet remove these shortcuts.
   CreateDirectory "$SMPROGRAMS\OpenSim"
-  CreateShortCut "$SMPROGRAMS\OpenSim\@VERSION@.lnk" "$INSTDIR\bin\opensim64.exe"
-  CreateShortCut "$SMPROGRAMS\OpenSim\Uninstall @VERSION@.lnk" "$INSTDIR\Uninstall.exe"
+  CreateShortCut "$SMPROGRAMS\OpenSim\OpenSim @VERSION@.lnk" "$INSTDIR\bin\opensim64.exe"
+  CreateShortCut "$SMPROGRAMS\OpenSim\Uninstall OpenSim @VERSION@.lnk" "$INSTDIR\Uninstall.exe"
 
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
@@ -123,6 +123,6 @@ Section "Uninstall"
 
   RMDir /r "$INSTDIR"
 
-  DeleteRegKey /ifempty HKCU "Software\@VERSION@"
+  DeleteRegKey /ifempty HKCU "Software\OpenSim@VERSION@"
 
 SectionEnd
