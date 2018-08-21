@@ -62,10 +62,8 @@ build_script:
   - ps: $env:commitHash = git describe --always # short commit hash or annotated tag, if one exists.
   - ps: $env:commitDate = git show -s --format=%cd --date=short HEAD
   - ps: $env:VERSION = "$env:commitHash"
-  - ps: if (!($env.APPVEYOR_REPO_TAG)) { $env:VERSION = "$env:VERSION-$env:commitDate" }
+  - ps: if (!($env.APPVEYOR_REPO_TAG)) { $env:VERSION = "$env:commitDate-$env:VERSION" }
   - ps: $env:VERSION
-  - ps: (Get-Content $env:APPVEYOR_BUILD_FOLDER/Gui/opensim/installer_files/Windows/opensim.conf).replace('/dev', '/' + $env:VERSION) | Set-Content $env:APPVEYOR_BUILD_FOLDER/Gui/opensim/installer_files/Windows/opensim.conf
-  - ps: (Get-Content $env:APPVEYOR_BUILD_FOLDER/Gui/opensim/nbproject/project.properties).replace('app.version=4.0.Beta', 'app.version=' + $env:VERSION) | Set-Content $env:APPVEYOR_BUILD_FOLDER/Gui/opensim/nbproject/project.properties
   - ps: mkdir ../build
   - cd ../build
   - cmake ../opensim-gui -G"Visual Studio 15 2017 Win64" -DCMAKE_PREFIX_PATH=C:\opensim-core-VC141 -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=C:/Program Files/NetBeans 8.2;-Dnbplatform.default.harness.dir=C:/Program Files/NetBeans 8.2/harness"
