@@ -21,7 +21,7 @@ find_package(Ant REQUIRED)
 find_package(Git)
 if(NOT Git_FOUND)
   set(GIT_COMMIT_HASH "nocommit")
-  set (BUILD_ID "000")
+  set (VERSION "000")
 else()
     execute_process(
       COMMAND git describe --always
@@ -36,14 +36,14 @@ else()
       OUTPUT_VARIABLE GIT_COMMIT_DATE
       OUTPUT_STRIP_TRAILING_WHITESPACE
     )
-    set (BUILD_ID "${GIT_COMMIT_DATE}-${GIT_COMMIT_HASH}")
+    set (VERSION "${GIT_COMMIT_DATE}-${GIT_COMMIT_HASH}")
 endif()
 # inform user of created build id
-message(STATUS "Build ID: ${BUILD_ID}")
+message(STATUS "Build VERSION: ${VERSION}")
 
 # copy build_id to .properties file to accompany build/package
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/build_id.properties.in
-    "${CMAKE_CURRENT_SOURCE_DIR}/build_id.properties")
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/nbproject/project.properties.in
+    "${CMAKE_CURRENT_SOURCE_DIR}/nbproject/project.properties" @ONLY)
 
 add_custom_target(CopyOpenSimCore ALL
                   COMMAND ${Ant_EXECUTABLE} copy-java-bindings -DapiJava.dir="${OpenSim_JAVA_FILES_DIR}"

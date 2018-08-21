@@ -10,7 +10,6 @@
     <property name="visualizer.dir" value="/Users/aymanhabib/dev/src/unused"/>
     <property name="jre.dir" value="${java.home}"/>
      <!--- load file that has build_id as a property -->
-    <loadproperties srcFile="build_id.properties"/>
     <condition property="installer-files.dir" value="installer_files/Windows">
         <os family="windows"/>
     </condition>
@@ -122,11 +121,7 @@
           value="${app.version}">
         <replacefilter token="@VERSION@" />
       </replace>
-      <replace file="${opensim.dist.dir}/etc/OpenSim.conf"
-          value="${build_id}">
-        <replacefilter token="@BUILD_ID@" />
-      </replace>
-      <!-- http://wiki.netbeans.org/DevFaqExecutableIcon -->
+     <!-- http://wiki.netbeans.org/DevFaqExecutableIcon -->
         <exec executable="installer_files/Windows/ReplaceVistaIcon.exe" resolveexecutable="true">
             <arg line="${opensim.dist.dir}/bin/OpenSim64.exe installer_files/Windows/OpenSimLogoWindows.ico"/>
         </exec>
