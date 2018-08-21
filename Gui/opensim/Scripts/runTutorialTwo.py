@@ -47,14 +47,11 @@ myState = myModel.initSystem()
 # Change the name of the model
 ##myModel.setName("Wrist Tendon Surgery.")
 
-
 ## Change the path points of the ECU_pre-surgery to match the existing ECU_post-surgery muscle
-for i in range(myModel.getMuscles().get("ECU_pre-surgery").getGeometryPath().getPathPointSet().getSize()):
-	# Get the Path Points from each muscle
-	ECUPrepathPoint			=	myModel.getMuscles().get("ECU_pre-surgery").getGeometryPath().getPathPointSet().get(i)
-	ECUPostpathPoint		=	myModel.getMuscles().get("ECU_post-surgery").getGeometryPath().getPathPointSet().get(i)
-	# Replace path point from ECU_pre-surgery to ECU_post-surgery
-	myModel.getMuscles().get("ECU_pre-surgery").getGeometryPath().replacePathPoint(myState,ECUPrepathPoint,ECUPostpathPoint)
+myModel.getMuscles().get("ECU_pre-surgery").getGeometryPath().updPathPointSet().clearAndDestroy();
+pps = myModel.getMuscles().get("ECU_pre-surgery").getGeometryPath().updPathPointSet();
+for i in range(myModel.getMuscles().get("ECU_post-surgery").getGeometryPath().getPathPointSet().getSize()):
+    pps.cloneAndAppend(myModel.getMuscles().get("ECU_post-surgery").getGeometryPath().getPathPointSet().get(i));
 
 # re-initialize the model now that you changed the path points
 myState = myModel.initSystem()
