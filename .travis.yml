@@ -48,9 +48,7 @@ install:
   - VERSION=$COMMIT_HASH
   - echo $VERSION
   # If this is not a tag, append commit date.
-  - if [ "$TRAVIS_TAG" != "$COMMIT_HASH" ]; then VERSION=$VERSION-$COMMIT_DATE; fi
-  # TODO sed has a different interface on Mac than on Linux.
-  - sed -i '' -e "s/app.version=4.0.Beta/app.version=$VERSION/g" Gui/opensim/nbproject/project.properties
+  - if [ "$TRAVIS_TAG" != "$COMMIT_HASH" ]; then VERSION=$COMMIT_DATE-$VERSION; fi
 
   # Build.
   - mkdir ../build && cd ../build
