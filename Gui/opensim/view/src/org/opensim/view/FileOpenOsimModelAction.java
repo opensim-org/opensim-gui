@@ -23,21 +23,19 @@
 
 package org.opensim.view;
 
-import java.awt.Dialog;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.SwingUtilities;
 import org.netbeans.api.progress.ProgressHandle;
 import org.netbeans.api.progress.ProgressHandleFactory;
-import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
+import org.openide.NotifyDescriptor;
 import org.openide.awt.StatusDisplayer;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.logger.OpenSimLogger;
 import org.opensim.modeling.Model;
-import org.opensim.swingui.ErrorReportJPanel;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.actions.MRUFilesOptions;
@@ -127,13 +125,9 @@ public class FileOpenOsimModelAction extends CallableSystemAction {
             return retValue;
         }
         if (aModel.getValidationLog().length()>0){
-            // Create Dialog (model by default) to display errors encountered
-            ErrorReportJPanel errorPanel = new ErrorReportJPanel();
-            errorPanel.setText(aModel.getValidationLog());
-            DialogDescriptor dlg = new DialogDescriptor(errorPanel, "Erros and Warnings");
-            dlg.setOptions(new Object[]{DialogDescriptor.OK_OPTION});
-            Dialog dialog = DialogDisplayer.getDefault().createDialog(dlg);
-            dialog.setVisible(true);
+            NotifyDescriptor.Message dlg =
+                          new NotifyDescriptor.Message("The following Warnings/Errors were encountered while loading the model:\n"+aModel.getValidationLog(), NotifyDescriptor.WARNING_MESSAGE);
+                  DialogDisplayer.getDefault().notify(dlg);
         }
         return loadModel(aModel, loadInForground);
     }
