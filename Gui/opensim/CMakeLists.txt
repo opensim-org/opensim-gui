@@ -58,10 +58,6 @@ set(OPENSIMGUI_BUILD_VERSION "${PROJECT_VERSION}${VERSION_SUFFIX}" CACHE STRING
 # inform user of created build version.
 message(STATUS "Build VERSION: ${OPENSIMGUI_BUILD_VERSION}")
 
-# copy build_id to .properties file to accompany build/package
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/build_version.properties.in
-    "${CMAKE_CURRENT_SOURCE_DIR}/build_version.properties" @ONLY)
-
 add_custom_target(CopyOpenSimCore ALL
                   COMMAND ${Ant_EXECUTABLE} copy-java-bindings -DapiJava.dir="${OpenSim_JAVA_FILES_DIR}"
                   ${ANT_ARGS}
