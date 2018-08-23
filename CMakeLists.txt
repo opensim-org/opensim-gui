@@ -1,4 +1,7 @@
-PROJECT (OpenSimApp)
+# Allow specifying VERSION for the project.
+cmake_policy(SET CMP0048 NEW)
+
+project(OpenSimApp VERSION 4.0)
 
 cmake_minimum_required(VERSION 3.1.3)
 
