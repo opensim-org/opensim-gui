@@ -1718,7 +1718,8 @@ public class ModelVisualizationJson extends JSONObject {
     // only supports Stationary PathPoints
     // @typeOfEdit = 2 -> delete
     // @typeOfEdit = 1 -> insert
-    // @typeOfEdit = 0 -> refresh
+    // @typeOfEdit = 0 -> refresh (on coordinate change or motion for example)
+    // @typeOfEdit = 3 -> recreate (on edit or restore for example)
     public JSONObject createPathUpdateJson(GeometryPath path, int typeOfEdit, int atIndex) {
         JSONObject topJson = new JSONObject();
         UUID pathUuid = pathList.get(path);
