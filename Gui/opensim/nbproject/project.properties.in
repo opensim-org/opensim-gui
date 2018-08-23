@@ -2,7 +2,6 @@ app.icon=branding/core/core.jar/org/netbeans/core/startup/frame48.gif
 app.icon.icns=installer_files/OSX/opensim.icns
 app.name=OpenSim
 app.title=OpenSim
-app.version=@OPENSIMGUI_BUILD_VERSION@
 auxiliary.org-netbeans-modules-apisupport-installer.license-type=no
 auxiliary.org-netbeans-modules-apisupport-installer.os-linux=false
 auxiliary.org-netbeans-modules-apisupport-installer.os-macosx=false

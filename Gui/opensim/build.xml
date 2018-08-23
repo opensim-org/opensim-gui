@@ -9,6 +9,7 @@
     <property name="models.dir" value="C:/Dev/gui/opensim-models"/>
     <property name="visualizer.dir" value="/Users/aymanhabib/dev/src/unused"/>
     <property name="jre.dir" value="${java.home}"/>
+    <loadproperties srcFile="build_version.properties"/>
      <!--- load file that has build_id as a property -->
     <condition property="installer-files.dir" value="installer_files/Windows">
         <os family="windows"/>

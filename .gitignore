@@ -13,7 +13,7 @@ build/
 
 Gui/opensim/nbproject/platform.xml
 Gui/opensim/nbproject/genfiles.properties
-Gui/opensim/build_id.properties
+Gui/opensim/build_version.properties
 
 # general back-up files
 *~

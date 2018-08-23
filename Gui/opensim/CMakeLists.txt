@@ -18,10 +18,9 @@ find_package(Ant REQUIRED)
 
 # http://xit0.org/2013/04/cmake-use-git-branch-and-commit-details-in-project/
 # Get the latest abbreviated commit hash of the working branch
+set(VERSION_SUFFIX "")
 find_package(Git)
-if(NOT Git_FOUND)
-  set(VERSION "000")
-else()
+if(Git_FOUND)
     # This command provides the annotated tag for the current commit, if it
     # exists, and returns an error if a tag does not exist.
     execute_process(
@@ -35,7 +34,8 @@ else()
     )
     if(${GIT_DESCRIBE_EXACT_MATCH_RETVAL} EQUAL 0)
         # A tag exists.
-        set(VERSION "${GIT_TAG}")
+        # set(VERSION_SUFFIX "${GIT_TAG}")
+        # Do not add anything to the version.
     else()
         execute_process(
             COMMAND git log -1 --format=%h
@@ -50,18 +50,17 @@ else()
             OUTPUT_VARIABLE GIT_COMMIT_DATE
             OUTPUT_STRIP_TRAILING_WHITESPACE
             )
-        set(VERSION "${GIT_COMMIT_DATE}-${GIT_COMMIT_HASH}")
+        set(VERSION_SUFFIX "-${GIT_COMMIT_DATE}-${GIT_COMMIT_HASH}")
     endif()
 endif()
-set(OPENSIMGUI_BUILD_VERSION "${VERSION}" CACHE STRING
+set(OPENSIMGUI_BUILD_VERSION "${PROJECT_VERSION}${VERSION_SUFFIX}" CACHE STRING
     "<date>-<commit>, or <tag> if this commit is tagged." FORCE)
 # inform user of created build version.
-message(STATUS "Build VERSION: ${VERSION}")
+message(STATUS "Build VERSION: ${OPENSIMGUI_BUILD_VERSION}")
 
 # copy build_id to .properties file to accompany build/package
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/nbproject/project.properties.in
-    "${CMAKE_CURRENT_SOURCE_DIR}/nbproject/project.properties" @ONLY)
-# TODO pass app.version on Ant command line?
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/build_version.properties.in
+    "${CMAKE_CURRENT_SOURCE_DIR}/build_version.properties" @ONLY)
 
 add_custom_target(CopyOpenSimCore ALL
                   COMMAND ${Ant_EXECUTABLE} copy-java-bindings -DapiJava.dir="${OpenSim_JAVA_FILES_DIR}"
