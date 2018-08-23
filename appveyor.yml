@@ -71,7 +71,7 @@ build_script:
 
   # Read the value of the cache variable storing the GUI build version.
   - ps: $env:match = cmake -L . | Select-String -Pattern OPENSIMGUI_BUILD_VERSION
-  - ps: $env:VERSION = $env:match.Line.split('=')[1]
+  - ps: $env:VERSION = $env:match.split('=')[1]
   - ps: $env:VERSION
   
 test_script:
