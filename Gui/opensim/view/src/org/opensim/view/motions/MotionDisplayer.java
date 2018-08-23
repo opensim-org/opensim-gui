@@ -147,7 +147,7 @@ public class MotionDisplayer {
     OpenSimContext dContext; 
     ArrayStr stateNames;
     private boolean renderMuscleActivations=false;
-    private double experimentalMarkerSize=1;
+    private double experimentalMarkerRadius=1000;
     private double experimentalForceScaleFactor=1;
     String DEFAULT_FORCE_SHAPE="arrow";
     private String currentForceShape;
@@ -379,9 +379,8 @@ public class MotionDisplayer {
         String currentSize =TheApp.getCurrentVersionPreferences().get("Visualizer: Experimental Marker Radius (mm)", 
                 defaultMarkerRadiusString);
         TheApp.getCurrentVersionPreferences().put("Visualizer: Experimental Marker Radius (mm)", currentSize);
-        DEFAULT_MARKER_SIZE = Double.parseDouble(currentSize);
         this.experimentalForceScaleFactor = 1.0;
-        this.experimentalMarkerSize = DEFAULT_MARKER_SIZE;
+        this.experimentalMarkerRadius = Double.parseDouble(currentSize);
         this.model = model;
         dContext= OpenSimDB.getInstance().getContext(model);
         simmMotionData = motionData;
@@ -988,7 +987,7 @@ public class MotionDisplayer {
             UUID uuidForMarkerGeometry = UUID.randomUUID();
             experimentalMarkerGeometryJson.put("uuid", uuidForMarkerGeometry.toString());
             experimentalMarkerGeometryJson.put("type", "SphereGeometry");
-            experimentalMarkerGeometryJson.put("radius", experimentalMarkerSize);
+            experimentalMarkerGeometryJson.put("radius", experimentalMarkerRadius);
             experimentalMarkerGeometryJson.put("widthSegments", 32);
             experimentalMarkerGeometryJson.put("heightSegments", 16);            
             getExperimentalMarkerGeometryJson().put("name", "DefaultExperimentalMarker");
@@ -1012,7 +1011,6 @@ public class MotionDisplayer {
         }
         
     }
-    double DEFAULT_MARKER_SIZE = 10;
 
     public void addExperimentalDataObjectsToJson(AbstractList<ExperimentalDataObject> expObjects) {
         
@@ -1071,28 +1069,28 @@ public class MotionDisplayer {
     }
 
     /**
-     * @return the experimentalMarkerSize
+     * @return the experimentalMarkerRadius
      */
-    public double getExperimentalMarkerSize() {
-        return experimentalMarkerSize;
+    public double getExperimentalMarkerRadius() {
+        return experimentalMarkerRadius;
     }
 
     /**
-     * @param experimentalMarkerSize the experimentalMarkerSize to set
+     * @param experimentalMarkerRadius the experimentalMarkerRadius to set
      */
-    public void setExperimentalMarkerSize(double experimentalMarkerSize) {
-        this.experimentalMarkerSize = experimentalMarkerSize;
+    public void setExperimentalMarkerRadius(double experimentalMarkerRadius) {
+        this.experimentalMarkerRadius = experimentalMarkerRadius;
         Set<OpenSimObject> expermintalDataObjects = mapComponentToUUID.keySet();
         for (OpenSimObject expObj : expermintalDataObjects){
             // Find first ExperimentalMarker and change its Material, this will affect all of them
             if (expObj instanceof ExperimentalMarker){
                 UUID expMarkerUUID = mapComponentToUUID.get(expObj).get(0); 
                 ViewDB.getInstance().resizeGeometryOfObjectByUUID(model, expMarkerUUID, 
-                        experimentalMarkerSize);  
+                        experimentalMarkerRadius);  
             }
         }
         // update cached experimentalMarkerGeometryJson
-         experimentalMarkerGeometryJson.put("radius", experimentalMarkerSize);
+         experimentalMarkerGeometryJson.put("radius", experimentalMarkerRadius);
     }
     
     public double getExperimentalForceScaleFactor() {

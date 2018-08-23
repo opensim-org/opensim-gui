@@ -195,7 +195,7 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }       
-        motionDisplayer.setExperimentalMarkerSize(newRadius);
+        motionDisplayer.setExperimentalMarkerRadius(newRadius);
         ViewDB.repaintAll();
         refreshNode();
     }
@@ -205,6 +205,6 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
        if (motionDisplayer==null){
             motionDisplayer = dMotion.getMotionDisplayer();
        }
-        return motionDisplayer.getExperimentalMarkerSize();
+        return motionDisplayer.getExperimentalMarkerRadius();
     }
 }
