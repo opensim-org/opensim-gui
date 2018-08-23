@@ -20,30 +20,46 @@ find_package(Ant REQUIRED)
 # Get the latest abbreviated commit hash of the working branch
 find_package(Git)
 if(NOT Git_FOUND)
-  set(GIT_COMMIT_HASH "nocommit")
-  set (VERSION "000")
+  set(VERSION "000")
 else()
+    # This command provides the annotated tag for the current commit, if it
+    # exists, and returns an error if a tag does not exist.
     execute_process(
-      COMMAND git describe --always
+      COMMAND git describe --exact-match
       WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-      OUTPUT_VARIABLE GIT_COMMIT_HASH
+      RESULT_VARIABLE GIT_DESCRIBE_EXACT_MATCH_RETVAL
+      OUTPUT_VARIABLE GIT_TAG
       OUTPUT_STRIP_TRAILING_WHITESPACE
     )
-	# prepend date so that build ids can meaningfully be sorted
-    execute_process(
-      COMMAND git show -s --format=%cd --date=short HEAD
-      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-      OUTPUT_VARIABLE GIT_COMMIT_DATE
-      OUTPUT_STRIP_TRAILING_WHITESPACE
-    )
-    set (VERSION "${GIT_COMMIT_DATE}-${GIT_COMMIT_HASH}")
+    if(${GIT_DESCRIBE_EXACT_MATCH_RETVAL} EQUAL 0)
+        # A tag exists.
+        set(VERSION "${GIT_TAG}")
+    else()
+        execute_process(
+            COMMAND git log -1 --format=%h
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+            OUTPUT_VARIABLE GIT_COMMIT_HASH
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+            )
+        # prepend date so that build ids can meaningfully be sorted
+        execute_process(
+            COMMAND git show -s --format=%cd --date=short HEAD
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+            OUTPUT_VARIABLE GIT_COMMIT_DATE
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+            )
+        set(VERSION "${GIT_COMMIT_DATE}-${GIT_COMMIT_HASH}")
+    endif()
 endif()
-# inform user of created build id
+set(OPENSIMGUI_BUILD_VERSION "${VERSION}" CACHE STRING
+    "<date>-<commit>, or <tag> if this commit is tagged." FORCE)
+# inform user of created build version.
 message(STATUS "Build VERSION: ${VERSION}")
 
 # copy build_id to .properties file to accompany build/package
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/nbproject/project.properties.in
     "${CMAKE_CURRENT_SOURCE_DIR}/nbproject/project.properties" @ONLY)
+# TODO pass app.version on Ant command line?
 
 add_custom_target(CopyOpenSimCore ALL
                   COMMAND ${Ant_EXECUTABLE} copy-java-bindings -DapiJava.dir="${OpenSim_JAVA_FILES_DIR}"
