@@ -81,7 +81,7 @@ if (WIN32)
     set(MSVC_REDIST_EXE "${MSVC_REDIST_DIR}/vcredist_x64.exe")
 
     add_custom_target(PrepareInstaller ALL
-                  COMMAND ${Ant_EXECUTABLE} copy-installer-files -Dapi.dir="${OpenSim_ROOT_DIR}" -Dmsvc.redist.exe="${MSVC_REDIST_EXE}"
+                  COMMAND ${Ant_EXECUTABLE} copy-installer-files -Dapi.dir="${OpenSim_ROOT_DIR}" -Dmsvc.redist.exe="${MSVC_REDIST_EXE}" -Dapp.version="${OPENSIMGUI_BUILD_VERSION}"
                   ${ANT_ARGS}
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
@@ -140,6 +140,7 @@ if (APPLE)
                   COMMAND ${Ant_EXECUTABLE} build-mac-installer
                   -Dapi.dir="${OpenSim_ROOT_DIR}"
                   -Dmodels.dir="${MODELS_INSTALL_DIR}"
+                  -Dapp.version="${OPENSIMGUI_BUILD_VERSION}"
                   ${ANT_ARGS}
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
