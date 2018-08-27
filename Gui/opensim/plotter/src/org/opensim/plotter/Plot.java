@@ -228,13 +228,14 @@ public class Plot {
       }
       //DecimalFormat numberFormat = new DecimalFormat("0.000E0");
       String origFilename = filename;
+      int locationOfDot = filename.lastIndexOf('.');
       // Assumption is that series indices are packed always 0, 1, ...
       for (int si=0; si< distinctX.size(); si++){
+         String nextfileName=origFilename;
          if (si>0){
-            int locationOfDot = filename.lastIndexOf('.');
-            filename = origFilename.substring(0, locationOfDot);   // Prepend index (should append to fielename -extension""
-            filename += "_"+String.valueOf(si);
-            filename += origFilename.substring(locationOfDot);
+            nextfileName = origFilename.substring(0, locationOfDot);   // Prepend index (should append to fielename -extension""
+            nextfileName += "_"+String.valueOf(si);
+            nextfileName += origFilename.substring(locationOfDot);
          }
          Storage newStorage = new Storage();
          
@@ -276,7 +277,7 @@ public class Plot {
             newStorage.append(nextRow);
          }
          //out.write("\n\n");
-         newStorage.print(filename);
+         newStorage.print(nextfileName);
       }
         // out.close();
       } catch (IOException ex) {
@@ -289,11 +290,15 @@ public class Plot {
       if (count!=xYSeries.getItemCount())
          return false;
       // same count, check first and last entry
-      if (!(series.getX(0).equals(xYSeries.getX(0)))) return false;
-      if (!(series.getX(count-1).equals(xYSeries.getX(count-1)))) return false;
+      if (Math.abs(series.getX(0).doubleValue() - xYSeries.getX(0).doubleValue())>CURVE_MATCH_TOL) {
+          return false;
+       }
+      if (Math.abs(series.getX(count-1).doubleValue()- xYSeries.getX(count-1).doubleValue())>CURVE_MATCH_TOL)
+          return false;
       // We need more checking to probe intermediate X values.
       return true;
    }
+    private static final double CURVE_MATCH_TOL = 1E-5; // number large enough to account for roundoff
 
     public void setOwnerFrame(Frame ownerFrame) {
         this.ownerFrame = ownerFrame;

@@ -201,7 +201,7 @@ public final class TheApp {
     public static String installResources() {
         // Popup a directory browser dialog prompting for install location of Models, Scripts
         String userHome = System.getProperty("user.home")+File.separator+"Documents"+File.separator+"OpenSim"+
-                        File.separator+System.getProperty ("netbeans.buildnumber");
+                        File.separator+System.getProperty ("opensim.buildnumber");
         FileUtils.getInstance().setWorkingDirectoryPreference(userHome);
         String userSelection = null;
         boolean exists = false;
@@ -273,6 +273,8 @@ public final class TheApp {
                 }
             }
             OpenSimLogger.logMessage("Done.", OpenSimLogger.INFO);
+            // Set preference to use the latest ResourcesDir from now on
+            TheApp.getCurrentVersionPreferences().put("Internal.OpenSimResourcesDir", userSelection);
             return userSelection;
         }
         else
