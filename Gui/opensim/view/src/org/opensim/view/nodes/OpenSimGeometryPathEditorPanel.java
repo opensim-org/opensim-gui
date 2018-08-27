@@ -312,12 +312,11 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       // TODO: send some event that the muscle displayer can listen for and know to deselect the point
       // and make sure the rest of the points maintain correct selection status
       ViewDB.getInstance().removeObjectsBelongingToMuscleFromSelection(objectWithPath);
-      
+      ViewDB.getInstance().removePathDisplay(currentPath);
       AbstractPathPoint closestPoint = pathPoints.get(index);
       openSimContext.addPathPoint(currentPath, menuChoice, closestPoint.getBody());
-      
       setupComponent(objectWithPath);
-      updatePathDisplay(EditOperation.AddPoint, menuChoice);
+      ViewDB.getInstance().updatePathDisplay(currentModel, currentPath, EditOperation.Recreate.ordinal(), -1);
    }
 
    public void deleteAttachmentPerformed(int menuChoice) {
@@ -344,14 +343,14 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          ModelVisualizationJson modelViz = ViewDB.getInstance().getModelVisualizationJson(currentModel);
          // We remove the visuals before actual deletion so we have the PathPoint in hand
          // and it doesn't refer to stale/released memory.
-         modelViz.deletePathPointVisuals(currentPath, menuChoice);
-         updatePathDisplay(EditOperation.RemovePoint, menuChoice);
+         ViewDB.getInstance().removePathDisplay(currentPath);
          openSimContext.deletePathPoint(currentPath, menuChoice);
          // ideally we'd like to just deselect the point we're deleting but the muscle displayer doesn't
          // deal well with maintaining the right glyph colors when the attachment set changes.
          // TODO: send some event that the muscle displayer can listen for and know to deselect the point
          // and make sure the rest of the points maintain correct selection status
          ViewDB.getInstance().removeObjectsBelongingToMuscleFromSelection(objectWithPath);
+         ViewDB.getInstance().updatePathDisplay(currentModel, currentPath, EditOperation.Recreate.ordinal(), -1);
          
          setupComponent(objectWithPath);
          Model model = currentModel;
@@ -1518,8 +1517,8 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       if (PhysicalFrame.getCPtr(newFrame) != PhysicalFrame.getCPtr(oldFrame)) {
          OpenSimContext context=OpenSimDB.getInstance().getContext(model);
          context.setBody(pathPoints.get(attachmentNum), newFrame);
-
-         updatePathDisplay(EditOperation.Refresh, -1);
+         ViewDB.getInstance().removePathDisplay(currentPath);
+         updatePathDisplay(EditOperation.Recreate, -1);
          // update the panels
          updateAttachmentPanel();
          updateCurrentPathPanel();
@@ -1560,8 +1559,8 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
             Model model = currentModel;
             OpenSimContext context = OpenSimDB.getInstance().getContext(model);
             context.setRangeMin(via, newValue/conversion);
-            
-            updatePathDisplay(EditOperation.Refresh, -1);
+            ViewDB.getInstance().removePathDisplay(currentPath);
+            updatePathDisplay(EditOperation.Recreate, -1);
             // update the current path panel
             updateCurrentPathPanel();
          }
@@ -1600,7 +1599,8 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          // update the model if the number has changed
          if (newValue != oldValue) {
             openSimContext.setRangeMax(via, newValue/conversion);
-            updatePathDisplay(EditOperation.Refresh, -1);
+            ViewDB.getInstance().removePathDisplay(currentPath);
+            updatePathDisplay(EditOperation.Recreate, -1);
             // update the current path panel
             updateCurrentPathPanel();
          }

@@ -35,24 +35,16 @@ public class Manager {
     }
   }
 
-  public Manager(Model model, SWIGTYPE_p_SimTK__Integrator integ) {
-    this(opensimSimulationJNI.new_Manager__SWIG_0(Model.getCPtr(model), model, SWIGTYPE_p_SimTK__Integrator.getCPtr(integ)), true);
-  }
-
   public Manager(Model model) {
-    this(opensimSimulationJNI.new_Manager__SWIG_1(Model.getCPtr(model), model), true);
+    this(opensimSimulationJNI.new_Manager__SWIG_0(Model.getCPtr(model), model), true);
   }
 
   public Manager(Model model, State state) {
-    this(opensimSimulationJNI.new_Manager__SWIG_2(Model.getCPtr(model), model, State.getCPtr(state), state), true);
-  }
-
-  public Manager(Model model, State state, SWIGTYPE_p_SimTK__Integrator integ) {
-    this(opensimSimulationJNI.new_Manager__SWIG_3(Model.getCPtr(model), model, State.getCPtr(state), state, SWIGTYPE_p_SimTK__Integrator.getCPtr(integ)), true);
+    this(opensimSimulationJNI.new_Manager__SWIG_1(Model.getCPtr(model), model, State.getCPtr(state), state), true);
   }
 
   public Manager() {
-    this(opensimSimulationJNI.new_Manager__SWIG_4(), true);
+    this(opensimSimulationJNI.new_Manager__SWIG_2(), true);
   }
 
   public void setSessionName(String name) {
@@ -79,12 +71,24 @@ public class Manager {
     opensimSimulationJNI.Manager_setWriteToStorage(swigCPtr, this, writeToStorage);
   }
 
+  public void setIntegratorMethod(Manager.IntegratorMethod integMethod) {
+    opensimSimulationJNI.Manager_setIntegratorMethod(swigCPtr, this, integMethod.swigValue());
+  }
+
   public SWIGTYPE_p_SimTK__Integrator getIntegrator() {
     return new SWIGTYPE_p_SimTK__Integrator(opensimSimulationJNI.Manager_getIntegrator(swigCPtr, this), false);
   }
 
-  public void setIntegrator(SWIGTYPE_p_SimTK__Integrator arg0) {
-    opensimSimulationJNI.Manager_setIntegrator(swigCPtr, this, SWIGTYPE_p_SimTK__Integrator.getCPtr(arg0));
+  public void setIntegratorMinimumStepSize(double hmin) {
+    opensimSimulationJNI.Manager_setIntegratorMinimumStepSize(swigCPtr, this, hmin);
+  }
+
+  public void setIntegratorMaximumStepSize(double hmax) {
+    opensimSimulationJNI.Manager_setIntegratorMaximumStepSize(swigCPtr, this, hmax);
+  }
+
+  public void setIntegratorInternalStepLimit(int nSteps) {
+    opensimSimulationJNI.Manager_setIntegratorInternalStepLimit(swigCPtr, this, nSteps);
   }
 
   public void setUseSpecifiedDT(boolean aTrueFalse) {
@@ -201,6 +205,55 @@ public class Manager {
 
   public void setIntegratorAccuracy(double accuracy) {
     opensimSimulationJNI.Manager_setIntegratorAccuracy(swigCPtr, this, accuracy);
+  }
+
+  public final static class IntegratorMethod {
+    public final static Manager.IntegratorMethod ExplicitEuler = new Manager.IntegratorMethod("ExplicitEuler", opensimSimulationJNI.Manager_IntegratorMethod_ExplicitEuler_get());
+    public final static Manager.IntegratorMethod RungeKutta2 = new Manager.IntegratorMethod("RungeKutta2", opensimSimulationJNI.Manager_IntegratorMethod_RungeKutta2_get());
+    public final static Manager.IntegratorMethod RungeKutta3 = new Manager.IntegratorMethod("RungeKutta3", opensimSimulationJNI.Manager_IntegratorMethod_RungeKutta3_get());
+    public final static Manager.IntegratorMethod RungeKuttaFeldberg = new Manager.IntegratorMethod("RungeKuttaFeldberg", opensimSimulationJNI.Manager_IntegratorMethod_RungeKuttaFeldberg_get());
+    public final static Manager.IntegratorMethod RungeKuttaMerson = new Manager.IntegratorMethod("RungeKuttaMerson", opensimSimulationJNI.Manager_IntegratorMethod_RungeKuttaMerson_get());
+    public final static Manager.IntegratorMethod SemiExplicitEuler2 = new Manager.IntegratorMethod("SemiExplicitEuler2", opensimSimulationJNI.Manager_IntegratorMethod_SemiExplicitEuler2_get());
+    public final static Manager.IntegratorMethod Verlet = new Manager.IntegratorMethod("Verlet", opensimSimulationJNI.Manager_IntegratorMethod_Verlet_get());
+
+    public final int swigValue() {
+      return swigValue;
+    }
+
+    public String toString() {
+      return swigName;
+    }
+
+    public static IntegratorMethod swigToEnum(int swigValue) {
+      if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
+        return swigValues[swigValue];
+      for (int i = 0; i < swigValues.length; i++)
+        if (swigValues[i].swigValue == swigValue)
+          return swigValues[i];
+      throw new IllegalArgumentException("No enum " + IntegratorMethod.class + " with value " + swigValue);
+    }
+
+    private IntegratorMethod(String swigName) {
+      this.swigName = swigName;
+      this.swigValue = swigNext++;
+    }
+
+    private IntegratorMethod(String swigName, int swigValue) {
+      this.swigName = swigName;
+      this.swigValue = swigValue;
+      swigNext = swigValue+1;
+    }
+
+    private IntegratorMethod(String swigName, IntegratorMethod swigEnum) {
+      this.swigName = swigName;
+      this.swigValue = swigEnum.swigValue;
+      swigNext = this.swigValue+1;
+    }
+
+    private static IntegratorMethod[] swigValues = { ExplicitEuler, RungeKutta2, RungeKutta3, RungeKuttaFeldberg, RungeKuttaMerson, SemiExplicitEuler2, Verlet };
+    private static int swigNext = 0;
+    private final int swigValue;
+    private final String swigName;
   }
 
 }

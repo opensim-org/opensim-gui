@@ -57,16 +57,4 @@ public class AnalyticGeometry extends Geometry {
     return opensimSimulationJNI.AnalyticGeometry_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setQuadrants(boolean[] quadrants) {
-    opensimSimulationJNI.AnalyticGeometry_setQuadrants(swigCPtr, this, quadrants);
-  }
-
-  public void getQuadrants(boolean[] quadrants) {
-    opensimSimulationJNI.AnalyticGeometry_getQuadrants(swigCPtr, this, quadrants);
-  }
-
-  public boolean isPiece() {
-    return opensimSimulationJNI.AnalyticGeometry_isPiece(swigCPtr, this);
-  }
-
 }

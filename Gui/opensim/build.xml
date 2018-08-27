@@ -9,6 +9,7 @@
     <property name="models.dir" value="C:/Dev/gui/opensim-models"/>
     <property name="visualizer.dir" value="/Users/aymanhabib/dev/src/unused"/>
     <property name="jre.dir" value="${java.home}"/>
+    <property name="app.version" value="Dev"/>
     <condition property="installer-files.dir" value="installer_files/Windows">
         <os family="windows"/>
     </condition>
@@ -116,8 +117,11 @@
         <replace file="${opensim.dist.dir}/../make_installer.nsi" value="${app.version}">
             <replacefilter token="@VERSION@" />
         </replace>
-
-        <!-- http://wiki.netbeans.org/DevFaqExecutableIcon -->
+      <replace file="${opensim.dist.dir}/etc/OpenSim.conf"
+          value="${app.version}">
+        <replacefilter token="@VERSION@" />
+      </replace>
+     <!-- http://wiki.netbeans.org/DevFaqExecutableIcon -->
         <exec executable="installer_files/Windows/ReplaceVistaIcon.exe" resolveexecutable="true">
             <arg line="${opensim.dist.dir}/bin/OpenSim64.exe installer_files/Windows/OpenSimLogoWindows.ico"/>
         </exec>
@@ -221,7 +225,7 @@
             <replacefilter token="@VERSION@" />
         </replace>
 
-        <copy todir="dist/OpenSim.app/Contents/Resources/"
+      <copy todir="dist/OpenSim.app/Contents/Resources/"
             file="installer_files/OSX/OpenSimDocument.icns" />
 
         <copy tofile="${mac.dist.inner.dir}/LICENSE.txt"
@@ -235,7 +239,6 @@
             file="jfreechart/gpl-3.0.txt"/>
         <copy todir="${mac.dist.inner.dir}/third_party_license_texts/"
             file="visualViewer/src/org/opensim/topologyEditor/cddl.txt"/>
-
         <!-- Create top level folder -->
         <property name="mac.dist.outer.dir" value="dist/pkgroot/OpenSim ${app.version}" />
         <property name="mac.final.app.name" value="OpenSim ${app.version}.app" />

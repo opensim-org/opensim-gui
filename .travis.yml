@@ -40,23 +40,15 @@ install:
   # Only get certain submodules (not OpenSimAPI).
   - git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
 
-  # Tweak installer files for the sourceforge deployment.
-  - COMMIT_HASH=`git describe --always` # short commit hash or annotated tag, if one exists.
-  - echo $COMMIT_HASH
-  - COMMIT_DATE=`git show -s --format=%cd --date=short HEAD`
-  - echo $COMMIT_DATE
-  - VERSION=$COMMIT_HASH
-  - echo $VERSION
-  # If this is not a tag, append commit date.
-  - if [ "$TRAVIS_TAG" != "$COMMIT_HASH" ]; then VERSION=$VERSION-$COMMIT_DATE; fi
-  # TODO sed has a different interface on Mac than on Linux.
-  - sed -i '' -e "s/app.version=4.0.Beta/app.version=$VERSION/g" Gui/opensim/nbproject/project.properties
-
   # Build.
   - mkdir ../build && cd ../build
   - cmake ../opensim-gui -DCMAKE_PREFIX_PATH=~/opensim-core -DAnt_EXECUTABLE="/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/extide/ant/bin/ant" -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans;-Dnbplatform.default.harness.dir=/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/harness"
   - make CopyOpenSimCore
   - make PrepareInstaller
+
+  # Read the value of the cache variable storing the GUI build version.
+  - VERSION=`cmake -L . | grep OPENSIMGUI_BUILD_VERSION | cut -d "=" -f2`
+  - echo $VERSION
   
 script: 
   - echo "No tests."

@@ -501,6 +501,10 @@ public class Coordinate extends ModelComponent {
     return opensimSimulationJNI.Coordinate_getBodyIndex(swigCPtr, this);
   }
 
+  public Coordinate.MotionType getUserSpecifiedMotionTypePriorTo40() {
+    return Coordinate.MotionType.swigToEnum(opensimSimulationJNI.Coordinate_getUserSpecifiedMotionTypePriorTo40(swigCPtr, this));
+  }
+
   public Coordinate() {
     this(opensimSimulationJNI.new_Coordinate__SWIG_0(), true);
   }
