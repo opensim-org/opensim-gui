@@ -1240,6 +1240,10 @@ public class Model extends ModelComponent {
     return new SWIGTYPE_p_std__vectorT_SimTK__ReferencePtrT_OpenSim__Coordinate_const_t_t(opensimSimulationJNI.Model_getCoordinatesInMultibodyTreeOrder(swigCPtr, this), true);
   }
 
+  public String getWarningMesssageForMotionTypeInconsistency() {
+    return opensimSimulationJNI.Model_getWarningMesssageForMotionTypeInconsistency(swigCPtr, this);
+  }
+
   public BodySet updBodySet() {
     return new BodySet(opensimSimulationJNI.Model_updBodySet(swigCPtr, this), false);
   }
