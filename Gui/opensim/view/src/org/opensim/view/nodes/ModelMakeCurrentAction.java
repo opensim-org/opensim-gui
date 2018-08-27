@@ -45,6 +45,7 @@ public final class ModelMakeCurrentAction extends CallableSystemAction {
         OpenSimDB.getInstance().setCurrentModel(mdl);
         if (mdl instanceof ModelForExperimentalData){
             // Make first motion current as Model is just a holder of Data
+            // We need to guard against sync. motions (getNumCurrentMotions()>=2)
             if (MotionsDB.getInstance().getNumCurrentMotions()<=1){
                 // Find first motion under mdl;
                 ArrayList<Storage> motions = MotionsDB.getInstance().getModelMotions(mdl);
