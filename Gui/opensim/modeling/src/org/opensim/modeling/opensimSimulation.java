@@ -9,4 +9,20 @@
 package org.opensim.modeling;
 
 public class opensimSimulation {
+  public static State simulate(Model model, State initialState, double finalTime, boolean saveStatesFile) {
+    return new State(opensimSimulationJNI.simulate__SWIG_0(Model.getCPtr(model), model, State.getCPtr(initialState), initialState, finalTime, saveStatesFile), true);
+  }
+
+  public static State simulate(Model model, State initialState, double finalTime) {
+    return new State(opensimSimulationJNI.simulate__SWIG_1(Model.getCPtr(model), model, State.getCPtr(initialState), initialState, finalTime), true);
+  }
+
+  public static void updatePre40KinematicsFilesFor40MotionType(Model model, StdVectorString filePaths, String suffix) {
+    opensimSimulationJNI.updatePre40KinematicsFilesFor40MotionType__SWIG_0(Model.getCPtr(model), model, StdVectorString.getCPtr(filePaths), filePaths, suffix);
+  }
+
+  public static void updatePre40KinematicsFilesFor40MotionType(Model model, StdVectorString filePaths) {
+    opensimSimulationJNI.updatePre40KinematicsFilesFor40MotionType__SWIG_1(Model.getCPtr(model), model, StdVectorString.getCPtr(filePaths), filePaths);
+  }
+
 }
