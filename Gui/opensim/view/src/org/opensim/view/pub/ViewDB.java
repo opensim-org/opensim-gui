@@ -354,7 +354,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     * Observable should be of type OpenSimDB.
     */
    public void update(Observable o, Object arg) {
-      //if (!isVtkGraphicsAvailable()) return;
       if (arg instanceof JSONObject){
           handleJson((JSONObject) arg);
           return;
@@ -636,31 +635,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     * is started. This may need to be change when a new project is opened
     */
    private void createNewViewWindowIfNeeded() {
-      if (openModelInNewWindow){
-         boolean evt = SwingUtilities.isEventDispatchThread();
-         if (isVtkGraphicsAvailable()){
-            // The following line has the side effect of loading VTK libraries, can't move it to another thread'
-            final ModelWindowVTKTopComponent win = new ModelWindowVTKTopComponent(); 
-            openWindows.add(win);
-            openModelInNewWindow=false;
-            setCurrentModelWindow(win);
-            // open window later rather than now to avoid having a rectangular blank patch appearing over the GUI while
-            // the model is loading and the scene is set up
-            if (SwingUtilities.isEventDispatchThread()){
-                win.requestActive();
-                win.open();
-            }
-            else 
-            {
-                       SwingUtilities.invokeLater(new Runnable(){ // Should change to WindowManager.getDefault().invokeWhenUIReady if/when we upgrade NB
-                           public void run(){
-                            win.open();
-                            win.requestActive();
-                           }});
-             } 
-         }
-
-      }
    }
    /**
     * Add an arbitrary Object to the scene (all views)
@@ -1046,15 +1020,12 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     */
    public double[] getSceneBounds() {
       double[] sceneBounds = new double[6];
-      if (isVtkGraphicsAvailable())
-        sceneAssembly.GetBounds(sceneBounds);
-      else {
-          int numModels = mapModelsToJsons.size();
-          for (int i=0; i<3; i++){
-            sceneBounds[i*2] = -2*numModels;
-            sceneBounds[i*2+1] = 2*numModels;
-          }
-      }
+       int numModels = mapModelsToJsons.size();
+       for (int i = 0; i < 3; i++) {
+           sceneBounds[i * 2] = -2 * numModels;
+           sceneBounds[i * 2 + 1] = 2 * numModels;
+       }
+      
       return sceneBounds;
    }
 
