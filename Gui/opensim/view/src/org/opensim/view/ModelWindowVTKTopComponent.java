@@ -71,19 +71,6 @@ public class ModelWindowVTKTopComponent extends TopComponent
       }
    }
 
-   class CameraEditorAction extends AbstractAction {
-      public CameraEditorAction() {
-         super("Edit Cameras...");
-      }
-      public void actionPerformed(ActionEvent evt) {
-         CameraEditorPanel panel = new CameraEditorPanel();
-         DialogDescriptor dlg = new DialogDescriptor(panel, "Camera Editor");
-         dlg.setModal(false);
-         dlg.setOptions(new Object[]{DialogDescriptor.OK_OPTION});
-         Dialog dialog = DialogDisplayer.getDefault().createDialog(dlg);
-         dialog.setVisible(true);
-      }
-   }
    
     private boolean internalTrigger=false;
     private static final long serialVersionUID = 1L;
@@ -479,24 +466,6 @@ public class ModelWindowVTKTopComponent extends TopComponent
     }//GEN-LAST:event_openSimCanvas1MousePressed
 
     private void cameraEditorButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cameraEditorButtonMousePressed
-      JPopupMenu cameraPopup = new JPopupMenu();
-      JRadioButtonMenuItem item = null;
-
-      // null camera
-      item = new JRadioButtonMenuItem(new SetCameraAction(null));
-      if(getCanvas().getCamera()==null) item.setSelected(true);
-      cameraPopup.add(item);
-
-      for(int i=0; i<CameraDB.getInstance().getNumCameras(); i++) {
-         Camera camera = CameraDB.getInstance().getCamera(i);
-         item = new JRadioButtonMenuItem(new SetCameraAction(camera));
-         if(camera.equals(getCanvas().getCamera())) item.setSelected(true);
-         cameraPopup.add(item);
-      }
-
-      cameraPopup.addSeparator();
-      cameraPopup.add(new JMenuItem(new CameraEditorAction()));
-      cameraPopup.show(evt.getComponent(), evt.getX(), evt.getY());
     }//GEN-LAST:event_cameraEditorButtonMousePressed
 
     private void jBackgroundColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBackgroundColorButtonActionPerformed
