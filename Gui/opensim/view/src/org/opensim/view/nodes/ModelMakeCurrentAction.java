@@ -22,12 +22,16 @@
  * -------------------------------------------------------------------------- */
 package org.opensim.view.nodes;
 
+import java.util.ArrayList;
 import org.openide.nodes.Node;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.Storage;
 import org.opensim.view.ExplorerTopComponent;
+import org.opensim.view.experimentaldata.ModelForExperimentalData;
+import org.opensim.view.motions.MotionsDB;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 
@@ -39,6 +43,15 @@ public final class ModelMakeCurrentAction extends CallableSystemAction {
         OneModelNode modelNode = (OneModelNode) selected[0];
         Model mdl = modelNode.getModel();
         OpenSimDB.getInstance().setCurrentModel(mdl);
+        if (mdl instanceof ModelForExperimentalData){
+            // Make first motion current as Model is just a holder of Data
+            // We need to guard against sync. motions (getNumCurrentMotions()>=2)
+            if (MotionsDB.getInstance().getNumCurrentMotions()<=1){
+                // Find first motion under mdl;
+                ArrayList<Storage> motions = MotionsDB.getInstance().getModelMotions(mdl);
+                MotionsDB.getInstance().setCurrent(mdl, motions.get(0));
+            }
+        }
     }
     
     public String getName() {
