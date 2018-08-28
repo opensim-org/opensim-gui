@@ -33,7 +33,6 @@ import java.awt.Color;
 import java.util.HashMap;
 import java.util.Stack;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.view.motions.MotionObjectsDB;
 import vtk.vtkActor;
 import vtk.vtkColorTransferFunction;
 import vtk.vtkDataArray;
@@ -97,9 +96,6 @@ public class OpenSimvtkGlyphCloud {    // Assume same shape
         shape = rep;
     }
     public void setShapeName(String name) {
-            shapeName = name; // Cache shape name for later editing
-            setShape(MotionObjectsDB.getInstance().getShape(name));
-            setModified();
         
     }
     public void setDisplayProperties(vtkProperty prop) {
@@ -332,7 +328,7 @@ public class OpenSimvtkGlyphCloud {    // Assume same shape
     }
     
     public boolean hasShapeName(String newName){
-        return (MotionObjectsDB.getInstance().getShape(name)!=null);
+        return false;
     }
 
     /**

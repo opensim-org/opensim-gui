@@ -611,7 +611,6 @@ public class MotionDisplayer {
       }
      // Body segment since experimental markersRep are in ground frame as ground_marker_??
        BodySet bodySet = model.getBodySet();
-       String[] motionObjectNames=MotionObjectsDB.getInstance().getAvailableNames();
        for (int i = 0; i<bodySet.getSize(); i++){
          Body bdy = bodySet.get(i);
          // 

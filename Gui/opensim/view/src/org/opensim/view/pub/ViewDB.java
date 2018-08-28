@@ -70,7 +70,6 @@ import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.Prefs;
 import org.opensim.utils.TheApp;
 import org.opensim.view.*;
-import static org.opensim.view.pub.ViewDB.isVtkGraphicsAvailable;
 import vtk.AxesActor;
 import vtk.FrameActor;
 import vtk.vtkActor;
@@ -839,9 +838,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       else
           lookupContents.remove(selectedObject.getOpenSimObject());
       
-      // Remaining code is vtk depenedent
-      //if (!isVtkGraphicsAvailable()) return;
-      //selectedObject.markSelected(highlight);
+
       if (websocketdb != null){
           Model model = selectedObject.getOwnerModel();
           ModelVisualizationJson modelJson = getModelVisualizationJson(model);
