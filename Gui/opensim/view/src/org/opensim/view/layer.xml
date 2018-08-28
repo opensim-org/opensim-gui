@@ -18,12 +18,10 @@
             <file name="org-opensim-view-ObjectDisplayOpacityAction.instance"/>
             <file name="org-opensim-view-ObjectDisplayShowOnlyAction.instance"/>
             <file name="org-opensim-view-ModelRenameAction.instance"/>
-            <file name="org-opensim-view-ViewReplicateAction.instance"/>
             <file name="org-opensim-view-SaveAction.instance"/>
             <file name="org-opensim-view-FileSaveModelAction.instance"/>
             <file name="org-opensim-view-actions-EditPreferencesAction.instance"/>
             <file name="org-opensim-view-actions-FileCloseAction.instance"/>
-            <file name="org-opensim-view-actions-ViewAddNewAction.instance"/>
             <file name="org-opensim-view-base-SelectCameraAction.instance"/>
             <file name="org-opensim-view-base-ToggleAxesAction.instance">
                 <attr name="instanceClass" stringvalue="org.opensim.view.base.ToggleAxesAction"/>
