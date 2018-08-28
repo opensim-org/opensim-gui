@@ -60,17 +60,7 @@ import vtk.vtkMatrix4x4;
 public class ModelWindowVTKTopComponent extends TopComponent 
         implements ChangeListener {  // For sliders
     
-   class SetCameraAction extends AbstractAction {
-      private Camera camera;
-      public SetCameraAction(Camera camera) {
-         super((camera!=null) ? camera.getName() : "none");
-         this.camera = camera;
-      }
-      public void actionPerformed(ActionEvent evt) {
-         getCanvas().setCamera(camera);
-      }
-   }
-
+ 
    
     private boolean internalTrigger=false;
     private static final long serialVersionUID = 1L;
@@ -502,7 +492,7 @@ public class ModelWindowVTKTopComponent extends TopComponent
 
     private void jPlusXViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPlusXViewButtonActionPerformed
 // TODO add your handling code here:
-        openSimCanvas1.applyCameraPlusX();
+
         // correct selected modes
         deselectViewButtons();
         jPlusXViewButton.setSelected(true);
@@ -510,7 +500,7 @@ public class ModelWindowVTKTopComponent extends TopComponent
 
     private void jPlusYViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPlusYViewButtonActionPerformed
 // TODO add your handling code here:
-        openSimCanvas1.applyCameraPlusY();
+
         // correct selected modes
         deselectViewButtons();
         jPlusYViewButton.setSelected(true);
@@ -518,7 +508,7 @@ public class ModelWindowVTKTopComponent extends TopComponent
 
     private void jMinusZViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMinusZViewButtonActionPerformed
 // TODO add your handling code here:
-        openSimCanvas1.applyCameraMinusZ();
+
         // correct selected modes
         deselectViewButtons();
         jMinusZViewButton.setSelected(true);       
@@ -572,7 +562,7 @@ public class ModelWindowVTKTopComponent extends TopComponent
 
     private void jPlusZViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPlusZViewButtonActionPerformed
 // TODO add your handling code here:
-        openSimCanvas1.applyCameraPlusZ();
+
         // correct selected modes
         deselectViewButtons();
         jPlusZViewButton.setSelected(true);
@@ -580,7 +570,7 @@ public class ModelWindowVTKTopComponent extends TopComponent
 
     private void jMinusXViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMinusXViewButtonActionPerformed
 // TODO add your handling code here:
-        openSimCanvas1.applyCameraMinusX();
+
         // correct selected modes
         deselectViewButtons();
         jMinusXViewButton.setSelected(true);      
@@ -588,7 +578,7 @@ public class ModelWindowVTKTopComponent extends TopComponent
 
    private void jMinusYViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMinusYViewButtonActionPerformed
 // TODO add your handling code here:
-        openSimCanvas1.applyCameraMinusY();
+
         // correct selected modes
         deselectViewButtons();
         jMinusYViewButton.setSelected(true);    

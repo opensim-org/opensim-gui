@@ -42,7 +42,6 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.EventListenerList;
 import org.opensim.utils.Prefs;
 import org.opensim.utils.TheApp;
-import org.opensim.view.Camera;
 import org.opensim.view.pub.GeometryFileLocator;
 import org.opensim.view.pub.ViewDB;
 import vtk.vtkActor2D;
@@ -67,10 +66,8 @@ public class OpenSimBaseCanvas extends vtkPanel
    String defaultBackgroundColor="0.15, 0.15, 0.15";
    int    numAAFrames=0;
    JPopupMenu settingsMenu = new JPopupMenu();
-   CamerasMenu camerasMenu;
 
    double currentTime = 0;
-   Camera camera = null;
    vtkImageMapper logoMapper = new vtkImageMapper();
    // Enable opoups to display on top of heavy weight component/canvas
    static {
@@ -84,7 +81,6 @@ public class OpenSimBaseCanvas extends vtkPanel
       GetRenderer().SetBackground(background);
       //GetRenderer().EraseOff();
       //createSettingsMenu();
-      camerasMenu = new CamerasMenu(this);
       addKeyListener(this);
       addMouseWheelListener(this);
       addLogo();
@@ -145,92 +141,13 @@ public class OpenSimBaseCanvas extends vtkPanel
       char keyChar = e.getKeyChar();
       int keyCode = e.getKeyCode();
       
-      if ('x' == keyChar) {
-         applyCameraMinusX();
-      } else if ('y' == keyChar) {
-         applyCameraMinusY();
-      } else if ('z' == keyChar) {
-         applyCameraMinusZ();
-      } else if ('i' == keyChar) {
-         GetRenderer().GetActiveCamera().Zoom(1.05);
-         repaint();
-      } else if ('o' == keyChar) {
-         GetRenderer().GetActiveCamera().Zoom(0.95);
-         repaint();
-      } else if (KeyEvent.VK_LEFT == keyCode) {
-         panCamera(-5.0, 0.0);
-         repaint();
-      } else if (KeyEvent.VK_RIGHT == keyCode) {
-         panCamera(5.0, 0.0);
-         repaint();
-      } else if (KeyEvent.VK_UP == keyCode) {
-         panCamera(0.0, -5.0);
-         repaint();
-      } else if (KeyEvent.VK_DOWN == keyCode) {
-         panCamera(0.0, 5.0);
-         repaint();
-      }else if (KeyEvent.VK_J == keyCode) {
-         rotateCamera(5.0);
-         repaint();
-      }else if (KeyEvent.VK_K == keyCode) {
-         rotateCamera(-5.0);
-         repaint();
-      }
       fireStateChanged();
       super.keyPressed(e);
    }
    
-   public void applyCameraPlusY() {
-      applyCamera(camerasMenu.pickStandardCamera("Bottom"));
-   }
-   
-   public void applyCameraMinusY() {
-      applyCamera(camerasMenu.pickStandardCamera("Top"));
-   }
-   
-   public void applyCameraPlusZ() {
-      applyCamera(camerasMenu.pickStandardCamera("Left"));
-   }
-   
-   public void applyCameraMinusZ() {
-      applyCamera(camerasMenu.pickStandardCamera("Right"));
-   }
-   
-   public void applyCameraPlusX() {
-      applyCamera(camerasMenu.pickStandardCamera("Back"));
-   }
-   
-   public void applyCameraMinusX() {
-      applyCamera(camerasMenu.pickStandardCamera("Front"));
-   }
-
-   // Overrides vtkPanel.resetCamera() to reset camera on selected objects (if any)
-   public void resetCamera() {
-      Lock();
-      UnLock();
-   } 
       
    public void processKey(char keyChar){
-      if ('x' == keyChar) {
-         applyCameraMinusX();
-      } else if ('y' == keyChar) {
-         applyCameraMinusY();
-      } else if ('z' == keyChar) {
-         applyCameraMinusZ();
-      } else if ('i' == keyChar) {
-         GetRenderer().GetActiveCamera().Zoom(1.05);
-         repaint();
-      } else if ('o' == keyChar) {
-         GetRenderer().GetActiveCamera().Zoom(0.95);
-         repaint();
-      } else if ('j' == keyChar) {
-         rotateCamera(5.0);
-         repaint();
-      }else if ('k' == keyChar) {
-         rotateCamera(-5.0);
-         repaint();
-      }
-   }
+    }
    /**
     * A method to apply a prespecified Camera (selectedCamera) to the current Canvas
     */
@@ -258,38 +175,12 @@ public class OpenSimBaseCanvas extends vtkPanel
         currentCamera.SetParallelScale(selectedCamera.GetParallelScale());
     }
 
-   //========================================================================
-   // Methods for new (animatable) Camera class
-   //========================================================================
-
-   public void setCamera(Camera camera) {
-      System.out.println("OpenSimBaseCanvas.setCamera "+((camera!=null)?camera.getName():""));
-      this.camera = camera;
-      applyTime(currentTime);
-   }
-   public Camera getCamera() { return camera; }
-
    // TODO: really we should be querying the motion controller for the current time, but it's inaccessible from this package
    public double getCurrentTime() { return currentTime; }
-
-   public void applyCameraConfiguration(Camera.Configuration config, boolean doRepaint) {
-      config.applyToView(this);
-      vtkLightCollection lights = GetRenderer().GetLights();
-      lights.RemoveAllItems();
-      GetRenderer().CreateLight();
-      if(doRepaint) repaint();
-   }
   
    public void applyTime(double time) {
       // Cache time since we don't have direct access to the motion controller
       currentTime = time;
-
-      // if camera not null, apply modified camera
-      // if not animated camera, don't need to do anything (assume that when user switched to that
-      // nonanimated camera, the proper configuration was selected and that was good enough
-      if(camera!=null && camera.getNumKeyFrames()>0) {
-         applyCameraConfiguration(camera.getConfiguration(currentTime), false);
-      }
    } 
 
    // mouseEntered and being a MouseListener is done for the specific purpose

@@ -46,7 +46,6 @@ import org.opensim.utils.ApplicationState;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.TheApp;
 import org.opensim.view.actions.ApplicationExit;
-import org.opensim.view.base.OpenSimBaseCanvas;
 import org.opensim.view.editors.BodyNameEditor;
 import org.opensim.view.editors.FrameNameEditor;
 import org.opensim.view.motions.MotionsDB;

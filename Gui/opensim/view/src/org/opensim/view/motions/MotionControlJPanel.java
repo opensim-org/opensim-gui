@@ -96,15 +96,9 @@ public class MotionControlJPanel extends javax.swing.JToolBar
          } else {
             double speed = (double)(((Double)smodel.getValue()).doubleValue());
             double factor = (double)direction*1e-9*speed;
-            if (ViewDB.isVtkGraphicsAvailable() && org.opensim.view.OpenSimCanvas.movieWriterReady) { // check if movie is being written in any view
-                getMasterMotion().advanceTime(direction*speed/15.0); // vtkAVIWriter writes at 15 fps, so advance time by (speed/15) seconds
-                //System.out.println("writingMovie masterMotion current time = "+(masterMotion.getCurrentTime()));
-            }
-            else {
-                //System.out.println("Time since last call "+(currentTimeNano-lastActionTimeNano)+" ns");
-                getMasterMotion().advanceTime(factor*(currentTimeNano-lastActionTimeNano));
-                //System.out.println("             masterMotion current time = "+(masterMotion.getCurrentTime()));
-            }
+            //System.out.println("Time since last call "+(currentTimeNano-lastActionTimeNano)+" ns");
+            getMasterMotion().advanceTime(factor*(currentTimeNano-lastActionTimeNano));
+            //System.out.println("             masterMotion current time = "+(masterMotion.getCurrentTime()));
             lastActionTimeNano = currentTimeNano;
          }
 

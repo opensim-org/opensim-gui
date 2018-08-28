@@ -31,8 +31,6 @@ package org.opensim.view.pub;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import org.opensim.view.ModelWindowVTKTopComponent;
-import vtk.vtkMatrix4x4;
 
 /**
  *
@@ -56,13 +54,7 @@ public class ViewDBDescriptor implements Serializable {
     
     public ViewDBDescriptor(ViewDB viewDB) {
         Object[] views = viewDB.getOpenWindows();
-        for (int i=0; i< views.length; i++){
-            if (!(views[i] instanceof ModelWindowVTKTopComponent))
-                continue;
-            ModelWindowVTKTopComponent view = (ModelWindowVTKTopComponent) views[i];
-            getViewNames().add(view.getDisplayName());
-            getCameraAttributes().add(view.getCameraAttributes());
-         }
+
     }
 
     public ArrayList<String> getViewNames() {
