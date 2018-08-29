@@ -41,7 +41,6 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.UUID;
 import java.util.Vector;
-import javax.swing.SwingUtilities;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
@@ -67,17 +66,12 @@ import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.TheApp;
 import org.opensim.view.*;
-import vtk.AxesActor;
 import vtk.FrameActor;
 import vtk.vtkActor;
 import vtk.vtkActor2D;
 import vtk.vtkAssembly;
-import vtk.vtkCamera;
-import vtk.vtkCaptionActor2D;
 import vtk.vtkProp3D;
 import vtk.vtkProp3DCollection;
-import vtk.vtkTextActor;
-import vtk.vtkTextProperty;
 
 
 /**
@@ -264,11 +258,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    
    static boolean useImmediateModeRendering = false; // Use Render instead of paint
    private ArrayList<SelectedObject> selectedObjects = new ArrayList<SelectedObject>(0);
-   private Hashtable<Selectable, vtkCaptionActor2D> selectedObjectsAnnotations = new Hashtable<Selectable, vtkCaptionActor2D>(0);
    private Hashtable<ModelVisualizationJson, Path> modelVisToJsonFilesMap = new Hashtable<ModelVisualizationJson, Path>();
-   private AxesActor     axesAssembly=null;
-   private boolean axesDisplayed=false;
-   private vtkTextActor textActor=null; 
    
    private boolean picking = false;
    private boolean query = false;
@@ -896,31 +886,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     */
    private void createScene() {
       sceneAssembly = new vtkAssembly();
-      axesAssembly = new AxesActor();
-      textActor= new vtkTextActor();
    }
    
-   public void showAxes(boolean trueFalse) {
-      if (trueFalse)
-         addObjectToScene(axesAssembly);
-      else
-         removeObjectFromScene(axesAssembly);
-      setAxesDisplayed(trueFalse);
-   }
-   
-   public void setTextCamera(vtkCamera camera) {
-       if (isAxesDisplayed()){
-           axesAssembly.setCamera(camera);
-       }
-   }
-   
-   public boolean isAxesDisplayed() {
-      return axesDisplayed;
-   }
-   
-   public void setAxesDisplayed(boolean axesDisplayed) {
-      this.axesDisplayed = axesDisplayed;
-   }
    
    /**
     * Search the list of displayed models for the passed in model and if found return
@@ -1011,7 +978,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       } else {
          toggleObjectDisplay(openSimObject, visible);
       }
-      updateAnnotationAnchors(); // in case object had annotations
    }
 
    public void toggleObjectDisplay(OpenSimObject openSimObject, boolean visible) {
@@ -1396,33 +1362,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         if (!mapModelsToJsons.containsKey(model))
             mapModelsToJsons.put(model, modelJson);
     }
-
-    public void setQuery(boolean enabled) {
-        query=enabled;
-        //System.out.println("Annotation "+(enabled?"On":"Off"));
-        // remove captions if disabling
-        if (!enabled){
-            Iterator<vtkCaptionActor2D> captions=selectedObjectsAnnotations.values().iterator();
-            vtkCaptionActor2D nextCaption;
-            while (captions.hasNext()){
-                nextCaption = captions.next();
-                removeAnnotationFromViews(nextCaption);
-            }
-            selectedObjectsAnnotations.clear();
-            getInstance().repaintAll();
-        }
-    }
-
-    public void removeAnnotationFromViews(final vtkActor2D nextCaption) {
-    }
-
-    public boolean isQuery() {
-        return query;
-    }
-
-    public void updateAnnotationAnchors() {
-        // For each Anotated object, update anchor point as needed
-    }
     // Change orientation based on passed in 3 Rotations, used to visualize mocap data
     public void setOrientation(Model model, Vec3 rotVec3) {
         if (websocketdb!=null){
@@ -1435,16 +1374,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         }          
     }
 
-
-    private vtkCaptionActor2D getAnnotation(Selectable selectedObject) {
-        Iterator<Selectable> selectedObjsIter = selectedObjectsAnnotations.keySet().iterator();
-        while(selectedObjsIter.hasNext()){
-            Selectable nextObject=  selectedObjsIter.next();
-            if (nextObject==selectedObject)
-                return selectedObjectsAnnotations.get(selectedObject);
-        }
-        return null;
-    }
     /** Debugging */
     public int getDebugLevel() {
         return debugLevel;
@@ -1490,16 +1419,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
            repaintAll();        
     }
 
-    public void removeObjectAnnotationFromViews(vtkCaptionActor2D caption) {
-        // Cycle thru array and remove Caption if warranted
-        Iterator<vtkCaptionActor2D> captions=selectedObjectsAnnotations.values().iterator();
-        vtkCaptionActor2D nextCaption;
-        while (captions.hasNext()){
-            nextCaption = captions.next();
-            if (nextCaption.equals(caption))
-                removeAnnotationFromViews(nextCaption);
-        }
-    }
 
     public static boolean isVtkGraphicsAvailable() {
         return false;
