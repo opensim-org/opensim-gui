@@ -604,7 +604,6 @@ public class MotionDisplayer {
           states=simmMotionData.getStateVector(currentFrame);
       
       applyStatesToModel(states.getData(), states.getTime());
-      ViewDB.getInstance().updateAnnotationAnchors();
       if (profile) {
           after=System.nanoTime();
           System.out.println("applyFrameToModel time: "+1e-6*(after-before)+" ms");

@@ -66,12 +66,6 @@ import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.TheApp;
 import org.opensim.view.*;
-import vtk.FrameActor;
-import vtk.vtkActor;
-import vtk.vtkActor2D;
-import vtk.vtkAssembly;
-import vtk.vtkProp3D;
-import vtk.vtkProp3DCollection;
 
 
 /**
@@ -85,7 +79,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    // List of models currently available in all views
    private static ArrayList<Boolean> saveStatus = new ArrayList<Boolean>(4);
    // One single vtAssemby for the whole Scene
-   private static vtkAssembly sceneAssembly;
    private static WebSocketDB websocketdb;
    private static JSONObject jsondb;
    private SelectedObject selectInVisualizer = null;
@@ -512,27 +505,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
    }
    /**
-    * Decide if a new window is needed to be created. Right now this's done only first time the application
-    * is started. This may need to be change when a new project is opened
-    */
-   private void createNewViewWindowIfNeeded() {
-   }
-   /**
-    * Add an arbitrary Object to the scene (all views)
-    */
-   public void addObjectToScene(vtkProp3D aProp) {
-      sceneAssembly.AddPart(aProp);
-      repaintAll();
-   }
-   
-   /**
-    * Remove an arbirary Object from the scene (all views)
-    */
-   public void removeObjectFromScene(vtkProp3D aProp) {
-      sceneAssembly.RemovePart(aProp);
-      repaintAll();
-   }
-   /**
     * Return a flag indicating whether the model is currently shown or hidden
     */
    public boolean getDisplayStatus(Model m) {
@@ -565,67 +537,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       renderAll();
    }
    
-   public void applyColor(final double[] colorComponents, final vtkProp3D asm, boolean allowUndo) {
-       AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
-           public boolean canUndo() {
-               return true;
-           }
-           public boolean canRedo() {
-               return true;
-           }
-           public void undo() throws CannotUndoException {
-               super.undo();
-               final double[] white=new double[]{1., 1., 1.};
-               applyColor(white, asm, false);
-           }
-           public void redo() throws CannotRedoException {
-               super.redo();
-               applyColor(colorComponents, asm, true);
-           }
-
-           @Override
-           public String getRedoPresentationName() {
-               return "Redo Color change";
-            }
-
-           @Override
-           public String getUndoPresentationName() {
-               return "Undo Color change";
-           }
-           
-       };
-       if (allowUndo)
-            ExplorerTopComponent.addUndoableEdit(auEdit);
-
-       ApplyFunctionToActors(asm, new ActorFunctionApplier() {
-         public void apply(vtkActor actor) { 
-             if (!(actor instanceof FrameActor)){
-                actor.GetProperty().SetColor(colorComponents);
-                actor.Modified();
-             }
-         }});
-      renderAll();
-   }
-   
-   public void setNominalModelOpacity(OpenSimObject object, double newOpacity)
-   {
-      if (object instanceof Model){
-         modelOpacities.put((Model)object, newOpacity);
-         double vtkOpacity= newOpacity;
-         if (object.equals(getCurrentModel())){
-         }
-         else {
-            vtkOpacity *= getNonCurrentModelOpacity();
-         }
-         setObjectOpacity(object, vtkOpacity);            
-      }
-   }
-   
-   public double getNominalModelOpacity(Model modelObject)
-   {
-      return modelOpacities.get(modelObject);
-   }
-
    /**
     * Set the Opacity of the passed in object to newOpacity
     */
@@ -635,12 +546,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
           ((Geometry)object).setOpacity(newOpacity);    
    }
    
-   //-----------------------------------------------------------------------------
-   private static void applyOpacity( final double newOpacity, final vtkProp3D asm ) {
-      ViewDB.ApplyFunctionToActors( asm, new ActorFunctionApplier() {
-         public void apply(vtkActor actor) { actor.GetProperty().SetOpacity(newOpacity); }});
-      
-   }
    /**
     * Remove items from selection list which belong to the given model
     */
@@ -880,14 +785,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       }
    }
 
-   /**
-    * createScene is invoked once to create the assembly representing the scene
-    * that models attach to. If all windows are closed then this function will not be called again.
-    */
-   private void createScene() {
-      sceneAssembly = new vtkAssembly();
-   }
-   
    
    /**
     * Search the list of displayed models for the passed in model and if found return
@@ -1273,37 +1170,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             websocketdb.broadcastMessageJson(currentJson.createRemoveObjectCommand(object2Remove, parentObject), null);
         }
     }
-
-   /**
-    * Utility: apply a function to given actor, or to all actors in assembly.
-    */
-   interface ActorFunctionApplier {
-      public void apply(vtkActor actor);
-   }
-   public static void ApplyFunctionToActors(vtkProp3D asm, ActorFunctionApplier functionApplier)
-   {
-      if (asm==null) return;
-      if (asm instanceof vtkAssembly){
-         vtkProp3DCollection parts = ((vtkAssembly)asm).GetParts();
-         parts.InitTraversal();
-         for (;;) {
-            vtkProp3D prop = parts.GetNextProp3D();
-            if (prop==null) break;
-            else ApplyFunctionToActors(prop, functionApplier); // recur on prop (may be nested assembly?)
-         }
-      } else if (asm instanceof vtkActor){
-         functionApplier.apply((vtkActor)asm);
-      }
-   }
-
-   public double getNonCurrentModelOpacity() {
-         return nonCurrentModelOpacity;
-   }
-
-   public void setNonCurrentModelOpacity(double nonCurrentModelOpacity) {
-      this.nonCurrentModelOpacity = nonCurrentModelOpacity;
-      TheApp.getCurrentVersionPreferences().get("Internal.NonCurrentModelOpacity", String.valueOf(nonCurrentModelOpacity));
-   }
    /**
     * Show only the passed in model and hide all others.
     */
