@@ -183,8 +183,8 @@ public class Installer extends ModuleInstall {
          String muscleRadius = "8";
          saved = TheApp.getCurrentVersionPreferences().get("Visualizer: Muscle Display Radius (mm)", muscleRadius);
          TheApp.getCurrentVersionPreferences().put("Visualizer: Muscle Display Radius (mm)", saved);
-
-         String experimentalMarkerDisplayScaleStr="5.0";
+         // The following value should stay the same as the value in MotionDisplayer constructor
+         String experimentalMarkerDisplayScaleStr="10";
          saved=TheApp.getCurrentVersionPreferences().get("Visualizer: Experimental Marker Radius (mm)", experimentalMarkerDisplayScaleStr);
          TheApp.getCurrentVersionPreferences().put("Visualizer: Experimental Marker Radius (mm)", saved);
          
