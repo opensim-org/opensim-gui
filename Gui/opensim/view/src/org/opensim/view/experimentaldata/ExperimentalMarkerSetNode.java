@@ -156,7 +156,7 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }
         motionDisplayer.setDefaultExperimentalMarkerColor(color);
-        ViewDB.repaintAll();
+        
         refreshNode();
     }
     public void setColorUI(final Color color) {
@@ -195,7 +195,7 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }       
         motionDisplayer.setExperimentalMarkerRadius(newRadius);
-        ViewDB.repaintAll();
+        
         refreshNode();
     }
 

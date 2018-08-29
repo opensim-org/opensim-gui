@@ -179,7 +179,6 @@ public final class ParametersTopComponent extends TopComponent
 
     private void resetViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetViewButtonActionPerformed
 // TODO add your handling code here:
-        ViewDB.getCurrentModelWindow().applyCameraAttributes(cameraAttributes);
     }//GEN-LAST:event_resetViewButtonActionPerformed
 
     private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed

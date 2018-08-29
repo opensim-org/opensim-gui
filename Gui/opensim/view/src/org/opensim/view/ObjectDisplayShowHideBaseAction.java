@@ -91,7 +91,7 @@ public abstract class ObjectDisplayShowHideBaseAction extends ObjectAppearanceCh
             this.applyOperationToNode( nextNode );
       }
       ViewDB.getInstance().setApplyAppearanceChange(true);
-      ViewDB.getInstance().repaintAll();
+      
    }
 
     //-------------------------------------------------------------------------

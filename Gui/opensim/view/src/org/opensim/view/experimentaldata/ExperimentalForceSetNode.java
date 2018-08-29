@@ -157,7 +157,7 @@ public class ExperimentalForceSetNode extends OpenSimNode {
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }
         motionDisplayer.setDefaultForceColor(color);
-        ViewDB.repaintAll();
+        
         refreshNode();
     }
     public void setColorUI(final Color color) {
@@ -195,7 +195,7 @@ public class ExperimentalForceSetNode extends OpenSimNode {
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }       
         motionDisplayer.setExperimentalForceScaleFactor(newFactor);
-        ViewDB.repaintAll();
+        
         refreshNode();
     }
 

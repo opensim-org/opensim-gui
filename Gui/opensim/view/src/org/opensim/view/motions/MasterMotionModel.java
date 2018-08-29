@@ -178,7 +178,7 @@ public class MasterMotionModel {
      displayers.clear();
      superMotionTimes.clear();  
      setTime(0);
-     ViewDB.getInstance().repaintAll();
+     
    }
 
    // TODO: get rid of third argument

@@ -53,7 +53,6 @@ public class ViewDBDescriptor implements Serializable {
     }
     
     public ViewDBDescriptor(ViewDB viewDB) {
-        Object[] views = viewDB.getOpenWindows();
 
     }
 

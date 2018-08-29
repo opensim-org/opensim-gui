@@ -157,7 +157,7 @@ public class MarkersNode extends OpenSimObjectSetNode {
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }
         markersDisplayer.setColor(color);
-        ViewDB.repaintAll();
+        
         refreshNode();
     }
     public void setColorUI(final Color color) {
@@ -194,7 +194,7 @@ public class MarkersNode extends OpenSimObjectSetNode {
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }       
         markersDisplayer.setScaleFactor(newFactor);
-        ViewDB.repaintAll();
+        
         refreshNode();
     }
 

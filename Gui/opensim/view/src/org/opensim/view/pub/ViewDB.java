@@ -84,13 +84,10 @@ import vtk.vtkTextProperty;
  *
  * @author Ayman Habib
  *
- * A Database of Displayed models, and displayed windows ModelWindowVTKTopComponents
- * Also keeps track of currently activated model window ModelWindowVTKTopComponent
+ * A Database of Displayed models
  */
 public final class ViewDB extends Observable implements Observer, LookupListener {
 
-   // List of view windows currently displayed
-   static ArrayList<ModelWindowVTKTopComponent> openWindows = new ArrayList<ModelWindowVTKTopComponent>(4);
    // List of models currently available in all views
    private static ArrayList<Boolean> saveStatus = new ArrayList<Boolean>(4);
    // One single vtAssemby for the whole Scene
@@ -261,10 +258,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    private Hashtable<Model, Double> modelOpacities = new Hashtable<Model, Double>();
    
    static ViewDB instance=null;
-   private static boolean graphicsAvailable = true;
-   // Window currently designated as current.
-   private static ModelWindowVTKTopComponent currentModelWindow=null;
-   
+  
    // Flag indicating whether new models are open in a new window or in the same window
    static boolean openModelInNewWindow=true;
    
@@ -334,18 +328,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     public synchronized void setChanged() {
         super.setChanged();
     }
-    
-   public static ModelWindowVTKTopComponent getCurrentModelWindow() {
-      return currentModelWindow;
-   }
-   /**
-    * Keep track of current view window so that dialogs are cenetred on top of it if necessary.
-    * Just a handy window to use.
-    */
-   public static void setCurrentModelWindow(ModelWindowVTKTopComponent aCurrentModelWindow) {
-      currentModelWindow = aCurrentModelWindow;
-   }
-   
+  
    /**
     * update Method is called whenever a model is added, removed and/or moved in the GUI
     * Observable should be of type OpenSimDB.
@@ -423,12 +406,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             if (ev.getOperation()==ModelEvent.Operation.Open){
                Model evModel = ev.getModel();
                processSavedSettings(evModel);
-                try {
-                 createNewViewWindowIfNeeded();
-               }
-               catch(UnsatisfiedLinkError e){
-                   setGraphicsAvailable(false);
-               }
                if (websocketdb!=null){
                    // create Json for model
                    //This will be invoked only when visualizer windows are already open
@@ -534,89 +511,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         if (repaint)
            repaintAll();
     }
-
-    private void addVisObjectToAllViews() {
-        //From here on we're adding things to display so we better lock
-        
-        if (sceneAssembly==null){
-           createScene();
-           // Add assembly to all views
-           Iterator<ModelWindowVTKTopComponent> windowIter = openWindows.iterator();
-           while(windowIter.hasNext()){
-              ModelWindowVTKTopComponent nextWindow = windowIter.next();
-              nextWindow.getCanvas().GetRenderer().AddViewProp(sceneAssembly);
-           }
-           //createXLabel();
-        }
-    }
-   
-   /**
-    * removeWindow removes the passed in window form the list of windows maintaiined
-    * by ViewDB
-    **/
-   public void removeWindow(ModelWindowVTKTopComponent modelWindowVTKTopComponent) {
-      openWindows.remove(modelWindowVTKTopComponent);
-   }
-   /**
-    * Add a new Viewing. window
-    * This executes in the Swing thread.
-    */
-   public void addViewWindow() {
-       try {
-        addViewWindow(null);
-       }
-       catch(UnsatisfiedLinkError e){
-           setGraphicsAvailable(false);
-       }
-   }
-   
-   public ModelWindowVTKTopComponent addViewWindow(String desiredName) {
-      // Create the window
-      final ModelWindowVTKTopComponent win = new ModelWindowVTKTopComponent();
-      // Fix name
-      if (desiredName==null){
-          int ct=0;
-          while(!ViewDB.getInstance().checkValidViewName(win.getDisplayName(), win)){
-             win.setTabDisplayName(NbBundle.getMessage(
-                     ModelWindowVTKTopComponent.class,
-                     "UnsavedModelNameFormat",
-                     new Object[] { new Integer(ct++) }
-             ));
-          };
-      }
-      else
-          win.setTabDisplayName(desiredName);
-      
-      if (getCurrentModelWindow()!=null){    // Copy camera from 
-          vtkCamera lastCamera=getCurrentModelWindow().getCanvas().GetRenderer().GetActiveCamera();
-          win.getCanvas().applyOrientation(lastCamera);
-            getCurrentModelWindow().getCanvas().GetRenderer().AddActor2D(textActor);
-      }
-      if (SwingUtilities.isEventDispatchThread()){
-          win.open();
-          win.requestActive();
-          setCurrentModelWindow(win);
-          // Open it and make it active
-          openWindows.add(win);
-          win.getCanvas().GetRenderer().AddViewProp(sceneAssembly);
-          repaintAll();
-      }
-      else {
-          SwingUtilities.invokeLater(new Runnable(){
-                public void run() {
-                  win.open();
-                  win.requestActive();
-                  setCurrentModelWindow(win);
-                  // Open it and make it active
-                  openWindows.add(win);
-                  win.getCanvas().GetRenderer().AddViewProp(sceneAssembly);
-                  repaintAll();
-                }});
-      }
-      // If the user manually added a new view, we won't need to automatically create a new one when model is loaded.
-      openModelInNewWindow=false;
-      return win;
-   }
    /**
     * Helper function to implement model hide/show.
     *
@@ -663,20 +557,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     * Cycle through displayed windows and repaint them
     */
    public static void repaintAll() {
-      Iterator<ModelWindowVTKTopComponent> windowIter = openWindows.iterator();
-      while( windowIter.hasNext() ){
-         if( useImmediateModeRendering )
-            windowIter.next().getCanvas().Render();
-         else
-            windowIter.next().getCanvas().repaint();
-      }
    }
 
    public static void renderAll() {
-      Iterator<ModelWindowVTKTopComponent> windowIter = openWindows.iterator();
-      while(windowIter.hasNext()){
-         windowIter.next().getCanvas().Render();
-      }
    }
    
    /**
@@ -766,7 +649,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    private static void applyOpacity( final double newOpacity, final vtkProp3D asm ) {
       ViewDB.ApplyFunctionToActors( asm, new ActorFunctionApplier() {
          public void apply(vtkActor actor) { actor.GetProperty().SetOpacity(newOpacity); }});
-      ViewDB.repaintAll();
+      
    }
    /**
     * Remove items from selection list which belong to the given model
@@ -871,19 +754,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       }
    }
    
-    public void addObjectAnnotationToViews(final vtkCaptionActor2D theCaption, OpenSimObject dObject) {
-        addAnnotationToViews(theCaption);
-        selectedObjectsAnnotations.put(new SelectedObject(dObject),theCaption);
-    }
-    public void addAnnotationToViews(final vtkActor2D theCaption) {
-        // Add caption to all windows
-        Iterator<ModelWindowVTKTopComponent> windowIter = openWindows.iterator();
-        while(windowIter.hasNext()){
-           ModelWindowVTKTopComponent nextWindow = windowIter.next();
-           nextWindow.getCanvas().GetRenderer().AddActor2D(theCaption);
-        }
-    }
-   
    public ArrayList<SelectedObject> getSelectedObjects() {
       return selectedObjects;
    }
@@ -978,25 +848,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       return (findObjectInSelectedList(obj) >= 0);
    }
 
-   /**
-    * Check if the name passed in is a valid name for a display window (no duplicates
-    * for now, until a more restricted naming is needed
-    *
-    * returns true if newName is a valid name for the passed in view, false otherwise
-    */
-   public boolean checkValidViewName(String newName, ModelWindowVTKTopComponent view) {
-      boolean valid = true;
-      Iterator<ModelWindowVTKTopComponent> windowIter = openWindows.iterator();
-      while(windowIter.hasNext() && valid){
-         ModelWindowVTKTopComponent nextWindow = windowIter.next();
-         String nextWindowName = nextWindow.getDisplayName();
-         if(nextWindowName.equalsIgnoreCase(newName)){
-            valid = (view.equals(nextWindow));
-         }
-      }
-      return valid;
-   }
-   
     public void setModelOffset(ModelVisualizationJson modelJson, Vec3 offsetVec3) {        
         if (websocketdb!=null){
             JSONObject guiJson = new JSONObject();
@@ -1116,11 +967,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
 
    public void applyTimeToViews(double time) {
-      Iterator<ModelWindowVTKTopComponent> windowIter = openWindows.iterator();
-      while(windowIter.hasNext()){
-         ModelWindowVTKTopComponent nextWindow = windowIter.next();
-         nextWindow.getCanvas().applyTime(time);
-      }
    }
 
    /**
@@ -1348,14 +1194,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
       notifyObservers(evnt);
    }
 
-   private void lockDrawingSurfaces(boolean toLock) {
-      Iterator<ModelWindowVTKTopComponent> windowIter = openWindows.iterator();
-      while(windowIter.hasNext()){
-         ModelWindowVTKTopComponent nextWindow = windowIter.next();
-         nextWindow.getCanvas().lockDrawingSurface(toLock);
-      }
-   }
-
 /*
  * Functions to deal with saved "Settings"
  * processSavedSettings parses the [modelFileWithoutExtension]_settings.xml file
@@ -1548,78 +1386,16 @@ public final class ViewDB extends Observable implements Observer, LookupListener
          else 
              return 1.0;     
     }
-    public Object[] getOpenWindows() {
-        return openWindows.toArray();
-    }
+
 
     public void rebuild(ViewDBDescriptor desc) {
         // Create a new window per view and give it the specified name
-        int restoredNumViews = desc.getViewNames().size();
-        if (restoredNumViews==0){
-            ViewDB.getInstance().removeWindow(getInstance().getCurrentModelWindow());   // Could return here or try to salvage cameras and offsets.
-            return;
-        }
-        for(int viewnum=0; viewnum<restoredNumViews; viewnum++){   // Reuse window we create by default for first model
-            final String nm = desc.getViewNames().get(viewnum);
-            if (viewnum >0){
-                ModelWindowVTKTopComponent win = getInstance().addViewWindow(nm);
-                win.applyCameraAttributes(desc.getCameraAttributes().get(viewnum));
-            }
-            else {  // We'll justrename existing view'
-                final ModelWindowVTKTopComponent win = getInstance().getCurrentModelWindow();
-                if (win ==null) continue;
-                if (desc.getCameraAttributes().size()==0) continue;
-                win.applyCameraAttributes(desc.getCameraAttributes().get(viewnum));
-                SwingUtilities.invokeLater(new Runnable(){
-                public void run() {
-                    win.setTabDisplayName(nm);
-                }});
-            }           
-        }
-        repaintAll();
     }
 
     public void addModelVisuals(Model model, ModelVisualizationJson modelJson) {
         if (!mapModelsToJsons.containsKey(model))
             mapModelsToJsons.put(model, modelJson);
     }
-    
-    public void displayText(String text, int forntSize){
-        textActor.SetInput(text);
-        vtkTextProperty tprop = textActor.GetTextProperty();
-        tprop.SetFontFamilyToArial();
-        tprop.SetLineSpacing(1.0);
-        tprop.SetFontSize(forntSize);
-        //System.out.println("Text Color="+getDefaultTextColor());
-        tprop.SetColor(getDefaultTextColor());
-        textActor.SetDisplayPosition( 50, 50 );
-        Iterator<ModelWindowVTKTopComponent> windowIter = openWindows.iterator();
-        while(windowIter.hasNext()){
-            ModelWindowVTKTopComponent nextWindow = windowIter.next();
-            nextWindow.getCanvas().GetRenderer().AddActor2D(textActor);
-        }
-    }
-    
-
-    /*
-    // Test function to show text billboarding
-    private void createXLabel()
-    {
-        vtkVectorText XText=new vtkVectorText();
-        XText.SetText("X");
-        vtkPolyDataMapper XTextMapper=new vtkPolyDataMapper();
-        XTextMapper.SetInputConnection(XText.GetOutputPort());
-        vtkFollower XActor=new vtkFollower();
-        XActor.SetMapper(XTextMapper);
-        XActor.SetScale(.5, .5, .5);
-        XActor.SetPosition(0.1, .2, .3);
-        XActor.GetProperty().SetColor(.1, .2, .3);
-        vtkCamera lastCamera=new vtkCamera();
-        if (currentModelWindow!=null)    // need a camera for the follower! 
-          lastCamera=currentModelWindow.getCanvas().GetRenderer().GetActiveCamera();
-        XActor.SetCamera(lastCamera);
-        sceneAssembly.AddPart(XActor);
-    }*/
 
     public void setQuery(boolean enabled) {
         query=enabled;
@@ -1638,11 +1414,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
 
     public void removeAnnotationFromViews(final vtkActor2D nextCaption) {
-        Iterator<ModelWindowVTKTopComponent> windowIter = openWindows.iterator();
-        while(windowIter.hasNext()){
-           ModelWindowVTKTopComponent nextWindow = windowIter.next();
-           nextWindow.getCanvas().GetRenderer().RemoveActor2D(nextCaption);
-        }
     }
 
     public boolean isQuery() {
@@ -1664,18 +1435,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         }          
     }
 
-    private void removeAnnotationObjects(Model dModel) {
-        Iterator<Selectable> selectedObjsIter = selectedObjectsAnnotations.keySet().iterator();
-        while(selectedObjsIter.hasNext()){
-            Selectable nextObject=  selectedObjsIter.next();
-            
-            if (nextObject.getOwnerModel().equals(dModel)){
-                vtkCaptionActor2D caption=selectedObjectsAnnotations.get(nextObject);
-                getCurrentModelWindow().getCanvas().GetRenderer().RemoveActor2D(caption);
-                selectedObjsIter.remove();
-            }            
-        }
-    }
 
     private vtkCaptionActor2D getAnnotation(Selectable selectedObject) {
         Iterator<Selectable> selectedObjsIter = selectedObjectsAnnotations.keySet().iterator();
@@ -1746,10 +1505,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         return false;
     }
 
-    public static void setGraphicsAvailable(boolean aGraphicsAvailable) {
-        graphicsAvailable = aGraphicsAvailable;
-        
-    }
     public static void printBounds(String name, double[] bodyBounds) {
         System.out.print("Bounds for "+name+" are:[");
         for(int i=0; i<6; i++)

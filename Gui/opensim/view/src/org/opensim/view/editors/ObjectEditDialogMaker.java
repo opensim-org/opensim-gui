@@ -72,7 +72,7 @@ public class ObjectEditDialogMaker {
     /**
      * Just review, no edit
      *
-     * @todo handle the case of null owner (if no ModelWindowVTKTopComponent is open)
+     * @todo handle the case of null owner 
      */
     public ObjectEditDialogMaker(OpenSimObject object) {
         this(object, false, "OK");

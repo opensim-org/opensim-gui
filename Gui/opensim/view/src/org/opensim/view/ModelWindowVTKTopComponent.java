@@ -50,9 +50,7 @@ import org.opensim.utils.FileUtils;
 import org.opensim.utils.Prefs;
 import org.opensim.utils.TheApp;
 import org.opensim.view.pub.ViewDB;
-import vtk.vtkCamera;
-import vtk.vtkFileOutputWindow;
-import vtk.vtkMatrix4x4;
+
 
 /**
  * Top component which displays something.
@@ -72,15 +70,6 @@ public class ModelWindowVTKTopComponent extends TopComponent
     public ModelWindowVTKTopComponent() {
         initComponents();
         setComponentZOrder(toolBarPanel1, 0);
-        setComponentZOrder(openSimCanvas1, 1);
-        
-        openSimCanvas1.addChangeListener(this);
-        
-        setTabDisplayName(NbBundle.getMessage(
-                        ModelWindowVTKTopComponent.class,
-                        "UnsavedModelNameFormat",
-                        new Object[] { new Integer(ct++) }
-                ));
         
         WindowManager.getDefault().invokeWhenUIReady(new Runnable(){
             public void run() {
@@ -89,13 +78,6 @@ public class ModelWindowVTKTopComponent extends TopComponent
         
         // Set preferred directory for the TopComponent (to be used for all saving, loading, ...
         prefs = TheApp.getCurrentVersionPreferences();
-        
-        synchronizeBackgroundColor();
-                
-        vtkFileOutputWindow fow = new vtkFileOutputWindow();
-        fow.SetFileName("vtklog.log");
-        if (fow != null)
-           fow.SetInstance(fow);
     }
     /** This method is called from within the constructor to
      * initialize the form.
@@ -107,7 +89,6 @@ public class ModelWindowVTKTopComponent extends TopComponent
         java.awt.GridBagConstraints gridBagConstraints;
 
         jRefitModelButton = new javax.swing.JButton();
-        openSimCanvas1 = new org.opensim.view.OpenSimCanvas();
         toolBarPanel1 = new java.awt.Panel();
         jModelWindowToolBar = new javax.swing.JToolBar();
         jBackgroundColorButton = new javax.swing.JButton();
@@ -134,22 +115,6 @@ public class ModelWindowVTKTopComponent extends TopComponent
         setDoubleBuffered(true);
         setMinimumSize(new java.awt.Dimension(20, 20));
         setLayout(new java.awt.GridBagLayout());
-
-        openSimCanvas1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                openSimCanvas1MousePressed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        add(openSimCanvas1, gridBagConstraints);
 
         toolBarPanel1.setBackground(new java.awt.Color(224, 223, 227));
 
@@ -451,7 +416,7 @@ public class ModelWindowVTKTopComponent extends TopComponent
     private void openSimCanvas1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openSimCanvas1MousePressed
 // TODO add your handling code here:
         if ((evt.getModifiers() == (InputEvent.BUTTON1_MASK))) {
-            deselectViewButtons();
+
         }
     }//GEN-LAST:event_openSimCanvas1MousePressed
 
@@ -460,20 +425,7 @@ public class ModelWindowVTKTopComponent extends TopComponent
 
     private void jBackgroundColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBackgroundColorButtonActionPerformed
 // TODO add your handling code here:
-        JColorChooser backgroundColorChooser = new JColorChooser();
-        OpenSimCanvas dCanvas = ViewDB.getInstance().getCurrentModelWindow().getCanvas();
-        Color newColor = backgroundColorChooser.showDialog(dCanvas, "Select new background color", dCanvas.getBackground());
-        if (newColor != null){
-             float[] colorComponents = newColor.getRGBComponents(null);
-             dCanvas.GetRenderer().SetBackground(colorComponents[0], colorComponents[1], colorComponents[2]);
-             String defaultBackgroundColor=String.valueOf(colorComponents[0])+", "+
-                     String.valueOf(colorComponents[1])+", "+
-                     String.valueOf(colorComponents[2]);
-             //TheApp.getCurrentVersionPreferences().put("BackgroundColor", defaultBackgroundColor);
-             synchronizeBackgroundColor();
-             dCanvas.updateLogoForBackgoundColor();
-             dCanvas.repaint();
-        }
+
     }//GEN-LAST:event_jBackgroundColorButtonActionPerformed
 
     private void jAxesToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAxesToggleButtonActionPerformed
@@ -493,24 +445,19 @@ public class ModelWindowVTKTopComponent extends TopComponent
     private void jPlusXViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPlusXViewButtonActionPerformed
 // TODO add your handling code here:
 
-        // correct selected modes
-        deselectViewButtons();
         jPlusXViewButton.setSelected(true);
     }//GEN-LAST:event_jPlusXViewButtonActionPerformed
 
     private void jPlusYViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPlusYViewButtonActionPerformed
 // TODO add your handling code here:
 
-        // correct selected modes
-        deselectViewButtons();
+
         jPlusYViewButton.setSelected(true);
     }//GEN-LAST:event_jPlusYViewButtonActionPerformed
 
     private void jMinusZViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMinusZViewButtonActionPerformed
 // TODO add your handling code here:
 
-        // correct selected modes
-        deselectViewButtons();
         jMinusZViewButton.setSelected(true);       
     }//GEN-LAST:event_jMinusZViewButtonActionPerformed
 
@@ -520,67 +467,23 @@ public class ModelWindowVTKTopComponent extends TopComponent
 
     private void jStartStopMovieToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStartStopMovieToggleButtonActionPerformed
 // TODO add your handling code here:
-        javax.swing.JToggleButton btn = (javax.swing.JToggleButton) (evt.getSource());
-        String saved = "";//TheApp.getCurrentVersionPreferences().get("Save Movie Frames", "Off");
-        boolean saveFramesOnly = saved.equalsIgnoreCase("On");
-        if (btn.getModel().isSelected()) {
-            String fileName = null;
-            if (saveFramesOnly) {
-                fileName = FileUtils.getInstance().browseForFolder("Folder to save movie frames", false);
-                if (fileName != null && !(new File(fileName).exists())) {
-                    boolean exists = false;
-                    if (!exists) {
-                        DialogDisplayer.getDefault().notify(
-                                new NotifyDescriptor.Message("Directory " + fileName + " does not exist, please create it first."));
-                        fileName = null;
-                    }
-                }
-
-            } else {
-                fileName = FileUtils.getInstance().browseForFilename(".avi", "Movie file to create", false);
-            }
-            //System.out.println("Create movie to file"+fileName);
-            if (fileName != null) {
-                // Append .avi to the end if not done by user
-                if (!fileName.endsWith(".avi") && !saveFramesOnly) {
-                    fileName = fileName + ".avi";
-                }
-                getCanvas().createMovie(fileName, saveFramesOnly);
-                // correct selected mode
-                jStartStopMovieToggleButton.setSelected(true);
-            } else {
-                btn.getModel().setSelected(false);
-                btn.getModel().setArmed(false);
-            }
-        } else {
-            getCanvas().finishMovie(saveFramesOnly);
-            //System.out.println("Finish movie");
-            // correct selected mode
-            jStartStopMovieToggleButton.setSelected(false);
-        }
     }//GEN-LAST:event_jStartStopMovieToggleButtonActionPerformed
 
     private void jPlusZViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPlusZViewButtonActionPerformed
 // TODO add your handling code here:
 
-        // correct selected modes
-        deselectViewButtons();
         jPlusZViewButton.setSelected(true);
     }//GEN-LAST:event_jPlusZViewButtonActionPerformed
 
     private void jMinusXViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMinusXViewButtonActionPerformed
 // TODO add your handling code here:
 
-        // correct selected modes
-        deselectViewButtons();
         jMinusXViewButton.setSelected(true);      
     }//GEN-LAST:event_jMinusXViewButtonActionPerformed
 
    private void jMinusYViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMinusYViewButtonActionPerformed
 // TODO add your handling code here:
 
-        // correct selected modes
-        deselectViewButtons();
         jMinusYViewButton.setSelected(true);    
    }//GEN-LAST:event_jMinusYViewButtonActionPerformed
 
@@ -589,20 +492,12 @@ public class ModelWindowVTKTopComponent extends TopComponent
        String defaultDir="";
        defaultDir = TheApp.getCurrentVersionPreferences().get("Internal.WorkDirectory", defaultDir);
         final JFileChooser dlog = new JFileChooser(defaultDir);
-        
-        if (dlog.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-            String fullPath = dlog.getSelectedFile().getAbsolutePath();
-            if (! fullPath.toLowerCase().endsWith(".tiff")){
-                fullPath = dlog.getSelectedFile().getAbsolutePath()+".tiff";
-            }
-            getCanvas().HardCopy(fullPath, 1);
-        }
+
     }//GEN-LAST:event_jTakeSnapshotButtonActionPerformed
 
     private void jRefitModelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRefitModelButtonActionPerformed
 // TODO add your handling code here:
-        getCanvas().resetCamera();
-        getCanvas().Render();
+
     }//GEN-LAST:event_jRefitModelButtonActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -620,131 +515,12 @@ public class ModelWindowVTKTopComponent extends TopComponent
     private javax.swing.JButton jRefitModelButton;
     private javax.swing.JToggleButton jStartStopMovieToggleButton;
     private javax.swing.JButton jTakeSnapshotButton;
-    private org.opensim.view.OpenSimCanvas openSimCanvas1;
     private java.awt.Panel toolBarPanel1;
     // End of variables declaration//GEN-END:variables
-    
-    public int getPersistenceType() {
-        return TopComponent.PERSISTENCE_NEVER;
-    }
-        
-    public String preferredID() {
-        return "Model";
-    }     
-    
-    public String getDisplayName()
-    {
-        return tabDisplayName;
-    }
-    
-    /**
-     * Potentially there could be multiple canvases inserted into this top component,
-     * Use an accessor method just incase 
-     */
-    public org.opensim.view.OpenSimCanvas getCanvas() {
-        return openSimCanvas1;
-    }
-    
-    public Action[] getActions(){
-        Action[] superActs = super.getActions();
-                         
-        return (new Action[]{});
-    };
 
-    protected void componentActivated() {
-        super.componentActivated();
-        ViewDB.getInstance().setCurrentModelWindow(this);
-    }
-
-    /**
-     * Window closing, remove self from ViewDB
-     **/
-    protected void componentClosed() {
-        super.componentClosed();
-        ViewDB.getInstance().removeWindow(this);
-    }
-
-    public void setTabDisplayName(String tabDisplayName) {
-        this.tabDisplayName = tabDisplayName;
+    @Override
+    public void stateChanged(ChangeEvent ce) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public void deselectViewButtons() 
-    {
-        jMinusZViewButton.setSelected(false);
-        jPlusZViewButton.setSelected(false);
-        jPlusYViewButton.setSelected(false);
-        jMinusYViewButton.setSelected(false);
-        jPlusXViewButton.setSelected(false);
-        jMinusXViewButton.setSelected(false);
-    }
-
-    public void synchronizeBackgroundColor()
-    {
-        // Get userBackgroundColor
-        String userBackgroundColor="0.0, 0.0, 0.0";
-        userBackgroundColor = prefs.get("BackgroundColor", userBackgroundColor);
-        double[] background = Prefs.parseColor(userBackgroundColor);
-        
-        // Set toolBarPanel1 background color
-        toolBarPanel1.setBackground(new java.awt.Color((int) (background[0]*255), (int) (background[1]*255), (int) (background[2]*255)));
-        //getCanvas().loadLogoImage();
-        //getCanvas().GetRenderer().Modified();
-    }
-    
-    public void recenterSphere()
-    {
-     }
-
-    public void stateChanged(ChangeEvent e) 
-    {
-        if (e.getSource().equals(openSimCanvas1) && !internalTrigger){
-             internalTrigger=true;
-             vtkCamera cam = ViewDB.getInstance().getCurrentModelWindow().getCanvas().GetRenderer().GetActiveCamera();
-             double rollAngle = cam.GetRoll();
-//             jHorizontalSlider1.setValue((int) rollAngle);
-//             jJoystickSlider.setValue((int) rollAngle);
-             jAnnotateToggleButton.setSelected(ViewDB.getInstance().isQuery());
-             internalTrigger=false;
-        } 
-    }
-    public double[] getCameraAttributes() {
-        double[] attributes = new double[13];
-        vtkCamera dCamera=getCanvas().GetRenderer().GetActiveCamera();
-        double[] temp = dCamera.GetPosition();
-        for(int i=0; i<3; i++)
-            attributes[i]=temp[i];
-        temp = dCamera.GetFocalPoint();
-        for(int i=0; i<3; i++)
-            attributes[3+i]=temp[i];
-        temp = dCamera.GetViewUp();
-        for(int i=0; i<3; i++)
-            attributes[6+i]=temp[i];
-        temp = dCamera.GetViewPlaneNormal();
-        for(int i=0; i<3; i++)
-            attributes[9+i]=temp[i];
-        attributes[12]=dCamera.GetViewAngle();
-        vtkMatrix4x4 orientation = dCamera.GetViewTransformMatrix();
-        return attributes;
-    }
-    
-    public void applyCameraAttributes(double[] cameraAttributes) {
-        vtkCamera dCamera=getCanvas().GetRenderer().GetActiveCamera();
-        dCamera.SetPosition(cameraAttributes[0], cameraAttributes[1], cameraAttributes[2]);
-        dCamera.SetFocalPoint(cameraAttributes[3], cameraAttributes[4], cameraAttributes[5]);
-        dCamera.SetViewUp(cameraAttributes[6], cameraAttributes[7], cameraAttributes[8]);
-        dCamera.SetViewPlaneNormal(cameraAttributes[9], cameraAttributes[10], cameraAttributes[11]);
-        dCamera.SetViewAngle(cameraAttributes[12]);
-        dCamera.Modified();
-        getCanvas().GetRenderer().ResetCameraClippingRange();
-        //vtkLightCollection lights = getCanvas().GetRenderer().GetLights();
-        //lights.RemoveAllItems();
-        //getCanvas().GetRenderer().CreateLight();
-    }
-
-    public UndoRedo getUndoRedo() {
-        return ExplorerTopComponent.getDefault().getUndoRedo();
-    }
-    public void processKey(char c) {
-        getCanvas().processKey(c);
-    }
 }

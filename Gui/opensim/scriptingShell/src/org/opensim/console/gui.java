@@ -335,12 +335,6 @@ public final class gui {
      * @param c 
      */
     static public void gfxWindowSendKey(final char c){
-        SwingUtilities.invokeLater(new Runnable(){
-
-            @Override
-            public void run() {
-                ViewDB.getCurrentModelWindow().processKey(c);
-            }});
     }
     /**
      * Get the full name of the directory used as a root for the Scripts.

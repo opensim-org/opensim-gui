@@ -1373,7 +1373,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          ParametersTabbedPanel.setSelectedComponent(AttachmentsTab);
          // tell the ViewDB to redraw the model
          //FIXME vis.updateMuscleOrForceAlongPathGeometry(asm, true);
-         ViewDB.getInstance().repaintAll();
+         
          // update the current path panel
          updateCurrentPathPanel();
       }
@@ -1407,7 +1407,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          ParametersTabbedPanel.setSelectedComponent(AttachmentsTab);
          // tell the ViewDB to redraw the model
          // FIXME vis.updateMuscleOrForceAlongPathGeometry(asm, true);
-         ViewDB.getInstance().repaintAll();
+         
          // update the current path panel
          updateCurrentPathPanel();
       }

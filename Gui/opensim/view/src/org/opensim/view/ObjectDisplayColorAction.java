@@ -63,7 +63,7 @@ public final class ObjectDisplayColorAction extends ObjectAppearanceChangeAction
         for (OneComponentNode nextNode:nodes){
             ObjectDisplayColorAction.applyOperationToNode(nextNode, newColorComponentsAsDoubleArray);
         }
-        ViewDB.getInstance().repaintAll();
+        
     }
 
 

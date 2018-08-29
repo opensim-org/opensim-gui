@@ -170,7 +170,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
                   //ViewDB.getInstance().updateModelDisplay(getModelForDisplay());  // Faster? than the next few indented lines
                     ViewDB.getInstance().updateModelDisplayNoRepaint(getModelForDisplay(), true, true);
                     ////ViewDB.getInstance().renderAll(); // Render now (if want to do it later, use repaintAll()) -- may slow things down too much
-                    //ViewDB.getInstance().repaintAll();
+                    //
                   lastRenderTime = currentRealTime; 
                   //System.out.println("REPAINTED");
                }
@@ -233,7 +233,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    
    public void cleanupMotionDisplayer() {
       if(motionDisplayer!=null) motionDisplayer.cleanupDisplay();
-      //ViewDB.getInstance().repaintAll();
+      //
       if (getTimer()!=null)
           getTimer().cancel();
    }
