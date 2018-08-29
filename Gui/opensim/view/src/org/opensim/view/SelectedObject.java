@@ -27,25 +27,11 @@
  */
 package org.opensim.view;
 
-import org.opensim.modeling.Body;
 import org.opensim.modeling.Component;
-import org.opensim.modeling.GeometryPath;
-import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelComponent;
-import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
-import org.opensim.modeling.PathActuator;
-import org.opensim.modeling.PathPoint;
-import org.opensim.modeling.PhysicalFrame;
-import org.opensim.modeling.WrapObject;
 import org.opensim.view.experimentaldata.ExperimentalDataObject;
-import org.opensim.view.pub.OpenSimDB;
-import org.opensim.view.pub.ViewDB;
-import vtk.vtkActor;
-import vtk.vtkCaptionActor2D;
-import vtk.vtkProp3D;
-import vtk.vtkProp3DCollection;
 
 
 /**

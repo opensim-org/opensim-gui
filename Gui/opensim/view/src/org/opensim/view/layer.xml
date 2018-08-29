@@ -5,7 +5,6 @@
         <folder name="Edit">
             <file name="org-opensim-view-FrameToggleVisibilityAction.instance"/>
             <file name="org-opensim-view-FileOpenOsimModelAction.instance"/>
-            <file name="org-opensim-view-experimentaldata-AnnotateMotionObjectsAction.instance"/>
             <file name="org-opensim-view-experimentaldata-MotionReclassifyAction.instance"/>
             <file name="org-opensim-view-motions.FileLoadMotionAction.instance"/>
             <file name="org-opensim-view-motions.FileLoadMotionMenuAction.instance"/>
